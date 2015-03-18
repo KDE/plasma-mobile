@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Window {

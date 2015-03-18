@@ -177,17 +177,17 @@ PlasmaCore.ColorScope {
         }
 
 
-        PlasmaWorkspace.BatteryIcon {
-            id: batteryIcon
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-            width: height
-            height: parent.height
-            hasBattery: pmSource.data["Battery"]["Has Battery"]
-           // batteryType: "Phone"
-            percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
+            PlasmaWorkspace.BatteryIcon {
+                id: batteryIcon
+                anchors {
+                    right: parent.right
+                    verticalCenter: parent.verticalCenter
+                }
+                width: height
+                height: parent.height
+                hasBattery: pmSource.data["Battery"]["Has Battery"]
+            // batteryType: "Phone"
+                percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
 
                 PlasmaCore.DataSource {
                     id: pmSource
@@ -218,12 +218,11 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
             onPressed: {
                 oldMouseY = mouse.y;
-                slidingPanel.visible = true;
+                slidingPanel.visibility = Qt.WindowFullScreen;
             }
             onPositionChanged: {
                 //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
                 var factor = 1;
-                print(slidingPanel.offset +" "+ slidingPanel.height)
                 slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
                 oldMouseY = mouse.y;
             }
