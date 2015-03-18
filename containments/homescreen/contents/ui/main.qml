@@ -145,14 +145,15 @@ Item {
         }
     }
 
-    Rectangle {
-        color: Qt.rgba(0, 0, 0, 0.9 * (Math.min(applicationsView.contentY + root.height, root.height) / root.height))
-        anchors.fill: parent
-    }
-
     PlasmaCore.ColorScope {
         anchors.fill: parent
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+        Rectangle {
+            color: PlasmaCore.ColorScope.backgroundColor
+            opacity: 0.9 * (Math.min(applicationsView.contentY + root.height, root.height) / root.height)
+            anchors.fill: parent
+        }
 
         GridView {
             id: applicationsView
