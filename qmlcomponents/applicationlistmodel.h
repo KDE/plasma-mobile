@@ -69,6 +69,9 @@ public:
 
     Q_INVOKABLE void loadApplications();
 
+public Q_SLOTS:
+     void sycocaDbChanged(const QStringList &change);
+
 Q_SIGNALS:
     void countChanged();
     void appOrderChanged();

@@ -30,12 +30,16 @@
 #include <KService>
 #include <KServiceGroup>
 #include <KServiceTypeTrader>
+#include <KSycoca>
 #include <KSycocaEntry>
 #include <QDebug>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    //can't use the new syntax as this signal is overloaded
+    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
+            this, SLOT(sycocaDbChanged(const QStringList &)));
 }
 
 ApplicationListModel::~ApplicationListModel()
@@ -54,6 +58,17 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     return roleNames;
 }
 
+void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
+{
+    if (!changes.contains("apps") && !changes.contains("xdgdata-apps")) {
+        return;
+    }
+
+    m_applicationList.clear();
+
+    loadApplications();
+}
+
 bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
 {
     return a1.name.toLower() < a2.name.toLower();
@@ -62,6 +77,8 @@ bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
 void ApplicationListModel::loadApplications()
 {
     beginResetModel();
+
+    m_applicationList.clear();
 
     KServiceGroup::Ptr group = KServiceGroup::root();
     if (!group || !group->isValid()) return;
