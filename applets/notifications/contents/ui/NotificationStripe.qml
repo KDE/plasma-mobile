@@ -18,6 +18,8 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -25,18 +27,13 @@ MouseArea {
     id: root
 
 
-    height: units.gridUnit * 2
+    height: units.gridUnit * (expanded ? 4 : 2) + background.margins.top + background.margins.bottom
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
     drag.target: root
 
     property bool expanded: false
-    property var textGradient: Gradient {
-                GradientStop { position: 1.0; color: "#FF00000C" }
-                GradientStop { position: 0.0; color: "#00000C00" }
-            }
-    property color textGradientOverlay: "#9900000C"
 
     Behavior on x {
         SpringAnimation { spring: 2; damping: 0.2 }
@@ -44,14 +41,6 @@ MouseArea {
 
     Behavior on height {
         SpringAnimation { spring: 5; damping: 0.3 }
-    }
-
-    onExpandedChanged: {
-        if (expanded && body) {
-            height = units.gridUnit * 4;
-        } else {
-            height = units.gridUnit * 2;
-        }
     }
 
     onReleased: {
@@ -67,91 +56,61 @@ MouseArea {
     }
 
 
+    PlasmaCore.FrameSvgItem {
+        id: background
+        imagePath: "widgets/background"
+        anchors {
+            fill: parent
+            rightMargin: -root.width
+            leftMargin: units.gridUnit
+        }
+        colorGroup: PlasmaCore.ColorScope.colorGroup
+    }
+
+    PlasmaComponents.ToolButton {
+        anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            leftMargin: units.gridUnit / 2
+        }
+        iconSource: "window-close"
+        flat: false
+        onClicked: {
+            notificationsModel.remove(index);
+        }
+    }
+
+    PlasmaComponents.Label {
+        anchors {
+            left: parent.left
+            verticalCenter: parent.verticalCenter
+            leftMargin: units.gridUnit * 3
+        }
+        color: PlasmaCore.ColorScope.textColor
+        text: model.appName
+    }
+
+    PlasmaComponents.Label {
+        id: summaryText
+        anchors {
+            right: icon.left
+            verticalCenter: parent.verticalCenter
+        }
+        horizontalAlignment: Qt.AlignRight
+        verticalAlignment: Qt.AlignVCenter
+        color: PlasmaCore.ColorScope.textColor
+        text: summary + (root.expanded ? (body ? "\n" + body : '') :
+                                            (body ? '...' : ''))
+    }
+
     PlasmaCore.IconItem {
         id: icon
+        anchors {
+            right: root.right
+            verticalCenter: parent.verticalCenter
+        }
         width: units.iconSizes.medium
         height: width
-        visible: !root.expanded
-        anchors.verticalCenter: parent.verticalCenter
-        x: units.largeSpacing
-        y: 0
         source: appIcon && appIcon.length > 0 ? appIcon : "im-user"
-    }
-
-    Item {
-        id: rounded
-        clip: true
-        height: parent.height
-        width: height / 2
-        visible: !root.expanded
-        anchors {
-            left: icon.right
-            leftMargin: units.largeSpacing
-        }
-
-        Rectangle {
-            id: roundedRect
-            height: parent.height
-            width: parent.width * 2
-            radius: height //Math.max(height, units.gridUnit)
-            anchors {
-                left: parent.left
-                top: parent.top
-            }
-
-            gradient: root.textGradient
-
-            Rectangle {
-                anchors.fill: parent
-                radius: height / 2
-                color: textGradientOverlay
-            }
-        }
-    }
-
-    Rectangle {
-        id: summaryArea
-        width: parent.width - icon.width - rounded.width - (units.largeSpacing * 2)
-        height: parent.height
-        anchors {
-            left: root.expanded ? root.left : rounded.right
-            right: root.right
-            top: parent.top
-        }
-
-        gradient: root.textGradient
-        Rectangle {
-            anchors.fill: parent
-            color: textGradientOverlay
-        }
-
-        PlasmaComponents.Label {
-            id: summaryText
-            anchors.fill: parent
-            clip: true
-            horizontalAlignment: root.expanded ? Qt.AlignHCenter : Qt.AlignLeft
-            verticalAlignment: Qt.AlignVCenter
-            color: PlasmaCore.ColorScope.textColor
-            text: summary + (root.expanded ? (body ? "\n" + body : '') :
-                                             (body ? '...' : ''))
-        }
-
-    }
-
-    Rectangle {
-        id: extraArea
-        width: parent.width
-        height: parent.width
-        anchors {
-            left: summaryArea.right
-            top: parent.top
-            bottom: parent.bottom
-        }
-
-        gradient: root.textGradient
-        Rectangle {
-            anchors.fill: parent
-            color: textGradientOverlay
-        }
     }
 }

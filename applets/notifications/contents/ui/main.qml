@@ -28,6 +28,41 @@ Item {
 
     Layout.minimumHeight: notificationView.contentsHeight
 
+    function addNotification(source, data, actions) {
+        // Do not show duplicated notifications
+        // Remove notifications that are sent again (odd, but true)
+        for (var i = 0; i < notificationsModel.count; ++i) {
+            var tmp = notificationsModel.get(i);
+            var matches = (tmp.appName == data.appName &&
+                           tmp.summary == data.summary &&
+                           tmp.body == data.body);
+            var sameSource = tmp.source == source;
+
+            if (sameSource && matches) {
+                return;
+            }
+
+            if (sameSource || matches) {
+                notificationsModel.remove(i)
+                break;
+            }
+        }
+
+        data["id"] = ++notificationId;
+        data["source"] = source;
+        if (data["summary"].length < 1) {
+            data["summary"] = data["body"];
+            data["body"] = '';
+        }
+        data["actions"] = actions;
+
+        notificationsModel.insert(0, data);
+        if (!data["isPersistent"]) {
+            pendingRemovals.push(notificationId);
+            pendingTimer.start();
+        }
+    }
+
     PlasmaCore.DataSource {
         id: notificationsSource
 
@@ -72,14 +107,17 @@ Item {
         ListElement {
             appIcon: "call-start"
             summary: "Missed call from Joe"
+            appName: "Phone"
             body: "Called at 8:42 from +41 56 373 37 31"
         }
         ListElement {
             appIcon: "im-google"
+            appName: "Message"
             summary: "July: Hey! Are you around?"
         }
         ListElement {
             appIcon: "im-google"
+            appName: "Message"
             summary: "July: Hello?"
         }
     }
