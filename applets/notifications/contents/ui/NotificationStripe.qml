@@ -24,16 +24,18 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 MouseArea {
-    id: root
+    id: notificationItem
 
 
-    height: units.gridUnit * (expanded ? 4 : 2) + background.margins.top + background.margins.bottom
+    height: units.gridUnit * (expanded ? (actionsLayout.visible ? 6 : 4) : 2) + background.margins.top + background.margins.bottom
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
-    drag.target: root
+    drag.target: notificationItem
 
     property bool expanded: false
+    property string source: model.source
+    property var actions: model.actions
 
     Behavior on x {
         SpringAnimation { spring: 2; damping: 0.2 }
@@ -61,7 +63,7 @@ MouseArea {
         imagePath: "widgets/background"
         anchors {
             fill: parent
-            rightMargin: -root.width
+            rightMargin: -notificationItem.width
             leftMargin: units.gridUnit
         }
         colorGroup: PlasmaCore.ColorScope.colorGroup
@@ -95,22 +97,45 @@ MouseArea {
         anchors {
             right: icon.left
             verticalCenter: parent.verticalCenter
+            rightMargin: units.smallSpacing
         }
         horizontalAlignment: Qt.AlignRight
         verticalAlignment: Qt.AlignVCenter
         color: PlasmaCore.ColorScope.textColor
-        text: summary + (root.expanded ? (body ? "\n" + body : '') :
+        text: summary + (notificationItem.expanded ? (body ? "\n" + body : '') :
                                             (body ? '...' : ''))
     }
 
     PlasmaCore.IconItem {
         id: icon
         anchors {
-            right: root.right
+            right: notificationItem.right
             verticalCenter: parent.verticalCenter
         }
         width: units.iconSizes.medium
         height: width
         source: appIcon && appIcon.length > 0 ? appIcon : "im-user"
+    }
+    RowLayout {
+        id: actionsLayout
+        anchors {
+            right: summaryText.right
+            top: summaryText.bottom
+            topMargin: units.smallSpacing
+        }
+        opacity: notificationItem.expanded && notificationItem.actions && notificationItem.actions.count > 0 ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        Repeater {
+            model: notificationItem.actions
+            delegate: PlasmaComponents.Button {
+                text: model.text
+                onClicked: root.executeAction(notificationItem.source, model.id)
+            }
+        }
     }
 }

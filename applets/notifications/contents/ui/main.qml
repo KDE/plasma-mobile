@@ -64,6 +64,20 @@ Item {
         }
     }
 
+    function executeAction(source, id) {
+        //try to use the service
+        if (source.indexOf("notification") !== -1) {
+            var service = notificationsSource.serviceForSource(source)
+            var op = service.operationDescription("invokeAction")
+            op["actionId"] = id
+
+            service.startOperationCall(op)
+        //try to open the id as url
+        } else if (source.indexOf("Job") !== -1) {
+            Qt.openUrlExternally(id)
+        }
+    }
+
     PlasmaCore.DataSource {
         id: notificationsSource
 
@@ -106,20 +120,26 @@ Item {
         id: notificationsModel
 
         ListElement {
+            source: "call1Source"
             appIcon: "call-start"
             summary: "Missed call from Joe"
             appName: "Phone"
             body: "Called at 8:42 from +41 56 373 37 31"
+            actions: []
         }
         ListElement {
+            source: "im1Source"
             appIcon: "im-google"
             appName: "Message"
             summary: "July: Hey! Are you around?"
+            actions: []
         }
         ListElement {
+            source: "im2Source"
             appIcon: "im-google"
             appName: "Message"
             summary: "July: Hello?"
+            actions: []
         }
     }
 
