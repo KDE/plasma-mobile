@@ -103,7 +103,6 @@ Rectangle {
             onPositionChanged: {
                 if (root.state == "app" || root.state == "zooming") {
                     mainFlickable.scale = (1 - (startY - mouse.y) / root.height);
-//                    mainFlickable.contentY -= oldY - mouse.y;
                 } else {
                     mainFlickable.contentY += oldY - mouse.y;
                 }
