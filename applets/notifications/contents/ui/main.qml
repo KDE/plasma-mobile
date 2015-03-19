@@ -25,6 +25,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: root
+    property int notificationId: 0
 
     Layout.minimumHeight: notificationView.contentsHeight
 
@@ -93,7 +94,7 @@ Item {
                 }
             }
 
-            homescreen.addNotification(
+            root.addNotification(
                     sourceName,
                     data,
                     actions);
