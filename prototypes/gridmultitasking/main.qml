@@ -43,7 +43,7 @@ Rectangle {
         Item {
             id: mainContent
             width: parent.width
-            height: flow.y + flow.height
+            height: flow.y + flow.height + root.height
             Flow {
                 id: flow
                 anchors {
@@ -87,31 +87,41 @@ Rectangle {
         MouseArea {
             anchors.fill: parent
             property int oldY
+            property real startY
             onClicked: {
                 root.state = "switcher"
             }
             onPressed: {
                 if (root.state == "app") {
-                    return;
-                }
-                root.state = "dragging";
+                    root.state = "zooming";
+                } else {
+                    root.state = "dragging";
+                }     
                 oldY = mouse.y;
+                startY = mouse.y;
             }
             onPositionChanged: {
-                if (root.state == "app") {
-                    return;
+                if (root.state == "app" || root.state == "zooming") {
+                    mainFlickable.scale = (1 - (startY - mouse.y) / root.height);
+//                    mainFlickable.contentY -= oldY - mouse.y;
+                } else {
+                    mainFlickable.contentY += oldY - mouse.y;
                 }
-                mainFlickable.contentY += oldY - mouse.y;
                 oldY = mouse.y;
             }
             onReleased: {
-                if (root.state == "app") {
-                    return;
-                }
-                if (mainFlickable.contentY < root.height) {
-                    root.state = "homescreen"
+                if (root.state == "app" || root.state == "zooming") {
+                    if (mainFlickable.scale < 0.7) {
+                        root.state = "switcher"
+                    } else {
+                        root.state = "app"
+                    }
                 } else {
-                    root.state = "switcher"
+                    if (mainFlickable.contentY < root.height) {
+                        root.state = "homescreen"
+                    } else {
+                        root.state = "switcher"
+                    }
                 }
             }
         }
@@ -125,7 +135,7 @@ Rectangle {
                 x: -root.width / 2
                 y: -root.height / 2
                 interactive: true
-                contentY: root.height*2
+                contentY: root.height*2 + (root.currentApp ? root.currentApp.y : 0)
                 visible: true
             }
         },
@@ -138,6 +148,18 @@ Rectangle {
                 y: -root.height / 2
                 interactive: true
                 contentY: contentY
+                visible: true
+            }
+        },
+        State {
+            name: "zooming"
+            PropertyChanges {
+                target: mainFlickable
+                scale: scale
+                x: (-root.currentApp.x * (mainFlickable.scale/0.5 - 1) ) +  (2 - mainFlickable.scale/0.5) * (-root.width / 2)
+                y: (-root.height / 2) * (2 - mainFlickable.scale/0.5)
+                interactive: true
+                contentY: (root.height*2 + (root.currentApp ? root.currentApp.y : 0)) * (2 - mainFlickable.scale/0.5) + (root.height*2 + root.currentApp.y) * (mainFlickable.scale/0.5 - 1)
                 visible: true
             }
         },
@@ -171,6 +193,9 @@ Rectangle {
             to: "dragging"
         },
         Transition {
+            to: "zooming"
+        },
+        Transition {
             SequentialAnimation {
                 ScriptAction {
                     script: {
@@ -189,6 +214,7 @@ Rectangle {
                     script: {
                         if (root.state == "homescreen") {
                             mainFlickable.visible = false;
+                            root.currentApp = null;
                         }
                     }
                 }
