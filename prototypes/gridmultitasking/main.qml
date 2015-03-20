@@ -1,7 +1,7 @@
  
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Rectangle {
     id: root
@@ -15,8 +15,16 @@ Rectangle {
         text: "Homescreen"
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.6 * Math.min(1, mainFlickable.contentY/(root.height*2))
+    }
+
     Flickable {
         id: mainFlickable
+        //Scale adjusted in the 0-1 range
+        property real zoomFactor: Math.max(mainFlickable.scale/0.5, 1) - 1
         width: root.width * 2 + 5
         height: root.height * 2 + 5
         
@@ -62,6 +70,7 @@ Rectangle {
                         MouseArea {
                             anchors.fill: parent
                             onClicked: {
+                                root.state = "scrolling"
                                 root.currentApp = appRect
                                 root.state = "app"
                             }
@@ -76,6 +85,7 @@ Rectangle {
         }
     }
     Rectangle {
+        id: bottomBar
         z: 99
         color: "blue"
         anchors {
@@ -123,6 +133,21 @@ Rectangle {
                     }
                 }
             }
+
+            Row {
+                PlasmaComponents.ToolButton {
+                    height: bottomBar.height
+                    width: height
+                    iconSource: "applications-other"
+                    onClicked: root.state = "switcher"
+                }
+                PlasmaComponents.ToolButton {
+                    height: bottomBar.height
+                    width: height
+                    iconSource: "go-home"
+                    onClicked: root.state = "homescreen"
+                }
+            }
         }
     }
     states: [
@@ -155,10 +180,10 @@ Rectangle {
             PropertyChanges {
                 target: mainFlickable
                 scale: scale
-                x: (-root.currentApp.x * (mainFlickable.scale/0.5 - 1) ) +  (2 - mainFlickable.scale/0.5) * (-root.width / 2)
-                y: (-root.height / 2) * (2 - mainFlickable.scale/0.5)
+                x: (-root.currentApp.x * mainFlickable.zoomFactor ) +  (1 - mainFlickable.zoomFactor) * (-root.width / 2)
+                y: (-root.height / 2) * (1 - mainFlickable.zoomFactor)
                 interactive: true
-                contentY: (root.height*2 + (root.currentApp ? root.currentApp.y : 0)) * (2 - mainFlickable.scale/0.5) + (root.height*2 + root.currentApp.y) * (mainFlickable.scale/0.5 - 1)
+                contentY: (root.height*2 + (root.currentApp ? root.currentApp.y : 0)) * (1 - mainFlickable.zoomFactor) + (root.height*2 + root.currentApp.y) * mainFlickable.zoomFactor
                 visible: true
             }
         },
@@ -190,6 +215,11 @@ Rectangle {
     transitions: [
         Transition {
             to: "dragging"
+            ScriptAction {
+                script: {
+                    root.currentApp = null;
+                }
+            }
         },
         Transition {
             to: "zooming"
