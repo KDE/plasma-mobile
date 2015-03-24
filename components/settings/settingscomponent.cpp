@@ -163,6 +163,12 @@ void SettingsComponent::loadModule(const QString &name)
         }
 
         d->kcm->load();
+        //instant apply
+        connect(d->kcm, &KQuickAddons::ConfigModule::needsSaveChanged, [=]() {
+            if (d->kcm->needsSave()) {
+                d->kcm->save();
+            }
+        });
 
         KPluginMetaData info(loader.fileName());
         d->settingsModule->setName(info.name());
