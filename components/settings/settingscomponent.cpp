@@ -39,6 +39,8 @@ public:
     QString module;
     QString icon;
     SettingsModule *settingsModule;
+    KQuickAddons::ConfigModule *kcm;
+    bool valid : 1;
     Plasma::Package package;
 };
 
@@ -49,6 +51,8 @@ SettingsComponent::SettingsComponent(QQuickItem *parent)
     d = new SettingsComponentPrivate;
     d->package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
     d->settingsModule = 0;
+    d->kcm = 0;
+    d->valid = false;
 }
 
 SettingsComponent::~SettingsComponent()
@@ -59,6 +63,8 @@ void SettingsComponent::loadModule(const QString &name)
 {
     delete d->settingsModule;
     d->settingsModule = 0;
+    delete d->kcm;
+    d->kcm = 0;
 
     d->package.setPath(name);
     //KGlobal::locale()->insertCatalog("plasma_package_" + name);
@@ -100,6 +106,7 @@ void SettingsComponent::loadModule(const QString &name)
                 QObject* obj = factory->create<QObject>();
                 if (!obj) {
                     qWarning() << "Error creating object from plugin" << loader.fileName();
+                    d->valid = true;
                 }
             }
         } else {
@@ -134,30 +141,43 @@ void SettingsComponent::loadModule(const QString &name)
     if (!factory) {
         qWarning() << "Error loading KCM plugin:" << loader.errorString();
     } else {
-        KQuickAddons::ConfigModule *cm = factory->create<KQuickAddons::ConfigModule >();
-        if (!cm) {
+        d->kcm = factory->create<KQuickAddons::ConfigModule >();
+        if (!d->kcm) {
             qWarning() << "Error creating object from plugin" << loader.fileName();
+            d->valid = false;
+            emit validChanged();
+            return;
         }
 
         d->settingsModule = new SettingsModule(this);
         connect(d->settingsModule, &SettingsModule::nameChanged, this, &SettingsComponent::nameChanged);
         connect(d->settingsModule, &SettingsModule::descriptionChanged,
                 this, &SettingsComponent::descriptionChanged);
-        cm->mainUi()->setParentItem(this);
+        d->kcm->mainUi()->setParentItem(this);
+
         {
             //set anchors
-            QQmlExpression expr(QtQml::qmlContext(cm->mainUi()), cm->mainUi(), "parent");
-            QQmlProperty prop(cm->mainUi(), "anchors.fill");
+            QQmlExpression expr(QtQml::qmlContext(d->kcm->mainUi()), d->kcm->mainUi(), "parent");
+            QQmlProperty prop(d->kcm->mainUi(), "anchors.fill");
             prop.write(expr.evaluate());
         }
-        cm->load();
+
+        d->kcm->load();
 
         KPluginMetaData info(loader.fileName());
         d->settingsModule->setName(info.name());
         setIcon(info.iconName());
         d->settingsModule->setDescription(info.description());
         d->settingsModule->setModule(info.pluginId());
+        d->valid = true;
     }
+
+    emit validChanged();
+}
+
+bool SettingsComponent::isValid() const
+{
+    return d->valid;
 }
 
 QString SettingsComponent::description() const

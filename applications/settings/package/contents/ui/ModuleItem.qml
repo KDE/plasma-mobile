@@ -30,7 +30,6 @@ ActiveSettings.SettingsComponent {
 
     signal moduleLoaded
 
-    property bool moduleValid: true
 
     Loader {
         id: settingsLoader
@@ -49,8 +48,7 @@ ActiveSettings.SettingsComponent {
             if (module != "") {
                 switcherPackage.name = module
                 var mainscript = switcherPackage.filePath("mainscript");
-                moduleValid = (mainscript != "" || currentModule == "");
-                if (!moduleValid) {
+                if (!valid) {
                     print("Failed to load module: " + module);
                 }
                 settingsLoader.source = mainscript;
@@ -63,6 +61,6 @@ ActiveSettings.SettingsComponent {
         anchors.fill: parent
         text: i18n("The module \"" + currentModule + "\" failed to load.")
         wrapMode: Text.WordWrap
-        visible: !moduleValid
+        visible: !valid
     }
 }
