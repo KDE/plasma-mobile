@@ -123,6 +123,14 @@ Item {
         }
     }
 
+    //pass the focus to the containment, so it can react to homescreen activate/inactivate
+    Connections {
+        target: desktop
+        onActiveChanged: {
+            containment.focus = desktop.active;
+        }
+    }
+
     Loader {
         id: dialerOverlay
         function open() {
