@@ -28,6 +28,7 @@
 #include <kdeclarative/kdeclarative.h>
 
 #include "applicationlistmodel.h"
+#include "favoritesmodel.h"
 
 void SatelliteComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -45,6 +46,7 @@ void SatelliteComponentsPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("org.kde.satellite.components"));
 
     qmlRegisterType<ApplicationListModel>(uri, 0, 1, "ApplicationListModel");
+    qmlRegisterType<FavoritesModel>();
 }
 
 
