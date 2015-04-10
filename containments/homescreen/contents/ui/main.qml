@@ -22,12 +22,12 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-
+import org.kde.kquickcontrolsaddons 2.0
 import org.kde.satellite.components 0.1 as SatelliteComponents
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
-Item {
+MouseEventListener {
     id: root
     width: 480
     height: 640
@@ -118,10 +118,8 @@ Item {
         interval: 10
         onTriggered: {
             applicationsView.contentY += scrollDown ? 8 : -8;
-            if (applicationsView.draggingItem) {
-                applicationsView.draggingItem.y += scrollDown ? 8 : -8;
-
-                applicationsView.draggingItem.updateRow();
+            if (applicationsView.dragData) {
+                dragDelegate.updateRow();
             }
         }
     }
@@ -151,6 +149,77 @@ Item {
         }
     }
 
+    onPressAndHold: {
+        var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
+        //in favorites area?
+        var item;
+        if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+            item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
+        } else {
+            pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
+            item = applicationsView.itemAt(pos.x, pos.y)
+        }
+        if (!item) {
+            return;
+        }
+
+        applicationsView.dragData = new Object;
+        applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
+        applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
+        applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
+        applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
+        applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
+        
+        dragDelegate.modelData = applicationsView.dragData;
+        applicationsView.interactive = false;
+        dragDelegate.x = mouse.x - dragDelegate.width/2;
+        dragDelegate.y = mouse.y - dragDelegate.height/2;
+        root.reorderingApps = true;
+        dragDelegate.visible = true;
+    }
+    onPositionChanged: {
+        if (!applicationsView.dragData) {
+            return;
+        }
+        dragDelegate.x = mouse.x - dragDelegate.width/2;
+        dragDelegate.y = mouse.y - dragDelegate.height/2;
+        
+        dragDelegate.updateRow();
+
+        if (!autoScrollTimer.running) {
+            
+
+            if (mouse.y < root.height / 4) {
+                autoScrollTimer.running = false;
+            } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
+                autoScrollTimer.scrollDown = false;
+                autoScrollTimer.running = true;
+            } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
+                autoScrollTimer.scrollDown = true;
+                autoScrollTimer.running = true;
+            } else {
+                autoScrollTimer.running = false;
+            }
+        } else {
+            autoScrollTimer.running = false;
+        }
+    }
+    onReleased: {
+        applicationsView.interactive = true;
+        dragDelegate.visible = false;
+        applicationsView.dragData = null;
+        root.reorderingApps = false;
+        applicationsView.forceLayout();
+        autoScrollTimer.running = false;
+    }
+    onClicked: {
+        var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
+        var item = applicationsView.itemAt(pos.x, pos.y)
+        if (!item) {
+            return;
+        }
+        appListModel.runApplication(item.modelData.ApplicationStorageIdRole)
+    }
     PlasmaCore.ColorScope {
         anchors.fill: parent
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
@@ -161,6 +230,29 @@ Item {
             anchors.fill: parent
         }
 
+        HomeLauncher {
+            id: dragDelegate
+            z: 999
+            function updateRow() {
+                if (!applicationsView.dragData) {
+                    return;
+                }
+                
+                var pos = root.mapToItem(applicationsView.contentItem, x, y);
+
+                //in favorites area?
+                if (applicationsView.headerItem.favoritesStrip.contains(root.mapToItem(applicationsView.headerItem.favoritesStrip, x, y))) {
+                    pos.y = 1;
+                }
+
+                var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.round(pos.y / applicationsView.cellHeight) + Math.round(pos.x / applicationsView.cellWidth));
+
+                if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
+                    appListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
+                    applicationsView.dragData.ApplicationOriginalRowRole = newRow;
+                }
+            }
+        }
         GridView {
             id: applicationsView
             anchors {
@@ -171,6 +263,7 @@ Item {
             }
 
             property Item draggingItem
+            property var dragData
 
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
@@ -197,13 +290,30 @@ Item {
                 duration: units.longDuration
                 easing.type: Easing.InOutQuad
             }
+            move: Transition {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                    properties: "x,y"
+                }
+            }
+            moveDisplaced: Transition {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                    properties: "x,y"
+                }
+            }
 
             //clip: true
-            delegate: HomeLauncher {}
+            delegate: HomeLauncher {
+                visible: index > 3
+            }
             header: MouseArea {
                 z: 999
                 property Item layout: appletsLayout
                 property Item lastSpacer: spacer
+                property Item favoritesStrip: favoritesView
                 width: root.width
                 height: mainLayout.Layout.minimumHeight
                 property int margin: stripe.height + units.gridUnit * 2
@@ -262,49 +372,30 @@ Item {
                     property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
 
                     y: Math.max(viewPos, 
-                          Math.min(parent.height, viewPos + root.height) - height + Math.max(0, -(parent.height - height + applicationsView.contentY)))
+                          Math.min(parent.height, viewPos + root.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))
 
                     PlasmaCore.Svg {
                         id: stripeIcons
                         imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
                     }
 
-                    Row {
+                    GridView {
+                        id: favoritesView
+                        //FIXME: QQuickItem has a contains, but seems to not work
+                        function contains(point) {
+                            return point.x > 0 && point.x < width && point.y > 0 && point.y < height;
+                        }
                         anchors.fill: parent
                         property int columns: 4
-                        property alias buttonHeight: stripe.height
+                        interactive: false
+                        flow: GridView.FlowTopToBottom
+                        cellWidth: root.buttonHeight
+                        cellHeight: cellWidth
+                        property Item draggingItem
 
-                        HomeLauncherSvg {
-                            id: phoneIcon
-                            svg: stripeIcons
-                            elementId: "phone"
-                            callback: function() {
-                                console.log("Start phone")
-                            }
-                        }
+                        model: appListModel
+                        delegate: HomeLauncher {}
 
-                        HomeLauncherSvg {
-                            id: messagingIcon
-                            svg: stripeIcons
-                            elementId: "messaging"
-                            callback: function() { console.log("Start messaging") }
-                        }
-
-
-                        HomeLauncherSvg {
-                            id: emailIcon
-                            svg: stripeIcons
-                            elementId: "email"
-                            callback: function() { console.log("Start email") }
-                        }
-
-
-                        HomeLauncherSvg {
-                            id: webIcon
-                            svg: stripeIcons
-                            elementId: "web"
-                            callback: function() { console.log("Start web") }
-                        }
                     }
                 }
             }

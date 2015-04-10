@@ -35,4 +35,9 @@ QHash<int, QByteArray> FavoritesModel::roleNames() const
     return sourceModel()->roleNames();
 }
 
+int FavoritesModel::rowCount(const QModelIndex &parent) const
+{return QIdentityProxyModel::rowCount(parent);
+    return qMin(QIdentityProxyModel::rowCount(parent), 4);
+}
+
 #include "moc_favoritesmodel.cpp"

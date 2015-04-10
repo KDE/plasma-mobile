@@ -34,11 +34,12 @@ public:
     FavoritesModel(QObject *parent = 0);
     ~FavoritesModel();
 
-    QHash<int, QByteArray> roleNames() const;
+    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     int count() const
     {
-        return qMin(rowCount(), 4);
+        return rowCount();
     }
 
 private:
