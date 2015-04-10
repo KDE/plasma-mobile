@@ -27,8 +27,6 @@
 
 class QString;
 
-class FavoritesModel;
-
 struct ApplicationData {
     QString name;
     QString icon;
@@ -41,13 +39,11 @@ class ApplicationListModel : public QAbstractListModel {
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
-    Q_PROPERTY(FavoritesModel *favoritesModel READ favoritesModel CONSTANT)
 
 public:
     ApplicationListModel(QObject *parent = 0);
     virtual ~ApplicationListModel();
 
-    FavoritesModel *favoritesModel();
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     int count() { return m_applicationList.count(); }
@@ -85,7 +81,6 @@ private:
 
     QStringList m_appOrder;
     QHash<QString, int> m_appPositions;
-    FavoritesModel *m_favoritesModel;
 };
 
 #endif // APPLICATIONLISTMODEL_H

@@ -3,7 +3,6 @@ project(satellitecomponents)
 set(satellitecomponents_SRCS
     satellitecomponentsplugin.cpp
     applicationlistmodel.cpp
-    favoritesmodel.cpp
     )
 
 add_library(satellitecomponentsplugin SHARED ${satellitecomponents_SRCS})

@@ -19,7 +19,6 @@
 
 // Self
 #include "applicationlistmodel.h"
-#include "favoritesmodel.h"
 
 // Qt
 #include <QByteArray>
@@ -38,9 +37,6 @@
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    m_favoritesModel = new FavoritesModel(this);
-    m_favoritesModel->setSourceModel(this);
-
     //can't use the new syntax as this signal is overloaded
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
@@ -48,11 +44,6 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
 
 ApplicationListModel::~ApplicationListModel()
 {
-}
-
-FavoritesModel *ApplicationListModel::favoritesModel()
-{
-    return m_favoritesModel;
 }
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
