@@ -262,7 +262,6 @@ MouseEventListener {
                 right: parent.right
             }
 
-            property Item draggingItem
             property var dragData
 
             cellWidth: root.buttonHeight
@@ -391,7 +390,6 @@ MouseEventListener {
                         flow: GridView.FlowTopToBottom
                         cellWidth: root.buttonHeight
                         cellHeight: cellWidth
-                        property Item draggingItem
 
                         model: appListModel
                         delegate: HomeLauncher {}

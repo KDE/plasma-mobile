@@ -182,8 +182,14 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
     }
 
     beginMoveRows(QModelIndex(), row, row, QModelIndex(), destination);
-    ApplicationData data = m_applicationList.takeAt(row);
-    m_applicationList.insert(destination, data);
+    if (destination > row) {
+        ApplicationData data = m_applicationList.at(row);
+        m_applicationList.insert(destination, data);
+        m_applicationList.takeAt(row);
+    } else {
+        ApplicationData data = m_applicationList.takeAt(row);
+        m_applicationList.insert(destination, data);
+    }
 
 
     m_appOrder.clear();
