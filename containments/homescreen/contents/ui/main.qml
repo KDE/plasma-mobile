@@ -116,7 +116,7 @@ MouseEventListener {
         property bool scrollDown: true
         repeat: true
         interval: 10
-        onTriggered: {
+        onTriggered: {return;
             applicationsView.contentY += scrollDown ? 8 : -8;
             if (applicationsView.dragData) {
                 dragDelegate.updateRow();
@@ -188,15 +188,19 @@ MouseEventListener {
 
         if (!autoScrollTimer.running) {
             
-
-            if (mouse.y < root.height / 4) {
+            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
+            //FAVORITES
+            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
                 autoScrollTimer.running = false;
+            //SCROLL UP
             } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
                 autoScrollTimer.scrollDown = false;
                 autoScrollTimer.running = true;
+            //SCROLL DOWN
             } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
                 autoScrollTimer.scrollDown = true;
                 autoScrollTimer.running = true;
+            //DON't SCROLL
             } else {
                 autoScrollTimer.running = false;
             }
