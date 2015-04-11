@@ -62,11 +62,9 @@ RowLayout {
                 id: labelMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    var command = "active-settings";
-                    if (model.settingsModule) {
-                        command += " -m " + model.settingsModule;
+                    if (model.settingsCommand) {
+                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     }
-                    plasmoid.nativeInterface.executeCommand(command)
                 }
             }
         }

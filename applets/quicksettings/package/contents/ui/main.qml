@@ -38,61 +38,61 @@ Item {
             text: "Settings"
             icon: "configure"
             enabled: false
-            settingsModule: ""
+            settingsCommand: "active-settings"
         }
         ListElement {
             text: "Mobile network"
             icon: "network-mobile-80"
             enabled: true
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Airplane mode"
             icon: "flightmode-on"
             enabled: false
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Bluetooth"
             icon: "preferences-system-bluetooth"
             enabled: false
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Wireless"
             icon: "network-wireless-on"
             enabled: true
-            settingsModule: "org.kde.satellite.settings.wifi"
+            settingsCommand: "active-settings -m org.kde.satellite.settings.wifi"
         }
         ListElement {
             text: "Alarms"
             icon: "korgac"
             enabled: false
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Notifications"
             icon: "preferences-desktop-notification"
             enabled: true
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Brightness"
             icon: "video-display-brightness"
             enabled: false
-            settingsModule: "org.kde.active.settings.powermanagement"
+            settingsCommand: "active-settings -m org.kde.active.settings.powermanagement"
         }
         ListElement {
             text: "Flashlight"
             icon: "package_games_puzzle"
             enabled: false
-            settingsModule: ""
+            settingsCommand: ""
         }
         ListElement {
             text: "Location"
             icon: "plasmaapplet-location"
             enabled: false
-            settingsModule: ""
+            settingsCommand: ""
         }
     }
 
