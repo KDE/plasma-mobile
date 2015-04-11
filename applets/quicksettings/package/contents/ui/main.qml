@@ -42,6 +42,7 @@ Item {
             enabled: false
             settingsCommand: "active-settings"
             toggleFunction: ""
+            delegate: ""
         }
         ListElement {
             text: "Mobile network"
@@ -85,6 +86,7 @@ Item {
             icon: "video-display-brightness"
             enabled: false
             settingsCommand: "active-settings -m org.kde.active.settings.powermanagement"
+            delegate: "BrightnessDelegate"
         }
         ListElement {
             text: "Flashlight"
@@ -101,6 +103,7 @@ Item {
     }
 
     Flow {
+        id: flow
         anchors {
             fill: parent
             margins: units.largeSpacing
@@ -108,7 +111,18 @@ Item {
         spacing: units.largeSpacing
         Repeater {
             model: settingsModel
-            delegate: Delegate {}
+            delegate: Loader {
+                width: item ? item.implicitWidth : 0
+                height: item ? item.implicitHeight : 0
+                source: Qt.resolvedUrl((model.delegate ? model.delegate : "Delegate") + ".qml")
+            }
+        }
+        move: Transition {
+            NumberAnimation {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
+                properties: "x,y"
+            }
         }
     }
 }

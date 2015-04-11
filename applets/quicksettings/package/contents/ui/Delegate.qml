@@ -23,12 +23,14 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 RowLayout {
+    id: delegateRoot
+    property bool toggled: model.enabled
     spacing: units.smallSpacing
-    width: parent.width / 2 - units.largeSpacing / 2
+    implicitWidth: flow.width / 2 - units.largeSpacing / 2
     Rectangle {
         Layout.minimumWidth: units.iconSizes.large
         Layout.minimumHeight: width
-        color: model.enabled ? 
+        color: toggled ? 
             Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
             Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.2)
 
@@ -43,7 +45,9 @@ RowLayout {
                 id: iconMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    if (model.toggleFunction) {
+                    if (delegateRoot.toggle) {
+                        delegateRoot.toggle();
+                    } else if (model.toggleFunction) {
                         root[model.toggleFunction]();
                     } else if (model.settingsCommand) {
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
