@@ -25,10 +25,12 @@ import org.kde.plasma.plasmoid 2.0
 
 
 Item {
-    id: bigClock
+    id: root
 
-    /*Layout.minimumWidth: implicitWidth
-    Layout.minimumHeight: implicitHeight*/
+    function toggleAirplane() {
+        print("toggle airplane mode")
+    }
+
     Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
 
     ListModel {
@@ -39,6 +41,7 @@ Item {
             icon: "configure"
             enabled: false
             settingsCommand: "active-settings"
+            toggleFunction: ""
         }
         ListElement {
             text: "Mobile network"
@@ -51,6 +54,7 @@ Item {
             icon: "flightmode-on"
             enabled: false
             settingsCommand: ""
+            toggleFunction: "toggleAirplane"
         }
         ListElement {
             text: "Bluetooth"

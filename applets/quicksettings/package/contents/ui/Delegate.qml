@@ -42,7 +42,13 @@ RowLayout {
             MouseArea {
                 id: iconMouseArea
                 anchors.fill: parent
-                onClicked: print("action of mouse area")
+                onClicked: {
+                    if (model.toggleFunction) {
+                        root[model.toggleFunction]();
+                    } else if (model.settingsCommand) {
+                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                    }
+                }
             }
         }
     }
@@ -64,6 +70,8 @@ RowLayout {
                 onClicked: {
                     if (model.settingsCommand) {
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                    } else if (model.toggleFunction) {
+                        root[model.toggleFunction]();
                     }
                 }
             }
