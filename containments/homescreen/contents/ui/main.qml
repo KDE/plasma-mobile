@@ -314,25 +314,7 @@ MouseEventListener {
             z: 999
             property int xTarget
             property int yTarget
-            function updateRow() {
-                if (!applicationsView.dragData) {
-                    return;
-                }
-                
-                var pos = root.mapToItem(applicationsView.contentItem, x, y);
 
-                //in favorites area?
-                if (applicationsView.headerItem.favoritesStrip.contains(root.mapToItem(applicationsView.headerItem.favoritesStrip, x, y))) {
-                    pos.y = 1;
-                }
-
-                var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.round(pos.y / applicationsView.cellHeight) + Math.round(pos.x / applicationsView.cellWidth));
-
-                if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
-                    appListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
-                    applicationsView.dragData.ApplicationOriginalRowRole = newRow;
-                }
-            }
             Behavior on opacity {
                 ParallelAnimation {
                     OpacityAnimator {
