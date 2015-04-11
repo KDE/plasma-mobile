@@ -228,9 +228,11 @@ MouseEventListener {
     }
     onReleased: {
         applicationsView.interactive = true;
-        dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight
-        dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight
+        dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight;
+        dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight;
         dragDelegate.opacity = 0;
+        dragDelegate.modelData.ApplicationIconRole = "";
+        dragDelegate.modelDataChanged();
         applicationsView.dragData = null;
         root.reorderingApps = false;
         applicationsView.forceLayout();
@@ -403,7 +405,10 @@ MouseEventListener {
                 property int margin: stripe.height + units.gridUnit * 2
 
                 onPressAndHold: {
-                    plasmoid.action("configure").trigger();
+                    print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
+                    if (!favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
+                        plasmoid.action("configure").trigger();
+                    }
                 }
 
                 ColumnLayout {
