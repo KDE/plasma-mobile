@@ -10,7 +10,7 @@ Item {
 
     property var modelData: model
 
-    opacity: root.reorderingApps && delegateRoot.GridView.view.dragData && delegateRoot.GridView.view.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole ? 0.3 : 1
+    opacity: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole ? 0.3 : 1
 
     PlasmaCore.IconItem {
         id: icon
@@ -18,7 +18,7 @@ Item {
         width: parent.height / 2
         height: width
         source: modelData.ApplicationIconRole
-        scale: root.reorderingApps && delegateRoot.GridView.view.dragData && delegateRoot.GridView.view.dragData.ApplicationStorageIdRole != modelData.ApplicationStorageIdRole ? 0.6 : 1
+        scale: root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole != modelData.ApplicationStorageIdRole ? 0.6 : 1
         Behavior on scale {
             NumberAnimation {
                 duration: units.longDuration

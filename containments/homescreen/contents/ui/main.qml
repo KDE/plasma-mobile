@@ -223,11 +223,19 @@ MouseEventListener {
         scrollDownIndicator.opacity = 0;
     }
     onClicked: {
-        var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-        var item = applicationsView.itemAt(pos.x, pos.y)
+        var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
+        //in favorites area?
+        var item;
+        if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+            item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
+        } else {
+            pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
+            item = applicationsView.itemAt(pos.x, pos.y)
+        }
         if (!item) {
             return;
         }
+
         appListModel.runApplication(item.modelData.ApplicationStorageIdRole)
     }
     PlasmaCore.ColorScope {
@@ -449,6 +457,20 @@ MouseEventListener {
                         model: appListModel
                         delegate: HomeLauncher {}
 
+                        move: Transition {
+                            NumberAnimation {
+                                duration: units.longDuration
+                                easing.type: Easing.InOutQuad
+                                properties: "x,y"
+                            }
+                        }
+                        moveDisplaced: Transition {
+                            NumberAnimation {
+                                duration: units.longDuration
+                                easing.type: Easing.InOutQuad
+                                properties: "x,y"
+                            }
+                        }
                     }
                 }
             }
