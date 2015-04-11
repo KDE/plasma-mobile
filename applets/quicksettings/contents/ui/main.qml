@@ -1,0 +1,110 @@
+/*
+ *   Copyright 2015 Marco Martin <notmart@gmail.com>
+ *
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Library General Public License for more details
+ *
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
+import QtQuick 2.1
+import QtQuick.Layouts 1.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.plasmoid 2.0
+
+
+Item {
+    id: bigClock
+
+    /*Layout.minimumWidth: implicitWidth
+    Layout.minimumHeight: implicitHeight*/
+    Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
+
+    ListModel {
+        id: settingsModel
+
+        ListElement {
+            text: "Settings"
+            icon: "configure"
+            enabled: false
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Mobile network"
+            icon: "network-mobile-80"
+            enabled: true
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Airplane mode"
+            icon: "flightmode-on"
+            enabled: false
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Bluetooth"
+            icon: "preferences-system-bluetooth"
+            enabled: false
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Wireless"
+            icon: "network-wireless-on"
+            enabled: true
+            settingsModule: "org.kde.satellite.settings.wifi"
+        }
+        ListElement {
+            text: "Alarms"
+            icon: "korgac"
+            enabled: false
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Notifications"
+            icon: "preferences-desktop-notification"
+            enabled: true
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Brightness"
+            icon: "video-display-brightness"
+            enabled: false
+            settingsModule: "org.kde.active.settings.powermanagement"
+        }
+        ListElement {
+            text: "Flashlight"
+            icon: "package_games_puzzle"
+            enabled: false
+            settingsModule: ""
+        }
+        ListElement {
+            text: "Location"
+            icon: "plasmaapplet-location"
+            enabled: false
+            settingsModule: ""
+        }
+    }
+
+    Flow {
+        anchors {
+            fill: parent
+            margins: units.largeSpacing
+        }
+        spacing: units.largeSpacing
+        Repeater {
+            model: settingsModel
+            delegate: Delegate {}
+        }
+    }
+}
