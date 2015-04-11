@@ -172,10 +172,12 @@ MouseEventListener {
         
         dragDelegate.modelData = applicationsView.dragData;
         applicationsView.interactive = false;
-        dragDelegate.x = mouse.x - dragDelegate.width/2;
-        dragDelegate.y = mouse.y - dragDelegate.height/2;
         root.reorderingApps = true;
-        dragDelegate.visible = true;
+        dragDelegate.x = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight
+        dragDelegate.y = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight
+        dragDelegate.xTarget = mouse.x - dragDelegate.width/2;
+        dragDelegate.yTarget = mouse.y - dragDelegate.width/2;
+        dragDelegate.opacity = 1;
     }
     onPositionChanged: {
         if (!applicationsView.dragData) {
@@ -184,7 +186,19 @@ MouseEventListener {
         dragDelegate.x = mouse.x - dragDelegate.width/2;
         dragDelegate.y = mouse.y - dragDelegate.height/2;
         
-        dragDelegate.updateRow();
+        var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
+
+        //in favorites area?
+        if (applicationsView.headerItem.favoritesStrip.contains(mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y))) {
+            pos.y = 1;
+        }
+
+        var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.floor(pos.y / applicationsView.cellHeight) + Math.floor(pos.x / applicationsView.cellWidth));
+
+        if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
+            appListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
+            applicationsView.dragData.ApplicationOriginalRowRole = newRow;
+        }
 
         var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
         //FAVORITES
@@ -214,7 +228,9 @@ MouseEventListener {
     }
     onReleased: {
         applicationsView.interactive = true;
-        dragDelegate.visible = false;
+        dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight
+        dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight
+        dragDelegate.opacity = 0;
         applicationsView.dragData = null;
         root.reorderingApps = false;
         applicationsView.forceLayout();
@@ -296,6 +312,8 @@ MouseEventListener {
         HomeLauncher {
             id: dragDelegate
             z: 999
+            property int xTarget
+            property int yTarget
             function updateRow() {
                 if (!applicationsView.dragData) {
                     return;
@@ -313,6 +331,28 @@ MouseEventListener {
                 if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
                     appListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
                     applicationsView.dragData.ApplicationOriginalRowRole = newRow;
+                }
+            }
+            Behavior on opacity {
+                ParallelAnimation {
+                    OpacityAnimator {
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAnimation {
+                        properties: "x"
+                        to: dragDelegate.xTarget
+                        target: dragDelegate
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                    PropertyAnimation {
+                        properties: "y"
+                        to: dragDelegate.yTarget
+                        target: dragDelegate
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }

@@ -9,8 +9,21 @@ Item {
     height: width
 
     property var modelData: model
+    property bool isDropTarget: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole
 
-    opacity: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole ? 0.3 : 1
+    opacity: isDropTarget ? 0.3 : 1
+
+    /*function syncDropTarget() {
+        if (isDropTarget) {
+            var pos = mapToItem(root, x, y);
+            dragDelegate.xTarget = pos.x;
+            dragDelegate.yTarget = pos.y;
+            print("AAAAA"+pos.x+" "+pos.x+" "+delegateRoot)
+        }
+    }
+    onIsDropTargetChanged: syncDropTarget();
+    onXChanged: syncDropTarget();
+    onYChanged: syncDropTarget();*/
 
     PlasmaCore.IconItem {
         id: icon
