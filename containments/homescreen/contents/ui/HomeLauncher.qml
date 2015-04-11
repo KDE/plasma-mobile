@@ -12,7 +12,7 @@ Item {
     property bool isDropTarget: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole
 
     opacity: isDropTarget ? 0.3 : 1
-onModelDataChanged:print("AAAA");
+
     PlasmaCore.IconItem {
         id: icon
         anchors.centerIn: parent

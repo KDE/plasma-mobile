@@ -205,7 +205,8 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
-    QProcess::startDetached(service->exec());
+    //ignore parameters like %u
+    QProcess::startDetached(service->exec().replace(QRegExp("%\\w"), ""));
 }
 
 QStringList ApplicationListModel::appOrder() const
