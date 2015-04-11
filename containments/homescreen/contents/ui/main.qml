@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.1
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
@@ -115,12 +115,12 @@ MouseEventListener {
         id: autoScrollTimer
         property bool scrollDown: true
         repeat: true
-        interval: 10
-        onTriggered: {return;
-            applicationsView.contentY += scrollDown ? 8 : -8;
-            if (applicationsView.dragData) {
-                dragDelegate.updateRow();
-            }
+        interval: 1500
+        onTriggered: {
+            scrollAnim.to = scrollDown ?
+                Math.min(applicationsView.contentItem.height - applicationsView.headerItem.height - root.height, applicationsView.contentY + root.height/2) :
+                Math.max(0, applicationsView.contentY - root.height/2);
+            scrollAnim.running = true;
         }
     }
 
@@ -186,27 +186,31 @@ MouseEventListener {
         
         dragDelegate.updateRow();
 
-        if (!autoScrollTimer.running) {
-            
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-            //FAVORITES
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                autoScrollTimer.running = false;
-            //SCROLL UP
-            } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
-                autoScrollTimer.scrollDown = false;
-                autoScrollTimer.running = true;
-            //SCROLL DOWN
-            } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
-                autoScrollTimer.scrollDown = true;
-                autoScrollTimer.running = true;
-            //DON't SCROLL
-            } else {
-                autoScrollTimer.running = false;
-            }
+        var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
+        //FAVORITES
+        if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+            autoScrollTimer.running = false;
+            scrollUpIndicator.opacity = 0;
+            scrollDownIndicator.opacity = 0;
+        //SCROLL UP
+        } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
+            autoScrollTimer.scrollDown = false;
+            autoScrollTimer.running = true;
+            scrollUpIndicator.opacity = 1;
+            scrollDownIndicator.opacity = 0;
+        //SCROLL DOWN
+        } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
+            autoScrollTimer.scrollDown = true;
+            autoScrollTimer.running = true;
+            scrollUpIndicator.opacity = 0;
+            scrollDownIndicator.opacity = 1;
+        //DON't SCROLL
         } else {
             autoScrollTimer.running = false;
+            scrollUpIndicator.opacity = 0;
+            scrollDownIndicator.opacity = 0;
         }
+
     }
     onReleased: {
         applicationsView.interactive = true;
@@ -215,6 +219,8 @@ MouseEventListener {
         root.reorderingApps = false;
         applicationsView.forceLayout();
         autoScrollTimer.running = false;
+        scrollUpIndicator.opacity = 0;
+        scrollDownIndicator.opacity = 0;
     }
     onClicked: {
         var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
@@ -232,6 +238,51 @@ MouseEventListener {
             color: PlasmaCore.ColorScope.backgroundColor
             opacity: 0.9 * (Math.min(applicationsView.contentY + root.height, root.height) / root.height)
             anchors.fill: parent
+        }
+
+        PlasmaCore.Svg {
+            id: arrowsSvg
+            imagePath: "widgets/arrows"
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        }
+        PlasmaCore.SvgItem {
+            id: scrollUpIndicator
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                top: parent.top
+                topMargin: 200
+            }
+            z: 2
+            opacity: 0
+            svg: arrowsSvg
+            elementId: "up-arrow"
+            width: units.iconSizes.large
+            height: width
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: 1000
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+        PlasmaCore.SvgItem {
+            id: scrollDownIndicator
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.bottom
+            }
+            z: 2
+            opacity: 0
+            svg: arrowsSvg
+            elementId: "down-arrow"
+            width: units.iconSizes.large
+            height: width
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: 1000
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
 
         HomeLauncher {
@@ -425,7 +476,7 @@ MouseEventListener {
             radius: width
             anchors.right: parent.right
             y: applicationsView.height * applicationsView.visibleArea.yPosition
-            opacity: scrollbarMouse.pressed || applicationsView.flicking ? 0.8 : 0
+            opacity: scrollbarMouse.pressed || applicationsView.flicking || scrollDownIndicator.opacity > 0 || scrollUpIndicator.opacity > 0 ? 0.8 : 0
             Behavior on opacity {
                 NumberAnimation {
                     duration: units.longDuration
