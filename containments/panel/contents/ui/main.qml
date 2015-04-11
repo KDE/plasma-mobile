@@ -239,6 +239,7 @@ PlasmaCore.ColorScope {
 
                 PlasmaComponents.TabBar {
                     id: tabBar
+                    visible: plasmoid.applets.count > 1
                     anchors {
                         left: parent.left
                         top: parent.top
@@ -251,7 +252,7 @@ PlasmaCore.ColorScope {
                     id: tabGroup
                     anchors {
                         left: parent.left
-                        top: tabBar.bottom
+                        top: plasmoid.applets.count > 1 ? tabBar.bottom : parent.top
                         right: parent.right
                         bottom: parent.bottom
                         margins: units.smallSpacing
