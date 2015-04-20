@@ -28,8 +28,9 @@ Item {
     id: callPage
 
     state: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.statusText : "disconnected"
+    property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
+
     property color textColor: "white"
-    property bool enableButtons: calling
 
     property string providerId: voiceCallmanager.providers.id(0)
 
@@ -78,7 +79,7 @@ Item {
             Layout.minimumHeight: implicitHeight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: one.font.pixelSize
+            font.pixelSize: theme.defaultFont.pixelSize * 2
             color: textColor
             text: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.lineId : ""
         }
@@ -87,11 +88,20 @@ Item {
             Layout.minimumHeight: implicitHeight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: theme.smallestFont.pixelSize
             color: textColor
-            text: voiceCallmanager.activeVoiceCall ? secondsToTimeString(voiceCallmanager.activeVoiceCall.duration) : ''
+            text: {
+                if (!voiceCallmanager.activeVoiceCall) {
+                    return '';
+                //STATUS_DIALING
+                } else if (voiceCallmanager.activeVoiceCall.status == 3) {
+                    return i18n("Calling...");
+                } else {
+                    return secondsToTimeString(voiceCallmanager.activeVoiceCall.duration);
+                }
+            }
         }
         PlasmaComponents.ButtonRow {
+            opacity: status == 1 ? 1 : 0
             exclusive: false
             spacing: 0
             Layout.alignment: Qt.AlignHCenter
@@ -114,21 +124,37 @@ Item {
         }
 
 
+        Item {
+            Layout.minimumHeight: units.gridUnit * 5
+            Layout.fillWidth: true
 
-        //TODO: swipe thing instead
-        PlasmaComponents.Button {
-            text: "Answer"
-            onClicked: {
-                if (voiceCallmanager.activeVoiceCall) {
-                    voiceCallmanager.activeVoiceCall.answer();
+            AnswerSwipe {
+                anchors.fill: parent
+                //STATUS_INCOMING
+                visible: status == 5
+                onAccepted: {
+                    if (voiceCallmanager.activeVoiceCall) {
+                        voiceCallmanager.activeVoiceCall.answer();
+                    }
+                }
+                onRejected: {
+                    if (voiceCallmanager.activeVoiceCall) {
+                        voiceCallmanager.activeVoiceCall.hangup();
+                    }
                 }
             }
-        }
-        PlasmaComponents.Button {
-            text: "Hangup"
-            onClicked: {
-                if (voiceCallmanager.activeVoiceCall) {
-                    voiceCallmanager.activeVoiceCall.hangup();
+
+            PlasmaComponents.Button {
+                anchors.fill: parent
+                //STATUS_INCOMING
+                visible: status != 5
+                iconSource: "call-stop"
+                Layout.fillWidth: true
+                text: i18n("End Call")
+                onClicked: {
+                    if (voiceCallmanager.activeVoiceCall) {
+                        voiceCallmanager.activeVoiceCall.hangup();
+                    }
                 }
             }
         }

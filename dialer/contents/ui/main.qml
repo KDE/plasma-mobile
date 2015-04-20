@@ -22,24 +22,21 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import org.nemomobile.voicecall 1.0
 import MeeGo.QOfono 0.2
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ApplicationWindow {
     id: root
+
+//BEGIN PROPERTIES
     width: 600
     height: 800
     visible: true
     color: Qt.rgba(0, 0, 0, 0.9)
 
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
+//END PROPERTIES
 
-    onStatusChanged: {
-        if (status > 0) {
-            stackView.push(Qt.resolvedUrl("Call/CallPage.qml"));
-        } else {
-            stackView.pop();
-        }
-    }
-
+//BEGIN MODELS
     OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
@@ -91,15 +88,7 @@ ApplicationWindow {
     OfonoNetworkOperator {
         id: netop
     }
-Button {
-    z: 99
-    text: "bah"
-    onClicked: {
-        print(voiceCallmanager.activeVoiceCall)
-        print(voiceCallmanager.voiceCalls.count)
-        print(voiceCallmanager.activeVoiceCall.status)
-    }
-}
+
     VoiceCallManager {
         id: voiceCallmanager
 
@@ -119,18 +108,27 @@ Button {
             console.log('*** QML *** VCM ERROR: ' + message);
         }
     }
+//END MODELS
 
-    StackView {
-        id: stackView
+//BEGIN UI
+    PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
+        when: root.visible && root.status == 0
+        source: Qt.resolvedUrl("Dialer.qml")
+        opacity: root.status == 0 ? 1 : 0
     }
 
+    PlasmaExtras.ConditionalLoader {
+        anchors.fill: parent
+        when: root.status > 0
+        source: Qt.resolvedUrl("Call/CallPage.qml")
+        opacity: root.status > 0 ? 1 : 0
+    }
+
+//END UI
     Component.onCompleted: {
-        //HACK: make sure activeVoiceCall is the proper one
+        //HACK: make sure activeVoiceCall is loaded if already existing
         voiceCallmanager.voiceCalls.onVoiceCallsChanged();
         voiceCallmanager.onActiveVoiceCallChanged();
-
-        //start with the dialer view
-        stackView.push(Qt.resolvedUrl("Dialer.qml"));
     }
 }
