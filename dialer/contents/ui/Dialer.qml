@@ -28,7 +28,6 @@ Item {
     id: dialer
 
     property color textColor: "white"
-    property bool enableButtons: calling
     property alias numberEntryText: status.text
 
     property string providerId: voiceCallmanager.providers.id(0)

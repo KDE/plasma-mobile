@@ -13,6 +13,9 @@ Text {
 
     MouseArea {
         anchors.fill: parent
+        onPressed: voiceCallmanager.startDtmfTone(parent.text);
+        onReleased: voiceCallmanager.stopDtmfTone();
+        onCanceled: voiceCallmanager.stopDtmfTone();
         onClicked: {
             if (callback) {
                 callback();
