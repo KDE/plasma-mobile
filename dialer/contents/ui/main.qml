@@ -88,8 +88,8 @@ ApplicationWindow {
         id: netop
     }
 
-    property VoiceCallManager manager: VoiceCallManager {
-        id: manager
+    VoiceCallManager {
+        id: voiceCallmanager
 
         onActiveVoiceCallChanged: {
             if (activeVoiceCall) {

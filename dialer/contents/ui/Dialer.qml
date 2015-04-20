@@ -27,14 +27,13 @@ import org.nemomobile.voicecall 1.0
 Item {
     id: dialer
 
-    state: manager.activeVoiceCall ? manager.activeVoiceCall.statusText : "disconnected"
+    state: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.statusText : "disconnected"
     property color textColor: "white"
     property bool calling: false // needs to be connected to a system service
     property bool enableButtons: calling
     property alias numberEntryText: status.text
-    property VoiceCallManager manager: root.manager
 
-    property string providerId: manager.providers.id(0)
+    property string providerId: voiceCallmanager.providers.id(0)
 
     function addNumber(number) {
         status.text = status.text + number
@@ -44,13 +43,13 @@ Item {
         if (!calling) {
             console.log("Calling: " + status.text);
             dialer.calling = true;
-            manager.dial(providerId, status.text);
+            voiceCallmanager.dial(providerId, status.text);
 
         } else {
             console.log("Hanging up: " + status.text);
             status.text = '';
             dialer.calling = false;
-            var call = manager.activeVoiceCall;
+            var call = voiceCallmanager.activeVoiceCall;
             if (call) {
                 call.hangup();
             }
@@ -184,7 +183,7 @@ Item {
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: one.font.pixelSize
             color: textColor
-            text: manager.activeVoiceCall ? manager.activeVoiceCall.lineId : ""
+            text: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.lineId : ""
         }
         Text {
             Layout.fillWidth: true
@@ -193,7 +192,7 @@ Item {
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: theme.smallestFont.pixelSize
             color: textColor
-            text: manager.activeVoiceCall ? secondsToTimeString(manager.activeVoiceCall.duration) : ''
+            text: voiceCallmanager.activeVoiceCall ? secondsToTimeString(voiceCallmanager.activeVoiceCall.duration) : ''
         }
         RowLayout {
             Layout.minimumHeight: parent.height / 3
@@ -204,7 +203,7 @@ Item {
             DialerIconButton {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                source: dialer.state == "incoming" ? "call-start" : (manager.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high")
+                source: dialer.state == "incoming" ? "call-start" : (voiceCallmanager.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high")
                 Rectangle {
                     z: -1
                     color: dialer.state == "incoming" ? "green" : "white"
@@ -217,11 +216,11 @@ Item {
 
                 callback: function () {
                     if (dialer.state == "incoming") {
-                        if (manager.activeVoiceCall) {
-                            manager.activeVoiceCall.answer();
+                        if (voiceCallmanager.activeVoiceCall) {
+                            voiceCallmanager.activeVoiceCall.answer();
                         }
                     } else {
-                        manager.isMicrophoneMuted = !manager.isMicrophoneMuted;
+                        voiceCallmanager.isMicrophoneMuted = !voiceCallmanager.isMicrophoneMuted;
                     }
                 }
             }
@@ -241,8 +240,8 @@ Item {
                 }
 
                 callback: function () {
-                    if (manager.activeVoiceCall) {
-                        manager.activeVoiceCall.hangup();
+                    if (voiceCallmanager.activeVoiceCall) {
+                        voiceCallmanager.activeVoiceCall.hangup();
                     }
                 }
             }
