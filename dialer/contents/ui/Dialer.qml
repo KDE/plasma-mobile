@@ -21,6 +21,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.nemomobile.voicecall 1.0
 
 Item {
@@ -88,13 +89,12 @@ Item {
             fill: parent
             margins: 20
         }
-        Text {
+        PlasmaComponents.Label {
             id: status
             Layout.fillWidth: true
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: one.font.pixelSize
-            color: textColor
         }
 
         Grid {
@@ -196,7 +196,7 @@ Item {
             text: manager.activeVoiceCall ? secondsToTimeString(manager.activeVoiceCall.duration) : ''
         }
         RowLayout {
-            height: parent.height / 3
+            Layout.minimumHeight: parent.height / 3
 
             Layout.fillWidth: true
             Layout.fillHeight: true
