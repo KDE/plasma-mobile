@@ -22,11 +22,15 @@ a phone call is in progress.
 A tutorial how to start phonesim on a desktop system can be found here:
 http://comments.gmane.org/gmane.comp.handhelds.ofono/12178
 
-* edit /etc/ofono/modem.conf, uncomment everything so that it looks like
+* edit /etc/ofono/phonesim.conf, uncomment everything so that it looks like
  [phonesim]
+
  Driver=phonesim
+ 
  Address=127.0.0.1
+ 
  Port=12345
+
 
 * start ofonod as root
 * start phonesim
