@@ -27,9 +27,7 @@ import org.nemomobile.voicecall 1.0
 Item {
     id: dialer
 
-    state: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.statusText : "disconnected"
     property color textColor: "white"
-    property bool calling: false // needs to be connected to a system service
     property bool enableButtons: calling
     property alias numberEntryText: status.text
 
@@ -40,15 +38,13 @@ Item {
     }
 
     function call() {
-        if (!calling) {
+        if (!voiceCallmanager.activeVoiceCall) {
             console.log("Calling: " + status.text);
-            dialer.calling = true;
             voiceCallmanager.dial(providerId, status.text);
 
         } else {
             console.log("Hanging up: " + status.text);
             status.text = '';
-            dialer.calling = false;
             var call = voiceCallmanager.activeVoiceCall;
             if (call) {
                 call.hangup();
@@ -61,28 +57,8 @@ Item {
         status.text = "+41 76 555 5555"
     }
 
-    function secondsToTimeString(seconds) {
-        seconds = Math.floor(seconds/1000)
-        var h = Math.floor(seconds / 3600);
-        var m = Math.floor((seconds - (h * 3600)) / 60);
-        var s = seconds - h * 3600 - m * 60;
-        if(h < 10) h = '0' + h;
-        if(m < 10) m = '0' + m;
-        if(s < 10) s = '0' + s;
-        return '' + h + ':' + m + ':' + s;
-    }
-
-    Behavior on opacity {
-        NumberAnimation { properties: "opacity"; duration: 100 }
-    }
-
-    MouseArea {
-        anchors.fill: parent
-    }
-
     ColumnLayout {
         id: dialPadArea
-        visible: dialer.state == "disconnected"
 
         anchors {
             fill: parent
@@ -130,7 +106,7 @@ Item {
             }
             DialerIconButton {
                 id: callButton
-                source: dialer.calling ? "call-stop" : "call-start"
+                source: "call-start"
                 callback: call
             }
             DialerIconButton { 
@@ -138,110 +114,6 @@ Item {
                 callback: function() {
                     if (status.text.length > 0) {
                         status.text = status.text.substr(0, status.text.length - 1);
-                    } else {
-                        dialer.calling = true;
-                        dialer.calling = false;
-                    }
-                }
-            }
-        }
-    }
-
-    ColumnLayout {
-        id: activeCallUi
-        spacing: 10
-        visible: dialer.state != "disconnected"
-
-        anchors {
-            fill: parent
-            margins: 20
-        }
-
-        Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: parent.height/2
-            Rectangle {
-                height: Math.min(parent.width, parent.height)
-                width: height
-                radius: 5
-                anchors.centerIn: parent
-                PlasmaCore.IconItem {
-                    anchors {
-                        fill: parent
-                        centerIn: parent
-                        margins: 20
-                    }
-                    source: "im-user"
-                }
-            }
-        }
-        Text {
-            Layout.fillWidth: true
-            Layout.minimumHeight: implicitHeight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: one.font.pixelSize
-            color: textColor
-            text: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.lineId : ""
-        }
-        Text {
-            Layout.fillWidth: true
-            Layout.minimumHeight: implicitHeight
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: theme.smallestFont.pixelSize
-            color: textColor
-            text: voiceCallmanager.activeVoiceCall ? secondsToTimeString(voiceCallmanager.activeVoiceCall.duration) : ''
-        }
-        RowLayout {
-            Layout.minimumHeight: parent.height / 3
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            DialerIconButton {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                source: dialer.state == "incoming" ? "call-start" : (voiceCallmanager.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high")
-                Rectangle {
-                    z: -1
-                    color: dialer.state == "incoming" ? "green" : "white"
-                    opacity: 0.5
-                    radius: 5
-                    anchors {
-                        fill: parent
-                    }
-                }
-
-                callback: function () {
-                    if (dialer.state == "incoming") {
-                        if (voiceCallmanager.activeVoiceCall) {
-                            voiceCallmanager.activeVoiceCall.answer();
-                        }
-                    } else {
-                        voiceCallmanager.isMicrophoneMuted = !voiceCallmanager.isMicrophoneMuted;
-                    }
-                }
-            }
-
-            DialerIconButton {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                source: "call-stop"
-                Rectangle {
-                    z: -1
-                    color: "red"
-                    opacity: 0.5
-                    radius: 5
-                    anchors {
-                        fill: parent
-                    }
-                }
-
-                callback: function () {
-                    if (voiceCallmanager.activeVoiceCall) {
-                        voiceCallmanager.activeVoiceCall.hangup();
                     }
                 }
             }

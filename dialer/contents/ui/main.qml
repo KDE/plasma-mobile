@@ -32,6 +32,14 @@ ApplicationWindow {
 
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
 
+    onStatusChanged: {
+        if (status > 0) {
+            stackView.push(Qt.resolvedUrl("Call/CallPage.qml"));
+        } else {
+            stackView.pop();
+        }
+    }
+
     OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
