@@ -22,6 +22,7 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import org.nemomobile.voicecall 1.0
 import MeeGo.QOfono 0.2
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ApplicationWindow {

@@ -43,6 +43,28 @@ MouseArea {
         anchors.fill: parent
         radius: height
         color: Qt.rgba((handlePosition > root.width/2 ? 0.6 : 0)+0.2, (handlePosition < root.width/2 ? 0.6 : 0)+0.2, 0.2, Math.abs(handlePosition - (root.width/2)) / answerHandle.width/2);
+
+        PlasmaCore.IconItem {
+            source: "call-start"
+            width: icon.width
+            height: width
+            anchors {
+                verticalCenter: parent.verticalCenter
+                left: parent.left
+                leftMargin: units.largeSpacing
+            }
+        }
+        PlasmaCore.IconItem {
+            source: "call-stop"
+            width: icon.width
+            height: width
+            anchors {
+                verticalCenter: parent.verticalCenter
+                right: parent.right
+                leftMargin: units.largeSpacing
+            }
+        }
+
         Rectangle {
             id: answerHandle
             x: parent.width/2 - width/2
@@ -51,6 +73,7 @@ MouseArea {
             radius: width
             color: Qt.rgba(0.2, 0.8, 0.2, 1)
             PlasmaCore.IconItem {
+                id: icon
                 source: "call-start"
                 width: parent.width * 0.7
                 height: width

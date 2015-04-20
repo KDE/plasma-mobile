@@ -113,19 +113,17 @@ Item {
                 source: "call-start"
                 callback: call
             }
-            DialerButton {
+            Item {
                 Layout.minimumWidth: dialPadArea.width/3
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                enabled: status.text.length > 0
-                opacity: enabled ? 1 : 0.5
-                text: i18n("Call")
-                callback: call
             }
             DialerIconButton {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumWidth: dialPadArea.width/3
+                enabled: status.text.length > 0
+                opacity: enabled ? 1 : 0.5
                 source: "edit-clear"
                 callback: function() {
                     if (status.text.length > 0) {
