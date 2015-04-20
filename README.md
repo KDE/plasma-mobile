@@ -37,6 +37,7 @@ http://comments.gmane.org/gmane.comp.handhelds.ofono/12178
 * start phonesim
   phonesim -p 12345  -gui  /usr/share/phonesim/default.xml
 * from the oFono *source* directory, call /test/enable-modem to bring the modem up, the control UI should come up
+* call test/online-modem to activate the test phonesim modem
 * start plasma with plasmashell -w -p org.kde.satellite.phone to start the phone homescreen in a window
 
 Note that the oFono/phonesim part is necessary only if it's needed to test some part specific to telephony
