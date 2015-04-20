@@ -30,8 +30,6 @@ Item {
     state: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.statusText : "disconnected"
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
 
-    property color textColor: "white"
-
     property string providerId: voiceCallmanager.providers.id(0)
 
     function secondsToTimeString(seconds) {
@@ -74,29 +72,29 @@ Item {
                 }
             }
         }
-        Text {
+        PlasmaComponents.Label {
             Layout.fillWidth: true
             Layout.minimumHeight: implicitHeight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: theme.defaultFont.pixelSize * 2
-            color: textColor
+            font.pointSize: theme.defaultFont.pointSize * 2
             text: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.lineId : ""
         }
-        Text {
+        PlasmaComponents.Label {
             Layout.fillWidth: true
             Layout.minimumHeight: implicitHeight
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
-            color: textColor
             text: {
                 if (!voiceCallmanager.activeVoiceCall) {
                     return '';
                 //STATUS_DIALING
                 } else if (voiceCallmanager.activeVoiceCall.status == 3) {
                     return i18n("Calling...");
-                } else {
+                } else if (voiceCallmanager.activeVoiceCall.duration > 0) {
                     return secondsToTimeString(voiceCallmanager.activeVoiceCall.duration);
+                } else {
+                    return '';
                 }
             }
         }

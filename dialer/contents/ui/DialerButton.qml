@@ -1,13 +1,20 @@
-import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 
-Text {
-    width: parent.width / parent.columns
-    height: parent.buttonHeight
+import QtQuick 2.0
+import QtQuick.Layouts 1.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+
+PlasmaComponents.Label {
+    Layout.fillWidth: true
+    Layout.fillHeight: true
+
+    //This is 0 to override the Label default height that would cause a binding loop
+    height: 0
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
-    color: dialer.textColor
-    font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
+    font.pointSize: 1024
+    fontSizeMode: Text.VerticalFit
+
     property alias sub: longHold.text
     property var callback
 
@@ -33,19 +40,19 @@ Text {
         }
     }
 
-    Text {
+    PlasmaComponents.Label {
         id: longHold
         anchors {
-            top: parent.top
+            verticalCenter: parent.verticalCenter
             right: parent.right
         }
-        height: parent.height
+        height: parent.height * 0.6
         width: parent.width / 3
         verticalAlignment: Qt.AlignVCenter
         visible: text.length > 0
         opacity: 0.7
 
-        font.pixelSize: parent.pixelSize * .8
-        color: parent.color
+        font.pointSize: 1024
+        fontSizeMode: Text.Fit
     }
 }

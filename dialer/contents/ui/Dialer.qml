@@ -27,7 +27,6 @@ import org.nemomobile.voicecall 1.0
 Item {
     id: dialer
 
-    property color textColor: "white"
     property alias numberEntryText: status.text
 
     property string providerId: voiceCallmanager.providers.id(0)
@@ -61,27 +60,27 @@ Item {
 
         anchors {
             fill: parent
-            margins: 20
+            margins: units.largeSpacing
         }
         PlasmaComponents.Label {
             id: status
             Layout.fillWidth: true
+            Layout.minimumHeight: parent.height / 6
+            Layout.maximumHeight: Layout.minimumHeight
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: one.font.pixelSize
+            font.pointSize: 1024
+            fontSizeMode: Text.Fit
         }
 
-        Grid {
+        GridLayout {
             id: pad
             columns: 3
-            spacing: 0
-            property int buttonHeight: height / 5
+
+            property int buttonHeight: parent.height / 6
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-
-            height: parent.height - status.height
-            width: parent.width
 
             DialerButton { id: one; text: "1" } 
             DialerButton { text: "2" }
@@ -98,17 +97,35 @@ Item {
             DialerButton { text: "*"; } 
             DialerButton { text: "0"; sub: "+"; }
             DialerButton { text: "#" }
+        }
 
-            DialerIconButton {
-                source: "im-user"
-                callback: fromContacts
-            }
+        RowLayout {
+            Layout.fillWidth: true
+            Layout.minimumHeight: parent.height / 6
+            Layout.maximumHeight: Layout.minimumHeight
             DialerIconButton {
                 id: callButton
+                Layout.minimumWidth: dialPadArea.width/3
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                enabled: status.text.length > 0
+                opacity: enabled ? 1 : 0.5
                 source: "call-start"
                 callback: call
             }
-            DialerIconButton { 
+            DialerButton {
+                Layout.minimumWidth: dialPadArea.width/3
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                enabled: status.text.length > 0
+                opacity: enabled ? 1 : 0.5
+                text: i18n("Call")
+                callback: call
+            }
+            DialerIconButton {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumWidth: dialPadArea.width/3
                 source: "edit-clear"
                 callback: function() {
                     if (status.text.length > 0) {
