@@ -29,8 +29,8 @@ ApplicationWindow {
     height: 800
     visible: true
     color: Qt.rgba(0, 0, 0, 0.9)
-    
-        OfonoManager {
+
+    OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
            console.log("Ofono is " + available)

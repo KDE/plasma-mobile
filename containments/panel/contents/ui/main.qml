@@ -104,6 +104,17 @@ PlasmaCore.ColorScope {
         interval: 60 * 1000
     }
 
+    OfonoManager {
+        id: ofonoManager
+        onAvailableChanged: {
+           console.log("Ofono is " + available)
+        }
+        onModemAdded: {
+            console.log("modem added " + modem)
+        }
+        onModemRemoved: console.log("modem removed")
+    }
+
     OfonoNetworkRegistration {
         id: netreg
         Component.onCompleted: {
