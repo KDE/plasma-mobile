@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import org.nemomobile.voicecall 1.0
@@ -116,6 +116,12 @@ ApplicationWindow {
         when: root.visible && root.status == 0
         source: Qt.resolvedUrl("Dialer.qml")
         opacity: root.status == 0 ? 1 : 0
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
     PlasmaExtras.ConditionalLoader {
@@ -123,6 +129,12 @@ ApplicationWindow {
         when: root.status > 0
         source: Qt.resolvedUrl("Call/CallPage.qml")
         opacity: root.status > 0 ? 1 : 0
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
 //END UI
