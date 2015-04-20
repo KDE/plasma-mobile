@@ -30,6 +30,8 @@ ApplicationWindow {
     visible: true
     color: Qt.rgba(0, 0, 0, 0.9)
 
+    property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
+
     OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
@@ -66,12 +68,6 @@ ApplicationWindow {
         }
     }
 
-    property OfonoSimManager simManager: ofonoSimManager
-    OfonoSimManager {
-        id: ofonoSimManager
-        modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
     OfonoNetworkRegistration {
         id: netreg
         Component.onCompleted: {
@@ -87,17 +83,25 @@ ApplicationWindow {
     OfonoNetworkOperator {
         id: netop
     }
-
+Button {
+    z: 99
+    text: "bah"
+    onClicked: {
+        print(voiceCallmanager.activeVoiceCall)
+        print(voiceCallmanager.voiceCalls.count)
+        print(voiceCallmanager.activeVoiceCall.status)
+    }
+}
     VoiceCallManager {
         id: voiceCallmanager
 
         onActiveVoiceCallChanged: {
             if (activeVoiceCall) {
                 //main.activeVoiceCallPerson = people.personByPhoneNumber(activeVoiceCall.lineId);
-                dialerOverlay.item.numberEntryText = activeVoiceCall.lineId;
+               // dialerOverlay.item.numberEntryText = activeVoiceCall.lineId;
 
             } else {
-                dialerOverlay.item.numberEntryText = '';
+               // dialerOverlay.item.numberEntryText = '';
 
                 //main.activeVoiceCallPerson = null;
             }
@@ -107,8 +111,18 @@ ApplicationWindow {
             console.log('*** QML *** VCM ERROR: ' + message);
         }
     }
-    Dialer {
-        id: dialerOverlay
+
+    StackView {
+        id: stackView
         anchors.fill: parent
+    }
+
+    Component.onCompleted: {
+        //HACK: make sure activeVoiceCall is the proper one
+        voiceCallmanager.voiceCalls.onVoiceCallsChanged();
+        voiceCallmanager.onActiveVoiceCallChanged();
+
+        //start with the dialer view
+        stackView.push(Qt.resolvedUrl("Dialer.qml"));
     }
 }
