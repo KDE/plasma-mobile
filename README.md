@@ -23,6 +23,7 @@ A tutorial how to start phonesim on a desktop system can be found here:
 http://comments.gmane.org/gmane.comp.handhelds.ofono/12178
 
 * edit /etc/ofono/phonesim.conf, uncomment everything so that it looks like
+
  [phonesim]
 
  Driver=phonesim
