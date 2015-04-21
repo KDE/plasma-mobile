@@ -30,6 +30,8 @@ Item {
     Layout.fillHeight: true
 
     property var callback
+    property var pressedCallback
+    property var releasedCallback
     property string sub
     property alias source: icon.source
     property alias text: label.text
@@ -55,17 +57,24 @@ Item {
         anchors.fill: parent
         onClicked: {
             if (callback) {
-                callback();
+                callback(parent.text);
             } else {
                 addNumber(parent.text);
             }
         }
 
         onPressAndHold: {
-            if (parent.sub.length > 0) {
-                addNumber(parent.sub);
+            var text;
+            if (longHold.visible) {
+                text = longHold.text;
             } else {
-                addNumber(parent.text);
+                text = parent.text;
+            }
+
+            if (callback) {
+                callback(text);
+            } else if (pad.callback) {
+                pad.callback(text);
             }
         }
     }

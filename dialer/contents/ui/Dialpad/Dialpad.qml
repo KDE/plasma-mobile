@@ -27,6 +27,10 @@ GridLayout {
     id: pad
     columns: 3
 
+    property var callback
+    property var pressedCallback
+    property var releasedCallback
+
     property int buttonHeight: parent.height / 6
 
     Layout.fillWidth: true

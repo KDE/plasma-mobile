@@ -51,11 +51,6 @@ Item {
         }
     }
 
-    function fromContacts() {
-        console.log("Should get from contacts!");
-        status.text = "+41 76 555 5555"
-    }
-
     ColumnLayout {
         id: dialPadArea
 
@@ -75,7 +70,15 @@ Item {
         }
 
         Dialpad {
-            
+            callback: function (string) {
+                addNumber(string);
+            }
+            pressedCallback: function (string) {
+                voiceCallmanager.startDtmfTone(string);
+            }
+            releasedCallback: function (string) {
+                voiceCallmanager.stopDtmfTone();
+            }
         }
 
         RowLayout {
@@ -104,7 +107,7 @@ Item {
                 enabled: status.text.length > 0
                 opacity: enabled ? 1 : 0.5
                 source: "edit-clear"
-                callback: function() {
+                callback: function(text) {
                     if (status.text.length > 0) {
                         status.text = status.text.substr(0, status.text.length - 1);
                     }

@@ -116,6 +116,7 @@ ApplicationWindow {
         anchors.fill: parent
         when: root.visible && root.status == 0
         source: Qt.resolvedUrl("Dialer/Dialer.qml")
+        z: root.status == 0 ? 2 : 0
         opacity: root.status == 0 ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
@@ -130,6 +131,7 @@ ApplicationWindow {
         when: root.status > 0
         source: Qt.resolvedUrl("Call/CallPage.qml")
         opacity: root.status > 0 ? 1 : 0
+        z: root.status > 0 ? 2 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration

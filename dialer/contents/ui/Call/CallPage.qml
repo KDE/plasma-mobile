@@ -45,6 +45,11 @@ Item {
         return '' + h + ':' + m + ':' + s;
     }
 
+    onStatusChanged: {
+        if (status != 1) {
+            dialerButton.checked = false;
+        }
+    }
 
     ColumnLayout {
         id: activeCallUi
@@ -61,8 +66,9 @@ Item {
             Layout.fillHeight: true
             Layout.minimumHeight: parent.height/2
 
-            contentWidth: topContents.width;
+            contentWidth: topContents.width
             contentHeight: topContents.height
+            interactive: status == 1;
             Row {
                 id: topContents
                 Avatar {
@@ -72,6 +78,12 @@ Item {
                 Dialpad {
                     width: topFlickable.width
                     height: topFlickable.height
+
+                    callback: function (string) {
+                        if (voiceCallmanager.activeVoiceCall) {
+                            voiceCallmanager.activeVoiceCall.sendDtmf(string);
+                        }
+                    }
                 }
             }
 

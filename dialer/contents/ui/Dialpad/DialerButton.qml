@@ -36,25 +36,53 @@ PlasmaComponents.Label {
 
     property alias sub: longHold.text
     property var callback
+    property var pressedCallback
+    property var releasedCallback
 
     MouseArea {
         anchors.fill: parent
-        onPressed: voiceCallmanager.startDtmfTone(parent.text);
-        onReleased: voiceCallmanager.stopDtmfTone();
-        onCanceled: voiceCallmanager.stopDtmfTone();
+        onPressed: {
+            if (pressedCallback) {
+                pressedCallback(parent.text);
+            } else if (pad.pressedCallback) {
+                pad.pressedCallback(parent.text);
+            }
+        }
+        onReleased: {
+            if (releasedCallback) {
+                releasedCallback(parent.text);
+            } else if (pad.releasedCallback) {
+                pad.releasedCallback(parent.text);
+            }
+        }
+        onCanceled: {
+            if (releasedCallback) {
+                releasedCallback(parent.text);
+            } else if (pad.releasedCallback) {
+                pad.releasedCallback(parent.text);
+            }
+        }
+
         onClicked: {
             if (callback) {
-                callback();
-            } else {
-                addNumber(parent.text);
+                callback(parent.text);
+            } else if (pad.callback) {
+                pad.callback(parent.text);
             }
         }
 
         onPressAndHold: {
+            var text;
             if (longHold.visible) {
-                addNumber(longHold.text);
+                text = longHold.text;
             } else {
-                addNumber(parent.text);
+                text = parent.text;
+            }
+
+            if (callback) {
+                callback(text);
+            } else if (pad.callback) {
+                pad.callback(text);
             }
         }
     }
