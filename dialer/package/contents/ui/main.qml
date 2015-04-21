@@ -37,6 +37,15 @@ ApplicationWindow {
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
 //END PROPERTIES
 
+//BEGIN SIGNAL HANDLERS
+    onStatusChanged: {
+        //STATUS_INCOMING
+        if (status == 5) {
+            root.visible = true;
+        }
+    }
+//END SIGNAL HANDLERS
+
 //BEGIN MODELS
     OfonoManager {
         id: ofonoManager
