@@ -115,7 +115,7 @@ ApplicationWindow {
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
         when: root.visible && root.status == 0
-        source: Qt.resolvedUrl("Dialer.qml")
+        source: Qt.resolvedUrl("Dialer/Dialer.qml")
         opacity: root.status == 0 ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {

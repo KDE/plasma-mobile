@@ -23,6 +23,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.nemomobile.voicecall 1.0
+import "../Dialpad"
 
 Item {
     id: dialer
@@ -73,30 +74,8 @@ Item {
             fontSizeMode: Text.Fit
         }
 
-        GridLayout {
-            id: pad
-            columns: 3
-
-            property int buttonHeight: parent.height / 6
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            DialerButton { id: one; text: "1" } 
-            DialerButton { text: "2" }
-            DialerButton { text: "3" }
-
-            DialerButton { text: "4" } 
-            DialerButton { text: "5" }
-            DialerButton { text: "6" }
-
-            DialerButton { text: "7" } 
-            DialerButton { text: "8" }
-            DialerButton { text: "9" }
-
-            DialerButton { text: "*"; } 
-            DialerButton { text: "0"; sub: "+"; }
-            DialerButton { text: "#" }
+        Dialpad {
+            
         }
 
         RowLayout {
