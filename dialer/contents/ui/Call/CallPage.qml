@@ -24,6 +24,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.nemomobile.voicecall 1.0
 
+import "../Dialpad"
+
 Item {
     id: callPage
 
@@ -53,7 +55,45 @@ Item {
             margins: 20
         }
 
-        Avatar {}
+        Flickable {
+            id: topFlickable
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.minimumHeight: parent.height/2
+
+            contentWidth: topContents.width;
+            contentHeight: topContents.height
+            Row {
+                id: topContents
+                Avatar {
+                    width: topFlickable.width
+                    height: topFlickable.height
+                }
+                Dialpad {
+                    width: topFlickable.width
+                    height: topFlickable.height
+                }
+            }
+
+            onMovingChanged: {
+                var checked = contentX > topFlickable.width/2;
+
+                if (checked) {
+                    topSlideAnim.to = topFlickable.width;
+                } else {
+                    topSlideAnim.to = 0;
+                }
+                dialerButton.checked = checked;
+                topSlideAnim.running = true;
+            }
+            PropertyAnimation {
+                id: topSlideAnim
+                target: topFlickable
+                properties: "contentX"
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
 
         PlasmaComponents.Label {
             Layout.fillWidth: true
@@ -98,8 +138,14 @@ Item {
                 id: dialerButton
                 flat: false
                 iconSource: "input-keyboard"
-                onClicked: {
-                    print("show dialer")
+                checkable: true
+                onCheckedChanged: {
+                    if (checked) {
+                        topSlideAnim.to = topFlickable.width;
+                    } else {
+                        topSlideAnim.to = 0;
+                    }
+                    topSlideAnim.running = true;
                 }
             }
         }
