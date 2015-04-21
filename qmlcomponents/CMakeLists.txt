@@ -20,4 +20,4 @@ install(TARGETS satellitecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde
 
 install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/satellite/components)
 
-
+add_subdirectory(modeltest)

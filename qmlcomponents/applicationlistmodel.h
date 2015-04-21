@@ -46,9 +46,13 @@ public:
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
+    void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
+
     int count() { return m_applicationList.count(); }
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+
+    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 

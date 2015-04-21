@@ -153,6 +153,13 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
     }
 }
 
+Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return 0;
+    return Qt::ItemIsDragEnabled|QAbstractItemModel::flags(index);
+}
+
 int ApplicationListModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
@@ -160,6 +167,11 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     }
 
     return m_applicationList.count();
+}
+
+void ApplicationListModel::moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild)
+{
+    moveItem(sourceRow, destinationChild);
 }
 
 Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
