@@ -37,9 +37,6 @@ plasma_install_package(look-and-feel org.kde.satellite.phone look-and-feel)
 plasma_install_package(shell org.kde.satellite.phone shells)
 install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.satellite.lockers")
 
-kpackage_install_package(dialer org.kde.phone.dialer genericqml)
-install(FILES dialer/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.dialer.desktop)
-
 install(DIRECTORY compositor/
         DESTINATION ${DATA_INSTALL_DIR}/greenisland/org.kde.satellite.compositor.phone
         PATTERN .svn EXCLUDE
@@ -53,3 +50,4 @@ add_subdirectory(services)
 add_subdirectory(settingsmodules)
 add_subdirectory(applets)
 add_subdirectory(containments)
+add_subdirectory(dialer)
