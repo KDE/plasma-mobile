@@ -32,8 +32,7 @@ ApplicationWindow {
 //BEGIN PROPERTIES
     width: 600
     height: 800
-    visible: true
-    //color: Qt.rgba(0, 0, 0, 0.9)
+
 
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
 //END PROPERTIES
