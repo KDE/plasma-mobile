@@ -53,25 +53,8 @@ Item {
             margins: 20
         }
 
-        Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: parent.height/2
-            Rectangle {
-                height: Math.min(parent.width, parent.height)
-                width: height
-                radius: 5
-                anchors.centerIn: parent
-                PlasmaCore.IconItem {
-                    anchors {
-                        fill: parent
-                        centerIn: parent
-                        margins: 20
-                    }
-                    source: "im-user"
-                }
-            }
-        }
+        Avatar {}
+
         PlasmaComponents.Label {
             Layout.fillWidth: true
             Layout.minimumHeight: implicitHeight
