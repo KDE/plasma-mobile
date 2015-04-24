@@ -15,7 +15,7 @@
  *  along with this program; if not, write to the Free Software
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 
@@ -53,23 +53,23 @@ PlasmaCore.ToolTipArea {
         }
         //if the fullRepresentation size was restored to a stored size, or if is dragged from the desktop, restore popup size
         if (fullRepresentation.width > 0) {
-            popupWindow.mainItem.width = fullRepresentation.width;
+            appletParent.width = fullRepresentation.width;
         } else if (fullRepresentation.Layout && fullRepresentation.Layout.preferredWidth > 0) {
-            popupWindow.mainItem.width = fullRepresentation.Layout.preferredWidth
+            appletParent.width = fullRepresentation.Layout.preferredWidth
         } else if (fullRepresentation.implicitWidth > 0) {
-            popupWindow.mainItem.width = fullRepresentation.implicitWidth
+            appletParent.width = fullRepresentation.implicitWidth
         } else {
-            popupWindow.mainItem.width = theme.mSize(theme.defaultFont).width * 35
+            appletParent.width = theme.mSize(theme.defaultFont).width * 35
         }
 
         if (fullRepresentation.height > 0) {
-            popupWindow.mainItem.height = fullRepresentation.height;
+            appletParent.height = fullRepresentation.height;
         } else if (fullRepresentation.Layout && fullRepresentation.Layout.preferredHeight > 0) {
-            popupWindow.mainItem.height = fullRepresentation.Layout.preferredHeight
+            appletParent.height = fullRepresentation.Layout.preferredHeight
         } else if (fullRepresentation.implicitHeight > 0) {
-            popupWindow.mainItem.height = fullRepresentation.implicitHeight
+            appletParent.height = fullRepresentation.implicitHeight
         } else {
-            popupWindow.mainItem.height = theme.mSize(theme.defaultFont).height * 25
+            appletParent.height = theme.mSize(theme.defaultFont).height * 25
         }
 
         fullRepresentation.parent = appletParent;
@@ -116,38 +116,21 @@ PlasmaCore.ToolTipArea {
         onTriggered: plasmoid.expanded = popupWindow.visible;
     }
 
-    PlasmaCore.Dialog {
-        id: popupWindow
-        objectName: "popupWindow"
-        flags: Qt.WindowStaysOnTopHint
-        visible: plasmoid.expanded && fullRepresentation
-        visualParent: compactRepresentation ? compactRepresentation : null
-        location: plasmoid.location
-        hideOnWindowDeactivate: plasmoid.hideOnWindowDeactivate
+    MouseEventListener {
+        id: appletParent
+        opacity: plasmoid.expanded ? 1 : 0
+        anchors.top: parent.bottom
+        Layout.minimumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumWidth : 0
+        Layout.minimumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumHeight: 0
+        Layout.maximumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumWidth : Infinity
+        Layout.maximumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumHeight: Infinity
 
-        property var oldStatus: PlasmaCore.Types.UnknownStatus
-
-        //It's a MouseEventListener to get all the events, so the eventfilter will be able to catch them
-        mainItem: MouseEventListener {
-            id: appletParent
-            Layout.minimumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumWidth : 0
-            Layout.minimumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumHeight: 0
-            Layout.maximumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumWidth : Infinity
-            Layout.maximumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumHeight: Infinity
-        }
-
-        onVisibleChanged: {
-            if (!visible) {
-                expandedSync.restart();
-                plasmoid.status = oldStatus;
-            } else {
-                oldStatus = plasmoid.status;
-                plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
-                // This call currently fails and complains at runtime:
-                // QWindow::setWindowState: QWindow::setWindowState does not accept Qt::WindowActive
-                popupWindow.requestActivate();
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
             }
         }
-
     }
+
 }
