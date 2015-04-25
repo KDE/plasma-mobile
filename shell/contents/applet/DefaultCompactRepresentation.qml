@@ -19,9 +19,11 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
-PlasmaCore.IconItem {
-    id: icon
+Row {
+    id: main
+    spacing: units.largeSpacing
 
     Layout.minimumWidth: {
         switch (plasmoid.formFactor) {
@@ -45,8 +47,28 @@ PlasmaCore.IconItem {
         }
     }
 
-    source: plasmoid.icon ? plasmoid.icon : "plasma"
-    active: mouseArea.containsMouse
+    PlasmaCore.IconItem {
+        id: icon
+        source: plasmoid.icon ? plasmoid.icon : "plasma"
+        active: mouseArea.containsMouse
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        anchors.verticalCenter: parent.verticalCenter
+    }
+    PlasmaCore.SvgItem {
+        svg: PlasmaCore.Svg {
+            id: arrowSvg
+            imagePath: "widgets/arrows"
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        }
+        width: units.iconSizes.smallMedium
+        height: width
+        elementId: plasmoid.expanded ? "up-arrow" : "down-arrow"
+        anchors.verticalCenter: parent.verticalCenter
+    }
+    PlasmaComponents.Label {
+        text: plasmoid.title
+        anchors.verticalCenter: parent.verticalCenter
+    }
 
     MouseArea {
         id: mouseArea

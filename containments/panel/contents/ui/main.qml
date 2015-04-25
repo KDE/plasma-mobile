@@ -38,6 +38,7 @@ PlasmaCore.ColorScope {
     property Item toolBox
     property int buttonHeight: width/4
     property bool reorderingApps: false
+    property QtObject expandedApplet
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);
@@ -54,7 +55,8 @@ PlasmaCore.ColorScope {
         applet.parent = container;
         container.applet = applet;
         //applet.anchors.fill = container;
-        applet.width = units.iconSizes.medium
+        applet.anchors.left = container.left;
+        applet.anchors.right = container.right;
         applet.height = units.iconSizes.medium
         applet.visible = true;
         container.visible = true;
@@ -66,7 +68,6 @@ PlasmaCore.ColorScope {
         // Fall through to determining an appropriate insert position.
         } else {
             var before = null;
-            container.animationsEnabled = false;
 
             if (lastSpacer.parent === layout) {
                 before = lastSpacer;
@@ -105,21 +106,30 @@ PlasmaCore.ColorScope {
  
     Component {
         id: appletContainerComponent
-        Rectangle {
-            color: "grey"
-            //not used yet
-            property bool animationsEnabled: false
+        Item {
             property Item applet
             Layout.fillWidth: true
-           // Layout.fillHeight: true
-           Layout.minimumHeight: applet && applet.expanded ? units.gridUnit * 20 : units.iconSizes.medium
-           Layout.maximumHeight: Layout.minimumHeight
-           Behavior on height {
-               NumberAnimation {
-                   duration: units.shortDuration
-                   easing.type: Easing.InOutQuad
-               }
-           }
+            clip: true
+            anchors {
+               left: parent.left
+               right: parent.right
+            }
+            height: applet && applet.expanded ? Math.max(applet.fullRepresentationItem.Layout.minimumHeight, units.iconSizes.medium) : units.iconSizes.medium
+            Behavior on height {
+                NumberAnimation {
+                    duration: units.shortDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            Connections {
+                target: applet
+                onExpandedChanged: {
+                    if (root.expandedApplet) {
+                        root.expandedApplet.expanded = false;
+                    }
+                    root.expandedApplet = applet;
+                }
+            }
         }
     }
 
@@ -282,15 +292,17 @@ PlasmaCore.ColorScope {
             contents: Item {
                 id: panelContents
                 anchors.fill: parent
+                clip: true
 
                 Item {
                     id: lastSpacer
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                 }
-                ColumnLayout {
+                Column {
                     id: layout
                     anchors.fill: parent
+                    spacing: units.smallSpacing
                 }
             }
         }

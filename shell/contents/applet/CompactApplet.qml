@@ -51,7 +51,7 @@ PlasmaCore.ToolTipArea {
         if (!fullRepresentation) {
             return;
         }
-        //if the fullRepresentation size was restored to a stored size, or if is dragged from the desktop, restore popup size
+       /* //if the fullRepresentation size was restored to a stored size, or if is dragged from the desktop, restore popup size
         if (fullRepresentation.width > 0) {
             appletParent.width = fullRepresentation.width;
         } else if (fullRepresentation.Layout && fullRepresentation.Layout.preferredWidth > 0) {
@@ -70,40 +70,19 @@ PlasmaCore.ToolTipArea {
             appletParent.height = fullRepresentation.implicitHeight
         } else {
             appletParent.height = theme.mSize(theme.defaultFont).height * 25
-        }
+        }*/
 
         fullRepresentation.parent = appletParent;
         fullRepresentation.anchors.fill = fullRepresentation.parent;
     }
 
-    PlasmaCore.FrameSvgItem {
+    Rectangle {
         id: expandedItem
         anchors.fill: parent
-        imagePath: "widgets/tabbar"
-        visible: fromCurrentTheme
-        prefix: {
-            var prefix;
-            switch (plasmoid.location) {
-                case PlasmaCore.Types.LeftEdge:
-                    prefix = "west-active-tab";
-                    break;
-                case PlasmaCore.Types.TopEdge:
-                    prefix = "north-active-tab";
-                    break;
-                case PlasmaCore.Types.RightEdge:
-                    prefix = "east-active-tab";
-                    break;
-                default:
-                    prefix = "south-active-tab";
-                }
-                if (!hasElementPrefix(prefix)) {
-                    prefix = "active-tab";
-                }
-                return prefix;
-            }
-        opacity: plasmoid.expanded ? 1 : 0
+        color: PlasmaCore.ColorScope.highlightColor
+        opacity: plasmoid.expanded ? 0.3 : 0
         Behavior on opacity {
-            NumberAnimation {
+            OpacityAnimator {
                 duration: units.shortDuration
                 easing.type: Easing.InOutQuad
             }
@@ -116,7 +95,7 @@ PlasmaCore.ToolTipArea {
         onTriggered: plasmoid.expanded = popupWindow.visible;
     }
 
-    MouseEventListener {
+    Item {
         id: appletParent
         opacity: plasmoid.expanded ? 1 : 0
         anchors.top: parent.bottom
@@ -124,6 +103,8 @@ PlasmaCore.ToolTipArea {
         Layout.minimumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumHeight: 0
         Layout.maximumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumWidth : Infinity
         Layout.maximumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumHeight: Infinity
+        width: Math.max(parent.width, Layout.minimumWidth)
+        height: Layout.minimumHeight
 
         Behavior on opacity {
             OpacityAnimator {
