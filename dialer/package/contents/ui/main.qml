@@ -33,15 +33,39 @@ ApplicationWindow {
     width: 600
     height: 800
 
-
     property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
+    //keep track of the status we were in
+    property int previousStatus
+    //keep track if we were visible when ringing
+    property bool wasVisible
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
     onStatusChanged: {
         //STATUS_INCOMING
         if (status == 5) {
+            wasVisible = root.visible;
             root.visible = true;
+        //Was STATUS_INCOMING now is STATUS_DISCONNECTED: Missed call!
+        } else if (status == 7 && previousStatus == 5) {
+            dialerUtils.notifyMissedCall();
+            root.visible = wasVisible;
+        }
+
+        previousStatus = status;
+    }
+
+    Connections {
+        target: dialerUtils
+        onMissedCallsActionTriggered: {
+            root.visible = true;
+        }
+    }
+
+    onVisibleChanged: {
+        //reset missed calls if the status is not STATUS_INCOMING when got visible
+        if (visible && status != 5) {
+            dialerUtils.resetMissedCalls();
         }
     }
 //END SIGNAL HANDLERS

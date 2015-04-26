@@ -1,0 +1,9 @@
+[Global]
+IconName=call-start
+Comment=Plasma Phone Dialer
+
+[Event/callMissed]
+Name=Missed Call
+Comment=A call has been missed
+Action=Popup
+

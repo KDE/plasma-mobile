@@ -20,14 +20,54 @@
 
 #include <QDebug>
 
+#include <KLocalizedString>
+
 DialerUtils::DialerUtils(QObject *parent)
-: QObject(parent)
+: QObject(parent),
+  m_missedCalls(0)
 {
-    
 }
 
 DialerUtils::~DialerUtils()
 {
+}
+
+void DialerUtils::notifyMissedCall()
+{
+    qWarning() << "Missed Call.";
+
+    ++m_missedCalls;
+    if (!m_callsNotification) {
+        m_callsNotification = new KNotification("callMissed", KNotification::Persistent, 0);
+    }
+    m_callsNotification->setComponentName("plasma_dialer");
+    m_callsNotification->setIconName("call-start");
+    m_callsNotification->setTitle(i18np("One call missed", "%1 calls missed", m_missedCalls));
+
+    QStringList actions;
+    actions.append(i18n("View"));
+    m_callsNotification->setActions(actions);
+    QObject::connect(m_callsNotification.data(), &KNotification::action1Activated,
+        [=]() {
+            qWarning()<<"View action activated";
+            emit missedCallsActionTriggered();
+            resetMissedCalls();
+        });
+
+    if (m_missedCalls == 1) {
+        m_callsNotification->sendEvent();
+    } else {
+        m_callsNotification->update();
+    }
+}
+
+void DialerUtils::resetMissedCalls()
+{
+    m_missedCalls = 0;
+    if (m_callsNotification) {
+        m_callsNotification->close();
+    }
+    m_callsNotification.clear();
 }
 
 #include "moc_dialerutils.cpp"

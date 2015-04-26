@@ -19,6 +19,8 @@ target_link_libraries(plasmaphonedialer
  KF5::Package
  KF5::QuickAddons
  KF5::DBusAddons
+ KF5::Notifications
 )
 
 install(TARGETS plasmaphonedialer ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(FILES plasma_dialer.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFY5RCDIR})
