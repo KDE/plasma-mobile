@@ -36,6 +36,7 @@ Item {
         status.text = status.text + number
     }
 
+    //TODO: move in root item
     function call() {
         if (!voiceCallmanager.activeVoiceCall) {
             console.log("Calling: " + status.text);
