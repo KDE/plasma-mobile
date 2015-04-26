@@ -21,6 +21,7 @@
 import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
+import QtQuick.LocalStorage 2.0
 import org.nemomobile.voicecall 1.0
 import MeeGo.QOfono 0.2
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -38,18 +39,28 @@ ApplicationWindow {
     property int previousStatus
     //keep track if we were visible when ringing
     property bool wasVisible
+    //support a single provider for now
+    property string providerId: voiceCallmanager.providers.id(0)
+    //was the last call an incoming one?
+    property bool isIncoming
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
     onStatusChanged: {
+        //STATUS_ACTIVE
+        if (status == 1) {
+            root.isIncoming = voiceCallmanager.activeVoiceCall.isIncoming;
         //STATUS_INCOMING
-        if (status == 5) {
+        } else if (status == 5) {
             wasVisible = root.visible;
             root.visible = true;
         //Was STATUS_INCOMING now is STATUS_DISCONNECTED: Missed call!
         } else if (status == 7 && previousStatus == 5) {
             dialerUtils.notifyMissedCall();
             root.visible = wasVisible;
+            insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, 0, 0);
+        } else if (status == 7) {
+            insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, voiceCallmanager.activeVoiceCall.duration, isIncoming ? 1 : 2);
         }
 
         previousStatus = status;
@@ -70,7 +81,76 @@ ApplicationWindow {
     }
 //END SIGNAL HANDLERS
 
+//BEGIN FUNCTIONS
+    function call(number) {
+        if (!voiceCallmanager.activeVoiceCall) {
+            console.log("Calling: " + status.text);
+            voiceCallmanager.dial(providerId, number);
+
+        } else {
+            console.log("Hanging up: " + status.text);
+            status.text = '';
+            var call = voiceCallmanager.activeVoiceCall;
+            if (call) {
+                call.hangup();
+            }
+        }
+    }
+
+    function insertCallInHistory(number, duration, callType) {
+        //DATABSE
+        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
+
+        db.transaction(
+            function(tx) {
+                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), time('now'), ?, ? )", [number, duration, callType]);
+
+                // Show all added greetings
+                var rs = tx.executeSql('SELECT * FROM History where id=?', [rs.insertId]);
+
+                for(var i = 0; i < rs.rows.length; i++) {
+                    historyModel.append(rs.rows.item(i));
+                }
+            }
+        )
+    }
+
+//END FUNCTIONS
+
+//BEGIN DATABASE
+    Component.onCompleted: {
+        //HACK: make sure activeVoiceCall is loaded if already existing
+        voiceCallmanager.voiceCalls.onVoiceCallsChanged();
+        voiceCallmanager.onActiveVoiceCallChanged();
+
+        //DATABSE
+        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
+
+        db.transaction(
+            function(tx) {
+                // Create the database if it doesn't already exist
+                //callType: wether is incoming, outgoing, unanswered
+                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, date DATE, time TIME, duration INTEGER, callType INTEGER)');
+
+                // Add (another) greeting row
+               // tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), time('now'), ? )", ['+39000', 0]);
+
+                // Show all added greetings
+                var rs = tx.executeSql('SELECT * FROM History');
+
+                for(var i = 0; i < rs.rows.length; i++) {
+                    historyModel.append(rs.rows.item(i));
+                }
+            }
+        )
+    }
+//END DATABASE
+
 //BEGIN MODELS
+    ListModel {
+        id: historyModel
+    }
+
     OfonoManager {
         id: ofonoManager
         onAvailableChanged: {
@@ -142,6 +222,8 @@ ApplicationWindow {
             console.log('*** QML *** VCM ERROR: ' + message);
         }
     }
+
+    SystemPalette {id: syspal}
 //END MODELS
 
 //BEGIN UI
@@ -174,9 +256,4 @@ ApplicationWindow {
     }
 
 //END UI
-    Component.onCompleted: {
-        //HACK: make sure activeVoiceCall is loaded if already existing
-        voiceCallmanager.voiceCalls.onVoiceCallsChanged();
-        voiceCallmanager.onActiveVoiceCallChanged();
-    }
 }

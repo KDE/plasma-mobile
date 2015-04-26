@@ -22,49 +22,19 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import QtQuick.LocalStorage 2.0
 
-Item {
+Rectangle {
+    color: syspal.base
 
-    //TODO: move in root item
-    property string providerId: voiceCallmanager.providers.id(0)
-    function call(number) {
-        if (!voiceCallmanager.activeVoiceCall) {
-            console.log("Calling: " + status.text);
-            voiceCallmanager.dial(providerId, number);
-
-        } else {
-            console.log("Hanging up: " + status.text);
-            status.text = '';
-            var call = voiceCallmanager.activeVoiceCall;
-            if (call) {
-                call.hangup();
-            }
-        }
-    }
-
-    Component.onCompleted: {
-        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
-
-        db.transaction(
-            function(tx) {
-                // Create the database if it doesn't already exist
-                //callType: wether is incoming, outgoing, unanswered
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(number TEXT, time DATETIME, callType TEXT)');
-
-                // Add (another) greeting row
-                //tx.executeSql("INSERT INTO History VALUES(?, datetime('now') )", ['+39000']);
-
-                // Show all added greetings
-                var rs = tx.executeSql('SELECT * FROM History');
-
-                var r = ""
-                for(var i = 0; i < rs.rows.length; i++) {
-                    r += rs.rows.item(i).number + ", " + rs.rows.item(i).time + "\n"
-                    historyModel.append({number: rs.rows.item(i).number, time: rs.rows.item(i).time})
-                }
-            }
-        )
+    function secondsToTimeString(seconds) {
+        seconds = Math.floor(seconds/1000)
+        var h = Math.floor(seconds / 3600);
+        var m = Math.floor((seconds - (h * 3600)) / 60);
+        var s = seconds - h * 3600 - m * 60;
+        if(h < 10) h = '0' + h;
+        if(m < 10) m = '0' + m;
+        if(s < 10) s = '0' + s;
+        return '' + h + ':' + m + ':' + s;
     }
 
     PlasmaComponents.Label {
@@ -76,8 +46,18 @@ Item {
         anchors.fill: parent
         ListView {
             id: view
-            model: ListModel {
-                id: historyModel
+            model: historyModel
+            section {
+                property: "date"
+                labelPositioning: ViewSection.CurrentLabelAtStart
+                delegate: Rectangle {
+                    width: view.width
+                    height: childrenRect.height
+                    color: syspal.base
+                    PlasmaComponents.Label {
+                        text: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));
+                    }
+                }
             }
             delegate: MouseArea {
                 width: view.width
@@ -87,11 +67,26 @@ Item {
                 RowLayout {
                     width: view.width
                     PlasmaComponents.Label {
+                        text: {
+                            switch (model.callType) {
+                            case 0:
+                                return "miss";
+                            case 1:
+                                return "incoming";
+                            case 2:
+                                return "outgoing";
+                            }
+                        }
+                    }
+                    PlasmaComponents.Label {
                         text: model.number
                         Layout.fillWidth: true
                     }
                     PlasmaComponents.Label {
-                        text: Qt.formatDateTime(model.time, Qt.locale().dateTimeFormat(Locale.LongFormat));
+                        text: i18n("Duration: %1", secondsToTimeString(model.duration));
+                    }
+                    PlasmaComponents.Label {
+                        text: Qt.formatTime(model.date+" "+model.time, Qt.locale().timeFormat(Locale.LongFormat));
                     }
                 }
             }

@@ -36,22 +36,6 @@ Item {
         status.text = status.text + number
     }
 
-    //TODO: move in root item
-    function call() {
-        if (!voiceCallmanager.activeVoiceCall) {
-            console.log("Calling: " + status.text);
-            voiceCallmanager.dial(providerId, status.text);
-
-        } else {
-            console.log("Hanging up: " + status.text);
-            status.text = '';
-            var call = voiceCallmanager.activeVoiceCall;
-            if (call) {
-                call.hangup();
-            }
-        }
-    }
-
     ColumnLayout {
         id: dialPadArea
 
@@ -94,7 +78,9 @@ Item {
                 enabled: status.text.length > 0
                 opacity: enabled ? 1 : 0.5
                 source: "call-start"
-                callback: call
+                callback: function() {
+                    call(status.text);
+                }
             }
             Item {
                 Layout.minimumWidth: dialPadArea.width/3
