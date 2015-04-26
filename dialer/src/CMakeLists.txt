@@ -2,6 +2,7 @@
 
 set(plasmaphonedialer_SRCS
     main.cpp
+    dialerutils.cpp
 )
 
 add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
