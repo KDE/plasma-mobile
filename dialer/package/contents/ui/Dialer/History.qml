@@ -41,11 +41,16 @@ Item {
         text: i18n("No recent calls")
         visible: false
     }
+
     PlasmaExtras.ScrollArea {
         anchors.fill: parent
         ListView {
             id: view
-            model: historyModel
+            model: PlasmaCore.SortFilterModel {
+                sourceModel: historyModel
+                sortRole: "time"
+                sortOrder: Qt.DescendingOrder
+            }
             section {
                 property: "date"
                 labelPositioning: ViewSection.CurrentLabelAtStart

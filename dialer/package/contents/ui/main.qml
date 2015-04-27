@@ -103,7 +103,7 @@ ApplicationWindow {
 
         db.transaction(
             function(tx) {
-                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), time('now'), ?, ? )", [number, duration, callType]);
+                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), datetime('now'), ?, ? )", [number, duration, callType]);
 
                 // Show all added greetings
                 var rs = tx.executeSql('SELECT * FROM History where id=?', [rs.insertId]);
@@ -126,7 +126,7 @@ ApplicationWindow {
 
         db.transaction(
             function(tx) {
-                tx.executeSql("DELETE from History WHERE id=?", [id]);
+                tx.executeSql("DELETE from History WHERE id=?", [item.id]);
             }
         )
 
@@ -147,7 +147,7 @@ ApplicationWindow {
             function(tx) {
                 // Create the database if it doesn't already exist
                 //callType: wether is incoming, outgoing, unanswered
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, date DATE, time TIME, duration INTEGER, callType INTEGER)');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, date DATE, time DATETIME, duration INTEGER, callType INTEGER)');
 
                 // Add (another) greeting row
                // tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), time('now'), ? )", ['+39000', 0]);

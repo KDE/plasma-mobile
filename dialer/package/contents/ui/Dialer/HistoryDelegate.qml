@@ -109,7 +109,7 @@ Item {
                 ColumnLayout {
                     PlasmaComponents.Label {
                         Layout.alignment: Qt.AlignRight
-                        text: Qt.formatTime(model.date+" "+model.time, Qt.locale().timeFormat(Locale.ShortFormat));
+                        text: Qt.formatTime(model.time, Qt.locale().timeFormat(Locale.ShortFormat));
                     }
                     PlasmaComponents.Label {
                         Layout.alignment: Qt.AlignRight
