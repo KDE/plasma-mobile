@@ -17,14 +17,13 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-Rectangle {
-    color: syspal.base
+Item {
 
     function secondsToTimeString(seconds) {
         seconds = Math.floor(seconds/1000)
@@ -50,46 +49,17 @@ Rectangle {
             section {
                 property: "date"
                 labelPositioning: ViewSection.CurrentLabelAtStart
-                delegate: Rectangle {
-                    width: view.width
-                    height: childrenRect.height
-                    color: syspal.base
+                delegate: PlasmaComponents.ListItem {
+                    //width: view.width
+                    //height: childrenRect.height
+                    //color: syspal.base
+                    sectionDelegate: true
                     PlasmaComponents.Label {
                         text: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));
                     }
                 }
             }
-            delegate: MouseArea {
-                width: view.width
-                height: childrenRect.height
-                onClicked: call(model.number);
-
-                RowLayout {
-                    width: view.width
-                    PlasmaComponents.Label {
-                        text: {
-                            switch (model.callType) {
-                            case 0:
-                                return "miss";
-                            case 1:
-                                return "incoming";
-                            case 2:
-                                return "outgoing";
-                            }
-                        }
-                    }
-                    PlasmaComponents.Label {
-                        text: model.number
-                        Layout.fillWidth: true
-                    }
-                    PlasmaComponents.Label {
-                        text: i18n("Duration: %1", secondsToTimeString(model.duration));
-                    }
-                    PlasmaComponents.Label {
-                        text: Qt.formatTime(model.date+" "+model.time, Qt.locale().timeFormat(Locale.LongFormat));
-                    }
-                }
-            }
+            delegate: HistoryDelegate {}
         }
     }
 }

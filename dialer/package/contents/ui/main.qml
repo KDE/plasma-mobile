@@ -115,6 +115,23 @@ ApplicationWindow {
         )
     }
 
+    function removeCallFromHistory(id) {
+        var item = historyModel.get(id);
+
+        if (!item) {
+            return;
+        }
+
+        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
+
+        db.transaction(
+            function(tx) {
+                tx.executeSql("DELETE from History WHERE id=?", [id]);
+            }
+        )
+
+        historyModel.remove(id);
+    }
 //END FUNCTIONS
 
 //BEGIN DATABASE
@@ -223,7 +240,6 @@ ApplicationWindow {
         }
     }
 
-    SystemPalette {id: syspal}
 //END MODELS
 
 //BEGIN UI
