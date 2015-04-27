@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -39,7 +39,22 @@ PlasmaComponents.Label {
     property var pressedCallback
     property var releasedCallback
 
+    Rectangle {
+        anchors.fill: parent
+        z: -1
+        color: PlasmaCore.ColorScope.highlightColor
+        radius: units.smallSpacing
+        opacity: mouse.pressed ? 0.4 : 0
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
+
     MouseArea {
+        id: mouse
         anchors.fill: parent
         onPressed: {
             if (pressedCallback) {

@@ -134,7 +134,6 @@ ApplicationWindow {
         )
 
         historyModel.remove(index);
-
     }
 //END FUNCTIONS
 
