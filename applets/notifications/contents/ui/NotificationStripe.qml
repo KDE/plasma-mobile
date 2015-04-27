@@ -48,11 +48,16 @@ MouseArea {
     onReleased: {
         if (drag.active) {
             if (x > width / 4 || x < width / -4) {
+                //if there is an action, execute the first when swiping left
+                if (x < 0 && actions) {
+                    var action = actions.get(0)
+                    root.executeAction(source, action.id)
+                }
                 notificationsModel.remove(index);
             } else {
                 x = 0;
             }
-        } else if (body) {
+        } else if (body || actions) {
             expanded = !expanded;
         }
     }
@@ -134,7 +139,10 @@ MouseArea {
             model: notificationItem.actions
             delegate: PlasmaComponents.Button {
                 text: model.text
-                onClicked: root.executeAction(notificationItem.source, model.id)
+                onClicked: {
+                    root.executeAction(notificationItem.source, model.id)
+                    notificationsModel.remove(index);
+                }
             }
         }
     }
