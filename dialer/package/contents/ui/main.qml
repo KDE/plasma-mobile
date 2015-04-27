@@ -106,18 +106,20 @@ ApplicationWindow {
             function(tx) {
                 var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), datetime('now'), ?, ? )", [number, duration, callType]);
 
-                // Show all added greetings
                 var rs = tx.executeSql('SELECT * FROM History where id=?', [rs.insertId]);
 
                 for(var i = 0; i < rs.rows.length; i++) {
-                    historyModel.append(rs.rows.item(i));
+                    var row = rs.rows.item(i);
+                    row.originalIndex = historyModel.count;
+                    historyModel.append(row);
                 }
             }
         )
     }
 
-    function removeCallFromHistory(id) {
-        var item = historyModel.get(id);
+    //index is historyModel row number, not db id and not sortmodel row number
+    function removeCallFromHistory(index) {
+        var item = historyModel.get(index);
 
         if (!item) {
             return;
@@ -131,7 +133,8 @@ ApplicationWindow {
             }
         )
 
-        historyModel.remove(id);
+        historyModel.remove(index);
+
     }
 //END FUNCTIONS
 
@@ -150,14 +153,12 @@ ApplicationWindow {
                 //callType: wether is incoming, outgoing, unanswered
                 tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, date DATE, time DATETIME, duration INTEGER, callType INTEGER)');
 
-                // Add (another) greeting row
-               // tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), time('now'), ? )", ['+39000', 0]);
-
-                // Show all added greetings
                 var rs = tx.executeSql('SELECT * FROM History');
 
                 for(var i = 0; i < rs.rows.length; i++) {
-                    historyModel.append(rs.rows.item(i));
+                    var row = rs.rows.item(i);
+                    row.originalIndex = historyModel.count;
+                    historyModel.append(row);
                 }
             }
         )

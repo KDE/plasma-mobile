@@ -39,7 +39,7 @@ Item {
     PlasmaComponents.Label {
         anchors.centerIn: parent
         text: i18n("No recent calls")
-        visible: false
+        visible: historyModel.count == 0
     }
 
     PlasmaExtras.ScrollArea {

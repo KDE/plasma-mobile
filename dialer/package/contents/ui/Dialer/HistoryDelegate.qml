@@ -48,7 +48,7 @@ Item {
             easing.type: Easing.InOutQuad
         }
         ScriptAction {
-            script: removeCallFromHistory(index);
+            script: removeCallFromHistory(model.originalIndex);
         }
     }
 
