@@ -135,6 +135,19 @@ ApplicationWindow {
 
         historyModel.remove(index);
     }
+
+    function clearHistory() {
+        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
+
+        db.transaction(
+            function(tx) {
+                tx.executeSql("DELETE from History");
+            }
+        )
+
+        historyModel.clear();
+    }
+
 //END FUNCTIONS
 
 //BEGIN DATABASE

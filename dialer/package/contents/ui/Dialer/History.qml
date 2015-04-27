@@ -42,29 +42,70 @@ Item {
         visible: historyModel.count == 0
     }
 
-    PlasmaExtras.ScrollArea {
+    ColumnLayout {
         anchors.fill: parent
-        ListView {
-            id: view
-            model: PlasmaCore.SortFilterModel {
-                sourceModel: historyModel
-                sortRole: "time"
-                sortOrder: Qt.DescendingOrder
-            }
-            section {
-                property: "date"
-                labelPositioning: ViewSection.CurrentLabelAtStart
-                delegate: PlasmaComponents.ListItem {
-                    //width: view.width
-                    //height: childrenRect.height
-                    //color: syspal.base
-                    sectionDelegate: true
-                    PlasmaComponents.Label {
-                        text: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));
+        visible: historyModel.count > 0
+        PlasmaComponents.ToolBar {
+            Layout.fillWidth: true
+            tools: RowLayout {
+                id: toolBarLayout
+                PlasmaComponents.TabBar {
+                    tabPosition: Qt.TopEdge
+                    PlasmaComponents.TabButton {
+                        iconSource: "call-start"
+                        text: i18n("All")
+                        onCheckedChanged: {
+                            if (checked) {
+                                filterModel.filterString = "";
+                            }
+                        }
+                    }
+                    PlasmaComponents.TabButton {
+                        iconSource: "list-remove"
+                        text: i18n("Missed")
+                        onCheckedChanged: {
+                            if (checked) {
+                                filterModel.filterString = "0";
+                            }
+                        }
                     }
                 }
+                Item {
+                    Layout.fillWidth: true
+                }
+                PlasmaComponents.Button {
+                    text: i18n("Clear")
+                    onClicked: clearHistory();
+                }
             }
-            delegate: HistoryDelegate {}
+        }
+        PlasmaExtras.ScrollArea {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            ListView {
+                id: view
+                model: PlasmaCore.SortFilterModel {
+                    id: filterModel
+                    sourceModel: historyModel
+                    filterRole: "callType"
+                    sortRole: "time"
+                    sortOrder: Qt.DescendingOrder
+                }
+                section {
+                    property: "date"
+                    labelPositioning: ViewSection.CurrentLabelAtStart
+                    delegate: PlasmaComponents.ListItem {
+                        //width: view.width
+                        //height: childrenRect.height
+                        //color: syspal.base
+                        sectionDelegate: true
+                        PlasmaComponents.Label {
+                            text: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));
+                        }
+                    }
+                }
+                delegate: HistoryDelegate {}
+            }
         }
     }
 }
