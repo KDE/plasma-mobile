@@ -56,7 +56,8 @@ ApplicationWindow {
             root.visible = true;
         //Was STATUS_INCOMING now is STATUS_DISCONNECTED: Missed call!
         } else if (status == 7 && previousStatus == 5) {
-            dialerUtils.notifyMissedCall();
+            var prettyDate = Qt.formatTime(voiceCallmanager.activeVoiceCall.startedAt, Qt.locale().timeFormat(Locale.ShortFormat));
+            dialerUtils.notifyMissedCall(voiceCallmanager.activeVoiceCall.lineId, i18n("%1 called at %2", voiceCallmanager.activeVoiceCall.lineId, prettyDate));
             root.visible = wasVisible;
             insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, 0, 0);
         } else if (status == 7) {

@@ -32,7 +32,7 @@ DialerUtils::~DialerUtils()
 {
 }
 
-void DialerUtils::notifyMissedCall()
+void DialerUtils::notifyMissedCall(const QString &caller, const QString &description)
 {
     qWarning() << "Missed Call.";
 
@@ -42,7 +42,13 @@ void DialerUtils::notifyMissedCall()
     }
     m_callsNotification->setComponentName("plasma_dialer");
     m_callsNotification->setIconName("call-start");
-    m_callsNotification->setTitle(i18np("One call missed", "%1 calls missed", m_missedCalls));
+    if (m_missedCalls == 1) {
+        m_callsNotification->setTitle(i18n("Missed call from %1", caller));
+        m_callsNotification->setText(description);
+    } else {
+        m_callsNotification->setTitle(i18n("%1 calls missed", m_missedCalls));
+        m_callsNotification->setText(i18n("Last call: %1", description));
+    }
 
     QStringList actions;
     actions.append(i18n("View"));

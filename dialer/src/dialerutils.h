@@ -31,7 +31,7 @@ public:
     DialerUtils(QObject *parent = 0);
     virtual ~DialerUtils();
 
-    Q_INVOKABLE void notifyMissedCall();
+    Q_INVOKABLE void notifyMissedCall(const QString &caller, const QString &description);
     Q_INVOKABLE void resetMissedCalls();
 
 Q_SIGNALS:
