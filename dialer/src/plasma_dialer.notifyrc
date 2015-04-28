@@ -7,3 +7,9 @@ Name=Missed Call
 Comment=A call has been missed
 Action=Popup
 
+[Event/ringing]
+Name=Ringing
+Comment=The phone is ringing
+Action=Sound
+Sound=KDE-Sys-Question.ogg
+

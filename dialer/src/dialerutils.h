@@ -33,12 +33,15 @@ public:
 
     Q_INVOKABLE void notifyMissedCall(const QString &caller, const QString &description);
     Q_INVOKABLE void resetMissedCalls();
+    Q_INVOKABLE void notifyRinging();
+    Q_INVOKABLE void stopRinging();
 
 Q_SIGNALS:
     void missedCallsActionTriggered();
 
 private:
     QPointer <KNotification> m_callsNotification;
+    QPointer <KNotification> m_ringingNotification;
     int m_missedCalls;
 };
 

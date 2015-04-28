@@ -37,16 +37,16 @@ GridLayout {
     Layout.fillHeight: true
 
     DialerButton { id: one; text: "1" } 
-    DialerButton { text: "2" }
-    DialerButton { text: "3" }
+    DialerButton { text: "2"; sub: "ABC" }
+    DialerButton { text: "3"; sub: "DEF" }
 
-    DialerButton { text: "4" } 
-    DialerButton { text: "5" }
-    DialerButton { text: "6" }
+    DialerButton { text: "4"; sub: "GHI" } 
+    DialerButton { text: "5"; sub: "JKL" }
+    DialerButton { text: "6"; sub: "MNO" }
 
-    DialerButton { text: "7" } 
-    DialerButton { text: "8" }
-    DialerButton { text: "9" }
+    DialerButton { text: "7"; sub: "PQRS" } 
+    DialerButton { text: "8"; sub: "TUV" }
+    DialerButton { text: "9"; sub: "WXYZ" }
 
     DialerButton { text: "*"; } 
     DialerButton { text: "0"; sub: "+"; }

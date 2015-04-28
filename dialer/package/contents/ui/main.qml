@@ -54,6 +54,7 @@ ApplicationWindow {
         } else if (status == 5) {
             wasVisible = root.visible;
             root.visible = true;
+            dialerUtils.notifyRinging();
         //Was STATUS_INCOMING now is STATUS_DISCONNECTED: Missed call!
         } else if (status == 7 && previousStatus == 5) {
             var prettyDate = Qt.formatTime(voiceCallmanager.activeVoiceCall.startedAt, Qt.locale().timeFormat(Locale.ShortFormat));
@@ -62,6 +63,8 @@ ApplicationWindow {
             insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, 0, 0);
         } else if (status == 7) {
             insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, voiceCallmanager.activeVoiceCall.duration, isIncoming ? 1 : 2);
+        } else {
+            dialerUtils.stopRinging();
         }
 
         previousStatus = status;
