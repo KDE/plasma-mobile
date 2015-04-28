@@ -94,6 +94,10 @@ PlasmaComponents.Label {
                 text = parent.text;
             }
 
+            if (text.length > 1) {
+                return;
+            }
+
             if (callback) {
                 callback(text);
             } else if (pad.callback) {
@@ -107,12 +111,13 @@ PlasmaComponents.Label {
         anchors {
             verticalCenter: parent.verticalCenter
             right: parent.right
+            rightMargin: units.largeSpacing
         }
-        height: parent.height * 0.6
-        width: parent.width / 3
+        height: parent.height * 0.4
+        width: parent.width / 4
         verticalAlignment: Qt.AlignVCenter
         visible: text.length > 0
-        opacity: 0.7
+        opacity: 0.6
 
         font.pointSize: 1024
         fontSizeMode: Text.Fit
