@@ -90,11 +90,11 @@ ApplicationWindow {
 //BEGIN FUNCTIONS
     function call(number) {
         if (!voiceCallmanager.activeVoiceCall) {
-            console.log("Calling: " + status.text);
+            console.log("Calling: " + providerId + " " + number);
             voiceCallmanager.dial(providerId, number);
 
         } else {
-            console.log("Hanging up: " + status.text);
+            console.log("Hanging up: " + voiceCallmanager.activeVoiceCall.lineId);
             status.text = '';
             var call = voiceCallmanager.activeVoiceCall;
             if (call) {
