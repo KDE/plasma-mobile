@@ -93,11 +93,8 @@ Item {
                 }
                 section {
                     property: "date"
-                    labelPositioning: ViewSection.CurrentLabelAtStart
                     delegate: PlasmaComponents.ListItem {
-                        //width: view.width
-                        //height: childrenRect.height
-                        //color: syspal.base
+                        id: sectionItem
                         sectionDelegate: true
                         PlasmaComponents.Label {
                             text: Qt.formatDate(section, Qt.locale().dateFormat(Locale.LongFormat));

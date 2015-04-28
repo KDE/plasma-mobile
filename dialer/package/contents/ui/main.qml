@@ -109,12 +109,13 @@ ApplicationWindow {
 
         db.transaction(
             function(tx) {
-                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, date('now'), datetime('now'), ?, ? )", [number, duration, callType]);
+                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, datetime('now'), ?, ? )", [number, duration, callType]);
 
                 var rs = tx.executeSql('SELECT * FROM History where id=?', [rs.insertId]);
 
                 for(var i = 0; i < rs.rows.length; i++) {
                     var row = rs.rows.item(i);
+                    row.date = Qt.formatDate(row.time, "yyyy-MM-dd");
                     row.originalIndex = historyModel.count;
                     historyModel.append(row);
                 }
@@ -168,12 +169,13 @@ ApplicationWindow {
             function(tx) {
                 // Create the database if it doesn't already exist
                 //callType: wether is incoming, outgoing, unanswered
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, date DATE, time DATETIME, duration INTEGER, callType INTEGER)');
+                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, time DATETIME, duration INTEGER, callType INTEGER)');
 
                 var rs = tx.executeSql('SELECT * FROM History');
 
                 for(var i = 0; i < rs.rows.length; i++) {
                     var row = rs.rows.item(i);
+                    row.date = Qt.formatDate(row.time, "yyyy-MM-dd");
                     row.originalIndex = historyModel.count;
                     historyModel.append(row);
                 }
