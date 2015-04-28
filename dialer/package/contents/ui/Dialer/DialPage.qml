@@ -44,7 +44,8 @@ Column {
         id: tabbar
         height: units.gridUnit * 5
         anchors {
-            horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
         }
         tabPosition: Qt.BottomEdge
         PlasmaComponents.TabButton {
