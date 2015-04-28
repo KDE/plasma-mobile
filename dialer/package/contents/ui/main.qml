@@ -63,7 +63,9 @@ ApplicationWindow {
             insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, 0, 0);
         } else if (status == 7) {
             insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, voiceCallmanager.activeVoiceCall.duration, isIncoming ? 1 : 2);
-        } else {
+        }
+
+        if (status != 5) {
             dialerUtils.stopRinging();
         }
 
