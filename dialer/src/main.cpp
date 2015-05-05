@@ -95,10 +95,16 @@ int main(int argc, char **argv)
     QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
     if (window) {
         QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
-            Q_UNUSED(arguments)
             Q_UNUSED(workingDirectory);
             window->show();
             window->requestActivate();
+            if (arguments.length() > 0) {
+                QString numberArg = arguments[1];
+                if (numberArg.startsWith("call://")) {
+                    numberArg = numberArg.mid(7);
+                }
+                obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
+            }
         });
         if (!parser.isSet(daemonOption)) {
             window->show();
