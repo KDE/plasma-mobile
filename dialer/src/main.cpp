@@ -57,11 +57,9 @@ int main(int argc, char **argv)
     QCommandLineOption daemonOption(QStringList() << QStringLiteral("d") <<
                                  QStringLiteral("daemon"),
                                  i18n("Daemon mode. run without displaying anything."));
-    QCommandLineOption dialOption(QStringList() << QStringLiteral("c") << QStringLiteral("call"),
-                                         i18n("Call the given number"),
-                                         QStringLiteral("number"));
 
-    parser.addOption(dialOption);
+    parser.addPositionalArgument("number", i18n("Call the given number"));
+
     parser.addOption(daemonOption);
 
     parser.process(app);
@@ -109,9 +107,13 @@ int main(int argc, char **argv)
         window->setTitle(obj->package().metadata().name());
         window->setIcon(QIcon::fromTheme(obj->package().metadata().iconName()));
 
-        if (parser.isSet(dialOption)) {
-            qWarning() << "Calling" << parser.value(dialOption);
-            obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, parser.value(dialOption)));
+        if (!parser.positionalArguments().isEmpty()) {
+            QString numberArg = parser.positionalArguments().first();
+            if (numberArg.startsWith("call://")) {
+                numberArg = numberArg.mid(7);
+            }
+            qWarning() << "Calling" << numberArg;
+            obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
         }
     } else {
         qWarning() << "Error loading the ApplicationWindow";

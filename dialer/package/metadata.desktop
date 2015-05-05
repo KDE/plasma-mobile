@@ -18,3 +18,4 @@ Exec=plasmaphonedialer
 
 X-Plasma-MainScript=ui/main.qml
 X-Plasma-RemoteLocation=
+MimeType=x-scheme-handler/call
