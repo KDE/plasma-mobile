@@ -44,6 +44,9 @@ install(DIRECTORY compositor/
         PATTERN Messages.sh EXCLUDE
         PATTERN dummydata EXCLUDE)
 
+kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
+install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.dialer.desktop)
+
 add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
 add_subdirectory(services)
