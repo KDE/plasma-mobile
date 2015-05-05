@@ -89,7 +89,7 @@ Item {
                             Layout.maximumHeight: Layout.minimumWidth
 
                             pixmap: model.decoration
-                            fillMode: ExtraComponents.QPixmapItem.PreserveAspectFit
+                            fillMode: KQuickControlsAddons.QPixmapItem.PreserveAspectFit
                             smooth: true
                         }
 
