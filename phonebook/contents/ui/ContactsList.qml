@@ -165,6 +165,11 @@ PlasmaExtras.ScrollArea {
                 anchors.leftMargin: parent.height / 4
                 source: "call-start"
             }
+            MouseArea {
+                anchors.fill: parent
+                //TODO: needs the proper number
+                onClicked: Qt.openUrlExternally("call://" + "605909123")
+            }
         }
 
         highlight: PlasmaComponents.Highlight {
