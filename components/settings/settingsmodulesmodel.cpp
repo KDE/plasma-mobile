@@ -30,6 +30,7 @@
 #include <KService>
 #include <KServiceTypeTrader>
 #include <KSharedConfig>
+#include <KPluginMetaData>
 
 #include <QDebug>
 
@@ -170,6 +171,17 @@ void SettingsModulesModel::populate()
         item->setIconName(service->icon());
         item->setModule(info.pluginName());
         item->setCategory(info.category());
+        d->settingsModules.append(item);
+    }
+
+    for (auto plugin : KPluginLoader::findPlugins("kcms")) {
+        SettingsModule* item = new SettingsModule(this);
+
+        item->setName(plugin.name());
+        item->setDescription(plugin.description());
+        item->setIconName(plugin.iconName());
+        item->setModule(plugin.pluginId());
+        item->setCategory(plugin.category());
         d->settingsModules.append(item);
     }
 

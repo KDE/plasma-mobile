@@ -27,9 +27,11 @@
 #include <KService>
 #include <KServiceTypeTrader>
 #include <QDebug>
+#include <KPluginMetaData>
 
 #include <Plasma/Package>
 #include <Plasma/PluginLoader>
+#include <kquickaddons/configmodule.h>
 
 class SettingsComponentPrivate {
 
@@ -37,6 +39,8 @@ public:
     QString module;
     QString icon;
     SettingsModule *settingsModule;
+    KQuickAddons::ConfigModule *kcm;
+    bool valid : 1;
     Plasma::Package package;
 };
 
@@ -47,6 +51,8 @@ SettingsComponent::SettingsComponent(QQuickItem *parent)
     d = new SettingsComponentPrivate;
     d->package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
     d->settingsModule = 0;
+    d->kcm = 0;
+    d->valid = false;
 }
 
 SettingsComponent::~SettingsComponent()
@@ -57,6 +63,8 @@ void SettingsComponent::loadModule(const QString &name)
 {
     delete d->settingsModule;
     d->settingsModule = 0;
+    delete d->kcm;
+    d->kcm = 0;
 
     d->package.setPath(name);
     //KGlobal::locale()->insertCatalog("plasma_package_" + name);
@@ -98,6 +106,7 @@ void SettingsComponent::loadModule(const QString &name)
                 QObject* obj = factory->create<QObject>();
                 if (!obj) {
                     qWarning() << "Error creating object from plugin" << loader.fileName();
+                    d->valid = true;
                 }
             }
         } else {
@@ -121,6 +130,60 @@ void SettingsComponent::loadModule(const QString &name)
        }
     }
 
+   /* if (!d->settingsModule) {
+        return;
+    }*/
+
+    //qml-kcm mode
+    KPluginLoader loader(KPluginLoader::findPlugin(QLatin1String("kcms/") + name));
+
+    KPluginFactory* factory = loader.factory();
+    if (!factory) {
+        qWarning() << "Error loading KCM plugin:" << loader.errorString();
+    } else {
+        d->kcm = factory->create<KQuickAddons::ConfigModule >();
+        if (!d->kcm) {
+            qWarning() << "Error creating object from plugin" << loader.fileName();
+            d->valid = false;
+            emit validChanged();
+            return;
+        }
+
+        d->settingsModule = new SettingsModule(this);
+        connect(d->settingsModule, &SettingsModule::nameChanged, this, &SettingsComponent::nameChanged);
+        connect(d->settingsModule, &SettingsModule::descriptionChanged,
+                this, &SettingsComponent::descriptionChanged);
+        d->kcm->mainUi()->setParentItem(this);
+
+        {
+            //set anchors
+            QQmlExpression expr(QtQml::qmlContext(d->kcm->mainUi()), d->kcm->mainUi(), "parent");
+            QQmlProperty prop(d->kcm->mainUi(), "anchors.fill");
+            prop.write(expr.evaluate());
+        }
+
+        d->kcm->load();
+        //instant apply
+        connect(d->kcm, &KQuickAddons::ConfigModule::needsSaveChanged, [=]() {
+            if (d->kcm->needsSave()) {
+                d->kcm->save();
+            }
+        });
+
+        KPluginMetaData info(loader.fileName());
+        d->settingsModule->setName(info.name());
+        setIcon(info.iconName());
+        d->settingsModule->setDescription(info.description());
+        d->settingsModule->setModule(info.pluginId());
+        d->valid = true;
+    }
+
+    emit validChanged();
+}
+
+bool SettingsComponent::isValid() const
+{
+    return d->valid;
 }
 
 QString SettingsComponent::description() const
