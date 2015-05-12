@@ -99,6 +99,18 @@ PlasmaCore.ColorScope {
         LayoutManager.restore();
     }
 
+    PlasmaCore.DataSource {
+        id: statusNotifierSource
+        engine: "statusnotifieritem"
+        interval: 0
+        onSourceAdded: {
+            connectSource(source)
+        }
+        Component.onCompleted: {
+            connectedSources = sources
+        }
+    }
+
     RowLayout {
         id: appletsLayout
         Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
@@ -226,6 +238,7 @@ PlasmaCore.ColorScope {
             color: PlasmaCore.ColorScope.textColor
             font.pixelSize: parent.height / 2
         }
+
         PlasmaComponents.Label {
             id: clock
             anchors.fill: parent
@@ -236,78 +249,96 @@ PlasmaCore.ColorScope {
             font.pixelSize: height / 2
         }
 
-
-            PlasmaWorkspace.BatteryIcon {
-                id: batteryIcon
-                anchors {
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                }
-                width: height
-                height: parent.height
-                hasBattery: pmSource.data["Battery"]["Has Battery"]
-            // batteryType: "Phone"
-                percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
-
-                PlasmaCore.DataSource {
-                    id: pmSource
-                    engine: "powermanagement"
-                    connectedSources: sources
-                    onSourceAdded: {
-                        disconnectSource(source);
-                        connectSource(source);
-                    }
-                    onSourceRemoved: {
-                        disconnectSource(source);
+        Row {
+            anchors.right: batteryIcon.left
+            height: parent.height
+            Repeater {
+                id: statusNotifierRepeater
+                model: PlasmaCore.SortFilterModel {
+                    id: filteredStatusNotifiers
+                    filterRole: "Title"
+                    filterRegExp: tasksRow.skipItems
+                    sourceModel: PlasmaCore.DataModel {
+                        dataSource: statusNotifierSource
                     }
                 }
-            }
-            Rectangle {
-                height: units.smallSpacing/2
-                color: PlasmaCore.ColorScope.highlightColor
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    bottom: parent.bottom
+
+                delegate: TaskWidget {
                 }
             }
         }
-        MouseArea {
-            property int oldMouseY: 0
 
+        PlasmaWorkspace.BatteryIcon {
+            id: batteryIcon
+            anchors {
+                right: parent.right
+                verticalCenter: parent.verticalCenter
+            }
+            width: height
+            height: parent.height
+            hasBattery: pmSource.data["Battery"]["Has Battery"]
+        // batteryType: "Phone"
+            percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
+
+            PlasmaCore.DataSource {
+                id: pmSource
+                engine: "powermanagement"
+                connectedSources: sources
+                onSourceAdded: {
+                    disconnectSource(source);
+                    connectSource(source);
+                }
+                onSourceRemoved: {
+                    disconnectSource(source);
+                }
+            }
+        }
+        Rectangle {
+            height: units.smallSpacing/2
+            color: PlasmaCore.ColorScope.highlightColor
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+        }
+    }
+    MouseArea {
+        property int oldMouseY: 0
+
+        anchors.fill: parent
+        onPressed: {
+            oldMouseY = mouse.y;
+            slidingPanel.visibility = Qt.WindowFullScreen;
+        }
+        onPositionChanged: {
+            //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
+            var factor = 1;
+            slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
+            oldMouseY = mouse.y;
+        }
+        onReleased: slidingPanel.updateState();
+    }
+
+    SlidingPanel {
+        id: slidingPanel
+        width: plasmoid.availableScreenRect.width
+        height: plasmoid.availableScreenRect.height
+        contents: Item {
+            id: panelContents
             anchors.fill: parent
-            onPressed: {
-                oldMouseY = mouse.y;
-                slidingPanel.visibility = Qt.WindowFullScreen;
-            }
-            onPositionChanged: {
-                //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
-                var factor = 1;
-                slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
-                oldMouseY = mouse.y;
-            }
-            onReleased: slidingPanel.updateState();
-        }
+            clip: true
 
-        SlidingPanel {
-            id: slidingPanel
-            width: plasmoid.availableScreenRect.width
-            height: plasmoid.availableScreenRect.height
-            contents: Item {
-                id: panelContents
+            Item {
+                id: lastSpacer
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            Column {
+                id: layout
                 anchors.fill: parent
-                clip: true
-
-                Item {
-                    id: lastSpacer
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                }
-                Column {
-                    id: layout
-                    anchors.fill: parent
-                    spacing: units.smallSpacing
-                }
+                spacing: units.smallSpacing
             }
         }
+    }
 }
