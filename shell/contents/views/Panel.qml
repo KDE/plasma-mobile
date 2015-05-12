@@ -22,10 +22,11 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-PlasmaCore.FrameSvgItem {
+Rectangle {
     id: root
 
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
+    color: theme.textColor
 
     property Item containment
 
