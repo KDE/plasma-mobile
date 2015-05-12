@@ -42,7 +42,7 @@ Item {
     property int buttonHeight: width/4
 
     /*
-        Notificadtion data object has the following properties:
+        Notification data object has the following properties:
         appIcon
         image
         appName
