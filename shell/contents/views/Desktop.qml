@@ -41,33 +41,8 @@ Item {
     property int notificationId: 0;
     property int buttonHeight: width/4
 
-<<<<<<< HEAD
-    /*
-        Notification data object has the following properties:
-        appIcon
-        image
-        appName
-        summary
-        body
-        isPersistent
-        expireTimeout
-        urgency
-        appRealName
-        configurable
-    */
-    function addNotification(source, data, actions) {
-        // Do not show duplicated notifications
-        // Remove notifications that are sent again (odd, but true)
-        for (var i = 0; i < notificationsModel.count; ++i) {
-            var tmp = notificationsModel.get(i);
-            var matches = (tmp.appName == data.appName &&
-                           tmp.summary == data.summary &&
-                           tmp.body == data.body);
-            var sameSource = tmp.source == source;
-=======
     onContainmentChanged: {
         containment.parent = homescreen;
->>>>>>> mart/newContainmentShell
 
         if (containment != null) {
             containment.visible = true;
