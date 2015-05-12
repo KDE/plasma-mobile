@@ -29,13 +29,16 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 PlasmaExtras.ScrollArea {
     anchors.fill: parent
-    verticalScrollBarPolicy: Qt.ScrollBarAsNeeded
+    verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
 
     contentItem: ListView {
         id: contactsList
 
         property bool delegateSelected: false
 
+
+        section.property: "display"
+        section.criteria: ViewSection.FirstCharacter
         clip: true
         model: PlasmaCore.SortFilterModel {
             sortRole: "display"
@@ -45,6 +48,10 @@ PlasmaExtras.ScrollArea {
         }
 
         boundsBehavior: Flickable.StopAtBounds
+        highlight: PlasmaComponents.Highlight {
+            hover: contactsList.focus
+        }
+        highlightMoveDuration: 0
 
         delegate: PlasmaComponents.ListItem {
             height: units.gridUnit * 6
@@ -172,9 +179,9 @@ PlasmaExtras.ScrollArea {
             }
         }
 
-        highlight: PlasmaComponents.Highlight {
-            hover: contactsList.focus
+        CustomSectionScroller {
+            listView: contactsList
         }
-        highlightMoveDuration: 0
+
     }
 }
