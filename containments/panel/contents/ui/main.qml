@@ -27,7 +27,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 
-import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+import "LayoutManager.js" as LayoutManager
 
 PlasmaCore.ColorScope {
     id: root
@@ -48,7 +48,7 @@ PlasmaCore.ColorScope {
     function addApplet(applet, x, y) {
         var container = appletContainerComponent.createObject(layout)
         container.visible = true
-        print("Applet added: " + applet)
+        print("Applet added: " + applet + " " + applet.title)
 
         var appletWidth = applet.width;
         var appletHeight = applet.height;
@@ -124,6 +124,10 @@ PlasmaCore.ColorScope {
             Connections {
                 target: applet
                 onExpandedChanged: {
+                    if (!applet.expanded && root.expandedApplet == applet) {
+                        root.expandedApplet = null;
+                        return;
+                    }
                     if (root.expandedApplet) {
                         root.expandedApplet.expanded = false;
                     }
