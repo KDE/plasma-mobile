@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Window 2.0
+import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Window {
@@ -26,8 +26,10 @@ Window {
     flags: Qt.WindowDoesNotAcceptFocus
 
     property int offset: 0
+    property int overShoot: units.gridUnit * 2
 
     color: "transparent"
+    property alias contents: contentArea.data
 
     function updateState() {
         var delta = offset - mouseArea.startOffset;
@@ -50,15 +52,17 @@ Window {
 
     MouseArea {
         id: mouseArea
-        y: units.iconSizes.small
+        y: 0
         width: window.width
         height: window.height - y
         clip: true
         state: "closed"
+        drag.filterChildren: true
 
         property int oldMouseY: 0
         property int startOffset: units.iconSizes.large;
         property string startState: "closed"
+
         onPressed: {
             startState = state;
             startOffset = window.offset;
@@ -67,26 +71,63 @@ Window {
             window.offset = startOffset;
         }
         onPositionChanged: {
-            window.offset = window.offset + (mouse.y - oldMouseY);
+            var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + overShoot) / overShoot)) : 1
+
+            window.offset = window.offset + (mouse.y - oldMouseY) * factor;
             oldMouseY = mouse.y;
         }
-        onReleased: window.updateState()
+        onReleased: {
+            if (Math.abs(window.offset - mouseArea.startOffset) < units.gridUnit &&
+                  slidingArea.y + slidingArea.height < mouse.y) {
+                mouseArea.state = "closed";
+            } else {
+                window.updateState();
+            }
+        }
 
         Rectangle {
+            anchors.fill: parent
+            color: Qt.rgba(0, 0, 0, 0.6-Math.abs(slidingArea.y/slidingArea.height))
+        }
+        PlasmaCore.ColorScope {
             id: slidingArea
             width: parent.width
-            height: parent.height
+            height: parent.height/1.5
             y: Math.min(0, -height + window.offset)
-
-            color: Qt.rgba(0, 0, 0, 0.7)
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
             Rectangle {
-                width: parent.width / 4
-                height: units.gridUnit/2
-                color: "yellow"
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: units.gridUnit/2
+                anchors.fill: parent
+
+                Item {
+                    id: contentArea
+                    anchors {
+                        fill: parent
+                        topMargin: overShoot
+                    }
+                }
+                color: PlasmaCore.ColorScope.backgroundColor
+
+                Rectangle {
+                    height: units.gridUnit
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.bottom
+                    }
+                    gradient: Gradient {
+                        GradientStop {
+                            position: 0.0
+                            color: Qt.rgba(0, 0, 0, 0.6)
+                        }
+                        GradientStop {
+                            position: 0.5
+                            color: Qt.rgba(0, 0, 0, 0.2)
+                        }
+                        GradientStop {
+                            position: 1.0
+                            color: "transparent"
+                        }
+                    }
                 }
             }
         }
@@ -103,7 +144,7 @@ Window {
                 name: "open"
                 PropertyChanges {
                     target: window
-                    offset: slidingArea.height
+                    offset: slidingArea.height - overShoot
                 }
             },
             State {
@@ -127,7 +168,7 @@ Window {
                     PropertyAnimation {
                         target: window
                         duration: units.longDuration
-                        easing: Easing.InOutQuad
+                        easing.type: Easing.InOutQuad
                         properties: "offset"
                     }
                     ScriptAction {

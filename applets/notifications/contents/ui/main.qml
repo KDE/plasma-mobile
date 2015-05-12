@@ -25,8 +25,58 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: root
+    property int notificationId: 0
 
     Layout.minimumHeight: notificationView.contentsHeight
+
+    function addNotification(source, data, actions) {
+        // Do not show duplicated notifications
+        // Remove notifications that are sent again (odd, but true)
+        for (var i = 0; i < notificationsModel.count; ++i) {
+            var tmp = notificationsModel.get(i);
+            var matches = (tmp.appName == data.appName &&
+                           tmp.summary == data.summary &&
+                           tmp.body == data.body);
+            var sameSource = tmp.source == source;
+
+            if (sameSource && matches) {
+                return;
+            }
+
+            if (sameSource || matches) {
+                notificationsModel.remove(i)
+                break;
+            }
+        }
+
+        data["id"] = ++notificationId;
+        data["source"] = source;
+        if (data["summary"].length < 1) {
+            data["summary"] = data["body"];
+            data["body"] = '';
+        }
+        data["actions"] = actions;
+
+        notificationsModel.insert(0, data);
+        if (!data["isPersistent"]) {
+            pendingRemovals.push(notificationId);
+            pendingTimer.start();
+        }
+    }
+
+    function executeAction(source, id) {
+        //try to use the service
+        if (source.indexOf("notification") !== -1) {
+            var service = notificationsSource.serviceForSource(source)
+            var op = service.operationDescription("invokeAction")
+            op["actionId"] = id
+
+            service.startOperationCall(op)
+        //try to open the id as url
+        } else if (source.indexOf("Job") !== -1) {
+            Qt.openUrlExternally(id)
+        }
+    }
 
     PlasmaCore.DataSource {
         id: notificationsSource
@@ -58,7 +108,7 @@ Item {
                 }
             }
 
-            homescreen.addNotification(
+            root.addNotification(
                     sourceName,
                     data,
                     actions);
@@ -70,17 +120,26 @@ Item {
         id: notificationsModel
 
         ListElement {
+            source: "call1Source"
             appIcon: "call-start"
             summary: "Missed call from Joe"
+            appName: "Phone"
             body: "Called at 8:42 from +41 56 373 37 31"
+            actions: []
         }
         ListElement {
+            source: "im1Source"
             appIcon: "im-google"
+            appName: "Message"
             summary: "July: Hey! Are you around?"
+            actions: []
         }
         ListElement {
+            source: "im2Source"
             appIcon: "im-google"
+            appName: "Message"
             summary: "July: Hello?"
+            actions: []
         }
     }
 

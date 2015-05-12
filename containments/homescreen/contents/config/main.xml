@@ -9,6 +9,10 @@
     <entry name="AppletOrder" type="String">
       <label>encoded order of items</label>
     </entry>
+    <entry name="AppOrder" type="StringList">
+      <label>order of apps</label>
+      <default>org.kde.phone.dialer.desktop</default>
+    </entry>
   </group>
 
 </kcfg>

@@ -30,13 +30,16 @@
 #include <KService>
 #include <KServiceGroup>
 #include <KServiceTypeTrader>
+#include <KSycoca>
 #include <KSycocaEntry>
 #include <QDebug>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    loadApplications();
+    //can't use the new syntax as this signal is overloaded
+    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
+            this, SLOT(sycocaDbChanged(const QStringList &)));
 }
 
 ApplicationListModel::~ApplicationListModel()
@@ -55,14 +58,34 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     return roleNames;
 }
 
+void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
+{
+    if (!changes.contains("apps") && !changes.contains("xdgdata-apps")) {
+        return;
+    }
+
+    m_applicationList.clear();
+
+    loadApplications();
+}
+
+bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
+{
+    return a1.name.toLower() < a2.name.toLower();
+}
 
 void ApplicationListModel::loadApplications()
 {
     beginResetModel();
 
+    m_applicationList.clear();
+
     KServiceGroup::Ptr group = KServiceGroup::root();
     if (!group || !group->isValid()) return;
     KServiceGroup::List subGroupList = group->entries(true);
+
+    QMap<int, ApplicationData> orderedList;
+    QList<ApplicationData> unorderedList;
 
     // Iterate over all entries in the group
     for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
@@ -85,13 +108,22 @@ void ApplicationListModel::loadApplications()
                             data.icon = service->icon();
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
-                            m_applicationList << data;
+
+                            if (m_appPositions.contains(service->storageId())) {
+                                orderedList[m_appPositions.value(service->storageId())] = data;
+                            } else {
+                                unorderedList << data;
+                            }
                         }
                     }
                 }
             }
         }
     }
+
+    std::sort(unorderedList.begin(), unorderedList.end(), appNameLessThan);
+    m_applicationList << orderedList.values();
+    m_applicationList << unorderedList;
 
     endResetModel();
     emit countChanged();
@@ -121,6 +153,13 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
     }
 }
 
+Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return 0;
+    return Qt::ItemIsDragEnabled|QAbstractItemModel::flags(index);
+}
+
 int ApplicationListModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
@@ -128,6 +167,11 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     }
 
     return m_applicationList.count();
+}
+
+void ApplicationListModel::moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild)
+{
+    moveItem(sourceRow, destinationChild);
 }
 
 Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
@@ -141,8 +185,27 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
     }
 
     beginMoveRows(QModelIndex(), row, row, QModelIndex(), destination);
-    ApplicationData data = m_applicationList.takeAt(row);
-    m_applicationList.insert(destination, data);
+    if (destination > row) {
+        ApplicationData data = m_applicationList.at(row);
+        m_applicationList.insert(destination, data);
+        m_applicationList.takeAt(row);
+    } else {
+        ApplicationData data = m_applicationList.takeAt(row);
+        m_applicationList.insert(destination, data);
+    }
+
+
+    m_appOrder.clear();
+    m_appPositions.clear();
+    int i = 0;
+    for (auto app : m_applicationList) {
+        m_appOrder << app.storageId;
+        m_appPositions[app.storageId] = i;
+        ++i;
+    }
+
+
+    emit appOrderChanged();
     endMoveRows();
 }
 
@@ -154,7 +217,29 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
-    QProcess::startDetached(service->exec());
+    //ignore parameters like %u
+    QProcess::startDetached(service->exec().replace(QRegExp("%\\w"), ""));
+}
+
+QStringList ApplicationListModel::appOrder() const
+{
+    return m_appOrder;
+}
+
+void ApplicationListModel::setAppOrder(const QStringList &order)
+{
+    if (m_appOrder == order) {
+        return;
+    }
+
+    m_appOrder = order;
+    m_appPositions.clear();
+    int i = 0;
+    for (auto app : m_appOrder) {
+        m_appPositions[app] = i;
+        ++i;
+    }
+    emit appOrderChanged();
 }
 
 #include "applicationlistmodel.moc"

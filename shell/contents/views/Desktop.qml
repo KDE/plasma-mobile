@@ -41,6 +41,7 @@ Item {
     property int notificationId: 0;
     property int buttonHeight: width/4
 
+<<<<<<< HEAD
     /*
         Notification data object has the following properties:
         appIcon
@@ -63,29 +64,19 @@ Item {
                            tmp.summary == data.summary &&
                            tmp.body == data.body);
             var sameSource = tmp.source == source;
+=======
+    onContainmentChanged: {
+        containment.parent = homescreen;
+>>>>>>> mart/newContainmentShell
 
-            if (sameSource && matches) {
-                return;
-            }
-
-            if (sameSource || matches) {
-                notificationsModel.remove(i)
-                break;
-            }
+        if (containment != null) {
+            containment.visible = true;
         }
-
-        data["id"] = ++notificationId;
-        data["source"] = source;
-        if (data["summary"].length < 1) {
-            data["summary"] = data["body"];
-            data["body"] = '';
-        }
-        data["actions"] = actions;
-
-        notificationsModel.insert(0, data);
-        if (!data["isPersistent"]) {
-            pendingRemovals.push(notificationId);
-            pendingTimer.start();
+        if (containment != null) {
+            containment.anchors.left = homescreen.left;
+            containment.anchors.top = homescreen.top;
+            containment.anchors.right = homescreen.right;
+            containment.anchors.bottom = homescreen.bottom;
         }
     }
 
@@ -131,39 +122,6 @@ Item {
         modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
     }
 
-    OfonoNetworkRegistration {
-        id: netreg
-        Component.onCompleted: {
-            netreg.scan()
-            updateStrengthIcon()
-        }
-
-        onNetworkOperatorsChanged : {
-            console.log("operators :"+netreg.currentOperator["Name"].toString())
-        }
-        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
-        function updateStrengthIcon() {
-            if (netreg.strength >= 100) {
-                strengthIcon.source = "network-mobile-100";
-            } else if (netreg.strength >= 80) {
-                strengthIcon.source = "network-mobile-80";
-            } else if (netreg.strength >= 60) {
-                strengthIcon.source = "network-mobile-60";
-            } else if (netreg.strength >= 40) {
-                strengthIcon.source = "network-mobile-40";
-            } else if (netreg.strength >= 20) {
-                strengthIcon.source = "network-mobile-20";
-            } else {
-                strengthIcon.source = "network-mobile-0";
-            }
-        }
-
-        onStrengthChanged: {
-            console.log("Strength changed to " + netreg.strength)
-            updateStrengthIcon()
-        }
-    }
-
     OfonoNetworkOperator {
         id: netop
     }
@@ -190,88 +148,11 @@ Item {
         }
     }
 
-    Timer {
-        id: pendingTimer
-        interval: 5000
-        repeat: false
-        onTriggered: {
-            for (var i = 0; i < pendingRemovals.length; ++i) {
-                var id = pendingRemovals[i];
-                for (var j = 0; j < notificationsModel.count; ++j) {
-                    if (notificationsModel.get(j).id == id) {
-                        notificationsModel.remove(j);
-                    }
-                }
-            }
-            pendingRemovals = [];
-        }
-    }
-
-    Rectangle {
-        z: 1
-        color: Qt.rgba(0, 0, 0, 0.9 * (Math.min(applications.contentY + homescreen.height, homescreen.height) / homescreen.height))
-        anchors.fill: parent
-    }
-
-    PlasmaCore.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60 * 1000
-    }
-    PlasmaCore.DataSource {
-        id: notificationsSource
-
-        engine: "notifications"
-        interval: 0
-
-        onSourceAdded: {
-            connectSource(source);
-        }
-
-        onSourceRemoved: {
-            for (var i = 0; i < notificationsModel.count; ++i) {
-                if (notificationsModel.get(i) == source) {
-                    notificationsModel.remove(i);
-                    break;
-                }
-            }
-        }
-
-        onNewData: {
-            var actions = new Array()
-            if (data["actions"] && data["actions"].length % 2 == 0) {
-                for (var i = 0; i < data["actions"].length; i += 2) {
-                    var action = new Object();
-                    action["id"] = data["actions"][i];
-                    action["text"] = data["actions"][i+1];
-                    actions.push(action);
-                }
-            }
-
-            homescreen.addNotification(
-                    sourceName,
-                    data,
-                    actions);
-        }
-
-    }
-
-    ListModel {
-        id: notificationsModel
-
-        ListElement {
-            appIcon: "call-start"
-            summary: "Missed call from Joe"
-            body: "Called at 8:42 from +41 56 373 37 31"
-        }
-        ListElement {
-            appIcon: "im-google"
-            summary: "July: Hey! Are you around?"
-        }
-        ListElement {
-            appIcon: "im-google"
-            summary: "July: Hello?"
+    //pass the focus to the containment, so it can react to homescreen activate/inactivate
+    Connections {
+        target: desktop
+        onActiveChanged: {
+            containment.focus = desktop.active;
         }
     }
 
@@ -302,255 +183,6 @@ Item {
         }
         z: 21
         source: simManager.pinRequired != OfonoSimManager.NoPin ? Qt.resolvedUrl("Pin.qml") : ""
-    }
-
-    PlasmaCore.ColorScope {
-        id: statusPanel
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-        height: units.iconSizes.small
-        z: 2
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        Rectangle {
-            anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.9)
-
-            PlasmaCore.IconItem {
-                id: strengthIcon
-                colorGroup: PlasmaCore.ColorScope.colorGroup
-                anchors {
-                    left: parent.left
-                    verticalCenter: parent.verticalCenter
-                }
-                width: units.iconSizes.small
-                height: width
-            }
-            PlasmaComponents.Label {
-                anchors {
-                    left: strengthIcon.right
-                    verticalCenter: parent.verticalCenter
-                }
-                text: netreg.strength + "% " + netreg.name
-                color: PlasmaCore.ColorScope.textColor
-                font.pixelSize: parent.height / 2
-            }
-            PlasmaComponents.Label {
-                id: clock
-                anchors.fill: parent
-                text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
-                color: PlasmaCore.ColorScope.textColor
-                horizontalAlignment: Qt.AlignHCenter
-                verticalAlignment: Qt.AlignVCenter
-                font.pixelSize: height / 2
-            }
-            MouseArea {
-                property int oldMouseY: 0
-
-                anchors.fill: parent
-                enabled: !dialerOverlay.item.visible
-                onPressed: {
-                    oldMouseY = mouse.y;
-                    slidingPanel.visible = true;
-                }
-                onPositionChanged: {
-                    slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
-                    oldMouseY = mouse.y;
-                }
-                onReleased: slidingPanel.updateState();
-            }
-
-
-            PlasmaWorkspace.BatteryIcon {
-                id: batteryIcon
-                anchors {
-                    right: parent.right
-                    verticalCenter: parent.verticalCenter
-                }
-                width: units.iconSizes.small
-                height: width
-                hasBattery: pmSource.data["Battery"]["Has Battery"]
-                batteryType: "Phone"
-                percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
-
-                PlasmaCore.DataSource {
-                    id: pmSource
-                    engine: "powermanagement"
-                    connectedSources: sources
-                    onSourceAdded: {
-                        disconnectSource(source);
-                        connectSource(source);
-                    }
-                    onSourceRemoved: {
-                        disconnectSource(source);
-                    }
-                }
-            }
-        }
-    }
-
-    SlidingPanel {
-        id: slidingPanel
-        width: homescreen.width
-        height: homescreen.height
-    }
-
-
-    PlasmaCore.ColorScope {
-        z: 1
-        anchors {
-            fill: parent
-        }
-
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        SatelliteComponents.ApplicationListModel {
-            id: appListModel
-        }
-
-        GridView {
-            id: applications
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: parent.left
-                right: parent.right
-            }
-            z: 1
-            cellWidth: homescreen.buttonHeight
-            cellHeight: cellWidth
-            model: appListModel
-            snapMode: GridView.SnapToRow
-            clip: true
-            header: MouseArea {
-                z: 999
-                width: homescreen.width
-                height: homescreen.height - units.iconSizes.medium
-
-                onPressAndHold: {
-                    containment.action("configure").trigger();
-                }
-
-                PlasmaComponents.Label {
-                    id: bigClock
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        top: parent.top
-                        bottom: notificationView.top
-                    }
-                    text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
-                    color: PlasmaCore.ColorScope.textColor
-                    horizontalAlignment: Qt.AlignHCenter
-                    verticalAlignment: Qt.AlignVCenter
-                    font.pointSize: 40
-                    style: Text.Raised
-                    styleColor: "black"
-                }
-
-                ListView {
-                    id: notificationView
-                    spacing: units.smallSpacing
-                    anchors {
-                        bottom: parent.bottom
-                        left: parent.left
-                        right: parent.right
-                        bottomMargin: stripe.height * 2
-                    }
-                    height: parent.height / 3
-                    interactive: false
-
-                    z: 1
-                    verticalLayoutDirection: ListView.BottomToTop
-                    model: notificationsModel
-
-                    add: Transition {
-                            NumberAnimation {
-                                properties: "x"
-                                from: notificationView.width
-                                duration: 100
-                            }
-                        }
-
-                    remove: Transition {
-                        NumberAnimation {
-                            properties: "x"
-                            to: notificationView.width
-                            duration: 500
-                        }
-                        NumberAnimation {
-                            properties: "opacity"
-                            to: 0
-                            duration: 500
-                        }
-                    }
-
-                    removeDisplaced: Transition {
-                        SequentialAnimation {
-                            PauseAnimation { duration: 600 }
-                            NumberAnimation { properties: "x,y"; duration: 100 }
-                        }
-                    }
-
-                    delegate: NotificationStripe {}
-
-                }
-                SatelliteStripe {
-                    id: stripe
-                    z: 99
-                    y: Math.max(applications.contentY + parent.height, parent.height - height)
-
-                    PlasmaCore.Svg {
-                        id: stripeIcons
-                        imagePath: Qt.resolvedUrl("../images/homescreenicons.svg")
-                    }
-
-                    Row {
-                        anchors.fill: parent
-                        property int columns: 4
-                        property alias buttonHeight: stripe.height
-
-                        HomeLauncherSvg {
-                            id: phoneIcon
-                            svg: stripeIcons
-                            elementId: "phone"
-                            callback: function() {
-                                dialerOverlay.open()
-                            }
-                        }
-
-                        HomeLauncherSvg {
-                            id: messagingIcon
-                            svg: stripeIcons
-                            elementId: "messaging"
-                            callback: function() { console.log("Start messaging") }
-                        }
-
-
-                        HomeLauncherSvg {
-                            id: emailIcon
-                            svg: stripeIcons
-                            elementId: "email"
-                            callback: function() { console.log("Start email") }
-                        }
-
-
-                        HomeLauncherSvg {
-                            id: webIcon
-                            svg: stripeIcons
-                            elementId: "web"
-                            callback: function() { console.log("Start web") }
-                        }
-                    }
-                }
-            }
-            delegate: HomeLauncher {}
-            Component.onCompleted : { console.log("WTF " + width) }
-
-            
-        }
     }
 
     Component.onCompleted: {

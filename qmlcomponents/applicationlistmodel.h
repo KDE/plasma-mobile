@@ -38,6 +38,7 @@ class ApplicationListModel : public QAbstractListModel {
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
     ApplicationListModel(QObject *parent = 0);
@@ -45,9 +46,13 @@ public:
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
+    void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
+
     int count() { return m_applicationList.count(); }
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
+
+    Qt::ItemFlags flags(const QModelIndex &index) const;
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
@@ -59,16 +64,27 @@ public:
         ApplicationOriginalRowRole  = Qt::UserRole + 6
     };
 
+    QStringList appOrder() const;
+    void setAppOrder(const QStringList &order);
+
     Q_INVOKABLE void moveItem(int row, int order);
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 
+    Q_INVOKABLE void loadApplications();
+
+public Q_SLOTS:
+     void sycocaDbChanged(const QStringList &change);
+
 Q_SIGNALS:
     void countChanged();
+    void appOrderChanged();
 
 private:
     QList<ApplicationData> m_applicationList;
-    void loadApplications();
+
+    QStringList m_appOrder;
+    QHash<QString, int> m_appPositions;
 };
 
 #endif // APPLICATIONLISTMODEL_H

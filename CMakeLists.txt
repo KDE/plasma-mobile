@@ -23,10 +23,10 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative)
-find_package(KF5 REQUIRED COMPONENTS PlasmaQuick I18n)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n)
+find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
 
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
@@ -44,9 +44,13 @@ install(DIRECTORY compositor/
         PATTERN Messages.sh EXCLUDE
         PATTERN dummydata EXCLUDE)
 
+kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
+install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.dialer.desktop)
+
 add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
 add_subdirectory(services)
 add_subdirectory(settingsmodules)
 add_subdirectory(applets)
 add_subdirectory(containments)
+add_subdirectory(dialer)
