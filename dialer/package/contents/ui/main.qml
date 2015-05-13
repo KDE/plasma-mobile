@@ -23,7 +23,6 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0
 import org.nemomobile.voicecall 1.0
-import MeeGo.QOfono 0.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -187,58 +186,6 @@ ApplicationWindow {
 //BEGIN MODELS
     ListModel {
         id: historyModel
-    }
-
-    OfonoManager {
-        id: ofonoManager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added " + modem)
-        }
-        onModemRemoved: console.log("modem removed")
-    }
-
-    OfonoConnMan {
-       id: ofono1
-       Component.onCompleted: {
-           console.log(ofonoManager.modems)
-       }
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoModem {
-       id: modem1
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-
-    }
-
-    OfonoContextConnection {
-        id: context1
-        contextPath : ofono1.contexts.length > 0 ? ofono1.contexts[0] : ""
-        Component.onCompleted: {
-            print("Context Active: " + context1.active)
-        }
-        onActiveChanged: {
-            print("Context Active: " + context1.active)
-        }
-    }
-
-    OfonoNetworkRegistration {
-        id: netreg
-        Component.onCompleted: {
-            netreg.scan()
-        }
-
-        onNetworkOperatorsChanged : {
-            console.log("operators :"+netreg.currentOperator["Name"].toString())
-        }
-        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoNetworkOperator {
-        id: netop
     }
 
     VoiceCallManager {
