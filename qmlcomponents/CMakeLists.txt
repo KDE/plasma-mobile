@@ -15,9 +15,9 @@ target_link_libraries(satellitecomponentsplugin
                 KF5::Declarative
                 KF5::I18n)
 
-install(TARGETS satellitecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/satellite/components)
+install(TARGETS satellitecomponentsplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/satellite/components)
 
 
-install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/satellite/components)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/satellite/components)
 
 add_subdirectory(modeltest)
