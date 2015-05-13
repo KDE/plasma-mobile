@@ -49,7 +49,7 @@ install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} REN
 
 add_subdirectory(bin)
 add_subdirectory(qmlcomponents)
-add_subdirectory(services)
+#add_subdirectory(services)
 add_subdirectory(settingsmodules)
 add_subdirectory(applets)
 add_subdirectory(containments)
