@@ -22,7 +22,6 @@ import QtQuick 2.3
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0
-import org.nemomobile.voicecall 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -33,44 +32,15 @@ ApplicationWindow {
     width: 600
     height: 800
 
-    property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
-    //keep track of the status we were in
-    property int previousStatus
     //keep track if we were visible when ringing
     property bool wasVisible
     //support a single provider for now
-    property string providerId: voiceCallmanager.providers.id(0)
+    property string providerId: ofonoWrapper.providerId
     //was the last call an incoming one?
     property bool isIncoming
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
-    onStatusChanged: {
-        //STATUS_ACTIVE
-        if (status == 1) {
-            root.isIncoming = voiceCallmanager.activeVoiceCall.isIncoming;
-        //STATUS_INCOMING
-        } else if (status == 5) {
-            wasVisible = root.visible;
-            root.visible = true;
-            dialerUtils.notifyRinging();
-        //Was STATUS_INCOMING now is STATUS_DISCONNECTED: Missed call!
-        } else if (status == 7 && previousStatus == 5) {
-            var prettyDate = Qt.formatTime(voiceCallmanager.activeVoiceCall.startedAt, Qt.locale().timeFormat(Locale.ShortFormat));
-            dialerUtils.notifyMissedCall(voiceCallmanager.activeVoiceCall.lineId, i18n("%1 called at %2", voiceCallmanager.activeVoiceCall.lineId, prettyDate));
-            root.visible = wasVisible;
-            insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, 0, 0);
-        } else if (status == 7) {
-            insertCallInHistory(voiceCallmanager.activeVoiceCall.lineId, voiceCallmanager.activeVoiceCall.duration, isIncoming ? 1 : 2);
-        }
-
-        if (status != 5) {
-            dialerUtils.stopRinging();
-        }
-
-        previousStatus = status;
-    }
-
     Connections {
         target: dialerUtils
         onMissedCallsActionTriggered: {
@@ -80,7 +50,7 @@ ApplicationWindow {
 
     onVisibleChanged: {
         //reset missed calls if the status is not STATUS_INCOMING when got visible
-        if (visible && status != 5) {
+        if (visible && ofonoWrapper.status != "incoming") {
             dialerUtils.resetMissedCalls();
         }
     }
@@ -88,18 +58,7 @@ ApplicationWindow {
 
 //BEGIN FUNCTIONS
     function call(number) {
-        if (!voiceCallmanager.activeVoiceCall) {
-            console.log("Calling: " + providerId + " " + number);
-            voiceCallmanager.dial(providerId, number);
-
-        } else {
-            console.log("Hanging up: " + voiceCallmanager.activeVoiceCall.lineId);
-            status.text = '';
-            var call = voiceCallmanager.activeVoiceCall;
-            if (call) {
-                call.hangup();
-            }
-        }
+        ofonoWrapper.call(number);
     }
 
     function insertCallInHistory(number, duration, callType) {
@@ -157,10 +116,6 @@ ApplicationWindow {
 
 //BEGIN DATABASE
     Component.onCompleted: {
-        //HACK: make sure activeVoiceCall is loaded if already existing
-        voiceCallmanager.voiceCalls.onVoiceCallsChanged();
-        voiceCallmanager.onActiveVoiceCallChanged();
-
         //DATABSE
         var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
 
@@ -188,24 +143,8 @@ ApplicationWindow {
         id: historyModel
     }
 
-    VoiceCallManager {
-        id: voiceCallmanager
-
-        onActiveVoiceCallChanged: {
-            if (activeVoiceCall) {
-                //main.activeVoiceCallPerson = people.personByPhoneNumber(activeVoiceCall.lineId);
-               // dialerOverlay.item.numberEntryText = activeVoiceCall.lineId;
-
-            } else {
-               // dialerOverlay.item.numberEntryText = '';
-
-                //main.activeVoiceCallPerson = null;
-            }
-        }
-
-        onError: {
-            console.log('*** QML *** VCM ERROR: ' + message);
-        }
+    OfonoWrapper {
+        id: ofonoWrapper
     }
 
 //END MODELS
@@ -213,10 +152,10 @@ ApplicationWindow {
 //BEGIN UI
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: root.visible && root.status == 0
+        when: root.visible && ofonoWrapper.status == "idle"
         source: Qt.resolvedUrl("Dialer/DialPage.qml")
-        z: root.status == 0 ? 2 : 0
-        opacity: root.status == 0 ? 1 : 0
+        z: ofonoWrapper.status == "idle" ? 2 : 0
+        opacity: ofonoWrapper.status == "idle" ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration
@@ -227,10 +166,10 @@ ApplicationWindow {
 
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: root.status > 0
+        when: ofonoWrapper.status != "idle"
         source: Qt.resolvedUrl("Call/CallPage.qml")
-        opacity: root.status > 0 ? 1 : 0
-        z: root.status > 0 ? 2 : 0
+        opacity: ofonoWrapper.status != "idle" ? 1 : 0
+        z: ofonoWrapper.status != "idle" ? 2 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration

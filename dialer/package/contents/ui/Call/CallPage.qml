@@ -22,17 +22,15 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.nemomobile.voicecall 1.0
 
 import "../Dialpad"
 
 Item {
     id: callPage
 
-    state: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.statusText : "disconnected"
-    property int status: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.status : 0
+    property string status: ofonoWrapper.status
 
-    property string providerId: voiceCallmanager.providers.id(0)
+    property string providerId: ofonoWrapper.providerId
 
     function secondsToTimeString(seconds) {
         seconds = Math.floor(seconds/1000)
@@ -46,7 +44,7 @@ Item {
     }
 
     onStatusChanged: {
-        if (status != 1) {
+        if (status != "active") {
             dialerButton.checked = false;
         }
     }
@@ -68,7 +66,7 @@ Item {
 
             contentWidth: topContents.width
             contentHeight: topContents.height
-            interactive: status == 1;
+            interactive: status == "active";
             Row {
                 id: topContents
                 Avatar {
@@ -80,9 +78,7 @@ Item {
                     height: topFlickable.height
 
                     callback: function (string) {
-                        if (voiceCallmanager.activeVoiceCall) {
-                            voiceCallmanager.activeVoiceCall.sendDtmf(string);
-                        }
+                        ofonoWrapper.sendToneToCall(string);
                     }
                 }
             }
@@ -113,7 +109,7 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             font.pointSize: theme.defaultFont.pointSize * 2
-            text: voiceCallmanager.activeVoiceCall ? voiceCallmanager.activeVoiceCall.lineId : ""
+            text: ofonoWrapper.lineId
         }
         PlasmaComponents.Label {
             Layout.fillWidth: true
@@ -121,29 +117,29 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             text: {
-                if (!voiceCallmanager.activeVoiceCall) {
+                if (!ofonoWrapper.hasActiveCall) {
                     return '';
                 //STATUS_DIALING
-                } else if (voiceCallmanager.activeVoiceCall.status == 3) {
+                } else if (ofonoWrapper.status == "dialing") {
                     return i18n("Calling...");
-                } else if (voiceCallmanager.activeVoiceCall.duration > 0) {
-                    return secondsToTimeString(voiceCallmanager.activeVoiceCall.duration);
+                } else if (ofonoWrapper.duration > 0) {
+                    return secondsToTimeString(ofonoWrapper.duration);
                 } else {
                     return '';
                 }
             }
         }
         PlasmaComponents.ButtonRow {
-            opacity: status == 1 ? 1 : 0
+            opacity: status == "active" ? 1 : 0
             exclusive: false
             spacing: 0
             Layout.alignment: Qt.AlignHCenter
             PlasmaComponents.ToolButton {
                 id: muteButton
                 flat: false
-                iconSource: voiceCallmanager.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high"
+                iconSource: ofonoWrapper.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high"
                 onClicked: {
-                    voiceCallmanager.isMicrophoneMuted = !voiceCallmanager.isMicrophoneMuted;
+                    ofonoWrapper.isMicrophoneMuted = !ofonoWrapper.isMicrophoneMuted;
                 }
             }
             PlasmaComponents.ToolButton {
@@ -170,30 +166,24 @@ Item {
             AnswerSwipe {
                 anchors.fill: parent
                 //STATUS_INCOMING
-                visible: status == 5
+                visible: status == "incoming"
                 onAccepted: {
-                    if (voiceCallmanager.activeVoiceCall) {
-                        voiceCallmanager.activeVoiceCall.answer();
-                    }
+                    ofonoWrapper.answer();
                 }
                 onRejected: {
-                    if (voiceCallmanager.activeVoiceCall) {
-                        voiceCallmanager.activeVoiceCall.hangup();
-                    }
+                    ofonoWrapper.hangup();
                 }
             }
 
             PlasmaComponents.Button {
                 anchors.fill: parent
                 //STATUS_INCOMING
-                visible: status != 5
+                visible: status != "incoming"
                 iconSource: "call-stop"
                 Layout.fillWidth: true
                 text: i18n("End Call")
                 onClicked: {
-                    if (voiceCallmanager.activeVoiceCall) {
-                        voiceCallmanager.activeVoiceCall.hangup();
-                    }
+                    ofonoWrapper.hangup();
                 }
             }
         }

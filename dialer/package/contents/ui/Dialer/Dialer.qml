@@ -22,7 +22,6 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.nemomobile.voicecall 1.0
 import "../Dialpad"
 
 Item {
@@ -30,7 +29,7 @@ Item {
 
     property alias numberEntryText: status.text
 
-    property string providerId: voiceCallmanager.providers.id(0)
+    property string providerId: ofonoWrapper.providerId
 
     function addNumber(number) {
         status.text = status.text + number
@@ -59,10 +58,10 @@ Item {
                 addNumber(string);
             }
             pressedCallback: function (string) {
-                voiceCallmanager.startDtmfTone(string);
+                ofonoWrapper.startTone(string);
             }
             releasedCallback: function (string) {
-                voiceCallmanager.stopDtmfTone();
+                ofonoWrapper.stopTone();
             }
         }
 
