@@ -25,7 +25,6 @@ import org.kde.plasma.shell 2.0 as Shell
 import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
-import org.nemomobile.voicecall 1.0
 import org.kde.kquickcontrolsaddons 2.0
 import MeeGo.QOfono 0.2
 import "../components"
@@ -99,28 +98,6 @@ Item {
 
     OfonoNetworkOperator {
         id: netop
-    }
-
-    property VoiceCallManager manager: VoiceCallManager {
-        id: manager
-
-        onActiveVoiceCallChanged: {
-            if (activeVoiceCall) {
-                dialerOverlay.open();
-                //main.activeVoiceCallPerson = people.personByPhoneNumber(activeVoiceCall.lineId);
-                dialerOverlay.item.numberEntryText = activeVoiceCall.lineId;
-
-            } else {
-                dialerOverlay.close();
-                dialerOverlay.item.numberEntryText = '';
-
-                //main.activeVoiceCallPerson = null;
-            }
-        }
-
-        onError: {
-            console.log('*** QML *** VCM ERROR: ' + message);
-        }
     }
 
     //pass the focus to the containment, so it can react to homescreen activate/inactivate
