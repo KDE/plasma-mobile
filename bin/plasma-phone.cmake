@@ -10,21 +10,6 @@
 # (at your option) any later version.
 #
 
-## Compositor
-
-export EGL_PLATFORM=hwcomposer
-export QT_QPA_PLATFORM=hwcomposer
-export QT_QPA_EGLFS_DEPTH=32
-export QT_QPA_EGLFS_HIDECURSOR=1
-export QT_COMPOSITOR_NEGATE_INVERTED_Y=0
-export KSCREEN_BACKEND=QScreen
-
-/usr/bin/greenisland -plugin evdevtouch:/dev/input/event1 -plugin evdevkeyboard:keymap=/usr/share/qt5/keymaps/droid.qmap -p org.kde.satellite.compositor.phone &
-
-sleep 3
-
-## UI
-
 unset EGL_PLATFORM
 unset QT_QPA_PLATFORM
 unset QT_QPA_EGLFS_DEPTH
@@ -40,4 +25,4 @@ export KSCREEN_BACKEND=QScreen
 export KDE_FULL_SESSION=1
 export KDE_SESSION_VERSION=5
 
-exec /usr/bin/plasmashell -p org.kde.satellite.phone -n
+exec /usr/bin/plasmashell -p org.kde.satellite.phone 
