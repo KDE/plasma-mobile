@@ -79,7 +79,7 @@ void DialerUtils::resetMissedCalls()
 void DialerUtils::notifyRinging()
 {
     if (!m_ringingNotification) {
-        m_ringingNotification = new KNotification("ringing", KNotification::Persistent|KNotification::LoopSound, 0);
+        m_ringingNotification = new KNotification("ringing", KNotification::Persistent, 0);
         m_ringingNotification->setComponentName("plasma_dialer");
     }
     m_ringingNotification->sendEvent();
