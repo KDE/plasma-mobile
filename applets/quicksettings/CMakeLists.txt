@@ -12,7 +12,7 @@ target_link_libraries(plasma_applet_quicksettings
                       KF5::I18n)
 
 
-install(TARGETS plasma_applet_quicksettings DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/plasmoids)
+install(TARGETS plasma_applet_quicksettings DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
 #install(FILES plasma-quicksettings-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 
 plasma_install_package(package org.kde.phone.quicksettings)

@@ -23,7 +23,6 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
-import org.kde.satellite.components 0.1 as SatelliteComponents
 
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
@@ -100,14 +99,14 @@ MouseEventListener {
         LayoutManager.restore();
         applicationsView.contentY = -root.height;
 
-        appListModel.appOrder = plasmoid.configuration.AppOrder;
-        appListModel.loadApplications();
+        plasmoid.nativeInterface.applicationListModel.appOrder = plasmoid.configuration.AppOrder;
+        plasmoid.nativeInterface.applicationListModel.loadApplications();
     }
 
-    SatelliteComponents.ApplicationListModel {
-        id: appListModel
+    Connections {
+        target: plasmoid.nativeInterface.applicationListModel
         onAppOrderChanged: {
-            plasmoid.configuration.AppOrder = appListModel.appOrder;
+            plasmoid.configuration.AppOrder = plasmoid.nativeInterface.applicationListModel.appOrder;
         }
     }
 
@@ -196,7 +195,7 @@ MouseEventListener {
         var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.floor(pos.y / applicationsView.cellHeight) + Math.floor(pos.x / applicationsView.cellWidth));
 
         if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
-            appListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
+            plasmoid.nativeInterface.applicationListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
             applicationsView.dragData.ApplicationOriginalRowRole = newRow;
         }
 
@@ -254,7 +253,7 @@ MouseEventListener {
             return;
         }
 
-        appListModel.runApplication(item.modelData.ApplicationStorageIdRole)
+        plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole)
     }
     PlasmaCore.ColorScope {
         anchors.fill: parent
@@ -353,7 +352,7 @@ MouseEventListener {
 
             cellWidth: root.buttonHeight
             cellHeight: cellWidth
-            model: appListModel
+            model: plasmoid.nativeInterface.applicationListModel
 
             snapMode: GridView.SnapToRow
 
@@ -481,7 +480,7 @@ MouseEventListener {
                         cellWidth: root.buttonHeight
                         cellHeight: cellWidth
 
-                        model: appListModel
+                        model: plasmoid.nativeInterface.applicationListModel
                         delegate: HomeLauncher {}
 
                         move: Transition {

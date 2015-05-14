@@ -6,7 +6,7 @@ Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
 X-Plasma-API=declarativeappletscript
-X-KDE-ParentApp=
+X-KDE-Library=plasma_applet_phone_homescreen
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Category=
 X-KDE-PluginInfo-Email=mart@kde.org
