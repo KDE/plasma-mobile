@@ -3,11 +3,11 @@ set(homescreen_SRCS
     applicationlistmodel.cpp
 )
 
-add_library(plasma_applet_phone_homescreen MODULE ${homescreen_SRCS})
+add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
 
-kcoreaddons_desktop_to_json(plasma_applet_phone_homescreen package/metadata.desktop)
+kcoreaddons_desktop_to_json(plasma_containment_phone_homescreen package/metadata.desktop)
 
-target_link_libraries(plasma_applet_phone_homescreen
+target_link_libraries(plasma_containment_phone_homescreen
                       Qt5::Gui
                       KF5::Plasma
                       Qt5::Qml
@@ -16,7 +16,7 @@ target_link_libraries(plasma_applet_phone_homescreen
                      )
 
 
-install(TARGETS plasma_applet_phone_homescreen DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
+install(TARGETS plasma_containment_phone_homescreen DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
 
 plasma_install_package(package org.kde.phone.homescreen)
 
