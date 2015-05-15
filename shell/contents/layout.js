@@ -18,3 +18,4 @@ desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.phone.quicksettings");
+panel.setHeight(60);
