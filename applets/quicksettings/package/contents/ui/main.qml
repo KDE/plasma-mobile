@@ -33,6 +33,8 @@ Item {
 
     Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
 
+    Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
+
     ListModel {
         id: settingsModel
 

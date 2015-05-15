@@ -126,7 +126,7 @@ PlasmaCore.ColorScope {
                left: parent.left
                right: parent.right
             }
-            height: applet && applet.expanded ? Math.max(applet.fullRepresentationItem.Layout.minimumHeight, units.iconSizes.medium) : units.iconSizes.medium
+            height: applet && (applet.expanded || plasmoid.applets.count == 1) ? Math.max(applet.fullRepresentationItem.Layout.minimumHeight, units.iconSizes.medium) : units.iconSizes.medium
             Behavior on height {
                 NumberAnimation {
                     duration: units.shortDuration
