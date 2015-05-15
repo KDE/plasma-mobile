@@ -27,7 +27,6 @@ Rectangle {
 
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
     color: theme.textColor
-
     property Item containment
 
     onContainmentChanged: {

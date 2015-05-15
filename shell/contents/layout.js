@@ -1,7 +1,7 @@
 var id = currentActivity();
 
 if (id.length < 1) {
-    id = createActivity("Homescreen")
+    id = createActivity("Homescreen", "org.kde.phone.homescreen")
 }
 
 var desktopsArray = desktopsForActivity(id);
@@ -18,4 +18,4 @@ desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.phone.quicksettings");
-panel.setHeight(60);
+panel.height = 60;
