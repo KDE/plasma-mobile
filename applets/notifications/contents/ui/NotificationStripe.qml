@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -27,7 +27,7 @@ MouseArea {
     id: notificationItem
 
 
-    height: Math.max(summaryText.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height : 0)
+    height: Math.max(messageLayout.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height : 0)
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
@@ -96,6 +96,7 @@ MouseArea {
     }
 
     PlasmaComponents.Label {
+        id: appLabel
         anchors {
             left: parent.left
             verticalCenter: parent.verticalCenter
@@ -105,18 +106,37 @@ MouseArea {
         text: model.appName
     }
 
-    PlasmaComponents.Label {
-        id: summaryText
+    Column {
+        id: messageLayout
         anchors {
+            left: appLabel.right
             right: icon.left
             verticalCenter: parent.verticalCenter
             rightMargin: units.smallSpacing
         }
-        horizontalAlignment: Qt.AlignRight
-        verticalAlignment: Qt.AlignVCenter
-        color: PlasmaCore.ColorScope.textColor
-        text: summary + (notificationItem.expanded ? (body ? "\n" + body : '') :
-                                            (body ? '...' : ''))
+
+        PlasmaComponents.Label {
+            anchors {
+                right: parent.right
+                left: parent.left
+            }
+            horizontalAlignment: Qt.AlignRight
+            verticalAlignment: Qt.AlignVCenter
+            text: summary + (!notificationItem.expanded && body ? "..." : "")
+            wrapMode: Text.WordWrap
+        }
+        PlasmaComponents.Label {
+            anchors {
+                right: parent.right
+                left: parent.left
+            }
+            visible: notificationItem.expanded && body != undefined && body
+            horizontalAlignment: Qt.AlignRight
+            verticalAlignment: Qt.AlignVCenter
+            text: body
+            wrapMode: Text.WordWrap
+        }
+        
     }
 
     PlasmaCore.IconItem {
@@ -127,13 +147,13 @@ MouseArea {
         }
         width: units.iconSizes.medium
         height: width
-        source: appIcon && appIcon.length > 0 ? appIcon : "im-user"
+        source: appIcon && appIcon.length > 0 ? appIcon : "preferences-desktop-notification"
     }
     RowLayout {
         id: actionsLayout
         anchors {
-            right: summaryText.right
-            top: summaryText.bottom
+            right: messageLayout.right
+            top: messageLayout.bottom
             topMargin: units.smallSpacing
         }
         opacity: notificationItem.expanded && notificationItem.actions && notificationItem.actions.count > 0 ? 1 : 0
