@@ -27,7 +27,7 @@ MouseArea {
     id: notificationItem
 
 
-    height: units.gridUnit * (expanded ? (actionsLayout.visible ? 6 : 4) : 2) + background.margins.top + background.margins.bottom
+    height: Math.max(summaryText.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height : 0)
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
@@ -38,11 +38,17 @@ MouseArea {
     property var actions: model.actions
 
     Behavior on x {
-        SpringAnimation { spring: 2; damping: 0.2 }
+        NumberAnimation {
+            easing.type: Easing.InOutQuad
+            duration: units.longDuration
+        }
     }
 
     Behavior on height {
-        SpringAnimation { spring: 5; damping: 0.3 }
+        NumberAnimation {
+            easing.type: Easing.InOutQuad
+            duration: units.longDuration
+        }
     }
 
     onReleased: {
@@ -50,8 +56,10 @@ MouseArea {
             if (x > width / 4 || x < width / -4) {
                 //if there is an action, execute the first when swiping left
                 if (x < 0 && actions) {
-                    var action = actions.get(0)
-                    root.executeAction(source, action.id)
+                    var action = actions.get(0);
+                    if (action) {
+                        root.executeAction(source, action.id)
+                    }
                 }
                 notificationsModel.remove(index);
             } else {

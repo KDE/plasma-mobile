@@ -157,7 +157,8 @@ Item {
                 NumberAnimation {
                     properties: "x"
                     from: notificationView.width
-                    duration: 100
+                    duration: units.shortDuration
+                    easing.type: Easing.InOutQuad
                 }
             }
 
@@ -165,19 +166,27 @@ Item {
             NumberAnimation {
                 properties: "x"
                 to: notificationView.width
-                duration: 500
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
             }
             NumberAnimation {
                 properties: "opacity"
                 to: 0
-                duration: 500
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
             }
         }
 
         removeDisplaced: Transition {
             SequentialAnimation {
-                PauseAnimation { duration: 600 }
-                NumberAnimation { properties: "x,y"; duration: 100 }
+                PauseAnimation {
+                    duration: units.longDuration
+                }
+                NumberAnimation {
+                    properties: "x,y"
+                    duration: units.shortDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
 
