@@ -16,7 +16,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                      )
 
 
-install(TARGETS plasma_containment_phone_homescreen DESTINATION ${PLUGIN_INSTALL_DIR}/plasma/applets)
+install(TARGETS plasma_containment_phone_homescreen DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 
 plasma_install_package(package org.kde.phone.homescreen)
 
