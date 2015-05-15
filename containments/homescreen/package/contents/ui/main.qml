@@ -257,6 +257,7 @@ MouseEventListener {
     }
     PlasmaCore.ColorScope {
         anchors.fill: parent
+        //TODO: decide what color we want applets
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
@@ -431,20 +432,28 @@ MouseEventListener {
                             source: "go-up"
                             width: units.iconSizes.huge
                             height: width
+                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                             anchors {
                                 horizontalCenter: parent.horizontalCenter
                                 bottom: parent.bottom
                             }
                         }
                     }
-                    ColumnLayout {
-                        id: appletsLayout
-                        Item {
-                            id: spacer
-                            Layout.fillWidth: true
-                            Layout.fillHeight: true
-                            Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
-                            Layout.maximumHeight: Layout.minimumHeight
+                    PlasmaCore.ColorScope {
+                        //TODO: decide what color we want applets
+                        colorGroup: PlasmaCore.Theme.NormalColorGroup
+                        Layout.fillWidth: true
+                        Layout.minimumHeight: appletsLayout.Layout.minimumHeight
+                        Layout.maximumHeight: appletsLayout.Layout.maximumHeight
+                        ColumnLayout {
+                            id: appletsLayout
+                            Item {
+                                id: spacer
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
+                                Layout.maximumHeight: Layout.minimumHeight
+                            }
                         }
                     }
                     Item {
