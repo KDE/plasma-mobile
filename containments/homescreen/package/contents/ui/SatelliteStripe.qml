@@ -13,14 +13,6 @@ PlasmaCore.ColorScope {
             topMargin: -margins.top
             bottomMargin: -margins.bottom
         }
-        Rectangle {
-            anchors {
-                fill: parent
-                topMargin: parent.margins.top
-                bottomMargin: parent.margins.bottom
-            }
-            color: PlasmaCore.ColorScope.backgroundColor
-        }
     }
 
     height: applicationsView.cellWidth
