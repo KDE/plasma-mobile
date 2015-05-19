@@ -42,7 +42,7 @@ Item {
     property int duration: callManager.foregroundCall ? callManager.foregroundCall.elapsedTime : 0
 
     //microphone muted?
-    property alias isMicrophoneMuted: callManager.muted
+    property bool isMicrophoneMuted: callManager.muted
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
@@ -114,6 +114,7 @@ Item {
         property int previousStatus
 
         onCallsChanged: {
+            print("AAA")
             //STATUS_INCOMING
             if (callManager.foregroundCall.ringing || callManager.foregroundCall.incoming) {
                 wasVisible = root.visible;
@@ -144,10 +145,6 @@ Item {
             }
 
             previousStatus = root.status;
-        }
-
-        onError: {
-            console.log('*** QML *** VCM ERROR: ' + message);
         }
     }
 
