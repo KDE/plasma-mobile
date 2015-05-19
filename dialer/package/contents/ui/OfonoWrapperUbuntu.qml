@@ -64,8 +64,20 @@ Item {
 //BEGIN FUNCTIONS
     function call(number) {
         if (!callManager.foregroundCall) {
-            console.log("Calling: " + providerId + " " + number);
-            callManager.startCall(number, providerId);
+            var account = null;
+            if (telepathyHelper.activeAccounts.length > 0) {
+                account = telepathyHelper.activeAccounts[0];
+            } else {
+                // if no account is active, use any account that can make emergency calls
+                for (var i in telepathyHelper.accounts) {
+                    if (telepathyHelper.accounts[i].emergencyCallsAvailable) {
+                        account = telepathyHelper.accounts[i];
+                        break;
+                    }
+                }
+            }
+            console.log("Calling: " + number + " " + account.accountId);
+            callManager.startCall(number, account.accountId);
 
         } else {
             console.log("Hanging up: " + callManager.foregroundCall.phoneNumber);
