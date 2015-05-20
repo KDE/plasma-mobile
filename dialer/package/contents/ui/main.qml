@@ -143,7 +143,7 @@ ApplicationWindow {
         id: historyModel
     }
 
-    OfonoWrapperUbuntu {
+    OfonoWrapper {
         id: ofonoWrapper
     }
 
