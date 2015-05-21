@@ -22,7 +22,6 @@ import QtQuick 2.0
 import QtGraphicalEffects 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
-import org.kde.satellite.components 0.1 as SatelliteComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
