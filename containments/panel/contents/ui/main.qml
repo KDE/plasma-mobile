@@ -57,7 +57,7 @@ PlasmaCore.ColorScope {
         //applet.anchors.fill = container;
         applet.anchors.left = container.left;
         applet.anchors.right = container.right;
-        applet.height = units.iconSizes.medium
+        applet.height = units.iconSizes.medium;
         applet.visible = true;
         container.visible = true;
 
@@ -119,6 +119,7 @@ PlasmaCore.ColorScope {
     Component {
         id: appletContainerComponent
         Item {
+            id: containerItem
             property Item applet
             Layout.fillWidth: true
             clip: true
@@ -133,9 +134,13 @@ PlasmaCore.ColorScope {
                     easing.type: Easing.InOutQuad
                 }
             }
+            Rectangle {
+                id: bah
+            }
             Connections {
                 target: applet
                 onExpandedChanged: {
+
                     if (!applet.expanded && root.expandedApplet == applet) {
                         root.expandedApplet = null;
                         return;
@@ -145,6 +150,16 @@ PlasmaCore.ColorScope {
                     }
                     root.expandedApplet = applet;
                 }
+            }
+
+            MouseArea {
+                id: mouseArea
+
+                property bool wasExpanded: false
+
+                anchors.fill: parent
+                onPressed: wasExpanded = applet.expanded
+                onClicked: applet.expanded = !wasExpanded
             }
         }
     }

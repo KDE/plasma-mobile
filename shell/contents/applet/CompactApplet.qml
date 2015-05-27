@@ -23,16 +23,11 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-PlasmaCore.ToolTipArea {
+Item {
     id: root
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    icon: plasmoid.icon
-    mainText: plasmoid.toolTipMainText
-    subText: plasmoid.toolTipSubText
-    location: plasmoid.location
-    active: !plasmoid.expanded
     property Item fullRepresentation
     property Item compactRepresentation
     property Item expandedFeedback: expandedItem
@@ -40,7 +35,10 @@ PlasmaCore.ToolTipArea {
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
             compactRepresentation.parent = root;
-            compactRepresentation.anchors.fill = root;
+            compactRepresentation.anchors.left = root.left;
+            compactRepresentation.anchors.top = root.top;
+            compactRepresentation.width = units.iconSizes.medium;
+            compactRepresentation.height = compactRepresentation.width;
             compactRepresentation.visible = true;
         }
         root.visible = true;
@@ -51,29 +49,29 @@ PlasmaCore.ToolTipArea {
         if (!fullRepresentation) {
             return;
         }
-       /* //if the fullRepresentation size was restored to a stored size, or if is dragged from the desktop, restore popup size
-        if (fullRepresentation.width > 0) {
-            appletParent.width = fullRepresentation.width;
-        } else if (fullRepresentation.Layout && fullRepresentation.Layout.preferredWidth > 0) {
-            appletParent.width = fullRepresentation.Layout.preferredWidth
-        } else if (fullRepresentation.implicitWidth > 0) {
-            appletParent.width = fullRepresentation.implicitWidth
-        } else {
-            appletParent.width = theme.mSize(theme.defaultFont).width * 35
-        }
-
-        if (fullRepresentation.height > 0) {
-            appletParent.height = fullRepresentation.height;
-        } else if (fullRepresentation.Layout && fullRepresentation.Layout.preferredHeight > 0) {
-            appletParent.height = fullRepresentation.Layout.preferredHeight
-        } else if (fullRepresentation.implicitHeight > 0) {
-            appletParent.height = fullRepresentation.implicitHeight
-        } else {
-            appletParent.height = theme.mSize(theme.defaultFont).height * 25
-        }*/
 
         fullRepresentation.parent = appletParent;
         fullRepresentation.anchors.fill = fullRepresentation.parent;
+    }
+
+    Row {
+        height: units.iconSizes.medium
+        anchors.left: compactRepresentation ? compactRepresentation.right : undefined
+        PlasmaCore.SvgItem {
+            svg: PlasmaCore.Svg {
+                id: arrowSvg
+                imagePath: "widgets/arrows"
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            }
+            width: units.iconSizes.smallMedium
+            height: width
+            elementId: plasmoid.expanded ? "up-arrow" : "down-arrow"
+            anchors.verticalCenter: parent.verticalCenter
+        }
+        PlasmaComponents.Label {
+            text: plasmoid.title
+            anchors.verticalCenter: parent.verticalCenter
+        }
     }
 
     Rectangle {
@@ -87,12 +85,6 @@ PlasmaCore.ToolTipArea {
                 easing.type: Easing.InOutQuad
             }
         }
-    }
- 
-    Timer {
-        id: expandedSync
-        interval: 100
-        onTriggered: plasmoid.expanded = popupWindow.visible;
     }
 
     Item {
