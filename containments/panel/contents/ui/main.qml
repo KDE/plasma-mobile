@@ -145,7 +145,7 @@ PlasmaCore.ColorScope {
                         root.expandedApplet = null;
                         return;
                     }
-                    if (root.expandedApplet) {
+                    if (root.expandedApplet && root.expandedApplet != applet) {
                         root.expandedApplet.expanded = false;
                     }
                     root.expandedApplet = applet;
