@@ -25,7 +25,6 @@ import org.kde.plasma.shell 2.0 as Shell
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
-import MeeGo.QOfono 0.2
 import "../components"
 
 Item {
@@ -51,52 +50,6 @@ Item {
             containment.anchors.right = homescreen.right;
             containment.anchors.bottom = homescreen.bottom;
         }
-    }
-
-    OfonoManager {
-        id: ofonoManager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added " + modem)
-        }
-        onModemRemoved: console.log("modem removed")
-    }
-
-    OfonoConnMan {
-       id: ofono1
-       Component.onCompleted: {
-           console.log(ofonoManager.modems)
-       }
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoModem {
-       id: modem1
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-
-    }
-
-    OfonoContextConnection {
-        id: context1
-        contextPath : ofono1.contexts.length > 0 ? ofono1.contexts[0] : ""
-        Component.onCompleted: {
-            print("Context Active: " + context1.active)
-        }
-        onActiveChanged: {
-            print("Context Active: " + context1.active)
-        }
-    }
-
-    property OfonoSimManager simManager: ofonoSimManager
-    OfonoSimManager {
-        id: ofonoSimManager
-        modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoNetworkOperator {
-        id: netop
     }
 
     //pass the focus to the containment, so it can react to homescreen activate/inactivate
@@ -133,7 +86,7 @@ Item {
             bottom: parent.bottom
         }
         z: 21
-        source: simManager.pinRequired != OfonoSimManager.NoPin ? Qt.resolvedUrl("Pin.qml") : ""
+        source: Qt.resolvedUrl("Pin.qml")
     }
 
     Component.onCompleted: {

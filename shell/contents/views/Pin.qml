@@ -29,9 +29,54 @@ Rectangle {
     color: "black"
     opacity: 0.8
     visible: simManager.pinRequired != OfonoSimManager.NoPin
+    property OfonoSimManager simManager: ofonoSimManager
+
+    OfonoManager {
+        id: ofonoManager
+        onAvailableChanged: {
+           console.log("Ofono is " + available)
+        }
+        onModemAdded: {
+            console.log("modem added " + modem)
+        }
+        onModemRemoved: console.log("modem removed")
+    }
+
+    OfonoConnMan {
+       id: ofono1
+       Component.onCompleted: {
+           console.log(ofonoManager.modems)
+       }
+       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
+    }
+
+    OfonoModem {
+       id: modem1
+       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
+
+    }
+
+    OfonoContextConnection {
+        id: context1
+        contextPath : ofono1.contexts.length > 0 ? ofono1.contexts[0] : ""
+        Component.onCompleted: {
+            print("Context Active: " + context1.active)
+        }
+        onActiveChanged: {
+            print("Context Active: " + context1.active)
+        }
+    }
+
+    OfonoSimManager {
+        id: ofonoSimManager
+        modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
+    }
+
+    OfonoNetworkOperator {
+        id: netop
+    }
 
     property color textColor: "white"
-    property OfonoSimManager simManager: homescreen.simManager
 
     function addNumber(number) {
         pinLabel.text = pinLabel.text + number
