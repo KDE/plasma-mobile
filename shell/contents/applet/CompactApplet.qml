@@ -35,6 +35,8 @@ Item {
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
             compactRepresentation.parent = root;
+            compactRepresentation.anchors.fill = undefined;
+            compactRepresentation.anchors.right = undefined;
             compactRepresentation.anchors.left = root.left;
             compactRepresentation.anchors.top = root.top;
             compactRepresentation.width = units.iconSizes.medium;
