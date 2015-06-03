@@ -33,6 +33,7 @@
 #include <KAboutData>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KPluginMetaData>
 #include <KService>
 #include <KServiceTypeTrader>
 #include <Plasma/Theme>
@@ -119,6 +120,14 @@ int main(int argc, char **argv)
                       << std::setw(nameWidth - info.pluginName().length() + 2)
                       << '.' << ' '
                       << description.toLocal8Bit().data() << std::endl;
+        }
+
+        for (auto plugin : KPluginLoader::findPlugins("kcms")) {
+            std::cout << plugin.pluginId().toLocal8Bit().data()
+            << ' '
+            << std::setw(nameWidth - plugin.pluginId().length() + 2)
+            << '.' << ' '
+            << plugin.description().toLocal8Bit().data() << std::endl;
         }
         return 0;
     }
