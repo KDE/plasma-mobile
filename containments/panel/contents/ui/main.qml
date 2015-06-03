@@ -132,9 +132,7 @@ PlasmaCore.ColorScope {
                     easing.type: Easing.InOutQuad
                 }
             }
-            Rectangle {
-                id: bah
-            }
+
             Connections {
                 target: applet
                 onExpandedChanged: {
@@ -179,6 +177,7 @@ PlasmaCore.ColorScope {
     }
 
     Rectangle {
+        z: 1
         parent: slidingPanel.visible ? panelContents : root
         anchors {
             left: parent.left
@@ -188,6 +187,10 @@ PlasmaCore.ColorScope {
         height: root.height
         color: PlasmaCore.ColorScope.backgroundColor
 
+        //used as is needed somebody to filter events
+        MouseArea {
+            anchors.fill: parent
+        }
         Loader {
             height: parent.height
             width: item.width
@@ -259,6 +262,7 @@ PlasmaCore.ColorScope {
         }
     }
     MouseArea {
+        z: 99
         property int oldMouseY: 0
 
         anchors.fill: parent
