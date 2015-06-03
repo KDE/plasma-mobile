@@ -18,9 +18,9 @@
  */
 
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kquickcontrolsaddons 2.0
 
 
 Item {
@@ -40,7 +40,7 @@ Item {
             QIconItem {
                 width: 22
                 height: 22
-                icon: QIcon("rating")
+                icon: "rating"
                 property int baseRating: (index+1)*2
                 enabled: (score > index*2)
             }

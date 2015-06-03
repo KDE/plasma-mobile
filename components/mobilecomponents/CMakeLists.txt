@@ -1,42 +1,32 @@
 project(mobilecomponents)
 
-include(KDE4Defaults)
-
 set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     fallbackcomponent.cpp
     package.cpp
-    texteffects.cpp
+    applicationlistmodel.cpp
+    #texteffects.cpp
     )
 
-INCLUDE_DIRECTORIES(
-        ${CMAKE_SOURCE_DIR}
-        ${CMAKE_BINARY_DIR}
-        ${KDE4_INCLUDES}
-)
+add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
+target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5::Quick KF5::Declarative KF5::Plasma KF5::I18n KF5::KIOCore KF5::KIOWidgets KF5::Activities)
 
-qt4_automoc(${mobilecomponents_SRCS})
+install(TARGETS mobilecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
+install(FILES ActionButton.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES Rating.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES IconButton.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES IconGrid.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES ResourceDelegate.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES ViewSearch.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES OverlayDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES SplitDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES DatePicker.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(FILES TimePicker.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-kde4_add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
-target_link_libraries(mobilecomponentsplugin ${QT_QTCORE_LIBRARY} ${QT_QTDBUS_LIBRARY}  ${QT_QTGUI_LIBRARY} ${QT_QTSCRIPT_LIBRARY} ${QT_QTDECLARATIVE_LIBRARY} ${KDE4_KDECORE_LIBRARY} ${KDE4_PLASMA_LIBS} ${KACTIVITIES_LIBRARY})
+install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(TARGETS mobilecomponentsplugin DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(DIRECTORY resourcedelegates DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(FILES ActionButton.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES Rating.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES IconButton.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES IconGrid.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES ResourceDelegate.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES ViewSearch.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES OverlayDrawer.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES SplitDrawer.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES DatePicker.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES TimePicker.qml DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-
-install(FILES qmldir DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-
-install(DIRECTORY resourcedelegates/ DESTINATION ${DATA_INSTALL_DIR}/plasma/resourcedelegates/)
-
-install(DIRECTORY private DESTINATION ${IMPORTS_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
+install(DIRECTORY private DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)

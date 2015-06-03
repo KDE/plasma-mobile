@@ -19,12 +19,10 @@
 
 #include "fallbackcomponent.h"
 
-
 #include <QFile>
 
-
-#include <KStandardDirs>
-#include <KDebug>
+#include <QStandardPaths>
+#include <QDebug>
 
 
 FallbackComponent::FallbackComponent(QObject *parent)
@@ -47,7 +45,7 @@ QString FallbackComponent::resolvePath(const QString &component, const QStringLi
             }
         }
 
-        resolved = KStandardDirs::locate("data", "plasma/" + key);
+        resolved = QStandardPaths::locate(QStandardPaths::DataLocation, "plasma/" + key);
         m_paths.insert(key, new QString(resolved));
         if (!resolved.isEmpty()) {
             break;

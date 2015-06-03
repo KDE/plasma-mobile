@@ -17,9 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
     id: button
@@ -55,10 +55,6 @@ Item {
             buttonItem.elementId = "normal"
             shadowItem.opacity = 1
         }
-    }
-
-    PlasmaCore.Theme {
-        id: theme
     }
 
     PlasmaCore.Svg {

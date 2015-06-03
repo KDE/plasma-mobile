@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2014 Sebastian Kügler <sebas@kde.org>                       *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,55 +18,74 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-// KDE
+// Qt
+#include <QGuiApplication>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QDebug>
+
+// Frameworks
 #include <KAboutData>
-#include <KCmdLineArgs>
-#include <KDebug>
-#include <KService>
 #include <KConfigGroup>
+#include <KLocalizedString>
+#include <Plasma/Theme>
 
 // Own
-#include "activewebbrowser.h"
+#include "view.h"
 
-static const char description[] = I18N_NOOP("Web browser for Plasma Active");
-
-static const char version[] = "1.9";
-//static const char HOME_URL[] = "http://community.kde.org/Plasma/Active";
-static const char HOME_URL[] = "";
+static const char description[] = I18N_NOOP("Angelfish Browser");
+static const char version[] = "0.1";
+static const char HOME_URL[] = "http://plasma-mobile.org";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-web-browser", 0, ki18n("Plasma Active Web Browser"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
-                     about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
-    KCmdLineArgs::init(argc, argv, &about);
+    QGuiApplication app(argc, argv);
+
+    KLocalizedString::setApplicationDomain("active-settings");
+
+    // About data
+    KAboutData aboutData("angelfish", i18n("Web Browser"), version, i18n("Touch-friendly web browser."), KAboutLicense::GPL, i18n("Copyright 2015, Sebastian Kügler"));
+    aboutData.addAuthor(i18n("Sebastian Kügler"), i18n("Maintainer"), "sebas@kde.org");
+    KAboutData::setApplicationData(aboutData);
+
+    app.setWindowIcon(QIcon::fromTheme("internet-web-browser"));
 
 
-    KCmdLineOptions options;
-    options.add("+[url]", ki18n( "URL to open" ), QByteArray());
+    const static auto _url = QStringLiteral("url");
+    QCommandLineOption url = QCommandLineOption(QStringList() << QStringLiteral("u") << _url,
+                               i18n("Start at URL"), i18n("url"));
 
-    KCmdLineArgs::addCmdLineOptions(options);
+    const static auto _f = QStringLiteral("fullscreen");
+    QCommandLineOption fullscreen = QCommandLineOption(QStringList() << QStringLiteral("f") << _f,
+                               i18n("Start full-screen"));
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    QCommandLineParser parser;
+    parser.addOption(url);
+    parser.addOption(fullscreen);
 
-    ActiveWebbrowser app(args);
+    aboutData.setupCommandLine(&parser);
 
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
 
-    //use plasmarc to share this with plasma-windowed
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "General");
-    bool useGL = cg.readEntry("UseOpenGl", true);
+    QString u = parser.value(url);
 
-    QString url;
-    if (args->count()) {
-        url = args->arg(0);
-    } else {
-        KSharedConfigPtr ptr = KSharedConfig::openConfig("active-webbrowserrc");
-        KConfigGroup _config = KConfigGroup(ptr, "webbrowser");
-        url = _config.readEntry("startPage", QString());
+    KConfigGroup cg(KSharedConfig::openConfig("angelfishrc"), "Browser");
+    const QString themeName = cg.readEntry("theme", "default");
+    if (u.isEmpty()) {
+        qDebug() << "u: " << u;
+        u = cg.readEntry("startPage", QString());
     }
 
-    app.setUseGL(useGL);
-    app.newWindow(url);
-    args->clear();
+    Plasma::Theme theme;
+    qDebug() << "Setting theme, package " << themeName << u;
+    theme.setUseGlobalSettings(false);
+    theme.setThemeName(themeName); // needs to happen after setUseGlobalSettings, since that clears themeName
+
+    auto settingsapp = new AngelFish::View(u);
+    if (parser.isSet(fullscreen)) {
+        settingsapp->setVisibility(QWindow::FullScreen);
+    }
+
     return app.exec();
 }

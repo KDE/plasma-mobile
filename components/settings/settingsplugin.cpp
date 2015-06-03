@@ -1,5 +1,5 @@
 /*
- *   Copyright 2011-2012 Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -18,9 +18,10 @@
  */
 
 #include "settingsplugin.h"
-#include <kdebug.h>
+#include <QDebug>
 
-#include <QtDeclarative/qdeclarative.h>
+#include <QQmlContext>
+//#include <QScriptEngine>
 
 //#include "settingsmoduleloader.h"
 #include "settingsmodulesmodel.h"
@@ -30,13 +31,11 @@
 void SettingsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.active.settings"));
-    const int major = 0;
-    const int minor = 1;
+    const int major = 2;
+    const int minor = 0;
     qmlRegisterType<SettingsModulesModel>(uri, major, minor, "SettingsModulesModel");
     qmlRegisterType<SettingsModule>(uri, major, minor, "SettingsModule");
     qmlRegisterType<SettingsComponent>(uri, major, minor, "SettingsComponent");
     qmlRegisterType<Plasma::ConfigGroup>(uri, major, minor, "ConfigGroup");
 }
-
-#include "settingsplugin.moc"
 

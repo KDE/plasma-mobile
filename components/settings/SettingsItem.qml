@@ -18,24 +18,35 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1 as ActiveSettings
+import QtQuick 2.2
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.active.settings 2.0 as ActiveSettings
 
 PlasmaComponents.PageStack {
     id: moduleContainer
     objectName: "moduleContainer"
 
     property alias module: settingsComponent.module
+    property alias icon: settingsComponent.icon
+
+    signal moduleLoaded
 
     function pushModule(module) {
         switcherPackage.name = module
-        moduleContainer.push(switcherPackage.filePath("mainscript"));
+        var mainscript = switcherPackage.filePath("mainscript");
+        //print("Loading mainscript: " + mainscript);
+        settingsLoader.source = mainscript;
+        moduleContainer.push(settingsLoader);
         moduleContainer.module = module
     }
 
     clip: true
+
+    Loader {
+        id: settingsLoader
+        anchors.fill: parent
+    }
 
     ActiveSettings.SettingsComponent {
         id: settingsComponent
@@ -45,8 +56,12 @@ PlasmaComponents.PageStack {
                 moduleContainer.pop();
             } else if (switcherPackage.name != module) {
                 switcherPackage.name = module
-                print(" Loading package: " + switcherPackage.filePath("mainscript"));
-                moduleContainer.replace(switcherPackage.filePath("mainscript"));
+                //print(" Loading package: " + switcherPackage.filePath("mainscript") + " " + module);
+                var mainscript = switcherPackage.filePath("mainscript");
+                settingsLoader.source = switcherPackage.filePath("mainscript");
+                //moduleContainer.replace(switcherPackage.filePath("mainscript"));
+                print("Loaded mainscript: " + mainscript);
+                moduleLoaded();
             }
         }
     }

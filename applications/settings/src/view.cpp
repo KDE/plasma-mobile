@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,58 +20,60 @@
 
 #include "view.h"
 
-#include <QDeclarativeContext>
-#include <QDeclarativeEngine>
-#include <QDeclarativeItem>
-#include <QScriptValue>
-#include <QTimer>
+#include <QDebug>
+#include <QQmlContext>
+#include <QQmlEngine>
+#include <QQuickItem>
 
-//#include <KConfigGroup>
-#include <KStandardDirs>
-#include "Plasma/Package"
+#include <KDBusService>
+#include <Plasma/Package>
+#include <Plasma/PluginLoader>
 
-#include <kdeclarative.h>
+#include <KDeclarative/KDeclarative>
+#include <KLocalizedString>
+#include <KWindowSystem>
 
-View::View(const QString &module, QWidget *parent)
-    : QDeclarativeView(parent),
-    m_package(0),
+
+View::View(const QString &module, const QString &package, QWindow *parent)
+    : QQuickView(parent),
     m_settingsRoot(0)
 {
-    // avoid flicker on show
-    setAttribute(Qt::WA_OpaquePaintEvent);
-    setAttribute(Qt::WA_NoSystemBackground);
-    viewport()->setAttribute(Qt::WA_OpaquePaintEvent);
-    viewport()->setAttribute(Qt::WA_NoSystemBackground);
+    setResizeMode(QQuickView::SizeRootObjectToView);
+    QQuickWindow::setDefaultAlphaBuffer(true);
 
-    setResizeMode(QDeclarativeView::SizeRootObjectToView);
+    setIcon(QIcon::fromTheme("preferences-desktop"));
+    setTitle(i18n("Active Settings"));
 
-    KDeclarative kdeclarative;
+    KDeclarative::KDeclarative kdeclarative;
     kdeclarative.setDeclarativeEngine(engine());
     kdeclarative.initialize();
     //binds things like kconfig and icons
     kdeclarative.setupBindings();
 
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    m_package = new Plasma::Package(QString(), "org.kde.active.settings", structure);
-
-    if (!module.isEmpty()) {
-        rootContext()->setContextProperty("startModule", module);
+    m_package = Plasma::PluginLoader::self()->loadPackage("Plasma/Generic");
+    if (!package.isEmpty()) {
+        m_package.setPath(package);
+    } else {
+        m_package.setPath("org.kde.active.settings");
     }
+    setIcon(QIcon::fromTheme(m_package.metadata().icon()));
+    setTitle(m_package.metadata().name());
 
-    const QString qmlFile = m_package->filePath("mainscript");
-    setSource(QUrl::fromLocalFile(m_package->filePath("mainscript")));
+    rootContext()->setContextProperty("startModule", module);
+
+    const QString qmlFile = m_package.filePath("mainscript");
+    //qDebug() << "mainscript: " << QUrl::fromLocalFile(m_package.filePath("mainscript"));
+    setSource(QUrl::fromLocalFile(m_package.filePath("mainscript")));
     show();
 
     onStatusChanged(status());
 
-    //connect(engine(), SIGNAL(signalHandlerException(QScriptValue)), this, SLOT(exception()));
-    connect(this, SIGNAL(statusChanged(QDeclarativeView::Status)),
-            this, SLOT(onStatusChanged(QDeclarativeView::Status)));
+    connect(this, &QQuickView::statusChanged,
+            this, &View::onStatusChanged);
 }
 
 View::~View()
 {
-    delete m_package;
 }
 
 void View::updateStatus()
@@ -79,23 +81,42 @@ void View::updateStatus()
     onStatusChanged(status());
 }
 
-void View::onStatusChanged(QDeclarativeView::Status status)
+void View::onStatusChanged(QQuickView::Status status)
 {
-    //kDebug() << "onStatusChanged";
-    if (status == QDeclarativeView::Ready) {
+    //qDebug() << "onStatusChanged";
+    if (status == QQuickView::Ready) {
         if (!m_settingsRoot) {
-            m_settingsRoot = rootObject()->findChild<QDeclarativeItem*>("settingsRoot");
+            m_settingsRoot = rootObject()->findChild<QQuickItem*>("settingsRoot");
             if (!m_settingsRoot) {
-                kError() << "settingsRoot component not found. :(";
+                qWarning() << "settingsRoot component not found. :(";
             }
+            setupKDBus();
         }
-    } else if (status == QDeclarativeView::Error) {
-        foreach (const QDeclarativeError &e, errors()) {
-            kWarning() << "error in QML: " << e.toString() << e.description();
+    } else if (status == QQuickView::Error) {
+        foreach (const QQmlError &e, errors()) {
+            qWarning() << "error in QML: " << e.toString() << e.description();
         }
-    } else if (status == QDeclarativeView::Loading) {
-        //kDebug() << "Loading.";
+    } else if (status == QQuickView::Loading) {
+        //qDebug() << "Loading.";
     }
 }
 
-#include "view.moc"
+void View::setupKDBus()
+{
+    qDebug() << "setupKDBus";
+    QCoreApplication::setOrganizationDomain("kde.org");
+    KDBusService* service = new KDBusService(KDBusService::Unique, this);
+
+    QObject::connect(service, &KDBusService::activateRequested, this, [=](const QStringList &arguments, const QString &workingDirectory) {
+        qDebug() << "activateRequested" << arguments;
+        parser->parse(arguments);
+        if (parser->isSet("module")) {
+            const QString module = parser->value("module");
+            qDebug() << "Loading module:" << module;
+            QMetaObject::invokeMethod(rootObject(), "loadModule", Q_ARG(QVariant, module));
+            KWindowSystem::activateWindow(winId());
+        }
+        raise();
+    } );
+}
+

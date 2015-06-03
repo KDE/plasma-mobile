@@ -1,0 +1,13 @@
+[Desktop Entry]
+Name=Angelfish Web Browser
+Comment=Mobile web browser
+GenericName=Web Browser
+Encoding=UTF-8
+Icon=internet-web-browser
+Exec=angelfish
+Type=Application
+X-DocPath=angelfish/index.html
+Categories=Qt;KDE;Network;WebBrowser;
+Terminal=false
+MimeType=text/html;
+InitialPreference=10

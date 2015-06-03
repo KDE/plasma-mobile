@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -20,32 +20,32 @@
 
 #ifndef VIEW_H
 #define VIEW_H
-#include <QDeclarativeItem>
-#include <QDeclarativeView>
 
-namespace Plasma
-{
-    class Package;
-}
+#include <QQuickView>
+#include <QCommandLineParser>
 
-class View : public QDeclarativeView
+#include <Plasma/Package>
+
+class View : public QQuickView
 {
     Q_OBJECT
 
 public:
-    explicit View(const QString &url, QWidget *parent = 0 );
+    explicit View(const QString &url, const QString &package, QWindow *parent = 0 );
     ~View();
+    QCommandLineParser *parser;
 
 Q_SIGNALS:
     void titleChanged(const QString&);
 
 private Q_SLOTS:
-    void onStatusChanged(QDeclarativeView::Status status);
+    void onStatusChanged(QQuickView::Status status);
     void updateStatus();
 
 private:
-    Plasma::Package *m_package;
-    QDeclarativeItem* m_settingsRoot;
+    void setupKDBus();
+    Plasma::Package m_package;
+    QQuickItem* m_settingsRoot;
 };
 
 #endif // VIEW_H

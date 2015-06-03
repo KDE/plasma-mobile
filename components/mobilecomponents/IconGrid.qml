@@ -17,19 +17,19 @@
     Boston, MA 02110-1301, USA.
 */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 Item {
     id: main
 
     property Component delegate
     property QtObject model
+
     property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
-    property int delegateWidth: theme.defaultFont.mSize.width * 15
-    property int delegateHeight: theme.defaultIconSize + theme.defaultFont.mSize.height + 8
+    property int delegateWidth: theme.mSize(theme.defaultFont).width * 15
+    property int delegateHeight: theme.mSize(theme.defaultFont).width + units.iconSizes.medium + 8
     property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
@@ -39,10 +39,6 @@ Item {
     function positionViewAtIndex(index)
     {
         iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
-    }
-
-    PlasmaCore.Theme {
-        id:theme
     }
 
     Timer {
@@ -57,6 +53,7 @@ Item {
             }
         }
     }
+
     ListView {
         id: iconView
         objectName: "iconView"
@@ -147,7 +144,7 @@ Item {
                 Rectangle {
                     id: barRectangle
                     color: theme.textColor
-                    opacity: 0.25
+                    opacity: 2.05
                     height: 4
                     radius: 2
                     anchors {

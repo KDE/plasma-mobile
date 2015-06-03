@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011 Sebastian Kügler <sebas@kde.org>                       *
+ *   Copyright 2011-2015 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -22,48 +22,69 @@
 #include <iostream>
 #include <iomanip>
 
-// KDE
+
+// Qt
+#include <QGuiApplication>
+#include <QCommandLineParser>
+#include <QCommandLineOption>
+#include <QDebug>
+
+// Frameworks
 #include <KAboutData>
-#include <KCmdLineArgs>
 #include <KConfigGroup>
-#include <KDebug>
+#include <KLocalizedString>
 #include <KService>
 #include <KServiceTypeTrader>
-
 #include <Plasma/Theme>
 
 // Own
-#include "activesettings.h"
+#include "view.h"
 
 static const char description[] = I18N_NOOP("Plasma Active Settings");
-
 static const char version[] = "2.0";
 static const char HOME_URL[] = "http://plasma-active.org";
 
 int main(int argc, char **argv)
 {
-    KAboutData about("active-settings", 0, ki18n("Plasma Active Settings"), version, ki18n(description),
-                     KAboutData::License_GPL, ki18n("Copyright 2011 Sebastian Kügler"), KLocalizedString(), 0, "sebas@kde.org");
-                     about.addAuthor( ki18n("Sebastian Kügler"), KLocalizedString(), "sebas@kde.org" );
-    KCmdLineArgs::init(argc, argv, &about);
+    QGuiApplication app(argc, argv);
 
-    KService::Ptr service = KService::serviceByDesktopName("active-settings");
-    about.setProgramIconName(service ? service->icon() : "preferences-desktop");
-    KCmdLineOptions options;
-    options.add("+[module]", ki18n( "Settings module to open" ), "startpage");
-    options.add("list", ki18n("Displays a list of known modules"));
+    KLocalizedString::setApplicationDomain("active-settings");
 
-    KCmdLineArgs::addCmdLineOptions(options);
+    // About data
+    KAboutData aboutData("activesettings", i18n("Settings"), version, i18n("Touch-friendly settings application."), KAboutLicense::GPL, i18n("Copyright 2011-2015, Sebastian Kügler"));
+    aboutData.addAuthor(i18n("Sebastian Kügler"), i18n("Maintainer"), "sebas@kde.org");
+    KAboutData::setApplicationData(aboutData);
 
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
+    app.setWindowIcon(QIcon::fromTheme("preferences-system"));
 
-    if (args->isSet("list")) {
-        //listPlugins(Plasma::Applet::listAppletInfo());
-        //kDebug() << "Available modules are:";
+    const static auto _l = QStringLiteral("list");
+    const static auto _m = QStringLiteral("module");
+    const static auto _f = QStringLiteral("fullscreen");
+    const static auto _ui = QStringLiteral("layout");
+
+    QCommandLineOption _list = QCommandLineOption(QStringList() << QStringLiteral("l") << _l,
+                               i18n("List available settings modules"));
+    QCommandLineOption _module = QCommandLineOption(QStringList() << QStringLiteral("m") << _m,
+                                i18n("Settings module to open"), i18n("modulename"));
+    QCommandLineOption _fullscreen = QCommandLineOption(QStringList() << QStringLiteral("f") << _f,
+                                i18n("Start window fullscreen"));
+    QCommandLineOption _layout = QCommandLineOption(QStringList() << _ui,
+                                i18n("Package to use for the UI (default org.kde.active.settings)"), i18n("packagename"));
+
+    QCommandLineParser parser;
+    parser.addOption(_list);
+    parser.addOption(_module);
+    parser.addOption(_fullscreen);
+    parser.addOption(_layout);
+    aboutData.setupCommandLine(&parser);
+
+    parser.process(app);
+    aboutData.processCommandLine(&parser);
+
+    if (parser.isSet(_list)) {
         QString query;
         KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
 
-        //kDebug() << "Found " << services.count() << " modules";
         int nameWidth = 0;
         foreach (const KService::Ptr &service, services) {
             KPluginInfo info(service);
@@ -93,7 +114,6 @@ int main(int argc, char **argv)
             } else if (!service->comment().isEmpty()) {
                 description = service->comment();
             }
-            //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
             std::cout << info.pluginName().toLocal8Bit().data()
                       << ' '
                       << std::setw(nameWidth - info.pluginName().length() + 2)
@@ -103,16 +123,24 @@ int main(int argc, char **argv)
         return 0;
     }
 
-    ActiveSettings app(args);
-    const QString module = args->count() ? args->arg(0) : QString();
+    const QString module = parser.value(_m);
+    QString ui = parser.value(_ui);
 
-    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-plasma-mobile");
+    KConfigGroup cg(KSharedConfig::openConfig("plasmarc"), "Theme-active-settings");
 
-    const QString themeName = cg.readEntry("name", "air-mobile");
-    Plasma::Theme::defaultTheme()->setUseGlobalSettings(false);
-    Plasma::Theme::defaultTheme()->setThemeName(themeName);
+    const QString themeName = cg.readEntry("name", "default");
+    ui = cg.readEntry("package", ui);
 
-    app.newWindow(module);
-    args->clear();
+    Plasma::Theme theme;
+    qDebug() << "Setting theme, package " << themeName << ui;
+    theme.setUseGlobalSettings(false);
+    theme.setThemeName(themeName); // nees to happen after setUseGlobalSettings, since that clears themeName
+
+    auto settingsapp = new View(module, ui);
+    settingsapp->parser = &parser;
+    if (parser.isSet(_fullscreen)) {
+        settingsapp->setVisibility(QWindow::FullScreen);
+    }
+
     return app.exec();
 }

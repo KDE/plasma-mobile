@@ -19,9 +19,6 @@
 
 #include "settingsmodule.h"
 
-#include <kdebug.h>
-#include <KIcon>
-#include <KLocale>
 #include <KService>
 #include <KServiceTypeTrader>
 

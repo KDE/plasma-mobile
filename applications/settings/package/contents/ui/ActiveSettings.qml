@@ -1,6 +1,6 @@
 /***************************************************************************
  *                                                                         *
- *   Copyright 2011,2012 Sebastian Kügler <sebas@kde.org>                  *
+ *   Copyright 2011-2014 Sebastian Kügler <sebas@kde.org>                  *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -18,178 +18,258 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
 
-import QtQuick 1.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.qtextracomponents 0.1
-import org.kde.active.settings 0.1 as ActiveSettings
+import QtQuick 2.2
 
-Image {
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kquickcontrolsaddons 2.0
+
+import org.kde.active.settings 2.0 as ActiveSettings
+
+Rectangle {
     id: rootItem
-    source: "image://appbackgrounds/standard"
-    fillMode: Image.Tile
-    asynchronous: true
-    width: 100
-    height: 360
-    anchors.margins: 8
 
-    PlasmaCore.Theme {
-        id: theme
+    width: 400
+    height: 600
+    color: theme.backgroundColor
+
+    property bool loading: false
+    property bool compactMode: width < units.gridUnit * 30
+
+    property string currentModule: ""
+
+    onCurrentModuleChanged: {
+        if (rootItem.compactMode) {
+            appBackground.x = - rootItem.width
+        }
     }
 
-    Item {
-        id: settingsRoot
-        objectName: "settingsRoot"
-        state: "expanded"
-        anchors.fill: parent
+    onCompactModeChanged: {
+        if (!compactMode) {
+            appBackground.x = 0;
+        }
+    }
 
-        signal loadPlugin(string module);
+    function loadModule(mod) {
+        print("Loading module." + mod);
+        rootItem.currentModule = mod;
+        settingsItem.module = mod;
+    }
 
-        Image {
-            id: modulesList
-            source: "image://appbackgrounds/contextarea"
-            fillMode: Image.Tile
-            z: 800
+    Image {
+        id: appBackground
+        source: "image://appbackgrounds/standard"
+        fillMode: Image.Tile
+        asynchronous: true
+        anchors {
+            top: parent.top
+            bottom: toolBar.top
+        }
+        width: rootItem.compactMode ? rootItem.width * 2 : rootItem.width
+        Behavior on x {
+            enabled: rootItem.compactMode
+            PropertyAnimation {
+                duration: units.shortDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
 
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            anchors.left: parent.left
-            width: parent.width/4
+        Item {
+            id: settingsRoot
+            objectName: "settingsRoot"
+            state: "expanded"
+            anchors.fill: parent
+
+            property bool loading: false
+
+            signal loadPlugin(string module);
+
+            AppHeader {
+                id: header
+                anchors {
+                    margins: units.gridUnit
+                    bottomMargin: 0
+                    top: parent.top
+                    left: modulesList.right
+                    right: settingsItem.right
+                }
+            }
+
+            Item {
+                id: navheader
+                visible: compactMode
+
+//                 Rectangle {
+//                     color: "orange";
+//                     opacity: 0.3
+//                     height: 60;
+//                     anchors { left: parent.left; right: parent.right }
+//                 }
+
+
+                height: childrenRect.height
+                anchors {
+                    margins: units.gridUnit
+                    bottomMargin: 0
+                    top: parent.top
+                    left: parent.left
+                    right: modulesList.right
+                }
+                PlasmaCore.IconItem {
+                    id: topIcon
+                    width: units.gridUnit * 2
+                    height: width
+                    opacity: loadingIndicator.running ? 0 : 1.0
+                    Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
+                    source: "preferences-desktop"
+                    anchors {
+                        verticalCenter: title.verticalCenter
+                        right: parent.right
+                        margins: units.gridUnit
+                        rightMargin: 0
+                    }
+                }
+
+                PlasmaComponents.BusyIndicator {
+                    id: loadingIndicator
+                    anchors.fill: topIcon
+                    opacity: running ? 1.0 : 0
+                    Behavior on opacity { NumberAnimation { duration: units.shortDuration } }
+                    running: settingsRoot.loading
+                }
+
+                PlasmaExtras.Title {
+                    id: title
+                    anchors {
+                        left: parent.left
+                        right: topIcon.left
+                    }
+                    elide: Text.ElideRight
+                    text: i18n("Settings")
+                }
+
+                PlasmaCore.SvgItem {
+                    svg: PlasmaCore.Svg {imagePath: "widgets/line"}
+                    elementId: "horizontal-line"
+                    height: naturalSize.height
+                    anchors {
+                        top: title.bottom
+                        topMargin: units.gridUnit / 2
+                        left: parent.left
+                        right: parent.right
+                        leftMargin: -units.gridUnit
+                        rightMargin: -units.gridUnit
+                    }
+                }
+            }
 
             Image {
-                source: "image://appbackgrounds/shadow-left"
+                id: modulesList
+                source: "image://appbackgrounds/contextarea"
                 fillMode: Image.Tile
-                anchors {
-                    right: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                    rightMargin: -1
+                z: 800
+
+                property alias currentIndex: mlist.currentIndex
+
+                anchors.top: compactMode ? navheader.bottom : parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                width: rootItem.compactMode ? rootItem.width : Math.min(units.gridUnit * 15, parent.width/3)
+
+                Image {
+                    source: "image://appbackgrounds/shadow-left"
+                    fillMode: Image.Tile
+                    anchors {
+                        right: parent.right
+                        top: parent.top
+                        bottom: parent.bottom
+                        rightMargin: -1
+                    }
+                }
+
+                ModulesList {
+                    id: mlist
+                    anchors.fill: parent
                 }
             }
 
             Component {
-                id: settingsModuleDelegate
-                PlasmaComponents.ListItem {
-                    id: delegateItem
-                    height: 64
-                    width: parent ? parent.width : 100
-                    anchors.margins: 20
-                    enabled: true
-                    checked: listView.currentIndex == index
-
-                    QIconItem {
-                        id: iconItem
-                        width: 48
-                        height: 32
-                        icon: QIcon(iconName)
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.rightMargin: 8
-                    }
-
-                    PlasmaExtras.Heading {
-                        id: textItem
-                        text: name
-                        level: 4
-                        elide: Text.ElideRight
-                        anchors.bottom: parent.verticalCenter
-                        anchors.left: iconItem.right
-                        anchors.right: parent.right
-                    }
-
-                    PlasmaComponents.Label {
-                        id: descriptionItem
-                        text: description
-                        font.pointSize: theme.defaultFont.pointSize -1
-                        opacity: 0.6
-                        elide: Text.ElideRight
-                        anchors.top: parent.verticalCenter
-                        anchors.left: iconItem.right
-                        anchors.right: parent.right
-                    }
-
-                    onClicked: {
-                        listView.currentIndex = index
-                        settingsItem.module = module
-                    }
-
-                    onPressAndHold: {
-                        listView.currentIndex = index
-                        settingsItem.module = module
+                id: initial_page
+                Item {
+                    visible: startModule == ""
+                    anchors { fill: parent; margins: 80; }
+                    PlasmaCore.IconItem {
+                        source: "preferences-desktop"
+                        anchors { top: parent.top; right: parent.right; }
+                        opacity: 0.1
+                        width: 256
+                        height: width
                     }
                 }
             }
 
-            ActiveSettings.SettingsModulesModel {
-                id: settingsModulesModel
-                onSettingsModulesChanged: {
-                    // when the modules are loaded, we need to ensure that
-                    // the list has the correct item loaded
-                    var module;
-                    if (settingsItem.module) {
-                        module = settingsItem.module
-                    } else if (typeof(startModule) != "undefined") {
-                        module = startModule
-                    }
+            ModuleItem {
+                id: settingsItem
 
-                    if (module) {
-                        var index = 0;
-                        var numModules = settingsModules.length
-                        var i = 0
-                        while (i < numModules) {
-                            if (settingsModules[i].module == module) {
-                                listView.currentIndex = i;
-                                break
-                            }
-                            ++i
-                        }
-                    }
-                }
-            }
-
-            ListView {
-                id: listView
-                currentIndex: -1
-                anchors.fill: parent
-                clip: true
-                interactive: false
-                model: settingsModulesModel.settingsModules
-                delegate: settingsModuleDelegate
-            }
-        }
-
-        Component {
-            id: initial_page
-            Item {
-                visible: startModule == ""
-                anchors { fill: parent; margins: 80; }
-                QIconItem {
-                    icon: QIcon("preferences-desktop")
-                    anchors { top: parent.top; right: parent.right; }
-                    opacity: 0.1
-                    width: 256
-                    height: width
+                anchors {
+                    margins: 20
+                    top: header.bottom
+                    bottom: parent.bottom
+                    left: modulesList.right
+                    right: parent.right
                 }
             }
         }
 
-        ActiveSettings.SettingsItem {
-            id: settingsItem
-            initialPage: initial_page
-            anchors {
-                margins: 20
-                top: parent.top
-                bottom: parent.bottom
-                left: modulesList.right
-                right: parent.right
+        Component.onCompleted: {
+            print("ActiveSettings Completed.");
+            if (startModule != "") {
+                loadModule(startModule);
+            }
+        }
+    }
+    PlasmaComponents.ToolBar {
+        id: toolBar
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        visible: rootItem.compactMode
+        opacity: enabled ? 1 : 0
+        Behavior on opacity { NumberAnimation {} }
+        enabled: appBackground.x < 0
+        tools: Row {
+            PlasmaComponents.ToolButton {
+                iconSource: "go-previous"
+                onClicked: {
+                    rootItem.currentModule = "";
+                    appBackground.x = 0;
+                    //modulesList.currentIndex = -1
+                    rootItem.state = "navigation";
+                }
             }
         }
     }
 
-    Component.onCompleted: {
-        if (typeof(startModule) != "undefined") {
-            settingsItem.module = startModule;
-        }
+    onStateChanged: {
+        print("state: " + state);
     }
+
+    states: [
+        State {
+            name: "navigation"
+            when: (compactMode && appBackground.x == 0) || (rootItem.currentModule == "")
+            //PropertyChanges { target: rootItem; currentModule: "" }
+//             PropertyChanges { target: moduleItem; opacity: 0.0 }
+        },
+        State {
+            name: "module"
+            when: (compactMode && appBackground.x != 0) || (rootItem.currentModule != "")
+//             PropertyChanges { target: modulesList; opacity: 0.0}
+//             PropertyChanges { target: moduleItem; opacity: 1.0 }
+        }
+    ]
+
 }

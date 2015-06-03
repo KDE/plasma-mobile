@@ -21,21 +21,22 @@
 
 #include <QPainter>
 
-#include <KDebug>
+#include <QDebug>
 
-#include <Plasma/PaintUtils>
 #include <Plasma/Svg>
+#include <Plasma/Theme>
 
-TextEffects::TextEffects(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+TextEffects::TextEffects(QQuickItem *parent)
+    : QQuickItem(parent),
       m_radius(3),
       m_horizontalOffset(0),
       m_verticalOffset(0),
       m_effect(TextEffects::ShadowedText),
       m_texture(0)
 {
-    setFlag(QGraphicsItem::ItemHasNoContents, false);
-    m_font = Plasma::Theme::defaultTheme()->font(Plasma::Theme::DesktopFont);
+    setFlag(QQuickItem::ItemHasContents, false);
+    //FIXME Find a way to setup the font
+    //m_font = Plasma::Theme::defaultTheme()->setFont(QFont("Sans"));
 }
 
 TextEffects::~TextEffects()
@@ -222,7 +223,8 @@ void TextEffects::setEffect(TextEffects::Effect effect)
 
 void TextEffects::refreshPixmap()
 {
-    switch (m_effect) {
+    //FIXME make it work
+    /*switch (m_effect) {
     case TexturedText:
         if (m_texture) {
             m_pixmap = Plasma::PaintUtils::texturedText(m_text, m_font, m_texture);
@@ -233,12 +235,11 @@ void TextEffects::refreshPixmap()
         QColor shadowColor = qGray(m_color.red(), m_color.green(), m_color.blue()) > 120?Qt::black:Qt::white;
         m_pixmap = Plasma::PaintUtils::shadowText(m_text, m_font, m_color, shadowColor, QPoint(m_horizontalOffset, m_verticalOffset), m_radius);
         break;
-    }
+    }*/
 }
 
-void TextEffects::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
+void TextEffects::paint(QPainter *painter, QWidget *widget)
 {
-    Q_UNUSED(option);
     Q_UNUSED(widget);
 
     //FIXME: better control of the halo strength

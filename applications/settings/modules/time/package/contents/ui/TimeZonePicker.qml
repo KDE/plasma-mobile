@@ -18,12 +18,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.active.settings 0.1
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.2
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.active.settings 2.0
+import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: timeZonePicker
@@ -74,7 +74,7 @@ Item {
         }
         onTextChanged: {
             //print("update filter" + text);
-            //timeSettings.timeZoneFilterChanged(text);
+            timeSettings.timeZoneFilterChanged(text);
             filterModel.filterRegExp = ".*"+text+".*"
         }
     }
@@ -83,7 +83,7 @@ Item {
         id: filterModel
         sourceModel: timeSettings.timeZonesModel
         filterRole: "display"
-        //filterRegExp: ".*"+tzFilter.text+".*"
+        filterRegExp: ".*"+tzFilter.text+".*"
         sortRole: "display"
         sortOrder: "AscendingOrder"
 

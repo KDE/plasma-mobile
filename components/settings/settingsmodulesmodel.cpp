@@ -22,16 +22,17 @@
 
 #include "settingsmodulesmodel.h"
 
-#include <QDeclarativeContext>
-#include <QDeclarativeEngine>
+#include <QQmlContext>
+#include <QQmlEngine>
 #include <QTimer>
 
-#include <KIcon>
 #include <KPluginInfo>
 #include <KService>
 #include <KServiceTypeTrader>
+#include <KSharedConfig>
+#include <KPluginMetaData>
 
-#include "kdebug.h"
+#include <QDebug>
 
 class SettingsModulesModelPrivate {
 
@@ -48,14 +49,14 @@ public:
 };
 
 
-SettingsModulesModel::SettingsModulesModel(QDeclarativeComponent *parent)
-    : QDeclarativeComponent(parent),
+SettingsModulesModel::SettingsModulesModel(QQmlComponent *parent)
+    : QQmlComponent(parent),
       d(new SettingsModulesModelPrivate(this))
 {
-    kDebug() << "Creating SettingsModel";
+    qDebug() << "Creating SettingsModel";
     d->populateTimer->setInterval(0);
     d->populateTimer->setSingleShot(true);
-    connect(d->populateTimer, SIGNAL(timeout()), this, SLOT(populate()));
+    connect(d->populateTimer, &QTimer::timeout, this, &SettingsModulesModel::populate);
     d->populateTimer->start();
 }
 
@@ -64,9 +65,9 @@ SettingsModulesModel::~SettingsModulesModel()
     delete d;
 }
 
-QDeclarativeListProperty<SettingsModule> SettingsModulesModel::settingsModules()
+QQmlListProperty<SettingsModule> SettingsModulesModel::settingsModules()
 {
-    return QDeclarativeListProperty<SettingsModule>(this, d->settingsModules);
+    return QQmlListProperty<SettingsModule>(this, d->settingsModules);
 }
 
 QString SettingsModulesModel::application() const
@@ -76,7 +77,7 @@ QString SettingsModulesModel::application() const
 
 void SettingsModulesModel::setApplication(const QString &appName)
 {
-    kDebug() << "setting application to" << appName;
+    qDebug() << "setting application to" << appName;
     if (d->appName != appName) {
         d->appName = appName;
         emit applicationChanged();
@@ -101,10 +102,10 @@ bool compareModules(const SettingsModule *l, const SettingsModule *r)
 
     // base it on the category weighting; if neither has a category weight the compare
     // strings
-    KConfigGroup orderConfig(KGlobal::config(), "SettingsCategoryWeights");
+    KConfigGroup orderConfig(KSharedConfig::openConfig(), "SettingsCategoryWeights");
     const int lG = orderConfig.readEntry(l->category(), -1);
     const int rG = orderConfig.readEntry(r->category(), -1);
-    //kDebug() << l->name() << l->category() << lG << " vs " << r->name() << r->category() << rG;
+    //qDebug() << l->name() << l->category() << lG << " vs " << r->name() << r->category() << rG;
 
     if (lG < 0) {
         if (rG > 0) {
@@ -130,7 +131,7 @@ bool compareModules(const SettingsModule *l, const SettingsModule *r)
 void SettingsModulesModel::populate()
 {
     if (d->isPopulated) {
-        kDebug() << "already populated.";
+        qDebug() << "already populated.";
         return;
     }
 
@@ -145,7 +146,7 @@ void SettingsModulesModel::populate()
 
     KService::List services = KServiceTypeTrader::self()->query("Active/SettingsModule", constraint);
     QSet<QString> seen;
-    //kDebug() << "Found " << services.count() << " modules";
+    //qDebug() << "Found " << services.count() << " modules";
     foreach (const KService::Ptr &service, services) {
         if (service->noDisplay()) {
             continue;
@@ -170,6 +171,17 @@ void SettingsModulesModel::populate()
         item->setIconName(service->icon());
         item->setModule(info.pluginName());
         item->setCategory(info.category());
+        d->settingsModules.append(item);
+    }
+
+    for (auto plugin : KPluginLoader::findPlugins("kcms")) {
+        SettingsModule* item = new SettingsModule(this);
+
+        item->setName(plugin.name());
+        item->setDescription(plugin.description());
+        item->setIconName(plugin.iconName());
+        item->setModule(plugin.pluginId());
+        item->setCategory(plugin.category());
         d->settingsModules.append(item);
     }
 

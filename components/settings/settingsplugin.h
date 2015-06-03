@@ -1,5 +1,5 @@
 /*
- *   Copyright 2011 by Sebastian Kügler <sebas@kde.org>
+ *   Copyright 2011-2014 by Sebastian Kügler <sebas@kde.org>
  * 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -20,17 +20,19 @@
 #ifndef SETTINGSPLUGIN_H
 #define SETTINGSPLUGIN_H
 
-#include <QDeclarativeExtensionPlugin>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-
-class SettingsPlugin : public QDeclarativeExtensionPlugin
+class SettingsPlugin : public QQmlExtensionPlugin
 {
     Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
 public:
+    //void initializeEngine(QQmlEngine *engine, const char *uri);
     void registerTypes(const char *uri);
 };
 
-Q_EXPORT_PLUGIN2(Settingsplugin, SettingsPlugin)
-
 #endif
+
+

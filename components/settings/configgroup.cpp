@@ -23,7 +23,8 @@
 #include <QtCore/QTimer>
 #include <KConfig>
 #include <KConfigGroup>
-#include <KDebug>
+#include <KSharedConfig>
+#include <QDebug>
 
 namespace Plasma
 {
@@ -46,27 +47,27 @@ public:
     KSharedConfigPtr config;
     KConfigGroup *configGroup;
     QString file;
-    QTimer *synchTimer;
+    QTimer *syncTimer;
     QString group;
 };
 
 
-ConfigGroup::ConfigGroup(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent),
+ConfigGroup::ConfigGroup(QQuickItem *parent)
+    : QQuickItem(parent),
       d(new ConfigGroupPrivate(this))
 {
     // Delay and compress everything within 5 seconds into one sync
-    d->synchTimer = new QTimer(this);
-    d->synchTimer->setSingleShot(true);
-    d->synchTimer->setInterval(1500);
-    connect(d->synchTimer, SIGNAL(timeout()), SLOT(sync()));
+    d->syncTimer = new QTimer(this);
+    d->syncTimer->setSingleShot(true);
+    d->syncTimer->setInterval(1500);
+    connect(d->syncTimer, &QTimer::timeout, this, &ConfigGroup::sync);
 }
 
 ConfigGroup::~ConfigGroup()
 {
-    if (d->synchTimer->isActive()) {
-        //kDebug() << "SYNC......";
-        d->synchTimer->stop();
+    if (d->syncTimer->isActive()) {
+        qDebug() << "SYNC......";
+        d->syncTimer->stop();
         d->configGroup->sync();
     }
 
@@ -104,6 +105,7 @@ void ConfigGroup::setGroup(const QString& groupname)
         return;
     }
     d->group = groupname;
+    qDebug() << "Set group name: " << groupname;
     readConfigFile();
     emit groupChanged();
     emit keyListChanged();
@@ -143,11 +145,13 @@ bool ConfigGroup::readConfigFile()
         return true;
     } else {
         if (d->file.isEmpty()) {
-            kWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
+            //qWarning() << "Could not find KConfig Parent: specify a file or parent to another ConfigGroup";
             return false;
         }
         d->config = KSharedConfig::openConfig(d->file);
         d->configGroup = new KConfigGroup(d->config, d->group);
+        qDebug() << "Opened config" << d->configGroup->entryMap();
+
         return true;
     }
 }
@@ -161,7 +165,7 @@ bool ConfigGroup::writeEntry(const QString& key, const QVariant& value)
     }
 
     d->configGroup->writeEntry(key, value);
-    d->synchTimer->start();
+    d->syncTimer->start();
     return true;
 }
 
@@ -171,19 +175,20 @@ QVariant ConfigGroup::readEntry(const QString& key)
         return QVariant();
     }
     const QVariant value = d->configGroup->readEntry(key, QVariant(""));
-    //kDebug() << " reading setting: " << key << value;
+    qDebug() << " reading setting: " << key << value;
     return value;
 }
 
 void ConfigGroup::deleteEntry(const QString& key)
 {
     d->configGroup->deleteEntry(key);
+    d->syncTimer->start();
 }
 
 void ConfigGroup::sync()
 {
     if (d->configGroup) {
-        //kDebug() << "synching config...";
+        qDebug() << "synching config...";
         d->configGroup->sync();
     }
 }

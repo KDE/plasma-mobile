@@ -17,60 +17,61 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.dirmodel 0.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.baloo 0.1 as Baloo
+import org.kde.activities 0.1 as Activities
+import org.kde.draganddrop 2.0
+import org.kde.plasma.private.folder 0.1 as Folder
+import org.kde.kio 1.0 as Kio
 
-
-Image {
+Rectangle {
     id: fileBrowserRoot
 
     //BEGIN properties
     width: 360
     height: 360
-    
-    property QtObject model: metadataModel
-    
+
+    property QtObject model: balooDataModel
+
     objectName: "fileBrowserRoot"
-    source: "image://appbackgrounds/contextarea"
-    fillMode: Image.Tile
+    color: theme.backgroundColor
+    Rectangle {
+        anchors.fill: parent
+        color: theme.highlightColor
+        opacity: 0.05
+    }
     state: "browsing"
     //END properties
 
     //BEGIN model
-    PlasmaCore.DataSource {
-        id: metadataSource
-        engine: "org.kde.active.metadata"
-        //connectedSources: []
+    PlasmaCore.SortFilterModel {
+        id: balooDataModel
+        sourceModel: Baloo.BalooDataModel {}
     }
 
-    MetadataModels.MetadataModel {
-        id: metadataModel
-        queryProvider: MetadataModels.ResourceQueryProvider {
-            sortBy: [userTypes.sortFields[metadataModel.queryProvider.resourceType]]
-            //This query string part is set by the user in the search field
-            property string userQueryString
-            //this query string part may be set by Browser addons
-            property string extraQueryString
-            queryString: userQueryString + (extraQueryString ? (" " + extraQueryString) : "")
-            resourceType: exclusiveResourceType
-            mimeTypes: exclusiveMimeTypes
+    PlasmaCore.SortFilterModel {
+        id: activitySource
+        sourceModel: Activities.ResourceModel {
+            shownAgents: ":any"
+            shownActivities: ":current"
         }
     }
 
-    PlasmaCore.DataSource {
-        id: activitySource
-        engine: "org.kde.activities"
-        connectedSources: ["Status"]
+    Kio.KRun {
+        id: krun
     }
 
-    DirModel {
-        id: dirModel
+    PlasmaCore.SortFilterModel {
+        id: folderModel
+        sourceModel: Folder.FolderModel {
+            previews: false
+        }
     }
+
     PlasmaCore.DataSource {
         id: hotplugSource
         engine: "hotplug"
@@ -82,29 +83,16 @@ Image {
         connectedSources: hotplugSource.sources
         onDataChanged: {
             //access it here due to the async nature of the dataengine
-            if (resultsGrid.model == dirModel) {
-                var udi
-                var path
-
-                for (var i in devicesSource.connectedSources) {
-                    udi = devicesSource.connectedSources[i]
-                    path = devicesSource.data[udi]["File Path"]
-                    print(udi+dirModel.url.indexOf(udi))
-                    if (dirModel.url.indexOf(path) > 2) {
-                        resourceBrowser.currentUdi = udi
-                        break
-                    }
-                }
-            } else if (resultsGrid.model != dirModel && devicesSource.data[resourceBrowser.currentUdi]["File Path"] != "") {
-                dirModel.url = devicesSource.data[resourceBrowser.currentUdi]["File Path"]
-
-                fileBrowserRoot.model = dirModel
+            for (var i in devicesSource.connectedSources) {
+                var udi = devicesSource.connectedSources[i]
+                var path = devicesSource.data[udi]["File Path"]
+                folderModel.sourceModel.url =path
             }
         }
     }
     //END model
 
-    //BEGIN functions    
+    //BEGIN functions
     function goBack() {
         toolBar.y = 0;
 
@@ -127,21 +115,21 @@ Image {
             horizontalCenterOffset: - Math.round(parent.width / 8)
         }
         x: y
-        source: "background-logo.png"
+        source: Qt.resolvedUrl("../images/background-logo.png")
     }
 
     PlasmaComponents.ToolBar {
         id: toolBar
-        height: tools && tools.item !== null ? theme.hugeIconSize : 0
+        height: tools && tools.item !== null ? units.iconSizes.huge : 0
     }
 
     function openResource(data)
     {
-        if (data.mimeType == "inode/directory") {
-            dirModel.url = data.url
-            fileBrowserRoot.model = dirModel
+        if(data.isDir) {
+            folderModel.sourceModel.url = data.url
         } else if (!mainStack.busy) {
-            var packageName = application.viewerPackageForType(data.mimeType)
+            //TODO Port it together with the imageviewer
+            /*var packageName = application.viewerPackageForType(data.mimeType)
             print("Package for mimetype " + data.mimeType + " " + packageName)
             if (packageName) {
                 partPackage.name = packageName
@@ -152,25 +140,13 @@ Image {
                 }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
                 part.loadResource(data)
-            } else {
-                Qt.openUrlExternally(data.url)
-            }
+            } */
+            krun.openUrl(data.url)
         }
     }
     //END functions
 
     //BEGIN non-UI components
-    PlasmaExtras.ResourceInstance {
-        id: resourceInstance
-    }
-
-    MobileComponents.Package {
-        id: partPackage
-    }
-
-    MetadataModels.MetadataUserTypes {
-        id: userTypes
-    }
 
     Timer {
         interval: 500
@@ -182,13 +158,13 @@ Image {
             mainStack.push(Qt.createComponent("Browser.qml"))
         }
     }
-    
+
     //FIXME: this is due to global vars being binded after the parse is done, do the 2 steps parsing
     Timer {
         interval: 100
         running: true
         onTriggered: {
-            if (application.startupArguments.length > 0) {
+            /*if (application.startupArguments.length > 0) {
                 var path = application.startupArguments[0]
 
                 if (startupMimeType == "inode/directory") {
@@ -197,7 +173,7 @@ Image {
                     }
                 }
                 openResource({"url": path, "mimeType": startupMimeType})
-            }
+            }*/
         }
     }
     //END non-UI components
@@ -217,11 +193,11 @@ Image {
         }
     }
 
-    PlasmaComponents.BusyIndicator {
-        anchors.centerIn: mainStack
-        visible: metadataModel.running
-        running: visible
-    }
+    //PlasmaComponents.BusyIndicator {
+   //     anchors.centerIn: mainStack
+        //visible: balooDataModel.running
+        //running: visible
+    //}
 
     //END UI components
 }

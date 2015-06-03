@@ -1,72 +1,23 @@
-find_package(NepomukCore REQUIRED)
 
-include_directories(
-    ${CMAKE_BINARY_DIR}/dataengines/metadata/ontologies
-    ${CMAKE_CURRENT_BINARY_DIR}
-    ${CMAKE_CURRENT_BINARY_DIR}/ontologies
-    ${CMAKE_CURRENT_SOURCE_DIR}/adblock
-    ${NEPOMUK_CORE_INCLUDE_DIR}
-   )
+# These are only needed here, consider porting away from both!
+find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Gui WebEngine)
 
-add_subdirectory(ontologies)
-
-set(active-webbrowser_SRCS
+set(angelfish_SRCS
     main.cpp
-    activewebbrowser.cpp
-    activebrowserwindow.cpp
-    kdeclarativewebview.cpp
-    completionitem.cpp
-    completionmodel.cpp
-    nepomukhelper.cpp
-    history.cpp
+    browsermanager.cpp
+    urlmodel.cpp
     view.cpp
-    networkaccessmanager.cpp
-    websslinfo.cpp
-
-    networkaccessmanager.cpp
-    adblock/adblockhostmatcher.cpp
-    adblock/adblockmanager.cpp
-    adblock/adblocknetworkreply.cpp
-    adblock/adblockrule.cpp
-    adblock/adblockrulefallbackimpl.cpp
-    adblock/adblockrulenullimpl.cpp
-    adblock/adblockruletextmatchimpl.cpp
-    #adblock/adblockwidget.cpp
 )
 
-soprano_add_ontology( webbrowser_SRCS
-  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/nuao.trig"
-  "NUAO"
-  "Nepomuk2::Vocabulary"
-  "trig")
+add_executable(angelfish ${angelfish_SRCS})
 
-soprano_add_ontology( SRCS
-  "${SHAREDDESKTOPONTOLOGIES_ROOT_DIR}/nepomuk/ndo.trig"
-  "NDO"
-  "Nepomuk2::Vocabulary"
-  "trig")
-
-#KDE4_ADD_UI_FILES( active-webbrowser_SRCS
-#    adblock/settings_adblock.ui
-#)
-
-kde4_add_executable(active-webbrowser ${active-webbrowser_SRCS})
-
-target_link_libraries(active-webbrowser
-    ${QT_QTWEBKIT_LIBRARY}
-    ${QT_QTDECLARATIVE_LIBRARY}
-    ${QT_QTOPENGL_LIBRARY}
-    ${KDE4_KDEUI_LIBS}
-    ${KDE4_KIO_LIBS}
-    ${KDE4_PLASMA_LIBS}
-    ${KDE4_KDEWEBKIT_LIBRARY}
-    ${NEPOMUK_CORE_LIBRARY}
-    ${NEPOMUK_QUERY_LIBRARIES}
-    ${KACTIVITIES_LIBRARY}
-    ${KDECLARATIVE_LIBRARIES}
-    ontologies
+target_link_libraries(angelfish
+    Qt5::Quick
+    Qt5::Gui
+    Qt5::WebEngine
+    KF5::Plasma
+    KF5::Declarative
+    KF5::I18n
 )
 
-install(FILES infopage.html DESTINATION ${DATA_INSTALL_DIR}/active-webbrowser )
-
-install( TARGETS active-webbrowser ${INSTALL_TARGETS_DEFAULT_ARGS} )
+install( TARGETS angelfish ${INSTALL_TARGETS_DEFAULT_ARGS} )

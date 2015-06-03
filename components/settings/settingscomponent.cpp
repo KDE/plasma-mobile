@@ -20,31 +20,39 @@
 #include "settingscomponent.h"
 #include "settingsmodule.h"
 
+#include <QQmlEngine>
+#include <QQmlComponent>
 
-#include <QDeclarativeEngine>
-#include <QDeclarativeComponent>
-
+#include <KPluginTrader>
 #include <KService>
 #include <KServiceTypeTrader>
-#include <KDebug>
+#include <QDebug>
+#include <KPluginMetaData>
 
 #include <Plasma/Package>
+#include <Plasma/PluginLoader>
+#include <kquickaddons/configmodule.h>
 
 class SettingsComponentPrivate {
 
 public:
     QString module;
+    QString icon;
     SettingsModule *settingsModule;
-    Plasma::Package* package;
+    KQuickAddons::ConfigModule *kcm;
+    bool valid : 1;
+    Plasma::Package package;
 };
 
 
-SettingsComponent::SettingsComponent(QDeclarativeItem *parent)
-    : QDeclarativeItem(parent)
+SettingsComponent::SettingsComponent(QQuickItem *parent)
+    : QQuickItem(parent)
 {
     d = new SettingsComponentPrivate;
-    d->package = 0;
+    d->package = Plasma::PluginLoader::self()->loadPackage(QStringLiteral("Plasma/Generic"));
     d->settingsModule = 0;
+    d->kcm = 0;
+    d->valid = false;
 }
 
 SettingsComponent::~SettingsComponent()
@@ -53,28 +61,28 @@ SettingsComponent::~SettingsComponent()
 
 void SettingsComponent::loadModule(const QString &name)
 {
-
-    delete d->package;
     delete d->settingsModule;
     d->settingsModule = 0;
+    delete d->kcm;
+    d->kcm = 0;
 
-    Plasma::PackageStructure::Ptr structure = Plasma::PackageStructure::load("Plasma/Generic");
-    d->package = new Plasma::Package(QString(), name, structure);
-    KGlobal::locale()->insertCatalog("plasma_package_" + name);
+    d->package.setPath(name);
+    //KGlobal::locale()->insertCatalog("plasma_package_" + name);
+#warning "Re-enable translation catalog, port insertCatalog"
     QString pluginName = name;
     QString query;
     if (pluginName.isEmpty()) {
-        //kDebug() << "Not loading plugin ..." << pluginName;
+        //qDebug() << "Not loading plugin ..." << pluginName;
         return;
     }
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
     KService::List offers = KServiceTypeTrader::self()->query("Active/SettingsModule", query);
     KService::List::const_iterator iter;
     for(iter = offers.constBegin(); iter < offers.constEnd(); ++iter) {
-       QString error;
-       KService::Ptr service = *iter;
+        QString error;
+        KService::Ptr service = *iter;
 
-        KPluginFactory *factory = KPluginLoader(service->library()).factory();
+        //KPluginFactory *factory = KPluginLoader(service->library()).factory();
 
         QString description;
         if (!service->genericName().isEmpty() && service->genericName() != service->name()) {
@@ -82,32 +90,100 @@ void SettingsComponent::loadModule(const QString &name)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
+        qDebug() << "Found plugin" << description << service->library();
+
+
         d->settingsModule = new SettingsModule(this);
-        if (factory) {
+
+        if (!service->library().isEmpty()) {
             // Load binary plugin
-            const QString query = QString("exist Library and Library == '%1'").arg(service->library());
-            kDebug() << "loading binary plugin from query: " << service->name();
-            KServiceTypeTrader::createInstanceFromQuery<QObject>("Active/SettingsModule", query, d->settingsModule);
+            qDebug() << "\n\nloading binary plugin from query: " << service->name();
+            KPluginLoader loader(KPluginLoader::findPlugin("active/settingsmodule/"+service->library()));
+            KPluginFactory* factory = loader.factory();
+            if (!factory) {
+                qWarning() << "Error loading plugin:" << loader.errorString();
+            } else {
+                QObject* obj = factory->create<QObject>();
+                if (!obj) {
+                    qWarning() << "Error creating object from plugin" << loader.fileName();
+                    d->valid = true;
+                }
+            }
         } else {
-            kDebug() << "QML only plugin";
+            qDebug() << "QML only plugin";
         }
 
-
-        connect(d->settingsModule, SIGNAL(nameChanged()), SIGNAL(nameChanged()));
-        connect(d->settingsModule, SIGNAL(descriptionChanged()), SIGNAL(descriptionChanged()));
+        connect(d->settingsModule, &SettingsModule::nameChanged, this, &SettingsComponent::nameChanged);
+        connect(d->settingsModule, &SettingsModule::descriptionChanged,
+                this, &SettingsComponent::descriptionChanged);
 
         d->settingsModule->setName(service->name());
+        setIcon(service->icon());
         d->settingsModule->setDescription(description);
         d->settingsModule->setModule(pluginName);
 
        if (d->settingsModule) {
-           kDebug() << "Successfully loaded plugin:" << service->name();
+           //qDebug() << "Successfully loaded plugin:" << service->name();
            //emit pluginLoaded(plugin);
        } else {
-           kDebug() << error;
+           qDebug() << error;
        }
     }
 
+   /* if (!d->settingsModule) {
+        return;
+    }*/
+
+    //qml-kcm mode
+    KPluginLoader loader(KPluginLoader::findPlugin(QLatin1String("kcms/") + name));
+
+    KPluginFactory* factory = loader.factory();
+    if (!factory) {
+        qWarning() << "Error loading KCM plugin:" << loader.errorString();
+    } else {
+        d->kcm = factory->create<KQuickAddons::ConfigModule >();
+        if (!d->kcm) {
+            qWarning() << "Error creating object from plugin" << loader.fileName();
+            d->valid = false;
+            emit validChanged();
+            return;
+        }
+
+        d->settingsModule = new SettingsModule(this);
+        connect(d->settingsModule, &SettingsModule::nameChanged, this, &SettingsComponent::nameChanged);
+        connect(d->settingsModule, &SettingsModule::descriptionChanged,
+                this, &SettingsComponent::descriptionChanged);
+        d->kcm->mainUi()->setParentItem(this);
+
+        {
+            //set anchors
+            QQmlExpression expr(QtQml::qmlContext(d->kcm->mainUi()), d->kcm->mainUi(), "parent");
+            QQmlProperty prop(d->kcm->mainUi(), "anchors.fill");
+            prop.write(expr.evaluate());
+        }
+
+        d->kcm->load();
+        //instant apply
+        connect(d->kcm, &KQuickAddons::ConfigModule::needsSaveChanged, [=]() {
+            if (d->kcm->needsSave()) {
+                d->kcm->save();
+            }
+        });
+
+        KPluginMetaData info(loader.fileName());
+        d->settingsModule->setName(info.name());
+        setIcon(info.iconName());
+        d->settingsModule->setDescription(info.description());
+        d->settingsModule->setModule(info.pluginId());
+        d->valid = true;
+    }
+
+    emit validChanged();
+}
+
+bool SettingsComponent::isValid() const
+{
+    return d->valid;
 }
 
 QString SettingsComponent::description() const
@@ -126,6 +202,20 @@ void SettingsComponent::setDescription(const QString &description)
     }
 }
 
+QString SettingsComponent::icon() const
+{
+    return d->icon;
+}
+
+void SettingsComponent::setIcon(const QString& name)
+{
+    if (name != d->icon) {
+        d->icon = name;
+        emit iconChanged();
+    }
+}
+
+
 QString SettingsComponent::module() const
 {
     return d->module;
@@ -133,7 +223,6 @@ QString SettingsComponent::module() const
 
 void SettingsComponent::setModule(const QString &module)
 {
-    kDebug() << "setmo" << module;
     if (d->module != module) {
         d->module = module;
         loadModule(module);

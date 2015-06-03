@@ -17,9 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
+import QtQuick 2.1
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 /**Documented API
 Inherits:
@@ -42,7 +42,7 @@ Properties:
 
         Item drawer:
         It's the part that can be pulled in and out, will act as a sidebar.
-        
+
         int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
 **/
 PlasmaComponents.Page {
@@ -60,13 +60,12 @@ PlasmaComponents.Page {
         mainPage.width = browserFrame.width - handleGraphics.width
     }
 
-
-    Image {
+    Rectangle {
         id: browserFrame
         //visible: mainPage.children.length > 0
         z: 100
-        source: "image://appbackgrounds/standard"
-        fillMode: Image.Tile
+        color: theme.backgroundColor
+
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -97,12 +96,28 @@ PlasmaComponents.Page {
             }
         }
 
-        PlasmaCore.FrameSvgItem {
+        Item {
             id: handleGraphics
-            imagePath: "dialogs/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-            width: handleIcon.width + margins.left + margins.right + 4
-            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
+            clip: true
+            Rectangle {
+                anchors {
+                    fill: parent
+                    rightMargin: -3
+                }
+                border {
+                    width: 3
+                    color: theme.textColor
+                }
+                color: "transparent"
+                opacity: 0.3
+            }
+            Rectangle {
+                anchors.fill: parent
+                color: theme.highlightColor
+                opacity: 0.05
+            }
+            width: handleIcon.width + units.gridUnit
+            height: handleIcon.width * 1.6 + units.gridUnit
             anchors.verticalCenter: parent.verticalCenter
 
             Component.onCompleted: {
@@ -112,10 +127,9 @@ PlasmaComponents.Page {
             //TODO: an icon
             PlasmaCore.SvgItem {
                 id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
-                elementId: "show-menu"
-                x: parent.margins.left
-                y: parent.margins.top
+                svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
+                elementId: "menu"
+                anchors.centerIn: parent
                 width: theme.smallMediumIconSize
                 height: width
                 anchors.verticalCenter: parent.verticalCenter
@@ -173,15 +187,32 @@ PlasmaComponents.Page {
             }
         }
     }
-    Image {
-        z: 999
-        source: "image://appbackgrounds/shadow-right"
-        fillMode: Image.TileVertically
+    Rectangle {
+        z: 99
+        width: 3
+        color: theme.textColor
+        opacity: 0.3
+        height: handleGraphics.y
         anchors {
             left: browserFrame.right
             top: browserFrame.top
+            //bottom: browserFrame.bottom
+            leftMargin: 0
+            topMargin: 3
+        }
+    }
+    Rectangle {
+        z: 99
+        width: 3
+        color: theme.textColor
+        opacity: 0.3
+        height: handleGraphics.y + 3
+        anchors {
+            left: browserFrame.right
+            //top: browserFrame.top
             bottom: browserFrame.bottom
-            leftMargin: -1
+            leftMargin: 0
+            topMargin: 3
         }
     }
 
@@ -216,10 +247,11 @@ PlasmaComponents.Page {
         }
     }
 
-    Image {
-        source: "image://appbackgrounds/shadow-bottom"
-        fillMode: Image.TileHorizontally
-        opacity: 0.8
+    Rectangle {
+        height: 3
+        color: theme.textColor
+        opacity: 0.3
+        z: 999
         anchors {
             left: parent.left
             top: toolBar.bottom

@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kquickcontrolsaddons  2.0
 
 
 /**Documented API
@@ -107,7 +107,7 @@ PlasmaComponents.Page {
         }
         PlasmaCore.FrameSvgItem {
             id: handleGraphics
-            imagePath: "dialogs/background"
+            imagePath: "widgets/background"
             enabledBorders: "LeftBorder|TopBorder|BottomBorder"
             width: handleIcon.width + margins.left + margins.right + 4
             height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
@@ -118,8 +118,8 @@ PlasmaComponents.Page {
 
             PlasmaCore.SvgItem {
                 id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "toolbar-icons/show"}
-                elementId: "show-menu"
+                svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
+                elementId: "menu"
                 x: parent.margins.left
                 y: parent.margins.top
                 width: theme.smallMediumIconSize
@@ -138,6 +138,7 @@ PlasmaComponents.Page {
             }
 
             property int startBrowserFrameX
+            property int startMouseScreenX
             property real oldMouseScreenX
             property bool toggle: false
             property bool startDragging: false
@@ -177,7 +178,7 @@ PlasmaComponents.Page {
                 }
             }
 
-            Item {
+            Rectangle {
                 id: drawerPage
                 anchors {
                     fill: parent

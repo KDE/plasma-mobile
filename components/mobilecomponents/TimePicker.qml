@@ -17,11 +17,12 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.locale 0.1 as KLocale
-import org.kde.active.settings 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+//import org.kde.locale 2.0 as KLocale
+import org.kde.active.settings 2.0
+import org.kde.active.settings.time 2.0
 import "private"
 
 
@@ -31,40 +32,42 @@ PlasmaCore.FrameSvgItem {
     clip: true
 
     //////// API
-    property int hours
-    property int minutes
-    property int seconds
+    property alias hours: clockRow.hours
+    property alias minutes: clockRow.minutes
+    property alias seconds: clockRow.seconds
 
     property bool userConfiguring: false
-
-    property bool twentyFour: locale.timeFormat.indexOf("%p") == -1
+    property bool twentyFour: true
 
     property string timeString: clockRow.twoDigitString(hours) + ":" + clockRow.twoDigitString(minutes) + ":" +  clockRow.twoDigitString(seconds)
 
-
-    /////// Implementation
     Connections {
         target: root
-        onHoursChanged: clockRow.hours = root.hours
-        onMinutesChanged: clockRow.minutes = root.minutes
-        onSecondsChanged: clockRow.seconds = root.seconds
+//         onHoursChanged: print("H : " + root.hours)
+//         onMinutesChanged: print("M : " + root.minutes)
+//         onSecondsChanged: print("S : " + root.seconds)
     }
 
     Behavior on width {
-        NumberAnimation {
-            duration: 250
-            easing.type: Easing.InOutQuad
+        SequentialAnimation {
+            PauseAnimation {
+                duration: 250
+            }
+            NumberAnimation {
+                //duration: units.longDuration
+                duration: 250
+                easing.type: Easing.InOutQuad
+            }
         }
     }
 
-    KLocale.Locale {
-        id: locale
-    }
+//     KLocale.Locale {
+//         id: locale
+//     }
 
     imagePath: "widgets/picker"
     width: clockRow.width + margins.left + margins.right
     height: clockRow.height + margins.top + margins.bottom
-
 
     Timer {
         id: userConfiguringTimer
@@ -102,11 +105,12 @@ PlasmaCore.FrameSvgItem {
                 horizontalAlignment: Text.AlignHCenter
                 width: hoursDigit.width
                 property int ownIndex: index
-                text: !root.twentyFour && index == 0 ? "12" : clockRow.twoDigitString(index)
+                text: (!root.twentyFour && index == 0) ? "12" : clockRow.twoDigitString(index)
                 font.pointSize: 20
-                opacity: PathView.itemOpacity
+                //opacity: PathView.itemOpacity
             }
             onSelectedIndexChanged: {
+                print("Bah");
                 if (selectedIndex > -1) {
                     if (root.twentyFour ||
                         meridiaeDigit.isAm) {
@@ -156,7 +160,8 @@ PlasmaCore.FrameSvgItem {
             }
         }
         PlasmaCore.SvgItem {
-            opacity: root.twentyFour ? 0 : 1
+            opacity: meridiaeDigit.opacity == 0 ? 0 : 1
+
             svg: PlasmaCore.Svg {imagePath: "widgets/line"}
             elementId: "vertical-line"
             width: naturalSize.width
@@ -173,6 +178,7 @@ PlasmaCore.FrameSvgItem {
         }
         Digit {
             id: meridiaeDigit
+            visible: opacity != 0
             opacity: root.twentyFour ? 0 : 1
             property bool isAm: (selectedIndex > -1) ? (selectedIndex < 1) : (currentIndex < 1)
             model: ListModel {
@@ -189,7 +195,7 @@ PlasmaCore.FrameSvgItem {
                 property int ownIndex: index
                 text: meridiae
                 font.pointSize: 20
-                opacity: PathView.itemOpacity
+                //opacity: PathView.itemOpacity
             }
             currentIndex: hours > 12 ? 1 : 0
             onSelectedIndexChanged: {

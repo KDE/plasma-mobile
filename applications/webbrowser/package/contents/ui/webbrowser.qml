@@ -1,159 +1,170 @@
-/****************************************************************************
-**
-** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
-** All rights reserved.
-** Contact: Nokia Corporation (qt-info@nokia.com)
-**
-** This file is part of the QtDeclarative module of the Qt Toolkit.
-**
-** $QT_BEGIN_LICENSE:LGPL$
-** No Commercial Usage
-** This file contains pre-release code and may not be distributed.
-** You may use this file in accordance with the terms and conditions
-** contained in the Technology Preview License Agreement accompanying
-** this package.
-**
-** GNU Lesser General Public License Usage
-** Alternatively, this file may be used under the terms of the GNU Lesser
-** General Public License version 2.1 as published by the Free Software
-** Foundation and appearing in the file LICENSE.LGPL included in the
-** packaging of this file.  Please review the following information to
-** ensure the GNU Lesser General Public License version 2.1 requirements
-** will be met: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html.
-**
-** In addition, as a special exception, Nokia gives you certain additional
-** rights.  These rights are described in the Nokia Qt LGPL Exception
-** version 1.1, included in the file LGPL_EXCEPTION.txt in this package.
-**
-** If you have questions regarding the use of this file, please contact
-** Nokia at qt-info@nokia.com.
-**
-**
-**
-**
-**
-**
-**
-**
-** $QT_END_LICENSE$
-**
-****************************************************************************/
+/***************************************************************************
+ *                                                                         *
+ *   Copyright 2014-2015 Sebastian Kügler <sebas@kde.org>                  *
+ *                                                                         *
+ *   This program is free software; you can redistribute it and/or modify  *
+ *   it under the terms of the GNU General Public License as published by  *
+ *   the Free Software Foundation; either version 2 of the License, or     *
+ *   (at your option) any later version.                                   *
+ *                                                                         *
+ *   This program is distributed in the hope that it will be useful,       *
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of        *
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the         *
+ *   GNU General Public License for more details.                          *
+ *                                                                         *
+ *   You should have received a copy of the GNU General Public License     *
+ *   along with this program; if not, write to the                         *
+ *   Free Software Foundation, Inc.,                                       *
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
+ *                                                                         *
+ ***************************************************************************/
 
-import QtQuick 1.0
-import org.kde.kdewebkit 0.1
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.extras 0.1 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
+import QtQuick 2.1
+import QtWebEngine 1.0
+// import QtQuick.Controls 1.0
+// import QtQuick.Controls.Styles 1.0
+// import QtQuick.Layouts 1.0
+import QtQuick.Window 2.1
 
-import "content"
+import org.kde.plasma.core 2.0 as PlasmaCore
 
-Image {
+
+Item {
     id: webBrowser
     objectName: "webBrowser"
-    source: "image://appbackgrounds/contextarea"
-    fillMode: Image.Tile
 
-    property string urlString : ""
-    property alias url: webView.url
-    property alias title: webView.title
+    /** Pointer to the currently active view.
+     *
+     * Browser-level functionality should use this to refer to the current
+     * view, rather than looking up views in the mode, as far as possible.
+     */
+    property Item currentWebView: tabs.currentIndex < tabs.count ? tabs.currentItem : null
 
-    width: 800; height: 600
+    onCurrentWebViewChanged: {
+        print("Current WebView is now : " + tabs.currentIndex);
+    }
+    property int borderWidth: Math.round(units.gridUnit / 18);
+    property var borderColor: theme.highlightColor;
 
-    PlasmaCore.Theme {
-        id: theme
+    /**
+     * Load a url in the current tab
+     */
+    function load(url) {
+        print("Loading url: " + url);
+        currentWebView.url = url;
+        //tabs.newTab(url)
     }
 
-    MobileComponents.Package {
-        id: activeWebBrowserPackage
-        name: "org.kde.active.webbrowser"
+    width: units.gridUnit * 15
+    height: units.gridUnit * 26
+
+    function addHistoryEntry() {
+        //print("Adding history");
+        var request = new Object;// FIXME
+        request.url = currentWebView.url;
+        request.title = currentWebView.title;
+        request.icon = currentWebView.icon;
+        browserManager.addToHistory(request);
+
     }
 
-    PlasmaExtras.ResourceInstance {
-        id: resourceInstance
-        uri: webBrowser.url
-        mimetype: "text/x-html"
-        title: webView.title
-    }
-
-    //FIXME: this will have to be removed
-    Timer {
-        interval: 100
-        running: true
-        onTriggered: backConnection.target = application.action("back")
-    }
-    Connections {
-        id: backConnection
-        target: application.action("back")
-        onTriggered: webView.back.trigger()
-    }
-
-    FlickableWebView {
-        id: webView
-        objectName: "webView"
-        url: webBrowser.urlString
-        onProgressChanged: header.urlChanged = false
+    ListWebView {
+        id: tabs
         anchors {
-            top: headerSpace.bottom
+            top: navigation.bottom
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            topMargin: -4
         }
     }
 
-    Item { id: headerSpace; width: parent.width; height: header.height }
+    ErrorHandler {
+        id: errorHandler
 
-    Header {
-        id: header
-        editUrl: webBrowser.urlString
-        width: headerSpace.width
-        //height: headerSpace.height
-    }
-/*
-    CompletionPopup {
-        id: completionPopup
-        property double relativeSize: 0.9
-        width: (webBrowser.width * relativeSize)
-        height: (webBrowser.height * relativeSize)
-        x: (webBrowser.width * (1.0-relativeSize) / 2)
-        y: (webBrowser.height * (1.0-relativeSize) / 2)
-        state: "collapsed"
-        //anchors.centerIn: webBrowser.
-        //anchors.top: urlText.bottom
-        //anchors.left: urlText.left
-        //anchors.right: urlText.right
+        errorString: currentWebView.errorString
+        errorCode: currentWebView.errorCode
 
-        Component.onCompleted: {
-            print( " size :   " + relativeSize);
-            print("   width:  " +( webBrowser.width * relativeSize));
-            print("   height: " + (webBrowser.height * relativeSize));
-            print("   x:    : " + (webBrowser.width * (1.0-relativeSize) / 2));
-            print("   y:    : " + (webBrowser.height * (1.0-relativeSize) / 2));
+        anchors {
+            top: navigation.bottom
+            left: parent.left
+            right: parent.right
         }
     }
-*/
 
-    ScrollBar {
-        scrollArea: webView; width: 8
-        anchors { right: parent.right; top: header.bottom; bottom: parent.bottom }
+    ContentView {
+        id: contentView
+        anchors.fill: tabs
     }
 
-    ScrollBar {
-        scrollArea: webView; height: 8; orientation: Qt.Horizontal
-        anchors { right: parent.right; rightMargin: 8; left: parent.left; bottom: parent.bottom }
+    // Container for the progress bar
+    Item {
+        id: progressItem
+
+        height: Math.round(units.gridUnit / 6)
+        z: navigation.z + 1
+        anchors {
+            top: tabs.top
+            topMargin: -Math.round(height / 2)
+            left: tabs.left
+            right: tabs.right
+        }
+
+        opacity: currentWebView.loading ? 1 : 0
+        Behavior on opacity { NumberAnimation { duration: units.longDuration; easing.type: Easing.InOutQuad; } }
+
+        Rectangle {
+            color: theme.highlightColor
+
+            width: Math.round((currentWebView.loadProgress / 100) * parent.width)
+            anchors {
+                top: parent.top
+                left: parent.left
+                bottom: parent.bottom
+            }
+        }
+
     }
 
-    function loadUrl(filteredUrl) {
-        webBrowser.urlString = filteredUrl
-        webBrowser.focus = true
-        header.urlChanged = false
+    // When clicked outside the menu, hide it
+    MouseArea {
+        id: optionsDismisser
+        visible: options.state != "hidden"
+        onClicked: options.state = "hidden"
+        anchors.fill: parent
+    }
+
+    // The menu at the top right
+    Options {
+        id: options
+
+        anchors {
+            top: navigation.bottom
+        }
+    }
+
+    Navigation {
+        id: navigation
+
+        height: units.gridUnit * 3
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+    }
+    // Thin line underneath navigation
+    Rectangle {
+        height: webBrowser.borderWidth
+        color: webBrowser.borderColor
+        anchors {
+            left: parent.left
+            bottom: navigation.bottom
+            right: options.left
+        }
     }
 
     Component.onCompleted: {
-        if (typeof startupArguments[0] != "undefined") {
-            urlString = startupArguments[0];
-        } else {
-            //urlString = "http://plasma.kde.org";
-        }
+        //contentView.state = "settings"; // For testing
     }
 }

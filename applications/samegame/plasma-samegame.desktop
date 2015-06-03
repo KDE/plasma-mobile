@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Samegame
+GenericName=Samegame
+Comment=A fun game
+Exec=plasma-app -platform wayland --fullscreen -m org.kde.plasma.samegame
+Terminal=false
+Icon=applications-toys
+Type=Application
+Categories=Qt;KDE;Settings;X-SuSE-core;Qt;Core;
+X-KDE-PluginInfo-Website=http://plasma-mobile.org

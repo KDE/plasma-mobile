@@ -38,15 +38,16 @@ class ClockHelper : public QObject
             DateError       = 1 << 3
         };
 
-    public slots:
+    public Q_SLOTS:
         ActionReply save(const QVariantMap &map);
 
     private:
-        int ntp(const QStringList& ntpServers, bool ntpEnabled,
-                const QString& ntpUtility);
+        int ntp(const QStringList& ntpServers, bool ntpEnabled);
         int date(const QString& newdate, const QString& olddate);
         int tz(const QString& selectedzone);
         int tzreset();
+
+        void toHwclock();
 };
 
 #endif // CLOCK_HELPER_H

@@ -25,7 +25,7 @@
 #include "timezone.h"
 #include "timezonesmodel.h"
 
-#include <kdebug.h>
+#include <QDebug>
 #include <KIcon>
 #include <KLocale>
 
@@ -33,23 +33,13 @@
 #include <QTimer>
 #include <QVariant>
 
-#include <kauthaction.h>
-#include <kdemacros.h>
 #include <KPluginFactory>
-#include <KPluginLoader>
-#include <KSharedConfig>
-#include <KStandardDirs>
-#include <KConfigGroup>
-#include <KGlobalSettings>
-#include <KSystemTimeZone>
 #include <KTimeZone>
 
-#include <QtDeclarative/qdeclarative.h>
-#include <QtDeclarative/QDeclarativeItem>
+#include <QtQml>
 #include <QtCore/QDate>
 
-K_PLUGIN_FACTORY(TimeSettingsFactory, registerPlugin<TimeSettingsPlugin>();)
-K_EXPORT_PLUGIN(TimeSettingsFactory("active_settings_time"))
+K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "metadata.json", registerPlugin<TimeSettingsPlugin>();)
 
 #define FORMAT24H "%H:%M:%S"
 #define FORMAT12H "%l:%M:%S %p"
@@ -59,15 +49,14 @@ TimeSettingsPlugin::TimeSettingsPlugin(QObject *parent, const QVariantList &list
 {
     Q_UNUSED(list)
 
-    kDebug() << "TimeSettingsPlugin created:)";
-    qmlRegisterType<TimeSettings>();
-    qmlRegisterType<TimeZone>();
-    qmlRegisterType<TimeSettings>("org.kde.active.settings", 0, 1, "TimeSettings");
+  //    qmlRegisterType<TimeZone>("org.kde.active.settings.time", 2, 0, "TimeZone");
+    qmlRegisterType<TimeSettings>("org.kde.active.settings.time", 2, 0, "TimeSettings");
+    qDebug() << "TimeSettingsPlugin registered types :)";
 }
 
 TimeSettingsPlugin::~TimeSettingsPlugin()
 {
-    kDebug() << "ts plugin del'ed";
+    qDebug() << "ts plugin del'ed";
 }
 
 

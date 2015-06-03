@@ -17,43 +17,43 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-import org.kde.qtextracomponents 0.1
-
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.private.folder 0.1 as Folder
+import org.kde.draganddrop 2.0
 
 Item {
     id: browserFrame
     anchors.fill: parent
-
-
-    //FIXME: this will have to be removed
-    Timer {
-        interval: 100
-        running: true
-        onTriggered: backConnection.target = application.action("back")
-    }
-    Connections {
-        id: backConnection
-        target: application.action("back")
-        onTriggered: {
-            resourceInstance.uri = ""
-            fileBrowserRoot.goBack()
-        }
-    }
+    property url resourceInstance
 
     ListModel {
         id: selectedModel
         signal modelCleared
     }
 
+    Folder.Positioner {
+        id: positioner
+        folderModel: folderModel
+    }
+
+    Folder.ItemViewAdapter {
+        id: viewAdapter
+        adapterView: resultsGrid
+        adapterModel: positioner
+
+        Component.onCompleted: {
+            folderModel.sourceModel.viewAdapter = viewAdapter;
+        }
+    }
+
     Connections {
-        target: metadataModel
-        onModelReset: {
+        target: resultsGrid
+        onCountChanged: {
             selectedModel.clear()
             selectedModel.modelCleared()
         }
@@ -71,9 +71,9 @@ Item {
             for (var i = 0; i < selectedModel.count; ++i) {
                 newUrls[i] = selectedModel.get(i).url
 
-                thumbnails[i] = selectedModel.get(i).thumbnail
-                labels[i] = selectedModel.get(i).label
-                mimeTypes[i] = selectedModel.get(i).mimeType
+                thumbnails[i] = selectedModel.get(i).decoration
+                labels[i] = selectedModel.get(i).display
+                mimeTypes[i] = selectedModel.get(i).resourceType
             }
             dragArea.mimeData.urls = newUrls
             dragArea.mimeTypes = mimeTypes
@@ -82,8 +82,8 @@ Item {
         }
     }
     Connections {
-        target: metadataModel
-        onModelReset: selectedModel.clear()
+        target: balooDataModel.sourceModel
+        onQueryChanged: selectedModel.clear()
     }
 
     //This pinch area is for selection
@@ -168,8 +168,7 @@ Item {
                 Repeater {
                     model: Math.min(4, dragArea.labels.length)
                     MobileComponents.ResourceDelegate {
-                        className: mimeType.indexOf("image") !== -1 ? "Image" : "FileDataObject"
-                        property string mimeType: dragArea.mimeTypes[index]
+                        resourceType: dragArea.mimeTypes[index]
                         property string label: dragArea.labels.length == 1 ? dragArea.labels[index] : ""
                         property variant thumbnail: dragArea.thumbnails[index]
 
@@ -185,6 +184,7 @@ Item {
             }
             MouseEventListener {
                 anchors.fill: parent
+                property int startY: 0
                 onPressed: startY = mouse.y
 
                 onPositionChanged: {
@@ -208,10 +208,12 @@ Item {
                 }
                 MobileComponents.IconGrid {
                     id: resultsGrid
+                    delegateWidth: Math.floor(resultsGrid.width / Math.max(Math.floor(resultsGrid.width / (units.gridUnit*12)), 3))
+                    delegateHeight: delegateWidth / 1.6
                     anchors.fill: parent
                     clip: false
 
-                    model: fileBrowserRoot.model
+                    model: fileBrowserRoot.model == folderModel ? positioner : fileBrowserRoot.model
                     onCurrentPageChanged: pinchArea.resetSelection()
 
                     delegate: Item {
@@ -224,7 +226,7 @@ Item {
                             imagePath: "widgets/viewitem"
                             prefix: "selected+hover"
                             anchors.fill: parent
-                            property real delegateX:resourceDelegate.x + resourceDelegate.parent.parent.x - resultsGrid.contentX
+                            property real delegateX: resourceDelegate.x + resourceDelegate.parent.parent.x - resultsGrid.contentX
                             property real delegateY: resourceDelegate.y
 
                             property bool contains: delegateX+resourceDelegate.width > selectionRect.x && delegateY+resourceDelegate.height > selectionRect.y && delegateX < selectionRect.x+selectionRect.width && delegateY < selectionRect.y+selectionRect.height
@@ -237,20 +239,20 @@ Item {
                                     selectedModel.append(model)
                                     opacity = 1
                                     if (selectedModel.count == 1) {
-                                        resourceInstance.uri = model.url;
+                                        resourceInstance = model.url;
                                     } else {
-                                        resourceInstance.uri = "";
+                                        resourceInstance = "";
                                     }
                                 } else {
-                                    if (resourceInstance.uri === model.url) {
-                                        resourceInstance.uri = "";
+                                    if (resourceInstance === model.url) {
+                                        resourceInstance = "";
                                     }
                                     for (var i = 0; i < selectedModel.count; ++i) {
                                         if ((model.url && model.url == selectedModel.get(i).url)) {
                                             opacity = 0
                                             selectedModel.remove(i)
                                             if (selectedModel.count == 1) {
-                                                resourceInstance.uri = selectedModel.get(0).url;
+                                                resourceInstance = selectedModel.get(0).url;
                                             }
                                             return
                                         }
@@ -263,22 +265,32 @@ Item {
                             onModelCleared: highlightFrame.opacity = 0
                         }
                         MobileComponents.ResourceDelegate {
-                            className: model["className"] ? model["className"] : ""
-                            genericClassName: (resultsGrid.model == metadataModel) ? (model["genericClassName"] ? model["genericClassName"] : "") : "FileDataObject"
-
-                            property string label: model.label ? model.label : (model.display ? model.display : "")
+                            anchors.fill: parent
+                            resourceType: {
+                                if (fileBrowserRoot.model.sourceModel.query  !== undefined) {
+                                    var type =resultsGrid.model.sourceModel.query.type
+                                    type = type.replace("File/", "")
+                                    return type
+                                } else if (model.resourceType !== undefined){
+                                    return model.resourceType
+                                } else {
+                                    return "FileDataObject"
+                                }
+                            }
 
                             width: resultsGrid.delegateWidth
                             height: resultsGrid.delegateHeight
                             onPressed: {
-                                if (selectedModel.count > 0 && 
+                                if (selectedModel.count > 0 &&
                                     highlightFrame.opacity > 0) {
                                     dragArea.enabled = true
                                 }
                             }
                             onPressAndHold: highlightFrame.contains = !highlightFrame.contains
 
-                            onClicked: openResource(model)
+                            onClicked: {
+                                openResource(model)
+                            }
                         }
                         Component.onCompleted: {
                             for (var i = 0; i < selectedModel.count; ++i) {

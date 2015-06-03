@@ -17,8 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.0
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.qtextracomponents 2.0
 
 Item {
     property alias icon: iconItem.icon

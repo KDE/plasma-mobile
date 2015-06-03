@@ -17,21 +17,40 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 1.1
-import org.kde.metadatamodels 0.1 as MetadataModels
-import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.core 0.1 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
-import org.kde.draganddrop 1.0
-import org.kde.qtextracomponents 0.1
+import QtQuick 2.1
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kquickcontrolsaddons 2.0
+import org.kde.draganddrop 2.0
+import org.kde.baloo 0.1 as Baloo
 
 Item {
     width: parent.width
     height: childrenRect.height
+    property string currentBalooQueryType: ""
 
     PlasmaCore.DataModel {
         id: devicesModel
         dataSource: hotplugSource
+    }
+
+    Baloo.BalooDataModel {
+        id: balooRestoreModel
+    }
+
+    anchors.fill: parent
+
+    Connections {
+        target: folderModel.sourceModel
+        onResolvedUrlChanged: {
+            if (resourceBrowser.currentUdi != "") {
+                var devicePath = "file://" + devicesSource.data[resourceBrowser.currentUdi]["File Path"]
+                var modelPath = folderModel.sourceModel.resolvedUrl
+                upButton.visible = String(modelPath).length > devicePath.length
+            }
+        }
     }
 
     Row {
@@ -46,27 +65,23 @@ Item {
         property int itemCount: 1
 
         Item {
-            width: theme.largeIconSize
+            width: units.iconSizes.large
             height: width
             PlasmaComponents.ToolButton {
                 id: upButton
                 anchors.fill: parent
                 flat: false
                 iconSource: "go-up"
-                visible: resourceBrowser.currentUdi != "" &&
-                    devicesSource.data[resourceBrowser.currentUdi] &&
-                    dirModel.url.indexOf(devicesSource.data[resourceBrowser.currentUdi]["File Path"]) !== -1 &&
-                    "file://" + devicesSource.data[resourceBrowser.currentUdi]["File Path"] !== dirModel.url
-                onClicked: dirModel.url = dirModel.url+"/.."
+                visible: resourceBrowser.currentUdi != ""
+                onClicked: folderModel.sourceModel.url = folderModel.sourceModel.url+"/.."
             }
         }
 
         PlasmaComponents.ToolButton {
             id: localButton
-            width: theme.mediumIconSize + 10
+            width: units.iconSizes.medium + 10
             height: width
             iconSource: "drive-harddisk"
-            checked: fileBrowserRoot.model == metadataModel
             onClicked: checked = true
             onCheckedChanged: {
                 if (checked) {
@@ -81,9 +96,15 @@ Item {
                             child.checked = false
                         }
                     }
-                    fileBrowserRoot.model = metadataModel
+
+                    currentBalooQueryType = fileBrowserRoot.model.sourceModel.query !== undefined ? fileBrowserRoot.model.sourceModel.query.type : ""
+                    fileBrowserRoot.model.sourceModel = folderModel.sourceModel
+                    folderModel.sourceModel.url = devicesSource.data[udi]["File Path"]
                     //nepomuk db, not filesystem
                     resourceBrowser.currentUdi = ""
+                } else {
+                        fileBrowserRoot.model.sourceModel = balooRestoreModel
+                        balooDataModel.sourceModel.query.type = currentBalooQueryType
                 }
             }
             DropArea {
@@ -105,13 +126,13 @@ Item {
 
             delegate: PlasmaComponents.ToolButton {
                 id: removableButton
-                width: theme.mediumIconSize + 10
+                width: units.iconSizes.medium + 10
                 height: width
                 visible: devicesSource.data[udi]["Removable"] == true
                 iconSource: model["icon"]
-                onClicked: checked = true
+                onClicked: checked = !checked
                 Component.onCompleted: {
-                    checked = dirModel.url.indexOf(devicesSource.data[udi]["File Path"]) > 0
+                    checked = folderModel.sourceModel.url.indexOf(devicesSource.data[udi]["File Path"]) > 0
                 }
                 onCheckedChanged: {
                     if (checked && visible) {
@@ -124,14 +145,17 @@ Item {
                         resourceBrowser.currentUdi = udi
 
                         if (devicesSource.data[udi]["Accessible"]) {
-                            dirModel.url = devicesSource.data[udi]["File Path"]
-
-                            fileBrowserRoot.model = dirModel
+                            folderModel.sourceModel.url = devicesSource.data[udi]["File Path"]
+                            currentBalooQueryType = fileBrowserRoot.model.sourceModel.query !== undefined ? fileBrowserRoot.model.sourceModel.query.type : ""
+                            fileBrowserRoot.model.sourceModel = folderModel.sourceModel
                         } else {
                             var service = devicesSource.serviceForSource(udi);
                             var operation = service.operationDescription("mount");
                             service.startOperationCall(operation);
                         }
+                    } else {
+                        fileBrowserRoot.model.sourceModel = balooRestoreModel
+                        balooDataModel.sourceModel.query.type = currentBalooQueryType
                     }
                 }
                 DropArea {
@@ -149,11 +173,11 @@ Item {
 
         PlasmaComponents.ToolButton {
             id: trashButton
-            width: theme.mediumIconSize + 10
+            width: units.iconSizes.medium + 10
             height: width
             parent: devicesFlow
             iconSource: "user-trash"
-            onClicked: checked = true
+            onClicked: checked = !checked
             onCheckedChanged: {
                 if (checked) {
                     for (var i = 0; i < devicesFlow.children.length; ++i) {
@@ -163,10 +187,13 @@ Item {
                         }
                     }
                     resourceBrowser.currentUdi = ""
+                    currentBalooQueryType = fileBrowserRoot.model.sourceModel.query !== undefined ? fileBrowserRoot.model.sourceModel.query.type : ""
+                    folderModel.sourceModel.url = "trash:/"
 
-                    dirModel.url = "trash:/"
-
-                    fileBrowserRoot.model = dirModel
+                    fileBrowserRoot.model.sourceModel = folderModel
+                } else {
+                    fileBrowserRoot.model.sourceModel = balooRestoreModel
+                    balooDataModel.sourceModel.query.type = currentBalooQueryType
                 }
             }
             DropArea {
@@ -177,7 +204,7 @@ Item {
                 onDrop: {
                     parent.flat = true
                     application.trash(event.mimeData.urls)
-                    metadataModel.requestRefresh()
+                    balooDataModel.requestRefresh()
                 }
             }
         }
@@ -186,17 +213,17 @@ Item {
     MobileComponents.ViewSearch {
         id: searchBox
         anchors.centerIn: parent
-        visible: fileBrowserRoot.model == metadataModel
+        visible: fileBrowserRoot.model == balooDataModel
 
         onSearchQueryChanged: {
             if (searchQuery.length > 3) {
                 // the "*" are needed for substring match.
-                metadataModel.queryProvider.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
+                balooDataModel.queryProvider.extraParameters["nfo:fileName"] = "*" + searchBox.searchQuery + "*"
             } else {
-                metadataModel.queryProvider.extraParameters["nfo:fileName"] = ""
+                balooDataModel.queryProvider.extraParameters["nfo:fileName"] = ""
             }
         }
-        busy: metadataModel.running
+        busy: balooDataModel.count < 0
     }
 
     Item {
@@ -209,12 +236,12 @@ Item {
             id: tabsRow
             anchors {
                 bottom: parent.bottom
-                bottomMargin: - toolBar.margins.bottom
+                bottomMargin: - toolBar.margins.bottom - 1
             }
             z: 900
             spacing: 0
 
-            height: theme.defaultFont.mSize.height * 1.6
+            height: theme.mSize(theme.defaultFont).height * 1.6
             exclusive: true
 
             PlasmaComponents.ToolButton {
@@ -232,7 +259,7 @@ Item {
 
             PlasmaComponents.ToolButton {
                 text: i18n("Time")
-                enabled: fileBrowserRoot.model == metadataModel
+                enabled: fileBrowserRoot.model == balooDataModel
                 flat: false
                 width: sidebar.width / 3
                 height: parent.height - 1
@@ -245,7 +272,7 @@ Item {
 
             PlasmaComponents.ToolButton {
                 text: i18n("Tags")
-                enabled: fileBrowserRoot.model == metadataModel
+                enabled: fileBrowserRoot.model == balooDataModel
                 flat: false
                 width: sidebar.width / 3
                 height: parent.height - 1
@@ -268,15 +295,15 @@ Item {
 
     PlasmaComponents.ToolButton {
         id: emptyTrashButton
-        width: theme.largeIconSize
+        width: units.iconSizes.large
         height: width
         anchors {
-            right: tabsRow.left
+         //   right: tabsRow.left
             verticalCenter: parent.verticalCenter
             rightMargin: y
         }
-        visible: fileBrowserRoot.model == dirModel && dirModel.url == "trash:/"
-        enabled: dirModel.count > 0
+        visible: fileBrowserRoot.model == folderModel && folderModel.sourceModel.url == "trash:/"
+        enabled: folderModel.count > 0
         iconSource: "trash-empty"
         onClicked: application.emptyTrash()
     }

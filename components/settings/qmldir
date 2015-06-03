@@ -1,2 +1,3 @@
+module org.kde.active.settings
 plugin settingsplugin
-SettingsItem 0.1 SettingsItem.qml
+SettingsItem 2.0 SettingsItem.qml

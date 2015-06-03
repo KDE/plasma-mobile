@@ -20,53 +20,75 @@
  ***************************************************************************/
 
 #include "filebrowser.h"
-#include "kdeclarativeview.h"
 
-#include <QDeclarativeContext>
-#include <QFileInfo>
+#include <QDebug>
+#include <QQmlContext>
+#include <QStandardPaths>
 
-#include <KAction>
-#include <KCmdLineArgs>
 #include <KConfigGroup>
-#include <KIcon>
-#include <KStandardAction>
-#include <KStandardDirs>
 #include <KServiceTypeTrader>
-#include <KMimeType>
-
+#include <kdeclarative/kdeclarative.h>
 #include <kio/copyjob.h>
-#include <Plasma/Theme>
-
 
 FileBrowser::FileBrowser()
-    : KDeclarativeMainWindow(),
+    : QQuickView(),
       m_emptyProcess(0)
 {
-    KCmdLineArgs *args = KCmdLineArgs::parsedArgs();
 
-    declarativeView()->setPackageName("org.kde.active.filebrowser");
+    KDeclarative::KDeclarative kdeclarative;
+    kdeclarative.setDeclarativeEngine(engine());
+    kdeclarative.setupBindings();
 
-    declarativeView()->rootContext()->setContextProperty("exclusiveResourceType", args->getOption("resourceType"));
-
-    QString mimeString = args->getOption("mimeTypes");
+    rootContext()->setContextProperty("exclusiveResourceType", resourceType());
+    rootContext()->setContextProperty("application", this);
+    QString mimeString = mimeTypes();
     if (mimeString.isEmpty()) {
-        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", QStringList());
+        rootContext()->setContextProperty("exclusiveMimeTypes", QStringList());
     } else {
         QStringList mimeTypes = mimeString.split(',');
-        declarativeView()->rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
+        rootContext()->setContextProperty("exclusiveMimeTypes", mimeTypes);
     }
 
+    const QString mainQMlFile = QStandardPaths::locate(QStandardPaths::GenericDataLocation, "/plasma/plasmoids/org.kde.plasma.active.filebrowser/contents/ui/main.qml", QStandardPaths::LocateFile);
+    setSource(QUrl::fromLocalFile(mainQMlFile));
+    setResizeMode(QQuickView::SizeRootObjectToView);
     //FIXME: need more elegant and pluggable way
-    if (args->getOption("resourceType") == "nfo:Image") {
-        setWindowIcon(KIcon("active-image-viewer"));
-        setPlainCaption(i18n("Images"));
-    }
-
+ /*
     if (!startupArguments().isEmpty()) {
         KMimeType::Ptr t = KMimeType::findByUrl(startupArguments().first());
         declarativeView()->rootContext()->setContextProperty("startupMimeType", t->name());
-    }
+    }*/
 }
+
+void FileBrowser::setResourceType(const QString &resourceType)
+{
+    if (resourceType == m_resourceType) {
+        return;
+    }
+
+    m_resourceType = resourceType;
+}
+
+QString FileBrowser::resourceType() const
+{
+    return m_resourceType;
+}
+
+
+void FileBrowser::setMimeTypes(const QString &mimeTypes)
+{
+    if (mimeTypes == m_mimeTypes) {
+        return;
+    }
+
+    m_mimeTypes = mimeTypes;
+}
+
+QString FileBrowser::mimeTypes() const
+{
+    return m_mimeTypes;
+}
+
 
 FileBrowser::~FileBrowser()
 {
@@ -90,8 +112,8 @@ QString FileBrowser::viewerPackageForType(const QString &mimeType)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-        //kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
-        kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
+        //qDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        qDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
         return service->property("X-KDE-PluginInfo-Name").toString();
     }
     return QString();
@@ -115,8 +137,8 @@ QString FileBrowser::browserPackageForType(const QString &type)
         } else if (!service->comment().isEmpty()) {
             description = service->comment();
         }
-        kDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
-        kDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
+        qDebug() << service->property("X-KDE-PluginInfo-Name") << " :: " << description;
+        qDebug() << service->property("X-KDE-PluginInfo-Name") << "\t\t" << description.toLocal8Bit().data();
         return service->property("X-KDE-PluginInfo-Name").toString();
     }
     return QString();
@@ -131,11 +153,14 @@ void FileBrowser::emptyTrash()
         return;
     }
 
-    m_emptyProcess = new KProcess(this);
+    m_emptyProcess = new QProcess(this);
     connect(m_emptyProcess, SIGNAL(finished(int,QProcess::ExitStatus)),
             this, SLOT(emptyFinished(int,QProcess::ExitStatus)));
-    (*m_emptyProcess) << KStandardDirs::findExe("ktrash") << "--empty";
-    m_emptyProcess->start();
+
+    const QString ktrash = QStandardPaths::locate(QStandardPaths::ApplicationsLocation,QStringLiteral("/trash5"), QStandardPaths::LocateFile);
+    QStringList arguments;
+    arguments << QStringLiteral("--empty");
+    m_emptyProcess->start(ktrash, arguments);
 }
 
 void FileBrowser::emptyFinished(int exitCode, QProcess::ExitStatus exitStatus)
@@ -150,21 +175,22 @@ void FileBrowser::emptyFinished(int exitCode, QProcess::ExitStatus exitStatus)
 
 void FileBrowser::copy(const QVariantList &src, const QString &dest)
 {
-    KUrl::List urls;
+    QList<QUrl> urls;
     foreach (const QVariant &var, src) {
-        KUrl url(var.toString());
+        QUrl url(var.toString());
         urls << url;
     }
 
-    KUrl destination(dest);
+    QUrl destination(dest);
     KIO::copy(urls, destination);
 }
 
 void FileBrowser::trash(const QVariantList &files)
 {
-    KUrl::List urls;
+    QList<QUrl> urls;
     foreach (const QVariant &var, files) {
-        urls << KUrl::fromPath(var.toString());
+        QUrl url(var.toString());
+        urls << url;
     }
     KIO::trash(urls);
 }
