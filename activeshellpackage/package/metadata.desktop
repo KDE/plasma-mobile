@@ -1,12 +1,8 @@
 [Desktop Entry]
 Comment=Plasma Active shell
-Comment[uk]=Компоненти для перегляду стільниці
-Comment[x-test]=xxDesktop view furniturexx
 Encoding=UTF-8
 Keywords=
 Name=Desktop
-Name[uk]=Стільниця
-Name[x-test]=xxDesktopxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell
