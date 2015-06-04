@@ -26,7 +26,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
-//import org.kde.active.settings.time 2.0
 import org.kde.kcm 1.0
 
 Item {
@@ -58,21 +57,13 @@ Item {
             width: parent.width
             columns: 2
             //rows: 4
-            //anchors.fill: parent
+            anchors.fill: parent
             //anchors.margins: gridspacing
             //rowSpacing: gridspacing
             columnSpacing: gridspacing
 
-    //         columns: 2
-    //         rows: 4
-    //         spacing: units.gridUnit
-
             PlasmaComponents.Label {
                 text: i18n("Use 24-hour clock:")
-//                 anchors {
-//                     right: twentyFourSwitch.left
-//                     rightMargin: theme.mSize(theme.defaultFont).width
-//                 }
             }
 
             PlasmaComponents.Switch {
@@ -89,10 +80,6 @@ Item {
             PlasmaComponents.Label {
                 id: timeZoneLabel
                 text: i18n("Timezone:")
-//                 anchors {
-//                     right: timeZoneButton.left
-//                     rightMargin: theme.mSize(theme.defaultFont).width
-//                 }
             }
 
             PlasmaComponents.Button {
@@ -104,14 +91,10 @@ Item {
             PlasmaComponents.Label {
                 id: ntpLabel
                 text: i18n("Set time automatically:")
-//                 anchors {
-//                     right: timeZoneButton.left
-//                     rightMargin: theme.mSize(theme.defaultFont).width
-//                 }
             }
 
             Row {
-                spacing: theme.mSize(theme.defaultFont).width
+                spacing: units.gridUnit
                 //Layout.columnSpan: 2
                 PlasmaComponents.Switch {
                     id: ntpCheckBox
@@ -136,20 +119,15 @@ Item {
                 id: timePicker
                 enabled: !ntpCheckBox.checked
                 twentyFour: twentyFourSwitch.checked
-                //twentyFour:
-                //visible: false
+
                 Layout.columnSpan: 2
                 Layout.preferredHeight: timePicker.childrenRect.height + timePicker.margins.top + timePicker.margins.bottom
                 Layout.preferredWidth: timePicker.childrenRect.width + timePicker.margins.left + timePicker.margins.right
 
-//                 anchors {
-//                     right: datePicker.left
-//                     rightMargin: theme.mSize(theme.defaultFont).width
-//                 }
                 Component.onCompleted: {
                     //var date = new Date("January 1, 1971 "+kcm.currentTime)
                     var date = new Date(kcm.currentTime)
-                    print("CurrnetATime: "  + kcm.currentTime);
+                    print("CurrentTime: "  + kcm.currentTime);
                     print("Date: "  + date);
                     print("hours:   "  + date.getHours());
                     print("minutes: "  + date.getMinutes());
@@ -206,7 +184,6 @@ Item {
                 }
                 onUserConfiguringChanged: {
                     kcm.currentDate = isoDate
-
                     kcm.saveTime()
                 }
             }
@@ -220,8 +197,8 @@ Item {
         onButtonClicked: close()
         content: Loader {
             id: timeZonePickerLoader
-            width: theme.mSize(theme.defaultFont).width*22
-            height: units.gridUnit*25
+            width: units.gridUnit * 22
+            height: units.gridUnit * 25
         }
         onStatusChanged: {
             if (status == PlasmaComponents.DialogStatus.Open) {

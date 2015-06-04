@@ -5,7 +5,6 @@ include_directories(../../../../components/settings)
 configure_file(config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
 
 set(timesettings_SRCS
-#    timesettingsplugin.cpp
     timesettings.cpp
     timezone.cpp
     timezonesmodel.cpp
@@ -23,12 +22,7 @@ target_link_libraries(kcm_mobile_time
     )
 kcoreaddons_desktop_to_json(kcm_mobile_time "timesettings.desktop")
 
-#install(TARGETS kcm_mobile_time DESTINATION ${PLUGIN_INSTALL_DIR}/active/settingsmodule)
-
 # Time and Date
-# install(DIRECTORY package/ DESTINATION ${DATA_INSTALL_DIR}/plasma/packages/org.kde.active.settings.time)
-# install(FILES package/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME org.kde.active.settings.time.desktop)
-#plasma_install_package(package org.kde.active.settings.time packages package)
 
 install(FILES timesettings.desktop DESTINATION ${SERVICES_INSTALL_DIR})
 install(TARGETS kcm_mobile_time DESTINATION ${PLUGIN_INSTALL_DIR}/kcms)
