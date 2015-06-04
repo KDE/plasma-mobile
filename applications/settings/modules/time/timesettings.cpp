@@ -1,7 +1,7 @@
 /*
     Copyright 2005 S.R.Haque <srhaque@iee.org>.
     Copyright 2009 David Faure <faure@kde.org>
-    Copyright 2011 Sebastian Kügler <sebas@kde.org>
+    Copyright 2011,2015 Sebastian Kügler <sebas@kde.org>
 
     This file is part of the KDE project
 
@@ -111,7 +111,6 @@ TimeSettings::TimeSettings(QObject* parent, const QVariantList& args)
 
 TimeSettings::~TimeSettings()
 {
-    qDebug() << "========================== timesettings destroy";
     delete d;
 }
 
@@ -165,7 +164,7 @@ void TimeSettingsPrivate::initSettings()
 
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT24H)));
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT12H)));
-    q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString() ) ); // FIXME?!
+    q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString(FORMAT24H) ) ); // FIXME?!
 
     KConfig _config( "kcmclockrc", KConfig::NoGlobals );
     KConfigGroup config(&_config, "NTP");
@@ -183,7 +182,6 @@ void TimeSettingsPrivate::initSettings()
 
 void TimeSettings::timeout()
 {
-    qDebug() << "timeout";
     setCurrentTime(QTime::currentTime());
     setCurrentDate(QDate::currentDate());
 }
@@ -237,7 +235,11 @@ void TimeSettings::setNtpServer(const QString &server)
 QStringList TimeSettings::availableNtpServers() const
 {
     QStringList servers;
-    servers << "pool.ntp.org" << "asia.pool.ntp.org" << "europe.pool.ntp.org" << "north-america.pool.ntp.org" << "oceania.pool.ntp.org";
+    servers << QStringLiteral("pool.ntp.org")
+            << QStringLiteral("asia.pool.ntp.org")
+            << QStringLiteral("europe.pool.ntp.org")
+            << QStringLiteral("north-america.pool.ntp.org")
+            << QStringLiteral("oceania.pool.ntp.org");
     return servers;
 }
 
@@ -248,11 +250,11 @@ QString TimeSettings::findNtpUtility()
         envpath = envpath.mid(1);
     }
 
-    QString path = "/sbin:/usr/sbin:";
+    QString path = QStringLiteral("/sbin:/usr/sbin:");
     if (!envpath.isEmpty()) {
         path += QString::fromLocal8Bit(envpath);
     } else {
-        path += QLatin1String("/bin:/usr/bin");
+        path += QStringLiteral("/bin:/usr/bin");
     }
 
     QString ntpUtility;
@@ -322,7 +324,6 @@ QString TimeSettings::timeFormat()
 
 void TimeSettings::setTimeFormat(const QString &timeFormat)
 {
-    qDebug() << "setTimeFormat: " << timeFormat;
     if (d->timeFormat != timeFormat) {
         d->timeFormat = timeFormat;
 
@@ -332,7 +333,7 @@ void TimeSettings::setTimeFormat(const QString &timeFormat)
         QDBusMessage msg = QDBusMessage::createSignal("/org/kde/kcmshell_clock", "org.kde.kcmshell_clock", "clockUpdated");
         QDBusConnection::sessionBus().send(msg);
 
-        qDebug() << "TIME" << QLocale().toString(QTime::currentTime(), d->timeFormat);
+        qDebug() << "time format is now: " << QLocale().toString(QTime::currentTime(), d->timeFormat);
         emit timeFormatChanged();
         timeout();
     }
@@ -347,7 +348,7 @@ void TimeSettings::setTimeZone(const QString &timezone)
 {
     if (d->timezone != timezone) {
         d->timezone = timezone;
-        qDebug() << "booyah";
+        qDebug() << "timezone changed to: " << timezone;
         emit timeZoneChanged();
         timeout();
     }
@@ -389,7 +390,7 @@ void TimeSettings::timeZoneFilterChanged(const QString &filter)
 {
     qDebug() << "new filter: " << filter;
     d->timeZoneFilter = filter;
-    d->timeZoneFilter.replace( ' ', '_' );
+    d->timeZoneFilter.replace(' ', '_');
     d->initTimeZones();
     emit timeZonesChanged();
 }
