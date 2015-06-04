@@ -39,6 +39,7 @@
 #include <kauthexecutejob.h>
 
 #include <kdemacros.h>
+#include <KAboutData>
 #include <KPluginFactory>
 #include <KPluginLoader>
 #include <KSharedConfig>
@@ -53,6 +54,9 @@
 
 #define FORMAT24H "HH:mm:ss"
 #define FORMAT12H "h:mm:ss ap"
+
+K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "metadata.json", registerPlugin<TimeSettings>();)
+
 
 class TimeSettingsPrivate {
 public:
@@ -78,13 +82,21 @@ public:
     QList<QObject*> timezones;
 };
 
-TimeSettings::TimeSettings()
+TimeSettings::TimeSettings(QObject* parent, const QVariantList& args)
+    : KQuickAddons::ConfigModule(parent, args)
 {
+    qDebug() << "time settings init";
     d = new TimeSettingsPrivate;
     d->q = this;
     d->timeZones = 0;
     d->timeZonesModel = 0;
     setTimeZone(KSystemTimeZones::local().name());
+
+    KAboutData* about = new KAboutData("kcm_mobile_time", i18n("Configure Date and Time"),
+                                       "0.1", QString(), KAboutLicense::LGPL);
+    about->addAuthor(i18n("Sebastian Kügler"), QString(), "sebas@kde.org");
+    setAboutData(about);
+    setButtons(Apply | Default);
 
     d->initSettings();
 
@@ -153,7 +165,7 @@ void TimeSettingsPrivate::initSettings()
 
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT24H)));
     //setTimeFormat(d->localeSettings.readEntry("TimeFormat", QString(FORMAT12H)));
-    q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString() ) );
+    q->setTimeFormat( localeSettings.readEntry( "TimeFormat", QString() ) ); // FIXME?!
 
     KConfig _config( "kcmclockrc", KConfig::NoGlobals );
     KConfigGroup config(&_config, "NTP");
@@ -171,6 +183,7 @@ void TimeSettingsPrivate::initSettings()
 
 void TimeSettings::timeout()
 {
+    qDebug() << "timeout";
     setCurrentTime(QTime::currentTime());
     setCurrentDate(QDate::currentDate());
 }
@@ -423,4 +436,4 @@ void TimeSettings::setTwentyFour(bool t)
 }
 
 
-//#include "timesettings.moc"
+#include "timesettings.moc"

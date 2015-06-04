@@ -28,6 +28,8 @@
 #include <QVariant>
 #include <QStringListModel>
 
+#include <KQuickAddons/ConfigModule>
+
 //#include "settingsmodule.h"
 
 class TimeSettingsPrivate;
@@ -39,7 +41,7 @@ class TimeSettingsPrivate;
  * This is done from one class in order to simplify the code. You can export any QObject-based
  * class through qmlRegisterType(), however.
  */
-class TimeSettings : public QObject
+class TimeSettings : public KQuickAddons::ConfigModule
 {
     Q_OBJECT
 
@@ -68,7 +70,7 @@ class TimeSettings : public QObject
          * @arg parent The parent object
          * @arg list Arguments, currently unused
          */
-        TimeSettings();
+        TimeSettings(QObject* parent, const QVariantList& args);
         virtual ~TimeSettings();
 
         QString currentTimeText();

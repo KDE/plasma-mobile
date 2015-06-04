@@ -126,11 +126,11 @@ Item {
         //model: timeSettings.timeZonesModel
 
         delegate: timeZoneDelegate
-//         highlight: PlasmaCore.FrameSvgItem {
-//             id: highlightFrame
-//             imagePath: "widgets/viewitem"
-//             prefix: "selected+hover"
-//         }
+        highlight: PlasmaCore.FrameSvgItem {
+            id: highlightFrame
+            imagePath: "widgets/viewitem"
+            prefix: "selected+hover"
+        }
 
     }
     PlasmaComponents.SectionScroller {
