@@ -31,23 +31,56 @@ PlasmaCore.Dialog {
     flags: Qt.X11BypassWindowManagerHint
     backgroundHints: PlasmaCore.Dialog.NoBackground
 
+    onVisibleChanged: {
+        if (visible) {
+            showAnim.running = true;
+        }
+    }
     mainItem: Item {
         width: workspace.virtualScreenSize.width
         height: workspace.virtualScreenSize.height
 
-        PlasmaComponents.Button {
-            z: 99
-            text: "close"
-            onClicked: dialog.visible = false;
+        SequentialAnimation {
+            id: hideAnim
+            NumberAnimation {
+                target: view
+                properties: "contentY"
+                to: -view.height
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            ScriptAction {
+                script: dialog.visible = false;
+            }
+        }
+        NumberAnimation {
+            id: showAnim
+            target: view
+            properties: "contentY"
+            to: 0
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
         }
         GridView {
             id: view
             anchors.fill: parent
+            cacheBuffer: 9999
             cellWidth: units.gridUnit * 20
             cellHeight: units.gridUnit * 20 // (view.width / view.height)
             model: KWin.ClientModel {
                 id: clientModel
                 exclusions: KWin.ClientModel.NotAcceptingFocusExclusion
+            }
+            onMovingChanged: {
+                if (contentY < -view.height/2) {
+                    hideAnim.running = true
+                } else if (contentY >= -view.height/2 && contentY < 0) {
+                    showAnim.running = true
+                }
+            }
+            header: Item {
+                width: view.width
+                height: view.height
             }
             delegate: MouseArea {
                 width: view.cellWidth
