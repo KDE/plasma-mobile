@@ -26,6 +26,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.active.settings 2.0 as ActiveSettings
 
 Item {
+
     id: settingsRoot
 
     property alias currentIndex: listView.currentIndex
@@ -77,15 +78,15 @@ Item {
                 print("Clicked index: " + index + " current: " + listView.currentIndex + " " + module + " curr: " + rootItem.currentModule);
                 loading = true;
                 rootItem.currentModule = module;
-                /*
-                listView.currentIndex = index;
-                if (settingsItem.module == module) {
-                    settingsRoot.state = "module"
-                } else {
-                    settingsItem.module = ""
-                    settingsItem.module = module
-                }
-                */
+
+//                 listView.currentIndex = index;
+//                 if (settingsItem.module == module) {
+//                     settingsRoot.state = "module"
+//                 } else {
+//                     settingsItem.module = ""
+//                     settingsItem.module = module
+//                 }
+
             }
 
 //             onPressAndHold: {
@@ -146,4 +147,5 @@ Item {
 //             }
 //         }
     }
+
 }
