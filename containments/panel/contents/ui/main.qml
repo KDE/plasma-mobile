@@ -44,7 +44,7 @@ PlasmaCore.ColorScope {
     }
 
     function addApplet(applet, x, y) {
-        var container = appletContainerComponent.createObject(layout)
+        var container = appletContainerComponent.createObject(tabGroup)
         container.visible = true
         print("Applet added: " + applet + " " + applet.title)
 
@@ -52,48 +52,22 @@ PlasmaCore.ColorScope {
         var appletHeight = applet.height;
         applet.parent = container;
         container.applet = applet;
-        //applet.anchors.fill = container;
-        applet.anchors.left = container.left;
-        applet.anchors.right = container.right;
-        applet.height = units.iconSizes.medium;
+        applet.anchors.fill = container;
         applet.visible = true;
         container.visible = true;
 
-        // If the provided position is valid, use it.
-        if (x >= 0 && y >= 0) {
-            var index = LayoutManager.insertAtCoordinates(container, x , y);
+        //container.parent = tabs;
 
-        // Fall through to determining an appropriate insert position.
-        } else {
-            var before = null;
-
-            if (lastSpacer.parent === layout) {
-                before = lastSpacer;
-            }
-
-            if (before) {
-                LayoutManager.insertBefore(before, container);
-
-            // Fall through to adding at the end.
-            } else {
-                container.parent = layout;
-            }
-
-            //event compress the enable of animations
-            //startupTimer.restart();
-        }
-
-        if (applet.Layout.fillWidth) {
-            lastSpacer.parent = root;
-        } else {
-            lastSpacer.parent = layout;
-        }
+        //The tab
+        var tab = tabComponent.createObject(tabBar.layout);
+        tab.iconSource = applet.icon;
+        tab.tab = container;
     }
 
     Component.onCompleted: {
         LayoutManager.plasmoid = plasmoid;
         LayoutManager.root = root;
-        LayoutManager.layout = layout;
+        LayoutManager.layout = appletsLayout;
         LayoutManager.restore();
     }
 
@@ -117,46 +91,11 @@ PlasmaCore.ColorScope {
     Component {
         id: appletContainerComponent
         Item {
-            id: containerItem
+            //not used yet
+            property bool animationsEnabled: false
             property Item applet
             Layout.fillWidth: true
-            clip: true
-            anchors {
-               left: parent.left
-               right: parent.right
-            }
-            height: applet && (applet.expanded || plasmoid.applets.count == 1) ? Math.max(applet.fullRepresentationItem.Layout.minimumHeight, units.iconSizes.medium) : units.iconSizes.medium
-            Behavior on height {
-                NumberAnimation {
-                    duration: units.shortDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-
-            Connections {
-                target: applet
-                onExpandedChanged: {
-
-                    if (!applet.expanded && root.expandedApplet == applet) {
-                        root.expandedApplet = null;
-                        return;
-                    }
-                    if (root.expandedApplet && root.expandedApplet != applet) {
-                        root.expandedApplet.expanded = false;
-                    }
-                    root.expandedApplet = applet;
-                }
-            }
-
-            MouseArea {
-                id: mouseArea
-
-                property bool wasExpanded: false
-
-                anchors.fill: parent
-                onPressed: wasExpanded = applet.expanded
-                onClicked: applet.expanded = !wasExpanded
-            }
+            Layout.fillHeight: true
         }
     }
 
@@ -286,17 +225,27 @@ PlasmaCore.ColorScope {
         contents: Item {
             id: panelContents
             anchors.fill: parent
-            clip: true
 
-            Item {
-                id: lastSpacer
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+            PlasmaComponents.TabBar {
+                id: tabBar
+                visible: plasmoid.applets.length > 1
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    right: parent.right
+                    margins: units.smallSpacing
+                }
+                height: units.iconSizes.huge
             }
-            Column {
-                id: layout
-                anchors.fill: parent
-                spacing: units.smallSpacing
+            PlasmaComponents.TabGroup {
+                id: tabGroup
+                anchors {
+                    left: parent.left
+                    top: plasmoid.applets.length > 1 ? tabBar.bottom : parent.top
+                    right: parent.right
+                    bottom: parent.bottom
+                    margins: units.smallSpacing
+                }
             }
         }
     }

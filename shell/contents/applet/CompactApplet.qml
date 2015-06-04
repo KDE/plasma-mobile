@@ -57,8 +57,9 @@ Item {
     }
 
     Row {
+        id: label
         height: units.iconSizes.medium
-        anchors.left: compactRepresentation ? compactRepresentation.right : undefined
+        anchors.left: compactRepresentation ? compactRepresentation.right : parent.left
         PlasmaCore.SvgItem {
             svg: PlasmaCore.Svg {
                 id: arrowSvg
@@ -78,7 +79,11 @@ Item {
 
     Rectangle {
         id: expandedItem
-        anchors.fill: parent
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        height: units.iconSizes.medium
         color: PlasmaCore.ColorScope.highlightColor
         opacity: plasmoid.expanded ? 0.3 : 0
         Behavior on opacity {
@@ -92,17 +97,13 @@ Item {
     Item {
         id: appletParent
         opacity: plasmoid.expanded ? 1 : 0
-        anchors.top: parent.bottom
-        Layout.minimumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumWidth : 0
-        Layout.minimumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumHeight: 0
-        Layout.maximumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumWidth : Infinity
-        Layout.maximumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumHeight: Infinity
-        width: Math.max(parent.width, Layout.minimumWidth)
-        height: Layout.minimumHeight
+        anchors.top: label.bottom
+        width: parent.width
+        height: units.gridUnit * 20 - units.iconSizes.medium
 
         Behavior on opacity {
             OpacityAnimator {
-                duration: units.shortDuration
+                duration: units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
