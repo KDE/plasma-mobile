@@ -17,9 +17,18 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kwin 2.0;
 
 Item {
     id: root
+
+    function showWindowList() {
+        if (!mainItemLoader.item) {
+            mainItemLoader.source = "switcher.qml";
+        }
+        mainItemLoader.item.visible = true;
+    }
 
     Loader {
         id: mainItemLoader
@@ -33,6 +42,14 @@ Item {
             }
             mainItemLoader.item.visible = true;
         }
+    }
+
+    Loader {
+        id: panelLoader
+    }
+
+    Component.onCompleted: {
+        panelLoader.source = "panel.qml"
     }
 }
 
