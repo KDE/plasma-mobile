@@ -47,6 +47,9 @@ install(DIRECTORY compositor/
 kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
 install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.phonebook.desktop)
 
+install( DIRECTORY kwinmultitasking/ DESTINATION ${DATA_INSTALL_DIR}/kwin/scripts/org.kde.phone.multitasking )
+install( FILES kwinmultitasking/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME kwin-script-org.kde.phone.multitasking.desktop )
+
 add_subdirectory(bin)
 #add_subdirectory(services)
 add_subdirectory(settingsmodules)
