@@ -31,6 +31,10 @@ PlasmaCore.Dialog {
     flags: Qt.X11BypassWindowManagerHint
     backgroundHints: PlasmaCore.Dialog.NoBackground
 
+    function closeWindowList() {
+        hideAnim.running = true;
+    }
+
     onVisibleChanged: {
         if (visible) {
             showAnim.running = true;
@@ -96,11 +100,11 @@ PlasmaCore.Dialog {
                     anchors.fill: parent
                     //parentWindow: dialog.windowId
                     client: model.client
-                    brightness: (index == view.currentIndex) ? 1.0 : 0.4
+                    brightness: (model.client == workspace.activeClient) ? 1.0 : 0.6
                 }
                 onClicked: {
                     workspace.activeClient = model.client
-                    dialog.visible = false
+                    hideAnim.running = true
                 }
             }
         }

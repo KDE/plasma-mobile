@@ -18,44 +18,31 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kwin 2.0;
 
-Item {
-    id: root
-
-    function showWindowList() {
-        if (!mainItemLoader.item) {
-            mainItemLoader.source = "switcher.qml";
+PlasmaCore.Dialog {
+    id: panel
+    y: workspace.virtualScreenSize.height - height
+    flags: Qt.X11BypassWindowManagerHint
+    
+    mainItem: Item {
+        width: workspace.virtualScreenSize.width
+        height: units.iconSizes.medium
+        PlasmaComponents.ToolButton {
+            anchors.left: parent.left
+            iconSource: "applications-other"
+            onClicked: root.showWindowList();
         }
-        mainItemLoader.item.visible = true;
-        panelLoader.item.raise();
-    }
 
-    function closeWindowList() {
-        mainItemLoader.item.closeWindowList()
-    }
-
-    Loader {
-        id: mainItemLoader
-    }
-
-    Connections {
-        target: workspace
-        onCurrentDesktopChanged: {
-            if (!mainItemLoader.item) {
-                mainItemLoader.source = "switcher.qml";
-            }
-            mainItemLoader.item.visible = true;
+        PlasmaComponents.ToolButton {
+            anchors.horizontalCenter: parent.horizontalCenter
+            iconSource: "go-home"
+            onClicked: root.closeWindowList();
         }
     }
-
-    Loader {
-        id: panelLoader
-    }
-
     Component.onCompleted: {
-        panelLoader.source = "panel.qml"
+      //  KWin.registerWindow(panel);
+        panel.visible = true;
     }
 }
-
-
