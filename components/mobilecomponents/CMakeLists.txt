@@ -22,8 +22,6 @@ install(FILES ResourceDelegate.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma
 install(FILES ViewSearch.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES OverlayDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES SplitDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES DatePicker.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES TimePicker.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 

@@ -72,7 +72,7 @@ void SettingsComponent::loadModule(const QString &name)
     QString pluginName = name;
     QString query;
     if (pluginName.isEmpty()) {
-        //qDebug() << "Not loading plugin ..." << pluginName;
+        qDebug() << "Not loading plugin ..." << pluginName;
         return;
     }
     query = QString("[X-KDE-PluginInfo-Name] == '%1'").arg(pluginName);
