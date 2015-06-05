@@ -1,6 +1,6 @@
 project(plasma-mobile)
 
-cmake_minimum_required(VERSION 2.8.10.1)
+cmake_minimum_required(VERSION 2.8.12)
 
 ################# Disallow in-source build #################
 
@@ -59,11 +59,6 @@ find_package(KF5Baloo NO_MODULE)
 find_package(KF5Declarative REQUIRED NO_MODULE)
 find_package(PkgConfig)
 #########################################################################
-
-add_definitions(-DQT_USE_FAST_CONCATENATION -DQT_USE_FAST_OPERATOR_PLUS)
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
-
-remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FROM_BYTEARRAY -DQT_NO_KEYWORDS)
 
 
 find_package(PkgConfig)
