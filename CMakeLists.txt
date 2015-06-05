@@ -67,9 +67,6 @@ remove_definitions(-DQT_NO_CAST_FROM_ASCII -DQT_STRICT_ITERATORS -DQT_NO_CAST_FR
 
 
 find_package(PkgConfig)
-pkg_check_modules(QTNETWORKMANAGER NetworkManagerQt)
-##TODO find a way to find it properly
-##find_package(LibKScreen)
 
 MACRO(installPackage dir component)
    SET(root ${ARGN})
@@ -82,22 +79,10 @@ ENDMACRO(installPackage)
 
 #add_subdirectory(applets)
 add_subdirectory(applications)
-add_subdirectory(artwork)
 add_subdirectory(components)
 add_subdirectory(containments)
 #add_subdirectory(dataengines)
 add_subdirectory(qmlpackages)
 #add_subdirectory(runners)
 #add_subdirectory(shell)
-#add_subdirectory(wallpapers)
 add_subdirectory(activeshellpackage)
-
-#if (QTNETWORKMANAGER_FOUND)
-#    add_subdirectory(contourd)
-#else (QTNETWORKMANAGER_FOUND)
-#    message(WARNING "QtNetworkManager not found. http://projects.kde.org/search?q=networkmanager&scope=all&all_words=1&projects=1&submit=Submit needed to build Contour")
-#endif (QTNETWORKMANAGER_FOUND)
-
-#if (BUILD_HANDSET)
-#   add_subdirectory(handset)
-#endif (BUILD_HANDSET)
