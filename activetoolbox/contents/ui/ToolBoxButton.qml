@@ -22,7 +22,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 Item {
     id: toolBoxButton
@@ -41,17 +40,21 @@ Item {
         id: buttonLayout
         spacing: units.smallSpacing
 
-        MobileComponents.ActionButton {
+        PlasmaComponents.ToolButton {
             id: addButton
-            svg: iconsSvg
-            elementId: "add"
+            iconSource: "list-add"
+            flat: false
+            width: units.iconSizes.large
+            height: width
             onClicked: plasmoid.action("add widgets").trigger();
         }
 
-        MobileComponents.ActionButton {
+        PlasmaComponents.ToolButton {
             id: configureButton
-            svg: iconsSvg
-            elementId: "configure"
+            iconSource: "configure"
+            flat: false
+            width: units.iconSizes.large
+            height: width
             anchors {
                 leftMargin: 10
             }

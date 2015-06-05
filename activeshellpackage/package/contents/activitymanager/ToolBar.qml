@@ -20,7 +20,6 @@
 import QtQuick 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
     id: actionsToolBar
@@ -69,11 +68,13 @@ PlasmaCore.FrameSvgItem {
         x: actionsToolBar.margins.left+30
         y: actionsToolBar.margins.top
         spacing: 40
-        MobileComponents.ActionButton {
+        PlasmaComponents.ToolButton {
             id: createActivityButton
-            svg: iconsSvg
-            elementId: "add"
-            toggle: true
+            iconSource: "list-add"
+            checkable: true
+            flat: false
+            height: units.iconSizes.large
+            width: height
 
             onCheckedChanged: {
                     if (!checked) {
@@ -117,12 +118,14 @@ PlasmaCore.FrameSvgItem {
                     easing.type: Easing.InOutQuad
                 }
             }
-            MobileComponents.ActionButton {
+            PlasmaComponents.ToolButton {
                 id: filterButton
-                svg: iconsSvg
-                elementId: "filter"
+                iconSource: "view-filter"
                 anchors.right: parent.right
-                toggle: true
+                checkable: true
+                flat: false
+                height: units.iconSizes.large
+                width: height
 
                 onClicked: {
                     if (filterField.opacity==1) {

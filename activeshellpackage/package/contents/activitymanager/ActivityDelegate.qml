@@ -19,7 +19,6 @@
 
 import QtQuick 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -178,11 +177,12 @@ Item {
                 }
             }
             property ConfirmationDialog confirmationDialog
-            MobileComponents.ActionButton {
+            PlasmaComponents.ToolButton {
                 id: deleteButton
-                svg: iconsSvg
-                elementId: "delete"
-                toggle: true
+                iconSource: "list-delete"
+                checkable: true
+                width: units.iconSizes.large
+                height: width
                 opacity: model.current == true ? 0.4 : 1
                 enabled: opacity == 1
                 z: 800
