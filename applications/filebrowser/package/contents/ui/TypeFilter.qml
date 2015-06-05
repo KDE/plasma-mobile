@@ -82,8 +82,8 @@ ColumnLayout {
         }
     }
 
-    //recreate the BalooDataModel
-    Baloo.BalooDataModel {
+    //recreate the QueryResultsModel
+    Baloo.QueryResultsModel {
         id: balooRestoreModel
     }
 

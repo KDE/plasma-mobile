@@ -50,7 +50,7 @@ Rectangle {
     //BEGIN model
     PlasmaCore.SortFilterModel {
         id: balooDataModel
-        sourceModel: Baloo.BalooDataModel {}
+        sourceModel: Baloo.QueryResultsModel {}
     }
 
     PlasmaCore.SortFilterModel {

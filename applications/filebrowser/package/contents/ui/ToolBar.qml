@@ -36,7 +36,7 @@ Item {
         dataSource: hotplugSource
     }
 
-    Baloo.BalooDataModel {
+    Baloo.QueryResultsModel {
         id: balooRestoreModel
     }
 
