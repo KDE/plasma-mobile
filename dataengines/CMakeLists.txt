@@ -1,7 +1,3 @@
 add_subdirectory(alarms)
 add_subdirectory(apps)
-add_subdirectory(devicecapabilities)
-add_subdirectory(metadata)
-add_subdirectory(orientation)
-add_subdirectory(preview)
 add_subdirectory(recommendations)

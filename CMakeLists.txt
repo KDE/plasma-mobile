@@ -56,7 +56,6 @@ find_package(PkgConfig)
 
 find_package(PkgConfig)
 
-#add_subdirectory(applets)
 add_subdirectory(applications)
 add_subdirectory(components)
 add_subdirectory(containments)
