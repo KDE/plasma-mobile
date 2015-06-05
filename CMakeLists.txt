@@ -26,13 +26,6 @@ include(KDECompilerSettings)
 
 find_package(Qt5 REQUIRED NO_MODULE COMPONENTS Core Quick Test Gui)
 
-#add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0)
-
-if(KDE_PLATFORM_FEATURE_DISABLE_DEPRECATED)
-   set(KDE_NO_DEPRECATED TRUE)
-   set(CMAKE_AUTOMOC_MOC_OPTIONS "-DKDE_NO_DEPRECATED")
-endif()
-
 ################# Enable C++11 features for clang and gcc #################
 
 if(UNIX)
