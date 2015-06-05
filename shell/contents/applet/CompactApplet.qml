@@ -56,16 +56,11 @@ Item {
         anchors {
             left: parent.left
             right: parent.right
+            bottom: parent.top
         }
         height: units.smallSpacing
         color: PlasmaCore.ColorScope.highlightColor
-        opacity: plasmoid.expanded ? 1 : 0
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: units.shortDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
+        visible: plasmoid.expanded
     }
 
     Item {

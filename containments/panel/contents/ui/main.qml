@@ -236,5 +236,14 @@ PlasmaCore.ColorScope {
                 }
             }
         }
+        onVisibleChanged: {
+            if (visible && !root.expandedApplet) {
+                print("AAA"+appletIconsRow.children[0].applet)
+                var applet = appletIconsRow.children[0].applet;
+                applet.expanded = true;
+                appletsStack.replace(applet.fullRepresentationItem);
+                root.expandedApplet = applet;
+            }
+        }
     }
 }
