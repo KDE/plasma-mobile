@@ -56,10 +56,12 @@ find_package(PkgConfig)
 
 find_package(PkgConfig)
 
+plasma_install_package(activetoolbox org.kde.plasma.activetoolbox packages package)
+
 add_subdirectory(applications)
 add_subdirectory(components)
 add_subdirectory(containments)
 #add_subdirectory(dataengines)
-add_subdirectory(qmlpackages)
 #add_subdirectory(runners)
 add_subdirectory(activeshellpackage)
+
