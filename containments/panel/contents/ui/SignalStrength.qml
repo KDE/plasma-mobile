@@ -28,6 +28,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Item {
 
+    width: strengthIcon.height + strengthLabel.width
     Layout.minimumWidth: strengthIcon.height + strengthLabel.width
     OfonoManager {
         id: ofonoManager

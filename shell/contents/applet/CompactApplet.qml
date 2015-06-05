@@ -35,12 +35,7 @@ Item {
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
             compactRepresentation.parent = root;
-            compactRepresentation.anchors.fill = undefined;
-            compactRepresentation.anchors.right = undefined;
-            compactRepresentation.anchors.left = root.left;
-            compactRepresentation.anchors.top = root.top;
-            compactRepresentation.width = units.iconSizes.medium;
-            compactRepresentation.height = compactRepresentation.width;
+            compactRepresentation.anchors.fill = root;
             compactRepresentation.visible = true;
         }
         root.visible = true;
@@ -56,36 +51,15 @@ Item {
         fullRepresentation.anchors.fill = fullRepresentation.parent;
     }
 
-    Row {
-        id: label
-        height: units.iconSizes.medium
-        anchors.left: compactRepresentation ? compactRepresentation.right : parent.left
-        PlasmaCore.SvgItem {
-            svg: PlasmaCore.Svg {
-                id: arrowSvg
-                imagePath: "widgets/arrows"
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            }
-            width: units.iconSizes.smallMedium
-            height: width
-            elementId: plasmoid.expanded ? "up-arrow" : "down-arrow"
-            anchors.verticalCenter: parent.verticalCenter
-        }
-        PlasmaComponents.Label {
-            text: plasmoid.title
-            anchors.verticalCenter: parent.verticalCenter
-        }
-    }
-
     Rectangle {
         id: expandedItem
         anchors {
             left: parent.left
             right: parent.right
         }
-        height: units.iconSizes.medium
+        height: units.smallSpacing
         color: PlasmaCore.ColorScope.highlightColor
-        opacity: plasmoid.expanded ? 0.3 : 0
+        opacity: plasmoid.expanded ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration
@@ -97,7 +71,7 @@ Item {
     Item {
         id: appletParent
         opacity: plasmoid.expanded ? 1 : 0
-        anchors.top: label.bottom
+        anchors.top: parent.top
         width: parent.width
         height: units.gridUnit * 20 - units.iconSizes.medium
 

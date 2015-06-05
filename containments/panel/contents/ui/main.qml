@@ -44,24 +44,18 @@ PlasmaCore.ColorScope {
     }
 
     function addApplet(applet, x, y) {
-        var container = appletContainerComponent.createObject(tabGroup)
-        container.visible = true
+         
+        var container = appletContainerComponent.createObject(appletIconsRow)
         print("Applet added: " + applet + " " + applet.title)
+        container.width = units.iconSizes.medium
+        container.height = container.height
 
-        var appletWidth = applet.width;
-        var appletHeight = applet.height;
         applet.parent = container;
         container.applet = applet;
         applet.anchors.fill = container;
         applet.visible = true;
         container.visible = true;
-
-        //container.parent = tabs;
-
-        //The tab
-        var tab = tabComponent.createObject(tabBar.layout);
-        tab.iconSource = applet.icon;
-        tab.tab = container;
+        
     }
 
     Component.onCompleted: {
@@ -96,6 +90,22 @@ PlasmaCore.ColorScope {
             property Item applet
             Layout.fillWidth: true
             Layout.fillHeight: true
+            Layout.minimumWidth: appletIconsRow.height
+
+            MouseArea {
+                anchors.fill: parent
+                z: 999
+                onClicked: {
+                    if (root.expandedApplet != applet) {
+                        applet.expanded = true;
+                        appletsStack.replace(applet.fullRepresentationItem);
+                        if (root.expandedApplet) {
+                            root.expandedApplet.expanded = false;
+                        }
+                        root.expandedApplet = applet;
+                    }
+                }
+            }
         }
     }
 
@@ -131,23 +141,15 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
         }
         Loader {
+            id: strengthLoader
             height: parent.height
-            width: item.width
+            width: item ? item.width : 0
             source: Qt.resolvedUrl("SignalStrength.qml")
         }
 
-        PlasmaComponents.Label {
-            id: clock
-            anchors.fill: parent
-            text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
-            color: PlasmaCore.ColorScope.textColor
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: height / 2
-        }
-
         Row {
-            anchors.right: batteryIcon.left
+            id: sniRow
+            anchors.left: strengthLoader.right
             height: parent.height
             Repeater {
                 id: statusNotifierRepeater
@@ -165,31 +167,31 @@ PlasmaCore.ColorScope {
             }
         }
 
-        PlasmaWorkspace.BatteryIcon {
-            id: batteryIcon
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
-            width: height
-            height: parent.height
-            hasBattery: pmSource.data["Battery"]["Has Battery"]
-        // batteryType: "Phone"
-            percent: pmSource.data["Battery0"] ? pmSource.data["Battery0"]["Percent"] : 0
+        PlasmaComponents.Label {
+            id: clock
+            anchors.fill: parent
+            text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
+            color: PlasmaCore.ColorScope.textColor
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignVCenter
+            font.pixelSize: height / 2
+        }
 
-            PlasmaCore.DataSource {
-                id: pmSource
-                engine: "powermanagement"
-                connectedSources: sources
-                onSourceAdded: {
-                    disconnectSource(source);
-                    connectSource(source);
-                }
-                onSourceRemoved: {
-                    disconnectSource(source);
+        RowLayout {
+            id: appletIconsRow
+            anchors {
+                bottom: parent.bottom
+                right: parent.right
+            }
+            height: slidingPanel.visible ? units.iconSizes.huge : parent.height
+            Behavior on height {
+                PropertyAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
                 }
             }
         }
+
         Rectangle {
             height: units.smallSpacing/2
             color: PlasmaCore.ColorScope.highlightColor
@@ -226,25 +228,11 @@ PlasmaCore.ColorScope {
             id: panelContents
             anchors.fill: parent
 
-            PlasmaComponents.TabBar {
-                id: tabBar
-                visible: plasmoid.applets.length > 1
+            PlasmaComponents.PageStack {
+                id: appletsStack
                 anchors {
-                    left: parent.left
-                    top: parent.top
-                    right: parent.right
-                    margins: units.smallSpacing
-                }
-                height: units.iconSizes.huge
-            }
-            PlasmaComponents.TabGroup {
-                id: tabGroup
-                anchors {
-                    left: parent.left
-                    top: plasmoid.applets.length > 1 ? tabBar.bottom : parent.top
-                    right: parent.right
-                    bottom: parent.bottom
-                    margins: units.smallSpacing
+                    fill: parent
+                    bottomMargin: units.iconSizes.huge
                 }
             }
         }
