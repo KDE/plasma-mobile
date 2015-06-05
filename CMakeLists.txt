@@ -56,15 +56,6 @@ find_package(PkgConfig)
 
 find_package(PkgConfig)
 
-MACRO(installPackage dir component)
-   SET(root ${ARGN})
-   IF(NOT root)
-        SET(root plasma/plasmoids)
-     ENDIF(NOT root)
-    install(DIRECTORY ${dir}/ DESTINATION ${DATA_INSTALL_DIR}/${root}/${component} PATTERN Messages.sh EXCLUDE)
-    install(FILES ${dir}/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME plasma-applet-${component}.desktop)
-ENDMACRO(installPackage)
-
 #add_subdirectory(applets)
 add_subdirectory(applications)
 add_subdirectory(components)
