@@ -3,6 +3,7 @@ project(active-settings)
 #include_directories( ${KDE4_INCLUDES} ${QT_INCLUDES} )
 
 add_subdirectory(src)
+add_subdirectory(import)
 add_subdirectory(modules)
 
 # Install plugin definition

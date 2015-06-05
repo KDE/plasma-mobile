@@ -2,7 +2,6 @@
 #TODO Here exists a big part of the nepomuk support, which needs to be
 #ported to Baloo
 add_subdirectory(mobilecomponents)
-add_subdirectory(settings)
 
 #FIXME can we remove that now?
 # dirmodel can be removed once plasma-mobile hard-requires KDE libs/runtime 4.11
