@@ -20,7 +20,6 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.components 0.1 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 
 Item {
@@ -71,13 +70,14 @@ Item {
             id: layout
             x: extraActionsFrame.margins.left
             y: extraActionsFrame.margins.top
-            MobileComponents.ActionButton {
+            PlasmaComponents.ToolButton {
                 id: removeButton
-                iconSize: 22
-                svg: iconsSvg
-                elementId: "configure"
+                width: units.iconSizes.medium
+                height: width
+                iconSource: "configure"
+                flat: false
 
-                action: applet.action("configure")
+                onClicked: applet.action("configure").trigger();
             }
 
             Item {
@@ -86,13 +86,14 @@ Item {
                 height: actionSize
             }
 
-            MobileComponents.ActionButton {
+            PlasmaComponents.ToolButton {
                 id: runButton
-                iconSize: 22
-                svg: iconsSvg
-                elementId: "close"
+                width: units.iconSizes.medium
+                height: width
+                iconSource: "close"
+                flat: false
 
-                action: applet.action("remove")
+                onClicked: applet.action("remove").trigger();
             }
         }
     }

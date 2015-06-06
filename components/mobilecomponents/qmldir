@@ -1,6 +1,5 @@
 module org.kde.plasma.mobilecomponents
 plugin mobilecomponentsplugin
-ActionButton 0.2 ActionButton.qml
 IconButton 0.2 IconButton.qml
 IconGrid 0.2 IconGrid.qml
 Rating 0.2 Rating.qml

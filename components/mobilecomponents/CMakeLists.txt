@@ -14,7 +14,6 @@ target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(FILES ActionButton.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES Rating.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconButton.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconGrid.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)

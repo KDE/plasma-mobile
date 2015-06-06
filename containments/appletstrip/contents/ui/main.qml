@@ -181,19 +181,18 @@ Item {
                     width: main.width/appletColumns
                     Column {
                         anchors.centerIn: parent
-                        MobileComponents.ActionButton {
-                            svg: configIconsSvg
-                            elementId: "add"
-                            action: plasmoid.action("add widgets")
+                        PlasmaComponents.ToolButton {
+                            iconSource: "list-add"
+                            width: units.iconSizes.medium
+                            height: width
+                            onClicked: plasmoid.action("add widgets").trigger()
                         }
-                        MobileComponents.ActionButton {
+                        PlasmaComponents.ToolButton {
                             svg: configIconsSvg
-                            elementId: "configure"
-                            action: plasmoid.action("configure")
-                            //FIXME: WHY?
-                            Component.onCompleted: {
-                                action.enabled = true
-                            }
+                            iconSource: "configure"
+                            width: units.iconSizes.medium
+                            height: width
+                            onClicked: plasmoid.action("configure").trigger()
                         }
                     }
                 }
