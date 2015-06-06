@@ -3,6 +3,5 @@ plugin mobilecomponentsplugin
 IconGrid 0.2 IconGrid.qml
 Rating 0.2 Rating.qml
 ResourceDelegate 0.2 ResourceDelegate.qml
-ViewSearch 0.2 ViewSearch.qml
 OverlayDrawer 0.2 OverlayDrawer.qml
 SplitDrawer 0.2 SplitDrawer.qml

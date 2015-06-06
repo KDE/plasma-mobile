@@ -210,7 +210,7 @@ Item {
         }
     }
 
-    MobileComponents.ViewSearch {
+    ViewSearch {
         id: searchBox
         anchors.centerIn: parent
         visible: fileBrowserRoot.model == balooDataModel

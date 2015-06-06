@@ -15,7 +15,6 @@ install(TARGETS mobilecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/pl
 install(FILES Rating.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconGrid.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES ResourceDelegate.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES ViewSearch.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES OverlayDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES SplitDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
