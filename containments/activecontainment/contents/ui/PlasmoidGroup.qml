@@ -21,7 +21,6 @@
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import "plasmapackage:/code/LayoutManager.js" as LayoutManager
 
 ItemGroup {
@@ -62,36 +61,35 @@ ItemGroup {
         }
     }
 
-    MobileComponents.ActionButton {
+    PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "close"
-        iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
-        backgroundVisible: false
-        visible: (action && typeof action !== "undefined") ? action.enabled : false
-        action: applet? applet.action("remove") : null
+        width: Math.max(16, plasmoidGroup.titleHeight - 2)
+        height: width
+        visible: (applet.action("remove")) ? applet.action("remove").enabled : false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: applet.action("remove").trigger();
+        }
         anchors {
             right: plasmoidGroup.contents.right
             bottom: plasmoidGroup.contents.top
-            bottomMargin: 4
-        }
-        Component.onCompleted: {
-            if (action && typeof action !== "undefined") {
-                action.enabled = true
-            }
         }
     }
 
-    MobileComponents.ActionButton {
+    PlasmaCore.SvgItem {
         svg: configIconsSvg
         elementId: "configure"
-        iconSize: Math.max(16, plasmoidGroup.titleHeight - 2)
-        backgroundVisible: false
-        visible: (action && typeof action !== "undefined") ? action.enabled : false
-        action: applet? applet.action("configure") : null
+        width: Math.max(16, plasmoidGroup.titleHeight - 2)
+        height: width
+        visible: (applet.action("configure")) ? applet.action("configure").enabled : false
+        MouseArea {
+            anchors.fill: parent
+            onClicked: applet.action("configure").trigger();
+        }
         anchors {
             left: plasmoidGroup.contents.left
             bottom: plasmoidGroup.contents.top
-            bottomMargin: 4
         }
         Component.onCompleted: {
             if (action && typeof action !== "undefined") {

@@ -20,7 +20,6 @@
 import QtQuick 1.0
 import org.kde.plasma.core 0.1 as PlasmaCore
 import org.kde.plasma.containments 0.1 as PlasmaContainments
-import org.kde.plasma.mobilecomponents 0.1 as MobileComponents
 
 PlasmaCore.FrameSvgItem {
     id: plasmoidContainer
@@ -89,7 +88,7 @@ PlasmaCore.FrameSvgItem {
         }
     }
 
-    MobileComponents.ActionButton {
+    PlasmaComponents.ToolButton {
         id: runButton
         anchors {
             right: parent.right
@@ -97,9 +96,7 @@ PlasmaCore.FrameSvgItem {
             rightMargin: plasmoidContainer.margins.right
             bottomMargin: plasmoidContainer.margins.bottom
         }
-        svg: iconsSvg
-        elementId: "maximize"
-        backgroundVisible: false
+        iconSource: "system-run"
         z: applet.z + 1
 
         action: applet.action("run associated application")
