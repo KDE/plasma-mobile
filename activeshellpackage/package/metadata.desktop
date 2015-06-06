@@ -1,8 +1,24 @@
 [Desktop Entry]
 Comment=Plasma Active shell
+Comment[ca]=Intèrpret d'ordres del Plasma Active
+Comment[es]=Intérprete para Plasma Active
+Comment[nl]=Plasma-activiteit-shell
+Comment[pt]=Consola do Plasma Active
+Comment[pt_BR]=Shell do Plasma Active
+Comment[sv]=Plasma Active skal
+Comment[uk]=Портативна оболонка Плазми
+Comment[x-test]=xxPlasma Active shellxx
 Encoding=UTF-8
 Keywords=
 Name=Desktop
+Name[ca]=Escriptori
+Name[es]=Escritorio
+Name[nl]=Bureaublad
+Name[pt]=Ambiente de Trabalho
+Name[pt_BR]=Ambiente de trabalho
+Name[sv]=Skrivbord
+Name[uk]=Стільниця
+Name[x-test]=xxDesktopxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell

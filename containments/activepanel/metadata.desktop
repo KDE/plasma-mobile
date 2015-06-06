@@ -1,6 +1,14 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Mobile Panel
+Name[ca]=Plafó mòbil
+Name[es]=Panel móvil
+Name[nl]=Paneel voor mobiel
+Name[pt]=Painel Móvel
+Name[pt_BR]=Painel móvel
+Name[sv]=Mobil panel
+Name[uk]=Мобільна панель
+Name[x-test]=xxMobile Panelxx
 Comment=A system tray applet for mobile shell
 Comment[bs]=Programčić u sistemskom tray za mobilne školjke
 Comment[ca]=Una miniaplicació de safata del sistema per a l'àrea de treball de Mòbil

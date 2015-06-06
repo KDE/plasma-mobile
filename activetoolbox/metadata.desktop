@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=Plasma Active Toolbox
+Name[ca]=Quadre d'eines del Plasma Active
+Name[es]=Caja de herramientas de Plasma Active
+Name[nl]=Actieve Plasma-hulpmiddelen
+Name[pt]=Ferramentas do Plasma Active
+Name[pt_BR]=Barra de ferramentas do Plasma Active
+Name[sv]=Plasma Active verktygslåda
+Name[uk]=Набір інструментів портативної Плазми
+Name[x-test]=xxPlasma Active Toolboxxx
 Encoding=UTF-8
 
 Type=Service

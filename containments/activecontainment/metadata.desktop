@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=Active Containment
+Name[ca]=Contenidor Active
+Name[es]=Contenedor de Active
+Name[nl]=Actieve container
+Name[pt]=Contentor Activo
+Name[pt_BR]=Contêiner ativo
+Name[sv]=Active omgivning
+Name[uk]=Портативний контейнер
+Name[x-test]=xxActive Containmentxx
 Encoding=UTF-8
 
 Type=Service
