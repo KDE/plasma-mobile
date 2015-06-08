@@ -131,6 +131,10 @@ Window {
                 }
             }
         }
+        //FIXME: this empty mousearea is a workaround on https://bugreports.qt.io/browse/QTBUG-46545
+        MouseArea {
+            anchors.fill: parent
+        }
 
         states: [
             State {
