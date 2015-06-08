@@ -26,6 +26,7 @@ PlasmaCore.Dialog {
     id: panel
     y: workspace.virtualScreenSize.height - height
     flags: Qt.X11BypassWindowManagerHint
+    type: PlasmaCore.Dialog.Dock
     
     mainItem: Item {
         width: workspace.virtualScreenSize.width
