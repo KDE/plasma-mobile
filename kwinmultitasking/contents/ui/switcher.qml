@@ -22,7 +22,7 @@ import QtQuick.Window 2.0;
 import org.kde.plasma.core 2.0 as PlasmaCore;
 import org.kde.plasma.components 2.0 as PlasmaComponents;
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons;
-import org.kde.kwin 2.0 as KWin;
+import org.kde.kwin 2.0 as KWinScripting;
 
 PlasmaCore.Dialog {
     id: dialog
@@ -71,9 +71,9 @@ PlasmaCore.Dialog {
             cacheBuffer: 9999
             cellWidth: units.gridUnit * 20
             cellHeight: units.gridUnit * 20 // (view.width / view.height)
-            model: KWin.ClientModel {
+            model: KWinScripting.ClientModel {
                 id: clientModel
-                exclusions: KWin.ClientModel.NotAcceptingFocusExclusion
+                exclusions: KWinScripting.ClientModel.NotAcceptingFocusExclusion
             }
             onMovingChanged: {
                 if (contentY < -view.height/2) {
@@ -96,7 +96,7 @@ PlasmaCore.Dialog {
                     onClicked: model.client.closeWindow()
                     visible: model.client.closeable
                 }
-                KWin.ThumbnailItem {
+                KWinScripting.ThumbnailItem {
                     anchors.fill: parent
                     //parentWindow: dialog.windowId
                     client: model.client
