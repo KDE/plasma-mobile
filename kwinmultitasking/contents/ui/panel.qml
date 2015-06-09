@@ -42,6 +42,12 @@ PlasmaCore.Dialog {
             iconSource: "go-home"
             onClicked: root.closeWindowList();
         }
+        
+        PlasmaComponents.ToolButton {
+            anchors.right: parent.right
+            iconSource: "window-close"
+            onClicked: workspace.activeClient.closeWindow();
+        }
     }
     Component.onCompleted: {
         KWin.registerWindow(panel);
