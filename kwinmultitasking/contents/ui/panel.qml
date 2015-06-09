@@ -40,12 +40,16 @@ PlasmaCore.Dialog {
         PlasmaComponents.ToolButton {
             anchors.horizontalCenter: parent.horizontalCenter
             iconSource: "go-home"
-            onClicked: root.closeWindowList();
+            onClicked: {
+                root.closeWindowList();
+                workspace.slotToggleShowDesktop();
+            }
         }
         
         PlasmaComponents.ToolButton {
             anchors.right: parent.right
             iconSource: "window-close"
+            enabled: workspace.activeClient
             onClicked: workspace.activeClient.closeWindow();
         }
     }

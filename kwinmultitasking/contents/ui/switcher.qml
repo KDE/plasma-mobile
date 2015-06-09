@@ -40,9 +40,10 @@ PlasmaCore.Dialog {
             showAnim.running = true;
         }
     }
-    mainItem: Item {
+    mainItem: Rectangle {
         width: workspace.virtualScreenSize.width
         height: workspace.virtualScreenSize.height
+        color: Qt.rgba(0, 0, 0, 0.5)
 
         SequentialAnimation {
             id: hideAnim

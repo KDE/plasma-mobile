@@ -32,7 +32,9 @@ Item {
     }
 
     function closeWindowList() {
-        mainItemLoader.item.closeWindowList()
+        if (mainItemLoader.item) {
+            mainItemLoader.item.closeWindowList()
+        }
     }
 
     Loader {
