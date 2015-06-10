@@ -74,7 +74,10 @@ PlasmaCore.Dialog {
             cellHeight: units.gridUnit * 20 // (view.width / view.height)
             model: KWinScripting.ClientModel {
                 id: clientModel
-                exclusions: KWinScripting.ClientModel.NotAcceptingFocusExclusion
+                exclusions: KWinScripting.ClientModel.NotAcceptingFocusExclusion |
+                            KWinScripting.ClientModel.DesktopWindowsExclusion |
+                            KWinScripting.ClientModel.DockWindowsExclusion |
+                            KWinScripting.ClientModel.SwitchSwitcherExclusion
             }
             onMovingChanged: {
                 if (contentY < -view.height/2) {
