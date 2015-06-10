@@ -230,8 +230,10 @@ MouseEventListener {
         dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight;
         dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight;
         dragDelegate.opacity = 0;
-        dragDelegate.modelData.ApplicationIconRole = "";
-        dragDelegate.modelDataChanged();
+        if (dragDelegate.modelData) {
+            dragDelegate.modelData.ApplicationIconRole = "";
+            dragDelegate.modelDataChanged();
+        }
         applicationsView.dragData = null;
         root.reorderingApps = false;
         applicationsView.forceLayout();
@@ -241,6 +243,7 @@ MouseEventListener {
     }
     onClicked: {
         var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
+
         //in favorites area?
         var item;
         if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
@@ -253,7 +256,30 @@ MouseEventListener {
             return;
         }
 
-        plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole)
+        plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
+        clickFedbackAnimation.target = item;
+        clickFedbackAnimation.running = true;
+    }
+    SequentialAnimation {
+        id: clickFedbackAnimation
+        property Item target
+        NumberAnimation {
+            target: clickFedbackAnimation.target
+            properties: "scale"
+            to: 2
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        PauseAnimation {
+            duration: units.shortDuration
+        }
+        NumberAnimation {
+            target: clickFedbackAnimation.target
+            properties: "scale"
+            to: 1
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
     }
     PlasmaCore.ColorScope {
         anchors.fill: parent
