@@ -28,4 +28,6 @@ export KDE_SESSION_VERSION=5
 
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
+/usr/bin/voicecall-manager&
+/usr/bin/plasmaphonedialer -d&
 exec /usr/bin/plasmashell -p org.kde.satellite.phone 
