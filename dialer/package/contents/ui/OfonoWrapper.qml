@@ -22,7 +22,7 @@ import org.nemomobile.voicecall 1.0
 
 
 Item {
-    id: root
+    id: ofonoWrapper
 
 //BEGIN PROPERTIES
     property string status: "idle"
@@ -146,29 +146,29 @@ Item {
             previousStatus = status;
             switch (status) {
             case 1:
-                root.status = "active";
+                ofonoWrapper.status = "active";
                 break;
             case 2:
-                root.status = "held";
+                ofonoWrapper.status = "held";
                 break;
             case 3:
-                root.status = "dialing";
+                ofonoWrapper.status = "dialing";
                 break;
             case 4:
-                root.status = "alerting";
+                ofonoWrapper.status = "alerting";
                 break;
             case 5:
-                root.status = "incoming";
+                ofonoWrapper.status = "incoming";
                 break;
             case 6:
-                root.status = "waiting";
+                ofonoWrapper.status = "waiting";
                 break;
             case 7:
-                root.status = "disconnected";
+                ofonoWrapper.status = "disconnected";
                 break;
             case 0:
             default:
-                root.status = "idle";
+                ofonoWrapper.status = "idle";
                 break;
             }
         }
