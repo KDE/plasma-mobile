@@ -109,15 +109,6 @@ PlasmaCore.ColorScope {
         }
     }
 
-    Component {
-        id: tabComponent
-        PlasmaComponents.TabButton {
-            width: parent.width / parent.children.length
-            height: units.iconSizes.huge
-        }
-    }
-
-
     PlasmaCore.DataSource {
         id: timeSource
         engine: "time"
@@ -238,7 +229,6 @@ PlasmaCore.ColorScope {
         }
         onVisibleChanged: {
             if (visible && !root.expandedApplet) {
-                print("AAA"+appletIconsRow.children[0].applet)
                 var applet = appletIconsRow.children[0].applet;
                 applet.expanded = true;
                 appletsStack.replace(applet.fullRepresentationItem);

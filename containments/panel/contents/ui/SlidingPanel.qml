@@ -133,6 +133,7 @@ Window {
         }
         //FIXME: this empty mousearea is a workaround on https://bugreports.qt.io/browse/QTBUG-46545
         MouseArea {
+            z: -1
             anchors.fill: parent
         }
 
