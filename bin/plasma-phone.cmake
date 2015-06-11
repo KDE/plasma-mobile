@@ -26,6 +26,8 @@ export KSCREEN_BACKEND=QScreen
 export KDE_FULL_SESSION=1
 export KDE_SESSION_VERSION=5
 
+export GRID_UNIT_PX=30
+
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
 /usr/bin/voicecall-manager&
