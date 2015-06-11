@@ -41,10 +41,10 @@ TaskPanel::~TaskPanel()
 void TaskPanel::executeScript(const QString &script)
 {
     //Plasma::Package p = 
-    package().filePath("scripts", script + ".js");
+    qWarning()<<"AAAAAA"<<package().filePath("scripts", script + ".js")<<package().path();
     QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/Scripting", QString(), "loadScript");
     QList<QVariant> arguments;
-    arguments << QVariant("/opt/kde5qt5/share/plasma/plasmoids/org.kde.phone.taskpanel/code/close.js");
+    arguments << QVariant(package().filePath("scripts", script + ".js"));
     message.setArguments(arguments);
     QDBusMessage reply = QDBusConnection::sessionBus().call(message);
     if (reply.type() == QDBusMessage::ErrorMessage) {

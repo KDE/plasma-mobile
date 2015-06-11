@@ -24,12 +24,22 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-Item {
+Rectangle {
+    anchors.fill: parent
+    //TODO: decide what color we want applets
+    color: theme.backgroundColor
+
     width: 600
     height: 40
 
     property Item toolBox
     
+    PlasmaComponents.ToolButton {
+        anchors.horizontalCenter: parent.horizontalCenter
+        iconSource: "go-home"
+        onClicked: plasmoid.nativeInterface.executeScript("showdesktop");
+    }
+
     PlasmaComponents.ToolButton {
         anchors.right: parent.right
         iconSource: "window-close"
