@@ -135,6 +135,10 @@ Window {
         MouseArea {
             z: -1
             anchors.fill: parent
+            onClicked: {
+                mouseArea.state = "closed";
+                window.visible = false;
+            }
         }
 
         states: [

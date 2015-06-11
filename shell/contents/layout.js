@@ -17,5 +17,6 @@ for (var j = 0; j < desktopsArray.length; j++) {
 desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");
 
 var panel = new Panel("org.kde.phone.panel");
-panel.addWidget("org.kde.phone.quicksettings");
+panel.addWidget("org.kde.plasma.networkmanagement");
+panel.addWidget("org.kde.plasma.battery");
 panel.height = 60;
