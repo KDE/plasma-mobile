@@ -559,25 +559,11 @@ MouseEventListener {
             radius: width
             anchors.right: parent.right
             y: applicationsView.height * applicationsView.visibleArea.yPosition
-            opacity: scrollbarMouse.pressed || applicationsView.flicking || scrollDownIndicator.opacity > 0 || scrollUpIndicator.opacity > 0 ? 0.8 : 0
+            opacity: applicationsView.flicking || scrollDownIndicator.opacity > 0 || scrollUpIndicator.opacity > 0 ? 0.8 : 0
             Behavior on opacity {
                 NumberAnimation {
                     duration: units.longDuration
                     easing.type: Easing.InOutQuad
-                }
-            }
-            MouseArea {
-                id: scrollbarMouse
-                anchors {
-                    fill: parent
-                    margins: -units.gridUnit
-                }
-                drag.target: parent
-                onPositionChanged: {
-                    applicationsView.contentY = applicationsView.contentHeight * (parent.y / applicationsView.height) - applicationsView.headerItem.height
-                }
-                onReleased: {
-                    applicationsView.returnToBounds()
                 }
             }
         }

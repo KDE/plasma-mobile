@@ -32,4 +32,4 @@ export GRID_UNIT_PX=30
 /usr/bin/kded5&
 /usr/bin/voicecall-manager&
 /usr/bin/plasmaphonedialer -d&
-exec /usr/bin/plasmashell -p org.kde.satellite.phone 
+exec /usr/bin/plasmashell -p org.kde.satellite.phone 2>/tmp/plasmashell_logs
