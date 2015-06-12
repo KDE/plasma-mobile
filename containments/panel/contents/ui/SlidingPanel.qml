@@ -137,7 +137,7 @@ Window {
             anchors.fill: parent
             onClicked: {
                 mouseArea.state = "closed";
-                window.visible = false;
+                //window.visible = false;
             }
         }
 
