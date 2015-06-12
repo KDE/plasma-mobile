@@ -122,7 +122,7 @@ MouseArea {
             }
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
-            text: background.margins.top + summary + (!notificationItem.expanded && body ? "..." : "")
+            text: summary + (!notificationItem.expanded && body ? "..." : "")
             wrapMode: Text.WordWrap
         }
         PlasmaComponents.Label {
