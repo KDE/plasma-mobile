@@ -1,3 +1,9 @@
+plasma-phone-components (0.1+kubuntu1-0ubuntu1) UNRELEASED; urgency=medium
+
+  * New snapshot
+
+ -- Jonathan Riddell <jriddell@ubuntu.com>  Fri, 12 Jun 2015 21:06:34 +0200
+
 plasma-phone-components (0.1+kubuntu1-0ubuntu1~ppaubuntu1) vivid; urgency=medium
 
   * Follow green island

@@ -1,15 +1,3 @@
 #!/usr/bin/make -f
 
-# Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
-
-export LDFLAGS += -Wl,--as-needed
-
-%:
-	dh $@ --parallel --with kde --with sodeps
-
-override_dh_auto_configure:
-	dh_auto_configure -Skde -- -DCMAKE_BUILD_TYPE=RelWithDebInfo
-
-.PHONY: override_dh_auto_test
-
+include /usr/share/pkg-kde-tools/qt-kde-team/2/debian-qt-kde.mk

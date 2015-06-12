@@ -1,35 +1,31 @@
 Source: plasma-phone-components
 Section: kde
 Priority: optional
-Maintainer: Boudewijn Rempt <boud@valdyas.org>
-Build-Depends: cmake (>= 2.6.3),
-               debhelper (>= 8.0~),
-               pkg-config,
-               pkg-kde-tools (>= 0.9),
+Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
+XSBC-Original-Maintainer: Boudewijn Rempt <boud@valdyas.org>
+Build-Depends: cmake,
+               debhelper (>= 9),
                extra-cmake-modules,
                libkf5declarative-dev,
-               plasma-framework-dev,
-               libkf5service-dev, 
-               qtdeclarative5-dev,
-               systemd,
+               libkf5notifications-dev,
+               libkf5service-dev,
                libsystemd-dev,
+               pkg-config,
+               pkg-kde-tools (>= 0.9),
+               plasma-framework-dev,
                qt5-default,
-               qtwayland,
-               greenisland
-Standards-Version: 3.9.1
+               qtdeclarative5-dev
+Standards-Version: 3.9.6
+Homepage: https://github.com/plasma-mobile/plasma-phone-components
+Vcs-Browser: https://github.com/plasma-mobile/plasma-phone-components-packaging
+Vcs-Git: https://github.com/plasma-mobile/plasma-phone-components-packaging.git
 
 Package: plasma-phone-components
 Architecture: any
-Depends: ${misc:Depends}, ${shlibs:Depends},
-         libkf5plasmaquick5,
-         plasma-workspace,
-         plasma-workspace-wallpapers,
-         breeze-icon-theme,
-         ttf-oxygen-font-family,
-         libqofono-qt5-0,
+Depends: plasma-workspace,
          qtwayland,
-         systemd,
-         greenisland
+         ttf-oxygen-font-family,
+         ${misc:Depends},
+         ${shlibs:Depends}
 Description: Plasma Phone Components
- This package contains the Plasma Phone components
-
+ This package contains the home screen for the phone.
