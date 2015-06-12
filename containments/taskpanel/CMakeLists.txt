@@ -13,6 +13,7 @@ target_link_libraries(plasma_containment_phone_taskpanel
                       Qt5::Qml
                       KF5::I18n
                       KF5::Service
+                      KF5::WaylandClient
                      )
 
 

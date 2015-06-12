@@ -24,9 +24,18 @@
 
 #include <Plasma/Containment>
 
+namespace KWayland
+{
+namespace Client
+{
+class PlasmaWindowManagement;
+}
+}
+
 class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
 
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
@@ -34,7 +43,18 @@ public:
 
     Q_INVOKABLE void executeScript(const QString &script);
 
+    bool isShowingDesktop() const {
+        return m_showingDesktop;
+    }
+    void requestShowingDesktop(bool showingDesktop);
+
+Q_SIGNALS:
+    void showingDesktopChanged(bool);
+
 private:
+    void initWayland();
+    bool m_showingDesktop;
+    KWayland::Client::PlasmaWindowManagement *m_windowManagement;
 
 };
 

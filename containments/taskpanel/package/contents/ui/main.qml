@@ -35,11 +35,21 @@ Rectangle {
     property Item toolBox
     
     PlasmaComponents.ToolButton {
+        id: showDesktopButton
         height: parent.height
         width: height
         anchors.horizontalCenter: parent.horizontalCenter
         iconSource: "go-home"
-        onClicked: plasmoid.nativeInterface.executeScript("showdesktop");
+        checkable: true
+        onCheckedChanged: {
+            plasmoid.nativeInterface.showDesktop = checked;
+        }
+        Connections {
+            target: plasmoid.nativeInterface
+            onShowingDesktopChanged: {
+                showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+            }
+        }
     }
 
     PlasmaComponents.ToolButton {

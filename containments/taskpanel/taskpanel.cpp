@@ -26,12 +26,19 @@
 
 #include <Plasma/Package>
 
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/plasmawindowmanagement.h>
+#include <KWayland/Client/registry.h>
+
 static const QString s_kwinService = QStringLiteral("org.kde.KWin");
 
 TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
+    , m_showingDesktop(false)
+    , m_windowManagement(nullptr)
 {
     setHasConfigurationInterface(true);
+    initWayland();
 }
 
 TaskPanel::~TaskPanel()
@@ -59,6 +66,43 @@ void TaskPanel::executeScript(const QString &script)
             qWarning() << reply.errorMessage();
         }
     }
+}
+
+void TaskPanel::requestShowingDesktop(bool showingDesktop)
+{
+    if (!m_windowManagement) {
+        return;
+    }
+    m_windowManagement->setShowingDesktop(showingDesktop);
+}
+
+void TaskPanel::initWayland()
+{
+    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        return;
+    }
+    using namespace KWayland::Client;
+    ConnectionThread *connection = ConnectionThread::fromApplication(this);
+    if (!connection) {
+        return;
+    }
+    Registry *registry = new Registry(this);
+    registry->create(connection);
+    connect(registry, &Registry::plasmaWindowManagementAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+            m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
+            connect(m_windowManagement, &PlasmaWindowManagement::showingDesktopChanged, this,
+                [this] (bool showing) {
+                    if (showing == m_showingDesktop) {
+                        return;
+                    }
+                    m_showingDesktop = showing;
+                    emit showingDesktopChanged(m_showingDesktop);
+                }
+            );
+        }
+    );
+    registry->setup();
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(taskpanel, TaskPanel, "metadata.json")
