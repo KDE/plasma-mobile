@@ -18,12 +18,15 @@
  */
 
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Window {
+PlasmaCore.Dialog {
     id: window
-    flags: Qt.WindowDoesNotAcceptFocus
+    //flags: Qt.X11BypassWindowManagerHint
+    backgroundHints: PlasmaCore.Dialog.NoBackground
+    location: PlasmaCore.Types.TopEdge
 
     property int offset: 0
     property int overShoot: units.gridUnit * 2
@@ -50,12 +53,12 @@ Window {
         }
     }
 
-    MouseArea {
+    mainItem: MouseArea {
         id: mouseArea
         y: 0
-        width: window.width
-        height: window.height - y
-        clip: true
+        Layout.minimumWidth: Screen.width
+        Layout.minimumHeight: Screen.height
+        //clip: true
         state: "closed"
         drag.filterChildren: true
 
