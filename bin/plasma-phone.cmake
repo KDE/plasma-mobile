@@ -27,7 +27,7 @@ export KDE_FULL_SESSION=1
 export KDE_SESSION_VERSION=5
 export PLASMA_PLATFORM=phone
 
-export GRID_UNIT_PX=30
+export GRID_UNIT_PX=25
 
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
