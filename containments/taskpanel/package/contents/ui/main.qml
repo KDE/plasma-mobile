@@ -35,12 +35,16 @@ Rectangle {
     property Item toolBox
     
     PlasmaComponents.ToolButton {
+        height: parent.height
+        width: height
         anchors.horizontalCenter: parent.horizontalCenter
         iconSource: "go-home"
         onClicked: plasmoid.nativeInterface.executeScript("showdesktop");
     }
 
     PlasmaComponents.ToolButton {
+        height: parent.height
+        width: height
         anchors.right: parent.right
         iconSource: "window-close"
         onClicked: plasmoid.nativeInterface.executeScript("close");
