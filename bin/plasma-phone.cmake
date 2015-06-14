@@ -31,6 +31,8 @@ export GRID_UNIT_PX=25
 
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
-/usr/bin/voicecall-manager&
-/usr/bin/plasmaphonedialer -d&
+
+mc-tool request ofono/ofono/account0 online
+paplay /usr/share/sounds/freedesktop/stereo/message.oga &
+
 exec /usr/bin/plasmashell -p org.kde.satellite.phone 2>/tmp/plasmashell_logs
