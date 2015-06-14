@@ -18,7 +18,7 @@ desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.plasma.networkmanagement");
-panel.addWidget("org.kde.plasma.battery");
+panel.addWidget("org.kde.plasma.phone.battery");
 panel.height = 60;
 
 var bottomPanel = new Panel("org.kde.phone.taskpanel");
