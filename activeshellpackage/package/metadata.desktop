@@ -2,6 +2,7 @@
 Comment=Plasma Active shell
 Comment[ca]=Intèrpret d'ordres del Plasma Active
 Comment[es]=Intérprete para Plasma Active
+Comment[fi]=Plasma Active -kuori
 Comment[nl]=Plasma-activiteit-shell
 Comment[pl]=Powłoka Plazma Active
 Comment[pt]=Consola do Plasma Active
@@ -15,6 +16,7 @@ Keywords=
 Name=Desktop
 Name[ca]=Escriptori
 Name[es]=Escritorio
+Name[fi]=Työpöytä
 Name[nl]=Bureaublad
 Name[pl]=Pulpit
 Name[pt]=Ambiente de Trabalho
