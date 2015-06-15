@@ -30,6 +30,9 @@ export QT_QUICK_CONTROLS_STYLE=Plasma
 
 export GRID_UNIT_PX=25
 
+# upstart user session has useful bits like mtp-server
+init --user &
+
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
 
