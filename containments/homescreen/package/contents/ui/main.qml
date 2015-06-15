@@ -390,9 +390,21 @@ MouseEventListener {
                 }
             }
             onDraggingVerticallyChanged: {
+                if (draggingVertically) {
+                    return;
+                }
+
+                //manage separately the first page, the lockscreen
+                if (contentY < -headerItem.height + root.height &&
+                    contentY > (-headerItem.height + root.height/6)) {
+                    scrollAnim.to = -root.height
+                    scrollAnim.running = true;
+                    return;
+                }
+
                 //(1000/scrollAnim.duration) is the length scrolled at the current speed in the duration of the animation
 
-                if (!draggingVertically && contentY < -headerItem.height + root.height) {
+                if (contentY < -headerItem.height + root.height) {
                     scrollAnim.to = Math.round((contentY + (verticalVelocity / (1000/scrollAnim.duration))) / root.height) * root.height
                     scrollAnim.running = true;
                 }
