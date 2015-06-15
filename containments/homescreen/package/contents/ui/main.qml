@@ -390,8 +390,10 @@ MouseEventListener {
                 }
             }
             onDraggingVerticallyChanged: {
+                //(1000/scrollAnim.duration) is the length scrolled at the current speed in the duration of the animation
+
                 if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                    scrollAnim.to = Math.round(contentY/root.height) * root.height
+                    scrollAnim.to = Math.round((contentY + (verticalVelocity / (1000/scrollAnim.duration))) / root.height) * root.height
                     scrollAnim.running = true;
                 }
             }
