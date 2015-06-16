@@ -24,6 +24,8 @@
 
 #include <Plasma/Containment>
 
+class QDBusPendingCallWatcher;
+
 namespace KWayland
 {
 namespace Client
@@ -50,6 +52,9 @@ public:
 
 Q_SIGNALS:
     void showingDesktopChanged(bool);
+
+private Q_SLOTS:
+    void loadScriptFinishedSlot(QDBusPendingCallWatcher *watcher);
 
 private:
     void initWayland();

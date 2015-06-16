@@ -23,6 +23,8 @@
 #include <QDebug>
 #include <QDBusMessage>
 #include <QDBusConnection>
+#include <QDBusPendingCallWatcher>
+#include <QDBusPendingReply>
 
 #include <Plasma/Package>
 
@@ -48,23 +50,29 @@ TaskPanel::~TaskPanel()
 void TaskPanel::executeScript(const QString &script)
 {
     //Plasma::Package p = 
-    qWarning()<<"AAAAAA"<<package().filePath("scripts", script + ".js")<<package().path();
     QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/Scripting", QString(), "loadScript");
     QList<QVariant> arguments;
     arguments << QVariant(package().filePath("scripts", script + ".js"));
     message.setArguments(arguments);
-    QDBusMessage reply = QDBusConnection::sessionBus().call(message);
+    QDBusPendingReply<void> asyncCall = QDBusConnection::sessionBus().asyncCall(message);
+    
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(asyncCall, this);
+    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
+          this, SLOT(loadScriptFinishedSlot(QDBusPendingCallWatcher*)));
+}
+
+void TaskPanel::loadScriptFinishedSlot(QDBusPendingCallWatcher *watcher)
+{
+    QDBusMessage reply = watcher->reply();
     if (reply.type() == QDBusMessage::ErrorMessage) {
         qWarning() << reply.errorMessage();
     } else {
         const int id = reply.arguments().first().toInt();
         QDBusConnection::sessionBus().connect(s_kwinService, "/" + QString::number(id), QString(), "print", this, SLOT(print(QString)));
         QDBusConnection::sessionBus().connect(s_kwinService, "/" + QString::number(id), QString(), "printError", this, SLOT(print(QString)));
-        message = QDBusMessage::createMethodCall(s_kwinService, "/" + QString::number(id), QString(), "run");
-        reply = QDBusConnection::sessionBus().call(message);
-        if (reply.type() == QDBusMessage::ErrorMessage) {
-            qWarning() << reply.errorMessage();
-        }
+        QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/" + QString::number(id), QString(), "run");
+        //fire blindly the call for now
+        reply = QDBusConnection::sessionBus().asyncCall(message);
     }
 }
 
