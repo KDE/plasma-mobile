@@ -395,9 +395,17 @@ MouseEventListener {
                 }
 
                 //manage separately the first page, the lockscreen
-                if (contentY < -headerItem.height + root.height &&
+                //scrolling down
+                if (verticalVelocity > 0 && contentY < -headerItem.height + root.height &&
                     contentY > (-headerItem.height + root.height/6)) {
-                    scrollAnim.to = -root.height
+                    scrollAnim.to = -plasmoid.availableScreenRect.height
+                    scrollAnim.running = true;
+                    return;
+
+                //scrolling up
+                } else if (verticalVelocity < 0 && contentY < -headerItem.height + root.height &&
+                    contentY < (-headerItem.height + root.height/6)) {
+                    scrollAnim.to = -headerItem.height;
                     scrollAnim.running = true;
                     return;
                 }
