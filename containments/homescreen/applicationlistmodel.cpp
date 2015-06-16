@@ -30,6 +30,7 @@
 #include <KService>
 #include <KServiceGroup>
 #include <KServiceTypeTrader>
+#include <KSharedConfig>
 #include <KSycoca>
 #include <KSycocaEntry>
 #include <QDebug>
@@ -76,6 +77,10 @@ bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
 
 void ApplicationListModel::loadApplications()
 {
+    auto cfg = KSharedConfig::openConfig("applications-blacklistrc");
+    auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
+    QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
+
     beginResetModel();
 
     m_applicationList.clear();
@@ -103,7 +108,8 @@ void ApplicationListModel::loadApplications()
 
                     if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
-                        if (service->isApplication()) {
+                        if (service->isApplication() &&
+                            !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) ) {
                             data.name = service->name();
                             data.icon = service->icon();
                             data.storageId = service->storageId();
