@@ -109,7 +109,10 @@ void ApplicationListModel::loadApplications()
                     if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication() &&
-                            !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) ) {
+                            !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) &&
+                            !service->showOnCurrentPlatform() &&
+                            !service->property("Terminal", QVariant::Bool).toBool()) {
+
                             data.name = service->name();
                             data.icon = service->icon();
                             data.storageId = service->storageId();
