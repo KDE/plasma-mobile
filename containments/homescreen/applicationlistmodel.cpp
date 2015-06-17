@@ -110,7 +110,7 @@ void ApplicationListModel::loadApplications()
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) &&
-                            !service->showOnCurrentPlatform() &&
+                            service->showOnCurrentPlatform() &&
                             !service->property("Terminal", QVariant::Bool).toBool()) {
 
                             data.name = service->name();
