@@ -72,7 +72,7 @@ void TaskPanel::loadScriptFinishedSlot(QDBusPendingCallWatcher *watcher)
         QDBusConnection::sessionBus().connect(s_kwinService, "/" + QString::number(id), QString(), "printError", this, SLOT(print(QString)));
         QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/" + QString::number(id), QString(), "run");
         //fire blindly the call for now
-        reply = QDBusConnection::sessionBus().asyncCall(message);
+        QDBusConnection::sessionBus().asyncCall(message);
     }
 }
 
