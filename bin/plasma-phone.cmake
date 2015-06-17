@@ -29,6 +29,7 @@ export PLASMA_PLATFORM=phone
 export QT_QUICK_CONTROLS_STYLE=Plasma
 
 export GRID_UNIT_PX=25
+export FORCE_RIL_NUM_MODEMS=1
 
 # upstart user session has useful bits like mtp-server
 init --user &
