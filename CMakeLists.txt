@@ -27,6 +27,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Te
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n)
 find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
+find_package(TelepathyQt5 REQUIRED)
 find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED

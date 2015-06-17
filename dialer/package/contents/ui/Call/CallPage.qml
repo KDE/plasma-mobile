@@ -183,7 +183,7 @@ Item {
                 Layout.fillWidth: true
                 text: i18n("End Call")
                 onClicked: {
-                    ofonoWrapper.hangup();
+                    tpCaller.hangUp();
                 }
             }
         }
