@@ -15,7 +15,10 @@ Item {
 
     PlasmaCore.IconItem {
         id: icon
-        anchors.centerIn: parent
+        anchors {
+            centerIn: parent
+            verticalCenterOffset: -theme.mSize(theme.defaultFont).height
+        }
         width: parent.height / 2
         height: width
         source: modelData.ApplicationIconRole
