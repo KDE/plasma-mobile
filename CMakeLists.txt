@@ -41,13 +41,6 @@ plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phone shells)
 install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.plasma.phone.lockers")
 
-install(DIRECTORY compositor/
-        DESTINATION ${DATA_INSTALL_DIR}/greenisland/org.kde.plasma.phone.compositor
-        PATTERN .svn EXCLUDE
-        PATTERN CMakeLists.txt EXCLUDE
-        PATTERN Messages.sh EXCLUDE
-        PATTERN dummydata EXCLUDE)
-
 kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
 install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.phonebook.desktop)
 

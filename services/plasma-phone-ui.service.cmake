@@ -6,8 +6,8 @@
 
 [Unit]
 Description=Plasma Phone UI
-Requires=dbus.socket plasma-phone-compositor.service
-After=plasma-phone-compositor.service
+Requires=dbus.socket
+After=
 
 [Service]
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
