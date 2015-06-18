@@ -46,11 +46,12 @@ TpCaller::TpCaller(QObject *parent)
     m_simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/account0"), connectionFactory, channelFactory);
     Tp::PendingReady *op = m_simAccount->becomeReady(Tp::Features() << Tp::Account::FeatureCore);
 
-    qDebug() << "Calling becomeReady on account" << m_simAccount->isValid();
-
     connect(op, &Tp::PendingOperation::finished, [=](){
-            qDebug() << "account ready";
-            qDebug() << "is error" << op->isError();
+        if (op->isError()) {
+            qWarning() << "SIM card account failed to get ready:" << op->errorMessage();
+        } else {
+            qDebug() << "SIM Account ready to use";
+        }
     });
 }
 
@@ -82,10 +83,8 @@ bool TpCaller::callInProgress()
     return m_callChannel && m_callChannel->isValid() && m_callChannel->connection();
 }
 
-
 void TpCaller::hangUp()
 {
-    qDebug() << "About to hangup" << m_callChannel << m_callChannel->isValid() << m_callChannel->connection();
     if (m_callChannel && m_callChannel->isValid() && m_callChannel->connection()) {
         qDebug() << "Hanging up";
         Tp::PendingOperation *op = m_callChannel->hangup();
@@ -93,7 +92,6 @@ void TpCaller::hangUp()
             if (op->isError()) {
                 qWarning() << "Unable to hang up:" << op->errorMessage();
             }
-            qDebug() << "Channel close request complete";
             m_callChannel->requestClose();
         });
     }
