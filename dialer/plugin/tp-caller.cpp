@@ -25,6 +25,7 @@
 #include <TelepathyQt/PendingReady>
 #include <TelepathyQt/PendingContacts>
 #include <TelepathyQt/TextChannel>
+#include <TelepathyQt/CallChannel>
 #include <TelepathyQt/Types>
 #include <TelepathyQt/ContactManager>
 
@@ -88,7 +89,7 @@ void TpCaller::hangUp()
     qDebug() << "About to hangup" << m_callChannel << m_callChannel->isValid() << m_callChannel->connection();
     if (m_callChannel && m_callChannel->isValid() && m_callChannel->connection()) {
         qDebug() << "Hanging up";
-        Tp::PendingOperation *op = m_callChannel->requestClose();
+        Tp::PendingOperation *op = qobject_cast<Tp::CallChannel*>(m_callChannel.data())->hangup();
         connect(op, &Tp::PendingOperation::finished, [=]() {
             if (op->isError()) {
                 qWarning() << "Unable to hang up:" << op->errorMessage();
