@@ -21,7 +21,7 @@
 
 #include <QObject>
 #include <TelepathyQt/Account>
-#include <TelepathyQt/Channel>
+#include <TelepathyQt/CallChannel>
 
 class TpCaller : public QObject
 {
@@ -40,7 +40,7 @@ Q_SIGNALS:
 
 private:
     Tp::AccountPtr m_simAccount;
-    Tp::ChannelPtr m_callChannel;
+    Tp::CallChannelPtr m_callChannel;
 };
 
 #endif // TPCALLER_H
