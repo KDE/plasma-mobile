@@ -24,39 +24,56 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-Rectangle {
-    anchors.fill: parent
-    //TODO: decide what color we want applets
-    color: theme.backgroundColor
-
+PlasmaCore.ColorScope {
+    id: root
     width: 600
-    height: 40
+    height: 480
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-    property Item toolBox
-    
-    PlasmaComponents.ToolButton {
-        id: showDesktopButton
-        height: parent.height
-        width: height
-        anchors.horizontalCenter: parent.horizontalCenter
-        iconSource: "go-home"
-        checkable: true
-        onCheckedChanged: {
-            plasmoid.nativeInterface.showDesktop = checked;
+    TaskSwitcher {
+        id: taskSwitcher
+    }
+    Rectangle {
+        anchors.fill: parent
+        color: root.backgroundColor
+
+        width: 600
+        height: 40
+
+        property Item toolBox
+
+        Button {
+            anchors.left: parent.left
+            height: parent.height
+            width: parent.width/3
+            iconSource: "applications-other"
+            onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
         }
-        Connections {
-            target: plasmoid.nativeInterface
-            onShowingDesktopChanged: {
-                showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+
+        Button {
+            id: showDesktopButton
+            height: parent.height
+            width: parent.width/3
+            anchors.horizontalCenter: parent.horizontalCenter
+            iconSource: "go-home"
+            checkable: true
+            onCheckedChanged: {print (checked)
+                plasmoid.nativeInterface.showDesktop = checked;
+            }
+            Connections {
+                target: plasmoid.nativeInterface
+                onShowingDesktopChanged: {
+                    showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+                }
             }
         }
-    }
 
-    PlasmaComponents.ToolButton {
-        height: parent.height
-        width: height
-        anchors.right: parent.right
-        iconSource: "window-close"
-        onClicked: plasmoid.nativeInterface.executeScript("close");
+        Button {
+            height: parent.height
+            width: parent.width/3
+            anchors.right: parent.right
+            iconSource: "window-close"
+            onClicked: plasmoid.nativeInterface.executeScript("close");
+        }
     }
 }
