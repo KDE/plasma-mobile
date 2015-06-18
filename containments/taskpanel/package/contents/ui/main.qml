@@ -73,7 +73,8 @@ PlasmaCore.ColorScope {
             width: parent.width/3
             anchors.right: parent.right
             iconSource: "window-close"
-            onClicked: plasmoid.nativeInterface.executeScript("close");
+            enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
+            onClicked: plasmoid.nativeInterface.closeActiveWindow();
         }
     }
 }

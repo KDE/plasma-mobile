@@ -21,10 +21,6 @@
 
 #include <QtQml>
 #include <QDebug>
-#include <QDBusMessage>
-#include <QDBusConnection>
-#include <QDBusPendingCallWatcher>
-#include <QDBusPendingReply>
 
 #include <Plasma/Package>
 
@@ -45,35 +41,6 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
 
 TaskPanel::~TaskPanel()
 {
-}
-
-void TaskPanel::executeScript(const QString &script)
-{
-    //Plasma::Package p = 
-    QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/Scripting", QString(), "loadScript");
-    QList<QVariant> arguments;
-    arguments << QVariant(package().filePath("scripts", script + ".js"));
-    message.setArguments(arguments);
-    QDBusPendingReply<void> asyncCall = QDBusConnection::sessionBus().asyncCall(message);
-    
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(asyncCall, this);
-    QObject::connect(watcher, SIGNAL(finished(QDBusPendingCallWatcher*)),
-          this, SLOT(loadScriptFinishedSlot(QDBusPendingCallWatcher*)));
-}
-
-void TaskPanel::loadScriptFinishedSlot(QDBusPendingCallWatcher *watcher)
-{
-    QDBusMessage reply = watcher->reply();
-    if (reply.type() == QDBusMessage::ErrorMessage) {
-        qWarning() << reply.errorMessage();
-    } else {
-        const int id = reply.arguments().first().toInt();
-        QDBusConnection::sessionBus().connect(s_kwinService, "/" + QString::number(id), QString(), "print", this, SLOT(print(QString)));
-        QDBusConnection::sessionBus().connect(s_kwinService, "/" + QString::number(id), QString(), "printError", this, SLOT(print(QString)));
-        QDBusMessage message = QDBusMessage::createMethodCall(s_kwinService, "/" + QString::number(id), QString(), "run");
-        //fire blindly the call for now
-        QDBusConnection::sessionBus().asyncCall(message);
-    }
 }
 
 void TaskPanel::requestShowingDesktop(bool showingDesktop)
@@ -108,9 +75,33 @@ void TaskPanel::initWayland()
                     emit showingDesktopChanged(m_showingDesktop);
                 }
             );
+            connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow);
+            updateActiveWindow();
         }
     );
     registry->setup();
+}
+
+void TaskPanel::updateActiveWindow()
+{
+    if (!m_windowManagement) {
+        return;
+    }
+    m_activeWindow = m_windowManagement->activeWindow();
+    // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
+    emit hasCloseableActiveWindowChanged();
+}
+
+bool TaskPanel::hasCloseableActiveWindow() const
+{
+    return m_activeWindow && m_activeWindow->isCloseable();
+}
+
+void TaskPanel::closeActiveWindow()
+{
+    if (m_activeWindow) {
+        m_activeWindow->requestClose();
+    }
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(taskpanel, TaskPanel, "metadata.json")

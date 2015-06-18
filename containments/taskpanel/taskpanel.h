@@ -24,13 +24,12 @@
 
 #include <Plasma/Containment>
 
-class QDBusPendingCallWatcher;
-
 namespace KWayland
 {
 namespace Client
 {
 class PlasmaWindowManagement;
+class PlasmaWindow;
 }
 }
 
@@ -38,28 +37,31 @@ class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
+    Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
 
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
     ~TaskPanel();
 
-    Q_INVOKABLE void executeScript(const QString &script);
+    Q_INVOKABLE void closeActiveWindow();
 
     bool isShowingDesktop() const {
         return m_showingDesktop;
     }
     void requestShowingDesktop(bool showingDesktop);
 
+    bool hasCloseableActiveWindow() const;
+
 Q_SIGNALS:
     void showingDesktopChanged(bool);
-
-private Q_SLOTS:
-    void loadScriptFinishedSlot(QDBusPendingCallWatcher *watcher);
+    void hasCloseableActiveWindowChanged();
 
 private:
     void initWayland();
+    void updateActiveWindow();
     bool m_showingDesktop;
     KWayland::Client::PlasmaWindowManagement *m_windowManagement;
+    KWayland::Client::PlasmaWindow *m_activeWindow = nullptr;
 
 };
 
