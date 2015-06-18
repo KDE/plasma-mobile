@@ -1,5 +1,3 @@
-include_directories(${TELEPATHY_QT5_INCLUDE_DIR})
-
 set(tpcallerplugin_SRCS
     tp-call-plugin.cpp
     tp-caller.cpp

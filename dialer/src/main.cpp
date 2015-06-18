@@ -20,6 +20,14 @@
 #include <QApplication>
 
 #include "dialerutils.h"
+#include "call-handler.h"
+
+#include <TelepathyQt/Types>
+#include <TelepathyQt/Debug>
+#include <TelepathyQt/ClientRegistrar>
+#include <TelepathyQt/CallChannel>
+#include <TelepathyQt/ChannelClassSpec>
+#include <TelepathyQt/ChannelFactory>
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
@@ -124,6 +132,37 @@ int main(int argc, char **argv)
     } else {
         qWarning() << "Error loading the ApplicationWindow";
     }
+
+    Tp::AccountFactoryPtr accountFactory = Tp::AccountFactory::create(QDBusConnection::sessionBus(),
+                                                                      Tp::Features() << Tp::Account::FeatureCore
+    );
+
+    Tp::ConnectionFactoryPtr connectionFactory = Tp::ConnectionFactory::create(QDBusConnection::sessionBus(),
+                                                                               Tp::Features() << Tp::Connection::FeatureCore
+                                                                                              << Tp::Connection::FeatureSelfContact
+    );
+
+    Tp::ChannelFactoryPtr channelFactory = Tp::ChannelFactory::create(QDBusConnection::sessionBus());
+    channelFactory->addCommonFeatures(Tp::Channel::FeatureCore);
+    channelFactory->addFeaturesForCalls(Tp::Features() << Tp::CallChannel::FeatureContents
+                                                       << Tp::CallChannel::FeatureCallState
+                                                       << Tp::CallChannel::FeatureCallMembers
+                                                       << Tp::CallChannel::FeatureLocalHoldState
+    );
+
+    Tp::ContactFactoryPtr contactFactory = Tp::ContactFactory::create(Tp::Features() << Tp::Contact::FeatureAlias
+                                                                                     << Tp::Contact::FeatureAvatarData
+    );
+
+
+//     app.setQuitOnLastWindowClosed(true);
+
+    Tp::ClientRegistrarPtr registrar =
+    Tp::ClientRegistrar::create(accountFactory, connectionFactory,
+                                channelFactory, contactFactory);
+
+    Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
+    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Phone.Dialer");
 
     return app.exec();
 }

@@ -3,6 +3,8 @@
 set(plasmaphonedialer_SRCS
     main.cpp
     dialerutils.cpp
+    call-handler.cpp
+    call-manager.cpp
 )
 
 add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
@@ -20,7 +22,15 @@ target_link_libraries(plasmaphonedialer
  KF5::QuickAddons
  KF5::DBusAddons
  KF5::Notifications
+ ${TELEPATHY_QT5_LIBRARIES}
 )
 
 install(TARGETS plasmaphonedialer ${INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES plasma_dialer.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFY5RCDIR})
+
+configure_file(org.freedesktop.Telepathy.Client.Plasma.Dialer.service.in
+                org.freedesktop.Telepathy.Client.Plasma.Dialer.service)
+install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.freedesktop.Telepathy.Client.Plasma.Dialer.service
+        DESTINATION ${DBUS_SERVICES_INSTALL_DIR})
+
+install(FILES Plasma.Dialer.client DESTINATION ${SHARE_INSTALL_PREFIX}/telepathy/clients/)
