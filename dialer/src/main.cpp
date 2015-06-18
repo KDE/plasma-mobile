@@ -28,6 +28,7 @@
 #include <TelepathyQt/CallChannel>
 #include <TelepathyQt/ChannelClassSpec>
 #include <TelepathyQt/ChannelFactory>
+#include <TelepathyQt/Account>
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
@@ -173,7 +174,5 @@ int main(int argc, char **argv)
         qWarning() << "Error loading the ApplicationWindow";
     }
 
-
     return app.exec();
 }
-
