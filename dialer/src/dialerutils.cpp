@@ -21,15 +21,65 @@
 #include <QDebug>
 
 #include <KLocalizedString>
+#include <TelepathyQt/PendingOperation>
+#include <TelepathyQt/PendingChannelRequest>
+#include <TelepathyQt/PendingReady>
+#include <TelepathyQt/Constants>
+#include <TelepathyQt/PendingContacts>
+#include <TelepathyQt/Types>
+#include <TelepathyQt/ContactManager>
 
-DialerUtils::DialerUtils(QObject *parent)
+DialerUtils::DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent)
 : QObject(parent),
-  m_missedCalls(0)
+  m_missedCalls(0),
+  m_simAccount(simAccount)
 {
+    Tp::PendingReady *op = m_simAccount->becomeReady(Tp::Features() << Tp::Account::FeatureCore);
+
+    connect(op, &Tp::PendingOperation::finished, [=](){
+        if (op->isError()) {
+            qWarning() << "SIM card account failed to get ready:" << op->errorMessage();
+        } else {
+            qDebug() << "SIM Account ready to use";
+        }
+    });
 }
 
 DialerUtils::~DialerUtils()
 {
+}
+
+void DialerUtils::dial(const QString &number)
+{
+    // FIXME: this should be replaced by kpeople thing
+    auto pendingContact = m_simAccount->connection()->contactManager()->contactsForIdentifiers(QStringList() << number);
+
+    connect(pendingContact, &Tp::PendingOperation::finished, [=](){
+        if (pendingContact->contacts().size() < 1) {
+            qWarning() << " no contacts";
+            return;
+        }
+        qDebug() << "Starting call...";
+        Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(pendingContact->contacts().first());
+        connect(pendingChannel, &Tp::PendingChannelRequest::finished, [=](){
+            if (pendingChannel->isError()) {
+                qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
+            }
+        });
+    });
+}
+
+QString DialerUtils::callState() const
+{
+    return m_callState;
+}
+
+void DialerUtils::setCallState(const QString &state)
+{
+    if (m_callState != state) {
+        m_callState = state;
+        Q_EMIT callStateChanged();
+    }
 }
 
 void DialerUtils::notifyMissedCall(const QString &caller, const QString &description)

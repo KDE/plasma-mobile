@@ -28,7 +28,7 @@ import "../Dialpad"
 Item {
     id: callPage
 
-    property string status: ofonoWrapper.status
+    property string status: dialerUtils.callState
 
     property string providerId: ofonoWrapper.providerId
 
@@ -168,10 +168,10 @@ Item {
                 //STATUS_INCOMING
                 visible: status == "incoming"
                 onAccepted: {
-                    ofonoWrapper.answer();
+                    dialerUtils.acceptCall();
                 }
                 onRejected: {
-                    ofonoWrapper.hangup();
+                    dialerUtils.rejectCall();
                 }
             }
 
@@ -183,7 +183,7 @@ Item {
                 Layout.fillWidth: true
                 text: i18n("End Call")
                 onClicked: {
-                    tpCaller.hangUp();
+                    dialerUtils.hangUp();
                 }
             }
         }

@@ -72,6 +72,43 @@ int main(int argc, char **argv)
 
     parser.process(app);
 
+    Tp::registerTypes();
+
+    Tp::AccountFactoryPtr accountFactory = Tp::AccountFactory::create(QDBusConnection::sessionBus(),
+                                                                      Tp::Features() << Tp::Account::FeatureCore
+    );
+
+    Tp::ConnectionFactoryPtr connectionFactory = Tp::ConnectionFactory::create(QDBusConnection::sessionBus(),
+                                                                               Tp::Features() << Tp::Connection::FeatureCore
+                                                                                              << Tp::Connection::FeatureSelfContact
+                                                                                              << Tp::Connection::FeatureConnected
+    );
+
+    Tp::ChannelFactoryPtr channelFactory = Tp::ChannelFactory::create(QDBusConnection::sessionBus());
+    channelFactory->addCommonFeatures(Tp::Channel::FeatureCore);
+    channelFactory->addFeaturesForCalls(Tp::Features() << Tp::CallChannel::FeatureContents
+                                                       << Tp::CallChannel::FeatureCallState
+                                                       << Tp::CallChannel::FeatureCallMembers
+                                                       << Tp::CallChannel::FeatureLocalHoldState
+    );
+
+//     channelFactory->addFeaturesForTextChats(Tp::Features() << Tp::TextChannel::FeatureMessageQueue
+//                                                            << Tp::TextChannel::FeatureMessageSentSignal
+//                                                            << Tp::TextChannel::FeatureChatState
+//                                                            << Tp::TextChannel::FeatureMessageCapabilities);
+
+    Tp::ContactFactoryPtr contactFactory = Tp::ContactFactory::create(Tp::Features() << Tp::Contact::FeatureAlias
+                                                                                     << Tp::Contact::FeatureAvatarData
+    );
+
+    Tp::ClientRegistrarPtr registrar =
+    Tp::ClientRegistrar::create(accountFactory, connectionFactory,
+                                channelFactory, contactFactory);
+
+    Tp::AccountPtr simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/account0"),
+                                                    connectionFactory, channelFactory);
+
+
     const QString packagePath("org.kde.phone.dialer");
 
     //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
@@ -81,7 +118,7 @@ int main(int argc, char **argv)
     obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
-    DialerUtils *dialerUtils = new DialerUtils;
+    DialerUtils *dialerUtils = new DialerUtils(simAccount);
     obj->engine()->rootContext()->setContextProperty("dialerUtils", QVariant::fromValue(dialerUtils));
 
     obj->completeInitialization();
@@ -89,6 +126,9 @@ int main(int argc, char **argv)
     if (!obj->package().metadata().isValid()) {
         return -1;
     }
+
+    Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
+    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Phone.Dialer");
 
     KPluginMetaData data = obj->package().metadata();
     // About data
@@ -133,36 +173,6 @@ int main(int argc, char **argv)
         qWarning() << "Error loading the ApplicationWindow";
     }
 
-    Tp::AccountFactoryPtr accountFactory = Tp::AccountFactory::create(QDBusConnection::sessionBus(),
-                                                                      Tp::Features() << Tp::Account::FeatureCore
-    );
-
-    Tp::ConnectionFactoryPtr connectionFactory = Tp::ConnectionFactory::create(QDBusConnection::sessionBus(),
-                                                                               Tp::Features() << Tp::Connection::FeatureCore
-                                                                                              << Tp::Connection::FeatureSelfContact
-    );
-
-    Tp::ChannelFactoryPtr channelFactory = Tp::ChannelFactory::create(QDBusConnection::sessionBus());
-    channelFactory->addCommonFeatures(Tp::Channel::FeatureCore);
-    channelFactory->addFeaturesForCalls(Tp::Features() << Tp::CallChannel::FeatureContents
-                                                       << Tp::CallChannel::FeatureCallState
-                                                       << Tp::CallChannel::FeatureCallMembers
-                                                       << Tp::CallChannel::FeatureLocalHoldState
-    );
-
-    Tp::ContactFactoryPtr contactFactory = Tp::ContactFactory::create(Tp::Features() << Tp::Contact::FeatureAlias
-                                                                                     << Tp::Contact::FeatureAvatarData
-    );
-
-
-//     app.setQuitOnLastWindowClosed(true);
-
-    Tp::ClientRegistrarPtr registrar =
-    Tp::ClientRegistrar::create(accountFactory, connectionFactory,
-                                channelFactory, contactFactory);
-
-    Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
-    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Phone.Dialer");
 
     return app.exec();
 }

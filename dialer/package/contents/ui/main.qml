@@ -24,7 +24,6 @@ import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.private.tpcaller 1.0
 
 ApplicationWindow {
     id: root
@@ -39,6 +38,7 @@ ApplicationWindow {
     property string providerId: ofonoWrapper.providerId
     //was the last call an incoming one?
     property bool isIncoming
+
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
@@ -59,8 +59,7 @@ ApplicationWindow {
 
 //BEGIN FUNCTIONS
     function call(number) {
-        tpCaller.dial(number);
-        //ofonoWrapper.call(number);
+        dialerUtils.dial(number);
     }
 
     function insertCallInHistory(number, duration, callType) {
@@ -149,19 +148,15 @@ ApplicationWindow {
         id: ofonoWrapper
     }
 
-    TpCaller {
-        id: tpCaller
-    }
-
 //END MODELS
 
 //BEGIN UI
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: root.visible && !tpCaller.callInProgress
+        when: root.visible && dialerUtils.callState == "idle"
         source: Qt.resolvedUrl("Dialer/DialPage.qml")
-        z: !tpCaller.callInProgress ? 2 : 0
-        opacity: !tpCaller.callInProgress ? 1 : 0
+        z: dialerUtils.callState == "idle" ? 2 : 0
+        opacity: dialerUtils.callState == "idle" ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration
@@ -172,10 +167,10 @@ ApplicationWindow {
 
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: tpCaller.callInProgress
+        when: dialerUtils.callState != "idle"
         source: Qt.resolvedUrl("Call/CallPage.qml")
-        opacity: tpCaller.callInProgress ? 1 : 0
-        z: tpCaller.callInProgress ? 2 : 0
+        opacity: dialerUtils.callState != "idle" ? 1 : 0
+        z:  dialerUtils.callState != "idle" ? 2 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration

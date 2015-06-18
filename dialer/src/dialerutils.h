@@ -23,26 +23,39 @@
 #include <QPointer>
 #include <KNotification>
 
+#include <TelepathyQt/Account>
+
 class DialerUtils : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString callState READ callState NOTIFY callStateChanged);
 public:
 
-    DialerUtils(QObject *parent = 0);
+    DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent = 0);
     virtual ~DialerUtils();
+
+    QString callState() const;
+    void setCallState(const QString &state);
 
     Q_INVOKABLE void notifyMissedCall(const QString &caller, const QString &description);
     Q_INVOKABLE void resetMissedCalls();
     Q_INVOKABLE void notifyRinging();
     Q_INVOKABLE void stopRinging();
+    Q_INVOKABLE void dial(const QString &number);
 
 Q_SIGNALS:
     void missedCallsActionTriggered();
+    void callStateChanged();
+    void acceptCall();
+    void rejectCall();
+    void hangUp();
 
 private:
     QPointer <KNotification> m_callsNotification;
     QPointer <KNotification> m_ringingNotification;
     int m_missedCalls;
+    QString m_callState;
+    Tp::AccountPtr m_simAccount;
 };
 
 
