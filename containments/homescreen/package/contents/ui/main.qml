@@ -256,6 +256,7 @@ MouseEventListener {
             return;
         }
 
+        feedbackWindow.state = "open";
         plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
         clickFedbackAnimation.target = item;
         clickFedbackAnimation.running = true;
@@ -280,6 +281,9 @@ MouseEventListener {
             duration: units.longDuration
             easing.type: Easing.InOutQuad
         }
+    }
+    FeedbackWindow {
+        id: feedbackWindow
     }
     PlasmaCore.ColorScope {
         anchors.fill: parent
