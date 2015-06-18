@@ -256,6 +256,7 @@ MouseEventListener {
             return;
         }
 
+        feedbackWindow.title = item.modelData.ApplicationNameRole;
         feedbackWindow.state = "open";
         plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
         clickFedbackAnimation.target = item;
