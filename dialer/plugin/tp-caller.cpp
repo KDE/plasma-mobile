@@ -83,7 +83,7 @@ void TpCaller::dial(const QString &number)
 
 bool TpCaller::callInProgress()
 {
-    return m_callChannel && m_callChannel->isValid() && m_callChannel->connection();
+    return m_callChannel && m_callChannel->isValid();
 }
 
 void TpCaller::hangUp()
