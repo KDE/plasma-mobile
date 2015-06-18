@@ -57,6 +57,7 @@ TpCaller::TpCaller(QObject *parent)
 
 void TpCaller::dial(const QString &number)
 {
+    // FIXME: this should be replaced by kpeople thing
     auto pendingContact = m_simAccount->connection()->contactManager()->contactsForIdentifiers(QStringList() << number);
 
     connect(pendingContact, &Tp::PendingOperation::finished, [=](){
@@ -73,6 +74,8 @@ void TpCaller::dial(const QString &number)
             }
 
             m_callChannel = Tp::CallChannelPtr(qobject_cast<Tp::CallChannel*>(pendingChannel->channel().data()));
+            connect(m_callChannel.data(), &Tp::Channel::invalidated, this, &TpCaller::callInProgressChanged);
+            connect(m_callChannel.data(), &Tp::CallChannel::callStateChanged, this, &TpCaller::callInProgressChanged);
             Q_EMIT callInProgressChanged();
         });
     });
