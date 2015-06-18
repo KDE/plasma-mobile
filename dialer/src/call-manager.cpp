@@ -42,6 +42,14 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
     connect(callChannel.data(), SIGNAL(callStateChanged(Tp::CallState)),
             SLOT(onCallStateChanged(Tp::CallState)));
 
+    connect(d->dialerUtils, &DialerUtils::acceptCall, this, &CallManager::onCallAccepted);
+    connect(d->dialerUtils, &DialerUtils::rejectCall, this, &CallManager::onCallRejected);
+    connect(d->dialerUtils, &DialerUtils::hangUp, this, &CallManager::onHangUpRequested);
+    connect(d->callChannel.data(), &Tp::CallChannel::invalidated, this, [=]() {
+        qDebug() << "Channel invalidated";
+        d->dialerUtils->setCallState("idle");
+    });
+
     //create the channel handler
 //     d->channelHandler = new CallChannelHandler(callChannel, this);
 
@@ -96,8 +104,7 @@ void CallManager::onCallStateChanged(Tp::CallState state)
 //             d->callWindow.data()->setStatus(CallWindow::StatusRemoteRinging);
         } else {
             d->dialerUtils->setCallState("incoming");
-            connect(d->dialerUtils, &DialerUtils::acceptCall, this, &CallManager::onCallAccepted);
-            connect(d->dialerUtils, &DialerUtils::rejectCall, this, &CallManager::onCallRejected);
+
             //show approver;
             (void) d->callChannel->setRinging();
         }
@@ -160,6 +167,20 @@ void CallManager::onCallAccepted()
 void CallManager::onCallRejected()
 {
     (void) d->callChannel->hangup(Tp::CallStateChangeReasonRejected, TP_QT_ERROR_REJECTED);
+}
+
+void CallManager::onHangUpRequested()
+{
+    if (d->callChannel && d->callChannel->isValid()) {
+        qDebug() << "Hanging up";
+        Tp::PendingOperation *op = d->callChannel->hangup();
+        connect(op, &Tp::PendingOperation::finished, [=]() {
+            if (op->isError()) {
+                qWarning() << "Unable to hang up:" << op->errorMessage();
+            }
+//             d->callChannel->requestClose();
+        });
+    }
 }
 
 void CallManager::ensureCallWindow()

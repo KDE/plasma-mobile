@@ -33,6 +33,7 @@ private Q_SLOTS:
     void onCallStateChanged(Tp::CallState state);
     void onCallAccepted();
     void onCallRejected();
+    void onHangUpRequested();
 
 private:
     void ensureCallWindow();
