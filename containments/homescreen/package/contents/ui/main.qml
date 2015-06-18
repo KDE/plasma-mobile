@@ -404,7 +404,7 @@ MouseEventListener {
 
                 //scrolling up
                 } else if (verticalVelocity < 0 && contentY < -headerItem.height + root.height &&
-                    contentY < (-headerItem.height + root.height/6)) {
+                    contentY < (-headerItem.height + root.height/6*5)) {
                     scrollAnim.to = -headerItem.height;
                     scrollAnim.running = true;
                     return;
