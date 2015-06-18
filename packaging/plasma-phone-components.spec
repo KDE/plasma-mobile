@@ -106,7 +106,7 @@ EOF
 
 cat > %{buildroot}%{_kf5_configdir}/kdeglobals <<EOF
 [KDE]
-LookAndFeelPackage=org.kde.satellite.phone
+LookAndFeelPackage=org.kde.plasma.phone
 
 [General]
 desktopFont=Oxygen Sans,9,-1,5,50,0,0,0,0,0

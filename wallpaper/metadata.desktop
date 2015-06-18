@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Satellite Lockers
+Name=Plasma Phone Lockers
 
-X-KDE-PluginInfo-Name=org.kde.satellite.lockers
+X-KDE-PluginInfo-Name=org.kde.plasma.phone.lockers
 X-KDE-PluginInfo-Author=Jens Reuterberg
 X-KDE-PluginInfo-Email=jens@ohyran.se
 X-KDE-PluginInfo-License=LGPLv3

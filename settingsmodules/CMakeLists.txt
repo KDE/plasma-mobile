@@ -1,4 +1,4 @@
-plasma_install_package(wireless org.kde.satellite.settings.wifi packages package)
+plasma_install_package(wireless org.kde.plasma.phone.settings.wifi packages package)
 
 
 

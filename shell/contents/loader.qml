@@ -23,7 +23,7 @@ import QtQuick 2
 Item {
     id: main
 
-    property string shell  : "org.kde.satellite.phone"
+    property string shell  : "org.kde.plasma.phone"
     property bool willing  : true
     property int  priority : 10
 

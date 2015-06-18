@@ -11,7 +11,7 @@ for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].currentConfigGroup = ["Wallpaper",
                                            desktopsArray[j].wallpaperPlugin,
                                            "General"];
-    desktopsArray[j].writeConfig("Image", "org.kde.satellite.lockers");
+    desktopsArray[j].writeConfig("Image", "org.kde.plasma.phone.lockers");
 }
 
 desktopsForActivity(id)[0].addWidget("org.kde.phone.notifications");

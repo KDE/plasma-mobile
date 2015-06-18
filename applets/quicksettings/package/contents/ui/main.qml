@@ -69,7 +69,7 @@ Item {
             text: "Wireless"
             icon: "network-wireless-on"
             enabled: true
-            settingsCommand: "active-settings -m org.kde.satellite.settings.wifi"
+            settingsCommand: "active-settings -m org.kde.plasma.phone.settings.wifi"
         }
         ListElement {
             text: "Alarms"

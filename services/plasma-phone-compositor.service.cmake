@@ -15,7 +15,7 @@ Type=notify
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=%t/dbus/user_bus_socket
 EnvironmentFile=-/var/lib/environment/compositor/*.conf
 EnvironmentFile=-/var/lib/environment/greenisland/*.conf
-ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/greenisland $LIPSTICK_OPTIONS -p org.kde.satellite.compositor.phone
+ExecStart=@CMAKE_INSTALL_FULL_BINDIR@/greenisland $LIPSTICK_OPTIONS -p org.kde.plasma.compositor.phone
 Restart=on-failure
 
 [Install]
