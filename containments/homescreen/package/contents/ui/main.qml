@@ -41,12 +41,6 @@ MouseEventListener {
         LayoutManager.save();
     }
 
-    Plasmoid.onFocusChanged: {
-        if (!plasmoid.focus && applicationsView.contentY > -(applicationsView.headerItem.height - root.height/2)) {
-            applicationsView.contentY = -root.height;
-        }
-    }
-
     function addApplet(applet, x, y) {
         var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
