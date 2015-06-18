@@ -71,6 +71,8 @@ public:
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 
+    Q_INVOKABLE void runApplicationKRun(const QString &storageId);
+
     Q_INVOKABLE void loadApplications();
 
 public Q_SLOTS:

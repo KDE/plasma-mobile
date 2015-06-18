@@ -33,6 +33,7 @@
 #include <KSharedConfig>
 #include <KSycoca>
 #include <KSycocaEntry>
+#include <KIOWidgets/KRun>
 #include <QDebug>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
@@ -218,6 +219,7 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
     endMoveRows();
 }
 
+//TODO: the implementation of runApplicationKRun should be the only one remaining
 void ApplicationListModel::runApplication(const QString &storageId)
 {
     if (storageId.isEmpty()) {
@@ -228,6 +230,17 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     //ignore parameters like %u
     QProcess::startDetached(service->exec().replace(QRegExp("%\\w"), ""));
+}
+
+void ApplicationListModel::runApplicationKRun(const QString &storageId)
+{
+    if (storageId.isEmpty()) {
+        return;
+    }
+
+    KService::Ptr service = KService::serviceByStorageId(storageId);
+
+    KRun::run(*service, QList<QUrl>(), 0);
 }
 
 QStringList ApplicationListModel::appOrder() const
