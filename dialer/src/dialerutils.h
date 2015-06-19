@@ -39,8 +39,6 @@ public:
 
     Q_INVOKABLE void notifyMissedCall(const QString &caller, const QString &description);
     Q_INVOKABLE void resetMissedCalls();
-    Q_INVOKABLE void notifyRinging();
-    Q_INVOKABLE void stopRinging();
     Q_INVOKABLE void dial(const QString &number);
 
 Q_SIGNALS:

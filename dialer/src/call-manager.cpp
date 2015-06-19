@@ -16,6 +16,9 @@
 */
 #include "call-manager.h"
 #include "dialerutils.h"
+
+#include <KNotification>
+#include <KLocalizedString>
 // #include "call-window.h"
 // #include "approver.h"
 // #include "../libktpcall/call-channel-handler.h"
@@ -30,6 +33,9 @@ struct CallManager::Private
 //     QPointer<CallWindow> callWindow;
 //     QPointer<Approver> approver;
     DialerUtils *dialerUtils;
+    KNotification *ringingNotification;
+    KNotification *callsNotification;
+    uint missedCalls;
 };
 
 CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dialerUtils, QObject *parent)
@@ -107,6 +113,11 @@ void CallManager::onCallStateChanged(Tp::CallState state)
 
             //show approver;
             (void) d->callChannel->setRinging();
+            if (!d->ringingNotification) {
+                d->ringingNotification = new KNotification("ringing", KNotification::Persistent | KNotification::LoopSound, 0);
+                d->ringingNotification->setComponentName("plasma_dialer");
+            }
+            d->ringingNotification->sendEvent();
         }
         break;
     case Tp::CallStateAccepted:
@@ -117,6 +128,9 @@ void CallManager::onCallStateChanged(Tp::CallState state)
 //             d->callWindow.data()->setStatus(CallWindow::StatusRemoteAccepted);
         } else {
             //hide approver & show call window
+            if (d->ringingNotification) {
+                d->ringingNotification->close();
+            }
 //             delete d->approver.data();
 //             ensureCallWindow();
 //             d->callWindow.data()->setStatus(CallWindow::StatusConnecting);
@@ -135,6 +149,9 @@ void CallManager::onCallStateChanged(Tp::CallState state)
         break;
     case Tp::CallStateEnded:
         d->dialerUtils->setCallState("ended");
+        if (d->ringingNotification) {
+            d->ringingNotification->close();
+        }
         //if we requested the call, make sure we have a window to show the error (if any)
 //         if (d->callChannel->isRequested()) {
 //             ensureCallWindow();

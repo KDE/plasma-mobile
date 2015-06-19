@@ -126,20 +126,4 @@ void DialerUtils::resetMissedCalls()
     m_callsNotification.clear();
 }
 
-void DialerUtils::notifyRinging()
-{
-    if (!m_ringingNotification) {
-        m_ringingNotification = new KNotification("ringing", KNotification::Persistent, 0);
-        m_ringingNotification->setComponentName("plasma_dialer");
-    }
-    m_ringingNotification->sendEvent();
-}
-
-void DialerUtils::stopRinging()
-{
-    if (m_ringingNotification) {
-        m_ringingNotification->close();
-    }
-}
-
 #include "moc_dialerutils.cpp"
