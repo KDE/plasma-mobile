@@ -21,8 +21,9 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2
 
-Window {
+FullScreenPanel {
     id: window
 
     property int offset: 0
