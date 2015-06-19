@@ -41,12 +41,6 @@ MouseEventListener {
         LayoutManager.save();
     }
 
-    Plasmoid.onFocusChanged: {
-        if (!plasmoid.focus && applicationsView.contentY > -(applicationsView.headerItem.height - root.height/2)) {
-            applicationsView.contentY = -root.height;
-        }
-    }
-
     function addApplet(applet, x, y) {
         var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
@@ -256,6 +250,8 @@ MouseEventListener {
             return;
         }
 
+        feedbackWindow.title = item.modelData.ApplicationNameRole;
+        feedbackWindow.state = "open";
         plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
         clickFedbackAnimation.target = item;
         clickFedbackAnimation.running = true;
@@ -281,6 +277,19 @@ MouseEventListener {
             easing.type: Easing.InOutQuad
         }
     }
+    FeedbackWindow {
+        id: feedbackWindow
+    }
+    KRunner {
+        z: 1000
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            topMargin: plasmoid.availableScreenRect.y
+        }
+    }
+
     PlasmaCore.ColorScope {
         anchors.fill: parent
         //TODO: decide what color we want applets
@@ -404,7 +413,7 @@ MouseEventListener {
 
                 //scrolling up
                 } else if (verticalVelocity < 0 && contentY < -headerItem.height + root.height &&
-                    contentY < (-headerItem.height + root.height/6)) {
+                    contentY < (-headerItem.height + root.height/6*5)) {
                     scrollAnim.to = -headerItem.height;
                     scrollAnim.running = true;
                     return;

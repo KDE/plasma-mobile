@@ -1,0 +1,9 @@
+This files are for systemd units.
+
+Our current implemention is based on top of the Ubuntu phone which
+still uses upstart. So these files do nothing, but we're still keeping
+them over here for now.
+
+The situation should be revisited in about 6 months.
+
+- 19th June 2015

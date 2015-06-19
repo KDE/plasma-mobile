@@ -33,6 +33,7 @@
 #include <KSharedConfig>
 #include <KSycoca>
 #include <KSycocaEntry>
+#include <KIOWidgets/KRun>
 #include <QDebug>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
@@ -96,7 +97,7 @@ void ApplicationListModel::loadApplications()
     for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
         KSycocaEntry::Ptr groupEntry = (*it);
 
-        if (groupEntry->isType(KST_KServiceGroup) && groupEntry->name() != "System/" && groupEntry->name() != "Settingsmenu/") {
+        if (groupEntry->isType(KST_KServiceGroup)) {
             KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
@@ -110,7 +111,7 @@ void ApplicationListModel::loadApplications()
                         KService::Ptr service(static_cast<KService* >(entry.data()));
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) &&
-                            !service->showOnCurrentPlatform() &&
+                            service->showOnCurrentPlatform() &&
                             !service->property("Terminal", QVariant::Bool).toBool()) {
 
                             data.name = service->name();
@@ -218,6 +219,7 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
     endMoveRows();
 }
 
+//TODO: the implementation of runApplicationKRun should be the only one remaining
 void ApplicationListModel::runApplication(const QString &storageId)
 {
     if (storageId.isEmpty()) {
@@ -228,6 +230,17 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     //ignore parameters like %u
     QProcess::startDetached(service->exec().replace(QRegExp("%\\w"), ""));
+}
+
+void ApplicationListModel::runApplicationKRun(const QString &storageId)
+{
+    if (storageId.isEmpty()) {
+        return;
+    }
+
+    KService::Ptr service = KService::serviceByStorageId(storageId);
+
+    KRun::run(*service, QList<QUrl>(), 0);
 }
 
 QStringList ApplicationListModel::appOrder() const

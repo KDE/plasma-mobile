@@ -25,7 +25,7 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO)
 find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
 find_package(TelepathyQt5 REQUIRED)
 find_package(KF5Wayland CONFIG)
@@ -38,16 +38,9 @@ feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAG
 
 include(CheckIncludeFiles)
 
-plasma_install_package(look-and-feel org.kde.satellite.phone look-and-feel)
-plasma_install_package(shell org.kde.satellite.phone shells)
-install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.satellite.lockers")
-
-install(DIRECTORY compositor/
-        DESTINATION ${DATA_INSTALL_DIR}/greenisland/org.kde.satellite.compositor.phone
-        PATTERN .svn EXCLUDE
-        PATTERN CMakeLists.txt EXCLUDE
-        PATTERN Messages.sh EXCLUDE
-        PATTERN dummydata EXCLUDE)
+plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
+plasma_install_package(shell org.kde.plasma.phone shells)
+install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.plasma.phone.lockers")
 
 kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
 install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.phonebook.desktop)

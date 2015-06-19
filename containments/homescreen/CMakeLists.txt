@@ -13,6 +13,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                       Qt5::Qml
                       KF5::I18n
                       KF5::Service
+                      KF5::KIOWidgets
                      )
 
 

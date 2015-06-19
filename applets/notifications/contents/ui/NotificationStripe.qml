@@ -44,13 +44,6 @@ MouseArea {
         }
     }
 
-    Behavior on height {
-        NumberAnimation {
-            easing.type: Easing.InOutQuad
-            duration: units.longDuration
-        }
-    }
-
     onReleased: {
         if (drag.active) {
             if (x > width / 4 || x < width / -4) {
@@ -97,11 +90,8 @@ MouseArea {
 
     PlasmaComponents.Label {
         id: appLabel
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-            leftMargin: units.gridUnit * 3
-        }
+        anchors.leftMargin: units.gridUnit * 3
+
         color: PlasmaCore.ColorScope.textColor
         text: model.appName
     }
@@ -109,35 +99,44 @@ MouseArea {
     Column {
         id: messageLayout
         anchors {
-            left: appLabel.right
-            right: icon.left
             verticalCenter: parent.verticalCenter
-            rightMargin: units.smallSpacing
+            left: parent.left
+            right: icon.left
+            leftMargin: units.gridUnit * 3
         }
 
         PlasmaComponents.Label {
-            anchors {
-                right: parent.right
-                left: parent.left
-            }
+            id: summaryLabel
+            anchors.right: parent.right
+            width: messageLayout.width - appLabel.width
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             text: summary + (!notificationItem.expanded && body ? "..." : "")
             wrapMode: Text.WordWrap
         }
+
         PlasmaComponents.Label {
+            id: bodyLabel
             anchors {
                 right: parent.right
                 left: parent.left
             }
-            visible: notificationItem.expanded && body != undefined && body
+            visible: height > 0
+            height: notificationItem.expanded && body != undefined && body ? implicitHeight : 0
+            clip: true
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             text: body
             wrapMode: Text.WordWrap
+            Behavior on height {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
-        
     }
+
 
     PlasmaCore.IconItem {
         id: icon
@@ -174,4 +173,34 @@ MouseArea {
             }
         }
     }
+
+    states: [
+        State {
+            name: "large"
+            when: appLabel.width + bodyLabel.paintedWidth < messageLayout.width
+            AnchorChanges {
+                target: appLabel
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    top: undefined
+                    left: parent.left
+                }
+            }
+            PropertyChanges {
+                
+            }
+        },
+        State {
+            name: "compact"
+            when: notificationItem.state != "large"
+            AnchorChanges {
+                target: appLabel
+                anchors {
+                    verticalCenter: undefined
+                    top: messageLayout.top
+                    left: parent.left
+                }
+            }
+        }
+    ]
 }

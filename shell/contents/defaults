@@ -1,5 +1,5 @@
 [kdeglobals][KDE]
-LookAndFeelPackage=org.kde.satellite.phone
+LookAndFeelPackage=org.kde.plasma.phone
 
 [Desktop]
 Containment=org.kde.phone.homescreen
