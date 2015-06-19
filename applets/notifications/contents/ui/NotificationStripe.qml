@@ -97,11 +97,8 @@ MouseArea {
 
     PlasmaComponents.Label {
         id: appLabel
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-            leftMargin: units.gridUnit * 3
-        }
+        anchors.leftMargin: units.gridUnit * 3
+
         color: PlasmaCore.ColorScope.textColor
         text: model.appName
     }
@@ -109,23 +106,24 @@ MouseArea {
     Column {
         id: messageLayout
         anchors {
-            left: appLabel.right
-            right: icon.left
             verticalCenter: parent.verticalCenter
-            rightMargin: units.smallSpacing
+            left: parent.left
+            right: icon.left
+            leftMargin: units.gridUnit * 3
         }
 
         PlasmaComponents.Label {
-            anchors {
-                right: parent.right
-                left: parent.left
-            }
+            id: summaryLabel
+            anchors.right: parent.right
+            width: messageLayout.width - appLabel.width
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             text: summary + (!notificationItem.expanded && body ? "..." : "")
             wrapMode: Text.WordWrap
         }
+
         PlasmaComponents.Label {
+            id: bodyLabel
             anchors {
                 right: parent.right
                 left: parent.left
@@ -136,8 +134,8 @@ MouseArea {
             text: body
             wrapMode: Text.WordWrap
         }
-        
     }
+
 
     PlasmaCore.IconItem {
         id: icon
@@ -174,4 +172,34 @@ MouseArea {
             }
         }
     }
+
+    states: [
+        State {
+            name: "large"
+            when: appLabel.width + bodyLabel.paintedWidth < messageLayout.width
+            AnchorChanges {
+                target: appLabel
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    top: undefined
+                    left: parent.left
+                }
+            }
+            PropertyChanges {
+                
+            }
+        },
+        State {
+            name: "compact"
+            when: notificationItem.state != "large"
+            AnchorChanges {
+                target: appLabel
+                anchors {
+                    verticalCenter: undefined
+                    top: messageLayout.top
+                    left: parent.left
+                }
+            }
+        }
+    ]
 }
