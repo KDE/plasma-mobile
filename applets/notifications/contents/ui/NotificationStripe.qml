@@ -44,13 +44,6 @@ MouseArea {
         }
     }
 
-    Behavior on height {
-        NumberAnimation {
-            easing.type: Easing.InOutQuad
-            duration: units.longDuration
-        }
-    }
-
     onReleased: {
         if (drag.active) {
             if (x > width / 4 || x < width / -4) {
@@ -128,11 +121,19 @@ MouseArea {
                 right: parent.right
                 left: parent.left
             }
-            visible: notificationItem.expanded && body != undefined && body
+            visible: height > 0
+            height: notificationItem.expanded && body != undefined && body ? implicitHeight : 0
+            clip: true
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             text: body
             wrapMode: Text.WordWrap
+            Behavior on height {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
         }
     }
 
