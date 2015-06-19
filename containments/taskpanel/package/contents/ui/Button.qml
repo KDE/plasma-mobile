@@ -41,7 +41,8 @@ MouseArea {
     PlasmaCore.IconItem {
         id: icon
         anchors.fill: parent
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup//PlasmaCore.ColorContext.colorGroup
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        enabled: button.enabled
     }
     onClicked: {
         if (checkable) {
