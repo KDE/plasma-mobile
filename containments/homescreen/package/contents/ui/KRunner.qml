@@ -30,15 +30,19 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.milou 0.1 as Milou
 
 PlasmaCore.FrameSvgItem {
+    id: background
     imagePath: "widgets/background"
     enabledBorders: PlasmaCore.FrameSvg.BottomBorder
-    height: childrenRect.height + margins.bottom
+    height: childrenRect.height + fixedMargins.top/2 + fixedMargins.bottom
 
     ColumnLayout {
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
+            topMargin: background.fixedMargins.top / 2
+            leftMargin: background.fixedMargins.left / 2
+            rightMargin: background.fixedMargins.right / 2
         }
         PlasmaComponents.TextField {
             id: queryField

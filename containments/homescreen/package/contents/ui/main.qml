@@ -283,8 +283,10 @@ MouseEventListener {
     KRunner {
         z: 1000
         anchors {
+            top: parent.top
             left: parent.left
             right: parent.right
+            topMargin: plasmoid.availableScreenRect.y
         }
     }
 
