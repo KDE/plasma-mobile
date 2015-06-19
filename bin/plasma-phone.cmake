@@ -34,6 +34,8 @@ export FORCE_RIL_NUM_MODEMS=1
 # upstart user session has useful bits like mtp-server
 init --user &
 
+sleep 5
+
 /usr/bin/kbuildsycoca5
 /usr/bin/kded5&
 
