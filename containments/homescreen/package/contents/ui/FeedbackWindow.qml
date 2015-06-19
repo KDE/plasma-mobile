@@ -41,16 +41,17 @@ Window {
         }
     }
 
-    Rectangle {
+    PlasmaCore.ColorScope {
         id: background
-        color: Qt.rgba(0, 0, 0, 0.8)
+        anchors.fill: parent
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
         width: window.width
         height: window.height
         state: "closed"
-
-        PlasmaCore.ColorScope {
+        Rectangle {
             anchors.fill: parent
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            color: background.backgroundColor
+        
             PlasmaComponents.BusyIndicator {
                 anchors.centerIn: parent
             }
