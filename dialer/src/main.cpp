@@ -129,9 +129,8 @@ int main(int argc, char **argv)
                                                                                      << Tp::Contact::FeatureAvatarData
     );
 
-    Tp::ClientRegistrarPtr registrar =
-    Tp::ClientRegistrar::create(accountFactory, connectionFactory,
-                                channelFactory, contactFactory);
+    Tp::ClientRegistrarPtr registrar = Tp::ClientRegistrar::create(accountFactory, connectionFactory,
+                                                                   channelFactory, contactFactory);
 
     Tp::AccountPtr simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/account0"),
                                                     connectionFactory, channelFactory);
