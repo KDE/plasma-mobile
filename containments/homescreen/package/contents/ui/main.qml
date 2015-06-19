@@ -280,6 +280,14 @@ MouseEventListener {
     FeedbackWindow {
         id: feedbackWindow
     }
+    KRunner {
+        z: 1000
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+    }
+
     PlasmaCore.ColorScope {
         anchors.fill: parent
         //TODO: decide what color we want applets
