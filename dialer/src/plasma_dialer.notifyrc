@@ -11,5 +11,5 @@ Action=Popup
 Name=Ringing
 Comment=The phone is ringing
 Action=Sound
-Sound=KDE-Sys-Question.ogg
+Sound=KDE-Im-Phone-Ring.ogg
 
