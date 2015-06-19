@@ -123,6 +123,10 @@ Window {
                     }
                     text: "Task " + modelData
                 }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: window.hide();
+                }
             }
         }
     }
