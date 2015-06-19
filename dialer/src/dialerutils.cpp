@@ -82,41 +82,6 @@ void DialerUtils::setCallState(const QString &state)
     }
 }
 
-void DialerUtils::notifyMissedCall(const QString &caller, const QString &description)
-{
-    qWarning() << "Missed Call.";
-
-    ++m_missedCalls;
-    if (!m_callsNotification) {
-        m_callsNotification = new KNotification("callMissed", KNotification::Persistent, 0);
-    }
-    m_callsNotification->setComponentName("plasma_dialer");
-    m_callsNotification->setIconName("call-start");
-    if (m_missedCalls == 1) {
-        m_callsNotification->setTitle(i18n("Missed call from %1", caller));
-        m_callsNotification->setText(description);
-    } else {
-        m_callsNotification->setTitle(i18n("%1 calls missed", m_missedCalls));
-        m_callsNotification->setText(i18n("Last call: %1", description));
-    }
-
-    QStringList actions;
-    actions.append(i18n("View"));
-    m_callsNotification->setActions(actions);
-    QObject::connect(m_callsNotification.data(), &KNotification::action1Activated,
-        [=]() {
-            qWarning()<<"View action activated";
-            emit missedCallsActionTriggered();
-            resetMissedCalls();
-        });
-
-    if (m_missedCalls == 1) {
-        m_callsNotification->sendEvent();
-    } else {
-        m_callsNotification->update();
-    }
-}
-
 void DialerUtils::resetMissedCalls()
 {
     m_missedCalls = 0;

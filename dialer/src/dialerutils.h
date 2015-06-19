@@ -37,7 +37,6 @@ public:
     QString callState() const;
     void setCallState(const QString &state);
 
-    Q_INVOKABLE void notifyMissedCall(const QString &caller, const QString &description);
     Q_INVOKABLE void resetMissedCalls();
     Q_INVOKABLE void dial(const QString &number);
 

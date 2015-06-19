@@ -152,6 +152,29 @@ void CallManager::onCallStateChanged(Tp::CallState state)
         if (d->ringingNotification) {
             d->ringingNotification->close();
         }
+        //FIXME this is defined in the spec, but try to find a proper enum value for it
+        if (d->callChannel->callStateReason().reason == 5) {
+            qDebug() << "Adding notification";
+            d->missedCalls++;
+            if (!d->callsNotification) {
+                d->callsNotification = new KNotification("callMissed", KNotification::Persistent, 0);
+            }
+            d->callsNotification->setComponentName("plasma_dialer");
+            d->callsNotification->setIconName("call-start");
+            if (d->missedCalls == 1) {
+                d->callsNotification->setTitle(i18n("Missed call from %1", d->callChannel->targetContact()->alias()));
+                d->callsNotification->setText(QTime::currentTime().toString("HH:mm"));
+            } else {
+                d->callsNotification->setTitle(i18n("%1 calls missed", d->missedCalls));
+                d->callsNotification->setText(i18n("Last call: %1", QTime::currentTime().toString("HH:mm")));
+            }
+
+            if (d->missedCalls == 1) {
+                d->callsNotification->sendEvent();
+            } else {
+                d->callsNotification->update();
+            }
+        }
         //if we requested the call, make sure we have a window to show the error (if any)
 //         if (d->callChannel->isRequested()) {
 //             ensureCallWindow();
