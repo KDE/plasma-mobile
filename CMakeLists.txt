@@ -40,7 +40,7 @@ find_package(KF5 REQUIRED COMPONENTS
     WindowSystem Codecs Archive CoreAddons Solid
     Config Auth DBusAddons Sonnet
     I18n Service Notifications IconThemes Completion
-    Bookmarks )
+    Bookmarks Wayland )
 
 find_package(KF5Plasma REQUIRED NO_MODULE)
 find_package(KF5PlasmaQuick REQUIRED NO_MODULE)
