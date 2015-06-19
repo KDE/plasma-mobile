@@ -35,6 +35,7 @@ MouseEventListener {
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
     property bool reorderingApps: false
+    property bool locked: applicationsView.contentY <= -applicationsView.headerItem.height + root.height
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);
@@ -143,6 +144,9 @@ MouseEventListener {
     }
 
     onPressAndHold: {
+        if (krunner.showingResults) {
+            return;
+        }
         var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
         //in favorites area?
         var item;
@@ -220,6 +224,9 @@ MouseEventListener {
 
     }
     onReleased: {
+        if (krunner.showingResults) {
+            return;
+        }
         applicationsView.interactive = true;
         dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight;
         dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight;
@@ -236,6 +243,9 @@ MouseEventListener {
         scrollDownIndicator.opacity = 0;
     }
     onClicked: {
+        if (krunner.showingResults) {
+            return;
+        }
         var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
 
         //in favorites area?
@@ -281,6 +291,7 @@ MouseEventListener {
         id: feedbackWindow
     }
     KRunner {
+        id: krunner
         z: 1000
         anchors {
             top: parent.top

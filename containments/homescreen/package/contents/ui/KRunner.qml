@@ -29,54 +29,89 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.milou 0.1 as Milou
 
-PlasmaCore.FrameSvgItem {
-    id: background
-    imagePath: "widgets/background"
-    enabledBorders: PlasmaCore.FrameSvg.BottomBorder
-    height: childrenRect.height + fixedMargins.top/2 + fixedMargins.bottom
+Rectangle {
+    id: krunner
+    anchors.fill: parent
+    height: childrenRect.height
+    color: listView.visible ? Qt.rgba(0, 0, 0, 0.8) : "transparent"
+    property alias showingResults: listView.visible
 
-    ColumnLayout {
+    MouseArea {
+        enabled: listView.visible
+        anchors.fill: parent
+        preventStealing: true
+        onClicked: queryField.text = "";
+    }
+    PlasmaCore.FrameSvgItem {
+        id: background
         anchors {
             left: parent.left
             right: parent.right
             top: parent.top
-            topMargin: background.fixedMargins.top / 2
-            leftMargin: background.fixedMargins.left / 2
-            rightMargin: background.fixedMargins.right / 2
         }
-        PlasmaComponents.TextField {
-            id: queryField
-            clearButtonShown: true
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
-
-            Keys.onEscapePressed: runnerWindow.visible = false
-            placeholderText: "Search ..."
+        clip: true
+        imagePath: "widgets/background"
+        enabledBorders: PlasmaCore.FrameSvg.BottomBorder
+        height: childrenRect.height + fixedMargins.top/2 + fixedMargins.bottom
+        Behavior on height {
+            NumberAnimation {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
         }
-
-        Milou.ResultsView {
-            id: listView
-            queryString: queryField.text
-            visible: count > 0
-
-            Layout.fillWidth: true
-            Layout.preferredHeight: listView.contentHeight
-            Layout.alignment: Qt.AlignTop
-
-            onActivated: queryField.text = ""
-            onUpdateQueryString: {
-                queryField.text = text
-                queryField.cursorPosition = cursorPosition
+        transform: Translate {
+            y: root.locked ? -background.height : 0
+            Behavior on y {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
 
-        Keys.onReturnPressed: {
-            if (queryField.texr.length == 0)
-                runnerWindow.visible = false;
-        }
-        Keys.onEnterPressed: {
-            if (queryField.texr.length == 0)
-                runnerWindow.visible = false;
+        ColumnLayout {
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+                topMargin: background.fixedMargins.top / 2
+                leftMargin: background.fixedMargins.left / 2
+                rightMargin: background.fixedMargins.right / 2
+            }
+            PlasmaComponents.TextField {
+                id: queryField
+                clearButtonShown: true
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                Keys.onEscapePressed: runnerWindow.visible = false
+                placeholderText: "Search ..."
+            }
+
+            Milou.ResultsView {
+                id: listView
+                queryString: queryField.text
+                visible: count > 0
+
+                Layout.fillWidth: true
+                Layout.preferredHeight: listView.contentHeight
+                Layout.alignment: Qt.AlignTop
+
+                onActivated: queryField.text = ""
+                onUpdateQueryString: {
+                    queryField.text = text
+                    queryField.cursorPosition = cursorPosition
+                }
+            }
+
+            Keys.onReturnPressed: {
+                if (queryField.texr.length == 0)
+                    runnerWindow.visible = false;
+            }
+            Keys.onEnterPressed: {
+                if (queryField.texr.length == 0)
+                    runnerWindow.visible = false;
+            }
         }
     }
 }
