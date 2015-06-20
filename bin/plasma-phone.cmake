@@ -36,9 +36,6 @@ init --user &
 
 sleep 5
 
-/usr/bin/kbuildsycoca5
-/usr/bin/kded5&
-
 mc-tool request ofono/ofono/account0 online
 paplay /usr/share/sounds/ubuntu/stereo/desktop-login.ogg &
 
