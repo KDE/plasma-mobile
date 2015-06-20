@@ -50,7 +50,6 @@ install( FILES kwinmultitasking/metadata.desktop DESTINATION ${SERVICES_INSTALL_
 
 add_subdirectory(bin)
 #add_subdirectory(services)
-add_subdirectory(settingsmodules)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(dialer)
