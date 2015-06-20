@@ -61,10 +61,9 @@ MouseEventListener {
             return;
         }
 
-        var pos = mapToItem(headerItem, mouse.x, mouse.y);
         draggingApplet.y = mouse.y - draggingApplet.height/2;
 
-        pos = mapToItem(appletsLayout, mouse.x, mouse.y);
+        var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
         var itemUnderMouse = appletsSpace.layout.childAt(pos.x, pos.y);
 
         if (itemUnderMouse && itemUnderMouse != dndSpacer) {
@@ -74,6 +73,18 @@ MouseEventListener {
             } else {
                 LayoutManager.insertAfter(itemUnderMouse, dndSpacer);
             }
+        }
+
+        pos = mapToItem(root, mouse.x, mouse.y);
+        //SCROLL UP
+        if (applicationsView.contentY > -applicationsView.headerItem.height + root.height && pos.y < root.height/4) {
+            root.scrollUp();
+        //SCROLL DOWN
+        } else if (applicationsView.contentY < 0 && pos.y > 3 * (root.height / 4)) {
+            root.scrollDown();
+        //DON't SCROLL
+        } else {
+            root.stopScroll();
         }
     }
     onReleased: {

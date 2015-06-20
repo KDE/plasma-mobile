@@ -60,7 +60,7 @@ Rectangle {
             }
         }
         transform: Translate {
-            y: root.locked ? -background.height : 0
+            y: root.locked || editOverlay.visible ? -background.height : 0
             Behavior on y {
                 NumberAnimation {
                     duration: units.longDuration

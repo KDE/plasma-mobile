@@ -31,17 +31,15 @@ Item {
     width: 480
     height: 640
 
+//BEGIN properties
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
     property bool reorderingApps: false
     property bool locked: applicationsView.contentY <= -applicationsView.headerItem.height + root.height
+//END properties
 
-    Containment.onAppletAdded: {
-        addApplet(applet, x, y);
-        LayoutManager.save();
-    }
-
+//BEGIN functions
     function addApplet(applet, x, y) {
         var container = appletContainerComponent.createObject(appletsSpace.layout)
         container.visible = true
@@ -81,6 +79,29 @@ Item {
         }
     }
 
+    //Autoscroll related functions
+    function scrollUp() {
+        autoScrollTimer.scrollDown = false;
+        autoScrollTimer.running = true;
+        scrollUpIndicator.opacity = 1;
+        scrollDownIndicator.opacity = 0;
+    }
+
+    function scrollDown() {
+        autoScrollTimer.scrollDown = true;
+        autoScrollTimer.running = true;
+        scrollUpIndicator.opacity = 0;
+        scrollDownIndicator.opacity = 1;
+    }
+
+    function stopScroll() {
+        autoScrollTimer.running = false;
+        scrollUpIndicator.opacity = 0;
+        scrollDownIndicator.opacity = 0;
+    }
+//END functions
+
+//BEGIN slots
     Component.onCompleted: {
         LayoutManager.plasmoid = plasmoid;
         LayoutManager.root = root;
@@ -93,12 +114,18 @@ Item {
         plasmoid.nativeInterface.applicationListModel.loadApplications();
     }
 
+    Containment.onAppletAdded: {
+        addApplet(applet, x, y);
+        LayoutManager.save();
+    }
+
     Connections {
         target: plasmoid.nativeInterface.applicationListModel
         onAppOrderChanged: {
             plasmoid.configuration.AppOrder = plasmoid.nativeInterface.applicationListModel.appOrder;
         }
     }
+//END slots
 
     Timer {
         id: autoScrollTimer
@@ -106,9 +133,22 @@ Item {
         repeat: true
         interval: 1500
         onTriggered: {
-            scrollAnim.to = scrollDown ?
-                Math.min(applicationsView.contentItem.height - applicationsView.headerItem.height - root.height, applicationsView.contentY + root.height/2) :
-                Math.max(0, applicationsView.contentY - root.height/2);
+            //reordering launcher icons
+            if (root.reorderingApps) {
+                scrollAnim.to = scrollDown ?
+                //Scroll down
+                    Math.min(applicationsView.contentItem.height - applicationsView.headerItem.height - root.height, applicationsView.contentY + root.height/2) :
+                //Scroll up
+                    Math.max(0, applicationsView.contentY - root.height/2);
+
+            //reordering applets
+            } else {
+                scrollAnim.to = scrollDown ?
+                //Scroll down
+                    Math.min(-root.height, applicationsView.contentY + root.height/2) :
+                //Scroll up
+                    Math.max(-applicationsView.headerItem.height + root.height, applicationsView.contentY - root.height/2);
+            }
             scrollAnim.running = true;
         }
     }
@@ -184,13 +224,12 @@ Item {
             topMargin: plasmoid.availableScreenRect.y
         }
     }
-    EditOverlay {
-        id: editOverlay
-        z: 1000
-    }
+
 
     MouseEventListener {
         anchors.fill: parent
+        //Events handling: those events are about clicking and reordering of app icons
+        //applet related events are in AppeltsArea.qml
         onPressAndHold: {
             var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
             //in favorites area?
@@ -245,26 +284,16 @@ Item {
             var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
             //FAVORITES
             if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                autoScrollTimer.running = false;
-                scrollUpIndicator.opacity = 0;
-                scrollDownIndicator.opacity = 0;
+                root.stopScroll();
             //SCROLL UP
             } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
-                autoScrollTimer.scrollDown = false;
-                autoScrollTimer.running = true;
-                scrollUpIndicator.opacity = 1;
-                scrollDownIndicator.opacity = 0;
+                root.scrollUp();
             //SCROLL DOWN
             } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
-                autoScrollTimer.scrollDown = true;
-                autoScrollTimer.running = true;
-                scrollUpIndicator.opacity = 0;
-                scrollDownIndicator.opacity = 1;
+                root.scrollDown();
             //DON't SCROLL
             } else {
-                autoScrollTimer.running = false;
-                scrollUpIndicator.opacity = 0;
-                scrollDownIndicator.opacity = 0;
+                root.stopScroll();
             }
 
         }
@@ -283,9 +312,7 @@ Item {
             applicationsView.dragData = null;
             root.reorderingApps = false;
             applicationsView.forceLayout();
-            autoScrollTimer.running = false;
-            scrollUpIndicator.opacity = 0;
-            scrollDownIndicator.opacity = 0;
+            root.stopScroll();
         }
         onClicked: {
             if (krunner.showingResults) {
@@ -323,6 +350,10 @@ Item {
                 anchors.fill: parent
             }
 
+            EditOverlay {
+                id: editOverlay
+                z: 2
+            }
             PlasmaCore.Svg {
                 id: arrowsSvg
                 imagePath: "widgets/arrows"
@@ -353,6 +384,7 @@ Item {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
+                    bottomMargin: units.gridUnit * 2
                 }
                 z: 2
                 opacity: 0
@@ -368,6 +400,8 @@ Item {
                 }
             }
 
+            //This HomeLauncher is the placeholder for the "drag"
+            //delegate (that is not actual drag and drop
             HomeLauncher {
                 id: dragDelegate
                 z: 999
