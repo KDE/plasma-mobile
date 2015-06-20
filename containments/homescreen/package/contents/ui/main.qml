@@ -169,7 +169,7 @@ Item {
     }
     KRunner {
         id: krunner
-        z: 1000
+        z: 999
         anchors {
             top: parent.top
             left: parent.left
@@ -177,13 +177,14 @@ Item {
             topMargin: plasmoid.availableScreenRect.y
         }
     }
+    EditOverlay {
+        id: editOverlay
+        z: 1000
+    }
 
     MouseEventListener {
         anchors.fill: parent
         onPressAndHold: {
-            if (krunner.showingResults) {
-                return;
-            }
             var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
             //in favorites area?
             var item;
@@ -478,7 +479,7 @@ Item {
                     onPressAndHold: {
                         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
                         if (!favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
-                            plasmoid.action("configure").trigger();
+                            editOverlay.visible = true;
                         }
                     }
 

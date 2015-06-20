@@ -38,6 +38,32 @@ Item {
     property int notificationId: 0;
     property int buttonHeight: width/4
 
+    function toggleWidgetExplorer(containment) {
+        console.log("Widget Explorer toggled");
+        if (widgetExplorerStack.source != "") {
+            widgetExplorerStack.source = "";
+        } else {
+            widgetExplorerStack.setSource(Qt.resolvedUrl("../explorer/WidgetExplorer.qml"), {"containment": containment})
+        }
+    }
+
+    Loader {
+        id: widgetExplorerStack
+        z: 99
+        asynchronous: true
+        y: containment ? containment.availableScreenRect.y : 0
+        height: containment ? containment.availableScreenRect.height : parent.height
+        width: item ? item.width: 0
+        
+        onLoaded: {
+            if (widgetExplorerStack.item) {
+                item.closed.connect(function() {
+                    widgetExplorerStack.source = ""
+                });
+            }
+        }
+    }
+
     onContainmentChanged: {
         containment.parent = homescreen;
 
