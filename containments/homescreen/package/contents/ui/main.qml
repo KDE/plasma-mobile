@@ -64,11 +64,6 @@ Item {
             var before = null;
             container.animationsEnabled = false;
 
-            if (appletsSpace.lastSpacer.parent === appletsSpace.layout) {
-              //Uncomment to make the spacer the last element again
-              //  before = appletsSpace.lastSpacer;
-            }
-
             if (before) {
                 LayoutManager.insertBefore(before, container);
 
@@ -90,7 +85,7 @@ Item {
         LayoutManager.plasmoid = plasmoid;
         LayoutManager.root = root;
         LayoutManager.layout = appletsSpace.layout;
-        LayoutManager.lastSpacer = appletsSpace.lastSpacer;
+        //LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
         applicationsView.contentY = -root.height;
 
@@ -434,7 +429,7 @@ Item {
                     //scrolling down
                     if (verticalVelocity > 0 && contentY < -headerItem.height + root.height &&
                         contentY > (-headerItem.height + root.height/6)) {
-                        scrollAnim.to = -plasmoid.availableScreenRect.height
+                        scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
                         scrollAnim.running = true;
                         return;
 
@@ -479,7 +474,8 @@ Item {
                 delegate: HomeLauncher {
                     visible: index > 3
                 }
-                header: MouseArea {
+                header: MouseEventListener {
+                    id: headerItem
                     z: 999
                     property Item layout: appletsLayout
                     property Item lastSpacer: spacer
@@ -487,12 +483,56 @@ Item {
                     width: root.width
                     height: mainLayout.Layout.minimumHeight
                     property int margin: stripe.height + units.gridUnit * 2
+                    property Item draggingApplet
 
                     onPressAndHold: {
                         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
                         if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
                             editOverlay.visible = true;
+                            var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
+                            draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
+print("BUuuH"+draggingApplet);
+print("MOOO"+draggingApplet.applet.title);
+                            if (draggingApplet) {
+                                dndSpacer.Layout.minimumHeight = draggingApplet.height;
+                                LayoutManager.insertBefore(draggingApplet, dndSpacer);
+                                draggingApplet.parent = headerItem;
+
+                                pos = mapToItem(headerItem, mouse.x, mouse.y);
+                                draggingApplet.y = pos.y - draggingApplet.height/2;
+
+                                applicationsView.interactive = false;
+                            }
                         }
+                    }
+                    onPositionChanged: {
+                        if (!draggingApplet) {
+                            return;
+                        }
+
+                        var pos = mapToItem(headerItem, mouse.x, mouse.y);
+                        draggingApplet.y = mouse.y - draggingApplet.height/2;
+
+                        pos = mapToItem(appletsLayout, mouse.x, mouse.y);
+                        var itemUnderMouse = appletsSpace.layout.childAt(pos.x, pos.y);
+
+                        if (itemUnderMouse && itemUnderMouse != dndSpacer) {
+                            dndSpacer.parent = colorScope;
+                            if (pos.y < itemUnderMouse.y + itemUnderMouse.height/2) {
+                                LayoutManager.insertBefore(itemUnderMouse, dndSpacer);
+                            } else {
+                                LayoutManager.insertAfter(itemUnderMouse, dndSpacer);
+                            }
+                        }
+                    }
+                    onReleased: {
+                        if (!draggingApplet) {
+                            return;
+                        }
+                        LayoutManager.insertBefore( dndSpacer, draggingApplet);
+                        applicationsView.interactive = true;
+                        dndSpacer.parent = colorScope;
+                        draggingApplet = null;
                     }
 
                     ColumnLayout {
@@ -523,7 +563,14 @@ Item {
                                 }
                             }
                         }
+                        Item {
+                            id: spacer
+                            Layout.fillWidth: true
+                            Layout.minimumHeight: 0
+                            Layout.maximumHeight: Layout.minimumHeight
+                        }
                         PlasmaCore.ColorScope {
+                            id: colorScope
                             //TODO: decide what color we want applets
                             colorGroup: PlasmaCore.Theme.NormalColorGroup
                             Layout.fillWidth: true
@@ -531,13 +578,13 @@ Item {
                             Layout.maximumHeight: appletsLayout.Layout.maximumHeight
                             ColumnLayout {
                                 id: appletsLayout
-                                Item {
-                                    id: spacer
-                                    Layout.fillWidth: true
-                                    Layout.fillHeight: true
-                                    Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
-                                    Layout.maximumHeight: Layout.minimumHeight
-                                }
+                            }
+                            Item {
+                                id: dndSpacer
+                                Layout.fillWidth: true
+                                Layout.fillHeight: true
+                                Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
+                                Layout.maximumHeight: Layout.minimumHeight
                             }
                         }
                         Item {
