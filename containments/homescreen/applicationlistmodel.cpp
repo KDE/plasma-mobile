@@ -33,6 +33,7 @@
 #include <KSharedConfig>
 #include <KSycoca>
 #include <KSycocaEntry>
+#include <KShell>
 #include <KIOWidgets/KRun>
 #include <QDebug>
 
@@ -241,8 +242,10 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
+    QStringList args = KShell::splitArgs(service->exec().replace(QRegExp("%\\w"), ""));
+    QString exec = args.takeFirst();
     //ignore parameters like %u
-    QProcess::startDetached(service->exec().replace(QRegExp("%\\w"), ""));
+    QProcess::startDetached(exec, args, service->path());
 }
 
 void ApplicationListModel::runApplicationKRun(const QString &storageId)
