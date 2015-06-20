@@ -478,7 +478,7 @@ Item {
 
                     onPressAndHold: {
                         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
-                        if (!favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
+                        if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
                             editOverlay.visible = true;
                         }
                     }
