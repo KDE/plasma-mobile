@@ -22,12 +22,15 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.plasmoid 2.0
 
 Item {
     id: root
     property int notificationId: 0
 
     Layout.minimumHeight: notificationView.contentsHeight
+
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     function addNotification(source, data, actions) {
         // Do not show duplicated notifications

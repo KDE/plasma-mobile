@@ -131,6 +131,18 @@ Item {
                     checkLastSpacer();
                 }
             }
+            onAppletChanged: {
+                if (applet.backgroundHints == PlasmaCore.Types.StandardBackground) {
+                    applet.anchors.margins = background.margins.top;
+                }
+            }
+            PlasmaCore.FrameSvgItem {
+                id: background
+                z: -1
+                anchors.fill: parent
+                imagePath: "widgets/background"
+                visible: applet.backgroundHints == PlasmaCore.Types.StandardBackground
+            }
 
             Layout.minimumWidth: root.width
             Layout.minimumHeight: Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2)
