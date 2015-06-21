@@ -42,7 +42,7 @@ Item {
     }
 
     onFullRepresentationChanged: {
-print(fullRepresentation);
+
         if (!fullRepresentation) {
             return;
         }
@@ -67,13 +67,24 @@ print(fullRepresentation);
     PlasmaCore.FrameSvgItem {
         id: appletParent
         imagePath: "widgets/background"
-        visible: fullRepresentation.parent == appletParent
+        //used only indesktop mode, not panel
+        visible: plasmoid.formFactor == PlasmaCore.Types.Planar
         z: 99
         opacity: plasmoid.expanded ? 1 : 0
         anchors.top: parent.top
         width: parent.width
         height: units.gridUnit * 20 - units.iconSizes.medium
 
+        MouseArea {
+            visible: plasmoid.expanded
+            anchors {
+                fill: parent
+                topMargin: -appletParent.height
+                bottomMargin: -appletParent.height
+            }
+            z: -1
+            onClicked: plasmoid.expanded = false;
+        }
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.longDuration
