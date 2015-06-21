@@ -60,7 +60,7 @@ Item {
         // Fall through to determining an appropriate insert position.
         } else {
             var before = null;
-            container.animationsEnabled = false;
+            //container.animationsEnabled = false;
 
             if (before) {
                 LayoutManager.insertBefore(before, container);
@@ -158,7 +158,7 @@ Item {
         MouseArea {
             id: appletContainer
             //not used yet
-            property bool animationsEnabled: false
+            property bool animationsEnabled: true
             property Item applet
             z: applet && applet.compactRepresentationItem && applet.expanded ? 99 : 0
             opacity: 1/Math.abs(x/(width/2))
@@ -186,6 +186,14 @@ Item {
                     applet.anchors.margins = background.margins.top;
                 } 
             }
+            onAnimationsEnabledChanged: {
+                if (!animationsEnabled) {
+                    translation.x = 0;
+                    translation.y = 0;
+                }
+            }
+            property int oldX: x
+            property int oldY: y
             PlasmaCore.FrameSvgItem {
                 id: background
                 z: -1
@@ -202,6 +210,47 @@ Item {
 
             Layout.maximumWidth: root.width
             Layout.maximumHeight: Layout.minimumHeight
+            
+            PlasmaComponents.BusyIndicator {
+                z: 1000
+                visible: applet && applet.busy
+                running: visible
+                anchors.centerIn: parent
+                width: Math.min(parent.width, parent.height)
+                height: width
+            }
+            onXChanged: {
+                if (!animationsEnabled) {
+                    return;
+                }
+                translation.x = oldX - x;
+                translation.y = oldY - y;
+                translAnim.running = true;
+                oldX = x;
+                oldY = y;
+            }
+            onYChanged: {
+                if (!animationsEnabled) {
+                    return;
+                }
+                translation.x = oldX - x;
+                translation.y = oldY - y;
+                translAnim.running = true;
+                oldX = x;
+                oldY = y;
+            }
+            transform: Translate {
+                id: translation
+                onYChanged: print(y)
+            }
+            NumberAnimation {
+                id: translAnim
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+                target: translation
+                properties: "x,y"
+                to: 0
+            }
         }
     }
 

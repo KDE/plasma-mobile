@@ -45,6 +45,7 @@ MouseEventListener {
             draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
 
             if (draggingApplet) {
+                draggingApplet.animationsEnabled = false;
                 dndSpacer.Layout.minimumHeight = draggingApplet.height;
                 LayoutManager.insertBefore(draggingApplet, dndSpacer);
                 draggingApplet.parent = headerItem;
@@ -95,6 +96,7 @@ MouseEventListener {
         if (draggingApplet.x > -draggingApplet.width/4 && draggingApplet.x < draggingApplet.width/4) {
             draggingApplet.x = 0;
             LayoutManager.insertBefore( dndSpacer, draggingApplet);
+            draggingApplet.animationsEnabled = true;
         } else {
             draggingApplet.applet.action("remove").trigger();
         }
