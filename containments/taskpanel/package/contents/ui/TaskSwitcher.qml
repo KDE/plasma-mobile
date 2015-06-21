@@ -120,40 +120,6 @@ FullScreenPanel {
             width: window.width
             height: window.height
         }
-        delegate: Item {
-            width: window.width/2
-            height: window.height/2
-            Rectangle {
-                anchors {
-                    fill: parent
-                    margins: units.gridUnit
-                }
-                radius: units.gridUnit
-                opacity: 0.8
-                PlasmaCore.IconItem {
-                    anchors.centerIn: parent
-                    width: Math.min(parent.width, parent.height)
-                    source: model.DecorationRole
-                }
-                PlasmaComponents.Label {
-                    anchors {
-                        bottom: parent.bottom
-                        horizontalCenter: parent.horizontalCenter
-                        left: parent.left
-                        right: parent.right
-                    }
-                    horizontalAlignment: Text.AlignHCenter
-                    elide: Text.ElideRight
-                    text: model.DisplayRole
-                }
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        window.hide();
-                        backend.activateItem(model.Id, true);
-                    }
-                }
-            }
-        }
+        delegate: Task {}
     }
 }
