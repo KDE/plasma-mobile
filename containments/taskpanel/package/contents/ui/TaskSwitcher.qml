@@ -121,5 +121,12 @@ FullScreenPanel {
             height: window.height
         }
         delegate: Task {}
+        displaced: Transition {
+            NumberAnimation {
+                properties: "x,y"
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 }

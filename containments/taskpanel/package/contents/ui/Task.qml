@@ -35,12 +35,23 @@ Item {
             fill: parent
             margins: units.gridUnit
         }
-        NumberAnimation {
+        SequentialAnimation {
             id: slideAnim
-            target: background
-            properties: "x"
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
+            property alias to: internalSlideAnim.to
+            NumberAnimation {
+                id: internalSlideAnim
+                target: background
+                properties: "x"
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            ScriptAction {
+                script: {
+                    if (background.x != 0) {
+                        backend.closeByItemId(model.Id);
+                    }
+                }
+            }
         }
         Rectangle {
             id: background
@@ -79,7 +90,8 @@ Item {
                 onReleased: {
                     delegate.z = 0;
                     if (Math.abs(background.x) > background.width/2) {
-                        backend.closeByItemId(model.Id);
+                        slideAnim.to = background.x > 0 ? background.width*2 : -background.width*2;
+                        slideAnim.running = true;
                     } else {
                         slideAnim.to = 0;
                         slideAnim.running = true;
