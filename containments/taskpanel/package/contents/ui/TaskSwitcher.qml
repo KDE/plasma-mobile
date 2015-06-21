@@ -24,6 +24,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
 
+import org.kde.plasma.private.taskmanager 0.1 as TaskManager
+
 FullScreenPanel {
     id: window
 
@@ -43,6 +45,17 @@ FullScreenPanel {
     function hide() {
         scrollAnim.to = -tasksView.headerItem.height;
         scrollAnim.running = true;
+    }
+
+    TaskManager.Backend {
+        id: backend
+
+        highlightWindows: false
+
+        //NoGrouping
+        groupingStrategy: 0
+        //AlphaSorting
+        sortingStrategy: 2
     }
 
     SequentialAnimation {
@@ -102,7 +115,7 @@ FullScreenPanel {
             }
         }
 
-        model: 10
+        model: backend.tasksModel
         header: Item {
             width: window.width
             height: window.height
@@ -117,16 +130,28 @@ FullScreenPanel {
                 }
                 radius: units.gridUnit
                 opacity: 0.8
+                PlasmaCore.IconItem {
+                    anchors.centerIn: parent
+                    width: Math.min(parent.width, parent.height)
+                    source: model.DecorationRole
+                }
                 PlasmaComponents.Label {
                     anchors {
                         bottom: parent.bottom
                         horizontalCenter: parent.horizontalCenter
+                        left: parent.left
+                        right: parent.right
                     }
-                    text: "Task " + modelData
+                    horizontalAlignment: Text.AlignHCenter
+                    elide: Text.ElideRight
+                    text: model.DisplayRole
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: window.hide();
+                    onClicked: {
+                        window.hide();
+                        backend.activateItem(model.Id, true);
+                    }
                 }
             }
         }
