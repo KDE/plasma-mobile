@@ -62,6 +62,7 @@ MouseEventListener {
         }
 
         draggingApplet.y = mouse.y - draggingApplet.height/2;
+        draggingApplet.x = mouse.x - draggingApplet.width/2;
 
         var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
         var itemUnderMouse = appletsSpace.layout.childAt(pos.x, pos.y);
@@ -91,7 +92,12 @@ MouseEventListener {
         if (!draggingApplet) {
             return;
         }
-        LayoutManager.insertBefore( dndSpacer, draggingApplet);
+        if (draggingApplet.x > -draggingApplet.width/4 && draggingApplet.x < draggingApplet.width/4) {
+            draggingApplet.x = 0;
+            LayoutManager.insertBefore( dndSpacer, draggingApplet);
+        } else {
+            draggingApplet.applet.action("remove").trigger();
+        }
         applicationsView.interactive = true;
         dndSpacer.parent = colorScope;
         draggingApplet = null;

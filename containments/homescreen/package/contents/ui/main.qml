@@ -156,10 +156,12 @@ Item {
     Component {
         id: appletContainerComponent
         MouseArea {
+            id: appletContainer
             //not used yet
             property bool animationsEnabled: false
             property Item applet
             z: applet && applet.compactRepresentationItem && applet.expanded ? 99 : 0
+            opacity: 1/Math.abs(x/(width/2))
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
             Layout.onFillHeightChanged: {
@@ -168,10 +170,21 @@ Item {
                 }
             }
 
+            Connections {
+                target: plasmoid
+
+                onAppletRemoved: {
+                    print("Applet removed Applet-" + applet.id)
+                    if (applet.id == appletContainer.applet.id) {
+                        appletContainer.destroy();
+                    }
+                }
+            }
+
             onAppletChanged: {
                 if (applet.backgroundHints == PlasmaCore.Types.StandardBackground) {
                     applet.anchors.margins = background.margins.top;
-                }
+                } 
             }
             PlasmaCore.FrameSvgItem {
                 id: background
