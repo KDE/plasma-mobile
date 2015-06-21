@@ -36,7 +36,7 @@ MouseEventListener {
     height: mainLayout.Layout.minimumHeight
     property int margin: stripe.height + units.gridUnit * 2
     property Item draggingApplet
-
+    
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
         if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {

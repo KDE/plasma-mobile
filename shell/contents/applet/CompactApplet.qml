@@ -42,13 +42,14 @@ Item {
     }
 
     onFullRepresentationChanged: {
-
+print(fullRepresentation);
         if (!fullRepresentation) {
             return;
         }
 
         fullRepresentation.parent = appletParent;
         fullRepresentation.anchors.fill = fullRepresentation.parent;
+        fullRepresentation.anchors.margins = appletParent.margins.top;
     }
 
     Rectangle {
@@ -63,8 +64,11 @@ Item {
         visible: plasmoid.expanded
     }
 
-    Item {
+    PlasmaCore.FrameSvgItem {
         id: appletParent
+        imagePath: "widgets/background"
+        visible: fullRepresentation.parent == appletParent
+        z: 99
         opacity: plasmoid.expanded ? 1 : 0
         anchors.top: parent.top
         width: parent.width

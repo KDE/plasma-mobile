@@ -159,6 +159,7 @@ Item {
             //not used yet
             property bool animationsEnabled: false
             property Item applet
+            z: applet && applet.compactRepresentationItem && applet.expanded ? 99 : 0
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
             Layout.onFillHeightChanged: {
@@ -166,6 +167,7 @@ Item {
                     checkLastSpacer();
                 }
             }
+
             onAppletChanged: {
                 if (applet.backgroundHints == PlasmaCore.Types.StandardBackground) {
                     applet.anchors.margins = background.margins.top;
