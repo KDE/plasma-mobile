@@ -155,7 +155,7 @@ Item {
 
     Component {
         id: appletContainerComponent
-        Item {
+        MouseArea {
             //not used yet
             property bool animationsEnabled: false
             property Item applet
