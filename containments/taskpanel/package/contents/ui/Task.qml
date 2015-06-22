@@ -62,7 +62,8 @@ Item {
             opacity: 0.8
             PlasmaCore.IconItem {
                 anchors.centerIn: parent
-                width: Math.min(parent.width, parent.height)
+                width: Math.min(parent.width, parent.height) / 2
+                height: width
                 source: model.DecorationRole
             }
             PlasmaComponents.Label {
