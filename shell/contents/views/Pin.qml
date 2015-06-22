@@ -21,152 +21,160 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import MeeGo.QOfono 0.2
 import "../components"
 
-Rectangle {
-    id: pinScreen
-    width:1000
-    height:1900
-    //anchors.fill: parent
-    
-    color: "black"
-    opacity: 0.8
+PlasmaCore.ColorScope {
+    id: root
+
+    anchors.fill: parent
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     visible: simManager.pinRequired != OfonoSimManager.NoPin
-    //visible: true
     property OfonoSimManager simManager: ofonoSimManager
-
-    OfonoManager {
-        id: ofonoManager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added " + modem)
-        }
-        onModemRemoved: console.log("modem removed")
-    }
-
-    OfonoConnMan {
-       id: ofono1
-       Component.onCompleted: {
-           console.log(ofonoManager.modems)
-       }
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoModem {
-       id: modem1
-       modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-
-    }
-
-    OfonoContextConnection {
-        id: context1
-        contextPath : ofono1.contexts.length > 0 ? ofono1.contexts[0] : ""
-        Component.onCompleted: {
-            print("Context Active: " + context1.active)
-        }
-        onActiveChanged: {
-            print("Context Active: " + context1.active)
-        }
-    }
-
-    OfonoSimManager {
-        id: ofonoSimManager
-        modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
-    }
-
-    OfonoNetworkOperator {
-        id: netop
-    }
-
-    property color textColor: "white"
 
     function addNumber(number) {
         pinLabel.text = pinLabel.text + number
     }
 
-    MouseArea {
+    Rectangle {
+        id: pinScreen
         anchors.fill: parent
-    }
+        
+        color: PlasmaCore.ColorScope.backgroundColor
 
-    Connections {
-        target: simManager
-        onEnterPinComplete: {
-            print("Enter Pin complete: " + error + " " + errorString)
+        OfonoManager {
+            id: ofonoManager
+            onAvailableChanged: {
+            console.log("Ofono is " + available)
+            }
+            onModemAdded: {
+                console.log("modem added " + modem)
+            }
+            onModemRemoved: console.log("modem removed")
         }
-    }
 
-    ColumnLayout {
-        id: dialPadArea
-
-        anchors {
-            fill: parent
-            margins: 20
+        OfonoConnMan {
+            id: ofono1
+            Component.onCompleted: {
+                console.log(ofonoManager.modems)
+            }
+            modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
         }
-        Text {
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: theme.defaultFont.pixelSize
-            color: textColor
-            text: {
-                switch (simManager.pinRequired) {
-                case OfonoSimManager.NoPin: return i18n("No pin (error)");
-                case OfonoSimManager.SimPin: return i18n("Enter Sim PIN");
-                case OfonoSimManager.SimPin2: return i18n("Enter Sim PIN 2");
-                case OfonoSimManager.SimPuk: return i18n("Enter Sim PUK");
-                case OfonoSimManager.SimPuk2: return i18n("Enter Sim PUK 2");
-                default: return i18n("Unknown PIN type: %1", simManager.pinRequired);
-                }
+
+        OfonoModem {
+            id: modem1
+            modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
+
+        }
+
+        OfonoContextConnection {
+            id: context1
+            contextPath : ofono1.contexts.length > 0 ? ofono1.contexts[0] : ""
+            Component.onCompleted: {
+                print("Context Active: " + context1.active)
+            }
+            onActiveChanged: {
+                print("Context Active: " + context1.active)
             }
         }
-        Text {
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: theme.defaultFont.pixelSize
-            color: textColor
-            text: /*i18n("%1 attempts left", (simManager.pinRetries ? simManager.pinRetries[simManager.pinRequired] : 0));*/ simManager.pinRetries[simManager.pinRequired] +"--"+ simManager.pinRequired
+
+        OfonoSimManager {
+            id: ofonoSimManager
+            modemPath: ofonoManager.modems.length > 0 ? ofonoManager.modems[0] : ""
         }
 
-        Text {
-            id: pinLabel
-            Layout.fillWidth: true
-            horizontalAlignment: Qt.AlignRight
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: one.font.pixelSize
-            color: textColor
+        OfonoNetworkOperator {
+            id: netop
         }
 
-        Grid {
-            id: pad
-            columns: 3
-            spacing: 0
-            property int buttonHeight: height / 5
+        MouseArea {
+            anchors.fill: parent
+        }
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+        Connections {
+            target: simManager
+            onEnterPinComplete: {
+                print("Enter Pin complete: " + error + " " + errorString)
+            }
+        }
 
-            DialerButton { id: one; text: "1"; color: "white"; } 
-            DialerButton { text: "2"; color: "white"; }
-            DialerButton { text: "3"; color: "white"; }
+        ColumnLayout {
+            id: dialPadArea
 
-            DialerButton { text: "4"; color: "white"; } 
-            DialerButton { text: "5"; color: "white"; }
-            DialerButton { text: "6"; color: "white"; }
+            anchors {
+                fill: parent
+                margins: 20
+            }
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: {
+                    switch (simManager.pinRequired) {
+                    case OfonoSimManager.NoPin: return i18n("No pin (error)");
+                    case OfonoSimManager.SimPin: return i18n("Enter Sim PIN");
+                    case OfonoSimManager.SimPin2: return i18n("Enter Sim PIN 2");
+                    case OfonoSimManager.SimPuk: return i18n("Enter Sim PUK");
+                    case OfonoSimManager.SimPuk2: return i18n("Enter Sim PUK 2");
+                    default: return i18n("Unknown PIN type: %1", simManager.pinRequired);
+                    }
+                }
+            }
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                horizontalAlignment: Qt.AlignHCenter
+                verticalAlignment: Qt.AlignVCenter
+                text: simManager.pinRetries && simManager.pinRetries[simManager.pinRequired] ? i18n("%1 attempts left", simManager.pinRetries[simManager.pinRequired]) : "";
+            }
 
-            DialerButton { text: "7"; color: "white"; } 
-            DialerButton { text: "8"; color: "white"; }
-            DialerButton { text: "9"; color: "white"; }
+            PlasmaComponents.Label {
+                id: pinLabel
+                Layout.fillWidth: true
+                horizontalAlignment: Qt.AlignRight
+                verticalAlignment: Qt.AlignVCenter
+                font.pixelSize: one.font.pixelSize
+            }
 
-            DialerButton { text: "*"; color: "white"; } 
-            DialerButton { text: "0"; sub: "+"; color: "white"; }
-            DialerButton {
-                text: "#"
-                 color: "white"
-                callback: function () {
+            Grid {
+                id: pad
+                columns: 3
+                spacing: 0
+                property int buttonHeight: height / 5
+
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                DialerButton { id: one; text: "1"; color: PlasmaCore.ColorScope.textColor } 
+                DialerButton { text: "2"; color: PlasmaCore.ColorScope.textColor }
+                DialerButton { text: "3"; color: PlasmaCore.ColorScope.textColor }
+
+                DialerButton { text: "4"; color: PlasmaCore.ColorScope.textColor } 
+                DialerButton { text: "5"; color: PlasmaCore.ColorScope.textColor }
+                DialerButton { text: "6"; color: PlasmaCore.ColorScope.textColor }
+
+                DialerButton { text: "7"; color: PlasmaCore.ColorScope.textColor } 
+                DialerButton { text: "8"; color: PlasmaCore.ColorScope.textColor }
+                DialerButton { text: "9"; color: PlasmaCore.ColorScope.textColor }
+
+                DialerButton { text: "*"; color: PlasmaCore.ColorScope.textColor } 
+                DialerButton { text: "0"; sub: "+"; color: PlasmaCore.ColorScope.textColor }
+                DialerButton {
+                    text: "#"
+                    color: PlasmaCore.ColorScope.textColor
+                    callback: function () {
+                        simManager.enterPin(simManager.pinRequired, pinLabel.text)
+                        pinLabel.text = "";
+                    }
+                }
+            }
+            PlasmaComponents.Button {
+                anchors {
+                    top: pad.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
+                text: i18n("Ok")
+                onClicked: {
                     simManager.enterPin(simManager.pinRequired, pinLabel.text)
                     pinLabel.text = "";
                 }
