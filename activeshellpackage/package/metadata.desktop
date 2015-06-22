@@ -1,6 +1,7 @@
 [Desktop Entry]
 Comment=Plasma Active shell
 Comment[ca]=Intèrpret d'ordres del Plasma Active
+Comment[en_GB]=Plasma Active shell
 Comment[es]=Intérprete para Plasma Active
 Comment[fi]=Plasma Active -kuori
 Comment[gl]=Shell de Plasma Active
@@ -17,6 +18,7 @@ Encoding=UTF-8
 Keywords=
 Name=Desktop
 Name[ca]=Escriptori
+Name[en_GB]=Desktop
 Name[es]=Escritorio
 Name[fi]=Työpöytä
 Name[gl]=Escritorio
