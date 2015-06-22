@@ -186,7 +186,9 @@ MouseEventListener {
             cellHeight: cellWidth
 
             model: plasmoid.nativeInterface.applicationListModel
-            delegate: HomeLauncher {}
+            delegate: HomeLauncher {
+                maximumLineCount: 1
+            }
 
             move: Transition {
                 NumberAnimation {

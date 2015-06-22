@@ -10,6 +10,7 @@ Item {
 
     property var modelData: model
     property bool isDropTarget: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole
+    property alias maximumLineCount: label.maximumLineCount
 
     opacity: isDropTarget ? 0.3 : 1
 
