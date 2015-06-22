@@ -26,9 +26,14 @@ import "../components"
 
 Rectangle {
     id: pinScreen
+    width:1000
+    height:1900
+    //anchors.fill: parent
+    
     color: "black"
     opacity: 0.8
     visible: simManager.pinRequired != OfonoSimManager.NoPin
+    //visible: true
     property OfonoSimManager simManager: ofonoSimManager
 
     OfonoManager {
@@ -123,7 +128,7 @@ Rectangle {
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: theme.defaultFont.pixelSize
             color: textColor
-            text: i18n("%1 attempts left", (simManager.pinRetries ? simManager.pinRetries[simManager.pinRequired] : 0));
+            text: /*i18n("%1 attempts left", (simManager.pinRetries ? simManager.pinRetries[simManager.pinRequired] : 0));*/ simManager.pinRetries[simManager.pinRequired] +"--"+ simManager.pinRequired
         }
 
         Text {

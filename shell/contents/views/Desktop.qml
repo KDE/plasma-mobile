@@ -87,31 +87,13 @@ Item {
     }
 
     Loader {
-        id: dialerOverlay
-        function open() {
-            source = Qt.resolvedUrl("Dialer.qml")
-            dialerOverlay.item.open();
-        }
-        function close() {
-            dialerOverlay.item.close();
-        }
-        anchors {
-            left: parent.left
-            top: statusPanel.bottom
-            right: parent.right
-            bottom: parent.bottom
-        }
-        z: 20
-    }
-    Loader {
         id: pinOverlay
         anchors {
-            left: parent.left
-            top: statusPanel.bottom
-            right: parent.right
-            bottom: parent.bottom
+            fill: parent
+            topMargin: containment.availableScreenRect.y
+            bottomMargin: parent.height - containment.availableScreenRect.height - containment.availableScreenRect.y
         }
-        z: 21
+        z: 222
         source: Qt.resolvedUrl("Pin.qml")
     }
 
