@@ -35,15 +35,26 @@ FullScreenPanel {
     property int offset: 0
     property int overShoot: units.gridUnit * 2
 
-    color: Qt.rgba(0, 0, 0, 0.6 * (Math.min(tasksView.contentY + window.height, window.height) / window.height))
+    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
+        (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
+        ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
 
     function show() {
+        if (!visible) {
+            tasksView.contentY = -tasksView.headerItem.height;
+        }
         visible = true;
+        scrollAnim.from = tasksView.contentY;
         scrollAnim.to = 0;
         scrollAnim.running = true;
     }
     function hide() {
-        scrollAnim.to = -tasksView.headerItem.height;
+        scrollAnim.from = tasksView.contentY;
+        if (tasksView.contentY + tasksView.headerItem.height < tasksView.contentHeight/2) {
+            scrollAnim.to = -tasksView.headerItem.height;
+        } else {
+            scrollAnim.to = tasksView.contentHeight - tasksView.headerItem.height;
+        }
         scrollAnim.running = true;
     }
 
@@ -61,6 +72,7 @@ FullScreenPanel {
     SequentialAnimation {
         id: scrollAnim
         property alias to: internalAnim.to
+        property alias from: internalAnim.from
         ScriptAction {
             script: window.visible = true;
         }
@@ -73,7 +85,7 @@ FullScreenPanel {
         }
         ScriptAction {
             script: {
-                if (tasksView.contentY <= -tasksView.headerItem.height) {
+                if (tasksView.contentY <= -tasksView.headerItem.height || tasksView.contentY >= tasksView.contentHeight - tasksView.headerItem.height) {
                     window.visible = false;
                 }
             }
@@ -86,11 +98,12 @@ FullScreenPanel {
         cellWidth: window.width/2
         cellHeight: window.height/2
         onFlickingChanged: {
-            if (!draggingVertically && contentY < -headerItem.height + window.height) {
-                scrollAnim.to = Math.round(contentY/window.height) * window.height
-                scrollAnim.running = true;
+            if (!draggingVertically && contentY < -headerItem.height + window.height ||
+                (contentY + footerItem.height) > (contentHeight - footerItem.height - window.height/6*5)) {
+                window.hide();
             }
         }
+
         onDraggingVerticallyChanged: {
             if (draggingVertically) {
                 return;
@@ -108,15 +121,31 @@ FullScreenPanel {
                 contentY < (-headerItem.height + window.height/6*5)) {
                 hide();
                 return;
-            }
 
-            if (contentY < 0) {
+            //hide by scrolling down
+            } else if ((contentY + footerItem.height) > (contentHeight - footerItem.height - window.height/6*5)) {
+                hide();
+                return;
+            //show
+            } else if ((contentY + tasksView.height) > (contentHeight - headerItem.height - footerItem.height) &&
+                (contentY + tasksView.height) < (contentHeight - headerItem.height - footerItem.height + window.height/6*5)) {
+                scrollAnim.from = tasksView.contentY;
+                visible = true;
+                
+                scrollAnim.to = contentHeight - footerItem.height - tasksView.height*2;
+                scrollAnim.running = true;
+                return;
+            } else if (contentY < 0) {
                 show();
             }
         }
 
         model: backend.tasksModel
         header: Item {
+            width: window.width
+            height: window.height
+        }
+        footer: Item {
             width: window.width
             height: window.height
         }

@@ -69,7 +69,6 @@ Item {
             PlasmaComponents.Label {
                 anchors {
                     bottom: parent.bottom
-                    horizontalCenter: parent.horizontalCenter
                     left: parent.left
                     right: parent.right
                 }
