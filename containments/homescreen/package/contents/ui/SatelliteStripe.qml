@@ -1,3 +1,5 @@
+
+
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -15,7 +17,8 @@ PlasmaCore.ColorScope {
         }
     }
 
-    height: applicationsView.cellWidth
+    //cut away one line from the favorites bar
+    height: applicationsView.cellWidth - units.gridUnit
     width: parent.width
     y: parent.height / 2 - height / 2
     x: 0

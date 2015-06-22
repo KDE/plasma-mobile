@@ -35,6 +35,7 @@ Rectangle {
     height: childrenRect.height
     color: listView.visible ? Qt.rgba(0, 0, 0, 0.8) : "transparent"
     property alias showingResults: listView.visible
+    property int inputHeight: queryField.height + background.fixedMargins.top/2 + background.fixedMargins.bottom
 
     MouseArea {
         enabled: listView.visible
