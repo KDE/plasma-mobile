@@ -128,12 +128,23 @@ PlasmaCore.ColorScope {
                 text: simManager.pinRetries && simManager.pinRetries[simManager.pinRequired] ? i18n("%1 attempts left", simManager.pinRetries[simManager.pinRequired]) : "";
             }
 
-            PlasmaComponents.Label {
-                id: pinLabel
+            RowLayout {
                 Layout.fillWidth: true
-                horizontalAlignment: Qt.AlignRight
-                verticalAlignment: Qt.AlignVCenter
-                font.pixelSize: one.font.pixelSize
+                PlasmaComponents.Label {
+                    id: pinLabel
+                    Layout.fillWidth: true
+                    horizontalAlignment: Qt.AlignRight
+                    verticalAlignment: Qt.AlignVCenter
+                    font.pixelSize: one.font.pixelSize
+                }
+                PlasmaComponents.Button {
+                    visible: pinLabel.text != ""
+                    iconSource: "edit-clear"
+                    width: height
+                    onClicked: {
+                        pinLabel.text = pinLabel.text.substring(0, pinLabel.text.length - 1);
+                    }
+                }
             }
 
             Grid {
