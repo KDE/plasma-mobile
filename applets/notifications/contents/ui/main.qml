@@ -28,7 +28,7 @@ Item {
     id: root
     property int notificationId: 0
 
-    Layout.minimumHeight: notificationView.contentsHeight
+    Layout.minimumHeight: notificationView.contentHeight
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
@@ -156,6 +156,48 @@ Item {
             summary: "July: Hello?"
             actions: []
         }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
     }
 
     ListView {
@@ -163,6 +205,7 @@ Item {
         spacing: units.smallSpacing
         anchors.fill: parent
         interactive: false
+        cacheBuffer: 2000
 
         z: 1
         verticalLayoutDirection: ListView.BottomToTop
