@@ -169,7 +169,7 @@ MouseEventListener {
         z: 99
         property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
 
-        y: Math.max(viewPos, 
+        y: Math.max(viewPos + plasmoid.availableScreenRect.y + krunner.inputHeight - units.smallSpacing, 
             Math.min(parent.height, viewPos + plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))
 
         GridView {
