@@ -32,12 +32,6 @@ MouseArea {
     property bool checked
     property bool checkable
 
-    Rectangle {
-        anchors.fill:parent
-        radius: width/4
-        visible: button.checked
-        color: theme.highlightColor
-    }
     PlasmaCore.IconItem {
         id: icon
         anchors.fill: parent
