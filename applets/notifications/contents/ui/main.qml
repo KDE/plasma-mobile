@@ -156,48 +156,6 @@ Item {
             summary: "July: Hello?"
             actions: []
         }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
     }
 
     ListView {

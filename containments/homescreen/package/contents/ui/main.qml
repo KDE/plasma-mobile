@@ -515,10 +515,7 @@ Item {
                 snapMode: GridView.SnapToRow
 
                 onFlickingChanged: {
-                    if (!draggingVertically && contentY < -headerItem.height + root.height) {
-                        scrollAnim.to = Math.round(contentY/root.height) * root.height
-                        scrollAnim.running = true;
-                    }
+                    draggingVerticallyChanged(false);
                 }
                 onDraggingVerticallyChanged: {
                     if (draggingVertically) {
@@ -539,13 +536,6 @@ Item {
                         scrollAnim.to = -headerItem.height;
                         scrollAnim.running = true;
                         return;
-                    }
-
-                    //(1000/scrollAnim.duration) is the length scrolled at the current speed in the duration of the animation
-
-                    if (contentY < -headerItem.height + root.height) {
-                        scrollAnim.to = Math.round((contentY + (verticalVelocity / (1000/scrollAnim.duration))) / root.height) * root.height
-                        scrollAnim.running = true;
                     }
                 }
                 NumberAnimation {
