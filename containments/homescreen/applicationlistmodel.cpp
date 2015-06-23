@@ -119,7 +119,7 @@ void ApplicationListModel::loadApplications()
                         qDebug() << " desktopEntryName: " << service->desktopEntryName();
 
                         if (service->isApplication() &&
-                            !blacklist.contains(service->desktopEntryName() + QStringLiteral(".desktop")) &&
+                            !blacklist.contains(service->desktopEntryName()) &&
                             service->showOnCurrentPlatform() &&
                             !service->property("Terminal", QVariant::Bool).toBool()) {
 
