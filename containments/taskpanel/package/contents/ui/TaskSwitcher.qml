@@ -24,8 +24,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
 
-import org.kde.plasma.private.taskmanager 0.1 as TaskManager
-
 FullScreenPanel {
     id: window
 
@@ -58,15 +56,17 @@ FullScreenPanel {
         scrollAnim.running = true;
     }
 
-    TaskManager.Backend {
-        id: backend
+    PlasmaCore.DataSource {
+        id: tasksSource
+        engine: "tasks"
 
-        highlightWindows: false
-
-        //NoGrouping
-        groupingStrategy: 0
-        //AlphaSorting
-        sortingStrategy: 2
+        connectedSources: "tasks"
+    }
+    function executeJob(operationName, id) {
+        var service = tasksSource.serviceForSource("tasks");
+        var operation = service.operationDescription(operationName);
+        operation.Id = id;
+        service.startOperationCall(operation);
     }
 
     SequentialAnimation {
@@ -140,7 +140,7 @@ FullScreenPanel {
             }
         }
 
-        model: backend.tasksModel
+        model: tasksSource.models.tasks
         header: Item {
             width: window.width
             height: window.height

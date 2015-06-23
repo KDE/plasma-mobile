@@ -48,7 +48,7 @@ Item {
             ScriptAction {
                 script: {
                     if (background.x != 0) {
-                        backend.closeByItemId(model.Id);
+                        window.executeJob("close", model.Id);
                     }
                 }
             }
@@ -85,7 +85,7 @@ Item {
                 onPressed: delegate.z = 10;
                 onClicked: {
                     window.hide();
-                    backend.activateItem(model.Id, true);
+                    window.executeJob("activate", model.Id);
                 }
                 onReleased: {
                     delegate.z = 0;
