@@ -167,7 +167,7 @@ MouseEventListener {
     SatelliteStripe {
         id: stripe
         z: 99
-        property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition + krunner.inputHeight
+        property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
 
         y: Math.max(viewPos, 
             Math.min(parent.height, viewPos + plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))

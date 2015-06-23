@@ -220,6 +220,7 @@ Item {
                 height: width
             }
             onXChanged: {
+                return;
                 if (!animationsEnabled) {
                     return;
                 }
@@ -230,6 +231,7 @@ Item {
                 oldY = y;
             }
             onYChanged: {
+                return;
                 if (!animationsEnabled) {
                     return;
                 }
