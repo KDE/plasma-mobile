@@ -24,8 +24,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
 
-import org.kde.plasma.private.taskmanager 0.1 as TaskManager
-
 Item {
     id: delegate
     width: window.width/2
