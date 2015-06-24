@@ -31,7 +31,8 @@ PlasmaComponents.Label {
     height: 0
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
-    font.pointSize: 1024
+    font.pointSize: 22 //anything higher for some reason makes number 4 not rendered
+    minimumPointSize: 8
     fontSizeMode: Text.VerticalFit
 
     property alias sub: longHold.text
