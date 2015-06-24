@@ -29,9 +29,9 @@ PlasmaComponents.Label {
 
     //This is 0 to override the Label default height that would cause a binding loop
     height: 0
-    horizontalAlignment: Qt.AlignHCenter
-    verticalAlignment: Qt.AlignVCenter
     font.pointSize: 22 //anything higher for some reason makes number 4 not rendered
+    horizontalAlignment: Text.AlignHCenter
+    verticalAlignment: Text.AlignTop
     minimumPointSize: 8
     fontSizeMode: Text.VerticalFit
 
