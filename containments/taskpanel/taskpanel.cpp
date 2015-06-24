@@ -26,6 +26,7 @@
 
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
+#include <KWayland/Client/plasmawindowmodel.h>
 #include <KWayland/Client/registry.h>
 
 static const QString s_kwinService = QStringLiteral("org.kde.KWin");
@@ -66,6 +67,9 @@ void TaskPanel::initWayland()
     connect(registry, &Registry::plasmaWindowManagementAnnounced, this,
         [this, registry] (quint32 name, quint32 version) {
             m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
+            qRegisterMetaType<QVector<int> >("QVector<int>");
+            m_windowModel = m_windowManagement->createWindowModel();
+            emit windowModelChanged();
             connect(m_windowManagement, &PlasmaWindowManagement::showingDesktopChanged, this,
                 [this] (bool showing) {
                     if (showing == m_showingDesktop) {
@@ -80,6 +84,11 @@ void TaskPanel::initWayland()
         }
     );
     registry->setup();
+}
+
+QAbstractItemModel *TaskPanel::windowModel() const
+{
+    return m_windowModel;
 }
 
 void TaskPanel::updateActiveWindow()

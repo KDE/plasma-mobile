@@ -21,8 +21,9 @@
 #ifndef TASKPANEL_H
 #define TASKPANEL_H
 
-
 #include <Plasma/Containment>
+
+class QAbstractItemModel;
 
 namespace KWayland
 {
@@ -30,18 +31,22 @@ namespace Client
 {
 class PlasmaWindowManagement;
 class PlasmaWindow;
+class PlasmaWindowModel;
 }
 }
 
 class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(QAbstractItemModel* windowModel READ windowModel NOTIFY windowModelChanged)
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
 
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
     ~TaskPanel();
+
+    QAbstractItemModel *windowModel() const;
 
     Q_INVOKABLE void closeActiveWindow();
 
@@ -53,6 +58,7 @@ public:
     bool hasCloseableActiveWindow() const;
 
 Q_SIGNALS:
+    void windowModelChanged();
     void showingDesktopChanged(bool);
     void hasCloseableActiveWindowChanged();
 
@@ -61,8 +67,8 @@ private:
     void updateActiveWindow();
     bool m_showingDesktop;
     KWayland::Client::PlasmaWindowManagement *m_windowManagement;
+    KWayland::Client::PlasmaWindowModel *m_windowModel = nullptr;
     KWayland::Client::PlasmaWindow *m_activeWindow = nullptr;
-
 };
 
 #endif

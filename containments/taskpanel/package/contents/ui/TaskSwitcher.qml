@@ -20,7 +20,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
 
@@ -54,19 +54,6 @@ FullScreenPanel {
             scrollAnim.to = tasksView.contentHeight - tasksView.headerItem.height;
         }
         scrollAnim.running = true;
-    }
-
-    PlasmaCore.DataSource {
-        id: tasksSource
-        engine: "tasks"
-
-        connectedSources: "tasks"
-    }
-    function executeJob(operationName, id) {
-        var service = tasksSource.serviceForSource("tasks");
-        var operation = service.operationDescription(operationName);
-        operation.Id = id;
-        service.startOperationCall(operation);
     }
 
     SequentialAnimation {
@@ -140,7 +127,14 @@ FullScreenPanel {
             }
         }
 
-        model: tasksSource.models.tasks
+        PlasmaCore.SortFilterModel {
+            id: filteredWindowModel
+            filterRole: "DisplayRole"
+            filterRegExp: ".+"
+            sourceModel: plasmoid.nativeInterface.windowModel
+        }
+
+        model: filteredWindowModel
         header: Item {
             width: window.width
             height: window.height
