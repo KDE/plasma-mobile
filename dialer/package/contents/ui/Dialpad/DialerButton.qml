@@ -111,15 +111,15 @@ PlasmaComponents.Label {
         anchors {
             verticalCenter: parent.verticalCenter
             right: parent.right
-            rightMargin: units.largeSpacing
+            rightMargin: units.smallSpacing
         }
         height: parent.height * 0.4
-        width: parent.width / 4
+        width: parent.width / 3
         verticalAlignment: Qt.AlignVCenter
+        horizontalAlignment: Qt.AlignHCenter
         visible: text.length > 0
         opacity: 0.6
 
-        font.pointSize: 1024
         fontSizeMode: Text.Fit
     }
 }

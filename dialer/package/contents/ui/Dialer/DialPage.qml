@@ -24,12 +24,12 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 
 Column {
     spacing: 0
+    anchors.fill: parent
+
     PlasmaComponents.TabGroup {
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
         height: parent.height - tabbar.height
+        width: parent.width
+
         History {
             id: history
         }
@@ -43,10 +43,8 @@ Column {
     PlasmaComponents.TabBar {
         id: tabbar
         height: units.gridUnit * 5
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
+        width: parent.width
+
         tabPosition: Qt.BottomEdge
         PlasmaComponents.TabButton {
             iconSource: "view-history"

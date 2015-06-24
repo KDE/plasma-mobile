@@ -42,11 +42,13 @@ Item {
             fill: parent
             margins: units.largeSpacing
         }
+
         PlasmaComponents.Label {
             id: status
             Layout.fillWidth: true
             Layout.minimumHeight: parent.height / 6
             Layout.maximumHeight: Layout.minimumHeight
+
             horizontalAlignment: Qt.AlignRight
             verticalAlignment: Qt.AlignVCenter
             font.pointSize: 1024
@@ -62,42 +64,6 @@ Item {
             }
             releasedCallback: function (string) {
                 ofonoWrapper.stopTone();
-            }
-        }
-
-        RowLayout {
-            Layout.fillWidth: true
-            Layout.minimumHeight: parent.height / 6
-            Layout.maximumHeight: Layout.minimumHeight
-            DialerIconButton {
-                id: callButton
-                Layout.minimumWidth: dialPadArea.width/3
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                enabled: status.text.length > 0
-                opacity: enabled ? 1 : 0.5
-                source: "call-start"
-                callback: function() {
-                    call(status.text);
-                }
-            }
-            Item {
-                Layout.minimumWidth: dialPadArea.width/3
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-            DialerIconButton {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumWidth: dialPadArea.width/3
-                enabled: status.text.length > 0
-                opacity: enabled ? 1 : 0.5
-                source: "edit-clear"
-                callback: function(text) {
-                    if (status.text.length > 0) {
-                        status.text = status.text.substr(0, status.text.length - 1);
-                    }
-                }
             }
         }
     }

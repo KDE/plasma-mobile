@@ -51,5 +51,36 @@ GridLayout {
     DialerButton { text: "*"; } 
     DialerButton { text: "0"; sub: "+"; }
     DialerButton { text: "#" }
-}
 
+    DialerIconButton {
+        id: callButton
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        Layout.minimumHeight: buttonHeight
+
+        enabled: status.text.length > 0
+        opacity: enabled ? 1 : 0.5
+        source: "call-start"
+        callback: function() {
+            call(status.text);
+        }
+    }
+    Item {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+    }
+    DialerIconButton {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        Layout.minimumHeight: buttonHeight
+
+        enabled: status.text.length > 0
+        opacity: enabled ? 1 : 0.5
+        source: "edit-clear"
+        callback: function(text) {
+            if (status.text.length > 0) {
+                status.text = status.text.substr(0, status.text.length - 1);
+            }
+        }
+    }
+}

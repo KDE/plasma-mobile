@@ -29,7 +29,7 @@ ApplicationWindow {
     id: root
 
 //BEGIN PROPERTIES
-    width: 600
+    width: 1080
     height: 800
 
     //keep track if we were visible when ringing
