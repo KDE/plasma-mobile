@@ -27,7 +27,9 @@ MouseArea {
     id: notificationItem
 
 
-    height: Math.max(messageLayout.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height : 0)
+    //actionsLayout.height*2 because the text is centered
+    //TODO: center the whole block not only the text
+    height: Math.max(messageLayout.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height*2 : 0)
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
@@ -148,9 +150,11 @@ MouseArea {
         height: width
         source: appIcon && appIcon.length > 0 ? appIcon : "preferences-desktop-notification"
     }
-    RowLayout {
+
+    Flow {
         id: actionsLayout
         anchors {
+            left: messageLayout.left
             right: messageLayout.right
             top: messageLayout.bottom
             topMargin: units.smallSpacing
