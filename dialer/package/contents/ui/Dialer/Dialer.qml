@@ -56,6 +56,9 @@ Item {
         }
 
         Dialpad {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
             callback: function (string) {
                 addNumber(string);
             }

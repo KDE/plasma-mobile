@@ -33,9 +33,6 @@ GridLayout {
 
     property int buttonHeight: parent.height / 6
 
-    Layout.fillWidth: true
-    Layout.fillHeight: true
-
     DialerButton { id: one; text: "1" } 
     DialerButton { text: "2"; sub: "ABC" }
     DialerButton { text: "3"; sub: "DEF" }
@@ -55,8 +52,8 @@ GridLayout {
     DialerIconButton {
         id: callButton
         Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.minimumHeight: buttonHeight
+        Layout.maximumHeight: buttonHeight
+        Layout.minimumHeight: Layout.maximumHeight
 
         enabled: status.text.length > 0
         opacity: enabled ? 1 : 0.5
@@ -67,12 +64,11 @@ GridLayout {
     }
     Item {
         Layout.fillWidth: true
-        Layout.fillHeight: true
     }
     DialerIconButton {
         Layout.fillWidth: true
-        Layout.fillHeight: true
-        Layout.minimumHeight: buttonHeight
+        Layout.maximumHeight: buttonHeight
+        Layout.minimumHeight: Layout.maximumHeight
 
         enabled: status.text.length > 0
         opacity: enabled ? 1 : 0.5
