@@ -56,6 +56,9 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
         d->dialerUtils->setCallState("idle");
     });
 
+    d->ringingNotification = nullptr;
+    d->callsNotification = nullptr;
+
     //create the channel handler
 //     d->channelHandler = new CallChannelHandler(callChannel, this);
 
