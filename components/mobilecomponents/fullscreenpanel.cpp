@@ -36,6 +36,7 @@ FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
       m_shellSurface(0)
 {
     setFlags(Qt::FramelessWindowHint);
+    setupWaylandIntegration();
 }
 
 FullScreenPanel::~FullScreenPanel()
@@ -48,6 +49,7 @@ void FullScreenPanel::showEvent(QShowEvent *event)
         setupWaylandIntegration();
     } else {
         setRole();
+        m_shellSurface->setPosition(QPoint(0, 0));
     }
     QQuickWindow::showEvent(event);
 }
@@ -67,6 +69,7 @@ void FullScreenPanel::setupWaylandIntegration()
     connect(registry, &Registry::plasmaShellAnnounced, this,
         [this, registry] (quint32 name, quint32 version) {
             m_waylandPlasmaShell = registry->createPlasmaShell(name, version, this);
+            create();
             Surface *s = Surface::fromWindow(this);
             if (!s) {
                 return;
