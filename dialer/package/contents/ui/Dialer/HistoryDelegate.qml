@@ -114,6 +114,7 @@ Item {
                     PlasmaComponents.Label {
                         Layout.alignment: Qt.AlignRight
                         text: i18n("Duration: %1", secondsToTimeString(model.duration));
+                        visible: model.duration > 0
                     }
                 }
             }
