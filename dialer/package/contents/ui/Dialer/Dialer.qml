@@ -41,7 +41,7 @@ Item {
         y: parent.height - callStatusNotification.paintedHeight
         color: PlasmaCore.ColorScope.backgroundColor
         opacity: 0.6
-        visible: dialerUtils.callState == "failing"
+        visible: dialerUtils.callState == "failed"
 
         PlasmaComponents.Label {
             id: callStatusNotification
