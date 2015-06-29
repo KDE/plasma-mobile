@@ -102,7 +102,7 @@ Item {
                         text: "Name (todo)"
                     }
                     PlasmaComponents.Label {
-                        text: i18n("Number: %1", model.number)
+                        text: model.number
                         Layout.fillWidth: true
                     }
                 }

@@ -50,6 +50,8 @@ public:
     QString callContactNumber() const;
     void setCallContactNumber(const QString &contactNumber);
 
+    void emitCallEnded();
+
     Q_INVOKABLE void resetMissedCalls();
     Q_INVOKABLE void dial(const QString &number);
 
@@ -62,6 +64,7 @@ Q_SIGNALS:
     void acceptCall();
     void rejectCall();
     void hangUp();
+    void callEnded(const QString &callContactNumber, uint callDuration, bool incomingCall);
 
 private:
     QPointer <KNotification> m_callsNotification;

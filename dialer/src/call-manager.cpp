@@ -56,6 +56,7 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
     connect(d->callChannel.data(), &Tp::CallChannel::invalidated, this, [=]() {
         qDebug() << "Channel invalidated";
         d->dialerUtils->setCallState("idle");
+        d->dialerUtils->emitCallEnded();
     });
 
     d->ringingNotification = nullptr;
@@ -197,7 +198,6 @@ void CallManager::onCallStateChanged(Tp::CallState state)
             d->callTimer->stop();
             d->callTimer->deleteLater();
             d->callTimer = nullptr;
-            d->dialerUtils->setCallDuration(0);
         }
         //if we requested the call, make sure we have a window to show the error (if any)
 //         if (d->callChannel->isRequested()) {

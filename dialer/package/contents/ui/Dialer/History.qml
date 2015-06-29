@@ -26,7 +26,6 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 Item {
 
     function secondsToTimeString(seconds) {
-        seconds = Math.floor(seconds/1000)
         var h = Math.floor(seconds / 3600);
         var m = Math.floor((seconds - (h * 3600)) / 60);
         var s = seconds - h * 3600 - m * 60;

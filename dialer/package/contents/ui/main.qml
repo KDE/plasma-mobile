@@ -47,6 +47,9 @@ ApplicationWindow {
         onMissedCallsActionTriggered: {
             root.visible = true;
         }
+        onCallEnded: {
+            insertCallInHistory(callContactNumber, callDuration, incomingCall ? 1 : 2);
+        }
     }
 
     onVisibleChanged: {

@@ -122,6 +122,15 @@ void DialerUtils::setCallContactNumber(const QString &contactNumber)
     }
 }
 
+void DialerUtils::emitCallEnded()
+{
+    qDebug() << "Call ended:" << m_callContactNumber << m_callDuration;
+    Q_EMIT callEnded(m_callContactNumber, m_callDuration, true);
+    m_callDuration = 0;
+    m_callContactNumber = QString();
+    m_callContactAlias = QString();
+}
+
 void DialerUtils::resetMissedCalls()
 {
     m_missedCalls = 0;
