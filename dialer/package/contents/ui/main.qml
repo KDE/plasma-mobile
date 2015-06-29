@@ -48,7 +48,15 @@ ApplicationWindow {
             root.visible = true;
         }
         onCallEnded: {
-            insertCallInHistory(callContactNumber, callDuration, isIncomingCall ? 1 : 2);
+            var callType;
+            if (isIncomingCall && callDuration == 0) {
+                callType = 0;
+            } else if (isIncomingCall && callDuration > 0) {
+                callType = 1;
+            } else {
+                callType = 2;
+            }
+            insertCallInHistory(callContactNumber, callDuration, callType);
         }
     }
 
