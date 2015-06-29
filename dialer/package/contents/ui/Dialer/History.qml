@@ -64,7 +64,7 @@ Item {
                         text: i18n("Missed")
                         onCheckedChanged: {
                             if (checked) {
-                                filterModel.filterString = "0";
+                                filterModel.filterString = "2";
                             }
                         }
                     }
