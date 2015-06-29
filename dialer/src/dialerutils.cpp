@@ -34,6 +34,7 @@ DialerUtils::DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent)
   m_missedCalls(0),
   m_simAccount(simAccount),
   m_callDuration(0),
+  m_callContactId(QString())
 {
     Tp::PendingReady *op = m_simAccount->becomeReady(Tp::Features() << Tp::Account::FeatureCore);
 
@@ -92,6 +93,19 @@ void DialerUtils::setCallDuration(uint duration)
 {
     m_callDuration = duration;
     Q_EMIT callDurationChanged();
+}
+
+QString DialerUtils::callContactId() const
+{
+    return m_callContactId;
+}
+
+void DialerUtils::setCallContactId(const QString &contactId)
+{
+    if (m_callContactId != contactId) {
+        m_callContactId = contactId;
+        Q_EMIT callContactIdChanged();
+    }
 }
 
 void DialerUtils::resetMissedCalls()

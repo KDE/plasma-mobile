@@ -109,7 +109,7 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             font.pointSize: theme.defaultFont.pointSize * 2
-            text: ofonoWrapper.lineId
+            text: dialerUtils.callContactId
         }
         PlasmaComponents.Label {
             Layout.fillWidth: true
@@ -120,7 +120,7 @@ Item {
                 if (!ofonoWrapper.hasActiveCall) {
                     return '';
                 //STATUS_DIALING
-                } else if (ofonoWrapper.status == "dialing") {
+                } else if (dialerUtils.status == "dialing") {
                     return i18n("Calling...");
                 } else if (dialerUtils.duration > 0) {
                     return secondsToTimeString(ofonoWrapper.duration);

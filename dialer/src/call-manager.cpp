@@ -92,6 +92,10 @@ void CallManager::onCallStateChanged(Tp::CallState state)
 {
     qDebug() << "new call state:" << state;
 
+    if (d->callChannel->targetContact()) {
+        d->dialerUtils->setCallContactId(d->callChannel->targetContact()->alias());
+    }
+
     switch (state) {
     case Tp::CallStatePendingInitiator:
         Q_ASSERT(d->callChannel->isRequested());
