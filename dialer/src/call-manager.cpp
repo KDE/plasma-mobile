@@ -16,6 +16,7 @@
 */
 #include "call-manager.h"
 #include "dialerutils.h"
+#include <QTimer>
 
 #include <KNotification>
 #include <KLocalizedString>
@@ -36,6 +37,7 @@ struct CallManager::Private
     KNotification *ringingNotification;
     KNotification *callsNotification;
     uint missedCalls;
+    QTimer *callTimer;
 };
 
 CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dialerUtils, QObject *parent)
@@ -58,6 +60,7 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
 
     d->ringingNotification = nullptr;
     d->callsNotification = nullptr;
+    d->callTimer = nullptr;
 
     //create the channel handler
 //     d->channelHandler = new CallChannelHandler(callChannel, this);
@@ -147,6 +150,12 @@ void CallManager::onCallStateChanged(Tp::CallState state)
 //             delete d->approver.data();
         }
         d->dialerUtils->setCallState("active");
+        d->callTimer = new QTimer(this);
+        connect(d->callTimer, &QTimer::timeout, [=]() {
+            d->dialerUtils->setCallDuration(d->dialerUtils->callDuration() + 1);
+        });
+        d->callTimer->start(1000);
+
 //         ensureCallWindow();
 //         d->callWindow.data()->setStatus(CallWindow::StatusActive);
         break;
@@ -177,6 +186,13 @@ void CallManager::onCallStateChanged(Tp::CallState state)
             } else {
                 d->callsNotification->update();
             }
+        }
+
+        if (d->callTimer) {
+            d->callTimer->stop();
+            d->callTimer->deleteLater();
+            d->callTimer = nullptr;
+            d->dialerUtils->setCallDuration(0);
         }
         //if we requested the call, make sure we have a window to show the error (if any)
 //         if (d->callChannel->isRequested()) {

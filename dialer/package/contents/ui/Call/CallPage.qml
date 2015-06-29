@@ -122,7 +122,7 @@ Item {
                 //STATUS_DIALING
                 } else if (ofonoWrapper.status == "dialing") {
                     return i18n("Calling...");
-                } else if (ofonoWrapper.duration > 0) {
+                } else if (dialerUtils.duration > 0) {
                     return secondsToTimeString(ofonoWrapper.duration);
                 } else {
                     return '';

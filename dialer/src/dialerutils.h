@@ -29,6 +29,7 @@ class DialerUtils : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString callState READ callState NOTIFY callStateChanged);
+    Q_PROPERTY(uint callDuration READ callDuration NOTIFY callDurationChanged);
 public:
 
     DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent = 0);
@@ -37,12 +38,15 @@ public:
     QString callState() const;
     void setCallState(const QString &state);
 
+    uint callDuration() const;
+    void setCallDuration(uint duration);
     Q_INVOKABLE void resetMissedCalls();
     Q_INVOKABLE void dial(const QString &number);
 
 Q_SIGNALS:
     void missedCallsActionTriggered();
     void callStateChanged();
+    void callDurationChanged();
     void acceptCall();
     void rejectCall();
     void hangUp();
@@ -53,6 +57,7 @@ private:
     int m_missedCalls;
     QString m_callState;
     Tp::AccountPtr m_simAccount;
+    uint m_callDuration;
 };
 
 
