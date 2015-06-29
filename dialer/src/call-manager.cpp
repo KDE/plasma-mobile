@@ -93,7 +93,8 @@ void CallManager::onCallStateChanged(Tp::CallState state)
     qDebug() << "new call state:" << state;
 
     if (d->callChannel->targetContact()) {
-        d->dialerUtils->setCallContactId(d->callChannel->targetContact()->alias());
+        d->dialerUtils->setCallContactAlias(d->callChannel->targetContact()->alias());
+        d->dialerUtils->setCallContactNumber(d->callChannel->targetContact()->id());
     }
 
     switch (state) {

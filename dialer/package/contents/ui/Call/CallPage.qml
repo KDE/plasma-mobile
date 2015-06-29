@@ -108,7 +108,7 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             font.pointSize: theme.defaultFont.pointSize * 2
-            text: dialerUtils.callContactId
+            text: dialerUtils.callContactAlias
         }
         PlasmaComponents.Label {
             Layout.fillWidth: true

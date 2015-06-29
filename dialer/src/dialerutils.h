@@ -30,7 +30,9 @@ class DialerUtils : public QObject
     Q_OBJECT
     Q_PROPERTY(QString callState READ callState NOTIFY callStateChanged);
     Q_PROPERTY(uint callDuration READ callDuration NOTIFY callDurationChanged);
-    Q_PROPERTY(QString callContactId READ callContactId NOTIFY callContactIdChanged);
+    Q_PROPERTY(QString callContactAlias READ callContactAlias NOTIFY callContactAliasChanged);
+    Q_PROPERTY(QString callContactNumber READ callContactNumber NOTIFY callContactNumberChanged);
+
 public:
 
     DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent = 0);
@@ -42,8 +44,11 @@ public:
     uint callDuration() const;
     void setCallDuration(uint duration);
 
-    QString callContactId() const;
-    void setCallContactId(const QString &contactId);
+    QString callContactAlias() const;
+    void setCallContactAlias(const QString &contactAlias);
+
+    QString callContactNumber() const;
+    void setCallContactNumber(const QString &contactNumber);
 
     Q_INVOKABLE void resetMissedCalls();
     Q_INVOKABLE void dial(const QString &number);
@@ -52,7 +57,8 @@ Q_SIGNALS:
     void missedCallsActionTriggered();
     void callStateChanged();
     void callDurationChanged();
-    void callContactIdChanged();
+    void callContactAliasChanged();
+    void callContactNumberChanged();
     void acceptCall();
     void rejectCall();
     void hangUp();
@@ -63,7 +69,8 @@ private:
     int m_missedCalls;
     QString m_callState;
     Tp::AccountPtr m_simAccount;
-    QString m_callContactId;
+    QString m_callContactAlias;
+    QString m_callContactNumber;
     uint m_callDuration;
 };
 
