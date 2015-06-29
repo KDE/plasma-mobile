@@ -57,6 +57,7 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
         qDebug() << "Channel invalidated";
         d->dialerUtils->setCallState("idle");
         d->dialerUtils->emitCallEnded();
+        deleteLater();
     });
 
     d->ringingNotification = nullptr;
