@@ -66,6 +66,7 @@ void DialerUtils::dial(const QString &number)
         connect(pendingChannel, &Tp::PendingChannelRequest::finished, [=](){
             if (pendingChannel->isError()) {
                 qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
+                setCallState("failed");
             }
         });
     });

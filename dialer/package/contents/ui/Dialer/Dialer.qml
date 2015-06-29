@@ -35,6 +35,24 @@ Item {
         status.text = status.text + number
     }
 
+    Rectangle {
+        width: parent.width / 2
+        x: parent.width / 4
+        y: parent.height - callStatusNotification.paintedHeight
+        color: PlasmaCore.ColorScope.backgroundColor
+        opacity: 0.6
+        visible: dialerUtils.callState == "failing"
+
+        PlasmaComponents.Label {
+            id: callStatusNotification
+            anchors.fill: parent
+            text: "Unable to make a call at this moment"
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.WordWrap
+            color: PlasmaCore.ColorScope.textColor
+        }
+    }
+
     ColumnLayout {
         id: dialPadArea
 
