@@ -99,6 +99,10 @@ void CallManager::onCallStateChanged(Tp::CallState state)
         d->dialerUtils->setCallContactNumber(d->callChannel->targetContact()->id());
     }
 
+    if (d->callChannel->isValid()) {
+        d->dialerUtils->setIsIncomingCall(!d->callChannel->isRequested());
+    }
+
     switch (state) {
     case Tp::CallStatePendingInitiator:
         Q_ASSERT(d->callChannel->isRequested());

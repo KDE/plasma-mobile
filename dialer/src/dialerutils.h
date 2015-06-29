@@ -32,6 +32,7 @@ class DialerUtils : public QObject
     Q_PROPERTY(uint callDuration READ callDuration NOTIFY callDurationChanged);
     Q_PROPERTY(QString callContactAlias READ callContactAlias NOTIFY callContactAliasChanged);
     Q_PROPERTY(QString callContactNumber READ callContactNumber NOTIFY callContactNumberChanged);
+    Q_PROPERTY(bool isIncomingCall READ isIncomingCall NOTIFY isIncomingCallChanged);
 
 public:
 
@@ -50,6 +51,9 @@ public:
     QString callContactNumber() const;
     void setCallContactNumber(const QString &contactNumber);
 
+    bool isIncomingCall() const;
+    void setIsIncomingCall(bool isIncomingCall);
+
     void emitCallEnded();
 
     Q_INVOKABLE void resetMissedCalls();
@@ -61,10 +65,11 @@ Q_SIGNALS:
     void callDurationChanged();
     void callContactAliasChanged();
     void callContactNumberChanged();
+    void isIncomingCallChanged();
     void acceptCall();
     void rejectCall();
     void hangUp();
-    void callEnded(const QString &callContactNumber, uint callDuration, bool incomingCall);
+    void callEnded(const QString &callContactNumber, uint callDuration, bool isIncomingCall);
 
 private:
     QPointer <KNotification> m_callsNotification;
@@ -75,6 +80,7 @@ private:
     QString m_callContactAlias;
     QString m_callContactNumber;
     uint m_callDuration;
+    bool m_isIncomingCall;
 };
 
 

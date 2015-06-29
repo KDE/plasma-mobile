@@ -122,10 +122,23 @@ void DialerUtils::setCallContactNumber(const QString &contactNumber)
     }
 }
 
+bool DialerUtils::isIncomingCall() const
+{
+    return m_isIncomingCall;
+}
+
+void DialerUtils::setIsIncomingCall(bool isIncomingCall)
+{
+    if (m_isIncomingCall != isIncomingCall) {
+        m_isIncomingCall = isIncomingCall;
+        Q_EMIT isIncomingCallChanged();
+    }
+}
+
 void DialerUtils::emitCallEnded()
 {
     qDebug() << "Call ended:" << m_callContactNumber << m_callDuration;
-    Q_EMIT callEnded(m_callContactNumber, m_callDuration, true);
+    Q_EMIT callEnded(m_callContactNumber, m_callDuration, m_isIncomingCall);
     m_callDuration = 0;
     m_callContactNumber = QString();
     m_callContactAlias = QString();
