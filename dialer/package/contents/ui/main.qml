@@ -153,10 +153,13 @@ ApplicationWindow {
 //BEGIN UI
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: root.visible && dialerUtils.callState == "idle"
+
+        property bool shouldShow: root.visible && (dialerUtils.callState == "idle" || dialerUtils.callState == "failed")
+
+        when: shouldShow
         source: Qt.resolvedUrl("Dialer/DialPage.qml")
-        z: dialerUtils.callState == "idle" ? 2 : 0
-        opacity: dialerUtils.callState == "idle" ? 1 : 0
+        z: shouldShow ? 2 : 0
+        opacity: shouldShow ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration
@@ -167,10 +170,13 @@ ApplicationWindow {
 
     PlasmaExtras.ConditionalLoader {
         anchors.fill: parent
-        when: dialerUtils.callState != "idle"
+
+        property bool shouldShow: dialerUtils.callState != "idle" && dialerUtils.callState != "failed"
+
+        when: shouldShow
         source: Qt.resolvedUrl("Call/CallPage.qml")
-        opacity: dialerUtils.callState != "idle" ? 1 : 0
-        z:  dialerUtils.callState != "idle" ? 2 : 0
+        opacity: shouldShow ? 1 : 0
+        z:  shouldShow ? 2 : 0
         Behavior on opacity {
             OpacityAnimator {
                 duration: units.shortDuration
