@@ -33,7 +33,6 @@ Item {
     property string providerId: ofonoWrapper.providerId
 
     function secondsToTimeString(seconds) {
-        seconds = Math.floor(seconds/1000)
         var h = Math.floor(seconds / 3600);
         var m = Math.floor((seconds - (h * 3600)) / 60);
         var s = seconds - h * 3600 - m * 60;
@@ -117,13 +116,10 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             text: {
-                if (!ofonoWrapper.hasActiveCall) {
-                    return '';
-                //STATUS_DIALING
-                } else if (dialerUtils.status == "dialing") {
+                if (dialerUtils.callState == "dialing") {
                     return i18n("Calling...");
-                } else if (dialerUtils.duration > 0) {
-                    return secondsToTimeString(ofonoWrapper.duration);
+                } else if (dialerUtils.callDuration > 0) {
+                    return secondsToTimeString(dialerUtils.callDuration);
                 } else {
                     return '';
                 }
