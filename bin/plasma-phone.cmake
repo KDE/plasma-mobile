@@ -36,7 +36,6 @@ init --user &
 
 sleep 5
 
-mc-tool request ofono/ofono/account0 online
 paplay /usr/share/sounds/sitter/brmm.ogg &
 
 exec /usr/bin/plasmashell -p org.kde.plasma.phone 2>/tmp/plasmashell_logs
