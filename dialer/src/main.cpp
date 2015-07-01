@@ -155,7 +155,7 @@ int main(int argc, char **argv)
     }
 
     Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
-    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Phone.Dialer");
+    registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Plasma.Dialer");
 
     KPluginMetaData data = obj->package().metadata();
     // About data
