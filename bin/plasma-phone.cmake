@@ -33,10 +33,11 @@ export FORCE_RIL_NUM_MODEMS=1
 
 # upstart user session has useful bits like mtp-server
 init --user &
+# start mission control
+dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:org.freedesktop.Telepathy.MissionControl5 uint32:0
 
 sleep 5
 
 paplay /usr/share/sounds/sitter/brmm.ogg &
 
 exec /usr/bin/plasmashell -p org.kde.plasma.phone 2>/tmp/plasmashell_logs
-dbus-send --session --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:org.freedesktop.Telepathy.MissionControl5 uint32:0
