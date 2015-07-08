@@ -294,6 +294,7 @@ Item {
 
     MouseEventListener {
         anchors.fill: parent
+
         //Events handling: those events are about clicking and reordering of app icons
         //applet related events are in AppeltsArea.qml
         onPressAndHold: {
@@ -500,10 +501,9 @@ Item {
             GridView {
                 id: applicationsView
                 anchors {
-                    top: parent.top
-                    bottom: parent.bottom
-                    left: parent.left
-                    right: parent.right
+                    fill: parent
+                    topMargin: plasmoid.availableScreenRect.y
+                    bottomMargin: root.height - plasmoid.availableScreenRect.y - plasmoid.availableScreenRect.height
                 }
 
                 property var dragData

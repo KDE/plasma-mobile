@@ -112,8 +112,8 @@ MouseEventListener {
         }
         Item {
             Layout.fillWidth: true
-            Layout.minimumHeight: root.height
-            Layout.maximumHeight: root.height
+            Layout.minimumHeight: plasmoid.availableScreenRect.height
+            Layout.maximumHeight: plasmoid.availableScreenRect.height
             Clock {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -169,8 +169,8 @@ MouseEventListener {
         z: 99
         property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
 
-        y: Math.max(viewPos + plasmoid.availableScreenRect.y + krunner.inputHeight - units.smallSpacing, 
-            Math.min(parent.height, viewPos + plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))
+        y: Math.max(viewPos + krunner.inputHeight - units.smallSpacing, 
+            Math.min(parent.height, viewPos + plasmoid.availableScreenRect.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))
 
         GridView {
             id: favoritesView
