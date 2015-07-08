@@ -173,8 +173,9 @@ PlasmaCore.ColorScope {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
+                bottomMargin: slidingPanel.visible ? parent.height : 0
             }
-            height: slidingPanel.visible ? units.iconSizes.huge : parent.height
+            height: slidingPanel.visible ? units.iconSizes.large : parent.height
             Behavior on height {
                 PropertyAnimation {
                     duration: units.longDuration
@@ -223,7 +224,7 @@ PlasmaCore.ColorScope {
                 id: appletsStack
                 anchors {
                     fill: parent
-                    bottomMargin: units.iconSizes.huge
+                    bottomMargin: units.iconSizes.large
                 }
             }
         }

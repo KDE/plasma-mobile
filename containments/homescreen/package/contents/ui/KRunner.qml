@@ -71,6 +71,7 @@ Rectangle {
         }
 
         ColumnLayout {
+            height: Math.min(implicitHeight, (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height) - Qt.inputMethod.keyboardRectangle.y)
             anchors {
                 left: parent.left
                 right: parent.right
@@ -89,19 +90,22 @@ Rectangle {
                 placeholderText: "Search ..."
             }
 
-            Milou.ResultsView {
-                id: listView
-                queryString: queryField.text
-                visible: count > 0
-
+            PlasmaExtras.ScrollArea {
+                visible: listView.count > 0
                 Layout.fillWidth: true
+                Layout.fillHeight: true
                 Layout.preferredHeight: listView.contentHeight
                 Layout.alignment: Qt.AlignTop
 
-                onActivated: queryField.text = ""
-                onUpdateQueryString: {
-                    queryField.text = text
-                    queryField.cursorPosition = cursorPosition
+                Milou.ResultsView {
+                    id: listView
+                    queryString: queryField.text
+
+                    onActivated: queryField.text = ""
+                    onUpdateQueryString: {
+                        queryField.text = text
+                        queryField.cursorPosition = cursorPosition
+                    }
                 }
             }
 
