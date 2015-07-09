@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     const QString description = i18n("Plasma Phone Dialer");
     const char version[] = PROJECT_VERSION;
 
-    app.setQuitOnLastWindowClosed(false);
+//     app.setQuitOnLastWindowClosed(false);
     app.setApplicationVersion(version);
     app.setOrganizationDomain("kde.org");
 
