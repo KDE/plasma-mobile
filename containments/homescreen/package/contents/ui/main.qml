@@ -99,6 +99,26 @@ Item {
         scrollUpIndicator.opacity = 0;
         scrollDownIndicator.opacity = 0;
     }
+
+    function checkLastSpacer() {
+        appletsSpace.lastSpacer.parent = root
+
+        var expands = false;
+
+        for (var container in appletsSpace.layout.children) {
+            var item = appletsSpace.layout.children[container];
+            if (item.Layout && item.Layout.fillHeight) {
+                expands = true;
+            }
+        }
+
+        if (!expands) {
+            appletsSpace.lastSpacer.parent = appletsSpace.layout;
+        }
+
+    }
+
+
 //END functions
 
 //BEGIN slots
@@ -165,9 +185,7 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
             Layout.onFillHeightChanged: {
-                if (plasmoid.formFactor == PlasmaCore.Types.Vertical) {
-                    checkLastSpacer();
-                }
+                checkLastSpacer();
             }
 
             Connections {
