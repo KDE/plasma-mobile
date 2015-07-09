@@ -71,7 +71,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            height: Math.min(implicitHeight, (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height) - Qt.inputMethod.keyboardRectangle.y)
+            height: Qt.inputMethod.keyboardRectangle.height > 0 ? (Math.min(implicitHeight, Qt.inputMethod.keyboardRectangle.y - plasmoid.availableScreenRect.y)) : implicitHeight
             anchors {
                 left: parent.left
                 right: parent.right
