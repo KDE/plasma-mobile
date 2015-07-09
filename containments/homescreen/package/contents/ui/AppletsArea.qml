@@ -136,8 +136,7 @@ MouseEventListener {
         Item {
             id: spacer
             Layout.fillWidth: true
-            Layout.minimumHeight: 0
-            Layout.maximumHeight: Layout.minimumHeight
+            Layout.fillHeight: true
         }
         PlasmaCore.ColorScope {
             id: colorScope
