@@ -112,8 +112,8 @@ MouseEventListener {
         }
         Item {
             Layout.fillWidth: true
-            Layout.minimumHeight: plasmoid.availableScreenRect.height
-            Layout.maximumHeight: plasmoid.availableScreenRect.height
+            Layout.minimumHeight: plasmoid.availableScreenRect.height + units.gridUnit * 3
+            Layout.maximumHeight: Layout.minimumHeight
             Clock {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
@@ -130,6 +130,7 @@ MouseEventListener {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
+                    bottomMargin: units.gridUnit * 3
                 }
             }
         }
