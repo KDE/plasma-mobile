@@ -146,8 +146,9 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onDoubleClicked: widgetExplorer.addApplet(pluginName)
-        onEntered: delegate.ListView.view.currentIndex = index
-        onExited: delegate.ListView.view.currentIndex = -1
+        onClicked: {
+            widgetExplorer.addApplet(pluginName);
+            main.closed();
+        }
     }
 }

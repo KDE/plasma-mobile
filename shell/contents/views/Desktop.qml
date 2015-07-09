@@ -53,7 +53,7 @@ Item {
         asynchronous: true
         y: containment ? containment.availableScreenRect.y : 0
         height: containment ? containment.availableScreenRect.height : parent.height
-        width: item ? item.width: 0
+        width: parent.width
         
         onLoaded: {
             if (widgetExplorerStack.item) {

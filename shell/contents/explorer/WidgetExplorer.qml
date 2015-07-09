@@ -33,7 +33,7 @@ import org.kde.plasma.private.shell 2.0
 PlasmaCore.FrameSvgItem {
     id: main
     imagePath: "widgets/background"
-    enabledBorders: PlasmaCore.FrameSvgItem.RightBorder
+    enabledBorders: PlasmaCore.FrameSvgItem.NoBorder
 
     width: Math.max(heading.paintedWidth, units.gridUnit * 16)
     height: 800//Screen.height
