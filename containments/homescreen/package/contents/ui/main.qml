@@ -36,7 +36,7 @@ Item {
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: width/4
     property bool reorderingApps: false
-    property bool locked: applicationsView.contentY <= -applicationsView.headerItem.height + root.height
+    property bool locked: applicationsView.contentY < -applicationsView.headerItem.height + plasmoid.availableScreenRect.height
 //END properties
 
 //BEGIN functions
