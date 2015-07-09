@@ -53,7 +53,7 @@
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
     // TODO: print it on stdout too?
-    QFile file("/home/phablet/dialer.log");
+    QFile file(QDir::homePath() + "/dialer.log");
 
     bool opened = file.open(QIODevice::WriteOnly | QIODevice::Append);
     Q_ASSERT(opened);
