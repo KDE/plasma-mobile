@@ -300,7 +300,7 @@ Item {
     }
     KRunner {
         id: krunner
-        z: 999
+        z: 998
         anchors {
             top: parent.top
             left: parent.left
@@ -310,6 +310,10 @@ Item {
     }
 
 
+    EditOverlay {
+        id: editOverlay
+        z: 999
+    }
     MouseEventListener {
         anchors.fill: parent
 
@@ -435,10 +439,6 @@ Item {
                 anchors.fill: parent
             }
 
-            EditOverlay {
-                id: editOverlay
-                z: 2
-            }
             PlasmaCore.Svg {
                 id: arrowsSvg
                 imagePath: "widgets/arrows"
