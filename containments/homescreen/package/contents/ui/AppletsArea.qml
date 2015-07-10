@@ -46,7 +46,7 @@ MouseEventListener {
 
             if (draggingApplet) {
                 draggingApplet.animationsEnabled = false;
-                dndSpacer.Layout.minimumHeight = draggingApplet.height;
+                dndSpacer.height = draggingApplet.height;
                 LayoutManager.insertBefore(draggingApplet, dndSpacer);
                 draggingApplet.parent = headerItem;
 
@@ -134,27 +134,40 @@ MouseEventListener {
                 }
             }
         }
-        Item {
+        Rectangle {
             id: spacer
-            Layout.fillWidth: true
-            Layout.fillHeight: true
+            radius: 20
+            width: parent.width
+            height: plasmoid.availableScreenRect.height/4
         }
         PlasmaCore.ColorScope {
             id: colorScope
             //TODO: decide what color we want applets
             colorGroup: PlasmaCore.Theme.NormalColorGroup
             Layout.fillWidth: true
-            Layout.minimumHeight: appletsLayout.Layout.minimumHeight
-            Layout.maximumHeight: appletsLayout.Layout.maximumHeight
-            ColumnLayout {
+            Layout.minimumHeight: appletsLayout.implicitHeight
+            Layout.maximumHeight: appletsLayout.implicitHeight
+            Column {
                 id: appletsLayout
+                width: parent.width
+                move: Transition {
+                    NumberAnimation {
+                        properties: "x,y"
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                add: Transition {
+                    NumberAnimation {
+                        properties: "x,y"
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
             Item {
                 id: dndSpacer
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.minimumHeight: plasmoid.applets.length % 2 == 0 ? 0 : (root.height - margin)/2
-                Layout.maximumHeight: Layout.minimumHeight
+                width: parent.width
             }
         }
         Item {

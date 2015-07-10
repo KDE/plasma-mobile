@@ -74,9 +74,7 @@ Item {
             //startupTimer.restart();
         }
 
-        if (applet.Layout.fillWidth) {
-            appletsSpace.lastSpacer.parent = root;
-        }
+        checkLastSpacer()
     }
 
     //Autoscroll related functions
@@ -103,19 +101,9 @@ Item {
     function checkLastSpacer() {
         appletsSpace.lastSpacer.parent = root
 
-        var expands = false;
-
-        for (var container in appletsSpace.layout.children) {
-            var item = appletsSpace.layout.children[container];
-            if (item.Layout && item.Layout.fillHeight) {
-                expands = true;
-            }
-        }
-
-        if (!expands) {
+        if (appletsSpace.layout.children.length <= 1) {
             appletsSpace.lastSpacer.parent = appletsSpace.layout;
         }
-
     }
 
 
@@ -184,9 +172,6 @@ Item {
             opacity: 1/Math.abs(x/(width/2))
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
-            Layout.onFillHeightChanged: {
-                checkLastSpacer();
-            }
 
             Connections {
                 target: plasmoid
@@ -204,12 +189,7 @@ Item {
                     applet.anchors.margins = background.margins.top;
                 } 
             }
-            onAnimationsEnabledChanged: {
-                if (!animationsEnabled) {
-                    translation.x = 0;
-                    translation.y = 0;
-                }
-            }
+
             property int oldX: x
             property int oldY: y
             PlasmaCore.FrameSvgItem {
@@ -220,14 +200,8 @@ Item {
                 visible: applet.backgroundHints == PlasmaCore.Types.StandardBackground
             }
 
-            Layout.minimumWidth: root.width
-            Layout.minimumHeight: Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2)
-
-            Layout.preferredWidth: root.width
-            Layout.preferredHeight: Layout.minimumHeight
-
-            Layout.maximumWidth: root.width
-            Layout.maximumHeight: Layout.minimumHeight
+            width: parent.width
+            height: Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2)
             
             PlasmaComponents.BusyIndicator {
                 z: 1000
@@ -237,40 +211,7 @@ Item {
                 width: Math.min(parent.width, parent.height)
                 height: width
             }
-            onXChanged: {
-                return;
-                if (!animationsEnabled) {
-                    return;
-                }
-                translation.x = oldX - x;
-                translation.y = oldY - y;
-                translAnim.running = true;
-                oldX = x;
-                oldY = y;
-            }
-            onYChanged: {
-                return;
-                if (!animationsEnabled) {
-                    return;
-                }
-                translation.x = oldX - x;
-                translation.y = oldY - y;
-                translAnim.running = true;
-                oldX = x;
-                oldY = y;
-            }
-            transform: Translate {
-                id: translation
-                onYChanged: print(y)
-            }
-            NumberAnimation {
-                id: translAnim
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-                target: translation
-                properties: "x,y"
-                to: 0
-            }
+            Component.onDestruction: checkLastSpacer();
         }
     }
 
