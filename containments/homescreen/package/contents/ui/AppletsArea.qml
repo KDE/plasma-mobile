@@ -36,7 +36,23 @@ MouseEventListener {
     height: mainLayout.Layout.minimumHeight
     property int margin: stripe.height + units.gridUnit * 2
     property Item draggingApplet
-    
+
+    SequentialAnimation {
+        id: removeAnim
+        property Item target
+        property real to
+        NumberAnimation {
+            properties: "x"
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+            target: removeAnim.target
+            to: removeAnim.to
+        }
+        ScriptAction {
+            script: removeAnim.target.applet.action("remove").trigger();
+        }
+    }
+
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
         if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
@@ -98,7 +114,10 @@ MouseEventListener {
             LayoutManager.insertBefore( dndSpacer, draggingApplet);
             draggingApplet.animationsEnabled = true;
         } else {
-            draggingApplet.applet.action("remove").trigger();
+            //draggingApplet.applet.action("remove").trigger();
+            removeAnim.target = draggingApplet;
+            removeAnim.to = (draggingApplet.x > 0) ? root.width : -root.width
+            removeAnim.running = true;
         }
         applicationsView.interactive = true;
         dndSpacer.parent = colorScope;
@@ -134,9 +153,8 @@ MouseEventListener {
                 }
             }
         }
-        Rectangle {
+        Item {
             id: spacer
-            radius: 20
             width: parent.width
             height: plasmoid.availableScreenRect.height/4
         }
