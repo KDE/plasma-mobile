@@ -19,7 +19,7 @@
  *
  */
 
-import QtQuick 2.0
+import QtQuick 2.2
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -34,12 +34,33 @@ Rectangle {
 
     color: Qt.rgba(0, 0, 0, 0.8)
     visible: false
+    onVisibleChanged: {
+        if (visible) {
+            opacity = 1;
+        }
+    }
+    opacity: 0
+    Behavior on opacity {
+        SequentialAnimation {
+            OpacityAnimator {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            ScriptAction {
+                script: {
+                    if (editOverlay.opacity == 0) {
+                        editOverlay.visible = false;
+                    }
+                }
+            }
+        }
+    }
 
     MouseArea {
         enabled: listView.visible
         anchors.fill: parent
         preventStealing: true
-        onClicked: editOverlay.visible = false;
+        onClicked: editOverlay.opacity = 0;
     }
     PlasmaCore.FrameSvgItem {
         id: background

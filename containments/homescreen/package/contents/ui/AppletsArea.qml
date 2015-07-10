@@ -36,6 +36,8 @@ MouseEventListener {
     height: mainLayout.Layout.minimumHeight
     property int margin: stripe.height + units.gridUnit * 2
     property Item draggingApplet
+    property int startMouseX
+    property int startMouseY
 
     SequentialAnimation {
         id: removeAnim
@@ -53,6 +55,10 @@ MouseEventListener {
         }
     }
 
+    onPressed: {
+        startMouseX = mouse.screenX;
+        startMouseY = mouse.screenY;
+    }
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
         if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
@@ -76,6 +82,11 @@ MouseEventListener {
     onPositionChanged: {
         if (!draggingApplet) {
             return;
+        }
+
+        if (Math.abs(mouse.screenX - startMouseX) > units.gridUnit ||
+            Math.abs(mouse.screenY - startMouseY) > units.gridUnit) {
+            editOverlay.opacity = 0;
         }
 
         draggingApplet.y = mouse.y - draggingApplet.height/2;
@@ -109,12 +120,12 @@ MouseEventListener {
         if (!draggingApplet) {
             return;
         }
+
         if (draggingApplet.x > -draggingApplet.width/4 && draggingApplet.x < draggingApplet.width/4) {
             draggingApplet.x = 0;
             LayoutManager.insertBefore( dndSpacer, draggingApplet);
             draggingApplet.animationsEnabled = true;
         } else {
-            //draggingApplet.applet.action("remove").trigger();
             removeAnim.target = draggingApplet;
             removeAnim.to = (draggingApplet.x > 0) ? root.width : -root.width
             removeAnim.running = true;
