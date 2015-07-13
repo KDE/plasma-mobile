@@ -88,9 +88,9 @@ PlasmaCore.ColorScope {
             //not used yet
             property bool animationsEnabled: false
             property Item applet
-            Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.minimumWidth: appletIconsRow.height
+            Layout.maximumWidth: appletIconsRow.height
 
             MouseArea {
                 anchors.fill: parent
