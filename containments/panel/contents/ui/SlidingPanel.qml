@@ -62,9 +62,14 @@ FullScreenPanel {
 
         property int oldMouseY: 0
         property int startOffset: units.iconSizes.large;
+        property int startMouseY: 0
         property string startState: "closed"
 
         onPressed: {
+            startMouseY = mouse.y;
+            if (startMouseY < contentArea.height - units.iconSizes.large) {
+                return;
+            }
             startState = state;
             startOffset = window.offset;
             oldMouseY = mouse.y;
@@ -72,12 +77,18 @@ FullScreenPanel {
             window.offset = startOffset;
         }
         onPositionChanged: {
+            if (startMouseY < contentArea.height - units.iconSizes.large) {
+                return;
+            }
             var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + overShoot) / overShoot)) : 1
 
             window.offset = window.offset + (mouse.y - oldMouseY) * factor;
             oldMouseY = mouse.y;
         }
         onReleased: {
+            if (startMouseY < contentArea.height - units.iconSizes.large) {
+                return;
+            }
             if (Math.abs(window.offset - mouseArea.startOffset) < units.gridUnit &&
                   slidingArea.y + slidingArea.height < mouse.y) {
                 mouseArea.state = "closed";
@@ -137,6 +148,9 @@ FullScreenPanel {
             z: -1
             anchors.fill: parent
             onClicked: {
+                if (startMouseY < contentArea.height - units.iconSizes.large) {
+                    return;
+                }
                 mouseArea.state = "closed";
                 //window.visible = false;
             }
