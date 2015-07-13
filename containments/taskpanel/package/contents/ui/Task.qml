@@ -46,7 +46,7 @@ Item {
             ScriptAction {
                 script: {
                     if (background.x != 0) {
-                        plasmoid.nativeInterface.windowModel.requestClose(model.index);
+                        plasmoid.nativeInterface.windowModel.requestClose(filteredWindowModel.mapRowToSource(model.index));
                     }
                 }
             }
@@ -83,7 +83,7 @@ Item {
                 onPressed: delegate.z = 10;
                 onClicked: {
                     window.hide();
-                    plasmoid.nativeInterface.windowModel.requestActivate(model.index);
+                    plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(model.index));
                 }
                 onReleased: {
                     delegate.z = 0;
