@@ -33,7 +33,7 @@ Column {
         History {
             id: history
         }
-        Contacts {
+        ContactsList {
             id: contacts
         }
         Dialer {
