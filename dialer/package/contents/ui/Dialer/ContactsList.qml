@@ -62,6 +62,7 @@ Item {
                 id: contactsList
 
                 property bool delegateSelected: false
+                property string numberToCall
 
 
                 section.property: "display"
@@ -101,9 +102,11 @@ Item {
                         if (contactsList.delegateSelected) {
                             contactsList.currentIndex = -1;
                             contactsList.delegateSelected = false;
+                            contactsList.numberToCall = "";
                         } else {
                             contactsList.currentIndex = index;
                             contactsList.delegateSelected = true;
+                            contactsList.numberToCall = model.phoneNumber;
                         }
 
                         contactsList.toggleOverlayButtons(contactsList.delegateSelected);
@@ -214,7 +217,7 @@ Item {
                     MouseArea {
                         anchors.fill: parent
                         //TODO: needs the proper number
-                        onClicked: call(model.phoneNumber)
+                        onClicked: call(contactsList.numberToCall)
                     }
                 }
 
