@@ -173,7 +173,7 @@ Item {
                     id: settingsRect
                     height: units.gridUnit * 6
                     width:  height + units.gridUnit * 2
-                    radius: 45
+                    radius: height
                     z: 100
                     visible: false
                     color: "lightblue"
