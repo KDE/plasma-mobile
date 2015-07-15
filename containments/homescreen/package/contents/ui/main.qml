@@ -37,6 +37,7 @@ Item {
     property int buttonHeight: width/4
     property bool reorderingApps: false
     property bool locked: applicationsView.contentY < -applicationsView.headerItem.height + plasmoid.availableScreenRect.height
+    property var layoutManager: LayoutManager
 //END properties
 
 //BEGIN functions

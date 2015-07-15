@@ -24,8 +24,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-import "LayoutManager.js" as LayoutManager
-
 MouseEventListener {
     id: headerItem
     z: 999
@@ -69,7 +67,7 @@ MouseEventListener {
             if (draggingApplet) {
                 draggingApplet.animationsEnabled = false;
                 dndSpacer.height = draggingApplet.height;
-                LayoutManager.insertBefore(draggingApplet, dndSpacer);
+                root.layoutManager.insertBefore(draggingApplet, dndSpacer);
                 draggingApplet.parent = headerItem;
 
                 pos = mapToItem(headerItem, mouse.x, mouse.y);
@@ -98,9 +96,9 @@ MouseEventListener {
         if (itemUnderMouse && itemUnderMouse != dndSpacer) {
             dndSpacer.parent = colorScope;
             if (pos.y < itemUnderMouse.y + itemUnderMouse.height/2) {
-                LayoutManager.insertBefore(itemUnderMouse, dndSpacer);
+                root.layoutManager.insertBefore(itemUnderMouse, dndSpacer);
             } else {
-                LayoutManager.insertAfter(itemUnderMouse, dndSpacer);
+                root.layoutManager.insertAfter(itemUnderMouse, dndSpacer);
             }
         }
 
@@ -123,7 +121,7 @@ MouseEventListener {
 
         if (draggingApplet.x > -draggingApplet.width/4 && draggingApplet.x < draggingApplet.width/4) {
             draggingApplet.x = 0;
-            LayoutManager.insertBefore( dndSpacer, draggingApplet);
+            root.layoutManager.insertBefore( dndSpacer, draggingApplet);
             draggingApplet.animationsEnabled = true;
         } else {
             removeAnim.target = draggingApplet;

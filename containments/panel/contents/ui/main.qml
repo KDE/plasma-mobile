@@ -37,6 +37,7 @@ PlasmaCore.ColorScope {
     property int buttonHeight: width/4
     property bool reorderingApps: false
     property QtObject expandedApplet
+    property var layoutManager: LayoutManager
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);
