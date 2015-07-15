@@ -25,7 +25,7 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO People)
 find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
 find_package(TelepathyQt5 REQUIRED)
 find_package(KF5Wayland CONFIG)
