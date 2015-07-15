@@ -41,12 +41,7 @@ public:
 protected:
     void showEvent(QShowEvent *event);
 
-private:
-    void setupWaylandIntegration();
-    void setRole();
 
-    KWayland::Client::PlasmaShell *m_waylandPlasmaShell;
-    KWayland::Client::PlasmaShellSurface *m_shellSurface;
 };
 
 #endif

@@ -32,11 +32,9 @@
 #include <KWayland/Client/registry.h>
 
 FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
-    : QQuickWindow(parent),
-      m_shellSurface(0)
+    : QQuickWindow(parent)
 {
     setFlags(Qt::FramelessWindowHint);
-    setupWaylandIntegration();
 }
 
 FullScreenPanel::~FullScreenPanel()
@@ -45,52 +43,10 @@ FullScreenPanel::~FullScreenPanel()
 
 void FullScreenPanel::showEvent(QShowEvent *event)
 {
-    if (!m_shellSurface) {
-        setupWaylandIntegration();
-    } else {
-        setRole();
-        m_shellSurface->setPosition(QPoint(0, 0));
-    }
+    setVisibility(QWindow::FullScreen);
     QQuickWindow::showEvent(event);
 }
 
-void FullScreenPanel::setupWaylandIntegration()
-{
-    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
-        return;
-    }
-    using namespace KWayland::Client;
-    ConnectionThread *connection = ConnectionThread::fromApplication(this);
-    if (!connection) {
-        return;
-    }
-    Registry *registry = new Registry(this);
-    registry->create(connection);
-    connect(registry, &Registry::plasmaShellAnnounced, this,
-        [this, registry] (quint32 name, quint32 version) {
-            m_waylandPlasmaShell = registry->createPlasmaShell(name, version, this);
-            create();
-            Surface *s = Surface::fromWindow(this);
-            if (!s) {
-                return;
-            }
-            m_shellSurface = m_waylandPlasmaShell->createSurface(s, this);
-            setRole();
-        }
-    );
-    registry->setup();
-}
-
-void FullScreenPanel::setRole()
-{
-    KWindowSystem::setOnAllDesktops(winId(), true);
-    KWindowSystem::setType(winId(), NET::Dock);
-
-    if (m_shellSurface) {
-        m_shellSurface->setRole(KWayland::Client::PlasmaShellSurface::Role::Panel);
-        m_shellSurface->setPanelBehavior(KWayland::Client::PlasmaShellSurface::PanelBehavior::WindowsGoBelow);
-    }
-}
 
 #include "fullscreenpanel.moc"
 
