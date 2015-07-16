@@ -88,6 +88,7 @@ void ApplicationListModel::loadApplications()
 
     QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
 
+
     beginResetModel();
 
     m_applicationList.clear();
@@ -143,6 +144,7 @@ void ApplicationListModel::loadApplications()
     }
 
     blgroup.writeEntry("allapps", bl);
+    blgroup.writeEntry("blacklist", blacklist);
     cfg->sync();
 
     std::sort(unorderedList.begin(), unorderedList.end(), appNameLessThan);
