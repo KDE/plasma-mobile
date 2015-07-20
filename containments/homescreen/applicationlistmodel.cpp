@@ -101,7 +101,7 @@ void ApplicationListModel::loadApplications()
     QList<ApplicationData> unorderedList;
 
     // Iterate over all entries in the group
-    for(KServiceGroup::List::ConstIterator it = subGroupList.begin();it != subGroupList.end(); it++) {
+    for(KServiceGroup::List::ConstIterator it = subGroupList.constBegin(); it != subGroupList.constEnd(); it++) {
         KSycocaEntry::Ptr groupEntry = (*it);
 
         if (groupEntry->isType(KST_KServiceGroup)) {
@@ -110,7 +110,7 @@ void ApplicationListModel::loadApplications()
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
 
-                for(KServiceGroup::List::ConstIterator it = entryGroupList.begin();  it != entryGroupList.end(); it++) {
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
 
