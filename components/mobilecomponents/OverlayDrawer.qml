@@ -59,6 +59,12 @@ PlasmaComponents.Page {
         anchors.fill: parent
     }
 
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.6 * (1 - browserFrame.x / root.width)
+    }
+
     Image {
         id: browserFrame
         z: 100
