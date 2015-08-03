@@ -65,121 +65,120 @@ PlasmaComponents.Page {
         color: "black"
         opacity: 0.6 * (1 - browserFrame.x / root.width)
     }
+
     MouseArea {
+        id: mouseEventListener
         anchors.fill: parent
-        enabled: browserFrame.state == "Open"
-        onClicked: browserFrame.state = "Closed"
-    }
+        drag.filterChildren: true
+        property int startBrowserFrameX
+        property int startMouseX
+        property real oldMouseX
+        property bool toggle: false
+        property bool startDragging: false
+        property string startState
 
-    Rectangle {
-        id: browserFrame
-        z: 100
-        color: PlasmaCore.ColorScope.backgroundColor
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
+        onPressed: {
+            if (mouse.x < width - units.gridUnit && browserFrame.state == "Closed") {
+                mouse.accepted = false;
+                return;
+            }
+
+            mouse.accepted = true;
+            startBrowserFrameX = browserFrame.x;
+            oldMouseX = startMouseX = mouse.x;
+            toggle = mouse.x < browserFrame.x || (mouse.x > width - units.gridUnit);
+            startDragging = false;
+            startState = browserFrame.state;
+            browserFrame.state = "Dragging";
+            browserFrame.x = startBrowserFrameX;
         }
 
-        width: {
-            if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
-                return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
+        onPositionChanged: {
+            if (mouse.x > browserFrame.x && Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
+                toggle = false;
+            }
+            if (mouse.x < units.gridUnit ||
+                Math.abs(mouse.x - startMouseX) > root.width / 5) {
+                startDragging = true;
+            }
+            if (startDragging) {
+                browserFrame.x = Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
+            }
+            oldMouseX = mouse.x;
+        }
+
+        onReleased: {
+            //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
+            if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
+                browserFrame.state = startState == "Open" ? "Closed" : "Open"
             } else {
-                return parent.width - units.gridUnit * 3
+                browserFrame.state = startState
             }
         }
-
-        state: "Closed"
-        onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
-        property bool open: false
-        onOpenChanged: openChangedTimer.restart()
-
-        Timer {
-            id: openChangedTimer
-            interval: 0
-            onTriggered: {
-                if (open) {
-                    browserFrame.state = "Open"
-                } else {
-                    browserFrame.state = "Closed"
-                }
-            }
-        }
-
-
-        LinearGradient {
-            width: units.gridUnit/2
+        Rectangle {
+            id: browserFrame
+            z: 100
+            color: PlasmaCore.ColorScope.backgroundColor
             anchors {
-                right: parent.left
                 top: parent.top
                 bottom: parent.bottom
-                rightMargin: -1
-            }
-            start: Qt.point(0, 0)
-            end: Qt.point(units.gridUnit/2, 0)
-            gradient: Gradient {
-                GradientStop {
-                    position: 0.0
-                    color: "transparent"
-                }
-                GradientStop {
-                    position: 0.7
-                    color: Qt.rgba(0, 0, 0, 0.15)
-                }
-                GradientStop {
-                    position: 1.0
-                    color: Qt.rgba(0, 0, 0, 0.3)
-                }
-            }
-        }
-
-
-        MouseEventListener {
-            id: mouseEventListener
-            anchors {
-                fill: parent
-                leftMargin: -units.gridUnit
             }
 
-            property int startBrowserFrameX
-            property int startMouseScreenX
-            property real oldMouseScreenX
-            property bool toggle: false
-            property bool startDragging: false
-            property string startState
-
-            onPressed: {
-                startBrowserFrameX = browserFrame.x
-                oldMouseScreenX = mouse.screenX
-                startMouseScreenX = mouse.screenX
-                toggle = (mouse.x < units.gridUnit)
-                startDragging = false
-                startState = browserFrame.state
-                browserFrame.state = "Dragging"
-                toggle = mouse.x < units.gridUnit
-            }
-            onPositionChanged: {
-                //mouse over handle and didn't move much
-                if (mouse.x > units.gridUnit ||
-                    Math.abs(mouse.screenX - startMouseScreenX) > 20) {
-                    toggle = false
-                }
-                if (mouse.x < units.gridUnit ||
-                    Math.abs(mouse.screenX - startMouseScreenX) > root.width / 5) {
-                    startDragging = true
-                }
-                if (startDragging) {
-                    browserFrame.x = Math.max(root.width - browserFrame.width, browserFrame.x + mouse.screenX - oldMouseScreenX)
-                }
-                oldMouseScreenX = mouse.screenX
-            }
-            onReleased: {
-                //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
-                if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
-                    browserFrame.state = startState == "Open" ? "Closed" : "Open"
+            width: {
+                if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
+                    return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
                 } else {
-                    browserFrame.state = startState
+                    return parent.width - units.gridUnit * 3
                 }
             }
+
+            state: "Closed"
+            onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
+            property bool open: false
+            onOpenChanged: openChangedTimer.restart()
+
+            Timer {
+                id: openChangedTimer
+                interval: 0
+                onTriggered: {
+                    if (open) {
+                        browserFrame.state = "Open"
+                    } else {
+                        browserFrame.state = "Closed"
+                    }
+                }
+            }
+
+
+            LinearGradient {
+                width: units.gridUnit/2
+                anchors {
+                    right: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    rightMargin: -1
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(units.gridUnit/2, 0)
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: "transparent"
+                    }
+                    GradientStop {
+                        position: 0.7
+                        color: Qt.rgba(0, 0, 0, 0.15)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: Qt.rgba(0, 0, 0, 0.3)
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                }
+            }
+
 
             Item {
                 id: drawerPage
@@ -189,46 +188,46 @@ PlasmaComponents.Page {
                 }
                 clip: true
             }
+
+            states: [
+                State {
+                    name: "Open"
+                    PropertyChanges {
+                        target: browserFrame
+                        x: root.width - browserFrame.width
+                    }
+
+                },
+                State {
+                    name: "Dragging"
+                    //workaround for a quirkiness of the state machine
+                    //if no x binding gets defined in this state x will be set to whatever last x it had last time it was in this state
+                    PropertyChanges {
+                        target: browserFrame
+                        x: mouseEventListener.startBrowserFrameX
+                    }
+                },
+                State {
+                    name: "Closed"
+                    PropertyChanges {
+                        target: browserFrame
+                        x: root.width
+                    }
+                }
+            ]
+
+            transitions: [
+                Transition {
+                    //Exclude Dragging
+                    to: "Open,Closed,Hidden"
+                    NumberAnimation {
+                        properties: "x"
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            ]
         }
-
-        states: [
-            State {
-                name: "Open"
-                PropertyChanges {
-                    target: browserFrame
-                    x: root.width - browserFrame.width
-                }
-
-            },
-            State {
-                name: "Dragging"
-                //workaround for a quirkiness of the state machine
-                //if no x binding gets defined in this state x will be set to whatever last x it had last time it was in this state
-                PropertyChanges {
-                    target: browserFrame
-                    x: mouseEventListener.startBrowserFrameX
-                }
-            },
-            State {
-                name: "Closed"
-                PropertyChanges {
-                    target: browserFrame
-                    x: root.width
-                }
-            }
-        ]
-
-        transitions: [
-            Transition {
-                //Exclude Dragging
-                to: "Open,Closed,Hidden"
-                NumberAnimation {
-                    properties: "x"
-                    duration: 250
-                    easing.type: Easing.InOutQuad
-                }
-            }
-        ]
     }
 }
 
