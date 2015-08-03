@@ -115,7 +115,7 @@ PlasmaComponents.Page {
                 rightMargin: -1
             }
             start: Qt.point(0, 0)
-            end: Qt.point(units.gridUnit, 0)
+            end: Qt.point(units.gridUnit/2, 0)
             gradient: Gradient {
                 GradientStop {
                     position: 0.0
@@ -123,11 +123,11 @@ PlasmaComponents.Page {
                 }
                 GradientStop {
                     position: 0.7
-                    color: Qt.rgba(0, 0, 0, 0.3)
+                    color: Qt.rgba(0, 0, 0, 0.15)
                 }
                 GradientStop {
                     position: 1.0
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                    color: Qt.rgba(0, 0, 0, 0.3)
                 }
             }
         }
