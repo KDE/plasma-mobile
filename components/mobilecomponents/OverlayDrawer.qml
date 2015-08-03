@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.1
+import QtGraphicalEffects 1.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
@@ -64,12 +65,16 @@ PlasmaComponents.Page {
         color: "black"
         opacity: 0.6 * (1 - browserFrame.x / root.width)
     }
+    MouseArea {
+        anchors.fill: parent
+        enabled: browserFrame.state == "Open"
+        onClicked: browserFrame.state = "Closed"
+    }
 
-    Image {
+    Rectangle {
         id: browserFrame
         z: 100
-        source: "image://appbackgrounds/standard"
-        fillMode: Image.Tile
+        color: PlasmaCore.ColorScope.backgroundColor
         anchors {
             top: parent.top
             bottom: parent.bottom
@@ -77,9 +82,9 @@ PlasmaComponents.Page {
 
         width: {
             if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
-                return Math.min( parent.width - handleGraphics.width, drawerPage.children[0].implicitWidth)
+                return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
             } else {
-                return parent.width - handleGraphics.width
+                return parent.width - units.gridUnit * 3
             }
         }
 
@@ -101,46 +106,38 @@ PlasmaComponents.Page {
         }
 
 
-        Image {
-            source: "image://appbackgrounds/shadow-left"
-            fillMode: Image.TileVertically
+        LinearGradient {
+            width: units.gridUnit/2
             anchors {
                 right: parent.left
                 top: parent.top
                 bottom: parent.bottom
                 rightMargin: -1
             }
-        }
-        PlasmaCore.FrameSvgItem {
-            id: handleGraphics
-            imagePath: "widgets/background"
-            enabledBorders: "LeftBorder|TopBorder|BottomBorder"
-            width: handleIcon.width + margins.left + margins.right + 4
-            height: handleIcon.width * 1.6 + margins.top + margins.bottom + 4
-            anchors {
-                right: parent.left
-                verticalCenter: parent.verticalCenter
+            start: Qt.point(0, 0)
+            end: Qt.point(units.gridUnit, 0)
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: "transparent"
+                }
+                GradientStop {
+                    position: 0.7
+                    color: Qt.rgba(0, 0, 0, 0.3)
+                }
+                GradientStop {
+                    position: 1.0
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
             }
+        }
 
-            PlasmaCore.SvgItem {
-                id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
-                elementId: "menu"
-                x: parent.margins.left
-                y: parent.margins.top
-                width: theme.smallMediumIconSize
-                height: width
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
 
         MouseEventListener {
             id: mouseEventListener
             anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: handleGraphics.left
-                right: parent.right
+                fill: parent
+                leftMargin: -units.gridUnit
             }
 
             property int startBrowserFrameX
@@ -154,19 +151,19 @@ PlasmaComponents.Page {
                 startBrowserFrameX = browserFrame.x
                 oldMouseScreenX = mouse.screenX
                 startMouseScreenX = mouse.screenX
-                toggle = (mouse.x < handleGraphics.width)
+                toggle = (mouse.x < units.gridUnit)
                 startDragging = false
                 startState = browserFrame.state
                 browserFrame.state = "Dragging"
-                toggle = mouse.x < handleGraphics.width
+                toggle = mouse.x < units.gridUnit
             }
             onPositionChanged: {
                 //mouse over handle and didn't move much
-                if (mouse.x > handleGraphics.width ||
+                if (mouse.x > units.gridUnit ||
                     Math.abs(mouse.screenX - startMouseScreenX) > 20) {
                     toggle = false
                 }
-                if (mouse.x < handleGraphics.width ||
+                if (mouse.x < units.gridUnit ||
                     Math.abs(mouse.screenX - startMouseScreenX) > root.width / 5) {
                     startDragging = true
                 }
@@ -184,11 +181,11 @@ PlasmaComponents.Page {
                 }
             }
 
-            Rectangle {
+            Item {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    leftMargin: handleGraphics.width
+                    leftMargin: units.gridUnit * 2
                 }
                 clip: true
             }
