@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.1
+import QtGraphicalEffects 1.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -54,167 +55,139 @@ PlasmaComponents.Page {
     default property alias page: mainPage.data
     property alias drawer: panelPage.data
     property alias open: sidebar.open
-    property int visibleDrawerWidth: width - browserFrame.width
+    property int visibleDrawerWidth: browserFrame.x
 
     Component.onCompleted: {
-        mainPage.width = browserFrame.width - handleGraphics.width
+        mainPage.width = browserFrame.width
+    }
+
+    MouseArea {
+        id: mouseEventListener
+        z: 200
+        drag.filterChildren: true
+        //drag.target: browserFrame
+        property int startMouseX
+        property int oldMouseX
+        property int startBrowserFrameX
+
+        anchors.fill: parent
+
+        onPressed: {
+            if ((browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
+                mouse.x < browserFrame.x) {
+                mouse.accepted = false;
+                return;
+            }
+
+            startBrowserFrameX = browserFrame.x;
+            oldMouseX = startMouseX = mouse.x;
+            browserFrame.state = "Dragging";
+            browserFrame.x = startBrowserFrameX;
+        }
+
+        onPositionChanged: {
+            browserFrame.x = Math.max(0, browserFrame.x + mouse.x - oldMouseX);
+            oldMouseX = mouse.x;
+        }
+
+        onReleased: {
+            if (browserFrame.x < sidebar.width / 2) {
+                browserFrame.state = "Closed";
+            } else {
+                browserFrame.state = "Open";
+            }
+        }
     }
 
     Rectangle {
         id: browserFrame
-        //visible: mainPage.children.length > 0
         z: 100
-        color: theme.backgroundColor
+        color: PlasmaCore.ColorScope.backgroundColor
+        state: "Closed"
+        onStateChanged: sidebar.open = (state != "Closed")
 
         anchors {
             top: parent.top
             bottom: parent.bottom
         }
-        x: mainPage.children.length > 0 && mainPage.children[0].visible ? 0 : - width
-        width: handleGraphics.x + handleGraphics.width
-        clip: true
-
-        function handlePosition()
-        {
-            return sidebar.open ? root.width - sidebar.width - handleGraphics.width : root.width - handleGraphics.width
-        }
-
-        Behavior on x {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.InOutQuad
-            }
-        }
+        width: root.width;
 
         Item {
             id: mainPage
             onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
+
+            anchors.fill: parent
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: "black"
+            opacity: 0.6 * (browserFrame.x / sidebar.width)
+        }
+        LinearGradient {
+            width: units.gridUnit/2
             anchors {
-                left: parent.left
+                right: parent.left
                 top: parent.top
                 bottom: parent.bottom
+                rightMargin: -1
+            }
+            start: Qt.point(0, 0)
+            end: Qt.point(units.gridUnit/2, 0)
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: "transparent"
+                }
+                GradientStop {
+                    position: 0.7
+                    color: Qt.rgba(0, 0, 0, 0.15)
+                }
+                GradientStop {
+                    position: 1.0
+                    color: Qt.rgba(0, 0, 0, 0.3)
+                }
             }
         }
 
-        Item {
-            id: handleGraphics
-            clip: true
-            Rectangle {
-                anchors {
-                    fill: parent
-                    rightMargin: -3
+        states: [
+            State {
+                name: "Open"
+                PropertyChanges {
+                    target: browserFrame
+                    x: sidebar.width
                 }
-                border {
-                    width: 3
-                    color: theme.textColor
-                }
-                color: "transparent"
-                opacity: 0.3
-            }
-            Rectangle {
-                anchors.fill: parent
-                color: theme.highlightColor
-                opacity: 0.05
-            }
-            width: handleIcon.width + units.gridUnit
-            height: handleIcon.width * 1.6 + units.gridUnit
-            anchors.verticalCenter: parent.verticalCenter
 
-            Component.onCompleted: {
-                handleGraphics.x = browserFrame.handlePosition()
-            }
-
-            //TODO: an icon
-            PlasmaCore.SvgItem {
-                id: handleIcon
-                svg: PlasmaCore.Svg {imagePath: "widgets/configuration-icons"}
-                elementId: "menu"
-                anchors.centerIn: parent
-                width: theme.smallMediumIconSize
-                height: width
-                anchors.verticalCenter: parent.verticalCenter
-            }
-        }
-        MouseArea {
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: handleGraphics.left
-                right: handleGraphics.right
-            }
-            drag {
-                target: handleGraphics
-                axis: Drag.XAxis
-                //-50, an overshoot to make it look smooter
-                minimumX: root.width - sidebar.width - handleGraphics.width - 50
-                maximumX: root.width - handleGraphics.width
-            }
-            property int startX
-            property bool toggle: true
-            onPressed: {
-                startX = handleGraphics.x
-                toggle = true
-            }
-            onPositionChanged: {
-                if (Math.abs(handleGraphics.x - startX) > 20) {
-                    toggle = false
+            },
+            State {
+                name: "Dragging"
+                PropertyChanges {
+                    target: browserFrame
+                    x: mouseEventListener.startBrowserFrameX
+                }
+            },
+            State {
+                name: "Closed"
+                PropertyChanges {
+                    target: browserFrame
+                    x: 0
                 }
             }
-            onReleased: {
-                if (toggle) {
-                    sidebar.open = !sidebar.open
-                } else {
-                    sidebar.open = (browserFrame.width < root.width -sidebar.width/2)
-                }
-                sidebarSlideAnimation.to = browserFrame.handlePosition()
-                sidebarSlideAnimation.running = true
-            }
-        }
-        //FIXME: use a state machine
-        SequentialAnimation {
-            id: sidebarSlideAnimation
-            property alias to: actualSlideAnimation.to
+        ]
 
-            NumberAnimation {
-                id: actualSlideAnimation
-                target: handleGraphics
-                properties: "x"
-                duration: 250
-                easing.type: Easing.InOutQuad
+        transitions: [
+            Transition {
+                //Exclude Dragging
+                to: "Open,Closed,Hidden"
+                NumberAnimation {
+                    properties: "x"
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
-            ScriptAction {
-                script: mainPage.width = browserFrame.width - handleGraphics.width
-            }
-        }
+        ]
     }
-    Rectangle {
-        z: 99
-        width: 3
-        color: theme.textColor
-        opacity: 0.3
-        height: handleGraphics.y
-        anchors {
-            left: browserFrame.right
-            top: browserFrame.top
-            //bottom: browserFrame.bottom
-            leftMargin: 0
-            topMargin: 3
-        }
-    }
-    Rectangle {
-        z: 99
-        width: 3
-        color: theme.textColor
-        opacity: 0.3
-        height: handleGraphics.y + 3
-        anchors {
-            left: browserFrame.right
-            //top: browserFrame.top
-            bottom: browserFrame.bottom
-            leftMargin: 0
-            topMargin: 3
-        }
-    }
+
 
     Item {
         id: sidebar
@@ -230,12 +203,12 @@ PlasmaComponents.Page {
 
         width: parent.width/4
         onWidthChanged: {
-            handleGraphics.x = browserFrame.handlePosition()
-            mainPage.width = browserFrame.width - handleGraphics.width
+            //handleGraphics.x = browserFrame.handlePosition()
+            //mainPage.width = browserFrame.width - handleGraphics.width
         }
-        x: parent.width - width
 
         anchors {
+            left: parent.left
             top: parent.top
             bottom: parent.bottom
         }
@@ -244,19 +217,6 @@ PlasmaComponents.Page {
             id: panelPage
             anchors.fill: parent
             clip: false
-        }
-    }
-
-    Rectangle {
-        height: 3
-        color: theme.textColor
-        opacity: 0.3
-        z: 999
-        anchors {
-            left: parent.left
-            top: toolBar.bottom
-            right: parent.right
-            topMargin: -2
         }
     }
 }

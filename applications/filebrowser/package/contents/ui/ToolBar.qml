@@ -230,7 +230,7 @@ Item {
         anchors {
             bottom: parent.bottom
         }
-        x: parent.width - resourceBrowser.visibleDrawerWidth + toolBar.margins.left
+        x: resourceBrowser.visibleDrawerWidth - tabsRow.width
         z: 900
         PlasmaComponents.ButtonRow {
             id: tabsRow
@@ -244,12 +244,21 @@ Item {
             height: theme.mSize(theme.defaultFont).height * 1.6
             exclusive: true
 
+            //fake: just to show something then overshooting
+            PlasmaComponents.ToolButton {
+                flat: false
+                width: root.width
+                height: parent.height-1
+                enabled: false
+                opacity: 1
+            }
             PlasmaComponents.ToolButton {
                 id: mainTab
                 text: i18n("Filters")
                 flat: false
                 width: sidebar.width / 3
                 height: parent.height - 1
+                checked: true
                 onCheckedChanged: {
                     if (checked) {
                         sidebarTabGroup.currentTab = categorySidebar
@@ -281,14 +290,6 @@ Item {
                         sidebarTabGroup.currentTab = tagsSidebar
                     }
                 }
-            }
-            //fake: just to show something then overshooting
-            PlasmaComponents.ToolButton {
-                flat: false
-                width: sidebar.width / 3
-                height: parent.height-1
-                enabled: false
-                opacity: 1
             }
         }
     }
