@@ -136,20 +136,13 @@ PlasmaComponents.Page {
             state: "Closed"
             onStateChanged: open = (state != "Closed")
             property bool open: false
-            onOpenChanged: openChangedTimer.restart()
-
-            Timer {
-                id: openChangedTimer
-                interval: 0
-                onTriggered: {
-                    if (open) {
-                        browserFrame.state = "Open"
-                    } else {
-                        browserFrame.state = "Closed"
-                    }
+            onOpenChanged: {
+                if (open) {
+                    browserFrame.state = "Open";
+                } else {
+                    browserFrame.state = "Closed";
                 }
             }
-
 
             LinearGradient {
                 width: units.gridUnit/2
