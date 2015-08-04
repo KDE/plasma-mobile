@@ -73,7 +73,7 @@ PlasmaComponents.Page {
         anchors.fill: parent
 
         onPressed: {
-            if ((browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
+            if (drawerPage.children.length == 0 || (browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
                 mouse.x < browserFrame.x) {
                 mouse.accepted = false;
                 return;
@@ -194,6 +194,10 @@ PlasmaComponents.Page {
 
         property bool open: false
         onOpenChanged: {
+            if (drawerPage.children.length == 0) {
+                return;
+            }
+
             if (open) {
                 browserFrame.state = "Open";
             } else {

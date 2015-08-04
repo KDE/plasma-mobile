@@ -79,7 +79,8 @@ PlasmaComponents.Page {
         property string startState
 
         onPressed: {
-            if (mouse.x < width - units.gridUnit && browserFrame.state == "Closed") {
+            if (drawerPage.children.length == 0 ||
+                (mouse.x < width - units.gridUnit && browserFrame.state == "Closed")) {
                 mouse.accepted = false;
                 return;
             }
@@ -95,6 +96,11 @@ PlasmaComponents.Page {
         }
 
         onPositionChanged: {
+            if (drawerPage.children.length == 0) {
+                mouse.accepted = false;
+                return;
+            }
+
             if (mouse.x > browserFrame.x && Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
                 toggle = false;
             }
@@ -109,6 +115,10 @@ PlasmaComponents.Page {
         }
 
         onReleased: {
+            if (drawerPage.children.length == 0) {
+                mouse.accepted = false;
+                return;
+            }
             //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
             if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open"
@@ -137,6 +147,10 @@ PlasmaComponents.Page {
             onStateChanged: open = (state != "Closed")
             property bool open: false
             onOpenChanged: {
+                if (drawerPage.children.length == 0) {
+                    return;
+                }
+
                 if (open) {
                     browserFrame.state = "Open";
                 } else {
