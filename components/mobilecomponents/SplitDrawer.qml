@@ -53,7 +53,7 @@ PlasmaComponents.Page {
     }
 
     default property alias page: mainPage.data
-    property alias drawer: panelPage.data
+    property alias drawer: drawerPage.data
     property alias open: sidebar.open
     property int visibleDrawerWidth: browserFrame.x
 
@@ -122,7 +122,7 @@ PlasmaComponents.Page {
         Rectangle {
             anchors.fill: parent
             color: "black"
-            opacity: 0.6 * (browserFrame.x / sidebar.width)
+            opacity: Math.min(0.6, 0.6 * (browserFrame.x / sidebar.width))
         }
         LinearGradient {
             width: units.gridUnit/2
@@ -194,18 +194,14 @@ PlasmaComponents.Page {
 
         property bool open: false
         onOpenChanged: {
-            if (width == 0) {
-                return
+            if (open) {
+                browserFrame.state = "Open";
+            } else {
+                browserFrame.state = "Closed";
             }
-            sidebarSlideAnimation.to = browserFrame.handlePosition()
-            sidebarSlideAnimation.running = true
         }
 
         width: parent.width/4
-        onWidthChanged: {
-            //handleGraphics.x = browserFrame.handlePosition()
-            //mainPage.width = browserFrame.width - handleGraphics.width
-        }
 
         anchors {
             left: parent.left
@@ -214,9 +210,10 @@ PlasmaComponents.Page {
         }
 
         Item {
-            id: panelPage
+            id: drawerPage
             anchors.fill: parent
             clip: false
+            onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
         }
     }
 }

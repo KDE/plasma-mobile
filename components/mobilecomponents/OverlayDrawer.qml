@@ -58,6 +58,7 @@ PlasmaComponents.Page {
     Item {
         id: mainPage
         anchors.fill: parent
+        onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
     }
 
     Rectangle {
@@ -133,7 +134,7 @@ PlasmaComponents.Page {
             }
 
             state: "Closed"
-            onStateChanged: open = (state == "Open" || mouseEventListener.startState == "Open")
+            onStateChanged: open = (state != "Closed")
             property bool open: false
             onOpenChanged: openChangedTimer.restart()
 
@@ -187,6 +188,7 @@ PlasmaComponents.Page {
                     leftMargin: units.gridUnit * 2
                 }
                 clip: true
+                onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
             }
 
             states: [
