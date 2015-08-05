@@ -69,6 +69,8 @@ PlasmaComponents.Page {
         property int startMouseX
         property int oldMouseX
         property int startBrowserFrameX
+        property bool toggle: false
+        property string startState
 
         anchors.fill: parent
 
@@ -79,8 +81,10 @@ PlasmaComponents.Page {
                 return;
             }
 
+            toggle = true;
             startBrowserFrameX = browserFrame.x;
             oldMouseX = startMouseX = mouse.x;
+            startState = browserFrame.state;
             browserFrame.state = "Dragging";
             browserFrame.x = startBrowserFrameX;
         }
@@ -88,10 +92,15 @@ PlasmaComponents.Page {
         onPositionChanged: {
             browserFrame.x = Math.max(0, browserFrame.x + mouse.x - oldMouseX);
             oldMouseX = mouse.x;
+            if (Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
+                toggle = false;
+            }
         }
 
         onReleased: {
-            if (browserFrame.x < sidebar.width / 2) {
+            if (toggle) {
+                browserFrame.state = startState == "Open" ? "Closed" : "Open"
+            } else if (browserFrame.x < sidebar.width / 2) {
                 browserFrame.state = "Closed";
             } else {
                 browserFrame.state = "Open";
@@ -122,7 +131,7 @@ PlasmaComponents.Page {
         Rectangle {
             anchors.fill: parent
             color: "black"
-            opacity: Math.min(0.6, 0.6 * (browserFrame.x / sidebar.width))
+            opacity: Math.min(0.4, 0.4 * (browserFrame.x / sidebar.width))
         }
         LinearGradient {
             width: units.gridUnit/2
