@@ -133,29 +133,6 @@ Item {
 
     ListModel {
         id: notificationsModel
-
-        ListElement {
-            source: "call1Source"
-            appIcon: "call-start"
-            summary: "Missed call from Joe"
-            appName: "Phone"
-            body: "Called at 8:42 from +41 56 373 37 31"
-            actions: []
-        }
-        ListElement {
-            source: "im1Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hey! Are you around?"
-            actions: []
-        }
-        ListElement {
-            source: "im2Source"
-            appIcon: "im-google"
-            appName: "Message"
-            summary: "July: Hello?"
-            actions: []
-        }
     }
 
     ListView {
