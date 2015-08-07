@@ -101,8 +101,9 @@ void ApplicationListModel::loadApplications()
     QList<ApplicationData> unorderedList;
 
     // Iterate over all entries in the group
-    for(KServiceGroup::List::ConstIterator it = subGroupList.constBegin(); it != subGroupList.constEnd(); it++) {
-        KSycocaEntry::Ptr groupEntry = (*it);
+    while (!subGroupList.isEmpty()) {
+        KSycocaEntry::Ptr groupEntry = subGroupList.first();
+        subGroupList.pop_front();
 
         if (groupEntry->isType(KST_KServiceGroup)) {
             KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
@@ -114,7 +115,11 @@ void ApplicationListModel::loadApplications()
                     KSycocaEntry::Ptr entry = (*it);
                     ApplicationData data;
 
-                    if (entry->property("Exec").isValid()) {
+                    if (entry->isType(KST_KServiceGroup)) {
+                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(entry.data()));
+                        subGroupList << serviceGroup;
+
+                    } else if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
 
                         qDebug() << " desktopEntryName: " << service->desktopEntryName();
