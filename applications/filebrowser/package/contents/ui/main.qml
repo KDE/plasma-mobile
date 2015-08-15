@@ -136,7 +136,7 @@ Rectangle {
                 if (partPackage.visibleName && partPackage.visibleName != '') {
                     application.caption = partPackage.visibleName
                 } else {
-                    application.caption = i18n('Files')
+                    application.caption = i18n("Files")
                 }
                 var part = mainStack.push(partPackage.filePath("mainscript"))
                 part.loadResource(data)
