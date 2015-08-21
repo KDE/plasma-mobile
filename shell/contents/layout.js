@@ -25,7 +25,7 @@ panel.height = 60;
 var bottomPanel = new Panel("org.kde.phone.taskpanel");
 bottomPanel.location = "bottom";
 
-if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.screen.width))
+if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.screen).width)
     bottomPanel.height = 150;
 else
     bottomPanel.height = 60;
