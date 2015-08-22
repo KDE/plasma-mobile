@@ -34,7 +34,7 @@ Item {
 //BEGIN properties
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
-    property int buttonHeight: width/4
+    property int buttonHeight: units.iconSizes.huge
     property bool reorderingApps: false
     property bool locked: applicationsView.contentY < -applicationsView.headerItem.height + plasmoid.availableScreenRect.height
     property var layoutManager: LayoutManager
@@ -468,8 +468,8 @@ Item {
 
                 property var dragData
 
-                cellWidth: root.buttonHeight
-                cellHeight: cellWidth
+                cellWidth: root.width / 4
+                cellHeight: units.iconSizes.huge
                 model: plasmoid.nativeInterface.applicationListModel
 
                 snapMode: GridView.SnapToRow

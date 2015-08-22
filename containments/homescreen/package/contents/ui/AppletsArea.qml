@@ -222,8 +222,9 @@ MouseEventListener {
             property int columns: 4
             interactive: false
             flow: GridView.FlowTopToBottom
-            cellWidth: root.buttonHeight
-            cellHeight: cellWidth
+
+            cellWidth: root.width / 4
+            cellHeight: units.iconSizes.huge
 
             model: plasmoid.nativeInterface.applicationListModel
             delegate: HomeLauncher {
@@ -247,4 +248,3 @@ MouseEventListener {
         }
     }
 }
-            

@@ -4,7 +4,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Item {
     id: root
     width: parent.width / parent.columns
-    height: parent.buttonHeight
+    height: units.iconSizes.huge
     property var callback
     property string text
     property string sub

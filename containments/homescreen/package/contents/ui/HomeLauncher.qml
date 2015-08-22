@@ -6,7 +6,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
     id: delegateRoot
     width: applicationsView.cellWidth
-    height: width
+    height: applicationsView.cellHeight
 
     property var modelData: model
     property bool isDropTarget: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole
