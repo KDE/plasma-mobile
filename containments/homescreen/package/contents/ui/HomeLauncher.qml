@@ -48,7 +48,7 @@ Item {
         maximumLineCount: 2
 
         text: modelData.ApplicationNameRole
-        font.pixelSize: theme.smallestFont.pixelSize
+        font.pixelSize: theme.defaultFont.pixelSize
         color: PlasmaCore.ColorScope.textColor
     }
 }
