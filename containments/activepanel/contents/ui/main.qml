@@ -21,7 +21,7 @@ import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 
-import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+import "LayoutManager.js" as LayoutManager
 
 MouseArea {
     id: main

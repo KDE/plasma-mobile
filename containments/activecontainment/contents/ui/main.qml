@@ -28,7 +28,7 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.activities 0.1 as Activities
 
-import "plasmapackage:/code/LayoutManager.js" as LayoutManager
+import "LayoutManager.js" as LayoutManager
 
 Item {
     id: main
