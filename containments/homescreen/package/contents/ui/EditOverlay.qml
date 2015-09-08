@@ -85,13 +85,19 @@ Rectangle {
                 Layout.fillWidth: true
                 Layout.fillHeight:true
                 text: i18n("Wallpaper...")
-                onClicked: plasmoid.action("configure").trigger();
+                onClicked: {
+                    plasmoid.action("configure").trigger();
+                    editOverlay.opacity = 0;
+                }
             }
             PlasmaComponents.Button {
                 Layout.fillWidth: true
                 Layout.fillHeight:true
                 text: i18n("Add Widgets...")
-                onClicked: plasmoid.action("add widgets").trigger();
+                onClicked: {
+                    plasmoid.action("add widgets").trigger();
+                    editOverlay.opacity = 0;
+                }
             }
         }
     }
