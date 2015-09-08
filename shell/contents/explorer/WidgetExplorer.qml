@@ -24,19 +24,17 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.private.shell 2.0
 
-PlasmaCore.FrameSvgItem {
+Rectangle {
     id: main
-    imagePath: "widgets/background"
-    enabledBorders: PlasmaCore.FrameSvgItem.NoBorder
 
-    width: Math.max(heading.paintedWidth, units.gridUnit * 16)
-    height: 800//Screen.height
+    color: theme.backgroundColor
 
     property alias containment: widgetExplorer.containment
 
@@ -64,142 +62,160 @@ PlasmaCore.FrameSvgItem {
         //view: desktop
         onShouldClose: main.closed();
     }
-
-    GridLayout {
-        id: topBar
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            topMargin: 0
-            leftMargin: units.smallSpacing
-            rightMargin: main.margins.right
-        }
-        columns: 2
-
-        PlasmaExtras.Title {
-            id: heading
-            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
-            Layout.fillWidth: true
-        }
-
-        PlasmaComponents.ToolButton {
-            id: closeButton
-            anchors {
-                right: parent.right
-                verticalCenter: heading.verticalCenter
-            }
-            iconSource: "window-close"
-            onClicked: main.closed()
-        }
-
-        PlasmaComponents.TextField {
-            id: searchInput
-            clearButtonShown: true
-            placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
-            onTextChanged: {
-                list.positionViewAtBeginning()
-                list.currentIndex = -1
-                widgetExplorer.widgetsModel.searchTerm = text
-            }
-
-            Component.onCompleted: forceActiveFocus()
-            Layout.columnSpan: 2
-            Layout.fillWidth: true
-        }
-    }
-
-    PlasmaCore.FrameSvgItem {
-        id: backgroundHint
-        imagePath: "widgets/viewitem"
-        prefix: "normal"
-        visible: false
-    }
-    PlasmaExtras.ScrollArea {
-        anchors {
-            top: topBar.bottom
-            left: parent.left
-            right: parent.right
-            bottom: bottomBar.top
-            topMargin: units.smallSpacing
-            leftMargin: units.smallSpacing
-            bottomMargin: units.smallSpacing
-            rightMargin: main.margins.right
-        }
-        ListView {
-            id: list
-
-            model: widgetExplorer.widgetsModel
-            activeFocusOnTab: true
-            currentIndex: -1
-            keyNavigationWraps: true
-
-            delegate: AppletDelegate {}
-
-            //slide in to view from the left
-            add: Transition {
-                NumberAnimation {
-                    properties: "x"
-                    from: -list.width
-                    to: 0
-                    duration: units.shortDuration * 3
-
-                }
-            }
-
-            //slide out of view to the right
-            remove: Transition {
-                NumberAnimation {
-                    properties: "x"
-                    to: list.width
-                    duration: units.shortDuration * 3
-                }
-            }
-
-            //if we are adding other items into the view use the same animation as normal adding
-            //this makes everything slide in together
-            //if we make it move everything ends up weird
-            addDisplaced: list.add
-
-            //moved due to filtering
-            displaced: Transition {
-                NumberAnimation {
-                    properties: "y"
-                    duration: units.shortDuration * 3
+    MobileComponents.SplitDrawer {
+        visible: true
+        anchors.fill: parent
+        drawer: PlasmaExtras.ScrollArea {
+            ListView {
+                model: widgetExplorer.filterModel
+                delegate: PlasmaComponents.ListItem {
+                    enabled: true
+                    visible: !model.separator
+                    height: model.separator ? 0 : implicitHeight
+                    PlasmaComponents.Label {
+                        text: model.display
+                    }
+                    onClicked: {
+                        list.contentX = 0
+                        list.contentY = 0
+                        heading.text = model.display
+                        widgetExplorer.widgetsModel.filterQuery = model.filterData
+                        widgetExplorer.widgetsModel.filterType = model.filterType
+                    }
                 }
             }
         }
-    }
+        ColumnLayout {
+            GridLayout {
+                id: topBar
+                anchors {
+                    top: parent.top
+                    left: parent.left
+                    right: parent.right
+                    topMargin: 0
+                    leftMargin: units.smallSpacing
+                }
+                columns: 2
 
-    Column {
-        id: bottomBar
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            leftMargin: units.smallSpacing
-            rightMargin: units.smallSpacing
-            bottomMargin: units.smallSpacing
-        }
+                PlasmaExtras.Title {
+                    id: heading
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
+                    Layout.fillWidth: true
+                }
 
-        spacing: units.smallSpacing
+                PlasmaComponents.ToolButton {
+                    id: closeButton
+                    anchors {
+                        right: parent.right
+                        verticalCenter: heading.verticalCenter
+                    }
+                    iconSource: "window-close"
+                    onClicked: main.closed()
+                }
 
-        Repeater {
-            model: widgetExplorer.extraActions.length
-            PlasmaComponents.Button {
+                PlasmaComponents.TextField {
+                    id: searchInput
+                    clearButtonShown: true
+                    placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
+                    onTextChanged: {
+                        list.positionViewAtBeginning()
+                        list.currentIndex = -1
+                        widgetExplorer.widgetsModel.searchTerm = text
+                    }
+
+                    Component.onCompleted: forceActiveFocus()
+                    Layout.columnSpan: 2
+                    Layout.fillWidth: true
+                }
+            }
+
+            PlasmaExtras.ScrollArea {
+                anchors {
+                    top: topBar.bottom
+                    left: parent.left
+                    right: parent.right
+                    bottom: bottomBar.top
+                    topMargin: units.smallSpacing
+                    leftMargin: units.smallSpacing
+                    bottomMargin: units.smallSpacing
+                }
+                ListView {
+                    id: list
+
+                    model: widgetExplorer.widgetsModel
+                    activeFocusOnTab: true
+                    currentIndex: -1
+                    keyNavigationWraps: true
+
+                    delegate: AppletDelegate {}
+
+                    //slide in to view from the left
+                    add: Transition {
+                        NumberAnimation {
+                            properties: "x"
+                            from: -list.width
+                            to: 0
+                            duration: units.shortDuration * 3
+
+                        }
+                    }
+
+                    //slide out of view to the right
+                    remove: Transition {
+                        NumberAnimation {
+                            properties: "x"
+                            to: list.width
+                            duration: units.shortDuration * 3
+                        }
+                    }
+
+                    //if we are adding other items into the view use the same animation as normal adding
+                    //this makes everything slide in together
+                    //if we make it move everything ends up weird
+                    addDisplaced: list.add
+
+                    //moved due to filtering
+                    displaced: Transition {
+                        NumberAnimation {
+                            properties: "y"
+                            duration: units.shortDuration * 3
+                        }
+                    }
+                }
+            }
+
+            Column {
+                id: bottomBar
                 anchors {
                     left: parent.left
                     right: parent.right
+                    bottom: parent.bottom
+                    leftMargin: units.smallSpacing
+                    rightMargin: units.smallSpacing
+                    bottomMargin: units.smallSpacing
                 }
-                iconSource: widgetExplorer.extraActions[modelData].icon
-                text: widgetExplorer.extraActions[modelData].text
-                onClicked: {
-                    widgetExplorer.extraActions[modelData].trigger()
+
+                spacing: units.smallSpacing
+
+                Repeater {
+                    model: widgetExplorer.extraActions.length
+                    PlasmaComponents.Button {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        iconSource: widgetExplorer.extraActions[modelData].icon
+                        text: widgetExplorer.extraActions[modelData].text
+                        onClicked: {
+                            widgetExplorer.extraActions[modelData].trigger()
+                        }
+                    }
                 }
             }
-        }
-    }
 
+        }
+
+    }
     Component.onCompleted: {
         main.getWidgetsButton = getWidgetsButton
         main.categoryButton = categoryButton
