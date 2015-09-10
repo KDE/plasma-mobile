@@ -57,7 +57,7 @@ Item {
             width: parent.width
             height: parent.height
             radius: units.gridUnit
-            opacity: 0.8
+            opacity: 0.8 * (1-Math.abs(x)/width)
             PlasmaCore.IconItem {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, parent.height) / 2
