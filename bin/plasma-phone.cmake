@@ -39,8 +39,7 @@ init --user &
 # start mission control
 dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:org.freedesktop.Telepathy.MissionControl5 uint32:0
 
-sleep 5
-
-paplay /usr/share/sounds/sitter/brmm.ogg &
+sleep 1
+paplay /usr/share/sounds/sitter/ohits.ogg &
 
 exec /usr/bin/plasmashell -p org.kde.plasma.phone 2>/tmp/plasmashell_logs
