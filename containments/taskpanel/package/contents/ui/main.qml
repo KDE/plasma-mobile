@@ -18,6 +18,7 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.2
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -33,48 +34,76 @@ PlasmaCore.ColorScope {
     TaskSwitcher {
         id: taskSwitcher
     }
-    Rectangle {
+    MouseArea {
+        id: mainMouseArea
         anchors.fill: parent
-        color: root.backgroundColor
-
-        width: 600
-        height: 40
-
-        property Item toolBox
-
-        Button {
-            anchors.left: parent.left
-            height: parent.height
-            width: parent.width/3
-            iconSource: "applications-other"
-            onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
+        property int oldMouseY: 0
+        drag.filterChildren: true
+        onPressed: {
+            oldMouseY = mouse.y;
+            taskSwitcher.offset = -taskSwitcher.height
+        }
+        onPositionChanged: {
+            taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
+            oldMouseY = mouse.y;
+            if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit) {
+                taskSwitcher.visibility = Window.FullScreen;
+            }
+        }
+        onReleased: {
+            if (taskSwitcher.visibility == Window.Hidden) {
+                return;
+            }
+            if (taskSwitcher.offset > -taskSwitcher.height/2) {
+                taskSwitcher.show();
+            } else {
+                taskSwitcher.hide();
+            }
         }
 
-        Button {
-            id: showDesktopButton
-            height: parent.height
-            width: parent.width/3
-            anchors.horizontalCenter: parent.horizontalCenter
-            iconSource: "go-home"
-            checkable: true
-            onCheckedChanged: {print (checked)
-                plasmoid.nativeInterface.showDesktop = checked;
+        Rectangle {
+            anchors.fill: parent
+            color: root.backgroundColor
+
+            width: 600
+            height: 40
+
+            property Item toolBox
+
+            Button {
+                anchors.left: parent.left
+                height: parent.height
+                width: parent.width/3
+                iconSource: "applications-other"
+                onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
             }
-            Connections {
-                target: plasmoid.nativeInterface
-                onShowingDesktopChanged: {
-                    showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+
+            Button {
+                id: showDesktopButton
+                height: parent.height
+                width: parent.width/3
+                anchors.horizontalCenter: parent.horizontalCenter
+                iconSource: "go-home"
+                checkable: true
+                onCheckedChanged: {print (checked)
+                    plasmoid.nativeInterface.showDesktop = checked;
+                }
+                Connections {
+                    target: plasmoid.nativeInterface
+                    onShowingDesktopChanged: {
+                        showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+                    }
                 }
             }
-        }
 
-        Button {
-            height: parent.height
-            width: parent.width/3
-            anchors.right: parent.right
-            iconSource: "window-close"
-            enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
-            onClicked: plasmoid.nativeInterface.closeActiveWindow();
+            Button {
+                height: parent.height
+                width: parent.width/3
+                anchors.right: parent.right
+                iconSource: "window-close"
+                enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
+                onClicked: plasmoid.nativeInterface.closeActiveWindow();
+            }
         }
     }
 }

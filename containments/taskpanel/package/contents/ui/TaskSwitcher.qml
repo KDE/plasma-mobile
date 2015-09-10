@@ -56,6 +56,8 @@ FullScreenPanel {
         scrollAnim.running = true;
     }
 
+    onOffsetChanged: tasksView.contentY = offset
+
     SequentialAnimation {
         id: scrollAnim
         property alias to: internalAnim.to
