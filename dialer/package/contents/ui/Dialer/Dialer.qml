@@ -29,8 +29,6 @@ Item {
 
     property alias numberEntryText: status.text
 
-    property string providerId: ofonoWrapper.providerId
-
     function addNumber(number) {
         status.text = status.text + number
     }
@@ -81,10 +79,11 @@ Item {
                 addNumber(string);
             }
             pressedCallback: function (string) {
-                ofonoWrapper.startTone(string);
+                //TODO
+//                 ofonoWrapper.startTone(string);
             }
             releasedCallback: function (string) {
-                ofonoWrapper.stopTone();
+//                 ofonoWrapper.stopTone();
             }
         }
     }

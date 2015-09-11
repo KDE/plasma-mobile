@@ -30,8 +30,6 @@ Item {
 
     property string status: dialerUtils.callState
 
-    property string providerId: ofonoWrapper.providerId
-
     function secondsToTimeString(seconds) {
         var h = Math.floor(seconds / 3600);
         var m = Math.floor((seconds - (h * 3600)) / 60);
@@ -77,7 +75,8 @@ Item {
                     height: topFlickable.height
 
                     callback: function (string) {
-                        ofonoWrapper.sendToneToCall(string);
+                        //TODO
+//                         ofonoWrapper.sendToneToCall(string);
                     }
                 }
             }
@@ -133,9 +132,12 @@ Item {
             PlasmaComponents.ToolButton {
                 id: muteButton
                 flat: false
-                iconSource: ofonoWrapper.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high"
+                iconSource: "audio-volume-high"
+                //TODO
+//                 iconSource: ofonoWrapper.isMicrophoneMuted ? "audio-volume-muted" : "audio-volume-high"
                 onClicked: {
-                    ofonoWrapper.isMicrophoneMuted = !ofonoWrapper.isMicrophoneMuted;
+                    //TODO
+//                     ofonoWrapper.isMicrophoneMuted = !ofonoWrapper.isMicrophoneMuted;
                 }
             }
             PlasmaComponents.ToolButton {

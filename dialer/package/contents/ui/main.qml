@@ -34,8 +34,6 @@ ApplicationWindow {
 
     //keep track if we were visible when ringing
     property bool wasVisible
-    //support a single provider for now
-    property string providerId: ofonoWrapper.providerId
     //was the last call an incoming one?
     property bool isIncoming
 
@@ -61,10 +59,8 @@ ApplicationWindow {
     }
 
     onVisibleChanged: {
+        //TODO
         //reset missed calls if the status is not STATUS_INCOMING when got visible
-        if (visible && ofonoWrapper.status != "incoming") {
-            dialerUtils.resetMissedCalls();
-        }
     }
 //END SIGNAL HANDLERS
 
@@ -153,10 +149,6 @@ ApplicationWindow {
 //BEGIN MODELS
     ListModel {
         id: historyModel
-    }
-
-    OfonoWrapper {
-        id: ofonoWrapper
     }
 
 //END MODELS
