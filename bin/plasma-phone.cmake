@@ -42,4 +42,7 @@ dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/D
 sleep 1
 paplay /usr/share/sounds/sitter/ohits.ogg &
 
+# Start kscreen_backend_launcher manually so plasmashell can restart properly
+@CMAKE_INSTALL_FULL_LIBEXECDIR_KF5@/kscreen_backend_launcher --backend QScreen &
+
 exec /usr/bin/plasmashell -p org.kde.plasma.phone 2>/tmp/plasmashell_logs
