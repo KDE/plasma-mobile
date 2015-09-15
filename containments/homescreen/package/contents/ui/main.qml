@@ -170,7 +170,7 @@ Item {
             property bool animationsEnabled: true
             property Item applet
             z: applet && applet.compactRepresentationItem && applet.expanded ? 99 : 0
-            opacity: 1/Math.abs(x/(width/2))
+            opacity: 1 - Math.abs(x/(width/2))
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
 
@@ -257,6 +257,7 @@ Item {
         z: 999
     }
     MouseEventListener {
+        id: mainListener
         anchors.fill: parent
 
         //Events handling: those events are about clicking and reordering of app icons

@@ -81,7 +81,7 @@ Rectangle {
                 top: parent.top
                 topMargin: parent.margins.top
             }
-            PlasmaComponents.Button {
+            PlasmaComponents.ToolButton {
                 Layout.fillWidth: true
                 Layout.fillHeight:true
                 text: i18n("Wallpaper...")
@@ -90,7 +90,7 @@ Rectangle {
                     editOverlay.opacity = 0;
                 }
             }
-            PlasmaComponents.Button {
+            PlasmaComponents.ToolButton {
                 Layout.fillWidth: true
                 Layout.fillHeight:true
                 text: i18n("Add Widgets...")

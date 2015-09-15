@@ -36,6 +36,8 @@ MouseEventListener {
     property Item draggingApplet
     property int startMouseX
     property int startMouseY
+    property int oldMouseX
+    property int oldMouseY
 
     SequentialAnimation {
         id: removeAnim
@@ -56,6 +58,8 @@ MouseEventListener {
     onPressed: {
         startMouseX = mouse.screenX;
         startMouseY = mouse.screenY;
+        oldMouseX = mouse.screenX;
+        oldMouseY = mouse.screenY;
     }
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
@@ -82,13 +86,16 @@ MouseEventListener {
             return;
         }
 
+        applicationsView.interactive = false;
         if (Math.abs(mouse.screenX - startMouseX) > units.gridUnit ||
             Math.abs(mouse.screenY - startMouseY) > units.gridUnit) {
             editOverlay.opacity = 0;
         }
 
-        draggingApplet.y = mouse.y - draggingApplet.height/2;
-        draggingApplet.x = mouse.x - draggingApplet.width/2;
+        draggingApplet.x -= oldMouseX - mouse.screenX;
+        draggingApplet.y -= oldMouseY - mouse.screenY;
+        oldMouseX = mouse.screenX;
+        oldMouseY = mouse.screenY;
 
         var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
         var itemUnderMouse = appletsSpace.layout.childAt(pos.x, pos.y);
@@ -119,10 +126,9 @@ MouseEventListener {
             return;
         }
 
-        if (draggingApplet.x > -draggingApplet.width/4 && draggingApplet.x < draggingApplet.width/4) {
+        if (draggingApplet.x > -draggingApplet.width/3 && draggingApplet.x < draggingApplet.width/3) {
             draggingApplet.x = 0;
             root.layoutManager.insertBefore( dndSpacer, draggingApplet);
-            draggingApplet.animationsEnabled = true;
         } else {
             removeAnim.target = draggingApplet;
             removeAnim.to = (draggingApplet.x > 0) ? root.width : -root.width
@@ -178,13 +184,6 @@ MouseEventListener {
                 id: appletsLayout
                 width: parent.width
                 move: Transition {
-                    NumberAnimation {
-                        properties: "x,y"
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-                add: Transition {
                     NumberAnimation {
                         properties: "x,y"
                         duration: units.longDuration
