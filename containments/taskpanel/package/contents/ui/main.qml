@@ -31,9 +31,18 @@ PlasmaCore.ColorScope {
     height: 480
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-    TaskSwitcher {
-        id: taskSwitcher
+    
+    property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
+    Loader {
+        id: taskSwitcherLoader
     }
+    //FIXME: why it crashes on startup if TaskSwitcher is loaded immediately?
+    Timer {
+        running: true
+        interval: 200
+        onTriggered: taskSwitcherLoader.source = Qt.resolvedUrl("TaskSwitcher.qml")
+    }
+
     MouseArea {
         id: mainMouseArea
         anchors.fill: parent
