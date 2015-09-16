@@ -81,6 +81,11 @@ void TaskPanel::initWayland()
             );
             connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow);
             updateActiveWindow();
+
+            //if a new window is open, show it, not the desktop
+            connect(m_windowModel, &PlasmaWindowModel::rowsInserted, [this] () {
+                requestShowingDesktop(false);
+            });
         }
     );
     registry->setup();
