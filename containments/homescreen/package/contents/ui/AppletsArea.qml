@@ -39,6 +39,10 @@ MouseEventListener {
     property int oldMouseX
     property int oldMouseY
 
+    EventGenerator {
+        id: eventGenerator
+    }
+
     SequentialAnimation {
         id: removeAnim
         property Item target
@@ -67,6 +71,10 @@ MouseEventListener {
             editOverlay.visible = true;
             var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
             draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
+
+            eventGenerator.sendGrabEvent(draggingApplet, EventGenerator.UngrabMouse);
+            eventGenerator.sendGrabEvent(headerItem, EventGenerator.GrabMouse);
+            eventGenerator.sendMouseEvent(headerItem, EventGenerator.MouseButtonPress, mouse.x, mouse.y, Qt.LeftButton, Qt.LeftButton, 0)
 
             if (draggingApplet) {
                 draggingApplet.animationsEnabled = false;
