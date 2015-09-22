@@ -60,10 +60,6 @@ MouseEventListener {
     }
 
     onPressed: {
-        startMouseX = mouse.screenX;
-        startMouseY = mouse.screenY;
-        oldMouseX = mouse.screenX;
-        oldMouseY = mouse.screenY;
     }
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
@@ -71,6 +67,11 @@ MouseEventListener {
             editOverlay.visible = true;
             var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
             draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
+
+            startMouseX = mouse.screenX;
+            startMouseY = mouse.screenY;
+            oldMouseX = mouse.screenX;
+            oldMouseY = mouse.screenY;
 
             eventGenerator.sendGrabEvent(draggingApplet, EventGenerator.UngrabMouse);
             eventGenerator.sendGrabEvent(headerItem, EventGenerator.GrabMouse);
