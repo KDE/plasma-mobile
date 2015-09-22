@@ -193,7 +193,7 @@ PlasmaComponents.Page {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    leftMargin: units.gridUnit
+                    //leftMargin: units.gridUnit
                 }
                 clip: true
                 onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
