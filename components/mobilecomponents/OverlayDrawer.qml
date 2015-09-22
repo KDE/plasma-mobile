@@ -49,6 +49,7 @@ Properties:
 PlasmaComponents.Page {
     id: root
     anchors.fill: parent
+    visible: true
 
     default property alias page: mainPage.data
     property alias drawer: drawerPage.data
@@ -192,7 +193,7 @@ PlasmaComponents.Page {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    leftMargin: units.gridUnit * 2
+                    leftMargin: units.gridUnit
                 }
                 clip: true
                 onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage

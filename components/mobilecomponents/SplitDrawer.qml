@@ -51,6 +51,7 @@ PlasmaComponents.Page {
     anchors {
         fill: parent
     }
+    visible: true
 
     default property alias page: mainPage.data
     property alias drawer: drawerPage.data
