@@ -133,23 +133,16 @@ Rectangle {
                 }
                 
                 ColumnLayout {
-                    anchors.fill: parent
-                    GridLayout {
-                        id: topBar
-                        anchors {
-                            top: parent.top
-                            left: parent.left
-                            right: parent.right
-                            topMargin: 0
-                            leftMargin: units.smallSpacing
-                        }
-                        columns: 2
+                    anchors {
+                        fill: parent
+                        margins: units.smallSpacing
+                    }
+                    spacing: units.smallSpacing
 
-                        PlasmaExtras.Title {
-                            id: heading
-                            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
-                            Layout.fillWidth: true
-                        }
+                    PlasmaExtras.Title {
+                        id: heading
+                        text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
+                        Layout.fillWidth: true
 
                         PlasmaComponents.ToolButton {
                             id: closeButton
@@ -160,33 +153,26 @@ Rectangle {
                             iconSource: "window-close"
                             onClicked: removeAnim.running = true;
                         }
-
-                        PlasmaComponents.TextField {
-                            id: searchInput
-                            clearButtonShown: true
-                            placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
-                            onTextChanged: {
-                                list.positionViewAtBeginning()
-                                list.currentIndex = -1
-                                widgetExplorer.widgetsModel.searchTerm = text
-                            }
-
-                            Component.onCompleted: forceActiveFocus()
-                            Layout.columnSpan: 2
-                            Layout.fillWidth: true
-                        }
                     }
 
-                    PlasmaExtras.ScrollArea {
-                        anchors {
-                            top: topBar.bottom
-                            left: parent.left
-                            right: parent.right
-                            bottom: bottomBar.top
-                            topMargin: units.smallSpacing
-                            leftMargin: units.smallSpacing
-                            bottomMargin: units.smallSpacing
+                    PlasmaComponents.TextField {
+                        id: searchInput
+                        clearButtonShown: true
+                        placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
+                        onTextChanged: {
+                            list.positionViewAtBeginning()
+                            list.currentIndex = -1
+                            widgetExplorer.widgetsModel.searchTerm = text
                         }
+
+                        Component.onCompleted: forceActiveFocus()
+                        Layout.fillWidth: true
+                    }
+
+
+                    PlasmaExtras.ScrollArea {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
                         GridView {
                             id: list
 
