@@ -50,7 +50,7 @@ Item {
 
         Item {
             id: iconContainer
-            width: units.iconSizes.enormous
+            width: units.iconSizes.huge
             height: width
             anchors.horizontalCenter: parent.horizontalCenter
 
@@ -63,7 +63,7 @@ Item {
                     visible: model.screenshot == ""
                 }
                 Image {
-                    width: units.iconSizes.enormous
+                    width: units.iconSizes.huge
                     height: width
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit

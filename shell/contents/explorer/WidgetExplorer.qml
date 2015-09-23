@@ -209,7 +209,7 @@ Rectangle {
                             activeFocusOnTab: true
                             currentIndex: -1
                             keyNavigationWraps: true
-                            cellWidth: units.iconSizes.enormous + units.smallSpacing * 2
+                            cellWidth: units.iconSizes.huge + units.smallSpacing * 2
                             cellHeight: cellWidth + units.gridUnit * 4 + units.smallSpacing * 2
 
 
