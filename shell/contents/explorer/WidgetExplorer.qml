@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.2
+import QtGraphicalEffects 1.0
 import QtQuick.Controls 1.1
 
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -100,6 +101,34 @@ Rectangle {
                 }
             }
 
+            LinearGradient {
+                width: units.gridUnit/2
+                anchors {
+                    left: parent.right
+                    top: parent.top
+                    bottom: parent.bottom
+                    rightMargin: -1
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(units.gridUnit/2, 0)
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: Qt.rgba(0, 0, 0, 0.3)
+                    }
+                    GradientStop {
+                        position: 0.3
+                        color: Qt.rgba(0, 0, 0, 0.15)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: "transparent"
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
+                }
+            }
             
             WidgetExplorer {
                 id: widgetExplorer
