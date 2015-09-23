@@ -38,102 +38,100 @@ Rectangle {
 
     MouseArea {
         anchors.fill: parent
-        onClicked: removeAnim.running = true;
-    }
+        drag.filterChildren: true
+        drag.target: splitDrawer.open ? null : main
+        drag.axis: Drag.XAxis
+        drag.maximumX: 0
+        onReleased: {
+            if (main.x < -main.width/3) {
+                removeAnim.running = true;
+            } else {
+                openAnim.running = true;
+            }
+        }
 
-    NumberAnimation {
-        id: openAnim
-        running: true
-        target: main
-        properties: "x"
-        duration: units.longDuration
-        easing.type: Easing.InOutQuad
-        to: 0
-    }
-    SequentialAnimation {
-        id: removeAnim
         NumberAnimation {
+            id: openAnim
+            running: true
             target: main
             properties: "x"
             duration: units.longDuration
             easing.type: Easing.InOutQuad
-            to: -main.width
+            to: 0
         }
-        ScriptAction {
-            script: root.closed();
-        }
-    }
-    Rectangle {
-        id: main
-
-        x: -width
-        width: parent.width - parent.width/6
-        height: parent.height
-        color: theme.backgroundColor
-
-        opacity: 1 - Math.abs(x / (width/2))
-        property alias containment: widgetExplorer.containment
-
-        //external drop events can cause a raise event causing us to lose focus and
-        //therefore get deleted whilst we are still in a drag exec()
-        //this is a clue to the owning dialog that hideOnWindowDeactivate should be deleted
-        //See https://bugs.kde.org/show_bug.cgi?id=332733
-        property bool preventWindowHide: false
-
-        property Item getWidgetsButton
-        property Item categoryButton
-
-
-        function addCurrentApplet() {
-            var pluginName = list.currentItem ? list.currentItem.pluginName : ""
-            if (pluginName) {
-                widgetExplorer.addApplet(pluginName)
+        SequentialAnimation {
+            id: removeAnim
+            NumberAnimation {
+                target: main
+                properties: "x"
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+                to: -main.width
+            }
+            ScriptAction {
+                script: root.closed();
             }
         }
+        Rectangle {
+            id: main
 
-        
-        WidgetExplorer {
-            id: widgetExplorer
-            //view: desktop
-            onShouldClose: removeAnim.running = true;
-        }
-        MobileComponents.SplitDrawer {
-            visible: true
-            anchors.fill: parent
-            drawer: PlasmaExtras.ScrollArea {
-                
-                ListView {
-                    model: widgetExplorer.filterModel
-                    delegate: PlasmaComponents.ListItem {
-                        enabled: true
-                        visible: !model.separator
-                        height: model.separator ? 0 : implicitHeight
-                        PlasmaComponents.Label {
-                            text: model.display
-                        }
-                        onClicked: {
-                            list.contentX = 0
-                            list.contentY = 0
-                            heading.text = model.display
-                            widgetExplorer.widgetsModel.filterQuery = model.filterData
-                            widgetExplorer.widgetsModel.filterType = model.filterType
-                        }
-                    }
+            x: -width
+            width: parent.width - parent.width/6
+            height: parent.height
+            color: theme.backgroundColor
+
+            opacity: 1 - Math.abs(x / (width/2))
+            property alias containment: widgetExplorer.containment
+
+            //external drop events can cause a raise event causing us to lose focus and
+            //therefore get deleted whilst we are still in a drag exec()
+            //this is a clue to the owning dialog that hideOnWindowDeactivate should be deleted
+            //See https://bugs.kde.org/show_bug.cgi?id=332733
+            property bool preventWindowHide: false
+
+            property Item getWidgetsButton
+            property Item categoryButton
+
+
+            function addCurrentApplet() {
+                var pluginName = list.currentItem ? list.currentItem.pluginName : ""
+                if (pluginName) {
+                    widgetExplorer.addApplet(pluginName)
                 }
             }
-            MouseArea {
+
+            
+            WidgetExplorer {
+                id: widgetExplorer
+                //view: desktop
+                onShouldClose: removeAnim.running = true;
+            }
+            MobileComponents.SplitDrawer {
+                id: splitDrawer
+                visible: true
                 anchors.fill: parent
-                drag.filterChildren: true
-                drag.target: main
-                drag.axis: Drag.XAxis
-                drag.maximumX: 0
-                onReleased: {
-                    if (main.x < -main.width/2) {
-                        removeAnim.running = true;
-                    } else {
-                        openAnim.running = true;
+                drawer: PlasmaExtras.ScrollArea {
+                    
+                    ListView {
+                        model: widgetExplorer.filterModel
+                        delegate: PlasmaComponents.ListItem {
+                            enabled: true
+                            visible: !model.separator
+                            height: model.separator ? 0 : implicitHeight
+                            PlasmaComponents.Label {
+                                text: model.display
+                            }
+                            onClicked: {
+                                list.contentX = 0
+                                list.contentY = 0
+                                heading.text = model.display
+                                widgetExplorer.widgetsModel.filterQuery = model.filterData
+                                widgetExplorer.widgetsModel.filterType = model.filterType
+                            }
+                        }
                     }
                 }
+                
                 ColumnLayout {
                     anchors.fill: parent
                     GridLayout {
@@ -267,14 +265,12 @@ Rectangle {
                     }
 
                 }
-            
-            }
 
-        }
-        Component.onCompleted: {
-            main.getWidgetsButton = getWidgetsButton
-            main.categoryButton = categoryButton
+            }
+            Component.onCompleted: {
+                main.getWidgetsButton = getWidgetsButton
+                main.categoryButton = categoryButton
+            }
         }
     }
 }
-
