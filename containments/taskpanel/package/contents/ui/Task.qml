@@ -33,6 +33,20 @@ Item {
             fill: parent
             margins: units.gridUnit
         }
+        PlasmaComponents.ToolButton {
+            z: 99
+            iconSource: "window-close"
+            flat: false
+            anchors {
+                top: parent.top
+                right: parent.right
+                margins: -units.gridUnit/2
+            }
+            onClicked: {
+                slideAnim.to = -background.width*2;
+                slideAnim.running = true;
+            }
+        }
         SequentialAnimation {
             id: slideAnim
             property alias to: internalSlideAnim.to
