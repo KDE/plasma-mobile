@@ -32,6 +32,7 @@ Rectangle {
     id: editOverlay
     anchors.fill: parent
 
+    property Item applet
     color: Qt.rgba(0, 0, 0, 0.8)
     visible: false
     onVisibleChanged: {
@@ -61,6 +62,31 @@ Rectangle {
         anchors.fill: parent
         preventStealing: true
         onClicked: editOverlay.opacity = 0;
+        Row {
+            visible: editOverlay.applet
+            anchors.horizontalCenter: parent.horizontalCenter
+            y: parent.mapFromItem(editOverlay.applet, 0, 0).y + units.gridUnit * 3
+            PlasmaComponents.ToolButton {
+                iconSource: "configure"
+                flat: false
+                onClicked: {
+                    editOverlay.applet.applet.action("configure").trigger();
+                    editOverlay.opacity = 0;
+                }
+            }
+            Item {
+                width: units.gridUnit * 10
+                height: 1
+            }
+            PlasmaComponents.ToolButton {
+                iconSource: "window-close"
+                flat: false
+                onClicked: {
+                    editOverlay.applet.applet.action("remove").trigger();
+                    editOverlay.opacity = 0;
+                }
+            }
+        }
     }
     PlasmaCore.FrameSvgItem {
         id: background

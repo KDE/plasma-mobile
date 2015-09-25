@@ -17,6 +17,7 @@
  */
 
 import QtQuick 2.0
+import QtGraphicalEffects 1.0
 import QtQuick.Dialogs 1.1
 import QtQuick.Controls 1.0 as QtControls
 import QtQuick.Layouts 1.0
@@ -42,11 +43,6 @@ Rectangle {
 
     ConfigModel {
         id: globalAppletConfigModel
-        ConfigCategory {
-            name: i18nd("plasma_shell_org.kde.plasma.desktop", "Keyboard shortcuts")
-            icon: "preferences-desktop-keyboard"
-            source: "ConfigurationShortcuts.qml"
-        }
     }
 //END model
 
@@ -361,6 +357,34 @@ Rectangle {
                     id: cancelAction
                     onTriggered: configDialog.close();
                     shortcut: "Escape"
+                }
+            }
+            LinearGradient {
+                width: units.gridUnit/2
+                anchors {
+                    right: parent.left
+                    top: parent.top
+                    bottom: parent.bottom
+                    rightMargin: -1
+                }
+                start: Qt.point(0, 0)
+                end: Qt.point(units.gridUnit/2, 0)
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: "transparent"
+                    }
+                    GradientStop {
+                        position: 0.7
+                        color: Qt.rgba(0, 0, 0, 0.15)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: Qt.rgba(0, 0, 0, 0.3)
+                    }
+                }
+                MouseArea {
+                    anchors.fill: parent
                 }
             }
         }

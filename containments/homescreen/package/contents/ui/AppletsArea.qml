@@ -67,6 +67,7 @@ MouseEventListener {
             editOverlay.visible = true;
             var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
             draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
+            editOverlay.applet = draggingApplet;
 
             startMouseX = mouse.screenX;
             startMouseY = mouse.screenY;
