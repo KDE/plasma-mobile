@@ -34,7 +34,7 @@ import org.kde.plasma.private.shell 2.0
 
 Rectangle {
     id: root
-    color: Qt.rgba(0, 0, 0, main.opacity * 0.8)
+    color: Qt.rgba(0, 0, 0, (1 - Math.abs(main.x / (main.width/2))) * 0.8)
     signal closed()
 
     MouseArea {
@@ -48,6 +48,11 @@ Rectangle {
                 removeAnim.running = true;
             } else {
                 openAnim.running = true;
+            }
+        }
+        onClicked: {
+            if (mouse.x > main.width) {
+                removeAnim.running = true;
             }
         }
 
@@ -81,7 +86,6 @@ Rectangle {
             height: parent.height
             color: theme.backgroundColor
 
-            opacity: 1 - Math.abs(x / (width/2))
             property alias containment: widgetExplorer.containment
 
             //external drop events can cause a raise event causing us to lose focus and
