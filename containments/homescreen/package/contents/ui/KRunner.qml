@@ -97,9 +97,10 @@ Rectangle {
                 Layout.preferredHeight: listView.contentHeight
                 Layout.alignment: Qt.AlignTop
 
-                Milou.ResultsView {
+                Milou.ResultsListView {
                     id: listView
                     queryString: queryField.text
+                    highlight: null
 
                     onActivated: queryField.text = ""
                     onUpdateQueryString: {
