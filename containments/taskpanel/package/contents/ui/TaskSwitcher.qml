@@ -131,7 +131,7 @@ FullScreenPanel {
 
         PlasmaCore.SortFilterModel {
             id: filteredWindowModel
-            filterRole: "SkipsTaskbar"
+            filterRole: "SkipTaskbar"
             filterRegExp: "false"
             sourceModel: plasmoid.nativeInterface.windowModel
         }
