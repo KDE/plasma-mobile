@@ -62,24 +62,24 @@ Rectangle {
         anchors.fill: parent
         preventStealing: true
         onClicked: editOverlay.opacity = 0;
-        Row {
+        PlasmaComponents.ButtonRow {
             visible: editOverlay.applet
+            spacing: 0
+            exclusive: false
             anchors.horizontalCenter: parent.horizontalCenter
-            y: parent.mapFromItem(editOverlay.applet, 0, 0).y + units.gridUnit * 3
+            y: editOverlay.mapFromItem(editOverlay.applet.parent, 0, editOverlay.applet.y).y + editOverlay.applet.height/2 - height/2
             PlasmaComponents.ToolButton {
                 iconSource: "configure"
+                text: i18n("Configure..")
                 flat: false
                 onClicked: {
                     editOverlay.applet.applet.action("configure").trigger();
                     editOverlay.opacity = 0;
                 }
             }
-            Item {
-                width: units.gridUnit * 10
-                height: 1
-            }
             PlasmaComponents.ToolButton {
                 iconSource: "window-close"
+                text: i18n("Remove")
                 flat: false
                 onClicked: {
                     editOverlay.applet.applet.action("remove").trigger();
