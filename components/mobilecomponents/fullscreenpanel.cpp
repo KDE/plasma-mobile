@@ -35,6 +35,7 @@ FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
     : QQuickWindow(parent)
 {
     setFlags(Qt::FramelessWindowHint);
+    setWindowState(Qt::WindowFullScreen);
 }
 
 FullScreenPanel::~FullScreenPanel()
@@ -43,7 +44,6 @@ FullScreenPanel::~FullScreenPanel()
 
 void FullScreenPanel::showEvent(QShowEvent *event)
 {
-    setVisibility(QWindow::FullScreen);
     QQuickWindow::showEvent(event);
     KWindowSystem::setState(winId(), NET::SkipTaskbar);
 }
