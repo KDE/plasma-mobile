@@ -45,6 +45,7 @@ void FullScreenPanel::showEvent(QShowEvent *event)
 {
     setVisibility(QWindow::FullScreen);
     QQuickWindow::showEvent(event);
+    KWindowSystem::setState(winId(), NET::SkipTaskbar);
 }
 
 
