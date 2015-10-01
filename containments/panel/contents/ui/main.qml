@@ -202,7 +202,7 @@ PlasmaCore.ColorScope {
         anchors.fill: parent
         onPressed: {
             oldMouseY = mouse.y;
-            slidingPanel.visibility = Qt.WindowFullScreen;
+            slidingPanel.visible = true;
         }
         onPositionChanged: {
             //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
