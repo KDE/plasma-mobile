@@ -31,7 +31,7 @@ Rectangle {
     Layout.minimumHeight: units.gridUnit * 20
 
 //BEGIN properties
-    color: Qt.rgba(0, 0, 0, 1 - panel.x/width)
+    color: Qt.rgba(0, 0, 0, (1 - Math.abs(panel.x / (panel.width/2))) * 0.8)
     width: units.gridUnit * 40
     height: units.gridUnit * 30
 
@@ -118,7 +118,7 @@ Rectangle {
         properties: "x"
         duration: units.longDuration
         easing.type: Easing.InOutQuad
-        to: root.width/6
+        to: 0
     }
     SequentialAnimation {
         id: closeAnim
@@ -127,7 +127,7 @@ Rectangle {
             properties: "x"
             duration: units.longDuration
             easing.type: Easing.InOutQuad
-            to: root.width
+            to: -panel.width
         }
         ScriptAction {
             script: cancelAction.trigger();
@@ -164,24 +164,23 @@ Rectangle {
         drag.filterChildren: true
         drag.target: panel
         drag.axis: Drag.XAxis
-        drag.maximumX: width
-        drag.minimumX: width/6
+        drag.maximumX: 0
         onReleased: {
-            if (panel.x > root.width/2) {
+            if (panel.x < -panel.width/3) {
                 closeAnim.running = true;
             } else {
                 openAnim.running = true;
             }
         }
         onClicked: {
-            if (mouse.x < width / 6) {
+            if (mouse.x > main.width) {
                 closeAnim.running = true;
             }
         }
         Rectangle {
             id: panel
-            width: root.width - root.width/6
-            x: root.width
+            x: -width
+            width: parent.width - parent.width/6
             height: root.height
             color: syspal.window
             ColumnLayout {
@@ -362,7 +361,7 @@ Rectangle {
             LinearGradient {
                 width: units.gridUnit/2
                 anchors {
-                    right: parent.left
+                    left: parent.right
                     top: parent.top
                     bottom: parent.bottom
                     rightMargin: -1
@@ -372,19 +371,16 @@ Rectangle {
                 gradient: Gradient {
                     GradientStop {
                         position: 0.0
-                        color: "transparent"
+                        color: Qt.rgba(0, 0, 0, 0.3)
                     }
                     GradientStop {
-                        position: 0.7
+                        position: 0.3
                         color: Qt.rgba(0, 0, 0, 0.15)
                     }
                     GradientStop {
                         position: 1.0
-                        color: Qt.rgba(0, 0, 0, 0.3)
+                        color: "transparent"
                     }
-                }
-                MouseArea {
-                    anchors.fill: parent
                 }
             }
         }

@@ -129,9 +129,6 @@ Rectangle {
                         color: "transparent"
                     }
                 }
-                MouseArea {
-                    anchors.fill: parent
-                }
             }
             
             WidgetExplorer {
