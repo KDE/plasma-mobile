@@ -26,11 +26,6 @@
 
 #include <kwindowsystem.h>
 
-#include <KWayland/Client/plasmashell.h>
-#include <KWayland/Client/connection_thread.h>
-#include <KWayland/Client/surface.h>
-#include <KWayland/Client/registry.h>
-
 FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
     : QQuickWindow(parent)
 {

@@ -21,15 +21,6 @@
 
 #include <QQuickWindow>
 
-namespace KWayland
-{
-    namespace Client
-    {
-        class PlasmaShell;
-        class PlasmaShellSurface;
-    }
-}
-
 class FullScreenPanel : public QQuickWindow
 {
     Q_OBJECT
