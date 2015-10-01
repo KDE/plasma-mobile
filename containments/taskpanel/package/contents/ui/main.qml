@@ -83,6 +83,7 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
+                enabled: taskSwitcher.tasksCount > 0
                 iconSource: "applications-other"
                 onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
             }

@@ -32,12 +32,16 @@ FullScreenPanel {
     height: Screen.height
     property int offset: 0
     property int overShoot: units.gridUnit * 2
+    property int tasksCount: filteredWindowModel.count
 
     color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
         ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
 
     function show() {
+        if (filteredWindowModel.count == 0) {
+            return;
+        }
         if (!visible) {
             tasksView.contentY = -tasksView.headerItem.height;
         }
