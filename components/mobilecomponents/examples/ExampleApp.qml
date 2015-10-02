@@ -23,6 +23,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 SimpleApp {
     id: root
@@ -65,29 +66,42 @@ SimpleApp {
     }
 
     globalDrawer: PlasmaExtras.ScrollArea {
+        implicitWidth: units.gridUnit * 12
         ListView {
             id: optionMenu
             model: 5
-            verticalLayoutDirection: ListView.BottomToTop
+            //verticalLayoutDirection: ListView.BottomToTop
 
+            header: Row {
+                anchors {
+                    left: parent.left
+                    margins: units.largeSpacing
+                }
+                PlasmaCore.IconItem {
+                    height: parent.height
+                    width: height
+                    source: "akregator"
+                }
+                PlasmaExtras.Heading {
+                    level: 1
+                    text: "Akregator"
+                }
+            }
             delegate: PlasmaComponents.ListItem {
                 PlasmaComponents.Label {
+                    anchors {
+                        left: parent.left
+                        margins: units.largeSpacing
+                    }
                     enabled: true
                     text: "Option " + modelData
                 }
             }
         }
     }
-    contextDrawer: PlasmaExtras.ScrollArea {
-        ListView {
-            model: 6
-            delegate: PlasmaComponents.ListItem {
-                PlasmaComponents.Label {
-                    enabled: true
-                    text: "Menu Item " + modelData
-                }
-            }
-        }
+    contextDrawer: ContextMenu {
+        model: 6
+        title: "Article"
     }
 
     //Main app content
