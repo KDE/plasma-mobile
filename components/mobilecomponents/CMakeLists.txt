@@ -13,12 +13,9 @@ target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(FILES Rating.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES IconGrid.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
-install(FILES ResourceDelegate.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES OverlayDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 install(FILES SplitDrawer.qml DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
 install(FILES qmldir DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
 
-install(DIRECTORY resourcedelegates DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mobilecomponents)
