@@ -46,7 +46,7 @@ Properties:
         Item drawer:
         It's the part that can be pulled in and out, will act as a sidebar.
 **/
-PlasmaComponents.Page {
+Item {
     id: root
     anchors.fill: parent
     visible: true
@@ -69,19 +69,38 @@ PlasmaComponents.Page {
     }
 
     MouseArea {
+        anchors {
+            right: parent.right
+            top: parent.top
+            bottom: parent.bottom
+        }
+        z: 99
+        width: units.smallSpacing
+        onPressed: {
+            mouseEventListener.managePressed(mouse)
+        }
+        onPositionChanged: {
+            mouseEventListener.positionChanged(mouse)
+        }
+        onReleased: {
+            var pos = mapToItem(mouseEventListener, mouse.x, mouse.y);
+            mouseEventListener.released(mouse)
+        }
+    }
+    MouseArea {
         id: mouseEventListener
         anchors.fill: parent
         drag.filterChildren: true
         property int startBrowserFrameX
         property int startMouseX
         property real oldMouseX
-        property bool toggle: false
         property bool startDragging: false
         property string startState
+        enabled: browserFrame.state != "Closed"
 
-        onPressed: {
-            if (drawerPage.children.length == 0 ||
-                (mouse.x < width - units.gridUnit && browserFrame.state == "Closed")) {
+        onPressed: managePressed(mouse)
+        function managePressed(mouse) {
+            if (drawerPage.children.length == 0) {
                 mouse.accepted = false;
                 return;
             }
@@ -89,7 +108,6 @@ PlasmaComponents.Page {
             mouse.accepted = true;
             startBrowserFrameX = browserFrame.x;
             oldMouseX = startMouseX = mouse.x;
-            toggle = mouse.x < browserFrame.x || (mouse.x > width - units.gridUnit);
             startDragging = false;
             startState = browserFrame.state;
             browserFrame.state = "Dragging";
@@ -102,9 +120,6 @@ PlasmaComponents.Page {
                 return;
             }
 
-            if (mouse.x > browserFrame.x && Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
-                toggle = false;
-            }
             if (mouse.x < units.gridUnit ||
                 Math.abs(mouse.x - startMouseX) > root.width / 5) {
                 startDragging = true;
@@ -120,11 +135,27 @@ PlasmaComponents.Page {
                 mouse.accepted = false;
                 return;
             }
-            //If one condition for toggle is satisfied toggle, otherwise do an animation that resets the original position
-            if (toggle || Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
-                browserFrame.state = startState == "Open" ? "Closed" : "Open"
+
+            if (mouse.x > width - units.gridUnit) {
+                browserFrame.state = "Closed";
+            } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+                browserFrame.state = "Closed";
+            } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+                browserFrame.state = "Open";
             } else {
                 browserFrame.state = startState
+            }
+        }
+        onCanceled: {
+            if (oldMouseX > width - units.gridUnit) {
+                browserFrame.state = "Closed";
+            } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
+                browserFrame.state = startState == "Open" ? "Closed" : "Open";
+            }
+        }
+        onClicked: {
+            if (mouse.x < browserFrame.x) {
+                browserFrame.state = startState == "Open" ? "Closed" : "Open";
             }
         }
         Rectangle {
@@ -183,13 +214,10 @@ PlasmaComponents.Page {
                         color: Qt.rgba(0, 0, 0, 0.3)
                     }
                 }
-                MouseArea {
-                    anchors.fill: parent
-                }
             }
 
 
-            Item {
+            MouseArea {
                 id: drawerPage
                 anchors {
                     fill: parent

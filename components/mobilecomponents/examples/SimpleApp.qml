@@ -1,5 +1,5 @@
 /*
- *   Copyright 2015 Marco Martin <mart@kde.org>
+ *   Copycontext 2015 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -25,19 +25,20 @@ import org.kde.kquickcontrolsaddons 2.0
 ApplicationWindow {
     id: root
 
-    default property alias page: overlay.page
-    property alias leftDrawer: split.drawer
-    property alias rightDrawer: overlay.drawer
+    default property alias page: split.page
+    property alias globalDrawer: split.drawer
+    property alias contextDrawer: overlay.drawer
 
-    property alias leftDrawerOpen: split.open
-    property alias rightDrawerOpen: overlay.open
+    property alias globalDrawerOpen: split.open
+    property alias contextDrawerOpen: overlay.open
     MobileComponents.SplitDrawer {
         id: split
         visible: true
         anchors.fill: parent
-        MobileComponents.OverlayDrawer {
+        
+    }
+    MobileComponents.OverlayDrawer {
             id: overlay
             visible: true
         }
-    }
 }

@@ -1,5 +1,5 @@
 /*
- *   Copyright 2015 Marco Martin <mart@kde.org>
+ *   Copycontext 2015 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -30,11 +30,11 @@ SimpleApp {
     height: 800
 
 
-    onLeftDrawerOpenChanged: {
-        configureButton.checked = leftDrawerOpen;
+    onGlobalDrawerOpenChanged: {
+        configureButton.checked = globalDrawerOpen;
     }
-    onRightDrawerOpenChanged: {
-        menuButton.checked = rightDrawerOpen;
+    onContextDrawerOpenChanged: {
+        menuButton.checked = contextDrawerOpen;
     }
     statusBar: PlasmaComponents.ToolBar {
         tools: PlasmaComponents.ToolBarLayout {
@@ -44,9 +44,9 @@ SimpleApp {
                 iconSource: "configure"
                 checkable: true
                 onCheckedChanged: {
-                    leftDrawerOpen = checked
+                    globalDrawerOpen = checked
                     if (checked) {
-                        rightDrawerOpen = false;
+                        contextDrawerOpen = false;
                     }
                 }
             }
@@ -55,16 +55,16 @@ SimpleApp {
                 iconSource: "applications-other"
                 checkable: true
                 onCheckedChanged: {
-                    rightDrawerOpen = checked
+                    contextDrawerOpen = checked
                     if (checked) {
-                        leftDrawerOpen = false;
+                        globalDrawerOpen = false;
                     }
                 }
             }
         }
     }
 
-    leftDrawer: PlasmaExtras.ScrollArea {
+    globalDrawer: PlasmaExtras.ScrollArea {
         ListView {
             id: optionMenu
             model: 5
@@ -78,9 +78,9 @@ SimpleApp {
             }
         }
     }
-    rightDrawer: PlasmaExtras.ScrollArea {
+    contextDrawer: PlasmaExtras.ScrollArea {
         ListView {
-            model: 20
+            model: 6
             delegate: PlasmaComponents.ListItem {
                 PlasmaComponents.Label {
                     enabled: true
