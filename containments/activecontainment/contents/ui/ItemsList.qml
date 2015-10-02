@@ -66,7 +66,7 @@ Item {
                 prefix: "selected+hover"
         }
 
-        delegate: MobileComponents.ResourceDelegate {
+        delegate: ResourceDelegate {
                 id: resourceDelegate
                 width: main.iconWidth
                 height: main.iconHeight

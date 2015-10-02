@@ -167,7 +167,7 @@ Item {
 
                 Repeater {
                     model: Math.min(4, dragArea.labels.length)
-                    MobileComponents.ResourceDelegate {
+                    ResourceDelegate {
                         resourceType: dragArea.mimeTypes[index]
                         property string label: dragArea.labels.length == 1 ? dragArea.labels[index] : ""
                         property variant thumbnail: dragArea.thumbnails[index]
@@ -264,7 +264,7 @@ Item {
                             target: selectedModel
                             onModelCleared: highlightFrame.opacity = 0
                         }
-                        MobileComponents.ResourceDelegate {
+                        ResourceDelegate {
                             anchors.fill: parent
                             resourceType: {
                                 if (fileBrowserRoot.model.sourceModel.query  !== undefined) {

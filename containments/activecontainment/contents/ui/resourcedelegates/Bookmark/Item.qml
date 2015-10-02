@@ -107,7 +107,7 @@ Item {
         anchors.margins: 4
     }
 
-    MobileComponents.Rating {
+    Rating {
         //color: "green"
         id: ratingItem
         score: rating
