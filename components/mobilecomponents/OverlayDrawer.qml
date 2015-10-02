@@ -49,12 +49,11 @@ Properties:
 Item {
     id: root
     anchors.fill: parent
-    visible: true
 
     default property alias page: mainPage.data
     property alias drawer: drawerPage.data
     property alias open: browserFrame.open
-
+    property bool inverse: false
 
     Item {
         id: mainPage
@@ -65,27 +64,23 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "black"
-        opacity: 0.6 * (1 - browserFrame.x / root.width)
+        opacity: 0.6 * (root.inverse
+            ? ((browserFrame.x + browserFrame.width) / browserFrame.width)
+            : (1 - browserFrame.x / root.width))
     }
 
     MouseArea {
         anchors {
-            right: parent.right
+            right: root.inverse ? undefined : parent.right
+            left: root.inverse ? parent.left : undefined
             top: parent.top
             bottom: parent.bottom
         }
         z: 99
         width: units.smallSpacing
-        onPressed: {
-            mouseEventListener.managePressed(mouse)
-        }
-        onPositionChanged: {
-            mouseEventListener.positionChanged(mouse)
-        }
-        onReleased: {
-            var pos = mapToItem(mouseEventListener, mouse.x, mouse.y);
-            mouseEventListener.released(mouse)
-        }
+        onPressed: mouseEventListener.managePressed(mouse)
+        onPositionChanged: mouseEventListener.positionChanged(mouse)
+        onReleased: mouseEventListener.released(mouse)
     }
     MouseArea {
         id: mouseEventListener
@@ -125,7 +120,9 @@ Item {
                 startDragging = true;
             }
             if (startDragging) {
-                browserFrame.x = Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
+                browserFrame.x = root.inverse
+                    ? Math.min(0, browserFrame.x + mouse.x - oldMouseX)
+                    : Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
             }
             oldMouseX = mouse.x;
         }
@@ -136,14 +133,27 @@ Item {
                 return;
             }
 
-            if (mouse.x > width - units.gridUnit) {
-                browserFrame.state = "Closed";
-            } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
-                browserFrame.state = "Closed";
-            } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
-                browserFrame.state = "Open";
+            if (root.inverse) {
+                if (mouse.x < units.gridUnit) {
+                    browserFrame.state = "Closed";
+                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+                    browserFrame.state = "Open";
+                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+                    browserFrame.state = "Closed";
+                } else {
+                    browserFrame.state = startState
+                }
+
             } else {
-                browserFrame.state = startState
+                if (mouse.x > width - units.gridUnit) {
+                    browserFrame.state = "Closed";
+                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+                    browserFrame.state = "Closed";
+                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+                    browserFrame.state = "Open";
+                } else {
+                    browserFrame.state = startState;
+                }
             }
         }
         onCanceled: {
@@ -154,7 +164,11 @@ Item {
             }
         }
         onClicked: {
-            if (mouse.x < browserFrame.x) {
+            if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
+                return;
+            }
+            if ((root.inverse && mouse.x > browserFrame.width) ||
+                (!root.inverse && mouse.x < browserFrame.x)) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
             }
         }
@@ -193,25 +207,33 @@ Item {
             LinearGradient {
                 width: units.gridUnit/2
                 anchors {
-                    right: parent.left
+                    right: root.inverse ? undefined : parent.left
+                    left: root.inverse ? parent.right : undefined
                     top: parent.top
                     bottom: parent.bottom
                     rightMargin: -1
                 }
+                opacity: browserFrame.state == "Closed" ? 0 : 1
                 start: Qt.point(0, 0)
                 end: Qt.point(units.gridUnit/2, 0)
                 gradient: Gradient {
                     GradientStop {
                         position: 0.0
-                        color: "transparent"
+                        color: root.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
                     }
                     GradientStop {
-                        position: 0.7
+                        position: root.inverse ? 0.3 : 0.7
                         color: Qt.rgba(0, 0, 0, 0.15)
                     }
                     GradientStop {
                         position: 1.0
-                        color: Qt.rgba(0, 0, 0, 0.3)
+                        color: root.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
+                    }
+                }
+                Behavior on opacity {
+                    NumberAnimation {
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
                     }
                 }
             }
@@ -232,7 +254,7 @@ Item {
                     name: "Open"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.width - browserFrame.width
+                        x: root.inverse ? 0 : root.width - browserFrame.width
                     }
 
                 },
@@ -249,7 +271,7 @@ Item {
                     name: "Closed"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.width
+                        x: root.inverse ? -browserFrame.width : root.width
                     }
                 }
             ]

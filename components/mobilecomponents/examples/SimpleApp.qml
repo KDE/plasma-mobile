@@ -25,20 +25,24 @@ import org.kde.kquickcontrolsaddons 2.0
 ApplicationWindow {
     id: root
 
-    default property alias page: split.page
-    property alias globalDrawer: split.drawer
-    property alias contextDrawer: overlay.drawer
+    default property alias page: main.data
+    property alias globalDrawer: global.drawer
+    property alias contextDrawer: context.drawer
 
-    property alias globalDrawerOpen: split.open
-    property alias contextDrawerOpen: overlay.open
-    MobileComponents.SplitDrawer {
-        id: split
-        visible: true
+    property alias globalDrawerOpen: global.open
+    property alias contextDrawerOpen: context.open
+
+    Item {
+        id: main
         anchors.fill: parent
-        
+        onChildrenChanged: main.children[0].anchors.fill = main
     }
     MobileComponents.OverlayDrawer {
-            id: overlay
-            visible: true
-        }
+        id: global
+        inverse: true
+    }
+    MobileComponents.OverlayDrawer {
+        id: context
+        visible: true
+    }
 }
