@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.3
+import QtQuick.Controls 1.4
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -30,40 +30,9 @@ SimpleApp {
     width: 500
     height: 800
 
-
-    onGlobalDrawerOpenChanged: {
-        configureButton.checked = globalDrawerOpen;
-    }
-    onContextDrawerOpenChanged: {
-        menuButton.checked = contextDrawerOpen;
-    }
-    statusBar: PlasmaComponents.ToolBar {
-        tools: PlasmaComponents.ToolBarLayout {
-            //TODO: those buttons should support drag to open the menus as well
-            PlasmaComponents.ToolButton {
-                id: configureButton
-                iconSource: "configure"
-                checkable: true
-                onCheckedChanged: {
-                    globalDrawerOpen = checked
-                    if (checked) {
-                        contextDrawerOpen = false;
-                    }
-                }
-            }
-            PlasmaComponents.ToolButton {
-                id: menuButton
-                iconSource: "applications-other"
-                checkable: true
-                onCheckedChanged: {
-                    contextDrawerOpen = checked
-                    if (checked) {
-                        globalDrawerOpen = false;
-                    }
-                }
-            }
-        }
-    }
+    contextualActions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
+    [Action {text:"AAA"; onTriggered: print("AAA")}, Action {text:"bbb"}]
+    contextualActionsTitle: "Actions"
 
     globalDrawer: PlasmaExtras.ScrollArea {
         implicitWidth: units.gridUnit * 12
@@ -99,10 +68,7 @@ SimpleApp {
             }
         }
     }
-    contextDrawer: ContextMenu {
-        model: 6
-        title: "Article"
-    }
+
 
     //Main app content
     PlasmaExtras.ScrollArea {

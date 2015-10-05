@@ -19,6 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.3
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -32,6 +33,49 @@ ApplicationWindow {
     property alias globalDrawerOpen: global.open
     property alias contextDrawerOpen: context.open
 
+    //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
+    property alias contextualActions: internalActions.data
+    property string contextualActionsTitle
+
+    statusBar: PlasmaComponents.ToolBar {
+        tools: PlasmaComponents.ToolBarLayout {
+            //TODO: those buttons should support drag to open the menus as well
+            PlasmaComponents.ToolButton {
+                id: configureButton
+                iconSource: "configure"
+                checkable: true
+                onCheckedChanged: {
+                    globalDrawerOpen = checked
+                    if (checked) {
+                        contextDrawerOpen = false;
+                    }
+                }
+            }
+            PlasmaComponents.ToolButton {
+                id: menuButton
+                iconSource: "applications-other"
+                checkable: true
+                onCheckedChanged: {
+                    contextDrawerOpen = checked
+                    if (checked) {
+                        globalDrawerOpen = false;
+                    }
+                }
+            }
+        }
+    }
+
+    onGlobalDrawerOpenChanged: {
+        configureButton.checked = globalDrawerOpen;
+    }
+    onContextDrawerOpenChanged: {
+        menuButton.checked = contextDrawerOpen;
+    }
+
+    Item {
+        id: internalActions
+    }
+
     Item {
         id: main
         anchors.fill: parent
@@ -44,5 +88,9 @@ ApplicationWindow {
     MobileComponents.OverlayDrawer {
         id: context
         visible: true
+        drawer: ContextDrawerContents {
+            actions: root.contextualActions
+            title: root.contextualActionsTitle
+        }
     }
 }

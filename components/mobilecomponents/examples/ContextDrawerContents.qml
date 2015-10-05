@@ -27,10 +27,21 @@ import org.kde.kquickcontrolsaddons  2.0
 
 QtControls.ScrollView {
     id: root
-    property alias model: menu.model
+    property var actions
     property string title
+
     ListView {
         id: menu
+        model: {
+            if (root.actions.length == 0) {
+                return null;
+            } else {
+                return root.actions[0].text !== undefined &&
+                    root.actions[0].trigger !== undefined ?
+                        root.actions :
+                        root.actions[0];
+            }
+        }
         header: Item {
             height: heading.height
             PlasmaExtras.Heading {
@@ -44,6 +55,7 @@ QtControls.ScrollView {
             }
         }
         delegate: PlasmaComponents.ListItem {
+            enabled: true
             Row {
                 anchors {
                     left: parent.left
@@ -51,7 +63,17 @@ QtControls.ScrollView {
                 }
                 PlasmaComponents.Label {
                     enabled: true
-                    text: "Menu Item " + modelData
+                    text: "Menu Item " + model ? model.text : modelData.text
+                }
+            }
+            onClicked: {
+                if (modelData && modelData.trigger !== undefined) {
+                    modelData.trigger();
+                // assume the model is a list of QAction or Action
+                } else if (menu.model.length > index) {
+                    menu.model[index].trigger();
+                } else {
+                    console.log("Don't know how to trigger the action")
                 }
             }
         }
