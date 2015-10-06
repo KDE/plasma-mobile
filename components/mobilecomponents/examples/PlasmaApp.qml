@@ -41,62 +41,18 @@ ApplicationWindow {
     property alias contextualActions: internalActions.data
 
     property alias toolbarActions: internalToolbarActions.data
-    property alias toolbarDelegate: internalButtons.data
+    property alias toolbarDelegate: toolbar.toolbarDelegate
 
-    statusBar: PlasmaComponents.ToolBar {
-        tools: PlasmaComponents.ToolBarLayout {
-            //TODO: those buttons should support drag to open the menus as well
-            PlasmaComponents.ToolButton {
-                id: configureButton
-                iconSource: "configure"
-                checkable: true
-                onCheckedChanged: {
-                    globalDrawerOpen = checked
-                    if (checked) {
-                        contextDrawerOpen = false;
-                    }
-                }
-            }
-            RowLayout {
-                id: internalButtons
-                Layout.fillWidth: false
-                Repeater {
-                    model: root.toolbarActions
-                    delegate: PlasmaComponents.ToolButton {
-                        iconSource: modelData.iconName
-                        onClicked: modelData.trigger()
-                    }
-                }
-                onChildrenChanged: {
-                    var flexibleFound = false;
-                    for (var i = 0; i < children.length; ++i) {
-                        if (children[i].Layout.fillWidth) {
-                            flexibleFound = true;
-                            break;
-                        }
-                    }
-                    Layout.fillWidth = flexibleFound;
-                }
-            }
-            PlasmaComponents.ToolButton {
-                id: menuButton
-                iconSource: "applications-other"
-                checkable: true
-                onCheckedChanged: {
-                    contextDrawerOpen = checked
-                    if (checked) {
-                        globalDrawerOpen = false;
-                    }
-                }
-            }
-        }
+    statusBar: PlasmaMobileToolBar {
+        id: toolbar
+        actions: toolbarActions
     }
 
     onGlobalDrawerOpenChanged: {
-        configureButton.checked = globalDrawerOpen;
+        toolbar.configureButton.checked = globalDrawerOpen;
     }
     onContextDrawerOpenChanged: {
-        menuButton.checked = contextDrawerOpen;
+        toolbar.menuButton.checked = contextDrawerOpen;
     }
 
     Item {

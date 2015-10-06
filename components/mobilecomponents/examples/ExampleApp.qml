@@ -37,9 +37,9 @@ PlasmaApp {
 
     toolbarActions:  [Action {iconName:"konqueror"; onTriggered: print("AAA")}, Action {iconName:"go-home"}]
 
-    toolbarDelegate: PlasmaComponents.TextField {
+   /* toolbarDelegate: PlasmaComponents.TextField {
         Layout.fillWidth: true
-    }
+    }*/
 
     globalDrawer: PlasmaExtras.ScrollArea {
         implicitWidth: units.gridUnit * 12
