@@ -19,20 +19,27 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.4
+import QtQuick.Layouts 1.3
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-SimpleApp {
+PlasmaApp {
     id: root
     width: 500
     height: 800
 
     contextualActions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
     [Action {text:"AAA"; onTriggered: print("AAA")}, Action {text:"bbb"}]
-    contextualActionsTitle: "Actions"
+    contextualDrawerTitle: "Actions"
+
+    toolbarActions:  [Action {iconName:"konqueror"; onTriggered: print("AAA")}, Action {iconName:"go-home"}]
+
+    toolbarDelegate: PlasmaComponents.TextField {
+        Layout.fillWidth: true
+    }
 
     globalDrawer: PlasmaExtras.ScrollArea {
         implicitWidth: units.gridUnit * 12

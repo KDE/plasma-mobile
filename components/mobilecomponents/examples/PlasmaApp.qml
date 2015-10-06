@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.3
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -33,9 +34,14 @@ ApplicationWindow {
     property alias globalDrawerOpen: global.open
     property alias contextDrawerOpen: context.open
 
+    property string globalDrawerTitle
+    property string contextualDrawerTitle
+
     //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
     property alias contextualActions: internalActions.data
-    property string contextualActionsTitle
+
+    property alias toolbarActions: internalToolbarActions.data
+    property alias toolbarDelegate: internalButtons.data
 
     statusBar: PlasmaComponents.ToolBar {
         tools: PlasmaComponents.ToolBarLayout {
@@ -49,6 +55,27 @@ ApplicationWindow {
                     if (checked) {
                         contextDrawerOpen = false;
                     }
+                }
+            }
+            RowLayout {
+                id: internalButtons
+                Layout.fillWidth: false
+                Repeater {
+                    model: root.toolbarActions
+                    delegate: PlasmaComponents.ToolButton {
+                        iconSource: modelData.iconName
+                        onClicked: modelData.trigger()
+                    }
+                }
+                onChildrenChanged: {
+                    var flexibleFound = false;
+                    for (var i = 0; i < children.length; ++i) {
+                        if (children[i].Layout.fillWidth) {
+                            flexibleFound = true;
+                            break;
+                        }
+                    }
+                    Layout.fillWidth = flexibleFound;
                 }
             }
             PlasmaComponents.ToolButton {
@@ -75,6 +102,9 @@ ApplicationWindow {
     Item {
         id: internalActions
     }
+    Item {
+        id: internalToolbarActions
+    }
 
     Item {
         id: main
@@ -90,7 +120,7 @@ ApplicationWindow {
         visible: true
         drawer: ContextDrawerContents {
             actions: root.contextualActions
-            title: root.contextualActionsTitle
+            title: root.contextualDrawerTitle
         }
     }
 }
