@@ -37,6 +37,8 @@ ApplicationWindow {
     property string globalDrawerTitle
     property string contextualDrawerTitle
 
+    property alias globalActions: internalGlobalActions.data
+
     //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
     property alias contextualActions: internalActions.data
 
@@ -60,6 +62,9 @@ ApplicationWindow {
     }
     Item {
         id: internalToolbarActions
+    }
+    Item {
+        id: internalGlobalActions
     }
 
     Item {

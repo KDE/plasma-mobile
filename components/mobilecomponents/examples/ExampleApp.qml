@@ -40,12 +40,39 @@ PlasmaApp {
    /* toolbarDelegate: PlasmaComponents.TextField {
         Layout.fillWidth: true
     }*/
+   
+    globalActions: [
+       ActionGroup {
+           text: "group2"
+           Action {
+                text: "action 1"
+           }
+           Action {
+                text: "action 2"
+           }
+           Action {
+                text: "action 3"
+           }
+       },
+       ActionGroup {
+           text: "group3"
+           Action {
+                text: "action 4"
+           }
+           Action {
+                text: "action 5"
+           }
+       },
+       Action {
+           text: "Settings"
+       }
+    ]
 
     globalDrawer: PlasmaExtras.ScrollArea {
         implicitWidth: units.gridUnit * 12
         ListView {
             id: optionMenu
-            model: 5
+            model: root.globalActions
             //verticalLayoutDirection: ListView.BottomToTop
 
             header: Row {
@@ -70,7 +97,7 @@ PlasmaApp {
                         margins: units.largeSpacing
                     }
                     enabled: true
-                    text: "Option " + modelData
+                    text: modelData.text
                 }
             }
         }
