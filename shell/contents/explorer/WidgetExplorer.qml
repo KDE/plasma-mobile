@@ -36,6 +36,7 @@ Rectangle {
     id: root
     color: Qt.rgba(0, 0, 0, (1 - Math.abs(main.x / (main.width/2))) * 0.8)
     signal closed()
+    property alias containment: widgetExplorer.containment
 
     MouseArea {
         anchors.fill: parent
@@ -85,8 +86,6 @@ Rectangle {
             width: parent.width - parent.width/6
             height: parent.height
             color: theme.backgroundColor
-
-            property alias containment: widgetExplorer.containment
 
             //external drop events can cause a raise event causing us to lose focus and
             //therefore get deleted whilst we are still in a drag exec()
