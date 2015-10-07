@@ -19,6 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 import QtQuick.Controls 1.3
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -31,7 +32,52 @@ ToolBar {
     property alias toolbarDelegate: internalButtons.data
     property Item configureButton: configureButton
     property Item menuButton: menuButton
+    property Flickable flickable
 
+    anchors {
+        left: parent.left
+        right: parent.right
+    }
+    y: flickable.height - height
+    Connections {
+        target: flickable
+        property real oldContentY: flickable.contentY
+        onContentYChanged: {
+            if (flickable.atYBeginning || flickable.atYEnd) {
+                return;
+            }
+            root.y = Math.max(flickable.height - root.height, Math.min(flickable.height, root.y + flickable.contentY - oldContentY));
+            oldContentY = flickable.contentY;
+        }
+    }
+
+    LinearGradient {
+        height: units.gridUnit/2
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.top
+            leftMargin: -units.gridUnit
+            rightMargin: -units.gridUnit
+        }
+        opacity: (flickable.height - root.y) / root.height
+        start: Qt.point(0, 0)
+        end: Qt.point(0, units.gridUnit/2)
+        gradient: Gradient {
+            GradientStop {
+                position: 0.0
+                color: "transparent"
+            }
+            GradientStop {
+                position: 0.7
+                color: Qt.rgba(0, 0, 0, 0.15)
+            }
+            GradientStop {
+                position: 1.0
+                color: Qt.rgba(0, 0, 0, 0.3)
+            }
+        }
+    }
     RowLayout {
         anchors.fill: parent
         //TODO: those buttons should support drag to open the menus as well

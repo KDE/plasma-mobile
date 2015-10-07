@@ -45,9 +45,13 @@ ApplicationWindow {
     property alias toolbarActions: internalToolbarActions.data
     property alias toolbarDelegate: toolbar.toolbarDelegate
 
-    statusBar: PlasmaMobileToolBar {
+    property alias mainFlickable: toolbar.flickable
+
+    PlasmaMobileToolBar {
         id: toolbar
+        flickable: root.mainFlickable
         actions: toolbarActions
+        z: 2
     }
 
     onGlobalDrawerOpenChanged: {

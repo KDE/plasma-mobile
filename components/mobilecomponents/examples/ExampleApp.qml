@@ -40,7 +40,9 @@ PlasmaApp {
    /* toolbarDelegate: PlasmaComponents.TextField {
         Layout.fillWidth: true
     }*/
-   
+
+    mainFlickable: mainListView
+
     globalActions: [
        ActionGroup {
            text: "group2"
@@ -107,6 +109,7 @@ PlasmaApp {
     //Main app content
     PlasmaExtras.ScrollArea {
         ListView {
+            id: mainListView
             model: 30
             delegate: PlasmaComponents.ListItem {
                 PlasmaComponents.Label {
