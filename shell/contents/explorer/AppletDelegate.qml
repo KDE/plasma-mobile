@@ -161,7 +161,7 @@ Item {
         hoverEnabled: true
         onClicked: {
             widgetExplorer.addApplet(pluginName);
-            main.closed()
+            root.closed()
         }
         onEntered: list.currentIndex = index
         onExited: list.currentIndex = -1
