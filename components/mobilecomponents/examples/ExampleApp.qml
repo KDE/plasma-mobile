@@ -70,40 +70,7 @@ PlasmaApp {
        }
     ]
 
-    globalDrawer: PlasmaExtras.ScrollArea {
-        implicitWidth: units.gridUnit * 12
-        ListView {
-            id: optionMenu
-            model: root.globalActions
-            //verticalLayoutDirection: ListView.BottomToTop
-
-            header: Row {
-                anchors {
-                    left: parent.left
-                    margins: units.largeSpacing
-                }
-                PlasmaCore.IconItem {
-                    height: parent.height
-                    width: height
-                    source: "akregator"
-                }
-                PlasmaExtras.Heading {
-                    level: 1
-                    text: "Akregator"
-                }
-            }
-            delegate: PlasmaComponents.ListItem {
-                PlasmaComponents.Label {
-                    anchors {
-                        left: parent.left
-                        margins: units.largeSpacing
-                    }
-                    enabled: true
-                    text: modelData.text
-                }
-            }
-        }
-    }
+    globalDrawer: GlobalDrawerContents {}
 
 
     //Main app content
