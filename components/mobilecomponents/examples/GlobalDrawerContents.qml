@@ -28,6 +28,8 @@ import org.kde.kquickcontrolsaddons  2.0
 
 Item {
     implicitWidth: units.gridUnit * 12
+    default property alias content: mainContent.data
+
     ColumnLayout {
         id: mainColumn
         anchors.fill: parent
@@ -56,6 +58,11 @@ Item {
             initialPage: menuComponent
         }
 
+        ColumnLayout {
+            id: mainContent
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
         Component {
             id: menuComponent
             ListView {

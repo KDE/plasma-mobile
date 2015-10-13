@@ -61,6 +61,11 @@ QtControls.ScrollView {
                     left: parent.left
                     margins: units.largeSpacing
                 }
+                PlasmaCore.IconItem {
+                    height: parent.height
+                    width: height
+                    source: modelData.iconName
+                }
                 PlasmaComponents.Label {
                     enabled: true
                     text: "Menu Item " + model ? model.text : modelData.text
