@@ -18,36 +18,47 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.0 as QtControls
+import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
-import QtQml.Models 2.2
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
+import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
-Item {
-    implicitWidth: units.gridUnit * 12
-    default property alias content: mainContent.data
+MobileComponents.OverlayDrawer {
+    id: root
+    inverse: true
 
-    ColumnLayout {
+    property alias content: mainContent.data
+
+    property alias title: heading.text
+    property alias titleIcon: headingIcon.source
+    property list<Action> actions
+
+    drawer: ColumnLayout {
         id: mainColumn
         anchors.fill: parent
+        implicitWidth: units.gridUnit * 12
 
         RowLayout {
-            //Layout.fillWidth: true
+            Layout.fillWidth: true
             anchors {
                 left: parent.left
-                margins: units.largeSpacing
             }
             PlasmaCore.IconItem {
+                id: headingIcon
                 height: parent.height
                 width: height
-                source: "akregator"
+                Layout.minimumWidth: height
             }
             PlasmaExtras.Heading {
+                id: heading
                 level: 1
-                text: "Akregator"
+            }
+            Item {
+                height: parent.height
+                Layout.minimumWidth: height
             }
         }
 
@@ -68,7 +79,7 @@ Item {
             ListView {
                 id: optionMenu
 
-                model: root.globalActions
+                model: actions
                 property int level: 0
 
                 footer: PlasmaComponents.ListItem {

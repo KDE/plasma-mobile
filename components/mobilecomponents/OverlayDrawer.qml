@@ -49,6 +49,7 @@ Properties:
 Item {
     id: root
     anchors.fill: parent
+    z: 9999
 
     default property alias page: mainPage.data
     property alias drawer: drawerPage.data

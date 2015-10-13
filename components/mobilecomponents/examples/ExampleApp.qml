@@ -31,10 +31,6 @@ PlasmaApp {
     width: 500
     height: 800
 
-    contextualActions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
-    [Action {text:"AAA"; iconName: "document-decrypt"; onTriggered: print("AAA")}, Action {text:"bbb"; iconName: "document-share"}]
-    contextualDrawerTitle: "Actions"
-
     toolbarActions:  [Action {iconName:"konqueror"; onTriggered: print("AAA")}, Action {iconName:"go-home"}]
 
    /* toolbarDelegate: PlasmaComponents.TextField {
@@ -43,51 +39,62 @@ PlasmaApp {
 
     mainFlickable: mainListView
 
-    globalActions: [
-       ActionGroup {
-           text: "View"
-           iconName: "view-list-icons"
-           Action {
-                text: "action 1"
-           }
-           Action {
-                text: "action 2"
-           }
-           Action {
-                text: "action 3"
-           }
-       },
-       ActionGroup {
-           text: "Sync"
-           iconName: "folder-sync"
-           Action {
-                text: "action 4"
-           }
-           Action {
-                text: "action 5"
-           }
-       },
-       Action {
-           text: "Settings"
-           iconName: "configure"
-       }
-    ]
+    GlobalDrawer {
+        title: "Akregator"
+        titleIcon: "akregator"
 
-    globalDrawer: GlobalDrawerContents {
-        Rectangle {
-            Layout.minimumHeight: 200
-            Layout.minimumWidth: 200
-        }
-        Rectangle {
-            color: "red"
+        actions: [
+            ActionGroup {
+                text: "View"
+                iconName: "view-list-icons"
+                Action {
+                        text: "action 1"
+                }
+                Action {
+                        text: "action 2"
+                }
+                Action {
+                        text: "action 3"
+                }
+            },
+            ActionGroup {
+                text: "Sync"
+                iconName: "folder-sync"
+                Action {
+                        text: "action 4"
+                }
+                Action {
+                        text: "action 5"
+                }
+            },
+            Action {
+                text: "Settings"
+                iconName: "configure"
+            }
+            ]
+        content: Rectangle {
             Layout.minimumHeight: 200
             Layout.minimumWidth: 200
         }
     }
-
+    ContextDrawer {
+        actions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
+            [
+            Action {
+                text:"AAA"
+                iconName: "document-decrypt"
+                onTriggered: print("AAA")
+            },
+            Action {
+                text:"bbb"
+                iconName: "document-share"
+            }]
+        title: "Actions"
+    }
 
     //Main app content
     PlasmaExtras.ScrollArea {
+        anchors.fill:parent
         ListView {
             id: mainListView
             model: 30
