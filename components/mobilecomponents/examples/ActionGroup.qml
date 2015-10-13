@@ -21,5 +21,7 @@ import QtQuick 2.1
 import QtQuick.Controls 1.3
 
 Action {
-    default property var children
+    id: root
+    default property alias children: root.__children
+    property list<Action> __children
 }

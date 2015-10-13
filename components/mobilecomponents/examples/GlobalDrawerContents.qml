@@ -107,10 +107,11 @@ Item {
                     }
                     onClicked: {
                         if (modelData.children) {
-                            pageRow.pop(optionMenu)
-                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1})
+                            pageRow.pop(optionMenu);
+                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
                         } else {
-                            modelData.trigger()
+                            modelData.trigger();
+                            pageRow.pop();
                         }
                     }
                 }

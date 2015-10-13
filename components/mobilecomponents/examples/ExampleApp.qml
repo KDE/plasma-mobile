@@ -45,7 +45,8 @@ PlasmaApp {
 
     globalActions: [
        ActionGroup {
-           text: "group2"
+           text: "View"
+           iconName: "view-list-icons"
            Action {
                 text: "action 1"
            }
@@ -57,7 +58,8 @@ PlasmaApp {
            }
        },
        ActionGroup {
-           text: "group3"
+           text: "Sync"
+           iconName: "folder-sync"
            Action {
                 text: "action 4"
            }
