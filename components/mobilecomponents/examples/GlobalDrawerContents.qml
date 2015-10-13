@@ -26,84 +26,96 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
 
-
-ColumnLayout {
+Item {
     implicitWidth: units.gridUnit * 12
-    
-    RowLayout {
-        Layout.fillWidth: true
-        anchors {
-            left: parent.left
-            margins: units.largeSpacing
-        }
-        PlasmaCore.IconItem {
-            height: parent.height
-            width: height
-            source: "akregator"
-        }
-        PlasmaExtras.Heading {
-            level: 1
-            text: "Akregator"
-        }
-    }
-    
-    PlasmaExtras.PageRow {
-        id: pageRow
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        initialPage: menuComponent
-    }
+    ColumnLayout {
+        id: mainColumn
+        anchors.fill: parent
 
-    Component {
-        id: menuComponent
-        ListView {
-            id: optionMenu
-
-            model: root.globalActions
-            property int level: 0
-
-            footer: PlasmaComponents.ListItem {
-                visible: level > 0
-                enabled: true
-                PlasmaComponents.Label {
-                    anchors {
-                        left: parent.left
-                        margins: units.largeSpacing
-                    }
-                    text: i18n("Back")
-                }
-                onClicked: pageRow.scrollToLevel(level - 1)
+        RowLayout {
+            //Layout.fillWidth: true
+            anchors {
+                left: parent.left
+                margins: units.largeSpacing
             }
-            delegate: PlasmaComponents.ListItem {
-                enabled: true
-                RowLayout {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        margins: units.largeSpacing
+            PlasmaCore.IconItem {
+                height: parent.height
+                width: height
+                source: "akregator"
+            }
+            PlasmaExtras.Heading {
+                level: 1
+                text: "Akregator"
+            }
+        }
+
+        PlasmaExtras.PageRow {
+            id: pageRow
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            initialPage: menuComponent
+        }
+
+        Component {
+            id: menuComponent
+            ListView {
+                id: optionMenu
+
+                model: root.globalActions
+                property int level: 0
+
+                footer: PlasmaComponents.ListItem {
+                    visible: level > 0
+                    enabled: true
+                    RowLayout {
+                        anchors {
+                            left: parent.left
+                        }
+                        PlasmaCore.IconItem {
+                            Layout.maximumWidth: height
+                            Layout.fillHeight: true
+                            source: "go-previous"
+                        }
+                        PlasmaComponents.Label {
+                            text: i18n("Back")
+                        }
                     }
-                    PlasmaComponents.Label {
-                        Layout.fillWidth: true                        
-                        text: modelData.text
-                    }
-                    PlasmaCore.IconItem {
-                        Layout.maximumWidth: height
-                        Layout.fillHeight: true
-                        source: "go-next"
-                        visible: modelData.children != undefined
-                    }
+                    onClicked: pageRow.scrollToLevel(level - 1)
                 }
-                onClicked: {
-                    if (modelData.children) {
-                        pageRow.pop(optionMenu)
-                        pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1})
-                    } else {
-                        modelData.trigger()
+                delegate: PlasmaComponents.ListItem {
+                    enabled: true
+                    RowLayout {
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        PlasmaCore.IconItem {
+                            Layout.maximumWidth: height
+                            Layout.fillHeight: true
+                            source: modelData.iconName
+                        }
+                        PlasmaComponents.Label {
+                            Layout.fillWidth: true
+                            text: modelData.text
+                        }
+                        PlasmaCore.IconItem {
+                            Layout.maximumWidth: height
+                            Layout.fillHeight: true
+                            source: "go-next"
+                            visible: modelData.children != undefined
+                        }
+                    }
+                    onClicked: {
+                        if (modelData.children) {
+                            pageRow.pop(optionMenu)
+                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1})
+                        } else {
+                            modelData.trigger()
+                        }
                     }
                 }
             }
         }
     }
 }
-
 

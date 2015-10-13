@@ -67,6 +67,7 @@ PlasmaApp {
        },
        Action {
            text: "Settings"
+           iconName: "configure"
        }
     ]
 

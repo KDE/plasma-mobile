@@ -161,6 +161,8 @@ Item {
                 browserFrame.state = "Closed";
             } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
+            } else {
+                browserFrame.state = "Open";
             }
         }
         onClicked: {
