@@ -26,17 +26,17 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-ApplicationWindow {
+MobileComponents.ApplicationWindow {
     id: root
     width: 500
     height: 800
 
-    GlobalDrawer {
+    MobileComponents.GlobalDrawer {
         title: "Akregator"
         titleIcon: "akregator"
 
         actions: [
-            ActionGroup {
+            MobileComponents.ActionGroup {
                 text: "View"
                 iconName: "view-list-icons"
                 Controls.Action {
@@ -49,7 +49,7 @@ ApplicationWindow {
                         text: "action 3"
                 }
             },
-            ActionGroup {
+            MobileComponents.ActionGroup {
                 text: "Sync"
                 iconName: "folder-sync"
                 Controls.Action {
@@ -69,16 +69,16 @@ ApplicationWindow {
             Layout.minimumWidth: 200
         }
     }
-    ContextDrawer {
-        actions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
+    MobileComponents.ContextDrawer {
+        actions:
             [
             Controls.Action {
-                text:"AAA"
+                text:"Action 1"
                 iconName: "document-decrypt"
-                onTriggered: print("AAA")
+                onTriggered: print("Action 1 clicked")
             },
             Controls.Action {
-                text:"bbb"
+                text:"Action 2"
                 iconName: "document-share"
             }]
         title: "Actions"
@@ -89,9 +89,17 @@ ApplicationWindow {
     //Main app content
     Component {
         id: mainPageComponent
-        Page {
+        MobileComponents.Page {
             anchors.fill:parent
-            actions:  [Controls.Action {iconName:"konqueror"; onTriggered: print("AAA")}, Controls.Action {iconName:"go-home"}]
+            actions:  [
+                Controls.Action {
+                    iconName:"konqueror"
+                    onTriggered: print("Action triggered")
+                },
+                Controls.Action {
+                    iconName:"go-home"
+                }
+            ]
             PlasmaExtras.ScrollArea {
                 anchors.fill:parent
                 ListView {

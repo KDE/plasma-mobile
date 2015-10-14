@@ -1,5 +1,5 @@
 /*
- *   Copyright 2012 Marco Martin <mart@kde.org>
+ *   Copyright 2015 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -98,7 +98,7 @@ MobileComponents.OverlayDrawer {
                             text: i18n("Back")
                         }
                     }
-                    onClicked: pageRow.scrollToLevel(level - 1)
+                    onClicked: pageRow.pop()
                 }
                 delegate: PlasmaComponents.ListItem {
                     enabled: true
@@ -125,11 +125,10 @@ MobileComponents.OverlayDrawer {
                     }
                     onClicked: {
                         if (modelData.children) {
-                            pageRow.pop(optionMenu);
                             pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
                         } else {
                             modelData.trigger();
-                            pageRow.pop();
+                            pageRow.pop(pageRow.initialPage);
                         }
                     }
                 }

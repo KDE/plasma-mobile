@@ -1,5 +1,5 @@
 /*
- *   Copyright 2012 Marco Martin <mart@kde.org>
+ *   Copyright 2015 Marco Martin <mart@kde.org>
  *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -57,8 +57,10 @@ MobileComponents.OverlayDrawer {
                     id: heading
                     anchors {
                         left: parent.left
+                        right: parent.right
                         margins: units.largeSpacing
                     }
+                    elide: Text.ElideRight
                     level: 2
                     text: root.title
                 }
@@ -76,8 +78,7 @@ MobileComponents.OverlayDrawer {
                         source: modelData.iconName
                     }
                     PlasmaComponents.Label {
-                        enabled: true
-                        text: "Menu Item " + model ? model.text : modelData.text
+                        text: model ? model.text : modelData.text
                     }
                 }
                 onClicked: {
@@ -87,7 +88,7 @@ MobileComponents.OverlayDrawer {
                     } else if (menu.model.length > index) {
                         menu.model[index].trigger();
                     } else {
-                        console.log("Don't know how to trigger the action")
+                        console.warning("Don't know how to trigger the action")
                     }
                 }
             }
