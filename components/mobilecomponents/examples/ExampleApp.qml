@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.4
+import QtQuick.Controls 1.4 as Controls
 import QtQuick.Layouts 1.3
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -26,18 +26,10 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-PlasmaApp {
+ApplicationWindow {
     id: root
     width: 500
     height: 800
-
-    toolbarActions:  [Action {iconName:"konqueror"; onTriggered: print("AAA")}, Action {iconName:"go-home"}]
-
-   /* toolbarDelegate: PlasmaComponents.TextField {
-        Layout.fillWidth: true
-    }*/
-
-    mainFlickable: mainListView
 
     GlobalDrawer {
         title: "Akregator"
@@ -47,27 +39,27 @@ PlasmaApp {
             ActionGroup {
                 text: "View"
                 iconName: "view-list-icons"
-                Action {
+                Controls.Action {
                         text: "action 1"
                 }
-                Action {
+                Controls.Action {
                         text: "action 2"
                 }
-                Action {
+                Controls.Action {
                         text: "action 3"
                 }
             },
             ActionGroup {
                 text: "Sync"
                 iconName: "folder-sync"
-                Action {
+                Controls.Action {
                         text: "action 4"
                 }
-                Action {
+                Controls.Action {
                         text: "action 5"
                 }
             },
-            Action {
+            Controls.Action {
                 text: "Settings"
                 iconName: "configure"
             }
@@ -80,28 +72,39 @@ PlasmaApp {
     ContextDrawer {
         actions: //ListModel {ListElement{text:"AAA"} ListElement{text:"cccc"}}
             [
-            Action {
+            Controls.Action {
                 text:"AAA"
                 iconName: "document-decrypt"
                 onTriggered: print("AAA")
             },
-            Action {
+            Controls.Action {
                 text:"bbb"
                 iconName: "document-share"
             }]
         title: "Actions"
     }
 
+    initialPage: mainPageComponent
+
     //Main app content
-    PlasmaExtras.ScrollArea {
-        anchors.fill:parent
-        ListView {
-            id: mainListView
-            model: 30
-            delegate: PlasmaComponents.ListItem {
-                PlasmaComponents.Label {
-                    enabled: true
-                    text: "Item " + modelData
+    Component {
+        id: mainPageComponent
+        Page {
+            anchors.fill:parent
+            actions:  [Controls.Action {iconName:"konqueror"; onTriggered: print("AAA")}, Controls.Action {iconName:"go-home"}]
+            PlasmaExtras.ScrollArea {
+                anchors.fill:parent
+                ListView {
+                    id: mainListView
+                    model: 30
+                    delegate: PlasmaComponents.ListItem {
+                        enabled: true
+                        PlasmaComponents.Label {
+                            enabled: true
+                            text: "Item " + modelData
+                        }
+                        onClicked: root.pageStack.push(mainPageComponent)
+                    }
                 }
             }
         }

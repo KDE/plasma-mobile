@@ -18,36 +18,9 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Layouts 1.3
 import QtQuick.Controls 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.2
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-ApplicationWindow {
-    id: root
-
-    //default property alias page: main.data
-    property OverlayDrawer globalDrawer
-    property OverlayDrawer contextDrawer
-
-    property alias toolbarActions: internalToolbarActions.data
-    property alias toolbarDelegate: toolbar.toolbarDelegate
-
-    property alias mainFlickable: toolbar.flickable
-
-    PlasmaMobileToolBar {
-        id: toolbar
-        flickable: root.mainFlickable
-        actions: toolbarActions
-        z: 2
-    }
-
-    Item {
-        id: internalActions
-    }
-    Item {
-        id: internalToolbarActions
-    }
-
+PlasmaExtras.PageRow {
+    
 }
