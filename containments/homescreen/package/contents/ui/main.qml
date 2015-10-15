@@ -181,6 +181,7 @@ Item {
             opacity: 1 - Math.abs(x/(width/2))
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
+            Layout.minimumHeight: applet && applet.switchHeight ? applet.switchHeight : 0
 
             Connections {
                 target: plasmoid
