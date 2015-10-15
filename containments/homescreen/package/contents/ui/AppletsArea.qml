@@ -181,8 +181,10 @@ MouseEventListener {
         Item {
             id: spacer
             width: parent.width
-            height: plasmoid.availableScreenRect.height/4
+            height: plasmoid.availableScreenRect.height/4 * Math.max(0, 4 -plasmoid.applets.length)
+            //plasmoid.availableScreenRect.height/4
         }
+
         PlasmaCore.ColorScope {
             id: colorScope
             //TODO: decide what color we want applets

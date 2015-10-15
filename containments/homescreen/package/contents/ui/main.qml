@@ -492,7 +492,6 @@ Item {
                     if (draggingVertically) {
                         return;
                     }
-print("AAAAAA "+contentY+" "+(-headerItem.height + root.height)+" "+(-headerItem.height + root.height/5)+wasLocked)
 
                     if (wasLocked) {
                         //scrolling down, unlock
