@@ -141,7 +141,6 @@ Rectangle {
             openAnim.running = true;
         }
     }
-    onWidthChanged: panel.x = root.width/6
 
     MessageDialog {
         id: messageDialog
