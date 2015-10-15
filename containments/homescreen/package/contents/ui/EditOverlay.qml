@@ -96,7 +96,7 @@ Rectangle {
             bottom: parent.bottom
             bottomMargin: editOverlay.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height)
         }
-        height: buttonsLayout.height + margins.top
+        height: buttonsLayout.height + fixedMargins.top + fixedMargins.bottom/2
         imagePath: "widgets/background"
         enabledBorders: PlasmaCore.FrameSvg.TopBorder
         RowLayout {
@@ -105,7 +105,10 @@ Rectangle {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-                topMargin: parent.margins.top
+                topMargin: parent.fixedMargins.top
+                leftMargin: parent.fixedMargins.left/2
+                rightMargin: parent.fixedMargins.right/2
+                bottomMargin: parent.fixedMargins.bottom/2
             }
             PlasmaComponents.ToolButton {
                 Layout.fillWidth: true
