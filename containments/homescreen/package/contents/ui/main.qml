@@ -477,6 +477,7 @@ Item {
                 }
 
                 property var dragData
+                property bool wasLocked: true
 
                 cellWidth: root.width / 4
                 cellHeight: root.buttonHeight
@@ -491,21 +492,40 @@ Item {
                     if (draggingVertically) {
                         return;
                     }
+print("AAAAAA "+contentY+" "+(-headerItem.height + root.height)+" "+(-headerItem.height + root.height/5)+wasLocked)
 
-                    //manage separately the first page, the lockscreen
-                    //scrolling down
-                    if (verticalVelocity > 0 && contentY < -headerItem.height + root.height &&
-                        contentY > (-headerItem.height + root.height/6)) {
-                        scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
-                        scrollAnim.running = true;
-                        return;
+                    if (wasLocked) {
+                        //scrolling down, unlock
+                        if (contentY > (-headerItem.height + root.height/5)) {
+                            scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
+                            scrollAnim.running = true;
+                            wasLocked = false;
+                            return;
 
-                    //scrolling up
-                    } else if (verticalVelocity < 0 && contentY < -headerItem.height + root.height &&
-                        contentY < (-headerItem.height + root.height/6*5)) {
-                        scrollAnim.to = -headerItem.height;
-                        scrollAnim.running = true;
-                        return;
+                        //scrolling up, lock
+                        } else {
+                            scrollAnim.to = -headerItem.height;
+                            scrollAnim.running = true;
+                            wasLocked = true;
+                            return;
+                        }
+
+                    //was unlocked
+                    } else {
+                        //scrolling up, lock
+                        if (contentY < (-headerItem.height +  root.height - root.height/5)) {
+                            scrollAnim.to = -headerItem.height;
+                            scrollAnim.running = true;
+                            wasLocked = true;
+                            return;
+
+                        //scrolling down, unlock
+                        } else if (contentY < (-headerItem.height +  root.height + root.height/5)) {
+                            scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
+                            scrollAnim.running = true;
+                            wasLocked = false;
+                            return;
+                        }
                     }
                 }
                 NumberAnimation {
