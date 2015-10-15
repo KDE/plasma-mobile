@@ -138,6 +138,11 @@ FullScreenPanel {
             filterRole: "SkipTaskbar"
             filterRegExp: "false"
             sourceModel: plasmoid.nativeInterface.windowModel
+            onCountChanged: {
+                if (count == 0) {
+                    window.hide();
+                }
+            }
         }
 
         model: filteredWindowModel
