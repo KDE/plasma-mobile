@@ -27,7 +27,7 @@ import org.kde.plasma.configuration 2.0
 //TODO: all of this will be done with desktop components
 Rectangle {
     id: root
-    Layout.minimumWidth: units.gridUnit * 30
+    Layout.minimumWidth: units.gridUnit * 20
     Layout.minimumHeight: units.gridUnit * 20
 
 //BEGIN properties
