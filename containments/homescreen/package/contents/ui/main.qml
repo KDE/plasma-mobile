@@ -117,10 +117,18 @@ Item {
         LayoutManager.layout = appletsSpace.layout;
         //LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
-        applicationsView.contentY = -root.height;
+        applicationsView.contentY = -applicationsView.headerItem.height*2;
 
         plasmoid.nativeInterface.applicationListModel.appOrder = plasmoid.configuration.AppOrder;
         plasmoid.nativeInterface.applicationListModel.loadApplications();
+    }
+
+    Timer {
+        interval: 200
+        running: true
+        onTriggered: {
+            applicationsView.contentY = -applicationsView.headerItem.height;
+        }
     }
 
     Containment.onAppletAdded: {
