@@ -115,7 +115,7 @@ Item {
         LayoutManager.plasmoid = plasmoid;
         LayoutManager.root = root;
         LayoutManager.layout = appletsSpace.layout;
-        //LayoutManager.lastSpacer = appletsSpace.lastSpacer;
+        LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
         applicationsView.contentY = -applicationsView.headerItem.height*2;
 

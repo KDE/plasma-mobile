@@ -181,7 +181,7 @@ MouseEventListener {
         Item {
             id: spacer
             width: parent.width
-            height: plasmoid.availableScreenRect.height/4 * Math.max(0, 4 -plasmoid.applets.length)
+            height: Math.max(0, plasmoid.availableScreenRect.height/4 * Math.max(0, 4 -plasmoid.applets.length) - stripe.height - units.gridUnit * 3)
             //plasmoid.availableScreenRect.height/4
         }
 
