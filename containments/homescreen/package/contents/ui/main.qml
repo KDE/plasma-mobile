@@ -181,7 +181,6 @@ Item {
             opacity: 1 - Math.abs(x/(width/2))
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
-            Layout.minimumHeight: applet && applet.switchHeight ? applet.switchHeight : 0
 
             Connections {
                 target: plasmoid
@@ -211,7 +210,7 @@ Item {
             }
 
             width: parent.width
-            height: Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2)
+            height: Math.max(applet.switchHeight + 1 + background.margins.top + background.margins.bottom, Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2))
             
             PlasmaComponents.BusyIndicator {
                 z: 1000
