@@ -61,16 +61,15 @@ Item {
         }
         height: units.smallSpacing
         color: PlasmaCore.ColorScope.highlightColor
-        visible: plasmoid.expanded
+        visible: plasmoid.formFactor != PlasmaCore.Types.Planar && plasmoid.expanded
     }
 
     PlasmaCore.FrameSvgItem {
         id: appletParent
         imagePath: "widgets/background"
         //used only indesktop mode, not panel
-        visible: plasmoid.formFactor == PlasmaCore.Types.Planar
+        visible: plasmoid.expanded && plasmoid.formFactor == PlasmaCore.Types.Planar
         z: 99
-        opacity: plasmoid.expanded ? 1 : 0
         anchors.top: parent.top
         width: parent.width
         height: units.gridUnit * 20 - units.iconSizes.medium
@@ -84,12 +83,6 @@ Item {
             }
             z: -1
             onClicked: plasmoid.expanded = false;
-        }
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
         }
     }
 
