@@ -25,7 +25,7 @@ export KSCREEN_BACKEND=QScreen
 
 export KDE_FULL_SESSION=1
 export KDE_SESSION_VERSION=5
-export PLASMA_PLATFORM=phone
+export PLASMA_PLATFORM=phone:handheld
 export QT_QUICK_CONTROLS_STYLE=Plasma
 
 export GRID_UNIT_PX=25
