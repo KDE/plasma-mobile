@@ -32,6 +32,9 @@ namespace Client
 class PlasmaWindowManagement;
 class PlasmaWindow;
 class PlasmaWindowModel;
+class PlasmaShell;
+class PlasmaShellSurface;
+class Surface;
 }
 }
 
@@ -41,12 +44,16 @@ class TaskPanel : public Plasma::Containment
     Q_PROPERTY(QAbstractItemModel* windowModel READ windowModel NOTIFY windowModelChanged)
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
+    Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
 
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
     ~TaskPanel();
 
     QAbstractItemModel *windowModel() const;
+
+    QWindow *panel();
+    void setPanel(QWindow *panel);
 
     Q_INVOKABLE void closeActiveWindow();
 
@@ -57,16 +64,23 @@ public:
 
     bool hasCloseableActiveWindow() const;
 
+    Q_INVOKABLE void setTaskGeometry(int row, int x, int y, int width, int height);
+
 Q_SIGNALS:
     void windowModelChanged();
     void showingDesktopChanged(bool);
     void hasCloseableActiveWindowChanged();
+    void panelChanged();
 
 private:
     void initWayland();
     void updateActiveWindow();
     bool m_showingDesktop;
-    KWayland::Client::PlasmaWindowManagement *m_windowManagement;
+    QWindow *m_panel = nullptr;
+    KWayland::Client::PlasmaShellSurface *m_shellSurface = nullptr;
+    KWayland::Client::Surface *m_surface = nullptr;
+    KWayland::Client::PlasmaShell *m_shellInterface = nullptr;
+    KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     KWayland::Client::PlasmaWindowModel *m_windowModel = nullptr;
     KWayland::Client::PlasmaWindow *m_activeWindow = nullptr;
 };

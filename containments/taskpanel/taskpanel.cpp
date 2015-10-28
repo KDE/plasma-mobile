@@ -21,13 +21,17 @@
 
 #include <QtQml>
 #include <QDebug>
+#include <QQuickItem>
+#include <QQuickWindow>
 
 #include <Plasma/Package>
 
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
 #include <KWayland/Client/plasmawindowmodel.h>
+#include <KWayland/Client/plasmashell.h>
 #include <KWayland/Client/registry.h>
+#include <KWayland/Client/surface.h>
 
 static const QString s_kwinService = QStringLiteral("org.kde.KWin");
 
@@ -88,12 +92,53 @@ void TaskPanel::initWayland()
             });
         }
     );
+    connect(registry, &Registry::plasmaShellAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+            
+            m_shellInterface = registry->createPlasmaShell(name, version, this);
+
+            if (!m_panel) {
+                return;
+            }
+            Surface *s = Surface::fromWindow(m_panel);
+            if (!s) {
+                return;
+            }
+            m_shellSurface = m_shellInterface->createSurface(s, this);
+        }
+    );
     registry->setup();
 }
 
 QAbstractItemModel *TaskPanel::windowModel() const
 {
     return m_windowModel;
+}
+
+QWindow *TaskPanel::panel()
+{
+    return m_panel;
+}
+
+void TaskPanel::setPanel(QWindow *panel)
+{
+    using namespace KWayland::Client;
+    if (panel == m_panel) {
+        return;
+    }
+
+    m_panel = panel;
+    emit panelChanged();
+
+    if (!m_shellSurface) {
+        return;
+    }
+    Surface *s = Surface::fromWindow(panel);
+    if (!s) {
+        return;
+    }
+    
+    m_shellSurface = m_shellInterface->createSurface(s, this);
 }
 
 void TaskPanel::updateActiveWindow()
@@ -116,6 +161,23 @@ void TaskPanel::closeActiveWindow()
     if (m_activeWindow) {
         m_activeWindow->requestClose();
     }
+}
+
+void TaskPanel::setTaskGeometry(int row, int x, int y, int width, int height)
+{
+    using namespace KWayland::Client;
+    if (!m_shellSurface) {
+        if (!m_shellInterface || !m_panel || !m_panel->isVisible()) {
+            return;
+        }
+        m_surface = Surface::fromWindow(m_panel);
+        if (!m_surface) {
+            return;
+        }
+        m_shellSurface = m_shellInterface->createSurface(m_surface, this);
+    }
+
+    m_windowModel->setMinimizedGeometry(row, m_surface, QRect(x, y, width, height));
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(taskpanel, TaskPanel, "metadata.json")

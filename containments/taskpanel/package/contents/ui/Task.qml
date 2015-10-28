@@ -28,6 +28,23 @@ Item {
     id: delegate
     width: window.width/2
     height: window.height/2
+
+    //Workaround
+    property bool active: model.IsActive
+    onActiveChanged: {
+        if (model.IsActive) {
+            window.currentTaskIndex = index
+        }
+    }
+
+    Connections {
+        target: tasksView
+        onContentYChanged: {
+            var pos = delegate.mapToItem(tasksView, 0, 0);
+            plasmoid.nativeInterface.setTaskGeometry(filteredWindowModel.mapRowToSource(model.index), pos.x, pos.y, delegate.width, delegate.height);
+        }
+    }
+
     Item {
         anchors {
             fill: parent

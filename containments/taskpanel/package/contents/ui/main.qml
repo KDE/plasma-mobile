@@ -58,6 +58,7 @@ PlasmaCore.ColorScope {
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
                 taskSwitcher.visible = true;
             }
+            taskSwitcher.setSingleActiveWindow(-1);
         }
         onReleased: {
             if (taskSwitcher.visibility == Window.Hidden) {
@@ -67,6 +68,7 @@ PlasmaCore.ColorScope {
                 taskSwitcher.show();
             } else {
                 taskSwitcher.hide();
+                taskSwitcher.setSingleActiveWindow(taskSwitcher.currentTaskIndex);
             }
         }
 
@@ -95,13 +97,17 @@ PlasmaCore.ColorScope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "go-home"
                 checkable: true
-                onCheckedChanged: {print (checked)
-                    plasmoid.nativeInterface.showDesktop = checked;
+                onCheckedChanged: {
+                    if (checked) {
+                        root.taskSwitcher.setSingleActiveWindow(-1);
+                    } else {
+                        root.taskSwitcher.setSingleActiveWindow(Math.max(0, root.taskSwitcher.currentTaskIndex));
+                    }
                 }
                 Connections {
-                    target: plasmoid.nativeInterface
-                    onShowingDesktopChanged: {
-                        showDesktopButton.checked = plasmoid.nativeInterface.showDesktop;
+                    target: root.taskSwitcher
+                    onCurrentTaskIndexChanged: {
+                        showDesktopButton.checked = root.taskSwitcher.currentTaskIndex >= 0
                     }
                 }
             }

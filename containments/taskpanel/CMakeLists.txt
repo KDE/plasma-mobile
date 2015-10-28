@@ -11,6 +11,7 @@ target_link_libraries(plasma_containment_phone_taskpanel
                       Qt5::DBus
                       KF5::Plasma
                       Qt5::Qml
+                      Qt5::Quick
                       KF5::I18n
                       KF5::Service
                       KF5::WaylandClient
