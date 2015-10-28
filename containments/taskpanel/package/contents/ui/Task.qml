@@ -28,6 +28,15 @@ Item {
     id: delegate
     width: window.width/2
     height: window.height/2
+
+    //Workaround
+    property bool active: model.IsActive
+    onActiveChanged: {
+        if (model.IsActive) {
+            window.currentTaskIndex = index
+        }
+    }
+
     Item {
         anchors {
             fill: parent

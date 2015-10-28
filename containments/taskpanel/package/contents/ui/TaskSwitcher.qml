@@ -33,6 +33,7 @@ FullScreenPanel {
     property int offset: 0
     property int overShoot: units.gridUnit * 2
     property int tasksCount: filteredWindowModel.count
+    property int currentTaskIndex: -1
 
     color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
@@ -49,6 +50,7 @@ FullScreenPanel {
         scrollAnim.from = tasksView.contentY;
         scrollAnim.to = 0;
         scrollAnim.running = true;
+        setSingleActiveWindow(-1);
     }
     function hide() {
         scrollAnim.from = tasksView.contentY;
@@ -58,6 +60,24 @@ FullScreenPanel {
             scrollAnim.to = tasksView.contentHeight - tasksView.headerItem.height;
         }
         scrollAnim.running = true;
+    }
+
+    function setSingleActiveWindow(id) {
+        var task;
+        for (var i = 0; i < filteredWindowModel.count; ++i) {
+            task = filteredWindowModel.get(i);
+            print("AAAAAA "+(i != id)+task.DisplayRole+" "+task.IsMinimized)
+            if (i == id && task.IsMinimized) {
+                plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
+            } else if (i != id && !task.IsMinimized) {
+                plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
+            } 
+        }
+        return;
+        if (id >= 0) {
+            plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(id));
+        }
+        currentTaskIndex = id;
     }
 
     onOffsetChanged: tasksView.contentY = offset
