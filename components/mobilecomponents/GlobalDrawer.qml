@@ -74,6 +74,7 @@ MobileComponents.OverlayDrawer {
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
+
         Component {
             id: menuComponent
             ListView {
