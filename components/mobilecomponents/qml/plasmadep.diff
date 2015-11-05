@@ -1,0 +1,3802 @@
+diff --git a/components/mobilecomponents/ActionGroup.qml b/components/mobilecomponents/ActionGroup.qml
+deleted file mode 100644
+index ba057f5..0000000
+--- a/components/mobilecomponents/ActionGroup.qml
++++ /dev/null
+@@ -1,27 +0,0 @@
+-/*
+- *   Copycontext 2015 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2 or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtQuick.Controls 1.3
+-
+-Action {
+-    id: root
+-    default property alias children: root.__children
+-    property list<Action> __children
+-}
+diff --git a/components/mobilecomponents/ApplicationWindow.qml b/components/mobilecomponents/ApplicationWindow.qml
+deleted file mode 100644
+index 67509db..0000000
+--- a/components/mobilecomponents/ApplicationWindow.qml
++++ /dev/null
+@@ -1,57 +0,0 @@
+-/*
+- *   Copycontext 2015 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2 or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtQuick.Controls 1.3
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-import org.kde.plasma.mobilecomponents 0.2
+-import org.kde.kquickcontrolsaddons 2.0
+-import org.kde.plasma.extras 2.0 as PlasmaExtras
+-
+-/**
+- * A window that provides some basic features needed for all apps
+- *
+- * It's usually used as a root QML component for the application.
+- * It's based around the PageRow component, the application will be
+- * about pages adding and removal.
+- */
+-ApplicationWindow {
+-    id: root
+-
+-    /**
+-     * The first page that will be loaded when the application starts
+-     */
+-    property alias initialPage: __pageStack.initialPage
+-
+-    /**
+-     * The stack used to allocate the pages nd to manage the transitions
+-     * between them.
+-     * It's using a PageRow, while having the same aPI as PageStack,
+-     * it positions the pages as adjacent columns, with as many columns
+-     * as can fit in the screen. An handheld device would usually have a single
+-     * fullscreen column, a tablet device would have many tiled columns.
+-     */
+-    property alias pageStack: __pageStack
+-
+-    PlasmaExtras.PageRow {
+-        id: __pageStack
+-        anchors.fill: parent
+-    }
+-
+-}
+diff --git a/components/mobilecomponents/CMakeLists.txt b/components/mobilecomponents/CMakeLists.txt
+index aa135c9..620c756 100644
+--- a/components/mobilecomponents/CMakeLists.txt
++++ b/components/mobilecomponents/CMakeLists.txt
+@@ -13,6 +13,10 @@ target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5
+ 
+ install(TARGETS mobilecomponentsplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
+ 
+-install(DIRECTORY  ${PROJECT_SOURCE_DIR} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/)
+ 
++install(DIRECTORY qml/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
+ 
++
++FILE(GLOB platformspecific ${PROJECT_SOURCE_DIR}/plasmatheme/*)
++
++install(FILES ${platformspecific} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
+diff --git a/components/mobilecomponents/ContextDrawer.qml b/components/mobilecomponents/ContextDrawer.qml
+deleted file mode 100644
+index 9488ebd..0000000
+--- a/components/mobilecomponents/ContextDrawer.qml
++++ /dev/null
+@@ -1,97 +0,0 @@
+-/*
+- *   Copyright 2015 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2, or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtQuick.Controls 1.0 as QtControls
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-import org.kde.plasma.extras 2.0 as PlasmaExtras
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-import org.kde.kquickcontrolsaddons  2.0
+-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+-
+-MobileComponents.OverlayDrawer {
+-    id: root
+-
+-    property string title
+-
+-    //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
+-    property alias actions: internalActions.data
+-
+-    Item {
+-        id: internalActions
+-    }
+-
+-    drawer: QtControls.ScrollView {
+-
+-        ListView {
+-            id: menu
+-            model: {
+-                if (root.actions.length == 0) {
+-                    return null;
+-                } else {
+-                    return root.actions[0].text !== undefined &&
+-                        root.actions[0].trigger !== undefined ?
+-                            root.actions :
+-                            root.actions[0];
+-                }
+-            }
+-            header: Item {
+-                height: heading.height
+-                PlasmaExtras.Heading {
+-                    id: heading
+-                    anchors {
+-                        left: parent.left
+-                        right: parent.right
+-                        margins: units.largeSpacing
+-                    }
+-                    elide: Text.ElideRight
+-                    level: 2
+-                    text: root.title
+-                }
+-            }
+-            delegate: PlasmaComponents.ListItem {
+-                enabled: true
+-                Row {
+-                    anchors {
+-                        left: parent.left
+-                        margins: units.largeSpacing
+-                    }
+-                    PlasmaCore.IconItem {
+-                        height: parent.height
+-                        width: height
+-                        source: modelData.iconName
+-                    }
+-                    PlasmaComponents.Label {
+-                        text: model ? model.text : modelData.text
+-                    }
+-                }
+-                onClicked: {
+-                    if (modelData && modelData.trigger !== undefined) {
+-                        modelData.trigger();
+-                    // assume the model is a list of QAction or Action
+-                    } else if (menu.model.length > index) {
+-                        menu.model[index].trigger();
+-                    } else {
+-                        console.warning("Don't know how to trigger the action")
+-                    }
+-                }
+-            }
+-        }
+-    }
+-}
+diff --git a/components/mobilecomponents/GlobalDrawer.qml b/components/mobilecomponents/GlobalDrawer.qml
+deleted file mode 100644
+index 76d5038..0000000
+--- a/components/mobilecomponents/GlobalDrawer.qml
++++ /dev/null
+@@ -1,140 +0,0 @@
+-/*
+- *   Copyright 2015 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2, or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtQuick.Controls 1.0
+-import QtQuick.Layouts 1.3
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-import org.kde.plasma.extras 2.0 as PlasmaExtras
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-import org.kde.kquickcontrolsaddons  2.0
+-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+-
+-MobileComponents.OverlayDrawer {
+-    id: root
+-    inverse: true
+-
+-    property alias content: mainContent.data
+-
+-    property alias title: heading.text
+-    property alias titleIcon: headingIcon.source
+-    property list<Action> actions
+-
+-    drawer: ColumnLayout {
+-        id: mainColumn
+-        anchors.fill: parent
+-        implicitWidth: units.gridUnit * 12
+-
+-        RowLayout {
+-            Layout.fillWidth: true
+-            anchors {
+-                left: parent.left
+-            }
+-            PlasmaCore.IconItem {
+-                id: headingIcon
+-                height: parent.height
+-                width: height
+-                Layout.minimumWidth: height
+-            }
+-            PlasmaExtras.Heading {
+-                id: heading
+-                level: 1
+-            }
+-            Item {
+-                height: parent.height
+-                Layout.minimumWidth: height
+-            }
+-        }
+-
+-        PlasmaExtras.PageRow {
+-            id: pageRow
+-            Layout.fillWidth: true
+-            Layout.fillHeight: true
+-            initialPage: menuComponent
+-        }
+-
+-        ColumnLayout {
+-            id: mainContent
+-            Layout.fillWidth: true
+-            Layout.fillHeight: true
+-        }
+-
+-        Component {
+-            id: menuComponent
+-            ListView {
+-                id: optionMenu
+-
+-                model: actions
+-                property int level: 0
+-
+-                footer: PlasmaComponents.ListItem {
+-                    visible: level > 0
+-                    enabled: true
+-                    RowLayout {
+-                        anchors {
+-                            left: parent.left
+-                        }
+-                        PlasmaCore.IconItem {
+-                            Layout.maximumWidth: height
+-                            Layout.fillHeight: true
+-                            source: "go-previous"
+-                        }
+-                        PlasmaComponents.Label {
+-                            text: i18n("Back")
+-                        }
+-                    }
+-                    onClicked: pageRow.pop()
+-                }
+-                delegate: PlasmaComponents.ListItem {
+-                    enabled: true
+-                    RowLayout {
+-                        anchors {
+-                            left: parent.left
+-                            right: parent.right
+-                        }
+-                        PlasmaCore.IconItem {
+-                            Layout.maximumWidth: height
+-                            Layout.fillHeight: true
+-                            source: modelData.iconName
+-                        }
+-                        PlasmaComponents.Label {
+-                            Layout.fillWidth: true
+-                            text: modelData.text
+-                        }
+-                        PlasmaCore.IconItem {
+-                            Layout.maximumWidth: height
+-                            Layout.fillHeight: true
+-                            source: "go-next"
+-                            visible: modelData.children != undefined
+-                        }
+-                    }
+-                    onClicked: {
+-                        if (modelData.children) {
+-                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
+-                        } else {
+-                            modelData.trigger();
+-                            pageRow.pop(pageRow.initialPage);
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-    }
+-}
+-
+diff --git a/components/mobilecomponents/IconGrid.qml b/components/mobilecomponents/IconGrid.qml
+deleted file mode 100644
+index ff2cae9..0000000
+--- a/components/mobilecomponents/IconGrid.qml
++++ /dev/null
+@@ -1,238 +0,0 @@
+-/*
+-    Copyright 2010 Marco Martin <notmart@gmail.com>
+-
+-    This library is free software; you can redistribute it and/or
+-    modify it under the terms of the GNU Library General Public
+-    License as published by the Free Software Foundation; either
+-    version 2 of the License, or (at your option) any later version.
+-
+-    This library is distributed in the hope that it will be useful,
+-    but WITHOUT ANY WARRANTY; without even the implied warranty of
+-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+-    Library General Public License for more details.
+-
+-    You should have received a copy of the GNU Library General Public License
+-    along with this library; see the file COPYING.LIB.  If not, write to
+-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+-    Boston, MA 02110-1301, USA.
+-*/
+-
+-import QtQuick 2.1
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+-
+-Item {
+-    id: main
+-
+-    property Component delegate
+-    property QtObject model
+-
+-    property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+-    property int delegateWidth: theme.mSize(theme.defaultFont).width * 15
+-    property int delegateHeight: theme.mSize(theme.defaultFont).width + units.iconSizes.medium + 8
+-    property alias currentPage: iconView.currentIndex
+-    property int pagesCount: Math.ceil(model.count/pageSize)
+-    property int count: model.count
+-    property alias contentX: iconView.contentX
+-    clip: true
+-
+-    function positionViewAtIndex(index)
+-    {
+-        iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
+-    }
+-
+-    Timer {
+-        id: resizeTimer
+-        running: true
+-        interval: 100
+-        onTriggered: {
+-            main.pageSize = Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+-            if (iconView.currentItem) {
+-                iconView.currentItem.width = iconView.width
+-                iconView.currentItem.height = iconView.height
+-            }
+-        }
+-    }
+-
+-    ListView {
+-        id: iconView
+-        objectName: "iconView"
+-        pressDelay: 200
+-        cacheBuffer: 100
+-        highlightMoveDuration: 250
+-        anchors.fill: parent
+-        onWidthChanged: resizeTimer.restart()
+-        onHeightChanged: resizeTimer.restart()
+-
+-        model: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
+-        highlightRangeMode: ListView.StrictlyEnforceRange
+-        orientation: ListView.Horizontal
+-        snapMode: ListView.SnapOneItem
+-        boundsBehavior: Flickable.DragOverBounds
+-
+-        signal clicked(string url)
+-
+-        delegate: Component {
+-            Item {
+-                id: delegatePage
+-                //Explicitly *not* bind the properties for performance reasons
+-                Component.onCompleted: {
+-                    width = iconView.width
+-                    height = iconView.height
+-                    //iconView.cacheBuffer = iconView.width
+-                }
+-
+-                Flow {
+-                    id: iconFlow
+-                    width: iconRepeater.suggestedWidth
+-
+-                    anchors {
+-                        horizontalCenter: parent.horizontalCenter
+-                        top: parent.top
+-                        bottom: parent.bottom
+-                    }
+-                    property int orientation: ListView.Horizontal
+-
+-                    MobileComponents.PagedProxyModel {
+-                        id: pagedProxyModel
+-                        sourceModel: main.model
+-                        currentPage: index
+-                        pageSize: main.pageSize
+-                    }
+-                    Repeater {
+-                        id: iconRepeater
+-                        model: pagedProxyModel
+-                        property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
+-                        property int suggestedWidth: main.delegateWidth*columns
+-                        //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
+-
+-                        delegate: main.delegate
+-                    }
+-                }
+-            }
+-        }
+-    }
+-
+-
+-    Loader {
+-        id: scrollArea
+-        visible: main.model && Math.ceil(main.model.count/main.pageSize) > 1
+-        anchors {
+-            left: parent.left
+-            right: parent.right
+-            bottom: parent.bottom
+-        }
+-        height: Math.max( 16, iconView.height - Math.floor(iconView.height/delegateHeight)*delegateHeight)
+-
+-        property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
+-
+-        sourceComponent: pageCount > 1 ? ((pageCount * 20 > width) ? scrollDotComponent : dotsRow) : undefined
+-        function setViewIndex(index)
+-        {
+-            //animate only if near
+-            if (Math.abs(iconView.currentIndex - index) > 1) {
+-                iconView.positionViewAtIndex(index, ListView.Beginning)
+-            } else {
+-                iconView.currentIndex = index
+-            }
+-        }
+-        Component {
+-            id: scrollDotComponent
+-            MouseArea {
+-                anchors.fill: parent
+-                property int pendingIndex: 0
+-                Rectangle {
+-                    id: barRectangle
+-                    color: theme.textColor
+-                    opacity: 2.05
+-                    height: 4
+-                    radius: 2
+-                    anchors {
+-                        left: parent.left
+-                        right: parent.right
+-                        verticalCenter: parent.verticalCenter
+-                        leftMargin: (parent.width/pageCount/2)
+-                        rightMargin: (parent.width/pageCount/2)
+-                    }
+-                }
+-                Rectangle {
+-                    color: theme.textColor
+-                    height: 8
+-                    width: height
+-                    radius: 4
+-                    anchors.verticalCenter: parent.verticalCenter
+-                    x: parent.width/(pageCount/(iconView.currentIndex+1)) - (parent.width/pageCount/2) - 4
+-                    Behavior on x {
+-                        NumberAnimation {
+-                            duration: 250
+-                            easing.type: Easing.InOutQuad
+-                        }
+-                    }
+-                }
+-                function setViewIndexFromMouse(x)
+-                {
+-                    pendingIndex = Math.min(pageCount,
+-                                            Math.round(pageCount / (barRectangle.width / Math.max(x - barRectangle.x, 1))))
+-                    viewPositionTimer.restart()
+-                }
+-                onPressed: setViewIndexFromMouse(mouse.x)
+-                onPositionChanged: setViewIndexFromMouse(mouse.x)
+-
+-                Timer {
+-                    id: viewPositionTimer
+-                    interval: 200
+-                    onTriggered: setViewIndex(pendingIndex)
+-                }
+-            }
+-        }
+-        Component {
+-            id: dotsRow
+-
+-            Item {
+-                Row {
+-                    anchors.centerIn: parent
+-                    spacing: 20
+-
+-                    Repeater {
+-                        model: scrollArea.pageCount
+-
+-
+-                        Rectangle {
+-                            width: 6
+-                            height: 6
+-                            scale: iconView.currentIndex == index ? 1.5 : 1
+-                            radius: 5
+-                            smooth: true
+-                            opacity: iconView.currentIndex == index ? 0.8: 0.4
+-                            color: theme.textColor
+-
+-                            Behavior on scale {
+-                                NumberAnimation {
+-                                    duration: 250
+-                                    easing.type: Easing.InOutQuad
+-                                }
+-                            }
+-                            Behavior on opacity {
+-                                NumberAnimation {
+-                                    duration: 250
+-                                    easing.type: Easing.InOutQuad
+-                                }
+-                            }
+-
+-                            MouseArea {
+-                                anchors {
+-                                    fill: parent
+-                                    margins: -10
+-                                }
+-
+-                                onClicked: {
+-                                    setViewIndex(index)
+-                                }
+-                            }
+-                        }
+-                    }
+-                }
+-            }
+-        }
+-    }
+-}
+diff --git a/components/mobilecomponents/OverlayDrawer.qml b/components/mobilecomponents/OverlayDrawer.qml
+deleted file mode 100644
+index c38f78c..0000000
+--- a/components/mobilecomponents/OverlayDrawer.qml
++++ /dev/null
+@@ -1,296 +0,0 @@
+-/*
+- *   Copyright 2012 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2, or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtGraphicalEffects 1.0
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-import org.kde.kquickcontrolsaddons  2.0
+-
+-
+-/**Documented API
+-Inherits:
+-        Page from org.kde.plasmacomponents
+-
+-Imports:
+-        org.kde.plasma.core
+-        org.kde.plasma.components
+-        QtQuick 1.1
+-
+-Description:
+-        Overlay Drawers are used to expose additional UI elements needed for small secondary tasks for which the main UI elements are not needed. For example in Okular Active, an Overlay Drawer is used to display thumbnails of all pages within a document along with a search field. This is used for the distinct task of navigating to another page.
+-
+-Properties:
+-        bool open:
+-        If true the drawer is open showing the contents of the "drawer" component.
+-
+-        Item page:
+-        It's the default property. it's the main content of the drawer page, the part that is always shown
+-
+-        Item drawer:
+-        It's the part that can be pulled in and out, will act as a sidebar.
+-**/
+-Item {
+-    id: root
+-    anchors.fill: parent
+-    z: 9999
+-
+-    default property alias page: mainPage.data
+-    property alias drawer: drawerPage.data
+-    property alias open: browserFrame.open
+-    property bool inverse: false
+-
+-    Item {
+-        id: mainPage
+-        anchors.fill: parent
+-        onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
+-    }
+-
+-    Rectangle {
+-        anchors.fill: parent
+-        color: "black"
+-        opacity: 0.6 * (root.inverse
+-            ? ((browserFrame.x + browserFrame.width) / browserFrame.width)
+-            : (1 - browserFrame.x / root.width))
+-    }
+-
+-    MouseArea {
+-        anchors {
+-            right: root.inverse ? undefined : parent.right
+-            left: root.inverse ? parent.left : undefined
+-            top: parent.top
+-            bottom: parent.bottom
+-        }
+-        z: 99
+-        width: units.smallSpacing
+-        onPressed: mouseEventListener.managePressed(mouse)
+-        onPositionChanged: mouseEventListener.positionChanged(mouse)
+-        onReleased: mouseEventListener.released(mouse)
+-    }
+-    MouseArea {
+-        id: mouseEventListener
+-        anchors.fill: parent
+-        drag.filterChildren: true
+-        property int startBrowserFrameX
+-        property int startMouseX
+-        property real oldMouseX
+-        property bool startDragging: false
+-        property string startState
+-        enabled: browserFrame.state != "Closed"
+-
+-        onPressed: managePressed(mouse)
+-        function managePressed(mouse) {
+-            if (drawerPage.children.length == 0) {
+-                mouse.accepted = false;
+-                return;
+-            }
+-
+-            mouse.accepted = true;
+-            startBrowserFrameX = browserFrame.x;
+-            oldMouseX = startMouseX = mouse.x;
+-            startDragging = false;
+-            startState = browserFrame.state;
+-            browserFrame.state = "Dragging";
+-            browserFrame.x = startBrowserFrameX;
+-        }
+-
+-        onPositionChanged: {
+-            if (drawerPage.children.length == 0) {
+-                mouse.accepted = false;
+-                return;
+-            }
+-
+-            if (mouse.x < units.gridUnit ||
+-                Math.abs(mouse.x - startMouseX) > root.width / 5) {
+-                startDragging = true;
+-            }
+-            if (startDragging) {
+-                browserFrame.x = root.inverse
+-                    ? Math.min(0, browserFrame.x + mouse.x - oldMouseX)
+-                    : Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
+-            }
+-            oldMouseX = mouse.x;
+-        }
+-
+-        onReleased: {
+-            if (drawerPage.children.length == 0) {
+-                mouse.accepted = false;
+-                return;
+-            }
+-
+-            if (root.inverse) {
+-                if (mouse.x < units.gridUnit) {
+-                    browserFrame.state = "Closed";
+-                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+-                    browserFrame.state = "Open";
+-                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+-                    browserFrame.state = "Closed";
+-                } else {
+-                    browserFrame.state = startState
+-                }
+-
+-            } else {
+-                if (mouse.x > width - units.gridUnit) {
+-                    browserFrame.state = "Closed";
+-                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+-                    browserFrame.state = "Closed";
+-                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+-                    browserFrame.state = "Open";
+-                } else {
+-                    browserFrame.state = startState;
+-                }
+-            }
+-        }
+-        onCanceled: {
+-            if (oldMouseX > width - units.gridUnit) {
+-                browserFrame.state = "Closed";
+-            } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
+-                browserFrame.state = startState == "Open" ? "Closed" : "Open";
+-            } else {
+-                browserFrame.state = "Open";
+-            }
+-        }
+-        onClicked: {
+-            if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
+-                return;
+-            }
+-            if ((root.inverse && mouse.x > browserFrame.width) ||
+-                (!root.inverse && mouse.x < browserFrame.x)) {
+-                browserFrame.state = startState == "Open" ? "Closed" : "Open";
+-            }
+-        }
+-        Rectangle {
+-            id: browserFrame
+-            z: 100
+-            color: PlasmaCore.ColorScope.backgroundColor
+-            anchors {
+-                top: parent.top
+-                bottom: parent.bottom
+-            }
+-
+-            width: {
+-                if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
+-                    return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
+-                } else {
+-                    return parent.width - units.gridUnit * 3
+-                }
+-            }
+-
+-            state: "Closed"
+-            onStateChanged: open = (state != "Closed")
+-            property bool open: false
+-            onOpenChanged: {
+-                if (drawerPage.children.length == 0) {
+-                    return;
+-                }
+-
+-                if (open) {
+-                    browserFrame.state = "Open";
+-                } else {
+-                    browserFrame.state = "Closed";
+-                }
+-            }
+-
+-            LinearGradient {
+-                width: units.gridUnit/2
+-                anchors {
+-                    right: root.inverse ? undefined : parent.left
+-                    left: root.inverse ? parent.right : undefined
+-                    top: parent.top
+-                    bottom: parent.bottom
+-                    rightMargin: -1
+-                }
+-                opacity: browserFrame.state == "Closed" ? 0 : 1
+-                start: Qt.point(0, 0)
+-                end: Qt.point(units.gridUnit/2, 0)
+-                gradient: Gradient {
+-                    GradientStop {
+-                        position: 0.0
+-                        color: root.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
+-                    }
+-                    GradientStop {
+-                        position: root.inverse ? 0.3 : 0.7
+-                        color: Qt.rgba(0, 0, 0, 0.15)
+-                    }
+-                    GradientStop {
+-                        position: 1.0
+-                        color: root.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
+-                    }
+-                }
+-                Behavior on opacity {
+-                    NumberAnimation {
+-                        duration: units.longDuration
+-                        easing.type: Easing.InOutQuad
+-                    }
+-                }
+-            }
+-
+-
+-            MouseArea {
+-                id: drawerPage
+-                anchors {
+-                    fill: parent
+-                    //leftMargin: units.gridUnit
+-                }
+-                clip: true
+-                onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
+-            }
+-
+-            states: [
+-                State {
+-                    name: "Open"
+-                    PropertyChanges {
+-                        target: browserFrame
+-                        x: root.inverse ? 0 : root.width - browserFrame.width
+-                    }
+-
+-                },
+-                State {
+-                    name: "Dragging"
+-                    //workaround for a quirkiness of the state machine
+-                    //if no x binding gets defined in this state x will be set to whatever last x it had last time it was in this state
+-                    PropertyChanges {
+-                        target: browserFrame
+-                        x: mouseEventListener.startBrowserFrameX
+-                    }
+-                },
+-                State {
+-                    name: "Closed"
+-                    PropertyChanges {
+-                        target: browserFrame
+-                        x: root.inverse ? -browserFrame.width : root.width
+-                    }
+-                }
+-            ]
+-
+-            transitions: [
+-                Transition {
+-                    //Exclude Dragging
+-                    to: "Open,Closed,Hidden"
+-                    NumberAnimation {
+-                        properties: "x"
+-                        duration: units.longDuration
+-                        easing.type: Easing.InOutQuad
+-                    }
+-                }
+-            ]
+-        }
+-    }
+-}
+-
+diff --git a/components/mobilecomponents/Page.qml b/components/mobilecomponents/Page.qml
+deleted file mode 100644
+index 001bc3e..0000000
+--- a/components/mobilecomponents/Page.qml
++++ /dev/null
+@@ -1,122 +0,0 @@
+-/*
+- *   Copyright 2015 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2, or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtQuick.Layouts 1.3
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-
+-Item {
+-    id: root
+-
+-    /**
+-     * type:PageStack
+-     * The page stack that this page is owned by.
+-     */
+-    property Item pageStack
+-
+-    /**
+-     * Defines the toolbar contents for the page. If the page stack is set up
+-     * using a toolbar instance, it automatically shows the currently active
+-     * page's toolbar contents in the toolbar.
+-     *
+-     * The default value is null resulting in the page's toolbar to be
+-     * invisible when the page is active.
+-     */
+-    property Item tools: null
+-
+-    /**
+-     * Defines the actions for the page: at most 4 buttons will
+-     * contain the actions at the bottom of the page, if the main
+-     * item of the page is a Flickable or a ScrllArea, it will
+-     * control the visibility of the actions.
+-     */
+-    property alias actions: internalActions.data
+-
+-    Item {
+-        id: internalActions
+-    }
+-
+-    RowLayout {
+-        id: internalButtons
+-        z:99
+-        anchors.horizontalCenter: parent.horizontalCenter
+-        Layout.fillWidth: false
+-        height: units.iconSizes.large
+-        property Item flickable: {
+-            if (root.children[root.children.length-1]) {
+-                if (root.children[root.children.length-1].contentY) {
+-                    return root.children[root.children.length-1];
+-                } else if (root.children[root.children.length-1].flickableItem) {
+-                    return root.children[root.children.length-1].flickableItem;
+-                }
+-            }
+-            return null;
+-        }
+-        Connections {
+-            target: internalButtons.flickable
+-            property real oldContentY: internalButtons.flickable.contentY
+-            onContentYChanged: {
+-                if (internalButtons.flickable.atYBeginning || internalButtons.flickable.atYEnd) {
+-                    return;
+-                }
+-                internalButtons.y = Math.max(internalButtons.flickable.height - internalButtons.height, Math.min(internalButtons.flickable.height, internalButtons.y + internalButtons.flickable.contentY - oldContentY));
+-                oldContentY = internalButtons.flickable.contentY;
+-            }
+-        }
+-        y: parent.height - height
+-        Repeater {
+-            model: {
+-                if (root.actions.length == 0) {
+-                    return null;
+-                } else {
+-                    return root.actions[0].text !== undefined &&
+-                        root.actions[0].trigger !== undefined ?
+-                            root.actions :
+-                            root.actions[0];
+-                }
+-            }
+-            delegate: PlasmaComponents.ToolButton {
+-                Layout.fillHeight: true
+-                flat: false
+-                iconSource: modelData.iconName
+-                onClicked: {
+-                    if (modelData && modelData.trigger !== undefined) {
+-                        modelData.trigger();
+-                    // assume the model is a list of QAction or Action
+-                    } else if (toolbar.model.length > index) {
+-                        toolbar.model[index].trigger();
+-                    } else {
+-                        console.log("Don't know how to trigger the action")
+-                    }
+-                }
+-            }
+-        }
+-        onChildrenChanged: {
+-            var flexibleFound = false;
+-            for (var i = 0; i < children.length; ++i) {
+-                if (children[i].Layout.fillWidth) {
+-                    flexibleFound = true;
+-                    break;
+-                }
+-            }
+-            Layout.fillWidth = flexibleFound;
+-        }
+-    }
+-}
+diff --git a/components/mobilecomponents/SplitDrawer.qml b/components/mobilecomponents/SplitDrawer.qml
+deleted file mode 100644
+index f737871..0000000
+--- a/components/mobilecomponents/SplitDrawer.qml
++++ /dev/null
+@@ -1,234 +0,0 @@
+-/*
+- *   Copyright 2012 Marco Martin <mart@kde.org>
+- *
+- *   This program is free software; you can redistribute it and/or modify
+- *   it under the terms of the GNU Library General Public License as
+- *   published by the Free Software Foundation; either version 2, or
+- *   (at your option) any later version.
+- *
+- *   This program is distributed in the hope that it will be useful,
+- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+- *   GNU Library General Public License for more details
+- *
+- *   You should have received a copy of the GNU Library General Public
+- *   License along with this program; if not, write to the
+- *   Free Software Foundation, Inc.,
+- *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+- */
+-
+-import QtQuick 2.1
+-import QtGraphicalEffects 1.0
+-import org.kde.plasma.components 2.0 as PlasmaComponents
+-import org.kde.plasma.core 2.0 as PlasmaCore
+-
+-/**Documented API
+-Inherits:
+-        Page from org.kde.plasmacomponents
+-
+-Imports:
+-        org.kde.plasma.core
+-        org.kde.plasma.components
+-        QtQuick 1.1
+-
+-Description:
+-        Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
+-
+-Properties:
+-        bool open:
+-        If true the drawer is open showing the contents of the "drawer" component.
+-
+-        Item page:
+-        It's the default property. it's the main content of the drawer page, the part that is always shown
+-
+-        Item drawer:
+-        It's the part that can be pulled in and out, will act as a sidebar.
+-
+-        int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
+-**/
+-PlasmaComponents.Page {
+-    id: root
+-    anchors {
+-        fill: parent
+-    }
+-    visible: true
+-
+-    default property alias page: mainPage.data
+-    property alias drawer: drawerPage.data
+-    property alias open: sidebar.open
+-    property int visibleDrawerWidth: browserFrame.x
+-
+-    Component.onCompleted: {
+-        mainPage.width = browserFrame.width
+-    }
+-
+-    MouseArea {
+-        id: mouseEventListener
+-        z: 200
+-        drag.filterChildren: true
+-        //drag.target: browserFrame
+-        property int startMouseX
+-        property int oldMouseX
+-        property int startBrowserFrameX
+-        property bool toggle: false
+-        property string startState
+-
+-        anchors.fill: parent
+-
+-        onPressed: {
+-            if (drawerPage.children.length == 0 || (browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
+-                mouse.x < browserFrame.x) {
+-                mouse.accepted = false;
+-                return;
+-            }
+-
+-            toggle = true;
+-            startBrowserFrameX = browserFrame.x;
+-            oldMouseX = startMouseX = mouse.x;
+-            startState = browserFrame.state;
+-            browserFrame.state = "Dragging";
+-            browserFrame.x = startBrowserFrameX;
+-        }
+-
+-        onPositionChanged: {
+-            browserFrame.x = Math.max(0, browserFrame.x + mouse.x - oldMouseX);
+-            oldMouseX = mouse.x;
+-            if (Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
+-                toggle = false;
+-            }
+-        }
+-
+-        onReleased: {
+-            if (toggle) {
+-                browserFrame.state = startState == "Open" ? "Closed" : "Open"
+-            } else if (browserFrame.x < sidebar.width / 2) {
+-                browserFrame.state = "Closed";
+-            } else {
+-                browserFrame.state = "Open";
+-            }
+-        }
+-    }
+-
+-    Rectangle {
+-        id: browserFrame
+-        z: 100
+-        color: PlasmaCore.ColorScope.backgroundColor
+-        state: "Closed"
+-        onStateChanged: sidebar.open = (state != "Closed")
+-
+-        anchors {
+-            top: parent.top
+-            bottom: parent.bottom
+-        }
+-        width: root.width;
+-
+-        Item {
+-            id: mainPage
+-            onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
+-
+-            anchors.fill: parent
+-        }
+-
+-        Rectangle {
+-            anchors.fill: parent
+-            color: "black"
+-            opacity: Math.min(0.4, 0.4 * (browserFrame.x / sidebar.width))
+-        }
+-        LinearGradient {
+-            width: units.gridUnit/2
+-            anchors {
+-                right: parent.left
+-                top: parent.top
+-                bottom: parent.bottom
+-                rightMargin: -1
+-            }
+-            start: Qt.point(0, 0)
+-            end: Qt.point(units.gridUnit/2, 0)
+-            gradient: Gradient {
+-                GradientStop {
+-                    position: 0.0
+-                    color: "transparent"
+-                }
+-                GradientStop {
+-                    position: 0.7
+-                    color: Qt.rgba(0, 0, 0, 0.15)
+-                }
+-                GradientStop {
+-                    position: 1.0
+-                    color: Qt.rgba(0, 0, 0, 0.3)
+-                }
+-            }
+-        }
+-
+-        states: [
+-            State {
+-                name: "Open"
+-                PropertyChanges {
+-                    target: browserFrame
+-                    x: sidebar.width
+-                }
+-
+-            },
+-            State {
+-                name: "Dragging"
+-                PropertyChanges {
+-                    target: browserFrame
+-                    x: mouseEventListener.startBrowserFrameX
+-                }
+-            },
+-            State {
+-                name: "Closed"
+-                PropertyChanges {
+-                    target: browserFrame
+-                    x: 0
+-                }
+-            }
+-        ]
+-
+-        transitions: [
+-            Transition {
+-                //Exclude Dragging
+-                to: "Open,Closed,Hidden"
+-                NumberAnimation {
+-                    properties: "x"
+-                    duration: units.longDuration
+-                    easing.type: Easing.InOutQuad
+-                }
+-            }
+-        ]
+-    }
+-
+-
+-    Item {
+-        id: sidebar
+-
+-        property bool open: false
+-        onOpenChanged: {
+-            if (drawerPage.children.length == 0) {
+-                return;
+-            }
+-
+-            if (open) {
+-                browserFrame.state = "Open";
+-            } else {
+-                browserFrame.state = "Closed";
+-            }
+-        }
+-
+-        width: parent.width/4
+-
+-        anchors {
+-            left: parent.left
+-            top: parent.top
+-            bottom: parent.bottom
+-        }
+-
+-        Item {
+-            id: drawerPage
+-            anchors.fill: parent
+-            clip: false
+-            onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
+-        }
+-    }
+-}
+-
+diff --git a/components/mobilecomponents/fallbacktheme/Theme.qml b/components/mobilecomponents/fallbacktheme/Theme.qml
+new file mode 100644
+index 0000000..4889e6c
+--- /dev/null
++++ b/components/mobilecomponents/fallbacktheme/Theme.qml
+@@ -0,0 +1,58 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.0
++
++pragma Singleton
++
++/*!
++   \qmltype Theme
++   \inqmlmodule Material 0.1
++
++   \brief Provides access to standard colors that follow the Material Design specification.
++
++   See \l {http://www.google.com/design/spec/style/color.html#color-ui-color-application} for
++   details about choosing a color scheme for your application.
++ */
++Object {
++    id: theme
++
++    property color textColor: Qt.rgba(0,0,0, 0.54)
++    
++    property color highlightColor: "#2196F3"
++    property color backgroundColor: "#f3f3f3"
++    property color linkColor: "#2196F3"
++    property color visitedLinkColor: "#2196F3"
++
++    property color buttonTextColor: Qt.rgba(0,0,0, 0.54)
++    property color buttonBackgroundColor: "#f3f3f3"
++    property color buttonHoverColor: "#2196F3"
++    property color buttonFocusColor: "#2196F3"
++
++    property color viewTextColor: Qt.rgba(0,0,0, 0.54)
++    property color viewBackgroundColor: "#f3f3f3"
++    property color viewHoverColor: "#2196F3"
++    property color viewFocusColor: "#2196F3"
++
++    property color complementaryTextColor: "#f3f3f3"
++    property color complementaryBackgroundColor: Qt.rgba(0,0,0, 0.54)
++    property color complementaryHoverColor: "#2196F3"
++    property color complementaryFocusColor: "#2196F3"
++
++}
+diff --git a/components/mobilecomponents/fallbacktheme/Units.qml b/components/mobilecomponents/fallbacktheme/Units.qml
+new file mode 100644
+index 0000000..a8b8c62
+--- /dev/null
++++ b/components/mobilecomponents/fallbacktheme/Units.qml
+@@ -0,0 +1,102 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.0
++import QtQuick.Window 2.2
++
++pragma Singleton
++
++
++Object {
++    id: units
++
++    /**
++     * The fundamental unit of space that should be used for sizes, expressed in pixels.
++     * Given the screen has an accurate DPI settings, it corresponds to a width of
++     * the capital letter M
++     */
++    property int gridUnit: textSpacer.height
++
++    /**
++     * units.iconSizes provides access to platform-dependent icon sizing
++     *
++     * The icon sizes provided are normalized for different DPI, so icons
++     * will scale depending on the DPI.
++     *
++     * Icon sizes from KIconLoader, adjusted to devicePixelRatio:
++     * * small
++     * * smallMedium
++     * * medium
++     * * large
++     * * huge
++     * * enormous
++     *
++     * Not devicePixelRation-adjusted::
++     * * desktop
++     */
++    property QtObject iconSizes: Object {
++        property int small: 16 * devicePixelRatio
++        property int smallMedium: 22 * devicePixelRatio
++        property int medium: 32 * devicePixelRatio
++        property int large: 48 * devicePixelRatio
++        property int huge: 64 * devicePixelRatio
++        property int enormous: 128 * devicePixelRatio
++    }
++
++    /**
++     * units.smallSpacing is the amount of spacing that should be used around smaller UI elements,
++     * for example as spacing in Columns. Internally, this size depends on the size of
++     * the default font as rendered on the screen, so it takes user-configured font size and DPI
++     * into account.
++     */
++    property int smallSpacing: gridUnit/4
++
++    /**
++     * units.largeSpacing is the amount of spacing that should be used inside bigger UI elements,
++     * for example between an icon and the corresponding text. Internally, this size depends on
++     * the size of the default font as rendered on the screen, so it takes user-configured font
++     * size and DPI into account.
++     */
++    property int largeSpacing: gridUnit
++
++    /**
++     * The ratio between physical and device-independent pixels. This value does not depend on the \
++     * size of the configured font. If you want to take font sizes into account when scaling elements,
++     * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
++     * The devicePixelRatio follows the definition of "device independent pixel" by Microsoft.
++     */
++    property real devicePixelRatio: Screen.devicePixelRatio
++
++    /**
++     * units.longDuration should be used for longer, screen-covering animations, for opening and
++     * closing of dialogs and other "not too small" animations
++     */
++    property int longDuration: 250
++
++    /**
++     * units.shortDuration should be used for short animations, such as accentuating a UI event,
++     * hover events, etc..
++     */
++    property int shortDuration: 150
++
++    Text {
++        id: textSpacer
++        text: "M"
++    }
++}
+diff --git a/components/mobilecomponents/plasmatheme/Theme.qml b/components/mobilecomponents/plasmatheme/Theme.qml
+new file mode 100644
+index 0000000..538c5ae
+--- /dev/null
++++ b/components/mobilecomponents/plasmatheme/Theme.qml
+@@ -0,0 +1,59 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.0
++import org.kde.plasma.core 2.0 as PlasmaCore
++
++pragma Singleton
++
++/*!
++   \qmltype Theme
++   \inqmlmodule Material 0.1
++
++   \brief Provides access to standard colors that follow the Material Design specification.
++
++   See \l {http://www.google.com/design/spec/style/color.html#color-ui-color-application} for
++   details about choosing a color scheme for your application.
++ */
++Object {
++    id: theme
++
++    property color textColor: theme.textColor
++    
++    property color highlightColor: theme.highlightColor
++    property color backgroundColor: theme.backgroundColor
++    property color linkColor: theme.linkColor
++    property color visitedLinkColor: theme.visitedLinkColor
++
++    property color buttonTextColor: theme.buttonTextColor
++    property color buttonBackgroundColor: theme.buttonBackgroundColor
++    property color buttonHoverColor: theme.buttonHoverColor
++    property color buttonFocusColor: theme.buttonFocusColor
++
++    property color viewTextColor: theme.viewTextColor
++    property color viewBackgroundColor: theme.viewBackgroundColor
++    property color viewHoverColor: theme.viewHoverColor
++    property color viewFocusColor: theme.viewFocusColor
++
++    property color complementaryTextColor: theme.complementaryTextColor
++    property color complementaryBackgroundColor: theme.complementaryBackgroundColor
++    property color complementaryHoverColor: theme.complementaryHoverColor
++    property color complementaryFocusColor: theme.complementaryFocusColor
++
++}
+diff --git a/components/mobilecomponents/plasmatheme/Units.qml b/components/mobilecomponents/plasmatheme/Units.qml
+new file mode 100644
+index 0000000..8696e62
+--- /dev/null
++++ b/components/mobilecomponents/plasmatheme/Units.qml
+@@ -0,0 +1,97 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.0
++import org.kde.plasma.core 2.0 as PlasmaCore
++
++pragma Singleton
++
++
++Object {
++    id: units
++
++    /**
++     * The fundamental unit of space that should be used for sizes, expressed in pixels.
++     * Given the screen has an accurate DPI settings, it corresponds to a width of
++     * the capital letter M
++     */
++    property int gridUnit: theme.gridUnit
++
++    /**
++     * units.iconSizes provides access to platform-dependent icon sizing
++     *
++     * The icon sizes provided are normalized for different DPI, so icons
++     * will scale depending on the DPI.
++     *
++     * Icon sizes from KIconLoader, adjusted to devicePixelRatio:
++     * * small
++     * * smallMedium
++     * * medium
++     * * large
++     * * huge
++     * * enormous
++     *
++     * Not devicePixelRation-adjusted::
++     * * desktop
++     */
++    property QtObject iconSizes: Object {
++        property int small: theme.small
++        property int smallMedium: theme.smallMedium
++        property int medium: theme.medium
++        property int large: theme.large
++        property int huge: theme.huge
++        property int enormous: theme.enormous
++    }
++
++    /**
++     * units.smallSpacing is the amount of spacing that should be used around smaller UI elements,
++     * for example as spacing in Columns. Internally, this size depends on the size of
++     * the default font as rendered on the screen, so it takes user-configured font size and DPI
++     * into account.
++     */
++    property int smallSpacing: theme.smallSpacing
++
++    /**
++     * units.largeSpacing is the amount of spacing that should be used inside bigger UI elements,
++     * for example between an icon and the corresponding text. Internally, this size depends on
++     * the size of the default font as rendered on the screen, so it takes user-configured font
++     * size and DPI into account.
++     */
++    property int largeSpacing: theme.largeSpacing
++
++    /**
++     * The ratio between physical and device-independent pixels. This value does not depend on the \
++     * size of the configured font. If you want to take font sizes into account when scaling elements,
++     * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
++     * The devicePixelRatio follows the definition of "device independent pixel" by Microsoft.
++     */
++    property real devicePixelRatio: theme.devicePixelRatio
++
++    /**
++     * units.longDuration should be used for longer, screen-covering animations, for opening and
++     * closing of dialogs and other "not too small" animations
++     */
++    property int longDuration: theme.longDuration
++
++    /**
++     * units.shortDuration should be used for short animations, such as accentuating a UI event,
++     * hover events, etc..
++     */
++    property int shortDuration: theme.shortDuration
++}
+diff --git a/components/mobilecomponents/qml/ActionGroup.qml b/components/mobilecomponents/qml/ActionGroup.qml
+new file mode 100644
+index 0000000..ba057f5
+--- /dev/null
++++ b/components/mobilecomponents/qml/ActionGroup.qml
+@@ -0,0 +1,27 @@
++/*
++ *   Copycontext 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2 or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtQuick.Controls 1.3
++
++Action {
++    id: root
++    default property alias children: root.__children
++    property list<Action> __children
++}
+diff --git a/components/mobilecomponents/qml/ApplicationWindow.qml b/components/mobilecomponents/qml/ApplicationWindow.qml
+new file mode 100644
+index 0000000..d497b6d
+--- /dev/null
++++ b/components/mobilecomponents/qml/ApplicationWindow.qml
+@@ -0,0 +1,56 @@
++/*
++ *   Copycontext 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2 or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtQuick.Controls 1.3
++import org.kde.plasma.mobilecomponents 0.2
++import org.kde.kquickcontrolsaddons 2.0
++import org.kde.plasma.extras 2.0 as PlasmaExtras
++
++/**
++ * A window that provides some basic features needed for all apps
++ *
++ * It's usually used as a root QML component for the application.
++ * It's based around the PageRow component, the application will be
++ * about pages adding and removal.
++ */
++ApplicationWindow {
++    id: root
++
++    /**
++     * The first page that will be loaded when the application starts
++     */
++    property alias initialPage: __pageStack.initialPage
++
++    /**
++     * The stack used to allocate the pages nd to manage the transitions
++     * between them.
++     * It's using a PageRow, while having the same aPI as PageStack,
++     * it positions the pages as adjacent columns, with as many columns
++     * as can fit in the screen. An handheld device would usually have a single
++     * fullscreen column, a tablet device would have many tiled columns.
++     */
++    property alias pageStack: __pageStack
++
++    PageRow {
++        id: __pageStack
++        anchors.fill: parent
++    }
++
++}
+diff --git a/components/mobilecomponents/qml/ContextDrawer.qml b/components/mobilecomponents/qml/ContextDrawer.qml
+new file mode 100644
+index 0000000..9488ebd
+--- /dev/null
++++ b/components/mobilecomponents/qml/ContextDrawer.qml
+@@ -0,0 +1,97 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtQuick.Controls 1.0 as QtControls
++import org.kde.plasma.components 2.0 as PlasmaComponents
++import org.kde.plasma.extras 2.0 as PlasmaExtras
++import org.kde.plasma.core 2.0 as PlasmaCore
++import org.kde.kquickcontrolsaddons  2.0
++import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
++
++MobileComponents.OverlayDrawer {
++    id: root
++
++    property string title
++
++    //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
++    property alias actions: internalActions.data
++
++    Item {
++        id: internalActions
++    }
++
++    drawer: QtControls.ScrollView {
++
++        ListView {
++            id: menu
++            model: {
++                if (root.actions.length == 0) {
++                    return null;
++                } else {
++                    return root.actions[0].text !== undefined &&
++                        root.actions[0].trigger !== undefined ?
++                            root.actions :
++                            root.actions[0];
++                }
++            }
++            header: Item {
++                height: heading.height
++                PlasmaExtras.Heading {
++                    id: heading
++                    anchors {
++                        left: parent.left
++                        right: parent.right
++                        margins: units.largeSpacing
++                    }
++                    elide: Text.ElideRight
++                    level: 2
++                    text: root.title
++                }
++            }
++            delegate: PlasmaComponents.ListItem {
++                enabled: true
++                Row {
++                    anchors {
++                        left: parent.left
++                        margins: units.largeSpacing
++                    }
++                    PlasmaCore.IconItem {
++                        height: parent.height
++                        width: height
++                        source: modelData.iconName
++                    }
++                    PlasmaComponents.Label {
++                        text: model ? model.text : modelData.text
++                    }
++                }
++                onClicked: {
++                    if (modelData && modelData.trigger !== undefined) {
++                        modelData.trigger();
++                    // assume the model is a list of QAction or Action
++                    } else if (menu.model.length > index) {
++                        menu.model[index].trigger();
++                    } else {
++                        console.warning("Don't know how to trigger the action")
++                    }
++                }
++            }
++        }
++    }
++}
+diff --git a/components/mobilecomponents/qml/GlobalDrawer.qml b/components/mobilecomponents/qml/GlobalDrawer.qml
+new file mode 100644
+index 0000000..c05b129
+--- /dev/null
++++ b/components/mobilecomponents/qml/GlobalDrawer.qml
+@@ -0,0 +1,139 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtQuick.Controls 1.0
++import QtQuick.Layouts 1.3
++import org.kde.plasma.components 2.0 as PlasmaComponents
++import org.kde.plasma.core 2.0 as PlasmaCore
++import org.kde.kquickcontrolsaddons  2.0
++import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
++
++MobileComponents.OverlayDrawer {
++    id: root
++    inverse: true
++
++    property alias content: mainContent.data
++
++    property alias title: heading.text
++    property alias titleIcon: headingIcon.source
++    property list<Action> actions
++
++    drawer: ColumnLayout {
++        id: mainColumn
++        anchors.fill: parent
++        implicitWidth: units.gridUnit * 12
++
++        RowLayout {
++            Layout.fillWidth: true
++            anchors {
++                left: parent.left
++            }
++            PlasmaCore.IconItem {
++                id: headingIcon
++                height: parent.height
++                width: height
++                Layout.minimumWidth: height
++            }
++            Heading {
++                id: heading
++                level: 1
++            }
++            Item {
++                height: parent.height
++                Layout.minimumWidth: height
++            }
++        }
++
++        PageRow {
++            id: pageRow
++            Layout.fillWidth: true
++            Layout.fillHeight: true
++            initialPage: menuComponent
++        }
++
++        ColumnLayout {
++            id: mainContent
++            Layout.fillWidth: true
++            Layout.fillHeight: true
++        }
++
++        Component {
++            id: menuComponent
++            ListView {
++                id: optionMenu
++
++                model: actions
++                property int level: 0
++
++                footer: PlasmaComponents.ListItem {
++                    visible: level > 0
++                    enabled: true
++                    RowLayout {
++                        anchors {
++                            left: parent.left
++                        }
++                        PlasmaCore.IconItem {
++                            Layout.maximumWidth: height
++                            Layout.fillHeight: true
++                            source: "go-previous"
++                        }
++                        PlasmaComponents.Label {
++                            text: i18n("Back")
++                        }
++                    }
++                    onClicked: pageRow.pop()
++                }
++                delegate: PlasmaComponents.ListItem {
++                    enabled: true
++                    RowLayout {
++                        anchors {
++                            left: parent.left
++                            right: parent.right
++                        }
++                        PlasmaCore.IconItem {
++                            Layout.maximumWidth: height
++                            Layout.fillHeight: true
++                            source: modelData.iconName
++                        }
++                        PlasmaComponents.Label {
++                            Layout.fillWidth: true
++                            text: modelData.text
++                        }
++                        PlasmaCore.IconItem {
++                            Layout.maximumWidth: height
++                            Layout.fillHeight: true
++                            source: "go-next"
++                            visible: modelData.children != undefined
++                        }
++                    }
++                    onClicked: {
++                        if (modelData.children) {
++                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
++                        } else {
++                            modelData.trigger();
++                            pageRow.pop(pageRow.initialPage);
++                        }
++                    }
++                }
++            }
++        }
++    }
++}
++
+diff --git a/components/mobilecomponents/qml/Heading.qml b/components/mobilecomponents/qml/Heading.qml
+new file mode 100644
+index 0000000..9127b17
+--- /dev/null
++++ b/components/mobilecomponents/qml/Heading.qml
+@@ -0,0 +1,75 @@
++/*
++*   Copyright 2012 by Sebastian Kügler <sebas@kde.org>
++*
++*   This program is free software; you can redistribute it and/or modify
++*   it under the terms of the GNU Library General Public License as
++*   published by the Free Software Foundation; either version 2, or
++*   (at your option) any later version.
++*
++*   This program is distributed in the hope that it will be useful,
++*   but WITHOUT ANY WARRANTY; without even the implied warranty of
++*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++*   GNU Library General Public License for more details
++*
++*   You should have received a copy of the GNU Library General Public
++*   License along with this program; if not, write to the
++*   Free Software Foundation, Inc.,
++*   51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
++*/
++
++import QtQuick 2.0
++
++/**
++ * A heading label used for subsections of texts.
++ *
++ * The characteristics of the text will be automatically set according to the
++ * plasma theme. Use this components for section titles or headings in your UI,
++ * for example page or section titles.
++ *
++ * Example usage:
++ *
++ * @code
++ * import org.kde.plasma.extras 2.0 as PlasmaExtras
++ * [...]
++ * Column {
++ *     PlasmaExtras.Title { text: "Fruit sweetness on the rise" }
++ *     PlasmaExtras.Heading { text: "Apples in the sunlight"; level: 2 }
++ *     PlasmaExtras.Paragraph { text: "Long text about fruit and apples [...]" }
++ *   [...]
++ * }
++ * @endcode
++ *
++ * The most important property is "text", which applies to the text property of
++ * Label. See PlasmaComponents Label and primitive QML Text element API for
++ * additional properties, methods and signals.
++ */
++Label {
++    id: heading
++
++    /**
++     * The level determines how big the section header is display, values
++     * between 1 (big) and 5 (small) are accepted
++     */
++    property int level: 1
++
++    property int step: 2
++
++    height: Math.round(paintedHeight * 1.2)
++    font.pointSize: headerPointSize(level)
++    font.weight: Font.Light
++    wrapMode: Text.WordWrap
++    opacity: 0.8
++
++    function headerPointSize(l) {
++        var n = theme.defaultFont.pointSize;
++        var s;
++        if (l > 4) {
++            s = n
++        } else if (l < 2) {
++            s = n + (5*step)
++        } else {
++            s = n + ((5-level)*2)
++        }
++        return s;
++    }
++}
+diff --git a/components/mobilecomponents/qml/IconGrid.qml b/components/mobilecomponents/qml/IconGrid.qml
+new file mode 100644
+index 0000000..ff2cae9
+--- /dev/null
++++ b/components/mobilecomponents/qml/IconGrid.qml
+@@ -0,0 +1,238 @@
++/*
++    Copyright 2010 Marco Martin <notmart@gmail.com>
++
++    This library is free software; you can redistribute it and/or
++    modify it under the terms of the GNU Library General Public
++    License as published by the Free Software Foundation; either
++    version 2 of the License, or (at your option) any later version.
++
++    This library is distributed in the hope that it will be useful,
++    but WITHOUT ANY WARRANTY; without even the implied warranty of
++    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
++    Library General Public License for more details.
++
++    You should have received a copy of the GNU Library General Public License
++    along with this library; see the file COPYING.LIB.  If not, write to
++    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
++    Boston, MA 02110-1301, USA.
++*/
++
++import QtQuick 2.1
++import org.kde.plasma.core 2.0 as PlasmaCore
++import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
++
++Item {
++    id: main
++
++    property Component delegate
++    property QtObject model
++
++    property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
++    property int delegateWidth: theme.mSize(theme.defaultFont).width * 15
++    property int delegateHeight: theme.mSize(theme.defaultFont).width + units.iconSizes.medium + 8
++    property alias currentPage: iconView.currentIndex
++    property int pagesCount: Math.ceil(model.count/pageSize)
++    property int count: model.count
++    property alias contentX: iconView.contentX
++    clip: true
++
++    function positionViewAtIndex(index)
++    {
++        iconView.positionViewAtIndex(index / pageSize, ListView.Beginning)
++    }
++
++    Timer {
++        id: resizeTimer
++        running: true
++        interval: 100
++        onTriggered: {
++            main.pageSize = Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
++            if (iconView.currentItem) {
++                iconView.currentItem.width = iconView.width
++                iconView.currentItem.height = iconView.height
++            }
++        }
++    }
++
++    ListView {
++        id: iconView
++        objectName: "iconView"
++        pressDelay: 200
++        cacheBuffer: 100
++        highlightMoveDuration: 250
++        anchors.fill: parent
++        onWidthChanged: resizeTimer.restart()
++        onHeightChanged: resizeTimer.restart()
++
++        model: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
++        highlightRangeMode: ListView.StrictlyEnforceRange
++        orientation: ListView.Horizontal
++        snapMode: ListView.SnapOneItem
++        boundsBehavior: Flickable.DragOverBounds
++
++        signal clicked(string url)
++
++        delegate: Component {
++            Item {
++                id: delegatePage
++                //Explicitly *not* bind the properties for performance reasons
++                Component.onCompleted: {
++                    width = iconView.width
++                    height = iconView.height
++                    //iconView.cacheBuffer = iconView.width
++                }
++
++                Flow {
++                    id: iconFlow
++                    width: iconRepeater.suggestedWidth
++
++                    anchors {
++                        horizontalCenter: parent.horizontalCenter
++                        top: parent.top
++                        bottom: parent.bottom
++                    }
++                    property int orientation: ListView.Horizontal
++
++                    MobileComponents.PagedProxyModel {
++                        id: pagedProxyModel
++                        sourceModel: main.model
++                        currentPage: index
++                        pageSize: main.pageSize
++                    }
++                    Repeater {
++                        id: iconRepeater
++                        model: pagedProxyModel
++                        property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
++                        property int suggestedWidth: main.delegateWidth*columns
++                        //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
++
++                        delegate: main.delegate
++                    }
++                }
++            }
++        }
++    }
++
++
++    Loader {
++        id: scrollArea
++        visible: main.model && Math.ceil(main.model.count/main.pageSize) > 1
++        anchors {
++            left: parent.left
++            right: parent.right
++            bottom: parent.bottom
++        }
++        height: Math.max( 16, iconView.height - Math.floor(iconView.height/delegateHeight)*delegateHeight)
++
++        property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
++
++        sourceComponent: pageCount > 1 ? ((pageCount * 20 > width) ? scrollDotComponent : dotsRow) : undefined
++        function setViewIndex(index)
++        {
++            //animate only if near
++            if (Math.abs(iconView.currentIndex - index) > 1) {
++                iconView.positionViewAtIndex(index, ListView.Beginning)
++            } else {
++                iconView.currentIndex = index
++            }
++        }
++        Component {
++            id: scrollDotComponent
++            MouseArea {
++                anchors.fill: parent
++                property int pendingIndex: 0
++                Rectangle {
++                    id: barRectangle
++                    color: theme.textColor
++                    opacity: 2.05
++                    height: 4
++                    radius: 2
++                    anchors {
++                        left: parent.left
++                        right: parent.right
++                        verticalCenter: parent.verticalCenter
++                        leftMargin: (parent.width/pageCount/2)
++                        rightMargin: (parent.width/pageCount/2)
++                    }
++                }
++                Rectangle {
++                    color: theme.textColor
++                    height: 8
++                    width: height
++                    radius: 4
++                    anchors.verticalCenter: parent.verticalCenter
++                    x: parent.width/(pageCount/(iconView.currentIndex+1)) - (parent.width/pageCount/2) - 4
++                    Behavior on x {
++                        NumberAnimation {
++                            duration: 250
++                            easing.type: Easing.InOutQuad
++                        }
++                    }
++                }
++                function setViewIndexFromMouse(x)
++                {
++                    pendingIndex = Math.min(pageCount,
++                                            Math.round(pageCount / (barRectangle.width / Math.max(x - barRectangle.x, 1))))
++                    viewPositionTimer.restart()
++                }
++                onPressed: setViewIndexFromMouse(mouse.x)
++                onPositionChanged: setViewIndexFromMouse(mouse.x)
++
++                Timer {
++                    id: viewPositionTimer
++                    interval: 200
++                    onTriggered: setViewIndex(pendingIndex)
++                }
++            }
++        }
++        Component {
++            id: dotsRow
++
++            Item {
++                Row {
++                    anchors.centerIn: parent
++                    spacing: 20
++
++                    Repeater {
++                        model: scrollArea.pageCount
++
++
++                        Rectangle {
++                            width: 6
++                            height: 6
++                            scale: iconView.currentIndex == index ? 1.5 : 1
++                            radius: 5
++                            smooth: true
++                            opacity: iconView.currentIndex == index ? 0.8: 0.4
++                            color: theme.textColor
++
++                            Behavior on scale {
++                                NumberAnimation {
++                                    duration: 250
++                                    easing.type: Easing.InOutQuad
++                                }
++                            }
++                            Behavior on opacity {
++                                NumberAnimation {
++                                    duration: 250
++                                    easing.type: Easing.InOutQuad
++                                }
++                            }
++
++                            MouseArea {
++                                anchors {
++                                    fill: parent
++                                    margins: -10
++                                }
++
++                                onClicked: {
++                                    setViewIndex(index)
++                                }
++                            }
++                        }
++                    }
++                }
++            }
++        }
++    }
++}
+diff --git a/components/mobilecomponents/qml/Label.qml b/components/mobilecomponents/qml/Label.qml
+new file mode 100644
+index 0000000..a22efb6
+--- /dev/null
++++ b/components/mobilecomponents/qml/Label.qml
+@@ -0,0 +1,59 @@
++/*
++*   Copyright (C) 2011 by Marco Martin <mart@kde.org>
++*
++*   This program is free software; you can redistribute it and/or modify
++*   it under the terms of the GNU Library General Public License as
++*   published by the Free Software Foundation; either version 2, or
++*   (at your option) any later version.
++*
++*   This program is distributed in the hope that it will be useful,
++*   but WITHOUT ANY WARRANTY; without even the implied warranty of
++*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++*   GNU Library General Public License for more details
++*
++*   You should have received a copy of the GNU Library General Public
++*   License along with this program; if not, write to the
++*   Free Software Foundation, Inc.,
++*   51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
++*/
++
++import QtQuick 2.1
++import org.kde.plasma.core 2.0 as PlasmaCore
++
++/**
++ * This is a label which uses the plasma theme.
++ *
++ * The characteristics of the text will be automatically set according to the
++ * plasma theme. If you need a more customized text item use the Text component
++ * from QtQuick.
++ *
++ * You can use all elements of the QML Text component, in particular the "text"
++ * property to define the label text.
++ *
++ * @inherit QtQuick.Text
++ */
++Text {
++    id: root
++
++    height: Math.round(Math.max(paintedHeight, theme.mSize(theme.defaultFont).height*1.6))
++    verticalAlignment: lineCount > 1 ? Text.AlignTop : Text.AlignVCenter
++
++    activeFocusOnTab: false
++    renderType: Text.NativeRendering
++
++    font.capitalization: theme.defaultFont.capitalization
++    font.family: theme.defaultFont.family
++    font.italic: theme.defaultFont.italic
++    font.letterSpacing: theme.defaultFont.letterSpacing
++    font.pointSize: theme.defaultFont.pointSize
++    font.strikeout: theme.defaultFont.strikeout
++    font.underline: theme.defaultFont.underline
++    font.weight: theme.defaultFont.weight
++    font.wordSpacing: theme.defaultFont.wordSpacing
++    color: PlasmaCore.ColorScope.textColor
++
++    opacity: enabled? 1 : 0.6
++
++    Accessible.role: Accessible.StaticText
++    Accessible.name: text
++}
+diff --git a/components/mobilecomponents/qml/OverlayDrawer.qml b/components/mobilecomponents/qml/OverlayDrawer.qml
+new file mode 100644
+index 0000000..c38f78c
+--- /dev/null
++++ b/components/mobilecomponents/qml/OverlayDrawer.qml
+@@ -0,0 +1,296 @@
++/*
++ *   Copyright 2012 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtGraphicalEffects 1.0
++import org.kde.plasma.components 2.0 as PlasmaComponents
++import org.kde.plasma.core 2.0 as PlasmaCore
++import org.kde.kquickcontrolsaddons  2.0
++
++
++/**Documented API
++Inherits:
++        Page from org.kde.plasmacomponents
++
++Imports:
++        org.kde.plasma.core
++        org.kde.plasma.components
++        QtQuick 1.1
++
++Description:
++        Overlay Drawers are used to expose additional UI elements needed for small secondary tasks for which the main UI elements are not needed. For example in Okular Active, an Overlay Drawer is used to display thumbnails of all pages within a document along with a search field. This is used for the distinct task of navigating to another page.
++
++Properties:
++        bool open:
++        If true the drawer is open showing the contents of the "drawer" component.
++
++        Item page:
++        It's the default property. it's the main content of the drawer page, the part that is always shown
++
++        Item drawer:
++        It's the part that can be pulled in and out, will act as a sidebar.
++**/
++Item {
++    id: root
++    anchors.fill: parent
++    z: 9999
++
++    default property alias page: mainPage.data
++    property alias drawer: drawerPage.data
++    property alias open: browserFrame.open
++    property bool inverse: false
++
++    Item {
++        id: mainPage
++        anchors.fill: parent
++        onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
++    }
++
++    Rectangle {
++        anchors.fill: parent
++        color: "black"
++        opacity: 0.6 * (root.inverse
++            ? ((browserFrame.x + browserFrame.width) / browserFrame.width)
++            : (1 - browserFrame.x / root.width))
++    }
++
++    MouseArea {
++        anchors {
++            right: root.inverse ? undefined : parent.right
++            left: root.inverse ? parent.left : undefined
++            top: parent.top
++            bottom: parent.bottom
++        }
++        z: 99
++        width: units.smallSpacing
++        onPressed: mouseEventListener.managePressed(mouse)
++        onPositionChanged: mouseEventListener.positionChanged(mouse)
++        onReleased: mouseEventListener.released(mouse)
++    }
++    MouseArea {
++        id: mouseEventListener
++        anchors.fill: parent
++        drag.filterChildren: true
++        property int startBrowserFrameX
++        property int startMouseX
++        property real oldMouseX
++        property bool startDragging: false
++        property string startState
++        enabled: browserFrame.state != "Closed"
++
++        onPressed: managePressed(mouse)
++        function managePressed(mouse) {
++            if (drawerPage.children.length == 0) {
++                mouse.accepted = false;
++                return;
++            }
++
++            mouse.accepted = true;
++            startBrowserFrameX = browserFrame.x;
++            oldMouseX = startMouseX = mouse.x;
++            startDragging = false;
++            startState = browserFrame.state;
++            browserFrame.state = "Dragging";
++            browserFrame.x = startBrowserFrameX;
++        }
++
++        onPositionChanged: {
++            if (drawerPage.children.length == 0) {
++                mouse.accepted = false;
++                return;
++            }
++
++            if (mouse.x < units.gridUnit ||
++                Math.abs(mouse.x - startMouseX) > root.width / 5) {
++                startDragging = true;
++            }
++            if (startDragging) {
++                browserFrame.x = root.inverse
++                    ? Math.min(0, browserFrame.x + mouse.x - oldMouseX)
++                    : Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
++            }
++            oldMouseX = mouse.x;
++        }
++
++        onReleased: {
++            if (drawerPage.children.length == 0) {
++                mouse.accepted = false;
++                return;
++            }
++
++            if (root.inverse) {
++                if (mouse.x < units.gridUnit) {
++                    browserFrame.state = "Closed";
++                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
++                    browserFrame.state = "Open";
++                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
++                    browserFrame.state = "Closed";
++                } else {
++                    browserFrame.state = startState
++                }
++
++            } else {
++                if (mouse.x > width - units.gridUnit) {
++                    browserFrame.state = "Closed";
++                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
++                    browserFrame.state = "Closed";
++                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
++                    browserFrame.state = "Open";
++                } else {
++                    browserFrame.state = startState;
++                }
++            }
++        }
++        onCanceled: {
++            if (oldMouseX > width - units.gridUnit) {
++                browserFrame.state = "Closed";
++            } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
++                browserFrame.state = startState == "Open" ? "Closed" : "Open";
++            } else {
++                browserFrame.state = "Open";
++            }
++        }
++        onClicked: {
++            if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
++                return;
++            }
++            if ((root.inverse && mouse.x > browserFrame.width) ||
++                (!root.inverse && mouse.x < browserFrame.x)) {
++                browserFrame.state = startState == "Open" ? "Closed" : "Open";
++            }
++        }
++        Rectangle {
++            id: browserFrame
++            z: 100
++            color: PlasmaCore.ColorScope.backgroundColor
++            anchors {
++                top: parent.top
++                bottom: parent.bottom
++            }
++
++            width: {
++                if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
++                    return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
++                } else {
++                    return parent.width - units.gridUnit * 3
++                }
++            }
++
++            state: "Closed"
++            onStateChanged: open = (state != "Closed")
++            property bool open: false
++            onOpenChanged: {
++                if (drawerPage.children.length == 0) {
++                    return;
++                }
++
++                if (open) {
++                    browserFrame.state = "Open";
++                } else {
++                    browserFrame.state = "Closed";
++                }
++            }
++
++            LinearGradient {
++                width: units.gridUnit/2
++                anchors {
++                    right: root.inverse ? undefined : parent.left
++                    left: root.inverse ? parent.right : undefined
++                    top: parent.top
++                    bottom: parent.bottom
++                    rightMargin: -1
++                }
++                opacity: browserFrame.state == "Closed" ? 0 : 1
++                start: Qt.point(0, 0)
++                end: Qt.point(units.gridUnit/2, 0)
++                gradient: Gradient {
++                    GradientStop {
++                        position: 0.0
++                        color: root.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
++                    }
++                    GradientStop {
++                        position: root.inverse ? 0.3 : 0.7
++                        color: Qt.rgba(0, 0, 0, 0.15)
++                    }
++                    GradientStop {
++                        position: 1.0
++                        color: root.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
++                    }
++                }
++                Behavior on opacity {
++                    NumberAnimation {
++                        duration: units.longDuration
++                        easing.type: Easing.InOutQuad
++                    }
++                }
++            }
++
++
++            MouseArea {
++                id: drawerPage
++                anchors {
++                    fill: parent
++                    //leftMargin: units.gridUnit
++                }
++                clip: true
++                onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
++            }
++
++            states: [
++                State {
++                    name: "Open"
++                    PropertyChanges {
++                        target: browserFrame
++                        x: root.inverse ? 0 : root.width - browserFrame.width
++                    }
++
++                },
++                State {
++                    name: "Dragging"
++                    //workaround for a quirkiness of the state machine
++                    //if no x binding gets defined in this state x will be set to whatever last x it had last time it was in this state
++                    PropertyChanges {
++                        target: browserFrame
++                        x: mouseEventListener.startBrowserFrameX
++                    }
++                },
++                State {
++                    name: "Closed"
++                    PropertyChanges {
++                        target: browserFrame
++                        x: root.inverse ? -browserFrame.width : root.width
++                    }
++                }
++            ]
++
++            transitions: [
++                Transition {
++                    //Exclude Dragging
++                    to: "Open,Closed,Hidden"
++                    NumberAnimation {
++                        properties: "x"
++                        duration: units.longDuration
++                        easing.type: Easing.InOutQuad
++                    }
++                }
++            ]
++        }
++    }
++}
++
+diff --git a/components/mobilecomponents/qml/Page.qml b/components/mobilecomponents/qml/Page.qml
+new file mode 100644
+index 0000000..001bc3e
+--- /dev/null
++++ b/components/mobilecomponents/qml/Page.qml
+@@ -0,0 +1,122 @@
++/*
++ *   Copyright 2015 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtQuick.Layouts 1.3
++import org.kde.plasma.core 2.0 as PlasmaCore
++import org.kde.plasma.components 2.0 as PlasmaComponents
++
++Item {
++    id: root
++
++    /**
++     * type:PageStack
++     * The page stack that this page is owned by.
++     */
++    property Item pageStack
++
++    /**
++     * Defines the toolbar contents for the page. If the page stack is set up
++     * using a toolbar instance, it automatically shows the currently active
++     * page's toolbar contents in the toolbar.
++     *
++     * The default value is null resulting in the page's toolbar to be
++     * invisible when the page is active.
++     */
++    property Item tools: null
++
++    /**
++     * Defines the actions for the page: at most 4 buttons will
++     * contain the actions at the bottom of the page, if the main
++     * item of the page is a Flickable or a ScrllArea, it will
++     * control the visibility of the actions.
++     */
++    property alias actions: internalActions.data
++
++    Item {
++        id: internalActions
++    }
++
++    RowLayout {
++        id: internalButtons
++        z:99
++        anchors.horizontalCenter: parent.horizontalCenter
++        Layout.fillWidth: false
++        height: units.iconSizes.large
++        property Item flickable: {
++            if (root.children[root.children.length-1]) {
++                if (root.children[root.children.length-1].contentY) {
++                    return root.children[root.children.length-1];
++                } else if (root.children[root.children.length-1].flickableItem) {
++                    return root.children[root.children.length-1].flickableItem;
++                }
++            }
++            return null;
++        }
++        Connections {
++            target: internalButtons.flickable
++            property real oldContentY: internalButtons.flickable.contentY
++            onContentYChanged: {
++                if (internalButtons.flickable.atYBeginning || internalButtons.flickable.atYEnd) {
++                    return;
++                }
++                internalButtons.y = Math.max(internalButtons.flickable.height - internalButtons.height, Math.min(internalButtons.flickable.height, internalButtons.y + internalButtons.flickable.contentY - oldContentY));
++                oldContentY = internalButtons.flickable.contentY;
++            }
++        }
++        y: parent.height - height
++        Repeater {
++            model: {
++                if (root.actions.length == 0) {
++                    return null;
++                } else {
++                    return root.actions[0].text !== undefined &&
++                        root.actions[0].trigger !== undefined ?
++                            root.actions :
++                            root.actions[0];
++                }
++            }
++            delegate: PlasmaComponents.ToolButton {
++                Layout.fillHeight: true
++                flat: false
++                iconSource: modelData.iconName
++                onClicked: {
++                    if (modelData && modelData.trigger !== undefined) {
++                        modelData.trigger();
++                    // assume the model is a list of QAction or Action
++                    } else if (toolbar.model.length > index) {
++                        toolbar.model[index].trigger();
++                    } else {
++                        console.log("Don't know how to trigger the action")
++                    }
++                }
++            }
++        }
++        onChildrenChanged: {
++            var flexibleFound = false;
++            for (var i = 0; i < children.length; ++i) {
++                if (children[i].Layout.fillWidth) {
++                    flexibleFound = true;
++                    break;
++                }
++            }
++            Layout.fillWidth = flexibleFound;
++        }
++    }
++}
+diff --git a/components/mobilecomponents/qml/PageRow.qml b/components/mobilecomponents/qml/PageRow.qml
+new file mode 100644
+index 0000000..d3e0091
+--- /dev/null
++++ b/components/mobilecomponents/qml/PageRow.qml
+@@ -0,0 +1,495 @@
++/****************************************************************************
++**
++** Copyright (C) 2012 Marco Martin  <mart@kde.org>
++**
++** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
++** All rights reserved.
++** Contact: Nokia Corporation (qt-info@nokia.com)
++**
++** This file is part of the Qt Components project.
++**
++** $QT_BEGIN_LICENSE:BSD$
++** You may use this file under the terms of the BSD license as follows:
++**
++** "Redistribution and use in source and binary forms, with or without
++** modification, are permitted provided that the following conditions are
++** met:
++**   * Redistributions of source code must retain the above copyright
++**     notice, this list of conditions and the following disclaimer.
++**   * Redistributions in binary form must reproduce the above copyright
++**     notice, this list of conditions and the following disclaimer in
++**     the documentation and/or other materials provided with the
++**     distribution.
++**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
++**     the names of its contributors may be used to endorse or promote
++**     products derived from this software without specific prior written
++**     permission.
++**
++** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++import QtQuick 2.0
++import QtQuick.Controls 1.0
++import org.kde.plasma.components 2.0
++
++import "private/PageStack.js" as Engine
++
++Item {
++    id: actualRoot
++
++    width: parent ? parent.width : 0
++    height: parent ? parent.height : 0
++
++
++    property int depth: Engine.getDepth()
++    property Item currentPage: null
++    property ToolBar toolBar
++    property variant initialPage
++    //A column is wide enough for 30 characters
++    property int columnWidth: Math.round(parent.width/(theme.mSize(theme.defaultFont).width*30)) > 0 ? parent.width/Math.round(parent.width/(theme.mSize(theme.defaultFont).width*30)) : width
++    property alias clip: scrollArea.clip
++
++    // Indicates whether there is an ongoing page transition.
++    property bool busy: internal.ongoingTransitionCount > 0
++
++    // Pushes a page on the stack.
++    // The page can be defined as a component, item or string.
++    // If an item is used then the page will get re-parented.
++    // If a string is used then it is interpreted as a url that is used to load a page component.
++    //
++    // The page can also be given as an array of pages. In this case all those pages will be pushed
++    // onto the stack. The items in the stack can be components, items or strings just like for single
++    // pages. Additionally an object can be used, which specifies a page and an optional properties
++    // property. This can be used to push multiple pages while still giving each of them properties.
++    // When an array is used the transition animation will only be to the last page.
++    //
++    // The properties argument is optional and allows defining a map of properties to set on the page.
++    // If the immediate argument is true then no transition animation is performed.
++    // Returns the page instance.
++    function push(page, properties, immediate)
++    {
++        var item = Engine.push(page, properties, false, immediate)
++        scrollToLevel(depth)
++        return item
++    }
++
++    // Pops a page off the stack.
++    // If page is specified then the stack is unwound to that page, to unwind to the first page specify
++    // page as null. If the immediate argument is true then no transition animation is performed.
++    // Returns the page instance that was popped off the stack.
++    function pop(page, immediate)
++    {
++        return Engine.pop(page, immediate);
++    }
++
++    // Replaces a page on the stack.
++    // See push() for details.
++    function replace(page, properties, immediate)
++    {
++        var item = Engine.push(page, properties, true, immediate);
++        scrollToLevel(depth)
++        return item
++    }
++
++    // Clears the page stack.
++    function clear()
++    {
++        return Engine.clear();
++    }
++
++    // Iterates through all pages (top to bottom) and invokes the specified function.
++    // If the specified function returns true the search stops and the find function
++    // returns the page that the iteration stopped at. If the search doesn't result
++    // in any page being found then null is returned.
++    function find(func)
++    {
++        return Engine.find(func);
++    }
++
++    // Scroll the view to have the page of the given level as first item
++    function scrollToLevel(level)
++    {
++        if (level < 0 || level > depth || root.width < width) {
++            return
++        }
++
++        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * level - columnWidth), mainFlickable.contentWidth))
++        scrollAnimation.running = true
++    }
++
++    NumberAnimation {
++        id: scrollAnimation
++        target: mainFlickable
++        properties: "contentX"
++        duration: internal.transitionDuration
++        easing.type: Easing.InOutQuad
++    }
++
++    // Called when the page stack visibility changes.
++    onVisibleChanged: {
++        if (currentPage) {
++            internal.setPageStatus(currentPage, visible ? PageStatus.Active : PageStatus.Inactive);
++            if (visible)
++                currentPage.visible = currentPage.parent.visible = true;
++        }
++    }
++
++    onInitialPageChanged: {
++        if (!internal.completed) {
++            return
++        }
++
++        if (initialPage) {
++            if (depth == 0) {
++                push(initialPage, null, true)
++            } else if (depth == 1) {
++                replace(initialPage, null, true)
++            } else {
++                console.log("Cannot update PageStack.initialPage")
++            }
++        }
++    }
++
++    Component.onCompleted: {
++        internal.completed = true
++        if (initialPage && depth == 0)
++            push(initialPage, null, true)
++    }
++
++    QtObject {
++        id: internal
++
++        // The number of ongoing transitions.
++        property int ongoingTransitionCount: 0
++
++        //FIXME: there should be a way to access to theh without storing it in an ugly way
++        property bool completed: false
++
++        // Duration of transition animation (in ms)
++        property int transitionDuration: units.longDuration
++
++        // Sets the page status.
++        function setPageStatus(page, status)
++        {
++            if (page != null) {
++                if (page.status !== undefined) {
++                    if (status == PageStatus.Active && page.status == PageStatus.Inactive)
++                        page.status = PageStatus.Activating;
++                    else if (status == PageStatus.Inactive && page.status == PageStatus.Active)
++                        page.status = PageStatus.Deactivating;
++
++                    page.status = status;
++                }
++            }
++        }
++    }
++
++    ScrollView {
++        id: scrollArea
++        anchors.fill: parent
++        Flickable {
++            id: mainFlickable
++            anchors.fill: parent
++            interactive: root.width > width
++            boundsBehavior: Flickable.StopAtBounds
++            contentWidth: root.width
++            contentHeight: height
++            Row {
++                id: root
++                spacing: -100
++                width: Math.max((depth-1+children[children.length-1].takenColumns) * columnWidth, childrenRect.width - 100) 
++
++                height: parent.height
++                Behavior on width {
++                    NumberAnimation {
++                        duration: internal.transitionDuration
++                        easing.type: Easing.InOutQuad
++                    }
++                }
++            }
++            onMovementEnded: {
++                scrollToLevel(Math.round(contentX/columnWidth)+1)
++            }
++        }
++    }
++
++    // Component for page containers.
++    Component {
++        id: containerComponent
++
++        Item {
++            id: container
++
++            implicitWidth: actualContainer.width + 100
++            width: implicitWidth
++            height: parent ? parent.height : 0
++
++            x: 0
++
++            // The actual parent of page: page will anchor to that
++            property Item pageParent: actualContainer
++
++            property int pageDepth: 0
++            Component.onCompleted: {
++                pageDepth = Engine.getDepth() + 1
++                container.z = -Engine.getDepth()
++            }
++
++            // The states correspond to the different possible positions of the container.
++            state: "Hidden"
++
++            // The page held by this container.
++            property Item page: null
++
++            // The owner of the page.
++            property Item owner: null
++
++            // The width of the longer stack dimension
++            property int stackWidth: Math.max(actualRoot.width, actualRoot.height)
++
++
++            // Flag that indicates the container should be cleaned up after the transition has ended.
++            property bool cleanupAfterTransition: false
++
++            // Flag that indicates if page transition animation is running
++            property bool transitionAnimationRunning: false
++
++            // State to be set after previous state change animation has finished
++            property string pendingState: "none"
++
++            //how many columns take the page?
++            property alias takenColumns: actualContainer.takenColumns
++
++            // Ensures that transition finish actions are executed
++            // in case the object is destroyed before reaching the
++            // end state of an ongoing transition
++            Component.onDestruction: {
++                if (transitionAnimationRunning)
++                    transitionEnded();
++            }
++
++            Item {
++                id: actualContainer
++
++                anchors {
++                    top: parent.top
++                    bottom: parent.bottom
++                    right: parent.right
++                    rightMargin: 100
++                }
++
++                property int takenColumns: Math.max(1, Math.round(container.page ? container.page.implicitWidth/columnWidth : 1));
++
++                width: (container.pageDepth >= actualRoot.depth ? Math.min(actualRoot.width, takenColumns*columnWidth) : columnWidth)
++            }
++
++            // Sets pending state as current if state change is delayed
++            onTransitionAnimationRunningChanged: {
++                if (!transitionAnimationRunning && pendingState != "none") {
++                    state = pendingState;
++                    pendingState = "none";
++                }
++            }
++
++            // Handles state change depening on transition animation status
++            function setState(newState)
++            {
++                if (transitionAnimationRunning)
++                    pendingState = newState;
++                else
++                    state = newState;
++            }
++
++            // Performs a push enter transition.
++            function pushEnter(immediate, orientationChanges)
++            {
++                if (!immediate) {
++                    setState("Right");
++                }
++                setState("");
++                page.visible = true;
++                if (actualRoot.visible && immediate)
++                    internal.setPageStatus(page, PageStatus.Active);
++            }
++
++            // Performs a push exit transition.
++            function pushExit(replace, immediate, orientationChanges)
++            {
++                if (replace) {
++                    setState(immediate ? "Hidden" : "Left");
++                }
++
++                if (actualRoot.visible && immediate)
++                    internal.setPageStatus(page, PageStatus.Inactive);
++                if (replace) {
++                    if (immediate)
++                        cleanup();
++                    else
++                        cleanupAfterTransition = true;
++                }
++            }
++
++            // Performs a pop enter transition.
++            function popEnter(immediate, orientationChanges)
++            {
++                setState("");
++                page.visible = true;
++                if (actualRoot.visible && immediate)
++                    internal.setPageStatus(page, PageStatus.Active);
++            }
++
++            // Performs a pop exit transition.
++            function popExit(immediate, orientationChanges)
++            {
++                setState(immediate ? "Hidden" : "Left");
++
++                if (actualRoot.visible && immediate)
++                    internal.setPageStatus(page, PageStatus.Inactive);
++                if (immediate)
++                    cleanup();
++                else
++                    cleanupAfterTransition = true;
++            }
++
++            // Called when a transition has started.
++            function transitionStarted()
++            {
++                container.clip = true
++                transitionAnimationRunning = true;
++                internal.ongoingTransitionCount++;
++                if (actualRoot.visible) {
++                    internal.setPageStatus(page, (state == "") ? PageStatus.Activating : PageStatus.Deactivating);
++                }
++            }
++
++            // Called when a transition has ended.
++            function transitionEnded()
++            {
++                container.clip = false
++                if (state != "")
++                    state = "Hidden";
++                if (actualRoot.visible)
++                    internal.setPageStatus(page, (state == "") ? PageStatus.Active : PageStatus.Inactive);
++
++                internal.ongoingTransitionCount--;
++                transitionAnimationRunning = false;
++
++                if (cleanupAfterTransition) {
++                    cleanup();
++                }
++            }
++
++            states: [
++                // Explicit properties for default state.
++                State {
++                    name: ""
++                    PropertyChanges { target: container; visible: true; opacity: 1 }
++                    PropertyChanges { target: container; width: container.implicitWidth}
++                },
++                // Start state for pop entry, end state for push exit.
++                State {
++                    name: "Left"
++                    PropertyChanges { target: container; opacity: 0 }
++                    PropertyChanges { target: container; width: 100}
++                },
++                // Start state for push entry, end state for pop exit.
++                State {
++                    name: "Right"
++                    PropertyChanges { target: container; opacity: 0 }
++                    PropertyChanges { target: container; width: 100}
++                },
++                // Inactive state.
++                State {
++                    name: "Hidden"
++                    PropertyChanges { target: container; visible: false }
++                    PropertyChanges { target: container; width: container.implicitWidth}
++                }
++            ]
++
++            transitions: [
++                // Push exit transition
++                Transition {
++                    from: ""; to: "Left"
++                    SequentialAnimation {
++                        ScriptAction { script: transitionStarted() }
++                        ParallelAnimation {
++                            PropertyAnimation { properties: "width"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                            PropertyAnimation { properties: "opacity"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                        }
++                        ScriptAction { script: transitionEnded() }
++                    }
++                },
++                // Pop entry transition
++                Transition {
++                    from: "Left"; to: ""
++                    SequentialAnimation {
++                        ScriptAction { script: transitionStarted() }
++                        ParallelAnimation {
++                            PropertyAnimation { properties: "width"; easing.type: Easing.OutQuad; duration: internal.transitionDuration }
++                            PropertyAnimation { properties: "opacity"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                        }
++                        ScriptAction { script: transitionEnded() }
++                    }
++                },
++                // Pop exit transition
++                Transition {
++                    from: ""; to: "Right"
++                    SequentialAnimation {
++                        ScriptAction { script: transitionStarted() }
++                        ParallelAnimation {
++                            PropertyAnimation { properties: "width"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                            PropertyAnimation { properties: "opacity"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                        }
++                        // Workaround for transition animation bug causing ghost view with page pop transition animation
++                        // TODO: Root cause still unknown
++                        PropertyAnimation {}
++                        ScriptAction { script: transitionEnded() }
++                    }
++                },
++                // Push entry transition
++                Transition {
++                    from: "Right"; to: ""
++                    SequentialAnimation {
++                        ScriptAction { script: transitionStarted() }
++                        ParallelAnimation {
++                            PropertyAnimation { properties: "width"; easing.type: Easing.OutQuad; duration: internal.transitionDuration }
++                            PropertyAnimation { properties: "opacity"; easing.type: Easing.InQuad; duration: internal.transitionDuration }
++                        }
++                        ScriptAction { script: transitionEnded() }
++                    }
++                }
++            ]
++
++            // Cleans up the container and then destroys it.
++            function cleanup()
++            {
++                if (page != null) {
++                    if (page.status == PageStatus.Active) {
++                        internal.setPageStatus(page, PageStatus.Inactive)
++                    }
++                    if (owner != container) {
++                        // container is not the owner of the page - re-parent back to original owner
++                        page.visible = false;
++                        page.anchors.fill = undefined
++                        page.parent = owner;
++                    }
++                }
++                container.parent = null;
++                container.visible = false;
++                destroy();
++            }
++        }
++    }
++}
+diff --git a/components/mobilecomponents/qml/SplitDrawer.qml b/components/mobilecomponents/qml/SplitDrawer.qml
+new file mode 100644
+index 0000000..f737871
+--- /dev/null
++++ b/components/mobilecomponents/qml/SplitDrawer.qml
+@@ -0,0 +1,234 @@
++/*
++ *   Copyright 2012 Marco Martin <mart@kde.org>
++ *
++ *   This program is free software; you can redistribute it and/or modify
++ *   it under the terms of the GNU Library General Public License as
++ *   published by the Free Software Foundation; either version 2, or
++ *   (at your option) any later version.
++ *
++ *   This program is distributed in the hope that it will be useful,
++ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
++ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ *   GNU Library General Public License for more details
++ *
++ *   You should have received a copy of the GNU Library General Public
++ *   License along with this program; if not, write to the
++ *   Free Software Foundation, Inc.,
++ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
++ */
++
++import QtQuick 2.1
++import QtGraphicalEffects 1.0
++import org.kde.plasma.components 2.0 as PlasmaComponents
++import org.kde.plasma.core 2.0 as PlasmaCore
++
++/**Documented API
++Inherits:
++        Page from org.kde.plasmacomponents
++
++Imports:
++        org.kde.plasma.core
++        org.kde.plasma.components
++        QtQuick 1.1
++
++Description:
++        Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
++
++Properties:
++        bool open:
++        If true the drawer is open showing the contents of the "drawer" component.
++
++        Item page:
++        It's the default property. it's the main content of the drawer page, the part that is always shown
++
++        Item drawer:
++        It's the part that can be pulled in and out, will act as a sidebar.
++
++        int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
++**/
++PlasmaComponents.Page {
++    id: root
++    anchors {
++        fill: parent
++    }
++    visible: true
++
++    default property alias page: mainPage.data
++    property alias drawer: drawerPage.data
++    property alias open: sidebar.open
++    property int visibleDrawerWidth: browserFrame.x
++
++    Component.onCompleted: {
++        mainPage.width = browserFrame.width
++    }
++
++    MouseArea {
++        id: mouseEventListener
++        z: 200
++        drag.filterChildren: true
++        //drag.target: browserFrame
++        property int startMouseX
++        property int oldMouseX
++        property int startBrowserFrameX
++        property bool toggle: false
++        property string startState
++
++        anchors.fill: parent
++
++        onPressed: {
++            if (drawerPage.children.length == 0 || (browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
++                mouse.x < browserFrame.x) {
++                mouse.accepted = false;
++                return;
++            }
++
++            toggle = true;
++            startBrowserFrameX = browserFrame.x;
++            oldMouseX = startMouseX = mouse.x;
++            startState = browserFrame.state;
++            browserFrame.state = "Dragging";
++            browserFrame.x = startBrowserFrameX;
++        }
++
++        onPositionChanged: {
++            browserFrame.x = Math.max(0, browserFrame.x + mouse.x - oldMouseX);
++            oldMouseX = mouse.x;
++            if (Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
++                toggle = false;
++            }
++        }
++
++        onReleased: {
++            if (toggle) {
++                browserFrame.state = startState == "Open" ? "Closed" : "Open"
++            } else if (browserFrame.x < sidebar.width / 2) {
++                browserFrame.state = "Closed";
++            } else {
++                browserFrame.state = "Open";
++            }
++        }
++    }
++
++    Rectangle {
++        id: browserFrame
++        z: 100
++        color: PlasmaCore.ColorScope.backgroundColor
++        state: "Closed"
++        onStateChanged: sidebar.open = (state != "Closed")
++
++        anchors {
++            top: parent.top
++            bottom: parent.bottom
++        }
++        width: root.width;
++
++        Item {
++            id: mainPage
++            onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
++
++            anchors.fill: parent
++        }
++
++        Rectangle {
++            anchors.fill: parent
++            color: "black"
++            opacity: Math.min(0.4, 0.4 * (browserFrame.x / sidebar.width))
++        }
++        LinearGradient {
++            width: units.gridUnit/2
++            anchors {
++                right: parent.left
++                top: parent.top
++                bottom: parent.bottom
++                rightMargin: -1
++            }
++            start: Qt.point(0, 0)
++            end: Qt.point(units.gridUnit/2, 0)
++            gradient: Gradient {
++                GradientStop {
++                    position: 0.0
++                    color: "transparent"
++                }
++                GradientStop {
++                    position: 0.7
++                    color: Qt.rgba(0, 0, 0, 0.15)
++                }
++                GradientStop {
++                    position: 1.0
++                    color: Qt.rgba(0, 0, 0, 0.3)
++                }
++            }
++        }
++
++        states: [
++            State {
++                name: "Open"
++                PropertyChanges {
++                    target: browserFrame
++                    x: sidebar.width
++                }
++
++            },
++            State {
++                name: "Dragging"
++                PropertyChanges {
++                    target: browserFrame
++                    x: mouseEventListener.startBrowserFrameX
++                }
++            },
++            State {
++                name: "Closed"
++                PropertyChanges {
++                    target: browserFrame
++                    x: 0
++                }
++            }
++        ]
++
++        transitions: [
++            Transition {
++                //Exclude Dragging
++                to: "Open,Closed,Hidden"
++                NumberAnimation {
++                    properties: "x"
++                    duration: units.longDuration
++                    easing.type: Easing.InOutQuad
++                }
++            }
++        ]
++    }
++
++
++    Item {
++        id: sidebar
++
++        property bool open: false
++        onOpenChanged: {
++            if (drawerPage.children.length == 0) {
++                return;
++            }
++
++            if (open) {
++                browserFrame.state = "Open";
++            } else {
++                browserFrame.state = "Closed";
++            }
++        }
++
++        width: parent.width/4
++
++        anchors {
++            left: parent.left
++            top: parent.top
++            bottom: parent.bottom
++        }
++
++        Item {
++            id: drawerPage
++            anchors.fill: parent
++            clip: false
++            onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
++        }
++    }
++}
++
+diff --git a/components/mobilecomponents/qml/private/PageStack.js b/components/mobilecomponents/qml/private/PageStack.js
+new file mode 100644
+index 0000000..8986956
+--- /dev/null
++++ b/components/mobilecomponents/qml/private/PageStack.js
+@@ -0,0 +1,243 @@
++/****************************************************************************
++**
++** Copyright (C) 2011 Nokia Corporation and/or its subsidiary(-ies).
++** All rights reserved.
++** Contact: Nokia Corporation (qt-info@nokia.com)
++**
++** This file is part of the Qt Components project.
++**
++** $QT_BEGIN_LICENSE:BSD$
++** You may use this file under the terms of the BSD license as follows:
++**
++** "Redistribution and use in source and binary forms, with or without
++** modification, are permitted provided that the following conditions are
++** met:
++**   * Redistributions of source code must retain the above copyright
++**     notice, this list of conditions and the following disclaimer.
++**   * Redistributions in binary form must reproduce the above copyright
++**     notice, this list of conditions and the following disclaimer in
++**     the documentation and/or other materials provided with the
++**     distribution.
++**   * Neither the name of Nokia Corporation and its Subsidiary(-ies) nor
++**     the names of its contributors may be used to endorse or promote
++**     products derived from this software without specific prior written
++**     permission.
++**
++** THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
++** "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
++** LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
++** A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
++** OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
++** SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
++** LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++** DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++** THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++** (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
++** OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++// Page stack. Items are page containers.
++var pageStack = [];
++
++// Page component cache map. Key is page url, value is page component.
++var componentCache = {};
++
++// Returns the page stack depth.
++function getDepth() {
++    return pageStack.length;
++}
++
++// Pushes a page on the stack.
++function push(page, properties, replace, immediate) {
++    // page order sanity check
++    if ((!replace && page == currentPage)
++        || (replace && pageStack.length > 1
++        && page == pageStack[pageStack.length - 2].page)) {
++        throw new Error("Cannot navigate so that the resulting page stack has two consecutive entries of the same page instance.");
++    }
++
++    // figure out if more than one page is being pushed
++    var pages;
++    if (page instanceof Array) {
++        pages = page;
++        page = pages.pop();
++        if (page.createObject === undefined && page.parent === undefined && typeof page != "string") {
++            properties = properties || page.properties;
++            page = page.page;
++        }
++    }
++
++    // get the current container
++    var oldContainer;
++    if (pageStack.length) {
++        oldContainer = pageStack[pageStack.length - 1];
++    }
++
++    // pop the old container off the stack if this is a replace
++    if (oldContainer && replace) {
++        pageStack.pop();
++    }
++
++    // push any extra defined pages onto the stack
++    if (pages) {
++        var i;
++        for (i = 0; i < pages.length; i++) {
++            var tPage = pages[i];
++            var tProps;
++            if (tPage.createObject === undefined && tPage.parent === undefined && typeof tPage != "string") {
++                tProps = tPage.properties;
++                tPage = tPage.page;
++            }
++            pageStack.push(initPage(tPage, tProps));
++        }
++    }
++
++    // initialize the page
++    var container = initPage(page, properties);
++
++    // push the page container onto the stack
++    pageStack.push(container);
++
++    depth = pageStack.length;
++    currentPage = container.page;
++
++    // perform page transition
++    //FIXME: this should be in for PageStack, out for PageRow?
++    //immediate = immediate || !oldContainer;
++    var orientationChange = false;
++    if (oldContainer) {
++        orientationChange = orientationChanges(oldContainer.page, container.page);
++        oldContainer.pushExit(replace, immediate, orientationChange);
++    }
++
++    // sync tool bar
++    var tools = container.page.tools || null;
++    if (toolBar) {
++        toolBar.setTools(tools, immediate ? "set" : replace ? "replace" : "push");
++    }
++
++    container.pushEnter(immediate, orientationChange);
++    return container.page;
++}
++
++// Initializes a page and its container.
++function initPage(page, properties) {
++    var container = containerComponent.createObject(root);
++
++    var pageComp;
++    if (page.createObject) {
++        // page defined as component
++        pageComp = page;
++    } else if (typeof page == "string") {
++        // page defined as string (a url)
++        pageComp = componentCache[page];
++        if (!pageComp) {
++            pageComp = componentCache[page] = Qt.createComponent(page);
++        }
++    }
++    if (pageComp) {
++        if (pageComp.status == Component.Error) {
++            throw new Error("Error while loading page: " + pageComp.errorString());
++        } else {
++            // instantiate page from component
++            page = pageComp.createObject(container.pageParent, properties || {});
++        }
++    } else {
++        // copy properties to the page
++        for (var prop in properties) {
++            if (properties.hasOwnProperty(prop)) {
++                page[prop] = properties[prop];
++            }
++        }
++    }
++
++    container.page = page;
++    if (page.parent == null || page.parent == container.pageParent) {
++        container.owner = container;
++    } else {
++        container.owner = page.parent;
++    }
++
++    // the page has to be reparented if
++    if (page.parent != container.pageParent) {
++        page.parent = container.pageParent;
++    }
++
++    if (page.pageStack !== undefined) {
++        page.pageStack = root;
++    }
++
++    page.anchors.fill = container.pageParent
++
++    return container;
++}
++
++// Pops a page off the stack.
++function pop(page, immediate) {
++    // make sure there are enough pages in the stack to pop
++    if (pageStack.length > 1) {
++        //unwind to itself means no pop
++        if (page !== undefined && page == pageStack[pageStack.length - 1].page) {
++            return
++        }
++        // pop the current container off the stack and get the next container
++        var oldContainer = pageStack.pop();
++        var container = pageStack[pageStack.length - 1];
++        if (page !== undefined) {
++            // an unwind target has been specified - pop until we find it
++            while (page != container.page && pageStack.length > 1) {
++                pageStack.pop();
++                container.popExit(immediate, false);
++                container = pageStack[pageStack.length - 1];
++            }
++        }
++
++        depth = pageStack.length;
++        currentPage = container.page;
++
++        // perform page transition
++        var orientationChange = orientationChanges(oldContainer.page, container.page);
++        oldContainer.popExit(immediate, orientationChange);
++        container.popEnter(immediate, orientationChange);
++
++        // sync tool bar
++        var tools = container.page.tools || null;
++        if (toolBar) {
++            toolBar.setTools(tools, immediate ? "set" : "pop");
++        }
++        return oldContainer.page;
++    } else {
++        return null;
++    }
++}
++
++// Checks if the orientation changes between oldPage and newPage
++function orientationChanges(oldPage, newPage) {
++    return newPage.orientationLock != 0 //PlasmaComponents.PageOrientation.Automatic
++           && newPage.orientationLock != 3//PlasmaComponents.PageOrientation.LockPrevious
++           && newPage.orientationLock != oldPage.orientationLock
++}
++
++// Clears the page stack.
++function clear() {
++    var container;
++    while (container = pageStack.pop()) {
++        container.cleanup();
++    }
++    depth = 0;
++    currentPage = null;
++}
++
++// Iterates through all pages in the stack (top to bottom) to find a page.
++function find(func) {
++    for (var i = pageStack.length - 1; i >= 0; i--) {
++        var page = pageStack[i].page;
++        if (func(page)) {
++            return page;
++        }
++    }
++    return null;
++}
++
+diff --git a/components/mobilecomponents/qml/qmldir b/components/mobilecomponents/qml/qmldir
+new file mode 100644
+index 0000000..6c8fecb
+--- /dev/null
++++ b/components/mobilecomponents/qml/qmldir
+@@ -0,0 +1,11 @@
++module org.kde.plasma.mobilecomponents
++plugin mobilecomponentsplugin
++IconGrid 0.2 IconGrid.qml
++OverlayDrawer 0.2 OverlayDrawer.qml
++SplitDrawer 0.2 SplitDrawer.qml
++ActionGroup 0.2 ActionGroup.qml
++ApplicationWindow 0.2 ApplicationWindow.qml
++ContextDrawer 0.2 ContextDrawer.qml
++GlobalDrawer 0.2 GlobalDrawer.qml
++Page 0.2 Page.qml
++
+diff --git a/components/mobilecomponents/qmldir b/components/mobilecomponents/qmldir
+deleted file mode 100644
+index 6c8fecb..0000000
+--- a/components/mobilecomponents/qmldir
++++ /dev/null
+@@ -1,11 +0,0 @@
+-module org.kde.plasma.mobilecomponents
+-plugin mobilecomponentsplugin
+-IconGrid 0.2 IconGrid.qml
+-OverlayDrawer 0.2 OverlayDrawer.qml
+-SplitDrawer 0.2 SplitDrawer.qml
+-ActionGroup 0.2 ActionGroup.qml
+-ApplicationWindow 0.2 ApplicationWindow.qml
+-ContextDrawer 0.2 ContextDrawer.qml
+-GlobalDrawer 0.2 GlobalDrawer.qml
+-Page 0.2 Page.qml
+-
