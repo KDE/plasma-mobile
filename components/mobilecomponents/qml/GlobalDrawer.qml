@@ -20,7 +20,6 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -82,7 +81,7 @@ MobileComponents.OverlayDrawer {
                 model: actions
                 property int level: 0
 
-                footer: PlasmaComponents.ListItem {
+                footer: ListItem {
                     visible: level > 0
                     enabled: true
                     RowLayout {
@@ -94,13 +93,13 @@ MobileComponents.OverlayDrawer {
                             Layout.fillHeight: true
                             source: "go-previous"
                         }
-                        PlasmaComponents.Label {
+                        Label {
                             text: i18n("Back")
                         }
                     }
                     onClicked: pageRow.pop()
                 }
-                delegate: PlasmaComponents.ListItem {
+                delegate: ListItem {
                     enabled: true
                     RowLayout {
                         anchors {
@@ -112,7 +111,7 @@ MobileComponents.OverlayDrawer {
                             Layout.fillHeight: true
                             source: modelData.iconName
                         }
-                        PlasmaComponents.Label {
+                        Label {
                             Layout.fillWidth: true
                             text: modelData.text
                         }

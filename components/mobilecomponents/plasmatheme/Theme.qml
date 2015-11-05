@@ -56,4 +56,5 @@ Object {
     property color complementaryHoverColor: theme.complementaryHoverColor
     property color complementaryFocusColor: theme.complementaryFocusColor
 
+    property var defaultFont: theme.defaultFont
 }

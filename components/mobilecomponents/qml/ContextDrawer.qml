@@ -19,8 +19,6 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.0 as QtControls
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -53,7 +51,7 @@ MobileComponents.OverlayDrawer {
             }
             header: Item {
                 height: heading.height
-                PlasmaExtras.Heading {
+                Heading {
                     id: heading
                     anchors {
                         left: parent.left
@@ -65,7 +63,7 @@ MobileComponents.OverlayDrawer {
                     text: root.title
                 }
             }
-            delegate: PlasmaComponents.ListItem {
+            delegate: ListItem {
                 enabled: true
                 Row {
                     anchors {
@@ -77,7 +75,7 @@ MobileComponents.OverlayDrawer {
                         width: height
                         source: modelData.iconName
                     }
-                    PlasmaComponents.Label {
+                    Label {
                         text: model ? model.text : modelData.text
                     }
                 }

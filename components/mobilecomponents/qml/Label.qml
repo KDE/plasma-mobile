@@ -21,10 +21,10 @@ import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 /**
- * This is a label which uses the plasma theme.
+ * This is a label which uses the plasma Theme.
  *
  * The characteristics of the text will be automatically set according to the
- * plasma theme. If you need a more customized text item use the Text component
+ * plasma Theme. If you need a more customized text item use the Text component
  * from QtQuick.
  *
  * You can use all elements of the QML Text component, in particular the "text"
@@ -35,21 +35,21 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Text {
     id: root
 
-    height: Math.round(Math.max(paintedHeight, theme.mSize(theme.defaultFont).height*1.6))
+    height: Math.round(Math.max(paintedHeight, Units.gridUnit * 1.6))
     verticalAlignment: lineCount > 1 ? Text.AlignTop : Text.AlignVCenter
 
     activeFocusOnTab: false
     renderType: Text.NativeRendering
 
-    font.capitalization: theme.defaultFont.capitalization
-    font.family: theme.defaultFont.family
-    font.italic: theme.defaultFont.italic
-    font.letterSpacing: theme.defaultFont.letterSpacing
-    font.pointSize: theme.defaultFont.pointSize
-    font.strikeout: theme.defaultFont.strikeout
-    font.underline: theme.defaultFont.underline
-    font.weight: theme.defaultFont.weight
-    font.wordSpacing: theme.defaultFont.wordSpacing
+    font.capitalization: Theme.defaultFont.capitalization
+    font.family: Theme.defaultFont.family
+    font.italic: Theme.defaultFont.italic
+    font.letterSpacing: Theme.defaultFont.letterSpacing
+    font.pointSize: Theme.defaultFont.pointSize
+    font.strikeout: Theme.defaultFont.strikeout
+    font.underline: Theme.defaultFont.underline
+    font.weight: Theme.defaultFont.weight
+    font.wordSpacing: Theme.defaultFont.wordSpacing
     color: PlasmaCore.ColorScope.textColor
 
     opacity: enabled? 1 : 0.6
