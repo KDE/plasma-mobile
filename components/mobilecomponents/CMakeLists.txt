@@ -13,6 +13,12 @@ target_link_libraries(mobilecomponentsplugin Qt5::Core Qt5::Widgets Qt5::Qml Qt5
 
 install(TARGETS mobilecomponentsplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
 
-install(DIRECTORY  ${PROJECT_SOURCE_DIR} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/)
+
+FILE(GLOB qml ${PROJECT_SOURCE_DIR}/qml/*)
+
+install(FILES ${qml} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
 
 
+FILE(GLOB platformspecific ${PROJECT_SOURCE_DIR}/plasmatheme/*)
+
+install(FILES ${platformspecific} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobilecomponents)
