@@ -19,7 +19,6 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -49,7 +48,7 @@ ApplicationWindow {
      */
     property alias pageStack: __pageStack
 
-    PlasmaExtras.PageRow {
+    PageRow {
         id: __pageStack
         anchors.fill: parent
     }

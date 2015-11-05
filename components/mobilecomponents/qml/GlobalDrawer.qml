@@ -21,7 +21,6 @@ import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
@@ -52,7 +51,7 @@ MobileComponents.OverlayDrawer {
                 width: height
                 Layout.minimumWidth: height
             }
-            PlasmaExtras.Heading {
+            Heading {
                 id: heading
                 level: 1
             }
@@ -62,7 +61,7 @@ MobileComponents.OverlayDrawer {
             }
         }
 
-        PlasmaExtras.PageRow {
+        PageRow {
             id: pageRow
             Layout.fillWidth: true
             Layout.fillHeight: true
