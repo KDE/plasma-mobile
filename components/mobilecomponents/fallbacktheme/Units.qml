@@ -23,7 +23,7 @@ import QtQuick.Window 2.2
 pragma Singleton
 
 
-Object {
+QtObject {
     id: units
 
     /**
@@ -50,7 +50,7 @@ Object {
      * Not devicePixelRation-adjusted::
      * * desktop
      */
-    property QtObject iconSizes: Object {
+    property QtObject iconSizes: QtObject {
         property int small: 16 * devicePixelRatio
         property int smallMedium: 22 * devicePixelRatio
         property int medium: 32 * devicePixelRatio
