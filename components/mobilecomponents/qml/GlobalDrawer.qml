@@ -22,9 +22,8 @@ import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
-MobileComponents.OverlayDrawer {
+OverlayDrawer {
     id: root
     inverse: true
 

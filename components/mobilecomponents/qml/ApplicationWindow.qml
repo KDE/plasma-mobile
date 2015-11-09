@@ -19,9 +19,6 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.3
-import org.kde.plasma.mobilecomponents 0.2
-import org.kde.kquickcontrolsaddons 2.0
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 /**
  * A window that provides some basic features needed for all apps

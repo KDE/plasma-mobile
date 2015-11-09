@@ -17,10 +17,10 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+pragma Singleton
+
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-
-pragma Singleton
 
 /*!
    \qmltype Theme

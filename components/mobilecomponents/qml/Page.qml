@@ -19,8 +19,8 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.3
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.mobilecomponents 0.2
+import "private"
 
 Item {
     id: root
@@ -76,11 +76,11 @@ Item {
                 if (internalButtons.flickable.atYBeginning || internalButtons.flickable.atYEnd) {
                     return;
                 }
-                internalButtons.y = Math.max(internalButtons.flickable.height - internalButtons.height, Math.min(internalButtons.flickable.height, internalButtons.y + internalButtons.flickable.contentY - oldContentY));
+                internalButtons.y = Math.max(internalButtons.flickable.height - internalButtons.height - Units.smallSpacing, Math.min(internalButtons.flickable.height, internalButtons.y + internalButtons.flickable.contentY - oldContentY));
                 oldContentY = internalButtons.flickable.contentY;
             }
         }
-        y: parent.height - height
+        y: parent.height - height - Units.smallSpacing
         Repeater {
             model: {
                 if (root.actions.length == 0) {
@@ -92,9 +92,8 @@ Item {
                             root.actions[0];
                 }
             }
-            delegate: PlasmaComponents.ToolButton {
+            delegate: ActionButton {
                 Layout.fillHeight: true
-                flat: false
                 iconSource: modelData.iconName
                 onClicked: {
                     if (modelData && modelData.trigger !== undefined) {

@@ -17,21 +17,19 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+pragma Singleton
+
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-pragma Singleton
-
 
 QtObject {
-    id: units
-
     /**
      * The fundamental unit of space that should be used for sizes, expressed in pixels.
      * Given the screen has an accurate DPI settings, it corresponds to a width of
      * the capital letter M
      */
-    property int gridUnit: theme.gridUnit
+    property int gridUnit: units.gridUnit
 
     /**
      * units.iconSizes provides access to platform-dependent icon sizing
@@ -50,13 +48,13 @@ QtObject {
      * Not devicePixelRation-adjusted::
      * * desktop
      */
-    property QtObject iconSizes: Object {
-        property int small: theme.small
-        property int smallMedium: theme.smallMedium
-        property int medium: theme.medium
-        property int large: theme.large
-        property int huge: theme.huge
-        property int enormous: theme.enormous
+    property QtObject iconSizes: QtObject {
+        property int small: units.iconSizes.small
+        property int smallMedium: units.iconSizes.smallMedium
+        property int medium: units.iconSizes.medium
+        property int large: units.iconSizes.large
+        property int huge: units.iconSizes.huge
+        property int enormous: units.iconSizes.enormous
     }
 
     /**
@@ -65,7 +63,7 @@ QtObject {
      * the default font as rendered on the screen, so it takes user-configured font size and DPI
      * into account.
      */
-    property int smallSpacing: theme.smallSpacing
+    property int smallSpacing: units.smallSpacing
 
     /**
      * units.largeSpacing is the amount of spacing that should be used inside bigger UI elements,
@@ -73,7 +71,7 @@ QtObject {
      * the size of the default font as rendered on the screen, so it takes user-configured font
      * size and DPI into account.
      */
-    property int largeSpacing: theme.largeSpacing
+    property int largeSpacing: units.largeSpacing
 
     /**
      * The ratio between physical and device-independent pixels. This value does not depend on the \
@@ -81,17 +79,17 @@ QtObject {
      * use theme.mSize(theme.defaultFont), units.smallSpacing and units.largeSpacing.
      * The devicePixelRatio follows the definition of "device independent pixel" by Microsoft.
      */
-    property real devicePixelRatio: theme.devicePixelRatio
+    property real devicePixelRatio: units.devicePixelRatio
 
     /**
      * units.longDuration should be used for longer, screen-covering animations, for opening and
      * closing of dialogs and other "not too small" animations
      */
-    property int longDuration: theme.longDuration
+    property int longDuration: units.longDuration
 
     /**
      * units.shortDuration should be used for short animations, such as accentuating a UI event,
      * hover events, etc..
      */
-    property int shortDuration: theme.shortDuration
+    property int shortDuration: units.shortDuration
 }

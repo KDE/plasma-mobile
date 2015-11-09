@@ -1,8 +1,8 @@
 module org.kde.plasma.mobilecomponents
 plugin mobilecomponentsplugin
 
-singleton Units Units.qml
-singleton Theme Theme.qml
+singleton Units 0.2 Units.qml
+singleton Theme 0.2 Theme.qml
 
 IconGrid 0.2 IconGrid.qml
 OverlayDrawer 0.2 OverlayDrawer.qml
@@ -13,4 +13,3 @@ ContextDrawer 0.2 ContextDrawer.qml
 GlobalDrawer 0.2 GlobalDrawer.qml
 Page 0.2 Page.qml
 Icon 0.2 Icon.qml
-
