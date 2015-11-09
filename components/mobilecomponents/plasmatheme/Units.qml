@@ -23,7 +23,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 pragma Singleton
 
 
-Object {
+QtObject {
     id: units
 
     /**

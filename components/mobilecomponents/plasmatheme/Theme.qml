@@ -31,7 +31,7 @@ pragma Singleton
    See \l {http://www.google.com/design/spec/style/color.html#color-ui-color-application} for
    details about choosing a color scheme for your application.
  */
-Object {
+QtObject {
     id: theme
 
     property color textColor: theme.textColor
