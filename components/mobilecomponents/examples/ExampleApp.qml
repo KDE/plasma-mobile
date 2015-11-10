@@ -104,13 +104,21 @@ MobileComponents.ApplicationWindow {
                 ListView {
                     id: mainListView
                     model: 30
-                    delegate: MobileComponents.ListItem {
+                    delegate: MobileComponents.ListItemWithActions {
                         enabled: true
                         MobileComponents.Label {
                             enabled: true
                             text: "Item " + modelData
                         }
                         onClicked: root.pageStack.push(mainPageComponent)
+                        actions: [
+                            Controls.Action {
+                                iconName: "document-decrypt"
+                                onTriggered: print("Action 1 clicked")
+                            },
+                            Controls.Action {
+                                iconName: "document-share"
+                            }]
                     }
                 }
             }
