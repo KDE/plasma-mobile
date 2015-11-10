@@ -89,18 +89,37 @@ Item {
         onSectionDelegateChanged: background.prefix = (listItem.sectionDelegate ? "section" : "normal")
     }
 
-    Rectangle {
-        id : background
-        color: itemMouse.pressed && itemMouse.changeBackgroundOnPress ? Theme.highlightColor : Theme.backgroundColor
-
+    MouseArea {
+        id: itemMouse
+        property bool changeBackgroundOnPress: !listItem.checked && !listItem.sectionDelegate
         anchors.fill: parent
-        visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
-        opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
-        Behavior on color {
-             ColorAnimation { duration: units.longDuration }
+        enabled: false
+        hoverEnabled: true
+
+        onClicked: listItem.clicked()
+        onPressAndHold: listItem.pressAndHold()
+
+        Rectangle {
+            id : background
+            color: itemMouse.pressed && itemMouse.changeBackgroundOnPress ? Theme.highlightColor : Theme.backgroundColor
+
+            anchors.fill: parent
+            visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
+            opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
+            Behavior on color {
+                ColorAnimation { duration: units.longDuration }
+            }
+            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
         }
-        Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+        Item {
+            id: paddingItem
+            anchors {
+                fill: parent
+                margins: Units.smallSpacing
+            }
+        }
     }
+
     Rectangle {
         color: Theme.textColor
         opacity: 0.2
@@ -110,25 +129,6 @@ Item {
             bottom: parent.bottom
         }
         height: 1
-    }
-
-    MouseArea {
-        id: itemMouse
-        property bool changeBackgroundOnPress: !listItem.checked && !listItem.sectionDelegate
-        anchors.fill: background
-        enabled: false
-        hoverEnabled: true
-
-        onClicked: listItem.clicked()
-        onPressAndHold: listItem.pressAndHold()
-
-        Item {
-            id: paddingItem
-            anchors {
-                fill: parent
-                margins: Units.smallSpacing
-            }
-        }
     }
 
     Accessible.role: Accessible.ListItem
