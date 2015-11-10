@@ -42,7 +42,6 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0
-import org.kde.plasma.components 2.0
 import org.kde.plasma.mobilecomponents 0.2
 
 import "private/PageStack.js" as Engine
@@ -141,7 +140,6 @@ Item {
     // Called when the page stack visibility changes.
     onVisibleChanged: {
         if (currentPage) {
-            internal.setPageStatus(currentPage, visible ? PageStatus.Active : PageStatus.Inactive);
             if (visible)
                 currentPage.visible = currentPage.parent.visible = true;
         }
@@ -180,21 +178,6 @@ Item {
 
         // Duration of transition animation (in ms)
         property int transitionDuration: units.longDuration
-
-        // Sets the page status.
-        function setPageStatus(page, status)
-        {
-            if (page != null) {
-                if (page.status !== undefined) {
-                    if (status == PageStatus.Active && page.status == PageStatus.Inactive)
-                        page.status = PageStatus.Activating;
-                    else if (status == PageStatus.Inactive && page.status == PageStatus.Active)
-                        page.status = PageStatus.Deactivating;
-
-                    page.status = status;
-                }
-            }
-        }
     }
 
     ScrollView {
@@ -321,8 +304,6 @@ Item {
                 }
                 setState("");
                 page.visible = true;
-                if (actualRoot.visible && immediate)
-                    internal.setPageStatus(page, PageStatus.Active);
             }
 
             // Performs a push exit transition.
@@ -332,8 +313,6 @@ Item {
                     setState(immediate ? "Hidden" : "Left");
                 }
 
-                if (actualRoot.visible && immediate)
-                    internal.setPageStatus(page, PageStatus.Inactive);
                 if (replace) {
                     if (immediate)
                         cleanup();
@@ -347,8 +326,6 @@ Item {
             {
                 setState("");
                 page.visible = true;
-                if (actualRoot.visible && immediate)
-                    internal.setPageStatus(page, PageStatus.Active);
             }
 
             // Performs a pop exit transition.
@@ -356,8 +333,6 @@ Item {
             {
                 setState(immediate ? "Hidden" : "Left");
 
-                if (actualRoot.visible && immediate)
-                    internal.setPageStatus(page, PageStatus.Inactive);
                 if (immediate)
                     cleanup();
                 else
@@ -370,9 +345,6 @@ Item {
                 container.clip = true
                 transitionAnimationRunning = true;
                 internal.ongoingTransitionCount++;
-                if (actualRoot.visible) {
-                    internal.setPageStatus(page, (state == "") ? PageStatus.Activating : PageStatus.Deactivating);
-                }
             }
 
             // Called when a transition has ended.
@@ -381,8 +353,6 @@ Item {
                 container.clip = false
                 if (state != "")
                     state = "Hidden";
-                if (actualRoot.visible)
-                    internal.setPageStatus(page, (state == "") ? PageStatus.Active : PageStatus.Inactive);
 
                 internal.ongoingTransitionCount--;
                 transitionAnimationRunning = false;
@@ -477,9 +447,6 @@ Item {
             function cleanup()
             {
                 if (page != null) {
-                    if (page.status == PageStatus.Active) {
-                        internal.setPageStatus(page, PageStatus.Inactive)
-                    }
                     if (owner != container) {
                         // container is not the owner of the page - re-parent back to original owner
                         page.visible = false;

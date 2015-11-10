@@ -19,7 +19,6 @@
 
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
-import org.kde.kquickcontrolsaddons  2.0
 import org.kde.plasma.mobilecomponents 0.2
 
 /**Documented API

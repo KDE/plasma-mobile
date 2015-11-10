@@ -20,7 +20,6 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
-import org.kde.kquickcontrolsaddons  2.0
 
 OverlayDrawer {
     id: root
