@@ -43,6 +43,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 1.0
 import org.kde.plasma.components 2.0
+import org.kde.plasma.mobilecomponents 0.2
 
 import "private/PageStack.js" as Engine
 
@@ -58,7 +59,7 @@ Item {
     property ToolBar toolBar
     property variant initialPage
     //A column is wide enough for 30 characters
-    property int columnWidth: Math.round(parent.width/(theme.mSize(theme.defaultFont).width*30)) > 0 ? parent.width/Math.round(parent.width/(theme.mSize(theme.defaultFont).width*30)) : width
+    property int columnWidth: Math.round(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.round(parent.width/(Units.gridUnit*30)) : width
     property alias clip: scrollArea.clip
 
     // Indicates whether there is an ongoing page transition.

@@ -19,19 +19,13 @@
 
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
-
+import org.kde.plasma.mobilecomponents 0.2
 
 /**Documented API
-Inherits:
-        Page from org.kde.plasmacomponents
 
 Imports:
-        org.kde.plasma.core
-        org.kde.plasma.components
-        QtQuick 1.1
+        QtQuick 2.1
 
 Description:
         Overlay Drawers are used to expose additional UI elements needed for small secondary tasks for which the main UI elements are not needed. For example in Okular Active, an Overlay Drawer is used to display thumbnails of all pages within a document along with a search field. This is used for the distinct task of navigating to another page.
@@ -178,7 +172,7 @@ Item {
         Rectangle {
             id: browserFrame
             z: 100
-            color: PlasmaCore.ColorScope.backgroundColor
+            color: Theme.backgroundColor
             anchors {
                 top: parent.top
                 bottom: parent.bottom

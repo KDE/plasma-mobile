@@ -19,17 +19,14 @@
 
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2
 
 /**Documented API
 Inherits:
-        Page from org.kde.plasmacomponents
+        Item
 
 Imports:
-        org.kde.plasma.core
-        org.kde.plasma.components
-        QtQuick 1.1
+        QtQuick 2.1
 
 Description:
         Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
@@ -46,7 +43,7 @@ Properties:
 
         int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
 **/
-PlasmaComponents.Page {
+Item {
     id: root
     anchors {
         fill: parent
@@ -112,7 +109,7 @@ PlasmaComponents.Page {
     Rectangle {
         id: browserFrame
         z: 100
-        color: PlasmaCore.ColorScope.backgroundColor
+        color: Theme.backgroundColor
         state: "Closed"
         onStateChanged: sidebar.open = (state != "Closed")
 

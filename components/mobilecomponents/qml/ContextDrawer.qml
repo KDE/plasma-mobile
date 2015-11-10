@@ -69,7 +69,7 @@ OverlayDrawer {
                         left: parent.left
                         margins: units.largeSpacing
                     }
-                    PlasmaCore.IconItem {
+                    Icon {
                         height: parent.height
                         width: height
                         source: modelData.iconName

@@ -18,6 +18,7 @@
 */
 
 import QtQuick 2.0
+import org.kde.plasma.mobilecomponents 0.2
 
 /**
  * A heading label used for subsections of texts.
@@ -61,7 +62,7 @@ Label {
     opacity: 0.8
 
     function headerPointSize(l) {
-        var n = theme.defaultFont.pointSize;
+        var n = Theme.defaultFont.pointSize;
         var s;
         if (l > 4) {
             s = n

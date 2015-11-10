@@ -20,7 +20,6 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons  2.0
 
 OverlayDrawer {
@@ -43,7 +42,7 @@ OverlayDrawer {
             anchors {
                 left: parent.left
             }
-            PlasmaCore.IconItem {
+            Icon {
                 id: headingIcon
                 height: parent.height
                 width: height
@@ -87,7 +86,7 @@ OverlayDrawer {
                         anchors {
                             left: parent.left
                         }
-                        PlasmaCore.IconItem {
+                        Icon {
                             Layout.maximumWidth: height
                             Layout.fillHeight: true
                             source: "go-previous"
@@ -105,7 +104,7 @@ OverlayDrawer {
                             left: parent.left
                             right: parent.right
                         }
-                        PlasmaCore.IconItem {
+                        Icon {
                             Layout.maximumWidth: height
                             Layout.fillHeight: true
                             source: modelData.iconName
@@ -114,7 +113,7 @@ OverlayDrawer {
                             Layout.fillWidth: true
                             text: modelData.text
                         }
-                        PlasmaCore.IconItem {
+                        Icon {
                             Layout.maximumWidth: height
                             Layout.fillHeight: true
                             source: "go-next"

@@ -32,10 +32,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
    details about choosing a color scheme for your application.
  */
 QtObject {
-    id: theme
 
     property color textColor: theme.textColor
-    
     property color highlightColor: theme.highlightColor
     property color backgroundColor: theme.backgroundColor
     property color linkColor: theme.linkColor
@@ -56,5 +54,5 @@ QtObject {
     property color complementaryHoverColor: theme.complementaryHoverColor
     property color complementaryFocusColor: theme.complementaryFocusColor
 
-    property var defaultFont: theme.defaultFont
+    property variant defaultFont: theme.defaultFont
 }

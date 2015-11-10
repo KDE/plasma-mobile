@@ -33,7 +33,7 @@ MouseArea {
         id: background
         radius: width/2
         anchors.fill: parent
-        color: mouse.pressed ? theme.highlightColor : theme.backgroundColor
+        color: mouse.pressed ? Theme.highlightColor : Theme.backgroundColor
         Icon {
             id: icon
             anchors {
