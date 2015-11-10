@@ -13,3 +13,5 @@ ContextDrawer 0.2 ContextDrawer.qml
 GlobalDrawer 0.2 GlobalDrawer.qml
 Page 0.2 Page.qml
 Icon 0.2 Icon.qml
+Label 0.2 Label.qml
+ListItem 0.2 ListItem.qml

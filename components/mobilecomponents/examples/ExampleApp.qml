@@ -24,7 +24,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 MobileComponents.ApplicationWindow {
     id: root
@@ -100,14 +99,14 @@ MobileComponents.ApplicationWindow {
                     iconName:"go-home"
                 }
             ]
-            PlasmaExtras.ScrollArea {
+            Controls.ScrollView {
                 anchors.fill:parent
                 ListView {
                     id: mainListView
                     model: 30
-                    delegate: PlasmaComponents.ListItem {
+                    delegate: MobileComponents.ListItem {
                         enabled: true
-                        PlasmaComponents.Label {
+                        MobileComponents.Label {
                             enabled: true
                             text: "Item " + modelData
                         }

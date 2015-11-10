@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2
 
 /**
  * An item delegate for the primitive ListView component.
@@ -78,9 +78,9 @@ Item {
     property alias containsMouse: itemMouse.containsMouse
 
     width: parent ? parent.width : childrenRect.width
-    height: paddingItem.childrenRect.height + background.margins.top + background.margins.bottom
+    height: paddingItem.childrenRect.height + Units.smallSpacing*2
 
-    property int implicitHeight: paddingItem.childrenRect.height + background.margins.top + background.margins.bottom
+    property int implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing*2
 
 
     Connections {
@@ -89,29 +89,27 @@ Item {
         onSectionDelegateChanged: background.prefix = (listItem.sectionDelegate ? "section" : "normal")
     }
 
-    PlasmaCore.FrameSvgItem {
+    Rectangle {
         id : background
-        imagePath: "widgets/listitem"
-        prefix: "normal"
+        color: itemMouse.pressed && itemMouse.changeBackgroundOnPress ? Theme.highlightColor : Theme.backgroundColor
 
         anchors.fill: parent
         visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
         opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
-        Component.onCompleted: {
-            prefix = (listItem.sectionDelegate ? "section" : (listItem.checked ? "pressed" : "normal"))
+        Behavior on color {
+             ColorAnimation { duration: units.longDuration }
         }
         Behavior on opacity { NumberAnimation { duration: units.longDuration } }
     }
-    PlasmaCore.SvgItem {
-        svg: PlasmaCore.Svg {imagePath: "widgets/listitem"}
-        elementId: "separator"
+    Rectangle {
+        color: Theme.textColor
+        opacity: 0.2
         anchors {
             left: parent.left
             right: parent.right
-            top: parent.top
+            bottom: parent.bottom
         }
-        height: naturalSize.height
-        visible: listItem.sectionDelegate || (typeof(index) != "undefined" && index > 0 && !listItem.checked && !itemMouse.pressed)
+        height: 1
     }
 
     MouseArea {
@@ -123,18 +121,12 @@ Item {
 
         onClicked: listItem.clicked()
         onPressAndHold: listItem.pressAndHold()
-        onPressed: if (changeBackgroundOnPress) background.prefix = "pressed"
-        onReleased: if (changeBackgroundOnPress) background.prefix = "normal"
-        onCanceled: if (changeBackgroundOnPress) background.prefix = "normal"
 
         Item {
             id: paddingItem
             anchors {
                 fill: parent
-                leftMargin: background.margins.left
-                topMargin: background.margins.top
-                rightMargin: background.margins.right
-                bottomMargin: background.margins.bottom
+                margins: Units.smallSpacing
             }
         }
     }
