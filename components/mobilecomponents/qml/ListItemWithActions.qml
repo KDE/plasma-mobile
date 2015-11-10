@@ -110,6 +110,10 @@ Item {
 
         width: parent.width
         height: parent.height
+        MouseArea {
+            anchors.fill: parent
+            onClicked: itemMouse.x = 0;
+        }
         RowLayout {
             anchors {
                 right: parent.right
@@ -145,6 +149,7 @@ Item {
                         } else {
                             console.log("Don't know how to trigger the action")
                         }
+                        itemMouse.x = 0;
                     }
                 }
             }
