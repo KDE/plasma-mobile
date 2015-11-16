@@ -29,7 +29,6 @@
 #include "pagedproxymodel.h"
 #include "package.h"
 #include "applicationlistmodel.h"
-#include "fullscreenpanel.h"
 
 void MobileComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -49,7 +48,6 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
     qmlRegisterType<ApplicationListModel>(uri, 0, 2, "ApplicationListModel");
     qmlRegisterType<Package>(uri, 0, 2, "Package");
-    qmlRegisterType<FullScreenPanel>(uri, 0, 2, "FullScreenPanel");
 }
 
 

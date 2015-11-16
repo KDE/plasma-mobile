@@ -5,7 +5,6 @@ set(mobilecomponents_SRCS
     pagedproxymodel.cpp
     package.cpp
     applicationlistmodel.cpp
-    fullscreenpanel.cpp
     )
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})
