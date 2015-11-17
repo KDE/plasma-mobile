@@ -24,6 +24,14 @@ import org.kde.plasma.mobilecomponents 0.2
 
 Page {
     Layout.fillWidth: true
+    Heading {
+        text: "Buttons"
+        anchors {
+            left: parent.left
+            top: parent.top
+            leftMargin: Units.smallSpacing
+        }
+    }
     ColumnLayout {
         anchors.centerIn: parent
         spacing: Units.smallSpacing
@@ -34,7 +42,8 @@ Page {
             onClicked: print("clicked")
         }
         Controls.Button {
-            text: "Button"
+            text: "Disabled Button"
+            enabled: false
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: print("clicked")
         }

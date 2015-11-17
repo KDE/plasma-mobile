@@ -32,6 +32,13 @@ Page {
         
         ColumnLayout {
             width: page.width
+            Heading {
+                text: "Radio buttons"
+                anchors {
+                    left: parent.left
+                    leftMargin: Units.smallSpacing
+                }
+            }
             Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: units.gridUnit * 10

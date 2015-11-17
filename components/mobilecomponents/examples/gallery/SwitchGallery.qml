@@ -33,7 +33,7 @@ Page {
         ColumnLayout {
             width: page.width
             Heading {
-                text: "Checkboxes"
+                text: "Switches"
                 anchors {
                     left: parent.left
                     leftMargin: Units.smallSpacing
@@ -62,24 +62,20 @@ Page {
                     Label {
                         text: "On"
                     }
-                    Controls.CheckBox {
-                        text: "On"
+                    Controls.Switch {
                         checked: true
                     }
-                    Controls.CheckBox {
-                        text: "On"
+                    Controls.Switch {
                         checked: true
                         enabled: false
                     }
                     Label {
                         text: "Off"
                     }
-                    Controls.CheckBox {
-                        text: "Off"
+                    Controls.Switch {
                         checked: false
                     }
-                    Controls.CheckBox {
-                        text: "Off"
+                    Controls.Switch {
                         checked: false
                         enabled: false
                     }
@@ -113,24 +109,20 @@ Page {
                         Label {
                             text: "On"
                         }
-                        Controls.CheckBox {
-                            text: "On"
+                        Controls.Switch {
                             checked: true
                         }
-                        Controls.CheckBox {
-                            text: "On"
+                        Controls.Switch {
                             checked: true
                             enabled: false
                         }
                         Label {
                             text: "Off"
                         }
-                        Controls.CheckBox {
-                            text: "Off"
+                        Controls.Switch {
                             checked: false
                         }
-                        Controls.CheckBox {
-                            text: "Off"
+                        Controls.Switch {
                             checked: false
                             enabled: false
                         }

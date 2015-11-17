@@ -14,5 +14,6 @@ GlobalDrawer 0.2 GlobalDrawer.qml
 Page 0.2 Page.qml
 Icon 0.2 Icon.qml
 Label 0.2 Label.qml
+Heading 0.2 Heading.qml
 ListItem 0.2 ListItem.qml
 ListItemWithActions 0.2 ListItemWithActions.qml

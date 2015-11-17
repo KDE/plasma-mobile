@@ -28,8 +28,8 @@ Item {
     property QtObject model
 
     property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
-    property int delegateWidth: Units.gridUnit * 8
-    property int delegateHeight: Units.gridUnit * 8
+    property int delegateWidth: Units.iconSizes.huge + Units.gridUnit*2
+    property int delegateHeight: Units.iconSizes.huge + Units.gridUnit*2
     property alias currentPage: iconView.currentIndex
     property int pagesCount: Math.ceil(model.count/pageSize)
     property int count: model.count
