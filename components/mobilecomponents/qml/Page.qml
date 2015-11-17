@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.3
 import org.kde.plasma.mobilecomponents 0.2
 import "private"
 
-Item {
+Rectangle {
     id: root
 
     /**
@@ -52,6 +52,8 @@ Item {
     Item {
         id: internalActions
     }
+
+    color: "transparent"
 
     RowLayout {
         id: internalButtons

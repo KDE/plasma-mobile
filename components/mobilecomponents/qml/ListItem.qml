@@ -83,12 +83,6 @@ Item {
     property int implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing*2
 
 
-    Connections {
-        target: listItem
-        onCheckedChanged: background.prefix = (listItem.checked ? "pressed" : "normal")
-        onSectionDelegateChanged: background.prefix = (listItem.sectionDelegate ? "section" : "normal")
-    }
-
     MouseArea {
         id: itemMouse
         property bool changeBackgroundOnPress: !listItem.checked && !listItem.sectionDelegate
@@ -101,7 +95,7 @@ Item {
 
         Rectangle {
             id : background
-            color: itemMouse.pressed && itemMouse.changeBackgroundOnPress ? Theme.highlightColor : Theme.backgroundColor
+            color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.backgroundColor
 
             anchors.fill: parent
             visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true

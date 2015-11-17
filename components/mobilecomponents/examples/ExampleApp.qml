@@ -90,6 +90,7 @@ MobileComponents.ApplicationWindow {
         id: mainPageComponent
         MobileComponents.Page {
             anchors.fill:parent
+            color: MobileComponents.Theme.viewBackgroundColor
             actions:  [
                 Controls.Action {
                     iconName:"konqueror"
@@ -103,14 +104,48 @@ MobileComponents.ApplicationWindow {
                 anchors.fill:parent
                 ListView {
                     id: mainListView
-                    model: 30
+                    model: ListModel {
+                        ListElement {
+                            text: "Button"
+                            component: "Button"
+                        }
+                        ListElement {
+                            text: "CheckBox"
+                            component: "CheckBox"
+                        }
+                        ListElement {
+                            text: "Radio Button"
+                            component: "RadioButton"
+                        }
+                        ListElement {
+                            text: "Progress Bar"
+                            component: "ProgressBar"
+                        }
+                        ListElement {
+                            text: "Slider"
+                            component: "Slider"
+                        }
+                        ListElement {
+                            text: "Switch"
+                            component: "Switch"
+                        }
+                        ListElement {
+                            text: "Text Field"
+                            component: "TextField"
+                        }
+                    }
                     delegate: MobileComponents.ListItemWithActions {
                         enabled: true
                         MobileComponents.Label {
                             enabled: true
-                            text: "Item " + modelData
+                            text: model.text
                         }
-                        onClicked: root.pageStack.push(mainPageComponent)
+                        property Item ownPage
+                        onClicked: {
+                            root.pageStack.pop(root.initialPage);
+                            ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
+                        }
+                        checked: root.pageStack.currentPage == ownPage
                         actions: [
                             Controls.Action {
                                 iconName: "document-decrypt"

@@ -42,6 +42,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0
+import QtQuick.Layouts 1.3
 import org.kde.plasma.mobilecomponents 0.2
 
 import "private/PageStack.js" as Engine
@@ -274,9 +275,26 @@ Item {
                     rightMargin: 100
                 }
 
-                property int takenColumns: Math.max(1, Math.round(container.page ? container.page.implicitWidth/columnWidth : 1));
+                property int takenColumns: {
+                    if (container.page && container.page.Layout && container.page.Layout.fillWidth) {
+                        return Math.max(1, Math.round(actualRoot.width/columnWidth)-1);
+                    } else {
+                        return Math.max(1, Math.round(container.page ? container.page.implicitWidth/columnWidth : 1));
+                    }
+                }
 
                 width: (container.pageDepth >= actualRoot.depth ? Math.min(actualRoot.width, takenColumns*columnWidth) : columnWidth)
+            }
+
+            Rectangle {
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: actualContainer.left
+                }
+                width: 1
+                color: Theme.textColor
+                opacity: 0.3
             }
 
             // Sets pending state as current if state change is delayed
