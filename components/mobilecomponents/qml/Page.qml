@@ -53,6 +53,16 @@ Rectangle {
         id: internalActions
     }
 
+    /**
+     * Defines the contextual actions for the page:
+     * an easy way to assign actions in the right sliding panel
+     */
+    property alias contextualActions: internalContextualActions.data
+
+    Item {
+        id: internalContextualActions
+    }
+
     color: "transparent"
 
     RowLayout {

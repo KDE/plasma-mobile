@@ -20,10 +20,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.4 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.kquickcontrolsaddons 2.0
 
 MobileComponents.ApplicationWindow {
     id: root
@@ -82,17 +79,8 @@ MobileComponents.ApplicationWindow {
         
     }
     MobileComponents.ContextDrawer {
-        actions:
-            [
-            Controls.Action {
-                text:"Action 1"
-                iconName: "document-decrypt"
-                onTriggered: print("Action 1 clicked")
-            },
-            Controls.Action {
-                text:"Action 2"
-                iconName: "document-share"
-            }]
+        id: contextDrawer
+        actions: root.pageStack.currentPage ? root.pageStack.currentPage.contextualActions : null
         title: "Actions"
     }
 

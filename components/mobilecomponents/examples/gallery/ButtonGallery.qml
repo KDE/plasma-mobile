@@ -24,6 +24,17 @@ import org.kde.plasma.mobilecomponents 0.2
 
 Page {
     Layout.fillWidth: true
+    contextualActions: [
+        Controls.Action {
+            text:"Action for buttons"
+            iconName: "bookmarks"
+            onTriggered: print("Action 1 clicked")
+        },
+        Controls.Action {
+            text:"Action 2"
+            iconName: "folder"
+        }
+    ]
     Heading {
         text: "Buttons"
         anchors {

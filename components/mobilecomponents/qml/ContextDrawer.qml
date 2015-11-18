@@ -19,7 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.0 as QtControls
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2
 
 OverlayDrawer {
     id: root
@@ -27,14 +27,10 @@ OverlayDrawer {
     property string title
 
     //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
-    property alias actions: internalActions.data
-
-    Item {
-        id: internalActions
-    }
+    property var actions
+    enabled: menu.count > 0
 
     drawer: QtControls.ScrollView {
-
         ListView {
             id: menu
             model: {
@@ -47,14 +43,17 @@ OverlayDrawer {
                             root.actions[0];
                 }
             }
-            header: Item {
+            verticalLayoutDirection: ListView.BottomToTop
+            //in bottomtotop all is flipped
+            footer: Item {
                 height: heading.height
+                width: menu.width
                 Heading {
                     id: heading
                     anchors {
                         left: parent.left
                         right: parent.right
-                        margins: units.largeSpacing
+                        margins: Units.largeSpacing
                     }
                     elide: Text.ElideRight
                     level: 2
@@ -66,7 +65,7 @@ OverlayDrawer {
                 Row {
                     anchors {
                         left: parent.left
-                        margins: units.largeSpacing
+                        margins: Units.largeSpacing
                     }
                     Icon {
                         height: parent.height

@@ -27,6 +27,12 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Page {
     id: page
     Layout.fillWidth: true
+    actions:  [
+        Controls.Action {
+            iconName:"dialog-cancel"
+            onTriggered: print("Action triggered")
+        }
+    ]
     Controls.ScrollView {
         anchors.fill: parent
         

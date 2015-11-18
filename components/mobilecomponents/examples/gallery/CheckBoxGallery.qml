@@ -26,6 +26,15 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Page {
     id: page
+    contextualActions: [
+        Controls.Action {
+            text:"Action for checkbox page"
+            onTriggered: print("Action 1 clicked")
+        },
+        Controls.Action {
+            text:"Action 2"
+        }
+    ]
     Layout.fillWidth: true
     Controls.ScrollView {
         anchors.fill: parent
