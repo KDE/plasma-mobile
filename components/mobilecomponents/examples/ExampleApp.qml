@@ -31,8 +31,8 @@ MobileComponents.ApplicationWindow {
     height: 800
 
     MobileComponents.GlobalDrawer {
-        title: "Akregator"
-        titleIcon: "akregator"
+        title: "Widget gallery"
+        titleIcon: "applications-graphics"
 
         actions: [
             MobileComponents.ActionGroup {
@@ -63,10 +63,22 @@ MobileComponents.ApplicationWindow {
                 iconName: "configure"
             }
             ]
-        content: Rectangle {
-            Layout.minimumHeight: 200
-            Layout.minimumWidth: 200
+        
+        Controls.CheckBox {
+            checked: true
+            text: "Option 1"
         }
+        Controls.CheckBox {
+            text: "Option 2"
+        }
+        Controls.CheckBox {
+            text: "Option 3"
+        }
+        Controls.Slider {
+            Layout.fillWidth: true
+            value: 0.5
+        }
+        
     }
     MobileComponents.ContextDrawer {
         actions:

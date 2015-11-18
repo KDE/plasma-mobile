@@ -95,7 +95,7 @@ Item {
 
         Rectangle {
             id : background
-            color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.backgroundColor
+            color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.viewBackgroundColor
 
             anchors.fill: parent
             visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true

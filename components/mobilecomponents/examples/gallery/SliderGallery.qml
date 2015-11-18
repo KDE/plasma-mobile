@@ -55,6 +55,15 @@ Page {
                         maximumValue: 5.0
                     }
                     Label {
+                        text: "Disabled:"
+                    }
+                    Controls.Slider {
+                        enabled: false
+                        Layout.minimumWidth: units.gridUnit * 20
+                        value: 2
+                        maximumValue: 5.0
+                    }
+                    Label {
                         text: "Thickmarks:"
                     }
                     Controls.Slider {

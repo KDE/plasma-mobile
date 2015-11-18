@@ -20,12 +20,13 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
+import org.kde.plasma.mobilecomponents 0.2
 
 OverlayDrawer {
     id: root
     inverse: true
 
-    property alias content: mainContent.data
+    default property alias content: mainContent.data
 
     property alias title: heading.text
     property alias titleIcon: headingIcon.source
@@ -34,18 +35,20 @@ OverlayDrawer {
     drawer: ColumnLayout {
         id: mainColumn
         anchors.fill: parent
+        spacing: 0
         implicitWidth: units.gridUnit * 12
 
         RowLayout {
             Layout.fillWidth: true
+            Layout.minimumHeight: Math.max(headingIcon.height, heading.height) + Units.smallSpacing*2
             anchors {
                 left: parent.left
+                margins: Units.smallSpacing
             }
             Icon {
                 id: headingIcon
-                height: parent.height
-                width: height
-                Layout.minimumWidth: height
+                Layout.minimumWidth: Units.iconSizes.large
+                Layout.minimumHeight: width
             }
             Heading {
                 id: heading
@@ -55,6 +58,12 @@ OverlayDrawer {
                 height: parent.height
                 Layout.minimumWidth: height
             }
+        }
+        Rectangle {
+            color: Theme.textColor
+            opacity: 0.2
+            Layout.fillWidth: true
+            Layout.minimumHeight: 1
         }
 
         PageRow {
@@ -66,8 +75,15 @@ OverlayDrawer {
 
         ColumnLayout {
             id: mainContent
-            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignHCenter
+            Layout.minimumWidth: parent.width - Units.smallSpacing*2
+            Layout.maximumWidth: Layout.minimumWidth
+            Layout.fillWidth: false
             Layout.fillHeight: true
+        }
+        Item {
+            Layout.minimumWidth: Units.smallSpacing
+            Layout.minimumHeight: Units.smallSpacing
         }
 
         Component {

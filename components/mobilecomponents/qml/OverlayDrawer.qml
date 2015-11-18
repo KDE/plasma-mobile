@@ -171,7 +171,7 @@ Item {
         Rectangle {
             id: browserFrame
             z: 100
-            color: Theme.backgroundColor
+            color: Theme.viewBackgroundColor
             anchors {
                 top: parent.top
                 bottom: parent.bottom
@@ -207,7 +207,6 @@ Item {
                     left: root.inverse ? parent.right : undefined
                     top: parent.top
                     bottom: parent.bottom
-                    rightMargin: -1
                 }
                 opacity: browserFrame.state == "Closed" ? 0 : 1
                 start: Qt.point(0, 0)

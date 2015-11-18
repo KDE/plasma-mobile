@@ -290,11 +290,12 @@ Item {
                 anchors {
                     top: parent.top
                     bottom: parent.bottom
-                    left: actualContainer.left
+                    right: actualContainer.right
                 }
                 width: 1
                 color: Theme.textColor
                 opacity: 0.3
+                visible: container.pageDepth < actualRoot.depth
             }
 
             // Sets pending state as current if state change is delayed
