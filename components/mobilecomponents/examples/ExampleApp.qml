@@ -33,6 +33,7 @@ MobileComponents.ApplicationWindow {
     MobileComponents.GlobalDrawer {
         title: "Widget gallery"
         titleIcon: "applications-graphics"
+        bannerImageSource: "banner.jpg"
 
         actions: [
             MobileComponents.ActionGroup {

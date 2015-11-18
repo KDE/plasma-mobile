@@ -20,6 +20,7 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.3
+import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 
 OverlayDrawer {
@@ -30,6 +31,7 @@ OverlayDrawer {
 
     property alias title: heading.text
     property alias titleIcon: headingIcon.source
+    property alias bannerImageSource: bannerImage.source
     property list<Action> actions
 
     drawer: ColumnLayout {
@@ -38,27 +40,67 @@ OverlayDrawer {
         spacing: 0
         implicitWidth: units.gridUnit * 12
 
-        RowLayout {
+        Image {
+            id: bannerImage
             Layout.fillWidth: true
+
+            Layout.preferredWidth: title.implicitWidth
+            Layout.preferredHeight: bannerImageSource != "" ? Math.max(title.implicitHeight, Math.floor(width / (sourceSize.width/sourceSize.height))) : title.implicitHeight
             Layout.minimumHeight: Math.max(headingIcon.height, heading.height) + Units.smallSpacing*2
+
+            fillMode: Image.PreserveAspectCrop
+
             anchors {
                 left: parent.left
-                margins: Units.smallSpacing
+                right: parent.right
+                top: parent.top
             }
-            Icon {
-                id: headingIcon
-                Layout.minimumWidth: Units.iconSizes.large
-                Layout.minimumHeight: width
+
+            LinearGradient {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    top: parent.top
+                }
+                height: title.height * 1.3
+                start: Qt.point(0, 0)
+                end: Qt.point(0, height)
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0.0
+                        color: Qt.rgba(0, 0, 0, 0.8)
+                    }
+                    GradientStop {
+                        position: 1.0
+                        color: "transparent"
+                    }
+                }
             }
-            Heading {
-                id: heading
-                level: 1
-            }
-            Item {
-                height: parent.height
-                Layout.minimumWidth: height
+
+            RowLayout {
+                id: title
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    margins: Units.smallSpacing
+                }
+                Icon {
+                    id: headingIcon
+                    Layout.minimumWidth: Units.iconSizes.large
+                    Layout.minimumHeight: width
+                }
+                Heading {
+                    id: heading
+                    level: 1
+                    color: bannerImageSource != "" ? "white" : Theme.textColor
+                }
+                Item {
+                    height: parent.height
+                    Layout.minimumWidth: height
+                }
             }
         }
+
         Rectangle {
             color: Theme.textColor
             opacity: 0.2
