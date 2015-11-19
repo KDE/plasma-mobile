@@ -28,7 +28,6 @@
 
 #include "pagedproxymodel.h"
 #include "package.h"
-#include "applicationlistmodel.h"
 
 void MobileComponentsPlugin::initializeEngine(QQmlEngine *engine, const char *uri)
 {
@@ -46,7 +45,6 @@ void MobileComponentsPlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
 
     qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
-    qmlRegisterType<ApplicationListModel>(uri, 0, 2, "ApplicationListModel");
     qmlRegisterType<Package>(uri, 0, 2, "Package");
 }
 

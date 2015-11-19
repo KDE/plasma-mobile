@@ -4,7 +4,6 @@ set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
     pagedproxymodel.cpp
     package.cpp
-    applicationlistmodel.cpp
     )
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})

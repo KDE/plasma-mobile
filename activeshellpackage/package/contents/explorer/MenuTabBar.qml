@@ -34,10 +34,6 @@ PlasmaComponents.TabBar {
     }
     width: Math.min(implicitWidth, parent.width - 100)
 
-    MobileComponents.ApplicationListModel {
-        id: applicationsModel
-    }
-
     CategoryTab {
         text: i18n("Applications")
         component: appsComponent
