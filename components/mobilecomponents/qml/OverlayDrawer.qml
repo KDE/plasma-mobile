@@ -48,7 +48,26 @@ Item {
     property alias drawer: drawerPage.data
     property alias open: browserFrame.open
     property bool inverse: false
+    property Item externalHandle
 
+    Connections {
+        target: externalHandle
+        onPressed:  {
+            if (root.enabled) {
+                mouseEventListener.managePressed(mouse);
+            }
+        }
+        onPositionChanged: {
+            if (root.enabled) {
+                mouseEventListener.positionChanged(mouse);
+            }
+        }
+        onReleased: {
+            if (root.enabled) {
+                mouseEventListener.released(mouse);
+            }
+        }
+    }
     Item {
         id: mainPage
         anchors.fill: parent

@@ -29,10 +29,16 @@ MouseArea {
     Layout.maximumWidth: Layout.minimumWidth
     implicitWidth: Units.iconSizes.large
     implicitHeight: width
+    drag {
+        target: background
+        axis: Drag.XAxis
+    }
+    onReleased: background.x = 0
     Rectangle {
         id: background
         radius: width/2
-        anchors.fill: parent
+        width: parent.width
+        height: parent.height
         color: mouse.pressed ? Theme.highlightColor : Theme.backgroundColor
         Icon {
             id: icon
@@ -47,12 +53,18 @@ MouseArea {
                 easing.type: Easing.InOutQuad
             }
         }
+        Behavior on x {
+            NumberAnimation {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
     DropShadow {
         anchors.fill: background
         horizontalOffset: 0
         verticalOffset: units.smallSpacing/2
-        radius: units.gridUnit / 2.2
+        radius: units.gridUnit / 2.4
         samples: 16
         color: mouse.pressed ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
         source: background

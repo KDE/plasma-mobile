@@ -19,6 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.3
+import "private"
 
 /**
  * A window that provides some basic features needed for all apps
@@ -50,4 +51,29 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
+    property OverlayDrawer globalDrawer
+    property OverlayDrawer contextDrawer
+
+    onGlobalDrawerChanged: {
+        globalDrawer.parent = contentItem;
+        globalDrawer.externalHandle = actionButton;
+    }
+    onContextDrawerChanged: {
+        contextDrawer.parent = contentItem;
+        contextDrawer.externalHandle = actionButton;
+    }
+
+    property alias actionButton: __actionButton
+    ActionButton {
+        id: __actionButton
+        anchors.bottom: parent.bottom
+        x: parent.width/2 - width/2
+        iconSource: "distribute-horizontal-x"
+
+        visible: root.globalDrawer || root.contextDrawer
+        //TODO: how an app can inject here?
+        onClicked: {
+            
+        }
+    }
 }

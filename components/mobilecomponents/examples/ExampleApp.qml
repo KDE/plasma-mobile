@@ -27,7 +27,7 @@ MobileComponents.ApplicationWindow {
     width: 500
     height: 800
 
-    MobileComponents.GlobalDrawer {
+    globalDrawer: MobileComponents.GlobalDrawer {
         title: "Widget gallery"
         titleIcon: "applications-graphics"
         bannerImageSource: "banner.jpg"
@@ -78,7 +78,7 @@ MobileComponents.ApplicationWindow {
         }
         
     }
-    MobileComponents.ContextDrawer {
+    contextDrawer: MobileComponents.ContextDrawer {
         id: contextDrawer
         actions: root.pageStack.currentPage ? root.pageStack.currentPage.contextualActions : null
         title: "Actions"
@@ -91,4 +91,5 @@ MobileComponents.ApplicationWindow {
         id: mainPageComponent
         MainPage {}
     }
+
 }

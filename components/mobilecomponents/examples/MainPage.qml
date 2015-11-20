@@ -25,15 +25,7 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 MobileComponents.Page {
     anchors.fill:parent
     color: MobileComponents.Theme.viewBackgroundColor
-    actions:  [
-        Controls.Action {
-            iconName:"konqueror"
-            onTriggered: print("Action triggered")
-        },
-        Controls.Action {
-            iconName:"go-home"
-        }
-    ]
+
     contextualActions: [
         Controls.Action {
             text:"Action 1"

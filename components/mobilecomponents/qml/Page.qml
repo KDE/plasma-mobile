@@ -42,18 +42,6 @@ Rectangle {
     property Item tools: null
 
     /**
-     * Defines the actions for the page: at most 4 buttons will
-     * contain the actions at the bottom of the page, if the main
-     * item of the page is a Flickable or a ScrllArea, it will
-     * control the visibility of the actions.
-     */
-    property alias actions: internalActions.data
-
-    Item {
-        id: internalActions
-    }
-
-    /**
      * Defines the contextual actions for the page:
      * an easy way to assign actions in the right sliding panel
      */
@@ -65,69 +53,4 @@ Rectangle {
 
     color: "transparent"
 
-    RowLayout {
-        id: internalButtons
-        z:99
-        anchors.horizontalCenter: parent.horizontalCenter
-        Layout.fillWidth: false
-        height: units.iconSizes.large
-        property Item flickable: {
-            if (root.children[root.children.length-1]) {
-                if (root.children[root.children.length-1].contentY) {
-                    return root.children[root.children.length-1];
-                } else if (root.children[root.children.length-1].flickableItem) {
-                    return root.children[root.children.length-1].flickableItem;
-                }
-            }
-            return null;
-        }
-        Connections {
-            target: internalButtons.flickable
-            property real oldContentY: internalButtons.flickable.contentY
-            onContentYChanged: {
-                if (internalButtons.flickable.atYBeginning || internalButtons.flickable.atYEnd) {
-                    return;
-                }
-                internalButtons.y = Math.max(internalButtons.flickable.height - internalButtons.height - Units.smallSpacing, Math.min(internalButtons.flickable.height, internalButtons.y + internalButtons.flickable.contentY - oldContentY));
-                oldContentY = internalButtons.flickable.contentY;
-            }
-        }
-        y: parent.height - height - Units.smallSpacing
-        Repeater {
-            model: {
-                if (root.actions.length == 0) {
-                    return null;
-                } else {
-                    return root.actions[0].text !== undefined &&
-                        root.actions[0].trigger !== undefined ?
-                            root.actions :
-                            root.actions[0];
-                }
-            }
-            delegate: ActionButton {
-                Layout.fillHeight: true
-                iconSource: modelData.iconName
-                onClicked: {
-                    if (modelData && modelData.trigger !== undefined) {
-                        modelData.trigger();
-                    // assume the model is a list of QAction or Action
-                    } else if (toolbar.model.length > index) {
-                        toolbar.model[index].trigger();
-                    } else {
-                        console.log("Don't know how to trigger the action")
-                    }
-                }
-            }
-        }
-        onChildrenChanged: {
-            var flexibleFound = false;
-            for (var i = 0; i < children.length; ++i) {
-                if (children[i].Layout.fillWidth) {
-                    flexibleFound = true;
-                    break;
-                }
-            }
-            Layout.fillWidth = flexibleFound;
-        }
-    }
 }
