@@ -45,29 +45,31 @@ Item {
     z: 9999
 
     default property alias page: mainPage.data
-    property alias drawer: drawerPage.data
-    property alias open: browserFrame.open
+    property Item drawer
+    property alias opened: browserFrame.open
     property bool inverse: false
-    property Item externalHandle
+    property real position: 0
 
-    Connections {
-        target: externalHandle
-        onPressed:  {
-            if (root.enabled) {
-                mouseEventListener.managePressed(mouse);
-            }
-        }
-        onPositionChanged: {
-            if (root.enabled) {
-                mouseEventListener.positionChanged(mouse);
-            }
-        }
-        onReleased: {
-            if (root.enabled) {
-                mouseEventListener.released(mouse);
-            }
+    onDrawerChanged: drawer.parent = drawerPage
+    onPositionChanged: {
+        if (inverse) {
+            browserFrame.x = -browserFrame.width + position * browserFrame.width;
+        } else {
+            browserFrame.x = root.width - (position * browserFrame.width);
         }
     }
+    function open () {
+        mouseEventListener.startBrowserFrameX = browserFrame.x;
+        browserFrame.state = "Dragging";
+        browserFrame.state = "Open";
+    }
+    function close () {
+        mouseEventListener.startBrowserFrameX = browserFrame.x;
+        browserFrame.state = "Dragging";
+        browserFrame.state = "Closed";
+    }
+    signal clicked
+
     Item {
         id: mainPage
         anchors.fill: parent
@@ -185,6 +187,7 @@ Item {
             if ((root.inverse && mouse.x > browserFrame.width) ||
                 (!root.inverse && mouse.x < browserFrame.x)) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
+                root.clicked();
             }
         }
         Rectangle {
@@ -202,6 +205,10 @@ Item {
                 } else {
                     return parent.width - units.gridUnit * 3
                 }
+            }
+
+            onXChanged: {
+                root.position = root.inverse ? 1 + browserFrame.x/browserFrame.width : (root.width - browserFrame.x)/browserFrame.width;
             }
 
             state: "Closed"
@@ -227,7 +234,7 @@ Item {
                     top: parent.top
                     bottom: parent.bottom
                 }
-                opacity: browserFrame.state == "Closed" ? 0 : 1
+                opacity: root.position == 0 ? 0 : 1
                 start: Qt.point(0, 0)
                 end: Qt.point(units.gridUnit/2, 0)
                 gradient: Gradient {
@@ -270,7 +277,6 @@ Item {
                         target: browserFrame
                         x: root.inverse ? 0 : root.width - browserFrame.width
                     }
-
                 },
                 State {
                     name: "Dragging"
@@ -293,8 +299,9 @@ Item {
             transitions: [
                 Transition {
                     //Exclude Dragging
-                    to: "Open,Closed,Hidden"
+                    to: "Open,Closed"
                     NumberAnimation {
+                        id: transitionAnim
                         properties: "x"
                         duration: units.longDuration
                         easing.type: Easing.InOutQuad

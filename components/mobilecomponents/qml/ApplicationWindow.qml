@@ -71,9 +71,5 @@ ApplicationWindow {
         iconSource: "distribute-horizontal-x"
 
         visible: root.globalDrawer || root.contextDrawer
-        //TODO: how an app can inject here?
-        onClicked: {
-            
-        }
     }
 }

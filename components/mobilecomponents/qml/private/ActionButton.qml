@@ -23,23 +23,57 @@ import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 
 MouseArea {
-    id: mouse
+    id: button
     property alias iconSource: icon.source
     Layout.minimumWidth: Units.iconSizes.large
     Layout.maximumWidth: Layout.minimumWidth
     implicitWidth: Units.iconSizes.large
     implicitHeight: width
     drag {
-        target: background
+        target: button
         axis: Drag.XAxis
     }
-    onReleased: background.x = 0
+
+    onReleased: {
+        if (x > parent.width/2 + globalDrawer.drawer.width/2) {
+            globalDrawer.open();
+            contextDrawer.close();
+        } else if (x < parent.width/2 - contextDrawer.drawer.width/2) {
+            contextDrawer.open();
+            globalDrawer.close();
+        } else {
+            globalDrawer.close();
+            contextDrawer.close();
+        }
+    }
+    Connections {
+        target: globalDrawer
+        onPositionChanged: {
+            if (!button.pressed) {
+                button.x = globalDrawer.drawer.width * globalDrawer.position + button.parent.width/2 - button.width/2;
+            }
+        }
+    }
+    Connections {
+        target: contextDrawer
+        onPositionChanged: {
+            if (!button.pressed) {
+                button.x = button.parent.width/2 - button.width/2 - contextDrawer.drawer.width * contextDrawer.position;
+            }
+        }
+    }
+    onXChanged: {
+        if (button.pressed) {
+            globalDrawer.position = Math.min(1, Math.max(0, (x - button.parent.width/2 + button.width/2)/globalDrawer.drawer.width));
+            contextDrawer.position = Math.min(1, Math.max(0, (button.parent.width/2 - button.width/2 - x)/contextDrawer.drawer.width));
+        }
+    }
     Rectangle {
         id: background
         radius: width/2
         width: parent.width
         height: parent.height
-        color: mouse.pressed ? Theme.highlightColor : Theme.backgroundColor
+        color: button.pressed ? Theme.highlightColor : Theme.backgroundColor
         Icon {
             id: icon
             anchors {
@@ -66,7 +100,7 @@ MouseArea {
         verticalOffset: units.smallSpacing/2
         radius: units.gridUnit / 2.4
         samples: 16
-        color: mouse.pressed ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
+        color: button.pressed ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
         source: background
     }
 }
