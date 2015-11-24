@@ -108,11 +108,11 @@ OverlayDrawer {
             Layout.minimumHeight: 1
         }
 
-        PageRow {
+        StackView {
             id: pageRow
             Layout.fillWidth: true
             Layout.fillHeight: true
-            initialPage: menuComponent
+            initialItem: menuComponent
         }
 
         ColumnLayout {

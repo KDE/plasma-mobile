@@ -35,10 +35,10 @@ MouseArea {
     }
 
     onReleased: {
-        if (x > parent.width/2 + globalDrawer.drawer.width/2) {
+        if (x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.drawer.width/2)) {
             globalDrawer.open();
             contextDrawer.close();
-        } else if (x < parent.width/2 - contextDrawer.drawer.width/2) {
+        } else if (x < Math.max(parent.width/4, parent.width/2 - contextDrawer.drawer.width/2)) {
             contextDrawer.open();
             globalDrawer.close();
         } else {

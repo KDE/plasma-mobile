@@ -56,11 +56,9 @@ ApplicationWindow {
 
     onGlobalDrawerChanged: {
         globalDrawer.parent = contentItem;
-        globalDrawer.externalHandle = actionButton;
     }
     onContextDrawerChanged: {
         contextDrawer.parent = contentItem;
-        contextDrawer.externalHandle = actionButton;
     }
 
     property alias actionButton: __actionButton
