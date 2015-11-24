@@ -31,7 +31,7 @@ OverlayDrawer {
     enabled: menu.count > 0
     edge: Qt.RightEdge
 
-    drawer: QtControls.ScrollView {
+    contentItem: QtControls.ScrollView {
         ListView {
             id: menu
             model: {

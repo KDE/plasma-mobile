@@ -35,10 +35,10 @@ MouseArea {
     }
 
     onReleased: {
-        if (x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.drawer.width/2)) {
+        if (x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
             globalDrawer.open();
             contextDrawer.close();
-        } else if (x < Math.max(parent.width/4, parent.width/2 - contextDrawer.drawer.width/2)) {
+        } else if (x < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
             contextDrawer.open();
             globalDrawer.close();
         } else {
@@ -50,7 +50,7 @@ MouseArea {
         target: globalDrawer
         onPositionChanged: {
             if (!button.pressed) {
-                button.x = globalDrawer.drawer.width * globalDrawer.position + button.parent.width/2 - button.width/2;
+                button.x = globalDrawer.contentItem.width * globalDrawer.position + button.parent.width/2 - button.width/2;
             }
         }
     }
@@ -58,14 +58,14 @@ MouseArea {
         target: contextDrawer
         onPositionChanged: {
             if (!button.pressed) {
-                button.x = button.parent.width/2 - button.width/2 - contextDrawer.drawer.width * contextDrawer.position;
+                button.x = button.parent.width/2 - button.width/2 - contextDrawer.contentItem.width * contextDrawer.position;
             }
         }
     }
     onXChanged: {
         if (button.pressed) {
-            globalDrawer.position = Math.min(1, Math.max(0, (x - button.parent.width/2 + button.width/2)/globalDrawer.drawer.width));
-            contextDrawer.position = Math.min(1, Math.max(0, (button.parent.width/2 - button.width/2 - x)/contextDrawer.drawer.width));
+            globalDrawer.position = Math.min(1, Math.max(0, (x - button.parent.width/2 + button.width/2)/globalDrawer.contentItem.width));
+            contextDrawer.position = Math.min(1, Math.max(0, (button.parent.width/2 - button.width/2 - x)/contextDrawer.contentItem.width));
         }
     }
     Rectangle {

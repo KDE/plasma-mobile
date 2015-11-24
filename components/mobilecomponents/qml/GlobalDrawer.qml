@@ -34,7 +34,7 @@ OverlayDrawer {
     property alias bannerImageSource: bannerImage.source
     property list<Action> actions
 
-    drawer: ColumnLayout {
+    contentItem: ColumnLayout {
         id: mainColumn
         anchors.fill: parent
         spacing: 0
