@@ -25,7 +25,7 @@ import org.kde.plasma.mobilecomponents 0.2
 
 OverlayDrawer {
     id: root
-    inverse: true
+    edge: Qt.LeftEdge
 
     default property alias content: mainContent.data
 

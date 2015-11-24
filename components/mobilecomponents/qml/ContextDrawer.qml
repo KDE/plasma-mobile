@@ -29,6 +29,7 @@ OverlayDrawer {
     //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
     property var actions
     enabled: menu.count > 0
+    edge: Qt.RightEdge
 
     drawer: QtControls.ScrollView {
         ListView {

@@ -47,12 +47,12 @@ Item {
     default property alias page: mainPage.data
     property Item drawer
     property alias opened: browserFrame.open
-    property bool inverse: false
+    property int edge: Qt.LeftEdge
     property real position: 0
 
     onDrawerChanged: drawer.parent = drawerPage
     onPositionChanged: {
-        if (inverse) {
+        if (root.edge == Qt.LeftEdge) {
             browserFrame.x = -browserFrame.width + position * browserFrame.width;
         } else {
             browserFrame.x = root.width - (position * browserFrame.width);
@@ -79,15 +79,15 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "black"
-        opacity: 0.6 * (root.inverse
+        opacity: 0.6 * (root.edge == Qt.LeftEdge
             ? ((browserFrame.x + browserFrame.width) / browserFrame.width)
             : (1 - browserFrame.x / root.width))
     }
 
     MouseArea {
         anchors {
-            right: root.inverse ? undefined : parent.right
-            left: root.inverse ? parent.left : undefined
+            right: root.edge == Qt.LeftEdge ? undefined : parent.right
+            left: root.edge == Qt.LeftEdge ? parent.left : undefined
             top: parent.top
             bottom: parent.bottom
         }
@@ -135,7 +135,7 @@ Item {
                 startDragging = true;
             }
             if (startDragging) {
-                browserFrame.x = root.inverse
+                browserFrame.x = root.edge == Qt.LeftEdge
                     ? Math.min(0, browserFrame.x + mouse.x - oldMouseX)
                     : Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
             }
@@ -148,7 +148,7 @@ Item {
                 return;
             }
 
-            if (root.inverse) {
+            if (root.edge == Qt.LeftEdge) {
                 if (mouse.x < units.gridUnit) {
                     browserFrame.state = "Closed";
                 } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
@@ -184,8 +184,8 @@ Item {
             if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
                 return;
             }
-            if ((root.inverse && mouse.x > browserFrame.width) ||
-                (!root.inverse && mouse.x < browserFrame.x)) {
+            if ((root.edge == Qt.LeftEdge && mouse.x > browserFrame.width) ||
+                (root.edge != Qt.LeftEdge && mouse.x < browserFrame.x)) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
                 root.clicked();
             }
@@ -208,7 +208,7 @@ Item {
             }
 
             onXChanged: {
-                root.position = root.inverse ? 1 + browserFrame.x/browserFrame.width : (root.width - browserFrame.x)/browserFrame.width;
+                root.position = root.edge == Qt.LeftEdge ? 1 + browserFrame.x/browserFrame.width : (root.width - browserFrame.x)/browserFrame.width;
             }
 
             state: "Closed"
@@ -229,8 +229,8 @@ Item {
             LinearGradient {
                 width: units.gridUnit/2
                 anchors {
-                    right: root.inverse ? undefined : parent.left
-                    left: root.inverse ? parent.right : undefined
+                    right: root.edge == Qt.LeftEdge ? undefined : parent.left
+                    left: root.edge == Qt.LeftEdge ? parent.right : undefined
                     top: parent.top
                     bottom: parent.bottom
                 }
@@ -240,15 +240,15 @@ Item {
                 gradient: Gradient {
                     GradientStop {
                         position: 0.0
-                        color: root.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
+                        color: root.edge == Qt.LeftEdge ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
                     }
                     GradientStop {
-                        position: root.inverse ? 0.3 : 0.7
+                        position: root.edge == Qt.LeftEdge ? 0.3 : 0.7
                         color: Qt.rgba(0, 0, 0, 0.15)
                     }
                     GradientStop {
                         position: 1.0
-                        color: root.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
+                        color: root.edge == Qt.LeftEdge ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
                     }
                 }
                 Behavior on opacity {
@@ -275,7 +275,7 @@ Item {
                     name: "Open"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.inverse ? 0 : root.width - browserFrame.width
+                        x: root.edge == Qt.LeftEdge ? 0 : root.width - browserFrame.width
                     }
                 },
                 State {
@@ -291,7 +291,7 @@ Item {
                     name: "Closed"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.inverse ? -browserFrame.width : root.width
+                        x: root.edge == Qt.LeftEdge ? -browserFrame.width : root.width
                     }
                 }
             ]
