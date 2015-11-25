@@ -1,7 +1,7 @@
 /*
  *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
  *   Copyright 2010 by Ménard Alexis <menard@kde.org>
- *   Copyright 2010 by Marco Martin <mart@kde.org>
+ *   Copyright 2015 by Marco Martin <mart@kde.org>
 
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
@@ -19,22 +19,22 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "mobilecomponentsplugin.h"
+#include "mobilecomponentsprivateplugin.h"
 
 #include <QQmlExtensionPlugin>
 #include <QQmlEngine>
 #include <QQmlContext>
 #include <QQuickItem>
+#include "pagedproxymodel.h"
 
 
-void MobileComponentsPlugin::registerTypes(const char *uri)
+void MobileComponentsPrivatePlugin::registerTypes(const char *uri)
 {
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
+    Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents.private"));
 
-    //TODO: in this plugin it will end up something similar to
-    //PlasmaCore's ColorScope
+    qmlRegisterType<PagedProxyModel>(uri, 0, 2, "PagedProxyModel");
 }
 
 
-#include "mobilecomponentsplugin.moc"
+#include "mobilecomponentsprivateplugin.moc"
 
