@@ -68,29 +68,53 @@ MouseArea {
             contextDrawer.position = Math.min(1, Math.max(0, (button.parent.width/2 - button.width/2 - x)/contextDrawer.contentItem.width));
         }
     }
-    Rectangle {
+
+    Item {
         id: background
-        radius: width/2
-        width: parent.width
-        height: parent.height
-        color: button.pressed ? Theme.highlightColor : Theme.backgroundColor
-        Icon {
-            id: icon
-            anchors {
-                fill: parent
-                margins: units.smallSpacing
-            }
+        anchors {
+            fill: parent
+            leftMargin: -Units.gridUnit
+            rightMargin: -Units.gridUnit
         }
-        Behavior on color {
-            ColorAnimation {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
+        Rectangle {
+            radius: width/2
+            anchors.centerIn: parent
+            height: parent.height - Units.smallSpacing*2
+            width: height
+            color: button.pressed ? Theme.highlightColor : Theme.backgroundColor
+            Icon {
+                id: icon
+                anchors {
+                    fill: parent
+                    margins: units.smallSpacing
+                }
             }
-        }
-        Behavior on x {
-            NumberAnimation {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
+            ActionButtonArrow {
+                anchors {
+                    right: parent.left
+                    rightMargin: Units.smallSpacing
+                }
+                visible: contextDrawer.enabled
+                inverted: true
+            }
+            ActionButtonArrow {
+                anchors {
+                    left: parent.right
+                    leftMargin: Units.smallSpacing
+                }
+                visible: globalDrawer.enabled
+            }
+            Behavior on color {
+                ColorAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
+            Behavior on x {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
             }
         }
     }

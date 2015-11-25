@@ -52,6 +52,9 @@ Item {
 
     onContentItemChanged: contentItem.parent = drawerPage
     onPositionChanged: {
+        if (!enabled) {
+            return;
+        }
         if (root.edge == Qt.LeftEdge) {
             browserFrame.x = -browserFrame.width + position * browserFrame.width;
         } else {
