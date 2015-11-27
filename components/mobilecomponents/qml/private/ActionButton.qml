@@ -34,6 +34,7 @@ MouseArea {
         axis: Drag.XAxis
     }
 
+    transform: Translate {}
     onReleased: {
         if (x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
             globalDrawer.open();
