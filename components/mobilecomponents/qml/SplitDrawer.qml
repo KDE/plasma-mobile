@@ -20,6 +20,7 @@
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
+import "private"
 
 /**Documented API
 Inherits:
@@ -43,7 +44,7 @@ Properties:
 
         int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
 **/
-Item {
+AbstractDrawer {
     id: root
     anchors {
         fill: parent
@@ -51,14 +52,15 @@ Item {
     visible: true
 
     default property alias page: mainPage.data
-    property alias drawer: drawerPage.data
-    property alias open: sidebar.open
+    property Item contentItem
+    property alias opened: sidebar.open
     property int visibleDrawerWidth: browserFrame.x
 
     Component.onCompleted: {
         mainPage.width = browserFrame.width
     }
 
+    onContentItemChanged: contentItem.parent = drawerPage
     MouseArea {
         id: mouseEventListener
         z: 200
@@ -104,6 +106,7 @@ Item {
                 browserFrame.state = "Open";
             }
         }
+        onClicked: root.clicked()
     }
 
     Rectangle {
@@ -212,7 +215,7 @@ Item {
             }
         }
 
-        width: parent.width/4
+        width: Math.min(parent.width/4*3, Math.max(root.contentItem ? root.contentItem.implicitWidth : 0, parent.width/4))
 
         anchors {
             left: parent.left

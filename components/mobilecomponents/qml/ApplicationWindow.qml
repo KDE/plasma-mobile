@@ -51,8 +51,8 @@ ApplicationWindow {
         anchors.fill: parent
     }
 
-    property OverlayDrawer globalDrawer
-    property OverlayDrawer contextDrawer
+    property AbstractDrawer globalDrawer
+    property AbstractDrawer contextDrawer
 
     onGlobalDrawerChanged: {
         globalDrawer.parent = contentItem;

@@ -20,6 +20,7 @@
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
+import "private"
 
 /**Documented API
 
@@ -39,7 +40,7 @@ Properties:
         Item contentItem:
         It's the part that can be pulled in and out, will act as a sidebar.
 **/
-Item {
+AbstractDrawer {
     id: root
     anchors.fill: parent
     z: 9999
@@ -71,7 +72,6 @@ Item {
         browserFrame.state = "Dragging";
         browserFrame.state = "Closed";
     }
-    signal clicked
 
     Item {
         id: mainPage
