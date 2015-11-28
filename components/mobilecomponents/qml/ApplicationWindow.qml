@@ -64,6 +64,7 @@ ApplicationWindow {
     property alias actionButton: __actionButton
     ActionButton {
         id: __actionButton
+        z: 9999
         anchors.bottom: parent.bottom
         x: parent.width/2 - width/2
         iconSource: "distribute-horizontal-x"

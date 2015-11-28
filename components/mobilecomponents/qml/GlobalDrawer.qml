@@ -62,6 +62,7 @@ OverlayDrawer {
                     right: parent.right
                     top: parent.top
                 }
+                visible: bannerImageSource != ""
                 height: title.height * 1.3
                 start: Qt.point(0, 0)
                 end: Qt.point(0, height)
@@ -183,6 +184,7 @@ OverlayDrawer {
                         } else {
                             modelData.trigger();
                             pageRow.pop(pageRow.initialPage);
+                            root.opened = false;
                         }
                     }
                 }
