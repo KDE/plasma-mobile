@@ -47,36 +47,24 @@ Rectangle {
      */
     property alias contextualActions: internalContextualActions.data
 
+    property Flickable flickable
     Item {
         id: internalContextualActions
     }
 
     color: "transparent"
 
-    QtObject {
-        id: internal
-        property Item flickable: {
-            if (root.children[root.children.length-1]) {
-                if (root.children[root.children.length-1].contentY) {
-                    return root.children[root.children.length-1];
-                } else if (root.children[root.children.length-1].flickableItem) {
-                    return root.children[root.children.length-1].flickableItem;
-                }
-            }
-            return null;
-        }
-    }
     Connections {
-        target: internal.flickable
-        property real oldContentY: internal.flickable.contentY
+        target: flickable
+        property real oldContentY: flickable.contentY
         onContentYChanged: {
-            print(internal.flickable.contentY+" "+actionButton.transform[0] )
-            if (internal.flickable.atYBeginning || internal.flickable.atYEnd) {
+            print(flickable.contentY+" "+actionButton.transform[0] )
+            if (flickable.atYBeginning || flickable.atYEnd) {
                 return;
             }
-            actionButton.transform[0].y = Math.min(actionButton.height, Math.max(0, actionButton.transform[0].y + (internal.flickable.contentY - oldContentY)));
+            actionButton.transform[0].y = Math.min(actionButton.height, Math.max(0, actionButton.transform[0].y + (flickable.contentY - oldContentY)));
 
-            oldContentY = internal.flickable.contentY;
+            oldContentY = flickable.contentY;
         }
     }
 }

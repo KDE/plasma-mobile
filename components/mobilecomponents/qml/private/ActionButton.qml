@@ -32,19 +32,29 @@ MouseArea {
     drag {
         target: button
         axis: Drag.XAxis
+        minimumX: contextDrawer ? 0 : parent.width/2 - width/2
+        maximumX: globalDrawer ? parent.width : parent.width/2 - width/2
     }
 
     transform: Translate {}
     onReleased: {
-        if (x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
+        if (globalDrawer && x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
             globalDrawer.open();
             contextDrawer.close();
-        } else if (x < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
-            contextDrawer.open();
-            globalDrawer.close();
+        } else if (contextDrawer && x < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
+            if (contextDrawer) {
+                contextDrawer.open();
+            }
+            if (globalDrawer) {
+                globalDrawer.close();
+            }
         } else {
-            globalDrawer.close();
-            contextDrawer.close();
+            if (globalDrawer) {
+                globalDrawer.close();
+            }
+            if (contextDrawer) {
+                contextDrawer.close();
+            }
         }
     }
     Connections {
@@ -95,7 +105,7 @@ MouseArea {
                     right: parent.left
                     rightMargin: Units.smallSpacing
                 }
-                visible: contextDrawer.enabled
+                visible: contextDrawer && contextDrawer.enabled
                 inverted: true
             }
             ActionButtonArrow {
@@ -103,7 +113,7 @@ MouseArea {
                     left: parent.right
                     leftMargin: Units.smallSpacing
                 }
-                visible: globalDrawer.enabled
+                visible: globalDrawer && globalDrawer.enabled
             }
             Behavior on color {
                 ColorAnimation {

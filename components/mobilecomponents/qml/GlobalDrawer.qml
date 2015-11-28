@@ -133,6 +133,7 @@ OverlayDrawer {
             id: menuComponent
             ListView {
                 id: optionMenu
+                clip: true
 
                 model: actions
                 property int level: 0
