@@ -144,7 +144,7 @@ Item {
                 property int pendingIndex: 0
                 Rectangle {
                     id: barRectangle
-                    color: theme.textColor
+                    color: Theme.textColor
                     opacity: 2.05
                     height: 4
                     radius: 2
@@ -157,7 +157,7 @@ Item {
                     }
                 }
                 Rectangle {
-                    color: theme.textColor
+                    color: Theme.textColor
                     height: 8
                     width: height
                     radius: 4
@@ -205,7 +205,7 @@ Item {
                             radius: 5
                             smooth: true
                             opacity: iconView.currentIndex == index ? 0.8: 0.4
-                            color: theme.textColor
+                            color: Theme.textColor
 
                             Behavior on scale {
                                 NumberAnimation {

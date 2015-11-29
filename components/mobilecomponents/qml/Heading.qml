@@ -24,7 +24,7 @@ import org.kde.plasma.mobilecomponents 0.2
  * A heading label used for subsections of texts.
  *
  * The characteristics of the text will be automatically set according to the
- * plasma theme. Use this components for section titles or headings in your UI,
+ * plasma Theme. Use this components for section titles or headings in your UI,
  * for example page or section titles.
  *
  * Example usage:

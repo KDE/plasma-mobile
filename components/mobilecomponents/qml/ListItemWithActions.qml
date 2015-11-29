@@ -201,7 +201,7 @@ Item {
 
         Behavior on x {
             NumberAnimation {
-                duration: units.longDuration
+                duration: Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -213,7 +213,7 @@ Item {
             
             visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
             Behavior on color {
-                ColorAnimation { duration: units.longDuration }
+                ColorAnimation { duration: Units.longDuration }
             }
 
             Item {

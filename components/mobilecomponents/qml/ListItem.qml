@@ -101,9 +101,9 @@ Item {
             visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
             opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
             Behavior on color {
-                ColorAnimation { duration: units.longDuration }
+                ColorAnimation { duration: Units.longDuration }
             }
-            Behavior on opacity { NumberAnimation { duration: units.longDuration } }
+            Behavior on opacity { NumberAnimation { duration: Units.longDuration } }
         }
         Item {
             id: paddingItem

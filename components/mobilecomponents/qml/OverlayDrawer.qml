@@ -95,7 +95,7 @@ AbstractDrawer {
             bottom: parent.bottom
         }
         z: 99
-        width: units.smallSpacing
+        width: Units.smallSpacing
         onPressed: mouseEventListener.managePressed(mouse)
         onPositionChanged: mouseEventListener.positionChanged(mouse)
         onReleased: mouseEventListener.released(mouse)
@@ -133,7 +133,7 @@ AbstractDrawer {
                 return;
             }
 
-            if (mouse.x < units.gridUnit ||
+            if (mouse.x < Units.gridUnit ||
                 Math.abs(mouse.x - startMouseX) > root.width / 5) {
                 startDragging = true;
             }
@@ -152,7 +152,7 @@ AbstractDrawer {
             }
 
             if (root.edge == Qt.LeftEdge) {
-                if (mouse.x < units.gridUnit) {
+                if (mouse.x < Units.gridUnit) {
                     browserFrame.state = "Closed";
                 } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Open";
@@ -163,7 +163,7 @@ AbstractDrawer {
                 }
 
             } else {
-                if (mouse.x > width - units.gridUnit) {
+                if (mouse.x > width - Units.gridUnit) {
                     browserFrame.state = "Closed";
                 } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Closed";
@@ -175,7 +175,7 @@ AbstractDrawer {
             }
         }
         onCanceled: {
-            if (oldMouseX > width - units.gridUnit) {
+            if (oldMouseX > width - Units.gridUnit) {
                 browserFrame.state = "Closed";
             } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
@@ -184,7 +184,7 @@ AbstractDrawer {
             }
         }
         onClicked: {
-            if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
+            if (Math.abs(startMouseX - mouse.x) > Units.gridUnit) {
                 return;
             }
             if ((root.edge == Qt.LeftEdge && mouse.x > browserFrame.width) ||
@@ -204,9 +204,9 @@ AbstractDrawer {
 
             width: {
                 if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
-                    return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
+                    return Math.min( parent.width - Units.gridUnit, drawerPage.children[0].implicitWidth)
                 } else {
-                    return parent.width - units.gridUnit * 3
+                    return parent.width - Units.gridUnit * 3
                 }
             }
 
@@ -230,7 +230,7 @@ AbstractDrawer {
             }
 
             LinearGradient {
-                width: units.gridUnit/2
+                width: Units.gridUnit/2
                 anchors {
                     right: root.edge == Qt.LeftEdge ? undefined : parent.left
                     left: root.edge == Qt.LeftEdge ? parent.right : undefined
@@ -239,7 +239,7 @@ AbstractDrawer {
                 }
                 opacity: root.position == 0 ? 0 : 1
                 start: Qt.point(0, 0)
-                end: Qt.point(units.gridUnit/2, 0)
+                end: Qt.point(Units.gridUnit/2, 0)
                 gradient: Gradient {
                     GradientStop {
                         position: 0.0
@@ -256,7 +256,7 @@ AbstractDrawer {
                 }
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: units.longDuration
+                        duration: Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -267,7 +267,7 @@ AbstractDrawer {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    //leftMargin: units.gridUnit
+                    //leftMargin: Units.gridUnit
                 }
                 clip: true
                 onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
@@ -306,7 +306,7 @@ AbstractDrawer {
                     NumberAnimation {
                         id: transitionAnim
                         properties: "x"
-                        duration: units.longDuration
+                        duration: Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }

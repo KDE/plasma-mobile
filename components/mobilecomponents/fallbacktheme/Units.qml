@@ -31,7 +31,7 @@ QtObject {
      * Given the screen has an accurate DPI settings, it corresponds to a width of
      * the capital letter M
      */
-    property int gridUnit: textMetrics.height
+    property int gridUnit: fontMetrics.height
 
     /**
      * units.iconSizes provides access to platform-dependent icon sizing

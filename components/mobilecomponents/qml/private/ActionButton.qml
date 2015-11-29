@@ -97,7 +97,7 @@ MouseArea {
                 id: icon
                 anchors {
                     fill: parent
-                    margins: units.smallSpacing
+                    margins: Units.smallSpacing
                 }
             }
             ActionButtonArrow {
@@ -117,13 +117,13 @@ MouseArea {
             }
             Behavior on color {
                 ColorAnimation {
-                    duration: units.longDuration
+                    duration: Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
             Behavior on x {
                 NumberAnimation {
-                    duration: units.longDuration
+                    duration: Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -132,8 +132,8 @@ MouseArea {
     DropShadow {
         anchors.fill: background
         horizontalOffset: 0
-        verticalOffset: units.smallSpacing/2
-        radius: units.gridUnit / 2.4
+        verticalOffset: Units.smallSpacing/2
+        radius: Units.gridUnit / 2.4
         samples: 16
         color: button.pressed ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
         source: background
