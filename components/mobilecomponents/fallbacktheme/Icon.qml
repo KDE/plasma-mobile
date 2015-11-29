@@ -32,7 +32,7 @@ Item {
     Image {
         id: image
         anchors.fill: parent
-        source: "icons/" + root.source + ".svg"
+        source: root.source != "" ? "icons/" + root.source + ".svg" : root.source
     }
     GammaAdjust {
         anchors.fill: image
