@@ -51,11 +51,16 @@ ApplicationWindow {
         anchors.fill: parent
         focus: true
         Keys.onReleased: {
-        if (event.key == Qt.Key_Back && stackView.depth > 1) {
-            stackView.pop();
-            event.accepted = true;
+            if (event.key == Qt.Key_Back && stackView.depth > 1) {
+                stackView.pop();
+                event.accepted = true;
+            }
         }
-    }
+        onLastVisiblePageChanged: {
+            if (lastVisiblePage != null) {
+                pop(lastVisiblePage)
+            }
+        }
     }
 
     property AbstractDrawer globalDrawer

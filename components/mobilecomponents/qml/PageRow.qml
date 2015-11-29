@@ -56,6 +56,7 @@ Item {
 
     property int depth: Engine.getDepth()
     property Item currentPage: null
+    property Item lastVisiblePage
     property ToolBar toolBar
     property variant initialPage
     //A column is wide enough for 30 characters
@@ -126,16 +127,26 @@ Item {
             return
         }
 
-        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * level - columnWidth), mainFlickable.contentWidth))
+        var firstLevel = Math.max(0, level - mainFlickable.width/columnWidth + 1);
+        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth+1000))
         scrollAnimation.running = true
     }
 
-    NumberAnimation {
+    SequentialAnimation {
         id: scrollAnimation
-        target: mainFlickable
-        properties: "contentX"
-        duration: internal.transitionDuration
-        easing.type: Easing.InOutQuad
+        property alias to: actualScrollAnimation.to
+        NumberAnimation {
+            id: actualScrollAnimation
+            target: mainFlickable
+            properties: "contentX"
+            duration: internal.transitionDuration
+            easing.type: Easing.InOutQuad
+        }
+        ScriptAction {
+            script: {
+                actualRoot.lastVisiblePage = root.children[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page
+            }
+        }
     }
 
     // Called when the page stack visibility changes.
@@ -207,6 +218,9 @@ Item {
             onMovementEnded: {
                 scrollToLevel(Math.round(contentX/columnWidth)+1)
             }
+            onFlickEnded: {
+                movementEnded();
+            }
         }
     }
 
@@ -277,7 +291,7 @@ Item {
 
                 property int takenColumns: {
                     if (container.page && container.page.Layout && container.page.Layout.fillWidth) {
-                        return Math.max(1, Math.round(actualRoot.width/columnWidth)-1);
+                        return Math.max(1, Math.round(actualRoot.width/columnWidth)-(container.x > 0 ? 1: 0));
                     } else {
                         return Math.max(1, Math.round(container.page ? container.page.implicitWidth/columnWidth : 1));
                     }

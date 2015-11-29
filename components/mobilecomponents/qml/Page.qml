@@ -52,6 +52,7 @@ Rectangle {
         id: internalContextualActions
     }
 
+    Layout.fillWidth: true
     color: "transparent"
 
     Connections {
