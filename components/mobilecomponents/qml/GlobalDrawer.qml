@@ -19,7 +19,7 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.3
+import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 
@@ -38,7 +38,7 @@ OverlayDrawer {
         id: mainColumn
         anchors.fill: parent
         spacing: 0
-        implicitWidth: units.gridUnit * 12
+        implicitWidth: Units.gridUnit * 12
 
         Image {
             id: bannerImage
