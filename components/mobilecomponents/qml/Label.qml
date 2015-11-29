@@ -18,7 +18,6 @@
 */
 
 import QtQuick 2.1
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.2
 
 /**
@@ -51,7 +50,7 @@ Text {
     font.underline: Theme.defaultFont.underline
     font.weight: Theme.defaultFont.weight
     font.wordSpacing: Theme.defaultFont.wordSpacing
-    color: PlasmaCore.ColorScope.textColor
+    color: Theme.textColor
 
     opacity: enabled? 1 : 0.6
 
