@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.4
 
 pragma Singleton
 
@@ -54,5 +54,9 @@ QtObject {
     property color complementaryBackgroundColor: Qt.rgba(0,0,0, 0.54)
     property color complementaryHoverColor: "#2196F3"
     property color complementaryFocusColor: "#2196F3"
+
+    property font defaultFont: fontMetrics.font
+
+    property variant fontMetrics: TextMetrics {}
 
 }
