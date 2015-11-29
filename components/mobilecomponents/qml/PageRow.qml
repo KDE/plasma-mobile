@@ -42,7 +42,7 @@
 
 import QtQuick 2.0
 import QtQuick.Controls 1.0
-import QtQuick.Layouts 1.3
+import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
 import "private/PageStack.js" as Engine
@@ -178,7 +178,7 @@ Item {
         property bool completed: false
 
         // Duration of transition animation (in ms)
-        property int transitionDuration: units.longDuration
+        property int transitionDuration: Units.longDuration
     }
 
     ScrollView {
