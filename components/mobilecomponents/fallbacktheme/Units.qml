@@ -95,5 +95,7 @@ QtObject {
      */
     property int shortDuration: 150
 
-    property variant fontMetrics: TextMetrics {}
+    property variant fontMetrics: TextMetrics {
+		text: "M"
+	}
 }
