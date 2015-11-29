@@ -73,6 +73,10 @@ MouseArea {
             }
         }
     }
+    Connections {
+        target: button.parent
+        onWidthChanged: button.x = button.parent.width/2 - button.width/2
+    }
     onXChanged: {
         if (button.pressed) {
             globalDrawer.position = Math.min(1, Math.max(0, (x - button.parent.width/2 + button.width/2)/globalDrawer.contentItem.width));

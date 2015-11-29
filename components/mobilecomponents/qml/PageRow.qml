@@ -131,8 +131,8 @@ Item {
         }
 
         var firstLevel = Math.max(0, level - mainFlickable.width/columnWidth + 1);
-        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth))
-        scrollAnimation.running = true
+        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+        scrollAnimation.running = true;
     }
 
     SequentialAnimation {
@@ -176,6 +176,10 @@ Item {
         }
     }
 
+    onWidthChanged: {
+        var firstLevel = Math.max(0, depth - mainFlickable.width/columnWidth + 1);
+        mainFlickable.contentX = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+    }
     Component.onCompleted: {
         internal.completed = true
         if (initialPage && depth == 0)
