@@ -37,7 +37,7 @@ MouseArea {
     }
     function toggle() {
         showAnimation.running = false;
-        if (transform[0].y < button.height) {
+        if (translateTransform.y < button.height) {
             showAnimation.to = button.height;
         } else {
             showAnimation.to = 0;
@@ -45,7 +45,9 @@ MouseArea {
         showAnimation.running = true;
     }
 
-    transform: Translate {}
+    transform: Translate {
+        id: translateTransform
+    }
     onReleased: {
         if (globalDrawer && x > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
             globalDrawer.open();
@@ -99,7 +101,7 @@ MouseArea {
 
     NumberAnimation {
         id: showAnimation
-        target: button.transform[0]
+        target: translateTransform
         properties: "y"
         duration: Units.longDuration
         easing.type: Easing.InOutQuad

@@ -97,8 +97,8 @@ OverlayDrawer {
                     color: bannerImageSource != "" ? "white" : Theme.textColor
                 }
                 Item {
-                    height: parent.height
-                    Layout.minimumWidth: height
+                    height: 1
+                    Layout.minimumWidth: heading.height
                 }
             }
         }
