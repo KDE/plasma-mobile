@@ -149,7 +149,8 @@ OverlayDrawer {
                             left: parent.left
                         }
                         Icon {
-                            Layout.maximumWidth: height
+                            Layout.minimumWidth: height
+                            Layout.maximumWidth: Layout.minimumWidth
                             Layout.fillHeight: true
                             source: "go-previous"
                         }
@@ -179,7 +180,8 @@ OverlayDrawer {
                             text: modelData.text
                         }
                         Icon {
-                            Layout.maximumWidth: height
+                            Layout.minimumWidth: height
+                            Layout.maximumWidth: Layout.minimumWidth
                             Layout.fillHeight: true
                             source: "go-next"
                             visible: modelData.children != undefined
