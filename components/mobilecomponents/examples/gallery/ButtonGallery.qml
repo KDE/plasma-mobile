@@ -35,6 +35,10 @@ Page {
             iconName: "folder"
         }
     ]
+    MouseArea {
+        anchors.fill: parent
+        onClicked: actionButton.toggle();
+    }
     Heading {
         text: "Buttons"
         anchors {

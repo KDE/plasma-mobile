@@ -36,7 +36,9 @@ Page {
         }
     ]
     Layout.fillWidth: true
+    flickable: scrollView.flickableItem
     Controls.ScrollView {
+        id: scrollView
         anchors.fill: parent
         
         ColumnLayout {
