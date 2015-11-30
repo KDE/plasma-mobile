@@ -37,7 +37,7 @@ Page {
     ]
     MouseArea {
         anchors.fill: parent
-        onClicked: actionButton.toggle();
+        onClicked: actionButton.toggleVisibility();
     }
     Heading {
         text: "Buttons"

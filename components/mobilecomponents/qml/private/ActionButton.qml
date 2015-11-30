@@ -25,6 +25,8 @@ import org.kde.plasma.mobilecomponents 0.2
 MouseArea {
     id: button
     property alias iconSource: icon.source
+    property bool checkable: false
+    property bool checked: false
     Layout.minimumWidth: Units.iconSizes.large
     Layout.maximumWidth: Layout.minimumWidth
     implicitWidth: Units.iconSizes.large
@@ -35,7 +37,7 @@ MouseArea {
         minimumX: contextDrawer ? 0 : parent.width/2 - width/2
         maximumX: globalDrawer ? parent.width : parent.width/2 - width/2
     }
-    function toggle() {
+    function toggleVisibility() {
         showAnimation.running = false;
         if (translateTransform.y < button.height) {
             showAnimation.to = button.height;
@@ -66,6 +68,11 @@ MouseArea {
             if (contextDrawer) {
                 contextDrawer.close();
             }
+        }
+    }
+    onClicked: {
+        if (checkable) {
+            checked = !checked;
         }
     }
     Connections {
@@ -118,7 +125,7 @@ MouseArea {
             anchors.centerIn: parent
             height: parent.height - Units.smallSpacing*2
             width: height
-            color: button.pressed ? Theme.highlightColor : Theme.backgroundColor
+            color: button.pressed || button.checked ? Theme.highlightColor : Theme.backgroundColor
             Icon {
                 id: icon
                 anchors {
