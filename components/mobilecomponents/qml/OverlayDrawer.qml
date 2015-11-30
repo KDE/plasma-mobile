@@ -218,7 +218,7 @@ AbstractDrawer {
             onStateChanged: open = (state != "Closed")
             property bool open: false
             onOpenChanged: {
-                if (drawerPage.children.length == 0) {
+                if (browserFrame.state == "Dragging" || drawerPage.children.length == 0) {
                     return;
                 }
 
