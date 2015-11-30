@@ -84,7 +84,7 @@ OverlayDrawer {
                 anchors {
                     left: parent.left
                     top: parent.top
-                    margins: Units.smallSpacing
+                    margins: Units.smallSpacing * 2
                 }
                 Icon {
                     id: headingIcon
