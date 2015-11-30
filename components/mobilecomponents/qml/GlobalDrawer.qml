@@ -140,6 +140,8 @@ OverlayDrawer {
                 model: actions
                 property int level: 0
 
+                interactive: contentHeight > height
+
                 footer: ListItem {
                     visible: level > 0
                     enabled: true
