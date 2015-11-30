@@ -147,6 +147,11 @@ Item {
         }
         ScriptAction {
             script: {
+                //At startup sometimes the contentX is NaN for an instant
+                if (isNaN(mainFlickable.contentX)) {
+                    return;
+                }
+
                 actualRoot.lastVisiblePage = root.children[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page
             }
         }
