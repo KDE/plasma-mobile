@@ -1,8 +1,6 @@
 /*
- *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
- *   Copyright 2010 by Ménard Alexis <menard@kde.org>
- *   Copyright 2010 by Marco Martin <mart@kde.org>
-
+ *   Copyright 2015 Marco Martin <mart@kde.org>
+ *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
  *   published by the Free Software Foundation; either version 2, or
@@ -19,22 +17,8 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "mobilecomponentsplugin.h"
-
-#include <QQmlExtensionPlugin>
-#include <QQmlEngine>
-#include <QQmlContext>
-#include <QQuickItem>
+import QtQuick 2.0
+import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-void MobileComponentsPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
-
-    //TODO: in this plugin it will end up something similar to
-    //PlasmaCore's ColorScope
-}
-
-
-#include "mobilecomponentsplugin.moc"
-
+PlasmaCore.IconItem {}

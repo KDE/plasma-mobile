@@ -19,10 +19,8 @@
 
 import QtQuick 2.1
 import QtQuick.Controls 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import "private"
 import org.kde.plasma.mobilecomponents 0.2
-import org.kde.kquickcontrolsaddons 2.0
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 /**
  * A window that provides some basic features needed for all apps
@@ -40,18 +38,53 @@ ApplicationWindow {
     property alias initialPage: __pageStack.initialPage
 
     /**
-     * The stack used to allocate the pages nd to manage the transitions
+     * The stack used to allocate the pages and to manage the transitions
      * between them.
-     * It's using a PageRow, while having the same aPI as PageStack,
+     * It's using a PageRow, while having the same API as PageStack,
      * it positions the pages as adjacent columns, with as many columns
      * as can fit in the screen. An handheld device would usually have a single
      * fullscreen column, a tablet device would have many tiled columns.
      */
     property alias pageStack: __pageStack
 
-    PlasmaExtras.PageRow {
+    PageRow {
         id: __pageStack
         anchors.fill: parent
+        focus: true
+        Keys.onReleased: {
+            if (event.key == Qt.Key_Back && stackView.depth > 1) {
+                stackView.pop();
+                event.accepted = true;
+            }
+        }
+        onLastVisiblePageChanged: {
+            if (lastVisiblePage != null) {
+                pop(lastVisiblePage)
+            }
+        }
     }
 
+    property AbstractDrawer globalDrawer
+    property AbstractDrawer contextDrawer
+
+    onGlobalDrawerChanged: {
+        globalDrawer.parent = contentItem.parent;
+    }
+    onContextDrawerChanged: {
+        contextDrawer.parent = contentItem.parent;
+    }
+
+    width: Units.gridUnit * 25
+    height: Units.gridUnit * 30
+
+    property alias actionButton: __actionButton
+    ActionButton {
+        id: __actionButton
+        z: 9999
+        anchors.bottom: parent.bottom
+        x: parent.width/2 - width/2
+        iconSource: "distribute-horizontal-x"
+
+        visible: root.globalDrawer || root.contextDrawer
+    }
 }

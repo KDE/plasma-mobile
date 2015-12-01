@@ -18,27 +18,21 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Layouts 1.2
 import QtQuick.Controls 1.0 as QtControls
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kquickcontrolsaddons  2.0
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.mobilecomponents 0.2
 
-MobileComponents.OverlayDrawer {
+OverlayDrawer {
     id: root
 
     property string title
 
     //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
-    property alias actions: internalActions.data
+    property var actions
+    enabled: menu.count > 0
+    edge: Qt.RightEdge
 
-    Item {
-        id: internalActions
-    }
-
-    drawer: QtControls.ScrollView {
-
+    contentItem: QtControls.ScrollView {
         ListView {
             id: menu
             model: {
@@ -51,33 +45,37 @@ MobileComponents.OverlayDrawer {
                             root.actions[0];
                 }
             }
-            header: Item {
+            verticalLayoutDirection: ListView.BottomToTop
+            //in bottomtotop all is flipped
+            footer: Item {
                 height: heading.height
-                PlasmaExtras.Heading {
+                width: menu.width
+                Heading {
                     id: heading
                     anchors {
                         left: parent.left
                         right: parent.right
-                        margins: units.largeSpacing
+                        margins: Units.largeSpacing
                     }
                     elide: Text.ElideRight
                     level: 2
                     text: root.title
                 }
             }
-            delegate: PlasmaComponents.ListItem {
+            delegate: ListItem {
                 enabled: true
-                Row {
+                RowLayout {
+                    height: implicitHeight + Units.smallSpacing * 2
                     anchors {
                         left: parent.left
-                        margins: units.largeSpacing
+                        margins: Units.largeSpacing
                     }
-                    PlasmaCore.IconItem {
+                    Icon {
                         height: parent.height
                         width: height
                         source: modelData.iconName
                     }
-                    PlasmaComponents.Label {
+                    Label {
                         text: model ? model.text : modelData.text
                     }
                 }

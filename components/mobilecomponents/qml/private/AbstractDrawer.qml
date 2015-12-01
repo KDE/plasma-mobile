@@ -1,8 +1,6 @@
 /*
- *   Copyright 2009 by Alan Alpert <alan.alpert@nokia.com>
- *   Copyright 2010 by Ménard Alexis <menard@kde.org>
- *   Copyright 2010 by Marco Martin <mart@kde.org>
-
+ *   Copyright 2015 Marco Martin <mart@kde.org>
+ *
  *   This program is free software; you can redistribute it and/or modify
  *   it under the terms of the GNU Library General Public License as
  *   published by the Free Software Foundation; either version 2, or
@@ -19,22 +17,31 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "mobilecomponentsplugin.h"
+import QtQuick 2.1
+import QtGraphicalEffects 1.0
+import org.kde.plasma.mobilecomponents 0.2
 
-#include <QQmlExtensionPlugin>
-#include <QQmlEngine>
-#include <QQmlContext>
-#include <QQuickItem>
+//TODO: This will become a QQC2 Drawer
+//providing just a dummy api for now
+Item {
+    id: root
+    anchors.fill: parent
+    z: 9999
 
+    default property alias page: mainPage.data
+    property Item contentItem
+    property bool opened
+    property int edge: Qt.LeftEdge
+    property real position: 0
 
-void MobileComponentsPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
+    function open () { }
+    function close () { }
+    signal clicked
 
-    //TODO: in this plugin it will end up something similar to
-    //PlasmaCore's ColorScope
+    Item {
+        id: mainPage
+        anchors.fill: parent
+        onChildrenChanged: mainPage.children[0].anchors.fill = mainPage
+    }
 }
-
-
-#include "mobilecomponentsplugin.moc"
 

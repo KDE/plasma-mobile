@@ -25,8 +25,12 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 Item {
     id: root
 
-    MobileComponents.ApplicationListModel {
+    PlasmaCore.DataModel {
         id: applicationData
+        dataSource: PlasmaCore.DataSource {
+            engine: "apps"
+            connectedSources: sources
+        }
     }
 
     PlasmaCore.SortFilterModel {
@@ -71,7 +75,7 @@ Item {
 
                 PlasmaCore.IconItem {
                     id: applicationIcon
-                    source: model.ApplicationIconRole
+                    source: model.iconName
                     width: parent.width / 1.6
                     height: parent.height / 1.6
                     anchors.horizontalCenter: parent.horizontalCenter
@@ -80,13 +84,13 @@ Item {
 
                 PlasmaComponents.Label {
                     anchors.bottom: parent.bottom
-                    text: model.ApplicationNameRole
+                    text: model.name
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.top: applicationIcon.bottom
                 }
                 onClicked: {
                     applicationsList.currentIndex = (applicationsList.currentPage * applicationsList.pageSize) + index
-                    applicationData.runApplication(model.ApplicationStorageIdRole)
+                    applicationData.runApplication(model.menuId)
                 }
             }
         }

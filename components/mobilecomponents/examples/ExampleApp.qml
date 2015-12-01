@@ -20,20 +20,19 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.4 as Controls
 import QtQuick.Layouts 1.3
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.kquickcontrolsaddons 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 MobileComponents.ApplicationWindow {
     id: root
     width: 500
     height: 800
 
-    MobileComponents.GlobalDrawer {
-        title: "Akregator"
-        titleIcon: "akregator"
+    actionButton.onClicked: print("Action button clicked")
+
+    globalDrawer: MobileComponents.GlobalDrawer {
+        title: "Widget gallery"
+        titleIcon: "applications-graphics"
+        bannerImageSource: "banner.jpg"
 
         actions: [
             MobileComponents.ActionGroup {
@@ -64,23 +63,26 @@ MobileComponents.ApplicationWindow {
                 iconName: "configure"
             }
             ]
-        content: Rectangle {
-            Layout.minimumHeight: 200
-            Layout.minimumWidth: 200
+        
+        Controls.CheckBox {
+            checked: true
+            text: "Option 1"
         }
+        Controls.CheckBox {
+            text: "Option 2"
+        }
+        Controls.CheckBox {
+            text: "Option 3"
+        }
+        Controls.Slider {
+            Layout.fillWidth: true
+            value: 0.5
+        }
+        
     }
-    MobileComponents.ContextDrawer {
-        actions:
-            [
-            Controls.Action {
-                text:"Action 1"
-                iconName: "document-decrypt"
-                onTriggered: print("Action 1 clicked")
-            },
-            Controls.Action {
-                text:"Action 2"
-                iconName: "document-share"
-            }]
+    contextDrawer: MobileComponents.ContextDrawer {
+        id: contextDrawer
+        actions: root.pageStack.currentPage ? root.pageStack.currentPage.contextualActions : null
         title: "Actions"
     }
 
@@ -89,32 +91,7 @@ MobileComponents.ApplicationWindow {
     //Main app content
     Component {
         id: mainPageComponent
-        MobileComponents.Page {
-            anchors.fill:parent
-            actions:  [
-                Controls.Action {
-                    iconName:"konqueror"
-                    onTriggered: print("Action triggered")
-                },
-                Controls.Action {
-                    iconName:"go-home"
-                }
-            ]
-            PlasmaExtras.ScrollArea {
-                anchors.fill:parent
-                ListView {
-                    id: mainListView
-                    model: 30
-                    delegate: PlasmaComponents.ListItem {
-                        enabled: true
-                        PlasmaComponents.Label {
-                            enabled: true
-                            text: "Item " + modelData
-                        }
-                        onClicked: root.pageStack.push(mainPageComponent)
-                    }
-                }
-            }
-        }
+        MainPage {}
     }
+
 }

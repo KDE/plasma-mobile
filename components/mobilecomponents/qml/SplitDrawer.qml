@@ -19,17 +19,15 @@
 
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.mobilecomponents 0.2
+import "private"
 
 /**Documented API
 Inherits:
-        Page from org.kde.plasmacomponents
+        Item
 
 Imports:
-        org.kde.plasma.core
-        org.kde.plasma.components
-        QtQuick 1.1
+        QtQuick 2.1
 
 Description:
         Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
@@ -46,7 +44,7 @@ Properties:
 
         int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
 **/
-PlasmaComponents.Page {
+AbstractDrawer {
     id: root
     anchors {
         fill: parent
@@ -54,14 +52,15 @@ PlasmaComponents.Page {
     visible: true
 
     default property alias page: mainPage.data
-    property alias drawer: drawerPage.data
-    property alias open: sidebar.open
+    property Item contentItem
+    property alias opened: sidebar.open
     property int visibleDrawerWidth: browserFrame.x
 
     Component.onCompleted: {
         mainPage.width = browserFrame.width
     }
 
+    onContentItemChanged: contentItem.parent = drawerPage
     MouseArea {
         id: mouseEventListener
         z: 200
@@ -76,7 +75,7 @@ PlasmaComponents.Page {
         anchors.fill: parent
 
         onPressed: {
-            if (drawerPage.children.length == 0 || (browserFrame.state == "Closed" && mouse.x > units.gridUnit) ||
+            if (drawerPage.children.length == 0 || (browserFrame.state == "Closed" && mouse.x > Units.gridUnit) ||
                 mouse.x < browserFrame.x) {
                 mouse.accepted = false;
                 return;
@@ -93,7 +92,7 @@ PlasmaComponents.Page {
         onPositionChanged: {
             browserFrame.x = Math.max(0, browserFrame.x + mouse.x - oldMouseX);
             oldMouseX = mouse.x;
-            if (Math.abs(mouse.x - startMouseX) > units.gridUnit * 2) {
+            if (Math.abs(mouse.x - startMouseX) > Units.gridUnit * 2) {
                 toggle = false;
             }
         }
@@ -107,12 +106,13 @@ PlasmaComponents.Page {
                 browserFrame.state = "Open";
             }
         }
+        onClicked: root.clicked()
     }
 
     Rectangle {
         id: browserFrame
         z: 100
-        color: PlasmaCore.ColorScope.backgroundColor
+        color: Theme.backgroundColor
         state: "Closed"
         onStateChanged: sidebar.open = (state != "Closed")
 
@@ -135,7 +135,7 @@ PlasmaComponents.Page {
             opacity: Math.min(0.4, 0.4 * (browserFrame.x / sidebar.width))
         }
         LinearGradient {
-            width: units.gridUnit/2
+            width: Units.gridUnit/2
             anchors {
                 right: parent.left
                 top: parent.top
@@ -143,7 +143,7 @@ PlasmaComponents.Page {
                 rightMargin: -1
             }
             start: Qt.point(0, 0)
-            end: Qt.point(units.gridUnit/2, 0)
+            end: Qt.point(Units.gridUnit/2, 0)
             gradient: Gradient {
                 GradientStop {
                     position: 0.0
@@ -191,7 +191,7 @@ PlasmaComponents.Page {
                 to: "Open,Closed,Hidden"
                 NumberAnimation {
                     properties: "x"
-                    duration: units.longDuration
+                    duration: Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -215,7 +215,7 @@ PlasmaComponents.Page {
             }
         }
 
-        width: parent.width/4
+        width: Math.min(parent.width/4*3, Math.max(root.contentItem ? root.contentItem.implicitWidth : 0, parent.width/4))
 
         anchors {
             left: parent.left

@@ -19,7 +19,8 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.mobilecomponents 0.2
+import org.kde.plasma.mobilecomponents.private 0.2
 
 Item {
     id: main
@@ -27,11 +28,11 @@ Item {
     property Component delegate
     property QtObject model
 
-    property int pageSize: Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
-    property int delegateWidth: theme.mSize(theme.defaultFont).width * 15
-    property int delegateHeight: theme.mSize(theme.defaultFont).width + units.iconSizes.medium + 8
+    property int pageSize: Math.floor(iconView.width / main.delegateWidth) * Math.floor(iconView.height / main.delegateHeight)
+    property int delegateWidth: Units.iconSizes.huge + Units.gridUnit * 2
+    property int delegateHeight: Units.iconSizes.huge + Units.gridUnit * 2
     property alias currentPage: iconView.currentIndex
-    property int pagesCount: Math.ceil(model.count/pageSize)
+    property int pagesCount: Math.ceil(model.count / pageSize)
     property int count: model.count
     property alias contentX: iconView.contentX
     clip: true
@@ -46,7 +47,7 @@ Item {
         running: true
         interval: 100
         onTriggered: {
-            main.pageSize = Math.floor(iconView.width/main.delegateWidth)*Math.floor(iconView.height/main.delegateHeight)
+            main.pageSize = Math.floor(iconView.width / main.delegateWidth) * Math.floor(iconView.height / main.delegateHeight)
             if (iconView.currentItem) {
                 iconView.currentItem.width = iconView.width
                 iconView.currentItem.height = iconView.height
@@ -58,8 +59,8 @@ Item {
         id: iconView
         objectName: "iconView"
         pressDelay: 200
-        cacheBuffer: 100
-        highlightMoveDuration: 250
+        cacheBuffer: Units.gridUnit * 8
+        highlightMoveDuration: Units.shortDuration
         anchors.fill: parent
         onWidthChanged: resizeTimer.restart()
         onHeightChanged: resizeTimer.restart()
@@ -93,17 +94,17 @@ Item {
                     }
                     property int orientation: ListView.Horizontal
 
-                    MobileComponents.PagedProxyModel {
+                    PagedProxyModel {
                         id: pagedProxyModel
                         sourceModel: main.model
-                        currentPage: index
+                        currentPage: model.index
                         pageSize: main.pageSize
                     }
                     Repeater {
                         id: iconRepeater
                         model: pagedProxyModel
-                        property int columns: Math.min(count, Math.floor(delegatePage.width/main.delegateWidth))
-                        property int suggestedWidth: main.delegateWidth*columns
+                        property int columns: Math.min(count, Math.floor(delegatePage.width / main.delegateWidth))
+                        property int suggestedWidth: main.delegateWidth * columns
                         //property int suggestedHeight: main.delegateHeight*Math.floor(count/columns)
 
                         delegate: main.delegate
@@ -122,7 +123,7 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
-        height: Math.max( 16, iconView.height - Math.floor(iconView.height/delegateHeight)*delegateHeight)
+        height: Math.max(16, iconView.height - Math.floor(iconView.height / delegateHeight) * delegateHeight)
 
         property int pageCount: main.model ? Math.ceil(main.model.count/main.pageSize) : 0
 
@@ -143,28 +144,27 @@ Item {
                 property int pendingIndex: 0
                 Rectangle {
                     id: barRectangle
-                    color: theme.textColor
-                    opacity: 2.05
+                    color: Theme.textColor
                     height: 4
                     radius: 2
                     anchors {
                         left: parent.left
                         right: parent.right
                         verticalCenter: parent.verticalCenter
-                        leftMargin: (parent.width/pageCount/2)
-                        rightMargin: (parent.width/pageCount/2)
+                        leftMargin: (parent.width / pageCount / 2)
+                        rightMargin: (parent.width / pageCount / 2)
                     }
                 }
                 Rectangle {
-                    color: theme.textColor
+                    color: Theme.textColor
                     height: 8
                     width: height
                     radius: 4
                     anchors.verticalCenter: parent.verticalCenter
-                    x: parent.width/(pageCount/(iconView.currentIndex+1)) - (parent.width/pageCount/2) - 4
+                    x: parent.width / (pageCount / (iconView.currentIndex+1)) - (parent.width / pageCount / 2) - 4
                     Behavior on x {
                         NumberAnimation {
-                            duration: 250
+                            duration: Units.shortDuration
                             easing.type: Easing.InOutQuad
                         }
                     }
@@ -191,7 +191,7 @@ Item {
             Item {
                 Row {
                     anchors.centerIn: parent
-                    spacing: 20
+                    spacing: units.gridUnit
 
                     Repeater {
                         model: scrollArea.pageCount
@@ -204,17 +204,17 @@ Item {
                             radius: 5
                             smooth: true
                             opacity: iconView.currentIndex == index ? 0.8: 0.4
-                            color: theme.textColor
+                            color: Theme.textColor
 
                             Behavior on scale {
                                 NumberAnimation {
-                                    duration: 250
+                                    duration: units.shortDuration
                                     easing.type: Easing.InOutQuad
                                 }
                             }
                             Behavior on opacity {
                                 NumberAnimation {
-                                    duration: 250
+                                    duration: units.shortDuration
                                     easing.type: Easing.InOutQuad
                                 }
                             }
@@ -222,7 +222,7 @@ Item {
                             MouseArea {
                                 anchors {
                                     fill: parent
-                                    margins: -10
+                                    margins: Units.gridUnit / 2
                                 }
 
                                 onClicked: {

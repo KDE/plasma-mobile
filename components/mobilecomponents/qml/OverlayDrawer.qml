@@ -19,42 +19,65 @@
 
 import QtQuick 2.1
 import QtGraphicalEffects 1.0
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kquickcontrolsaddons  2.0
-
+import org.kde.plasma.mobilecomponents 0.2
+import "private"
 
 /**Documented API
-Inherits:
-        Page from org.kde.plasmacomponents
 
 Imports:
-        org.kde.plasma.core
-        org.kde.plasma.components
-        QtQuick 1.1
+        QtQuick 2.1
 
 Description:
-        Overlay Drawers are used to expose additional UI elements needed for small secondary tasks for which the main UI elements are not needed. For example in Okular Active, an Overlay Drawer is used to display thumbnails of all pages within a document along with a search field. This is used for the distinct task of navigating to another page.
+        Overlay Drawers are used to expose additional UI elements needed for
+        small secondary tasks for which the main UI elements are not needed.
+        For example in Okular Active, an Overlay Drawer is used to display
+        thumbnails of all pages within a document along with a search field.
+        This is used for the distinct task of navigating to another page.
 
 Properties:
-        bool open:
-        If true the drawer is open showing the contents of the "drawer" component.
+        bool opened:
+        If true the drawer is open showing the contents of the "drawer"
+		component.
 
         Item page:
-        It's the default property. it's the main content of the drawer page, the part that is always shown
+        It's the default property. it's the main content of the drawer page,
+		the part that is always shown
 
-        Item drawer:
+        Item contentItem:
         It's the part that can be pulled in and out, will act as a sidebar.
 **/
-Item {
+AbstractDrawer {
     id: root
     anchors.fill: parent
     z: 9999
 
     default property alias page: mainPage.data
-    property alias drawer: drawerPage.data
-    property alias open: browserFrame.open
-    property bool inverse: false
+    property Item contentItem
+    property alias opened: browserFrame.open
+    property int edge: Qt.LeftEdge
+    property real position: 0
+
+    onContentItemChanged: contentItem.parent = drawerPage
+    onPositionChanged: {
+        if (!enabled) {
+            return;
+        }
+        if (root.edge == Qt.LeftEdge) {
+            browserFrame.x = -browserFrame.width + position * browserFrame.width;
+        } else {
+            browserFrame.x = root.width - (position * browserFrame.width);
+        }
+    }
+    function open () {
+        mouseEventListener.startBrowserFrameX = browserFrame.x;
+        browserFrame.state = "Dragging";
+        browserFrame.state = "Open";
+    }
+    function close () {
+        mouseEventListener.startBrowserFrameX = browserFrame.x;
+        browserFrame.state = "Dragging";
+        browserFrame.state = "Closed";
+    }
 
     Item {
         id: mainPage
@@ -65,20 +88,20 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: "black"
-        opacity: 0.6 * (root.inverse
+        opacity: 0.6 * (root.edge == Qt.LeftEdge
             ? ((browserFrame.x + browserFrame.width) / browserFrame.width)
             : (1 - browserFrame.x / root.width))
     }
 
     MouseArea {
         anchors {
-            right: root.inverse ? undefined : parent.right
-            left: root.inverse ? parent.left : undefined
+            right: root.edge == Qt.LeftEdge ? undefined : parent.right
+            left: root.edge == Qt.LeftEdge ? parent.left : undefined
             top: parent.top
             bottom: parent.bottom
         }
         z: 99
-        width: units.smallSpacing
+        width: Units.smallSpacing
         onPressed: mouseEventListener.managePressed(mouse)
         onPositionChanged: mouseEventListener.positionChanged(mouse)
         onReleased: mouseEventListener.released(mouse)
@@ -116,12 +139,12 @@ Item {
                 return;
             }
 
-            if (mouse.x < units.gridUnit ||
+            if (mouse.x < Units.gridUnit ||
                 Math.abs(mouse.x - startMouseX) > root.width / 5) {
                 startDragging = true;
             }
             if (startDragging) {
-                browserFrame.x = root.inverse
+                browserFrame.x = root.edge == Qt.LeftEdge
                     ? Math.min(0, browserFrame.x + mouse.x - oldMouseX)
                     : Math.max(root.width - browserFrame.width, browserFrame.x + mouse.x - oldMouseX);
             }
@@ -134,8 +157,8 @@ Item {
                 return;
             }
 
-            if (root.inverse) {
-                if (mouse.x < units.gridUnit) {
+            if (root.edge == Qt.LeftEdge) {
+                if (mouse.x < Units.gridUnit) {
                     browserFrame.state = "Closed";
                 } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Open";
@@ -146,7 +169,7 @@ Item {
                 }
 
             } else {
-                if (mouse.x > width - units.gridUnit) {
+                if (mouse.x > width - Units.gridUnit) {
                     browserFrame.state = "Closed";
                 } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Closed";
@@ -158,7 +181,7 @@ Item {
             }
         }
         onCanceled: {
-            if (oldMouseX > width - units.gridUnit) {
+            if (oldMouseX > width - Units.gridUnit) {
                 browserFrame.state = "Closed";
             } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
@@ -167,18 +190,19 @@ Item {
             }
         }
         onClicked: {
-            if (Math.abs(startMouseX - mouse.x) > units.gridUnit) {
+            if (Math.abs(startMouseX - mouse.x) > Units.gridUnit) {
                 return;
             }
-            if ((root.inverse && mouse.x > browserFrame.width) ||
-                (!root.inverse && mouse.x < browserFrame.x)) {
+            if ((root.edge == Qt.LeftEdge && mouse.x > browserFrame.width) ||
+                (root.edge != Qt.LeftEdge && mouse.x < browserFrame.x)) {
                 browserFrame.state = startState == "Open" ? "Closed" : "Open";
+                root.clicked();
             }
         }
         Rectangle {
             id: browserFrame
             z: 100
-            color: PlasmaCore.ColorScope.backgroundColor
+            color: Theme.viewBackgroundColor
             anchors {
                 top: parent.top
                 bottom: parent.bottom
@@ -186,17 +210,21 @@ Item {
 
             width: {
                 if (drawerPage.children.length > 0 && drawerPage.children[0].implicitWidth > 0) {
-                    return Math.min( parent.width - units.gridUnit, drawerPage.children[0].implicitWidth)
+                    return Math.min( parent.width - Units.gridUnit, drawerPage.children[0].implicitWidth)
                 } else {
-                    return parent.width - units.gridUnit * 3
+                    return parent.width - Units.gridUnit * 3
                 }
+            }
+
+            onXChanged: {
+                root.position = root.edge == Qt.LeftEdge ? 1 + browserFrame.x/browserFrame.width : (root.width - browserFrame.x)/browserFrame.width;
             }
 
             state: "Closed"
             onStateChanged: open = (state != "Closed")
             property bool open: false
             onOpenChanged: {
-                if (drawerPage.children.length == 0) {
+                if (browserFrame.state == "Dragging" || drawerPage.children.length == 0) {
                     return;
                 }
 
@@ -208,34 +236,33 @@ Item {
             }
 
             LinearGradient {
-                width: units.gridUnit/2
+                width: Units.gridUnit/2
                 anchors {
-                    right: root.inverse ? undefined : parent.left
-                    left: root.inverse ? parent.right : undefined
+                    right: root.edge == Qt.LeftEdge ? undefined : parent.left
+                    left: root.edge == Qt.LeftEdge ? parent.right : undefined
                     top: parent.top
                     bottom: parent.bottom
-                    rightMargin: -1
                 }
-                opacity: browserFrame.state == "Closed" ? 0 : 1
+                opacity: root.position == 0 ? 0 : 1
                 start: Qt.point(0, 0)
-                end: Qt.point(units.gridUnit/2, 0)
+                end: Qt.point(Units.gridUnit/2, 0)
                 gradient: Gradient {
                     GradientStop {
                         position: 0.0
-                        color: root.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
+                        color: root.edge == Qt.LeftEdge ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
                     }
                     GradientStop {
-                        position: root.inverse ? 0.3 : 0.7
+                        position: root.edge == Qt.LeftEdge ? 0.3 : 0.7
                         color: Qt.rgba(0, 0, 0, 0.15)
                     }
                     GradientStop {
                         position: 1.0
-                        color: root.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
+                        color: root.edge == Qt.LeftEdge ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
                     }
                 }
                 Behavior on opacity {
                     NumberAnimation {
-                        duration: units.longDuration
+                        duration: Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -246,7 +273,7 @@ Item {
                 id: drawerPage
                 anchors {
                     fill: parent
-                    //leftMargin: units.gridUnit
+                    //leftMargin: Units.gridUnit
                 }
                 clip: true
                 onChildrenChanged: drawerPage.children[0].anchors.fill = drawerPage
@@ -257,9 +284,8 @@ Item {
                     name: "Open"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.inverse ? 0 : root.width - browserFrame.width
+                        x: root.edge == Qt.LeftEdge ? 0 : root.width - browserFrame.width
                     }
-
                 },
                 State {
                     name: "Dragging"
@@ -274,7 +300,7 @@ Item {
                     name: "Closed"
                     PropertyChanges {
                         target: browserFrame
-                        x: root.inverse ? -browserFrame.width : root.width
+                        x: root.edge == Qt.LeftEdge ? -browserFrame.width : root.width
                     }
                 }
             ]
@@ -282,10 +308,11 @@ Item {
             transitions: [
                 Transition {
                     //Exclude Dragging
-                    to: "Open,Closed,Hidden"
+                    to: "Open,Closed"
                     NumberAnimation {
+                        id: transitionAnim
                         properties: "x"
-                        duration: units.longDuration
+                        duration: Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
