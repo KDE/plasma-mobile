@@ -46,7 +46,7 @@ OverlayDrawer {
 
             Layout.preferredWidth: title.implicitWidth
             Layout.preferredHeight: bannerImageSource != "" ? Math.max(title.implicitHeight, Math.floor(width / (sourceSize.width/sourceSize.height))) : title.implicitHeight
-            Layout.minimumHeight: Math.max(headingIcon.height, heading.height) + Units.smallSpacing*2
+            Layout.minimumHeight: Math.max(headingIcon.height, heading.height) + Units.smallSpacing * 2
 
             fillMode: Image.PreserveAspectCrop
             asynchronous: true
@@ -167,7 +167,7 @@ OverlayDrawer {
                 delegate: ListItem {
                     enabled: true
                     RowLayout {
-                        height: implicitHeight + Units.smallSpacing*2
+                        height: implicitHeight + Units.smallSpacing * 2
                         anchors {
                             left: parent.left
                             right: parent.right
