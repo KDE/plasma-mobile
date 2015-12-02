@@ -1,2 +1,2 @@
 #! /bin/sh
-$XGETTEXT *.cpp */*.cpp -o $podir/plasmamobileshellprivateplugin.pot
+$XGETTEXT *.cpp -o $podir/plasmamobileshellprivateplugin.pot
