@@ -82,6 +82,7 @@ Item {
     // Returns the page instance.
     function push(page, properties, immediate)
     {
+        pop(lastVisiblePage, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, false, immediate)
         scrollToLevel(depth)
@@ -102,6 +103,7 @@ Item {
     // See push() for details.
     function replace(page, properties, immediate)
     {
+        pop(lastVisiblePage, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, true, immediate);
         scrollToLevel(depth)

@@ -57,11 +57,6 @@ ApplicationWindow {
                 event.accepted = true;
             }
         }
-        onLastVisiblePageChanged: {
-            if (lastVisiblePage != null) {
-                pop(lastVisiblePage)
-            }
-        }
     }
 
     property AbstractDrawer globalDrawer
