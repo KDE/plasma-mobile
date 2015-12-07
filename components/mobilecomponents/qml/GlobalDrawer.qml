@@ -157,9 +157,7 @@ OverlayDrawer {
                             source: "go-previous"
                         }
                         Label {
-                            // Weird, this doesn't work
-                            //text: (typeof(i18n) != undefined) ? i18n("Back") : "Back"
-                            text: "Back"
+                            text: typeof i18n !== "undefined" ? i18n("Back") : "Back"
                         }
                     }
                     onClicked: pageRow.pop()
