@@ -28,13 +28,15 @@ Item {
     property bool active: false
     property bool valid: image.status == Image.Ready 
 
-    implicitWidth: image.source != "" ? Units.iconSizes.small : 0
-    implicitHeight: image.source != "" ? Units.iconSizes.small : 0
+    implicitWidth: image.source != "" ? Units.iconSizes.smallMedium : 0
+    implicitHeight: image.source != "" ? Units.iconSizes.smallMedium : 0
 
     Image {
         id: image
         anchors.fill: parent
         source: root.source != "" ? (root.source.indexOf(".") === -1 ? "icons/" + root.source + ".svg" : root.source) : root.source
+        sourceSize.width: root.width
+        sourceSize.height: root.height
     }
     GammaAdjust {
         anchors.fill: image
