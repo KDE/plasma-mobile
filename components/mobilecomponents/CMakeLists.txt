@@ -22,3 +22,4 @@ install(FILES ${platformspecific} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plas
 
 add_subdirectory(private)
 
+kpackage_install_package(example org.kde.plasma.mobile.gallery genericqml)

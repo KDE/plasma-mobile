@@ -26,6 +26,7 @@ MobileComponents.ApplicationWindow {
     id: root
     width: 500
     height: 800
+    visible: true
 
     actionButton.onClicked: print("Action button clicked")
 
