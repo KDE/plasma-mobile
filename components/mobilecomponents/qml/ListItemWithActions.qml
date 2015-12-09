@@ -116,7 +116,7 @@ Item {
             height: Math.min( parent.height / 1.5, Units.iconSizes.medium)
             property bool exclusive: false
             property Item checkedButton
-            spacing: 0
+            spacing: Units.largeSpacing
             Repeater {
                 model: {
                     if (listItem.actions.length == 0) {
@@ -132,7 +132,6 @@ Item {
                     Layout.fillHeight: true
                     Layout.minimumWidth: height
                     iconName: modelData.iconName
-                    property bool flat: false
                     onClicked: {
                         if (modelData && modelData.trigger !== undefined) {
                             modelData.trigger();
