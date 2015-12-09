@@ -83,7 +83,7 @@ MobileComponents.ApplicationWindow {
     }
     contextDrawer: MobileComponents.ContextDrawer {
         id: contextDrawer
-        actions: root.pageStack.currentPage ? root.pageStack.currentPage.contextualActions : null
+        actions: root.pageStack.lastVisiblePage ? root.pageStack.lastVisiblePage.contextualActions : null
         title: "Actions"
     }
 
