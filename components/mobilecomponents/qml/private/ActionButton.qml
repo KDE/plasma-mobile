@@ -34,8 +34,8 @@ MouseArea {
     drag {
         target: button
         axis: Drag.XAxis
-        minimumX: contextDrawer && contextDrawer.enabled ? 0 : parent.width/2 - width/2
-        maximumX: globalDrawer && globalDrawer.enabled ? parent.width : parent.width/2 - width/2
+        minimumX: parent.width/2 - width/2 - (contextDrawer && contextDrawer.enabled ? contextDrawer.contentItem.width : 0)
+        maximumX: parent.width/2 - width/2 + (globalDrawer && globalDrawer.enabled ?  globalDrawer.contentItem.width : 0)
     }
     function toggleVisibility() {
         showAnimation.running = false;
