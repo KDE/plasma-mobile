@@ -67,6 +67,9 @@ AbstractDrawer {
         } else {
             browserFrame.x = root.width - (position * browserFrame.width);
         }
+        if (!mouseEventListener.pressed && !edgeMouse.pressed) {
+            speedSampler.running = true;
+        }
     }
     function open () {
         mouseEventListener.startBrowserFrameX = browserFrame.x;
@@ -94,6 +97,7 @@ AbstractDrawer {
     }
 
     MouseArea {
+        id: edgeMouse
         anchors {
             right: root.edge == Qt.LeftEdge ? undefined : parent.right
             left: root.edge == Qt.LeftEdge ? parent.left : undefined
@@ -117,6 +121,26 @@ AbstractDrawer {
         property string startState
         enabled: browserFrame.state != "Closed"
 
+        Timer {
+            id: speedSampler
+            interval: 100
+            repeat: true
+            property real speed
+            property real oldBrowserFrameX
+            onTriggered: {
+                speed = browserFrame.x - oldBrowserFrameX;
+                oldBrowserFrameX = browserFrame.x;
+                running = mouseEventListener.pressed||edgeMouse.pressed
+            }
+            onRunningChanged: {
+                if (running) {
+                    speed = 0;
+                } else {
+                    speed = browserFrame.x - oldBrowserFrameX;
+                }
+                oldBrowserFrameX = browserFrame.x;
+            }
+        }
         onPressed: managePressed(mouse)
         function managePressed(mouse) {
             if (drawerPage.children.length == 0) {
@@ -124,6 +148,7 @@ AbstractDrawer {
                 return;
             }
 
+            speedSampler.restart();
             mouse.accepted = true;
             startBrowserFrameX = browserFrame.x;
             oldMouseX = startMouseX = mouse.x;
@@ -152,6 +177,7 @@ AbstractDrawer {
         }
 
         onReleased: {
+            speedSampler.running = false;
             if (drawerPage.children.length == 0) {
                 mouse.accepted = false;
                 return;
@@ -160,20 +186,21 @@ AbstractDrawer {
             if (root.edge == Qt.LeftEdge) {
                 if (mouse.x < Units.gridUnit) {
                     browserFrame.state = "Closed";
-                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+                } else if (speedSampler.speed > Units.gridUnit*3 || browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Open";
-                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+                } else if (speedSampler.speed < -Units.gridUnit*3 || startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
                     browserFrame.state = "Closed";
                 } else {
                     browserFrame.state = startState
                 }
 
+            //default to RightEdge, top and bottom edges not supported yet
             } else {
                 if (mouse.x > width - Units.gridUnit) {
                     browserFrame.state = "Closed";
-                } else if (browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
+                } else if (speedSampler.speed > Units.gridUnit*3 || browserFrame.x - startBrowserFrameX > browserFrame.width / 3) {
                     browserFrame.state = "Closed";
-                } else if (startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
+                } else if (speedSampler.speed < -Units.gridUnit*3 || startBrowserFrameX - browserFrame.x > browserFrame.width / 3) {
                     browserFrame.state = "Open";
                 } else {
                     browserFrame.state = startState;
@@ -181,6 +208,7 @@ AbstractDrawer {
             }
         }
         onCanceled: {
+            speedSampler.running = false;
             if (oldMouseX > width - Units.gridUnit) {
                 browserFrame.state = "Closed";
             } else if (Math.abs(browserFrame.x - startBrowserFrameX) > browserFrame.width / 3) {
@@ -190,6 +218,7 @@ AbstractDrawer {
             }
         }
         onClicked: {
+            speedSampler.running = false;
             if (Math.abs(startMouseX - mouse.x) > Units.gridUnit) {
                 return;
             }

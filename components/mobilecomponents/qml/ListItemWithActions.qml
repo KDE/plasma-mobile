@@ -186,7 +186,7 @@ Item {
             }
         }
     }
-    
+
     MouseArea {
         id: itemMouse
         property bool changeBackgroundOnPress: !listItem.checked && !listItem.sectionDelegate
@@ -223,6 +223,25 @@ Item {
                 }
             }
 
+            Timer {
+                id: speedSampler
+                interval: 100
+                repeat: true
+                property real speed
+                property real oldItemMouseX
+                onTriggered: {
+                    speed = itemMouse.x - oldItemMouseX;
+                    oldItemMouseX = itemMouse.x;
+                }
+                onRunningChanged: {
+                    if (running) {
+                        speed = 0;
+                    } else {
+                        speed = itemMouse.x - oldItemMouseX;
+                    }
+                    oldItemMouseX = itemMouse.x;
+                }
+            }
             MouseArea {
                 width: Units.iconSizes.smallMedium
                 height: width
@@ -237,11 +256,20 @@ Item {
                     axis: Drag.XAxis
                     maximumX: 0
                 }
+                onPressed: {
+                    speedSampler.speed = 0;
+                    speedSampler.running = true;
+                }
+                onCanceled: speedSampler.running = false;
                 onReleased: {
-                    if (itemMouse.x > -itemMouse.width/2) {
+                    speedSampler.running = false;
+
+                    if (speedSampler.speed < -Units.gridUnit * 3) {
+                        itemMouse.x = -itemMouse.width + width * 2;
+                    } else if (speedSampler.speed > Units.gridUnit * 3 || itemMouse.x > -itemMouse.width/3) {
                         itemMouse.x = 0;
                     } else {
-                        itemMouse.x = -itemMouse.width + width * 2
+                        itemMouse.x = -itemMouse.width + width * 2;
                     }
                 }
                 onClicked: {
