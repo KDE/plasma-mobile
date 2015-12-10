@@ -36,6 +36,11 @@ MobileComponents.Page {
         Controls.Action {
             text:"Action 2"
             iconName: "document-share"
+        },
+        Controls.Action {
+            text:"Checkabke"
+            checkable: true
+            iconName: "dashboard-show"
         }
     ]
 
