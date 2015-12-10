@@ -164,6 +164,7 @@ OverlayDrawer {
                 }
                 delegate: ListItem {
                     enabled: true
+                    checked: modelData.checked
                     RowLayout {
                         height: implicitHeight + Units.smallSpacing * 2
                         anchors {

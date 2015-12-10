@@ -60,11 +60,30 @@ MobileComponents.ApplicationWindow {
                 }
             },
             Controls.Action {
+                text: "Checkable"
+                iconName: "view-list-details"
+                checkable: true
+                checked: false
+                onTriggered: {
+                    print("Action checked:" + checked)
+                }
+            },
+            Controls.Action {
                 text: "Settings"
                 iconName: "configure"
+                checkable: true
+                //Need to do this, otherwise it breaks the bindings
+                property bool current: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.objectName == "settingsPage" : false
+                onCurrentChanged: {
+                    checked = current;
+                }
+                onTriggered: {
+                    pageStack.pop(pageStack.initialPage);
+                    pageStack.push(settingsComponent);
+                }
             }
             ]
-        
+
         Controls.CheckBox {
             checked: true
             text: "Option 1"
@@ -79,13 +98,22 @@ MobileComponents.ApplicationWindow {
             Layout.fillWidth: true
             value: 0.5
         }
-        
     }
     contextDrawer: MobileComponents.ContextDrawer {
         id: contextDrawer
     }
 
     initialPage: mainPageComponent
+
+    Component {
+        id: settingsComponent
+        MobileComponents.Page {
+            objectName: "settingsPage"
+            Rectangle {
+                anchors.fill: parent
+            }
+        }
+    }
 
     //Main app content
     Component {
