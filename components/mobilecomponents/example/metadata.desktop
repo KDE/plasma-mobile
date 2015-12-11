@@ -1,5 +1,11 @@
 [Desktop Entry]
 Name=Components Gallery
+Name[gl]=Galería de compoñentes
+Name[nl]=Galerij met componenten
+Name[pt]=Galeria de Componentes
+Name[sv]=Komponentgalleri
+Name[uk]=Галерея компонентів
+Name[x-test]=xxComponents Galleryxx
 
 Encoding=UTF-8
 Type=Application
