@@ -52,9 +52,9 @@ Page {
         spacing: Units.smallSpacing
 
         Controls.Button {
-            text: "Button"
+            text: "Open Sheet"
             anchors.horizontalCenter: parent.horizontalCenter
-            onClicked: print("clicked")
+            onClicked: sheet.open()
         }
         Controls.Button {
             text: "Disabled Button"
