@@ -33,25 +33,27 @@ ScrollView {
     property ListView listView: listView
 
     property alias contentY: listView.contentY
-    ListView {
-        id: listView
-        contentY: 0
-        header: Item {
+    children: [
+        Item {
+            z: 99
+            y: -listView.contentY-height
             width: listView.width
-            height: listView.height/2
+            height: Units.gridUnit * 3
             BusyIndicator {
                 anchors.centerIn: parent
                 running: root.requestingRefresh
                 opacity: root.requestingRefresh ? 1 : (listView.originY - listView.contentY) / (Units.gridUnit * 3)
                 rotation: root.requestingRefresh ? 0 : 360 * opacity
             }
-        }
-        footer: Item {
-            width: listView.width
-            height: Units.gridUnit * 5
-        }
+        }]
+    Component.onCompleted: {
+        listView.topMargin = 500
+        listView.bottomMargin = 500
+    }
+    ListView {
+        id: listView
         onContentYChanged: {
-            if (contentY < originY - Units.gridUnit * 3) {
+            if (contentY < originY - Units.gridUnit * 3 && !root.requestingRefresh) {
                 root.requestingRefresh = true;
                 root.refreshRequested();
             }
