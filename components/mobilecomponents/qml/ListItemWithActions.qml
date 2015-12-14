@@ -105,7 +105,15 @@ Item {
         height: parent.height
         MouseArea {
             anchors.fill: parent
+            drag {
+                target: itemMouse
+                axis: Drag.XAxis
+                maximumX: 0
+            }
             onClicked: itemMouse.x = 0;
+            onPressed: handleArea.mouseDown(mouse);
+            onPositionChanged: handleArea.positionChanged(mouse);
+            onReleased: handleArea.released(mouse);
         }
         RowLayout {
             anchors {
@@ -242,6 +250,7 @@ Item {
                 }
             }
             MouseArea {
+                id: handleArea
                 width: Units.iconSizes.smallMedium
                 height: width
                 preventStealing: true
@@ -255,10 +264,11 @@ Item {
                     axis: Drag.XAxis
                     maximumX: 0
                 }
-                onPressed: {
+                function mouseDown(mouse) {
                     speedSampler.speed = 0;
                     speedSampler.running = true;
                 }
+                onPressed: mouseDown(mouse);
                 onCanceled: speedSampler.running = false;
                 onReleased: {
                     speedSampler.running = false;
