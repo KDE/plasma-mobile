@@ -17,3 +17,4 @@ Label 0.2 Label.qml
 Heading 0.2 Heading.qml
 ListItem 0.2 ListItem.qml
 ListItemWithActions 0.2 ListItemWithActions.qml
+RefreshableListView 0.2 RefreshableListView.qml

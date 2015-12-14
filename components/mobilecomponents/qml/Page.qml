@@ -47,7 +47,7 @@ Rectangle {
      */
     property alias contextualActions: internalContextualActions.data
 
-    property Flickable flickable
+    property Item flickable
     Item {
         id: internalContextualActions
     }

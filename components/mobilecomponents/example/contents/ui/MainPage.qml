@@ -44,66 +44,124 @@ MobileComponents.Page {
         }
     ]
 
-    Controls.ScrollView {
+    Timer {
+        id: refreshRequestTimer
+        interval: 3000
+        onTriggered: mainListView.requestingRefresh = false
+    }
+    MobileComponents.RefreshableListView {
         anchors.fill:parent
-        ListView {
-            id: mainListView
-            model: ListModel {
-                ListElement {
-                    text: "Button"
-                    component: "Button"
-                }
-                ListElement {
-                    text: "CheckBox"
-                    component: "CheckBox"
-                }
-                ListElement {
-                    text: "Radio Button"
-                    component: "RadioButton"
-                }
-                ListElement {
-                    text: "Progress Bar"
-                    component: "ProgressBar"
-                }
-                ListElement {
-                    text: "Slider"
-                    component: "Slider"
-                }
-                ListElement {
-                    text: "Switch"
-                    component: "Switch"
-                }
-                ListElement {
-                    text: "Text Field"
-                    component: "TextField"
-                }
-                ListElement {
-                    text: "Icon Grid"
-                    component: "IconGrid"
-                }
+        id: mainListView
+        onRefreshRequested: refreshRequestTimer.running = true
+        model: ListModel {
+            ListElement {
+                text: "Button"
+                component: "Button"
             }
-            delegate: MobileComponents.ListItemWithActions {
+            ListElement {
+                text: "CheckBox"
+                component: "CheckBox"
+            }
+            ListElement {
+                text: "Radio Button"
+                component: "RadioButton"
+            }
+            ListElement {
+                text: "Progress Bar"
+                component: "ProgressBar"
+            }
+            ListElement {
+                text: "Slider"
+                component: "Slider"
+            }
+            ListElement {
+                text: "Switch"
+                component: "Switch"
+            }
+            ListElement {
+                text: "Text Field"
+                component: "TextField"
+            }
+            ListElement {
+                text: "Icon Grid"
+                component: "IconGrid"
+            }
+            /*ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }
+            ListElement {
+                text: "Placeholder"
+            }*/
+        }
+        delegate: MobileComponents.ListItemWithActions {
+            enabled: true
+            MobileComponents.Label {
                 enabled: true
-                MobileComponents.Label {
-                    enabled: true
-                    text: model.text
-                }
-                property Item ownPage
-                onClicked: {
-                    root.pageStack.pop(root.initialPage);
-                    ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
-                }
-                checked: root.pageStack.currentPage == ownPage
-                actions: [
-                    Controls.Action {
-                        iconName: "document-decrypt"
-                        onTriggered: print("Action 1 clicked")
-                    },
-                    Controls.Action {
-                        iconName: "mail-reply-sender"
-                    }]
+                text: model.text
             }
+            property Item ownPage
+            onClicked: {
+                root.pageStack.pop(root.initialPage);
+                if (!model.component) {
+                    return;
+                }
+                ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
+            }
+            checked: root.pageStack.currentPage == ownPage
+            actions: [
+                Controls.Action {
+                    iconName: "document-decrypt"
+                    onTriggered: print("Action 1 clicked")
+                },
+                Controls.Action {
+                    iconName: "mail-reply-sender"
+                }]
         }
     }
 }
-    
+
