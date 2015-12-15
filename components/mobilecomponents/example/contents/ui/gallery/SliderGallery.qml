@@ -27,12 +27,11 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 Page {
     id: page
     Layout.fillWidth: true
-    flickable: scrollView.flickableItem
 
     Controls.ScrollView {
         id: scrollView
         anchors.fill: parent
-        
+
         ColumnLayout {
             width: page.width
             Heading {

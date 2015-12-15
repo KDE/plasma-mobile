@@ -25,7 +25,6 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 MobileComponents.Page {
     anchors.fill:parent
     color: MobileComponents.Theme.viewBackgroundColor
-    flickable: mainListView
 
     contextualActions: [
         Controls.Action {
@@ -47,120 +46,123 @@ MobileComponents.Page {
     Timer {
         id: refreshRequestTimer
         interval: 3000
-        onTriggered: mainListView.requestingRefresh = false
+        onTriggered: scrollView.requestingRefresh = false
     }
-    MobileComponents.RefreshableListView {
+    MobileComponents.RefreshableScrollView {
+        id: scrollView
         anchors.fill:parent
-        id: mainListView
         onRefreshRequested: refreshRequestTimer.running = true
-        model: ListModel {
-            ListElement {
-                text: "Button"
-                component: "Button"
-            }
-            ListElement {
-                text: "CheckBox"
-                component: "CheckBox"
-            }
-            ListElement {
-                text: "Radio Button"
-                component: "RadioButton"
-            }
-            ListElement {
-                text: "Progress Bar"
-                component: "ProgressBar"
-            }
-            ListElement {
-                text: "Slider"
-                component: "Slider"
-            }
-            ListElement {
-                text: "Switch"
-                component: "Switch"
-            }
-            ListElement {
-                text: "Text Field"
-                component: "TextField"
-            }
-            ListElement {
-                text: "Icon Grid"
-                component: "IconGrid"
-            }
-            /*ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }
-            ListElement {
-                text: "Placeholder"
-            }*/
-        }
-        delegate: MobileComponents.ListItemWithActions {
-            enabled: true
-            MobileComponents.Label {
-                enabled: true
-                text: model.text
-            }
-            property Item ownPage
-            onClicked: {
-                root.pageStack.pop(root.initialPage);
-                if (!model.component) {
-                    return;
+        ListView {
+            id: mainListView
+            model: ListModel {
+                ListElement {
+                    text: "Button"
+                    component: "Button"
                 }
-                ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
+                ListElement {
+                    text: "CheckBox"
+                    component: "CheckBox"
+                }
+                ListElement {
+                    text: "Radio Button"
+                    component: "RadioButton"
+                }
+                ListElement {
+                    text: "Progress Bar"
+                    component: "ProgressBar"
+                }
+                ListElement {
+                    text: "Slider"
+                    component: "Slider"
+                }
+                ListElement {
+                    text: "Switch"
+                    component: "Switch"
+                }
+                ListElement {
+                    text: "Text Field"
+                    component: "TextField"
+                }
+                ListElement {
+                    text: "Icon Grid"
+                    component: "IconGrid"
+                }
+                /*ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }
+                ListElement {
+                    text: "Placeholder"
+                }*/
             }
-            checked: root.pageStack.currentPage == ownPage
-            actions: [
-                Controls.Action {
-                    iconName: "document-decrypt"
-                    onTriggered: print("Action 1 clicked")
-                },
-                Controls.Action {
-                    iconName: "mail-reply-sender"
-                }]
+            delegate: MobileComponents.ListItemWithActions {
+                enabled: true
+                MobileComponents.Label {
+                    enabled: true
+                    text: model.text
+                }
+                property Item ownPage
+                onClicked: {
+                    root.pageStack.pop(root.initialPage);
+                    if (!model.component) {
+                        return;
+                    }
+                    ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
+                }
+                checked: root.pageStack.currentPage == ownPage
+                actions: [
+                    Controls.Action {
+                        iconName: "document-decrypt"
+                        onTriggered: print("Action 1 clicked")
+                    },
+                    Controls.Action {
+                        iconName: "mail-reply-sender"
+                    }]
+            }
         }
     }
 }

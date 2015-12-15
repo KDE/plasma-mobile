@@ -26,37 +26,40 @@ ScrollView {
     id: root
     property bool requestingRefresh: false
     signal refreshRequested
-    property alias header: listView.header
-    property alias footer: listView.footer
-    property alias model: listView.model
-    property alias delegate: listView.delegate
-    property ListView listView: listView
 
-    property alias contentY: listView.contentY
     children: [
         Item {
             z: 99
-            y: -listView.contentY-height
-            width: listView.width
+            y: -root.flickableItem.contentY-height
+            width: root.flickableItem.width
             height: Units.gridUnit * 3
             BusyIndicator {
                 anchors.centerIn: parent
                 running: root.requestingRefresh
-                opacity: root.requestingRefresh ? 1 : (listView.originY - listView.contentY) / (Units.gridUnit * 3)
+                visible: root.requestingRefresh || parent.y < Units.gridUnit
+                opacity: root.requestingRefresh ? 1 : (root.flickableItem.originY - root.flickableItem.contentY) / (Units.gridUnit * 3)
                 rotation: root.requestingRefresh ? 0 : 360 * opacity
             }
-        }]
-    Component.onCompleted: {
-        listView.topMargin = 500
-        listView.bottomMargin = 500
-    }
-    ListView {
-        id: listView
-        onContentYChanged: {
-            if (contentY < originY - Units.gridUnit * 3 && !root.requestingRefresh) {
-                root.requestingRefresh = true;
-                root.refreshRequested();
+            onYChanged: {
+                if (y > Units.gridUnit) {
+                    return;
+                }
+                if (!root.requestingRefresh && y > 0) {
+                    root.requestingRefresh = true;
+                    root.refreshRequested();
+                }
+            }
+            Connections {
+                target: root.flickableItem
+                onContentHeightChanged: {
+                    root.flickableItem.bottomMargin = MAth.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5);
+                }
             }
         }
+    ]
+
+    onHeightChanged: {
+        root.flickableItem.bottomMargin = (root.height - root.flickableItem.contentHeight);
+        root.flickableItem.topMargin = height/2;
     }
 }
