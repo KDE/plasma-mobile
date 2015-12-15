@@ -27,6 +27,8 @@ MouseArea {
     property alias iconSource: icon.source
     property bool checkable: false
     property bool checked: false
+    //either Action or QAction should work here
+    property QtObject action
     Layout.minimumWidth: Units.iconSizes.large
     Layout.maximumWidth: Layout.minimumWidth
     implicitWidth: Units.iconSizes.large
@@ -73,6 +75,11 @@ MouseArea {
     onClicked: {
         if (checkable) {
             checked = !checked;
+        }
+
+        //if an action has been assigned, trigger it
+        if (button.action && button.action.trigger) {
+            button.action.trigger();
         }
     }
     Connections {
