@@ -52,7 +52,7 @@ ScrollView {
             Connections {
                 target: root.flickableItem
                 onContentHeightChanged: {
-                    root.flickableItem.bottomMargin = MAth.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5);
+                    root.flickableItem.bottomMargin = Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5);
                 }
             }
         }

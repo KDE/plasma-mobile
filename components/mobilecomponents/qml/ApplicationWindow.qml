@@ -47,6 +47,15 @@ ApplicationWindow {
      */
     property alias pageStack: __pageStack
 
+    function showPassiveNotification(message, timeout, actionText, callBack) {
+        if (!__actionButton.__passiveNotification) {
+            var component = Qt.createComponent("private/PassiveNotification.qml");
+            __actionButton.__passiveNotification = component.createObject(contentItem.parent);
+        }
+
+        __actionButton.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+    }
+
     PageRow {
         id: __pageStack
         anchors.fill: parent
@@ -75,6 +84,8 @@ ApplicationWindow {
     property alias actionButton: __actionButton
     ActionButton {
         id: __actionButton
+        //put it there just to make it not accessible bu users
+        property Item __passiveNotification
         z: 9999
         anchors.bottom: parent.bottom
         x: parent.width/2 - width/2

@@ -57,6 +57,16 @@ Page {
             onClicked: sheet.open()
         }
         Controls.Button {
+            text: "Show Passive Notification"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: showPassiveNotification("This is a passive message", 3000);
+        }
+        Controls.Button {
+            text: "Passive Notification Action"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: showPassiveNotification("This is a passive message", "long", "Action", function() {print("Passive notification action clicked")});
+        }
+        Controls.Button {
             text: "Disabled Button"
             enabled: false
             anchors.horizontalCenter: parent.horizontalCenter
