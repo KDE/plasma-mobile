@@ -87,57 +87,6 @@ MobileComponents.Page {
                     text: "Icon Grid"
                     component: "IconGrid"
                 }
-                /*ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }
-                ListElement {
-                    text: "Placeholder"
-                }*/
             }
             delegate: MobileComponents.ListItemWithActions {
                 enabled: true

@@ -93,6 +93,7 @@ AbstractDrawer {
             break;
         }
         mainAnim.running = true;
+        mainFlickable.open = true;
     }
     function close () {
         switch (root.edge) {
@@ -108,6 +109,7 @@ AbstractDrawer {
             break;
         }
         mainAnim.running = true;
+        mainFlickable.open = false;
     }
 
     Item {
@@ -264,6 +266,13 @@ AbstractDrawer {
             property bool open
             anchors.fill: parent
 
+            onOpenChanged: {
+                if (open) {
+                    root.open();
+                } else {
+                    root.close();
+                }
+            }
             enabled: parent.enabled
             flickableDirection: root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge ? Flickable.HorizontalFlick : Flickable.VerticalFlick
             contentWidth: mainItem.width

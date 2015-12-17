@@ -66,24 +66,11 @@ OverlayDrawer {
                     text: root.title
                 }
             }
-            delegate: ListItem {
+            delegate: BasicListItem {
                 enabled: true
                 checked: modelData.checked
-                RowLayout {
-                    height: implicitHeight + Units.smallSpacing * 2
-                    anchors {
-                        left: parent.left
-                        margins: Units.largeSpacing
-                    }
-                    Icon {
-                        height: parent.height
-                        width: height
-                        source: modelData.iconName
-                    }
-                    Label {
-                        text: model ? model.text : modelData.text
-                    }
-                }
+                icon: modelData.iconName
+                label: model ? model.text : modelData.text
                 onClicked: {
                     if (modelData && modelData.trigger !== undefined) {
                         modelData.trigger();

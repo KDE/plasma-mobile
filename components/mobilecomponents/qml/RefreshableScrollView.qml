@@ -40,6 +40,16 @@ ScrollView {
                 opacity: root.requestingRefresh ? 1 : (root.flickableItem.originY - root.flickableItem.contentY) / (Units.gridUnit * 3)
                 rotation: root.requestingRefresh ? 0 : 360 * opacity
             }
+            Rectangle {
+                color: Theme.textColor
+                opacity: 0.2
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                }
+                height: 1
+            }
             onYChanged: {
                 if (y > Units.gridUnit) {
                     return;

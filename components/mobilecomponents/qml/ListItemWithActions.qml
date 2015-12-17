@@ -98,107 +98,80 @@ Item {
 
 
     Rectangle {
-        id : background
+        id: shadowHolder
         color: Theme.backgroundColor
-
+        x: itemMouse.x + itemMouse.width
         width: parent.width
         height: parent.height
-        MouseArea {
-            anchors.fill: parent
-            drag {
-                target: itemMouse
-                axis: Drag.XAxis
-                maximumX: 0
-            }
-            onClicked: itemMouse.x = 0;
-            onPressed: handleArea.mouseDown(mouse);
-            onPositionChanged: handleArea.positionChanged(mouse);
-            onReleased: handleArea.released(mouse);
-        }
-        RowLayout {
-            anchors {
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-                rightMargin: y
-            }
-            height: Math.min( parent.height / 1.5, Units.iconSizes.medium)
-            property bool exclusive: false
-            property Item checkedButton
-            spacing: Units.largeSpacing
-            Repeater {
-                model: {
-                    if (listItem.actions.length == 0) {
-                        return null;
-                    } else {
-                        return listItem.actions[0].text !== undefined &&
-                            listItem.actions[0].trigger !== undefined ?
-                                listItem.actions :
-                                listItem.actions[0];
-                    }
-                }
-                delegate: Icon {
-                    Layout.fillHeight: true
-                    Layout.minimumWidth: height
-                    source: modelData.iconName
-                    MouseArea {
-                        anchors {
-                            fill: parent
-                            margins: -Units.smallSpacing
-                        }
-                        onClicked: {
-                            if (modelData && modelData.trigger !== undefined) {
-                                modelData.trigger();
-                            // assume the model is a list of QAction or Action
-                            } else if (toolbar.model.length > index) {
-                                toolbar.model[index].trigger();
-                            } else {
-                                console.log("Don't know how to trigger the action")
-                            }
-                            itemMouse.x = 0;
-                        }
-                    }
-                }
-            }
-        }
     }
     InnerShadow {
-        anchors.fill: parent
+        anchors.fill: shadowHolder
         radius: Units.smallSpacing * 2
         samples: 16
-        horizontalOffset: 0
+        horizontalOffset: verticalOffset
         verticalOffset: Units.smallSpacing / 2
         color: Qt.rgba(0, 0, 0, 0.3)
-        source: background
+        source: shadowHolder
     }
-    LinearGradient {
-        id: shadow
-        //TODO: depends from app layout
-        property bool inverse: true
-        width: Units.smallSpacing * 2
+
+    MouseArea {
+        anchors.fill: parent
+        drag {
+            target: itemMouse
+            axis: Drag.XAxis
+            maximumX: 0
+        }
+        onClicked: itemMouse.x = 0;
+        onPressed: handleArea.mouseDown(mouse);
+        onPositionChanged: handleArea.positionChanged(mouse);
+        onReleased: handleArea.released(mouse);
+    }
+    RowLayout {
         anchors {
-            right: shadow.inverse ? undefined : itemMouse.left
-            left: shadow.inverse ? itemMouse.right : undefined
-            top: itemMouse.top
-            bottom: itemMouse.bottom
-            rightMargin: -1
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+            rightMargin: y
         }
-        start: Qt.point(0, 0)
-        end: Qt.point(Units.smallSpacing*2, 0)
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: shadow.inverse ? Qt.rgba(0, 0, 0, 0.3) : "transparent"
+        height: Math.min( parent.height / 1.5, Units.iconSizes.medium)
+        property bool exclusive: false
+        property Item checkedButton
+        spacing: Units.largeSpacing
+        Repeater {
+            model: {
+                if (listItem.actions.length == 0) {
+                    return null;
+                } else {
+                    return listItem.actions[0].text !== undefined &&
+                        listItem.actions[0].trigger !== undefined ?
+                            listItem.actions :
+                            listItem.actions[0];
+                }
             }
-            GradientStop {
-                position: shadow.inverse ? 0.3 : 0.7
-                color: Qt.rgba(0, 0, 0, 0.15)
-            }
-            GradientStop {
-                position: 1.0
-                color: shadow.inverse ? "transparent" : Qt.rgba(0, 0, 0, 0.3)
+            delegate: Icon {
+                Layout.fillHeight: true
+                Layout.minimumWidth: height
+                source: modelData.iconName
+                MouseArea {
+                    anchors {
+                        fill: parent
+                        margins: -Units.smallSpacing
+                    }
+                    onClicked: {
+                        if (modelData && modelData.trigger !== undefined) {
+                            modelData.trigger();
+                        // assume the model is a list of QAction or Action
+                        } else if (toolbar.model.length > index) {
+                            toolbar.model[index].trigger();
+                        } else {
+                            console.log("Don't know how to trigger the action")
+                        }
+                        itemMouse.x = 0;
+                    }
+                }
             }
         }
     }
+
 
     MouseArea {
         id: itemMouse
@@ -269,6 +242,7 @@ Item {
                     target: itemMouse
                     axis: Drag.XAxis
                     maximumX: 0
+                    minimumX: -listItem.width
                 }
                 function mouseDown(mouse) {
                     speedSampler.speed = 0;
