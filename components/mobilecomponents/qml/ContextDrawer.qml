@@ -33,6 +33,7 @@ OverlayDrawer {
     edge: Qt.RightEdge
 
     contentItem: QtControls.ScrollView {
+        implicitWidth: Units.gridUnit * 20
         ListView {
             id: menu
             interactive: contentHeight > height
@@ -49,9 +50,8 @@ OverlayDrawer {
                             root.actions[0];
                 }
             }
-            verticalLayoutDirection: ListView.BottomToTop
-            //in bottomtotop all is flipped
-            footer: Item {
+            topMargin: menu.height - menu.contentHeight
+            header: Item {
                 height: heading.height
                 width: menu.width
                 Heading {
