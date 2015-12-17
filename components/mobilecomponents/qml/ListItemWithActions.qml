@@ -136,20 +136,26 @@ Item {
                                 listItem.actions[0];
                     }
                 }
-                delegate: ToolButton {
+                delegate: Icon {
                     Layout.fillHeight: true
                     Layout.minimumWidth: height
-                    iconName: modelData.iconName
-                    onClicked: {
-                        if (modelData && modelData.trigger !== undefined) {
-                            modelData.trigger();
-                        // assume the model is a list of QAction or Action
-                        } else if (toolbar.model.length > index) {
-                            toolbar.model[index].trigger();
-                        } else {
-                            console.log("Don't know how to trigger the action")
+                    source: modelData.iconName
+                    MouseArea {
+                        anchors {
+                            fill: parent
+                            margins: -Units.smallSpacing
                         }
-                        itemMouse.x = 0;
+                        onClicked: {
+                            if (modelData && modelData.trigger !== undefined) {
+                                modelData.trigger();
+                            // assume the model is a list of QAction or Action
+                            } else if (toolbar.model.length > index) {
+                                toolbar.model[index].trigger();
+                            } else {
+                                console.log("Don't know how to trigger the action")
+                            }
+                            itemMouse.x = 0;
+                        }
                     }
                 }
             }
