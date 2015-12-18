@@ -43,6 +43,4 @@ MouseArea {
             checked = !checked;
         }
     }
-    onPositionChanged: mainMouseArea.positionChanged(mouse);
-    onReleased: mainMouseArea.released(mouse);
 }

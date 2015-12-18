@@ -115,7 +115,7 @@ Item {
                 onPressed: delegate.z = 10;
                 onClicked: {
                     window.hide();
-                    plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(model.index));
+                    window.setSingleActiveWindow(model.index);
                 }
                 onReleased: {
                     delegate.z = 0;

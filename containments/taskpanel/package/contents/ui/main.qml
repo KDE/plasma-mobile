@@ -88,6 +88,8 @@ PlasmaCore.ColorScope {
                 enabled: taskSwitcher.tasksCount > 0
                 iconSource: "window-list"
                 onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
+                onPositionChanged: mainMouseArea.positionChanged(mouse);
+                onReleased: mainMouseArea.released(mouse);
             }
 
             Button {
@@ -104,10 +106,12 @@ PlasmaCore.ColorScope {
                         root.taskSwitcher.setSingleActiveWindow(Math.max(0, root.taskSwitcher.currentTaskIndex));
                     }
                 }
+                onPositionChanged: mainMouseArea.positionChanged(mouse);
+                onReleased: mainMouseArea.released(mouse);
                 Connections {
                     target: root.taskSwitcher
                     onCurrentTaskIndexChanged: {
-                        showDesktopButton.checked = root.taskSwitcher.currentTaskIndex >= 0
+                        showDesktopButton.checked = root.taskSwitcher.currentTaskIndex < 0
                     }
                 }
             }
@@ -119,6 +123,8 @@ PlasmaCore.ColorScope {
                 iconSource: "window-close"
                 enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
                 onClicked: plasmoid.nativeInterface.closeActiveWindow();
+                onPositionChanged: mainMouseArea.positionChanged(mouse);
+                onReleased: mainMouseArea.released(mouse);
             }
         }
     }

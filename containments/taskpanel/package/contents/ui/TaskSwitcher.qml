@@ -69,7 +69,8 @@ FullScreenPanel {
             task = filteredWindowModel.get(i);
 
             if (i == id && task.IsMinimized) {
-                plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
+                //plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
+                plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(i));
             } else if (i != id && !task.IsMinimized) {
                 plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
             } 
@@ -204,6 +205,7 @@ FullScreenPanel {
         }
         iconSource: "go-home"
         onClicked: {
+            setSingleActiveWindow(-1);
             window.hide();
         }
     }
