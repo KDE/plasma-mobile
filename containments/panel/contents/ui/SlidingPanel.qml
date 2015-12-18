@@ -33,6 +33,9 @@ FullScreenPanel {
     color: "transparent"
     property alias contents: contentArea.data
 
+    width: Screen.width
+    height: Screen.height
+
     function updateState() {
         var delta = offset - mouseArea.startOffset;
         if (delta > units.gridUnit * 8) {
@@ -49,6 +52,8 @@ FullScreenPanel {
         if (visible) {
             mouseArea.state = "draggingFromClosed";
             mouseArea.startOffset = units.gridUnit * 4;
+            window.width = Screen.width;
+            window.height = Screen.height;
         }
     }
 
