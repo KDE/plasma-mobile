@@ -142,8 +142,8 @@ AbstractDrawer {
             bottom: root.edge == Qt.TopEdge ? undefined : parent.bottom
         }
         z: 99
-        width: Units.smallSpacing
-        height: Units.smallSpacing
+        width: Units.smallSpacing * 2
+        height: Units.smallSpacing * 2
         property int startMouseX
         property real oldMouseX
         property int startMouseY
