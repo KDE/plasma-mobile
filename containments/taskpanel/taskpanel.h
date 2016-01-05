@@ -82,7 +82,7 @@ private:
     KWayland::Client::PlasmaShell *m_shellInterface = nullptr;
     KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     KWayland::Client::PlasmaWindowModel *m_windowModel = nullptr;
-    KWayland::Client::PlasmaWindow *m_activeWindow = nullptr;
+    QPointer<KWayland::Client::PlasmaWindow> m_activeWindow;
 };
 
 #endif

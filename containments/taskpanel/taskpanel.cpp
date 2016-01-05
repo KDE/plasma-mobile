@@ -146,7 +146,13 @@ void TaskPanel::updateActiveWindow()
     if (!m_windowManagement) {
         return;
     }
+    if (m_activeWindow) {
+        disconnect(m_activeWindow, &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
+    }
     m_activeWindow = m_windowManagement->activeWindow();
+
+    connect(m_activeWindow, &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
+
     // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
     emit hasCloseableActiveWindowChanged();
 }
