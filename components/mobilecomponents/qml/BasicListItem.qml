@@ -41,8 +41,8 @@ ListItem {
             margins: Units.largeSpacing
         }
         Icon {
-            height: parent.height
-            width: height
+            Layout.minimumHeight: Units.iconSizes.smallMedium
+            Layout.minimumWidth: height
             source: listItem.icon
         }
         Label {
