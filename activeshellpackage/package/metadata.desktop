@@ -2,6 +2,7 @@
 Comment=Plasma Active shell
 Comment[ca]=Intèrpret d'ordres del Plasma Active
 Comment[ca@valencia]=Intèrpret d'ordes del Plasma Active
+Comment[da]=Plasma Active-skal
 Comment[de]=Plasma-Active-Shell
 Comment[el]=Ενεργό Κέλυφος του Plasma
 Comment[en_GB]=Plasma Active shell
@@ -23,6 +24,7 @@ Keywords=
 Name=Desktop
 Name[ca]=Escriptori
 Name[ca@valencia]=Escriptori
+Name[da]=Desktop
 Name[de]=Arbeitsfläche
 Name[el]=Περιβάλλον γραφείου
 Name[en_GB]=Desktop
