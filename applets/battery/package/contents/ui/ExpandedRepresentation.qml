@@ -136,10 +136,6 @@ FocusScope {
             property alias maximumValue: brightnessSlider.maximumValue
             width: parent.width
 
-            icon: "video-display-brightness"
-            label: i18n("Screen Brightness")
-            value: batterymonitor.screenBrightness
-            maximumValue: batterymonitor.maximumScreenBrightness
             //             KeyNavigation.tab: keyboardBrightnessSlider
             //             KeyNavigation.backtab: batteryList
 
@@ -148,6 +144,7 @@ FocusScope {
 
             PlasmaCore.IconItem {
                 id: brightnessIcon
+                source: "video-display-brightness"
                 Layout.alignment: Qt.AlignTop
                 width: units.iconSizes.medium
                 height: width
@@ -163,6 +160,7 @@ FocusScope {
                     id: brightnessLabel
                     width: parent.width
                     height: paintedHeight
+                    text: i18n("Screen Brightness")
                 }
 
                 PlasmaComponents.Slider {
@@ -170,7 +168,9 @@ FocusScope {
                     width: parent.width
                     // Don't allow the slider to turn off the screen
                     // Please see https://git.reviewboard.kde.org/r/122505/ for more information
+                    value: batterymonitor.screenBrightness
                     minimumValue: maximumValue > 100 ? 1 : 0
+                    maximumValue: batterymonitor.maximumScreenBrightness
                     stepSize: 1
                 }
             }
