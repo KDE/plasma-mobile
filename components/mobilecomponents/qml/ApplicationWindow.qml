@@ -58,7 +58,11 @@ ApplicationWindow {
 
     PageRow {
         id: __pageStack
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            bottomMargin: Qt.inputMethod.visible ? (root.y + root.height) - (Qt.
+inputMethod.keyboardRectangle.y) : 0
+        }
         focus: true
         Keys.onReleased: {
             if (event.key == Qt.Key_Back && stackView.depth > 1) {
