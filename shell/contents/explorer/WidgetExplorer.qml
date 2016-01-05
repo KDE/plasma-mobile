@@ -139,7 +139,7 @@ Rectangle {
                 id: splitDrawer
                 visible: true
                 anchors.fill: parent
-                drawer: PlasmaExtras.ScrollArea {
+                contentItem: PlasmaExtras.ScrollArea {
                     
                     ListView {
                         model: widgetExplorer.filterModel
