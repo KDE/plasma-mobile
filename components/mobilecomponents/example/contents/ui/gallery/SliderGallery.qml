@@ -52,7 +52,7 @@ Page {
                         text: "Normal:"
                     }
                     Controls.Slider {
-                        Layout.minimumWidth: units.gridUnit * 20
+                        Layout.minimumWidth: units.gridUnit * 15
                         value: 2
                         maximumValue: 5.0
                     }
@@ -61,7 +61,7 @@ Page {
                     }
                     Controls.Slider {
                         enabled: false
-                        Layout.minimumWidth: units.gridUnit * 20
+                        Layout.minimumWidth: units.gridUnit * 15
                         value: 2
                         maximumValue: 5.0
                     }
@@ -69,7 +69,7 @@ Page {
                         text: "Thickmarks:"
                     }
                     Controls.Slider {
-                        Layout.minimumWidth: units.gridUnit * 20
+                        Layout.minimumWidth: units.gridUnit * 15
                         tickmarksEnabled: true
                         maximumValue: 5.0
                         stepSize: 1.0
@@ -115,7 +115,7 @@ Page {
                             text: "Normal:"
                         }
                         Controls.Slider {
-                            Layout.minimumWidth: units.gridUnit * 20
+                            Layout.minimumWidth: units.gridUnit * 15
                             value: 2
                             maximumValue: 5.0
                         }
@@ -123,7 +123,7 @@ Page {
                             text: "Thickmarks:"
                         }
                         Controls.Slider {
-                            Layout.minimumWidth: units.gridUnit * 20
+                            Layout.minimumWidth: units.gridUnit * 15
                             tickmarksEnabled: true
                             maximumValue: 5.0
                             stepSize: 1.0
