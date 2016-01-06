@@ -38,9 +38,11 @@ Item {
         sourceSize.width: root.width
         sourceSize.height: root.height
     }
+    /* // FIXME: This causes black squares on some GLES drivers, notably on Adreno hardware
     GammaAdjust {
         anchors.fill: image
         source: image
         gamma: root.active ? 3.0 : 1
     }
+    */
 }
