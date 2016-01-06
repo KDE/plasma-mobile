@@ -33,6 +33,7 @@ Page {
         Controls.Action {
             text:"Action 2"
             iconName: "folder"
+            enabled: false
         }
     ]
     MouseArea {
