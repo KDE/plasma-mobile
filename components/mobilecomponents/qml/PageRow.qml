@@ -246,7 +246,6 @@ Item {
 
         Item {
             id: container
-objectName:"FNORD"
             implicitWidth: actualContainer.width + Units.gridUnit * 8
             width: implicitWidth
             height: parent ? parent.height : 0
