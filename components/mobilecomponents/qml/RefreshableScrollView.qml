@@ -32,12 +32,13 @@ ScrollView {
             z: 99
             y: -root.flickableItem.contentY-height
             width: root.flickableItem.width
-            height: Units.gridUnit * 3
+            height: root.flickableItem.topMargin
             BusyIndicator {
+                id: busyIndicator
                 anchors.centerIn: parent
                 running: root.requestingRefresh
-                visible: root.requestingRefresh || parent.y < Units.gridUnit
-                opacity: root.requestingRefresh ? 1 : (root.flickableItem.originY - root.flickableItem.contentY) / (Units.gridUnit * 3)
+                visible: root.requestingRefresh || parent.y < root.flickableItem.topMargin
+                opacity: root.requestingRefresh ? 1 : (parent.y/(busyIndicator.height*2))
                 rotation: root.requestingRefresh ? 0 : 360 * opacity
             }
             Rectangle {
@@ -51,10 +52,7 @@ ScrollView {
                 height: 1
             }
             onYChanged: {
-                if (y > Units.gridUnit) {
-                    return;
-                }
-                if (!root.requestingRefresh && y > 0) {
+                if (!root.requestingRefresh && y > busyIndicator.height*2) {
                     root.requestingRefresh = true;
                     root.refreshRequested();
                 }
