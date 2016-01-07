@@ -64,9 +64,17 @@ ApplicationWindow {
         }
         focus: true
         Keys.onReleased: {
-            if (event.key == Qt.Key_Back && stackView.depth > 1) {
-                stackView.pop();
-                event.accepted = true;
+            if (event.key == Qt.Key_Back) {
+                if (root.contextDrawer && root.contextDrawer.opened) {
+                    root.contextDrawer.close();
+                    event.accepted = true;
+                } else if (root.globalDrawer && root.globalDrawer.opened) {
+                    root.globalDrawer.close();
+                    event.accepted = true;
+                } else if (stackView.depth > 1) {
+                    stackView.pop();
+                    event.accepted = true;
+                }
             }
         }
     }
