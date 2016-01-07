@@ -247,9 +247,9 @@ AbstractDrawer {
         drag.filterChildren: true
         onClicked: {
             if ((root.edge == Qt.LeftEdge && mouse.x < drawerPage.width) ||
-                (root.edge == Qt.RightEdge && mouse.x > drawerPage.x) ||
+                (root.edge == Qt.RightEdge && mouse.x > drawerPage.x - mainFlickable.contentX) ||
                 (root.edge == Qt.TopEdge && mouse.y < drawerPage.height) ||
-                (root.edge == Qt.BottomEdge && mouse.y > drawerPage.y)) {
+                (root.edge == Qt.BottomEdge && mouse.y > drawerPage.y - mainFlickable.contentY)) {
                 return;
             }
             root.clicked();
