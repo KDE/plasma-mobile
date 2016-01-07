@@ -153,8 +153,7 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
-
-                actualRoot.lastVisiblePage = root.children[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
+                actualRoot.lastVisiblePage = Engine.pageStack[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
                 if (!actualRoot.lastVisiblePage) {
                     actualRoot.lastVisiblePage = actualRoot.currentPage;
                 }
@@ -247,7 +246,7 @@ Item {
 
         Item {
             id: container
-
+objectName:"FNORD"
             implicitWidth: actualContainer.width + Units.gridUnit * 8
             width: implicitWidth
             height: parent ? parent.height : 0

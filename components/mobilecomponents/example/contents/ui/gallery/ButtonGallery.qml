@@ -36,6 +36,10 @@ Page {
             enabled: false
         }
     ]
+    mainAction: Controls.Action {
+        iconName: "document-edit"
+        onTriggered: print("Action button in buttons page clicked")
+    }
     MouseArea {
         anchors.fill: parent
         onClicked: actionButton.toggleVisibility();

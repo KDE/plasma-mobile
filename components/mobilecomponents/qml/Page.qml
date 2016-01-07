@@ -47,6 +47,10 @@ Rectangle {
      */
     property list<QtObject> contextualActions
 
+    /**
+     * An optional single action for the action button
+     */
+    property QtObject mainAction
 
     Layout.fillWidth: true
     color: "transparent"
