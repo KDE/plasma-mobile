@@ -154,7 +154,7 @@ FullScreenPanel {
             z: -1
             anchors.fill: parent
             onClicked: {
-                if (startMouseY < contentArea.height - units.iconSizes.large) {
+                if (mouseArea.startMouseY < contentArea.height - units.iconSizes.large) {
                     return;
                 }
                 mouseArea.state = "closed";
