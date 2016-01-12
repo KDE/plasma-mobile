@@ -75,9 +75,11 @@ FullScreenPanel {
                 plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
             } 
         }
-        return;
+
         if (id >= 0) {
             plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(id));
+        } else {
+            plasmoid.nativeInterface.forgetActiveWindow();
         }
         currentTaskIndex = id;
     }
@@ -205,8 +207,8 @@ FullScreenPanel {
         }
         iconSource: "go-home"
         onClicked: {
-            setSingleActiveWindow(-1);
             window.hide();
+            setSingleActiveWindow(-1);
         }
     }
     Component.onCompleted: plasmoid.nativeInterface.panel = window;

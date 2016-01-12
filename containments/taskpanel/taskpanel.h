@@ -66,6 +66,9 @@ public:
 
     Q_INVOKABLE void setTaskGeometry(int row, int x, int y, int width, int height);
 
+public Q_SLOTS:
+    void forgetActiveWindow();
+
 Q_SIGNALS:
     void windowModelChanged();
     void showingDesktopChanged(bool);

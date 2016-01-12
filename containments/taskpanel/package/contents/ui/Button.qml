@@ -33,8 +33,8 @@ MouseArea {
     property bool checkable
     Rectangle {
         anchors.fill: parent
-        visible: button.checked
-        opacity: 0.05
+        visible: button.pressed
+        opacity: 0.1
     }
     PlasmaCore.IconItem {
         id: icon

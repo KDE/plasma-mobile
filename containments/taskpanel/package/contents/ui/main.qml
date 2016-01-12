@@ -98,22 +98,11 @@ PlasmaCore.ColorScope {
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "go-home"
-                checkable: true
-                onCheckedChanged: {
-                    if (checked) {
-                        root.taskSwitcher.setSingleActiveWindow(-1);
-                    } else {
-                        root.taskSwitcher.setSingleActiveWindow(Math.max(0, root.taskSwitcher.currentTaskIndex));
-                    }
+                onClicked: {
+                    root.taskSwitcher.setSingleActiveWindow(-1);
                 }
                 onPositionChanged: mainMouseArea.positionChanged(mouse);
                 onReleased: mainMouseArea.released(mouse);
-                Connections {
-                    target: root.taskSwitcher
-                    onCurrentTaskIndexChanged: {
-                        showDesktopButton.checked = root.taskSwitcher.currentTaskIndex < 0
-                    }
-                }
             }
 
             Button {
