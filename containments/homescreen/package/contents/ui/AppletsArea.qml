@@ -31,7 +31,7 @@ MouseEventListener {
     property Item lastSpacer: spacer
     property Item favoritesStrip: favoritesView
     width: root.width
-    height: mainLayout.Layout.minimumHeight
+    height: Math.max(applicationsView.height - stripe.height, mainLayout.Layout.minimumHeight)
     property int margin: stripe.height + units.gridUnit * 2
     property Item draggingApplet
     property int startMouseX
@@ -63,7 +63,7 @@ MouseEventListener {
     }
     onPressAndHold: {
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
-        if (!root.locked && !favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
+        if (!favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
             editOverlay.visible = true;
             var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
             draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
@@ -154,37 +154,11 @@ MouseEventListener {
         anchors {
             fill: parent
         }
-        Item {
-            Layout.fillWidth: true
-            Layout.minimumHeight: plasmoid.availableScreenRect.height + units.gridUnit * 3
-            Layout.maximumHeight: Layout.minimumHeight
-            Clock {
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: goUp.top
-                    margins: units.largeSpacing
-                }
-            }
-            PlasmaCore.IconItem {
-                id: goUp
-                source: "go-up"
-                width: units.iconSizes.huge
-                height: width
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: units.gridUnit * 3
-                }
-            }
-        }
-        Item {
-            id: spacer
-            width: parent.width
-            height: Math.max(0, plasmoid.availableScreenRect.height/4 * Math.max(0, 4 -plasmoid.applets.length) - stripe.height - units.gridUnit * 3)
-            //plasmoid.availableScreenRect.height/4
-        }
 
+        Item {
+            Layout.minimumHeight: krunner.inputHeight
+            Layout.minimumWidth: Layout.minimumHeight
+        }
         PlasmaCore.ColorScope {
             id: colorScope
             //TODO: decide what color we want applets
@@ -208,12 +182,6 @@ MouseEventListener {
                 width: parent.width
             }
         }
-        Item {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.minimumHeight: margin
-            Layout.maximumHeight: Layout.minimumHeight
-        }
     }
     SatelliteStripe {
         id: stripe
@@ -221,7 +189,26 @@ MouseEventListener {
         property int viewPos: applicationsView.contentItem.height * applicationsView.visibleArea.yPosition
 
         y: Math.max(viewPos + krunner.inputHeight - units.smallSpacing, 
-            Math.min(parent.height, viewPos + plasmoid.availableScreenRect.height - height) + Math.max(0, -(parent.height - height + applicationsView.contentY)))
+            Math.min(parent.height, viewPos + plasmoid.availableScreenRect.height - height) )
+
+        PlasmaCore.IconItem {
+            id: goUp
+            source: "go-up"
+            width: units.iconSizes.huge
+            height: width
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            anchors {
+                horizontalCenter: parent.horizontalCenter
+                bottom: parent.top
+            }
+            MouseArea {
+                anchors {
+                    fill: parent
+                    margins: -units.smallSpacing
+                }
+                onClicked: applicationsView.flick(0, -applicationsView.height/2)
+            }
+        }
 
         GridView {
             id: favoritesView

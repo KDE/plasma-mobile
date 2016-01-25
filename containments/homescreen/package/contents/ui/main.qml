@@ -36,7 +36,6 @@ Item {
     property alias appletsSpace: applicationsView.headerItem
     property int buttonHeight: (Math.floor(height / units.iconSizes.huge) > 6) ? units.iconSizes.enormous : units.iconSizes.huge
     property bool reorderingApps: false
-    property bool locked: applicationsView.contentY < -applicationsView.headerItem.height + plasmoid.availableScreenRect.height
     property var layoutManager: LayoutManager
 //END properties
 
@@ -74,8 +73,6 @@ Item {
             //event compress the enable of animations
             //startupTimer.restart();
         }
-
-        checkLastSpacer()
     }
 
     //Autoscroll related functions
@@ -99,13 +96,6 @@ Item {
         scrollDownIndicator.opacity = 0;
     }
 
-    function checkLastSpacer() {
-        appletsSpace.lastSpacer.parent = root
-
-        if (appletsSpace.layout.children.length <= 1) {
-            appletsSpace.lastSpacer.parent = appletsSpace.layout;
-        }
-    }
 
 
 //END functions
@@ -115,7 +105,6 @@ Item {
         LayoutManager.plasmoid = plasmoid;
         LayoutManager.root = root;
         LayoutManager.layout = appletsSpace.layout;
-        LayoutManager.lastSpacer = appletsSpace.lastSpacer;
         LayoutManager.restore();
         applicationsView.contentY = -applicationsView.headerItem.height*2;
 
@@ -220,7 +209,6 @@ Item {
                 width: Math.min(parent.width, parent.height)
                 height: width
             }
-            Component.onDestruction: checkLastSpacer();
         }
     }
 
@@ -400,7 +388,7 @@ Item {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     top: parent.top
-                    topMargin: 200
+                    topMargin: 300
                 }
                 z: 2
                 opacity: 0
@@ -476,7 +464,6 @@ Item {
                 }
 
                 property var dragData
-                property bool wasLocked: true
 
                 cellWidth: root.width / 4
                 cellHeight: root.buttonHeight
@@ -484,48 +471,6 @@ Item {
 
                 snapMode: GridView.SnapToRow
 
-                onFlickingChanged: {
-                    draggingVerticallyChanged(false);
-                }
-                onDraggingVerticallyChanged: {
-                    if (draggingVertically) {
-                        return;
-                    }
-
-                    if (wasLocked) {
-                        //scrolling down, unlock
-                        if (contentY > (-headerItem.height + root.height/5)) {
-                            scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
-                            scrollAnim.running = true;
-                            wasLocked = false;
-                            return;
-
-                        //scrolling up, lock
-                        } else {
-                            scrollAnim.to = -headerItem.height;
-                            scrollAnim.running = true;
-                            wasLocked = true;
-                            return;
-                        }
-
-                    //was unlocked
-                    } else {
-                        //scrolling up, lock
-                        if (contentY < (-headerItem.height +  root.height - root.height/5)) {
-                            scrollAnim.to = -headerItem.height;
-                            scrollAnim.running = true;
-                            wasLocked = true;
-                            return;
-
-                        //scrolling down, unlock
-                        } else if (contentY < (-headerItem.height +  root.height + root.height/5)) {
-                            scrollAnim.to = -headerItem.height +plasmoid.availableScreenRect.height
-                            scrollAnim.running = true;
-                            wasLocked = false;
-                            return;
-                        }
-                    }
-                }
                 NumberAnimation {
                     id: scrollAnim
                     target: applicationsView
@@ -559,31 +504,14 @@ Item {
                 }
             }
 
-            Rectangle {
+            PlasmaComponents.ScrollBar {
                 anchors {
+                    right: parent.right
                     top: parent.top
                     bottom: parent.bottom
-                    horizontalCenter: scrollHandle.horizontalCenter
                 }
-                width: units.smallSpacing
-                color: PlasmaCore.ColorScope.textColor
-                opacity: scrollHandle.opacity / 2
-            }
-            Rectangle {
-                id: scrollHandle
-                color: PlasmaCore.ColorScope.textColor
-                width: units.gridUnit
-                height: width
-                radius: width
-                anchors.right: parent.right
-                y: applicationsView.height * applicationsView.visibleArea.yPosition
-                opacity: applicationsView.flicking || scrollDownIndicator.opacity > 0 || scrollUpIndicator.opacity > 0 ? 0.8 : 0
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
+                interactive: false
+                flickableItem: applicationsView
             }
         }
     }
