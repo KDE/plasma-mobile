@@ -23,6 +23,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0
 
 
@@ -115,15 +116,45 @@ Item {
         return status;
     }
 
-    Plasmoid.compactRepresentation: BatteryIcon {
-        id: batteryIcon
-        Layout.minimumHeight: units.iconSizes.small
-        anchors.horizontalCenter: parent.horizontalCenter
-        hasBattery: true
-        percent: pmSource.data["Battery"]["Percent"]
-        //pluggedIn: batteryContainer.pluggedIn
-//         height: batteryContainer.iconSize
-//         width: height
+    Plasmoid.compactRepresentation: MouseArea {
+        Layout.minimumWidth: batteryLayout.implicitWidth
+        Layout.minimumHeight: batteryLayout.implicitHeight
+
+        property bool wasExpanded: false
+        onPressed: {
+            if (mouse.button == Qt.LeftButton) {
+                wasExpanded = plasmoid.expanded;
+            } else if (mouse.button == Qt.MiddleButton) {
+                muteVolume();
+            }
+        }
+        onClicked: {
+            if (mouse.button == Qt.LeftButton) {
+                plasmoid.expanded = !wasExpanded;
+            }
+        }
+        RowLayout {
+            id: batteryLayout
+            anchors.fill: parent
+            PlasmaComponents.Label {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                text: pmSource.data["Battery"]["Percent"]
+                horizontalAlignment: Text.AlignRight
+                verticalAlignment: Text.AlignVCenter
+            }
+            BatteryIcon {
+                id: batteryIcon
+                Layout.minimumWidth: height
+                Layout.maximumWidth: height
+                Layout.fillHeight: true
+                hasBattery: true
+                percent: pmSource.data["Battery"]["Percent"]
+                //pluggedIn: batteryContainer.pluggedIn
+        //         height: batteryContainer.iconSize
+        //         width: height
+            }
+        }
     }
 
     Plasmoid.fullRepresentation: ExpandedRepresentation {
