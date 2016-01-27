@@ -29,10 +29,10 @@ MouseArea {
     property bool checked: false
     //either Action or QAction should work here
     property QtObject action: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.mainAction : null
-    Layout.minimumWidth: Units.iconSizes.medium
-    Layout.maximumWidth: Layout.minimumWidth
-    implicitWidth: Units.iconSizes.medium
-    implicitHeight: width
+
+    implicitWidth: parent.width
+    implicitHeight: Units.iconSizes.medium
+
     drag {
         target: button
         axis: Drag.XAxis
@@ -56,11 +56,12 @@ MouseArea {
     property int startX
     onPressed: {
         downTimestamp = (new Date()).getTime();
-        startX = button.x
+        startX = button.x + button.width/2
     }
     onReleased: {
         //pixel/second
-        var speed = ((button.x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
+        var x = button.x + button.width/2;
+        var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
 
         //project where it would be a full second in the future
         if (globalDrawer && x + speed > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
@@ -83,6 +84,9 @@ MouseArea {
         }
     }
     onClicked: {
+        if (mouse.x < buttonGraphics.x || mouse.x > buttonGraphics.x + buttonGraphics.width) {
+            return;
+        }
         if (checkable) {
             checked = !checked;
         }
@@ -138,6 +142,7 @@ MouseArea {
             rightMargin: -Units.gridUnit
         }
         Rectangle {
+            id: buttonGraphics
             radius: width/2
             anchors.centerIn: parent
             height: parent.height - Units.smallSpacing*2

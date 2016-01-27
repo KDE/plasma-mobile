@@ -100,7 +100,7 @@ ApplicationWindow {
         z: 9999
         anchors.bottom: parent.bottom
         x: parent.width/2 - width/2
-        iconSource: action && action.iconName ? action.iconName : "distribute-horizontal-x"
+        iconSource: action && action.iconName ? action.iconName : ""
 
         visible: root.globalDrawer || root.contextDrawer
     }
