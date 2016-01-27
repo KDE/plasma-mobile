@@ -7,7 +7,7 @@ singleton Theme 0.2 Theme.qml
 IconGrid 0.2 IconGrid.qml
 OverlayDrawer 0.2 OverlayDrawer.qml
 SplitDrawer 0.2 SplitDrawer.qml
-ActionGroup 0.2 ActionGroup.qml
+Action 0.2 Action.qml
 ApplicationWindow 0.2 ApplicationWindow.qml
 ContextDrawer 0.2 ContextDrawer.qml
 GlobalDrawer 0.2 GlobalDrawer.qml

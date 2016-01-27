@@ -36,30 +36,30 @@ MobileComponents.ApplicationWindow {
         bannerImageSource: "banner.jpg"
 
         actions: [
-            MobileComponents.ActionGroup {
+            MobileComponents.Action {
                 text: "View"
                 iconName: "view-list-icons"
-                Controls.Action {
+                MobileComponents.Action {
                         text: "action 1"
                 }
-                Controls.Action {
+                MobileComponents.Action {
                         text: "action 2"
                 }
-                Controls.Action {
+                MobileComponents.Action {
                         text: "action 3"
                 }
             },
-            MobileComponents.ActionGroup {
+            MobileComponents.Action {
                 text: "Sync"
                 iconName: "folder-sync"
-                Controls.Action {
+                MobileComponents.Action {
                         text: "action 4"
                 }
-                Controls.Action {
+                MobileComponents.Action {
                         text: "action 5"
                 }
             },
-            Controls.Action {
+            MobileComponents.Action {
                 text: "Checkable"
                 iconName: "view-list-details"
                 checkable: true
@@ -68,7 +68,7 @@ MobileComponents.ApplicationWindow {
                     print("Action checked:" + checked)
                 }
             },
-            Controls.Action {
+            MobileComponents.Action {
                 text: "Settings"
                 iconName: "configure"
                 checkable: true

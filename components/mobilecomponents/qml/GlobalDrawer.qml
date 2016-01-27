@@ -18,7 +18,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.0
+import QtQuick.Controls 1.0 as Controls
 import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
@@ -110,7 +110,7 @@ OverlayDrawer {
             Layout.minimumHeight: 1
         }
 
-        StackView {
+        Controls.StackView {
             id: pageRow
             Layout.fillWidth: true
             Layout.fillHeight: true
@@ -163,11 +163,11 @@ OverlayDrawer {
                         }
                         width: height
                         source: "go-next"
-                        visible: modelData.children != undefined
+                        visible: modelData.children.length > 0
                     }
 
                     onClicked: {
-                        if (modelData.children) {
+                        if (modelData.children.length > 0) {
                             pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
                         } else {
                             modelData.trigger();

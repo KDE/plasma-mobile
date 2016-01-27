@@ -18,10 +18,12 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls 1.3
+import QtQuick.Controls 1.3 as Controls
 
-Action {
+Controls.Action {
     id: root
+    property bool visible: true
+
     default property alias children: root.__children
-    property list<Action> __children
+    property list<QtObject> __children
 }
