@@ -46,12 +46,16 @@ MobileComponents.Page {
     Timer {
         id: refreshRequestTimer
         interval: 3000
-        onTriggered: scrollView.requestingRefresh = false
+        onTriggered: scrollView.refreshing = false
     }
     MobileComponents.RefreshableScrollView {
         id: scrollView
         anchors.fill:parent
-        onRefreshRequested: refreshRequestTimer.running = true
+        onRefreshingChanged: {
+            if (refreshing) {
+                refreshRequestTimer.running = true;
+            }
+        }
         ListView {
             id: mainListView
             model: ListModel {

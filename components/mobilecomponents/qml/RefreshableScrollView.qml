@@ -24,8 +24,7 @@ import org.kde.plasma.mobilecomponents 0.2
 
 ScrollView {
     id: root
-    property bool requestingRefresh: false
-    signal refreshRequested
+    property bool refreshing: false
 
     children: [
         Item {
@@ -36,10 +35,10 @@ ScrollView {
             BusyIndicator {
                 id: busyIndicator
                 anchors.centerIn: parent
-                running: root.requestingRefresh
-                visible: root.requestingRefresh || parent.y < root.flickableItem.topMargin
-                opacity: root.requestingRefresh ? 1 : (parent.y/(busyIndicator.height*2))
-                rotation: root.requestingRefresh ? 0 : 360 * opacity
+                running: root.refreshing
+                visible: root.refreshing || parent.y < root.flickableItem.topMargin
+                opacity: root.refreshing ? 1 : (parent.y/(busyIndicator.height*2))
+                rotation: root.refreshing ? 0 : 360 * opacity
             }
             Rectangle {
                 color: Theme.textColor
@@ -52,22 +51,21 @@ ScrollView {
                 height: 1
             }
             onYChanged: {
-                if (!root.requestingRefresh && y > busyIndicator.height*2) {
-                    root.requestingRefresh = true;
-                    root.refreshRequested();
+                if (!root.refreshing && y > busyIndicator.height*2) {
+                    root.refreshing = true;
                 }
             }
-            Connections {
+            Binding {
                 target: root.flickableItem
-                onContentHeightChanged: {
-                    root.flickableItem.bottomMargin = Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5);
-                }
+                property: "bottomMargin"
+                value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
+            }
+
+            Binding {
+                target: root.flickableItem
+                property: "topMargin"
+                value: height/2
             }
         }
     ]
-
-    onHeightChanged: {
-        root.flickableItem.bottomMargin = (root.height - root.flickableItem.contentHeight);
-        root.flickableItem.topMargin = height/2;
-    }
 }
