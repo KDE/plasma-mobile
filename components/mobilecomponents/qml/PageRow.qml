@@ -153,7 +153,9 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
-                actualRoot.lastVisiblePage = Engine.pageStack[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
+                var lastIdx = Math.min(Engine.pageStack.length-1, Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth))
+                actualRoot.lastVisiblePage = Engine.pageStack[lastIdx].page;
+
                 if (!actualRoot.lastVisiblePage) {
                     actualRoot.lastVisiblePage = actualRoot.currentPage;
                 }
