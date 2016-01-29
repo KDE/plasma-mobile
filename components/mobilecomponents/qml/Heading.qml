@@ -33,7 +33,10 @@ import org.kde.plasma.mobilecomponents 0.2
  * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
  * [...]
  * Column {
- *     MobileComponents.Heading { text: "Apples in the sunlight"; level: 2 }
+ *     MobileComponents.Heading {
+ *         text: "Apples in the sunlight"
+ *         level: 2
+ *     }
  *   [...]
  * }
  * @endcode
@@ -46,11 +49,16 @@ Label {
     id: heading
 
     /**
+     * level: int
      * The level determines how big the section header is display, values
      * between 1 (big) and 5 (small) are accepted
      */
     property int level: 1
 
+    /**
+     * step: int
+     * adjust the point size in between a level and another.
+     */
     property int step: 2
 
     height: Math.round(paintedHeight * 1.2)

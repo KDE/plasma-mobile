@@ -20,10 +20,26 @@
 import QtQuick 2.1
 import QtQuick.Controls 1.3 as Controls
 
+/**
+ * An item that represents an abstract Action
+ *
+ * @inherit Controls.Action
+ */
 Controls.Action {
     id: root
+
+    /**
+     * visible: bool
+     * True (default) when the graphic representation of the action
+     * is supposed to be visible.
+     */
     property bool visible: true
 
+    /**
+     * children: list<Action>
+     * A list of children actions.
+     * Useful for tree-like manus
+     */
     default property alias children: root.__children
     property list<QtObject> __children
 }

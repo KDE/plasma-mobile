@@ -29,6 +29,35 @@ import org.kde.plasma.mobilecomponents 0.2
  * flickable to have more top margins in order to make possible to scroll down the list
  * to reach it with the thumb while using the phone with a single hand.
  *
+ * Example usage:
+ *
+ * @code
+ * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+ * [...]
+ * 
+ * MobileComponents.RefreshableScrollView {
+ *     id: view
+ *     supportsRefreshing: true
+ *     onRefreshingChanged: {
+ *         if (refreshing) {
+ *             myModel.refresh();
+ *         }
+ *     }
+ *     ListView {
+ *         //NOTE: MyModel doesn't come from the components,
+ *         //it's purely an example on how it can be used together
+ *         //some application logic that can update the list model
+ *         //and signals when it's done.
+ *         model: MyModel {
+ *             onRefreshDone: view.refreshing = false;
+ *         }
+ *         delegate: BasicListItem {}
+ *     }
+ * }
+ * [...]
+ *
+ * @endcode
+ * 
  * @inherit QtQuick.Controls.Scrollview
  */
 ScrollView {
