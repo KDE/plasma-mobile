@@ -87,10 +87,9 @@ Item {
 
     /**
      * type: list<Action>
-     * Defines the actions for the page: at most 4 buttons will
-     * contain the actions at the bottom of the page, if the main
-     * item of the page is a Flickable or a ScrllArea, it will
-     * control the visibility of the actions.
+     * Defines the actions for the list item: at most 4 buttons will
+     * contain the actions for the item, that can be revealed by
+     * sliding away the list item.
      */
     property list<Action> actions
 

@@ -80,10 +80,9 @@ Item {
      */
     property alias containsMouse: itemMouse.containsMouse
 
-    width: parent ? parent.width : childrenRect.width
-    height: paddingItem.childrenRect.height + Units.smallSpacing*2
+    implicitWidth: parent ? parent.width : childrenRect.width
 
-    property int implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing*2
+    implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing*2
 
 
     opacity: enabled ? 1 : 0.6
