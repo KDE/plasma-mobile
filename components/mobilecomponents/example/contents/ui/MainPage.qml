@@ -24,7 +24,9 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 
 MobileComponents.Page {
     anchors.fill:parent
-    color: MobileComponents.Theme.viewBackgroundColor
+    background: Rectangle {
+        color: MobileComponents.Theme.viewBackgroundColor
+    }
 
     contextualActions: [
         Controls.Action {

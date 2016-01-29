@@ -26,7 +26,7 @@ import "private"
  * Page is a container for all the app pages: everything pushed to the
  * ApplicationWindow stackView should be a Page instabnce
  */
-Rectangle {
+Item {
     id: root
 
     /**
@@ -95,6 +95,20 @@ Rectangle {
      */
     property QtObject mainAction
 
+    /**
+     * This property holds the background item.
+     * Note: If the background item has no explicit size specified,
+     * it automatically follows the control's size.
+     * In most cases, there is no need to specify width or
+     * height for a background item.
+     */
+    property Item background
+
+    onBackgroundChanged: {
+        background.z = -1;
+        background.parent = root;
+        background.anchors.fill = root;
+    }
+
     Layout.fillWidth: true
-    color: "transparent"
 }
