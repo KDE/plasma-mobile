@@ -69,7 +69,7 @@ Item {
     /**
      * type: bool
      * If true the item will be a delegate for a section, so will look like a
-     * "title" for the otems under it.
+     * "title" for the items under it.
      */
     //is this to be used as section delegate?
     property bool sectionDelegate: false

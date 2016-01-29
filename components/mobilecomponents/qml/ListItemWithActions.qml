@@ -92,12 +92,7 @@ Item {
      * item of the page is a Flickable or a ScrllArea, it will
      * control the visibility of the actions.
      */
-    //property alias actions: internalActions.data
     property list<Action> actions
-
-    Item {
-        id: internalActions
-    }
 
     width: parent ? parent.width : childrenRect.width
     height: paddingItem.childrenRect.height + Units.smallSpacing * 2
