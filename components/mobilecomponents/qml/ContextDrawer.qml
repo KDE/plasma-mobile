@@ -22,12 +22,64 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 1.0 as QtControls
 import org.kde.plasma.mobilecomponents 0.2
 
+/**
+ * A drawer specialization that will show a list of actions that are
+ * specific of the current page shown by the application
+ *
+ * Example usage:
+ * @code
+ * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+ *
+ * MobileComponents.ApplicationWindow {
+ *  [...]
+ *     contextDrawer: MobileComponents.ContextDrawer {
+ *         id: contextDrawer
+ *     }
+ *  [...]
+ * }
+ * @endcode
+ *
+ * @code
+ * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+ *
+ * MobileComponents.Page {
+ *   [...]
+ *     contextualActions: [
+ *         MobileComponents.Action {
+ *             iconName: "edit"
+ *             text: "Action text"
+ *             onTriggered: {
+ *                 // do stuff
+ *             }
+ *         },
+ *         MobileComponents.Action {
+ *             iconName: "edit"
+ *             text: "Action text"
+ *             onTriggered: {
+ *                 // do stuff
+ *             }
+ *         }
+ *     ]
+ *   [...]
+ * }
+ * @endcode
+ *
+ * @inherit AbstractDrawer
+ */
 OverlayDrawer {
     id: root
 
+    /**
+     * title: string
+     * A title for the action list that will be shown to the user when opens the drawer
+     */
     property string title: typeof i18n !== "undefined" ? i18n("Actions") : "Actions"
 
-    //This can be any type of object that a ListView can accept as model. It expects items compatible with either QAction or QQC Action
+    /**
+     * actions: list<Action>
+     * This can be any type of object that a ListView can accept as model. 
+     * It expects items compatible with either QAction or MobileComponents Action
+     */
     property var actions: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.contextualActions : null
     enabled: menu.count > 0
     edge: Qt.RightEdge

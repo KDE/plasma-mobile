@@ -22,28 +22,12 @@ import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 import "private"
 
-/**Documented API
-Inherits:
-        Item
-
-Imports:
-        QtQuick 2.1
-
-Description:
-        Split Drawers are used to expose additional UI elements which are optional and can be used in conjunction with the main UI elements. For example the Resource Browser uses a Split Drawer to select different kinds of filters for the main view.
-
-Properties:
-        bool open:
-        If true the drawer is open showing the contents of the "drawer" component.
-
-        Item page:
-        It's the default property. it's the main content of the drawer page, the part that is always shown
-
-        Item drawer:
-        It's the part that can be pulled in and out, will act as a sidebar.
-
-        int visibleDrawerWidth: the width of the visible portion of the drawer: it updates while dragging or animating
-**/
+/**
+ * Split Drawers are used to expose additional UI elements which are optional
+ * and can be used in conjunction with the main UI elements.
+ * For example the Resource Browser uses a Split Drawer to select
+ * different kinds of filters for the main view.
+ */
 AbstractDrawer {
     id: root
     anchors {
@@ -51,10 +35,26 @@ AbstractDrawer {
     }
     visible: true
 
+    /**
+     * page: Item
+     * It's the default property. it's the main content of the drawer page,
+     * the part that is always shown
+     */
     default property alias page: mainPage.data
+
+    /**
+     * contentItem: Item
+     * It's the part that can be pulled in and out, will act as a sidebar.
+     */
     property Item contentItem
+
+    /**
+     * opened: bool
+     * If true the drawer is open showing the contents of the "drawer"
+     * component.
+     */
     property alias opened: sidebar.open
-    property int visibleDrawerWidth: browserFrame.x
+    
 
     Component.onCompleted: {
         mainPage.width = browserFrame.width

@@ -22,61 +22,64 @@ import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 import "private"
 
-/**Documented API
-
-Imports:
-        QtQuick 2.1
-
-Description:
-        Overlay Drawers are used to expose additional UI elements needed for
-        small secondary tasks for which the main UI elements are not needed.
-        For example in Okular Active, an Overlay Drawer is used to display
-        thumbnails of all pages within a document along with a search field.
-        This is used for the distinct task of navigating to another page.
-
-Properties:
-        bool opened:
-        If true the drawer is open showing the contents of the "drawer"
-        component.
-
-        Item page:
-        It's the default property. it's the main content of the drawer page,
-        the part that is always shown
-
-        Item contentItem:
-        It's the part that can be pulled in and out, will act as a sidebar.
-**/
+/**
+ * Overlay Drawers are used to expose additional UI elements needed for
+ * small secondary tasks for which the main UI elements are not needed.
+ * For example in Okular Active, an Overlay Drawer is used to display
+ * thumbnails of all pages within a document along with a search field.
+ * This is used for the distinct task of navigating to another page.
+ *
+ */
 AbstractDrawer {
     id: root
     anchors.fill: parent
     z: 9999
 
+    /**
+     * page: Item
+     * It's the default property. it's the main content of the drawer page,
+     * the part that is always shown
+     */
     default property alias page: mainPage.data
+
+    /**
+     * contentItem: Item
+     * It's the part that can be pulled in and out, will act as a sidebar.
+     */
     property Item contentItem
+
+    /**
+     * opened: bool
+     * If true the drawer is open showing the contents of the "drawer"
+     * component.
+     */
     property alias opened: mainFlickable.open
+
+    /**
+     * edge: enumeration
+     * This property holds the edge of the content item at which the drawer
+     * will open from.
+     * The acceptable values are:
+     * Qt.TopEdge: The top edge of the content item.
+     * Qt.LeftEdge: The left edge of the content item (default).
+     * Qt.RightEdge: The right edge of the content item.
+     * Qt.BottomEdge: The bottom edge of the content item.
+     */
     property int edge: Qt.LeftEdge
+
+    /**
+     * position: real
+     * This property holds the position of the drawer relative to its
+     * final destination. That is, the position will be 0 when the
+     * drawer is fully closed, and 1 when fully open.
+     */
     property real position: 0
-    onPositionChanged: {
-        if (!mainFlickable.flicking && !mainFlickable.dragging && !mainAnim.running) {
-            switch (root.edge) {
-            case Qt.RightEdge:
-                mainFlickable.contentX = drawerPage.width * position;
-                break;
-            case Qt.LeftEdge:
-                mainFlickable.contentX = drawerPage.width * (1-position);
-                break;
-            case Qt.BottomEdge:
-                mainFlickable.contentY = drawerPage.height * position;
-                break;
-            }
-        }
-    }
-    onContentItemChanged: {
-        contentItem.parent = drawerPage
-        contentItem.anchors.fill = drawerPage
-    }
 
-
+    /**
+     * open: function
+     * This method opens the drawer, animating the movement if a
+     * valid animation has been set.
+     */
     function open () {
         mainAnim.to = 0;
         switch (root.edge) {
@@ -95,6 +98,12 @@ AbstractDrawer {
         mainAnim.running = true;
         mainFlickable.open = true;
     }
+
+    /**
+     * close: function
+     * This method closes the drawer, animating the movement if a
+     * valid animation has been set.
+     */
     function close () {
         switch (root.edge) {
         case Qt.RightEdge:
@@ -110,6 +119,31 @@ AbstractDrawer {
         }
         mainAnim.running = true;
         mainFlickable.open = false;
+    }
+
+    /**
+     * clicked: signal
+     * This signal is emitted when the drawer is clicked.
+     */
+    
+    onPositionChanged: {
+        if (!mainFlickable.flicking && !mainFlickable.dragging && !mainAnim.running) {
+            switch (root.edge) {
+            case Qt.RightEdge:
+                mainFlickable.contentX = drawerPage.width * position;
+                break;
+            case Qt.LeftEdge:
+                mainFlickable.contentX = drawerPage.width * (1-position);
+                break;
+            case Qt.BottomEdge:
+                mainFlickable.contentY = drawerPage.height * position;
+                break;
+            }
+        }
+    }
+    onContentItemChanged: {
+        contentItem.parent = drawerPage
+        contentItem.anchors.fill = drawerPage
     }
 
     Item {

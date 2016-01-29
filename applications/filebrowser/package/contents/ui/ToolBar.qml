@@ -230,7 +230,7 @@ Item {
         anchors {
             bottom: parent.bottom
         }
-        x: resourceBrowser.visibleDrawerWidth - tabsRow.width
+        x: 0
         z: 900
         PlasmaComponents.ButtonRow {
             id: tabsRow

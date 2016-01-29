@@ -23,16 +23,131 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 
+/**
+ * A drawer specialization intended for the global actions of the application
+ * valid regardless of the application state (think about the menubar
+ * of a desktop application).
+ *
+ * Example usage:
+ * @code
+ * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+ *
+ * MobileComponents.ApplicationWindow {
+ *  [...]
+ *     globalDrawer: MobileComponents.GlobalDrawer {
+ *         actions: [
+ *            MobileComponents.Action {
+ *                text: "View"
+ *                iconName: "view-list-icons"
+ *                MobileComponents.Action {
+ *                        text: "action 1"
+ *                }
+ *                MobileComponents.Action {
+ *                        text: "action 2"
+ *                }
+ *                MobileComponents.Action {
+ *                        text: "action 3"
+ *                }
+ *            },
+ *            MobileComponents.Action {
+ *                text: "Sync"
+ *                iconName: "folder-sync"
+ *            }
+ *         ]
+ *     }
+ *  [...]
+ * }
+ * @endcode
+ *
+ * @inherit AbstractDrawer
+ */
 OverlayDrawer {
     id: root
     edge: Qt.LeftEdge
 
-    default property alias content: mainContent.data
-
+    /**
+     * title: string
+     * A title to be displayed on top of the drawer
+     */
     property alias title: heading.text
+
+    /**
+     * icon: var
+     * An icon to be displayed alongside the title.
+     * It can be a QIcon, a fdo-compatible icon name, or any url understood by Image
+     */
     property alias titleIcon: headingIcon.source
+
+    /**
+     * bannerImageSource: string
+     * An image to be used as background for the title and icon for
+     * a decorative purpose.
+     * It accepts any url format supported by Image
+     */
     property alias bannerImageSource: bannerImage.source
+
+    /**
+     * actions: list<Action>
+     * The list of actions can be nested having a tree structure.
+     * A tree depth bigger than 2 is discouraged.
+     *
+     * Example usage:
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     *
+     * MobileComponents.ApplicationWindow {
+     *  [...]
+     *     globalDrawer: MobileComponents.GlobalDrawer {
+     *         actions: [
+     *            MobileComponents.Action {
+     *                text: "View"
+     *                iconName: "view-list-icons"
+     *                MobileComponents.Action {
+     *                        text: "action 1"
+     *                }
+     *                MobileComponents.Action {
+     *                        text: "action 2"
+     *                }
+     *                MobileComponents.Action {
+     *                        text: "action 3"
+     *                }
+     *            },
+     *            MobileComponents.Action {
+     *                text: "Sync"
+     *                iconName: "folder-sync"
+     *            }
+     *         ]
+     *     }
+     *  [...]
+     * }
+     * @endcode
+     */
     property list<Action> actions
+
+
+    /**
+     * content: list<Item> default property
+     * Any random Item can be instantiated inside the drawer and
+     * will be displayed underneath the actions list.
+     *
+     * Example usage:
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     *
+     * MobileComponents.ApplicationWindow {
+     *  [...]
+     *     globalDrawer: MobileComponents.GlobalDrawer {
+     *         actions: [...]
+     *         Button {
+     *             text: "Button"
+     *             onClicked: //do stuff
+     *         }
+     *     }
+     *  [...]
+     * }
+     * @endcode
+     */
+    default property alias content: mainContent.data
 
     contentItem: ColumnLayout {
         id: mainColumn

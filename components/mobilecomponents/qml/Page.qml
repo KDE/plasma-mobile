@@ -22,33 +22,76 @@ import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 import "private"
 
+/**
+ * Page is a container for all the app pages: everything pushed to the
+ * ApplicationWindow stackView should be a Page instabnce
+ */
 Rectangle {
     id: root
 
     /**
-     * type:PageStack
-     * The page stack that this page is owned by.
-     */
-    property Item pageStack
-
-    /**
-     * Defines the toolbar contents for the page. If the page stack is set up
-     * using a toolbar instance, it automatically shows the currently active
-     * page's toolbar contents in the toolbar.
-     *
-     * The default value is null resulting in the page's toolbar to be
-     * invisible when the page is active.
-     */
-    property Item tools: null
-
-    /**
+     * contextualActions: list<QtObject>
      * Defines the contextual actions for the page:
      * an easy way to assign actions in the right sliding panel
+     *
+     * Example usage:
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     *
+     * MobileComponents.ApplicationWindow {
+     *  [...]
+     *     contextDrawer: MobileComponents.ContextDrawer {
+     *         id: contextDrawer
+     *     }
+     *  [...]
+     * }
+     * @endcode
+     *
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     *
+     * MobileComponents.Page {
+     *   [...]
+     *     contextualActions: [
+     *         MobileComponents.Action {
+     *             iconName: "edit"
+     *             text: "Action text"
+     *             onTriggered: {
+     *                 // do stuff
+     *             }
+     *         },
+     *         MobileComponents.Action {
+     *             iconName: "edit"
+     *             text: "Action text"
+     *             onTriggered: {
+     *                 // do stuff
+     *             }
+     *         }
+     *     ]
+     *   [...]
+     * }
+     * @endcode
      */
     property list<QtObject> contextualActions
 
     /**
-     * An optional single action for the action button
+     * mainAction: Action
+     * An optional single action for the action button.
+     * it can be a MobileComponents.Action or a QAction
+     *
+     * Example usage:
+     *
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     * MobileComponents.Page {
+     *     mainAction: MobileComponents.Action {
+     *         iconName: "edit"
+     *         onTriggered: {
+     *             // do stuff
+     *         }
+     *     }
+     * }
+     * @endcode
      */
     property QtObject mainAction
 
