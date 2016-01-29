@@ -19,7 +19,6 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.2
-import QtQuick.Controls 1.0
 import org.kde.plasma.mobilecomponents 0.2
 import QtGraphicalEffects 1.0
 
@@ -27,6 +26,9 @@ import QtGraphicalEffects 1.0
  * An item delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
+ * Every item has an handle to uncover a series of Actions.
+ * Useful if each element has a common set of actions,
+ * like answer ofdelete to email messages.
  *
  * @inherit QtQuick.Item
  */
@@ -35,11 +37,12 @@ Item {
     default property alias content: paddingItem.data
 
     /**
-     * type:bool Holds if the item emits signals related to mouse interaction.
+     * type: bool
+     * Holds if the item emits signals related to mouse interaction.
      *
      * The default value is false.
      */
-    property alias enabled: itemMouse.enabled
+    property alias supportsMouseEvents: itemMouse.enabled
     //item has been clicked or pressed+hold
 
     /**
@@ -60,6 +63,7 @@ Item {
     signal pressAndHold
 
     /**
+     * type: bool
      * If true makes the list item look as checked or pressed. It has to be set
      * from the code, it won't change by itself.
      */
@@ -68,6 +72,7 @@ Item {
     property bool checked: false
 
     /**
+     * type: bool
      * If true the item will be a delegate for a section, so will look like a
      * "title" for the otems under it.
      */
@@ -75,17 +80,20 @@ Item {
     property bool sectionDelegate: false
 
     /**
+     * type: bool
      * True if the list item contains mouse
      */
     property alias containsMouse: itemMouse.containsMouse
 
     /**
+     * type: list<Action>
      * Defines the actions for the page: at most 4 buttons will
      * contain the actions at the bottom of the page, if the main
      * item of the page is a Flickable or a ScrllArea, it will
      * control the visibility of the actions.
      */
-    property alias actions: internalActions.data
+    //property alias actions: internalActions.data
+    property list<Action> actions
 
     Item {
         id: internalActions
@@ -96,6 +104,8 @@ Item {
 
     property int implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing * 2
 
+
+    opacity: enabled ? 1 : 0.6
 
     Rectangle {
         id: shadowHolder

@@ -32,12 +32,12 @@ Item {
     default property alias content: paddingItem.data
 
     /**
-     * type:bool Holds if the item emits signals related to mouse interaction.
+     * type:bool
+     * Holds if the item emits signals related to mouse interaction.
      *
      * The default value is false.
      */
-    property alias enabled: itemMouse.enabled
-    //item has been clicked or pressed+hold
+    property alias supportsMouseEvents: itemMouse.enabled
 
     /**
      * This signal is emitted when there is a click.
@@ -58,6 +58,7 @@ Item {
     signal pressAndHold
 
     /**
+     * type: bool
      * If true makes the list item look as checked or pressed. It has to be set
      * from the code, it won't change by itself.
      */
@@ -66,6 +67,7 @@ Item {
     property bool checked: false
 
     /**
+     * type: bool
      * If true the item will be a delegate for a section, so will look like a
      * "title" for the otems under it.
      */
@@ -73,6 +75,7 @@ Item {
     property bool sectionDelegate: false
 
     /**
+     * type: bool
      * True if the list item contains mouse
      */
     property alias containsMouse: itemMouse.containsMouse
@@ -82,6 +85,8 @@ Item {
 
     property int implicitHeight: paddingItem.childrenRect.height + Units.smallSpacing*2
 
+
+    opacity: enabled ? 1 : 0.6
 
     MouseArea {
         id: itemMouse

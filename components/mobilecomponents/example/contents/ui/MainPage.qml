@@ -94,7 +94,7 @@ MobileComponents.Page {
                 }
             }
             delegate: MobileComponents.ListItemWithActions {
-                enabled: true
+                supportsMouseEvents: true
                 MobileComponents.Label {
                     enabled: true
                     text: model.text
@@ -109,11 +109,11 @@ MobileComponents.Page {
                 }
                 checked: root.pageStack.currentPage == ownPage
                 actions: [
-                    Controls.Action {
+                    MobileComponents.Action {
                         iconName: "document-decrypt"
                         onTriggered: print("Action 1 clicked")
                     },
-                    Controls.Action {
+                    MobileComponents.Action {
                         iconName: "mail-reply-sender"
                     }]
             }

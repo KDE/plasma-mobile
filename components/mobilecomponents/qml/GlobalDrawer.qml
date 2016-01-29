@@ -144,13 +144,13 @@ OverlayDrawer {
 
                 footer: BasicListItem {
                     visible: level > 0
-                    enabled: true
+                    supportsMouseEvents: true
                     icon: "go-previous"
                     label: typeof i18n !== "undefined" ? i18n("Back") : "Back"
                     onClicked: pageRow.pop()
                 }
                 delegate: BasicListItem {
-                    enabled: true
+                    supportsMouseEvents: true
                     checked: modelData.checked
                     icon: modelData.iconName
                     label: modelData.text

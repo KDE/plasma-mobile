@@ -25,13 +25,25 @@ import org.kde.plasma.mobilecomponents 0.2
  * An item delegate for the primitive ListView component.
  *
  * It's intended to make all listviews look coherent.
+ * It has a default icon and a label
  *
- * @inherit QtQuick.Item
+ * @inherit AbstractListItem
  */
-ListItem {
+AbstractListItem {
     id: listItem
 
+    /**
+     * string: bool
+     * A single text label the list item will contain
+     */
     property string label
+
+    /**
+     * icon: var
+     * A single icon that will be displayed in the list item. The icon can
+     * be either a QIcon, a string name of a fdo compatible name,
+     * or any url accepted by the Image element.
+     */
     property var icon
 
     RowLayout {
