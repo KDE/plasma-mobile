@@ -22,9 +22,32 @@ import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
+
+/**
+ * RefreshableScrollView is a scroll view for any Flickable that supports the
+ * "scroll down to refresh" behavior, and also allows the contents of the
+ * flickable to have more top margins in order to make possible to scroll down the list
+ * to reach it with the thumb while using the phone with a single hand.
+ *
+ * @inherit QtQuick.Controls.Scrollview
+ */
 ScrollView {
     id: root
+
+    /**
+     * type: bool
+     * If true the list is asking for refresh and will show a loading spinner.
+     * it will automatically be set to true when the user pulls down enough the list.
+     * This signals the application logic to start its refresh procedure.
+     * The application itself will have to set back this property to false when done.
+     */
     property bool refreshing: false
+
+    /**
+     * type: bool
+     * If true the list supports the "pull down to refresh" behavior.
+     */
+    property bool supportsRefreshing: false
 
     children: [
         Item {
@@ -37,7 +60,7 @@ ScrollView {
                 anchors.centerIn: parent
                 running: root.refreshing
                 visible: root.refreshing || parent.y < root.flickableItem.topMargin
-                opacity: root.refreshing ? 1 : (parent.y/(busyIndicator.height*2))
+                opacity: supportsRefreshing ? (root.refreshing ? 1 : (parent.y/(busyIndicator.height*2))) : 0
                 rotation: root.refreshing ? 0 : 360 * opacity
             }
             Rectangle {
@@ -51,20 +74,23 @@ ScrollView {
                 height: 1
             }
             onYChanged: {
+                if (!supportsRefreshing) {
+                    return;
+                }
                 if (!root.refreshing && y > busyIndicator.height*2) {
                     root.refreshing = true;
                 }
             }
             Binding {
                 target: root.flickableItem
-                property: "bottomMargin"
-                value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
+                property: "topMargin"
+                value: height/2
             }
 
             Binding {
                 target: root.flickableItem
-                property: "topMargin"
-                value: height/2
+                property: "bottomMargin"
+                value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
             }
         }
     ]

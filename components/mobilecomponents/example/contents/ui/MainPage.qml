@@ -51,6 +51,7 @@ MobileComponents.Page {
     MobileComponents.RefreshableScrollView {
         id: scrollView
         anchors.fill:parent
+        supportsRefreshing: true
         onRefreshingChanged: {
             if (refreshing) {
                 refreshRequestTimer.running = true;
