@@ -71,8 +71,8 @@ ApplicationWindow {
                 } else if (root.globalDrawer && root.globalDrawer.opened) {
                     root.globalDrawer.close();
                     event.accepted = true;
-                } else if (stackView.depth > 1) {
-                    stackView.pop();
+                } else if (__pageStack.depth > 1) {
+                    __pageStack.pop();
                     event.accepted = true;
                 }
             }
