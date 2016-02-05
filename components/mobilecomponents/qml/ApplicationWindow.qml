@@ -60,7 +60,7 @@ ApplicationWindow {
         id: __pageStack
         anchors {
             fill: parent
-            bottomMargin: Qt.inputMethod.keyboardRectangle.height
+            bottomMargin: Qt.platform.os == "android" ? 0 : Qt.inputMethod.keyboardRectangle.height
         }
         focus: true
         Keys.onReleased: {
