@@ -86,6 +86,13 @@ Item {
     property alias containsMouse: itemMouse.containsMouse
 
     /**
+     * type: bool
+     * True if the separator between items is visible
+     * default: true
+     */
+    property alias separatorVisible: separator.visible
+
+    /**
      * type: list<Action>
      * Defines the actions for the list item: at most 4 buttons will
      * contain the actions for the item, that can be revealed by
@@ -282,6 +289,7 @@ Item {
 
 
     Rectangle {
+        id: separator
         color: Theme.textColor
         opacity: 0.2
         anchors {
@@ -289,7 +297,7 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
-        height: 1
+        height: Math.round(Units.smallSpacing / 3);
     }
 
     Accessible.role: Accessible.ListItem
