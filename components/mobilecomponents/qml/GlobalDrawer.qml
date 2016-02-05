@@ -226,7 +226,7 @@ OverlayDrawer {
         }
 
         Controls.StackView {
-            id: pageRow
+            id: stackView
             Layout.fillWidth: true
             Layout.fillHeight: true
             initialItem: menuComponent
@@ -262,7 +262,7 @@ OverlayDrawer {
                     supportsMouseEvents: true
                     icon: "go-previous"
                     label: typeof i18n !== "undefined" ? i18n("Back") : "Back"
-                    onClicked: pageRow.pop()
+                    onClicked: stackView.pop()
                 }
                 delegate: BasicListItem {
                     supportsMouseEvents: true
@@ -285,10 +285,10 @@ OverlayDrawer {
 
                     onClicked: {
                         if (modelData.children.length > 0) {
-                            pageRow.push(menuComponent, {"model": modelData.children, "level": level + 1});
+                            stackView.push(menuComponent, {"model": modelData.children, "level": level + 1});
                         } else {
                             modelData.trigger();
-                            pageRow.pop(pageRow.initialPage);
+                            stackView.pop(stackView.initialItem);
                             root.opened = false;
                         }
                     }

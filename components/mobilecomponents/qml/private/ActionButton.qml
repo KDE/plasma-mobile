@@ -28,7 +28,7 @@ MouseArea {
     property bool checkable: false
     property bool checked: false
     //either Action or QAction should work here
-    property QtObject action: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.mainAction : null
+    property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
 
     implicitWidth: parent.width
     implicitHeight: Units.iconSizes.medium

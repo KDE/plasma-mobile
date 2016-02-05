@@ -50,84 +50,124 @@ import "private/PageStack.js" as Engine
 Item {
     id: actualRoot
 
-    width: parent ? parent.width : 0
-    height: parent ? parent.height : 0
+    anchors.fill: parent
 
-
+//BEGIN PROPERTIES
+    /**
+     * This property holds the number of items currently pushed onto the view
+     */
     property int depth: Engine.getDepth()
-    property Item currentPage: null
-    property Item lastVisiblePage: currentPage
-    property ToolBar toolBar
+
+    /**
+     * The last Page in the Row
+     */
+    property Item lastItem: null
+
+    /**
+     * The currently visible Item
+     */
+    property Item currentItem: currentItem
+
+    /**
+     * The initial item when this PageRow is created
+     */
     property variant initialPage
-    //A column is wide enough for 30 characters
+
+    /**
+     * The default width for a column
+     * default is wide enough for 30 characters
+     */
     property int columnWidth: Math.round(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.round(parent.width/(Units.gridUnit*30)) : width
-    property alias clip: scrollArea.clip
 
-    // Indicates whether there is an ongoing page transition.
-    property bool busy: internal.ongoingTransitionCount > 0
+//END PROPERTIES
 
-    // Pushes a page on the stack.
-    // The page can be defined as a component, item or string.
-    // If an item is used then the page will get re-parented.
-    // If a string is used then it is interpreted as a url that is used to load a page component.
-    //
-    // The page can also be given as an array of pages. In this case all those pages will be pushed
-    // onto the stack. The items in the stack can be components, items or strings just like for single
-    // pages. Additionally an object can be used, which specifies a page and an optional properties
-    // property. This can be used to push multiple pages while still giving each of them properties.
-    // When an array is used the transition animation will only be to the last page.
-    //
-    // The properties argument is optional and allows defining a map of properties to set on the page.
-    // If the immediate argument is true then no transition animation is performed.
-    // Returns the page instance.
-    function push(page, properties, immediate)
-    {
-        pop(lastVisiblePage, true);
+//BEGIN FUNCTIONS
+    /**
+     * Pushes a page on the stack.
+     * The page can be defined as a component, item or string.
+     * If an item is used then the page will get re-parented.
+     * If a string is used then it is interpreted as a url that is used to load a page 
+     * component.
+     *
+     * @param page The page can also be given as an array of pages.
+     *     In this case all those pages will
+     *     be pushed onto the stack. The items in the stack can be components, items or
+     *     strings just like for single pages.
+     *     Additionally an object can be used, which specifies a page and an optional
+     *     properties property.
+     *     This can be used to push multiple pages while still giving each of
+     *     them properties.
+     *     When an array is used the transition animation will only be to the last page.
+     *
+     * @param properties The properties argument is optional and allows defining a
+     * map of properties to set on the page.
+     * @return The new created page
+     */
+    function push(page, properties) {
+        pop(currentItem, true);
         scrollAnimation.running = false;
-        var item = Engine.push(page, properties, false, immediate)
+        var item = Engine.push(page, properties, false, false)
         scrollToLevel(depth)
         return item
     }
 
-    // Pops a page off the stack.
-    // If page is specified then the stack is unwound to that page, to unwind to the first page specify
-    // page as null. If the immediate argument is true then no transition animation is performed.
-    // Returns the page instance that was popped off the stack.
-    function pop(page, immediate)
-    {
+    /**
+     * Pops a page off the stack.
+     * @param page If page is specified then the stack is unwound to that page,
+     * to unwind to the first page specify
+     * page as null.
+     * @return The page instance that was popped off the stack.
+     */
+    function pop(page) {
         scrollToLevel(depth-1);
-        return Engine.pop(page, immediate);
+        return Engine.pop(page, false);
     }
 
-    // Replaces a page on the stack.
-    // See push() for details.
-    function replace(page, properties, immediate)
-    {
-        pop(lastVisiblePage, true);
+    /**
+     * Replaces a page on the stack.
+     * @param page The page can also be given as an array of pages.
+     *     In this case all those pages will
+     *     be pushed onto the stack. The items in the stack can be components, items or
+     *     strings just like for single pages.
+     *     Additionally an object can be used, which specifies a page and an optional
+     *     properties property.
+     *     This can be used to push multiple pages while still giving each of
+     *     them properties.
+     *     When an array is used the transition animation will only be to the last page.
+     * @param properties The properties argument is optional and allows defining a
+     * map of properties to set on the page.
+     * @see push() for details.
+     */
+    function replace(page, properties) {
+        pop(currentItem, true);
         scrollAnimation.running = false;
-        var item = Engine.push(page, properties, true, immediate);
+        var item = Engine.push(page, properties, true, false);
         scrollToLevel(depth)
         return item
     }
 
-    // Clears the page stack.
-    function clear()
-    {
+    /**
+     * Clears the page stack.
+     * Destroy (or reparent) all the pages contained.
+     */
+    function clear() {
         return Engine.clear();
     }
 
-    // Iterates through all pages (top to bottom) and invokes the specified function.
-    // If the specified function returns true the search stops and the find function
-    // returns the page that the iteration stopped at. If the search doesn't result
-    // in any page being found then null is returned.
-    function find(func)
-    {
+    /**
+     * Iterates through all pages (top to bottom) and invokes the specified function.
+     * If the specified function returns true the search stops and the find function
+     * returns the page that the iteration stopped at. If the search doesn't result
+     * in any page being found then null is returned.
+     */
+    function find(func) {
         return Engine.find(func);
     }
 
-    // Scroll the view to have the page of the given level as first item
-    function scrollToLevel(level)
-    {
+    /**
+     * Scroll the view to have the page of the given level as first item
+     */
+    function scrollToLevel(level) {
         if (level < 0 || level > depth || root.width < width) {
             return
         }
@@ -136,6 +176,10 @@ Item {
         scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
         scrollAnimation.running = true;
     }
+
+//END FUNCTIONS
+
+    property alias clip: scrollArea.clip
 
     SequentialAnimation {
         id: scrollAnimation
@@ -153,9 +197,9 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
-                actualRoot.lastVisiblePage = Engine.pageStack[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
-                if (!actualRoot.lastVisiblePage) {
-                    actualRoot.lastVisiblePage = actualRoot.currentPage;
+                actualRoot.currentItem = Engine.pageStack[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
+                if (!actualRoot.currentItem) {
+                    actualRoot.currentItem = actualRoot.lastItem;
                 }
             }
         }
@@ -163,9 +207,9 @@ Item {
 
     // Called when the page stack visibility changes.
     onVisibleChanged: {
-        if (currentPage) {
+        if (lastItem) {
             if (visible)
-                currentPage.visible = currentPage.parent.visible = true;
+                lastItem.visible = lastItem.parent.visible = true;
         }
     }
 
@@ -191,8 +235,10 @@ Item {
     }
     Component.onCompleted: {
         internal.completed = true
-        if (initialPage && depth == 0)
-            push(initialPage, null, true)
+        if (initialPage && depth == 0) {
+            push(initialPage, null, true);
+        }
+        actualRoot.currentItem = actualRoot.lastItem;
     }
 
     QtObject {

@@ -96,12 +96,6 @@ ApplicationWindow {
     id: root
 
     /**
-     * initialPage: Page
-     * The first page that will be loaded when the application starts
-     */
-    property alias initialPage: __pageStack.initialPage
-
-    /**
      * pageStack: StackView
      * Readonly.
      * The stack used to allocate the pages and to manage the transitions

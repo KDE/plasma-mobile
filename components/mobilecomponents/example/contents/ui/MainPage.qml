@@ -106,13 +106,13 @@ MobileComponents.Page {
                 }
                 property Item ownPage
                 onClicked: {
-                    root.pageStack.pop(root.initialPage);
+                    root.pageStack.pop(root.initialItem);
                     if (!model.component) {
                         return;
                     }
                     ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
                 }
-                checked: root.pageStack.currentPage == ownPage
+                checked: ownPage && root.pageStack.lastItem == ownPage
                 actions: [
                     MobileComponents.Action {
                         iconName: "document-decrypt"

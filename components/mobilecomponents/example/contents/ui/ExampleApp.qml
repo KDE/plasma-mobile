@@ -73,12 +73,12 @@ MobileComponents.ApplicationWindow {
                 iconName: "configure"
                 checkable: true
                 //Need to do this, otherwise it breaks the bindings
-                property bool current: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.objectName == "settingsPage" : false
+                property bool current: pageStack.currentItem ? pageStack.currentItem.objectName == "settingsPage" : false
                 onCurrentChanged: {
                     checked = current;
                 }
                 onTriggered: {
-                    pageStack.pop(pageStack.initialPage);
+                    pageStack.pop(root.initialPage);
                     pageStack.push(settingsComponent);
                 }
             }
@@ -120,7 +120,8 @@ MobileComponents.ApplicationWindow {
             }
         }
     }
-    initialPage: mainPageComponent
+
+    pageStack.initialPage: mainPageComponent
 
     Component {
         id: settingsComponent

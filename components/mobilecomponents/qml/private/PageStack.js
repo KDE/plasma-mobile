@@ -52,7 +52,7 @@ function getDepth() {
 // Pushes a page on the stack.
 function push(page, properties, replace, immediate) {
     // page order sanity check
-    if ((!replace && page == currentPage)
+    if ((!replace && page == lastItem)
         || (replace && pageStack.length > 1
         && page == pageStack[pageStack.length - 2].page)) {
         throw new Error("Cannot navigate so that the resulting page stack has two consecutive entries of the same page instance.");
@@ -101,7 +101,7 @@ function push(page, properties, replace, immediate) {
     pageStack.push(container);
 
     depth = pageStack.length;
-    currentPage = container.page;
+    lastItem = container.page;
 
     // perform page transition
     //FIXME: this should be in for PageStack, out for PageRow?
@@ -195,7 +195,7 @@ function pop(page, immediate) {
         }
 
         depth = pageStack.length;
-        currentPage = container.page;
+        lastItem = container.page;
 
         // perform page transition
         var orientationChange = orientationChanges(oldContainer.page, container.page);
@@ -227,7 +227,7 @@ function clear() {
         container.cleanup();
     }
     depth = 0;
-    currentPage = null;
+    lastItem = null;
 }
 
 // Iterates through all pages in the stack (top to bottom) to find a page.

@@ -80,7 +80,7 @@ OverlayDrawer {
      * This can be any type of object that a ListView can accept as model. 
      * It expects items compatible with either QAction or MobileComponents Action
      */
-    property var actions: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.contextualActions : null
+    property var actions: pageStack.currentItem ? pageStack.currentItem.contextualActions : null
     enabled: menu.count > 0
     edge: Qt.RightEdge
 
