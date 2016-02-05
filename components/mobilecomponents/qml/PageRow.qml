@@ -69,6 +69,11 @@ Item {
     property Item currentItem: currentItem
 
     /**
+     * the index of the currently visible Item
+     */
+    property int currentIndex: 0
+
+    /**
      * The initial item when this PageRow is created
      */
     property variant initialPage
@@ -107,7 +112,8 @@ Item {
         pop(currentItem, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, false, false)
-        scrollToLevel(depth)
+        actualRoot.currentIndex = depth;
+        internal.syncWithCurrentIndex();
         return item
     }
 
@@ -119,7 +125,8 @@ Item {
      * @return The page instance that was popped off the stack.
      */
     function pop(page) {
-        scrollToLevel(depth-1);
+        actualRoot.currentIndex = depth;
+        internal.syncWithCurrentIndex();
         return Engine.pop(page, false);
     }
 
@@ -142,7 +149,8 @@ Item {
         pop(currentItem, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, true, false);
-        scrollToLevel(depth)
+        actualRoot.currentIndex = depth;
+        internal.syncWithCurrentIndex();
         return item
     }
 
@@ -164,20 +172,10 @@ Item {
         return Engine.find(func);
     }
 
-    /**
-     * Scroll the view to have the page of the given level as first item
-     */
-    function scrollToLevel(level) {
-        if (level < 0 || level > depth || root.width < width) {
-            return
-        }
-
-        var firstLevel = Math.max(0, level - mainFlickable.width/columnWidth + 1);
-        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
-        scrollAnimation.running = true;
-    }
-
 //END FUNCTIONS
+    onCurrentIndexChanged: {
+        internal.syncWithCurrentIndex();
+    }
 
     property alias clip: scrollArea.clip
 
@@ -197,7 +195,9 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
-                actualRoot.currentItem = Engine.pageStack[Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth)].page;
+                actualRoot.currentIndex = Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth);
+                internal.syncWithCurrentIndex();
+                actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
                 if (!actualRoot.currentItem) {
                     actualRoot.currentItem = actualRoot.lastItem;
                 }
@@ -252,6 +252,16 @@ Item {
 
         // Duration of transition animation (in ms)
         property int transitionDuration: Units.longDuration
+
+        function syncWithCurrentIndex() {
+            if (currentIndex < 0 || currentIndex > depth || root.width < width) {
+                return
+            }
+
+            var firstLevel = Math.max(0, currentIndex - mainFlickable.width/columnWidth + 1);
+            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+            scrollAnimation.running = true;
+        }
     }
 
     ScrollView {
@@ -278,7 +288,8 @@ Item {
                 }
             }
             onMovementEnded: {
-                scrollToLevel(Math.round(contentX/columnWidth)+1)
+                actualRoot.currentIndex = (Math.round(contentX/columnWidth)+1);
+                internal.syncWithCurrentIndex();
             }
             onFlickEnded: {
                 movementEnded();
