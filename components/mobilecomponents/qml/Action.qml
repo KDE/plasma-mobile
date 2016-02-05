@@ -32,13 +32,25 @@ Controls.Action {
      * visible: bool
      * True (default) when the graphic representation of the action
      * is supposed to be visible.
+     * It's up to the action representation to honor this property.
      */
     property bool visible: true
 
     /**
      * children: list<Action>
      * A list of children actions.
-     * Useful for tree-like manus
+     * Useful for tree-like menus
+     * @code
+     * Action {
+     *    text: "Tools"
+     *    Action {
+     *        text: "Action1"
+     *    }
+     *    Action {
+     *        text: "Action2"
+     *    }
+     * }
+     * @endcode
      */
     default property alias children: root.__children
     property list<QtObject> __children

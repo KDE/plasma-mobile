@@ -87,6 +87,8 @@ Item {
 
     opacity: enabled ? 1 : 0.6
 
+    height: visible ? implicitHeight : 0
+
     MouseArea {
         id: itemMouse
         property bool changeBackgroundOnPress: !listItem.checked && !listItem.sectionDelegate

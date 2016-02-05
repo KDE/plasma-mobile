@@ -29,16 +29,19 @@ MobileComponents.Page {
     }
 
     contextualActions: [
-        Controls.Action {
+        MobileComponents.Action {
             text:"Action 1"
             iconName: "document-decrypt"
             onTriggered: print("Action 1 clicked")
         },
-        Controls.Action {
+        MobileComponents.Action {
+            id: shareAction
+            visible: checkableAction.checked
             text:"Action 2"
             iconName: "document-share"
         },
-        Controls.Action {
+        MobileComponents.Action {
+            id: checkableAction
             text:"Checkabke"
             checkable: true
             iconName: "dashboard-show"

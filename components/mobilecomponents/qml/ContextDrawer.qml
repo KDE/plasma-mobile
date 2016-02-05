@@ -124,6 +124,7 @@ OverlayDrawer {
                 supportsMouseEvents: true
                 label: model ? model.text : modelData.text
                 enabled: model ? model.enabled : modelData.enabled
+                visible: model ? model.visible : modelData.visible
                 opacity: enabled ? 1.0 : 0.6
                 onClicked: {
                     if (modelData && modelData.trigger !== undefined) {
