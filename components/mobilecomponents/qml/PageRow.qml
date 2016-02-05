@@ -80,9 +80,11 @@ Item {
 
     /**
      * The default width for a column
-     * default is wide enough for 30 characters
+     * default is wide enough for 30 characters.
+     * Pages can override it with their Layout.fillWidth,
+     * implicitWidth Layout.minimumWidth etc.
      */
-    property int columnWidth: Math.round(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.round(parent.width/(Units.gridUnit*30)) : width
+    property int defaultColumnWidth: Math.round(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.round(parent.width/(Units.gridUnit*30)) : width
 
 //END PROPERTIES
 
@@ -195,7 +197,7 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
-                actualRoot.currentIndex = Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/columnWidth);
+                actualRoot.currentIndex = Math.min(Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/defaultColumnWidth), actualRoot.depth-1);
                 internal.syncWithCurrentIndex();
                 actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
                 if (!actualRoot.currentItem) {
@@ -230,8 +232,8 @@ Item {
     }
 
     onWidthChanged: {
-        var firstLevel = Math.max(0, depth - mainFlickable.width/columnWidth + 1);
-        mainFlickable.contentX = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+        var firstLevel = Math.max(0, depth - mainFlickable.width/defaultColumnWidth + 1);
+        mainFlickable.contentX = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
     }
     Component.onCompleted: {
         internal.completed = true
@@ -258,8 +260,8 @@ Item {
                 return
             }
 
-            var firstLevel = Math.max(0, currentIndex - mainFlickable.width/columnWidth + 1);
-            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+            var firstLevel = Math.max(0, currentIndex - mainFlickable.width/defaultColumnWidth + 1);
+            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
             scrollAnimation.running = true;
         }
     }
@@ -277,7 +279,7 @@ Item {
             Row {
                 id: root
                 spacing: -Units.gridUnit * 8
-                width: Math.max((depth-1+children[children.length-1].takenColumns) * columnWidth, childrenRect.width - Units.gridUnit * 8)
+                width: Math.max((depth-1+children[children.length-1].takenColumns) * defaultColumnWidth, childrenRect.width - Units.gridUnit * 8)
 
                 height: parent.height
                 Behavior on width {
@@ -288,7 +290,7 @@ Item {
                 }
             }
             onMovementEnded: {
-                actualRoot.currentIndex = (Math.round(contentX/columnWidth)+1);
+                actualRoot.currentIndex = (Math.round(contentX/defaultColumnWidth)+1);
                 internal.syncWithCurrentIndex();
             }
             onFlickEnded: {
@@ -363,13 +365,13 @@ Item {
 
                 property int takenColumns: {
                     if (container.page && container.page.Layout && container.page.Layout.fillWidth) {
-                        return Math.max(1, Math.round(actualRoot.width/columnWidth)-(container.x > 0 ? 1: 0));
+                        return Math.max(1, Math.round(actualRoot.width/defaultColumnWidth)-(container.x > 0 ? 1: 0));
                     } else {
-                        return Math.max(1, Math.round(container.page ? container.page.implicitWidth/columnWidth : 1));
+                        return Math.max(1, Math.round(container.page ? container.page.implicitWidth/defaultColumnWidth : 1));
                     }
                 }
 
-                width: (container.pageDepth >= actualRoot.depth ? Math.min(actualRoot.width, takenColumns*columnWidth) : columnWidth)
+                width: (container.pageDepth >= actualRoot.depth ? Math.min(actualRoot.width, takenColumns*defaultColumnWidth) : defaultColumnWidth)
             }
 
             Rectangle {

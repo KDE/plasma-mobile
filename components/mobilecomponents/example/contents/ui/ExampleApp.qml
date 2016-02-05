@@ -78,7 +78,6 @@ MobileComponents.ApplicationWindow {
                     checked = current;
                 }
                 onTriggered: {
-                    pageStack.pop(root.initialPage);
                     pageStack.push(settingsComponent);
                 }
             }
