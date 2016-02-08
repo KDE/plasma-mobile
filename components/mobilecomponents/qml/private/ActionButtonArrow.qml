@@ -27,7 +27,27 @@ Canvas {
     width: Units.gridUnit
     height: width
     property bool inverted
-    property color color: parent.color
+    property color color: {
+        if (!mouseArea.pressed) {
+            return Theme.backgroundColor;
+        }
+
+        if (globalDrawer && globalDrawer.position == 0 &&
+            contextDrawer && contextDrawer.position == 0) {
+            return Theme.highlightColor;
+        }
+
+        if (inverted) {
+            if (contextDrawer) {
+                return contextDrawer.position > 0 ? Theme.highlightColor : Theme.backgroundColor;
+            }
+        } else {
+            if (globalDrawer) {
+                return globalDrawer.position > 0 ? Theme.highlightColor : Theme.backgroundColor;
+            }
+        }
+    }
+
     anchors.verticalCenter: parent.verticalCenter
 
     onColorChanged: requestPaint()

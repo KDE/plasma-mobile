@@ -28,8 +28,6 @@ MobileComponents.ApplicationWindow {
     height: 800
     visible: true
 
-    actionButton.onClicked: print("Action button clicked")
-
     globalDrawer: MobileComponents.GlobalDrawer {
         title: "Widget gallery"
         titleIcon: "applications-graphics"

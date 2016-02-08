@@ -38,8 +38,15 @@ Page {
         }
     ]
     mainAction: Controls.Action {
-        iconName: "document-edit"
-        onTriggered: print("Action button in buttons page clicked")
+        iconName: sheet.opened ? "dialog-cancel" : "document-edit"
+        onTriggered: {
+            print("Action button in buttons page clicked");
+            if (sheet.opened) {
+                sheet.close();
+            } else {
+                sheet.open();
+            }
+        }
     }
 
     //Close the drawer with the back button

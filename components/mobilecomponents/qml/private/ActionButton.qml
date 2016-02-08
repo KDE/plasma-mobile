@@ -22,23 +22,15 @@ import QtQuick.Layouts 1.2
 import QtGraphicalEffects 1.0
 import org.kde.plasma.mobilecomponents 0.2
 
-MouseArea {
+Item {
     id: button
-    property alias iconSource: icon.source
-    property bool checkable: false
-    property bool checked: false
-    //either Action or QAction should work here
-    property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
 
     implicitWidth: parent.width
     implicitHeight: Units.iconSizes.medium
 
-    drag {
-        target: button
-        axis: Drag.XAxis
-        minimumX: parent.width/2 - width/2 - (contextDrawer && contextDrawer.enabled ? contextDrawer.contentItem.width : 0)
-        maximumX: parent.width/2 - width/2 + (globalDrawer && globalDrawer.enabled ?  globalDrawer.contentItem.width : 0)
-    }
+    //either Action or QAction should work here
+    property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
+
     function toggleVisibility() {
         showAnimation.running = false;
         if (translateTransform.y < button.height) {
@@ -49,75 +41,8 @@ MouseArea {
         showAnimation.running = true;
     }
 
-    transform: Translate {
-        id: translateTransform
-    }
-    property var downTimestamp;
-    property int startX
-    onPressed: {
-        downTimestamp = (new Date()).getTime();
-        startX = button.x + button.width/2
-    }
-    onReleased: {
-        //pixel/second
-        var x = button.x + button.width/2;
-        var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
-
-        //project where it would be a full second in the future
-        if (globalDrawer && x + speed > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
-            globalDrawer.open();
-            contextDrawer.close();
-        } else if (contextDrawer && x + speed < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
-            if (contextDrawer) {
-                contextDrawer.open();
-            }
-            if (globalDrawer) {
-                globalDrawer.close();
-            }
-        } else {
-            if (globalDrawer) {
-                globalDrawer.close();
-            }
-            if (contextDrawer) {
-                contextDrawer.close();
-            }
-        }
-    }
-    onClicked: {
-        if (mouse.x < buttonGraphics.x - buttonGraphics.width / 2 || mouse.x > buttonGraphics.x + buttonGraphics.width / 2) {
-            return;
-        }
-        if (checkable) {
-            checked = !checked;
-        }
-
-        //if an action has been assigned, trigger it
-        if (button.action && button.action.trigger) {
-            button.action.trigger();
-        }
-    }
-    Connections {
-        target: globalDrawer
-        onPositionChanged: {
-            if (!button.pressed) {
-                button.x = globalDrawer.contentItem.width * globalDrawer.position + button.parent.width/2 - button.width/2;
-            }
-        }
-    }
-    Connections {
-        target: contextDrawer
-        onPositionChanged: {
-            if (!button.pressed) {
-                button.x = button.parent.width/2 - button.width/2 - contextDrawer.contentItem.width * contextDrawer.position;
-            }
-        }
-    }
-    Connections {
-        target: button.parent
-        onWidthChanged: button.x = button.parent.width/2 - button.width/2
-    }
     onXChanged: {
-        if (button.pressed) {
+        if (mouseArea.pressed) {
             if (globalDrawer) {
                 globalDrawer.position = Math.min(1, Math.max(0, (x - button.parent.width/2 + button.width/2)/globalDrawer.contentItem.width));
             }
@@ -127,71 +52,156 @@ MouseArea {
         }
     }
 
-    NumberAnimation {
-        id: showAnimation
-        target: translateTransform
-        properties: "y"
-        duration: Units.longDuration
-        easing.type: Easing.InOutQuad
-    }
-    Item {
-        id: background
-        anchors {
-            fill: parent
-            leftMargin: -Units.gridUnit
-            rightMargin: -Units.gridUnit
+    MouseArea {
+        id: mouseArea
+        anchors.fill: parent
+
+        drag {
+            target: button
+            axis: Drag.XAxis
+            minimumX: parent.width/2 - width/2 - (contextDrawer && contextDrawer.enabled ? contextDrawer.contentItem.width : 0)
+            maximumX: parent.width/2 - width/2 + (globalDrawer && globalDrawer.enabled ?  globalDrawer.contentItem.width : 0)
         }
-        Rectangle {
-            id: buttonGraphics
-            radius: width/2
-            anchors.centerIn: parent
-            height: parent.height - Units.smallSpacing*2
-            width: height
-            color: button.pressed || button.checked ? Theme.highlightColor : Theme.backgroundColor
-            Icon {
-                id: icon
-                anchors {
-                    fill: parent
-                    margins: Units.smallSpacing
+
+        transform: Translate {
+            id: translateTransform
+        }
+        property var downTimestamp;
+        property int startX
+        property bool buttonPressedUnderMouse: false
+
+        onPressed: {
+            downTimestamp = (new Date()).getTime();
+            startX = button.x + button.width/2;
+            buttonPressedUnderMouse = mouse.x > buttonGraphics.x - buttonGraphics.width / 2 && mouse.x < buttonGraphics.x + buttonGraphics.width / 2;
+        }
+        onReleased: {
+            //pixel/second
+            var x = button.x + button.width/2;
+            var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
+
+            //project where it would be a full second in the future
+            if (globalDrawer && x + speed > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
+                globalDrawer.open();
+                contextDrawer.close();
+            } else if (contextDrawer && x + speed < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
+                if (contextDrawer) {
+                    contextDrawer.open();
                 }
-            }
-            ActionButtonArrow {
-                anchors {
-                    right: parent.left
-                    rightMargin: Units.smallSpacing
+                if (globalDrawer) {
+                    globalDrawer.close();
                 }
-                visible: contextDrawer && contextDrawer.enabled
-                inverted: true
-            }
-            ActionButtonArrow {
-                anchors {
-                    left: parent.right
-                    leftMargin: Units.smallSpacing
+            } else {
+                if (globalDrawer) {
+                    globalDrawer.close();
                 }
-                visible: globalDrawer && globalDrawer.enabled
-            }
-            Behavior on color {
-                ColorAnimation {
-                    duration: Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-            Behavior on x {
-                NumberAnimation {
-                    duration: Units.longDuration
-                    easing.type: Easing.InOutQuad
+                if (contextDrawer) {
+                    contextDrawer.close();
                 }
             }
         }
-    }
-    DropShadow {
-        anchors.fill: background
-        horizontalOffset: 0
-        verticalOffset: Units.smallSpacing/3
-        radius: Units.gridUnit / 3.5
-        samples: 16
-        color: button.pressed ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
-        source: background
+        onClicked: {
+            if (!buttonPressedUnderMouse || !button.action) {
+                return;
+            }
+            if (button.action.checkable) {
+                checked = !checked;
+            }
+
+            //if an action has been assigned, trigger it
+            if (button.action && button.action.trigger) {
+                button.action.trigger();
+            }
+        }
+        Connections {
+            target: globalDrawer
+            onPositionChanged: {
+                if (!mouseArea.pressed) {
+                    button.x = globalDrawer.contentItem.width * globalDrawer.position + button.parent.width/2 - button.width/2;
+                }
+            }
+        }
+        Connections {
+            target: contextDrawer
+            onPositionChanged: {
+                if (!mouseArea.pressed) {
+                    button.x = button.parent.width/2 - button.width/2 - contextDrawer.contentItem.width * contextDrawer.position;
+                }
+            }
+        }
+        Connections {
+            target: button.parent
+            onWidthChanged: button.x = button.parent.width/2 - button.width/2
+        }
+
+        NumberAnimation {
+            id: showAnimation
+            target: translateTransform
+            properties: "y"
+            duration: Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        Item {
+            id: background
+            anchors {
+                fill: parent
+                leftMargin: -Units.gridUnit
+                rightMargin: -Units.gridUnit
+            }
+
+            Rectangle {
+                id: buttonGraphics
+                radius: width/2
+                anchors.centerIn: parent
+                height: parent.height - Units.smallSpacing*2
+                width: height
+                color: (button.action && mouseArea.buttonPressedUnderMouse && mouseArea.pressed) || button.checked ? Theme.highlightColor : Theme.backgroundColor
+                Icon {
+                    id: icon
+                    source: button.action && button.action.iconName ? button.action.iconName : ""
+                    anchors {
+                        fill: parent
+                        margins: Units.smallSpacing
+                    }
+                }
+                ActionButtonArrow {
+                    anchors {
+                        right: parent.left
+                        rightMargin: Units.smallSpacing
+                    }
+                    visible: contextDrawer && contextDrawer.enabled
+                    inverted: true
+                }
+                ActionButtonArrow {
+                    anchors {
+                        left: parent.right
+                        leftMargin: Units.smallSpacing
+                    }
+                    visible: globalDrawer && globalDrawer.enabled
+                }
+                Behavior on color {
+                    ColorAnimation {
+                        duration: Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+                Behavior on x {
+                    NumberAnimation {
+                        duration: Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
+            }
+        }
+        DropShadow {
+            anchors.fill: background
+            horizontalOffset: 0
+            verticalOffset: Units.smallSpacing/3
+            radius: Units.gridUnit / 3.5
+            samples: 16
+            color: mouseArea.pressed && button.action && mouseArea.buttonPressedUnderMouse ? "transparent" : Qt.rgba(0, 0, 0, 0.5)
+            source: background
+        }
     }
 }
 
