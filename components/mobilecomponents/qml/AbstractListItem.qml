@@ -106,20 +106,9 @@ Item {
         onClicked: listItem.clicked()
         onPressAndHold: listItem.pressAndHold()
 
-        Rectangle {
-            id : background
-            color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.viewBackgroundColor
-
-            anchors.fill: parent
-            visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
-            opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
-            Behavior on color {
-                ColorAnimation { duration: Units.longDuration }
-            }
-            Behavior on opacity { NumberAnimation { duration: Units.longDuration } }
-        }
         Item {
             id: paddingItem
+            z: 2
             anchors {
                 fill: parent
                 margins: Units.smallSpacing
@@ -127,16 +116,32 @@ Item {
         }
     }
 
-    Rectangle {
-        id: separator
-        color: Theme.textColor
-        opacity: 0.2
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
+    property Item background: Rectangle {
+        color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.viewBackgroundColor
+
+        parent: itemMouse
+        anchors.fill: parent
+        visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
+        opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
+        Behavior on color {
+            ColorAnimation { duration: Units.longDuration }
         }
-        height: Math.round(Units.smallSpacing / 3);
+        Behavior on opacity { NumberAnimation { duration: Units.longDuration } }
+
+        Rectangle {
+            id: separator
+            color: Theme.textColor
+            opacity: 0.2
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: Math.round(Units.smallSpacing / 3);
+        }
+    }
+    onBackgroundChanged: {
+        background.parent = itemMouse
     }
 
     Accessible.role: Accessible.ListItem
