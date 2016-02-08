@@ -84,7 +84,7 @@ MouseArea {
         }
     }
     onClicked: {
-        if (mouse.x < buttonGraphics.x || mouse.x > buttonGraphics.x + buttonGraphics.width) {
+        if (mouse.x < buttonGraphics.x - buttonGraphics.width / 2 || mouse.x > buttonGraphics.x + buttonGraphics.width / 2) {
             return;
         }
         if (checkable) {
