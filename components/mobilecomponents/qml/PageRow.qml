@@ -197,6 +197,7 @@ Item {
                 if (isNaN(mainFlickable.contentX)) {
                     return;
                 }
+
                 actualRoot.currentIndex = Math.min(Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/defaultColumnWidth), actualRoot.depth-1);
                 internal.syncWithCurrentIndex();
                 actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;

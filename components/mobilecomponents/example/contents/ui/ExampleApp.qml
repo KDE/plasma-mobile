@@ -102,25 +102,8 @@ MobileComponents.ApplicationWindow {
         id: contextDrawer
     }
 
-    MobileComponents.OverlayDrawer {
-        id: sheet
-        edge: Qt.BottomEdge
-        contentItem: Item {
-            implicitWidth: MobileComponents.Units.gridUnit * 8
-            implicitHeight: MobileComponents.Units.gridUnit * 8
-            ColumnLayout {
-                anchors.centerIn: parent
-                Controls.Button {
-                    text: "Button1"
-                }
-                Controls.Button {
-                    text: "Button2"
-                }
-            }
-        }
-    }
-
     pageStack.initialPage: mainPageComponent
+
 
     Component {
         id: settingsComponent

@@ -131,20 +131,26 @@ ApplicationWindow {
         id: __pageStack
         anchors {
             fill: parent
-            bottomMargin: Qt.inputMethod.keyboardRectangle.height
+            bottomMargin: Qt.platform.os == "android" ? 0 : Qt.inputMethod.keyboardRectangle.height
         }
         focus: true
         Keys.onReleased: {
-            if (event.key == Qt.Key_Back) {
+            if (event.key == Qt.Key_Back ||
+            (event.key === Qt.Key_Left && (event.modifiers & Qt.AltModifier))) {
+                event.accepted = true;
+
                 if (root.contextDrawer && root.contextDrawer.opened) {
                     root.contextDrawer.close();
-                    event.accepted = true;
                 } else if (root.globalDrawer && root.globalDrawer.opened) {
                     root.globalDrawer.close();
-                    event.accepted = true;
-                } else if (stackView.depth > 1) {
-                    stackView.pop();
-                    event.accepted = true;
+                } else if (__pageStack.depth > 1) {
+                    var backEvent = {accepted: false}
+                    __pageStack.currentItem.backRequested(backEvent);
+                    if (!backEvent.accepted) {
+                        __pageStack.pop();
+                    }
+                } else {
+                    Qt.quit();
                 }
             }
         }

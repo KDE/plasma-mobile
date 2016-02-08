@@ -23,6 +23,7 @@ import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
 Page {
+    id: page
     Layout.fillWidth: true
     contextualActions: [
         Controls.Action {
@@ -40,6 +41,16 @@ Page {
         iconName: "document-edit"
         onTriggered: print("Action button in buttons page clicked")
     }
+
+    //Close the drawer with the back button
+    onBackRequested: {
+        if (sheet.opened) {
+            event.accepted = true;
+            sheet.close();
+        }
+    }
+
+    //Example of Action button optional visibility
     MouseArea {
         anchors.fill: parent
         onClicked: actionButton.toggleVisibility();
@@ -111,6 +122,26 @@ Page {
                 iconName: "edit-paste"
                 property bool flat: false
                 onClicked: print("clicked")
+            }
+        }
+    }
+ 
+    OverlayDrawer {
+        id: sheet
+        anchors.fill: parent
+        edge: Qt.BottomEdge
+        contentItem: Item {
+            implicitWidth: Units.gridUnit * 8
+            implicitHeight: Units.gridUnit * 8
+            ColumnLayout {
+                anchors.centerIn: parent
+                Controls.Button {
+                    text: "Button1"
+                    onClicked: print(root)
+                }
+                Controls.Button {
+                    text: "Button2"
+                }
             }
         }
     }
