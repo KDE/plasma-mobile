@@ -30,7 +30,7 @@ MouseArea {
     //either Action or QAction should work here
     property QtObject action: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.mainAction : null
 
-    implicitWidth: parent.width
+    implicitWidth: Units.iconSizes.medium
     implicitHeight: Units.iconSizes.medium
 
     drag {
