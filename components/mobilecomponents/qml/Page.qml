@@ -52,6 +52,16 @@ Rectangle {
      */
     property QtObject mainAction
 
+    /**
+     * emitted When the application requests a Back action
+     * For instance a global "back" shortcut or the Android
+     * Back button has been pressed.
+     * The page can manage the back event by itself,
+     * and if it set event.accepted = true, it will stop the main
+     * application to manage the back event.
+     */
+    signal backRequested(var event);
+
     Layout.fillWidth: true
     color: "transparent"
 }

@@ -64,16 +64,22 @@ ApplicationWindow {
         }
         focus: true
         Keys.onReleased: {
-            if (event.key == Qt.Key_Back) {
+            if (event.key == Qt.Key_Back ||
+            (event.key === Qt.Key_Left && (event.modifiers & Qt.AltModifier))) {
+                event.accepted = true;
+
                 if (root.contextDrawer && root.contextDrawer.opened) {
                     root.contextDrawer.close();
-                    event.accepted = true;
                 } else if (root.globalDrawer && root.globalDrawer.opened) {
                     root.globalDrawer.close();
-                    event.accepted = true;
                 } else if (__pageStack.depth > 1) {
-                    __pageStack.pop();
-                    event.accepted = true;
+                    var backEvent = {accepted: false}
+                    __pageStack.lastVisiblePage.backRequested(backEvent);
+                    if (!backEvent.accepted) {
+                        __pageStack.pop();
+                    }
+                } else {
+                    Qt.quit();
                 }
             }
         }
