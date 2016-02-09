@@ -27,7 +27,7 @@ import org.kde.plasma.mobilecomponents 0.2
  *
  * @inherit QtQuick.Item
  */
-Item {
+Rectangle {
     id: listItem
     default property Item contentItem
 
@@ -79,7 +79,7 @@ Item {
      * True if the separator between items is visible
      * default: true
      */
-    property alias separatorVisible: separator.visible
+    property bool separatorVisible: true
 
     implicitWidth: parent ? parent.width : childrenRect.width
 
@@ -131,6 +131,7 @@ Item {
             id: separator
             color: Theme.textColor
             opacity: 0.2
+            visible: listItem.separatorVisible
             anchors {
                 left: parent.left
                 right: parent.right

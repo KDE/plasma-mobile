@@ -99,20 +99,21 @@ MobileComponents.Page {
                 }
             }
             delegate: MobileComponents.ListItemWithActions {
-                supportsMouseEvents: true
-                MobileComponents.Label {
-                    enabled: true
-                    text: model.text
-                }
-                property Item ownPage
-                onClicked: {
-                    root.pageStack.pop(root.initialItem);
-                    if (!model.component) {
-                        return;
+                MobileComponents.BasicListItem {
+                    supportsMouseEvents: true
+                    label: model.text
+
+                    property Item ownPage
+                    onClicked: {
+                        root.pageStack.pop(root.initialItem);
+                        if (!model.component) {
+                            return;
+                        }
+                        ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
                     }
-                    ownPage = root.pageStack.push(Qt.resolvedUrl("gallery/" + model.component + "Gallery.qml"));
+                    checked: ownPage && root.pageStack.lastItem == ownPage
                 }
-                checked: ownPage && root.pageStack.lastItem == ownPage
+                
                 actions: [
                     MobileComponents.Action {
                         iconName: "document-decrypt"
