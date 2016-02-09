@@ -29,7 +29,7 @@ import org.kde.plasma.mobilecomponents 0.2
  */
 Item {
     id: listItem
-    default property alias content: paddingItem.data
+    default property Item contentItem
 
     /**
      * type:bool
@@ -76,12 +76,6 @@ Item {
 
     /**
      * type: bool
-     * True if the list item contains mouse
-     */
-    property alias containsMouse: itemMouse.containsMouse
-
-    /**
-     * type: bool
      * True if the separator between items is visible
      * default: true
      */
@@ -95,6 +89,11 @@ Item {
     opacity: enabled ? 1 : 0.6
 
     height: visible ? implicitHeight : 0
+
+    onContentItemChanged: {
+        contentItem.parent = paddingItem;
+        contentItem.anchors.fill = parent;
+    }
 
     MouseArea {
         id: itemMouse
