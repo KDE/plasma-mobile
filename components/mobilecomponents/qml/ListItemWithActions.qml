@@ -54,6 +54,7 @@ import QtGraphicalEffects 1.0
 Item {
     id: listItemRoot
 
+//BEGIN properties
     default property AbstractListItem listItem
 
     /**
@@ -65,10 +66,105 @@ Item {
     property list<Action> actions
 
 
+    /**
+     * position: real
+     * This property holds the position of the dragged list item relative to its
+     * final destination (just like the Drawer). That is, the position
+     * will be 0 when the list item is fully closed, and 1 when fully open.
+     */
+    property real position: 0
+
+    /**
+     * type: Item
+     * This property holds the background item.
+     *
+     * Note: If the background item has no explicit size specified,
+     * it automatically follows the control's size.
+     * In most cases, there is no need to specify width or
+     * height for a background item.
+     */
+    property Item background : Item {
+        id: backgroundItem
+        parent: listItemRoot
+        anchors {
+            fill: parent
+            leftMargin: height
+        }
+        Rectangle {
+            id: shadowHolder
+            color: Theme.backgroundColor
+            anchors.fill: parent
+        }
+        LinearGradient {
+            height: Units.gridUnit/2
+            anchors {
+                right: parent.right
+                left: parent.left
+                top: parent.top
+            }
+
+            start: Qt.point(0, 0)
+            end: Qt.point(0, Units.gridUnit/2)
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: Qt.rgba(0, 0, 0, 0.2)
+                }
+                GradientStop {
+                    position: 0.3
+                    color: Qt.rgba(0, 0, 0, 0.1)
+                }
+                GradientStop {
+                    position: 1.0
+                    color:  "transparent"
+                }
+            }
+        }
+        LinearGradient {
+            width: Units.gridUnit/2
+            x: backgroundItem.width - (backgroundItem.width * listItemRoot.position)
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+            }
+
+            start: Qt.point(0, 0)
+            end: Qt.point(Units.gridUnit/2, 0)
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: Qt.rgba(0, 0, 0, 0.2)
+                }
+                GradientStop {
+                    position: 0.3
+                    color: Qt.rgba(0, 0, 0, 0.1)
+                }
+                GradientStop {
+                    position: 1.0
+                    color:  "transparent"
+                }
+            }
+        }
+    }
 
     implicitWidth: parent ? parent.width : listItem.width
     implicitHeight: listItem.height
     height: visible ? implicitHeight : 0
+//END properties
+
+//BEGIN signal handlers
+    onBackgroundChanged: {
+        background.parent = listItemRoot;
+        background.anchors.fill = listItemRoot;
+        background.anchors.leftMargin = background.height;
+        background.z = 0;
+    }
+
+    onHeightChanged: {
+        if (background) {
+            background.anchors.leftMargin = background.height;
+        }
+    }
 
     onListItemChanged: {
         listItem.parent = listItemParent
@@ -77,41 +173,18 @@ Item {
         listItem.parent = listItemParent
     }
 
-
-    Rectangle {
-        id: shadowHolder
-        color: Theme.backgroundColor
-        anchors.fill: parent
-    }
-    LinearGradient {
-        height: Units.gridUnit/2
-        anchors {
-            right: parent.right
-            left: parent.left
-            top: parent.top
-        }
-
-        start: Qt.point(0, 0)
-        end: Qt.point(0, Units.gridUnit/2)
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: Qt.rgba(0, 0, 0, 0.2)
-            }
-            GradientStop {
-                position: 0.3
-                color: Qt.rgba(0, 0, 0, 0.1)
-            }
-            GradientStop {
-                position: 1.0
-                color:  "transparent"
-            }
+    onPositionChanged: {
+        if (!handleMouse.pressed && !mainFlickable.flicking &&
+            !mainFlickable.dragging && !positionAnimation.running) {
+            mainFlickable.contentX = (listItemRoot.width-listItemRoot.height) * internalPosition;
         }
     }
+//END signal handlers
 
-
+//BEGIN UI implementation
     RowLayout {
         id: actionsLayout
+        z: 1
         anchors {
             right: parent.right
             verticalCenter: parent.verticalCenter
@@ -168,6 +241,7 @@ Item {
     }
     Flickable {
         id: mainFlickable
+        z: 2
         interactive: false
         boundsBehavior: Flickable.StopAtBounds
         anchors.fill: parent
@@ -180,6 +254,10 @@ Item {
                 positionAnimation.to = 0;
             }
             positionAnimation.running = true;
+        }
+        property real internalPosition:  (mainFlickable.contentX/(listItemRoot.width-listItemRoot.height));
+        onInternalPositionChanged: {
+            listItemRoot.position = internalPosition;
         }
 
         Item {
@@ -195,33 +273,9 @@ Item {
                 }
                 width: mainFlickable.width
             }
-            LinearGradient {
-                width: Units.gridUnit/2
-                anchors {
-                    left: listItemParent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-
-                start: Qt.point(0, 0)
-                end: Qt.point(Units.gridUnit/2, 0)
-                gradient: Gradient {
-                    GradientStop {
-                        position: 0.0
-                        color: Qt.rgba(0, 0, 0, 0.2)
-                    }
-                    GradientStop {
-                        position: 0.3
-                        color: Qt.rgba(0, 0, 0, 0.1)
-                    }
-                    GradientStop {
-                        position: 1.0
-                        color:  "transparent"
-                    }
-                }
-            }
             
             MouseArea {
+                id: handleMouse
                 anchors {
                     left: listItemParent.right
                     top: parent.top
@@ -269,6 +323,7 @@ Item {
             }
         }
     }
+//END UI implementation
 
     Accessible.role: Accessible.ListItem
 }

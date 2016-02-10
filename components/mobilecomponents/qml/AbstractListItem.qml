@@ -29,17 +29,26 @@ import org.kde.plasma.mobilecomponents 0.2
  */
 Rectangle {
     id: listItem
-    default property Item contentItem
+    
+    /**
+     * type: Item
+     * This property holds the visual content item.
+     *
+     * Note: The content item is automatically resized inside the
+     * padding of the control.
+     */
+     default property Item contentItem
 
     /**
-     * type:bool
+     * type: bool
      * Holds if the item emits signals related to mouse interaction.
-     *
+     *TODO: remove
      * The default value is false.
      */
     property alias supportsMouseEvents: itemMouse.enabled
 
     /**
+     * type: signal
      * This signal is emitted when there is a click.
      *
      * This is disabled by default, set enabled to true to use it.
@@ -49,6 +58,7 @@ Rectangle {
 
 
     /**
+     * type: signal
      * The user pressed the item with the mouse and didn't release it for a
      * certain amount of time.
      *
@@ -62,8 +72,6 @@ Rectangle {
      * If true makes the list item look as checked or pressed. It has to be set
      * from the code, it won't change by itself.
      */
-    //plasma extension
-    //always look pressed?
     property bool checked: false
 
     /**
@@ -71,7 +79,6 @@ Rectangle {
      * If true the item will be a delegate for a section, so will look like a
      * "title" for the items under it.
      */
-    //is this to be used as section delegate?
     property bool sectionDelegate: false
 
     /**
@@ -80,6 +87,42 @@ Rectangle {
      * default: true
      */
     property bool separatorVisible: true
+
+    
+    /**
+     * type: Item
+     * This property holds the background item.
+     *
+     * Note: If the background item has no explicit size specified,
+     * it automatically follows the control's size.
+     * In most cases, there is no need to specify width or
+     * height for a background item.
+     */
+    property Item background: Rectangle {
+        color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.viewBackgroundColor
+
+        parent: itemMouse
+        anchors.fill: parent
+        visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
+        opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
+        Behavior on color {
+            ColorAnimation { duration: Units.longDuration }
+        }
+        Behavior on opacity { NumberAnimation { duration: Units.longDuration } }
+
+        Rectangle {
+            id: separator
+            color: Theme.textColor
+            opacity: 0.2
+            visible: listItem.separatorVisible
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: Math.round(Units.smallSpacing / 3);
+        }
+    }
 
     implicitWidth: parent ? parent.width : childrenRect.width
 
@@ -115,31 +158,6 @@ Rectangle {
         }
     }
 
-    property Item background: Rectangle {
-        color: listItem.checked || (itemMouse.pressed && itemMouse.changeBackgroundOnPress) ? Theme.highlightColor : Theme.viewBackgroundColor
-
-        parent: itemMouse
-        anchors.fill: parent
-        visible: listItem.ListView.view ? listItem.ListView.view.highlight === null : true
-        opacity: itemMouse.containsMouse && !itemMouse.pressed ? 0.5 : 1
-        Behavior on color {
-            ColorAnimation { duration: Units.longDuration }
-        }
-        Behavior on opacity { NumberAnimation { duration: Units.longDuration } }
-
-        Rectangle {
-            id: separator
-            color: Theme.textColor
-            opacity: 0.2
-            visible: listItem.separatorVisible
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-            height: Math.round(Units.smallSpacing / 3);
-        }
-    }
     onBackgroundChanged: {
         background.parent = itemMouse
     }
