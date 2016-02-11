@@ -150,10 +150,11 @@ OverlayDrawer {
                     onClicked: pageRow.pop()
                 }
                 delegate: BasicListItem {
-                    enabled: true
+                    enabled: modelData.enabled
                     checked: modelData.checked
                     icon: modelData.iconName
                     label: modelData.text
+                    opacity: enabled ? 1.0 : 0.3
 
                     Icon {
                         anchors {
