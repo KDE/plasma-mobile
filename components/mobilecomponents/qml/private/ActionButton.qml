@@ -29,9 +29,10 @@ MouseArea {
     property bool checked: false
     //either Action or QAction should work here
     property QtObject action: pageStack.lastVisiblePage ? pageStack.lastVisiblePage.mainAction : null
+    visible: action != null && (action.visible === undefined || action.visible)
 
-    implicitWidth: Units.iconSizes.medium
-    implicitHeight: Units.iconSizes.medium
+    implicitWidth: Units.iconSizes.medium + Units.smallSpacing*2
+    implicitHeight: implicitWidth
 
     drag {
         target: button
@@ -155,21 +156,7 @@ MouseArea {
                     margins: Units.smallSpacing
                 }
             }
-            ActionButtonArrow {
-                anchors {
-                    right: parent.left
-                    rightMargin: Units.smallSpacing
-                }
-                visible: contextDrawer && contextDrawer.enabled
-                inverted: true
-            }
-            ActionButtonArrow {
-                anchors {
-                    left: parent.right
-                    leftMargin: Units.smallSpacing
-                }
-                visible: globalDrawer && globalDrawer.enabled
-            }
+
             Behavior on color {
                 ColorAnimation {
                     duration: Units.longDuration
