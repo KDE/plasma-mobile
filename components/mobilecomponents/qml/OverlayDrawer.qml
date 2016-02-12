@@ -368,11 +368,12 @@ AbstractDrawer {
                         left: root.edge == Qt.RightEdge ? undefined : drawerPage.right
                         bottom: drawerPage.bottom
                     }
-                    visible: root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge
+                    visible: root.enabled && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge)
                     width: Units.iconSizes.medium + Units.gridUnit
                     height: width
                     Rectangle {
                         color: Theme.viewBackgroundColor
+                        opacity: 0.5 + root.position
                         anchors {
                             fill: parent
                             topMargin: Units.gridUnit
