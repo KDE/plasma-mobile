@@ -36,7 +36,7 @@ FullScreenPanel {
     property int tasksCount: filteredWindowModel.count
     property int currentTaskIndex: -1
 
-    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
+    color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
         ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
 
@@ -73,15 +73,12 @@ FullScreenPanel {
                 plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(i));
             } else if (i != id && !task.IsMinimized) {
                 plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
-            } 
+            }
         }
-
         if (id >= 0) {
             plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(id));
-        } else {
-            plasmoid.nativeInterface.forgetActiveWindow();
+            currentTaskIndex = id;
         }
-        currentTaskIndex = id;
     }
 
     onOffsetChanged: tasksView.contentY = offset
@@ -207,8 +204,9 @@ FullScreenPanel {
         }
         iconSource: "go-home"
         onClicked: {
-            window.hide();
+            currentTaskIndex = -1;
             setSingleActiveWindow(-1);
+            window.hide();
         }
     }
     Component.onCompleted: plasmoid.nativeInterface.panel = window;

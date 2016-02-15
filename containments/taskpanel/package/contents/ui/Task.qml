@@ -32,8 +32,9 @@ Item {
     //Workaround
     property bool active: model.IsActive
     onActiveChanged: {
+        //sometimes the task switcher window itself appears, screwing up the state
         if (model.IsActive) {
-            window.currentTaskIndex = index
+           // window.currentTaskIndex = index
         }
     }
 
@@ -88,8 +89,8 @@ Item {
             }
             width: parent.width
             height: parent.height
-            radius: units.gridUnit
-            opacity: 0.8 * (1-Math.abs(x)/width)
+            radius: units.smallSpacing
+            opacity: 0.9 * (1-Math.abs(x)/width)
             PlasmaCore.IconItem {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, parent.height) / 2

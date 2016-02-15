@@ -47,12 +47,22 @@ PlasmaCore.ColorScope {
         id: mainMouseArea
         anchors.fill: parent
         property int oldMouseY: 0
+        property int startMouseY: 0
+        property bool isDragging: false
         drag.filterChildren: true
-        onPressed: {
-            oldMouseY = mouse.y;
+        function managePressed(mouse) {
+            startMouseY = oldMouseY = mouse.y;
             taskSwitcher.offset = -taskSwitcher.height
         }
+        onPressed: managePressed();
         onPositionChanged: {
+            if (!isDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
+                oldMouseY = mouse.y;
+                return;
+            } else {
+                isDragging = true;
+            }
+
             taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
             oldMouseY = mouse.y;
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
@@ -61,10 +71,15 @@ PlasmaCore.ColorScope {
             taskSwitcher.setSingleActiveWindow(-1);
         }
         onReleased: {
+            if (!isDragging) {
+                return;
+            }
+
             if (taskSwitcher.visibility == Window.Hidden) {
                 return;
             }
             if (taskSwitcher.offset > -taskSwitcher.height/2) {
+                taskSwitcher.currentTaskIndex = -1
                 taskSwitcher.show();
             } else {
                 taskSwitcher.hide();
@@ -85,9 +100,13 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
-                enabled: taskSwitcher.tasksCount > 0
+                enabled: taskSwitcher.tasksCount > 0 && plasmoid.nativeInterface.hasCloseableActiveWindow;
                 iconSource: "window-list"
-                onClicked: taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
+                onClicked: {
+                    taskSwitcher.currentTaskIndex = -1;
+                    taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
+                }
+                onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);
                 onReleased: mainMouseArea.released(mouse);
             }
@@ -98,11 +117,26 @@ PlasmaCore.ColorScope {
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "go-home"
-                onClicked: {
-                    root.taskSwitcher.setSingleActiveWindow(-1);
+                enabled: taskSwitcher.tasksCount > 0
+                checkable: true
+                onCheckedChanged: {
+                    if (checked) {
+                        root.taskSwitcher.setSingleActiveWindow(-1);
+                    } else {
+                        root.taskSwitcher.setSingleActiveWindow(root.taskSwitcher.currentTaskIndex);
+                    }
                 }
+                onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);
                 onReleased: mainMouseArea.released(mouse);
+                Connections {
+                    target: root.taskSwitcher
+                    onCurrentTaskIndexChanged: {
+                        if (root.taskSwitcher.currentTaskIndex < 0) {
+                            showDesktopButton.checked = false;
+                        }
+                    }
+                }
             }
 
             Button {
@@ -112,6 +146,7 @@ PlasmaCore.ColorScope {
                 iconSource: "window-close"
                 enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
                 onClicked: plasmoid.nativeInterface.closeActiveWindow();
+                onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);
                 onReleased: mainMouseArea.released(mouse);
             }
