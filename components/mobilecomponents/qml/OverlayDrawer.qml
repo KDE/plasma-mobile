@@ -356,8 +356,8 @@ AbstractDrawer {
                     }
                     color: Theme.viewBackgroundColor
                     clip: true
-                    width: root.contentItem ? Math.min(root.contentItem.implicitWidth, root.width - Units.gridUnit * 2) : 0
-                    height: root.contentItem ? Math.min(root.contentItem.implicitHeight, root.height - Units.gridUnit * 2) : 0
+                    width: root.contentItem ? Math.min(root.contentItem.implicitWidth, root.width * 0.7) : 0
+                    height: root.contentItem ? Math.min(root.contentItem.implicitHeight, root.height * 0.7) : 0
                 }
                 Item {
                     id: drawerHandle
