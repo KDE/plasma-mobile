@@ -372,20 +372,21 @@ AbstractDrawer {
                     width: Units.iconSizes.medium + Units.gridUnit
                     height: width
                     Rectangle {
+                        id: handleGraphics
                         color: Theme.viewBackgroundColor
-                        opacity: 0.5 + root.position
+                        opacity: 0.3 + root.position
                         anchors {
                             fill: parent
                             topMargin: Units.gridUnit
                             rightMargin: root.edge == Qt.LeftEdge ? Units.gridUnit : 0
                             leftMargin: root.edge == Qt.LeftEdge ? 0 : Units.gridUnit
                         }
-                        ActionButtonArrow {
-                            anchors.centerIn: parent
-                            color: handleMouseArea.pressed || root.position != 0 ? Theme.highlightColor : Theme.textColor
-                            inverted: root.edge == Qt.RightEdge
-                            rotation: 180 * root.position
-                        }
+                    }
+                    ActionButtonArrow {
+                        anchors.centerIn: handleGraphics
+                        color: handleMouseArea.pressed || root.position != 0 ? Theme.highlightColor : Theme.textColor
+                        inverted: root.edge == Qt.RightEdge
+                        rotation: 180 * root.position
                     }
                 }
                 DropShadow {
