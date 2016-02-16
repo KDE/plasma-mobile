@@ -73,7 +73,7 @@ FocusScope {
                 batteryType: model["Type"]
                 percent: pmSource.data["Battery0"]["Percent"]
                 hasBattery: true
-                pluggedIn: pmSource.data["Battery0"]["State"] === "Charging" && pmSource.data["Battery0"]["Is Power Supply"]
+                pluggedIn: pmSource.data["Battery0"]["State"] === "Charging"
             }
 
             Column {

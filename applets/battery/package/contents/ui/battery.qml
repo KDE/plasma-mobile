@@ -136,7 +136,7 @@ Item {
         RowLayout {
             id: batteryLayout
             anchors.fill: parent
-            spacing: 0
+            spacing: -10
             PlasmaComponents.Label {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
@@ -152,7 +152,7 @@ Item {
                 Layout.fillHeight: true
                 hasBattery: true
                 percent: pmSource.data["Battery"]["Percent"]
-                //pluggedIn: batteryContainer.pluggedIn
+                pluggedIn: pmSource.data["AC Adapter"]["Plugged in"]
         //         height: batteryContainer.iconSize
         //         width: height
             }
