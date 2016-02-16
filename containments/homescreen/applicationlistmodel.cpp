@@ -113,7 +113,6 @@ void ApplicationListModel::loadApplications()
 
                 for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
                     KSycocaEntry::Ptr entry = (*it);
-                    ApplicationData data;
 
                     if (entry->isType(KST_KServiceGroup)) {
                         KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(entry.data()));
@@ -131,6 +130,7 @@ void ApplicationListModel::loadApplications()
 
                             bl << service->desktopEntryName();
 
+                            ApplicationData data;
                             data.name = service->name();
                             data.icon = service->icon();
                             data.storageId = service->storageId();
