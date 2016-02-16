@@ -28,19 +28,16 @@ Page {
     id: page
     Layout.fillWidth: true
 
+    title: "Sliders"
+    flickable: scrollView.flickableItem
+     Component.onCompleted: scrollView.flickableItem.topMargin = 100
     Controls.ScrollView {
         id: scrollView
         anchors.fill: parent
 
         ColumnLayout {
             width: page.width
-            Heading {
-                text: "Sliders"
-                anchors {
-                    left: parent.left
-                    leftMargin: Units.smallSpacing
-                }
-            }
+
             Item {
                 Layout.fillWidth: true
                 Layout.minimumHeight: units.gridUnit * 20

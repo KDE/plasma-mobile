@@ -114,7 +114,7 @@ Item {
         pop(currentItem, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, false, false)
-        actualRoot.currentIndex = depth;
+        actualRoot.currentIndex = depth-1;
         internal.syncWithCurrentIndex();
         return item
     }
@@ -127,7 +127,7 @@ Item {
      * @return The page instance that was popped off the stack.
      */
     function pop(page) {
-        actualRoot.currentIndex = depth;
+        actualRoot.currentIndex = depth-1;
         internal.syncWithCurrentIndex();
         return Engine.pop(page, false);
     }
@@ -151,7 +151,7 @@ Item {
         pop(currentItem, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, true, false);
-        actualRoot.currentIndex = depth;
+        actualRoot.currentIndex = depth-1;
         internal.syncWithCurrentIndex();
         return item
     }
@@ -172,6 +172,16 @@ Item {
      */
     function find(func) {
         return Engine.find(func);
+    }
+
+    /**
+     * Returns the page at a particular index
+     */
+    function pageAt(id) {
+        if (id < 0 || id >= depth) {
+            return null;
+        }
+        return root.children[id].page;
     }
 
 //END FUNCTIONS
@@ -262,7 +272,7 @@ Item {
             }
 
             var firstLevel = Math.max(0, currentIndex - mainFlickable.width/defaultColumnWidth + 1);
-            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * firstLevel), mainFlickable.contentWidth));
             scrollAnimation.running = true;
         }
     }
@@ -291,7 +301,7 @@ Item {
                 }
             }
             onMovementEnded: {
-                actualRoot.currentIndex = (Math.round(contentX/defaultColumnWidth)+1);
+                actualRoot.currentIndex = (Math.round(contentX/defaultColumnWidth));
                 internal.syncWithCurrentIndex();
             }
             onFlickEnded: {

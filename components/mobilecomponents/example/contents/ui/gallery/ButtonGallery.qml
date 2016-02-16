@@ -25,6 +25,7 @@ import org.kde.plasma.mobilecomponents 0.2
 Page {
     id: page
     Layout.fillWidth: true
+    title: "Buttons"
     contextualActions: [
         Action {
             text:"Action for buttons"
@@ -78,6 +79,11 @@ Page {
             text: "Open Sheet"
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: sheet.open()
+        }
+        Controls.Button {
+            text: "Push another"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: pageStack.push(Qt.resolvedUrl("ButtonGallery.qml"));
         }
         Controls.Button {
             text: "Show Passive Notification"

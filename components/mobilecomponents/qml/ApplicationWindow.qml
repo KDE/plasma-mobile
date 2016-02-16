@@ -21,6 +21,7 @@ import QtQuick 2.1
 import QtQuick.Controls 1.3
 import "private"
 import org.kde.plasma.mobilecomponents 0.2
+import QtGraphicalEffects 1.0
 
 /**
  * A window that provides some basic features needed for all apps
@@ -127,10 +128,96 @@ ApplicationWindow {
         __actionButton.__passiveNotification.showNotification(message, timeout, actionText, callBack);
     }
 
+    property Item header: headerItem
+    Rectangle {
+        id: headerItem
+        z: 2
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        color: Theme.highlightColor
+        height: Math.max(Units.gridUnit*1.6, Math.min(units.gridUnit * 5, -Math.min(0, __pageStack.currentItem.flickable.contentY)))
+
+        Behavior on height {
+            NumberAnimation {
+                duration: Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        ListView {
+            id: titleList
+            anchors.fill: parent
+            orientation: ListView.Horizontal
+            model: __pageStack.depth
+            spacing: Units.gridUnit
+            currentIndex: __pageStack.currentIndex
+            snapMode: ListView.SnapToItem
+            delegate:MouseArea {
+                width: Math.min(titleList.width, delegateRoot.implicitWidth)
+                height: delegateRoot.height
+                onClicked: __pageStack.currentIndex = modelData
+                Row {
+                    id: delegateRoot
+
+                    spacing: Units.gridUnit
+                    Rectangle {
+                        opacity: modelData > 0 ? 0.5 : 0
+                        color: Theme.viewBackgroundColor
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: height
+                        height: Math.min(Units.gridUnit, title.height / 1.6)
+                        radius: width
+                    }
+                    Heading {
+                        id: title
+                        width:Math.min(titleList.width, implicitWidth)
+                        anchors.verticalCenter: parent.verticalCenter
+                        opacity: __pageStack.currentIndex == modelData ? 1 : 0.5
+                        //Scaling animate NativeRendering is too slow
+                        renderType: Text.QtRendering
+                        color: Theme.viewBackgroundColor
+                        elide: Text.ElideRight
+                        text: __pageStack.pageAt(modelData).title
+                        font.pixelSize: headerItem.height / 1.6
+                    }
+                }
+            }
+        }
+        LinearGradient {
+            height: Units.gridUnit/2
+            anchors {
+                right: parent.right
+                left: parent.left
+                top: parent.bottom
+            }
+
+            start: Qt.point(0, 0)
+            end: Qt.point(0, Units.gridUnit/2)
+            gradient: Gradient {
+                GradientStop {
+                    position: 0.0
+                    color: Qt.rgba(0, 0, 0, 0.2)
+                }
+                GradientStop {
+                    position: 0.3
+                    color: Qt.rgba(0, 0, 0, 0.1)
+                }
+                GradientStop {
+                    position: 1.0
+                    color:  "transparent"
+                }
+            }
+        }
+    }
+
     PageRow {
         id: __pageStack
         anchors {
             fill: parent
+            topMargin: Units.gridUnit*1.6
+            //HACK: workaround a bug in android keyboard management
             bottomMargin: Qt.platform.os == "android" ? 0 : Qt.inputMethod.keyboardRectangle.height
         }
         focus: true
@@ -167,7 +254,7 @@ ApplicationWindow {
      * It is recommended to use the GlobalDrawer class here
      */
     property AbstractDrawer globalDrawer
-    
+
     /**
      * contextDrawer: AbstractDrawer
      * The drawer for context-dependednt actions, that will be opened by sliding from the

@@ -28,6 +28,9 @@ MobileComponents.Page {
         color: MobileComponents.Theme.viewBackgroundColor
     }
 
+    title: "Gallery"
+
+    flickable: mainListView
     contextualActions: [
         MobileComponents.Action {
             text:"Action 1"

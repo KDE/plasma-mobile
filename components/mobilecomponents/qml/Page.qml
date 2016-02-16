@@ -30,6 +30,13 @@ Item {
     id: root
 
     /**
+     * Title for the page
+     */
+    property string title
+
+    property Flickable flickable
+
+    /**
      * contextualActions: list<QtObject>
      * Defines the contextual actions for the page:
      * an easy way to assign actions in the right sliding panel
