@@ -17,5 +17,5 @@ Label 0.2 Label.qml
 Heading 0.2 Heading.qml
 AbstractListItem 0.2 AbstractListItem.qml
 BasicListItem 0.2 BasicListItem.qml
-ListItemWithActions 0.2 ListItemWithActions.qml
+ActionsForListItem 0.2 ActionsForListItem.qml
 RefreshableScrollView 0.2 RefreshableScrollView.qml

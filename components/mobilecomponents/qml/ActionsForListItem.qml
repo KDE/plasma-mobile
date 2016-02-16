@@ -30,7 +30,7 @@ import QtGraphicalEffects 1.0
  * @code
  * ListView {
  *     model: myModel
- *     delegate: ListItemWidthActions {
+ *     delegate: ActionsForListItem {
  *         BasicListItem {
  *             label: model.text
  *         }

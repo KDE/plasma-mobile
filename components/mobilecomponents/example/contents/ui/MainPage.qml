@@ -98,7 +98,7 @@ MobileComponents.Page {
                     component: "IconGrid"
                 }
             }
-            delegate: MobileComponents.ListItemWithActions {
+            delegate: MobileComponents.ActionsForListItem {
                 MobileComponents.BasicListItem {
                     supportsMouseEvents: true
                     label: model.text
@@ -113,7 +113,7 @@ MobileComponents.Page {
                     }
                     checked: ownPage && root.pageStack.lastItem == ownPage
                 }
-                
+
                 actions: [
                     MobileComponents.Action {
                         iconName: "document-decrypt"
