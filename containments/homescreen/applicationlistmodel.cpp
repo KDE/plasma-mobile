@@ -136,8 +136,9 @@ void ApplicationListModel::loadApplications()
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
 
-                            if (m_appPositions.contains(service->storageId())) {
-                                orderedList[m_appPositions.value(service->storageId())] = data;
+                            auto it = m_appPositions.constFind(service->storageId());
+                            if (it != m_appPositions.constEnd()) {
+                                orderedList[*it] = data;
                             } else {
                                 unorderedList << data;
                             }
