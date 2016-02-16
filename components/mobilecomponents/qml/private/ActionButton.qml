@@ -26,7 +26,7 @@ Item {
     id: button
 
     implicitWidth: implicitHeight
-    implicitHeight: Units.iconSizes.medium
+    implicitHeight: Units.iconSizes.large
     visible: action != null
 
     //either Action or QAction should work here
@@ -60,8 +60,8 @@ Item {
         drag {
             target: button
             axis: Drag.XAxis
-            minimumX: parent.width/2 - width/2 - (contextDrawer && contextDrawer.enabled ? contextDrawer.contentItem.width : 0)
-            maximumX: parent.width/2 - width/2 + (globalDrawer && globalDrawer.enabled ?  globalDrawer.contentItem.width : 0)
+            minimumX: 0
+            maximumX: button.parent.width
         }
 
         transform: Translate {
@@ -82,17 +82,17 @@ Item {
             var speed = ((x - startX) / ((new Date()).getTime() - downTimestamp) * 1000);
 
             //project where it would be a full second in the future
-            if (globalDrawer && x + speed > Math.min(parent.width/4*3, parent.width/2 + globalDrawer.contentItem.width/2)) {
+            if (globalDrawer && x + speed > Math.min(button.parent.width/4*3, button.parent.width/2 + globalDrawer.contentItem.width/2)) {
                 globalDrawer.open();
                 contextDrawer.close();
-            } else if (contextDrawer && x + speed < Math.max(parent.width/4, parent.width/2 - contextDrawer.contentItem.width/2)) {
+            } else if (contextDrawer && x + speed < Math.max(button.parent.width/4, button.parent.width/2 - contextDrawer.contentItem.width/2)) {print("222")
                 if (contextDrawer) {
                     contextDrawer.open();
                 }
                 if (globalDrawer) {
                     globalDrawer.close();
                 }
-            } else {
+            } else {print("3333")
                 if (globalDrawer) {
                     globalDrawer.close();
                 }
