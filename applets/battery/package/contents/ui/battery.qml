@@ -136,9 +136,11 @@ Item {
         RowLayout {
             id: batteryLayout
             anchors.fill: parent
+            spacing: 0
             PlasmaComponents.Label {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                font.pixelSize: theme.smallestFont.pixelSize
                 text: pmSource.data["Battery"]["Percent"]
                 horizontalAlignment: Text.AlignRight
                 verticalAlignment: Text.AlignVCenter
