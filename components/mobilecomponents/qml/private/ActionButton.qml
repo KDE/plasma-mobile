@@ -25,22 +25,13 @@ import org.kde.plasma.mobilecomponents 0.2
 Item {
     id: button
 
+    //either Action or QAction should work here
+    property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
+
     implicitWidth: implicitHeight
     implicitHeight: Units.iconSizes.large
     visible: action != null
 
-    //either Action or QAction should work here
-    property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
-
-    function toggleVisibility() {
-        showAnimation.running = false;
-        if (translateTransform.y < button.height) {
-            showAnimation.to = button.height;
-        } else {
-            showAnimation.to = 0;
-        }
-        showAnimation.running = true;
-    }
 
     onXChanged: {
         if (mouseArea.pressed) {
@@ -56,6 +47,17 @@ Item {
     MouseArea {
         id: mouseArea
         anchors.fill: parent
+
+        property bool internalVisibility: button.action ? (action.visible === undefined || action.visible === true) : false
+        onInternalVisibilityChanged: {
+            showAnimation.running = false;
+            if (internalVisibility) {
+                showAnimation.to = 0;
+            } else {
+                showAnimation.to = button.height;
+            }
+            showAnimation.running = true;
+        }
 
         drag {
             target: button

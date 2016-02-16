@@ -26,18 +26,18 @@ Page {
     id: page
     Layout.fillWidth: true
     contextualActions: [
-        Controls.Action {
+        Action {
             text:"Action for buttons"
             iconName: "bookmarks"
             onTriggered: print("Action 1 clicked")
         },
-        Controls.Action {
+        Action {
             text:"Action 2"
             iconName: "folder"
             enabled: false
         }
     ]
-    mainAction: Controls.Action {
+    mainAction: Action {
         iconName: sheet.opened ? "dialog-cancel" : "document-edit"
         onTriggered: {
             print("Action button in buttons page clicked");
@@ -60,7 +60,7 @@ Page {
     //Example of Action button optional visibility
     MouseArea {
         anchors.fill: parent
-        onClicked: actionButton.toggleVisibility();
+        onClicked: mainAction.visible = !mainAction.visible;
     }
     Heading {
         text: "Buttons"
