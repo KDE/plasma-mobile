@@ -408,7 +408,7 @@ AbstractDrawer {
                     Rectangle {
                         id: handleGraphics
                         color: Theme.viewBackgroundColor
-                        opacity: 0.3 + root.position
+                        opacity: handleMouseArea.pressed ? 1 : 0.3 + root.position
                         anchors {
                             fill: parent
                             topMargin: Units.gridUnit
@@ -417,10 +417,9 @@ AbstractDrawer {
                         }
                     }
                     ActionButtonArrow {
+                        opacity: 0.8
                         anchors.centerIn: handleGraphics
-                        color: handleMouseArea.pressed || root.position != 0 ? Theme.highlightColor : Theme.textColor
-                        inverted: root.edge == Qt.RightEdge
-                        rotation: 180 * root.position
+                        inverted: (root.edge == Qt.RightEdge ?  0 : 1) - root.position * (root.edge == Qt.RightEdge ?  -1 : 1)
                     }
                 }
                 DropShadow {

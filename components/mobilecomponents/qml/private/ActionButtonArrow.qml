@@ -24,49 +24,26 @@ import org.kde.plasma.mobilecomponents 0.2
 
 Canvas {
     id: canvas
-    width: height / 1.8
-    height: Units.iconSizes.medium - Units.smallSpacing
-    property bool inverted
-    property color color: {
-        if (!mouseArea.pressed) {
-            return Theme.backgroundColor;
-        }
-
-        if (globalDrawer && globalDrawer.position == 0 &&
-            contextDrawer && contextDrawer.position == 0) {
-            return Theme.highlightColor;
-        }
-
-        if (inverted) {
-            if (contextDrawer) {
-                return contextDrawer.position > 0 ? Theme.highlightColor : Theme.backgroundColor;
-            }
-        } else {
-            if (globalDrawer) {
-                return globalDrawer.position > 0 ? Theme.highlightColor : Theme.backgroundColor;
-            }
-        }
-    }
+    width: height
+    height: Units.iconSizes.medium
+    property real inverted
+    property color color: Theme.textColor
 
     anchors.verticalCenter: parent.verticalCenter
 
     onColorChanged: requestPaint()
+    onInvertedChanged: requestPaint()
 
     onPaint: {
         var ctx = canvas.getContext("2d");
-        ctx.lineWidth = Units.smallSpacing/4
+        ctx.lineWidth = Units.smallSpacing/3
         ctx.strokeStyle = canvas.color;
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.beginPath();
-        if (inverted) {
-            ctx.moveTo(canvas.width - Units.smallSpacing, Units.smallSpacing);
-            ctx.lineTo(Units.smallSpacing, canvas.height/2);
-            ctx.lineTo(canvas.width - Units.smallSpacing, canvas.height - Units.smallSpacing);
-        } else {
-            ctx.moveTo(Units.smallSpacing, Units.smallSpacing);
-            ctx.lineTo(canvas.width - Units.smallSpacing, canvas.height/2);
-            ctx.lineTo(Units.smallSpacing, canvas.height -Units.smallSpacing);
-            //ctx.lineTo(0, canvas.height);
-        }
+
+        ctx.moveTo(canvas.width/2, Units.smallSpacing);
+        ctx.lineTo(Units.smallSpacing*2 + (canvas.width - Units.smallSpacing*4) * inverted, canvas.height/2);
+        ctx.lineTo(canvas.width/2, canvas.height - Units.smallSpacing);
         ctx.stroke();
     }
 }
