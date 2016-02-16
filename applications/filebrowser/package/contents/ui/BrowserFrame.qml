@@ -25,6 +25,7 @@ import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.folder 0.1 as Folder
 import org.kde.draganddrop 2.0
+import org.kde.plasma.private.mobileshell 2.0
 
 Item {
     id: browserFrame
@@ -206,7 +207,7 @@ Item {
                     onCountChanged: pinchArea.resetSelection()
                     onModelReset: pinchArea.resetSelection()
                 }
-                MobileComponents.IconGrid {
+                IconGrid {
                     id: resultsGrid
                     delegateWidth: Math.floor(resultsGrid.width / Math.max(Math.floor(resultsGrid.width / (units.gridUnit*12)), 3))
                     delegateHeight: delegateWidth / 1.6

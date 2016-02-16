@@ -19,8 +19,9 @@
 
 import QtQuick 2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.private.mobileshell 2.0
 
-MobileComponents.IconGrid {
+IconGrid {
     id: commonList
     property int currentIndex: 0
     signal closeRequested()

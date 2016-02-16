@@ -4,7 +4,6 @@ module org.kde.plasma.mobilecomponents
 singleton Units 0.2 Units.qml
 singleton Theme 0.2 Theme.qml
 
-IconGrid 0.2 IconGrid.qml
 OverlayDrawer 0.2 OverlayDrawer.qml
 SplitDrawer 0.2 SplitDrawer.qml
 Action 0.2 Action.qml

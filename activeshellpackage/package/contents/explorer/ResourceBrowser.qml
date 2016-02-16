@@ -21,8 +21,9 @@ import QtQuick 2.0
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.private.mobileshell 2.0
 
-MobileComponents.IconGrid {
+IconGrid {
     id: resultsGrid
     anchors.fill: parent
     property string resourceType: ""
