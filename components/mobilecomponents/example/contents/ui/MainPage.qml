@@ -93,10 +93,6 @@ MobileComponents.Page {
                     text: "Text Field"
                     component: "TextField"
                 }
-                ListElement {
-                    text: "Icon Grid"
-                    component: "IconGrid"
-                }
             }
             delegate: MobileComponents.ActionsForListItem {
                 MobileComponents.BasicListItem {
