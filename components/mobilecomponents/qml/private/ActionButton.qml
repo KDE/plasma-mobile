@@ -25,8 +25,9 @@ import org.kde.plasma.mobilecomponents 0.2
 Item {
     id: button
 
-    implicitWidth: parent.width
+    implicitWidth: implicitHeight
     implicitHeight: Units.iconSizes.medium
+    visible: action != null
 
     //either Action or QAction should work here
     property QtObject action: pageStack.currentItem ? pageStack.currentItem.mainAction : null
@@ -163,21 +164,6 @@ Item {
                         fill: parent
                         margins: Units.smallSpacing
                     }
-                }
-                ActionButtonArrow {
-                    anchors {
-                        right: parent.left
-                        rightMargin: Units.smallSpacing
-                    }
-                    visible: contextDrawer && contextDrawer.enabled
-                    inverted: true
-                }
-                ActionButtonArrow {
-                    anchors {
-                        left: parent.right
-                        leftMargin: Units.smallSpacing
-                    }
-                    visible: globalDrawer && globalDrawer.enabled
                 }
                 Behavior on color {
                     ColorAnimation {

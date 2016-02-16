@@ -24,8 +24,8 @@ import org.kde.plasma.mobilecomponents 0.2
 
 Canvas {
     id: canvas
-    width: Units.gridUnit
-    height: width
+    width: height / 1.8
+    height: Units.iconSizes.medium - Units.smallSpacing
     property bool inverted
     property color color: {
         if (!mouseArea.pressed) {
@@ -54,23 +54,20 @@ Canvas {
 
     onPaint: {
         var ctx = canvas.getContext("2d");
-        ctx.fillStyle = canvas.color;
+        ctx.lineWidth = Units.smallSpacing/4
+        ctx.strokeStyle = canvas.color;
         ctx.beginPath();
         if (inverted) {
-            ctx.moveTo(canvas.width, 0);
-            ctx.bezierCurveTo(canvas.width-canvas.width/8, 0,
-                              canvas.width-canvas.width/8, canvas.height,
-                              canvas.width, canvas.height);
-            ctx.lineTo(0, canvas.height/2);
+            ctx.moveTo(canvas.width - Units.smallSpacing, Units.smallSpacing);
+            ctx.lineTo(Units.smallSpacing, canvas.height/2);
+            ctx.lineTo(canvas.width - Units.smallSpacing, canvas.height - Units.smallSpacing);
         } else {
-            ctx.moveTo(0, 0);
-            ctx.bezierCurveTo(canvas.width/8, 0,
-                              canvas.width/8, canvas.height,
-                              0, canvas.height);
-            ctx.lineTo(canvas.width, canvas.height/2);
+            ctx.moveTo(Units.smallSpacing, Units.smallSpacing);
+            ctx.lineTo(canvas.width - Units.smallSpacing, canvas.height/2);
+            ctx.lineTo(Units.smallSpacing, canvas.height -Units.smallSpacing);
             //ctx.lineTo(0, canvas.height);
         }
-        ctx.fill();
+        ctx.stroke();
     }
 }
 

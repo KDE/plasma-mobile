@@ -184,7 +184,7 @@ AbstractDrawer {
         property real oldMouseY
         property bool startDragging: false
 
-        onPressed: {
+        function managePress(mouse) {
             if (drawerPage.children.length == 0) {
                 mouse.accepted = false;
                 return;
@@ -195,6 +195,9 @@ AbstractDrawer {
             oldMouseX = startMouseX = mouse.x;
             oldMouseY = startMouseY = mouse.y;
             startDragging = false;
+        }
+        onPressed: {
+            managePress(mouse)
         }
 
         onPositionChanged: {
@@ -227,6 +230,9 @@ AbstractDrawer {
             oldMouseY = mouse.y;
         }
         onReleased: {
+            if (!startDragging) {
+                return;
+            }
             speedSampler.running = false;
             if (speedSampler.speed != 0) {
                 if (root.edge == Qt.RightEdge || root.edge == Qt.LeftEdge) {
@@ -242,6 +248,22 @@ AbstractDrawer {
                 }
             }
         }
+    }
+
+    MouseArea {
+        id: handleMouseArea
+        anchors {
+            right: root.edge == Qt.LeftEdge ? undefined : parent.right
+            left: root.edge == Qt.RightEdge ? undefined : parent.left
+            bottom: parent.bottom
+        }
+        visible: root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge
+        width: Units.iconSizes.medium
+        height: width
+        onPressed: edgeMouse.managePress(mouse);
+        onPositionChanged: edgeMouse.positionChanged(mouse);
+        onReleased: edgeMouse.released(mouse);
+        onClicked: root.opened ? root.close() : root.open();
     }
 
     Timer {
@@ -368,8 +390,48 @@ AbstractDrawer {
                     }
                     color: Theme.viewBackgroundColor
                     clip: true
-                    width: root.contentItem ? Math.min(root.contentItem.implicitWidth, root.width - Units.gridUnit * 2) : 0
-                    height: root.contentItem ? Math.min(root.contentItem.implicitHeight, root.height - Units.gridUnit * 2) : 0
+                    width: root.contentItem ? Math.min(root.contentItem.implicitWidth, root.width * 0.7) : 0
+                    height: root.contentItem ? Math.min(root.contentItem.implicitHeight, root.height * 0.7) : 0
+                }
+                Item {
+                    id: drawerHandle
+                    z: 2
+
+                    anchors {
+                        right: root.edge == Qt.LeftEdge ? undefined : drawerPage.left
+                        left: root.edge == Qt.RightEdge ? undefined : drawerPage.right
+                        bottom: drawerPage.bottom
+                    }
+                    visible: root.enabled && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge)
+                    width: Units.iconSizes.medium + Units.gridUnit
+                    height: width
+                    Rectangle {
+                        id: handleGraphics
+                        color: Theme.viewBackgroundColor
+                        opacity: 0.3 + root.position
+                        anchors {
+                            fill: parent
+                            topMargin: Units.gridUnit
+                            rightMargin: root.edge == Qt.LeftEdge ? Units.gridUnit : 0
+                            leftMargin: root.edge == Qt.LeftEdge ? 0 : Units.gridUnit
+                        }
+                    }
+                    ActionButtonArrow {
+                        anchors.centerIn: handleGraphics
+                        color: handleMouseArea.pressed || root.position != 0 ? Theme.highlightColor : Theme.textColor
+                        inverted: root.edge == Qt.RightEdge
+                        rotation: 180 * root.position
+                    }
+                }
+                DropShadow {
+                    visible: drawerHandle.visible
+                    anchors.fill: drawerHandle
+                    horizontalOffset: 0
+                    verticalOffset: 0
+                    radius: Units.gridUnit 
+                    samples: 16
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                    source: drawerHandle
                 }
                 LinearGradient {
                     width: Units.gridUnit/2

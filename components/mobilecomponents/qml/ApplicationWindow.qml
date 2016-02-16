@@ -143,11 +143,15 @@ ApplicationWindow {
                     root.contextDrawer.close();
                 } else if (root.globalDrawer && root.globalDrawer.opened) {
                     root.globalDrawer.close();
-                } else if (__pageStack.depth > 1) {
+                } else if (__pageStack.depth >= 1) {
                     var backEvent = {accepted: false}
                     __pageStack.currentItem.backRequested(backEvent);
                     if (!backEvent.accepted) {
-                        __pageStack.pop();
+                        if (__pageStack.depth > 1) {
+                            __pageStack.pop();
+                        } else {
+                            Qt.quit();
+                        }
                     }
                 } else {
                     Qt.quit();
@@ -259,7 +263,5 @@ ApplicationWindow {
         z: 9999
         anchors.bottom: parent.bottom
         x: parent.width/2 - width/2
-
-        visible: action != null || root.globalDrawer || root.contextDrawer
     }
 }
