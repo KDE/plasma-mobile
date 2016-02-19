@@ -122,6 +122,14 @@ ScrollView {
                 property: "bottomMargin"
                 value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
             }
+            Timer {
+                id: resetTimer
+                interval: 100
+                onTriggered: {
+                    flickableItem.contentY = -Units.gridUnit * 1.6
+                }
+            }
         }
     ]
+    onFlickableItemChanged: resetTimer.restart()
 }
