@@ -22,18 +22,13 @@ import QtQuick.Controls 1.2 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
-Page {
+ScrollablePage {
+    id: page
     Layout.fillWidth: true
-    Heading {
-        text: "Text fields"
-        anchors {
-            left: parent.left
-            top: parent.top
-            leftMargin: Units.smallSpacing
-        }
-    }
+    title: "Text fields"
+
     ColumnLayout {
-        anchors.centerIn: parent
+        width: page.width
         spacing: Units.smallSpacing
 
         Label {
@@ -62,6 +57,7 @@ Page {
             text: "Text area:"
         }
         Controls.TextArea {
+            Layout.fillWidth: true
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent eu nisl ac nibh malesuada pretium ut sit amet libero. Nulla libero arcu, pharetra a dignissim nec, iaculis sit amet metus. Suspendisse quis justo efficitur, pharetra dui maximus, aliquam dolor. Vestibulum vel imperdiet turpis. Mauris ut leo mauris. Praesent ut libero sollicitudin, tincidunt nisi a, efficitur erat. Curabitur lacinia leo et tempor aliquam."
             Layout.minimumWidth: Units.gridUnit * 12
             Layout.minimumHeight: Units.gridUnit * 12

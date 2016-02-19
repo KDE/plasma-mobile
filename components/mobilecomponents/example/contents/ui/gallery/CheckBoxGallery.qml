@@ -24,7 +24,7 @@ import org.kde.plasma.mobilecomponents 0.2
 //FIXME
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Page {
+ScrollablePage {
     id: page
     contextualActions: [
         Controls.Action {
@@ -36,23 +36,64 @@ Page {
         }
     ]
     Layout.fillWidth: true
+    title: "Checkboxes"
 
-    Controls.ScrollView {
-        id: scrollView
-        anchors.fill: parent
+    ColumnLayout {
+        width: page.width
+        Item {
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gridUnit * 10
+            GridLayout {
+                anchors.centerIn: parent
+                columns: 3
+                rows: 3
+                rowSpacing: Units.smallSpacing
 
-        ColumnLayout {
-            width: page.width
-            Heading {
-                text: "Checkboxes"
-                anchors {
-                    left: parent.left
-                    leftMargin: Units.smallSpacing
+                Item {
+                    width: 1
+                    height: 1
+                }
+                Label {
+                    text: "Normal"
+                }
+                Label {
+                    text: "Disabled"
+                    enabled: false
+                }
+                Label {
+                    text: "On"
+                }
+                Controls.CheckBox {
+                    text: "On"
+                    checked: true
+                }
+                Controls.CheckBox {
+                    text: "On"
+                    checked: true
+                    enabled: false
+                }
+                Label {
+                    text: "Off"
+                }
+                Controls.CheckBox {
+                    text: "Off"
+                    checked: false
+                }
+                Controls.CheckBox {
+                    text: "Off"
+                    checked: false
+                    enabled: false
                 }
             }
-            Item {
-                Layout.fillWidth: true
-                Layout.minimumHeight: units.gridUnit * 10
+        }
+        //FIXME: possible to have this in mobileComponents?
+        PlasmaCore.ColorScope {
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gridUnit * 10
+            Rectangle {
+                anchors.fill: parent
+                color: PlasmaCore.ColorScope.backgroundColor
                 GridLayout {
                     anchors.centerIn: parent
                     columns: 3
@@ -93,58 +134,6 @@ Page {
                         text: "Off"
                         checked: false
                         enabled: false
-                    }
-                }
-            }
-            //FIXME: possible to have this in mobileComponents?
-            PlasmaCore.ColorScope {
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                Layout.fillWidth: true
-                Layout.minimumHeight: units.gridUnit * 10
-                Rectangle {
-                    anchors.fill: parent
-                    color: PlasmaCore.ColorScope.backgroundColor
-                    GridLayout {
-                        anchors.centerIn: parent
-                        columns: 3
-                        rows: 3
-                        rowSpacing: Units.smallSpacing
-
-                        Item {
-                            width: 1
-                            height: 1
-                        }
-                        Label {
-                            text: "Normal"
-                        }
-                        Label {
-                            text: "Disabled"
-                            enabled: false
-                        }
-                        Label {
-                            text: "On"
-                        }
-                        Controls.CheckBox {
-                            text: "On"
-                            checked: true
-                        }
-                        Controls.CheckBox {
-                            text: "On"
-                            checked: true
-                            enabled: false
-                        }
-                        Label {
-                            text: "Off"
-                        }
-                        Controls.CheckBox {
-                            text: "Off"
-                            checked: false
-                        }
-                        Controls.CheckBox {
-                            text: "Off"
-                            checked: false
-                            enabled: false
-                        }
                     }
                 }
             }

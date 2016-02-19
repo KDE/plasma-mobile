@@ -22,7 +22,7 @@ import QtQuick.Controls 1.2 as Controls
 import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
-Page {
+ScrollablePage {
     id: page
     Layout.fillWidth: true
     title: "Buttons"
@@ -58,21 +58,28 @@ Page {
         }
     }
 
-    //Example of Action button optional visibility
-    MouseArea {
+    OverlayDrawer {
+        id: sheet
         anchors.fill: parent
-        onClicked: mainAction.visible = !mainAction.visible;
-    }
-    Heading {
-        text: "Buttons"
-        anchors {
-            left: parent.left
-            top: parent.top
-            leftMargin: Units.smallSpacing
+        edge: Qt.BottomEdge
+        contentItem: Item {
+            implicitWidth: Units.gridUnit * 8
+            implicitHeight: Units.gridUnit * 8
+            ColumnLayout {
+                anchors.centerIn: parent
+                Controls.Button {
+                    text: "Button1"
+                    onClicked: print(root)
+                }
+                Controls.Button {
+                    text: "Button2"
+                }
+            }
         }
     }
+
     ColumnLayout {
-        anchors.centerIn: parent
+        width: page.width
         spacing: Units.smallSpacing
 
         Controls.Button {
@@ -84,6 +91,11 @@ Page {
             text: "Push another"
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: pageStack.push(Qt.resolvedUrl("ButtonGallery.qml"));
+        }
+        Controls.Button {
+            text: "Toggle Action Button"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: mainAction.visible = !mainAction.visible;
         }
         Controls.Button {
             text: "Show Passive Notification"
@@ -139,23 +151,5 @@ Page {
         }
     }
  
-    OverlayDrawer {
-        id: sheet
-        anchors.fill: parent
-        edge: Qt.BottomEdge
-        contentItem: Item {
-            implicitWidth: Units.gridUnit * 8
-            implicitHeight: Units.gridUnit * 8
-            ColumnLayout {
-                anchors.centerIn: parent
-                Controls.Button {
-                    text: "Button1"
-                    onClicked: print(root)
-                }
-                Controls.Button {
-                    text: "Button2"
-                }
-            }
-        }
-    }
+    
 }

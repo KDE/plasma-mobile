@@ -24,16 +24,28 @@ import "private"
 
 /**
  * Page is a container for all the app pages: everything pushed to the
- * ApplicationWindow stackView should be a Page instabnce
+ * ApplicationWindow stackView should be a Page instabnce (or a subclass,
+ * such as ScrollablePage)
+ * @see ScrollablePage
  */
 Item {
     id: root
 
     /**
+     * title: string
      * Title for the page
      */
     property string title
 
+    /**
+     * flickable: Flickable
+     * if the central element of the page is a Flickable
+     * (ListView and Gridview as well) you can set it there.
+     * normally, you wouldn't need to do that, but just use the
+     * ScrollablePage element instead
+     * @see ScrollablePage
+     * Use this if your flickable has some non standard properties, such as not covering the whole Page
+     */
     property Flickable flickable
 
     /**
@@ -103,6 +115,7 @@ Item {
     property QtObject mainAction
 
     /**
+     * background: Item
      * This property holds the background item.
      * Note: If the background item has no explicit size specified,
      * it automatically follows the control's size.

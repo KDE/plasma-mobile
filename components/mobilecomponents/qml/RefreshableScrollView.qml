@@ -116,6 +116,7 @@ ScrollView {
                 value: height/2
             }
 
+
             Binding {
                 target: root.flickableItem
                 property: "bottomMargin"

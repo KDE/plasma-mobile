@@ -24,26 +24,64 @@ import org.kde.plasma.mobilecomponents 0.2
 //FIXME
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-Page {
+ScrollablePage {
     id: page
     Layout.fillWidth: true
+    title: "Switches"
 
-    Controls.ScrollView {
-        id: scrollView
-        anchors.fill: parent
+    ColumnLayout {
+        width: page.width
 
-        ColumnLayout {
-            width: page.width
-            Heading {
-                text: "Switches"
-                anchors {
-                    left: parent.left
-                    leftMargin: Units.smallSpacing
+        Item {
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gridUnit * 10
+            GridLayout {
+                anchors.centerIn: parent
+                columns: 3
+                rows: 3
+                rowSpacing: Units.smallSpacing
+
+                Item {
+                    width: 1
+                    height: 1
+                }
+                Label {
+                    text: "Normal"
+                }
+                Label {
+                    text: "Disabled"
+                    enabled: false
+                }
+                Label {
+                    text: "On"
+                }
+                Controls.Switch {
+                    checked: true
+                }
+                Controls.Switch {
+                    checked: true
+                    enabled: false
+                }
+                Label {
+                    text: "Off"
+                }
+                Controls.Switch {
+                    checked: false
+                }
+                Controls.Switch {
+                    checked: false
+                    enabled: false
                 }
             }
-            Item {
-                Layout.fillWidth: true
-                Layout.minimumHeight: units.gridUnit * 10
+        }
+        //FIXME: possible to have this in mobileComponents?
+        PlasmaCore.ColorScope {
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gridUnit * 10
+            Rectangle {
+                anchors.fill: parent
+                color: PlasmaCore.ColorScope.backgroundColor
                 GridLayout {
                     anchors.centerIn: parent
                     columns: 3
@@ -80,54 +118,6 @@ Page {
                     Controls.Switch {
                         checked: false
                         enabled: false
-                    }
-                }
-            }
-            //FIXME: possible to have this in mobileComponents?
-            PlasmaCore.ColorScope {
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                Layout.fillWidth: true
-                Layout.minimumHeight: units.gridUnit * 10
-                Rectangle {
-                    anchors.fill: parent
-                    color: PlasmaCore.ColorScope.backgroundColor
-                    GridLayout {
-                        anchors.centerIn: parent
-                        columns: 3
-                        rows: 3
-                        rowSpacing: Units.smallSpacing
-
-                        Item {
-                            width: 1
-                            height: 1
-                        }
-                        Label {
-                            text: "Normal"
-                        }
-                        Label {
-                            text: "Disabled"
-                            enabled: false
-                        }
-                        Label {
-                            text: "On"
-                        }
-                        Controls.Switch {
-                            checked: true
-                        }
-                        Controls.Switch {
-                            checked: true
-                            enabled: false
-                        }
-                        Label {
-                            text: "Off"
-                        }
-                        Controls.Switch {
-                            checked: false
-                        }
-                        Controls.Switch {
-                            checked: false
-                            enabled: false
-                        }
                     }
                 }
             }
