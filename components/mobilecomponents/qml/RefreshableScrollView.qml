@@ -122,6 +122,7 @@ ScrollView {
                 property: "bottomMargin"
                 value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
             }
+            //FIXME: this shouldn't exist
             Timer {
                 id: resetTimer
                 interval: 100
