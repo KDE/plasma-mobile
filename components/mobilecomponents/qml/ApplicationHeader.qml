@@ -17,8 +17,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.1
+import QtQuick 2.5
 import QtQuick.Controls 1.3
+import QtQuick.Layouts 1.2
 import "private"
 import org.kde.plasma.mobilecomponents 0.2
 import QtGraphicalEffects 1.0
@@ -32,13 +33,17 @@ Rectangle {
         right: parent.right
     }
     color: Theme.highlightColor
-    height: Math.max(Units.gridUnit*1.6, Math.min(units.gridUnit * 5, -Math.min(0, appWindow.pageStack.currentItem.flickable.contentY)))
-    y: Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY-Units.gridUnit*1.6)
+    Layout.minimumHeight: Units.gridUnit*1.6
+
+    height: units.gridUnit * 5
+    //height: Math.max(Units.gridUnit*1.6, Math.min(units.gridUnit * 5, -Math.min(0, appWindow.pageStack.currentItem.flickable.contentY)))
+    y: Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY - height)
 
     property QtObject appWindow: applicationWindow();
     parent: appWindow.contentItem;
 
-    Behavior on height {
+    Behavior on y {
+        enabled: !appWindow.pageStack.currentItem.flickable.moving
         NumberAnimation {
             duration: Units.longDuration
             easing.type: Easing.InOutQuad
@@ -46,7 +51,10 @@ Rectangle {
     }
     ListView {
         id: titleList
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            topMargin: Math.min(headerItem.height - headerItem.Layout.minimumHeight, -headerItem.y)
+        }
         orientation: ListView.Horizontal
         model: appWindow.pageStack.depth
         spacing: Units.gridUnit
@@ -54,7 +62,7 @@ Rectangle {
         snapMode: ListView.SnapToItem
         delegate:MouseArea {
             width: Math.min(titleList.width, delegateRoot.implicitWidth)
-            height: delegateRoot.height
+            height: titleList.height
             onClicked: appWindow.pageStack.currentIndex = modelData
             Row {
                 id: delegateRoot
@@ -78,13 +86,14 @@ Rectangle {
                     color: Theme.viewBackgroundColor
                     elide: Text.ElideRight
                     text: appWindow.pageStack.pageAt(modelData).title
-                    font.pixelSize: headerItem.height / 1.6
+                    font.pixelSize: titleList.height / 1.6
                 }
             }
         }
     }
     LinearGradient {
         height: Units.gridUnit/2
+        opacity: headerItem.y > -headerItem.height ? 1 : 0
         anchors {
             right: parent.right
             left: parent.left
@@ -105,6 +114,12 @@ Rectangle {
             GradientStop {
                 position: 1.0
                 color:  "transparent"
+            }
+        }
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: Units.longDuration
+                easing.type: Easing.InOutQuad
             }
         }
     }

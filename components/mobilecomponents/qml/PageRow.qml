@@ -115,7 +115,6 @@ Item {
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, false, false)
         actualRoot.currentIndex = depth-1;
-        internal.syncWithCurrentIndex();
         return item
     }
 
@@ -128,7 +127,6 @@ Item {
      */
     function pop(page) {
         actualRoot.currentIndex = depth-1;
-        internal.syncWithCurrentIndex();
         return Engine.pop(page, false);
     }
 
@@ -152,7 +150,6 @@ Item {
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, true, false);
         actualRoot.currentIndex = depth-1;
-        internal.syncWithCurrentIndex();
         return item
     }
 
@@ -208,12 +205,9 @@ Item {
                     return;
                 }
 
-                actualRoot.currentIndex = Math.min(Math.floor((mainFlickable.contentX + mainFlickable.width - 1)/defaultColumnWidth), actualRoot.depth-1);
-                internal.syncWithCurrentIndex();
-                actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
-                if (!actualRoot.currentItem) {
-                    actualRoot.currentItem = actualRoot.lastItem;
-                }
+                //to not break syncIndexWithPosition
+                scrollAnimation.running = false;
+                internal.syncIndexWithPosition();
             }
         }
     }
@@ -266,14 +260,43 @@ Item {
         // Duration of transition animation (in ms)
         property int transitionDuration: Units.longDuration
 
-        function syncWithCurrentIndex() {
-            if (currentIndex < 0 || currentIndex > depth || root.width < width) {
-                return
+        function syncIndexWithPosition() {
+            if (scrollAnimation.running) {
+                return;
             }
 
-            var firstLevel = Math.max(0, currentIndex - mainFlickable.width/defaultColumnWidth + 1);
-            scrollAnimation.to = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * firstLevel), mainFlickable.contentWidth));
-            scrollAnimation.running = true;
+            //search the last page to kinda fit
+            for (var i = Engine.pageStack.length - 1; i >= 0; --i) {
+                if (Engine.pageStack[i].mapToItem(mainFlickable).x < Engine.pageStack[i].width /2) {
+                    actualRoot.currentIndex = i;
+                    break;
+                }
+            }
+
+            actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
+            if (!actualRoot.currentItem) {
+                actualRoot.currentItem = actualRoot.lastItem;
+            }
+        }
+
+        function syncWithCurrentIndex() {
+            if (currentIndex < 0 || currentIndex > depth || root.width < width) {
+                return;
+            }
+
+            var itemAtPrevIndex = Engine.pageStack[Math.max(0, currentIndex-1)];
+
+            scrollAnimation.running = false;
+            if (currentIndex > 0) {
+                var itemAtPrevIndex = Engine.pageStack[Math.max(0, currentIndex-1)];
+                scrollAnimation.to = Math.min(itemAtPrevIndex.x + itemAtPrevIndex.page.width, mainFlickable.contentWidth - mainFlickable.width);
+            } else {
+                scrollAnimation.to = 0;
+            }
+            //don't bother if we don't actually move
+            if (mainFlickable.contentX != scrollAnimation.to) {
+                scrollAnimation.running = true;
+            }
         }
     }
 
@@ -287,21 +310,18 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             contentWidth: root.width
             contentHeight: height
+            onContentWidthChanged: internal.syncWithCurrentIndex();
             Row {
                 id: root
                 spacing: -Units.gridUnit * 8
                 width: Math.max((depth-1+children[children.length-1].takenColumns) * defaultColumnWidth, childrenRect.width - Units.gridUnit * 8)
 
                 height: parent.height
-                Behavior on width {
-                    NumberAnimation {
-                        duration: internal.transitionDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
             }
             onMovementEnded: {
-                actualRoot.currentIndex = (Math.round(contentX/defaultColumnWidth));
+                //get correct index
+                internal.syncIndexWithPosition();
+                //snap
                 internal.syncWithCurrentIndex();
             }
             onFlickEnded: {
@@ -478,6 +498,7 @@ Item {
                 if (cleanupAfterTransition) {
                     cleanup();
                 }
+                internal.syncWithCurrentIndex();
             }
 
             states: [

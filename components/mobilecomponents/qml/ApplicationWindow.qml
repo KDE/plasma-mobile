@@ -62,7 +62,7 @@ import QtGraphicalEffects 1.0
  *         id: contextDrawer
  *     }
  * 
- *     initialPage: MobileComponents.Page {
+ *     pageStack.initialPage: MobileComponents.Page {
  *         mainAction: MobileComponents.Action {
  *             iconName: "edit"
  *             onTriggered: {
@@ -128,11 +128,15 @@ ApplicationWindow {
         __actionButton.__passiveNotification.showNotification(message, timeout, actionText, callBack);
     }
 
+    /**
+     * @returns a pointer to this application window
+     * can be used anywhere in the application.
+     */
     function applicationWindow() {
         return root;
     }
 
-    property Item header: HeaderItem {
+    property Item header: ApplicationHeader {
     }
 
     PageRow {
