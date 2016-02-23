@@ -84,7 +84,7 @@ Item {
      * Pages can override it with their Layout.fillWidth,
      * implicitWidth Layout.minimumWidth etc.
      */
-    property int defaultColumnWidth: Math.round(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.round(parent.width/(Units.gridUnit*30)) : width
+    property int defaultColumnWidth: Math.floor(parent.width/(Units.gridUnit*30)) > 0 ? parent.width/Math.floor(parent.width/(Units.gridUnit*30)) : width
 
 //END PROPERTIES
 
@@ -184,6 +184,11 @@ Item {
 //END FUNCTIONS
     onCurrentIndexChanged: {
         internal.syncWithCurrentIndex();
+
+        actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
+        if (!actualRoot.currentItem) {
+            actualRoot.currentItem = actualRoot.lastItem;
+        }
     }
 
     property alias clip: scrollArea.clip
@@ -205,6 +210,7 @@ Item {
                     return;
                 }
 
+                mainFlickable.returnToBounds();
                 //to not break syncIndexWithPosition
                 scrollAnimation.running = false;
                 internal.syncIndexWithPosition();
@@ -272,11 +278,6 @@ Item {
                     break;
                 }
             }
-
-            actualRoot.currentItem = Engine.pageStack[actualRoot.currentIndex].page;
-            if (!actualRoot.currentItem) {
-                actualRoot.currentItem = actualRoot.lastItem;
-            }
         }
 
         function syncWithCurrentIndex() {
@@ -303,18 +304,19 @@ Item {
     ScrollView {
         id: scrollArea
         anchors.fill: parent
+        verticalScrollBarPolicy: Qt.ScrollBarAlwaysOff
         Flickable {
             id: mainFlickable
             anchors.fill: parent
-            interactive: root.width > width
+            interactive: true//root.width > width
             boundsBehavior: Flickable.StopAtBounds
             contentWidth: root.width
             contentHeight: height
             onContentWidthChanged: internal.syncWithCurrentIndex();
             Row {
                 id: root
-                spacing: -Units.gridUnit * 8
-                width: Math.max((depth-1+children[children.length-1].takenColumns) * defaultColumnWidth, childrenRect.width - Units.gridUnit * 8)
+                spacing: 0
+                width: Math.max((depth-1+children[children.length-1].takenColumns) * defaultColumnWidth, childrenRect.width)
 
                 height: parent.height
             }
@@ -336,7 +338,7 @@ Item {
 
         Item {
             id: container
-            implicitWidth: actualContainer.width + Units.gridUnit * 8
+            implicitWidth: actualContainer.width //+ Units.gridUnit * 8
             width: implicitWidth
             height: parent ? parent.height : 0
 
@@ -391,7 +393,6 @@ Item {
                     top: parent.top
                     bottom: parent.bottom
                     right: parent.right
-                    rightMargin: Units.gridUnit * 8
                 }
 
                 property int takenColumns: {
