@@ -92,6 +92,17 @@ ScrollView {
                 opacity: supportsRefreshing ? (root.refreshing ? 1 : (parent.y/(busyIndicator.height*2))) : 0
                 rotation: root.refreshing ? 0 : 360 * opacity
             }
+            Label {
+                id: label
+                anchors {
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                    bottomMargin: Units.gridUnit * 2
+                }
+                //FIXME: how to translate at this tier?
+                text: "Pull down to refresh"
+                opacity: supportsRefreshing ? (root.refreshing ? 0 : Math.min(1, ((parent.height - Units.gridUnit * 8) + parent.y) / (Units.gridUnit * 9))) : 0
+            }
             Rectangle {
                 color: Theme.textColor
                 opacity: 0.2
@@ -100,7 +111,9 @@ ScrollView {
                     right: parent.right
                     bottom: parent.bottom
                 }
-                height: 1
+                //only show in ListViews
+                visible: root.flickableItem == root.contentItem
+                height: Math.round(Units.smallSpacing / 3);
             }
             onYChanged: {
                 if (!supportsRefreshing) {
