@@ -259,7 +259,10 @@ Item {
     Component.onCompleted: {
         internal.completed = true
         if (initialPage && depth == 0) {
-            push(initialPage, null, true);
+            scrollAnimation.running = false;
+            //Disable animation: push() doesn't expose this anymore
+            Engine.push(initialPage, null, false, true)
+            actualRoot.currentIndex = depth-1;
         }
         actualRoot.currentItem = actualRoot.lastItem;
     }

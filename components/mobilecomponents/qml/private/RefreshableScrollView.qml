@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.1
+import QtQuick 2.5
 import QtQuick.Controls 1.3
 import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
@@ -102,6 +102,12 @@ ScrollView {
                 //FIXME: how to translate at this tier?
                 text: "Pull down to refresh"
                 opacity: supportsRefreshing ? (root.refreshing ? 0 : Math.min(1, ((parent.height - Units.gridUnit * 8) + parent.y) / (Units.gridUnit * 9))) : 0
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
             }
             Rectangle {
                 color: Theme.textColor
