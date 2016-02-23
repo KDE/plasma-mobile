@@ -45,7 +45,7 @@ import QtQuick.Controls 1.0
 import QtQuick.Layouts 1.2
 import org.kde.plasma.mobilecomponents 0.2
 
-import "private/PageStack.js" as Engine
+import "PageStack.js" as Engine
 
 Item {
     id: actualRoot
