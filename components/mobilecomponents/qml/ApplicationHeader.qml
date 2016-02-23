@@ -36,7 +36,7 @@ Rectangle {
     Layout.minimumHeight: Units.gridUnit*1.6
 
     height: units.gridUnit * 5
-    //height: Math.max(Units.gridUnit*1.6, Math.min(units.gridUnit * 5, -Math.min(0, appWindow.pageStack.currentItem.flickable.contentY)))
+
     y: Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY - height)
 
     property QtObject appWindow: applicationWindow();
@@ -55,13 +55,40 @@ Rectangle {
             fill: parent
             topMargin: Math.min(headerItem.height - headerItem.Layout.minimumHeight, -headerItem.y)
         }
+        property bool wideScreen: appWindow.pageStack.currentItem && appWindow.pageStack.currentItem.width > 0 && appWindow.pageStack.width > appWindow.pageStack.currentItem.width
         orientation: ListView.Horizontal
+        boundsBehavior: Flickable.StopAtBounds
         model: appWindow.pageStack.depth
-        spacing: Units.gridUnit
+        spacing: wideScreen ? 0 : Units.gridUnit
         currentIndex: appWindow.pageStack.currentIndex
         snapMode: ListView.SnapToItem
-        delegate:MouseArea {
-            width: Math.min(titleList.width, delegateRoot.implicitWidth)
+
+        onCurrentIndexChanged: {
+            positionViewAtIndex(currentIndex, ListView.Contain);
+        }
+
+        onContentXChanged: {
+            if (wideScreen && !appWindow.pageStack.contentItem.moving) {
+                appWindow.pageStack.contentItem.contentX = titleList.contentX
+            }
+        }
+        onHeightChanged: {
+            titleList.returnToBounds()
+        }
+        onMovementEnded: {
+            if (wideScreen) {
+                appWindow.pageStack.contentItem.movementEnded();
+            }
+        }
+        delegate: MouseArea {
+            width: {
+                //more columns shown?
+                if (titleList.wideScreen) {
+                    return appWindow.pageStack.defaultColumnWidth;
+                } else {
+                    return Math.min(titleList.width, delegateRoot.implicitWidth);
+                }
+            }
             height: titleList.height
             onClicked: appWindow.pageStack.currentIndex = modelData
             Row {
@@ -70,6 +97,7 @@ Rectangle {
                 spacing: Units.gridUnit
                 Rectangle {
                     opacity: modelData > 0 ? 0.5 : 0
+                    visible: !titleList.wideScreen
                     color: Theme.viewBackgroundColor
                     anchors.verticalCenter: parent.verticalCenter
                     width: height
@@ -87,6 +115,22 @@ Rectangle {
                     elide: Text.ElideRight
                     text: appWindow.pageStack.pageAt(modelData).title
                     font.pixelSize: titleList.height / 1.6
+                }
+            }
+            Connections {
+                target: appWindow.pageStack.pageAt(modelData).flickable
+                onMovingChanged: {
+                    if (appWindow.pageStack.pageAt(modelData).flickable.moving) {
+                        appWindow.pageStack.currentIndex = modelData
+                    }
+                }
+            }
+        }
+        Connections {
+            target: titleList.wideScreen ? appWindow.pageStack.contentItem : null
+            onContentXChanged: {
+                if (!titleList.contentItem.moving) {
+                    titleList.contentX = Math.max(0, appWindow.pageStack.contentItem.contentX)
                 }
             }
         }

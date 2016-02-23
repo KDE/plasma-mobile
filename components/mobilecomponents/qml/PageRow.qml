@@ -79,6 +79,11 @@ Item {
     property variant initialPage
 
     /**
+     * The main flickable of this Row
+     */
+    property alias contentItem: mainFlickable
+
+    /**
      * The default width for a column
      * default is wide enough for 30 characters.
      * Pages can override it with their Layout.fillWidth,
@@ -285,6 +290,8 @@ Item {
                 return;
             }
 
+            var itemAtIndex = Engine.pageStack[Math.max(0, currentIndex)];
+            //Why itemAtPrevIndex? sometimes itemAtIndex is not positioned yet
             var itemAtPrevIndex = Engine.pageStack[Math.max(0, currentIndex-1)];
 
             scrollAnimation.running = false;
@@ -294,8 +301,12 @@ Item {
             } else {
                 scrollAnimation.to = 0;
             }
+
             //don't bother if we don't actually move
-            if (mainFlickable.contentX != scrollAnimation.to) {
+            if (mainFlickable.contentX != scrollAnimation.to &&
+                //If current page is completely contained, don't scroll
+                !(mainFlickable.contentX < scrollAnimation.to &&
+                 mainFlickable.contentX + actualRoot.width > scrollAnimation.to + itemAtIndex.width)) {
                 scrollAnimation.running = true;
             }
         }
