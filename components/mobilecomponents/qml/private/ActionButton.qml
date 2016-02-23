@@ -94,7 +94,7 @@ Item {
                 if (globalDrawer) {
                     globalDrawer.close();
                 }
-            } else {print("3333")
+            } else {
                 if (globalDrawer) {
                     globalDrawer.close();
                 }

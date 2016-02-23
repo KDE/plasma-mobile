@@ -140,5 +140,40 @@ Item {
      */
     signal backRequested(var event);
 
+    /**
+     * actionButton: ActionButton
+     * Readonly.
+     * ActionButton can't be instantiated directly by the user.
+     * This is the Action button shown in the middle bottom of the page.
+     * It will open the side drawers by dragging it around.
+     * Also, it is possible to assign an Action to it, dependent from the page.
+     *
+     * Example usage:
+     *
+     * @code
+     * import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+     * MobileComponents.Page {
+     *     mainAction: MobileComponents.Action {
+     *         iconName: "edit"
+     *         onTriggered: {
+     *             // do stuff
+     *         }
+     *     }
+     * }
+     * @endcode
+     *
+     * When that page will be the current one in the app, the action button
+     * will have the icon of the page's mainAction and when clicked it will
+     * trigger it.
+     */
+    property alias actionButton: __actionButton
+    ActionButton {
+        id: __actionButton
+        z: 9999
+        action: root.mainAction
+        anchors.bottom: parent.bottom
+        x: parent.width/2 - width/2
+    }
+
     Layout.fillWidth: true
 }
