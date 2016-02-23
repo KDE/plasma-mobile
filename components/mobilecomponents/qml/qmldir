@@ -19,4 +19,3 @@ ScrollablePage 0.2 ScrollablePage.qml
 AbstractListItem 0.2 AbstractListItem.qml
 BasicListItem 0.2 BasicListItem.qml
 ActionsForListItem 0.2 ActionsForListItem.qml
-RefreshableScrollView 0.2 RefreshableScrollView.qml

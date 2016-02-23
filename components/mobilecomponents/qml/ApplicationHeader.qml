@@ -49,6 +49,7 @@ Rectangle {
             easing.type: Easing.InOutQuad
         }
     }
+
     ListView {
         id: titleList
         anchors {
@@ -58,6 +59,7 @@ Rectangle {
         property bool wideScreen: appWindow.pageStack.currentItem && appWindow.pageStack.currentItem.width > 0 && appWindow.pageStack.width > appWindow.pageStack.currentItem.width
         orientation: ListView.Horizontal
         boundsBehavior: Flickable.StopAtBounds
+        //FIXME: proper implmentation needs Qt 5.6 for new ObjectModel api
         model: appWindow.pageStack.depth
         spacing: wideScreen ? 0 : Units.gridUnit
         currentIndex: appWindow.pageStack.currentIndex

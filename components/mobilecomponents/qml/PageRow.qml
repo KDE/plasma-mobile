@@ -74,6 +74,11 @@ Item {
     property int currentIndex: 0
 
     /**
+     * This property holds the list of content children.
+     */
+    property var contentChildren: Engine.actualPages
+
+    /**
      * The initial item when this PageRow is created
      */
     property variant initialPage

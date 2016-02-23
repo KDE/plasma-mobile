@@ -176,7 +176,7 @@ Item {
     onPositionChanged: {
         if (!handleMouse.pressed && !mainFlickable.flicking &&
             !mainFlickable.dragging && !positionAnimation.running) {
-            mainFlickable.contentX = (listItemRoot.width-listItemRoot.height) * internalPosition;
+            mainFlickable.contentX = (listItemRoot.width-listItemRoot.height) * mainFlickable.internalPosition;
         }
     }
 //END signal handlers

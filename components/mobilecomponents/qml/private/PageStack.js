@@ -41,6 +41,9 @@
 // Page stack. Items are page containers.
 var pageStack = [];
 
+// Page stack. Items are the actual pages.
+var actualPages = [];
+
 // Page component cache map. Key is page url, value is page component.
 var componentCache = {};
 
@@ -78,6 +81,8 @@ function push(page, properties, replace, immediate) {
     // pop the old container off the stack if this is a replace
     if (oldContainer && replace) {
         pageStack.pop();
+        actualPages.pop();
+        actualRoot.contentChildrenChanged();
     }
 
     // push any extra defined pages onto the stack
@@ -91,6 +96,8 @@ function push(page, properties, replace, immediate) {
                 tPage = tPage.page;
             }
             pageStack.push(initPage(tPage, tProps));
+            actualPages.push(pages[i]);
+            actualRoot.contentChildrenChanged();
         }
     }
 
@@ -99,6 +106,8 @@ function push(page, properties, replace, immediate) {
 
     // push the page container onto the stack
     pageStack.push(container);
+    actualPages.push(container.page);
+    actualRoot.contentChildrenChanged();
 
     depth = pageStack.length;
     lastItem = container.page;
@@ -189,6 +198,8 @@ function pop(page, immediate) {
             // an unwind target has been specified - pop until we find it
             while (page != container.page && pageStack.length > 1) {
                 pageStack.pop();
+                actualPages.pop();
+                actualRoot.contentChildrenChanged();
                 container.popExit(immediate, false);
                 container = pageStack[pageStack.length - 1];
             }
@@ -224,8 +235,10 @@ function orientationChanges(oldPage, newPage) {
 function clear() {
     var container;
     while (container = pageStack.pop()) {
+        actualPages.pop();
         container.cleanup();
     }
+    actualRoot.contentChildrenChanged();
     depth = 0;
     lastItem = null;
 }
