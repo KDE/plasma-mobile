@@ -416,10 +416,12 @@ AbstractDrawer {
                             leftMargin: root.edge == Qt.LeftEdge ? 0 : Units.gridUnit
                         }
                     }
-                    ActionButtonArrow {
-                        opacity: 0.8
+
+                    Loader {
                         anchors.centerIn: handleGraphics
-                        inverted: (root.edge == Qt.RightEdge ?  0 : 1) - root.position * (root.edge == Qt.RightEdge ?  -1 : 1)
+                        width: height
+                        height: Units.iconSizes.smallMedium - Units.smallSpacing * 2
+                        source: root.edge == Qt.LeftEdge ? Qt.resolvedUrl("private/MenuIcon.qml") : (root.edge == Qt.RightEdge ? Qt.resolvedUrl("private/ContextIcon.qml") : "")
                     }
                 }
                 DropShadow {
