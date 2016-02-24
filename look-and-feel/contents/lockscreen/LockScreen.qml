@@ -1,188 +1,94 @@
+/********************************************************************
+ This file is part of the KDE project.
+
+Copyright (C) 2014 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*********************************************************************/
+
 import QtQuick 2.0
+import QtQuick.Controls 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.private.sessions 2.0
 import "../components"
 
-Leaves {
-    id: lockscreen
-    signal tryUnlock(string code)
+Image {
+    id: root
+    property bool viewVisible: false
+    property bool debug: false
+    property string notification
+    property Item userSelect: null
+    property int interfaceVersion: org_kde_plasma_screenlocker_greeter_interfaceVersion ? org_kde_plasma_screenlocker_greeter_interfaceVersion : 0
+    signal clearPassword()
 
-    PlasmaCore.Svg {
-        id: symbolsSvg
-        imagePath:  Qt.resolvedUrl("images/symbols.svgz")
+    source: backgroundPath || "../components/artwork/background.png"
+    fillMode: Image.PreserveAspectCrop
+    asynchronous: true
+
+    onStatusChanged: {
+        if (status == Image.Error) {
+            source = "../components/artwork/background.png";
+        }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        onPressed: {
-            stripe.opacity = 1;
+    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+    LayoutMirroring.childrenInherit: true
+
+    Connections {
+        target: authenticator
+        onFailed: {
+            root.notification = i18nd("plasma_lookandfeel_org.kde.lookandfeel","Unlocking failed");
         }
+        onGraceLockedChanged: {
+            if (!authenticator.graceLocked) {
+                root.notification = "";
+                root.clearPassword();
+            }
+        }
+        onMessage: {
+            root.notification = msg;
+        }
+        onError: {
+            root.notification = err;
+        }
+    }
+
+    SessionsModel {
+        id: sessionsModel
     }
 
     PlasmaCore.DataSource {
-        id: dataSource
-        engine: "time"
-        connectedSources: "Local"
-        interval: 30000
+        id: keystateSource
+        engine: "keystate"
+        connectedSources: "Caps Lock"
+    }
 
-        onDataChanged: {
-            var date = new Date(data["Local"]["DateTime"]);
-            hour.text = date.getHours();
-            minute.text = date.getMinutes();
-        }
+    StackView {
+        id: stackView
+        anchors.fill: parent
 
-        Component.onCompleted: {
-            onDataChanged();
+        initialItem: Loader {
+            active: root.viewVisible
+            source: "MainBlock.qml"
         }
     }
 
-    Text {
-        id: hour
-
-        onTextChanged: {
-            if (text.length < 2) {
-                minute.text = "0" + text;
-            }
-        }
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            bottom: stripe.top
-        }
-        color: "white" // FIXME: base on wallpaper?
-        text: "00"
-        font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
-        horizontalAlignment: Qt.AlignCenter
-        verticalAlignment: Qt.AlignVCenter
-    }
-
-    SatelliteStripe {
-        id: stripe
-        opacity: 0
-
-        property string code
-
-        function lockKeyPressed(id) {
-            hideTimer.stop();
-            code += id;
-        }
-
-        function lockKeyReleased(id) {
-            hideTimer.start();
-            code += id;
-        }
-
-        Behavior on opacity {
-            NumberAnimation {
-                duration: 500
-                easing.type: Easing.InOutQuad
-            }
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            onPressed: {
-                if (stripe.opacity < 1) {
-                    stripe.opacity = 1;
-                    return;
-                }
-
-                stripe.lockKeyPressed(stripe.childAt(mouseX, mouseY).value);
-            }
-
-            onReleased: {
-                if (stripe.opacity < 1) {
-                    return;
-                }
-
-                stripe.lockKeyReleased(stripe.childAt(mouseX, mouseY).value);
-            }
-        }
-
-        Timer {
-            id: hideTimer
-            interval: 1000
-            running: parent.opacity == 1
-            onTriggered: {
-                stripe.opacity = 0;
-                lockscreen.tryUnlock(stripe.code);
-                stripe.code = '';
-            }
-        }
-
-        LockKey {
-            id: square
-            value: 1
-            anchors.left: parent.left
-            elementId: "square"
-        }
-
-        LockKey {
-            id: circle
-            value: 2
-            anchors.left: square.right
-
-            elementId: "circle"
-        }
-
-        LockKey {
-            id: ex
-            value: 3
-            anchors.left: circle.right
-
-            elementId: "ex"
-
-        }
-
-        LockKey {
-            id: triangle
-            value: 4
-            anchors.left: ex.right
-
-            elementId: "triangle"
-        }
-    }
-
-
-    Text {
-        id: minute
-
-        onTextChanged: {
-            if (text.length < 2) {
-                minute.text = "0" + text;
-            }
-        }
-
-        anchors {
-            top: stripe.bottom
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        color: hour.color
-        text: "00"
-        font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
-        horizontalAlignment: Qt.AlignCenter
-        verticalAlignment: Qt.AlignVCenter
-    }
-
-    Text {
-        id: emergencyCall
-
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        horizontalAlignment: Qt.AlignCenter
-        color: minute.color
-        text: i18n("Emergency Call")
-
-        MouseArea {
-            anchors.fill: parent
-            onClicked: { print("FIXME: Launch the dialer service!") }
+    Component.onCompleted: {
+        // version support checks
+        if (root.interfaceVersion < 1) {
+            // ksmserver of 5.4, with greeter of 5.5
+            root.viewVisible = true;
         }
     }
 }
