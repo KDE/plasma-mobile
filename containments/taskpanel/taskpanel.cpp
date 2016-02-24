@@ -147,14 +147,14 @@ void TaskPanel::updateActiveWindow()
         return;
     }
     if (m_activeWindow) {
-        disconnect(m_activeWindow, &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
-        disconnect(m_activeWindow, &KWayland::Client::PlasmaWindow::unmapped,
+        disconnect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
+        disconnect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::unmapped,
             this, &TaskPanel::forgetActiveWindow);
     }
     m_activeWindow = m_windowManagement->activeWindow();
 
-    connect(m_activeWindow, &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
-    connect(m_activeWindow, &KWayland::Client::PlasmaWindow::unmapped,
+    connect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
+    connect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::unmapped,
             this, &TaskPanel::forgetActiveWindow);
 
     // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
@@ -169,8 +169,8 @@ bool TaskPanel::hasCloseableActiveWindow() const
 void TaskPanel::forgetActiveWindow()
 {
     if (m_activeWindow) {
-        disconnect(m_activeWindow, &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
-        disconnect(m_activeWindow, &KWayland::Client::PlasmaWindow::unmapped,
+        disconnect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::closeableChanged, this, &TaskPanel::hasCloseableActiveWindowChanged);
+        disconnect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::unmapped,
             this, &TaskPanel::forgetActiveWindow);
     }
     m_activeWindow.clear();
