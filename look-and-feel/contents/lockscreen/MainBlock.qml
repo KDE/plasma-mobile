@@ -17,7 +17,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 
-import QtQuick 2.0
+import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 1.1
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -30,9 +30,35 @@ PlasmaCore.ColorScope {
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
 
+    Component.onCompleted: appearAnimation.running = true;
+
+    SequentialAnimation {
+        id: appearAnimation
+        ParallelAnimation {
+            YAnimator {
+                target: topPanel
+                from: -topPanel.height
+                to: 0
+                duration: units.longDuration
+            }
+            YAnimator {
+                target: bottomPanel
+                from: block.height
+                to: block.height - bottomPanel.height
+                duration: units.longDuration
+            }
+        }
+        ScriptAction {
+            script: {
+                topPanel.anchors.top = block.top;
+                bottomPanel.anchors.bottom = block.bottom;
+            }
+        }
+    }
     Item {
+        id: topPanel
+        y: -height
         anchors {
-            top: parent.top
             left: parent.left
             right: parent.right
         }
@@ -51,12 +77,13 @@ PlasmaCore.ColorScope {
     }
 
     Item {
+        id: bottomPanel
         height: mainLayout.height + units.largeSpacing * 2
         anchors {
             left: parent.left
             right: parent.right
-            bottom: parent.bottom
         }
+        y: parent.height
         Rectangle {
             anchors.fill: parent
             color: PlasmaCore.ColorScope.backgroundColor
