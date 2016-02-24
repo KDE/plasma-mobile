@@ -78,6 +78,33 @@ ScrollView {
      */
     property bool supportsRefreshing: false
 
+    /**
+     * leftPadding: int
+     * default contents padding at left
+     */
+    property int leftPadding: Units.gridUnit
+
+    /**
+     * topPadding: int
+     * default contents padding at top
+     */
+    property int topPadding: Units.gridUnit
+
+    /**
+     * rightPadding: int
+     * default contents padding at right
+     */
+    property int rightPadding: Units.gridUnit
+
+    /**
+     * bottomPadding: int
+     * default contents padding at bottom
+     */
+    property int bottomPadding: Units.gridUnit
+
+
+    frameVisible: false
+
     children: [
         Item {
             z: 99
@@ -141,15 +168,49 @@ ScrollView {
                 property: "bottomMargin"
                 value: Math.max((root.height - root.flickableItem.contentHeight), Units.gridUnit * 5)
             }
+
+            Binding {
+                target: root.contentItem
+                property: "width"
+                value: root.flickableItem.width
+            }
+
             //FIXME: this shouldn't exist
             Timer {
                 id: resetTimer
                 interval: 100
                 onTriggered: {
-                    flickableItem.contentY = -Units.gridUnit * 1.6
+                   flickableItem.contentY = -Units.gridUnit * 1.6
+
+                   if (root.contentItem == root.flickableItem) {
+                       flickableItem.anchors.leftMargin = 0;
+                       flickableItem.anchors.topMargin = 0;
+                       flickableItem.anchors.rightMargin = 0;
+                       flickableItem.anchors.bottomMargin = 0;
+                   } else {
+                       flickableItem.anchors.leftMargin = leftPadding;
+                       flickableItem.anchors.topMargin = topPadding;
+                       flickableItem.anchors.rightMargin = rightPadding;
+                       flickableItem.anchors.bottomMargin = bottomPadding;
+                   }
                 }
             }
         }
     ]
+
+    onLeftPaddingChanged: {
+        if (root.contentItem == root.flickableItem) {
+            flickableItem.anchors.leftMargin = 0;
+            flickableItem.anchors.topMargin = 0;
+            flickableItem.anchors.rightMargin = 0;
+            flickableItem.anchors.bottomMargin = 0;
+        } else {
+            flickableItem.anchors.leftMargin = leftPadding;
+            flickableItem.anchors.topMargin = topPadding;
+            flickableItem.anchors.rightMargin = rightPadding;
+            flickableItem.anchors.bottomMargin = bottomPadding;
+        }
+    }
+
     onFlickableItemChanged: resetTimer.restart()
 }

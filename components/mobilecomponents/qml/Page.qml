@@ -38,6 +38,36 @@ Item {
     property string title
 
     /**
+     * leftPadding: int
+     * default contents padding at left
+     */
+    property int leftPadding: Units.gridUnit
+
+    /**
+     * topPadding: int
+     * default contents padding at top
+     */
+    property int topPadding: Units.gridUnit
+
+    /**
+     * rightPadding: int
+     * default contents padding at right
+     */
+    property int rightPadding: Units.gridUnit
+
+    /**
+     * bottomPadding: int
+     * default contents padding at bottom
+     */
+    property int bottomPadding: Units.gridUnit
+
+    /**
+     * contentItem: Item
+     * The main item contained in this Page
+     */
+    default property Item contentItem
+
+    /**
      * flickable: Flickable
      * if the central element of the page is a Flickable
      * (ListView and Gridview as well) you can set it there.
@@ -173,6 +203,23 @@ Item {
         action: root.mainAction
         anchors.bottom: parent.bottom
         x: parent.width/2 - width/2
+    }
+
+    Binding {
+        target: root.contentItem
+        property: "parent"
+        value: container
+    }
+
+    Item {
+        id: container
+        anchors {
+            fill: parent
+            leftMargin: leftPadding
+            topMargin: topPadding
+            rightMargin: rightPadding
+            bottomMargin: bottomPadding
+        }
     }
 
     Layout.fillWidth: true

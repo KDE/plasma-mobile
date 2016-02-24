@@ -37,7 +37,7 @@ Rectangle {
 
     height: units.gridUnit * 5
 
-    y: Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY - height)
+    y: appWindow.pageStack.currentItem.flickable ? Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY - height) : -height
 
     property QtObject appWindow: applicationWindow();
     parent: appWindow.contentItem;

@@ -98,6 +98,10 @@ MobileComponents.ScrollablePage {
                 text: "Text Field"
                 component: "TextField"
             }
+            ListElement {
+                text: "Non Scrollable Page"
+                component: "NonScrollable"
+            }
         }
         delegate: MobileComponents.ActionsForListItem {
             MobileComponents.BasicListItem {

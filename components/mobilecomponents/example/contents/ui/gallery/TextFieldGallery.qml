@@ -28,6 +28,7 @@ ScrollablePage {
     title: "Text fields"
 
     ColumnLayout {
+        objectName: "pollo"
         width: page.width
         spacing: Units.smallSpacing
 

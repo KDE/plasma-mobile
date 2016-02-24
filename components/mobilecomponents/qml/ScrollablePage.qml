@@ -91,19 +91,44 @@ Page {
      */
     default property alias contentItem: scrollView.contentItem
 
+    /**
+     * leftPadding: int
+     * default contents padding at left
+     */
+    property alias leftPadding: scrollView.leftPadding
 
-    RefreshableScrollView {
-        id: scrollView
-        anchors {
-            fill: parent
+    /**
+     * topPadding: int
+     * default contents padding at top
+     */
+    property alias topPadding: scrollView.topPadding
+
+    /**
+     * rightPadding: int
+     * default contents padding at right
+     */
+    property alias rightPadding: scrollView.rightPadding
+
+    /**
+     * bottomPadding: int
+     * default contents padding at bottom
+     */
+    property alias bottomPadding: scrollView.bottomPadding
+
+    children: [
+        RefreshableScrollView {
+            id: scrollView
+            anchors {
+                fill: parent
+            }
+        },
+
+        Item {
+            id: overlay
+            anchors.fill: parent
+            property Item oldContentItem
         }
-    }
-
-    Item {
-        id: overlay
-        anchors.fill: parent
-        property Item oldContentItem
-    }
+    ]
 
     //HACK to get the contentItem as the last one, all the other eventual items as an overlay
     //no idea if is the way the user expects
