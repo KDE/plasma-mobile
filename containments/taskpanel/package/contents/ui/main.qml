@@ -100,7 +100,7 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
-                enabled: taskSwitcher.tasksCount > 0 && plasmoid.nativeInterface.hasCloseableActiveWindow;
+                enabled: taskSwitcher.tasksCount > 0;
                 iconSource: "window-list"
                 onClicked: {
                     taskSwitcher.currentTaskIndex = -1;
