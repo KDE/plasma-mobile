@@ -132,7 +132,7 @@ Rectangle {
 
                 spacing: Units.gridUnit
                 Rectangle {
-                    opacity: modelData > 0 ? 0.5 : 0
+                    opacity: modelData > 0 ? 0.4 : 0
                     visible: !titleList.wideScreen
                     color: Theme.viewBackgroundColor
                     anchors.verticalCenter: parent.verticalCenter
@@ -144,7 +144,7 @@ Rectangle {
                     id: title
                     width:Math.min(titleList.width, implicitWidth)
                     anchors.verticalCenter: parent.verticalCenter
-                    opacity: __appWindow.pageStack.currentIndex == modelData ? 1 : 0.5
+                    opacity: __appWindow.pageStack.currentIndex == modelData ? 1 : 0.4
                     //Scaling animate NativeRendering is too slow
                     renderType: Text.QtRendering
                     color: Theme.viewBackgroundColor
