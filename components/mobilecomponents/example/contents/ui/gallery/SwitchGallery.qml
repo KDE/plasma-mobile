@@ -80,7 +80,11 @@ ScrollablePage {
             Layout.fillWidth: true
             Layout.minimumHeight: units.gridUnit * 10
             Rectangle {
-                anchors.fill: parent
+                anchors {
+                    fill: parent
+                    leftMargin: -page.leftPadding
+                    rightMargin: -page.rightPadding
+                }
                 color: PlasmaCore.ColorScope.backgroundColor
                 GridLayout {
                     anchors.centerIn: parent

@@ -25,6 +25,17 @@ import org.kde.plasma.mobilecomponents 0.2
 import QtGraphicalEffects 1.0
 
 
+/**
+ * An item that can be used as a title for the application.
+ * Scrolling the main page will make it taller or shorter (trough the point of going away)
+ * It's a behavior similar to the typical mobile web browser adressbar
+ * the minimum, preferred and maximum heights of the item can be controlled with
+ * * Layout.minimumHeight: default is 0, i.e. hidden
+ * * Layout.preferredHeight: default is Units.gridUnit * 1.6
+ * * Layout.maximumHeight: default is Units.gridUnit * 3
+ *
+ * To achieve a titlebar that stays completely fixed just set the 3 sizes as the same
+ */
 Rectangle {
     id: headerItem
     z: 2
@@ -33,39 +44,40 @@ Rectangle {
         right: parent.right
     }
     color: Theme.highlightColor
-    Layout.minimumHeight: Units.gridUnit * 1.6
+    Layout.minimumHeight: 0
+    Layout.preferredHeight: Units.gridUnit * 1.6
     Layout.maximumHeight: Units.gridUnit * 3
 
     height: Layout.maximumHeight
 
-    y: -height + Layout.minimumHeight
+    y: -height + Layout.preferredHeight
 
-    property QtObject appWindow: applicationWindow();
-    parent: appWindow.contentItem;
+    property QtObject __appWindow: applicationWindow();
+    parent: __appWindow.contentItem;
 
     Connections {
         id: headerSlideConnection
-        target: appWindow.pageStack.currentItem.flickable 
+        target: __appWindow.pageStack.currentItem.flickable 
         property int oldContentY
         onContentYChanged: {
-            headerItem.y = Math.min(0, Math.max(-headerItem.height, headerItem.y + oldContentY - appWindow.pageStack.currentItem.flickable.contentY))
-            oldContentY = appWindow.pageStack.currentItem.flickable.contentY
+            headerItem.y = Math.min(0, Math.max(-headerItem.height + headerItem.Layout.minimumHeight, headerItem.y + oldContentY - __appWindow.pageStack.currentItem.flickable.contentY))
+            oldContentY = __appWindow.pageStack.currentItem.flickable.contentY
         }
     }
     Connections {
-        target: appWindow.pageStack
+        target: __appWindow.pageStack
         onCurrentItemChanged: {
-            if (appWindow.pageStack.currentItem.flickable) {
-                headerSlideConnection.oldContentY = appWindow.pageStack.currentItem.flickable.contentY;
+            if (__appWindow.pageStack.currentItem.flickable) {
+                headerSlideConnection.oldContentY = __appWindow.pageStack.currentItem.flickable.contentY;
             } else {
                 headerSlideConnection.oldContentY = 0;
             }
-            headerItem.y = -headerItem.height + headerItem.Layout.minimumHeight;
+            headerItem.y = -headerItem.height + headerItem.Layout.preferredHeight;
         }
     }
 
     Behavior on y {
-        enabled: !appWindow.pageStack.currentItem.flickable.moving
+        enabled: !__appWindow.pageStack.currentItem.flickable.moving
         NumberAnimation {
             duration: Units.longDuration
             easing.type: Easing.InOutQuad
@@ -76,15 +88,15 @@ Rectangle {
         id: titleList
         anchors {
             fill: parent
-            topMargin: Math.min(headerItem.height - headerItem.Layout.minimumHeight, -headerItem.y)
+            topMargin: Math.min(headerItem.height - headerItem.Layout.preferredHeight, -headerItem.y)
         }
-        property bool wideScreen: appWindow.pageStack.currentItem && appWindow.pageStack.currentItem.width > 0 && appWindow.pageStack.width > appWindow.pageStack.currentItem.width
+        property bool wideScreen: __appWindow.pageStack.currentItem && __appWindow.pageStack.currentItem.width > 0 && __appWindow.pageStack.width > __appWindow.pageStack.currentItem.width
         orientation: ListView.Horizontal
         boundsBehavior: Flickable.StopAtBounds
         //FIXME: proper implmentation needs Qt 5.6 for new ObjectModel api
-        model: appWindow.pageStack.depth
+        model: __appWindow.pageStack.depth
         spacing: wideScreen ? 0 : Units.gridUnit
-        currentIndex: appWindow.pageStack.currentIndex
+        currentIndex: __appWindow.pageStack.currentIndex
         snapMode: ListView.SnapToItem
 
         onCurrentIndexChanged: {
@@ -92,8 +104,8 @@ Rectangle {
         }
 
         onContentXChanged: {
-            if (wideScreen && !appWindow.pageStack.contentItem.moving) {
-                appWindow.pageStack.contentItem.contentX = titleList.contentX
+            if (wideScreen && !__appWindow.pageStack.contentItem.moving) {
+                __appWindow.pageStack.contentItem.contentX = titleList.contentX
             }
         }
         onHeightChanged: {
@@ -101,20 +113,20 @@ Rectangle {
         }
         onMovementEnded: {
             if (wideScreen) {
-                appWindow.pageStack.contentItem.movementEnded();
+                __appWindow.pageStack.contentItem.movementEnded();
             }
         }
         delegate: MouseArea {
             width: {
                 //more columns shown?
                 if (titleList.wideScreen) {
-                    return appWindow.pageStack.defaultColumnWidth;
+                    return __appWindow.pageStack.defaultColumnWidth;
                 } else {
                     return Math.min(titleList.width, delegateRoot.implicitWidth);
                 }
             }
             height: titleList.height
-            onClicked: appWindow.pageStack.currentIndex = modelData
+            onClicked: __appWindow.pageStack.currentIndex = modelData
             Row {
                 id: delegateRoot
 
@@ -132,29 +144,29 @@ Rectangle {
                     id: title
                     width:Math.min(titleList.width, implicitWidth)
                     anchors.verticalCenter: parent.verticalCenter
-                    opacity: appWindow.pageStack.currentIndex == modelData ? 1 : 0.5
+                    opacity: __appWindow.pageStack.currentIndex == modelData ? 1 : 0.5
                     //Scaling animate NativeRendering is too slow
                     renderType: Text.QtRendering
                     color: Theme.viewBackgroundColor
                     elide: Text.ElideRight
-                    text: appWindow.pageStack.pageAt(modelData).title
+                    text: __appWindow.pageStack.pageAt(modelData).title
                     font.pixelSize: titleList.height / 1.6
                 }
             }
             Connections {
-                target: appWindow.pageStack.pageAt(modelData).flickable
+                target: __appWindow.pageStack.pageAt(modelData).flickable
                 onMovingChanged: {
-                    if (appWindow.pageStack.pageAt(modelData).flickable.moving) {
-                        appWindow.pageStack.currentIndex = modelData
+                    if (__appWindow.pageStack.pageAt(modelData).flickable.moving) {
+                        __appWindow.pageStack.currentIndex = modelData
                     }
                 }
             }
         }
         Connections {
-            target: titleList.wideScreen ? appWindow.pageStack.contentItem : null
+            target: titleList.wideScreen ? __appWindow.pageStack.contentItem : null
             onContentXChanged: {
                 if (!titleList.contentItem.moving) {
-                    titleList.contentX = Math.max(0, appWindow.pageStack.contentItem.contentX)
+                    titleList.contentX = Math.max(0, __appWindow.pageStack.contentItem.contentX)
                 }
             }
         }
