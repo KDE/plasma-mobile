@@ -173,7 +173,7 @@ ApplicationWindow {
                     __pageStack.currentItem.backRequested(backEvent);
                     if (!backEvent.accepted) {
                         if (__pageStack.depth > 1) {
-                            __pageStack.pop();
+                            __pageStack.currentIndex = Math.max(0, __pageStack.currentIndex - 1);
                         } else {
                             Qt.quit();
                         }
