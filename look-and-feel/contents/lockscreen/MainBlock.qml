@@ -165,7 +165,7 @@ PlasmaCore.ColorScope {
                 text: i18n("Unlock")
                 enabled: !authenticator.graceLocked
                 onClicked: {
-                    unlockFunction();
+                    bottomPanel.unlockFunction();
                 }
             }
         }
