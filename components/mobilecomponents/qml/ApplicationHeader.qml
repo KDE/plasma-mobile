@@ -33,14 +33,36 @@ Rectangle {
         right: parent.right
     }
     color: Theme.highlightColor
-    Layout.minimumHeight: Units.gridUnit*1.6
+    Layout.minimumHeight: Units.gridUnit * 1.6
+    Layout.maximumHeight: Units.gridUnit * 3
 
-    height: units.gridUnit * 5
+    height: Layout.maximumHeight
 
-    y: appWindow.pageStack.currentItem.flickable ? Math.min(0, -appWindow.pageStack.currentItem.flickable.contentY - height) : -height
+    y: -height + Layout.minimumHeight
 
     property QtObject appWindow: applicationWindow();
     parent: appWindow.contentItem;
+
+    Connections {
+        id: headerSlideConnection
+        target: appWindow.pageStack.currentItem.flickable 
+        property int oldContentY
+        onContentYChanged: {
+            headerItem.y = Math.min(0, Math.max(-headerItem.height, headerItem.y + oldContentY - appWindow.pageStack.currentItem.flickable.contentY))
+            oldContentY = appWindow.pageStack.currentItem.flickable.contentY
+        }
+    }
+    Connections {
+        target: appWindow.pageStack
+        onCurrentItemChanged: {
+            if (appWindow.pageStack.currentItem.flickable) {
+                headerSlideConnection.oldContentY = appWindow.pageStack.currentItem.flickable.contentY;
+            } else {
+                headerSlideConnection.oldContentY = 0;
+            }
+            headerItem.y = -headerItem.height + headerItem.Layout.minimumHeight;
+        }
+    }
 
     Behavior on y {
         enabled: !appWindow.pageStack.currentItem.flickable.moving

@@ -47,7 +47,7 @@ Item {
      * topPadding: int
      * default contents padding at top
      */
-    property int topPadding: Units.gridUnit
+    property int topPadding: Units.gridUnit + (applicationWindow() && applicationWindow().header ? Units.gridUnit * 1.6 : 0)
 
     /**
      * rightPadding: int
