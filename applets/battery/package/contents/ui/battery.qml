@@ -152,7 +152,9 @@ Item {
                 Layout.fillHeight: true
                 hasBattery: true
                 percent: pmSource.data["Battery"]["Percent"]
-                pluggedIn: pmSource.data["AC Adapter"]["Plugged in"]
+                pluggedIn: pmSource.data["Battery"]["State"] == "Charging"
+                //FIXME: AC Adapter is not present there
+                //pmSource.data["AC Adapter"]["Plugged in"]
         //         height: batteryContainer.iconSize
         //         width: height
             }
