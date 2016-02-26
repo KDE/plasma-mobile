@@ -52,14 +52,14 @@ ScrollablePage {
 
     //Close the drawer with the back button
     onBackRequested: {
-        if (sheet.opened) {
+        if (bottomDrawer.opened) {
             event.accepted = true;
-            sheet.close();
+            bottomDrawer.close();
         }
     }
 
     OverlayDrawer {
-        id: sheet
+        id: bottomDrawer
         anchors.fill: parent
         edge: Qt.BottomEdge
         contentItem: Item {
@@ -78,17 +78,46 @@ ScrollablePage {
         }
     }
 
+    OverlaySheet {
+        id: sheet
+        ColumnLayout {
+            Label {
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+                text: "
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id risus id augue euismod accumsan. Nunc vestibulum placerat bibendum. Morbi commodo auctor varius. Donec molestie euismod ultrices. Sed facilisis augue nec eros auctor, vitae mattis quam rhoncus. Nam ut erat diam. Curabitur iaculis accumsan magna, eget fermentum massa scelerisque eu. Cras elementum erat non erat euismod accumsan. Vestibulum ac mi sed dui finibus pulvinar. Vivamus dictum, leo sed lobortis porttitor, nisl magna faucibus orci, sit amet euismod arcu elit eget est. Duis et vehicula nibh. In arcu sapien, laoreet sit amet porttitor non, rhoncus vel magna. Suspendisse imperdiet consectetur est nec ornare. Pellentesque bibendum sapien at erat efficitur vehicula. Morbi sed porta nibh. Vestibulum ut urna ut dolor sagittis mattis.
+
+    Morbi dictum, sapien at maximus pulvinar, sapien metus condimentum magna, quis lobortis nisi dui mollis turpis. Aliquam sit amet scelerisque dui. In sit amet tellus placerat, condimentum enim sed, hendrerit quam. Integer dapibus lobortis finibus. Suspendisse faucibus eros vitae ante posuere blandit. Nullam volutpat quam id diam hendrerit aliquam. Donec non sem at diam posuere convallis. Vivamus ut congue quam. Ut dictum fermentum sapien, eu ultricies est ornare ut.
+
+    Nullam fringilla a libero vehicula faucibus. Donec euismod sodales nulla, in vehicula lectus posuere a. Donec nisi nulla, pulvinar eu porttitor vitae, varius eget ante. Nam rutrum eleifend elit, quis facilisis leo sodales vitae. Aenean accumsan a nulla at sagittis. Integer placerat tristique magna, vitae iaculis ante cursus sit amet. Sed facilisis mollis turpis nec tristique. Etiam quis feugiat odio. Vivamus sagittis at purus nec aliquam.
+
+    Morbi neque dolor, elementum ac fermentum ac, auctor ut erat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus non nibh sit amet quam luctus congue. Donec in eros varius, porta metus sed, sagittis lacus. Mauris dapibus lorem nisi, non eleifend massa tristique egestas. Curabitur nec blandit urna. Mauris rhoncus libero felis, commodo viverra ante consectetur vel. Donec dictum tincidunt orci, quis tristique urna. Quisque egestas, dui ac mollis dictum, purus velit elementum est, at pellentesque erat est fermentum purus. Nulla a quam tellus. Vestibulum a congue ligula. Quisque feugiat nulla et tortor sodales viverra. Maecenas dolor leo, elementum sed urna vel, posuere hendrerit metus. Mauris pellentesque, mi non luctus aliquam, leo nulla varius arcu, vel pulvinar enim enim nec nisl.
+
+    Etiam sapien leo, venenatis eget justo at, pellentesque mollis tellus. Fusce consequat ullamcorper vulputate. Duis tellus nisi, dictum ut augue non, elementum congue ligula. Fusce in vehicula arcu. Nulla facilisi. Quisque a convallis sapien. Aenean pellentesque convallis egestas. Phasellus rhoncus, nulla in tempor maximus, arcu ex venenatis diam, sit amet egestas mi dolor non ante. "
+            }
+            Controls.Button {
+                text: "Close"
+                anchors.horizontalCenter: parent.horizontalCenter
+                onClicked: sheet.close()
+            }
+        }
+    }
     ColumnLayout {
         width: page.width
         spacing: Units.smallSpacing
 
+        Controls.Button {
+            text: "Open Bottom drawer"
+            anchors.horizontalCenter: parent.horizontalCenter
+            onClicked: bottomDrawer.open()
+        }
         Controls.Button {
             text: "Open Sheet"
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: sheet.open()
         }
         Controls.Button {
-            text: "Push another"
+            text: "Push another page"
             anchors.horizontalCenter: parent.horizontalCenter
             onClicked: pageStack.push(Qt.resolvedUrl("ButtonGallery.qml"));
         }
