@@ -252,10 +252,6 @@ Item {
         }
     }
 
-    onWidthChanged: {
-        var firstLevel = Math.max(0, depth - mainFlickable.width/defaultColumnWidth + 1);
-        mainFlickable.contentX = Math.max(0, Math.min(Math.max(0, defaultColumnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
-    }
     Component.onCompleted: {
         internal.completed = true
         if (initialPage && depth == 0) {
@@ -348,6 +344,16 @@ Item {
             onFlickEnded: {
                 movementEnded();
             }
+            onWidthChanged: {
+                resizeEventCompressTimer.restart();
+            }
+            Timer {
+                id: resizeEventCompressTimer
+                interval: 150
+                onTriggered: {
+                    scrollToLevel(actualRoot.lastVisiblePage.parent.parent.pageLevel);
+                }
+            }
         }
     }
 
@@ -360,6 +366,7 @@ Item {
             implicitWidth: actualContainer.width //+ Units.gridUnit * 8
             width: implicitWidth
             height: parent ? parent.height : 0
+            property int pageLevel: 0
 
             x: 0
 

@@ -95,14 +95,17 @@ function push(page, properties, replace, immediate) {
                 tProps = tPage.properties;
                 tPage = tPage.page;
             }
-            pageStack.push(initPage(tPage, tProps));
+
+            var container = initPage(tPage, tProps);
+            container.pageLevel = pageStack.length;
+            pageStack.push(container);
             actualPages.push(pages[i]);
-            actualRoot.contentChildrenChanged();
         }
     }
 
     // initialize the page
     var container = initPage(page, properties);
+    container.pageLevel = pageStack.length;
 
     // push the page container onto the stack
     pageStack.push(container);
