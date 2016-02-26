@@ -132,8 +132,7 @@ Item {
             return
         }
 
-        var firstLevel = Math.max(0, level - mainFlickable.width/columnWidth + 1);
-        scrollAnimation.to = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
+        scrollAnimation.to = Engine.pageStack[level].x;
         scrollAnimation.running = true;
     }
 
@@ -187,10 +186,6 @@ Item {
         }
     }
 
-    onWidthChanged: {
-        var firstLevel = Math.max(0, depth - mainFlickable.width/columnWidth + 1);
-        mainFlickable.contentX = Math.max(0, Math.min(Math.max(0, columnWidth * (firstLevel - 1)), mainFlickable.contentWidth));
-    }
     Component.onCompleted: {
         internal.completed = true
         if (initialPage && depth == 0)
@@ -234,10 +229,20 @@ Item {
                 }
             }
             onMovementEnded: {
-                scrollToLevel(Math.round(contentX/columnWidth)+1)
+                scrollToLevel(Math.round(contentX/columnWidth));
             }
             onFlickEnded: {
                 movementEnded();
+            }
+            onWidthChanged: {
+                resizeEventCompressTimer.restart();
+            }
+            Timer {
+                id: resizeEventCompressTimer
+                interval: 150
+                onTriggered: {
+                    scrollToLevel(actualRoot.lastVisiblePage.parent.parent.pageLevel);
+                }
             }
         }
     }
@@ -251,6 +256,7 @@ Item {
             implicitWidth: actualContainer.width + Units.gridUnit * 8
             width: implicitWidth
             height: parent ? parent.height : 0
+            property int pageLevel: 0
 
             x: 0
 
