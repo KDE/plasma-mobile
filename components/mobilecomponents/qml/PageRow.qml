@@ -85,7 +85,7 @@ Item {
         pop(lastVisiblePage, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, false, immediate)
-        scrollToLevel(depth)
+        scrollToLevel(depth-1)
         return item
     }
 
@@ -95,7 +95,7 @@ Item {
     // Returns the page instance that was popped off the stack.
     function pop(page, immediate)
     {
-        scrollToLevel(depth-1);
+        scrollToLevel(depth-2);
         return Engine.pop(page, immediate);
     }
 
@@ -106,7 +106,7 @@ Item {
         pop(lastVisiblePage, true);
         scrollAnimation.running = false;
         var item = Engine.push(page, properties, true, immediate);
-        scrollToLevel(depth)
+        scrollToLevel(depth-1)
         return item
     }
 
@@ -128,11 +128,17 @@ Item {
     // Scroll the view to have the page of the given level as first item
     function scrollToLevel(level)
     {
-        if (level < 0 || level > depth || root.width < width) {
-            return
+        if (root.width <= width) {
+            //return
         }
 
-        scrollAnimation.to = Engine.pageStack[level].x;
+        if (level <= 0) {
+            scrollAnimation.to = 0;
+        } else if (level >= depth) {
+            scrollAnimation.to = Engine.pageStack[depth - 1].x;
+        } else {
+            scrollAnimation.to = Engine.pageStack[level-1].x + Engine.pageStack[level-1].page.width ;
+        }
         scrollAnimation.running = true;
     }
 
