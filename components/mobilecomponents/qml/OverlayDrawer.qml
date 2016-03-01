@@ -291,6 +291,7 @@ AbstractDrawer {
             onOpenChanged: {
                 if (open) {
                     root.open();
+                    Qt.inputMethod.hide();
                 } else {
                     root.close();
                 }
