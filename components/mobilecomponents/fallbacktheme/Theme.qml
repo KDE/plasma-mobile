@@ -21,37 +21,29 @@ import QtQuick 2.4
 
 pragma Singleton
 
-/*!
-   \qmltype Theme
-   \inqmlmodule Material 0.1
 
-   \brief Provides access to standard colors that follow the Material Design specification.
-
-   See \l {http://www.google.com/design/spec/style/color.html#color-ui-color-application} for
-   details about choosing a color scheme for your application.
- */
 QtObject {
     id: theme
 
-    property color textColor: Qt.rgba(0,0,0, 0.54)
-    
+    property color textColor: "#31363b"
+
     property color highlightColor: "#2196F3"
     property color backgroundColor: "#eff0f1"
     property color linkColor: "#2196F3"
     property color visitedLinkColor: "#2196F3"
 
-    property color buttonTextColor: Qt.rgba(0,0,0, 0.54)
+    property color buttonTextColor: "#31363b"
     property color buttonBackgroundColor: "#eff0f1"
     property color buttonHoverColor: "#2196F3"
     property color buttonFocusColor: "#2196F3"
 
-    property color viewTextColor: Qt.rgba(0,0,0, 0.54)
+    property color viewTextColor: "#31363b"
     property color viewBackgroundColor: "#fcfcfc"
     property color viewHoverColor: "#2196F3"
     property color viewFocusColor: "#2196F3"
 
     property color complementaryTextColor: "#f3f3f3"
-    property color complementaryBackgroundColor: Qt.rgba(0,0,0, 0.54)
+    property color complementaryBackgroundColor: "#31363b"
     property color complementaryHoverColor: "#2196F3"
     property color complementaryFocusColor: "#2196F3"
 

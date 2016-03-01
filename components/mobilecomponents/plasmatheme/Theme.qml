@@ -22,15 +22,6 @@ pragma Singleton
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
-/*!
-   \qmltype Theme
-   \inqmlmodule Material 0.1
-
-   \brief Provides access to standard colors that follow the Material Design specification.
-
-   See \l {http://www.google.com/design/spec/style/color.html#color-ui-color-application} for
-   details about choosing a color scheme for your application.
- */
 QtObject {
 
     property color textColor: theme.textColor

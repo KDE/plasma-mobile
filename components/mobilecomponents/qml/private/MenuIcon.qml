@@ -37,7 +37,7 @@ Item {
             top: parent.top
             rightMargin: canvas.width/4 * morph
         }
-        smooth: true
+        antialiasing: true
         transformOrigin: Item.Right
         width: (1 - morph) * parent.width + morph * ((parent.width / Math.sqrt(2)) - height/2)
         height: Math.round(Units.smallSpacing / 2)
@@ -58,7 +58,7 @@ Item {
             bottom: parent.bottom
             rightMargin: canvas.width/4 * morph
         }
-        smooth: true
+        antialiasing: true
         transformOrigin: Item.Right
         width: (1 - morph) * parent.width + morph * ((parent.width / Math.sqrt(2)) - height/2)
         height: Math.round(Units.smallSpacing / 2)
