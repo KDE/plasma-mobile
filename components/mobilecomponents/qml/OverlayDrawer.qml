@@ -35,6 +35,7 @@ AbstractDrawer {
     anchors.fill: parent
     z: 9999
 
+//BEGIN Properties
     /**
      * page: Item
      * It's the default property. it's the main content of the drawer page,
@@ -75,6 +76,17 @@ AbstractDrawer {
      */
     property real position: 0
 
+    /**
+     * handleVisible: bool
+     * If true, a little handle will be visible to make opening the drawer easier
+     * Currently supported only on left and right drawers
+     */
+    property bool handleVisible: true
+
+//END Properties
+
+
+//BEGIN Methods
     /**
      * open: function
      * This method opens the drawer, animating the movement if a
@@ -125,7 +137,9 @@ AbstractDrawer {
      * clicked: signal
      * This signal is emitted when the drawer is clicked.
      */
-    
+//END Methods
+
+//BEGIN Signal handlers
     onPositionChanged: {
         if (!mainFlickable.flicking && !mainFlickable.dragging && !mainAnim.running) {
             switch (root.edge) {
@@ -145,6 +159,7 @@ AbstractDrawer {
         contentItem.parent = drawerPage
         contentItem.anchors.fill = drawerPage
     }
+//END Signal handlers
 
     Item {
         id: mainPage
@@ -257,7 +272,7 @@ AbstractDrawer {
             left: root.edge == Qt.RightEdge ? undefined : parent.left
             bottom: parent.bottom
         }
-        visible: root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge
+        visible: root.handleVisible && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge)
         width: Units.iconSizes.medium
         height: width
         onPressed: edgeMouse.managePress(mouse);
@@ -383,6 +398,7 @@ AbstractDrawer {
 
                 Rectangle {
                     id: drawerPage
+                    z: 3
                     anchors {
                         left: root.edge != Qt.RightEdge ? parent.left : undefined
                         right: root.edge != Qt.LeftEdge ? parent.right : undefined
@@ -406,6 +422,22 @@ AbstractDrawer {
                     visible: root.enabled && (root.edge == Qt.LeftEdge || root.edge == Qt.RightEdge)
                     width: Units.iconSizes.medium + Units.gridUnit
                     height: width
+                    opacity: root.handleVisible ? 1 : 0
+                    Behavior on opacity {
+                        NumberAnimation {
+                            duration: Units.longDuration
+                            easing.type: Easing.InOutQuad
+                        }
+                    }
+                    transform: Translate {
+                        x: root.handleVisible ? 0 : (root.edge == Qt.LeftEdge ? -drawerHandle.width : drawerHandle.width)
+                        Behavior on x {
+                            NumberAnimation {
+                                duration: Units.longDuration
+                                easing.type: Easing.InOutQuad
+                            }
+                        }
+                    }
                     Rectangle {
                         id: handleGraphics
                         color: Theme.viewBackgroundColor
@@ -424,17 +456,19 @@ AbstractDrawer {
                         height: Units.iconSizes.smallMedium - Units.smallSpacing * 2
                         source: root.edge == Qt.LeftEdge ? Qt.resolvedUrl("private/MenuIcon.qml") : (root.edge == Qt.RightEdge ? Qt.resolvedUrl("private/ContextIcon.qml") : "")
                     }
+                    layer.enabled: true
+                    layer.effect: DropShadow {
+                        visible: drawerHandle.visible
+                        anchors.fill: drawerHandle
+                        horizontalOffset: 0
+                        verticalOffset: 0
+                        radius: Units.gridUnit
+                        samples: radius * 2
+                        color: Qt.rgba(0, 0, 0, 0.5)
+                        source: drawerHandle
+                    }
                 }
-                DropShadow {
-                    visible: drawerHandle.visible
-                    anchors.fill: drawerHandle
-                    horizontalOffset: 0
-                    verticalOffset: 0
-                    radius: Units.gridUnit 
-                    samples: 16
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                    source: drawerHandle
-                }
+
                 LinearGradient {
                     width: Units.gridUnit/2
                     height: Units.gridUnit/2
