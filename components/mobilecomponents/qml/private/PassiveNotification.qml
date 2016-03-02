@@ -57,6 +57,11 @@ MouseArea {
         timer.restart();
     }
 
+    function hideNotification() {
+        visible = false;
+    }
+
+
     onClicked: {
         appearAnimation.appear = false;
         appearAnimation.running = true;
