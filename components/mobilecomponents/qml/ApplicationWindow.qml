@@ -47,6 +47,17 @@ ApplicationWindow {
      */
     property alias pageStack: __pageStack
 
+    /**
+     * Show a little notification in the application window
+     * This is to be used for little, non invasive and not workflow
+     * interrupting messages. It's not intended to replace the 
+     * system-wide notification system.
+     * @param message The message to show to the user
+     * @param timeout optional: timeout in milliseconds or predefined values "short" and "long"
+     * @param actionText optional: the text for an action button if the notification is intended to have an associated action
+     * @param callBack optional: a callback JavaScript function() that will be executed when the user clicks the button
+     * 
+     */
     function showPassiveNotification(message, timeout, actionText, callBack) {
         if (!__actionButton.__passiveNotification) {
             var component = Qt.createComponent(Qt.resolvedUrl("private/PassiveNotification.qml"));
@@ -54,6 +65,15 @@ ApplicationWindow {
         }
 
         __actionButton.__passiveNotification.showNotification(message, timeout, actionText, callBack);
+    }
+
+    /**
+     * Hide the passive notification, if any is shown
+     */
+    function hidePassiveNotification() {
+        if(__actionButton.__passiveNotification) {
+           __actionButton.__passiveNotification.hideNotification();
+        }
     }
 
     PageRow {
