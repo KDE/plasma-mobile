@@ -131,11 +131,12 @@ Item {
         if (root.width <= width) {
             //return
         }
+        var pagesShown = Math.floor(width / columnWidth)
 
         if (level <= 0) {
             scrollAnimation.to = 0;
-        } else if (level >= depth) {
-            scrollAnimation.to = Engine.pageStack[depth - 1].x;
+        } else if (level > depth - pagesShown) {
+            scrollAnimation.to = Engine.pageStack[depth - pagesShown].x;
         } else {
             scrollAnimation.to = Engine.pageStack[level-1].x + Engine.pageStack[level-1].page.width ;
         }
