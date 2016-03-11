@@ -39,6 +39,7 @@ MouseArea {
         if (!message) {
             return;
         }
+        appearAnimation.running = false;
         appearAnimation.appear = true;
         appearAnimation.running = true;
         if (timeout == "short") {
