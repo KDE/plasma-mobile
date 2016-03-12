@@ -2,9 +2,7 @@
 if (LibKScreen_FOUND AND QTMOBILITY_FOUND AND X11_Xinput_FOUND)
 installPackage(orientation org.kde.active.orientation)
 endif()
-installPackage(powerbutton org.kde.active.powerbutton)
 installPackage(resourcelist org.kde.resourcelist)
-installPackage(digital-clock org.kde.digital-clock)
 
 add_subdirectory(alarms)
 add_subdirectory(locationchooser)
