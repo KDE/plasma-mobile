@@ -59,6 +59,7 @@ MouseArea {
     }
 
     function hideNotification() {
+        appearAnimation.running = false;
         appearAnimation.appear = false;
         appearAnimation.running = true;
     }
