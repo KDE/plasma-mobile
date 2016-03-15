@@ -20,7 +20,7 @@ import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.private.mobileshell 0.2 as MobileShell
 
 Item {
     id: root
@@ -56,7 +56,7 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
         }
 
-        MobileComponents.IconGrid {
+        MobileShell.IconGrid {
             id: applicationsList
             property int currentIndex: 0
             onCurrentIndexChanged: {

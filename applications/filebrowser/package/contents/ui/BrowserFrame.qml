@@ -21,7 +21,7 @@ import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.plasma.private.mobileshell 0.2 as MobileShell
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.folder 0.1 as Folder
 import org.kde.draganddrop 2.0
@@ -206,7 +206,7 @@ Item {
                     onCountChanged: pinchArea.resetSelection()
                     onModelReset: pinchArea.resetSelection()
                 }
-                MobileComponents.IconGrid {
+                MobileShell.IconGrid {
                     id: resultsGrid
                     delegateWidth: Math.floor(resultsGrid.width / Math.max(Math.floor(resultsGrid.width / (units.gridUnit*12)), 3))
                     delegateHeight: delegateWidth / 1.6

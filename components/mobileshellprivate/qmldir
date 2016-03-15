@@ -1,2 +1,3 @@
 module org.kde.plasma.private.mobileshell
 plugin plasmamobileshellprivateplugin
+IconGrid 2.0 IconGrid.qml

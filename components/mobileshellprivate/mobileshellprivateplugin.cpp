@@ -22,6 +22,7 @@
 
 #include "mobileshellprivateplugin.h"
 #include "fullscreenpanel.h"
+#include "pagedproxymodel.h"
 
 #include <QtQml>
 
@@ -31,4 +32,5 @@ void PlasmaMobileShellPrivatePlugin::registerTypes(const char *uri)
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.private.mobileshell"));
 
     qmlRegisterType<FullScreenPanel>(uri, 2, 0, "FullScreenPanel");
+    qmlRegisterType<PagedProxyModel>(uri, 2, 0, "PagedProxyModel");
 }
