@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
@@ -42,7 +43,7 @@ Item {
         target: tasksView
         onContentYChanged: {
             var pos = delegate.mapToItem(tasksView, 0, 0);
-            plasmoid.nativeInterface.setTaskGeometry(filteredWindowModel.mapRowToSource(model.index), pos.x, pos.y, delegate.width, delegate.height);
+            tasksModel.requestPublishDelegateGeometry(model.index, Qt.rect(pos.x, pos.y, delegate.width, delegate.height));
         }
     }
 
@@ -65,7 +66,7 @@ Item {
             ScriptAction {
                 script: {
                     if (background.x != 0) {
-                        plasmoid.nativeInterface.windowModel.requestClose(filteredWindowModel.mapRowToSource(model.index));
+                        tasksModel.requestClose(model.index);
                     }
                 }
             }
@@ -95,7 +96,7 @@ Item {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, parent.height) / 2
                 height: width
-                source: model.DecorationRole
+                source: model.decoration
             }
             PlasmaComponents.Label {
                 anchors {
@@ -105,7 +106,7 @@ Item {
                 }
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                text: model.DisplayRole
+                text: model.AppName
             }
             MouseArea {
                 anchors.fill: parent

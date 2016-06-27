@@ -20,6 +20,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.mobilecomponents 0.2
@@ -33,7 +34,7 @@ FullScreenPanel {
     height: Screen.height
     property int offset: 0
     property int overShoot: units.gridUnit * 2
-    property int tasksCount: filteredWindowModel.count
+    property int tasksCount: tasksModel.count
     property int currentTaskIndex: -1
 
     color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
@@ -41,7 +42,7 @@ FullScreenPanel {
         ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
 
     function show() {
-        if (filteredWindowModel.count == 0) {
+        if (tasksModel.count == 0) {
             return;
         }
         if (!visible) {
@@ -65,19 +66,15 @@ FullScreenPanel {
 
     function setSingleActiveWindow(id) {
         var task;
-        for (var i = 0; i < filteredWindowModel.count; ++i) {
-            task = filteredWindowModel.get(i);
+        for (var i = 0; i < tasksModel.count; ++i) {
+            task = filterModel.get(i);
 
-            if (i == id && task.IsMinimized) {
-                //plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
-                plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(i));
+            if (i == id) {
+                tasksModel.requestActivate(tasksModel.index(i, 0));
+                currentTaskIndex = id;
             } else if (i != id && !task.IsMinimized) {
-                plasmoid.nativeInterface.windowModel.requestToggleMinimized(filteredWindowModel.mapRowToSource(i));
+                tasksModel.requestToggleMinimized(tasksModel.index(i, 0));
             }
-        }
-        if (id >= 0) {
-            plasmoid.nativeInterface.windowModel.requestActivate(filteredWindowModel.mapRowToSource(id));
-            currentTaskIndex = id;
         }
     }
 
@@ -155,11 +152,13 @@ FullScreenPanel {
             }
         }
 
+        TaskManager.TasksModel {
+            id: tasksModel
+        }
+        //This proxy is only used for "get"
         PlasmaCore.SortFilterModel {
-            id: filteredWindowModel
-            filterRole: "SkipTaskbar"
-            filterRegExp: "false"
-            sourceModel: plasmoid.nativeInterface.windowModel
+            id: filterModel
+            sourceModel: TaskManager.TasksModel {}
             onCountChanged: {
                 if (count == 0) {
                     window.hide();
@@ -167,7 +166,7 @@ FullScreenPanel {
             }
         }
 
-        model: filteredWindowModel
+        model: tasksModel
         header: Item {
             width: window.width
             height: window.height

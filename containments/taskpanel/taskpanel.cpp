@@ -72,8 +72,6 @@ void TaskPanel::initWayland()
         [this, registry] (quint32 name, quint32 version) {
             m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
             qRegisterMetaType<QVector<int> >("QVector<int>");
-            m_windowModel = m_windowManagement->createWindowModel();
-            emit windowModelChanged();
             connect(m_windowManagement, &PlasmaWindowManagement::showingDesktopChanged, this,
                 [this] (bool showing) {
                     if (showing == m_showingDesktop) {
@@ -85,11 +83,6 @@ void TaskPanel::initWayland()
             );
             connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow);
             updateActiveWindow();
-
-            //if a new window is open, show it, not the desktop
-            connect(m_windowModel, &PlasmaWindowModel::rowsInserted, [this] () {
-                requestShowingDesktop(false);
-            });
         }
     );
     connect(registry, &Registry::plasmaShellAnnounced, this,
@@ -108,11 +101,6 @@ void TaskPanel::initWayland()
         }
     );
     registry->setup();
-}
-
-QAbstractItemModel *TaskPanel::windowModel() const
-{
-    return m_windowModel;
 }
 
 QWindow *TaskPanel::panel()
@@ -182,23 +170,6 @@ void TaskPanel::closeActiveWindow()
     if (m_activeWindow) {
         m_activeWindow->requestClose();
     }  
-}
-
-void TaskPanel::setTaskGeometry(int row, int x, int y, int width, int height)
-{
-    using namespace KWayland::Client;
-    if (!m_shellSurface) {
-        if (!m_shellInterface || !m_panel || !m_panel->isVisible()) {
-            return;
-        }
-        m_surface = Surface::fromWindow(m_panel);
-        if (!m_surface) {
-            return;
-        }
-        m_shellSurface = m_shellInterface->createSurface(m_surface, this);
-    }
-
-    m_windowModel->setMinimizedGeometry(row, m_surface, QRect(x, y, width, height));
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(taskpanel, TaskPanel, "metadata.json")

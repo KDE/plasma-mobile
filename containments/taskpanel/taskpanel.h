@@ -41,7 +41,6 @@ class Surface;
 class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
-    Q_PROPERTY(QAbstractItemModel* windowModel READ windowModel NOTIFY windowModelChanged)
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
@@ -49,8 +48,6 @@ class TaskPanel : public Plasma::Containment
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
     ~TaskPanel();
-
-    QAbstractItemModel *windowModel() const;
 
     QWindow *panel();
     void setPanel(QWindow *panel);
@@ -64,13 +61,10 @@ public:
 
     bool hasCloseableActiveWindow() const;
 
-    Q_INVOKABLE void setTaskGeometry(int row, int x, int y, int width, int height);
-
 public Q_SLOTS:
     void forgetActiveWindow();
 
 Q_SIGNALS:
-    void windowModelChanged();
     void showingDesktopChanged(bool);
     void hasCloseableActiveWindowChanged();
     void panelChanged();
