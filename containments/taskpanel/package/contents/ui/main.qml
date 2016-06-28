@@ -145,8 +145,14 @@ PlasmaCore.ColorScope {
                 width: parent.width/3
                 anchors.right: parent.right
                 iconSource: "window-close"
-                enabled: plasmoid.nativeInterface.hasCloseableActiveWindow;
-                onClicked: plasmoid.nativeInterface.closeActiveWindow();
+                //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
+                enabled: taskSwitcher.model ? (taskSwitcher.model.data(taskSwitcher.model.activeTask, Qt.UserRole+9) === true && taskSwitcher.model.data(taskSwitcher.model.activeTask, Qt.UserRole+15) === true) : false
+                onClicked: {
+                    var index = taskSwitcher.model.activeTask;
+                    if (index) {
+                        taskSwitcher.model.requestClose(index);
+                    }
+                }
                 onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);
                 onReleased: mainMouseArea.released(mouse);

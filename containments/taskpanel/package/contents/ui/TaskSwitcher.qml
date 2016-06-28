@@ -36,6 +36,7 @@ FullScreenPanel {
     property int overShoot: units.gridUnit * 2
     property int tasksCount: tasksModel.count
     property int currentTaskIndex: -1
+    property alias model: tasksModel
 
     color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),

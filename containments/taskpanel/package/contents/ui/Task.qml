@@ -43,7 +43,7 @@ Item {
         target: tasksView
         onContentYChanged: {
             var pos = delegate.mapToItem(tasksView, 0, 0);
-            tasksModel.requestPublishDelegateGeometry(model.index, Qt.rect(pos.x, pos.y, delegate.width, delegate.height));
+            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height));
         }
     }
 
@@ -66,7 +66,7 @@ Item {
             ScriptAction {
                 script: {
                     if (background.x != 0) {
-                        tasksModel.requestClose(model.index);
+                        tasksModel.requestClose(tasksModel.index(model.index, 0));
                     }
                 }
             }
