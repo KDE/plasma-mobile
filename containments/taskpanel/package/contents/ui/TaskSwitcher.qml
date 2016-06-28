@@ -99,6 +99,7 @@ FullScreenPanel {
             script: {
                 if (tasksView.contentY <= -tasksView.headerItem.height || tasksView.contentY >= tasksView.contentHeight - tasksView.headerItem.height) {
                     window.visible = false;
+                    setSingleActiveWindow(currentTaskIndex);
                 }
             }
         }

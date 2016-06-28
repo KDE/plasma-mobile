@@ -104,7 +104,6 @@ PlasmaCore.ColorScope {
                 enabled: taskSwitcher.tasksCount > 0;
                 iconSource: "window-list"
                 onClicked: {
-                    taskSwitcher.currentTaskIndex = -1;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
