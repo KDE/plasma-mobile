@@ -209,5 +209,4 @@ FullScreenPanel {
             window.hide();
         }
     }
-    Component.onCompleted: plasmoid.nativeInterface.panel = window;
 }

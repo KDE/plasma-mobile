@@ -6,7 +6,6 @@ Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
 X-Plasma-API=declarativeappletscript
-X-KDE-Library=plasma_containment_phone_taskpanel
 X-KDE-PluginInfo-Author=Marco Martin
 X-KDE-PluginInfo-Category=Containments
 X-KDE-PluginInfo-Email=mart@kde.org
