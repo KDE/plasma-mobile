@@ -3,4 +3,5 @@ build
 *.creator 
 *.files 
 *.includes
+*.user
 
