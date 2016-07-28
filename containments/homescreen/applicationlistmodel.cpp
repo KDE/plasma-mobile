@@ -241,25 +241,7 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
     endMoveRows();
 }
 
-//TODO: the implementation of runApplicationKRun should be the only one remaining
 void ApplicationListModel::runApplication(const QString &storageId)
-{
-    if (storageId.isEmpty()) {
-        return;
-    }
-
-    KService::Ptr service = KService::serviceByStorageId(storageId);
-
-    //ignore parameters like %u
-    QStringList args = KShell::splitArgs(service->exec().replace(QRegExp("%\\w"), ""));
-    QString exec = args.takeFirst();
-    qDebug() << "exec -> " << exec;
-    qDebug() << "args -> " << args;
-    qDebug() << "path -> " << service->path();
-    QProcess::startDetached(exec, args, service->path());
-}
-
-void ApplicationListModel::runApplicationKRun(const QString &storageId)
 {
     if (storageId.isEmpty()) {
         return;
