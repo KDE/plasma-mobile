@@ -250,9 +250,12 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
+    //ignore parameters like %u
     QStringList args = KShell::splitArgs(service->exec().replace(QRegExp("%\\w"), ""));
     QString exec = args.takeFirst();
-    //ignore parameters like %u
+    qDebug() << "exec -> " << exec;
+    qDebug() << "args -> " << args;
+    qDebug() << "path -> " << service->path();
     QProcess::startDetached(exec, args, service->path());
 }
 
