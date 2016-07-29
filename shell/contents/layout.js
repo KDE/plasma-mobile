@@ -1,10 +1,5 @@
-var id = currentActivity();
 
-if (id.length < 1) {
-    id = createActivity("Homescreen", "org.kde.phone.homescreen")
-}
-
-var desktopsArray = desktopsForActivity(id);
+var desktopsArray = desktopsForActivty(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = "org.kde.image";
     //desktopsArray[j].name = "Homescreen" + (j > 0 ? " " + j : "");
