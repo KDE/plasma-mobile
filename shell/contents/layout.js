@@ -1,5 +1,5 @@
 
-var desktopsArray = desktopsForActivty(currentActivity());
+var desktopsArray = desktopsForActivity(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = "org.kde.image";
     //desktopsArray[j].name = "Homescreen" + (j > 0 ? " " + j : "");
@@ -9,7 +9,7 @@ for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].writeConfig("Image", "org.kde.plasma.phone.lockers");
 }
 
-desktopsForActivity(id)[0].addWidget("org.kde.plasma.analogclock");
+desktopsArray[0].addWidget("org.kde.plasma.analogclock");
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.plasma.notifications");
