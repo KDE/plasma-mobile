@@ -44,4 +44,7 @@ paplay /usr/share/sounds/sitter/ohits.ogg &
 # start polkit authentication agent
 @CMAKE_INSTALL_FULL_LIBEXECDIR@/polkit-kde-authentication-agent-1 &
 
+# start powerdevil
+@CMAKE_INSTALL_FULL_LIBEXECDIR@/org_kde_powerdevil &
+
 exec /usr/bin/plasmashell -p org.kde.plasma.phone 2>/tmp/plasmashell_logs
