@@ -38,6 +38,8 @@ FullScreenPanel {
     property int currentTaskIndex: -1
     property alias model: tasksModel
 
+    Component.onCompleted: plasmoid.nativeInterface.panel = window;
+
     color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
         ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
@@ -53,7 +55,7 @@ FullScreenPanel {
         scrollAnim.from = tasksView.contentY;
         scrollAnim.to = 0;
         scrollAnim.running = true;
-        setSingleActiveWindow(-1);
+        plasmoid.nativeInterface.requestShowingDesktop(true);
     }
     function hide() {
         scrollAnim.from = tasksView.contentY;
@@ -66,16 +68,8 @@ FullScreenPanel {
     }
 
     function setSingleActiveWindow(id) {
-        var task;
-        for (var i = 0; i < tasksModel.count; ++i) {
-            task = filterModel.get(i);
-
-            if (i == id) {
-                tasksModel.requestActivate(tasksModel.index(i, 0));
-                currentTaskIndex = id;
-            } else if (i != id && !task.IsMinimized) {
-                tasksModel.requestToggleMinimized(tasksModel.index(i, 0));
-            }
+        if (id >= 0) {
+            tasksModel.requestActivate(tasksModel.index(id, 0));
         }
     }
 
@@ -206,7 +200,7 @@ FullScreenPanel {
         iconSource: "go-home"
         onClicked: {
             currentTaskIndex = -1;
-            setSingleActiveWindow(-1);
+            plasmoid.nativeInterface.requestShowingDesktop(true);
             window.hide();
         }
     }
