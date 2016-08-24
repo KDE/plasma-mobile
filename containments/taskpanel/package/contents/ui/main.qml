@@ -104,6 +104,7 @@ PlasmaCore.ColorScope {
                 enabled: taskSwitcher.tasksCount > 0;
                 iconSource: "window-list"
                 onClicked: {
+                    plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
@@ -120,11 +121,8 @@ PlasmaCore.ColorScope {
                 enabled: taskSwitcher.tasksCount > 0
                 checkable: true
                 onCheckedChanged: {
-                    if (checked) {
-                        root.taskSwitcher.setSingleActiveWindow(-1);
-                    } else {
-                        root.taskSwitcher.setSingleActiveWindow(root.taskSwitcher.currentTaskIndex);
-                    }
+                    taskSwitcher.hide();
+                    plasmoid.nativeInterface.showDesktop = checked;
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);

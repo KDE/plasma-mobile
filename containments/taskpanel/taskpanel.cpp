@@ -50,6 +50,7 @@ TaskPanel::~TaskPanel()
 
 void TaskPanel::requestShowingDesktop(bool showingDesktop)
 {
+    qWarning()<<"AAAA"<<showingDesktop<<m_windowManagement;
     if (!m_windowManagement) {
         return;
     }

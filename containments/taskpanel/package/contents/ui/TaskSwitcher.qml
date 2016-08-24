@@ -55,7 +55,6 @@ FullScreenPanel {
         scrollAnim.from = tasksView.contentY;
         scrollAnim.to = 0;
         scrollAnim.running = true;
-        plasmoid.nativeInterface.requestShowingDesktop(true);
     }
     function hide() {
         scrollAnim.from = tasksView.contentY;
@@ -200,8 +199,8 @@ FullScreenPanel {
         iconSource: "go-home"
         onClicked: {
             currentTaskIndex = -1;
-            plasmoid.nativeInterface.requestShowingDesktop(true);
             window.hide();
+            plasmoid.nativeInterface.showDesktop = true;
         }
     }
 }
