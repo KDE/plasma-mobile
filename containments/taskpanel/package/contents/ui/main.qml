@@ -69,7 +69,7 @@ PlasmaCore.ColorScope {
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
                 taskSwitcher.visible = true;
             }
-            plasmoid.nativeInterface.requestShowingDesktop(true);
+            plasmoid.nativeInterface.showDesktop = true;
         }
         onReleased: {
             if (!isDragging) {
