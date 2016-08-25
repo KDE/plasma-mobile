@@ -87,7 +87,7 @@ void TaskPanel::initWayland()
     );
     connect(registry, &Registry::plasmaShellAnnounced, this,
         [this, registry] (quint32 name, quint32 version) {
-            
+
             m_shellInterface = registry->createPlasmaShell(name, version, this);
 
             if (!m_panel) {
@@ -98,6 +98,7 @@ void TaskPanel::initWayland()
                 return;
             }
             m_shellSurface = m_shellInterface->createSurface(s, this);
+            m_shellSurface->setSkipTaskbar(true);
         }
     );
     registry->setup();
@@ -118,15 +119,15 @@ void TaskPanel::setPanel(QWindow *panel)
     m_panel = panel;
     emit panelChanged();
 
-    if (!m_shellSurface) {
-        return;
-    }
     Surface *s = Surface::fromWindow(panel);
     if (!s) {
         return;
     }
-    
+
     m_shellSurface = m_shellInterface->createSurface(s, this);
+    if (m_shellSurface) {
+        m_shellSurface->setSkipTaskbar(true);
+    }
 }
 
 void TaskPanel::updateActiveWindow()
