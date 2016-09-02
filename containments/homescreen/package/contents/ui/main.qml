@@ -360,11 +360,11 @@ Item {
                 return;
             }
 
+            clickFedbackAnimation.target = item;
+            clickFedbackAnimation.running = true;
             feedbackWindow.title = item.modelData.ApplicationNameRole;
             feedbackWindow.state = "open";
             plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
-            clickFedbackAnimation.target = item;
-            clickFedbackAnimation.running = true;
         }
 
         PlasmaCore.ColorScope {
