@@ -40,6 +40,11 @@ FullScreenPanel {
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
 
+    onTasksCountChanged: {
+        if (tasksCount == 0) {
+            hide();
+        }
+    }
     color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
         (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
         ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
