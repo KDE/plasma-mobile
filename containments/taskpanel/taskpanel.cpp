@@ -42,6 +42,10 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
 {
     setHasConfigurationInterface(true);
     initWayland();
+    m_activeTimer = new QTimer(this);
+    m_activeTimer->setSingleShot(true);
+    m_activeTimer->setInterval(250);
+    connect(m_activeTimer, &QTimer::timeout, this, &TaskPanel::updateActiveWindow);
 }
 
 TaskPanel::~TaskPanel()
@@ -81,7 +85,10 @@ void TaskPanel::initWayland()
                     emit showingDesktopChanged(m_showingDesktop);
                 }
             );
-            connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow);
+            //FIXME
+            //connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow, Qt::QueuedConnection);
+            
+            connect(m_windowManagement, SIGNAL(activeWindowChanged()), m_activeTimer, SLOT(start()));
             updateActiveWindow();
         }
     );
@@ -132,7 +139,7 @@ void TaskPanel::setPanel(QWindow *panel)
 
 void TaskPanel::updateActiveWindow()
 {
-    if (!m_windowManagement) {
+    if (!m_windowManagement || m_activeWindow == m_windowManagement->activeWindow()) {
         return;
     }
     if (m_activeWindow) {
@@ -154,7 +161,7 @@ void TaskPanel::updateActiveWindow()
 
 bool TaskPanel::hasCloseableActiveWindow() const
 {
-    return m_activeWindow && m_activeWindow->isCloseable() && !m_activeWindow->isMinimized();
+    return m_activeWindow && m_activeWindow->isCloseable() /*&& !m_activeWindow->isMinimized()*/;
 }
 
 void TaskPanel::forgetActiveWindow()

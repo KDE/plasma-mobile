@@ -80,6 +80,7 @@ private:
     KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     KWayland::Client::PlasmaWindowModel *m_windowModel = nullptr;
     QPointer<KWayland::Client::PlasmaWindow> m_activeWindow;
+    QTimer *m_activeTimer;
 };
 
 #endif

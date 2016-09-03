@@ -143,7 +143,7 @@ PlasmaCore.ColorScope {
                 anchors.right: parent.right
                 iconSource: "window-close"
                 //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
-                enabled: taskSwitcher.model ? (taskSwitcher.model.data(taskSwitcher.model.activeTask, Qt.UserRole+9) === true && taskSwitcher.model.data(taskSwitcher.model.activeTask, Qt.UserRole+15) === true) : false
+                enabled: plasmoid.nativeInterface.hasCloseableActiveWindow
                 onClicked: {
                     var index = taskSwitcher.model.activeTask;
                     if (index) {
