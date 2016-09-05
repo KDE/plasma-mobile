@@ -1,0 +1,21 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Phone Activities
+
+Comment=Activity switcher for the phone
+Icon=start-here-symbolic
+Type=Service
+X-KDE-ParentApp=
+X-KDE-PluginInfo-Author=Marco Martin
+X-KDE-PluginInfo-Email=mart@kde.org
+X-KDE-PluginInfo-License=GPL
+X-KDE-PluginInfo-Name=org.kde.phone.activities
+X-KDE-PluginInfo-Version=1.0
+X-KDE-PluginInfo-Website=plasma.kde.org
+X-KDE-ServiceTypes=Plasma/Applet
+X-Plasma-API=declarativeappletscript
+X-KDE-PluginInfo-Category=Activities
+X-Plasma-Provides=org.kde.plasma.activities
+
+X-Plasma-MainScript=ui/main.qml
+X-Plasma-RemoteLocation=
