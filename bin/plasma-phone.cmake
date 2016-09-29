@@ -35,6 +35,11 @@ export QT_QUICK_CONTROLS_MOBILE=true
 
 # upstart user session has useful bits like mtp-server
 init --user &
+
+# HACK: FIXME: This should autostart when required but appearantly there is some async magic which prevents it gettings started.
+# start signond service
+dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:com.google.code.AccountsSSO.SingleSignOn uint32:0
+
 # start mission control
 dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:org.freedesktop.Telepathy.MissionControl5 uint32:0
 
