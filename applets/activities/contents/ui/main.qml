@@ -31,12 +31,15 @@ ColumnLayout {
         model: Activities.ActivityModel {
             id: activityModel
         }
-        highlight: PlasmaComponents.Highlight {}
         delegate: MouseArea {
                 id: delegate
                 drag {
-                    target: delegate
+                    target: listView.count > 0  && !model.current? delegate : null
                     axis: Drag.XAxis
+                }
+                PlasmaComponents.Highlight {
+                    visible: model.current
+                    anchors.fill:parent
                 }
                 SequentialAnimation {
                     id: positionAnim
