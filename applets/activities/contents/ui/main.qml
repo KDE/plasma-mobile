@@ -25,6 +25,7 @@ import org.kde.activities 0.1 as Activities
 
 ColumnLayout {
     PlasmaComponents.ToolButton {
+        id: newButton
         Layout.fillWidth: true
         text: i18n("New Activity...")
         onClicked: {
@@ -50,84 +51,103 @@ ColumnLayout {
             }
         }
     }
-    ListView {
-        id: listView
+    MouseArea {
+        id: rootMouseArea
         Layout.fillWidth: true
         Layout.fillHeight: true
-        model: Activities.ActivityModel {
-            id: activityModel
-        }
-        delegate: MouseArea {
-                id: delegate
-                drag {
-                    target: listView.count > 0  && !model.current? delegate : null
-                    axis: Drag.XAxis
-                }
-                PlasmaComponents.Highlight {
-                    visible: model.current
-                    anchors.fill:parent
-                }
-                SequentialAnimation {
-                    id: positionAnim
-                    property alias to: xAnim.to
-                    XAnimator {
-                        id: xAnim
-                        target: delegate
-                        from: delegate.x
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
+        drag.filterChildren: true
+        onClicked: newEdit.visible = false
+        ListView {
+            id: listView
+            anchors.fill: parent
+            model: Activities.ActivityModel {
+                id: activityModel
+            }
+            delegate: MouseArea {
+                    id: delegate
+                    drag {
+                        target: listView.count > 0  && !model.current? delegate : null
+                        axis: Drag.XAxis
                     }
-                    ScriptAction {
-                        script: {
-                            if (delegate.x < -delegate.width/2 || delegate.x > delegate.width/2) {
-                                activityModel.removeActivity(model.id, function() {});
+                    PlasmaComponents.Highlight {
+                        visible: model.current
+                        anchors.fill:parent
+                    }
+                    Connections {
+                        target: rootMouseArea
+                        onClicked: {
+                            if (!delegate.contains(rootMouseArea.mapToItem(delegate, mouse.x, mouse.y))) {
+                                edit.visible = false;
                             }
                         }
                     }
-                }
-                width: listView.width
-                height: label.height
-                onClicked: {
-                    listView.currentIndex = index;
-                    activityModel.setCurrentActivity(model.id, function() {});
-                }
-                onPressAndHold: {
-                    edit.visible = true
-                    edit.focus = true
-                }
-                onReleased: {
-                    if (edit.visible) {
+                    Connections {
+                        target: newButton
+                        onClicked: edit.visible = false;
+                    }
+                    SequentialAnimation {
+                        id: positionAnim
+                        property alias to: xAnim.to
+                        XAnimator {
+                            id: xAnim
+                            target: delegate
+                            from: delegate.x
+                            duration: units.longDuration
+                            easing.type: Easing.InOutQuad
+                        }
+                        ScriptAction {
+                            script: {
+                                if (delegate.x < -delegate.width/2 || delegate.x > delegate.width/2) {
+                                    activityModel.removeActivity(model.id, function() {});
+                                }
+                            }
+                        }
+                    }
+                    width: listView.width
+                    height: Math.max(label.height, label.height)
+                    onClicked: {
+                        listView.currentIndex = index;
+                        activityModel.setCurrentActivity(model.id, function() {});
+                    }
+                    onPressAndHold: {
+                        edit.visible = true
                         edit.focus = true
-                        edit.forceActiveFocus()
                     }
-                    if (delegate.x < -delegate.width/2) {
-                        positionAnim.to = -delegate.width;
-                    } else if (delegate.x > delegate.width/2) {
-                        positionAnim.to = delegate.width;
-                    } else {
-                        positionAnim.to = 0;
-                    }
+                    onReleased: {
+                        if (edit.visible) {
+                            edit.focus = true
+                            edit.forceActiveFocus()
+                        }
+                        if (delegate.x < -delegate.width/2) {
+                            positionAnim.to = -delegate.width;
+                        } else if (delegate.x > delegate.width/2) {
+                            positionAnim.to = delegate.width;
+                        } else {
+                            positionAnim.to = 0;
+                        }
 
-                    positionAnim.running = true;
-                }
-            PlasmaComponents.Label {
-                id: label
-                text: model.name
-                x: units.smallSpacing
-            }
-            PlasmaComponents.TextField {
-                id: edit
-                visible: false
-                text: model.name
-                width: parent.width
-                onFocusChanged: {
-                    if (!focus) {
-                        visible = false
+                        positionAnim.running = true;
                     }
+                PlasmaComponents.Label {
+                    id: label
+                    text: model.name
+                    anchors.verticalCenter: parent.verticalCenter
+                    x: units.smallSpacing
                 }
-                onAccepted: {
-                    if (text != "") {
-                        activityModel.setActivityName(model.id, text, function() {visible = false});
+                PlasmaComponents.TextField {
+                    id: edit
+                    visible: false
+                    text: model.name
+                    width: parent.width
+                    onFocusChanged: {
+                        if (!focus) {
+                            visible = false
+                        }
+                    }
+                    onAccepted: {
+                        if (text != "") {
+                            activityModel.setActivityName(model.id, text, function() {visible = false});
+                        }
                     }
                 }
             }
