@@ -28,7 +28,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import "../components"
 
 Item {
-    id: homescreen
+    id: root
     width: 1080
     height: 1920
 
@@ -65,16 +65,95 @@ Item {
     }
 
     onContainmentChanged: {
-        containment.parent = homescreen;
-
-        if (containment != null) {
-            containment.visible = true;
+        if (containment == null) {
+            return;
         }
-        if (containment != null) {
-            containment.anchors.left = homescreen.left;
-            containment.anchors.top = homescreen.top;
-            containment.anchors.right = homescreen.right;
-            containment.anchors.bottom = homescreen.bottom;
+
+        if (switchAnim.running) {
+            //If the animation was still running, stop it and reset
+            //everything so that a consistent state can be kept
+            switchAnim.running = false;
+            internal.newContainment.visible = false;
+            internal.oldContainment.visible = false;
+            internal.oldContainment = null;
+        }
+
+        internal.newContainment = containment;
+        containment.visible = true;
+
+        if (internal.oldContainment != null && internal.oldContainment != containment) {
+            switchAnim.running = true;
+        } else {
+            containment.anchors.left = root.left;
+            containment.anchors.top = root.top;
+            containment.anchors.right = root.right;
+            containment.anchors.bottom = root.bottom;
+            if (internal.oldContainment) {
+                internal.oldContainment.visible = false;
+            }
+            internal.oldContainment = containment;
+        }
+    }
+
+    //some properties that shouldn't be accessible from elsewhere
+    QtObject {
+        id: internal;
+
+        property Item oldContainment: null;
+        property Item newContainment: null;
+    }
+
+    SequentialAnimation {
+        id: switchAnim
+        ScriptAction {
+            script: {
+                if (containment) {
+                    containment.anchors.left = undefined;
+                    containment.anchors.top = undefined;
+                    containment.anchors.right = undefined;
+                    containment.anchors.bottom = undefined;
+                    containment.z = 1;
+                    containment.x = root.width;
+                }
+                if (internal.oldContainment) {
+                    internal.oldContainment.anchors.left = undefined;
+                    internal.oldContainment.anchors.top = undefined;
+                    internal.oldContainment.anchors.right = undefined;
+                    internal.oldContainment.anchors.bottom = undefined;
+                    internal.oldContainment.z = 0;
+                    internal.oldContainment.x = 0;
+                }
+            }
+        }
+        ParallelAnimation {
+            NumberAnimation {
+                target: internal.oldContainment
+                properties: "x"
+                to: internal.newContainment != null ? -root.width : 0
+                duration: 400
+                easing.type: Easing.InOutQuad
+            }
+            NumberAnimation {
+                target: internal.newContainment
+                properties: "x"
+                to: 0
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        ScriptAction {
+            script: {
+                if (internal.oldContainment) {
+                    internal.oldContainment.visible = false;
+                }
+                if (containment) {
+                    containment.anchors.left = root.left;
+                    containment.anchors.top = root.top;
+                    containment.anchors.right = root.right;
+                    containment.anchors.bottom = root.bottom;
+                    internal.oldContainment = containment;
+                }
+            }
         }
     }
 
