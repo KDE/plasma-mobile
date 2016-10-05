@@ -24,6 +24,32 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.activities 0.1 as Activities
 
 ColumnLayout {
+    PlasmaComponents.ToolButton {
+        Layout.fillWidth: true
+        text: i18n("New Activity...")
+        onClicked: {
+            newEdit.visible = true;
+            newEdit.forceActiveFocus();
+        }
+        PlasmaComponents.TextField {
+            id: newEdit
+            visible: false
+            width: parent.width
+            onFocusChanged: {
+                if (!focus) {
+                    visible = false
+                }
+            }
+            onAccepted: {
+                if (text != "") {
+                    activityModel.addActivity(text, function(id) {
+                        visible = false;
+                        activityModel.setCurrentActivity(id, function() {});
+                    });
+                }
+            }
+        }
+    }
     ListView {
         id: listView
         Layout.fillWidth: true
@@ -103,33 +129,6 @@ ColumnLayout {
                     if (text != "") {
                         activityModel.setActivityName(model.id, text, function() {visible = false});
                     }
-                }
-            }
-        }
-    }
-    PlasmaComponents.ToolButton {
-        Layout.fillWidth: true
-        text: i18n("New Activity...")
-        onClicked: {
-            newEdit.visible = true;
-            newEdit.forceActiveFocus();
-        }
-        PlasmaComponents.TextField {
-            id: newEdit
-            visible: false
-            width: parent.width
-            onFocusChanged: {
-                if (!focus) {
-                    visible = false
-                }
-            }
-            onAccepted: {
-                if (text != "") {
-                    activityModel.addActivity(text, function(id) {
-                        visible = false;
-                        print("AAA"+id)
-                        activityModel.setCurrentActivity(id, function() {});
-                    });
                 }
             }
         }
