@@ -45,7 +45,9 @@ ColumnLayout {
                 if (text != "") {
                     activityModel.addActivity(text, function(id) {
                         visible = false;
-                        activityModel.setCurrentActivity(id, function() {});
+                        activityModel.setCurrentActivity(id, function() {
+                            plasmoid.expanded = false;
+                        });
                     });
                 }
             }
@@ -107,7 +109,9 @@ ColumnLayout {
                     height: Math.max(label.height, label.height)
                     onClicked: {
                         listView.currentIndex = index;
-                        activityModel.setCurrentActivity(model.id, function() {});
+                        activityModel.setCurrentActivity(model.id, function() {
+                             plasmoid.expanded = false;
+                        });
                     }
                     onPressAndHold: {
                         edit.visible = true

@@ -36,6 +36,12 @@ FullScreenPanel {
     width: Screen.width
     height: Screen.height
 
+    function open() {
+        mouseArea.state = "open";
+    }
+    function close() {
+        mouseArea.state = "closed";
+    }
     function updateState() {
         var delta = offset - mouseArea.startOffset;
         if (delta > units.gridUnit * 8) {

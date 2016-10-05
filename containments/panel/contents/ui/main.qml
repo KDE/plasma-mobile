@@ -44,6 +44,15 @@ PlasmaCore.ColorScope {
         LayoutManager.save();
     }
 
+    Connections {
+        target: expandedApplet
+        onExpandedChanged: {
+            if (!expanded) {
+                slidingPanel.close();
+            }
+        }
+    }
+
     function addApplet(applet, x, y) {
          
         var container = appletContainerComponent.createObject(appletIconsRow)
@@ -98,12 +107,14 @@ PlasmaCore.ColorScope {
                 z: 999
                 onClicked: {
                     if (root.expandedApplet != applet) {
+                        //temp var needed for oldExpandedApplet not to catch one expandedChanged too much by our Connections
+                        var oldExpandedApplet = root.expandedApplet;
+                        root.expandedApplet = applet;
                         applet.expanded = true;
                         appletsStack.replace(applet.fullRepresentationItem);
-                        if (root.expandedApplet) {
-                            root.expandedApplet.expanded = false;
+                        if (oldExpandedApplet) {
+                            oldExpandedApplet.expanded = false;
                         }
-                        root.expandedApplet = applet;
                     }
                 }
             }
@@ -209,6 +220,7 @@ PlasmaCore.ColorScope {
             var factor = 1;
             slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
             oldMouseY = mouse.y;
+            root.expandedApplet.expanded = true;
         }
         onReleased: slidingPanel.updateState();
     }
