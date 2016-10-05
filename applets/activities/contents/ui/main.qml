@@ -23,20 +23,79 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.activities 0.1 as Activities
 
-ListView {
-    id: listView
-    model: Activities.ActivityModel {
-        id: activityModel
+ColumnLayout {
+    ListView {
+        id: listView
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        model: Activities.ActivityModel {
+            id: activityModel
+        }
+        highlight: PlasmaComponents.Highlight {}
+        delegate: MouseArea {
+                width: listView.width
+                height: label.height
+                onClicked: {
+                    listView.currentIndex = index;
+                    activityModel.setCurrentActivity(model.id, function() {});
+                }
+                onPressAndHold: {
+                    edit.visible = true
+                    edit.focus = true
+                }
+                onReleased: {
+                    if (edit.visible) {
+                        edit.focus = true
+                        edit.forceActiveFocus()
+                    }
+                }
+            PlasmaComponents.Label {
+                id: label
+                text: model.name
+                x: units.smallSpacing
+            }
+            PlasmaComponents.TextField {
+                id: edit
+                visible: false
+                text: model.name
+                width: parent.width
+                onFocusChanged: {
+                    if (!focus) {
+                        visible = false
+                    }
+                }
+                onAccepted: {
+                    if (text != "") {
+                        activityModel.setActivityName(model.id, text, function() {visible = false});
+                    }
+                }
+            }
+        }
     }
-    highlight: PlasmaComponents.Highlight {}
-    delegate: PlasmaComponents.Label {
-        text: model.name
-        width: listView.width
-        MouseArea {
-            anchors.fill: parent
-            onClicked: {
-                listView.currentIndex = index;
-                activityModel.setCurrentActivity(model.id, function() {});
+    PlasmaComponents.ToolButton {
+        Layout.fillWidth: true
+        text: i18n("New Activity...")
+        onClicked: {
+            newEdit.visible = true;
+            newEdit.forceActiveFocus();
+        }
+        PlasmaComponents.TextField {
+            id: newEdit
+            visible: false
+            width: parent.width
+            onFocusChanged: {
+                if (!focus) {
+                    visible = false
+                }
+            }
+            onAccepted: {
+                if (text != "") {
+                    activityModel.addActivity(text, function(id) {
+                        visible = false;
+                        print("AAA"+id)
+                        activityModel.setCurrentActivity(id, function() {});
+                    });
+                }
             }
         }
     }

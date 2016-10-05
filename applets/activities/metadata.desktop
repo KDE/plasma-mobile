@@ -3,7 +3,7 @@ Encoding=UTF-8
 Name=Phone Activities
 
 Comment=Activity switcher for the phone
-Icon=start-here-symbolic
+Icon=preferences-activities
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin
