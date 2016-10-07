@@ -1,6 +1,12 @@
 [Desktop Entry]
 Name=Phone multitask
+Name[nl]=Multitasking van de telefoon
+Name[pt]=Multi-Tarefas do Telefone
+Name[sv]=Flera uppgifter på telefonen
+Name[uk]=Багатозадачний телефон
+Name[x-test]=xxPhone multitaskxx
 Comment=Multitasking user interface for Phone devices
+Comment[uk]=Багатозадачний інтерфейс користувача для телефонних пристроїв
 
 Icon=preferences-system-windows-script-test
 

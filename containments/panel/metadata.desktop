@@ -2,6 +2,11 @@
 Encoding=UTF-8
 Keywords=
 Name=Phone Panel
+Name[nl]=Telefoonpaneel
+Name[pt]=Painel do Telefone
+Name[sv]=Telefonpanel
+Name[uk]=Панель телефону
+Name[x-test]=xxPhone Panelxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

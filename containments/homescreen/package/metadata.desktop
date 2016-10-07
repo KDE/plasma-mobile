@@ -2,6 +2,11 @@
 Encoding=UTF-8
 Keywords=
 Name=Phone Homescreen
+Name[nl]=Standaardscherm van de telefoon
+Name[pt]=Ecrã Inicial
+Name[sv]=Telefonens hemskärm
+Name[uk]=Домашня сторінка телефону
+Name[x-test]=xxPhone Homescreenxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

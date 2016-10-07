@@ -1,15 +1,40 @@
 [Global]
 IconName=call-start
 Comment=Phone
+Comment[nl]=Telefoon
+Comment[pt]=Telefone
+Comment[sv]=Telefon
+Comment[uk]=Телефон
+Comment[x-test]=xxPhonexx
 
 [Event/callMissed]
 Name=Missed Call
+Name[nl]=Gemiste oproepen
+Name[pt]=Chamada Não Atendida
+Name[sv]=Missat samtal
+Name[uk]=Пропущений дзвінок
+Name[x-test]=xxMissed Callxx
 Comment=A call has been missed
+Comment[nl]=Er is een gemiste oproep
+Comment[pt]=Uma chamada não foi atendida
+Comment[sv]=Ett samtal har missats
+Comment[uk]=Було пропущено дзвінок
+Comment[x-test]=xxA call has been missedxx
 Action=Popup
 
 [Event/ringing]
 Name=Ringing
+Name[nl]=Bel gaat over
+Name[pt]=A tocar
+Name[sv]=Ringer
+Name[uk]=Дзвінок
+Name[x-test]=xxRingingxx
 Comment=The phone is ringing
+Comment[nl]=De telefoon gaat over
+Comment[pt]=O telefone está a tocar
+Comment[sv]=Telefonen ringer
+Comment[uk]=Телефон дзвонить
+Comment[x-test]=xxThe phone is ringingxx
 Action=Sound
 Sound=KDE-Im-Phone-Ring.ogg
 

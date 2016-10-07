@@ -1,7 +1,22 @@
 [Desktop Entry]
 Name=Plasma Phone
+Name[nl]=Plasma telefoon
+Name[pt]=Plasma para Telefones
+Name[sv]=Plasma telefon
+Name[uk]=Телефон Плазми
+Name[x-test]=xxPlasma Phonexx
 Comment=Plasma workspace for smartphones
+Comment[nl]=Plasma workspace voor smartphones
+Comment[pt]=Área de trabalho Plasma para telemóveis
+Comment[sv]=Plasma arbetsyta för smarta telefoner
+Comment[uk]=Робочий простір Плазми для смартфонів
+Comment[x-test]=xxPlasma workspace for smartphonesxx
 Keywords=Phone, Workspace, Look and Feel
+Keywords[nl]=Telefoon, werkruimte, uiterlijk
+Keywords[pt]=Telefone, Telemóvel, Área de Trabalho, Aparência e Comportamento
+Keywords[sv]=Telefon, arbetsyta, utseende och känsla
+Keywords[uk]=Телефон, Робочий простір, Вигляд і поведінка
+Keywords[x-test]=xxPhone, Workspace, Look and Feelxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/LookAndFeel

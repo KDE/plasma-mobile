@@ -1,8 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Clock
+Name[nl]=Klok
+Name[pt]=Relógio
+Name[sv]=Klocka
+Name[uk]=Годинник
+Name[x-test]=xxClockxx
 
 Comment=Time displayed in a digital format
+Comment[nl]=De tijd getoond in een digitaal formaat
+Comment[pt]=A hora apresentada num formato digital
+Comment[sv]=Tid visad med digitalformat
+Comment[uk]=Час, показаний у цифровому форматі
+Comment[x-test]=xxTime displayed in a digital formatxx
 
 Icon=preferences-system-time
 Type=Service

@@ -1,5 +1,10 @@
 [Desktop Entry]
 Name=Phone
+Name[nl]=Telefoon
+Name[pt]=Telefone
+Name[sv]=Telefon
+Name[uk]=Телефон
+Name[x-test]=xxPhonexx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell

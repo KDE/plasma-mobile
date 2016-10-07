@@ -1,7 +1,17 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Notifications
+Name[nl]=Meldingen
+Name[pt]=Notificações
+Name[sv]=Underrättelser
+Name[uk]=Сповіщення
+Name[x-test]=xxNotificationsxx
 Comment=Display notifications and jobs
+Comment[nl]=Meldingen en taken tonen
+Comment[pt]=Mostrar as notificações e tarefas
+Comment[sv]=Visa underrättelser och jobb
+Comment[uk]=Показ сповіщень і завдань
+Comment[x-test]=xxDisplay notifications and jobsxx
 
 Type=Service
 Icon=preferences-desktop-notification

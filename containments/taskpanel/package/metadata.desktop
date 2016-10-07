@@ -2,6 +2,11 @@
 Encoding=UTF-8
 Keywords=
 Name=Phone Task panel
+Name[nl]=Telefoontakenpaneel
+Name[pt]=Painel de Tarefas do Telefone
+Name[sv]=Telefonaktivitetspanel
+Name[uk]=Панель завдань телефону
+Name[x-test]=xxPhone Task panelxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
