@@ -2,7 +2,9 @@
 Encoding=UTF-8
 Keywords=
 Name=Phone Homescreen
+Name[ca]=Pantalla d'inici del telèfon
 Name[nl]=Standaardscherm van de telefoon
+Name[pl]=Ekran domowy telefonu
 Name[pt]=Ecrã Inicial
 Name[sv]=Telefonens hemskärm
 Name[uk]=Домашня сторінка телефону

@@ -1,13 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Notifications
+Name[ca]=Notificacions
+Name[es]=Notificaciones
 Name[nl]=Meldingen
+Name[pl]=Powiadomienia
 Name[pt]=Notificações
 Name[sv]=Underrättelser
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
 Comment=Display notifications and jobs
+Comment[ca]=Mostra les notificacions i els treballs
 Comment[nl]=Meldingen en taken tonen
+Comment[pl]=Wyświetla powiadomienia i zadania
 Comment[pt]=Mostrar as notificações e tarefas
 Comment[sv]=Visa underrättelser och jobb
 Comment[uk]=Показ сповіщень і завдань

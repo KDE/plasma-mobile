@@ -1,6 +1,8 @@
 [Desktop Entry]
 Comment=Plasma phone dialer
+Comment[ca]=Marcador del telèfon del Plasma
 Comment[nl]=Telefoonkiezer van Plasma
+Comment[pl]=Pole wybierania telefonu
 Comment[pt]=Teclado do Plasma
 Comment[sv]=Plasma telefonuppringning
 Comment[uk]=Засіб набирання номеру Плазми
@@ -8,7 +10,10 @@ Comment[x-test]=xxPlasma phone dialerxx
 Encoding=UTF-8
 Keywords=
 Name=Phone
+Name[ca]=Telèfon
+Name[es]=Teléfono
 Name[nl]=Telefoon
+Name[pl]=Telefon
 Name[pt]=Telefone
 Name[sv]=Telefon
 Name[uk]=Телефон

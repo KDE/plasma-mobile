@@ -1,14 +1,18 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Phone Activities
+Name[ca]=Activitats del telèfon
 Name[nl]=Telefoonactiviteiten
+Name[pl]=Aktywności telefonu
 Name[pt]=Actividades do Telefone
 Name[sv]=Telefonaktiviteter
 Name[uk]=Простори дій телефону
 Name[x-test]=xxPhone Activitiesxx
 
 Comment=Activity switcher for the phone
+Comment[ca]=Commutador de l'activitat per al telèfon
 Comment[nl]=Omschakelaar van telefoonactiviteiten
+Comment[pl]=Przełącznik aktywności dla tego telefonu
 Comment[pt]=Selector de actividades do telefone
 Comment[sv]=Aktivitetsbyte för telefonen
 Comment[uk]=Перемикач дій для телефону

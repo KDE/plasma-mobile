@@ -1,18 +1,24 @@
 [Desktop Entry]
 Name=Plasma Phone
+Name[ca]=Telèfon del Plasma
 Name[nl]=Plasma telefoon
+Name[pl]=Telefon Plazmy
 Name[pt]=Plasma para Telefones
 Name[sv]=Plasma telefon
 Name[uk]=Телефон Плазми
 Name[x-test]=xxPlasma Phonexx
 Comment=Plasma workspace for smartphones
+Comment[ca]=Espai de treball del plasma per a telèfons intel·ligents
 Comment[nl]=Plasma workspace voor smartphones
+Comment[pl]=Przestrzeń robocza Plazmy dla smartfonów
 Comment[pt]=Área de trabalho Plasma para telemóveis
 Comment[sv]=Plasma arbetsyta för smarta telefoner
 Comment[uk]=Робочий простір Плазми для смартфонів
 Comment[x-test]=xxPlasma workspace for smartphonesxx
 Keywords=Phone, Workspace, Look and Feel
+Keywords[ca]=Telèfon, Espai de treball, Aspecte i comportament
 Keywords[nl]=Telefoon, werkruimte, uiterlijk
+Keywords[pl]=Telefon, Przestrzeń robocza, Wrażenia wzrokowe i dotykowe
 Keywords[pt]=Telefone, Telemóvel, Área de Trabalho, Aparência e Comportamento
 Keywords[sv]=Telefon, arbetsyta, utseende och känsla
 Keywords[uk]=Телефон, Робочий простір, Вигляд і поведінка

@@ -1,14 +1,19 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Clock
+Name[ca]=Rellotge
+Name[es]=Reloj
 Name[nl]=Klok
+Name[pl]=Zegar
 Name[pt]=Relógio
 Name[sv]=Klocka
 Name[uk]=Годинник
 Name[x-test]=xxClockxx
 
 Comment=Time displayed in a digital format
+Comment[ca]=Mostra l'hora en un format digital
 Comment[nl]=De tijd getoond in een digitaal formaat
+Comment[pl]=Wyświetla czas w formacie cyfrowym
 Comment[pt]=A hora apresentada num formato digital
 Comment[sv]=Tid visad med digitalformat
 Comment[uk]=Час, показаний у цифровому форматі

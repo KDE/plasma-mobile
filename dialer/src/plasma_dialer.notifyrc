@@ -1,7 +1,10 @@
 [Global]
 IconName=call-start
 Comment=Phone
+Comment[ca]=Telèfon
+Comment[es]=Teléfono
 Comment[nl]=Telefoon
+Comment[pl]=Telefon
 Comment[pt]=Telefone
 Comment[sv]=Telefon
 Comment[uk]=Телефон
@@ -9,13 +12,19 @@ Comment[x-test]=xxPhonexx
 
 [Event/callMissed]
 Name=Missed Call
+Name[ca]=Trucada perduda
+Name[es]=Llamada perdida
 Name[nl]=Gemiste oproepen
+Name[pl]=Połączenie nieodebrane
 Name[pt]=Chamada Não Atendida
 Name[sv]=Missat samtal
 Name[uk]=Пропущений дзвінок
 Name[x-test]=xxMissed Callxx
 Comment=A call has been missed
+Comment[ca]=S'ha perdut una trucada
+Comment[es]=Se ha perdido una llamada
 Comment[nl]=Er is een gemiste oproep
+Comment[pl]=Nie odebrano połączenia
 Comment[pt]=Uma chamada não foi atendida
 Comment[sv]=Ett samtal har missats
 Comment[uk]=Було пропущено дзвінок
@@ -24,13 +33,19 @@ Action=Popup
 
 [Event/ringing]
 Name=Ringing
+Name[ca]=Sonant...
+Name[es]=Sonando
 Name[nl]=Bel gaat over
+Name[pl]=Dzwonienie
 Name[pt]=A tocar
 Name[sv]=Ringer
 Name[uk]=Дзвінок
 Name[x-test]=xxRingingxx
 Comment=The phone is ringing
+Comment[ca]=El telèfon està sonant
+Comment[es]=El teléfono está sonando
 Comment[nl]=De telefoon gaat over
+Comment[pl]=Telefon dzwoni
 Comment[pt]=O telefone está a tocar
 Comment[sv]=Telefonen ringer
 Comment[uk]=Телефон дзвонить
