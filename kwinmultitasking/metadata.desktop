@@ -1,6 +1,7 @@
 [Desktop Entry]
 Name=Phone multitask
 Name[ca]=Multitasca del telèfon
+Name[ca@valencia]=Multitasca del telèfon
 Name[nl]=Multitasking van de telefoon
 Name[pl]=Wiele zadań na telefonie
 Name[pt]=Multi-Tarefas do Telefone
@@ -9,6 +10,7 @@ Name[uk]=Багатозадачний телефон
 Name[x-test]=xxPhone multitaskxx
 Comment=Multitasking user interface for Phone devices
 Comment[ca]=Interfície d'usuari multitasca per als dispositius de telèfon
+Comment[ca@valencia]=Interfície d'usuari multitasca per als dispositius de telèfon
 Comment[nl]=Gebruikersinterface voor multitasking voor telefoonapparaten
 Comment[pl]=Interfejs użytkownika dla telefonów do wykonywania wielu zadań
 Comment[pt]=Interface multi-tarefa para dispositivos telefónicos

@@ -2,6 +2,7 @@
 Encoding=UTF-8
 Name=Phone Activities
 Name[ca]=Activitats del telèfon
+Name[ca@valencia]=Activitats del telèfon
 Name[nl]=Telefoonactiviteiten
 Name[pl]=Aktywności telefonu
 Name[pt]=Actividades do Telefone
@@ -11,6 +12,7 @@ Name[x-test]=xxPhone Activitiesxx
 
 Comment=Activity switcher for the phone
 Comment[ca]=Commutador de l'activitat per al telèfon
+Comment[ca@valencia]=Commutador de l'activitat per al telèfon
 Comment[nl]=Omschakelaar van telefoonactiviteiten
 Comment[pl]=Przełącznik aktywności dla tego telefonu
 Comment[pt]=Selector de actividades do telefone
