@@ -2,6 +2,7 @@
 Comment=Plasma phone dialer
 Comment[ca]=Marcador del telèfon del Plasma
 Comment[ca@valencia]=Marcador del telèfon del Plasma
+Comment[en_GB]=Plasma phone dialer
 Comment[nl]=Telefoonkiezer van Plasma
 Comment[pl]=Pole wybierania telefonu
 Comment[pt]=Teclado do Plasma
@@ -14,6 +15,7 @@ Name=Phone
 Name[ca]=Telèfon
 Name[ca@valencia]=Telèfon
 Name[de]=Telefon
+Name[en_GB]=Phone
 Name[es]=Teléfono
 Name[nl]=Telefoon
 Name[pl]=Telefon
