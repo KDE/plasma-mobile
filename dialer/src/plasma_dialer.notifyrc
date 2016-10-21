@@ -71,5 +71,5 @@ Comment[sv]=Telefonen ringer
 Comment[uk]=Телефон дзвонить
 Comment[x-test]=xxThe phone is ringingxx
 Action=Sound
-Sound=KDE-Im-Phone-Ring.ogg
+Sound=Oxygen-Im-Phone-Ring.ogg
 
