@@ -14,6 +14,7 @@ Name[pt]=Actividades do Telefone
 Name[sv]=Telefonaktiviteter
 Name[uk]=Простори дій телефону
 Name[x-test]=xxPhone Activitiesxx
+Name[zh_TW]=手機活動
 
 Comment=Activity switcher for the phone
 Comment[ca]=Commutador de l'activitat per al telèfon
@@ -28,6 +29,7 @@ Comment[pt]=Selector de actividades do telefone
 Comment[sv]=Aktivitetsbyte för telefonen
 Comment[uk]=Перемикач дій для телефону
 Comment[x-test]=xxActivity switcher for the phonexx
+Comment[zh_TW]=手機的活動切換器
 Icon=preferences-activities
 Type=Service
 X-KDE-ParentApp=

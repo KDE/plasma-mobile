@@ -14,6 +14,7 @@ Name[pt]=Relógio
 Name[sv]=Klocka
 Name[uk]=Годинник
 Name[x-test]=xxClockxx
+Name[zh_TW]=時鐘
 
 Comment=Time displayed in a digital format
 Comment[ca]=Mostra l'hora en un format digital
@@ -29,6 +30,7 @@ Comment[pt]=A hora apresentada num formato digital
 Comment[sv]=Tid visad med digitalformat
 Comment[uk]=Час, показаний у цифровому форматі
 Comment[x-test]=xxTime displayed in a digital formatxx
+Comment[zh_TW]=以數位格式顯示時間
 
 Icon=preferences-system-time
 Type=Service

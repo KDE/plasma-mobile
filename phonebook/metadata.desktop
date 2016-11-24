@@ -15,6 +15,7 @@ Name[pt]=Lista Telefónica
 Name[sv]=Telefonkatalog
 Name[uk]=Телефонна книга
 Name[x-test]=xxPhonebookxx
+Name[zh_TW]=通訊錄
 Type=Application
 Icon=system-users
 Exec=kpackagelauncherqml -a org.kde.phone.phonebook

@@ -13,6 +13,7 @@ Name[pt]=Painel de Tarefas do Telefone
 Name[sv]=Telefonaktivitetspanel
 Name[uk]=Панель завдань телефону
 Name[x-test]=xxPhone Task panelxx
+Name[zh_TW]=手機工作列
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment

@@ -13,6 +13,7 @@ Name[pt]=Telefone
 Name[sv]=Telefon
 Name[uk]=Телефон
 Name[x-test]=xxPhonexx
+Name[zh_TW]=電話
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell

@@ -14,6 +14,7 @@ Comment[pt]=Telefone
 Comment[sv]=Telefon
 Comment[uk]=Телефон
 Comment[x-test]=xxPhonexx
+Comment[zh_TW]=電話
 
 [Event/callMissed]
 Name=Missed Call
@@ -30,6 +31,7 @@ Name[pt]=Chamada Não Atendida
 Name[sv]=Missat samtal
 Name[uk]=Пропущений дзвінок
 Name[x-test]=xxMissed Callxx
+Name[zh_TW]=錯過的來電
 Comment=A call has been missed
 Comment[ca]=S'ha perdut una trucada
 Comment[ca@valencia]=S'ha perdut una trucada
@@ -43,6 +45,7 @@ Comment[pt]=Uma chamada não foi atendida
 Comment[sv]=Ett samtal har missats
 Comment[uk]=Було пропущено дзвінок
 Comment[x-test]=xxA call has been missedxx
+Comment[zh_TW]=錯過一次來電
 Action=Popup
 
 [Event/ringing]
@@ -60,6 +63,7 @@ Name[pt]=A tocar
 Name[sv]=Ringer
 Name[uk]=Дзвінок
 Name[x-test]=xxRingingxx
+Name[zh_TW]=響鈴中
 Comment=The phone is ringing
 Comment[ca]=El telèfon està sonant
 Comment[ca@valencia]=El telèfon està sonant
@@ -74,6 +78,7 @@ Comment[pt]=O telefone está a tocar
 Comment[sv]=Telefonen ringer
 Comment[uk]=Телефон дзвонить
 Comment[x-test]=xxThe phone is ringingxx
+Comment[zh_TW]=電話正在響鈴中
 Action=Sound
 Sound=Oxygen-Im-Phone-Ring.ogg
 

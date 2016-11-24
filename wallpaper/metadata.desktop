@@ -10,6 +10,7 @@ Name[pt]=Bloqueios de Telefone do Plasma
 Name[sv]=Plasma telefonskåp
 Name[uk]=Блокувальники телефону Плазми
 Name[x-test]=xxPlasma Phone Lockersxx
+Name[zh_TW]=Plasma 手機鎖定程式
 
 X-KDE-PluginInfo-Name=org.kde.plasma.phone.lockers
 X-KDE-PluginInfo-Author=Jens Reuterberg
