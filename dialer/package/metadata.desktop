@@ -1,5 +1,6 @@
 [Desktop Entry]
 Comment=Plasma phone dialer
+Comment[ast]=Marcador Plasma del teléfonu
 Comment[ca]=Marcador del telèfon del Plasma
 Comment[ca@valencia]=Marcador del telèfon del Plasma
 Comment[en_GB]=Plasma phone dialer
@@ -15,6 +16,7 @@ Comment[zh_TW]=Plasma 手機撥號程式
 Encoding=UTF-8
 Keywords=
 Name=Phone
+Name[ast]=Teléfonu
 Name[ca]=Telèfon
 Name[ca@valencia]=Telèfon
 Name[cs]=Telefon
