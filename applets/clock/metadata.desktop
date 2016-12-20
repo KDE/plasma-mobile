@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Clock
-Name[ast]=Reló
 Name[ca]=Rellotge
 Name[ca@valencia]=Rellotge
 Name[cs]=Hodiny
@@ -18,7 +17,6 @@ Name[x-test]=xxClockxx
 Name[zh_TW]=時鐘
 
 Comment=Time displayed in a digital format
-Comment[ast]=Hora amosada en formatu dixital
 Comment[ca]=Mostra l'hora en un format digital
 Comment[ca@valencia]=Mostra l'hora en un format digital
 Comment[cs]=Čas zobrazený v digitální podobě
