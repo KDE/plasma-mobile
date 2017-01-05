@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Plasma Phone
+Name[ast]=Marcador Plasma del teléfonu
 Name[ca]=Telèfon del Plasma
 Name[ca@valencia]=Telèfon del Plasma
 Name[cs]=Plasma Phone
@@ -14,6 +15,7 @@ Name[uk]=Телефон Плазми
 Name[x-test]=xxPlasma Phonexx
 Name[zh_TW]=Plasma 電話
 Comment=Plasma workspace for smartphones
+Comment[ast]=Estaya de trabayu Plasma pa teléfonos intelixentes
 Comment[ca]=Espai de treball del plasma per a telèfons intel·ligents
 Comment[ca@valencia]=Espai de treball del plasma per a telèfons intel·ligents
 Comment[en_GB]=Plasma workspace for smartphones
@@ -27,6 +29,7 @@ Comment[uk]=Робочий простір Плазми для смартфоні
 Comment[x-test]=xxPlasma workspace for smartphonesxx
 Comment[zh_TW]=智慧型手機的 Plasma 工作空間
 Keywords=Phone, Workspace, Look and Feel
+Keywords[ast]=Teléfonu, Phone, Estaya de trabayu, Aspeutu y sentir
 Keywords[ca]=Telèfon, Espai de treball, Aspecte i comportament
 Keywords[ca@valencia]=Telèfon, Espai de treball, Aspecte i comportament
 Keywords[en_GB]=Phone, Workspace, Look and Feel
