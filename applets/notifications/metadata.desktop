@@ -15,6 +15,7 @@ Name[pt]=Notificações
 Name[sv]=Underrättelser
 Name[uk]=Сповіщення
 Name[x-test]=xxNotificationsxx
+Name[zh_CN]=通知
 Name[zh_TW]=通知
 Comment=Display notifications and jobs
 Comment[ast]=Amuesa avisos y trabayos
@@ -31,6 +32,7 @@ Comment[pt]=Mostrar as notificações e tarefas
 Comment[sv]=Visa underrättelser och jobb
 Comment[uk]=Показ сповіщень і завдань
 Comment[x-test]=xxDisplay notifications and jobsxx
+Comment[zh_CN]=显示通知和任务
 Comment[zh_TW]=顯示通知與工作
 
 Type=Service

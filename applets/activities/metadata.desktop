@@ -15,6 +15,7 @@ Name[pt]=Actividades do Telefone
 Name[sv]=Telefonaktiviteter
 Name[uk]=Простори дій телефону
 Name[x-test]=xxPhone Activitiesxx
+Name[zh_CN]=手机活动
 Name[zh_TW]=手機活動
 
 Comment=Activity switcher for the phone
@@ -31,6 +32,7 @@ Comment[pt]=Selector de actividades do telefone
 Comment[sv]=Aktivitetsbyte för telefonen
 Comment[uk]=Перемикач дій для телефону
 Comment[x-test]=xxActivity switcher for the phonexx
+Comment[zh_CN]=手机的活动切换器
 Comment[zh_TW]=手機的活動切換器
 Icon=preferences-activities
 Type=Service

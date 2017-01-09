@@ -12,6 +12,7 @@ Name[pt]=Multi-Tarefas do Telefone
 Name[sv]=Flera uppgifter på telefonen
 Name[uk]=Багатозадачний телефон
 Name[x-test]=xxPhone multitaskxx
+Name[zh_CN]=手机多任务
 Name[zh_TW]=手機多工
 Comment=Multitasking user interface for Phone devices
 Comment[ast]=Interfaz multi-xera d'usuariu pa teléfonos
@@ -26,6 +27,7 @@ Comment[pt]=Interface multi-tarefa para dispositivos telefónicos
 Comment[sv]=Användargränssnitt med flera uppgifter för telefoner
 Comment[uk]=Багатозадачний інтерфейс користувача для телефонних пристроїв
 Comment[x-test]=xxMultitasking user interface for Phone devicesxx
+Comment[zh_CN]=为手机设备设计的多任务用户界面
 Comment[zh_TW]=手機裝置的多工使用者介面
 
 Icon=preferences-system-windows-script-test
