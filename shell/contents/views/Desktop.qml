@@ -25,9 +25,10 @@ import org.kde.plasma.shell 2.0 as Shell
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.activities 0.1 as Activities
 import "../components"
 
-Item {
+MouseArea {
     id: root
     width: 1080
     height: 1920
@@ -37,7 +38,40 @@ Item {
     property var pendingRemovals: [];
     property int notificationId: 0;
     property int buttonHeight: width/4
+    property bool containmentsEnterFromRight: true
 
+    drag.filterChildren: true
+
+    //NOTE: this 
+    PathView {
+        id: activitiesRepresentation
+        model: Activities.ActivityModel {
+            id: activityModel
+        }
+        width: 10
+        height: 10
+        cacheItemCount: 999//count
+        delegate: Item {
+            Component.onCompleted: {
+                activityModel.setCurrentActivity(model.id, function(){});
+            }
+            Connections {
+                target: model
+                onCurrentChanged: activityModel.setCurrentActivity(model.id, function(){});
+            }
+        }
+    }
+    property int mouseDownX
+    onPressed: mouseDownX = mouse.x
+    onReleased: {
+        if (mouse.x - mouseDownX > root.width/6) {
+            root.containmentsEnterFromRight = false;
+            activitiesRepresentation.decrementCurrentIndex();
+        } else if (mouse.x - mouseDownX < -root.width/6) {
+            root.containmentsEnterFromRight = true;
+            activitiesRepresentation.incrementCurrentIndex();
+        }
+    }
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
         if (widgetExplorerStack.source != "") {
@@ -113,7 +147,7 @@ Item {
                     containment.anchors.right = undefined;
                     containment.anchors.bottom = undefined;
                     containment.z = 1;
-                    containment.x = root.width;
+                    containment.x = root.containmentsEnterFromRight ? root.width : -root.width;
                 }
                 if (internal.oldContainment) {
                     internal.oldContainment.anchors.left = undefined;
@@ -129,7 +163,7 @@ Item {
             NumberAnimation {
                 target: internal.oldContainment
                 properties: "x"
-                to: internal.newContainment != null ? -root.width : 0
+                to: internal.newContainment != null ? (root.containmentsEnterFromRight ? -root.width : root.width) : 0
                 duration: 400
                 easing.type: Easing.InOutQuad
             }
