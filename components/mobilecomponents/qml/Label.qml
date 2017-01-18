@@ -18,6 +18,8 @@
 */
 
 import QtQuick 2.1
+import QtQuick.Controls 1.0
+import QtQuick.Controls.Private 1.0 as QtQuickControlsPrivate
 import org.kde.plasma.mobilecomponents 0.2
 
 /**
@@ -39,7 +41,7 @@ Text {
     verticalAlignment: lineCount > 1 ? Text.AlignTop : Text.AlignVCenter
 
     activeFocusOnTab: false
-    renderType: Text.NativeRendering
+    renderType: QtQuickControlsPrivate.Settings.isMobile ? Text.QtRendering : Text.NativeRendering
 
     font.capitalization: Theme.defaultFont.capitalization
     font.family: Theme.defaultFont.family
