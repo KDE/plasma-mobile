@@ -28,7 +28,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
 
-MouseArea {
+MouseEventListener {
     id: root
     width: 1080
     height: 1920
@@ -39,8 +39,6 @@ MouseArea {
     property int notificationId: 0;
     property int buttonHeight: width/4
     property bool containmentsEnterFromRight: true
-
-    drag.filterChildren: true
 
     //NOTE: this 
     PathView {
@@ -62,8 +60,15 @@ MouseArea {
         }
     }
     property int mouseDownX
-    onPressed: mouseDownX = mouse.x
+    property int mouseDownY
+    onPressed: {
+        mouseDownX = mouse.x
+        mouseDownY = mouse.y
+    }
     onReleased: {
+        if (Math.abs(mouse.x - mouseDownX) < Math.abs(mouse.y - mouseDownY)) {
+            return;
+        }
         if (mouse.x - mouseDownX > root.width/6) {
             root.containmentsEnterFromRight = false;
             activitiesRepresentation.decrementCurrentIndex();
