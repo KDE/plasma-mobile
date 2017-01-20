@@ -27,3 +27,4 @@ if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.scree
 else
     bottomPanel.height = 60;
 
+createActivity("Activity 2");
