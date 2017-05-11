@@ -27,7 +27,7 @@
 **
 ****************************************************************************/
 
-import QtQuick 2.7
+import QtQuick 2.0
 import QtQuick.VirtualKeyboard 2.1
 import QtQuick.VirtualKeyboard.Styles 2.1
 
@@ -52,7 +52,7 @@ KeyboardStyle {
     }
 
     keyboardDesignWidth: 2560
-    keyboardDesignHeight: 2560
+    keyboardDesignHeight: 1000
     keyboardRelativeLeftMargin: 114 / keyboardDesignWidth
     keyboardRelativeRightMargin: 114 / keyboardDesignWidth
     keyboardRelativeTopMargin: 13 / keyboardDesignHeight
@@ -882,96 +882,8 @@ KeyboardStyle {
         NumberAnimation { property: "opacity"; to: 0; duration: 200 }
     }
 
-    languagePopupListEnabled: true
-
-    languageListDelegate: SelectionListItem {
-        id: languageListItem
-        width: languageNameTextMetrics.width * 17
-        height: languageNameTextMetrics.height + languageListLabel.anchors.topMargin + languageListLabel.anchors.bottomMargin
-        Text {
-            id: languageListLabel
-            anchors.left: parent.left
-            anchors.top: parent.top
-            anchors.leftMargin: languageNameTextMetrics.height / 2
-            anchors.rightMargin: anchors.leftMargin
-            anchors.topMargin: languageNameTextMetrics.height / 3
-            anchors.bottomMargin: anchors.topMargin
-            text: languageNameFormatter.elidedText
-            color: "#5CAA15"
-            font {
-                family: fontFamily
-                weight: Font.Normal
-                pixelSize: 44 * scaleHint
-            }
-        }
-        TextMetrics {
-            id: languageNameTextMetrics
-            font {
-                family: fontFamily
-                weight: Font.Normal
-                pixelSize: 44 * scaleHint
-            }
-            text: "X"
-        }
-        TextMetrics {
-            id: languageNameFormatter
-            font {
-                family: fontFamily
-                weight: Font.Normal
-                pixelSize: 44 * scaleHint
-            }
-            elide: Text.ElideRight
-            elideWidth: languageListItem.width - languageListLabel.anchors.leftMargin - languageListLabel.anchors.rightMargin
-            text: displayName
-        }
-        states: State {
-            name: "current"
-            when: languageListItem.ListView.isCurrentItem
-            PropertyChanges {
-                target: languageListLabel
-                color: "black"
-            }
-        }
-    }
-
-    languageListBackground: Rectangle {
-        color: "white"
-        border {
-            width: 1
-            color: "#929495"
-        }
-    }
-
-    languageListAdd: Transition {
-        NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: 200 }
-    }
-
-    languageListRemove: Transition {
-        NumberAnimation { property: "opacity"; to: 0; duration: 200 }
-    }
-
     selectionHandle: Image {
         sourceSize.width: 20
         source: resourcePrefix + "images/selectionhandle-bottom.svg"
     }
-
-    fullScreenInputContainerBackground: Rectangle {
-        color: "#FFF"
-    }
-
-    fullScreenInputBackground: Rectangle {
-        color: "#FFF"
-    }
-
-    fullScreenInputMargins: Math.round(15 * scaleHint)
-
-    fullScreenInputPadding: Math.round(30 * scaleHint)
-
-    fullScreenInputCursor: Rectangle {
-        width: 1
-        color: "#000"
-        visible: parent.blinkStatus
-    }
-
-    fullScreenInputFont.pixelSize: 58 * scaleHint
 }
