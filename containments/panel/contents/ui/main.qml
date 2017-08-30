@@ -36,7 +36,6 @@ PlasmaCore.ColorScope {
     property Item toolBox
     property int buttonHeight: width/4
     property bool reorderingApps: false
-    property QtObject expandedApplet
     property var layoutManager: LayoutManager
 
     Containment.onAppletAdded: {
@@ -44,17 +43,14 @@ PlasmaCore.ColorScope {
         LayoutManager.save();
     }
 
-    Connections {
-        target: expandedApplet
-        onExpandedChanged: {
-            if (!expanded) {
-                slidingPanel.close();
-            }
-        }
-    }
-
     function addApplet(applet, x, y) {
-         
+        if (applet.pluginName == "org.kde.phone.quicksettings") {
+            applet.parent = quickSettingsParent;
+            quickSettingsParent.applet = applet;
+            applet.anchors.fill = quickSettingsParent;
+            applet.visible = true;
+            return;
+        } 
         var container = appletContainerComponent.createObject(appletIconsRow)
         print("Applet added: " + applet + " " + applet.title)
         container.width = units.iconSizes.medium
@@ -65,7 +61,12 @@ PlasmaCore.ColorScope {
         applet.anchors.fill = container;
         applet.visible = true;
         container.visible = true;
-        
+        if (applet.pluginName == "org.kde.plasma.notifications") {
+            applet.expanded = true;
+            applet.fullRepresentationItem.parent = notificationsParent;
+            notificationsParent.applet = applet.fullRepresentationItem;
+            applet.fullRepresentationItem.anchors.fill = notificationsParent;
+        }
     }
 
     Component.onCompleted: {
@@ -101,23 +102,6 @@ PlasmaCore.ColorScope {
             Layout.fillHeight: true
             Layout.minimumWidth: applet && applet.compactRepresentationItem ? Math.max(applet.compactRepresentationItem.Layout.minimumWidth, appletIconsRow.height) : appletIconsRow.height
             Layout.maximumWidth: Layout.minimumWidth
-
-            MouseArea {
-                anchors.fill: parent
-                z: 999
-                onClicked: {
-                    if (root.expandedApplet != applet) {
-                        //temp var needed for oldExpandedApplet not to catch one expandedChanged too much by our Connections
-                        var oldExpandedApplet = root.expandedApplet;
-                        root.expandedApplet = applet;
-                        applet.expanded = true;
-                        appletsStack.replace(applet.fullRepresentationItem);
-                        if (oldExpandedApplet) {
-                            oldExpandedApplet.expanded = false;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -140,9 +124,9 @@ PlasmaCore.ColorScope {
         color: PlasmaCore.ColorScope.backgroundColor
 
         //used as is needed somebody to filter events
-        MouseArea {
+        /*MouseArea {
             anchors.fill: parent
-        }
+        }*/
         Loader {
             id: strengthLoader
             height: parent.height
@@ -185,15 +169,8 @@ PlasmaCore.ColorScope {
             anchors {
                 bottom: parent.bottom
                 right: parent.right
-                bottomMargin: slidingPanel.visible ? parent.height : 0
             }
-            height: slidingPanel.visible ? units.iconSizes.large : parent.height
-            Behavior on height {
-                PropertyAnimation {
-                    duration: units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
+            height: parent.height
         }
 
         Rectangle {
@@ -220,7 +197,6 @@ PlasmaCore.ColorScope {
             var factor = 1;
             slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
             oldMouseY = mouse.y;
-            root.expandedApplet.expanded = true;
         }
         onReleased: slidingPanel.updateState();
     }
@@ -229,24 +205,21 @@ PlasmaCore.ColorScope {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
-        contents: Item {
+        contents: ColumnLayout {
             id: panelContents
             anchors.fill: parent
-
-            PlasmaComponents.PageStack {
-                id: appletsStack
-                anchors {
-                    fill: parent
-                    bottomMargin: units.iconSizes.large
-                }
+            Item {
+                id: quickSettingsParent
+                property var applet
+                Layout.fillWidth: true
+                Layout.minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
             }
-        }
-        onVisibleChanged: {
-            if (visible && !root.expandedApplet) {
-                var applet = appletIconsRow.children[0].applet;
-                applet.expanded = true;
-                appletsStack.replace(applet.fullRepresentationItem);
-                root.expandedApplet = applet;
+            Item {
+                id: notificationsParent
+                property var applet
+                clip: true
+                Layout.minimumHeight: applet ? applet.Layout.minimumHeight : 0
+                Layout.fillWidth: true
             }
         }
     }
