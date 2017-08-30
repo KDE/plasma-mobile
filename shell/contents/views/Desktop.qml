@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.6
 import QtGraphicalEffects 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
@@ -28,7 +28,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
 
-MouseEventListener {
+Item {
     id: root
     width: 1080
     height: 1920
@@ -59,24 +59,14 @@ MouseEventListener {
             }
         }
     }
-    property int mouseDownX
-    property int mouseDownY
-    onPressed: {
-        mouseDownX = mouse.x
-        mouseDownY = mouse.y
+
+    ActivityHandle {
+        mirrored: true
     }
-    onReleased: {
-        if (Math.abs(mouse.x - mouseDownX) < Math.abs(mouse.y - mouseDownY)) {
-            return;
-        }
-        if (mouse.x - mouseDownX > root.width/6) {
-            root.containmentsEnterFromRight = false;
-            activitiesRepresentation.decrementCurrentIndex();
-        } else if (mouse.x - mouseDownX < -root.width/6) {
-            root.containmentsEnterFromRight = true;
-            activitiesRepresentation.incrementCurrentIndex();
-        }
+    ActivityHandle {
+        mirrored: false
     }
+
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
         if (widgetExplorerStack.source != "") {
