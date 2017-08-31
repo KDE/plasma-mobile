@@ -90,7 +90,8 @@ FullScreenPanel {
         }
         onPositionChanged: {
             if (startMouseY < contentArea.height - units.iconSizes.large) {
-                return;
+                //TODO: test if we can do without this return
+              //  return;
             }
             var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + overShoot) / overShoot)) : 1
 

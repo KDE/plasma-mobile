@@ -205,21 +205,32 @@ PlasmaCore.ColorScope {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
-        contents: ColumnLayout {
+        contents: Item {
             id: panelContents
             anchors.fill: parent
-            Item {
+            Rectangle {
                 id: quickSettingsParent
+                color: PlasmaCore.ColorScope.backgroundColor
+                z: 2
+                anchors {
+                    left: parent.left
+                    top: parent.top
+                    right: parent.right
+                }
                 property var applet
-                Layout.fillWidth: true
-                Layout.minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                height: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
             }
             Item {
                 id: notificationsParent
+                anchors {
+                    left: parent.left
+                    bottom: parent.bottom
+                    right: parent.right
+                    bottomMargin: root.height
+                }
                 property var applet
                 clip: true
-                Layout.minimumHeight: applet ? applet.Layout.minimumHeight : 0
-                Layout.fillWidth: true
+                height: panelContents.height - quickSettingsParent.height-root.height//applet ? applet.Layout.minimumHeight : 0
             }
         }
     }
