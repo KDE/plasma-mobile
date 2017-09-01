@@ -39,7 +39,7 @@ FullScreenPanel {
     property alias fixedArea: fixedArea
     function open() {
         window.visible = true;
-        openAnim.running = true;
+        peekAnim.running = true;
     }
     function close() {
         closeAnim.running = true;
@@ -49,6 +49,8 @@ FullScreenPanel {
             close();
         } else if (offset < peekHeight) {
             open();
+        } else if (mainFlickable.contentY < 0) {
+            openAnim.running = true;
         }
     }
 
@@ -75,13 +77,22 @@ FullScreenPanel {
         }
     }
     PropertyAnimation {
-        id: openAnim
+        id: peekAnim
         target: window
         duration: units.longDuration
         easing.type: Easing.InOutQuad
         properties: "offset"
         from: window.offset
         to: window.peekHeight
+    }
+    PropertyAnimation {
+        id: openAnim
+        target: window
+        duration: units.longDuration
+        easing.type: Easing.InOutQuad
+        properties: "offset"
+        from: window.offset
+        to: contentArea.height
     }
 
     Rectangle {
@@ -90,7 +101,6 @@ FullScreenPanel {
     }
 
     PlasmaCore.ColorScope {
-        id: slidingArea
         anchors.fill: parent
         y: Math.min(0, -height + window.offset)
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
