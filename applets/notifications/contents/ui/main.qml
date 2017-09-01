@@ -136,7 +136,7 @@ Item {
 
     ListModel {
         id: notificationsModel
-        ListElement {
+    /*    ListElement {
             source: "call1Source"
             appIcon: "call-start"
             summary: "Missed call from Joe"
@@ -157,7 +157,7 @@ Item {
             appName: "Message"
             summary: "July: Hello?"
             actions: []
-        }
+        }*/
     }
 
      ListView {
