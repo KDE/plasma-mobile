@@ -122,17 +122,13 @@ Item {
 
     }
 
-    PlasmaCore.FrameSvgItem {
+    PlasmaComponents.Label {
         anchors.centerIn: parent
+        opacity: 0.4
         visible: notificationsModel.count == 0
-        imagePath: "widgets/background"
-        width: childrenRect.width + margins.left + margins.right
-        height: childrenRect.height + margins.top + margins.bottom
-        PlasmaComponents.Label {
-            anchors.centerIn: parent
-            text: i18n("No recent notifications")
-        }
+        text: i18n("No recent notifications")
     }
+
 
     ListModel {
         id: notificationsModel
