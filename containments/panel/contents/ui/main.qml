@@ -62,7 +62,6 @@ PlasmaCore.ColorScope {
         applet.visible = true;
         container.visible = true;
         if (applet.pluginName == "org.kde.phone.notifications") {
-         //   applet.expanded = true;
             applet.fullRepresentationItem.parent = notificationsParent;
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
