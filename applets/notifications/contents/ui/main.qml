@@ -28,9 +28,12 @@ Item {
     id: root
     property int notificationId: 0
 
-    Layout.minimumHeight: notificationView.contentHeight
+    Layout.maximumHeight: notificationView.contentHeight + units.gridUnit
+    //todo: size of first item
+    Layout.minimumHeight: units.gridUnit * 4
 
-    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+    Plasmoid.switchWidth: 500
+    Plasmoid.switchHeight: 500
 
     function addNotification(source, data, actions) {
         // Do not show duplicated notifications
@@ -133,14 +136,40 @@ Item {
 
     ListModel {
         id: notificationsModel
+        ListElement {
+            source: "call1Source"
+            appIcon: "call-start"
+            summary: "Missed call from Joe"
+            appName: "Phone"
+            body: "Called at 8:42 from +41 56 373 37 31"
+            actions: []
+        }
+        ListElement {
+            source: "im1Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hey! Are you around?"
+            actions: []
+        }
+        ListElement {
+            source: "im2Source"
+            appIcon: "im-google"
+            appName: "Message"
+            summary: "July: Hello?"
+            actions: []
+        }
     }
 
-    ListView {
+     ListView {
         id: notificationView
-        spacing: units.smallSpacing
-        anchors.fill: parent
+        spacing: units.largeSpacing
+        anchors {
+            fill: parent
+            leftMargin: units.largeSpacing
+            rightMargin: units.largeSpacing
+        }
         interactive: false
-        cacheBuffer: 2000
+        cacheBuffer: 200000
 
         z: 1
         verticalLayoutDirection: ListView.BottomToTop

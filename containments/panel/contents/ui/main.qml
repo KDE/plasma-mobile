@@ -61,10 +61,10 @@ PlasmaCore.ColorScope {
         applet.anchors.fill = container;
         applet.visible = true;
         container.visible = true;
-        if (applet.pluginName == "org.kde.plasma.notifications") {
-            applet.expanded = true;
+        if (applet.pluginName == "org.kde.phone.notifications") {
+         //   applet.expanded = true;
             applet.fullRepresentationItem.parent = notificationsParent;
-            notificationsParent.applet = applet.fullRepresentationItem;
+            notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
         }
     }
@@ -123,10 +123,6 @@ PlasmaCore.ColorScope {
         height: root.height
         color: PlasmaCore.ColorScope.backgroundColor
 
-        //used as is needed somebody to filter events
-        /*MouseArea {
-            anchors.fill: parent
-        }*/
         Loader {
             id: strengthLoader
             height: parent.height
@@ -205,20 +201,34 @@ PlasmaCore.ColorScope {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
+        peekHeight: quickSettingsParent.height + notificationsParent.minimumHeight + root.height
         contents: Item {
             id: panelContents
             anchors.fill: parent
+            implicitHeight: quickSettingsParent.height + notificationsParent.height + root.height
             Rectangle {
                 id: quickSettingsParent
+                parent: slidingPanel.fixedArea
                 color: PlasmaCore.ColorScope.backgroundColor
                 z: 2
                 anchors {
                     left: parent.left
-                    top: parent.top
                     right: parent.right
                 }
+                y: Math.min(0, slidingPanel.offset - height - root.height)
                 property var applet
                 height: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                Rectangle {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom:parent.bottom
+                    }
+                    height: units.devicePixelRatio
+                    color: PlasmaCore.ColorScope.textColor
+                    opacity: 0.2
+                    visible: slidingPanel.offset < panelContents.height
+                }
             }
             Item {
                 id: notificationsParent
@@ -229,8 +239,8 @@ PlasmaCore.ColorScope {
                     bottomMargin: root.height
                 }
                 property var applet
-                clip: true
-                height: panelContents.height - quickSettingsParent.height-root.height//applet ? applet.Layout.minimumHeight : 0
+                height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
+                property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
             }
         }
     }

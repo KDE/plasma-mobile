@@ -28,7 +28,7 @@ FullScreenPanel {
     id: window
 
     property int offset: 0
-    property int overShoot: units.gridUnit * 2
+    property int peekHeight
 
     color: "transparent"
     property alias contents: contentArea.data
@@ -36,108 +36,108 @@ FullScreenPanel {
     width: Screen.width
     height: Screen.height
 
+    property alias fixedArea: fixedArea
     function open() {
-        mouseArea.state = "open";
+        window.visible = true;
+        openAnim.running = true;
     }
     function close() {
-        mouseArea.state = "closed";
+        closeAnim.running = true;
     }
     function updateState() {
-        var delta = offset - mouseArea.startOffset;
-        if (delta > units.gridUnit * 8) {
-            mouseArea.state = "open";
-        } else if (delta < -units.gridUnit * 8) {
-            mouseArea.state = "closed";
-        } else {
-            mouseArea.state = mouseArea.startState;
+        if (offset < peekHeight / 2) {
+            close();
+        } else if (offset < peekHeight) {
+            open();
         }
-        mouseArea.startState = mouseArea.state;
     }
 
     onVisibleChanged: {
         if (visible) {
-            mouseArea.state = "draggingFromClosed";
-            mouseArea.startOffset = units.gridUnit * 4;
             window.width = Screen.width;
             window.height = Screen.height;
         }
     }
-
-    MouseArea {
-        id: mouseArea
-        y: 0
-        width: Screen.width
-        height: Screen.height
-        //clip: true
-        state: "closed"
-        drag.filterChildren: true
-
-        property int oldMouseY: 0
-        property int startOffset: units.iconSizes.large;
-        property int startMouseY: 0
-        property string startState: "closed"
-
-        onPressed: {
-            startMouseY = mouse.y;
-            if (startMouseY < contentArea.height - units.iconSizes.large) {
-                return;
-            }
-            startState = state;
-            startOffset = window.offset;
-            oldMouseY = mouse.y;
-            state = "draggingFromOpen";
-            window.offset = startOffset;
+    SequentialAnimation {
+        id: closeAnim
+        PropertyAnimation {
+            target: window
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+            properties: "offset"
+            from: window.offset
+            to: 0
         }
-        onPositionChanged: {
-            if (startMouseY < contentArea.height - units.iconSizes.large) {
-                //TODO: test if we can do without this return
-              //  return;
-            }
-            var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + overShoot) / overShoot)) : 1
-
-            window.offset = window.offset + (mouse.y - oldMouseY) * factor;
-            oldMouseY = mouse.y;
-        }
-        onReleased: {
-            if (startMouseY < contentArea.height - units.iconSizes.large) {
-                return;
-            }
-            if (Math.abs(window.offset - mouseArea.startOffset) < units.gridUnit &&
-                  slidingArea.y + slidingArea.height < mouse.y) {
-                mouseArea.state = "closed";
-            } else {
-                window.updateState();
+        ScriptAction {
+            script: {
+                 window.visible = false;
             }
         }
+    }
+    PropertyAnimation {
+        id: openAnim
+        target: window
+        duration: units.longDuration
+        easing.type: Easing.InOutQuad
+        properties: "offset"
+        from: window.offset
+        to: window.peekHeight
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
+    }
+
+    PlasmaCore.ColorScope {
+        id: slidingArea
+        anchors.fill: parent
+        y: Math.min(0, -height + window.offset)
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
-            anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.6-Math.abs(slidingArea.y/slidingArea.height))
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+            height: contentArea.height - mainFlickable.contentY
+            color: PlasmaCore.ColorScope.backgroundColor
         }
-        PlasmaCore.ColorScope {
-            id: slidingArea
-            width: parent.width
-            height: parent.height/1.5
-            y: Math.min(0, -height + window.offset)
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            Rectangle {
-                anchors.fill: parent
 
+        Flickable {
+            id: mainFlickable
+            anchors.fill: parent
+            Binding {
+                target: mainFlickable
+                property: "contentY"
+                value: -window.offset + contentArea.height
+                when: !mainFlickable.moving && !mainFlickable.dragging && !mainFlickable.flicking
+            }
+            //no loop as those 2 values compute to exactly the same
+            onContentYChanged: window.offset = -contentY + contentArea.height
+            contentWidth: window.width
+            contentHeight: window.height*2
+            bottomMargin: window.height
+            onMovementEnded: window.updateState();
+            onFlickEnded: window.updateState();
+            Item {
+                width: window.width
+                height: window.height*2
                 Item {
                     id: contentArea
                     anchors {
-                        fill: parent
-                        topMargin: overShoot
+                        left: parent.left
+                        right: parent.right
                     }
+                    height: children[0].implicitHeight
                 }
-                color: PlasmaCore.ColorScope.backgroundColor
-
                 Rectangle {
                     height: units.gridUnit
                     anchors {
                         left: parent.left
                         right: parent.right
-                        top: parent.bottom
+                        top: contentArea.bottom
                     }
                     gradient: Gradient {
                         GradientStop {
@@ -154,69 +154,25 @@ FullScreenPanel {
                         }
                     }
                 }
+                MouseArea {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: contentArea.bottom
+                    }
+                    height: window.height
+                    onClicked: window.close();
+                }
             }
         }
-        //FIXME: this empty mousearea is a workaround on https://bugreports.qt.io/browse/QTBUG-46545
-        MouseArea {
-            z: -1
-            anchors.fill: parent
-            onClicked: {
-                if (mouseArea.startMouseY < contentArea.height - units.iconSizes.large) {
-                    return;
-                }
-                mouseArea.state = "closed";
-                //window.visible = false;
+        Item {
+            id: fixedArea
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
             }
+            height: childrenRect.height
         }
-
-        states: [
-            State {
-                name: "closed"
-                PropertyChanges {
-                    target: window
-                    offset: 0
-                }
-            },
-            State {
-                name: "open"
-                PropertyChanges {
-                    target: window
-                    offset: slidingArea.height - overShoot
-                }
-            },
-            State {
-                name: "draggingFromOpen"
-            },
-            State {
-                name: "draggingFromClosed"
-                PropertyChanges {
-                    target: window
-                    offset: units.gridUnit * 4
-                }
-            }
-        ]
-
-        transitions: [
-            Transition {
-                to: "draggingFromOpen"
-            },
-            Transition {
-                SequentialAnimation {
-                    PropertyAnimation {
-                        target: window
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
-                        properties: "offset"
-                    }
-                    ScriptAction {
-                        script: {
-                            if (mouseArea.state == "closed") {
-                                window.visible = false;
-                            }
-                        }
-                    }
-                }
-            }
-        ]
     }
 }

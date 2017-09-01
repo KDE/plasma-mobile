@@ -68,7 +68,7 @@ Item {
             text: "Settings"
             icon: "configure"
             enabled: false
-            settingsCommand: "active-settings"
+            settingsCommand: "plasma-mobile-settings"
             toggleFunction: ""
             delegate: ""
         }

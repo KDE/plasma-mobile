@@ -29,7 +29,7 @@ MouseArea {
 
     //actionsLayout.height*2 because the text is centered
     //TODO: center the whole block not only the text
-    height: Math.max(messageLayout.height, icon.height) + background.margins.top + background.margins.bottom + (expanded ? actionsLayout.height*2 : 0)
+    height: Math.max(units.gridUnit * 3, Math.max(messageLayout.height, icon.height)) + (expanded ? actionsLayout.height*2 : 0)
     width: parent.width
     anchors.bottomMargin: 10
     drag.axis: Drag.XAxis
@@ -39,7 +39,14 @@ MouseArea {
     property string source: model.source
     property var actions: model.actions
 
+    opacity: 1 - Math.abs(x) / (width/2)
     Behavior on x {
+        NumberAnimation {
+            easing.type: Easing.InOutQuad
+            duration: units.longDuration
+        }
+    }
+    Behavior on height {
         NumberAnimation {
             easing.type: Easing.InOutQuad
             duration: units.longDuration
@@ -66,22 +73,18 @@ MouseArea {
     }
 
 
-    PlasmaCore.FrameSvgItem {
+    Rectangle {
         id: background
-        imagePath: "widgets/background"
-        anchors {
-            fill: parent
-            rightMargin: -notificationItem.width
-            leftMargin: units.gridUnit
-        }
-        colorGroup: PlasmaCore.ColorScope.colorGroup
+        anchors.fill: parent
+        color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, notificationItem.pressed ? 0.5 : 0.2)
     }
 
     PlasmaComponents.ToolButton {
+        id: closeButton
         anchors {
-            left: parent.left
+            right: parent.right
             verticalCenter: parent.verticalCenter
-            leftMargin: units.gridUnit / 2
+            rightMargin: units.gridUnit
         }
         iconSource: "window-close"
         flat: false
@@ -90,52 +93,32 @@ MouseArea {
         }
     }
 
-    PlasmaComponents.Label {
-        id: appLabel
-        anchors.leftMargin: units.gridUnit * 3
-
-        color: PlasmaCore.ColorScope.textColor
-        text: model.appName
-    }
-
-    Column {
+    ColumnLayout {
         id: messageLayout
         anchors {
             verticalCenter: parent.verticalCenter
-            left: parent.left
-            right: icon.left
-            leftMargin: units.gridUnit * 3
+            left: icon.right
+            right: notificationItem.expanded ? actionsLayout.left : closeButton.left
+            leftMargin: units.gridUnit
+            rightMargin: units.gridUnit
         }
 
         PlasmaComponents.Label {
             id: summaryLabel
-            anchors.right: parent.right
-            width: messageLayout.width - appLabel.width
-            horizontalAlignment: Qt.AlignRight
+            Layout.fillWidth: true
             verticalAlignment: Qt.AlignVCenter
-            text: summary + (!notificationItem.expanded && body ? "..." : "")
-            wrapMode: Text.WordWrap
+            text: model.appName + " " + summary
+            elide: Text.ElideRight
         }
 
         PlasmaComponents.Label {
             id: bodyLabel
-            anchors {
-                right: parent.right
-                left: parent.left
-            }
-            visible: height > 0
-            height: notificationItem.expanded && body != undefined && body ? implicitHeight : 0
-            clip: true
-            horizontalAlignment: Qt.AlignRight
+            Layout.fillWidth: true
+            visible: text.length > 0
+            opacity: 0.8
             verticalAlignment: Qt.AlignVCenter
             text: body
             wrapMode: Text.WordWrap
-            Behavior on height {
-                NumberAnimation {
-                    duration: units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
         }
     }
 
@@ -143,21 +126,21 @@ MouseArea {
     PlasmaCore.IconItem {
         id: icon
         anchors {
-            right: notificationItem.right
             verticalCenter: parent.verticalCenter
         }
+        x: units.gridUnit
         width: units.iconSizes.medium
         height: width
         source: appIcon && appIcon.length > 0 ? appIcon : "preferences-desktop-notification"
+        colorGroup: PlasmaCore.ColorScope.colorGroup
     }
 
-    Flow {
+    Column {
         id: actionsLayout
         anchors {
-            left: messageLayout.left
-            right: messageLayout.right
-            top: messageLayout.bottom
-            topMargin: units.smallSpacing
+            right: closeButton.left
+            rightMargin: units.gridUnit
+            verticalCenter: parent.verticalCenter
         }
         opacity: notificationItem.expanded && notificationItem.actions && notificationItem.actions.count > 0 ? 1 : 0
         Behavior on opacity {
@@ -177,34 +160,4 @@ MouseArea {
             }
         }
     }
-
-    states: [
-        State {
-            name: "large"
-            when: appLabel.width + bodyLabel.paintedWidth < messageLayout.width
-            AnchorChanges {
-                target: appLabel
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    top: undefined
-                    left: parent.left
-                }
-            }
-            PropertyChanges {
-                
-            }
-        },
-        State {
-            name: "compact"
-            when: notificationItem.state != "large"
-            AnchorChanges {
-                target: appLabel
-                anchors {
-                    verticalCenter: undefined
-                    top: messageLayout.top
-                    left: parent.left
-                }
-            }
-        }
-    ]
 }
