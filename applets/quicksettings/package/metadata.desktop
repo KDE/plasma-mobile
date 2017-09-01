@@ -1,8 +1,21 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Settings
+Name[ca]=Opcions ràpides
+Name[cs]=Rychlé nastavení
+Name[nl]=Snelle instellingen
+Name[pt]=Configuração Rápida
+Name[sv]=Snabbinställningar
+Name[uk]=Швидке налаштовування
+Name[x-test]=xxQuick Settingsxx
 
 Comment=A panel to quickly access most important settings
+Comment[ca]=Un plafó per accedir ràpidament a les opcions més importants
+Comment[nl]=Een paneel voor snelle toegang tot de meest belangrijke instellingen
+Comment[pt]=Um painel para aceder rapidamente às configurações mais importantes
+Comment[sv]=En panel för att snabbt komma åt de viktigaste inställningarna
+Comment[uk]=Панель для пришвидшення доступу до найважливіших параметрів
+Comment[x-test]=xxA panel to quickly access most important settingsxx
 
 Icon=systemsettings
 Type=Service
