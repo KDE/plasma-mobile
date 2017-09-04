@@ -240,6 +240,7 @@ PlasmaCore.ColorScope {
                 property var applet
                 height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
                 property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                onHeightChanged: slidingPanel.updateState();
             }
         }
     }

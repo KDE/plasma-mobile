@@ -54,10 +54,16 @@ FullScreenPanel {
         }
     }
 
+    onActiveChanged: {
+        if (!active) {
+            close();
+        }
+    }
     onVisibleChanged: {
         if (visible) {
             window.width = Screen.width;
             window.height = Screen.height;
+            window.requestActivate();
         }
     }
     SequentialAnimation {
