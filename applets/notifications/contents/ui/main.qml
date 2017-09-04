@@ -129,10 +129,35 @@ Item {
         text: i18n("No recent notifications")
     }
 
+    Plasmoid.compactRepresentation: PlasmaCore.SvgItem {
+        id: notificationSvgItem
+        anchors.centerIn: parent
+        width: units.roundToIconSize(Math.min(parent.width, parent.height))
+        height: width
+
+        svg: PlasmaCore.Svg {
+            imagePath: "icons/notification"
+            colorGroup: PlasmaCore.ColorScope.colorGroup
+        }
+
+        elementId: {
+            if (notificationsModel.count > 0) {
+                return "notification-empty"
+            }
+            return "notification-disabled"
+        }
+        PlasmaComponents.Label {
+            anchors.fill: parent
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+            visible: notificationsModel.count > 0
+            text: notificationsModel.count
+        }
+    }
 
     ListModel {
         id: notificationsModel
-    /*    ListElement {
+     /*   ListElement {
             source: "call1Source"
             appIcon: "call-start"
             summary: "Missed call from Joe"
