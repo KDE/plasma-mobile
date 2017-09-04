@@ -31,6 +31,8 @@ FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
 {
     setFlags(Qt::FramelessWindowHint);
     setWindowState(Qt::WindowFullScreen);
+   // connect(this, &FullScreenPanel::activeFocusItemChanged, this, [this]() {qWarning()<<"hide()";});
+    connect(this, &QWindow::activeChanged, this, &FullScreenPanel::activeChanged);
 }
 
 FullScreenPanel::~FullScreenPanel()
