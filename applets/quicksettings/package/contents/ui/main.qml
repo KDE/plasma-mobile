@@ -35,6 +35,32 @@ Item {
 
     Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
 
+    property int screenBrightness
+    readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
+    onScreenBrightnessChanged: {
+        var service = pmSource.serviceForSource("PowerDevil");
+        var operation = service.operationDescription("setBrightness");
+        operation.brightness = screenBrightness;
+        operation.silent = true
+        service.startOperationCall(operation);
+    }
+
+    PlasmaCore.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: ["PowerDevil"]
+        onSourceAdded: {
+            if (source === "PowerDevil") {
+                disconnectSource(source);
+                connectSource(source);
+            }
+        }
+
+        onDataChanged: {
+            root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
+        }
+    }
+
     ListModel {
         id: settingsModel
 
@@ -42,7 +68,7 @@ Item {
             text: "Settings"
             icon: "configure"
             enabled: false
-            settingsCommand: "active-settings"
+            settingsCommand: "plasma-settings"
             toggleFunction: ""
             delegate: ""
         }
@@ -69,26 +95,13 @@ Item {
             text: "Wireless"
             icon: "network-wireless-on"
             enabled: true
-            settingsCommand: "active-settings -m org.kde.plasma.phone.settings.wifi"
+            settingsCommand: "plasmawindowed org.kde.plasma.networkmanagement"
         }
         ListElement {
             text: "Alarms"
             icon: "korgac"
             enabled: false
-            settingsCommand: ""
-        }
-        ListElement {
-            text: "Notifications"
-            icon: "preferences-desktop-notification"
-            enabled: true
-            settingsCommand: ""
-        }
-        ListElement {
-            text: "Brightness"
-            icon: "video-display-brightness"
-            enabled: false
-            settingsCommand: "active-settings -m org.kde.active.settings.powermanagement"
-            delegate: "BrightnessDelegate"
+            settingsCommand: "ktimer"
         }
         ListElement {
             text: "Flashlight"
@@ -124,6 +137,33 @@ Item {
                 duration: units.shortDuration
                 easing.type: Easing.InOutQuad
                 properties: "x,y"
+            }
+        }
+        RowLayout {
+            width: flow.width
+            PlasmaCore.IconItem {
+                Layout.preferredWidth: units.iconSizes.small
+                Layout.preferredHeight: Layout.preferredWidth
+                //TODO: needs brightness
+                source: "contrast"
+            }
+            PlasmaComponents.Slider {
+                id: brightnessSlider
+                Layout.fillWidth: true
+                value: root.screenBrightness
+                onValueChanged: {
+                    if (pressed) {
+                        root.screenBrightness = value
+                    }
+                }
+                minimumValue: maximumValue > 100 ? 1 : 0
+                maximumValue: root.maximumScreenBrightness
+            }
+            PlasmaCore.IconItem {
+                Layout.preferredWidth: units.iconSizes.small
+                Layout.preferredHeight: Layout.preferredWidth
+                //TODO: needs brightness
+                source: "contrast"
             }
         }
     }

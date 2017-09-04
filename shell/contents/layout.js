@@ -12,7 +12,8 @@ for (var j = 0; j < desktopsArray.length; j++) {
 desktopsArray[0].addWidget("org.kde.plasma.analogclock");
 
 var panel = new Panel("org.kde.phone.panel");
-panel.addWidget("org.kde.plasma.notifications");
+panel.addWidget("org.kde.phone.notifications");
+panel.addWidget("org.kde.phone.quicksettings");
 panel.addWidget("org.kde.plasma.networkmanagement");
 panel.addWidget("org.kde.plasma.battery");
 panel.addWidget("org.kde.plasma.volume");
@@ -27,4 +28,6 @@ if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.scree
 else
     bottomPanel.height = 60;
 
-createActivity("Activity 2");
+if (activities().length < 2) {
+    createActivity("Activity 2");
+}
