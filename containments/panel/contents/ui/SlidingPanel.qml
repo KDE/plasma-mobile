@@ -137,7 +137,12 @@ FullScreenPanel {
                 when: !mainFlickable.moving && !mainFlickable.dragging && !mainFlickable.flicking
             }
             //no loop as those 2 values compute to exactly the same
-            onContentYChanged: window.offset = -contentY + contentArea.height - window.headerHeight
+            onContentYChanged: {
+                window.offset = -contentY + contentArea.height - window.headerHeight
+                if (contentY > contentArea.height - headerHeight) {
+                    contentY = contentArea.height - headerHeight;
+                }
+            }
             contentWidth: window.width
             contentHeight: window.height*2
             bottomMargin: window.height
@@ -168,7 +173,7 @@ FullScreenPanel {
                     }
                 }
                 Rectangle {
-                    height: units.gridUnit
+                    height: units.smallSpacing
                     anchors {
                         left: parent.left
                         right: parent.right
