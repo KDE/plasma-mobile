@@ -1,10 +1,12 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Settings
+Name[ast]=Axustes rápidos
 Name[ca]=Opcions ràpides
 Name[cs]=Rychlé nastavení
 Name[es]=Ajustes rápidos
 Name[nl]=Snelle instellingen
+Name[nn]=Snøgginnstillingar
 Name[pl]=Szybkie ustawienia
 Name[pt]=Configuração Rápida
 Name[sv]=Snabbinställningar
@@ -12,9 +14,11 @@ Name[uk]=Швидке налаштовування
 Name[x-test]=xxQuick Settingsxx
 
 Comment=A panel to quickly access most important settings
+Comment[ast]=Un panel p'acceder rápidamente a les opciones más importantes
 Comment[ca]=Un plafó per accedir ràpidament a les opcions més importants
 Comment[es]=Un panel para acceder rápidamente a los ajustes más importantes
 Comment[nl]=Een paneel voor snelle toegang tot de meest belangrijke instellingen
+Comment[nn]=Panel for rask tilgang til dei viktigaste innstillingane
 Comment[pl]=Panel szybkiego dostępu do najważniejszych ustawień
 Comment[pt]=Um painel para aceder rapidamente às configurações mais importantes
 Comment[sv]=En panel för att snabbt komma åt de viktigaste inställningarna
