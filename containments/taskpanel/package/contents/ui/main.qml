@@ -32,7 +32,8 @@ PlasmaCore.ColorScope {
     height: 480
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-    
+    Plasmoid.backgroundHints: plasmoid.configuration.PanelButtonsVisible ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
+
     property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
     Loader {
         id: taskSwitcherLoader
@@ -95,6 +96,7 @@ PlasmaCore.ColorScope {
             width: 600
             height: 40
 
+            visible: plasmoid.configuration.PanelButtonsVisible
             property Item toolBox
 
             Button {

@@ -22,17 +22,17 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
-Rectangle {
+Item {
     id: root
 
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
-    color: theme.textColor
     property Item containment
 
     onContainmentChanged: {
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
+        panel.backgroundHints = containment.backgroundHints;
     }
 
     Component.onCompleted: {
