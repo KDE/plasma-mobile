@@ -29,6 +29,7 @@ FullScreenPanel {
 
     property int offset: 0
     property int peekHeight
+    property bool userInteracting: false
 
     color: "transparent"
     property alias contents: contentArea.data
@@ -140,8 +141,16 @@ FullScreenPanel {
             contentWidth: window.width
             contentHeight: window.height*2
             bottomMargin: window.height
-            onMovementEnded: window.updateState();
-            onFlickEnded: window.updateState();
+            onMovementStarted: window.userInteracting = true;
+            onFlickStarted: window.userInteracting = true;
+            onMovementEnded: {
+                window.userInteracting = false;
+                window.updateState();
+            }
+            onFlickEnded: {
+                window.userInteracting = true;
+                window.updateState();
+            }
             Item {
                 width: window.width
                 height: Math.max(contentArea.height, window.height*2)
@@ -153,7 +162,9 @@ FullScreenPanel {
                     }
                     height: children[0].implicitHeight
                     onHeightChanged: {
-                        updateStateTimer.restart()
+                        if (!window.userInteracting) {
+                            updateStateTimer.restart()
+                        }
                     }
                 }
                 Rectangle {

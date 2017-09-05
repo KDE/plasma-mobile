@@ -184,6 +184,7 @@ PlasmaCore.ColorScope {
 
         anchors.fill: parent
         onPressed: {
+            slidingPanel.userInteracting = true;
             oldMouseY = mouse.y;
             slidingPanel.visible = true;
         }
@@ -193,7 +194,10 @@ PlasmaCore.ColorScope {
             slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
             oldMouseY = mouse.y;
         }
-        onReleased: slidingPanel.updateState();
+        onReleased: {
+            slidingPanel.userInteracting = false;
+            slidingPanel.updateState();
+        }
     }
 
     SlidingPanel {
