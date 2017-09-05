@@ -201,6 +201,7 @@ PlasmaCore.ColorScope {
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
         peekHeight: quickSettingsParent.height + notificationsParent.minimumHeight + root.height
+        headerHeight: root.height
         contents: Item {
             id: panelContents
             anchors.fill: parent
@@ -226,7 +227,7 @@ PlasmaCore.ColorScope {
                     height: units.devicePixelRatio
                     color: PlasmaCore.ColorScope.textColor
                     opacity: 0.2
-                    visible: slidingPanel.offset < panelContents.height
+                    visible: slidingPanel.offset + slidingPanel.headerHeight < panelContents.height
                 }
             }
             Item {
@@ -240,7 +241,6 @@ PlasmaCore.ColorScope {
                 property var applet
                 height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
                 property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
-                onHeightChanged: slidingPanel.updateState();
             }
         }
     }

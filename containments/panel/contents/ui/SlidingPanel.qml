@@ -32,6 +32,7 @@ FullScreenPanel {
 
     color: "transparent"
     property alias contents: contentArea.data
+    property int headerHeight
 
     width: Screen.width
     height: Screen.height
@@ -53,7 +54,11 @@ FullScreenPanel {
             openAnim.running = true;
         }
     }
-
+    Timer {
+        id: updateStateTimer
+        interval: 0
+        onTriggered: updateState()
+    }
     onActiveChanged: {
         if (!active) {
             close();
@@ -89,7 +94,7 @@ FullScreenPanel {
         easing.type: Easing.InOutQuad
         properties: "offset"
         from: window.offset
-        to: window.peekHeight
+        to: window.peekHeight - headerHeight
     }
     PropertyAnimation {
         id: openAnim
@@ -127,11 +132,11 @@ FullScreenPanel {
             Binding {
                 target: mainFlickable
                 property: "contentY"
-                value: -window.offset + contentArea.height
+                value: -window.offset + contentArea.height - window.headerHeight
                 when: !mainFlickable.moving && !mainFlickable.dragging && !mainFlickable.flicking
             }
             //no loop as those 2 values compute to exactly the same
-            onContentYChanged: window.offset = -contentY + contentArea.height
+            onContentYChanged: window.offset = -contentY + contentArea.height - window.headerHeight
             contentWidth: window.width
             contentHeight: window.height*2
             bottomMargin: window.height
@@ -139,7 +144,7 @@ FullScreenPanel {
             onFlickEnded: window.updateState();
             Item {
                 width: window.width
-                height: window.height*2
+                height: Math.max(contentArea.height, window.height*2)
                 Item {
                     id: contentArea
                     anchors {
@@ -147,6 +152,9 @@ FullScreenPanel {
                         right: parent.right
                     }
                     height: children[0].implicitHeight
+                    onHeightChanged: {
+                        updateStateTimer.restart()
+                    }
                 }
                 Rectangle {
                     height: units.gridUnit
