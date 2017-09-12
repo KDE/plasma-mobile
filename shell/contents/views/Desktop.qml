@@ -210,6 +210,7 @@ Item {
         if (desktop) {
             desktop.width = width;
             desktop.height = height;
+            desktop.windowType = Shell.Desktop.Desktop;
         }
     }
 }
