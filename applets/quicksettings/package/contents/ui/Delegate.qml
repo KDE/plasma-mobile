@@ -28,7 +28,7 @@ RowLayout {
     spacing: units.smallSpacing
     implicitWidth: flow.width / 2 - units.largeSpacing / 2
     Rectangle {
-        Layout.minimumWidth: units.iconSizes.large
+        Layout.minimumWidth: units.iconSizes.medium
         Layout.minimumHeight: width
         color: toggled ? 
             Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
