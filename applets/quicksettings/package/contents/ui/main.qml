@@ -158,6 +158,7 @@ Item {
                 }
                 minimumValue: maximumValue > 100 ? 1 : 0
                 maximumValue: root.maximumScreenBrightness
+                stepSize: 1
             }
             PlasmaCore.IconItem {
                 Layout.preferredWidth: units.iconSizes.small
