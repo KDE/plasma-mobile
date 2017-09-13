@@ -10,12 +10,11 @@
 # (at your option) any later version.
 #
 
-unset EGL_PLATFORM
-unset QT_QPA_PLATFORM
 unset QT_QPA_EGLFS_DEPTH
 unset QT_QPA_EGLFS_HIDECURSOR
 unset QT_COMPOSITOR_NEGATE_INVERTED_Y
 
+export EGL_PLATFORM=wayland
 export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=KDE
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
