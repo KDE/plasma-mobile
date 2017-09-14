@@ -24,7 +24,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-MouseEventListener {
+MouseArea {
     id: headerItem
     z: 999
     property Item layout: appletsLayout
@@ -39,6 +39,7 @@ MouseEventListener {
     property int oldMouseX
     property int oldMouseY
 
+    drag.filterChildren: true
     EventGenerator {
         id: eventGenerator
     }
@@ -60,19 +61,27 @@ MouseEventListener {
     }
 
     onPressed: {
+        startMouseX = mouse.x;
+        startMouseY = mouse.y;
     }
     onPressAndHold: {
+        var absolutePos = mapToItem(appletsLayout, mouse.x, mouse.y);
+        var absoluteStartPos = mapToItem(appletsLayout, startMouseX, startMouseY);
+
+        if (Math.abs(absolutePos.x - absoluteStartPos.x) > units.gridUnit*2 ||
+            Math.abs(absolutePos.y - absoluteStartPos.y) > units.gridUnit*2) {
+            print("finger moved too much, press and hold canceled")
+            return;
+        }
         print(favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y)))
         if (!favoritesView.contains(mapToItem(favoritesView, mouse.x, mouse.y))) {
             editOverlay.visible = true;
             var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
-            draggingApplet = appletsSpace.layout.childAt(pos.x, pos.y);
+            draggingApplet = appletsSpace.layout.childAt(absolutePos.x, absolutePos.y);
             editOverlay.applet = draggingApplet;
 
-            startMouseX = mouse.screenX;
-            startMouseY = mouse.screenY;
-            oldMouseX = mouse.screenX;
-            oldMouseY = mouse.screenY;
+            oldMouseX = mouse.x;
+            oldMouseY = mouse.y;
 
             eventGenerator.sendGrabEvent(draggingApplet, EventGenerator.UngrabMouse);
             eventGenerator.sendGrabEvent(headerItem, EventGenerator.GrabMouse);
@@ -91,21 +100,22 @@ MouseEventListener {
             }
         }
     }
+
     onPositionChanged: {
         if (!draggingApplet) {
             return;
         }
 
         applicationsView.interactive = false;
-        if (Math.abs(mouse.screenX - startMouseX) > units.gridUnit ||
-            Math.abs(mouse.screenY - startMouseY) > units.gridUnit) {
+        if (Math.abs(mouse.x - startMouseX) > units.gridUnit ||
+            Math.abs(mouse.y - startMouseY) > units.gridUnit) {
             editOverlay.opacity = 0;
         }
 
-        draggingApplet.x -= oldMouseX - mouse.screenX;
-        draggingApplet.y -= oldMouseY - mouse.screenY;
-        oldMouseX = mouse.screenX;
-        oldMouseY = mouse.screenY;
+        draggingApplet.x -= oldMouseX - mouse.x;
+        draggingApplet.y -= oldMouseY - mouse.y;
+        oldMouseX = mouse.x;
+        oldMouseY = mouse.y;
 
         var pos = mapToItem(appletsLayout, mouse.x, mouse.y);
         var itemUnderMouse = appletsSpace.layout.childAt(pos.x, pos.y);
