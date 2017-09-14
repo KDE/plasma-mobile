@@ -109,6 +109,7 @@ void TaskPanel::initWayland()
         }
     );
     registry->setup();
+    connection->roundtrip();
 }
 
 QWindow *TaskPanel::panel()
