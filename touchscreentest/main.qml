@@ -8,13 +8,20 @@ ApplicationWindow {
     height: 480
     title: qsTr("Hello World")
 
+    property real startX
+    property real startY
+
     function format(text, mouse) {
-        return text + " " + Math.round(mouse.x*100)/100 + " " + Math.round(mouse.y*100)/100
+        return text + " " + Math.round(mouse.x*100)/100 + " " + Math.round(mouse.y*100)/100 +"\nInitial: " + Math.round(startX*100)/100 +" "+Math.round(startY*100)/100
     }
 
     MouseArea {
         anchors.fill: parent
-        onPressed: label.text = format("MOUSE PRESS", mouse)
+        onPressed: {
+            startX = mouse.x;
+            startY = mouse.y;
+            label.text = format("MOUSE PRESS", mouse);
+        }
         onPositionChanged: label.text = format("MOUSE Position change", mouse)
         onReleased: label.text = label.text = format("MOUSE Release", mouse)
         onCanceled: label.text = label.text = format("MOUSE Cancel", mouse)
