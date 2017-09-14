@@ -17,7 +17,7 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.3
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -26,6 +26,8 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 
 import "LayoutManager.js" as LayoutManager
+
+import "quicksettings"
 
 PlasmaCore.ColorScope {
     id: root
@@ -44,13 +46,6 @@ PlasmaCore.ColorScope {
     }
 
     function addApplet(applet, x, y) {
-        if (applet.pluginName == "org.kde.phone.quicksettings") {
-            applet.parent = quickSettingsParent;
-            quickSettingsParent.applet = applet;
-            applet.anchors.fill = quickSettingsParent;
-            applet.visible = true;
-            return;
-        } 
         var container = appletContainerComponent.createObject(appletIconsRow)
         print("Applet added: " + applet + " " + applet.title)
         container.width = units.iconSizes.medium
@@ -65,6 +60,13 @@ PlasmaCore.ColorScope {
             applet.fullRepresentationItem.parent = notificationsParent;
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
+        } else if (applet.pluginName != "org.kde.phone.quicksettings") {
+            applet.expanded = true
+            applet.expanded = false
+            quickSettings.addPlasmoid(applet.icon, applet.title, fullRepsLayout.count);
+            applet.fullRepresentationItem.parent = fullRepsLayout;
+            fullRepsLayout.currentIndex = 0
+            applet.fullRepresentationItem.anchors.fill = fullRepsLayout;
         }
     }
 
@@ -206,22 +208,32 @@ PlasmaCore.ColorScope {
         height: plasmoid.availableScreenRect.height
         peekHeight: quickSettingsParent.height + notificationsParent.minimumHeight + root.height
         headerHeight: root.height
+        onExpandedChanged: {
+            modeSwitchAnim.running = false;
+            modeSwitchAnim.to = expanded ? width : 0
+            modeSwitchAnim.running = true;
+        }
         contents: Item {
             id: panelContents
             anchors.fill: parent
-            implicitHeight: quickSettingsParent.height + notificationsParent.height + root.height
+            implicitHeight: slidingPanel.expanded ? (slidingPanel.height-slidingPanel.headerHeight)*0.8 :  (quickSettingsParent.height + notificationsParent.height + root.height)
             Rectangle {
                 id: quickSettingsParent
                 parent: slidingPanel.fixedArea
                 color: PlasmaCore.ColorScope.backgroundColor
                 z: 2
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                width: parent.width
+                x: -modeFlick.contentX
                 y: Math.min(0, slidingPanel.offset - height - root.height)
-                property var applet
-                height: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                height: quickSettings.Layout.minimumHeight
+                QuickSettings {
+                    id: quickSettings
+                    anchors.fill: parent
+                    onPlasmoidTriggered: {
+                        fullRepsLayout.currentIndex = id;
+                        slidingPanel.expanded = true;
+                    }
+                }
                 Rectangle {
                     anchors {
                         left: parent.left
@@ -234,17 +246,54 @@ PlasmaCore.ColorScope {
                     visible: slidingPanel.offset + slidingPanel.headerHeight < panelContents.height
                 }
             }
-            Item {
-                id: notificationsParent
-                anchors {
-                    left: parent.left
-                    bottom: parent.bottom
-                    right: parent.right
-                    bottomMargin: root.height
+            PropertyAnimation {
+                id: modeSwitchAnim
+                target: modeFlick
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+                properties: "contentX"
+                from: modeFlick.contentX
+                to: 0
+            }
+            Flickable {
+                id: modeFlick
+                anchors.fill: parent
+                contentWidth: width * 2
+                contentHeight: height
+                boundsBehavior: Flickable.StopAtBounds
+                interactive: slidingPanel.expanded
+                onFlickEnded: movementEnded()
+                onMovementEnded: {
+                    slidingPanel.expanded = (contentX > panelContents.width/2);
+                    modeSwitchAnim.running = false;
+                    modeSwitchAnim.to = slidingPanel.expanded ? width : 0
+                    modeSwitchAnim.running = true;
                 }
-                property var applet
-                height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
-                property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                Item {
+                    width: modeFlick.width
+                    height: modeFlick.height
+                    Item {
+                        id: notificationsParent
+                        anchors {
+                            left: parent.left
+                            bottom: parent.bottom
+                            right: parent.right
+                            bottomMargin: root.height
+                        }
+                        property var applet
+                        height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
+                        property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                    }
+                    StackLayout {
+                        id: fullRepsLayout
+                        anchors {
+                            left: notificationsParent.right
+                            bottom: parent.bottom
+                        }
+                        width: panelContents.width
+                        height: panelContents.height
+                    }
+                }
             }
         }
     }

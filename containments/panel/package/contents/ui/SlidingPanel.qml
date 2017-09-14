@@ -30,6 +30,7 @@ FullScreenPanel {
     property int offset: 0
     property int peekHeight
     property bool userInteracting: false
+    property bool expanded: false
 
     color: "transparent"
     property alias contents: contentArea.data
@@ -47,7 +48,9 @@ FullScreenPanel {
         closeAnim.running = true;
     }
     function updateState() {
-        if (offset < peekHeight / 2) {
+        if (expanded) {
+            openAnim.running = true;
+        } else if (offset < peekHeight / 2) {
             close();
         } else if (offset < peekHeight) {
             open();
@@ -70,6 +73,8 @@ FullScreenPanel {
             window.width = Screen.width;
             window.height = Screen.height;
             window.requestActivate();
+        } else {
+            window.expanded = false;
         }
     }
     SequentialAnimation {
@@ -130,6 +135,7 @@ FullScreenPanel {
         Flickable {
             id: mainFlickable
             anchors.fill: parent
+            interactive: !window.expanded
             Binding {
                 target: mainFlickable
                 property: "contentY"
