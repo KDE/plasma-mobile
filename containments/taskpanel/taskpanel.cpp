@@ -41,11 +41,11 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
     , m_windowManagement(nullptr)
 {
     setHasConfigurationInterface(true);
-    initWayland();
     m_activeTimer = new QTimer(this);
     m_activeTimer->setSingleShot(true);
     m_activeTimer->setInterval(250);
     connect(m_activeTimer, &QTimer::timeout, this, &TaskPanel::updateActiveWindow);
+    initWayland();
 }
 
 TaskPanel::~TaskPanel()
