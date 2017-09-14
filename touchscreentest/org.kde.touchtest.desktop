@@ -1,0 +1,21 @@
+[Desktop Entry]
+Name=Touch Test
+
+Categories=Qt;KDE;System;Development;
+
+Exec=touchtest
+GenericName=Terminal
+Icon=input-touchpad
+MimeType=
+
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+TryExec=touchtest
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-AuthorizeAction=shell_access
+X-KDE-SubstituteUID=false
+X-KDE-Username=
