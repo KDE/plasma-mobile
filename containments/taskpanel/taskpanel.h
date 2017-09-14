@@ -72,6 +72,7 @@ Q_SIGNALS:
 private:
     void initWayland();
     void updateActiveWindow();
+    void updatePanelVisibility();
     bool m_showingDesktop;
     QWindow *m_panel = nullptr;
     KWayland::Client::PlasmaShellSurface *m_shellSurface = nullptr;

@@ -119,15 +119,28 @@ QWindow *TaskPanel::panel()
 
 void TaskPanel::setPanel(QWindow *panel)
 {
-    using namespace KWayland::Client;
     if (panel == m_panel) {
         return;
     }
 
+    if (m_panel) {
+        disconnect(m_panel, &QWindow::visibilityChanged, this, &TaskPanel::updatePanelVisibility);
+    }
     m_panel = panel;
+    connect(m_panel, &QWindow::visibilityChanged, this, &TaskPanel::updatePanelVisibility, Qt::QueuedConnection);
     emit panelChanged();
+    updatePanelVisibility();
+}
 
-    Surface *s = Surface::fromWindow(panel);
+void TaskPanel::updatePanelVisibility()
+{
+    using namespace KWayland::Client;
+    if (!m_panel->isVisible()) {
+        return;
+    }
+
+    Surface *s = Surface::fromWindow(m_panel);
+
     if (!s) {
         return;
     }
