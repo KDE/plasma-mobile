@@ -293,6 +293,17 @@ PlasmaCore.ColorScope {
                         width: panelContents.width
                         height: panelContents.height
                     }
+                    PlasmaComponents.ToolButton {
+                        anchors {
+                            left: fullRepsLayout.left
+                            right: fullRepsLayout.right
+                            bottom: parent.bottom
+                            bottomMargin: root.height
+                        }
+                        text: i18n("Back")
+                        iconName: "go-previous"
+                        onClicked: slidingPanel.expanded = false;
+                    }
                 }
             }
         }
