@@ -13,7 +13,6 @@ desktopsArray[0].addWidget("org.kde.plasma.analogclock");
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.phone.notifications");
-panel.addWidget("org.kde.phone.quicksettings");
 panel.addWidget("org.kde.plasma.networkmanagement");
 panel.addWidget("org.kde.plasma.battery");
 panel.addWidget("org.kde.plasma.volume");
