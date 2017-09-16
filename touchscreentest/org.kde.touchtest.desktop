@@ -1,10 +1,24 @@
 [Desktop Entry]
 Name=Touch Test
+Name[ca]=Prova el tàctil
+Name[ca@valencia]=Prova el tàctil
+Name[nl]=Aanraaktest
+Name[pt]=Teste de Toque
+Name[sv]=Beröringsprov
+Name[uk]=Тестування дотику
+Name[x-test]=xxTouch Testxx
 
 Categories=Qt;KDE;System;Development;
 
 Exec=touchtest
 GenericName=Terminal
+GenericName[ca]=Terminal
+GenericName[ca@valencia]=Terminal
+GenericName[nl]=Terminal
+GenericName[pt]=Terminal
+GenericName[sv]=Terminal
+GenericName[uk]=Термінал
+GenericName[x-test]=xxTerminalxx
 Icon=input-touchpad
 MimeType=
 
