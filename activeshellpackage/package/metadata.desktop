@@ -43,6 +43,7 @@ Name[sl]=Namizje
 Name[sv]=Skrivbord
 Name[uk]=Стільниця
 Name[x-test]=xxDesktopxx
+Name[zh_CN]=桌面
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell
