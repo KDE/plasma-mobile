@@ -14,6 +14,7 @@ Exec=touchtest
 GenericName=Terminal
 GenericName[ca]=Terminal
 GenericName[ca@valencia]=Terminal
+GenericName[de]=Terminal
 GenericName[nl]=Terminal
 GenericName[pt]=Terminal
 GenericName[sv]=Terminal
