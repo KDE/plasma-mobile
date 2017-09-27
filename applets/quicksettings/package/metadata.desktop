@@ -14,6 +14,7 @@ Name[pt]=Configuração Rápida
 Name[sv]=Snabbinställningar
 Name[uk]=Швидке налаштовування
 Name[x-test]=xxQuick Settingsxx
+Name[zh_TW]=快速設定
 
 Comment=A panel to quickly access most important settings
 Comment[ast]=Un panel p'acceder rápidamente a les opciones más importantes
@@ -27,6 +28,7 @@ Comment[pt]=Um painel para aceder rapidamente às configurações mais important
 Comment[sv]=En panel för att snabbt komma åt de viktigaste inställningarna
 Comment[uk]=Панель для пришвидшення доступу до найважливіших параметрів
 Comment[x-test]=xxA panel to quickly access most important settingsxx
+Comment[zh_TW]=快速存取重要設定的面板
 
 Icon=systemsettings
 Type=Service
