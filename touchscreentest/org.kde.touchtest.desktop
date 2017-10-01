@@ -2,6 +2,7 @@
 Name=Touch Test
 Name[ca]=Prova el tàctil
 Name[ca@valencia]=Prova el tàctil
+Name[es]=Prueba táctil
 Name[nl]=Aanraaktest
 Name[pt]=Teste de Toque
 Name[sv]=Beröringsprov
@@ -16,6 +17,7 @@ GenericName=Terminal
 GenericName[ca]=Terminal
 GenericName[ca@valencia]=Terminal
 GenericName[de]=Terminal
+GenericName[es]=Terminal
 GenericName[nl]=Terminal
 GenericName[pt]=Terminal
 GenericName[sv]=Terminal
