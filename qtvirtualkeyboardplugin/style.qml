@@ -52,11 +52,11 @@ KeyboardStyle {
     }
 
     keyboardDesignWidth: 2560
-    keyboardDesignHeight: 1000
-    keyboardRelativeLeftMargin: 114 / keyboardDesignWidth
-    keyboardRelativeRightMargin: 114 / keyboardDesignWidth
-    keyboardRelativeTopMargin: 13 / keyboardDesignHeight
-    keyboardRelativeBottomMargin: 86 / keyboardDesignHeight
+    keyboardDesignHeight: 1500
+    //keyboardRelativeLeftMargin: 114 / keyboardDesignWidth
+    //keyboardRelativeRightMargin: 114 / keyboardDesignWidth
+    keyboardRelativeTopMargin: 10 / keyboardDesignHeight
+    keyboardRelativeBottomMargin: 10 / keyboardDesignHeight
 
     keyboardBackground: Rectangle {
         color: "black"
@@ -80,7 +80,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 38 * scaleHint
+                    pixelSize: 86 * scaleHint
                     capitalization: control.uppercased ? Font.AllUppercase : Font.MixedCase
                 }
             }
@@ -98,7 +98,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 52 * scaleHint
+                    pixelSize: 117 * scaleHint
                     capitalization: control.uppercased ? Font.AllUppercase : Font.MixedCase
                 }
             }
@@ -272,7 +272,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: 99 * scaleHint
                     capitalization: Font.AllUppercase
                 }
                 anchors.fill: parent
@@ -441,7 +441,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 48 * scaleHint
+                    pixelSize: 72 * scaleHint
                 }
             }
         }
@@ -483,7 +483,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: 66 * scaleHint
                     capitalization: Font.AllUppercase
                 }
             }
@@ -534,7 +534,7 @@ KeyboardStyle {
                 font {
                     family: fontFamily
                     weight: Font.Normal
-                    pixelSize: 44 * scaleHint
+                    pixelSize: 66 * scaleHint
                     capitalization: Font.AllUppercase
                 }
             }
