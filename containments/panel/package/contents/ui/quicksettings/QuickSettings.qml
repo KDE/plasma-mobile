@@ -39,13 +39,6 @@ Item {
 
     property int screenBrightness
     readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
-    onScreenBrightnessChanged: {
-        var service = pmSource.serviceForSource("PowerDevil");
-        var operation = service.operationDescription("setBrightness");
-        operation.brightness = screenBrightness;
-        operation.silent = true
-        service.startOperationCall(operation);
-    }
 
     PlasmaCore.DataSource {
         id: pmSource
@@ -163,7 +156,11 @@ Item {
                 value: root.screenBrightness
                 onValueChanged: {
                     if (pressed) {
-                        root.screenBrightness = value
+                        var service = pmSource.serviceForSource("PowerDevil");
+                        var operation = service.operationDescription("setBrightness");
+                        operation.brightness = value;
+                        operation.silent = true
+                        service.startOperationCall(operation);
                     }
                 }
                 minimumValue: maximumValue > 100 ? 1 : 0
