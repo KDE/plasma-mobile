@@ -140,7 +140,6 @@ PlasmaCore.ColorScope {
                 model: PlasmaCore.SortFilterModel {
                     id: filteredStatusNotifiers
                     filterRole: "Title"
-                    filterRegExp: tasksRow.skipItems
                     sourceModel: PlasmaCore.DataModel {
                         dataSource: statusNotifierSource
                     }
