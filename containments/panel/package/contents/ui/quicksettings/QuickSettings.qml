@@ -142,6 +142,7 @@ Item {
                 properties: "x,y"
             }
         }
+        /*
         RowLayout {
             width: flow.width
             PlasmaCore.IconItem {
@@ -174,5 +175,6 @@ Item {
                 source: "contrast"
             }
         }
+        */
     }
 }
