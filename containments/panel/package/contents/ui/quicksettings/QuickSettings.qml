@@ -37,25 +37,6 @@ Item {
     signal plasmoidTriggered(var id)
     Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
 
-    property int screenBrightness
-    readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
-
-    PlasmaCore.DataSource {
-        id: pmSource
-        engine: "powermanagement"
-        connectedSources: ["PowerDevil"]
-        onSourceAdded: {
-            if (source === "PowerDevil") {
-                disconnectSource(source);
-                connectSource(source);
-            }
-        }
-
-        onDataChanged: {
-            root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
-        }
-    }
-
     ListModel {
         id: settingsModel
 
@@ -142,39 +123,5 @@ Item {
                 properties: "x,y"
             }
         }
-        /*
-        RowLayout {
-            width: flow.width
-            PlasmaCore.IconItem {
-                Layout.preferredWidth: units.iconSizes.small
-                Layout.preferredHeight: Layout.preferredWidth
-                //TODO: needs brightness
-                source: "contrast"
-            }
-            PlasmaComponents.Slider {
-                id: brightnessSlider
-                Layout.fillWidth: true
-                value: root.screenBrightness
-                onValueChanged: {
-                    if (pressed) {
-                        var service = pmSource.serviceForSource("PowerDevil");
-                        var operation = service.operationDescription("setBrightness");
-                        operation.brightness = value;
-                        operation.silent = true
-                        service.startOperationCall(operation);
-                    }
-                }
-                minimumValue: maximumValue > 100 ? 1 : 0
-                maximumValue: root.maximumScreenBrightness
-                stepSize: 1
-            }
-            PlasmaCore.IconItem {
-                Layout.preferredWidth: units.iconSizes.small
-                Layout.preferredHeight: Layout.preferredWidth
-                //TODO: needs brightness
-                source: "contrast"
-            }
-        }
-        */
     }
 }
