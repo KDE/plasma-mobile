@@ -50,12 +50,13 @@ Item {
         height: 10
         cacheItemCount: 999//count
         delegate: Item {
-            Component.onCompleted: {
-                activityModel.setCurrentActivity(model.id, function(){});
-            }
             Connections {
-                target: model
-                onCurrentChanged: activityModel.setCurrentActivity(model.id, function(){});
+                target: activitiesRepresentation
+                onCurrentIndexChanged: {
+                    if (index == activitiesRepresentation.currentIndex) {
+                        activityModel.setCurrentActivity(model.id, function(){});
+                    }
+                }
             }
         }
     }
