@@ -31,7 +31,7 @@ Item {
     }
 
     function addPlasmoid(applet, id) {
-        settingsModel.append({"icon": applet.icon, "text": applet.text, "plasmoidId": id, "enabled": false, "applet": applet})
+        settingsModel.append({"icon": applet.icon, "text": applet.title, "plasmoidId": id, "enabled": false, "applet": applet})
     }
 
     signal plasmoidTriggered(var applet, var id)
