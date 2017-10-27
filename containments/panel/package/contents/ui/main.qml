@@ -63,7 +63,7 @@ PlasmaCore.ColorScope {
         } else if (applet.pluginName != "org.kde.phone.quicksettings") {
             applet.expanded = true
             applet.expanded = false
-            quickSettings.addPlasmoid(applet.icon, applet.title, fullRepsLayout.count);
+            quickSettings.addPlasmoid(applet, fullRepsLayout.count);
             applet.fullRepresentationItem.parent = fullRepsLayout;
             fullRepsLayout.currentIndex = 0
             applet.fullRepresentationItem.anchors.fill = fullRepsLayout;
@@ -229,6 +229,7 @@ PlasmaCore.ColorScope {
                     id: quickSettings
                     anchors.fill: parent
                     onPlasmoidTriggered: {
+                        applet.expanded = true;
                         fullRepsLayout.currentIndex = id;
                         slidingPanel.expanded = true;
                     }

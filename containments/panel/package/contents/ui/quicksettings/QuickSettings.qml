@@ -30,75 +30,51 @@ Item {
         print("toggle airplane mode")
     }
 
-    function addPlasmoid(icon, text, id) {
-        settingsModel.append({"icon": icon, "text": text, "plasmoidId": id, "enabled": false})
+    function addPlasmoid(applet, id) {
+        settingsModel.append({"icon": applet.icon, "text": applet.text, "plasmoidId": id, "enabled": false, "applet": applet})
     }
 
-    signal plasmoidTriggered(var id)
+    signal plasmoidTriggered(var applet, var id)
     Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
+
+    //HACK: make the list know about the applet delegate which is a qtobject
+    QtObject {
+        id: nullApplet
+    }
+    Component.onCompleted: {
+        //NOTE: add all in javascript as the static decl of listelements can't have scripts
+        settingsModel.append({
+            "text": i18n("Settings"),
+            "icon": "configure",
+            "enabled": false,
+            "settingsCommand": "plasma-settings",
+            "toggleFunction": "",
+            "delegate": "",
+            "plasmoidId": -1,
+            "enabled": false,
+            "applet": nullApplet
+        });
+
+        settingsModel.append({
+            "text": i18n("Flashlight"),
+            "icon": "package_games_puzzle",
+            "enabled": false,
+            "settingsCommand": "",
+            "plasmoidId": -1,
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Location"),
+            "icon": "plasmaapplet-location",
+            "enabled": false,
+            "settingsCommand": "",
+            "plasmoidId": -1,
+            "applet": null
+        });
+    }
 
     ListModel {
         id: settingsModel
-
-        ListElement {
-            text: "Settings"
-            icon: "configure"
-            enabled: false
-            settingsCommand: "plasma-settings"
-            toggleFunction: ""
-            delegate: ""
-            plasmoidId: -1
-        }
-       /* ListElement {
-            text: "Mobile network"
-            icon: "network-mobile-80"
-            enabled: true
-            settingsCommand: ""
-            plasmoidId: -1
-        }
-        ListElement {
-            text: "Airplane mode"
-            icon: "flightmode-on"
-            enabled: false
-            settingsCommand: ""
-            toggleFunction: "toggleAirplane"
-            plasmoidId: -1
-        }
-        ListElement {
-            text: "Bluetooth"
-            icon: "preferences-system-bluetooth"
-            enabled: false
-            settingsCommand: ""
-            plasmoidId: -1
-        }
-        ListElement {
-            text: "Wireless"
-            icon: "network-wireless-on"
-            enabled: true
-            settingsCommand: "plasmawindowed org.kde.plasma.networkmanagement"
-            plasmoidId: -1
-        }
-        ListElement {
-            text: "Alarms"
-            icon: "korgac"
-            enabled: false
-            settingsCommand: "ktimer"
-            plasmoidId: -1
-        }*/
-        ListElement {
-            text: "Flashlight"
-            icon: "package_games_puzzle"
-            enabled: false
-            settingsCommand: ""
-            plasmoidId: -1
-        }
-        ListElement {
-            text: "Location"
-            icon: "plasmaapplet-location"
-            enabled: false
-            settingsCommand: ""
-            plasmoidId: -1
-        }
     }
 
     Flow {
