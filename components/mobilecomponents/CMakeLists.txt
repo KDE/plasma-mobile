@@ -2,6 +2,7 @@ project(mobilecomponents)
 
 set(mobilecomponents_SRCS
     mobilecomponentsplugin.cpp
+    pagedproxymodel.cpp
     )
 
 add_library(mobilecomponentsplugin SHARED ${mobilecomponents_SRCS})

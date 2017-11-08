@@ -20,6 +20,7 @@
  */
 
 #include "mobilecomponentsplugin.h"
+#include "pagedproxymodel.h"
 
 #include <QQmlExtensionPlugin>
 #include <QQmlEngine>
@@ -30,9 +31,7 @@
 void MobileComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(uri == QLatin1String("org.kde.plasma.mobilecomponents"));
-
-    //TODO: in this plugin it will end up something similar to
-    //PlasmaCore's ColorScope
+    qmlRegisterType<PagedProxyModel>(uri, 2, 0, "PagedProxyModel");
 }
 
 

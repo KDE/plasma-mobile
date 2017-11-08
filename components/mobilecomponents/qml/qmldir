@@ -18,3 +18,4 @@ ListItem 0.2 ListItem.qml
 BasicListItem 0.2 BasicListItem.qml
 ListItemWithActions 0.2 ListItemWithActions.qml
 RefreshableScrollView 0.2 RefreshableScrollView.qml
+IconGrid 0.2 IconGrid.qml
