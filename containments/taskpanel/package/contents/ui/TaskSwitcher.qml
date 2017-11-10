@@ -23,7 +23,6 @@ import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.mobilecomponents 0.2
 import org.kde.plasma.private.mobileshell 2.0
 
 FullScreenPanel {

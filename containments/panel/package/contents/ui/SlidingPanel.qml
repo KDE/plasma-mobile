@@ -21,7 +21,6 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.mobilecomponents 0.2
 import org.kde.plasma.private.mobileshell 2.0
 
 FullScreenPanel {

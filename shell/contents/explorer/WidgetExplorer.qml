@@ -26,6 +26,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
+import org.kde.kirigami 2.2 as Kirigami
 
 import QtQuick.Window 2.1
 import QtQuick.Layouts 1.1
@@ -37,6 +38,8 @@ Rectangle {
     color: Qt.rgba(0, 0, 0, (1 - Math.abs(main.x / (main.width/2))) * 0.8)
     signal closed()
     property alias containment: widgetExplorer.containment
+
+    Component.onCompleted: splitDrawer.contentX = typeSelector.width
 
     MouseArea {
         anchors.fill: parent
@@ -135,152 +138,165 @@ Rectangle {
                 //view: desktop
                 onShouldClose: removeAnim.running = true;
             }
-            MobileComponents.SplitDrawer {
+            Flickable {
                 id: splitDrawer
                 visible: true
                 anchors.fill: parent
-                contentItem: PlasmaExtras.ScrollArea {
-                    
-                    ListView {
-                        model: widgetExplorer.filterModel
-                        delegate: PlasmaComponents.ListItem {
-                            enabled: true
-                            visible: !model.separator
-                            height: model.separator ? 0 : implicitHeight
-                            PlasmaComponents.Label {
-                                text: model.display
-                            }
-                            onClicked: {
-                                list.contentX = 0
-                                list.contentY = 0
-                                heading.text = model.display
-                                widgetExplorer.widgetsModel.filterQuery = model.filterData
-                                widgetExplorer.widgetsModel.filterType = model.filterType
-                            }
-                        }
-                    }
-                }
-                
-                ColumnLayout {
-                    anchors {
-                        fill: parent
-                        margins: units.smallSpacing
-                    }
-                    spacing: units.smallSpacing
-
-                    PlasmaExtras.Title {
-                        id: heading
-                        text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
-                        Layout.fillWidth: true
-
-                        PlasmaComponents.ToolButton {
-                            id: closeButton
-                            anchors {
-                                right: parent.right
-                                verticalCenter: heading.verticalCenter
-                            }
-                            iconSource: "window-close"
-                            onClicked: removeAnim.running = true;
-                        }
-                    }
-
-                    PlasmaComponents.TextField {
-                        id: searchInput
-                        clearButtonShown: true
-                        placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
-                        onTextChanged: {
-                            list.positionViewAtBeginning()
-                            list.currentIndex = -1
-                            widgetExplorer.widgetsModel.searchTerm = text
-                        }
-
-                        Component.onCompleted: forceActiveFocus()
-                        Layout.fillWidth: true
-                    }
-
-
+                clip: true
+                contentWidth: mainRow.width
+                contentHeight: height
+                Row {
+                    id: mainRow
+                    height: splitDrawer.height
                     PlasmaExtras.ScrollArea {
-                        Layout.fillHeight: true
-                        Layout.fillWidth: true
-                        GridView {
-                            id: list
-
-                            model: widgetExplorer.widgetsModel
-                            activeFocusOnTab: true
-                            currentIndex: -1
-                            keyNavigationWraps: true
-                            cellWidth: units.iconSizes.huge + units.smallSpacing * 2
-                            cellHeight: cellWidth + units.gridUnit * 4 + units.smallSpacing * 2
-
-
-                            delegate: AppletDelegate {}
-
-                            //slide in to view from the left
-                            add: Transition {
-                                NumberAnimation {
-                                    properties: "x"
-                                    from: -list.width
-                                    to: 0
-                                    duration: units.shortDuration * 3
-
+                        id: typeSelector
+                        anchors {
+                            top: parent.top
+                            bottom: parent.bottom
+                        }
+                        width: units.gridUnit * 10
+                        ListView {
+                            model: widgetExplorer.filterModel
+                            delegate: PlasmaComponents.ListItem {
+                                enabled: true
+                                visible: !model.separator
+                                height: model.separator ? 0 : implicitHeight
+                                PlasmaComponents.Label {
+                                    text: model.display
                                 }
-                            }
-
-                            //slide out of view to the right
-                            remove: Transition {
-                                NumberAnimation {
-                                    properties: "x"
-                                    to: list.width
-                                    duration: units.shortDuration * 3
-                                }
-                            }
-
-                            //if we are adding other items into the view use the same animation as normal adding
-                            //this makes everything slide in together
-                            //if we make it move everything ends up weird
-                            addDisplaced: list.add
-
-                            //moved due to filtering
-                            displaced: Transition {
-                                NumberAnimation {
-                                    properties: "y"
-                                    duration: units.shortDuration * 3
+                                onClicked: {
+                                    list.contentX = 0
+                                    list.contentY = 0
+                                    heading.text = model.display
+                                    widgetExplorer.widgetsModel.filterQuery = model.filterData
+                                    widgetExplorer.widgetsModel.filterType = model.filterType
                                 }
                             }
                         }
                     }
-
-                    Column {
-                        id: bottomBar
+                    
+                    ColumnLayout {
                         anchors {
-                            left: parent.left
-                            right: parent.right
+                            top: parent.top
                             bottom: parent.bottom
-                            leftMargin: units.smallSpacing
-                            rightMargin: units.smallSpacing
-                            bottomMargin: units.smallSpacing
                         }
+                        width: splitDrawer.width
 
                         spacing: units.smallSpacing
 
-                        Repeater {
-                            model: widgetExplorer.extraActions.length
-                            PlasmaComponents.Button {
+                        PlasmaExtras.Title {
+                            id: heading
+                            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Widgets")
+                            Layout.fillWidth: true
+
+                            PlasmaComponents.ToolButton {
+                                id: closeButton
                                 anchors {
-                                    left: parent.left
                                     right: parent.right
+                                    verticalCenter: heading.verticalCenter
                                 }
-                                iconSource: widgetExplorer.extraActions[modelData].icon
-                                text: widgetExplorer.extraActions[modelData].text
-                                onClicked: {
-                                    widgetExplorer.extraActions[modelData].trigger()
+                                iconSource: "window-close"
+                                onClicked: removeAnim.running = true;
+                            }
+                        }
+
+                        PlasmaComponents.TextField {
+                            id: searchInput
+                            clearButtonShown: true
+                            placeholderText: i18nd("plasma_shell_org.kde.plasma.desktop", "Search...")
+                            onTextChanged: {
+                                list.positionViewAtBeginning()
+                                list.currentIndex = -1
+                                widgetExplorer.widgetsModel.searchTerm = text
+                            }
+
+                            Component.onCompleted: forceActiveFocus()
+                            Layout.fillWidth: true
+                        }
+
+
+                        PlasmaExtras.ScrollArea {
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            GridView {
+                                id: list
+
+                                model: widgetExplorer.widgetsModel
+                                activeFocusOnTab: true
+                                currentIndex: -1
+                                keyNavigationWraps: true
+                                cellWidth: units.iconSizes.huge + units.smallSpacing * 2
+                                cellHeight: cellWidth + units.gridUnit * 4 + units.smallSpacing * 2
+
+
+                                delegate: AppletDelegate {}
+
+                                //slide in to view from the left
+                                add: Transition {
+                                    NumberAnimation {
+                                        properties: "x"
+                                        from: -list.width
+                                        to: 0
+                                        duration: units.shortDuration * 3
+
+                                    }
+                                }
+
+                                //slide out of view to the right
+                                remove: Transition {
+                                    NumberAnimation {
+                                        properties: "x"
+                                        to: list.width
+                                        duration: units.shortDuration * 3
+                                    }
+                                }
+
+                                //if we are adding other items into the view use the same animation as normal adding
+                                //this makes everything slide in together
+                                //if we make it move everything ends up weird
+                                addDisplaced: list.add
+
+                                //moved due to filtering
+                                displaced: Transition {
+                                    NumberAnimation {
+                                        properties: "y"
+                                        duration: units.shortDuration * 3
+                                    }
                                 }
                             }
                         }
+
+                        Column {
+                            id: bottomBar
+                            anchors {
+                                left: parent.left
+                                right: parent.right
+                                bottom: parent.bottom
+                                leftMargin: units.smallSpacing
+                                rightMargin: units.smallSpacing
+                                bottomMargin: units.smallSpacing
+                            }
+
+                            spacing: units.smallSpacing
+
+                            Repeater {
+                                model: widgetExplorer.extraActions.length
+                                PlasmaComponents.Button {
+                                    anchors {
+                                        left: parent.left
+                                        right: parent.right
+                                    }
+                                    iconSource: widgetExplorer.extraActions[modelData].icon
+                                    text: widgetExplorer.extraActions[modelData].text
+                                    onClicked: {
+                                        widgetExplorer.extraActions[modelData].trigger()
+                                    }
+                                }
+                            }
+                        }
+
                     }
-
                 }
-
             }
             Component.onCompleted: {
                 main.getWidgetsButton = getWidgetsButton
