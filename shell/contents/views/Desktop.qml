@@ -35,7 +35,6 @@ Item {
 
     property Item containment;
     property Item wallpaper;
-    property var pendingRemovals: [];
     property int notificationId: 0;
     property int buttonHeight: width/4
     property bool containmentsEnterFromRight: true

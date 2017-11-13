@@ -31,6 +31,7 @@ Item {
     Layout.maximumHeight: notificationView.contentHeight + units.gridUnit
     //todo: size of first item
     Layout.minimumHeight: units.gridUnit * 4
+    property var pendingRemovals: [];
 
     Plasmoid.switchWidth: 500
     Plasmoid.switchHeight: 500
