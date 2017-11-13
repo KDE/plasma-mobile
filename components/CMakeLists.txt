@@ -10,5 +10,6 @@ target_link_libraries(plasmamobileshellprivateplugin Qt5::Core Qt5::Qml Qt5::Qui
 
 install(TARGETS plasmamobileshellprivateplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
 
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
 
 
