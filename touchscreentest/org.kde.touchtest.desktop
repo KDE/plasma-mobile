@@ -2,6 +2,7 @@
 Name=Touch Test
 Name[ca]=Prova el tàctil
 Name[ca@valencia]=Prova el tàctil
+Name[cs]=Test doteku
 Name[es]=Prueba táctil
 Name[nl]=Aanraaktest
 Name[pl]=Próba dotyku
@@ -18,6 +19,7 @@ Exec=touchtest
 GenericName=Terminal
 GenericName[ca]=Terminal
 GenericName[ca@valencia]=Terminal
+GenericName[cs]=Terminál
 GenericName[de]=Terminal
 GenericName[es]=Terminal
 GenericName[nl]=Terminal
