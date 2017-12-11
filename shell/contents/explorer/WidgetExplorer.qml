@@ -25,7 +25,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
-import org.kde.plasma.mobilecomponents 0.2 as MobileComponents
 import org.kde.kirigami 2.2 as Kirigami
 
 import QtQuick.Window 2.1
