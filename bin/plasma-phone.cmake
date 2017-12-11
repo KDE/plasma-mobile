@@ -32,9 +32,6 @@ export QT_QUICK_CONTROLS_MOBILE=true
 
 @CMAKE_INSTALL_FULL_LIBEXECDIR@/ksyncdbusenv
 
-# upstart user session has useful bits like mtp-server
-init --user &
-
 # HACK: FIXME: This should autostart when required but appearantly there is some async magic which prevents it gettings started.
 # start signond service
 dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:com.google.code.AccountsSSO.SingleSignOn uint32:0
