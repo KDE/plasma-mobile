@@ -70,7 +70,7 @@ Rectangle {
             y: editOverlay.mapFromItem(editOverlay.applet.parent, 0, editOverlay.applet.y).y + editOverlay.applet.height/2 - height/2
             PlasmaComponents.ToolButton {
                 iconSource: "configure"
-                text: i18n("Configure..")
+                text: i18n("Configure...")
                 flat: false
                 onClicked: {
                     editOverlay.applet.applet.action("configure").trigger();
