@@ -32,6 +32,7 @@ Comment[tr]=Dosya türünü doğrudan dosya tarayıcısı ile tüklemek için Pl
 Comment[uk]=Пакунок Плазми для завантаження даних певного типу MIME безпосередньо з вікна програми для перегляду файлів
 Comment[wa]=Pacaedje plasma po tcherdjî ene sôre mime dinêye direk do foyteu des fitchîs
 Comment[x-test]=xxPlasma package to load a particular mimetype directly in the file browserxx
+Comment[zh_CN]=用于在文件管理器中直接载入特定 mime 类型的 Plasma 包
 Comment[zh_TW]=直接在檔案瀏覽器直接載入特別的 MIME 型態的 Plasma 套件
 
 #At the moment supported Browser and Viewer

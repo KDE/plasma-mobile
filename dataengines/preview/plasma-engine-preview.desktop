@@ -68,6 +68,7 @@ Comment[tr]=Web sayfaları için önizleme gösterir
 Comment[uk]=Показує мініатюри сторінок інтернету
 Comment[wa]=Mostere des prévoeyaedjes po des pådjes waibe
 Comment[x-test]=xxShows previews for webpagesxx
+Comment[zh_CN]=显示网页预览
 Comment[zh_TW]=顯示網頁預覽
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

@@ -30,6 +30,7 @@ Name[tr]=Plasma Active Uygulama Listeleyici
 Name[uk]=Список програм Портативної Плазми
 Name[wa]=Fijheu di lisse di programes di Plasma Active
 Name[x-test]=xxPlasma Active App Listerxx
+Name[zh_CN]=Plasma Active 程序列举器
 Name[zh_TW]=Plasma Active App Lister
 X-KDE-ServiceTypes=Plasma/Runner
 Type=Service

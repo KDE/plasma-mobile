@@ -67,6 +67,7 @@ Comment[tr]=Akonadi Alarmlarını listeler ve ayarlar
 Comment[uk]=Показ списку і внесення змін до нагадувань Akonadi
 Comment[wa]=Fé l' djivêye eyet defini les xhîletes d' Akonadi
 Comment[x-test]=xxList and set Akonadi Alarmsxx
+Comment[zh_CN]=列出及设置 Akonadi 闹钟
 Comment[zh_TW]=列出並設定 Akonadi 鬧鐘
 X-KDE-ServiceTypes=Plasma/DataEngine
 Type=Service

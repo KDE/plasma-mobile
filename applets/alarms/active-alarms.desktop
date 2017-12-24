@@ -68,6 +68,7 @@ Comment[tr]=Tabletler için görsel ve sesli alarmları ayarlamak için bir ara�
 Comment[uk]=Програма для налаштовування візуальних та звукових нагадувань для планшетів
 Comment[wa]=Ene usteye po mete a pont des veyåvès ey oyåvès xhîletes sol tåvlete
 Comment[x-test]=xxA tool to setup visual and audio alarms for tabletsxx
+Comment[zh_CN]=为平板电脑设置视觉及听觉闹钟的工具
 Comment[zh_TW]=在平板裝置上設定視覺與音效鬧鐘的工具
 
 Exec=plasma-windowed -graphicssystem raster org.kde.active.alarms

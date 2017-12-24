@@ -78,6 +78,7 @@ GenericName[ug]=ھۆججەت كۆرگۈ
 GenericName[uk]=Керування файлами
 GenericName[wa]=Foyteu di fitchîs
 GenericName[x-test]=xxFile browserxx
+GenericName[zh_CN]=文件浏览器
 GenericName[zh_TW]=檔案瀏覽器
 Comment=A simple file browser/manager
 Comment[bs]=Jednostavni pretraživač/upravitelj datoteka
@@ -112,6 +113,7 @@ Comment[ug]=ئاددىي ھۆججەت كۆرگۈ/باشقۇرغۇ
 Comment[uk]=Проста програма для перегляду і керування файловою системою
 Comment[wa]=Èn åjhey foyteu/manaedjeu di fitchîs
 Comment[x-test]=xxA simple file browser/managerxx
+Comment[zh_CN]=简单的文件浏览器/管理器
 Comment[zh_TW]=簡單的檔案瀏覽器
 
 

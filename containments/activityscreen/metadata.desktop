@@ -30,6 +30,7 @@ Name[tr]=Contour etkinlik ekranı
 Name[uk]=Сторінка простору дій Contour
 Name[wa]=Waitroûle d' activité Contour
 Name[x-test]=xxContour activity screenxx
+Name[zh_CN]=Contour 活动屏幕
 Name[zh_TW]=Contour 活動螢幕
 Comment=Categorized resources and widgets
 Comment[bs]=Razvrstani izvori i grafičke kontrole
@@ -61,6 +62,7 @@ Comment[tr]=Kategorilendirilmiş kaynaklar ve gereçler
 Comment[uk]=Категоризований список ресурсів та віджетів
 Comment[wa]=Rissources eyet ahesses categorijheyes
 Comment[x-test]=xxCategorized resources and widgetsxx
+Comment[zh_CN]=分类的资源及小部件
 Comment[zh_TW]=分類的資源與元件
 Encoding=UTF-8
 

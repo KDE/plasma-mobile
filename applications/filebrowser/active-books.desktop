@@ -72,6 +72,7 @@ GenericName[ug]=كىتابلار
 GenericName[uk]=Збірка книг
 GenericName[wa]=Ramexhnêye di lives
 GenericName[x-test]=xxBook collectionxx
+GenericName[zh_CN]=书籍收藏
 GenericName[zh_TW]=書籍收藏
 Comment=All books installed on the device
 Comment[bs]=Sve knjige koje su instalirane na uređaju
@@ -106,6 +107,7 @@ Comment[ug]=ئۈسكۈنىگە ئورنىتىلغان بارلىق كىتابل�
 Comment[uk]=Всі книги, встановлені на пристрої
 Comment[wa]=Toss les lives astalés so l' éndjin
 Comment[x-test]=xxAll books installed on the devicexx
+Comment[zh_CN]=设备上安装的所有书籍
 Comment[zh_TW]=所有安裝在此裝置上的書籍
 
 Exec=active-filebrowser --mimeTypes=application/epub+zip,application/pdf -graphicssystem raster %u

@@ -75,6 +75,7 @@ GenericName[ug]=رەسىم كۆرگۈ
 GenericName[uk]=Переглядач зображень
 GenericName[wa]=Håyneu d' imådjes
 GenericName[x-test]=xxImage viewerxx
+GenericName[zh_CN]=图像查看器
 GenericName[zh_TW]=影像檢視器
 Comment=An image viewer for touch tablets
 Comment[bs]=Preglednik slika za dodirne tablete
@@ -108,6 +109,7 @@ Comment[ug]=چەكمە ئۈسكۈنىلەر ئۈچۈن سۈرەت كۆرگۈ
 Comment[uk]=Програма для перегляду зображень на сенсорних планшетах
 Comment[wa]=On håyneu d' imådjes po tåvletes a toutchî
 Comment[x-test]=xxAn image viewer for touch tabletsxx
+Comment[zh_CN]=用于触摸屏的图像浏览器
 Comment[zh_TW]=觸控面板的影像檢視器
 
 Exec=active-filebrowser --resourceType=nfo:Image -graphicssystem raster %u
