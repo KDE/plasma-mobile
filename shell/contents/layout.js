@@ -2,11 +2,6 @@
 var desktopsArray = desktopsForActivity(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = "org.kde.image";
-    //desktopsArray[j].name = "Homescreen" + (j > 0 ? " " + j : "");
-    desktopsArray[j].currentConfigGroup = ["Wallpaper",
-                                           desktopsArray[j].wallpaperPlugin,
-                                           "General"];
-    desktopsArray[j].writeConfig("Image", "org.kde.plasma.phone.lockers");
 }
 
 desktopsArray[0].addWidget("org.kde.plasma.analogclock");
