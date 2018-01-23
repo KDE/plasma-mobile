@@ -21,7 +21,3 @@ if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.scree
     bottomPanel.height = 150;
 else
     bottomPanel.height = 60;
-
-if (activities().length < 2) {
-    createActivity("Activity 2");
-}
