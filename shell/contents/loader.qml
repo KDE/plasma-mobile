@@ -25,7 +25,7 @@ Item {
 
     property string shell  : "org.kde.plasma.phone"
     property bool willing  : true
-    property int  priority : currentSession == "plasma-mobile" ? 0 : 10
+    property int  priority : 10
 
     // This is not needed, but allows the
     // handler to know whether its shell is loaded

@@ -20,6 +20,7 @@
 
 import QtQuick 2.6
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -28,18 +29,20 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
 
-Item {
+MouseArea {
     id: root
     width: 1080
     height: 1920
 
     property Item containment;
+    property Item containmentNextActivityPreview;
     property Item wallpaper;
     property int notificationId: 0;
     property int buttonHeight: width/4
     property bool containmentsEnterFromRight: true
+    drag.filterChildren: true
 
-    //NOTE: this 
+    //HACK: needs better api from kactivities qml
     PathView {
         id: activitiesRepresentation
         model: Activities.ActivityModel {
@@ -59,7 +62,36 @@ Item {
             }
         }
     }
-
+    PageIndicator {
+        z: 999
+        anchors {
+            bottom: parent.bottom
+            horizontalCenter: parent.horizontalCenter
+        }
+        count: activitiesRepresentation.count
+        currentIndex: activitiesRepresentation.currentIndex
+    }
+    property int startX
+    onPressed: {
+        startX = mouse.x - containment.x 
+    }
+    onPositionChanged: {
+        containment.x = mouse.x - startX
+        if (containment.x < 0) {
+            var cont = desktop.containmentItemForActivity("395250d4-d44b-4735-8494-4db49beb29dd");
+            if (cont != containmentNextActivityPreview) {
+                print(cont+" "+root.containment);
+                containmentNextActivityPreview = cont;
+                cont.width = root.width;
+                cont.height = root.height;
+                cont.parent = root;
+            }
+            containmentNextActivityPreview.x = containment.x + containment.width;
+        }
+    }
+    onReleased: {
+        activityModel.setCurrentActivity("395250d4-d44b-4735-8494-4db49beb29dd", function(){});
+    }
     ActivityHandle {
         mirrored: true
     }
@@ -113,9 +145,9 @@ Item {
         if (internal.oldContainment != null && internal.oldContainment != containment) {
             switchAnim.running = true;
         } else {
-            containment.anchors.left = root.left;
+            //containment.anchors.left = root.left;
             containment.anchors.top = root.top;
-            containment.anchors.right = root.right;
+            //containment.anchors.right = root.right;
             containment.anchors.bottom = root.bottom;
             if (internal.oldContainment) {
                 internal.oldContainment.visible = false;
@@ -124,6 +156,11 @@ Item {
         }
     }
 
+    Binding {
+        target: containment
+        property: "width"
+        value: root.width
+    }
     //some properties that shouldn't be accessible from elsewhere
     QtObject {
         id: internal;
@@ -137,20 +174,12 @@ Item {
         ScriptAction {
             script: {
                 if (containment) {
-                    containment.anchors.left = undefined;
-                    containment.anchors.top = undefined;
-                    containment.anchors.right = undefined;
-                    containment.anchors.bottom = undefined;
-                    containment.z = 1;
-                    containment.x = root.containmentsEnterFromRight ? root.width : -root.width;
+                    //containment.z = 1;
+                    //containment.x = root.containmentsEnterFromRight ? root.width : -root.width;
                 }
                 if (internal.oldContainment) {
-                    internal.oldContainment.anchors.left = undefined;
-                    internal.oldContainment.anchors.top = undefined;
-                    internal.oldContainment.anchors.right = undefined;
-                    internal.oldContainment.anchors.bottom = undefined;
-                    internal.oldContainment.z = 0;
-                    internal.oldContainment.x = 0;
+                    //internal.oldContainment.z = 0;
+                    //internal.oldContainment.x = 0;
                 }
             }
         }
@@ -176,9 +205,7 @@ Item {
                     internal.oldContainment.visible = false;
                 }
                 if (containment) {
-                    containment.anchors.left = root.left;
                     containment.anchors.top = root.top;
-                    containment.anchors.right = root.right;
                     containment.anchors.bottom = root.bottom;
                     internal.oldContainment = containment;
                 }
