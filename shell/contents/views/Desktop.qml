@@ -81,14 +81,14 @@ MouseArea {
             
             Connections {
                 target: activitiesView
-                onMovementEnded: {return;
+                onMovementEnded: {
                     if (activitiesView.currentIndex == index) {
                         activityModel.setCurrentActivity(model.id, function(){
                             mainDelegate.containment.parent = mainDelegate;
                         });
                     }
                 }
-                onFlickEnded: onMovementEnded()
+                onFlickEnded: activitiesView.movementEnded()
             }
             onInViewportChanged: {
                 if (inViewport && !mainDelegate.containment) {
@@ -142,12 +142,6 @@ MouseArea {
     onReleased: {
         activityModel.setCurrentActivity("395250d4-d44b-4735-8494-4db49beb29dd", function(){});
     }*/
-    ActivityHandle {
-        mirrored: true
-    }
-    ActivityHandle {
-        mirrored: false
-    }
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
