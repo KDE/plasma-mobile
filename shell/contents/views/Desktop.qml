@@ -42,28 +42,15 @@ MouseArea {
     property bool containmentsEnterFromRight: true
     drag.filterChildren: false
 
-    //HACK: needs better api from kactivities qml
-    PathView {
-        id: activitiesRepresentation
-        model: Activities.ActivityModel {
-            id: activityModel
-        }
-        width: 10
-        height: 10
-        cacheItemCount: 999//count
-        delegate: Item {
-            Connections {
-                target: activitiesRepresentation
-                onCurrentIndexChanged: {
-                    if (index == activitiesRepresentation.currentIndex) {
-                        activityModel.setCurrentActivity(model.id, function(){});
-                    }
-                }
-            }
-        }
+    //HACK FIXME this timer hack is to wait activitiesView finished all its setup
+    //which we can't know for sure and suggests that we can't really use it
+    Timer {
+        id: hackTimer
+        interval: 1000
+        running: true
     }
     ListView {
-        id: mainView
+        id: activitiesView
         z: 998
         visible: root.containment
         interactive: true
@@ -71,23 +58,37 @@ MouseArea {
         orientation: ListView.Horizontal
         snapMode: ListView.SnapOneItem
         boundsBehavior: Flickable.StopAtBounds 
+        highlightMoveDuration: 0
+        highlightRangeMode: ListView.StrictlyEnforceRange
         cacheBuffer: width * count * 2
         model: Activities.ActivityModel {
-            id: activityModel2
+            id: activityModel
         }
 
         delegate: Rectangle {
             radius: 100
             id: mainDelegate
-            width: mainView.width
-            height: mainView.height
-            property bool inViewport: root.containment && mainView.contentX <= x && mainView.contentX+mainView.width <= x + width
-            property bool current: containment == root.containment
+            width: activitiesView.width
+            height: activitiesView.height
             property Item containment
-            onCurrentChanged: {
-                if (current) {
-                    mainView.currentIndex = index
+            readonly property bool inViewport: !hackTimer.running && root.containment &&
+                     ((x >= activitiesView.contentX &&
+                       x < activitiesView.contentX + activitiesView.width) ||
+                      (x + width > activitiesView.contentX &&
+                       x + width < activitiesView.contentX + activitiesView.width))
+            readonly property bool currentActivity: root.containment && model.current
+
+            
+            Connections {
+                target: activitiesView
+                onMovementEnded: {return;
+                    if (activitiesView.currentIndex == index) {
+                        activityModel.setCurrentActivity(model.id, function(){
+                            mainDelegate.containment.parent = mainDelegate;
+                        });
+                    }
                 }
+                onFlickEnded: onMovementEnded()
             }
             onInViewportChanged: {
                 if (inViewport && !mainDelegate.containment) {
@@ -98,11 +99,16 @@ MouseArea {
                     mainDelegate.containment.anchors.fill = mainDelegate;
                 }
             }
+            onCurrentActivityChanged: {
+                if (currentActivity) {
+                    activitiesView.positionViewAtIndex(index, ListView.Beginning);
+                    activitiesView.currentIndex = index;
+                }
+            }
             
             Text {
-                x: -100
                 z: 100
-                text: mainDelegate.inViewport + " " + mainView.contentX +" "+ mainDelegate.x +" "+ (mainView.contentX + mainView.width) + " " + (mainDelegate.x + mainDelegate.width)
+                text: mainDelegate.inViewport + " " + activitiesView.contentX +" "+ mainDelegate.x +" "+ (activitiesView.contentX + activitiesView.width) + " " + (mainDelegate.x + mainDelegate.width)
             }
         }
     }
@@ -112,8 +118,8 @@ MouseArea {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }
-        count: mainView.count
-        currentIndex: mainView.currentIndex
+        count: activitiesView.count
+        currentIndex: activitiesView.currentIndex
     }
  /*   property int startX
     onPressed: {
