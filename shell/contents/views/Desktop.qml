@@ -40,7 +40,7 @@ MouseArea {
     property int notificationId: 0;
     property int buttonHeight: width/4
     property bool containmentsEnterFromRight: true
-    drag.filterChildren: true
+    drag.filterChildren: false
 
     //HACK: needs better api from kactivities qml
     PathView {
@@ -62,16 +62,60 @@ MouseArea {
             }
         }
     }
+    ListView {
+        id: mainView
+        z: 998
+        visible: root.containment
+        interactive: true
+        anchors.fill: parent
+        orientation: ListView.Horizontal
+        snapMode: ListView.SnapOneItem
+        boundsBehavior: Flickable.StopAtBounds 
+        cacheBuffer: width * count * 2
+        model: Activities.ActivityModel {
+            id: activityModel2
+        }
+
+        delegate: Rectangle {
+            radius: 100
+            id: mainDelegate
+            width: mainView.width
+            height: mainView.height
+            property bool inViewport: root.containment && mainView.contentX <= x && mainView.contentX+mainView.width <= x + width
+            property bool current: containment == root.containment
+            property Item containment
+            onCurrentChanged: {
+                if (current) {
+                    mainView.currentIndex = index
+                }
+            }
+            onInViewportChanged: {
+                if (inViewport && !mainDelegate.containment) {
+                    mainDelegate.containment = desktop.containmentItemForActivity(model.id);
+                    print(mainDelegate.containment+" "+root.containment);
+                    containmentNextActivityPreview = containment;
+                    mainDelegate.containment.parent = mainDelegate;
+                    mainDelegate.containment.anchors.fill = mainDelegate;
+                }
+            }
+            
+            Text {
+                x: -100
+                z: 100
+                text: mainDelegate.inViewport + " " + mainView.contentX +" "+ mainDelegate.x +" "+ (mainView.contentX + mainView.width) + " " + (mainDelegate.x + mainDelegate.width)
+            }
+        }
+    }
     PageIndicator {
         z: 999
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }
-        count: activitiesRepresentation.count
-        currentIndex: activitiesRepresentation.currentIndex
+        count: mainView.count
+        currentIndex: mainView.currentIndex
     }
-    property int startX
+ /*   property int startX
     onPressed: {
         startX = mouse.x - containment.x 
     }
@@ -91,7 +135,7 @@ MouseArea {
     }
     onReleased: {
         activityModel.setCurrentActivity("395250d4-d44b-4735-8494-4db49beb29dd", function(){});
-    }
+    }*/
     ActivityHandle {
         mirrored: true
     }
@@ -124,7 +168,7 @@ MouseArea {
             }
         }
     }
-
+/*
     onContainmentChanged: {
         if (containment == null) {
             return;
@@ -155,7 +199,7 @@ MouseArea {
             internal.oldContainment = containment;
         }
     }
-
+*/
     Binding {
         target: containment
         property: "width"
@@ -168,7 +212,7 @@ MouseArea {
         property Item oldContainment: null;
         property Item newContainment: null;
     }
-
+/*
     SequentialAnimation {
         id: switchAnim
         ScriptAction {
@@ -212,7 +256,7 @@ MouseArea {
             }
         }
     }
-
+*/
     //pass the focus to the containment, so it can react to homescreen activate/inactivate
     Connections {
         target: desktop
