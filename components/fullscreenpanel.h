@@ -21,6 +21,19 @@
 
 #include <QQuickWindow>
 
+namespace KWayland
+{
+namespace Client
+{
+class PlasmaWindow;
+class PlasmaShell;
+class PlasmaShellSurface;
+class Shell;
+class ShellSurface;
+class Surface;
+}
+}
+
 class FullScreenPanel : public QQuickWindow
 {
     Q_OBJECT
@@ -36,7 +49,13 @@ Q_SIGNALS:
 protected:
     void showEvent(QShowEvent *event);
 
-
+private:
+    void initWayland();
+    KWayland::Client::PlasmaShellSurface *m_plasmaShellSurface = nullptr;
+    KWayland::Client::ShellSurface *m_shellSurface = nullptr;
+    KWayland::Client::Surface *m_surface = nullptr;
+    KWayland::Client::PlasmaShell *m_plasmaShellInterface = nullptr;
+    KWayland::Client::Shell *m_shellInterface = nullptr;
 };
 
 #endif

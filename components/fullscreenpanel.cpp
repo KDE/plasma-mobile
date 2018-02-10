@@ -26,24 +26,78 @@
 
 #include <kwindowsystem.h>
 
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/plasmashell.h>
+#include <KWayland/Client/registry.h>
+#include <KWayland/Client/surface.h>
+#include <KWayland/Client/shell.h>
+
 FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
     : QQuickWindow(parent)
 {
-    setFlags(Qt::FramelessWindowHint);
-    setWindowState(Qt::WindowFullScreen);
+    //setFlags(Qt::FramelessWindowHint);
+    //setWindowState(Qt::WindowFullScreen);
    // connect(this, &FullScreenPanel::activeFocusItemChanged, this, [this]() {qWarning()<<"hide()";});
     connect(this, &QWindow::activeChanged, this, &FullScreenPanel::activeChanged);
+    initWayland();
 }
 
 FullScreenPanel::~FullScreenPanel()
 {
 }
 
+void FullScreenPanel::initWayland()
+{
+    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        return;
+    }
+    using namespace KWayland::Client;
+    ConnectionThread *connection = ConnectionThread::fromApplication(this);
+    if (!connection) {
+        return;
+    }
+    Registry *registry = new Registry(this);
+    registry->create(connection);
+
+    m_surface = Surface::fromWindow(this);
+    if (!m_surface) {
+        return;
+    }
+    connect(registry, &Registry::plasmaShellAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+
+            m_plasmaShellInterface = registry->createPlasmaShell(name, version, this);
+
+            m_plasmaShellSurface = m_plasmaShellInterface->createSurface(m_surface, this);
+            m_plasmaShellSurface->setSkipTaskbar(true);
+        }
+    );
+    connect(registry, &Registry::shellAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+
+            m_shellInterface = registry->createShell(name, version, this);
+            if (!m_shellInterface) {
+                return;
+            }
+            //bshah: following code results in error...
+            //wl_surface@67: error 0: ShellSurface already created
+            //Wayland display got fatal error 71: Protocol error
+            //Additionally, errno was set to 71: Protocol error
+            m_shellSurface = m_shellInterface->createSurface(m_surface, this);
+        }
+    );
+    registry->setup();
+    connection->roundtrip();
+}
+
 void FullScreenPanel::showEvent(QShowEvent *event)
 {
+    using namespace KWayland::Client;
     QQuickWindow::showEvent(event);
-    setWindowState(Qt::WindowFullScreen);
-    KWindowSystem::setState(winId(), NET::SkipTaskbar);
+
+    if (m_shellSurface) {
+        m_shellSurface->setFullscreen();
+    }
 }
 
 
