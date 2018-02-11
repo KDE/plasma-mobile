@@ -35,8 +35,8 @@
 FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
     : QQuickWindow(parent)
 {
-    //setFlags(Qt::FramelessWindowHint);
-    //setWindowState(Qt::WindowFullScreen);
+    setFlags(Qt::FramelessWindowHint);
+    setWindowState(Qt::WindowFullScreen);
    // connect(this, &FullScreenPanel::activeFocusItemChanged, this, [this]() {qWarning()<<"hide()";});
     connect(this, &QWindow::activeChanged, this, &FullScreenPanel::activeChanged);
     initWayland();
@@ -72,6 +72,7 @@ void FullScreenPanel::initWayland()
             m_plasmaShellSurface->setSkipTaskbar(true);
         }
     );
+    /*
     connect(registry, &Registry::shellAnnounced, this,
         [this, registry] (quint32 name, quint32 version) {
 
@@ -85,7 +86,7 @@ void FullScreenPanel::initWayland()
             //Additionally, errno was set to 71: Protocol error
             m_shellSurface = m_shellInterface->createSurface(m_surface, this);
         }
-    );
+    );*/
     registry->setup();
     connection->roundtrip();
 }
@@ -94,10 +95,7 @@ void FullScreenPanel::showEvent(QShowEvent *event)
 {
     using namespace KWayland::Client;
     QQuickWindow::showEvent(event);
-
-    if (m_shellSurface) {
-        m_shellSurface->setFullscreen();
-    }
+    setWindowState(Qt::WindowFullScreen);
 }
 
 
