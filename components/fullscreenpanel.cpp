@@ -42,10 +42,8 @@ FullScreenPanel::~FullScreenPanel()
 void FullScreenPanel::showEvent(QShowEvent *event)
 {
     QQuickWindow::showEvent(event);
-    setWindowState(Qt::WindowFullScreen);
     KWindowSystem::setState(winId(), NET::SkipTaskbar);
 }
-
 
 #include "fullscreenpanel.moc"
 

@@ -83,7 +83,7 @@ FullScreenPanel {
         property alias to: internalAnim.to
         property alias from: internalAnim.from
         ScriptAction {
-            script: window.visible = true;
+            script: window.showFullScreen();
         }
         NumberAnimation {
             id: internalAnim
