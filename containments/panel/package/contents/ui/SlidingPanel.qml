@@ -40,7 +40,7 @@ FullScreenPanel {
 
     property alias fixedArea: fixedArea
     function open() {
-        window.visible = true;
+        window.showFullScreen();
         peekAnim.running = true;
     }
     function close() {
