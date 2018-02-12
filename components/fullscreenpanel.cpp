@@ -95,7 +95,7 @@ void FullScreenPanel::showEvent(QShowEvent *event)
 {
     using namespace KWayland::Client;
     QQuickWindow::showEvent(event);
-    setWindowState(Qt::WindowFullScreen);
+//    setWindowState(Qt::WindowFullScreen);
 }
 
 
