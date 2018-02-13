@@ -29,91 +29,126 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
 
-MouseArea {
+Item {
     id: root
-    width: 1080
-    height: 1920
+    width: 0
+    height: 0
 
     property Item containment;
     property Item containmentNextActivityPreview;
     property Item wallpaper;
     property int notificationId: 0;
     property int buttonHeight: width/4
-    property bool containmentsEnterFromRight: true
-    drag.filterChildren: false
+    property bool loadCompleted: false
 
-    //HACK FIXME this timer hack is to wait activitiesView finished all its setup
-    //which we can't know for sure and suggests that we can't really use it
-    Timer {
-        id: hackTimer
-        interval: 1000
-        running: true
+    SmoothedAnimation {
+        id: switchAnim
+        target: activitiesView
+        properties: "contentX"
+        to: 0
+        //it's a long travel, we want a consistent velocity rather than duration
+        velocity: width
+        easing.type: Easing.InOutQuad
     }
-    ListView {
+    Flickable {
         id: activitiesView
-        z: 998
+        z: 99
         visible: root.containment
         interactive: true
         anchors.fill: parent
-        orientation: ListView.Horizontal
-        snapMode: ListView.SnapOneItem
+        contentWidth: activitiesLayout.width
+        contentHeight: height
         boundsBehavior: Flickable.StopAtBounds 
-        highlightMoveDuration: 0
-        highlightRangeMode: ListView.StrictlyEnforceRange
-        cacheBuffer: width * count * 2
-        model: Activities.ActivityModel {
-            id: activityModel
+        maximumFlickVelocity: width/5
+        property int currentIndex: -1
+
+        onCurrentIndexChanged: {
+            if (!activitiesLayout.loadCompleted) {
+                contentX = currentIndex * width;
+                return;
+            }
+            switchAnim.from = contentX;
+            switchAnim.to = currentIndex * width;
+            switchAnim.running = true;
         }
+        onFlickEnded: movementEnded();
+        onMovementEnded: {
+            currentIndex = Math.round(contentX / width);
+            //be sure the animation will work
+            currentIndexChanged();
+        }
+        //don't animate
+        onWidthChanged: contentX = currentIndex * width;
 
-        delegate: Rectangle {
-            radius: 100
-            id: mainDelegate
-            width: activitiesView.width
+        Row {
+            id: activitiesLayout
             height: activitiesView.height
-            property Item containment
-            readonly property bool inViewport: !hackTimer.running && root.containment &&
-                     ((x >= activitiesView.contentX &&
-                       x < activitiesView.contentX + activitiesView.width) ||
-                      (x + width > activitiesView.contentX &&
-                       x + width < activitiesView.contentX + activitiesView.width))
-            readonly property bool currentActivity: root.containment && model.current
+            spacing: 0
+            //don't try to do anything until we are well setted up
+            property bool loadCompleted: root.loadCompleted && width == activitiesView.width * (activitiesLayout.children.length - 1) && activitiesLayout.children.length == activityRepeater.count + 1
+            onLoadCompletedChanged: activitiesView.currentIndexChanged();
 
-            
-            Connections {
-                target: activitiesView
-                onMovementEnded: {
-                    if (activitiesView.currentIndex == index) {
-                        activityModel.setCurrentActivity(model.id, function(){
+            Repeater {
+                id: activityRepeater
+                model: Activities.ActivityModel {
+                    id: activityModel
+                }
+
+                delegate: Rectangle {
+                    radius: 100
+                    id: mainDelegate
+                    width: activitiesView.width
+                    height: activitiesView.height
+                    property Item containment
+                    readonly property bool inViewport: activitiesLayout.loadCompleted && root.containment &&
+                            ((x >= activitiesView.contentX &&
+                            x < activitiesView.contentX + activitiesView.width) ||
+                            (x + width > activitiesView.contentX &&
+                            x + width < activitiesView.contentX + activitiesView.width))
+                    readonly property bool currentActivity: root.containment && model.current
+
+                    
+                    Connections {
+                        target: activitiesView
+                        onMovementEnded: {
+                            if (activitiesView.currentIndex == index) {
+                                activityModel.setCurrentActivity(model.id, function(){
+                                    mainDelegate.containment.parent = mainDelegate;
+                                });
+                            }
+                        }
+                        onFlickEnded: activitiesView.movementEnded()
+                    }
+                    onInViewportChanged: {
+                        if (inViewport && !mainDelegate.containment) {
+                            mainDelegate.containment = desktop.containmentItemForActivity(model.id);
+                            containmentNextActivityPreview = containment;
                             mainDelegate.containment.parent = mainDelegate;
-                        });
+                            mainDelegate.containment.anchors.fill = mainDelegate;
+                        }
+                    }
+                    onCurrentActivityChanged: {
+                        if (currentActivity) {
+                            activitiesView.currentIndex = index;
+                        }
+                    }
+                    
+                    Text {
+                        z: 100
+                        text: "inViewport: " + mainDelegate.inViewport +
+                            "\n activitiesView.contentX: " + activitiesView.contentX +
+                            "\n mainDelegate.x: "+ mainDelegate.x +
+                            "\n (activitiesView.contentX + activitiesView.width):"+ (activitiesView.contentX + activitiesView.width) +
+                            "\n (mainDelegate.x + mainDelegate.width):" + (mainDelegate.x + mainDelegate.width)
                     }
                 }
-                onFlickEnded: activitiesView.movementEnded()
-            }
-            onInViewportChanged: {
-                if (inViewport && !mainDelegate.containment) {
-                    mainDelegate.containment = desktop.containmentItemForActivity(model.id);
-                    print(mainDelegate.containment+" "+root.containment);
-                    containmentNextActivityPreview = containment;
-                    mainDelegate.containment.parent = mainDelegate;
-                    mainDelegate.containment.anchors.fill = mainDelegate;
-                }
-            }
-            onCurrentActivityChanged: {
-                if (currentActivity) {
-                    activitiesView.positionViewAtIndex(index, ListView.Beginning);
-                    activitiesView.currentIndex = index;
-                }
-            }
-            
-            Text {
-                z: 100
-                text: mainDelegate.inViewport + " " + activitiesView.contentX +" "+ mainDelegate.x +" "+ (activitiesView.contentX + activitiesView.width) + " " + (mainDelegate.x + mainDelegate.width)
             }
         }
     }
+
+    //TODO: adjust its Y to current containment availablescreenrect
     PageIndicator {
-        z: 999
+        z: 100
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
@@ -121,27 +156,7 @@ MouseArea {
         count: activitiesView.count
         currentIndex: activitiesView.currentIndex
     }
- /*   property int startX
-    onPressed: {
-        startX = mouse.x - containment.x 
-    }
-    onPositionChanged: {
-        containment.x = mouse.x - startX
-        if (containment.x < 0) {
-            var cont = desktop.containmentItemForActivity("395250d4-d44b-4735-8494-4db49beb29dd");
-            if (cont != containmentNextActivityPreview) {
-                print(cont+" "+root.containment);
-                containmentNextActivityPreview = cont;
-                cont.width = root.width;
-                cont.height = root.height;
-                cont.parent = root;
-            }
-            containmentNextActivityPreview.x = containment.x + containment.width;
-        }
-    }
-    onReleased: {
-        activityModel.setCurrentActivity("395250d4-d44b-4735-8494-4db49beb29dd", function(){});
-    }*/
+
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
@@ -168,38 +183,7 @@ MouseArea {
             }
         }
     }
-/*
-    onContainmentChanged: {
-        if (containment == null) {
-            return;
-        }
 
-        if (switchAnim.running) {
-            //If the animation was still running, stop it and reset
-            //everything so that a consistent state can be kept
-            switchAnim.running = false;
-            internal.newContainment.visible = false;
-            internal.oldContainment.visible = false;
-            internal.oldContainment = null;
-        }
-
-        internal.newContainment = containment;
-        containment.visible = true;
-
-        if (internal.oldContainment != null && internal.oldContainment != containment) {
-            switchAnim.running = true;
-        } else {
-            //containment.anchors.left = root.left;
-            containment.anchors.top = root.top;
-            //containment.anchors.right = root.right;
-            containment.anchors.bottom = root.bottom;
-            if (internal.oldContainment) {
-                internal.oldContainment.visible = false;
-            }
-            internal.oldContainment = containment;
-        }
-    }
-*/
     Binding {
         target: containment
         property: "width"
@@ -212,51 +196,7 @@ MouseArea {
         property Item oldContainment: null;
         property Item newContainment: null;
     }
-/*
-    SequentialAnimation {
-        id: switchAnim
-        ScriptAction {
-            script: {
-                if (containment) {
-                    //containment.z = 1;
-                    //containment.x = root.containmentsEnterFromRight ? root.width : -root.width;
-                }
-                if (internal.oldContainment) {
-                    //internal.oldContainment.z = 0;
-                    //internal.oldContainment.x = 0;
-                }
-            }
-        }
-        ParallelAnimation {
-            NumberAnimation {
-                target: internal.oldContainment
-                properties: "x"
-                to: internal.newContainment != null ? (root.containmentsEnterFromRight ? -root.width : root.width) : 0
-                duration: 400
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: internal.newContainment
-                properties: "x"
-                to: 0
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        ScriptAction {
-            script: {
-                if (internal.oldContainment) {
-                    internal.oldContainment.visible = false;
-                }
-                if (containment) {
-                    containment.anchors.top = root.top;
-                    containment.anchors.bottom = root.bottom;
-                    internal.oldContainment = containment;
-                }
-            }
-        }
-    }
-*/
+
     //pass the focus to the containment, so it can react to homescreen activate/inactivate
     Connections {
         target: desktop
@@ -276,11 +216,21 @@ MouseArea {
         source: Qt.resolvedUrl("Pin.qml")
     }
 
-    Component.onCompleted: {
+    onWidthChanged: {
+        //There will be a resize at the very start which we can't avoid, don't do anything until then
         //configure the view behavior
-        if (desktop) {
+        if (desktop && root.width > 0) {
             desktop.width = width;
             desktop.height = height;
+            root.loadCompleted = true;
+        }
+    }
+    Component.onCompleted: {
+        //configure the view behavior
+        if (desktop && root.width > 0) {
+            desktop.width = width;
+            desktop.height = height;
+            root.loadCompleted = true;
         }
     }
 }
