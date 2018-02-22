@@ -18,7 +18,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.3
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -50,16 +50,16 @@ Item {
         velocity: width
         easing.type: Easing.InOutQuad
     }
-    Flickable {
+    MouseArea {
         id: activitiesView
         z: 99
         visible: root.containment
-        interactive: true
         anchors.fill: parent
-        contentWidth: activitiesLayout.width
-        contentHeight: height
-        boundsBehavior: Flickable.StopAtBounds 
-        maximumFlickVelocity: width/5
+        drag.filterChildren: true
+        drag.target: activitiesLayout
+        drag.axis: Drag.XAxis
+        drag.minimumX: -activitiesLayout.width + width
+        drag.maximumX: 0
         property int currentIndex: -1
 
         onCurrentIndexChanged: {
@@ -71,12 +71,12 @@ Item {
             switchAnim.to = currentIndex * width;
             switchAnim.running = true;
         }
-        onFlickEnded: movementEnded();
+  /*      onFlickEnded: movementEnded();
         onMovementEnded: {
             currentIndex = Math.round(contentX / width);
             //be sure the animation will work
             currentIndexChanged();
-        }
+        }*/
         //don't animate
         onWidthChanged: contentX = currentIndex * width;
 
@@ -101,10 +101,10 @@ Item {
                     height: activitiesView.height
                     property Item containment
                     readonly property bool inViewport: activitiesLayout.loadCompleted && root.containment &&
-                            ((x >= activitiesView.contentX &&
-                            x < activitiesView.contentX + activitiesView.width) ||
-                            (x + width > activitiesView.contentX &&
-                            x + width < activitiesView.contentX + activitiesView.width))
+                            ((x >= -activitiesLayout.x &&
+                            x < -activitiesLayout.x + activitiesView.width) ||
+                            (x + width > -activitiesLayout.x &&
+                            x + width < -activitiesLayout.x + activitiesView.width))
                     readonly property bool currentActivity: root.containment && model.current
 
                     
@@ -136,9 +136,9 @@ Item {
                     Text {
                         z: 100
                         text: "inViewport: " + mainDelegate.inViewport +
-                            "\n activitiesView.contentX: " + activitiesView.contentX +
+                            "\n -activitiesLayout.x: " + -activitiesLayout.x +
                             "\n mainDelegate.x: "+ mainDelegate.x +
-                            "\n (activitiesView.contentX + activitiesView.width):"+ (activitiesView.contentX + activitiesView.width) +
+                            "\n (-activitiesLayout.x + activitiesView.width):"+ (-activitiesLayout.x + activitiesView.width) +
                             "\n (mainDelegate.x + mainDelegate.width):" + (mainDelegate.x + mainDelegate.width)
                     }
                 }
