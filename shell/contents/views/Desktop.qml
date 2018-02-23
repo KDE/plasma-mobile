@@ -41,13 +41,10 @@ Item {
     property int buttonHeight: width/4
     property bool loadCompleted: false
 
-    SmoothedAnimation {
+    XAnimator {
         id: switchAnim
-        target: activitiesView
-        properties: "contentX"
-        to: 0
-        //it's a long travel, we want a consistent velocity rather than duration
-        velocity: width
+        target: activitiesLayout
+        duration: units.longDuration
         easing.type: Easing.InOutQuad
     }
     MouseArea {
@@ -61,25 +58,31 @@ Item {
         drag.minimumX: -activitiesLayout.width + width
         drag.maximumX: 0
         property int currentIndex: -1
+        property Item nextContainment: root.containment
 
-        onCurrentIndexChanged: {
+        function adjustPosition() {
             if (!activitiesLayout.loadCompleted) {
-                contentX = currentIndex * width;
+                activitiesLayout.x = - currentIndex * width;
                 return;
             }
-            switchAnim.from = contentX;
-            switchAnim.to = currentIndex * width;
+            switchAnim.from = activitiesLayout.x;
+            switchAnim.to = - currentIndex * width;
             switchAnim.running = true;
         }
-  /*      onFlickEnded: movementEnded();
-        onMovementEnded: {
-            currentIndex = Math.round(contentX / width);
-            //be sure the animation will work
-            currentIndexChanged();
-        }*/
+        onCurrentIndexChanged: adjustPosition();
+        
         //don't animate
         onWidthChanged: contentX = currentIndex * width;
 
+        onPositionChanged: {
+            var tempIndex = Math.round(-activitiesLayout.x / width);
+            nextContainment = activitiesLayout.children[tempIndex].containment;
+        }
+        onReleased: {
+            currentIndex = Math.round(-activitiesLayout.x / width);
+            //unconditionally run the slide anim
+            adjustPosition();
+        }
         Row {
             id: activitiesLayout
             height: activitiesView.height
@@ -94,23 +97,23 @@ Item {
                     id: activityModel
                 }
 
-                delegate: Rectangle {
-                    radius: 100
+                delegate: Item {
                     id: mainDelegate
                     width: activitiesView.width
                     height: activitiesView.height
                     property Item containment
+                    //inViewport should be only the current, and the other adjacent two
                     readonly property bool inViewport: activitiesLayout.loadCompleted && root.containment &&
                             ((x >= -activitiesLayout.x &&
-                            x < -activitiesLayout.x + activitiesView.width) ||
-                            (x + width > -activitiesLayout.x &&
+                            x <= -activitiesLayout.x + activitiesView.width) ||
+                            (x + width >= -activitiesLayout.x &&
                             x + width < -activitiesLayout.x + activitiesView.width))
                     readonly property bool currentActivity: root.containment && model.current
 
                     
                     Connections {
                         target: activitiesView
-                        onMovementEnded: {
+                        onCurrentIndexChanged: {
                             if (activitiesView.currentIndex == index) {
                                 activityModel.setCurrentActivity(model.id, function(){
                                     mainDelegate.containment.parent = mainDelegate;
@@ -132,7 +135,7 @@ Item {
                             activitiesView.currentIndex = index;
                         }
                     }
-                    
+                    /*DEBUG TODO remove
                     Text {
                         z: 100
                         text: "inViewport: " + mainDelegate.inViewport +
@@ -140,7 +143,7 @@ Item {
                             "\n mainDelegate.x: "+ mainDelegate.x +
                             "\n (-activitiesLayout.x + activitiesView.width):"+ (-activitiesLayout.x + activitiesView.width) +
                             "\n (mainDelegate.x + mainDelegate.width):" + (mainDelegate.x + mainDelegate.width)
-                    }
+                    }*/
                 }
             }
         }
@@ -151,12 +154,30 @@ Item {
         z: 100
         anchors {
             bottom: parent.bottom
+            bottomMargin: root.containment.availableScreenRect.y + root.containment.availableScreenRect.height
             horizontalCenter: parent.horizontalCenter
         }
         count: activitiesView.count
         currentIndex: activitiesView.currentIndex
     }
-
+    PlasmaCore.FrameSvgItem {
+        z: 100
+        opacity: activitiesView.drag.active ? 1 : 0
+        anchors.centerIn: parent
+        imagePath: "widgets/background"
+        width: childrenRect.width + units.gridUnit*2
+        height: childrenRect.height + units.gridUnit*2
+        PlasmaComponents.Label {
+            anchors.centerIn: parent
+            text: activitiesView.nextContainment.activityName
+        }
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
