@@ -22,6 +22,7 @@ Comment[tr]=Plasma Active kabuğu
 Comment[uk]=Портативна оболонка Плазми
 Comment[x-test]=xxPlasma Active shellxx
 Comment[zh_CN]=Plasma Active 外壳
+Comment[zh_TW]=Plasma Active shell
 Encoding=UTF-8
 Keywords=
 Name=Desktop
@@ -49,6 +50,7 @@ Name[tr]=Masaüstü
 Name[uk]=Стільниця
 Name[x-test]=xxDesktopxx
 Name[zh_CN]=桌面
+Name[zh_TW]=桌面
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell
