@@ -21,13 +21,13 @@
 import QtQuick 2
 import org.kde.solid 1.0 as Solid
 import org.kde.plasma.platformcomponents 2.0 as Platform
-
+import org.kde.kirigami 2.4 as Kirigami
 Item {
     id: main
 
     property string shell  : "org.kde.plasma.active"
-    property bool willing  : false
-    property int  priority : 1
+    property bool willing  : true
+    property int  priority : Kirigami.Settings.tabletMode ? 0 : 10
 
     // This is not needed, but allows the
     // handler to know whether its shell is loaded
