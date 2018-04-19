@@ -40,7 +40,17 @@ Item {
     property int notificationId: 0;
     property int buttonHeight: width/4
     property bool loadCompleted: false
+    property var candidateContainments: Object
 
+    Connections {
+        target: desktop
+        onCandidateContainmentsChanged: {
+            for (var i = 0; i < desktop.candidateContainments.length; ++i) {
+                var cont = desktop.candidateContainments[i];
+                root.candidateContainments[cont.activity] = cont;
+            }
+        }
+    }
     XAnimator {
         id: switchAnim
         target: activitiesLayout
@@ -124,7 +134,8 @@ Item {
                     }
                     onInViewportChanged: {
                         if (inViewport && !mainDelegate.containment) {
-                            mainDelegate.containment = desktop.containmentItemForActivity(model.id);
+                            mainDelegate.containment = root.candidateContainments[model.id];
+                            //desktop.containmentItemForActivity(model.id);
                             containmentNextActivityPreview = containment;
                             mainDelegate.containment.parent = mainDelegate;
                             mainDelegate.containment.anchors.fill = mainDelegate;
@@ -135,15 +146,6 @@ Item {
                             activitiesView.currentIndex = index;
                         }
                     }
-                    /*DEBUG TODO remove
-                    Text {
-                        z: 100
-                        text: "inViewport: " + mainDelegate.inViewport +
-                            "\n -activitiesLayout.x: " + -activitiesLayout.x +
-                            "\n mainDelegate.x: "+ mainDelegate.x +
-                            "\n (-activitiesLayout.x + activitiesView.width):"+ (-activitiesLayout.x + activitiesView.width) +
-                            "\n (mainDelegate.x + mainDelegate.width):" + (mainDelegate.x + mainDelegate.width)
-                    }*/
                 }
             }
         }
