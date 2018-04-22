@@ -18,8 +18,9 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.6
+import QtQuick 2.7
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -30,41 +31,145 @@ import "../components"
 
 Item {
     id: root
-    width: 1080
-    height: 1920
+    width: 0
+    height: 0
 
     property Item containment;
+    property Item containmentNextActivityPreview;
     property Item wallpaper;
     property int notificationId: 0;
     property int buttonHeight: width/4
-    property bool containmentsEnterFromRight: true
+    property bool loadCompleted: false
 
-    //NOTE: this 
-    PathView {
-        id: activitiesRepresentation
-        model: Activities.ActivityModel {
-            id: activityModel
+    XAnimator {
+        id: switchAnim
+        target: activitiesLayout
+        duration: units.longDuration
+        easing.type: Easing.InOutQuad
+    }
+    MouseArea {
+        id: activitiesView
+        z: 99
+        visible: root.containment
+        anchors.fill: parent
+        drag.filterChildren: true
+        drag.target: activitiesLayout
+        drag.axis: Drag.XAxis
+        drag.minimumX: -activitiesLayout.width + width
+        drag.maximumX: 0
+        property int currentIndex: -1
+        property Item nextContainment: root.containment
+
+        function adjustPosition() {
+            if (!activitiesLayout.loadCompleted) {
+                activitiesLayout.x = - currentIndex * width;
+                return;
+            }
+            switchAnim.from = activitiesLayout.x;
+            switchAnim.to = - currentIndex * width;
+            switchAnim.running = true;
         }
-        width: 10
-        height: 10
-        cacheItemCount: 999//count
-        delegate: Item {
-            Connections {
-                target: activitiesRepresentation
-                onCurrentIndexChanged: {
-                    if (index == activitiesRepresentation.currentIndex) {
-                        activityModel.setCurrentActivity(model.id, function(){});
+        onCurrentIndexChanged: adjustPosition();
+        
+        //don't animate
+        onWidthChanged: contentX = currentIndex * width;
+
+        onPositionChanged: {
+            var tempIndex = Math.round(-activitiesLayout.x / width);
+            nextContainment = activitiesLayout.children[tempIndex].containment;
+        }
+        onReleased: {
+            currentIndex = Math.round(-activitiesLayout.x / width);
+            //unconditionally run the slide anim
+            adjustPosition();
+        }
+        Row {
+            id: activitiesLayout
+            height: activitiesView.height
+            spacing: 0
+            //don't try to do anything until we are well setted up
+            property bool loadCompleted: root.loadCompleted && width == activitiesView.width * (activitiesLayout.children.length - 1) && activitiesLayout.children.length == activityRepeater.count + 1
+            onLoadCompletedChanged: activitiesView.currentIndexChanged();
+
+            Repeater {
+                id: activityRepeater
+                model: Activities.ActivityModel {
+                    id: activityModel
+                }
+
+                delegate: Item {
+                    id: mainDelegate
+                    width: activitiesView.width
+                    height: activitiesView.height
+                    property Item containment
+                    //inViewport should be only the current, and the other adjacent two
+                    readonly property bool inViewport: activitiesLayout.loadCompleted && root.containment &&
+                            ((x >= -activitiesLayout.x &&
+                            x <= -activitiesLayout.x + activitiesView.width) ||
+                            (x + width >= -activitiesLayout.x &&
+                            x + width < -activitiesLayout.x + activitiesView.width))
+                    readonly property bool currentActivity: root.containment && model.current
+
+                    
+                    Connections {
+                        target: activitiesView
+                        onCurrentIndexChanged: {
+                            if (activitiesView.currentIndex == index) {
+                                activityModel.setCurrentActivity(model.id, function(){
+                                    mainDelegate.containment.parent = mainDelegate;
+                                });
+                            }
+                        }
+                        onFlickEnded: activitiesView.movementEnded()
+                    }
+                    onInViewportChanged: {
+                        if (inViewport && !mainDelegate.containment) {
+                            mainDelegate.containment = desktop.candidateContainments[model.id];
+                            //desktop.containmentItemForActivity(model.id);
+                            containmentNextActivityPreview = containment;
+                            mainDelegate.containment.parent = mainDelegate;
+                            mainDelegate.containment.anchors.fill = mainDelegate;
+                        }
+                    }
+                    onCurrentActivityChanged: {
+                        if (currentActivity) {
+                            activitiesView.currentIndex = index;
+                        }
+                        mainDelegate.containment.visible = true;
                     }
                 }
             }
         }
     }
 
-    ActivityHandle {
-        mirrored: true
+    //TODO: adjust its Y to current containment availablescreenrect
+    PageIndicator {
+        z: 100
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: root.containment.availableScreenRect.y + root.containment.availableScreenRect.height
+            horizontalCenter: parent.horizontalCenter
+        }
+        count: activitiesView.count
+        currentIndex: activitiesView.currentIndex
     }
-    ActivityHandle {
-        mirrored: false
+    PlasmaCore.FrameSvgItem {
+        z: 100
+        opacity: activitiesView.drag.active ? 1 : 0
+        anchors.centerIn: parent
+        imagePath: "widgets/background"
+        width: childrenRect.width + units.gridUnit*2
+        height: childrenRect.height + units.gridUnit*2
+        PlasmaComponents.Label {
+            anchors.centerIn: parent
+            text: activitiesView.nextContainment.activityName
+        }
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
     function toggleWidgetExplorer(containment) {
@@ -93,97 +198,17 @@ Item {
         }
     }
 
-    onContainmentChanged: {
-        if (containment == null) {
-            return;
-        }
-
-        if (switchAnim.running) {
-            //If the animation was still running, stop it and reset
-            //everything so that a consistent state can be kept
-            switchAnim.running = false;
-            internal.newContainment.visible = false;
-            internal.oldContainment.visible = false;
-            internal.oldContainment = null;
-        }
-
-        internal.newContainment = containment;
-        containment.visible = true;
-
-        if (internal.oldContainment != null && internal.oldContainment != containment) {
-            switchAnim.running = true;
-        } else {
-            containment.anchors.left = root.left;
-            containment.anchors.top = root.top;
-            containment.anchors.right = root.right;
-            containment.anchors.bottom = root.bottom;
-            if (internal.oldContainment) {
-                internal.oldContainment.visible = false;
-            }
-            internal.oldContainment = containment;
-        }
+    Binding {
+        target: containment
+        property: "width"
+        value: root.width
     }
-
     //some properties that shouldn't be accessible from elsewhere
     QtObject {
         id: internal;
 
         property Item oldContainment: null;
         property Item newContainment: null;
-    }
-
-    SequentialAnimation {
-        id: switchAnim
-        ScriptAction {
-            script: {
-                if (containment) {
-                    containment.anchors.left = undefined;
-                    containment.anchors.top = undefined;
-                    containment.anchors.right = undefined;
-                    containment.anchors.bottom = undefined;
-                    containment.z = 1;
-                    containment.x = root.containmentsEnterFromRight ? root.width : -root.width;
-                }
-                if (internal.oldContainment) {
-                    internal.oldContainment.anchors.left = undefined;
-                    internal.oldContainment.anchors.top = undefined;
-                    internal.oldContainment.anchors.right = undefined;
-                    internal.oldContainment.anchors.bottom = undefined;
-                    internal.oldContainment.z = 0;
-                    internal.oldContainment.x = 0;
-                }
-            }
-        }
-        ParallelAnimation {
-            NumberAnimation {
-                target: internal.oldContainment
-                properties: "x"
-                to: internal.newContainment != null ? (root.containmentsEnterFromRight ? -root.width : root.width) : 0
-                duration: 400
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: internal.newContainment
-                properties: "x"
-                to: 0
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        ScriptAction {
-            script: {
-                if (internal.oldContainment) {
-                    internal.oldContainment.visible = false;
-                }
-                if (containment) {
-                    containment.anchors.left = root.left;
-                    containment.anchors.top = root.top;
-                    containment.anchors.right = root.right;
-                    containment.anchors.bottom = root.bottom;
-                    internal.oldContainment = containment;
-                }
-            }
-        }
     }
 
     //pass the focus to the containment, so it can react to homescreen activate/inactivate
@@ -205,11 +230,21 @@ Item {
         source: Qt.resolvedUrl("Pin.qml")
     }
 
-    Component.onCompleted: {
+    onWidthChanged: {
+        //There will be a resize at the very start which we can't avoid, don't do anything until then
         //configure the view behavior
-        if (desktop) {
+        if (desktop && root.width > 0) {
             desktop.width = width;
             desktop.height = height;
+            root.loadCompleted = true;
+        }
+    }
+    Component.onCompleted: {
+        //configure the view behavior
+        if (desktop && root.width > 0) {
+            desktop.width = width;
+            desktop.height = height;
+            root.loadCompleted = true;
         }
     }
 }

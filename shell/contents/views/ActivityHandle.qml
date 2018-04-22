@@ -33,6 +33,7 @@ MouseArea {
         right: handle.mirrored ? parent.right : undefined
         left: handle.mirrored ? undefined : parent.left
     }
+    property Item frame: nextActivityLabel
     width: units.gridUnit
     drag.target: nextActivityLabel
     drag.axis: Drag.XAxis
