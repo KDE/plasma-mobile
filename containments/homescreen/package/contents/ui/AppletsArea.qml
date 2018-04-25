@@ -24,7 +24,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-MouseArea {
+import Qt.labs.handlers 1.0
+
+Item {
     id: headerItem
     z: 999
     property Item layout: appletsLayout
@@ -39,31 +41,18 @@ MouseArea {
     property int oldMouseX
     property int oldMouseY
 
-    drag.filterChildren: true
-    EventGenerator {
-        id: eventGenerator
-    }
 
-    SequentialAnimation {
-        id: removeAnim
-        property Item target
-        property real to
-        NumberAnimation {
-            properties: "x"
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
-            target: removeAnim.target
-            to: removeAnim.to
-        }
-        ScriptAction {
-            script: removeAnim.target.applet.action("remove").trigger();
-        }
+    TapHandler {
+        longPressThreshold: 3000
+        onLongPressed: editOverlay.visible = true;
     }
-
+/*
     onPressed: {
         startMouseX = mouse.x;
         startMouseY = mouse.y;
     }
+    */
+/*
     onPressAndHold: {
         var absolutePos = mapToItem(appletsLayout, mouse.x, mouse.y);
         var absoluteStartPos = mapToItem(appletsLayout, startMouseX, startMouseY);
@@ -158,7 +147,7 @@ MouseArea {
         dndSpacer.parent = colorScope;
         draggingApplet = null;
     }
-
+*/
     ColumnLayout {
         id: mainLayout
         anchors {

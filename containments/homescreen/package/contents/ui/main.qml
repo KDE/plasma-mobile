@@ -161,9 +161,24 @@ Item {
         }
     }
 
+    SequentialAnimation {
+        id: removeAnim
+        property Item target
+        property real to
+        NumberAnimation {
+            properties: "x"
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+            target: removeAnim.target
+            to: removeAnim.to
+        }
+        ScriptAction {
+            script: removeAnim.target.applet.action("remove").trigger();
+        }
+    }
     Component {
         id: appletContainerComponent
-        MouseArea {
+        Item {
             id: appletContainer
             //not used yet
             property bool animationsEnabled: true
@@ -173,6 +188,36 @@ Item {
             Layout.fillWidth: true
             Layout.fillHeight: applet && applet.Layout.fillHeight
 
+            onYChanged: editOverlay.opacity = 0
+            Item {
+                anchors.fill:parent
+                z: 2
+                DragHandler {
+                    id: drag
+                    target: appletContainer
+                    //grabPermissions: TapHandler.TakeOverForbidden
+                    longPressThreshold: 2000
+                    onActiveChanged: {
+                        if (active) {
+                            editOverlay.applet = appletContainer;
+                            editOverlay.visible = true;
+                            editOverlay.parent = applicationsView.headerItem;
+                        } else {
+                            if (appletContainer.x > -appletContainer.width/3 && appletContainer.x < appletContainer.width/3) {
+                                appletContainer.x = 0;
+                                root.layoutManager.insertBefore( dndSpacer, appletContainer);
+                            } else {
+                                removeAnim.target = appletContainer;
+                                removeAnim.to = (appletContainer.x > 0) ? root.width : -root.width
+                                removeAnim.running = true;
+                            }
+                            applicationsView.interactive = true;
+                            dndSpacer.parent = colorScope;
+                        }
+                    }
+                    //gesturePolicy: TapHandler.WithinBounds
+                }
+            }
             Connections {
                 target: plasmoid
 
@@ -257,117 +302,6 @@ Item {
     Item {
         id: mainListener
         anchors.fill: parent
-
-        //Events handling: those events are about clicking and reordering of app icons
-        //applet related events are in AppeltsArea.qml
-        /*onPressAndHold: {
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-            //in favorites area?
-            var item;
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
-            } else {
-                pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-                item = applicationsView.itemAt(pos.x, pos.y)
-            }
-            if (!item) {
-                return;
-            }
-
-            applicationsView.dragData = new Object;
-            applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
-            applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
-            applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
-            applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
-            applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
-            
-            dragDelegate.modelData = applicationsView.dragData;
-            applicationsView.interactive = false;
-            root.reorderingApps = true;
-            dragDelegate.x = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight
-            dragDelegate.y = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight
-            dragDelegate.xTarget = mouse.x - dragDelegate.width/2;
-            dragDelegate.yTarget = mouse.y - dragDelegate.width/2;
-            dragDelegate.opacity = 1;
-        }*/
-        /*onPositionChanged: {
-            if (!applicationsView.dragData) {
-                return;
-            }
-            dragDelegate.x = mouse.x - dragDelegate.width/2;
-            dragDelegate.y = mouse.y - dragDelegate.height/2;
-            
-            var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-
-            //in favorites area?
-            if (applicationsView.headerItem.favoritesStrip.contains(mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y))) {
-                pos.y = 1;
-            }
-
-            var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.floor(pos.y / applicationsView.cellHeight) + Math.floor(pos.x / applicationsView.cellWidth));
-
-            if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
-                plasmoid.nativeInterface.applicationListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
-                applicationsView.dragData.ApplicationOriginalRowRole = newRow;
-            }
-
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-            //FAVORITES
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                root.stopScroll();
-            //SCROLL UP
-            } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
-                root.scrollUp();
-            //SCROLL DOWN
-            } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
-                root.scrollDown();
-            //DON't SCROLL
-            } else {
-                root.stopScroll();
-            }
-
-        }*/
-        /*onReleased: {
-            if (krunner.showingResults) {
-                return;
-            }
-            applicationsView.interactive = true;
-            dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight;
-            dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight;
-            dragDelegate.opacity = 0;
-            if (dragDelegate.modelData) {
-                dragDelegate.modelData.ApplicationIconRole = "";
-                dragDelegate.modelDataChanged();
-            }
-            applicationsView.dragData = null;
-            root.reorderingApps = false;
-            applicationsView.forceLayout();
-            root.stopScroll();
-        }
-        onClicked: {
-            if (krunner.showingResults) {
-                return;
-            }
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-
-            //in favorites area?
-            var item;
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
-            } else {
-                pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-                item = applicationsView.itemAt(pos.x, pos.y)
-            }
-            if (!item) {
-                return;
-            }
-
-            clickFedbackAnimation.target = item;
-            clickFedbackAnimation.running = true;
-            feedbackWindow.title = item.modelData.ApplicationNameRole;
-            feedbackWindow.state = "open";
-            plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
-        }*/
 
         PlasmaCore.ColorScope {
             anchors.fill: parent
@@ -535,37 +469,54 @@ Item {
                     visible: index > 3
                     DragHandler {
                         target: dragDelegate
-                        onGrabChanged: {
-                            //FIXME: assumes it's getting it, losing grab
-                            
-                            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, point.position.x, point.position.y);
-                            //in favorites area?
-                            var item;
-                            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
-                            } else {
-                                pos = mapToItem(applicationsView.contentItem, point.position.x, point.position.y);
-                                item = applicationsView.itemAt(pos.x, pos.y)
-                            }
-                            if (!item) {
-                                return;
-                            }
+                        longPressThreshold: 3000
+                        onActiveChanged: {
+                            if (active) {
+                                var pos = mapToItem(applicationsView.headerItem.favoritesStrip, point.position.x, point.position.y);
+                                //in favorites area?
+                                var item;
+                                if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+                                    item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
+                                } else {
+                                    pos = mapToItem(applicationsView.contentItem, point.position.x, point.position.y);
+                                    item = applicationsView.itemAt(pos.x, pos.y)
+                                }
+                                if (!item) {
+                                    return;
+                                }
 
-                            applicationsView.dragData = new Object;
-                            applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
-                            applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
-                            applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
-                            applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
-                            applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
-                            
-                            dragDelegate.modelData = applicationsView.dragData;
-                            applicationsView.interactive = false;
-                            root.reorderingApps = true;
-                            dragDelegate.x = Math.floor(point.position.x / root.buttonHeight) * root.buttonHeight
-                            dragDelegate.y = Math.floor(point.position.y / root.buttonHeight) * root.buttonHeight
-                            dragDelegate.xTarget = point.position.x - dragDelegate.width/2;
-                            dragDelegate.yTarget = point.position.y - dragDelegate.width/2;
-                            dragDelegate.opacity = 1;
+                                applicationsView.dragData = new Object;
+                                applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
+                                applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
+                                applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
+                                applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
+                                applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
+                                
+                                dragDelegate.modelData = applicationsView.dragData;
+                                applicationsView.interactive = false;
+                                root.reorderingApps = true;
+                                dragDelegate.x = Math.floor(point.position.x / root.buttonHeight) * root.buttonHeight
+                                dragDelegate.y = Math.floor(point.position.y / root.buttonHeight) * root.buttonHeight
+                                dragDelegate.xTarget = point.position.x - dragDelegate.width/2;
+                                dragDelegate.yTarget = point.position.y - dragDelegate.width/2;
+                                dragDelegate.opacity = 1;
+                            } else {
+                                if (krunner.showingResults) {
+                                    return;
+                                }
+                                applicationsView.interactive = true;
+                                dragDelegate.xTarget = Math.floor(point.position.x / root.buttonHeight) * root.buttonHeight;
+                                dragDelegate.yTarget = Math.floor(point.position.y / root.buttonHeight) * root.buttonHeight;
+                                dragDelegate.opacity = 0;
+                                if (dragDelegate.modelData) {
+                                    dragDelegate.modelData.ApplicationIconRole = "";
+                                    dragDelegate.modelDataChanged();
+                                }
+                                applicationsView.dragData = null;
+                                root.reorderingApps = false;
+                                applicationsView.forceLayout();
+                                root.stopScroll();
+                            }
                         }
                         onCanceled: {
                             
