@@ -26,6 +26,8 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import "LayoutManager.js" as LayoutManager
 
+import Qt.labs.handlers 1.0
+
 Item {
     id: root
     width: 480
@@ -252,13 +254,13 @@ Item {
         id: editOverlay
         z: 999
     }
-    MouseEventListener {
+    Item {
         id: mainListener
         anchors.fill: parent
 
         //Events handling: those events are about clicking and reordering of app icons
         //applet related events are in AppeltsArea.qml
-        onPressAndHold: {
+        /*onPressAndHold: {
             var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
             //in favorites area?
             var item;
@@ -287,8 +289,8 @@ Item {
             dragDelegate.xTarget = mouse.x - dragDelegate.width/2;
             dragDelegate.yTarget = mouse.y - dragDelegate.width/2;
             dragDelegate.opacity = 1;
-        }
-        onPositionChanged: {
+        }*/
+        /*onPositionChanged: {
             if (!applicationsView.dragData) {
                 return;
             }
@@ -324,8 +326,8 @@ Item {
                 root.stopScroll();
             }
 
-        }
-        onReleased: {
+        }*/
+        /*onReleased: {
             if (krunner.showingResults) {
                 return;
             }
@@ -365,7 +367,7 @@ Item {
             feedbackWindow.title = item.modelData.ApplicationNameRole;
             feedbackWindow.state = "open";
             plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
-        }
+        }*/
 
         PlasmaCore.ColorScope {
             anchors.fill: parent
@@ -432,6 +434,41 @@ Item {
                 property int xTarget
                 property int yTarget
 
+                onYChanged: {
+                    if (!applicationsView.dragData) {
+                        return;
+                    }
+                                
+                    var pos = mapToItem(applicationsView.contentItem, width/2, height/2);
+
+                    //in favorites area?
+                    if (applicationsView.headerItem.favoritesStrip.contains(mapToItem(applicationsView.headerItem.favoritesStrip, width/2, y+height/2))) {
+                        pos.y = 1;
+                    }
+
+                    var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.floor(pos.y / applicationsView.cellHeight) + Math.floor(pos.x / applicationsView.cellWidth));
+
+                    if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
+                        plasmoid.nativeInterface.applicationListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
+                        applicationsView.dragData.ApplicationOriginalRowRole = newRow;
+                    }
+
+                    var pos = mapToItem(applicationsView.headerItem.favoritesStrip, x + width/2, y + width/2);
+                    //FAVORITES
+                    if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+                        root.stopScroll();
+                    //SCROLL UP
+                    } else if (applicationsView.contentY > 0 && y + width/2 < root.buttonHeight + root.height / 4) {
+                        root.scrollUp();
+                    //SCROLL DOWN
+                    } else if (!applicationsView.atYEnd && y + width/2 > 3 * (root.height / 4)) {
+                        root.scrollDown();
+                    //DON't SCROLL
+                    } else {
+                        root.stopScroll();
+                    }
+
+                }
                 Behavior on opacity {
                     ParallelAnimation {
                         OpacityAnimator {
@@ -496,6 +533,53 @@ Item {
                 //clip: true
                 delegate: HomeLauncher {
                     visible: index > 3
+                    DragHandler {
+                        target: dragDelegate
+                        onGrabChanged: {
+                            //FIXME: assumes it's getting it, losing grab
+                            
+                            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, point.position.x, point.position.y);
+                            //in favorites area?
+                            var item;
+                            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
+                                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
+                            } else {
+                                pos = mapToItem(applicationsView.contentItem, point.position.x, point.position.y);
+                                item = applicationsView.itemAt(pos.x, pos.y)
+                            }
+                            if (!item) {
+                                return;
+                            }
+
+                            applicationsView.dragData = new Object;
+                            applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
+                            applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
+                            applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
+                            applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
+                            applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
+                            
+                            dragDelegate.modelData = applicationsView.dragData;
+                            applicationsView.interactive = false;
+                            root.reorderingApps = true;
+                            dragDelegate.x = Math.floor(point.position.x / root.buttonHeight) * root.buttonHeight
+                            dragDelegate.y = Math.floor(point.position.y / root.buttonHeight) * root.buttonHeight
+                            dragDelegate.xTarget = point.position.x - dragDelegate.width/2;
+                            dragDelegate.yTarget = point.position.y - dragDelegate.width/2;
+                            dragDelegate.opacity = 1;
+                        }
+                        onCanceled: {
+                            
+                        }
+                    }
+                    TapHandler {
+                        onSingleTapped: {
+                            clickFedbackAnimation.target = parent;
+                            clickFedbackAnimation.running = true;
+                            feedbackWindow.title = modelData.ApplicationNameRole;
+                            feedbackWindow.state = "open";
+                            plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
+                        }
+                    }
                 }
                 header: AppletsArea {}
                 footer: Item {
