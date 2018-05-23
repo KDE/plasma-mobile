@@ -42,6 +42,7 @@ Name[x-test]=xxFilesxx
 Name[zh_CN]=文件
 Name[zh_TW]=檔案
 GenericName=File browser
+GenericName[ast]=Restolador de ficheros
 GenericName[bs]=Preglednik datoteka
 GenericName[ca]=Navegador de fitxers
 GenericName[ca@valencia]=Navegador de fitxers
