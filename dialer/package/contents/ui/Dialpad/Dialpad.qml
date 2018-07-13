@@ -26,34 +26,37 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 GridLayout {
     id: pad
     columns: 3
+    rowSpacing: 10
+    columnSpacing: 10
 
     property var callback
     property var pressedCallback
     property var releasedCallback
 
-    property int buttonHeight: parent.height / 6
-
-    DialerButton { id: one; text: "1" } 
+    DialerButton { id: one; text: "1" }
     DialerButton { text: "2"; sub: "ABC" }
     DialerButton { text: "3"; sub: "DEF" }
 
-    DialerButton { text: "4"; sub: "GHI" } 
+    DialerButton { text: "4"; sub: "GHI" }
     DialerButton { text: "5"; sub: "JKL" }
     DialerButton { text: "6"; sub: "MNO" }
 
-    DialerButton { text: "7"; sub: "PQRS" } 
+    DialerButton { text: "7"; sub: "PQRS" }
     DialerButton { text: "8"; sub: "TUV" }
     DialerButton { text: "9"; sub: "WXYZ" }
 
-    DialerButton { text: "*"; } 
-    DialerButton { text: "0"; sub: "+"; }
-    DialerButton { text: "#" }
+    DialerButton { display: "＊"; text: "*"; special: true; }
+    DialerButton { text: "0"; subdisplay: "＋"; sub: "+"; }
+    DialerButton { display: "＃"; text: "#"; special: true; }
 
+    Item {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+    }
     DialerIconButton {
         id: callButton
         Layout.fillWidth: true
-        Layout.maximumHeight: buttonHeight
-        Layout.minimumHeight: Layout.maximumHeight
+        Layout.fillHeight: true
 
         enabled: status.text.length > 0
         opacity: enabled ? 1 : 0.5
@@ -64,19 +67,6 @@ GridLayout {
     }
     Item {
         Layout.fillWidth: true
-    }
-    DialerIconButton {
-        Layout.fillWidth: true
-        Layout.maximumHeight: buttonHeight
-        Layout.minimumHeight: Layout.maximumHeight
-
-        enabled: status.text.length > 0
-        opacity: enabled ? 1 : 0.5
-        source: "edit-clear"
-        callback: function(text) {
-            if (status.text.length > 0) {
-                status.text = status.text.substr(0, status.text.length - 1);
-            }
-        }
+        Layout.fillHeight: true
     }
 }

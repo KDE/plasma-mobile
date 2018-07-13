@@ -96,6 +96,3 @@ void FullScreenPanel::showEvent(QShowEvent *event)
     using namespace KWayland::Client;
     QQuickWindow::showEvent(event);
 }
-
-#include "fullscreenpanel.moc"
-

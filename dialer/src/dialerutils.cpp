@@ -20,7 +20,6 @@
 
 #include <QDebug>
 
-#include <KLocalizedString>
 #include <TelepathyQt/PendingOperation>
 #include <TelepathyQt/PendingChannelRequest>
 #include <TelepathyQt/PendingReady>
@@ -28,6 +27,9 @@
 #include <TelepathyQt/PendingContacts>
 #include <TelepathyQt/Types>
 #include <TelepathyQt/ContactManager>
+
+#include "phonenumbers/phonenumberutil.h"
+#include "phonenumbers/asyoutypeformatter.h"
 
 DialerUtils::DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent)
 : QObject(parent),
@@ -75,6 +77,33 @@ void DialerUtils::dial(const QString &number)
 QString DialerUtils::callState() const
 {
     return m_callState;
+}
+
+const QString DialerUtils::formatNumber(const QString& number)
+{
+    using namespace ::i18n::phonenumbers;
+
+    // Get formatter instance
+    QLocale locale;
+    QStringList qcountry = locale.name().split('_');
+    QString countrycode(qcountry.constLast());
+    const char* country = countrycode.toUtf8().constData();
+    PhoneNumberUtil* util = PhoneNumberUtil::GetInstance();
+    AsYouTypeFormatter* formatter = util->PhoneNumberUtil::GetAsYouTypeFormatter(country);
+
+    // Normalize input
+    string stdnumber = number.toUtf8().constData();
+    util->NormalizeDiallableCharsOnly(&stdnumber);
+
+    // Format
+    string formatted;
+    formatter->Clear();
+    for (char& c : stdnumber) {
+        formatter->InputDigit(c, &formatted);
+    }
+    delete formatter;
+
+    return QString::fromStdString(formatted);
 }
 
 void DialerUtils::setCallState(const QString &state)

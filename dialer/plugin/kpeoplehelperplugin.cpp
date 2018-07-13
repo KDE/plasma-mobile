@@ -27,5 +27,3 @@ void KPeopleHelperPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<KPeopleHelper>(uri, 1, 0, "KPeopleHelper");
 }
-
-#include "kpeoplehelperplugin.moc"

@@ -29,10 +29,6 @@ Item {
 
     property alias numberEntryText: status.text
 
-    function addNumber(number) {
-        status.text = status.text + number
-    }
-
     Rectangle {
         width: parent.width / 2
         x: parent.width / 4
@@ -59,16 +55,13 @@ Item {
             margins: units.largeSpacing
         }
 
-        PlasmaComponents.Label {
+        PhoneNumberInput {
             id: status
-            Layout.fillWidth: true
-            Layout.minimumHeight: parent.height / 6
-            Layout.maximumHeight: Layout.minimumHeight
 
-            horizontalAlignment: Qt.AlignRight
-            verticalAlignment: Qt.AlignVCenter
-            font.pointSize: 1024
-            fontSizeMode: Text.Fit
+            Layout.fillWidth: true
+            Layout.minimumHeight: units.gridUnit * 3.5
+            Layout.maximumHeight: Layout.minimumHeight
+            font.pointSize: 30
         }
 
         Dialpad {
@@ -76,7 +69,7 @@ Item {
             Layout.fillHeight: true
 
             callback: function (string) {
-                addNumber(string);
+                status.append(string)
             }
             pressedCallback: function (string) {
                 //TODO

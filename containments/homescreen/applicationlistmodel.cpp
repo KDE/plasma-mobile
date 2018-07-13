@@ -201,7 +201,7 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     return m_applicationList.count();
 }
 
-void ApplicationListModel::moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild)
+void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int sourceRow, const QModelIndex& /* destinationParent */, int destinationChild)
 {
     moveItem(sourceRow, destinationChild);
 }
@@ -249,7 +249,7 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
-    KRun::run(*service, QList<QUrl>(), 0);
+    KRun::runService(*service, QList<QUrl>(), 0);
 }
 
 QStringList ApplicationListModel::appOrder() const
@@ -272,5 +272,3 @@ void ApplicationListModel::setAppOrder(const QStringList &order)
     }
     emit appOrderChanged();
 }
-
-#include "applicationlistmodel.moc"

@@ -56,7 +56,7 @@ Item {
             id: icon
             anchors.verticalCenter: parent.verticalCenter
             width: height
-            height: buttonRoot.height * 0.6
+            height: units.gridUnit * 3.5
         }
         PlasmaComponents.Label {
             id: label

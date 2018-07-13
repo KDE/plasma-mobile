@@ -9,6 +9,7 @@
  *
  *   This program is distributed in the hope that it will be useful,
  *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+
  *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *   GNU Library General Public License for more details
  *
@@ -23,22 +24,16 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-PlasmaComponents.Label {
+Item {
+    id: root
     Layout.fillWidth: true
     Layout.fillHeight: true
 
-    //This is 0 to override the Label default height that would cause a binding loop
-    height: 0
-    horizontalAlignment: Text.AlignHCenter
-    verticalAlignment: Text.AlignTop
-    font.pointSize: 21 //anything higher for some reason makes number 4 not rendered
-    minimumPointSize: 8
-    fontSizeMode: Text.VerticalFit
-
-    property alias sub: longHold.text
-    property var callback
-    property var pressedCallback
-    property var releasedCallback
+    property string text
+    property string sub
+    property string display
+    property string subdisplay
+    property bool special: false
 
     Rectangle {
         anchors.fill: parent
@@ -57,68 +52,61 @@ PlasmaComponents.Label {
     MouseArea {
         id: mouse
         anchors.fill: parent
+
         onPressed: {
-            if (pressedCallback) {
-                pressedCallback(parent.text);
-            } else if (pad.pressedCallback) {
+            if (pad.pressedCallback) {
                 pad.pressedCallback(parent.text);
             }
         }
         onReleased: {
-            if (releasedCallback) {
-                releasedCallback(parent.text);
-            } else if (pad.releasedCallback) {
+            if (pad.releasedCallback) {
                 pad.releasedCallback(parent.text);
             }
         }
         onCanceled: {
-            if (releasedCallback) {
-                releasedCallback(parent.text);
-            } else if (pad.releasedCallback) {
+            if (pad.releasedCallback) {
                 pad.releasedCallback(parent.text);
             }
         }
-
         onClicked: {
-            if (callback) {
-                callback(parent.text);
-            } else if (pad.callback) {
+            if (pad.callback) {
                 pad.callback(parent.text);
             }
         }
-
         onPressAndHold: {
-            var text;
-            if (longHold.visible) {
-                text = longHold.text;
-            } else {
-                text = parent.text;
-            }
-
-            if (text.length > 1) {
-                return;
-            }
-
-            if (callback) {
-                callback(text);
-            } else if (pad.callback) {
+            var text = parent.sub.length > 0 ? parent.sub : parent.text
+            if (pad.callback && text.length === 1) {
                 pad.callback(text);
             }
         }
     }
 
-    PlasmaComponents.Label {
-        id: longHold
-        anchors {
-            bottom: parent.bottom
-        }
-        height: parent.height * 0.4
-        width: parent.width
-        verticalAlignment: Text.AlignBottom
-        horizontalAlignment: Text.AlignHCenter
-        visible: text.length > 0
-        opacity: 0.4
+    ColumnLayout {
+        spacing: -5
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
 
-        fontSizeMode: Text.VerticalFit
+        PlasmaComponents.Label {
+            id: main
+
+            text: root.display || root.text
+            opacity: special? 0.4 : 1.0
+            // anything higher for some reason makes number 4 not rendered
+            font.pointSize: 30
+            fontSizeMode: Text.VerticalFit
+            Layout.minimumWidth: parent.width
+            horizontalAlignment: Text.AlignHCenter
+        }
+
+        PlasmaComponents.Label {
+            id: longHold
+
+            text: root.subdisplay || root.sub
+            opacity: 0.4
+            font.pointSize: 16
+            fontSizeMode: Text.VerticalFit
+            Layout.minimumWidth: parent.width
+            horizontalAlignment: Text.AlignHCenter
+        }
     }
 }
