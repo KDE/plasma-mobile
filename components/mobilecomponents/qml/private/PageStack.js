@@ -227,7 +227,7 @@ function orientationChanges(oldPage, newPage) {
 // Clears the page stack.
 function clear() {
     var container;
-    while (container = pageStack.pop()) {
+    while (container == pageStack.pop()) {
         container.cleanup();
     }
     depth = 0;
