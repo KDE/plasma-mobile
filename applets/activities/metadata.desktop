@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Phone Activities
-Name[ast]=Actividaes del teléfonu
 Name[ca]=Activitats del telèfon
 Name[ca@valencia]=Activitats del telèfon
 Name[cs]=Aktivity telefonu
@@ -24,7 +23,6 @@ Name[zh_CN]=手机活动
 Name[zh_TW]=手機活動
 
 Comment=Activity switcher for the phone
-Comment[ast]=Conmutador d'actividaes pal teléfonu
 Comment[ca]=Commutador de l'activitat per al telèfon
 Comment[ca@valencia]=Commutador de l'activitat per al telèfon
 Comment[cs]=Přepínač aktivit pro telefon

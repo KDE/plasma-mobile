@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Notifications
-Name[ast]=Avisos
 Name[ca]=Notificacions
 Name[ca@valencia]=Notificacions
 Name[cs]=Oznamování
@@ -23,7 +22,6 @@ Name[x-test]=xxNotificationsxx
 Name[zh_CN]=通知
 Name[zh_TW]=通知
 Comment=Display notifications and jobs
-Comment[ast]=Amuesa avisos y trabayos
 Comment[ca]=Mostra les notificacions i els treballs
 Comment[ca@valencia]=Mostra les notificacions i els treballs
 Comment[cs]=Oznámení a úlohy

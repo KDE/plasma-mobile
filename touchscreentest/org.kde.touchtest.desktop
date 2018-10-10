@@ -1,6 +1,5 @@
 [Desktop Entry]
 Name=Touch Test
-Name[ast]=Prueba táutil
 Name[ca]=Prova el tàctil
 Name[ca@valencia]=Prova el tàctil
 Name[cs]=Test doteku
@@ -24,7 +23,6 @@ Categories=Qt;KDE;System;Development;
 
 Exec=touchtest
 GenericName=Terminal
-GenericName[ast]=Terminal
 GenericName[ca]=Terminal
 GenericName[ca@valencia]=Terminal
 GenericName[cs]=Terminál

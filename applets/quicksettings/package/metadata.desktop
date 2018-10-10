@@ -1,7 +1,6 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Quick Settings
-Name[ast]=Axustes rápidos
 Name[ca]=Opcions ràpides
 Name[ca@valencia]=Opcions ràpides
 Name[cs]=Rychlé nastavení
@@ -23,7 +22,6 @@ Name[x-test]=xxQuick Settingsxx
 Name[zh_TW]=快速設定
 
 Comment=A panel to quickly access most important settings
-Comment[ast]=Un panel p'acceder aína a les opciones más importantes
 Comment[ca]=Un plafó per accedir ràpidament a les opcions més importants
 Comment[ca@valencia]=Un plafó per accedir ràpidament a les opcions més importants
 Comment[en_GB]=A panel to quickly access most important settings
