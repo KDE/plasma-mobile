@@ -10,7 +10,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 
 find_package(ECM 0.0.9 REQUIRED NO_MODULE)
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR} ${CMAKE_SOURCE_DIR}/cmake)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -32,9 +32,6 @@ find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED
                        PURPOSE "Required for interacting with the compositor")
-
-
-feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
 include(CheckIncludeFiles)
 
@@ -64,3 +61,5 @@ add_subdirectory(containments)
 add_subdirectory(dialer)
 add_subdirectory(sounds)
 #add_subdirectory(touchscreentest)
+
+feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

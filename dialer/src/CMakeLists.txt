@@ -11,10 +11,10 @@ add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
 target_compile_definitions(plasmaphonedialer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 #find_package(ActiveApp REQUIRED)
-find_library(phonenumber REQUIRED)
+find_package(PhoneNumber REQUIRED)
 
 target_link_libraries(plasmaphonedialer
- phonenumber
+ PhoneNumber::PhoneNumber
  Qt5::Gui
  Qt5::Quick
  Qt5::Widgets
