@@ -3,25 +3,27 @@
 # ---------------
 #
 # This module finds if PhoneNumber is installed.
-# If found, this will define the following variables:
+#
+# This is a component-based find module, which makes use of the COMPONENTS and
+# OPTIONAL_COMPONENTS arguments to find_module.  The following components are
+# available:
+#
+#   PhoneNumber
+#   GeoCoding
+#
+# If no components are specified, this module will act as though all components
+# were passed to OPTIONAL_COMPONENTS.
+#
+# This module will define the following variables, independently of the
+# components searched for or found:
 #
 # ``PhoneNumber_FOUND``
-#     Set to TRUE if PhoneNumber was found.
-# ``PhoneNumber_LIBRARIES``
-#     Path to PhoneNumber libraries.
-# ``PhoneNumber_INCLUDE_DIR``
-#     Path to the PhoneNumber include directory.
-# ``PhoneNumberGeoCoding_LIBRARIES``
-#     Path to PhoneNumber GeoCodeing libraries.
+#     True if (the requestion version of) PhoneNumber is available
 #
-# If ``PhoneNumber_FOUND`` is TRUE the following imported targets
-# will be defined:
-#
-# ``PhoneNumber::PhoneNumber``
-#     The PhoneNumber library
-# ``PhoneNumber::GeoCoding``
-#     The PhoneNumber geo coding library
-#
+# For each searched-for components, ``PhoneNumber_<component>_FOUND`` will be set to
+# TRUE if the corresponding library was found, and FALSE otherwise.  If
+# ``PhoneNumber_<component>_FOUND`` is TRUE, the imported target ``PhoneNumber::<component>``
+# will be defined.
 
 #=============================================================================
 # Copyright (c) 2017 Klaralvdalens Datakonsult AB, a KDAB Group company, info@kdab.com
@@ -51,37 +53,38 @@
 # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #=============================================================================
 
-include(FindPackageHandleStandardArgs)
+include(ECMFindModuleHelpersStub)
 
-find_library(PhoneNumber_LIBRARIES
-        NAMES phonenumber
-        PATH_SUFFIXES lib
-        HINTS ENV PHONENUMBERDIR)
+ecm_find_package_version_check(PhoneNumber)
 
-find_path(PhoneNumber_INCLUDE_DIR
-        NAMES phonenumbers/phonenumberutil.h
-        HINTS ENV PHONENUMBERDIR)
+set(PhoneNumber_known_components
+    PhoneNumber
+    GeoCoding
+)
+set(PhoneNumber_default_components ${PhoneNumber_known_components})
 
-find_library(PhoneNumberGeoCoding_LIBRARIES
-        NAMES geocoding
-        PATH_SUFFIXES lib
-        HINTS ENV PHONENUMBERDIR)
+set(PhoneNumber_PhoneNumber_lib phonenumber)
+set(PhoneNumber_PhoneNumber_header phonenumbers/phonenumberutil.h)
+set(PhoneNumber_GeoCoding_lib geocoding)
+set(PhoneNumber_GeoCoding_header phonenumbers/geocoding/phonenumber_offline_geocoder.h)
 
-mark_as_advanced(PhoneNumber_LIBRARIES PhoneNumber_INCLUDE_DIR)
-mark_as_advanced(PhoneNumberGeoCoding_LIBRARIES)
-
-find_package_handle_standard_args(PhoneNumber DEFAULT_MSG PhoneNumber_LIBRARIES PhoneNumber_INCLUDE_DIR PhoneNumberGeoCoding_LIBRARIES)
-
-if(PhoneNumber_FOUND AND NOT TARGET PhoneNumber::PhoneNumber)
-    add_library(PhoneNumber::PhoneNumber UNKNOWN IMPORTED)
-    set_target_properties(PhoneNumber::PhoneNumber PROPERTIES
-        IMPORTED_LOCATION "${PhoneNumber_LIBRARIES}"
-        INTERFACE_INCLUDE_DIRECTORIES "${PhoneNumber_INCLUDE_DIR}")
-    add_library(PhoneNumber::GeoCoding UNKNOWN IMPORTED)
-    set_target_properties(PhoneNumber::GeoCoding PROPERTIES
-        IMPORTED_LOCATION "${PhoneNumberGeoCoding_LIBRARIES}"
-        INTERFACE_INCLUDE_DIRECTORIES "${PhoneNumber_INCLUDE_DIR}")
-endif()
+ecm_find_package_parse_components(PhoneNumber
+    RESULT_VAR PhoneNumber_components
+    KNOWN_COMPONENTS ${PhoneNumber_known_components}
+    DEFAULT_COMPONENTS ${PhoneNumber_default_components}
+)
+ecm_find_package_handle_library_components(PhoneNumber
+    COMPONENTS ${PhoneNumber_components}
+)
+find_package_handle_standard_args(PhoneNumber
+    FOUND_VAR
+        PhoneNumber_FOUND
+    REQUIRED_VARS
+        PhoneNumber_LIBRARIES
+    VERSION_VAR
+        PhoneNumber_VERSION
+    HANDLE_COMPONENTS
+)
 
 include(FeatureSummary)
 set_package_properties(PhoneNumber PROPERTIES

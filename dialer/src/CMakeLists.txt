@@ -11,7 +11,7 @@ add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
 target_compile_definitions(plasmaphonedialer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 #find_package(ActiveApp REQUIRED)
-find_package(PhoneNumber REQUIRED)
+find_package(PhoneNumber COMPONENTS PhoneNumber REQUIRED)
 
 target_link_libraries(plasmaphonedialer
  PhoneNumber::PhoneNumber
