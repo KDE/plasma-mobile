@@ -31,7 +31,7 @@ Item {
     }
 
     function addPlasmoid(applet, id) {
-        settingsModel.append({"icon": applet.icon, "text": applet.title, "plasmoidId": id, "enabled": false, "applet": applet})
+        settingsModel.append({"icon": applet.icon, "text": applet.title, "plasmoidId": id, "enabled": false, "applet": applet, "settingsCommand": ""})
     }
 
     signal plasmoidTriggered(var applet, var id)
@@ -52,7 +52,7 @@ Item {
             "delegate": "",
             "plasmoidId": -1,
             "enabled": false,
-            "applet": nullApplet
+            "applet": null
         });
 
         settingsModel.append({
@@ -65,7 +65,7 @@ Item {
         });
         settingsModel.append({
             "text": i18n("Location"),
-            "icon": "plasmaapplet-location",
+            "icon": "find-location-symbolic",
             "enabled": false,
             "settingsCommand": "",
             "plasmoidId": -1,
