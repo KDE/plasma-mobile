@@ -96,7 +96,7 @@ Item {
             "icon": "package_games_puzzle",
             "enabled": false,
             "settingsCommand": "",
-            "toggleFunction": "toggleAirplane",
+            "toggleFunction": "toggleTorch",
             "plasmoidId": -1,
             "applet": null
         });
