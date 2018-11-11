@@ -58,7 +58,7 @@ void PhonePanel::toggleTorch()
             return;
         }
         g_object_set(m_source, "mode", 2, NULL);
-        g_object_set(m_source, "torch-mode", TRUE, NULL);
+        g_object_set(m_source, "video-torch", TRUE, NULL);
         if (gst_element_set_state(m_pipeline, GST_STATE_PLAYING) == GST_STATE_CHANGE_FAILURE) {
             qDebug() << "Failed to turn on torch: failed to start pipeline";
             g_object_unref(m_pipeline);
