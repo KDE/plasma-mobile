@@ -39,7 +39,8 @@ Item {
                               "plasmoidId": id,
                               "enabled": false,
                               "applet": applet,
-                              "settingsCommand": ""})
+                              "settingsCommand": "",
+                              "toggleFunction": ""});
     }
 
     signal plasmoidTriggered(var applet, var id)
