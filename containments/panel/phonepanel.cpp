@@ -52,7 +52,7 @@ void PhonePanel::toggleTorch()
             return;
         }
         gst_bin_add_many(GST_BIN(m_pipeline), m_source, m_sink, NULL);
-        if (gst_element_link(m_source, m_sink)) {
+        if (gst_element_link(m_source, m_sink) != TRUE) {
             qDebug() << "Failed to turn on torch: failed to link source and sink";
             g_object_unref(m_pipeline);
             return;
