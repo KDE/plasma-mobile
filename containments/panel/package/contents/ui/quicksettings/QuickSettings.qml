@@ -22,7 +22,6 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-
 Item {
     id: root
 
@@ -42,6 +41,34 @@ Item {
     signal plasmoidTriggered(var applet, var id)
     Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
 
+    property int screenBrightness
+    property bool disableBrightnessUpdate: true
+    readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
+
+    onScreenBrightnessChanged: {
+        if(!disableBrightnessUpdate) {
+            var service = pmSource.serviceForSource("PowerDevil");
+            var operation = service.operationDescription("setBrightness");
+            operation.brightness = screenBrightness;
+            operation.silent = true
+            service.startOperationCall(operation);
+        }
+    }
+
+    PlasmaCore.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: ["PowerDevil"]
+        onSourceAdded: {
+            if (source === "PowerDevil") {
+                disconnectSource(source);
+                connectSource(source);
+            }
+        }
+        onDataChanged: {
+            root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
+        }
+    }
     //HACK: make the list know about the applet delegate which is a qtobject
     QtObject {
         id: nullApplet
@@ -76,6 +103,10 @@ Item {
             "plasmoidId": -1,
             "applet": null
         });
+        brightnessSlider.valueChanged.connect(function() {
+            root.screenBrightness = brightnessSlider.value;
+        });
+        disableBrightnessUpdate = false;
     }
 
     ListModel {
@@ -102,6 +133,19 @@ Item {
                 duration: units.shortDuration
                 easing.type: Easing.InOutQuad
                 properties: "x,y"
+            }
+        }
+
+        BrightnessItem {
+            id: brightnessSlider
+            width: flow.width
+            icon: "video-display-brightness"
+            label: i18n("Display Brightness")
+            value: root.screenBrightness
+            maximumValue: root.maximumScreenBrightness
+            Connections {
+                target: root
+                onScreenBrightnessChanged: brightnessSlider.value = root.screenBrightness
             }
         }
     }
