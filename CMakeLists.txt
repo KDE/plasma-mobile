@@ -35,6 +35,8 @@ set_package_properties(KF5Wayland PROPERTIES
 
 # torch
 find_package(GStreamer 1.1.90 REQUIRED)
+find_package(GLIB2 REQUIRED)
+find_package(GObject REQUIRED)
 
 include(CheckIncludeFiles)
 
