@@ -37,7 +37,7 @@ public:
 
 public Q_SLOTS:
     void executeCommand(const QString &command);
-    void toggleTorch(bool toggle);
+    void toggleTorch();
 
 private:
     GstElement* m_pipeline;
