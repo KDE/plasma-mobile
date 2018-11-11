@@ -24,6 +24,8 @@
 
 #include <Plasma/Containment>
 
+#include <gst/gst.h>
+
 
 class PhonePanel : public Plasma::Containment
 {
@@ -35,9 +37,13 @@ public:
 
 public Q_SLOTS:
     void executeCommand(const QString &command);
+    void toggleTorch(bool toggle);
 
 private:
-
+    GstElement* m_pipeline;
+    GstElement* m_sink;
+    GstElement* m_source;
+    bool m_running = false;
 };
 
 #endif
