@@ -33,6 +33,11 @@ set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED
                        PURPOSE "Required for interacting with the compositor")
 
+# torch
+find_package(GStreamer 1.1.90 REQUIRED)
+find_package(GLIB2 REQUIRED)
+find_package(GObject REQUIRED)
+
 include(CheckIncludeFiles)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)

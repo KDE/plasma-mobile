@@ -29,13 +29,18 @@ Item {
         print("toggle airplane mode")
     }
 
+    function toggleTorch() {
+        plasmoid.nativeInterface.toggleTorch()
+    }
+
     function addPlasmoid(applet, id) {
         settingsModel.append({"icon": applet.icon,
                               "text": applet.title,
                               "plasmoidId": id,
                               "enabled": false,
                               "applet": applet,
-                              "settingsCommand": ""})
+                              "settingsCommand": "",
+                              "toggleFunction": ""});
     }
 
     signal plasmoidTriggered(var applet, var id)
@@ -92,6 +97,7 @@ Item {
             "icon": "package_games_puzzle",
             "enabled": false,
             "settingsCommand": "",
+            "toggleFunction": "toggleTorch",
             "plasmoidId": -1,
             "applet": null
         });
