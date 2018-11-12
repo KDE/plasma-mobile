@@ -57,11 +57,17 @@ PlasmaCore.ColorScope {
         applet.visible = true;
         container.visible = true;
         if (applet.pluginName == "org.kde.phone.notifications") {
-            applet.expanded = true
             applet.fullRepresentationItem.parent = notificationsParent;
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
-        } 
+        } else if (applet.pluginName != "org.kde.phone.quicksettings") {
+            applet.expanded = true
+            applet.expanded = false
+            quickSettings.addPlasmoid(applet, fullRepsLayout.count);
+            applet.fullRepresentationItem.parent = fullRepsLayout;
+            fullRepsLayout.currentIndex = 0
+            applet.fullRepresentationItem.anchors.fill = fullRepsLayout;
+        }
     }
 
     Component.onCompleted: {
