@@ -61,7 +61,7 @@ PlasmaCore.ColorScope {
             applet.fullRepresentationItem.parent = notificationsParent;
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
-        } else if (applet.pluginName != "org.kde.phone.quicksettings") {
+        } else {
             applet.expanded = true
             applet.expanded = false
             quickSettings.addPlasmoid(applet, fullRepsLayout.count);
