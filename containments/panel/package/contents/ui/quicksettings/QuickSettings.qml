@@ -71,7 +71,9 @@ Item {
             }
         }
         onDataChanged: {
+            disableBrightnessUpdate = true;
             root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
+            disableBrightnessUpdate = false;
         }
     }
     //HACK: make the list know about the applet delegate which is a qtobject
