@@ -39,9 +39,6 @@ dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/D
 # start mission control
 dbus-send --session --print-reply --dest=org.freedesktop.DBus /org/freedesktop/DBus org.freedesktop.DBus.StartServiceByName string:org.freedesktop.Telepathy.MissionControl5 uint32:0
 
-sleep 1
-paplay /usr/share/sounds/sitter/ohits.ogg &
-
 # start polkit authentication agent
 @CMAKE_INSTALL_FULL_LIBEXECDIR@/polkit-kde-authentication-agent-1 &
 
