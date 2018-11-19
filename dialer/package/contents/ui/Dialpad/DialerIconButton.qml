@@ -35,6 +35,7 @@ Item {
     property string sub
     property alias source: icon.source
     property alias text: label.text
+    property int size
 
     Rectangle {
         anchors.fill: parent
@@ -56,13 +57,12 @@ Item {
             id: icon
             anchors.verticalCenter: parent.verticalCenter
             width: height
-            height: units.gridUnit * 3.5
+            height: buttonRoot.size || buttonRoot.height * 0.6
         }
         PlasmaComponents.Label {
             id: label
             height: buttonRoot.height
             anchors.verticalCenter: parent.verticalCenter
-            font.pointSize: 1024
             fontSizeMode: Text.VerticalFit
         }
     }

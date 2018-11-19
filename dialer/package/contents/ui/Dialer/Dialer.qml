@@ -49,19 +49,17 @@ Item {
 
     ColumnLayout {
         id: dialPadArea
-
-        anchors {
-            fill: parent
-            margins: units.largeSpacing
-        }
+        anchors.fill: parent
 
         PhoneNumberInput {
             id: status
 
             Layout.fillWidth: true
-            Layout.minimumHeight: units.gridUnit * 3.5
+            Layout.topMargin: units.largeSpacing * 3
+            Layout.bottomMargin: units.largeSpacing
+            Layout.minimumHeight: units.gridUnit * 3
             Layout.maximumHeight: Layout.minimumHeight
-            font.pointSize: 30
+            font.pixelSize: units.gridUnit * 2.3
         }
 
         Dialpad {
@@ -71,12 +69,15 @@ Item {
             callback: function (string) {
                 status.append(string)
             }
+            deleteCallback: function () {
+                status.pop()
+            }
             pressedCallback: function (string) {
-                //TODO
-//                 ofonoWrapper.startTone(string);
+                // TODO
+                // ofonoWrapper.startTone(string);
             }
             releasedCallback: function (string) {
-//                 ofonoWrapper.stopTone();
+                // ofonoWrapper.stopTone();
             }
         }
     }

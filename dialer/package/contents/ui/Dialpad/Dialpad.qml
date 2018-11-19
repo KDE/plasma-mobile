@@ -19,7 +19,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick.Layouts 1.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
@@ -28,10 +28,13 @@ GridLayout {
     columns: 3
     rowSpacing: 10
     columnSpacing: 10
+    Layout.leftMargin: units.largeSpacing * 2
+    Layout.rightMargin: units.largeSpacing * 2
 
     property var callback
     property var pressedCallback
     property var releasedCallback
+    property var deleteCallback
 
     DialerButton { id: one; text: "1" }
     DialerButton { text: "2"; sub: "ABC" }
@@ -61,12 +64,20 @@ GridLayout {
         enabled: status.text.length > 0
         opacity: enabled ? 1 : 0.5
         source: "call-start"
+        size: units.gridUnit * 3
         callback: function() {
             call(status.text);
         }
     }
-    Item {
+    DialerIconButton {
+        id: delButton
         Layout.fillWidth: true
         Layout.fillHeight: true
+
+        enabled: status.text.length > 0
+        opacity: enabled ? 1 : 0.5
+        source: "edit-clear"
+        size: units.gridUnit * 2
+        callback: pad.deleteCallback
     }
 }

@@ -89,11 +89,9 @@ Item {
         PlasmaComponents.Label {
             id: main
 
+            font.pixelSize: units.gridUnit * 2
             text: root.display || root.text
             opacity: special? 0.4 : 1.0
-            // anything higher for some reason makes number 4 not rendered
-            font.pointSize: 30
-            fontSizeMode: Text.VerticalFit
             Layout.minimumWidth: parent.width
             horizontalAlignment: Text.AlignHCenter
         }
@@ -103,8 +101,6 @@ Item {
 
             text: root.subdisplay || root.sub
             opacity: 0.4
-            font.pointSize: 16
-            fontSizeMode: Text.VerticalFit
             Layout.minimumWidth: parent.width
             horizontalAlignment: Text.AlignHCenter
         }
