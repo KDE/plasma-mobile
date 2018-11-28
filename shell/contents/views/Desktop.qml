@@ -158,9 +158,10 @@ Item {
         opacity: activitiesView.drag.active ? 1 : 0
         anchors.centerIn: parent
         imagePath: "widgets/background"
-        width: childrenRect.width + units.gridUnit*2
-        height: childrenRect.height + units.gridUnit*2
+        width: activityNameLabel.implicitWidth + units.gridUnit*2
+        height: activityNameLabel.implicitHeight + units.gridUnit*2
         PlasmaComponents.Label {
+            id: activityNameLabel
             anchors.centerIn: parent
             text: activitiesView.nextContainment.activityName
         }
