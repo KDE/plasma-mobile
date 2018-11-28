@@ -28,7 +28,6 @@ import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
-import org.kde.kirigami 2.5 as Kirigami
 
 Item {
     id: root
