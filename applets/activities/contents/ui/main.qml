@@ -67,8 +67,9 @@ ColumnLayout {
             }
             delegate: MouseArea {
                     id: delegate
+                    preventStealing: true
                     drag {
-                        target: listView.count > 0  && !model.current? delegate : null
+                        target: listView.count > 0  ? delegate : null
                         axis: Drag.XAxis
                     }
                     PlasmaComponents.Highlight {

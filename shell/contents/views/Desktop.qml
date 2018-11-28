@@ -28,6 +28,7 @@ import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
 import "../components"
+import org.kde.kirigami 2.5 as Kirigami
 
 Item {
     id: root
@@ -110,17 +111,26 @@ Item {
                             x + width < -activitiesLayout.x + activitiesView.width))
                     readonly property bool currentActivity: root.containment && model.current
 
-                    
+                    Component.onCompleted: {
+                        inViewportChanged();
+                    }
                     Connections {
                         target: activitiesView
                         onCurrentIndexChanged: {
-                            if (activitiesView.currentIndex == index) {
-                                activityModel.setCurrentActivity(model.id, function(){
+                            if (activitiesView.currentIndex == index && !model.current) {
+                                activityModel.setCurrentActivity(model.id, function() {
+                                    inViewportChanged();
                                     mainDelegate.containment.parent = mainDelegate;
                                 });
                             }
                         }
                         onFlickEnded: activitiesView.movementEnded()
+                    }
+                    Connections {
+                        target: desktop
+                        onCandidateContainmentsChanged: {
+                            inViewportChanged();
+                        }
                     }
                     onInViewportChanged: {
                         if (inViewport && !mainDelegate.containment) {
@@ -129,6 +139,7 @@ Item {
                             containmentNextActivityPreview = containment;
                             mainDelegate.containment.parent = mainDelegate;
                             mainDelegate.containment.anchors.fill = mainDelegate;
+                            mainDelegate.containment.visible = true;
                         }
                     }
                     onCurrentActivityChanged: {
