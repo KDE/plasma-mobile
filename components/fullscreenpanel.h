@@ -40,14 +40,14 @@ class FullScreenPanel : public QQuickWindow
     Q_PROPERTY(bool active READ isActive NOTIFY activeChanged)
 
 public:
-    FullScreenPanel(QQuickWindow *parent = 0);
-    ~FullScreenPanel();
+    FullScreenPanel(QQuickWindow *parent = nullptr);
+    ~FullScreenPanel() override;
 
 Q_SIGNALS:
     void activeChanged();
 
 protected:
-    void showEvent(QShowEvent *event);
+    void showEvent(QShowEvent *event) override;
 
 private:
     void initWayland();

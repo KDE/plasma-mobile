@@ -32,8 +32,7 @@ HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
 }
 
 HomeScreen::~HomeScreen()
-{
-}
+= default;
 
 ApplicationListModel *HomeScreen::applicationListModel()
 {

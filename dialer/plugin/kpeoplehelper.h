@@ -47,11 +47,11 @@ public:
     };
     Q_ENUMS(Role)
 
-    KPeopleHelper(QObject *parent = 0);
-    ~KPeopleHelper();
+    KPeopleHelper(QObject *parent = nullptr);
+    ~KPeopleHelper() override;
 
-    virtual QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
-    virtual QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
 private:
     KPeople::PersonsModel *m_model;

@@ -47,7 +47,7 @@ class TaskPanel : public Plasma::Containment
 
 public:
     TaskPanel( QObject *parent, const QVariantList &args );
-    ~TaskPanel();
+    ~TaskPanel() override;
 
     QWindow *panel();
     void setPanel(QWindow *panel);

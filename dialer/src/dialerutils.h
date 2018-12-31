@@ -36,8 +36,8 @@ class DialerUtils : public QObject
 
 public:
 
-    DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent = 0);
-    virtual ~DialerUtils();
+    DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent = nullptr);
+    ~DialerUtils() override;
 
     QString callState() const;
     void setCallState(const QString &state);

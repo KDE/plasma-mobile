@@ -33,7 +33,7 @@ class PhonePanel : public Plasma::Containment
 
 public:
     PhonePanel( QObject *parent, const QVariantList &args );
-    ~PhonePanel();
+    ~PhonePanel() override;
 
 public Q_SLOTS:
     void executeCommand(const QString &command);

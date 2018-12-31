@@ -50,8 +50,7 @@ DialerUtils::DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent)
 }
 
 DialerUtils::~DialerUtils()
-{
-}
+= default;
 
 void DialerUtils::dial(const QString &number)
 {

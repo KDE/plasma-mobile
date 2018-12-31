@@ -131,7 +131,7 @@ void CallManager::onCallStateChanged(Tp::CallState state)
             //show approver;
             (void) d->callChannel->setRinging();
             if (!d->ringingNotification) {
-                d->ringingNotification = new KNotification("ringing", KNotification::Persistent | KNotification::LoopSound, 0);
+                d->ringingNotification = new KNotification("ringing", KNotification::Persistent | KNotification::LoopSound, nullptr);
                 d->ringingNotification->setComponentName("plasma_dialer");
             }
             d->ringingNotification->sendEvent();
@@ -180,7 +180,7 @@ void CallManager::onCallStateChanged(Tp::CallState state)
             qDebug() << "Adding notification";
             d->missedCalls++;
             if (!d->callsNotification) {
-                d->callsNotification = new KNotification("callMissed", KNotification::Persistent, 0);
+                d->callsNotification = new KNotification("callMissed", KNotification::Persistent, nullptr);
             }
             d->callsNotification->setComponentName("plasma_dialer");
             d->callsNotification->setIconName("call-start");

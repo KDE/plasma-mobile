@@ -43,8 +43,7 @@ FullScreenPanel::FullScreenPanel(QQuickWindow *parent)
 }
 
 FullScreenPanel::~FullScreenPanel()
-{
-}
+= default;
 
 void FullScreenPanel::initWayland()
 {
@@ -56,7 +55,7 @@ void FullScreenPanel::initWayland()
     if (!connection) {
         return;
     }
-    Registry *registry = new Registry(this);
+    auto *registry = new Registry(this);
     registry->create(connection);
 
     m_surface = Surface::fromWindow(this);

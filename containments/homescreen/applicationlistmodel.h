@@ -41,8 +41,8 @@ class ApplicationListModel : public QAbstractListModel {
     Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
-    ApplicationListModel(QObject *parent = 0);
-    virtual ~ApplicationListModel();
+    ApplicationListModel(QObject *parent = nullptr);
+    ~ApplicationListModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
@@ -52,7 +52,7 @@ public:
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
-    Qt::ItemFlags flags(const QModelIndex &index) const;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 

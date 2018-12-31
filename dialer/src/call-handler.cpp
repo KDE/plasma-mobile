@@ -54,8 +54,7 @@ CallHandler::CallHandler(DialerUtils *utils)
 }
 
 CallHandler::~CallHandler()
-{
-}
+= default;
 
 bool CallHandler::bypassApproval() const
 {

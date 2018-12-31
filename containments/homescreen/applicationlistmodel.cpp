@@ -46,8 +46,7 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
 }
 
 ApplicationListModel::~ApplicationListModel()
-{
-}
+= default;
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {
@@ -188,7 +187,7 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return 0;
+        return nullptr;
     return Qt::ItemIsDragEnabled|QAbstractItemModel::flags(index);
 }
 
@@ -249,7 +248,7 @@ void ApplicationListModel::runApplication(const QString &storageId)
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
-    KRun::runService(*service, QList<QUrl>(), 0);
+    KRun::runService(*service, QList<QUrl>(), nullptr);
 }
 
 QStringList ApplicationListModel::appOrder() const

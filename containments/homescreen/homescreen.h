@@ -33,7 +33,7 @@ class HomeScreen : public Plasma::Containment
 
 public:
     HomeScreen( QObject *parent, const QVariantList &args );
-    ~HomeScreen();
+    ~HomeScreen() override;
 
     ApplicationListModel *applicationListModel();
 

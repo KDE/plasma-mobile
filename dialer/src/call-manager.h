@@ -26,8 +26,8 @@ class CallManager : public QObject
 {
     Q_OBJECT
 public:
-    explicit CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dialerUtils, QObject *parent = 0);
-    virtual ~CallManager();
+    explicit CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dialerUtils, QObject *parent = nullptr);
+    ~CallManager() override;
 
 private Q_SLOTS:
     void onCallStateChanged(Tp::CallState state);

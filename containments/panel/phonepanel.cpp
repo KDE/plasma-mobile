@@ -30,8 +30,7 @@ PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
 }
 
 PhonePanel::~PhonePanel()
-{
-}
+= default;
 
 void PhonePanel::executeCommand(const QString &command)
 {
@@ -42,7 +41,7 @@ void PhonePanel::executeCommand(const QString &command)
 void PhonePanel::toggleTorch()
 {
     if (!m_running) {
-        gst_init(NULL, NULL);
+        gst_init(nullptr, nullptr);
         // create elements
         m_source = gst_element_factory_make("droidcamsrc", "source");
         m_sink = gst_element_factory_make("fakesink", "sink");

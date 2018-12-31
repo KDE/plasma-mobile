@@ -151,13 +151,13 @@ int main(int argc, char **argv)
     const QString packagePath("org.kde.phone.dialer");
 
     //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    KDeclarative::QmlObject *obj = new KDeclarative::QmlObject();
+    auto *obj = new KDeclarative::QmlObject();
     obj->setTranslationDomain(packagePath);
     obj->setInitializationDelayed(true);
     obj->loadPackage(packagePath);
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
-    DialerUtils *dialerUtils = new DialerUtils(simAccount);
+    auto *dialerUtils = new DialerUtils(simAccount);
     obj->engine()->rootContext()->setContextProperty("dialerUtils", QVariant::fromValue(dialerUtils));
 
     obj->completeInitialization();
