@@ -123,7 +123,6 @@ Item {
                                 });
                             }
                         }
-                        onFlickEnded: activitiesView.movementEnded()
                     }
                     Connections {
                         target: desktop
