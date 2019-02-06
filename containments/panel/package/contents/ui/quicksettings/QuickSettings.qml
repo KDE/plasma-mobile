@@ -33,6 +33,14 @@ Item {
         plasmoid.nativeInterface.toggleTorch()
     }
 
+    function requestShutdown() {
+        print("Shutdown requested, depends on ksmserver running");
+        var service = pmSource.serviceForSource("PowerDevil");
+        //note the strange camelCasing is intentional
+        var operation = service.operationDescription("requestShutDown");
+        return service.startOperationCall(operation);
+    }
+
     function addPlasmoid(applet) {
         settingsModel.append({"icon": applet.icon,
                               "text": applet.title,
@@ -107,6 +115,18 @@ Item {
             "settingsCommand": "",
             "applet": null
         });
+        if (plasmoid.configuration.ShowPowerButton) {
+            settingsModel.append({
+                "text": i18n("Shutdown"),
+                "icon": "system-shutdown-symbolic",
+                "enabled": false,
+                "settingsCommand": "",
+                "toggleFunction": "requestShutdown",
+                "plasmoidId": -1,
+                "applet": null
+            });
+        }
+
         brightnessSlider.valueChanged.connect(function() {
             root.screenBrightness = brightnessSlider.value;
         });
