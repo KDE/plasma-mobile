@@ -45,8 +45,8 @@ RowLayout {
                 id: iconMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    if (model.plasmoidId > -1) {
-                        root.plasmoidTriggered(model.applet, model.plasmoidId);
+                    if (model.applet) {
+                        model.applet.expanded = !model.applet.expanded;
                     } else if (delegateRoot.toggle) {
                         delegateRoot.toggle();
                     } else if (model.toggleFunction) {
@@ -74,8 +74,8 @@ RowLayout {
                 id: labelMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    if (model.plasmoidId > -1) {
-                        root.plasmoidTriggered(model.applet, model.plasmoidId);
+                    if (model.applet) {
+                        model.applet.expanded = !model.applet.expanded;
                     } else if (model.settingsCommand) {
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     } else if (model.toggleFunction) {

@@ -23,6 +23,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.private.minishell 2.0 as MiniShell
+
 Item {
     id: root
     objectName: "org.kde.desktop-CompactApplet"
@@ -32,6 +34,13 @@ Item {
     property Item compactRepresentation
     property Item expandedFeedback: expandedItem
 
+    property Item rootItem: {
+        var item = root
+        while (item.parent) {
+            item = item.parent;
+        }
+        return item;
+    }
     onCompactRepresentationChanged: {
         if (compactRepresentation) {
             compactRepresentation.parent = root;
@@ -64,26 +73,37 @@ Item {
         visible: plasmoid.formFactor != PlasmaCore.Types.Planar && plasmoid.expanded
     }
 
-    PlasmaCore.FrameSvgItem {
-        id: appletParent
-        imagePath: "widgets/background"
-        //used only indesktop mode, not panel
-        visible: plasmoid.expanded && plasmoid.formFactor == PlasmaCore.Types.Planar
-        z: 99
-        anchors.top: parent.top
-        width: parent.width
-        height: units.gridUnit * 20 - units.iconSizes.medium
-
-        MouseArea {
-            visible: plasmoid.expanded
-            anchors {
-                fill: parent
-                topMargin: -appletParent.height
-                bottomMargin: -appletParent.height
+    Connections {
+        target: plasmoid
+        onExpandedChanged: {
+            if (plasmoid.expanded) {
+                expandedOverlay.showFullScreen()
+            } else {
+                expandedOverlay.visible = false;
             }
-            z: -1
-            onClicked: plasmoid.expanded = false;
         }
     }
 
+    MiniShell.FullScreenPanel {
+        id: expandedOverlay
+        color: Qt.rgba(0, 0, 0, 0.5)
+        visible: plasmoid.expanded
+        width: Screen.width
+        height: Screen.height
+        MouseArea {
+            anchors.fill: parent
+            onClicked: plasmoid.expanded = false
+        }
+
+        PlasmaCore.FrameSvgItem {
+            id: appletParent
+            imagePath: "widgets/background"
+            //used only indesktop mode, not panel
+
+            x: Math.min(parent.width - width - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).x + root.width / 2 - width / 2))
+            y: Math.min(parent.height - height - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).y + root.height / 2 - height / 2))
+            width: Math.max(Math.max(root.fullRepresentation.implicitWidth, units.gridUnit * 15), plasmoid.switchWidth) * 1.5
+            height: Math.max(Math.max(root.fullRepresentation.implicitHeight, units.gridUnit * 15), plasmoid.switchHeight) * 1.5
+        }
+    }
 }

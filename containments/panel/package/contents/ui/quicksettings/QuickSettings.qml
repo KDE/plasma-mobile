@@ -33,10 +33,9 @@ Item {
         plasmoid.nativeInterface.toggleTorch()
     }
 
-    function addPlasmoid(applet, id) {
+    function addPlasmoid(applet) {
         settingsModel.append({"icon": applet.icon,
                               "text": applet.title,
-                              "plasmoidId": id,
                               "enabled": false,
                               "applet": applet,
                               "settingsCommand": "",
@@ -89,7 +88,6 @@ Item {
             "settingsCommand": "plasma-settings",
             "toggleFunction": "",
             "delegate": "",
-            "plasmoidId": -1,
             "enabled": false,
             "applet": null
         });
@@ -100,7 +98,6 @@ Item {
             "enabled": false,
             "settingsCommand": "",
             "toggleFunction": "toggleTorch",
-            "plasmoidId": -1,
             "applet": null
         });
         settingsModel.append({
@@ -108,7 +105,6 @@ Item {
             "icon": "find-location-symbolic",
             "enabled": false,
             "settingsCommand": "",
-            "plasmoidId": -1,
             "applet": null
         });
         brightnessSlider.valueChanged.connect(function() {
@@ -131,7 +127,8 @@ Item {
         Repeater {
             model: settingsModel
             delegate: Loader {
-                width: item ? item.implicitWidth : 0
+                //FIXME: why this is needed?
+                width: flow.width / 2 - units.largeSpacing / 2//item ? item.implicitWidth : 0
                 height: item ? item.implicitHeight : 0
                 source: Qt.resolvedUrl((model.delegate ? model.delegate : "Delegate") + ".qml")
             }

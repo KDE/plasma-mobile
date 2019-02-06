@@ -57,17 +57,14 @@ PlasmaCore.ColorScope {
         applet.visible = true;
         container.visible = true;
         if (applet.pluginName == "org.kde.phone.notifications") {
+            //FIXME: make a way to instantiate fullRepresentationItem without the open/close dance
             applet.expanded = true
+            applet.expanded = false
             applet.fullRepresentationItem.parent = notificationsParent;
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
         } else {
-            applet.expanded = true
-            applet.expanded = false
-            quickSettings.addPlasmoid(applet, fullRepsLayout.count);
-            applet.fullRepresentationItem.parent = fullRepsLayout;
-            fullRepsLayout.currentIndex = 0
-            applet.fullRepresentationItem.anchors.fill = fullRepsLayout;
+            quickSettings.addPlasmoid(applet);
         }
     }
 
@@ -223,17 +220,11 @@ PlasmaCore.ColorScope {
                 color: PlasmaCore.ColorScope.backgroundColor
                 z: 2
                 width: parent.width
-                x: -modeFlick.contentX
                 y: Math.min(0, slidingPanel.offset - height - root.height)
                 height: quickSettings.Layout.minimumHeight
                 QuickSettings {
                     id: quickSettings
                     anchors.fill: parent
-                    onPlasmoidTriggered: {
-                        applet.expanded = true;
-                        fullRepsLayout.currentIndex = id;
-                        slidingPanel.expanded = true;
-                    }
                 }
                 Rectangle {
                     anchors {
@@ -247,65 +238,17 @@ PlasmaCore.ColorScope {
                     visible: slidingPanel.offset + slidingPanel.headerHeight < panelContents.height
                 }
             }
-            PropertyAnimation {
-                id: modeSwitchAnim
-                target: modeFlick
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-                properties: "contentX"
-                from: modeFlick.contentX
-                to: 0
-            }
-            Flickable {
-                id: modeFlick
-                anchors.fill: parent
-                contentWidth: width * 2
-                contentHeight: height
-                boundsBehavior: Flickable.StopAtBounds
-                interactive: slidingPanel.expanded
-                onFlickEnded: movementEnded()
-                onMovementEnded: {
-                    slidingPanel.expanded = (contentX > panelContents.width/2);
-                    modeSwitchAnim.running = false;
-                    modeSwitchAnim.to = slidingPanel.expanded ? width : 0
-                    modeSwitchAnim.running = true;
+            Item {
+                id: notificationsParent
+                anchors {
+                    left: parent.left
+                    bottom: parent.bottom
+                    right: parent.right
+                    bottomMargin: root.height
                 }
-                Item {
-                    width: modeFlick.width
-                    height: modeFlick.height
-                    Item {
-                        id: notificationsParent
-                        anchors {
-                            left: parent.left
-                            bottom: parent.bottom
-                            right: parent.right
-                            bottomMargin: root.height
-                        }
-                        property var applet
-                        height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
-                        property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
-                    }
-                    StackLayout {
-                        id: fullRepsLayout
-                        anchors {
-                            left: notificationsParent.right
-                            bottom: parent.bottom
-                        }
-                        width: panelContents.width
-                        height: panelContents.height
-                    }
-                    PlasmaComponents.ToolButton {
-                        anchors {
-                            left: fullRepsLayout.left
-                            right: fullRepsLayout.right
-                            bottom: parent.bottom
-                            bottomMargin: root.height
-                        }
-                        text: i18n("Back")
-                        iconName: "go-previous"
-                        onClicked: slidingPanel.expanded = false;
-                    }
-                }
+                property var applet
+                height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
+                property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
             }
         }
     }
