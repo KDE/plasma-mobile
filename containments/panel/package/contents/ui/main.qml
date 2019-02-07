@@ -64,6 +64,7 @@ PlasmaCore.ColorScope {
             notificationsParent.applet = applet;
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
         } else {
+            applet.preferredRepresentation = applet.compactRepresentation
             quickSettings.addPlasmoid(applet);
         }
     }
