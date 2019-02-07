@@ -32,7 +32,7 @@ Item {
 
     property Item fullRepresentation
     property Item compactRepresentation
-    property Item expandedFeedback: expandedItem
+    property Item expandedFeedback: null
 
     property Item rootItem: {
         var item = root
@@ -59,18 +59,6 @@ Item {
         fullRepresentation.parent = appletParent;
         fullRepresentation.anchors.fill = fullRepresentation.parent;
         fullRepresentation.anchors.margins = appletParent.margins.top;
-    }
-
-    Rectangle {
-        id: expandedItem
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.top
-        }
-        height: units.smallSpacing
-        color: PlasmaCore.ColorScope.highlightColor
-        visible: plasmoid.formFactor != PlasmaCore.Types.Planar && plasmoid.expanded
     }
 
     Connections {
