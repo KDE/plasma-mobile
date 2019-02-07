@@ -127,7 +127,7 @@ Item {
             });
         }
 
-        brightnessSlider.valueChanged.connect(function() {
+        brightnessSlider.moved.connect(function() {
             root.screenBrightness = brightnessSlider.value;
         });
         disableBrightnessUpdate = false;
