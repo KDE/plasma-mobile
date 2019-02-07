@@ -1,13 +1,14 @@
-import QtQuick 2.0
+import QtQuick 2.5
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kio 1.0 as Kio
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-Item {
+Column {
     id: delegateRoot
     width: applicationsView.cellWidth
     height: applicationsView.cellHeight
 
+    property int iconSize
     property var modelData: model
     property bool isDropTarget: delegateRoot != dragDelegate && root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole == modelData.ApplicationStorageIdRole
     property alias maximumLineCount: label.maximumLineCount
@@ -16,12 +17,9 @@ Item {
 
     PlasmaCore.IconItem {
         id: icon
-        anchors {
-            centerIn: parent
-            verticalCenterOffset: -theme.mSize(theme.defaultFont).height
-        }
-        width: parent.height - label.height
-        height: width
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: delegateRoot.iconSize
+        height: delegateRoot.iconSize
         source: modelData.ApplicationIconRole
         scale: root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole != modelData.ApplicationStorageIdRole ? 0.6 : 1
         Behavior on scale {
@@ -36,11 +34,8 @@ Item {
         id: label
         visible: text.length > 0
 
-        anchors {
-            top: icon.bottom
-            left: icon.left
-            right: icon.right
-        }
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: icon.width
 
         wrapMode: Text.WordWrap
         horizontalAlignment: Qt.AlignHCenter

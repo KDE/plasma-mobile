@@ -34,7 +34,8 @@ Item {
 //BEGIN properties
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
-    property int buttonHeight: units.iconSizes.large + units.gridUnit * 2
+    readonly property int iconSize: units.iconSizes.large
+    property int buttonHeight: dragDelegate.height
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 //END properties
@@ -431,6 +432,7 @@ Item {
                 z: 999
                 property int xTarget
                 property int yTarget
+                iconSize: root.iconSize
 
                 Behavior on opacity {
                     ParallelAnimation {
@@ -496,6 +498,7 @@ Item {
                 //clip: true
                 delegate: HomeLauncher {
                     visible: index > 3
+                    iconSize: root.iconSize
                 }
                 header: AppletsArea {}
                 footer: Item {

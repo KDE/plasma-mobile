@@ -237,6 +237,7 @@ MouseArea {
             model: plasmoid.nativeInterface.applicationListModel
             delegate: HomeLauncher {
                 maximumLineCount: 1
+                iconSize: root.iconSize
             }
 
             move: Transition {
