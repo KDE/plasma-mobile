@@ -12,12 +12,12 @@ battery.writeConfig("showPercentage", true);
 battery.reloadConfig();
 panel.addWidget("org.kde.plasma.volume");
 panel.addWidget("org.kde.phone.activities");
-panel.height = 60;
+panel.height = 1 * gridUnit;
 
 var bottomPanel = new Panel("org.kde.phone.taskpanel");
 bottomPanel.location = "bottom";
 
 if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.screen).width)
-    bottomPanel.height = 150;
+    bottomPanel.height = 2 * gridUnit;
 else
-    bottomPanel.height = 60;
+    bottomPanel.height = 1 * gridUnit;

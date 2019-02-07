@@ -34,7 +34,7 @@ Item {
 //BEGIN properties
     property Item toolBox
     property alias appletsSpace: applicationsView.headerItem
-    property int buttonHeight: (Math.floor(height / units.iconSizes.huge) > 6) ? units.iconSizes.enormous : units.iconSizes.huge
+    property int buttonHeight: units.iconSizes.large + units.gridUnit * 2
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 //END properties

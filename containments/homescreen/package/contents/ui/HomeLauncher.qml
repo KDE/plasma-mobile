@@ -20,7 +20,7 @@ Item {
             centerIn: parent
             verticalCenterOffset: -theme.mSize(theme.defaultFont).height
         }
-        width: parent.height / 2
+        width: parent.height - label.height
         height: width
         source: modelData.ApplicationIconRole
         scale: root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole != modelData.ApplicationStorageIdRole ? 0.6 : 1

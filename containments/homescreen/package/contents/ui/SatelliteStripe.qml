@@ -18,7 +18,7 @@ PlasmaCore.ColorScope {
     }
 
     //cut away one line from the favorites bar
-    height: applicationsView.cellHeight - units.gridUnit
+    height: applicationsView.cellHeight - units.gridUnit/2
     width: parent.width
     y: parent.height / 2 - height / 2
     x: 0
