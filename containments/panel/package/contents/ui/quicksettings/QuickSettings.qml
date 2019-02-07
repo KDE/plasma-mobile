@@ -54,17 +54,14 @@ Item {
     Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
 
     property int screenBrightness
-    property bool disableBrightnessUpdate: true
     readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
 
     onScreenBrightnessChanged: {
-        if(!disableBrightnessUpdate) {
-            var service = pmSource.serviceForSource("PowerDevil");
-            var operation = service.operationDescription("setBrightness");
-            operation.brightness = screenBrightness;
-            operation.silent = true
-            service.startOperationCall(operation);
-        }
+        var service = pmSource.serviceForSource("PowerDevil");
+        var operation = service.operationDescription("setBrightness");
+        operation.brightness = screenBrightness;
+        operation.silent = true
+        service.startOperationCall(operation);
     }
 
     PlasmaCore.DataSource {
@@ -78,9 +75,7 @@ Item {
             }
         }
         onDataChanged: {
-            disableBrightnessUpdate = true;
             root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
-            disableBrightnessUpdate = false;
         }
     }
     //HACK: make the list know about the applet delegate which is a qtobject
@@ -130,7 +125,6 @@ Item {
         brightnessSlider.moved.connect(function() {
             root.screenBrightness = brightnessSlider.value;
         });
-        disableBrightnessUpdate = false;
     }
 
     ListModel {
