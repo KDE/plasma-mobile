@@ -103,7 +103,7 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 enabled: taskSwitcher.tasksCount > 0;
-                iconSource: "window-list"
+                iconSource: "box"
                 onClicked: {
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
@@ -118,7 +118,7 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
-                iconSource: "go-home"
+                iconSource: "start-here-kde"
                 enabled: taskSwitcher.tasksCount > 0
                 checkable: true
                 onCheckedChanged: {
@@ -142,7 +142,7 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 anchors.right: parent.right
-                iconSource: "window-close"
+                iconSource: "paint-none"
                 //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
                 enabled: plasmoid.nativeInterface.hasCloseableActiveWindow
                 onClicked: {

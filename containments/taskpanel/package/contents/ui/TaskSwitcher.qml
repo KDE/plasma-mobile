@@ -200,7 +200,7 @@ FullScreenPanel {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
         }
-        iconSource: "go-home"
+        iconSource: "start-here-kde"
         onClicked: {
             currentTaskIndex = -1;
             window.hide();
