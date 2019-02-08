@@ -88,10 +88,16 @@ Item {
             imagePath: "widgets/background"
             //used only indesktop mode, not panel
 
-            x: Math.min(parent.width - width - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).x + root.width / 2 - width / 2))
-            y: Math.min(parent.height - height - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).y + root.height / 2 - height / 2))
-            width: Math.max(Math.max(root.fullRepresentation.implicitWidth, units.gridUnit * 15), plasmoid.switchWidth) * 1.5
-            height: Math.max(Math.max(root.fullRepresentation.implicitHeight, units.gridUnit * 15), plasmoid.switchHeight) * 1.5
+            property bool wideMode: expandedOverlay.width > width * 2
+
+            x: wideMode
+                ? Math.min(parent.width - width - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).x + root.width / 2 - width / 2))
+                : expandedOverlay.width/2 - width/2
+            y: wideMode
+                ? Math.min(parent.height - height - units.largeSpacing, Math.max(units.largeSpacing, root.mapToItem(root.rootItem, 0, 0).y + root.height / 2 - height / 2))
+                : units.largeSpacing
+            width: Math.min(expandedOverlay.width - units.largeSpacing * 2, Math.max(Math.max(root.fullRepresentation.implicitWidth, units.gridUnit * 15), plasmoid.switchWidth) * 1.5)
+            height: Math.min(expandedOverlay.height - units.largeSpacing * 2, Math.max(Math.max(root.fullRepresentation.implicitHeight, units.gridUnit * 15), plasmoid.switchHeight) * 1.5)
         }
     }
 }
