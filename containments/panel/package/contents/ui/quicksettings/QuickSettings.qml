@@ -99,10 +99,49 @@ Item {
             "enabled": false,
             "applet": null
         });
-
+        settingsModel.append({
+            "text": i18n("Wifi"),
+            "icon": "network-wireless-signal",
+            "enabled": false,
+            "settingsCommand": "plasma-settings -m kcm_mobile_wifi",
+            "toggleFunction": "",
+            "delegate": "",
+            "enabled": false,
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Mobile Data"),
+            "icon": "network-modem",
+            "enabled": false,
+            "settingsCommand": "plasma-settings -m kcm_mobile_broadband",
+            "toggleFunction": "",
+            "delegate": "",
+            "enabled": false,
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Battery"),
+            "icon": "battery",
+            "enabled": false,
+            "settingsCommand": "plasma-settings -m kcm_mobile_power",
+            "toggleFunction": "",
+            "delegate": "",
+            "enabled": false,
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Sound"),
+            "icon": "audio-speakers-symbolic",
+            "enabled": false,
+            "settingsCommand": "plasma-settings -m kcm_pulseaudio",
+            "toggleFunction": "",
+            "delegate": "",
+            "enabled": false,
+            "applet": null
+        });
         settingsModel.append({
             "text": i18n("Flashlight"),
-            "icon": "package_games_puzzle",
+            "icon": "flashlight-on",
             "enabled": false,
             "settingsCommand": "",
             "toggleFunction": "toggleTorch",
