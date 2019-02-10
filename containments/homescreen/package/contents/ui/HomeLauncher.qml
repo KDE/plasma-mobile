@@ -20,6 +20,7 @@ Column {
         anchors.horizontalCenter: parent.horizontalCenter
         width: delegateRoot.iconSize
         height: delegateRoot.iconSize
+        usesPlasmaTheme: false
         source: modelData.ApplicationIconRole
         scale: root.reorderingApps && applicationsView.dragData && applicationsView.dragData.ApplicationStorageIdRole != modelData.ApplicationStorageIdRole ? 0.6 : 1
         Behavior on scale {
