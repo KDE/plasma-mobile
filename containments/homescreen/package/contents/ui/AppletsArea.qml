@@ -203,13 +203,14 @@ MouseArea {
 
         PlasmaCore.IconItem {
             id: goUp
-            source: "go-up"
-            width: units.iconSizes.huge
+            source: "arrow-up"
+            width: units.iconSizes.medium
             height: width
             colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.top
+                margins: units.largeSpacing
             }
             MouseArea {
                 anchors {
