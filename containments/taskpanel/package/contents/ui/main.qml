@@ -92,9 +92,6 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
             color: root.backgroundColor
 
-            width: 600
-            height: 40
-
             visible: plasmoid.configuration.PanelButtonsVisible
             property Item toolBox
 
