@@ -167,16 +167,6 @@ PlasmaCore.ColorScope {
             }
             height: parent.height
         }
-
-        Rectangle {
-            height: units.smallSpacing/2
-            color: PlasmaCore.ColorScope.highlightColor
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
-        }
     }
     MouseArea {
         z: 99
