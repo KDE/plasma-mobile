@@ -20,6 +20,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.5 as Controls
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import MeeGo.QOfono 0.2
@@ -130,12 +131,14 @@ PlasmaCore.ColorScope {
 
             RowLayout {
                 Layout.fillWidth: true
-                PlasmaComponents.Label {
+                Controls.TextField {
                     id: pinLabel
+                    readOnly: true
+                    echoMode: TextInput.Password
+                    activeFocusOnPress: false
                     Layout.fillWidth: true
                     horizontalAlignment: Qt.AlignRight
                     verticalAlignment: Qt.AlignVCenter
-                    font.pixelSize: one.font.pixelSize
                 }
                 PlasmaComponents.Button {
                     visible: pinLabel.text != ""
