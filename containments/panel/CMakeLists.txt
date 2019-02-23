@@ -10,7 +10,7 @@ target_link_libraries(plasma_applet_phonepanel
                       Qt5::Gui
                       KF5::Plasma
                       KF5::I18n
-                      ${GSTREAMER_LIBRARIES} ${GLIB2_LIBRARIES} ${GOBJECT_LIBRARIES})
+                      ${GSTREAMER_LIBRARIES} GLIB2::GLIB2 ${GOBJECT_LIBRARIES})
 
 target_include_directories(plasma_applet_phonepanel PRIVATE "${GSTREAMER_INCLUDE_DIR}")
 
