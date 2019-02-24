@@ -12,13 +12,13 @@ PlasmaCore.ColorScope {
         enabledBorders: PlasmaCore.FrameSvgItem.TopBorder | PlasmaCore.FrameSvgItem.BottomBorder
         anchors {
             fill: parent
-            topMargin: -margins.top
-            bottomMargin: -margins.bottom
+            topMargin: -margins.top / 2
+            bottomMargin: -margins.bottom / 2
         }
     }
 
     //cut away one line from the favorites bar
-    height: applicationsView.cellHeight - units.gridUnit/2
+    height: applicationsView.cellHeight
     width: parent.width
     y: parent.height / 2 - height / 2
     x: 0
