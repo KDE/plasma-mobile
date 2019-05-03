@@ -22,6 +22,12 @@ Name[x-test]=xxPhonexx
 Name[zh_CN]=手机
 Name[zh_TW]=電話
 Comment=Plasma shell for phones
+Comment[ca]=Espai de treball Plasma per a telèfons
+Comment[nl]=Plasma-shell voor telefoons
+Comment[pt]=Área de trabalho Plasma para telemóveis
+Comment[sv]=Plasma skal för telefoner
+Comment[uk]=Оболонка Плазми для телефонів
+Comment[x-test]=xxPlasma shell for phonesxx
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Shell
