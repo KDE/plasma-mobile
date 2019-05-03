@@ -70,7 +70,7 @@ void TaskPanel::initWayland()
     if (!connection) {
         return;
     }
-    Registry *registry = new Registry(this);
+    auto *registry = new Registry(this);
     registry->create(connection);
     connect(registry, &Registry::plasmaWindowManagementAnnounced, this,
         [this, registry] (quint32 name, quint32 version) {

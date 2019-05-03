@@ -47,8 +47,6 @@
 #include <KAboutData>
 #include <KDBusService>
 
-#include <stdio.h>
-#include <stdlib.h>
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
