@@ -44,9 +44,6 @@ plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phone shells)
 install(DIRECTORY wallpaper/ DESTINATION "${WALLPAPER_INSTALL_DIR}/org.kde.plasma.phone.lockers")
 
-#kpackage_install_package(phonebook org.kde.phone.phonebook genericqml)
-#install(FILES phonebook/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAME org.kde.phone.phonebook.desktop)
-
 install( DIRECTORY kwinmultitasking/ DESTINATION ${DATA_INSTALL_DIR}/kwin/scripts/org.kde.phone.multitasking )
 install( FILES kwinmultitasking/metadata.desktop DESTINATION ${SERVICES_INSTALL_DIR} RENAME kwin-script-org.kde.phone.multitasking.desktop )
 
@@ -62,7 +59,7 @@ add_subdirectory(bin)
 #add_subdirectory(services)
 add_subdirectory(applets)
 add_subdirectory(containments)
- add_subdirectory(components)
+add_subdirectory(components)
 add_subdirectory(dialer)
 add_subdirectory(sounds)
 #add_subdirectory(touchscreentest)
