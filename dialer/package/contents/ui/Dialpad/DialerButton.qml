@@ -21,8 +21,10 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import QtQuick.Controls 2.2 as Controls
+
+import org.kde.kirigami 2.2 as Kirigami
+
 
 Item {
     id: root
@@ -38,12 +40,12 @@ Item {
     Rectangle {
         anchors.fill: parent
         z: -1
-        color: PlasmaCore.ColorScope.highlightColor
+        color: Kirigami.Theme.highlightColor
         radius: units.smallSpacing
         opacity: mouse.pressed ? 0.4 : 0
         Behavior on opacity {
             OpacityAnimator {
-                duration: units.longDuration
+                duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -86,17 +88,17 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
 
-        PlasmaComponents.Label {
+        Controls.Label {
             id: main
 
             font.pixelSize: units.gridUnit * 2
             text: root.display || root.text
-            opacity: special? 0.4 : 1.0
+            opacity: special ? 0.4 : 1.0
             Layout.minimumWidth: parent.width
             horizontalAlignment: Text.AlignHCenter
         }
 
-        PlasmaComponents.Label {
+        Controls.Label {
             id: longHold
 
             text: root.subdisplay || root.sub

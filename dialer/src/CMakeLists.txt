@@ -1,5 +1,3 @@
-
-
 set(plasmaphonedialer_SRCS
     main.cpp
     dialerutils.cpp

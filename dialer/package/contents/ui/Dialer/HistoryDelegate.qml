@@ -19,9 +19,11 @@
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
+import QtQuick.Controls 2.2 as Controls
+
+import org.kde.kirigami 2.2 as Kirigami
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+
 
 Item {
     id: delegateParent
@@ -83,7 +85,7 @@ Item {
             RowLayout {
                 width: parent.width
                 //FIXME: ad hoc icons
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     width: units.iconSizes.medium
                     height: width
                     source: {
@@ -98,20 +100,20 @@ Item {
                     }
                 }
                 ColumnLayout {
-                    PlasmaComponents.Label {
+                    Controls.Label {
                         text: "Name (todo)"
                     }
-                    PlasmaComponents.Label {
+                    Controls.Label {
                         text: model.number
                         Layout.fillWidth: true
                     }
                 }
                 ColumnLayout {
-                    PlasmaComponents.Label {
+                    Controls.Label {
                         Layout.alignment: Qt.AlignRight
                         text: Qt.formatTime(model.time, Qt.locale().timeFormat(Locale.ShortFormat));
                     }
-                    PlasmaComponents.Label {
+                    Controls.Label {
                         Layout.alignment: Qt.AlignRight
                         text: i18n("Duration: %1", secondsToTimeString(model.duration));
                         visible: model.duration > 0

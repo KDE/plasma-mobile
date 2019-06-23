@@ -19,10 +19,9 @@
  */
 
 import QtQuick 2.3
-import QtQuick.Controls 1.3
+import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ApplicationWindow {

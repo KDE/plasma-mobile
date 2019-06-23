@@ -1,20 +1,16 @@
 import QtQuick 2.0
-import QtQuick.Controls.Styles 1.4
+import QtQuick.Controls 2.2 as Controls
 import QtQuick.Layouts 1.1
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
 
 // TODO: search through contacts while typing
-PlasmaComponents.TextField {
+Controls.TextField {
     id: root
 
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignBottom
 
-    style: TextFieldStyle {
-        background: Rectangle {
-            opacity: 0
-        }
+    background: Rectangle {
+        opacity: 0
     }
 
     // append some text to the end of this input
