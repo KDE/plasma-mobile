@@ -59,9 +59,7 @@ RowLayout {
             id: brightnessSlider
             width: parent.width
             onMoved: brightnessRoot.moved()
-            // Don't allow the slider to turn off the screen
-            // Please see https://git.reviewboard.kde.org/r/122505/ for more information
-            from: to > 100 ? 1 : 0
+            from: 1
             //stepSize: 1
         }
     }
