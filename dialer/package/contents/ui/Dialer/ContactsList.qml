@@ -23,14 +23,13 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.7 as Kirigami
 import org.kde.people 1.0 as KPeople
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.kpeoplehelper 1.0
 
 
 Item {
     Controls.Label {
         anchors.centerIn: parent
         text: i18n("No contacts")
-        visible: contactsModel.count == 0
+        visible: contactsModel.count === 0
     }
 
     ColumnLayout {
@@ -46,7 +45,7 @@ Item {
                 Kirigami.Action {
                     icon.name: "edit-clear"
                     onTriggered: searchField.text = ""
-                    visible: searchField.text != ""
+                    visible: searchField.text !== ""
                 }
             ]
         }
@@ -68,7 +67,7 @@ Item {
                 clip: true
                 model: PlasmaCore.SortFilterModel {
                     sourceModel: KPeople.PersonsSortFilterProxyModel {
-                        sourceModel: KPeopleHelper {
+                        sourceModel: KPeople.PersonsModel {
                             id: contactsModel
                         }
                         requiredProperties: "phoneNumber"
@@ -139,7 +138,7 @@ Item {
                                 text: model.phoneNumber
 
                                 elide: Text.ElideRight
-                                visible: dataLabel.text != nickLabel.text
+                                visible: dataLabel.text !== nickLabel.text
                             }
                         }
                     }

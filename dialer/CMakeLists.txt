@@ -5,4 +5,3 @@ install(FILES package/metadata.desktop DESTINATION ${XDG_APPS_INSTALL_DIR} RENAM
 include_directories(${TELEPATHY_QT5_INCLUDE_DIR})
 
 add_subdirectory(src)
-add_subdirectory(plugin)
