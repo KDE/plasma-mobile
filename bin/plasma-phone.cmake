@@ -22,7 +22,7 @@ export XDG_CURRENT_DESKTOP=KDE
 
 export KDE_FULL_SESSION=1
 export KDE_SESSION_VERSION=5
-export PLASMA_PLATFORM=phone:handheld
+export PLASMA_PLATFORM=phone:handset
 export QT_QUICK_CONTROLS_STYLE=Plasma
 
 export GRID_UNIT_PX=25
