@@ -32,6 +32,8 @@ struct ApplicationData {
     QString icon;
     QString storageId;
     QString entryPath;
+    bool favorite = false;
+    bool desktop = false;
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -66,6 +68,9 @@ public:
 
     QStringList appOrder() const;
     void setAppOrder(const QStringList &order);
+
+    Q_INVOKABLE void setFavoriteItem(int row, bool favorite);
+    Q_INVOKABLE void setDesktopItem(int row, bool desktop);
 
     Q_INVOKABLE void moveItem(int row, int order);
 

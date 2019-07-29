@@ -205,7 +205,37 @@ void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int so
     moveItem(sourceRow, destinationChild);
 }
 
-Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
+void ApplicationListModel::setFavoriteItem(int row, bool favorite)
+{
+    if (row < 0 || row >= m_applicationList.length()) {
+        return;
+    }
+
+    ApplicationData &data = m_applicationList[row];
+    if (data.favorite == favorite) {
+        return;
+    }
+
+    data.favorite = favorite;
+    emit dataChanged(index(row, 0), index(row, 0));
+}
+
+void ApplicationListModel::setDesktopItem(int row, bool desktop)
+{
+    if (row < 0 || row >= m_applicationList.length()) {
+        return;
+    }
+
+    ApplicationData &data = m_applicationList[row];
+    if (data.desktop == desktop) {
+        return;
+    }
+
+    data.desktop = desktop;
+    emit dataChanged(index(row, 0), index(row, 0));
+}
+
+void ApplicationListModel::moveItem(int row, int destination)
 {
     if (row < 0 || destination < 0 || row >= m_applicationList.length() ||
         destination >= m_applicationList.length() || row == destination) {
