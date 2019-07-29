@@ -26,6 +26,8 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.draganddrop 2.0 as DragDrop
 
+import "launcher" as Launcher
+
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 Item {
@@ -68,67 +70,78 @@ Item {
 Text {
     text:"Edit Mode"
     color: "white"
-    visible: appletsLayout.editMode
+    visible: plasmoid.editMode
 }
         Connections {
             target: plasmoid
-            onEditModeChanged: appletsLayout.editMode = plasmoid.editMode
+            onEditModeChanged: {
+                appletsLayout.editMode = plasmoid.editMode
+                if (plasmoid.editMode) {
+                    menuRepeater.freeLayout();
+                } else {
+                    menuRepeater.relayout();
+                }
+            }
         }
 
-        ContainmentLayoutManager.AppletsLayout {
-            id: appletsLayout
+        Flickable {
             anchors.fill: parent
-            configKey: width > height ? "ItemGeometries" : "ItemGeometriesVertical"
-            containment: plasmoid
-            editModeCondition: plasmoid.immutable
-                    ? ContainmentLayoutManager.AppletsLayout.Manual
-                    : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
+            contentWidth: width
+            contentHeight: appletsLayout.height
+            interactive: !plasmoid.editMode
 
-            // Sets the containment in edit mode when we go in edit mode as well
-            onEditModeChanged: plasmoid.editMode = editMode
+            ContainmentLayoutManager.AppletsLayout {
+                id: appletsLayout
+                width: parent.width
+                height: 500 + launcher.height
+                configKey: width > height ? "ItemGeometries" : "ItemGeometriesVertical"
+                containment: plasmoid
+                editModeCondition: plasmoid.immutable
+                        ? ContainmentLayoutManager.AppletsLayout.Manual
+                        : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
 
-            minimumItemWidth: units.gridUnit * 3
-            minimumItemHeight: minimumItemWidth
+                // Sets the containment in edit mode when we go in edit mode as well
+                onEditModeChanged: plasmoid.editMode = editMode
 
-            defaultItemWidth: units.gridUnit * 6
-            defaultItemHeight: defaultItemWidth
+                minimumItemWidth: units.gridUnit * 3
+                minimumItemHeight: minimumItemWidth
 
-            cellWidth: units.iconSizes.small
-            cellHeight: cellWidth
+                defaultItemWidth: units.gridUnit * 6
+                defaultItemHeight: defaultItemWidth
 
-            acceptsAppletCallback: function(applet, x, y) {
-                print("Applet: "+applet+" "+x+" "+y)
-                return true;
-            }
+                cellWidth: units.iconSizes.small
+                cellHeight: cellWidth
 
-            appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
-                id: appletContainer
-                configOverlayComponent: ConfigOverlay {}
-            }
+                acceptsAppletCallback: function(applet, x, y) {
+                    print("Applet: "+applet+" "+x+" "+y)
+                    return true;
+                }
 
-            placeHolder: ContainmentLayoutManager.PlaceHolder {}
+                appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
+                    id: appletContainer
+                    configOverlayComponent: ConfigOverlay {}
+                    onEditModeChanged: {
+                        if (editMode) {
+                            plasmoid.editMode = true;
+                        }
+                    }
+                }
 
-            Repeater {
-                model: 3
-                ContainmentLayoutManager.ItemContainer {
-                    id: extraIcon
-                    key: "Icon-" + modelData
-                    preferredLayoutDirection: editMode ? ContainmentLayoutManager.AppletsLayout.Closest : ContainmentLayoutManager.AppletsLayout.TopToBottom
-                    x: 16
-                    y: 16
-                    implicitWidth: 48
-                    implicitHeight: 48
-                    
-                    editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPress
+                placeHolder: ContainmentLayoutManager.PlaceHolder {}
 
-                    Rectangle {
-                        anchors.fill: parent
-                        color: extraIcon.focus ? "green" : "red"
-                        radius: width
-                        opacity: extraIcon.editMode ? 0.6 : 1
+                Launcher.LauncherGrid {
+                    id: launcher
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        bottom: parent.bottom
                     }
                 }
             }
+        }
+        Controls.Button {
+            text: "load"
+            onClicked: menuRepeater.model = plasmoid.nativeInterface.applicationListModel
         }
     }
 }
