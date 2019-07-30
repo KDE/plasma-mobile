@@ -60,10 +60,12 @@ public:
 
     enum Roles {
         ApplicationNameRole = Qt::UserRole + 1,
-        ApplicationIconRole = Qt::UserRole + 2,
-        ApplicationStorageIdRole = Qt::UserRole + 3,
-        ApplicationEntryPathRole = Qt::UserRole + 4,
-        ApplicationOriginalRowRole  = Qt::UserRole + 6
+        ApplicationIconRole,
+        ApplicationStorageIdRole,
+        ApplicationEntryPathRole,
+        ApplicationOriginalRowRole,
+        ApplicationFavoriteRole,
+        ApplicationOnDesktopRole
     };
 
     QStringList appOrder() const;

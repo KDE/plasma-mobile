@@ -39,6 +39,8 @@ Controls.Control {
     readonly property int cellWidth: applicationsFlow.width / Math.floor(applicationsFlow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight - topPadding
 
+    property FavoriteStrip favoriteStrip
+
     signal externalDragStarted
     signal dragPositionChanged(point pos)
 
@@ -53,19 +55,6 @@ Controls.Control {
         id: frame
         imagePath: "widgets/background"
         anchors.fill: parent
-
-        Rectangle {
-            y: root.cellHeight + frame.margins.top
-            color: theme.textColor
-            opacity: 0.3
-            height: 1
-            anchors {
-                left: parent.left
-                right: parent.right
-                leftMargin: frame.margins.left
-                rightMargin: frame.margins.right
-            }
-        }
     }
 
     contentItem: Item {
@@ -84,6 +73,7 @@ Controls.Control {
             width: root.cellWidth
             height: root.cellHeight
             onYChanged: dragPositionChanged(Qt.point(x, y))
+            opacity: 1
 
             visible: modelData !== null
         }
@@ -120,6 +110,7 @@ Controls.Control {
                     width: root.cellWidth
                     height: root.cellHeight
                     dragDelegate: dragDelegateItem
+                    parent: index < favoriteStrip.count ? favoriteStrip.contentItem : applicationsFlow  
                 }
             }
         }

@@ -37,63 +37,66 @@ Item {
 
     property Item toolBox
 
-    DragDrop.DropArea {
-        anchors.fill: parent
-
-        //TODO type safety?
-        property Item appletsArea
-        onDragEnter: {
-            event.accept(event.proposedAction);
-        }
-        onDragMove: {
-            appletsLayout.showPlaceHolderAt(
-                Qt.rect(event.x - appletsLayout.defaultItemWidth / 2,
-                event.y - appletsLayout.defaultItemHeight / 2,
-                appletsLayout.defaultItemWidth,
-                appletsLayout.defaultItemHeight)
-            );
-        }
-
-        onDragLeave: {
-            appletsLayout.hidePlaceHolder();
-        }
-
-        preventStealing: true
-
-        onDrop: {
-            plasmoid.processMimeData(event.mimeData,
-                        event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
-            event.accept(event.proposedAction);
-            appletsLayout.hidePlaceHolder();
-        }
-
 Text {
     text:"Edit Mode"
     color: "white"
     visible: plasmoid.editMode
 }
-        Connections {
-            target: plasmoid
-            onEditModeChanged: {
-                appletsLayout.editMode = plasmoid.editMode
-                if (plasmoid.editMode) {
-                    menuRepeater.freeLayout();
-                } else {
-                    menuRepeater.relayout();
-                }
+    Connections {
+        target: plasmoid
+        onEditModeChanged: {
+            appletsLayout.editMode = plasmoid.editMode
+            if (plasmoid.editMode) {
+                menuRepeater.freeLayout();
+            } else {
+                menuRepeater.relayout();
             }
         }
+    }
 
-        Flickable {
-            anchors.fill: parent
-            contentWidth: width
-            contentHeight: appletsLayout.height
-            interactive: !plasmoid.editMode
+    Flickable {
+        id: mainFlickable
+        anchors.fill: parent
+        
+        bottomMargin: favoriteStrip.height
+        contentWidth: width
+        contentHeight: appletsLayout.height
+        interactive: !plasmoid.editMode
+
+        DragDrop.DropArea {
+            width: parent.width
+            height: mainFlickable.height + launcher.height
+
+            onDragEnter: {
+                event.accept(event.proposedAction);
+            }
+            onDragMove: {
+                appletsLayout.showPlaceHolderAt(
+                    Qt.rect(event.x - appletsLayout.defaultItemWidth / 2,
+                    event.y - appletsLayout.defaultItemHeight / 2,
+                    appletsLayout.defaultItemWidth,
+                    appletsLayout.defaultItemHeight)
+                );
+            }
+
+            onDragLeave: {
+                appletsLayout.hidePlaceHolder();
+            }
+
+            preventStealing: true
+
+            onDrop: {
+                plasmoid.processMimeData(event.mimeData,
+                            event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
+                event.accept(event.proposedAction);
+                appletsLayout.hidePlaceHolder();
+            }
 
             ContainmentLayoutManager.AppletsLayout {
                 id: appletsLayout
-                width: parent.width
-                height: 500 + launcher.height
+
+                anchors.fill: parent
+
                 configKey: width > height ? "ItemGeometries" : "ItemGeometriesVertical"
                 containment: plasmoid
                 editModeCondition: plasmoid.immutable
@@ -131,6 +134,7 @@ Text {
 
                 Launcher.LauncherGrid {
                     id: launcher
+                    favoriteStrip: favoriteStrip
                     anchors {
                         left: parent.left
                         right: parent.right
@@ -139,9 +143,15 @@ Text {
                 }
             }
         }
-        Controls.Button {
-            text: "load"
-            onClicked: menuRepeater.model = plasmoid.nativeInterface.applicationListModel
+    }
+    Launcher.FavoriteStrip {
+        id: favoriteStrip
+        launcherGrid: launcher
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
         }
     }
 }
+

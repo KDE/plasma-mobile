@@ -43,6 +43,8 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
     //can't use the new syntax as this signal is overloaded
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
+    //here or delayed?
+    loadApplications();
 }
 
 ApplicationListModel::~ApplicationListModel()
@@ -56,6 +58,8 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
     roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
     roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
+    roleNames[ApplicationFavoriteRole] = "ApplicationFavoriteRole";
+    roleNames[ApplicationOnDesktopRole] = "ApplicationOnDesktopRole";
 
     return roleNames;
 }
@@ -217,6 +221,7 @@ void ApplicationListModel::setFavoriteItem(int row, bool favorite)
     }
 
     data.favorite = favorite;
+qWarning()<<m_applicationList[row].favorite;
     emit dataChanged(index(row, 0), index(row, 0));
 }
 

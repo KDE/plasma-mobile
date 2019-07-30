@@ -25,31 +25,28 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
-Controls.Control {
+ContainmentLayoutManager.ItemContainer {
     id: delegate
 
     z: dragging ? 1 : 0
 
     property var modelData: typeof model !== "undefined" ? model : null
     property bool dragging
-    property Controls.Control dragDelegate
+    property ContainmentLayoutManager.ItemContainer dragDelegate
 
-    Drag.active: false
-    Drag.hotSpot.x: delegate.width/2
-    Drag.hotSpot.y: delegate.height/2
-    Drag.mimeData: { "text/uri-list": modelData ? "file://" + modelData.ApplicationDesktopRole : "" }
-    Drag.dragType: Drag.Automatic
-
-    leftPadding: units.smallSpacing*2
-    topPadding: units.smallSpacing*2
-    rightPadding: units.smallSpacing*2
-    bottomPadding: units.smallSpacing*2
+    leftPadding: units.smallSpacing * 2
+    topPadding: units.smallSpacing * 2
+    rightPadding: units.smallSpacing * 2
+    bottomPadding: units.smallSpacing * 2
 
     opacity: dragging ? 0.4 : 1
 
     onDraggingChanged: {
         if (dragging) {
+            var pos = dragDelegate.parent.mapFromItem(delegate, 0, 0);
+            dragDelegate.parent = delegate.parent.parent;
             dragDelegate.x = delegate.x
             dragDelegate.y = delegate.y
             dragDelegate.modelData = model;
@@ -59,6 +56,7 @@ Controls.Control {
             root.reorderingApps = false;
         }
     }
+
     contentItem: MouseArea {
         drag.target: dragging ? dragDelegate : null
 
@@ -85,20 +83,13 @@ Controls.Control {
                 return;
             }
 
-            if (dragDelegate.x + dragDelegate.width < 0
-                || dragDelegate.y + dragDelegate.height < 0
-                || dragDelegate.x > applicationsFlow.width
-                || dragDelegate.y > applicationsFlow.height) {
-                dragging = false;
-                delegate.grabToImage(function(result) {
-                    root.externalDragStarted();
-                    delegate.Drag.imageSource = result.url;
-                    delegate.Drag.active = true;
-                })
-                return;
-            }
+            var newRow = 0;
 
-            var newRow = Math.round(applicationsFlow.width / dragDelegate.width) * Math.floor((dragDelegate.y+dragDelegate.height/2) / dragDelegate.height) + Math.floor((dragDelegate.x+dragDelegate.width/2) / dragDelegate.width);
+            if (favoriteStrip.contains(favoriteStrip.mapFromItem(dragDelegate, dragDelegate.width/2, dragDelegate.height/2))) {
+                newRow = Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width);
+            } else {
+                newRow = Math.round(applicationsFlow.width / dragDelegate.width) * Math.floor((dragDelegate.y + dragDelegate.height/2) / dragDelegate.height) + Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width) + favoriteStrip.count;
+            }
 
             plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
         }
@@ -106,6 +97,7 @@ Controls.Control {
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
+
             PlasmaCore.IconItem {
                 id: icon
 
