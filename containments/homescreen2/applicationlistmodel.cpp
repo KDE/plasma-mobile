@@ -182,6 +182,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).entryPath;
     case ApplicationOriginalRowRole:
         return index.row();
+    case ApplicationOnDesktopRole:
+        return m_applicationList.at(index.row()).desktop;
 
     default:
         return QVariant();
@@ -221,7 +223,7 @@ void ApplicationListModel::setFavoriteItem(int row, bool favorite)
     }
 
     data.favorite = favorite;
-qWarning()<<m_applicationList[row].favorite;
+
     emit dataChanged(index(row, 0), index(row, 0));
 }
 
@@ -237,6 +239,7 @@ void ApplicationListModel::setDesktopItem(int row, bool desktop)
     }
 
     data.desktop = desktop;
+qWarning()<<m_applicationList[row].desktop;
     emit dataChanged(index(row, 0), index(row, 0));
 }
 

@@ -43,6 +43,8 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragging ? 0.4 : 1
 
+    editModeCondition: model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
+
     onDraggingChanged: {
         if (dragging) {
             var pos = dragDelegate.parent.mapFromItem(delegate, 0, 0);
@@ -71,10 +73,17 @@ ContainmentLayoutManager.ItemContainer {
         }
     
         onPressAndHold: {
+            if (model.ApplicationOnDesktopRole) {
+                mouse.accepted = false
+                return
+            }
             delegate.dragging = true;
         }
 
-        onReleased: delegate.dragging = false;
+        onReleased: {
+            delegate.dragging = false;
+            
+        }
 
         onCanceled: delegate.dragging = false;
 
@@ -85,11 +94,19 @@ ContainmentLayoutManager.ItemContainer {
 
             var newRow = 0;
 
+            // Put it in the favorites strip
             if (favoriteStrip.contains(favoriteStrip.mapFromItem(dragDelegate, dragDelegate.width/2, dragDelegate.height/2))) {
                 newRow = Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width);
+            // Put it on desktop
+            } else if (appletsLayout.contains(appletsLayout.mapFromItem(dragDelegate, dragDelegate.width/2, dragDelegate.height/2))) {
+                plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, true);
+                return;
+            // Put it in the general view
             } else {
                 newRow = Math.round(applicationsFlow.width / dragDelegate.width) * Math.floor((dragDelegate.y + dragDelegate.height/2) / dragDelegate.height) + Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width) + favoriteStrip.count;
             }
+
+            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
 
             plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
         }

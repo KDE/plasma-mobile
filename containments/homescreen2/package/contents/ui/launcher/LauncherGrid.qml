@@ -25,6 +25,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 Controls.Control {
     id: root
@@ -39,6 +40,7 @@ Controls.Control {
     readonly property int cellWidth: applicationsFlow.width / Math.floor(applicationsFlow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight - topPadding
 
+    property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
 
     signal externalDragStarted
@@ -110,7 +112,15 @@ Controls.Control {
                     width: root.cellWidth
                     height: root.cellHeight
                     dragDelegate: dragDelegateItem
-                    parent: index < favoriteStrip.count ? favoriteStrip.contentItem : applicationsFlow  
+                    parent: {
+                        if (model.ApplicationOnDesktopRole) {
+                            return appletsLayout;
+                        }
+                        if (index < favoriteStrip.count) {
+                            return favoriteStrip.contentItem;
+                        }
+                        return applicationsFlow;
+                    }
                 }
             }
         }

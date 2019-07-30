@@ -46,112 +46,127 @@ Text {
         target: plasmoid
         onEditModeChanged: {
             appletsLayout.editMode = plasmoid.editMode
-            if (plasmoid.editMode) {
-                menuRepeater.freeLayout();
-            } else {
-                menuRepeater.relayout();
-            }
         }
     }
 
     Flickable {
         id: mainFlickable
-        anchors.fill: parent
+        anchors {
+            fill: parent
+           // bottomMargin: favoriteStrip.height
+        }
         
         bottomMargin: favoriteStrip.height
         contentWidth: width
-        contentHeight: appletsLayout.height
+        contentHeight: flickableContents.height
         interactive: !plasmoid.editMode
 
-        DragDrop.DropArea {
+        ColumnLayout {
+            id: flickableContents
             width: parent.width
-            height: mainFlickable.height + launcher.height
+            DragDrop.DropArea {
+                Layout.fillWidth: true
+                Layout.preferredHeight: mainFlickable.height //TODO: multiple widgets pages
 
-            onDragEnter: {
-                event.accept(event.proposedAction);
-            }
-            onDragMove: {
-                appletsLayout.showPlaceHolderAt(
-                    Qt.rect(event.x - appletsLayout.defaultItemWidth / 2,
-                    event.y - appletsLayout.defaultItemHeight / 2,
-                    appletsLayout.defaultItemWidth,
-                    appletsLayout.defaultItemHeight)
-                );
-            }
-
-            onDragLeave: {
-                appletsLayout.hidePlaceHolder();
-            }
-
-            preventStealing: true
-
-            onDrop: {
-                plasmoid.processMimeData(event.mimeData,
-                            event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
-                event.accept(event.proposedAction);
-                appletsLayout.hidePlaceHolder();
-            }
-
-            ContainmentLayoutManager.AppletsLayout {
-                id: appletsLayout
-
-                anchors.fill: parent
-
-                configKey: width > height ? "ItemGeometries" : "ItemGeometriesVertical"
-                containment: plasmoid
-                editModeCondition: plasmoid.immutable
-                        ? ContainmentLayoutManager.AppletsLayout.Manual
-                        : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
-
-                // Sets the containment in edit mode when we go in edit mode as well
-                onEditModeChanged: plasmoid.editMode = editMode
-
-                minimumItemWidth: units.gridUnit * 3
-                minimumItemHeight: minimumItemWidth
-
-                defaultItemWidth: units.gridUnit * 6
-                defaultItemHeight: defaultItemWidth
-
-                cellWidth: units.iconSizes.small
-                cellHeight: cellWidth
-
-                acceptsAppletCallback: function(applet, x, y) {
-                    print("Applet: "+applet+" "+x+" "+y)
-                    return true;
+                onDragEnter: {
+                    event.accept(event.proposedAction);
+                }
+                onDragMove: {
+                    appletsLayout.showPlaceHolderAt(
+                        Qt.rect(event.x - appletsLayout.defaultItemWidth / 2,
+                        event.y - appletsLayout.defaultItemHeight / 2,
+                        appletsLayout.defaultItemWidth,
+                        appletsLayout.defaultItemHeight)
+                    );
                 }
 
-                appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
-                    id: appletContainer
-                    configOverlayComponent: ConfigOverlay {}
-                    onEditModeChanged: {
-                        if (editMode) {
-                            plasmoid.editMode = true;
+                onDragLeave: {
+                    appletsLayout.hidePlaceHolder();
+                }
+
+                preventStealing: true
+
+                onDrop: {
+                    plasmoid.processMimeData(event.mimeData,
+                                event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
+                    event.accept(event.proposedAction);
+                    appletsLayout.hidePlaceHolder();
+                }
+
+                PlasmaCore.Svg {
+                    id: arrowsSvg
+                    imagePath: "widgets/arrows"
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                }
+                PlasmaCore.SvgItem {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                        bottomMargin: favoriteStrip.height
+                    }
+                    z: 2
+                    svg: arrowsSvg
+                    elementId: "up-arrow"
+                    width: units.iconSizes.large
+                    height: width
+                }
+
+                ContainmentLayoutManager.AppletsLayout {
+                    id: appletsLayout
+
+                    anchors.fill: parent
+
+                    configKey: width > height ? "ItemGeometriesHorizontal" : "ItemGeometriesVertical"
+                    containment: plasmoid
+                    editModeCondition: plasmoid.immutable
+                            ? ContainmentLayoutManager.AppletsLayout.Manual
+                            : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
+
+                    // Sets the containment in edit mode when we go in edit mode as well
+                    onEditModeChanged: plasmoid.editMode = editMode
+
+                    minimumItemWidth: units.gridUnit * 3
+                    minimumItemHeight: minimumItemWidth
+
+                    defaultItemWidth: units.gridUnit * 6
+                    defaultItemHeight: defaultItemWidth
+
+                    cellWidth: units.iconSizes.small
+                    cellHeight: cellWidth
+
+                    acceptsAppletCallback: function(applet, x, y) {
+                        print("Applet: "+applet+" "+x+" "+y)
+                        return true;
+                    }
+
+                    appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
+                        id: appletContainer
+                        configOverlayComponent: ConfigOverlay {}
+                        onEditModeChanged: {
+                            if (editMode) {
+                                plasmoid.editMode = true;
+                            }
                         }
                     }
-                }
 
-                placeHolder: ContainmentLayoutManager.PlaceHolder {}
-
-                Launcher.LauncherGrid {
-                    id: launcher
-                    favoriteStrip: favoriteStrip
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom: parent.bottom
-                    }
+                    placeHolder: ContainmentLayoutManager.PlaceHolder {}
                 }
+            }
+            Launcher.LauncherGrid {
+                id: launcher
+                Layout.fillWidth: true
+                
+                favoriteStrip: favoriteStrip
+                appletsLayout: appletsLayout
             }
         }
     }
     Launcher.FavoriteStrip {
         id: favoriteStrip
+        anchors.horizontalCenter: parent.horizontalCenter
+        width: Math.min(root.width, units.gridUnit * 30)
         launcherGrid: launcher
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
+        y: Math.max(0, root.height - height - mainFlickable.contentY)
     }
 }
 
