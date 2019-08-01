@@ -30,6 +30,9 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 Controls.Control {
     id: root
 
+    function forceLayout() {
+        applicationsFlow.forceLayout();
+    }
     readonly property bool dragging: applicationsFlow.dragData
     property bool reorderingApps: false
 

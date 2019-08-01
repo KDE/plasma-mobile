@@ -59,7 +59,7 @@ Text {
         bottomMargin: favoriteStrip.height
         contentWidth: width
         contentHeight: flickableContents.height
-        interactive: !plasmoid.editMode
+        interactive: !plasmoid.editMode && !launcher.dragging
 
         ColumnLayout {
             id: flickableContents

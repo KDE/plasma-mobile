@@ -43,7 +43,20 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragging ? 0.4 : 1
 
-    editModeCondition: model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
+    editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold//model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
+    onEditModeChanged: {//FIXME: remove
+        plasmoid.editMode = editMode
+    }
+    onDragActiveChanged: {
+        if (dragActive) {
+            return;
+        }
+        
+        plasmoid.editMode = false;
+        editMode = false;
+        launcher.forceLayout();
+        favoriteStrip.forceLayout();
+    }
 
     onDraggingChanged: {
         if (dragging) {
@@ -59,9 +72,36 @@ ContainmentLayoutManager.ItemContainer {
         }
     }
 
-    contentItem: MouseArea {
-        drag.target: dragging ? dragDelegate : null
+    onUserDrag: {
+       // newPosition
+        var newRow = 0;
 
+        // Put it in the favorites strip
+        if (favoriteStrip.contains(favoriteStrip.mapFromItem(delegate, dragCenter.x, dragCenter.y))) {
+            var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
+            newRow = Math.floor((pos.x + dragCenter.x) / delegate.width);
+
+        // Put it on desktop
+        } else if (appletsLayout.contains(appletsLayout.mapFromItem(delegate, dragCenter.x, dragCenter.y))) {
+            var pos = appletsLayout.mapFromItem(delegate, 0, 0);
+            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, true);
+            delegate.x = pos.x
+            delegate.y = pos.y
+            return;
+    
+        // Put it in the general view
+        } else {
+            newRow = Math.round(applicationsFlow.width / delegate.width) * Math.floor((delegate.y + dragCenter.y) / delegate.height) + Math.floor((delegate.x + dragCenter.x) / delegate.width) + favoriteStrip.count;
+        }
+
+        plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
+
+        plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+
+        //delegate.x = newPosition.x;
+    }
+
+    contentItem: MouseArea {
         onClicked: {
             if (modelData.ApplicationStartupNotifyRole) {
                 clickFedbackAnimation.target = delegate;
@@ -70,45 +110,6 @@ ContainmentLayoutManager.ItemContainer {
                 feedbackWindow.state = "open";
             }
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
-        }
-    
-        onPressAndHold: {
-            if (model.ApplicationOnDesktopRole) {
-                mouse.accepted = false
-                return
-            }
-            delegate.dragging = true;
-        }
-
-        onReleased: {
-            delegate.dragging = false;
-            
-        }
-
-        onCanceled: delegate.dragging = false;
-
-        onPositionChanged: {
-            if (!dragging || !dragDelegate) {
-                return;
-            }
-
-            var newRow = 0;
-
-            // Put it in the favorites strip
-            if (favoriteStrip.contains(favoriteStrip.mapFromItem(dragDelegate, dragDelegate.width/2, dragDelegate.height/2))) {
-                newRow = Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width);
-            // Put it on desktop
-            } else if (appletsLayout.contains(appletsLayout.mapFromItem(dragDelegate, dragDelegate.width/2, dragDelegate.height/2))) {
-                plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, true);
-                return;
-            // Put it in the general view
-            } else {
-                newRow = Math.round(applicationsFlow.width / dragDelegate.width) * Math.floor((dragDelegate.y + dragDelegate.height/2) / dragDelegate.height) + Math.floor((dragDelegate.x + dragDelegate.width/2) / dragDelegate.width) + favoriteStrip.count;
-            }
-
-            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
-
-            plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
         }
 
         ColumnLayout {
