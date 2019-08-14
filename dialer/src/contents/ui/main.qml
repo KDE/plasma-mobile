@@ -22,7 +22,9 @@ import QtQuick 2.3
 import QtQuick.Controls 2.3
 import QtQuick.Layouts 1.1
 import QtQuick.LocalStorage 2.0
+
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami 2.0 as Kirigami
 
 ApplicationWindow {
     id: root
@@ -164,7 +166,7 @@ ApplicationWindow {
         opacity: shouldShow ? 1 : 0
         Behavior on opacity {
             OpacityAnimator {
-                duration: units.shortDuration
+                duration: Kirigami.Units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -181,7 +183,7 @@ ApplicationWindow {
         z:  shouldShow ? 2 : 0
         Behavior on opacity {
             OpacityAnimator {
-                duration: units.shortDuration
+                duration: Kirigami.Units.shortDuration
                 easing.type: Easing.InOutQuad
             }
         }
