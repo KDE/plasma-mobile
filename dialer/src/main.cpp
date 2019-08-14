@@ -33,15 +33,10 @@
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
 #include <qcommandlineoption.h>
-#include <QQuickItem>
 #include <QtQml>
 
-#include <kpackage/package.h>
-#include <kpackage/packageloader.h>
 #include <QQmlContext>
 #include <QQmlEngine>
-#include <QQmlExpression>
-#include <QQmlProperty>
 #include <QQuickWindow>
 #include <kdeclarative/qmlobject.h>
 #include <KAboutData>
@@ -152,7 +147,7 @@ int main(int argc, char **argv)
     auto *obj = new KDeclarative::QmlObject();
     obj->setTranslationDomain(packagePath);
     obj->setInitializationDelayed(true);
-    obj->loadPackage(packagePath);
+    obj->setSource(QUrl("qrc:///main.qml"));
     obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
     auto *dialerUtils = new DialerUtils(simAccount);
@@ -160,20 +155,13 @@ int main(int argc, char **argv)
 
     obj->completeInitialization();
 
-    if (!obj->package().metadata().isValid()) {
-        return -1;
-    }
-
     Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
     registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Plasma.Dialer");
 
-    KPluginMetaData data = obj->package().metadata();
-    // About data
-    KAboutData aboutData(data.pluginId(), data.name(), data.version(), data.description(), KAboutLicense::byKeyword(data.license()).key());
-
-    for (auto author : data.authors()) {
-        aboutData.addAuthor(author.name(), author.task(), author.emailAddress(), author.webAddress(), author.ocsUsername());
-    }
+    KAboutData aboutData("dialer", i18n("Dialer"), "0.9", i18n("Plasma phone dialer"), KAboutLicense::GPL);
+    aboutData.setDesktopFileName("org.kde.phone.dialer");
+    
+    KAboutData::setApplicationData(aboutData);
 
     //The root is not a window?
     //have to use a normal QQuickWindow since the root item is already created

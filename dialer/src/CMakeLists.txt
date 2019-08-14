@@ -4,11 +4,10 @@ set(plasmaphonedialer_SRCS
     call-handler.cpp
     call-manager.cpp
 )
-
-add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
+qt5_add_resources(RESOURCES resources.qrc)
+add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS} ${RESOURCES})
 target_compile_definitions(plasmaphonedialer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
-#find_package(ActiveApp REQUIRED)
 find_package(PhoneNumber COMPONENTS PhoneNumber REQUIRED)
 
 target_link_libraries(plasmaphonedialer
@@ -18,7 +17,6 @@ target_link_libraries(plasmaphonedialer
  Qt5::Widgets
  KF5::Declarative
  KF5::I18n
- KF5::Package
  KF5::QuickAddons
  KF5::DBusAddons
  KF5::Notifications
