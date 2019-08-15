@@ -24,6 +24,7 @@
 
 #include <Plasma/Containment>
 
+class QQuickItem;
 class ApplicationListModel;
 
 class HomeScreen : public Plasma::Containment
@@ -36,6 +37,8 @@ public:
     ~HomeScreen() override;
 
     ApplicationListModel *applicationListModel();
+
+    Q_INVOKABLE void orderItems(QQuickItem *item1, QQuickItem *item2);
 
 private:
     ApplicationListModel *m_applicationListModel;

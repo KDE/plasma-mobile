@@ -30,9 +30,8 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 Controls.Control {
     id: root
 
-    function forceLayout() {
-        applicationsFlow.forceLayout();
-    }
+    property alias flow: applicationsFlow
+
     readonly property bool dragging: applicationsFlow.dragData
     property bool reorderingApps: false
 
@@ -49,6 +48,19 @@ Controls.Control {
     signal externalDragStarted
     signal dragPositionChanged(point pos)
 
+    function forceLayout() {
+        applicationsFlow.forceLayout();
+    }
+
+    function showSpacerBefore(item) {
+        spacer.parent = applicationsFlow
+        plasmoid.nativeInterface.orderItems(spacer, item);
+    }
+
+    function hideSpacer() {
+        spacer.parent = flowParent;
+    }
+
     implicitHeight: applicationsFlow.implicitHeight + frame.margins.top + frame.margins.bottom
 
     leftPadding: frame.margins.left
@@ -63,6 +75,7 @@ Controls.Control {
     }
 
     contentItem: Item {
+        id: flowParent
         //NOTE: TextMetrics can't handle multi line
         Controls.Label {
             id: metrics
@@ -70,19 +83,12 @@ Controls.Control {
             visible: false
         }
 
-        //This Delegate is the placeholder for the "drag"
-        //delegate (that is not actual drag and drop
-        Delegate {
-            id: dragDelegateItem
-            z: 999
-            width: root.cellWidth
-            height: root.cellHeight
-            onYChanged: dragPositionChanged(Qt.point(x, y))
-            opacity: 1
-
-            visible: modelData !== null
+        Item {
+            id: spacer
+            width: units.gridUnit * 4
+            height: width
+            visible:parent == applicationsFlow
         }
-
         Flow {
             id: applicationsFlow
             anchors.fill: parent
@@ -114,15 +120,31 @@ Controls.Control {
                 delegate: Delegate {
                     width: root.cellWidth
                     height: root.cellHeight
-                    dragDelegate: dragDelegateItem
+                    container: {
+                        if (model.ApplicationOnDesktopRole) {
+                            return null;
+                        }
+                        if (index < favoriteStrip.count) {
+                            return favoriteStrip;
+                        }
+                        return root;
+                    }
                     parent: {
                         if (model.ApplicationOnDesktopRole) {
                             return appletsLayout;
                         }
                         if (index < favoriteStrip.count) {
-                            return favoriteStrip.contentItem;
+                            if (editMode) {
+                                return favoriteStrip.contentItem;
+                            } else {
+                                return favoriteStrip.flow;
+                            }
                         }
-                        return applicationsFlow;
+                        if (editMode) {
+                            return flowParent;
+                        } else {
+                            return applicationsFlow;
+                        }
                     }
                 }
             }

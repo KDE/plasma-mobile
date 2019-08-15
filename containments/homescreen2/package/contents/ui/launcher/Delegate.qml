@@ -33,8 +33,9 @@ ContainmentLayoutManager.ItemContainer {
     z: dragging ? 1 : 0
 
     property var modelData: typeof model !== "undefined" ? model : null
-    property bool dragging
-    property ContainmentLayoutManager.ItemContainer dragDelegate
+    property ContainmentLayoutManager.ItemContainer beforeItem
+    property Item container
+    property ContainmentLayoutManager.ItemContainer before
 
     leftPadding: units.smallSpacing * 2
     topPadding: units.smallSpacing * 2
@@ -46,29 +47,29 @@ ContainmentLayoutManager.ItemContainer {
     editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold//model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
     onEditModeChanged: {//FIXME: remove
         plasmoid.editMode = editMode
+        if (!editMode) {
+            root.forceLayout();
+        }
     }
     onDragActiveChanged: {
         if (dragActive) {
+            if (container) {
+                container.showSpacerBefore(delegate);
+            }
             return;
         }
         
         plasmoid.editMode = false;
         editMode = false;
-        launcher.forceLayout();
-        favoriteStrip.forceLayout();
+        if (container) {
+            container.forceLayout();
+            container.hideSpacer();
+        }
     }
 
-    onDraggingChanged: {
-        if (dragging) {
-            var pos = dragDelegate.parent.mapFromItem(delegate, 0, 0);
-            dragDelegate.parent = delegate.parent.parent;
-            dragDelegate.x = delegate.x
-            dragDelegate.y = delegate.y
-            dragDelegate.modelData = model;
-            root.reorderingApps = true;
-        } else {
-            dragDelegate.modelData = null;
-            root.reorderingApps = false;
+    onParentChanged: {
+        if (container) {
+            plasmoid.nativeInterface.orderItems(delegate, before);
         }
     }
 
@@ -80,6 +81,7 @@ ContainmentLayoutManager.ItemContainer {
         if (favoriteStrip.contains(favoriteStrip.mapFromItem(delegate, dragCenter.x, dragCenter.y))) {
             var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
             newRow = Math.floor((pos.x + dragCenter.x) / delegate.width);
+            before = favoriteStrip.flow.childAt(delegate.x + dragCenter.x, delegate.y + dragCenter.y);
 
         // Put it on desktop
         } else if (appletsLayout.contains(appletsLayout.mapFromItem(delegate, dragCenter.x, dragCenter.y))) {
@@ -87,16 +89,22 @@ ContainmentLayoutManager.ItemContainer {
             plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, true);
             delegate.x = pos.x
             delegate.y = pos.y
+            before = null;
             return;
     
         // Put it in the general view
         } else {
             newRow = Math.round(applicationsFlow.width / delegate.width) * Math.floor((delegate.y + dragCenter.y) / delegate.height) + Math.floor((delegate.x + dragCenter.x) / delegate.width) + favoriteStrip.count;
+            before = applicationsFlow.childAt(delegate.x + dragCenter.x, delegate.y + dragCenter.y);
         }
 
         plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
 
         plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+
+        if (container) {
+            container.showSpacerBefore(before);
+        }
 
         //delegate.x = newPosition.x;
     }

@@ -22,6 +22,7 @@
 
 #include <QtQml>
 #include <QDebug>
+#include <QQuickItem>
 
 HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
@@ -38,6 +39,16 @@ ApplicationListModel *HomeScreen::applicationListModel()
 {
     return m_applicationListModel;
 }
+
+void HomeScreen::orderItems(QQuickItem *item1, QQuickItem *item2)
+{
+    if (!item1 || !item2 || item1->parentItem() != item2->parentItem()) {
+        return;
+    }
+
+    item1->stackBefore(item2);
+}
+
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(homescreen, HomeScreen, "metadata.json")
 

@@ -29,12 +29,23 @@ import org.kde.kquickcontrolsaddons 2.0
 Controls.Control {
     id: root
 
+    property alias flow: applicationsFlow
+
+    property Controls.Control launcherGrid
+    readonly property int count: applicationsFlow.width / launcherGrid.cellWidth
+
     function forceLayout() {
         applicationsFlow.forceLayout();
     }
 
-    property Controls.Control launcherGrid
-    readonly property int count: applicationsFlow.width / launcherGrid.cellWidth
+    function showSpacerBefore(item) {
+        spacer.parent = applicationsFlow
+        plasmoid.nativeInterface.orderItems(spacer, item);
+    }
+
+    function hideSpacer() {
+        spacer.parent = flowParent;
+    }
 
     implicitHeight: applicationsFlow.implicitHeight + frame.margins.top + frame.margins.bottom
 
@@ -49,16 +60,30 @@ Controls.Control {
         anchors.fill: parent
     }
 
-    contentItem: Flow {
-        id: applicationsFlow
+    contentItem: Item {
+        id: flowParent
 
-        spacing: 0
+        implicitWidth: applicationsFlow.implicitWidth
+        implicitHeight: applicationsFlow.implicitHeight
 
-        move: Transition {
-            NumberAnimation {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-                properties: "x,y"
+        Item {
+            id: spacer
+            width: units.gridUnit * 4
+            height: width
+        }
+
+        Flow {
+            id: applicationsFlow
+            anchors.fill: parent
+
+            spacing: 0
+
+            move: Transition {
+                NumberAnimation {
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                    properties: "x,y"
+                }
             }
         }
     }
