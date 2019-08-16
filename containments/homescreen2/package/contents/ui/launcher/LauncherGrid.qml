@@ -27,127 +27,68 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
-Controls.Control {
+LauncherContainer {
     id: root
 
-    property alias flow: applicationsFlow
-
-    readonly property bool dragging: applicationsFlow.dragData
+    readonly property bool dragging: root.flow.dragData
     property bool reorderingApps: false
 
-    property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
 
-    readonly property int reservedSpaceForLabel: metrics.height
-
-    readonly property int cellWidth: applicationsFlow.width / Math.floor(applicationsFlow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
+    readonly property int cellWidth: root.flow.width / Math.floor(root.flow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight - topPadding
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
 
-    signal externalDragStarted
-    signal dragPositionChanged(point pos)
 
-    function forceLayout() {
-        applicationsFlow.forceLayout();
-    }
-
-    function showSpacerBefore(item) {
-        spacer.parent = applicationsFlow
-        plasmoid.nativeInterface.orderItems(spacer, item);
-    }
-
-    function hideSpacer() {
-        spacer.parent = flowParent;
-    }
-
-    implicitHeight: applicationsFlow.implicitHeight + frame.margins.top + frame.margins.bottom
-
-    leftPadding: frame.margins.left
-    topPadding: frame.margins.top
-    rightPadding: frame.margins.right
-    bottomPadding: frame.margins.bottom
-
-    background: PlasmaCore.FrameSvgItem {
-        id: frame
-        imagePath: "widgets/background"
-        anchors.fill: parent
-    }
-
-    contentItem: Item {
-        id: flowParent
-        //NOTE: TextMetrics can't handle multi line
-        Controls.Label {
-            id: metrics
-            text: "M\nM"
-            visible: false
-        }
-
-        Item {
-            id: spacer
-            width: units.gridUnit * 4
-            height: width
-            visible:parent == applicationsFlow
-        }
-        Flow {
-            id: applicationsFlow
-            anchors.fill: parent
-
-            spacing: 0
-
-            property var dragData
-            property int startContentYDrag
-            property bool viewHasBeenDragged
-
-
-            NumberAnimation {
-                id: scrollAnim
-                target: applicationsFlow
-                properties: "contentY"
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            move: Transition {
-                NumberAnimation {
-                    duration: units.longDuration
-                    easing.type: Easing.InOutQuad
-                    properties: "x,y"
+    Repeater {
+        model: plasmoid.nativeInterface.applicationListModel
+        delegate: Delegate {
+            id: delegate
+            width: root.cellWidth
+            height: root.cellHeight
+            container: {
+                if (model.ApplicationOnDesktopRole) {
+                    return null;
                 }
+                if (index < favoriteStrip.count) {
+                    return favoriteStrip;
+                }
+                return root;
             }
-
-            Repeater {
-                model: plasmoid.nativeInterface.applicationListModel
-                delegate: Delegate {
-                    width: root.cellWidth
-                    height: root.cellHeight
-                    container: {
-                        if (model.ApplicationOnDesktopRole) {
-                            return null;
-                        }
-                        if (index < favoriteStrip.count) {
-                            return favoriteStrip;
-                        }
-                        return root;
+            parent: {
+                if (model.ApplicationOnDesktopRole) {
+                    var pos = appletsLayout.mapFromItem(delegate, 0, 0);
+                    x = pos.x;
+                    y = pos.y;
+                    return appletsLayout;
+                }
+                if (model.ApplicationFavoriteRole) {
+                    if (editMode) {
+                        var pos = favoriteStrip.contentItem.mapFromItem(delegate, 0, 0);
+                        x = pos.x;
+                        y = pos.y;
+                        return favoriteStrip.contentItem;
+                    } else {
+                        var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
+                        x = pos.x;
+                        y = pos.y;
+                        return favoriteStrip.flow;
                     }
-                    parent: {
-                        if (model.ApplicationOnDesktopRole) {
-                            return appletsLayout;
-                        }
-                        if (index < favoriteStrip.count) {
-                            if (editMode) {
-                                return favoriteStrip.contentItem;
-                            } else {
-                                return favoriteStrip.flow;
-                            }
-                        }
-                        if (editMode) {
-                            return flowParent;
-                        } else {
-                            return applicationsFlow;
-                        }
-                    }
+                }
+                if (editMode) {
+                    var pos = flowParent.mapFromItem(delegate, 0, 0);
+                    x = pos.x;
+                    y = pos.y;
+                    return flowParent;
+                } else {
+                    var pos = root.flow.mapFromItem(delegate, 0, 0);
+                    x = pos.x;
+                    y = pos.y;
+                    return root.flow;
                 }
             }
         }
     }
 }
+

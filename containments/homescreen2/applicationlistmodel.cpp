@@ -103,6 +103,8 @@ void ApplicationListModel::loadApplications()
     QMap<int, ApplicationData> orderedList;
     QList<ApplicationData> unorderedList;
 
+    int i = 0; // for default bookmarks
+
     // Iterate over all entries in the group
     while (!subGroupList.isEmpty()) {
         KSycocaEntry::Ptr groupEntry = subGroupList.first();
@@ -141,8 +143,12 @@ void ApplicationListModel::loadApplications()
 
                             auto it = m_appPositions.constFind(service->storageId());
                             if (it != m_appPositions.constEnd()) {
+                                //TODO: proper bookmarks
+                                data.favorite = (*it) < 6;
                                 orderedList[*it] = data;
                             } else {
+                                //TODO: proper bookmarks
+                                data.favorite = ++i + m_appPositions.size() < 6;
                                 unorderedList << data;
                             }
                         }
@@ -184,6 +190,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return index.row();
     case ApplicationOnDesktopRole:
         return m_applicationList.at(index.row()).desktop;
+    case ApplicationFavoriteRole:
+        return m_applicationList.at(index.row()).favorite;
 
     default:
         return QVariant();
@@ -222,6 +230,7 @@ void ApplicationListModel::setFavoriteItem(int row, bool favorite)
         return;
     }
 
+    setDesktopItem(row, false);
     data.favorite = favorite;
 
     emit dataChanged(index(row, 0), index(row, 0));
@@ -238,8 +247,9 @@ void ApplicationListModel::setDesktopItem(int row, bool desktop)
         return;
     }
 
+    setFavoriteItem(row, false);
     data.desktop = desktop;
-qWarning()<<m_applicationList[row].desktop;
+
     emit dataChanged(index(row, 0), index(row, 0));
 }
 

@@ -164,7 +164,7 @@ Text {
     Launcher.FavoriteStrip {
         id: favoriteStrip
         anchors.horizontalCenter: parent.horizontalCenter
-        width: Math.min(root.width, units.gridUnit * 30)
+        width: Math.min(root.width, implicitWidth)
         launcherGrid: launcher
         y: Math.max(0, root.height - height - mainFlickable.contentY)
     }

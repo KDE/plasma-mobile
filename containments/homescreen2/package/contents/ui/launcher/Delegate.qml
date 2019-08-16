@@ -83,6 +83,9 @@ ContainmentLayoutManager.ItemContainer {
             newRow = Math.floor((pos.x + dragCenter.x) / delegate.width);
             before = favoriteStrip.flow.childAt(delegate.x + dragCenter.x, delegate.y + dragCenter.y);
 
+            plasmoid.nativeInterface.applicationListModel.setFavoriteItem(index, true);
+
+
         // Put it on desktop
         } else if (appletsLayout.contains(appletsLayout.mapFromItem(delegate, dragCenter.x, dragCenter.y))) {
             var pos = appletsLayout.mapFromItem(delegate, 0, 0);
@@ -94,6 +97,9 @@ ContainmentLayoutManager.ItemContainer {
     
         // Put it in the general view
         } else {
+            plasmoid.nativeInterface.applicationListModel.setFavoriteItem(index, false);
+            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
+
             newRow = Math.round(applicationsFlow.width / delegate.width) * Math.floor((delegate.y + dragCenter.y) / delegate.height) + Math.floor((delegate.x + dragCenter.x) / delegate.width) + favoriteStrip.count;
             before = applicationsFlow.childAt(delegate.x + dragCenter.x, delegate.y + dragCenter.y);
         }
