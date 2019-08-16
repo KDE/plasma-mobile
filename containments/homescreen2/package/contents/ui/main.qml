@@ -49,6 +49,13 @@ Text {
         }
     }
 
+    Launcher.LauncherDragManager {
+        id: launcherDragManager
+        appletsLayout: appletsLayout
+        launcherGrid: launcher
+        favoriteStrip: favoriteStrip
+    }
+
     Flickable {
         id: mainFlickable
         anchors {
@@ -152,6 +159,7 @@ Text {
                     placeHolder: ContainmentLayoutManager.PlaceHolder {}
                 }
             }
+
             Launcher.LauncherGrid {
                 id: launcher
                 Layout.fillWidth: true
@@ -161,6 +169,7 @@ Text {
             }
         }
     }
+
     Launcher.FavoriteStrip {
         id: favoriteStrip
         anchors.horizontalCenter: parent.horizontalCenter

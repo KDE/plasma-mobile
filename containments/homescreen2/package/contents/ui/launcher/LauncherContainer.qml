@@ -25,6 +25,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 Controls.Control {
     id: root
@@ -32,20 +33,11 @@ Controls.Control {
     readonly property int reservedSpaceForLabel: metrics.height
     property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
 
+    property ContainmentLayoutManager.AppletsLayout appletsLayout
+    property Controls.Control launcherGrid
+    property Controls.Control favoriteStrip
+
     property alias flow: applicationsFlow
-
-    function forceLayout() {
-        applicationsFlow.forceLayout();
-    }
-
-    function showSpacerBefore(item) {
-        spacer.parent = applicationsFlow
-        plasmoid.nativeInterface.orderItems(spacer, item);
-    }
-
-    function hideSpacer() {
-        spacer.parent = flowParent;
-    }
 
     implicitWidth: contentItem.implicitWidth + frame.margins.top + frame.margins.bottom
     implicitHeight: contentItem.implicitHeight + frame.margins.top + frame.margins.bottom

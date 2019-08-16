@@ -37,9 +37,6 @@ LauncherContainer {
     readonly property int cellWidth: root.flow.width / Math.floor(root.flow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight - topPadding
 
-    property ContainmentLayoutManager.AppletsLayout appletsLayout
-    property FavoriteStrip favoriteStrip
-
 
     Repeater {
         model: plasmoid.nativeInterface.applicationListModel
@@ -58,33 +55,18 @@ LauncherContainer {
             }
             parent: {
                 if (model.ApplicationOnDesktopRole) {
-                    var pos = appletsLayout.mapFromItem(delegate, 0, 0);
-                    x = pos.x;
-                    y = pos.y;
                     return appletsLayout;
                 }
                 if (model.ApplicationFavoriteRole) {
                     if (editMode) {
-                        var pos = favoriteStrip.contentItem.mapFromItem(delegate, 0, 0);
-                        x = pos.x;
-                        y = pos.y;
                         return favoriteStrip.contentItem;
                     } else {
-                        var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
-                        x = pos.x;
-                        y = pos.y;
                         return favoriteStrip.flow;
                     }
                 }
                 if (editMode) {
-                    var pos = flowParent.mapFromItem(delegate, 0, 0);
-                    x = pos.x;
-                    y = pos.y;
                     return flowParent;
                 } else {
-                    var pos = root.flow.mapFromItem(delegate, 0, 0);
-                    x = pos.x;
-                    y = pos.y;
                     return root.flow;
                 }
             }

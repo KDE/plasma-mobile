@@ -29,8 +29,6 @@ import org.kde.kquickcontrolsaddons 2.0
 LauncherContainer {
     id: root
 
-    property Controls.Control launcherGrid
-
     readonly property int count: flow.width / launcherGrid.cellWidth
 
     flow.flow: Flow.TopToBottom
