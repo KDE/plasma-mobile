@@ -64,7 +64,7 @@ public:
         ApplicationStorageIdRole,
         ApplicationEntryPathRole,
         ApplicationOriginalRowRole,
-        ApplicationFavoriteRole,
+        ApplicationFavoriteRole, //TODO: a single role for parent
         ApplicationOnDesktopRole
     };
 
