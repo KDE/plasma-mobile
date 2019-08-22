@@ -84,14 +84,49 @@ QtObject {
         item.y = pos.y;
     }
 
+    function nearestChild (item, dragCenterX, dragCenterY, container) {
+        var distance = Number.POSITIVE_INFINITY;
+        var child;
+
+        // Search Left
+        for (var i = 0; i < item.width * 2; i += item.width/2) {
+            var candidate = container.flow.childAt(item.x + dragCenterX + i, item.y + dragCenterY);
+            if (candidate && i < distance) {
+                child = candidate;
+                break;
+            }
+        }
+
+        // Search Right
+        for (var i = 0; i < item.width * 2; i += item.width/2) {
+            var candidate = container.flow.childAt(item.x + dragCenterX - i, item.y + dragCenterY);
+            if (candidate && i < distance) {
+                child = candidate;
+                break;
+            }
+        }
+
+        if (!child) {
+            if (item.y < container.flow.height/2) {
+                child = container.flow.children[0];
+            } else {
+                child = container.flow.children[container.flow.children.length - 1];
+            }
+        }
+
+        return child;
+    }
+
     function showSpacer(item, dragCenterX, dragCenterY) {
         var container = containerForItem(item, dragCenterX, dragCenterY);
 
         raiseContainer(container);
 
-        var child = container.flow.childAt(item.x + dragCenterX, item.y + dragCenterX);
+        var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
         if (!child) {
+            spacer.visible = false;
+            spacer.parent = container.flow
             return;
         }
 
@@ -104,14 +139,12 @@ QtObject {
         spacer.parent = container.flow
 
         if (item.x + dragCenterX < child.x + child.width / 2) {
-            plasmoid.nativeInterface.orderItems(spacer, child);
+            plasmoid.nativeInterface.stackBefore(spacer, child);
         } else {
-            plasmoid.nativeInterface.orderItems(child, spacer);
+            plasmoid.nativeInterface.stackAfter(spacer, child);
         }
 
         changeContainer(item, container);
-
-        print(spacer.parent+" "+child.parent)
 
         spacer.visible = true;
     }
@@ -128,16 +161,19 @@ QtObject {
         spacer.visible = false;
         spacer.parent = container.contentItem;
 
-        var child = container.flow.childAt(item.x + dragCenterX, item.y + dragCenterX);
+        var child = nearestChild(item, dragCenterX, dragCenterY, container);
+
         if (!child) {
+            putInContainerLayout(item, container);
             return;
         }
 
-        putInContainerLayout(item, container);
         if (item.x + dragCenterX < child.x + child.width / 2) {
-            plasmoid.nativeInterface.orderItems(item, child);
+            putInContainerLayout(item, container);
+            plasmoid.nativeInterface.stackBefore(item, child);
         } else {
-            plasmoid.nativeInterface.orderItems(child, item);
+            putInContainerLayout(item, container);
+            plasmoid.nativeInterface.stackAfter(item, child);
         }
     }
 }

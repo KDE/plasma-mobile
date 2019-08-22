@@ -33,7 +33,10 @@ LauncherContainer {
 
     flow.flow: Flow.TopToBottom
 
+    visible: plasmoid.nativeInterface.applicationListModel.favoriteCount > 0 || plasmoid.editMode
 
-    implicitWidth: launcherGrid.cellWidth * 5 + leftPadding + rightPadding//applicationsFlow.count
+    height: launcherGrid.cellHeight + topPadding + bottomPadding
+
+    implicitWidth: launcherGrid.cellWidth * Math.max(1, plasmoid.nativeInterface.applicationListModel.favoriteCount) + leftPadding + rightPadding
 
 }

@@ -38,7 +38,8 @@ public:
 
     ApplicationListModel *applicationListModel();
 
-    Q_INVOKABLE void orderItems(QQuickItem *item1, QQuickItem *item2);
+    Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
+    Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
 
 private:
     ApplicationListModel *m_applicationListModel;

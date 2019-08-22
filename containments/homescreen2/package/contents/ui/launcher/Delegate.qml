@@ -33,7 +33,6 @@ ContainmentLayoutManager.ItemContainer {
     z: dragging ? 1 : 0
 
     property var modelData: typeof model !== "undefined" ? model : null
-    property Item container
 
     leftPadding: units.smallSpacing * 2
     topPadding: units.smallSpacing * 2
@@ -42,24 +41,30 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragging ? 0.4 : 1
 
+    property real dragCenterX
+    property real dragCenterY
+
     editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold//model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
     onEditModeChanged: {//FIXME: remove
         plasmoid.editMode = editMode
     }
     onDragActiveChanged: {
         if (dragActive) {
+            // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
             launcherDragManager.showSpacer(delegate, 0, 0);
-            return;
+        } else {
+            launcherDragManager.positionItem(delegate, dragCenterX, dragCenterY);
+            plasmoid.editMode = false;
+            editMode = false;
         }
-        
-        plasmoid.editMode = false;
-        editMode = false;
     }
 
     onUserDrag: {
        // newPosition
         var newRow = 0;
 
+        dragCenterX = dragCenter.x;
+        dragCenterY = dragCenter.y;
         var newContainer = launcherDragManager.containerForItem(delegate, dragCenter.x, dragCenter.y);
 
         // Put it in the favorites strip

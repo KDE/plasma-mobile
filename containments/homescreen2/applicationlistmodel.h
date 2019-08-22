@@ -40,6 +40,7 @@ class ApplicationListModel : public QAbstractListModel {
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
+    Q_PROPERTY(int favoriteCount READ favoriteCount NOTIFY favoriteCountChanged)
     Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
@@ -50,7 +51,8 @@ public:
 
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
 
-    int count() { return m_applicationList.count(); }
+    int count() const { return m_applicationList.count(); }
+    int favoriteCount() const { return m_favoriteCount;}
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
@@ -85,6 +87,7 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void countChanged();
+    void favoriteCountChanged();
     void appOrderChanged();
 
 private:
@@ -92,6 +95,7 @@ private:
 
     QStringList m_appOrder;
     QHash<QString, int> m_appPositions;
+    int m_favoriteCount = 0;
 };
 
 #endif // APPLICATIONLISTMODEL_H

@@ -44,15 +44,7 @@ LauncherContainer {
             id: delegate
             width: root.cellWidth
             height: root.cellHeight
-            container: {
-                if (model.ApplicationOnDesktopRole) {
-                    return null;
-                }
-                if (index < favoriteStrip.count) {
-                    return favoriteStrip;
-                }
-                return root;
-            }
+
             parent: {
                 if (model.ApplicationOnDesktopRole) {
                     return appletsLayout;

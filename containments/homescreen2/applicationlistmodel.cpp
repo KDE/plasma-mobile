@@ -105,6 +105,8 @@ void ApplicationListModel::loadApplications()
 
     int i = 0; // for default bookmarks
 
+    m_favoriteCount = 0;
+
     // Iterate over all entries in the group
     while (!subGroupList.isEmpty()) {
         KSycocaEntry::Ptr groupEntry = subGroupList.first();
@@ -151,6 +153,10 @@ void ApplicationListModel::loadApplications()
                                 data.favorite = ++i + m_appPositions.size() < 6;
                                 unorderedList << data;
                             }
+                            if (data.favorite) {
+                                ++m_favoriteCount;
+                            }
+                            emit favoriteCountChanged();
                         }
                     }
                 }
@@ -232,6 +238,13 @@ void ApplicationListModel::setFavoriteItem(int row, bool favorite)
 
     setDesktopItem(row, false);
     data.favorite = favorite;
+
+    if (data.favorite) {
+        ++m_favoriteCount;
+    } else {
+        m_favoriteCount = qMax(0, m_favoriteCount - 1);
+    }
+    emit favoriteCountChanged();
 
     emit dataChanged(index(row, 0), index(row, 0));
 }
