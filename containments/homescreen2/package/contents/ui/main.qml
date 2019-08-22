@@ -30,6 +30,8 @@ import "launcher" as Launcher
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
+import org.kde.phone.homescreen 1.0
+
 Item {
     id: root
     width: 640

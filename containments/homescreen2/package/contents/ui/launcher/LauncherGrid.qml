@@ -27,6 +27,8 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
+import org.kde.phone.homescreen 1.0
+
 LauncherContainer {
     id: root
 
@@ -46,16 +48,18 @@ LauncherContainer {
             height: root.cellHeight
 
             parent: {
-                if (model.ApplicationOnDesktopRole) {
+                if (model.ApplicationLocationRole == ApplicationListModel.Desktop) {
                     return appletsLayout;
                 }
-                if (model.ApplicationFavoriteRole) {
+
+                if (model.ApplicationLocationRole == ApplicationListModel.Favorites) {
                     if (editMode) {
                         return favoriteStrip.contentItem;
                     } else {
                         return favoriteStrip.flow;
                     }
                 }
+
                 if (editMode) {
                     return flowParent;
                 } else {

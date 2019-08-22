@@ -27,13 +27,14 @@
 
 class QString;
 
+class ApplicationListModel;
+
 struct ApplicationData {
     QString name;
     QString icon;
     QString storageId;
     QString entryPath;
-    bool favorite = false;
-    bool desktop = false;
+    int location = 0; //FIXME
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -44,6 +45,22 @@ class ApplicationListModel : public QAbstractListModel {
     Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
+    enum LauncherLocation {
+        Grid = 0,
+        Favorites,
+        Desktop
+    };
+    Q_ENUM(LauncherLocation)
+
+    enum Roles {
+        ApplicationNameRole = Qt::UserRole + 1,
+        ApplicationIconRole,
+        ApplicationStorageIdRole,
+        ApplicationEntryPathRole,
+        ApplicationOriginalRowRole,
+        ApplicationLocationRole
+    };
+
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
 
@@ -60,21 +77,10 @@ public:
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    enum Roles {
-        ApplicationNameRole = Qt::UserRole + 1,
-        ApplicationIconRole,
-        ApplicationStorageIdRole,
-        ApplicationEntryPathRole,
-        ApplicationOriginalRowRole,
-        ApplicationFavoriteRole, //TODO: a single role for parent
-        ApplicationOnDesktopRole
-    };
-
     QStringList appOrder() const;
     void setAppOrder(const QStringList &order);
 
-    Q_INVOKABLE void setFavoriteItem(int row, bool favorite);
-    Q_INVOKABLE void setDesktopItem(int row, bool desktop);
+    Q_INVOKABLE void setLocation(int row, LauncherLocation location);
 
     Q_INVOKABLE void moveItem(int row, int order);
 

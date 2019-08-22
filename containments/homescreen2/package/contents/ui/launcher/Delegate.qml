@@ -27,6 +27,8 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
+import org.kde.phone.homescreen 1.0
+
 ContainmentLayoutManager.ItemContainer {
     id: delegate
 
@@ -72,23 +74,22 @@ ContainmentLayoutManager.ItemContainer {
             var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
             newRow = Math.floor((pos.x + dragCenter.x) / delegate.width);
 
-            plasmoid.nativeInterface.applicationListModel.setFavoriteItem(index, true);
-
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Favorites);
 
         // Put it on desktop
         } else if (newContainer == appletsLayout) {
             var pos = appletsLayout.mapFromItem(delegate, 0, 0);
-            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, true);
-            delegate.x = pos.x
-            delegate.y = pos.y
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Desktop);
+        print("!!!!!!!!!!!!"+pos.x+" "+pos.y)
+           // delegate.x = pos.x
+           // delegate.y = pos.y
             return;
     
         // Put it in the general view
         } else {
             newRow = Math.round(newContainer.flow.width / delegate.width) * Math.floor((delegate.y + dragCenter.y) / delegate.height) + Math.floor((delegate.x + dragCenter.x) / delegate.width) + favoriteStrip.count;
 
-            plasmoid.nativeInterface.applicationListModel.setFavoriteItem(index, false);
-            plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Grid);
         }
 
         launcherDragManager.showSpacer(delegate, dragCenter.x, dragCenter.y);

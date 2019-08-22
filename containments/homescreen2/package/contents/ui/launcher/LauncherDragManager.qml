@@ -60,7 +60,7 @@ QtObject {
 
     function changeContainer(item, container) {
         var pos;
-
+print("$$$$$$$$"+container)
         if (container == appletsLayout) {
             pos = container.mapFromItem(item, 0, 0);
             item.parent = container;
@@ -75,7 +75,7 @@ QtObject {
 
     function putInContainerLayout(item, container) {
         var pos = container.contentItem.mapFromItem(item, 0, 0);
-
+print("££££££££££££££££"+container)
         if (container == appletsLayout) {
             item.parent = container;
         } else {
@@ -125,17 +125,18 @@ QtObject {
         var container = containerForItem(item, dragCenterX, dragCenterY);
 
         raiseContainer(container);
+print("&&&&&&&&&&&"+container)
+        if (container == appletsLayout) {
+            spacer.visible = false;
+            changeContainer(item, container);
+            return;
+        }
 
         var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
         if (!child) {
             spacer.visible = false;
             spacer.parent = container.flow
-            return;
-        }
-
-        if (container == appletsLayout) {
-            changeContainer(item, container);
             return;
         }
 

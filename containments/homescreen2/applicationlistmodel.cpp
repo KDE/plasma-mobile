@@ -58,8 +58,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
     roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
     roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
-    roleNames[ApplicationFavoriteRole] = "ApplicationFavoriteRole";
-    roleNames[ApplicationOnDesktopRole] = "ApplicationOnDesktopRole";
+    roleNames[ApplicationLocationRole] = "ApplicationLocationRole";
 
     return roleNames;
 }
@@ -146,14 +145,14 @@ void ApplicationListModel::loadApplications()
                             auto it = m_appPositions.constFind(service->storageId());
                             if (it != m_appPositions.constEnd()) {
                                 //TODO: proper bookmarks
-                                data.favorite = (*it) < 6;
+                                data.location = (*it) < 6 ? Favorites : Grid;
                                 orderedList[*it] = data;
                             } else {
                                 //TODO: proper bookmarks
-                                data.favorite = ++i + m_appPositions.size() < 6;
+                                data.location = (++i + m_appPositions.size() < 6) ? Favorites : Grid;
                                 unorderedList << data;
                             }
-                            if (data.favorite) {
+                            if (data.location == Favorites) {
                                 ++m_favoriteCount;
                             }
                             emit favoriteCountChanged();
@@ -194,10 +193,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).entryPath;
     case ApplicationOriginalRowRole:
         return index.row();
-    case ApplicationOnDesktopRole:
-        return m_applicationList.at(index.row()).desktop;
-    case ApplicationFavoriteRole:
-        return m_applicationList.at(index.row()).favorite;
+    case ApplicationLocationRole:
+        return m_applicationList.at(index.row()).location;
 
     default:
         return QVariant();
@@ -225,43 +222,26 @@ void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int so
     moveItem(sourceRow, destinationChild);
 }
 
-void ApplicationListModel::setFavoriteItem(int row, bool favorite)
+void ApplicationListModel::setLocation(int row, LauncherLocation location)
 {
     if (row < 0 || row >= m_applicationList.length()) {
         return;
     }
 
     ApplicationData &data = m_applicationList[row];
-    if (data.favorite == favorite) {
+    if (data.location == location) {
         return;
     }
 
-    setDesktopItem(row, false);
-    data.favorite = favorite;
-
-    if (data.favorite) {
+    if (location == Favorites) {
         ++m_favoriteCount;
-    } else {
+        emit favoriteCountChanged();
+    } else  if (data.location == Favorites) {
         m_favoriteCount = qMax(0, m_favoriteCount - 1);
-    }
-    emit favoriteCountChanged();
-
-    emit dataChanged(index(row, 0), index(row, 0));
-}
-
-void ApplicationListModel::setDesktopItem(int row, bool desktop)
-{
-    if (row < 0 || row >= m_applicationList.length()) {
-        return;
+        emit favoriteCountChanged();
     }
 
-    ApplicationData &data = m_applicationList[row];
-    if (data.desktop == desktop) {
-        return;
-    }
-
-    setFavoriteItem(row, false);
-    data.desktop = desktop;
+    data.location = location;
 
     emit dataChanged(index(row, 0), index(row, 0));
 }
