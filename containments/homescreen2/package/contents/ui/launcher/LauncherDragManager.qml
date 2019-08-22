@@ -21,6 +21,8 @@ import QtQuick 2.4
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
+import org.kde.phone.homescreen 1.0
+
 QtObject {
     id: root
 
@@ -33,152 +35,203 @@ QtObject {
         height: width
     }
 
-    function raiseContainer(container) {
-        container.z = 1;
-
-        if (container == appletsLayout) {
-            launcherGrid.z = 0;
-            favoriteStrip.z = 0;
-        } else if (container == favoriteStrip) {
-            appletsLayout.z = 0;
-            launcherGrid.z = 0;
-        } else {
-            appletsLayout.z = 0;
-            favoriteStrip.z = 0;
-        } 
+    function startDrag(item) {
+        internal.showSpacer(item, 0, 0);
     }
 
-    function containerForItem(item, dragCenterX, dragCenterY) {
-        if (favoriteStrip.contains(favoriteStrip.mapFromItem(item, dragCenterX, dragCenterY))) {
-            return favoriteStrip;
-        } else if (appletsLayout.contains(appletsLayout.mapFromItem(item, dragCenterX, dragCenterY))) {
-            return appletsLayout;
-        } else {
-            return launcherGrid;
-        }
-    }
+    function dragItem(delegate, index, dragCenterX, dragCenterY) {
+              // newPosition
+        var newRow = 0;
 
-    function changeContainer(item, container) {
-        var pos;
-print("$$$$$$$$"+container)
-        if (container == appletsLayout) {
-            pos = container.mapFromItem(item, 0, 0);
-            item.parent = container;
-        } else {
-            pos = container.contentItem.mapFromItem(item, 0, 0);
-            item.parent = container.contentItem;
-        }
+        var newContainer = internal.containerForItem(delegate, dragCenterX, dragCenterY);
 
-        item.x = pos.x;
-        item.y = pos.y;
-    }
+        // Put it in the favorites strip
+        if (newContainer == favoriteStrip) {
+            var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
+            newRow = Math.floor((pos.x + dragCenterX) / delegate.width);
 
-    function putInContainerLayout(item, container) {
-        var pos = container.contentItem.mapFromItem(item, 0, 0);
-print("££££££££££££££££"+container)
-        if (container == appletsLayout) {
-            item.parent = container;
-        } else {
-            item.parent = container.flow;
-        }
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Favorites);
 
-        item.x = pos.x;
-        item.y = pos.y;
-    }
+            internal.showSpacer(delegate, dragCenterX, dragCenterY);
+            plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
 
-    function nearestChild (item, dragCenterX, dragCenterY, container) {
-        var distance = Number.POSITIVE_INFINITY;
-        var child;
-
-        // Search Left
-        for (var i = 0; i < item.width * 2; i += item.width/2) {
-            var candidate = container.flow.childAt(
-                Math.min(container.flow.width, Math.max(0, item.x + dragCenterX + i)),
-                Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
-            if (candidate && i < distance) {
-                child = candidate;
-                break;
-            }
-        }
-
-        // Search Right
-        for (var i = 0; i < item.width * 2; i += item.width/2) {
-            var candidate = container.flow.childAt(Math.min(container.flow.width, Math.max(0, item.x + dragCenterX - i)), Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
-            if (candidate && i < distance) {
-                child = candidate;
-                break;
-            }
-        }
-
-        if (!child) {
-            if (item.y < container.flow.height/2) {
-                child = container.flow.children[0];
-            } else {
-                child = container.flow.children[container.flow.children.length - 1];
-            }
-        }
-
-        return child;
-    }
-
-    function showSpacer(item, dragCenterX, dragCenterY) {
-        var container = containerForItem(item, dragCenterX, dragCenterY);
-
-        raiseContainer(container);
-print("&&&&&&&&&&&"+container)
-        if (container == appletsLayout) {
-            spacer.visible = false;
-            changeContainer(item, container);
+        // Put it on desktop
+        } else if (newContainer == appletsLayout) {
+            var pos = appletsLayout.mapFromItem(delegate, 0, 0);
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Desktop);
+            
+            internal.showSpacer(delegate, dragCenterX, dragCenterY);
             return;
+    
+        // Put it in the general view
+        } else {
+            newRow = Math.round(newContainer.flow.width / delegate.width) * Math.floor((delegate.y + dragCenterY) / delegate.height) + Math.floor((delegate.x + dragCenterX) / delegate.width) + favoriteStrip.count;
+
+            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Grid);
+
+            internal.showSpacer(delegate, dragCenterX, dragCenterY);
+            plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
         }
 
-        var child = nearestChild(item, dragCenterX, dragCenterY, container);
+        internal.showSpacer(delegate, dragCenterX, dragCenterY);
+        plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+    }
 
-        if (!child) {
+    function dropItem(item, dragCenterX, dragCenterY) {
+        internal.positionItem(item, dragCenterX, dragCenterY);
+    }
+
+    // Those should never be accessed from outside
+    property QtObject __internal: QtObject {
+        id: internal
+        function raiseContainer(container) {
+            container.z = 1;
+
+            if (container == appletsLayout) {
+                launcherGrid.z = 0;
+                favoriteStrip.z = 0;
+            } else if (container == favoriteStrip) {
+                appletsLayout.z = 0;
+                launcherGrid.z = 0;
+            } else {
+                appletsLayout.z = 0;
+                favoriteStrip.z = 0;
+            } 
+        }
+
+        function containerForItem(item, dragCenterX, dragCenterY) {
+            if (favoriteStrip.contains(favoriteStrip.mapFromItem(item, dragCenterX, dragCenterY))) {
+                return favoriteStrip;
+            } else if (appletsLayout.contains(appletsLayout.mapFromItem(item, dragCenterX, dragCenterY))) {
+                return appletsLayout;
+            } else {
+                return launcherGrid;
+            }
+        }
+
+        function changeContainer(item, container) {
+            var pos;
+
+            if (container == appletsLayout) {
+                pos = container.mapFromItem(item, 0, 0);
+                item.parent = container;
+            } else {
+                pos = container.contentItem.mapFromItem(item, 0, 0);
+                item.parent = container.contentItem;
+            }
+
+            item.x = pos.x;
+            item.y = pos.y;
+        }
+
+        function putInContainerLayout(item, container) {
+            var pos = container.contentItem.mapFromItem(item, 0, 0);
+
+            if (container == appletsLayout) {
+                item.parent = container;
+            } else {
+                item.parent = container.flow;
+            }
+
+            item.x = pos.x;
+            item.y = pos.y;
+        }
+
+        function nearestChild (item, dragCenterX, dragCenterY, container) {
+            var distance = Number.POSITIVE_INFINITY;
+            var child;
+
+            // Search Left
+            for (var i = 0; i < item.width * 2; i += item.width/2) {
+                var candidate = container.flow.childAt(
+                    Math.min(container.flow.width, Math.max(0, item.x + dragCenterX + i)),
+                    Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
+                if (candidate && i < distance) {
+                    child = candidate;
+                    break;
+                }
+            }
+
+            // Search Right
+            for (var i = 0; i < item.width * 2; i += item.width/2) {
+                var candidate = container.flow.childAt(Math.min(container.flow.width, Math.max(0, item.x + dragCenterX - i)), Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
+                if (candidate && i < distance) {
+                    child = candidate;
+                    break;
+                }
+            }
+
+            if (!child) {
+                if (item.y < container.flow.height/2) {
+                    child = container.flow.children[0];
+                } else {
+                    child = container.flow.children[container.flow.children.length - 1];
+                }
+            }
+
+            return child;
+        }
+
+        function showSpacer(item, dragCenterX, dragCenterY) {
+            var container = containerForItem(item, dragCenterX, dragCenterY);
+
+            raiseContainer(container);
+
+            if (container == appletsLayout) {
+                spacer.visible = false;
+                changeContainer(item, container);
+                return;
+            }
+
+            var child = nearestChild(item, dragCenterX, dragCenterY, container);
+
+            if (!child) {
+                spacer.visible = false;
+                spacer.parent = container.flow
+                return;
+            }
+
             spacer.visible = false;
             spacer.parent = container.flow
-            return;
+
+            if (item.x + dragCenterX < child.x + child.width / 2) {
+                plasmoid.nativeInterface.stackBefore(spacer, child);
+            } else {
+                plasmoid.nativeInterface.stackAfter(spacer, child);
+            }
+
+            changeContainer(item, container);
+
+            spacer.visible = true;
         }
 
-        spacer.visible = false;
-        spacer.parent = container.flow
+        function positionItem(item, dragCenterX, dragCenterY) {
+            var container = containerForItem(item, dragCenterX, dragCenterY);
 
-        if (item.x + dragCenterX < child.x + child.width / 2) {
-            plasmoid.nativeInterface.stackBefore(spacer, child);
-        } else {
-            plasmoid.nativeInterface.stackAfter(spacer, child);
-        }
+            raiseContainer(container);
 
-        changeContainer(item, container);
+            if (container == appletsLayout) {
+                appletsLayout.positionItem(item);
+                return;
+            }
 
-        spacer.visible = true;
-    }
+            spacer.visible = false;
+            spacer.parent = container.contentItem;
 
-    function positionItem(item, dragCenterX, dragCenterY) {
-        var container = containerForItem(item, dragCenterX, dragCenterY);
+            var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
-        raiseContainer(container);
+            if (!child) {
+                putInContainerLayout(item, container);
+                return;
+            }
 
-        if (container == appletsLayout) {
-            return;
-        }
-
-        spacer.visible = false;
-        spacer.parent = container.contentItem;
-
-        var child = nearestChild(item, dragCenterX, dragCenterY, container);
-
-        if (!child) {
-            putInContainerLayout(item, container);
-            return;
-        }
-
-        if (item.x + dragCenterX < child.x + child.width / 2) {
-            putInContainerLayout(item, container);
-            plasmoid.nativeInterface.stackBefore(item, child);
-        } else {
-            putInContainerLayout(item, container);
-            plasmoid.nativeInterface.stackAfter(item, child);
+            if (item.x + dragCenterX < child.x + child.width / 2) {
+                putInContainerLayout(item, container);
+                plasmoid.nativeInterface.stackBefore(item, child);
+            } else {
+                putInContainerLayout(item, container);
+                plasmoid.nativeInterface.stackAfter(item, child);
+            }
         }
     }
 }

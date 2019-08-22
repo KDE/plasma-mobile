@@ -46,57 +46,25 @@ ContainmentLayoutManager.ItemContainer {
     property real dragCenterX
     property real dragCenterY
 
-    editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold//model.ApplicationOnDesktopRole ? ContainmentLayoutManager.ItemContainer.AfterPressAndHold: ContainmentLayoutManager.ItemContainer.Manual
+    editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
     onEditModeChanged: {//FIXME: remove
         plasmoid.editMode = editMode
     }
     onDragActiveChanged: {
         if (dragActive) {
             // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
-            launcherDragManager.showSpacer(delegate, 0, 0);
+            launcherDragManager.startDrag(delegate);
         } else {
-            launcherDragManager.positionItem(delegate, dragCenterX, dragCenterY);
+            launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
             plasmoid.editMode = false;
             editMode = false;
         }
     }
 
     onUserDrag: {
-       // newPosition
-        var newRow = 0;
-
         dragCenterX = dragCenter.x;
         dragCenterY = dragCenter.y;
-        var newContainer = launcherDragManager.containerForItem(delegate, dragCenter.x, dragCenter.y);
-
-        // Put it in the favorites strip
-        if (newContainer == favoriteStrip) {
-            var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
-            newRow = Math.floor((pos.x + dragCenter.x) / delegate.width);
-
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Favorites);
-
-        // Put it on desktop
-        } else if (newContainer == appletsLayout) {
-            var pos = appletsLayout.mapFromItem(delegate, 0, 0);
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Desktop);
-        print("!!!!!!!!!!!!"+pos.x+" "+pos.y)
-           // delegate.x = pos.x
-           // delegate.y = pos.y
-            return;
-    
-        // Put it in the general view
-        } else {
-            newRow = Math.round(newContainer.flow.width / delegate.width) * Math.floor((delegate.y + dragCenter.y) / delegate.height) + Math.floor((delegate.x + dragCenter.x) / delegate.width) + favoriteStrip.count;
-
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Grid);
-        }
-
-        launcherDragManager.showSpacer(delegate, dragCenter.x, dragCenter.y);
-
-        plasmoid.nativeInterface.applicationListModel.setDesktopItem(index, false);
-
-        plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+        launcherDragManager.dragItem(delegate, index, dragCenter.x, dragCenter.y);
     }
 
     contentItem: MouseArea {
