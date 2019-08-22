@@ -59,11 +59,13 @@ QtObject {
     }
 
     function changeContainer(item, container) {
-        var pos = container.contentItem.mapFromItem(item, 0, 0);
+        var pos;
 
         if (container == appletsLayout) {
+            pos = container.mapFromItem(item, 0, 0);
             item.parent = container;
         } else {
+            pos = container.contentItem.mapFromItem(item, 0, 0);
             item.parent = container.contentItem;
         }
 
@@ -90,7 +92,9 @@ QtObject {
 
         // Search Left
         for (var i = 0; i < item.width * 2; i += item.width/2) {
-            var candidate = container.flow.childAt(item.x + dragCenterX + i, item.y + dragCenterY);
+            var candidate = container.flow.childAt(
+                Math.min(container.flow.width, Math.max(0, item.x + dragCenterX + i)),
+                Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
             if (candidate && i < distance) {
                 child = candidate;
                 break;
@@ -99,7 +103,7 @@ QtObject {
 
         // Search Right
         for (var i = 0; i < item.width * 2; i += item.width/2) {
-            var candidate = container.flow.childAt(item.x + dragCenterX - i, item.y + dragCenterY);
+            var candidate = container.flow.childAt(Math.min(container.flow.width, Math.max(0, item.x + dragCenterX - i)), Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
             if (candidate && i < distance) {
                 child = candidate;
                 break;
