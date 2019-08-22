@@ -90,12 +90,13 @@ QtObject {
         raiseContainer(container);
 
         var child = container.flow.childAt(item.x + dragCenterX, item.y + dragCenterX);
+
         if (!child) {
             return;
         }
 
-        changeContainer(item, container);
         if (container == appletsLayout) {
+            changeContainer(item, container);
             return;
         }
 
@@ -107,6 +108,11 @@ QtObject {
         } else {
             plasmoid.nativeInterface.orderItems(child, spacer);
         }
+
+        changeContainer(item, container);
+
+        print(spacer.parent+" "+child.parent)
+
         spacer.visible = true;
     }
 

@@ -49,7 +49,6 @@ ContainmentLayoutManager.ItemContainer {
     onDragActiveChanged: {
         if (dragActive) {
             launcherDragManager.showSpacer(delegate, 0, 0);
-print("AAAH, BENGALAAAAH")
             return;
         }
         
