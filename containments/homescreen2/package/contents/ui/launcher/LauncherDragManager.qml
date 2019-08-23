@@ -39,7 +39,7 @@ QtObject {
         internal.showSpacer(item, 0, 0);
     }
 
-    function dragItem(delegate, index, dragCenterX, dragCenterY) {
+    function dragItem(delegate, dragCenterX, dragCenterY) {
               // newPosition
         var newRow = 0;
 
@@ -50,15 +50,15 @@ QtObject {
             var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
             newRow = Math.floor((pos.x + dragCenterX) / delegate.width);
 
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Favorites);
+            plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Favorites);
 
             internal.showSpacer(delegate, dragCenterX, dragCenterY);
-            plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+            plasmoid.nativeInterface.applicationListModel.moveItem(delegate.modelData.index, newRow);
 
         // Put it on desktop
         } else if (newContainer == appletsLayout) {
             var pos = appletsLayout.mapFromItem(delegate, 0, 0);
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Desktop);
+            plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Desktop);
             
             internal.showSpacer(delegate, dragCenterX, dragCenterY);
             return;
@@ -67,14 +67,11 @@ QtObject {
         } else {
             newRow = Math.round(newContainer.flow.width / delegate.width) * Math.floor((delegate.y + dragCenterY) / delegate.height) + Math.floor((delegate.x + dragCenterX) / delegate.width) + favoriteStrip.count;
 
-            plasmoid.nativeInterface.applicationListModel.setLocation(index, ApplicationListModel.Grid);
+            plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Grid);
 
             internal.showSpacer(delegate, dragCenterX, dragCenterY);
-            plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
+            plasmoid.nativeInterface.applicationListModel.moveItem(delegate.modelData.index, newRow);
         }
-
-        internal.showSpacer(delegate, dragCenterX, dragCenterY);
-        plasmoid.nativeInterface.applicationListModel.moveItem(modelData.index, newRow);
     }
 
     function dropItem(item, dragCenterX, dragCenterY) {

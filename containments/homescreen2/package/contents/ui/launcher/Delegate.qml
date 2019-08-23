@@ -64,7 +64,7 @@ ContainmentLayoutManager.ItemContainer {
     onUserDrag: {
         dragCenterX = dragCenter.x;
         dragCenterY = dragCenter.y;
-        launcherDragManager.dragItem(delegate, index, dragCenter.x, dragCenter.y);
+        launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
     }
 
     contentItem: MouseArea {
