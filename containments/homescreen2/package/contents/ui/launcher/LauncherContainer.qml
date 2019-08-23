@@ -27,54 +27,53 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
-Controls.Control {
+Item {
     id: root
 
     readonly property int reservedSpaceForLabel: metrics.height
     property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
-    property Controls.Control launcherGrid
-    property Controls.Control favoriteStrip
+    property Item launcherGrid
+    property Item favoriteStrip
 
+    property alias frame: frame
     property alias flow: applicationsFlow
 
-    implicitWidth: contentItem.implicitWidth + frame.margins.top + frame.margins.bottom
-    implicitHeight: contentItem.implicitHeight + frame.margins.top + frame.margins.bottom
+    implicitWidth: frame.implicitWidth
+    implicitHeight: frame.implicitHeight
 
-    leftPadding: frame.margins.left
-    topPadding: frame.margins.top
-    rightPadding: frame.margins.right
-    bottomPadding: frame.margins.bottom
-
-    background: PlasmaCore.FrameSvgItem {
-        id: frame
-        imagePath: "widgets/background"
-        anchors.fill: parent
+    Controls.Label {
+        id: metrics
+        text: "M\nM"
+        visible: false
     }
 
-    contentItem: Item {
-        id: flowParent
+    Item {
+        id: spacer
+        width: units.gridUnit * 4
+        height: width
+    }
 
-        implicitWidth: applicationsFlow.implicitWidth
-        implicitHeight: applicationsFlow.implicitHeight
+    Controls.Control {
+        id: frame
+        anchors.centerIn: parent
+        implicitWidth: contentItem.implicitWidth + frameSvg.margins.top + frameSvg.margins.bottom
+        implicitHeight: contentItem.implicitHeight + frameSvg.margins.top + frameSvg.margins.bottom
 
-        //NOTE: TextMetrics can't handle multi line
-        Controls.Label {
-            id: metrics
-            text: "M\nM"
-            visible: false
-        }
+        leftPadding: frameSvg.margins.left
+        topPadding: frameSvg.margins.top
+        rightPadding: frameSvg.margins.right
+        bottomPadding: frameSvg.margins.bottom
 
-        Item {
-            id: spacer
-            width: units.gridUnit * 4
-            height: width
-        }
-
-        Flow {
-            id: applicationsFlow
+        background: PlasmaCore.FrameSvgItem {
+            id: frameSvg
+            imagePath: "widgets/background"
             anchors.fill: parent
+        }
+
+        contentItem: Flow {
+            id: applicationsFlow
 
             spacing: 0
 

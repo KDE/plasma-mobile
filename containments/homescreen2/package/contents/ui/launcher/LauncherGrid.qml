@@ -37,8 +37,9 @@ LauncherContainer {
 
 
     readonly property int cellWidth: root.flow.width / Math.floor(root.flow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
-    readonly property int cellHeight: availableCellHeight - topPadding
+    readonly property int cellHeight: availableCellHeight
 
+    frame.width: width
 
     Repeater {
         model: plasmoid.nativeInterface.applicationListModel
@@ -48,21 +49,12 @@ LauncherContainer {
             height: root.cellHeight
 
             parent: {
-                if (model.ApplicationLocationRole == ApplicationListModel.Desktop) {
+                switch (model.ApplicationLocationRole) {
+                case ApplicationListModel.Desktop:
                     return appletsLayout;
-                }
-
-                if (model.ApplicationLocationRole == ApplicationListModel.Favorites) {
-                    if (editMode) {
-                        return favoriteStrip.contentItem;
-                    } else {
-                        return favoriteStrip.flow;
-                    }
-                }
-
-                if (editMode) {
-                    return flowParent;
-                } else {
+                case ApplicationListModel.Favorites:
+                    return favoriteStrip.flow;
+                default:
                     return root.flow;
                 }
             }

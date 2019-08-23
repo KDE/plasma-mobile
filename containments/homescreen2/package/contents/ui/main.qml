@@ -174,8 +174,11 @@ Text {
 
     Launcher.FavoriteStrip {
         id: favoriteStrip
-        anchors.horizontalCenter: parent.horizontalCenter
-        width: Math.min(root.width, implicitWidth)
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        appletsLayout: appletsLayout
         launcherGrid: launcher
         y: Math.max(0, root.height - height - mainFlickable.contentY)
     }

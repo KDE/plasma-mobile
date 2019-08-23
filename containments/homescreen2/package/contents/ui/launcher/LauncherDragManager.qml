@@ -107,22 +107,15 @@ QtObject {
         }
 
         function changeContainer(item, container) {
-            var pos;
-
-            if (container == appletsLayout) {
-                pos = container.mapFromItem(item, 0, 0);
-                item.parent = container;
-            } else {
-                pos = container.contentItem.mapFromItem(item, 0, 0);
-                item.parent = container.contentItem;
-            }
+            var pos = container.mapFromItem(item, 0, 0);
+            item.parent = container;
 
             item.x = pos.x;
             item.y = pos.y;
         }
 
         function putInContainerLayout(item, container) {
-            var pos = container.contentItem.mapFromItem(item, 0, 0);
+            var pos = container.flow.mapFromItem(item, 0, 0);
 
             if (container == appletsLayout) {
                 item.parent = container;
@@ -134,24 +127,25 @@ QtObject {
             item.y = pos.y;
         }
 
-        function nearestChild (item, dragCenterX, dragCenterY, container) {
+        function nearestChild(item, dragCenterX, dragCenterY, container) {
             var distance = Number.POSITIVE_INFINITY;
             var child;
+            var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
 
-            // Search Left
+            // Search Right
             for (var i = 0; i < item.width * 2; i += item.width/2) {
                 var candidate = container.flow.childAt(
-                    Math.min(container.flow.width, Math.max(0, item.x + dragCenterX + i)),
-                    Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
+                    Math.min(container.flow.width, Math.max(0, pos.x + i)),
+                    Math.min(container.flow.height-1, Math.max(0, pos.y)));
                 if (candidate && i < distance) {
                     child = candidate;
                     break;
                 }
             }
 
-            // Search Right
+            // Search Left
             for (var i = 0; i < item.width * 2; i += item.width/2) {
-                var candidate = container.flow.childAt(Math.min(container.flow.width, Math.max(0, item.x + dragCenterX - i)), Math.min(container.flow.height-1, Math.max(0, item.y + dragCenterY)));
+                var candidate = container.flow.childAt(Math.min(container.flow.width, Math.max(0, pos.x - i)), Math.min(container.flow.height-1, Math.max(0, pos.y)));
                 if (candidate && i < distance) {
                     child = candidate;
                     break;
@@ -191,7 +185,9 @@ QtObject {
             spacer.visible = false;
             spacer.parent = container.flow
 
-            if (item.x + dragCenterX < child.x + child.width / 2) {
+            var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
+
+            if (pos.x < child.x + child.width / 2) {
                 plasmoid.nativeInterface.stackBefore(spacer, child);
             } else {
                 plasmoid.nativeInterface.stackAfter(spacer, child);
@@ -213,7 +209,7 @@ QtObject {
             }
 
             spacer.visible = false;
-            spacer.parent = container.contentItem;
+            spacer.parent = container;
 
             var child = nearestChild(item, dragCenterX, dragCenterY, container);
 

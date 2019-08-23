@@ -37,12 +37,5 @@ LauncherContainer {
 
     height: launcherGrid.cellHeight + topPadding + bottomPadding
 
-    implicitWidth: launcherGrid.cellWidth * Math.max(1, plasmoid.nativeInterface.applicationListModel.favoriteCount) + leftPadding + rightPadding
-
-    Behavior on width {
-        NumberAnimation {
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-    }
+    frame.implicitWidth: launcherGrid.cellWidth * Math.max(1, plasmoid.nativeInterface.applicationListModel.favoriteCount) + frame.leftPadding + frame.rightPadding
 }
