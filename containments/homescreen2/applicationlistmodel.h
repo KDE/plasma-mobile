@@ -25,6 +25,8 @@
 #include <QAbstractListModel>
 #include <QList>
 
+#include "homescreen.h"
+
 class QString;
 
 class ApplicationListModel;
@@ -42,7 +44,6 @@ class ApplicationListModel : public QAbstractListModel {
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(int favoriteCount READ favoriteCount NOTIFY favoriteCountChanged)
-    Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
 
 public:
     enum LauncherLocation {
@@ -61,7 +62,7 @@ public:
         ApplicationLocationRole
     };
 
-    ApplicationListModel(QObject *parent = nullptr);
+    ApplicationListModel(HomeScreen *parent = nullptr);
     ~ApplicationListModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
@@ -69,16 +70,13 @@ public:
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
 
     int count() const { return m_applicationList.count(); }
-    int favoriteCount() const { return m_favoriteCount;}
+    int favoriteCount() const { return m_favorites.count();}
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
-
-    QStringList appOrder() const;
-    void setAppOrder(const QStringList &order);
 
     Q_INVOKABLE void setLocation(int row, LauncherLocation location);
 
@@ -94,14 +92,14 @@ public Q_SLOTS:
 Q_SIGNALS:
     void countChanged();
     void favoriteCountChanged();
-    void appOrderChanged();
 
 private:
     QList<ApplicationData> m_applicationList;
 
+    HomeScreen *m_homeScreen = nullptr;
     QStringList m_appOrder;
+    QStringList m_favorites;
     QHash<QString, int> m_appPositions;
-    int m_favoriteCount = 0;
 };
 
 #endif // APPLICATIONLISTMODEL_H

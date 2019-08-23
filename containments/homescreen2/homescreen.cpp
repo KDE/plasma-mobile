@@ -28,7 +28,7 @@ HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
     qmlRegisterUncreatableType<ApplicationListModel>("org.kde.phone.homescreen", 1, 0, "ApplicationListModel", QStringLiteral("Cannot create item of type ApplicationListModel"));
-    m_applicationListModel = new ApplicationListModel(this);
+
     setHasConfigurationInterface(true);
 }
 
@@ -37,6 +37,9 @@ HomeScreen::~HomeScreen()
 
 ApplicationListModel *HomeScreen::applicationListModel()
 {
+    if (!m_applicationListModel) {
+        m_applicationListModel = new ApplicationListModel(this);
+    }
     return m_applicationListModel;
 }
 

@@ -42,7 +42,7 @@ public:
     Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
 
 private:
-    ApplicationListModel *m_applicationListModel;
+    ApplicationListModel *m_applicationListModel = nullptr;
 
 };
 

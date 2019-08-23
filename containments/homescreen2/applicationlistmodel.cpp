@@ -37,12 +37,20 @@
 #include <KIOWidgets/KRun>
 #include <QDebug>
 
-ApplicationListModel::ApplicationListModel(QObject *parent)
-    : QAbstractListModel(parent)
+ApplicationListModel::ApplicationListModel(HomeScreen *parent)
+    : QAbstractListModel(parent),
+      m_homeScreen(parent)
 {
     //can't use the new syntax as this signal is overloaded
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
+    m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
+    m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
+    int i = 0;
+    for (auto app : m_appOrder) {
+        m_appPositions[app] = i;
+        ++i;
+    }
     //here or delayed?
     loadApplications();
 }
@@ -104,8 +112,6 @@ void ApplicationListModel::loadApplications()
 
     int i = 0; // for default bookmarks
 
-    m_favoriteCount = 0;
-
     // Iterate over all entries in the group
     while (!subGroupList.isEmpty()) {
         KSycocaEntry::Ptr groupEntry = subGroupList.first();
@@ -142,20 +148,16 @@ void ApplicationListModel::loadApplications()
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
 
+                            if (m_favorites.contains(data.storageId)) {
+                                data.location = Favorites;
+                            }
+
                             auto it = m_appPositions.constFind(service->storageId());
                             if (it != m_appPositions.constEnd()) {
-                                //TODO: proper bookmarks
-                                data.location = (*it) < 6 ? Favorites : Grid;
                                 orderedList[*it] = data;
                             } else {
-                                //TODO: proper bookmarks
-                                data.location = (++i + m_appPositions.size() < 6) ? Favorites : Grid;
                                 unorderedList << data;
                             }
-                            if (data.location == Favorites) {
-                                ++m_favoriteCount;
-                            }
-                            emit favoriteCountChanged();
                         }
                     }
                 }
@@ -234,10 +236,12 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     }
 
     if (location == Favorites) {
-        ++m_favoriteCount;
+        m_favorites.insert(row, data.storageId);
+        m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     } else  if (data.location == Favorites) {
-        m_favoriteCount = qMax(0, m_favoriteCount - 1);
+        m_favorites.removeAll(data.storageId);
+        m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     }
 
@@ -276,8 +280,8 @@ void ApplicationListModel::moveItem(int row, int destination)
         ++i;
     }
 
+    m_homeScreen->config().writeEntry("AppOrder", m_appOrder);
 
-    emit appOrderChanged();
     endMoveRows();
 }
 
@@ -292,23 +296,5 @@ void ApplicationListModel::runApplication(const QString &storageId)
     KRun::runService(*service, QList<QUrl>(), nullptr);
 }
 
-QStringList ApplicationListModel::appOrder() const
-{
-    return m_appOrder;
-}
+#include "moc_applicationlistmodel.cpp"
 
-void ApplicationListModel::setAppOrder(const QStringList &order)
-{
-    if (m_appOrder == order) {
-        return;
-    }
-
-    m_appOrder = order;
-    m_appPositions.clear();
-    int i = 0;
-    for (auto app : m_appOrder) {
-        m_appPositions[app] = i;
-        ++i;
-    }
-    emit appOrderChanged();
-}

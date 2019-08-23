@@ -6,11 +6,9 @@
   <kcfgfile name=""/>
 
   <group name="General">
-    <entry name="ItemsGeometries" type="String" hidden="true">
-      <label>Encoded geometries of items (resource categories).</label>
-    </entry>
-    <entry name="VerticalItemsGeometries" type="String" hidden="true">
-      <label>Encoded geometries of items, vertical screen (resource categories).</label>
+    <entry name="AppOrder" type="StringList">
+      <label>order of apps</label>
+      <default>org.kde.phone.dialer.desktop</default>
     </entry>
   </group>
 
