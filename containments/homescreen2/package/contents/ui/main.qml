@@ -44,6 +44,46 @@ Text {
     color: "white"
     visible: plasmoid.editMode
 }
+
+//BEGIN functions
+    //Autoscroll related functions
+    function scrollUp() {
+        autoScrollTimer.scrollDown = false;
+        autoScrollTimer.running = true;
+//         scrollUpIndicator.opacity = 1;
+//         scrollDownIndicator.opacity = 0;
+    }
+
+    function scrollDown() {
+        autoScrollTimer.scrollDown = true;
+        autoScrollTimer.running = true;
+//         scrollUpIndicator.opacity = 0;
+//         scrollDownIndicator.opacity = 1;
+    }
+
+    function stopScroll() {
+        autoScrollTimer.running = false;
+//         scrollUpIndicator.opacity = 0;
+//         scrollDownIndicator.opacity = 0;
+    }
+//END functions
+
+    Timer {
+        id: autoScrollTimer
+        property bool scrollDown: true
+        repeat: true
+        interval: 1500
+        onTriggered: {
+            scrollAnim.to = scrollDown ?
+            //Scroll down
+                Math.min(mainFlickable.contentItem.height - root.height, mainFlickable.contentY + root.height/2) :
+            //Scroll up
+                Math.max(0, mainFlickable.contentY - root.height/2);
+
+            scrollAnim.running = true;
+        }
+    }
+
     Connections {
         target: plasmoid
         onEditModeChanged: {
@@ -69,6 +109,14 @@ Text {
         contentWidth: width
         contentHeight: flickableContents.height
         interactive: !plasmoid.editMode && !launcher.dragging
+
+        NumberAnimation {
+            id: scrollAnim
+            target: mainFlickable
+            properties: "contentY"
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
 
         ColumnLayout {
             id: flickableContents

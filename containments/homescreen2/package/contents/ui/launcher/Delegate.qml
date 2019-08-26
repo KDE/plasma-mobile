@@ -63,6 +63,7 @@ ContainmentLayoutManager.ItemContainer {
             launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
             plasmoid.editMode = false;
             editMode = false;
+            plasmoid.fullRepresentationItem.stopScroll();
         }
     }
 
@@ -70,6 +71,18 @@ ContainmentLayoutManager.ItemContainer {
         dragCenterX = dragCenter.x;
         dragCenterY = dragCenter.y;
         launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
+
+        var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
+        //SCROLL UP
+        if (pos.y < plasmoid.fullRepresentationItem.height / 4) {
+            plasmoid.fullRepresentationItem.scrollUp();
+        //SCROLL DOWN
+        } else if (pos.y > 3 * (plasmoid.fullRepresentationItem.height / 4)) {
+            plasmoid.fullRepresentationItem.scrollDown();
+        //DON't SCROLL
+        } else {
+            plasmoid.fullRepresentationItem.stopScroll();
+        }
     }
 
     contentItem: MouseArea {
