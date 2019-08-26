@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
+import QtGraphicalEffects 1.6
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -36,6 +37,9 @@ ContainmentLayoutManager.ItemContainer {
 
     property var modelData: typeof model !== "undefined" ? model : null
 
+    Layout.minimumWidth: availableCellWidth + units.gridUnit
+    Layout.minimumHeight: availableCellHeight + units.gridUnit
+
     leftPadding: units.smallSpacing * 2
     topPadding: units.smallSpacing * 2
     rightPadding: units.smallSpacing * 2
@@ -43,6 +47,7 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragging ? 0.4 : 1
 
+    key: model.ApplicationStorageIdRole
     property real dragCenterX
     property real dragCenterY
 
@@ -113,7 +118,16 @@ ContainmentLayoutManager.ItemContainer {
 
                 text: modelData ? modelData.ApplicationNameRole : ""
                 font.pixelSize: theme.defaultFont.pixelSize
-                color: PlasmaCore.ColorScope.textColor
+                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
+
+                layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
+                layer.effect: DropShadow {
+                    horizontalOffset: 0
+                    verticalOffset: 2
+                    radius: 8.0
+                    samples: 16
+                    color: Qt.rgba(0, 0, 0, 0.8)
+                }
             }
         }
     }

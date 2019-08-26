@@ -45,6 +45,7 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
     m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
+    m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
     m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
     int i = 0;
     for (auto app : m_appOrder) {
@@ -150,6 +151,8 @@ void ApplicationListModel::loadApplications()
 
                             if (m_favorites.contains(data.storageId)) {
                                 data.location = Favorites;
+                            } else if (m_desktopItems.contains(data.storageId)) {
+                                data.location = Desktop;
                             }
 
                             auto it = m_appPositions.constFind(service->storageId());
@@ -243,6 +246,14 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
         m_favorites.removeAll(data.storageId);
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
+    }
+
+    if (location == Desktop) {
+        m_desktopItems.insert(data.storageId);
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
+    } else  if (data.location == Favorites) {
+        m_desktopItems.remove(data.storageId);
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
     }
 
     data.location = location;

@@ -99,6 +99,7 @@ private:
     HomeScreen *m_homeScreen = nullptr;
     QStringList m_appOrder;
     QStringList m_favorites;
+    QSet<QString> m_desktopItems;
     QHash<QString, int> m_appPositions;
 };
 
