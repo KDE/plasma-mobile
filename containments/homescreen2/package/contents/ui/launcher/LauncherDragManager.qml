@@ -23,7 +23,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.phone.homescreen 1.0
 
-QtObject {
+Item {
     id: root
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
@@ -80,7 +80,7 @@ QtObject {
     }
 
     // Those should never be accessed from outside
-    property QtObject __internal: QtObject {
+    QtObject {
         id: internal
         function raiseContainer(container) {
             container.z = 1;
@@ -107,9 +107,9 @@ QtObject {
             }
         }
 
-        function changeContainer(item, container) {
-            var pos = container.mapFromItem(item, 0, 0);
-            item.parent = container;
+        function putItemInDragSpace(item) {
+            var pos = root.mapFromItem(item, 0, 0);
+            item.parent = root;
 
             item.x = pos.x;
             item.y = pos.y;
@@ -171,7 +171,7 @@ QtObject {
 
             if (container == appletsLayout) {
                 spacer.visible = false;
-                changeContainer(item, container);
+                putItemInDragSpace(item);
                 return;
             }
 
@@ -194,7 +194,7 @@ QtObject {
                 plasmoid.nativeInterface.stackAfter(spacer, child);
             }
 
-            changeContainer(item, container);
+            putItemInDragSpace(item);
 
             spacer.visible = true;
         }
@@ -205,6 +205,7 @@ QtObject {
             raiseContainer(container);
 
             if (container == appletsLayout) {
+                item.parent = appletsLayout;
                 appletsLayout.positionItem(item);
                 return;
             }

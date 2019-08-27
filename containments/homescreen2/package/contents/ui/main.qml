@@ -118,6 +118,8 @@ Text {
 
     Launcher.LauncherDragManager {
         id: launcherDragManager
+        anchors.fill: parent
+        z: 2
         appletsLayout: appletsLayout
         launcherGrid: launcher
         favoriteStrip: favoriteStrip
