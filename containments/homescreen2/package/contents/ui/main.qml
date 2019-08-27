@@ -127,7 +127,8 @@ Text {
         id: mainFlickable
         anchors {
             fill: parent
-           // bottomMargin: favoriteStrip.height
+           topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
+           bottomMargin: root.height - plasmoid.availableScreenRect.height - topMargin
         }
         
         bottomMargin: favoriteStrip.height
@@ -146,6 +147,7 @@ Text {
         ColumnLayout {
             id: flickableContents
             width: parent.width
+
             DragDrop.DropArea {
                 Layout.fillWidth: true
                 Layout.preferredHeight: mainFlickable.height //TODO: multiple widgets pages
@@ -253,7 +255,18 @@ Text {
         }
         appletsLayout: appletsLayout
         launcherGrid: launcher
-        y: Math.max(0, root.height - height - mainFlickable.contentY)
+        y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
+    }
+
+    KRunner {
+        id: krunner
+        z: 998
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            topMargin: plasmoid.availableScreenRect.y
+        }
     }
 }
 

@@ -53,7 +53,7 @@ Rectangle {
         clip: true
         imagePath: "widgets/background"
         enabledBorders: PlasmaCore.FrameSvg.BottomBorder
-        height: childrenRect.height + fixedMargins.top/2 + fixedMargins.bottom
+        height: Math.min(krunner.height, childrenRect.height + fixedMargins.top/2 + fixedMargins.bottom)
         Behavior on height {
             NumberAnimation {
                 duration: units.longDuration
@@ -71,7 +71,7 @@ Rectangle {
         }
 
         ColumnLayout {
-            height: Qt.inputMethod.keyboardRectangle.height > 0 ? (Math.min(implicitHeight, Qt.inputMethod.keyboardRectangle.y - plasmoid.availableScreenRect.y)) : implicitHeight
+            height: Qt.inputMethod.keyboardRectangle.height > 0 ? (Math.min(implicitHeight, background.height, Qt.inputMethod.keyboardRectangle.y - plasmoid.availableScreenRect.y)) : implicitHeight
             anchors {
                 left: parent.left
                 right: parent.right

@@ -37,8 +37,8 @@ ContainmentLayoutManager.ItemContainer {
 
     property var modelData: typeof model !== "undefined" ? model : null
 
-    Layout.minimumWidth: availableCellWidth
-    Layout.minimumHeight: availableCellHeight
+    Layout.minimumWidth: launcherGrid.cellWidth
+    Layout.minimumHeight: launcherGrid.cellHeight
 
     leftPadding: units.smallSpacing * 2
     topPadding: units.smallSpacing * 2
@@ -72,8 +72,8 @@ ContainmentLayoutManager.ItemContainer {
         dragCenterY = dragCenter.y;
         launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
 
-        delegate.height = availableCellHeight;
-        delegate.width = availableCellWidth;
+        delegate.width = launcherGrid.cellWidth;
+        delegate.height = launcherGrid.cellHeight;
 
         var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
         //SCROLL UP
@@ -108,7 +108,7 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.preferredHeight: parent.height - root.reservedSpaceForLabel
+                Layout.minimumHeight: parent.height - root.reservedSpaceForLabel
 
                 source: modelData ? modelData.ApplicationIconRole : ""
                 scale: root.reorderingApps && dragDelegate && !dragging ? 0.6 : 1
@@ -132,9 +132,9 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: model.ApplicationNameRole + " "+model.ApplicationLocationRole
+                text: model.ApplicationNameRole
                 font.pixelSize: theme.defaultFont.pixelSize
-                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : "black"//PlasmaCore.Theme.textColor
+                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 
                 layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
                 layer.effect: DropShadow {

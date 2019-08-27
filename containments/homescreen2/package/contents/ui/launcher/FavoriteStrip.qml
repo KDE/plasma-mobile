@@ -32,6 +32,7 @@ LauncherContainer {
     readonly property int count: flow.width / launcherGrid.cellWidth
 
     flow.flow: Flow.TopToBottom
+    favoriteStrip: root
 
     visible: plasmoid.nativeInterface.applicationListModel.favoriteCount > 0 || plasmoid.editMode
 
