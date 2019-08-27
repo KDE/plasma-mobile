@@ -29,6 +29,7 @@ QtObject {
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property LauncherGrid launcherGrid
     property FavoriteStrip favoriteStrip
+    property Delegate currentlyDraggedDelegate
 
     readonly property Item spacer: Item {
         width: units.gridUnit * 4

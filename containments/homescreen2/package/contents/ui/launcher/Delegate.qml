@@ -59,11 +59,13 @@ ContainmentLayoutManager.ItemContainer {
         if (dragActive) {
             // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
             launcherDragManager.startDrag(delegate);
+            launcherDragManager.currentlyDraggedDelegate = delegate;
         } else {
             launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
             plasmoid.editMode = false;
             editMode = false;
             plasmoid.fullRepresentationItem.stopScroll();
+            launcherDragManager.currentlyDraggedDelegate = null;
         }
     }
 

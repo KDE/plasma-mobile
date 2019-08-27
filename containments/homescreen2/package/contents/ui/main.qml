@@ -50,21 +50,21 @@ Text {
     function scrollUp() {
         autoScrollTimer.scrollDown = false;
         autoScrollTimer.running = true;
-//         scrollUpIndicator.opacity = 1;
-//         scrollDownIndicator.opacity = 0;
+        scrollUpIndicator.opacity = 1;
+        scrollDownIndicator.opacity = 0;
     }
 
     function scrollDown() {
         autoScrollTimer.scrollDown = true;
         autoScrollTimer.running = true;
-//         scrollUpIndicator.opacity = 0;
-//         scrollDownIndicator.opacity = 1;
+        scrollUpIndicator.opacity = 0;
+        scrollDownIndicator.opacity = 1;
     }
 
     function stopScroll() {
         autoScrollTimer.running = false;
-//         scrollUpIndicator.opacity = 0;
-//         scrollDownIndicator.opacity = 0;
+        scrollUpIndicator.opacity = 0;
+        scrollDownIndicator.opacity = 0;
     }
 //END functions
 
@@ -245,6 +245,23 @@ Text {
                 appletsLayout: appletsLayout
             }
         }
+    }
+
+    ScrollIndicator {
+        id: scrollUpIndicator
+        anchors {
+            top: parent.top
+            topMargin: units.gridUnit * 2
+        }
+        elementId: "up-arrow"
+    }
+    ScrollIndicator {
+        id: scrollDownIndicator
+        anchors {
+            bottom: parent.bottom
+            bottomMargin: units.gridUnit * 2
+        }
+        elementId: "down-arrow"
     }
 
     Launcher.FavoriteStrip {
