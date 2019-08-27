@@ -67,6 +67,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
     roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
     roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
+    roleNames[ApplicationStartupNotifyRole] = "ApplicationStartupNotifyRole";
     roleNames[ApplicationLocationRole] = "ApplicationLocationRole";
 
     return roleNames;
@@ -148,6 +149,7 @@ void ApplicationListModel::loadApplications()
                             data.icon = service->icon();
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
+                            data.startupNotify = service->property("StartupNotify").toBool();
 
                             if (m_favorites.contains(data.storageId)) {
                                 data.location = Favorites;
@@ -198,6 +200,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).entryPath;
     case ApplicationOriginalRowRole:
         return index.row();
+    case ApplicationStartupNotifyRole:
+        return m_applicationList.at(index.row()).startupNotify;
     case ApplicationLocationRole:
         return m_applicationList.at(index.row()).location;
 

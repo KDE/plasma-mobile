@@ -37,8 +37,8 @@ ContainmentLayoutManager.ItemContainer {
 
     property var modelData: typeof model !== "undefined" ? model : null
 
-    Layout.minimumWidth: availableCellWidth + units.gridUnit
-    Layout.minimumHeight: availableCellHeight + units.gridUnit
+    Layout.minimumWidth: availableCellWidth
+    Layout.minimumHeight: availableCellHeight
 
     leftPadding: units.smallSpacing * 2
     topPadding: units.smallSpacing * 2
@@ -72,6 +72,9 @@ ContainmentLayoutManager.ItemContainer {
         dragCenterY = dragCenter.y;
         launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
 
+        delegate.height = availableCellHeight;
+        delegate.width = availableCellWidth;
+
         var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
         //SCROLL UP
         if (pos.y < plasmoid.fullRepresentationItem.height / 4) {
@@ -87,12 +90,12 @@ ContainmentLayoutManager.ItemContainer {
 
     contentItem: MouseArea {
         onClicked: {
-            if (modelData.ApplicationStartupNotifyRole) {
-                clickFedbackAnimation.target = delegate;
-                clickFedbackAnimation.running = true;
-                feedbackWindow.title = modelData.ApplicationNameRole;
-                feedbackWindow.state = "open";
-            }
+            clickFedbackAnimation.target = delegate;
+            clickFedbackAnimation.running = true;
+            feedbackWindow.title = modelData.ApplicationNameRole;
+            feedbackWindow.icon = modelData.ApplicationIconRole;
+            feedbackWindow.state = "open";
+
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
         }
 
@@ -129,9 +132,9 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: modelData ? modelData.ApplicationNameRole : ""
+                text: model.ApplicationNameRole + " "+model.ApplicationLocationRole
                 font.pixelSize: theme.defaultFont.pixelSize
-                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
+                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : "black"//PlasmaCore.Theme.textColor
 
                 layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
                 layer.effect: DropShadow {

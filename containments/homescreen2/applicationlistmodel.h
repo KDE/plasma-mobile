@@ -37,6 +37,7 @@ struct ApplicationData {
     QString storageId;
     QString entryPath;
     int location = 0; //FIXME
+    bool startupNotify = true;
 };
 
 class ApplicationListModel : public QAbstractListModel {
@@ -59,6 +60,7 @@ public:
         ApplicationStorageIdRole,
         ApplicationEntryPathRole,
         ApplicationOriginalRowRole,
+        ApplicationStartupNotifyRole,
         ApplicationLocationRole
     };
 
