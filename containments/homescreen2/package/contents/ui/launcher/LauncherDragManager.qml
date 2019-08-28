@@ -169,9 +169,14 @@ Item {
 
             raiseContainer(container);
 
+            appletsLayout.hidePlaceHolder();
+
             if (container == appletsLayout) {
                 spacer.visible = false;
+                appletsLayout.releaseSpace(item);
                 putItemInDragSpace(item);
+                var pos = appletsLayout.mapFromItem(item, 0, 0);
+                appletsLayout.showPlaceHolderAt(Qt.rect(pos.x, pos.y, item.width, item.height));
                 return;
             }
 
@@ -205,7 +210,11 @@ Item {
             raiseContainer(container);
 
             if (container == appletsLayout) {
+                var pos = appletsLayout.mapFromItem(item, 0, 0);
                 item.parent = appletsLayout;
+                item.x = pos.x;
+                item.y = pos.y;
+                appletsLayout.hidePlaceHolder();
                 appletsLayout.positionItem(item);
                 return;
             }
