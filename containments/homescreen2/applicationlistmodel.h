@@ -45,6 +45,7 @@ class ApplicationListModel : public QAbstractListModel {
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(int favoriteCount READ favoriteCount NOTIFY favoriteCountChanged)
+    Q_PROPERTY(int maxFavoriteCount READ maxFavoriteCount WRITE setMaxFavoriteCount NOTIFY maxFavoriteCountChanged)
 
 public:
     enum LauncherLocation {
@@ -74,6 +75,9 @@ public:
     int count() const { return m_applicationList.count(); }
     int favoriteCount() const { return m_favorites.count();}
 
+    int maxFavoriteCount() const;
+    void setMaxFavoriteCount(int count);
+
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
     Qt::ItemFlags flags(const QModelIndex &index) const override;
@@ -94,11 +98,13 @@ public Q_SLOTS:
 Q_SIGNALS:
     void countChanged();
     void favoriteCountChanged();
+    void maxFavoriteCountChanged();
 
 private:
     QList<ApplicationData> m_applicationList;
 
     HomeScreen *m_homeScreen = nullptr;
+    int m_maxFavoriteCount = 5;
     QStringList m_appOrder;
     QStringList m_favorites;
     QSet<QString> m_desktopItems;

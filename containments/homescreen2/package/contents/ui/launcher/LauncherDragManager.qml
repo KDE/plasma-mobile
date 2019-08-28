@@ -48,7 +48,7 @@ Item {
 
         // Put it in the favorites strip
         if (newContainer == favoriteStrip) {
-            var pos = favoriteStrip.mapFromItem(delegate, 0, 0);
+            var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
             newRow = Math.floor((pos.x + dragCenterX) / delegate.width);
 
             plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Favorites);
@@ -229,7 +229,9 @@ Item {
                 return;
             }
 
-            if (item.x + dragCenterX < child.x + child.width / 2) {
+            var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
+
+            if (pos.x + dragCenterX < child.x + child.width / 2) {
                 putInContainerLayout(item, container);
                 plasmoid.nativeInterface.stackBefore(item, child);
             } else {

@@ -243,7 +243,19 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     }
 
     if (location == Favorites) {
+        if (row >= m_maxFavoriteCount) {
+            return;
+        }
         m_favorites.insert(row, data.storageId);
+
+        int i = 0;
+
+        if (m_applicationList[m_maxFavoriteCount].location == Favorites) {
+            m_applicationList[m_maxFavoriteCount].location = Grid;
+            m_favorites.pop_back();
+            emit dataChanged(index(m_maxFavoriteCount, 0), index(m_maxFavoriteCount, 0));
+        }
+
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     } else  if (data.location == Favorites) {
@@ -309,6 +321,36 @@ void ApplicationListModel::runApplication(const QString &storageId)
     KService::Ptr service = KService::serviceByStorageId(storageId);
 
     KRun::runService(*service, QList<QUrl>(), nullptr);
+}
+
+int ApplicationListModel::maxFavoriteCount() const
+{
+    return m_maxFavoriteCount;
+}
+
+void ApplicationListModel::setMaxFavoriteCount(int count)
+{
+    if (m_maxFavoriteCount == count) {
+        return;
+    }
+
+    if (m_maxFavoriteCount > count) {
+        while (m_favorites.size() > count) {
+            m_favorites.pop_back();
+        }
+
+        int i = 0;
+        for (auto &app : m_applicationList) {
+            if (i >= count && app.location == Favorites) {
+                app.location = Grid;
+            }
+            ++i;
+        }
+    }
+
+    m_maxFavoriteCount = count;
+
+    emit maxFavoriteCountChanged();
 }
 
 #include "moc_applicationlistmodel.cpp"

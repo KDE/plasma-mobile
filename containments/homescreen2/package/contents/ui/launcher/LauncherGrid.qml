@@ -50,7 +50,8 @@ LauncherContainer {
             width: root.cellWidth
             height: root.cellHeight
 
-            parent: {
+            parent: parentFromLocation
+            property Item parentFromLocation: {
                 switch (model.ApplicationLocationRole) {
                 case ApplicationListModel.Desktop:
                     return appletsLayout;
@@ -58,6 +59,17 @@ LauncherContainer {
                     return favoriteStrip.flow;
                 default:
                     return root.flow;
+                }
+            }
+            onParentFromLocationChanged: {
+                if (!editMode && parent != parentFromLocation) {
+                    parent = parentFromLocation;
+                    if (model.ApplicationLocationRole == ApplicationListModel.Favorites) {
+                        plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[index]);
+
+                    } else if (model.ApplicationLocationRole == ApplicationListModel.Grid) {
+                        plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - plasmoid.nativeInterface.applicationListModel.favoriteCount)]);
+                    }
                 }
             }
         }
