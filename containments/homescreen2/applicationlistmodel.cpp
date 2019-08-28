@@ -339,6 +339,7 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
         for (auto &app : m_applicationList) {
             if (i >= count && app.location == Favorites) {
                 app.location = Grid;
+                emit dataChanged(index(i, 0), index(i, 0));
             }
             ++i;
         }

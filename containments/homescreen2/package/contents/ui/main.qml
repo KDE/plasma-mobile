@@ -72,6 +72,9 @@ Text {
     }
 //END functions
 
+    onWidthChanged: plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth)
+    onHeightChanged: plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth)
+
     Timer {
         id: autoScrollTimer
         property bool scrollDown: true
