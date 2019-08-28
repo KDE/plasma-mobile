@@ -112,8 +112,6 @@ void ApplicationListModel::loadApplications()
     QMap<int, ApplicationData> orderedList;
     QList<ApplicationData> unorderedList;
 
-    int i = 0; // for default bookmarks
-
     // Iterate over all entries in the group
     while (!subGroupList.isEmpty()) {
         KSycocaEntry::Ptr groupEntry = subGroupList.first();
@@ -247,8 +245,6 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
             return;
         }
         m_favorites.insert(row, data.storageId);
-
-        int i = 0;
 
         if (m_applicationList[m_maxFavoriteCount].location == Favorites) {
             m_applicationList[m_maxFavoriteCount].location = Grid;
