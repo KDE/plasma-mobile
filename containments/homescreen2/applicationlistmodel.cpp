@@ -331,7 +331,7 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
     }
 
     if (m_maxFavoriteCount > count) {
-        while (m_favorites.size() > count) {
+        while (m_favorites.size() > count && m_favorites.count() > 0) {
             m_favorites.pop_back();
         }
 

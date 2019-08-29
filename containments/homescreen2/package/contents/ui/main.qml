@@ -298,6 +298,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
+            bottomMargin: root.height - plamsoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         appletsLayout: appletsLayout
         launcherGrid: launcher
