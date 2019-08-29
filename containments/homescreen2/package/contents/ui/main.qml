@@ -19,11 +19,11 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as Controls
 import QtGraphicalEffects 1.0
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
 import "launcher" as Launcher
@@ -145,6 +145,16 @@ Text {
         contentHeight: flickableContents.height
         interactive: !plasmoid.editMode && !launcher.dragging
 
+        PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
+            id: scrollabr
+            opacity: mainFlickable.moving
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: units.longDuration * 2
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
         NumberAnimation {
             id: scrollAnim
             target: mainFlickable
