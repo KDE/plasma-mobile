@@ -32,7 +32,6 @@ import org.kde.phone.homescreen 1.0
 LauncherContainer {
     id: root
 
-    readonly property bool dragging: root.flow.dragData
     property bool reorderingApps: false
 
 

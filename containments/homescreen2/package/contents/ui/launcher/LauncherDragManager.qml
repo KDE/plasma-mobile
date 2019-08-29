@@ -30,6 +30,7 @@ Item {
     property LauncherGrid launcherGrid
     property FavoriteStrip favoriteStrip
     property Delegate currentlyDraggedDelegate
+    property bool active
 
     readonly property Item spacer: Item {
         width: units.gridUnit * 4

@@ -52,10 +52,9 @@ ContainmentLayoutManager.ItemContainer {
     property real dragCenterY
 
     editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
-    onEditModeChanged: {//FIXME: remove
-        plasmoid.editMode = editMode
-    }
+
     onDragActiveChanged: {
+        launcherDragManager.active = dragActive
         if (dragActive) {
             // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
             launcherDragManager.startDrag(delegate);

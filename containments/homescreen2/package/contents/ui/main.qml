@@ -39,16 +39,18 @@ Item {
 
     property Item toolBox
 
-Text {
-    text:"Edit Mode"
-    color: "white"
-    visible: plasmoid.editMode
-}
-Text {
-    anchors.centerIn: parent
-    text: plasmoid.availableScreenRect.x + ", " + plasmoid.availableScreenRect.y+ ", "+ plasmoid.availableScreenRect.width + "x" + plasmoid.availableScreenRect.height
-    color: "white"
-}
+    Column {
+        anchors.centerIn: parent
+        Text {
+            text:"Edit Mode"
+            color: "white"
+            visible: plasmoid.editMode
+        }
+        Text {
+            text: plasmoid.availableScreenRect.x + ", " + plasmoid.availableScreenRect.y+ ", "+ plasmoid.availableScreenRect.width + "x" + plasmoid.availableScreenRect.height
+            color: "white"
+        }
+    }
 //BEGIN functions
     //Autoscroll related functions
     function scrollUp() {
@@ -136,15 +138,22 @@ Text {
         id: mainFlickable
         anchors {
             fill: parent
-           topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
-           bottomMargin: root.height - plasmoid.availableScreenRect.height - topMargin
+            topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
+            bottomMargin: root.height - plasmoid.availableScreenRect.height - topMargin
         }
         
         bottomMargin: favoriteStrip.height
         contentWidth: width
         contentHeight: flickableContents.height
-        interactive: !plasmoid.editMode && !launcher.dragging
+        interactive: !plasmoid.editMode && !launcherDragManager.active
 
+        property real oldContentY
+        onContentYChanged: {
+            if (!atYBeginning) {
+                krunner.y = Math.min(plasmoid.availableScreenRect.y, Math.max(plasmoid.availableScreenRect.y - krunner.inputHeight, krunner.y + oldContentY - contentY));
+            }
+            oldContentY = contentY;
+        }
         PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
             id: scrollabr
             opacity: mainFlickable.moving
@@ -166,10 +175,11 @@ Text {
         ColumnLayout {
             id: flickableContents
             width: parent.width
+            spacing: Math.max(0, favoriteStrip.frame.height - mainFlickable.contentY)
 
             DragDrop.DropArea {
                 Layout.fillWidth: true
-                Layout.preferredHeight: mainFlickable.height //TODO: multiple widgets pages
+                Layout.preferredHeight: mainFlickable.height - favoriteStrip.frame.height //TODO: multiple widgets pages
 
                 onDragEnter: {
                     event.accept(event.proposedAction);
@@ -205,7 +215,7 @@ Text {
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         bottom: parent.bottom
-                        bottomMargin: favoriteStrip.height
+                        //bottomMargin: favoriteStrip.height
                     }
                     z: 2
                     svg: arrowsSvg
@@ -245,10 +255,9 @@ Text {
                     appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
                         id: appletContainer
                         configOverlayComponent: ConfigOverlay {}
-                        onEditModeChanged: {
-                            if (editMode) {
-                                plasmoid.editMode = true;
-                            }
+
+                        onDragActiveChanged: {
+                            launcherDragManager.active = dragActive;
                         }
                     }
 
@@ -288,17 +297,19 @@ Text {
         anchors {
             left: parent.left
             right: parent.right
+            bottom: parent.bottom
         }
         appletsLayout: appletsLayout
         launcherGrid: launcher
-        y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
+        //y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
     }
 
     KRunner {
         id: krunner
         z: 998
+        height: plasmoid.availableScreenRect.height
         anchors {
-            top: parent.top
+            //top: parent.top
             left: parent.left
             right: parent.right
             topMargin: plasmoid.availableScreenRect.y

@@ -31,7 +31,6 @@ import org.kde.milou 0.1 as Milou
 
 Rectangle {
     id: krunner
-    anchors.fill: parent
     height: childrenRect.height
     color: listView.visible ? Qt.rgba(0, 0, 0, 0.8) : "transparent"
     property alias showingResults: listView.visible
