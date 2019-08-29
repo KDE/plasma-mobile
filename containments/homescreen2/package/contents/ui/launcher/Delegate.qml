@@ -111,6 +111,7 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.minimumHeight: parent.height - root.reservedSpaceForLabel
+                Layout.preferredHeight: Layout.minimumHeight
 
                 source: modelData ? modelData.ApplicationIconRole : ""
                 scale: root.reorderingApps && dragDelegate && !dragging ? 0.6 : 1
@@ -127,7 +128,7 @@ ContainmentLayoutManager.ItemContainer {
                 visible: text.length > 0
 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.preferredHeight: root.reservedSpaceForLabel
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
