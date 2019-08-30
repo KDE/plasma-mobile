@@ -32,9 +32,6 @@ import org.kde.phone.homescreen 1.0
 LauncherContainer {
     id: root
 
-    property bool reorderingApps: false
-
-
     readonly property int cellWidth: root.flow.width / Math.floor(root.flow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight
 

@@ -33,7 +33,7 @@ import org.kde.phone.homescreen 1.0
 ContainmentLayoutManager.ItemContainer {
     id: delegate
 
-    z: dragging ? 1 : 0
+    z: dragActive ? 1 : 0
 
     property var modelData: typeof model !== "undefined" ? model : null
 
@@ -45,7 +45,7 @@ ContainmentLayoutManager.ItemContainer {
     rightPadding: units.smallSpacing * 2
     bottomPadding: units.smallSpacing * 2
 
-    opacity: dragging ? 0.4 : 1
+    opacity: dragActive ? 0.4 : 1
 
     key: model.ApplicationStorageIdRole
     property real dragCenterX
@@ -113,7 +113,6 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.preferredHeight: Layout.minimumHeight
 
                 source: modelData ? modelData.ApplicationIconRole : ""
-                scale: root.reorderingApps && dragDelegate && !dragging ? 0.6 : 1
                 Behavior on scale {
                     NumberAnimation {
                         duration: units.longDuration

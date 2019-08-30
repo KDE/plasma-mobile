@@ -256,6 +256,9 @@ Item {
                         id: appletContainer
                         configOverlayComponent: ConfigOverlay {}
 
+                        onEditModeChanged: {
+                            launcherDragManager.active = editMode;
+                        }
                         onDragActiveChanged: {
                             launcherDragManager.active = dragActive;
                         }
