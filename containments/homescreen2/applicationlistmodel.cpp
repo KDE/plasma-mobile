@@ -245,11 +245,13 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
             return;
         }
         m_favorites.insert(row, data.storageId);
-
+qWarning()<<"AAAAAAAAAAAAA111"<<m_maxFavoriteCount<<m_applicationList.count();
         if (m_applicationList[m_maxFavoriteCount].location == Favorites) {
             m_applicationList[m_maxFavoriteCount].location = Grid;
+    qWarning()<<"bbbbbb2222";
             m_favorites.pop_back();
             emit dataChanged(index(m_maxFavoriteCount, 0), index(m_maxFavoriteCount, 0));
+qWarning()<<"cccc3333";
         }
 
         m_homeScreen->config().writeEntry("Favorites", m_favorites);

@@ -61,7 +61,7 @@ Item {
         } else if (newContainer == appletsLayout) {
             var pos = appletsLayout.mapFromItem(delegate, 0, 0);
             plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Desktop);
-            
+
             internal.showSpacer(delegate, dragCenterX, dragCenterY);
             return;
     
