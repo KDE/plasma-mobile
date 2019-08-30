@@ -34,9 +34,9 @@ LauncherContainer {
     flow.flow: Flow.TopToBottom
     favoriteStrip: root
 
-    visible: plasmoid.nativeInterface.applicationListModel.favoriteCount > 0 || plasmoid.editMode
+    visible: flow.children.length > 0 || plasmoid.editMode
 
     height: launcherGrid.cellHeight + topPadding + bottomPadding
 
-    frame.implicitWidth: launcherGrid.cellWidth * Math.max(1, plasmoid.nativeInterface.applicationListModel.favoriteCount) + frame.leftPadding + frame.rightPadding
+    frame.implicitWidth: launcherGrid.cellWidth * Math.max(1, flow.children.length) + frame.leftPadding + frame.rightPadding
 }

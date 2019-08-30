@@ -212,17 +212,24 @@ Item {
                     imagePath: "widgets/arrows"
                     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 }
-                PlasmaCore.SvgItem {
+                PlasmaCore.IconItem {
+                    z: 9
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         bottom: parent.bottom
-                        //bottomMargin: favoriteStrip.height
                     }
-                    z: 2
-                    svg: arrowsSvg
-                    elementId: "up-arrow"
-                    width: units.iconSizes.large
+                    source: "arrow-up"
+                    width: units.iconSizes.medium
                     height: width
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+                    MouseArea {
+                        anchors {
+                            fill: parent
+                            margins: -units.smallSpacing
+                        }
+                        onClicked: mainFlickable.flick(0, -mainFlickable.height)
+                    }
                 }
 
                 ContainmentLayoutManager.AppletsLayout {
@@ -305,7 +312,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: root.height - plamsoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: root.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         appletsLayout: appletsLayout
         launcherGrid: launcher

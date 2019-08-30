@@ -240,32 +240,31 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
         return;
     }
 
-    if (location == Favorites) {
-        if (row >= m_maxFavoriteCount) {
+    if (location == Favorites) {qWarning()<<"favoriting"<<row<<data.name;
+        // Deny favorites when full
+        if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount) {
             return;
         }
+
         m_favorites.insert(row, data.storageId);
-qWarning()<<"AAAAAAAAAAAAA111"<<m_maxFavoriteCount<<m_applicationList.count();
-        if (m_applicationList[m_maxFavoriteCount].location == Favorites) {
-            m_applicationList[m_maxFavoriteCount].location = Grid;
-    qWarning()<<"bbbbbb2222";
-            m_favorites.pop_back();
-            emit dataChanged(index(m_maxFavoriteCount, 0), index(m_maxFavoriteCount, 0));
-qWarning()<<"cccc3333";
-        }
 
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
+
+    // Out of favorites
     } else  if (data.location == Favorites) {
         m_favorites.removeAll(data.storageId);
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     }
 
+    // In Desktop
     if (location == Desktop) {
         m_desktopItems.insert(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
-    } else  if (data.location == Favorites) {
+
+    // Out of Desktop
+    } else  if (data.location == Desktop) {
         m_desktopItems.remove(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
     }
@@ -290,6 +289,7 @@ void ApplicationListModel::moveItem(int row, int destination)
         ApplicationData data = m_applicationList.at(row);
         m_applicationList.insert(destination, data);
         m_applicationList.takeAt(row);
+
     } else {
         ApplicationData data = m_applicationList.takeAt(row);
         m_applicationList.insert(destination, data);
@@ -331,11 +331,12 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
     if (m_maxFavoriteCount == count) {
         return;
     }
-
+qWarning()<<"NEW FAVORITE COUNT"<<count;
     if (m_maxFavoriteCount > count) {
         while (m_favorites.size() > count && m_favorites.count() > 0) {
             m_favorites.pop_back();
         }
+        emit favoriteCountChanged();
 
         int i = 0;
         for (auto &app : m_applicationList) {
