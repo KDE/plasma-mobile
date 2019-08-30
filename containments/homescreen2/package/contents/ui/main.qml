@@ -157,6 +157,7 @@ Item {
         PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
             id: scrollabr
             opacity: mainFlickable.moving
+            interactive: false
             Behavior on opacity {
                 OpacityAnimator {
                     duration: units.longDuration * 2
@@ -229,6 +230,9 @@ Item {
 
                     anchors.fill: parent
 
+                    cellWidth: Math.floor(width / launcher.columns)
+                    cellHeight: launcher.cellHeight
+
                     configKey: width > height ? "ItemGeometriesHorizontal" : "ItemGeometriesVertical"
                     containment: plasmoid
                     editModeCondition: plasmoid.immutable
@@ -244,8 +248,8 @@ Item {
                     defaultItemWidth: units.gridUnit * 6
                     defaultItemHeight: defaultItemWidth
 
-                    cellWidth: units.iconSizes.small
-                    cellHeight: cellWidth
+                    //cellWidth: units.iconSizes.small
+                    //cellHeight: cellWidth
 
                     acceptsAppletCallback: function(applet, x, y) {
                         print("Applet: "+applet+" "+x+" "+y)
@@ -257,10 +261,10 @@ Item {
                         configOverlayComponent: ConfigOverlay {}
 
                         onEditModeChanged: {
-                            launcherDragManager.active = editMode;
+                            launcherDragManager.active = dragActive || editMode;
                         }
                         onDragActiveChanged: {
-                            launcherDragManager.active = dragActive;
+                            launcherDragManager.active = dragActive || editMode;
                         }
                     }
 
