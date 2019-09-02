@@ -136,8 +136,6 @@ void ApplicationListModel::loadApplications()
                     } else if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
 
-                        qDebug() << " desktopEntryName: " << service->desktopEntryName();
-
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName()) &&
                             service->showOnCurrentPlatform() &&

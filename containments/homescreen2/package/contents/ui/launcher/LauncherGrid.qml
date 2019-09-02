@@ -57,8 +57,13 @@ LauncherContainer {
                     return root.flow;
                 }
             }
+            Component.onCompleted: {
+                if (model.ApplicationLocationRole == ApplicationListModel.Desktop) {
+                    appletsLayout.restoreItem(delegate);
+                }
+            }
             onParentFromLocationChanged: {
-                if (!editMode && parent != parentFromLocation) {
+                if (!launcherDragManager.active && parent != parentFromLocation) {
                     parent = parentFromLocation;
                     if (model.ApplicationLocationRole == ApplicationListModel.Favorites) {
                         plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[index]);
