@@ -39,18 +39,6 @@ Item {
 
     property Item toolBox
 
-    Column {
-        anchors.centerIn: parent
-        Text {
-            text:"Edit Mode"
-            color: "white"
-            visible: plasmoid.editMode
-        }
-        Text {
-            text: plasmoid.availableScreenRect.x + ", " + plasmoid.availableScreenRect.y+ ", "+ plasmoid.availableScreenRect.width + "x" + plasmoid.availableScreenRect.height
-            color: "white"
-        }
-    }
 //BEGIN functions
     //Autoscroll related functions
     function scrollUp() {
