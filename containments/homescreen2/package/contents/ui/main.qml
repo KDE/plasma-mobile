@@ -321,8 +321,8 @@ Item {
     ScrollIndicator {
         id: scrollDownIndicator
         anchors {
-            bottom: parent.bottom
-            bottomMargin: units.gridUnit * 2
+            bottom: favoriteStrip.top
+            bottomMargin: units.gridUnit
         }
         elementId: "down-arrow"
     }

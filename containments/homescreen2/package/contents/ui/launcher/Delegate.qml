@@ -78,10 +78,10 @@ ContainmentLayoutManager.ItemContainer {
 
         var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
         //SCROLL UP
-        if (pos.y < plasmoid.fullRepresentationItem.height / 4) {
+        if (pos.y < plasmoid.availableScreenRect.y + units.gridUnit) {
             plasmoid.fullRepresentationItem.scrollUp();
         //SCROLL DOWN
-        } else if (pos.y > 3 * (plasmoid.fullRepresentationItem.height / 4)) {
+        } else if (pos.y > plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height - units.gridUnit) {
             plasmoid.fullRepresentationItem.scrollDown();
         //DON't SCROLL
         } else {
