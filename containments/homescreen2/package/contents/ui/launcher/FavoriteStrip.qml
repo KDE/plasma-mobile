@@ -34,7 +34,7 @@ LauncherContainer {
     flow.flow: Flow.TopToBottom
     favoriteStrip: root
 
-    visible: flow.children.length > 0 || plasmoid.editMode
+    visible: flow.children.length > 0 || launcherDragManager.active
 
     height: launcherGrid.cellHeight + topPadding + bottomPadding
 

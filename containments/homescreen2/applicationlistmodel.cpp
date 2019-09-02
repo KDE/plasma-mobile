@@ -37,6 +37,7 @@
 #include <KIOWidgets/KRun>
 #include <QDebug>
 
+
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent),
       m_homeScreen(parent)
@@ -47,6 +48,8 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
     m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
     m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
+    m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", 5);
+
     int i = 0;
     for (auto app : m_appOrder) {
         m_appPositions[app] = i;
@@ -270,7 +273,7 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     }
 
     data.location = location;
-
+    emit m_homeScreen->configNeedsSaving();
     emit dataChanged(index(row, 0), index(row, 0));
 }
 
@@ -331,7 +334,7 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
     if (m_maxFavoriteCount == count) {
         return;
     }
-qWarning()<<"NEW FAVORITE COUNT"<<count;
+
     if (m_maxFavoriteCount > count) {
         while (m_favorites.size() > count && m_favorites.count() > 0) {
             m_favorites.pop_back();
@@ -349,6 +352,7 @@ qWarning()<<"NEW FAVORITE COUNT"<<count;
     }
 
     m_maxFavoriteCount = count;
+    m_homeScreen->config().writeEntry("MaxFavoriteCount", m_maxFavoriteCount);
 
     emit maxFavoriteCountChanged();
 }

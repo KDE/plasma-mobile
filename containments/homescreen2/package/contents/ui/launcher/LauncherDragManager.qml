@@ -99,7 +99,7 @@ Item {
         }
 
         function containerForItem(item, dragCenterX, dragCenterY) {
-            if (favoriteStrip.contains(favoriteStrip.mapFromItem(item, dragCenterX, dragCenterY))
+            if (favoriteStrip.contains(favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY))
                 && plasmoid.nativeInterface.applicationListModel.favoriteCount < plasmoid.nativeInterface.applicationListModel.maxFavoriteCount) {
                 return favoriteStrip;
             } else if (appletsLayout.contains(appletsLayout.mapFromItem(item, dragCenterX, dragCenterY))) {

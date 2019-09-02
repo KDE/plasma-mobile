@@ -72,10 +72,24 @@ Item {
         scrollUpIndicator.opacity = 0;
         scrollDownIndicator.opacity = 0;
     }
+
+    function recalculateMaxFavoriteCount() {
+        if (!componentComplete) {
+            return;
+        }
+
+        plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth);
+    }
 //END functions
 
-    onWidthChanged: plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth)
-    onHeightChanged: plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth)
+
+    property bool componentComplete: false
+    onWidthChanged: recalculateMaxFavoriteCount()
+    onHeightChanged:recalculateMaxFavoriteCount()
+    Component.onCompleted: {
+        componentComplete = true;
+        recalculateMaxFavoriteCount()
+    }
 
     Timer {
         id: autoScrollTimer
@@ -136,10 +150,11 @@ Item {
 
     Flickable {
         id: mainFlickable
+        width: parent.width
         anchors {
             fill: parent
             topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
-            bottomMargin: root.height - plasmoid.availableScreenRect.height - topMargin
+            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         
         bottomMargin: favoriteStrip.height
@@ -173,14 +188,17 @@ Item {
             easing.type: Easing.InOutQuad
         }
 
-        ColumnLayout {
+        Column {
             id: flickableContents
-            width: parent.width
+            width: mainFlickable.width
             spacing: Math.max(0, favoriteStrip.frame.height - mainFlickable.contentY)
 
             DragDrop.DropArea {
-                Layout.fillWidth: true
-                Layout.preferredHeight: mainFlickable.height - favoriteStrip.frame.height //TODO: multiple widgets pages
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: mainFlickable.height - favoriteStrip.frame.height //TODO: multiple widgets pages
 
                 onDragEnter: {
                     event.accept(event.proposedAction);
@@ -281,7 +299,10 @@ Item {
 
             Launcher.LauncherGrid {
                 id: launcher
-                Layout.fillWidth: true
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
                 
                 favoriteStrip: favoriteStrip
                 appletsLayout: appletsLayout
@@ -312,7 +333,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            bottomMargin: root.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         appletsLayout: appletsLayout
         launcherGrid: launcher

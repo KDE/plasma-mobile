@@ -104,7 +104,7 @@ private:
     QList<ApplicationData> m_applicationList;
 
     HomeScreen *m_homeScreen = nullptr;
-    int m_maxFavoriteCount = 5;
+    int m_maxFavoriteCount = 0;
     QStringList m_appOrder;
     QStringList m_favorites;
     QSet<QString> m_desktopItems;
