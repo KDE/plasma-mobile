@@ -67,9 +67,9 @@ Window {
                     text: window.title
                     Layout.alignment: Qt.AlignCenter
                 }
-                PlasmaComponents.BusyIndicator {
+               /* PlasmaComponents.BusyIndicator {
                     Layout.alignment: Qt.AlignCenter
-                }
+                }*/
             }
         }
 
