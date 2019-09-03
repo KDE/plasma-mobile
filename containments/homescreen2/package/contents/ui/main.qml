@@ -150,13 +150,6 @@ Item {
         contentHeight: flickableContents.height
         interactive: !plasmoid.editMode && !launcherDragManager.active
 
-        property real oldContentY
-        onContentYChanged: {
-            if (!atYBeginning) {
-                krunner.y = Math.min(plasmoid.availableScreenRect.y, Math.max(plasmoid.availableScreenRect.y - krunner.inputHeight, krunner.y + oldContentY - contentY));
-            }
-            oldContentY = contentY;
-        }
         PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
             id: scrollabr
             opacity: mainFlickable.moving
@@ -333,7 +326,7 @@ Item {
         z: 998
         height: plasmoid.availableScreenRect.height
         anchors {
-            //top: parent.top
+            top: parent.top
             left: parent.left
             right: parent.right
             topMargin: plasmoid.availableScreenRect.y
