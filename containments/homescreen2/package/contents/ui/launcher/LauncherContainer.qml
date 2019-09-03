@@ -85,5 +85,11 @@ Item {
                 }
             }
         }
+        Behavior on implicitWidth {
+            NumberAnimation {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 }

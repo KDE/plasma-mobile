@@ -33,8 +33,8 @@ Item {
     property bool active
 
     readonly property Item spacer: Item {
-        width: units.gridUnit * 4
-        height: width
+        width: launcherGrid.cellWidth
+        height: launcherGrid.cellHeight
     }
 
     function startDrag(item) {
@@ -227,25 +227,12 @@ Item {
                 plasmoid.nativeInterface.applicationListModel.setLocation(item.modelData.index, ApplicationListModel.Grid);
             }
 
-            spacer.visible = false;
-            spacer.parent = container;
-
             var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
-            if (!child) {
-                putInContainerLayout(item, container);
-                return;
-            }
-
-            var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
-
-            if (pos.x + dragCenterX < child.x + child.width / 2) {
-                putInContainerLayout(item, container);
-                plasmoid.nativeInterface.stackBefore(item, child);
-            } else {
-                putInContainerLayout(item, container);
-                plasmoid.nativeInterface.stackAfter(item, child);
-            }
+            putInContainerLayout(item, container);
+            plasmoid.nativeInterface.stackBefore(item, spacer);
+            spacer.visible = false;
+            spacer.parent = container;
         }
     }
 }
