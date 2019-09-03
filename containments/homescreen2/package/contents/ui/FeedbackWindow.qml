@@ -43,10 +43,10 @@ Window {
         }
     }
 
-    PlasmaCore.ColorScope {
+    Item {
         id: background
         anchors.fill: parent
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
         width: window.width
         height: window.height
         state: "closed"
