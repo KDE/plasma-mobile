@@ -25,30 +25,58 @@
 #include <QAbstractListModel>
 #include <QList>
 
+#include "homescreen.h"
+
 class QString;
+
+class ApplicationListModel;
 
 struct ApplicationData {
     QString name;
     QString icon;
     QString storageId;
     QString entryPath;
+    int location = 0; //FIXME
+    bool startupNotify = true;
 };
 
 class ApplicationListModel : public QAbstractListModel {
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
-    Q_PROPERTY(QStringList appOrder READ appOrder WRITE setAppOrder NOTIFY appOrderChanged)
+    Q_PROPERTY(int favoriteCount READ favoriteCount NOTIFY favoriteCountChanged)
+    Q_PROPERTY(int maxFavoriteCount READ maxFavoriteCount WRITE setMaxFavoriteCount NOTIFY maxFavoriteCountChanged)
 
 public:
-    ApplicationListModel(QObject *parent = nullptr);
+    enum LauncherLocation {
+        Grid = 0,
+        Favorites,
+        Desktop
+    };
+    Q_ENUM(LauncherLocation)
+
+    enum Roles {
+        ApplicationNameRole = Qt::UserRole + 1,
+        ApplicationIconRole,
+        ApplicationStorageIdRole,
+        ApplicationEntryPathRole,
+        ApplicationOriginalRowRole,
+        ApplicationStartupNotifyRole,
+        ApplicationLocationRole
+    };
+
+    ApplicationListModel(HomeScreen *parent = nullptr);
     ~ApplicationListModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
 
-    int count() { return m_applicationList.count(); }
+    int count() const { return m_applicationList.count(); }
+    int favoriteCount() const { return m_favorites.count();}
+
+    int maxFavoriteCount() const;
+    void setMaxFavoriteCount(int count);
 
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
 
@@ -56,16 +84,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    enum Roles {
-        ApplicationNameRole = Qt::UserRole + 1,
-        ApplicationIconRole = Qt::UserRole + 2,
-        ApplicationStorageIdRole = Qt::UserRole + 3,
-        ApplicationEntryPathRole = Qt::UserRole + 4,
-        ApplicationOriginalRowRole  = Qt::UserRole + 6
-    };
-
-    QStringList appOrder() const;
-    void setAppOrder(const QStringList &order);
+    Q_INVOKABLE void setLocation(int row, LauncherLocation location);
 
     Q_INVOKABLE void moveItem(int row, int order);
 
@@ -78,12 +97,17 @@ public Q_SLOTS:
 
 Q_SIGNALS:
     void countChanged();
-    void appOrderChanged();
+    void favoriteCountChanged();
+    void maxFavoriteCountChanged();
 
 private:
     QList<ApplicationData> m_applicationList;
 
+    HomeScreen *m_homeScreen = nullptr;
+    int m_maxFavoriteCount = 0;
     QStringList m_appOrder;
+    QStringList m_favorites;
+    QSet<QString> m_desktopItems;
     QHash<QString, int> m_appPositions;
 };
 

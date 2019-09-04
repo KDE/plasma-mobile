@@ -37,12 +37,26 @@
 #include <KIOWidgets/KRun>
 #include <QDebug>
 
-ApplicationListModel::ApplicationListModel(QObject *parent)
-    : QAbstractListModel(parent)
+
+ApplicationListModel::ApplicationListModel(HomeScreen *parent)
+    : QAbstractListModel(parent),
+      m_homeScreen(parent)
 {
     //can't use the new syntax as this signal is overloaded
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
+    m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
+    m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
+    m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
+    m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", 5);
+
+    int i = 0;
+    for (auto app : m_appOrder) {
+        m_appPositions[app] = i;
+        ++i;
+    }
+    //here or delayed?
+    loadApplications();
 }
 
 ApplicationListModel::~ApplicationListModel()
@@ -56,6 +70,8 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
     roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
     roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
     roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
+    roleNames[ApplicationStartupNotifyRole] = "ApplicationStartupNotifyRole";
+    roleNames[ApplicationLocationRole] = "ApplicationLocationRole";
 
     return roleNames;
 }
@@ -120,8 +136,6 @@ void ApplicationListModel::loadApplications()
                     } else if (entry->property("Exec").isValid()) {
                         KService::Ptr service(static_cast<KService* >(entry.data()));
 
-                        qDebug() << " desktopEntryName: " << service->desktopEntryName();
-
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName()) &&
                             service->showOnCurrentPlatform() &&
@@ -134,6 +148,13 @@ void ApplicationListModel::loadApplications()
                             data.icon = service->icon();
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
+                            data.startupNotify = service->property("StartupNotify").toBool();
+
+                            if (m_favorites.contains(data.storageId)) {
+                                data.location = Favorites;
+                            } else if (m_desktopItems.contains(data.storageId)) {
+                                data.location = Desktop;
+                            }
 
                             auto it = m_appPositions.constFind(service->storageId());
                             if (it != m_appPositions.constEnd()) {
@@ -178,6 +199,10 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).entryPath;
     case ApplicationOriginalRowRole:
         return index.row();
+    case ApplicationStartupNotifyRole:
+        return m_applicationList.at(index.row()).startupNotify;
+    case ApplicationLocationRole:
+        return m_applicationList.at(index.row()).location;
 
     default:
         return QVariant();
@@ -205,7 +230,52 @@ void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int so
     moveItem(sourceRow, destinationChild);
 }
 
-Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
+void ApplicationListModel::setLocation(int row, LauncherLocation location)
+{
+    if (row < 0 || row >= m_applicationList.length()) {
+        return;
+    }
+
+    ApplicationData &data = m_applicationList[row];
+    if (data.location == location) {
+        return;
+    }
+
+    if (location == Favorites) {qWarning()<<"favoriting"<<row<<data.name;
+        // Deny favorites when full
+        if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount) {
+            return;
+        }
+
+        m_favorites.insert(row, data.storageId);
+
+        m_homeScreen->config().writeEntry("Favorites", m_favorites);
+        emit favoriteCountChanged();
+
+    // Out of favorites
+    } else  if (data.location == Favorites) {
+        m_favorites.removeAll(data.storageId);
+        m_homeScreen->config().writeEntry("Favorites", m_favorites);
+        emit favoriteCountChanged();
+    }
+
+    // In Desktop
+    if (location == Desktop) {
+        m_desktopItems.insert(data.storageId);
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
+
+    // Out of Desktop
+    } else  if (data.location == Desktop) {
+        m_desktopItems.remove(data.storageId);
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
+    }
+
+    data.location = location;
+    emit m_homeScreen->configNeedsSaving();
+    emit dataChanged(index(row, 0), index(row, 0));
+}
+
+void ApplicationListModel::moveItem(int row, int destination)
 {
     if (row < 0 || destination < 0 || row >= m_applicationList.length() ||
         destination >= m_applicationList.length() || row == destination) {
@@ -220,6 +290,7 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
         ApplicationData data = m_applicationList.at(row);
         m_applicationList.insert(destination, data);
         m_applicationList.takeAt(row);
+
     } else {
         ApplicationData data = m_applicationList.takeAt(row);
         m_applicationList.insert(destination, data);
@@ -235,8 +306,8 @@ Q_INVOKABLE void ApplicationListModel::moveItem(int row, int destination)
         ++i;
     }
 
+    m_homeScreen->config().writeEntry("AppOrder", m_appOrder);
 
-    emit appOrderChanged();
     endMoveRows();
 }
 
@@ -251,23 +322,38 @@ void ApplicationListModel::runApplication(const QString &storageId)
     KRun::runService(*service, QList<QUrl>(), nullptr);
 }
 
-QStringList ApplicationListModel::appOrder() const
+int ApplicationListModel::maxFavoriteCount() const
 {
-    return m_appOrder;
+    return m_maxFavoriteCount;
 }
 
-void ApplicationListModel::setAppOrder(const QStringList &order)
+void ApplicationListModel::setMaxFavoriteCount(int count)
 {
-    if (m_appOrder == order) {
+    if (m_maxFavoriteCount == count) {
         return;
     }
 
-    m_appOrder = order;
-    m_appPositions.clear();
-    int i = 0;
-    for (auto app : m_appOrder) {
-        m_appPositions[app] = i;
-        ++i;
+    if (m_maxFavoriteCount > count) {
+        while (m_favorites.size() > count && m_favorites.count() > 0) {
+            m_favorites.pop_back();
+        }
+        emit favoriteCountChanged();
+
+        int i = 0;
+        for (auto &app : m_applicationList) {
+            if (i >= count && app.location == Favorites) {
+                app.location = Grid;
+                emit dataChanged(index(i, 0), index(i, 0));
+            }
+            ++i;
+        }
     }
-    emit appOrderChanged();
+
+    m_maxFavoriteCount = count;
+    m_homeScreen->config().writeEntry("MaxFavoriteCount", m_maxFavoriteCount);
+
+    emit maxFavoriteCountChanged();
 }
+
+#include "moc_applicationlistmodel.cpp"
+

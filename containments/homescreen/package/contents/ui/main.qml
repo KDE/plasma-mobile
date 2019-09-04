@@ -1,81 +1,45 @@
 /*
- *  Copyright 2015 Marco Martin <mart@kde.org>
+ *  Copyright 2019 Marco Martin <mart@kde.org>
  *
- *  This program is free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
+ *   This program is free software; you can redistribute it and/or modify
+ *   it under the terms of the GNU Library General Public License as
+ *   published by the Free Software Foundation; either version 2 or
+ *   (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Library General Public License for more details
  *
- *  You should have received a copy of the GNU General Public License
- *  along with this program; if not, write to the Free Software
- *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
+ *   You should have received a copy of the GNU Library General Public
+ *   License along with this program; if not, write to the
+ *   Free Software Foundation, Inc.,
+ *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.4
+import QtQuick 2.12
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.0
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.draganddrop 2.0 as DragDrop
 
-import "LayoutManager.js" as LayoutManager
+import "launcher" as Launcher
+
+import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
+
+import org.kde.phone.homescreen 1.0
 
 Item {
     id: root
-    width: 480
-    height: 640
+    width: 640
+    height: 480
 
-//BEGIN properties
     property Item toolBox
-    property alias appletsSpace: applicationsView.headerItem
-    readonly property int iconSize: units.iconSizes.large
-    property int buttonHeight: dragDelegate.height
-    property bool reorderingApps: false
-    property var layoutManager: LayoutManager
-//END properties
 
 //BEGIN functions
-    function addApplet(applet, x, y) {
-        var container = appletContainerComponent.createObject(appletsSpace.layout)
-        container.visible = true
-        print("Applet added: " + applet)
-
-        var appletWidth = applet.width;
-        var appletHeight = applet.height;
-        applet.parent = container;
-        container.applet = applet;
-        applet.anchors.fill = container;
-        applet.visible = true;
-        container.visible = true;
-
-        // If the provided position is valid, use it.
-        if (x >= 0 && y >= 0) {
-            var index = LayoutManager.insertAtCoordinates(container, x , y);
-
-        // Fall through to determining an appropriate insert position.
-        } else {
-            var before = null;
-            //container.animationsEnabled = false;
-
-            if (before) {
-                LayoutManager.insertBefore(before, container);
-
-            // Fall through to adding at the end.
-            } else {
-                container.parent = appletsSpace.layout;
-            }
-
-            //event compress the enable of animations
-            //startupTimer.restart();
-        }
-    }
-
     //Autoscroll related functions
     function scrollUp() {
         autoScrollTimer.scrollDown = false;
@@ -97,42 +61,23 @@ Item {
         scrollDownIndicator.opacity = 0;
     }
 
+    function recalculateMaxFavoriteCount() {
+        if (!componentComplete) {
+            return;
+        }
 
-
+        plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth);
+    }
 //END functions
 
-//BEGIN slots
+
+    property bool componentComplete: false
+    onWidthChanged: recalculateMaxFavoriteCount()
+    onHeightChanged:recalculateMaxFavoriteCount()
     Component.onCompleted: {
-        LayoutManager.plasmoid = plasmoid;
-        LayoutManager.root = root;
-        LayoutManager.layout = appletsSpace.layout;
-        LayoutManager.restore();
-        applicationsView.contentY = -applicationsView.headerItem.height*2;
-
-        plasmoid.nativeInterface.applicationListModel.appOrder = plasmoid.configuration.AppOrder;
-        plasmoid.nativeInterface.applicationListModel.loadApplications();
+        componentComplete = true;
+        recalculateMaxFavoriteCount()
     }
-
-    Timer {
-        interval: 200
-        running: true
-        onTriggered: {
-            applicationsView.contentY = -applicationsView.headerItem.height;
-        }
-    }
-
-    Containment.onAppletAdded: {
-        addApplet(applet, x, y);
-        LayoutManager.save();
-    }
-
-    Connections {
-        target: plasmoid.nativeInterface.applicationListModel
-        onAppOrderChanged: {
-            plasmoid.configuration.AppOrder = plasmoid.nativeInterface.applicationListModel.appOrder;
-        }
-    }
-//END slots
 
     Timer {
         id: autoScrollTimer
@@ -140,79 +85,26 @@ Item {
         repeat: true
         interval: 1500
         onTriggered: {
-            //reordering launcher icons
-            if (root.reorderingApps) {
-                scrollAnim.to = scrollDown ?
-                //Scroll down
-                    Math.min(applicationsView.contentItem.height - applicationsView.headerItem.height - root.height, applicationsView.contentY + root.height/2) :
-                //Scroll up
-                    Math.max(0, applicationsView.contentY - root.height/2);
+            scrollAnim.to = scrollDown ?
+            //Scroll down
+                Math.min(mainFlickable.contentItem.height - root.height, mainFlickable.contentY + root.height/2) :
+            //Scroll up
+                Math.max(0, mainFlickable.contentY - root.height/2);
 
-            //reordering applets
-            } else {
-                scrollAnim.to = scrollDown ?
-                //Scroll down
-                    Math.min(-root.height, applicationsView.contentY + root.height/2) :
-                //Scroll up
-                    Math.max(-applicationsView.headerItem.height + root.height, applicationsView.contentY - root.height/2);
-            }
             scrollAnim.running = true;
         }
     }
 
-    Component {
-        id: appletContainerComponent
-        MouseArea {
-            id: appletContainer
-            //not used yet
-            property bool animationsEnabled: true
-            property Item applet
-            z: applet && applet.compactRepresentationItem && applet.expanded ? 99 : 0
-            opacity: 1 - Math.abs(x/(width/2))
-            Layout.fillWidth: true
-            Layout.fillHeight: applet && applet.Layout.fillHeight
-
-            Connections {
-                target: plasmoid
-
-                onAppletRemoved: {
-                    print("Applet removed Applet-" + applet.id)
-                    if (applet.id == appletContainer.applet.id) {
-                        appletContainer.destroy();
-                    }
-                }
-            }
-
-            onAppletChanged: {
-                if (applet.backgroundHints == PlasmaCore.Types.StandardBackground) {
-                    applet.anchors.margins = background.margins.top;
-                } 
-            }
-
-            property int oldX: x
-            property int oldY: y
-            PlasmaCore.FrameSvgItem {
-                id: background
-                z: -1
-                anchors.fill: parent
-                imagePath: "widgets/background"
-                visible: applet.backgroundHints == PlasmaCore.Types.StandardBackground
-            }
-
-            width: parent.width
-            height: Math.max(applet.switchHeight + 1 + background.margins.top + background.margins.bottom, Math.max(applet.Layout.minimumHeight, (root.height-applicationsView.headerItem.margin) / 2))
-            
-            PlasmaComponents.BusyIndicator {
-                z: 1000
-                visible: applet && applet.busy
-                running: visible
-                anchors.centerIn: parent
-                width: Math.min(parent.width, parent.height)
-                height: width
-            }
+    Connections {
+        target: plasmoid
+        onEditModeChanged: {
+            appletsLayout.editMode = plasmoid.editMode
         }
     }
 
+    FeedbackWindow {
+        id: feedbackWindow
+    }
     SequentialAnimation {
         id: clickFedbackAnimation
         property Item target
@@ -234,12 +126,205 @@ Item {
             easing.type: Easing.InOutQuad
         }
     }
-    FeedbackWindow {
-        id: feedbackWindow
+
+    Launcher.LauncherDragManager {
+        id: launcherDragManager
+        anchors.fill: parent
+        z: 2
+        appletsLayout: appletsLayout
+        launcherGrid: launcher
+        favoriteStrip: favoriteStrip
     }
+
+    Flickable {
+        id: mainFlickable
+        width: parent.width
+        anchors {
+            fill: parent
+            topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
+            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+        }
+        
+        bottomMargin: favoriteStrip.height
+        contentWidth: width
+        contentHeight: flickableContents.height
+        interactive: !plasmoid.editMode && !launcherDragManager.active
+
+        PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
+            id: scrollabr
+            opacity: mainFlickable.moving
+            interactive: false
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: units.longDuration * 2
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
+        NumberAnimation {
+            id: scrollAnim
+            target: mainFlickable
+            properties: "contentY"
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+
+        Column {
+            id: flickableContents
+            width: mainFlickable.width
+            spacing: Math.max(0, favoriteStrip.frame.height - mainFlickable.contentY)
+
+            DragDrop.DropArea {
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: mainFlickable.height - favoriteStrip.frame.height //TODO: multiple widgets pages
+
+                onDragEnter: {
+                    event.accept(event.proposedAction);
+                }
+                onDragMove: {
+                    appletsLayout.showPlaceHolderAt(
+                        Qt.rect(event.x - appletsLayout.defaultItemWidth / 2,
+                        event.y - appletsLayout.defaultItemHeight / 2,
+                        appletsLayout.defaultItemWidth,
+                        appletsLayout.defaultItemHeight)
+                    );
+                }
+
+                onDragLeave: {
+                    appletsLayout.hidePlaceHolder();
+                }
+
+                preventStealing: true
+
+                onDrop: {
+                    plasmoid.processMimeData(event.mimeData,
+                                event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
+                    event.accept(event.proposedAction);
+                    appletsLayout.hidePlaceHolder();
+                }
+
+                PlasmaCore.Svg {
+                    id: arrowsSvg
+                    imagePath: "widgets/arrows"
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                }
+                PlasmaCore.IconItem {
+                    z: 9
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                    }
+                    source: "arrow-up"
+                    width: units.iconSizes.medium
+                    height: width
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+                    MouseArea {
+                        anchors {
+                            fill: parent
+                            margins: -units.smallSpacing
+                        }
+                        onClicked: mainFlickable.flick(0, -mainFlickable.height)
+                    }
+                }
+
+                ContainmentLayoutManager.AppletsLayout {
+                    id: appletsLayout
+
+                    anchors.fill: parent
+
+                    cellWidth: Math.floor(width / launcher.columns)
+                    cellHeight: launcher.cellHeight
+
+                    configKey: width > height ? "ItemGeometriesHorizontal" : "ItemGeometriesVertical"
+                    containment: plasmoid
+                    editModeCondition: plasmoid.immutable
+                            ? ContainmentLayoutManager.AppletsLayout.Manual
+                            : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
+
+                    // Sets the containment in edit mode when we go in edit mode as well
+                    onEditModeChanged: plasmoid.editMode = editMode
+
+                    minimumItemWidth: units.gridUnit * 3
+                    minimumItemHeight: minimumItemWidth
+
+                    defaultItemWidth: units.gridUnit * 6
+                    defaultItemHeight: defaultItemWidth
+
+                    //cellWidth: units.iconSizes.small
+                    //cellHeight: cellWidth
+
+                    acceptsAppletCallback: function(applet, x, y) {
+                        print("Applet: "+applet+" "+x+" "+y)
+                        return true;
+                    }
+
+                    appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
+                        id: appletContainer
+                        configOverlayComponent: ConfigOverlay {}
+
+                        onEditModeChanged: {
+                            launcherDragManager.active = dragActive || editMode;
+                        }
+                        onDragActiveChanged: {
+                            launcherDragManager.active = dragActive || editMode;
+                        }
+                    }
+
+                    placeHolder: ContainmentLayoutManager.PlaceHolder {}
+                }
+            }
+
+            Launcher.LauncherGrid {
+                id: launcher
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                
+                favoriteStrip: favoriteStrip
+                appletsLayout: appletsLayout
+            }
+        }
+    }
+
+    ScrollIndicator {
+        id: scrollUpIndicator
+        anchors {
+            top: parent.top
+            topMargin: units.gridUnit * 2
+        }
+        elementId: "up-arrow"
+    }
+    ScrollIndicator {
+        id: scrollDownIndicator
+        anchors {
+            bottom: favoriteStrip.top
+            bottomMargin: units.gridUnit
+        }
+        elementId: "down-arrow"
+    }
+
+    Launcher.FavoriteStrip {
+        id: favoriteStrip
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+        }
+        appletsLayout: appletsLayout
+        launcherGrid: launcher
+        //y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
+    }
+
     KRunner {
         id: krunner
         z: 998
+        height: plasmoid.availableScreenRect.height
         anchors {
             top: parent.top
             left: parent.left
@@ -247,275 +332,5 @@ Item {
             topMargin: plasmoid.availableScreenRect.y
         }
     }
-
-
-    EditOverlay {
-        id: editOverlay
-        z: 999
-    }
-    MouseEventListener {
-        id: mainListener
-        anchors.fill: parent
-
-        //Events handling: those events are about clicking and reordering of app icons
-        //applet related events are in AppeltsArea.qml
-        onPressAndHold: {
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-            //in favorites area?
-            var item;
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
-            } else {
-                pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-                item = applicationsView.itemAt(pos.x, pos.y)
-            }
-            if (!item) {
-                return;
-            }
-
-            applicationsView.dragData = new Object;
-            applicationsView.dragData.ApplicationNameRole = item.modelData.ApplicationNameRole;
-            applicationsView.dragData.ApplicationIconRole =  item.modelData.ApplicationIconRole;
-            applicationsView.dragData.ApplicationStorageIdRole = item.modelData.ApplicationStorageIdRole;
-            applicationsView.dragData.ApplicationEntryPathRole = item.modelData.ApplicationEntryPathRole;
-            applicationsView.dragData.ApplicationOriginalRowRole = item.modelData.ApplicationOriginalRowRole;
-            
-            dragDelegate.modelData = applicationsView.dragData;
-            applicationsView.interactive = false;
-            root.reorderingApps = true;
-            dragDelegate.x = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight
-            dragDelegate.y = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight
-            dragDelegate.xTarget = mouse.x - dragDelegate.width/2;
-            dragDelegate.yTarget = mouse.y - dragDelegate.width/2;
-            dragDelegate.opacity = 1;
-        }
-        onPositionChanged: {
-            if (!applicationsView.dragData) {
-                return;
-            }
-            dragDelegate.x = mouse.x - dragDelegate.width/2;
-            dragDelegate.y = mouse.y - dragDelegate.height/2;
-            
-            var pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-
-            //in favorites area?
-            if (applicationsView.headerItem.favoritesStrip.contains(mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y))) {
-                pos.y = 1;
-            }
-
-            var newRow = (Math.round(applicationsView.width / applicationsView.cellWidth) * Math.floor(pos.y / applicationsView.cellHeight) + Math.floor(pos.x / applicationsView.cellWidth));
-
-            if (applicationsView.dragData.ApplicationOriginalRowRole != newRow) {
-                plasmoid.nativeInterface.applicationListModel.moveItem(applicationsView.dragData.ApplicationOriginalRowRole, newRow);
-                applicationsView.dragData.ApplicationOriginalRowRole = newRow;
-            }
-
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-            //FAVORITES
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                root.stopScroll();
-            //SCROLL UP
-            } else if (applicationsView.contentY > 0 && mouse.y < root.buttonHeight + root.height / 4) {
-                root.scrollUp();
-            //SCROLL DOWN
-            } else if (!applicationsView.atYEnd && mouse.y > 3 * (root.height / 4)) {
-                root.scrollDown();
-            //DON't SCROLL
-            } else {
-                root.stopScroll();
-            }
-
-        }
-        onReleased: {
-            if (krunner.showingResults) {
-                return;
-            }
-            applicationsView.interactive = true;
-            dragDelegate.xTarget = Math.floor(mouse.x / root.buttonHeight) * root.buttonHeight;
-            dragDelegate.yTarget = Math.floor(mouse.y / root.buttonHeight) * root.buttonHeight;
-            dragDelegate.opacity = 0;
-            if (dragDelegate.modelData) {
-                dragDelegate.modelData.ApplicationIconRole = "";
-                dragDelegate.modelDataChanged();
-            }
-            applicationsView.dragData = null;
-            root.reorderingApps = false;
-            applicationsView.forceLayout();
-            root.stopScroll();
-        }
-        onClicked: {
-            if (krunner.showingResults) {
-                return;
-            }
-            var pos = mapToItem(applicationsView.headerItem.favoritesStrip, mouse.x, mouse.y);
-
-            //in favorites area?
-            var item;
-            if (applicationsView.headerItem.favoritesStrip.contains(pos)) {
-                item = applicationsView.headerItem.favoritesStrip.itemAt(pos.x, pos.y);
-            } else {
-                pos = mapToItem(applicationsView.contentItem, mouse.x, mouse.y);
-                item = applicationsView.itemAt(pos.x, pos.y)
-            }
-            if (!item) {
-                return;
-            }
-
-            clickFedbackAnimation.target = item;
-            clickFedbackAnimation.running = true;
-            feedbackWindow.title = item.modelData.ApplicationNameRole;
-            feedbackWindow.state = "open";
-            plasmoid.nativeInterface.applicationListModel.runApplication(item.modelData.ApplicationStorageIdRole);
-        }
-
-        PlasmaCore.ColorScope {
-            anchors.fill: parent
-            //TODO: decide what color we want applets
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-            Rectangle {
-                color: PlasmaCore.ColorScope.backgroundColor
-                opacity: 0.9 * (Math.min(applicationsView.contentY + root.height, root.height) / root.height)
-                anchors.fill: parent
-            }
-
-            PlasmaCore.Svg {
-                id: arrowsSvg
-                imagePath: "widgets/arrows"
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            }
-            PlasmaCore.SvgItem {
-                id: scrollUpIndicator
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    top: parent.top
-                    topMargin: 300
-                }
-                z: 2
-                opacity: 0
-                svg: arrowsSvg
-                elementId: "up-arrow"
-                width: units.iconSizes.large
-                height: width
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: 1000
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-            PlasmaCore.SvgItem {
-                id: scrollDownIndicator
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                    bottomMargin: units.gridUnit * 2
-                }
-                z: 2
-                opacity: 0
-                svg: arrowsSvg
-                elementId: "down-arrow"
-                width: units.iconSizes.large
-                height: width
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: 1000
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-
-            //This HomeLauncher is the placeholder for the "drag"
-            //delegate (that is not actual drag and drop
-            HomeLauncher {
-                id: dragDelegate
-                z: 999
-                property int xTarget
-                property int yTarget
-                iconSize: root.iconSize
-
-                Behavior on opacity {
-                    ParallelAnimation {
-                        OpacityAnimator {
-                            duration: units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                        PropertyAnimation {
-                            properties: "x"
-                            to: dragDelegate.xTarget
-                            target: dragDelegate
-                            duration: units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                        PropertyAnimation {
-                            properties: "y"
-                            to: dragDelegate.yTarget
-                            target: dragDelegate
-                            duration: units.longDuration
-                            easing.type: Easing.InOutQuad
-                        }
-                    }
-                }
-            }
-            GridView {
-                id: applicationsView
-                anchors {
-                    fill: parent
-                    topMargin: plasmoid.availableScreenRect.y
-                    bottomMargin: root.height - plasmoid.availableScreenRect.y - plasmoid.availableScreenRect.height
-                }
-
-                property var dragData
-
-                cellWidth: root.width / 4
-                cellHeight: root.buttonHeight
-                model: plasmoid.nativeInterface.applicationListModel
-
-                snapMode: GridView.SnapToRow
-
-                NumberAnimation {
-                    id: scrollAnim
-                    target: applicationsView
-                    properties: "contentY"
-                    duration: units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-                move: Transition {
-                    NumberAnimation {
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
-                        properties: "x,y"
-                    }
-                }
-                moveDisplaced: Transition {
-                    NumberAnimation {
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
-                        properties: "x,y"
-                    }
-                }
-
-                //clip: true
-                delegate: HomeLauncher {
-                    visible: index > 3
-                    iconSize: root.iconSize
-                }
-                header: AppletsArea {}
-                footer: Item {
-                    width: units. gridUnit * 4
-                    height: width
-                }
-            }
-
-            PlasmaComponents.ScrollBar {
-                anchors {
-                    right: parent.right
-                    top: parent.top
-                    bottom: parent.bottom
-                }
-                interactive: false
-                flickableItem: applicationsView
-            }
-        }
-    }
 }
+

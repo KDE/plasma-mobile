@@ -22,11 +22,13 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Window {
     id: window
 
     property alias state: background.state
+    property alias icon: icon.source
     width: Screen.width
     height: Screen.height
     color: "transparent"
@@ -41,19 +43,33 @@ Window {
         }
     }
 
-    PlasmaCore.ColorScope {
+    Item {
         id: background
         anchors.fill: parent
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
         width: window.width
         height: window.height
         state: "closed"
         Rectangle {
             anchors.fill: parent
             color: background.backgroundColor
-        
-            PlasmaComponents.BusyIndicator {
+
+            ColumnLayout {
                 anchors.centerIn: parent
+                PlasmaCore.IconItem {
+                    id: icon
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                    Layout.preferredWidth: units.iconSizes.enormous
+                    Layout.preferredHeight: Layout.preferredWidth
+                    Layout.alignment: Qt.AlignCenter
+                }
+                PlasmaExtras.Heading {
+                    text: window.title
+                    Layout.alignment: Qt.AlignCenter
+                }
+               /* PlasmaComponents.BusyIndicator {
+                    Layout.alignment: Qt.AlignCenter
+                }*/
             }
         }
 

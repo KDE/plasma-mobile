@@ -24,6 +24,7 @@
 
 #include <Plasma/Containment>
 
+class QQuickItem;
 class ApplicationListModel;
 
 class HomeScreen : public Plasma::Containment
@@ -37,8 +38,11 @@ public:
 
     ApplicationListModel *applicationListModel();
 
+    Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
+    Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
+
 private:
-    ApplicationListModel *m_applicationListModel;
+    ApplicationListModel *m_applicationListModel = nullptr;
 
 };
 

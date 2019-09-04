@@ -22,12 +22,13 @@
 
 #include <QtQml>
 #include <QDebug>
+#include <QQuickItem>
 
 HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
-    qmlRegisterType<ApplicationListModel>();
-    m_applicationListModel = new ApplicationListModel(this);
+    qmlRegisterUncreatableType<ApplicationListModel>("org.kde.phone.homescreen", 1, 0, "ApplicationListModel", QStringLiteral("Cannot create item of type ApplicationListModel"));
+
     setHasConfigurationInterface(true);
 }
 
@@ -36,7 +37,28 @@ HomeScreen::~HomeScreen()
 
 ApplicationListModel *HomeScreen::applicationListModel()
 {
+    if (!m_applicationListModel) {
+        m_applicationListModel = new ApplicationListModel(this);
+    }
     return m_applicationListModel;
+}
+
+void HomeScreen::stackBefore(QQuickItem *item1, QQuickItem *item2)
+{
+    if (!item1 || !item2 || item1->parentItem() != item2->parentItem()) {
+        return;
+    }
+
+    item1->stackBefore(item2);
+}
+
+void HomeScreen::stackAfter(QQuickItem *item1, QQuickItem *item2)
+{
+    if (!item1 || !item2 || item1->parentItem() != item2->parentItem()) {
+        return;
+    }
+
+    item1->stackAfter(item2);
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(homescreen, HomeScreen, "metadata.json")
