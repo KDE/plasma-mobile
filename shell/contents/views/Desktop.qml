@@ -187,7 +187,7 @@ Item {
         if (widgetExplorerStack.source != "") {
             widgetExplorerStack.source = "";
         } else {
-            widgetExplorerStack.setSource(Qt.resolvedUrl("../explorer/WidgetExplorer.qml"), {"containment": containment})
+            widgetExplorerStack.setSource(desktop.fileFromPackage("explorer", "WidgetExplorer.qml"), {"containment": root.containment})
         }
     }
 
