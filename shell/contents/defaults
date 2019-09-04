@@ -2,10 +2,10 @@
 LookAndFeelPackage=org.kde.plasma.phone
 
 [Desktop]
-Containment=org.kde.phone.homescreen
-ToolBox=
+Containment=org.kde.phone.homescreen2
+ToolBox=org.kde.plasma.nano.desktoptoolbox
 
 [Desktop][ContainmentActions]
 
 [plasmarc][Theme]
-name=breeze-dark
+name=breeze
