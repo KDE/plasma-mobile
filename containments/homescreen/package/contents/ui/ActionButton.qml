@@ -34,7 +34,7 @@ PlasmaCore.ToolTipArea {
     property alias elementId: icon.elementId
     property QtObject action
     property bool backgroundVisible: false
-    property int iconSize: 32
+    property int iconSize: units.iconSizes.large
     property int pressedOffset: 1
     property bool checked: false
     property bool toggle: false
