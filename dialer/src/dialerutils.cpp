@@ -55,21 +55,13 @@ DialerUtils::~DialerUtils()
 void DialerUtils::dial(const QString &number)
 {
     // FIXME: this should be replaced by kpeople thing
-    auto pendingContact = m_simAccount->connection()->contactManager()->contactsForIdentifiers(QStringList() << number);
-
-    connect(pendingContact, &Tp::PendingOperation::finished, [=](){
-        if (pendingContact->contacts().size() < 1) {
-            qWarning() << " no contacts";
-            return;
+    qDebug() << "Starting call...";
+    Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(number);
+    connect(pendingChannel, &Tp::PendingChannelRequest::finished, [=](){
+        if (pendingChannel->isError()) {
+            qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
+            setCallState("failed");
         }
-        qDebug() << "Starting call...";
-        Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(pendingContact->contacts().first());
-        connect(pendingChannel, &Tp::PendingChannelRequest::finished, [=](){
-            if (pendingChannel->isError()) {
-                qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
-                setCallState("failed");
-            }
-        });
     });
 }
 
