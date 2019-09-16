@@ -45,6 +45,15 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     //can't use the new syntax as this signal is overloaded
     connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
             this, SLOT(sycocaDbChanged(const QStringList &)));
+
+    loadSettings();
+}
+
+ApplicationListModel::~ApplicationListModel()
+= default;
+
+void ApplicationListModel::loadSettings()
+{
     m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
     m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
     m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
@@ -55,12 +64,9 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
         m_appPositions[app] = i;
         ++i;
     }
-    //here or delayed?
+
     loadApplications();
 }
-
-ApplicationListModel::~ApplicationListModel()
-= default;
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {

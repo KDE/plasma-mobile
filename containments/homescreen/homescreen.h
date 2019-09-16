@@ -41,6 +41,9 @@ public:
     Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
     Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
 
+protected:
+   // void configChanged() override;
+
 private:
     ApplicationListModel *m_applicationListModel = nullptr;
 

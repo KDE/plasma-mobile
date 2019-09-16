@@ -35,6 +35,14 @@ HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
 HomeScreen::~HomeScreen()
 = default;
 
+void HomeScreen::configChanged()
+{
+    Plasma::Containment::configChanged();
+    if (m_applicationListModel) {
+        m_applicationListModel->loadSettings();
+    }
+}
+
 ApplicationListModel *HomeScreen::applicationListModel()
 {
     if (!m_applicationListModel) {

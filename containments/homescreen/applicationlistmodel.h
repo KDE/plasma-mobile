@@ -68,6 +68,8 @@ public:
     ApplicationListModel(HomeScreen *parent = nullptr);
     ~ApplicationListModel() override;
 
+    void loadSettings();
+
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
