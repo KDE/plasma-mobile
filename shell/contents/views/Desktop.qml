@@ -41,32 +41,29 @@ Item {
     property int buttonHeight: width/4
     property bool loadCompleted: false
 
-    XAnimator {
+    NumberAnimation {
         id: switchAnim
-        target: activitiesLayout
+        target: activitiesView
+        property: "contentX"
         duration: units.longDuration
         easing.type: Easing.InOutQuad
     }
-    MouseArea {
+    Flickable {
         id: activitiesView
         z: 99
         visible: root.containment
         anchors.fill: parent
-        drag.filterChildren: true
-        drag.target: activitiesLayout
-        drag.axis: Drag.XAxis
-        drag.minimumX: -activitiesLayout.width + width
-        drag.maximumX: 0
+
         property int currentIndex: -1
         property Item nextContainment: root.containment
-
+        contentWidth: activitiesLayout.width
         function adjustPosition() {
             if (!activitiesLayout.loadCompleted) {
-                activitiesLayout.x = - currentIndex * width;
+                activitiesView.contentX = currentIndex * width;
                 return;
             }
-            switchAnim.from = activitiesLayout.x;
-            switchAnim.to = - currentIndex * width;
+            switchAnim.from = activitiesView.contentX;
+            switchAnim.to = currentIndex * width;
             switchAnim.running = true;
         }
         onCurrentIndexChanged: adjustPosition();
@@ -74,15 +71,11 @@ Item {
         //don't animate
         onWidthChanged: contentX = currentIndex * width;
 
-        onPositionChanged: {
-            var tempIndex = Math.round(-activitiesLayout.x / width);
-            nextContainment = activitiesLayout.children[tempIndex].containment;
-        }
-        onReleased: {
-            currentIndex = Math.round(-activitiesLayout.x / width);
-            //unconditionally run the slide anim
+        onMovementEnded: {
+            currentIndex = Math.round(activitiesView.contentX / width);
             adjustPosition();
         }
+        onFlickEnded: movementEnded();
         Row {
             id: activitiesLayout
             height: activitiesView.height
@@ -104,10 +97,10 @@ Item {
                     property Item containment
                     //inViewport should be only the current, and the other adjacent two
                     readonly property bool inViewport: activitiesLayout.loadCompleted && root.containment &&
-                            ((x >= -activitiesLayout.x &&
-                            x <= -activitiesLayout.x + activitiesView.width) ||
-                            (x + width >= -activitiesLayout.x &&
-                            x + width < -activitiesLayout.x + activitiesView.width))
+                            ((x >= activitiesView.contentX &&
+                            x <= activitiesView.contentX + activitiesView.width) ||
+                            (x + width >= activitiesView.contentX &&
+                            x + width < activitiesView.contentX + activitiesView.width))
                     readonly property bool currentActivity: root.containment && model.current
 
                     Component.onCompleted: {
@@ -164,7 +157,7 @@ Item {
     }
     PlasmaCore.FrameSvgItem {
         z: 100
-        opacity: activitiesView.drag.active ? 1 : 0
+        opacity: activitiesView.flicking || activitiesView.draggingHorizontally ? 1 : 0
         anchors.centerIn: parent
         imagePath: "widgets/background"
         width: activityNameLabel.implicitWidth + units.gridUnit*2
