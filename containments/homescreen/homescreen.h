@@ -36,6 +36,8 @@ public:
     HomeScreen( QObject *parent, const QVariantList &args );
     ~HomeScreen() override;
 
+    void configChanged() override;
+
     ApplicationListModel *applicationListModel();
 
     Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
