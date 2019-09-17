@@ -47,7 +47,7 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragActive ? 0.4 : 1
 
-    key: model.ApplicationStorageIdRole
+    key: model.url
     property real dragCenterX
     property real dragCenterY
 
@@ -93,8 +93,8 @@ ContainmentLayoutManager.ItemContainer {
         onClicked: {
             clickFedbackAnimation.target = delegate;
             clickFedbackAnimation.running = true;
-            feedbackWindow.title = modelData.ApplicationNameRole;
-            feedbackWindow.icon = modelData.ApplicationIconRole;
+            feedbackWindow.title = model.display;
+            feedbackWindow.icon = model.decoration;
             feedbackWindow.state = "open";
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
@@ -112,7 +112,7 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.minimumHeight: parent.height - root.reservedSpaceForLabel
                 Layout.preferredHeight: Layout.minimumHeight
 
-                source: modelData ? modelData.ApplicationIconRole : ""
+                source: model.decoration
                 Behavior on scale {
                     NumberAnimation {
                         duration: units.longDuration
@@ -133,7 +133,7 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: model.ApplicationNameRole
+                text: model.display
                 font.pixelSize: theme.defaultFont.pixelSize
                 color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 

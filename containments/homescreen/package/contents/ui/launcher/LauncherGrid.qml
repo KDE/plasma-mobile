@@ -29,6 +29,8 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.phone.homescreen 1.0
 
+import org.kde.plasma.private.kicker 0.1 as Kicker
+
 LauncherContainer {
     id: root
 
@@ -38,6 +40,28 @@ LauncherContainer {
     launcherGrid: root
 
     frame.width: width
+
+    Kicker.RootModel {
+        id: kickerRootModel
+        appNameFormat: 0
+
+        autoPopulate: false
+        flat: true
+        sorted: true
+        showSeparators: false
+        appletInterface: plasmoid
+        paginate: false
+        showAllApps: true
+        showTopLevelItems: false
+        showRecentApps: false
+        showRecentDocs: false
+        showRecentContacts: false
+        recentOrdering: 0
+        Component.onCompleted: {
+            kickerRootModel.refresh();
+            plasmoid.nativeInterface.applicationListModel.sourceModel = kickerRootModel.modelForRow(0);
+        }
+    }
 
     Repeater {
         model: plasmoid.nativeInterface.applicationListModel

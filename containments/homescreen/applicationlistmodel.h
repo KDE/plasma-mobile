@@ -22,7 +22,7 @@
 
 // Qt
 #include <QObject>
-#include <QAbstractListModel>
+#include <QSortFilterProxyModel>
 #include <QList>
 
 #include "homescreen.h"
@@ -31,16 +31,7 @@ class QString;
 
 class ApplicationListModel;
 
-struct ApplicationData {
-    QString name;
-    QString icon;
-    QString storageId;
-    QString entryPath;
-    int location = 0; //FIXME
-    bool startupNotify = true;
-};
-
-class ApplicationListModel : public QAbstractListModel {
+class ApplicationListModel : public QSortFilterProxyModel {
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -56,12 +47,7 @@ public:
     Q_ENUM(LauncherLocation)
 
     enum Roles {
-        ApplicationNameRole = Qt::UserRole + 1,
-        ApplicationIconRole,
-        ApplicationStorageIdRole,
-        ApplicationEntryPathRole,
-        ApplicationOriginalRowRole,
-        ApplicationStartupNotifyRole,
+        SortKeyRole = Qt::UserRole + 100,
         ApplicationLocationRole
     };
 
@@ -70,11 +56,7 @@ public:
 
     void loadSettings();
 
-    int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
-
-    void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
-
-    int count() const { return m_applicationList.count(); }
+    int count() const { return rowCount(); }
     int favoriteCount() const { return m_favorites.count();}
 
     int maxFavoriteCount() const;
@@ -92,10 +74,7 @@ public:
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 
-    Q_INVOKABLE void loadApplications();
-
 public Q_SLOTS:
-     void sycocaDbChanged(const QStringList &change);
 
 Q_SIGNALS:
     void countChanged();
@@ -103,10 +82,9 @@ Q_SIGNALS:
     void maxFavoriteCountChanged();
 
 private:
-    QList<ApplicationData> m_applicationList;
-
     HomeScreen *m_homeScreen = nullptr;
     int m_maxFavoriteCount = 0;
+    int m_urlRole = 0;
     QStringList m_appOrder;
     QStringList m_favorites;
     QSet<QString> m_desktopItems;
