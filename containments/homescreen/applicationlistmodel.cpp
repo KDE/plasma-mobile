@@ -39,9 +39,13 @@
 
 
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
-    : QSortFilterProxyModel(parent),
+    : QAbstractListModel(parent),
       m_homeScreen(parent)
 {
+    //can't use the new syntax as this signal is overloaded
+    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
+            this, SLOT(sycocaDbChanged(const QStringList &)));
+
     loadSettings();
 }
 
@@ -60,23 +64,128 @@ void ApplicationListModel::loadSettings()
         m_appPositions[app] = i;
         ++i;
     }
+
+    loadApplications();
 }
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {
     QHash<int, QByteArray> roleNames;
-    if (sourceModel()) {
-        roleNames = sourceModel()->roleNames();
-    }
-    
-    roleNames[SortKeyRole] = "SortKeyRole";
+    roleNames[ApplicationNameRole] = "ApplicationNameRole";
+    roleNames[ApplicationIconRole] = "ApplicationIconRole";
+    roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
+    roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
+    roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
+    roleNames[ApplicationStartupNotifyRole] = "ApplicationStartupNotifyRole";
     roleNames[ApplicationLocationRole] = "ApplicationLocationRole";
-
-    const_cast<ApplicationListModel *>(this)->m_urlRole = roleNames.key("url");
 
     return roleNames;
 }
 
+void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
+{
+    if (!changes.contains("apps") && !changes.contains("xdgdata-apps")) {
+        return;
+    }
+
+    m_applicationList.clear();
+
+    loadApplications();
+}
+
+bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
+{
+    return a1.name.toLower() < a2.name.toLower();
+}
+
+void ApplicationListModel::loadApplications()
+{
+    auto cfg = KSharedConfig::openConfig("applications-blacklistrc");
+    auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
+
+    // This is only temporary to get a clue what those apps' desktop files are called
+    // I'll remove it once I've done a blacklist
+    QStringList bl;
+
+    QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
+
+
+    beginResetModel();
+
+    m_applicationList.clear();
+
+    KServiceGroup::Ptr group = KServiceGroup::root();
+    if (!group || !group->isValid()) return;
+    KServiceGroup::List subGroupList = group->entries(true);
+
+    QMap<int, ApplicationData> orderedList;
+    QList<ApplicationData> unorderedList;
+
+    // Iterate over all entries in the group
+    while (!subGroupList.isEmpty()) {
+        KSycocaEntry::Ptr groupEntry = subGroupList.first();
+        subGroupList.pop_front();
+
+        if (groupEntry->isType(KST_KServiceGroup)) {
+            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
+
+            if (!serviceGroup->noDisplay()) {
+                KServiceGroup::List entryGroupList = serviceGroup->entries(true);
+
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
+                    KSycocaEntry::Ptr entry = (*it);
+
+                    if (entry->isType(KST_KServiceGroup)) {
+                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(entry.data()));
+                        subGroupList << serviceGroup;
+
+                    } else if (entry->property("Exec").isValid()) {
+                        KService::Ptr service(static_cast<KService* >(entry.data()));
+
+                        if (service->isApplication() &&
+                            !blacklist.contains(service->desktopEntryName()) &&
+                            service->showOnCurrentPlatform() &&
+                            !service->property("Terminal", QVariant::Bool).toBool()) {
+
+                            bl << service->desktopEntryName();
+
+                            ApplicationData data;
+                            data.name = service->name();
+                            data.icon = service->icon();
+                            data.storageId = service->storageId();
+                            data.entryPath = service->exec();
+                            data.startupNotify = service->property("StartupNotify").toBool();
+
+                            if (m_favorites.contains(data.storageId)) {
+                                data.location = Favorites;
+                            } else if (m_desktopItems.contains(data.storageId)) {
+                                data.location = Desktop;
+                            }
+
+                            auto it = m_appPositions.constFind(service->storageId());
+                            if (it != m_appPositions.constEnd()) {
+                                orderedList[*it] = data;
+                            } else {
+                                unorderedList << data;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    blgroup.writeEntry("allapps", bl);
+    blgroup.writeEntry("blacklist", blacklist);
+    cfg->sync();
+
+    std::sort(unorderedList.begin(), unorderedList.end(), appNameLessThan);
+    m_applicationList << orderedList.values();
+    m_applicationList << unorderedList;
+
+    endResetModel();
+    emit countChanged();
+}
 
 QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 {
@@ -85,117 +194,127 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-    case SortKeyRole: {
-        const QString url = QSortFilterProxyModel::data(index, m_urlRole).toString();
-        if (m_appOrder.contains(url)) {
-            return QString::number(m_appOrder.indexOf(url)) + QStringLiteral("_") + QSortFilterProxyModel::data(index, Qt::DisplayRole).toString();
-        } else {
-            return QStringLiteral("z_") + QSortFilterProxyModel::data(index, Qt::DisplayRole).toString();
-        }
-    }
-
-    case ApplicationLocationRole: {
-        const QString url = QSortFilterProxyModel::data(index, m_urlRole).toString();
-        if (m_favorites.contains(url)) {
-            return Favorites;
-        } else if (m_desktopItems.contains(url)) {
-            return Desktop;
-        } else {
-            return Grid;
-        }
-    }
+    case Qt::DisplayRole:
+    case ApplicationNameRole:
+        return m_applicationList.at(index.row()).name;
+    case ApplicationIconRole:
+        return m_applicationList.at(index.row()).icon;
+    case ApplicationStorageIdRole:
+        return m_applicationList.at(index.row()).storageId;
+    case ApplicationEntryPathRole:
+        return m_applicationList.at(index.row()).entryPath;
+    case ApplicationOriginalRowRole:
+        return index.row();
+    case ApplicationStartupNotifyRole:
+        return m_applicationList.at(index.row()).startupNotify;
+    case ApplicationLocationRole:
+        return m_applicationList.at(index.row()).location;
 
     default:
-        return QSortFilterProxyModel::data(index, role);
+        return QVariant();
     }
 }
 
-//TODO: remove?
 Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return nullptr;
-    return Qt::ItemIsDragEnabled|QSortFilterProxyModel::flags(index);
+    return Qt::ItemIsDragEnabled|QAbstractItemModel::flags(index);
 }
 
+int ApplicationListModel::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return m_applicationList.count();
+}
+
+void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int sourceRow, const QModelIndex& /* destinationParent */, int destinationChild)
+{
+    moveItem(sourceRow, destinationChild);
+}
 
 void ApplicationListModel::setLocation(int row, LauncherLocation location)
 {
-    if (row < 0 || row >= rowCount()) {
+    if (row < 0 || row >= m_applicationList.length()) {
         return;
     }
 
-    const QString url = data(index(row, 0), m_urlRole).toString();
-
-    if (url.isEmpty()) {
+    ApplicationData &data = m_applicationList[row];
+    if (data.location == location) {
         return;
     }
 
-    if (location == Favorites && !m_favorites.contains(url)) {
-        qWarning()<<"favoriting"<<row;
+    if (location == Favorites) {qWarning()<<"favoriting"<<row<<data.name;
         // Deny favorites when full
         if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount) {
             return;
         }
 
-        m_favorites.insert(row, url);
+        m_favorites.insert(row, data.storageId);
 
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
 
     // Out of favorites
-    } else  if (m_favorites.contains(url)) {
-        m_favorites.removeAll(url);
+    } else  if (data.location == Favorites) {
+        m_favorites.removeAll(data.storageId);
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     }
 
     // In Desktop
-    if (location == Desktop && m_desktopItems.contains(url)) {
-        m_desktopItems.insert(url);
+    if (location == Desktop) {
+        m_desktopItems.insert(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
 
     // Out of Desktop
-    } else  if (m_desktopItems.contains(url)) {
-        m_desktopItems.remove(url);
+    } else  if (data.location == Desktop) {
+        m_desktopItems.remove(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
     }
 
+    data.location = location;
     emit m_homeScreen->configNeedsSaving();
     emit dataChanged(index(row, 0), index(row, 0));
 }
 
 void ApplicationListModel::moveItem(int row, int destination)
 {
-    if (row < 0 || destination < 0 || row >= rowCount() ||
-        destination >= rowCount() || row == destination) {
+    if (row < 0 || destination < 0 || row >= m_applicationList.length() ||
+        destination >= m_applicationList.length() || row == destination) {
         return;
     }
     if (destination > row) {
         ++destination;
     }
 
-    const QString url = data(index(row, 0), m_urlRole).toString();
-
-    if (url.isEmpty()) {
-        return;
-    }
-
-    if (m_appOrder.length() < qMax(row, destination)) {
-        for (int i = m_appOrder.length(); i <= qMax(row, destination); ++i) {
-            m_appOrder << data(index(i, 0), m_urlRole).toString();
-        }
-    }
+    beginMoveRows(QModelIndex(), row, row, QModelIndex(), destination);
     if (destination > row) {
-        m_appOrder.insert(destination, url);
-        m_appOrder.takeAt(row);
+        ApplicationData data = m_applicationList.at(row);
+        m_applicationList.insert(destination, data);
+        m_applicationList.takeAt(row);
 
     } else {
-        m_appOrder.takeAt(row);
-        m_appOrder.insert(destination, url);
+        ApplicationData data = m_applicationList.takeAt(row);
+        m_applicationList.insert(destination, data);
+    }
+
+
+    m_appOrder.clear();
+    m_appPositions.clear();
+    int i = 0;
+    for (auto app : m_applicationList) {
+        m_appOrder << app.storageId;
+        m_appPositions[app.storageId] = i;
+        ++i;
     }
 
     m_homeScreen->config().writeEntry("AppOrder", m_appOrder);
+
+    endMoveRows();
 }
 
 void ApplicationListModel::runApplication(const QString &storageId)
@@ -225,7 +344,7 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
             m_favorites.pop_back();
         }
         emit favoriteCountChanged();
-/*TODO
+
         int i = 0;
         for (auto &app : m_applicationList) {
             if (i >= count && app.location == Favorites) {
@@ -233,7 +352,7 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
                 emit dataChanged(index(i, 0), index(i, 0));
             }
             ++i;
-        }*/
+        }
     }
 
     m_maxFavoriteCount = count;
