@@ -25,7 +25,7 @@ import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
-NanoShell.FullScreenPanel {
+NanoShell.FullScreenOverlay {
     id: window
 
     visible: false

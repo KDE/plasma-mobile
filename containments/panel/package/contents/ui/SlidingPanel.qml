@@ -23,7 +23,7 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
-NanoShell.FullScreenPanel {
+NanoShell.FullScreenOverlay {
     id: window
 
     property int offset: 0
