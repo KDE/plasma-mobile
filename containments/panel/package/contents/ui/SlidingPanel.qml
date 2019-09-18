@@ -31,7 +31,7 @@ NanoShell.FullScreenPanel {
     property bool userInteracting: false
     property bool expanded: false
 
-    color: "transparent"
+    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
     property alias contents: contentArea.data
     property int headerHeight
 
@@ -109,11 +109,6 @@ NanoShell.FullScreenPanel {
         properties: "offset"
         from: window.offset
         to: contentArea.height
-    }
-
-    Rectangle {
-        anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
     }
 
     PlasmaCore.ColorScope {
