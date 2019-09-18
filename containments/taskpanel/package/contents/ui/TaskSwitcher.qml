@@ -23,9 +23,9 @@ import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 2.0
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
-FullScreenPanel {
+NanoShell.FullScreenPanel {
     id: window
 
     visible: false
