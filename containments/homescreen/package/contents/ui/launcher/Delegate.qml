@@ -99,7 +99,7 @@ ContainmentLayoutManager.ItemContainer {
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
         }
-        preventStealing: true
+        //preventStealing: true
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
