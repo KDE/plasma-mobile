@@ -30,6 +30,9 @@ NanoShell.FullScreenPanel {
     property int peekHeight
     property bool userInteracting: false
     property bool expanded: false
+    readonly property bool wideScreen: width > units.gridUnit * 45
+    readonly property int drawerWidth: wideScreen ? units.gridUnit * 25 : width
+    property int drawerX: 0
 
     color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
     property alias contents: contentArea.data
@@ -117,13 +120,11 @@ NanoShell.FullScreenPanel {
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
+            x: drawerX
+            anchors.top: parent.top
             height: contentArea.height - mainFlickable.contentY
             color: PlasmaCore.ColorScope.backgroundColor
+            width: drawerWidth
         }
 
         Flickable {
@@ -156,62 +157,59 @@ NanoShell.FullScreenPanel {
                 window.userInteracting = true;
                 window.updateState();
             }
-            Item {
-                width: window.width
-                height: Math.max(contentArea.height, window.height*2)
+            MouseArea {
+                width: parent.width
+                height: mainItem.height
+                onClicked: window.close();
+
                 Item {
-                    id: contentArea
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
-                    height: children[0].implicitHeight
-                    onHeightChanged: {
-                        if (!window.userInteracting) {
-                            updateStateTimer.restart()
+                    id: mainItem
+                    x: drawerX
+                    width: drawerWidth
+                    height: Math.max(contentArea.height, window.height*2)
+                    Item {
+                        id: contentArea
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                        }
+                        height: children[0].implicitHeight
+                        onHeightChanged: {
+                            if (!window.userInteracting) {
+                                updateStateTimer.restart()
+                            }
                         }
                     }
-                }
-                Rectangle {
-                    height: units.smallSpacing
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: contentArea.bottom
-                    }
-                    gradient: Gradient {
-                        GradientStop {
-                            position: 0.0
-                            color: Qt.rgba(0, 0, 0, 0.6)
+                    Rectangle {
+                        height: units.smallSpacing
+                        anchors {
+                            left: parent.left
+                            right: parent.right
+                            top: contentArea.bottom
                         }
-                        GradientStop {
-                            position: 0.5
-                            color: Qt.rgba(0, 0, 0, 0.2)
-                        }
-                        GradientStop {
-                            position: 1.0
-                            color: "transparent"
+                        gradient: Gradient {
+                            GradientStop {
+                                position: 0.0
+                                color: Qt.rgba(0, 0, 0, 0.6)
+                            }
+                            GradientStop {
+                                position: 0.5
+                                color: Qt.rgba(0, 0, 0, 0.2)
+                            }
+                            GradientStop {
+                                position: 1.0
+                                color: "transparent"
+                            }
                         }
                     }
-                }
-                MouseArea {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: contentArea.bottom
-                    }
-                    height: window.height
-                    onClicked: window.close();
                 }
             }
         }
         Item {
             id: fixedArea
-            anchors {
-                left: parent.left
-                right: parent.right
-                top: parent.top
-            }
+            anchors.top: parent.top
+            x: drawerX
+            width: drawerWidth
             height: childrenRect.height
         }
     }

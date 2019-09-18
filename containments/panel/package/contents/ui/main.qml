@@ -113,7 +113,7 @@ PlasmaCore.ColorScope {
 
     Rectangle {
         z: 1
-        parent: slidingPanel.visible ? panelContents : root
+        parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
         anchors {
             left: parent.left
             right: parent.right
@@ -173,9 +173,10 @@ PlasmaCore.ColorScope {
 
         anchors.fill: parent
         onPressed: {
+            slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.drawerWidth)
             slidingPanel.userInteracting = true;
             oldMouseY = mouse.y;
-            slidingPanel.visible = true;
+            slidingPanel.showFullScreen();
         }
         onPositionChanged: {
             //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
