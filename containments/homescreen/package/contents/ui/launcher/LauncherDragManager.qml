@@ -67,7 +67,8 @@ Item {
     
         // Put it in the general view
         } else {
-            newRow = Math.round(newContainer.flow.width / delegate.width) * Math.floor((delegate.y + dragCenterY) / delegate.height) + Math.floor((delegate.x + dragCenterX) / delegate.width) + favoriteStrip.count;
+            var pos = launcherGrid.flow.mapFromItem(delegate, 0, 0);
+            newRow = Math.floor(newContainer.flow.width / delegate.width) * Math.floor((pos.y + dragCenterY) / delegate.height) + Math.round((pos.x + dragCenterX) / delegate.width) + favoriteStrip.count;
 
             //plasmoid.nativeInterface.applicationListModel.setLocation(delegate.modelData.index, ApplicationListModel.Grid);
 
