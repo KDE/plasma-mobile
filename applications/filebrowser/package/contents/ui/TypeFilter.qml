@@ -39,21 +39,21 @@ ColumnLayout {
         sourceModel: ListModel {
             ListElement {
                 resourceType: "File/Document"
-                label: "Documents"
+                label: i18n("Documents")
             }
 
             ListElement {
                 resourceType: "File/Video"
-                label: "Videos"
+                label: i18n("Videos")
             }
 
             ListElement {
                 resourceType: "File/Music"
-                label: "Music"
+                label: i18n("Music")
             }
             ListElement {
                 resourceType: "File/Image"
-                label: "Images"
+                label: i18n("Images")
             }
         }
 
