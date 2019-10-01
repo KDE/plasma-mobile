@@ -65,6 +65,8 @@ PlasmaCore.ColorScope {
             applet.fullRepresentationItem.anchors.fill = notificationsParent;
         } else {
             applet.preferredRepresentation = applet.compactRepresentation
+            applet.switchWidth = -1;
+            applet.switchHeight = -1;
         }
     }
 
