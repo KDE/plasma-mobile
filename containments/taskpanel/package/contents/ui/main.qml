@@ -30,7 +30,7 @@ PlasmaCore.ColorScope {
     id: root
     width: 600
     height: 480
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
     Plasmoid.backgroundHints: plasmoid.configuration.PanelButtonsVisible ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
 

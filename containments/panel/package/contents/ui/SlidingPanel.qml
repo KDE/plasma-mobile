@@ -117,7 +117,7 @@ NanoShell.FullScreenOverlay {
     PlasmaCore.ColorScope {
         anchors.fill: parent
         y: Math.min(0, -height + window.offset)
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
         Rectangle {
             x: drawerX

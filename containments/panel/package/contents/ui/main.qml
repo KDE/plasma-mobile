@@ -33,7 +33,7 @@ PlasmaCore.ColorScope {
     id: root
     width: 480
     height: 640
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
     property Item toolBox
     property int buttonHeight: width/4
