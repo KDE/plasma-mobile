@@ -32,10 +32,9 @@ NanoShell.FullScreenOverlay {
     property bool userInteracting: false
     readonly property bool wideScreen: width > units.gridUnit * 45
     readonly property int drawerWidth: wideScreen ? units.gridUnit * 25 : width
-    readonly property int drawerHeight: contentArea.height + headerHeight
     property int drawerX: 0
 
-    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/drawerHeight))
+    color: "transparent"//Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
     property alias contentItem: contentArea.contentItem
     property int headerHeight
 
@@ -51,7 +50,6 @@ NanoShell.FullScreenOverlay {
         closeAnim.running = true;
     }
     function updateState() {
-        print("SUKUNNU"+offset + " "+openThreshold)
         if (offset < openThreshold) {
             close();
         } else {
@@ -75,6 +73,7 @@ NanoShell.FullScreenOverlay {
             window.requestActivate();
         }
     }
+
     SequentialAnimation {
         id: closeAnim
         PropertyAnimation {
@@ -98,27 +97,68 @@ NanoShell.FullScreenOverlay {
         easing.type: Easing.InOutQuad
         properties: "offset"
         from: window.offset
-        to: drawerHeight
+        to: contentArea.height
     }
 
+    Rectangle {
+        anchors {
+            fill: parent
+            topMargin: headerHeight
+        }
+        color: "black"
+        opacity: 0.6 * Math.min(1, offset/contentArea.height)
+    
+        Rectangle {
+            height: headerHeight
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.top
+            }
+            color: "black"
+            opacity: 0.2
+        }
+        Rectangle {
+            height: units.smallSpacing
+            anchors {
+                left: parent.left
+                right: parent.right
+                top: parent.top
+            }
+            gradient: Gradient {
+                GradientStop {
+                    position: 1.0
+                    color: Qt.rgba(0, 0, 0, 0.0)
+                }
+                GradientStop {
+                    position: 0.5
+                    color: Qt.rgba(0, 0, 0, 0.4)
+                }
+                GradientStop {
+                    position: 1.0
+                    color: "transparent"
+                }
+            }
+        }
+    }
     PlasmaCore.ColorScope {
         anchors.fill: parent
 
         Flickable {
             id: mainFlickable
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                topMargin: headerHeight
+            }
             Binding {
                 target: mainFlickable
                 property: "contentY"
-                value: -window.offset + drawerHeight
+                value: -window.offset + contentArea.height
                 when: !mainFlickable.moving && !mainFlickable.dragging && !mainFlickable.flicking
             }
             //no loop as those 2 values compute to exactly the same
             onContentYChanged: {
-                window.offset = -contentY + drawerHeight
-              /*  if (contentY > drawerHeight) {
-                    contentY = d;
-                }*/
+                window.offset = -contentY + contentArea.height
             }
             contentWidth: window.width
             contentHeight: window.height*2
@@ -140,7 +180,6 @@ NanoShell.FullScreenOverlay {
                 onClicked: window.close();
                 PlasmaComponents.Control {
                     id: contentArea
-                    y: headerHeight
                     x: drawerX
                     width: drawerWidth
                 }
