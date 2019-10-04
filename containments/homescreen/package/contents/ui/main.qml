@@ -325,11 +325,11 @@ Item {
         id: krunner
         z: 998
         height: plasmoid.availableScreenRect.height
+        topPadding: plasmoid.availableScreenRect.y
         anchors {
             top: parent.top
             left: parent.left
             right: parent.right
-            topMargin: plasmoid.availableScreenRect.y
         }
     }
 }

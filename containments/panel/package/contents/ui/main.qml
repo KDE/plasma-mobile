@@ -24,6 +24,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
+import org.kde.taskmanager 0.1 as TaskManager
 
 import "LayoutManager.js" as LayoutManager
 
@@ -32,13 +33,17 @@ import "quicksettings"
 PlasmaCore.ColorScope {
     id: root
     width: 480
-    height: 640
+    height: 30
     //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+
+    Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
 
     property Item toolBox
     property int buttonHeight: width/4
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
+
+    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen)
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);
@@ -77,6 +82,16 @@ PlasmaCore.ColorScope {
         LayoutManager.restore();
     }
 
+    TaskManager.TasksModel {
+        id: tasksModel
+        sortMode: TaskManager.TasksModel.SortVirtualDesktop
+        groupMode: TaskManager.TasksModel.GroupDisabled
+
+        screenGeometry: plasmoid.screenGeometry
+        filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
+
+    }
+
     PlasmaCore.DataSource {
         id: statusNotifierSource
         engine: "statusnotifieritem"
@@ -113,7 +128,7 @@ PlasmaCore.ColorScope {
         interval: 60 * 1000
     }
 
-    Rectangle {
+    Item {
         z: 1
         //parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
         anchors {
@@ -122,7 +137,11 @@ PlasmaCore.ColorScope {
             bottom: parent.bottom
         }
         height: root.height
-        color: PlasmaCore.ColorScope.backgroundColor
+        Rectangle {
+            anchors.fill: parent
+            color: PlasmaCore.ColorScope.backgroundColor
+            opacity: showingApp
+        }
 
         Loader {
             id: strengthLoader

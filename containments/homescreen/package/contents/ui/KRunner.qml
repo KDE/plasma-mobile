@@ -35,6 +35,7 @@ Rectangle {
     color: listView.visible ? Qt.rgba(0, 0, 0, 0.8) : "transparent"
     property alias showingResults: listView.visible
     property int inputHeight: queryField.height + background.fixedMargins.top/2 + background.fixedMargins.bottom
+    property int topPadding: 0
 
     MouseArea {
         enabled: listView.visible
@@ -70,14 +71,14 @@ Rectangle {
         }
 
         ColumnLayout {
-            height: Qt.inputMethod.keyboardRectangle.height > 0 ? (Math.min(implicitHeight, background.height, Qt.inputMethod.keyboardRectangle.y - plasmoid.availableScreenRect.y)) : implicitHeight
+            height: Qt.inputMethod.keyboardRectangle.height > 0 ? (Math.min(implicitHeight, background.height, Qt.inputMethod.keyboardRectangle.y - plasmoid.availableScreenRect.y)) : implicitHeight + anchors.topMargin
             anchors {
                 left: parent.left
                 right: parent.right
                 top: parent.top
-                topMargin: background.fixedMargins.top / 2
-                leftMargin: background.fixedMargins.left / 2
-                rightMargin: background.fixedMargins.right / 2
+                topMargin: background.fixedMargins.top / 2 + krunner.topPadding
+                leftMargin: background.fixedMargins.left
+                rightMargin: background.fixedMargins.right
             }
             PlasmaComponents.TextField {
                 id: queryField
