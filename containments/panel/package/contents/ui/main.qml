@@ -197,12 +197,11 @@ PlasmaCore.ColorScope {
             slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.drawerWidth)
             slidingPanel.userInteracting = true;
             oldMouseY = mouse.y;
+            slidingPanel.offset = units.gridUnit * 2;
             slidingPanel.showFullScreen();
         }
         onPositionChanged: {
-            //var factor = (mouse.y - oldMouseY > 0) ? (1 - Math.max(0, (slidingArea.y + slidingPanel.overShoot) / slidingPanel.overShoot)) : 1
-            var factor = 1;
-            slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY) * factor;
+            slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
             oldMouseY = mouse.y;
         }
         onReleased: {
@@ -215,52 +214,29 @@ PlasmaCore.ColorScope {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
-        peekHeight: quickSettingsParent.height + notificationsParent.minimumHeight + root.height
+        openThreshold: units.gridUnit * 10
         headerHeight: root.height
-        onExpandedChanged: {
-            modeSwitchAnim.running = false;
-            modeSwitchAnim.to = expanded ? width : 0
-            modeSwitchAnim.running = true;
-        }
-        contents: Item {
+
+        contentItem: ColumnLayout {
             id: panelContents
             anchors.fill: parent
-            implicitHeight: slidingPanel.expanded ? (slidingPanel.height-slidingPanel.headerHeight)*0.8 :  (quickSettingsParent.height + notificationsParent.height + root.height)
-            Rectangle {
-                id: quickSettingsParent
-                parent: slidingPanel.fixedArea
-                color: PlasmaCore.ColorScope.backgroundColor
-                z: 2
-                width: parent.width
-                y: Math.min(0, slidingPanel.offset - height - root.height)
-                height: quickSettings.Layout.minimumHeight
-                QuickSettings {
+
+            DrawerBackground {
+                Layout.fillWidth: true
+                contentItem: QuickSettings {
                     id: quickSettings
-                    anchors.fill: parent
-                }
-                Rectangle {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        bottom:parent.bottom
-                    }
-                    height: units.devicePixelRatio
-                    color: PlasmaCore.ColorScope.textColor
-                    opacity: 0.2
-                    visible: slidingPanel.offset + slidingPanel.headerHeight < panelContents.height
                 }
             }
-            Item {
-                id: notificationsParent
-                anchors {
-                    left: parent.left
-                    bottom: parent.bottom
-                    right: parent.right
-                    bottomMargin: root.height
+
+            DrawerBackground {
+                Layout.fillWidth: true
+                contentItem: Item {
+                    id: notificationsParent
+
+                    property var applet
+                    implicitHeight: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
+                    property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
                 }
-                property var applet
-                height: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
-                property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
             }
         }
     }

@@ -21,42 +21,40 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 NanoShell.FullScreenOverlay {
     id: window
 
     property int offset: 0
-    property int peekHeight
+    property int openThreshold
     property bool userInteracting: false
-    property bool expanded: false
     readonly property bool wideScreen: width > units.gridUnit * 45
     readonly property int drawerWidth: wideScreen ? units.gridUnit * 25 : width
+    readonly property int drawerHeight: contentArea.height + headerHeight
     property int drawerX: 0
 
-    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
-    property alias contents: contentArea.data
+    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/drawerHeight))
+    property alias contentItem: contentArea.contentItem
     property int headerHeight
 
     width: Screen.width
     height: Screen.height
+    
 
-    property alias fixedArea: fixedArea
     function open() {
         window.showFullScreen();
-        peekAnim.running = true;
+        open.running = true;
     }
     function close() {
         closeAnim.running = true;
     }
     function updateState() {
-        if (expanded) {
-            openAnim.running = true;
-        } else if (offset < peekHeight / 2) {
+        print("SUKUNNU"+offset + " "+openThreshold)
+        if (offset < openThreshold) {
             close();
-        } else if (offset < peekHeight) {
-            open();
-        } else if (mainFlickable.contentY < 0) {
+        } else {
             openAnim.running = true;
         }
     }
@@ -75,8 +73,6 @@ NanoShell.FullScreenOverlay {
             window.width = Screen.width;
             window.height = Screen.height;
             window.requestActivate();
-        } else {
-            window.expanded = false;
         }
     }
     SequentialAnimation {
@@ -91,18 +87,9 @@ NanoShell.FullScreenOverlay {
         }
         ScriptAction {
             script: {
-                 window.visible = false;
+                window.visible = false;
             }
         }
-    }
-    PropertyAnimation {
-        id: peekAnim
-        target: window
-        duration: units.longDuration
-        easing.type: Easing.InOutQuad
-        properties: "offset"
-        from: window.offset
-        to: window.peekHeight - headerHeight
     }
     PropertyAnimation {
         id: openAnim
@@ -111,38 +98,27 @@ NanoShell.FullScreenOverlay {
         easing.type: Easing.InOutQuad
         properties: "offset"
         from: window.offset
-        to: contentArea.height
+        to: drawerHeight
     }
 
     PlasmaCore.ColorScope {
         anchors.fill: parent
-        y: Math.min(0, -height + window.offset)
-        //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-
-        Rectangle {
-            x: drawerX
-            anchors.top: parent.top
-            height: contentArea.height - mainFlickable.contentY
-            color: PlasmaCore.ColorScope.backgroundColor
-            width: drawerWidth
-        }
 
         Flickable {
             id: mainFlickable
             anchors.fill: parent
-            interactive: !window.expanded
             Binding {
                 target: mainFlickable
                 property: "contentY"
-                value: -window.offset + contentArea.height - window.headerHeight
+                value: -window.offset + drawerHeight
                 when: !mainFlickable.moving && !mainFlickable.dragging && !mainFlickable.flicking
             }
             //no loop as those 2 values compute to exactly the same
             onContentYChanged: {
-                window.offset = -contentY + contentArea.height - window.headerHeight
-                if (contentY > contentArea.height - headerHeight) {
-                    contentY = contentArea.height - headerHeight;
-                }
+                window.offset = -contentY + drawerHeight
+              /*  if (contentY > drawerHeight) {
+                    contentY = d;
+                }*/
             }
             contentWidth: window.width
             contentHeight: window.height*2
@@ -158,59 +134,17 @@ NanoShell.FullScreenOverlay {
                 window.updateState();
             }
             MouseArea {
+                id: dismissArea
                 width: parent.width
-                height: mainItem.height
+                height: mainFlickable.contentHeight
                 onClicked: window.close();
-
-                Item {
-                    id: mainItem
+                PlasmaComponents.Control {
+                    id: contentArea
+                    y: headerHeight
                     x: drawerX
                     width: drawerWidth
-                    height: Math.max(contentArea.height, window.height*2)
-                    Item {
-                        id: contentArea
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                        }
-                        height: children[0].implicitHeight
-                        onHeightChanged: {
-                            if (!window.userInteracting) {
-                                updateStateTimer.restart()
-                            }
-                        }
-                    }
-                    Rectangle {
-                        height: units.smallSpacing
-                        anchors {
-                            left: parent.left
-                            right: parent.right
-                            top: contentArea.bottom
-                        }
-                        gradient: Gradient {
-                            GradientStop {
-                                position: 0.0
-                                color: Qt.rgba(0, 0, 0, 0.6)
-                            }
-                            GradientStop {
-                                position: 0.5
-                                color: Qt.rgba(0, 0, 0, 0.2)
-                            }
-                            GradientStop {
-                                position: 1.0
-                                color: "transparent"
-                            }
-                        }
-                    }
                 }
             }
-        }
-        Item {
-            id: fixedArea
-            anchors.top: parent.top
-            x: drawerX
-            width: drawerWidth
-            height: childrenRect.height
         }
     }
 }

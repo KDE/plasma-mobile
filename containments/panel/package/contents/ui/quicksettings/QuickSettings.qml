@@ -25,6 +25,9 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 Item {
     id: root
 
+    implicitWidth: flow.implicitWidth + units.smallSpacing * 6
+    implicitHeight: flow.implicitHeight + units.smallSpacing * 6
+
     function toggleAirplane() {
         print("toggle airplane mode")
     }
@@ -180,7 +183,7 @@ Item {
         id: flow
         anchors {
             fill: parent
-            margins: units.largeSpacing
+            margins: units.smallSpacing*3
         }
         spacing: units.largeSpacing
         Repeater {

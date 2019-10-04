@@ -32,7 +32,7 @@ RowLayout {
         Layout.minimumHeight: width
         color: toggled ? 
             Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
-            Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.2)
+            Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.1)
 
         PlasmaCore.IconItem {
             colorGroup: PlasmaCore.ColorScope.colorGroup
@@ -61,7 +61,7 @@ RowLayout {
     Rectangle {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, labelMouseArea.pressed ? 0.5 : 0.2)
+        color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, labelMouseArea.pressed ? 0.5 : 0.1)
         PlasmaComponents.Label {
             anchors {
                 fill: parent
