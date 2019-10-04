@@ -72,16 +72,22 @@ Item {
             anchors.fill: parent
         }
 
-        contentItem: Flow {
-            id: applicationsFlow
+        // With a mousearea, it will be possible to drag with touch also on empty places
+        contentItem: MouseArea {
+            implicitWidth: applicationsFlow.implicitWidth
+            implicitHeight: applicationsFlow.implicitHeight
+            Flow {
+                id: applicationsFlow
 
-            spacing: 0
+                spacing: 0
+                anchors.fill: parent
 
-            move: Transition {
-                NumberAnimation {
-                    duration: units.longDuration
-                    easing.type: Easing.InOutQuad
-                    properties: "x,y"
+                move: Transition {
+                    NumberAnimation {
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                        properties: "x,y"
+                    }
                 }
             }
         }
