@@ -39,7 +39,7 @@ MouseArea {
     PlasmaCore.IconItem {
         id: icon
         anchors.fill: parent
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        colorGroup: PlasmaCore.ColorScope.colorGroup
         enabled: button.enabled
     }
     onClicked: {
