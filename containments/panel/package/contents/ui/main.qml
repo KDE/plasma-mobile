@@ -115,7 +115,7 @@ PlasmaCore.ColorScope {
 
     Rectangle {
         z: 1
-        parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
+        //parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
         anchors {
             left: parent.left
             right: parent.right
