@@ -217,19 +217,28 @@ PlasmaCore.ColorScope {
         openThreshold: units.gridUnit * 10
         headerHeight: root.height
 
-        contentItem: ColumnLayout {
+        contentItem: Item {
             id: panelContents
             anchors.fill: parent
+            implicitWidth: quickSettingsParent.implicitWidth
+            implicitHeight: quickSettingsParent.implicitHeight
 
             DrawerBackground {
-                Layout.fillWidth: true
+                id: quickSettingsParent
+                anchors.fill: parent
+                z: 1
                 contentItem: QuickSettings {
                     id: quickSettings
                 }
             }
 
             DrawerBackground {
-                Layout.fillWidth: true
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                y: quickSettingsParent.height - height * (1-opacity)
+                opacity: slidingPanel.offset/panelContents.height
                 contentItem: Item {
                     id: notificationsParent
 

@@ -82,7 +82,7 @@ NanoShell.FullScreenOverlay {
             easing.type: Easing.InOutQuad
             properties: "offset"
             from: window.offset
-            to: 0
+            to: -headerHeight
         }
         ScriptAction {
             script: {
