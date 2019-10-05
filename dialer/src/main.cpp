@@ -35,6 +35,7 @@
 #include <qcommandlineoption.h>
 #include <QtQml>
 
+#include <QEventLoop>
 #include <QQmlContext>
 #include <QQmlEngine>
 #include <QQuickWindow>
@@ -42,6 +43,7 @@
 #include <KAboutData>
 #include <KDBusService>
 
+#include <qofonomanager.h>
 
 void myMessageOutput(QtMsgType type, const QMessageLogContext &context, const QString &msg)
 {
@@ -137,9 +139,17 @@ int main(int argc, char **argv)
     Tp::ClientRegistrarPtr registrar = Tp::ClientRegistrar::create(accountFactory, connectionFactory,
                                                                    channelFactory, contactFactory);
 
-    Tp::AccountPtr simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/account0"),
+    // we ask the ofono for the default modem, which is generally first modem
+    QOfonoManager *ofonoManager = new QOfonoManager;
+    
+    QEventLoop loop;
+    QObject::connect(ofonoManager, &QOfonoManager::availableChanged, &loop, &QEventLoop::quit);
+    loop.exec(QEventLoop::ExcludeUserInputEvents);
+    
+    const QString accountName = ofonoManager->modems().isEmpty() ? "" : ofonoManager->modems().first();
+    
+    Tp::AccountPtr simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/") + accountName,
                                                     connectionFactory, channelFactory);
-
 
     const QString packagePath("org.kde.phone.dialer");
 

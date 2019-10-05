@@ -38,6 +38,8 @@ find_package(GStreamer 1.1.90 REQUIRED)
 find_package(GLIB2 REQUIRED)
 find_package(GObject REQUIRED)
 
+find_package(Qofono REQUIRED)
+
 include(CheckIncludeFiles)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
