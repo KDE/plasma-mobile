@@ -29,6 +29,7 @@ import org.kde.taskmanager 0.1 as TaskManager
 import "LayoutManager.js" as LayoutManager
 
 import "quicksettings"
+import "indicators" as Indicators
 
 PlasmaCore.ColorScope {
     id: root
@@ -51,28 +52,25 @@ PlasmaCore.ColorScope {
     }
 
     function addApplet(applet, x, y) {
-        var container = appletContainerComponent.createObject(appletIconsRow)
+        var compactContainer = compactContainerComponent.createObject(appletIconsRow)
         print("Applet added: " + applet + " " + applet.title)
-        container.width = units.iconSizes.medium
-        container.height = container.height
 
-        applet.parent = container;
-        container.applet = applet;
-        applet.anchors.fill = container;
+        applet.parent = compactContainer;
+        compactContainer.applet = applet;
+        applet.anchors.fill = compactContainer;
         applet.visible = true;
-        container.visible = true;
         if (applet.pluginName == "org.kde.phone.notifications") {
-            //FIXME: make a way to instantiate fullRepresentationItem without the open/close dance
-            applet.expanded = true
-            applet.expanded = false
-            applet.fullRepresentationItem.parent = notificationsParent;
-            notificationsParent.applet = applet;
-            applet.fullRepresentationItem.anchors.fill = notificationsParent;
-        } else {
-            applet.preferredRepresentation = applet.compactRepresentation
-            applet.switchWidth = -1;
-            applet.switchHeight = -1;
+            
         }
+        //FIXME: make a way to instantiate fullRepresentationItem without the open/close dance
+        applet.expanded = true
+        applet.expanded = false
+
+        var fullContainer = fullContainerComponent.createObject(fullRepresentationsLayout);
+        fullContainer.parent = fullRepresentationsLayout;
+        applet.fullRepresentationItem.parent = fullContainer;
+        fullContainer.applet = applet;
+        applet.fullRepresentationItem.anchors.fill = fullContainer;
     }
 
     Component.onCompleted: {
@@ -109,15 +107,30 @@ PlasmaCore.ColorScope {
         Layout.minimumHeight: Math.max(root.height, Math.round(Layout.preferredHeight / root.height) * root.height)
     }
  
+    //todo: REMOVE?
     Component {
-        id: appletContainerComponent
+        id: compactContainerComponent
         Item {
-            //not used yet
-            property bool animationsEnabled: false
             property Item applet
+            visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
             Layout.fillHeight: true
             Layout.minimumWidth: applet && applet.compactRepresentationItem ? Math.max(applet.compactRepresentationItem.Layout.minimumWidth, appletIconsRow.height) : appletIconsRow.height
             Layout.maximumWidth: Layout.minimumWidth
+        }
+    }
+    Component {
+        id: fullContainerComponent
+        Item {
+            property Item applet
+            visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
+            Layout.fillHeight: true
+            Layout.minimumWidth: fullRepresentationsView.width
+            Layout.minimumHeight: applet && applet.switchHeight
+            onVisibleChanged: {
+                if (visible) {
+                    fullRepresentationsView.setCurrentItem(this);
+                }
+            }
         }
     }
 
@@ -183,9 +196,23 @@ PlasmaCore.ColorScope {
             id: appletIconsRow
             anchors {
                 bottom: parent.bottom
-                right: parent.right
+                right: simpleIndicatorsLayout.left
             }
             height: parent.height
+        }
+
+        //TODO: pluggable
+        RowLayout {
+            id: simpleIndicatorsLayout
+            anchors {
+                top: parent.top
+                bottom: parent.bottom
+                right: parent.right
+                rightMargin: units.smallSpacing
+            }
+            Indicators.Bluetooth {}
+            Indicators.Wifi {}
+            Indicators.Battery {}
         }
     }
     MouseArea {
@@ -239,14 +266,39 @@ PlasmaCore.ColorScope {
                 }
                 y: quickSettingsParent.height - height * (1-opacity)
                 opacity: slidingPanel.offset/panelContents.height
-                contentItem: Item {
-                    id: notificationsParent
+                height: Math.min(plasmoid.screenGeometry.height - quickSettingsParent.y - quickSettingsParent.height, implicitHeight)
+                contentItem: Flickable {
+                    id: fullRepresentationsView
 
-                    property var applet
-                    implicitHeight: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
-                    property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
-                    
-                    //TODO implicitHeight: applet ? applet.switchHeight : 0
+                    property Item currentItem
+                    onCurrentItemChanged: {
+                        if (currentItem) {
+                            contentX = currentItem.x
+                        } else {
+                            currentItem = children[0];
+                        }
+                    }
+
+                    function setCurrentItem(item) {
+                        currentItem = item;
+                        currentItemChanged();
+                    }
+                    onMovementEnded: setCurrentItem(fullRepresentationsLayout.childAt(contentX + width/2, 1))
+                    contentWidth: fullRepresentationsLayout.width
+                    contentHeight: height
+                    implicitHeight: fullRepresentationsLayout.implicitHeight
+                    clip: true
+                    Behavior on contentX {
+                        NumberAnimation {
+                            duration: units.longDuration
+                            easing: easing.InOutQuad
+                        }
+                    }
+
+                    RowLayout {
+                        id: fullRepresentationsLayout
+                        spacing: 0
+                    }
                 }
             }
         }

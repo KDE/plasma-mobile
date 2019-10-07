@@ -6,12 +6,8 @@ for (var j = 0; j < desktopsArray.length; j++) {
 
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.phone.notifications");
-panel.addWidget("org.kde.plasma.networkmanagement");
-var battery = panel.addWidget("org.kde.plasma.battery");
-battery.writeConfig("showPercentage", true);
-battery.reloadConfig();
-panel.addWidget("org.kde.plasma.volume");
-panel.addWidget("org.kde.phone.activities");
+panel.addWidget("org.kde.plasma.mediacontroller");
+panel.addWidget("org.kde.plasma.devicenotifier");
 panel.height = 1 * gridUnit;
 
 var bottomPanel = new Panel("org.kde.phone.taskpanel");
