@@ -194,7 +194,7 @@ Item {
         cacheBuffer: 200000
 
         z: 1
-        verticalLayoutDirection: ListView.BottomToTop
+        //verticalLayoutDirection: ListView.BottomToTop
         model: notificationsModel
 
         add: Transition {
