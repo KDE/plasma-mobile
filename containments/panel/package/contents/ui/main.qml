@@ -147,7 +147,7 @@ PlasmaCore.ColorScope {
             id: strengthLoader
             height: parent.height
             width: item ? item.width : 0
-            source: Qt.resolvedUrl("SignalStrength.qml")
+            source: Qt.resolvedUrl("indicators/SignalStrength.qml")
         }
 
         Row {
@@ -245,6 +245,8 @@ PlasmaCore.ColorScope {
                     property var applet
                     implicitHeight: applet ? applet.fullRepresentationItem.Layout.maximumHeight : 0
                     property int minimumHeight: applet ? applet.fullRepresentationItem.Layout.minimumHeight : 0
+                    
+                    //TODO implicitHeight: applet ? applet.switchHeight : 0
                 }
             }
         }
