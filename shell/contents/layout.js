@@ -7,7 +7,6 @@ for (var j = 0; j < desktopsArray.length; j++) {
 var panel = new Panel("org.kde.phone.panel");
 panel.addWidget("org.kde.phone.notifications");
 panel.addWidget("org.kde.plasma.mediacontroller");
-panel.addWidget("org.kde.plasma.devicenotifier");
 panel.height = 1 * gridUnit;
 
 var bottomPanel = new Panel("org.kde.phone.taskpanel");
