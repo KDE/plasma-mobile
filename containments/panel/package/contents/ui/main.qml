@@ -70,7 +70,8 @@ PlasmaCore.ColorScope {
         var fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem);
         applet.fullRepresentationItem.parent = fullContainer;
         fullContainer.applet = applet;
-        applet.fullRepresentationItem.anchors.fill = fullContainer;
+        fullContainer.contentItem = applet.fullRepresentationItem;
+        //applet.fullRepresentationItem.anchors.fill = fullContainer;
     }
 
     Component.onCompleted: {
@@ -121,12 +122,12 @@ PlasmaCore.ColorScope {
 
     Component {
         id: fullContainerComponent
-        Item {
+        DrawerBackground {
             id: fullContainer
             property Item applet
             visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
             height: parent.height
-            width: visible ? fullRepresentationView.width : 0
+            width: visible ? quickSettingsParent.width : 0
             Layout.minimumHeight: applet && applet.switchHeight
             onVisibleChanged: {
                 if (visible) {
@@ -282,46 +283,56 @@ PlasmaCore.ColorScope {
                 }
             }
 
-            DrawerBackground {
-                id: fullRepresentationDrawer
+
+            ListView {
+                id: fullRepresentationView
+                parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
                 y: quickSettingsParent.height - height * (1-opacity)
-                opacity: slidingPanel.offset/panelContents.height
-                height: Math.min(plasmoid.screenGeometry.height - quickSettingsParent.y - quickSettingsParent.height, implicitHeight)
-                contentItem: ListView {
-                    id: fullRepresentationView
-
-                    implicitHeight: 300
-                    cacheBuffer: width * 100
-                    highlightFollowsCurrentItem: true
-                    highlightRangeMode: ListView.StrictlyEnforceRange
-                    highlightMoveDuration: units.longDuration
-                    snapMode: ListView.SnapOneItem
-                    model: ObjectModel {
-                        id: fullRepresentationModel
-                    }
-                    orientation: ListView.Horizontal
-
-
-                    //implicitHeight: fullRepresentationLayout.implicitHeight
-                    clip: true
-
+                opacity: fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
+                height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
+                leftMargin: slidingPanel.drawerX
+                preferredHighlightBegin: slidingPanel.drawerX
+                
+                implicitHeight: units.gridUnit * 20
+                cacheBuffer: width * 100
+                highlightFollowsCurrentItem: true
+                highlightRangeMode: ListView.StrictlyEnforceRange
+                highlightMoveDuration: units.longDuration
+                snapMode: slidingPanel.wideScreen ? ListView.NoSnap : ListView.SnapOneItem
+                model: ObjectModel {
+                    id: fullRepresentationModel
                 }
+                orientation: ListView.Horizontal
+
+                MouseArea {
+                    //parent: fullRepresentationView.contentItem
+                    anchors.fill: parent
+                    z: -1
+                    
+                    onClicked: slidingPanel.close()
+                }
+
+                //implicitHeight: fullRepresentationLayout.implicitHeight
+                //clip: true
+
             }
             
         }
-        footer: DrawerBackground {
+        DrawerBackground {
             id: bottomBar
             anchors {
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
             }
-            opacity: fullRepresentationDrawer.opacity
-            visible: fullRepresentationModel.count > 1
+
+            parent: slidingPanel.fixedArea
+            opacity: fullRepresentationView.opacity
+            visible: !slidingPanel.wideScreen && fullRepresentationModel.count > 1
             //height: 40
             z: 100
             contentItem: RowLayout {
@@ -329,7 +340,9 @@ PlasmaCore.ColorScope {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     position: PlasmaComponents.TabBar.Footer
-                    
+                    Text {
+                        text:fullRepresentationModel.count
+                    }
                     Repeater {
                         model: fullRepresentationView.count
                         delegate: PlasmaComponents.TabButton {
