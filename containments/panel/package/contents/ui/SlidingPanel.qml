@@ -33,6 +33,7 @@ NanoShell.FullScreenOverlay {
     readonly property bool wideScreen: width > units.gridUnit * 45
     readonly property int drawerWidth: wideScreen ? units.gridUnit * 25 : width
     property int drawerX: 0
+    property Item footer
 
     color: "transparent"//Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
     property alias contentItem: contentArea.contentItem
@@ -60,6 +61,10 @@ NanoShell.FullScreenOverlay {
         id: updateStateTimer
         interval: 0
         onTriggered: updateState()
+    }
+    onFooterChanged: {
+        footer.parent = mainScope
+        footer.anchors.bottom = mainScope.bottom
     }
     onActiveChanged: {
         if (!active) {
@@ -142,6 +147,7 @@ NanoShell.FullScreenOverlay {
         }
     }
     PlasmaCore.ColorScope {
+        id: mainScope
         anchors.fill: parent
 
         Flickable {

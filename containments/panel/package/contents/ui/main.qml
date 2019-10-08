@@ -18,10 +18,11 @@
 
 import QtQuick 2.1
 import QtQuick.Layouts 1.3
+import QtQml.Models 2.12
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.taskmanager 0.1 as TaskManager
@@ -66,8 +67,7 @@ PlasmaCore.ColorScope {
         applet.expanded = true
         applet.expanded = false
 
-        var fullContainer = fullContainerComponent.createObject(fullRepresentationsLayout);
-        fullContainer.parent = fullRepresentationsLayout;
+        var fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem);
         applet.fullRepresentationItem.parent = fullContainer;
         fullContainer.applet = applet;
         applet.fullRepresentationItem.anchors.fill = fullContainer;
@@ -118,17 +118,40 @@ PlasmaCore.ColorScope {
             Layout.maximumWidth: Layout.minimumWidth
         }
     }
+
     Component {
         id: fullContainerComponent
         Item {
+            id: fullContainer
             property Item applet
             visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
-            Layout.fillHeight: true
-            Layout.minimumWidth: fullRepresentationsView.width
+            height: parent.height
+            width: visible ? fullRepresentationView.width : 0
             Layout.minimumHeight: applet && applet.switchHeight
             onVisibleChanged: {
                 if (visible) {
-                    fullRepresentationsView.setCurrentItem(this);
+                    for (var i = 0; i < fullRepresentationModel.count; ++i) {
+                        if (fullRepresentationModel.get(i) === this) {
+                            return;
+                        }
+                    }
+                    fullRepresentationModel.append(this);
+                    fullRepresentationView.forceLayout();
+
+                    fullRepresentationView.currentIndex = ObjectModel.index;
+                    fullRepresentationView.positionViewAtIndex(ObjectModel.index, ListView.SnapPosition)
+                } else if (ObjectModel.index >= 0) {
+                    fullRepresentationModel.remove(ObjectModel.index);
+                    fullRepresentationView.forceLayout();
+                }
+            }
+            Connections {
+                target: fullContainer.applet
+                onActivated: {
+                    if (!visible) {
+                        return;
+                    }
+                    fullRepresentationView.currentIndex = ObjectModel.index;
                 }
             }
         }
@@ -260,6 +283,7 @@ PlasmaCore.ColorScope {
             }
 
             DrawerBackground {
+                id: fullRepresentationDrawer
                 anchors {
                     left: parent.left
                     right: parent.right
@@ -267,38 +291,61 @@ PlasmaCore.ColorScope {
                 y: quickSettingsParent.height - height * (1-opacity)
                 opacity: slidingPanel.offset/panelContents.height
                 height: Math.min(plasmoid.screenGeometry.height - quickSettingsParent.y - quickSettingsParent.height, implicitHeight)
-                contentItem: Flickable {
-                    id: fullRepresentationsView
+                contentItem: ListView {
+                    id: fullRepresentationView
 
-                    property Item currentItem
-                    onCurrentItemChanged: {
-                        if (currentItem) {
-                            contentX = currentItem.x
-                        } else {
-                            currentItem = children[0];
-                        }
+                    implicitHeight: 300
+                    cacheBuffer: width * 100
+                    highlightFollowsCurrentItem: true
+                    highlightRangeMode: ListView.StrictlyEnforceRange
+                    highlightMoveDuration: units.longDuration
+                    snapMode: ListView.SnapOneItem
+                    model: ObjectModel {
+                        id: fullRepresentationModel
                     }
+                    orientation: ListView.Horizontal
 
-                    function setCurrentItem(item) {
-                        currentItem = item;
-                        currentItemChanged();
-                    }
-                    onMovementEnded: setCurrentItem(fullRepresentationsLayout.childAt(contentX + width/2, 1))
-                    contentWidth: fullRepresentationsLayout.width
-                    contentHeight: height
-                    implicitHeight: fullRepresentationsLayout.implicitHeight
+
+                    //implicitHeight: fullRepresentationLayout.implicitHeight
                     clip: true
-                    Behavior on contentX {
-                        NumberAnimation {
-                            duration: units.longDuration
-                            easing: easing.InOutQuad
+
+                }
+            }
+            
+        }
+        footer: DrawerBackground {
+            id: bottomBar
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            opacity: fullRepresentationDrawer.opacity
+            visible: fullRepresentationModel.count > 1
+            //height: 40
+            z: 100
+            contentItem: RowLayout {
+                PlasmaComponents.TabBar {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    position: PlasmaComponents.TabBar.Footer
+                    
+                    Repeater {
+                        model: fullRepresentationView.count
+                        delegate: PlasmaComponents.TabButton {
+                            implicitHeight: parent.height
+                            text: fullRepresentationModel.get(index).applet.title
+                            checked: fullRepresentationView.currentIndex === index
+                        
+                            onClicked: fullRepresentationView.currentIndex = index
                         }
                     }
-
-                    RowLayout {
-                        id: fullRepresentationsLayout
-                        spacing: 0
-                    }
+                }
+                PlasmaComponents.ToolButton {
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: height
+                    icon.name: "paint-none"
+                    onClicked: slidingPanel.close();
                 }
             }
         }

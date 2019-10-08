@@ -25,7 +25,7 @@ Item {
     width: parent.height
     height: width
     //hide application status icons
-    opacity: (Category != "ApplicationStatus" && (main.state == "active" || Status != "Passive")) ? 1 : 0
+    opacity: (Category != "ApplicationStatus" && Status != "Passive") ? 1 : 0
     onOpacityChanged: visible = opacity
 
     Behavior on opacity {
