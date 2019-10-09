@@ -126,15 +126,14 @@ ContainmentLayoutManager.ItemContainer {
                 visible: text.length > 0
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: root.reservedSpaceForLabel
-                wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: model.ApplicationNameRole
-                font.pixelSize: theme.defaultFont.pixelSize
+                text: model.ApplicationNameRole.split(" ")[0]
+                //FIXME: export smallestReadableFont
+                font.pixelSize: theme.defaultFont.pixelSize * 0.8
                 color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 
                 layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
