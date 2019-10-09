@@ -32,5 +32,9 @@ QQC2.Control {
 
     background: PlasmaCore.FrameSvgItem {
         imagePath: "widgets/background"
+        // This MouseArea just prevents the Control from eating pure touch event (breaking flickables)
+        MouseArea {
+            anchors.fill:parent
+        }
     }
 }
