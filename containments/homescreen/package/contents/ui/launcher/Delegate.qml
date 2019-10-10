@@ -99,12 +99,7 @@ ContainmentLayoutManager.ItemContainer {
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
         }
-Rectangle {
-    anchors.fill:parent
-    z: -1
-    radius: 10
-    opacity: 0.1
-}
+
         //preventStealing: true
         ColumnLayout {
             anchors.fill: parent
