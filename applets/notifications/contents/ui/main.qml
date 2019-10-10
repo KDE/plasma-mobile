@@ -35,6 +35,9 @@ Item {
 
     Plasmoid.switchWidth: 500
     Plasmoid.switchHeight: 500
+    Plasmoid.status: notificationsModel.count > 0
+                    ? PlasmaCore.Types.ActiveStatus
+                    : PlasmaCore.Types.PassiveStatus
 
     function addNotification(source, data, actions) {
         // Do not show duplicated notifications
