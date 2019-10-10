@@ -131,9 +131,9 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: model.ApplicationNameRole.split(" ")[0]
+                text: model.ApplicationNameRole //.split(" ")[0]
                 //FIXME: export smallestReadableFont
-                font.pixelSize: theme.defaultFont.pixelSize * 0.8
+                font.pixelSize: theme.defaultFont.pixelSize * 0.9
                 color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 
                 layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
