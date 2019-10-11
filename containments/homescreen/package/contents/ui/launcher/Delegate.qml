@@ -40,11 +40,6 @@ ContainmentLayoutManager.ItemContainer {
     Layout.minimumWidth: launcherGrid.cellWidth
     Layout.minimumHeight: launcherGrid.cellHeight
 
-    leftPadding: units.smallSpacing * 2
-    topPadding: units.smallSpacing * 2
-    rightPadding: units.smallSpacing * 2
-    bottomPadding: units.smallSpacing * 2
-
     opacity: dragActive ? 0.4 : 1
 
     key: model.ApplicationStorageIdRole
@@ -102,7 +97,13 @@ ContainmentLayoutManager.ItemContainer {
 
         //preventStealing: true
         ColumnLayout {
-            anchors.fill: parent
+            anchors {
+                fill: parent
+                leftMargin: units.smallSpacing * 2
+                topMargin: units.smallSpacing * 2
+                rightMargin: units.smallSpacing * 2
+                bottomMargin: units.smallSpacing * 2
+            }
             spacing: 0
 
             PlasmaCore.IconItem {
@@ -127,8 +128,8 @@ ContainmentLayoutManager.ItemContainer {
                 visible: text.length > 0
 
                 Layout.fillWidth: true
-                Layout.leftMargin: -delegate.leftPadding
-                Layout.rightMargin: -delegate.rightPadding
+                Layout.leftMargin: -parent.anchors.leftMargin
+                Layout.rightMargin: -parent.anchors.rightMargin
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2
