@@ -164,6 +164,7 @@ NanoShell.FullScreenOverlay {
             onContentYChanged: {
                 window.offset = -contentY + contentArea.height
             }
+            boundsBehavior: Flickable.StopAtBounds
             contentWidth: window.width
             contentHeight: window.height*2
             bottomMargin: window.height

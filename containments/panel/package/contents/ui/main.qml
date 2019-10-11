@@ -252,7 +252,7 @@ PlasmaCore.ColorScope {
             slidingPanel.showFullScreen();
         }
         onPositionChanged: {
-            slidingPanel.offset = slidingPanel.offset + (mouse.y - oldMouseY);
+            slidingPanel.offset = Math.min(slidingPanel.contentItem.height, slidingPanel.offset + (mouse.y - oldMouseY));
             oldMouseY = mouse.y;
         }
         onReleased: {
