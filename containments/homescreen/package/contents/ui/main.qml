@@ -172,7 +172,7 @@ Item {
         Column {
             id: flickableContents
             width: mainFlickable.width
-            spacing: Math.max(0, favoriteStrip.frame.height - mainFlickable.contentY)
+            spacing: Math.max(0, favoriteStrip.frame.height + favoriteStrip.anchors.bottomMargin - mainFlickable.contentY)
 
             DragDrop.DropArea {
                 anchors {

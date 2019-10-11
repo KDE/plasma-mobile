@@ -32,7 +32,9 @@ PlasmaCore.ColorScope {
     height: 480
     //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
-    Plasmoid.backgroundHints: plasmoid.configuration.PanelButtonsVisible ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+
+    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen)
 
     property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
     Loader {
@@ -43,6 +45,16 @@ PlasmaCore.ColorScope {
         running: true
         interval: 200
         onTriggered: taskSwitcherLoader.source = Qt.resolvedUrl("TaskSwitcher.qml")
+    }
+
+    TaskManager.TasksModel {
+        id: tasksModel
+        sortMode: TaskManager.TasksModel.SortVirtualDesktop
+        groupMode: TaskManager.TasksModel.GroupDisabled
+
+        screenGeometry: plasmoid.screenGeometry
+        filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
+
     }
 
     MouseArea {
@@ -88,12 +100,26 @@ PlasmaCore.ColorScope {
             }
         }
 
-        Rectangle {
+        Item {
             anchors.fill: parent
-            color: root.backgroundColor
 
             visible: plasmoid.configuration.PanelButtonsVisible
-            property Item toolBox
+
+            Rectangle {
+                anchors.fill: parent
+                color: root.backgroundColor
+                opacity: showingApp ? 1 : 0.9
+                Rectangle {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                        top: parent.top
+                    }
+                    height: 1
+                    color: PlasmaCore.ColorScope.textColor
+                    opacity: 0.2
+                }
+            }
 
             Button {
                 anchors.left: parent.left
