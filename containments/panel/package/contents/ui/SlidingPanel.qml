@@ -179,6 +179,7 @@ NanoShell.FullScreenOverlay {
             }
             MouseArea {
                 id: dismissArea
+                z: 2
                 width: parent.width
                 height: mainFlickable.contentHeight
                 onClicked: window.close();
