@@ -22,7 +22,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 NanoShell.FullScreenOverlay {
@@ -184,23 +184,15 @@ NanoShell.FullScreenOverlay {
         }
     }
 
-    Rectangle {
-        color: theme.textColor
-        anchors {
-            fill: showDesktopButton
-            margins: -showDesktopButton.width/4
-        }
-        radius: width
-    }
-    Button {
+    PlasmaComponents.RoundButton {
         id: showDesktopButton
-        height: units.iconSizes.medium
+        height: units.iconSizes.large
         width: height
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
         }
-        iconSource: "start-here-kde"
+        icon.name: "start-here-kde"
         onClicked: {
             currentTaskIndex = -1;
             window.hide();
