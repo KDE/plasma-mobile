@@ -29,6 +29,9 @@
 #include <TelepathyQt/ChannelClassSpec>
 #include <TelepathyQt/ChannelFactory>
 #include <TelepathyQt/Account>
+#include <TelepathyQt/AccountSet>
+#include <TelepathyQt/AccountManager>
+#include <TelepathyQt/PendingReady>
 
 #include <klocalizedstring.h>
 #include <qcommandlineparser.h>
@@ -136,11 +139,29 @@ int main(int argc, char **argv)
 
     Tp::ClientRegistrarPtr registrar = Tp::ClientRegistrar::create(accountFactory, connectionFactory,
                                                                    channelFactory, contactFactory);
+    QEventLoop loop;
+    Tp::AccountManagerPtr manager = Tp::AccountManager::create();
+    Tp::PendingReady *ready = manager->becomeReady();
+    QObject::connect(ready, &Tp::PendingReady::finished, &loop, &QEventLoop::quit);
+    loop.exec(QEventLoop::ExcludeUserInputEvents);
 
-    Tp::AccountPtr simAccount = Tp::Account::create(TP_QT_ACCOUNT_MANAGER_BUS_NAME, QStringLiteral("/org/freedesktop/Telepathy/Account/ofono/ofono/account0"),
-                                                    connectionFactory, channelFactory);
+    Tp::AccountPtr simAccount;
+    const Tp::AccountSetPtr accountSet = manager->validAccounts();
+    for (const Tp::AccountPtr &account : accountSet->accounts()) {
+        static const QStringList supportedProtocols = {
+            QLatin1String("ofono"),
+            QLatin1String("tel"),
+        };
+        if (supportedProtocols.contains(account->protocolName())) {
+            simAccount = account;
+            break;
+        }
+    }
 
-
+    if (simAccount.isNull()) {
+        qCritical() << "Unable to get SIM account";
+        return -1;
+    }
     const QString packagePath("org.kde.phone.dialer");
 
     //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
