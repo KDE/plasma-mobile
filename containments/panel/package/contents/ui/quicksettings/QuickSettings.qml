@@ -185,12 +185,14 @@ Item {
             fill: parent
             margins: units.smallSpacing*3
         }
-        spacing: units.largeSpacing
+        readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6 + Math.floor(units.largeSpacing/2)
+        readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
+        spacing: 0
         Repeater {
             model: settingsModel
             delegate: Loader {
                 //FIXME: why this is needed?
-                width: flow.width / 2 - units.largeSpacing / 2//item ? item.implicitWidth : 0
+                width: flow.columnWidth
                 height: item ? item.implicitHeight : 0
                 source: Qt.resolvedUrl((model.delegate ? model.delegate : "Delegate") + ".qml")
             }

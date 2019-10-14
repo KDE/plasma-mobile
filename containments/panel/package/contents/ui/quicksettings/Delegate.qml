@@ -20,16 +20,18 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
-RowLayout {
+ColumnLayout {
     id: delegateRoot
     property bool toggled: model.enabled
     spacing: units.smallSpacing
-    implicitWidth: flow.width / 2 - units.largeSpacing / 2
+
     Rectangle {
-        Layout.minimumWidth: units.iconSizes.medium
+        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 6
         Layout.minimumHeight: width
+        Layout.alignment: Qt.AlignHCenter
+        radius: width
         color: toggled ? 
             Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
             Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.1)
@@ -38,16 +40,14 @@ RowLayout {
             colorGroup: PlasmaCore.ColorScope.colorGroup
             anchors {
                 fill: parent
-                margins: units.smallSpacing
+                margins: units.smallSpacing * 3
             }
             source: model.icon
             MouseArea {
                 id: iconMouseArea
                 anchors.fill: parent
                 onClicked: {
-                    if (model.applet) {
-                        model.applet.expanded = !model.applet.expanded;
-                    } else if (delegateRoot.toggle) {
+                    if (delegateRoot.toggle) {
                         delegateRoot.toggle();
                     } else if (model.toggleFunction) {
                         root[model.toggleFunction]();
@@ -58,29 +58,42 @@ RowLayout {
             }
         }
     }
-    Rectangle {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, labelMouseArea.pressed ? 0.5 : 0.1)
-        PlasmaComponents.Label {
+    
+    PlasmaComponents.Label {
+        id: label
+
+        Layout.maximumWidth: parent.width
+        Layout.alignment: Qt.AlignHCenter
+
+        text: model.text
+        bottomPadding: units.smallSpacing * 2
+        horizontalAlignment: Text.AlignHCenter
+        font.pixelSize: theme.defaultFont.pixelSize * 0.8
+        elide: Text.ElideRight
+        verticalAlignment: Text.AlignVCenter
+
+        PlasmaCore.SvgItem {
             anchors {
-                fill: parent
-                margins: units.smallSpacing
+                left: parent.right
+                verticalCenter: parent.verticalCenter
+                verticalCenterOffset: -units.smallSpacing
             }
-            text: model.text
-            elide: Text.ElideRight
-            verticalAlignment: Text.AlignVCenter
-            MouseArea {
-                id: labelMouseArea
-                anchors.fill: parent
-                onClicked: {
-                    if (model.applet) {
-                        model.applet.expanded = !model.applet.expanded;
-                    } else if (model.settingsCommand) {
-                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
-                    } else if (model.toggleFunction) {
-                        root[model.toggleFunction]();
-                    }
+            visible: model.settingsCommand
+            width: units.iconSizes.small/2
+            height: width
+            elementId: "down-arrow"
+            svg: PlasmaCore.Svg {
+                imagePath: "widgets/arrows"
+            }
+        }
+        MouseArea {
+            id: labelMouseArea
+            anchors.fill: parent
+            onClicked: {
+                if (model.settingsCommand) {
+                    plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                } else if (model.toggleFunction) {
+                    root[model.toggleFunction]();
                 }
             }
         }
