@@ -29,16 +29,15 @@ Item {
     Controls.Label {
         anchors.centerIn: parent
         text: i18n("No contacts")
-        visible: contactsModel.count === 0
+        visible: contactsList.count === 0
     }
 
     ColumnLayout {
         anchors.fill: parent
-        //visible: contactsModel.count > 0
-
 
         Kirigami.ActionTextField {
             id: searchField
+            visible: contactsList.count > 0
             Layout.fillWidth: true
             placeholderText: i18n("Search...")
             rightActions: [
