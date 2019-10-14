@@ -49,12 +49,6 @@ install( FILES kwinmultitasking/metadata.desktop DESTINATION ${SERVICES_INSTALL_
 
 install( DIRECTORY qtvirtualkeyboardplugin/ DESTINATION ${KDE_INSTALL_QMLDIR}/QtQuick/VirtualKeyboard/Styles/Plasma )
 
-configure_file(plasma-mobile.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/plasma-mobile.desktop)
-install(FILES
-        ${CMAKE_CURRENT_BINARY_DIR}/plasma-mobile.desktop
-        DESTINATION ${KDE_INSTALL_DATADIR}/wayland-sessions
-)
-
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)

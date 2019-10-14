@@ -1,0 +1,30 @@
+#!/bin/sh
+
+[ -f /etc/profile ] && . /etc/profile
+
+export $(dbus-launch)
+export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORMTHEME=KDE
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export XDG_CURRENT_DESKTOP=KDE
+export KSCREEN_BACKEND=QScreen
+export EGL_PLATFORM=wayland
+
+export KDE_FULL_SESSION=1
+export KDE_SESSION_VERSION=5
+export PLASMA_PLATFORM=phone
+export QT_QUICK_CONTROLS_STYLE=Plasma
+export QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
+export QT_QUICK_CONTROLS_MOBILE=true
+
+# work around to fix : https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1507584
+export LD_LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf/libhybris-egl:$LD_LIBRARY_PATH
+
+if [ "`cat /sys/devices/virtual/dmi/id/board_name`" = "EXOPG06411" ]; then
+  # The ExoPC Slate from Akademy in Berlin only supports OpenGL 1.4, to get it to
+  # work with KWin (which requires 2.0), fake 2.0 support.
+  export MESA_GL_VERSION_OVERRIDE=2.0
+fi
+
+touch /tmp/simplelogin_starting
+kwin_wayland --xwayland --libinput --inputmethod maliit-server plasma-phone
