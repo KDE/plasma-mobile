@@ -128,6 +128,8 @@ ContainmentLayoutManager.ItemContainer {
                 visible: text.length > 0
 
                 Layout.fillWidth: true
+                Layout.preferredHeight: root.reservedSpaceForLabel
+                wrapMode: Text.WordWrap
                 Layout.leftMargin: -parent.anchors.leftMargin
                 Layout.rightMargin: -parent.anchors.rightMargin
                 horizontalAlignment: Text.AlignHCenter
@@ -135,21 +137,7 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text: {
-                    var pieces = model.ApplicationNameRole.split(" ");
-                    var word = "";
-                    var nextWord = "";
-                    var i = 0;
-                    while (nextWord.length < 15) {
-                        word += " " + pieces[i++];
-                        if (i < pieces.length) {
-                            nextWord = word + " " + pieces[i];
-                        } else {
-                            break;
-                        }
-                    }
-                    return word;
-                }
+                text: model.ApplicationNameRole
                 //FIXME: export smallestReadableFont
                 font.pixelSize: theme.defaultFont.pixelSize * 0.9
                 color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor

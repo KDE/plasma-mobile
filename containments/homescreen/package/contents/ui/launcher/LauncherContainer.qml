@@ -45,7 +45,7 @@ Item {
 
     Controls.Label {
         id: metrics
-        text: "M"
+        text: "M\nM"
         visible: false
     }
 
