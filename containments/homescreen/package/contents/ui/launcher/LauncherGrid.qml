@@ -40,6 +40,7 @@ LauncherContainer {
     frame.width: width
 
     Repeater {
+        parent: root.flow
         model: plasmoid.nativeInterface.applicationListModel
         delegate: Delegate {
             id: delegate

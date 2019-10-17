@@ -53,7 +53,7 @@ ApplicationListModel *HomeScreen::applicationListModel()
 
 void HomeScreen::stackBefore(QQuickItem *item1, QQuickItem *item2)
 {
-    if (!item1 || !item2 || item1->parentItem() != item2->parentItem()) {
+    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
         return;
     }
 
@@ -62,7 +62,7 @@ void HomeScreen::stackBefore(QQuickItem *item1, QQuickItem *item2)
 
 void HomeScreen::stackAfter(QQuickItem *item1, QQuickItem *item2)
 {
-    if (!item1 || !item2 || item1->parentItem() != item2->parentItem()) {
+    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
         return;
     }
 
