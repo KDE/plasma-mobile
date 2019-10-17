@@ -129,17 +129,26 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: root.reservedSpaceForLabel
+                height: root.reservedSpaceForLabel
                 wrapMode: Text.WordWrap
-                Layout.leftMargin: -parent.anchors.leftMargin
-                Layout.rightMargin: -parent.anchors.rightMargin
+                Layout.leftMargin: -parent.anchors.leftMargin + units.smallSpacing
+                Layout.rightMargin: -parent.anchors.rightMargin + units.smallSpacing
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2
-                elide: Text.ElideRight
+                //elide: Text.ElideRight
+                elide: truncated ? Text.ElideLeft : Text.ElideRight
 
-                text: model.ApplicationNameRole
+                text: {
+                    // This trick can get us a shorter text but without ...
+                    if (truncated) {
+                        return model.ApplicationNameRole + "\x9C"
+                    } else {
+                        return model.ApplicationNameRole;
+                    }
+                }
                 //FIXME: export smallestReadableFont
-                font.pixelSize: theme.defaultFont.pixelSize * 0.9
+                font.pointSize: theme.defaultFont.pointSize * 0.9
                 color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 
                 layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop

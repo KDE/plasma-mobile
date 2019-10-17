@@ -47,6 +47,7 @@ Item {
         id: metrics
         text: "M\nM"
         visible: false
+        font.pointSize: theme.defaultFont.pointSize * 0.9
     }
 
     Item {
