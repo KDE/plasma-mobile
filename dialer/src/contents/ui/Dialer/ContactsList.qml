@@ -20,7 +20,7 @@
 import QtQuick 2.0
 import QtQuick.Controls 2.2 as Controls
 import QtQuick.Layouts 1.1
-import org.kde.kirigami 2.7 as Kirigami
+import org.kde.kirigami 2.8 as Kirigami
 import org.kde.people 1.0 as KPeople
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -35,20 +35,10 @@ Item {
     ColumnLayout {
         anchors.fill: parent
 
-        Kirigami.ActionTextField {
+        Kirigami.SearchField {
             id: searchField
-            visible: contactsList.count > 0
             Layout.fillWidth: true
-            placeholderText: i18n("Search...")
-            rightActions: [
-                Kirigami.Action {
-                    icon.name: "edit-clear"
-                    onTriggered: searchField.text = ""
-                    visible: searchField.text !== ""
-                }
-            ]
         }
-
 
         Controls.ScrollView {
             id: contactScrollView
