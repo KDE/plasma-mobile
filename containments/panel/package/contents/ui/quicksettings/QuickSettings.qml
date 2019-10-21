@@ -124,7 +124,7 @@ Item {
         });
         settingsModel.append({
             "text": i18n("Battery"),
-            "icon": "battery",
+            "icon": "battery-full",
             "enabled": false,
             "settingsCommand": "plasma-settings -m kcm_mobile_power",
             "toggleFunction": "",
