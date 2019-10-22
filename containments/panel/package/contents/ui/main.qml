@@ -71,7 +71,7 @@ PlasmaCore.ColorScope {
         } else {
             fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem, {"fullRepresentationModel": fullRepresentationModel, "fullRepresentationView": fullRepresentationView});
         }
-print("SDSDSDS"+fullContainer);
+
         applet.fullRepresentationItem.parent = fullContainer;
         fullContainer.applet = applet;
         fullContainer.contentItem = applet.fullRepresentationItem;
