@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.1
+import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQml.Models 2.12
 
@@ -60,14 +60,18 @@ PlasmaCore.ColorScope {
         compactContainer.applet = applet;
         applet.anchors.fill = compactContainer;
         applet.visible = true;
-        if (applet.pluginName == "org.kde.phone.notifications") {
-            
-        }
+
         //FIXME: make a way to instantiate fullRepresentationItem without the open/close dance
         applet.expanded = true
         applet.expanded = false
 
-        var fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem);
+        var fullContainer = null;
+        if (applet.pluginName == "org.kde.plasma.notifications") {
+            fullContainer = fullNotificationsContainerComponent.createObject(fullRepresentationView.contentItem, {"fullRepresentationModel": fullRepresentationModel, "fullRepresentationView": fullRepresentationView});
+        } else {
+            fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem, {"fullRepresentationModel": fullRepresentationModel, "fullRepresentationView": fullRepresentationView});
+        }
+print("SDSDSDS"+fullContainer);
         applet.fullRepresentationItem.parent = fullContainer;
         fullContainer.applet = applet;
         fullContainer.contentItem = applet.fullRepresentationItem;
@@ -122,39 +126,13 @@ PlasmaCore.ColorScope {
 
     Component {
         id: fullContainerComponent
-        DrawerBackground {
-            id: fullContainer
-            property Item applet
-            visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
-            height: parent.height
-            width: visible ? quickSettingsParent.width : 0
-            Layout.minimumHeight: applet && applet.switchHeight
-            onVisibleChanged: {
-                if (visible) {
-                    for (var i = 0; i < fullRepresentationModel.count; ++i) {
-                        if (fullRepresentationModel.get(i) === this) {
-                            return;
-                        }
-                    }
-                    fullRepresentationModel.append(this);
-                    fullRepresentationView.forceLayout();
+        FullContainer {
+        }
+    }
 
-                    fullRepresentationView.currentIndex = ObjectModel.index;
-                    fullRepresentationView.positionViewAtIndex(ObjectModel.index, ListView.SnapPosition)
-                } else if (ObjectModel.index >= 0) {
-                    fullRepresentationModel.remove(ObjectModel.index);
-                    fullRepresentationView.forceLayout();
-                }
-            }
-            Connections {
-                target: fullContainer.applet
-                onActivated: {
-                    if (!visible) {
-                        return;
-                    }
-                    fullRepresentationView.currentIndex = ObjectModel.index;
-                }
-            }
+    Component {
+        id: fullNotificationsContainerComponent
+        FullNotificationsContainer {
         }
     }
 
@@ -286,6 +264,7 @@ PlasmaCore.ColorScope {
 
             ListView {
                 id: fullRepresentationView
+                z: 4
                 parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
                 anchors {
                     left: parent.left
