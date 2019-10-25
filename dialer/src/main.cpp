@@ -181,31 +181,26 @@ int main(int argc, char **argv)
     
     KAboutData::setApplicationData(aboutData);
 
-//     //The root is not a window?
-//     //have to use a normal QQuickWindow since the root item is already created
     QWindow *window = qobject_cast<QWindow *>(engine.rootObjects()[0]);
-        qDebug() << window;
-//     if (window) {
-//     }
-//         QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
-//             Q_UNUSED(workingDirectory);
-//             window->show();
-//             window->requestActivate();
-//             if (arguments.length() > 0) {
-//                 QString numberArg = arguments[1];
-//                 if (numberArg.startsWith("call://")) {
-//                     numberArg = numberArg.mid(7);
-//                 }
+
+    Q_ASSERT(window);
+
+    QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
+        Q_UNUSED(workingDirectory);
+        window->show();
+        window->requestActivate();
+        if (arguments.length() > 0) {
+            QString numberArg = arguments[1];
+            if (numberArg.startsWith("call://")) {
+                numberArg = numberArg.mid(7);
+            }
 //                 obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
-//             }
-//         });
-//         if (!parser.isSet(daemonOption)) {
-//             window->show();
-//             window->requestActivate();
-//         }
-//         window->setTitle(obj->package().metadata().name());
-//         window->setIcon(QIcon::fromTheme(obj->package().metadata().iconName()));
-//
+        }
+    });
+    if (!parser.isSet(daemonOption)) {
+        window->show();
+        window->requestActivate();
+    }
 //         if (!parser.positionalArguments().isEmpty()) {
 //             QString numberArg = parser.positionalArguments().first();
 //             if (numberArg.startsWith("call://")) {
@@ -214,9 +209,6 @@ int main(int argc, char **argv)
 //             qWarning() << "Calling" << numberArg;
 //             obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
 //         }
-//     } else {
-//         qWarning() << "Error loading the ApplicationWindow";
-//     }
 
     return app.exec();
 }
