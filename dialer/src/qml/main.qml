@@ -33,6 +33,8 @@ ApplicationWindow {
     width: 1080
     height: 800
 
+    visible: false
+
     //keep track if we were visible when ringing
     property bool wasVisible
     //was the last call an incoming one?

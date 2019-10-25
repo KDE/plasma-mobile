@@ -173,17 +173,6 @@ int main(int argc, char **argv)
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
-//     const QString packagePath("org.kde.phone.dialer");
-//
-//     //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-//     auto *obj = new KDeclarative::QmlObject();
-//     obj->setTranslationDomain(packagePath);
-//     obj->setInitializationDelayed(true);
-//     obj->setSource(QUrl("qrc:///main.qml"));
-//
-//
-//     obj->completeInitialization();
-
     Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
     registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Plasma.Dialer");
 
@@ -194,8 +183,10 @@ int main(int argc, char **argv)
 
 //     //The root is not a window?
 //     //have to use a normal QQuickWindow since the root item is already created
-//     QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
+    QWindow *window = qobject_cast<QWindow *>(engine.rootObject());
+        qDebug() << window;
 //     if (window) {
+//     }
 //         QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
 //             Q_UNUSED(workingDirectory);
 //             window->show();
