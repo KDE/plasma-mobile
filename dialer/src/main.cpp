@@ -159,10 +159,10 @@ int main(int argc, char **argv)
         }
     }
 
-//     if (simAccount.isNull()) {
-//         qCritical() << "Unable to get SIM account";
-//         return -1;
-//     }
+    if (simAccount.isNull()) {
+        qCritical() << "Unable to get SIM account";
+        return -1;
+    }
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
@@ -194,21 +194,21 @@ int main(int argc, char **argv)
             if (numberArg.startsWith("call://")) {
                 numberArg = numberArg.mid(7);
             }
-//                 obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
+            dialerUtils->dial(numberArg);
         }
     });
     if (!parser.isSet(daemonOption)) {
         window->show();
         window->requestActivate();
     }
-//         if (!parser.positionalArguments().isEmpty()) {
-//             QString numberArg = parser.positionalArguments().first();
-//             if (numberArg.startsWith("call://")) {
-//                 numberArg = numberArg.mid(7);
-//             }
-//             qWarning() << "Calling" << numberArg;
-//             obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
-//         }
+    if (!parser.positionalArguments().isEmpty()) {
+        QString numberArg = parser.positionalArguments().first();
+        if (numberArg.startsWith("call://")) {
+            numberArg = numberArg.mid(7);
+        }
+        qWarning() << "Calling" << numberArg;
+        dialerUtils->dial(numberArg);
+    }
 
     return app.exec();
 }
