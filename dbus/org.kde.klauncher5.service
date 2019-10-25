@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.kde.klauncher5
-SystemdService=kdeinit5.service
