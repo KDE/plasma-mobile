@@ -183,7 +183,7 @@ int main(int argc, char **argv)
 
 //     //The root is not a window?
 //     //have to use a normal QQuickWindow since the root item is already created
-    QWindow *window = qobject_cast<QWindow *>(engine.rootObject());
+    QWindow *window = qobject_cast<QWindow *>(engine.rootObjects()[0]);
         qDebug() << window;
 //     if (window) {
 //     }
