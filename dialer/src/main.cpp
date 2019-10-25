@@ -34,6 +34,7 @@
 #include <TelepathyQt/PendingReady>
 
 #include <KLocalizedString>
+#include <KLocalizedContext>
 #include <QCommandLineParser>
 #include <QCommandLineOption>
 #include <QtQml>
@@ -158,23 +159,30 @@ int main(int argc, char **argv)
         }
     }
 
-    if (simAccount.isNull()) {
-        qCritical() << "Unable to get SIM account";
-        return -1;
-    }
-    const QString packagePath("org.kde.phone.dialer");
+//     if (simAccount.isNull()) {
+//         qCritical() << "Unable to get SIM account";
+//         return -1;
+//     }
 
-    //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
-    auto *obj = new KDeclarative::QmlObject();
-    obj->setTranslationDomain(packagePath);
-    obj->setInitializationDelayed(true);
-    obj->setSource(QUrl("qrc:///main.qml"));
-    obj->engine()->rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextObject(new KLocalizedContext(&engine));
 
     auto *dialerUtils = new DialerUtils(simAccount);
-    obj->engine()->rootContext()->setContextProperty("dialerUtils", QVariant::fromValue(dialerUtils));
+    engine.rootContext()->setContextProperty("dialerUtils", QVariant::fromValue(dialerUtils));
+    engine.rootContext()->setContextProperty("commandlineArguments", parser.positionalArguments());
 
-    obj->completeInitialization();
+    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+
+//     const QString packagePath("org.kde.phone.dialer");
+//
+//     //usually we have an ApplicationWindow here, so we do not need to create a window by ourselves
+//     auto *obj = new KDeclarative::QmlObject();
+//     obj->setTranslationDomain(packagePath);
+//     obj->setInitializationDelayed(true);
+//     obj->setSource(QUrl("qrc:///main.qml"));
+//
+//
+//     obj->completeInitialization();
 
     Tp::SharedPtr<CallHandler> callHandler(new CallHandler(dialerUtils));
     registrar->registerClient(Tp::AbstractClientPtr::dynamicCast(callHandler), "Plasma.Dialer");
@@ -184,40 +192,40 @@ int main(int argc, char **argv)
     
     KAboutData::setApplicationData(aboutData);
 
-    //The root is not a window?
-    //have to use a normal QQuickWindow since the root item is already created
-    QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
-    if (window) {
-        QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
-            Q_UNUSED(workingDirectory);
-            window->show();
-            window->requestActivate();
-            if (arguments.length() > 0) {
-                QString numberArg = arguments[1];
-                if (numberArg.startsWith("call://")) {
-                    numberArg = numberArg.mid(7);
-                }
-                obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
-            }
-        });
-        if (!parser.isSet(daemonOption)) {
-            window->show();
-            window->requestActivate();
-        }
-        window->setTitle(obj->package().metadata().name());
-        window->setIcon(QIcon::fromTheme(obj->package().metadata().iconName()));
-
-        if (!parser.positionalArguments().isEmpty()) {
-            QString numberArg = parser.positionalArguments().first();
-            if (numberArg.startsWith("call://")) {
-                numberArg = numberArg.mid(7);
-            }
-            qWarning() << "Calling" << numberArg;
-            obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
-        }
-    } else {
-        qWarning() << "Error loading the ApplicationWindow";
-    }
+//     //The root is not a window?
+//     //have to use a normal QQuickWindow since the root item is already created
+//     QWindow *window = qobject_cast<QWindow *>(obj->rootObject());
+//     if (window) {
+//         QObject::connect(&service, &KDBusService::activateRequested, [=](const QStringList &arguments, const QString &workingDirectory) {
+//             Q_UNUSED(workingDirectory);
+//             window->show();
+//             window->requestActivate();
+//             if (arguments.length() > 0) {
+//                 QString numberArg = arguments[1];
+//                 if (numberArg.startsWith("call://")) {
+//                     numberArg = numberArg.mid(7);
+//                 }
+//                 obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
+//             }
+//         });
+//         if (!parser.isSet(daemonOption)) {
+//             window->show();
+//             window->requestActivate();
+//         }
+//         window->setTitle(obj->package().metadata().name());
+//         window->setIcon(QIcon::fromTheme(obj->package().metadata().iconName()));
+//
+//         if (!parser.positionalArguments().isEmpty()) {
+//             QString numberArg = parser.positionalArguments().first();
+//             if (numberArg.startsWith("call://")) {
+//                 numberArg = numberArg.mid(7);
+//             }
+//             qWarning() << "Calling" << numberArg;
+//             obj->rootObject()->metaObject()->invokeMethod(obj->rootObject(), "call", Q_ARG(QVariant, numberArg));
+//         }
+//     } else {
+//         qWarning() << "Error loading the ApplicationWindow";
+//     }
 
     return app.exec();
 }

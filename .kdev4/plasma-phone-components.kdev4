@@ -1,0 +1,19 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00.\x00p\x00l\x00a\x00s\x00m\x00a\x00-\x00p\x00h\x00o\x00n\x00e\x00-\x00c\x00o\x00m\x00p\x00o\x00n\x00e\x00n\x00t\x00s)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/nico/kde/build/plasma-phone-components
+Build Type=Debug\n
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=
+Runtime=Host System
+
+[Project]
+VersionControlSupport=kdevgit
