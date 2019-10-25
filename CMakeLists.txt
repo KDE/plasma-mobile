@@ -56,7 +56,6 @@ install(FILES
 )
 
 add_subdirectory(bin)
-#add_subdirectory(services)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(dialer)
