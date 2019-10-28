@@ -3,9 +3,9 @@ set(plasmaphonedialer_SRCS
     dialerutils.cpp
     call-handler.cpp
     call-manager.cpp
+    resources.qrc
 )
-qt5_add_resources(RESOURCES resources.qrc)
-add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS} ${RESOURCES})
+add_executable(plasmaphonedialer ${plasmaphonedialer_SRCS})
 target_compile_definitions(plasmaphonedialer PRIVATE -DPROJECT_VERSION="${PROJECT_VERSION}")
 
 find_package(PhoneNumber COMPONENTS PhoneNumber REQUIRED)

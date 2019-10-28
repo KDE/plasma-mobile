@@ -1,20 +1,20 @@
 <RCC>
     <qresource prefix="/">
-        <file alias="main.qml">contents/ui/main.qml</file>
-        <file alias="Call/AnswerSwipe.qml">contents/ui/Call/AnswerSwipe.qml</file>
-        <file alias="Call/CallPage.qml">contents/ui/Call/CallPage.qml</file>
-        <file alias="Call/Avatar.qml">contents/ui/Call/Avatar.qml</file>
-        <file alias="Dialer/Dialer.qml">contents/ui/Dialer/Dialer.qml</file>
-        <file alias="Dialer/ContactsList.qml">contents/ui/Dialer/ContactsList.qml</file>
-        <file alias="Dialer/DialPage.qml">contents/ui/Dialer/DialPage.qml</file>
-        <file alias="Dialer/private/SectionScroller.js">contents/ui/Dialer/private/SectionScroller.js</file>
-        <file alias="Dialer/RoundImage.qml">contents/ui/Dialer/RoundImage.qml</file>
-        <file alias="Dialer/History.qml">contents/ui/Dialer/History.qml</file>
-        <file alias="Dialer/CustomSectionScroller.qml">contents/ui/Dialer/CustomSectionScroller.qml</file>
-        <file alias="Dialer/HistoryDelegate.qml">contents/ui/Dialer/HistoryDelegate.qml</file>
-        <file alias="Dialpad/Dialpad.qml">contents/ui/Dialpad/Dialpad.qml</file>
-        <file alias="Dialpad/PhoneNumberInput.qml">contents/ui/Dialpad/PhoneNumberInput.qml</file>
-        <file alias="Dialpad/DialerButton.qml">contents/ui/Dialpad/DialerButton.qml</file>
-        <file alias="Dialpad/DialerIconButton.qml">contents/ui/Dialpad/DialerIconButton.qml</file>
+        <file alias="main.qml">qml/main.qml</file>
+        <file alias="Call/AnswerSwipe.qml">qml/Call/AnswerSwipe.qml</file>
+        <file alias="Call/CallPage.qml">qml/Call/CallPage.qml</file>
+        <file alias="Call/Avatar.qml">qml/Call/Avatar.qml</file>
+        <file alias="Dialer/Dialer.qml">qml/Dialer/Dialer.qml</file>
+        <file alias="Dialer/ContactsList.qml">qml/Dialer/ContactsList.qml</file>
+        <file alias="Dialer/DialPage.qml">qml/Dialer/DialPage.qml</file>
+        <file alias="Dialer/private/SectionScroller.js">qml/Dialer/private/SectionScroller.js</file>
+        <file alias="Dialer/RoundImage.qml">qml/Dialer/RoundImage.qml</file>
+        <file alias="Dialer/History.qml">qml/Dialer/History.qml</file>
+        <file alias="Dialer/CustomSectionScroller.qml">qml/Dialer/CustomSectionScroller.qml</file>
+        <file alias="Dialer/HistoryDelegate.qml">qml/Dialer/HistoryDelegate.qml</file>
+        <file alias="Dialpad/Dialpad.qml">qml/Dialpad/Dialpad.qml</file>
+        <file alias="Dialpad/PhoneNumberInput.qml">qml/Dialpad/PhoneNumberInput.qml</file>
+        <file alias="Dialpad/DialerButton.qml">qml/Dialpad/DialerButton.qml</file>
+        <file alias="Dialpad/DialerIconButton.qml">qml/Dialpad/DialerIconButton.qml</file>
     </qresource>
 </RCC>
