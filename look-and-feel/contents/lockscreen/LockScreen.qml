@@ -19,76 +19,107 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import QtQuick 2.0
 import QtQuick.Controls 1.1
+import QtQuick.Layouts 1.1
+import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.sessions 2.0
+import org.kde.plasma.workspace.keyboardlayout 1.0
 import "../components"
 
-Image {
-    id: root
-    property bool viewVisible: false
-    property bool debug: false
-    property string notification
-    property Item userSelect: null
-    property int interfaceVersion: org_kde_plasma_screenlocker_greeter_interfaceVersion ? org_kde_plasma_screenlocker_greeter_interfaceVersion : 0
-    signal clearPassword()
+PlasmaCore.ColorScope {
+    id: block
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    anchors.fill: parent
 
-    source: backgroundPath || "../components/artwork/background.png"
-    fillMode: Image.PreserveAspectCrop
-    asynchronous: true
-
-    onStatusChanged: {
-        if (status == Image.Error) {
-            source = "../components/artwork/background.png";
-        }
+    Rectangle {
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        color: PlasmaCore.ColorScope.backgroundColor
+        opacity: 0.8
+        height: infoPane.height + units.largeSpacing * 2
     }
 
-    LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-    LayoutMirroring.childrenInherit: true
+    InfoPane {
+        id: infoPane
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.topMargin: units.largeSpacing
+    }
 
-    Connections {
-        target: authenticator
-        onFailed: {
-            root.notification = i18nd("plasma_lookandfeel_org.kde.lookandfeel","Unlocking failed");
+    Rectangle {
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        color: PlasmaCore.ColorScope.backgroundColor
+        opacity: 0.8
+        height: mainLayout.height + units.largeSpacing * 2
+    }
+
+    ColumnLayout {
+        id: mainLayout
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            bottomMargin: units.largeSpacing
         }
-        onGraceLockedChanged: {
-            if (!authenticator.graceLocked) {
-                root.notification = "";
-                root.clearPassword();
+        spacing: units.largeSpacing
+        RowLayout {
+            Layout.alignment: Qt.AlignHCenter
+
+            PlasmaComponents.TextField {
+                id: passwordInput
+                placeholderText: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Password")
+                echoMode: TextInput.Password
+                enabled: !authenticator.graceLocked
+                onAccepted: actionButton.clicked(null)
+                focus: false
+
+                onVisibleChanged: {
+                    if (visible) {
+                        forceActiveFocus();
+                    }
+                    text = "";
+                }
+                onTextChanged: {
+                    if (text == "") {
+                        clearTimer.stop();
+                    } else {
+                        clearTimer.restart();
+                    }
+                }
+
+                Timer {
+                    id: clearTimer
+                    interval: 30000
+                    repeat: false
+                    onTriggered: {
+                        passwordInput.text = "";
+                    }
+                }
+            }
+
+            DialerIconButton {
+                source: "edit-clear"
+                callback: function() {
+                    if (passwordInput.text.length > 0) {
+                        passwordInput.text = passwordInput.text.substr(0, passwordInput.text.length - 1);
+                    }
+                }
             }
         }
-        onMessage: {
-            root.notification = msg;
+        Dialer {
+            id: dialer
+            Layout.fillWidth: true
         }
-        onError: {
-            root.notification = err;
-        }
-    }
-
-    SessionsModel {
-        id: sessionsModel
-    }
-
-    PlasmaCore.DataSource {
-        id: keystateSource
-        engine: "keystate"
-        connectedSources: "Caps Lock"
-    }
-
-    StackView {
-        id: stackView
-        anchors.fill: parent
-
-        initialItem: Loader {
-            active: root.viewVisible
-            source: "MainBlock.qml"
-        }
-    }
-
-    Component.onCompleted: {
-        // version support checks
-        if (root.interfaceVersion < 1) {
-            // ksmserver of 5.4, with greeter of 5.5
-            root.viewVisible = true;
+        PlasmaComponents.Button {
+            id: actionButton
+            Layout.alignment: Qt.AlignHCenter
+            Layout.minimumWidth: passwordInput.width
+            text: i18n("Unlock")
+            enabled: !authenticator.graceLocked
+            onClicked: authenticator.tryUnlock(passwordInput.text);
         }
     }
 }

@@ -30,7 +30,7 @@ ColumnLayout {
         text: Qt.formatTime(timeSource.data["Local"]["DateTime"])
         //we fill the width then align the text so that we can make the text shrink to fit
         Layout.fillWidth: true
-        horizontalAlignment: Text.AlignRight
+        horizontalAlignment: Text.AlignHCenter
 
         font.weight: Font.DemiBold
         fontSizeMode: Text.HorizontalFit
@@ -39,11 +39,11 @@ ColumnLayout {
 
     PlasmaComponents.Label {
         text: Qt.formatDate(timeSource.data["Local"]["DateTime"], Qt.DefaultLocaleLongDate);
-        Layout.alignment: Qt.AlignRight
+        Layout.alignment: Qt.AlignHCenter
     }
 
     RowLayout {
-        Layout.alignment: Qt.AlignRight
+        Layout.alignment: Qt.AlignHCenter
         visible: pmSource.data["Battery"]["Has Cumulative"]
 
         PW.BatteryIcon {
@@ -69,7 +69,7 @@ ColumnLayout {
                     return i18nd("plasma_lookandfeel_org.kde.lookandfeel","%1% battery remaining", battery.percent)
                 }
             }
-            Layout.alignment: Qt.AlignRight
+            Layout.alignment: Qt.AlignHCenter
             wrapMode: Text.Wrap
         }
     }
