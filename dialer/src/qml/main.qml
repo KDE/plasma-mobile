@@ -133,7 +133,7 @@ ApplicationWindow {
         db.transaction(
             function(tx) {
                 // Create the database if it doesn't already exist
-                //callType: wether is incoming, outgoing, unanswered
+                //callType: whether is incoming, outgoing, unanswered
                 tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, time DATETIME, duration INTEGER, callType INTEGER)');
 
                 var rs = tx.executeSql('SELECT * FROM History');

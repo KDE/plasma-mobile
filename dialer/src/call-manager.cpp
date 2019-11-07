@@ -112,7 +112,7 @@ void CallManager::onCallStateChanged(Tp::CallState state)
         if (d->callChannel->isRequested()) {
             d->dialerUtils->setCallState("dialing");
 
-            //show status that the call is conneting
+            //show status that the call is connecting
 //             ensureCallWindow();
 //             d->callWindow.data()->setStatus(CallWindow::StatusConnecting);
         } else {

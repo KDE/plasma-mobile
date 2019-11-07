@@ -80,7 +80,7 @@ Item {
             id: activitiesLayout
             height: activitiesView.height
             spacing: 0
-            //don't try to do anything until we are well setted up
+            //don't try to do anything until we are well set up
             property bool loadCompleted: root.loadCompleted && width == activitiesView.width * (activitiesLayout.children.length - 1) && activitiesLayout.children.length == activityRepeater.count + 1
             onLoadCompletedChanged: activitiesView.currentIndexChanged();
 
