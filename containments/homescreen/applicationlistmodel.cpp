@@ -43,8 +43,8 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
       m_homeScreen(parent)
 {
     //can't use the new syntax as this signal is overloaded
-    connect(KSycoca::self(), SIGNAL(databaseChanged(const QStringList &)),
-            this, SLOT(sycocaDbChanged(const QStringList &)));
+    connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)),
+            this, SLOT(sycocaDbChanged(QStringList)));
 
     loadSettings();
 }
@@ -60,7 +60,7 @@ void ApplicationListModel::loadSettings()
     m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", 5);
 
     int i = 0;
-    for (auto app : m_appOrder) {
+    for (const QString &app : qAsConst(m_appOrder)) {
         m_appPositions[app] = i;
         ++i;
     }
@@ -219,7 +219,7 @@ Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return nullptr;
-    return Qt::ItemIsDragEnabled|QAbstractItemModel::flags(index);
+    return Qt::ItemIsDragEnabled|QAbstractListModel::flags(index);
 }
 
 int ApplicationListModel::rowCount(const QModelIndex &parent) const
@@ -306,7 +306,7 @@ void ApplicationListModel::moveItem(int row, int destination)
     m_appOrder.clear();
     m_appPositions.clear();
     int i = 0;
-    for (auto app : m_applicationList) {
+    for (const ApplicationData &app : qAsConst(m_applicationList)) {
         m_appOrder << app.storageId;
         m_appPositions[app.storageId] = i;
         ++i;

@@ -57,7 +57,7 @@ void DialerUtils::dial(const QString &number)
     // FIXME: this should be replaced by kpeople thing
     qDebug() << "Starting call...";
     Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(number);
-    connect(pendingChannel, &Tp::PendingChannelRequest::finished, [=](){
+    connect(pendingChannel, &Tp::PendingChannelRequest::finished, pendingChannel, [=](){
         if (pendingChannel->isError()) {
             qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
             setCallState("failed");
@@ -78,7 +78,7 @@ const QString DialerUtils::formatNumber(const QString& number)
     QLocale locale;
     QStringList qcountry = locale.name().split('_');
     QString countrycode(qcountry.constLast());
-    const char* country = countrycode.toUtf8().constData();
+    string country = countrycode.toUtf8().constData();
     PhoneNumberUtil* util = PhoneNumberUtil::GetInstance();
     AsYouTypeFormatter* formatter = util->PhoneNumberUtil::GetAsYouTypeFormatter(country);
 

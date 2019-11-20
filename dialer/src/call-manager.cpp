@@ -162,7 +162,7 @@ void CallManager::onCallStateChanged(Tp::CallState state)
         }
         d->dialerUtils->setCallState("active");
         d->callTimer = new QTimer(this);
-        connect(d->callTimer, &QTimer::timeout, [=]() {
+        connect(d->callTimer, &QTimer::timeout, d->callTimer, [=]() {
             d->dialerUtils->setCallDuration(d->dialerUtils->callDuration() + 1);
         });
         d->callTimer->start(1000);

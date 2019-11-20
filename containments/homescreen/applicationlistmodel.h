@@ -86,7 +86,7 @@ public:
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE void setLocation(int row, LauncherLocation location);
+    Q_INVOKABLE void setLocation(int row, ApplicationListModel::LauncherLocation location);
 
     Q_INVOKABLE void moveItem(int row, int order);
 
