@@ -39,9 +39,8 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent),
       m_homeScreen(parent)
 {
-    //can't use the new syntax as this signal is overloaded
-    connect(KSycoca::self(), SIGNAL(databaseChanged(QStringList)),
-            this, SLOT(sycocaDbChanged(QStringList)));
+    connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged),
+            this, &ApplicationListModel::sycocaDbChanged);
 
     loadSettings();
 }

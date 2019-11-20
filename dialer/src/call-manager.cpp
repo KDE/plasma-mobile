@@ -47,8 +47,8 @@ CallManager::CallManager(const Tp::CallChannelPtr &callChannel, DialerUtils *dia
 
     d->dialerUtils = dialerUtils;
     d->callChannel = callChannel;
-    connect(callChannel.data(), SIGNAL(callStateChanged(Tp::CallState)),
-            SLOT(onCallStateChanged(Tp::CallState)));
+    connect(callChannel.data(), &Tp::CallChannel::callStateChanged,
+            this, &CallManager::onCallStateChanged);
 
     connect(d->dialerUtils, &DialerUtils::acceptCall, this, &CallManager::onCallAccepted);
     connect(d->dialerUtils, &DialerUtils::rejectCall, this, &CallManager::onCallRejected);

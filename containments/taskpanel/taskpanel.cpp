@@ -87,8 +87,10 @@ void TaskPanel::initWayland()
             );
             //FIXME
             //connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, this, &TaskPanel::updateActiveWindow, Qt::QueuedConnection);
-            
-            connect(m_windowManagement, SIGNAL(activeWindowChanged()), m_activeTimer, SLOT(start()));
+
+            connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::activeWindowChanged,
+                    m_activeTimer, qOverload<>(&QTimer::start));
+
             updateActiveWindow();
         }
     );
