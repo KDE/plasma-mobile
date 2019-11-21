@@ -126,7 +126,7 @@ PlasmaCore.ColorScope {
                 Layout.fillWidth: true
                 horizontalAlignment: Qt.AlignHCenter
                 verticalAlignment: Qt.AlignVCenter
-                text: simManager.pinRetries && simManager.pinRetries[simManager.pinRequired] ? i18n("%1 attempts left", simManager.pinRetries[simManager.pinRequired]) : "";
+                text: simManager.pinRetries && simManager.pinRetries[simManager.pinRequired] ? i18np("%1 attempt left", "%1 attempts left", simManager.pinRetries[simManager.pinRequired]) : "";
             }
 
             RowLayout {
@@ -187,7 +187,7 @@ PlasmaCore.ColorScope {
                     top: pad.bottom
                     horizontalCenter: parent.horizontalCenter
                 }
-                text: i18n("Ok")
+                text: i18n("OK")
                 onClicked: {
                     simManager.enterPin(simManager.pinRequired, pinLabel.text)
                     pinLabel.text = "";

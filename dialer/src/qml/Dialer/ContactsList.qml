@@ -91,7 +91,7 @@ Item {
                         },
                         Kirigami.Action {
                             icon.name: "configure-shortcuts"
-                            text: i18n("Send message")
+                            text: i18n("Send Message")
                         }
                     ]
 
