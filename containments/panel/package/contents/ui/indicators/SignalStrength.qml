@@ -92,7 +92,7 @@ Item {
             left: strengthIcon.right
             verticalCenter: parent.verticalCenter
         }
-        text: i18nc("<strength of network>% <network name>", "%1% %2", netreg.strength, netreg.name)
+        text: netreg.strength + "% " + netreg.name
         color: PlasmaCore.ColorScope.textColor
         font.pixelSize: parent.height / 2
     }
