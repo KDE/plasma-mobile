@@ -41,6 +41,7 @@ Comment[nl]=Plasma-mobiel door KDE
 Comment[nn]=Plasma Mobile frå KDE
 Comment[pl]=Plazma Mobile stworzona przez KDE
 Comment[pt]=Plasma Mobile do KDE
+Comment[pt_BR]=Plasma Mobile do KDE
 Comment[sv]=Plasma mobil av KDE
 Comment[uk]=Мобільна Плазма від KDE
 Comment[x-test]=xxPlasma Mobile by KDExx
