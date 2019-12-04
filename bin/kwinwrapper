@@ -2,24 +2,25 @@
 
 [ -f /etc/profile ] && . /etc/profile
 
-export $(dbus-launch)
 export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=KDE
 export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
-export XDG_CURRENT_DESKTOP=KDE
 export EGL_PLATFORM=wayland
 
-export KDE_FULL_SESSION=1
-export KDE_SESSION_VERSION=5
-export PLASMA_PLATFORM=phone
 export QT_QUICK_CONTROLS_STYLE=Plasma
 export QT_ENABLE_GLYPH_CACHE_WORKAROUND=1
 export QT_QUICK_CONTROLS_MOBILE=true
+export PLASMA_PLATFORM=phone:handset
+
+export GRID_UNIT_PX=25
+export FORCE_RIL_NUM_MODEMS=1
+export PLASMA_DEFAULT_SHELL=org.kde.plasma.phone
 
 # work around to fix : https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1507584
-if [ -d /usr/lib/arm-linux-gnueabihf/libhybris-egl ]; then
-    export LD_LIBRARY_PATH=/usr/lib/arm-linux-gnueabihf/libhybris-egl:$LD_LIBRARY_PATH
+_ARCH=arm-linux-gnueabihf
+if [ -d /usr/lib/$_ARCH/libhybris-egl ]; then
+    export LD_LIBRARY_PATH=/usr/lib/$_ARCH/libhybris-egl:$LD_LIBRARY_PATH
 fi
 
 touch /tmp/simplelogin_starting
-kwin_wayland --xwayland --libinput --inputmethod maliit-server plasma-phone
+startplasma-wayland --xwayland --libinput --inputmethod maliit-server --exit-with-session=/usr/lib/$_ARCH/libexec/startplasma-waylandsession
