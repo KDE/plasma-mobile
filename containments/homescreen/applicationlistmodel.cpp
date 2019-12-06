@@ -51,7 +51,12 @@ ApplicationListModel::~ApplicationListModel()
 void ApplicationListModel::loadSettings()
 {
     m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
+#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
+    m_desktopItems = QSet<QString>(m_homeScreen->config().readEntry("DesktopItems", QStringList()).begin(),
+                          m_homeScreen->config().readEntry("DesktopItems", QStringList()).end());
+#else
     m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
+#endif
     m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
     m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", 5);
 
@@ -264,12 +269,12 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     // In Desktop
     if (location == Desktop) {
         m_desktopItems.insert(data.storageId);
-        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.values());
 
     // Out of Desktop
     } else  if (data.location == Desktop) {
         m_desktopItems.remove(data.storageId);
-        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.toList());
+        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.values());
     }
 
     data.location = location;

@@ -24,6 +24,7 @@
 #include <QObject>
 #include <QAbstractListModel>
 #include <QList>
+#include <QSet>
 
 #include "homescreen.h"
 
