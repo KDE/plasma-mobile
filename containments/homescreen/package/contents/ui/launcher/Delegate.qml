@@ -129,7 +129,6 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: root.reservedSpaceForLabel
-                height: root.reservedSpaceForLabel
                 wrapMode: Text.WordWrap
                 Layout.leftMargin: -parent.anchors.leftMargin + units.smallSpacing
                 Layout.rightMargin: -parent.anchors.rightMargin + units.smallSpacing
