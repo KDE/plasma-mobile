@@ -18,10 +18,9 @@ export FORCE_RIL_NUM_MODEMS=1
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.phone
 
 # work around to fix : https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1507584
-_ARCH=arm-linux-gnueabihf
-if [ -d /usr/lib/$_ARCH/libhybris-egl ]; then
-    export LD_LIBRARY_PATH=/usr/lib/$_ARCH/libhybris-egl:$LD_LIBRARY_PATH
+if [ -d @KDE_INSTALL_FULL_LIBDIR@/libhybris-egl ]; then
+    export LD_LIBRARY_PATH=@KDE_INSTALL_FULL_LIBDIR@/libhybris-egl:$LD_LIBRARY_PATH
 fi
 
 touch /tmp/simplelogin_starting
-startplasma-wayland --xwayland --libinput --inputmethod maliit-server --exit-with-session=/usr/lib/$_ARCH/libexec/startplasma-waylandsession
+startplasma-wayland --xwayland --libinput --inputmethod maliit-server --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
