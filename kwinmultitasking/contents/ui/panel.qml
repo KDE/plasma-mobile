@@ -17,9 +17,10 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
 import QtQuick 2.0
+import QtQuick.Layouts 1.4
 import QtQuick.Window 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kwin 2.0
 
 PlasmaCore.Dialog {
@@ -28,29 +29,38 @@ PlasmaCore.Dialog {
     flags: Qt.X11BypassWindowManagerHint
     type: PlasmaCore.Dialog.Dock
     
-    mainItem: Item {
+    mainItem: MouseArea {
         width: workspace.virtualScreenSize.width
         height: units.iconSizes.medium
-        PlasmaComponents.ToolButton {
-            anchors.left: parent.left
-            iconSource: "applications-other"
-            onClicked: root.showWindowList();
-        }
 
-        PlasmaComponents.ToolButton {
-            anchors.horizontalCenter: parent.horizontalCenter
-            iconSource: "go-home"
-            onClicked: {
-                root.closeWindowList();
-                workspace.slotToggleShowDesktop();
-            }
-        }
         
-        PlasmaComponents.ToolButton {
-            anchors.right: parent.right
-            iconSource: "window-close"
-            enabled: workspace.activeClient
-            onClicked: workspace.activeClient.closeWindow();
+
+        RowLayout {
+            anchors.fill: parent
+            PlasmaComponents.ToolButton {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                icon.name: "applications-other"
+                onClicked: root.showWindowList();
+            }
+
+            PlasmaComponents.ToolButton {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                icon.name: "go-home"
+                onClicked: {
+                    root.closeWindowList();
+                    workspace.slotToggleShowDesktop();
+                }
+            }
+            
+            PlasmaComponents.ToolButton {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                icon.name: "window-close"
+                enabled: workspace.activeClient
+                onClicked: workspace.activeClient.closeWindow();
+            }
         }
     }
     Component.onCompleted: {

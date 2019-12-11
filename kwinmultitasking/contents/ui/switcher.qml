@@ -104,7 +104,6 @@ PlasmaCore.Dialog {
                     anchors.fill: parent
                     //parentWindow: dialog.windowId
                     client: model.client
-                    brightness: (model.client == workspace.activeClient) ? 1.0 : 0.6
                 }
                 onClicked: {
                     workspace.activeClient = model.client
