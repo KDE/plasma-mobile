@@ -72,7 +72,7 @@ PlasmaCore.Dialog {
             anchors.fill: parent
             cacheBuffer: 9999
             
-            cellWidth: units.gridUnit * 20
+            cellWidth: width / Math.floor(width / (units.gridUnit * 10))
             cellHeight: cellWidth / (view.width / view.height) + units.gridUnit * 3
             model: KWinScripting.ClientModel {
                 id: clientModel
