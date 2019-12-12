@@ -23,31 +23,33 @@ import org.kde.kwin 2.0;
 Item {
     id: root
 
+    function peekWindowList(amount) {
+
+        switcher.view.contentY = amount;
+        switcher.visible = true;
+        //panelLoader.item.raise();
+    }
+
     function showWindowList() {
-        if (!mainItemLoader.item) {
-            mainItemLoader.source = "switcher.qml";
-        }
-        mainItemLoader.item.visible = true;
-        panelLoader.item.raise();
+        switcher.open();
+        //panelLoader.item.raise();
     }
 
     function closeWindowList() {
-        if (mainItemLoader.item) {
-            mainItemLoader.item.closeWindowList()
-        }
+        switcher.close();
     }
 
-    Loader {
-        id: mainItemLoader
+    Switcher {
+        id: switcher
     }
 
     Connections {
         target: workspace
         onCurrentDesktopChanged: {
-            if (!mainItemLoader.item) {
+            if (!switcher) {
                 mainItemLoader.source = "switcher.qml";
             }
-            mainItemLoader.item.visible = true;
+            switcher.visible = true;
         }
     }
 

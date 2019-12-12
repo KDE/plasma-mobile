@@ -31,15 +31,16 @@ PlasmaCore.Dialog {
     flags: Qt.X11BypassWindowManagerHint
     backgroundHints: PlasmaCore.Dialog.NoBackground
 
-    function closeWindowList() {
-        hideAnim.running = true;
+    property alias view: view
+
+    function open() {
+        dialog.visible = true;
+        showAnim.restart();
+    }
+    function close() {
+        hideAnim.restart();
     }
 
-    onVisibleChanged: {
-        if (visible) {
-            showAnim.running = true;
-        }
-    }
     mainItem: Rectangle {
         width: workspace.virtualScreenSize.width
         height: workspace.virtualScreenSize.height
@@ -70,8 +71,9 @@ PlasmaCore.Dialog {
             id: view
             anchors.fill: parent
             cacheBuffer: 9999
+            
             cellWidth: units.gridUnit * 20
-            cellHeight: units.gridUnit * 20 // (view.width / view.height)
+            cellHeight: cellWidth / (view.width / view.height) + units.gridUnit * 3
             model: KWinScripting.ClientModel {
                 id: clientModel
                 exclusions: KWinScripting.ClientModel.NotAcceptingFocusExclusion |
@@ -79,7 +81,15 @@ PlasmaCore.Dialog {
                             KWinScripting.ClientModel.DockWindowsExclusion |
                             KWinScripting.ClientModel.SwitchSwitcherExclusion
             }
+            MouseArea {
+                parent: view.contentItem
+                anchors.fill: parent
+                onClicked: dialog.close()
+            } 
             onMovingChanged: {
+                if (moving) {
+                    return;
+                }
                 if (contentY < -view.height/2) {
                     hideAnim.running = true
                 } else if (contentY >= -view.height/2 && contentY < 0) {
@@ -93,17 +103,33 @@ PlasmaCore.Dialog {
             delegate: MouseArea {
                 width: view.cellWidth
                 height: view.cellHeight
-                PlasmaComponents.ToolButton {
-                    anchors.right: parent.right
-                    iconSource: "window-close"
-                    flat: false
-                    onClicked: model.client.closeWindow()
-                    visible: model.client.closeable
-                }
-                KWinScripting.ThumbnailItem {
-                    anchors.fill: parent
-                    //parentWindow: dialog.windowId
-                    client: model.client
+                Rectangle {
+                    anchors {
+                        fill: parent
+                        margins: units.smallSpacing
+                    }
+                    radius: 3
+
+                    PlasmaComponents.ToolButton {
+                        id: closeButton
+                        anchors.right: parent.right
+                        iconSource: "window-close"
+                        onClicked: model.client.closeWindow()
+                        visible: model.client.closeable
+                    }
+                    KWinScripting.ThumbnailItem {
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            right: parent.right
+                            bottom: parent.bottom
+                            margins: units.smallSpacing
+                            topMargin: closeButton.height
+                        }
+                        //parentWindow: dialog.windowId
+                        client: model.client
+                    }
+
                 }
                 onClicked: {
                     workspace.activeClient = model.client

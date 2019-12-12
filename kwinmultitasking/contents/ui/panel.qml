@@ -28,38 +28,73 @@ PlasmaCore.Dialog {
     y: workspace.virtualScreenSize.height - height
     flags: Qt.X11BypassWindowManagerHint
     type: PlasmaCore.Dialog.Dock
-    
+    backgroundHints: PlasmaCore.Dialog.NoBackground
+
     mainItem: MouseArea {
         width: workspace.virtualScreenSize.width
         height: units.iconSizes.medium
+        property int startY
+        property bool dragging
 
-        
+        onPressed: {
+            startY = mouse.y;
+            dragging = false
+        }
+        onPositionChanged: {
+            if (Math.abs(mouse.y - startY) > height) {
+                dragging = true;
+            }
+            if (dragging) {
+                root.peekWindowList(-workspace.virtualScreenSize.height - mouse.y);
+            }
+        }
+        onReleased: {
+            if (dragging) {
+                if (mouse.y < -workspace.virtualScreenSize.height/2) {
+                    root.showWindowList();
+                } else {
+                    root.closeWindowList();
+                }
+                return;
+            }
+            var button = layout.childAt(mouse.x, mouse.y);
+            print("AAAA"+button.source)
+            if (button) {
+                button.click();
+            }
+        }
+
+        Rectangle {
+            anchors.fill: parent
+            color: theme.backgroundColor
+        }
 
         RowLayout {
+            id: layout
             anchors.fill: parent
-            PlasmaComponents.ToolButton {
+            PlasmaCore.IconItem {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                icon.name: "applications-other"
-                onClicked: root.showWindowList();
+                source: "box"
+                function click() { root.showWindowList();}
             }
 
-            PlasmaComponents.ToolButton {
+            PlasmaCore.IconItem {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                icon.name: "go-home"
-                onClicked: {
+                source: "start-here-kde"
+                function click() {
                     root.closeWindowList();
                     workspace.slotToggleShowDesktop();
                 }
             }
             
-            PlasmaComponents.ToolButton {
+            PlasmaCore.IconItem {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                icon.name: "window-close"
+                source: "paint-none"
                 enabled: workspace.activeClient
-                onClicked: workspace.activeClient.closeWindow();
+                function click() { workspace.activeClient.closeWindow();}
             }
         }
     }
