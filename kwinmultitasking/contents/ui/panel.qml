@@ -58,7 +58,6 @@ PlasmaCore.Dialog {
                 return;
             }
             var button = layout.childAt(mouse.x, mouse.y);
-            print("AAAA"+button.source)
             if (button) {
                 button.click();
             }

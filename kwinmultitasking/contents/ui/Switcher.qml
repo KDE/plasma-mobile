@@ -17,7 +17,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *********************************************************************/
-import QtQuick 2.0;
+import QtQuick 2.12;
+import QtQuick.Layouts 1.2
 import QtQuick.Window 2.0;
 import org.kde.plasma.core 2.0 as PlasmaCore;
 import org.kde.plasma.components 2.0 as PlasmaComponents;
@@ -73,7 +74,7 @@ PlasmaCore.Dialog {
             cacheBuffer: 9999
             
             cellWidth: width / Math.floor(width / (units.gridUnit * 10))
-            cellHeight: cellWidth / (view.width / view.height) + units.gridUnit * 3
+            cellHeight: cellWidth / (workspace.virtualScreenSize.width / workspace.virtualScreenSize.height) + units.gridUnit * 3
             model: KWinScripting.ClientModel {
                 id: clientModel
                 exclusions: KWinScripting.ClientModel.NotAcceptingFocusExclusion |
@@ -83,7 +84,11 @@ PlasmaCore.Dialog {
             }
             MouseArea {
                 parent: view.contentItem
-                anchors.fill: parent
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                }
+                height: Math.max(parent.height, view.height)
                 onClicked: dialog.close()
             } 
             onMovingChanged: {
@@ -96,38 +101,84 @@ PlasmaCore.Dialog {
                     showAnim.running = true
                 }
             }
-            header: Item {
-                width: view.width
-                height: view.height
-            }
+            topMargin: height
+            bottomMargin: height
             delegate: MouseArea {
                 width: view.cellWidth
                 height: view.cellHeight
-                Rectangle {
-                    anchors {
-                        fill: parent
-                        margins: units.smallSpacing
-                    }
-                    radius: 3
+                drag.target: decoration
+                drag.axis: Drag.XAxis
 
-                    PlasmaComponents.ToolButton {
-                        id: closeButton
-                        anchors.right: parent.right
-                        iconSource: "window-close"
-                        onClicked: model.client.closeWindow()
-                        visible: model.client.closeable
+                onReleased: {
+                    if (decoration.x > decoration.width / 2) {
+                        windowCloseAnim.to = decoration.width
+                        windowCloseAnim.restart()
+                    } else if (decoration.x < -decoration.width / 2) {
+                        windowCloseAnim.to = -decoration.width
+                        windowCloseAnim.restart()
+                    } else {
+                        resetAnim.restart();
                     }
-                    KWinScripting.ThumbnailItem {
-                        anchors {
-                            left: parent.left
-                            top: parent.top
-                            right: parent.right
-                            bottom: parent.bottom
-                            margins: units.smallSpacing
-                            topMargin: closeButton.height
+                }
+                NumberAnimation {
+                    id: resetAnim
+                    target: decoration
+                    property: "x"
+                    from: decoration.x
+                    to: 0
+                    duration: units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+                SequentialAnimation {
+                    id: windowCloseAnim
+                    property alias to: internalAnim.to
+                    NumberAnimation {
+                        id: internalAnim
+                        property: "x"
+                        target: decoration
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                    ScriptAction {
+                        script: {
+                            model.client.closeWindow()
+                            decoration.x = 0;
                         }
-                        //parentWindow: dialog.windowId
-                        client: model.client
+                    }
+                }
+                Rectangle {
+                    id: decoration
+                    opacity: 1 - Math.abs(x / width)
+                    width: parent.width - units.smallSpacing*2
+                    height: parent.height - units.smallSpacing*2
+                    radius: 3
+                    color: theme.backgroundColor
+
+                    ColumnLayout {
+                        anchors {
+                            fill: parent
+                            margins: units.smallSpacing
+                        }
+                        RowLayout {
+                            Layout.fillWidth: true
+                            PlasmaComponents.Label {
+                                Layout.fillWidth: true
+                                elide: Text.ElideRight
+                                text: model.client.caption
+                            }
+                            PlasmaComponents.ToolButton {
+                                iconSource: "window-close"
+                                onClicked: model.client.closeWindow()
+                                visible: model.client.closeable
+                            }
+                        }
+                        KWinScripting.ThumbnailItem {
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            //parentWindow: dialog.windowId
+                            opacity: decoration.opacity
+                            client: model.client
+                        }
                     }
 
                 }
