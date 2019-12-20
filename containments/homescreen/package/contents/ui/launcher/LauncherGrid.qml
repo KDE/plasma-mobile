@@ -39,6 +39,58 @@ LauncherContainer {
 
     frame.width: width
 
+    PlasmaCore.IconItem {
+        id: effect
+        height: 64
+        width:  64
+        visible: false
+        x: 0
+        y: 0
+
+        source: "pattern-kde"
+        property string title
+
+        SequentialAnimation {
+            id: woosh
+            ScriptAction {
+                script: effect.visible = true
+            }
+            ParallelAnimation {
+                NumberAnimation {
+                    target: effect
+                    property: "opacity"
+                    from: 0.9
+                    to: 0
+                    duration: 200
+                }
+                NumberAnimation {
+                    target: effect
+                    property: "scale"
+                    from: 1
+                    to: 3
+                    duration: 200
+                }
+            }
+            ScriptAction {
+                script: {
+                    feedbackWindow.title = effect.title
+                    feedbackWindow.icon = effect.source
+                    feedbackWindow.state = "open"
+                    effect.visible = false
+                }
+            }
+        }
+
+        function swoosh(x, y, sauce, title) {
+            effect.x = x
+            effect.y = y
+            effect.source = sauce
+            effect.visible = true
+            effect.title = title
+            woosh.restart()
+        }
+    }
+
     Repeater {
         parent: root.flow
         model: plasmoid.nativeInterface.applicationListModel
@@ -62,6 +114,10 @@ LauncherContainer {
                 if (model.ApplicationLocationRole == ApplicationListModel.Desktop) {
                     appletsLayout.restoreItem(delegate);
                 }
+            }
+            onLaunch: (a, b, c, d) => {
+                print(a,b,c,d)
+                effect.swoosh(a, b, c, d)
             }
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {
