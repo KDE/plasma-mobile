@@ -19,7 +19,6 @@
 
 #include "homescreen.h"
 #include "applicationlistmodel.h"
-#include "colouraverage.h"
 
 #include <QtQml>
 #include <QDebug>
@@ -29,13 +28,6 @@ HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
     qmlRegisterUncreatableType<ApplicationListModel>("org.kde.phone.homescreen", 1, 0, "ApplicationListModel", QStringLiteral("Cannot create item of type ApplicationListModel"));
-    qmlRegisterSingletonType<ColourAverage>("org.kde.phone.homescreen", 1, 0, "ColourAverage", [](QQmlEngine *engine, QJSEngine *scriptEngine) -> QObject * {
-        Q_UNUSED(engine);
-        Q_UNUSED(scriptEngine);
-
-        ColourAverage *obj = new ColourAverage();
-        return obj;
-    });
 
     setHasConfigurationInterface(true);
 }
