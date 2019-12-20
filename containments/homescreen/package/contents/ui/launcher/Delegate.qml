@@ -48,6 +48,8 @@ ContainmentLayoutManager.ItemContainer {
 
     editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
 
+    signal launch(int x, int y, var source, string title)
+
     onDragActiveChanged: {
         launcherDragManager.active = dragActive
         if (dragActive) {
@@ -88,9 +90,8 @@ ContainmentLayoutManager.ItemContainer {
         onClicked: {
             clickFedbackAnimation.target = delegate;
             clickFedbackAnimation.running = true;
-            feedbackWindow.title = modelData.ApplicationNameRole;
-            feedbackWindow.icon = modelData.ApplicationIconRole;
-            feedbackWindow.state = "open";
+
+            delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.ApplicationNameRole)
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
         }

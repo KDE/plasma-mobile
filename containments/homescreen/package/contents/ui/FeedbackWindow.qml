@@ -23,6 +23,9 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import QtGraphicalEffects 1.12
+
+import org.kde.phone.homescreen 1.0
 
 Window {
     id: window
@@ -52,24 +55,26 @@ Window {
         state: "closed"
         Rectangle {
             anchors.fill: parent
-            color: background.backgroundColor
-
-            ColumnLayout {
+            color: PlasmaCore.Theme.backgroundColor
+            Rectangle {
+                id: rect
+                anchors.fill: parent
+            }
+            PlasmaCore.IconItem {
                 anchors.centerIn: parent
-                PlasmaCore.IconItem {
-                    id: icon
-                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                    Layout.preferredWidth: units.iconSizes.enormous
-                    Layout.preferredHeight: Layout.preferredWidth
-                    Layout.alignment: Qt.AlignCenter
-                }
-                PlasmaExtras.Heading {
-                    text: window.title
-                    Layout.alignment: Qt.AlignCenter
-                }
-               /* PlasmaComponents.BusyIndicator {
-                    Layout.alignment: Qt.AlignCenter
-                }*/
+                id: icon
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                width: units.iconSizes.enormous
+                height: width
+            }
+            DropShadow {
+                anchors.fill: icon
+                horizontalOffset: 0
+                verticalOffset: 0
+                radius: 8.0
+                samples: 17
+                color: "#80000000"
+                source: icon
             }
         }
 
@@ -103,7 +108,12 @@ Window {
                 from: "closed"
                 SequentialAnimation {
                     ScriptAction {
-                        script: window.visible = true;
+                        script: { 
+                            window.visible = true;
+                            icon.grabToImage((img) => {
+                                rect.color = ColourAverage.averageColour(img.image)
+                            })
+                        }
                     }
                     PropertyAnimation {
                         target: background
