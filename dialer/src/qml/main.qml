@@ -26,6 +26,8 @@ import QtQuick.LocalStorage 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.0 as Kirigami
 
+import org.kde.plasma.dialer 1.0
+
 ApplicationWindow {
     id: root
 
@@ -57,7 +59,7 @@ ApplicationWindow {
             } else {
                 callType = 2;
             }
-            insertCallInHistory(callContactNumber, callDuration, callType);
+            historyModel.addCall(callContactNumber, callDuration, callType)
         }
     }
 
@@ -71,86 +73,10 @@ ApplicationWindow {
     function call(number) {
         dialerUtils.dial(number);
     }
-
-    function insertCallInHistory(number, duration, callType) {
-        //DATABSE
-        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
-
-        db.transaction(
-            function(tx) {
-                var rs = tx.executeSql("INSERT INTO History VALUES(NULL, ?, datetime('now'), ?, ? )", [number, duration, callType]);
-
-                var rs = tx.executeSql('SELECT * FROM History where id=?', [rs.insertId]);
-
-                for(var i = 0; i < rs.rows.length; i++) {
-                    var row = rs.rows.item(i);
-                    row.date = Qt.formatDate(row.time, "yyyy-MM-dd");
-                    row.originalIndex = historyModel.count;
-                    historyModel.append(row);
-                }
-            }
-        )
-    }
-
-    //index is historyModel row number, not db id and not sortmodel row number
-    function removeCallFromHistory(index) {
-        var item = historyModel.get(index);
-
-        if (!item) {
-            return;
-        }
-
-        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
-
-        db.transaction(
-            function(tx) {
-                tx.executeSql("DELETE from History WHERE id=?", [item.id]);
-            }
-        )
-
-        historyModel.remove(index);
-    }
-
-    function clearHistory() {
-        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
-
-        db.transaction(
-            function(tx) {
-                tx.executeSql("DELETE from History");
-            }
-        )
-
-        historyModel.clear();
-    }
-
 //END FUNCTIONS
 
-//BEGIN DATABASE
-    Component.onCompleted: {
-        //DATABSE
-        var db = LocalStorage.openDatabaseSync("PlasmaPhoneDialer", "1.0", "Call history of the Plasma Phone dialer", 1000000);
-
-        db.transaction(
-            function(tx) {
-                // Create the database if it doesn't already exist
-                //callType: whether is incoming, outgoing, unanswered
-                tx.executeSql('CREATE TABLE IF NOT EXISTS History(id INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, time DATETIME, duration INTEGER, callType INTEGER)');
-
-                var rs = tx.executeSql('SELECT * FROM History');
-
-                for(var i = 0; i < rs.rows.length; i++) {
-                    var row = rs.rows.item(i);
-                    row.date = Qt.formatDate(row.time, "yyyy-MM-dd");
-                    row.originalIndex = historyModel.count;
-                    historyModel.append(row);
-                }
-            }
-        )
-    }
-//END DATABASE
-
 //BEGIN MODELS
-    ListModel {
+    CallHistoryModel {
         id: historyModel
     }
 

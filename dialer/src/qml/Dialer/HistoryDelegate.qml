@@ -24,7 +24,6 @@ import QtQuick.Controls 2.2 as Controls
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-
 Item {
     id: delegateParent
     width: view.width
@@ -50,7 +49,7 @@ Item {
             easing.type: Easing.InOutQuad
         }
         ScriptAction {
-            script: removeCallFromHistory(model.originalIndex);
+            script: filterModel.remove(model.index)
         }
     }
 

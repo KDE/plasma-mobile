@@ -23,6 +23,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
+import org.kde.plasma.dialer 1.0
+
 Item {
 
     function secondsToTimeString(seconds) {
@@ -38,12 +40,12 @@ Item {
     PlasmaComponents.Label {
         anchors.centerIn: parent
         text: i18n("No recent calls")
-        visible: historyModel.count == 0
+        visible: view.count == 0
     }
 
     ColumnLayout {
         anchors.fill: parent
-        visible: historyModel.count > 0
+        visible: view.count > 0
         PlasmaComponents.ToolBar {
             Layout.fillWidth: true
             tools: RowLayout {
@@ -55,7 +57,7 @@ Item {
                         text: i18n("All")
                         onCheckedChanged: {
                             if (checked) {
-                                filterModel.filterString = "";
+                                filterModel.setFilterFixedString("")
                             }
                         }
                     }
@@ -64,7 +66,7 @@ Item {
                         text: i18n("Missed")
                         onCheckedChanged: {
                             if (checked) {
-                                filterModel.filterString = "0";
+                                filterModel.setFilterFixedString("0")
                             }
                         }
                     }
@@ -74,7 +76,7 @@ Item {
                 }
                 PlasmaComponents.Button {
                     text: i18n("Clear")
-                    onClicked: clearHistory();
+                    onClicked: historyModel.clear()
                 }
             }
         }
@@ -83,12 +85,12 @@ Item {
             Layout.fillHeight: true
             ListView {
                 id: view
-                model: PlasmaCore.SortFilterModel {
+                model: CallHistorySortFilterModel {
                     id: filterModel
                     sourceModel: historyModel
-                    filterRole: "callType"
-                    sortRole: "time"
-                    sortOrder: Qt.DescendingOrder
+                    filterRole: CallHistoryModel.CallTypeRole
+                    sortRole: CallHistoryModel.TimeRole
+                    Component.onCompleted: sort(0, Qt.DescendingOrder)
                 }
                 section {
                     property: "date"

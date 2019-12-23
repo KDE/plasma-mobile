@@ -2,6 +2,7 @@ set(plasmaphonedialer_SRCS
     main.cpp
     dialerutils.cpp
     call-handler.cpp
+    callhistorymodel.cpp
     call-manager.cpp
     resources.qrc
 )
@@ -15,6 +16,7 @@ target_link_libraries(plasmaphonedialer
  Qt5::Gui
  Qt5::Quick
  Qt5::Widgets
+ Qt5::Sql
  KF5::Declarative
  KF5::I18n
  KF5::QuickAddons

@@ -21,6 +21,7 @@
 
 #include "dialerutils.h"
 #include "call-handler.h"
+#include "callhistorymodel.h"
 
 #include <TelepathyQt/Types>
 #include <TelepathyQt/Debug>
@@ -108,6 +109,9 @@ int main(int argc, char **argv)
     parser.addOption(daemonOption);
 
     parser.process(app);
+
+    qmlRegisterType<CallHistoryModel>("org.kde.plasma.dialer", 1, 0, "CallHistoryModel");
+    qmlRegisterType<CallHistorySortFilterModel>("org.kde.plasma.dialer", 1, 0, "CallHistorySortFilterModel");
 
     Tp::registerTypes();
 
