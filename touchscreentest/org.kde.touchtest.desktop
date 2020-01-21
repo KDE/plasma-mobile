@@ -28,6 +28,7 @@ Name[sv]=Beröringsprov
 Name[tr]=Dokunma Testi
 Name[uk]=Тестування дотику
 Name[x-test]=xxTouch Testxx
+Name[zh_CN]=触摸测试
 Name[zh_TW]=觸控測試
 
 Categories=Qt;KDE;System;Development;
