@@ -214,6 +214,7 @@ PlasmaCore.ColorScope {
             }
             Indicators.Bluetooth {}
             Indicators.Wifi {}
+            Indicators.Volume {}
             Indicators.Battery {}
         }
     }
