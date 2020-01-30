@@ -54,9 +54,14 @@ DialerUtils::~DialerUtils()
 
 void DialerUtils::dial(const QString &number)
 {
+    using namespace ::i18n::phonenumbers;
+    PhoneNumberUtil* util = PhoneNumberUtil::GetInstance();
+    string stdnumber = number.toUtf8().constData();
+    util->Normalize(&stdnumber);
+
     // FIXME: this should be replaced by kpeople thing
     qDebug() << "Starting call...";
-    Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(number);
+    Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(QString::fromStdString(stdnumber));
     connect(pendingChannel, &Tp::PendingChannelRequest::finished, pendingChannel, [=](){
         if (pendingChannel->isError()) {
             qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
