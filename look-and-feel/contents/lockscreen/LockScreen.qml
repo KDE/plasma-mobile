@@ -1,7 +1,5 @@
-/********************************************************************
- This file is part of the KDE project.
-
-Copyright (C) 2014 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
+/*
+Copyright (C) 2019 Nicolas Fella <nicolas.fella@gmx.de>
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -10,116 +8,161 @@ the Free Software Foundation; either version 2 of the License, or
 
 This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
-*********************************************************************/
+*/
 
-import QtQuick 2.0
+import QtQuick 2.13
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import "../components"
 
 PlasmaCore.ColorScope {
-    id: block
+    id: root
+
+    property string password
+
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
 
-    Rectangle {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+    FastBlur {
+        id: blur
+        anchors.fill: parent
+        source: wallpaper
+        radius: 32
+        visible: false
+    }
+
+    MultiPointTouchArea {
+        anchors.fill: parent
+
+        onGestureStarted: {
+            numBlock.visible = true
+            blur.visible = true
+        }
+    }
+
+    DropShadow {
+        id: clockShadow
+        anchors.fill: clock
+        source: clock
+        horizontalOffset: 1
+        verticalOffset: 1
+        radius: 6
+        samples: 14
+        spread: 0.3
         color: PlasmaCore.ColorScope.backgroundColor
-        opacity: 0.8
-        height: infoPane.height + units.largeSpacing * 2
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: 1000
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
 
-    InfoPane {
-        id: infoPane
+    Clock {
+        id: clock
+
+        property Item shadow: clockShadow
+
+        anchors.leftMargin: units.gridUnit
+        anchors.rightMargin: units.gridUnit
+        anchors.topMargin: units.gridUnit * 3
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.topMargin: units.largeSpacing
     }
 
-    Rectangle {
+    Row {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: numBlock.top
+        anchors.bottomMargin: units.gridUnit * 2
+        spacing: 6
+
+        Repeater {
+            model: root.password.length
+            delegate: Rectangle {
+                width: units.gridUnit * 2
+                height: width
+                radius: width
+                color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.6)
+            }
+        }
+    }
+
+    GridLayout {
+        id: numBlock
+        visible: false
+        property string thePw
+
+        height: units.gridUnit * 16
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        color: PlasmaCore.ColorScope.backgroundColor
-        opacity: 0.8
-        height: mainLayout.height + units.largeSpacing * 2
-    }
+        anchors.bottomMargin: units.gridUnit
+        anchors.leftMargin: units.gridUnit * 2
+        anchors.rightMargin: units.gridUnit *2
+        rowSpacing: units.gridUnit
 
-    ColumnLayout {
-        id: mainLayout
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            bottomMargin: units.largeSpacing
-        }
-        spacing: units.largeSpacing
-        RowLayout {
-            Layout.alignment: Qt.AlignHCenter
+        columns: 3
 
-            PlasmaComponents.TextField {
-                id: passwordInput
-                placeholderText: i18nd("plasma_lookandfeel_org.kde.lookandfeel","Password")
-                echoMode: TextInput.Password
-                enabled: !authenticator.graceLocked
-                onAccepted: actionButton.clicked(null)
-                focus: false
+        Repeater {
+            model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "0", "E"]
+            delegate: Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-                onVisibleChanged: {
-                    if (visible) {
-                        forceActiveFocus();
-                    }
-                    text = "";
-                }
-                onTextChanged: {
-                    if (text == "") {
-                        clearTimer.stop();
-                    } else {
-                        clearTimer.restart();
+                Rectangle {
+                    anchors.centerIn: parent
+                    width: units.gridUnit * 3
+                    height: width
+                    radius: 12
+                    color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, ma.pressed ? 0.8 : 0.3)
+                    visible: modelData.length > 0
+
+                    MouseArea {
+                        id: ma
+                        anchors.fill: parent
+                        onClicked: {
+                            if (modelData === "R") {
+                                root.password = root.password.substr(0, root.password.length - 1);
+                            } else if (modelData === "E") {
+                                authenticator.tryUnlock(root.password);
+                            } else {
+                                root.password += modelData
+                            }
+                        }
                     }
                 }
 
-                Timer {
-                    id: clearTimer
-                    interval: 30000
-                    repeat: false
-                    onTriggered: {
-                        passwordInput.text = "";
-                    }
+                PlasmaComponents.Label {
+                    visible: modelData !== "R" && modelData !== "E"
+                    text: modelData
+                    anchors.centerIn: parent
+                    font.pointSize: 20
+                }
+
+                PlasmaCore.IconItem {
+                    visible: modelData === "R"
+                    anchors.centerIn: parent
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                    source: "edit-clear"
+                }
+
+                PlasmaCore.IconItem {
+                    visible: modelData === "E"
+                    anchors.centerIn: parent
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                    source: "go-next"
                 }
             }
-
-            DialerIconButton {
-                source: "edit-clear"
-                callback: function() {
-                    if (passwordInput.text.length > 0) {
-                        passwordInput.text = passwordInput.text.substr(0, passwordInput.text.length - 1);
-                    }
-                }
-            }
-        }
-        Dialer {
-            id: dialer
-            Layout.fillWidth: true
-        }
-        PlasmaComponents.Button {
-            id: actionButton
-            Layout.alignment: Qt.AlignHCenter
-            Layout.minimumWidth: passwordInput.width
-            text: i18n("Unlock")
-            enabled: !authenticator.graceLocked
-            onClicked: authenticator.tryUnlock(passwordInput.text);
         }
     }
 }
