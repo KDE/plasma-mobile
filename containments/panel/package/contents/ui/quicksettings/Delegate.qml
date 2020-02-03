@@ -28,10 +28,11 @@ ColumnLayout {
     spacing: units.smallSpacing
 
     Rectangle {
-        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 6
+        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 2
         Layout.minimumHeight: width
         Layout.alignment: Qt.AlignHCenter
-        radius: width
+        radius: units.smallSpacing
+        border.color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, 0.2)
         color: toggled ? 
             Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
             Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.1)
@@ -40,7 +41,7 @@ ColumnLayout {
             colorGroup: PlasmaCore.ColorScope.colorGroup
             anchors {
                 fill: parent
-                margins: units.smallSpacing * 3
+                margins: units.smallSpacing * 2
             }
             source: model.icon
             MouseArea {
