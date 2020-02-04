@@ -42,7 +42,6 @@ NanoShell.FullScreenOverlay {
 
     width: Screen.width
     height: Screen.height
-    
 
     function open() {
         window.showFullScreen();
