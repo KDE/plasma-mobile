@@ -55,6 +55,7 @@ ColumnLayout {
                         root[model.toggleFunction]();
                     } else if (model.settingsCommand) {
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                        root.closeRequested();
                     }
                 }
             }
