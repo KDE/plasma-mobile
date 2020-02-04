@@ -182,6 +182,11 @@ NanoShell.FullScreenOverlay {
                 easing.type: Easing.InOutQuad
             }
         }
+        MouseArea {
+            parent: tasksView.contentItem
+            anchors.fill:parent
+            onClicked: window.hide()
+        }
     }
 
     PlasmaComponents.RoundButton {
