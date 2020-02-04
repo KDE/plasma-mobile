@@ -180,7 +180,7 @@ Item {
         if (widgetExplorerStack.source != "") {
             widgetExplorerStack.source = "";
         } else {
-            widgetExplorerStack.setSource(desktop.fileFromPackage("explorer", "WidgetExplorer.qml"), {"containment": root.containment})
+            widgetExplorerStack.setSource(desktop.fileFromPackage("explorer", "WidgetExplorer.qml"), {"containment": containment, "containmentInterface": root.containment})
         }
     }
 
