@@ -258,7 +258,7 @@ PlasmaCore.ColorScope {
             DrawerBackground {
                 id: quickSettingsParent
                 anchors.fill: parent
-                z: 1
+                z: 4
                 contentItem: QuickSettings {
                     id: quickSettings
                     onCloseRequested: {
@@ -270,7 +270,7 @@ PlasmaCore.ColorScope {
 
             ListView {
                 id: fullRepresentationView
-                z: 4
+                z: 1
                 parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
                 anchors {
                     left: parent.left
