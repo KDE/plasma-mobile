@@ -27,6 +27,7 @@ ColumnLayout {
     property bool toggled: model.enabled
     spacing: units.smallSpacing
     signal closeRequested
+    signal panelClosed
 
     Rectangle {
         Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 2

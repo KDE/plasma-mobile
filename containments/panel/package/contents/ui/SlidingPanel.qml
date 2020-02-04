@@ -40,6 +40,8 @@ NanoShell.FullScreenOverlay {
     property alias contentItem: contentArea.contentItem
     property int headerHeight
 
+    signal closed
+
     width: Screen.width
     height: Screen.height
 
@@ -89,6 +91,7 @@ NanoShell.FullScreenOverlay {
         ScriptAction {
             script: {
                 window.visible = false;
+                window.closed();
             }
         }
     }

@@ -247,6 +247,8 @@ PlasmaCore.ColorScope {
         openThreshold: units.gridUnit * 10
         headerHeight: root.height
 
+        onClosed: quickSettings.closed()
+
         contentItem: Item {
             id: panelContents
             anchors.fill: parent

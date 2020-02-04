@@ -29,6 +29,7 @@ Item {
     implicitHeight: flow.implicitHeight + units.smallSpacing * 6
 
     signal closeRequested
+    signal closed
 
     function toggleAirplane() {
         print("toggle airplane mode")
@@ -193,13 +194,18 @@ Item {
         Repeater {
             model: settingsModel
             delegate: Loader {
+                id: loader
                 //FIXME: why this is needed?
                 width: flow.columnWidth
                 height: item ? item.implicitHeight : 0
                 source: Qt.resolvedUrl((model.delegate ? model.delegate : "Delegate") + ".qml")
                 Connections {
-                    target: item
-                    onCloseRequested: root.closeRequested()
+                    target: loader.item
+                    onCloseRequested: root.closeRequested();
+                }
+                Connections {
+                    target: root
+                    onClosed: loader.item.panelClosed();
                 }
             }
         }
