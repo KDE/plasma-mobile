@@ -259,6 +259,9 @@ PlasmaCore.ColorScope {
                 z: 1
                 contentItem: QuickSettings {
                     id: quickSettings
+                    onCloseRequested: {
+                        slidingPanel.hide()
+                    }
                 }
             }
 

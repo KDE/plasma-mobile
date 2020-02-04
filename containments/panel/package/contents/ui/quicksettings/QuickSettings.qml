@@ -28,6 +28,8 @@ Item {
     implicitWidth: flow.implicitWidth + units.smallSpacing * 6
     implicitHeight: flow.implicitHeight + units.smallSpacing * 6
 
+    signal closeRequested
+
     function toggleAirplane() {
         print("toggle airplane mode")
     }
@@ -195,6 +197,10 @@ Item {
                 width: flow.columnWidth
                 height: item ? item.implicitHeight : 0
                 source: Qt.resolvedUrl((model.delegate ? model.delegate : "Delegate") + ".qml")
+                Connections {
+                    target: item
+                    onCloseRequested: root.closeRequested()
+                }
             }
         }
         move: Transition {

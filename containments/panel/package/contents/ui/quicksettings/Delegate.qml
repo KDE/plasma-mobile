@@ -26,6 +26,7 @@ ColumnLayout {
     id: delegateRoot
     property bool toggled: model.enabled
     spacing: units.smallSpacing
+    signal closeRequested
 
     Rectangle {
         Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 2
@@ -93,6 +94,7 @@ ColumnLayout {
             onClicked: {
                 if (model.settingsCommand) {
                     plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                    closeRequested();
                 } else if (model.toggleFunction) {
                     root[model.toggleFunction]();
                 }
