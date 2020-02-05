@@ -58,6 +58,16 @@ Item {
                     focus: true
                 }
             }
+            PlasmaCore.IconItem {
+                anchors {
+                    bottom: parent.bottom
+                    right: parent.right
+                }
+                width: Math.min(parent.width, parent.height) * 0.8
+                height: width
+                opacity: 0.2
+                source: "search"
+            }
             Controls.ScrollView {
                 anchors.fill: parent
                 Milou.ResultsListView {
