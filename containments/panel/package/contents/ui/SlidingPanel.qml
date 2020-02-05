@@ -108,7 +108,6 @@ NanoShell.FullScreenOverlay {
     Rectangle {
         anchors {
             fill: parent
-            topMargin: headerHeight
         }
         color: "black"
         opacity: 0.6 * Math.min(1, offset/contentArea.height)
