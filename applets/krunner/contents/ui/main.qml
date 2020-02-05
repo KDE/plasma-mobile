@@ -28,43 +28,50 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.milou 0.1 as Milou
 import org.kde.kirigami 2.10 as Kirigami
 
-PlasmaComponents.TextField {
-    id: bigClock
-
+Item {
     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-    text: i18n("Search...")
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
-    MouseArea {
-        anchors.fill: parent
-        onClicked: window.showMaximized()
-    }
-    Kirigami.AbstractApplicationWindow {
-        id: window
-        visible: false
-        onVisibleChanged: {
-            if (visible) {
-                queryField.forceActiveFocus();
-            }
-        }
-        header: Controls.ToolBar {
-            contentItem: Kirigami.SearchField {
-                id: queryField
-                focus: true
-            }
-        }
-        Controls.ScrollView {
-            anchors.fill: parent
-            Milou.ResultsListView {
-                id: listView
-                queryString: queryField.text
-                highlight: null
-                PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-                anchors.rightMargin: 10
 
-                onActivated: queryField.text = ""
-                onUpdateQueryString: {
-                    queryField.text = text
-                    queryField.cursorPosition = cursorPosition
+    PlasmaComponents.TextField {
+        id: bigClock
+
+        anchors {
+            fill: parent
+            margins: units.gridUnit
+        }
+        text: i18n("Search...")
+        MouseArea {
+            anchors.fill: parent
+            onClicked: window.showMaximized()
+        }
+        Kirigami.AbstractApplicationWindow {
+            id: window
+            visible: false
+            onVisibleChanged: {
+                if (visible) {
+                    queryField.forceActiveFocus();
+                }
+            }
+            header: Controls.ToolBar {
+                contentItem: Kirigami.SearchField {
+                    id: queryField
+                    focus: true
+                }
+            }
+            Controls.ScrollView {
+                anchors.fill: parent
+                Milou.ResultsListView {
+                    id: listView
+                    queryString: queryField.text
+                    highlight: null
+                    PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+                    anchors.rightMargin: 10
+
+                    onActivated: queryField.text = ""
+                    onUpdateQueryString: {
+                        queryField.text = text
+                        queryField.cursorPosition = cursorPosition
+                    }
                 }
             }
         }

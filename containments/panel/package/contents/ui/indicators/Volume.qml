@@ -38,6 +38,8 @@ PlasmaCore.IconItem {
         ? iconName(paSinkModel.preferredSink.volume, paSinkModel.preferredSink.muted)
         : iconName(0, true)
 
+    colorGroup: PlasmaCore.ColorScope.colorGroup
+
     visible: paSinkModel.preferredSink.muted
 
     function iconName(volume, muted, prefix) {

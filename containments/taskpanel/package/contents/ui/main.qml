@@ -19,6 +19,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+import QtGraphicalEffects 1.12
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.plasmoid 2.0
@@ -30,7 +31,7 @@ PlasmaCore.ColorScope {
     id: root
     width: 600
     height: 480
-    //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    colorGroup: showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
@@ -100,7 +101,18 @@ PlasmaCore.ColorScope {
             }
         }
 
+        DropShadow {
+            anchors.fill: icons
+            visible: !showinApp
+            horizontalOffset: 0
+            verticalOffset: 1
+            radius: 4.0
+            samples: 17
+            color: Qt.rgba(0,0,0,0.8)
+            source: icons
+        }
         Item {
+            id: icons
             anchors.fill: parent
 
             visible: plasmoid.configuration.PanelButtonsVisible
@@ -108,7 +120,7 @@ PlasmaCore.ColorScope {
             Rectangle {
                 anchors.fill: parent
                 color: root.backgroundColor
-                opacity: showingApp ? 1 : 0.9
+                opacity: showingApp ? 1 : 0
                 Rectangle {
                     anchors {
                         left: parent.left

@@ -141,7 +141,7 @@ Item {
         width: parent.width
         anchors {
             fill: parent
-            topMargin: plasmoid.availableScreenRect.y + krunner.inputHeight
+            topMargin: plasmoid.availableScreenRect.y
             bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         
@@ -321,16 +321,16 @@ Item {
         //y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
     }
 
-    KRunner {
-        id: krunner
-        z: 998
-        height: plasmoid.availableScreenRect.height
-        topPadding: plasmoid.availableScreenRect.y
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-    }
+//     KRunner {
+//         id: krunner
+//         z: 998
+//         height: plasmoid.availableScreenRect.height
+//         topPadding: plasmoid.availableScreenRect.y
+//         anchors {
+//             top: parent.top
+//             left: parent.left
+//             right: parent.right
+//         }
+//     }
 }
 

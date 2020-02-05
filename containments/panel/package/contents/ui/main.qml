@@ -19,6 +19,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQml.Models 2.12
+import QtGraphicalEffects 1.12
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -32,11 +33,10 @@ import "LayoutManager.js" as LayoutManager
 import "quicksettings"
 import "indicators" as Indicators
 
-PlasmaCore.ColorScope {
+Item {
     id: root
     width: 480
     height: 30
-    //colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
 
@@ -143,8 +143,21 @@ PlasmaCore.ColorScope {
         interval: 60 * 1000
     }
 
-    Item {
+    DropShadow {
+        anchors.fill: icons
+        visible: !showinApp
+        horizontalOffset: 0
+        verticalOffset: 1
+        radius: 4.0
+        samples: 17
+        color: Qt.rgba(0,0,0,0.8)
+        source: icons
+    }
+
+    PlasmaCore.ColorScope {
+        id: icons
         z: 1
+        colorGroup: showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
         //parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
         anchors {
             left: parent.left
