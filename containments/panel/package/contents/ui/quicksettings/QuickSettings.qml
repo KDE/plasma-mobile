@@ -160,17 +160,6 @@ Item {
             "settingsCommand": "",
             "applet": null
         });
-        if (plasmoid.configuration.ShowPowerButton) {
-            settingsModel.append({
-                "text": i18n("Shutdown"),
-                "icon": "system-shutdown-symbolic",
-                "enabled": false,
-                "settingsCommand": "",
-                "toggleFunction": "requestShutdown",
-                "plasmoidId": -1,
-                "applet": null
-            });
-        }
 
         brightnessSlider.moved.connect(function() {
             root.screenBrightness = brightnessSlider.value;

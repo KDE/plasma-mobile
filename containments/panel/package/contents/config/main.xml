@@ -9,10 +9,6 @@
     <entry name="AppletOrder" type="String">
       <label>encoded order of items</label>
     </entry>
-    <entry name="ShowPowerButton" type="Bool">
-      <default>true</default>
-      <label>optional power button</label>
-    </entry>
   </group>
 
 </kcfg>
