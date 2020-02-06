@@ -116,7 +116,7 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
 
             visible: plasmoid.configuration.PanelButtonsVisible
-
+/*
             Rectangle {
                 anchors.fill: parent
                 color: root.backgroundColor
@@ -130,6 +130,19 @@ PlasmaCore.ColorScope {
                     height: 1
                     color: PlasmaCore.ColorScope.textColor
                     opacity: 0.2
+                }
+            }*/
+            Rectangle {
+                anchors.fill: parent
+                gradient: Gradient {
+                    GradientStop {
+                        position: 0
+                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : "transparent"
+                    }
+                    GradientStop {
+                        position: 1
+                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : Qt.rgba(0, 0, 0, 0.2)
+                    }
                 }
             }
 

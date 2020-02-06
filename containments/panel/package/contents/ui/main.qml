@@ -167,8 +167,16 @@ Item {
         height: root.height
         Rectangle {
             anchors.fill: parent
-            color: PlasmaCore.ColorScope.backgroundColor
-            opacity: showingApp
+            gradient: Gradient {
+                GradientStop {
+                    position: 1.0
+                    color: showingApp ? icons.backgroundColor : "transparent"
+                }
+                GradientStop {
+                    position: 0.0
+                    color: showingApp ? icons.backgroundColor : Qt.rgba(0, 0, 0, 0.2)
+                }
+            }
         }
 
         Loader {
