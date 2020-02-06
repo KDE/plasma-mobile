@@ -17,13 +17,11 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.7
 import QtQuick.Controls 2.2 as Controls
 import QtQuick.Layouts 1.1
-import org.kde.kirigami 2.8 as Kirigami
+import org.kde.kirigami 2.10 as Kirigami
 import org.kde.people 1.0 as KPeople
-import org.kde.plasma.core 2.0 as PlasmaCore
-
 
 Item {
     Controls.Label {
@@ -38,104 +36,46 @@ Item {
         Kirigami.SearchField {
             id: searchField
             Layout.fillWidth: true
+            onTextChanged: contactsProxyModel.setFilterFixedString(text)
         }
 
-        Controls.ScrollView {
-            id: contactScrollView
+        ListView {
+            id: contactsList
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Controls.ScrollBar.vertical.policy: Controls.ScrollBar.AlwaysOn
 
-            contentItem: ListView {
-                id: contactsList
+            section.property: "display"
+            section.criteria: ViewSection.FirstCharacter
+            section.delegate: Kirigami.ListSectionHeader {text: section}
+            clip: true
 
-                property string numberToCall
-
-                section.property: "display"
-                section.criteria: ViewSection.FirstCharacter
-                clip: true
-                model: PlasmaCore.SortFilterModel {
-                    sourceModel: KPeople.PersonsSortFilterProxyModel {
-                        sourceModel: KPeople.PersonsModel {
-                            id: contactsModel
-                        }
-                        requiredProperties: "phoneNumber"
-                    }
-                    sortRole: "display"
-                    filterRole: "display"
-                    filterRegExp: ".*" + searchField.text + ".*"
-                    sortOrder: Qt.AscendingOrder
+            model: KPeople.PersonsSortFilterProxyModel {
+                id: contactsProxyModel
+                sourceModel: KPeople.PersonsModel {
+                    id: contactsModel
                 }
+                requiredProperties: "phoneNumber"
+                filterRole: Qt.DisplayRole
+                sortRole: Qt.DisplayRole
+                filterCaseSensitivity: Qt.CaseInsensitive
+                Component.onCompleted: sort(0)
+            }
 
-        //         PlasmaCore.SortFilterModel {
-        //             sortRole: "display"
-        //             sourceModel:
-        //         }
+            boundsBehavior: Flickable.StopAtBounds
 
-                boundsBehavior: Flickable.StopAtBounds
+            Component {
+                id: contactListDelegate
 
-                delegate: Kirigami.SwipeListItem {
-                    height: Kirigami.Units.gridUnit * 6
-                    enabled: true
-                    clip: true
-
-                    onClicked: {
-                            contactsList.numberToCall = model.phoneNumber;
-                    }
-
-                    actions: [
-                        Kirigami.Action {
-                            icon.name: "call-start"
-                            text: i18n("Call")
-                            onTriggered: call(contactsList.numberToCall)
-                        },
-                        Kirigami.Action {
-                            icon.name: "configure-shortcuts"
-                            text: i18n("Send Message")
-                        }
-                    ]
-
-
-                    RowLayout {
-                        id: mainLayout
-                        anchors.fill: parent
-                        spacing: 10
-
-                        RoundImage {
-                            id: avatar
-                            source: model.decoration
-                            isRound: true
-
-                            Layout.preferredHeight: parent.height - Kirigami.Units.gridUnit
-                            Layout.preferredWidth: parent.height - Kirigami.Units.gridUnit
-                        }
-
-                        ColumnLayout {
-                            // contact name
-                            Kirigami.Heading {
-                                id: nickLabel
-                                text: model.display
-                                textFormat: Text.PlainText
-                                elide: Text.ElideRight
-                                maximumLineCount: 1
-                                level: 3
-                                Layout.fillWidth: true
-                            }
-
-                            Controls.Label {
-                                id: dataLabel
-                                text: model.phoneNumber
-
-                                elide: Text.ElideRight
-                                visible: dataLabel.text !== nickLabel.text
-                            }
-                        }
-                    }
+                Kirigami.BasicListItem {
+                    icon: model.decoration
+                    label: model.display
+//                     onClicked: dialerUtils.dial(model.phoneNumber)
                 }
+            }
 
-                CustomSectionScroller {
-                    listView: contactsList
-                }
+            delegate: Kirigami.DelegateRecycler {
+                width: parent.width
+                sourceComponent: contactListDelegate
             }
         }
     }

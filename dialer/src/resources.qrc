@@ -7,10 +7,8 @@
         <file alias="Dialer/Dialer.qml">qml/Dialer/Dialer.qml</file>
         <file alias="Dialer/ContactsList.qml">qml/Dialer/ContactsList.qml</file>
         <file alias="Dialer/DialPage.qml">qml/Dialer/DialPage.qml</file>
-        <file alias="Dialer/private/SectionScroller.js">qml/Dialer/private/SectionScroller.js</file>
         <file alias="Dialer/RoundImage.qml">qml/Dialer/RoundImage.qml</file>
         <file alias="Dialer/History.qml">qml/Dialer/History.qml</file>
-        <file alias="Dialer/CustomSectionScroller.qml">qml/Dialer/CustomSectionScroller.qml</file>
         <file alias="Dialer/HistoryDelegate.qml">qml/Dialer/HistoryDelegate.qml</file>
         <file alias="Dialpad/Dialpad.qml">qml/Dialpad/Dialpad.qml</file>
         <file alias="Dialpad/PhoneNumberInput.qml">qml/Dialpad/PhoneNumberInput.qml</file>
