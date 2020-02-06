@@ -45,10 +45,6 @@ Kirigami.Page {
         QQC2.Label {
             id: status
 
-            onTextChanged: {
-                text = dialerUtils.formatNumber(text);
-            }
-
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignBottom
 
