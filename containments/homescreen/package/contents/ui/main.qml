@@ -143,7 +143,7 @@ Item {
         anchors {
             fill: parent
             topMargin: plasmoid.availableScreenRect.y
-            bottomMargin: favoriteStrip.height//plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         
         //bottomMargin: favoriteStrip.height
