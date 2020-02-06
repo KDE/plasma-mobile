@@ -28,7 +28,7 @@ import org.kde.kirigami 2.0 as Kirigami
 
 import org.kde.plasma.dialer 1.0
 
-ApplicationWindow {
+Kirigami.ApplicationWindow {
     id: root
 
 //BEGIN PROPERTIES
@@ -42,6 +42,7 @@ ApplicationWindow {
     //was the last call an incoming one?
     property bool isIncoming
 
+    pageStack.globalToolBar.style:Kirigami.ApplicationHeaderStyle.Titles
 //END PROPERTIES
 
 //BEGIN SIGNAL HANDLERS
@@ -82,40 +83,27 @@ ApplicationWindow {
 
 //END MODELS
 
-//BEGIN UI
-    PlasmaExtras.ConditionalLoader {
-        anchors.fill: parent
+    pageStack.initialPage: dialerUtils.callState == "idle" || dialerUtils.callState == "failed" ? [Qt.resolvedUrl("HistoryPage.qml"), Qt.resolvedUrl("ContactsPage.qml"), Qt.resolvedUrl("DialerPage.qml")] : Qt.resolvedUrl("Call/CallPage.qml")
 
-        property bool shouldShow: root.visible && (dialerUtils.callState == "idle" || dialerUtils.callState == "failed")
+    footer: TabBar {
+        height: 50
 
-        when: shouldShow
-        source: Qt.resolvedUrl("Dialer/DialPage.qml")
-        z: shouldShow ? 2 : 0
-        opacity: shouldShow ? 1 : 0
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: Kirigami.Units.shortDuration
-                easing.type: Easing.InOutQuad
-            }
+        currentIndex: pageStack.currentIndex
+
+        TabButton {
+            text: "Foo"
+            icon.name: "view-pim-contacts"
+            onClicked: pageStack.currentIndex = 0
+        }
+        TabButton {
+            text: "Contacts"
+            icon.name: "view-pim-contacts"
+            onClicked: pageStack.currentIndex = 1
+        }
+        TabButton {
+            text: "Dialer"
+            icon.name: "view-pim-contacts"
+            onClicked: pageStack.currentIndex = 2
         }
     }
-
-    PlasmaExtras.ConditionalLoader {
-        anchors.fill: parent
-
-        property bool shouldShow: dialerUtils.callState != "idle" && dialerUtils.callState != "failed"
-
-        when: shouldShow
-        source: Qt.resolvedUrl("Call/CallPage.qml")
-        opacity: shouldShow ? 1 : 0
-        z:  shouldShow ? 2 : 0
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: Kirigami.Units.shortDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-    }
-
-//END UI
 }

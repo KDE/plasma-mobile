@@ -22,10 +22,11 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.kirigami 2.5 as Kirigami
 
 import "../Dialpad"
 
-Item {
+Kirigami.Page {
     id: callPage
 
     property string status: dialerUtils.callState

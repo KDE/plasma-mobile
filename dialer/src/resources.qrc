@@ -1,15 +1,13 @@
 <RCC>
     <qresource prefix="/">
         <file alias="main.qml">qml/main.qml</file>
+        <file alias="DialerPage.qml">qml/DialerPage.qml</file>
+        <file alias="ContactsPage.qml">qml/ContactsPage.qml</file>
+        <file alias="HistoryPage.qml">qml/HistoryPage.qml</file>
         <file alias="Call/AnswerSwipe.qml">qml/Call/AnswerSwipe.qml</file>
         <file alias="Call/CallPage.qml">qml/Call/CallPage.qml</file>
         <file alias="Call/Avatar.qml">qml/Call/Avatar.qml</file>
-        <file alias="Dialer/Dialer.qml">qml/Dialer/Dialer.qml</file>
-        <file alias="Dialer/ContactsList.qml">qml/Dialer/ContactsList.qml</file>
-        <file alias="Dialer/DialPage.qml">qml/Dialer/DialPage.qml</file>
-        <file alias="Dialer/RoundImage.qml">qml/Dialer/RoundImage.qml</file>
-        <file alias="Dialer/History.qml">qml/Dialer/History.qml</file>
-        <file alias="Dialer/HistoryDelegate.qml">qml/Dialer/HistoryDelegate.qml</file>
+        <file alias="HistoryDelegate.qml">qml/HistoryDelegate.qml</file>
         <file alias="Dialpad/Dialpad.qml">qml/Dialpad/Dialpad.qml</file>
         <file alias="Dialpad/PhoneNumberInput.qml">qml/Dialpad/PhoneNumberInput.qml</file>
         <file alias="Dialpad/DialerButton.qml">qml/Dialpad/DialerButton.qml</file>

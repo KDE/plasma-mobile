@@ -20,42 +20,40 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.5 as QQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
-import "../Dialpad"
+import org.kde.kirigami 2.9 as Kirigami
+import "Dialpad"
 
-Item {
+Kirigami.Page {
     id: dialer
 
     property alias numberEntryText: status.text
 
-    Rectangle {
-        width: parent.width / 2
-        x: parent.width / 4
-        y: parent.height - callStatusNotification.paintedHeight
-        color: PlasmaCore.ColorScope.backgroundColor
-        opacity: 0.6
+    title: i18n("Dialer")
+    header: Kirigami.InlineMessage {
+        type: Kirigami.MessageType.Error
+        text: i18n("Unable to make a call at this moment")
         visible: dialerUtils.callState == "failed"
-
-        PlasmaComponents.Label {
-            id: callStatusNotification
-            anchors.fill: parent
-            text: "Unable to make a call at this moment"
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.WordWrap
-            color: PlasmaCore.ColorScope.textColor
-        }
     }
 
     ColumnLayout {
         id: dialPadArea
         anchors.fill: parent
 
-        PhoneNumberInput {
+        QQC2.Label {
             id: status
 
+            onTextChanged: {
+                text = dialerUtils.formatNumber(text);
+            }
+
+            horizontalAlignment: Qt.AlignHCenter
+            verticalAlignment: Qt.AlignBottom
+
             Layout.fillWidth: true
-            Layout.topMargin: units.largeSpacing * 3
+            Layout.topMargin: units.largeSpacing * 2
             Layout.bottomMargin: units.largeSpacing
             Layout.minimumHeight: units.gridUnit * 3
             Layout.maximumHeight: Layout.minimumHeight
@@ -67,10 +65,12 @@ Item {
             Layout.fillHeight: true
 
             callback: function (string) {
-                status.append(string)
+                var newText = status.text + string
+                status.text = dialerUtils.formatNumber(newText);
             }
             deleteCallback: function () {
-                status.pop()
+                var newText = status.text.slice(0, -1)
+                status.text = dialerUtils.formatNumber(newText);
             }
             pressedCallback: function (string) {
                 // TODO
