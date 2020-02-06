@@ -31,6 +31,8 @@ Item {
     signal closeRequested
     signal closed
 
+    property bool screenshotRequested: false
+
     function toggleAirplane() {
         print("toggle airplane mode")
     }
@@ -70,6 +72,18 @@ Item {
             operation.brightness = screenBrightness;
             operation.silent = true
             service.startOperationCall(operation);
+        }
+    }
+
+    function requestScreenshot() {
+        screenshotRequested = true;
+        root.closeRequested();
+    }
+
+    onClosed: {
+        if (screenshotRequested) {
+            plasmoid.nativeInterface.takeScreenshot();
+            screenshotRequested = false;
         }
     }
 
@@ -158,6 +172,14 @@ Item {
             "icon": "find-location-symbolic",
             "enabled": false,
             "settingsCommand": "",
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Screenshot"),
+            "icon": "spectacle",
+            "enabled": false,
+            "settingsCommand": "",
+            "toggleFunction": "requestScreenshot",
             "applet": null
         });
 

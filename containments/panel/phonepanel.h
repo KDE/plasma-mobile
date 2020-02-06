@@ -38,6 +38,7 @@ public:
 public Q_SLOTS:
     void executeCommand(const QString &command);
     void toggleTorch();
+    void takeScreenshot();
 
 private:
     GstElement* m_pipeline;

@@ -20,8 +20,15 @@
 
 #include "phonepanel.h"
 
+#include <QDateTime>
+#include <QDBusPendingReply>
+#include <QFile>
 #include <QDebug>
+#include <QStandardPaths>
 #include <QProcess>
+#include <QtConcurrent/QtConcurrent>
+
+#include "screenshotinterface.h"
 
 PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
@@ -69,6 +76,52 @@ void PhonePanel::toggleTorch()
         gst_object_unref(m_pipeline);
         m_running = false;
     }
+}
+
+void PhonePanel::takeScreenshot()
+{
+    auto *interface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
+    QDBusPendingReply<QString> reply = interface->screenshotFullscreen();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<QString> reply = *watcher;
+
+        if (reply.isError()) {
+            qWarning() << "Creating the screenshot failed:" << reply.error().name() << reply.error().message();
+        } else {
+            QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+            if (filePath.isEmpty()) {
+                qWarning() << "Couldn't find a writable location for the screenshot! The screenshot is in /tmp.";
+                return;
+            }
+
+            QDir picturesDir(filePath);
+            if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
+                qWarning() << "Couldn't create folder at"
+                           << picturesDir.path() + QStringLiteral("/Screenshots")
+                           << "to take screenshot.";
+                return;
+            }
+
+            filePath += QStringLiteral("/Screenshots/Screenshot_%1.png")
+                            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
+
+            const QString currentPath = reply.argumentAt<0>();
+            QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
+                QFile screenshotFile(currentPath);
+                if (!screenshotFile.rename(filePath)) {
+                    qWarning() << "Couldn't move screenshot into Pictures folder:"
+                               << screenshotFile.errorString();
+                }
+
+                qDebug() << "Successfully saved screenshot at" << filePath;
+            });
+        }
+
+        watcher->deleteLater();
+        interface->deleteLater();
+    });
 }
 
 K_EXPORT_PLASMA_APPLET_WITH_JSON(quicksettings, PhonePanel, "metadata.json")
