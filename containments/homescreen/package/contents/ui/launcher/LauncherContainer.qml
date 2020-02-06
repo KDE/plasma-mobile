@@ -41,7 +41,7 @@ Item {
     property alias flow: applicationsFlow
 
     implicitWidth: frame.implicitWidth
-    implicitHeight: frame.implicitHeight
+    implicitHeight: Math.max(units.gridUnit*3, frame.implicitHeight)
 
     Controls.Label {
         id: metrics
@@ -69,7 +69,7 @@ Item {
 
         background: PlasmaCore.FrameSvgItem {
             id: frameSvg
-            imagePath: "widgets/background"
+            //imagePath: "widgets/background"
             anchors.fill: parent
         }
 

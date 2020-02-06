@@ -139,13 +139,14 @@ Item {
     Flickable {
         id: mainFlickable
         width: parent.width
+        clip: true
         anchors {
             fill: parent
             topMargin: plasmoid.availableScreenRect.y
-            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: favoriteStrip.height//plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         
-        bottomMargin: favoriteStrip.height
+        //bottomMargin: favoriteStrip.height
         contentWidth: width
         contentHeight: flickableContents.height
         interactive: !plasmoid.editMode && !launcherDragManager.active
@@ -172,14 +173,14 @@ Item {
         Column {
             id: flickableContents
             width: mainFlickable.width
-            spacing: Math.max(0, favoriteStrip.frame.height + favoriteStrip.anchors.bottomMargin - mainFlickable.contentY)
+            spacing: 0
 
             DragDrop.DropArea {
                 anchors {
                     left: parent.left
                     right: parent.right
                 }
-                height: mainFlickable.height - favoriteStrip.frame.height //TODO: multiple widgets pages
+                height: mainFlickable.height //TODO: multiple widgets pages
 
                 onDragEnter: {
                     event.accept(event.proposedAction);
@@ -308,6 +309,23 @@ Item {
         elementId: "down-arrow"
     }
 
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: favoriteStrip.top
+            leftMargin: units.gridUnit
+            rightMargin: units.gridUnit
+        }
+        height: 1
+        opacity: mainFlickable.contentY > 0 ? 0.6 : 0
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.longDuration * 2
+                easing.type: Easing.InOutQuad
+            }
+        }
+    }
     Launcher.FavoriteStrip {
         id: favoriteStrip
         anchors {
@@ -320,17 +338,5 @@ Item {
         launcherGrid: launcher
         //y: Math.max(krunner.inputHeight, root.height - height - mainFlickable.contentY)
     }
-
-//     KRunner {
-//         id: krunner
-//         z: 998
-//         height: plasmoid.availableScreenRect.height
-//         topPadding: plasmoid.availableScreenRect.y
-//         anchors {
-//             top: parent.top
-//             left: parent.left
-//             right: parent.right
-//         }
-//     }
 }
 

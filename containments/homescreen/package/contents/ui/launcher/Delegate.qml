@@ -149,15 +149,15 @@ ContainmentLayoutManager.ItemContainer {
                 }
                 //FIXME: export smallestReadableFont
                 font.pointSize: theme.defaultFont.pointSize * 0.9
-                color: model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
+                color: "white"//model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
 
-                layer.enabled: model.ApplicationLocationRole == ApplicationListModel.Desktop
+                layer.enabled: true//model.ApplicationLocationRole == ApplicationListModel.Desktop
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2
                     radius: 8.0
                     samples: 16
-                    color: Qt.rgba(0, 0, 0, 0.8)
+                    color: Qt.rgba(0, 0, 0, 1)
                 }
             }
         }
