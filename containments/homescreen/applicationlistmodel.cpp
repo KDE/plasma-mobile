@@ -52,8 +52,8 @@ void ApplicationListModel::loadSettings()
 {
     m_favorites = m_homeScreen->config().readEntry("Favorites", QStringList());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-    m_desktopItems = QSet<QString>(m_homeScreen->config().readEntry("DesktopItems", QStringList()).begin(),
-                          m_homeScreen->config().readEntry("DesktopItems", QStringList()).end());
+    const auto di = m_homeScreen->config().readEntry("DesktopItems", QStringList());
+    m_desktopItems = QSet<QString>(di.begin(), di.end());
 #else
     m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
 #endif
