@@ -63,7 +63,7 @@ Name[x-test]=xxPhonexx
 Name[zh_CN]=手机
 Name[zh_TW]=電話
 Type=Application
-Icon=call-start
+Icon=dialer
 Exec=plasmaphonedialer %u
 
 MimeType=x-scheme-handler/call
