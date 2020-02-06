@@ -59,19 +59,13 @@ Item {
     Controls.Control {
         id: frame
         anchors.centerIn: parent
-        implicitWidth: contentItem.implicitWidth + frameSvg.margins.top + frameSvg.margins.bottom
-        implicitHeight: contentItem.implicitHeight + frameSvg.margins.top + frameSvg.margins.bottom
+        implicitWidth: contentItem.implicitWidth
+        implicitHeight: contentItem.implicitHeight
 
-        leftPadding: frameSvg.margins.left
-        topPadding: frameSvg.margins.top
-        rightPadding: frameSvg.margins.right
-        bottomPadding: frameSvg.margins.bottom
-
-        background: PlasmaCore.FrameSvgItem {
-            id: frameSvg
-            //imagePath: "widgets/background"
-            anchors.fill: parent
-        }
+        leftPadding: 0
+        topPadding: 0
+        rightPadding: 0
+        bottomPadding: 0
 
         // With a mousearea, it will be possible to drag with touch also on empty places
         contentItem: MouseArea {
