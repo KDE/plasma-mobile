@@ -70,7 +70,6 @@ Item {
     }
 //END functions
 
-
     property bool componentComplete: false
     onWidthChanged: recalculateMaxFavoriteCount()
     onHeightChanged:recalculateMaxFavoriteCount()
@@ -150,6 +149,12 @@ Item {
         contentWidth: width
         contentHeight: flickableContents.height
         interactive: !plasmoid.editMode && !launcherDragManager.active
+
+        signal cancelEditModeForItemsRequested
+        onDragStarted: cancelEditModeForItemsRequested()
+        onDragEnded: cancelEditModeForItemsRequested()
+        onFlickStarted: cancelEditModeForItemsRequested()
+        onFlickEnded: cancelEditModeForItemsRequested()
 
         PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
             id: scrollabr

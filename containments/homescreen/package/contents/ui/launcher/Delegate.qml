@@ -50,6 +50,10 @@ ContainmentLayoutManager.ItemContainer {
 
     signal launch(int x, int y, var source, string title)
 
+    Connections {
+        target: mainFlickable
+        onCancelEditModeForItemsRequested: cancelEdit()
+    }
     onDragActiveChanged: {
         launcherDragManager.active = dragActive
         if (dragActive) {
