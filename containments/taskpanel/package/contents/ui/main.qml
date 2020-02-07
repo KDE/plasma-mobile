@@ -150,7 +150,7 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
-                enabled: taskSwitcher.tasksCount > 0;
+                enabled: taskSwitcher && taskSwitcher.tasksCount > 0;
                 iconSource: "box"
                 onClicked: {
                     plasmoid.nativeInterface.showDesktop = false;
@@ -167,7 +167,7 @@ PlasmaCore.ColorScope {
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "start-here-kde"
-                enabled: taskSwitcher.tasksCount > 0
+                enabled: taskSwitcher && taskSwitcher.tasksCount > 0
                 checkable: true
                 onCheckedChanged: {
                     taskSwitcher.hide();

@@ -165,7 +165,7 @@ Item {
         PlasmaComponents.Label {
             id: activityNameLabel
             anchors.centerIn: parent
-            text: activitiesView.nextContainment.activityName
+            text: activitiesView.nextContainment ? activitiesView.nextContainment.activityName : ""
         }
         Behavior on opacity {
             OpacityAnimator {
@@ -226,8 +226,8 @@ Item {
         id: pinOverlay
         anchors {
             fill: parent
-            topMargin: containment.availableScreenRect.y
-            bottomMargin: parent.height - containment.availableScreenRect.height - containment.availableScreenRect.y
+            topMargin: containment ? containment.availableScreenRect.y : 0
+            bottomMargin: parent.height - containment ? (containment.availableScreenRect.height + containment.availableScreenRect.y) : 0
         }
         z: 222
         source: Qt.resolvedUrl("Pin.qml")
