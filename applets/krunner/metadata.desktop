@@ -1,8 +1,28 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Search And Run
+Name[ca]=Cerca i executa
+Name[es]=Buscar y ejecutar
+Name[et]=Otsimine ja käivitamine
+Name[lt]=Ieškoti ir paleisti
+Name[nl]=Zoeken en uitvoeren
+Name[pt]=Pesquisar e Executar
+Name[pt_BR]=Pesquisar e executar
+Name[sv]=Sök och kör
+Name[uk]=Пошук і запуск
+Name[x-test]=xxSearch And Runxx
 
 Comment=Search and run Applications and services
+Comment[ca]=Cerca i executa aplicacions i serveis
+Comment[es]=Buscar y ejecutar aplicaciones y servicios
+Comment[et]=Rakenduste ja teenuste otsimine ja käivitamine
+Comment[lt]=Ieškoti ir paleisti programas bei tarnybas
+Comment[nl]=Zoeken en uitvoeren van toepassingen en services
+Comment[pt]=Pesquisa e executa aplicações e serviços
+Comment[pt_BR]=Pesquisa e executa aplicativos e serviços
+Comment[sv]=Sök och kör program och tjänster
+Comment[uk]=Пошук і запуск програм і служб
+Comment[x-test]=xxSearch and run Applications and servicesxx
 
 Icon=preferences-system-time
 Type=Service
