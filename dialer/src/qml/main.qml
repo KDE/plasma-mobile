@@ -91,17 +91,17 @@ Kirigami.ApplicationWindow {
         currentIndex: pageStack.currentIndex
 
         TabButton {
-            text: "Foo"
+            text: i18n("History")
             icon.name: "view-pim-contacts"
             onClicked: pageStack.currentIndex = 0
         }
         TabButton {
-            text: "Contacts"
+            text: i18n("Contacts")
             icon.name: "view-pim-contacts"
             onClicked: pageStack.currentIndex = 1
         }
         TabButton {
-            text: "Dialer"
+            text: i18n("Dialer")
             icon.name: "view-pim-contacts"
             onClicked: pageStack.currentIndex = 2
         }
