@@ -31,9 +31,9 @@ Item {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    signal pressed()
+
     property var callback
-    property var pressedCallback
-    property var releasedCallback
     property string sub
     property alias source: icon.source
     property alias text: label.text
@@ -72,27 +72,6 @@ Item {
     MouseArea {
         id: mouse
         anchors.fill: parent
-        onClicked: {
-            if (callback) {
-                callback(parent.text);
-            } else {
-                addNumber(parent.text);
-            }
-        }
-
-        onPressAndHold: {
-            var text;
-            if (longHold.visible) {
-                text = longHold.text;
-            } else {
-                text = parent.text;
-            }
-
-            if (callback) {
-                callback(text);
-            } else if (pad.callback) {
-                pad.callback(text);
-            }
-        }
+        onClicked: buttonRoot.pressed()
     }
 }

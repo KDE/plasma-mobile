@@ -54,27 +54,14 @@ Kirigami.Page {
             Layout.minimumHeight: units.gridUnit * 3
             Layout.maximumHeight: Layout.minimumHeight
             font.pixelSize: units.gridUnit * 2.3
+
+            text: dialerUtils.formatNumber(dialPad.number)
         }
 
         Dialpad {
+            id: dialPad
             Layout.fillWidth: true
             Layout.fillHeight: true
-
-            callback: function (string) {
-                var newText = status.text + string
-                status.text = dialerUtils.formatNumber(newText);
-            }
-            deleteCallback: function () {
-                var newText = status.text.slice(0, -1)
-                status.text = dialerUtils.formatNumber(newText);
-            }
-            pressedCallback: function (string) {
-                // TODO
-                // ofonoWrapper.startTone(string);
-            }
-            releasedCallback: function (string) {
-                // ofonoWrapper.stopTone();
-            }
         }
     }
 }

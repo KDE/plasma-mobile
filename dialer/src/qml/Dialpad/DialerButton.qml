@@ -31,6 +31,8 @@ Item {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    signal clicked(string text)
+
     property string text
     property string sub
     property string display
@@ -55,30 +57,12 @@ Item {
         id: mouse
         anchors.fill: parent
 
-        onPressed: {
-            if (pad.pressedCallback) {
-                pad.pressedCallback(parent.text);
-            }
-        }
-        onReleased: {
-            if (pad.releasedCallback) {
-                pad.releasedCallback(parent.text);
-            }
-        }
-        onCanceled: {
-            if (pad.releasedCallback) {
-                pad.releasedCallback(parent.text);
-            }
-        }
-        onClicked: {
-            if (pad.callback) {
-                pad.callback(parent.text);
-            }
-        }
+        onClicked: root.clicked(parent.text)
+
         onPressAndHold: {
             var text = parent.sub.length > 0 ? parent.sub : parent.text
-            if (pad.callback && text.length === 1) {
-                pad.callback(text);
+            if (text.length === 1) {
+                root.clicked(text);
             }
         }
     }

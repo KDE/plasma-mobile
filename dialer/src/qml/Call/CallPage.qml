@@ -74,11 +74,6 @@ Kirigami.Page {
                 Dialpad {
                     width: topFlickable.width
                     height: topFlickable.height
-
-                    callback: function (string) {
-                        //TODO
-//                         ofonoWrapper.sendToneToCall(string);
-                    }
                 }
             }
 

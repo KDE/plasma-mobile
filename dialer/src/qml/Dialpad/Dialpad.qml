@@ -31,31 +31,29 @@ GridLayout {
     Layout.leftMargin: Kirigami.Units.largeSpacing * 2
     Layout.rightMargin: Kirigami.Units.largeSpacing * 2
 
-    property var callback
-    property var pressedCallback
-    property var releasedCallback
-    property var deleteCallback
+    property string number
 
-    DialerButton { id: one; text: "1" }
-    DialerButton { text: "2"; sub: "ABC" }
-    DialerButton { text: "3"; sub: "DEF" }
+    DialerButton { id: one; text: "1"; onClicked: pad.number += text }
+    DialerButton { text: "2"; sub: "ABC"; onClicked: pad.number += text }
+    DialerButton { text: "3"; sub: "DEF"; onClicked: pad.number += text }
 
-    DialerButton { text: "4"; sub: "GHI" }
-    DialerButton { text: "5"; sub: "JKL" }
-    DialerButton { text: "6"; sub: "MNO" }
+    DialerButton { text: "4"; sub: "GHI"; onClicked: pad.number += text }
+    DialerButton { text: "5"; sub: "JKL"; onClicked: pad.number += text }
+    DialerButton { text: "6"; sub: "MNO"; onClicked: pad.number += text }
 
-    DialerButton { text: "7"; sub: "PQRS" }
-    DialerButton { text: "8"; sub: "TUV" }
-    DialerButton { text: "9"; sub: "WXYZ" }
+    DialerButton { text: "7"; sub: "PQRS"; onClicked: pad.number += text }
+    DialerButton { text: "8"; sub: "TUV"; onClicked: pad.number += text }
+    DialerButton { text: "9"; sub: "WXYZ"; onClicked: pad.number += text }
 
-    DialerButton { display: "＊"; text: "*"; special: true; }
-    DialerButton { text: "0"; subdisplay: "＋"; sub: "+"; }
-    DialerButton { display: "＃"; text: "#"; special: true; }
+    DialerButton { display: "＊"; text: "*"; special: true; onClicked: pad.number += text }
+    DialerButton { text: "0"; subdisplay: "＋"; sub: "+"; onClicked: pad.number += text }
+    DialerButton { display: "＃"; text: "#"; special: true; onClicked: pad.number += text }
 
     Item {
         Layout.fillWidth: true
         Layout.fillHeight: true
     }
+
     DialerIconButton {
         id: callButton
         Layout.fillWidth: true
@@ -65,9 +63,7 @@ GridLayout {
         opacity: enabled ? 1 : 0.5
         source: "call-start"
         size: Kirigami.Units.gridUnit * 3
-        callback: function() {
-            call(status.text);
-        }
+        onPressed: call(status.text)
     }
     DialerIconButton {
         id: delButton
@@ -78,6 +74,8 @@ GridLayout {
         opacity: enabled ? 1 : 0.5
         source: "edit-clear"
         size: Kirigami.Units.gridUnit * 2
-        callback: pad.deleteCallback
+        onPressed: {
+            pad.number = pad.number.slice(0, -1)
+        }
     }
 }
