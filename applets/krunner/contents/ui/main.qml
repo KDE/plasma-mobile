@@ -53,6 +53,7 @@ Item {
                 }
             }
             header: Controls.ToolBar {
+                height: Kirigami.Units.gridUnit * 2
                 contentItem: Kirigami.SearchField {
                     id: queryField
                     focus: true
