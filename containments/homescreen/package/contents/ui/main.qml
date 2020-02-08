@@ -323,6 +323,14 @@ Item {
             rightMargin: units.gridUnit
         }
         height: 1
+        gradient: Gradient {
+            orientation: Gradient.Horizontal
+            GradientStop { position: 0.0; color: Qt.rgba(1, 1, 1, 0) }
+            GradientStop { position: 0.15; color: Qt.rgba(1, 1, 1, 0.5) }
+            GradientStop { position: 0.5; color: Qt.rgba(1, 1, 1, 1) }
+            GradientStop { position: 0.85; color: Qt.rgba(1, 1, 1, 0.5) }
+            GradientStop { position: 1.0; color: Qt.rgba(1, 1, 1, 0) }
+        }
         opacity: mainFlickable.contentY > 0 ? 0.6 : 0
         Behavior on opacity {
             OpacityAnimator {
@@ -331,6 +339,7 @@ Item {
             }
         }
     }
+
     Launcher.FavoriteStrip {
         id: favoriteStrip
         anchors {
