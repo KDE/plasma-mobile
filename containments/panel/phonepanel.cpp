@@ -80,47 +80,54 @@ void PhonePanel::toggleTorch()
 
 void PhonePanel::takeScreenshot()
 {
-    auto *interface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
-    QDBusPendingReply<QString> reply = interface->screenshotFullscreen();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    // wait ~200 ms to wait for rest of animations
+    QTimer::singleShot(200, [=]() {
+        auto *interface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
 
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<QString> reply = *watcher;
+        // screenshot fullscreen currently doesn't work on all devices -> we need to use screenshot area
+        // this won't work with multiple screens
+        QSize screenSize = QGuiApplication::primaryScreen()->size();
+        QDBusPendingReply<QString> reply = interface->screenshotArea(0, 0, screenSize.width(), screenSize.height());
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
 
-        if (reply.isError()) {
-            qWarning() << "Creating the screenshot failed:" << reply.error().name() << reply.error().message();
-        } else {
-            QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-            if (filePath.isEmpty()) {
-                qWarning() << "Couldn't find a writable location for the screenshot! The screenshot is in /tmp.";
-                return;
-            }
+        connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
+            QDBusPendingReply<QString> reply = *watcher;
 
-            QDir picturesDir(filePath);
-            if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
-                qWarning() << "Couldn't create folder at"
-                           << picturesDir.path() + QStringLiteral("/Screenshots")
-                           << "to take screenshot.";
-                return;
-            }
-
-            filePath += QStringLiteral("/Screenshots/Screenshot_%1.png")
-                            .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
-
-            const QString currentPath = reply.argumentAt<0>();
-            QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
-                QFile screenshotFile(currentPath);
-                if (!screenshotFile.rename(filePath)) {
-                    qWarning() << "Couldn't move screenshot into Pictures folder:"
-                               << screenshotFile.errorString();
+            if (reply.isError()) {
+                qWarning() << "Creating the screenshot failed:" << reply.error().name() << reply.error().message();
+            } else {
+                QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+                if (filePath.isEmpty()) {
+                    qWarning() << "Couldn't find a writable location for the screenshot! The screenshot is in /tmp.";
+                    return;
                 }
 
-                qDebug() << "Successfully saved screenshot at" << filePath;
-            });
-        }
+                QDir picturesDir(filePath);
+                if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
+                    qWarning() << "Couldn't create folder at"
+                            << picturesDir.path() + QStringLiteral("/Screenshots")
+                            << "to take screenshot.";
+                    return;
+                }
 
-        watcher->deleteLater();
-        interface->deleteLater();
+                filePath += QStringLiteral("/Screenshots/Screenshot_%1.png")
+                                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
+
+                const QString currentPath = reply.argumentAt<0>();
+                QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
+                    QFile screenshotFile(currentPath);
+                    if (!screenshotFile.rename(filePath)) {
+                        qWarning() << "Couldn't move screenshot into Pictures folder:"
+                                << screenshotFile.errorString();
+                    }
+
+                    qDebug() << "Successfully saved screenshot at" << filePath;
+                });
+            }
+
+            watcher->deleteLater();
+            interface->deleteLater();
+        });
     });
 }
 
