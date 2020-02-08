@@ -22,10 +22,8 @@
 
 #include <QDateTime>
 #include <QDBusPendingReply>
-#include <QDebug>
 #include <QFile>
-#include <QGuiApplication>
-#include <QScreen>
+#include <QDebug>
 #include <QStandardPaths>
 #include <QProcess>
 #include <QtConcurrent/QtConcurrent>
@@ -83,11 +81,7 @@ void PhonePanel::toggleTorch()
 void PhonePanel::takeScreenshot()
 {
     auto *interface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
-
-    // screenshot fullscreen currently doesn't work on all devices -> we need to use screenshot area
-    // this won't work with multiple screens
-    QSize screenSize = QGuiApplication::primaryScreen()->size();
-    QDBusPendingReply<QString> reply = interface->screenshotArea(0, 0, screenSize.width(), screenSize.height());
+    QDBusPendingReply<QString> reply = interface->screenshotFullscreen();
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
 
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
