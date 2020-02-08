@@ -20,7 +20,7 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.12
-import QtQuick.Controls 2.12 as Controls
+import QtQuick.Controls 2.8 as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kcoreaddons 1.0 as KCoreAddons
@@ -60,54 +60,47 @@ PlasmaCore.ColorScope {
         id: kuser
     }
 
-    Rectangle {
-        anchors.fill: contents
-        color: PlasmaCore.ColorScope.backgroundColor
-        radius: units.smallSpacing
-    }
-
-    ColumnLayout {
-        id: contents
+    Controls.Popup {
+        visible: true
         anchors.centerIn: parent
-        spacing: units.largeSpacing
         width: Math.min(units.gridUnit * 20, root.width * 0.8)
         height: Math.min(units.gridUnit * 25, root.height * 0.7)
-
-        UserDelegate {
-            Layout.fillWidth: true
-            width: units.gridUnit * 7
-            height: width
-            nameFontSize: theme.defaultFont.pointSize + 4
-            constrainText: false
-            avatarPath: kuser.faceIconUrl
-            iconSource: "user-identity"
-            isCurrent: true
-            name: kuser.fullName
-        }
+        Component.onCompleted: open()
 
         ColumnLayout {
-            Controls.Button {
+            id: contents
+            spacing: units.largeSpacing
+            anchors.fill: parent
+
+            UserDelegate {
                 Layout.fillWidth: true
-                display: Controls.Button.TextUnderIcon
-                icon.name: "system-shutdown"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
-                onClicked: root.haltRequested()
+                width: units.gridUnit * 7
+                height: width
+                nameFontSize: theme.defaultFont.pointSize + 4
+                constrainText: false
+                avatarPath: kuser.faceIconUrl
+                iconSource: "user-identity"
+                isCurrent: true
+                name: kuser.fullName
             }
 
-            Controls.Button {
-                Layout.fillWidth: true
-                display: Controls.Button.TextUnderIcon
-                icon.name: "system-reboot"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
-                onClicked: root.rebootRequested()
-            }
+            ColumnLayout {
+                Layout.margins: 10
+                Controls.Button {
+                    Layout.fillWidth: true
+                    display: Controls.Button.TextUnderIcon
+                    icon.name: "system-shutdown"
+                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
+                    onClicked: root.haltRequested()
+                }
 
-            Controls.Button {
-                Layout.fillWidth: true
-                display: Controls.Button.TextUnderIcon
-                icon.name: "system-lock-screen"
-                text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Lock screen")
-                onClicked: root.lockScreenRequested()
+                Controls.Button {
+                    Layout.fillWidth: true
+                    display: Controls.Button.TextUnderIcon
+                    icon.name: "system-reboot"
+                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
+                    onClicked: root.rebootRequested()
+                }
             }
         }
     }
