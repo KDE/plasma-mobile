@@ -27,6 +27,7 @@
 #include <QStandardPaths>
 #include <QProcess>
 #include <QtConcurrent/QtConcurrent>
+#include <QScreen>
 
 #include "screenshotinterface.h"
 
