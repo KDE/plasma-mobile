@@ -101,28 +101,6 @@ Item {
         }
     }
 
-    SequentialAnimation {
-        id: clickFedbackAnimation
-        property Item target
-        NumberAnimation {
-            target: clickFedbackAnimation.target
-            properties: "scale"
-            to: 2
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-        PauseAnimation {
-            duration: units.shortDuration
-        }
-        NumberAnimation {
-            target: clickFedbackAnimation.target
-            properties: "scale"
-            to: 1
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-    }
-
     Launcher.LauncherDragManager {
         id: launcherDragManager
         anchors.fill: parent

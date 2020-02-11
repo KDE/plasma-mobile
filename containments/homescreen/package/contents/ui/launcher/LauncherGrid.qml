@@ -41,67 +41,6 @@ LauncherContainer {
 
     frame.width: width
 
-    PlasmaCore.IconItem {
-        id: effect
-        height: 64
-        width:  64
-        visible: false
-        x: 0
-        y: 0
-
-        source: "pattern-kde"
-        property string title
-
-        SequentialAnimation {
-            id: woosh
-            ScriptAction {
-                script: effect.visible = true
-            }
-            ParallelAnimation {
-                NumberAnimation {
-                    target: effect
-                    property: "opacity"
-                    from: 0.9
-                    to: 0
-                    duration: 200
-                }
-                NumberAnimation {
-                    target: effect
-                    property: "scale"
-                    from: 1
-                    to: 3
-                    duration: 200
-                }
-                ScriptAction {
-                    script: {
-                        effect.grabToImage((img) => {
-                            NanoShell.StartupFeedback.open(
-                                effect.source,
-                                effect.title,
-                                ColourAverage.averageColour(img.image),
-                                effect.Kirigami.ScenePosition.x,
-                                effect.Kirigami.ScenePosition.y,
-                                effect.width,
-                                effect.height);
-                        })
-                    }
-                }
-            }
-            ScriptAction {
-                script: effect.visible = false
-            }
-        }
-
-        function swoosh(x, y, sauce, title) {
-            effect.x = x
-            effect.y = y
-            effect.source = sauce
-            effect.visible = true
-            effect.title = title
-            woosh.restart()
-        }
-    }
-
     Repeater {
         parent: root.flow
         model: plasmoid.nativeInterface.applicationListModel
@@ -126,9 +65,16 @@ LauncherContainer {
                     appletsLayout.restoreItem(delegate);
                 }
             }
-            onLaunch: (a, b, c, d) => {
-                print(a,b,c,d)
-                effect.swoosh(a, b, c, d)
+            onLaunch: (x, y, icon, title) => {
+                delegate.grabToImage((img) => {
+                    NanoShell.StartupFeedback.open(
+                                icon,
+                                title,
+                                ColourAverage.averageColour(img.image),
+                                delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
+                                delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
+                                Math.min(delegate.iconItem.width, delegate.iconItem.height));
+                });
             }
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {

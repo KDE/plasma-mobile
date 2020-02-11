@@ -45,6 +45,7 @@ ContainmentLayoutManager.ItemContainer {
     key: model.ApplicationStorageIdRole
     property real dragCenterX
     property real dragCenterY
+    property alias iconItem: icon
 
     editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
 
@@ -92,9 +93,6 @@ ContainmentLayoutManager.ItemContainer {
 
     contentItem: MouseArea {
         onClicked: {
-            clickFedbackAnimation.target = delegate;
-            clickFedbackAnimation.running = true;
-
             delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.ApplicationNameRole)
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.ApplicationStorageIdRole);
