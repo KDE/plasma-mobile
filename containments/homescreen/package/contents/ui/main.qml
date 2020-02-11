@@ -101,9 +101,6 @@ Item {
         }
     }
 
-    FeedbackWindow {
-        id: feedbackWindow
-    }
     SequentialAnimation {
         id: clickFedbackAnimation
         property Item target

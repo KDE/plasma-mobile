@@ -24,8 +24,10 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
-
+import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
+
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 import org.kde.phone.homescreen 1.0
 
@@ -70,14 +72,23 @@ LauncherContainer {
                     to: 3
                     duration: 200
                 }
+                ScriptAction {
+                    script: {
+                        effect.grabToImage((img) => {
+                            NanoShell.StartupFeedback.open(
+                                effect.source,
+                                effect.title,
+                                ColourAverage.averageColour(img.image),
+                                effect.Kirigami.ScenePosition.x,
+                                effect.Kirigami.ScenePosition.y,
+                                effect.width,
+                                effect.height);
+                        })
+                    }
+                }
             }
             ScriptAction {
-                script: {
-                    feedbackWindow.title = effect.title
-                    feedbackWindow.icon = effect.source
-                    feedbackWindow.state = "open"
-                    effect.visible = false
-                }
+                script: effect.visible = false
             }
         }
 
