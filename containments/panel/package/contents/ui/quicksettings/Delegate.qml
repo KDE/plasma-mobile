@@ -21,6 +21,8 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.kirigami 2.10 as Kirigami
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 ColumnLayout {
     id: delegateRoot
@@ -40,6 +42,7 @@ ColumnLayout {
             Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.1)
 
         PlasmaCore.IconItem {
+            id: icon
             colorGroup: PlasmaCore.ColorScope.colorGroup
             anchors {
                 fill: parent
@@ -55,6 +58,13 @@ ColumnLayout {
                     } else if (model.toggleFunction) {
                         root[model.toggleFunction]();
                     } else if (model.settingsCommand) {
+                        NanoShell.StartupFeedback.open(
+                            model.icon,
+                            model.text,
+                            theme.textColor,
+                            icon.Kirigami.ScenePosition.x + icon.width/2,
+                            icon.Kirigami.ScenePosition.y + icon.height/2,
+                            Math.min(icon.width, icon.height));
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                         root.closeRequested();
                     }
@@ -95,7 +105,14 @@ ColumnLayout {
             anchors.fill: parent
             onClicked: {
                 if (model.settingsCommand) {
-                    plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                    NanoShell.StartupFeedback.open(
+                        model.icon,
+                        model.text,
+                        theme.textColor,
+                        icon.Kirigami.ScenePosition.x + icon.width/2,
+                        icon.Kirigami.ScenePosition.y + icon.height/2,
+                        Math.min(icon.width, icon.height));
+                    //plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     closeRequested();
                 } else if (model.toggleFunction) {
                     root[model.toggleFunction]();
