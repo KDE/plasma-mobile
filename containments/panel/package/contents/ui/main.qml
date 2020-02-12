@@ -146,6 +146,7 @@ Item {
     DropShadow {
         anchors.fill: icons
         visible: !showinApp
+        cached: true
         horizontalOffset: 0
         verticalOffset: 1
         radius: 4.0

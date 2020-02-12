@@ -33,6 +33,7 @@ PlasmaCore.SvgItem {
     height: width
     layer.enabled: true
     layer.effect: DropShadow {
+        cached: true
         horizontalOffset: 0
         verticalOffset: 2
         radius: 8.0
