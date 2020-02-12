@@ -142,7 +142,7 @@ PlasmaCore.ColorScope {
                     }
                     GradientStop {
                         position: 1
-                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : Qt.rgba(0, 0, 0, 0.2)
+                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : Qt.rgba(0, 0, 0, 0.05)
                     }
                 }
             }
