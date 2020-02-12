@@ -117,6 +117,7 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.minimumHeight: parent.height - root.reservedSpaceForLabel
                 Layout.preferredHeight: Layout.minimumHeight
 
+                usesPlasmaTheme: false
                 source: modelData ? modelData.ApplicationIconRole : ""
                 Behavior on scale {
                     NumberAnimation {

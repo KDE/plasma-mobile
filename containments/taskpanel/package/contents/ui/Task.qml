@@ -95,6 +95,7 @@ Item {
                 anchors.centerIn: parent
                 width: Math.min(parent.width, parent.height) / 2
                 height: width
+                usesPlasmaTheme: false
                 source: model.decoration
             }
             PlasmaComponents.Label {
