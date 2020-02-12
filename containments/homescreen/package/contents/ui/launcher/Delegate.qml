@@ -159,6 +159,7 @@ ContainmentLayoutManager.ItemContainer {
                     verticalOffset: 2
                     radius: 8.0
                     samples: 16
+                    cached: true
                     color: Qt.rgba(0, 0, 0, 1)
                 }
             }
