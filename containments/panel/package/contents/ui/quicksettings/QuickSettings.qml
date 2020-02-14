@@ -197,9 +197,9 @@ Item {
         id: flow
         anchors {
             fill: parent
-            margins: units.smallSpacing*3
+            margins: units.smallSpacing
         }
-        readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6 + Math.floor(units.largeSpacing/2)
+        readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 4
         readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
         spacing: 0
         Repeater {
