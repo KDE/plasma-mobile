@@ -199,7 +199,7 @@ Item {
             fill: parent
             margins: units.smallSpacing
         }
-        readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 4
+        readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
         readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
         spacing: 0
         Repeater {
