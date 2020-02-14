@@ -139,17 +139,10 @@ ContainmentLayoutManager.ItemContainer {
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2
-                //elide: Text.ElideRight
-                elide: truncated ? Text.ElideLeft : Text.ElideRight
+                elide: Text.ElideRight
 
-                text: {
-                    // This trick can get us a shorter text but without ...
-                    if (truncated) {
-                        return model.ApplicationNameRole + "\x9C"
-                    } else {
-                        return model.ApplicationNameRole;
-                    }
-                }
+                text:  model.ApplicationNameRole
+
                 //FIXME: export smallestReadableFont
                 font.pointSize: theme.defaultFont.pointSize * 0.9
                 color: "white"//model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
