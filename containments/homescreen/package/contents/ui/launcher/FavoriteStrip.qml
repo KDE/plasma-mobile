@@ -38,10 +38,16 @@ LauncherContainer {
 
     opacity: launcherDragManager.active && plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ? 0.3 : 1
 
-    height: launcherGrid.cellHeight
+    height: visible ? launcherGrid.cellHeight : 0
 
     frame.implicitWidth: launcherGrid.cellWidth * Math.max(1, flow.children.length) + frame.leftPadding + frame.rightPadding
 
+    Behavior on height {
+        NumberAnimation {
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
     Behavior on opacity {
         OpacityAnimator {
             duration: units.longDuration * 4

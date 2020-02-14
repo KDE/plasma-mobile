@@ -46,7 +46,7 @@ Item {
         var newRow = 0;
 
         var newContainer = internal.containerForItem(delegate, dragCenterX, dragCenterY);
-
+print("AAA"+newContainer)
         // Put it in the favorites strip
         if (newContainer == favoriteStrip) {
             var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
@@ -100,7 +100,7 @@ Item {
         }
 
         function containerForItem(item, dragCenterX, dragCenterY) {
-            if (favoriteStrip.contains(favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY))
+            if (favoriteStrip.contains(Qt.point(0,favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY).y))
                 && plasmoid.nativeInterface.applicationListModel.favoriteCount < plasmoid.nativeInterface.applicationListModel.maxFavoriteCount) {
                 return favoriteStrip;
             } else if (appletsLayout.contains(appletsLayout.mapFromItem(item, dragCenterX, dragCenterY))) {
