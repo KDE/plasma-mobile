@@ -66,7 +66,7 @@ Item {
         topPadding: 0
         rightPadding: 0
         bottomPadding: 0
-background: Rectangle{opacity: 0.3}
+
         // With a mousearea, it will be possible to drag with touch also on empty places
         contentItem: MouseArea {
             implicitWidth: applicationsFlow.implicitWidth
