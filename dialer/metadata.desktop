@@ -66,4 +66,4 @@ Type=Application
 Icon=dialer
 Exec=plasmaphonedialer %u
 
-MimeType=x-scheme-handler/call
+MimeType=x-scheme-handler/tel
