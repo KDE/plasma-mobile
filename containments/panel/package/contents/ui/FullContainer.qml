@@ -31,7 +31,7 @@ DrawerBackground {
     height: parent.height
     width: visible ? quickSettingsParent.width : 0
     Layout.minimumHeight: applet && applet.switchHeight
-    onVisibleChanged: {print("OOOOOOO"+fullRepresentationModel+fullRepresentationView)
+    onVisibleChanged: {
         if (visible) {
             for (var i = 0; i < fullRepresentationModel.count; ++i) {
                 if (fullRepresentationModel.get(i) === this) {
