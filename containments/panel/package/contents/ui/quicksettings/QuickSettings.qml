@@ -21,6 +21,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 
 Item {
     id: root
@@ -33,12 +34,25 @@ Item {
 
     property bool screenshotRequested: false
 
+    PlasmaNM.Handler {
+    	id: nmHandler
+    }
+
+    PlasmaNM.EnabledConnections {
+    	id: enabledConnections
+    }
+
     function toggleAirplane() {
         print("toggle airplane mode")
     }
 
     function toggleTorch() {
         plasmoid.nativeInterface.toggleTorch()
+    }
+
+    function toggleWifi() {
+    	nmHandler.enableWireless(!enabledConnections.wirelessEnabled)
+	settingsModel.get(1).enabled = !enabledConnections.wirelessEnabled
     }
 
     function requestShutdown() {
@@ -122,11 +136,10 @@ Item {
         settingsModel.append({
             "text": i18n("Wifi"),
             "icon": "network-wireless-signal",
-            "enabled": false,
-            "settingsCommand": "plasma-settings -m kcm_mobile_wifi",
-            "toggleFunction": "",
+            "settingsCommand": "",
+            "toggleFunction": "toggleWifi",
             "delegate": "",
-            "enabled": false,
+            "enabled": enabledConnections.wirelessEnabled,
             "applet": null
         });
         settingsModel.append({
