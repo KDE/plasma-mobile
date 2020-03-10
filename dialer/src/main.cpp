@@ -195,8 +195,8 @@ int main(int argc, char **argv)
         window->requestActivate();
         if (arguments.length() > 0) {
             QString numberArg = arguments[1];
-            if (numberArg.startsWith("call://")) {
-                numberArg = numberArg.mid(7);
+            if (numberArg.startsWith("tel:")) {
+                numberArg = numberArg.mid(4);
             }
             dialerUtils->dial(numberArg);
         }
@@ -207,8 +207,8 @@ int main(int argc, char **argv)
     }
     if (!parser.positionalArguments().isEmpty()) {
         QString numberArg = parser.positionalArguments().first();
-        if (numberArg.startsWith("call://")) {
-            numberArg = numberArg.mid(7);
+        if (numberArg.startsWith("tel:")) {
+            numberArg = numberArg.mid(4);
         }
         qWarning() << "Calling" << numberArg;
         dialerUtils->dial(numberArg);
