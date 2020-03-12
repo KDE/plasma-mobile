@@ -165,7 +165,6 @@ int main(int argc, char **argv)
 
     if (simAccount.isNull()) {
         qCritical() << "Unable to get SIM account";
-        return -1;
     }
 
     QQmlApplicationEngine engine;

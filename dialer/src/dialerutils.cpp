@@ -38,6 +38,10 @@ DialerUtils::DialerUtils(const Tp::AccountPtr &simAccount, QObject *parent)
   m_callDuration(0),
   m_callContactAlias(QString())
 {
+    if (!m_simAccount) {
+        return;
+    }
+
     Tp::PendingReady *op = m_simAccount->becomeReady(Tp::Features() << Tp::Account::FeatureCore);
 
     connect(op, &Tp::PendingOperation::finished, [=](){
@@ -56,13 +60,17 @@ void DialerUtils::dial(const QString &number)
 {
     // FIXME: this should be replaced by kpeople thing
     qDebug() << "Starting call...";
-    Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(number);
-    connect(pendingChannel, &Tp::PendingChannelRequest::finished, pendingChannel, [=](){
-        if (pendingChannel->isError()) {
-            qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
-            setCallState("failed");
-        }
-    });
+    if (m_simAccount) {
+        Tp::PendingChannelRequest *pendingChannel = m_simAccount->ensureAudioCall(number);
+        connect(pendingChannel, &Tp::PendingChannelRequest::finished, pendingChannel, [=](){
+            if (pendingChannel->isError()) {
+                qWarning() << "Error when requesting channel" << pendingChannel->errorMessage();
+                setCallState("failed");
+            }
+        });
+    } else {
+        setCallState("failed");
+    }
 }
 
 QString DialerUtils::callState() const
