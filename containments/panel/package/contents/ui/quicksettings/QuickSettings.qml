@@ -55,6 +55,11 @@ Item {
 	settingsModel.get(1).enabled = !enabledConnections.wirelessEnabled
     }
 
+    function toggleWwan() {
+        nmHandler.enableWwan(!enabledConnections.wwanEnabled)
+	settingsModel.get(2).enabled = !enabledConnections.wwanEnabled
+    }
+
     function requestShutdown() {
         print("Shutdown requested, depends on ksmserver running");
         var service = pmSource.serviceForSource("PowerDevil");
@@ -145,11 +150,10 @@ Item {
         settingsModel.append({
             "text": i18n("Mobile Data"),
             "icon": "network-modem",
-            "enabled": false,
-            "settingsCommand": "plasma-settings -m kcm_mobile_broadband",
-            "toggleFunction": "",
+            "settingsCommand": "",
+            "toggleFunction": "toggleWwan",
             "delegate": "",
-            "enabled": false,
+            "enabled": enabledConnections.wwanEnabled,
             "applet": null
         });
         settingsModel.append({
