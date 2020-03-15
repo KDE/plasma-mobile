@@ -1,5 +1,5 @@
 /***************************************************************************
- *   Copyright (C) 2019 Carson Black                                       *
+ *   Copyright (C) 2019 Carson Black <uhhadd@gmail.com>                    *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
@@ -16,6 +16,7 @@
  *   Free Software Foundation, Inc.,                                       *
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA .        *
  ***************************************************************************/
+#pragma once
 
 #include <QObject>
 #include <QColor>
