@@ -25,7 +25,7 @@ include(ECMGenerateHeaders)
 include(GenerateExportHeader)
 include(FeatureSummary)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test Sql)
+find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Qml Quick)
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO)
 find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
