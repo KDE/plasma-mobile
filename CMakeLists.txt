@@ -27,9 +27,8 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Gui Widgets Qml Quick Test Sql)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO People)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO)
 find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
-find_package(TelepathyQt5 REQUIRED)
 find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED
@@ -54,7 +53,6 @@ install( DIRECTORY qtvirtualkeyboardplugin/ DESTINATION ${KDE_INSTALL_QMLDIR}/Qt
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
-add_subdirectory(dialer)
 add_subdirectory(sounds)
 #add_subdirectory(touchscreentest)
 

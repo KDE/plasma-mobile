@@ -1,3 +1,0 @@
-[D-BUS Service]
-Name=org.freedesktop.Telepathy.Client.Plasma.Dialer
-Exec=@CMAKE_INSTALL_PREFIX@/bin/plasmaphonedialer
