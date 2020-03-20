@@ -33,11 +33,16 @@ class QString;
 class ApplicationListModel;
 
 struct ApplicationData {
+    enum LauncherLocation {
+        Grid = 0,
+        Favorites,
+        Desktop
+    };
     QString name;
     QString icon;
     QString storageId;
     QString entryPath;
-    int location = 0; //FIXME
+    LauncherLocation location = Grid;
     bool startupNotify = true;
 };
 
@@ -50,9 +55,9 @@ class ApplicationListModel : public QAbstractListModel {
 
 public:
     enum LauncherLocation {
-        Grid = 0,
-        Favorites,
-        Desktop
+        Grid = ApplicationData::Grid,
+        Favorites = ApplicationData::Favorites,
+        Desktop = ApplicationData::Desktop
     };
     Q_ENUM(LauncherLocation)
 
@@ -87,9 +92,9 @@ public:
 
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE void setLocation(int row, ApplicationListModel::LauncherLocation location);
+    Q_INVOKABLE void setLocation(int row, ApplicationData::LauncherLocation location);
 
-    Q_INVOKABLE void moveItem(int row, int order);
+    Q_INVOKABLE void moveItem(int row, int destination);
 
     Q_INVOKABLE void runApplication(const QString &storageId);
 

@@ -16,7 +16,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                       KF5::I18n
                       KF5::Service
                       KF5::KIOWidgets
-                     )
+)
 
 
 install(TARGETS plasma_containment_phone_homescreen DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)

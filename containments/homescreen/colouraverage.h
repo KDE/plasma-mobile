@@ -25,7 +25,8 @@
 class ColourAverage : public QObject
 {
     Q_OBJECT
+
 public:
-    explicit ColourAverage(QObject* parent = nullptr);
-    Q_INVOKABLE QColor averageColour(QImage img);
+    explicit ColourAverage(QObject *parent = nullptr);
+    Q_INVOKABLE QColor averageColour(const QImage &img);
 };

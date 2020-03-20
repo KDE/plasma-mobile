@@ -34,6 +34,7 @@
 #include <KIOWidgets/KRun>
 #include <QDebug>
 
+constexpr int MAX_FAVOURITES = 5;
 
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent),
@@ -45,8 +46,7 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     loadSettings();
 }
 
-ApplicationListModel::~ApplicationListModel()
-= default;
+ApplicationListModel::~ApplicationListModel() = default;
 
 void ApplicationListModel::loadSettings()
 {
@@ -58,7 +58,7 @@ void ApplicationListModel::loadSettings()
     m_desktopItems = m_homeScreen->config().readEntry("DesktopItems", QStringList()).toSet();
 #endif
     m_appOrder = m_homeScreen->config().readEntry("AppOrder", QStringList());
-    m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", 5);
+    m_maxFavoriteCount = m_homeScreen->config().readEntry("MaxFavoriteCount", MAX_FAVOURITES);
 
     int i = 0;
     for (const QString &app : qAsConst(m_appOrder)) {
@@ -84,7 +84,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
 
 void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
 {
-    if (!changes.contains("apps") && !changes.contains("xdgdata-apps")) {
+    if (!changes.contains(QStringLiteral("apps")) && !changes.contains(QStringLiteral("xdgdata-apps"))) {
         return;
     }
 
@@ -100,7 +100,7 @@ bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
 
 void ApplicationListModel::loadApplications()
 {
-    auto cfg = KSharedConfig::openConfig("applications-blacklistrc");
+    auto cfg = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
     auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
 
     // This is only temporary to get a clue what those apps' desktop files are called
@@ -127,7 +127,7 @@ void ApplicationListModel::loadApplications()
         subGroupList.pop_front();
 
         if (groupEntry->isType(KST_KServiceGroup)) {
-            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
+            KServiceGroup::Ptr serviceGroup(dynamic_cast<KServiceGroup* >(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
@@ -136,16 +136,16 @@ void ApplicationListModel::loadApplications()
                     KSycocaEntry::Ptr entry = (*it);
 
                     if (entry->isType(KST_KServiceGroup)) {
-                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(entry.data()));
+                        KServiceGroup::Ptr serviceGroup(dynamic_cast<KServiceGroup* >(entry.data()));
                         subGroupList << serviceGroup;
 
-                    } else if (entry->property("Exec").isValid()) {
-                        KService::Ptr service(static_cast<KService* >(entry.data()));
+                    } else if (entry->property(QStringLiteral("Exec")).isValid()) {
+                        KService::Ptr service(dynamic_cast<KService* >(entry.data()));
 
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName()) &&
                             service->showOnCurrentPlatform() &&
-                            !service->property("Terminal", QVariant::Bool).toBool()) {
+                            !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
 
                             bl << service->desktopEntryName();
 
@@ -154,12 +154,12 @@ void ApplicationListModel::loadApplications()
                             data.icon = service->icon();
                             data.storageId = service->storageId();
                             data.entryPath = service->exec();
-                            data.startupNotify = service->property("StartupNotify").toBool();
+                            data.startupNotify = service->property(QStringLiteral("StartupNotify")).toBool();
 
                             if (m_favorites.contains(data.storageId)) {
-                                data.location = Favorites;
+                                data.location = ApplicationData::Favorites;
                             } else if (m_desktopItems.contains(data.storageId)) {
-                                data.location = Desktop;
+                                data.location = ApplicationData::Desktop;
                             }
 
                             auto it = m_appPositions.constFind(service->storageId());
@@ -218,7 +218,7 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
-        return nullptr;
+        return {};
     return Qt::ItemIsDragEnabled|QAbstractListModel::flags(index);
 }
 
@@ -236,18 +236,19 @@ void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int so
     moveItem(sourceRow, destinationChild);
 }
 
-void ApplicationListModel::setLocation(int row, LauncherLocation location)
+void ApplicationListModel::setLocation(int row, ApplicationData::LauncherLocation location)
 {
     if (row < 0 || row >= m_applicationList.length()) {
         return;
     }
 
-    ApplicationData &data = m_applicationList[row];
+    ApplicationData data = m_applicationList.at(row);
     if (data.location == location) {
         return;
     }
 
-    if (location == Favorites) {qWarning()<<"favoriting"<<row<<data.name;
+    if (location == ApplicationData::Favorites) {
+        qWarning() << "favoriting" << row << data.name;
         // Deny favorites when full
         if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount) {
             return;
@@ -259,21 +260,21 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
         emit favoriteCountChanged();
 
     // Out of favorites
-    } else  if (data.location == Favorites) {
+    } else  if (data.location == ApplicationData::Favorites) {
         m_favorites.removeAll(data.storageId);
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     }
 
     // In Desktop
-    if (location == Desktop) {
+    if (location == ApplicationData::Desktop) {
         m_desktopItems.insert(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.values());
 
     // Out of Desktop
-    } else  if (data.location == Desktop) {
+    } else  if (data.location == ApplicationData::Desktop) {
         m_desktopItems.remove(data.storageId);
-        m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.values());
+        m_homeScreen->config().writeEntry(QStringLiteral("DesktopItems"), m_desktopItems.values());
     }
 
     data.location = location;
@@ -347,8 +348,8 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
 
         int i = 0;
         for (auto &app : m_applicationList) {
-            if (i >= count && app.location == Favorites) {
-                app.location = Grid;
+            if (i >= count && app.location == ApplicationData::Favorites) {
+                app.location = ApplicationData::Grid;
                 emit dataChanged(index(i, 0), index(i, 0));
             }
             ++i;

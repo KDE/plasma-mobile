@@ -21,13 +21,14 @@
 #include <QColor>
 #include <QImage>
 #include <QDebug>
-#include <signal.h>
 
 #include "colouraverage.h"
 
-ColourAverage::ColourAverage(QObject* parent) : QObject(parent) {}
+ColourAverage::ColourAverage(QObject *parent) : QObject(parent)
+{
+}
 
-QColor ColourAverage::averageColour(QImage img) {
+QColor ColourAverage::averageColour(const QImage &img) {
     int r = 0;
     int g = 0;
     int b = 0;

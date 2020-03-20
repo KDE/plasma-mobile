@@ -34,6 +34,7 @@
 #include <KWayland/Client/surface.h>
 
 static const QString s_kwinService = QStringLiteral("org.kde.KWin");
+constexpr int ACTIVE_WINDOW_UPDATE_INVERVAL = 250;
 
 TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
@@ -43,14 +44,12 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
     setHasConfigurationInterface(true);
     m_activeTimer = new QTimer(this);
     m_activeTimer->setSingleShot(true);
-    m_activeTimer->setInterval(250);
+    m_activeTimer->setInterval(ACTIVE_WINDOW_UPDATE_INVERVAL);
     connect(m_activeTimer, &QTimer::timeout, this, &TaskPanel::updateActiveWindow);
     initWayland();
 }
 
-TaskPanel::~TaskPanel()
-{
-}
+TaskPanel::~TaskPanel() = default;
 
 void TaskPanel::requestShowingDesktop(bool showingDesktop)
 {
