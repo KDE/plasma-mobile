@@ -127,7 +127,7 @@ void ApplicationListModel::loadApplications()
         subGroupList.pop_front();
 
         if (groupEntry->isType(KST_KServiceGroup)) {
-            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(groupEntry.data()));
+            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup *>(groupEntry.data()));
 
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
@@ -136,11 +136,11 @@ void ApplicationListModel::loadApplications()
                     KSycocaEntry::Ptr entry = (*it);
 
                     if (entry->isType(KST_KServiceGroup)) {
-                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup* >(entry.data()));
+                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup *>(entry.data()));
                         subGroupList << serviceGroup;
 
                     } else if (entry->property(QStringLiteral("Exec")).isValid()) {
-                        KService::Ptr service(static_cast<KService* >(entry.data()));
+                        KService::Ptr service(static_cast<KService *>(entry.data()));
 
                         if (service->isApplication() &&
                             !blacklist.contains(service->desktopEntryName()) &&
