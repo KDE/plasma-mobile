@@ -34,6 +34,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     PlasmaQuick
     Service
     Notifications
+    WindowSystem
 )
 find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES

@@ -1,7 +1,6 @@
 set(homescreen_SRCS
     homescreen.cpp
     applicationlistmodel.cpp
-    colouraverage.cpp
 )
 
 add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
@@ -17,6 +16,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                       KF5::Service
                       KF5::KIOGui
                       KF5::Notifications
+                      KF5::WindowSystem
 )
 
 

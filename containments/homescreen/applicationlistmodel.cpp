@@ -39,12 +39,31 @@ constexpr int MAX_FAVOURITES = 5;
 
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent),
-      m_homeScreen(parent)
+      m_homeScreen(parent),
+      m_startupInfo(new KStartupInfo(0, this))
 {
     connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged),
             this, &ApplicationListModel::sycocaDbChanged);
 
+    connect(m_startupInfo, &KStartupInfo::gotRemoveStartup,
+            this, &ApplicationListModel::applicationExited);
+
+    connect(m_startupInfo, &KStartupInfo::gotNewStartup,
+            this, [=](const KStartupInfoId &, const KStartupInfoData &data) {
+        applicationStarted(data.name(), data.icon());
+    });
+
     loadSettings();
+
+    // Debug
+    connect(this, &ApplicationListModel::applicationStarted, this, [=](const QString &name, const QString &icon) {
+        qDebug() << "Opening startup feedback for" << name << icon;
+    });
+
+    connect(this, &ApplicationListModel::applicationExited, this, []() {
+        qDebug() << "Removing startup feedback";
+    });
+
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
@@ -116,7 +135,8 @@ void ApplicationListModel::loadApplications()
     m_applicationList.clear();
 
     KServiceGroup::Ptr group = KServiceGroup::root();
-    if (!group || !group->isValid()) return;
+    if (!group || !group->isValid())
+        return;
     KServiceGroup::List subGroupList = group->entries(true);
 
     QMap<int, ApplicationData> orderedList;

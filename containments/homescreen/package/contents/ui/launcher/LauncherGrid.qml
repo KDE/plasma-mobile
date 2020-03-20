@@ -24,7 +24,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami 2.13 as Kirigami
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
@@ -40,6 +40,20 @@ LauncherContainer {
     launcherGrid: root
 
     frame.width: width
+
+    Connections {
+        target: plasmoid.nativeInterface.applicationListModel
+        onApplicationExited: NanoShell.StartupFeedback.close()
+        onApplicationStarted: (name, icon) => {
+            NanoShell.StartupFeedback.open(
+                icon,
+                name,
+                root.width * 0.5,
+                root.height * 0.5,
+                root.width * 0.2
+            );
+        }
+    }
 
     Repeater {
         parent: root.flow
@@ -64,17 +78,6 @@ LauncherContainer {
                 if (model.applicationLocation === ApplicationListModel.Desktop) {
                     appletsLayout.restoreItem(delegate);
                 }
-            }
-            onLaunch: (x, y, icon, title) => {
-                delegate.grabToImage((img) => {
-                    NanoShell.StartupFeedback.open(
-                                icon,
-                                title,
-                                delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
-                                delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
-                                Math.min(delegate.iconItem.width, delegate.iconItem.height),
-                                ColourAverage.averageColour(img.image));
-                });
             }
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {

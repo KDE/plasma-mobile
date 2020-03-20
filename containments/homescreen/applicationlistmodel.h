@@ -26,6 +26,9 @@
 #include <QList>
 #include <QSet>
 
+// KDE
+#include <KStartupInfo>
+
 #include "homescreen.h"
 
 class QString;
@@ -102,6 +105,8 @@ Q_SIGNALS:
     void countChanged();
     void favoriteCountChanged();
     void maxFavoriteCountChanged();
+    void applicationStarted(const QString &name, const QString &icon);
+    void applicationExited();
 
 private:
     QList<ApplicationData> m_applicationList;
@@ -112,6 +117,7 @@ private:
     QStringList m_favorites;
     QSet<QString> m_desktopItems;
     QHash<QString, int> m_appPositions;
+    KStartupInfo *m_startupInfo;
 };
 
 #endif // APPLICATIONLISTMODEL_H
