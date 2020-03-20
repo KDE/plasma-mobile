@@ -42,7 +42,7 @@ ContainmentLayoutManager.ItemContainer {
 
     opacity: dragActive ? 0.4 : 1
 
-    key: model.ApplicationStorageIdRole
+    key: model.applicationStorageId
     property real dragCenterX
     property real dragCenterY
     property alias iconItem: icon
@@ -118,7 +118,7 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.preferredHeight: Layout.minimumHeight
 
                 usesPlasmaTheme: false
-                source: modelData ? modelData.ApplicationIconRole : ""
+                source: modelData ? modelData.applicationIcon : ""
                 Behavior on scale {
                     NumberAnimation {
                         duration: units.longDuration
@@ -141,13 +141,13 @@ ContainmentLayoutManager.ItemContainer {
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text:  model.ApplicationNameRole
+                text:  model.applicationName
 
                 //FIXME: export smallestReadableFont
                 font.pointSize: theme.defaultFont.pointSize * 0.9
-                color: "white"//model.ApplicationLocationRole == ApplicationListModel.Desktop ? "white" : theme.textColor
+                color: "white"//model.applicationLocation == ApplicationListModel.Desktop ? "white" : theme.textColor
 
-                layer.enabled: true//model.ApplicationLocationRole == ApplicationListModel.Desktop
+                layer.enabled: true//model.applicationLocation == ApplicationListModel.Desktop
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2

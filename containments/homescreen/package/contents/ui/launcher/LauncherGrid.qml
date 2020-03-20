@@ -51,7 +51,7 @@ LauncherContainer {
 
             parent: parentFromLocation
             property Item parentFromLocation: {
-                switch (model.ApplicationLocationRole) {
+                switch (model.applicationLocation) {
                 case ApplicationListModel.Desktop:
                     return appletsLayout;
                 case ApplicationListModel.Favorites:
@@ -61,7 +61,7 @@ LauncherContainer {
                 }
             }
             Component.onCompleted: {
-                if (model.ApplicationLocationRole == ApplicationListModel.Desktop) {
+                if (model.applicationLocation === ApplicationListModel.Desktop) {
                     appletsLayout.restoreItem(delegate);
                 }
             }
@@ -79,10 +79,10 @@ LauncherContainer {
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {
                     parent = parentFromLocation;
-                    if (model.ApplicationLocationRole == ApplicationListModel.Favorites) {
+                    if (model.applicationLocation === ApplicationListModel.Favorites) {
                         plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[index]);
 
-                    } else if (model.ApplicationLocationRole == ApplicationListModel.Grid) {
+                    } else if (model.applicationLocation === ApplicationListModel.Grid) {
                         plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - plasmoid.nativeInterface.applicationListModel.favoriteCount)]);
                     }
                 }

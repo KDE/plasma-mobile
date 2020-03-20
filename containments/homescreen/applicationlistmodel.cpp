@@ -71,16 +71,15 @@ void ApplicationListModel::loadSettings()
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {
-    QHash<int, QByteArray> roleNames;
-    roleNames[ApplicationNameRole] = "ApplicationNameRole";
-    roleNames[ApplicationIconRole] = "ApplicationIconRole";
-    roleNames[ApplicationStorageIdRole] = "ApplicationStorageIdRole";
-    roleNames[ApplicationEntryPathRole] = "ApplicationEntryPathRole";
-    roleNames[ApplicationOriginalRowRole] = "ApplicationOriginalRowRole";
-    roleNames[ApplicationStartupNotifyRole] = "ApplicationStartupNotifyRole";
-    roleNames[ApplicationLocationRole] = "ApplicationLocationRole";
-
-    return roleNames;
+    return {
+        {ApplicationNameRole, QByteArrayLiteral("applicationName")},
+        {ApplicationIconRole, QByteArrayLiteral("applicationIcon")},
+        {ApplicationStorageIdRole, QByteArrayLiteral("applicationStorageId")},
+        {ApplicationEntryPathRole, QByteArrayLiteral("applicationEntryPath")},
+        {ApplicationOriginalRowRole, QByteArrayLiteral("applicationOriginalRow")},
+        {ApplicationStartupNotifyRole, QByteArrayLiteral("applicationStartupNotify")},
+        {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")}
+    };
 }
 
 void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
