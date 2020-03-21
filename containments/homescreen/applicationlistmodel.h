@@ -32,15 +32,6 @@ class QString;
 
 class ApplicationListModel;
 
-struct ApplicationData {
-    QString name;
-    QString icon;
-    QString storageId;
-    QString entryPath;
-    int location = 0; //FIXME
-    bool startupNotify = true;
-};
-
 class ApplicationListModel : public QAbstractListModel {
     Q_OBJECT
 
@@ -55,6 +46,15 @@ public:
         Desktop
     };
     Q_ENUM(LauncherLocation)
+
+    struct ApplicationData {
+        QString name;
+        QString icon;
+        QString storageId;
+        QString entryPath;
+        LauncherLocation location = LauncherLocation::Grid;
+        bool startupNotify = true;
+    };
 
     enum Roles {
         ApplicationNameRole = Qt::UserRole + 1,

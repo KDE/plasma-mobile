@@ -94,7 +94,7 @@ void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
     loadApplications();
 }
 
-bool appNameLessThan(const ApplicationData &a1, const ApplicationData &a2)
+bool appNameLessThan(const ApplicationListModel::ApplicationData &a1, const ApplicationListModel::ApplicationData &a2)
 {
     return a1.name.toLower() < a2.name.toLower();
 }
