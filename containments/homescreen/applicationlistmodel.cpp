@@ -157,9 +157,9 @@ void ApplicationListModel::loadApplications()
                             data.startupNotify = service->property(QStringLiteral("StartupNotify")).toBool();
 
                             if (m_favorites.contains(data.storageId)) {
-                                data.location = ApplicationData::Favorites;
+                                data.location = Favorites;
                             } else if (m_desktopItems.contains(data.storageId)) {
-                                data.location = ApplicationData::Desktop;
+                                data.location = Desktop;
                             }
 
                             auto it = m_appPositions.constFind(service->storageId());
@@ -236,7 +236,7 @@ void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int so
     moveItem(sourceRow, destinationChild);
 }
 
-void ApplicationListModel::setLocation(int row, ApplicationData::LauncherLocation location)
+void ApplicationListModel::setLocation(int row, LauncherLocation location)
 {
     if (row < 0 || row >= m_applicationList.length()) {
         return;
@@ -247,7 +247,7 @@ void ApplicationListModel::setLocation(int row, ApplicationData::LauncherLocatio
         return;
     }
 
-    if (location == ApplicationData::Favorites) {
+    if (location == Favorites) {
         qWarning() << "favoriting" << row << data.name;
         // Deny favorites when full
         if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount) {
@@ -260,19 +260,19 @@ void ApplicationListModel::setLocation(int row, ApplicationData::LauncherLocatio
         emit favoriteCountChanged();
 
     // Out of favorites
-    } else  if (data.location == ApplicationData::Favorites) {
+    } else  if (data.location == Favorites) {
         m_favorites.removeAll(data.storageId);
         m_homeScreen->config().writeEntry("Favorites", m_favorites);
         emit favoriteCountChanged();
     }
 
     // In Desktop
-    if (location == ApplicationData::Desktop) {
+    if (location == Desktop) {
         m_desktopItems.insert(data.storageId);
         m_homeScreen->config().writeEntry("DesktopItems", m_desktopItems.values());
 
     // Out of Desktop
-    } else  if (data.location == ApplicationData::Desktop) {
+    } else  if (data.location == Desktop) {
         m_desktopItems.remove(data.storageId);
         m_homeScreen->config().writeEntry(QStringLiteral("DesktopItems"), m_desktopItems.values());
     }
@@ -348,8 +348,8 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
 
         int i = 0;
         for (auto &app : m_applicationList) {
-            if (i >= count && app.location == ApplicationData::Favorites) {
-                app.location = ApplicationData::Grid;
+            if (i >= count && app.location == Favorites) {
+                app.location = Grid;
                 emit dataChanged(index(i, 0), index(i, 0));
             }
             ++i;
