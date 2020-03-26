@@ -20,6 +20,7 @@ Name[sk]=Hľadať a Spustiť
 Name[sv]=Sök och kör
 Name[uk]=Пошук і запуск
 Name[x-test]=xxSearch And Runxx
+Name[zh_CN]=搜索和运行
 Name[zh_TW]=搜尋並執行
 
 Comment=Search and run Applications and services
@@ -42,6 +43,7 @@ Comment[sk]=Hľadať a spustiť Aplikácie a služby
 Comment[sv]=Sök och kör program och tjänster
 Comment[uk]=Пошук і запуск програм і служб
 Comment[x-test]=xxSearch and run Applications and servicesxx
+Comment[zh_CN]=搜索和运行应用程序及服务
 Comment[zh_TW]=搜尋並執行應用程式及服務
 
 Icon=preferences-system-time
