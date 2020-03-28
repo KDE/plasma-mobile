@@ -93,9 +93,9 @@ ContainmentLayoutManager.ItemContainer {
 
     contentItem: MouseArea {
         onClicked: {
-            delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationNameRole)
+            delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationName)
 
-            plasmoid.nativeInterface.applicationListModel.runApplication(modelData.applicationStorageIdRole);
+            plasmoid.nativeInterface.applicationListModel.runApplication(modelData.applicationStorageId);
         }
 
         //preventStealing: true
