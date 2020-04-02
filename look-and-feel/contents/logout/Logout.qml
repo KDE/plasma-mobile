@@ -101,6 +101,14 @@ PlasmaCore.ColorScope {
                     text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
                     onClicked: root.rebootRequested()
                 }
+
+                Controls.Button {
+                    Layout.fillWidth: true
+                    display: Controls.Button.TextUnderIcon
+                    icon.name: "dialog-cancel"
+                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
+                    onClicked: root.cancelRequested()
+                }
             }
         }
     }
