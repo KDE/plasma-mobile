@@ -35,6 +35,7 @@ PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
     //setHasConfigurationInterface(true);
+    m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded5"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
     m_screenshotInterface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
 }
 
@@ -76,6 +77,29 @@ void PhonePanel::toggleTorch()
         gst_element_set_state(m_pipeline, GST_STATE_NULL);
         gst_object_unref(m_pipeline);
         m_running = false;
+    }
+}
+
+bool PhonePanel::autoRotate()
+{
+    QDBusPendingReply<bool> reply = m_kscreenInterface->getAutoRotate();
+    reply.waitForFinished();
+    if (reply.isError()) {
+        qWarning() << "Getting auto rotate failed:" << reply.error().name() << reply.error().message();
+        return false;
+    } else {
+        return reply.value();
+    }
+}
+
+void PhonePanel::setAutoRotate(bool value)
+{
+    QDBusPendingReply<> reply = m_kscreenInterface->setAutoRotate(value);
+    reply.waitForFinished();
+    if (reply.isError()) {
+        qWarning() << "Setting auto rotate failed:" << reply.error().name() << reply.error().message();
+    } else {
+        emit autoRotateChanged(value);
     }
 }
 

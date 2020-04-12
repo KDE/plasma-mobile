@@ -60,6 +60,12 @@ Item {
         settingsModel.get(2).enabled = !enabledConnections.wwanEnabled
     }
 
+    function toggleRotation() {
+        const enable = !plasmoid.nativeInterface.autoRotateEnabled
+        plasmoid.nativeInterface.autoRotateEnabled = enable
+        settingsModel.get(8).enabled = enable
+    }
+
     function requestShutdown() {
         print("Shutdown requested, depends on ksmserver running");
         var service = pmSource.serviceForSource("PowerDevil");
@@ -197,6 +203,14 @@ Item {
             "enabled": false,
             "settingsCommand": "",
             "toggleFunction": "requestScreenshot",
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Auto-rotate"),
+            "icon": "rotation-allowed",
+            "enabled": plasmoid.nativeInterface.autoRotateEnabled,
+            "settingsCommand": "",
+            "toggleFunction": "toggleRotation",
             "applet": null
         });
 
