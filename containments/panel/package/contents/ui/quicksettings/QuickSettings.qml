@@ -35,11 +35,11 @@ Item {
     property bool screenshotRequested: false
 
     PlasmaNM.Handler {
-    	id: nmHandler
+        id: nmHandler
     }
 
     PlasmaNM.EnabledConnections {
-    	id: enabledConnections
+        id: enabledConnections
     }
 
     function toggleAirplane() {
@@ -51,13 +51,13 @@ Item {
     }
 
     function toggleWifi() {
-    	nmHandler.enableWireless(!enabledConnections.wirelessEnabled)
-	settingsModel.get(1).enabled = !enabledConnections.wirelessEnabled
+        nmHandler.enableWireless(!enabledConnections.wirelessEnabled)
+        settingsModel.get(1).enabled = !enabledConnections.wirelessEnabled
     }
 
     function toggleWwan() {
         nmHandler.enableWwan(!enabledConnections.wwanEnabled)
-	settingsModel.get(2).enabled = !enabledConnections.wwanEnabled
+        settingsModel.get(2).enabled = !enabledConnections.wwanEnabled
     }
 
     function requestShutdown() {
