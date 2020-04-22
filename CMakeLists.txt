@@ -27,8 +27,13 @@ include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED Core Qml Quick)
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS Plasma Service Declarative I18n KIO)
-find_package(KF5 REQUIRED COMPONENTS PlasmaQuick DBusAddons Notifications)
+find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+    I18n
+    KIO
+    Plasma
+    PlasmaQuick
+    Service
+)
 find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES
                        TYPE REQUIRED
