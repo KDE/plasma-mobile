@@ -26,6 +26,7 @@
 
 #include <gst/gst.h>
 
+#include "screenshotinterface.h"
 
 class PhonePanel : public Plasma::Containment
 {
@@ -45,6 +46,8 @@ private:
     GstElement* m_sink;
     GstElement* m_source;
     bool m_running = false;
+
+    org::kde::kwin::Screenshot *m_screenshotInterface;
 };
 
 #endif

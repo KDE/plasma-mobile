@@ -29,14 +29,13 @@
 #include <QtConcurrent/QtConcurrent>
 #include <QScreen>
 
-#include "screenshotinterface.h"
-
 constexpr int SCREENSHOT_DELAY = 200;
 
 PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
     //setHasConfigurationInterface(true);
+    m_screenshotInterface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
 }
 
 PhonePanel::~PhonePanel() = default;
@@ -84,12 +83,10 @@ void PhonePanel::takeScreenshot()
 {
     // wait ~200 ms to wait for rest of animations
     QTimer::singleShot(SCREENSHOT_DELAY, [=]() {
-        auto *interface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
-
         // screenshot fullscreen currently doesn't work on all devices -> we need to use screenshot area
         // this won't work with multiple screens
         QSize screenSize = QGuiApplication::primaryScreen()->size();
-        QDBusPendingReply<QString> reply = interface->screenshotArea(0, 0, screenSize.width(), screenSize.height());
+        QDBusPendingReply<QString> reply = m_screenshotInterface->screenshotArea(0, 0, screenSize.width(), screenSize.height());
         auto *watcher = new QDBusPendingCallWatcher(reply, this);
 
         connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
@@ -128,7 +125,6 @@ void PhonePanel::takeScreenshot()
             }
 
             watcher->deleteLater();
-            interface->deleteLater();
         });
     });
 }
