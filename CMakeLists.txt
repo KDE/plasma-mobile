@@ -3,7 +3,7 @@ project(plasma-phone-components)
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
 set (QT_MIN_VERSION "5.12.0")
-set(KF5_MIN_VERSION "5.66.0")
+set(KF5_MIN_VERSION "5.70.0")
 
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
@@ -33,6 +33,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Plasma
     PlasmaQuick
     Service
+    Notifications
 )
 find_package(KF5Wayland CONFIG)
 set_package_properties(KF5Wayland PROPERTIES

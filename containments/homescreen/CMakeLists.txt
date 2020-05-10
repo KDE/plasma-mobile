@@ -15,7 +15,8 @@ target_link_libraries(plasma_containment_phone_homescreen
                       Qt5::Quick
                       KF5::I18n
                       KF5::Service
-                      KF5::KIOWidgets
+                      KF5::KIOGui
+                      KF5::Notifications
 )
 
 

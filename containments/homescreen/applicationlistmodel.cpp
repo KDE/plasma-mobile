@@ -24,15 +24,16 @@
 #include <QByteArray>
 #include <QModelIndex>
 #include <QProcess>
+#include <QDebug>
 
 // KDE
+#include <KIO/ApplicationLauncherJob>
+#include <KNotificationJobUiDelegate>
 #include <KService>
 #include <KServiceGroup>
 #include <KSharedConfig>
 #include <KSycoca>
 #include <KSycocaEntry>
-#include <KIOWidgets/KRun>
-#include <QDebug>
 
 constexpr int MAX_FAVOURITES = 5;
 
@@ -325,8 +326,9 @@ void ApplicationListModel::runApplication(const QString &storageId)
     }
 
     KService::Ptr service = KService::serviceByStorageId(storageId);
-
-    KRun::runService(*service, QList<QUrl>(), nullptr);
+    KIO::ApplicationLauncherJob *job = new KIO::ApplicationLauncherJob(service);
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
+    job->start();
 }
 
 int ApplicationListModel::maxFavoriteCount() const
