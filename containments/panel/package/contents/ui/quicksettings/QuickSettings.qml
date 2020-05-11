@@ -192,7 +192,7 @@ Item {
         });
         settingsModel.append({
             "text": i18n("Location"),
-            "icon": "find-location-symbolic",
+            "icon": "gps",
             "enabled": false,
             "settingsCommand": "",
             "applet": null
