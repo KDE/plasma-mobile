@@ -70,10 +70,10 @@ LauncherContainer {
                     NanoShell.StartupFeedback.open(
                                 icon,
                                 title,
-                                ColourAverage.averageColour(img.image),
                                 delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
                                 delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
-                                Math.min(delegate.iconItem.width, delegate.iconItem.height));
+                                Math.min(delegate.iconItem.width, delegate.iconItem.height),
+                                ColourAverage.averageColour(img.image));
                 });
             }
             onParentFromLocationChanged: {

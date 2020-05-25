@@ -61,10 +61,10 @@ ColumnLayout {
                         NanoShell.StartupFeedback.open(
                             model.icon,
                             model.text,
-                            theme.textColor,
                             icon.Kirigami.ScenePosition.x + icon.width/2,
                             icon.Kirigami.ScenePosition.y + icon.height/2,
-                            Math.min(icon.width, icon.height));
+                            Math.min(icon.width, icon.height),
+                            theme.textColor);
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                         root.closeRequested();
                     }
@@ -108,10 +108,10 @@ ColumnLayout {
                     NanoShell.StartupFeedback.open(
                         model.icon,
                         model.text,
-                        theme.textColor,
                         icon.Kirigami.ScenePosition.x + icon.width/2,
                         icon.Kirigami.ScenePosition.y + icon.height/2,
-                        Math.min(icon.width, icon.height));
+                        Math.min(icon.width, icon.height),
+                        theme.textColor);
                     //plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     closeRequested();
                 } else if (model.toggleFunction) {
