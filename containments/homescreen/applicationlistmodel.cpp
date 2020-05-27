@@ -56,14 +56,13 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     loadSettings();
 
     // Debug
-    connect(this, &ApplicationListModel::applicationStarted, this, [=](const QString &name, const QString &icon) {
+    /*connect(this, &ApplicationListModel::applicationStarted, this, [=](const QString &name, const QString &icon) {
         qDebug() << "Opening startup feedback for" << name << icon;
     });
 
     connect(this, &ApplicationListModel::applicationExited, this, []() {
         qDebug() << "Removing startup feedback";
-    });
-
+    });*/
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
