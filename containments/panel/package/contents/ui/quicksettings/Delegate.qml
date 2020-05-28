@@ -58,6 +58,13 @@ ColumnLayout {
                     } else if (model.toggleFunction) {
                         root[model.toggleFunction]();
                     } else if (model.settingsCommand) {
+                        NanoShell.StartupFeedback.open(
+                            model.icon,
+                            model.text,
+                            icon.Kirigami.ScenePosition.x + icon.width/2,
+                            icon.Kirigami.ScenePosition.y + icon.height/2,
+                            Math.min(icon.width, icon.height),
+                            theme.textColor);
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                         root.closeRequested();
                     }
@@ -98,6 +105,13 @@ ColumnLayout {
             anchors.fill: parent
             onClicked: {
                 if (model.settingsCommand) {
+                    NanoShell.StartupFeedback.open(
+                        model.icon,
+                        model.text,
+                        icon.Kirigami.ScenePosition.x + icon.width/2,
+                        icon.Kirigami.ScenePosition.y + icon.height/2,
+                        Math.min(icon.width, icon.height),
+                        theme.textColor);
                     //plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     closeRequested();
                 } else if (model.toggleFunction) {
