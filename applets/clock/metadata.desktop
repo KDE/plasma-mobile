@@ -30,7 +30,6 @@ Name[sk]=Hodiny
 Name[sv]=Klocka
 Name[tr]=Saat
 Name[uk]=Годинник
-Name[x-test]=xxClockxx
 Name[zh_CN]=时钟
 Name[zh_TW]=時鐘
 
@@ -63,7 +62,6 @@ Comment[sk]=Čas zobrazený v digitálnom formáte
 Comment[sv]=Tid visad med digitalformat
 Comment[tr]=Saati, sayısal biçimde göster
 Comment[uk]=Час, показаний у цифровому форматі
-Comment[x-test]=xxTime displayed in a digital formatxx
 Comment[zh_CN]=已数字格式显示时间
 Comment[zh_TW]=以數位格式顯示時間
 
