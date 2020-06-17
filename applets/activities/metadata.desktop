@@ -30,7 +30,6 @@ Name[sl]=Opravila telefona
 Name[sv]=Telefonaktiviteter
 Name[tr]=Telefon Etkinlikleri
 Name[uk]=Простори дій телефону
-Name[x-test]=xxPhone Activitiesxx
 Name[zh_CN]=手机活动
 Name[zh_TW]=手機活動
 
@@ -62,7 +61,6 @@ Comment[sl]=Preklop opravil za telefon
 Comment[sv]=Aktivitetsbyte för telefonen
 Comment[tr]=Telefon için etkinlik değiştirici
 Comment[uk]=Перемикач дій для телефону
-Comment[x-test]=xxActivity switcher for the phonexx
 Comment[zh_CN]=手机的活动切换器
 Comment[zh_TW]=手機的活動切換器
 Icon=preferences-activities
