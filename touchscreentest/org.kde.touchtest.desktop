@@ -27,6 +27,7 @@ Name[sk]=Dotykový test
 Name[sv]=Beröringsprov
 Name[tr]=Dokunma Testi
 Name[uk]=Тестування дотику
+Name[x-test]=xxTouch Testxx
 Name[zh_CN]=触摸测试
 Name[zh_TW]=觸控測試
 
@@ -62,6 +63,7 @@ GenericName[sk]=Terminál
 GenericName[sv]=Terminal
 GenericName[tr]=Uçbirim
 GenericName[uk]=Термінал
+GenericName[x-test]=xxTerminalxx
 GenericName[zh_CN]=终端
 GenericName[zh_TW]=終端機
 Icon=input-touchpad
