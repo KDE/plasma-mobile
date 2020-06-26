@@ -28,6 +28,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.taskmanager 0.1 as TaskManager
 
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+
 import "LayoutManager.js" as LayoutManager
 
 import "quicksettings"
@@ -45,7 +47,7 @@ Item {
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 
-    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen)
+    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen) || NanoShell.StartupFeedback.visible
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);

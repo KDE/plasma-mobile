@@ -27,6 +27,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+
 PlasmaCore.ColorScope {
     id: root
     width: 600
@@ -35,7 +37,7 @@ PlasmaCore.ColorScope {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen)
+    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen) || NanoShell.StartupFeedback.visible
 
     property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
     Loader {
