@@ -63,8 +63,7 @@ ColumnLayout {
                             model.text,
                             icon.Kirigami.ScenePosition.x + icon.width/2,
                             icon.Kirigami.ScenePosition.y + icon.height/2,
-                            Math.min(icon.width, icon.height),
-                            theme.textColor);
+                            Math.min(icon.width, icon.height))
                         plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                         root.closeRequested();
                     }
@@ -110,8 +109,7 @@ ColumnLayout {
                         model.text,
                         icon.Kirigami.ScenePosition.x + icon.width/2,
                         icon.Kirigami.ScenePosition.y + icon.height/2,
-                        Math.min(icon.width, icon.height),
-                        theme.textColor);
+                        Math.min(icon.width, icon.height))
                     //plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     closeRequested();
                 } else if (model.toggleFunction) {
