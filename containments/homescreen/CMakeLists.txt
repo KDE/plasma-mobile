@@ -1,7 +1,6 @@
 set(homescreen_SRCS
     homescreen.cpp
     applicationlistmodel.cpp
-    colouraverage.cpp
 )
 
 add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
