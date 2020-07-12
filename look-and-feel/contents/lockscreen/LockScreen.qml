@@ -126,6 +126,7 @@ PlasmaCore.ColorScope {
                 spacing: 6
 
                 Layout.minimumHeight: units.gridUnit
+                Layout.maximumWidth: parent.width
                 
                 Repeater {
                     model: root.password.length
