@@ -97,11 +97,12 @@ PlasmaCore.ColorScope {
                     flick(0, 1000);
                 }
             }
-            
-            // wipe password at beginning
-            if (atYBeginning) {
-                
-            }
+        }
+
+        // wipe password if it is more than half way down the screen
+        onContentYChanged: {
+            if (contentY < columnHeight / 2)
+                root.password = "";
         }
         
         ColumnLayout {
