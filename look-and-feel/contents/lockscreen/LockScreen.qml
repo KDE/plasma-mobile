@@ -31,22 +31,19 @@ PlasmaCore.ColorScope {
 
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
-
-    FastBlur {
-        id: blur
+    
+    BrightnessContrast {
+        id: darken
         anchors.fill: parent
         source: wallpaper
-        radius: 32
-        visible: false
+        brightness: -(passwordFlickable.contentY / passwordFlickable.columnHeight * 0.6)
     }
-
-    MultiPointTouchArea {
+    
+    FastBlur {
         anchors.fill: parent
-
-        onGestureStarted: {
-            numBlock.visible = true
-            blur.visible = true
-        }
+        cached: true
+        source: darken
+        radius: passwordFlickable.contentY / passwordFlickable.columnHeight * 32
     }
 
     DropShadow {
@@ -80,87 +77,121 @@ PlasmaCore.ColorScope {
         anchors.right: parent.right
     }
 
-    Row {
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: numBlock.top
-        anchors.bottomMargin: units.gridUnit * 2
-        spacing: 6
-
-        Repeater {
-            model: root.password.length
-            delegate: Rectangle {
-                width: units.gridUnit * 2
-                height: width
-                radius: width
-                color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.6)
+    Flickable {
+        id: passwordFlickable
+        
+        anchors.fill: parent
+        
+        property int columnHeight: units.gridUnit * 20
+        
+        height: columnHeight + root.height
+        contentHeight: columnHeight + root.height
+        boundsBehavior: Flickable.StopAtBounds
+        
+        // always snap to end (either hidden or shown)
+        onFlickEnded: {
+            if (!atYBeginning && !atYEnd) {
+                if (contentY > columnHeight - contentY) {
+                    flick(0, -1000);
+                } else {
+                    flick(0, 1000);
+                }
+            }
+            
+            // wipe password at beginning
+            if (atYBeginning) {
+                
             }
         }
-    }
+        
+        ColumnLayout {
+            id: passwordLayout
+            anchors.bottom: parent.bottom
+            
+            width: parent.width
+            spacing: units.gridUnit * 2
+            opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
+            
+            Row {
+                id: dotDisplay
+                Layout.alignment: Qt.AlignHCenter
+                spacing: 6
 
-    GridLayout {
-        id: numBlock
-        visible: false
-        property string thePw
-
-        height: units.gridUnit * 16
-        anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottomMargin: units.gridUnit
-        anchors.leftMargin: units.gridUnit * 2
-        anchors.rightMargin: units.gridUnit *2
-        rowSpacing: units.gridUnit
-
-        columns: 3
-
-        Repeater {
-            model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "0", "E"]
-            delegate: Item {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-
-                Rectangle {
-                    anchors.centerIn: parent
-                    width: units.gridUnit * 3
-                    height: width
-                    radius: 12
-                    color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, ma.pressed ? 0.8 : 0.3)
-                    visible: modelData.length > 0
-
-                    MouseArea {
-                        id: ma
-                        anchors.fill: parent
-                        onClicked: {
-                            if (modelData === "R") {
-                                root.password = root.password.substr(0, root.password.length - 1);
-                            } else if (modelData === "E") {
-                                authenticator.tryUnlock(root.password);
-                            } else {
-                                root.password += modelData
-                            }
-                        }
+                Repeater {
+                    model: root.password.length
+                    delegate: Rectangle {
+                        width: units.gridUnit * 2
+                        height: width
+                        radius: width
+                        color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.6)
                     }
                 }
+            }
 
-                PlasmaComponents.Label {
-                    visible: modelData !== "R" && modelData !== "E"
-                    text: modelData
-                    anchors.centerIn: parent
-                    font.pointSize: 20
-                }
+            GridLayout {
+                id: numBlock
+                property string thePw
 
-                PlasmaCore.IconItem {
-                    visible: modelData === "R"
-                    anchors.centerIn: parent
-                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                    source: "edit-clear"
-                }
+                Layout.fillWidth: true
+                Layout.minimumHeight: units.gridUnit * 16
+                Layout.maximumWidth: root.width
+                Layout.bottomMargin: units.gridUnit
+                Layout.leftMargin: units.gridUnit * 2
+                Layout.rightMargin: units.gridUnit * 2
+                rowSpacing: units.gridUnit
 
-                PlasmaCore.IconItem {
-                    visible: modelData === "E"
-                    anchors.centerIn: parent
-                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                    source: "go-next"
+                columns: 3
+
+                Repeater {
+                    model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "0", "E"]
+                    delegate: Item {
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: units.gridUnit * 3
+                            height: width
+                            radius: 12
+                            color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, ma.pressed ? 0.8 : 0.3)
+                            visible: modelData.length > 0
+
+                            MouseArea {
+                                id: ma
+                                anchors.fill: parent
+                                onClicked: {
+                                    if (modelData === "R") {
+                                        root.password = root.password.substr(0, root.password.length - 1);
+                                    } else if (modelData === "E") {
+                                        authenticator.tryUnlock(root.password);
+                                    } else {
+                                        root.password += modelData
+                                    }
+                                }
+                            }
+                        }
+
+                        PlasmaComponents.Label {
+                            visible: modelData !== "R" && modelData !== "E"
+                            text: modelData
+                            anchors.centerIn: parent
+                            font.pointSize: 20
+                        }
+
+                        PlasmaCore.IconItem {
+                            visible: modelData === "R"
+                            anchors.centerIn: parent
+                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                            source: "edit-clear"
+                        }
+
+                        PlasmaCore.IconItem {
+                            visible: modelData === "E"
+                            anchors.centerIn: parent
+                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                            source: "go-next"
+                        }
+                    }
                 }
             }
         }
