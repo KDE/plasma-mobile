@@ -38,13 +38,6 @@ PlasmaCore.ColorScope {
         source: wallpaper
         brightness: -(passwordFlickable.contentY / passwordFlickable.columnHeight * 0.6)
     }
-    
-    FastBlur {
-        anchors.fill: parent
-        cached: true
-        source: darken
-        radius: passwordFlickable.contentY / passwordFlickable.columnHeight * 32
-    }
 
     DropShadow {
         id: clockShadow
@@ -56,12 +49,9 @@ PlasmaCore.ColorScope {
         samples: 14
         spread: 0.3
         color: PlasmaCore.ColorScope.backgroundColor
-        Behavior on opacity {
-            OpacityAnimator {
-                duration: 1000
-                easing.type: Easing.InOutQuad
-            }
-        }
+        
+        // hide when keypad is shown
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
     }
 
     Clock {
@@ -75,6 +65,17 @@ PlasmaCore.ColorScope {
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+    }
+    
+    PlasmaCore.IconItem {
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: units.gridUnit
+        anchors.horizontalCenter: parent.horizontalCenter
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        source: "arrow-up"
     }
 
     Flickable {
@@ -113,15 +114,23 @@ PlasmaCore.ColorScope {
             spacing: units.gridUnit * 2
             opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
             
+            PlasmaComponents.Label {
+                Layout.alignment: Qt.AlignHCenter
+                text: qsTr("Enter PIN")
+                font.pointSize: 12
+            }
+            
             Row {
                 id: dotDisplay
                 Layout.alignment: Qt.AlignHCenter
                 spacing: 6
 
+                Layout.minimumHeight: units.gridUnit
+                
                 Repeater {
                     model: root.password.length
                     delegate: Rectangle {
-                        width: units.gridUnit * 2
+                        width: units.gridUnit
                         height: width
                         radius: width
                         color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.6)
@@ -136,7 +145,7 @@ PlasmaCore.ColorScope {
                 Layout.fillWidth: true
                 Layout.minimumHeight: units.gridUnit * 16
                 Layout.maximumWidth: root.width
-                Layout.bottomMargin: units.gridUnit
+                Layout.bottomMargin: units.gridUnit * 2
                 Layout.leftMargin: units.gridUnit * 2
                 Layout.rightMargin: units.gridUnit * 2
                 rowSpacing: units.gridUnit
@@ -176,7 +185,7 @@ PlasmaCore.ColorScope {
                             visible: modelData !== "R" && modelData !== "E"
                             text: modelData
                             anchors.centerIn: parent
-                            font.pointSize: 20
+                            font.pointSize: 16
                         }
 
                         PlasmaCore.IconItem {
