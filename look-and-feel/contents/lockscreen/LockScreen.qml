@@ -68,8 +68,7 @@ PlasmaCore.ColorScope {
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
     }
     
-    // bottom of screen elements
-    ColumnLayout {
+    PlasmaCore.IconItem {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -77,16 +76,8 @@ PlasmaCore.ColorScope {
         anchors.horizontalCenter: parent.horizontalCenter
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         
-        PlasmaCore.IconItem {
-            Layout.alignment: Qt.AlignHCenter
-            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            source: "arrow-up"
-        }
-        
-        PlasmaComponents.Label {
-            Layout.alignment: Qt.AlignHCenter
-            text: qsTr("Swipe up to unlock device")
-        }
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        source: "arrow-up"
     }
 
     Flickable {
@@ -145,7 +136,7 @@ PlasmaCore.ColorScope {
                         width: units.gridUnit
                         height: width
                         radius: width
-                        color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.6)
+                        color: Qt.rgba(255, 255, 255, 0.3)
                     }
                 }
             }
