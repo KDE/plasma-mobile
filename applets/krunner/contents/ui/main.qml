@@ -31,6 +31,7 @@ import org.kde.kirigami 2.10 as Kirigami
 Item {
     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
+    Layout.minimumWidth: Math.min(plasmoid.availableScreenRect.width, plasmoid.availableScreenRect.height) - Kirigami.Units.gridUnit * 2
 
     PlasmaComponents.TextField {
         id: bigClock
