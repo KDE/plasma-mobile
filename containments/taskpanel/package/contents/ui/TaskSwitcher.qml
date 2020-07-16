@@ -153,6 +153,11 @@ NanoShell.FullScreenOverlay {
 
         TaskManager.TasksModel {
             id: tasksModel
+            sortMode: TaskManager.TasksModel.SortVirtualDesktop
+            groupMode: TaskManager.TasksModel.GroupDisabled
+
+            screenGeometry: plasmoid.screenGeometry
+            filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
         }
         //This proxy is only used for "get"
         PlasmaCore.SortFilterModel {

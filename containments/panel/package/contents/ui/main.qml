@@ -47,7 +47,9 @@ Item {
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 
-    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen) || NanoShell.StartupFeedback.visible
+    readonly property bool showingApp: !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+
+    readonly property bool hasTasks: tasksModel.count > 0
 
     Containment.onAppletAdded: {
         addApplet(applet, x, y);
@@ -94,7 +96,8 @@ Item {
 
         screenGeometry: plasmoid.screenGeometry
         filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
-
+        //FIXME: workaround
+        Component.onCompleted: tasksModel.countChanged();
     }
 
     PlasmaCore.DataSource {

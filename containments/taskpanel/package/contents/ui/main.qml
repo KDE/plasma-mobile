@@ -37,7 +37,9 @@ PlasmaCore.ColorScope {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property bool showingApp: tasksModel.activeTask && tasksModel.activeTask.valid && !tasksModel.data(tasksModel.activeTask, TaskManager.AbstractTasksModel.IsFullScreen) || NanoShell.StartupFeedback.visible
+    readonly property bool showingApp: !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+
+    readonly property bool hasTasks: tasksModel.count > 0
 
     property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
     Loader {
@@ -52,12 +54,24 @@ PlasmaCore.ColorScope {
 
     TaskManager.TasksModel {
         id: tasksModel
-        sortMode: TaskManager.TasksModel.SortVirtualDesktop
         groupMode: TaskManager.TasksModel.GroupDisabled
 
         screenGeometry: plasmoid.screenGeometry
         filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
+        sortMode: TaskManager.TasksModel.SortAlpha
 
+        virtualDesktop: virtualDesktopInfo.currentDesktop
+        activity: activityInfo.currentActivity
+        //FIXME: workaround
+        Component.onCompleted: tasksModel.countChanged();
+    }
+
+    TaskManager.VirtualDesktopInfo {
+        id: virtualDesktopInfo
+    }
+
+    TaskManager.ActivityInfo {
+        id: activityInfo
     }
 
     MouseArea {
@@ -153,7 +167,7 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
-                enabled: taskSwitcher && taskSwitcher.tasksCount > 0;
+                enabled: root.hasTasks
                 iconSource: "box"
                 onClicked: {
                     plasmoid.nativeInterface.showDesktop = false;
