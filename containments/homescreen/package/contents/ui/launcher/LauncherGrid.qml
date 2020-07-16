@@ -39,6 +39,8 @@ LauncherContainer {
     readonly property int cellHeight: availableCellHeight
     launcherGrid: root
 
+    signal launched
+
     frame.width: width
 
     Repeater {
@@ -74,6 +76,7 @@ LauncherContainer {
                                 delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
                                 Math.min(delegate.iconItem.width, delegate.iconItem.height)
                 )});
+                root.launched();
             }
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {

@@ -265,7 +265,10 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                
+                onLaunched: {
+                    scrollAnim.to = 0;
+                    scrollAnim.restart();
+                }
                 favoriteStrip: favoriteStrip
                 appletsLayout: appletsLayout
             }
