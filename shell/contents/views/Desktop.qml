@@ -43,7 +43,7 @@ Rectangle {
         if (widgetExplorerStack.source != "") {
             widgetExplorerStack.source = "";
         } else {
-            widgetExplorerStack.setSource(Qt.resolvedUrl("../explorer/WidgetExplorer.qml"), {"containment": containment, "containmentInterface": root.containment})
+            widgetExplorerStack.setSource(desktop.fileFromPackage("explorer", "WidgetExplorer.qml"), {"containment": containment, "containmentInterface": root.containment})
         }
     }
 
@@ -51,7 +51,9 @@ Rectangle {
         id: widgetExplorerStack
         z: 99
         asynchronous: true
-        anchors.fill: parent
+        y: containment ? containment.availableScreenRect.y : 0
+        height: containment ? containment.availableScreenRect.height : parent.height
+        width: parent.width
         
         onLoaded: {
             if (widgetExplorerStack.item) {
