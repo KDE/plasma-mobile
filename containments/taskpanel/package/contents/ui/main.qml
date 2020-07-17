@@ -81,6 +81,7 @@ PlasmaCore.ColorScope {
         property int oldMouseY: 0
         property int startMouseY: 0
         property bool isDragging: false
+        property bool opening: false
         drag.filterChildren: true
         function managePressed(mouse) {
             startMouseY = oldMouseY = mouse.y;
@@ -96,6 +97,7 @@ PlasmaCore.ColorScope {
             }
 
             taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
+            opening = oldMouseY > mouse.y;
             oldMouseY = mouse.y;
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
                 taskSwitcher.showFullScreen();
@@ -109,12 +111,10 @@ PlasmaCore.ColorScope {
             if (taskSwitcher.visibility == Window.Hidden) {
                 return;
             }
-            if (taskSwitcher.offset > -taskSwitcher.height/2) {
-                taskSwitcher.currentTaskIndex = -1
+            if (opening) {
                 taskSwitcher.show();
             } else {
                 taskSwitcher.hide();
-                taskSwitcher.setSingleActiveWindow(taskSwitcher.currentTaskIndex);
             }
         }
 

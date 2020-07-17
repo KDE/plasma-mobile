@@ -83,7 +83,7 @@ NanoShell.FullScreenOverlay {
         }
     }
 
-    onOffsetChanged: tasksView.contentY = offset
+    onOffsetChanged: tasksView.contentY = offset + grid.y
     onVisibleChanged: {
         if (!visible) {
             tasksView.contentY = 0;
