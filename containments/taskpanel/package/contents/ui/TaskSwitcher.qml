@@ -198,14 +198,13 @@ NanoShell.FullScreenOverlay {
     }
 
     PlasmaComponents.RoundButton {
-        id: showDesktopButton
-        height: units.iconSizes.large
-        width: height
         anchors {
             horizontalCenter: parent.horizontalCenter
             bottom: parent.bottom
         }
         icon.name: "start-here-kde"
+        icon.width: units.iconSizes.medium
+        icon.height: units.iconSizes.medium
         onClicked: {
             currentTaskIndex = -1;
             window.hide();

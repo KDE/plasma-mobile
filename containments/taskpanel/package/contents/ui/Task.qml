@@ -103,10 +103,11 @@ Item {
                     bottom: parent.bottom
                     left: parent.left
                     right: parent.right
+                    margins: units.smallSpacing
                 }
                 horizontalAlignment: Text.AlignHCenter
                 elide: Text.ElideRight
-                text: model.AppName
+                text: model.display
             }
             MouseArea {
                 anchors.fill: parent
