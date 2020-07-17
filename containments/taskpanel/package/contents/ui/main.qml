@@ -97,7 +97,7 @@ PlasmaCore.ColorScope {
             taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
             oldMouseY = mouse.y;
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
-                taskSwitcher.visible = true;
+                taskSwitcher.showFullScreen();
             }
         }
         onReleased: {
