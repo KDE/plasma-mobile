@@ -17,7 +17,7 @@
  *   51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
@@ -33,53 +33,62 @@ NanoShell.FullScreenOverlay {
     height: Screen.height
     property int offset: 0
     property int overShoot: units.gridUnit * 2
-    property int tasksCount: tasksModel.count
+    property int tasksCount: window.model.count
     property int currentTaskIndex: -1
-    property alias model: tasksModel
+    property TaskManager.TasksModel model
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
+
+    enum MovementDirection {
+        None = 0,
+        Up,
+        Down
+    }
 
     onTasksCountChanged: {
         if (tasksCount == 0) {
             hide();
         }
     }
-    color: Qt.rgba(0, 0, 0, 0.8 * Math.min(
-        (Math.min(tasksView.contentY + tasksView.height, tasksView.height) / tasksView.height),
-        ((tasksView.contentHeight - tasksView.contentY - tasksView.headerItem.height - tasksView.footerItem.height)/tasksView.height)))
+    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
+        (Math.min(tasksView.contentY, tasksView.height) / tasksView.height),
+        ((tasksView.contentHeight - tasksView.contentY - window.height) / tasksView.height)))
 
     function show() {
-        if (tasksModel.count == 0) {
+        if (window.model.count == 0) {
             return;
         }
-        if (!visible) {
-            tasksView.contentY = -tasksView.headerItem.height;
-        }
+
         visible = true;
         scrollAnim.from = tasksView.contentY;
-        scrollAnim.to = 0;
-        scrollAnim.running = true;
+        scrollAnim.to = window.height;
+        scrollAnim.restart();
     }
     function hide() {
         if (!window.visible) {
             return;
         }
         scrollAnim.from = tasksView.contentY;
-        if (tasksView.contentY + tasksView.headerItem.height < tasksView.contentHeight/2) {
-            scrollAnim.to = -tasksView.headerItem.height;
+        if (tasksView.contentY + window.height < tasksView.contentHeight/2) {
+            scrollAnim.to = 0;
         } else {
-            scrollAnim.to = tasksView.contentHeight - tasksView.headerItem.height;
+            scrollAnim.to = tasksView.contentHeight - window.height;
         }
-        scrollAnim.running = true;
+        scrollAnim.restart();
     }
 
     function setSingleActiveWindow(id) {
         if (id >= 0) {
-            tasksModel.requestActivate(tasksModel.index(id, 0));
+            window.model.requestActivate(window.model.index(id, 0));
         }
     }
 
     onOffsetChanged: tasksView.contentY = offset
+    onVisibleChanged: {
+        if (!visible) {
+            tasksView.contentY = 0;
+        }
+    }
 
     SequentialAnimation {
         id: scrollAnim
@@ -97,7 +106,7 @@ NanoShell.FullScreenOverlay {
         }
         ScriptAction {
             script: {
-                if (tasksView.contentY <= -tasksView.headerItem.height || tasksView.contentY >= tasksView.contentHeight - tasksView.headerItem.height) {
+                if (tasksView.contentY <= 0 || tasksView.contentY >= tasksView.contentHeight - window.height) {
                     window.visible = false;
                     setSingleActiveWindow(currentTaskIndex);
                 }
@@ -105,17 +114,34 @@ NanoShell.FullScreenOverlay {
         }
     }
 
-    GridView {
+    Flickable {
         id: tasksView
         width: window.width
         height: window.height
-        cellWidth: window.width/2
-        cellHeight: window.height/2
-        onFlickingChanged: {
-            if (!draggingVertically && contentY < -headerItem.height + window.height ||
-                (contentY + footerItem.height) > (contentHeight - footerItem.height - window.height/6*5)) {
-                window.hide();
+        contentWidth: width
+        contentHeight: mainArea.implicitHeight
+        property int flickState: TaskSwitcher.MovementDirection.None
+
+        readonly property int movementDirection: {
+            if (flickState != TaskSwitcher.MovementDirection.None) {
+                return flickState;
+            } else if (verticalVelocity < 0) {
+                return TaskSwitcher.MovementDirection.Up;
+            } else if (verticalVelocity > 0)  {
+                return TaskSwitcher.MovementDirection.Down;
+            } else {
+                return TaskSwitcher.MovementDirection.None;
             }
+        }
+
+        onFlickingVerticallyChanged: {
+            if (flickingVertically) {
+                flickState = verticalVelocity < 0 ? TaskSwitcher.MovementDirection.Up : TaskSwitcher.MovementDirection.Down;
+            } else if (/*!draggingVertically &&*/ !flickingVertically) {
+               draggingVerticallyChanged();
+               flickState = TaskSwitcher.MovementDirection.None
+            }
+            
         }
 
         onDraggingVerticallyChanged: {
@@ -123,78 +149,82 @@ NanoShell.FullScreenOverlay {
                 return;
             }
 
-            //manage separately the first page, the lockscreen
-            //scrolling down
-            if (verticalVelocity > 0 && contentY < -headerItem.height + window.height &&
-                contentY > (-headerItem.height + window.height/6)) {
-                show();
-                return;
+            let beforeBeginning = contentY <  window.height;
+            let afterEnd = contentY > contentHeight - window.height * 2;
 
-            //scrolling up
-            } else if (verticalVelocity < 0 && contentY < -headerItem.height + window.height &&
-                contentY < (-headerItem.height + window.height/6*5)) {
-                hide();
-                return;
+            let topCloseCondition = contentY <  window.height / 10 * 9;
+            let bottomClosecondition = contentY > contentHeight - window.height * 2 - window.height / 10;
 
-            //hide by scrolling down
-            } else if ((contentY + footerItem.height) > (contentHeight - footerItem.height - window.height/6*5)) {
-                hide();
-                return;
-            //show
-            } else if ((contentY + tasksView.height) > (contentHeight - headerItem.height - footerItem.height) &&
-                (contentY + tasksView.height) < (contentHeight - headerItem.height - footerItem.height + window.height/6*5)) {
-                scrollAnim.from = tasksView.contentY;
-                visible = true;
-                
-                scrollAnim.to = contentHeight - footerItem.height - tasksView.height*2;
-                scrollAnim.running = true;
-                return;
-            } else if (contentY < 0) {
-                show();
+            switch (movementDirection) {
+            case TaskSwitcher.MovementDirection.Up: {
+                if (topCloseCondition) {
+                    hide();
+                } else if (beforeBeginning) {
+                    show();
+                } else if (afterEnd) {
+                    scrollAnim.from = tasksView.contentY;
+                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
+                    scrollAnim.restart();
+                }
+                break;
+            }
+            case TaskSwitcher.MovementDirection.Down: {
+                if (bottomClosecondition) {
+                    hide();
+                } else if (beforeBeginning) {
+                    show();
+                } else if (afterEnd) {
+                    scrollAnim.from = tasksView.contentY;
+                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
+                    scrollAnim.restart();
+                }
+                break;
+            }
+            case TaskSwitcher.MovementDirection.None:
+            default:
+                if (beforeBeginning) {
+                    show();
+                } else if (afterEnd) {
+                    scrollAnim.from = tasksView.contentY;
+                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
+                    scrollAnim.restart();
+                }
+                break;
             }
         }
 
-        TaskManager.TasksModel {
-            id: tasksModel
-            sortMode: TaskManager.TasksModel.SortVirtualDesktop
-            groupMode: TaskManager.TasksModel.GroupDisabled
+        MouseArea {
+            id: mainArea
+            parent: tasksView.contentItem
+            width: tasksView.width
+            implicitHeight: window.height * 2 + Math.max(window.height, grid.implicitHeight)
+            onClicked: window.hide()
 
-            screenGeometry: plasmoid.screenGeometry
-            filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
-        }
-        //This proxy is only used for "get"
-        PlasmaCore.SortFilterModel {
-            id: filterModel
-            sourceModel: TaskManager.TasksModel {}
-            onCountChanged: {
-                if (count == 0) {
-                    window.hide();
+            Grid {
+                id: grid
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    bottom: parent.bottom
+                    bottomMargin: window.height
+                }
+                columns: 2
+
+                Repeater {
+                    model: window.model
+                    delegate: Task {}
+                }
+
+                move: Transition {
+                    NumberAnimation {
+                        properties: "x,y"
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
                 }
             }
         }
 
-        model: tasksModel
-        header: Item {
-            width: window.width
-            height: window.height
-        }
-        footer: Item {
-            width: window.width
-            height: window.height
-        }
-        delegate: Task {}
-        displaced: Transition {
-            NumberAnimation {
-                properties: "x,y"
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        MouseArea {
-            parent: tasksView.contentItem
-            anchors.fill:parent
-            onClicked: window.hide()
-        }
     }
 
     PlasmaComponents.RoundButton {

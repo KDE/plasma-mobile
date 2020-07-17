@@ -49,7 +49,9 @@ PlasmaCore.ColorScope {
     Timer {
         running: true
         interval: 200
-        onTriggered: taskSwitcherLoader.source = Qt.resolvedUrl("TaskSwitcher.qml")
+        onTriggered: {
+            taskSwitcherLoader.setSource(Qt.resolvedUrl("TaskSwitcher.qml"), {"model": tasksModel});
+        }
     }
 
     TaskManager.TasksModel {
@@ -57,7 +59,6 @@ PlasmaCore.ColorScope {
         groupMode: TaskManager.TasksModel.GroupDisabled
 
         screenGeometry: plasmoid.screenGeometry
-        filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
         sortMode: TaskManager.TasksModel.SortAlpha
 
         virtualDesktop: virtualDesktopInfo.currentDesktop
