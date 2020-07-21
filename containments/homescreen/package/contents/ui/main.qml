@@ -135,6 +135,7 @@ Item {
             id: scrollabr
             opacity: mainFlickable.moving
             interactive: false
+            enabled: false
             Behavior on opacity {
                 OpacityAnimator {
                     duration: units.longDuration * 2
