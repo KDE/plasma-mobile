@@ -318,6 +318,15 @@ Item {
         }
     }
 
+    MouseArea {
+        anchors.fill:favoriteStrip
+        property real oldMouseY
+        onPressed: oldMouseY = mouse.y
+        onPositionChanged: {
+            mainFlickable.contentY -= mouse.y - oldMouseY;
+            oldMouseY = mouse.y;
+        }
+    }
     Launcher.FavoriteStrip {
         id: favoriteStrip
         anchors {

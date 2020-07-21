@@ -46,7 +46,7 @@ Item {
         var newRow = 0;
 
         var newContainer = internal.containerForItem(delegate, dragCenterX, dragCenterY);
-print("AAA"+newContainer)
+
         // Put it in the favorites strip
         if (newContainer == favoriteStrip) {
             var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
