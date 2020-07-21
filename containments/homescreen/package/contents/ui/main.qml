@@ -66,7 +66,7 @@ Item {
             return;
         }
 
-        plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.floor(Math.min(width, height) / launcher.cellWidth);
+        plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / launcher.cellWidth));
     }
 //END functions
 
