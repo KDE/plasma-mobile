@@ -327,6 +327,9 @@ Item {
             mainFlickable.contentY -= mouse.y - oldMouseY;
             oldMouseY = mouse.y;
         }
+        onReleased: {
+            mainFlickable.flick(0, 1)
+        }
     }
     Launcher.FavoriteStrip {
         id: favoriteStrip
