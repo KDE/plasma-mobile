@@ -56,6 +56,8 @@ install( FILES kwinmultitasking/metadata.desktop DESTINATION ${SERVICES_INSTALL_
 
 install( DIRECTORY qtvirtualkeyboardplugin/ DESTINATION ${KDE_INSTALL_QMLDIR}/QtQuick/VirtualKeyboard/Styles/Plasma )
 
+install( DIRECTORY components/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell )
+
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)

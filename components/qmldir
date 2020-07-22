@@ -1,0 +1,3 @@
+module org.kde.mycroft.bigscreen
+
+singleton HomeScreenControls 1.0 HomeScreenControls.qml
