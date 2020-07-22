@@ -26,6 +26,6 @@ QtObject {
 
     signal resetHomeScreenPosition()
     property Item homeScreen
-    property Window homeScreenWindow
-    property bool homeScreenVisible
+    property QtObject homeScreenWindow
+    property bool homeScreenVisible: true
 }

@@ -18,6 +18,7 @@
  */
 
 import QtQuick 2.12
+import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.0
 
@@ -31,6 +32,8 @@ import "launcher" as Launcher
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.phone.homescreen 1.0
+
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Item {
     id: root
@@ -74,8 +77,32 @@ Item {
     onWidthChanged: recalculateMaxFavoriteCount()
     onHeightChanged:recalculateMaxFavoriteCount()
     Component.onCompleted: {
+        if (plasmoid.screen == 0) {
+            MobileShell.HomeScreenControls.homeScreen = root
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+        }
         componentComplete = true;
         recalculateMaxFavoriteCount()
+    }
+
+    Plasmoid.onScreenChanged: {
+        if (plasmoid.screen == 0) {
+            MobileShell.HomeScreenControls.homeScreen = root
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+        }
+    }
+    Window.onWindowChanged: {
+        if (plasmoid.screen == 0) {
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+        }
+    }
+
+    Connections {
+        target: MobileShell.HomeScreenControls
+        function onResetHomeScreenPosition() {
+            scrollAnim.to = 0;
+            scrollAnim.restart();
+        }
     }
 
     Timer {

@@ -29,11 +29,13 @@ import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.taskmanager 0.1 as TaskManager
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "LayoutManager.js" as LayoutManager
 
 import "quicksettings"
 import "indicators" as Indicators
+
 
 Item {
     id: root
@@ -47,7 +49,7 @@ Item {
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 
-    readonly property bool showingApp: !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+    readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible//!plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
 
     readonly property bool hasTasks: tasksModel.count > 0
 

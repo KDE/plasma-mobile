@@ -29,6 +29,8 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
 PlasmaCore.ColorScope {
     id: root
     width: 600
@@ -37,7 +39,7 @@ PlasmaCore.ColorScope {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property bool showingApp: !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+    readonly property bool showingApp: plasmoid.nativeInterface.hasCloseableActiveWindow// !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
 
     readonly property bool hasTasks: tasksModel.count > 0
 
@@ -46,6 +48,12 @@ PlasmaCore.ColorScope {
         id: taskSwitcherLoader
     }
     //FIXME: why it crashes on startup if TaskSwitcher is loaded immediately?
+    Connections {
+        target: plasmoid.nativeInterface
+        function onHasCloseableActiveWindowChanged() {
+            MobileShell.HomeScreenControls.homeScreenVisible = !plasmoid.nativeInterface.hasCloseableActiveWindow
+        }
+    }
     Timer {
         running: true
         interval: 200
@@ -204,10 +212,11 @@ PlasmaCore.ColorScope {
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "start-here-kde"
                 enabled: taskSwitcher && taskSwitcher.tasksCount > 0
-                checkable: true
-                onCheckedChanged: {
+                //checkable: true
+                onClicked: {
                     taskSwitcher.hide();
                     root.minimizeAll();
+                    MobileShell.HomeScreenControls.resetHomeScreenPosition()
                     //plasmoid.nativeInterface.showDesktop = checked;
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
