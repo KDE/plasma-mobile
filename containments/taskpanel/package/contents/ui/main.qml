@@ -54,6 +54,24 @@ PlasmaCore.ColorScope {
         }
     }
 
+    function minimizeAll() {
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = tasksModel.makeModelIndex(i);
+            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+            }
+        }
+    }
+
+    function restoreAll() {
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = tasksModel.makeModelIndex(i);
+            if (tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+            }
+        }
+    }
+
     TaskManager.TasksModel {
         id: tasksModel
         groupMode: TaskManager.TasksModel.GroupDisabled
@@ -189,7 +207,8 @@ PlasmaCore.ColorScope {
                 checkable: true
                 onCheckedChanged: {
                     taskSwitcher.hide();
-                    plasmoid.nativeInterface.showDesktop = checked;
+                    root.minimizeAll();
+                    //plasmoid.nativeInterface.showDesktop = checked;
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
                 onPositionChanged: mainMouseArea.positionChanged(mouse);

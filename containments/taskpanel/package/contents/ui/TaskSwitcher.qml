@@ -78,8 +78,16 @@ NanoShell.FullScreenOverlay {
     }
 
     function setSingleActiveWindow(id) {
-        if (id >= 0) {
-            window.model.requestActivate(window.model.index(id, 0));
+        if (id < 0) {
+            return;
+        }
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = window.model.index(i, 0)
+            if (i == id) {
+                window.model.requestActivate(idx);
+            } else if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+            }
         }
     }
 
@@ -238,7 +246,9 @@ NanoShell.FullScreenOverlay {
         onClicked: {
             currentTaskIndex = -1;
             window.hide();
-            plasmoid.nativeInterface.showDesktop = true;
+            //plasmoid.nativeInterface.showDesktop = true;
+
+            root.minimizeAll();
         }
     }
 }
