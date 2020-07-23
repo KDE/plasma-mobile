@@ -44,7 +44,7 @@ Item {
             margins: units.gridUnit
         }
         radius: height/2
-        height: layout.implicitHeight + radius
+        height: layout.implicitHeight + units.gridUnit
         color: Qt.rgba(1,1,1, 0.3)
 
         RowLayout {
