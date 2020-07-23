@@ -149,7 +149,7 @@ Item {
         clip: true
         anchors {
             fill: parent
-            topMargin: plasmoid.availableScreenRect.y
+            //topMargin: plasmoid.availableScreenRect.y
             bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
         
@@ -191,6 +191,9 @@ Item {
             width: mainFlickable.width
             spacing: 0
 
+            Item {
+                height: plasmoid.availableScreenRect.y
+            }
             DragDrop.DropArea {
                 anchors {
                     left: parent.left

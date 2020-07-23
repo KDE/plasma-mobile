@@ -182,7 +182,7 @@ Item {
                 }
                 GradientStop {
                     position: 0.0
-                    color: showingApp ? icons.backgroundColor : Qt.rgba(0, 0, 0, 0.05)
+                    color: showingApp ? icons.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
                 }
             }
         }
