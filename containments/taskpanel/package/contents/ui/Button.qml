@@ -28,13 +28,21 @@ MouseArea {
     id: button
     width: Math.min(parent.width, parent.height)
     height: width
+
     property alias iconSource: icon.source
     property bool checked
     property bool checkable
     Rectangle {
+        radius: height/2
         anchors.fill: parent
-        visible: button.pressed
-        opacity: 0.1
+        opacity: button.pressed ? 0.1 : 0
+        color: PlasmaCore.ColorScope.textColor
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
     }
     PlasmaCore.IconItem {
         id: icon

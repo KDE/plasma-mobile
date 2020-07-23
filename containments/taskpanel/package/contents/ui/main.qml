@@ -39,7 +39,7 @@ PlasmaCore.ColorScope {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property bool showingApp: plasmoid.nativeInterface.hasCloseableActiveWindow// !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+    readonly property bool showingApp: !plasmoid.nativeInterface.allMinimized// !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
 
     readonly property bool hasTasks: tasksModel.count > 0
 
@@ -50,8 +50,8 @@ PlasmaCore.ColorScope {
     //FIXME: why it crashes on startup if TaskSwitcher is loaded immediately?
     Connections {
         target: plasmoid.nativeInterface
-        function onHasCloseableActiveWindowChanged() {
-            MobileShell.HomeScreenControls.homeScreenVisible = !plasmoid.nativeInterface.hasCloseableActiveWindow
+        function onAllMinimizedChanged() {
+            MobileShell.HomeScreenControls.homeScreenVisible = plasmoid.nativeInterface.allMinimized
         }
     }
     Timer {
@@ -197,6 +197,9 @@ PlasmaCore.ColorScope {
                 enabled: root.hasTasks
                 iconSource: "box"
                 onClicked: {
+                    if (taskSwitcher.visible) {
+                        return;
+                    }
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
@@ -214,9 +217,12 @@ PlasmaCore.ColorScope {
                 enabled: taskSwitcher && taskSwitcher.tasksCount > 0
                 //checkable: true
                 onClicked: {
-                    taskSwitcher.hide();
+                    if (taskSwitcher.visible) {
+                        return;
+                    }
                     root.minimizeAll();
-                    MobileShell.HomeScreenControls.resetHomeScreenPosition()
+                    MobileShell.HomeScreenControls.resetHomeScreenPosition();
+                    plasmoid.nativeInterface.allMinimizedChanged();
                     //plasmoid.nativeInterface.showDesktop = checked;
                 }
                 onPressed: mainMouseArea.managePressed(mouse);
@@ -238,8 +244,14 @@ PlasmaCore.ColorScope {
                 anchors.right: parent.right
                 iconSource: "paint-none"
                 //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
-                enabled: plasmoid.nativeInterface.hasCloseableActiveWindow
+                opacity: plasmoid.nativeInterface.hasCloseableActiveWindow ? 1 : 0.4
                 onClicked: {
+                    if (taskSwitcher.visible) {
+                        return;
+                    }
+                    if (!plasmoid.nativeInterface.hasCloseableActiveWindow) {
+                        return;
+                    }
                     var index = taskSwitcher.model.activeTask;
                     if (index) {
                         taskSwitcher.model.requestClose(index);

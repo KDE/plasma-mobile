@@ -42,8 +42,8 @@ NanoShell.FullScreenOverlay {
 
     signal closed
 
-    width: Screen.width
-    height: Screen.height
+    //width: Screen.width
+    //height: Screen.height
 
     function open() {
         window.showFullScreen();
@@ -70,13 +70,13 @@ NanoShell.FullScreenOverlay {
             close();
         }
     }
-    onVisibleChanged: {
+    /*onVisibleChanged: {
         if (visible) {
             window.width = Screen.width;
             window.height = Screen.height;
             window.requestActivate();
         }
-    }
+    }*/
 
     SequentialAnimation {
         id: closeAnim

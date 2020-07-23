@@ -42,6 +42,7 @@ class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
+    Q_PROPERTY(bool allMinimized READ allMinimized NOTIFY allMinimizedChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
 
@@ -59,6 +60,9 @@ public:
     }
     void requestShowingDesktop(bool showingDesktop);
 
+    bool allMinimized() const {
+        return m_allMinimized;
+    }
     bool hasCloseableActiveWindow() const;
 
 public Q_SLOTS:
@@ -68,12 +72,14 @@ Q_SIGNALS:
     void showingDesktopChanged(bool);
     void hasCloseableActiveWindowChanged();
     void panelChanged();
+    void allMinimizedChanged();
 
 private:
     void initWayland();
     void updateActiveWindow();
     void updatePanelVisibility();
-    bool m_showingDesktop;
+    bool m_showingDesktop = false;
+    bool m_allMinimized = true;
     QWindow *m_panel = nullptr;
     KWayland::Client::PlasmaShellSurface *m_shellSurface = nullptr;
     KWayland::Client::Surface *m_surface = nullptr;

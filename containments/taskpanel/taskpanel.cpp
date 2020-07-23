@@ -66,6 +66,7 @@ void TaskPanel::initWayland()
     }
     using namespace KWayland::Client;
     ConnectionThread *connection = ConnectionThread::fromApplication(this);
+
     if (!connection) {
         return;
     }
@@ -170,6 +171,17 @@ void TaskPanel::updateActiveWindow()
                 this, &TaskPanel::forgetActiveWindow);
     }
 
+    bool newAllMinimized = true;
+    for (auto *w : m_windowManagement->windows()) {
+        if (!w->isMinimized() && !w->skipTaskbar() && !w->isFullscreen() /*&& w->appId() != QStringLiteral("org.kde.plasmashell")*/) {
+            newAllMinimized = false;
+            break;
+        }
+    }
+    if (newAllMinimized != m_allMinimized) {
+        m_allMinimized = newAllMinimized;
+        emit allMinimizedChanged();
+    }
     // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
     emit hasCloseableActiveWindowChanged();
 }
