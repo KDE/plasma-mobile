@@ -56,7 +56,7 @@ Comment[x-test]=xxSearch and run Applications and servicesxx
 Comment[zh_CN]=搜索和运行应用程序及服务
 Comment[zh_TW]=搜尋並執行應用程式及服務
 
-Icon=preferences-system-time
+Icon=search
 Type=Service
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Marco Martin

@@ -25,22 +25,46 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.milou 0.1 as Milou
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami 2.14 as Kirigami
 
 Item {
     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
     Layout.minimumWidth: Math.min(plasmoid.availableScreenRect.width, plasmoid.availableScreenRect.height) - Kirigami.Units.gridUnit * 2
 
-    PlasmaComponents.TextField {
-        id: bigClock
+    Rectangle {
+        id: background
 
         anchors {
-            fill: parent
+            left: parent.left
+            right: parent.right
+            verticalCenter: parent.verticalCenter
             margins: units.gridUnit
         }
-        text: i18n("Search...")
+        radius: height/2
+        height: layout.implicitHeight + radius
+        color: Qt.rgba(1,1,1, 0.3)
+
+        RowLayout {
+            id: layout
+            anchors {
+                left: parent.left
+                verticalCenter: parent.verticalCenter
+                margins: background.radius/2
+            }
+            Kirigami.Icon {
+                source: "search"
+                Layout.fillHeight: true
+                Layout.preferredWidth: height
+                color: "white"
+            }
+            PlasmaExtras.Heading {
+                level: 2
+                text: i18n("Search...")
+            }
+        }
         MouseArea {
             anchors.fill: parent
             onClicked: window.showMaximized()
