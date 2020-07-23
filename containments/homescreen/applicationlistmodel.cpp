@@ -121,6 +121,7 @@ void ApplicationListModel::loadApplications()
 
     QMap<int, ApplicationData> orderedList;
     QList<ApplicationData> unorderedList;
+    QSet<QString> foundFavorites;
 
     // Iterate over all entries in the group
     while (!subGroupList.isEmpty()) {
@@ -159,6 +160,7 @@ void ApplicationListModel::loadApplications()
 
                             if (m_favorites.contains(data.storageId)) {
                                 data.location = Favorites;
+                                foundFavorites.insert(data.storageId);
                             } else if (m_desktopItems.contains(data.storageId)) {
                                 data.location = Desktop;
                             }
@@ -186,6 +188,18 @@ void ApplicationListModel::loadApplications()
 
     endResetModel();
     emit countChanged();
+
+    bool favChanged = false;
+    for (const auto &item : m_favorites) {
+        if (!foundFavorites.contains(item)) {
+            favChanged = true;
+            m_favorites.removeAll(item);
+        }
+    }
+    if (favChanged) {
+        m_homeScreen->config().writeEntry("Favorites", m_favorites);
+        emit favoriteCountChanged();
+    }
 }
 
 QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
