@@ -32,10 +32,11 @@ MouseArea {
     property alias iconSource: icon.source
     property bool checked
     property bool checkable
+    property bool clickable
     Rectangle {
         radius: height/2
         anchors.fill: parent
-        opacity: button.pressed ? 0.1 : 0
+        opacity: button.pressed && button.containsMouse && button.clickable ? 0.1 : 0
         color: PlasmaCore.ColorScope.textColor
         Behavior on opacity {
             OpacityAnimator {
@@ -48,7 +49,7 @@ MouseArea {
         id: icon
         anchors.fill: parent
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        enabled: button.enabled
+        enabled: button.enabled && button.clickable
     }
     onClicked: {
         if (checkable) {

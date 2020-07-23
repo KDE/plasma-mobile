@@ -103,6 +103,12 @@ Item {
             scrollAnim.to = 0;
             scrollAnim.restart();
         }
+        function onSnapHomeScreenPosition() {
+            mainFlickable.flick(0, 1);
+        }
+        function onRequestHomeScreenPosition(y) {
+            mainFlickable.contentY = y;
+        }
     }
 
     Timer {
@@ -157,6 +163,8 @@ Item {
         onDragEnded: cancelEditModeForItemsRequested()
         onFlickStarted: cancelEditModeForItemsRequested()
         onFlickEnded: cancelEditModeForItemsRequested()
+
+        onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
 
         PlasmaComponents.ScrollBar.vertical: PlasmaComponents.ScrollBar {
             id: scrollabr
@@ -355,7 +363,7 @@ Item {
             oldMouseY = mouse.y;
         }
         onReleased: {
-            mainFlickable.flick(0, 1)
+            mainFlickable.flick(0, 1);
         }
     }
     Launcher.FavoriteStrip {

@@ -124,10 +124,14 @@ PlasmaCore.ColorScope {
 
             taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
             opening = oldMouseY > mouse.y;
-            oldMouseY = mouse.y;
+
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
                 taskSwitcher.showFullScreen();
+            //no tasks, let's scroll up the homescreen instead
+            } else if (taskSwitcher.tasksCount === 0) {
+                MobileShell.HomeScreenControls.requestHomeScreenPosition(MobileShell.HomeScreenControls.homeScreenPosition - (mouse.y - oldMouseY));
             }
+            oldMouseY = mouse.y;
         }
         onReleased: {
             if (!isDragging) {
@@ -135,6 +139,9 @@ PlasmaCore.ColorScope {
             }
 
             if (taskSwitcher.visibility == Window.Hidden) {
+                if (taskSwitcher.tasksCount === 0) {
+                    MobileShell.HomeScreenControls.snapHomeScreenPosition();
+                }
                 return;
             }
             if (opening) {
@@ -195,9 +202,10 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 enabled: root.hasTasks
+                clickable: root.hasTasks && !taskSwitcher.visible
                 iconSource: "box"
                 onClicked: {
-                    if (taskSwitcher.visible) {
+                    if (!clickable) {
                         return;
                     }
                     plasmoid.nativeInterface.showDesktop = false;
@@ -214,10 +222,10 @@ PlasmaCore.ColorScope {
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
                 iconSource: "start-here-kde"
-                enabled: taskSwitcher && taskSwitcher.tasksCount > 0
+                clickable: !taskSwitcher.visible && (root.showingApp || MobileShell.HomeScreenControls.homeScreenPosition != 0)
                 //checkable: true
                 onClicked: {
-                    if (taskSwitcher.visible) {
+                    if (!clickable) {
                         return;
                     }
                     root.minimizeAll();
@@ -244,9 +252,9 @@ PlasmaCore.ColorScope {
                 anchors.right: parent.right
                 iconSource: "paint-none"
                 //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
-                opacity: plasmoid.nativeInterface.hasCloseableActiveWindow ? 1 : 0.4
+                clickable: plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible
                 onClicked: {
-                    if (taskSwitcher.visible) {
+                    if (!clickable) {
                         return;
                     }
                     if (!plasmoid.nativeInterface.hasCloseableActiveWindow) {
