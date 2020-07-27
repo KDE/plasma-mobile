@@ -192,6 +192,7 @@ Item {
             spacing: 0
 
             Item {
+                width: 1
                 height: plasmoid.availableScreenRect.y
             }
             DragDrop.DropArea {
@@ -199,7 +200,7 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                height: mainFlickable.height //TODO: multiple widgets pages
+                height: mainFlickable.height - plasmoid.availableScreenRect.y //TODO: multiple widgets pages
 
                 onDragEnter: {
                     event.accept(event.proposedAction);
