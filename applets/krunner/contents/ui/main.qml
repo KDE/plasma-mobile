@@ -84,29 +84,81 @@ Item {
                     focus: true
                 }
             }
-            PlasmaCore.IconItem {
-                anchors {
-                    bottom: parent.bottom
-                    right: parent.right
-                }
-                width: Math.min(parent.width, parent.height) * 0.8
-                height: width
-                opacity: 0.2
-                source: "search"
-            }
-            Controls.ScrollView {
+            Rectangle {
                 anchors.fill: parent
-                Milou.ResultsListView {
-                    id: listView
-                    queryString: queryField.text
-                    highlight: null
-                    PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-                    anchors.rightMargin: 10
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.View
+                color: Kirigami.Theme.BackgroundColor
+                PlasmaCore.IconItem {
+                    anchors {
+                        bottom: parent.bottom
+                        right: parent.right
+                    }
+                    width: Math.min(parent.width, parent.height) * 0.8
+                    height: width
+                    opacity: 0.2
+                    source: "search"
+                }
+                Controls.ScrollView {
+                    anchors.fill: parent
+                    Milou.ResultsListView {
+                        id: listView
+                        queryString: queryField.text
+                        highlight: null
+                        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+                        anchors.rightMargin: 10
 
-                    onActivated: queryField.text = ""
-                    onUpdateQueryString: {
-                        queryField.text = text
-                        queryField.cursorPosition = cursorPosition
+                        onActivated: {
+                            window.visible = false;
+                            queryField.text = "";
+                        }
+                        onUpdateQueryString: {
+                            queryField.text = text
+                            queryField.cursorPosition = cursorPosition
+                        }
+                        delegate: Kirigami.BasicListItem {
+                            id: resultDelegate
+                            property var additionalActions: typeof actions !== "undefined" ? actions : []
+                            icon: model.decoration
+                            label: typeof modelData !== "undefined" ? modelData : model.display
+                            subtitle: model.subtext || ""
+                            onClicked: {
+                                listView.currentIndex = model.index
+                                listView.runCurrentIndex()
+                            }
+                            Row {
+                                id: actionsRow
+
+                                Repeater {
+                                    id: actionsRepeater
+                                    model: resultDelegate.additionalActions
+
+                                    Controls.ToolButton {
+                                        width: height
+                                        height: listItem.height
+                                        visible: modelData.visible || true
+                                        enabled: modelData.enabled || true
+
+                                        Accessible.role: Accessible.Button
+                                        Accessible.name: modelData.text
+                                        checkable: checked
+                                        checked: resultDelegate.activeAction === index
+                                        focus: resultDelegate.activeAction === index
+
+                                        Kirigami.Icon{
+                                            anchors.centerIn: parent
+                                            width: units.iconSizes.small
+                                            height: units.iconSizes.small
+                                            // ToolButton cannot cope with QIcon
+                                            source: modelData.icon || ""
+                                            active: parent.hovered || parent.checked
+                                        }
+
+                                        onClicked: resultDelegate.ListView.view.runAction(index)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
