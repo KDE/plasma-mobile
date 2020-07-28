@@ -35,6 +35,10 @@
 #include <KSycoca>
 #include <KSycocaEntry>
 
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/plasmawindowmanagement.h>
+#include <KWayland/Client/registry.h>
+
 constexpr int MAX_FAVOURITES = 5;
 
 ApplicationListModel::ApplicationListModel(HomeScreen *parent)
@@ -45,6 +49,7 @@ ApplicationListModel::ApplicationListModel(HomeScreen *parent)
             this, &ApplicationListModel::sycocaDbChanged);
 
     loadSettings();
+    initWayland();
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
@@ -79,7 +84,8 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
         {ApplicationEntryPathRole, QByteArrayLiteral("applicationEntryPath")},
         {ApplicationOriginalRowRole, QByteArrayLiteral("applicationOriginalRow")},
         {ApplicationStartupNotifyRole, QByteArrayLiteral("applicationStartupNotify")},
-        {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")}
+        {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")},
+        {ApplicationRunningRole, QByteArrayLiteral("applicationRunning")}
     };
 }
 
@@ -97,6 +103,57 @@ void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
 bool appNameLessThan(const ApplicationListModel::ApplicationData &a1, const ApplicationListModel::ApplicationData &a2)
 {
     return a1.name.toLower() < a2.name.toLower();
+}
+
+void ApplicationListModel::initWayland()
+{
+    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
+        return;
+    }
+    using namespace KWayland::Client;
+    ConnectionThread *connection = ConnectionThread::fromApplication(this);
+
+    if (!connection) {
+        return;
+    }
+    auto *registry = new Registry(this);
+    registry->create(connection);
+    connect(registry, &Registry::plasmaWindowManagementAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+            m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
+            qRegisterMetaType<QVector<int> >("QVector<int>");
+
+            connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated,
+                    this, [this] (KWayland::Client::PlasmaWindow *window) {
+                if (window->appId() == QStringLiteral("org.kde.plasmashell")) {
+                    return;
+                }
+                int idx = 0;
+                for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+                    if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+                        (*i).window = window;
+                        emit dataChanged(index(idx, 0), index(idx, 0));
+                        connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window] () {
+                            int idx = 0;
+                            for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+                                if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+                                    (*i).window = nullptr;
+                                    emit dataChanged(index(idx, 0), index(idx, 0));
+                                    break;
+                                }
+                                idx++;
+                            }
+                        });
+                        break;
+                    }
+                    idx++;
+                }
+            });
+        }
+    );
+
+    registry->setup();
+    connection->roundtrip();
 }
 
 void ApplicationListModel::loadApplications()
@@ -224,6 +281,8 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return m_applicationList.at(index.row()).startupNotify;
     case ApplicationLocationRole:
         return m_applicationList.at(index.row()).location;
+    case ApplicationRunningRole:
+        return m_applicationList.at(index.row()).window != nullptr;
 
     default:
         return QVariant();
@@ -337,6 +396,13 @@ void ApplicationListModel::runApplication(const QString &storageId)
 {
     if (storageId.isEmpty()) {
         return;
+    }
+
+    for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+        if ((*i).window && (*i).storageId == storageId) {
+            (*i).window->requestActivate();
+            return;
+        }
     }
 
     KService::Ptr service = KService::serviceByStorageId(storageId);

@@ -93,7 +93,11 @@ ContainmentLayoutManager.ItemContainer {
 
     contentItem: MouseArea {
         onClicked: {
-            delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationName)
+            if (modelData.applicationRunning) {
+                delegate.launch(0, 0, "", modelData.applicationName);
+            } else {
+                delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationName);
+            }
 
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.applicationStorageId);
         }
@@ -119,11 +123,17 @@ ContainmentLayoutManager.ItemContainer {
 
                 usesPlasmaTheme: false
                 source: modelData ? modelData.applicationIcon : ""
-                Behavior on scale {
-                    NumberAnimation {
-                        duration: units.longDuration
-                        easing.type: Easing.InOutQuad
+
+                Rectangle {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
                     }
+                    visible: model.applicationRunning
+                    radius: width
+                    width: units.smallSpacing
+                    height: width
+                    color: theme.highlightColor
                 }
             }
 

@@ -16,6 +16,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                       KF5::Service
                       KF5::KIOGui
                       KF5::Notifications
+                      KF5::WaylandClient
 )
 
 

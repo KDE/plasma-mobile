@@ -30,6 +30,15 @@
 
 class QString;
 
+namespace KWayland
+{
+namespace Client
+{
+class PlasmaWindowManagement;
+class PlasmaWindow;
+}
+}
+
 class ApplicationListModel;
 
 class ApplicationListModel : public QAbstractListModel {
@@ -54,6 +63,7 @@ public:
         QString entryPath;
         LauncherLocation location = LauncherLocation::Grid;
         bool startupNotify = true;
+        KWayland::Client::PlasmaWindow *window = nullptr;
     };
 
     enum Roles {
@@ -63,7 +73,8 @@ public:
         ApplicationEntryPathRole,
         ApplicationOriginalRowRole,
         ApplicationStartupNotifyRole,
-        ApplicationLocationRole
+        ApplicationLocationRole,
+        ApplicationRunningRole
     };
 
     ApplicationListModel(HomeScreen *parent = nullptr);
@@ -104,8 +115,11 @@ Q_SIGNALS:
     void maxFavoriteCountChanged();
 
 private:
+    void initWayland();
+
     QList<ApplicationData> m_applicationList;
 
+    KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     HomeScreen *m_homeScreen = nullptr;
     int m_maxFavoriteCount = 0;
     QStringList m_appOrder;

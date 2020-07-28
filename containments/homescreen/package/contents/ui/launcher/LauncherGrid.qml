@@ -68,14 +68,14 @@ LauncherContainer {
                 }
             }
             onLaunch: (x, y, icon, title) => {
-                delegate.grabToImage((img) => {
+                if (icon !== "") {
                     NanoShell.StartupFeedback.open(
-                                icon,
-                                title,
-                                delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
-                                delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
-                                Math.min(delegate.iconItem.width, delegate.iconItem.height)
-                )});
+                            icon,
+                            title,
+                            delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
+                            delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
+                            Math.min(delegate.iconItem.width, delegate.iconItem.height));
+                }
                 root.launched();
             }
             onParentFromLocationChanged: {
