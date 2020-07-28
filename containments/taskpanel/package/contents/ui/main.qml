@@ -271,4 +271,10 @@ PlasmaCore.ColorScope {
             }
         }
     }
+    //This is to give an animation when the plasma button is pressed
+    Item {
+        id: dummyWindowTask
+        width: Screen.width
+        height: Screen.height
+    }
 }

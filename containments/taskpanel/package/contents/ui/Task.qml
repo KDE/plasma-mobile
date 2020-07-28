@@ -38,13 +38,27 @@ Item {
         }
     }
 
+    function syncDelegateGeometry() {
+        let pos = delegate.mapToItem(tasksView, 0, 0);
+        if (window.visible) {
+            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), delegate);
+        } else {
+            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
+        }
+    }
     Connections {
         target: tasksView
         onContentYChanged: {
-            var pos = delegate.mapToItem(tasksView, 0, 0);
-            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height));
+            syncDelegateGeometry();
         }
     }
+    Connections {
+        target: window
+        function onVisibleChanged() {
+            syncDelegateGeometry();
+        }
+    }
+    Component.onCompleted: syncDelegateGeometry();
 
     Item {
         anchors {
