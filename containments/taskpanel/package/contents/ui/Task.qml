@@ -87,41 +87,56 @@ Item {
         Rectangle {
             id: background
 
-            PlasmaComponents.ToolButton {
-                z: 99
-                icon.name: "window-close"
-                icon.width: units.iconSizes.medium
-                icon.height: units.iconSizes.medium
-                anchors {
-                    top: parent.top
-                    right: parent.right
-                }
-                onClicked: {
-                    slideAnim.to = -background.width*2;
-                    slideAnim.running = true;
-                }
-            }
             width: parent.width
             height: parent.height
             radius: units.smallSpacing
-            opacity: 0.9 * (1-Math.abs(x)/width)
-            PlasmaCore.IconItem {
-                anchors.centerIn: parent
-                width: Math.min(parent.width, parent.height) / 2
-                height: width
-                usesPlasmaTheme: false
-                source: model.decoration
-            }
-            PlasmaComponents.Label {
+            color: theme.backgroundColor
+            opacity: 1 * (1-Math.abs(x)/width)
+            ColumnLayout {
                 anchors {
-                    bottom: parent.bottom
-                    left: parent.left
-                    right: parent.right
+                    fill: parent
                     margins: units.smallSpacing
                 }
-                horizontalAlignment: Text.AlignHCenter
-                elide: Text.ElideRight
-                text: model.display
+                
+                RowLayout {
+                    Layout.fillWidth: true
+                    Layout.maximumHeight: units.gridUnit
+                    PlasmaCore.IconItem {
+                        Layout.fillHeight: true
+                        Layout.preferredWidth: height
+                        usesPlasmaTheme: false
+                        source: model.decoration
+                    }
+                    PlasmaComponents.Label {
+                        Layout.fillWidth: true
+                        horizontalAlignment: Text.AlignHCenter
+                        elide: Text.ElideRight
+                        text: model.display
+                        color: theme.textColor
+                    }
+                    PlasmaComponents.ToolButton {
+                        z: 99
+                        icon.name: "window-close"
+                        icon.width: units.iconSizes.medium
+                        icon.height: units.iconSizes.medium
+                        onClicked: {
+                            slideAnim.to = -background.width*2;
+                            slideAnim.running = true;
+                        }
+                    }
+                }
+                TaskManager.PipeWireSourceItem {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    //visible: waylandItem.nodeId > 0
+                    visible: true
+                    nodeId: waylandItem.nodeId
+
+                    TaskManager.ScreencastingItem {
+                        id: waylandItem
+                        uuid: model.WinIdList[0]
+                    }
+                }
             }
             MouseArea {
                 anchors.fill: parent
