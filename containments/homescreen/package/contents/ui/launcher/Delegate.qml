@@ -27,7 +27,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
-
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.phone.homescreen 1.0
 
 ContainmentLayoutManager.ItemContainer {
@@ -51,9 +51,30 @@ ContainmentLayoutManager.ItemContainer {
 
     signal launch(int x, int y, var source, string title)
 
+    readonly property bool applicationRunning: model.applicationRunning
+    onApplicationRunningChanged: {
+        if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
+            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
+        }
+    }
     Connections {
         target: mainFlickable
-        onCancelEditModeForItemsRequested: cancelEdit()
+        function onCancelEditModeForItemsRequested() {
+            cancelEdit()
+        }
+        function onContentYChanged() {
+            if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
+                plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
+            }
+        }
+    }
+    Connections {
+        target: MobileShell.HomeScreenControls
+        function taskSwitcherVisibleChanged() {
+            if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
+                plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
+            }
+        }
     }
     onDragActiveChanged: {
         launcherDragManager.active = dragActive

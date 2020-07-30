@@ -43,7 +43,7 @@ Item {
         if (window.visible) {
             tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), delegate);
         } else {
-            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
+          //  tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
         }
     }
     Connections {
@@ -58,6 +58,7 @@ Item {
             syncDelegateGeometry();
         }
     }
+
     Component.onCompleted: syncDelegateGeometry();
 
     Item {

@@ -31,4 +31,5 @@ QtObject {
     property Item homeScreen
     property QtObject homeScreenWindow
     property bool homeScreenVisible: true
+    property bool taskSwitcherVisible: false
 }

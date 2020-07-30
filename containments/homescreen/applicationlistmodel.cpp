@@ -25,6 +25,8 @@
 #include <QModelIndex>
 #include <QProcess>
 #include <QDebug>
+#include <QQuickItem>
+#include <QQuickWindow>
 
 // KDE
 #include <KIO/ApplicationLauncherJob>
@@ -38,6 +40,7 @@
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
 #include <KWayland/Client/registry.h>
+#include <KWayland/Client/surface.h>
 
 constexpr int MAX_FAVOURITES = 5;
 
@@ -442,6 +445,39 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
     m_homeScreen->config().writeEntry("MaxFavoriteCount", m_maxFavoriteCount);
 
     emit maxFavoriteCountChanged();
+}
+
+void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
+{
+    if (row < 0 || row >= m_applicationList.count()) {
+        return;
+    }
+
+    if (!delegate || !delegate->parentItem() || !delegate->window()) {
+        return;
+    }
+
+    QWindow *delegateWindow = delegate->window();
+
+    if (!delegateWindow) {
+        return;
+    }
+
+    using namespace KWayland::Client;
+    KWayland::Client::PlasmaWindow *window = m_applicationList[row].window;
+    if (!window) {
+        return;
+    }
+
+    Surface *surface = Surface::fromWindow(delegateWindow);
+
+    if (!surface) {
+        return;
+    }
+
+    QRect rect = delegate->mapRectToScene(QRectF(0,0, delegate->width(), delegate->height())).toRect();
+
+    window->setMinimizedGeometry(surface, rect);
 }
 
 #include "moc_applicationlistmodel.cpp"
