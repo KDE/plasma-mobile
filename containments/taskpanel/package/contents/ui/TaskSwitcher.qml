@@ -78,7 +78,7 @@ NanoShell.FullScreenOverlay {
         scrollAnim.restart();
     }
 
-    function setSingleActiveWindow(id) {
+    function setSingleActiveWindow(id, delegate) {
         if (id < 0) {
             return;
         }
@@ -90,6 +90,8 @@ NanoShell.FullScreenOverlay {
                 tasksModel.requestToggleMinimized(idx);
             }
         }
+        activateAnim.delegate = delegate;
+        activateAnim.restart();
     }
 
     onOffsetChanged: tasksView.contentY = offset + grid.y
@@ -116,10 +118,41 @@ NanoShell.FullScreenOverlay {
         }
         ScriptAction {
             script: {
-                if (tasksView.contentY <= 0 || tasksView.contentY >= tasksView.contentHeight - window.height) {
-                    window.visible = false;
-                    setSingleActiveWindow(currentTaskIndex);
-                }
+                window.visible = false;
+            }
+        }
+    }
+    
+    SequentialAnimation {
+        id: activateAnim
+        property Item delegate
+        ScriptAction {
+            script: {
+                activateAnim.delegate.z = 2;
+            }
+        }
+        ParallelAnimation {
+            OpacityAnimator {
+                target: window.contentItem
+                from: 1
+                to: 0
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            ScaleAnimator {
+                target: activateAnim.delegate
+                from: 1
+                to: 2
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        ScriptAction {
+            script: {
+                window.visible = false;
+                activateAnim.delegate.z = 0;
+                activateAnim.delegate.scale = 1;
+                window.contentItem.opacity = 1
             }
         }
     }

@@ -132,8 +132,8 @@ Item {
                 }
                 onPressed: delegate.z = 10;
                 onClicked: {
-                    window.hide();
-                    window.setSingleActiveWindow(model.index);
+                    //window.hide();
+                    window.setSingleActiveWindow(model.index, delegate);
                 }
                 onReleased: {
                     delegate.z = 0;
