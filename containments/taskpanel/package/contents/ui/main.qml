@@ -39,7 +39,8 @@ PlasmaCore.ColorScope {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property bool showingApp: !plasmoid.nativeInterface.allMinimized// !plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+    readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : PlasmaCore.ColorScope.backgroundColor
+    readonly property bool showingApp: !plasmoid.nativeInterface.allMinimized
 
     readonly property bool hasTasks: tasksModel.count > 0
 
@@ -167,32 +168,17 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
 
             visible: plasmoid.configuration.PanelButtonsVisible
-/*
-            Rectangle {
-                anchors.fill: parent
-                color: root.backgroundColor
-                opacity: showingApp ? 1 : 0
-                Rectangle {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                        top: parent.top
-                    }
-                    height: 1
-                    color: PlasmaCore.ColorScope.textColor
-                    opacity: 0.2
-                }
-            }*/
+
             Rectangle {
                 anchors.fill: parent
                 gradient: Gradient {
                     GradientStop {
                         position: 0
-                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : "transparent"
+                        color: showingApp ? root.backgroundColor : "transparent"
                     }
                     GradientStop {
                         position: 1
-                        color: showingApp ? PlasmaCore.ColorScope.backgroundColor : Qt.rgba(0, 0, 0, 0.05)
+                        color: showingApp ? root.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
                     }
                 }
             }

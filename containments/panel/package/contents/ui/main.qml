@@ -49,7 +49,8 @@ Item {
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 
-    readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible//!plasmoid.nativeInterface.showDesktop && (hasTasks || NanoShell.StartupFeedback.visible)
+    readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : icons.backgroundColor
+    readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible
 
     readonly property bool hasTasks: tasksModel.count > 0
 
@@ -178,11 +179,11 @@ Item {
             gradient: Gradient {
                 GradientStop {
                     position: 1.0
-                    color: showingApp ? icons.backgroundColor : "transparent"
+                    color: showingApp ? root.backgroundColor : "transparent"
                 }
                 GradientStop {
                     position: 0.0
-                    color: showingApp ? icons.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
+                    color: showingApp ? root.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
                 }
             }
         }
