@@ -47,7 +47,6 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
     m_activeTimer->setInterval(ACTIVE_WINDOW_UPDATE_INVERVAL);
     connect(m_activeTimer, &QTimer::timeout, this, &TaskPanel::updateActiveWindow);
     initWayland();
-    m_activeTimer->start();
 }
 
 TaskPanel::~TaskPanel() = default;
@@ -92,7 +91,7 @@ void TaskPanel::initWayland()
             connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::activeWindowChanged,
                     m_activeTimer, qOverload<>(&QTimer::start));
 
-            updateActiveWindow();
+            m_activeTimer->start();
         }
     );
     connect(registry, &Registry::plasmaShellAnnounced, this,
