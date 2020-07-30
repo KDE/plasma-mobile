@@ -118,7 +118,10 @@ NanoShell.FullScreenOverlay {
         }
         ScriptAction {
             script: {
-                window.visible = false;
+                if (tasksView.contentY <= 0 || tasksView.contentY >= tasksView.contentHeight - window.height) {
+                    window.visible = false;
+                    setSingleActiveWindow(currentTaskIndex);
+                }
             }
         }
     }
