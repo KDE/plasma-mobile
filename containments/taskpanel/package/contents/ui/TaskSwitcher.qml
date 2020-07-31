@@ -51,9 +51,15 @@ NanoShell.FullScreenOverlay {
             hide();
         }
     }
-    color: Qt.rgba(0, 0, 0, 0.6 * Math.min(
-        (Math.min(tasksView.contentY, tasksView.height) / tasksView.height),
-        ((tasksView.contentHeight - tasksView.contentY - window.height) / tasksView.height)))
+    color: "transparent"
+    // More controllable than the color property
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(0, 0, 0, 0.6)
+        opacity: Math.min(
+            (Math.min(tasksView.contentY, tasksView.height) / tasksView.height),
+            ((tasksView.contentHeight - tasksView.contentY - window.height) / tasksView.height))
+    }
 
     function show() {
         if (window.model.count == 0) {
@@ -108,7 +114,6 @@ NanoShell.FullScreenOverlay {
             }
         }
         MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
-        print("BBBB"+MobileShell.HomeScreenControls.taskSwitcherVisible)
     }
 
     SequentialAnimation {
@@ -143,6 +148,16 @@ NanoShell.FullScreenOverlay {
         ScriptAction {
             script: {
                 activateAnim.delegate.z = 2;
+                let pos = tasksView.mapFromItem(activateAnim.delegate, 0, 0);
+                if (pos.x < tasksView.width / 2 && pos.y < tasksView.height / 2) {
+                    activateAnim.delegate.transformOrigin = Item.TopLeft;
+                } else if (pos.x < tasksView.width / 2 && pos.y >= tasksView.height / 2) {
+                    activateAnim.delegate.transformOrigin = Item.BottomLeft;
+                } else if (pos.x >= tasksView.width / 2 && pos.y < tasksView.height / 2) {
+                    activateAnim.delegate.transformOrigin = Item.TopRight;
+                } else {
+                    activateAnim.delegate.transformOrigin = Item.BottomRight;
+                }
             }
         }
         ParallelAnimation {
@@ -164,9 +179,6 @@ NanoShell.FullScreenOverlay {
         ScriptAction {
             script: {
                 window.visible = false;
-                activateAnim.delegate.z = 0;
-                activateAnim.delegate.scale = 1;
-                window.contentItem.opacity = 1
             }
         }
     }
