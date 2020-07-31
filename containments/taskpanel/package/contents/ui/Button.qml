@@ -24,22 +24,24 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
-MouseArea {
+Item {
     id: button
     width: Math.min(parent.width, parent.height)
     height: width
 
+    property MouseArea mouseArea
+    readonly property bool pressed: mouseArea.pressed && mouseArea.activeButton == button
     property alias iconSource: icon.source
-    property bool checked
-    property bool checkable
-    property bool clickable
+    signal clicked()
+
     Rectangle {
         radius: height/2
         anchors.fill: parent
-        opacity: button.pressed && button.containsMouse && button.clickable ? 0.1 : 0
+        opacity: button.pressed && button.enabled ? 0.1 : 0
         color: PlasmaCore.ColorScope.textColor
         Behavior on opacity {
-            OpacityAnimator {
+            //an OpacityAnimator causes stuttering in task switcher dragging
+            NumberAnimation {
                 duration: units.longDuration
                 easing.type: Easing.InOutQuad
             }
@@ -49,11 +51,6 @@ MouseArea {
         id: icon
         anchors.fill: parent
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        enabled: button.enabled && button.clickable
-    }
-    onClicked: {
-        if (checkable) {
-            checked = !checked;
-        }
+        //enabled: button.enabled && button.clickable
     }
 }

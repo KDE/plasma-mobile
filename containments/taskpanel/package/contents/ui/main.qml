@@ -110,12 +110,18 @@ PlasmaCore.ColorScope {
         property bool isDragging: false
         property bool opening: false
         drag.filterChildren: true
-        function managePressed(mouse) {
+        property Button activeButton
+
+        onPressed: {
             startMouseY = oldMouseY = mouse.y;
-            taskSwitcher.offset = -taskSwitcher.height
+            taskSwitcher.offset = -taskSwitcher.height;
+            activeButton = icons.childAt(mouse.x, mouse.y);
         }
-        onPressed: managePressed(mouse);
         onPositionChanged: {
+            let newButton = icons.childAt(mouse.x, mouse.y);
+            if (newButton != activeButton) {
+                activeButton = null;
+            }
             if (!isDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
                 oldMouseY = mouse.y;
                 return;
@@ -127,6 +133,7 @@ PlasmaCore.ColorScope {
             opening = oldMouseY > mouse.y;
 
             if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
+                activeButton = null;
                 taskSwitcher.showFullScreen();
             //no tasks, let's scroll up the homescreen instead
             } else if (taskSwitcher.tasksCount === 0) {
@@ -135,16 +142,21 @@ PlasmaCore.ColorScope {
             oldMouseY = mouse.y;
         }
         onReleased: {
-            if (!isDragging) {
-                return;
-            }
-
             if (taskSwitcher.visibility == Window.Hidden) {
                 if (taskSwitcher.tasksCount === 0) {
                     MobileShell.HomeScreenControls.snapHomeScreenPosition();
                 }
+
+                if (activeButton) {
+                    activeButton.clicked();
+                }
                 return;
             }
+
+            if (!isDragging) {
+                return;
+            }
+
             if (opening) {
                 taskSwitcher.show();
             } else {
@@ -187,19 +199,16 @@ PlasmaCore.ColorScope {
                 anchors.left: parent.left
                 height: parent.height
                 width: parent.width/3
+                mouseArea: mainMouseArea
                 enabled: root.hasTasks
-                clickable: root.hasTasks && !taskSwitcher.visible
                 iconSource: "box"
                 onClicked: {
-                    if (!clickable) {
+                    if (!enabled) {
                         return;
                     }
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
-                onPressed: mainMouseArea.managePressed(mouse);
-                onPositionChanged: mainMouseArea.positionChanged(mouse);
-                onReleased: mainMouseArea.released(mouse);
             }
 
             Button {
@@ -207,28 +216,16 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 anchors.horizontalCenter: parent.horizontalCenter
+                mouseArea: mainMouseArea
                 iconSource: "start-here-kde"
-                clickable: !taskSwitcher.visible && (root.showingApp || MobileShell.HomeScreenControls.homeScreenPosition != 0)
-                //checkable: true
+                enabled: !taskSwitcher.visible && (root.showingApp || MobileShell.HomeScreenControls.homeScreenPosition != 0)
                 onClicked: {
-                    if (!clickable) {
+                    if (!enabled) {
                         return;
                     }
                     root.minimizeAll();
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
                     plasmoid.nativeInterface.allMinimizedChanged();
-                    //plasmoid.nativeInterface.showDesktop = checked;
-                }
-                onPressed: mainMouseArea.managePressed(mouse);
-                onPositionChanged: mainMouseArea.positionChanged(mouse);
-                onReleased: mainMouseArea.released(mouse);
-                Connections {
-                    target: root.taskSwitcher
-                    onCurrentTaskIndexChanged: {
-                        if (root.taskSwitcher.currentTaskIndex < 0) {
-                            showDesktopButton.checked = false;
-                        }
-                    }
                 }
             }
 
@@ -236,11 +233,11 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width/3
                 anchors.right: parent.right
+                mouseArea: mainMouseArea
                 iconSource: "paint-none"
-                //FIXME:Qt.UserRole+9 is IsWindow Qt.UserRole+15 is IsClosable. We can't reach that enum from QML
-                clickable: plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible
+                enabled: plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible
                 onClicked: {
-                    if (!clickable) {
+                    if (!enabled) {
                         return;
                     }
                     if (!plasmoid.nativeInterface.hasCloseableActiveWindow) {
@@ -251,9 +248,6 @@ PlasmaCore.ColorScope {
                         taskSwitcher.model.requestClose(index);
                     }
                 }
-                onPressed: mainMouseArea.managePressed(mouse);
-                onPositionChanged: mainMouseArea.positionChanged(mouse);
-                onReleased: mainMouseArea.released(mouse);
             }
         }
     }
