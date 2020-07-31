@@ -453,10 +453,6 @@ void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
         return;
     }
 
-    if (!delegate || !delegate->parentItem() || !delegate->window()) {
-        return;
-    }
-
     QWindow *delegateWindow = delegate->window();
 
     if (!delegateWindow) {
@@ -478,6 +474,33 @@ void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
     QRect rect = delegate->mapRectToScene(QRectF(0,0, delegate->width(), delegate->height())).toRect();
 
     window->setMinimizedGeometry(surface, rect);
+}
+
+void ApplicationListModel::unsetMinimizedDelegate(int row, QQuickItem *delegate)
+{
+    if (row < 0 || row >= m_applicationList.count()) {
+        return;
+    }
+
+    QWindow *delegateWindow = delegate->window();
+
+    if (!delegateWindow) {
+        return;
+    }
+
+    using namespace KWayland::Client;
+    KWayland::Client::PlasmaWindow *window = m_applicationList[row].window;
+    if (!window) {
+        return;
+    }
+
+    Surface *surface = Surface::fromWindow(delegateWindow);
+
+    if (!surface) {
+        return;
+    }
+qWarning()<<"UNSETTING"<<window->title();
+    window->unsetMinimizedGeometry(surface);
 }
 
 #include "moc_applicationlistmodel.cpp"

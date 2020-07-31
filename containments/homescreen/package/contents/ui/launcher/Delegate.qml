@@ -51,11 +51,21 @@ ContainmentLayoutManager.ItemContainer {
 
     signal launch(int x, int y, var source, string title)
 
+    function syncDelegateGeometry() {
+        if (!applicationRunning) {
+            return;
+        }
+
+        if (!MobileShell.HomeScreenControls.taskSwitcherVisible) {
+            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
+        } else {
+            plasmoid.nativeInterface.applicationListModel.unsetMinimizedDelegate(index, delegate);
+        }
+    }
+
     readonly property bool applicationRunning: model.applicationRunning
     onApplicationRunningChanged: {
-        if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
-            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
-        }
+        syncDelegateGeometry();
     }
     Connections {
         target: mainFlickable
@@ -63,17 +73,13 @@ ContainmentLayoutManager.ItemContainer {
             cancelEdit()
         }
         function onContentYChanged() {
-            if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
-                plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
-            }
+            syncDelegateGeometry()
         }
     }
     Connections {
         target: MobileShell.HomeScreenControls
-        function taskSwitcherVisibleChanged() {
-            if (applicationRunning && !MobileShell.HomeScreenControls.taskSwitcherVisible) {
-                plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
-            }
+        function onTaskSwitcherVisibleChanged() {
+            syncDelegateGeometry();
         }
     }
     onDragActiveChanged: {

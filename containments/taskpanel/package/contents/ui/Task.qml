@@ -132,10 +132,9 @@ Item {
                 }
                 onPressed: delegate.z = 10;
                 onClicked: {
-                    if (model.IsActive) {
-                        window.hide();
-                    } else {
-                        window.setSingleActiveWindow(model.index, delegate);
+                    window.setSingleActiveWindow(model.index, delegate);
+                    if (!model.IsMinimized) {
+                        window.visible = false;
                     }
                 }
                 onReleased: {

@@ -98,8 +98,17 @@ NanoShell.FullScreenOverlay {
     onVisibleChanged: {
         if (!visible) {
             tasksView.contentY = 0;
+            moveTransition.enabled = false;
+            scrollAnim.running = false;
+            activateAnim.running = false;
+            window.contentItem.opacity = 1;
+            if (activateAnim.delegate) {
+                activateAnim.delegate.z = 0;
+                activateAnim.delegate.scale = 1;
+            }
         }
         MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
+        print("BBBB"+MobileShell.HomeScreenControls.taskSwitcherVisible)
     }
 
     SequentialAnimation {
@@ -121,6 +130,8 @@ NanoShell.FullScreenOverlay {
                 if (tasksView.contentY <= 0 || tasksView.contentY >= tasksView.contentHeight - window.height) {
                     window.visible = false;
                     setSingleActiveWindow(currentTaskIndex);
+                } else {
+                    moveTransition.enabled = true;
                 }
             }
         }
@@ -262,6 +273,8 @@ NanoShell.FullScreenOverlay {
                 }
 
                 move: Transition {
+                    id: moveTransition
+                    enabled: false
                     NumberAnimation {
                         properties: "x,y"
                         duration: units.longDuration
