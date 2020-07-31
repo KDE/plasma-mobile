@@ -189,6 +189,8 @@ NanoShell.FullScreenOverlay {
         height: window.height
         contentWidth: width
         contentHeight: mainArea.implicitHeight
+       // topMargin: flickingVertically ? -height : 0
+       // bottomMargin: flickingVertically ? -height : 0
         property int flickState: TaskSwitcher.MovementDirection.None
 
         readonly property int movementDirection: {
@@ -207,10 +209,12 @@ NanoShell.FullScreenOverlay {
             if (flickingVertically) {
                 flickState = verticalVelocity < 0 ? TaskSwitcher.MovementDirection.Up : TaskSwitcher.MovementDirection.Down;
             } else if (/*!draggingVertically &&*/ !flickingVertically) {
-               draggingVerticallyChanged();
                flickState = TaskSwitcher.MovementDirection.None
             }
-            
+            Qt.callLater(function() {
+                tasksView.topMargin = flickingVertically && !scrollAnim.running ? -tasksView.height : 0;
+                tasksView.bottomMargin = tasksView.topMargin;
+            });
         }
 
         onDraggingVerticallyChanged: {
