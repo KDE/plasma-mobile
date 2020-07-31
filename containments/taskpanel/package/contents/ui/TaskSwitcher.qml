@@ -76,7 +76,8 @@ NanoShell.FullScreenOverlay {
             return;
         }
         scrollAnim.from = tasksView.contentY;
-        if (tasksView.contentY + window.height < tasksView.contentHeight - tasksView.contentY) {
+
+        if (tasksView.contentY + window.height <= tasksView.contentHeight - tasksView.contentY) {
             scrollAnim.to = 0;
         } else {
             scrollAnim.to = tasksView.contentHeight - window.height;
@@ -278,11 +279,16 @@ NanoShell.FullScreenOverlay {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    bottom: parent.bottom
-                    bottomMargin: window.height
                 }
                 columns: 2
+                y: parent.height - height - window.height
 
+                Behavior on y {
+                    NumberAnimation {
+                        duration: units.longDuration
+                        easing.type: Easing.InOutQuad
+                    }
+                }
                 Repeater {
                     model: window.model
                     delegate: Task {}
