@@ -76,7 +76,7 @@ NanoShell.FullScreenOverlay {
             return;
         }
         scrollAnim.from = tasksView.contentY;
-        if (tasksView.contentY + window.height < tasksView.contentHeight/2) {
+        if (tasksView.contentY + window.height < tasksView.contentHeight - tasksView.contentY) {
             scrollAnim.to = 0;
         } else {
             scrollAnim.to = tasksView.contentHeight - window.height;
