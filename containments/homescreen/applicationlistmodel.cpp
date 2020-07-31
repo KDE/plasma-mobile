@@ -499,7 +499,7 @@ void ApplicationListModel::unsetMinimizedDelegate(int row, QQuickItem *delegate)
     if (!surface) {
         return;
     }
-qWarning()<<"UNSETTING"<<window->title();
+
     window->unsetMinimizedGeometry(surface);
 }
 
