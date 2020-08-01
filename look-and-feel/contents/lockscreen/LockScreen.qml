@@ -68,6 +68,18 @@ PlasmaCore.ColorScope {
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
     }
     
+    MediaControls {
+        anchors {
+            left: parent.left
+            leftMargin: units.gridUnit
+            right: parent.right
+            rightMargin: units.gridUnit
+            verticalCenter: parent.verticalCenter
+        }
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        z: 5
+    }
+
     PlasmaCore.IconItem {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
