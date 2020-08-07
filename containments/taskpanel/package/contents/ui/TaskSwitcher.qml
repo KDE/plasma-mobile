@@ -173,7 +173,8 @@ NanoShell.FullScreenOverlay {
                 target: activateAnim.delegate
                 from: 1
                 to: 2
-                duration: units.longDuration
+                // To try tosync up with kwin animation
+                duration: units.longDuration * 0.85
                 easing.type: Easing.InOutQuad
             }
         }

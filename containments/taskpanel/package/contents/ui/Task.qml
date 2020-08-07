@@ -39,9 +39,9 @@ Item {
     }
 
     function syncDelegateGeometry() {
-        let pos = delegate.mapToItem(tasksView, 0, 0);
+        let pos = pipeWireItem.mapToItem(tasksView, 0, 0);
         if (window.visible) {
-            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), delegate);
+            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireItem.width, pipeWireItem.height), pipeWireItem);
         } else {
           //  tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
         }
@@ -127,6 +127,7 @@ Item {
                     }
                 }
                 TaskManager.PipeWireSourceItem {
+                    id: pipeWireItem
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     //visible: waylandItem.nodeId > 0
