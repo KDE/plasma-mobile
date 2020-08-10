@@ -39,9 +39,9 @@ Item {
     }
 
     function syncDelegateGeometry() {
-        let pos = pipeWireItem.mapToItem(tasksView, 0, 0);
+        let pos = pipeWireLoader.mapToItem(tasksView, 0, 0);
         if (window.visible) {
-            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireItem.width, pipeWireItem.height), pipeWireItem);
+            tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
         } else {
           //  tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
         }
@@ -126,17 +126,15 @@ Item {
                         }
                     }
                 }
-                TaskManager.PipeWireSourceItem {
-                    id: pipeWireItem
+                Loader {
+                    id: pipeWireLoader
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    //visible: waylandItem.nodeId > 0
-                    visible: true
-                    nodeId: waylandItem.nodeId
-
-                    TaskManager.ScreencastingItem {
-                        id: waylandItem
-                        uuid: model.WinIdList[0]
+                    source: Qt.resolvedUrl("./Thumbnail.qml")
+                    onStatusChanged: {
+                        if (status === Loader.Error) {
+                            source = Qt.resolvedUrl("./TaskIcon.qml");
+                        }
                     }
                 }
             }
