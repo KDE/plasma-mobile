@@ -190,6 +190,12 @@ Item {
                     easing.type: Easing.InOutQuad
                 }
             }
+            implicitWidth: Math.round(units.gridUnit/3)
+            contentItem: Rectangle {
+                radius: width/2
+                color: Qt.rgba(1, 1, 1, 0.3)
+                border.color: Qt.rgba(0, 0, 0, 0.4)
+            }
         }
         NumberAnimation {
             id: scrollAnim
