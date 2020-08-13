@@ -147,6 +147,8 @@ Item {
         anchors {
             left: parent.left
             right: parent.right
+            leftMargin: -1
+            rightMargin: -1
         }
         border.color: Qt.rgba(1, 1, 1, 0.5)
         radius: units.gridUnit
