@@ -245,24 +245,57 @@ Item {
                     imagePath: "widgets/arrows"
                     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 }
-                PlasmaCore.IconItem {
+                Item {
                     id: arrowUpIcon
                     z: 9
                     anchors {
                         horizontalCenter: parent.horizontalCenter
                         bottom: parent.bottom
                     }
-                    source: "arrow-up"
+
                     width: units.iconSizes.medium
                     height: width
-                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
 
+                    property real factor: Math.max(0, Math.min(1, mainFlickable.contentY / (mainFlickable.height/2)))
+                    Rectangle {
+                        anchors {
+                            verticalCenter: parent.verticalCenter
+                            right: parent.horizontalCenter
+                            left: parent.left
+                            verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
+                        }
+                        color: theme.backgroundColor
+                        transformOrigin: Item.Right
+                        rotation: -45 + 90 * parent.factor
+                        antialiasing: true
+                        height: 1
+                    }
+                    Rectangle {
+                        anchors {
+                            verticalCenter: parent.verticalCenter
+                            left: parent.horizontalCenter
+                            right: parent.right
+                            verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
+                        }
+                        color: theme.backgroundColor
+                        transformOrigin: Item.Left
+                        rotation: 45 - 90 * parent.factor
+                        antialiasing: true
+                        height: 1
+                    }
                     MouseArea {
                         anchors {
                             fill: parent
                             margins: -units.smallSpacing
                         }
-                        onClicked: mainFlickable.flick(0, -mainFlickable.height)
+                        onClicked: {
+                            if (mainFlickable.contentY >= mainFlickable.height/2) {
+                                scrollAnim.to = 0;
+                            } else {
+                                scrollAnim.to = mainFlickable.height/2
+                            }
+                            scrollAnim.restart();
+                        }
                     }
                 }
 
