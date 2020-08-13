@@ -143,6 +143,19 @@ Item {
         favoriteStrip: favoriteStrip
     }
 
+    Rectangle {
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        border.color: Qt.rgba(1, 1, 1, 0.5)
+        radius: units.gridUnit
+        color: "black"
+        opacity: 0.4 * Math.min(1, mainFlickable.contentY / (units.gridUnit * 10))
+        height: root.height + radius * 2
+        y: Math.max(-radius, -mainFlickable.contentY + arrowUpIcon.y - units.smallSpacing)
+    }
+
     Flickable {
         id: mainFlickable
         width: parent.width
@@ -152,7 +165,7 @@ Item {
             //topMargin: plasmoid.availableScreenRect.y
             bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
-        
+
         //bottomMargin: favoriteStrip.height
         contentWidth: width
         contentHeight: flickableContents.height
@@ -233,6 +246,7 @@ Item {
                     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 }
                 PlasmaCore.IconItem {
+                    id: arrowUpIcon
                     z: 9
                     anchors {
                         horizontalCenter: parent.horizontalCenter
