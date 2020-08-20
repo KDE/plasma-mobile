@@ -93,51 +93,7 @@ Item {
             radius: units.smallSpacing
             color: theme.backgroundColor
             opacity: 1 * (1-Math.abs(x)/width)
-            ColumnLayout {
-                anchors {
-                    fill: parent
-                    margins: units.smallSpacing
-                }
-                
-                RowLayout {
-                    Layout.fillWidth: true
-                    Layout.maximumHeight: units.gridUnit
-                    PlasmaCore.IconItem {
-                        Layout.fillHeight: true
-                        Layout.preferredWidth: height
-                        usesPlasmaTheme: false
-                        source: model.decoration
-                    }
-                    PlasmaComponents.Label {
-                        Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
-                        elide: Text.ElideRight
-                        text: model.display
-                        color: theme.textColor
-                    }
-                    PlasmaComponents.ToolButton {
-                        z: 99
-                        icon.name: "window-close"
-                        icon.width: units.iconSizes.medium
-                        icon.height: units.iconSizes.medium
-                        onClicked: {
-                            slideAnim.to = -background.width*2;
-                            slideAnim.running = true;
-                        }
-                    }
-                }
-                Loader {
-                    id: pipeWireLoader
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    source: Qt.resolvedUrl("./Thumbnail.qml")
-                    onStatusChanged: {
-                        if (status === Loader.Error) {
-                            source = Qt.resolvedUrl("./TaskIcon.qml");
-                        }
-                    }
-                }
-            }
+
             MouseArea {
                 anchors.fill: parent
                 drag {
@@ -159,6 +115,52 @@ Item {
                     } else {
                         slideAnim.to = 0;
                         slideAnim.running = true;
+                    }
+                }
+
+                ColumnLayout {
+                    anchors {
+                        fill: parent
+                        margins: units.smallSpacing
+                    }
+                    
+                    RowLayout {
+                        Layout.fillWidth: true
+                        Layout.maximumHeight: units.gridUnit
+                        PlasmaCore.IconItem {
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: height
+                            usesPlasmaTheme: false
+                            source: model.decoration
+                        }
+                        PlasmaComponents.Label {
+                            Layout.fillWidth: true
+                            horizontalAlignment: Text.AlignHCenter
+                            elide: Text.ElideRight
+                            text: model.display
+                            color: theme.textColor
+                        }
+                        PlasmaComponents.ToolButton {
+                            z: 99
+                            icon.name: "window-close"
+                            icon.width: units.iconSizes.medium
+                            icon.height: units.iconSizes.medium
+                            onClicked: {
+                                slideAnim.to = -background.width*2;
+                                slideAnim.running = true;
+                            }
+                        }
+                    }
+                    Loader {
+                        id: pipeWireLoader
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        source: Qt.resolvedUrl("./Thumbnail.qml")
+                        onStatusChanged: {
+                            if (status === Loader.Error) {
+                                source = Qt.resolvedUrl("./TaskIcon.qml");
+                            }
+                        }
                     }
                 }
             }
