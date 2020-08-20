@@ -280,15 +280,19 @@ Item {
 
         onClosed: quickSettings.closed()
 
-        contentItem: Item {
+        contentItem: GridLayout {
             id: panelContents
             anchors.fill: parent
             implicitWidth: quickSettingsParent.implicitWidth
-            implicitHeight: quickSettingsParent.implicitHeight
+            implicitHeight: MAth.min(slidingPanel.height, quickSettingsParent.implicitHeight)
 
+            columns: slidingPanel.wideScreen ? 2 : 1
+            rows: slidingPanel.wideScreen ? 1 : 2
             DrawerBackground {
                 id: quickSettingsParent
-                anchors.fill: parent
+                //anchors.fill: parent
+                Layout.alignment: Qt.AlignTop
+                Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
                 z: 4
                 contentItem: QuickSettings {
                     id: quickSettings
@@ -302,15 +306,14 @@ Item {
             ListView {
                 id: fullRepresentationView
                 z: 1
-                parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                y: quickSettingsParent.height - height * (1-opacity)
-                opacity: fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
+                //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
+                Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
+                //Layout.fillWidth: true
+                clip: slidingPanel.wideScreen
+                y: slidingPanel.wideScreen ? 0 : quickSettingsParent.height - height * (1-opacity)
+                opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
                 height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
-                leftMargin: slidingPanel.drawerX
+                //leftMargin: slidingPanel.drawerX
                 preferredHighlightBegin: slidingPanel.drawerX
                 
                 implicitHeight: units.gridUnit * 20

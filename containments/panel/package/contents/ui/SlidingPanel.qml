@@ -30,8 +30,8 @@ NanoShell.FullScreenOverlay {
     property int offset: 0
     property int openThreshold
     property bool userInteracting: false
-    readonly property bool wideScreen: width > units.gridUnit * 45
-    readonly property int drawerWidth: wideScreen ? units.gridUnit * 25 : width
+    readonly property bool wideScreen: width > height || width > units.gridUnit * 45
+    readonly property int drawerWidth: wideScreen ? contentItem.implicitWidth : width
     property int drawerX: 0
     property alias fixedArea: mainScope
     property alias flickable: mainFlickable

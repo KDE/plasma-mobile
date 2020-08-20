@@ -251,13 +251,6 @@ Item {
                 }
             }
         }
-        move: Transition {
-            NumberAnimation {
-                duration: units.shortDuration
-                easing.type: Easing.InOutQuad
-                properties: "x,y"
-            }
-        }
 
         BrightnessItem {
             id: brightnessSlider
