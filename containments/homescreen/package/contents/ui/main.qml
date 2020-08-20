@@ -155,7 +155,7 @@ Item {
         color: "black"
         opacity: 0.4 * Math.min(1, mainFlickable.contentY / (units.gridUnit * 10))
         height: root.height + radius * 2
-        y: Math.max(-radius, -mainFlickable.contentY + arrowUpIcon.y - units.smallSpacing)
+        y: Math.max(-radius, -mainFlickable.contentY + arrowUpIcon.y)
     }
 
     Flickable {
@@ -253,56 +253,57 @@ Item {
                     imagePath: "widgets/arrows"
                     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 }
-                Item {
+                MouseArea {
                     id: arrowUpIcon
                     z: 9
                     anchors {
-                        horizontalCenter: parent.horizontalCenter
+                        left: parent.left
+                        right: parent.right
                         bottom: parent.bottom
+                        margins: -units.smallSpacing
                     }
-
-                    width: units.iconSizes.medium
-                    height: width
-
                     property real factor: Math.max(0, Math.min(1, mainFlickable.contentY / (mainFlickable.height/2)))
-                    Rectangle {
-                        anchors {
-                            verticalCenter: parent.verticalCenter
-                            right: parent.horizontalCenter
-                            left: parent.left
-                            verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
+
+                    height: units.iconSizes.medium
+                    onClicked: {
+                        if (mainFlickable.contentY >= mainFlickable.height/2) {
+                            scrollAnim.to = 0;
+                        } else {
+                            scrollAnim.to = mainFlickable.height/2
                         }
-                        color: theme.backgroundColor
-                        transformOrigin: Item.Right
-                        rotation: -45 + 90 * parent.factor
-                        antialiasing: true
-                        height: 1
+                        scrollAnim.restart();
                     }
-                    Rectangle {
-                        anchors {
-                            verticalCenter: parent.verticalCenter
-                            left: parent.horizontalCenter
-                            right: parent.right
-                            verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
-                        }
-                        color: theme.backgroundColor
-                        transformOrigin: Item.Left
-                        rotation: 45 - 90 * parent.factor
-                        antialiasing: true
-                        height: 1
-                    }
-                    MouseArea {
-                        anchors {
-                            fill: parent
-                            margins: -units.smallSpacing
-                        }
-                        onClicked: {
-                            if (mainFlickable.contentY >= mainFlickable.height/2) {
-                                scrollAnim.to = 0;
-                            } else {
-                                scrollAnim.to = mainFlickable.height/2
+                    Item {
+                        anchors.centerIn: parent
+
+                        width: units.iconSizes.medium
+                        height: width
+
+                        Rectangle {
+                            anchors {
+                                verticalCenter: parent.verticalCenter
+                                right: parent.horizontalCenter
+                                left: parent.left
+                                verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
                             }
-                            scrollAnim.restart();
+                            color: theme.backgroundColor
+                            transformOrigin: Item.Right
+                            rotation: -45 + 90 * arrowUpIcon.factor
+                            antialiasing: true
+                            height: 1
+                        }
+                        Rectangle {
+                            anchors {
+                                verticalCenter: parent.verticalCenter
+                                left: parent.horizontalCenter
+                                right: parent.right
+                                verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
+                            }
+                            color: theme.backgroundColor
+                            transformOrigin: Item.Left
+                            rotation: 45 - 90 * arrowUpIcon.factor
+                            antialiasing: true
+                            height: 1
                         }
                     }
                 }
