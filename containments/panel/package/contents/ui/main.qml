@@ -262,6 +262,7 @@ Item {
         }
         onPositionChanged: {
             slidingPanel.offset = Math.min(slidingPanel.contentItem.height, slidingPanel.offset + (mouse.y - oldMouseY));
+            
             oldMouseY = mouse.y;
         }
         onReleased: {
@@ -274,7 +275,7 @@ Item {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
-        openThreshold: units.gridUnit * 10
+        openThreshold: units.gridUnit * 2
         headerHeight: root.height
 
         onClosed: quickSettings.closed()

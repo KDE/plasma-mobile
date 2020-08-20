@@ -45,18 +45,33 @@ NanoShell.FullScreenOverlay {
     //width: Screen.width
     //height: Screen.height
 
+    enum MovementDirection {
+        None = 0,
+        Up,
+        Down
+    }
+    property int direction: SlidingPanel.MovementDirection.None
+
     function open() {
         window.showFullScreen();
-        open.running = true;
+        openAnim.restart();
     }
     function close() {
-        closeAnim.running = true;
+        closeAnim.restart();
     }
     function updateState() {
-        if (offset < openThreshold) {
+        if (window.direction === SlidingPanel.MovementDirection.None) {
+            if (offset < openThreshold) {
+                close();
+            } else {
+                openAnim.restart();
+            }
+        } else if (offset > openThreshold && window.direction === SlidingPanel.MovementDirection.Down) {
+            openAnim.restart();
+        } else if (mainFlickable.contentY > openThreshold) {
             close();
         } else {
-            openAnim.running = true;
+            openAnim.restart();
         }
     }
     Timer {
@@ -163,8 +178,15 @@ NanoShell.FullScreenOverlay {
             }
             //no loop as those 2 values compute to exactly the same
             onContentYChanged: {
+                if (contentY === oldContentY) {
+                    window.direction = SlidingPanel.MovementDirection.None;
+                } else {
+                    window.direction = contentY > oldContentY ? SlidingPanel.MovementDirection.Up : SlidingPanel.MovementDirection.Down;
+                }
                 window.offset = -contentY + contentArea.height
+                oldContentY = contentY;
             }
+            property real oldContentY
             boundsBehavior: Flickable.StopAtBounds
             contentWidth: window.width
             contentHeight: window.height*2
