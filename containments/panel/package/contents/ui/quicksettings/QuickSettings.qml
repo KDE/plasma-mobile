@@ -147,7 +147,7 @@ Item {
         settingsModel.append({
             "text": i18n("Wifi"),
             "icon": "network-wireless-signal",
-            "settingsCommand": "",
+            "settingsCommand": "plasma-settings -m kcm_mobile_wifi",
             "toggleFunction": "toggleWifi",
             "delegate": "",
             "enabled": enabledConnections.wirelessEnabled,
@@ -156,7 +156,7 @@ Item {
         settingsModel.append({
             "text": i18n("Mobile Data"),
             "icon": "network-modem",
-            "settingsCommand": "",
+            "settingsCommand": "plasma-settings -m kcm_mobile_broadband",
             "toggleFunction": "toggleWwan",
             "delegate": "",
             "enabled": enabledConnections.wwanEnabled,
