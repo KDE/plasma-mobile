@@ -1,6 +1,7 @@
 /***************************************************************************
  *   Copyright (C) 2014 by Aleix Pol Gonzalez <aleixpol@blue-systems.com>  *
  *   Copyright (C) 2020 by Linus Jahn <lnj@kaidan.im>                      *
+ *    Copyright (C) 2020 by Marco Martin <mart@kde.org                     *
  *                                                                         *
  *   This program is free software; you can redistribute it and/or modify  *
  *   it under the terms of the GNU General Public License as published by  *
