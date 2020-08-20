@@ -56,8 +56,7 @@ PlasmaCore.ColorScope {
     MouseArea {
         anchors.fill: parent
         onClicked: {
-            closeAnim.restart();
-            root.cancelRequested();
+            closeAnim.execute(root.cancelRequested);
         }
     }
 
@@ -87,33 +86,51 @@ PlasmaCore.ColorScope {
         OpacityAnimator {
             target: background
             from: 0
-            to: 0.5
+            to: 0.6
             duration: units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
-    ParallelAnimation {
+
+    SequentialAnimation {
         id: closeAnim
-        ScaleAnimator {
-            target: lay
-            from: 1
-            to: 10
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
+        property var callback
+        function execute(call) {
+            callback = call;
+            closeAnim.restart();
         }
-        OpacityAnimator {
-            target: lay
-            from: 1
-            to: 0
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
+        ParallelAnimation {
+            ScaleAnimator {
+                target: lay
+                from: 1
+                to: 10
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            OpacityAnimator {
+                target: lay
+                from: 1
+                to: 0
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            OpacityAnimator {
+                target: background
+                from: 0.6
+                to: 0
+                duration: units.longDuration
+                easing.type: Easing.InOutQuad
+            }
         }
-        OpacityAnimator {
-            target: background
-            from: 0.5
-            to: 0
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
+        ScriptAction {
+            script: {
+                if (closeAnim.callback) {
+                    closeAnim.callback();
+                }
+                lay.opacity = 1;
+                lay.scale = 1;
+                background.opacity = 0.6;
+            }
         }
     }
     GridLayout {
@@ -128,8 +145,7 @@ PlasmaCore.ColorScope {
             iconSource: "system-reboot"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
             onClicked: {
-                closeAnim.restart();
-                root.rebootRequested();
+                closeAnim.execute(root.rebootRequested);
             }
         }
 
@@ -137,8 +153,7 @@ PlasmaCore.ColorScope {
             iconSource: "system-shutdown"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
             onClicked: {
-                closeAnim.restart();
-                root.haltRequested();
+                closeAnim.execute(root.haltRequested);
             }
         }
 
@@ -149,8 +164,7 @@ PlasmaCore.ColorScope {
             iconSource: "dialog-cancel"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
             onClicked: {
-                closeAnim.restart();
-                root.cancelRequested();
+                closeAnim.execute(root.cancelRequested);
             }
         }
     }
