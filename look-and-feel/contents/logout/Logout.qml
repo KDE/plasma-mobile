@@ -32,6 +32,7 @@ import org.kde.plasma.private.sessions 2.0
 PlasmaCore.ColorScope {
     id: root
 
+    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     signal logoutRequested()
     signal haltRequested()
     signal suspendRequested(int spdMethod)
@@ -46,69 +47,110 @@ PlasmaCore.ColorScope {
     }
 
     Rectangle {
+        id: background
         anchors.fill: parent
         color: PlasmaCore.ColorScope.backgroundColor
-        opacity: 0.5
+        opacity: 0
     }
 
     MouseArea {
         anchors.fill: parent
-        onClicked: root.cancelRequested()
+        onClicked: {
+            closeAnim.restart();
+            root.cancelRequested();
+        }
     }
 
-    KCoreAddons.KUser {
-        id: kuser
+    Component.onCompleted: openAnim.restart()
+    onVisibleChanged: {
+        if (visible) {
+            openAnim.restart()
+        }
     }
 
-    Controls.Popup {
-        visible: true
+    ParallelAnimation {
+        id: openAnim
+        ScaleAnimator {
+            target: lay
+            from: 10
+            to: 1
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        OpacityAnimator {
+            target: lay
+            from: 0
+            to: 1
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        OpacityAnimator {
+            target: background
+            from: 0
+            to: 0.5
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    ParallelAnimation {
+        id: closeAnim
+        ScaleAnimator {
+            target: lay
+            from: 1
+            to: 10
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        OpacityAnimator {
+            target: lay
+            from: 1
+            to: 0
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+        OpacityAnimator {
+            target: background
+            from: 0.5
+            to: 0
+            duration: units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
+    GridLayout {
+        id: lay
         anchors.centerIn: parent
-        width: Math.min(units.gridUnit * 20, root.width * 0.8)
-        height: Math.min(units.gridUnit * 25, root.height * 0.7)
-        Component.onCompleted: open()
-
-        ColumnLayout {
-            id: contents
-            spacing: units.largeSpacing
-            anchors.fill: parent
-
-            UserDelegate {
-                Layout.fillWidth: true
-                width: units.gridUnit * 7
-                height: width
-                nameFontSize: theme.defaultFont.pointSize + 4
-                constrainText: false
-                avatarPath: kuser.faceIconUrl
-                iconSource: "user-identity"
-                isCurrent: true
-                name: kuser.fullName
+        columns: 2
+        rowSpacing: units.gridUnit * 2
+        columnSpacing: units.gridUnit * 2
+        scale: 2
+        opacity: 0
+        ActionButton {
+            iconSource: "system-reboot"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
+            onClicked: {
+                closeAnim.restart();
+                root.rebootRequested();
             }
+        }
 
-            ColumnLayout {
-                Layout.margins: 10
-                Controls.Button {
-                    Layout.fillWidth: true
-                    display: Controls.Button.TextUnderIcon
-                    icon.name: "system-shutdown"
-                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
-                    onClicked: root.haltRequested()
-                }
+        ActionButton {
+            iconSource: "system-shutdown"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
+            onClicked: {
+                closeAnim.restart();
+                root.haltRequested();
+            }
+        }
 
-                Controls.Button {
-                    Layout.fillWidth: true
-                    display: Controls.Button.TextUnderIcon
-                    icon.name: "system-reboot"
-                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
-                    onClicked: root.rebootRequested()
-                }
-
-                Controls.Button {
-                    Layout.fillWidth: true
-                    display: Controls.Button.TextUnderIcon
-                    icon.name: "dialog-cancel"
-                    text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
-                    onClicked: root.cancelRequested()
-                }
+        ActionButton {
+            //Remove this when we have more buttons
+            Layout.columnSpan: 2
+            Layout.alignment: Qt.AlignCenter
+            iconSource: "dialog-cancel"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
+            onClicked: {
+                closeAnim.restart();
+                root.cancelRequested();
             }
         }
     }
