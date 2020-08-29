@@ -32,21 +32,31 @@ ColumnLayout {
     signal panelClosed
 
     Rectangle {
-        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing * 2
+        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing
         Layout.minimumHeight: width
         Layout.alignment: Qt.AlignHCenter
         radius: units.smallSpacing
-        border.color: Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, 0.2)
-        color: toggled ? 
-            Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3) :
-            Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, iconMouseArea.pressed ? 0.5 : 0.1)
+        border.color: toggled ? 
+            Qt.darker(Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, 1), 1.25) :
+            Qt.rgba(PlasmaCore.ColorScope.textColor.r, PlasmaCore.ColorScope.textColor.g, PlasmaCore.ColorScope.textColor.b, 0.2)
+        color: {
+            if (toggled) {
+                return Qt.rgba(PlasmaCore.ColorScope.highlightColor.r, PlasmaCore.ColorScope.highlightColor.g, PlasmaCore.ColorScope.highlightColor.b, iconMouseArea.pressed ? 0.5 : 0.3);
+            } else {
+                if (iconMouseArea.pressed) {
+                    return Qt.darker(Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.9), 1.25);
+                } else {
+                    return Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.3);
+                }
+            }
+        }
 
         PlasmaCore.IconItem {
             id: icon
             colorGroup: PlasmaCore.ColorScope.colorGroup
             anchors {
                 fill: parent
-                margins: units.smallSpacing * 2
+                margins: units.smallSpacing
             }
             source: model.icon
             MouseArea {
