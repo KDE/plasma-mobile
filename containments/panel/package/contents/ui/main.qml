@@ -163,6 +163,7 @@ Item {
         source: icons
     }
 
+    // screen top panel
     PlasmaCore.ColorScope {
         id: icons
         z: 1
@@ -248,6 +249,14 @@ Item {
             Indicators.Battery {}
         }
     }
+    
+    // screen top panel background (background for the rest of the screen in SlidingPanel.qml)
+    Rectangle {
+        anchors.fill: parent
+        color: "black"
+        opacity: 0.6 * Math.min(1, slidingPanel.offset/panelContents.height)
+    }
+    
     MouseArea {
         z: 99
         property int oldMouseY: 0

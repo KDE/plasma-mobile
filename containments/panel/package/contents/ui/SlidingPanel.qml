@@ -123,6 +123,7 @@ NanoShell.FullScreenOverlay {
     Rectangle {
         anchors {
             fill: parent
+            topMargin: root.height // top panel background handled separately in main.qml
         }
         color: "black"
         opacity: 0.6 * Math.min(1, offset/contentArea.height)
