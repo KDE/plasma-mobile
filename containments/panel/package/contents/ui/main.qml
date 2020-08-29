@@ -278,6 +278,8 @@ Item {
         openThreshold: units.gridUnit * 2
         headerHeight: root.height
 
+        offset: quickSettingsParent.height
+        
         onClosed: quickSettings.closed()
 
         contentItem: GridLayout {
@@ -288,6 +290,7 @@ Item {
 
             columns: slidingPanel.wideScreen ? 2 : 1
             rows: slidingPanel.wideScreen ? 1 : 2
+            
             DrawerBackground {
                 id: quickSettingsParent
                 //anchors.fill: parent
