@@ -19,22 +19,34 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.4 as QQC2
+import QtGraphicalEffects 1.0
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 
 QQC2.Control {
     id: root
-    leftPadding: background.margins.left
-    topPadding: background.margins.top
-    rightPadding: background.margins.right
-    bottomPadding: background.margins.bottom
+    leftPadding: units.largeSpacing
+    topPadding: units.largeSpacing
+    rightPadding: units.largeSpacing
+    bottomPadding: units.largeSpacing
 
-    background: PlasmaCore.FrameSvgItem {
-        imagePath: "widgets/background"
-        // This MouseArea just prevents the Control from eating pure touch event (breaking flickables)
+    background: Item {
         MouseArea {
-            anchors.fill:parent
+            anchors.fill: parent
+        }
+        Rectangle {
+            id: container
+            color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.85)
+            anchors {
+                fill: parent
+                leftMargin: units.smallSpacing
+                rightMargin: units.smallSpacing
+                topMargin: units.smallSpacing
+                bottomMargin: units.smallSpacing
+            }
+            radius: units.smallSpacing
         }
     }
 }
