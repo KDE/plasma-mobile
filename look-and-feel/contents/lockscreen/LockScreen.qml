@@ -22,68 +22,183 @@ import QtGraphicalEffects 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
+import org.kde.notificationmanager 1.1 as Notifications
 import "../components"
 
 PlasmaCore.ColorScope {
     id: root
 
     property string password
+    
+    property bool isWidescreen: root.height < root.width * 0.75
+    property bool notificationsShown: phoneNotificationsList.count !== 0
 
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
     
-    BrightnessContrast {
-        id: darken
+    function isPinDrawerOpen() {
+        return passwordFlickable.contentY === passwordFlickable.columnHeight;
+    }
+    
+    // blur background once keypad is open
+    FastBlur {
+        id: blur
+        cached: true
         anchors.fill: parent
         source: wallpaper
-        brightness: -(passwordFlickable.contentY / passwordFlickable.columnHeight * 0.6)
-    }
-
-    DropShadow {
-        id: clockShadow
-        anchors.fill: clock
-        source: clock
-        horizontalOffset: 1
-        verticalOffset: 1
-        radius: 6
-        samples: 14
-        spread: 0.3
-        color: PlasmaCore.ColorScope.backgroundColor
+        visible: true
         
-        // hide when keypad is shown
-        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        property bool doBlur: notificationsShown || isPinDrawerOpen() // only blur once animation finished for performance
+        
+        Behavior on doBlur {
+            NumberAnimation {
+                target: blur
+                property: "radius"
+                duration: 1000
+                to: blur.doBlur ? 0 : 50
+                easing.type: Easing.InOutQuad
+            }
+            PropertyAction {
+                target: blur
+                property: "visible"
+                value: blur.doBlur
+            }
+        }
     }
-
-    Clock {
-        id: clock
-
-        property Item shadow: clockShadow
-
-        anchors.leftMargin: units.gridUnit
-        anchors.rightMargin: units.gridUnit
-        anchors.topMargin: units.gridUnit * 3
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+    
+    Notifications.WatchedNotificationsModel {
+        id: notifModel
+    }
+    
+    // header bar
+    SimpleHeaderBar {
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        height: units.gridUnit
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
     }
     
-    MediaControls {
+    // phone clock component
+    ColumnLayout {
+        id: phoneClockComponent
+        visible: !isWidescreen
+        
         anchors {
+            top: parent.top
+            topMargin: root.height / 2 - (height / 2 + units.gridUnit * 2)
+            left: parent.left
+            right: parent.right
+        }
+        spacing: 0
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        
+        states: State {
+            name: "notification"; when: notificationsShown
+            PropertyChanges { target: phoneClockComponent; anchors.topMargin: units.gridUnit * 5 }
+        }
+        
+        transitions: Transition {
+            NumberAnimation {
+                properties: "anchors.topMargin"
+                easing.type: Easing.InOutQuad
+            }
+        }
+        
+        Clock {
+            id: phoneClock
+            alignment: Qt.AlignHCenter
+            Layout.bottomMargin: units.gridUnit * 2 // keep spacing even if media controls are gone
+        }
+        MediaControls {
+            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.maximumWidth: units.gridUnit * 25
+            Layout.minimumWidth: units.gridUnit * 15
+            Layout.leftMargin: units.gridUnit
+            Layout.rightMargin: units.gridUnit
+            z: 5
+        }
+    }
+    
+    // tablet clock component
+    Item {
+        id: tabletClockComponent
+        visible: isWidescreen
+        width: parent.width / 2   
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: parent.left
+            leftMargin: units.gridUnit * 3
+        }
+        
+        ColumnLayout {
+            id: tabletLayout
+            anchors.centerIn: parent
+            spacing: units.gridUnit
+            opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+            
+            Clock {
+                id: tabletClock
+                alignment: Qt.AlignLeft
+                Layout.fillWidth: true
+                Layout.minimumWidth: units.gridUnit * 20
+            }
+            MediaControls {
+                Layout.alignment: Qt.AlignLeft
+                Layout.fillWidth: true
+                Layout.maximumWidth: units.gridUnit * 25
+                Layout.minimumWidth: units.gridUnit * 20
+                z: 5
+            }
+        }
+    }
+    
+    // phone notifications list
+    NotificationsList {
+        id: phoneNotificationsList
+        visible: !isWidescreen
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // prevent mousearea from interfering with pin drawer
+        anchors {
+            top: phoneClockComponent.bottom
+            topMargin: units.gridUnit
+            bottom: scrollUpIcon.top
+            bottomMargin: units.gridUnit
             left: parent.left
             leftMargin: units.gridUnit
             right: parent.right
             rightMargin: units.gridUnit
-            verticalCenter: parent.verticalCenter
         }
-        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
-        z: 5
     }
-
+    
+    // tablet notifications list
+    ColumnLayout {
+        visible: isWidescreen
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // prevent mousearea from interfering with pin drawer
+        anchors {
+            top: parent.top
+            bottom: parent.bottom
+            left: tabletClockComponent.right
+            right: parent.right
+            rightMargin: units.gridUnit
+        }
+        
+        NotificationsList {
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.minimumHeight: this.notificationListHeight
+            Layout.minimumWidth: units.gridUnit * 15
+            Layout.maximumWidth: units.gridUnit * 25
+        }
+    }
+    
+    // scroll up icon
     PlasmaCore.IconItem {
+        id: scrollUpIcon
         anchors.bottom: parent.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
         anchors.bottomMargin: units.gridUnit + passwordFlickable.contentY * 0.5
         anchors.horizontalCenter: parent.horizontalCenter
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
@@ -116,8 +231,10 @@ PlasmaCore.ColorScope {
 
         // wipe password if it is more than half way down the screen
         onContentYChanged: {
-            if (contentY < columnHeight / 2)
+            if (contentY < columnHeight / 2) {
                 root.password = "";
+                keypad.pinLabel = qsTr("Enter PIN");
+            }
         }
         
         ColumnLayout {
@@ -125,99 +242,22 @@ PlasmaCore.ColorScope {
             anchors.bottom: parent.bottom
             
             width: parent.width
-            spacing: units.gridUnit * 2
+            spacing: units.gridUnit
             opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
             
-            PlasmaComponents.Label {
+            // scroll down icon
+            PlasmaCore.IconItem {
                 Layout.alignment: Qt.AlignHCenter
-                text: qsTr("Enter PIN")
-                font.pointSize: 12
-            }
-            
-            Row {
-                id: dotDisplay
-                Layout.alignment: Qt.AlignHCenter
-                spacing: 6
-
-                Layout.minimumHeight: units.gridUnit
-                Layout.maximumWidth: parent.width
-                
-                Repeater {
-                    model: root.password.length
-                    delegate: Rectangle {
-                        width: units.gridUnit
-                        height: width
-                        radius: width
-                        color: Qt.rgba(255, 255, 255, 0.3)
-                    }
-                }
+                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                source: "arrow-down"
             }
 
-            GridLayout {
-                id: numBlock
-                property string thePw
-
+            Keypad {
+                id: keypad
+                focus: passwordFlickable.contentY === passwordFlickable.columnHeight
                 Layout.fillWidth: true
-                Layout.minimumHeight: units.gridUnit * 16
+                Layout.minimumHeight: units.gridUnit * 17
                 Layout.maximumWidth: root.width
-                Layout.bottomMargin: units.gridUnit * 2
-                Layout.leftMargin: units.gridUnit * 2
-                Layout.rightMargin: units.gridUnit * 2
-                rowSpacing: units.gridUnit
-
-                columns: 3
-
-                Repeater {
-                    model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "0", "E"]
-                    delegate: Item {
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-
-                        Rectangle {
-                            anchors.centerIn: parent
-                            width: units.gridUnit * 3
-                            height: width
-                            radius: 12
-                            color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, ma.pressed ? 0.8 : 0.3)
-                            visible: modelData.length > 0
-
-                            MouseArea {
-                                id: ma
-                                anchors.fill: parent
-                                onClicked: {
-                                    if (modelData === "R") {
-                                        root.password = root.password.substr(0, root.password.length - 1);
-                                    } else if (modelData === "E") {
-                                        authenticator.tryUnlock(root.password);
-                                    } else {
-                                        root.password += modelData
-                                    }
-                                }
-                            }
-                        }
-
-                        PlasmaComponents.Label {
-                            visible: modelData !== "R" && modelData !== "E"
-                            text: modelData
-                            anchors.centerIn: parent
-                            font.pointSize: 16
-                        }
-
-                        PlasmaCore.IconItem {
-                            visible: modelData === "R"
-                            anchors.centerIn: parent
-                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                            source: "edit-clear"
-                        }
-
-                        PlasmaCore.IconItem {
-                            visible: modelData === "E"
-                            anchors.centerIn: parent
-                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                            source: "go-next"
-                        }
-                    }
-                }
             }
         }
     }
