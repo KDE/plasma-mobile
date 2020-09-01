@@ -27,10 +27,13 @@ DrawerBackground {
     property Item applet
     property ObjectModel fullRepresentationModel
     property ListView fullRepresentationView
-    visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
+    visible: shouldBeVisible
+    property bool shouldBeVisible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
     height: parent.height
     width: visible ? quickSettingsParent.width : 0
     Layout.minimumHeight: applet && applet.switchHeight
+    onShouldBeVisibleChanged: fullContainer.visible = fullContainer.shouldBeVisible
+
     onVisibleChanged: {
         if (visible) {
             for (var i = 0; i < fullRepresentationModel.count; ++i) {
@@ -46,6 +49,9 @@ DrawerBackground {
         } else if (ObjectModel.index >= 0) {
             fullRepresentationModel.remove(ObjectModel.index);
             fullRepresentationView.forceLayout();
+        }
+        if (!shouldBeVisible) {
+            visible = false;
         }
     }
     Connections {

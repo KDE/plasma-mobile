@@ -302,10 +302,10 @@ Item {
                 }
             }
 
-
             ListView {
                 id: fullRepresentationView
                 z: 1
+                interactive: width < contentWidth
                 //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
                 Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
                 //Layout.fillWidth: true
@@ -328,7 +328,7 @@ Item {
                 orientation: ListView.Horizontal
 
                 MouseArea {
-                    //parent: fullRepresentationView.contentItem
+                    parent: fullRepresentationView.contentItem
                     anchors.fill: parent
                     z: -1
                     
