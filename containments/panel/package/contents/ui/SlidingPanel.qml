@@ -126,7 +126,7 @@ NanoShell.FullScreenOverlay {
             right: parent.right
             bottom: parent.bottom
         }
-        height: parent.height - headerHeight
+        height: parent.height - headerHeight // don't layer on top panel indicators (area is darkened separately)
         color: "black"
         opacity: 0.6 * Math.min(1, offset/contentArea.height)
     

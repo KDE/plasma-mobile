@@ -19,9 +19,7 @@
 import QtQuick 2.6
 import QtQuick.Layouts 1.4
 import QtQuick.Controls 2.4 as QQC2
-import QtGraphicalEffects 1.0
 
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -41,12 +39,12 @@ QQC2.Control {
             color: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.backgroundColor, {"alpha": 0.85*255})
             anchors {
                 fill: parent
-                leftMargin: units.smallSpacing
-                rightMargin: units.smallSpacing
-                topMargin: units.smallSpacing
-                bottomMargin: units.smallSpacing
+                leftMargin: PlasmaCore.Units.smallSpacing
+                rightMargin: PlasmaCore.Units.smallSpacing
+                topMargin: PlasmaCore.Units.smallSpacing
+                bottomMargin: PlasmaCore.Units.smallSpacing
             }
-            radius: units.smallSpacing
+            radius: PlasmaCore.Units.smallSpacing
         }
     }
 }
