@@ -23,7 +23,7 @@ import QtGraphicalEffects 1.0
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-
+import org.kde.kirigami 2.12 as Kirigami
 
 QQC2.Control {
     id: root
@@ -38,7 +38,7 @@ QQC2.Control {
         }
         Rectangle {
             id: container
-            color: Qt.rgba(PlasmaCore.ColorScope.backgroundColor.r, PlasmaCore.ColorScope.backgroundColor.g, PlasmaCore.ColorScope.backgroundColor.b, 0.85)
+            color: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.backgroundColor, {"alpha": 0.85*255})
             anchors {
                 fill: parent
                 leftMargin: units.smallSpacing
