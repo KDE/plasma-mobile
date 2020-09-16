@@ -37,6 +37,12 @@ Rectangle {
         indexWithNumber = -2;
         root.password = root.password.substr(0, root.password.length - 1);
     }
+
+    function clear() {
+        lastKeyPressValue = "0";
+        indexWithNumber = -2;
+        root.password = "";
+    }
     
     function enter() {
         authenticator.tryUnlock(root.password);
@@ -100,7 +106,7 @@ Rectangle {
         
         // pin dot display
         Item {
-            Layout.alignment: Qt.AlignHCenter
+            Layout.alignment: Qt.AlignCenter
             Layout.minimumHeight: units.gridUnit * 0.5
             Layout.maximumWidth: parent.width
             
@@ -114,37 +120,38 @@ Rectangle {
             RowLayout {
                 id: dotDisplay
                 anchors.centerIn: parent
-                height: units.gridUnit // maintain height when letter is shown
+                height: units.gridUnit * 1.5// maintain height when letter is shown
                 spacing: 6
                 
                 Repeater {
                     model: root.password.length
                     delegate: Rectangle { // dot
                         visible: index !== indexWithNumber // hide dot if number is shown
-                        Layout.preferredWidth: units.gridUnit * 0.25
+                        Layout.preferredWidth: units.gridUnit * 0.35
                         Layout.preferredHeight: Layout.preferredWidth
-                        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                        Layout.alignment: Qt.AlignVCenter
                         radius: width
                         color: "#424242"
                     }
                 }
                 Label { // number/letter
                     visible: root.password.length-1 === indexWithNumber // hide label if no label needed
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
                     color: "#424242"
                     text: lastKeyPressValue
-                    font.pointSize: 10
+                    font.pointSize: 12
                 }
             }
         }
-        
+
+
         // separator
         Rectangle {
             Layout.fillWidth: true
             height: 1
             color: "#eeeeee"
         }
-        
+
         // number keys
         GridLayout {
             property string thePw
@@ -154,15 +161,15 @@ Rectangle {
             Layout.maximumWidth: units.gridUnit * 22
             Layout.maximumHeight: units.gridUnit * 12.5
             columns: 4
-            
+
             // numpad keys
             Repeater {
                 model: ["1", "2", "3", "R", "4", "5", "6", "0", "7", "8", "9", "E"]
-                
+
                 delegate: Item {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    
+
                     Rectangle {
                         id: keyRect
                         anchors.centerIn: parent
@@ -185,9 +192,14 @@ Rectangle {
                                     keyPress(modelData);
                                 }
                             }
+                            onPressAndHold: {
+                                if (modelData === "R") {
+                                    clear();
+                                }
+                            }
                         }
                     }
-                    
+
                     DropShadow {
                         anchors.fill: keyRect
                         source: keyRect
@@ -210,14 +222,14 @@ Rectangle {
                     PlasmaCore.IconItem {
                         visible: modelData === "R"
                         anchors.centerIn: parent
-//                         colorGroup: PlasmaCore.ColorScope.backgroundColor
+                        //                         colorGroup: PlasmaCore.ColorScope.backgroundColor
                         source: "edit-clear"
                     }
 
                     PlasmaCore.IconItem {
                         visible: modelData === "E"
                         anchors.centerIn: parent
-//                         colorGroup: PlasmaCore.ColorScope.backgroundColor
+                        //                         colorGroup: PlasmaCore.ColorScope.backgroundColor
                         source: "go-next"
                     }
                 }
