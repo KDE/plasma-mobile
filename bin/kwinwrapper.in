@@ -23,4 +23,4 @@ if [ -d @KDE_INSTALL_FULL_LIBDIR@/libhybris-egl ]; then
 fi
 
 touch /tmp/simplelogin_starting
-startplasma-wayland --xwayland --libinput --inputmethod maliit-keyboard --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
+startplasma-wayland --xwayland --libinput --lockscreen --inputmethod maliit-keyboard --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
