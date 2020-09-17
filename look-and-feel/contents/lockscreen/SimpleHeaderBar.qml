@@ -76,7 +76,7 @@ PlasmaCore.ColorScope {
     PlasmaComponents.Label {
         id: clock
         anchors.fill: parent
-        text: Qt.formatTime(timeSource.data.Local.DateTime, "hh:mm")
+        text: Qt.formatTime(timeSource.data.Local.DateTime, root.is24HourTime ? "h:mm" : "h:mm ap")
         color: PlasmaCore.ColorScope.textColor
         horizontalAlignment: Qt.AlignHCenter
         verticalAlignment: Qt.AlignVCenter

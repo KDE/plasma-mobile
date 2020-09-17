@@ -29,7 +29,7 @@ ColumnLayout {
     spacing: units.gridUnit
     
     Label {
-        text: Qt.formatTime(timeSource.data["Local"]["DateTime"], "h:mm ap")
+        text: Qt.formatTime(timeSource.data["Local"]["DateTime"], root.is24HourTime ? "h:mm" : "h:mm ap")
         color: ColorScope.textColor
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter

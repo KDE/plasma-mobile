@@ -33,6 +33,8 @@ PlasmaCore.ColorScope {
     property bool isWidescreen: root.height < root.width * 0.75
     property bool notificationsShown: phoneNotificationsList.count !== 0
 
+    property bool is24HourTime: Qt.locale().timeFormat(Locale.ShortFormat).toLowerCase().indexOf("ap") === -1
+    
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
     
