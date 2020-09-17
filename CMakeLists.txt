@@ -2,7 +2,7 @@ project(plasma-phone-components)
 
 # minimal requirements
 cmake_minimum_required (VERSION 2.8.12 FATAL_ERROR)
-set (QT_MIN_VERSION "5.12.0")
+set (QT_MIN_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.74")
 
 set(CMAKE_AUTOMOC ON)
