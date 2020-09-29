@@ -120,7 +120,7 @@ Rectangle {
             RowLayout {
                 id: dotDisplay
                 anchors.centerIn: parent
-                height: units.gridUnit * 1.5// maintain height when letter is shown
+                height: units.gridUnit * 1.5 // maintain height when letter is shown
                 spacing: 6
                 
                 Repeater {
