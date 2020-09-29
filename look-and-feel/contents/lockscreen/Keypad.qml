@@ -24,47 +24,78 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
 
 Rectangle {
+    id: keypadRoot
     color: Qt.rgba(250, 250, 250, 0.85) // slightly translucent background, for key contrast
     property string pinLabel: qsTr("Enter PIN")
     
     // for displaying temporary number in pin dot display
     property string lastKeyPressValue: "0"
-    property int indexWithNumber: -2
+    property int indexWithNumber: -2 
+    
+    // if waiting for result of auth
+    property bool waitingForAuth: false
+    
+    function reset() {
+        waitingForAuth = false;
+        root.password = "";
+        keypadRoot.pinLabel = qsTr("Enter PIN");
+    }
     
     // keypad functions
     function backspace() {
-        lastKeyPressValue = "0";
-        indexWithNumber = -2;
-        root.password = root.password.substr(0, root.password.length - 1);
+        if (!keypadRoot.waitingForAuth) {
+            keypadRoot.lastKeyPressValue = "0";
+            keypadRoot.indexWithNumber = -2;
+            root.password = root.password.substr(0, root.password.length - 1);
+        }
     }
 
     function clear() {
-        lastKeyPressValue = "0";
-        indexWithNumber = -2;
-        root.password = "";
+        if (!keypadRoot.waitingForAuth) {
+            keypadRoot.lastKeyPressValue = "0";
+            keypadRoot.indexWithNumber = -2;
+            root.password = "";
+        }
     }
     
     function enter() {
-        authenticator.tryUnlock(root.password);
+        keypadRoot.waitingForAuth = true;
+        // don't try to unlock if there is a timeout (unlock once unlocked)
+        if (!authenticator.graceLocked) {
+            authenticator.tryUnlock(root.password);
+        }
     }
     
     function keyPress(data) {
-        if (keypad.pinLabel !== qsTr("Enter PIN")) {
-            keypad.pinLabel = qsTr("Enter PIN");
+        if (!keypadRoot.waitingForAuth) {
+            if (keypadRoot.pinLabel !== qsTr("Enter PIN")) {
+                keypadRoot.pinLabel = qsTr("Enter PIN");
+            }
+            keypadRoot.lastKeyPressValue = data;
+            keypadRoot.indexWithNumber = root.password.length;
+            root.password += data
+            
+            // trigger turning letter into dot later
+            letterTimer.restart();
         }
-        lastKeyPressValue = data;
-        indexWithNumber = root.password.length;
-        root.password += data
-        
-        // trigger turning letter into dot later
-        letterTimer.restart();
     }
     
     Connections {
         target: authenticator
+        function onSucceeded() {
+            pinLabel = qsTr("Logging in...");
+            keypadRoot.waitingForAuth = false;
+        }
         function onFailed() {
             root.password = "";
-            pinLabel = qsTr("Wrong PIN")
+            pinLabel = qsTr("Wrong PIN");
+            keypadRoot.waitingForAuth = false;
+        }
+        function onGraceLockedChanged() {
+            // try authenticating if it was waiting for grace lock to stop and it has stopped
+            if (!authenticator.graceLocked && keypadRoot.waitingForAuth) {
+                authenticator.tryUnlock(root.password);
+            }
         }
     }
     
@@ -72,11 +103,11 @@ Rectangle {
     Keys.onPressed: {
         if (event.modifiers === Qt.NoModifier) {
             if (event.key === Qt.Key_Backspace) {
-                backspace();
+                keypadRoot.backspace();
             } else if (event.key === Qt.Key_Return) {
-                enter();
+                keypadRoot.enter();
             } else if (event.text != "") {
-                keyPress(event.text);
+                keypadRoot.keyPress(event.text);
             }
         }
     }
@@ -88,8 +119,8 @@ Rectangle {
         running: false
         repeat: false
         onTriggered: {
-            lastKeyPressValue = 0;
-            indexWithNumber = -2;
+            keypadRoot.lastKeyPressValue = 0;
+            keypadRoot.indexWithNumber = -2;
         }
     }
     
@@ -104,19 +135,26 @@ Rectangle {
         }
         spacing: units.gridUnit
         
+        Item {
+            Layout.alignment: Qt.AlignCenter
+        }
+        
         // pin dot display
         Item {
             Layout.alignment: Qt.AlignCenter
             Layout.minimumHeight: units.gridUnit * 0.5
             Layout.maximumWidth: parent.width
             
+            // label ("wrong pin", "enter pin")
             Label {
                 visible: root.password.length === 0
                 anchors.centerIn: parent
-                text: pinLabel
+                text: keypadRoot.pinLabel
                 font.pointSize: 12
                 color: "#616161"
             }
+            
+            // dot display and letter
             RowLayout {
                 id: dotDisplay
                 anchors.centerIn: parent
@@ -131,13 +169,13 @@ Rectangle {
                         Layout.preferredHeight: Layout.preferredWidth
                         Layout.alignment: Qt.AlignVCenter
                         radius: width
-                        color: "#424242"
+                        color: keypadRoot.waitingForAuth ? "#969696" : "#424242" // dim when waiting for auth
                     }
                 }
                 Label { // number/letter
                     visible: root.password.length-1 === indexWithNumber // hide label if no label needed
                     Layout.alignment: Qt.AlignHCenter
-                    color: "#424242"
+                    color: keypadRoot.waitingForAuth ? "#969696" : "#424242"
                     text: lastKeyPressValue
                     font.pointSize: 12
                 }
@@ -185,11 +223,11 @@ Rectangle {
                             onReleased: parent.color = "white"
                             onClicked: {
                                 if (modelData === "R") {
-                                    backspace();
+                                    keypadRoot.backspace();
                                 } else if (modelData === "E") {
-                                    enter();
+                                    keypadRoot.enter();
                                 } else {
-                                    keyPress(modelData);
+                                    keypadRoot.keyPress(modelData);
                                 }
                             }
                             onPressAndHold: {

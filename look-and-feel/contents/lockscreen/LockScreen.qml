@@ -234,8 +234,7 @@ PlasmaCore.ColorScope {
         // wipe password if it is more than half way down the screen
         onContentYChanged: {
             if (contentY < columnHeight / 2) {
-                root.password = "";
-                keypad.pinLabel = qsTr("Enter PIN");
+                keypad.reset();
             }
         }
         
