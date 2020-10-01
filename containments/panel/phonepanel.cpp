@@ -20,6 +20,7 @@
 
 #include "phonepanel.h"
 
+#include <qplatformdefs.h>
 #include <QDateTime>
 #include <QDBusPendingReply>
 #include <QFile>
@@ -28,8 +29,49 @@
 #include <QProcess>
 #include <QtConcurrent/QtConcurrent>
 #include <QScreen>
+#include <unistd.h>
 
 constexpr int SCREENSHOT_DELAY = 200;
+
+/* -- Static Helpers --------------------------------------------------------------------------- */
+
+static int readData(int theFile, QByteArray &theDataOut)
+{
+    // implementation based on QtWayland file qwaylanddataoffer.cpp
+    char    lBuffer[4096];
+    int     lRetryCount = 0;
+    ssize_t lBytesRead = 0;
+    while (true) {
+        lBytesRead = QT_READ(theFile, lBuffer, sizeof lBuffer);
+        // give user 30 sec to click a window, afterwards considered as error
+        if (lBytesRead == -1 && (errno == EAGAIN) && ++lRetryCount < 30000) {
+            usleep(1000);
+        } else {
+            break;
+        }
+    }
+
+    if (lBytesRead > 0) {
+        theDataOut.append(lBuffer, lBytesRead);
+        lBytesRead = readData(theFile, theDataOut);
+    }
+    return lBytesRead;
+}
+
+static QImage readImage(int thePipeFd)
+{
+    QByteArray lContent;
+    if (readData(thePipeFd, lContent) != 0) {
+        close(thePipeFd);
+        return QImage();
+    }
+    close(thePipeFd);
+
+    QDataStream lDataStream(lContent);
+    QImage lImage;
+    lDataStream >> lImage;
+    return lImage;
+}
 
 PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
@@ -105,51 +147,51 @@ void PhonePanel::setAutoRotate(bool value)
 
 void PhonePanel::takeScreenshot()
 {
+    QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+    if (filePath.isEmpty()) {
+        qWarning() << "Couldn't find a writable location for the screenshot!";
+        return;
+    }
+    QDir picturesDir(filePath);
+    if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
+        qWarning() << "Couldn't create folder at"
+                << picturesDir.path() + QStringLiteral("/Screenshots")
+                << "to take screenshot.";
+        return;
+    }
+    filePath += QStringLiteral("/Screenshots/Screenshot_%1.png").arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
+
     // wait ~200 ms to wait for rest of animations
     QTimer::singleShot(SCREENSHOT_DELAY, [=]() {
-        // screenshot fullscreen currently doesn't work on all devices -> we need to use screenshot area
-        // this won't work with multiple screens
-        QSize screenSize = QGuiApplication::primaryScreen()->size();
-        QDBusPendingReply<QString> reply = m_screenshotInterface->screenshotArea(0, 0, screenSize.width(), screenSize.height());
-        auto *watcher = new QDBusPendingCallWatcher(reply, this);
-
-        connect(watcher, &QDBusPendingCallWatcher::finished, this, [=](QDBusPendingCallWatcher *watcher) {
-            QDBusPendingReply<QString> reply = *watcher;
-
-            if (reply.isError()) {
-                qWarning() << "Creating the screenshot failed:" << reply.error().name() << reply.error().message();
-            } else {
-                QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-                if (filePath.isEmpty()) {
-                    qWarning() << "Couldn't find a writable location for the screenshot! The screenshot is in /tmp.";
-                    return;
-                }
-
-                QDir picturesDir(filePath);
-                if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
-                    qWarning() << "Couldn't create folder at"
-                            << picturesDir.path() + QStringLiteral("/Screenshots")
-                            << "to take screenshot.";
-                    return;
-                }
-
-                filePath += QStringLiteral("/Screenshots/Screenshot_%1.png")
-                                .arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
-
-                const QString currentPath = reply.argumentAt<0>();
-                QtConcurrent::run(QThreadPool::globalInstance(), [=]() {
-                    QFile screenshotFile(currentPath);
-                    if (!screenshotFile.rename(filePath)) {
-                        qWarning() << "Couldn't move screenshot into Pictures folder:"
-                                << screenshotFile.errorString();
-                    }
-
-                    qDebug() << "Successfully saved screenshot at" << filePath;
-                });
+        int lPipeFds[2];
+        if (pipe2(lPipeFds, O_CLOEXEC|O_NONBLOCK) != 0) {
+            qWarning() << "Could not take screenshot";
+            return;
+        }
+        QDBusInterface lInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QStringLiteral("org.kde.kwin.Screenshot"));
+        // Take fullscreen screenshot, and no pointer
+        QDBusPendingCall pcall = lInterface.asyncCall("screenshotFullscreen", QVariant::fromValue(QDBusUnixFileDescriptor(lPipeFds[1])), false);
+        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
+        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher* watcher) {
+            if (watcher->isError()) {
+                const auto error = watcher->error();
+                qWarning() << "Error calling KWin DBus interface:" << error.name() << error.message();
             }
-
             watcher->deleteLater();
         });
+        auto lWatcher = new QFutureWatcher<QImage>(this);
+            QObject::connect(lWatcher, &QFutureWatcher<QImage>::finished, this,
+            [lWatcher, filePath, this] () {
+                lWatcher->deleteLater();
+                const QImage lImage = lWatcher->result();
+                qDebug() << lImage;
+                if(!lImage.save(filePath, "PNG")) {
+                    qWarning() << "Failed to save screenshot to" << filePath;
+                }
+            }
+        );
+        lWatcher->setFuture(QtConcurrent::run(readImage, lPipeFds[0]));
+        close(lPipeFds[1]);
     });
 }
 
