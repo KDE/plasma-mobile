@@ -168,20 +168,19 @@ void PhonePanel::takeScreenshot()
             qWarning() << "Could not take screenshot";
             return;
         }
-        QDBusInterface lInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QStringLiteral("org.kde.kwin.Screenshot"));
         // Take fullscreen screenshot, and no pointer
-        QDBusPendingCall pcall = lInterface.asyncCall("screenshotFullscreen", QVariant::fromValue(QDBusUnixFileDescriptor(lPipeFds[1])), false);
+        QDBusPendingCall pcall = m_screenshotInterface->screenshotFullscreen(QDBusUnixFileDescriptor(lPipeFds[1]), false);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher* watcher) {
+        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [](QDBusPendingCallWatcher* watcher) {
             if (watcher->isError()) {
                 const auto error = watcher->error();
                 qWarning() << "Error calling KWin DBus interface:" << error.name() << error.message();
             }
             watcher->deleteLater();
         });
-        auto lWatcher = new QFutureWatcher<QImage>(this);
+        const auto lWatcher = new QFutureWatcher<QImage>(this);
             QObject::connect(lWatcher, &QFutureWatcher<QImage>::finished, this,
-            [lWatcher, filePath, this] () {
+            [lWatcher, filePath] () {
                 lWatcher->deleteLater();
                 const QImage lImage = lWatcher->result();
                 qDebug() << lImage;
