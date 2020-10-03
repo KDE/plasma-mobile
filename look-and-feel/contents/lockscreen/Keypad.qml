@@ -59,7 +59,10 @@ Rectangle {
     }
     
     function enter() {
-        keypadRoot.waitingForAuth = true;
+        if (root.password !== "") { // prevent typing lock when password is empty
+            keypadRoot.waitingForAuth = true;
+        }
+        
         // don't try to unlock if there is a timeout (unlock once unlocked)
         if (!authenticator.graceLocked) {
             authenticator.tryUnlock(root.password);
