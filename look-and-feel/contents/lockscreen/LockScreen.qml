@@ -221,7 +221,7 @@ PlasmaCore.ColorScope {
         boundsBehavior: Flickable.StopAtBounds
         
         // always snap to end (either hidden or shown)
-        onFlickEnded: {
+        onMovementEnded: {
             if (!atYBeginning && !atYEnd) {
                 if (contentY > columnHeight - contentY) {
                     flick(0, -1000);
