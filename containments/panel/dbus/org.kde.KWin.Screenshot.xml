@@ -1,114 +1,120 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
 <node>
-<interface name="org.kde.kwin.Screenshot">
-<signal name="screenshotCreated">
-<arg name="handle" type="t" direction="out"/>
-</signal>
-<method name="screenshotForWindow">
-<arg name="winid" type="t" direction="in"/>
-<arg name="mask" type="i" direction="in"/>
-</method>
-<method name="screenshotForWindow">
-<arg name="winid" type="t" direction="in"/>
-</method>
-<method name="interactive">
-<arg type="s" direction="out"/>
-<arg name="mask" type="i" direction="in"/>
-</method>
-<method name="interactive">
-<arg type="s" direction="out"/>
-</method>
-<method name="interactive">
-<arg name="fd" type="h" direction="in"/>
-<arg name="mask" type="i" direction="in"/>
-</method>
-<method name="interactive">
-<arg name="fd" type="h" direction="in"/>
-</method>
-<method name="screenshotWindowUnderCursor">
-<arg name="mask" type="i" direction="in"/>
-</method>
-<method name="screenshotWindowUnderCursor">
-</method>
-<method name="screenshotFullscreen">
-<arg type="s" direction="out"/>
-<arg name="captureCursor" type="b" direction="in"/>
-</method>
-<method name="screenshotFullscreen">
-<arg type="s" direction="out"/>
-</method>
-<method name="screenshotFullscreen">
-<arg name="fd" type="h" direction="in"/>
-<arg name="captureCursor" type="b" direction="in"/>
-</method>
-<method name="screenshotFullscreen">
-<arg name="fd" type="h" direction="in"/>
-</method>
-<method name="screenshotScreen">
-<arg type="s" direction="out"/>
-<arg name="screen" type="i" direction="in"/>
-<arg name="captureCursor" type="b" direction="in"/>
-</method>
-<method name="screenshotScreen">
-<arg type="s" direction="out"/>
-<arg name="screen" type="i" direction="in"/>
-</method>
-<method name="screenshotScreen">
-<arg name="fd" type="h" direction="in"/>
-<arg name="captureCursor" type="b" direction="in"/>
-</method>
-<method name="screenshotScreen">
-<arg name="fd" type="h" direction="in"/>
-</method>
-<method name="screenshotArea">
-<arg type="s" direction="out"/>
-<arg name="x" type="i" direction="in"/>
-<arg name="y" type="i" direction="in"/>
-<arg name="width" type="i" direction="in"/>
-<arg name="height" type="i" direction="in"/>
-<arg name="captureCursor" type="b" direction="in"/>
-</method>
-<method name="screenshotArea">
-<arg type="s" direction="out"/>
-<arg name="x" type="i" direction="in"/>
-<arg name="y" type="i" direction="in"/>
-<arg name="width" type="i" direction="in"/>
-<arg name="height" type="i" direction="in"/>
-</method>
-</interface>
-<interface name="org.freedesktop.DBus.Properties">
-<method name="Get">
-<arg name="interface_name" type="s" direction="in"/>
-<arg name="property_name" type="s" direction="in"/>
-<arg name="value" type="v" direction="out"/>
-</method>
-<method name="Set">
-<arg name="interface_name" type="s" direction="in"/>
-<arg name="property_name" type="s" direction="in"/>
-<arg name="value" type="v" direction="in"/>
-</method>
-<method name="GetAll">
-<arg name="interface_name" type="s" direction="in"/>
-<arg name="values" type="a{sv}" direction="out"/>
-<annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
-</method>
-<signal name="PropertiesChanged">
-<arg name="interface_name" type="s" direction="out"/>
-<arg name="changed_properties" type="a{sv}" direction="out"/>
-<annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>
-<arg name="invalidated_properties" type="as" direction="out"/>
-</signal>
-</interface>
-<interface name="org.freedesktop.DBus.Introspectable">
-<method name="Introspect">
-<arg name="xml_data" type="s" direction="out"/>
-</method>
-</interface>
-<interface name="org.freedesktop.DBus.Peer">
-<method name="Ping"/>
-<method name="GetMachineId">
-<arg name="machine_uuid" type="s" direction="out"/>
-</method>
-</interface>
-</node> 
+  <interface name="org.kde.kwin.Screenshot">
+    <signal name="screenshotCreated">
+      <arg name="handle" type="t" direction="out"/>
+    </signal>
+    <method name="screenshotForWindow">
+      <arg name="winid" type="t" direction="in"/>
+      <arg name="mask" type="i" direction="in"/>
+    </method>
+    <method name="screenshotForWindow">
+      <arg name="winid" type="t" direction="in"/>
+    </method>
+    <method name="interactive">
+      <arg type="s" direction="out"/>
+      <arg name="mask" type="i" direction="in"/>
+    </method>
+    <method name="interactive">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="interactive">
+      <arg name="fd" type="h" direction="in"/>
+      <arg name="mask" type="i" direction="in"/>
+    </method>
+    <method name="interactive">
+      <arg name="fd" type="h" direction="in"/>
+    </method>
+    <method name="screenshotWindowUnderCursor">
+      <arg name="mask" type="i" direction="in"/>
+    </method>
+    <method name="screenshotWindowUnderCursor">
+    </method>
+    <method name="screenshotFullscreen">
+      <arg type="s" direction="out"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+    </method>
+    <method name="screenshotFullscreen">
+      <arg type="s" direction="out"/>
+    </method>
+    <method name="screenshotFullscreen">
+      <arg name="fd" type="h" direction="in"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+      <arg name="shouldReturnNativeSize" type="b" direction="in"/>
+    </method>
+    <method name="screenshotFullscreen">
+      <arg name="fd" type="h" direction="in"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+    </method>
+    <method name="screenshotFullscreen">
+      <arg name="fd" type="h" direction="in"/>
+    </method>
+    <method name="screenshotScreen">
+      <arg type="s" direction="out"/>
+      <arg name="screen" type="i" direction="in"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+    </method>
+    <method name="screenshotScreen">
+      <arg type="s" direction="out"/>
+      <arg name="screen" type="i" direction="in"/>
+    </method>
+    <method name="screenshotScreen">
+      <arg name="fd" type="h" direction="in"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+    </method>
+    <method name="screenshotScreen">
+      <arg name="fd" type="h" direction="in"/>
+    </method>
+    <method name="screenshotArea">
+      <arg type="s" direction="out"/>
+      <arg name="x" type="i" direction="in"/>
+      <arg name="y" type="i" direction="in"/>
+      <arg name="width" type="i" direction="in"/>
+      <arg name="height" type="i" direction="in"/>
+      <arg name="captureCursor" type="b" direction="in"/>
+    </method>
+    <method name="screenshotArea">
+      <arg type="s" direction="out"/>
+      <arg name="x" type="i" direction="in"/>
+      <arg name="y" type="i" direction="in"/>
+      <arg name="width" type="i" direction="in"/>
+      <arg name="height" type="i" direction="in"/>
+    </method>
+  </interface>
+  <interface name="org.freedesktop.DBus.Properties">
+    <method name="Get">
+      <arg name="interface_name" type="s" direction="in"/>
+      <arg name="property_name" type="s" direction="in"/>
+      <arg name="value" type="v" direction="out"/>
+    </method>
+    <method name="Set">
+      <arg name="interface_name" type="s" direction="in"/>
+      <arg name="property_name" type="s" direction="in"/>
+      <arg name="value" type="v" direction="in"/>
+    </method>
+    <method name="GetAll">
+      <arg name="interface_name" type="s" direction="in"/>
+      <arg name="values" type="a{sv}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out0" value="QVariantMap"/>
+    </method>
+    <signal name="PropertiesChanged">
+      <arg name="interface_name" type="s" direction="out"/>
+      <arg name="changed_properties" type="a{sv}" direction="out"/>
+      <annotation name="org.qtproject.QtDBus.QtTypeName.Out1" value="QVariantMap"/>
+      <arg name="invalidated_properties" type="as" direction="out"/>
+    </signal>
+  </interface>
+  <interface name="org.freedesktop.DBus.Introspectable">
+    <method name="Introspect">
+      <arg name="xml_data" type="s" direction="out"/>
+    </method>
+  </interface>
+  <interface name="org.freedesktop.DBus.Peer">
+    <method name="Ping"/>
+    <method name="GetMachineId">
+      <arg name="machine_uuid" type="s" direction="out"/>
+    </method>
+  </interface>
+</node>
+

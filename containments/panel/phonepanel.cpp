@@ -86,7 +86,7 @@ PhonePanel::~PhonePanel() = default;
 void PhonePanel::executeCommand(const QString &command)
 {
     qWarning() << "Executing" << command;
-    QProcess::startDetached(command);
+    QProcess::startDetached(command, QStringList());
 }
 
 void PhonePanel::toggleTorch()
@@ -169,7 +169,7 @@ void PhonePanel::takeScreenshot()
             return;
         }
         // Take fullscreen screenshot, and no pointer
-        QDBusPendingCall pcall = m_screenshotInterface->screenshotFullscreen(QDBusUnixFileDescriptor(lPipeFds[1]), false);
+        QDBusPendingCall pcall = m_screenshotInterface->screenshotFullscreen(QDBusUnixFileDescriptor(lPipeFds[1]), false, true);
         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
         QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [](QDBusPendingCallWatcher* watcher) {
             if (watcher->isError()) {
