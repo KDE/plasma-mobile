@@ -86,7 +86,8 @@ PhonePanel::~PhonePanel() = default;
 void PhonePanel::executeCommand(const QString &command)
 {
     qWarning() << "Executing" << command;
-    QProcess::startDetached(command, QStringList());
+    const QStringList commandAndArguments = QProcess::splitCommand(command);
+    QProcess::startDetached(commandAndArguments.front(), commandAndArguments.mid(1));
 }
 
 void PhonePanel::toggleTorch()
