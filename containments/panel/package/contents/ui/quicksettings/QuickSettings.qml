@@ -22,6 +22,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.bluezqt 1.0 as BluezQt
 
 Item {
     id: root
@@ -42,6 +43,14 @@ Item {
         id: enabledConnections
     }
 
+    Connections {
+        target: BluezQt.Manager
+
+        function onBluetoothOperationalChanged() {
+            settingsModel.get(2).enabled = BluezQt.Manager.bluetoothOperational
+        }
+    }
+
     function toggleAirplane() {
         print("toggle airplane mode")
     }
@@ -57,13 +66,23 @@ Item {
 
     function toggleWwan() {
         nmHandler.enableWwan(!enabledConnections.wwanEnabled)
-        settingsModel.get(2).enabled = !enabledConnections.wwanEnabled
+        settingsModel.get(3).enabled = !enabledConnections.wwanEnabled
     }
 
     function toggleRotation() {
         const enable = !plasmoid.nativeInterface.autoRotateEnabled
         plasmoid.nativeInterface.autoRotateEnabled = enable
-        settingsModel.get(8).enabled = enable
+        settingsModel.get(9).enabled = enable
+    }
+
+    function toggleBluetooth() {
+        var enable = !BluezQt.Manager.bluetoothOperational;
+        BluezQt.Manager.bluetoothBlocked = !enable;
+
+        for (var i = 0; i < BluezQt.Manager.adapters.length; ++i) {
+            var adapter = BluezQt.Manager.adapters[i];
+            adapter.powered = enable;
+        }
     }
 
     function requestShutdown() {
@@ -151,6 +170,15 @@ Item {
             "toggleFunction": "toggleWifi",
             "delegate": "",
             "enabled": enabledConnections.wirelessEnabled,
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Bluetooth"),
+            "icon": "network-bluetooth",
+            "settingsCommand": "plasma-settings -m kcm_bluetooth",
+            "toggleFunction": "toggleBluetooth",
+            "delegate": "",
+            "enabled": BluezQt.Manager.bluetoothOperational,
             "applet": null
         });
         settingsModel.append({
