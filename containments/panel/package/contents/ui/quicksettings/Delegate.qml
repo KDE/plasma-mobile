@@ -31,13 +31,11 @@ ColumnLayout {
     signal panelClosed
 
     // Model interface
-    required property string text;
-    required property string icon;
-    required property bool enabled;
-    required property string settingsCommand;
-    required property var toggleFunction;
-    required property string delegate;
-    required property QtObject applet;
+    required property string text
+    required property string icon
+    required property bool enabled
+    required property string settingsCommand
+    required property var toggleFunction
 
     Rectangle {
         Layout.preferredWidth: units.iconSizes.large + units.smallSpacing
