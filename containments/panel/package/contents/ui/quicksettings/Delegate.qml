@@ -26,21 +26,29 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 ColumnLayout {
     id: delegateRoot
-    property bool toggled: model.enabled
     spacing: units.smallSpacing
     signal closeRequested
     signal panelClosed
+
+    // Model interface
+    required property string text;
+    required property string icon;
+    required property bool enabled;
+    required property string settingsCommand;
+    required property var toggleFunction;
+    required property string delegate;
+    required property QtObject applet;
 
     Rectangle {
         Layout.preferredWidth: units.iconSizes.large + units.smallSpacing
         Layout.minimumHeight: width
         Layout.alignment: Qt.AlignHCenter
         radius: units.smallSpacing
-        border.color: toggled ? 
+        border.color: delegateRoot.enabled ?
             Qt.darker(Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {}), 1.25) :
             Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.textColor, {"alpha": 0.2*255})
         color: {
-            if (toggled) {
+            if (delegateRoot.enabled) {
                 return Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": iconMouseArea.pressed ? 0.5*255 : 0.3*255});
             } else {
                 if (iconMouseArea.pressed) {
@@ -58,38 +66,38 @@ ColumnLayout {
                 fill: parent
                 margins: units.smallSpacing
             }
-            source: model.icon
+            source: delegateRoot.icon
             MouseArea {
                 id: iconMouseArea
                 anchors.fill: parent
                 onClicked: {
                     if (delegateRoot.toggle) {
                         delegateRoot.toggle();
-                    } else if (model.toggleFunction) {
-                        root[model.toggleFunction]();
-                    } else if (model.settingsCommand) {
+                    } else if (delegateRoot.toggleFunction) {
+                        root[delegateRoot.toggleFunction]();
+                    } else if (delegateRoot.settingsCommand) {
                         NanoShell.StartupFeedback.open(
-                            model.icon,
-                            model.text,
+                            delegateRoot.icon,
+                            delegateRoot.text,
                             icon.Kirigami.ScenePosition.x + icon.width/2,
                             icon.Kirigami.ScenePosition.y + icon.height/2,
                             Math.min(icon.width, icon.height))
-                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                        plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
                         root.closeRequested();
                     }
                 }
                 onPressAndHold: {
-                    if (model.settingsCommand) {
+                    if (delegateRoot.settingsCommand) {
                         NanoShell.StartupFeedback.open(
-                            model.icon,
-                            model.text,
+                            delegateRoot.icon,
+                            delegateRoot.text,
                             icon.Kirigami.ScenePosition.x + icon.width/2,
                             icon.Kirigami.ScenePosition.y + icon.height/2,
                             Math.min(icon.width, icon.height))
                         closeRequested();
-                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
-                    } else if (model.toggleFunction) {
-                        root[model.toggleFunction]();
+                        plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
+                    } else if (delegateRoot.toggleFunction) {
+                        root[delegateRoot.toggleFunction]();
                     }
                 }
             }
@@ -102,7 +110,7 @@ ColumnLayout {
         Layout.maximumWidth: parent.width
         Layout.alignment: Qt.AlignHCenter
 
-        text: model.text
+        text: delegateRoot.text
         bottomPadding: units.smallSpacing * 2
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: theme.defaultFont.pixelSize * 0.8
@@ -115,7 +123,7 @@ ColumnLayout {
                 verticalCenter: parent.verticalCenter
                 verticalCenterOffset: -units.smallSpacing
             }
-            visible: model.settingsCommand
+            visible: delegateRoot.settingsCommand
             width: units.iconSizes.small/2
             height: width
             elementId: "down-arrow"
@@ -127,17 +135,17 @@ ColumnLayout {
             id: labelMouseArea
             anchors.fill: parent
             onClicked: {
-                if (model.settingsCommand) {
+                if (delegateRoot.settingsCommand) {
                     NanoShell.StartupFeedback.open(
-                        model.icon,
-                        model.text,
+                        delegateRoot.icon,
+                        delegateRoot.text,
                         icon.Kirigami.ScenePosition.x + icon.width/2,
                         icon.Kirigami.ScenePosition.y + icon.height/2,
                         Math.min(icon.width, icon.height))
-                    plasmoid.nativeInterface.executeCommand(model.settingsCommand);
+                    plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
                     closeRequested();
-                } else if (model.toggleFunction) {
-                    root[model.toggleFunction]();
+                } else if (delegateRoot.toggleFunction) {
+                    root[delegateRoot.toggleFunction]();
                 }
             }
         }

@@ -160,7 +160,6 @@ Item {
             "settingsCommand": "plasma-settings",
             "toggleFunction": "",
             "delegate": "",
-            "enabled": false,
             "applet": null
         });
         settingsModel.append({
@@ -197,7 +196,6 @@ Item {
             "settingsCommand": "plasma-settings -m kcm_mobile_power",
             "toggleFunction": "",
             "delegate": "",
-            "enabled": false,
             "applet": null
         });
         settingsModel.append({
@@ -207,7 +205,6 @@ Item {
             "settingsCommand": "plasma-settings -m kcm_pulseaudio",
             "toggleFunction": "",
             "delegate": "",
-            "enabled": false,
             "applet": null
         });
         settingsModel.append({
