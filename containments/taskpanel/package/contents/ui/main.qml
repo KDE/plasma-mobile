@@ -180,7 +180,18 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
 
             visible: plasmoid.configuration.PanelButtonsVisible
-
+            
+            PlasmaCore.Svg {
+                id: panelSvg
+                imagePath: "icons/mobile"
+                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+            }
+            PlasmaCore.Svg {
+                id: startSvg
+                imagePath: "icons/start"
+                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+            }
+            
             Rectangle {
                 anchors.fill: parent
                 gradient: Gradient {
@@ -196,12 +207,15 @@ PlasmaCore.ColorScope {
             }
 
             Button {
-                anchors.left: parent.left
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                    leftMargin: parent.width * 0.1
+                }
                 height: parent.height
-                width: parent.width/3
+                width: parent.width*0.8/3
                 mouseArea: mainMouseArea
                 enabled: root.hasTasks
-                iconSource: "box"
                 onClicked: {
                     if (!enabled) {
                         return;
@@ -209,15 +223,29 @@ PlasmaCore.ColorScope {
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
+                PlasmaCore.SvgItem {
+                    anchors.centerIn: parent
+                    implicitHeight: 0.75 * parent.height * 0.6 // 0.75 sizing adjustment fix needed 
+                    implicitWidth: implicitHeight
+                    opacity: parent.enabled ? 1 : 0.5
+                    svg: panelSvg
+                    elementId: "mobile-task-switcher"
+                    
+                    Behavior on opacity {
+                        NumberAnimation { duration: units.shortDuration }
+                    }
+                }
             }
 
             Button {
                 id: showDesktopButton
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    horizontalCenter: parent.horizontalCenter
+                }
                 height: parent.height
-                width: parent.width/3
-                anchors.horizontalCenter: parent.horizontalCenter
+                width: parent.width*0.8/3
                 mouseArea: mainMouseArea
-                iconSource: "start-here-kde"
                 enabled: !taskSwitcher.visible && (root.showingApp || MobileShell.HomeScreenControls.homeScreenPosition != 0)
                 onClicked: {
                     if (!enabled) {
@@ -227,14 +255,29 @@ PlasmaCore.ColorScope {
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
                     plasmoid.nativeInterface.allMinimizedChanged();
                 }
+                PlasmaCore.SvgItem {
+                    anchors.centerIn: parent
+                    implicitHeight: parent.height * 0.6
+                    implicitWidth: implicitHeight
+                    opacity: parent.enabled ? 1 : 0.5
+                    svg: startSvg
+                    elementId: "16-16-start-here-kde"
+                    
+                    Behavior on opacity {
+                        NumberAnimation { duration: units.shortDuration }
+                    }
+                }
             }
 
             Button {
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                    rightMargin: parent.width * 0.1
+                }
                 height: parent.height
-                width: parent.width/3
-                anchors.right: parent.right
+                width: parent.width*0.8/3
                 mouseArea: mainMouseArea
-                iconSource: "paint-none"
                 enabled: plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible
                 onClicked: {
                     if (!enabled) {
@@ -246,6 +289,19 @@ PlasmaCore.ColorScope {
                     var index = taskSwitcher.model.activeTask;
                     if (index) {
                         taskSwitcher.model.requestClose(index);
+                    }
+                }
+
+                PlasmaCore.SvgItem {
+                    anchors.centerIn: parent
+                    implicitHeight: 0.75 * parent.height * 0.6 // 0.75 sizing adjustment fix needed 
+                    implicitWidth: implicitHeight
+                    opacity: parent.enabled ? 1 : 0.5
+                    svg: panelSvg
+                    elementId: "mobile-close-app"
+                    
+                    Behavior on opacity {
+                        NumberAnimation { duration: units.shortDuration }
                     }
                 }
             }

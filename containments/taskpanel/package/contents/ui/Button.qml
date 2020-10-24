@@ -16,7 +16,7 @@
  *  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  2.010-1301, USA.
  */
 
-import QtQuick 2.4
+import QtQuick 2.12
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
@@ -35,15 +35,42 @@ Item {
     signal clicked()
 
     Rectangle {
+        id: rect
         radius: height/2
         anchors.fill: parent
-        opacity: button.pressed && button.enabled ? 0.1 : 0
+        opacity: 0
         color: PlasmaCore.ColorScope.textColor
-        Behavior on opacity {
-            //an OpacityAnimator causes stuttering in task switcher dragging
-            NumberAnimation {
-                duration: units.longDuration
-                easing.type: Easing.InOutQuad
+        
+        // this way of calculating animations lets the animation fully complete before switching back (tap runs the full animation)
+        property bool buttonHeld: button.pressed && button.enabled
+        
+        onButtonHeldChanged: showBackground(buttonHeld)
+        Component.onCompleted: showBackground(buttonHeld)
+        
+        function showBackground(show) {
+            if (show) {
+                if (!opacityAnimator.running && opacityAnimator.to !== 0.1) {
+                    opacityAnimator.to = 0.1;
+                    opacityAnimator.start();
+                }
+            } else {
+                if (!opacityAnimator.running && opacityAnimator.to !== 0) {
+                    opacityAnimator.to = 0;
+                    opacityAnimator.start();
+                }
+            }
+        }
+        NumberAnimation on opacity {
+            id: opacityAnimator
+            duration: units.shortDuration
+            easing.type: Easing.InOutQuad
+            onFinished: {
+                // animate the state back
+                if (rect.buttonHeld && opacityAnimator.to === 0) {
+                    rect.showBackground(true);
+                } else if (!rect.buttonHeld && opacityAnimator.to === 0.1) {
+                    rect.showBackground(false);
+                }
             }
         }
     }
