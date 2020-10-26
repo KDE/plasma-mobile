@@ -27,7 +27,7 @@ TaskManager.PipeWireSourceItem {
     visible: true
     nodeId: waylandItem.nodeId
 
-    TaskManager.ScreencastingItem {
+    TaskManager.ScreencastingRequest {
         id: waylandItem
         uuid: model.WinIdList[0]
     }
