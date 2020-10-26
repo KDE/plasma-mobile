@@ -125,6 +125,7 @@ Item {
                     }
                     
                     RowLayout {
+                        z: 99
                         Layout.fillWidth: true
                         Layout.maximumHeight: units.gridUnit
                         PlasmaCore.IconItem {
