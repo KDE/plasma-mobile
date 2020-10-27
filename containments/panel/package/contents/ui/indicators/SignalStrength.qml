@@ -25,74 +25,50 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
-
 Item {
-
     width: strengthIcon.height + strengthLabel.width
     Layout.minimumWidth: strengthIcon.height + strengthLabel.width
+
     OfonoManager {
         id: ofonoManager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added " + modem)
-        }
-        onModemRemoved: console.log("modem removed")
     }
 
     OfonoNetworkRegistration {
         id: netreg
         Component.onCompleted: {
             netreg.scan()
-            updateStrengthIcon()
         }
 
-        onNetworkOperatorsChanged : {
-            console.log("operators :"+netreg.currentOperator["Name"].toString())
-        }
         modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
-        function updateStrengthIcon() {
-            if (netreg.strength >= 100) {
-                strengthIcon.source = "network-mobile-100";
-            } else if (netreg.strength >= 80) {
-                strengthIcon.source = "network-mobile-80";
-            } else if (netreg.strength >= 60) {
-                strengthIcon.source = "network-mobile-60";
-            } else if (netreg.strength >= 40) {
-                strengthIcon.source = "network-mobile-40";
-            } else if (netreg.strength >= 20) {
-                strengthIcon.source = "network-mobile-20";
-            } else {
-                strengthIcon.source = "network-mobile-0";
-            }
-        }
-
-        onStrengthChanged: {
-            console.log("Strength changed to " + netreg.strength)
-            updateStrengthIcon()
-        }
     }
 
-
+    OfonoSimManager {
+        id: simManager
+        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
+    }
 
     PlasmaCore.IconItem {
         id: strengthIcon
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-        }
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
         width: height
         height: parent.height
+
+        source: netreg.strength == 100 ? "network-mobile-100"
+                : netreg.strength >= 80 ? "network-mobile-80"
+                : netreg.strength >= 60 ? "network-mobile-60"
+                : netreg.strength >= 40 ? "network-mobile-40"
+                : netreg.strength >= 20 ? "network-mobile-20"
+                : "network-mobile-0"
     }
+
     PlasmaComponents.Label {
-        id: strengthLabel
-        anchors {
-            left: strengthIcon.right
-            verticalCenter: parent.verticalCenter
-        }
-        text: netreg.strength + "% " + netreg.name
+        id: label
+        anchors.left: strengthIcon.right
+        anchors.verticalCenter: parent.verticalCenter
+
+        text: simManager.pinRequired !== OfonoSimManager.NoPin ? i18n("Sim locked") : netreg.name
         color: PlasmaCore.ColorScope.textColor
         font.pixelSize: parent.height / 2
     }
