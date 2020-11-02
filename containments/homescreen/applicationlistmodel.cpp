@@ -164,12 +164,7 @@ void ApplicationListModel::loadApplications()
     auto cfg = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
     auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
 
-    // This is only temporary to get a clue what those apps' desktop files are called
-    // I'll remove it once I've done a blacklist
-    QStringList bl;
-
     QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
-
 
     beginResetModel();
 
@@ -209,8 +204,6 @@ void ApplicationListModel::loadApplications()
                             service->showOnCurrentPlatform() &&
                             !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
 
-                            bl << service->desktopEntryName();
-
                             ApplicationData data;
                             data.name = service->name();
                             data.icon = service->icon();
@@ -238,7 +231,6 @@ void ApplicationListModel::loadApplications()
         }
     }
 
-    blgroup.writeEntry("allapps", bl);
     blgroup.writeEntry("blacklist", blacklist);
     cfg->sync();
 
