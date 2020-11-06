@@ -87,6 +87,7 @@ ColumnLayout {
                             icon.Kirigami.ScenePosition.y + icon.height/2,
                             Math.min(icon.width, icon.height))
                         closeRequested();
+                        plasmoid.nativeInterface.executeCommand(model.settingsCommand);
                     } else if (model.toggleFunction) {
                         root[model.toggleFunction]();
                     }
