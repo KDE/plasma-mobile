@@ -150,7 +150,7 @@ PlasmaCore.IconItem {
         //   componentName: kmix
         //   actions: increase_volume, decrease_volume, mute
         name: "kmix"
-        displayName: main.displayName
+        displayName: i18n("Audio")
 
         GlobalAction {
             objectName: "increase_volume"
