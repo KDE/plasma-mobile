@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Phone
+Name[ast]=Teléfonu
 Name[ca]=Telèfon
 Name[ca@valencia]=Telèfon
 Name[cs]=Telefon
@@ -35,6 +36,7 @@ Name[x-test]=xxPhonexx
 Name[zh_CN]=手机
 Name[zh_TW]=電話
 Comment=Plasma shell for phones
+Comment[ast]=La shell de Plasma pa teléfonos
 Comment[ca]=Espai de treball Plasma per a telèfons
 Comment[ca@valencia]=Espai de treball Plasma per a telèfons
 Comment[cs]=Plasma Shell pro telefony

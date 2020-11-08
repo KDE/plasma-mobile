@@ -1,5 +1,6 @@
 [Desktop Entry]
 Name=Phone multitask
+Name[ast]=Multixera de teléfonos
 Name[ca]=Multitasca del telèfon
 Name[ca@valencia]=Multitasca del telèfon
 Name[da]=Multitask til telefon
@@ -32,6 +33,7 @@ Name[x-test]=xxPhone multitaskxx
 Name[zh_CN]=手机多任务
 Name[zh_TW]=手機多工
 Comment=Multitasking user interface for Phone devices
+Comment[ast]=Interfaz d'usuariu multixera pa teléfonos
 Comment[ca]=Interfície d'usuari multitasca per als dispositius de telèfon
 Comment[ca@valencia]=Interfície d'usuari multitasca per als dispositius de telèfon
 Comment[da]=Brugerflade med multitasking til telefoner

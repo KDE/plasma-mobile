@@ -1,6 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Search And Run
+Name[ast]=Busca y execución
 Name[ca]=Cerca i executa
 Name[cs]=Vyhledat a spustit
 Name[da]=Søg og kør
@@ -31,6 +32,7 @@ Name[zh_CN]=搜索和运行
 Name[zh_TW]=搜尋並執行
 
 Comment=Search and run Applications and services
+Comment[ast]=Busca y executa aplicaciones y servicios
 Comment[ca]=Cerca i executa aplicacions i serveis
 Comment[cs]=Vyhledat a spustit aplikace a služby
 Comment[da]=Søg og kør programmer og tjenester
