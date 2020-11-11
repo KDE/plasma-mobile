@@ -95,6 +95,7 @@ void PhonePanel::executeCommand(const QString &command)
 
 void PhonePanel::toggleTorch()
 {
+    // FIXME this is hardcoded to the PinePhone for now
     static auto FLASH_SYSFS_PATH = "/sys/devices/platform/led-controller/leds/white:flash/brightness";
     int fd = open(FLASH_SYSFS_PATH, O_WRONLY);
 
