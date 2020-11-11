@@ -216,7 +216,6 @@ NanoShell.FullScreenOverlay {
                     y: 0
                     x: drawerX
                     width: drawerWidth
-                    height: contentItem.height
                 }
             }
         }
