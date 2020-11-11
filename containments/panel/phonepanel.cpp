@@ -21,6 +21,9 @@
 #include "phonepanel.h"
 
 #include <qplatformdefs.h>
+#include <fcntl.h>
+#include <unistd.h>
+
 #include <QDateTime>
 #include <QDBusPendingReply>
 #include <QFile>
@@ -92,35 +95,17 @@ void PhonePanel::executeCommand(const QString &command)
 
 void PhonePanel::toggleTorch()
 {
-    if (!m_running) {
-        gst_init(nullptr, nullptr);
-        // create elements
-        m_source = gst_element_factory_make("droidcamsrc", "source");
-        m_sink = gst_element_factory_make("fakesink", "sink");
-        m_pipeline = gst_pipeline_new("torch-pipeline");
-        if (!m_pipeline || !m_source || !m_sink) {
-            qDebug() << "Failed to turn on torch: failed to create elements";
-            return;
-        }
-        gst_bin_add_many(GST_BIN(m_pipeline), m_source, m_sink, NULL);
-        if (gst_element_link(m_source, m_sink) != TRUE) {
-            qDebug() << "Failed to turn on torch: failed to link source and sink";
-            g_object_unref(m_pipeline);
-            return;
-        }
-        g_object_set(m_source, "mode", 2, NULL);
-        g_object_set(m_source, "video-torch", TRUE, NULL);
-        if (gst_element_set_state(m_pipeline, GST_STATE_PLAYING) == GST_STATE_CHANGE_FAILURE) {
-            qDebug() << "Failed to turn on torch: failed to start pipeline";
-            g_object_unref(m_pipeline);
-            return;
-        }
-        m_running = true;
-    } else {
-        gst_element_set_state(m_pipeline, GST_STATE_NULL);
-        gst_object_unref(m_pipeline);
-        m_running = false;
+    static auto FLASH_SYSFS_PATH = "/sys/devices/platform/led-controller/leds/white:flash/brightness";
+    int fd = open(FLASH_SYSFS_PATH, O_WRONLY);
+
+    if (fd < 0) {
+        qWarning() << "Unable to open file %s" << FLASH_SYSFS_PATH;
+        return;
     }
+
+    write(fd, m_running ? "0" : "1", 1);
+    close(fd);
+    m_running = !m_running;
 }
 
 bool PhonePanel::autoRotate()
