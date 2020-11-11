@@ -24,8 +24,6 @@
 
 #include <Plasma/Containment>
 
-#include <gst/gst.h>
-
 #include "kscreeninterface.h"
 #include "screenshotinterface.h"
 
@@ -50,9 +48,6 @@ signals:
     void autoRotateChanged(bool value);
 
 private:
-    GstElement* m_pipeline;
-    GstElement* m_sink;
-    GstElement* m_source;
     bool m_running = false;
 
     org::kde::KScreen *m_kscreenInterface;
