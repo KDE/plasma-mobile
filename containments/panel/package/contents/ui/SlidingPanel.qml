@@ -213,8 +213,10 @@ NanoShell.FullScreenOverlay {
                 PlasmaComponents.Control {
                     id: contentArea
                     z: 1
+                    y: 0
                     x: drawerX
                     width: drawerWidth
+                    height: contentItem.height
                 }
             }
         }

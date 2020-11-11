@@ -293,67 +293,69 @@ Item {
         
         onClosed: quickSettings.closed()
 
-        contentItem: GridLayout {
-            id: panelContents
-            anchors.fill: parent
+        contentItem: Item {
             implicitWidth: quickSettingsParent.implicitWidth
             implicitHeight: Math.min(slidingPanel.height, quickSettingsParent.implicitHeight)
+            GridLayout {
+                id: panelContents
+                anchors.fill: parent
+                implicitWidth: quickSettingsParent.implicitWidth
+                implicitHeight: Math.min(slidingPanel.height, quickSettingsParent.implicitHeight)
 
-            columns: slidingPanel.wideScreen ? 2 : 1
-            rows: slidingPanel.wideScreen ? 1 : 2
-            
-            DrawerBackground {
-                id: quickSettingsParent
-                //anchors.fill: parent
-                Layout.alignment: Qt.AlignTop
-                Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
-                z: 4
-                contentItem: QuickSettings {
-                    id: quickSettings
-                    onCloseRequested: {
-                        slidingPanel.hide()
+                columns: slidingPanel.wideScreen ? 2 : 1
+                rows: slidingPanel.wideScreen ? 1 : 2
+                
+                DrawerBackground {
+                    id: quickSettingsParent
+                    //anchors.fill: parent
+                    Layout.alignment: Qt.AlignTop
+                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
+                    z: 4
+                    contentItem: QuickSettings {
+                        id: quickSettings
+                        onCloseRequested: {
+                            slidingPanel.hide()
+                        }
                     }
                 }
-            }
 
-            ListView {
-                id: fullRepresentationView
-                z: 1
-                interactive: width < contentWidth
-                //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
-                Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
-                //Layout.fillWidth: true
-                clip: slidingPanel.wideScreen
-                y: slidingPanel.wideScreen ? 0 : quickSettingsParent.height - height * (1-opacity)
-                opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
-                height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
-                //leftMargin: slidingPanel.drawerX
-                preferredHighlightBegin: slidingPanel.drawerX
-                
-                implicitHeight: units.gridUnit * 20
-                cacheBuffer: width * 100
-                highlightFollowsCurrentItem: true
-                highlightRangeMode: ListView.StrictlyEnforceRange
-                highlightMoveDuration: units.longDuration
-                snapMode: slidingPanel.wideScreen ? ListView.NoSnap : ListView.SnapOneItem
-                model: ObjectModel {
-                    id: fullRepresentationModel
-                }
-                orientation: ListView.Horizontal
-
-                MouseArea {
-                    parent: fullRepresentationView.contentItem
-                    anchors.fill: parent
-                    z: -1
+                ListView {
+                    id: fullRepresentationView
+                    z: 1
+                    interactive: width < contentWidth
+                    //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
+                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
+                    //Layout.fillWidth: true
+                    clip: slidingPanel.wideScreen
+                    y: slidingPanel.wideScreen ? 0 : quickSettingsParent.height - height * (1-opacity)
+                    opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
+                    height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
+                    //leftMargin: slidingPanel.drawerX
+                    preferredHighlightBegin: slidingPanel.drawerX
                     
-                    onClicked: slidingPanel.close()
+                    implicitHeight: units.gridUnit * 20
+                    cacheBuffer: width * 100
+                    highlightFollowsCurrentItem: true
+                    highlightRangeMode: ListView.StrictlyEnforceRange
+                    highlightMoveDuration: units.longDuration
+                    snapMode: slidingPanel.wideScreen ? ListView.NoSnap : ListView.SnapOneItem
+                    model: ObjectModel {
+                        id: fullRepresentationModel
+                    }
+                    orientation: ListView.Horizontal
+
+                    MouseArea {
+                        parent: fullRepresentationView.contentItem
+                        anchors.fill: parent
+                        z: -1
+                        onClicked: slidingPanel.close()
+                    }
+
+                    //implicitHeight: fullRepresentationLayout.implicitHeight
+                    //clip: true
+
                 }
-
-                //implicitHeight: fullRepresentationLayout.implicitHeight
-                //clip: true
-
             }
-            
         }
         DrawerBackground {
             id: bottomBar
