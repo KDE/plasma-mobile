@@ -246,7 +246,7 @@ PlasmaCore.ColorScope {
                             color: "white"
                             visible: modelData.length > 0
 
-                            MouseArea {
+                            AbstractButton {
                                 anchors.fill: parent
                                 onPressed: parent.color = "#e0e0e0"
                                 onReleased: parent.color = "white"

@@ -16,7 +16,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
 import QtQuick 2.12
-import QtQuick.Controls 1.1
+import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
@@ -220,7 +220,7 @@ Rectangle {
                         color: "white"
                         visible: modelData.length > 0
 
-                        MouseArea {
+                        AbstractButton {
                             anchors.fill: parent
                             onPressed: parent.color = "#e0e0e0"
                             onReleased: parent.color = "white"
