@@ -32,7 +32,6 @@
 #include <QProcess>
 #include <QtConcurrent/QtConcurrent>
 #include <QScreen>
-#include <unistd.h>
 
 constexpr int SCREENSHOT_DELAY = 200;
 
