@@ -213,7 +213,7 @@ Item {
         settingsModel.append({
             "text": i18n("Flashlight"),
             "icon": "flashlight-on",
-            "enabled": false,
+            "enabled": plasmoid.nativeInterface.torchEnabled,
             "settingsCommand": "",
             "toggleFunction": "toggleTorch",
             "applet": null

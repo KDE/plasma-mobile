@@ -107,8 +107,12 @@ void PhonePanel::toggleTorch()
     write(fd, m_running ? "0" : "1", 1);
     close(fd);
     m_running = !m_running;
+    Q_EMIT torchChanged(m_running);
 }
-
+bool PhonePanel::torchEnabled() const
+{
+    return m_running;
+}
 bool PhonePanel::autoRotate()
 {
     QDBusPendingReply<bool> reply = m_kscreenInterface->getAutoRotate();
