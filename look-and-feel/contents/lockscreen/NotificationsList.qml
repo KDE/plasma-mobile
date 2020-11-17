@@ -27,6 +27,65 @@ import "../components"
 Item {
     property alias notificationListHeight: notificationListView.contentHeight
     property int count: notificationListView.count
+    clip: true
+
+    Rectangle {
+        z: 1
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
+        visible: !notificationListView.atYBeginning
+        height: PlasmaCore.Units.gridUnit
+        gradient: Gradient {
+            GradientStop {
+                position: 1.0
+                color: "transparent"
+            }
+            GradientStop {
+                position: 0.0
+                color: Qt.rgba(0, 0, 0, 0.3)
+            }
+        }
+        Rectangle {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
+            height: 1
+            color: Qt.rgba(1, 1, 1, 0.5)
+        }
+    }
+    Rectangle {
+        z: 1
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        visible: !notificationListView.atYEnd
+        height: PlasmaCore.Units.gridUnit
+        gradient: Gradient {
+            GradientStop {
+                position: 1.0
+                color: Qt.rgba(0, 0, 0, 0.3)
+            }
+            GradientStop {
+                position: 0.0
+                color: "transparent"
+            }
+        }
+        Rectangle {
+            anchors {
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
+            height: 1
+            color: Qt.rgba(1, 1, 1, 0.5)
+        }
+    }
     
     ListView {
         id: notificationListView
@@ -36,11 +95,12 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            leftMargin: units.gridUnit
+            rightMargin: units.gridUnit
         }
         height: Math.min(contentHeight, parent.height) // don't take up the entire screen for notification list view
 
         interactive: contentHeight > parent.height // only allow scrolling on notifications list if it is long enough
-        clip: true
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         spacing: units.gridUnit
         

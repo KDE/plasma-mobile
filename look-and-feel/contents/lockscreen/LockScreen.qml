@@ -170,9 +170,7 @@ PlasmaCore.ColorScope {
             bottom: scrollUpIcon.top
             bottomMargin: units.gridUnit
             left: parent.left
-            leftMargin: units.gridUnit
             right: parent.right
-            rightMargin: units.gridUnit
         }
     }
     
