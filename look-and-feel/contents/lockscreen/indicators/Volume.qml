@@ -64,69 +64,6 @@ PlasmaCore.IconItem {
         return output && output.name === dummyOutputName;
     }
 
-    function boundVolume(volume) {
-        return Math.max(PulseAudio.MinimalVolume, Math.min(volume, maxVolumeValue));
-    }
-
-    function volumePercent(volume, max){
-        if(!max) {
-            max = PulseAudio.NormalVolume;
-        }
-        return Math.round(volume / max * 100.0);
-    }
-
-    function playFeedback(sinkIndex) {
-        if(!volumeFeedback){
-            return;
-        }
-        if(sinkIndex == undefined) {
-            sinkIndex = paSinkModel.preferredSink.index;
-        }
-        feedback.play(sinkIndex)
-    }
-
-    function increaseVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
-            return;
-        }
-
-        var volume = boundVolume(paSinkModel.preferredSink.volume + volumeStep);
-        var percent = volumePercent(volume, maxVolumeValue);
-        paSinkModel.preferredSink.muted = percent == 0;
-        paSinkModel.preferredSink.volume = volume;
-        osd.show(percent);
-        playFeedback();
-
-    }
-
-    function decreaseVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
-            return;
-        }
-
-        var volume = boundVolume(paSinkModel.preferredSink.volume - volumeStep);
-        var percent = volumePercent(volume, maxVolumeValue);
-        paSinkModel.preferredSink.muted = percent == 0;
-        paSinkModel.preferredSink.volume = volume;
-        osd.show(percent);
-        playFeedback();
-    }
-
-
-
-    function muteVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
-            return;
-        }
-
-        var toMute = !paSinkModel.preferredSink.muted;
-        paSinkModel.preferredSink.muted = toMute;
-        osd.show(toMute ? 0 : volumePercent(paSinkModel.preferredSink.volume, maxVolumeValue));
-        if (!toMute) {
-            playFeedback();
-        }
-    }
-
     SinkModel {
         id: paSinkModel
     }
@@ -137,40 +74,5 @@ PlasmaCore.IconItem {
 
     VolumeFeedback {
         id: feedback
-    }
-
-    GlobalActionCollection {
-        // KGlobalAccel cannot transition from kmix to something else, so if
-        // the user had a custom shortcut set for kmix those would get lost.
-        // To avoid this we hijack kmix name and actions. Entirely mental but
-        // best we can do to not cause annoyance for the user.
-        // The display name actually is updated to whatever registered last
-        // though, so as far as user visible strings go we should be fine.
-        // As of 2015-07-21:
-        //   componentName: kmix
-        //   actions: increase_volume, decrease_volume, mute
-        name: "kmix"
-        displayName: main.displayName
-
-        GlobalAction {
-            objectName: "increase_volume"
-            text: i18n("Increase Volume")
-            shortcut: Qt.Key_VolumeUp
-            onTriggered: increaseVolume()
-        }
-
-        GlobalAction {
-            objectName: "decrease_volume"
-            text: i18n("Decrease Volume")
-            shortcut: Qt.Key_VolumeDown
-            onTriggered: decreaseVolume()
-        }
-
-        GlobalAction {
-            objectName: "mute"
-            text: i18n("Mute")
-            shortcut: Qt.Key_VolumeMute
-            onTriggered: muteVolume()
-        }
     }
 }
