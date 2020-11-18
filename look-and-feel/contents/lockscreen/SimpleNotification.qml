@@ -183,7 +183,7 @@ Item {
             }
             onReleased: {
                 if (Math.abs(rect.x) > width / 2) { // dismiss notification when finished swipe
-                    notifModel.close(notification.id);
+                    notifModel.close(notificationItem.notification.notificationId);
                 } else {
                     slideAnim.restart();
                 }
