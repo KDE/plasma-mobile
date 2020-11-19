@@ -23,6 +23,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.bluezqt 1.0 as BluezQt
+import org.kde.colorcorrect 0.1 as CC
 
 Item {
     id: root
@@ -84,6 +85,16 @@ Item {
             adapter.powered = enable;
         }
     }
+    
+    function toggleNightColor() {
+        if (compositorAdaptor.active) {
+            compositorAdaptor.activeStaged = false;
+        } else {
+            compositorAdaptor.activeStaged = true;
+            compositorAdaptor.modeStaged = 3; // always on
+        }
+        compositorAdaptor.sendConfigurationAll();
+    }
 
     function requestShutdown() {
         print("Shutdown requested, depends on ksmserver running");
@@ -138,6 +149,12 @@ Item {
             disableBrightnessUpdate = false;
         }
     }
+    
+    // night color
+    CC.CompositorAdaptor {
+        id: compositorAdaptor
+    }
+    
     //HACK: make the list know about the applet delegate which is a qtobject
     QtObject {
         id: nullApplet
@@ -222,6 +239,14 @@ Item {
             "enabled": plasmoid.nativeInterface.autoRotateEnabled,
             "settingsCommand": "",
             "toggleFunction": "toggleRotation",
+            "applet": null
+        });
+        settingsModel.append({
+            "text": i18n("Night Color"),
+            "icon": "redshift-status-on",
+            "enabled": compositorAdaptor.active,
+            "settingsCommand": "", // change once night color kcm is added
+            "toggleFunction": "toggleNightColor",
             "applet": null
         });
 
