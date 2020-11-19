@@ -41,7 +41,19 @@ PlasmaCore.ColorScope {
     function isPinDrawerOpen() {
         return passwordFlickable.contentY === passwordFlickable.columnHeight;
     }
-    
+
+    function askPassword() {
+        showPasswordAnim.restart();
+    }
+    NumberAnimation {
+        id: showPasswordAnim
+        target: passwordFlickable
+        property: "contentY"
+        from: 0
+        to: passwordFlickable.contentHeight - passwordFlickable.height
+        duration: units.longDuration
+        easing.type: Easing.InOutQuad
+    }
     // blur background once keypad is open
     FastBlur {
         id: blur

@@ -162,7 +162,13 @@ Item {
                         text: modelData.label || ""
 
                         onClicked: {
-                            notifModel.invokeAction(notificationItem.notification.notificationId, modelData.actionName);
+                            if (notificationItem.notification.category === "x-kde.incoming-call") {
+                                notifModel.invokeAction(notificationItem.notification.notificationId, modelData.actionName);
+                            } else {
+                                notificationsRoot.pendingAction = {"notificationId": notificationItem.notification.notificationId,
+                                "actionName":modelData.actionName};
+                                root.askPassword();
+                            }
                         }
                     }
                 }
@@ -186,6 +192,15 @@ Item {
                     notifModel.close(notificationItem.notification.notificationId);
                 } else {
                     slideAnim.restart();
+                }
+                if (notificationItem.notification.hasDefaultAction && Math.abs(rect.x) < units.gridUnit) {
+                    if (notificationItem.notification.category === "x-kde.incoming-call") {
+                        notifModel.invokeDefaultAction(notificationItem.notification.notificationId);
+                    } else {
+                        notificationsRoot.pendingAction = {"notificationId": notificationItem.notification.notificationId,
+                        "actionName": ""};
+                        root.askPassword();
+                    }
                 }
             }
 

@@ -25,9 +25,12 @@ import org.kde.notificationmanager 1.1 as Notifications
 import "../components"
 
 Item {
+    id: notificationsRoot
     property alias notificationListHeight: notificationListView.contentHeight
     property int count: notificationListView.count
     clip: true
+
+    property var pendingAction: {"notificationId": 0, "actionName": ""}
 
     Rectangle {
         z: 1
@@ -86,7 +89,25 @@ Item {
             color: Qt.rgba(1, 1, 1, 0.5)
         }
     }
-    
+
+    Connections {
+        target: authenticator
+        function onSucceeded() {
+            if (notificationsRoot.pendingAction.notificationId !== 0) {
+                if (notificationsRoot.pendingAction.actionName.length == 0) {
+                    notifModel.invokeDefaultAction(pendingAction.notificationId);
+                } else {
+                    notifModel.invokeAction(pendingAction.notificationId, pendingAction.actionName);
+                }
+
+                notificationsRoot.pendingAction = {"notificationId": 0, "actionName":""};
+            }
+        }
+        function onFailed() {
+            notificationsRoot.pendingAction = {"notificationId": 0, "actionName":""};
+        }
+    }
+
     ListView {
         id: notificationListView
         model: notifModel
