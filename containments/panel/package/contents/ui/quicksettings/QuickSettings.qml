@@ -58,6 +58,7 @@ Item {
 
     function toggleTorch() {
         plasmoid.nativeInterface.toggleTorch()
+        settingsModel.get(6).enabled = plasmoid.nativeInterface.torchEnabled
     }
 
     function toggleWifi() {
@@ -94,6 +95,7 @@ Item {
             compositorAdaptor.modeStaged = 3; // always on
         }
         compositorAdaptor.sendConfigurationAll();
+        settingsModel.get(10).enabled = compositorAdaptor.active;
     }
 
     function requestShutdown() {
