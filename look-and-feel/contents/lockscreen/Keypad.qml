@@ -222,8 +222,13 @@ Rectangle {
 
                         AbstractButton {
                             anchors.fill: parent
-                            onPressed: parent.color = "#e0e0e0"
-                            onReleased: parent.color = "white"
+                            onPressedChanged: {
+                                if(pressed)
+                                    parent.color = "#e0e0e0"
+                                else
+                                    parent.color = "white"
+                            }
+
                             onClicked: {
                                 if (modelData === "R") {
                                     keypadRoot.backspace();
