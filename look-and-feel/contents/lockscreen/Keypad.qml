@@ -217,16 +217,16 @@ Rectangle {
                         width: parent.width
                         height: parent.height
                         radius: 5
-                        color: "white"
+                        color: PlasmaCore.Theme.buttonBackgroundColor
                         visible: modelData.length > 0
 
                         AbstractButton {
                             anchors.fill: parent
                             onPressedChanged: {
                                 if(pressed)
-                                    parent.color = "#e0e0e0"
+                                    parent.color = PlasmaCore.Theme.buttonFocusColor
                                 else
-                                    parent.color = "white"
+                                    parent.color = PlasmaCore.Theme.buttonBackgroundColor
                             }
 
                             onClicked: {
@@ -262,7 +262,7 @@ Rectangle {
                         text: modelData
                         anchors.centerIn: parent
                         font.pointSize: 18
-                        color: "#424242"
+                        color: PlasmaCore.Theme.textColor
                     }
 
                     PlasmaCore.IconItem {
