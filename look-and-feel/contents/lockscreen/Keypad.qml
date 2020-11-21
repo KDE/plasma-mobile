@@ -45,20 +45,20 @@ Rectangle {
     property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
     property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
     property color buttonTextColor: PlasmaCore.Theme.textColor
-    property color dropShadowColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.1*255})
+    property color dropShadowColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
     property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
     property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
     property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
+    // keypad functions
     function reset() {
         waitingForAuth = false;
         root.password = "";
         keypadRoot.pinLabel = qsTr("Enter PIN");
     }
     
-    // keypad functions
     function backspace() {
         if (!keypadRoot.waitingForAuth) {
             keypadRoot.lastKeyPressValue = "0";
@@ -144,6 +144,7 @@ Rectangle {
         }
     }
     
+    // rectangle "bar" on the top of the keypad
     Rectangle {
         id: topTextDisplay
         anchors.top: parent.top
@@ -177,7 +178,7 @@ Rectangle {
             anchors.centerIn: parent
             text: keypadRoot.pinLabel
             font.pointSize: 12
-            color: keypadRoot.headerTextColor //Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.7*255})
+            color: keypadRoot.headerTextColor 
         }
         
         // dot display and letter
@@ -208,6 +209,7 @@ Rectangle {
         }
     }
     
+    // actual number keys
     ColumnLayout {
         anchors {
             left: parent.left
@@ -219,7 +221,6 @@ Rectangle {
         }
         spacing: units.gridUnit
 
-        // number keys
         GridLayout {
             property string thePw
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
