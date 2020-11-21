@@ -250,18 +250,19 @@ PlasmaCore.ColorScope {
             
             width: parent.width
             spacing: units.gridUnit
-            opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
             
             // scroll down icon
             PlasmaCore.IconItem {
                 Layout.alignment: Qt.AlignHCenter
                 colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 source: "arrow-down"
+                opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
             }
 
             Keypad {
                 id: keypad
                 focus: passwordFlickable.contentY === passwordFlickable.columnHeight
+                swipeProgress: passwordFlickable.contentY / passwordFlickable.columnHeight
                 Layout.fillWidth: true
                 Layout.minimumHeight: units.gridUnit * 17
                 Layout.maximumWidth: root.width

@@ -22,10 +22,16 @@ import QtGraphicalEffects 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
+import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
     id: keypadRoot
-    color: Qt.rgba(250, 250, 250, 0.85) // slightly translucent background, for key contrast
+    
+    // 0 - keypad is not shown, 1 - keypad is shown
+    property double swipeProgress
+    
+    // slightly translucent background, for key contrast
+    color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.9*255})
     property string pinLabel: qsTr("Enter PIN")
     
     // for displaying temporary number in pin dot display
@@ -34,6 +40,17 @@ Rectangle {
     
     // if waiting for result of auth
     property bool waitingForAuth: false
+    
+    // colour calculations
+    property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
+    property color buttonTextColor: PlasmaCore.Theme.textColor
+    property color dropShadowColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.1*255})
+    property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
+    property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
+    
+    opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
     function reset() {
         waitingForAuth = false;
@@ -127,71 +144,80 @@ Rectangle {
         }
     }
     
+    Rectangle {
+        id: topTextDisplay
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+        color: keypadRoot.headerBackgroundColor
+        implicitHeight: units.gridUnit * 2.5
+        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+    }
+    
+    DropShadow {
+        anchors.fill: topTextDisplay
+        source: topTextDisplay
+        cached: true
+        horizontalOffset: 0
+        verticalOffset: 1
+        radius: 4
+        samples: 6
+        color: keypadRoot.dropShadowColor
+        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+    }
+    
+    // pin dot display
+    Item {
+        anchors.verticalCenter: topTextDisplay.verticalCenter
+        anchors.horizontalCenter: topTextDisplay.horizontalCenter
+        
+        // label ("wrong pin", "enter pin")
+        Label {
+            visible: root.password.length === 0
+            anchors.centerIn: parent
+            text: keypadRoot.pinLabel
+            font.pointSize: 12
+            color: keypadRoot.headerTextColor //Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.7*255})
+        }
+        
+        // dot display and letter
+        RowLayout {
+            id: dotDisplay
+            anchors.centerIn: parent
+            height: units.gridUnit * 1.5 // maintain height when letter is shown
+            spacing: 6
+            
+            Repeater {
+                model: root.password.length
+                delegate: Rectangle { // dot
+                    visible: index !== indexWithNumber // hide dot if number is shown
+                    Layout.preferredWidth: units.gridUnit * 0.35
+                    Layout.preferredHeight: Layout.preferredWidth
+                    Layout.alignment: Qt.AlignVCenter
+                    radius: width
+                    color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
+                }
+            }
+            Label { // number/letter
+                visible: root.password.length-1 === indexWithNumber // hide label if no label needed
+                Layout.alignment: Qt.AlignHCenter
+                color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
+                text: lastKeyPressValue
+                font.pointSize: 12
+            }
+        }
+    }
+    
     ColumnLayout {
         anchors {
             left: parent.left
             right: parent.right
-            top: parent.top
+            top: topTextDisplay.bottom
             bottom: parent.bottom
             topMargin: units.gridUnit
             bottomMargin: units.gridUnit
         }
         spacing: units.gridUnit
-        
-        Item {
-            Layout.alignment: Qt.AlignCenter
-        }
-        
-        // pin dot display
-        Item {
-            Layout.alignment: Qt.AlignCenter
-            Layout.minimumHeight: units.gridUnit * 0.5
-            Layout.maximumWidth: parent.width
-            
-            // label ("wrong pin", "enter pin")
-            Label {
-                visible: root.password.length === 0
-                anchors.centerIn: parent
-                text: keypadRoot.pinLabel
-                font.pointSize: 12
-                color: "#616161"
-            }
-            
-            // dot display and letter
-            RowLayout {
-                id: dotDisplay
-                anchors.centerIn: parent
-                height: units.gridUnit * 1.5 // maintain height when letter is shown
-                spacing: 6
-                
-                Repeater {
-                    model: root.password.length
-                    delegate: Rectangle { // dot
-                        visible: index !== indexWithNumber // hide dot if number is shown
-                        Layout.preferredWidth: units.gridUnit * 0.35
-                        Layout.preferredHeight: Layout.preferredWidth
-                        Layout.alignment: Qt.AlignVCenter
-                        radius: width
-                        color: keypadRoot.waitingForAuth ? "#969696" : "#424242" // dim when waiting for auth
-                    }
-                }
-                Label { // number/letter
-                    visible: root.password.length-1 === indexWithNumber // hide label if no label needed
-                    Layout.alignment: Qt.AlignHCenter
-                    color: keypadRoot.waitingForAuth ? "#969696" : "#424242"
-                    text: lastKeyPressValue
-                    font.pointSize: 12
-                }
-            }
-        }
-
-
-        // separator
-        Rectangle {
-            Layout.fillWidth: true
-            height: 1
-            color: "#eeeeee"
-        }
 
         // number keys
         GridLayout {
@@ -217,16 +243,19 @@ Rectangle {
                         width: parent.width
                         height: parent.height
                         radius: 5
-                        color: PlasmaCore.Theme.buttonBackgroundColor
+                        color: keypadRoot.buttonColor
+                        
                         visible: modelData.length > 0
+                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
 
                         AbstractButton {
                             anchors.fill: parent
                             onPressedChanged: {
-                                if(pressed)
-                                    parent.color = PlasmaCore.Theme.buttonFocusColor
-                                else
-                                    parent.color = PlasmaCore.Theme.buttonBackgroundColor
+                                if (pressed) {
+                                    parent.color = keypadRoot.buttonPressedColor;
+                                } else {
+                                    parent.color = keypadRoot.buttonColor;
+                                }
                             }
 
                             onClicked: {
@@ -254,7 +283,8 @@ Rectangle {
                         verticalOffset: 1
                         radius: 4
                         samples: 6
-                        color: "#e0e0e0"
+                        color: keypadRoot.dropShadowColor
+                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
                     }
 
                     PlasmaComponents.Label {
@@ -262,20 +292,18 @@ Rectangle {
                         text: modelData
                         anchors.centerIn: parent
                         font.pointSize: 18
-                        color: PlasmaCore.Theme.textColor
+                        color: keypadRoot.buttonTextColor
                     }
 
                     PlasmaCore.IconItem {
                         visible: modelData === "R"
                         anchors.centerIn: parent
-                        //                         colorGroup: PlasmaCore.ColorScope.backgroundColor
                         source: "edit-clear"
                     }
 
                     PlasmaCore.IconItem {
                         visible: modelData === "E"
                         anchors.centerIn: parent
-                        //                         colorGroup: PlasmaCore.ColorScope.backgroundColor
                         source: "go-next"
                     }
                 }
