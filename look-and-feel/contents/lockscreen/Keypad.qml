@@ -299,12 +299,14 @@ Rectangle {
                         visible: modelData === "R"
                         anchors.centerIn: parent
                         source: "edit-clear"
+                        colorGroup: PlasmaCore.ColorScope.textColor
                     }
 
                     PlasmaCore.IconItem {
                         visible: modelData === "E"
                         anchors.centerIn: parent
                         source: "go-next"
+                        colorGroup: PlasmaCore.ColorScope.textColor
                     }
                 }
             }
