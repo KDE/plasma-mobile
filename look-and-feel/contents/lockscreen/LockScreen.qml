@@ -60,22 +60,18 @@ PlasmaCore.ColorScope {
         cached: true
         anchors.fill: parent
         source: wallpaper
-        visible: true
+        radius: 50
+        opacity: 0
         
         property bool doBlur: notificationsShown || isPinDrawerOpen() // only blur once animation finished for performance
         
         Behavior on doBlur {
             NumberAnimation {
                 target: blur
-                property: "radius"
+                property: "opacity"
                 duration: 1000
-                to: blur.doBlur ? 0 : 50
+                to: blur.doBlur ? 0 : 1
                 easing.type: Easing.InOutQuad
-            }
-            PropertyAction {
-                target: blur
-                property: "visible"
-                value: blur.doBlur
             }
         }
     }
