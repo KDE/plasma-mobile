@@ -14,7 +14,8 @@ target_link_libraries(plasma_applet_phonepanel
                       Qt5::Gui
                       Qt5::DBus
                       KF5::Plasma
-                      KF5::I18n)
+                      KF5::I18n
+                      KF5::Notifications)
 
 install(TARGETS plasma_applet_phonepanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 #install(FILES plasma-phonepanel-default.desktop DESTINATION ${SERVICES_INSTALL_DIR})

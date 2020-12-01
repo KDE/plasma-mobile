@@ -24,6 +24,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <KNotification>
+#include <KLocalizedString>
+
 #include <QDateTime>
 #include <QDBusPendingReply>
 #include <QFile>
@@ -176,6 +179,13 @@ void PhonePanel::takeScreenshot()
                 qDebug() << lImage;
                 if(!lImage.save(filePath, "PNG")) {
                     qWarning() << "Failed to save screenshot to" << filePath;
+                } else {
+                    KNotification *notif = new KNotification("captured");
+                    notif->setComponentName(QStringLiteral("plasma_phone_components"));
+                    notif->setTitle(i18n("New Screenshot"));
+                    notif->setUrls({filePath});
+                    notif->setText(i18n("New screenshot saved to %1", filePath));
+                    notif->sendEvent();
                 }
             }
         );
