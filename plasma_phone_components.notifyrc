@@ -1,8 +1,26 @@
 [Global]
 IconName=preferences-system-windows-effect-screenshot
 Name=Plasma
+Name[ca]=Plasma
+Name[nl]=Plasma
+Name[pt]=Plasma
+Name[sv]=Plasma
+Name[uk]=Плазма
+Name[x-test]=xxPlasmaxx
 
 [Event/captured]
 Name=Captured
+Name[ca]=Captura
+Name[nl]=Opgenomen
+Name[pt]=Capturada
+Name[sv]=Lagrad
+Name[uk]=Захоплено
+Name[x-test]=xxCapturedxx
 Comment=Captured
+Comment[ca]=Captura
+Comment[nl]=Opgenomen
+Comment[pt]=Capturada
+Comment[sv]=Lagrad
+Comment[uk]=Захоплено
+Comment[x-test]=xxCapturedxx
 Action=Popup
