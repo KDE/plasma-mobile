@@ -33,7 +33,6 @@ Rectangle {
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
-        panel.backgroundHints = containment.backgroundHints;
     }
 
     Component.onCompleted: {
