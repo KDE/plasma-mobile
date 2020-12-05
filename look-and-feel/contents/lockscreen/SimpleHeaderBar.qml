@@ -34,15 +34,13 @@ PlasmaCore.ColorScope {
     
     layer.enabled: true
     layer.effect: DropShadow {
-        anchors.fill: icons
-        visible: !showingApp
+        visible: true
         cached: true
         horizontalOffset: 0
         verticalOffset: 1
         radius: 4.0
         samples: 17
         color: Qt.rgba(0,0,0,0.8)
-        source: icons
     }
     
     PlasmaCore.DataSource {
