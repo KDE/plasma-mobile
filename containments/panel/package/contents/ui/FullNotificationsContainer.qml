@@ -25,7 +25,8 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 FullContainer {
     id: fullContainer
 
-    visible: applet && historyModel.count > 0
+    shouldBeVisible: applet && historyModel.count > 0
+    visible: shouldBeVisible
 
     NotificationManager.Notifications {
         id: historyModel
