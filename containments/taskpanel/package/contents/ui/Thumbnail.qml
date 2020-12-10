@@ -23,8 +23,7 @@ import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
 
 TaskManager.PipeWireSourceItem {
-    //visible: waylandItem.nodeId > 0
-    visible: true
+    visible: Window.visibility !== Window.Hidden
     nodeId: waylandItem.nodeId
 
     TaskManager.ScreencastingRequest {
