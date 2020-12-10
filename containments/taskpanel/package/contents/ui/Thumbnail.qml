@@ -26,9 +26,14 @@ TaskManager.PipeWireSourceItem {
     visible: Window.visibility !== Window.Hidden
     nodeId: waylandItem.nodeId
 
+    onVisibleChanged: {
+        if (visible && waylandItem.uuid.length === 0) {
+            waylandItem.uuid = model.WinIdList[0]
+        }
+    }
+
     TaskManager.ScreencastingRequest {
         id: waylandItem
-        uuid: model.WinIdList[0]
     }
 }
 
