@@ -16,7 +16,7 @@ export QT_VIRTUALKEYBOARD_STYLE=Plasma
 
 export GRID_UNIT_PX=25
 export FORCE_RIL_NUM_MODEMS=1
-export PLASMA_DEFAULT_SHELL=org.kde.plasma.phone
+export PLASMA_DEFAULT_SHELL=org.kde.plasma.phoneshell
 
 # work around to fix : https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1507584
 if [ -d @KDE_INSTALL_FULL_LIBDIR@/libhybris-egl ]; then
