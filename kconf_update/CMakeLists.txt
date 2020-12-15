@@ -1,0 +1,4 @@
+install(FILES rename_lnf.upd
+        DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})
+install(PROGRAMS rename_lnf.py
+        DESTINATION ${KDE_INSTALL_KCONFUPDATEDIR})

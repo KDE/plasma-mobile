@@ -40,7 +40,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 
 include(CheckIncludeFiles)
 
-plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
+plasma_install_package(look-and-feel org.kde.plasma.phonelnf look-and-feel)
 plasma_install_package(shell org.kde.plasma.phone shells)
 
 install(DIRECTORY kwinmultitasking/ DESTINATION ${DATA_INSTALL_DIR}/kwin/scripts/org.kde.phone.multitasking)
@@ -52,6 +52,7 @@ add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(sounds)
+add_subdirectory(kconf_update)
 #add_subdirectory(touchscreentest)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

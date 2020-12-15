@@ -1,0 +1,8 @@
+# Ensure toolbar font (as displayed) remains the same even after
+# fixing BUG 358254, i.e. copy general font to toolbar font once
+
+Version=5
+Id=Rename_LNF_Package
+File=kdeglobals
+Group=KDE
+Script=rename_lnf.py,python3
