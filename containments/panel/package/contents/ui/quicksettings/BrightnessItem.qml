@@ -20,10 +20,9 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.2 as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as Components
+import org.kde.plasma.components 3.0 as PC3
 
 RowLayout {
     id: brightnessRoot
@@ -49,13 +48,13 @@ RowLayout {
         Layout.alignment: Qt.AlignTop
         spacing: 0
 
-        Components.Label {
+        PC3.Label {
             id: brightnessLabel
             width: parent.width
             height: paintedHeight
         }
 
-        Controls.Slider {
+        PC3.Slider {
             id: brightnessSlider
             width: parent.width
             onMoved: brightnessRoot.moved()
