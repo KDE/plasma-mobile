@@ -15,13 +15,14 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import QtQuick 2.12
+import QtQuick 2.15
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
+import org.kde.kirigami 2.13 as Kirigami
 import "../components"
 
 Item {
@@ -108,6 +109,20 @@ Item {
         }
     }
 
+    Component {
+        id: notificationComponent
+        Column {
+            width: notificationListView.width
+            spacing: units.smallSpacing
+            
+            // insert application heading here once application grouping is implemented
+            
+            SimpleNotification {
+                notification: model
+            }
+        }
+    }
+    
     ListView {
         id: notificationListView
         model: notifModel
@@ -125,15 +140,15 @@ Item {
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         spacing: units.gridUnit
         
-        delegate: Column {
-            width: notificationListView.width
-            spacing: units.smallSpacing
-            
-            // insert application heading here once application grouping is implemented
-            
-            SimpleNotification {
-                notification: model
-            }
+        delegate: Kirigami.DelegateRecycler {
+            sourceComponent: notificationComponent
+        }
+        add: Transition {
+            NumberAnimation { property: "opacity"; from: 0; to: 1.0; duration: Kirigami.Units.shortDuration }
+            NumberAnimation { property: "scale"; from: 0; to: 1.0; duration: Kirigami.Units.shortDuration }
+        }
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: Kirigami.Units.shortDuration; easing.type: Easing.InOutQuad }
         }
     }
 }
