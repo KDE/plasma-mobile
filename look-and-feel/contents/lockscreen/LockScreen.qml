@@ -95,6 +95,7 @@ PlasmaCore.ColorScope {
     ColumnLayout {
         id: phoneClockComponent
         visible: !isWidescreen
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
         
         anchors {
             top: parent.top
@@ -129,7 +130,6 @@ PlasmaCore.ColorScope {
             Layout.minimumWidth: units.gridUnit * 15
             Layout.leftMargin: units.gridUnit
             Layout.rightMargin: units.gridUnit
-            z: 5
         }
     }
     
@@ -144,6 +144,7 @@ PlasmaCore.ColorScope {
             left: parent.left
             leftMargin: units.gridUnit * 3
         }
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
         
         ColumnLayout {
             id: tabletLayout
@@ -162,7 +163,6 @@ PlasmaCore.ColorScope {
                 Layout.fillWidth: true
                 Layout.maximumWidth: units.gridUnit * 25
                 Layout.minimumWidth: units.gridUnit * 20
-                z: 5
             }
         }
     }

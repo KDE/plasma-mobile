@@ -151,7 +151,6 @@ Item {
             Layout.preferredWidth: height // make this button bigger
             icon.name: mpris2Source.playing ? "media-playback-pause" : "media-playback-start"
             onClicked: {
-                console.log("Fooo");
 //                 fadeoutTimer.running = false
                 mpris2Source.playPause()
             }
