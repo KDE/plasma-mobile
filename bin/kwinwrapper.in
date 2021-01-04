@@ -18,10 +18,4 @@ export GRID_UNIT_PX=25
 export FORCE_RIL_NUM_MODEMS=1
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.phoneshell
 
-# work around to fix : https://bugs.launchpad.net/ubuntu/+source/mesa/+bug/1507584
-if [ -d @KDE_INSTALL_FULL_LIBDIR@/libhybris-egl ]; then
-    export LD_LIBRARY_PATH=@KDE_INSTALL_FULL_LIBDIR@/libhybris-egl:$LD_LIBRARY_PATH
-fi
-
-touch /tmp/simplelogin_starting
 startplasma-wayland --xwayland --libinput --lockscreen --inputmethod maliit-keyboard --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
