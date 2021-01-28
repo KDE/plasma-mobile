@@ -6,7 +6,7 @@ for (let i in panels()) {
     if (panels()[i].type === "org.kde.phone.panel") {
         topFound = true;
     } else if (panels()[i].type === "org.kde.phone.taskpanel") {
-        topFound = true;
+        bottomFound = true;
     }
 }
 
