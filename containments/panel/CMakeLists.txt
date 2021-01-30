@@ -11,8 +11,8 @@ add_library(plasma_applet_phonepanel MODULE ${phonepanel_SRCS})
 kcoreaddons_desktop_to_json(plasma_applet_phonepanel package/metadata.desktop)
 
 target_link_libraries(plasma_applet_phonepanel
-                      Qt5::Gui
-                      Qt5::DBus
+                      Qt::Gui
+                      Qt::DBus
                       KF5::Plasma
                       KF5::I18n
                       KF5::Notifications)
