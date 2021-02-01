@@ -46,20 +46,22 @@ static int readData(int theFile, QByteArray &theDataOut)
     char    lBuffer[4096];
     int     lRetryCount = 0;
     ssize_t lBytesRead = 0;
-    while (true) {
-        lBytesRead = QT_READ(theFile, lBuffer, sizeof lBuffer);
-        // give user 30 sec to click a window, afterwards considered as error
-        if (lBytesRead == -1 && (errno == EAGAIN) && ++lRetryCount < 30000) {
-            usleep(1000);
-        } else {
-            break;
-        }
-    }
 
-    if (lBytesRead > 0) {
-        theDataOut.append(lBuffer, lBytesRead);
-        lBytesRead = readData(theFile, theDataOut);
-    }
+    do {
+        // give user 30 sec to click a window, afterwards considered as error
+        while (true) {
+            lBytesRead = QT_READ(theFile, lBuffer, sizeof lBuffer);
+            if (lBytesRead == -1 && (errno == EAGAIN) && ++lRetryCount < 30000) {
+                usleep(1000);
+            } else {
+                break;
+            }
+        }
+
+        if (lBytesRead > 0) {
+            theDataOut.append(lBuffer, lBytesRead);
+        }
+    } while (lBytesRead > 0);
     return lBytesRead;
 }
 
