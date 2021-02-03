@@ -361,12 +361,17 @@ Item {
                     left: parent.left
                     right: parent.right
                 }
-                onLaunched: {
+                onLaunched: scrollResetTimer.restart();
+                favoriteStrip: favoriteStrip
+                appletsLayout: appletsLayout
+            }
+            Timer {
+                id: scrollResetTimer
+                interval: 1000
+                onTriggered: {
                     scrollAnim.to = 0;
                     scrollAnim.restart();
                 }
-                favoriteStrip: favoriteStrip
-                appletsLayout: appletsLayout
             }
         }
     }
