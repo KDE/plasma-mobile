@@ -87,7 +87,7 @@ Rectangle {
                 Layout.alignment: Qt.AlignTop
 
                 Keys.onEscapePressed: runnerWindow.visible = false
-                placeholderText: "Search..."
+                placeholderText: i18n("Search...")
             }
 
             PlasmaExtras.ScrollArea {
