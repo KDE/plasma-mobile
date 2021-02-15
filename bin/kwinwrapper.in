@@ -14,8 +14,6 @@ export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=phone:handset
 export QT_VIRTUALKEYBOARD_STYLE=Plasma
 
-export GRID_UNIT_PX=25
-export FORCE_RIL_NUM_MODEMS=1
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.phoneshell
 
 startplasma-wayland --xwayland --libinput --lockscreen --inputmethod maliit-keyboard --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
