@@ -26,6 +26,7 @@
 
 class QQuickItem;
 class ApplicationListModel;
+class FavoritesModel;
 
 class HomeScreen : public Plasma::Containment
 {
@@ -48,7 +49,7 @@ protected:
 
 private:
     ApplicationListModel *m_applicationListModel = nullptr;
-
+    bool m_showAllApps = false;
 };
 
 #endif

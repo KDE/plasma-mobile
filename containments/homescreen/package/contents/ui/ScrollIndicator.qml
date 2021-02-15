@@ -21,14 +21,14 @@ import QtGraphicalEffects 1.6
 import org.kde.plasma.core 2.0 as PlasmaCore
  
 PlasmaCore.SvgItem {
-    id: scrollDownIndicator
+    id: scrollIndicator
     
-    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.verticalCenter: parent.verticalCenter
 
     z: 2
     opacity: 0
     svg: arrowsSvg
-    elementId: "down-arrow"
+    elementId: "left-arrow"
     width: units.iconSizes.large
     height: width
     layer.enabled: true
