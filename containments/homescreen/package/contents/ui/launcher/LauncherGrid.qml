@@ -37,7 +37,6 @@ LauncherContainer {
     readonly property int columns: Math.floor(root.flow.width / cellWidth)
     readonly property int cellWidth: root.flow.width / Math.floor(root.flow.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight
-    launcherGrid: root
 
     signal launched
 
@@ -46,7 +45,7 @@ LauncherContainer {
     Repeater {
         parent: root.flow
         model: plasmoid.nativeInterface.applicationListModel
-        delegate: Delegate {
+        delegate: HomeDelegate {
             id: delegate
             width: root.cellWidth
             height: root.cellHeight

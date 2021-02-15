@@ -29,18 +29,17 @@ import org.kde.kquickcontrolsaddons 2.0
 LauncherContainer {
     id: root
 
-    readonly property int count: flow.width / launcherGrid.cellWidth
+    readonly property int count: flow.width / cellWidth
 
     flow.flow: Flow.TopToBottom
-    favoriteStrip: root
 
-    visible: flow.children.length > 0 || launcherDragManager.active
+    visible: flow.children.length > 0 || launcherDragManager.active || dropArea.containsDrag
 
     opacity: launcherDragManager.active && plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ? 0.3 : 1
 
-    height: visible ? launcherGrid.cellHeight : 0
+    height: visible ? cellHeight : 0
 
-    frame.implicitWidth: launcherGrid.cellWidth * Math.max(1, flow.children.length) + frame.leftPadding + frame.rightPadding
+    frame.implicitWidth: cellWidth * Math.max(1, flow.children.length) + frame.leftPadding + frame.rightPadding
 
     Behavior on height {
         NumberAnimation {

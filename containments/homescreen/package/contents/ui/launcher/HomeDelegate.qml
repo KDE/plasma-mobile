@@ -23,12 +23,14 @@ import QtGraphicalEffects 1.6
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PC3
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.phone.homescreen 1.0
+
+import "private" as Private
 
 ContainmentLayoutManager.ItemContainer {
     id: delegate
@@ -37,12 +39,12 @@ ContainmentLayoutManager.ItemContainer {
 
     property var modelData: typeof model !== "undefined" ? model : null
 
-    Layout.minimumWidth: launcherGrid.cellWidth
-    Layout.minimumHeight: launcherGrid.cellHeight
+    Layout.minimumWidth: appletsLayout.cellWidth
+    Layout.minimumHeight: appletsLayout.cellHeight
 
-    opacity: dragActive ? 0.4 : 1
-
-    key: model.applicationStorageId
+    key: model.applicationUniqueId
+    property ContainmentLayoutManager.AppletsLayout appletsLayout
+    property int reservedSpaceForLabel
     property real dragCenterX
     property real dragCenterY
     property alias iconItem: icon
@@ -82,18 +84,28 @@ ContainmentLayoutManager.ItemContainer {
             syncDelegateGeometry();
         }
     }
+    Connections {
+        target: appletsLayout
+        function onAppletsLayoutInteracted() {
+            removeButton.hide();
+        }
+    }
+
     onDragActiveChanged: {
         launcherDragManager.active = dragActive
         if (dragActive) {
             // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
             launcherDragManager.startDrag(delegate);
             launcherDragManager.currentlyDraggedDelegate = delegate;
+            removeButton.show();
+            mouseArea.enabled = true;
         } else {
             launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
             plasmoid.editMode = false;
             editMode = false;
             plasmoid.fullRepresentationItem.stopScroll();
             launcherDragManager.currentlyDraggedDelegate = null;
+            forceActiveFocus();
         }
     }
 
@@ -102,16 +114,16 @@ ContainmentLayoutManager.ItemContainer {
         dragCenterY = dragCenter.y;
         launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
 
-        delegate.width = launcherGrid.cellWidth;
-        delegate.height = launcherGrid.cellHeight;
+        delegate.width = appletsLayout.cellWidth;
+        delegate.height = appletsLayout.cellHeight;
 
         var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
-        //SCROLL UP
-        if (pos.y < plasmoid.availableScreenRect.y + units.gridUnit) {
-            plasmoid.fullRepresentationItem.scrollUp();
-        //SCROLL DOWN
-        } else if (pos.y > plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height - units.gridUnit) {
-            plasmoid.fullRepresentationItem.scrollDown();
+        //SCROLL LEFT
+        if (pos.x < plasmoid.availableScreenRect.x + units.gridUnit) {
+            plasmoid.fullRepresentationItem.scrollLeft();
+        //SCROLL RIGHT
+        } else if (pos.x > plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width - units.gridUnit) {
+            plasmoid.fullRepresentationItem.scrollRight();
         //DON't SCROLL
         } else {
             plasmoid.fullRepresentationItem.stopScroll();
@@ -119,6 +131,7 @@ ContainmentLayoutManager.ItemContainer {
     }
 
     contentItem: MouseArea {
+        id: mouseArea
         onClicked: {
             if (modelData.applicationRunning) {
                 delegate.launch(0, 0, "", modelData.applicationName);
@@ -126,6 +139,7 @@ ContainmentLayoutManager.ItemContainer {
                 delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationName);
             }
 
+            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
             plasmoid.nativeInterface.applicationListModel.runApplication(modelData.applicationStorageId);
         }
 
@@ -145,7 +159,7 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.minimumHeight: parent.height - root.reservedSpaceForLabel
+                Layout.minimumHeight: Math.min(units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
                 Layout.preferredHeight: Layout.minimumHeight
 
                 usesPlasmaTheme: false
@@ -162,15 +176,20 @@ ContainmentLayoutManager.ItemContainer {
                     height: width
                     color: theme.highlightColor
                 }
+                //TODO: in loader?
+                Private.DelegateRemoveButton {
+                    id: removeButton
+                }
             }
 
-            PlasmaComponents.Label {
+            PC3.Label {
                 id: label
                 visible: text.length > 0
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: root.reservedSpaceForLabel
+                Layout.preferredHeight: delegate.reservedSpaceForLabel
                 wrapMode: Text.WordWrap
+                Layout.alignment: Qt.AlignTop
                 Layout.leftMargin: -parent.anchors.leftMargin + units.smallSpacing
                 Layout.rightMargin: -parent.anchors.rightMargin + units.smallSpacing
                 horizontalAlignment: Text.AlignHCenter
@@ -194,6 +213,7 @@ ContainmentLayoutManager.ItemContainer {
                     color: Qt.rgba(0, 0, 0, 1)
                 }
             }
+            Item {Layout.fillHeight:true}
         }
     }
 }

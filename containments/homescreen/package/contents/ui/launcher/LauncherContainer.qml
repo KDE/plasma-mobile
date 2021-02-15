@@ -31,11 +31,11 @@ Item {
     id: root
 
     readonly property int reservedSpaceForLabel: metrics.height
+    readonly property int cellWidth: root.width / Math.floor(root.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
+    readonly property int cellHeight: availableCellHeight
     property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
-    property Item launcherGrid
-    property Item favoriteStrip
 
     property alias frame: frame
     property alias flow: applicationsFlow
@@ -61,6 +61,7 @@ Item {
         anchors.centerIn: parent
         implicitWidth: contentItem.implicitWidth
         implicitHeight: contentItem.implicitHeight
+        height: parent.height
 
         leftPadding: 0
         topPadding: 0
