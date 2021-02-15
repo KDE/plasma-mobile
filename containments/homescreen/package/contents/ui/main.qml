@@ -358,8 +358,6 @@ Item {
                     appletsLayout: appletsLayout
                     favoriteStrip: favoriteStrip
                 }
-                favoriteStrip: favoriteStrip
-                appletsLayout: appletsLayout
             }
         }
     }
