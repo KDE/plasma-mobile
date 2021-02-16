@@ -218,11 +218,16 @@ Item {
 
             onDragEnter: {
                 event.accept(event.proposedAction);
+                launcherDragManager.active = true;
             }
             onDragMove: {
                 let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
                 if (posInFavorites.y > 0) {
-                    launcherDragManager.showSpacerAtPos(event.x, event.y, favoriteStrip);
+                    if (plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ) {
+                        launcherDragManager.hideSpacer();
+                    } else {
+                        launcherDragManager.showSpacerAtPos(event.x, event.y, favoriteStrip);
+                    }
                     appletsLayout.hidePlaceHolder();
                 } else {
                     appletsLayout.showPlaceHolderAt(
@@ -237,16 +242,22 @@ Item {
 
             onDragLeave: {
                 appletsLayout.hidePlaceHolder();
+                launcherDragManager.active = false;
             }
 
             preventStealing: true
 
             onDrop: {
+                launcherDragManager.active = false;
                 if (event.mimeData.formats[0] === "text/x-plasma-phone-homescreen-launcher") {
                     let storageId = event.mimeData.getDataAsByteArray("text/x-plasma-phone-homescreen-launcher");
 
                     let posInFavorites = favoriteStrip.flow.mapFromItem(this, event.x, event.y);
                     if (posInFavorites.y > 0) {
+                        if (plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ) {
+                            return;
+                        }
+
                         plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, 0, ApplicationListModel.Favorites)
                         let item = launcherRepeater.itemAt(0);
 
