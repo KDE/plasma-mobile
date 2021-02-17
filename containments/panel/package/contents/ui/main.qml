@@ -265,6 +265,7 @@ Item {
 
         anchors.fill: parent
         onPressed: {
+            slidingPanel.cancelAnimations();
             slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.drawerWidth)
             slidingPanel.userInteracting = true;
             oldMouseY = mouse.y;
