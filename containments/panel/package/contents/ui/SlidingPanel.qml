@@ -52,14 +52,21 @@ NanoShell.FullScreenOverlay {
     }
     property int direction: SlidingPanel.MovementDirection.None
 
+    function cancelAnimations() {
+        closeAnim.stop();
+        openAnim.stop();
+    }
     function open() {
+        cancelAnimations();
         window.showFullScreen();
         openAnim.restart();
     }
     function close() {
+        cancelAnimations();
         closeAnim.restart();
     }
     function updateState() {
+        cancelAnimations();
         if (window.direction === SlidingPanel.MovementDirection.None) {
             if (offset < openThreshold) {
                 close();
@@ -194,7 +201,10 @@ NanoShell.FullScreenOverlay {
             contentWidth: window.width
             contentHeight: window.height*2
             bottomMargin: window.height
-            onMovementStarted: window.userInteracting = true;
+            onMovementStarted: {
+                window.cancelAnimations();
+                window.userInteracting = true;
+            }
             onFlickStarted: window.userInteracting = true;
             onMovementEnded: {
                 window.userInteracting = false;
