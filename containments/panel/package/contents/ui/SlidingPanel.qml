@@ -67,7 +67,11 @@ NanoShell.FullScreenOverlay {
     }
     function updateState() {
         cancelAnimations();
-        if (window.direction === SlidingPanel.MovementDirection.None) {
+        if (window.offset <= -headerHeight) {
+            // close immediately, so that we don't have to wait units.longDuration 
+            window.visible = false;
+            window.closed();
+        } else if (window.direction === SlidingPanel.MovementDirection.None) {
             if (offset < openThreshold) {
                 close();
             } else {
