@@ -188,7 +188,7 @@ Item {
         DragHandler {
             target: mainFlickable
             yAxis.enabled: !appletsLayout.editMode
-            enabled: appDrawer.status !== Launcher.AppDrawer.Status.Open
+            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open
             onTranslationChanged: {
                 if (active) {
                     appDrawer.offset = -translation.y
@@ -317,6 +317,7 @@ Item {
                         appletsLayout.editMode = false;
                     }
                     onLongPressed: appletsLayout.editMode = true;
+                    onPressedChanged: root.focus = true;
                 }
 
                 cellWidth: favoriteStrip.cellWidth
@@ -411,7 +412,7 @@ Item {
         DragHandler {
             target: favoriteStrip
             yAxis.enabled: !appletsLayout.editMode
-            enabled: appDrawer.status !== Launcher.AppDrawer.Status.Open
+            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open
             onTranslationChanged: {
                 if (active) {
                     appDrawer.offset = -translation.y
@@ -431,6 +432,7 @@ Item {
                 appletsLayout.editMode = false;
             }
             onLongPressed: appletsLayout.editMode = true;
+            onPressedChanged: root.focus = true;
         }
     }
 }
