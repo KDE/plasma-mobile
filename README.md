@@ -16,5 +16,5 @@ If you want to test some part specific to telephony, set up ofono-phonesim accor
 
 To start the phone homescreen in a window, run:
 ```
-QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.phone"
+QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.phoneshell"
 ```
