@@ -36,7 +36,7 @@ Rectangle {
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
     property Item containment
 
-    color: containment.backgroundHints == PlasmaCore.Types.NoBackground ? "transparent" : theme.textColor
+    color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : theme.textColor
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
@@ -75,7 +75,7 @@ Rectangle {
         anchors {
             fill: parent
             topMargin: containment ? containment.availableScreenRect.y : 0
-            bottomMargin: parent.height - containment ? (containment.availableScreenRect.height + containment.availableScreenRect.y) : 0
+            bottomMargin: parent.height - (containment ? (containment.availableScreenRect.height + containment.availableScreenRect.y) : 0)
         }
         z: 222
         source: Qt.resolvedUrl("Pin.qml")
@@ -85,7 +85,6 @@ Rectangle {
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
-        panel.backgroundHints = containment.backgroundHints;
     }
 
     Component.onCompleted: {
