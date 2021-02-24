@@ -278,7 +278,6 @@ Item {
 
                 //FIXME: why this is needed?
                 width: flow.columnWidth
-                height: item ? item.implicitHeight : 0
 
                 Connections {
                     target: delegateItem
