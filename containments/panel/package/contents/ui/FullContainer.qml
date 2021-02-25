@@ -34,6 +34,7 @@ DrawerBackground {
     Layout.minimumHeight: applet && applet.switchHeight
     onShouldBeVisibleChanged: fullContainer.visible = fullContainer.shouldBeVisible
 
+    Component.onCompleted: visibleChanged();
     onVisibleChanged: {
         if (visible) {
             for (var i = 0; i < fullRepresentationModel.count; ++i) {
@@ -45,7 +46,7 @@ DrawerBackground {
             fullRepresentationView.forceLayout();
 
             fullRepresentationView.currentIndex = ObjectModel.index;
-            fullRepresentationView.positionViewAtIndex(ObjectModel.index, ListView.SnapPosition)
+            fullRepresentationView.positionViewAtIndex(ObjectModel.index, ListView.Contain)
         } else if (ObjectModel.index >= 0) {
             fullRepresentationModel.remove(ObjectModel.index);
             fullRepresentationView.forceLayout();
@@ -56,11 +57,17 @@ DrawerBackground {
     }
     Connections {
         target: fullContainer.applet
-        onActivated: {
+        function onActivated() {
             if (!visible) {
                 return;
             }
             fullRepresentationView.currentIndex = ObjectModel.index;
+        }
+    }
+    Connections {
+        target: fullContainer.applet.fullRepresentationItem
+        function onParentChanged() {
+            fullContainer.applet.fullRepresentationItem.parent = fullContainer;
         }
     }
 }
