@@ -266,7 +266,7 @@ Item {
         anchors.fill: parent
         onPressed: {
             slidingPanel.cancelAnimations();
-            slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.drawerWidth)
+            slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.contentItem.width)
             slidingPanel.userInteracting = true;
             oldMouseY = mouse.y;
             slidingPanel.offset = 0//units.gridUnit * 2;
@@ -295,7 +295,7 @@ Item {
         onClosed: quickSettings.closed()
 
         contentItem: Item {
-            implicitWidth: quickSettingsParent.implicitWidth
+            implicitWidth: panelContents.implicitWidth
             implicitHeight: Math.min(slidingPanel.height, quickSettingsParent.implicitHeight)
             GridLayout {
                 id: panelContents
@@ -325,7 +325,7 @@ Item {
                     z: 1
                     interactive: width < contentWidth
                     //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
-                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
+                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width - quickSettingsParent.width, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
                     //Layout.fillWidth: true
                     clip: slidingPanel.wideScreen
                     y: slidingPanel.wideScreen ? 0 : quickSettingsParent.height - height * (1-opacity)
@@ -333,7 +333,7 @@ Item {
                     height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
                     //leftMargin: slidingPanel.drawerX
                     preferredHighlightBegin: slidingPanel.drawerX
-                    
+
                     implicitHeight: units.gridUnit * 20
                     cacheBuffer: width * 100
                     highlightFollowsCurrentItem: true
