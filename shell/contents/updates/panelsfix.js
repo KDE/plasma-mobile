@@ -11,10 +11,14 @@ for (let i in panels()) {
 }
 
 if (!topFound) {
+    // keep widget list synced with the layout.js
     let topPanel = new Panel("org.kde.phone.panel")
-    topPanel.location = "Top";
+    topPanel.addWidget("org.kde.plasma.notifications");
+    topPanel.addWidget("org.kde.plasma.mediacontroller");
+    topPanel.location = "top";
 }
 if (!bottomFound) {
-    let topPanel = new Panel("org.kde.phone.taskpanel")
-    topPanel.location = "Bottom";
+    let bottomPanel = new Panel("org.kde.phone.taskpanel")
+    bottomPanel.location = "bottom";
+    bottomPanel.height = 2 * gridUnit;
 }
