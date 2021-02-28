@@ -35,7 +35,7 @@ PlasmaCore.ColorScope {
     id: root
     width: 600
     height: 480
-    colorGroup: showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 

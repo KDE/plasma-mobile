@@ -167,7 +167,7 @@ Item {
     PlasmaCore.ColorScope {
         id: icons
         z: 1
-        colorGroup: showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
         //parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
         anchors {
             left: parent.left
