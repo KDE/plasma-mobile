@@ -169,17 +169,6 @@ PlasmaCore.ColorScope {
 
             visible: plasmoid.configuration.PanelButtonsVisible
             
-            PlasmaCore.Svg {
-                id: panelSvg
-                imagePath: "icons/mobile"
-                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-            }
-            PlasmaCore.Svg {
-                id: startSvg
-                imagePath: "icons/start"
-                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-            }
-            
             Rectangle {
                 anchors.fill: parent
                 gradient: Gradient {
@@ -211,18 +200,8 @@ PlasmaCore.ColorScope {
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
-                PlasmaCore.SvgItem {
-                    anchors.centerIn: parent
-                    implicitHeight: 0.75 * parent.height * 0.6 // 0.75 sizing adjustment fix needed 
-                    implicitWidth: implicitHeight
-                    opacity: parent.enabled ? 1 : 0.5
-                    svg: panelSvg
-                    elementId: "mobile-task-switcher"
-                    
-                    Behavior on opacity {
-                        NumberAnimation { duration: units.shortDuration }
-                    }
-                }
+                iconSource: "mobile-task-switcher"
+                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
 
             Button {
@@ -243,18 +222,8 @@ PlasmaCore.ColorScope {
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
                     plasmoid.nativeInterface.allMinimizedChanged();
                 }
-                PlasmaCore.SvgItem {
-                    anchors.centerIn: parent
-                    implicitHeight: parent.height * 0.6
-                    implicitWidth: implicitHeight
-                    opacity: parent.enabled ? 1 : 0.5
-                    svg: startSvg
-                    elementId: "16-16-start-here-kde"
-                    
-                    Behavior on opacity {
-                        NumberAnimation { duration: units.shortDuration }
-                    }
-                }
+                iconSource: "start-here-kde"
+                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
 
             Button {
@@ -284,18 +253,8 @@ PlasmaCore.ColorScope {
                     }
                 }
 
-                PlasmaCore.SvgItem {
-                    anchors.centerIn: parent
-                    implicitHeight: 0.75 * parent.height * 0.6 // 0.75 sizing adjustment fix needed 
-                    implicitWidth: implicitHeight
-                    opacity: parent.enabled ? 1 : 0.5
-                    svg: panelSvg
-                    elementId: TaskPanel.KWinVirtualKeyboard.active ? "go-down" : "mobile-close-app"
-                    
-                    Behavior on opacity {
-                        NumberAnimation { duration: units.shortDuration }
-                    }
-                }
+                iconSource: TaskPanel.KWinVirtualKeyboard.active ? "go-down" : "mobile-close-app"
+                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
         }
     }

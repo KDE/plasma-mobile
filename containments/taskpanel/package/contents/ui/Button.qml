@@ -20,6 +20,7 @@ Item {
     property MouseArea mouseArea
     readonly property bool pressed: mouseArea.pressed && mouseArea.activeButton == button
     property alias iconSource: icon.source
+    property alias colorGroup: icon.colorGroup
     signal clicked()
 
     Rectangle {
@@ -64,7 +65,10 @@ Item {
     }
     PlasmaCore.IconItem {
         id: icon
-        anchors.fill: parent
+        anchors {
+            fill: parent
+            margins: parent.height * 0.25
+        }
         colorGroup: PlasmaCore.ColorScope.colorGroup
         //enabled: button.enabled && button.clickable
     }
