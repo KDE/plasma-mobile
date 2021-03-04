@@ -80,6 +80,12 @@ Item {
 
 //END functions
 
+
+    FastBlur {
+        anchors.fill: parent
+        source: wallpaper
+        radius: 32
+    }
     property bool componentComplete: false
     onWidthChanged: recalculateMaxFavoriteCount()
     onHeightChanged:recalculateMaxFavoriteCount()
@@ -258,8 +264,9 @@ Item {
                             return;
                         }
 
-                        plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, 0, ApplicationListModel.Favorites)
-                        let item = launcherRepeater.itemAt(0);
+                        let pos = Math.min(plasmoid.nativeInterface.applicationListModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
+                        plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, pos, ApplicationListModel.Favorites)
+                        let item = launcherRepeater.itemAt(pos);
 
                         if (item) {
                             item.x = posInFavorites.x;
@@ -273,8 +280,9 @@ Item {
                     }
 
 
-                    plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, 0, ApplicationListModel.Desktop)
-                    let item = launcherRepeater.itemAt(0);
+                    let pos = plasmoid.nativeInterface.applicationListModel.count;
+                    plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, pos, ApplicationListModel.Desktop)
+                    let item = launcherRepeater.itemAt(pos);
 
                     event.accept(event.proposedAction);
                     if (item) {
