@@ -253,7 +253,7 @@ PlasmaCore.ColorScope {
                     }
                 }
 
-                iconSource: TaskPanel.KWinVirtualKeyboard.active ? "go-down" : "mobile-close-app"
+                iconSource: TaskPanel.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
         }
