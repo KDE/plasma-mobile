@@ -68,11 +68,6 @@ Item {
 //END functions
 
 
-    FastBlur {
-        anchors.fill: parent
-        source: wallpaper
-        radius: 32
-    }
     property bool componentComplete: false
     onWidthChanged: recalculateMaxFavoriteCount()
     onHeightChanged:recalculateMaxFavoriteCount()
