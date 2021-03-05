@@ -200,6 +200,7 @@ PlasmaCore.ColorScope {
                     plasmoid.nativeInterface.showDesktop = false;
                     taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show();
                 }
+                iconSizeFactor: 0.75
                 iconSource: "mobile-task-switcher"
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
@@ -222,6 +223,7 @@ PlasmaCore.ColorScope {
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
                     plasmoid.nativeInterface.allMinimizedChanged();
                 }
+                iconSizeFactor: 1
                 iconSource: "start-here-kde"
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
@@ -253,6 +255,8 @@ PlasmaCore.ColorScope {
                     }
                 }
 
+                // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
+                iconSizeFactor: TaskPanel.KWinVirtualKeyboard.active ? 1 : 0.75
                 iconSource: TaskPanel.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
