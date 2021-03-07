@@ -1,5 +1,5 @@
 [Desktop Entry]
-Exec=dbus-run-session ${CMAKE_INSTALL_FULL_BINDIR}/kwinwrapper
+Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed  ${CMAKE_INSTALL_FULL_BINDIR}/kwinwrapper
 TryExec=${CMAKE_INSTALL_FULL_BINDIR}/kwinwrapper
 DesktopNames=KDE
 Name=Plasma Mobile
