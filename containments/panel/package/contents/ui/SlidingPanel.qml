@@ -4,7 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
+import QtQuick 2.14
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -23,14 +23,15 @@ NanoShell.FullScreenOverlay {
     property alias fixedArea: mainScope
     property alias flickable: mainFlickable
 
-    color: "transparent"//Qt.rgba(0, 0, 0, 0.6 * Math.min(1, offset/contentArea.height))
+    color: "transparent"
     property alias contentItem: contentArea.contentItem
     property int headerHeight
+    property real topEmptyAreaHeight
 
     signal closed
 
-    //width: Screen.width
-    //height: Screen.height
+    width: Screen.width
+    height: Screen.height
 
     enum MovementDirection {
         None = 0,
@@ -115,7 +116,7 @@ NanoShell.FullScreenOverlay {
         easing.type: Easing.InOutQuad
         properties: "offset"
         from: window.offset
-        to: contentArea.height
+        to: contentArea.height - topEmptyAreaHeight
     }
 
     Rectangle {
@@ -188,9 +189,9 @@ NanoShell.FullScreenOverlay {
                 oldContentY = contentY;
             }
             property real oldContentY
-            boundsBehavior: Flickable.StopAtBounds
+            boundsMovement: Flickable.StopAtBounds
             contentWidth: window.width
-            contentHeight: window.height*2
+            contentHeight: window.height*2 - headerHeight*2
             bottomMargin: window.height
             onMovementStarted: {
                 window.cancelAnimations();

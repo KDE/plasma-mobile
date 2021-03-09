@@ -18,7 +18,7 @@ DrawerBackground {
     visible: shouldBeVisible
     property bool shouldBeVisible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
     height: parent.height
-    width: visible ? quickSettingsParent.width : 0
+    width: visible ? quickSettings.width : 0
     Layout.minimumHeight: applet && applet.switchHeight
     onShouldBeVisibleChanged: fullContainer.visible = fullContainer.shouldBeVisible
 

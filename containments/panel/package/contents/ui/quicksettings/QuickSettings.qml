@@ -4,13 +4,17 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick 2.14
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.bluezqt 1.0 as BluezQt
 import org.kde.colorcorrect 0.1 as CC
+import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+
+import org.kde.plasma.components 3.0 as PC3
 
 Item {
     id: root
@@ -21,7 +25,36 @@ Item {
     signal closeRequested
     signal closed
 
+    property bool expandedMode: parentSlidingPanel.wideScreen
+    readonly property real expandedRatio: expandedMode ? 1 : Math.max(0, Math.min(1, (parentSlidingPanel.offset - firstRowHeight - parentSlidingPanel.headerHeight) / otherRowsHeight))
+
+    readonly property real topEmptyAreaHeight: parentSlidingPanel.userInteracting
+        ? (root.height - collapsedHeight) * (1 - expandedRatio)
+        : (expandedMode ? 0 : root.height - collapsedHeight)
+     
+    readonly property real collapsedHeight: firstRowHeight + PlasmaCore.Units.largeSpacing * 2
+    readonly property real firstRowHeight: flow.children[0].height
+    readonly property real otherRowsHeight: flow.height - firstRowHeight
+
+    Connections {
+        target: root.parentSlidingPanel
+        function onUserInteractingChanged() {
+            if (!parentSlidingPanel.userInteracting) {
+                if (root.expandedRatio > 0.7) {
+                    root.expandedMode = true;
+                }
+            }
+        }
+    }
+
     property bool screenshotRequested: false
+
+    property NanoShell.FullScreenOverlay parentSlidingPanel
+    property Item background
+    onBackgroundChanged: {
+        background.parent = backgroundParent
+        background.anchors.fill = backgroundParent
+    }
 
     PlasmaNM.Handler {
         id: nmHandler
@@ -29,6 +62,14 @@ Item {
 
     PlasmaNM.EnabledConnections {
         id: enabledConnections
+    }
+
+    Connections {
+        target: root.Window.window
+        function onVisibilityChanged() {
+                root.expandedMode = parentSlidingPanel.wideScreen;
+            
+        }
     }
 
     Connections {
@@ -249,44 +290,87 @@ Item {
         id: settingsModel
     }
 
-    Flow {
-        id: flow
+    Item {
+        id: backgroundParent
+        anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
+        height: firstRowHeight + units.largeSpacing*2 + otherRowsHeight * root.expandedRatio
+    }
+
+    Item {
         anchors {
             fill: parent
             margins: units.smallSpacing
         }
+
         readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
         readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
-        spacing: 0
-        Repeater {
-            model: settingsModel
-            delegate: Delegate {
-                id: delegateItem
 
-                //FIXME: why this is needed?
-                width: flow.columnWidth
+        Flow {
+            id: flow
+            anchors {
+                fill: parent
+                margins: units.largeSpacing
+            }
 
-                Connections {
-                    target: delegateItem
-                    onCloseRequested: root.closeRequested();
-                }
-                Connections {
-                    target: root
-                    onClosed: delegateItem.panelClosed();
+            readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
+            readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
+            spacing: 0
+            Repeater {
+                model: settingsModel
+                delegate: Delegate {
+                    id: delegateItem
+
+                    //FIXME: why this is needed?
+                    width: flow.columnWidth - (y > 0 ? 0 : (flow.columnWidth/Math.floor(flow.width / flow.columnWidth)) * (1 - root.expandedRatio))
+                    height: item ? item.implicitHeight : 0
+
+                    labelOpacity: y > 0  ? 1 : root.expandedRatio
+
+                    opacity: y <= 0  ? 1 : root.expandedRatio
+                    transform: Translate {
+                        y: otherRowsHeight * (1 - root.expandedRatio)
+                    }
+
+                    Connections {
+                        target: delegateItem
+                        onCloseRequested: root.closeRequested();
+                    }
+                    Connections {
+                        target: root
+                        onClosed: delegateItem.panelClosed();
+                    }
                 }
             }
-        }
 
-        BrightnessItem {
-            id: brightnessSlider
-            width: flow.width
-            icon: "video-display-brightness"
-            label: i18n("Display Brightness")
-            value: root.screenBrightness
-            maximumValue: root.maximumScreenBrightness
-            Connections {
-                target: root
-                onScreenBrightnessChanged: brightnessSlider.value = root.screenBrightness
+            move: Transition {
+                NumberAnimation {
+                    duration: units.shortDuration
+                    //Here a linear easing actually looks better
+                    //easing.type: Easing.InOutQuad
+                    properties: "x,y"
+                }
+            }
+
+            BrightnessItem {
+                id: brightnessSlider
+                width: flow.width
+                icon: "video-display-brightness"
+                label: i18n("Display Brightness")
+                value: root.screenBrightness
+                maximumValue: root.maximumScreenBrightness
+                opacity: root.expandedRatio
+                transform: Translate{
+                    y: otherRowsHeight * (1 - root.expandedRatio)
+                }
+
+                Connections {
+                    target: root
+                    onScreenBrightnessChanged: brightnessSlider.value = root.screenBrightness
+                }
             }
         }
     }

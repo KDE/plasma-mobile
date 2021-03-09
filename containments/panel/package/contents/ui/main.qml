@@ -269,6 +269,10 @@ Item {
             slidingPanel.userInteracting = false;
             slidingPanel.updateState();
         }
+        onCanceled: {
+            slidingPanel.userInteracting = false;
+            slidingPanel.updateState();
+        }
     }
 
     SlidingPanel {
@@ -277,35 +281,36 @@ Item {
         height: plasmoid.availableScreenRect.height
         openThreshold: units.gridUnit * 2
         headerHeight: root.height
+        topEmptyAreaHeight: quickSettings.topEmptyAreaHeight
 
-        offset: quickSettingsParent.height
+        offset: quickSettings.height
         
         onClosed: quickSettings.closed()
 
         contentItem: Item {
             implicitWidth: panelContents.implicitWidth
-            implicitHeight: Math.min(slidingPanel.height, quickSettingsParent.implicitHeight)
+
+            implicitHeight: Math.min(slidingPanel.height, quickSettings.implicitHeight)
+
             GridLayout {
                 id: panelContents
                 anchors.fill: parent
-                implicitWidth: quickSettingsParent.implicitWidth
-                implicitHeight: Math.min(slidingPanel.height, quickSettingsParent.implicitHeight)
+                implicitWidth: quickSettings.implicitWidth
+                implicitHeight: Math.min(slidingPanel.height, quickSettings.implicitHeight)
 
                 columns: slidingPanel.wideScreen ? 2 : 1
                 rows: slidingPanel.wideScreen ? 1 : 2
                 
-                DrawerBackground {
-                    id: quickSettingsParent
-                    //anchors.fill: parent
+                QuickSettings {
+                    id: quickSettings
                     Layout.alignment: Qt.AlignTop
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
                     z: 4
-                    contentItem: QuickSettings {
-                        id: quickSettings
-                        onCloseRequested: {
-                            slidingPanel.hide()
-                        }
+                    parentSlidingPanel: slidingPanel
+                    onCloseRequested: {
+                        slidingPanel.hide()
                     }
+                    background: DrawerBackground {}
                 }
 
                 ListView {
@@ -313,12 +318,14 @@ Item {
                     z: 1
                     interactive: width < contentWidth
                     //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
-                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width - quickSettingsParent.width, quickSettingsParent.width*fullRepresentationModel.count) : panelContents.width 
+
+                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettings.width*fullRepresentationModel.count) : panelContents.width 
+
                     //Layout.fillWidth: true
                     clip: slidingPanel.wideScreen
-                    y: slidingPanel.wideScreen ? 0 : quickSettingsParent.height - height * (1-opacity)
-                    opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && slidingPanel.offset/panelContents.height
-                    height: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettingsParent.height - bottomBar.height, implicitHeight)
+                    y: slidingPanel.wideScreen ? 0 : quickSettings.height - (quickSettings.height + height) * (1-opacity)
+                    opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && (slidingPanel.offset + slidingPanel.headerHeight)/(quickSettings.height -slidingPanel.topEmptyAreaHeight)
+                    Layout.preferredHeight: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettings.height - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
                     //leftMargin: slidingPanel.drawerX
                     preferredHighlightBegin: slidingPanel.drawerX
 
