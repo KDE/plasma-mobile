@@ -217,7 +217,7 @@ Item {
 
         PlasmaComponents.Label {
             id: clock
-            property bool is24HourTime: Qt.locale().timeFormat(Locale.ShortFormat).toLowerCase().indexOf("ap") === -1
+            property bool is24HourTime: plasmoid.nativeInterface.isSystem24HourFormat
             
             anchors.fill: parent
             text: Qt.formatTime(timeSource.data.Local.DateTime, is24HourTime ? "h:mm" : "h:mm ap")
