@@ -19,8 +19,8 @@ import org.kde.plasma.components 3.0 as PC3
 Item {
     id: root
 
-    implicitWidth: flow.implicitWidth + units.smallSpacing * 6
-    implicitHeight: flow.implicitHeight + units.smallSpacing * 6
+    implicitWidth: column.implicitWidth + units.smallSpacing * 6
+    implicitHeight: column.implicitHeight + units.smallSpacing * 2
 
     signal closeRequested
     signal closed
@@ -32,9 +32,9 @@ Item {
         ? (root.height - collapsedHeight) * (1 - expandedRatio)
         : (expandedMode ? 0 : root.height - collapsedHeight)
      
-    readonly property real collapsedHeight: firstRowHeight + PlasmaCore.Units.largeSpacing * 2
+    readonly property real collapsedHeight: firstRowHeight + PlasmaCore.Units.smallSpacing * 2
     readonly property real firstRowHeight: flow.children[0].height
-    readonly property real otherRowsHeight: flow.height - firstRowHeight
+    readonly property real otherRowsHeight: column.height - firstRowHeight
 
     Connections {
         target: root.parentSlidingPanel
@@ -297,7 +297,7 @@ Item {
             right: parent.right
             bottom: parent.bottom
         }
-        height: firstRowHeight + units.largeSpacing*2 + otherRowsHeight * root.expandedRatio
+        height: firstRowHeight + otherRowsHeight * root.expandedRatio
     }
 
     Item {
@@ -309,61 +309,69 @@ Item {
         readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
         readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
 
-        Flow {
-            id: flow
-            anchors {
-                fill: parent
-                margins: units.largeSpacing
-            }
-
-            readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
-            readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
+        ColumnLayout {
+            id: column
+            anchors.fill: parent
             spacing: 0
-            Repeater {
-                model: settingsModel
-                delegate: Delegate {
-                    id: delegateItem
+            
+            Flow {
+                id: flow
+                Layout.fillWidth: true
+                Layout.leftMargin: units.smallSpacing + (units.largeSpacing - units.smallSpacing) * root.expandedRatio
+                Layout.rightMargin: units.largeSpacing
+                Layout.topMargin: units.largeSpacing
 
-                    //FIXME: why this is needed?
-                    width: flow.columnWidth - (y > 0 ? 0 : (flow.columnWidth/Math.floor(flow.width / flow.columnWidth)) * (1 - root.expandedRatio))
-                    height: item ? item.implicitHeight : 0
+                readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
+                readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
+                spacing: 0
+                Repeater {
+                    model: settingsModel
+                    delegate: Delegate {
+                        id: delegateItem
 
-                    labelOpacity: y > 0  ? 1 : root.expandedRatio
+                        //FIXME: why this is needed?
+                        width: flow.columnWidth - (y > 0 ? 0 : (flow.columnWidth/Math.floor(flow.width / flow.columnWidth)) * (1 - root.expandedRatio))
+                        height: item ? item.implicitHeight : 0
 
-                    opacity: y <= 0  ? 1 : root.expandedRatio
-                    transform: Translate {
-                        y: otherRowsHeight * (1 - root.expandedRatio)
+                        labelOpacity: y > 0  ? 1 : root.expandedRatio
+
+                        opacity: y <= 0  ? 1 : root.expandedRatio
+                        transform: Translate {
+                            y: otherRowsHeight * (1 - root.expandedRatio)
+                        }
+
+                        Connections {
+                            target: delegateItem
+                            onCloseRequested: root.closeRequested();
+                        }
+                        Connections {
+                            target: root
+                            onClosed: delegateItem.panelClosed();
+                        }
                     }
+                }
 
-                    Connections {
-                        target: delegateItem
-                        onCloseRequested: root.closeRequested();
-                    }
-                    Connections {
-                        target: root
-                        onClosed: delegateItem.panelClosed();
+                move: Transition {
+                    NumberAnimation {
+                        duration: units.shortDuration
+                        //Here a linear easing actually looks better
+                        //easing.type: Easing.InOutQuad
+                        properties: "x,y"
                     }
                 }
             }
-
-            move: Transition {
-                NumberAnimation {
-                    duration: units.shortDuration
-                    //Here a linear easing actually looks better
-                    //easing.type: Easing.InOutQuad
-                    properties: "x,y"
-                }
-            }
-
             BrightnessItem {
                 id: brightnessSlider
-                width: flow.width
-                icon: "video-display-brightness"
-                label: i18n("Display Brightness")
+                
+                Layout.bottomMargin: units.largeSpacing
+                Layout.leftMargin: units.largeSpacing
+                Layout.rightMargin: units.largeSpacing
+                Layout.fillWidth: true
+                
                 value: root.screenBrightness
                 maximumValue: root.maximumScreenBrightness
                 opacity: root.expandedRatio
-                transform: Translate{
+                transform: Translate {
                     y: otherRowsHeight * (1 - root.expandedRatio)
                 }
 
