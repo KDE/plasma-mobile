@@ -116,7 +116,7 @@ Rectangle {
         if (event.modifiers === Qt.NoModifier) {
             if (event.key === Qt.Key_Backspace) {
                 keypadRoot.backspace();
-            } else if (event.key === Qt.Key_Return) {
+            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
                 keypadRoot.enter();
             } else if (event.text != "") {
                 keypadRoot.keyPress(event.text);
