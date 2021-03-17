@@ -24,7 +24,6 @@ Rectangle {
     property string pinLabel: qsTr("Enter PIN")
     
     // for displaying temporary number in pin dot display
-    property string lastKeyPressValue: "0"
     property int indexWithNumber: -2 
     
     // if waiting for result of auth
@@ -41,26 +40,29 @@ Rectangle {
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
+    signal passwordChanged()
+    
     // keypad functions
     function reset() {
         waitingForAuth = false;
         root.password = "";
+        passwordChanged();
         keypadRoot.pinLabel = qsTr("Enter PIN");
     }
     
     function backspace() {
         if (!keypadRoot.waitingForAuth) {
-            keypadRoot.lastKeyPressValue = "0";
             keypadRoot.indexWithNumber = -2;
             root.password = root.password.substr(0, root.password.length - 1);
+            passwordChanged();
         }
     }
 
     function clear() {
         if (!keypadRoot.waitingForAuth) {
-            keypadRoot.lastKeyPressValue = "0";
             keypadRoot.indexWithNumber = -2;
             root.password = "";
+            passwordChanged();
         }
     }
     
@@ -80,9 +82,9 @@ Rectangle {
             if (keypadRoot.pinLabel !== qsTr("Enter PIN")) {
                 keypadRoot.pinLabel = qsTr("Enter PIN");
             }
-            keypadRoot.lastKeyPressValue = data;
             keypadRoot.indexWithNumber = root.password.length;
             root.password += data
+            passwordChanged();
             
             // trigger turning letter into dot later
             letterTimer.restart();
@@ -128,7 +130,6 @@ Rectangle {
         running: false
         repeat: false
         onTriggered: {
-            keypadRoot.lastKeyPressValue = 0;
             keypadRoot.indexWithNumber = -2;
         }
     }
@@ -152,46 +153,106 @@ Rectangle {
         color: keypadRoot.headerBackgroundColor
         implicitHeight: units.gridUnit * 2.5
         opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-    }
-    
-    // pin dot display
-    Item {
-        anchors.verticalCenter: topTextDisplay.verticalCenter
-        anchors.horizontalCenter: topTextDisplay.horizontalCenter
         
         // label ("wrong pin", "enter pin")
         Label {
-            visible: root.password.length === 0
+            opacity: root.password.length === 0 ? 1 : 0
             anchors.centerIn: parent
             text: keypadRoot.pinLabel
             font.pointSize: 12
             color: keypadRoot.headerTextColor 
-        }
-        
-        // dot display and letter
-        RowLayout {
-            id: dotDisplay
-            anchors.centerIn: parent
-            height: units.gridUnit * 1.5 // maintain height when letter is shown
-            spacing: 6
             
-            Repeater {
-                model: root.password.length
-                delegate: Rectangle { // dot
-                    visible: index !== indexWithNumber // hide dot if number is shown
-                    Layout.preferredWidth: units.gridUnit * 0.35
-                    Layout.preferredHeight: Layout.preferredWidth
-                    Layout.alignment: Qt.AlignVCenter
+            Behavior on opacity {
+                NumberAnimation { duration: 200 }
+            }
+        }
+    }
+    
+    // we need to use a listmodel to avoid all delegates from reloading
+    ListModel {
+        id: dotDisplayModel
+    }
+    onPasswordChanged: {
+        while (root.password.length < dotDisplayModel.count) {
+            dotDisplayModel.remove(dotDisplayModel.count - 1);
+        }
+        while (root.password.length > dotDisplayModel.count) {
+            dotDisplayModel.append({"char": root.password.charAt(dotDisplayModel.count)});
+        }
+    }
+    
+    // pin dot display
+    ColumnLayout {
+        anchors.fill: topTextDisplay
+        ListView {
+            id: dotDisplay
+            property int dotWidth: Math.round(units.gridUnit * 0.35)
+            
+            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            Layout.bottomMargin: Math.round(dotWidth / 2)
+            orientation: ListView.Horizontal
+            implicitWidth: count * dotWidth + spacing * (count - 1)
+            spacing: 8
+            model: dotDisplayModel
+            
+            Behavior on implicitWidth {
+                NumberAnimation { duration: 50 }
+            }
+            
+            delegate: Item {
+                implicitWidth: dotDisplay.dotWidth
+                implicitHeight: dotDisplay.dotWidth
+                property bool showChar: index === indexWithNumber
+                
+                Component.onCompleted: {
+                    if (showChar) {
+                        charAnimation.to = 1;
+                        charAnimation.restart();
+                    } else {
+                        dotAnimation.to = 1;
+                        dotAnimation.restart();
+                    }
+                }
+                
+                onShowCharChanged: {
+                    if (!showChar) {
+                        charAnimation.to = 0;
+                        charAnimation.restart();
+                        dotAnimation.to = 1;
+                        dotAnimation.restart();
+                    }
+                }
+                
+                Rectangle { // dot
+                    id: dot
+                    scale: 0
+                    anchors.fill: parent
                     radius: width
                     color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
+                    
+                    PropertyAnimation {
+                        id: dotAnimation
+                        target: dot;
+                        property: "scale";
+                        duration: 200
+                    }
                 }
-            }
-            Label { // number/letter
-                visible: root.password.length-1 === indexWithNumber // hide label if no label needed
-                Layout.alignment: Qt.AlignHCenter
-                color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
-                text: lastKeyPressValue
-                font.pointSize: 12
+                
+                Label { // number/letter
+                    id: charLabel
+                    scale: 0
+                    anchors.centerIn: parent
+                    color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
+                    text: model.char
+                    font.pointSize: 12
+                    
+                    PropertyAnimation {
+                        id: charAnimation
+                        target: charLabel;
+                        property: "scale";
+                        duration: 150;
+                    }
+                }
             }
         }
     }
