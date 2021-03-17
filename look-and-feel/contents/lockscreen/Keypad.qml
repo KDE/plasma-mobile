@@ -282,6 +282,7 @@ Rectangle {
                         text: modelData
                         anchors.centerIn: parent
                         font.pointSize: 18
+                        font.weight: Font.Light
                         color: keypadRoot.buttonTextColor
                     }
 
