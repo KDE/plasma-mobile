@@ -99,6 +99,7 @@ Rectangle {
         }
         function onFailed() {
             root.password = "";
+            passwordChanged();
             pinLabel = qsTr("Wrong PIN");
             keypadRoot.waitingForAuth = false;
         }
@@ -207,6 +208,7 @@ Rectangle {
                 Component.onCompleted: {
                     if (showChar) {
                         charAnimation.to = 1;
+                        charAnimation.duration = 75;
                         charAnimation.restart();
                     } else {
                         dotAnimation.to = 1;
@@ -217,9 +219,10 @@ Rectangle {
                 onShowCharChanged: {
                     if (!showChar) {
                         charAnimation.to = 0;
+                        charAnimation.duration = 50;
                         charAnimation.restart();
                         dotAnimation.to = 1;
-                        dotAnimation.restart();
+                        dotAnimation.start();
                     }
                 }
                 
@@ -234,7 +237,7 @@ Rectangle {
                         id: dotAnimation
                         target: dot;
                         property: "scale";
-                        duration: 200
+                        duration: 50
                     }
                 }
                 
@@ -250,7 +253,6 @@ Rectangle {
                         id: charAnimation
                         target: charLabel;
                         property: "scale";
-                        duration: 150;
                     }
                 }
             }
