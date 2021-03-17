@@ -31,6 +31,16 @@ Item {
     
     opacity: 1 - Math.min(1, 1.5 * Math.abs(rect.x) / width) // opacity during dismiss swipe
 
+    RectangularGlow {
+        anchors.topMargin: 1
+        anchors.leftMargin: 1
+        anchors.fill: rect
+        cornerRadius: rect.radius * 2
+        glowRadius: 2
+        spread: 0.2
+        color: "#616161"
+    }
+    
     // notification
     Rectangle {
         id: rect
@@ -201,15 +211,5 @@ Item {
                 duration: units.longDuration
             }
         }
-    }
-    
-    DropShadow {
-        anchors.fill: rect
-        source: rect
-        horizontalOffset: 1
-        verticalOffset: 1
-        radius: 4
-        samples: 6
-        color: "#616161"
     }
 }

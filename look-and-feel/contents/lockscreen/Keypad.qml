@@ -133,6 +133,16 @@ Rectangle {
         }
     }
     
+    RectangularGlow {
+        anchors.topMargin: 1
+        anchors.fill: topTextDisplay
+        cached: true
+        glowRadius: 4
+        spread: 0.2
+        color: keypadRoot.dropShadowColor
+        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+    }
+    
     // rectangle "bar" on the top of the keypad
     Rectangle {
         id: topTextDisplay
@@ -141,18 +151,6 @@ Rectangle {
         anchors.right: parent.right
         color: keypadRoot.headerBackgroundColor
         implicitHeight: units.gridUnit * 2.5
-        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-    }
-    
-    DropShadow {
-        anchors.fill: topTextDisplay
-        source: topTextDisplay
-        cached: true
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 4
-        samples: 6
-        color: keypadRoot.dropShadowColor
         opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
     }
     
@@ -227,6 +225,17 @@ Rectangle {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
+                    RectangularGlow {
+                        anchors.topMargin: 1
+                        anchors.fill: keyRect
+                        cornerRadius: keyRect.radius * 2
+                        cached: true
+                        glowRadius: 2
+                        spread: 0.2
+                        color: keypadRoot.dropShadowColor
+                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+                    }
+
                     Rectangle {
                         id: keyRect
                         anchors.centerIn: parent
@@ -263,18 +272,6 @@ Rectangle {
                                 }
                             }
                         }
-                    }
-
-                    DropShadow {
-                        anchors.fill: keyRect
-                        source: keyRect
-                        cached: true
-                        horizontalOffset: 0
-                        verticalOffset: 1
-                        radius: 4
-                        samples: 6
-                        color: keypadRoot.dropShadowColor
-                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
                     }
 
                     PlasmaComponents.Label {
