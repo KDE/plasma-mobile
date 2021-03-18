@@ -232,6 +232,7 @@ Item {
                     z: 4
                     Layout.alignment: Qt.AlignTop
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
+
                     parentSlidingPanel: slidingPanel
                     onCloseRequested: slidingPanel.hide()
                 }

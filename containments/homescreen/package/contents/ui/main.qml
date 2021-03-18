@@ -15,6 +15,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
 import "launcher" as Launcher
+//TODO: everything using this will eventually move in Launcher
+import "launcher/private" as LauncherPrivate
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
@@ -163,7 +165,8 @@ Item {
         //bottomMargin: favoriteStrip.height
         contentWidth: appletsLayout.width
         contentHeight: height
-        interactive: !plasmoid.editMode && !launcherDragManager.active
+        //interactive: !plasmoid.editMode && !launcherDragManager.active
+        interactive: false
 
         signal cancelEditModeForItemsRequested
         onDragStarted: cancelEditModeForItemsRequested()
@@ -173,22 +176,48 @@ Item {
 
         onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
 
+        LauncherPrivate.DragGestureHandler {
+            appDrawer: appDrawer
+            mainFlickable: mainFlickable
+            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
+        }
+/*
         DragHandler {
             target: mainFlickable
-            yAxis.enabled: !appletsLayout.editMode
+            yAxis.enabled: !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
+            xAxis.enabled: yAxis.enabled
             enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open
-            onTranslationChanged: {
+            property real initialMainFlickableX
+            enum ScrollDirection {
+                None,
+                Horizontal,
+                Vertical
+            }
+            property int scrollDirection: None
+            onTranslationChanged: {print(translation.x)
                 if (active) {
-                    appDrawer.offset = -translation.y
+                    if (appDrawer.offset > PlasmaCore.Units.gridUnit) {
+                        scrollDirection = Vertical;
+                    } else if (Math.abs(mainFlickable.contentX - initialMainFlickableX) > PlasmaCore.Units.gridUnit) {
+                        scrollDirection = Horizontal;
+                    }
+                    if (scrollDirection !== Horizontal) {
+                        appDrawer.offset = -translation.y;
+                    }
+                    if (scrollDirection !== Vertical) {
+                        mainFlickable.contentX = Math.max(0, initialMainFlickableX - translation.x);
+                    }
                 }
             }
             onActiveChanged: {
-                if (!active) {
+                if (active) {
+                    initialMainFlickableX = mainFlickable.contentX;
+                } else {
                     appDrawer.snapDrawerStatus();
                 }
             }
         }
-
+*/
         NumberAnimation {
             id: scrollAnim
             target: mainFlickable
@@ -201,7 +230,7 @@ Item {
         // TODO: span on multiple pages
         DragDrop.DropArea {
             id: dropArea
-            width: mainFlickable.width
+            width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
             height: mainFlickable.height + favoriteStrip.height
 
             onDragEnter: {
@@ -297,7 +326,7 @@ Item {
                 }
 
                 signal appletsLayoutInteracted
-
+onChildrenRectChanged: print("AAAAAA"+childrenRect.width)
                 TapHandler {
                     target: mainFlickable
                     enabled: appDrawer.status !== Launcher.AppDrawer.Status.Open
@@ -361,6 +390,19 @@ Item {
                     favoriteStrip: favoriteStrip
                 }
             }
+        }
+        PlasmaComponents.PageIndicator {
+            anchors {
+                bottom: parent.bottom
+                horizontalCenter: parent.horizontalCenter
+                bottomMargin: PlasmaCore.Units.gridUnit * 2
+            }
+            PlasmaCore.ColorScope.inherit: false
+            PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            parent: mainFlickable
+            count: Math.ceil(dropArea.width / mainFlickable.width)
+            visible: count > 1
+            currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
         }
     }
 
