@@ -17,12 +17,12 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.phone.homescreen 1.0
 import org.kde.kirigami 2.14 as Kirigami
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 Repeater {
     id: launcherRepeater
-    model: plasmoid.nativeInterface.applicationListModel
+    model: HomeScreenComponents.FavoritesModel
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
     property int cellWidth
@@ -48,15 +48,15 @@ Repeater {
         reservedSpaceForLabel: metrics.height
         property Item parentFromLocation: {
             switch (model.applicationLocation) {
-            case ApplicationListModel.Favorites:
+            case HomeScreenComponents.ApplicationListModel.Favorites:
                 return favoriteStrip.flow;
-            case ApplicationListModel.Desktop:
+            case HomeScreenComponents.ApplicationListModel.Desktop:
             default:
                 return appletsLayout;
             }
         }
         Component.onCompleted: {
-            if (model.applicationLocation === ApplicationListModel.Desktop) {
+            if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Desktop) {
                 appletsLayout.restoreItem(delegate);
             }
         }
@@ -114,11 +114,11 @@ Repeater {
         onParentFromLocationChanged: {
             if (!launcherDragManager.active && parent != parentFromLocation) {
                 parent = parentFromLocation;
-                if (model.applicationLocation === ApplicationListModel.Favorites) {
+                if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Favorites) {
                     plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[index]);
 
-                } else if (model.applicationLocation === ApplicationListModel.Grid) {
-                    plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - plasmoid.nativeInterface.applicationListModel.favoriteCount)]);
+                } else if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Grid) {
+                    plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - HomeScreenComponents.ApplicationListModel.favoriteCount)]);
                 }
             }
         }

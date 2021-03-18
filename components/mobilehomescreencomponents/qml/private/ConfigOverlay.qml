@@ -16,7 +16,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 ContainmentLayoutManager.ConfigOverlayWithHandles {
     id: overlay
 
-    readonly property int iconSize: units.iconSizes.medium
+    readonly property int iconSize: PlasmaCore.Units.iconSizes.medium
     PlasmaCore.Svg {
         id: configIconsSvg
         imagePath: "widgets/configuration-icons"
@@ -40,7 +40,7 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
             property: "scale"
             from: 1
             to: 0
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         ScriptAction {
@@ -60,7 +60,7 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
 
         RowLayout {
             id: layout
-            spacing: units.largeSpacing
+            spacing: PlasmaCore.Units.largeSpacing
             anchors {
                 fill: parent
                 topMargin: parent.margins.top

@@ -16,7 +16,6 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen 1.0
 
 MouseArea {
     id: delegate
@@ -97,7 +96,7 @@ MouseArea {
 
             //FIXME: export smallestReadableFont
             font.pointSize: theme.defaultFont.pointSize * 0.9
-            color: "white"//model.applicationLocation == ApplicationListModel.Desktop ? "white" : theme.textColor
+            color: "white"
         }
     }
 }

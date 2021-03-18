@@ -16,7 +16,7 @@ import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import org.kde.phone.homescreen 1.0
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 import "private"
 
@@ -204,10 +204,7 @@ Item {
 
        // boundsBehavior: Flickable.StopAtBounds
 
-        model: ApplicationListModel {
-            id: allApplicationsModel
-            Component.onCompleted: loadApplications()
-        }
+        model: HomeScreenComponents.ApplicationListModel
 
         header: Rectangle {
             height: root.height - root.topPadding - root.bottomPadding - root.closedPositionOffset
@@ -247,8 +244,8 @@ Item {
                             Math.min(delegate.iconItem.width, delegate.iconItem.height));
                 }
 
-                allApplicationsModel.setMinimizedDelegate(index, delegate);
-                allApplicationsModel.runApplication(storageId);
+                HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
+                HomeScreenComponents.ApplicationListModel.runApplication(storageId);
                 root.launched();
                 closeTimer.restart();
             }

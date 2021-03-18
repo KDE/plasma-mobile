@@ -4,8 +4,6 @@
  */
 
 #include "homescreen.h"
-#include "applicationlistmodel.h"
-#include "favoritesmodel.h"
 
 #include <QDebug>
 #include <QQuickItem>
@@ -14,8 +12,6 @@
 HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)
 {
-    qmlRegisterType<ApplicationListModel>("org.kde.phone.homescreen", 1, 0, "ApplicationListModel");
-    qmlRegisterType<FavoritesModel>("org.kde.phone.homescreen", 1, 0, "FavoritesModel");
 
     setHasConfigurationInterface(true);
 }
@@ -25,24 +21,8 @@ HomeScreen::~HomeScreen() = default;
 void HomeScreen::configChanged()
 {
     Plasma::Containment::configChanged();
-    if (m_applicationListModel) {
-        m_applicationListModel->loadSettings();
-    }
 }
 
-ApplicationListModel *HomeScreen::applicationListModel()
-{
-    if (!m_applicationListModel) {
-        if (m_showAllApps) {
-            m_applicationListModel = new ApplicationListModel(this);
-        } else {
-            m_applicationListModel = new FavoritesModel(this);
-        }
-        m_applicationListModel->setApplet(this);
-        m_applicationListModel->loadApplications();
-    }
-    return m_applicationListModel;
-}
 
 void HomeScreen::stackBefore(QQuickItem *item1, QQuickItem *item2)
 {

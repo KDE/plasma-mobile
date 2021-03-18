@@ -9,9 +9,9 @@
 
 // Qt
 #include <QByteArray>
-#include <QDebug>
 #include <QModelIndex>
 #include <QProcess>
+#include <QDebug>
 #include <QQuickItem>
 #include <QQuickWindow>
 
@@ -29,13 +29,17 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+#include <Plasma/Applet>
+#include <PlasmaQuick/AppletQuickItem>
+
 constexpr int MAX_FAVOURITES = 5;
 
-ApplicationListModel::ApplicationListModel(HomeScreen *parent)
+ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
-    , m_applet(parent)
+      //m_applet(parent)
 {
-    connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged), this, &ApplicationListModel::sycocaDbChanged);
+    connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged),
+            this, &ApplicationListModel::sycocaDbChanged);
 
     loadSettings();
     initWayland();
@@ -48,15 +52,15 @@ void ApplicationListModel::loadSettings()
     if (!m_applet) {
         return;
     }
-    m_favorites = m_applet->config().readEntry("Favorites", QStringList());
+    m_favorites = m_applet->applet()->config().readEntry("Favorites", QStringList());
 #if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
-    const auto di = m_applet->config().readEntry("DesktopItems", QStringList());
+    const auto di = m_applet->applet()->config().readEntry("DesktopItems", QStringList());
     m_desktopItems = QSet<QString>(di.begin(), di.end());
 #else
-    m_desktopItems = m_applet->config().readEntry("DesktopItems", QStringList()).toSet();
+    m_desktopItems = m_applet->applet()->config().readEntry("DesktopItems", QStringList()).toSet();
 #endif
-    m_appOrder = m_applet->config().readEntry("AppOrder", QStringList());
-    m_maxFavoriteCount = m_applet->config().readEntry("MaxFavoriteCount", MAX_FAVOURITES);
+    m_appOrder = m_applet->applet()->config().readEntry("AppOrder", QStringList());
+    m_maxFavoriteCount = m_applet->applet()->config().readEntry("MaxFavoriteCount", MAX_FAVOURITES);
 
     int i = 0;
     for (const QString &app : qAsConst(m_appOrder)) {
@@ -64,7 +68,7 @@ void ApplicationListModel::loadSettings()
         ++i;
     }
 
-    // loadApplications();
+    //loadApplications();
 }
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
@@ -78,7 +82,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
         {ApplicationStartupNotifyRole, QByteArrayLiteral("applicationStartupNotify")},
         {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")},
         {ApplicationRunningRole, QByteArrayLiteral("applicationRunning")},
-        {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")},
+        {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")}
     };
 }
 
@@ -111,36 +115,39 @@ void ApplicationListModel::initWayland()
     }
     auto *registry = new Registry(this);
     registry->create(connection);
-    connect(registry, &Registry::plasmaWindowManagementAnnounced, this, [this, registry](quint32 name, quint32 version) {
-        m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
-        qRegisterMetaType<QVector<int>>("QVector<int>");
+    connect(registry, &Registry::plasmaWindowManagementAnnounced, this,
+        [this, registry] (quint32 name, quint32 version) {
+            m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
+            qRegisterMetaType<QVector<int> >("QVector<int>");
 
-        connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated, this, [this](KWayland::Client::PlasmaWindow *window) {
-            if (window->appId() == QStringLiteral("org.kde.plasmashell")) {
-                return;
-            }
-            int idx = 0;
-            for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
-                if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
-                    (*i).window = window;
-                    emit dataChanged(index(idx, 0), index(idx, 0));
-                    connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window]() {
-                        int idx = 0;
-                        for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
-                            if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
-                                (*i).window = nullptr;
-                                emit dataChanged(index(idx, 0), index(idx, 0));
-                                break;
-                            }
-                            idx++;
-                        }
-                    });
-                    break;
+            connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated,
+                    this, [this] (KWayland::Client::PlasmaWindow *window) {
+                if (window->appId() == QStringLiteral("org.kde.plasmashell")) {
+                    return;
                 }
-                idx++;
-            }
-        });
-    });
+                int idx = 0;
+                for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+                    if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+                        (*i).window = window;
+                        emit dataChanged(index(idx, 0), index(idx, 0));
+                        connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window] () {
+                            int idx = 0;
+                            for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+                                if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+                                    (*i).window = nullptr;
+                                    emit dataChanged(index(idx, 0), index(idx, 0));
+                                    break;
+                                }
+                                idx++;
+                            }
+                        });
+                        break;
+                    }
+                    idx++;
+                }
+            });
+        }
+    );
 
     registry->setup();
     connection->roundtrip();
@@ -158,9 +165,7 @@ void ApplicationListModel::loadApplications()
     m_applicationList.clear();
 
     KServiceGroup::Ptr group = KServiceGroup::root();
-    if (!group || !group->isValid()) {
-        return;
-    }
+    if (!group || !group->isValid()) return;
     KServiceGroup::List subGroupList = group->entries(true);
 
     QMap<int, ApplicationData> orderedList;
@@ -178,7 +183,7 @@ void ApplicationListModel::loadApplications()
             if (!serviceGroup->noDisplay()) {
                 KServiceGroup::List entryGroupList = serviceGroup->entries(true);
 
-                for (KServiceGroup::List::ConstIterator it = entryGroupList.constBegin(); it != entryGroupList.constEnd(); it++) {
+                for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
                     KSycocaEntry::Ptr entry = (*it);
 
                     if (entry->isType(KST_KServiceGroup)) {
@@ -188,10 +193,11 @@ void ApplicationListModel::loadApplications()
                     } else if (entry->property(QStringLiteral("Exec")).isValid()) {
                         KService::Ptr service(static_cast<KService *>(entry.data()));
 
-                        if (service->isApplication() //
-                            && !blacklist.contains(service->desktopEntryName()) //
-                            && service->showOnCurrentPlatform() //
-                            && !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
+                        if (service->isApplication() &&
+                            !blacklist.contains(service->desktopEntryName()) &&
+                            service->showOnCurrentPlatform() &&
+                            !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
+
                             ApplicationData data;
                             data.name = service->name();
                             data.icon = service->icon();
@@ -239,7 +245,7 @@ void ApplicationListModel::loadApplications()
     }
     if (favChanged) {
         if (m_applet) {
-            m_applet->config().writeEntry("Favorites", m_favorites);
+            m_applet->applet()->config().writeEntry("Favorites", m_favorites);
         }
         emit favoriteCountChanged();
     }
@@ -279,10 +285,9 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
-    if (!index.isValid()) {
+    if (!index.isValid())
         return {};
-    }
-    return Qt::ItemIsDragEnabled | QAbstractListModel::flags(index);
+    return Qt::ItemIsDragEnabled|QAbstractListModel::flags(index);
 }
 
 int ApplicationListModel::rowCount(const QModelIndex &parent) const
@@ -294,7 +299,7 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     return m_applicationList.count();
 }
 
-void ApplicationListModel::moveRow(const QModelIndex & /* sourceParent */, int sourceRow, const QModelIndex & /* destinationParent */, int destinationChild)
+void ApplicationListModel::moveRow(const QModelIndex& /* sourceParent */, int sourceRow, const QModelIndex& /* destinationParent */, int destinationChild)
 {
     moveItem(sourceRow, destinationChild);
 }
@@ -313,22 +318,23 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     if (location == Favorites) {
         qWarning() << "favoriting" << row << data.name;
         // Deny favorites when full
-        if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount || m_favorites.contains(data.uniqueId)) {
+        if (row >= m_maxFavoriteCount || m_favorites.count() >= m_maxFavoriteCount ||
+            m_favorites.contains(data.uniqueId)) {
             return;
         }
 
         m_favorites.insert(row, data.uniqueId);
 
         if (m_applet) {
-            m_applet->config().writeEntry("Favorites", m_favorites);
+            m_applet->applet()->config().writeEntry("Favorites", m_favorites);
         }
         emit favoriteCountChanged();
 
-        // Out of favorites
-    } else if (data.location == Favorites) {
+    // Out of favorites
+    } else  if (data.location == Favorites) {
         m_favorites.removeAll(data.uniqueId);
         if (m_applet) {
-            m_applet->config().writeEntry("Favorites", m_favorites);
+            m_applet->applet()->config().writeEntry("Favorites", m_favorites);
         }
         emit favoriteCountChanged();
     }
@@ -337,27 +343,28 @@ void ApplicationListModel::setLocation(int row, LauncherLocation location)
     if (location == Desktop) {
         m_desktopItems.insert(data.uniqueId);
         if (m_applet) {
-            m_applet->config().writeEntry("DesktopItems", m_desktopItems.values());
+            m_applet->applet()->config().writeEntry("DesktopItems", m_desktopItems.values());
         }
 
-        // Out of Desktop
-    } else if (data.location == Desktop) {
+    // Out of Desktop
+    } else  if (data.location == Desktop) {
         m_desktopItems.remove(data.uniqueId);
         if (m_applet) {
-            m_applet->config().writeEntry(QStringLiteral("DesktopItems"), m_desktopItems.values());
+            m_applet->applet()->config().writeEntry(QStringLiteral("DesktopItems"), m_desktopItems.values());
         }
     }
 
     data.location = location;
     if (m_applet) {
-        emit m_applet->configNeedsSaving();
+        emit m_applet->applet()->configNeedsSaving();
     }
     emit dataChanged(index(row, 0), index(row, 0));
 }
 
 void ApplicationListModel::moveItem(int row, int destination)
 {
-    if (row < 0 || destination < 0 || row >= m_applicationList.length() || destination >= m_applicationList.length() || row == destination) {
+    if (row < 0 || destination < 0 || row >= m_applicationList.length() ||
+        destination >= m_applicationList.length() || row == destination) {
         return;
     }
     if (destination > row) {
@@ -375,6 +382,7 @@ void ApplicationListModel::moveItem(int row, int destination)
         m_applicationList.insert(destination, data);
     }
 
+
     m_appOrder.clear();
     m_appPositions.clear();
     int i = 0;
@@ -385,7 +393,7 @@ void ApplicationListModel::moveItem(int row, int destination)
     }
 
     if (m_applet) {
-        m_applet->config().writeEntry("AppOrder", m_appOrder);
+        m_applet->applet()->config().writeEntry("AppOrder", m_appOrder);
     }
 
     endMoveRows();
@@ -439,20 +447,25 @@ void ApplicationListModel::setMaxFavoriteCount(int count)
 
     m_maxFavoriteCount = count;
     if (m_applet) {
-        m_applet->config().writeEntry("MaxFavoriteCount", m_maxFavoriteCount);
+        m_applet->applet()->config().writeEntry("MaxFavoriteCount", m_maxFavoriteCount);
     }
 
     emit maxFavoriteCountChanged();
 }
 
-Plasma::Applet *ApplicationListModel::applet() const
+PlasmaQuick::AppletQuickItem *ApplicationListModel::applet() const
 {
     return m_applet;
 }
 
-void ApplicationListModel::setApplet(Plasma::Applet *applet)
+void ApplicationListModel::setApplet(PlasmaQuick::AppletQuickItem *applet)
 {
+    if (m_applet == applet) {
+        return;
+    }
     m_applet = applet;
+    loadSettings();
+    emit appletChanged();
 }
 
 void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
@@ -479,7 +492,7 @@ void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
         return;
     }
 
-    QRect rect = delegate->mapRectToScene(QRectF(0, 0, delegate->width(), delegate->height())).toRect();
+    QRect rect = delegate->mapRectToScene(QRectF(0,0, delegate->width(), delegate->height())).toRect();
 
     window->setMinimizedGeometry(surface, rect);
 }
@@ -512,3 +525,4 @@ void ApplicationListModel::unsetMinimizedDelegate(int row, QQuickItem *delegate)
 }
 
 #include "moc_applicationlistmodel.cpp"
+

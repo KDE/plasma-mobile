@@ -16,7 +16,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen 1.0
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 import "private" as Private
 
@@ -47,9 +47,9 @@ ContainmentLayoutManager.ItemContainer {
         }
 
         if (!MobileShell.HomeScreenControls.taskSwitcherVisible) {
-            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
+            HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
         } else {
-            plasmoid.nativeInterface.applicationListModel.unsetMinimizedDelegate(index, delegate);
+            HomeScreenComponents.ApplicationListModel.unsetMinimizedDelegate(index, delegate);
         }
     }
 
@@ -94,8 +94,8 @@ ContainmentLayoutManager.ItemContainer {
                 delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
             }
 
-            plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
-            plasmoid.nativeInterface.applicationListModel.runApplication(modelData.applicationStorageId);
+            HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
+            HomeScreenComponents.ApplicationListModel.runApplication(modelData.applicationStorageId);
         }
 
         //preventStealing: true
@@ -156,9 +156,9 @@ ContainmentLayoutManager.ItemContainer {
 
                 //FIXME: export smallestReadableFont
                 font.pointSize: theme.defaultFont.pointSize * 0.9
-                color: "white"//model.applicationLocation == ApplicationListModel.Desktop ? "white" : theme.textColor
+                color: "white"//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop ? "white" : theme.textColor
 
-                layer.enabled: true//model.applicationLocation == ApplicationListModel.Desktop
+                layer.enabled: true//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2

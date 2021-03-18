@@ -21,8 +21,6 @@ LauncherContainer {
 
     flow.flow: Flow.TopToBottom
 
-    opacity: launcherDragManager.active && plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ? 0.3 : 1
-
     height: visible ? cellHeight : 0
 
     frame.implicitWidth: cellWidth * Math.max(1, flow.children.length) + frame.leftPadding + frame.rightPadding

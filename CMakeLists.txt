@@ -53,11 +53,12 @@ plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
-install(DIRECTORY components/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
+
 
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
+add_subdirectory(components)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 

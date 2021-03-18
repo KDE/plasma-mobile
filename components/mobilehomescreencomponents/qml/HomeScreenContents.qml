@@ -16,9 +16,9 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
-import org.kde.phone.homescreen 1.0
-
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 import "private" as Private
 
@@ -26,13 +26,28 @@ DragDrop.DropArea {
     id: dropArea
     width: mainFlickable.width * 100
     //width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
-    height: mainFlickable.height + favoriteStrip.height + units.gridUnit
+    height: mainFlickable.height
 
     property alias itemsBoundingRect: appletsLayout.childrenRect
 
     property alias appletsLayout: appletsLayout
 
     property FavoriteStrip favoriteStrip
+
+    property LauncherDragManager launcherDragManager: LauncherDragManager {
+        id: launcherDragManager
+        parent: {
+            let candidate = dropArea;
+            while (candidate.parent) {
+                candidate = candidate.parent;
+            }
+            return candidate;
+        }
+        anchors.fill: parent
+        z: 999999
+        appletsLayout: homeScreenContents.appletsLayout
+        favoriteStrip: dropArea.favoriteStrip
+    }
 
     Connections {
         target: plasmoid
@@ -48,7 +63,7 @@ DragDrop.DropArea {
     onDragMove: {
         let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
         if (posInFavorites.y > 0) {
-            if (plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ) {
+            if (HomeScreenComponents.ApplicationListModel.favoriteCount >= HomeScreenComponents.ApplicationListModel.maxFavoriteCount ) {
                 launcherDragManager.hideSpacer();
             } else {
                 launcherDragManager.showSpacerAtPos(event.x, event.y, favoriteStrip);
@@ -91,12 +106,12 @@ DragDrop.DropArea {
 
             let posInFavorites = favoriteStrip.flow.mapFromItem(this, event.x, event.y);
             if (posInFavorites.y > 0) {
-                if (plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ) {
+                if (HomeScreenComponents.ApplicationListModel.favoriteCount >= HomeScreenComponents.ApplicationListModel.maxFavoriteCount ) {
                     return;
                 }
 
-                let pos = Math.min(plasmoid.nativeInterface.applicationListModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
-                plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, pos, ApplicationListModel.Favorites)
+                let pos = Math.min(HomeScreenComponents.FavoritesModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
+                HomeScreenComponents.FavoritesModel.addFavorite(storageId, pos, HomeScreenComponents.ApplicationListModel.Favorites)
                 let item = launcherRepeater.itemAt(pos);
 
                 if (item) {
@@ -110,9 +125,8 @@ DragDrop.DropArea {
                 return;
             }
 
-
-            let pos = plasmoid.nativeInterface.applicationListModel.count;
-            plasmoid.nativeInterface.applicationListModel.addFavorite(storageId, pos, ApplicationListModel.Desktop)
+            let pos = HomeScreenComponents.FavoritesModel.count;
+            HomeScreenComponents.FavoritesModel.addFavorite(storageId, pos, HomeScreenComponents.ApplicationListModel.Desktop)
             let item = launcherRepeater.itemAt(pos);
 
             event.accept(event.proposedAction);
@@ -136,7 +150,7 @@ DragDrop.DropArea {
 
         anchors {
             fill: parent
-            bottomMargin: favoriteStrip.height
+            bottomMargin: dropArea.favoriteStrip ? dropArea.favoriteStrip.height : 0
         }
 
         signal appletsLayoutInteracted
@@ -176,88 +190,8 @@ DragDrop.DropArea {
             print("Applet: "+applet+" "+x+" "+y)
             return true;
         }
-
-        appletContainerComponent: ContainmentLayoutManager.BasicAppletContainer {
-            id: appletContainer
-            configOverlayComponent: Private.ConfigOverlay {}
-
-            onEditModeChanged: {
-                launcherDragManager.active = dragActive || editMode;
-            }
-
-            property real dragCenterX
-            property real dragCenterY
-
-            editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
-
-            onDragActiveChanged: {
-                launcherDragManager.active = dragActive || editMode;
-                if (dragActive) {
-                    // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
-                    launcherDragManager.startDrag(appletContainer);
-                    launcherDragManager.currentlyDraggedDelegate = appletContainer;
-                    // Reparenting removed focus
-                    appletContainer.forceActiveFocus();
-                } else {
-                    launcherDragManager.dropItem(appletContainer, dragCenterX, dragCenterY);
-                    plasmoid.editMode = false;
-                    launcherRepeater.stopScrollRequested();
-                    launcherDragManager.currentlyDraggedDelegate = null;
-                    forceActiveFocus();
-                }
-            }
-            onUserDrag: {
-                dragCenterX = dragCenter.x;
-                dragCenterY = dragCenter.y;
-                launcherDragManager.dragItem(appletContainer, dragCenter.x, dragCenter.y);
-
-                var pos = plasmoid.fullRepresentationItem.mapFromItem(appletContainer, dragCenter.x, dragCenter.y);
-
-                //SCROLL LEFT
-                if (pos.x < units.gridUnit) {
-                    launcherRepeater.scrollLeftRequested();
-                //SCROLL RIGHT
-                } else if (pos.x > mainFlickable.width - units.gridUnit) {
-                    launcherRepeater.scrollRightRequested();
-                //DON't SCROLL
-                } else {
-                    launcherRepeater.stopScrollRequested();
-                }
-
-                appletContainer.x = Math.max(0, Math.min(mainFlickable.width - appletContainer.width, appletContainer.x));
-            }
-            Connections {
-                target: appletsLayout
-                function onAppletsLayoutInteracted() {
-                    appletContainer.editMode = false;
-                }
-            }
-            Connections {
-                target: dropArea
-                function onWidthChanged () {
-                    let spaceReleased = false;
-                    if (appletContainer.width > mainFlickable.width || appletContainer.height > mainFlickable.height) {
-                        appletContainer.width = Math.min(appletContainer.width, mainFlickable.width);
-                        appletContainer.height = Math.min(appletContainer.height, mainFlickable.height);
-                        spaceReleased = true;
-                    }
-                    if (Math.floor((appletContainer.x) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width)) {
-                        appletsLayout.releaseSpace(appletContainer);
-                        appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width) * mainFlickable.width;
-                        appletsLayout.positionItem(appletContainer);
-                        spaceReleased = false;
-
-                    } else if (Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width)) {
-                        appletsLayout.releaseSpace(appletContainer);
-                        appletContainer.x = Math.ceil(appletContainer.x / mainFlickable.width) * mainFlickable.width - appletContainer.width;
-                        appletsLayout.positionItem(appletContainer);
-                        spaceReleased = false;
-                    }
-                    if (spaceReleased) {
-                        appletsLayout.positionItem(appletContainer);
-                    }
-                }
-            }
+        appletContainerComponent: MobileAppletContainer {
+            launcherDragManager: dropArea.launcherDragManager
         }
 
         placeHolder: ContainmentLayoutManager.PlaceHolder {}

@@ -16,8 +16,6 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
-import org.kde.phone.homescreen 1.0
-
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 

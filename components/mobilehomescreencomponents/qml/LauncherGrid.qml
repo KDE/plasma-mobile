@@ -17,7 +17,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
-import org.kde.phone.homescreen 1.0
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 LauncherContainer {
     id: root
@@ -32,7 +32,7 @@ LauncherContainer {
 
     Repeater {
         parent: root.flow
-        model: plasmoid.nativeInterface.applicationListModel
+        model: HomeScreenComponents.ApplicationListModel
         delegate: HomeDelegate {
             id: delegate
             width: root.cellWidth
@@ -41,16 +41,16 @@ LauncherContainer {
             parent: parentFromLocation
             property Item parentFromLocation: {
                 switch (model.applicationLocation) {
-                case ApplicationListModel.Desktop:
+                case HomeScreenComponents.ApplicationListModel.Desktop:
                     return appletsLayout;
-                case ApplicationListModel.Favorites:
+                case HomeScreenComponents.ApplicationListModel.Favorites:
                     return favoriteStrip.flow;
                 default:
                     return root.flow;
                 }
             }
             Component.onCompleted: {
-                if (model.applicationLocation === ApplicationListModel.Desktop) {
+                if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Desktop) {
                     appletsLayout.restoreItem(delegate);
                 }
             }
@@ -68,11 +68,11 @@ LauncherContainer {
             onParentFromLocationChanged: {
                 if (!launcherDragManager.active && parent != parentFromLocation) {
                     parent = parentFromLocation;
-                    if (model.applicationLocation === ApplicationListModel.Favorites) {
+                    if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Favorites) {
                         plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[index]);
 
-                    } else if (model.applicationLocation === ApplicationListModel.Grid) {
-                        plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - plasmoid.nativeInterface.applicationListModel.favoriteCount)]);
+                    } else if (model.applicationLocation === HomeScreenComponents.ApplicationListModel.Grid) {
+                        plasmoid.nativeInterface.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - HomeScreenComponents.ApplicationListModel.favoriteCount)]);
                     }
                 }
             }
