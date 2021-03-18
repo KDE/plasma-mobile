@@ -228,7 +228,9 @@ Item {
                 
                 QuickSettingsPanel {
                     id: quickSettings
+
                     property int trueHeight: height + Math.round(Kirigami.Units.gridUnit * 1.5) // add height of bottom bar
+
                     z: 4
                     Layout.alignment: Qt.AlignTop
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
