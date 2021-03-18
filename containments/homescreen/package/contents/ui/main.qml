@@ -67,6 +67,12 @@ Item {
         plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / appletsLayout.cellWidth));
     }
 
+    function snapPage() {
+        scrollAnim.running = false;
+        scrollAnim.to = mainFlickable.width * Math.round(mainFlickable.contentX / mainFlickable.width)
+        scrollAnim.running = true;
+    }
+
 //END functions
 
 
@@ -177,47 +183,14 @@ Item {
         onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
 
         LauncherPrivate.DragGestureHandler {
+            id: gestureHandler
+            target: appletsLayout
             appDrawer: appDrawer
             mainFlickable: mainFlickable
             enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
+            onSnapPage: root.snapPage();
         }
-/*
-        DragHandler {
-            target: mainFlickable
-            yAxis.enabled: !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
-            xAxis.enabled: yAxis.enabled
-            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open
-            property real initialMainFlickableX
-            enum ScrollDirection {
-                None,
-                Horizontal,
-                Vertical
-            }
-            property int scrollDirection: None
-            onTranslationChanged: {print(translation.x)
-                if (active) {
-                    if (appDrawer.offset > PlasmaCore.Units.gridUnit) {
-                        scrollDirection = Vertical;
-                    } else if (Math.abs(mainFlickable.contentX - initialMainFlickableX) > PlasmaCore.Units.gridUnit) {
-                        scrollDirection = Horizontal;
-                    }
-                    if (scrollDirection !== Horizontal) {
-                        appDrawer.offset = -translation.y;
-                    }
-                    if (scrollDirection !== Vertical) {
-                        mainFlickable.contentX = Math.max(0, initialMainFlickableX - translation.x);
-                    }
-                }
-            }
-            onActiveChanged: {
-                if (active) {
-                    initialMainFlickableX = mainFlickable.contentX;
-                } else {
-                    appDrawer.snapDrawerStatus();
-                }
-            }
-        }
-*/
+
         NumberAnimation {
             id: scrollAnim
             target: mainFlickable
@@ -326,7 +299,7 @@ Item {
                 }
 
                 signal appletsLayoutInteracted
-onChildrenRectChanged: print("AAAAAA"+childrenRect.width)
+
                 TapHandler {
                     target: mainFlickable
                     enabled: appDrawer.status !== Launcher.AppDrawer.Status.Open
@@ -441,20 +414,12 @@ onChildrenRectChanged: print("AAAAAA"+childrenRect.width)
         }
         appletsLayout: appletsLayout
 
-        DragHandler {
+        LauncherPrivate.DragGestureHandler {
             target: favoriteStrip
-            yAxis.enabled: !appletsLayout.editMode
-            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open
-            onTranslationChanged: {
-                if (active) {
-                    appDrawer.offset = -translation.y
-                }
-            }
-            onActiveChanged: {
-                if (!active) {
-                    appDrawer.snapDrawerStatus();
-                }
-            }
+            appDrawer: appDrawer
+            mainFlickable: mainFlickable
+            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
+            onSnapPage: root.snapPage();
         }
         TapHandler {
             target: favoriteStrip

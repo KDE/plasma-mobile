@@ -15,20 +15,26 @@ DragHandler {
     xAxis.enabled: enabled
     property Flickable mainFlickable
     property Launcher.AppDrawer appDrawer
+    signal snapPage
+
     enum ScrollDirection {
         None,
         Horizontal,
         Vertical
     }
+
     property real __initialMainFlickableX
     property int __scrollDirection: DragGestureHandler.None
-    onTranslationChanged: {print(translation.x)
+    onTranslationChanged: {
         if (active) {
             if (appDrawer.offset > PlasmaCore.Units.gridUnit) {
                 __scrollDirection = DragGestureHandler.Vertical;
+                snapPage();
             } else if (Math.abs(mainFlickable.contentX - __initialMainFlickableX) > PlasmaCore.Units.gridUnit) {
                 __scrollDirection = DragGestureHandler.Horizontal;
+                appDrawer.close();
             }
+
             if (__scrollDirection !== DragGestureHandler.Horizontal) {
                 appDrawer.offset = -translation.y;
             }
@@ -41,7 +47,9 @@ DragHandler {
         if (active) {
             __initialMainFlickableX = mainFlickable.contentX;
         } else {
+            __scrollDirection = DragGestureHandler.None;
             appDrawer.snapDrawerStatus();
+            snapPage();
         }
     }
 }
