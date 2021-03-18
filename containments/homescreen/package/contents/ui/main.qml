@@ -24,7 +24,7 @@ import org.kde.phone.homescreen 1.0
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-Item {
+FocusScope {
     id: root
     width: 640
     height: 480
