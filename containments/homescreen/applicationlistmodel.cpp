@@ -158,8 +158,9 @@ void ApplicationListModel::loadApplications()
     m_applicationList.clear();
 
     KServiceGroup::Ptr group = KServiceGroup::root();
-    if (!group || !group->isValid())
+    if (!group || !group->isValid()) {
         return;
+    }
     KServiceGroup::List subGroupList = group->entries(true);
 
     QMap<int, ApplicationData> orderedList;
@@ -278,8 +279,9 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 
 Qt::ItemFlags ApplicationListModel::flags(const QModelIndex &index) const
 {
-    if (!index.isValid())
+    if (!index.isValid()) {
         return {};
+    }
     return Qt::ItemIsDragEnabled | QAbstractListModel::flags(index);
 }
 
