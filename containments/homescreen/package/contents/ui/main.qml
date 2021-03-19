@@ -152,8 +152,7 @@ FocusScope {
         favoriteStrip: favoriteStrip
     }
 
-    //TODO: this flickable does nothing for now, will be used for horizontal paging
-    Flickable {
+    Launcher.FlickablePages {
         id: mainFlickable
 
         anchors {
@@ -161,44 +160,6 @@ FocusScope {
             topMargin: plasmoid.availableScreenRect.y
             bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
-
-        opacity: 1 - appDrawer.openFactor
-        transform: Translate {
-            y: -mainFlickable.height/10 * appDrawer.openFactor
-        }
-        scale: (3 - appDrawer.openFactor) /3
-
-        //bottomMargin: favoriteStrip.height
-        contentWidth: appletsLayout.width
-        contentHeight: height
-        //interactive: !plasmoid.editMode && !launcherDragManager.active
-        interactive: false
-
-        signal cancelEditModeForItemsRequested
-        onDragStarted: cancelEditModeForItemsRequested()
-        onDragEnded: cancelEditModeForItemsRequested()
-        onFlickStarted: cancelEditModeForItemsRequested()
-        onFlickEnded: cancelEditModeForItemsRequested()
-
-        onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
-
-        LauncherPrivate.DragGestureHandler {
-            id: gestureHandler
-            target: appletsLayout
-            appDrawer: appDrawer
-            mainFlickable: mainFlickable
-            enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
-            onSnapPage: root.snapPage();
-        }
-
-        NumberAnimation {
-            id: scrollAnim
-            target: mainFlickable
-            properties: "contentX"
-            duration: units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-
 
         // TODO: span on multiple pages
         DragDrop.DropArea {
@@ -363,19 +324,6 @@ FocusScope {
                     favoriteStrip: favoriteStrip
                 }
             }
-        }
-        PlasmaComponents.PageIndicator {
-            anchors {
-                bottom: parent.bottom
-                horizontalCenter: parent.horizontalCenter
-                bottomMargin: PlasmaCore.Units.gridUnit * 2
-            }
-            PlasmaCore.ColorScope.inherit: false
-            PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-            parent: mainFlickable
-            count: Math.ceil(dropArea.width / mainFlickable.width)
-            visible: count > 1
-            currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
         }
     }
 
