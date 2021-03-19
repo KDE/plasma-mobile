@@ -39,7 +39,7 @@ public:
     enum LauncherLocation {
         Grid = 0,
         Favorites,
-        Desktop
+        Desktop,
     };
     Q_ENUM(LauncherLocation)
 
@@ -63,7 +63,7 @@ public:
         ApplicationStartupNotifyRole,
         ApplicationLocationRole,
         ApplicationRunningRole,
-        ApplicationUniqueIdRole
+        ApplicationUniqueIdRole,
     };
 
     ApplicationListModel(HomeScreen *parent = nullptr);

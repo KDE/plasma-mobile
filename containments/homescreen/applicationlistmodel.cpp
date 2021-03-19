@@ -79,7 +79,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
         {ApplicationStartupNotifyRole, QByteArrayLiteral("applicationStartupNotify")},
         {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")},
         {ApplicationRunningRole, QByteArrayLiteral("applicationRunning")},
-        {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")}
+        {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")},
     };
 }
 
@@ -190,11 +190,10 @@ void ApplicationListModel::loadApplications()
                     } else if (entry->property(QStringLiteral("Exec")).isValid()) {
                         KService::Ptr service(static_cast<KService *>(entry.data()));
 
-                        if (service->isApplication() &&
-                            !blacklist.contains(service->desktopEntryName()) &&
-                            service->showOnCurrentPlatform() &&
-                            !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
-
+                        if (service->isApplication() //
+                            && !blacklist.contains(service->desktopEntryName()) //
+                            && service->showOnCurrentPlatform() //
+                            && !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
                             ApplicationData data;
                             data.name = service->name();
                             data.icon = service->icon();
