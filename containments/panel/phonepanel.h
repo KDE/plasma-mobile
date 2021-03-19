@@ -7,11 +7,10 @@
 #ifndef PHONEPANEL_H
 #define PHONEPANEL_H
 
-
 #include <Plasma/Containment>
 
-#include <KSharedConfig>
 #include <KConfigWatcher>
+#include <KSharedConfig>
 
 #include "kscreeninterface.h"
 #include "screenshotinterface.h"
@@ -22,8 +21,9 @@ class PhonePanel : public Plasma::Containment
     Q_PROPERTY(bool autoRotateEnabled READ autoRotate WRITE setAutoRotate NOTIFY autoRotateChanged);
     Q_PROPERTY(bool torchEnabled READ torchEnabled NOTIFY torchChanged);
     Q_PROPERTY(bool isSystem24HourFormat READ isSystem24HourFormat NOTIFY isSystem24HourFormatChanged);
+
 public:
-    PhonePanel( QObject *parent, const QVariantList &args );
+    PhonePanel(QObject *parent, const QVariantList &args);
     ~PhonePanel() override;
 
 public Q_SLOTS:
@@ -33,9 +33,9 @@ public Q_SLOTS:
 
     bool autoRotate();
     void setAutoRotate(bool value);
-    
+
     bool torchEnabled() const;
-    
+
     bool isSystem24HourFormat();
 
 signals:
@@ -45,7 +45,7 @@ signals:
 
 private:
     bool m_running = false;
-    
+
     KConfigWatcher::Ptr m_localeConfigWatcher;
     KSharedConfig::Ptr m_localeConfig;
 

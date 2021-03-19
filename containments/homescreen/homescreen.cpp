@@ -7,9 +7,9 @@
 #include "applicationlistmodel.h"
 #include "favoritesmodel.h"
 
-#include <QtQml>
 #include <QDebug>
 #include <QQuickItem>
+#include <QtQml>
 
 HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
     : Plasma::Containment(parent, args)

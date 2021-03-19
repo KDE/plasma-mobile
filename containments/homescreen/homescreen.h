@@ -7,7 +7,6 @@
 #ifndef HOMESCREEN_H
 #define HOMESCREEN_H
 
-
 #include <Plasma/Containment>
 
 class QQuickItem;
@@ -20,7 +19,7 @@ class HomeScreen : public Plasma::Containment
     Q_PROPERTY(ApplicationListModel *applicationListModel READ applicationListModel CONSTANT)
 
 public:
-    HomeScreen( QObject *parent, const QVariantList &args );
+    HomeScreen(QObject *parent, const QVariantList &args);
     ~HomeScreen() override;
 
     void configChanged() override;
@@ -31,7 +30,7 @@ public:
     Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
 
 protected:
-   // void configChanged() override;
+    // void configChanged() override;
 
 private:
     ApplicationListModel *m_applicationListModel = nullptr;

@@ -33,7 +33,7 @@ class TaskPanel : public Plasma::Containment
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
 
 public:
-    TaskPanel( QObject *parent, const QVariantList &args );
+    TaskPanel(QObject *parent, const QVariantList &args);
     ~TaskPanel() override;
 
     QWindow *panel();
@@ -41,12 +41,14 @@ public:
 
     Q_INVOKABLE void closeActiveWindow();
 
-    bool isShowingDesktop() const {
+    bool isShowingDesktop() const
+    {
         return m_showingDesktop;
     }
     void requestShowingDesktop(bool showingDesktop);
 
-    bool allMinimized() const {
+    bool allMinimized() const
+    {
         return m_allMinimized;
     }
     bool hasCloseableActiveWindow() const;

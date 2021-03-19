@@ -8,9 +8,9 @@
 #define APPLICATIONLISTMODEL_H
 
 // Qt
-#include <QObject>
 #include <QAbstractListModel>
 #include <QList>
+#include <QObject>
 #include <QSet>
 
 #include "homescreen.h"
@@ -28,7 +28,8 @@ class PlasmaWindow;
 
 class ApplicationListModel;
 
-class ApplicationListModel : public QAbstractListModel {
+class ApplicationListModel : public QAbstractListModel
+{
     Q_OBJECT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
@@ -75,8 +76,14 @@ public:
 
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
 
-    int count() const { return m_applicationList.count(); }
-    int favoriteCount() const { return m_favorites.count();}
+    int count() const
+    {
+        return m_applicationList.count();
+    }
+    int favoriteCount() const
+    {
+        return m_favorites.count();
+    }
 
     int maxFavoriteCount() const;
     void setMaxFavoriteCount(int count);
@@ -102,7 +109,7 @@ public:
     Q_INVOKABLE void unsetMinimizedDelegate(int row, QQuickItem *delegate);
 
 public Q_SLOTS:
-     void sycocaDbChanged(const QStringList &change);
+    void sycocaDbChanged(const QStringList &change);
 
 Q_SIGNALS:
     void countChanged();
