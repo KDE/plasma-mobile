@@ -5,4 +5,5 @@ build
 *.includes
 *.user
 
-*.kdev4
+/.clang-format
+/.clangd
