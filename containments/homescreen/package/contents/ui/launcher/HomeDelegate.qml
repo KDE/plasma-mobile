@@ -107,10 +107,10 @@ ContainmentLayoutManager.ItemContainer {
 
         var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
         //SCROLL LEFT
-        if (pos.x < plasmoid.availableScreenRect.x + units.gridUnit) {
+        if (pos.x < units.gridUnit) {
             plasmoid.fullRepresentationItem.scrollLeft();
         //SCROLL RIGHT
-        } else if (pos.x > plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width - units.gridUnit) {
+        } else if (pos.x > mainFlickable.width - units.gridUnit) {
             plasmoid.fullRepresentationItem.scrollRight();
         //DON't SCROLL
         } else {
