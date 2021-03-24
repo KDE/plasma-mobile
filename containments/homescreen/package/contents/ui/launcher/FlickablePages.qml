@@ -13,9 +13,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
-import "launcher" as Launcher
-//TODO: everything using this will eventually move in Launcher
-import "launcher/private" as LauncherPrivate
+import "private" as Private
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
@@ -27,11 +25,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Flickable {
     id: mainFlickable
 
-    anchors {
-        fill: parent
-        topMargin: plasmoid.availableScreenRect.y
-        bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
-    }
+    property AppDrawer appDrawer
 
     opacity: 1 - appDrawer.openFactor
     transform: Translate {
@@ -53,13 +47,63 @@ Flickable {
 
     onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
 
-    LauncherPrivate.DragGestureHandler {
+
+        //Autoscroll related functions
+    function scrollLeft() {
+        if (mainFlickable.atXBeginning) {
+            return;
+        }
+        autoScrollTimer.scrollRight = false;
+        autoScrollTimer.running = true;
+        scrollLeftIndicator.opacity = 1;
+        scrollRightIndicator.opacity = 0;
+    }
+
+    function scrollRight() {
+        if (mainFlickable.atXEnd) {
+            return;
+        }
+        autoScrollTimer.scrollRight = true;
+        autoScrollTimer.running = true;
+        scrollLeftIndicator.opacity = 0;
+        scrollRightIndicator.opacity = 1;
+    }
+
+    function stopScroll() {
+        autoScrollTimer.running = false;
+        scrollLeftIndicator.opacity = 0;
+        scrollRightIndicator.opacity = 0;
+    }
+
+    function snapPage() {
+        scrollAnim.running = false;
+        scrollAnim.to = mainFlickable.width * Math.round(mainFlickable.contentX / mainFlickable.width)
+        scrollAnim.running = true;
+    }
+
+    Timer {
+        id: autoScrollTimer
+        property bool scrollRight: true
+        repeat: true
+        interval: 1500
+        onTriggered: {
+            scrollAnim.to = scrollRight ?
+            //Scroll Right
+                Math.min(mainFlickable.contentItem.width - mainFlickable.width, mainFlickable.contentX + mainFlickable.width) :
+            //Scroll Left
+                Math.max(0, mainFlickable.contentX - mainFlickable.width);
+
+            scrollAnim.running = true;
+        }
+    }
+
+    Private.DragGestureHandler {
         id: gestureHandler
         target: appletsLayout
-        appDrawer: appDrawer
+        appDrawer: mainFlickable.appDrawer
         mainFlickable: mainFlickable
-        enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
-        onSnapPage: root.snapPage();
+        enabled: root.focus && appDrawer.status !== AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
+        onSnapPage: mainFlickable.snapPage();
     }
 
     NumberAnimation {
@@ -83,6 +127,25 @@ Flickable {
         count: Math.ceil(dropArea.width / mainFlickable.width)
         visible: count > 1
         currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
+    }
+
+    Private.ScrollIndicator {
+        id: scrollLeftIndicator
+        parent: mainFlickable
+        anchors {
+            left: parent.left
+            leftMargin: units.smallSpacing
+        }
+        elementId: "left-arrow"
+    }
+    Private.ScrollIndicator {
+        id: scrollRightIndicator
+        parent: mainFlickable
+        anchors {
+            right: parent.right
+            rightMargin: units.smallSpacing
+        }
+        elementId: "right-arrow"
     }
 }
 

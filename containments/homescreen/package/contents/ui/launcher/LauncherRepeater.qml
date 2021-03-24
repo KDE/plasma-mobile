@@ -28,6 +28,10 @@ Repeater {
     property int cellWidth
     property int cellHeight
 
+    signal scrollLeftRequested
+    signal scrollRightRequested
+    signal stopScrollRequested
+
     delegate: HomeDelegate {
         id: delegate
         width: launcherRepeater.cellWidth
@@ -54,6 +58,44 @@ Repeater {
         Component.onCompleted: {
             if (model.applicationLocation === ApplicationListModel.Desktop) {
                 appletsLayout.restoreItem(delegate);
+            }
+        }
+
+        onUserDrag: {
+            dragCenterX = dragCenter.x;
+            dragCenterY = dragCenter.y;
+            launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
+
+            delegate.width = appletsLayout.cellWidth;
+            delegate.height = appletsLayout.cellHeight;
+
+            var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
+
+            //SCROLL LEFT
+            if (pos.x < units.gridUnit) {
+                launcherRepeater.scrollLeftRequested();
+            //SCROLL RIGHT
+            } else if (pos.x > mainFlickable.width - units.gridUnit) {
+                launcherRepeater.scrollRightRequested();
+            //DON't SCROLL
+            } else {
+                launcherRepeater.stopScrollRequested();
+            }
+        }
+
+        onDragActiveChanged: {
+            launcherDragManager.active = dragActive
+            if (dragActive) {
+                // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
+                launcherDragManager.startDrag(delegate);
+                launcherDragManager.currentlyDraggedDelegate = delegate;
+            } else {
+                launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
+                plasmoid.editMode = false;
+                editMode = false;
+                launcherRepeater.stopScrollRequested();
+                launcherDragManager.currentlyDraggedDelegate = null;
+                forceActiveFocus();
             }
         }
 

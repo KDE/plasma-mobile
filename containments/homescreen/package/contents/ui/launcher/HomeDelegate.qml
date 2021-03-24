@@ -57,6 +57,12 @@ ContainmentLayoutManager.ItemContainer {
     onApplicationRunningChanged: {
         syncDelegateGeometry();
     }
+    onDragActiveChanged: {
+        if (dragActive) {
+            removeButton.show();
+            mouseArea.enabled = true;
+        }
+    }
     Connections {
         target: mainFlickable
         function onCancelEditModeForItemsRequested() {
@@ -76,45 +82,6 @@ ContainmentLayoutManager.ItemContainer {
         target: appletsLayout
         function onAppletsLayoutInteracted() {
             removeButton.hide();
-        }
-    }
-
-    onDragActiveChanged: {
-        launcherDragManager.active = dragActive
-        if (dragActive) {
-            // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
-            launcherDragManager.startDrag(delegate);
-            launcherDragManager.currentlyDraggedDelegate = delegate;
-            removeButton.show();
-            mouseArea.enabled = true;
-        } else {
-            launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
-            plasmoid.editMode = false;
-            editMode = false;
-            plasmoid.fullRepresentationItem.stopScroll();
-            launcherDragManager.currentlyDraggedDelegate = null;
-            forceActiveFocus();
-        }
-    }
-
-    onUserDrag: {
-        dragCenterX = dragCenter.x;
-        dragCenterY = dragCenter.y;
-        launcherDragManager.dragItem(delegate, dragCenter.x, dragCenter.y);
-
-        delegate.width = appletsLayout.cellWidth;
-        delegate.height = appletsLayout.cellHeight;
-
-        var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
-        //SCROLL LEFT
-        if (pos.x < units.gridUnit) {
-            plasmoid.fullRepresentationItem.scrollLeft();
-        //SCROLL RIGHT
-        } else if (pos.x > mainFlickable.width - units.gridUnit) {
-            plasmoid.fullRepresentationItem.scrollRight();
-        //DON't SCROLL
-        } else {
-            plasmoid.fullRepresentationItem.stopScroll();
         }
     }
 

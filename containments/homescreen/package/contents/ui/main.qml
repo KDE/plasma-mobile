@@ -32,32 +32,6 @@ FocusScope {
     property Item toolBox
 
 //BEGIN functions
-    //Autoscroll related functions
-    function scrollLeft() {
-        if (mainFlickable.atXBeginning) {
-            return;
-        }
-        autoScrollTimer.scrollRight = false;
-        autoScrollTimer.running = true;
-        scrollLeftIndicator.opacity = 1;
-        scrollRightIndicator.opacity = 0;
-    }
-
-    function scrollRight() {
-        if (mainFlickable.atXEnd) {
-            return;
-        }
-        autoScrollTimer.scrollRight = true;
-        autoScrollTimer.running = true;
-        scrollLeftIndicator.opacity = 0;
-        scrollRightIndicator.opacity = 1;
-    }
-
-    function stopScroll() {
-        autoScrollTimer.running = false;
-        scrollLeftIndicator.opacity = 0;
-        scrollRightIndicator.opacity = 0;
-    }
 
     function recalculateMaxFavoriteCount() {
         if (!componentComplete) {
@@ -65,12 +39,6 @@ FocusScope {
         }
 
         plasmoid.nativeInterface.applicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / appletsLayout.cellWidth));
-    }
-
-    function snapPage() {
-        scrollAnim.running = false;
-        scrollAnim.to = mainFlickable.width * Math.round(mainFlickable.contentX / mainFlickable.width)
-        scrollAnim.running = true;
     }
 
 //END functions
@@ -121,25 +89,9 @@ FocusScope {
         }
     }
 
-    Timer {
-        id: autoScrollTimer
-        property bool scrollRight: true
-        repeat: true
-        interval: 1500
-        onTriggered: {
-            scrollAnim.to = scrollRight ?
-            //Scroll Right
-                Math.min(mainFlickable.contentItem.width - mainFlickable.width, mainFlickable.contentX + mainFlickable.width) :
-            //Scroll Left
-                Math.max(0, mainFlickable.contentX - mainFlickable.width);
-
-            scrollAnim.running = true;
-        }
-    }
-
     Connections {
         target: plasmoid
-        onEditModeChanged: {
+        function onEditModeChanged() {
             appletsLayout.editMode = plasmoid.editMode
         }
     }
@@ -160,6 +112,8 @@ FocusScope {
             topMargin: plasmoid.availableScreenRect.y
             bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
+
+        appDrawer: appDrawer
 
         // TODO: span on multiple pages
         DragDrop.DropArea {
@@ -322,6 +276,9 @@ FocusScope {
                     cellHeight: appletsLayout.cellHeight
                     appletsLayout: appletsLayout
                     favoriteStrip: favoriteStrip
+                    onScrollLeftRequested: mainFlickable.scrollLeft()
+                    onScrollRightRequested: mainFlickable.scrollRight()
+                    onStopScrollRequested: mainFlickable.stopScroll()
                 }
             }
         }
@@ -333,23 +290,6 @@ FocusScope {
 
         topPadding: plasmoid.availableScreenRect.y
         bottomPadding: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
-    }
-
-    ScrollIndicator {
-        id: scrollLeftIndicator
-        anchors {
-            left: parent.left
-            leftMargin: units.smallSpacing
-        }
-        elementId: "left-arrow"
-    }
-    ScrollIndicator {
-        id: scrollRightIndicator
-        anchors {
-            right: parent.right
-            rightMargin: units.smallSpacing
-        }
-        elementId: "right-arrow"
     }
 
     Launcher.FavoriteStrip {
@@ -367,7 +307,7 @@ FocusScope {
             appDrawer: appDrawer
             mainFlickable: mainFlickable
             enabled: root.focus && appDrawer.status !== Launcher.AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
-            onSnapPage: root.snapPage();
+            onSnapPage: mainFlickable.snapPage();
         }
         TapHandler {
             target: favoriteStrip

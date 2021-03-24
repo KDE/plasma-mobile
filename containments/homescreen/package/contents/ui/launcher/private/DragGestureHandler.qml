@@ -11,6 +11,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import ".." as Launcher
 
 DragHandler {
+    id: root
     yAxis.enabled: enabled
     xAxis.enabled: enabled
     property Flickable mainFlickable
@@ -27,16 +28,16 @@ DragHandler {
     property int __scrollDirection: DragGestureHandler.None
     onTranslationChanged: {
         if (active) {
-            if (appDrawer.offset > PlasmaCore.Units.gridUnit) {
+            if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
                 __scrollDirection = DragGestureHandler.Vertical;
                 snapPage();
             } else if (Math.abs(mainFlickable.contentX - __initialMainFlickableX) > PlasmaCore.Units.gridUnit) {
                 __scrollDirection = DragGestureHandler.Horizontal;
-                appDrawer.close();
+                root.appDrawer.close();
             }
 
             if (__scrollDirection !== DragGestureHandler.Horizontal) {
-                appDrawer.offset = -translation.y;
+                root.appDrawer.offset = -translation.y;
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
                 mainFlickable.contentX = Math.max(0, __initialMainFlickableX - translation.x);
@@ -48,7 +49,7 @@ DragHandler {
             __initialMainFlickableX = mainFlickable.contentX;
         } else {
             __scrollDirection = DragGestureHandler.None;
-            appDrawer.snapDrawerStatus();
+            root.appDrawer.snapDrawerStatus();
             snapPage();
         }
     }
