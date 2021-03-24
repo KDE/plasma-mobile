@@ -27,6 +27,9 @@ Flickable {
 
     property AppDrawer appDrawer
 
+    readonly property int totalPages: Math.ceil(contentWidth / width)
+    property int currentIndex: 0
+
     opacity: 1 - appDrawer.openFactor
     transform: Translate {
         y: -mainFlickable.height/10 * appDrawer.openFactor
@@ -34,7 +37,6 @@ Flickable {
     scale: (3 - appDrawer.openFactor) /3
 
     //bottomMargin: favoriteStrip.height
-    contentWidth: appletsLayout.width
     contentHeight: height
     //interactive: !plasmoid.editMode && !launcherDragManager.active
     interactive: false
@@ -45,10 +47,11 @@ Flickable {
     onFlickStarted: cancelEditModeForItemsRequested()
     onFlickEnded: cancelEditModeForItemsRequested()
 
-    onContentYChanged: MobileShell.HomeScreenControls.homeScreenPosition = contentY
+    onCurrentIndexChanged: contentX = width * currentIndex;
+    onContentXChanged: mainFlickable.currentIndex = Math.floor(contentX / width)
 
 
-        //Autoscroll related functions
+    //Autoscroll related functions
     function scrollLeft() {
         if (mainFlickable.atXBeginning) {
             return;
@@ -124,7 +127,7 @@ Flickable {
         PlasmaCore.ColorScope.inherit: false
         PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
         parent: mainFlickable
-        count: Math.ceil(dropArea.width / mainFlickable.width)
+        count: mainFlickable.totalPages
         visible: count > 1
         currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
     }

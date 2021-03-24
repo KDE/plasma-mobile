@@ -114,12 +114,14 @@ FocusScope {
         }
 
         appDrawer: appDrawer
+        contentWidth: Math.max(width, width * Math.ceil(appletsLayout.childrenRect.width/width)) + (launcherDragManager.active ? width : 0)
 
         // TODO: span on multiple pages
         DragDrop.DropArea {
             id: dropArea
-            width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
-            height: mainFlickable.height + favoriteStrip.height
+            width: mainFlickable.width * 100
+            //width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
+            height: mainFlickable.height + favoriteStrip.height + units.gridUnit
 
             onDragEnter: {
                 event.accept(event.proposedAction);
