@@ -40,7 +40,7 @@ DragHandler {
                 root.appDrawer.offset = -translation.y;
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
-                mainFlickable.contentX = Math.max(0, __initialMainFlickableX - translation.x);
+                mainFlickable.contentX = Math.min((mainFlickable.width * mainFlickable.totalPages) - mainFlickable.width, Math.max(0, __initialMainFlickableX - translation.x))
             }
         }
     }
