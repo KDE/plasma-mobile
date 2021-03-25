@@ -84,6 +84,18 @@ Flickable {
         scrollAnim.running = true;
     }
 
+    function snapNextPage() {
+        scrollAnim.running = false;
+        scrollAnim.to = mainFlickable.width * Math.ceil(mainFlickable.contentX / mainFlickable.width)
+        scrollAnim.running = true;
+    }
+
+    function snapPrevPage() {
+        scrollAnim.running = false;
+        scrollAnim.to = mainFlickable.width * Math.floor(mainFlickable.contentX / mainFlickable.width)
+        scrollAnim.running = true;
+    }
+
     Timer {
         id: autoScrollTimer
         property bool scrollRight: true
@@ -107,6 +119,8 @@ Flickable {
         mainFlickable: mainFlickable
         enabled: root.focus && appDrawer.status !== AppDrawer.Status.Open && !appletsLayout.editMode && !plasmoid.editMode && !launcherDragManager.active
         onSnapPage: mainFlickable.snapPage();
+        onSnapNextPage: mainFlickable.snapNextPage();
+        onSnapPrevPage: mainFlickable.snapPrevPage();
     }
 
     NumberAnimation {

@@ -17,10 +17,13 @@ DragHandler {
     property Flickable mainFlickable
     property Launcher.AppDrawer appDrawer
     signal snapPage
+    signal snapNextPage
+    signal snapPrevPage
 
     enum ScrollDirection {
         None,
-        Horizontal,
+        Left,
+        Right,
         Vertical
     }
 
@@ -31,16 +34,27 @@ DragHandler {
             if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
                 __scrollDirection = DragGestureHandler.Vertical;
                 snapPage();
-            } else if (Math.abs(mainFlickable.contentX - __initialMainFlickableX) > PlasmaCore.Units.gridUnit) {
-                __scrollDirection = DragGestureHandler.Horizontal;
+            } else if (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit) {
+                __scrollDirection = DragGestureHandler.Right;
+                root.appDrawer.close();
+            } else if (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit) {
+                __scrollDirection = DragGestureHandler.Left;
                 root.appDrawer.close();
             }
 
-            if (__scrollDirection !== DragGestureHandler.Horizontal) {
+            if (__scrollDirection !== DragGestureHandler.Left || __scrollDirection !== DragGestureHandler.Right) {
                 root.appDrawer.offset = -translation.y;
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
-                mainFlickable.contentX = Math.min((mainFlickable.width * mainFlickable.totalPages) - mainFlickable.width, Math.max(0, __initialMainFlickableX - translation.x))
+                let newContentX = Math.min((mainFlickable.width * mainFlickable.totalPages) - mainFlickable.width, Math.max(0, __initialMainFlickableX - translation.x));
+
+                if (mainFlickable.contentX < newContentX) {
+                    __scrollDirection = DragGestureHandler.Right;
+                } else {
+                    __scrollDirection = DragGestureHandler.Left;
+                }
+
+                mainFlickable.contentX = newContentX;
             }
         }
     }
@@ -48,9 +62,15 @@ DragHandler {
         if (active) {
             __initialMainFlickableX = mainFlickable.contentX;
         } else {
-            __scrollDirection = DragGestureHandler.None;
             root.appDrawer.snapDrawerStatus();
-            snapPage();
+            if (__scrollDirection === DragGestureHandler.Left && (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit * 5)) {
+                snapPrevPage();
+            } else if (__scrollDirection === DragGestureHandler.Right && (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit * 5)) {
+                snapNextPage();
+            } else {print("normal");
+                snapPage();
+            }
+            __scrollDirection = DragGestureHandler.None;
         }
     }
 }
