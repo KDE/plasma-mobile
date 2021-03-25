@@ -14,7 +14,6 @@
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmashell.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
-#include <KWayland/Client/plasmawindowmodel.h>
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 #include <Plasma/Package>

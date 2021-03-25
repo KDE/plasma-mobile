@@ -17,7 +17,6 @@ namespace Client
 {
 class PlasmaWindowManagement;
 class PlasmaWindow;
-class PlasmaWindowModel;
 class PlasmaShell;
 class PlasmaShellSurface;
 class Surface;
@@ -73,7 +72,6 @@ private:
     KWayland::Client::Surface *m_surface = nullptr;
     KWayland::Client::PlasmaShell *m_shellInterface = nullptr;
     KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
-    KWayland::Client::PlasmaWindowModel *m_windowModel = nullptr;
     QPointer<KWayland::Client::PlasmaWindow> m_activeWindow;
     QTimer *m_activeTimer;
 };
