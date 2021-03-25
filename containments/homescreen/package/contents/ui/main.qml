@@ -144,6 +144,17 @@ FocusScope {
                         appletsLayout.defaultItemHeight)
                     );
                     launcherDragManager.hideSpacer();
+
+                    //SCROLL LEFT
+                    if (event.x < units.gridUnit) {
+                        mainFlickable.scrollLeft();
+                    //SCROLL RIGHT
+                    } else if (event.x > mainFlickable.width - units.gridUnit) {
+                        mainFlickable.scrollRight();
+                    //DON't SCROLL
+                    } else {
+                        mainFlickable.stopScroll();
+                    }
                 }
             }
 

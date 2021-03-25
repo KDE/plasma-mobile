@@ -47,7 +47,7 @@ Flickable {
     onFlickStarted: cancelEditModeForItemsRequested()
     onFlickEnded: cancelEditModeForItemsRequested()
 
-    onCurrentIndexChanged: contentX = width * currentIndex;
+    //onCurrentIndexChanged: contentX = width * currentIndex;
     onContentXChanged: mainFlickable.currentIndex = Math.floor(contentX / width)
 
 
