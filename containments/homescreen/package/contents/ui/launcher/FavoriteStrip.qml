@@ -21,8 +21,6 @@ LauncherContainer {
 
     flow.flow: Flow.TopToBottom
 
-    visible: flow.children.length > 0 || launcherDragManager.active || dropArea.containsDrag
-
     opacity: launcherDragManager.active && plasmoid.nativeInterface.applicationListModel.favoriteCount >= plasmoid.nativeInterface.applicationListModel.maxFavoriteCount ? 0.3 : 1
 
     height: visible ? cellHeight : 0

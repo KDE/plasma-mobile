@@ -30,6 +30,8 @@ Flickable {
     readonly property int totalPages: Math.ceil(contentWidth / width)
     property int currentIndex: 0
 
+    property ContainmentLayoutManager.AppletsLayout appletsLayout: null
+
     opacity: 1 - appDrawer.openFactor
     transform: Translate {
         y: -mainFlickable.height/10 * appDrawer.openFactor

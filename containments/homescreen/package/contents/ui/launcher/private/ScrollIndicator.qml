@@ -15,7 +15,10 @@ PlasmaCore.SvgItem {
 
     z: 2
     opacity: 0
-    svg: arrowsSvg
+    svg: PlasmaCore.Svg {
+        imagePath: "widgets/arrows"
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    }
     elementId: "left-arrow"
     width: units.iconSizes.large
     height: width
