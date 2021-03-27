@@ -28,6 +28,7 @@ Name[x-test]=xxPlasmaxx
 [Event/captured]
 Name=Captured
 Name[ca]=Captura
+Name[cs]=Zachyceno
 Name[en_GB]=Captured
 Name[es]=Capturado
 Name[eu]=Atzemanda
@@ -48,6 +49,7 @@ Name[uk]=Захоплено
 Name[x-test]=xxCapturedxx
 Comment=Captured
 Comment[ca]=Captura
+Comment[cs]=Zachyceno
 Comment[en_GB]=Captured
 Comment[es]=Capturado
 Comment[eu]=Atzemanda
