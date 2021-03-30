@@ -42,6 +42,10 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Wayland
 )
 find_package(KWinDBusInterface)
+set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
+    TYPE REQUIRED
+    PURPOSE "Needed for virtual keyboard toggle button"
+)
 
 include(CheckIncludeFiles)
 
