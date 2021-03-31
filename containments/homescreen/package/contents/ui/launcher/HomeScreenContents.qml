@@ -61,11 +61,12 @@ DragDrop.DropArea {
             );
             launcherDragManager.hideSpacer();
 
+            let scenePos = mapToItem(null, event.x, event.y);
             //SCROLL LEFT
-            if (event.x < units.gridUnit) {
+            if (scenePos.x < units.gridUnit) {
                 mainFlickable.scrollLeft();
             //SCROLL RIGHT
-            } else if (event.x > mainFlickable.width - units.gridUnit) {
+            } else if (scenePos.x > mainFlickable.width - units.gridUnit) {
                 mainFlickable.scrollRight();
             //DON't SCROLL
             } else {
