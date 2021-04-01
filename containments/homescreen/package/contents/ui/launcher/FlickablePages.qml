@@ -97,6 +97,11 @@ Flickable {
         scrollAnim.to = mainFlickable.width * Math.floor(mainFlickable.contentX / mainFlickable.width)
         scrollAnim.running = true;
     }
+    function scrollToPage(index) {
+        scrollAnim.running = false;
+        scrollAnim.to = mainFlickable.width * Math.max(0, Math.min(index, mainFlickable.contentWidth - mainFlickable.width))
+        scrollAnim.running = true;
+    }
 
     Timer {
         id: autoScrollTimer

@@ -72,8 +72,7 @@ FocusScope {
         property real lastRequestedPosition: 0
         target: MobileShell.HomeScreenControls
         function onResetHomeScreenPosition() {
-            scrollAnim.to = 0;
-            scrollAnim.restart();
+            mainFlickable.scrollToPage(0);
             appDrawer.close();
         }
         function onSnapHomeScreenPosition() {
