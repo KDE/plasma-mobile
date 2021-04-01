@@ -32,6 +32,8 @@ DragDrop.DropArea {
 
     property alias appletsLayout: appletsLayout
 
+    property FavoriteStrip favoriteStrip
+
     Connections {
         target: plasmoid
         function onEditModeChanged() {
@@ -199,7 +201,7 @@ DragDrop.DropArea {
             cellWidth: appletsLayout.cellWidth
             cellHeight: appletsLayout.cellHeight
             appletsLayout: appletsLayout
-            favoriteStrip: favoriteStrip
+            favoriteStrip: dropArea.favoriteStrip
             onScrollLeftRequested: mainFlickable.scrollLeft()
             onScrollRightRequested: mainFlickable.scrollRight()
             onStopScrollRequested: mainFlickable.stopScroll()

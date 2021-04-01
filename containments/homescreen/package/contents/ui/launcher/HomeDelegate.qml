@@ -91,7 +91,7 @@ ContainmentLayoutManager.ItemContainer {
             if (modelData.applicationRunning) {
                 delegate.launch(0, 0, "", modelData.applicationName);
             } else {
-                delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, modelData.applicationName);
+                delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
             }
 
             plasmoid.nativeInterface.applicationListModel.setMinimizedDelegate(index, delegate);
@@ -102,10 +102,10 @@ ContainmentLayoutManager.ItemContainer {
         ColumnLayout {
             anchors {
                 fill: parent
-                leftMargin: units.smallSpacing * 2
-                topMargin: units.smallSpacing * 2
-                rightMargin: units.smallSpacing * 2
-                bottomMargin: units.smallSpacing * 2
+                leftMargin: PlasmaCore.Units.smallSpacing * 2
+                topMargin: PlasmaCore.Units.smallSpacing * 2
+                rightMargin: PlasmaCore.Units.smallSpacing * 2
+                bottomMargin: PlasmaCore.Units.smallSpacing * 2
             }
             spacing: 0
 
@@ -114,7 +114,7 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.minimumHeight: Math.min(units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
+                Layout.minimumHeight: Math.min(PlasmaCore.Units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
                 Layout.preferredHeight: Layout.minimumHeight
 
                 usesPlasmaTheme: false
@@ -127,7 +127,7 @@ ContainmentLayoutManager.ItemContainer {
                     }
                     visible: model.applicationRunning
                     radius: width
-                    width: units.smallSpacing
+                    width: PlasmaCore.Units.smallSpacing
                     height: width
                     color: theme.highlightColor
                 }
@@ -145,8 +145,8 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.preferredHeight: delegate.reservedSpaceForLabel
                 wrapMode: Text.WordWrap
                 Layout.alignment: Qt.AlignTop
-                Layout.leftMargin: -parent.anchors.leftMargin + units.smallSpacing
-                Layout.rightMargin: -parent.anchors.rightMargin + units.smallSpacing
+                Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
+                Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2

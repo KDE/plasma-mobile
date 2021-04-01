@@ -42,7 +42,7 @@ Repeater {
         Binding {
             target: delegate
             property: "height"
-            value: Math.min(parent.height, launcherRepeater.cellHeight)
+            value: Math.min(delegate.parent.height, launcherRepeater.cellHeight)
         }
         parent: parentFromLocation
         reservedSpaceForLabel: metrics.height

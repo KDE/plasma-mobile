@@ -114,6 +114,7 @@ FocusScope {
         Launcher.HomeScreenContents {
             id: homeScreenContents
             width: mainFlickable.width * 100
+            favoriteStrip: favoriteStrip
         }
     }
 
