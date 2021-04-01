@@ -143,7 +143,6 @@ Flickable {
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
-            bottomMargin: PlasmaCore.Units.gridUnit * 2
         }
         PlasmaCore.ColorScope.inherit: false
         PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
