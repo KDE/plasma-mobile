@@ -9,6 +9,7 @@ import QtQuick 2.1
 import QtQuick.Window 2.1
 import QtQuick.Controls 2.2 as Controls
 import QtQuick.Layouts 1.1
+import QtGraphicalEffects 1.12
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -31,117 +32,175 @@ Item {
             margins: units.gridUnit
         }
         radius: height/2
-        height: layout.implicitHeight + units.gridUnit
+        height: layout.implicitHeight + PlasmaCore.Units.largeSpacing
         color: Qt.rgba(1,1,1, 0.3)
 
         RowLayout {
             id: layout
             anchors {
                 left: parent.left
+                right: parent.right
                 verticalCenter: parent.verticalCenter
                 margins: background.radius/2
             }
+            spacing: PlasmaCore.Units.smallSpacing * 2
             Kirigami.Icon {
-                source: "search"
-                Layout.fillHeight: true
+                source: "start-here-symbolic"
+                Layout.preferredHeight: PlasmaCore.Units.gridUnit * 1.5
                 Layout.preferredWidth: height
                 color: "white"
             }
             PlasmaExtras.Heading {
-                level: 2
+                level: 3
                 text: i18n("Search...")
             }
+            Item { Layout.fillWidth: true }
+            Kirigami.Icon {
+                source: "search"
+                Layout.preferredHeight: PlasmaCore.Units.gridUnit * 1.5
+                Layout.preferredWidth: height
+                color: "white"
+            }
         }
+        
         MouseArea {
             anchors.fill: parent
             onClicked: window.showMaximized()
         }
+        
         Kirigami.AbstractApplicationWindow {
             id: window
             visible: false
+            color: "transparent"
             onVisibleChanged: {
                 if (visible) {
                     queryField.forceActiveFocus();
                 }
             }
-            header: Controls.ToolBar {
-                height: Kirigami.Units.gridUnit * 2
-                contentItem: Kirigami.SearchField {
-                    id: queryField
-                    focus: true
-                }
-            }
-            Rectangle {
+            
+            MouseArea {
                 anchors.fill: parent
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.View
-                color: Kirigami.Theme.backgroundColor
-                PlasmaCore.IconItem {
-                    anchors {
-                        bottom: parent.bottom
-                        right: parent.right
-                    }
-                    width: Math.min(parent.width, parent.height) * 0.8
-                    height: width
-                    opacity: 0.2
-                    source: "search"
+                onClicked: window.close();
+                
+                // shadow for search window
+                RectangularGlow {
+                    anchors.topMargin: 1 
+                    anchors.fill: content
+                    cached: true
+                    glowRadius: 4
+                    spread: 0.2
+                    color: Qt.rgba(0, 0, 0, 0.15)
                 }
-                Controls.ScrollView {
-                    anchors.fill: parent
-                    Milou.ResultsListView {
-                        id: listView
-                        queryString: queryField.text
-                        highlight: null
-                        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-                        anchors.rightMargin: 10
 
-                        onActivated: {
-                            window.visible = false;
-                            queryField.text = "";
+                MouseArea {
+                    id: content
+                    // capture presses on the rectangle so that it doesn't close the window
+                    anchors.top: parent.top
+                    anchors.topMargin: Kirigami.Units.largeSpacing * 2
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    implicitWidth: Math.min(Kirigami.Units.gridUnit * 30, parent.width - Kirigami.Units.largeSpacing * 4)
+                    implicitHeight: Math.min(mainColumn.implicitHeight, parent.height - Kirigami.Units.largeSpacing * 4)
+
+                    Behavior on implicitHeight {
+                        NumberAnimation { 
+                            duration: Kirigami.Units.longDuration 
+                            easing: Easing.InOutQuad
                         }
-                        onUpdateQueryString: {
-                            queryField.text = text
-                            queryField.cursorPosition = cursorPosition
-                        }
-                        delegate: Kirigami.BasicListItem {
-                            id: resultDelegate
-                            property var additionalActions: typeof actions !== "undefined" ? actions : []
-                            icon: model.decoration
-                            label: typeof modelData !== "undefined" ? modelData : model.display
-                            subtitle: model.subtext || ""
-                            onClicked: {
-                                listView.currentIndex = model.index
-                                listView.runCurrentIndex()
+                    }
+                    
+                    Rectangle {
+                        anchors.fill: parent
+                        radius: Kirigami.Units.smallSpacing 
+
+                        Kirigami.Theme.inherit: false
+                        Kirigami.Theme.colorSet: Kirigami.Theme.View
+                        color: Kirigami.Theme.backgroundColor
+
+                        ColumnLayout {
+                            id: mainColumn
+                            anchors.fill: parent
+                            anchors.margins: Kirigami.Units.smallSpacing
+
+                            RowLayout {
+                                Layout.bottomMargin: Kirigami.Units.smallSpacing / 2
+                                Item {
+                                    implicitHeight: queryField.height
+                                    implicitWidth: height
+                                    Kirigami.Icon {
+                                        anchors.fill: parent
+                                        anchors.margins: Math.round(Kirigami.Units.smallSpacing * 1.5)
+                                        source: "start-here-symbolic"
+                                    }
+                                }
+                                Kirigami.SearchField {
+                                    id: queryField
+                                    focus: true
+                                    Layout.fillWidth: true
+                                }
                             }
-                            Row {
-                                id: actionsRow
 
-                                Repeater {
-                                    id: actionsRepeater
-                                    model: resultDelegate.additionalActions
+                            Controls.ScrollView {
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
 
-                                    Controls.ToolButton {
-                                        width: height
-                                        height: listItem.height
-                                        visible: modelData.visible || true
-                                        enabled: modelData.enabled || true
+                                Milou.ResultsListView {
+                                    id: listView
+                                    queryString: queryField.text
+                                    highlight: null
+                                    PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+                                    anchors.rightMargin: 10
 
-                                        Accessible.role: Accessible.Button
-                                        Accessible.name: modelData.text
-                                        checkable: checked
-                                        checked: resultDelegate.activeAction === index
-                                        focus: resultDelegate.activeAction === index
+                                    onActivated: {
+                                        window.visible = false;
+                                        queryField.text = "";
+                                    }
+                                    onUpdateQueryString: {
+                                        queryField.text = text
+                                        queryField.cursorPosition = cursorPosition
+                                    }
 
-                                        Kirigami.Icon{
-                                            anchors.centerIn: parent
-                                            width: units.iconSizes.small
-                                            height: units.iconSizes.small
-                                            // ToolButton cannot cope with QIcon
-                                            source: modelData.icon || ""
-                                            active: parent.hovered || parent.checked
+                                    delegate: Kirigami.BasicListItem {
+                                        id: resultDelegate
+                                        property var additionalActions: typeof actions !== "undefined" ? actions : []
+                                        icon: model.decoration
+                                        label: typeof modelData !== "undefined" ? modelData : model.display
+                                        subtitle: model.subtext || ""
+                                        onClicked: {
+                                            listView.currentIndex = model.index
+                                            listView.runCurrentIndex()
                                         }
+                                        Row {
+                                            id: actionsRow
 
-                                        onClicked: resultDelegate.ListView.view.runAction(index)
+                                            Repeater {
+                                                id: actionsRepeater
+                                                model: resultDelegate.additionalActions
+
+                                                Controls.ToolButton {
+                                                    width: height
+                                                    height: listItem.height
+                                                    visible: modelData.visible || true
+                                                    enabled: modelData.enabled || true
+
+                                                    Accessible.role: Accessible.Button
+                                                    Accessible.name: modelData.text
+                                                    checkable: checked
+                                                    checked: resultDelegate.activeAction === index
+                                                    focus: resultDelegate.activeAction === index
+
+                                                    Kirigami.Icon{
+                                                        anchors.centerIn: parent
+                                                        width: units.iconSizes.small
+                                                        height: units.iconSizes.small
+                                                        // ToolButton cannot cope with QIcon
+                                                        source: modelData.icon || ""
+                                                        active: parent.hovered || parent.checked
+                                                    }
+
+                                                    onClicked: resultDelegate.ListView.view.runAction(index)
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
