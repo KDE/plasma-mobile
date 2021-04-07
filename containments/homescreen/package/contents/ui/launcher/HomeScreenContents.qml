@@ -163,7 +163,7 @@ DragDrop.DropArea {
                 : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
 
         // Sets the containment in edit mode when we go in edit mode as well
-        onEditModeChanged: plasmoid.editMode = editMode
+        onEditModeChanged: plasmoid.editMode = editMode;
 
         minimumItemWidth: units.gridUnit * 3
         minimumItemHeight: minimumItemWidth
@@ -183,8 +183,64 @@ DragDrop.DropArea {
             onEditModeChanged: {
                 launcherDragManager.active = dragActive || editMode;
             }
+
+            property real dragCenterX
+            property real dragCenterY
+
+            editModeCondition: ContainmentLayoutManager.ItemContainer.AfterPressAndHold
+
             onDragActiveChanged: {
                 launcherDragManager.active = dragActive || editMode;
+                if (dragActive) {
+                    // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
+                    launcherDragManager.startDrag(appletContainer);
+                    launcherDragManager.currentlyDraggedDelegate = appletContainer;
+                } else {
+                    launcherDragManager.dropItem(appletContainer, dragCenterX, dragCenterY);
+                    plasmoid.editMode = false;
+                    editMode = false;
+                    launcherRepeater.stopScrollRequested();
+                    launcherDragManager.currentlyDraggedDelegate = null;
+                    forceActiveFocus();
+                }
+            }
+            onUserDrag: {
+                dragCenterX = dragCenter.x;
+                dragCenterY = dragCenter.y;
+                launcherDragManager.dragItem(appletContainer, dragCenter.x, dragCenter.y);
+
+                var pos = plasmoid.fullRepresentationItem.mapFromItem(appletContainer, dragCenter.x, dragCenter.y);
+
+                //SCROLL LEFT
+                if (pos.x < units.gridUnit) {
+                    launcherRepeater.scrollLeftRequested();
+                //SCROLL RIGHT
+                } else if (pos.x > mainFlickable.width - units.gridUnit) {
+                    launcherRepeater.scrollRightRequested();
+                //DON't SCROLL
+                } else {
+                    launcherRepeater.stopScrollRequested();
+                }
+
+                appletContainer.x = Math.max(0, Math.min(mainFlickable.width - appletContainer.width, appletContainer.x));
+            }
+            Connections {
+                target: dropArea
+                function onWidthChanged () {
+                    if (Math.floor((appletContainer.x) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width)) {
+                        print("should go next")
+                        appletsLayout.releaseSpace(appletContainer);
+                        appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width) * mainFlickable.width;
+                        appletsLayout.positionItem(appletContainer);
+                    } else if (Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width)) {
+                        print("should go previous")
+                        appletsLayout.releaseSpace(appletContainer);
+                        appletContainer.x = Math.ceil(appletContainer.x / mainFlickable.width) * mainFlickable.width - appletContainer.width;
+                        appletsLayout.positionItem(appletContainer);
+                    } else {
+                        print("good where it is")
+                    }
+                }
             }
         }
 

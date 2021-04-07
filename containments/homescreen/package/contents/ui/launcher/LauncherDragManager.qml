@@ -15,7 +15,7 @@ Item {
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
-    property HomeDelegate currentlyDraggedDelegate
+    property ContainmentLayoutManager.ItemContainer currentlyDraggedDelegate
     property bool active
     property QtObject model: plasmoid.nativeInterface.applicationListModel
 
@@ -160,7 +160,9 @@ Item {
         }
 
         function containerForItem(item, dragCenterX, dragCenterY) {
-            if (favoriteStrip.contains(Qt.point(0,favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY).y))
+            if (!item.modelData) {
+                return appletsLayout;
+            } else if (favoriteStrip.contains(Qt.point(0,favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY).y))
                 && (item.modelData.applicationLocation == ApplicationListModel.Favorites
                     || root.model.favoriteCount < root.model.maxFavoriteCount)) {
                 return favoriteStrip;
@@ -274,7 +276,9 @@ Item {
             raiseContainer(container);
 
             if (container == appletsLayout) {
-                root.model.setLocation(item.modelData.index, ApplicationListModel.Desktop);
+                if (item.modelData) {
+                    root.model.setLocation(item.modelData.index, ApplicationListModel.Desktop);
+                }
                 var pos = appletsLayout.mapFromItem(item, 0, 0);
                 item.parent = appletsLayout;
                 item.x = pos.x;
