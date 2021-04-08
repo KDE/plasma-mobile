@@ -74,7 +74,7 @@ DragHandler {
                 snapPrevPage();
             } else if (__scrollDirection === DragGestureHandler.Right && (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit * 5)) {
                 snapNextPage();
-            } else {print("normal");
+            } else {
                 snapPage();
             }
             __scrollDirection = DragGestureHandler.None;

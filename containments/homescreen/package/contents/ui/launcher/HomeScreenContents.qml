@@ -148,9 +148,10 @@ DragDrop.DropArea {
                 //Hides icons close button
                 appletsLayout.appletsLayoutInteracted();
                 appletsLayout.editMode = false;
+                appletsLayout.forceActiveFocus();
             }
             onLongPressed: appletsLayout.editMode = true;
-            onPressedChanged: root.focus = true;
+            onPressedChanged: appletsLayout.focus = true;
         }
 
         cellWidth: favoriteStrip.cellWidth
@@ -195,6 +196,8 @@ DragDrop.DropArea {
                     // Must be 0, 0 as at this point dragCenterX and dragCenterY are on the drag before"
                     launcherDragManager.startDrag(appletContainer);
                     launcherDragManager.currentlyDraggedDelegate = appletContainer;
+                    // Reparenting removed focus
+                    appletContainer.forceActiveFocus();
                 } else {
                     launcherDragManager.dropItem(appletContainer, dragCenterX, dragCenterY);
                     plasmoid.editMode = false;
@@ -222,6 +225,12 @@ DragDrop.DropArea {
                 }
 
                 appletContainer.x = Math.max(0, Math.min(mainFlickable.width - appletContainer.width, appletContainer.x));
+            }
+            Connections {
+                target: appletsLayout
+                function onAppletsLayoutInteracted() {
+                    appletContainer.editMode = false;
+                }
             }
             Connections {
                 target: dropArea
