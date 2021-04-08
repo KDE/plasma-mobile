@@ -40,6 +40,7 @@ Flickable {
     scale: (3 - appDrawer.openFactor) /3
     clip: true
 
+    property bool showAddPageIndicator: false
     //bottomMargin: favoriteStrip.height
     contentHeight: height
     //interactive: !plasmoid.editMode && !launcherDragManager.active
@@ -148,6 +149,7 @@ Flickable {
 
 
     PlasmaComponents.PageIndicator {
+        id: pageIndicator
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
@@ -159,6 +161,29 @@ Flickable {
         count: mainFlickable.totalPages
         visible: count > 1
         currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
+        delegate: Rectangle {
+            property bool isAddPageIndicator: index === pageIndicator.count-1 && mainFlickable.showAddPageIndicator
+            implicitWidth: PlasmaCore.Units.gridUnit/2
+            implicitHeight: implicitWidth
+            
+            radius: width
+            color: isAddPageIndicator ? "transparent" : PlasmaCore.ColorScope.textColor
+
+
+            PlasmaComponents.Label {
+                anchors.centerIn: parent
+                visible: parent.isAddPageIndicator
+                text: "⊕"
+            }
+
+            opacity: index === currentIndex ? 0.9 : pressed ? 0.7 : 0.5
+            Behavior on opacity {
+                OpacityAnimator {
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
+        }
     }
 
     Private.ScrollIndicator {
