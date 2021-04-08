@@ -228,17 +228,14 @@ DragDrop.DropArea {
                 target: dropArea
                 function onWidthChanged () {
                     if (Math.floor((appletContainer.x) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width)) {
-                        print("should go next")
                         appletsLayout.releaseSpace(appletContainer);
                         appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width) * mainFlickable.width;
                         appletsLayout.positionItem(appletContainer);
+
                     } else if (Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width)) {
-                        print("should go previous")
                         appletsLayout.releaseSpace(appletContainer);
                         appletContainer.x = Math.ceil(appletContainer.x / mainFlickable.width) * mainFlickable.width - appletContainer.width;
                         appletsLayout.positionItem(appletContainer);
-                    } else {
-                        print("good where it is")
                     }
                 }
             }
