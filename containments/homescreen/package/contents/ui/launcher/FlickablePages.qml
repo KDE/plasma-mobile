@@ -31,6 +31,7 @@ Flickable {
     property int currentIndex: 0
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout: null
+    property Item footer
 
     opacity: 1 - appDrawer.openFactor
     transform: Translate {
@@ -53,6 +54,12 @@ Flickable {
     //onCurrentIndexChanged: contentX = width * currentIndex;
     onContentXChanged: mainFlickable.currentIndex = Math.floor(contentX / width)
 
+    onFooterChanged: {
+        footer.parent = mainFlickable;
+        footer.anchors.left = mainFlickable.left;
+        footer.anchors.bottom = mainFlickable.bottom;
+        footer.anchors.right = mainFlickable.right;
+    }
 
     //Autoscroll related functions
     function scrollLeft() {
@@ -144,6 +151,7 @@ Flickable {
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
+            bottomMargin: mainFlickable.footer ? mainFlickable.footer.height : 0
         }
         PlasmaCore.ColorScope.inherit: false
         PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup

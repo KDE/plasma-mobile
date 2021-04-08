@@ -102,9 +102,10 @@ FocusScope {
         anchors {
             fill: parent
             topMargin: plasmoid.availableScreenRect.y
-            bottomMargin: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: /*favoriteStrip.height +*/ plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
 
+        footer: favoriteStrip
         appletsLayout: homeScreenContents.appletsLayout
 
         appDrawer: appDrawer
@@ -122,17 +123,17 @@ FocusScope {
         anchors.fill: parent
 
         topPadding: plasmoid.availableScreenRect.y
-        bottomPadding: favoriteStrip.height + plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+        bottomPadding: /*favoriteStrip.height + */plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
     }
 
     Launcher.FavoriteStrip {
         id: favoriteStrip
-        anchors {
+  /*      anchors {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
             bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
-        }
+        }*/
         appletsLayout: homeScreenContents.appletsLayout
 
         visible: flow.children.length > 0 || launcherDragManager.active || homeScreenContents.containsDrag
