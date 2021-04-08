@@ -271,6 +271,7 @@ Item {
 
 
         function positionItem(item, dragCenterX, dragCenterY) {
+            hideSpacer();
             var container = containerForItem(item, dragCenterX, dragCenterY);
 
             raiseContainer(container);
