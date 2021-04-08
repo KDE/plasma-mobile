@@ -198,7 +198,6 @@ DragDrop.DropArea {
                 } else {
                     launcherDragManager.dropItem(appletContainer, dragCenterX, dragCenterY);
                     plasmoid.editMode = false;
-                    editMode = false;
                     launcherRepeater.stopScrollRequested();
                     launcherDragManager.currentlyDraggedDelegate = null;
                     forceActiveFocus();
