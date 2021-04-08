@@ -31,27 +31,34 @@ DragHandler {
     property int __scrollDirection: DragGestureHandler.None
     onTranslationChanged: {
         if (active) {
-            if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
-                __scrollDirection = DragGestureHandler.Vertical;
-                snapPage();
-            } else if (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit) {
-                __scrollDirection = DragGestureHandler.Right;
-                root.appDrawer.close();
-            } else if (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit) {
-                __scrollDirection = DragGestureHandler.Left;
-                root.appDrawer.close();
+            if (__scrollDirection === DragGestureHandler.None) {
+                if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
+
+                    __scrollDirection = DragGestureHandler.Vertical;
+                    snapPage();
+                } else if (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit) {
+
+                    __scrollDirection = DragGestureHandler.Right;
+                    root.appDrawer.close();
+                } else if (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit) {
+
+                    __scrollDirection = DragGestureHandler.Left;
+                    root.appDrawer.close();
+                }
             }
 
-            if (__scrollDirection !== DragGestureHandler.Left || __scrollDirection !== DragGestureHandler.Right) {
+            if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
                 root.appDrawer.offset = -translation.y;
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
                 let newContentX = Math.min((mainFlickable.width * mainFlickable.totalPages) - mainFlickable.width, Math.max(0, __initialMainFlickableX - translation.x));
 
-                if (mainFlickable.contentX < newContentX) {
-                    __scrollDirection = DragGestureHandler.Right;
-                } else {
-                    __scrollDirection = DragGestureHandler.Left;
+                if (__scrollDirection !== DragGestureHandler.None) {
+                    if (mainFlickable.contentX < newContentX) {
+                        __scrollDirection = DragGestureHandler.Right;
+                    } else {
+                        __scrollDirection = DragGestureHandler.Left;
+                    }
                 }
 
                 mainFlickable.contentX = newContentX;
