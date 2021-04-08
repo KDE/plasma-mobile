@@ -37,6 +37,7 @@ Flickable {
         y: -mainFlickable.height/10 * appDrawer.openFactor
     }
     scale: (3 - appDrawer.openFactor) /3
+    clip: true
 
     //bottomMargin: favoriteStrip.height
     contentHeight: height
