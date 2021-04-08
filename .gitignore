@@ -7,3 +7,6 @@ build
 
 /.clang-format
 /.clangd
+/compile_commands.json
+.idea
+/cmake-build*
