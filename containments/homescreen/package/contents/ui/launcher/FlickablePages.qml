@@ -147,7 +147,6 @@ Flickable {
         easing.type: Easing.InOutQuad
     }
 
-
     PlasmaComponents.PageIndicator {
         id: pageIndicator
         anchors {
