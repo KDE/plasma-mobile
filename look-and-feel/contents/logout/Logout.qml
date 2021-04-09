@@ -40,6 +40,14 @@ PlasmaCore.ColorScope {
         color: PlasmaCore.ColorScope.backgroundColor
         opacity: 0
     }
+    
+    Rectangle {
+        id: fadeToBlack
+        anchors.fill: parent
+        color: "black"
+        opacity: 0
+        z: 1
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -79,7 +87,29 @@ PlasmaCore.ColorScope {
             easing.type: Easing.InOutQuad
         }
     }
-
+    
+    NumberAnimation {
+        id: fadeToBlackAnim
+        property: "opacity"
+        target: fadeToBlack
+        from: 0
+        to: 1
+        duration: units.longDuration * 4
+        easing.type: Easing.InOutQuad
+        
+        property var callback
+        function execute(call) {
+            callback = call;
+            fadeToBlackAnim.restart();
+        }
+        
+        onFinished: {
+            if (fadeToBlackAnim.callback) {
+                fadeToBlackAnim.callback();
+            }
+        }
+    }
+    
     SequentialAnimation {
         id: closeAnim
         property var callback
@@ -133,7 +163,7 @@ PlasmaCore.ColorScope {
             iconSource: "system-reboot"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Restart")
             onClicked: {
-                closeAnim.execute(root.rebootRequested);
+                fadeToBlackAnim.execute(root.rebootRequested);
             }
         }
 
@@ -141,7 +171,7 @@ PlasmaCore.ColorScope {
             iconSource: "system-shutdown"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Shut Down")
             onClicked: {
-                closeAnim.execute(root.haltRequested);
+                fadeToBlackAnim.execute(root.haltRequested);
             }
         }
 
