@@ -8,6 +8,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQml.Models 2.12
 
+import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 DrawerBackground {
@@ -15,8 +16,12 @@ DrawerBackground {
     property Item applet
     property ObjectModel fullRepresentationModel
     property ListView fullRepresentationView
+
+    backgroundColor: (applet.backgroundHints === PlasmaCore.Types.NoBackground) ? "transparent" : Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.8*255})
     visible: shouldBeVisible
+
     property bool shouldBeVisible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
+    
     height: parent.height
     width: visible ? quickSettings.width : 0
     Layout.minimumHeight: applet && applet.switchHeight

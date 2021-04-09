@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
@@ -8,6 +9,8 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.3
 import QtQml.Models 2.12
 import QtGraphicalEffects 1.12
+
+import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -23,7 +26,7 @@ import "LayoutManager.js" as LayoutManager
 
 import "quicksettings"
 import "indicators" as Indicators
-
+import "indicators/providers" as IndicatorProviders
 
 Item {
     id: root
@@ -37,7 +40,7 @@ Item {
     property bool reorderingApps: false
     property var layoutManager: LayoutManager
 
-    readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : icons.backgroundColor
+    readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : topPanel.colorScopeColor
     readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible
 
     readonly property bool hasTasks: tasksModel.count > 0
@@ -48,7 +51,7 @@ Item {
     }
 
     function addApplet(applet, x, y) {
-        var compactContainer = compactContainerComponent.createObject(appletIconsRow)
+        var compactContainer = compactContainerComponent.createObject(topPanel.applets)
         print("Applet added: " + applet + " " + applet.title)
 
         applet.parent = compactContainer;
@@ -115,138 +118,59 @@ Item {
             property Item applet
             visible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
             Layout.fillHeight: true
-            Layout.minimumWidth: applet && applet.compactRepresentationItem ? Math.max(applet.compactRepresentationItem.Layout.minimumWidth, appletIconsRow.height) : appletIconsRow.height
+            Layout.minimumWidth: applet && applet.compactRepresentationItem ? Math.max(applet.compactRepresentationItem.Layout.minimumWidth, topPanel.applets.height) : topPanel.applets.height
             Layout.maximumWidth: Layout.minimumWidth
         }
     }
 
     Component {
         id: fullContainerComponent
-        FullContainer {
-        }
+        FullContainer {}
     }
 
     Component {
         id: fullNotificationsContainerComponent
-        FullNotificationsContainer {
-        }
+        FullNotificationsContainer {}
     }
 
-    PlasmaCore.DataSource {
-        id: timeSource
-        engine: "time"
-        connectedSources: ["Local"]
-        interval: 60 * 1000
+    // indicator providers
+    IndicatorProviders.BatteryProvider {
+        id: batteryProvider
     }
-
-    DropShadow {
-        anchors.fill: icons
-        visible: !showingApp
-        cached: true
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 4.0
-        samples: 17
-        color: Qt.rgba(0,0,0,0.8)
-        source: icons
+    IndicatorProviders.BluetoothProvider {
+        id: bluetoothProvider
     }
-
-    // screen top panel
-    PlasmaCore.ColorScope {
-        id: icons
-        z: 1
-        colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-        //parent: slidingPanel.visible && !slidingPanel.wideScreen ? panelContents : root
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-        }
-        height: root.height
-        Rectangle {
-            anchors.fill: parent
-            gradient: Gradient {
-                GradientStop {
-                    position: 1.0
-                    color: showingApp ? root.backgroundColor : "transparent"
-                }
-                GradientStop {
-                    position: 0.0
-                    color: showingApp ? root.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
-                }
-            }
-        }
-
-        Loader {
-            id: strengthLoader
-            height: parent.height
-            width: item ? item.width : 0
-            source: Qt.resolvedUrl("indicators/SignalStrength.qml")
-        }
-
-        Row {
-            id: sniRow
-            anchors.left: strengthLoader.right
-            height: parent.height
-            Repeater {
-                id: statusNotifierRepeater
-                model: PlasmaCore.SortFilterModel {
-                    id: filteredStatusNotifiers
-                    filterRole: "Title"
-                    sourceModel: PlasmaCore.DataModel {
-                        dataSource: statusNotifierSource
-                    }
-                }
-
-                delegate: TaskWidget {
-                }
-            }
-        }
-
-        PlasmaComponents.Label {
-            id: clock
-            property bool is24HourTime: plasmoid.nativeInterface.isSystem24HourFormat
-            
-            anchors.fill: parent
-            text: Qt.formatTime(timeSource.data.Local.DateTime, is24HourTime ? "h:mm" : "h:mm ap")
-            color: PlasmaCore.ColorScope.textColor
-            horizontalAlignment: Qt.AlignHCenter
-            verticalAlignment: Qt.AlignVCenter
-            font.pixelSize: height / 2
-        }
-
-        RowLayout {
-            id: appletIconsRow
-            anchors {
-                bottom: parent.bottom
-                right: simpleIndicatorsLayout.left
-            }
-            height: parent.height
-        }
-
-        //TODO: pluggable
-        RowLayout {
-            id: simpleIndicatorsLayout
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                right: parent.right
-                rightMargin: units.smallSpacing
-            }
-            Indicators.Bluetooth {}
-            Indicators.Wifi {}
-            Indicators.Volume {}
-            Indicators.Battery {}
-        }
+    property alias signalStrengthProvider: signalStrengthProviderLoader.item
+    Loader {
+        id: signalStrengthProviderLoader
+        source: Qt.resolvedUrl("indicators/providers/SignalStrengthProvider.qml")
+    }
+    IndicatorProviders.VolumeProvider {
+        id: volumeProvider
+    }
+    IndicatorProviders.WifiProvider {
+        id: wifiProvider
     }
     
-    // screen top panel background (background for the rest of the screen in SlidingPanel.qml)
+    // top panel component
+    IndicatorsRow {
+        id: topPanel
+        anchors.fill: parent
+        z: 1
+        colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        backgroundColor: !showingApp ? "transparent" : root.backgroundColor
+        showGradientBackground: !showingApp
+        showDropShadow: !showingApp
+    }
+    
+    // top panel background (background for the rest of the screen in SlidingPanel.qml)
     Rectangle {
         anchors.fill: parent
-        color: "black"
+        color: PlasmaCore.Theme.backgroundColor
         opacity: 0.6 * Math.min(1, slidingPanel.offset/panelContents.height)
     }
     
+    // initial swipe down
     MouseArea {
         z: 99
         property int oldMouseY: 0
@@ -256,13 +180,12 @@ Item {
             slidingPanel.cancelAnimations();
             slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.contentItem.width)
             slidingPanel.userInteracting = true;
+            slidingPanel.flickable.contentY = slidingPanel.closedContentY;
             oldMouseY = mouse.y;
-            slidingPanel.offset = 0//units.gridUnit * 2;
             slidingPanel.showFullScreen();
         }
         onPositionChanged: {
-            slidingPanel.offset = Math.min(slidingPanel.contentItem.height, slidingPanel.offset + (mouse.y - oldMouseY));
-            
+            slidingPanel.updateOffset(mouse.y - oldMouseY);
             oldMouseY = mouse.y;
         }
         onReleased: {
@@ -275,61 +198,65 @@ Item {
         }
     }
 
-    SlidingPanel {
+    // sliding component
+    SlidingContainer {
         id: slidingPanel
         width: plasmoid.availableScreenRect.width
         height: plasmoid.availableScreenRect.height
-        openThreshold: units.gridUnit * 2
-        headerHeight: root.height
+        topPanelHeight: topPanel.height
         topEmptyAreaHeight: quickSettings.topEmptyAreaHeight
-
+        collapsedHeight: quickSettings.collapsedHeight
+        fullyOpenHeight: quickSettings.implicitHeight
+        
+        appletsShown: fullRepresentationView.count > 0
+        
         offset: quickSettings.height
         
         onClosed: quickSettings.closed()
 
-        contentItem: Item {
-            implicitWidth: panelContents.implicitWidth
-
+        contentItem: MouseArea {
+            // mousearea captures touch presses so that the flickable picks them up for swiping
+            implicitWidth: slidingPanel.width
             implicitHeight: Math.min(slidingPanel.height, quickSettings.implicitHeight)
 
             GridLayout {
                 id: panelContents
                 anchors.fill: parent
-                implicitWidth: quickSettings.implicitWidth
-                implicitHeight: Math.min(slidingPanel.height, quickSettings.implicitHeight)
-
+                
                 columns: slidingPanel.wideScreen ? 2 : 1
                 rows: slidingPanel.wideScreen ? 1 : 2
                 
-                QuickSettings {
+                QuickSettingsPanel {
                     id: quickSettings
+                    property int trueHeight: height + Math.round(Kirigami.Units.gridUnit * 1.5) // add height of bottom bar
+                    z: 4
                     Layout.alignment: Qt.AlignTop
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
-                    z: 4
                     parentSlidingPanel: slidingPanel
-                    onCloseRequested: {
-                        slidingPanel.hide()
-                    }
-                    background: DrawerBackground {}
+                    onCloseRequested: slidingPanel.hide()
                 }
 
+                // notifications
                 ListView {
                     id: fullRepresentationView
-                    z: 1
-                    interactive: width < contentWidth
-                    //parent: slidingPanel.wideScreen ? slidingPanel.flickable.contentItem : panelContents
-
+                    implicitHeight: units.gridUnit * 20
+                    Layout.topMargin: slidingPanel.wideScreen ? 0 : Math.round(Kirigami.Units.gridUnit * 1.5) // add height of bottom bar
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettings.width*fullRepresentationModel.count) : panelContents.width 
+                    Layout.preferredHeight: Math.min(plasmoid.screenGeometry.height - quickSettings.implicitHeight - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
+                    z: 1
+                    interactive: count > 0 && width < contentWidth
 
-                    //Layout.fillWidth: true
                     clip: slidingPanel.wideScreen
-                    y: slidingPanel.wideScreen ? 0 : quickSettings.height - (quickSettings.height + height) * (1-opacity)
-                    opacity: slidingPanel.wideScreen ? 1 : fullRepresentationModel.count > 0 && (slidingPanel.offset + slidingPanel.headerHeight)/(quickSettings.height -slidingPanel.topEmptyAreaHeight)
-                    Layout.preferredHeight: Math.min(plasmoid.screenGeometry.height - slidingPanel.headerHeight - quickSettings.height - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
-                    //leftMargin: slidingPanel.drawerX
+                    y: slidingPanel.wideScreen ? 0 : quickSettings.trueHeight
+                    opacity: {
+                        if (slidingPanel.wideScreen) {
+                            return 1;
+                        } else {
+                            return fullRepresentationModel.count > 0 && slidingPanel.offset / slidingPanel.collapsedHeight;
+                        }
+                    }
                     preferredHighlightBegin: slidingPanel.drawerX
 
-                    implicitHeight: units.gridUnit * 20
                     cacheBuffer: width * 100
                     highlightFollowsCurrentItem: true
                     highlightRangeMode: ListView.StrictlyEnforceRange
@@ -346,10 +273,6 @@ Item {
                         z: -1
                         onClicked: slidingPanel.close()
                     }
-
-                    //implicitHeight: fullRepresentationLayout.implicitHeight
-                    //clip: true
-
                 }
             }
         }
@@ -360,11 +283,11 @@ Item {
                 right: parent.right
                 bottom: parent.bottom
             }
+            backgroundColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.8*255})
 
             parent: slidingPanel.fixedArea
             opacity: fullRepresentationView.opacity
             visible: !slidingPanel.wideScreen && fullRepresentationModel.count > 1
-            //height: 40
             z: 100
             contentItem: RowLayout {
                 PlasmaComponents.TabBar {

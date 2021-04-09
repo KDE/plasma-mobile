@@ -15,10 +15,11 @@ FullContainer {
 
     shouldBeVisible: applet && historyModel.count > 0
     visible: shouldBeVisible
-
+    
     NotificationManager.Notifications {
         id: historyModel
         showExpired: true
         showDismissed: true
+        expandUnread: true
     }
 }

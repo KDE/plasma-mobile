@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
+ *   SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -14,6 +15,9 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 ColumnLayout {
     id: delegateRoot
     spacing: units.smallSpacing
+    
+    required property var settingsModel
+    
     signal closeRequested
     signal panelClosed
 
@@ -24,67 +28,68 @@ ColumnLayout {
     required property string settingsCommand
     required property var toggleFunction
     property alias labelOpacity: label.opacity
+    
+    property color disabledButtonColor: PlasmaCore.Theme.backgroundColor
+    property color disabledPressedButtonColor: Qt.darker(disabledButtonColor, 1.1)
+    property color enabledButtonColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": 0.4*255})
+    property color enabledPressedButtonColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": 0.6*255});
 
     Rectangle {
-        Layout.preferredWidth: units.iconSizes.large + units.smallSpacing
+        Layout.preferredWidth: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing
         Layout.minimumHeight: width
         Layout.alignment: Qt.AlignHCenter
-        radius: units.smallSpacing
+        radius: PlasmaCore.Units.smallSpacing
         border.color: delegateRoot.enabled ?
             Qt.darker(Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {}), 1.25) :
             Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.textColor, {"alpha": 0.2*255})
         color: {
             if (delegateRoot.enabled) {
-                return Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": iconMouseArea.pressed ? 0.5*255 : 0.3*255});
+                return iconMouseArea.pressed ? enabledPressedButtonColor : enabledButtonColor
             } else {
-                if (iconMouseArea.pressed) {
-                    return Qt.darker(Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.backgroundColor, {"alpha": 0.9*255}), 1.25);
-                } else {
-                    return Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.backgroundColor, {"alpha": 0.3*255});
-                }
+                return iconMouseArea.pressed ? disabledPressedButtonColor : disabledButtonColor
             }
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
-            colorGroup: PlasmaCore.ColorScope.colorGroup
-            anchors {
-                fill: parent
-                margins: units.smallSpacing
-            }
+            color: PlasmaCore.Theme.textColor
+            anchors.centerIn: parent
+            implicitWidth: Math.round(parent.width * 0.6)
+            implicitHeight: width
             source: delegateRoot.icon
-            MouseArea {
-                id: iconMouseArea
-                anchors.fill: parent
-                onClicked: {
-                    if (delegateRoot.toggle) {
-                        delegateRoot.toggle();
-                    } else if (delegateRoot.toggleFunction) {
-                        root[delegateRoot.toggleFunction]();
-                    } else if (delegateRoot.settingsCommand) {
-                        NanoShell.StartupFeedback.open(
-                            delegateRoot.icon,
-                            delegateRoot.text,
-                            icon.Kirigami.ScenePosition.x + icon.width/2,
-                            icon.Kirigami.ScenePosition.y + icon.height/2,
-                            Math.min(icon.width, icon.height))
-                        plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
-                        root.closeRequested();
-                    }
+        }
+        
+        MouseArea {
+            id: iconMouseArea
+            anchors.fill: parent
+            onClicked: {
+                if (delegateRoot.toggle) {
+                    delegateRoot.toggle();
+                } else if (delegateRoot.toggleFunction) {
+                    settingsModel[delegateRoot.toggleFunction]();
+                } else if (delegateRoot.settingsCommand) {
+                    NanoShell.StartupFeedback.open(
+                        delegateRoot.icon,
+                        delegateRoot.text,
+                        icon.Kirigami.ScenePosition.x + icon.width/2,
+                        icon.Kirigami.ScenePosition.y + icon.height/2,
+                        Math.min(icon.width, icon.height))
+                    plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
+                    root.closeRequested();
                 }
-                onPressAndHold: {
-                    if (delegateRoot.settingsCommand) {
-                        NanoShell.StartupFeedback.open(
-                            delegateRoot.icon,
-                            delegateRoot.text,
-                            icon.Kirigami.ScenePosition.x + icon.width/2,
-                            icon.Kirigami.ScenePosition.y + icon.height/2,
-                            Math.min(icon.width, icon.height))
-                        closeRequested();
-                        plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
-                    } else if (delegateRoot.toggleFunction) {
-                        root[delegateRoot.toggleFunction]();
-                    }
+            }
+            onPressAndHold: {
+                if (delegateRoot.settingsCommand) {
+                    NanoShell.StartupFeedback.open(
+                        delegateRoot.icon,
+                        delegateRoot.text,
+                        icon.Kirigami.ScenePosition.x + icon.width/2,
+                        icon.Kirigami.ScenePosition.y + icon.height/2,
+                        Math.min(icon.width, icon.height))
+                    closeRequested();
+                    plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
+                } else if (delegateRoot.toggleFunction) {
+                    root[delegateRoot.toggleFunction]();
                 }
             }
         }
@@ -131,7 +136,7 @@ ColumnLayout {
                     plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
                     closeRequested();
                 } else if (delegateRoot.toggleFunction) {
-                    root[delegateRoot.toggleFunction]();
+                    settingsModel[delegateRoot.toggleFunction]();
                 }
             }
         }

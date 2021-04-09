@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
  *  SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
@@ -11,31 +12,27 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PW
 
+import "providers"
 
 RowLayout {
-    visible: pmSource.data["Battery"]["Has Cumulative"]
+    required property BatteryProvider provider
+    visible: provider.isVisible
 
     PW.BatteryIcon {
         id: battery
         Layout.preferredWidth: height
         Layout.fillHeight: true
         hasBattery: true
-        percent: pmSource.data["Battery"]["Percent"]
-        pluggedIn: pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false
+        percent: provider.percent
+        pluggedIn: provider.pluggedIn
 
         height: batteryLabel.height
         width: batteryLabel.height
-
-        PlasmaCore.DataSource {
-            id: pmSource
-            engine: "powermanagement"
-            connectedSources: ["Battery", "AC Adapter"]
-        }
     }
 
     PlasmaComponents.Label {
         id: batteryLabel
-        text: i18n("%1%", battery.percent)
+        text: i18n("%1%", provider.percent)
         Layout.alignment: Qt.AlignVCenter
 
         color: PlasmaCore.ColorScope.textColor

@@ -12,23 +12,25 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 
-import "providers"
+Item {
+    visible: false
+    property string icon: connectionIconProvider.connectionIcon
+    property bool indicatorRunning: connectionIconProvider.connecting
+    
+    PlasmaNM.NetworkStatus {
+        id: networkStatus
+    }
 
-PlasmaCore.IconItem {
-    id: connectionIcon
-    required property WifiProvider provider
+    PlasmaNM.NetworkModel {
+        id: connectionModel
+    }
 
-    source: provider.icon
-    colorGroup: PlasmaCore.ColorScope.colorGroup
+    PlasmaNM.Handler {
+        id: handler
+    }
 
-    Layout.fillHeight: true
-    Layout.preferredWidth: height
-
-    PlasmaComponents.BusyIndicator {
-        id: connectingIndicator
-
-        anchors.fill: parent
-        running: provider.indicatorRunning
-        visible: running
+    PlasmaNM.ConnectionIcon {
+        id: connectionIconProvider
     }
 }
+

@@ -1,4 +1,5 @@
 /*
+    SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com
     SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
     SPDX-FileCopyrightText: 2013-2017 Jan Grulich <jgrulich@redhat.com>
 
@@ -11,38 +12,17 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.bluezqt 1.0 as BluezQt
 
+import "providers"
+
 PlasmaCore.IconItem {
     id: connectionIcon
+    required property BluetoothProvider provider
 
-    property bool deviceConnected : false
-
-    source: deviceConnected ? "preferences-system-bluetooth-activated" : "preferences-system-bluetooth";
+    source: provider.icon;
     colorGroup: PlasmaCore.ColorScope.colorGroup
 
-    visible: BluezQt.Manager.bluetoothOperational
+    visible: provider.isVisible
 
     Layout.fillHeight: true
     Layout.preferredWidth: height
-    function updateStatus()
-    {
-        var connectedDevices = [];
-
-        for (var i = 0; i < BluezQt.Manager.devices.length; ++i) {
-            var device = BluezQt.Manager.devices[i];
-            if (device.connected) {
-                connectedDevices.push(device);
-            }
-        }
-        deviceConnected = connectedDevices.length > 0;
-    }
-
-    Component.onCompleted: {
-        BluezQt.Manager.deviceAdded.connect(updateStatus);
-        BluezQt.Manager.deviceRemoved.connect(updateStatus);
-        BluezQt.Manager.deviceChanged.connect(updateStatus);
-        BluezQt.Manager.bluetoothBlockedChanged.connect(updateStatus);
-        BluezQt.Manager.bluetoothOperationalChanged.connect(updateStatus);
-
-        updateStatus();
-    }
 }
