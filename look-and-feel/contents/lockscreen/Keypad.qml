@@ -23,12 +23,6 @@ Rectangle {
     color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.9*255})
     property string pinLabel: qsTr("Enter PIN")
     
-    // for displaying temporary number in pin dot display
-    property int previewCharIndex: -2 
-    
-    // if waiting for result of auth
-    property bool waitingForAuth: false
-    
     // colour calculations
     property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
     property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
@@ -48,70 +42,24 @@ Rectangle {
     
     signal passwordChanged()
     
-    // keypad functions
     function reset() {
-        waitingForAuth = false;
-        root.password = "";
-        passwordChanged();
-        keypadRoot.pinLabel = qsTr("Enter PIN");
-    }
-    
-    function backspace() {
-        if (!keypadRoot.waitingForAuth) {
-            keypadRoot.previewCharIndex = -2;
-            root.password = root.password.substr(0, root.password.length - 1);
-            passwordChanged();
-        }
-    }
-
-    function clear() {
-        if (!keypadRoot.waitingForAuth) {
-            keypadRoot.previewCharIndex = -2;
-            root.password = "";
-            passwordChanged();
-        }
-    }
-    
-    function enter() {
-        if (root.password !== "") { // prevent typing lock when password is empty
-            keypadRoot.waitingForAuth = true;
-        }
-        
-        // don't try to unlock if there is a timeout (unlock once unlocked)
-        if (!authenticator.graceLocked) {
-            authenticator.tryUnlock(root.password);
-        }
-    }
-    
-    function keyPress(data) {
-        if (!keypadRoot.waitingForAuth) {
-            if (keypadRoot.pinLabel !== qsTr("Enter PIN")) {
-                keypadRoot.pinLabel = qsTr("Enter PIN");
-            }
-            keypadRoot.previewCharIndex = root.password.length;
-            root.password += data
-            passwordChanged();
-            
-            // trigger turning letter into dot later
-            letterTimer.restart();
-        }
+        passwordBar.reset();
     }
     
     Connections {
         target: authenticator
         function onSucceeded() {
-            pinLabel = qsTr("Logging in...");
-            keypadRoot.waitingForAuth = false;
+            passwordBar.pinLabel = qsTr("Logging in...");
+            passwordBar.waitingForAuth = false;
         }
         function onFailed() {
             root.password = "";
-            passwordChanged();
-            pinLabel = qsTr("Wrong PIN");
-            keypadRoot.waitingForAuth = false;
+            passwordBar.pinLabel = qsTr("Wrong PIN");
+            passwordBar.waitingForAuth = false;
         }
         function onGraceLockedChanged() {
             // try authenticating if it was waiting for grace lock to stop and it has stopped
-            if (!authenticator.graceLocked && keypadRoot.waitingForAuth) {
+            if (!authenticator.graceLocked && passwordBar.waitingForAuth) {
                 authenticator.tryUnlock(root.password);
             }
         }
@@ -121,23 +69,12 @@ Rectangle {
     Keys.onPressed: {
         if (event.modifiers === Qt.NoModifier) {
             if (event.key === Qt.Key_Backspace) {
-                keypadRoot.backspace();
+                passwordBar.backspace();
             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                keypadRoot.enter();
+                passwordBar.enter();
             } else if (event.text != "") {
-                keypadRoot.keyPress(event.text);
+                passwordBar.keyPress(event.text);
             }
-        }
-    }
-    
-    // trigger turning letter into dot after 500 milliseconds
-    Timer {
-        id: letterTimer
-        interval: 500
-        running: false
-        repeat: false
-        onTriggered: {
-            keypadRoot.previewCharIndex = -2;
         }
     }
     
@@ -162,8 +99,15 @@ Rectangle {
         
         keypadOpen: swipeProgress === 1
         password: root.password
-        previewCharIndex: keypadRoot.previewCharIndex
-        pinLabel: keypadRoot.pinLabel
+        previewCharIndex: -2
+        pinLabel: qsTr("Enter PIN")
+        
+        onChangePassword: root.password = password
+        Binding {
+            target: passwordBar
+            property: "password"
+            value: root.password
+        }
     }
     
     // actual number keys
@@ -238,16 +182,16 @@ Rectangle {
 
                             onClicked: {
                                 if (modelData === "R") {
-                                    keypadRoot.backspace();
+                                    passwordBar.backspace();
                                 } else if (modelData === "E") {
-                                    keypadRoot.enter();
+                                    passwordBar.enter();
                                 } else {
-                                    keypadRoot.keyPress(modelData);
+                                    passwordBar.keyPress(modelData);
                                 }
                             }
                             onPressAndHold: {
                                 if (modelData === "R") {
-                                    clear();
+                                    passwordBar.clear();
                                 }
                             }
                         }

@@ -21,12 +21,80 @@ Rectangle {
     property bool isPinMode: true
     
     property string password
+    
+    // for displaying temporary number in pin dot display
     property int previewCharIndex
+    
     property string pinLabel
     property bool keypadOpen
     
+    // if waiting for result of auth
+    property bool waitingForAuth: false
+    
     property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
     property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
+    
+    signal changePassword();
+    
+    // keypad functions
+    function reset() {
+        waitingForAuth = false;
+        root.password = "";
+        changePassword();
+        root.pinLabel = qsTr("Enter PIN");
+    }
+    
+    function backspace() {
+        if (!root.waitingForAuth) {
+            root.previewCharIndex = -2;
+            root.password = root.password.substr(0, root.password.length - 1);
+            changePassword();
+        }
+    }
+
+    function clear() {
+        if (!root.waitingForAuth) {
+            root.previewCharIndex = -2;
+            root.password = "";
+            changePassword();
+        }
+    }
+    
+    function enter() {
+        if (root.password !== "") { // prevent typing lock when password is empty
+            root.waitingForAuth = true;
+        }
+        
+        // don't try to unlock if there is a timeout (unlock once unlocked)
+        if (!authenticator.graceLocked) {
+            authenticator.tryUnlock(root.password);
+        }
+    }
+    
+    function keyPress(data) {
+        if (!root.waitingForAuth) {
+            if (root.pinLabel !== qsTr("Enter PIN")) {
+                root.pinLabel = qsTr("Enter PIN");
+            }
+            root.previewCharIndex = root.password.length;
+            root.password += data
+            changePassword();
+            
+            // trigger turning letter into dot later
+            letterTimer.restart();
+        }
+    }
+    
+    // trigger turning letter into dot after 500 milliseconds
+    Timer {
+        id: letterTimer
+        interval: 500
+        running: false
+        repeat: false
+        onTriggered: {
+            root.previewCharIndex = -2;
+        }
+    }
     
     // we need to use a listmodel to avoid all delegates from reloading
     ListModel {
@@ -43,10 +111,41 @@ Rectangle {
     
     // hidden textfield so that the virtual keyboard shows up
     TextField {
-        visible: false
         id: textField
+        visible: false
         focus: keypadOpen && !isPinMode
         z: 1
+        
+        property bool externalEdit: false
+        property string prevText: ""
+        
+        Connections {
+            target: root
+            function onChangePassword() {
+                if (textField.text != root.password) {
+                    textField.externalEdit = true;
+                    textField.text = root.password;
+                }
+            }
+        }
+        onEditingFinished: {
+            if (textField.focus) {
+                root.enter();
+            }
+        }
+        onTextChanged: {
+            if (!externalEdit) {
+                if (prevText.length > text.length) { // backspace
+                    for (let i = 0; i < (prevText.length - text.length); i++) {
+                        root.backspace();
+                    }
+                } else if (text.length > 0) { // key enter
+                    root.keyPress(text.charAt(text.length - 1));
+                }
+                prevText = text;
+            }
+            externalEdit = false;
+        }
     }
     
     // toggle between showing keypad and not
@@ -123,7 +222,7 @@ Rectangle {
                     scale: 0
                     anchors.fill: parent
                     radius: width
-                    color: keypadRoot.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                    color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
                     
                     PropertyAnimation {
                         id: dotAnimation
@@ -137,7 +236,7 @@ Rectangle {
                     id: charLabel
                     scale: 0
                     anchors.centerIn: parent
-                    color: keypadRoot.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                    color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
                     text: model.char
                     font.pointSize: 12
                     

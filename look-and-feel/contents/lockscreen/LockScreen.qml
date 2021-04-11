@@ -235,6 +235,7 @@ PlasmaCore.ColorScope {
         anchors.fill: parent
         
         property int columnHeight: units.gridUnit * 20
+        property int oldContentY: contentY
         
         height: columnHeight + root.height
         contentHeight: columnHeight + root.height
@@ -253,9 +254,10 @@ PlasmaCore.ColorScope {
 
         // wipe password if it is more than half way down the screen
         onContentYChanged: {
-            if (contentY < columnHeight / 2) {
+            if (contentY < columnHeight / 2 && oldContentY >= columnHeight / 2) {
                 keypad.reset();
             }
+            oldContentY = contentY;
         }
         
         ColumnLayout {

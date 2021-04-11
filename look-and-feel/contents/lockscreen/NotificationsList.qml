@@ -48,6 +48,7 @@ Item {
             }
             height: 1
             color: Qt.rgba(1, 1, 1, 0.5)
+            opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         }
     }
     Rectangle {
@@ -77,6 +78,7 @@ Item {
             }
             height: 1
             color: Qt.rgba(1, 1, 1, 0.5)
+            opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         }
     }
 
