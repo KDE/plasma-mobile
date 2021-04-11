@@ -1,5 +1,5 @@
 /*
-SPDX-FileCopyrightText: 2020 Devin Lin <espidev@gmail.com>
+SPDX-FileCopyrightText: 2020-2021 Devin Lin <espidev@gmail.com>
 
 SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -24,7 +24,7 @@ Rectangle {
     property string pinLabel: qsTr("Enter PIN")
     
     // for displaying temporary number in pin dot display
-    property int indexWithNumber: -2 
+    property int previewCharIndex: -2 
     
     // if waiting for result of auth
     property bool waitingForAuth: false
@@ -35,10 +35,16 @@ Rectangle {
     property color buttonTextColor: PlasmaCore.Theme.textColor
     property color dropShadowColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
     property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
-    property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
-    property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
+    
+    implicitHeight: passwordBar.isPinMode ? PlasmaCore.Units.gridUnit * 17 : passwordBar.implicitHeight
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: Kirigami.Units.longDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
     
     signal passwordChanged()
     
@@ -52,7 +58,7 @@ Rectangle {
     
     function backspace() {
         if (!keypadRoot.waitingForAuth) {
-            keypadRoot.indexWithNumber = -2;
+            keypadRoot.previewCharIndex = -2;
             root.password = root.password.substr(0, root.password.length - 1);
             passwordChanged();
         }
@@ -60,7 +66,7 @@ Rectangle {
 
     function clear() {
         if (!keypadRoot.waitingForAuth) {
-            keypadRoot.indexWithNumber = -2;
+            keypadRoot.previewCharIndex = -2;
             root.password = "";
             passwordChanged();
         }
@@ -82,7 +88,7 @@ Rectangle {
             if (keypadRoot.pinLabel !== qsTr("Enter PIN")) {
                 keypadRoot.pinLabel = qsTr("Enter PIN");
             }
-            keypadRoot.indexWithNumber = root.password.length;
+            keypadRoot.previewCharIndex = root.password.length;
             root.password += data
             passwordChanged();
             
@@ -131,13 +137,13 @@ Rectangle {
         running: false
         repeat: false
         onTriggered: {
-            keypadRoot.indexWithNumber = -2;
+            keypadRoot.previewCharIndex = -2;
         }
     }
     
     RectangularGlow {
         anchors.topMargin: 1
-        anchors.fill: topTextDisplay
+        anchors.fill: passwordBar
         cached: true
         glowRadius: 4
         spread: 0.2
@@ -145,126 +151,36 @@ Rectangle {
         opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
     }
     
-    // rectangle "bar" on the top of the keypad
-    Rectangle {
-        id: topTextDisplay
+    // pin display and bar
+    PasswordBar {
+        id: passwordBar
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
         color: keypadRoot.headerBackgroundColor
-        implicitHeight: units.gridUnit * 2.5
         opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
         
-        // label ("wrong pin", "enter pin")
-        Label {
-            opacity: root.password.length === 0 ? 1 : 0
-            anchors.centerIn: parent
-            text: keypadRoot.pinLabel
-            font.pointSize: 12
-            color: keypadRoot.headerTextColor 
-            
-            Behavior on opacity {
-                NumberAnimation { duration: 200 }
-            }
-        }
-    }
-    
-    // we need to use a listmodel to avoid all delegates from reloading
-    ListModel {
-        id: dotDisplayModel
-    }
-    onPasswordChanged: {
-        while (root.password.length < dotDisplayModel.count) {
-            dotDisplayModel.remove(dotDisplayModel.count - 1);
-        }
-        while (root.password.length > dotDisplayModel.count) {
-            dotDisplayModel.append({"char": root.password.charAt(dotDisplayModel.count)});
-        }
-    }
-    
-    // pin dot display
-    ColumnLayout {
-        anchors.fill: topTextDisplay
-        ListView {
-            id: dotDisplay
-            property int dotWidth: Math.round(units.gridUnit * 0.35)
-            
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.bottomMargin: Math.round(dotWidth / 2)
-            orientation: ListView.Horizontal
-            implicitWidth: count * dotWidth + spacing * (count - 1)
-            spacing: 8
-            model: dotDisplayModel
-            
-            Behavior on implicitWidth {
-                NumberAnimation { duration: 50 }
-            }
-            
-            delegate: Item {
-                implicitWidth: dotDisplay.dotWidth
-                implicitHeight: dotDisplay.dotWidth
-                property bool showChar: index === indexWithNumber
-                
-                Component.onCompleted: {
-                    if (showChar) {
-                        charAnimation.to = 1;
-                        charAnimation.duration = 75;
-                        charAnimation.restart();
-                    } else {
-                        dotAnimation.to = 1;
-                        dotAnimation.restart();
-                    }
-                }
-                
-                onShowCharChanged: {
-                    if (!showChar) {
-                        charAnimation.to = 0;
-                        charAnimation.duration = 50;
-                        charAnimation.restart();
-                        dotAnimation.to = 1;
-                        dotAnimation.start();
-                    }
-                }
-                
-                Rectangle { // dot
-                    id: dot
-                    scale: 0
-                    anchors.fill: parent
-                    radius: width
-                    color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
-                    
-                    PropertyAnimation {
-                        id: dotAnimation
-                        target: dot;
-                        property: "scale";
-                        duration: 50
-                    }
-                }
-                
-                Label { // number/letter
-                    id: charLabel
-                    scale: 0
-                    anchors.centerIn: parent
-                    color: keypadRoot.waitingForAuth ? keypadRoot.headerTextInactiveColor : keypadRoot.headerTextColor // dim when waiting for auth
-                    text: model.char
-                    font.pointSize: 12
-                    
-                    PropertyAnimation {
-                        id: charAnimation
-                        target: charLabel;
-                        property: "scale";
-                    }
-                }
-            }
-        }
+        keypadOpen: swipeProgress === 1
+        password: root.password
+        previewCharIndex: keypadRoot.previewCharIndex
+        pinLabel: keypadRoot.pinLabel
     }
     
     // actual number keys
     ColumnLayout {
+        visible: opacity > 0
+        opacity: passwordBar.isPinMode ? 1 : 0
+        Behavior on opacity {
+            NumberAnimation {
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+        }
+        
         anchors {
             left: parent.left
             right: parent.right
-            top: topTextDisplay.bottom
+            top: passwordBar.bottom
             bottom: parent.bottom
             topMargin: units.gridUnit
             bottomMargin: units.gridUnit
