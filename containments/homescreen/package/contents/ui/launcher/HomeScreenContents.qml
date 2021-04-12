@@ -235,14 +235,25 @@ DragDrop.DropArea {
             Connections {
                 target: dropArea
                 function onWidthChanged () {
+                    let spaceReleased = false;
+                    if (appletContainer.width > mainFlickable.width || appletContainer.height > mainFlickable.height) {
+                        appletContainer.width = Math.min(appletContainer.width, mainFlickable.width);
+                        appletContainer.height = Math.min(appletContainer.height, mainFlickable.height);
+                        spaceReleased = true;
+                    }
                     if (Math.floor((appletContainer.x) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width)) {
                         appletsLayout.releaseSpace(appletContainer);
                         appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width) * mainFlickable.width;
                         appletsLayout.positionItem(appletContainer);
+                        spaceReleased = false;
 
                     } else if (Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width)) {
                         appletsLayout.releaseSpace(appletContainer);
                         appletContainer.x = Math.ceil(appletContainer.x / mainFlickable.width) * mainFlickable.width - appletContainer.width;
+                        appletsLayout.positionItem(appletContainer);
+                        spaceReleased = false;
+                    }
+                    if (spaceReleased) {
                         appletsLayout.positionItem(appletContainer);
                     }
                 }
