@@ -105,7 +105,7 @@ Item {
     Drag.dragType: Drag.Automatic
 
     onOffsetChanged: {
-        if (!view.moving) {
+        if (!view.moving) {print("BLII?"+offset)
             view.contentY = Math.max(0, offset) - view.originY - view.height*2 + closedPositionOffset*2
         }
     }
@@ -194,9 +194,10 @@ Item {
                 movementDirection = AppDrawer.MovementDirection.Up;
             } else {
                 movementDirection = AppDrawer.MovementDirection.Down;
-            }return;
+            }
+
             oldContentY = contentY;
-            root.offset = contentY + view.originY + view.height*2 //+ root.closedPositionOffset*2
+            root.offset = contentY + view.originY + view.height*2 - root.closedPositionOffset*2
             MobileShell.HomeScreenControls.homeScreenPosition = contentY
         }
         onMovementEnded: root.snapDrawerStatus()
