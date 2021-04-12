@@ -105,7 +105,7 @@ Item {
     Drag.dragType: Drag.Automatic
 
     onOffsetChanged: {
-        if (!view.moving) {print("BLII?"+offset)
+        if (!view.moving) {
             view.contentY = Math.max(0, offset) - view.originY - view.height*2 + closedPositionOffset*2
         }
     }
