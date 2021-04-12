@@ -131,12 +131,7 @@ FocusScope {
 
     Launcher.FavoriteStrip {
         id: favoriteStrip
-        anchors {
-            left: parent.left
-            right: parent.right
-            bottom: parent.bottom
-            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
-        }
+
         appletsLayout: homeScreenContents.appletsLayout
 
         visible: flow.children.length > 0 || launcherDragManager.active || homeScreenContents.containsDrag
