@@ -38,7 +38,7 @@ Item {
     readonly property int status: {
         if (view.contentY >= -view.originY - view.height) {
             return AppDrawer.Status.Open;
-        } else if (view.contentY > -view.originY - view.height*2) {
+        } else if (view.contentY > -view.originY - view.height*2 + closedPositionOffset*2) {
             return AppDrawer.Status.Peeking;
         } else {
             return AppDrawer.Status.Closed;
@@ -46,6 +46,7 @@ Item {
     }
 
     property real offset: 0
+    property real closedPositionOffset: 0
 
     property real leftPadding: 0
     property real topPadding: 0
@@ -63,7 +64,7 @@ Item {
 
     property alias flickable: view
 
-    readonly property real openFactor: Math.min(1, Math.max(0, Math.min(1, (view.contentY + view.originY + view.height*2) / (units.gridUnit * 10))))
+    readonly property real openFactor: Math.min(1, Math.max(0, Math.min(1, (view.contentY + view.originY + view.height*2 - root.closedPositionOffset*2) / (units.gridUnit * 10))))
 
     function open() {
         if (root.status === AppDrawer.Status.Open) {
@@ -76,7 +77,7 @@ Item {
 
     function close() {
         if (root.status !== AppDrawer.Status.Closed) {
-            scrollAnim.to = -view.height;
+            scrollAnim.to = -view.height + closedPositionOffset;
             scrollAnim.restart();
         }
     }
@@ -105,7 +106,7 @@ Item {
 
     onOffsetChanged: {
         if (!view.moving) {
-            view.contentY = Math.max(0, offset) - view.originY - view.height*2
+            view.contentY = Math.max(0, offset) - view.originY - view.height*2 + closedPositionOffset*2
         }
     }
 
@@ -151,7 +152,7 @@ Item {
         color: "black"
         opacity: 0.4 * root.openFactor
         height: root.height + radius * 2
-        y: Math.min(view.height, Math.max(-radius, -view.contentY - view.originY - root.height + root.topPadding + root.bottomPadding))
+        y: Math.min(view.height, Math.max(-radius, -view.contentY - view.originY - root.height + root.topPadding + root.bottomPadding + root.closedPositionOffset))
     }
 
     Timer {
@@ -175,7 +176,7 @@ Item {
             } else if (root.status == AppDrawer.Status.Closed) {
                 return 0;
             } else { // peeking
-                return (1 - view.contentY / -view.height);
+                return root.openFactor;
             }
         }
         
@@ -193,9 +194,9 @@ Item {
                 movementDirection = AppDrawer.MovementDirection.Up;
             } else {
                 movementDirection = AppDrawer.MovementDirection.Down;
-            }
+            }return;
             oldContentY = contentY;
-            root.offset = contentY + view.originY + view.height*2
+            root.offset = contentY + view.originY + view.height*2 //+ root.closedPositionOffset*2
             MobileShell.HomeScreenControls.homeScreenPosition = contentY
         }
         onMovementEnded: root.snapDrawerStatus()
@@ -208,12 +209,12 @@ Item {
             Component.onCompleted: loadApplications()
         }
 
-        header: Item {
-            height: root.height - root.topPadding - root.bottomPadding
+        header: Rectangle {
+            height: root.height - root.topPadding - root.bottomPadding - root.closedPositionOffset
             property real oldHeight: height
             onHeightChanged: {
                 if (root.status !== AppDrawer.Status.Open) {
-                    view.contentY = -view.height;
+                    view.contentY = -view.height + root.closedPositionOffset;
                 }
                 oldHeight = height;
             }
