@@ -102,7 +102,7 @@ FocusScope {
         anchors {
             fill: parent
             topMargin: plasmoid.availableScreenRect.y
-            bottomMargin: /*favoriteStrip.height + */plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            bottomMargin: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         }
 
         //TODO: favorite strip disappearing with everything else
@@ -125,7 +125,7 @@ FocusScope {
         anchors.fill: parent
 
         topPadding: plasmoid.availableScreenRect.y
-        bottomPadding: /*favoriteStrip.height +*/ plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+        bottomPadding: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
         closedPositionOffset: favoriteStrip.height
     }
 
