@@ -60,6 +60,7 @@ install(DIRECTORY components/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/p
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
+add_subdirectory(desktoptheme)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
