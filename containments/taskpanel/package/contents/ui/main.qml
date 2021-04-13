@@ -95,12 +95,15 @@ PlasmaCore.ColorScope {
         anchors.fill: parent
         property int oldMouseY: 0
         property int startMouseY: 0
+        property int oldMouseX: 0
+        property int startMouseX: 0
         property bool isDragging: false
         property bool opening: false
         drag.filterChildren: true
         property Button activeButton
 
         onPressed: {
+            startMouseX = oldMouseX = mouse.y;
             startMouseY = oldMouseY = mouse.y;
             taskSwitcher.offset = -taskSwitcher.height;
             activeButton = icons.childAt(mouse.x, mouse.y);
@@ -125,8 +128,9 @@ PlasmaCore.ColorScope {
                 taskSwitcher.showFullScreen();
             //no tasks, let's scroll up the homescreen instead
             } else if (taskSwitcher.tasksCount === 0) {
-                MobileShell.HomeScreenControls.requestHomeScreenPosition(MobileShell.HomeScreenControls.homeScreenPosition - (mouse.y - oldMouseY));
+                MobileShell.HomeScreenControls.requestRelativeScroll(Qt.point(mouse.x - oldMouseX, mouse.y - oldMouseY));
             }
+            oldMouseY = mouse.y;
             oldMouseY = mouse.y;
         }
         onReleased: {
@@ -214,7 +218,6 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width*0.8/3
                 mouseArea: mainMouseArea
-                enabled: !taskSwitcher.visible && (root.showingApp || MobileShell.HomeScreenControls.homeScreenPosition != 0)
                 onClicked: {
                     if (!enabled) {
                         return;

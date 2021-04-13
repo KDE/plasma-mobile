@@ -76,15 +76,15 @@ FocusScope {
             appDrawer.close();
         }
         function onSnapHomeScreenPosition() {
-            if (lastRequestedPosition > 0) {
+            if (lastRequestedPosition < 0) {
                 appDrawer.open();
             } else {
                 appDrawer.close();
             }
         }
-        function onRequestHomeScreenPosition(y) {
-            appDrawer.offset += y;
-            lastRequestedPosition = y;
+        function onRequestRelativeScroll(pos) {
+            appDrawer.offset -= pos.y;
+            lastRequestedPosition = pos.y;
         }
     }
 

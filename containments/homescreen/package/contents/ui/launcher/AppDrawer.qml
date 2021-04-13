@@ -198,7 +198,6 @@ Item {
 
             oldContentY = contentY;
             root.offset = contentY + view.originY + view.height*2 - root.closedPositionOffset*2
-            MobileShell.HomeScreenControls.homeScreenPosition = contentY
         }
         onMovementEnded: root.snapDrawerStatus()
         onFlickEnded: movementEnded()

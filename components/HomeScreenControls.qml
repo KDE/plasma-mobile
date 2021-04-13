@@ -14,8 +14,7 @@ QtObject {
 
     signal resetHomeScreenPosition()
     signal snapHomeScreenPosition()
-    signal requestHomeScreenPosition(real y)
-    property real homeScreenPosition: 0
+    signal requestRelativeScroll(point pos)
     property Item homeScreen
     property QtObject homeScreenWindow
     property bool homeScreenVisible: true
