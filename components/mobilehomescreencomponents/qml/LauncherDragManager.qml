@@ -94,9 +94,9 @@ Item {
         var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
 
         if (pos.x < child.x + child.width / 2) {
-            plasmoid.nativeInterface.stackBefore(spacer, child);
+            HomeScreenComponents.HomeScreenUtils.stackBefore(spacer, child);
         } else {
-            plasmoid.nativeInterface.stackAfter(spacer, child);
+            HomeScreenComponents.HomeScreenUtils.stackAfter(spacer, child);
         }
 
         internal.putItemInDragSpace(item);
@@ -130,9 +130,9 @@ Item {
         spacer.parent = container.flow
 
         if (pos.x < child.x + child.width / 2) {
-            plasmoid.nativeInterface.stackBefore(spacer, child);
+            HomeScreenComponents.HomeScreenUtils.stackBefore(spacer, child);
         } else {
-            plasmoid.nativeInterface.stackAfter(spacer, child);
+            HomeScreenComponents.HomeScreenUtils.stackAfter(spacer, child);
         }
 
         spacer.visible = true;
@@ -297,7 +297,7 @@ Item {
             var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
             putInContainerLayout(item, container);
-            plasmoid.nativeInterface.stackBefore(item, spacer);
+            HomeScreenComponents.HomeScreenUtils.stackBefore(item, spacer);
             spacer.visible = false;
             spacer.parent = root;
         }
