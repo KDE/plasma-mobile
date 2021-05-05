@@ -28,6 +28,7 @@ DragDrop.DropArea {
     //width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
     height: mainFlickable.height
 
+    property alias launcherModel: launcherRepeater.model
     property alias itemsBoundingRect: appletsLayout.childrenRect
 
     property alias appletsLayout: appletsLayout
