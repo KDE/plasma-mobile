@@ -33,11 +33,11 @@ Flickable {
     property Item footer
 
     property alias dragGestureEnabled: gestureHandler.enabled
-    opacity: 1 - appDrawer.openFactor
+    opacity: appDrawer ? 1 - appDrawer.openFactor : 1
     transform: Translate {
-        y: -mainFlickable.height/10 * appDrawer.openFactor
+        y: appDrawer ? -mainFlickable.height/10 * appDrawer.openFactor : 0
     }
-    scale: (3 - appDrawer.openFactor) /3
+    scale: appDrawer ? (3 - appDrawer.openFactor) /3 : 1
     clip: true
 
     property bool showAddPageIndicator: false

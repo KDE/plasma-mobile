@@ -31,24 +31,26 @@ DragHandler {
     property int __scrollDirection: DragGestureHandler.None
     onTranslationChanged: {
         if (active) {
-            if (__scrollDirection === DragGestureHandler.None) {
-                if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
+            if (root.appDrawer) {
+                if (__scrollDirection === DragGestureHandler.None) {
+                    if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
 
-                    __scrollDirection = DragGestureHandler.Vertical;
-                    snapPage();
-                } else if (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit) {
+                        __scrollDirection = DragGestureHandler.Vertical;
+                        snapPage();
+                    } else if (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit) {
 
-                    __scrollDirection = DragGestureHandler.Right;
-                    root.appDrawer.close();
-                } else if (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit) {
+                        __scrollDirection = DragGestureHandler.Right;
+                        root.appDrawer.close();
+                    } else if (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit) {
 
-                    __scrollDirection = DragGestureHandler.Left;
-                    root.appDrawer.close();
+                        __scrollDirection = DragGestureHandler.Left;
+                        root.appDrawer.close();
+                    }
                 }
-            }
 
-            if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
-                root.appDrawer.offset = -translation.y;
+                if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
+                    root.appDrawer.offset = -translation.y;
+                }
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
                 let newContentX = Math.min((mainFlickable.width * mainFlickable.totalPages) - mainFlickable.width, Math.max(0, __initialMainFlickableX - translation.x));
@@ -69,7 +71,9 @@ DragHandler {
         if (active) {
             __initialMainFlickableX = mainFlickable.contentX;
         } else {
-            root.appDrawer.snapDrawerStatus();
+            if (root.appDrawer) {
+                root.appDrawer.snapDrawerStatus();
+            }
             if (__scrollDirection === DragGestureHandler.Left && (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit * 5)) {
                 snapPrevPage();
             } else if (__scrollDirection === DragGestureHandler.Right && (mainFlickable.contentX - __initialMainFlickableX > PlasmaCore.Units.gridUnit * 5)) {
