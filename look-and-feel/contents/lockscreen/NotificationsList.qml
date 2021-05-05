@@ -100,9 +100,9 @@ Item {
 
     Component {
         id: notificationComponent
-        Column {
+        ColumnLayout {
             width: notificationListView.width
-            spacing: units.smallSpacing
+            spacing: PlasmaCore.Units.smallSpacing
             
             // insert application heading here once application grouping is implemented
             
@@ -118,16 +118,14 @@ Item {
         
         anchors {
             top: parent.top
-            left: parent.left
-            right: parent.right
-            leftMargin: units.gridUnit
-            rightMargin: units.gridUnit
+            horizontalCenter: parent.horizontalCenter
         }
+        width: Math.min(PlasmaCore.Units.gridUnit * 25, parent.width - PlasmaCore.Units.gridUnit * 2)
         height: Math.min(contentHeight, parent.height) // don't take up the entire screen for notification list view
 
         interactive: contentHeight > parent.height // only allow scrolling on notifications list if it is long enough
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
-        spacing: units.gridUnit
+        spacing: PlasmaCore.Units.gridUnit
         
         delegate: Kirigami.DelegateRecycler {
             sourceComponent: notificationComponent

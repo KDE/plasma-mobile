@@ -20,7 +20,7 @@ PlasmaCore.ColorScope {
     property string password
     
     property bool isWidescreen: root.height < root.width * 0.75
-    property bool notificationsShown: phoneNotificationsList.count !== 0
+    property bool notificationsShown: false
 
     property bool is24HourTime: Qt.locale().timeFormat(Locale.ShortFormat).toLowerCase().indexOf("ap") === -1
     
@@ -43,6 +43,7 @@ PlasmaCore.ColorScope {
         duration: units.longDuration
         easing.type: Easing.InOutQuad
     }
+    
     // blur background once keypad is open
     FastBlur {
         id: blur
@@ -53,7 +54,6 @@ PlasmaCore.ColorScope {
         opacity: 0
         
         property bool doBlur: notificationsShown || isPinDrawerOpen() // only blur once animation finished for performance
-        
         Behavior on doBlur {
             NumberAnimation {
                 target: blur
@@ -70,7 +70,9 @@ PlasmaCore.ColorScope {
     }
     
     // header bar
-    SimpleHeaderBar {
+    Loader {
+        id: headerBar
+        asynchronous: true
         anchors {
             top: parent.top
             left: parent.left
@@ -78,117 +80,140 @@ PlasmaCore.ColorScope {
         }
         height: units.gridUnit
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        sourceComponent: SimpleHeaderBar {}
     }
-    
-    // phone clock component
-    ColumnLayout {
-        id: phoneClockComponent
+
+    // phone lockscreen component
+    Loader {
+        id: phoneComponent
         visible: !isWidescreen
-        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
-        
-        anchors {
-            top: parent.top
-            topMargin: root.height / 2 - (height / 2 + units.gridUnit * 2)
-            left: parent.left
-            right: parent.right
-        }
-        spacing: 0
+        active: visible
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         
-        states: State {
-            name: "notification"; when: notificationsShown
-            PropertyChanges { target: phoneClockComponent; anchors.topMargin: units.gridUnit * 5 }
+        asynchronous: true
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
+        anchors {
+            top: parent.top
+            bottom: scrollUpIcon.top
+            left: parent.left
+            right: parent.right
+            topMargin: item && !root.notificationsShown ? Math.round(root.height / 2 - (item.implicitHeight / 2 + PlasmaCore.Units.gridUnit * 2)) : PlasmaCore.Units.gridUnit * 5
+            bottomMargin: PlasmaCore.Units.gridUnit
         }
-        
-        transitions: Transition {
+        Behavior on anchors.topMargin {
             NumberAnimation {
-                properties: "anchors.topMargin"
+                duration: loadTimer.running ? 0 : PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
+        // avoid topMargin animation when item is being loaded
+        onLoaded: loadTimer.restart();
+        Timer {
+            id: loadTimer
+            interval: PlasmaCore.Units.longDuration
+        }
         
-        Clock {
-            id: phoneClock
-            alignment: Qt.AlignHCenter
-            Layout.bottomMargin: units.gridUnit * 2 // keep spacing even if media controls are gone
-        }
-        MediaControls {
-            Layout.alignment: Qt.AlignHCenter
-            Layout.fillWidth: true
-            Layout.maximumWidth: units.gridUnit * 25
-            Layout.minimumWidth: units.gridUnit * 15
-            Layout.leftMargin: units.gridUnit
-            Layout.rightMargin: units.gridUnit
-        }
-    }
-    
-    // tablet clock component
-    Item {
-        id: tabletClockComponent
-        visible: isWidescreen
-        width: parent.width / 2   
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: parent.left
-            leftMargin: units.gridUnit * 3
-        }
-        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
+        // move while swiping up
+        transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
         
-        ColumnLayout {
-            id: tabletLayout
-            anchors.centerIn: parent
-            spacing: units.gridUnit
-            opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
+        sourceComponent: ColumnLayout {
+            id: phoneClockComponent
+            spacing: 0
             
             Clock {
-                id: tabletClock
-                alignment: Qt.AlignLeft
-                Layout.fillWidth: true
-                Layout.minimumWidth: units.gridUnit * 20
+                id: phoneClock
+                alignment: Qt.AlignHCenter
+                Layout.bottomMargin: units.gridUnit * 2 // keep spacing even if media controls are gone
             }
             MediaControls {
-                Layout.alignment: Qt.AlignLeft
+                Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
-                Layout.maximumWidth: units.gridUnit * 25
-                Layout.minimumWidth: units.gridUnit * 20
+                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
+                Layout.leftMargin: PlasmaCore.Units.gridUnit
+                Layout.rightMargin: PlasmaCore.Units.gridUnit
+            }
+            
+            NotificationsList {
+                id: phoneNotificationsList
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.gridUnit
+                z: passwordFlickable.contentY === 0 ? 5 : 0 // prevent mousearea from interfering with pin drawer
+                onCountChanged: root.notificationsShown = count !== 0
             }
         }
     }
     
-    // phone notifications list
-    NotificationsList {
-        id: phoneNotificationsList
-        visible: !isWidescreen
-        z: passwordFlickable.contentY === 0 ? 5 : 0 // prevent mousearea from interfering with pin drawer
-        anchors {
-            top: phoneClockComponent.bottom
-            topMargin: units.gridUnit
-            bottom: scrollUpIcon.top
-            bottomMargin: units.gridUnit
-            left: parent.left
-            right: parent.right
-        }
-    }
-    
-    // tablet notifications list
-    ColumnLayout {
+    // tablet lockscreen component
+    Loader {
+        id: tabletComponent
         visible: isWidescreen
-        z: passwordFlickable.contentY === 0 ? 5 : 0 // prevent mousearea from interfering with pin drawer
-        anchors {
-            top: parent.top
-            bottom: parent.bottom
-            left: tabletClockComponent.right
-            right: parent.right
-            rightMargin: units.gridUnit
-        }
+        active: visible
+        opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         
-        NotificationsList {
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth: true
-            Layout.minimumHeight: this.notificationListHeight
-            Layout.minimumWidth: units.gridUnit * 15
-            Layout.maximumWidth: units.gridUnit * 25
+        asynchronous: true
+        z: passwordFlickable.contentY === 0 ? 5 : 0 // in front of password flickable when closed
+        anchors.top: headerBar.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: scrollUpIcon.top
+        
+        // move while swiping up
+        transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
+        
+        sourceComponent: Item {
+            Item {
+                id: tabletClockComponent
+                width: parent.width / 2   
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: parent.left
+                    leftMargin: PlasmaCore.Units.gridUnit * 3
+                }
+                
+                ColumnLayout {
+                    id: tabletLayout
+                    anchors.centerIn: parent
+                    spacing: PlasmaCore.Units.gridUnit
+                    
+                    Clock {
+                        id: tabletClock
+                        alignment: Qt.AlignLeft
+                        Layout.fillWidth: true
+                        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
+                    }
+                    MediaControls {
+                        Layout.alignment: Qt.AlignLeft
+                        Layout.fillWidth: true
+                        Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
+                    }
+                }
+            }
+                
+            // tablet notifications list
+            ColumnLayout {
+                id: tabletNotificationsList
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                    left: tabletClockComponent.right
+                    right: parent.right
+                    rightMargin: PlasmaCore.Units.gridUnit
+                }
+                
+                NotificationsList {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    Layout.fillWidth: true
+                    Layout.maximumHeight: parent.height
+                    Layout.minimumHeight: this.notificationListHeight
+                    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
+                    Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                    onCountChanged: root.notificationsShown = count !== 0
+                }
+            }
         }
     }
     
