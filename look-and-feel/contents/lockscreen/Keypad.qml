@@ -32,7 +32,13 @@ Rectangle {
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
-    implicitHeight: passwordBar.isPinMode ? PlasmaCore.Units.gridUnit * 17 : passwordBar.implicitHeight
+    implicitHeight: {
+        if (passwordBar.isPinMode && !Qt.inputMethod.visible) {
+            return PlasmaCore.Units.gridUnit * 17;
+        } else {
+            return PlasmaCore.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight;
+        }
+    }
     Behavior on implicitHeight {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
