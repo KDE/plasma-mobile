@@ -48,6 +48,8 @@ NanoShell.FullScreenOverlay {
     width: Screen.width
     height: Screen.height
 
+    Component.onCompleted: plasmoid.nativeInterface.panel = window;
+
     onInitiallyOpenedChanged: {
         if (initiallyOpened) mainFlickable.focus = true;
     }
@@ -128,7 +130,6 @@ NanoShell.FullScreenOverlay {
         to: window.closedContentY
         onFinished: {
             window.visible = false;
-            window.closed();
         }
     }
     PropertyAnimation {

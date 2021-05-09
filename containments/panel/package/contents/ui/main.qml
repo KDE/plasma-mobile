@@ -182,7 +182,7 @@ Item {
             slidingPanel.userInteracting = true;
             slidingPanel.flickable.contentY = slidingPanel.closedContentY;
             oldMouseY = mouse.y;
-            slidingPanel.showFullScreen();
+            slidingPanel.visible = true;
         }
         onPositionChanged: {
             slidingPanel.updateOffset(mouse.y - oldMouseY);
