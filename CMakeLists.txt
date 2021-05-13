@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.16)
 project(plasma-phone-components)
 
 set(QT_MIN_VERSION "5.15.0")
-set(KF5_MIN_VERSION "5.78")
+set(KF5_MIN_VERSION "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
