@@ -71,7 +71,7 @@ Item {
             left: strengthIcon.right
             verticalCenter: parent.verticalCenter
         }
-        text: netreg.strength + "% " + netreg.name
+        text: netreg.name
         color: PlasmaCore.ColorScope.textColor
         font.pixelSize: parent.height / 2
     }
