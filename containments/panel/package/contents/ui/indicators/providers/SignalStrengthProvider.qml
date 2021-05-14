@@ -27,10 +27,6 @@ QtObject {
     property OfonoManager ofonoManager: OfonoManager {}
 
     property OfonoNetworkRegistration netreg: OfonoNetworkRegistration {
-        Component.onCompleted: {
-            netreg.scan()
-        }
-
         modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
     }
 

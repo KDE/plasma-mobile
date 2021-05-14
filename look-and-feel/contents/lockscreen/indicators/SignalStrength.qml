@@ -31,7 +31,6 @@ Item {
     OfonoNetworkRegistration {
         id: netreg
         Component.onCompleted: {
-            netreg.scan()
             updateStrengthIcon()
         }
 
