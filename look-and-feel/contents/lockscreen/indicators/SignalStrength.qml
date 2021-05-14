@@ -19,13 +19,6 @@ Item {
     Layout.minimumWidth: strengthIcon.height + strengthLabel.width
     OfonoManager {
         id: ofonoManager
-        onAvailableChanged: {
-           console.log("Ofono is " + available)
-        }
-        onModemAdded: {
-            console.log("modem added " + modem)
-        }
-        onModemRemoved: console.log("modem removed")
     }
 
     OfonoNetworkRegistration {
