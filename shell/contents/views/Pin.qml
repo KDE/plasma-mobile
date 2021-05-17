@@ -18,7 +18,6 @@ PlasmaCore.ColorScope {
     id: root
 
     anchors.fill: parent
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     visible: simManager.pinRequired != OfonoSimManager.NoPin
     property OfonoSimManager simManager: ofonoSimManager
 
@@ -29,6 +28,9 @@ PlasmaCore.ColorScope {
     property var newPin: ""
 
     property bool pinsNotEqual: false
+
+    property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
 
     Connections {
         target: simManager
@@ -54,7 +56,7 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
         }
 
-        color: Qt.rgba(250, 250, 250, 0.85)
+        color: Qt.hsla(PlasmaCore.Theme.backgroundColor.hslHue, PlasmaCore.Theme.backgroundColor.hslSaturation, PlasmaCore.Theme.backgroundColor.hslLightness, 0.85)
 
         function backspace() {
             root.lastKey = ""
@@ -143,7 +145,7 @@ PlasmaCore.ColorScope {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.pointSize: 18
-                    color: "#616161"
+                    color: PlasmaCore.Theme.textColor
                     text: {
                         switch (simManager.pinRequired) {
                             case OfonoSimManager.NoPin: return i18n("No pin (error)");
@@ -168,7 +170,7 @@ PlasmaCore.ColorScope {
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.pointSize: 12
-                    color: "#616161"
+                    color: PlasmaCore.Theme.textColor
                     visible: (simManager.pinRequired !== OfonoSimManager.SimPuk) || root.puk === ""
                     text: simManager.pinRetries && simManager.pinRetries[simManager.pinRequired] ? i18np("%1 attempt left", "%1 attempts left", simManager.pinRetries[simManager.pinRequired]) : ""
                 }
@@ -188,24 +190,17 @@ PlasmaCore.ColorScope {
                             Layout.preferredHeight: Layout.preferredWidth
                             Layout.alignment: Qt.AlignVCenter
                             radius: width
-                            color: "#424242"
+                            color: PlasmaCore.Theme.textColor
                         }
                     }
                     Label { // number/letter
                         visible: root.lastKey !== "" // hide label if no label needed
                         Layout.alignment: Qt.AlignHCenter
-                        color: "#424242"
+                        color: PlasmaCore.Theme.textColor
                         text: root.lastKey
                         font.pointSize: 20
                     }
                 }
-            }
-
-            // separator
-            Rectangle {
-                Layout.fillWidth: true
-                height: 1
-                color: "#eeeeee"
             }
 
             // number keys
@@ -230,13 +225,13 @@ PlasmaCore.ColorScope {
                             width: parent.width
                             height: parent.height
                             radius: 5
-                            color: "white"
+                            color: root.buttonColor
                             visible: modelData.length > 0
 
                             AbstractButton {
                                 anchors.fill: parent
-                                onPressed: parent.color = "#e0e0e0"
-                                onReleased: parent.color = "white"
+                                onPressed: parent.color = root.buttonPressedColor
+                                onReleased: parent.color = root.buttonColor
                                 onClicked: {
                                     if (modelData === "R") {
                                         pinScreen.backspace();
@@ -262,7 +257,7 @@ PlasmaCore.ColorScope {
                             verticalOffset: 1
                             radius: 4
                             samples: 6
-                            color: "#e0e0e0"
+                            color: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
                         }
 
                         PlasmaComponents.Label {
@@ -270,7 +265,7 @@ PlasmaCore.ColorScope {
                             text: modelData
                             anchors.centerIn: parent
                             font.pointSize: 18
-                            color: "#424242"
+                            color: PlasmaCore.Theme.textColor
                         }
 
                         PlasmaCore.IconItem {
