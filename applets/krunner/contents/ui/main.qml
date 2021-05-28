@@ -73,7 +73,7 @@ Item {
             visible: false
             color: "transparent"
             onVisibleChanged: {
-                if (visible) {
+                if (!visible) {
                     queryField.forceActiveFocus();
                 }
             }
@@ -188,7 +188,7 @@ Item {
                                                     checked: resultDelegate.activeAction === index
                                                     focus: resultDelegate.activeAction === index
 
-                                                    Kirigami.Icon{
+                                                    Kirigami.Icon {
                                                         anchors.centerIn: parent
                                                         width: units.iconSizes.small
                                                         height: units.iconSizes.small
