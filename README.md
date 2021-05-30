@@ -1,10 +1,21 @@
-plasma-phone-components
-=======================
+# plasma-phone-components
 
-UI components for Plasma Phone
+UI components for Plasma Mobile.
 
-Test on a development machine
-=======================
+Contains components such as:
+* Shell panels (task panel, and top panel)
+* Homescreen
+* Logout menu
+* Lockscreen theme
+* Search applet
+
+## Links
+* Project page: https://invent.kde.org/plasma/plasma-phone-components
+* Issues relating to the shell: https://invent.kde.org/plasma-mobile/plasma-phone-components/-/issues
+* General Plasma Mobile issues: https://invent.kde.org/teams/plasma-mobile/issues/-/issues
+* Development channel: https://matrix.to/#/#plasmamobile:matrix.org
+
+## Test on a development machine
 
 Dependencies:
 * KDE Frameworks 5 setup (plasma-framework and its dependencies)
