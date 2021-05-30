@@ -1,4 +1,4 @@
-qt5_add_dbus_interfaces(DBUS_SRCS ${KWIN_VIRTUALKEYBOARD_INTERFACE})
+qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_VIRTUALKEYBOARD_INTERFACE})
 
 add_library(plasma_containment_phone_taskpanel MODULE taskpanel.cpp ${DBUS_SRCS})
 

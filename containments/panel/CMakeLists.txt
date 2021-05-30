@@ -1,4 +1,4 @@
-qt5_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.Screenshot.xml
+qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.Screenshot.xml
                                   dbus/org.kde.KScreen.xml)
 
 set(phonepanel_SRCS
