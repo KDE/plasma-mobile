@@ -20,10 +20,8 @@ include(ECMSetupVersion)
 include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(GenerateExportHeader)
-if(ECM_VERSION VERSION_GREATER_EQUAL 5.79)
-    include(KDEGitCommitHooks)
-    include(KDEClangFormat)
-endif()
+include(KDEGitCommitHooks)
+include(KDEClangFormat)
 include(FeatureSummary)
 
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
@@ -62,9 +60,7 @@ add_subdirectory(components)
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
 
-if(ECM_VERSION VERSION_GREATER_EQUAL 5.79)
-    # add clang-format target for all our real source files
-    file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
-    kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
-    kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
-endif()
+# add clang-format target for all our real source files
+file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)
+kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
+kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
