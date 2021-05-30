@@ -163,13 +163,6 @@ Item {
         showDropShadow: !showingApp
     }
     
-    // top panel background (background for the rest of the screen in SlidingPanel.qml)
-    Rectangle {
-        anchors.fill: parent
-        color: PlasmaCore.Theme.backgroundColor
-        opacity: 0.6 * Math.min(1, slidingPanel.offset/panelContents.height)
-    }
-    
     // initial swipe down
     MouseArea {
         z: 99
