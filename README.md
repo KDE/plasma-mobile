@@ -3,11 +3,11 @@
 UI components for Plasma Mobile.
 
 Contains components such as:
-* Shell panels (task panel, and top panel)
-* Homescreen
-* Logout menu
-* Lockscreen theme
-* Search applet
+* Shell panels ([task panel](containments/taskpanel), and [top panel](containments/panel))
+* [Homescreen](containments/homescreen)
+* [Logout menu](look-and-feel/contents/logout)
+* [Lockscreen theme](look-and-feel/contents/lockscreen)
+* [Search applet](applets/krunner)
 
 ## Links
 * Project page: https://invent.kde.org/plasma/plasma-phone-components
