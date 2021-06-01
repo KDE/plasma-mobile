@@ -36,7 +36,8 @@ Rectangle {
         if (passwordBar.isPinMode && !Qt.inputMethod.visible) {
             return PlasmaCore.Units.gridUnit * 17;
         } else {
-            return PlasmaCore.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight;
+            return Math.min(root.height - passwordBar.implicitHeight, // don't make the password bar go off the screen
+                            PlasmaCore.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight);
         }
     }
     Behavior on implicitHeight {
