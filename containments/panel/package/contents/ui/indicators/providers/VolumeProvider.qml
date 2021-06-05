@@ -12,6 +12,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.private.volume 0.1
 
+import "../../volumeosd"
+
 QtObject {
     property bool isVisible: paSinkModel.preferredSink && paSinkModel.preferredSink.muted
     property string icon: paSinkModel.preferredSink && !isDummyOutput(paSinkModel.preferredSink)
@@ -23,6 +25,10 @@ QtObject {
     property int volumeStep: Math.round(5 * PulseAudio.NormalVolume / 100.0)
     readonly property string dummyOutputName: "auto_null"
 
+    function showVolumeOverlay() {
+        osd.showOverlay();
+    }
+    
     function iconName(volume, muted, prefix) {
         if (!prefix) {
             prefix = "audio-volume";
@@ -57,10 +63,10 @@ QtObject {
     }
 
     function playFeedback(sinkIndex) {
-        if(!volumeFeedback){
+        if (!volumeFeedback){
             return;
         }
-        if(sinkIndex == undefined) {
+        if (sinkIndex == undefined) {
             sinkIndex = paSinkModel.preferredSink.index;
         }
         feedback.play(sinkIndex)
@@ -75,7 +81,8 @@ QtObject {
         var percent = volumePercent(volume, maxVolumeValue);
         paSinkModel.preferredSink.muted = percent == 0;
         paSinkModel.preferredSink.volume = volume;
-        osd.show(percent);
+        osd.volume = percent;
+        osd.showOverlay();
         playFeedback();
 
     }
@@ -89,7 +96,8 @@ QtObject {
         var percent = volumePercent(volume, maxVolumeValue);
         paSinkModel.preferredSink.muted = percent == 0;
         paSinkModel.preferredSink.volume = volume;
-        osd.show(percent);
+        osd.volume = percent;
+        osd.showOverlay();
         playFeedback();
     }
 
@@ -102,15 +110,37 @@ QtObject {
 
         var toMute = !paSinkModel.preferredSink.muted;
         paSinkModel.preferredSink.muted = toMute;
-        osd.show(toMute ? 0 : volumePercent(paSinkModel.preferredSink.volume, maxVolumeValue));
+        
+        osd.volume = toMute ? 0 : volumePercent(paSinkModel.preferredSink.volume, maxVolumeValue);
+        osd.showOverlay();
+        
         if (!toMute) {
             playFeedback();
+        }
+    }
+    
+    property var updateVolume: Connections {
+        target: paSinkModel.preferredSink
+        
+        function onVolumeChanged() {
+            var percent = volumePercent(paSinkModel.preferredSink.volume, maxVolumeValue);
+            osd.volume = percent;
+        }
+    }
+    property var updateVolumeOnSinkChange: Connections {
+        target: paSinkModel
+        
+        function onPreferredSinkChanged() {
+            if (paSinkModel.preferredSink) {
+                var percent = volumePercent(paSinkModel.preferredSink.volume, maxVolumeValue);
+                osd.volume = percent;
+            }
         }
     }
 
     property SinkModel paSinkModel: SinkModel {}
 
-    property VolumeOSD osd: VolumeOSD {}
+    property VolumeOsd osd: VolumeOsd {}
 
     property VolumeFeedback feedback: VolumeFeedback {}
 

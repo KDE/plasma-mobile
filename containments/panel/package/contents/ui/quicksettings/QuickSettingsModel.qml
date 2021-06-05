@@ -106,6 +106,10 @@ Item {
         root.closeRequested();
     }
     
+    function openVolumeOsd() {
+        volumeProvider.showVolumeOverlay();
+    }
+    
     // initialize quick settings
     Component.onCompleted: {
         //NOTE: add all in javascript as the static decl of listelements can't have scripts
@@ -150,7 +154,7 @@ Item {
             "icon": "audio-speakers-symbolic",
             "enabled": false,
             "settingsCommand": "plasma-settings -m kcm_pulseaudio",
-            "toggleFunction": ""
+            "toggleFunction": "openVolumeOsd"
         });
         settingsModel.append({
             "text": i18n("Flashlight"),

@@ -74,6 +74,7 @@ Item {
         fullContainer.applet = applet;
         fullContainer.contentItem = applet.fullRepresentationItem;
         //applet.fullRepresentationItem.anchors.fill = fullContainer;
+        
     }
 
     Component.onCompleted: {
@@ -233,7 +234,7 @@ Item {
                     onCloseRequested: slidingPanel.close()
                 }
 
-                // notifications
+                // notifications and media player
                 ListView {
                     id: fullRepresentationView
                     implicitHeight: units.gridUnit * 20
