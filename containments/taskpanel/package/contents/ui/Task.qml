@@ -125,7 +125,7 @@ Item {
                             Layout.fillWidth: true
                             horizontalAlignment: Text.AlignHCenter
                             elide: Text.ElideRight
-                            text: model.display
+                            text: model.AppName
                             color: theme.textColor
                         }
                         PlasmaComponents.ToolButton {
