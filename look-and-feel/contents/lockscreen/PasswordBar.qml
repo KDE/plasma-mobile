@@ -179,7 +179,12 @@ Rectangle {
             anchors.margins: units.smallSpacing
             implicitWidth: height
             icon.name: "input-keyboard-virtual-symbolic"
-            onClicked: root.isPinMode = !root.isPinMode
+            onClicked: {
+                root.isPinMode = !root.isPinMode;
+                if (!root.isPinMode) {
+                    Keyboards.KWinVirtualKeyboard.active = true;
+                }
+            }
         }
         
         // label ("wrong pin", "enter pin")
