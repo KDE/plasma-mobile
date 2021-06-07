@@ -130,6 +130,12 @@ Rectangle {
         focus: keypadOpen && !isPinMode
         z: 1
         
+        onFocusChanged: {
+            if (focus) {
+                Keyboards.KWinVirtualKeyboard.active = true;
+            }
+        }
+        
         property bool externalEdit: false
         property string prevText: ""
         
