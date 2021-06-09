@@ -17,7 +17,6 @@ DrawerBackground {
     property ObjectModel fullRepresentationModel
     property ListView fullRepresentationView
 
-    backgroundColor: (applet.backgroundHints === PlasmaCore.Types.NoBackground) ? "transparent" : Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.8*255})
     visible: shouldBeVisible
 
     property bool shouldBeVisible: applet && (applet.status != PlasmaCore.Types.HiddenStatus && applet.status != PlasmaCore.Types.PassiveStatus)
@@ -35,7 +34,12 @@ DrawerBackground {
                     return;
                 }
             }
-            fullRepresentationModel.append(this);
+            if (applet && applet.pluginName == "org.kde.plasma.notifications") {
+                fullRepresentationModel.insert(0, this);
+            } else {
+                fullRepresentationModel.append(this);
+            }
+
             fullRepresentationView.forceLayout();
 
             fullRepresentationView.currentIndex = ObjectModel.index;

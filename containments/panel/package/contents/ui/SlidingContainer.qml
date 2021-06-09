@@ -28,8 +28,8 @@ NanoShell.FullScreenOverlay {
     readonly property int openedContentY: wideScreen || offset > (collapsedHeight + openThreshold) ? -topEmptyAreaHeight : offsetToContentY(collapsedHeight)
     readonly property int closedContentY: mainFlickable.contentHeight
     
-    readonly property bool wideScreen: width > height || width > units.gridUnit * 45
-    readonly property int drawerWidth: wideScreen ? contentItem.implicitWidth : width
+    readonly property bool wideScreen: false//width > height || width > units.gridUnit * 45
+    readonly property int drawerWidth: 400//wideScreen ? contentItem.implicitWidth : width
     
     property int drawerX: 0
     property alias fixedArea: mainScope
@@ -88,6 +88,11 @@ NanoShell.FullScreenOverlay {
         closeAnim.restart();
         initiallyOpened = false;
     }
+    function expand() {
+        cancelAnimations();
+        expandAnim.restart();
+        initiallyOpened = true;
+    }
     function updateState() {
         cancelAnimations();
         if (window.offset <= 0) {
@@ -139,6 +144,14 @@ NanoShell.FullScreenOverlay {
         duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
         to: window.openedContentY
+    }
+    PropertyAnimation {
+        id: expandAnim
+        target: mainFlickable
+        properties: "contentY"
+        duration: PlasmaCore.Units.longDuration
+        easing.type: Easing.InOutQuad
+        to: 0
     }
 
     // fullscreen background
@@ -203,13 +216,13 @@ NanoShell.FullScreenOverlay {
                 width: parent.width
                 height: mainFlickable.contentHeight
                 onClicked: window.close();
-                
+
                 // actual sliding contents
                 PlasmaComponents.Control {
                     id: contentArea
                     z: 1
-                    x: drawerX
-                    width: drawerWidth
+                    x: Math.max(0, Math.min(window.drawerX, window.width - window.drawerWidth))
+                    width: Math.min(window.width, window.drawerWidth)
                 }
             }
         }

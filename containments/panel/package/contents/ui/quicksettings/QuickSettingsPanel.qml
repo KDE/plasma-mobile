@@ -24,19 +24,23 @@ import "../"
 Item {
     id: root
     implicitWidth: column.implicitWidth + PlasmaCore.Units.smallSpacing * 6
-    implicitHeight: column.implicitHeight + PlasmaCore.Units.smallSpacing * 2
+    implicitHeight: background.implicitHeight
 
+    signal expandRequested
     signal closeRequested
     signal closed
 
     property bool expandedMode: parentSlidingPanel.wideScreen
-    readonly property real expandedRatio: expandedMode ? 1 : Math.max(0, Math.min(1, (parentSlidingPanel.offset - (parentSlidingPanel.topPanelHeight + firstRowHeight) - parentSlidingPanel.topPanelHeight) / otherRowsHeight + 0.05)) // HACK: add 0.05 to prevent jumping since this height isn't exact
+    readonly property real expandedRatio: expandedMode
+                    ? 1
+                    // This counts also all spacings in form of Lyout.topMargin that some elements has
+                    : Math.max(0, Math.min(1, (parentSlidingPanel.offset - firstRowHeight - indicatorsRow.height - Kirigami.Units.largeSpacing - Kirigami.Units.smallSpacing * 2 - bottomBar.height - background.margins.top -background.fixedMargins.bottom) / otherRowsHeight + 0.05)) // HACK: add 0.05 to prevent jumping since this height isn't exact
 
     readonly property real topEmptyAreaHeight: parentSlidingPanel.userInteracting
         ? (root.height - collapsedHeight) * (1 - expandedRatio)
         : (expandedMode ? 0 : root.height - collapsedHeight)
      
-    readonly property real collapsedHeight: parentSlidingPanel.topPanelHeight + firstRowHeight + PlasmaCore.Units.smallSpacing * 2
+    readonly property real collapsedHeight: parentSlidingPanel.topPanelHeight + firstRowHeight + bottomBar.height + background.margins.top + background.fixedMargins.bottom
     readonly property real firstRowHeight: flow.children[0].height
     readonly property real otherRowsHeight: column.implicitHeight - firstRowHeight - parentSlidingPanel.topPanelHeight
     
@@ -67,80 +71,65 @@ Item {
 
     property QuickSettingsModel quickSettingsModel: QuickSettingsModel {}
     
-    // shadow below panel (only if not widescreen)
-    Rectangle {
-        visible: !parentSlidingPanel.wideScreen
-        anchors.bottom: background.bottom
-        anchors.left: background.left
-        anchors.right: background.right
-        height: PlasmaCore.Units.gridUnit
-        gradient: Gradient {
-            GradientStop {
-                position: 0.0
-                color: Qt.rgba(0, 0, 0, 0.05)
-            }
-            GradientStop {
-                position: 1.0
-                color: "transparent"
-            }
-        }
-    }
-    // shadow for bottom bar
-    RectangularGlow {
-        z: 1
-        anchors.topMargin: 1
-        anchors.fill: bottomBar
-        cached: true
-        glowRadius: 4
-        spread: 0.2
-        color: Qt.rgba(0, 0, 0, 0.1)
-    }
-    // shadow for whole panel (only if widescreen)
-    RectangularGlow {
-        visible: parentSlidingPanel.wideScreen
-        anchors.topMargin: 1
-        anchors.top: background.top
-        anchors.left: background.left
-        anchors.right: background.right
-        anchors.bottom: bottomBar.bottom
-        cached: true
-        glowRadius: 4
-        spread: 0.2
-        color: Qt.rgba(0, 0, 0, 0.1)
-    }
     
     // bottom "handle bar"
-    Rectangle {
+    Item {
         id: bottomBar
-        anchors.top: background.bottom
-        anchors.left: background.left
-        anchors.right: background.right
-        color: PlasmaCore.Theme.backgroundColor
-        height: Math.round(PlasmaCore.Units.gridUnit * 1.3)
+        anchors {
+            bottom: background.bottom
+            left: background.left
+            right: background.right
+            leftMargin: background.fixedMargins.left
+            rightMargin: background.fixedMargins.right
+            bottomMargin: background.fixedMargins.bottom
+        }
+        visible: !parentSlidingPanel.wideScreen
+        height: visible ? Math.round(PlasmaCore.Units.gridUnit * 1.3) : 0
         z: 1
-        
-        Kirigami.Icon {
-            visible: !parentSlidingPanel.wideScreen
+        Kirigami.Separator {
+            anchors {
+                left: parent.left
+                right: parent.right
+            }
             color: PlasmaCore.Theme.disabledTextColor
-            source: expandedRatio >= 1 ? "go-up-symbolic" : "go-down-symbolic"
+            opacity: 0.3
+        }
+        Kirigami.Icon {
+            color: PlasmaCore.Theme.disabledTextColor
+            source: expandedRatio >= 0.5 ? "go-up-symbolic" : "go-down-symbolic"
             implicitWidth: PlasmaCore.Units.gridUnit
             implicitHeight: width
             anchors.centerIn: parent
         }
+        TapHandler {
+            onTapped: {
+                if (root.expandedMode) {
+                    root.closeRequested();
+                } else {
+                    root.expandRequested();
+                    root.expandedMode = true;
+                }
+            }
+        }
     }
     
-    Rectangle {
+    PlasmaCore.FrameSvgItem {
         id: background
-        color: PlasmaCore.Theme.backgroundColor
+        implicitHeight: column.implicitHeight + bottomBar.height + margins.top + fixedMargins.bottom
+        enabledBorders: parentSlidingPanel.wideScreen ? PlasmaCore.FrameSvg.AllBorders : PlasmaCore.FrameSvg.BottomBorder
         anchors.fill: parent
-        
+        imagePath: "widgets/background"
+
         ColumnLayout {
             id: column
-            anchors.leftMargin: PlasmaCore.Units.smallSpacing
-            anchors.rightMargin: PlasmaCore.Units.smallSpacing
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors {
+                leftMargin: parent.fixedMargins.left
+                rightMargin: parent.fixedMargins.right
+                bottomMargin: parent.fixedMargins.bottom + bottomBar.height
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
+            }
             spacing: 0
             clip: expandedRatio > 0 && expandedRatio < 1 // only clip when necessary to improve performance
             
@@ -157,7 +146,7 @@ Item {
                 showGradientBackground: false
                 showDropShadow: false
                 transform: Translate {
-                    y: otherRowsHeight * (1 - root.expandedRatio) - PlasmaCore.Units.smallSpacing
+                    y: otherRowsHeight * (1 - root.expandedRatio)
                 }
             }
             
@@ -165,14 +154,14 @@ Item {
                 id: flow
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
-                Layout.leftMargin: units.smallSpacing + (units.largeSpacing - units.smallSpacing) * root.expandedRatio
-                Layout.rightMargin: units.smallSpacing + (units.largeSpacing - units.smallSpacing) * root.expandedRatio
+                Layout.leftMargin: root.expandedRatio < 0.4 ? -background.fixedMargins.left * (1 - root.expandedRatio) : 0
+                Layout.rightMargin: root.expandedRatio < 0.4 ? -background.fixedMargins.right * (1 - root.expandedRatio) : 0
                 Layout.topMargin: units.largeSpacing
                 
                 readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
                 readonly property real columns: Math.floor(width / cellSizeHint)
                 readonly property real columnsWhenCollapsed: 1.05 // .05 to account for the fact that we have an overshoot on the panel on first flick, we don't want the movement to be jarring
-                readonly property real columnWidth: Math.floor(width / (columns + (columnsWhenCollapsed - columnsWhenCollapsed * root.expandedRatio)))
+                readonly property real columnWidth: Math.floor(width / columns)
                 
                 spacing: 0
                 Repeater {

@@ -70,7 +70,7 @@ Item {
             fullContainer = fullContainerComponent.createObject(fullRepresentationView.contentItem, {"fullRepresentationModel": fullRepresentationModel, "fullRepresentationView": fullRepresentationView});
         }
 
-        applet.fullRepresentationItem.parent = fullContainer;
+       // applet.fullRepresentationItem.parent = fullContainer;
         fullContainer.applet = applet;
         fullContainer.contentItem = applet.fullRepresentationItem;
         //applet.fullRepresentationItem.anchors.fill = fullContainer;
@@ -209,12 +209,12 @@ Item {
 
         contentItem: MouseArea {
             // mousearea captures touch presses so that the flickable picks them up for swiping
-            implicitWidth: slidingPanel.width
+            implicitWidth: slidingPanel.wideScreen ? panelContents.implicitWidth : slidingPanel.width
             implicitHeight: Math.min(slidingPanel.height, quickSettings.implicitHeight)
 
             GridLayout {
                 id: panelContents
-                anchors.fill: parent
+                width: slidingPanel.wideScreen ? Math.min(parent.width, implicitWidth) : parent.width
                 
                 columns: slidingPanel.wideScreen ? 2 : 1
                 rows: slidingPanel.wideScreen ? 1 : 2
@@ -229,18 +229,21 @@ Item {
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
 
                     parentSlidingPanel: slidingPanel
-                    onCloseRequested: slidingPanel.hide()
+                    onExpandRequested: slidingPanel.expand()
+                    onCloseRequested: slidingPanel.close()
                 }
 
                 // notifications
                 ListView {
                     id: fullRepresentationView
                     implicitHeight: units.gridUnit * 20
-                    Layout.topMargin: slidingPanel.wideScreen ? 0 : Math.round(Kirigami.Units.gridUnit * 1.5) // add height of bottom bar
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettings.width*fullRepresentationModel.count) : panelContents.width 
-                    Layout.preferredHeight: Math.min(plasmoid.screenGeometry.height - quickSettings.implicitHeight - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
+                    Layout.preferredHeight: slidingPanel.wideScreen
+                            ? Math.min(units.gridUnit * 20, Math.max(units.gridUnit * 15, quickSettings.implicitHeight))
+                            : Math.min(plasmoid.screenGeometry.height - quickSettings.implicitHeight - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
+
                     z: 1
-                    interactive: count > 0 && width < contentWidth
+                    interactive: true//count > 0 && width < contentWidth
 
                     clip: slidingPanel.wideScreen
                     y: slidingPanel.wideScreen ? 0 : quickSettings.trueHeight
@@ -251,11 +254,11 @@ Item {
                             return fullRepresentationModel.count > 0 && slidingPanel.offset / slidingPanel.collapsedHeight;
                         }
                     }
-                    preferredHighlightBegin: slidingPanel.drawerX
+                    //preferredHighlightBegin: slidingPanel.drawerX
 
                     cacheBuffer: width * 100
                     highlightFollowsCurrentItem: true
-                    highlightRangeMode: ListView.StrictlyEnforceRange
+                    highlightRangeMode: ListView.ApplyRange
                     highlightMoveDuration: units.longDuration
                     snapMode: slidingPanel.wideScreen ? ListView.NoSnap : ListView.SnapOneItem
                     model: ObjectModel {
@@ -279,8 +282,6 @@ Item {
                 right: parent.right
                 bottom: parent.bottom
             }
-            backgroundColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.8*255})
-
             parent: slidingPanel.fixedArea
             opacity: fullRepresentationView.opacity
             visible: !slidingPanel.wideScreen && fullRepresentationModel.count > 1
