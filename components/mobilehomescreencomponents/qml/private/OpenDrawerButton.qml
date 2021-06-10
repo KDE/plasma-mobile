@@ -51,7 +51,7 @@ MouseArea {
                 left: parent.left
                 verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
             }
-            color: theme.alternateBackgroundColor
+            color: PlasmaCore.Theme.complementaryBackgroundColor
             transformOrigin: Item.Right
             rotation: -45 + 90 * arrowUpIcon.factor
             antialiasing: true
@@ -64,7 +64,7 @@ MouseArea {
                 right: parent.right
                 verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
             }
-            color: theme.alternateBackgroundColor
+            color: PlasmaCore.Theme.complementaryBackgroundColor
             transformOrigin: Item.Left
             rotation: 45 - 90 * arrowUpIcon.factor
             antialiasing: true
