@@ -4,7 +4,6 @@
  */
 
 #include "homescreenutils.h"
-#include "applicationlistmodel.h"
 #include "favoritesmodel.h"
 
 #include <QtQml>
@@ -18,20 +17,6 @@ HomeScreenUtils::HomeScreenUtils(QObject *parent)
 }
 
 HomeScreenUtils::~HomeScreenUtils() = default;
-
-ApplicationListModel *HomeScreenUtils::applicationListModel()
-{
-    if (!m_applicationListModel) {
-        if (m_showAllApps) {
-            m_applicationListModel = new ApplicationListModel(this);
-        } else {
-            m_applicationListModel = new FavoritesModel(this);
-        }
-      //  m_applicationListModel->setApplet(this);
-        m_applicationListModel->loadApplications();
-    }
-    return m_applicationListModel;
-}
 
 void HomeScreenUtils::stackBefore(QQuickItem *item1, QQuickItem *item2)
 {
