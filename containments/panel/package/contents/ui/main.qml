@@ -90,7 +90,6 @@ Item {
         groupMode: TaskManager.TasksModel.GroupDisabled
 
         screenGeometry: plasmoid.screenGeometry
-        filterByScreen: plasmoid.configuration.showForCurrentScreenOnly
         //FIXME: workaround
         Component.onCompleted: tasksModel.countChanged();
     }
