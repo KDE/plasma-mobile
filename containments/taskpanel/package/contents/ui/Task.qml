@@ -78,7 +78,7 @@ Item {
             width: parent.width
             height: parent.height
             radius: units.smallSpacing
-            color: theme.backgroundColor
+            color: PlasmaCore.Theme.backgroundColor
             opacity: 1 * (1-Math.abs(x)/width)
 
             MouseArea {
@@ -126,7 +126,7 @@ Item {
                             horizontalAlignment: Text.AlignHCenter
                             elide: Text.ElideRight
                             text: model.AppName
-                            color: theme.textColor
+                            color: PlasmaCore.Theme.textColor
                         }
                         PlasmaComponents.ToolButton {
                             z: 99

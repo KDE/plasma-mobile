@@ -104,7 +104,7 @@ ColumnLayout {
         text: delegateRoot.text
         bottomPadding: units.smallSpacing * 2
         horizontalAlignment: Text.AlignHCenter
-        font.pixelSize: theme.defaultFont.pixelSize * 0.8
+        font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 0.8
         elide: Text.ElideRight
         verticalAlignment: Text.AlignVCenter
 

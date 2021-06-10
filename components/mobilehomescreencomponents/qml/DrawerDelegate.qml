@@ -74,7 +74,7 @@ MouseArea {
                 radius: width
                 width: units.smallSpacing
                 height: width
-                color: theme.highlightColor
+                color: PlasmaCore.Theme.highlightColor
             }
         }
 
@@ -95,7 +95,7 @@ MouseArea {
             text:  model.applicationName
 
             //FIXME: export smallestReadableFont
-            font.pointSize: theme.defaultFont.pointSize * 0.9
+            font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
             color: "white"
         }
     }

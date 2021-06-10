@@ -129,7 +129,7 @@ ContainmentLayoutManager.ItemContainer {
                     radius: width
                     width: PlasmaCore.Units.smallSpacing
                     height: width
-                    color: theme.highlightColor
+                    color: PlasmaCore.Theme.highlightColor
                 }
                 //TODO: in loader?
                 Private.DelegateRemoveButton {
@@ -155,8 +155,8 @@ ContainmentLayoutManager.ItemContainer {
                 text:  model.applicationName
 
                 //FIXME: export smallestReadableFont
-                font.pointSize: theme.defaultFont.pointSize * 0.9
-                color: "white"//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop ? "white" : theme.textColor
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
+                color: "white"//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
 
                 layer.enabled: true//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop
                 layer.effect: DropShadow {

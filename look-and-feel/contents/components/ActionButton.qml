@@ -83,7 +83,7 @@ Item {
 
     PlasmaComponents3.Label {
         id: label
-        font.pointSize: Math.max(fontSize + 1,theme.defaultFont.pointSize + 1)
+        font.pointSize: Math.max(fontSize + 1,PlasmaCore.Theme.defaultFont.pointSize + 1)
         anchors {
             top: icon.bottom
             topMargin: (softwareRendering ? 1.5 : 1) * units.smallSpacing

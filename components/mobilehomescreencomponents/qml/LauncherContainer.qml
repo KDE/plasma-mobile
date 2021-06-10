@@ -35,7 +35,7 @@ Item {
         id: metrics
         text: "M\nM"
         visible: false
-        font.pointSize: theme.defaultFont.pointSize * 0.9
+        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
     }
 
     Item {

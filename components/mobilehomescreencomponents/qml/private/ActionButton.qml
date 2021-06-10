@@ -93,7 +93,7 @@ PlasmaCore.ToolTipArea {
             id: actionText
             text: button.text
             style: Text.Outline
-            color: theme.textColor
+            color: PlasmaCore.Theme.textColor
             styleColor: Qt.rgba(1,1,1,0.4)
             anchors.verticalCenter: parent.verticalCenter
         }

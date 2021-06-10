@@ -149,7 +149,7 @@ Item {
 
     PlasmaComponents.Label {
         id: usernameDelegate
-        font.pointSize: Math.max(fontSize + 2,theme.defaultFont.pointSize + 2)
+        font.pointSize: Math.max(fontSize + 2, PlasmaCore.Theme.defaultFont.pointSize + 2)
         anchors {
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
