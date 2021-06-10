@@ -16,13 +16,12 @@
 #include <QQuickWindow>
 
 // KDE
+#include <KApplicationTrader>
 #include <KIO/ApplicationLauncherJob>
 #include <KNotificationJobUiDelegate>
 #include <KService>
-#include <KServiceGroup>
 #include <KSharedConfig>
 #include <KSycoca>
-#include <KSycocaEntry>
 
 #include <KWayland/Client/connection_thread.h>
 #include <KWayland/Client/plasmawindowmanagement.h>
@@ -158,71 +157,55 @@ void ApplicationListModel::loadApplications()
     auto cfg = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
     auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
 
-    QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
+    const QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
 
     beginResetModel();
 
     m_applicationList.clear();
 
-    KServiceGroup::Ptr group = KServiceGroup::root();
-    if (!group || !group->isValid()) return;
-    KServiceGroup::List subGroupList = group->entries(true);
-
     QMap<int, ApplicationData> orderedList;
     QList<ApplicationData> unorderedList;
     QSet<QString> foundFavorites;
 
-    // Iterate over all entries in the group
-    while (!subGroupList.isEmpty()) {
-        KSycocaEntry::Ptr groupEntry = subGroupList.first();
-        subGroupList.pop_front();
+    auto filter = [blacklist](const KService::Ptr &service) -> bool {
+        if (service->noDisplay()) {
+            return false;
+        }
 
-        if (groupEntry->isType(KST_KServiceGroup)) {
-            KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup *>(groupEntry.data()));
+        if (!service->showOnCurrentPlatform()) {
+            return false;
+        }
 
-            if (!serviceGroup->noDisplay()) {
-                KServiceGroup::List entryGroupList = serviceGroup->entries(true);
+        if (blacklist.contains(service->desktopEntryName())) {
+            return false;
+        }
 
-                for(KServiceGroup::List::ConstIterator it = entryGroupList.constBegin();  it != entryGroupList.constEnd(); it++) {
-                    KSycocaEntry::Ptr entry = (*it);
+        return true;
+    };
 
-                    if (entry->isType(KST_KServiceGroup)) {
-                        KServiceGroup::Ptr serviceGroup(static_cast<KServiceGroup *>(entry.data()));
-                        subGroupList << serviceGroup;
+    const KService::List apps = KApplicationTrader::query(filter);
 
-                    } else if (entry->property(QStringLiteral("Exec")).isValid()) {
-                        KService::Ptr service(static_cast<KService *>(entry.data()));
+    for (const KService::Ptr &service : apps) {
+        ApplicationData data;
+        data.name = service->name();
+        data.icon = service->icon();
+        data.storageId = service->storageId();
+        data.uniqueId = service->storageId();
+        data.entryPath = service->exec();
+        data.startupNotify = service->property(QStringLiteral("StartupNotify")).toBool();
 
-                        if (service->isApplication() &&
-                            !blacklist.contains(service->desktopEntryName()) &&
-                            service->showOnCurrentPlatform() &&
-                            !service->property(QStringLiteral("Terminal"), QVariant::Bool).toBool()) {
+        if (m_favorites.contains(data.uniqueId)) {
+            data.location = Favorites;
+            foundFavorites.insert(data.uniqueId);
+        } else if (m_desktopItems.contains(data.uniqueId)) {
+            data.location = Desktop;
+        }
 
-                            ApplicationData data;
-                            data.name = service->name();
-                            data.icon = service->icon();
-                            data.storageId = service->storageId();
-                            data.uniqueId = service->storageId();
-                            data.entryPath = service->exec();
-                            data.startupNotify = service->property(QStringLiteral("StartupNotify")).toBool();
-
-                            if (m_favorites.contains(data.uniqueId)) {
-                                data.location = Favorites;
-                                foundFavorites.insert(data.uniqueId);
-                            } else if (m_desktopItems.contains(data.uniqueId)) {
-                                data.location = Desktop;
-                            }
-
-                            auto it = m_appPositions.constFind(data.uniqueId);
-                            if (it != m_appPositions.constEnd()) {
-                                orderedList[*it] = data;
-                            } else {
-                                unorderedList << data;
-                            }
-                        }
-                    }
-                }
-            }
+        auto it = m_appPositions.constFind(data.uniqueId);
+        if (it != m_appPositions.constEnd()) {
+            orderedList[*it] = data;
+        } else {
+            unorderedList << data;
         }
     }
 
