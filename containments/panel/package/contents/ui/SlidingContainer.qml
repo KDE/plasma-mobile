@@ -30,7 +30,7 @@ NanoShell.FullScreenOverlay {
     
     readonly property bool wideScreen: width > height || width > units.gridUnit * 45
     readonly property int drawerWidth: wideScreen ? contentItem.implicitWidth : width
-    
+
     property int drawerX: 0
     property alias fixedArea: mainScope
     property alias flickable: mainFlickable
@@ -53,7 +53,7 @@ NanoShell.FullScreenOverlay {
     onInitiallyOpenedChanged: {
         if (initiallyOpened) mainFlickable.focus = true;
     }
-    
+
     function offsetToContentY(num) { return -num + window.fullyOpenHeight; }
     function contentYToOffset(num) { return offsetToContentY(num); }
     

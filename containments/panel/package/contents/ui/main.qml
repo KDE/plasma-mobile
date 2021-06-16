@@ -199,7 +199,7 @@ Item {
         topPanelHeight: topPanel.height
         topEmptyAreaHeight: quickSettings.topEmptyAreaHeight
         collapsedHeight: quickSettings.collapsedHeight
-        fullyOpenHeight: quickSettings.implicitHeight
+        fullyOpenHeight: quickSettings.expandedHeight
         
         appletsShown: fullRepresentationView.count > 0
         
