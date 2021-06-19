@@ -202,6 +202,6 @@ bool PhonePanel::isSystem24HourFormat()
     return timeFormat == QStringLiteral(FORMAT24H);
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(quicksettings, PhonePanel, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(PhonePanel, "metadata.json")
 
 #include "phonepanel.moc"

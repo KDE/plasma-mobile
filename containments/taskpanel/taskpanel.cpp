@@ -206,6 +206,6 @@ void TaskPanel::closeActiveWindow()
     }
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(taskpanel, TaskPanel, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(TaskPanel, "metadata.json")
 
 #include "taskpanel.moc"

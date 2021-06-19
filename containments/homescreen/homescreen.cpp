@@ -42,6 +42,6 @@ void HomeScreen::stackAfter(QQuickItem *item1, QQuickItem *item2)
     item1->stackAfter(item2);
 }
 
-K_EXPORT_PLASMA_APPLET_WITH_JSON(homescreen, HomeScreen, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "metadata.json")
 
 #include "homescreen.moc"
