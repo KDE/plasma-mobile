@@ -41,9 +41,9 @@ Item {
         : (expandedMode ? 0 : root.height - collapsedHeight)
 
 
-    readonly property real collapsedHeight: column.Layout.minimumHeight + background.fixedMargins.top + background.fixedMargins.bottom
+    readonly property real collapsedHeight: column.Layout.minimumHeight + background.margins.top + background.fixedMargins.bottom
 
-    readonly property real expandedHeight: column.Layout.maximumHeight + background.fixedMargins.top + background.fixedMargins.bottom
+    readonly property real expandedHeight: column.Layout.maximumHeight + background.margins.top + background.fixedMargins.bottom
 
     Connections {
         target: root.parentSlidingPanel
@@ -81,21 +81,23 @@ Item {
 
         ColumnLayout {
             id: column
+            
             anchors {
                 leftMargin: parent.fixedMargins.left
                 rightMargin: parent.fixedMargins.right
-                bottomMargin: parent.fixedMargins.bottom
+                bottomMargin: parent.fixedMargins.bottom * (parentSlidingPanel.wideScreen ? 1 : 0.5) // HACK: fix the bottom arrow not being centered, bottom margins aren't properly calculated it seems
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
             }
+            
             spacing: 0
             height: Layout.minimumHeight * (1 - root.expandedRatio) + (Layout.maximumHeight * root.expandedRatio)
-           // clip: expandedRatio > 0 && expandedRatio < 1 // only clip when necessary to improve performance
             
             readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
             readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
             
+            // top indicators (clock, widgets, etc.)
             IndicatorsRow {
                 id: indicatorsRow
                 z: 1
@@ -106,6 +108,8 @@ Item {
                 showGradientBackground: false
                 showDropShadow: false
             }
+            
+            // quicksettings list
             ColumnLayout {
                 clip: expandedRatio > 0 && expandedRatio < 1 // only clip when necessary to improve performance
                 Layout.fillWidth: true
@@ -172,27 +176,30 @@ Item {
             }
 
             // bottom "handle bar"
-            Item {
+            ColumnLayout {
                 id: bottomBar
-                Layout.fillWidth: true
+                spacing: 0
                 visible: !parentSlidingPanel.wideScreen
+                
+                Layout.fillWidth: true
                 implicitHeight: visible ? Math.round(PlasmaCore.Units.gridUnit * 1.3) : 0
-                z: 1
+                
                 Kirigami.Separator {
-                    anchors {
-                        left: parent.left
-                        right: parent.right
-                    }
+                    Layout.fillWidth: true
                     color: PlasmaCore.Theme.disabledTextColor
                     opacity: 0.3
                 }
+                
                 Kirigami.Icon {
                     color: PlasmaCore.Theme.disabledTextColor
                     source: expandedRatio >= 0.5 ? "go-up-symbolic" : "go-down-symbolic"
                     implicitWidth: PlasmaCore.Units.gridUnit
                     implicitHeight: width
-                    anchors.centerIn: parent
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.topMargin: Kirigami.Units.smallSpacing
+                    Layout.bottomMargin: Kirigami.Units.smallSpacing
                 }
+                
                 TapHandler {
                     onTapped: {
                         if (root.expandedMode) {
