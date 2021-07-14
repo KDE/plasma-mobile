@@ -50,6 +50,9 @@ NanoShell.FullScreenOverlay {
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
 
+    onVisibleChanged: if (!visible) {
+        closed()
+    }
     onInitiallyOpenedChanged: {
         if (initiallyOpened) mainFlickable.focus = true;
     }
@@ -93,7 +96,6 @@ NanoShell.FullScreenOverlay {
         if (window.offset <= 0) {
             // close immediately, so that we don't have to wait units.longDuration 
             window.visible = false;
-            window.closed();
             close();
         } else if (window.direction === SlidingContainer.MovementDirection.None) {
             if (window.offset < openThreshold) {
