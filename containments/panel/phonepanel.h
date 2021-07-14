@@ -28,6 +28,7 @@ public:
 
 public Q_SLOTS:
     void executeCommand(const QString &command);
+    void launchApp(const QString &app);
     void toggleTorch();
     void takeScreenshot();
 

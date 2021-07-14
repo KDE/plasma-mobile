@@ -119,6 +119,12 @@ Item {
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
             font.pixelSize: height / 2
+
+            TapHandler {
+                onTapped: {
+                    plasmoid.nativeInterface.launchApp("org.kde.kclock");
+                }
+            }
         }
 
         RowLayout {
