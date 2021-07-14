@@ -70,7 +70,7 @@ Item {
     
     onClosed: quickSettingsModel.panelClosed()
 
-    property QuickSettingsModel quickSettingsModel: QuickSettingsModel {}
+    readonly property SettingsModel quickSettingsModel: SettingsModel {}
     
     PlasmaCore.FrameSvgItem {
         id: background
@@ -132,7 +132,7 @@ Item {
                     spacing: 0
 
                     Repeater {
-                        model: quickSettingsModel.model
+                        model: quickSettingsModel
                         delegate: Delegate {
                             id: delegateItem
                             required property var modelData

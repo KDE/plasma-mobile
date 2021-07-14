@@ -21,6 +21,7 @@ import org.kde.taskmanager 0.1 as TaskManager
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 import "LayoutManager.js" as LayoutManager
 
@@ -148,7 +149,7 @@ Item {
     IndicatorProviders.VolumeProvider {
         id: volumeProvider
 
-        readonly property var soundQuickSetting: QuickSetting {
+        readonly property var setting: HomeScreenComponents.QuickSetting {
             text: i18n("Sound")
             icon: "audio-speakers-symbolic"
             enabled: false
@@ -156,8 +157,8 @@ Item {
             function toggle() {
                 volumeProvider.showVolumeOverlay()
             }
-            Component.onCompleted: quickSettings.quickSettingsModel.model.push(volumeProvider.soundQuickSetting)
         }
+        Component.onCompleted: quickSettings.quickSettingsModel.include(setting)
     }
     IndicatorProviders.WifiProvider {
         id: wifiProvider

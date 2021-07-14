@@ -22,13 +22,17 @@
 #include <QQmlContext>
 #include <QQuickItem>
 
-#include "favoritesmodel.h"
 #include "applicationlistmodel.h"
+#include "favoritesmodel.h"
 #include "homescreenutils.h"
+#include "quicksettingsmodel.h"
 
 void MobileHomeScreenComponentsPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mobilehomescreencomponents"));
+
+    qmlRegisterType<QuickSetting>(uri, 0, 1, "QuickSetting");
+    qmlRegisterType<QuickSettingsModel>(uri, 0, 1, "QuickSettingsModel");
 
     qmlRegisterSingletonType<HomeScreenUtils>(uri, 0, 1, "HomeScreenUtils",
                                               [](QQmlEngine *, QJSEngine *) {
