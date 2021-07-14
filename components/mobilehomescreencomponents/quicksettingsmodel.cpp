@@ -6,6 +6,11 @@
 
 #include "quicksettingsmodel.h"
 
+#include <KPackage/PackageLoader>
+#include <QFileInfo>
+#include <QQmlComponent>
+#include <QQmlEngine>
+
 QuickSettingsModel::QuickSettingsModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -36,6 +41,36 @@ QVariant QuickSettingsModel::data(const QModelIndex &index, int role) const
     }
 
     return QVariant::fromValue<QObject *>(m_children[index.row()]);
+}
+
+void QuickSettingsModel::classBegin()
+{
+    QQmlEngine *engine = qmlEngine(this);
+
+    const auto packages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KPackage/GenericQML"), "plasma/quicksettings");
+    auto c = new QQmlComponent(engine, this);
+    for (const auto &metaData : packages) {
+        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
+        if (!package.isValid()) {
+            qWarning() << "Could not load" << metaData.fileName();
+            continue;
+        }
+
+        c->loadUrl(package.fileUrl("mainscript"), QQmlComponent::PreferSynchronous);
+        auto created = c->create(engine->rootContext());
+        auto createdSetting = qobject_cast<QuickSetting *>(created);
+        if (!createdSetting) {
+            qWarning() << "Could not load" << metaData.fileName() << created;
+            delete created;
+            continue;
+        }
+        include(createdSetting);
+    }
+    delete c;
+}
+
+void QuickSettingsModel::componentComplete()
+{
 }
 
 ////////////////////////

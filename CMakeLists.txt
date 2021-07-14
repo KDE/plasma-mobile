@@ -49,6 +49,7 @@ include(CheckIncludeFiles)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
+plasma_install_package(quicksettings/nightcolor org.kde.plasma.nightcolor quicksettings)
 
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
 

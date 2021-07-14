@@ -61,9 +61,10 @@ private:
     QList<QObject *> m_children;
 };
 
-class QuickSettingsModel : public QAbstractListModel
+class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
+    Q_INTERFACES(QQmlParserStatus)
     Q_PROPERTY(QQmlListProperty<QuickSetting> children READ children NOTIFY childrenChanged)
     Q_CLASSINFO("DefaultProperty", "children")
     QML_ELEMENT
@@ -77,6 +78,8 @@ public:
 
     QQmlListProperty<QuickSetting> children();
 
+    void classBegin() override;
+    void componentComplete() override;
     Q_SCRIPTABLE void include(QuickSetting *item);
 
 Q_SIGNALS:

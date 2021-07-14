@@ -13,7 +13,6 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.bluezqt 1.0 as BluezQt
-import org.kde.colorcorrect 0.1 as CC
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
@@ -114,26 +113,6 @@ HomeScreenComponents.QuickSettingsModel
         enabled: plasmoid.nativeInterface.autoRotateEnabled
         function toggle() {
             plasmoid.nativeInterface.autoRotateEnabled = !enabled
-        }
-    }
-    HomeScreenComponents.QuickSetting {
-        text: i18n("Night Color")
-        icon: "redshift-status-on"
-        enabled: compositorAdaptor.active
-        settingsCommand: "plasma-settings -m kcm_nightcolor"
-
-        CC.CompositorAdaptor {
-            id: compositorAdaptor
-        }
-        function toggle() {
-            if (compositorAdaptor.active) {
-                compositorAdaptor.activeStaged = false;
-            } else {
-                compositorAdaptor.activeStaged = true;
-                compositorAdaptor.modeStaged = 3; // always on
-            }
-            compositorAdaptor.sendConfigurationAll();
-            enabled = compositorAdaptor.active;
         }
     }
 }
