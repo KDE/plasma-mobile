@@ -77,15 +77,6 @@ Item {
             settingsCommand: "plasma-settings -m kcm_mobile_power"
         },
         QuickSetting {
-            text: i18n("Sound")
-            icon: "audio-speakers-symbolic"
-            enabled: false
-            settingsCommand: "plasma-settings -m kcm_pulseaudio"
-            function toggle() {
-                volumeProvider.showVolumeOverlay()
-            }
-        },
-        QuickSetting {
             text: i18n("Flashlight")
             icon: "flashlight-on"
             enabled: plasmoid.nativeInterface.torchEnabled

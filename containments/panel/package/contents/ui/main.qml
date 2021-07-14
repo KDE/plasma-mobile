@@ -147,6 +147,17 @@ Item {
     }
     IndicatorProviders.VolumeProvider {
         id: volumeProvider
+
+        readonly property var soundQuickSetting: QuickSetting {
+            text: i18n("Sound")
+            icon: "audio-speakers-symbolic"
+            enabled: false
+            settingsCommand: "plasma-settings -m kcm_pulseaudio"
+            function toggle() {
+                volumeProvider.showVolumeOverlay()
+            }
+            Component.onCompleted: quickSettings.quickSettingsModel.model.push(volumeProvider.soundQuickSetting)
+        }
     }
     IndicatorProviders.WifiProvider {
         id: wifiProvider
