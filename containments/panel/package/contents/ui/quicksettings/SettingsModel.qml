@@ -80,12 +80,6 @@ HomeScreenComponents.QuickSettingsModel
         }
     }
     HomeScreenComponents.QuickSetting {
-        text: i18n("Battery")
-        icon: "battery-full"
-        enabled: false
-        settingsCommand: "plasma-settings -m kcm_mobile_power"
-    }
-    HomeScreenComponents.QuickSetting {
         text: i18n("Flashlight")
         icon: "flashlight-on"
         enabled: plasmoid.nativeInterface.torchEnabled

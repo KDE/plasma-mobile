@@ -137,6 +137,14 @@ Item {
     // indicator providers
     IndicatorProviders.BatteryProvider {
         id: batteryProvider
+
+        readonly property var setting: HomeScreenComponents.QuickSetting {
+            text: i18n("Battery")
+            icon: "battery-full" + (batteryProvider.pluggedIn ? "-charging" : "")
+            enabled: false
+            settingsCommand: "plasma-settings -m kcm_mobile_power"
+        }
+        Component.onCompleted: quickSettings.quickSettingsModel.include(setting)
     }
     IndicatorProviders.BluetoothProvider {
         id: bluetoothProvider
