@@ -87,6 +87,7 @@ Q_SIGNALS:
 
 private:
     QList<QuickSetting *> m_children;
+    QList<QuickSetting *> m_external;
 };
 
 #endif // QUICKSETTINGSMODEL_H

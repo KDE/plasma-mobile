@@ -31,16 +31,23 @@ int QuickSettingsModel::rowCount(const QModelIndex &parent) const
     if (parent.isValid())
         return 0;
 
-    return m_children.count();
+    return m_children.count() + m_external.count();
 }
 
 QVariant QuickSettingsModel::data(const QModelIndex &index, int role) const
 {
-    if (!index.isValid() || index.row() >= m_children.count() || role != Qt::UserRole) {
+    if (!index.isValid() || index.row() >= rowCount({}) || role != Qt::UserRole) {
         return {};
     }
 
-    return QVariant::fromValue<QObject *>(m_children[index.row()]);
+    QObject *obj = nullptr;
+    if (index.row() < m_children.count()) {
+        obj = m_children[index.row()];
+    } else {
+        obj = m_external[index.row() - m_children.count()];
+    }
+
+    return QVariant::fromValue<QObject *>(obj);
 }
 
 void QuickSettingsModel::classBegin()
@@ -64,7 +71,7 @@ void QuickSettingsModel::classBegin()
             delete created;
             continue;
         }
-        include(createdSetting);
+        m_external += createdSetting;
     }
     delete c;
 }
@@ -123,7 +130,8 @@ QQmlListProperty<QObject> QuickSetting::children()
 
 void QuickSettingsModel::include(QuickSetting *item)
 {
-    beginInsertRows({}, m_children.count(), m_children.count());
-    m_children.append(item);
+    const int c = m_children.count() + m_external.count();
+    beginInsertRows({}, c, c);
+    m_external.append(item);
     endInsertRows();
 }
