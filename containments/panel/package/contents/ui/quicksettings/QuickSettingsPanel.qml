@@ -135,7 +135,7 @@ Item {
                         model: quickSettingsModel.model
                         delegate: Delegate {
                             id: delegateItem
-                            settingsModel: quickSettingsModel
+                            required property var modelData
                             width: root.expandedRatio < 0.4
                                     ? Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2, flow.width / (flow.columns + 1))
                                     : Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2,
@@ -143,6 +143,11 @@ Item {
 
                             labelOpacity: y > 0  ? 1 : root.expandedRatio
                             opacity: y <= 0 ? 1 : root.expandedRatio
+                            text: modelData.text
+                            icon: modelData.icon
+                            enabled: modelData.enabled
+                            settingsCommand: modelData.settingsCommand
+                            toggleFunction: modelData.toggle
 
                             Connections {
                                 target: delegateItem

@@ -16,8 +16,6 @@ ColumnLayout {
     id: delegateRoot
     spacing: units.smallSpacing
     
-    required property var settingsModel
-    
     signal closeRequested
     signal panelClosed
 
@@ -66,7 +64,7 @@ ColumnLayout {
                 if (delegateRoot.toggle) {
                     delegateRoot.toggle();
                 } else if (delegateRoot.toggleFunction) {
-                    settingsModel[delegateRoot.toggleFunction]();
+                    delegateRoot.toggleFunction();
                 } else if (delegateRoot.settingsCommand) {
                     NanoShell.StartupFeedback.open(
                         delegateRoot.icon,
@@ -89,7 +87,7 @@ ColumnLayout {
                     closeRequested();
                     plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
                 } else if (delegateRoot.toggleFunction) {
-                    root[delegateRoot.toggleFunction]();
+                    delegateRoot.toggleFunction();
                 }
             }
         }
@@ -136,7 +134,7 @@ ColumnLayout {
                     plasmoid.nativeInterface.executeCommand(delegateRoot.settingsCommand);
                     closeRequested();
                 } else if (delegateRoot.toggleFunction) {
-                    settingsModel[delegateRoot.toggleFunction]();
+                    delegateRoot.toggleFunction();
                 }
             }
         }
