@@ -29,6 +29,7 @@ class KwinVirtualKeyboardInterface : public OrgKdeKwinVirtualKeyboardInterface
     Q_OBJECT
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
     Q_PROPERTY(bool enabled READ enabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool visible READ visible NOTIFY visibleChanged)
 public:
     KwinVirtualKeyboardInterface()
         : OrgKdeKwinVirtualKeyboardInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/VirtualKeyboard"), QDBusConnection::sessionBus())

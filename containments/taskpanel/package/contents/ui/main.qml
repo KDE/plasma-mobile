@@ -240,7 +240,7 @@ PlasmaCore.ColorScope {
                 height: parent.height
                 width: parent.width*0.8/3
                 mouseArea: mainMouseArea
-                enabled: TaskPanel.KWinVirtualKeyboard.active || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
+                enabled: TaskPanel.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
                 onClicked: {
                     if (!enabled) {
                         return
@@ -259,8 +259,8 @@ PlasmaCore.ColorScope {
                 }
 
                 // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-                iconSizeFactor: TaskPanel.KWinVirtualKeyboard.active ? 1 : 0.75
-                iconSource: TaskPanel.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
+                iconSizeFactor: TaskPanel.KWinVirtualKeyboard.visible ? 1 : 0.75
+                iconSource: TaskPanel.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
         }
