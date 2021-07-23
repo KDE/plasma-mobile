@@ -1,5 +1,13 @@
 [Desktop Entry]
 Name=Night Color
+Name[ca]=Color de nit
+Name[es]=Color nocturno
+Name[nl]=Nachtkleur
+Name[pt]=Cor Nocturna
+Name[pt_BR]=Cor noturna
+Name[sv]=Nattfärg
+Name[uk]=Нічні кольори
+Name[x-test]=xxNight Colorxx
 Icon=redshift-status-on
 
 Type=Service
