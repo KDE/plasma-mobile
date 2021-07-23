@@ -13,7 +13,7 @@
 #include <KSharedConfig>
 
 #include "kscreeninterface.h"
-#include "screenshotinterface.h"
+#include "screenshot2interface.h"
 
 class PhonePanel : public Plasma::Containment
 {
@@ -45,13 +45,14 @@ signals:
     void isSystem24HourFormatChanged();
 
 private:
+    void handleMetaDataReceived(const QVariantMap &metadata, int fd);
     bool m_running = false;
 
     KConfigWatcher::Ptr m_localeConfigWatcher;
     KSharedConfig::Ptr m_localeConfig;
 
     org::kde::KScreen *m_kscreenInterface;
-    org::kde::kwin::Screenshot *m_screenshotInterface;
+    OrgKdeKWinScreenShot2Interface *m_screenshotInterface;
 };
 
 #endif

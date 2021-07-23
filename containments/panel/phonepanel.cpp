@@ -20,6 +20,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
+#include <QGuiApplication>
 #include <QProcess>
 #include <QScreen>
 #include <QStandardPaths>
@@ -31,44 +32,45 @@ constexpr int SCREENSHOT_DELAY = 200;
 
 /* -- Static Helpers --------------------------------------------------------------------------- */
 
-static int readData(int theFile, QByteArray &theDataOut)
+static QImage allocateImage(const QVariantMap &metadata)
 {
-    // implementation based on QtWayland file qwaylanddataoffer.cpp
-    char lBuffer[4096];
-    int lRetryCount = 0;
-    ssize_t lBytesRead = 0;
+    bool ok;
 
-    do {
-        // give user 30 sec to click a window, afterwards considered as error
-        while (true) {
-            lBytesRead = QT_READ(theFile, lBuffer, sizeof lBuffer);
-            if (lBytesRead == -1 && (errno == EAGAIN) && ++lRetryCount < 30000) {
-                usleep(1000);
-            } else {
-                break;
-            }
-        }
-
-        if (lBytesRead > 0) {
-            theDataOut.append(lBuffer, lBytesRead);
-        }
-    } while (lBytesRead > 0);
-    return lBytesRead;
-}
-
-static QImage readImage(int thePipeFd)
-{
-    QByteArray lContent;
-    if (readData(thePipeFd, lContent) != 0) {
-        close(thePipeFd);
+    const uint width = metadata.value(QStringLiteral("width")).toUInt(&ok);
+    if (!ok) {
         return QImage();
     }
-    close(thePipeFd);
 
-    QDataStream lDataStream(lContent);
-    QImage lImage;
-    lDataStream >> lImage;
-    return lImage;
+    const uint height = metadata.value(QStringLiteral("height")).toUInt(&ok);
+    if (!ok) {
+        return QImage();
+    }
+
+    const uint format = metadata.value(QStringLiteral("format")).toUInt(&ok);
+    if (!ok) {
+        return QImage();
+    }
+
+    return QImage(width, height, QImage::Format(format));
+}
+
+static QImage readImage(int fileDescriptor, const QVariantMap &metadata)
+{
+    QFile file;
+    if (!file.open(fileDescriptor, QFileDevice::ReadOnly, QFileDevice::AutoCloseHandle)) {
+        close(fileDescriptor);
+        return QImage();
+    }
+
+    QImage result = allocateImage(metadata);
+    if (result.isNull()) {
+        return QImage();
+    }
+
+    QDataStream stream(&file);
+    stream.readRawData(reinterpret_cast<char *>(result.bits()), result.sizeInBytes());
+
+    return result;
 }
 
 PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
@@ -76,7 +78,10 @@ PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
 {
     // setHasConfigurationInterface(true);
     m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded5"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
-    m_screenshotInterface = new org::kde::kwin::Screenshot(QStringLiteral("org.kde.KWin"), QStringLiteral("/Screenshot"), QDBusConnection::sessionBus(), this);
+    m_screenshotInterface = new OrgKdeKWinScreenShot2Interface(QStringLiteral("org.kde.KWin.ScreenShot2"),
+                                                               QStringLiteral("/org/kde/KWin/ScreenShot2"),
+                                                               QDBusConnection::sessionBus(),
+                                                               this);
 
     m_localeConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
@@ -143,55 +148,70 @@ void PhonePanel::setAutoRotate(bool value)
     }
 }
 
+void PhonePanel::handleMetaDataReceived(const QVariantMap &metadata, int fd)
+{
+    const QString type = metadata.value(QStringLiteral("type")).toString();
+    if (type != QLatin1String("raw")) {
+        qWarning() << "Unsupported metadata type:" << type;
+        return;
+    }
+
+    auto watcher = new QFutureWatcher<QImage>(this);
+    connect(watcher, &QFutureWatcher<QImage>::finished, this, [watcher]() {
+        watcher->deleteLater();
+
+        QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+        if (filePath.isEmpty()) {
+            qWarning() << "Couldn't find a writable location for the screenshot!";
+            return;
+        }
+        QDir picturesDir(filePath);
+        if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
+            qWarning() << "Couldn't create folder at" << picturesDir.path() + QStringLiteral("/Screenshots") << "to take screenshot.";
+            return;
+        }
+        filePath += QStringLiteral("/Screenshots/Screenshot_%1.png").arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
+        const auto m_result = watcher->result();
+        if (m_result.isNull() || !m_result.save(filePath)) {
+            qWarning() << "Screenshot failed";
+        } else {
+            KNotification *notif = new KNotification("captured");
+            notif->setComponentName(QStringLiteral("plasma_phone_components"));
+            notif->setTitle(i18n("New Screenshot"));
+            notif->setUrls({filePath});
+            notif->setText(i18n("New screenshot saved to %1", filePath));
+            notif->sendEvent();
+        }
+    });
+    watcher->setFuture(QtConcurrent::run(readImage, fd, metadata));
+}
+
 void PhonePanel::takeScreenshot()
 {
-    QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-    if (filePath.isEmpty()) {
-        qWarning() << "Couldn't find a writable location for the screenshot!";
-        return;
-    }
-    QDir picturesDir(filePath);
-    if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
-        qWarning() << "Couldn't create folder at" << picturesDir.path() + QStringLiteral("/Screenshots") << "to take screenshot.";
-        return;
-    }
-    filePath += QStringLiteral("/Screenshots/Screenshot_%1.png").arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
-
     // wait ~200 ms to wait for rest of animations
     QTimer::singleShot(SCREENSHOT_DELAY, [=]() {
         int lPipeFds[2];
-        if (pipe2(lPipeFds, O_CLOEXEC | O_NONBLOCK) != 0) {
+        if (pipe2(lPipeFds, O_CLOEXEC) != 0) {
             qWarning() << "Could not take screenshot";
             return;
         }
-        // Take fullscreen screenshot, and no pointer
-        QDBusPendingCall pcall = m_screenshotInterface->screenshotFullscreen(QDBusUnixFileDescriptor(lPipeFds[1]), false, true);
-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(pcall, this);
-        QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [](QDBusPendingCallWatcher *watcher) {
-            if (watcher->isError()) {
-                const auto error = watcher->error();
-                qWarning() << "Error calling KWin DBus interface:" << error.name() << error.message();
-            }
-            watcher->deleteLater();
-        });
-        const auto lWatcher = new QFutureWatcher<QImage>(this);
-        QObject::connect(lWatcher, &QFutureWatcher<QImage>::finished, this, [lWatcher, filePath]() {
-            lWatcher->deleteLater();
-            const QImage lImage = lWatcher->result();
-            qDebug() << lImage;
-            if (!lImage.save(filePath, "PNG")) {
-                qWarning() << "Failed to save screenshot to" << filePath;
-            } else {
-                KNotification *notif = new KNotification("captured");
-                notif->setComponentName(QStringLiteral("plasma_phone_components"));
-                notif->setTitle(i18n("New Screenshot"));
-                notif->setUrls({filePath});
-                notif->setText(i18n("New screenshot saved to %1", filePath));
-                notif->sendEvent();
-            }
-        });
-        lWatcher->setFuture(QtConcurrent::run(readImage, lPipeFds[0]));
+
+        // We don't have access to the ScreenPool so we'll just take the first screen
+        auto pendingCall = m_screenshotInterface->CaptureScreen(qGuiApp->screens().constFirst()->name(), {}, QDBusUnixFileDescriptor(lPipeFds[1]));
         close(lPipeFds[1]);
+        auto pipeFileDescriptor = lPipeFds[0];
+
+        auto watcher = new QDBusPendingCallWatcher(pendingCall, this);
+        connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, pipeFileDescriptor]() {
+            watcher->deleteLater();
+            const QDBusPendingReply<QVariantMap> reply = *watcher;
+
+            if (reply.isError()) {
+                qWarning() << "Screenshot request failed:" << reply.error().message();
+            } else {
+                handleMetaDataReceived(reply, pipeFileDescriptor);
+            }
+        });
     });
 }
 
