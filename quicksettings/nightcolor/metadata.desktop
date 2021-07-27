@@ -12,6 +12,7 @@ Name[pt_BR]=Cor noturna
 Name[sv]=Nattfärg
 Name[uk]=Нічні кольори
 Name[x-test]=xxNight Colorxx
+Name[zh_CN]=夜间颜色
 Icon=redshift-status-on
 
 Type=Service
