@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
@@ -7,71 +8,34 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
-import MeeGo.QOfono 0.2
-
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents
 
+import "providers"
 
 Item {
+    required property QtObject provider
 
     width: strengthIcon.height + strengthLabel.width
     Layout.minimumWidth: strengthIcon.height + strengthLabel.width
-    OfonoManager {
-        id: ofonoManager
-    }
-
-    OfonoNetworkRegistration {
-        id: netreg
-        Component.onCompleted: {
-            updateStrengthIcon()
-        }
-
-        onNetworkOperatorsChanged : {
-            console.log("operators :"+netreg.currentOperator["Name"].toString())
-        }
-        modemPath: ofonoManager.modems.length ? ofonoManager.modems[0] : ""
-        function updateStrengthIcon() {
-            if (netreg.strength >= 100) {
-                strengthIcon.source = "network-mobile-100";
-            } else if (netreg.strength >= 80) {
-                strengthIcon.source = "network-mobile-80";
-            } else if (netreg.strength >= 60) {
-                strengthIcon.source = "network-mobile-60";
-            } else if (netreg.strength >= 40) {
-                strengthIcon.source = "network-mobile-40";
-            } else if (netreg.strength >= 20) {
-                strengthIcon.source = "network-mobile-20";
-            } else {
-                strengthIcon.source = "network-mobile-0";
-            }
-        }
-
-        onStrengthChanged: {
-            console.log("Strength changed to " + netreg.strength)
-            updateStrengthIcon()
-        }
-    }
-
-
 
     PlasmaCore.IconItem {
         id: strengthIcon
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        anchors {
-            left: parent.left
-            verticalCenter: parent.verticalCenter
-        }
+        anchors.left: parent.left
+        anchors.verticalCenter: parent.verticalCenter
         width: height
         height: parent.height
+
+        source: provider.icon
     }
+
     PlasmaComponents.Label {
-        id: strengthLabel
-        anchors {
-            left: strengthIcon.right
-            verticalCenter: parent.verticalCenter
-        }
-        text: netreg.name
+        id: label
+        anchors.left: strengthIcon.right
+        anchors.verticalCenter: parent.verticalCenter
+
+        text: provider.label
         color: PlasmaCore.ColorScope.textColor
         font.pixelSize: parent.height / 2
     }

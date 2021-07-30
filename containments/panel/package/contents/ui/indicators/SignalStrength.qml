@@ -15,7 +15,6 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 import "providers"
 
 Item {
-    // we can't use SignalStrengthProvider as the var type as it would import ofono (which may cause it to break if ofono is not installed)
     required property QtObject provider
     
     width: strengthIcon.height + strengthLabel.width

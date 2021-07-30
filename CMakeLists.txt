@@ -39,6 +39,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Service
     Notifications
     Wayland
+    ModemManagerQt
 )
 find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
@@ -59,6 +60,7 @@ add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(components)
+add_subdirectory(mmplugin)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES

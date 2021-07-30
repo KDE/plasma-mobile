@@ -56,7 +56,15 @@ PlasmaCore.ColorScope {
         id: strengthLoader
         height: parent.height
         width: item ? item.width : 0
-        source: Qt.resolvedUrl("indicators/SignalStrength.qml")
+        active: signalStrengthProviderLoader.item
+        sourceComponent: Indicators.SignalStrength {
+            provider: signalStrengthProviderLoader.item
+        }
+    }
+
+    Loader {
+        id: signalStrengthProviderLoader
+        source: Qt.resolvedUrl("indicators/providers/SignalStrengthProvider.qml")
     }
 
     PlasmaComponents.Label {
