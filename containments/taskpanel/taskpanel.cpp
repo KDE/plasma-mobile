@@ -56,6 +56,12 @@ TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
                                                                  [](QQmlEngine *, QJSEngine *) -> QObject * {
                                                                      return new KwinVirtualKeyboardInterface;
                                                                  });
+
+    connect(this, &Plasma::Containment::locationChanged, this, &TaskPanel::locationChanged);
+    connect(this, &Plasma::Containment::locationChanged, this, [this] {
+        auto l = location();
+        setFormFactor(l == Plasma::Types::LeftEdge || l == Plasma::Types::RightEdge ? Plasma::Types::Vertical : Plasma::Types::Horizontal);
+    });
 }
 
 TaskPanel::~TaskPanel() = default;

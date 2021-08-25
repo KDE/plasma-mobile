@@ -30,6 +30,7 @@ class TaskPanel : public Plasma::Containment
     Q_PROPERTY(bool allMinimized READ allMinimized NOTIFY allMinimizedChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
+    Q_PROPERTY(Plasma::Types::Location location READ location WRITE setLocation NOTIFY locationChanged)
 
 public:
     TaskPanel(QObject *parent, const QVariantList &args);
@@ -60,6 +61,7 @@ Q_SIGNALS:
     void hasCloseableActiveWindowChanged();
     void panelChanged();
     void allMinimizedChanged();
+    void locationChanged();
 
 private:
     void initWayland();

@@ -9,10 +9,4 @@ panel.addWidget("org.kde.plasma.notifications");
 panel.addWidget("org.kde.plasma.mediacontroller");
 panel.height = 1 * gridUnit;
 
-var bottomPanel = new Panel("org.kde.phone.taskpanel");
-bottomPanel.location = "bottom";
-
-if (screenGeometry(bottomPanel.screen).height > screenGeometry(bottomPanel.screen).width)
-    bottomPanel.height = 2 * gridUnit;
-else
-    bottomPanel.height = 1 * gridUnit;
+var bottomPanel = new Panel("org.kde.phone.taskpanel")

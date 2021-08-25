@@ -68,7 +68,7 @@ Item {
         id: icon
         anchors {
             fill: parent
-            margins: Math.round((parent.height - parent.height * iconSizeFactor * 0.6) / 2)
+            margins: button.width < button.height ? 0 : Math.round((parent.height - parent.height * iconSizeFactor * 0.6) / 2)
         }
         colorGroup: PlasmaCore.ColorScope.colorGroup
         //enabled: button.enabled && button.clickable

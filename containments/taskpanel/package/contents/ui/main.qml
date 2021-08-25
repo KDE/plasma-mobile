@@ -172,6 +172,7 @@ PlasmaCore.ColorScope {
             anchors.fill: parent
 
             visible: plasmoid.configuration.PanelButtonsVisible
+            property real buttonLength: 0
             
             Rectangle {
                 anchors.fill: parent
@@ -188,13 +189,7 @@ PlasmaCore.ColorScope {
             }
 
             Button {
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    left: parent.left
-                    leftMargin: parent.width * 0.1
-                }
-                height: parent.height
-                width: parent.width*0.8/3
+                id: tasksButton
                 mouseArea: mainMouseArea
                 enabled: root.hasTasks
                 onClicked: {
@@ -211,12 +206,7 @@ PlasmaCore.ColorScope {
 
             Button {
                 id: showDesktopButton
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    horizontalCenter: parent.horizontalCenter
-                }
-                height: parent.height
-                width: parent.width*0.8/3
+                anchors.centerIn: parent
                 mouseArea: mainMouseArea
                 onClicked: {
                     if (!enabled) {
@@ -232,13 +222,7 @@ PlasmaCore.ColorScope {
             }
 
             Button {
-                anchors {
-                    verticalCenter: parent.verticalCenter
-                    right: parent.right
-                    rightMargin: parent.width * 0.1
-                }
-                height: parent.height
-                width: parent.width*0.8/3
+                id: closeTaskButton
                 mouseArea: mainMouseArea
                 enabled: TaskPanel.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
                 onClicked: {
@@ -264,5 +248,116 @@ PlasmaCore.ColorScope {
                 colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
         }
+
+        function resetOffsets() {
+            if (!Window.window)
+                return;
+
+            if (state === "landscape") {
+                // FIXME: find a more precise way to determine the top panel height
+                Window.window.offset = PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing
+            } else {
+                Window.window.offset = 0
+            }
+        }
+        Window.onWindowChanged: resetOffsets()
+        onStateChanged: resetOffsets()
+
+        states: [
+            State {
+                name: "landscape"
+                when: Screen.width > Screen.height
+                PropertyChanges {
+                    target: plasmoid.nativeInterface
+                    location: PlasmaCore.Types.RightEdge
+                }
+                PropertyChanges {
+                    target: plasmoid
+                    width: PlasmaCore.Units.gridUnit
+                    height: PlasmaCore.Units.gridUnit
+                }
+                PropertyChanges {
+                    target: icons
+                    buttonLength: icons.height * 0.8 / 3
+                }
+                AnchorChanges {
+                    target: tasksButton
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        top: parent.top
+                    }
+                }
+                PropertyChanges {
+                    target: tasksButton
+                    width: parent.width
+                    height: icons.buttonLength
+                    anchors.topMargin: parent.height * 0.1
+                }
+                PropertyChanges {
+                    target: showDesktopButton
+                    width: parent.width
+                    height: icons.buttonLength
+                }
+                AnchorChanges {
+                    target: closeTaskButton
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                    }
+                }
+                PropertyChanges {
+                    target: closeTaskButton
+                    height: icons.buttonLength
+                    width: icons.width
+                    anchors.bottomMargin: parent.height * 0.1
+                }
+            }, State {
+                name: "portrait"
+                when: Screen.width <= Screen.height
+                PropertyChanges {
+                    target: plasmoid
+                    height: PlasmaCore.Units.gridUnit
+                }
+                PropertyChanges {
+                    target: plasmoid.nativeInterface
+                    location: PlasmaCore.Types.BottomEdge
+                }
+                PropertyChanges {
+                    target: icons
+                    buttonLength: icons.width * 0.8 / 3
+                }
+                AnchorChanges {
+                    target: tasksButton
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        left: parent.left
+                    }
+                }
+                PropertyChanges {
+                    target: tasksButton
+                    height: parent.height
+                    width: icons.buttonLength
+                    anchors.leftMargin: parent.width * 0.1
+                }
+                PropertyChanges {
+                    target: showDesktopButton
+                    height: parent.height
+                    width: icons.buttonLength
+                }
+                AnchorChanges {
+                    target: closeTaskButton
+                    anchors {
+                        verticalCenter: parent.verticalCenter
+                        right: parent.right
+                    }
+                }
+                PropertyChanges {
+                    target: closeTaskButton
+                    height: parent.height
+                    width: icons.buttonLength
+                    anchors.rightMargin: parent.width * 0.1
+                }
+            }
+        ]
     }
 }
