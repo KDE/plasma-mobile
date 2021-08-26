@@ -104,7 +104,7 @@ Item {
                     Behavior on implicitHeight {
                         NumberAnimation { 
                             duration: Kirigami.Units.longDuration 
-                            easing: Easing.InOutQuad
+                            easing.type: Easing.InOutQuad
                         }
                     }
                     
