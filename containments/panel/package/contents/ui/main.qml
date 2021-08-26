@@ -142,7 +142,7 @@ Item {
             text: i18n("Battery")
             icon: "battery-full" + (batteryProvider.pluggedIn ? "-charging" : "")
             enabled: false
-            settingsCommand: "plasma-settings -m kcm_mobile_power"
+            settingsCommand: "plasma-open-settings kcm_mobile_power"
         }
         Component.onCompleted: quickSettings.quickSettingsModel.include(setting)
     }
@@ -161,7 +161,7 @@ Item {
             text: i18n("Sound")
             icon: "audio-speakers-symbolic"
             enabled: false
-            settingsCommand: "plasma-settings -m kcm_pulseaudio"
+            settingsCommand: "plasma-open-settings kcm_pulseaudio"
             function toggle() {
                 volumeProvider.showVolumeOverlay()
             }

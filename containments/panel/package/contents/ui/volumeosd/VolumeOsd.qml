@@ -171,7 +171,7 @@ NanoShell.FullScreenOverlay {
                             onClicked: {
                                 let coords = mapToItem(flickable, 0, 0);
                                 NanoShell.StartupFeedback.open("audio-volume-high", i18n("Audio Settings"), coords.x, coords.y, PlasmaCore.Units.iconSizes.medium);
-                                plasmoid.nativeInterface.executeCommand("plasma-settings -m kcm_pulseaudio");
+                                plasmoid.nativeInterface.executeCommand("plasma-open-settings kcm_pulseaudio");
                             }
                         }
                         

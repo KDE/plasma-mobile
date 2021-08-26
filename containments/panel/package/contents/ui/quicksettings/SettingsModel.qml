@@ -36,7 +36,7 @@ HomeScreenComponents.QuickSettingsModel
         text: i18n("Settings")
         icon: "configure"
         enabled: false
-        settingsCommand: "plasma-settings"
+        settingsCommand: "plasma-open-settings"
     }
     HomeScreenComponents.QuickSetting {
         PlasmaNM.Handler {
@@ -49,7 +49,7 @@ HomeScreenComponents.QuickSettingsModel
 
         text: i18n("Wi-Fi")
         icon: "network-wireless-signal"
-        settingsCommand: "plasma-settings -m kcm_mobile_wifi"
+        settingsCommand: "plasma-open-settings kcm_mobile_wifi"
         function toggle() {
             nmHandler.enableWireless(!enabledConnections.wirelessEnabled)
         }
@@ -58,7 +58,7 @@ HomeScreenComponents.QuickSettingsModel
     HomeScreenComponents.QuickSetting {
         text: i18n("Bluetooth")
         icon: "network-bluetooth"
-        settingsCommand: "plasma-settings -m kcm_bluetooth"
+        settingsCommand: "plasma-open-settings kcm_bluetooth"
         function toggle() {
             var enable = !BluezQt.Manager.bluetoothOperational;
             BluezQt.Manager.bluetoothBlocked = !enable;
@@ -73,7 +73,7 @@ HomeScreenComponents.QuickSettingsModel
     HomeScreenComponents.QuickSetting {
         text: i18n("Mobile Data")
         icon: "network-modem"
-        settingsCommand: "plasma-settings -m kcm_mobile_broadband"
+        settingsCommand: "plasma-open-settings kcm_mobile_broadband"
         enabled: enabledConnections.wwanEnabled
         function toggle() {
             nmHandler.enableWwan(!enabledConnections.wwanEnabled)

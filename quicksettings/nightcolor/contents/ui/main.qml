@@ -13,7 +13,7 @@ HomeScreenComponents.QuickSetting {
     text: i18n("Night Color")
     icon: "redshift-status-on"
     enabled: compositorAdaptor.active
-    settingsCommand: "plasma-settings -m kcm_nightcolor"
+    settingsCommand: "plasma-open-settings kcm_nightcolor"
 
     CC.CompositorAdaptor {
         id: compositorAdaptor
