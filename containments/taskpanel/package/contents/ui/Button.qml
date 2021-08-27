@@ -66,9 +66,10 @@ Item {
     }
     PlasmaCore.IconItem {
         id: icon
+        readonly property real side: Math.min(button.width, button.height)
         anchors {
             fill: parent
-            margins: button.width < button.height ? 0 : Math.round((parent.height - parent.height * iconSizeFactor * 0.6) / 2)
+            margins: Math.round((side - side * iconSizeFactor * 0.6) / 2)
         }
         colorGroup: PlasmaCore.ColorScope.colorGroup
         //enabled: button.enabled && button.clickable
