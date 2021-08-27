@@ -48,9 +48,8 @@ ColumnLayout {
             }
         }
 
-        Kirigami.Icon {
+        PlasmaCore.IconItem {
             id: icon
-            color: PlasmaCore.Theme.textColor
             anchors.centerIn: parent
             implicitWidth: Math.round(parent.width * 0.6)
             implicitHeight: width

@@ -65,9 +65,8 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-        
-        Kirigami.Icon {
-            color: PlasmaCore.Theme.textColor
+
+        PlasmaCore.IconItem {
             Layout.alignment: Qt.AlignVCenter
             Layout.leftMargin: PlasmaCore.Units.smallSpacing
             Layout.preferredWidth: Math.round(PlasmaCore.Units.gridUnit * 1.75)
@@ -84,9 +83,7 @@ Item {
             to: maximumScreenBrightness
         }
         
-        Kirigami.Icon {
-            color: PlasmaCore.Theme.textColor
-            isMask: true
+        PlasmaCore.IconItem {
             Layout.alignment: Qt.AlignVCenter
             Layout.rightMargin: PlasmaCore.Units.smallSpacing
             Layout.preferredWidth: Math.round(PlasmaCore.Units.gridUnit * 1.75)
