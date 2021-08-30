@@ -119,6 +119,7 @@ FocusScope {
 
         topPadding: plasmoid.availableScreenRect.y
         bottomPadding: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+        rightPadding: plasmoid.screenGeometry.width - plasmoid.availableScreenRect.width - plasmoid.availableScreenRect.x
         closedPositionOffset: favoriteStrip.height
     }
 
