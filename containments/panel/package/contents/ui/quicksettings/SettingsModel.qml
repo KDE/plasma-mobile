@@ -47,7 +47,7 @@ HomeScreenComponents.QuickSettingsModel
             id: enabledConnections
         }
 
-        text: i18n("Wifi")
+        text: i18n("Wi-Fi")
         icon: "network-wireless-signal"
         settingsCommand: "plasma-settings -m kcm_mobile_wifi"
         function toggle() {
