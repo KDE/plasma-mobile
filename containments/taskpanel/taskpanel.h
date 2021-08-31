@@ -9,12 +9,14 @@
 
 #include <Plasma/Containment>
 
+class OutputsModel;
 class QAbstractItemModel;
 
 namespace KWayland
 {
 namespace Client
 {
+class Output;
 class PlasmaWindowManagement;
 class PlasmaWindow;
 class PlasmaShell;
@@ -31,6 +33,7 @@ class TaskPanel : public Plasma::Containment
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
     Q_PROPERTY(Plasma::Types::Location location READ location WRITE setLocation NOTIFY locationChanged)
+    Q_PROPERTY(QAbstractItemModel *outputs READ outputs CONSTANT)
 
 public:
     TaskPanel(QObject *parent, const QVariantList &args);
@@ -52,6 +55,10 @@ public:
         return m_allMinimized;
     }
     bool hasCloseableActiveWindow() const;
+
+    QAbstractItemModel *outputs() const;
+
+    Q_INVOKABLE void sendWindowToOutput(const QString &uuid, KWayland::Client::Output *output);
 
 public Q_SLOTS:
     void forgetActiveWindow();
@@ -76,6 +83,7 @@ private:
     KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     QPointer<KWayland::Client::PlasmaWindow> m_activeWindow;
     QTimer *m_activeTimer;
+    OutputsModel *m_outputsModel;
 };
 
 #endif

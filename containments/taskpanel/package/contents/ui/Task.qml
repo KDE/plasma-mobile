@@ -7,6 +7,8 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+import QtQuick.Controls 2.2 as QQC2
+import org.kde.plasma.phone.taskpanel 1.0
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -17,7 +19,9 @@ Item {
     height: window.height/2
 
     //Workaround
+    required property var model
     property bool active: model.IsActive
+    readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
     onActiveChanged: {
         //sometimes the task switcher window itself appears, screwing up the state
         if (model.IsActive) {
@@ -127,6 +131,20 @@ Item {
                             elide: Text.ElideRight
                             text: model.AppName
                             color: PlasmaCore.Theme.textColor
+                        }
+                        Repeater {
+                            id: rep
+                            model: plasmoid.nativeInterface.outputs
+                            delegate: PlasmaComponents.ToolButton {
+                                text: model.modelName
+                                visible: model.position !== delegate.taskScreenPoint
+                                display: rep.count < 3 ? QQC2.Button.IconOnly : QQC2.Button.TextBesideIcon
+                                icon.name: "tv" //TODO provide a more adequate icon
+
+                                onClicked: {
+                                    plasmoid.nativeInterface.sendWindowToOutput(delegate.model.WinIdList[0], model.output)
+                                }
+                            }
                         }
                         PlasmaComponents.ToolButton {
                             z: 99
