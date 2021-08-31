@@ -1,0 +1,5 @@
+[kwinrc][Windows]
+Placement=Maximizing
+
+[plasmashellrc][Shell]
+ShellPackage=org.kde.plasma.phoneshell
