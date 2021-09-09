@@ -35,7 +35,9 @@ MouseArea {
         })
     }
 
+    propagateComposedEvents: true
     onClicked: {
+        mouse.accepted = true
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
         } else {
