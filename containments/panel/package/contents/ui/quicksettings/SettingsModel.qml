@@ -104,6 +104,7 @@ HomeScreenComponents.QuickSettingsModel
     HomeScreenComponents.QuickSetting {
         text: i18n("Auto-rotate")
         icon: "rotation-allowed"
+        settingsCommand: "plasma-open-settings kcm_kscreen"
         enabled: plasmoid.nativeInterface.autoRotateEnabled
         function toggle() {
             plasmoid.nativeInterface.autoRotateEnabled = !enabled
