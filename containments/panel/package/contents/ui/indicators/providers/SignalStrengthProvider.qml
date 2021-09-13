@@ -7,7 +7,6 @@
  */
 
 import QtQuick 2.1
-
 import org.kde.plasma.mm 1.0
 
 QtObject {

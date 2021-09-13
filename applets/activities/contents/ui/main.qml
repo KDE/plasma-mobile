@@ -7,11 +7,12 @@
 import QtQuick 2.5
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 2.0 as PlasmaComponents //Needed for Highlight
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.activities 0.1 as Activities
 
 ColumnLayout {
-    PlasmaComponents.ToolButton {
+    PlasmaComponents3.ToolButton {
         id: newButton
         Layout.fillWidth: true
         text: i18n("New Activity...")
@@ -19,7 +20,7 @@ ColumnLayout {
             newEdit.visible = true;
             newEdit.forceActiveFocus();
         }
-        PlasmaComponents.TextField {
+        PlasmaComponents3.TextField {
             id: newEdit
             visible: false
             width: parent.width
@@ -122,13 +123,13 @@ ColumnLayout {
 
                         positionAnim.running = true;
                     }
-                PlasmaComponents.Label {
+                PlasmaComponents3.Label {
                     id: label
                     text: model.name
                     anchors.verticalCenter: parent.verticalCenter
                     x: PlasmaCore.Units.smallSpacing
                 }
-                PlasmaComponents.TextField {
+                PlasmaComponents3.TextField {
                     id: edit
                     visible: false
                     text: model.name

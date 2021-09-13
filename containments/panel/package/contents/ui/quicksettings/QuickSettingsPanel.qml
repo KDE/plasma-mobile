@@ -11,7 +11,6 @@ import QtQuick.Window 2.2
 import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.bluezqt 1.0 as BluezQt
 import org.kde.colorcorrect 0.1 as CC

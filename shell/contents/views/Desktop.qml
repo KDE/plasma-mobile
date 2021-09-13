@@ -10,7 +10,6 @@ import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
