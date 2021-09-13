@@ -41,7 +41,7 @@ PlasmaCore.ColorScope {
         property: "contentY"
         from: 0
         to: passwordFlickable.contentHeight - passwordFlickable.height
-        duration: units.longDuration
+        duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
     }
     
@@ -79,7 +79,7 @@ PlasmaCore.ColorScope {
             left: parent.left
             right: parent.right
         }
-        height: units.gridUnit
+        height: PlasmaCore.Units.gridUnit
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         sourceComponent: SimpleHeaderBar {}
     }
@@ -124,7 +124,7 @@ PlasmaCore.ColorScope {
             Clock {
                 id: phoneClock
                 alignment: Qt.AlignHCenter
-                Layout.bottomMargin: units.gridUnit * 2 // keep spacing even if media controls are gone
+                Layout.bottomMargin: PlasmaCore.Units.gridUnit * 2 // keep spacing even if media controls are gone
             }
             MediaControls {
                 Layout.alignment: Qt.AlignHCenter
@@ -222,7 +222,7 @@ PlasmaCore.ColorScope {
     PlasmaCore.IconItem {
         id: scrollUpIcon
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: units.gridUnit + passwordFlickable.contentY * 0.5
+        anchors.bottomMargin: PlasmaCore.Units.gridUnit + passwordFlickable.contentY * 0.5
         anchors.horizontalCenter: parent.horizontalCenter
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         
@@ -235,7 +235,7 @@ PlasmaCore.ColorScope {
         
         anchors.fill: parent
         
-        property int columnHeight: units.gridUnit * 20
+        property int columnHeight: PlasmaCore.Units.gridUnit * 20
         property int oldContentY: contentY
         
         height: columnHeight + root.height
@@ -266,7 +266,7 @@ PlasmaCore.ColorScope {
             anchors.bottom: parent.bottom
             
             width: parent.width
-            spacing: units.gridUnit
+            spacing: PlasmaCore.Units.gridUnit
             
             // scroll down icon
             PlasmaCore.IconItem {

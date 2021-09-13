@@ -14,7 +14,7 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
 ColumnLayout {
     id: delegateRoot
-    spacing: units.smallSpacing
+    spacing: PlasmaCore.Units.smallSpacing
     
     signal closeRequested
     signal panelClosed
@@ -99,7 +99,7 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
 
         text: delegateRoot.text
-        bottomPadding: units.smallSpacing * 2
+        bottomPadding: PlasmaCore.Units.smallSpacing * 2
         horizontalAlignment: Text.AlignHCenter
         font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 0.8
         elide: Text.ElideRight
@@ -109,10 +109,10 @@ ColumnLayout {
             anchors {
                 left: parent.right
                 verticalCenter: parent.verticalCenter
-                verticalCenterOffset: -units.smallSpacing
+                verticalCenterOffset: -PlasmaCore.Units.smallSpacing
             }
             visible: delegateRoot.settingsCommand
-            width: units.iconSizes.small/2
+            width: PlasmaCore.Units.iconSizes.small/2
             height: width
             elementId: "down-arrow"
             svg: PlasmaCore.Svg {

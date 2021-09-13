@@ -140,7 +140,7 @@ Flickable {
         id: scrollAnim
         target: mainFlickable
         properties: "contentX"
-        duration: units.longDuration
+        duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
     }
 
@@ -197,7 +197,7 @@ Flickable {
             id: scrollLeftIndicator
             anchors {
                 left: parent.left
-                leftMargin: units.smallSpacing
+                leftMargin: PlasmaCore.Units.smallSpacing
             }
             elementId: "left-arrow"
         }
@@ -205,7 +205,7 @@ Flickable {
             id: scrollRightIndicator
             anchors {
                 right: parent.right
-                rightMargin: units.smallSpacing
+                rightMargin: PlasmaCore.Units.smallSpacing
             }
             elementId: "right-arrow"
         }

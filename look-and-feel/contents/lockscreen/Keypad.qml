@@ -133,18 +133,18 @@ Rectangle {
             right: parent.right
             top: passwordBar.bottom
             bottom: parent.bottom
-            topMargin: units.gridUnit
-            bottomMargin: units.gridUnit
+            topMargin: PlasmaCore.Units.gridUnit
+            bottomMargin: PlasmaCore.Units.gridUnit
         }
-        spacing: units.gridUnit
+        spacing: PlasmaCore.Units.gridUnit
 
         GridLayout {
             property string thePw
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.leftMargin: units.gridUnit * 0.5
-            Layout.rightMargin: units.gridUnit * 0.5
-            Layout.maximumWidth: units.gridUnit * 22
-            Layout.maximumHeight: units.gridUnit * 12.5
+            Layout.leftMargin: PlasmaCore.Units.gridUnit * 0.5
+            Layout.rightMargin: PlasmaCore.Units.gridUnit * 0.5
+            Layout.maximumWidth: PlasmaCore.Units.gridUnit * 22
+            Layout.maximumHeight: PlasmaCore.Units.gridUnit * 12.5
             columns: 4
 
             // numpad keys

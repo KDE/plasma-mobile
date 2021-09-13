@@ -20,7 +20,7 @@ PlasmaCore.SvgItem {
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     }
     elementId: "left-arrow"
-    width: units.iconSizes.large
+    width: PlasmaCore.Units.iconSizes.large
     height: width
     layer.enabled: true
     layer.effect: DropShadow {
@@ -33,7 +33,7 @@ PlasmaCore.SvgItem {
     }
     Behavior on opacity {
         OpacityAnimator {
-            duration: units.longDuration * 2
+            duration: PlasmaCore.Units.longDuration * 2
             easing.type: Easing.InOutQuad
         }
     }

@@ -12,7 +12,7 @@ import org.kde.plasma.components 2.0 as PlasmaComponents
 PlasmaComponents.Label {
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
-    font.pixelSize: units.gridUnit * 1.6
+    font.pixelSize: PlasmaCore.Units.gridUnit * 1.6
     property alias sub: longHold.text
     property var callback
     Layout.fillWidth: true

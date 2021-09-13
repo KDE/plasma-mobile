@@ -29,7 +29,7 @@ Item {
             left: parent.left
             right: parent.right
             verticalCenter: parent.verticalCenter
-            margins: units.gridUnit
+            margins: PlasmaCore.Units.gridUnit
         }
         radius: height/2
         height: layout.implicitHeight + PlasmaCore.Units.largeSpacing
@@ -190,8 +190,8 @@ Item {
 
                                                     Kirigami.Icon {
                                                         anchors.centerIn: parent
-                                                        width: units.iconSizes.small
-                                                        height: units.iconSizes.small
+                                                        width: PlasmaCore.Units.iconSizes.small
+                                                        height: PlasmaCore.Units.iconSizes.small
                                                         // ToolButton cannot cope with QIcon
                                                         source: modelData.icon || ""
                                                         active: parent.hovered || parent.checked

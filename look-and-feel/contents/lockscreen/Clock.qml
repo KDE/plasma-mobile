@@ -15,7 +15,7 @@ ColumnLayout {
     
     property int alignment
     Layout.alignment: alignment
-    spacing: units.gridUnit
+    spacing: Units.gridUnit
     
     Label {
         text: Qt.formatTime(timeSource.data["Local"]["DateTime"], root.is24HourTime ? "h:mm" : "h:mm ap")

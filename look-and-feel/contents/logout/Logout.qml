@@ -61,21 +61,21 @@ PlasmaCore.ColorScope {
             target: lay
             from: 10
             to: 1
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         OpacityAnimator {
             target: lay
             from: 0
             to: 1
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         OpacityAnimator {
             target: background
             from: 0
             to: 0.6
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
@@ -92,21 +92,21 @@ PlasmaCore.ColorScope {
                 target: lay
                 from: 1
                 to: 10
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
             OpacityAnimator {
                 target: lay
                 from: 1
                 to: 0
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
             OpacityAnimator {
                 target: background
                 from: 0.6
                 to: 0
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }
@@ -125,8 +125,8 @@ PlasmaCore.ColorScope {
         id: lay
         anchors.centerIn: parent
         columns: 2
-        rowSpacing: units.gridUnit * 2
-        columnSpacing: units.gridUnit * 2
+        rowSpacing: PlasmaCore.Units.gridUnit * 2
+        columnSpacing: PlasmaCore.Units.gridUnit * 2
         scale: 2
         opacity: 0
         ActionButton {

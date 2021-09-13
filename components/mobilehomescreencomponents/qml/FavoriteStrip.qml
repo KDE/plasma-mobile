@@ -27,13 +27,13 @@ LauncherContainer {
 
     Behavior on height {
         NumberAnimation {
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on opacity {
         OpacityAnimator {
-            duration: units.longDuration * 4
+            duration: PlasmaCore.Units.longDuration * 4
             easing.type: Easing.InOutQuad
         }
     }

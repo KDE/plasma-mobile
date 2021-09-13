@@ -27,7 +27,7 @@ Item {
     
     anchors.left: parent.left
     anchors.right: parent.right
-    height: notifLayout.height + units.gridUnit
+    height: notifLayout.height + PlasmaCore.Units.gridUnit
     
     opacity: 1 - Math.min(1, 1.5 * Math.abs(rect.x) / width) // opacity during dismiss swipe
 
@@ -57,20 +57,20 @@ Item {
             id: notifLayout
             anchors {
                 left: parent.left
-                leftMargin: units.gridUnit * 0.5
+                leftMargin: PlasmaCore.Units.gridUnit * 0.5
                 right: parent.right
-                rightMargin: units.gridUnit * 0.5
+                rightMargin: PlasmaCore.Units.gridUnit * 0.5
                 verticalCenter: parent.verticalCenter
             }
             RowLayout {
                 Layout.fillWidth: true
-                spacing: units.smallSpacing / 2
+                spacing: PlasmaCore.Units.smallSpacing / 2
                 // notif body
                 ColumnLayout {
                     id: textLayout
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                    spacing: units.gridUnit / 2
+                    spacing: PlasmaCore.Units.gridUnit / 2
 
                     Label {
                         text: notification.summary
@@ -97,10 +97,10 @@ Item {
                     id: iconContainer
 
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                    Layout.preferredWidth: units.iconSizes.large
-                    Layout.preferredHeight: units.iconSizes.large
-                    Layout.topMargin: units.smallSpacing
-                    Layout.bottomMargin: units.smallSpacing
+                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.large
+                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.large
+                    Layout.topMargin: PlasmaCore.Units.smallSpacing
+                    Layout.bottomMargin: PlasmaCore.Units.smallSpacing
 
                     visible: iconItem.active || imageItem.active
 
@@ -135,7 +135,7 @@ Item {
             Flow {
                 id: actionsflow
                 Layout.fillWidth: true
-                spacing: units.smallSpacing
+                spacing: PlasmaCore.Units.smallSpacing
                 layoutDirection: Qt.RightToLeft
                 Repeater {
                     id: actionRepeater
@@ -192,7 +192,7 @@ Item {
                 } else {
                     slideAnim.restart();
                 }
-                if (notificationItem.notification.hasDefaultAction && Math.abs(rect.x) < units.gridUnit) {
+                if (notificationItem.notification.hasDefaultAction && Math.abs(rect.x) < PlasmaCore.Units.gridUnit) {
                     if (notificationItem.notification.category === "x-kde.incoming-call") {
                         notifModel.invokeDefaultAction(notificationItem.notification.notificationId);
                     } else {
@@ -208,7 +208,7 @@ Item {
                 target: rect
                 property: "x"
                 to: 0
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
             }
         }
     }

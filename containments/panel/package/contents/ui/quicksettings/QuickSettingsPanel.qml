@@ -66,7 +66,7 @@ Item {
     }
 
     signal plasmoidTriggered(var applet, var id)
-    Layout.minimumHeight: flow.implicitHeight + units.largeSpacing*2
+    Layout.minimumHeight: flow.implicitHeight + PlasmaCore.Units.largeSpacing*2
     
     onClosed: quickSettingsModel.panelClosed()
 
@@ -94,7 +94,7 @@ Item {
             spacing: 0
             height: Layout.minimumHeight * (1 - root.expandedRatio) + (Layout.maximumHeight * root.expandedRatio)
             
-            readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
+            readonly property real cellSizeHint: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing * 6
             readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
             
             // top indicators (clock, widgets, etc.)
@@ -125,7 +125,7 @@ Item {
                     Layout.preferredHeight: implicitHeight
                     Layout.maximumHeight: (flow.cellSizeHint * Math.ceil((flow.children.length - 1) / flow.columns))
 
-                    readonly property real cellSizeHint: units.iconSizes.large + units.smallSpacing * 6
+                    readonly property real cellSizeHint: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing * 6
                     readonly property real columns: Math.floor(width / cellSizeHint)
                     readonly property real columnWidth: Math.floor(width / columns)
 
@@ -162,7 +162,7 @@ Item {
 
                     move: Transition {
                         NumberAnimation {
-                            duration: units.shortDuration
+                            duration: PlasmaCore.Units.shortDuration
                             easing.type: Easing.Linear
                             properties: "x,y"
                         }
@@ -170,10 +170,10 @@ Item {
                 }
                 BrightnessItem {
                     id: brightnessSlider
-                    Layout.topMargin: units.largeSpacing
-                    Layout.bottomMargin: units.smallSpacing
-                    Layout.leftMargin: units.largeSpacing
-                    Layout.rightMargin: units.largeSpacing
+                    Layout.topMargin: PlasmaCore.Units.largeSpacing
+                    Layout.bottomMargin: PlasmaCore.Units.smallSpacing
+                    Layout.leftMargin: PlasmaCore.Units.largeSpacing
+                    Layout.rightMargin: PlasmaCore.Units.largeSpacing
                     Layout.fillWidth: true
                     
                     opacity: root.expandedRatio

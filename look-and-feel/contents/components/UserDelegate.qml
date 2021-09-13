@@ -29,13 +29,13 @@ Item {
     property int fontSize: config.fontSize
     signal clicked()
 
-    property real faceSize: Math.min(width, height - usernameDelegate.height - units.smallSpacing)
+    property real faceSize: Math.min(width, height - usernameDelegate.height - PlasmaCore.Units.smallSpacing)
 
     opacity: isCurrent ? 1.0 : 0.5
 
     Behavior on opacity {
         OpacityAnimator {
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
         }
     }
 
@@ -54,16 +54,16 @@ Item {
         id: imageSource
         anchors {
             bottom: usernameDelegate.top
-            bottomMargin: units.largeSpacing
+            bottomMargin: PlasmaCore.Units.largeSpacing
             horizontalCenter: parent.horizontalCenter
         }
         Behavior on width { 
             PropertyAnimation {
                 from: faceSize
-                duration: units.longDuration * 2;
+                duration: PlasmaCore.Units.longDuration * 2;
             }
         }
-        width: isCurrent ? faceSize : faceSize - units.largeSpacing
+        width: isCurrent ? faceSize : faceSize - PlasmaCore.Units.largeSpacing
         height: width
 
         //Image takes priority, taking a full path to a file, if that doesn't exist we show an icon
@@ -80,7 +80,7 @@ Item {
             source: iconSource
             visible: (face.status == Image.Error || face.status == Image.Null)
             anchors.fill: parent
-            anchors.margins: units.gridUnit * 0.5 // because mockup says so...
+            anchors.margins: PlasmaCore.Units.gridUnit * 0.5 // because mockup says so...
             colorGroup: PlasmaCore.ColorScope.colorGroup
         }
     }
@@ -88,7 +88,7 @@ Item {
     ShaderEffect {
         anchors {
             bottom: usernameDelegate.top
-            bottomMargin: units.largeSpacing
+            bottomMargin: PlasmaCore.Units.largeSpacing
             horizontalCenter: parent.horizontalCenter
         }
 

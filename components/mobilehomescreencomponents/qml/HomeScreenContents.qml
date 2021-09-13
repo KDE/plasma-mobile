@@ -83,10 +83,10 @@ DragDrop.DropArea {
 
             let scenePos = mapToItem(null, event.x, event.y);
             //SCROLL LEFT
-            if (scenePos.x < units.gridUnit) {
+            if (scenePos.x < PlasmaCore.Units.gridUnit) {
                 mainFlickable.scrollLeft();
             //SCROLL RIGHT
-            } else if (scenePos.x > mainFlickable.width - units.gridUnit) {
+            } else if (scenePos.x > mainFlickable.width - PlasmaCore.Units.gridUnit) {
                 mainFlickable.scrollRight();
             //DON't SCROLL
             } else {
@@ -183,10 +183,10 @@ DragDrop.DropArea {
         // Sets the containment in edit mode when we go in edit mode as well
         onEditModeChanged: plasmoid.editMode = editMode;
 
-        minimumItemWidth: units.gridUnit * 3
+        minimumItemWidth: PlasmaCore.Units.gridUnit * 3
         minimumItemHeight: minimumItemWidth
 
-        defaultItemWidth: units.gridUnit * 6
+        defaultItemWidth: PlasmaCore.Units.gridUnit * 6
         defaultItemHeight: defaultItemWidth
 
         acceptsAppletCallback: function(applet, x, y) {

@@ -7,7 +7,7 @@ Text {
     horizontalAlignment: Qt.AlignHCenter
     verticalAlignment: Qt.AlignVCenter
     color: dialer.textColor
-    font.pixelSize: Math.floor((width - (units.largeSpacing)) / 2)
+    font.pixelSize: Math.floor((width - (PlasmaCore.Units.largeSpacing)) / 2)
     property alias sub: longHold.text
     property var callback
 

@@ -72,10 +72,10 @@ Repeater {
             var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
 
             //SCROLL LEFT
-            if (pos.x < units.gridUnit) {
+            if (pos.x < PlasmaCore.Units.gridUnit) {
                 launcherRepeater.scrollLeftRequested();
             //SCROLL RIGHT
-            } else if (pos.x > mainFlickable.width - units.gridUnit) {
+            } else if (pos.x > mainFlickable.width - PlasmaCore.Units.gridUnit) {
                 launcherRepeater.scrollRightRequested();
             //DON't SCROLL
             } else {

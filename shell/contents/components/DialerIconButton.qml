@@ -11,7 +11,7 @@ Item {
 
     PlasmaCore.IconItem {
         id: icon
-        width: units.iconSizes.medium
+        width: PlasmaCore.Units.iconSizes.medium
         height: width
         anchors.centerIn: parent
     }

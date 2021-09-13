@@ -128,9 +128,9 @@ PlasmaCore.ColorScope {
 
         ColumnLayout {
             anchors.fill: parent
-            anchors.topMargin: 2*units.gridUnit
-            anchors.bottomMargin: units.gridUnit
-            spacing: units.gridUnit
+            anchors.topMargin: 2*PlasmaCore.Units.gridUnit
+            anchors.bottomMargin: PlasmaCore.Units.gridUnit
+            spacing: PlasmaCore.Units.gridUnit
 
             // pin dot display
             Item {
@@ -166,7 +166,7 @@ PlasmaCore.ColorScope {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.top: simLabel.bottom
-                    anchors.topMargin: units.gridUnit
+                    anchors.topMargin: PlasmaCore.Units.gridUnit
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font.pointSize: 12
@@ -179,14 +179,14 @@ PlasmaCore.ColorScope {
                 RowLayout {
                     id: dotDisplay
                     anchors.centerIn: parent
-                    height: units.gridUnit * 2.5 // maintain height when letter is shown
+                    height: PlasmaCore.Units.gridUnit * 2.5 // maintain height when letter is shown
                     spacing: 6
 
                     Repeater {
                         model: root.pin.length
                         delegate: Rectangle { // dot
                             visible: index !== root.pin.length-1 || root.lastKey === "" // hide dot if number is shown
-                            Layout.preferredWidth: units.gridUnit * 0.5
+                            Layout.preferredWidth: PlasmaCore.Units.gridUnit * 0.5
                             Layout.preferredHeight: Layout.preferredWidth
                             Layout.alignment: Qt.AlignVCenter
                             radius: width
@@ -206,10 +206,10 @@ PlasmaCore.ColorScope {
             // number keys
             GridLayout {
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                Layout.leftMargin: units.gridUnit * 0.5
-                Layout.rightMargin: units.gridUnit * 0.5
-                Layout.maximumWidth: units.gridUnit * 22
-                Layout.maximumHeight: (root.height > root.width) ? units.gridUnit * 17.5 : units.gridUnit * 12.5
+                Layout.leftMargin: PlasmaCore.Units.gridUnit * 0.5
+                Layout.rightMargin: PlasmaCore.Units.gridUnit * 0.5
+                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 22
+                Layout.maximumHeight: (root.height > root.width) ? PlasmaCore.Units.gridUnit * 17.5 : PlasmaCore.Units.gridUnit * 12.5
                 columns: 3
 
                 Repeater {
@@ -283,7 +283,7 @@ PlasmaCore.ColorScope {
                 }
             }
             Item {
-                height: units.gridUnit * 0.5
+                height: PlasmaCore.Units.gridUnit * 0.5
             }
         }
     }

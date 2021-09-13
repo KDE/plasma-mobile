@@ -55,7 +55,7 @@ Item {
     Item {
         anchors {
             fill: parent
-            margins: units.smallSpacing
+            margins: PlasmaCore.Units.smallSpacing
         }
 
         SequentialAnimation {
@@ -65,7 +65,7 @@ Item {
                 id: internalSlideAnim
                 target: background
                 properties: "x"
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
             ScriptAction {
@@ -81,7 +81,7 @@ Item {
 
             width: parent.width
             height: parent.height
-            radius: units.smallSpacing
+            radius: PlasmaCore.Units.smallSpacing
             color: PlasmaCore.Theme.backgroundColor
             opacity: 1 * (1-Math.abs(x)/width)
 
@@ -112,13 +112,13 @@ Item {
                 ColumnLayout {
                     anchors {
                         fill: parent
-                        margins: units.smallSpacing
+                        margins: PlasmaCore.Units.smallSpacing
                     }
                     
                     RowLayout {
                         z: 99
                         Layout.fillWidth: true
-                        Layout.maximumHeight: units.gridUnit
+                        Layout.maximumHeight: PlasmaCore.Units.gridUnit
                         PlasmaCore.IconItem {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
@@ -149,8 +149,8 @@ Item {
                         PlasmaComponents.ToolButton {
                             z: 99
                             icon.name: "window-close"
-                            icon.width: units.iconSizes.medium
-                            icon.height: units.iconSizes.medium
+                            icon.width: PlasmaCore.Units.iconSizes.medium
+                            icon.height: PlasmaCore.Units.iconSizes.medium
                             onClicked: {
                                 slideAnim.to = -background.width*2;
                                 slideAnim.running = true;

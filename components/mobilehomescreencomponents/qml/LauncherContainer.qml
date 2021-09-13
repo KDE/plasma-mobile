@@ -19,9 +19,9 @@ Item {
     id: root
 
     readonly property int reservedSpaceForLabel: metrics.height
-    readonly property int cellWidth: root.width / Math.floor(root.width / ((availableCellHeight - reservedSpaceForLabel) + units.smallSpacing*4))
+    readonly property int cellWidth: root.width / Math.floor(root.width / ((availableCellHeight - reservedSpaceForLabel) + PlasmaCore.Units.smallSpacing*4))
     readonly property int cellHeight: availableCellHeight
-    property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
+    property int availableCellHeight: PlasmaCore.Units.iconSizes.huge + reservedSpaceForLabel
 
     property ContainmentLayoutManager.AppletsLayout appletsLayout
 
@@ -29,7 +29,7 @@ Item {
     property alias flow: applicationsFlow
 
     implicitWidth: frame.implicitWidth
-    implicitHeight: Math.max(units.gridUnit*3, frame.implicitHeight)
+    implicitHeight: Math.max(PlasmaCore.Units.gridUnit*3, frame.implicitHeight)
 
     Controls.Label {
         id: metrics
@@ -40,7 +40,7 @@ Item {
 
     Item {
         id: spacer
-        width: units.gridUnit * 4
+        width: PlasmaCore.Units.gridUnit * 4
         height: width
     }
 
@@ -68,7 +68,7 @@ Item {
 
                 move: Transition {
                     NumberAnimation {
-                        duration: units.longDuration
+                        duration: PlasmaCore.Units.longDuration
                         easing.type: Easing.InOutQuad
                         properties: "x,y"
                     }
@@ -77,7 +77,7 @@ Item {
         }
         Behavior on implicitWidth {
             NumberAnimation {
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
         }

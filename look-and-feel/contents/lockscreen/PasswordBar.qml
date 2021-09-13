@@ -16,7 +16,7 @@ import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 
 Rectangle {
     id: root
-    implicitHeight: units.gridUnit * 2.5
+    implicitHeight: PlasmaCore.Units.gridUnit * 2.5
     
     // toggle between pin and password mode
     property bool isPinMode: true
@@ -182,7 +182,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.margins: units.smallSpacing
+            anchors.margins: PlasmaCore.Units.smallSpacing
             implicitWidth: height
             icon.name: "input-keyboard-virtual-symbolic"
             onClicked: {
@@ -212,7 +212,7 @@ Rectangle {
             
             ListView {
                 id: dotDisplay
-                property int dotWidth: Math.round(units.gridUnit * 0.35)
+                property int dotWidth: Math.round(PlasmaCore.Units.gridUnit * 0.35)
                 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.bottomMargin: Math.round(dotWidth / 2)

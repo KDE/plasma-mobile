@@ -44,7 +44,7 @@ PlasmaCore.ToolTipArea {
         case PlasmaCore.Types.Horizontal:
             return height;
         default:
-            return units.gridUnit * 3;
+            return PlasmaCore.Units.gridUnit * 3;
         }
     }
 
@@ -55,7 +55,7 @@ PlasmaCore.ToolTipArea {
         case PlasmaCore.Types.Horizontal:
             return 0;
         default:
-            return units.gridUnit * 3;
+            return PlasmaCore.Units.gridUnit * 3;
         }
     }
 

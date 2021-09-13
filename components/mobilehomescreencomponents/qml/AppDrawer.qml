@@ -60,11 +60,11 @@ Item {
     signal dragStarted
 
     readonly property int reservedSpaceForLabel: metrics.height
-    property int availableCellHeight: units.iconSizes.huge + reservedSpaceForLabel
+    property int availableCellHeight: PlasmaCore.Units.iconSizes.huge + reservedSpaceForLabel
 
     property alias flickable: view
 
-    readonly property real openFactor: Math.min(1, Math.max(0, Math.min(1, (view.contentY + view.originY + view.height*2 - root.closedPositionOffset*2) / (units.gridUnit * 10))))
+    readonly property real openFactor: Math.min(1, Math.max(0, Math.min(1, (view.contentY + view.originY + view.height*2 - root.closedPositionOffset*2) / (PlasmaCore.Units.gridUnit * 10))))
 
     function open() {
         if (root.status === AppDrawer.Status.Open) {
@@ -114,7 +114,7 @@ Item {
         id: scrollAnim
         target: view
         properties: "contentY"
-        duration: units.longDuration * 2
+        duration: PlasmaCore.Units.longDuration * 2
         easing.type: Easing.OutQuad
         easing.amplitude: 2.0
     }
@@ -148,7 +148,7 @@ Item {
             rightMargin: -1
         }
         border.color: Qt.rgba(1, 1, 1, 0.5)
-        radius: units.gridUnit
+        radius: PlasmaCore.Units.gridUnit
         color: "black"
         opacity: 0.4 * root.openFactor
         height: root.height + radius * 2
@@ -181,7 +181,7 @@ Item {
         }
         
         visible: root.status !== AppDrawer.Status.Closed
-        cellWidth: view.width / Math.floor(view.width / ((root.availableCellHeight - root.reservedSpaceForLabel) + units.smallSpacing*4))
+        cellWidth: view.width / Math.floor(view.width / ((root.availableCellHeight - root.reservedSpaceForLabel) + PlasmaCore.Units.smallSpacing*4))
         cellHeight: root.availableCellHeight
         clip: true
 
@@ -258,11 +258,11 @@ Item {
             enabled: false
             Behavior on opacity {
                 OpacityAnimator {
-                    duration: units.longDuration * 2
+                    duration: PlasmaCore.Units.longDuration * 2
                     easing.type: Easing.InOutQuad
                 }
             }
-            implicitWidth: Math.round(units.gridUnit/3)
+            implicitWidth: Math.round(PlasmaCore.Units.gridUnit/3)
             contentItem: Rectangle {
                 radius: width/2
                 color: Qt.rgba(1, 1, 1, 0.3)
@@ -276,8 +276,8 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: units.gridUnit + root.leftPadding
-            rightMargin: units.gridUnit + root.rightPadding
+            leftMargin: PlasmaCore.Units.gridUnit + root.leftPadding
+            rightMargin: PlasmaCore.Units.gridUnit + root.rightPadding
             bottomMargin: root.bottomPadding - height
         }
         height: 1
@@ -293,7 +293,7 @@ Item {
         opacity: root.status !== AppDrawer.Status.Closed ? 0.6 : 0
         Behavior on opacity {
             OpacityAnimator {
-                duration: units.longDuration * 2
+                duration: PlasmaCore.Units.longDuration * 2
                 easing.type: Easing.InOutQuad
             }
         }

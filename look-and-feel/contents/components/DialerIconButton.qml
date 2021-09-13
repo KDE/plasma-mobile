@@ -2,7 +2,7 @@ import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
-    width: units.iconSizes.smallMedium
+    width: PlasmaCore.Units.iconSizes.smallMedium
     height: width
     property var callback
     property string text
@@ -11,7 +11,7 @@ Item {
 
     PlasmaCore.IconItem {
         id: icon
-        width: units.iconSizes.medium
+        width: PlasmaCore.Units.iconSizes.medium
         height: width
         anchors.centerIn: parent
         colorGroup: PlasmaCore.ColorScope.colorGroup

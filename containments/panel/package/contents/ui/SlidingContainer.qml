@@ -28,7 +28,7 @@ NanoShell.FullScreenOverlay {
     readonly property int openedContentY: wideScreen || offset > (collapsedHeight + openThreshold) ? -topEmptyAreaHeight : offsetToContentY(collapsedHeight)
     readonly property int closedContentY: mainFlickable.contentHeight
     
-    readonly property bool wideScreen: width > height || width > units.gridUnit * 45
+    readonly property bool wideScreen: width > height || width > PlasmaCore.Units.gridUnit * 45
     readonly property int drawerWidth: wideScreen ? contentItem.implicitWidth : width
 
     property int drawerX: 0
@@ -99,7 +99,7 @@ NanoShell.FullScreenOverlay {
     function updateState() {
         cancelAnimations();
         if (window.offset <= 0) {
-            // close immediately, so that we don't have to wait units.longDuration 
+            // close immediately, so that we don't have to wait PlasmaCore.Units.longDuration 
             window.visible = false;
             close();
         } else if (window.direction === SlidingContainer.MovementDirection.None) {

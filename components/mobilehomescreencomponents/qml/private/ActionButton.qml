@@ -21,7 +21,7 @@ PlasmaCore.ToolTipArea {
     property alias elementId: icon.elementId
     property QtObject action
     property bool backgroundVisible: false
-    property int iconSize: units.iconSizes.large
+    property int iconSize: PlasmaCore.Units.iconSizes.large
     property int pressedOffset: 1
     property bool checked: false
     property bool toggle: false
@@ -35,7 +35,7 @@ PlasmaCore.ToolTipArea {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }

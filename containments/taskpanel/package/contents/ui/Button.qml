@@ -52,7 +52,7 @@ Item {
         }
         NumberAnimation on opacity {
             id: opacityAnimator
-            duration: units.shortDuration
+            duration: PlasmaCore.Units.shortDuration
             easing.type: Easing.InOutQuad
             onFinished: {
                 // animate the state back

@@ -20,9 +20,9 @@ Item {
     RowLayout {
         id: controlsRow
         anchors.bottom: parent.bottom
-        y: units.smallSpacing // some distance to the password field
+        y: PlasmaCore.Units.smallSpacing // some distance to the password field
         width: parent.width
-        height: units.gridUnit * 3
+        height: PlasmaCore.Units.gridUnit * 3
         spacing: 0
 
         enabled: mpris2Source.canControl
@@ -94,7 +94,7 @@ Item {
         }
 
         Item { // spacer
-            width: units.smallSpacing
+            width: PlasmaCore.Units.smallSpacing
             height: 1
         }
 

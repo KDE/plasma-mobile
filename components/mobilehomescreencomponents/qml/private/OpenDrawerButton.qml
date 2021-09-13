@@ -25,7 +25,7 @@ MouseArea {
     property Flickable flickable
     property real factor: 0
 
-    height: units.iconSizes.medium
+    height: PlasmaCore.Units.iconSizes.medium
     signal openRequested
     signal closeRequested
 
@@ -41,7 +41,7 @@ MouseArea {
     Item {
         anchors.centerIn: parent
 
-        width: units.iconSizes.medium
+        width: PlasmaCore.Units.iconSizes.medium
         height: width
 
         Rectangle {

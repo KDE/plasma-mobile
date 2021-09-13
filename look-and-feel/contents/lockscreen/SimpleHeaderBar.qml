@@ -84,7 +84,7 @@ PlasmaCore.ColorScope {
             top: parent.top
             bottom: parent.bottom
             right: parent.right
-            rightMargin: units.smallSpacing
+            rightMargin: PlasmaCore.Units.smallSpacing
         }
         Indicators.Bluetooth {}
         Indicators.Wifi {}

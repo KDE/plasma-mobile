@@ -41,7 +41,7 @@ MouseArea {
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
         } else {
-            delegate.launch(delegate.x + (units.smallSpacing * 2), delegate.y + (units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
+            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
         }
     }
 
@@ -49,10 +49,10 @@ MouseArea {
     ColumnLayout {
         anchors {
             fill: parent
-            leftMargin: units.smallSpacing * 2
-            topMargin: units.smallSpacing * 2
-            rightMargin: units.smallSpacing * 2
-            bottomMargin: units.smallSpacing * 2
+            leftMargin: PlasmaCore.Units.smallSpacing * 2
+            topMargin: PlasmaCore.Units.smallSpacing * 2
+            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            bottomMargin: PlasmaCore.Units.smallSpacing * 2
         }
         spacing: 0
 
@@ -74,7 +74,7 @@ MouseArea {
                 }
                 visible: model.applicationRunning
                 radius: width
-                width: units.smallSpacing
+                width: PlasmaCore.Units.smallSpacing
                 height: width
                 color: PlasmaCore.Theme.highlightColor
             }
@@ -87,8 +87,8 @@ MouseArea {
             Layout.fillWidth: true
             Layout.preferredHeight: delegate.reservedSpaceForLabel
             wrapMode: Text.WordWrap
-            Layout.leftMargin: -parent.anchors.leftMargin + units.smallSpacing
-            Layout.rightMargin: -parent.anchors.rightMargin + units.smallSpacing
+            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
+            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
             maximumLineCount: 2

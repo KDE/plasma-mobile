@@ -20,7 +20,7 @@ NanoShell.FullScreenOverlay {
     width: Screen.width
     height: Screen.height
     property int offset: 0
-    property int overShoot: units.gridUnit * 2
+    property int overShoot: PlasmaCore.Units.gridUnit * 2
     property int tasksCount: window.model.count
     property int currentTaskIndex: -1
     property TaskManager.TasksModel model
@@ -122,7 +122,7 @@ NanoShell.FullScreenOverlay {
             id: internalAnim
             target: tasksView
             properties: "contentY"
-            duration: units.longDuration
+            duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         ScriptAction {
@@ -160,7 +160,7 @@ NanoShell.FullScreenOverlay {
                 target: window.contentItem
                 from: 1
                 to: 0
-                duration: units.longDuration
+                duration: PlasmaCore.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
             ScaleAnimator {
@@ -168,7 +168,7 @@ NanoShell.FullScreenOverlay {
                 from: 1
                 to: 2
                 // To try tosync up with kwin animation
-                duration: units.longDuration * 0.85
+                duration: PlasmaCore.Units.longDuration * 0.85
                 easing.type: Easing.InOutQuad
             }
         }
@@ -280,7 +280,7 @@ NanoShell.FullScreenOverlay {
 
                 Behavior on y {
                     NumberAnimation {
-                        duration: units.longDuration
+                        duration: PlasmaCore.Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -294,7 +294,7 @@ NanoShell.FullScreenOverlay {
                     enabled: false
                     NumberAnimation {
                         properties: "x,y"
-                        duration: units.longDuration
+                        duration: PlasmaCore.Units.longDuration
                         easing.type: Easing.InOutQuad
                     }
                 }
@@ -309,8 +309,8 @@ NanoShell.FullScreenOverlay {
             bottom: parent.bottom
         }
         icon.name: "start-here-kde"
-        icon.width: units.iconSizes.medium
-        icon.height: units.iconSizes.medium
+        icon.width: PlasmaCore.Units.iconSizes.medium
+        icon.height: PlasmaCore.Units.iconSizes.medium
         onClicked: {
             currentTaskIndex = -1;
             window.hide();

@@ -82,7 +82,7 @@ ColumnLayout {
                             id: xAnim
                             target: delegate
                             from: delegate.x
-                            duration: units.longDuration
+                            duration: PlasmaCore.Units.longDuration
                             easing.type: Easing.InOutQuad
                         }
                         ScriptAction {
@@ -126,7 +126,7 @@ ColumnLayout {
                     id: label
                     text: model.name
                     anchors.verticalCenter: parent.verticalCenter
-                    x: units.smallSpacing
+                    x: PlasmaCore.Units.smallSpacing
                 }
                 PlasmaComponents.TextField {
                     id: edit

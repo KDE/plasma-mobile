@@ -26,15 +26,15 @@ RowLayout {
     // false for displaying the value as normal text
     property bool showingProgress: false
 
-    spacing: units.smallSpacing
+    spacing: PlasmaCore.Units.smallSpacing
 
-    width: Math.max(Math.min(Screen.desktopAvailableWidth / 2, implicitWidth), units.gridUnit * 15)
-    height: units.iconSizes.medium
+    width: Math.max(Math.min(Screen.desktopAvailableWidth / 2, implicitWidth), PlasmaCore.Units.gridUnit * 15)
+    height: PlasmaCore.Units.iconSizes.medium
 
     PlasmaCore.IconItem {
-        Layout.leftMargin: units.smallSpacing
-        Layout.preferredWidth: units.iconSizes.medium
-        Layout.preferredHeight: units.iconSizes.medium
+        Layout.leftMargin: PlasmaCore.Units.smallSpacing
+        Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
+        Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
         Layout.alignment: Qt.AlignVCenter
         source: icon
         visible: valid
@@ -46,7 +46,7 @@ RowLayout {
         Layout.alignment: Qt.AlignVCenter
         // So it never exceeds the minimum popup size
         Layout.preferredWidth: 1
-        Layout.rightMargin: units.smallSpacing
+        Layout.rightMargin: PlasmaCore.Units.smallSpacing
         visible: showingProgress
         from: 0
         to: osdMaxValue
@@ -66,7 +66,7 @@ RowLayout {
         id: percentageLabel
         Layout.fillHeight: true
         Layout.preferredWidth: widestLabelSize.width
-        Layout.rightMargin: units.smallSpacing
+        Layout.rightMargin: PlasmaCore.Units.smallSpacing
         Layout.alignment: Qt.AlignVCenter
         level: 3
         horizontalAlignment: Text.AlignHCenter
@@ -93,7 +93,7 @@ RowLayout {
         id: label
         Layout.fillWidth: true
         Layout.fillHeight: true
-        Layout.rightMargin: units.smallSpacing
+        Layout.rightMargin: PlasmaCore.Units.smallSpacing
         Layout.alignment: Qt.AlignVCenter
         level: 3
         horizontalAlignment: Text.AlignHCenter

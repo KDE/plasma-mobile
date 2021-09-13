@@ -246,7 +246,7 @@ Item {
 
                     z: 4
                     Layout.alignment: Qt.AlignTop
-                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, units.gridUnit * 25) : panelContents.width
+                    Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, PlasmaCore.Units.gridUnit * 25) : panelContents.width
 
                     parentSlidingPanel: slidingPanel
                     onExpandRequested: slidingPanel.expand()
@@ -256,10 +256,10 @@ Item {
                 // notifications and media player
                 ListView {
                     id: fullRepresentationView
-                    implicitHeight: units.gridUnit * 20
+                    implicitHeight: PlasmaCore.Units.gridUnit * 20
                     Layout.preferredWidth: slidingPanel.wideScreen ? Math.min(slidingPanel.width/2, quickSettings.width*fullRepresentationModel.count) : panelContents.width 
                     Layout.preferredHeight: slidingPanel.wideScreen
-                            ? Math.min(units.gridUnit * 20, Math.max(units.gridUnit * 15, quickSettings.implicitHeight))
+                            ? Math.min(PlasmaCore.Units.gridUnit * 20, Math.max(PlasmaCore.Units.gridUnit * 15, quickSettings.implicitHeight))
                             : Math.min(plasmoid.screenGeometry.height - quickSettings.implicitHeight - bottomBar.height + slidingPanel.topEmptyAreaHeight, implicitHeight)
 
                     z: 1
@@ -279,7 +279,7 @@ Item {
                     cacheBuffer: width * 100
                     highlightFollowsCurrentItem: true
                     highlightRangeMode: ListView.ApplyRange
-                    highlightMoveDuration: units.longDuration
+                    highlightMoveDuration: PlasmaCore.Units.longDuration
                     snapMode: slidingPanel.wideScreen ? ListView.NoSnap : ListView.SnapOneItem
                     model: ObjectModel {
                         id: fullRepresentationModel
