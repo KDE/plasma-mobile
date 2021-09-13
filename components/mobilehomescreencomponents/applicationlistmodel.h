@@ -116,6 +116,7 @@ Q_SIGNALS:
     void favoriteCountChanged();
     void maxFavoriteCountChanged();
     void appletChanged();
+    void launchError(const QString &msg);
 
 protected:
     void initWayland();

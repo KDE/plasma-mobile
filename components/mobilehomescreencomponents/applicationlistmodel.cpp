@@ -399,6 +399,12 @@ void ApplicationListModel::runApplication(const QString &storageId)
     KIO::ApplicationLauncherJob *job = new KIO::ApplicationLauncherJob(service);
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
     job->start();
+    connect(job, &KJob::finished, this, [this, job] {
+        if (job->error()) {
+            qWarning() << "error launching" << job->error() << job->errorString();
+            Q_EMIT launchError(job->errorString());
+        }
+    });
 }
 
 int ApplicationListModel::maxFavoriteCount() const

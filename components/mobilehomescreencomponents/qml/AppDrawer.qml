@@ -204,6 +204,11 @@ Item {
 
        // boundsBehavior: Flickable.StopAtBounds
 
+        Connections {
+            target: HomeScreenComponents.ApplicationListModel
+            onLaunchError: NanoShell.StartupFeedback.close()
+        }
+
         model: HomeScreenComponents.ApplicationListModel
 
         header: Rectangle {
