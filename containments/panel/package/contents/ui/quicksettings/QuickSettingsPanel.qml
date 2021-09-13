@@ -94,9 +94,6 @@ Item {
             spacing: 0
             height: Layout.minimumHeight * (1 - root.expandedRatio) + (Layout.maximumHeight * root.expandedRatio)
             
-            readonly property real cellSizeHint: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing * 6
-            readonly property real columnWidth: Math.floor(width / Math.floor(width / cellSizeHint))
-            
             // top indicators (clock, widgets, etc.)
             IndicatorsRow {
                 id: indicatorsRow
@@ -127,7 +124,7 @@ Item {
 
                     readonly property real cellSizeHint: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing * 6
                     readonly property real columns: Math.floor(width / cellSizeHint)
-                    readonly property real columnWidth: Math.floor(width / columns)
+                    readonly property real columnWidth: (flow.width / (flow.columns + 1)) * (root.expandedRatio > 0.4 ? 1 : (1 - root.expandedRatio) + (flow.width / flow.columns) * root.expandedRatio)
 
                     spacing: 0
 
@@ -136,10 +133,8 @@ Item {
                         delegate: Delegate {
                             id: delegateItem
                             required property var modelData
-                            width: root.expandedRatio < 0.4
-                                    ? Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2, flow.width / (flow.columns + 1))
-                                    : Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2,
-                                            (flow.width / (flow.columns + 1)) * (1 - root.expandedRatio) + (flow.width / flow.columns) * root.expandedRatio)
+                            width: flow.columnWidth
+
 
                             labelOpacity: y > 0  ? 1 : root.expandedRatio
                             opacity: y <= 0 ? 1 : root.expandedRatio
