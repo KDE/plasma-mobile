@@ -30,7 +30,7 @@ Name[zh_CN]=Plasma
 
 [Event/captured]
 Name=Captured
-Name[ca]=Captura
+Name[ca]=Capturat
 Name[cs]=Zachyceno
 Name[de]=Aufgenommen
 Name[en_GB]=Captured
@@ -55,7 +55,7 @@ Name[uk]=Захоплено
 Name[x-test]=xxCapturedxx
 Name[zh_CN]=已捕获
 Comment=Captured
-Comment[ca]=Captura
+Comment[ca]=Capturat
 Comment[cs]=Zachyceno
 Comment[de]=Aufgenommen
 Comment[en_GB]=Captured

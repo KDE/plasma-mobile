@@ -1,5 +1,12 @@
 [Desktop Entry]
 Name=Airplane Mode
+Name[ca]=Mode avió
+Name[es]=Modo avión
+Name[ia]=Modo aeroplano
+Name[nl]=Vliegtuigmodus
+Name[sv]=Flygplansläge
+Name[uk]=Режим польоту
+Name[x-test]=xxAirplane Modexx
 Icon=network-flightmode-on
 
 Type=Service
