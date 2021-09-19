@@ -2,11 +2,13 @@
 Name=Airplane Mode
 Name[ca]=Mode avió
 Name[es]=Modo avión
+Name[fr]=Mode Avion
 Name[ia]=Modo aeroplano
 Name[nl]=Vliegtuigmodus
 Name[sv]=Flygplansläge
 Name[uk]=Режим польоту
 Name[x-test]=xxAirplane Modexx
+Name[zh_CN]=飞行模式
 Icon=network-flightmode-on
 
 Type=Service
