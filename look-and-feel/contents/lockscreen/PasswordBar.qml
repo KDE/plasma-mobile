@@ -129,6 +129,7 @@ Rectangle {
         visible: false
         focus: keypadOpen && !isPinMode
         z: 1
+        inputMethodHints: Qt.ImhNoPredictiveText
         
         onFocusChanged: {
             if (focus) {
