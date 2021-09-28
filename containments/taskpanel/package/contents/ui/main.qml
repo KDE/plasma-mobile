@@ -249,19 +249,15 @@ PlasmaCore.ColorScope {
             }
         }
 
-        function resetOffsets() {
+        Window.onWindowChanged: {
             if (!Window.window)
                 return;
 
-            if (state === "landscape") {
+            Window.window.offset = Qt.binding(() => {
                 // FIXME: find a more precise way to determine the top panel height
-                Window.window.offset = PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing
-            } else {
-                Window.window.offset = 0
-            }
+                return plasmoid.formFactor === PlasmaCore.Types.Vertical ? PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing : 0
+            });
         }
-        Window.onWindowChanged: resetOffsets()
-        onStateChanged: resetOffsets()
 
         states: [
             State {
