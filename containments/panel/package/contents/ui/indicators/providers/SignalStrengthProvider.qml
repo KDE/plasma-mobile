@@ -15,6 +15,6 @@ QtObject {
     property string icon: "network-mobile-" + Math.floor(SignalIndicator.strength / 20) * 20
     
     property string label: !SignalIndicator.available ? ""
-                         : SignalIndicator.simLocked ? i18n("Sim Locked") : SignalIndicator.name
+                         : SignalIndicator.simLocked ? i18n("SIM Locked") : SignalIndicator.name
 }
 
