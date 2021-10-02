@@ -178,7 +178,7 @@ void PhonePanel::handleMetaDataReceived(const QVariantMap &metadata, int fd)
             KNotification *notif = new KNotification("captured");
             notif->setComponentName(QStringLiteral("plasma_phone_components"));
             notif->setTitle(i18n("New Screenshot"));
-            notif->setUrls({filePath});
+            notif->setUrls({QUrl::fromLocalFile(filePath)});
             notif->setText(i18n("New screenshot saved to %1", filePath));
             notif->sendEvent();
         }

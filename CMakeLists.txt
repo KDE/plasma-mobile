@@ -25,6 +25,8 @@ include(KDEGitCommitHooks)
 include(KDEClangFormat)
 include(FeatureSummary)
 
+add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
+
 find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
