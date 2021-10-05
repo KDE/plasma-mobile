@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
+Dependencies:
+- 'on': ['@all']
+  'require':
+    'frameworks/extra-cmake-modules': '@latest'
+    'frameworks/kconfig': '@latest'
+    'frameworks/kcoreaddons': '@latest'
+    'frameworks/ki18n': '@latest'
+    'frameworks/kio': '@latest'
+    'frameworks/knotifications': '@latest'
+    'frameworks/kpackage': '@latest'
+    'frameworks/kservice': '@latest'
+    'frameworks/kwayland': '@latest'
+    'frameworks/kwindowsystem': '@latest'
+    'frameworks/modemmanager-qt': '@latest'
+    'frameworks/plasma-framework': '@latest'
+    'plasma/kwin': '@same'
