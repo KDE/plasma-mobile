@@ -185,7 +185,7 @@ Rectangle {
             anchors.bottom: parent.bottom
             anchors.margins: PlasmaCore.Units.smallSpacing
             implicitWidth: height
-            icon.name: "input-keyboard-virtual-symbolic"
+            icon.name: root.isPinMode ? "input-keyboard-virtual-symbolic" : "input-dialpad-symbolic"
             onClicked: {
                 root.isPinMode = !root.isPinMode;
                 if (!root.isPinMode) {
