@@ -16,8 +16,10 @@ import "providers"
 Item {
     required property QtObject provider
 
-    width: strengthIcon.height + strengthLabel.width
-    Layout.minimumWidth: strengthIcon.height + strengthLabel.width
+    property real labelPixelSize
+    
+    width: strengthIcon.height + label.width
+    Layout.minimumWidth: strengthIcon.height + label.width
 
     PlasmaCore.IconItem {
         id: strengthIcon
@@ -32,11 +34,12 @@ Item {
 
     PlasmaComponents.Label {
         id: label
+        anchors.leftMargin: PlasmaCore.Units.smallSpacing
         anchors.left: strengthIcon.right
         anchors.verticalCenter: parent.verticalCenter
 
         text: provider.label
         color: PlasmaCore.ColorScope.textColor
-        font.pixelSize: parent.height / 2
+        font.pixelSize: labelPixelSize
     }
 }

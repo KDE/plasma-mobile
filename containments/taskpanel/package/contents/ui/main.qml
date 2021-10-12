@@ -255,7 +255,7 @@ PlasmaCore.ColorScope {
 
             Window.window.offset = Qt.binding(() => {
                 // FIXME: find a more precise way to determine the top panel height
-                return plasmoid.formFactor === PlasmaCore.Types.Vertical ? PlasmaCore.Units.gridUnit : 0
+                return plasmoid.formFactor === PlasmaCore.Types.Vertical ? MobileShell.TopPanelControls.panelHeight : 0
             });
         }
 

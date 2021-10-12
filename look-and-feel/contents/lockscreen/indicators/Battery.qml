@@ -15,6 +15,8 @@ import org.kde.plasma.workspace.components 2.0 as PW
 RowLayout {
     visible: pmSource.data["Battery"]["Has Cumulative"]
 
+    property real labelPixelSize
+
     PW.BatteryIcon {
         id: battery
         Layout.preferredWidth: height
@@ -39,6 +41,6 @@ RowLayout {
         Layout.alignment: Qt.AlignVCenter
 
         color: PlasmaCore.ColorScope.textColor
-        font.pixelSize: parent.height / 2
+        font.pixelSize: labelPixelSize
     }
 }

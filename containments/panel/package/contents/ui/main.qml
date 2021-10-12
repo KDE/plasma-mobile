@@ -32,7 +32,21 @@ import "indicators/providers" as IndicatorProviders
 Item {
     id: root
     width: 480
-    height: 30
+    height: PlasmaCore.Units.gridUnit
+    
+    // set height binding to top panel API
+    Binding {
+        target: MobileShell.TopPanelControls
+        property: "panelHeight"
+        value: root.height
+    }
+
+    // set height binding to top panel API
+    Binding {
+        target: MobileShell.TopPanelControls
+        property: "panelHeight"
+        value: root.height
+    }
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
 
@@ -179,7 +193,6 @@ Item {
         z: 1
         colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
         backgroundColor: !showingApp ? "transparent" : root.backgroundColor
-        showGradientBackground: !showingApp
         showDropShadow: !showingApp
     }
     

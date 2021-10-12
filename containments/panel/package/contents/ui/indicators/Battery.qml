@@ -16,6 +16,7 @@ import "providers"
 
 RowLayout {
     required property BatteryProvider provider
+    property real labelHeight
     visible: provider.isVisible
 
     PW.BatteryIcon {
@@ -36,6 +37,6 @@ RowLayout {
         Layout.alignment: Qt.AlignVCenter
 
         color: PlasmaCore.ColorScope.textColor
-        font.pixelSize: parent.height / 2
+        font.pixelSize: labelHeight
     }
 }

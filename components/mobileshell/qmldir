@@ -1,3 +1,4 @@
 module org.kde.plasma.private.mobileshell
 
 singleton HomeScreenControls 1.0 HomeScreenControls.qml
+singleton TopPanelControls 1.0 TopPanelControls.qml

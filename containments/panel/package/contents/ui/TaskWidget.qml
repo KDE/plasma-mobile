@@ -23,6 +23,7 @@ Item {
     }
 
     PlasmaCore.IconItem {
+        id: icon
         source: IconName ? IconName : Icon
         width: Math.min(parent.width, parent.height)
         height: width

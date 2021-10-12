@@ -101,11 +101,15 @@ Item {
             IndicatorsRow {
                 id: indicatorsRow
                 z: 1
+                
+                Layout.leftMargin: -Kirigami.Units.largeSpacing
+                Layout.rightMargin: -Kirigami.Units.largeSpacing
                 Layout.fillWidth: true
-                Layout.preferredHeight: parentSlidingPanel.topPanelHeight
+                Layout.preferredHeight: parentSlidingPanel.topPanelHeight + PlasmaCore.Units.smallSpacing * 2
+                
+                showSecondRow: true
                 colorGroup: PlasmaCore.Theme.NormalColorGroup
                 backgroundColor: "transparent"
-                showGradientBackground: false
                 showDropShadow: false
             }
             
