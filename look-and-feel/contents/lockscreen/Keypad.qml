@@ -114,6 +114,7 @@ Rectangle {
         password: root.password
         previewCharIndex: -2
         pinLabel: qsTr("Enter PIN")
+        onPasswordChanged: keypadRoot.passwordChanged()
         
         onChangePassword: root.password = password
         Binding {

@@ -278,9 +278,12 @@ PlasmaCore.ColorScope {
 
             Keypad {
                 id: keypad
-                focus: passwordFlickable.contentY === passwordFlickable.columnHeight
+                focus: true
                 swipeProgress: passwordFlickable.contentY / passwordFlickable.columnHeight
                 Layout.fillWidth: true
+                onPasswordChanged: {
+                    passwordFlickable.contentY = passwordFlickable.contentHeight - passwordFlickable.height
+                }
             }
         }
     }
