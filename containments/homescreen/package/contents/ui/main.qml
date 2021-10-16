@@ -113,6 +113,23 @@ FocusScope {
         }
     }
 
+    Plasmoid.onActivated: {
+        console.log("Triggered!", plasmoid.nativeInterface.showingDesktop)
+
+        // there's a couple of steps:
+        // - minimize windows
+        // - open app drawer
+        // - restore windows
+        if (!plasmoid.nativeInterface.showingDesktop) {
+            plasmoid.nativeInterface.showingDesktop = true
+        } else if (appDrawer.status !== HomeScreenComponents.AppDrawer.Status.Open) {
+            mainFlickable.currentIndex = 0
+            appDrawer.open()
+        } else {
+            plasmoid.nativeInterface.showingDesktop = false
+            appDrawer.close()
+        }
+    }
     HomeScreenComponents.AppDrawer {
         id: appDrawer
         anchors.fill: parent

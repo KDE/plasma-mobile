@@ -16,6 +16,7 @@ class FavoritesModel;
 class HomeScreen : public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(bool showingDesktop READ showingDesktop WRITE setShowingDesktop NOTIFY showingDesktopChanged)
 
 public:
     HomeScreen(QObject *parent, const QVariantList &args);
@@ -23,9 +24,14 @@ public:
 
     void configChanged() override;
 
+    bool showingDesktop() const;
+    void setShowingDesktop(bool showingDesktop);
 
     Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
     Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
+
+Q_SIGNALS:
+    void showingDesktopChanged(bool showingDesktop);
 
 protected:
     // void configChanged() override;
