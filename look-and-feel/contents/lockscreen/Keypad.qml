@@ -83,8 +83,14 @@ Rectangle {
                 passwordBar.keyPress(event.text);
             }
         }
+
+        if (event.modifiers & Qt.ControlModifier) {
+            if (event.key === Qt.Key_Backspace) {
+                passwordBar.clear();
+            }
+        }
     }
-    
+
     RectangularGlow {
         anchors.topMargin: 1
         anchors.fill: passwordBar
