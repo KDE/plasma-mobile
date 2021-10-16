@@ -140,10 +140,10 @@ Item {
                         delegate: Delegate {
                             id: delegateItem
                             required property var modelData
-                            width: root.expandedRatio < 0.4
-                                    ? Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2, flow.width / (flow.columns + 1))
-                                    : Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2,
-                                            (flow.width / (flow.columns + 1)) * (1 - root.expandedRatio) + (flow.width / flow.columns) * root.expandedRatio)
+                            width: Math.max(implicitWidth + PlasmaCore.Units.smallSpacing * 2, boundingWidth)                                    
+                            boundingWidth: root.expandedRatio < 0.4 
+                                            ? flow.width / (flow.columns + 1)
+                                            : (flow.width / (flow.columns + 1)) * (1 - root.expandedRatio) + (flow.width / flow.columns) * root.expandedRatio
 
                             labelOpacity: y > 0  ? 1 : root.expandedRatio
                             opacity: y <= 0 ? 1 : root.expandedRatio
