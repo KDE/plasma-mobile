@@ -27,12 +27,15 @@ ColumnLayout {
     required property var toggleFunction
     property alias labelOpacity: label.opacity
     
+    required property real boundingWidth
+    
     property color disabledButtonColor: PlasmaCore.Theme.backgroundColor
     property color disabledPressedButtonColor: Qt.darker(disabledButtonColor, 1.1)
     property color enabledButtonColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": 0.4*255})
     property color enabledPressedButtonColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {"alpha": 0.6*255});
 
     Rectangle {
+        id: iconButton
         Layout.preferredWidth: PlasmaCore.Units.iconSizes.large + PlasmaCore.Units.smallSpacing
         Layout.minimumHeight: width
         Layout.alignment: Qt.AlignHCenter
@@ -95,7 +98,7 @@ ColumnLayout {
     PlasmaComponents.Label {
         id: label
 
-        Layout.maximumWidth: parent.width
+        Layout.maximumWidth: delegateRoot.boundingWidth - arrow.width - PlasmaCore.Units.smallSpacing * 2
         Layout.alignment: Qt.AlignHCenter
 
         text: delegateRoot.text
@@ -106,6 +109,7 @@ ColumnLayout {
         verticalAlignment: Text.AlignVCenter
 
         PlasmaCore.SvgItem {
+            id: arrow
             anchors {
                 left: parent.right
                 verticalCenter: parent.verticalCenter
