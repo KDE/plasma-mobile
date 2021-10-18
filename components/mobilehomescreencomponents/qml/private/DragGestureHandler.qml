@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2021 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -15,7 +16,7 @@ DragHandler {
     yAxis.enabled: enabled
     xAxis.enabled: enabled
     property Flickable mainFlickable
-    property Launcher.AppDrawer appDrawer
+    property Launcher.AbstractAppDrawer appDrawer
     signal snapPage
     signal snapNextPage
     signal snapPrevPage
@@ -33,7 +34,7 @@ DragHandler {
         if (active) {
             if (root.appDrawer) {
                 if (__scrollDirection === DragGestureHandler.None) {
-                    if (root.appDrawer.offset > PlasmaCore.Units.gridUnit) {
+                    if (root.appDrawer.flickable.contentY > PlasmaCore.Units.gridUnit * 2) {
 
                         __scrollDirection = DragGestureHandler.Vertical;
                         snapPage();
@@ -49,7 +50,7 @@ DragHandler {
                 }
 
                 if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
-                    root.appDrawer.offset = -translation.y;
+                    root.appDrawer.flickable.contentY = Math.min(root.appDrawer.drawerTopMargin, Math.max(0, -translation.y));
                 }
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
