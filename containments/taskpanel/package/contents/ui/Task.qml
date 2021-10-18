@@ -92,7 +92,6 @@ Item {
             
             RowLayout {
                 id: appHeader
-                z: 99
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignBottom
                 
@@ -173,8 +172,7 @@ Item {
                     }
                     TapHandler {
                         onTapped: {
-                            window.setSingleActiveWindow(model.index, delegate);
-                            window.visible = false;
+                            window.activateWindow(model.index);
                         }
                     }
                 }

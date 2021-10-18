@@ -21,14 +21,18 @@ NanoShell.FullScreenOverlay {
     width: Screen.width
     height: Screen.height
     
-    required property bool gestureDragging
     required property real panelHeight // height of task panel, provided by main.qml
     
     property int tasksCount: window.model.count
     property int currentTaskIndex: tasksView.contentX / (tasksView.width + tasksView.spacing)
     property TaskManager.TasksModel model
     
+    // properties controlled from main.qml MouseArea (swipe to open gesture)
+    property real oldOffset: 0
     property real offset: 0
+    
+    readonly property real targetOffsetDist: window.height - tasksView.height // offset distance to perfect opening
+    property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
 
@@ -58,7 +62,7 @@ NanoShell.FullScreenOverlay {
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6)
+        color: Qt.rgba(0, 0, 0, 0.6 * (window.wasInActiveTask ? 1 : Math.min(1, window.offset / window.targetOffsetDist)))
         
         MouseArea {
             anchors.fill: parent
@@ -66,23 +70,50 @@ NanoShell.FullScreenOverlay {
         }
     }
 
-    function show() {
+//BEGIN functions
+    function show(animation) {
         window.offset = 0;
+        window.wasInActiveTask = window.model.activeTask.row >= 0;
+        
         // skip to first active task
-        if (window.model.activeTask.row >= 0) {
-            tasksView.contentX = window.model.activeTask.row * (tasksView.width + tasksView.spacing);
+        if (window.wasInActiveTask) {
+            tasksView.contentX = Math.max(0, Math.min(tasksView.contentWidth, window.model.activeTask.row * (tasksView.width + tasksView.spacing)));
         }
         
         root.minimizeAll();
         window.visible = true;
+        
+        // animate app shrink
+        if (animation) {
+            offsetAnimator.to = window.targetOffsetDist;
+            offsetAnimator.restart();
+        }
     }
     function hide() {
-        if (!window.visible) {
-            return;
-        }
+        if (!window.visible) return;
         window.visible = false;
     }
 
+    function snapOffset() {
+        let opening = window.offset > window.oldOffset;
+        if (opening || window.offset >= window.targetOffsetDist) {
+            offsetAnimator.to = window.targetOffsetDist;
+            offsetAnimator.restart();
+        } else {
+            if (!window.wasInActiveTask) { // if pulled up from homescreen, don't activate app
+                offsetAnimator.activateApp = false;
+            }
+            offsetAnimator.to = 0;
+            offsetAnimator.restart();
+        }
+    }
+    
+    // scroll to delegate index, and activate it
+    function activateWindow(id) {
+        offsetAnimator.to = 0;
+        offsetAnimator.restart();
+    }
+    
     function setSingleActiveWindow(id, delegate) {
         if (id < 0) {
             return;
@@ -105,57 +136,37 @@ NanoShell.FullScreenOverlay {
         
         window.visible = false;
     }
+//END functions
     
-    //Rectangle {
-        //id: liveAppShrink
-        //anchors.fill: parent
-        //anchors.topMargin: MobileShell.TopPanelControls.panelHeight
-        //anchors.bottomMargin: window.panelHeight
+    // animate app grow and shrink
+    NumberAnimation on offset {
+        id: offsetAnimator
+        duration: PlasmaCore.Units.longDuration
+        easing.type: Easing.InOutQuad
         
-////         visible: window.gestureDragging
-        //z: tasksView.z + 1
-        //color: Qt.rgba(255, 255, 255, 0.1)
+        property bool activateApp: true
         
-        //transform: Scale {
-            //origin.x: window.width / 2
-            //origin.y: MobileShell.TopPanelControls.panelHeight + liveAppShrink.height / 2
-            //xScale: {
-                //let minScale = tasksView.scalingFactor;
-                //let travelDist = window.height - tasksView.height;
-                //let subtract = (1 - minScale) * (window.offset / travelDist);
-                //return Math.min(1, Math.max(minScale, 1 - subtract));
-            //}
-            //yScale: xScale
-        //}
-        
-        //Loader {
-            //id: pipeWireLoader
-            //anchors.fill: parent
-            
-            //z: tasksView.z + 1
-            //source: Qt.resolvedUrl("./Thumbnail.qml")
-            //onStatusChanged: {
-                //if (status === Loader.Error) {
-                    //visible = false;
-                //}
-            //}
-            
-            //function syncDelegateGeometry() {
-                //window.model.requestPublishDelegateGeometry(window.model.activeTask, Qt.rect(parent.x, parent.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
-            //}
-            //Component.onCompleted: syncDelegateGeometry();
-            //Connections {
-                //target: window.model
-                //function onActiveTaskChanged() {
-                    //pipeWireLoader.syncDelegateGeometry();
-                //}
-            //}
-        //}
-    //}
+        // states of to:
+        // 0 - open/resume app (zoom up the thumbnail)
+        // window.targetOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
+        to: 0
+        onFinished: {
+            if (to === 0) { // close task switcher, and switch to current app
+                if (!window.visible) return;
+                window.visible = false;
+                
+                if (activateApp) {
+                    setSingleActiveWindow(window.currentTaskIndex);
+                }
+                activateApp = true;
+            }
+        }
+    }
     
     ListView {
         id: tasksView
         z: 100
+        opacity: window.wasInActiveTask ? 1 : Math.min(1, window.offset / window.targetOffsetDist)
         
         property real horizontalMargin: PlasmaCore.Units.gridUnit * 3
         anchors.centerIn: parent
@@ -188,7 +199,6 @@ NanoShell.FullScreenOverlay {
             NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
         }
         
-        property real offset: 0
         property real currentIndexInView: indexAt(contentX, contentY)
         
         MouseArea {
@@ -214,29 +224,23 @@ NanoShell.FullScreenOverlay {
             property int curIndex: model.index
             width: tasksView.width
             height: tasksView.height
+            z: curIndex === tasksView.currentIndexInView ? 1 : 0
             
             // ensure that window previews are exactly to the scale of the device screen
             previewWidth: tasksView.scalingFactor * window.width
             previewHeight: tasksView.scalingFactor * tasksView.windowHeight
             
+            // swipe gesture
             scale: {
-                if (task.curIndex === window.currentTaskIndex) {
+                if (task.curIndex === window.currentTaskIndex && window.wasInActiveTask /* TODO activate from homescreen */) {
                     let maxScale = 1 / tasksView.scalingFactor;
-                    let travelDist = window.height - tasksView.height;
-                    let subtract = (maxScale - 1) * (window.offset / travelDist);
+                    let subtract = (maxScale - 1) * (window.offset / window.targetOffsetDist);
                     let finalScale = Math.max(1, Math.min(maxScale, maxScale - subtract));
                     
                     return finalScale;
                 }
                 return 1;
             }
-            
-            onDragOffsetChanged: tasksView.offset = dragOffset
-            
-            // TODO slide right animation
-            //transform: Translate { 
-                //x: task.curIndex < tasksView.currentIndexInView ? Math.min(task.width + tasksView.spacing, tasksView.offset / 2) : 0 
-            //}
         }
     }
     
