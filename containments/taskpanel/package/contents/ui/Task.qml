@@ -1,10 +1,11 @@
 /*
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
+ *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2 as QQC2
@@ -15,32 +16,25 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
     id: delegate
-    width: window.width/2
-    height: window.height/2
 
-    //Workaround
     required property var model
-    property bool active: model.IsActive
-    readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
-    onActiveChanged: {
-        //sometimes the task switcher window itself appears, screwing up the state
-        if (model.IsActive) {
-           // window.currentTaskIndex = index
-        }
-    }
 
+    readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
+    readonly property real dragOffset: -control.y
+    
+    property bool active: model.IsActive
+    
+    required property real previewHeight
+    required property real previewWidth
+    property real scale: 1
+    
+    opacity: 1 - dragOffset / window.height
+    
+    Component.onCompleted: syncDelegateGeometry();
     function syncDelegateGeometry() {
         let pos = pipeWireLoader.mapToItem(tasksView, 0, 0);
         if (window.visible) {
             tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
-        } else {
-          //  tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, delegate.width, delegate.height), dummyWindowTask);
-        }
-    }
-    Connections {
-        target: tasksView
-        onContentYChanged: {
-            syncDelegateGeometry();
         }
     }
     Connections {
@@ -49,123 +43,138 @@ Item {
             syncDelegateGeometry();
         }
     }
+    
+    function closeApp() {
+        tasksModel.requestClose(tasksModel.index(model.index, 0));
+    }
 
-    Component.onCompleted: syncDelegateGeometry();
-
-    Item {
-        anchors {
-            fill: parent
-            margins: PlasmaCore.Units.smallSpacing
+    QQC2.Control {
+        id: control
+        width: parent.width
+        height: parent.height
+        
+        // drag up gesture
+        DragHandler {
+            id: dragHandler
+            target: parent
+            yAxis.enabled: true
+            xAxis.enabled: false
+            yAxis.maximum: 0
+            onActiveChanged: {
+                yAnimator.stop();
+                
+                if (parent.y < -PlasmaCore.Units.gridUnit * 2) {
+                    yAnimator.to = -window.height;
+                } else {
+                    yAnimator.to = 0;
+                }
+                yAnimator.start();
+            }
+        }
+        
+        NumberAnimation on y {
+            id: yAnimator
+            running: !dragHandler.active
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.InOutQuad
+            to: 0
+            onFinished: {
+                if (to != 0) { // close app
+                    delegate.closeApp();
+                }
+            }
         }
 
-        SequentialAnimation {
-            id: slideAnim
-            property alias to: internalSlideAnim.to
-            NumberAnimation {
-                id: internalSlideAnim
-                target: background
-                properties: "x"
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
+        // application
+        ColumnLayout {
+            anchors.fill: parent
+            spacing: PlasmaCore.Units.smallSpacing
+            
+            RowLayout {
+                id: appHeader
+                z: 99
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignBottom
+                
+                PlasmaCore.IconItem {
+                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
+                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.smallMedium
+                    Layout.alignment: Qt.AlignVCenter
+                    usesPlasmaTheme: false
+                    source: model.decoration
+                }
+                
+                PlasmaComponents.Label {
+                    Layout.fillWidth: true
+                    Layout.alignment: Qt.AlignVCenter
+                    elide: Text.ElideRight
+                    text: model.AppName
+                    color: "white"
+                }
+                
+                Repeater {
+                    id: rep
+                    model: plasmoid.nativeInterface.outputs
+                    delegate: PlasmaComponents.ToolButton {
+                        text: model.modelName
+                        visible: model.position !== delegate.taskScreenPoint
+                        display: rep.count < 3 ? QQC2.Button.IconOnly : QQC2.Button.TextBesideIcon
+                        icon.name: "tv" //TODO provide a more adequate icon
+
+                        onClicked: {
+                            plasmoid.nativeInterface.sendWindowToOutput(delegate.model.WinIdList[0], model.output)
+                        }
+                    }
+                }
+                
+                PlasmaComponents.ToolButton {
+                    z: 99
+                    icon.name: "window-close"
+                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
+                    icon.height: PlasmaCore.Units.iconSizes.smallMedium
+                    onClicked: delegate.closeApp()
+                }
             }
-            ScriptAction {
-                script: {
-                    if (background.x != 0) {
-                        tasksModel.requestClose(tasksModel.index(model.index, 0));
-                    }
+            
+            QQC2.Control {
+                id: appView
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                Layout.preferredWidth: delegate.previewWidth
+                Layout.preferredHeight: delegate.previewHeight // keep same as window resolution
+                
+                leftPadding: 0
+                rightPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+                
+                transform: Scale {
+                    origin.x: item.width / 2
+                    origin.y: item.height / 2
+                    xScale: delegate.scale
+                    yScale: delegate.scale
                 }
-            }
-        }
-        Rectangle {
-            id: background
-
-            width: parent.width
-            height: parent.height
-            radius: PlasmaCore.Units.smallSpacing
-            color: PlasmaCore.Theme.backgroundColor
-            opacity: 1 * (1-Math.abs(x)/width)
-
-            MouseArea {
-                anchors.fill: parent
-                drag {
-                    target: background
-                    axis: Drag.XAxis
+                
+                background: Rectangle {
+                    color: PlasmaCore.Theme.backgroundColor
                 }
-                onPressed: delegate.z = 10;
-                onClicked: {
-                    window.setSingleActiveWindow(model.index, delegate);
-                    if (!model.IsMinimized) {
-                        window.visible = false;
-                    }
-                }
-                onReleased: {
-                    delegate.z = 0;
-                    if (Math.abs(background.x) > background.width/2) {
-                        slideAnim.to = background.x > 0 ? background.width*2 : -background.width*2;
-                        slideAnim.running = true;
-                    } else {
-                        slideAnim.to = 0;
-                        slideAnim.running = true;
-                    }
-                }
-
-                ColumnLayout {
-                    anchors {
-                        fill: parent
-                        margins: PlasmaCore.Units.smallSpacing
-                    }
+                
+                contentItem: Item {
+                    id: item
                     
-                    RowLayout {
-                        z: 99
-                        Layout.fillWidth: true
-                        Layout.maximumHeight: PlasmaCore.Units.gridUnit
-                        PlasmaCore.IconItem {
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                            usesPlasmaTheme: false
-                            source: model.decoration
-                        }
-                        PlasmaComponents.Label {
-                            Layout.fillWidth: true
-                            horizontalAlignment: Text.AlignHCenter
-                            elide: Text.ElideRight
-                            text: model.AppName
-                            color: PlasmaCore.Theme.textColor
-                        }
-                        Repeater {
-                            id: rep
-                            model: plasmoid.nativeInterface.outputs
-                            delegate: PlasmaComponents.ToolButton {
-                                text: model.modelName
-                                visible: model.position !== delegate.taskScreenPoint
-                                display: rep.count < 3 ? QQC2.Button.IconOnly : QQC2.Button.TextBesideIcon
-                                icon.name: "tv" //TODO provide a more adequate icon
-
-                                onClicked: {
-                                    plasmoid.nativeInterface.sendWindowToOutput(delegate.model.WinIdList[0], model.output)
-                                }
-                            }
-                        }
-                        PlasmaComponents.ToolButton {
-                            z: 99
-                            icon.name: "window-close"
-                            icon.width: PlasmaCore.Units.iconSizes.medium
-                            icon.height: PlasmaCore.Units.iconSizes.medium
-                            onClicked: {
-                                slideAnim.to = -background.width*2;
-                                slideAnim.running = true;
-                            }
-                        }
-                    }
                     Loader {
                         id: pipeWireLoader
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        source: Qt.resolvedUrl("./Thumbnail.qml")
+                        anchors.fill: parent
+                        source: /*Qt.resolvedUrl("./TaskIcon.qml");*/ Qt.resolvedUrl("./Thumbnail.qml")
                         onStatusChanged: {
                             if (status === Loader.Error) {
                                 source = Qt.resolvedUrl("./TaskIcon.qml");
                             }
+                        }
+                    }
+                    TapHandler {
+                        onTapped: {
+                            window.setSingleActiveWindow(model.index, delegate);
+                            window.visible = false;
                         }
                     }
                 }

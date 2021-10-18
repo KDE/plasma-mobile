@@ -60,6 +60,17 @@ FocusScope {
             lastRequestedPosition = pos.y;
         }
     }
+    opacity: 1
+    Behavior on opacity {
+        NumberAnimation { duration: PlasmaCore.Units.shortDuration } 
+    }
+    Connections {
+        target: MobileShell.HomeScreenControls
+        function onSetHomeScreenOpacity(opacity) {
+            root.opacity = opacity;
+        }
+    }
+
 //END API implementation
 
     property bool componentComplete: false

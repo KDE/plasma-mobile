@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -46,7 +47,7 @@ PlasmaCore.ColorScope {
         running: true
         interval: 200
         onTriggered: {
-            taskSwitcherLoader.setSource(Qt.resolvedUrl("TaskSwitcher.qml"), {"model": tasksModel});
+            taskSwitcherLoader.setSource(Qt.resolvedUrl("TaskSwitcher.qml"), {"model": tasksModel, "panelHeight": root.height, "gestureDragging": mainMouseArea.pressed});
         }
     }
 
@@ -77,8 +78,6 @@ PlasmaCore.ColorScope {
 
         virtualDesktop: virtualDesktopInfo.currentDesktop
         activity: activityInfo.currentActivity
-        //FIXME: workaround
-        Component.onCompleted: tasksModel.countChanged();
     }
 
     TaskManager.VirtualDesktopInfo {
@@ -104,7 +103,6 @@ PlasmaCore.ColorScope {
         onPressed: {
             startMouseX = oldMouseX = mouse.y;
             startMouseY = oldMouseY = mouse.y;
-            taskSwitcher.offset = -taskSwitcher.height;
             activeButton = icons.childAt(mouse.x, mouse.y);
         }
         onPositionChanged: {
@@ -119,18 +117,18 @@ PlasmaCore.ColorScope {
                 isDragging = true;
             }
 
-            taskSwitcher.offset = taskSwitcher.offset - (mouse.y - oldMouseY);
+            taskSwitcher.offset = Math.max(0, taskSwitcher.offset - (mouse.y - oldMouseY));
             opening = oldMouseY > mouse.y;
 
-            if (taskSwitcher.visibility == Window.Hidden && taskSwitcher.offset > -taskSwitcher.height + units.gridUnit && taskSwitcher.tasksCount) {
+            if (taskSwitcher.visibility == Window.Hidden && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
                 activeButton = null;
-                taskSwitcher.showFullScreen();
-            //no tasks, let's scroll up the homescreen instead
+                taskSwitcher.show();
             } else if (taskSwitcher.tasksCount === 0) {
+                //no tasks, let's scroll up the homescreen instead
                 MobileShell.HomeScreenControls.requestRelativeScroll(Qt.point(mouse.x - oldMouseX, mouse.y - oldMouseY));
             }
             oldMouseY = mouse.y;
-            oldMouseY = mouse.y;
+            oldMouseX = mouse.x;
         }
         onReleased: {
             if (taskSwitcher.visibility == Window.Hidden) {
@@ -172,19 +170,11 @@ PlasmaCore.ColorScope {
 
             visible: plasmoid.configuration.PanelButtonsVisible
             property real buttonLength: 0
-            
+
+            // background colour
             Rectangle {
                 anchors.fill: parent
-                gradient: Gradient {
-                    GradientStop {
-                        position: 0
-                        color: showingApp ? root.backgroundColor : "transparent"
-                    }
-                    GradientStop {
-                        position: 1
-                        color: showingApp ? root.backgroundColor : Qt.rgba(0, 0, 0, 0.1)
-                    }
-                }
+                color: showingApp ? root.backgroundColor : "transparent"
             }
 
             Button {
@@ -213,6 +203,7 @@ PlasmaCore.ColorScope {
                     }
                     root.minimizeAll();
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
+                    MobileShell.HomeScreenControls.setHomeScreenOpacity(1);
                     plasmoid.nativeInterface.allMinimizedChanged();
                 }
                 iconSizeFactor: 1
@@ -253,7 +244,6 @@ PlasmaCore.ColorScope {
                 return;
 
             Window.window.offset = Qt.binding(() => {
-                // FIXME: find a more precise way to determine the top panel height
                 return plasmoid.formFactor === PlasmaCore.Types.Vertical ? MobileShell.TopPanelControls.panelHeight : 0
             });
         }

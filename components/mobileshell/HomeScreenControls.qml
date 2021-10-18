@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2020 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -15,6 +16,7 @@ QtObject {
     signal resetHomeScreenPosition()
     signal snapHomeScreenPosition()
     signal requestRelativeScroll(point pos)
+    signal setHomeScreenOpacity(int opacity)
     property Item homeScreen
     property QtObject homeScreenWindow
     property bool homeScreenVisible: true

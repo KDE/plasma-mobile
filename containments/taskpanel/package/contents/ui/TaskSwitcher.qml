@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
+ *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -19,18 +20,31 @@ NanoShell.FullScreenOverlay {
     visible: false
     width: Screen.width
     height: Screen.height
-    property int offset: 0
-    property int overShoot: PlasmaCore.Units.gridUnit * 2
+    
+    required property bool gestureDragging
+    required property real panelHeight // height of task panel, provided by main.qml
+    
     property int tasksCount: window.model.count
-    property int currentTaskIndex: -1
+    property int currentTaskIndex: tasksView.contentX / (tasksView.width + tasksView.spacing)
     property TaskManager.TasksModel model
+    
+    property real offset: 0
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
 
     enum MovementDirection {
         None = 0,
-        Up,
-        Down
+        Left,
+        Right
+    }
+    
+    onVisibleChanged: {
+        if (!visible) {
+            window.contentItem.opacity = 1;
+        }
+        // hide homescreen elements to make use of wallpaper
+        MobileShell.HomeScreenControls.setHomeScreenOpacity(visible ? 0 : 1);
+        MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
     }
 
     onTasksCountChanged: {
@@ -38,38 +52,35 @@ NanoShell.FullScreenOverlay {
             hide();
         }
     }
+    
     color: "transparent"
-    // More controllable than the color property
+    
     Rectangle {
+        id: backgroundRect
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.6)
-        opacity: Math.min(
-            (Math.min(tasksView.contentY, tasksView.height) / tasksView.height),
-            ((tasksView.contentHeight - tasksView.contentY - window.height) / tasksView.height))
+        
+        MouseArea {
+            anchors.fill: parent
+            onClicked: hide()
+        }
     }
 
     function show() {
-        if (window.model.count == 0) {
-            return;
+        window.offset = 0;
+        // skip to first active task
+        if (window.model.activeTask.row >= 0) {
+            tasksView.contentX = window.model.activeTask.row * (tasksView.width + tasksView.spacing);
         }
-
-        visible = true;
-        scrollAnim.from = tasksView.contentY;
-        scrollAnim.to = window.height;
-        scrollAnim.restart();
+        
+        root.minimizeAll();
+        window.visible = true;
     }
     function hide() {
         if (!window.visible) {
             return;
         }
-        scrollAnim.from = tasksView.contentY;
-
-        if (tasksView.contentY + window.height <= tasksView.contentHeight - tasksView.contentY) {
-            scrollAnim.to = 0;
-        } else {
-            scrollAnim.to = tasksView.contentHeight - window.height;
-        }
-        scrollAnim.restart();
+        window.visible = false;
     }
 
     function setSingleActiveWindow(id, delegate) {
@@ -91,232 +102,179 @@ NanoShell.FullScreenOverlay {
                 }
             }
         }
-        activateAnim.delegate = delegate;
-        activateAnim.restart();
+        
+        window.visible = false;
     }
-
-    onOffsetChanged: tasksView.contentY = offset + grid.y
-    onVisibleChanged: {
-        if (!visible) {
-            tasksView.contentY = 0;
-            moveTransition.enabled = false;
-            scrollAnim.running = false;
-            activateAnim.running = false;
-            window.contentItem.opacity = 1;
-            if (activateAnim.delegate) {
-                activateAnim.delegate.z = 0;
-                activateAnim.delegate.scale = 1;
+    
+    //Rectangle {
+        //id: liveAppShrink
+        //anchors.fill: parent
+        //anchors.topMargin: MobileShell.TopPanelControls.panelHeight
+        //anchors.bottomMargin: window.panelHeight
+        
+////         visible: window.gestureDragging
+        //z: tasksView.z + 1
+        //color: Qt.rgba(255, 255, 255, 0.1)
+        
+        //transform: Scale {
+            //origin.x: window.width / 2
+            //origin.y: MobileShell.TopPanelControls.panelHeight + liveAppShrink.height / 2
+            //xScale: {
+                //let minScale = tasksView.scalingFactor;
+                //let travelDist = window.height - tasksView.height;
+                //let subtract = (1 - minScale) * (window.offset / travelDist);
+                //return Math.min(1, Math.max(minScale, 1 - subtract));
+            //}
+            //yScale: xScale
+        //}
+        
+        //Loader {
+            //id: pipeWireLoader
+            //anchors.fill: parent
+            
+            //z: tasksView.z + 1
+            //source: Qt.resolvedUrl("./Thumbnail.qml")
+            //onStatusChanged: {
+                //if (status === Loader.Error) {
+                    //visible = false;
+                //}
+            //}
+            
+            //function syncDelegateGeometry() {
+                //window.model.requestPublishDelegateGeometry(window.model.activeTask, Qt.rect(parent.x, parent.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
+            //}
+            //Component.onCompleted: syncDelegateGeometry();
+            //Connections {
+                //target: window.model
+                //function onActiveTaskChanged() {
+                    //pipeWireLoader.syncDelegateGeometry();
+                //}
+            //}
+        //}
+    //}
+    
+    ListView {
+        id: tasksView
+        z: 100
+        
+        property real horizontalMargin: PlasmaCore.Units.gridUnit * 3
+        anchors.centerIn: parent
+        
+        width: window.width - horizontalMargin * 2
+        height: window.height - (MobileShell.TopPanelControls.panelHeight + window.panelHeight + footerButtons.height 
+                + PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
+        
+        // ensure that window previews are exactly to the scale of the device screen
+        property real windowHeight: window.height - window.panelHeight - MobileShell.TopPanelControls.panelHeight
+        property real scalingFactor: {
+            let candidateWidth = tasksView.width;
+            let candidateHeight = (tasksView.width / window.width) * windowHeight;
+            
+            if (candidateHeight > tasksView.height) {
+                return tasksView.height / windowHeight;
+            } else {
+                return tasksView.width / window.width;
             }
         }
-        MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
-    }
-
-    SequentialAnimation {
-        id: scrollAnim
-        property alias to: internalAnim.to
-        property alias from: internalAnim.from
-        ScriptAction {
-            script: window.showFullScreen();
+                
+        model: window.model
+        snapMode: ListView.SnapToItem
+        orientation: ListView.Horizontal
+        spacing: PlasmaCore.Units.largeSpacing
+        displayMarginBeginning: 2 * (width + spacing)
+        displayMarginEnd: 2 * (width + spacing)
+        
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
         }
-        NumberAnimation {
-            id: internalAnim
-            target: tasksView
-            properties: "contentY"
-            duration: PlasmaCore.Units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-        ScriptAction {
-            script: {
-                if (tasksView.contentY <= 0 || tasksView.contentY >= tasksView.contentHeight - window.height) {
-                    window.visible = false;
-                    setSingleActiveWindow(currentTaskIndex);
-                } else {
-                    moveTransition.enabled = true;
+        
+        property real offset: 0
+        property real currentIndexInView: indexAt(contentX, contentY)
+        
+        MouseArea {
+            z: -1
+            anchors.fill: parent
+            visible: tasksView.count === 0
+            enabled: visible
+            onClicked: { // close window on tap if there are no delegates
+                if (tasksView.count === 0) {
+                    window.hide()
                 }
             }
+            
+            PlasmaComponents.Label {
+                anchors.centerIn: parent
+                text: i18n("No applications are open")
+                color: "white"
+            }
+        }
+        
+        delegate: Task {
+            id: task
+            property int curIndex: model.index
+            width: tasksView.width
+            height: tasksView.height
+            
+            // ensure that window previews are exactly to the scale of the device screen
+            previewWidth: tasksView.scalingFactor * window.width
+            previewHeight: tasksView.scalingFactor * tasksView.windowHeight
+            
+            scale: {
+                if (task.curIndex === window.currentTaskIndex) {
+                    let maxScale = 1 / tasksView.scalingFactor;
+                    let travelDist = window.height - tasksView.height;
+                    let subtract = (maxScale - 1) * (window.offset / travelDist);
+                    let finalScale = Math.max(1, Math.min(maxScale, maxScale - subtract));
+                    
+                    return finalScale;
+                }
+                return 1;
+            }
+            
+            onDragOffsetChanged: tasksView.offset = dragOffset
+            
+            // TODO slide right animation
+            //transform: Translate { 
+                //x: task.curIndex < tasksView.currentIndexInView ? Math.min(task.width + tasksView.spacing, tasksView.offset / 2) : 0 
+            //}
         }
     }
     
-    SequentialAnimation {
-        id: activateAnim
-        property Item delegate
-        ScriptAction {
-            script: {
-                activateAnim.delegate.z = 2;
-                let pos = tasksView.mapFromItem(activateAnim.delegate, 0, 0);
-                if (pos.x < tasksView.width / 2 && pos.y < tasksView.height / 2) {
-                    activateAnim.delegate.transformOrigin = Item.TopLeft;
-                } else if (pos.x < tasksView.width / 2 && pos.y >= tasksView.height / 2) {
-                    activateAnim.delegate.transformOrigin = Item.BottomLeft;
-                } else if (pos.x >= tasksView.width / 2 && pos.y < tasksView.height / 2) {
-                    activateAnim.delegate.transformOrigin = Item.TopRight;
-                } else {
-                    activateAnim.delegate.transformOrigin = Item.BottomRight;
-                }
-            }
+    RowLayout {
+        id: footerButtons
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: PlasmaCore.Units.largeSpacing + window.panelHeight
+        anchors.topMargin: PlasmaCore.Units.largeSpacing
+        
+        spacing: PlasmaCore.Units.largeSpacing
+        
+        PlasmaComponents.ToolButton {
+            Layout.alignment: Qt.AlignRight
+            icon.width: PlasmaCore.Units.iconSizes.medium
+            icon.height: PlasmaCore.Units.iconSizes.medium
+            icon.name: "view-list-symbolic" // "view-grid-symbolic"
+            text: i18n("Switch to list view")
+            display: PlasmaComponents.ToolButton.IconOnly
         }
-        ParallelAnimation {
-            OpacityAnimator {
-                target: window.contentItem
-                from: 1
-                to: 0
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-            ScaleAnimator {
-                target: activateAnim.delegate
-                from: 1
-                to: 2
-                // To try tosync up with kwin animation
-                duration: PlasmaCore.Units.longDuration * 0.85
-                easing.type: Easing.InOutQuad
-            }
+        
+        PlasmaComponents.ToolButton {
+            Layout.alignment: Qt.AlignHCenter
+            icon.width: PlasmaCore.Units.iconSizes.medium
+            icon.height: PlasmaCore.Units.iconSizes.medium
+            icon.name: "trash-empty"
+            text: i18n("Clear All")
+            display: PlasmaComponents.ToolButton.IconOnly
         }
-        ScriptAction {
-            script: {
-                window.visible = false;
-            }
-        }
-    }
-
-    Flickable {
-        id: tasksView
-        width: window.width
-        height: window.height
-        contentWidth: width
-        contentHeight: mainArea.implicitHeight
-       // topMargin: flickingVertically ? -height : 0
-       // bottomMargin: flickingVertically ? -height : 0
-        property int flickState: TaskSwitcher.MovementDirection.None
-
-        readonly property int movementDirection: {
-            if (flickState != TaskSwitcher.MovementDirection.None) {
-                return flickState;
-            } else if (verticalVelocity < 0) {
-                return TaskSwitcher.MovementDirection.Up;
-            } else if (verticalVelocity > 0)  {
-                return TaskSwitcher.MovementDirection.Down;
-            } else {
-                return TaskSwitcher.MovementDirection.None;
-            }
-        }
-
-        onFlickingVerticallyChanged: {
-            if (flickingVertically) {
-                flickState = verticalVelocity < 0 ? TaskSwitcher.MovementDirection.Up : TaskSwitcher.MovementDirection.Down;
-            } else if (/*!draggingVertically &&*/ !flickingVertically) {
-               flickState = TaskSwitcher.MovementDirection.None
-            }
-            Qt.callLater(function() {
-                tasksView.topMargin = flickingVertically && !scrollAnim.running ? -tasksView.height : 0;
-                tasksView.bottomMargin = tasksView.topMargin;
-            });
-        }
-
-        onDraggingVerticallyChanged: {
-            if (draggingVertically) {
-                return;
-            }
-
-            let beforeBeginning = contentY <  window.height;
-            let afterEnd = contentY > contentHeight - window.height * 2;
-
-            let topCloseCondition = contentY <  window.height / 10 * 9;
-            let bottomClosecondition = contentY > contentHeight - window.height * 2 - window.height / 10;
-
-            switch (movementDirection) {
-            case TaskSwitcher.MovementDirection.Up: {
-                if (topCloseCondition) {
-                    hide();
-                } else if (beforeBeginning) {
-                    show();
-                } else if (afterEnd) {
-                    scrollAnim.from = tasksView.contentY;
-                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
-                    scrollAnim.restart();
-                }
-                break;
-            }
-            case TaskSwitcher.MovementDirection.Down: {
-                if (bottomClosecondition) {
-                    hide();
-                } else if (beforeBeginning) {
-                    show();
-                } else if (afterEnd) {
-                    scrollAnim.from = tasksView.contentY;
-                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
-                    scrollAnim.restart();
-                }
-                break;
-            }
-            case TaskSwitcher.MovementDirection.None:
-            default:
-                if (beforeBeginning) {
-                    show();
-                } else if (afterEnd) {
-                    scrollAnim.from = tasksView.contentY;
-                    scrollAnim.to = tasksView.contentHeight - window.height * 2;
-                    scrollAnim.restart();
-                }
-                break;
-            }
-        }
-
-        MouseArea {
-            id: mainArea
-            parent: tasksView.contentItem
-            width: tasksView.width
-            implicitHeight: window.height * 2 + Math.max(window.height, grid.implicitHeight)
-            onClicked: window.hide()
-
-            Grid {
-                id: grid
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
-                columns: 2
-                y: parent.height - height - window.height
-
-                Behavior on y {
-                    NumberAnimation {
-                        duration: PlasmaCore.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-                Repeater {
-                    model: window.model
-                    delegate: Task {}
-                }
-
-                move: Transition {
-                    id: moveTransition
-                    enabled: false
-                    NumberAnimation {
-                        properties: "x,y"
-                        duration: PlasmaCore.Units.longDuration
-                        easing.type: Easing.InOutQuad
-                    }
-                }
-            }
-        }
-
-    }
-
-    PlasmaComponents.RoundButton {
-        anchors {
-            horizontalCenter: parent.horizontalCenter
-            bottom: parent.bottom
-        }
-        icon.name: "start-here-kde"
-        icon.width: PlasmaCore.Units.iconSizes.medium
-        icon.height: PlasmaCore.Units.iconSizes.medium
-        onClicked: {
-            currentTaskIndex = -1;
-            window.hide();
-            //plasmoid.nativeInterface.showDesktop = true;
-
-            root.minimizeAll();
+        
+        PlasmaComponents.ToolButton {
+            Layout.alignment: Qt.AlignLeft
+            icon.width: PlasmaCore.Units.iconSizes.medium
+            icon.height: PlasmaCore.Units.iconSizes.medium
+            icon.name: "system-search"
+            text: i18n("Search")
+            display: PlasmaComponents.ToolButton.IconOnly
         }
     }
 }
