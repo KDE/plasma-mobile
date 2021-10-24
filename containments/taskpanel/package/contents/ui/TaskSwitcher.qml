@@ -89,8 +89,8 @@ NanoShell.FullScreenOverlay {
             tasksView.contentX = Math.max(0, Math.min(tasksView.contentWidth, window.model.activeTask.row * (tasksView.width + tasksView.spacing)));
         }
         
-        root.minimizeAll();
         window.visible = true;
+        root.minimizeAll();
         
         // animate app shrink
         if (animation) {
