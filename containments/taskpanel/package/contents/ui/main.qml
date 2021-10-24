@@ -98,7 +98,6 @@ PlasmaCore.ColorScope {
         property int startMouseY: 0
         property int oldMouseX: 0
         property int startMouseX: 0
-        property bool isDragging: false
         property bool opening: false
         drag.filterChildren: true
         property Button activeButton
@@ -113,24 +112,28 @@ PlasmaCore.ColorScope {
             if (newButton != activeButton) {
                 activeButton = null;
             }
-            if (!isDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
+            
+            if (!taskSwitcher.currentlyDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
                 oldMouseY = mouse.y;
                 return;
-            } else {
-                isDragging = true;
+            } else if (mainMouseArea.pressed) {
+                taskSwitcher.currentlyDragging = true;
             }
 
-            taskSwitcher.oldOffset = taskSwitcher.offset
-            taskSwitcher.offset = Math.max(0, taskSwitcher.offset - (mouse.y - oldMouseY));
+            // update offsets with drags
+            taskSwitcher.oldYOffset = taskSwitcher.yOffset;
+            taskSwitcher.yOffset = Math.max(0, taskSwitcher.yOffset - (mouse.y - oldMouseY));
+            
             opening = oldMouseY > mouse.y;
 
             if (taskSwitcher.visibility == Window.Hidden && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
+                // start task switcher gesture
                 activeButton = null;
                 taskSwitcher.show(false);
-            } else if (taskSwitcher.tasksCount === 0) {
-                //no tasks, let's scroll up the homescreen instead
+            } else if (taskSwitcher.tasksCount === 0) { // no tasks, let's scroll up the homescreen instead
                 MobileShell.HomeScreenControls.requestRelativeScroll(Qt.point(mouse.x - oldMouseX, mouse.y - oldMouseY));
             }
+            
             oldMouseY = mouse.y;
             oldMouseX = mouse.x;
         }
@@ -146,10 +149,10 @@ PlasmaCore.ColorScope {
                 return;
             }
 
-            if (isDragging) {
+            if (taskSwitcher.currentlyDragging) {
+                taskSwitcher.currentlyDragging = false;
                 taskSwitcher.snapOffset();
             }
-            
         }
 
         DropShadow {
@@ -202,7 +205,7 @@ PlasmaCore.ColorScope {
                     }
                     root.minimizeAll();
                     MobileShell.HomeScreenControls.resetHomeScreenPosition();
-                    MobileShell.HomeScreenControls.setHomeScreenOpacity(1);
+                    MobileShell.HomeScreenControls.showHomeScreen(true);
                     plasmoid.nativeInterface.allMinimizedChanged();
                 }
                 iconSizeFactor: 1

@@ -61,13 +61,29 @@ FocusScope {
         }
     }
     opacity: 1
-    Behavior on opacity {
-        NumberAnimation { duration: PlasmaCore.Units.shortDuration } 
+    
+    NumberAnimation on opacity {
+        id: opacityAnimation
+        duration: PlasmaCore.Units.longDuration
     }
+    
     Connections {
         target: MobileShell.HomeScreenControls
-        function onSetHomeScreenOpacity(opacity) {
-            root.opacity = opacity;
+        function onHideHomeScreen(animate) {
+            if (animate) {
+                opacityAnimation.to = 0;
+                opacityAnimation.restart();
+            } else {
+                root.opacity = 0;
+            }
+        }
+        function onShowHomeScreen(animate) {
+            if (animate) {
+                opacityAnimation.to = 1;
+                opacityAnimation.restart();
+            } else {
+                root.opacity = 1;
+            }
         }
     }
 

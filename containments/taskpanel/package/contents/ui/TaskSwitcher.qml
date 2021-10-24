@@ -28,11 +28,16 @@ NanoShell.FullScreenOverlay {
     property TaskManager.TasksModel model
     
     // properties controlled from main.qml MouseArea (swipe to open gesture)
-    property real oldOffset: 0
-    property real offset: 0
+    property real oldYOffset: 0
+    property real yOffset: 0
     
-    readonly property real targetOffsetDist: window.height - tasksView.height // offset distance to perfect opening
+    // offset constants
+    readonly property real targetYOffsetDist: window.height - tasksView.height // offset distance to perfect opening
+    readonly property real dismissYOffsetDist: window.height
+    
+    // set from main.qml
     property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
+    property bool currentlyDragging: false // whether we are in a swipe up gesture
 
     Component.onCompleted: plasmoid.nativeInterface.panel = window;
 
@@ -47,7 +52,11 @@ NanoShell.FullScreenOverlay {
             window.contentItem.opacity = 1;
         }
         // hide homescreen elements to make use of wallpaper
-        MobileShell.HomeScreenControls.setHomeScreenOpacity(visible ? 0 : 1);
+        if (visible) {
+            MobileShell.HomeScreenControls.hideHomeScreen(!window.wasInActiveTask); // only animate if going from homescreen
+        } else {
+            MobileShell.HomeScreenControls.showHomeScreen(true);
+        }
         MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
     }
 
@@ -62,7 +71,7 @@ NanoShell.FullScreenOverlay {
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6 * (window.wasInActiveTask ? 1 : Math.min(1, window.offset / window.targetOffsetDist)))
+        color: Qt.rgba(0, 0, 0, 0.6 * (window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)))
         
         MouseArea {
             anchors.fill: parent
@@ -72,7 +81,7 @@ NanoShell.FullScreenOverlay {
 
 //BEGIN functions
     function show(animation) {
-        window.offset = 0;
+        window.yOffset = 0;
         window.wasInActiveTask = window.model.activeTask.row >= 0;
         
         // skip to first active task
@@ -85,7 +94,7 @@ NanoShell.FullScreenOverlay {
         
         // animate app shrink
         if (animation) {
-            offsetAnimator.to = window.targetOffsetDist;
+            offsetAnimator.to = window.targetYOffsetDist;
             offsetAnimator.restart();
         }
     }
@@ -95,11 +104,12 @@ NanoShell.FullScreenOverlay {
     }
 
     function snapOffset() {
-        let opening = window.offset > window.oldOffset;
-        if (opening || window.offset >= window.targetOffsetDist) {
-            offsetAnimator.to = window.targetOffsetDist;
+        let movingUp = window.yOffset > window.oldYOffset;
+        
+        if (movingUp || window.yOffset >= window.targetYOffsetDist) { // open task switcher and stay
+            offsetAnimator.to = window.targetYOffsetDist;
             offsetAnimator.restart();
-        } else {
+        } else { // close task switcher and return to app
             if (!window.wasInActiveTask) { // if pulled up from homescreen, don't activate app
                 offsetAnimator.activateApp = false;
             }
@@ -139,7 +149,7 @@ NanoShell.FullScreenOverlay {
 //END functions
     
     // animate app grow and shrink
-    NumberAnimation on offset {
+    NumberAnimation on yOffset {
         id: offsetAnimator
         duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
@@ -148,7 +158,7 @@ NanoShell.FullScreenOverlay {
         
         // states of to:
         // 0 - open/resume app (zoom up the thumbnail)
-        // window.targetOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
+        // window.targetYOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
         to: 0
         onFinished: {
             if (to === 0) { // close task switcher, and switch to current app
@@ -159,6 +169,8 @@ NanoShell.FullScreenOverlay {
                     setSingleActiveWindow(window.currentTaskIndex);
                 }
                 activateApp = true;
+            } else if (to == window.dismissYOffsetDist) {
+                window.hide();
             }
         }
     }
@@ -166,7 +178,7 @@ NanoShell.FullScreenOverlay {
     ListView {
         id: tasksView
         z: 100
-        opacity: window.wasInActiveTask ? 1 : Math.min(1, window.offset / window.targetOffsetDist)
+        opacity: window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)
         
         property real horizontalMargin: PlasmaCore.Units.gridUnit * 3
         anchors.centerIn: parent
@@ -175,6 +187,18 @@ NanoShell.FullScreenOverlay {
         height: window.height - (MobileShell.TopPanelControls.panelHeight + window.panelHeight + footerButtons.height 
                 + PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
         
+        // scale gesture
+        scale: {
+            if (window.wasInActiveTask || !taskSwitcher.currentlyDragging) {
+                let maxScale = 1 / tasksView.scalingFactor;
+                let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
+                let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
+                
+                return finalScale;
+            }
+            return 1;
+        }
+
         // ensure that window previews are exactly to the scale of the device screen
         property real windowHeight: window.height - window.panelHeight - MobileShell.TopPanelControls.panelHeight
         property real scalingFactor: {
@@ -229,18 +253,6 @@ NanoShell.FullScreenOverlay {
             // ensure that window previews are exactly to the scale of the device screen
             previewWidth: tasksView.scalingFactor * window.width
             previewHeight: tasksView.scalingFactor * tasksView.windowHeight
-            
-            // swipe gesture
-            scale: {
-                if (task.curIndex === window.currentTaskIndex && window.wasInActiveTask /* TODO activate from homescreen */) {
-                    let maxScale = 1 / tasksView.scalingFactor;
-                    let subtract = (maxScale - 1) * (window.offset / window.targetOffsetDist);
-                    let finalScale = Math.max(1, Math.min(maxScale, maxScale - subtract));
-                    
-                    return finalScale;
-                }
-                return 1;
-            }
         }
     }
     
