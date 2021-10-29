@@ -8,6 +8,7 @@
 import QtQuick 2.14
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import ".." as Launcher
 
@@ -29,6 +30,7 @@ DragHandler {
     }
 
     property real __initialMainFlickableX
+    property real __oldTranslationY: 0
     property int __scrollDirection: DragGestureHandler.None
     onTranslationChanged: {
         if (active) {
@@ -50,7 +52,20 @@ DragHandler {
                 }
 
                 if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
+                    // if swipe up, scroll app drawer
                     root.appDrawer.flickable.contentY = Math.min(root.appDrawer.drawerTopMargin, Math.max(0, -translation.y));
+                    
+                    if (translation.y < 0 && MobileShell.TopPanelControls.inSwipe) {
+                        MobileShell.TopPanelControls.endSwipe();
+                    }
+                    
+                    // if swipe down, scroll top panel
+                    if (translation.y > 0) {
+                        if (!MobileShell.TopPanelControls.inSwipe) {
+                            MobileShell.TopPanelControls.startSwipe();
+                        }
+                        MobileShell.TopPanelControls.requestRelativeScroll(translation.y - __oldTranslationY);
+                    }
                 }
             }
             if (__scrollDirection !== DragGestureHandler.Vertical) {
@@ -67,13 +82,19 @@ DragHandler {
                 mainFlickable.contentX = newContentX;
             }
         }
+        
+        __oldTranslationY = translation.y;
     }
+    
     onActiveChanged: {
         if (active) {
             __initialMainFlickableX = mainFlickable.contentX;
         } else {
             if (root.appDrawer) {
                 root.appDrawer.snapDrawerStatus();
+            }
+            if (MobileShell.TopPanelControls.inSwipe) {
+                MobileShell.TopPanelControls.endSwipe();
             }
             if (__scrollDirection === DragGestureHandler.Left && (__initialMainFlickableX - mainFlickable.contentX > PlasmaCore.Units.gridUnit * 5)) {
                 snapPrevPage();

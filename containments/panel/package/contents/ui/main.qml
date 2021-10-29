@@ -34,19 +34,34 @@ Item {
     width: 480
     height: PlasmaCore.Units.gridUnit
     
-    // set height binding to top panel API
-    Binding {
-        target: MobileShell.TopPanelControls
-        property: "panelHeight"
-        value: root.height
-    }
+//BEGIN API implementation
 
-    // set height binding to top panel API
     Binding {
         target: MobileShell.TopPanelControls
         property: "panelHeight"
         value: root.height
     }
+    Binding {
+        target: MobileShell.TopPanelControls
+        property: "inSwipe"
+        value: slidingPanel.userInteracting
+    }
+    
+    Connections {
+        target: MobileShell.TopPanelControls
+        
+        function onStartSwipe() {
+            swipeMouseArea.startSwipe(0);
+        }
+        function onEndSwipe() {
+            swipeMouseArea.endSwipe();
+        }
+        function onRequestRelativeScroll(offsetY) {
+            swipeMouseArea.updateOffset(offsetY);
+        }
+    }
+    
+//END API implementation
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
 
@@ -196,31 +211,39 @@ Item {
         showDropShadow: !showingApp
     }
     
-    // initial swipe down
+    // initial swipe down gesture
     MouseArea {
+        id: swipeMouseArea
         z: 99
         property int oldMouseY: 0
 
-        anchors.fill: parent
-        onPressed: {
+        function startSwipe(mouseX) {
             slidingPanel.cancelAnimations();
-            slidingPanel.drawerX = Math.min(Math.max(0, mouse.x - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.contentItem.width)
+            slidingPanel.drawerX = Math.min(Math.max(0, mouseX - slidingPanel.drawerWidth/2), slidingPanel.width - slidingPanel.contentItem.width)
             slidingPanel.userInteracting = true;
             slidingPanel.flickable.contentY = slidingPanel.closedContentY;
-            oldMouseY = mouse.y;
             slidingPanel.visible = true;
         }
-        onPositionChanged: {
-            slidingPanel.updateOffset(mouse.y - oldMouseY);
+        
+        function endSwipe() {
+            slidingPanel.userInteracting = false;
+            slidingPanel.updateState();
+        }
+        
+        function updateOffset(offsetY) {
+            slidingPanel.updateOffset(offsetY);
+        }
+        
+        anchors.fill: parent
+        onPressed: {
             oldMouseY = mouse.y;
+            startSwipe(mouse.x);
         }
-        onReleased: {
-            slidingPanel.userInteracting = false;
-            slidingPanel.updateState();
-        }
-        onCanceled: {
-            slidingPanel.userInteracting = false;
-            slidingPanel.updateState();
+        onReleased: endSwipe()
+        onCanceled: endSwipe()
+        onPositionChanged: {
+            updateOffset(mouse.y - oldMouseY);
+            oldMouseY = mouse.y;
         }
     }
 

@@ -39,7 +39,7 @@ FocusScope {
 
 //END functions
 
-    // implement API signals
+//BEGIN API implementation
     Connections {
         target: MobileShell.HomeScreenControls
         
@@ -60,6 +60,7 @@ FocusScope {
             lastRequestedPosition = pos.y;
         }
     }
+//END API implementation
 
     property bool componentComplete: false
     onWidthChanged: recalculateMaxFavoriteCount()
