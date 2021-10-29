@@ -160,7 +160,7 @@ DragDrop.DropArea {
 
         TapHandler {
             target: mainFlickable
-            enabled: appDrawer.status !== AppDrawer.Status.Open
+            enabled: appDrawer.status !== AbstractAppDrawer.Status.Open
             onTapped: {
                 //Hides icons close button
                 appletsLayout.appletsLayoutInteracted();

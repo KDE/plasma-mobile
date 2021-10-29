@@ -24,7 +24,7 @@ import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenCompon
 Flickable {
     id: mainFlickable
 
-    property AppDrawer appDrawer
+    property AbstractAppDrawer appDrawer
 
     readonly property int totalPages: Math.ceil(contentWidth / width)
     property int currentIndex: 0
@@ -35,9 +35,8 @@ Flickable {
     property alias dragGestureEnabled: gestureHandler.enabled
     opacity: appDrawer ? 1 - appDrawer.openFactor : 1
     transform: Translate {
-        y: appDrawer ? -mainFlickable.height/10 * appDrawer.openFactor : 0
+        y: appDrawer ? (-mainFlickable.height / 20) * appDrawer.openFactor : 0
     }
-    scale: appDrawer ? (3 - appDrawer.openFactor) /3 : 1
     clip: true
 
     property bool showAddPageIndicator: false

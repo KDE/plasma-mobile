@@ -25,23 +25,20 @@ MouseArea {
     property Flickable flickable
     property real factor: 0
 
-    height: PlasmaCore.Units.iconSizes.medium
+    cursorShape: Qt.PointingHandCursor
+    height: PlasmaCore.Units.iconSizes.smallMedium
     signal openRequested
     signal closeRequested
-
+    
     onClicked: {
-        if ((arrowUpIcon.flickable.contentY + arrowUpIcon.flickable.originY + arrowUpIcon.flickable.height*2) >= arrowUpIcon.flickable.height/2) {
-            closeRequested();
-        } else {
-            openRequested();
-        }
+        openRequested();
         scrollAnim.restart();
     }
 
     Item {
         anchors.centerIn: parent
 
-        width: PlasmaCore.Units.iconSizes.medium
+        width: PlasmaCore.Units.iconSizes.smallMedium
         height: width
 
         Rectangle {
@@ -51,7 +48,7 @@ MouseArea {
                 left: parent.left
                 verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
             }
-            color: PlasmaCore.Theme.backgroundColor
+            color: "white"
             transformOrigin: Item.Right
             rotation: -45 + 90 * arrowUpIcon.factor
             antialiasing: true
@@ -64,7 +61,7 @@ MouseArea {
                 right: parent.right
                 verticalCenterOffset: -arrowUpIcon.height/4 + (arrowUpIcon.height/4) * arrowUpIcon.factor
             }
-            color: PlasmaCore.Theme.backgroundColor
+            color: "white"
             transformOrigin: Item.Left
             rotation: 45 - 90 * arrowUpIcon.factor
             antialiasing: true
