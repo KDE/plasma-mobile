@@ -39,18 +39,42 @@ FocusScope {
 
 //END functions
 
+    // implement API signals
+    Connections {
+        target: MobileShell.HomeScreenControls
+        
+        property real lastRequestedPosition: 0
+        function onResetHomeScreenPosition() {
+            mainFlickable.scrollToPage(0);
+            root.appDrawer.close();
+        }
+        function onSnapHomeScreenPosition() {
+            if (lastRequestedPosition < 0) {
+                root.appDrawer.open();
+            } else {
+                root.appDrawer.close();
+            }
+        }
+        function onRequestRelativeScroll(pos) {
+            root.appDrawer.offset -= pos.y;
+            lastRequestedPosition = pos.y;
+        }
+    }
+
     property bool componentComplete: false
     onWidthChanged: recalculateMaxFavoriteCount()
     onHeightChanged:recalculateMaxFavoriteCount()
+    
     Component.onCompleted: {
         // ApplicationListModel doesn't have a plasmoid as is not the one that should be doing writing
         HomeScreenComponents.ApplicationListModel.loadApplications();
         HomeScreenComponents.FavoritesModel.applet = plasmoid;
         HomeScreenComponents.FavoritesModel.loadApplications();
 
+        // set API variables
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.homeScreen = root
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+            MobileShell.HomeScreenControls.homeScreen = root;
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
         componentComplete = true;
         recalculateMaxFavoriteCount()
@@ -68,26 +92,6 @@ FocusScope {
     Window.onWindowChanged: {
         if (plasmoid.screen == 0) {
             MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
-        }
-    }
-
-    Connections {
-        property real lastRequestedPosition: 0
-        target: MobileShell.HomeScreenControls
-        function onResetHomeScreenPosition() {
-            mainFlickable.scrollToPage(0);
-            appDrawer.close();
-        }
-        function onSnapHomeScreenPosition() {
-            if (lastRequestedPosition < 0) {
-                root.appDrawer.open();
-            } else {
-                root.appDrawer.close();
-            }
-        }
-        function onRequestRelativeScroll(pos) {
-            root.appDrawer.offset -= pos.y;
-            lastRequestedPosition = pos.y;
         }
     }
 
