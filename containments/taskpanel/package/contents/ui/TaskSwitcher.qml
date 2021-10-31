@@ -91,7 +91,7 @@ NanoShell.FullScreenOverlay {
         // skip to first active task
         if (window.wasInActiveTask) {
             tasksView.currentIndex = window.model.activeTask.row;
-            tasksView.contentX = Math.max(0, Math.min(tasksView.contentWidth, window.model.activeTask.row * (tasksView.width + tasksView.spacing)));
+            tasksView.positionViewAtIndex(window.model.activeTask.row, ListView.SnapPosition);
         }
         
         window.visible = true;
