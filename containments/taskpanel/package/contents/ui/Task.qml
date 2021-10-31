@@ -21,6 +21,7 @@ Item {
 
     readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
     readonly property real dragOffset: -control.y
+    
     readonly property real headerHeight: appHeader.height + PlasmaCore.Units.smallSpacing
     
     property bool active: model.IsActive
@@ -31,22 +32,30 @@ Item {
     
     opacity: 1 - dragOffset / window.height
     
-    Component.onCompleted: syncDelegateGeometry();
+//BEGIN functions
     function syncDelegateGeometry() {
         let pos = pipeWireLoader.mapToItem(tasksView, 0, 0);
         if (window.visible) {
             tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
         }
     }
+    
+    function closeApp() {
+        tasksModel.requestClose(tasksModel.index(model.index, 0));
+    }
+    
+    function activateApp() {
+        window.activateWindow(model.index);
+    }
+//END functions
+    
+    Component.onCompleted: syncDelegateGeometry();
+    
     Connections {
         target: window
         function onVisibleChanged() {
             syncDelegateGeometry();
         }
-    }
-    
-    function closeApp() {
-        tasksModel.requestClose(tasksModel.index(model.index, 0));
     }
 
     QQC2.Control {
@@ -94,6 +103,7 @@ Item {
             RowLayout {
                 id: appHeader
                 Layout.fillWidth: true
+                spacing: PlasmaCore.Units.smallSpacing * 2
                 
                 PlasmaCore.IconItem {
                     Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
@@ -171,9 +181,7 @@ Item {
                         }
                     }
                     TapHandler {
-                        onTapped: {
-                            window.activateWindow(model.index);
-                        }
+                        onTapped: delegate.activateApp()
                     }
                 }
             }

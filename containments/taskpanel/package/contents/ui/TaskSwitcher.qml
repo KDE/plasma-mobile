@@ -23,8 +23,12 @@ NanoShell.FullScreenOverlay {
     
     required property real taskPanelHeight // height of task panel, provided by main.qml
     
+    // dimensions of a window on the screen
+    readonly property real windowHeight: window.height - (navPanel.isPortrait ? window.taskPanelHeight : 0) - MobileShell.TopPanelControls.panelHeight
+    readonly property real windowWidth: window.width - (navPanel.isPortrait ? 0 : window.taskPanelHeight)
+    
     property int tasksCount: window.model.count
-    property int currentTaskIndex: Math.round(tasksView.contentX / (tasksView.width + tasksView.spacing))
+    property int currentTaskIndex: tasksView.currentIndex
     property TaskManager.TasksModel model
     
     // properties controlled from main.qml MouseArea (swipe to open gesture)
@@ -35,7 +39,7 @@ NanoShell.FullScreenOverlay {
     readonly property real targetYOffsetDist: window.height - tasksView.height // offset distance to perfect opening
     readonly property real dismissYOffsetDist: window.height
     
-    // set from main.qml
+    // set from NavigationPanel in main.qml
     property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
     property bool currentlyDragging: false // whether we are in a swipe up gesture
 
@@ -86,6 +90,7 @@ NanoShell.FullScreenOverlay {
         
         // skip to first active task
         if (window.wasInActiveTask) {
+            tasksView.currentIndex = window.model.activeTask.row;
             tasksView.contentX = Math.max(0, Math.min(tasksView.contentWidth, window.model.activeTask.row * (tasksView.width + tasksView.spacing)));
         }
         
@@ -184,24 +189,14 @@ NanoShell.FullScreenOverlay {
         anchors.centerIn: parent
         
         width: window.width - horizontalMargin * 2
-        height: window.height - (MobileShell.TopPanelControls.panelHeight + window.taskPanelHeight + PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
-
-        // ensure that window previews are exactly to the scale of the device screen
-        property real windowHeight: window.height - window.taskPanelHeight - MobileShell.TopPanelControls.panelHeight
-        property real scalingFactor: {
-            let candidateWidth = tasksView.width;
-            let candidateHeight = (tasksView.width / window.width) * windowHeight;
-            
-            if (candidateHeight > tasksView.height) {
-                return tasksView.height / windowHeight;
-            } else {
-                return tasksView.width / window.width;
-            }
-        }
+        height: window.windowHeight - (PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
         
         model: window.model
-        snapMode: ListView.SnapToItem
         orientation: ListView.Horizontal
+        
+        highlightRangeMode: ListView.StrictlyEnforceRange // ensures currentIndex is updated
+        snapMode: ListView.SnapToItem
+        
         spacing: PlasmaCore.Units.largeSpacing
         displayMarginBeginning: 2 * (width + spacing)
         displayMarginEnd: 2 * (width + spacing)
@@ -210,21 +205,14 @@ NanoShell.FullScreenOverlay {
             NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
         }
         
-        MouseArea {
-            z: -1
-            anchors.fill: parent
-            visible: tasksView.count === 0
-            enabled: visible
-            onClicked: { // close window on tap if there are no delegates
-                if (tasksView.count === 0) {
-                    window.hide()
-                }
-            }
+        // ensure that window previews are exactly to the scale of the device screen
+        property real scalingFactor: {
+            let candidateHeight = (tasksView.width / window.width) * window.windowHeight;
             
-            PlasmaComponents.Label {
-                anchors.centerIn: parent
-                text: i18n("No applications are open")
-                color: "white"
+            if (candidateHeight > tasksView.height) {
+                return tasksView.height / window.windowHeight;
+            } else {
+                return tasksView.width / window.windowWidth;
             }
         }
         
@@ -239,33 +227,20 @@ NanoShell.FullScreenOverlay {
             y: task.headerHeight / 2
             
             // scale gesture
-            property bool preventOverJump: false
             scale: {
                 let maxScale = 1 / tasksView.scalingFactor;
                 let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
                 let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
                 
-                // prevent y "jump" when letting go of gesture from homescreen
-                if (window.wasInActiveTask) {
-                    preventOverJump = false;
-                } else {
-                    if (!taskSwitcher.currentlyDragging && finalScale === 1) {
-                        preventOverJump = false;
-                    }
-                    if (window.wasInActiveTask && taskSwitcher.currentlyDragging) {
-                        preventOverJump = true;
-                    }
-                }
-                
-                if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && !preventOverJump && window.currentTaskIndex === task.curIndex) {
+                if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && window.currentTaskIndex === task.curIndex) {
                     return finalScale;
                 }
                 return 1;
             }
             
             // ensure that window previews are exactly to the scale of the device screen
-            previewWidth: tasksView.scalingFactor * window.width
-            previewHeight: tasksView.scalingFactor * tasksView.windowHeight
+            previewWidth: tasksView.scalingFactor * window.windowWidth
+            previewHeight: tasksView.scalingFactor * window.windowHeight
         }
     }
     
@@ -340,42 +315,4 @@ NanoShell.FullScreenOverlay {
             }
         }
     }
-    
-//     RowLayout {
-//         id: footerButtons
-//         anchors.left: parent.left
-//         anchors.right: parent.right
-//         anchors.bottom: parent.bottom
-//         anchors.bottomMargin: PlasmaCore.Units.largeSpacing + window.taskPanelHeight
-//         anchors.topMargin: PlasmaCore.Units.largeSpacing
-//         
-//         spacing: PlasmaCore.Units.largeSpacing
-//         
-//         PlasmaComponents.ToolButton {
-//             Layout.alignment: Qt.AlignRight
-//             icon.width: PlasmaCore.Units.iconSizes.medium
-//             icon.height: PlasmaCore.Units.iconSizes.medium
-//             icon.name: "view-list-symbolic" // "view-grid-symbolic"
-//             text: i18n("Switch to list view")
-//             display: PlasmaComponents.ToolButton.IconOnly
-//         }
-//         
-//         PlasmaComponents.ToolButton {
-//             Layout.alignment: Qt.AlignHCenter
-//             icon.width: PlasmaCore.Units.iconSizes.medium
-//             icon.height: PlasmaCore.Units.iconSizes.medium
-//             icon.name: "trash-empty"
-//             text: i18n("Clear All")
-//             display: PlasmaComponents.ToolButton.IconOnly
-//         }
-//         
-//         PlasmaComponents.ToolButton {
-//             Layout.alignment: Qt.AlignLeft
-//             icon.width: PlasmaCore.Units.iconSizes.medium
-//             icon.height: PlasmaCore.Units.iconSizes.medium
-//             icon.name: "system-search"
-//             text: i18n("Search")
-//             display: PlasmaComponents.ToolButton.IconOnly
-//         }
-//     }
 }
