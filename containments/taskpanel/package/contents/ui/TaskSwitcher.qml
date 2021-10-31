@@ -24,7 +24,7 @@ NanoShell.FullScreenOverlay {
     required property real taskPanelHeight // height of task panel, provided by main.qml
     
     property int tasksCount: window.model.count
-    property int currentTaskIndex: tasksView.currentIndexInView // Math.round(tasksView.contentX / (tasksView.width + tasksView.spacing))
+    property int currentTaskIndex: Math.round(tasksView.contentX / (tasksView.width + tasksView.spacing))
     property TaskManager.TasksModel model
     
     // properties controlled from main.qml MouseArea (swipe to open gesture)
@@ -210,8 +210,6 @@ NanoShell.FullScreenOverlay {
             NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
         }
         
-        property real currentIndexInView: indexAt(contentX, contentY)
-        
         MouseArea {
             z: -1
             anchors.fill: parent
@@ -233,7 +231,7 @@ NanoShell.FullScreenOverlay {
         delegate: Task {
             id: task
             property int curIndex: model.index
-            z: curIndex === tasksView.currentIndexInView ? 1 : 0
+            z: window.currentTaskIndex === curIndex ? 1 : 0
             width: tasksView.width
             height: tasksView.height
             
