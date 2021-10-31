@@ -180,67 +180,76 @@ NanoShell.FullScreenOverlay {
         }
     }
     
-    ListView {
-        id: tasksView
-        z: 100
-        opacity: window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)
+    Item {
+        id: container
         
-        property real horizontalMargin: PlasmaCore.Units.gridUnit * 3
-        anchors.centerIn: parent
+        // provide shell margins
+        anchors.fill: parent
+        anchors.rightMargin: navPanel.isPortrait ? 0 : window.taskPanelHeight
+        anchors.bottomMargin: navPanel.isPortrait ? window.taskPanelHeight : 0
+        anchors.topMargin: MobileShell.TopPanelControls.panelHeight
         
-        width: window.width - horizontalMargin * 2
-        height: window.windowHeight - (PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
-        
-        model: window.model
-        orientation: ListView.Horizontal
-        
-        highlightRangeMode: ListView.StrictlyEnforceRange // ensures currentIndex is updated
-        snapMode: ListView.SnapToItem
-        
-        spacing: PlasmaCore.Units.largeSpacing
-        displayMarginBeginning: 2 * (width + spacing)
-        displayMarginEnd: 2 * (width + spacing)
-        
-        displaced: Transition {
-            NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
-        }
-        
-        // ensure that window previews are exactly to the scale of the device screen
-        property real scalingFactor: {
-            let candidateHeight = (tasksView.width / window.width) * window.windowHeight;
+        // applications list
+        ListView {
+            id: tasksView
+            opacity: window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)        
+            anchors.centerIn: parent
             
-            if (candidateHeight > tasksView.height) {
-                return tasksView.height / window.windowHeight;
-            } else {
-                return tasksView.width / window.windowWidth;
-            }
-        }
-        
-        delegate: Task {
-            id: task
-            property int curIndex: model.index
-            z: window.currentTaskIndex === curIndex ? 1 : 0
-            width: tasksView.width
-            height: tasksView.height
+            readonly property real sizeFactor: 0.75
+            readonly property real taskHeaderHeight: PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.smallSpacing * 2
             
-            // account for header offset (center the preview)
-            y: task.headerHeight / 2
+            width: window.windowWidth * sizeFactor
+            height: window.windowHeight * sizeFactor + taskHeaderHeight
             
-            // scale gesture
-            scale: {
-                let maxScale = 1 / tasksView.scalingFactor;
-                let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
-                let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
-                
-                if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && window.currentTaskIndex === task.curIndex) {
-                    return finalScale;
-                }
-                return 1;
+            model: window.model
+            orientation: ListView.Horizontal
+            
+            highlightRangeMode: ListView.StrictlyEnforceRange // ensures currentIndex is updated
+            snapMode: ListView.SnapToItem
+            
+            spacing: PlasmaCore.Units.largeSpacing
+            displayMarginBeginning: 2 * (width + spacing)
+            displayMarginEnd: 2 * (width + spacing)
+            displaced: Transition {
+                NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
             }
             
             // ensure that window previews are exactly to the scale of the device screen
-            previewWidth: tasksView.scalingFactor * window.windowWidth
-            previewHeight: tasksView.scalingFactor * window.windowHeight
+            property real scalingFactor: {
+                let candidateHeight = (tasksView.width / window.windowWidth) * window.windowHeight;
+                if (candidateHeight > tasksView.height) {
+                    return tasksView.height / window.windowHeight;
+                } else {
+                    return tasksView.width / window.windowWidth;
+                }
+            }
+            
+            delegate: Task {
+                id: task
+                property int curIndex: model.index
+                z: window.currentTaskIndex === curIndex ? 1 : 0
+                width: tasksView.width
+                height: tasksView.height
+                
+                // account for header offset (center the preview)
+                y: -tasksView.taskHeaderHeight / 2
+                
+                // scale gesture
+                scale: {
+                    let maxScale = 1 / tasksView.scalingFactor;
+                    let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
+                    let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
+                    
+                    if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && window.currentTaskIndex === task.curIndex) {
+                        return finalScale;
+                    }
+                    return 1;
+                }
+                
+                // ensure that window previews are exactly to the scale of the device screen
+                previewWidth: tasksView.scalingFactor * window.windowWidth
+                previewHeight: tasksView.scalingFactor * window.windowHeight
+            }
         }
     }
     

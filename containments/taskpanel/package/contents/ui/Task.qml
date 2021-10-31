@@ -22,8 +22,6 @@ Item {
     readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
     readonly property real dragOffset: -control.y
     
-    readonly property real headerHeight: appHeader.height + PlasmaCore.Units.smallSpacing
-    
     property bool active: model.IsActive
     
     required property real previewHeight
@@ -63,6 +61,11 @@ Item {
         width: parent.width
         height: parent.height
         
+        leftPadding: 0
+        rightPadding: 0
+        topPadding: 0
+        bottomPadding: 0
+        
         // drag up gesture
         DragHandler {
             id: dragHandler
@@ -96,13 +99,16 @@ Item {
         }
 
         // application
-        ColumnLayout {
-            anchors.fill: parent
-            spacing: PlasmaCore.Units.smallSpacing
+        contentItem: ColumnLayout {
+            id: column
+            spacing: 0
             
+            // header
             RowLayout {
                 id: appHeader
                 Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.minimumHeight: column.height - appView.height
                 spacing: PlasmaCore.Units.smallSpacing * 2
                 
                 PlasmaCore.IconItem {
@@ -125,6 +131,7 @@ Item {
                     id: rep
                     model: plasmoid.nativeInterface.outputs
                     delegate: PlasmaComponents.ToolButton {
+                        Layout.alignment: Qt.AlignVCenter
                         text: model.modelName
                         visible: model.position !== delegate.taskScreenPoint
                         display: rep.count < 3 ? QQC2.Button.IconOnly : QQC2.Button.TextBesideIcon
@@ -137,6 +144,7 @@ Item {
                 }
                 
                 PlasmaComponents.ToolButton {
+                    Layout.alignment: Qt.AlignVCenter
                     z: 99
                     icon.name: "window-close"
                     icon.width: PlasmaCore.Units.iconSizes.smallMedium
@@ -145,11 +153,13 @@ Item {
                 }
             }
             
+            // app preview
             QQC2.Control {
                 id: appView
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.preferredWidth: delegate.previewWidth
-                Layout.preferredHeight: delegate.previewHeight // keep same as window resolution
+                Layout.preferredHeight: delegate.previewHeight
+                Layout.maximumWidth: delegate.previewWidth
+                Layout.maximumHeight: delegate.previewHeight
                 
                 leftPadding: 0
                 rightPadding: 0
