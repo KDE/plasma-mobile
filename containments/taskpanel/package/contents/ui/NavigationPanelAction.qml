@@ -1,0 +1,15 @@
+/*
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+ *
+ *  SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+import QtQuick 2.15
+
+QtObject {
+    property bool enabled
+    property string iconSource
+    property real iconSizeFactor
+    
+    signal triggered()
+}

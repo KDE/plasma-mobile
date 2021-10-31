@@ -21,6 +21,7 @@ Item {
 
     readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
     readonly property real dragOffset: -control.y
+    readonly property real headerHeight: appHeader.height + PlasmaCore.Units.smallSpacing
     
     property bool active: model.IsActive
     
@@ -93,7 +94,6 @@ Item {
             RowLayout {
                 id: appHeader
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignBottom
                 
                 PlasmaCore.IconItem {
                     Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
@@ -163,7 +163,7 @@ Item {
                     Loader {
                         id: pipeWireLoader
                         anchors.fill: parent
-                        source: /*Qt.resolvedUrl("./TaskIcon.qml");*/ Qt.resolvedUrl("./Thumbnail.qml")
+                        source: Qt.resolvedUrl("./Thumbnail.qml")
                         onStatusChanged: {
                             if (status === Loader.Error) {
                                 source = Qt.resolvedUrl("./TaskIcon.qml");

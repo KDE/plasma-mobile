@@ -21,10 +21,10 @@ NanoShell.FullScreenOverlay {
     width: Screen.width
     height: Screen.height
     
-    required property real panelHeight // height of task panel, provided by main.qml
+    required property real taskPanelHeight // height of task panel, provided by main.qml
     
     property int tasksCount: window.model.count
-    property int currentTaskIndex: tasksView.contentX / (tasksView.width + tasksView.spacing)
+    property int currentTaskIndex: tasksView.currentIndexInView // Math.round(tasksView.contentX / (tasksView.width + tasksView.spacing))
     property TaskManager.TasksModel model
     
     // properties controlled from main.qml MouseArea (swipe to open gesture)
@@ -66,8 +66,8 @@ NanoShell.FullScreenOverlay {
         }
     }
     
+    // background
     color: "transparent"
-    
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
@@ -184,23 +184,10 @@ NanoShell.FullScreenOverlay {
         anchors.centerIn: parent
         
         width: window.width - horizontalMargin * 2
-        height: window.height - (MobileShell.TopPanelControls.panelHeight + window.panelHeight + footerButtons.height 
-                + PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
-        
-        // scale gesture
-        scale: {
-            if (window.wasInActiveTask || !taskSwitcher.currentlyDragging) {
-                let maxScale = 1 / tasksView.scalingFactor;
-                let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
-                let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
-                
-                return finalScale;
-            }
-            return 1;
-        }
+        height: window.height - (MobileShell.TopPanelControls.panelHeight + window.taskPanelHeight + PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.largeSpacing * 2)
 
         // ensure that window previews are exactly to the scale of the device screen
-        property real windowHeight: window.height - window.panelHeight - MobileShell.TopPanelControls.panelHeight
+        property real windowHeight: window.height - window.taskPanelHeight - MobileShell.TopPanelControls.panelHeight
         property real scalingFactor: {
             let candidateWidth = tasksView.width;
             let candidateHeight = (tasksView.width / window.width) * windowHeight;
@@ -211,7 +198,7 @@ NanoShell.FullScreenOverlay {
                 return tasksView.width / window.width;
             }
         }
-                
+        
         model: window.model
         snapMode: ListView.SnapToItem
         orientation: ListView.Horizontal
@@ -246,9 +233,37 @@ NanoShell.FullScreenOverlay {
         delegate: Task {
             id: task
             property int curIndex: model.index
+            z: curIndex === tasksView.currentIndexInView ? 1 : 0
             width: tasksView.width
             height: tasksView.height
-            z: curIndex === tasksView.currentIndexInView ? 1 : 0
+            
+            // account for header offset (center the preview)
+            y: task.headerHeight / 2
+            
+            // scale gesture
+            property bool preventOverJump: false
+            scale: {
+                let maxScale = 1 / tasksView.scalingFactor;
+                let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
+                let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
+                
+                // prevent y "jump" when letting go of gesture from homescreen
+                if (window.wasInActiveTask) {
+                    preventOverJump = false;
+                } else {
+                    if (!taskSwitcher.currentlyDragging && finalScale === 1) {
+                        preventOverJump = false;
+                    }
+                    if (window.wasInActiveTask && taskSwitcher.currentlyDragging) {
+                        preventOverJump = true;
+                    }
+                }
+                
+                if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && !preventOverJump && window.currentTaskIndex === task.curIndex) {
+                    return finalScale;
+                }
+                return 1;
+            }
             
             // ensure that window previews are exactly to the scale of the device screen
             previewWidth: tasksView.scalingFactor * window.width
@@ -256,41 +271,113 @@ NanoShell.FullScreenOverlay {
         }
     }
     
-    RowLayout {
-        id: footerButtons
+    // top panel swipe down gesture
+    MouseArea {
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+        height: MobileShell.TopPanelControls.panelHeight
+        
+        property int oldMouseY: 0
+        onPositionChanged: {
+            MobileShell.TopPanelControls.requestRelativeScroll(mouse.y - oldMouseY);
+            oldMouseY = mouse.y;
+        }
+        onPressed: {
+            oldMouseY = mouse.y;
+            MobileShell.TopPanelControls.startSwipe();
+        }
+        onReleased: MobileShell.TopPanelControls.endSwipe();
+    }
+    
+    // task panel
+    NavigationPanel {
+        id: navPanel
+        
+        property bool isPortrait: Screen.width <= Screen.height
+        width: isPortrait ? implicitWidth : window.taskPanelHeight
+        height: isPortrait ? window.taskPanelHeight : implicitWidth
+        
+        anchors.left: isPortrait ? parent.left : undefined
+        anchors.right: parent.right
+        anchors.top: isPortrait ? undefined: parent.top
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: PlasmaCore.Units.largeSpacing + window.panelHeight
-        anchors.topMargin: PlasmaCore.Units.largeSpacing
         
-        spacing: PlasmaCore.Units.largeSpacing
+        taskSwitcher: window
+        backgroundColor: window.visible ? Qt.rgba(0, 0, 0, 0.1) : "transparent"
+        foregroundColorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        dragGestureEnabled: false
         
-        PlasmaComponents.ToolButton {
-            Layout.alignment: Qt.AlignRight
-            icon.width: PlasmaCore.Units.iconSizes.medium
-            icon.height: PlasmaCore.Units.iconSizes.medium
-            icon.name: "view-list-symbolic" // "view-grid-symbolic"
-            text: i18n("Switch to list view")
-            display: PlasmaComponents.ToolButton.IconOnly
+        Behavior on backgroundColor { ColorAnimation {} }
+        
+        leftAction: NavigationPanelAction {
+            enabled: true
+            iconSource: "mobile-task-switcher"
+            iconSizeFactor: 0.75
+            onTriggered: {
+                if (window.wasInActiveTask) {
+                    window.activateWindow(window.currentTaskIndex);
+                } else {
+                    window.hide();
+                }
+            }
         }
         
-        PlasmaComponents.ToolButton {
-            Layout.alignment: Qt.AlignHCenter
-            icon.width: PlasmaCore.Units.iconSizes.medium
-            icon.height: PlasmaCore.Units.iconSizes.medium
-            icon.name: "trash-empty"
-            text: i18n("Clear All")
-            display: PlasmaComponents.ToolButton.IconOnly
+        middleAction: NavigationPanelAction {
+            enabled: true
+            iconSource: "start-here-kde"
+            iconSizeFactor: 1
+            onTriggered: {
+                window.hide();
+                root.triggerHomescreen();
+            }
         }
         
-        PlasmaComponents.ToolButton {
-            Layout.alignment: Qt.AlignLeft
-            icon.width: PlasmaCore.Units.iconSizes.medium
-            icon.height: PlasmaCore.Units.iconSizes.medium
-            icon.name: "system-search"
-            text: i18n("Search")
-            display: PlasmaComponents.ToolButton.IconOnly
+        rightAction: NavigationPanelAction {
+            enabled: true
+            iconSource: "mobile-close-app"
+            iconSizeFactor: 0.75
+            onTriggered: {
+                tasksModel.requestClose(tasksModel.index(window.currentTaskIndex, 0));
+            }
         }
     }
+    
+//     RowLayout {
+//         id: footerButtons
+//         anchors.left: parent.left
+//         anchors.right: parent.right
+//         anchors.bottom: parent.bottom
+//         anchors.bottomMargin: PlasmaCore.Units.largeSpacing + window.taskPanelHeight
+//         anchors.topMargin: PlasmaCore.Units.largeSpacing
+//         
+//         spacing: PlasmaCore.Units.largeSpacing
+//         
+//         PlasmaComponents.ToolButton {
+//             Layout.alignment: Qt.AlignRight
+//             icon.width: PlasmaCore.Units.iconSizes.medium
+//             icon.height: PlasmaCore.Units.iconSizes.medium
+//             icon.name: "view-list-symbolic" // "view-grid-symbolic"
+//             text: i18n("Switch to list view")
+//             display: PlasmaComponents.ToolButton.IconOnly
+//         }
+//         
+//         PlasmaComponents.ToolButton {
+//             Layout.alignment: Qt.AlignHCenter
+//             icon.width: PlasmaCore.Units.iconSizes.medium
+//             icon.height: PlasmaCore.Units.iconSizes.medium
+//             icon.name: "trash-empty"
+//             text: i18n("Clear All")
+//             display: PlasmaComponents.ToolButton.IconOnly
+//         }
+//         
+//         PlasmaComponents.ToolButton {
+//             Layout.alignment: Qt.AlignLeft
+//             icon.width: PlasmaCore.Units.iconSizes.medium
+//             icon.height: PlasmaCore.Units.iconSizes.medium
+//             icon.name: "system-search"
+//             text: i18n("Search")
+//             display: PlasmaComponents.ToolButton.IconOnly
+//         }
+//     }
 }

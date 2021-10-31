@@ -33,27 +33,8 @@ PlasmaCore.ColorScope {
     readonly property bool hasTasks: tasksModel.count > 0
 
     property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
-    Loader {
-        id: taskSwitcherLoader
-    }
-    //FIXME: why it crashes on startup if TaskSwitcher is loaded immediately?
-    Connections {
-        target: plasmoid.nativeInterface
-        function onAllMinimizedChanged() {
-            MobileShell.HomeScreenControls.homeScreenVisible = plasmoid.nativeInterface.allMinimized
-        }
-    }
-    Timer {
-        running: true
-        interval: 200
-        onTriggered: {
-            taskSwitcherLoader.setSource(Qt.resolvedUrl("TaskSwitcher.qml"), {
-                "model": tasksModel, 
-                "panelHeight": root.height
-            });
-        }
-    }
 
+//BEGIN functions
     function minimizeAll() {
         for (var i = 0 ; i < tasksModel.count; i++) {
             var idx = tasksModel.makeModelIndex(i);
@@ -69,6 +50,21 @@ PlasmaCore.ColorScope {
             if (tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                 tasksModel.requestToggleMinimized(idx);
             }
+        }
+    }
+    
+    function triggerHomescreen() {
+        root.minimizeAll();
+        MobileShell.HomeScreenControls.resetHomeScreenPosition();
+        MobileShell.HomeScreenControls.showHomeScreen(true);
+        plasmoid.nativeInterface.allMinimizedChanged();
+    }
+//END functions
+
+    Connections {
+        target: plasmoid.nativeInterface
+        function onAllMinimizedChanged() {
+            MobileShell.HomeScreenControls.homeScreenVisible = plasmoid.nativeInterface.allMinimized
         }
     }
 
@@ -90,261 +86,98 @@ PlasmaCore.ColorScope {
     TaskManager.ActivityInfo {
         id: activityInfo
     }
+    
+    Window.onWindowChanged: {
+        if (!Window.window)
+            return;
 
-    MouseArea {
-        id: mainMouseArea
+        Window.window.offset = Qt.binding(() => {
+            return plasmoid.formFactor === PlasmaCore.Types.Vertical ? MobileShell.TopPanelControls.panelHeight : 0
+        });
+    }
+
+    // task switcher
+    Loader {
+        id: taskSwitcherLoader
+        sourceComponent: TaskSwitcher {
+            model: tasksModel
+            taskPanelHeight: root.state === "portrait" ? root.height : root.width
+        }
+    }
+
+    // bottom navigation panel
+    NavigationPanel {
+        id: panel
         anchors.fill: parent
-        property int oldMouseY: 0
-        property int startMouseY: 0
-        property int oldMouseX: 0
-        property int startMouseX: 0
-        property bool opening: false
-        drag.filterChildren: true
-        property Button activeButton
-
-        onPressed: {
-            startMouseX = oldMouseX = mouse.y;
-            startMouseY = oldMouseY = mouse.y;
-            activeButton = icons.childAt(mouse.x, mouse.y);
-        }
-        onPositionChanged: {
-            let newButton = icons.childAt(mouse.x, mouse.y);
-            if (newButton != activeButton) {
-                activeButton = null;
-            }
+        opacity: (root.taskSwitcher && root.taskSwitcher.visible) ? 0 : 1 // hide bar when task switcher is open
+        
+        backgroundColor: root.showingApp ? root.backgroundColor : "transparent"
+        foregroundColorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        
+        dragGestureEnabled: true
+        taskSwitcher: root.taskSwitcher
             
-            if (!taskSwitcher.currentlyDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
-                oldMouseY = mouse.y;
-                return;
-            } else if (mainMouseArea.pressed) {
-                taskSwitcher.currentlyDragging = true;
-            }
-
-            // update offsets with drags
-            taskSwitcher.oldYOffset = taskSwitcher.yOffset;
-            taskSwitcher.yOffset = Math.max(0, taskSwitcher.yOffset - (mouse.y - oldMouseY));
+        leftAction: NavigationPanelAction {
+            enabled: hasTasks
+            iconSource: "mobile-task-switcher"
+            iconSizeFactor: 0.75
             
-            opening = oldMouseY > mouse.y;
-
-            if (taskSwitcher.visibility == Window.Hidden && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
-                // start task switcher gesture
-                activeButton = null;
-                taskSwitcher.show(false);
-            } else if (taskSwitcher.tasksCount === 0) { // no tasks, let's scroll up the homescreen instead
-                MobileShell.HomeScreenControls.requestRelativeScroll(Qt.point(mouse.x - oldMouseX, mouse.y - oldMouseY));
+            onTriggered: {
+                plasmoid.nativeInterface.showDesktop = false;
+                taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show(true);
             }
+        }
+        
+        middleAction: NavigationPanelAction {
+            enabled: true
+            iconSource: "start-here-kde"
+            iconSizeFactor: 1
+            onTriggered: root.triggerHomescreen()
+        }
+        
+        rightAction: NavigationPanelAction {
+            enabled: TaskPanel.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
+            // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
+            iconSizeFactor: TaskPanel.KWinVirtualKeyboard.visible ? 1 : 0.75
+            iconSource: TaskPanel.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
             
-            oldMouseY = mouse.y;
-            oldMouseX = mouse.x;
-        }
-        onReleased: {
-            if (taskSwitcher.visibility == Window.Hidden) {
-                if (taskSwitcher.tasksCount === 0) {
-                    MobileShell.HomeScreenControls.snapHomeScreenPosition();
-                }
-
-                if (activeButton) {
-                    activeButton.clicked();
-                }
-                return;
-            }
-
-            if (taskSwitcher.currentlyDragging) {
-                taskSwitcher.currentlyDragging = false;
-                taskSwitcher.snapOffset();
-            }
-        }
-
-        DropShadow {
-            anchors.fill: icons
-            visible: !showingApp
-            cached: true
-            horizontalOffset: 0
-            verticalOffset: 1
-            radius: 4.0
-            samples: 17
-            color: Qt.rgba(0,0,0,0.8)
-            source: icons
-        }
-        Item {
-            id: icons
-            anchors.fill: parent
-
-            visible: plasmoid.configuration.PanelButtonsVisible
-            property real buttonLength: 0
-
-            // background colour
-            Rectangle {
-                anchors.fill: parent
-                color: showingApp ? root.backgroundColor : "transparent"
-            }
-
-            Button {
-                id: tasksButton
-                mouseArea: mainMouseArea
-                enabled: root.hasTasks
-                onClicked: {
-                    if (!enabled) {
-                        return;
-                    }
-                    plasmoid.nativeInterface.showDesktop = false;
-                    taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show(true);
-                }
-                iconSizeFactor: 0.75
-                iconSource: "mobile-task-switcher"
-                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-            }
-
-            Button {
-                id: showDesktopButton
-                anchors.centerIn: parent
-                mouseArea: mainMouseArea
-                onClicked: {
-                    if (!enabled) {
-                        return;
-                    }
-                    root.minimizeAll();
-                    MobileShell.HomeScreenControls.resetHomeScreenPosition();
-                    MobileShell.HomeScreenControls.showHomeScreen(true);
-                    plasmoid.nativeInterface.allMinimizedChanged();
-                }
-                iconSizeFactor: 1
-                iconSource: "start-here-kde"
-                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-            }
-
-            Button {
-                id: closeTaskButton
-                mouseArea: mainMouseArea
-                enabled: TaskPanel.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
-                onClicked: {
-                    if (!enabled) {
-                        return
-                    }
-                    if (TaskPanel.KWinVirtualKeyboard.active) {
-                        TaskPanel.KWinVirtualKeyboard.active = false
-                        return;
-                    }
-                    if (!plasmoid.nativeInterface.hasCloseableActiveWindow) {
-                        return;
-                    }
+            onTriggered: {
+                if (TaskPanel.KWinVirtualKeyboard.active) {
+                    TaskPanel.KWinVirtualKeyboard.active = false;
+                } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
                     var index = taskSwitcher.model.activeTask;
                     if (index) {
                         taskSwitcher.model.requestClose(index);
                     }
                 }
-
-                // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-                iconSizeFactor: TaskPanel.KWinVirtualKeyboard.visible ? 1 : 0.75
-                iconSource: TaskPanel.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
-                colorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
             }
         }
-
-        Window.onWindowChanged: {
-            if (!Window.window)
-                return;
-
-            Window.window.offset = Qt.binding(() => {
-                return plasmoid.formFactor === PlasmaCore.Types.Vertical ? MobileShell.TopPanelControls.panelHeight : 0
-            });
-        }
-
-        states: [
-            State {
-                name: "landscape"
-                when: Screen.width > Screen.height
-                PropertyChanges {
-                    target: plasmoid.nativeInterface
-                    location: PlasmaCore.Types.RightEdge
-                }
-                PropertyChanges {
-                    target: plasmoid
-                    width: PlasmaCore.Units.gridUnit
-                    height: PlasmaCore.Units.gridUnit
-                }
-                PropertyChanges {
-                    target: icons
-                    buttonLength: icons.height * 0.8 / 3
-                }
-                AnchorChanges {
-                    target: tasksButton
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        top: parent.top
-                    }
-                }
-                PropertyChanges {
-                    target: tasksButton
-                    width: parent.width
-                    height: icons.buttonLength
-                    anchors.topMargin: parent.height * 0.1
-                }
-                PropertyChanges {
-                    target: showDesktopButton
-                    width: parent.width
-                    height: icons.buttonLength
-                }
-                AnchorChanges {
-                    target: closeTaskButton
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: parent.bottom
-                    }
-                }
-                PropertyChanges {
-                    target: closeTaskButton
-                    height: icons.buttonLength
-                    width: icons.width
-                    anchors.bottomMargin: parent.height * 0.1
-                }
-            }, State {
-                name: "portrait"
-                when: Screen.width <= Screen.height
-                PropertyChanges {
-                    target: plasmoid
-                    height: PlasmaCore.Units.gridUnit
-                }
-                PropertyChanges {
-                    target: plasmoid.nativeInterface
-                    location: PlasmaCore.Types.BottomEdge
-                }
-                PropertyChanges {
-                    target: icons
-                    buttonLength: icons.width * 0.8 / 3
-                }
-                AnchorChanges {
-                    target: tasksButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        left: parent.left
-                    }
-                }
-                PropertyChanges {
-                    target: tasksButton
-                    height: parent.height
-                    width: icons.buttonLength
-                    anchors.leftMargin: parent.width * 0.1
-                }
-                PropertyChanges {
-                    target: showDesktopButton
-                    height: parent.height
-                    width: icons.buttonLength
-                }
-                AnchorChanges {
-                    target: closeTaskButton
-                    anchors {
-                        verticalCenter: parent.verticalCenter
-                        right: parent.right
-                    }
-                }
-                PropertyChanges {
-                    target: closeTaskButton
-                    height: parent.height
-                    width: icons.buttonLength
-                    anchors.rightMargin: parent.width * 0.1
-                }
-            }
-        ]
     }
+    
+    states: [
+        State {
+            name: "landscape"
+            when: Screen.width > Screen.height
+            PropertyChanges {
+                target: plasmoid.nativeInterface
+                location: PlasmaCore.Types.RightEdge
+            }
+            PropertyChanges {
+                target: plasmoid
+                width: PlasmaCore.Units.gridUnit
+                height: PlasmaCore.Units.gridUnit
+            }
+        }, State {
+            name: "portrait"
+            when: Screen.width <= Screen.height
+            PropertyChanges {
+                target: plasmoid
+                height: PlasmaCore.Units.gridUnit
+            }
+            PropertyChanges {
+                target: plasmoid.nativeInterface
+                location: PlasmaCore.Types.BottomEdge
+            }
+        }
+    ]
 }
