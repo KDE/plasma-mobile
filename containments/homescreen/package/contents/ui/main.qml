@@ -172,7 +172,7 @@ FocusScope {
         // - restore windows
         if (!plasmoid.nativeInterface.showingDesktop) {
             plasmoid.nativeInterface.showingDesktop = true
-        } else if (appDrawer.status !== HomeScreenComponents.AppDrawer.Status.Open) {
+        } else if (appDrawer.status !== HomeScreenComponents.AbstractAppDrawer.Status.Open) {
             mainFlickable.currentIndex = 0
             root.appDrawer.open()
         } else {
