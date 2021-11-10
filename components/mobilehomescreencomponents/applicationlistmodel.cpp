@@ -187,7 +187,7 @@ void ApplicationListModel::loadApplications()
 
     for (const KService::Ptr &service : apps) {
         ApplicationData data;
-        data.name = service->name();
+        data.name = service->storageId().startsWith("org.kde.") && !service->genericName().isEmpty() ? service->genericName() : service->name();
         data.icon = service->icon();
         data.storageId = service->storageId();
         data.uniqueId = service->storageId();
