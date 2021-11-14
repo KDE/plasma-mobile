@@ -19,6 +19,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.taskmanager 0.1 as TaskManager
 
+import org.kde.plasma.private.gestures 1.0 as Gestures
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
