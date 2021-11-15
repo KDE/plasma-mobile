@@ -4,4 +4,4 @@ plugin gesturesplugin
 
 DragVelocityProvider 0.1 DragVelocityProvider.qml
 DragGestureProvider 0.1 DragGestureProvider.qml
-DragGestureSource 0.1 DragGestureSource.qml
+DragGestureSurface 0.1 DragGestureSurface.qml
