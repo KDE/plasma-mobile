@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2013 Canonical Ltd. <legal@canonical.com>
  *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
@@ -19,31 +20,19 @@ MouseArea {
     property bool clickValidated: true
     property bool zeroVelocityCounts: false
 
-    propagateComposedEvents: true
-    
-    onMouseYChanged: {
-        if (orientation == Qt.Vertical) {
-            target.dragValue = mouseY - __pressedPosition.y;
-            if (target.dragValue != 0 && root.pressed) {
-                target.dragging = true;
-            }
-        }
-    }
-    
-    onMouseXChanged: {
-        if (orientation == Qt.Horizontal) {
-            target.dragValue = mouseX - __pressedPosition.x;
-            if (target.dragValue != 0 && root.pressed) {
-                target.dragging = true;
-            }
-        }
-    }
-    
     onPositionChanged: {
         if (orientation == Qt.Vertical) {
             target.__sourcePositionChange(mouse.y);
+            target.dragValue = mouse.y - __pressedPosition.y;
+            if (target.dragValue != 0 && root.pressed) {
+                target.dragging = true;
+            }
         } else {
             target.__sourcePositionChange(mouse.x);
+            target.dragValue = mouse.x - __pressedPosition.x;
+            if (target.dragValue != 0 && root.pressed) {
+                target.dragging = true;
+            }
         }
         
         if (!root.containsMouse) {
@@ -59,13 +48,11 @@ MouseArea {
             target.__sourcePress(mouse.x);
         }
         root.clickValidated = true;
-        //mouse.accepted = false;
     }
 
     onReleased: {
         target.dragging = false;
         __pressedPosition = Qt.point(mouse.x, mouse.y);
-        //mouse.accepted = false;
     }
 
     onCanceled: {

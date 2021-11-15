@@ -1,7 +1,8 @@
 /*
+ *  SPDX-FileCopyrightText: 2013 Canonical Ltd. <legal@canonical.com>
  *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
- *  SPDX-License-Identifier: GPL-2.0-or-later
+ *  SPDX-License-Identifier: GPL-3.0
  */
 
 import QtQuick 2.15
