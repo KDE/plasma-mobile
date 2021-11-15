@@ -2,8 +2,6 @@ module org.kde.plasma.private.gestures
 
 plugin gesturesplugin
 
-AxisDragEvaluator 0.1 AxisDragEvaluator.qml
-AxisFlickProvider 0.1 AxisFlickProvider.qml
-DraggingArea 0.1 DraggingArea.qml
-DragHandle 0.1 DragHandle.qml
-Showable 0.1 Showable.qml
+DragVelocityProvider 0.1 DragVelocityProvider.qml
+DragGestureProvider 0.1 DragGestureProvider.qml
+DragGestureSource 0.1 DragGestureSource.qml

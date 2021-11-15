@@ -1,18 +1,7 @@
+
 set(gesturesplugin_SRCS
     gesturesplugin.cpp
-    axisvelocitycalculator.cpp
-    candidateinactivitytimer.cpp
-    damper.cpp
-    debughelpers.cpp
     direction.cpp
-    timer.cpp
-    timesource.cpp
-    touchownershipevent.cpp
-    touchregistry.cpp
-    ucswipearea.cpp
-    unownedtouchevent.cpp
-    
-    pool_p.h
 )
 
 add_library(gesturesplugin ${gesturesplugin_SRCS})
