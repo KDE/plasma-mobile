@@ -7,8 +7,6 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.private.gestures 0.1
-
 QtObject {
     id: root
     

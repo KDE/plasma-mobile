@@ -1,64 +1,34 @@
 /*
+ *  SPDX-FileCopyrightText: 2013 Canonical Ltd. <legal@canonical.com>
  *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
- *  SPDX-License-Identifier: GPL-2.0-or-later
+ *  SPDX-License-Identifier: GPL-3.0
  */
 
 import QtQuick 2.15
+import org.kde.plasma.private.gestures 1.0
 
-/**
- * Provides events for an DragGestureProvider or DragVelocityProvider.
- * 
- * Use this component as the parent of the component you want gestures to be detected from.
- */
-
-Item {
+SwipeArea {
     id: root
 
-    property bool enabled: true
     property int orientation: Qt.Vertical
     
-    required property DragVelocityProvider target
+    required property DragVelocityProvider gestureProvider
     
-    DragHandler {
-        id: dragHandler
-        enabled: root.enabled
-        
-        property real startPosition: 0 // correct for dragThreshold so that we don't have a "jump" at the beginning of a gesture
-        property bool startActive: false
-        
-        onTranslationChanged: {
-            if (startActive) { // when the gesture actually starts with the first movement
-                startPosition = orientation == Qt.Vertical ? translation.y : translation.x;
-                root.target.__sourcePress(startPosition);
-                startActive = false;
-            }
-            
-            if (orientation == Qt.Vertical) {
-                root.target.__sourcePositionChange(translation.y);
-                root.target.dragValue = translation.y - startPosition;
-            } else {
-                root.target.__sourcePositionChange(translation.x);
-                root.target.dragValue = translation.x - startPosition;
-            }
-            
-            if (root.target.dragValue != 0 && active) {
-                root.target.dragging = true;
-            }
+    onDeltaPositionChanged: {
+        if (orientation == Qt.Vertical) {
+            root.gestureProvider.__sourcePositionChange(deltaPosition.y);
+            root.gestureProvider.dragValue = deltaPosition.y;
+        } else {
+            root.gestureProvider.__sourcePositionChange(deltaPosition.x);
+            root.gestureProvider.dragValue = deltaPosition.x;
         }
-        
-        onActiveChanged: {
-            if (active) {
-                startActive = true;
-            } else {
-                // touch release event
-                startActive = false;
-                root.target.dragging = false;
-                
-                // reset position of root
-                root.x = 0;
-                root.y = 0;
-            }
+    }
+    
+    onDraggingChanged: {
+        if (dragging) {
+            root.gestureProvider.__sourcePress(0);
         }
+        root.gestureProvider.dragging = dragging;
     }
 }

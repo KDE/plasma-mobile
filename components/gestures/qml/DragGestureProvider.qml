@@ -7,8 +7,6 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.private.gestures 0.1
-
 /*
    Evaluates end velocity (velocity at the moment the gesture ends) and travelled
    distance (delta between finger down and finger up positions) to determine
@@ -61,28 +59,51 @@ DragVelocityProvider {
     property real __dragDecreasingThreshold: greaterSnapPosition - dragThresholdPercent * (greaterSnapPosition - lesserSnapPosition)
     property real __dragIncreasingProgress: Math.min(1, Math.max(0, (position - lesserSnapPosition) / (greaterSnapPosition - lesserSnapPosition)))
     property real __startPosition
+    
+    // gestures either start from lesserSnapPosition or greaterSnapPosition
+    property bool __startedFromLesserSnapPosition: true
 
-    onDragStart: __startPosition = position;
+    onDragStart: {
+        positionAnimation.stop();
+        __startPosition = position;
+    }
     
     onDragEnd: {
-        if (shouldAutoCompleteIncreasing()) {
-            positionAnimation.to = greaterSnapPosition;
-        } else if (shouldAutoCompleteDecreasing()) {
-            positionAnimation.to = lesserSnapPosition;
-        } else if (position < __dragIncreasingThreshold) {
-            positionAnimation.to = lesserSnapPosition;
+        if (__startedFromLesserSnapPosition) { 
+            if (shouldAutoCompleteIncreasing()) {
+                positionAnimation.to = greaterSnapPosition;
+            } else if (position < __dragIncreasingThreshold) {
+                positionAnimation.to = lesserSnapPosition;
+            } else {
+                positionAnimation.to = greaterSnapPosition;
+            }
         } else {
-            positionAnimation.to = greaterSnapPosition;
+            if (shouldAutoCompleteDecreasing()) {
+                positionAnimation.to = lesserSnapPosition;
+            } else if (position > __dragDecreasingThreshold) {
+                positionAnimation.to = greaterSnapPosition;
+            } else {
+                positionAnimation.to = lesserSnapPosition;
+            }
         }
         positionAnimation.restart();
     }
-    
+
     onDragValueChanged: {
         if (root.dragging) {
             position = __startPosition + dragValue;
         }
     }
     
+    onPositionChanged: __updateSnapStartPosition()
+    function __updateSnapStartPosition() {
+        if (position === lesserSnapPosition) {
+            __startedFromLesserSnapPosition = true;
+        } else if (position === greaterSnapPosition) {
+            __startedFromLesserSnapPosition = false;
+        }
+    }
+
     property var __positionAnimation: SmoothedAnimation {
         id: positionAnimation
         target: root

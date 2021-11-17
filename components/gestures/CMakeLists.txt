@@ -1,7 +1,7 @@
 
 set(gesturesplugin_SRCS
     gesturesplugin.cpp
-    direction.cpp
+    swipearea.cpp
 )
 
 add_library(gesturesplugin ${gesturesplugin_SRCS})
