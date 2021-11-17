@@ -9,9 +9,12 @@ import QtQuick 2.12
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
+import org.kde.plasma.private.gestures 1.0 as Gestures
 import org.kde.notificationmanager 1.1 as Notifications
+
 import "../components"
 
 PlasmaCore.ColorScope {
@@ -34,6 +37,7 @@ PlasmaCore.ColorScope {
     function askPassword() {
         showPasswordAnim.restart();
     }
+    
     NumberAnimation {
         id: showPasswordAnim
         target: passwordFlickable
@@ -42,6 +46,27 @@ PlasmaCore.ColorScope {
         to: passwordFlickable.contentHeight - passwordFlickable.height
         duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
+    }
+    
+    property var gestureProvider: Gestures.DragGestureProvider {
+        position: 0
+        lesserSnapPosition: -PlasmaCore.Units.gridUnit * 20
+        greaterSnapPosition: 0
+        dragThresholdPercent: 0.2
+        
+        onPositionChanged: {
+            // wipe password if it is more than half way down the screen
+            if (position < -passwordFlickable.columnHeight / 2) {
+                keypad.reset();
+            }
+        }
+    }
+    
+    // TODO
+    Image {
+        id: wallpaper
+        source: "../components/artwork/background.png"
+        anchors.fill: parent
     }
     
     // blur background once keypad is open
@@ -69,6 +94,12 @@ PlasmaCore.ColorScope {
         id: notifModel
     }
     
+    Gestures.DragGestureHandler {
+        orientation: Qt.Vertical
+        gestureProvider: root.gestureProvider
+        grabPermissions: PointerHandler.TakeOverForbidden
+    }
+        
     // header bar
     Loader {
         id: headerBar
@@ -231,35 +262,17 @@ PlasmaCore.ColorScope {
 
     Flickable {
         id: passwordFlickable
-        
         anchors.fill: parent
         
         property int columnHeight: PlasmaCore.Units.gridUnit * 20
-        property int oldContentY: contentY
         
         height: columnHeight + root.height
         contentHeight: columnHeight + root.height
         boundsBehavior: Flickable.StopAtBounds
         
-        // always snap to end (either hidden or shown)
-        onMovementEnded: {
-            if (!atYBeginning && !atYEnd) {
-                if (contentY > columnHeight - contentY) {
-                    flick(0, -1000);
-                } else {
-                    flick(0, 1000);
-                }
-            }
-        }
+        contentY: -root.gestureProvider.position
+        interactive: false
 
-        // wipe password if it is more than half way down the screen
-        onContentYChanged: {
-            if (contentY < columnHeight / 2 && oldContentY >= columnHeight / 2) {
-                keypad.reset();
-            }
-            oldContentY = contentY;
-        }
-        
         ColumnLayout {
             id: passwordLayout
             anchors.bottom: parent.bottom
