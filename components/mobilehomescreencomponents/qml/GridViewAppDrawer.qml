@@ -95,7 +95,6 @@ AbstractAppDrawer {
                 HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
                 HomeScreenComponents.ApplicationListModel.runApplication(storageId);
                 root.launched();
-                closeTimer.restart();
             }
         }
 
