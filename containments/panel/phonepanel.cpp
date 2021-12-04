@@ -197,7 +197,12 @@ void PhonePanel::takeScreenshot()
         }
 
         // We don't have access to the ScreenPool so we'll just take the first screen
-        auto pendingCall = m_screenshotInterface->CaptureScreen(qGuiApp->screens().constFirst()->name(), {}, QDBusUnixFileDescriptor(lPipeFds[1]));
+        QVariantMap options;
+        options.insert(QStringLiteral("native-resolution"), true);
+
+        auto pendingCall = m_screenshotInterface->CaptureScreen(
+            qGuiApp->screens().constFirst()->name(), options,
+            QDBusUnixFileDescriptor(lPipeFds[1]));
         close(lPipeFds[1]);
         auto pipeFileDescriptor = lPipeFds[0];
 
