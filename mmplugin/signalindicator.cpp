@@ -26,7 +26,7 @@ QString SignalIndicator::name() const
 bool SignalIndicator::simLocked() const
 {
     if (!m_modem) {
-        return true;
+        return false;
     }
     return !(m_modem->unlockRequired() == MM_MODEM_LOCK_NONE || m_modem->unlockRequired() == MM_MODEM_LOCK_SIM_PIN2);
 }
