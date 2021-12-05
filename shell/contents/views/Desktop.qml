@@ -13,8 +13,6 @@ import org.kde.plasma.shell 2.0 as Shell
 import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.activities 0.1 as Activities
-//import "../components"
-
 
 Rectangle {
     id: root
@@ -54,17 +52,6 @@ Rectangle {
                 item.rightPanelWidth = root.width - (containment.availableScreenRect.width + containment.availableScreenRect.x)
             }
         }
-    }
-
-    Loader {
-        id: pinOverlay
-        anchors {
-            fill: parent
-            topMargin: containment ? containment.availableScreenRect.y : 0
-            bottomMargin: parent.height - (containment ? (containment.availableScreenRect.height + containment.availableScreenRect.y) : 0)
-        }
-        z: 222
-        source: Qt.resolvedUrl("Pin.qml")
     }
 
     onContainmentChanged: {

@@ -19,11 +19,6 @@ Contains components such as:
 
 Dependencies:
 * KDE Frameworks 5 setup (plasma-framework and its dependencies)
-* oFono https://git.kernel.org/cgit/network/ofono/ofono.git
-* libqofono https://git.merproject.org/mer-core/libqofono
-* ofono-phonesim https://git.kernel.org/cgit/network/ofono/phonesim.git/
-
-If you want to test some part specific to telephony, set up ofono-phonesim according to https://docs.plasma-mobile.org/Ofono.html
 
 To start the phone homescreen in a window, run:
 ```
