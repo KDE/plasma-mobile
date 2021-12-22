@@ -7,12 +7,13 @@
  */
 
 import org.kde.colorcorrect 0.1 as CC
-import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-HomeScreenComponents.QuickSetting {
+MobileShell.QuickSetting {
     text: i18n("Night Color")
     icon: "redshift-status-on"
     enabled: compositorAdaptor.active
+    status: ""
     settingsCommand: "plasma-open-settings kcm_nightcolor"
 
     CC.CompositorAdaptor {

@@ -7,7 +7,6 @@ for (var j = 0; j < desktopsArray.length; j++) {
 var panel = new Panel("org.kde.phone.panel");
 panel.location = "top";
 panel.addWidget("org.kde.plasma.notifications");
-panel.addWidget("org.kde.plasma.mediacontroller");
 panel.height = 1.25 * gridUnit; // HACK: supposed to be gridUnit + smallSpacing, but it doesn't seem to give the correct number
 
 var bottomPanel = new Panel("org.kde.phone.taskpanel")

@@ -1,0 +1,34 @@
+# SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+module org.kde.plasma.private.mobileshell
+
+plugin mobileshellplugin
+
+# /actiondrawer
+ActionDrawer 1.0 actiondrawer/ActionDrawer.qml
+ActionDrawerOpenSurface 1.0 actiondrawer/ActionDrawerOpenSurface.qml
+
+# /components
+BaseItem 1.0 components/BaseItem.qml
+Direction 1.0 components/Direction.qml
+PanelBackground 1.0 components/PanelBackground.qml
+
+# /dataproviders
+singleton BatteryProvider 1.0 dataproviders/BatteryProvider.qml
+singleton BluetoothProvider 1.0 dataproviders/BluetoothProvider.qml
+singleton NotificationProvider 1.0 dataproviders/NotificationProvider.qml
+singleton SignalStrengthProvider 1.0 dataproviders/SignalStrengthProvider.qml
+singleton VolumeProvider 1.0 dataproviders/VolumeProvider.qml
+singleton WifiProvider 1.0 dataproviders/WifiProvider.qml
+
+# /statusbar
+StatusBar 1.0 statusbar/StatusBar.qml
+
+# /widgets
+MediaControlsWidget 1.0 widgets/MediaControlsWidget.qml
+NotificationsWidget 1.0 widgets/NotificationsWidget.qml
+
+# /
+singleton HomeScreenControls 1.0 HomeScreenControls.qml
+singleton TopPanelControls 1.0 TopPanelControls.qml

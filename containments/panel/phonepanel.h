@@ -9,50 +9,13 @@
 
 #include <Plasma/Containment>
 
-#include <KConfigWatcher>
-#include <KSharedConfig>
-
-#include "kscreeninterface.h"
-#include "screenshot2interface.h"
-
 class PhonePanel : public Plasma::Containment
 {
     Q_OBJECT
-    Q_PROPERTY(bool autoRotateEnabled READ autoRotate WRITE setAutoRotate NOTIFY autoRotateChanged);
-    Q_PROPERTY(bool torchEnabled READ torchEnabled NOTIFY torchChanged);
-    Q_PROPERTY(bool isSystem24HourFormat READ isSystem24HourFormat NOTIFY isSystem24HourFormatChanged);
 
 public:
     PhonePanel(QObject *parent, const QVariantList &args);
     ~PhonePanel() override;
-
-public Q_SLOTS:
-    void executeCommand(const QString &command);
-    void launchApp(const QString &app);
-    void toggleTorch();
-    void takeScreenshot();
-
-    bool autoRotate();
-    void setAutoRotate(bool value);
-
-    bool torchEnabled() const;
-
-    bool isSystem24HourFormat();
-
-signals:
-    void autoRotateChanged(bool value);
-    void torchChanged(bool value);
-    void isSystem24HourFormatChanged();
-
-private:
-    void handleMetaDataReceived(const QVariantMap &metadata, int fd);
-    bool m_running = false;
-
-    KConfigWatcher::Ptr m_localeConfigWatcher;
-    KSharedConfig::Ptr m_localeConfig;
-
-    org::kde::KScreen *m_kscreenInterface;
-    OrgKdeKWinScreenShot2Interface *m_screenshotInterface;
 };
 
 #endif

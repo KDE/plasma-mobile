@@ -5,12 +5,13 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 
-HomeScreenComponents.QuickSetting {
+MobileShell.QuickSetting {
     text: i18n("Airplane Mode")
     icon: "network-flightmode-on"
+    status: ""
     enabled: PlasmaNM.Configuration.airplaneModeEnabled
 
     PlasmaNM.Handler {

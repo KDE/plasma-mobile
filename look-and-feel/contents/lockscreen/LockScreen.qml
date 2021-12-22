@@ -9,9 +9,12 @@ import QtQuick 2.12
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager 1.1 as Notifications
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
 import "../components"
 
 PlasmaCore.ColorScope {
@@ -78,9 +81,18 @@ PlasmaCore.ColorScope {
             left: parent.left
             right: parent.right
         }
-        height: PlasmaCore.Units.gridUnit
+        height: PlasmaCore.Units.gridUnit * 1.25
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
-        sourceComponent: SimpleHeaderBar {}
+        sourceComponent: MobileShell.StatusBar {
+            id: statusBar
+            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+            backgroundColor: "transparent"
+            
+            showSecondRow: false
+            showDropShadow: true
+            showTime: false
+            disableSystemTray: true // HACK: prevent SIGABRT
+        }
     }
 
     // phone lockscreen component
@@ -125,11 +137,10 @@ PlasmaCore.ColorScope {
                 alignment: Qt.AlignHCenter
                 Layout.bottomMargin: PlasmaCore.Units.gridUnit * 2 // keep spacing even if media controls are gone
             }
-            MediaControls {
+            MobileShell.MediaControlsWidget {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
                 Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
-                Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
                 Layout.leftMargin: PlasmaCore.Units.gridUnit
                 Layout.rightMargin: PlasmaCore.Units.gridUnit
             }
@@ -184,11 +195,10 @@ PlasmaCore.ColorScope {
                         Layout.fillWidth: true
                         Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
                     }
-                    MediaControls {
+                    MobileShell.MediaControlsWidget {
                         Layout.alignment: Qt.AlignLeft
                         Layout.fillWidth: true
                         Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
-                        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
                     }
                 }
             }

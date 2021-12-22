@@ -5,7 +5,6 @@ set(mobilehomescreencomponentsplugin_SRCS
     applicationlistmodel.cpp
     favoritesmodel.cpp
     homescreenutils.cpp
-    quicksettingsmodel.cpp
 )
 
 add_library(mobilehomescreencomponentsplugin ${mobilehomescreencomponentsplugin_SRCS})
