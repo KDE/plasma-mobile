@@ -68,7 +68,6 @@ add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(components)
-add_subdirectory(mmplugin)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES
