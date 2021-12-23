@@ -1,5 +1,12 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!-- 
+- SPDX-FileCopyrightText: 2020 Luca Weiss
+- SPDX-FileCopyrightText: 2020 Bhushan Shah <bshah@kde.org>
+- SPDX-FileCopyrightText: 2018 Kai Uwe Broulik <kde@privat.broulik.de>
+- SPDX-FileCopyrightText: 2013-2014 Daniel Vrátil <dvratil@kde.org>
+- SPDX-License-Identifier: GPL-2.0-or-later
+-->
 <node>
     <interface name="org.kde.KScreen">
         <method name="applyLayoutPreset">

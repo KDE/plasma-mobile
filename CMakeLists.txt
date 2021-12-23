@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2014-2020 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2017-2021 Bhushan Shah <bshah@kde.org>
+# SPDX-FileCopyrightText: 2019-2021 Nicolas Fella <nicolas.fella@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 cmake_minimum_required(VERSION 3.16)
 
 project(plasma-phone-components)

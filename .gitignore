@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: None
+# SPDX-License-Identifier: CC0-1.0
+
 build
 *.config 
 *.creator 
@@ -11,3 +14,6 @@ build
 .idea
 /cmake-build*
 .cache
+
+.kdev4/
+*.kdev4

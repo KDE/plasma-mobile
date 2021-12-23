@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2019 Aleix Pol <apol@kde.org>
+# SPDX-FileCopyrightText: 2020 Jonah Brüchert <jbb@kaidan.im>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 configure_file(kwinwrapper.in ${CMAKE_CURRENT_BINARY_DIR}/kwinwrapper)
 install(PROGRAMS ${CMAKE_CURRENT_BINARY_DIR}/kwinwrapper DESTINATION ${BIN_INSTALL_DIR})
 

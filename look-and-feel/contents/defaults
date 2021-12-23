@@ -1,3 +1,9 @@
+# SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
+# SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2014 Pier Luigi Fiorini
+# SPDX-FileCopyrightText: 2014 Aaron J. Seigo
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 [kwinrc][Windows]
 Placement=Maximizing
 

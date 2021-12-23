@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
 .import org.kde.notificationmanager 1.0 as NotificationManager
 .import QtQml 2.15 as QtQml
 

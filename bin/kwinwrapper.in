@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# SPDX-FileCopyrightText: 2019-2021 Aleix Pol <apol@kde.org>
+# SPDX-FileCopyrightText: 2019-2021 Bhushan Shah <bshah@kde.org>
+# SPDX-FileCopyrightText: 2019-2020 Jonah Brüchert <jbb@kaidan.im>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 [ -f /etc/profile ] && . /etc/profile
 
 export QT_QPA_PLATFORM=wayland

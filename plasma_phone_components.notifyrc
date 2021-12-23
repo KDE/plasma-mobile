@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2020 Han Young <hanyoung@protonmail.com>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 [Global]
 IconName=preferences-system-windows-effect-screenshot
 Name=Plasma

@@ -1,4 +1,7 @@
-
+# SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+# SPDX-FileCopyrightText: 2021 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
 
 set(mobilehomescreencomponentsplugin_SRCS
     mobilehomescreencomponentsplugin.cpp

@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2015-2021 Marco Martin <mart@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 set(homescreen_SRCS
     homescreen.cpp
 )

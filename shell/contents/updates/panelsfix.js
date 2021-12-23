@@ -1,3 +1,8 @@
+// SPDX-FileCopyrightText: 2014-2019 Marco Martin <mart@kde.org>
+// SPDX-FileCopyrightText: 2015-2021 Bhushan Shah <bshah@kde.org>
+// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 let topFound = false
 let bottomFound = false
 

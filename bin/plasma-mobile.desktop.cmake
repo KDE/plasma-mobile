@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2019 Aleix Pol <apol@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 [Desktop Entry]
 Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed  ${CMAKE_INSTALL_FULL_BINDIR}/kwinwrapper
 TryExec=${CMAKE_INSTALL_FULL_BINDIR}/kwinwrapper

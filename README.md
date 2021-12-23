@@ -1,3 +1,8 @@
+<!--
+- SPDX-FileCopyrightText: None 
+- SPDX-License-Identifier: CC0-1.0
+-->
+
 # plasma-phone-components
 
 UI components for Plasma Mobile.

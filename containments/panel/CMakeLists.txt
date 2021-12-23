@@ -1,3 +1,8 @@
+# SPDX-FileCopyrightText: 2017 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
+# SPDX-FileCopyrightText: 2020-2021 Nicolas Fella <nicolas.fella@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 set(phonepanel_SRCS
     phonepanel.cpp
 )
