@@ -2,12 +2,12 @@
 
 UI components for Plasma Mobile.
 
-Contains components such as:
-* Shell panels ([task panel](containments/taskpanel), and [top panel](containments/panel))
-* [Homescreen](containments/homescreen)
-* [Logout menu](look-and-feel/contents/logout)
-* [Lockscreen theme](look-and-feel/contents/lockscreen)
-* [Search applet](applets/krunner)
+Locations:
+* [applets](applets) - plasmoids
+* [components/mobileshell](components/mobileshell) - shell component library
+* [containments](containments) - shell panels (homescreen, status bar, task panel)
+* [look-and-feel](look-and-feel/contents) - Plasma look-and-feel packages (ex. lockscreen, logout, etc.)
+* [quicksettings](quicksettings) - quick settings packages for the action drawer
 
 ## Links
 * Project page: https://invent.kde.org/plasma/plasma-phone-components
@@ -17,8 +17,11 @@ Contains components such as:
 
 ## Test on a development machine
 
+It is recommended to use `kdesrc-build` to build this from source. See [this page](https://community.kde.org/Get_Involved/development) in order to set it up.
+
 Dependencies:
 * KDE Frameworks 5 setup (plasma-framework and its dependencies)
+* Plasma Nano
 
 To start the phone homescreen in a window, run:
 ```
