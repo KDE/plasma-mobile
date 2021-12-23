@@ -68,7 +68,7 @@ Comment[sv]=Plasma arbetsyta för smarta telefoner
 Comment[tr]=Akıllı telefonlar için Plasma çalışma alanı
 Comment[uk]=Робочий простір Плазми для смартфонів
 Comment[x-test]=xxPlasma workspace for smartphonesxx
-Comment[zh_CN]=为手机定制的 Plasma 工作空间
+Comment[zh_CN]=专为手机定制的 Plasma 工作空间
 Comment[zh_TW]=智慧型手機的 Plasma 工作空間
 Keywords=Phone, Workspace, Look and Feel
 Keywords[ast]=Teléfonu, estilu y aspeutu, y estaya de trabayu
@@ -103,7 +103,7 @@ Keywords[sv]=Telefon, arbetsyta, utseende och känsla
 Keywords[tr]=Telefon, Çalışma alanı, Görünüm
 Keywords[uk]=Телефон, Робочий простір, Вигляд і поведінка
 Keywords[x-test]=xxPhone, Workspace, Look and Feelxx
-Keywords[zh_CN]=Phone, Workspace, Look and Feel, 手机, 工作空间, 视觉效果
+Keywords[zh_CN]=Phone, Workspace, Look and Feel, 手机, 工作空间, 界面外观
 Keywords[zh_TW]=電話、工作空間、外觀與感覺
 Type=Service
 
