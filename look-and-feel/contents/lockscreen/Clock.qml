@@ -8,6 +8,7 @@ import QtQuick 2.8
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.5
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.core 2.0
 
 ColumnLayout {
@@ -55,6 +56,6 @@ ColumnLayout {
         engine: "time"
         connectedSources: ["Local"]
         interval: 60000
-        intervalAlignment: PlasmaCore.Types.AlignToMinute
+        intervalAlignment: Types.AlignToMinute
     }
 }

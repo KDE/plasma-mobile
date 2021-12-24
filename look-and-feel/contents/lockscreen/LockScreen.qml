@@ -15,8 +15,6 @@ import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import "../components"
-
 PlasmaCore.ColorScope {
     id: root
 

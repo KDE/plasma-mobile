@@ -16,8 +16,6 @@ import org.kde.notificationmanager 1.1 as Notifications
 
 import org.kde.kquickcontrolsaddons 2.0 as KQCAddons
 
-import "../components"
-
 // meant to be temporary, until the notifications components in plasma-workspace are available to used
 // https://invent.kde.org/plasma/plasma-workspace/-/blob/master/applets/notifications/package/contents/ui/NotificationItem.qml
 Item {

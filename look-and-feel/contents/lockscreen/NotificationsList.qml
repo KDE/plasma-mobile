@@ -8,10 +8,11 @@ import QtQuick 2.15
 import QtQuick.Controls 1.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
+
 import org.kde.kirigami 2.13 as Kirigami
-import "../components"
 
 Item {
     id: notificationsRoot
