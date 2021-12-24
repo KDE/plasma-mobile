@@ -12,7 +12,6 @@ ActionDrawerOpenSurface 1.0 actiondrawer/ActionDrawerOpenSurface.qml
 # /components
 BaseItem 1.0 components/BaseItem.qml
 Direction 1.0 components/Direction.qml
-PanelBackground 1.0 components/PanelBackground.qml
 
 # /dataproviders
 singleton BatteryProvider 1.0 dataproviders/BatteryProvider.qml
