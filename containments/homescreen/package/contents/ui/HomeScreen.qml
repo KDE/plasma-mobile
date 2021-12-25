@@ -116,12 +116,14 @@ Item {
         HomeScreenComponents.ListViewAppDrawer {
             anchors.fill: parent
             topPadding: plasmoid.availableScreenRect.y
+            
+            // pad for navbar
+            rightPadding: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
             bottomPadding: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            
             closedPositionOffset: favoriteStrip.height
             
-            headerItem: Loader {
-                sourceComponent: headerComponent
-            }
+            headerItem: Loader { sourceComponent: headerComponent }
             headerHeight: root.headerHeight
         }
     }
@@ -131,12 +133,14 @@ Item {
         HomeScreenComponents.GridViewAppDrawer {
             anchors.fill: parent
             topPadding: plasmoid.availableScreenRect.y
+            
+            // pad for navbar
+            rightPadding: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
             bottomPadding: plasmoid.screenGeometry.height - plasmoid.availableScreenRect.height - plasmoid.availableScreenRect.y
+            
             closedPositionOffset: favoriteStrip.height
             
-            headerItem: Loader {
-                sourceComponent: headerComponent
-            }
+            headerItem: Loader { sourceComponent: headerComponent }
             headerHeight: root.headerHeight
         }
     }
