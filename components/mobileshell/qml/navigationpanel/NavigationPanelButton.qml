@@ -8,7 +8,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -22,6 +21,7 @@ Item {
     property double iconSizeFactor: 1
     property alias iconSource: icon.source
     property alias colorGroup: icon.colorGroup
+    
     signal clicked()
 
     Rectangle {

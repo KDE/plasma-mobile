@@ -11,13 +11,11 @@ import QtQuick.Window 2.2
 import QtGraphicalEffects 1.12
 
 import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.phone.taskpanel 1.0 as TaskPanel
 
 Item {
     id: root
@@ -112,7 +110,6 @@ Item {
             id: icons
             anchors.fill: parent
 
-            visible: plasmoid.configuration.PanelButtonsVisible
             property real buttonLength: 0
 
             // background colour

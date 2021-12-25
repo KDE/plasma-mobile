@@ -21,8 +21,6 @@ import org.kde.plasma.phone.taskpanel 1.0 as TaskPanel
 
 PlasmaCore.ColorScope {
     id: root
-    width: 600
-    height: 480
     colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -99,14 +97,14 @@ PlasmaCore.ColorScope {
     // task switcher
     Loader {
         id: taskSwitcherLoader
-        sourceComponent: TaskSwitcher {
+        sourceComponent: MobileShell.TaskSwitcher {
             model: tasksModel
             taskPanelHeight: root.state === "portrait" ? root.height : root.width
         }
     }
 
     // bottom navigation panel
-    NavigationPanel {
+    MobileShell.NavigationPanel {
         id: panel
         anchors.fill: parent
         opacity: (root.taskSwitcher && root.taskSwitcher.visible) ? 0 : 1 // hide bar when task switcher is open
@@ -117,7 +115,7 @@ PlasmaCore.ColorScope {
         dragGestureEnabled: true
         taskSwitcher: root.taskSwitcher
             
-        leftAction: NavigationPanelAction {
+        leftAction: MobileShell.NavigationPanelAction {
             enabled: hasTasks
             iconSource: "mobile-task-switcher"
             iconSizeFactor: 0.75
@@ -128,22 +126,22 @@ PlasmaCore.ColorScope {
             }
         }
         
-        middleAction: NavigationPanelAction {
+        middleAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "start-here-kde"
             iconSizeFactor: 1
             onTriggered: root.triggerHomescreen()
         }
         
-        rightAction: NavigationPanelAction {
-            enabled: TaskPanel.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
+        rightAction: MobileShell.NavigationPanelAction {
+            enabled: MobileShell.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
             // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-            iconSizeFactor: TaskPanel.KWinVirtualKeyboard.visible ? 1 : 0.75
-            iconSource: TaskPanel.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+            iconSizeFactor: MobileShell.KWinVirtualKeyboard.visible ? 1 : 0.75
+            iconSource: MobileShell.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
             
             onTriggered: {
-                if (TaskPanel.KWinVirtualKeyboard.active) {
-                    TaskPanel.KWinVirtualKeyboard.active = false;
+                if (MobileShell.KWinVirtualKeyboard.active) {
+                    MobileShell.KWinVirtualKeyboard.active = false;
                 } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
                     var index = taskSwitcher.model.activeTask;
                     if (index) {

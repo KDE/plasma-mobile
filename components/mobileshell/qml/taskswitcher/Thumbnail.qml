@@ -7,6 +7,7 @@
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+
 import org.kde.taskmanager 0.1 as TaskManager
 
 TaskManager.PipeWireSourceItem {

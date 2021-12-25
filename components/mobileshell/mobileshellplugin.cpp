@@ -4,14 +4,18 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include "mobileshellplugin.h"
+
 #include <QQmlContext>
 #include <QQuickItem>
 
-#include "mobileshellplugin.h"
+#include "displaysmodel.h"
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 #include "quicksettingsmodel.h"
 #include "shellutil.h"
+#include "virtualkeyboardinterface.h"
+#include "vkbdinterface.h"
 
 void MobileShellPlugin::registerTypes(const char *uri)
 {
@@ -23,6 +27,11 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<QuickSetting>(uri, 1, 0, "QuickSetting");
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");
+
+    qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
+    qmlRegisterSingletonType<OrgKdeKwinVirtualKeyboardInterface>(uri, 1, 0, "KWinVirtualKeyboard", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return new KwinVirtualKeyboardInterface;
+    });
 
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");

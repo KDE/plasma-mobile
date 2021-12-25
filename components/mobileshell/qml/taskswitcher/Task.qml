@@ -9,7 +9,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 import QtQuick.Controls 2.2 as QQC2
-import org.kde.plasma.phone.taskpanel 1.0
+
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -18,6 +18,7 @@ Item {
     id: delegate
 
     required property var model
+    required property var displaysModel
 
     readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
     readonly property real dragOffset: -control.y
@@ -129,7 +130,7 @@ Item {
                 
                 Repeater {
                     id: rep
-                    model: plasmoid.nativeInterface.outputs
+                    model: displaysModel
                     delegate: PlasmaComponents.ToolButton {
                         Layout.alignment: Qt.AlignVCenter
                         text: model.modelName
@@ -138,7 +139,7 @@ Item {
                         icon.name: "tv" //TODO provide a more adequate icon
 
                         onClicked: {
-                            plasmoid.nativeInterface.sendWindowToOutput(delegate.model.WinIdList[0], model.output)
+                            displaysModel.sendWindowToOutput(delegate.model.WinIdList[0], model.output)
                         }
                     }
                 }

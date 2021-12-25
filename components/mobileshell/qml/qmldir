@@ -21,8 +21,15 @@ singleton SignalStrengthProvider 1.0 dataproviders/SignalStrengthProvider.qml
 singleton VolumeProvider 1.0 dataproviders/VolumeProvider.qml
 singleton WifiProvider 1.0 dataproviders/WifiProvider.qml
 
+# /navigationpanel
+NavigationPanel 1.0 navigationpanel/NavigationPanel.qml
+NavigationPanelAction 1.0 navigationpanel/NavigationPanelAction.qml
+
 # /statusbar
 StatusBar 1.0 statusbar/StatusBar.qml
+
+# /taskswitcher
+TaskSwitcher 1.0 taskswitcher/TaskSwitcher.qml
 
 # /widgets
 MediaControlsWidget 1.0 widgets/MediaControlsWidget.qml

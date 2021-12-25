@@ -2,14 +2,19 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.ScreenShot2.xml
-                                 dbus/org.kde.KScreen.xml)
-
+                                 dbus/org.kde.KScreen.xml
+                                 ${KWIN_VIRTUALKEYBOARD_INTERFACE})
+                                 
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     shellutil.cpp
     quicksettingsmodel.cpp
+    vkbdinterface.cpp
+    displaysmodel.cpp
+    
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
+    
     ${DBUS_SRCS}
 )
 

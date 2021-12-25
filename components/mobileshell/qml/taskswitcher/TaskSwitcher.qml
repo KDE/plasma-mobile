@@ -8,6 +8,7 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
+
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -43,8 +44,8 @@ NanoShell.FullScreenOverlay {
     property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
     property bool currentlyDragging: false // whether we are in a swipe up gesture
 
-    Component.onCompleted: plasmoid.nativeInterface.panel = window;
-
+    property var displaysModel: MobileShell.DisplaysModel {}
+    
     enum MovementDirection {
         None = 0,
         Left,
@@ -231,6 +232,8 @@ NanoShell.FullScreenOverlay {
                 width: tasksView.width
                 height: tasksView.height
                 
+                displaysModel: window.displaysModel
+                
                 // account for header offset (center the preview)
                 y: -tasksView.taskHeaderHeight / 2
                 
@@ -273,7 +276,7 @@ NanoShell.FullScreenOverlay {
     }
     
     // task panel
-    NavigationPanel {
+    MobileShell.NavigationPanel {
         id: navPanel
         
         property bool isPortrait: Screen.width <= Screen.height
@@ -292,7 +295,7 @@ NanoShell.FullScreenOverlay {
         
         Behavior on backgroundColor { ColorAnimation {} }
         
-        leftAction: NavigationPanelAction {
+        leftAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "mobile-task-switcher"
             iconSizeFactor: 0.75
@@ -305,7 +308,7 @@ NanoShell.FullScreenOverlay {
             }
         }
         
-        middleAction: NavigationPanelAction {
+        middleAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "start-here-kde"
             iconSizeFactor: 1
@@ -315,7 +318,7 @@ NanoShell.FullScreenOverlay {
             }
         }
         
-        rightAction: NavigationPanelAction {
+        rightAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "mobile-close-app"
             iconSizeFactor: 0.75
