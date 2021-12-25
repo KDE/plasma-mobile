@@ -87,6 +87,71 @@ PlasmaCore.ColorScope {
         });
     }
 
+    // navigation panel actions
+    MobileShell.NavigationPanelAction {
+        id: taskSwitcherAction
+        
+        enabled: hasTasks || taskSwitcher.visible
+        iconSource: "mobile-task-switcher"
+        iconSizeFactor: 0.75
+        
+        onTriggered: {
+            plasmoid.nativeInterface.showDesktop = false;
+            
+            if (!taskSwitcher.visible) {
+                taskSwitcher.show(true);
+            } else {
+                // when task switcher is open
+                if (taskSwitcher.wasInActiveTask) {
+                    // restore active window
+                    taskSwitcher.activateWindow(root.currentTaskIndex);
+                } else {
+                    taskSwitcher.hide();
+                }
+            }
+        }
+    }
+    
+    MobileShell.NavigationPanelAction {
+        id: homeAction
+        
+        enabled: true
+        iconSource: "start-here-kde"
+        iconSizeFactor: 1
+        onTriggered: {
+            MobileShell.HomeScreenControls.openHomeScreen();
+            plasmoid.nativeInterface.allMinimizedChanged();
+        }
+    }
+    
+    MobileShell.NavigationPanelAction {
+        id: closeAppAction
+        
+        enabled: MobileShell.KWinVirtualKeyboard.visible || taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
+        // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
+        iconSizeFactor: MobileShell.KWinVirtualKeyboard.visible ? 1 : 0.75
+        iconSource: MobileShell.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+        
+        onTriggered: {
+            if (MobileShell.KWinVirtualKeyboard.active) {
+                // close keyboard if it is open
+                MobileShell.KWinVirtualKeyboard.active = false;
+            } else if (taskSwitcher.visible) { 
+                
+                // if task switcher is open, close the current window shown
+                taskSwitcher.model.requestClose(taskSwitcher.model.index(taskSwitcher.currentTaskIndex, 0));
+                
+            } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
+                
+                // if task switcher is closed, but there is an active window
+                var index = taskSwitcher.model.activeTask;
+                if (index) {
+                    taskSwitcher.model.requestClose(index);
+                }
+            }
+        }
+    }
+    
     // bottom navigation panel
     MobileShell.NavigationPanel {
         id: panel
@@ -106,63 +171,9 @@ PlasmaCore.ColorScope {
         // also don't disable drag gesture mid-drag
         dragGestureEnabled: !taskSwitcher.visible || taskSwitcher.currentlyDragging
         
-        leftAction: MobileShell.NavigationPanelAction {
-            enabled: hasTasks || taskSwitcher.visible
-            iconSource: "mobile-task-switcher"
-            iconSizeFactor: 0.75
-            
-            onTriggered: {
-                plasmoid.nativeInterface.showDesktop = false;
-                
-                if (!taskSwitcher.visible) {
-                    taskSwitcher.show(true);
-                } else {
-                    // when task switcher is open
-                    if (taskSwitcher.wasInActiveTask) {
-                        // restore active window
-                        taskSwitcher.activateWindow(root.currentTaskIndex);
-                    } else {
-                        taskSwitcher.hide();
-                    }
-                }
-            }
-        }
-        
-        middleAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "start-here-kde"
-            iconSizeFactor: 1
-            onTriggered: {
-                MobileShell.HomeScreenControls.openHomeScreen();
-                plasmoid.nativeInterface.allMinimizedChanged();
-            }
-        }
-        
-        rightAction: MobileShell.NavigationPanelAction {
-            enabled: MobileShell.KWinVirtualKeyboard.visible || taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
-            // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-            iconSizeFactor: MobileShell.KWinVirtualKeyboard.visible ? 1 : 0.75
-            iconSource: MobileShell.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
-            
-            onTriggered: {
-                if (MobileShell.KWinVirtualKeyboard.active) {
-                    // close keyboard if it is open
-                    MobileShell.KWinVirtualKeyboard.active = false;
-                } else if (taskSwitcher.visible) { 
-                    
-                    // if task switcher is open, close the current window shown
-                    taskSwitcher.model.requestClose(taskSwitcher.model.index(taskSwitcher.currentTaskIndex, 0));
-                    
-                } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
-                    
-                    // if task switcher is closed, but there is an active window
-                    var index = taskSwitcher.model.activeTask;
-                    if (index) {
-                        taskSwitcher.model.requestClose(index);
-                    }
-                }
-            }
-        }
+        leftAction: taskSwitcherAction
+        middleAction: homeAction
+        rightAction: closeAppAction
     }
     
     states: [
