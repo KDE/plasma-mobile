@@ -60,7 +60,8 @@ AbstractAppDrawer {
 
         property int columns: Math.floor(root.contentWidth / cellWidth)
         property int rows: Math.ceil(model.count / columns)
-        cacheBuffer: rows * cellHeight
+        
+        cacheBuffer: Math.max(0, rows * cellHeight)
 
         model: HomeScreenComponents.ApplicationListModel
 
