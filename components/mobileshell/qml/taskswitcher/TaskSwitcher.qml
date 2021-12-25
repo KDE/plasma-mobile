@@ -15,32 +15,31 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-NanoShell.FullScreenOverlay {
-    id: window
-
+Item {
+    id: root
     visible: false
-    width: Screen.width
-    height: Screen.height
     
-    required property real taskPanelHeight // height of task panel, provided by main.qml
+    readonly property real taskPanelHeight: MobileShell.TaskPanelControls.panelHeight
+    readonly property real taskPanelWidth: MobileShell.TaskPanelControls.panelWidth
+    readonly property bool isPortrait: MobileShell.TaskPanelControls.isPortrait
     
     // dimensions of a window on the screen
-    readonly property real windowHeight: window.height - (navPanel.isPortrait ? window.taskPanelHeight : 0) - MobileShell.TopPanelControls.panelHeight
-    readonly property real windowWidth: window.width - (navPanel.isPortrait ? 0 : window.taskPanelHeight)
+    readonly property real windowHeight: root.height - (root.isPortrait ? root.taskPanelHeight : 0) - MobileShell.TopPanelControls.panelHeight
+    readonly property real windowWidth: root.width - (root.isPortrait ? 0 : root.taskPanelWidth)
     
-    property int tasksCount: window.model.count
-    property int currentTaskIndex: tasksView.currentIndex
+    readonly property int tasksCount: root.model.count
+    readonly property int currentTaskIndex: tasksView.currentIndex
     property TaskManager.TasksModel model
     
-    // properties controlled from main.qml MouseArea (swipe to open gesture)
+    // offset constants
+    readonly property real targetYOffsetDist: root.height - tasksView.height // offset distance to perfect opening
+    readonly property real dismissYOffsetDist: root.height
+    
+    // properties controlled from NavigationPanel (swipe to open gesture)
     property real oldYOffset: 0
     property real yOffset: 0
     
-    // offset constants
-    readonly property real targetYOffsetDist: window.height - tasksView.height // offset distance to perfect opening
-    readonly property real dismissYOffsetDist: window.height
-    
-    // set from NavigationPanel in main.qml
+    // set from NavigationPanel in taskpanel containment
     property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
     property bool currentlyDragging: false // whether we are in a swipe up gesture
 
@@ -52,18 +51,7 @@ NanoShell.FullScreenOverlay {
         Right
     }
     
-    onVisibleChanged: {
-        if (!visible) {
-            window.contentItem.opacity = 1;
-        }
-        // hide homescreen elements to make use of wallpaper
-        if (visible) {
-            MobileShell.HomeScreenControls.hideHomeScreen(!window.wasInActiveTask); // only animate if going from homescreen
-        } else {
-            MobileShell.HomeScreenControls.showHomeScreen(true);
-        }
-        MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
-    }
+    onVisibleChanged: MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
 
     onTasksCountChanged: {
         if (tasksCount == 0) {
@@ -71,52 +59,51 @@ NanoShell.FullScreenOverlay {
         }
     }
     
-    // background
-    color: "transparent"
     Rectangle {
         id: backgroundRect
         anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6 * (window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)))
+        color: Qt.rgba(0, 0, 0, 0.6 * (root.wasInActiveTask ? 1 : Math.min(1, root.yOffset / root.targetYOffsetDist)))
         
         MouseArea {
             anchors.fill: parent
-            onClicked: hide()
+            onClicked: root.hide()
         }
     }
 
 //BEGIN functions
+
     function show(animation) {
-        window.yOffset = 0;
-        window.wasInActiveTask = window.model.activeTask.row >= 0;
+        root.yOffset = 0;
+        root.wasInActiveTask = root.model.activeTask.row >= 0;
         
         // skip to first active task
-        if (window.wasInActiveTask) {
-            tasksView.currentIndex = window.model.activeTask.row;
-            tasksView.positionViewAtIndex(window.model.activeTask.row, ListView.SnapPosition);
+        if (root.wasInActiveTask) {
+            tasksView.currentIndex = root.model.activeTask.row;
+            tasksView.positionViewAtIndex(root.model.activeTask.row, ListView.SnapPosition);
         }
         
-        window.visible = true;
-        root.minimizeAll();
+        root.visible = true;
+        minimizeAll();
         
         // animate app shrink
         if (animation) {
-            offsetAnimator.to = window.targetYOffsetDist;
+            offsetAnimator.to = root.targetYOffsetDist;
             offsetAnimator.restart();
         }
     }
     function hide() {
-        if (!window.visible) return;
-        window.visible = false;
+        if (!root.visible) return;
+        root.visible = false;
     }
 
     function snapOffset() {
-        let movingUp = window.yOffset > window.oldYOffset;
+        let movingUp = root.yOffset > root.oldYOffset;
         
-        if (movingUp || window.yOffset >= window.targetYOffsetDist) { // open task switcher and stay
-            offsetAnimator.to = window.targetYOffsetDist;
+        if (movingUp || root.yOffset >= root.targetYOffsetDist) { // open task switcher and stay
+            offsetAnimator.to = root.targetYOffsetDist;
             offsetAnimator.restart();
         } else { // close task switcher and return to app
-            if (!window.wasInActiveTask) { // if pulled up from homescreen, don't activate app
+            if (!root.wasInActiveTask) { // if pulled up from homescreen, don't activate app
                 offsetAnimator.activateApp = false;
             }
             offsetAnimator.to = 0;
@@ -135,12 +122,12 @@ NanoShell.FullScreenOverlay {
             return;
         }
 
-        var newActiveIdx = window.model.index(id, 0)
+        var newActiveIdx = root.model.index(id, 0)
         var newActiveGeo = tasksModel.data(newActiveIdx, TaskManager.AbstractTasksModel.ScreenGeometry)
         for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = window.model.index(i, 0)
+            var idx = root.model.index(i, 0)
             if (i == id) {
-                window.model.requestActivate(idx);
+                root.model.requestActivate(idx);
             } else if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                 var geo = tasksModel.data(idx, TaskManager.AbstractTasksModel.ScreenGeometry)
                 // Only minimize the other windows in the same screen
@@ -150,8 +137,27 @@ NanoShell.FullScreenOverlay {
             }
         }
         
-        window.visible = false;
+        root.visible = false;
     }
+    
+    function minimizeAll() {
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = tasksModel.makeModelIndex(i);
+            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+            }
+        }
+    }
+
+    function restoreAll() {
+        for (var i = 0 ; i < tasksModel.count; i++) {
+            var idx = tasksModel.makeModelIndex(i);
+            if (tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
+                tasksModel.requestToggleMinimized(idx);
+            }
+        }
+    }
+    
 //END functions
     
     // animate app grow and shrink
@@ -164,19 +170,19 @@ NanoShell.FullScreenOverlay {
         
         // states of to:
         // 0 - open/resume app (zoom up the thumbnail)
-        // window.targetYOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
+        // root.targetYOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
         to: 0
         onFinished: {
             if (to === 0) { // close task switcher, and switch to current app
-                if (!window.visible) return;
-                window.visible = false;
+                if (!root.visible) return;
+                root.visible = false;
                 
                 if (activateApp) {
-                    setSingleActiveWindow(window.currentTaskIndex);
+                    setSingleActiveWindow(root.currentTaskIndex);
                 }
                 activateApp = true;
-            } else if (to == window.dismissYOffsetDist) {
-                window.hide();
+            } else if (to == root.dismissYOffsetDist) {
+                root.hide();
             }
         }
     }
@@ -186,23 +192,23 @@ NanoShell.FullScreenOverlay {
         
         // provide shell margins
         anchors.fill: parent
-        anchors.rightMargin: navPanel.isPortrait ? 0 : window.taskPanelHeight
-        anchors.bottomMargin: navPanel.isPortrait ? window.taskPanelHeight : 0
+        anchors.rightMargin: root.isPortrait ? 0 : root.taskPanelWidth
+        anchors.bottomMargin: root.isPortrait ? root.taskPanelHeight : 0
         anchors.topMargin: MobileShell.TopPanelControls.panelHeight
         
         // applications list
         ListView {
             id: tasksView
-            opacity: window.wasInActiveTask ? 1 : Math.min(1, window.yOffset / window.targetYOffsetDist)        
+            opacity: root.wasInActiveTask ? 1 : Math.min(1, root.yOffset / root.targetYOffsetDist)        
             anchors.centerIn: parent
             
             readonly property real sizeFactor: 0.75
             readonly property real taskHeaderHeight: PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.smallSpacing * 2
             
-            width: window.windowWidth * sizeFactor
-            height: window.windowHeight * sizeFactor + taskHeaderHeight
+            width: root.windowWidth * sizeFactor
+            height: root.windowHeight * sizeFactor + taskHeaderHeight
             
-            model: window.model
+            model: root.model
             orientation: ListView.Horizontal
             
             highlightRangeMode: ListView.StrictlyEnforceRange // ensures currentIndex is updated
@@ -217,22 +223,23 @@ NanoShell.FullScreenOverlay {
             
             // ensure that window previews are exactly to the scale of the device screen
             property real scalingFactor: {
-                let candidateHeight = (tasksView.width / window.windowWidth) * window.windowHeight;
+                let candidateHeight = (tasksView.width / root.windowWidth) * root.windowHeight;
                 if (candidateHeight > tasksView.height) {
-                    return tasksView.height / window.windowHeight;
+                    return tasksView.height / root.windowHeight;
                 } else {
-                    return tasksView.width / window.windowWidth;
+                    return tasksView.width / root.windowWidth;
                 }
             }
             
             delegate: Task {
                 id: task
                 property int curIndex: model.index
-                z: window.currentTaskIndex === curIndex ? 1 : 0
+                z: root.currentTaskIndex === curIndex ? 1 : 0
                 width: tasksView.width
                 height: tasksView.height
                 
-                displaysModel: window.displaysModel
+                taskSwitcher: root
+                displaysModel: root.displaysModel
                 
                 // account for header offset (center the preview)
                 y: -tasksView.taskHeaderHeight / 2
@@ -240,18 +247,18 @@ NanoShell.FullScreenOverlay {
                 // scale gesture
                 scale: {
                     let maxScale = 1 / tasksView.scalingFactor;
-                    let subtract = (maxScale - 1) * (window.yOffset / window.targetYOffsetDist);
+                    let subtract = (maxScale - 1) * (root.yOffset / root.targetYOffsetDist);
                     let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
                     
-                    if ((window.wasInActiveTask || !taskSwitcher.currentlyDragging) && window.currentTaskIndex === task.curIndex) {
+                    if ((root.wasInActiveTask || !taskSwitcher.currentlyDragging) && root.currentTaskIndex === task.curIndex) {
                         return finalScale;
                     }
                     return 1;
                 }
                 
                 // ensure that window previews are exactly to the scale of the device screen
-                previewWidth: tasksView.scalingFactor * window.windowWidth
-                previewHeight: tasksView.scalingFactor * window.windowHeight
+                previewWidth: tasksView.scalingFactor * root.windowWidth
+                previewHeight: tasksView.scalingFactor * root.windowHeight
             }
         }
     }
@@ -273,58 +280,5 @@ NanoShell.FullScreenOverlay {
             MobileShell.TopPanelControls.startSwipe();
         }
         onReleased: MobileShell.TopPanelControls.endSwipe();
-    }
-    
-    // task panel
-    MobileShell.NavigationPanel {
-        id: navPanel
-        
-        property bool isPortrait: Screen.width <= Screen.height
-        width: isPortrait ? implicitWidth : window.taskPanelHeight
-        height: isPortrait ? window.taskPanelHeight : implicitWidth
-        
-        anchors.left: isPortrait ? parent.left : undefined
-        anchors.right: parent.right
-        anchors.top: isPortrait ? undefined: parent.top
-        anchors.bottom: parent.bottom
-        
-        taskSwitcher: window
-        backgroundColor: window.visible ? Qt.rgba(0, 0, 0, 0.1) : "transparent"
-        foregroundColorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-        dragGestureEnabled: false
-        
-        Behavior on backgroundColor { ColorAnimation {} }
-        
-        leftAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "mobile-task-switcher"
-            iconSizeFactor: 0.75
-            onTriggered: {
-                if (window.wasInActiveTask) {
-                    window.activateWindow(window.currentTaskIndex);
-                } else {
-                    window.hide();
-                }
-            }
-        }
-        
-        middleAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "start-here-kde"
-            iconSizeFactor: 1
-            onTriggered: {
-                window.hide();
-                root.triggerHomescreen();
-            }
-        }
-        
-        rightAction: MobileShell.NavigationPanelAction {
-            enabled: true
-            iconSource: "mobile-close-app"
-            iconSizeFactor: 0.75
-            onTriggered: {
-                tasksModel.requestClose(tasksModel.index(window.currentTaskIndex, 0));
-            }
-        }
     }
 }

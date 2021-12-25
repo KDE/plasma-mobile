@@ -82,7 +82,7 @@ Item {
                 
                 opening = oldMouseY > mouse.y;
 
-                if (root.taskSwitcher.visibility == Window.Hidden && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && root.taskSwitcher.tasksCount) {
+                if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && root.taskSwitcher.tasksCount) {
                     // start task switcher gesture
                     activeButton = null;
                     root.taskSwitcher.show(false);

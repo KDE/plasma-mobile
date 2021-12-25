@@ -29,6 +29,7 @@ Item {
     readonly property real headerHeight: Math.round(PlasmaCore.Units.gridUnit * 3)
     
 //BEGIN functions
+    
     function activate() {
         // there's a couple of steps:
         // - minimize windows
@@ -44,6 +45,7 @@ Item {
             root.appDrawer.close()
         }
     }
+    
 //END functions
     
     HomeScreenComponents.FlickablePages {

@@ -17,6 +17,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 Item {
     id: delegate
 
+    required property var taskSwitcher
+    
     required property var model
     required property var displaysModel
 
@@ -29,12 +31,12 @@ Item {
     required property real previewWidth
     property real scale: 1
     
-    opacity: 1 - dragOffset / window.height
+    opacity: 1 - dragOffset / taskSwitcher.height
     
 //BEGIN functions
     function syncDelegateGeometry() {
         let pos = pipeWireLoader.mapToItem(tasksView, 0, 0);
-        if (window.visible) {
+        if (taskSwitcher.visible) {
             tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
         }
     }
@@ -44,14 +46,14 @@ Item {
     }
     
     function activateApp() {
-        window.activateWindow(model.index);
+        taskSwitcher.activateWindow(model.index);
     }
 //END functions
     
     Component.onCompleted: syncDelegateGeometry();
     
     Connections {
-        target: window
+        target: taskSwitcher
         function onVisibleChanged() {
             syncDelegateGeometry();
         }
@@ -78,7 +80,7 @@ Item {
                 yAnimator.stop();
                 
                 if (parent.y < -PlasmaCore.Units.gridUnit * 2) {
-                    yAnimator.to = -window.height;
+                    yAnimator.to = -root.height;
                 } else {
                     yAnimator.to = 0;
                 }

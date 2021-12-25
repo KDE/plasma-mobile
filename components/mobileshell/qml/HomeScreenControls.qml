@@ -13,12 +13,12 @@ pragma Singleton
 QtObject {
     id: delegate
 
+    signal openHomeScreen()
     signal resetHomeScreenPosition()
     signal snapHomeScreenPosition()
     signal requestRelativeScroll(point pos)
-    signal hideHomeScreen(bool animate)
-    signal showHomeScreen(bool animate)
-    property Item homeScreen
+    
+    property var taskSwitcher
     property QtObject homeScreenWindow
     property bool homeScreenVisible: true
     property bool taskSwitcherVisible: false

@@ -22,7 +22,7 @@ import org.kde.plasma.phone.taskpanel 1.0 as TaskPanel
 PlasmaCore.ColorScope {
     id: root
     colorGroup: showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-
+    
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : PlasmaCore.ColorScope.backgroundColor
@@ -30,35 +30,28 @@ PlasmaCore.ColorScope {
 
     readonly property bool hasTasks: tasksModel.count > 0
 
-    property QtObject taskSwitcher: taskSwitcherLoader.item ? taskSwitcherLoader.item : null
+    property var taskSwitcher: MobileShell.HomeScreenControls.taskSwitcher
 
-//BEGIN functions
-    function minimizeAll() {
-        for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = tasksModel.makeModelIndex(i);
-            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
-                tasksModel.requestToggleMinimized(idx);
-            }
-        }
+//BEGIN API implementation
+
+    Binding {
+        target: MobileShell.TaskPanelControls
+        property: "isPortrait"
+        value: Screen.width <= Screen.height
+    }
+    Binding {
+        target: MobileShell.TaskPanelControls
+        property: "panelHeight"
+        value: root.height
+    }
+    Binding {
+        target: MobileShell.TaskPanelControls
+        property: "panelWidth"
+        value: root.width
     }
 
-    function restoreAll() {
-        for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = tasksModel.makeModelIndex(i);
-            if (tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
-                tasksModel.requestToggleMinimized(idx);
-            }
-        }
-    }
+//END API implementation
     
-    function triggerHomescreen() {
-        root.minimizeAll();
-        MobileShell.HomeScreenControls.resetHomeScreenPosition();
-        MobileShell.HomeScreenControls.showHomeScreen(true);
-        plasmoid.nativeInterface.allMinimizedChanged();
-    }
-//END functions
-
     Connections {
         target: plasmoid.nativeInterface
         function onAllMinimizedChanged() {
@@ -94,35 +87,44 @@ PlasmaCore.ColorScope {
         });
     }
 
-    // task switcher
-    Loader {
-        id: taskSwitcherLoader
-        sourceComponent: MobileShell.TaskSwitcher {
-            model: tasksModel
-            taskPanelHeight: root.state === "portrait" ? root.height : root.width
-        }
-    }
-
     // bottom navigation panel
     MobileShell.NavigationPanel {
         id: panel
         anchors.fill: parent
-        opacity: (root.taskSwitcher && root.taskSwitcher.visible) ? 0 : 1 // hide bar when task switcher is open
-        
-        backgroundColor: root.showingApp ? root.backgroundColor : "transparent"
-        foregroundColorGroup: root.showingApp ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-        
-        dragGestureEnabled: true
         taskSwitcher: root.taskSwitcher
-            
+        
+        backgroundColor: {
+            if (taskSwitcher.visible) {
+                return Qt.rgba(0, 0, 0, 0.1);
+            } else {
+                return root.showingApp ? root.backgroundColor : "transparent";
+            }
+        }
+        foregroundColorGroup: (!taskSwitcher.visible && root.showingApp) ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        
+        // do not enable drag gesture when task switcher is already open
+        // also don't disable drag gesture mid-drag
+        dragGestureEnabled: !taskSwitcher.visible || taskSwitcher.currentlyDragging
+        
         leftAction: MobileShell.NavigationPanelAction {
-            enabled: hasTasks
+            enabled: hasTasks || taskSwitcher.visible
             iconSource: "mobile-task-switcher"
             iconSizeFactor: 0.75
             
             onTriggered: {
                 plasmoid.nativeInterface.showDesktop = false;
-                taskSwitcher.visible ? taskSwitcher.hide() : taskSwitcher.show(true);
+                
+                if (!taskSwitcher.visible) {
+                    taskSwitcher.show(true);
+                } else {
+                    // when task switcher is open
+                    if (taskSwitcher.wasInActiveTask) {
+                        // restore active window
+                        taskSwitcher.activateWindow(root.currentTaskIndex);
+                    } else {
+                        taskSwitcher.hide();
+                    }
+                }
             }
         }
         
@@ -130,19 +132,30 @@ PlasmaCore.ColorScope {
             enabled: true
             iconSource: "start-here-kde"
             iconSizeFactor: 1
-            onTriggered: root.triggerHomescreen()
+            onTriggered: {
+                MobileShell.HomeScreenControls.openHomeScreen();
+                plasmoid.nativeInterface.allMinimizedChanged();
+            }
         }
         
         rightAction: MobileShell.NavigationPanelAction {
-            enabled: MobileShell.KWinVirtualKeyboard.visible || (plasmoid.nativeInterface.hasCloseableActiveWindow && !taskSwitcher.visible)
+            enabled: MobileShell.KWinVirtualKeyboard.visible || taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
             // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
             iconSizeFactor: MobileShell.KWinVirtualKeyboard.visible ? 1 : 0.75
             iconSource: MobileShell.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
             
             onTriggered: {
                 if (MobileShell.KWinVirtualKeyboard.active) {
+                    // close keyboard if it is open
                     MobileShell.KWinVirtualKeyboard.active = false;
+                } else if (taskSwitcher.visible) { 
+                    
+                    // if task switcher is open, close the current window shown
+                    taskSwitcher.model.requestClose(taskSwitcher.model.index(taskSwitcher.currentTaskIndex, 0));
+                    
                 } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
+                    
+                    // if task switcher is closed, but there is an active window
                     var index = taskSwitcher.model.activeTask;
                     if (index) {
                         taskSwitcher.model.requestClose(index);

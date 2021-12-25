@@ -9,6 +9,7 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Layouts 1.1
 
+import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -29,6 +30,12 @@ FocusScope {
         }
         HomeScreenComponents.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homescreen.homeScreenContents.appletsLayout.cellWidth));
     }
+    
+    function triggerHomeScreen() {
+        taskSwitcher.minimizeAll();
+        MobileShell.HomeScreenControls.resetHomeScreenPosition();
+        taskSwitcher.visible = false; // will trigger homescreen open
+    }
 
 //END functions
 
@@ -37,6 +44,10 @@ FocusScope {
         target: MobileShell.HomeScreenControls
         
         property real lastRequestedPosition: 0
+        
+        function onOpenHomeScreen() {
+            root.triggerHomeScreen();
+        }
         
         function onResetHomeScreenPosition() {
             homescreen.flickablePages.scrollToPage(0);
@@ -55,35 +66,17 @@ FocusScope {
             homescreen.appDrawer.offset -= pos.y;
             lastRequestedPosition = pos.y;
         }
-        
-        function onHideHomeScreen(animate) {
-            if (animate) {
-                opacityAnimation.to = 0;
-                opacityAnimation.restart();
-            } else {
-                homescreen.opacity = 0;
-            }
-        }
-        
-        function onShowHomeScreen(animate) {
-            if (animate) {
-                opacityAnimation.to = 1;
-                opacityAnimation.restart();
-            } else {
-                homescreen.opacity = 1;
-            }
-        }
     }
     
     Plasmoid.onScreenChanged: {
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.homeScreen = root
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+            MobileShell.HomeScreenControls.taskSwitcher = taskSwitcher;
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
     Window.onWindowChanged: {
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window
+            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
 
@@ -101,7 +94,7 @@ FocusScope {
 
         // set API variables
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.homeScreen = root;
+            MobileShell.HomeScreenControls.taskSwitcher = taskSwitcher;
             MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
         componentComplete = true;
@@ -116,6 +109,7 @@ FocusScope {
         homescreen.activate();
     }
     
+    // homescreen component
     HomeScreen {
         id: homescreen
         anchors.fill: parent
@@ -124,6 +118,50 @@ FocusScope {
         NumberAnimation on opacity {
             id: opacityAnimation
             duration: PlasmaCore.Units.longDuration
+        }
+    }
+    
+    // task switcher component
+    TaskManager.TasksModel {
+        id: tasksModel
+        groupMode: TaskManager.TasksModel.GroupDisabled
+
+        screenGeometry: plasmoid.screenGeometry
+        sortMode: TaskManager.TasksModel.SortAlpha
+
+        virtualDesktop: virtualDesktopInfo.currentDesktop
+        activity: activityInfo.currentActivity
+    }
+
+    TaskManager.VirtualDesktopInfo {
+        id: virtualDesktopInfo
+    }
+
+    TaskManager.ActivityInfo {
+        id: activityInfo
+    }
+    
+    MobileShell.TaskSwitcher {
+        id: taskSwitcher
+        model: tasksModel
+
+        anchors.fill: parent
+        
+        // hide homescreen elements to make use of wallpaper
+        onVisibleChanged: {
+            if (visible) {
+                // only animate if going from homescreen
+                if (taskSwitcher.wasInActiveTask) {
+                    opacityAnimation.to = 0;
+                    opacityAnimation.restart();
+                } else {
+                    homescreen.opacity = 0;
+                }
+                
+            } else {
+                opacityAnimation.to = 1;
+                opacityAnimation.restart();
+            }
         }
     }
 }
