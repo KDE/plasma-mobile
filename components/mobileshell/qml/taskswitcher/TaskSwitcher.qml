@@ -262,23 +262,4 @@ Item {
             }
         }
     }
-    
-    // top panel swipe down gesture
-    MouseArea {
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        height: MobileShell.TopPanelControls.panelHeight
-        
-        property int oldMouseY: 0
-        onPositionChanged: {
-            MobileShell.TopPanelControls.requestRelativeScroll(mouse.y - oldMouseY);
-            oldMouseY = mouse.y;
-        }
-        onPressed: {
-            oldMouseY = mouse.y;
-            MobileShell.TopPanelControls.startSwipe();
-        }
-        onReleased: MobileShell.TopPanelControls.endSwipe();
-    }
 }
