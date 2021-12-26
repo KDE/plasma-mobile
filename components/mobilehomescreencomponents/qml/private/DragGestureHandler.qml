@@ -52,19 +52,23 @@ DragHandler {
                 }
 
                 if (__scrollDirection !== DragGestureHandler.Left && __scrollDirection !== DragGestureHandler.Right) {
-                    // if swipe up, scroll app drawer
-                    root.appDrawer.flickable.contentY = Math.min(root.appDrawer.drawerTopMargin, Math.max(0, -translation.y));
                     
-                    if (translation.y < 0 && MobileShell.TopPanelControls.inSwipe) {
-                        MobileShell.TopPanelControls.endSwipe();
-                    }
-                    
-                    // if swipe down, scroll top panel
-                    if (translation.y > 0) {
-                        if (!MobileShell.TopPanelControls.inSwipe) {
-                            MobileShell.TopPanelControls.startSwipe();
+                    // ensure it does not conflict with task switcher
+                    if (!MobileShell.HomeScreenControls.taskSwitcher.visible) {
+                        // if swipe up, scroll app drawer
+                        root.appDrawer.flickable.contentY = Math.min(root.appDrawer.drawerTopMargin, Math.max(0, -translation.y));
+                        
+                        if (translation.y < 0 && MobileShell.TopPanelControls.inSwipe) {
+                            MobileShell.TopPanelControls.endSwipe();
                         }
-                        MobileShell.TopPanelControls.requestRelativeScroll(translation.y - __oldTranslationY);
+                        
+                        // if swipe down, scroll top panel
+                        if (translation.y > 0) {
+                            if (!MobileShell.TopPanelControls.inSwipe) {
+                                MobileShell.TopPanelControls.startSwipe();
+                            }
+                            MobileShell.TopPanelControls.requestRelativeScroll(translation.y - __oldTranslationY);
+                        }
                     }
                 }
             }
