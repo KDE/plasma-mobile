@@ -48,7 +48,7 @@ Item {
     }
 
     // TODO close task switcher when an app opens while it is open, otherwise the navbar becomes glitched
-    // TODO click outside of delegate to close
+    // TODO filter shell windows
     
 //BEGIN functions
 

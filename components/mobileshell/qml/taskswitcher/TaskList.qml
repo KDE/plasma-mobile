@@ -23,6 +23,12 @@ Item {
     
     // taphandler activates even if delegate touched
     TapHandler {
+        onTapped: {
+            // if tapped on the background, then hide
+            if (root.childAt(eventPoint.position.x, eventPoint.position.y) === null) {
+                taskSwitcher.hide();
+            }
+        }
         onPressedChanged: {
             if (pressed) {
                 // ensure animations aren't running when finger is pressed
