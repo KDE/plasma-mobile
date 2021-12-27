@@ -164,19 +164,11 @@ Item {
             taskSwitcherState: root.taskSwitcherState
             
             // the item is effectively anchored to the flickable bounds
-            QQC2.Control {
-                leftPadding: 0
-                rightPadding: 0
-                topPadding: 0
-                bottomPadding: 0
-                
+            TaskList {
+                taskSwitcher: root
                 x: flickable.contentX
                 width: flickable.width
                 height: flickable.height
-                
-                contentItem: TaskList {
-                    taskSwitcher: root
-                }
             }
         }
     }

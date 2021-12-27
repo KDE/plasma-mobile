@@ -10,8 +10,8 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 PlasmaCore.IconItem {
-    implicitWidth: PlasmaCore.Units.iconSizes.medium
-    implicitHeight: PlasmaCore.Units.iconSizes.medium
+    implicitWidth: PlasmaCore.Units.iconSizes.enormous
+    implicitHeight: PlasmaCore.Units.iconSizes.enormous
     usesPlasmaTheme: false
     source: model.decoration
 }

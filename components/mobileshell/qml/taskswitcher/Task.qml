@@ -76,9 +76,13 @@ Item {
         DragHandler {
             id: dragHandler
             target: parent
+            
             yAxis.enabled: true
             xAxis.enabled: false
             yAxis.maximum: 0
+            
+            // y > 0 - dragging down (opening the app)
+            // y < 0 - dragging up (dismissing the app)
             onActiveChanged: {
                 yAnimator.stop();
                 
@@ -194,16 +198,18 @@ Item {
                 contentItem: Item {
                     id: item
                     
+                    // app icon (behind window preview in-case it doesn't load)
+                    TaskIcon {
+                        anchors.centerIn: parent
+                    }
+
+                    // attempt to load window preview
                     Loader {
                         id: pipeWireLoader
                         anchors.fill: parent
                         source: Qt.resolvedUrl("./Thumbnail.qml")
-                        onStatusChanged: {
-                            if (status === Loader.Error) {
-                                source = Qt.resolvedUrl("./TaskIcon.qml");
-                            }
-                        }
                     }
+                    
                     TapHandler {
                         onTapped: delegate.activateApp()
                     }
