@@ -169,21 +169,15 @@ Item {
             }
             
             // app preview
-            QQC2.Control {
+            Rectangle {
                 id: appView
                 Layout.preferredWidth: delegate.previewWidth
                 Layout.preferredHeight: delegate.previewHeight
                 Layout.maximumWidth: delegate.previewWidth
                 Layout.maximumHeight: delegate.previewHeight
                 
-                // prevent thumbnails from "leaking" out of the control
+                color: PlasmaCore.Theme.backgroundColor
                 clip: true
-                
-                leftPadding: 0
-                rightPadding: 0
-                topPadding: 0
-                bottomPadding: 0
-                
                 transform: Scale {
                     origin.x: item.width / 2
                     origin.y: item.height / 2
@@ -191,15 +185,14 @@ Item {
                     yScale: delegate.scale
                 }
                 
-                background: Rectangle {
-                    color: PlasmaCore.Theme.backgroundColor
-                }
-                
-                contentItem: Item {
+                Item {
                     id: item
+                    anchors.fill: parent
                     
                     // app icon (behind window preview in-case it doesn't load)
                     TaskIcon {
+                        // decrease the opacity faster
+                        opacity: delegate.opacity
                         anchors.centerIn: parent
                     }
 
