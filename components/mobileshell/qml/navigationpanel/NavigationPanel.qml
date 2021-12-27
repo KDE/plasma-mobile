@@ -69,20 +69,24 @@ Item {
             }
             
             if (root.dragGestureEnabled) {
-                if (!taskSwitcher.currentlyDragging && Math.abs(startMouseY - oldMouseY) < root.height) {
+                if (!opening && Math.abs(startMouseY - oldMouseY) < root.height) {
                     oldMouseY = mouse.y;
                     return;
                 } else if (mouseArea.pressed) {
-                    taskSwitcher.currentlyDragging = true;
+                    opening = true;
                 }
 
-                // update offsets with drags
-                root.taskSwitcher.oldYOffset = root.taskSwitcher.yOffset;
-                root.taskSwitcher.yOffset = Math.max(0, root.taskSwitcher.yOffset - (mouse.y - oldMouseY));
-                
-                opening = oldMouseY > mouse.y;
+                if (root.taskSwitcher.visible) {
+                    // update task switcher drag
+                    let offsetY = (mouse.y - oldMouseY) * 0.5; // we want to make the gesture take a longer swipe than it being pixel perfect
+                    let offsetX = (mouse.x - oldMouseX) * 0.5;
+                    taskSwitcher.taskSwitcherState.yPosition = Math.max(0, taskSwitcher.taskSwitcherState.yPosition - offsetY);
+                    
+                    // TODO add x swipe
+                    //taskSwitcher.taskSwitcherState.xPosition -= offsetX;
+                }
 
-                if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && root.taskSwitcher.tasksCount) {
+                if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
                     // start task switcher gesture
                     activeButton = null;
                     root.taskSwitcher.show(false);
@@ -98,11 +102,8 @@ Item {
         onReleased: {
             if (activeButton) {
                 activeButton.clicked();
-            }
-
-            if (root.dragGestureEnabled && root.taskSwitcher.currentlyDragging) {
-                root.taskSwitcher.currentlyDragging = false;
-                root.taskSwitcher.snapOffset();
+            } else if (root.dragGestureEnabled && taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
+                taskSwitcher.taskSwitcherState.updateState();
             }
         }
         

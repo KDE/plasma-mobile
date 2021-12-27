@@ -102,9 +102,9 @@ PlasmaCore.ColorScope {
                 taskSwitcher.show(true);
             } else {
                 // when task switcher is open
-                if (taskSwitcher.wasInActiveTask) {
+                if (taskSwitcher.taskSwitcherState.wasInActiveTask) {
                     // restore active window
-                    taskSwitcher.activateWindow(root.currentTaskIndex);
+                    taskSwitcher.activateWindow(taskSwitcher.taskSwitcherState.currentTaskIndex);
                 } else {
                     taskSwitcher.hide();
                 }
@@ -169,7 +169,7 @@ PlasmaCore.ColorScope {
         
         // do not enable drag gesture when task switcher is already open
         // also don't disable drag gesture mid-drag
-        dragGestureEnabled: !taskSwitcher.visible || taskSwitcher.currentlyDragging
+        dragGestureEnabled: !taskSwitcher.visible || taskSwitcher.taskSwitcherState.currentlyBeingOpened
         
         leftAction: taskSwitcherAction
         middleAction: homeAction

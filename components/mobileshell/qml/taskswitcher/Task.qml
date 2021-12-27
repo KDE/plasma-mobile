@@ -2,7 +2,7 @@
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
  *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
+ *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
 import QtQuick 2.15
@@ -22,20 +22,23 @@ Item {
     required property var model
     required property var displaysModel
 
-    readonly property point taskScreenPoint: Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y)
+    readonly property point taskScreenPoint: model ? Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y) : Qt.point(0, 0)
     readonly property real dragOffset: -control.y
     
-    property bool active: model.IsActive
+    property bool active: model ? model.IsActive : false
     
     required property real previewHeight
     required property real previewWidth
+    
+    property bool showHeader: true
+    
     property real scale: 1
     
     opacity: 1 - dragOffset / taskSwitcher.height
     
 //BEGIN functions
     function syncDelegateGeometry() {
-        let pos = pipeWireLoader.mapToItem(tasksView, 0, 0);
+        let pos = pipeWireLoader.mapToItem(delegate, 0, 0);
         if (taskSwitcher.visible) {
             tasksModel.requestPublishDelegateGeometry(tasksModel.index(model.index, 0), Qt.rect(pos.x, pos.y, pipeWireLoader.width, pipeWireLoader.height), pipeWireLoader);
         }
@@ -58,7 +61,7 @@ Item {
             syncDelegateGeometry();
         }
     }
-
+    
     QQC2.Control {
         id: control
         width: parent.width
@@ -113,6 +116,11 @@ Item {
                 Layout.fillHeight: true
                 Layout.minimumHeight: column.height - appView.height
                 spacing: PlasmaCore.Units.smallSpacing * 2
+                opacity: delegate.showHeader ? 1 : 0
+                
+                Behavior on opacity {
+                    NumberAnimation { duration: PlasmaCore.Units.shortDuration }
+                }
                 
                 PlasmaCore.IconItem {
                     Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
@@ -163,6 +171,9 @@ Item {
                 Layout.preferredHeight: delegate.previewHeight
                 Layout.maximumWidth: delegate.previewWidth
                 Layout.maximumHeight: delegate.previewHeight
+                
+                // prevent thumbnails from "leaking" out of the control
+                clip: true
                 
                 leftPadding: 0
                 rightPadding: 0

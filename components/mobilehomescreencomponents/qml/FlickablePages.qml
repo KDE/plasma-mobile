@@ -53,10 +53,12 @@ Flickable {
     onContentXChanged: mainFlickable.currentIndex = Math.floor(contentX / width)
 
     onFooterChanged: {
-        footer.parent = mainFlickable;
-        footer.anchors.left = mainFlickable.left;
-        footer.anchors.bottom = mainFlickable.bottom;
-        footer.anchors.right = mainFlickable.right;
+        if (footer) {
+            footer.parent = mainFlickable;
+            footer.anchors.left = mainFlickable.left;
+            footer.anchors.bottom = mainFlickable.bottom;
+            footer.anchors.right = mainFlickable.right;
+        }
     }
 
     //Autoscroll related functions

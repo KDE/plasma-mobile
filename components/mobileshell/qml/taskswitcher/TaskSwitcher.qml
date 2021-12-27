@@ -2,12 +2,12 @@
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
  *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
+ *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.12
+import QtQuick 2.15
+import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
@@ -15,109 +15,82 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
+import "../components" as Components
+
 Item {
     id: root
     visible: false
+    opacity: 0
     
-    readonly property real taskPanelHeight: MobileShell.TaskPanelControls.panelHeight
-    readonly property real taskPanelWidth: MobileShell.TaskPanelControls.panelWidth
-    readonly property bool isPortrait: MobileShell.TaskPanelControls.isPortrait
+    // state object
+    property var taskSwitcherState: TaskSwitcherState {
+        taskSwitcher: root
+    }
     
-    // dimensions of a window on the screen
-    readonly property real windowHeight: root.height - (root.isPortrait ? root.taskPanelHeight : 0) - MobileShell.TopPanelControls.panelHeight
-    readonly property real windowWidth: root.width - (root.isPortrait ? 0 : root.taskPanelWidth)
-    
-    readonly property int tasksCount: root.model.count
-    readonly property int currentTaskIndex: tasksView.currentIndex
+    // task list model
     property TaskManager.TasksModel model
-    
-    // offset constants
-    readonly property real targetYOffsetDist: root.height - tasksView.height // offset distance to perfect opening
-    readonly property real dismissYOffsetDist: root.height
-    
-    // properties controlled from NavigationPanel (swipe to open gesture)
-    property real oldYOffset: 0
-    property real yOffset: 0
-    
-    // set from NavigationPanel in taskpanel containment
-    property bool wasInActiveTask: false // whether we were in an app before opening the task switcher
-    property bool currentlyDragging: false // whether we are in a swipe up gesture
+    readonly property int tasksCount: model.count
 
     property var displaysModel: MobileShell.DisplaysModel {}
     
-    enum MovementDirection {
-        None = 0,
-        Left,
-        Right
-    }
-    
     onVisibleChanged: MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
-
-    onTasksCountChanged: {
+    
+    property int oldTasksCount: tasksCount
+    onTasksCountChanged: { 
         if (tasksCount == 0) {
             hide();
+        } else if (tasksCount < oldTasksCount && taskSwitcherState.currentTaskIndex >= tasksCount - 1) {
+            // if the user is on the last task, and it is closed, scroll left
+            taskSwitcherState.animateGoToTaskIndex(tasksCount - 1, PlasmaCore.Units.longDuration);
         }
-    }
-    
-    Rectangle {
-        id: backgroundRect
-        anchors.fill: parent
-        color: Qt.rgba(0, 0, 0, 0.6 * (root.wasInActiveTask ? 1 : Math.min(1, root.yOffset / root.targetYOffsetDist)))
         
-        MouseArea {
-            anchors.fill: parent
-            onClicked: root.hide()
-        }
+        oldTasksCount = tasksCount;
     }
 
+    // TODO close task switcher when an app opens while it is open, otherwise the navbar becomes glitched
+    // TODO click outside of delegate to close
+    
 //BEGIN functions
 
     function show(animation) {
-        root.yOffset = 0;
-        root.wasInActiveTask = root.model.activeTask.row >= 0;
+        // reset values
+        taskSwitcherState.cancelAnimations();
+        taskSwitcherState.yPosition = 0;
+        taskSwitcherState.xPosition = 0;
+        taskSwitcherState.wasInActiveTask = root.model.activeTask.row >= 0;
+        taskSwitcherState.currentlyBeingOpened = true;
         
         // skip to first active task
-        if (root.wasInActiveTask) {
-            tasksView.currentIndex = root.model.activeTask.row;
-            tasksView.positionViewAtIndex(root.model.activeTask.row, ListView.SnapPosition);
+        if (taskSwitcherState.wasInActiveTask) {
+            taskSwitcherState.goToTaskIndex(root.model.activeTask.row);
         }
         
-        root.visible = true;
+        // show task switcher, hide all running apps
+        visible = true;
+        opacity = 1;
         minimizeAll();
         
-        // animate app shrink
+        // fully open the panel (if this is a button press, not gesture)
         if (animation) {
-            offsetAnimator.to = root.targetYOffsetDist;
-            offsetAnimator.restart();
+            taskSwitcherState.open();
         }
     }
+    
+    function instantHide() {
+        opacity = 0;
+        visible = false;
+    }
+    
     function hide() {
-        if (!root.visible) return;
-        root.visible = false;
-    }
-
-    function snapOffset() {
-        let movingUp = root.yOffset > root.oldYOffset;
-        
-        if (movingUp || root.yOffset >= root.targetYOffsetDist) { // open task switcher and stay
-            offsetAnimator.to = root.targetYOffsetDist;
-            offsetAnimator.restart();
-        } else { // close task switcher and return to app
-            if (!root.wasInActiveTask) { // if pulled up from homescreen, don't activate app
-                offsetAnimator.activateApp = false;
-            }
-            offsetAnimator.to = 0;
-            offsetAnimator.restart();
-        }
+        closeAnim.restart();
     }
     
     // scroll to delegate index, and activate it
     function activateWindow(id) {
-        offsetAnimator.to = 0;
-        offsetAnimator.restart();
+        taskSwitcherState.openApp(id);
     }
     
-    function setSingleActiveWindow(id, delegate) {
+    function setSingleActiveWindow(id) {
         if (id < 0) {
             return;
         }
@@ -130,14 +103,14 @@ Item {
                 root.model.requestActivate(idx);
             } else if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                 var geo = tasksModel.data(idx, TaskManager.AbstractTasksModel.ScreenGeometry)
-                // Only minimize the other windows in the same screen
+                // only minimize the other windows in the same screen
                 if (geo === newActiveGeo) {
                     tasksModel.requestToggleMinimized(idx);
                 }
             }
         }
         
-        root.visible = false;
+        instantHide();
     }
     
     function minimizeAll() {
@@ -149,40 +122,29 @@ Item {
         }
     }
 
-    function restoreAll() {
-        for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = tasksModel.makeModelIndex(i);
-            if (tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
-                tasksModel.requestToggleMinimized(idx);
-            }
+//END functions
+
+    NumberAnimation on opacity {
+        id: closeAnim
+        to: 0
+        duration: PlasmaCore.Units.shortDuration
+        easing.type: Easing.InOutQuad
+        onFinished: {
+            root.visible = false;
         }
     }
-    
-//END functions
-    
-    // animate app grow and shrink
-    NumberAnimation on yOffset {
-        id: offsetAnimator
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+
+    // background colour
+    Rectangle {
+        id: backgroundRect
+        anchors.fill: parent
         
-        property bool activateApp: true
-        
-        // states of to:
-        // 0 - open/resume app (zoom up the thumbnail)
-        // root.targetYOffsetDist - animate shrinking of thumbnail, to listview (open task switcher)
-        to: 0
-        onFinished: {
-            if (to === 0) { // close task switcher, and switch to current app
-                if (!root.visible) return;
-                root.visible = false;
-                
-                if (activateApp) {
-                    setSingleActiveWindow(root.currentTaskIndex);
-                }
-                activateApp = true;
-            } else if (to == root.dismissYOffsetDist) {
-                root.hide();
+        color: {
+            // animate background colour only if opening from the homescreen
+            if (taskSwitcherState.wasInActiveTask) {
+                return Qt.rgba(0, 0, 0, 0.6);
+            } else {
+                return Qt.rgba(0, 0, 0, 0.6 * Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition));
             }
         }
     }
@@ -192,73 +154,29 @@ Item {
         
         // provide shell margins
         anchors.fill: parent
-        anchors.rightMargin: root.isPortrait ? 0 : root.taskPanelWidth
-        anchors.bottomMargin: root.isPortrait ? root.taskPanelHeight : 0
+        anchors.rightMargin: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
+        anchors.bottomMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
         anchors.topMargin: MobileShell.TopPanelControls.panelHeight
         
-        // applications list
-        ListView {
-            id: tasksView
-            opacity: root.wasInActiveTask ? 1 : Math.min(1, root.yOffset / root.targetYOffsetDist)        
-            anchors.centerIn: parent
+        FlickContainer {
+            id: flickable
+            anchors.fill: parent
+            taskSwitcherState: root.taskSwitcherState
             
-            readonly property real sizeFactor: 0.75
-            readonly property real taskHeaderHeight: PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.smallSpacing * 2
-            
-            width: root.windowWidth * sizeFactor
-            height: root.windowHeight * sizeFactor + taskHeaderHeight
-            
-            model: root.model
-            orientation: ListView.Horizontal
-            
-            highlightRangeMode: ListView.StrictlyEnforceRange // ensures currentIndex is updated
-            snapMode: ListView.SnapToItem
-            
-            spacing: PlasmaCore.Units.largeSpacing
-            displayMarginBeginning: 2 * (width + spacing)
-            displayMarginEnd: 2 * (width + spacing)
-            displaced: Transition {
-                NumberAnimation { properties: "x,y"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
-            }
-            
-            // ensure that window previews are exactly to the scale of the device screen
-            property real scalingFactor: {
-                let candidateHeight = (tasksView.width / root.windowWidth) * root.windowHeight;
-                if (candidateHeight > tasksView.height) {
-                    return tasksView.height / root.windowHeight;
-                } else {
-                    return tasksView.width / root.windowWidth;
+            // the item is effectively anchored to the flickable bounds
+            QQC2.Control {
+                leftPadding: 0
+                rightPadding: 0
+                topPadding: 0
+                bottomPadding: 0
+                
+                x: flickable.contentX
+                width: flickable.width
+                height: flickable.height
+                
+                contentItem: TaskList {
+                    taskSwitcher: root
                 }
-            }
-            
-            delegate: Task {
-                id: task
-                property int curIndex: model.index
-                z: root.currentTaskIndex === curIndex ? 1 : 0
-                width: tasksView.width
-                height: tasksView.height
-                
-                taskSwitcher: root
-                displaysModel: root.displaysModel
-                
-                // account for header offset (center the preview)
-                y: -tasksView.taskHeaderHeight / 2
-                
-                // scale gesture
-                scale: {
-                    let maxScale = 1 / tasksView.scalingFactor;
-                    let subtract = (maxScale - 1) * (root.yOffset / root.targetYOffsetDist);
-                    let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
-                    
-                    if ((root.wasInActiveTask || !taskSwitcher.currentlyDragging) && root.currentTaskIndex === task.curIndex) {
-                        return finalScale;
-                    }
-                    return 1;
-                }
-                
-                // ensure that window previews are exactly to the scale of the device screen
-                previewWidth: tasksView.scalingFactor * root.windowWidth
-                previewHeight: tasksView.scalingFactor * root.windowHeight
             }
         }
     }
