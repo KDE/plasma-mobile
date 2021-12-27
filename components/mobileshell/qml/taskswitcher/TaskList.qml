@@ -21,6 +21,13 @@ Item {
     
     opacity: taskSwitcherState.wasInActiveTask ? 1 : Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition)
     
+    transform: Scale {
+        origin.x: root.width / 2
+        origin.y: root.height / 2
+        xScale: taskSwitcherState.currentScale
+        yScale: taskSwitcherState.currentScale
+    }
+    
     // taphandler activates even if delegate touched
     TapHandler {
         onTapped: {
@@ -76,7 +83,7 @@ Item {
             // ensure current task is above others
             z: taskSwitcherState.currentTaskIndex === currentIndex ? 1 : 0
             
-            showHeader: currentIndex !== taskSwitcherState.currentTaskIndex || !taskSwitcherState.currentlyBeingOpened
+            showHeader: !taskSwitcherState.currentlyBeingOpened
             
             width: taskSwitcherState.taskWidth
             height: taskSwitcherState.taskHeight
@@ -85,13 +92,6 @@ Item {
             
             taskSwitcher: root.taskSwitcher
             displaysModel: root.taskSwitcher.displaysModel
-            
-            scale: {
-                if (taskSwitcherState.currentTaskIndex == currentIndex) {
-                    return taskSwitcherState.currentScale;
-                }
-                return 1;
-            }
         }
     }
 }

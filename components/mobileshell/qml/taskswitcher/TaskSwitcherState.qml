@@ -167,9 +167,11 @@ QtObject {
         }
         
         // update horizontal state
-        if (!currentlyBeingOpened) {
+        let duration = PlasmaCore.Units.longDuration * 2;
+        if (currentlyBeingOpened) {
+            animateGoToTaskIndex(currentTaskIndex, duration);
+        } else {
             let currentTaskIndexPosition = xPositionFromTaskIndex(currentTaskIndex);
-            let duration = PlasmaCore.Units.longDuration * 2;
             if (xPosition < currentTaskIndexPosition) {
                 if (movingRight) {
                     animateGoToTaskIndex(currentTaskIndex, duration);
@@ -198,8 +200,8 @@ QtObject {
         target: root
         property: "yPosition"
         to: openedYPosition 
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+        duration: PlasmaCore.Units.longDuration * 2
+        easing.type: Easing.OutBack
         
         onFinished: {
             root.currentlyBeingOpened = false;

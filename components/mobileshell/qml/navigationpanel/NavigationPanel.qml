@@ -79,11 +79,9 @@ Item {
                 if (root.taskSwitcher.visible) {
                     // update task switcher drag
                     let offsetY = (mouse.y - oldMouseY) * 0.5; // we want to make the gesture take a longer swipe than it being pixel perfect
-                    let offsetX = (mouse.x - oldMouseX) * 0.5;
+                    let offsetX = (mouse.x - oldMouseX) * 0.7; // we want to make the gesture not too hard to swipe, but not too easy
                     taskSwitcher.taskSwitcherState.yPosition = Math.max(0, taskSwitcher.taskSwitcherState.yPosition - offsetY);
-                    
-                    // TODO add x swipe
-                    //taskSwitcher.taskSwitcherState.xPosition -= offsetX;
+                    taskSwitcher.taskSwitcherState.xPosition -= offsetX;
                 }
 
                 if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {

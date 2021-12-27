@@ -22,17 +22,13 @@ Item {
     required property var model
     required property var displaysModel
 
-    readonly property point taskScreenPoint: model ? Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y) : Qt.point(0, 0)
-    readonly property real dragOffset: -control.y
-    
-    property bool active: model ? model.IsActive : false
-    
     required property real previewHeight
     required property real previewWidth
     
-    property bool showHeader: true
+    readonly property point taskScreenPoint: model ? Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y) : Qt.point(0, 0)
+    readonly property real dragOffset: -control.y
     
-    property real scale: 1
+    property bool showHeader: true
     
     opacity: 1 - dragOffset / taskSwitcher.height
     
@@ -178,12 +174,6 @@ Item {
                 
                 color: PlasmaCore.Theme.backgroundColor
                 clip: true
-                transform: Scale {
-                    origin.x: item.width / 2
-                    origin.y: item.height / 2
-                    xScale: delegate.scale
-                    yScale: delegate.scale
-                }
                 
                 Item {
                     id: item
