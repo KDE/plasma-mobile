@@ -36,7 +36,12 @@ PlasmaCore.ColorScope {
     // fullscreen background
     Rectangle {
         anchors.fill: parent
-        color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, PlasmaCore.Theme.backgroundColor.g, PlasmaCore.Theme.backgroundColor.b, 0.95)
+        // darken if there are notifications
+        color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
+                       PlasmaCore.Theme.backgroundColor.g, 
+                       PlasmaCore.Theme.backgroundColor.b, 
+                       notificationWidget.hasNotifications ? 0.95 : 0.7)
+        Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
     
@@ -72,6 +77,7 @@ PlasmaCore.ColorScope {
     }
     
     Widgets.NotificationsWidget {
+        id: notificationWidget
         anchors {
             top: quickSettings.top
             topMargin: quickSettings.height + translate.y

@@ -31,6 +31,8 @@ Item {
     property var historyModel: MobileShell.NotificationProvider.historyModel
     property var notificationSettings: MobileShell.NotificationProvider.notificationSettings
     
+    readonly property bool hasNotifications: list.count > 0
+    
     function clearHistory() {
         historyModel.clear(NotificationManager.Notifications.ClearExpired);
     }
