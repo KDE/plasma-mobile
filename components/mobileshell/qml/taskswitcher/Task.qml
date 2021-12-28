@@ -25,10 +25,11 @@ Item {
     required property real previewHeight
     required property real previewWidth
     
-    readonly property point taskScreenPoint: model ? Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y) : Qt.point(0, 0)
+    readonly property point taskScreenPoint: (model && model.ScreenGeometry) ? Qt.point(model.ScreenGeometry.x, model.ScreenGeometry.y) : Qt.point(0, 0)
     readonly property real dragOffset: -control.y
     
     property bool showHeader: true
+    property real darken: 0
     
     opacity: 1 - dragOffset / taskSwitcher.height
     
@@ -58,15 +59,10 @@ Item {
         }
     }
     
-    QQC2.Control {
+    Item {
         id: control
         width: parent.width
         height: parent.height
-        
-        leftPadding: 0
-        rightPadding: 0
-        topPadding: 0
-        bottomPadding: 0
         
         // drag up gesture
         DragHandler {
@@ -105,8 +101,9 @@ Item {
         }
 
         // application
-        contentItem: ColumnLayout {
+        ColumnLayout {
             id: column
+            anchors.fill: parent
             spacing: 0
             
             // header
@@ -191,6 +188,13 @@ Item {
                         id: pipeWireLoader
                         anchors.fill: parent
                         source: Qt.resolvedUrl("./Thumbnail.qml")
+                    }
+                    
+                    // darken effect
+                    Rectangle {
+                        anchors.fill: parent
+                        color: "black"
+                        opacity: delegate.darken
                     }
                     
                     TapHandler {

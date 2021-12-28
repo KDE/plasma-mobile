@@ -83,7 +83,15 @@ Item {
             // ensure current task is above others
             z: taskSwitcherState.currentTaskIndex === currentIndex ? 1 : 0
             
+            // only show header once task switcher is opened
             showHeader: !taskSwitcherState.currentlyBeingOpened
+            
+            // darken effect as task gets away from the centre of the screen
+            darken: {
+                let distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherState.taskWidth;
+                let upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;
+                return Math.max(0, upperBoundAdjust);
+            }
             
             width: taskSwitcherState.taskWidth
             height: taskSwitcherState.taskHeight
