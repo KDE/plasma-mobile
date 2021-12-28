@@ -47,9 +47,6 @@ Item {
         oldTasksCount = tasksCount;
     }
 
-    // TODO close task switcher when an app opens while it is open, otherwise the navbar becomes glitched
-    // TODO filter shell windows
-    
 //BEGIN functions
 
     function show(animation) {
