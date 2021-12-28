@@ -17,6 +17,10 @@ MouseArea {
     property int oldMouseY: 0
 
     function startSwipe() {
+        if (actionDrawer.visible) {
+            // ensure the action drawer state is consistent
+            actionDrawer.closeImmediately();
+        }
         actionDrawer.cancelAnimations();
         actionDrawer.dragging = true;
         actionDrawer.opened = false;
