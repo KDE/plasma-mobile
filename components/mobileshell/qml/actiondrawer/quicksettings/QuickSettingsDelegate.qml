@@ -51,7 +51,6 @@ Components.BaseItem {
                 iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
                 Math.min(iconItem.width, iconItem.height))
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
-            root.closeRequested();
         }
     }
     
