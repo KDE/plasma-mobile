@@ -22,9 +22,7 @@ Item {
     id: root
     
     readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible
-    readonly property color backgroundColor: NanoShell.StartupFeedback.visible 
-                                             ? NanoShell.StartupFeedback.backgroundColor 
-                                             : topPanel.colorScopeColor
+    readonly property color backgroundColor: topPanel.colorScopeColor
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
     

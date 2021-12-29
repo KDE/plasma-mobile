@@ -10,6 +10,9 @@ import QtQuick.Window 2.2
 
 pragma Singleton
 
+/**
+ * Provides access to the homescreen plasmoid containment within the shell.
+ */
 QtObject {
     id: delegate
 
@@ -17,6 +20,8 @@ QtObject {
     signal resetHomeScreenPosition()
     signal snapHomeScreenPosition()
     signal requestRelativeScroll(point pos)
+    
+    signal openAppAnimation(string splashIcon, string title, real x, real y, real sourceIconSize)
     
     property var taskSwitcher
     property QtObject homeScreenWindow

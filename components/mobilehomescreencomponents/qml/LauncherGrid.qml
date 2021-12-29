@@ -15,6 +15,7 @@ import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
@@ -55,7 +56,7 @@ LauncherContainer {
             }
             onLaunch: (x, y, icon, title) => {
                 if (icon !== "") {
-                    NanoShell.StartupFeedback.open(
+                    MobileShell.HomeScreenControls.openAppAnimation(
                             icon,
                             title,
                             delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

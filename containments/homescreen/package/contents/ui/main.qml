@@ -66,6 +66,10 @@ FocusScope {
             homescreen.appDrawer.offset -= pos.y;
             lastRequestedPosition = pos.y;
         }
+        
+        function onOpenAppAnimation(splashIcon, title, x, y, sourceIconSize) {
+            startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
+        }
     }
     
     Plasmoid.onScreenChanged: {
@@ -150,6 +154,8 @@ FocusScope {
         // hide homescreen elements to make use of wallpaper
         onVisibleChanged: {
             if (visible) {
+                startupFeedback.visible = false;
+                
                 // only animate if going from homescreen
                 if (taskSwitcher.wasInActiveTask) {
                     opacityAnimation.to = 0;
@@ -163,6 +169,12 @@ FocusScope {
                 opacityAnimation.restart();
             }
         }
+    }
+    
+    // start app animation
+    MobileShell.StartupFeedback {
+        id: startupFeedback
+        anchors.fill: parent
     }
 }
 

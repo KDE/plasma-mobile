@@ -9,6 +9,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 pragma Singleton
 
+/**
+ * Provides access to the panel plasmoid containment within the shell.
+ */
 QtObject {
     id: root
     

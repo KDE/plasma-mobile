@@ -152,7 +152,7 @@ QtObject {
 
     property SinkModel paSinkModel: SinkModel {}
 
-    property VolumeOSD osd: VolumeOSD {
+    property var osd: VolumeOSD {
         volume: volumeValue
     }
 

@@ -10,7 +10,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 pragma Singleton
 
 /**
- * Properties exposed by the taskpanel containment.
+ * Provides access to the taskpanel plasmoid containment within the shell.
  */
 QtObject {
     id: root

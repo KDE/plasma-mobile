@@ -17,6 +17,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -170,7 +171,7 @@ NanoShell.FullScreenOverlay {
                             
                             onClicked: {
                                 let coords = mapToItem(flickable, 0, 0);
-                                NanoShell.StartupFeedback.open("audio-volume-high", i18n("Audio Settings"), coords.x, coords.y, PlasmaCore.Units.iconSizes.medium);
+                                MobileShell.HomeScreenControls.openAppAnimation("audio-volume-high", i18n("Audio Settings"), coords.x, coords.y, PlasmaCore.Units.iconSizes.medium);
                                 plasmoid.nativeInterface.executeCommand("plasma-open-settings kcm_pulseaudio");
                             }
                         }

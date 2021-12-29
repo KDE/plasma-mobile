@@ -76,6 +76,10 @@ Item {
                         enabled: modelData.enabled
                         settingsCommand: modelData.settingsCommand
                         toggleFunction: modelData.toggle
+                        
+                        onCloseRequested: {
+                            actionDrawer.close();
+                        }
                     }
                 }
             }
@@ -122,6 +126,10 @@ Item {
                     enabled: modelData.enabled
                     settingsCommand: modelData.settingsCommand
                     toggleFunction: modelData.toggle
+                    
+                    onCloseRequested: {
+                        actionDrawer.close();
+                    }
                 }
             }
         }

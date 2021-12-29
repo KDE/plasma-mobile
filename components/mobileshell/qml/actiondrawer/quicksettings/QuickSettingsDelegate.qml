@@ -28,6 +28,8 @@ Components.BaseItem {
     required property string settingsCommand
     required property var toggleFunction
     
+    signal closeRequested()
+    
     // set by children
     property var iconItem
     
@@ -44,7 +46,8 @@ Components.BaseItem {
         } else if (root.toggleFunction) {
             root.toggleFunction();
         } else if (root.settingsCommand) {
-            NanoShell.StartupFeedback.open(
+            closeRequested();
+            MobileShell.HomeScreenControls.openAppAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
@@ -56,13 +59,13 @@ Components.BaseItem {
     
     function delegatePressAndHold() {
         if (root.settingsCommand) {
-            NanoShell.StartupFeedback.open(
+            closeRequested();
+            MobileShell.HomeScreenControls.openAppAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
                 iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
                 Math.min(iconItem.width, iconItem.height))
-            closeRequested();
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
         } else if (root.toggleFunction) {
             root.toggleFunction();

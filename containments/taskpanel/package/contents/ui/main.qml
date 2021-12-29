@@ -25,7 +25,7 @@ PlasmaCore.ColorScope {
     
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    readonly property color backgroundColor: NanoShell.StartupFeedback.visible ? NanoShell.StartupFeedback.backgroundColor : PlasmaCore.ColorScope.backgroundColor
+    readonly property color backgroundColor: PlasmaCore.ColorScope.backgroundColor
     readonly property bool showingApp: !plasmoid.nativeInterface.allMinimized
 
     readonly property bool hasTasks: tasksModel.count > 0
