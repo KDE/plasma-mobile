@@ -8,6 +8,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.15
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.1 as PlasmaCore
@@ -33,10 +34,20 @@ Item {
 
     property var displaysModel: MobileShell.DisplaysModel {}
     
+    // if a window has popped up in front, close the task switcher
+    property bool windowActive: Window.active
+    onWindowActiveChanged: {
+        if (visible && !windowActive) {
+            hide();
+        }
+    }
+    
+    // update API property
     onVisibleChanged: MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
     
+    // keep track of task list events
     property int oldTasksCount: tasksCount
-    onTasksCountChanged: { 
+    onTasksCountChanged: {
         if (tasksCount == 0) {
             hide();
         } else if (tasksCount < oldTasksCount && taskSwitcherState.currentTaskIndex >= tasksCount - 1) {
