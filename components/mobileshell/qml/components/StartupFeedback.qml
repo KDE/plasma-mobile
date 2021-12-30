@@ -19,7 +19,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 /**
  * Component that animates an app opening from a location.
  */
-Item {
+MouseArea { // use mousearea to ensure clicks don't go behind
     id: root
     visible: false
 
