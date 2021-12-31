@@ -42,7 +42,11 @@ Item {
     property alias appDrawer: appDrawerLoader.item
     property alias homeScreenContents: contents
     
-    Component.onCompleted: homeScreenState.goToPageIndex(0)
+    Component.onCompleted: {
+        // ensure that homescreen is on first page
+        homeScreenState.goToPageIndex(0);
+        homeScreenState.resetSwipeState();
+    }
     
     // the parent of the homescreen is a flickable that captures all flicks
     FlickContainer {

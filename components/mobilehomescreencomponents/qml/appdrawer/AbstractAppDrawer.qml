@@ -119,8 +119,9 @@ Item {
             }
             
             // actual drawer
-            Controls.Control {
-                id: drawerFlickable
+            MobileShell.BaseItem {
+                visible: root.openFactor > 0 // prevent handlers from picking up events
+                
                 Layout.fillWidth: true
                 Layout.preferredHeight: root.height
                 leftPadding: root.leftPadding; topPadding: root.topPadding

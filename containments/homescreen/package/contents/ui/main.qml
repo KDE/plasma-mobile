@@ -50,7 +50,7 @@ FocusScope {
         }
         
         function onResetHomeScreenPosition() {
-            homescreen.homeScreenState.goToPageIndex(0);
+            homescreen.homeScreenState.animateGoToPageIndex(0, PlasmaCore.Units.longDuration);
             homescreen.homeScreenState.closeAppDrawer();
         }
         
