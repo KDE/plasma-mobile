@@ -113,7 +113,6 @@ Repeater {
                         delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
                         Math.min(delegate.iconItem.width, delegate.iconItem.height));
             }
-            root.launched();
         }
         onParentFromLocationChanged: {
             if (!launcherDragManager.active && parent != parentFromLocation) {
