@@ -13,6 +13,7 @@ ActionDrawerOpenSurface 1.0 actiondrawer/ActionDrawerOpenSurface.qml
 BaseItem 1.0 components/BaseItem.qml
 Direction 1.0 components/Direction.qml
 StartupFeedback 1.0 components/StartupFeedback.qml
+VelocityCalculator 1.0 components/VelocityCalculator.qml
 
 # /dataproviders
 singleton BatteryProvider 1.0 dataproviders/BatteryProvider.qml

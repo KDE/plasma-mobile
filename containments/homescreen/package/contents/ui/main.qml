@@ -28,7 +28,7 @@ FocusScope {
         if (!componentComplete) {
             return;
         }
-        HomeScreenComponents.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homescreen.homeScreenContents.appletsLayout.cellWidth));
+        HomeScreenComponents.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homescreen.homeScreenContents.favoriteStrip.cellWidth));
     }
     
     function triggerHomeScreen() {
@@ -50,21 +50,22 @@ FocusScope {
         }
         
         function onResetHomeScreenPosition() {
-            homescreen.flickablePages.scrollToPage(0);
-            homescreen.appDrawer.close();
+            homescreen.homeScreenState.goToPageIndex(0);
+            homescreen.homeScreenState.closeAppDrawer();
         }
         
         function onSnapHomeScreenPosition() {
             if (lastRequestedPosition < 0) {
-                homescreen.appDrawer.open();
+                homescreen.homeScreenState.openAppDrawer();
             } else {
-                homescreen.appDrawer.close();
+                homescreen.homeScreenState.closeAppDrawer();
             }
         }
         
         function onRequestRelativeScroll(pos) {
-            homescreen.appDrawer.offset -= pos.y;
-            lastRequestedPosition = pos.y;
+            // TODO
+            //homescreen.appDrawer.offset -= pos.y;
+            //lastRequestedPosition = pos.y;
         }
         
         function onOpenAppAnimation(splashIcon, title, x, y, sourceIconSize) {
@@ -110,14 +111,29 @@ FocusScope {
     
     Plasmoid.onActivated: {
         console.log("Triggered!", plasmoid.nativeInterface.showingDesktop)
-        homescreen.activate();
+        
+        // there's a couple of steps:
+        // - minimize windows
+        // - open app drawer
+        // - restore windows
+        if (!plasmoid.nativeInterface.showingDesktop) {
+            plasmoid.nativeInterface.showingDesktop = true;
+        } else if (homescreen.homeScreenState.currentView === MobileShell.HomeScreenState.PageView) {
+            homescreen.homeScreenState.openAppDrawer()
+        } else {
+            plasmoid.nativeInterface.showingDesktop = false
+            homescreen.homeScreenState.closeAppDrawer()
+        }
     }
     
     // homescreen component
-    HomeScreen {
+    HomeScreenComponents.HomeScreen {
         id: homescreen
         anchors.fill: parent
-     
+        
+        // make the homescreen not interactable when task switcher or startup feedback is on
+        interactive: !taskSwitcher.visible && !startupFeedback.visible
+        
         opacity: 1
         NumberAnimation on opacity {
             id: opacityAnimation

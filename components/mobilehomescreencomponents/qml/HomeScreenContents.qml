@@ -24,10 +24,9 @@ import "private" as Private
 
 DragDrop.DropArea {
     id: dropArea
-    width: mainFlickable.width * 100
-    //width: Math.max(mainFlickable.width, mainFlickable.width * Math.ceil(appletsLayout.childrenRect.width/mainFlickable.width))
-    height: mainFlickable.height
-
+    
+    required property var homeScreenState
+    
     property alias launcherDelegate: launcherRepeater.delegate
     property alias launcherModel: launcherRepeater.model
     property alias launcherRepeater: launcherRepeater
@@ -36,6 +35,7 @@ DragDrop.DropArea {
     property alias appletsLayout: appletsLayout
 
     property FavoriteStrip favoriteStrip
+    property HomeScreenPages homeScreenPages
 
     property LauncherDragManager launcherDragManager: LauncherDragManager {
         id: launcherDragManager
@@ -48,7 +48,7 @@ DragDrop.DropArea {
         }
         anchors.fill: parent
         z: 999999
-        appletsLayout: homeScreenContents.appletsLayout
+        appletsLayout: dropArea.appletsLayout
         favoriteStrip: dropArea.favoriteStrip
     }
 
@@ -63,6 +63,7 @@ DragDrop.DropArea {
         event.accept(event.proposedAction);
         launcherDragManager.active = true;
     }
+    
     onDragMove: {
         let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
         if (posInFavorites.y > 0) {
@@ -84,13 +85,13 @@ DragDrop.DropArea {
             let scenePos = mapToItem(null, event.x, event.y);
             //SCROLL LEFT
             if (scenePos.x < PlasmaCore.Units.gridUnit) {
-                mainFlickable.scrollLeft();
+                homeScreenPages.scrollLeft();
             //SCROLL RIGHT
-            } else if (scenePos.x > mainFlickable.width - PlasmaCore.Units.gridUnit) {
-                mainFlickable.scrollRight();
+            } else if (scenePos.x > homeScreenPages.width - PlasmaCore.Units.gridUnit) {
+                homeScreenPages.scrollRight();
             //DON't SCROLL
             } else {
-                mainFlickable.stopScroll();
+                homeScreenPages.stopScroll();
             }
         }
     }
@@ -159,15 +160,20 @@ DragDrop.DropArea {
         signal appletsLayoutInteracted
 
         TapHandler {
-            target: mainFlickable
-            enabled: appDrawer.status !== AbstractAppDrawer.Status.Open
+            target: homeScreenPages
+            enabled: homeScreenState.currentView === HomeScreenState.PageView
             onTapped: {
                 //Hides icons close button
                 appletsLayout.appletsLayoutInteracted();
                 appletsLayout.editMode = false;
                 appletsLayout.forceActiveFocus();
             }
-            onLongPressed: appletsLayout.editMode = true;
+            onLongPressed: {
+                if (homeScreenState.currentSwipeState === HomeScreenState.DeterminingType) {
+                    // only go into edit mode when not in a swipe
+                    appletsLayout.editMode = true;
+                }
+            }
             onPressedChanged: appletsLayout.focus = true;
         }
 
@@ -200,20 +206,21 @@ DragDrop.DropArea {
         placeHolder: ContainmentLayoutManager.PlaceHolder {}
         //FIXME: move
         PlasmaComponents.Label {
-                id: metrics
-                text: "M\nM"
-                visible: false
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
-            }
+            id: metrics
+            text: "M\nM"
+            visible: false
+            font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
+        }
         LauncherRepeater {
             id: launcherRepeater
+            homeScreenState: dropArea.homeScreenState
             cellWidth: appletsLayout.cellWidth
             cellHeight: appletsLayout.cellHeight
             appletsLayout: appletsLayout
             favoriteStrip: dropArea.favoriteStrip
-            onScrollLeftRequested: mainFlickable.scrollLeft()
-            onScrollRightRequested: mainFlickable.scrollRight()
-            onStopScrollRequested: mainFlickable.stopScroll()
+            onScrollLeftRequested: homeScreenPages.scrollLeft()
+            onScrollRightRequested: homeScreenPages.scrollRight()
+            onStopScrollRequested: homeScreenPages.stopScroll()
         }
     }
 }

@@ -6,18 +6,23 @@ module org.kde.plasma.private.mobilehomescreencomponents
 
 plugin mobilehomescreencomponentsplugin
 
-AbstractAppDrawer 0.1 AbstractAppDrawer.qml
-GridViewAppDrawer 0.1 GridViewAppDrawer.qml
-ListViewAppDrawer 0.1 ListViewAppDrawer.qml
-DrawerListDelegate 0.1 DrawerListDelegate.qml
-DrawerGridDelegate 0.1 DrawerGridDelegate.qml
+AbstractAppDrawer 0.1 appdrawer/AbstractAppDrawer.qml
+AppDrawerHeader 0.1 appdrawer/AppDrawerHeader.qml
+AppDrawerLoader 0.1 appdrawer/AppDrawerLoader.qml
+DrawerGridDelegate 0.1 appdrawer/DrawerGridDelegate.qml
+DrawerListDelegate 0.1 appdrawer/DrawerListDelegate.qml
+GridViewAppDrawer 0.1 appdrawer/GridViewAppDrawer.qml
+ListViewAppDrawer 0.1 appdrawer/ListViewAppDrawer.qml
+
 FavoriteStrip 0.1 FavoriteStrip.qml
-FlickablePages 0.1 FlickablePages.qml
+FlickContainer 0.1 FlickContainer.qml
 HomeDelegate 0.1 HomeDelegate.qml
+HomeScreen 0.1 HomeScreen.qml
 HomeScreenContents 0.1 HomeScreenContents.qml
+HomeScreenPages 0.1 HomeScreenPages.qml
+HomeScreenState 0.1 HomeScreenState.qml
 LauncherContainer 0.1 LauncherContainer.qml
 LauncherDragManager 0.1 LauncherDragManager.qml
 LauncherGrid 0.1 LauncherGrid.qml
 LauncherRepeater 0.1 LauncherRepeater.qml
 MobileAppletContainer 0.1 MobileAppletContainer.qml
-

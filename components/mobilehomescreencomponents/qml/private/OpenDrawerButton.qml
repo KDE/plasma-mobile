@@ -22,6 +22,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 MouseArea {
     id: arrowUpIcon
     z: 9
+    
     property Flickable flickable
     property real factor: 0
 
@@ -32,7 +33,6 @@ MouseArea {
     
     onClicked: {
         openRequested();
-        scrollAnim.restart();
     }
 
     Item {

@@ -1,5 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
+ *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -23,23 +24,15 @@ import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenCompon
 
 Flickable {
     id: mainFlickable
-
-    property AbstractAppDrawer appDrawer
-
-    readonly property int totalPages: Math.ceil(contentWidth / width)
-    property int currentIndex: 0
-
-    property ContainmentLayoutManager.AppletsLayout appletsLayout: null
+    
+    required property var homeScreenState
+    
     property Item footer
 
-    property alias dragGestureEnabled: gestureHandler.enabled
-    opacity: appDrawer ? 1 - appDrawer.openFactor : 1
-    transform: Translate {
-        y: appDrawer ? (-mainFlickable.height / 20) * appDrawer.openFactor : 0
-    }
-    clip: true
-
     property bool showAddPageIndicator: false
+
+    contentX: homeScreenState.xPosition
+    
     contentHeight: height
     interactive: false
 
@@ -48,9 +41,6 @@ Flickable {
     onDragEnded: cancelEditModeForItemsRequested()
     onFlickStarted: cancelEditModeForItemsRequested()
     onFlickEnded: cancelEditModeForItemsRequested()
-
-    //onCurrentIndexChanged: contentX = width * currentIndex;
-    onContentXChanged: mainFlickable.currentIndex = Math.floor(contentX / width)
 
     onFooterChanged: {
         if (footer) {
@@ -61,7 +51,7 @@ Flickable {
         }
     }
 
-    //Autoscroll related functions
+    // autoscroll between pages (when holding a delegate to go to a new page)
     function scrollLeft() {
         if (mainFlickable.atXBeginning) {
             return;
@@ -88,63 +78,16 @@ Flickable {
         scrollRightIndicator.opacity = 0;
     }
 
-    function snapPage() {
-        scrollAnim.running = false;
-        scrollAnim.to = mainFlickable.width * Math.round(mainFlickable.contentX / mainFlickable.width)
-        scrollAnim.running = true;
-    }
-
-    function snapNextPage() {
-        scrollAnim.running = false;
-        scrollAnim.to = mainFlickable.width * Math.ceil(mainFlickable.contentX / mainFlickable.width)
-        scrollAnim.running = true;
-    }
-
-    function snapPrevPage() {
-        scrollAnim.running = false;
-        scrollAnim.to = mainFlickable.width * Math.floor(mainFlickable.contentX / mainFlickable.width)
-        scrollAnim.running = true;
-    }
-    function scrollToPage(index) {
-        scrollAnim.running = false;
-        scrollAnim.to = mainFlickable.width * Math.max(0, Math.min(index, mainFlickable.contentWidth - mainFlickable.width))
-        scrollAnim.running = true;
-    }
-
     Timer {
         id: autoScrollTimer
         property bool scrollRight: true
         repeat: true
         interval: 1500
         onTriggered: {
-            scrollAnim.to = scrollRight ?
-            //Scroll Right
-                Math.min(mainFlickable.contentItem.width - mainFlickable.width, mainFlickable.contentX + mainFlickable.width) :
-            //Scroll Left
-                Math.max(0, mainFlickable.contentX - mainFlickable.width);
-
-            scrollAnim.running = true;
+            homeScreenState.animateGoToPageIndex(Math.max(0, homeScreenState.currentPageIndex + (scrollRight ? 1 : -1)), PlasmaCore.Units.longDuration * 2);
         }
     }
-
-    Private.DragGestureHandler {
-        id: gestureHandler
-        target: appletsLayout
-        appDrawer: mainFlickable.appDrawer
-        mainFlickable: mainFlickable
-        onSnapPage: mainFlickable.snapPage();
-        onSnapNextPage: mainFlickable.snapNextPage();
-        onSnapPrevPage: mainFlickable.snapPrevPage();
-    }
-
-    NumberAnimation {
-        id: scrollAnim
-        target: mainFlickable
-        properties: "contentX"
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
-    }
-
+    
     PlasmaComponents.PageIndicator {
         id: pageIndicator
         anchors {
@@ -152,12 +95,16 @@ Flickable {
             horizontalCenter: parent.horizontalCenter
             bottomMargin: mainFlickable.footer ? mainFlickable.footer.height : 0
         }
+        
         PlasmaCore.ColorScope.inherit: false
         PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        
         parent: mainFlickable
-        count: mainFlickable.totalPages
         visible: count > 1
-        currentIndex: Math.round(mainFlickable.contentX / mainFlickable.width)
+        
+        count: homeScreenState.pagesCount
+        currentIndex: homeScreenState.currentPageIndex
+        
         delegate: Rectangle {
             property bool isAddPageIndicator: index === pageIndicator.count-1 && mainFlickable.showAddPageIndicator
             implicitWidth: PlasmaCore.Units.gridUnit/2
@@ -166,14 +113,13 @@ Flickable {
             radius: width
             color: isAddPageIndicator ? "transparent" : PlasmaCore.ColorScope.textColor
 
-
             PlasmaComponents.Label {
                 anchors.centerIn: parent
                 visible: parent.isAddPageIndicator
                 text: "⊕"
             }
 
-            opacity: index === currentIndex ? 0.9 : pressed ? 0.7 : 0.5
+            opacity: index === pageIndicator.currentIndex ? 0.9 : pressed ? 0.7 : 0.5
             Behavior on opacity {
                 OpacityAnimator {
                     duration: PlasmaCore.Units.longDuration

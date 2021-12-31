@@ -23,6 +23,8 @@ import "private" as Private
 ContainmentLayoutManager.ItemContainer {
     id: delegate
 
+    property var homeScreenState
+    
     z: dragActive ? 1 : 0
 
     property var modelData: typeof model !== "undefined" ? model : null
@@ -64,11 +66,11 @@ ContainmentLayoutManager.ItemContainer {
         }
     }
     Connections {
-        target: mainFlickable
+        target: homeScreenState
         function onCancelEditModeForItemsRequested() {
             cancelEdit()
         }
-        function onContentYChanged() {
+        function onXPositionChanged() {
             syncDelegateGeometry()
         }
     }

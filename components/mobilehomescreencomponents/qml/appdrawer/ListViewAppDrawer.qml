@@ -20,56 +20,28 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
-import "private"
+import "../private"
 
 AbstractAppDrawer {
     id: root
     
-    contentItem: GridView {
-        id: gridView
+    contentItem: ListView {
+        id: listView
         clip: true
+        reuseItems: true
+        cacheBuffer: model.count * delegateHeight // delegate height
         
-        // start location of dragging
-        property real startDragContentY
-        onMovementStarted: {
-            oldContentY = contentY;
-            startDragContentY = contentY;
-        }
+        interactive: root.homeScreenState.appDrawerInteractive
         
-        // move drawer down when at the top of the app list
-        property real oldContentY
-        property bool movingDrawerDown: false
-        onContentYChanged: {
-            let candidateContentY = root.flickable.contentY - (oldContentY - contentY);
-            if (dragging && startDragContentY <= 0 && oldContentY <= 0 && candidateContentY <= root.drawerTopMargin) {
-                root.flickable.contentY = candidateContentY;
-                contentY = 0;
-                movingDrawerDown = true;
-            }
-            oldContentY = contentY;
-        }
-        onMovementEnded: {
-            if (movingDrawerDown) {
-                root.snapDrawerStatus();
-                movingDrawerDown = false;
-            }
-        }
-        
-        cellWidth: root.contentWidth / Math.floor(root.contentWidth / ((root.availableCellHeight - root.reservedSpaceForLabel) + PlasmaCore.Units.smallSpacing*4))
-        cellHeight: root.availableCellHeight
-
-        property int columns: Math.floor(root.contentWidth / cellWidth)
-        property int rows: Math.ceil(model.count / columns)
-        
-        cacheBuffer: Math.max(0, rows * cellHeight)
+        property int delegateHeight: PlasmaCore.Units.gridUnit * 3
 
         model: HomeScreenComponents.ApplicationListModel
 
-        delegate: DrawerGridDelegate {
+        delegate: DrawerListDelegate {
             id: delegate
             
-            width: gridView.cellWidth
-            height: gridView.cellHeight
+            width: listView.width
+            height: listView.delegateHeight
             reservedSpaceForLabel: root.reservedSpaceForLabel
 
             onDragStarted: (imageSource, x, y, mimeData) => {
@@ -78,7 +50,7 @@ AbstractAppDrawer {
                 root.Drag.hotSpot.y = y;
                 root.Drag.mimeData = { "text/x-plasma-phone-homescreen-launcher": mimeData };
 
-                root.close()
+                root.homeScreenState.closeAppDrawer()
 
                 root.dragStarted()
                 root.Drag.active = true;
@@ -98,7 +70,7 @@ AbstractAppDrawer {
                 root.launched();
             }
         }
-
+        
         PC3.ScrollBar.vertical: PC3.ScrollBar {
             id: scrollBar
             interactive: true
@@ -117,4 +89,3 @@ AbstractAppDrawer {
         }
     }
 }
-

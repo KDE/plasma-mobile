@@ -22,6 +22,9 @@ import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenCompon
 Repeater {
     id: launcherRepeater
     model: HomeScreenComponents.FavoritesModel
+    
+    required property var homeScreenState
+    
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
     property int cellWidth
@@ -33,6 +36,8 @@ Repeater {
 
     delegate: HomeDelegate {
         id: delegate
+        homeScreenState: launcherRepeater.homeScreenState
+        
         width: launcherRepeater.cellWidth
         height: Math.min(parent.height, launcherRepeater.cellHeight)
         appletsLayout: launcherRepeater.appletsLayout
@@ -74,7 +79,7 @@ Repeater {
             if (pos.x < PlasmaCore.Units.gridUnit) {
                 launcherRepeater.scrollLeftRequested();
             //SCROLL RIGHT
-            } else if (pos.x > mainFlickable.width - PlasmaCore.Units.gridUnit) {
+            } else if (pos.x > homeScreenState.pageWidth - PlasmaCore.Units.gridUnit) {
                 launcherRepeater.scrollRightRequested();
             //DON't SCROLL
             } else {

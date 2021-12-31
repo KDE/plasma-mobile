@@ -20,44 +20,21 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
-import "private"
+import "../private"
+import "../"
 
 Item {
     id: root
-
-    enum Status {
-        Closed,
-        Peeking,
-        Open
-    }
-
-    enum MovementDirection {
-        None = 0,
-        Up,
-        Down
-    }
-
-    readonly property int status: {
-        if (flickable.contentY >= topMargin.height) {
-            return AbstractAppDrawer.Status.Open;
-        } else if (flickable.contentY > 0) {
-            return AbstractAppDrawer.Status.Peeking;
-        } else {
-            return AbstractAppDrawer.Status.Closed;
-        }
-    }
-
-    property real offset: 0
-    property real closedPositionOffset: 0
+    required property var homeScreenState
 
     property real leftPadding: 0
     property real topPadding: 0
     property real bottomPadding: 100
     property real rightPadding: 0
 
-    property alias flickable: view
+    property alias flickable: flickableBody.contentItem
     
-    property var contentItem
+    property Flickable contentItem
     property real contentWidth: holdingColumn.width
     
     required property int headerHeight
@@ -69,54 +46,14 @@ Item {
     readonly property int reservedSpaceForLabel: metrics.height
     property int availableCellHeight: PlasmaCore.Units.iconSizes.huge + reservedSpaceForLabel
 
-    readonly property real openFactor: factorNormalize(flickable.contentY / (units.gridUnit * 10))
+    readonly property real openFactor: factorNormalize(view.contentY / (PlasmaCore.Units.gridUnit * 10))
 
     // height from top of screen that the drawer starts
     readonly property real drawerTopMargin: height - topPadding - bottomPadding - closedPositionOffset
+    readonly property real closedPositionOffset: homeScreenState.appDrawerBottomOffset
     
 //BEGIN functions 
 
-    function goToBeginning() {
-        scrollAnim.to = drawerTopMargin;
-        scrollAnim.restart();
-    }
-    
-    function open() {
-        if (root.status === AbstractAppDrawer.Status.Open) {
-            flickable.flick(0,1);
-        } else {
-            goToBeginning();
-        }
-    }
-
-    function close() {
-        if (root.status !== AbstractAppDrawer.Status.Closed) {
-            scrollAnim.to = 0;
-            scrollAnim.restart();
-        }
-    }
-
-    // snap the drawer to an open or close position
-    function snapDrawerStatus() {
-        if (flickable.contentY > topMargin.height) {
-            return;
-        }
-
-        if (flickable.movementDirection === AbstractAppDrawer.MovementDirection.Up) {
-            if (flickable.contentY > topMargin.height / 8) { // over one eighth of the screen
-                open();
-            } else {
-                close();
-            }
-        } else {
-            if (flickable.contentY < 7 * topMargin.height / 8) { // over one eighth of the screen 
-                close();
-            } else {
-                open();
-            }
-        }
-    }
-    
     function factorNormalize(num) {
         return Math.min(1, Math.max(0, num));
     }
@@ -124,15 +61,6 @@ Item {
 //END functions 
 
     Drag.dragType: Drag.Automatic
-
-    NumberAnimation {
-        id: scrollAnim
-        target: flickable
-        properties: "contentY"
-        duration: PlasmaCore.Units.longDuration * 2
-        easing.type: Easing.OutQuad
-        easing.amplitude: 2.0
-    }
 
     PC3.Label {
         id: metrics
@@ -143,7 +71,7 @@ Item {
     
     // bottom divider
     GradientBar {
-        opacity: root.status !== AbstractAppDrawer.Status.Closed ? 0.6 : 0
+        opacity: (homeScreenState.currentView !== HomeScreenState.PageView || homeScreenState.currentSwipeState === HomeScreenState.SwipingAppDrawerVisibility) ? 0.6 : 0
         visible: root.bottomPadding > 0
         anchors.left: parent.left
         anchors.right: parent.right
@@ -156,24 +84,13 @@ Item {
         id: view
         anchors.fill: parent
         
-        // We have a situation where this vertical flickable conflicts with the horizontal flickable used for homescreen pages.
-        // This flickable is on top of the other, so we disable it when it isn't open.
-        // We do the initial open gesture in private/DragGestureHandler.qml
-        interactive: contentY > PlasmaCore.Units.gridUnit
+        // scroll events are handled by our flick container, we are only using this for positioning
+        interactive: false
+        contentY: Math.max(0, Math.min(root.drawerTopMargin, root.drawerTopMargin - homeScreenState.yPosition))
         
         contentHeight: column.implicitHeight
         contentWidth: -1
         boundsBehavior: Flickable.StopAtBounds
-        
-        // snap
-        onMovementEnded: root.snapDrawerStatus()
-        
-        property int movementDirection: AbstractAppDrawer.MovementDirection.None
-        property real oldContentY
-        onContentYChanged: { // update state
-            movementDirection = oldContentY > contentY ? AbstractAppDrawer.MovementDirection.Down : AbstractAppDrawer.MovementDirection.Up;
-            oldContentY = contentY;
-        }
         
         ColumnLayout {
             id: column
@@ -196,8 +113,8 @@ Item {
                     }
                     factor: root.openFactor
                     flickable: view
-                    onOpenRequested: root.open();
-                    onCloseRequested: root.close();
+                    onOpenRequested: homeScreenState.openAppDrawer();
+                    onCloseRequested: homeScreenState.closeAppDrawer();
                 }
             }
             
@@ -206,8 +123,6 @@ Item {
                 id: drawerFlickable
                 Layout.fillWidth: true
                 Layout.preferredHeight: root.height
-                
-                visible: view.interactive // this is so that the favourites strip can be interacted with
                 leftPadding: root.leftPadding; topPadding: root.topPadding
                 rightPadding: root.rightPadding; bottomPadding: root.bottomPadding
                 
