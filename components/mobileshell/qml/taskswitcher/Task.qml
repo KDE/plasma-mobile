@@ -64,6 +64,13 @@ Item {
         width: parent.width
         height: parent.height
         
+        property bool movingUp: false
+        property real oldY: y
+        onYChanged: {
+            movingUp = y < oldY;
+            oldY = y;
+        }
+        
         // drag up gesture
         DragHandler {
             id: dragHandler
@@ -78,12 +85,22 @@ Item {
             onActiveChanged: {
                 yAnimator.stop();
                 
-                if (parent.y < -PlasmaCore.Units.gridUnit * 2) {
+                if (control.movingUp && parent.y < -PlasmaCore.Units.gridUnit * 2) {
                     yAnimator.to = -root.height;
                 } else {
                     yAnimator.to = 0;
                 }
                 yAnimator.start();
+            }
+        }
+        
+        // if the app doesn't close within a certain time, drag it back
+        Timer {
+            id: uncloseTimer
+            interval: 3000
+            onTriggered: {
+                yAnimator.to = 0;
+                yAnimator.restart();
             }
         }
         
@@ -96,6 +113,7 @@ Item {
             onFinished: {
                 if (to != 0) { // close app
                     delegate.closeApp();
+                    uncloseTimer.start();
                 }
             }
         }
