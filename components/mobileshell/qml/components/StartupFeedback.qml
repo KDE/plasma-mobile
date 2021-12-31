@@ -147,34 +147,35 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                         // slight pause to give slower devices time to catch up when the item becomes visible
                         PauseAnimation { duration: 50 }
                         ParallelAnimation {
+                            id: parallelAnim
                             property real animationDuration: PlasmaCore.Units.longDuration + PlasmaCore.Units.shortDuration
                             
                             ScaleAnimator {
                                 target: background
                                 from: background.scale
                                 to: 1
-                                duration: animationDuration
+                                duration: parallelAnim.animationDuration
                                 easing.type: Easing.OutCubic
                             }
                             ScaleAnimator {
                                 target: iconParent
                                 from: iconParent.scale
                                 to: 1
-                                duration: animationDuration
+                                duration: parallelAnim.animationDuration
                                 easing.type: Easing.OutCubic
                             }
                             XAnimator {
                                 target: backgroundParent
                                 from: backgroundParent.x
                                 to: 0
-                                duration: animationDuration
+                                duration: parallelAnim.animationDuration
                                 easing.type: Easing.OutCubic
                             }
                             YAnimator {
                                 target: backgroundParent
                                 from: backgroundParent.y
                                 to: 0
-                                duration: animationDuration
+                                duration: parallelAnim.animationDuration
                                 easing.type: Easing.OutCubic
                             }
                         }
