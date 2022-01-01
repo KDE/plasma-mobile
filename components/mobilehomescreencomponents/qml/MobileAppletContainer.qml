@@ -22,6 +22,11 @@ import "private" as Private
 
 ContainmentLayoutManager.BasicAppletContainer {
     id: appletContainer
+    
+    property var homeScreenState
+    property real screenWidth: homeScreenState.availableScreenWidth
+    property real screenHeight: homeScreenState.availableScreenHeight
+    
     configOverlayComponent: Private.ConfigOverlay {}
 
     property LauncherDragManager launcherDragManager
@@ -62,19 +67,19 @@ ContainmentLayoutManager.BasicAppletContainer {
         if (pos.x < PlasmaCore.Units.gridUnit) {
             launcherRepeater.scrollLeftRequested();
         //SCROLL RIGHT
-        } else if (pos.x > mainFlickable.width - PlasmaCore.Units.gridUnit) {
+        } else if (pos.x > screenWidth - PlasmaCore.Units.gridUnit) {
             launcherRepeater.scrollRightRequested();
         //DON't SCROLL
         } else {
             launcherRepeater.stopScrollRequested();
         }
 
-        appletContainer.x = Math.max(0, Math.min(mainFlickable.width - appletContainer.width, appletContainer.x));
+        appletContainer.x = Math.max(0, Math.min(screenWidth - appletContainer.width, appletContainer.x));
     }
     onWidthChanged: {
-        if (appletContainer.x + appletContainer.width > mainFlickable.width * Math.max(1, Math.ceil(appletContainer.x / mainFlickable.width))) {
+        if (appletContainer.x + appletContainer.width > screenWidth * Math.max(1, Math.ceil(appletContainer.x / screenWidth))) {
             appletsLayout.releaseSpace(appletContainer);
-            appletContainer.width = (mainFlickable.width * Math.max(1, Math.ceil(appletContainer.x / mainFlickable.width)) - appletContainer.x);
+            appletContainer.width = (screenWidth * Math.max(1, Math.ceil(appletContainer.x / screenWidth)) - appletContainer.x);
             appletsLayout.positionItem(appletContainer);
         }
     }
@@ -88,21 +93,21 @@ ContainmentLayoutManager.BasicAppletContainer {
         target: dropArea
         function onWidthChanged () {
             let spaceReleased = false;
-            if (appletContainer.width > mainFlickable.width || appletContainer.height > mainFlickable.height) {
+            if (appletContainer.width > screenWidth || appletContainer.height > screenHeight) {
                 appletsLayout.releaseSpace(appletContainer);
-                appletContainer.width = Math.min(appletContainer.width, mainFlickable.width);
-                appletContainer.height = Math.min(appletContainer.height, mainFlickable.height);
+                appletContainer.width = Math.min(appletContainer.width, screenWidth);
+                appletContainer.height = Math.min(appletContainer.height, screenHeight);
                 spaceReleased = true;
             }
-            if (Math.floor((appletContainer.x) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width)) {
+            if (Math.floor((appletContainer.x) / screenWidth) < Math.floor((appletContainer.x + appletContainer.width/2) / screenWidth)) {
                 appletsLayout.releaseSpace(appletContainer);
-                appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width) * mainFlickable.width;
+                appletContainer.x = Math.floor((appletContainer.x + appletContainer.width) / screenWidth) * screenWidth;
                 appletsLayout.positionItem(appletContainer);
                 spaceReleased = false;
 
-            } else if (Math.floor((appletContainer.x + appletContainer.width/2) / mainFlickable.width) < Math.floor((appletContainer.x + appletContainer.width) / mainFlickable.width)) {
+            } else if (Math.floor((appletContainer.x + appletContainer.width/2) / screenWidth) < Math.floor((appletContainer.x + appletContainer.width) / screenWidth)) {
                 appletsLayout.releaseSpace(appletContainer);
-                appletContainer.x = Math.ceil(appletContainer.x / mainFlickable.width) * mainFlickable.width - appletContainer.width;
+                appletContainer.x = Math.ceil(appletContainer.x / screenWidth) * screenWidth - screenWidth;
                 appletsLayout.positionItem(appletContainer);
                 spaceReleased = false;
             }

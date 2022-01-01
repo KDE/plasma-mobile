@@ -200,6 +200,7 @@ DragDrop.DropArea {
             return true;
         }
         appletContainerComponent: MobileAppletContainer {
+            homeScreenState: dropArea.homeScreenState
             launcherDragManager: dropArea.launcherDragManager
         }
 
