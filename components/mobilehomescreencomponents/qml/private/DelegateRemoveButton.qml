@@ -56,7 +56,7 @@ PC3.RoundButton {
         ScriptAction {
             script: {
                 appletsLayout.releaseSpace(delegate);
-                HomeScreenComponents.ApplicationListModel.removeFavorite(index);
+                HomeScreenComponents.FavoritesModel.removeFavorite(index);
             }
         }
     }
