@@ -15,7 +15,11 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 ContainmentLayoutManager.ConfigOverlayWithHandles {
     id: overlay
+    property var appletContainer
 
+    signal requestRemoveTrigger
+    signal requestEditModeClose
+    
     readonly property int iconSize: PlasmaCore.Units.iconSizes.medium
     PlasmaCore.Svg {
         id: configIconsSvg
@@ -45,8 +49,8 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
         }
         ScriptAction {
             script: {
-                appletContainer.applet.action("remove").trigger();
-                appletContainer.editMode = false;
+                overlay.requestRemoveTrigger();
+                overlay.requestEditModeClose();
             }
         }
     }
@@ -75,6 +79,11 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
                 iconSize: overlay.iconSize
                 visible: (action && typeof(action) != "undefined") ? action.enabled : false
                 action: (applet) ? applet.action("configure") : null
+                
+                onRequestEditModeClose: {
+                    overlay.requestEditModeClose();
+                }
+                
                 Component.onCompleted: {
                     if (action && typeof(action) != "undefined") {
                         action.enabled = true
@@ -103,6 +112,11 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
                 onClicked: {
                     removeAnim.restart();
                 }
+                
+                onRequestEditModeClose: {
+                    overlay.requestEditModeClose();
+                }
+                
                 Component.onCompleted: {
                     var a = applet.action("remove");
                     if (a && typeof(a) != "undefined") {

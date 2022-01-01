@@ -25,7 +25,9 @@ PlasmaCore.ToolTipArea {
     property bool checked: false
     property bool toggle: false
     property string text
+    
     signal clicked
+    signal requestEditModeClose
 
     implicitWidth: buttonRow.implicitWidth
     implicitHeight: buttonRow.implicitHeight
@@ -128,7 +130,7 @@ PlasmaCore.ToolTipArea {
             } else {
                 button.clicked()
             }
-            appletContainer.editMode = false;
+            requestEditModeClose(); 
         }
     }
 }

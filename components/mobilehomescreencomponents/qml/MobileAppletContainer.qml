@@ -27,7 +27,10 @@ ContainmentLayoutManager.BasicAppletContainer {
     property real screenWidth: homeScreenState.availableScreenWidth
     property real screenHeight: homeScreenState.availableScreenHeight
     
-    configOverlayComponent: Private.ConfigOverlay {}
+    configOverlayComponent: Private.ConfigOverlay {
+        onRequestEditModeClose: appletContainer.editMode = false;
+        onRequestRemoveTrigger: appletContainer.applet.action("remove").trigger();
+    }
 
     property LauncherDragManager launcherDragManager
 
