@@ -27,11 +27,14 @@ ContainmentLayoutManager.BasicAppletContainer {
     property real screenWidth: homeScreenState.availableScreenWidth
     property real screenHeight: homeScreenState.availableScreenHeight
     
+    // HACK: for some reason configOverlayComponent access the appletContainer id
+    property var container: appletContainer
+    
     configOverlayComponent: Private.ConfigOverlay {
-        onRequestEditModeClose: appletContainer.editMode = false;
-        onRequestRemoveTrigger: appletContainer.applet.action("remove").trigger();
+        onRequestEditModeClose: container.editMode = false;
+        onRequestRemoveTrigger: container.applet.action("remove").trigger();
     }
-
+    
     property LauncherDragManager launcherDragManager
 
     onEditModeChanged: {
@@ -86,6 +89,7 @@ ContainmentLayoutManager.BasicAppletContainer {
             appletsLayout.positionItem(appletContainer);
         }
     }
+    
     Connections {
         target: appletsLayout
         function onAppletsLayoutInteracted() {
