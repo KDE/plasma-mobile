@@ -250,7 +250,7 @@ Item {
                                 model: typeof actions !== "undefined" ? actions : []
 
                                 Controls.ToolButton {
-                                    icon.name: modelData.icon || ""
+                                    icon: modelData.icon || ""
                                     visible: modelData.visible || true
                                     enabled: modelData.enabled || true
 
