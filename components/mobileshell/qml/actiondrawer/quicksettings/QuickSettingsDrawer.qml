@@ -17,7 +17,6 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../statusbar" as StatusBar
 import "../../components" as Components
-import "../../widgets" as Widgets
 import "../"
 
 /**
@@ -101,7 +100,7 @@ Components.BaseItem {
                 width: parent.width
             }
             
-            Widgets.MediaControlsWidget {
+            MobileShell.MediaControlsWidget {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
                 Layout.fillWidth: true

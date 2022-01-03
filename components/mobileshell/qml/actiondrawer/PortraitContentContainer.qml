@@ -11,9 +11,9 @@ import QtQuick.Window 2.2
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
-import "../widgets" as Widgets
 import "quicksettings"
 
 /**
@@ -76,7 +76,7 @@ PlasmaCore.ColorScope {
         }
     }
     
-    Widgets.NotificationsWidget {
+    MobileShell.NotificationsWidget {
         id: notificationWidget
         anchors {
             top: quickSettings.top

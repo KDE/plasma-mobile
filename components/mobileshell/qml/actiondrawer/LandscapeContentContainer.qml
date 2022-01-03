@@ -16,7 +16,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
-import "../widgets" as Widgets
 import "quicksettings"
 
 /**
@@ -93,7 +92,7 @@ PlasmaCore.ColorScope {
             font.weight: Font.Light
         }
         
-        Widgets.NotificationsWidget {
+        MobileShell.NotificationsWidget {
             id: notificationWidget
             // don't allow notifications widget to get too wide
             Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25

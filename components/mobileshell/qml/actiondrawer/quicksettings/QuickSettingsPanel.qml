@@ -18,7 +18,6 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../statusbar" as StatusBar
 import "../../components" as Components
-import "../../widgets" as Widgets
 import "../"
 
 /**
@@ -104,7 +103,7 @@ Components.BaseItem {
             Item { Layout.fillHeight: true }
         }
         
-        Widgets.MediaControlsWidget {
+        MobileShell.MediaControlsWidget {
             id: mediaWidget
             property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
             anchors.left: parent.left
