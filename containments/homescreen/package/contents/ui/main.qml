@@ -142,7 +142,6 @@ FocusScope {
         
         // make the homescreen not interactable when task switcher or startup feedback is on
         interactive: !taskSwitcher.visible && !startupFeedback.visible
-        
     }
         
     // search component
@@ -152,7 +151,6 @@ FocusScope {
         
         opacity: root.homeScreenOpacity
         visible: openFactor > 0
-        onOpenFactorChanged: homescreen.opacity = 1 - openFactor;
     }
     
     Connections {
