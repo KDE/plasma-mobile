@@ -65,13 +65,19 @@ Item {
         opacity: root.openFactor
     }
     
+    onOpacityChanged: {
+        if (opacity === 0) {
+            close();
+        }
+    }
+    
     Flickable {
         id: flickable
         
         anchors.fill: parent
-        anchors.topMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
+        anchors.topMargin: MobileShell.TopPanelControls.panelHeight
+        anchors.bottomMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
         anchors.rightMargin: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
-        anchors.bottomMargin: MobileShell.TaskPanelControls.panelHeight
         
         contentHeight: flickable.height + root.closedContentY + 999999
         contentY: root.closedContentY
@@ -81,6 +87,10 @@ Item {
         onContentYChanged: {
             opening = contentY < oldContentY;
             oldContentY = contentY;
+            
+            if (contentY !== root.openedContentY) {
+                queryField.focus = false;
+            }
         }
         
         onMovementEnded: root.endGesture()
@@ -96,7 +106,7 @@ Item {
             duration: PlasmaCore.Units.longDuration * 2
             easing.type: Easing.OutQuad
             onFinished: {
-                if (root.openedContentY) {
+                if (anim.to === root.openedContentY) {
                     queryField.forceActiveFocus();
                 }
             }
@@ -110,6 +120,9 @@ Item {
             Controls.Control {
                 opacity: root.openFactor
                 Layout.fillWidth: true
+                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 30
+                Layout.alignment: Qt.AlignHCenter
+                Layout.topMargin: PlasmaCore.Units.gridUnit
                 Layout.leftMargin: PlasmaCore.Units.gridUnit
                 Layout.rightMargin: PlasmaCore.Units.gridUnit
                 
@@ -168,6 +181,7 @@ Item {
                     id: listView
                     queryString: queryField.text
                     highlight: null
+                    clip: true
                     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
 
                     onActivated: queryField.text = "";
