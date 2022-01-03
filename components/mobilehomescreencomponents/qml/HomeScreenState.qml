@@ -12,6 +12,8 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 /**
  * State object for the homescreen.
+ * 
+ * We expose the data necessary to make custom "swipe-down" gestures from the page view.
  */
 QtObject {
     id: root
@@ -87,7 +89,7 @@ QtObject {
         SwipingPages, // horizontal movement between pages
         SwipingAppDrawerVisibility, // opening/closing app drawer
         SwipingAppDrawerList, // scrolling app drawer
-        SwipingActionPanel, // pulling down action panel
+        SwipingPagesDown, // custom gesture can be implemented for swiping down on the page view
         DeterminingType
     }
     
@@ -131,6 +133,11 @@ QtObject {
         closeDrawerAnim.stop();
         xAnim.stop();
     }
+    
+    // expose signals necessary to implement any behaviour for the "swipe-down" action on the page view
+    signal swipeDownGestureBegin
+    signal swipeDownGestureEnd
+    signal swipeDownGestureOffset(real value)
     
     // be very careful when resetting the swipe state
     // ensure that we aren't in the middle of a gesture
@@ -191,8 +198,8 @@ QtObject {
                             xDetermineSwipePosition = 0;
                             yDetermineSwipePosition = 0;
                         } else if (yDetermineSwipePosition >= verticalSwipeStateDetermineThreshold) {
-                            currentSwipeState = HomeScreenState.SwipingActionPanel;
-                            MobileShell.TopPanelControls.startSwipe();
+                            currentSwipeState = HomeScreenState.SwipingPagesDown;
+                            root.swipeDownGestureBegin();
                             xDetermineSwipePosition = 0;
                             yDetermineSwipePosition = 0;
                         } else if (-yDetermineSwipePosition >= verticalSwipeStateDetermineThreshold) {
@@ -206,10 +213,10 @@ QtObject {
                         xPosition += x;
                         break;
                         
-                    case HomeScreenState.SwipingActionPanel:
+                    case HomeScreenState.SwipingPagesDown:
                         yPosition = pagesYPosition;
                         if (y !== 0) {
-                            MobileShell.TopPanelControls.requestRelativeScroll(y);
+                            root.swipeDownGestureOffset(y);
                         }
                         break;
                         
@@ -277,8 +284,8 @@ QtObject {
                         break;
                     }
                     
-                    case HomeScreenState.SwipingActionPanel: {
-                        MobileShell.TopPanelControls.endSwipe();
+                    case HomeScreenState.SwipingPagesDown: {
+                        root.swipeDownGestureEnd();
                         root.resetSwipeState();
                         break;
                     }

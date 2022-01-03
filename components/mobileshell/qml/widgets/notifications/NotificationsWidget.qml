@@ -19,8 +19,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.notificationmanager 1.0 as NotificationManager
 
-import "notifications"
-
 /**
  * Embeddable notification list widget optimized for mobile and touch.
  * Used on the lockscreen and action drawer.

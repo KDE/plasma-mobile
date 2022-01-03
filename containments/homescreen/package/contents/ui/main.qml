@@ -32,9 +32,10 @@ FocusScope {
     }
     
     function triggerHomeScreen() {
-        taskSwitcher.minimizeAll();
         MobileShell.HomeScreenControls.resetHomeScreenPosition();
         taskSwitcher.visible = false; // will trigger homescreen open
+        searchWidget.close();
+        taskSwitcher.minimizeAll();
     }
 
 //END functions
@@ -126,18 +127,45 @@ FocusScope {
         }
     }
     
+    // control the opacity of both the search and homescreen components
+    property real homeScreenOpacity: 1
+    NumberAnimation on homeScreenOpacity {
+        id: opacityAnimation
+        duration: PlasmaCore.Units.longDuration
+    }
+    
     // homescreen component
     HomeScreenComponents.HomeScreen {
         id: homescreen
         anchors.fill: parent
+        opacity: root.homeScreenOpacity * (1 - searchWidget.openFactor)
         
         // make the homescreen not interactable when task switcher or startup feedback is on
         interactive: !taskSwitcher.visible && !startupFeedback.visible
         
-        opacity: 1
-        NumberAnimation on opacity {
-            id: opacityAnimation
-            duration: PlasmaCore.Units.longDuration
+    }
+        
+    // search component
+    MobileShell.KRunnerWidget {
+        id: searchWidget
+        anchors.fill: parent
+        
+        opacity: root.homeScreenOpacity
+        visible: openFactor > 0
+        onOpenFactorChanged: homescreen.opacity = 1 - openFactor;
+    }
+    
+    Connections {
+        target: homescreen.homeScreenState
+        
+        function onSwipeDownGestureBegin() {
+            searchWidget.startGesture();
+        }
+        function onSwipeDownGestureEnd() {
+            searchWidget.endGesture();
+        }
+        function onSwipeDownGestureOffset(offset) {
+            searchWidget.updateGestureOffset(-offset);
         }
     }
     
@@ -177,7 +205,7 @@ FocusScope {
                     opacityAnimation.to = 0;
                     opacityAnimation.restart();
                 } else {
-                    homescreen.opacity = 0;
+                    root.homeScreenOpacity = 0;
                 }
                 
             } else {

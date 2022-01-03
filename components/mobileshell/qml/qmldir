@@ -34,8 +34,9 @@ StatusBar 1.0 statusbar/StatusBar.qml
 TaskSwitcher 1.0 taskswitcher/TaskSwitcher.qml
 
 # /widgets
-MediaControlsWidget 1.0 widgets/MediaControlsWidget.qml
-NotificationsWidget 1.0 widgets/NotificationsWidget.qml
+KRunnerWidget 1.0 widgets/krunner/KRunnerWidget.qml
+MediaControlsWidget 1.0 widgets/mediacontrols/MediaControlsWidget.qml
+NotificationsWidget 1.0 widgets/notifications/NotificationsWidget.qml
 
 # /
 singleton HomeScreenControls 1.0 HomeScreenControls.qml
