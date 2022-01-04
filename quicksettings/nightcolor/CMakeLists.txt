@@ -25,15 +25,6 @@ target_link_libraries(nightcolorplugin
             Qt::Core
         PRIVATE
             Qt::DBus
-            Qt::Qml
-            Qt::Gui
-            Qt::Quick
-            KF5::Plasma
-            KF5::I18n
-            KF5::Notifications
-            KF5::PlasmaQuick
-            KF5::WaylandClient
-            KF5::Service
             KF5::CoreAddons
             KF5::QuickAddons
             KF5::ConfigCore
