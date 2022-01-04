@@ -58,16 +58,14 @@ include(CheckIncludeFiles)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
-plasma_install_package(quicksettings/nightcolor org.kde.plasma.nightcolor quicksettings)
-plasma_install_package(quicksettings/airplanemode org.kde.plasma.airplanemode quicksettings)
 
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
-
 
 add_subdirectory(bin)
 add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(components)
+add_subdirectory(quicksettings)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES

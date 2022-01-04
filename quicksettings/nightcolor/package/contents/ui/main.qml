@@ -8,25 +8,16 @@
 
 import org.kde.colorcorrect 0.1 as CC
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.quicksetting.nightcolor 1.0 as NightColor
 
 MobileShell.QuickSetting {
     text: i18n("Night Color")
     icon: "redshift-status-on"
-    enabled: compositorAdaptor.active
+    enabled: NightColor.NightColorUtil.enabled
     status: ""
     settingsCommand: "plasma-open-settings kcm_nightcolor"
 
-    CC.CompositorAdaptor {
-        id: compositorAdaptor
-    }
     function toggle() {
-        if (compositorAdaptor.active) {
-            compositorAdaptor.activeStaged = false;
-        } else {
-            compositorAdaptor.activeStaged = true;
-            compositorAdaptor.modeStaged = 3; // always on
-        }
-        compositorAdaptor.sendConfigurationAll();
-        enabled = compositorAdaptor.active;
+        NightColor.NightColorUtil.enabled = !enabled;
     }
 }
