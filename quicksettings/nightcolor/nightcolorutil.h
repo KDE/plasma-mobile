@@ -26,10 +26,10 @@ Q_SIGNALS:
     void enabledChanged();
 
 public Q_SLOTS:
-    void enabledUpdated(QString name, QVariantMap map, QStringList list);
+    void enabledUpdated(const QString &name, const QVariantMap &map, const QStringList &list);
 
 private:
     bool m_enabled;
     OrgKdeKwinColorCorrectInterface *m_ccInterface;
-    NightColorSettings *m_settings;
+    NightColorSettings *const m_settings;
 };

@@ -40,7 +40,7 @@ void NightColorUtil::setEnabled(bool enabled)
     m_settings->save();
 }
 
-void NightColorUtil::enabledUpdated(QString name, QVariantMap map, QStringList list)
+void NightColorUtil::enabledUpdated(const QString &name, const QVariantMap &map, const QStringList &list)
 {
     Q_UNUSED(name);
     Q_UNUSED(map);
