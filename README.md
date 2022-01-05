@@ -16,7 +16,7 @@ Locations:
 
 ## Links
 * Project page: https://invent.kde.org/plasma/plasma-phone-components
-* Issues relating to the shell: https://invent.kde.org/plasma-mobile/plasma-phone-components/-/issues
+* Issues relating to the shell: https://invent.kde.org/plasma/plasma-phone-components/-/issues
 * General Plasma Mobile issues: https://invent.kde.org/teams/plasma-mobile/issues/-/issues
 * Development channel: https://matrix.to/#/#plasmamobile:matrix.org
 
