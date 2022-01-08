@@ -126,10 +126,10 @@ Item {
                 Layout.leftMargin: PlasmaCore.Units.gridUnit
                 Layout.rightMargin: PlasmaCore.Units.gridUnit
                 
-                leftPadding: PlasmaCore.Units.smallSpacing / 2
-                rightPadding: PlasmaCore.Units.smallSpacing / 2
-                topPadding: PlasmaCore.Units.smallSpacing / 2
-                bottomPadding: PlasmaCore.Units.smallSpacing / 2
+                leftPadding: PlasmaCore.Units.smallSpacing 
+                rightPadding: PlasmaCore.Units.smallSpacing 
+                topPadding: PlasmaCore.Units.smallSpacing 
+                bottomPadding: PlasmaCore.Units.smallSpacing 
                 
                 background: Item {
                     
@@ -154,16 +154,17 @@ Item {
                     Item {
                         implicitHeight: queryField.height
                         implicitWidth: height
-                        Kirigami.Icon {
+                        PlasmaCore.IconItem {
                             anchors.fill: parent
-                            anchors.margins: Math.round(Kirigami.Units.smallSpacing * 1.5)
+                            anchors.margins: Math.round(Kirigami.Units.smallSpacing)
                             source: "start-here-symbolic"
                         }
                     }
-                    Kirigami.SearchField {
+                    PlasmaComponents.TextField {
                         id: queryField
                         focus: true
                         Layout.fillWidth: true
+                        placeholderText: i18n("Search…")
                     }
                 }
             }
