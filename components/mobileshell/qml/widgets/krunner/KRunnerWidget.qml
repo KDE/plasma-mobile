@@ -165,6 +165,7 @@ Item {
                         focus: true
                         Layout.fillWidth: true
                         placeholderText: i18n("Search…")
+                        inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
                     }
                 }
             }
