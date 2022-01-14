@@ -105,6 +105,7 @@ Item {
             id: anim
             duration: PlasmaCore.Units.longDuration * 2
             easing.type: Easing.OutQuad
+            running: false
             onFinished: {
                 if (anim.to === root.openedContentY) {
                     queryField.forceActiveFocus();
@@ -162,7 +163,6 @@ Item {
                     }
                     PlasmaComponents.TextField {
                         id: queryField
-                        focus: true
                         Layout.fillWidth: true
                         placeholderText: i18n("Search…")
                         inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
