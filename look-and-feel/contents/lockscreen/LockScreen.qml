@@ -231,6 +231,8 @@ PlasmaCore.ColorScope {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: PlasmaCore.Units.gridUnit + passwordFlickable.contentY * 0.5
         anchors.horizontalCenter: parent.horizontalCenter
+        implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
+        implicitHeight: PlasmaCore.Units.iconSizes.smallMedium 
         opacity: 1 - (passwordFlickable.contentY / passwordFlickable.columnHeight)
         
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
@@ -268,6 +270,7 @@ PlasmaCore.ColorScope {
             oldContentY = contentY;
         }
         
+        // keypad area
         ColumnLayout {
             id: passwordLayout
             anchors.bottom: parent.bottom
@@ -278,6 +281,8 @@ PlasmaCore.ColorScope {
             // scroll down icon
             PlasmaCore.IconItem {
                 Layout.alignment: Qt.AlignHCenter
+                implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
+                implicitHeight: PlasmaCore.Units.iconSizes.smallMedium
                 colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
                 source: "arrow-down"
                 opacity: Math.sin((Math.PI / 2) * (passwordFlickable.contentY / passwordFlickable.columnHeight) + 1.5 * Math.PI) + 1
