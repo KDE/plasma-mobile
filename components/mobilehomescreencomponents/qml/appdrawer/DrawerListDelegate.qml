@@ -34,11 +34,15 @@ MouseArea {
     }
 
     onClicked: {
+        // launch app
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
         } else {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
         }
+        
+        // close the app drawer
+        MobileShell.HomeScreenControls.openHomeScreen();
     }
     hoverEnabled: true
     
