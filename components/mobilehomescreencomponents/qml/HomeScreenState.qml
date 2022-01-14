@@ -206,6 +206,9 @@ QtObject {
                             currentSwipeState = HomeScreenState.SwipingAppDrawerVisibility;
                             xDetermineSwipePosition = 0;
                             yDetermineSwipePosition = 0;
+                            
+                            // reset app drawer position to top
+                            appDrawerFlickable.contentY = 0;
                         }
                         break;
                         
