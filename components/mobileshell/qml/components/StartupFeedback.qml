@@ -179,6 +179,13 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                                 easing.type: Easing.OutCubic
                             }
                         }
+                        
+                        ScriptAction {
+                            script: {
+                                // close the app drawer after it isn't visible
+                                MobileShell.HomeScreenControls.resetHomeScreenPosition();
+                            }
+                        }
                     }
                 }
             ]
