@@ -56,8 +56,7 @@ Item {
         homeScreenState: root.homeScreenState
         
         // disable flick tracking when necessary
-        interactive: root.interactive && homeScreenState.currentView !== HomeScreenState.AppDrawerView && 
-                     root.parent.focus && !contents.appletsLayout.editMode && !plasmoid.editMode && !contents.launcherDragManager.active
+        interactive: root.interactive && homeScreenState.currentView !== HomeScreenState.AppDrawerView
         
         // item is effectively anchored to root, while allowing flickContainer
         // to keep track of flicks
