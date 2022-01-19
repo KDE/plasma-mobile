@@ -62,7 +62,6 @@ plasma_install_package(shell org.kde.plasma.phoneshell shells)
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
 
 add_subdirectory(bin)
-add_subdirectory(applets)
 add_subdirectory(containments)
 add_subdirectory(components)
 add_subdirectory(quicksettings)
