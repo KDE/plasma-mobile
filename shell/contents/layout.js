@@ -10,6 +10,10 @@ for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = "org.kde.image";
 }
 
+// add meta shortcut 
+desktopsArray[0].currentConfigGroup = ["Shortcuts"]
+desktopsArray[0].writeConfig("global", "Meta+F1")
+
 // keep this list in sync with shell/contents/updates/panelsfix.js
 var panel = new Panel("org.kde.phone.panel");
 panel.location = "top";
