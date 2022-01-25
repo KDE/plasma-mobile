@@ -98,7 +98,7 @@ void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
 
 bool appNameLessThan(const ApplicationListModel::ApplicationData &a1, const ApplicationListModel::ApplicationData &a2)
 {
-    return a1.name.toLower() < a2.name.toLower();
+    return a1.name.compare(a2.name, Qt::CaseInsensitive) < 0;
 }
 
 void ApplicationListModel::initWayland()
