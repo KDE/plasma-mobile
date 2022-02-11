@@ -109,6 +109,10 @@ Item {
             var idx = tasksModel.index(i, 0)
             if (i == id) {
                 tasksModel.requestActivate(idx);
+                // ensure the window is in maximized state
+                if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMaximized)) {
+                    tasksModel.requestToggleMaximized(idx);
+                }
             } else if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                 var geo = tasksModel.data(idx, TaskManager.AbstractTasksModel.ScreenGeometry)
                 // only minimize the other windows in the same screen
