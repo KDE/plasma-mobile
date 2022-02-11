@@ -15,5 +15,6 @@ Dependencies:
     'frameworks/kwayland': '@latest'
     'frameworks/kwindowsystem': '@latest'
     'frameworks/modemmanager-qt': '@latest'
+    'frameworks/networkmanager-qt': '@latest'
     'frameworks/plasma-framework': '@latest'
     'plasma/kwin': '@same'
