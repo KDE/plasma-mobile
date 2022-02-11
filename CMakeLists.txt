@@ -49,6 +49,9 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     ModemManagerQt
     NetworkManagerQt
 )
+
+find_package(LibKWorkspace CONFIG REQUIRED)
+
 find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
     TYPE REQUIRED
