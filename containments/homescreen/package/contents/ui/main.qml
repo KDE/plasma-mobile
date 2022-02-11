@@ -168,16 +168,6 @@ FocusScope {
     }
     
     // task switcher component
-    TaskManager.TasksModel {
-        id: tasksModel
-        groupMode: TaskManager.TasksModel.GroupDisabled
-
-        screenGeometry: plasmoid.screenGeometry
-        sortMode: TaskManager.TasksModel.SortAlpha
-
-        virtualDesktop: virtualDesktopInfo.currentDesktop
-        activity: activityInfo.currentActivity
-    }
 
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
@@ -189,7 +179,16 @@ FocusScope {
     
     MobileShell.TaskSwitcher {
         id: taskSwitcher
-        model: tasksModel
+        
+        tasksModel: TaskManager.TasksModel {
+            groupMode: TaskManager.TasksModel.GroupDisabled
+
+            screenGeometry: plasmoid.screenGeometry
+            sortMode: TaskManager.TasksModel.SortAlpha
+
+            virtualDesktop: virtualDesktopInfo.currentDesktop
+            activity: activityInfo.currentActivity
+        }
 
         anchors.fill: parent
         
@@ -213,7 +212,7 @@ FocusScope {
         }
     }
     
-    // start app animation
+    // start app animation component
     MobileShell.StartupFeedback {
         id: startupFeedback
         anchors.fill: parent

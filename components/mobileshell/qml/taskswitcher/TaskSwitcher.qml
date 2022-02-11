@@ -1,6 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
- *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+ *   SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -29,8 +29,8 @@ Item {
     }
     
     // task list model
-    property TaskManager.TasksModel model
-    readonly property int tasksCount: model.count
+    property TaskManager.TasksModel tasksModel
+    readonly property int tasksCount: tasksModel.count
 
     property var displaysModel: MobileShell.DisplaysModel {}
     
@@ -65,12 +65,12 @@ Item {
         taskSwitcherState.cancelAnimations();
         taskSwitcherState.yPosition = 0;
         taskSwitcherState.xPosition = 0;
-        taskSwitcherState.wasInActiveTask = root.model.activeTask.row >= 0;
+        taskSwitcherState.wasInActiveTask = tasksModel.activeTask.row >= 0;
         taskSwitcherState.currentlyBeingOpened = true;
         
         // skip to first active task
         if (taskSwitcherState.wasInActiveTask) {
-            taskSwitcherState.goToTaskIndex(root.model.activeTask.row);
+            taskSwitcherState.goToTaskIndex(tasksModel.activeTask.row);
         }
         
         // show task switcher, hide all running apps
@@ -103,12 +103,12 @@ Item {
             return;
         }
 
-        var newActiveIdx = root.model.index(id, 0)
+        var newActiveIdx = tasksModel.index(id, 0)
         var newActiveGeo = tasksModel.data(newActiveIdx, TaskManager.AbstractTasksModel.ScreenGeometry)
         for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = root.model.index(i, 0)
+            var idx = tasksModel.index(i, 0)
             if (i == id) {
-                root.model.requestActivate(idx);
+                tasksModel.requestActivate(idx);
             } else if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
                 var geo = tasksModel.data(idx, TaskManager.AbstractTasksModel.ScreenGeometry)
                 // only minimize the other windows in the same screen
