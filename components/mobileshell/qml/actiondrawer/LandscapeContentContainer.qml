@@ -94,6 +94,9 @@ PlasmaCore.ColorScope {
         
         MobileShell.NotificationsWidget {
             id: notificationWidget
+            historyModel: root.actionDrawer.notificationModel
+            notificationSettings: root.actionDrawer.notificationSettings
+            
             // don't allow notifications widget to get too wide
             Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
             Layout.fillHeight: true

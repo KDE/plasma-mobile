@@ -26,8 +26,8 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 Item {
     id: root
     
-    property var historyModel: MobileShell.NotificationProvider.historyModel
-    property var notificationSettings: MobileShell.NotificationProvider.notificationSettings
+    property var historyModel: []
+    property var notificationSettings: NotificationManager.Settings {}
     
     readonly property bool hasNotifications: list.count > 0
     

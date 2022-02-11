@@ -25,6 +25,16 @@ import "../components" as Components
 
 NanoShell.FullScreenOverlay {
     id: window
+    
+    /**
+     * The model for the notification widget.
+     */
+    property var notificationModel
+    
+    /**
+     * The notification settings object to be used in the notification widget.
+     */
+    property var notificationSettings
 
     /**
      * The amount of pixels moved by touch/mouse in the process of opening/closing the panel.

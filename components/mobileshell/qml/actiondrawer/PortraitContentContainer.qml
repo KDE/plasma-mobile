@@ -78,6 +78,9 @@ PlasmaCore.ColorScope {
     
     MobileShell.NotificationsWidget {
         id: notificationWidget
+        historyModel: root.actionDrawer.notificationModel
+        notificationSettings: root.actionDrawer.notificationSettings
+        
         anchors {
             top: quickSettings.top
             topMargin: quickSettings.height + translate.y

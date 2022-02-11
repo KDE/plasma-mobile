@@ -18,6 +18,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
+import org.kde.notificationmanager 1.0 as NotificationManager
+
 Item {
     id: root
     
@@ -59,7 +61,7 @@ Item {
 //END API implementation
     
     Component.onCompleted: {
-        // we want to bind global shortcuts here
+        // we want to bind global volume shortcuts here
         MobileShell.VolumeProvider.bindShortcuts = true;
     }
     
@@ -67,6 +69,7 @@ Item {
     MobileShell.StatusBar {
         id: topPanel
         anchors.fill: parent
+        
         showDropShadow: !root.showingApp
         colorGroup: root.showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
@@ -78,7 +81,30 @@ Item {
         anchors.fill: parent
     }
     
+    // swipe-down drawer component
     MobileShell.ActionDrawer {
         id: drawer
+        
+        notificationSettings: NotificationManager.Settings {}
+        
+        notificationModel: NotificationManager.Notifications {
+            showExpired: true
+            showDismissed: true
+            showJobs: drawer.notificationSettings.jobsInNotifications
+            sortMode: NotificationManager.Notifications.SortByTypeAndUrgency
+            groupMode: NotificationManager.Notifications.GroupApplicationsFlat
+            groupLimit: 2
+            expandUnread: true
+            blacklistedDesktopEntries: drawer.notificationSettings.historyBlacklistedApplications
+            blacklistedNotifyRcNames: drawer.notificationSettings.historyBlacklistedServices
+            urgencies: {
+                var urgencies = NotificationManager.Notifications.CriticalUrgency
+                            | NotificationManager.Notifications.NormalUrgency;
+                if (drawer.notificationSettings.lowPriorityHistory) {
+                    urgencies |= NotificationManager.Notifications.LowUrgency;
+                }
+                return urgencies;
+            }
+        }
     }
 }
