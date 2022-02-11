@@ -10,6 +10,7 @@ target_sources(ppc-mmqmlplugin PRIVATE
 target_link_libraries(ppc-mmqmlplugin
     Qt5::Qml
     KF5::ModemManagerQt
+    KF5::NetworkManagerQt
 )
 
 set_property(TARGET ppc-mmqmlplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mm)

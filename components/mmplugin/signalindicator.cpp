@@ -1,10 +1,17 @@
 // SPDX-FileCopyrightText: 2021 Tobias Fella <fella@posteo.de>
+// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
+
+#include <NetworkManagerQt/Manager>
 
 #include "signalindicator.h"
 
 SignalIndicator::SignalIndicator()
 {
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::wwanEnabledChanged, this, [this](bool) {
+        Q_EMIT wwanEnabledChanged();
+    });
+
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModem);
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModem);
     updateModem();
@@ -34,6 +41,16 @@ bool SignalIndicator::simLocked() const
 bool SignalIndicator::available() const
 {
     return !ModemManager::modemDevices().isEmpty();
+}
+
+bool SignalIndicator::wwanEnabled() const
+{
+    return NetworkManager::isWwanEnabled();
+}
+
+void SignalIndicator::setWwanEnabled(bool wwanEnabled)
+{
+    NetworkManager::setWwanEnabled(wwanEnabled);
 }
 
 void SignalIndicator::updateModem()
