@@ -1,0 +1,71 @@
+/*
+ *   SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+ *
+ *   SPDX-License-Identifier: LGPL-2.0-or-later
+ */
+
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.core 2.0 as PlasmaCore
+
+MobileShell.QuickSetting {
+    text: i18n("Caffeine")
+    icon: "system-suspend-hibernate"
+    status: enabled ? i18n("Tap to disable sleep suspension") : i18n("Tap to suspend sleep")
+    enabled: false
+
+    PlasmaCore.DataSource {
+        id: pmSource
+        engine: "powermanagement"
+        connectedSources: sources
+        onSourceAdded: {
+            disconnectSource(source);
+            connectSource(source);
+        }
+        onSourceRemoved: {
+            disconnectSource(source);
+        }
+    }
+
+    property int cookie1: -1
+    property int cookie2: -1
+    
+    function toggle() {
+        let inhibit = !enabled;
+        const service = pmSource.serviceForSource("PowerDevil");
+        if (inhibit) {
+            const reason = i18n("Plasma Mobile has enabled system-wide inhibition");
+            const op1 = service.operationDescription("beginSuppressingSleep");
+            op1.reason = reason;
+            const op2 = service.operationDescription("beginSuppressingScreenPowerManagement");
+            op2.reason = reason;
+
+            const job1 = service.startOperationCall(op1);
+            job1.finished.connect(job => {
+                cookie1 = job.result;
+            });
+
+            const job2 = service.startOperationCall(op2);
+            job2.finished.connect(job => {
+                cookie2 = job.result;
+            });
+        } else {
+            const op1 = service.operationDescription("stopSuppressingSleep");
+            op1.cookie = cookie1;
+            const op2 = service.operationDescription("stopSuppressingScreenPowerManagement");
+            op2.cookie = cookie2;
+
+            const job1 = service.startOperationCall(op1);
+            job1.finished.connect(job => {
+                cookie1 = -1;
+            });
+
+            const job2 = service.startOperationCall(op2);
+            job2.finished.connect(job => {
+                cookie2 = -1;
+            });
+
+        }
+        enabled = inhibit;
+    }
+}
+

@@ -2,4 +2,5 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 plasma_install_package(airplanemode org.kde.plasma.airplanemode quicksettings)
+plasma_install_package(caffeine org.kde.plasma.caffeine quicksettings)
 add_subdirectory(nightcolor)
