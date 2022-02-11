@@ -47,6 +47,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Notifications
     Wayland
     ModemManagerQt
+    NetworkManagerQt
 )
 find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"

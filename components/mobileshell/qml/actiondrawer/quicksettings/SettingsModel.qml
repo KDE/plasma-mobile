@@ -15,6 +15,7 @@ import org.kde.bluezqt 1.0 as BluezQt
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.plasma.mm 1.0 as PlasmaMM
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.QuickSettingsModel {
@@ -67,9 +68,9 @@ MobileShell.QuickSettingsModel {
         text: i18n("Mobile Data")
         icon: "network-modem"
         settingsCommand: "plasma-open-settings kcm_mobile_broadband"
-        enabled: enabledConnections.wwanEnabled
+        enabled: PlasmaMM.SignalIndicator.wwanEnabled
         function toggle() {
-            nmHandler.enableWwan(!enabledConnections.wwanEnabled)
+            PlasmaMM.SignalIndicator.wwanEnabled = !PlasmaMM.SignalIndicator.wwanEnabled
         }
     }
     MobileShell.QuickSetting {
