@@ -46,7 +46,7 @@ Item {
     
     Repeater {
         id: repeater
-        model: taskSwitcher.model
+        model: taskSwitcher.tasksModel
         
         // left margin from root edge such that the task is centered
         readonly property real leftMargin: (root.width / 2) - (taskSwitcherState.taskWidth / 2) 
