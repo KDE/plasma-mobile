@@ -139,14 +139,14 @@ PlasmaCore.ColorScope {
             } else if (taskSwitcher.visible) { 
                 
                 // if task switcher is open, close the current window shown
-                taskSwitcher.model.requestClose(taskSwitcher.model.index(taskSwitcher.currentTaskIndex, 0));
+                taskSwitcher.tasksModel.requestClose(taskSwitcher.tasksModel.index(taskSwitcher.currentTaskIndex, 0));
                 
             } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
                 
                 // if task switcher is closed, but there is an active window
-                var index = taskSwitcher.model.activeTask;
+                var index = taskSwitcher.tasksModel.activeTask;
                 if (index) {
-                    taskSwitcher.model.requestClose(index);
+                    taskSwitcher.tasksModel.requestClose(index);
                 }
             }
         }
