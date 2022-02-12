@@ -24,7 +24,7 @@ import "util.js" as Util
 // notification properties are in BaseNotificationItem
 BaseNotificationItem {
     id: notificationItem
-    implicitHeight: mainCard.implicitHeight
+    implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
     
     // notification heading for groups with one element
     NotificationGroupHeader {

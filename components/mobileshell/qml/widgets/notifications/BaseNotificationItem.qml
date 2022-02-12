@@ -20,7 +20,19 @@ import org.kde.kcoreaddons 1.0 as KCoreAddons
 
 Item {
     id: notificationItem
-    required property NotificationManager.Notifications notificationsModel
+    
+    required property var notificationsModel
+    
+    required property int notificationsModelType
+    
+    /**
+     * Whether the notification is allowed to invoke any action, or if it should instead
+     * emit the runActionRequested(action) signal, containing the code to run.
+     * 
+     * This is useful for cases like the lockscreen, where actions should only be run after
+     * the user logs in.
+     */
+    property bool requestToInvoke: false
     
     property var model
     property int modelIndex
@@ -29,7 +41,7 @@ Item {
     
     readonly property int notificationType: model.type
 
-    readonly property bool inGroup: model.isInGroup
+    readonly property bool inGroup: model.isInGroup || false
     readonly property bool inHistory: true
 
     readonly property string applicationIconSource: model.applicationIconName
@@ -87,7 +99,13 @@ Item {
         }
         return labels;
     }
-
+    
+    /**
+     * This signal is emitted and intended for the parent to make its own decision
+     * on whether to run the requested notification action.
+     */
+    signal runActionRequested()
+    
     signal actionInvoked(string actionName)
     signal replied(string text)
     signal openUrl(string url)
@@ -97,45 +115,124 @@ Item {
     signal resumeJobClicked
     signal killJobClicked
     
-    onActionInvoked: {
-        if (actionName === "default") {
-            notificationsModel.invokeDefaultAction(notificationsModel.index(modelIndex, 0));
-        } else {
-            notificationsModel.invokeAction(notificationsModel.index(modelIndex, 0), actionName);
-        }
-
-        expire();
-    }
-    onOpenUrl: {
-        Qt.openUrlExternally(url);
-        expire();
-    }
-    onFileActionInvoked: {
-        if (action.objectName === "movetotrash" || action.objectName === "deletefile") {
-            close();
-        } else {
-            expire();
-        }
-    }
-    onSuspendJobClicked: notificationsModel.suspendJob(notificationsModel.index(modelIndex, 0))
-    onResumeJobClicked: notificationsModel.resumeJob(notificationsModel.index(modelIndex, 0))
-    onKillJobClicked: notificationsModel.killJob(notificationsModel.index(modelIndex, 0))
-
     function expire() {
         if (model.resident) {
             model.expired = true;
         } else {
-            notificationsModel.expire(notificationsModel.index(modelIndex, 0));
+            if (notificationsModelType === NotificationsModelType.WatchedNotificationsModel) {
+                notificationsModel.expire(model.notificationId);
+            } else if (notificationsModelType === NotificationsModelType.NotificationsModel) {
+                notificationsModel.expire(notificationsModel.index(modelIndex, 0));
+            }
         }
     }
 
     function close() {
-        notificationsModel.close(notificationsModel.index(modelIndex, 0));
+        if (notificationsModelType === NotificationsModelType.WatchedNotificationsModel) {
+            notificationsModel.close(model.notificationId);
+        } else if (notificationsModelType === NotificationsModelType.NotificationsModel) {
+            notificationsModel.close(notificationsModel.index(modelIndex, 0));
+        }
     }
     
     // TODO call
     function configure() {
         notificationsModel.configure(notificationsModel.index(modelIndex, 0))
+    }
+    
+    property var pendingAction: () => {}
+    function runPendingAction() {
+        pendingAction();
+    }
+    
+    onActionInvoked: {
+        let action = () => {
+            if (notificationsModelType === NotificationsModelType.WatchedNotificationsModel) {
+                if (actionName === "") {
+                    notificationsModel.invokeDefaultAction(model.notificationId);
+                } else {
+                    notificationsModel.invokeAction(notificationItem.model.notificationId, actionName);
+                }
+            } else if (notificationsModelType === NotificationsModelType.NotificationsModel) {
+                if (actionName === "default") {
+                    notificationsModel.invokeDefaultAction(notificationsModel.index(modelIndex, 0));
+                } else {
+                    notificationsModel.invokeAction(notificationsModel.index(modelIndex, 0), actionName);
+                }
+            }
+            expire();
+        }
+        
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
+    }
+    
+    onOpenUrl: {
+        let action = () => {
+            Qt.openUrlExternally(url);
+            expire();
+        }
+        
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
+    }
+    
+    onFileActionInvoked: {
+        let action = () => {
+            if (action.objectName === "movetotrash" || action.objectName === "deletefile") {
+                close();
+            } else {
+                expire();
+            }
+        }
+        
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
+    }
+    
+    onSuspendJobClicked: {
+        let action = () => notificationsModel.suspendJob(notificationsModel.index(modelIndex, 0));
+        
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
+    }
+    
+    onResumeJobClicked: {
+        let action = () => notificationsModel.resumeJob(notificationsModel.index(modelIndex, 0));
+        
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
+    }
+    
+    onKillJobClicked: {
+        let action = () => notificationsModel.killJob(notificationsModel.index(modelIndex, 0));
+    
+        if (notificationItem.requestToInvoke) {
+            pendingAction = action;
+            runActionRequested();
+        } else {
+            action();
+        }
     }
 }
 

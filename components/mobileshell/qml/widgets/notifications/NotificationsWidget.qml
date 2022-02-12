@@ -26,15 +26,56 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 Item {
     id: root
     
+    /**
+     * The notification model for the widget.
+     */
     property var historyModel: []
+    
+    /**
+     * The type of notification model used for the widget.
+     */
+    property int historyModelType: NotificationsModelType.NotificationsModel
+    
+    /**
+     * The notification model settings for the widget.
+     */
     property var notificationSettings: NotificationManager.Settings {}
     
+    /**
+     * Whether invoking notification actions requires authentiation of some sort.
+     * 
+     * If set to true, any attempted invoking will trigger the unlockRequested() signal.
+     * Any consumers can then call the runPendingAction() function if authenticated to proceed
+     * executing the notification action.
+     */
+    property bool actionsRequireUnlock: false
+    
+    /**
+     * Whether the widget has notifications.
+     */
     readonly property bool hasNotifications: list.count > 0
     
+    enum ModelType {
+        NotificationsModel, // used in the logged-in shell
+        WatchedNotificationsModel // used on the lockscreen
+    }
+    
+    signal unlockRequested()
+    
+    function runPendingAction() {
+        list.pendingNotificationWithAction.runPendingAction();
+    }
+    
+    /**
+     * Clears the history of the notification model.
+     */
     function clearHistory() {
         historyModel.clear(NotificationManager.Notifications.ClearExpired);
     }
 
+    /**
+     * Open the system notification settings.
+     */
     function openNotificationSettings() {
         MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_notifications");
     }
@@ -51,6 +92,8 @@ Item {
         id: list
         model: historyModel
         currentIndex: -1
+        
+        property var pendingNotificationWithAction
         
         boundsBehavior: Flickable.StopAtBounds
         spacing: Kirigami.Units.largeSpacing
@@ -72,7 +115,7 @@ Item {
             width: parent.width - (PlasmaCore.Units.largeSpacing * 4)
 
             text: i18n("Notification service not available")
-            visible: list.count === 0 && !NotificationManager.Server.valid
+            visible: list.count === 0 && !NotificationManager.Server.valid && historyModelType === NotificationsModelType.NotificationsModel
 
             PlasmaComponents3.Label {
                 // Checking valid to avoid creating ServerInfo object if everything is alright
@@ -153,23 +196,41 @@ Item {
                     spacing: PlasmaCore.Units.smallSpacing
                     
                     NotificationItem {
+                        id: notificationItem
                         Layout.fillWidth: true
                         
                         model: delegateLoader.model
                         modelIndex: delegateLoader.index
-                        notificationsModel: historyModel
+                        notificationsModel: root.historyModel
+                        notificationsModelType: root.historyModelType
                         timeSource: timeDataSource
+                        
+                        requestToInvoke: root.actionsRequireUnlock
+                        onRunActionRequested: {
+                            list.pendingNotificationWithAction = notificationItem;
+                            root.unlockRequested();
+                        }
                     }
                     
-                    PlasmaComponents3.ToolButton {
-                        icon.name: model.isGroupExpanded ? "arrow-up" : "arrow-down"
-                        text: model.isGroupExpanded ? i18n("Show Fewer")
-                                                    : i18nc("Expand to show n more notifications",
-                                                            "Show %1 More", (model.groupChildrenCount - model.expandedGroupChildrenCount))
-                        visible: (model.groupChildrenCount > model.expandedGroupChildrenCount || model.isGroupExpanded)
-                            && delegateLoader.ListView.nextSection !== delegateLoader.ListView.section
-                        onClicked: list.setGroupExpanded(model.index, !model.isGroupExpanded)
+                    Loader {
                         height: visible ? implicitHeight : 0
+                        visible: active
+                        active: {
+                            // if we have the WatchedNotificationsModel, we don't have notification grouping support
+                            if (typeof model.groupChildrenCount === 'undefined')
+                                return false;
+                            
+                            return (model.groupChildrenCount > model.expandedGroupChildrenCount || model.isGroupExpanded)
+                                    && delegateLoader.ListView.nextSection !== delegateLoader.ListView.section
+                        }
+                        
+                        sourceComponent: PlasmaComponents3.ToolButton {
+                            icon.name: model.isGroupExpanded ? "arrow-up" : "arrow-down"
+                            text: model.isGroupExpanded ? i18n("Show Fewer")
+                                                        : i18nc("Expand to show n more notifications",
+                                                                "Show %1 More", (model.groupChildrenCount - model.expandedGroupChildrenCount))
+                            onClicked: list.setGroupExpanded(model.index, !model.isGroupExpanded)
+                        }
                     }
                 }
             }
