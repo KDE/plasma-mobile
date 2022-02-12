@@ -40,12 +40,6 @@ PlasmaCore.ColorScope {
         id: notifModel
     }
     
-    Image {
-        id: wallpaper
-        anchors.fill: parent
-        source: "/home/devin/Pictures/Wallpaper/1920x1080_1620115524334.jpeg"
-    }
-    
     // blur background once keypad is open
     FastBlur {
         id: blur
