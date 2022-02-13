@@ -3,6 +3,11 @@
 
 [Desktop Entry]
 Name=Power Menu
+Name[ca]=Power Menu
+Name[nl]=Energiemenu
+Name[sv]=Strömmeny
+Name[uk]=Меню живлення
+Name[x-test]=xxPower Menuxx
 Icon=system-shutdown-symbolic
 
 Type=Service

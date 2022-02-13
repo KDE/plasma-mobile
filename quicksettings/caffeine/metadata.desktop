@@ -3,6 +3,11 @@
 
 [Desktop Entry]
 Name=Caffeine
+Name[ca]=Caffeine
+Name[nl]=Cafeïne
+Name[sv]=Koffein
+Name[uk]=Кофеїн
+Name[x-test]=xxCaffeinexx
 Icon=system-suspend-hibernate
 
 Type=Service
