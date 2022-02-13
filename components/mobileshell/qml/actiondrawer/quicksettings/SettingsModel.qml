@@ -32,6 +32,7 @@ MobileShell.QuickSettingsModel {
         enabled: false
         settingsCommand: "plasma-open-settings"
     }
+    
     MobileShell.QuickSetting {
         PlasmaNM.Handler {
             id: nmHandler
@@ -49,6 +50,7 @@ MobileShell.QuickSettingsModel {
         }
         enabled: enabledConnections.wirelessEnabled
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Bluetooth")
         icon: "network-bluetooth"
@@ -64,15 +66,17 @@ MobileShell.QuickSettingsModel {
         }
         enabled: BluezQt.Manager.bluetoothOperational
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Mobile Data")
         icon: "network-modem"
         settingsCommand: "plasma-open-settings kcm_mobile_broadband"
-        enabled: PlasmaMM.SignalIndicator.wwanEnabled
+        enabled: PlasmaMM.SignalIndicator.mobileDataEnabled
         function toggle() {
-            PlasmaMM.SignalIndicator.wwanEnabled = !PlasmaMM.SignalIndicator.wwanEnabled
+            PlasmaMM.SignalIndicator.mobileDataEnabled = !PlasmaMM.SignalIndicator.mobileDataEnabled
         }
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Flashlight")
         icon: "flashlight-on"
@@ -81,11 +85,13 @@ MobileShell.QuickSettingsModel {
             MobileShell.ShellUtil.toggleTorch()
         }
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Location")
         icon: "gps"
         enabled: false
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Screenshot")
         status: i18n("Tap to screenshot")
@@ -113,6 +119,7 @@ MobileShell.QuickSettingsModel {
             onTriggered: MobileShell.ShellUtil.takeScreenshot()
         }
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Auto-rotate")
         icon: "rotation-allowed"
@@ -122,6 +129,7 @@ MobileShell.QuickSettingsModel {
             MobileShell.ShellUtil.autoRotateEnabled = !enabled
         }
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Battery")
         status: i18n("%1%", MobileShell.BatteryProvider.percent) 
@@ -129,6 +137,7 @@ MobileShell.QuickSettingsModel {
         enabled: false
         settingsCommand: "plasma-open-settings kcm_mobile_power"
     }
+    
     MobileShell.QuickSetting {
         text: i18n("Sound")
         icon: "audio-speakers-symbolic"

@@ -7,6 +7,9 @@
 #include <ModemManagerQt/Manager>
 #include <ModemManagerQt/modem3gpp.h>
 
+#include <NetworkManagerQt/Connection>
+#include <NetworkManagerQt/ModemDevice>
+
 #include <QObject>
 
 // We make the assumption that there is only one modem.
@@ -18,7 +21,8 @@ class SignalIndicator : public QObject
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(bool simLocked READ simLocked NOTIFY simLockedChanged)
     Q_PROPERTY(bool available READ available NOTIFY availableChanged)
-    Q_PROPERTY(bool wwanEnabled READ wwanEnabled WRITE setWwanEnabled NOTIFY wwanEnabledChanged)
+    Q_PROPERTY(bool mobileDataSupported READ mobileDataSupported NOTIFY mobileDataSupportedChanged)
+    Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
 
 public:
     SignalIndicator();
@@ -27,19 +31,24 @@ public:
     QString name() const;
     bool simLocked() const;
     bool available() const;
-    bool wwanEnabled() const;
+    bool mobileDataSupported() const;
+    bool mobileDataEnabled() const;
 
-    void setWwanEnabled(bool wwanEnabled);
+    void setMobileDataEnabled(bool enabled);
 
 Q_SIGNALS:
     void strengthChanged();
     void nameChanged();
     void simLockedChanged();
     void availableChanged();
-    void wwanEnabledChanged();
+    void mobileDataSupportedChanged();
+    void mobileDataEnabledChanged();
 
 private:
+    NetworkManager::ModemDevice::Ptr m_nmModem;
+    ModemManager::ModemDevice::Ptr m_modemDevice;
     ModemManager::Modem::Ptr m_modem;
     ModemManager::Modem3gpp::Ptr m_3gppModem;
+
     void updateModem();
 };
