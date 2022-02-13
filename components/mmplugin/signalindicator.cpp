@@ -2,16 +2,13 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+#include <NetworkManagerQt/GsmSetting>
 #include <NetworkManagerQt/Manager>
 
 #include "signalindicator.h"
 
 SignalIndicator::SignalIndicator()
 {
-    connect(NetworkManager::notifier(), &NetworkManager::Notifier::wwanEnabledChanged, this, [this](bool) {
-        Q_EMIT wwanEnabledChanged();
-    });
-
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModem);
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModem);
     updateModem();
@@ -43,14 +40,50 @@ bool SignalIndicator::available() const
     return !ModemManager::modemDevices().isEmpty();
 }
 
-bool SignalIndicator::wwanEnabled() const
+bool SignalIndicator::mobileDataSupported() const
 {
-    return NetworkManager::isWwanEnabled();
+    return m_nmModem && m_modemDevice->sim();
 }
 
-void SignalIndicator::setWwanEnabled(bool wwanEnabled)
+bool SignalIndicator::mobileDataEnabled() const
 {
-    NetworkManager::setWwanEnabled(wwanEnabled);
+    if (!m_nmModem) {
+        return false;
+    }
+
+    return m_nmModem->state() == NetworkManager::Device::Activated || m_nmModem->autoconnect();
+}
+
+void SignalIndicator::setMobileDataEnabled(bool enabled)
+{
+    if (!m_nmModem) {
+        return;
+    }
+
+    if (!enabled) {
+        m_nmModem->setAutoconnect(false);
+
+        // before disconnecting, we ensure the current active connection is set to autoconnect
+        for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
+            if (con->uuid() == m_nmModem->activeConnection()->uuid()) {
+                con->settings()->setAutoconnect(true);
+            } else {
+                con->settings()->setAutoconnect(false);
+            }
+        }
+
+        m_nmModem->disconnectInterface().waitForFinished();
+    } else {
+        m_nmModem->setAutoconnect(true);
+
+        // activate the connection that is set to autoconnect
+        for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
+            if (con->settings()->autoconnect()) {
+                NetworkManager::activateConnection(con->path(), m_nmModem->uni(), "");
+                break;
+            }
+        }
+    }
 }
 
 void SignalIndicator::updateModem()
@@ -59,11 +92,31 @@ void SignalIndicator::updateModem()
         qWarning() << "No modems available";
         return;
     }
-    m_modem = ModemManager::modemDevices()[0]->modemInterface();
-    m_3gppModem = ModemManager::modemDevices()[0]->interface(ModemManager::ModemDevice::GsmInterface).objectCast<ModemManager::Modem3gpp>();
-    Q_EMIT nameChanged();
+
+    // we assume that there is a single modem
+    m_modemDevice = ModemManager::modemDevices()[0];
+    m_modem = m_modemDevice->modemInterface();
+    m_3gppModem = m_modemDevice->interface(ModemManager::ModemDevice::GsmInterface).objectCast<ModemManager::Modem3gpp>();
+
+    // find networkmanager modem
+    for (NetworkManager::Device::Ptr nmDevice : NetworkManager::networkInterfaces()) {
+        if (nmDevice->udi() == m_modemDevice->uni()) {
+            m_nmModem = nmDevice.objectCast<NetworkManager::ModemDevice>();
+
+            connect(m_nmModem.get(), &NetworkManager::Device::autoconnectChanged, this, [this]() {
+                Q_EMIT mobileDataEnabledChanged();
+            });
+            connect(m_nmModem.get(), &NetworkManager::Device::stateChanged, this, [this](auto, auto, auto) {
+                Q_EMIT mobileDataEnabledChanged();
+            });
+        }
+    }
+
     connect(m_modem.get(), &ModemManager::Modem::signalQualityChanged, this, &SignalIndicator::strengthChanged);
     connect(m_3gppModem.get(), &ModemManager::Modem3gpp::operatorNameChanged, this, &SignalIndicator::nameChanged);
     connect(m_modem.get(), &ModemManager::Modem::unlockRequiredChanged, this, &SignalIndicator::simLockedChanged);
+
+    Q_EMIT mobileDataSupportedChanged();
+    Q_EMIT nameChanged();
     Q_EMIT availableChanged();
 }
