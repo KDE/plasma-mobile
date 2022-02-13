@@ -76,7 +76,7 @@ void TaskPanel::initWayland()
                 return;
             }
             m_showingDesktop = showing;
-            emit showingDesktopChanged(m_showingDesktop);
+            Q_EMIT showingDesktopChanged(m_showingDesktop);
         });
         connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::activeWindowChanged, m_activeTimer, qOverload<>(&QTimer::start));
 
@@ -115,8 +115,15 @@ void TaskPanel::setPanel(QWindow *panel)
     }
     m_panel = panel;
     connect(m_panel, &QWindow::visibilityChanged, this, &TaskPanel::updatePanelVisibility, Qt::QueuedConnection);
-    emit panelChanged();
+    Q_EMIT panelChanged();
     updatePanelVisibility();
+}
+
+void TaskPanel::setPanelHeight(qreal height)
+{
+    if (m_panel) {
+        m_panel->setHeight(height);
+    }
 }
 
 void TaskPanel::updatePanelVisibility()
@@ -163,10 +170,10 @@ void TaskPanel::updateActiveWindow()
     }
     if (newAllMinimized != m_allMinimized) {
         m_allMinimized = newAllMinimized;
-        emit allMinimizedChanged();
+        Q_EMIT allMinimizedChanged();
     }
     // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
-    emit hasCloseableActiveWindowChanged();
+    Q_EMIT hasCloseableActiveWindowChanged();
 }
 
 bool TaskPanel::hasCloseableActiveWindow() const
@@ -181,7 +188,7 @@ void TaskPanel::forgetActiveWindow()
         disconnect(m_activeWindow.data(), &KWayland::Client::PlasmaWindow::unmapped, this, &TaskPanel::forgetActiveWindow);
     }
     m_activeWindow.clear();
-    emit hasCloseableActiveWindowChanged();
+    Q_EMIT hasCloseableActiveWindowChanged();
 }
 
 void TaskPanel::closeActiveWindow()

@@ -20,6 +20,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Item {
     id: root
     
+    property bool shadow: false
     property color backgroundColor
     property var foregroundColorGroup
     
@@ -32,7 +33,7 @@ Item {
     
     DropShadow {
         anchors.fill: mouseArea
-        visible: !showingApp
+        visible: shadow
         cached: true
         horizontalOffset: 0
         verticalOffset: 1
@@ -166,7 +167,7 @@ Item {
     states: [
         State {
             name: "landscape"
-            when: Screen.width > Screen.height
+            when: root.width < root.height
             PropertyChanges {
                 target: icons
                 buttonLength: icons.height * 0.8 / 3
@@ -204,7 +205,7 @@ Item {
             }
         }, State {
             name: "portrait"
-            when: Screen.width <= Screen.height
+            when: root.width >= root.height
             PropertyChanges {
                 target: icons
                 buttonLength: icons.width * 0.8 / 3

@@ -23,6 +23,7 @@ singleton VolumeProvider 1.0 dataproviders/VolumeProvider.qml
 singleton WifiProvider 1.0 dataproviders/WifiProvider.qml
 
 # /navigationpanel
+NavigationGestureArea 1.0 navigationpanel/NavigationGestureArea.qml
 NavigationPanel 1.0 navigationpanel/NavigationPanel.qml
 NavigationPanelAction 1.0 navigationpanel/NavigationPanelAction.qml
 
@@ -40,5 +41,6 @@ NotificationsModelType 1.0 widgets/notifications/NotificationsModelType.qml
 
 # /
 singleton HomeScreenControls 1.0 HomeScreenControls.qml
+singleton Shell 1.0 Shell.qml
 singleton TaskPanelControls 1.0 TaskPanelControls.qml
 singleton TopPanelControls 1.0 TopPanelControls.qml

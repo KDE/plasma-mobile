@@ -9,6 +9,7 @@ set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     shellutil.cpp
     quicksettingsmodel.cpp
+    mobileshellsettings.cpp
     vkbdinterface.cpp
     displaysmodel.cpp
     

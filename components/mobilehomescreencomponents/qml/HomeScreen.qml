@@ -33,8 +33,8 @@ Item {
         
         appDrawerFlickable: appDrawer.flickable
         
-        availableScreenHeight: height - (MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0)
-        availableScreenWidth: width - (MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth)
+        availableScreenHeight: height - MobileShell.Shell.bottomMargin
+        availableScreenWidth: width - MobileShell.Shell.leftMargin - MobileShell.Shell.rightMargin
         
         appDrawerBottomOffset: favoriteStrip.height
     }
@@ -73,9 +73,10 @@ Item {
 
                 // account for panels
                 anchors.fill: parent
-                anchors.topMargin: MobileShell.TopPanelControls.panelHeight
-                anchors.rightMargin: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
-                anchors.bottomMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
+                anchors.topMargin: MobileShell.Shell.topMargin
+                anchors.bottomMargin: MobileShell.Shell.bottomMargin
+                anchors.leftMargin: MobileShell.Shell.leftMargin
+                anchors.rightMargin: MobileShell.Shell.rightMargin
                 
                 // animation when app drawer is being shown
                 opacity: root.appDrawer ? 1 - root.appDrawer.openFactor : 1
@@ -129,9 +130,10 @@ Item {
                 homeScreenState: root.homeScreenState
                 
                 // account for panels
-                topPadding: MobileShell.TopPanelControls.panelHeight
-                rightPadding: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
-                bottomPadding: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
+                topPadding: MobileShell.Shell.topMargin
+                bottomPadding: MobileShell.Shell.bottomMargin
+                leftPadding: MobileShell.Shell.leftMargin
+                rightPadding: MobileShell.Shell.rightMargin
             }
         }
     }

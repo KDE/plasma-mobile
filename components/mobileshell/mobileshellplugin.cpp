@@ -10,6 +10,7 @@
 #include <QQuickItem>
 
 #include "displaysmodel.h"
+#include "mobileshellsettings.h"
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 #include "quicksettingsmodel.h"
@@ -23,6 +24,10 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<ShellUtil>(uri, 1, 0, "ShellUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return ShellUtil::instance();
+    });
+
+    qmlRegisterSingletonType<MobileShellSettings>(uri, 1, 0, "MobileShellSettings", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return MobileShellSettings::self();
     });
 
     qmlRegisterType<QuickSetting>(uri, 1, 0, "QuickSetting");

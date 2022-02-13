@@ -166,9 +166,10 @@ Item {
         
         // provide shell margins
         anchors.fill: parent
-        anchors.rightMargin: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
-        anchors.bottomMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
-        anchors.topMargin: MobileShell.TopPanelControls.panelHeight
+        anchors.leftMargin: MobileShell.Shell.leftMargin
+        anchors.rightMargin: MobileShell.Shell.rightMargin
+        anchors.bottomMargin: MobileShell.Shell.bottomMargin
+        anchors.topMargin: MobileShell.Shell.topMargin
         
         FlickContainer {
             id: flickable

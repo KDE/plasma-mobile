@@ -75,9 +75,10 @@ Item {
         id: flickable
         
         anchors.fill: parent
-        anchors.topMargin: MobileShell.TopPanelControls.panelHeight
-        anchors.bottomMargin: MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0
-        anchors.rightMargin: MobileShell.TaskPanelControls.isPortrait ? 0 : MobileShell.TaskPanelControls.panelWidth
+        anchors.topMargin: MobileShell.Shell.topMargin
+        anchors.bottomMargin: MobileShell.Shell.bottomMargin
+        anchors.leftMargin: MobileShell.Shell.leftMargin
+        anchors.rightMargin: MobileShell.Shell.rightMargin
         
         contentHeight: flickable.height + root.closedContentY + 999999
         contentY: root.closedContentY

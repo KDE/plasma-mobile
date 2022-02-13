@@ -11,6 +11,7 @@ pragma Singleton
 
 /**
  * Provides access to the taskpanel plasmoid containment within the shell.
+ * Properties are updated by the taskpanel containment.
  */
 QtObject {
     id: root

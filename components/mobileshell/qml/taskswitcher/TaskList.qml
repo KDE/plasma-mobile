@@ -71,8 +71,8 @@ Item {
             
             // account for system header and footer offset (center the preview image)
             y: {
-                let headerHeight = MobileShell.TopPanelControls.panelHeight;
-                let footerHeight = MobileShell.TaskPanelControls.isPortrait ? MobileShell.TaskPanelControls.panelHeight : 0;
+                let headerHeight = MobileShell.Shell.topMargin;
+                let footerHeight = MobileShell.Shell.bottomMargin;
                 let diff = headerHeight - footerHeight;
                 
                 let baseY = (taskSwitcher.height / 2) - (height / 2) - (taskSwitcherState.taskHeaderHeight / 2)

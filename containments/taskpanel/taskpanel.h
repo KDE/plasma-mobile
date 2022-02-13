@@ -41,6 +41,8 @@ public:
     QWindow *panel();
     void setPanel(QWindow *panel);
 
+    Q_INVOKABLE void setPanelHeight(qreal height);
+
     Q_INVOKABLE void closeActiveWindow();
 
     bool isShowingDesktop() const
