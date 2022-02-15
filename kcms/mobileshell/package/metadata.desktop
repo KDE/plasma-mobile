@@ -3,7 +3,23 @@
 
 [Desktop Entry]
 Name=Shell
+Name[az]=Örtük
+Name[ca]=Intèrpret d'ordres
+Name[es]=Intérprete de órdenes
+Name[hu]=Felület
+Name[nl]=Shell
+Name[sl]=Shell
+Name[uk]=Оболонка
+Name[x-test]=xxShellxx
 Comment=Configure the system shell
+Comment[az]=Sistem 
+Comment[ca]=Configura l'intèrpret d'ordres del sistema
+Comment[es]=Configura el intérprete de órdenes del sistema
+Comment[hu]=A rendszerfelület beállítása
+Comment[nl]=De systeem-shell configureren
+Comment[sl]=Nastavi sistemski shell
+Comment[uk]=Налаштувати командну оболонку системи
+Comment[x-test]=xxConfigure the system shellxx
 Encoding=UTF-8
 Type=Service
 Icon=preferences-desktop-plasma
@@ -21,5 +37,13 @@ X-KDE-PluginInfo-Category=System Information
 X-KDE-PluginInfo-License=GPL
 X-KDE-PluginInfo-EnabledByDefault=true
 X-KDE-Keywords=system,shell,panel
+X-KDE-Keywords[az]=sistem,örtük,panel
+X-KDE-Keywords[ca]=sistema,intèrpret d'ordres,plafó
+X-KDE-Keywords[es]=sistema,intérprete,intérprete de órdenes,panel
+X-KDE-Keywords[hu]=rendszer,felület,panel
+X-KDE-Keywords[nl]=systeem,shell,paneel
+X-KDE-Keywords[sl]=sistem,shell,kontrolna plošča
+X-KDE-Keywords[uk]=system,shell,panel,система,оболонка,панель
+X-KDE-Keywords[x-test]=xxsystemxx,xxshellxx,xxpanelxx
 X-KDE-ParentApp=kcontrol
 X-KDE-PluginInfo-Name=kcm_mobileshell
