@@ -13,6 +13,7 @@ Name[sl]=Caffeine
 Name[sv]=Koffein
 Name[uk]=Кофеїн
 Name[x-test]=xxCaffeinexx
+Name[zh_CN]=Caffeine
 Icon=system-suspend-hibernate
 
 Type=Service

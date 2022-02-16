@@ -13,6 +13,7 @@ Name[sl]=Meni energije
 Name[sv]=Strömmeny
 Name[uk]=Меню живлення
 Name[x-test]=xxPower Menuxx
+Name[zh_CN]=电源菜单
 Icon=system-shutdown-symbolic
 
 Type=Service
