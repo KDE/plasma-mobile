@@ -15,13 +15,16 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Rectangle {
     id: rect
-    color: "transparent"
-    clip: true
+    
+    readonly property bool notificationsShown: notificationsList.hasNotifications
     
     property real leftMargin: 0
     property real rightMargin: 0
     property real topMargin: 0
     property real bottomMargin: 0
+    
+    color: "transparent"
+    clip: true
     
     PlasmaCore.ColorScope {
         anchors.fill: parent
@@ -34,18 +37,19 @@ Rectangle {
         Connections {
             target: authenticator
             function onSucceeded() {
-                if (phoneNotificationsList.requestNotificationAction) {
-                    phoneNotificationsList.runPendingAction();
-                    phoneNotificationsList.requestNotificationAction = false;
+                // run pending action if successfully unlocked
+                if (notificationsList.requestNotificationAction) {
+                    notificationsList.runPendingAction();
+                    notificationsList.requestNotificationAction = false;
                 }
             }
             function onFailed() {
-                phoneNotificationsList.requestNotificationAction = false;
+                notificationsList.requestNotificationAction = false;
             }
         }
         
         MobileShell.NotificationsWidget {
-            id: phoneNotificationsList
+            id: notificationsList
             anchors.fill: parent
             
             historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
@@ -54,7 +58,6 @@ Rectangle {
         
             property bool requestNotificationAction: false
             
-            onHasNotificationsChanged: root.notificationsShown = hasNotifications
             onUnlockRequested: {
                 requestNotificationAction = true;
                 root.askPassword();

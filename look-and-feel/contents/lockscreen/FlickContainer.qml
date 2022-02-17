@@ -31,6 +31,9 @@ Flickable {
     }
     
     function updateState() {
+        // don't update state if at end
+        if (position <= 0 || position >= keypadHeight) return;
+        
         if (movingUp) {
             goToOpenPosition();
         } else {
@@ -72,7 +75,7 @@ Flickable {
     property real oldContentY
     onContentYChanged: {
         positionChangedDueToFlickable = true;
-        position += (contentY - oldContentY);
+        position = Math.max(0, Math.min(keypadHeight, position + (contentY - oldContentY)));
         oldContentY = contentY;
     }
     

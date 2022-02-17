@@ -1,7 +1,6 @@
 /*
-SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
-
-SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
+ * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 import QtQuick 2.8
@@ -12,10 +11,13 @@ import QtGraphicalEffects 1.12
 import org.kde.plasma.core 2.0
 
 ColumnLayout {
-    readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+    id: root
+    property int layoutAlignment
     
-    property int alignment
-    Layout.alignment: alignment
+    readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+    readonly property bool is24HourTime: Qt.locale().timeFormat(Locale.ShortFormat).toLowerCase().indexOf("ap") === -1
+    
+    Layout.alignment: layoutAlignment
     spacing: Units.gridUnit
     
     Label {
@@ -24,7 +26,7 @@ ColumnLayout {
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
         
-        Layout.alignment: alignment
+        Layout.alignment: root.layoutAlignment
         font.weight: Font.Light // this font weight may switch to regular on distros that don't have a light variant
         font.pointSize: 36
         layer.enabled: true
@@ -35,13 +37,14 @@ ColumnLayout {
             color: "#757575"
         }
     }
+    
     Label {
         text: Qt.formatDate(timeSource.data["Local"]["DateTime"], "ddd, MMM d")
         color: ColorScope.textColor
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
         
-        Layout.alignment: alignment
+        Layout.alignment: root.layoutAlignment
         font.pointSize: 10
         layer.enabled: true
         layer.effect: DropShadow {
@@ -51,6 +54,7 @@ ColumnLayout {
             color: "#757575"
         }
     }
+    
     DataSource {
         id: timeSource
         engine: "time"
