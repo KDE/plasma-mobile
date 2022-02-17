@@ -24,7 +24,7 @@ PlasmaCore.ColorScope {
     width: 360
     
     // contrasting colour
-    colorGroup: !plasmoid.nativeInterface.allMinimized ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    colorGroup: !plasmoid.nativeInterface.allMinimized ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
     readonly property color backgroundColor: PlasmaCore.ColorScope.backgroundColor
 
