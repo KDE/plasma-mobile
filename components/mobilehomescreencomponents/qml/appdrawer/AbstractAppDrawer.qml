@@ -148,7 +148,7 @@ Item {
                     spacing: 0
                     
                     // drawer header
-                    Controls.Control {
+                    MobileShell.BaseItem {
                         id: flickableHeader
                         Layout.preferredHeight: root.headerHeight
                         Layout.fillWidth: true
@@ -158,7 +158,7 @@ Item {
                     }
                     
                     // drawer body
-                    Controls.Control {
+                    MobileShell.BaseItem {
                         id: flickableBody
                         Layout.fillHeight: true
                         Layout.fillWidth: true
