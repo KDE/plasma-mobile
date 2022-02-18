@@ -23,6 +23,8 @@ This repository contains shell components for Plasma Mobile.
 
 ### Test on a development machine
 
+See the [documentation page](https://invent.kde.org/plasma/plasma-mobile/-/wikis/Building-and-Testing-Locally) for more details.
+
 It is recommended to use `kdesrc-build` to build this from source. See [this page](https://community.kde.org/Get_Involved/development) in order to set it up.
 
 Dependencies:
