@@ -9,6 +9,7 @@ This repository contains shell components for Plasma Mobile.
 
 ### Links
 * Project page: https://invent.kde.org/plasma/plasma-mobile
+* Documentation: https://invent.kde.org/plasma/plasma-mobile/-/wikis/home
 * Issues relating to the shell: https://invent.kde.org/plasma/plasma-mobile/-/issues
 * General Plasma Mobile issues: https://invent.kde.org/teams/plasma-mobile/issues/-/issues
 * Development channel: https://matrix.to/#/#plasmamobile:matrix.org
