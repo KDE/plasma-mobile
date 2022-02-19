@@ -70,6 +70,9 @@ MobileShell.QuickSettingsModel {
     MobileShell.QuickSetting {
         text: i18n("Mobile Data")
         icon: "network-modem"
+        status: PlasmaMM.SignalIndicator.mobileDataSupported 
+                    ? "" // on or off supplied by default
+                    : "Not Available" // NOTE: not translated to not break string freeze
         settingsCommand: "plasma-open-settings kcm_mobile_broadband"
         enabled: PlasmaMM.SignalIndicator.mobileDataEnabled
         function toggle() {
