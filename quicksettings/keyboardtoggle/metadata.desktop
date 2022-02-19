@@ -3,6 +3,12 @@
 
 [Desktop Entry]
 Name=Virtual Keyboard Toggle
+Name[ca]=Commutació del teclat virtual
+Name[es]=Conmutación del teclado virtual
+Name[hu]=Virtuális billentyűzet kapcsoló
+Name[nl]=Omschakeling van virtueel toetsenbord
+Name[uk]=Перемикання віртуальної клавіатури
+Name[x-test]=xxVirtual Keyboard Togglexx
 Icon=input-keyboard-virtual
 
 Type=Service
