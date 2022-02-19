@@ -9,3 +9,6 @@ Placement=Maximizing
 
 [plasmashellrc][Shell]
 ShellPackage=org.kde.plasma.phoneshell
+
+[Wallpaper]
+Image=Next
