@@ -42,7 +42,7 @@ PlasmaCore.ColorScope {
         color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
                        PlasmaCore.Theme.backgroundColor.g, 
                        PlasmaCore.Theme.backgroundColor.b, 
-                       notificationWidget.hasNotifications ? 0.95 : 0.7)
+                       notificationWidget.hasNotifications ? 0.95 : 0.9)
         Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
