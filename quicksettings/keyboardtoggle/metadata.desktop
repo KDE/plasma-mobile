@@ -4,9 +4,13 @@
 [Desktop Entry]
 Name=Virtual Keyboard Toggle
 Name[ca]=Commutació del teclat virtual
+Name[en_GB]=Virtual Keyboard Toggle
 Name[es]=Conmutación del teclado virtual
+Name[fr]=Basculement vers /hors clavier virtuel
 Name[hu]=Virtuális billentyűzet kapcsoló
 Name[nl]=Omschakeling van virtueel toetsenbord
+Name[sl]=Preklop navidezne tipkovnice
+Name[sv]=Visa eller dölj virtuellt tangentbord
 Name[uk]=Перемикання віртуальної клавіатури
 Name[x-test]=xxVirtual Keyboard Togglexx
 Icon=input-keyboard-virtual
