@@ -18,14 +18,14 @@ MobileShell.NavigationPanel {
     property bool appIsShown: !plasmoid.nativeInterface.allMinimized
     
     // background is:
-    // - opaque if an app is shown
+    // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
     backgroundColor: {
         if (root.taskSwitcher.visible) {
             return Qt.rgba(0, 0, 0, 0.1);
         } else {
-            return appIsShown ? PlasmaCore.ColorScope.backgroundColor : "transparent";
+            return (MobileShell.KWinVirtualKeyboard.visible || appIsShown) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
         }
     }
     foregroundColorGroup: (!root.taskSwitcher.visible && appIsShown) ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
