@@ -16,6 +16,7 @@ Name[sl]=Preklop navidezne tipkovnice
 Name[sv]=Visa eller dölj virtuellt tangentbord
 Name[uk]=Перемикання віртуальної клавіатури
 Name[x-test]=xxVirtual Keyboard Togglexx
+Name[zh_CN]=虚拟键盘开关
 Icon=input-keyboard-virtual
 
 Type=Service
