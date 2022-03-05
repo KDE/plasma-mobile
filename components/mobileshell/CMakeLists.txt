@@ -19,7 +19,9 @@ set(mobileshellplugin_SRCS
     ${DBUS_SRCS}
 )
 
-add_library(mobileshellplugin ${mobileshellplugin_SRCS})
+qtquick_compiler_add_resources(RESOURCES resources.qrc)
+
+add_library(mobileshellplugin ${mobileshellplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellplugin
         PUBLIC
@@ -41,6 +43,8 @@ target_link_libraries(mobileshellplugin
             KF5::Service
     )
 
-install(TARGETS mobileshellplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
+# we compiled the qml files, just install qmldir
+install(FILES qml/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
 
-install(DIRECTORY qml/ DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
+ecm_generate_qmltypes(org.kde.plasma.private.mobileshell 1.0 DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)
+install(TARGETS mobileshellplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell)

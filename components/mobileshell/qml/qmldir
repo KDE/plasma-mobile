@@ -1,46 +1,7 @@
-# SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+# SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 module org.kde.plasma.private.mobileshell
 
 plugin mobileshellplugin
 
-# /actiondrawer
-ActionDrawer 1.0 actiondrawer/ActionDrawer.qml
-ActionDrawerOpenSurface 1.0 actiondrawer/ActionDrawerOpenSurface.qml
-
-# /components
-BaseItem 1.0 components/BaseItem.qml
-Direction 1.0 components/Direction.qml
-StartupFeedback 1.0 components/StartupFeedback.qml
-VelocityCalculator 1.0 components/VelocityCalculator.qml
-
-# /dataproviders
-singleton BatteryProvider 1.0 dataproviders/BatteryProvider.qml
-singleton BluetoothProvider 1.0 dataproviders/BluetoothProvider.qml
-singleton SignalStrengthProvider 1.0 dataproviders/SignalStrengthProvider.qml
-singleton VolumeProvider 1.0 dataproviders/VolumeProvider.qml
-singleton WifiProvider 1.0 dataproviders/WifiProvider.qml
-
-# /navigationpanel
-NavigationGestureArea 1.0 navigationpanel/NavigationGestureArea.qml
-NavigationPanel 1.0 navigationpanel/NavigationPanel.qml
-NavigationPanelAction 1.0 navigationpanel/NavigationPanelAction.qml
-
-# /statusbar
-StatusBar 1.0 statusbar/StatusBar.qml
-
-# /taskswitcher
-TaskSwitcher 1.0 taskswitcher/TaskSwitcher.qml
-
-# /widgets
-KRunnerWidget 1.0 widgets/krunner/KRunnerWidget.qml
-MediaControlsWidget 1.0 widgets/mediacontrols/MediaControlsWidget.qml
-NotificationsWidget 1.0 widgets/notifications/NotificationsWidget.qml
-NotificationsModelType 1.0 widgets/notifications/NotificationsModelType.qml
-
-# /
-singleton HomeScreenControls 1.0 HomeScreenControls.qml
-singleton Shell 1.0 Shell.qml
-singleton TaskPanelControls 1.0 TaskPanelControls.qml
-singleton TopPanelControls 1.0 TopPanelControls.qml

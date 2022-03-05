@@ -25,6 +25,8 @@ include(ECMInstallIcons)
 include(ECMSetupVersion)
 include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
+include(ECMQMLModules)
+include(ECMGenerateQmlTypes)
 include(GenerateExportHeader)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
@@ -36,6 +38,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
+    QuickCompiler
 )
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
