@@ -18,6 +18,11 @@ export QT_QUICK_CONTROLS_MOBILE=true
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=phone:handset
 
+# if coredumpd knows about the dumps, make sure drkonqi catches them
+if [[ $(cat /proc/sys/kernel/core_pattern) =~ /systemd-coredump ]]
+then
+	export KDE_COREDUMP_NOTIFY=1
+fi
 
 # TODO port away from PLASMA_DEFAULT_SHELL into QT_QPA_PLATFORM=offscreen plasma-apply-lookandfeel --apply org.kde.plasma.phone
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.phoneshell
