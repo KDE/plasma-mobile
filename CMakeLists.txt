@@ -17,7 +17,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
-set(KF_IGNORE_PLATFORM_CHECK OFF CACHE BOOL "Check platform that is being built on")
+set(KF_IGNORE_PLATFORM_CHECK ON CACHE BOOL "Don't check platform that is being built on")
 
 option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
 
