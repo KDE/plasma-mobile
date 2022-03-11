@@ -8,10 +8,12 @@ qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.ScreenShot2.xml
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     shellutil.cpp
-    quicksettingsmodel.cpp
     mobileshellsettings.cpp
     vkbdinterface.cpp
     displaysmodel.cpp
+    
+    quicksettings/quicksetting.cpp
+    quicksettings/quicksettingsmodel.cpp
     
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
