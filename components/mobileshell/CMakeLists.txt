@@ -19,7 +19,11 @@ set(mobileshellplugin_SRCS
     ${DBUS_SRCS}
 )
 
-qtquick_compiler_add_resources(RESOURCES resources.qrc)
+if(QUICK_COMPILER)
+    qtquick_compiler_add_resources(RESOURCES resources.qrc)
+else()
+    qt5_add_resources(RESOURCES resources.qrc)
+endif()
 
 add_library(mobileshellplugin ${mobileshellplugin_SRCS} ${RESOURCES})
 

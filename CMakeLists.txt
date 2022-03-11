@@ -17,6 +17,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
@@ -40,6 +42,10 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Quick
     QuickCompiler
 )
+
+if (QUICK_COMPILER)
+    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED QuickCompiler)
+endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
