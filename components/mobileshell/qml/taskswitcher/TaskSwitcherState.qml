@@ -205,7 +205,6 @@ QtObject {
         
         onFinished: {
             root.currentlyBeingOpened = false;
-            taskSwitcher.tasksModel.requestLastActivatedReorderDelay(false);
         }
     }
         
@@ -221,7 +220,6 @@ QtObject {
             taskSwitcher.instantHide();
             
             if (root.wasInActiveTask) {
-                taskSwitcher.tasksModel.requestLastActivatedReorderDelay(true);
                 taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             }
         }

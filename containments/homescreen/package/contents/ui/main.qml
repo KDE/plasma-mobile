@@ -184,7 +184,7 @@ FocusScope {
             groupMode: TaskManager.TasksModel.GroupDisabled
 
             screenGeometry: plasmoid.screenGeometry
-            sortMode: TaskManager.TasksModel.SortLastActivated
+            sortMode: TaskManager.TasksModel.SortAlpha
 
             virtualDesktop: virtualDesktopInfo.currentDesktop
             activity: activityInfo.currentActivity

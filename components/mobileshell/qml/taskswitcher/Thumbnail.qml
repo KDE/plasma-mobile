@@ -15,7 +15,7 @@ TaskManager.PipeWireSourceItem {
     nodeId: waylandItem.nodeId
 
     onVisibleChanged: {
-        if (visible) {
+        if (visible && waylandItem.uuid.length === 0) {
             if (model.WinIdList) {
                 waylandItem.uuid = model.WinIdList[0];
             }
