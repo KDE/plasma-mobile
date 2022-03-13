@@ -12,7 +12,12 @@
 
 #include <virtualkeyboardinterface.h>
 
-class KwinVirtualKeyboardInterface : public OrgKdeKwinVirtualKeyboardInterface
+#include "mobileshell_export.h"
+
+namespace MobileShell
+{
+
+class MOBILESHELL_EXPORT KwinVirtualKeyboardInterface : public OrgKdeKwinVirtualKeyboardInterface
 {
     Q_OBJECT
     Q_PROPERTY(bool active READ active WRITE setActive NOTIFY activeChanged)
@@ -21,3 +26,5 @@ class KwinVirtualKeyboardInterface : public OrgKdeKwinVirtualKeyboardInterface
 public:
     KwinVirtualKeyboardInterface();
 };
+
+} // namespace MobileShell

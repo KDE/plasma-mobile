@@ -15,7 +15,12 @@
 #include "kscreeninterface.h"
 #include "screenshot2interface.h"
 
-class ShellUtil : public QObject
+#include "mobileshell_export.h"
+
+namespace MobileShell
+{
+
+class MOBILESHELL_EXPORT ShellUtil : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool autoRotateEnabled READ autoRotate WRITE setAutoRotate NOTIFY autoRotateChanged);
@@ -55,3 +60,5 @@ private:
     org::kde::KScreen *m_kscreenInterface;
     OrgKdeKWinScreenShot2Interface *m_screenshotInterface;
 };
+
+} // namespace MobileShell

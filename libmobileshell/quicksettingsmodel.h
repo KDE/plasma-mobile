@@ -4,8 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef QUICKSETTINGSMODEL_H
-#define QUICKSETTINGSMODEL_H
+#pragma once
 
 #include "qqml.h"
 #include "quicksetting.h"
@@ -13,7 +12,12 @@
 #include <QAbstractListModel>
 #include <QQmlListProperty>
 
-class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
+#include "mobileshell_export.h"
+
+namespace MobileShell
+{
+
+class MOBILESHELL_EXPORT QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
@@ -42,4 +46,4 @@ private:
     QList<QuickSetting *> m_external;
 };
 
-#endif // QUICKSETTINGSMODEL_H
+} // namespace MobileShell

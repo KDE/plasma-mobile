@@ -6,6 +6,8 @@
 
 #include "mobileshellsettings.h"
 
+using namespace MobileShell;
+
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
 

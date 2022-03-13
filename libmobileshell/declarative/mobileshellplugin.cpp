@@ -9,15 +9,17 @@
 #include <QQmlContext>
 #include <QQuickItem>
 
-#include "displaysmodel.h"
-#include "mobileshellsettings.h"
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
-#include "quicksettings/quicksetting.h"
-#include "quicksettings/quicksettingsmodel.h"
+
+#include "displaysmodel.h"
+#include "kwinvirtualkeyboardinterface.h"
+#include "mobileshellsettings.h"
+#include "quicksetting.h"
+#include "quicksettingsmodel.h"
 #include "shellutil.h"
-#include "virtualkeyboardinterface.h"
-#include "vkbdinterface.h"
+
+using namespace MobileShell;
 
 QUrl resolvePath(std::string str)
 {
@@ -40,7 +42,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");
 
     qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
-    qmlRegisterSingletonType<OrgKdeKwinVirtualKeyboardInterface>(uri, 1, 0, "KWinVirtualKeyboard", [](QQmlEngine *, QJSEngine *) -> QObject * {
+    qmlRegisterSingletonType<KwinVirtualKeyboardInterface>(uri, 1, 0, "KWinVirtualKeyboard", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return new KwinVirtualKeyboardInterface;
     });
 

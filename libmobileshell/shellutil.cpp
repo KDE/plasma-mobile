@@ -29,6 +29,8 @@
 
 #define FORMAT24H "HH:mm:ss"
 
+using namespace MobileShell;
+
 constexpr int SCREENSHOT_DELAY = 200;
 
 /* -- Static Helpers --------------------------------------------------------------------------- */

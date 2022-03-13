@@ -15,9 +15,10 @@ This repository contains shell components for Plasma Mobile.
 * Development channel: https://matrix.to/#/#plasmamobile:matrix.org
 
 ### Locations
-* [applets](applets) - plasmoids
-* [components/mobileshell](components/mobileshell) - shell component library
+* [libmobileshell](libmobileshell) - shell component library
 * [containments](containments) - shell panels (homescreen, status bar, task panel)
+* [homescreens](homescreens) - homescreen packages
+* [kcms]() - settings modules
 * [look-and-feel](look-and-feel/contents) - Plasma look-and-feel packages (ex. lockscreen, logout, etc.)
 * [quicksettings](quicksettings) - quick settings packages for the action drawer
 

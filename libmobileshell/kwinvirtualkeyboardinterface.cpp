@@ -4,7 +4,9 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "vkbdinterface.h"
+#include "kwinvirtualkeyboardinterface.h"
+
+using namespace MobileShell;
 
 KwinVirtualKeyboardInterface::KwinVirtualKeyboardInterface()
     : OrgKdeKwinVirtualKeyboardInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/VirtualKeyboard"), QDBusConnection::sessionBus())

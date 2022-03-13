@@ -10,7 +10,12 @@
 #include <QAbstractListModel>
 #include <QQmlListProperty>
 
-class QuickSetting : public QObject
+#include "mobileshell_export.h"
+
+namespace MobileShell
+{
+
+class MOBILESHELL_EXPORT QuickSetting : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString text READ text WRITE setText REQUIRED NOTIFY textChanged)
@@ -67,3 +72,5 @@ private:
     QString m_settingsCommand;
     QList<QObject *> m_children;
 };
+
+} // namespace MobileShell
