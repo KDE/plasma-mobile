@@ -13,7 +13,6 @@
         <file>qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml</file>
         <file>qml/actiondrawer/quicksettings/QuickSettingsMinimizedDelegate.qml</file>
         <file>qml/actiondrawer/quicksettings/QuickSettingsPanel.qml</file>
-        <file>qml/actiondrawer/quicksettings/SettingsModel.qml</file>
         
         <file>qml/actiondrawer/ActionDrawer.qml</file>
         <file>qml/actiondrawer/ActionDrawerOpenSurface.qml</file>

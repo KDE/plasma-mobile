@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../components" as Components
 import "../../components/util.js" as Util
@@ -39,9 +40,7 @@ Item {
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
     
-    readonly property SettingsModel quickSettingsModel: SettingsModel {
-        actionDrawer: root.actionDrawer
-    }
+    readonly property var quickSettingsModel: MobileShell.QuickSettingsModel {}
     
     // view when fully open
     ColumnLayout {

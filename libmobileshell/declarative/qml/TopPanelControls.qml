@@ -18,6 +18,9 @@ QtObject {
     signal startSwipe()
     signal endSwipe()
     signal requestRelativeScroll(real offsetY)
+    signal closeActionDrawer()
+    signal openActionDrawer()
     property bool inSwipe: false
     property real panelHeight: PlasmaCore.Units.gridUnit // set and updated in panel containment
+    property bool actionDrawerVisible: false 
 }

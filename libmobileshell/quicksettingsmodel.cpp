@@ -58,22 +58,31 @@ void QuickSettingsModel::classBegin()
 
     const auto packages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KPackage/GenericQML"), "plasma/quicksettings");
     auto c = new QQmlComponent(engine, this);
+
     for (const auto &metaData : packages) {
         KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
         if (!package.isValid()) {
-            qWarning() << "Could not load" << metaData.fileName();
+            qWarning() << "Quick setting package invalid:" << metaData.fileName();
             continue;
         }
 
         c->loadUrl(package.fileUrl("mainscript"), QQmlComponent::PreferSynchronous);
+
         auto created = c->create(engine->rootContext());
         auto createdSetting = qobject_cast<QuickSetting *>(created);
+
         if (!createdSetting) {
             qWarning() << "Could not load" << metaData.fileName() << created;
+            if (c->isError()) {
+                for (const auto &error : c->errors()) {
+                    qDebug() << error;
+                }
+            }
             delete created;
-            continue;
+        } else {
+            qDebug() << "Loaded quicksetting" << metaData.fileName();
+            m_external += createdSetting;
         }
-        m_external += createdSetting;
     }
     delete c;
 }

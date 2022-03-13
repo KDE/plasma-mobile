@@ -43,6 +43,11 @@ Item {
         property: "inSwipe"
         value: drawer.dragging
     }
+    Binding {
+        target: MobileShell.TopPanelControls
+        property: "actionDrawerVisible"
+        value: drawer.visible
+    }
     
     Connections {
         target: MobileShell.TopPanelControls
@@ -55,6 +60,12 @@ Item {
         }
         function onRequestRelativeScroll(offsetY) {
             swipeArea.updateOffset(offsetY);
+        }
+        function onCloseActionDrawer() {
+            drawer.close();
+        }
+        function onOpenActionDrawer() {
+            drawer.open();
         }
     }
     

@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[Desktop Entry]
+Name=Location
+Icon=gps
+Description=Location quick setting
+
+Type=Service
+X-KDE-ServiceTypes=KPackage/GenericQML
+
+X-KDE-PluginInfo-Author=Devin Lin
+X-KDE-PluginInfo-Email=devin@kde.org
+X-KDE-PluginInfo-Name=org.kde.plasma.location
+X-KDE-PluginInfo-Version=0.1
+X-KDE-PluginInfo-Website=https://kde.org
+X-KDE-PluginInfo-License=GPL-2.0+
