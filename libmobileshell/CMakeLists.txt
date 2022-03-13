@@ -53,6 +53,8 @@ set_target_properties(mobileshell PROPERTIES
                       SOVERSION 1
                       EXPORT_NAME LibMobileShell)
 
+install(TARGETS mobileshell EXPORT mobileshellLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
+                      
 install(FILES
     displaysmodel.h
     kwinvirtualkeyboardinterface.h
