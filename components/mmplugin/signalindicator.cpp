@@ -47,11 +47,30 @@ bool SignalIndicator::mobileDataSupported() const
 
 bool SignalIndicator::mobileDataEnabled() const
 {
+    // no modem -> no mobile data -> report disabled
     if (!m_nmModem) {
         return false;
     }
 
-    return m_nmModem->state() == NetworkManager::Device::Activated || m_nmModem->autoconnect();
+    // mobile data already activated -> report enabled
+    if (m_nmModem->state() == NetworkManager::Device::Activated) {
+        return true;
+    }
+
+    // autoconnect disabled on the entire modem -> report disabled
+    if (!m_nmModem->autoconnect()) {
+        return false;
+    }
+
+    // at least one connection set to autoconnect -> report enabled
+    for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
+        if (con->settings()->autoconnect()) {
+            return true;
+        }
+    }
+
+    // modem, but no connection, set to autoconnect -> report disabled (#182)
+    return false;
 }
 
 void SignalIndicator::setMobileDataEnabled(bool enabled)
@@ -59,29 +78,36 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
     if (!m_nmModem) {
         return;
     }
-
     if (!enabled) {
         m_nmModem->setAutoconnect(false);
-
-        // before disconnecting, we ensure the current active connection is set to autoconnect
+        // we need to also set all connections to not autoconnect (#182)
         for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
-            if (con->uuid() == m_nmModem->activeConnection()->uuid()) {
-                con->settings()->setAutoconnect(true);
-            } else {
-                con->settings()->setAutoconnect(false);
-            }
+            con->settings()->setAutoconnect(false);
+            con->update(con->settings()->toMap());
         }
-
         m_nmModem->disconnectInterface().waitForFinished();
     } else {
         m_nmModem->setAutoconnect(true);
-
-        // activate the connection that is set to autoconnect
+        // activate the connection that was last used
+        QDateTime latestTimestamp;
+        NetworkManager::Connection::Ptr latestCon;
         for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
-            if (con->settings()->autoconnect()) {
-                NetworkManager::activateConnection(con->path(), m_nmModem->uni(), "");
-                break;
+            QDateTime timestamp = con->settings()->timestamp();
+            // if con was not used yet, skip it, otherwise:
+            // if we have no latestTimestamp yet, con is the latest
+            // otherwise, compare the timestamps
+            // in case of a tie, use the first connection that was found
+            if (!timestamp.isNull() && (latestTimestamp.isNull() || timestamp > latestTimestamp)) {
+                latestTimestamp = timestamp;
+                latestCon = con;
             }
+        }
+        // if we found the last used connection
+        if (!latestCon.isNull()) {
+            // set it to autoconnect and connect it immediately
+            latestCon->settings()->setAutoconnect(true);
+            latestCon->update(latestCon->settings()->toMap());
+            NetworkManager::activateConnection(latestCon->path(), m_nmModem->uni(), "");
         }
     }
 }
