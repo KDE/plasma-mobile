@@ -8,6 +8,7 @@
 var desktopsArray = desktopsForActivity(currentActivity());
 for (var j = 0; j < desktopsArray.length; j++) {
     desktopsArray[j].wallpaperPlugin = "org.kde.image";
+    desktopsArray[j].addWidget("org.kde.phone.homescreen.folio"); // default homescreen
 }
 
 // add meta shortcut 

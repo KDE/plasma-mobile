@@ -82,6 +82,7 @@ install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_D
 add_subdirectory(bin)
 add_subdirectory(containments)
 add_subdirectory(components)
+add_subdirectory(homescreens)
 add_subdirectory(quicksettings)
 add_subdirectory(kcms)
 add_subdirectory(libmobileshell)

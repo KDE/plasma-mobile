@@ -28,7 +28,7 @@ FocusScope {
         if (!componentComplete) {
             return;
         }
-        HomeScreenComponents.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homescreen.homeScreenContents.favoriteStrip.cellWidth));
+        HomeScreenComponents.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homeScreen.homeScreenContents.favoriteStrip.cellWidth));
     }
     
     function triggerHomeScreen() {
@@ -51,21 +51,21 @@ FocusScope {
         }
         
         function onResetHomeScreenPosition() {
-            homescreen.homeScreenState.animateGoToPageIndex(0, PlasmaCore.Units.longDuration);
-            homescreen.homeScreenState.closeAppDrawer();
+            homeScreen.homeScreenState.animateGoToPageIndex(0, PlasmaCore.Units.longDuration);
+            homeScreen.homeScreenState.closeAppDrawer();
         }
         
         function onSnapHomeScreenPosition() {
             if (lastRequestedPosition < 0) {
-                homescreen.homeScreenState.openAppDrawer();
+                homeScreen.homeScreenState.openAppDrawer();
             } else {
-                homescreen.homeScreenState.closeAppDrawer();
+                homeScreen.homeScreenState.closeAppDrawer();
             }
         }
         
         function onRequestRelativeScroll(pos) {
             // TODO
-            //homescreen.appDrawer.offset -= pos.y;
+            //homeScreen.appDrawer.offset -= pos.y;
             //lastRequestedPosition = pos.y;
         }
         
@@ -93,10 +93,11 @@ FocusScope {
     onHeightChanged: recalculateMaxFavoriteCount()
     
     Component.onCompleted: {
-        // ApplicationListModel doesn't have a plasmoid as is not the one that should be doing writing
-        HomeScreenComponents.ApplicationListModel.loadApplications();
-        HomeScreenComponents.FavoritesModel.applet = plasmoid;
-        HomeScreenComponents.FavoritesModel.loadApplications();
+        // load homescreen containment
+        for (let i = 0; i < plasmoid.applets.length; ++i) {
+            // TODO check if this applet is actually a homescreen containment (X-Plasma-Provides)
+            addApplet(plasmoid.applets[i]);
+        }
 
         // set API variables
         if (plasmoid.screen == 0) {
@@ -110,6 +111,11 @@ FocusScope {
         forceActiveFocus();
     }
     
+    Containment.onAppletAdded: {
+        // TODO check if this applet is actually a homescreen containment (X-Plasma-Provides)
+        addApplet(applet);
+    }
+    
     Plasmoid.onActivated: {
         console.log("Triggered!", plasmoid.nativeInterface.showingDesktop)
         
@@ -119,29 +125,39 @@ FocusScope {
         // - restore windows
         if (!plasmoid.nativeInterface.showingDesktop) {
             plasmoid.nativeInterface.showingDesktop = true;
-        } else if (homescreen.homeScreenState.currentView === MobileShell.HomeScreenState.PageView) {
-            homescreen.homeScreenState.openAppDrawer()
+        } else if (homeScreen.homeScreenState.currentView === MobileShell.HomeScreenState.PageView) {
+            homeScreen.homeScreenState.openAppDrawer()
         } else {
             plasmoid.nativeInterface.showingDesktop = false
-            homescreen.homeScreenState.closeAppDrawer()
+            homeScreen.homeScreenState.closeAppDrawer()
         }
     }
     
-    // control the opacity of both the search and homescreen components
-    property real homeScreenOpacity: 1
-    NumberAnimation on homeScreenOpacity {
-        id: opacityAnimation
-        duration: PlasmaCore.Units.longDuration
+    function addApplet(applet) {
+        console.log("Homescreen containment loaded applet: " + applet + " " + applet.title);
+        homeScreen = applet;
+        applet.parent = homeScreenContainer;
+        applet.anchors.fill = homeScreenContainer;
+        applet.visible = true;
     }
     
+    property var homeScreen
+    
     // homescreen component
-    HomeScreenComponents.HomeScreen {
-        id: homescreen
+    Item {
+        id: homeScreenContainer
         anchors.fill: parent
-        opacity: root.homeScreenOpacity * (1 - searchWidget.openFactor)
+        opacity: homeScreenOpacity * (1 - searchWidget.openFactor)
         
         // make the homescreen not interactable when task switcher or startup feedback is on
-        interactive: !taskSwitcher.visible && !startupFeedback.visible
+        //interactive: !taskSwitcher.visible && !startupFeedback.visible
+        
+        // control the opacity of both the search and homescreen components
+        property real homeScreenOpacity: 1
+        NumberAnimation on homeScreenOpacity {
+            id: opacityAnimation
+            duration: PlasmaCore.Units.longDuration
+        }
     }
         
     // search component
@@ -149,12 +165,12 @@ FocusScope {
         id: searchWidget
         anchors.fill: parent
         
-        opacity: root.homeScreenOpacity
+        opacity: homeScreenContainer.homeScreenOpacity
         visible: openFactor > 0
     }
     
     Connections {
-        target: homescreen.homeScreenState
+        target: homeScreen.homeScreenState
         
         function onSwipeDownGestureBegin() {
             searchWidget.startGesture();
@@ -202,7 +218,7 @@ FocusScope {
                     opacityAnimation.to = 0;
                     opacityAnimation.restart();
                 } else {
-                    root.homeScreenOpacity = 0;
+                    homeScreenContainer.homeScreenOpacity = 0;
                 }
                 
             } else {
