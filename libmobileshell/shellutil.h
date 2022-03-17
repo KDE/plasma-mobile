@@ -13,7 +13,6 @@
 #include <KSharedConfig>
 
 #include "kscreeninterface.h"
-#include "screenshot2interface.h"
 
 #include "mobileshell_export.h"
 
