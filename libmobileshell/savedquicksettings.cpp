@@ -21,6 +21,7 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
 {
     // throttle model updates from config, to avoid performance issues with fast reloading
     m_updateTimer->setInterval(2000);
+    m_updateTimer->setSingleShot(true);
     connect(m_updateTimer, &QTimer::timeout, this, [this]() {
         refreshModel();
     });
