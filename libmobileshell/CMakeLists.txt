@@ -7,8 +7,7 @@ if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
-qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KScreen.xml
-                                 ${KWIN_VIRTUALKEYBOARD_INTERFACE})
+qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_VIRTUALKEYBOARD_INTERFACE})
 
 set(mobileshell_LIB_SRCS
     displaysmodel.cpp

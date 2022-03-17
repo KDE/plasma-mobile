@@ -4,13 +4,14 @@
 import QtQuick 2.15
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.quicksetting.screenrotation 1.0
 
 MobileShell.QuickSetting {
     text: i18n("Auto-rotate")
     icon: "rotation-allowed"
     settingsCommand: "plasma-open-settings kcm_kscreen"
-    enabled: MobileShell.ShellUtil.autoRotateEnabled
+    enabled: ScreenRotationUtil.screenRotationEnabled
     function toggle() {
-        MobileShell.ShellUtil.autoRotateEnabled = !enabled
+        ScreenRotationUtil.screenRotationEnabled = !enabled
     }
 }
