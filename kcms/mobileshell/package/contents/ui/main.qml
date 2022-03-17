@@ -41,7 +41,7 @@ KCM.SimpleKCM {
                     text: i18n("Gesture-only Mode")
                     description: i18n("Whether to hide the navigation panel.")
                     checked: !kcm.navigationPanelEnabled
-                    switchControl.onCheckStateChanged: {
+                    onCheckedChanged: {
                         if (checked != !kcm.navigationPanelEnabled) {
                             kcm.navigationPanelEnabled = !checked;
                         }
