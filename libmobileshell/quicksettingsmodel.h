@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -8,6 +9,8 @@
 
 #include "qqml.h"
 #include "quicksetting.h"
+#include "savedquicksettings.h"
+#include "savedquicksettingsmodel.h"
 
 #include <QAbstractListModel>
 #include <QQmlListProperty>
@@ -21,8 +24,6 @@ class MOBILESHELL_EXPORT QuickSettingsModel : public QAbstractListModel, public 
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
-    Q_PROPERTY(QQmlListProperty<QuickSetting> children READ children NOTIFY childrenChanged)
-    Q_CLASSINFO("DefaultProperty", "children")
     QML_ELEMENT
 
 public:
@@ -32,18 +33,14 @@ public:
     int rowCount(const QModelIndex &parent) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    QQmlListProperty<QuickSetting> children();
-
     void classBegin() override;
     void componentComplete() override;
-    Q_SCRIPTABLE void include(QuickSetting *item);
-
-Q_SIGNALS:
-    void childrenChanged();
-
 private:
-    QList<QuickSetting *> m_children;
-    QList<QuickSetting *> m_external;
+    void loadQuickSettings();
+
+    bool m_loaded = false;
+    QList<QuickSetting *> m_quickSettings;
+    SavedQuickSettings *m_savedQuickSettings;
 };
 
 } // namespace MobileShell

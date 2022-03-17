@@ -10,6 +10,7 @@ using namespace MobileShell;
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
+const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
 MobileShellSettings *MobileShellSettings::self()
 {
@@ -26,6 +27,9 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT navigationPanelEnabledChanged();
+        } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
+            Q_EMIT enabledQuickSettingsChanged();
+            Q_EMIT disabledQuickSettingsChanged();
         }
     });
 }
@@ -34,4 +38,56 @@ bool MobileShellSettings::navigationPanelEnabled() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     return group.readEntry("navigationPanelEnabled", true);
+}
+
+void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+QList<QString> MobileShellSettings::enabledQuickSettings() const
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    // TODO move defaults to file
+    // we aren't worried about quicksettings not showing up though, any that are not specified will be automatically added to the end
+    return group.readEntry("enabledQuickSettings",
+                           QList<QString>{
+                               QStringLiteral("org.kde.plasma.wifi"),
+                               QStringLiteral("org.kde.plasma.mobiledata"),
+                               QStringLiteral("org.kde.plasma.bluetooth"),
+                               QStringLiteral("org.kde.plasma.flashlight"),
+                               QStringLiteral("org.kde.plasma.screenrotation"),
+                               QStringLiteral("org.kde.plasma.settingsapp"),
+                               QStringLiteral("org.kde.plasma.airplanemode"),
+                               QStringLiteral("org.kde.plasma.audio"),
+                               QStringLiteral("org.kde.plasma.battery"),
+                               QStringLiteral("org.kde.plasma.location"),
+                               QStringLiteral("org.kde.plasma.nightcolor"),
+                               QStringLiteral("org.kde.plasma.screenshot"),
+                               QStringLiteral("org.kde.plasma.powermenu"),
+                               QStringLiteral("org.kde.plasma.keyboardtoggle"),
+                               QStringLiteral("org.kde.plasma.caffeine"),
+                           });
+}
+
+void MobileShellSettings::setEnabledQuickSettings(QList<QString> &list)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("enabledQuickSettings", list, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+QList<QString> MobileShellSettings::disabledQuickSettings() const
+{
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
+    return group.readEntry("disabledQuickSettings", QList<QString>{});
+}
+
+void MobileShellSettings::setDisabledQuickSettings(QList<QString> &list)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("disabledQuickSettings", list, KConfigGroup::Notify);
+    m_config->sync();
 }

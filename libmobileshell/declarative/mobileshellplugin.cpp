@@ -40,6 +40,8 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<QuickSetting>(uri, 1, 0, "QuickSetting");
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");
+    qmlRegisterType<SavedQuickSettings>(uri, 1, 0, "SavedQuickSettings");
+    qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
 
     qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
     qmlRegisterSingletonType<KwinVirtualKeyboardInterface>(uri, 1, 0, "KWinVirtualKeyboard", [](QQmlEngine *, QJSEngine *) -> QObject * {

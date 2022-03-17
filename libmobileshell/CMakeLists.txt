@@ -14,10 +14,13 @@ qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.ScreenShot2.xml
 set(mobileshell_LIB_SRCS
     displaysmodel.cpp
     mobileshellsettings.cpp
-    quicksetting.cpp
-    quicksettingsmodel.cpp
     shellutil.cpp
     kwinvirtualkeyboardinterface.cpp
+    
+    quicksetting.cpp
+    quicksettingsmodel.cpp
+    savedquicksettingsmodel.cpp
+    savedquicksettings.cpp
     
     ${DBUS_SRCS}
 )
@@ -59,9 +62,13 @@ install(FILES
     displaysmodel.h
     kwinvirtualkeyboardinterface.h
     mobileshellsettings.h
+    shellutil.h
+    
     quicksetting.h
     quicksettingsmodel.h
-    shellutil.h
+    savedquicksettingsmodel.h
+    savedquicksettings.h
+    
     ${CMAKE_CURRENT_BINARY_DIR}/mobileshell_export.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/mobileshell COMPONENT Devel
 )
