@@ -17,11 +17,11 @@ QVariant SavedQuickSettingsModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == NameRole) {
-        return m_data[index.row()].name();
+        return m_data[index.row()]->name();
     } else if (role == IconRole) {
-        return QString(); // TODO m_data[index.row()].icon();
+        return m_data[index.row()]->iconName();
     } else if (role == IdRole) {
-        return m_data[index.row()].pluginId();
+        return m_data[index.row()]->pluginId();
     }
     return QVariant();
 }
@@ -43,14 +43,18 @@ void SavedQuickSettingsModel::moveRow(int oldIndex, int newIndex)
         return;
     }
 
+    if (oldIndex < newIndex) {
+        ++newIndex;
+    }
+
     Q_EMIT beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex);
-    std::iter_swap(m_data.begin() + oldIndex, m_data.end() + newIndex);
+    std::iter_swap(m_data.begin() + oldIndex, m_data.begin() + newIndex);
     Q_EMIT endMoveRows();
 
     Q_EMIT dataUpdated(m_data);
 }
 
-void SavedQuickSettingsModel::insertRow(KPluginMetaData metaData, int index)
+void SavedQuickSettingsModel::insertRow(KPluginMetaData *metaData, int index)
 {
     Q_EMIT beginInsertRows(QModelIndex(), index, index);
     m_data.insert(index, metaData);
@@ -72,12 +76,12 @@ void SavedQuickSettingsModel::removeRow(int index)
     Q_EMIT dataUpdated(m_data);
 }
 
-QList<KPluginMetaData> SavedQuickSettingsModel::list() const
+QList<KPluginMetaData *> SavedQuickSettingsModel::list() const
 {
     return m_data;
 }
 
-void SavedQuickSettingsModel::updateData(QList<KPluginMetaData> data)
+void SavedQuickSettingsModel::updateData(QList<KPluginMetaData *> data)
 {
     Q_EMIT beginResetModel();
 

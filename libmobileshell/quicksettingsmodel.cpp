@@ -61,6 +61,8 @@ void QuickSettingsModel::loadQuickSettings()
         return;
     }
 
+    beginResetModel();
+
     for (auto *quickSetting : m_quickSettings) {
         quickSetting->deleteLater();
     }
@@ -72,7 +74,7 @@ void QuickSettingsModel::loadQuickSettings()
     // loop through enabled quick settings metadata
     for (const auto &metaData : m_savedQuickSettings->enabledQuickSettingsModel()->list()) {
         // load kpackage
-        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
+        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData->fileName()).path());
         if (!package.isValid()) {
             continue;
         }
@@ -91,10 +93,12 @@ void QuickSettingsModel::loadQuickSettings()
             }
             delete created;
         } else {
-            qDebug() << "Loaded quicksetting" << metaData.fileName();
+            qDebug() << "Loaded quicksetting" << metaData->fileName();
             m_quickSettings.push_back(createdSetting);
         }
     }
 
     delete c;
+
+    endResetModel();
 }

@@ -6,6 +6,8 @@
 
 #include "mobileshellsettings.h"
 
+#include <QDebug>
+
 using namespace MobileShell;
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
@@ -25,6 +27,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     m_configWatcher = KConfigWatcher::create(m_config);
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+        qDebug() << "config changed"; // TODO
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT navigationPanelEnabledChanged();
         } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
@@ -74,7 +77,7 @@ QList<QString> MobileShellSettings::enabledQuickSettings() const
 
 void MobileShellSettings::setEnabledQuickSettings(QList<QString> &list)
 {
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
     group.writeEntry("enabledQuickSettings", list, KConfigGroup::Notify);
     m_config->sync();
 }
@@ -87,7 +90,7 @@ QList<QString> MobileShellSettings::disabledQuickSettings() const
 
 void MobileShellSettings::setDisabledQuickSettings(QList<QString> &list)
 {
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    auto group = KConfigGroup{m_config, QUICKSETTINGS_CONFIG_GROUP};
     group.writeEntry("disabledQuickSettings", list, KConfigGroup::Notify);
     m_config->sync();
 }

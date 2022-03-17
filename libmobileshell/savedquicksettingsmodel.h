@@ -35,19 +35,19 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void moveRow(int oldIndex, int newIndex);
-    Q_INVOKABLE void insertRow(KPluginMetaData metaData, int index);
+    Q_INVOKABLE void insertRow(KPluginMetaData *metaData, int index);
     Q_INVOKABLE void removeRow(int index);
 
-    QList<KPluginMetaData> list() const;
+    QList<KPluginMetaData *> list() const;
 
 public Q_SLOTS:
-    void updateData(QList<KPluginMetaData> data);
+    void updateData(QList<KPluginMetaData *> data);
 
 Q_SIGNALS:
-    void dataUpdated(QList<KPluginMetaData> data);
+    void dataUpdated(QList<KPluginMetaData *> data);
 
 private:
-    QList<KPluginMetaData> m_data;
+    QList<KPluginMetaData *> m_data;
 };
 
 } // namespace MobileShell

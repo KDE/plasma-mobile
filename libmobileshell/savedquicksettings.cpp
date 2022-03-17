@@ -17,7 +17,14 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
     , m_disabledPackages{}
     , m_enabledQSModel{new SavedQuickSettingsModel{this}}
     , m_disabledQSModel{new SavedQuickSettingsModel{this}}
+    , m_updateTimer{new QTimer{this}}
 {
+    // throttle model updates from config, to avoid performance issues with fast reloading
+    m_updateTimer->setInterval(2000);
+    connect(m_updateTimer, &QTimer::timeout, this, [this]() {
+        refreshModel();
+    });
+
     // load quicksettings packages
     auto packages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("KPackage/GenericQML"), "plasma/quicksettings");
 
@@ -27,29 +34,33 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
             qWarning() << "Quick setting package invalid:" << metaData.fileName();
             continue;
         }
-        m_validPackages.push_back(metaData);
+        m_validPackages.push_back(new KPluginMetaData{metaData});
     }
 
     // subscribe to config changes
     connect(m_settings, &MobileShellSettings::enabledQuickSettingsChanged, this, [this]() {
-        refreshModel();
+        m_updateTimer->start();
     });
     connect(m_settings, &MobileShellSettings::disabledQuickSettingsChanged, this, [this]() {
-        refreshModel();
+        m_updateTimer->start();
     });
 
     // subscribe to model changes
-    connect(m_enabledQSModel, &SavedQuickSettingsModel::dataUpdated, this, [this](QList<KPluginMetaData> data) -> void {
+    connect(m_enabledQSModel, &SavedQuickSettingsModel::dataUpdated, this, [this](QList<KPluginMetaData *> data) -> void {
         m_enabledPackages.clear();
         for (auto metaData : data) {
             m_enabledPackages.push_back(metaData);
         }
+
+        saveModel();
     });
-    connect(m_disabledQSModel, &SavedQuickSettingsModel::dataUpdated, this, [this](QList<KPluginMetaData> data) -> void {
+    connect(m_disabledQSModel, &SavedQuickSettingsModel::dataUpdated, this, [this](QList<KPluginMetaData *> data) -> void {
         m_disabledPackages.clear();
         for (auto metaData : data) {
             m_disabledPackages.push_back(metaData);
         }
+
+        saveModel();
     });
 
     // load
@@ -77,7 +88,7 @@ void SavedQuickSettings::refreshModel()
     // add enabled quick settings in order
     for (const QString &pluginId : enabledQS) {
         for (auto &metaData : m_validPackages) {
-            if (pluginId == metaData.pluginId()) {
+            if (pluginId == metaData->pluginId()) {
                 m_enabledPackages.push_back(metaData);
                 break;
             }
@@ -87,7 +98,7 @@ void SavedQuickSettings::refreshModel()
     // add disabled quick settings in order
     for (const QString &pluginId : disabledQS) {
         for (auto &metaData : m_validPackages) {
-            if (pluginId == metaData.pluginId()) {
+            if (pluginId == metaData->pluginId()) {
                 m_disabledPackages.push_back(metaData);
                 break;
             }
@@ -96,7 +107,7 @@ void SavedQuickSettings::refreshModel()
 
     // add undefined quick settings to the back of enabled quick settings
     for (auto &metaData : m_validPackages) {
-        if (!enabledQS.contains(metaData.pluginId()) && !disabledQS.contains(metaData.pluginId())) {
+        if (!enabledQS.contains(metaData->pluginId()) && !disabledQS.contains(metaData->pluginId())) {
             m_enabledPackages.push_back(metaData);
         }
     }
@@ -111,10 +122,10 @@ void SavedQuickSettings::saveModel()
     QList<QString> disabledQS;
 
     for (auto &metaData : m_enabledPackages) {
-        enabledQS.push_back(metaData.pluginId());
+        enabledQS.push_back(metaData->pluginId());
     }
     for (auto &metaData : m_disabledPackages) {
-        disabledQS.push_back(metaData.pluginId());
+        disabledQS.push_back(metaData->pluginId());
     }
 
     m_settings->setEnabledQuickSettings(enabledQS);
