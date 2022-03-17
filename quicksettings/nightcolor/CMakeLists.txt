@@ -37,4 +37,4 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 install(TARGETS nightcolorplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/nightcolor)
 install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/nightcolor)
 
-plasma_install_package(package org.kde.plasma.nightcolor quicksettings)
+plasma_install_package(package org.kde.plasma.quicksetting.nightcolor quicksettings)

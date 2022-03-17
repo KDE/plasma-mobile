@@ -41,7 +41,7 @@ X-KDE-ServiceTypes=KPackage/GenericQML
 
 X-KDE-PluginInfo-Author=Aleix Pol
 X-KDE-PluginInfo-Email=aleixpol@kde.org
-X-KDE-PluginInfo-Name=org.kde.plasma.nightcolor
+X-KDE-PluginInfo-Name=org.kde.plasma.quicksetting.nightcolor
 X-KDE-PluginInfo-Version=0.1
 X-KDE-PluginInfo-Website=https://kde.org
 X-KDE-PluginInfo-License=GPL

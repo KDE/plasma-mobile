@@ -30,5 +30,5 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 install(TARGETS powermenuplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/powermenu)
 install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/powermenu)
 
-plasma_install_package(package org.kde.plasma.powermenu quicksettings)
+plasma_install_package(package org.kde.plasma.quicksetting.powermenu quicksettings)
 

@@ -32,6 +32,6 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 install(TARGETS flashlightplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/flashlight)
 install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/flashlight)
 
-plasma_install_package(package org.kde.plasma.flashlight quicksettings)
+plasma_install_package(package org.kde.plasma.quicksetting.flashlight quicksettings)
 
 

@@ -34,6 +34,6 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 install(TARGETS screenrotationplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/screenrotation)
 install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/screenrotation)
 
-plasma_install_package(package org.kde.plasma.screenrotation quicksettings)
+plasma_install_package(package org.kde.plasma.quicksetting.screenrotation quicksettings)
 
 
