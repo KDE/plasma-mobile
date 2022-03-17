@@ -20,4 +20,4 @@ void ScreenShotPlugin::registerTypes(const char *uri)
     });
 }
 
-//#include "moc_nightcolorplugin.cpp"
+//#include "moc_screenshotplugin.cpp"

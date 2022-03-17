@@ -23,7 +23,6 @@ class MOBILESHELL_EXPORT ShellUtil : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool autoRotateEnabled READ autoRotate WRITE setAutoRotate NOTIFY autoRotateChanged);
-    Q_PROPERTY(bool torchEnabled READ torchEnabled NOTIFY torchChanged);
     Q_PROPERTY(bool isSystem24HourFormat READ isSystem24HourFormat NOTIFY isSystem24HourFormatChanged);
 
 public:
@@ -34,23 +33,17 @@ public:
 public Q_SLOTS:
     void executeCommand(const QString &command);
     void launchApp(const QString &app);
-    void toggleTorch();
 
     bool autoRotate();
     void setAutoRotate(bool value);
-
-    bool torchEnabled() const;
 
     bool isSystem24HourFormat();
 
 Q_SIGNALS:
     void autoRotateChanged(bool value);
-    void torchChanged(bool value);
     void isSystem24HourFormatChanged();
 
 private:
-    bool m_running = false;
-
     KConfigWatcher::Ptr m_localeConfigWatcher;
     KSharedConfig::Ptr m_localeConfig;
 

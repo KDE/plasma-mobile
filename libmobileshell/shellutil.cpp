@@ -108,28 +108,6 @@ void ShellUtil::executeCommand(const QString &command)
     QProcess::startDetached(commandAndArguments.front(), commandAndArguments.mid(1));
 }
 
-void ShellUtil::toggleTorch()
-{
-    // FIXME this is hardcoded to the PinePhone for now
-    static auto FLASH_SYSFS_PATH = "/sys/devices/platform/led-controller/leds/white:flash/brightness";
-    int fd = open(FLASH_SYSFS_PATH, O_WRONLY);
-
-    if (fd < 0) {
-        qWarning() << "Unable to open file %s" << FLASH_SYSFS_PATH;
-        return;
-    }
-
-    write(fd, m_running ? "0" : "1", 1);
-    close(fd);
-    m_running = !m_running;
-    Q_EMIT torchChanged(m_running);
-}
-
-bool ShellUtil::torchEnabled() const
-{
-    return m_running;
-}
-
 bool ShellUtil::autoRotate()
 {
     QDBusPendingReply<bool> reply = m_kscreenInterface->getAutoRotate();
