@@ -36,7 +36,6 @@ public Q_SLOTS:
     void executeCommand(const QString &command);
     void launchApp(const QString &app);
     void toggleTorch();
-    void takeScreenshot();
 
     bool autoRotate();
     void setAutoRotate(bool value);
@@ -51,14 +50,12 @@ Q_SIGNALS:
     void isSystem24HourFormatChanged();
 
 private:
-    void handleMetaDataReceived(const QVariantMap &metadata, int fd);
     bool m_running = false;
 
     KConfigWatcher::Ptr m_localeConfigWatcher;
     KSharedConfig::Ptr m_localeConfig;
 
     org::kde::KScreen *m_kscreenInterface;
-    OrgKdeKWinScreenShot2Interface *m_screenshotInterface;
 };
 
 } // namespace MobileShell

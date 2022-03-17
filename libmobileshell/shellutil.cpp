@@ -31,8 +31,6 @@
 
 using namespace MobileShell;
 
-constexpr int SCREENSHOT_DELAY = 200;
-
 /* -- Static Helpers --------------------------------------------------------------------------- */
 
 static QImage allocateImage(const QVariantMap &metadata)
@@ -81,10 +79,6 @@ ShellUtil::ShellUtil(QObject *parent)
 {
     // setHasConfigurationInterface(true);
     m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded5"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
-    m_screenshotInterface = new OrgKdeKWinScreenShot2Interface(QStringLiteral("org.kde.KWin.ScreenShot2"),
-                                                               QStringLiteral("/org/kde/KWin/ScreenShot2"),
-                                                               QDBusConnection::sessionBus(),
-                                                               this);
 
     m_localeConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
@@ -130,10 +124,12 @@ void ShellUtil::toggleTorch()
     m_running = !m_running;
     Q_EMIT torchChanged(m_running);
 }
+
 bool ShellUtil::torchEnabled() const
 {
     return m_running;
 }
+
 bool ShellUtil::autoRotate()
 {
     QDBusPendingReply<bool> reply = m_kscreenInterface->getAutoRotate();
@@ -155,76 +151,6 @@ void ShellUtil::setAutoRotate(bool value)
     } else {
         emit autoRotateChanged(value);
     }
-}
-
-void ShellUtil::handleMetaDataReceived(const QVariantMap &metadata, int fd)
-{
-    const QString type = metadata.value(QStringLiteral("type")).toString();
-    if (type != QLatin1String("raw")) {
-        qWarning() << "Unsupported metadata type:" << type;
-        return;
-    }
-
-    auto watcher = new QFutureWatcher<QImage>(this);
-    connect(watcher, &QFutureWatcher<QImage>::finished, this, [watcher]() {
-        watcher->deleteLater();
-
-        QString filePath = QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
-        if (filePath.isEmpty()) {
-            qWarning() << "Couldn't find a writable location for the screenshot!";
-            return;
-        }
-        QDir picturesDir(filePath);
-        if (!picturesDir.mkpath(QStringLiteral("Screenshots"))) {
-            qWarning() << "Couldn't create folder at" << picturesDir.path() + QStringLiteral("/Screenshots") << "to take screenshot.";
-            return;
-        }
-        filePath += QStringLiteral("/Screenshots/Screenshot_%1.png").arg(QDateTime::currentDateTime().toString(QStringLiteral("yyyyMMdd_hhmmss")));
-        const auto m_result = watcher->result();
-        if (m_result.isNull() || !m_result.save(filePath)) {
-            qWarning() << "Screenshot failed";
-        } else {
-            KNotification *notif = new KNotification("captured");
-            notif->setComponentName(QStringLiteral("plasma_phone_components"));
-            notif->setTitle(i18n("New Screenshot"));
-            notif->setUrls({QUrl::fromLocalFile(filePath)});
-            notif->setText(i18n("New screenshot saved to %1", filePath));
-            notif->sendEvent();
-        }
-    });
-    watcher->setFuture(QtConcurrent::run(readImage, fd, metadata));
-}
-
-void ShellUtil::takeScreenshot()
-{
-    // wait ~200 ms to wait for rest of animations
-    QTimer::singleShot(SCREENSHOT_DELAY, [=]() {
-        int lPipeFds[2];
-        if (pipe2(lPipeFds, O_CLOEXEC) != 0) {
-            qWarning() << "Could not take screenshot";
-            return;
-        }
-
-        // We don't have access to the ScreenPool so we'll just take the first screen
-        QVariantMap options;
-        options.insert(QStringLiteral("native-resolution"), true);
-
-        auto pendingCall = m_screenshotInterface->CaptureScreen(qGuiApp->screens().constFirst()->name(), options, QDBusUnixFileDescriptor(lPipeFds[1]));
-        close(lPipeFds[1]);
-        auto pipeFileDescriptor = lPipeFds[0];
-
-        auto watcher = new QDBusPendingCallWatcher(pendingCall, this);
-        connect(watcher, &QDBusPendingCallWatcher::finished, this, [this, watcher, pipeFileDescriptor]() {
-            watcher->deleteLater();
-            const QDBusPendingReply<QVariantMap> reply = *watcher;
-
-            if (reply.isError()) {
-                qWarning() << "Screenshot request failed:" << reply.error().message();
-            } else {
-                handleMetaDataReceived(reply, pipeFileDescriptor);
-            }
-        });
-    });
 }
 
 bool ShellUtil::isSystem24HourFormat()

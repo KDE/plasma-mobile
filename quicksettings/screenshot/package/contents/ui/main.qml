@@ -4,6 +4,7 @@
 import QtQuick 2.15
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.quicksetting.screenshot 1.0
 
 MobileShell.QuickSetting {
     text: i18n("Screenshot")
@@ -32,6 +33,6 @@ MobileShell.QuickSetting {
     Timer {
         id: timer
         interval: 500
-        onTriggered: MobileShell.ShellUtil.takeScreenshot()
+        onTriggered: ScreenShotUtil.takeScreenShot()
     }
 }
