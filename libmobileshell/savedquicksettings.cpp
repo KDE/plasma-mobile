@@ -11,7 +11,6 @@ using namespace MobileShell;
 
 SavedQuickSettings::SavedQuickSettings(QObject *parent)
     : QObject{parent}
-    , m_settings{new MobileShellSettings{this}}
     , m_validPackages{}
     , m_enabledPackages{}
     , m_disabledPackages{}
@@ -39,10 +38,10 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
     }
 
     // subscribe to config changes
-    connect(m_settings, &MobileShellSettings::enabledQuickSettingsChanged, this, [this]() {
+    connect(MobileShellSettings::self(), &MobileShellSettings::enabledQuickSettingsChanged, this, [this]() {
         m_updateTimer->start();
     });
-    connect(m_settings, &MobileShellSettings::disabledQuickSettingsChanged, this, [this]() {
+    connect(MobileShellSettings::self(), &MobileShellSettings::disabledQuickSettingsChanged, this, [this]() {
         m_updateTimer->start();
     });
 
@@ -80,8 +79,8 @@ SavedQuickSettingsModel *SavedQuickSettings::disabledQuickSettingsModel() const
 
 void SavedQuickSettings::refreshModel()
 {
-    QList<QString> enabledQS = m_settings->enabledQuickSettings();
-    QList<QString> disabledQS = m_settings->disabledQuickSettings();
+    QList<QString> enabledQS = MobileShellSettings::self()->enabledQuickSettings();
+    QList<QString> disabledQS = MobileShellSettings::self()->disabledQuickSettings();
 
     m_enabledPackages.clear();
     m_disabledPackages.clear();
@@ -129,6 +128,6 @@ void SavedQuickSettings::saveModel()
         disabledQS.push_back(metaData->pluginId());
     }
 
-    m_settings->setEnabledQuickSettings(enabledQS);
-    m_settings->setDisabledQuickSettings(disabledQS);
+    MobileShellSettings::self()->setEnabledQuickSettings(enabledQS);
+    MobileShellSettings::self()->setDisabledQuickSettings(disabledQS);
 }

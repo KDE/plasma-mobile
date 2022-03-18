@@ -13,6 +13,7 @@
 #include "notifications/notificationthumbnailer.h"
 
 #include "displaysmodel.h"
+#include "homescreenmodel.h"
 #include "kwinvirtualkeyboardinterface.h"
 #include "mobileshellsettings.h"
 #include "quicksetting.h"
@@ -37,6 +38,8 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<MobileShellSettings>(uri, 1, 0, "MobileShellSettings", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return MobileShellSettings::self();
     });
+
+    qmlRegisterType<HomeScreenModel>(uri, 1, 0, "HomeScreenModel");
 
     qmlRegisterType<QuickSetting>(uri, 1, 0, "QuickSetting");
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");

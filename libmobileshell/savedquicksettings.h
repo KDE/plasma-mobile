@@ -36,7 +36,6 @@ private:
     void refreshModel();
     void saveModel();
 
-    MobileShellSettings *m_settings;
     QList<KPluginMetaData *> m_validPackages;
     QList<KPluginMetaData *> m_enabledPackages;
     QList<KPluginMetaData *> m_disabledPackages;

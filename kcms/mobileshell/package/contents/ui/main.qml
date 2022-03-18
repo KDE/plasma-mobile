@@ -34,6 +34,25 @@ KCM.SimpleKCM {
                 spacing: 0
                 
                 MobileForm.FormCardHeader {
+                    title: i18n("Home Screen")
+                }
+                
+                MobileForm.FormButtonDelegate {
+                    text: i18n("Launcher type")
+                    description: i18n("Change the homescreen application launcher.")
+                    onClicked: kcm.push("SelectHomeScreen.qml");
+                }
+            }
+        }
+        
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            
+            contentItem: ColumnLayout {
+                spacing: 0
+                
+                MobileForm.FormCardHeader {
                     title: i18n("Navigation Panel")
                 }
                 

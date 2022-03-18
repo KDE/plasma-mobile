@@ -27,14 +27,36 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     m_configWatcher = KConfigWatcher::create(m_config);
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
-        qDebug() << "config changed"; // TODO
         if (group.name() == GENERAL_CONFIG_GROUP) {
-            Q_EMIT navigationPanelEnabledChanged();
+            if (names.contains("homeScreenType")) {
+                Q_EMIT homeScreenTypeChanged();
+            }
+            if (names.contains("navigationPanelEnabled")) {
+                Q_EMIT navigationPanelEnabledChanged();
+            }
+
         } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
-            Q_EMIT enabledQuickSettingsChanged();
-            Q_EMIT disabledQuickSettingsChanged();
+            if (names.contains("enabledQuickSettings")) {
+                Q_EMIT enabledQuickSettingsChanged();
+            }
+            if (names.contains("disabledQuickSettings")) {
+                Q_EMIT disabledQuickSettingsChanged();
+            }
         }
     });
+}
+
+QString MobileShellSettings::homeScreenType() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("homeScreenType", "org.kde.phone.homescreen.folio");
+}
+
+void MobileShellSettings::setHomeScreenType(QString homeScreenType)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("homeScreenType", homeScreenType, KConfigGroup::Notify);
+    m_config->sync();
 }
 
 bool MobileShellSettings::navigationPanelEnabled() const

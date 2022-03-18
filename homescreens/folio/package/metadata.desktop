@@ -5,6 +5,7 @@
 Encoding=UTF-8
 Keywords=
 Name=Folio
+Description=Application launcher with an app drawer and customizable pages.
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
@@ -18,5 +19,4 @@ X-KDE-PluginInfo-Name=org.kde.phone.homescreen.folio
 X-KDE-PluginInfo-Version=
 X-KDE-PluginInfo-Website=
 X-Plasma-MainScript=ui/main.qml
-X-Plasma-Provides=org.kde.plasma.homescreen
-
+X-Plasma-Provides=org.kde.phone.homescreen

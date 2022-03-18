@@ -13,6 +13,7 @@ AbstractFormDelegate {
     id: root
     
     property string text: ""
+    property string description: ""
     property alias checked: checkBoxItem.checked
     property alias checkBox: checkBoxItem
     
@@ -26,10 +27,24 @@ AbstractFormDelegate {
             Layout.rightMargin: Kirigami.Units.largeSpacing
         }
         
-        Label {
-            text: root.text
-            elide: Text.ElideRight
+        ColumnLayout {
             Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+            
+            Label {
+                Layout.fillWidth: true
+                text: root.text
+                elide: Text.ElideRight
+            }
+            
+            Label {
+                Layout.fillWidth: true
+                text: root.description
+                color: Kirigami.Theme.disabledTextColor
+                font: Kirigami.Theme.smallFont
+                elide: Text.ElideRight
+                visible: root.description !== ""
+            }
         }
     }
 }

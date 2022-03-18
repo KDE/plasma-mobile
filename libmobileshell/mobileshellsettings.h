@@ -26,6 +26,9 @@ public:
 
     MobileShellSettings(QObject *parent = nullptr);
 
+    QString homeScreenType() const;
+    void setHomeScreenType(QString homeScreenType);
+
     bool navigationPanelEnabled() const;
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
@@ -36,6 +39,7 @@ public:
     void setDisabledQuickSettings(QList<QString> &list);
 
 Q_SIGNALS:
+    void homeScreenTypeChanged();
     void navigationPanelEnabledChanged();
     void enabledQuickSettingsChanged();
     void disabledQuickSettingsChanged();

@@ -14,6 +14,7 @@ set(mobileshell_LIB_SRCS
     mobileshellsettings.cpp
     shellutil.cpp
     kwinvirtualkeyboardinterface.cpp
+    homescreenmodel.cpp
     
     quicksetting.cpp
     quicksettingsmodel.cpp
@@ -61,6 +62,7 @@ install(FILES
     kwinvirtualkeyboardinterface.h
     mobileshellsettings.h
     shellutil.h
+    homescreenmodel.h
     
     quicksetting.h
     quicksettingsmodel.h
