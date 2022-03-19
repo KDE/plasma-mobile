@@ -6,8 +6,10 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
                                  
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
+    shellutil.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
+    taskswitcher/displaysmodel.cpp
 )
 
 if(QUICK_COMPILER)

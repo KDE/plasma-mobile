@@ -7,20 +7,13 @@ if (BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
-qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_VIRTUALKEYBOARD_INTERFACE})
-
 set(mobileshell_LIB_SRCS
-    displaysmodel.cpp
     mobileshellsettings.cpp
-    shellutil.cpp
-    kwinvirtualkeyboardinterface.cpp
     
     quicksetting.cpp
     quicksettingsmodel.cpp
     savedquicksettingsmodel.cpp
     savedquicksettings.cpp
-    
-    ${DBUS_SRCS}
 )
 
 add_library(mobileshell ${mobileshell_LIB_SRCS})
@@ -57,10 +50,7 @@ set_target_properties(mobileshell PROPERTIES
 install(TARGETS mobileshell EXPORT mobileshellLibraryTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS} )
                       
 install(FILES
-    displaysmodel.h
-    kwinvirtualkeyboardinterface.h
     mobileshellsettings.h
-    shellutil.h
     
     quicksetting.h
     quicksettingsmodel.h

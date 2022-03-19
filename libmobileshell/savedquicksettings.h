@@ -19,7 +19,12 @@
 
 namespace MobileShell
 {
-
+/**
+ * @short A model that reads quick settings configurations
+ * from the config and presents models to display them.
+ *
+ * @author Devin Lin <devin@kde.org>
+ **/
 class MOBILESHELL_EXPORT SavedQuickSettings : public QObject
 {
     Q_OBJECT

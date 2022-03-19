@@ -16,7 +16,11 @@
 
 namespace MobileShell
 {
-
+/**
+ * @short A list model for serving quick settings metadata.
+ *
+ * @author Devin Lin <devin@kde.org>
+ **/
 class MOBILESHELL_EXPORT SavedQuickSettingsModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -25,9 +29,9 @@ public:
     SavedQuickSettingsModel(QObject *parent = nullptr);
 
     enum {
-        NameRole,
-        IdRole,
-        IconRole,
+        NameRole, /**< The name of the quick setting. */
+        IdRole, /**< The plugin id of the quick setting package. */
+        IconRole, /**< The icon of the quick setting. */
     };
 
     QVariant data(const QModelIndex &index, int role) const override;

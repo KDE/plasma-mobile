@@ -12,12 +12,11 @@
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 
-#include "displaysmodel.h"
-#include "kwinvirtualkeyboardinterface.h"
 #include "mobileshellsettings.h"
 #include "quicksetting.h"
 #include "quicksettingsmodel.h"
 #include "shellutil.h"
+#include "taskswitcher/displaysmodel.h"
 
 using namespace MobileShell;
 
@@ -44,9 +43,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
 
     qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
-    qmlRegisterSingletonType<KwinVirtualKeyboardInterface>(uri, 1, 0, "KWinVirtualKeyboard", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return new KwinVirtualKeyboardInterface;
-    });
 
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");

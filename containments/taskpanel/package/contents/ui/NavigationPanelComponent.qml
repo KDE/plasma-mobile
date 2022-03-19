@@ -10,6 +10,7 @@ import QtQuick.Window 2.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
@@ -25,7 +26,7 @@ MobileShell.NavigationPanel {
         if (root.taskSwitcher.visible) {
             return Qt.rgba(0, 0, 0, 0.1);
         } else {
-            return (MobileShell.KWinVirtualKeyboard.visible || appIsShown) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
+            return (Keyboards.KWinVirtualKeyboard.visible || appIsShown) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
         }
     }
     foregroundColorGroup: (!root.taskSwitcher.visible && appIsShown) ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
@@ -81,15 +82,15 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
         
-        enabled: MobileShell.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
-        iconSource: MobileShell.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+        enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
+        iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-        iconSizeFactor: MobileShell.KWinVirtualKeyboard.visible ? 1 : 0.75
+        iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
         
         onTriggered: {
-            if (MobileShell.KWinVirtualKeyboard.active) {
+            if (Keyboards.KWinVirtualKeyboard.active) {
                 // close keyboard if it is open
-                MobileShell.KWinVirtualKeyboard.active = false;
+                Keyboards.KWinVirtualKeyboard.active = false;
             } else if (taskSwitcher.visible) { 
                 // if task switcher is open, close the current window shown
                 let indexToClose = root.taskSwitcher.tasksModel.index(root.taskSwitcher.currentTaskIndex, 0);
