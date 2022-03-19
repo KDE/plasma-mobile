@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Mobile Data
+Name[ca]=Dades mòbils
+Name[es]=Datos móviles
+Name[uk]=Мобільні дані
+Name[x-test]=xxMobile Dataxx
 Icon=network-modem
 Description=Location quick setting
+Description[ca]=Configuració ràpida de la ubicació
+Description[es]=Ajuste rápido de la ubicación
+Description[uk]=Швидке налаштовування розташування
+Description[x-test]=xxLocation quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

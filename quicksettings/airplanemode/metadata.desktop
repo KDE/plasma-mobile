@@ -35,6 +35,10 @@ Name[x-test]=xxAirplane Modexx
 Name[zh_CN]=飞行模式
 Icon=network-flightmode-on
 Description=Airplane mode quick setting
+Description[ca]=Configuració ràpida del mode avió
+Description[es]=Ajuste rápido del modo avión
+Description[uk]=Швидке встановлення режиму польоту
+Description[x-test]=xxAirplane mode quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

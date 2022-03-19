@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Settings
+Name[ca]=Configuració
+Name[es]=Preferencias
+Name[uk]=Параметри
+Name[x-test]=xxSettingsxx
 Icon=spectacle
 Description=Settings application quick setting
+Description[ca]=Configuració ràpida de la configuració general
+Description[es]=Ajuste rápido de la aplicación de preferencias
+Description[uk]=Швидке налаштовування параметрів програм
+Description[x-test]=xxSettings application quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

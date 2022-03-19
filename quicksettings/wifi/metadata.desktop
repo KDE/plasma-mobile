@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Wi-Fi
+Name[ca]=Wi-Fi
+Name[es]=Wifi
+Name[uk]=Wi-Fi
+Name[x-test]=xxWi-Fixx
 Icon=network-wireless-signal
 Description=Wi-Fi quick setting
+Description[ca]=Configuració ràpida de la Wi-Fi
+Description[es]=Ajuste rápido del wifi
+Description[uk]=Швидке налаштовування Wi-Fi
+Description[x-test]=xxWi-Fi quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

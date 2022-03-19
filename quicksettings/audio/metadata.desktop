@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Audio
+Name[ca]=Àudio
+Name[es]=Sonido
+Name[uk]=Звук
+Name[x-test]=xxAudioxx
 Icon=audio-speakers-symbolic
 Description=Audio quick setting
+Description[ca]=Configuració ràpida de l'àudio
+Description[es]=Ajuste rápido del sonido
+Description[uk]=Швидке налаштовування звуку
+Description[x-test]=xxAudio quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Battery
+Name[ca]=Bateria
+Name[es]=Batería
+Name[uk]=Акумулятор
+Name[x-test]=xxBatteryxx
 Icon=battery-full
 Description=Battery quick setting
+Description[ca]=Configuració ràpida de la bateria
+Description[es]=Ajuste rápido de la batería
+Description[uk]=Швидке налаштовування акумулятора
+Description[x-test]=xxBattery quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Screen rotation
+Name[ca]=Gir de la pantalla
+Name[es]=Rotación de la pantalla
+Name[uk]=Реалізовано обертання зображення на екрані
+Name[x-test]=xxScreen rotationxx
 Icon=rotation-allowed
 Description=Screen rotation quick setting
+Description[ca]=Configuració ràpida del gir de pantalla
+Description[es]=Ajuste rápido de la rotación de la pantalla
+Description[uk]=Швидке встановлення обертання екрана
+Description[x-test]=xxScreen rotation quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

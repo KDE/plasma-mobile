@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Screenshot
+Name[ca]=Captura de pantalla
+Name[es]=Captura de pantalla
+Name[uk]=Знімок вікна
+Name[x-test]=xxScreenshotxx
 Icon=spectacle
 Description=Screenshot quick setting
+Description[ca]=Configuració ràpida de la captura de pantalla
+Description[es]=Ajuste rápido de la captura de pantalla
+Description[uk]=Швидке встановлення знімка вікна
+Description[x-test]=xxScreenshot quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML

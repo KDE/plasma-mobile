@@ -3,8 +3,16 @@
 
 [Desktop Entry]
 Name=Bluetooth
+Name[ca]=Bluetooth
+Name[es]=Bluetooth
+Name[uk]=Bluetooth
+Name[x-test]=xxBluetoothxx
 Icon=network-bluetooth
 Description=Bluetooth quick setting
+Description[ca]=Configuració ràpida del Bluetooth
+Description[es]=Ajuste rápido del Bluetooth
+Description[uk]=Швидке налаштовування Bluetooth
+Description[x-test]=xxBluetooth quick settingxx
 
 Type=Service
 X-KDE-ServiceTypes=KPackage/GenericQML
