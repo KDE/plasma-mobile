@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Battery
 Name[ca]=Bateria
+Name[ca@valencia]=Bateria
 Name[es]=Batería
+Name[fr]=Batterie
+Name[nl]=Batterij
+Name[sl]=Baterija
+Name[sv]=Batteri
+Name[tr]=Pil
 Name[uk]=Акумулятор
 Name[x-test]=xxBatteryxx
 Icon=battery-full
 Description=Battery quick setting
 Description[ca]=Configuració ràpida de la bateria
+Description[ca@valencia]=Configuració ràpida de la bateria
 Description[es]=Ajuste rápido de la batería
+Description[fr]=Configuration rapide de la batterie
+Description[nl]=Snelle instelling van batterij
+Description[sl]=Hitre nastavitve baterije
+Description[sv]=Snabbinställning av batteri
+Description[tr]=Pil hızlı Ayarı
 Description[uk]=Швидке налаштовування акумулятора
 Description[x-test]=xxBattery quick settingxx
 

@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Screen rotation
 Name[ca]=Gir de la pantalla
+Name[ca@valencia]=Gir de la pantalla
 Name[es]=Rotación de la pantalla
+Name[fr]=Rotation de l'écran
+Name[nl]=Schermrotatie
+Name[sl]=Sukanje zaslona
+Name[sv]=Skärmrotation
+Name[tr]=Ekran döndürme
 Name[uk]=Реалізовано обертання зображення на екрані
 Name[x-test]=xxScreen rotationxx
 Icon=rotation-allowed
 Description=Screen rotation quick setting
 Description[ca]=Configuració ràpida del gir de pantalla
+Description[ca@valencia]=Configuració ràpida del gir de pantalla
 Description[es]=Ajuste rápido de la rotación de la pantalla
+Description[fr]=Configuration rapide de la rotation d'écran
+Description[nl]=Snelle instelling van schermrotatie
+Description[sl]=Hitre nastavitve sukanja zaslona
+Description[sv]=Snabbinställning av skärmrotation
+Description[tr]=Ekran döndürme hızlı ayarı
 Description[uk]=Швидке встановлення обертання екрана
 Description[x-test]=xxScreen rotation quick settingxx
 

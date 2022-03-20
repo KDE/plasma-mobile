@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Audio
 Name[ca]=Àudio
+Name[ca@valencia]=Àudio
 Name[es]=Sonido
+Name[fr]=Audio
+Name[nl]=Audio
+Name[sl]=Zvok
+Name[sv]=Ljud
+Name[tr]=Ses
 Name[uk]=Звук
 Name[x-test]=xxAudioxx
 Icon=audio-speakers-symbolic
 Description=Audio quick setting
 Description[ca]=Configuració ràpida de l'àudio
+Description[ca@valencia]=Configuració ràpida de l'àudio
 Description[es]=Ajuste rápido del sonido
+Description[fr]=Configuration rapide de l'audio
+Description[nl]=Snelle instelling van audio
+Description[sl]=Hitre nastavitve zvoka
+Description[sv]=Snabbinställning av ljud
+Description[tr]=Ses hızlı ayarı
 Description[uk]=Швидке налаштовування звуку
 Description[x-test]=xxAudio quick settingxx
 

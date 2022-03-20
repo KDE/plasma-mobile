@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Bluetooth
 Name[ca]=Bluetooth
+Name[ca@valencia]=Bluetooth
 Name[es]=Bluetooth
+Name[fr]=Bluetooth
+Name[nl]=Bluetooth
+Name[sl]=Bluetooth
+Name[sv]=Blåtand
+Name[tr]=Bluetooth
 Name[uk]=Bluetooth
 Name[x-test]=xxBluetoothxx
 Icon=network-bluetooth
 Description=Bluetooth quick setting
 Description[ca]=Configuració ràpida del Bluetooth
+Description[ca@valencia]=Configuració ràpida del Bluetooth
 Description[es]=Ajuste rápido del Bluetooth
+Description[fr]=Configuration rapide de Bluetooth
+Description[nl]=Snelle instelling van bluetooth
+Description[sl]=Hitre nastavitve Bluetooth
+Description[sv]=Snabbinställning av Blåtand
+Description[tr]=Bluetooth hızlı ayarı
 Description[uk]=Швидке налаштовування Bluetooth
 Description[x-test]=xxBluetooth quick settingxx
 

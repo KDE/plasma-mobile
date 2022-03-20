@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Screenshot
 Name[ca]=Captura de pantalla
+Name[ca@valencia]=Captura de pantalla
 Name[es]=Captura de pantalla
+Name[fr]=Copie d'écran
+Name[nl]=Schermafdruk
+Name[sl]=Slika zaslona
+Name[sv]= Skärmbild
+Name[tr]=Ekran görüntüsü
 Name[uk]=Знімок вікна
 Name[x-test]=xxScreenshotxx
 Icon=spectacle
 Description=Screenshot quick setting
 Description[ca]=Configuració ràpida de la captura de pantalla
+Description[ca@valencia]=Configuració ràpida de la captura de pantalla
 Description[es]=Ajuste rápido de la captura de pantalla
+Description[fr]=Configuration rapide des copies d'écran
+Description[nl]=Snelle instelling van schermafdruk
+Description[sl]=Hitre nastavitve slike zaslona
+Description[sv]=Snabbinställning av skärmbild
+Description[tr]=Ekran görüntüsü hızlı ayarı
 Description[uk]=Швидке встановлення знімка вікна
 Description[x-test]=xxScreenshot quick settingxx
 

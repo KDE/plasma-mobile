@@ -36,7 +36,13 @@ Name[zh_CN]=飞行模式
 Icon=network-flightmode-on
 Description=Airplane mode quick setting
 Description[ca]=Configuració ràpida del mode avió
+Description[ca@valencia]=Configuració ràpida del mode avió
 Description[es]=Ajuste rápido del modo avión
+Description[fr]=Configuration rapide du mode Avion
+Description[nl]=Snelle instelling van vliegtuigmodus
+Description[sl]=Hitre nastavitve letalskega načina
+Description[sv]=Snabbinställning av flygplansläge
+Description[tr]=Uçak kipi hızlı ayarı
 Description[uk]=Швидке встановлення режиму польоту
 Description[x-test]=xxAirplane mode quick settingxx
 

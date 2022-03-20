@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Wi-Fi
 Name[ca]=Wi-Fi
+Name[ca@valencia]=Wi-Fi
 Name[es]=Wifi
+Name[fr]=Wi-Fi
+Name[nl]=Wi-Fi
+Name[sl]=Wi-Fi
+Name[sv]=Wifi
+Name[tr]=Wi-Fi
 Name[uk]=Wi-Fi
 Name[x-test]=xxWi-Fixx
 Icon=network-wireless-signal
 Description=Wi-Fi quick setting
 Description[ca]=Configuració ràpida de la Wi-Fi
+Description[ca@valencia]=Configuració ràpida de la Wi-Fi
 Description[es]=Ajuste rápido del wifi
+Description[fr]=Configuration rapide du Wifi
+Description[nl]=Snelle instelling van Wi-Fi
+Description[sl]=Hitre nastavitve Wi-Fi
+Description[sv]=Snabbinställning av wifi
+Description[tr]=Wi-Fi hızlı ayarı
 Description[uk]=Швидке налаштовування Wi-Fi
 Description[x-test]=xxWi-Fi quick settingxx
 

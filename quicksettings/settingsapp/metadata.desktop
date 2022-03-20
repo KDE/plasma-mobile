@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Settings
 Name[ca]=Configuració
+Name[ca@valencia]=Configuració
 Name[es]=Preferencias
+Name[fr]=Configuration
+Name[nl]=Instellingen
+Name[sl]=Nastavitve
+Name[sv]=Inställningar
+Name[tr]=Ayarlar
 Name[uk]=Параметри
 Name[x-test]=xxSettingsxx
 Icon=spectacle
 Description=Settings application quick setting
 Description[ca]=Configuració ràpida de la configuració general
+Description[ca@valencia]=Configuració ràpida de la configuració general
 Description[es]=Ajuste rápido de la aplicación de preferencias
+Description[fr]=Configuration rapide de la configuration d'une application
+Description[nl]=Snelle instelling van toepassing voor instellingen
+Description[sl]=Hitre nastavitve aplikacij
+Description[sv]=Snabbinställning av inställningsprogram
+Description[tr]=Ayarlar uygulaması hızlı ayarı
 Description[uk]=Швидке налаштовування параметрів програм
 Description[x-test]=xxSettings application quick settingxx
 

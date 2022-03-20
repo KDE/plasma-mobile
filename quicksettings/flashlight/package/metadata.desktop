@@ -4,13 +4,25 @@
 [Desktop Entry]
 Name=Flashlight
 Name[ca]=Llum de flaix
+Name[ca@valencia]=Llum de flaix
 Name[es]=Linterna
+Name[fr]=Flashlight
+Name[nl]=Zaklamp
+Name[sl]=Svetilka
+Name[sv]=Ficklampa
+Name[tr]=El feneri
 Name[uk]=Спалах
 Name[x-test]=xxFlashlightxx
 Icon=flashlight-on
 Description=Flashlight quick setting
 Description[ca]=Configuració ràpida del llum de flaix
+Description[ca@valencia]=Configuració ràpida del llum de flaix
 Description[es]=Ajuste rápido de la linterna
+Description[fr]=Configuration rapide de Flashlight
+Description[nl]=Snelle instelling van zaklamp
+Description[sl]=Hitre nastavitve svetilke
+Description[sv]=Snabbinställning av ficklampa
+Description[tr]=El Feneri hızlı ayarı
 Description[uk]=Швидке налаштовування спалаху
 Description[x-test]=xxFlashlight quick settingxx
 
