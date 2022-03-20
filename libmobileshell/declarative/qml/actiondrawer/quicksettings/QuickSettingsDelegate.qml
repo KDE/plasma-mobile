@@ -47,7 +47,7 @@ Components.BaseItem {
             root.toggleFunction();
         } else if (root.settingsCommand) {
             closeRequested();
-            MobileShell.HomeScreenControls.openAppAnimation(
+            MobileShell.HomeScreenControls.openAppLaunchAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
@@ -60,7 +60,7 @@ Components.BaseItem {
     function delegatePressAndHold() {
         if (root.settingsCommand) {
             closeRequested();
-            MobileShell.HomeScreenControls.openAppAnimation(
+            MobileShell.HomeScreenControls.openAppLaunchAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,

@@ -106,7 +106,7 @@ Repeater {
         onLaunch: (x, y, icon, title) => {
             if (icon !== "") {
                 print(delegate.iconItem)
-                MobileShell.HomeScreenControls.openAppAnimation(
+                MobileShell.HomeScreenControls.openAppLaunchAnimation(
                         icon,
                         title,
                         delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

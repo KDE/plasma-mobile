@@ -57,7 +57,7 @@ AbstractAppDrawer {
             }
             onLaunch: (x, y, icon, title, storageId) => {
                 if (icon !== "") {
-                    MobileShell.HomeScreenControls.openAppAnimation(
+                    MobileShell.HomeScreenControls.openAppLaunchAnimation(
                             icon,
                             title,
                             delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

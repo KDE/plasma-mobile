@@ -21,7 +21,8 @@ QtObject {
     signal snapHomeScreenPosition()
     signal requestRelativeScroll(point pos)
     
-    signal openAppAnimation(string splashIcon, string title, real x, real y, real sourceIconSize)
+    signal openAppLaunchAnimation(string splashIcon, string title, real x, real y, real sourceIconSize)
+    signal closeAppLaunchAnimation()
     
     property var taskSwitcher
     property QtObject homeScreenWindow

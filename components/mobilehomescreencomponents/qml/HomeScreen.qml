@@ -66,6 +66,12 @@ Item {
             width: flickContainer.width
             height: flickContainer.height
             
+            // listen to app launch errors
+            Connections {
+                target: HomeScreenComponents.ApplicationListModel
+                onLaunchError: MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+            }
+            
             // horizontal pages
             HomeScreenPages {
                 id: pages

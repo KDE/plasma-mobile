@@ -69,8 +69,12 @@ FocusScope {
             //lastRequestedPosition = pos.y;
         }
         
-        function onOpenAppAnimation(splashIcon, title, x, y, sourceIconSize) {
+        function onOpenAppLaunchAnimation(splashIcon, title, x, y, sourceIconSize) {
             startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
+        }
+        
+        function onCloseAppLaunchAnimation() {
+            startupFeedback.close();
         }
     }
     
