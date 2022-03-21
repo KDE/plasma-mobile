@@ -92,11 +92,11 @@ KCM.SimpleKCM {
                                 }
                                 
                                 Kirigami.Icon {
-                                    visible: model.icon !== ""
-                                    source: model.icon
-                                    Layout.rightMargin: (model.icon !== "") ? Kirigami.Units.largeSpacing : 0
-                                    implicitWidth: (model.icon !== "") ? Kirigami.Units.iconSizes.small : 0
-                                    implicitHeight: (model.icon !== "") ? Kirigami.Units.iconSizes.small : 0
+                                    visible: model && model.icon !== ""
+                                    source: model ? model.icon : ""
+                                    Layout.rightMargin: (model && model.icon !== "") ? Kirigami.Units.largeSpacing : 0
+                                    implicitWidth: (model && model.icon !== "") ? Kirigami.Units.iconSizes.small : 0
+                                    implicitHeight: (model && model.icon !== "") ? Kirigami.Units.iconSizes.small : 0
                                 }
                                 
                                 ColumnLayout {
@@ -105,7 +105,7 @@ KCM.SimpleKCM {
                                     
                                     QQC2.Label {
                                         Layout.fillWidth: true
-                                        text: model.name
+                                        text: model ? model.name : ""
                                         elide: Text.ElideRight
                                     }
                                 }

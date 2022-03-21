@@ -41,11 +41,7 @@ void SavedQuickSettingsModel::moveRow(int oldIndex, int newIndex)
         return;
     }
 
-    if (oldIndex < newIndex) {
-        ++newIndex;
-    }
-
-    Q_EMIT beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex);
+    Q_EMIT beginMoveRows(QModelIndex(), oldIndex, oldIndex, QModelIndex(), newIndex + (oldIndex < newIndex ? 1 : 0));
     std::iter_swap(m_data.begin() + oldIndex, m_data.begin() + newIndex);
     Q_EMIT endMoveRows();
 

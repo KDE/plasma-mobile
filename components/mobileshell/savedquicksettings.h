@@ -29,6 +29,7 @@ class SavedQuickSettings : public QObject
 
 public:
     SavedQuickSettings(QObject *parent = nullptr);
+    ~SavedQuickSettings();
 
     SavedQuickSettingsModel *enabledQuickSettingsModel() const;
     SavedQuickSettingsModel *disabledQuickSettingsModel() const;
@@ -46,4 +47,5 @@ private:
     SavedQuickSettingsModel *m_disabledQSModel;
 
     QTimer *m_updateTimer;
+    QTimer *m_saveTimer;
 };

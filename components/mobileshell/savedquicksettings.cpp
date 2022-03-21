@@ -16,12 +16,20 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
     , m_enabledQSModel{new SavedQuickSettingsModel{this}}
     , m_disabledQSModel{new SavedQuickSettingsModel{this}}
     , m_updateTimer{new QTimer{this}}
+    , m_saveTimer{new QTimer{this}}
 {
     // throttle model updates from config, to avoid performance issues with fast reloading
     m_updateTimer->setInterval(2000);
     m_updateTimer->setSingleShot(true);
     connect(m_updateTimer, &QTimer::timeout, this, [this]() {
         refreshModel();
+    });
+
+    // throttle saving so that we don't have conflicts while writing and then getting notified about updates
+    m_saveTimer->setInterval(1000);
+    m_saveTimer->setSingleShot(true);
+    connect(m_saveTimer, &QTimer::timeout, this, [this]() {
+        saveModel();
     });
 
     // load quicksettings packages
@@ -51,7 +59,10 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
             m_enabledPackages.push_back(metaData);
         }
 
-        saveModel();
+        m_saveTimer->start();
+        if (m_updateTimer->isActive()) {
+            m_updateTimer->start(); // reset update timer if it's running
+        }
     });
     connect(m_disabledQSModel, &SavedQuickSettingsModel::dataUpdated, this, [this](QList<KPluginMetaData *> data) -> void {
         m_disabledPackages.clear();
@@ -59,11 +70,22 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
             m_disabledPackages.push_back(metaData);
         }
 
-        saveModel();
+        m_saveTimer->start();
+        if (m_updateTimer->isActive()) {
+            m_updateTimer->start(); // reset update timer if it's running
+        }
     });
 
     // load
     refreshModel();
+}
+
+SavedQuickSettings::~SavedQuickSettings()
+{
+    // save immediately if was requested
+    if (m_saveTimer->isActive()) {
+        saveModel();
+    }
 }
 
 SavedQuickSettingsModel *SavedQuickSettings::enabledQuickSettingsModel() const
