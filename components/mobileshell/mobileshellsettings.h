@@ -11,12 +11,7 @@
 #include <KSharedConfig>
 #include <QObject>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
-
-class MOBILESHELL_EXPORT MobileShellSettings : public QObject
+class MobileShellSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
@@ -44,5 +39,3 @@ private:
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;
 };
-
-} // namespace MobileShell

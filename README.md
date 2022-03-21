@@ -15,7 +15,7 @@ This repository contains shell components for Plasma Mobile.
 * Development channel: https://matrix.to/#/#plasmamobile:matrix.org
 
 ### Locations
-* [libmobileshell](libmobileshell) - shell component library (not guaranteed to be binary compatible between releases!)
+* [components/mobileshell](mobileshell) - private shell component library (API not guaranteed to be stable!)
 * [containments](containments) - shell panels (homescreen, status bar, task panel)
 * [homescreens](homescreens) - homescreen packages
 * [kcms](kcms) - settings modules

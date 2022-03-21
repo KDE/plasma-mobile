@@ -4,3 +4,4 @@
 
 add_subdirectory(mmplugin)
 add_subdirectory(mobilehomescreencomponents)
+add_subdirectory(mobileshell)

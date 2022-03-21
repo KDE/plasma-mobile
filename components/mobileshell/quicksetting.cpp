@@ -6,8 +6,6 @@
 
 #include "quicksetting.h"
 
-using namespace MobileShell;
-
 QuickSetting::QuickSetting(QObject *parent)
     : QObject(parent)
 {

@@ -9,8 +9,6 @@
 
 #include <QGuiApplication>
 
-using namespace MobileShell;
-
 DisplaysModel::DisplaysModel(QObject *parent)
     : QAbstractListModel(parent)
 {

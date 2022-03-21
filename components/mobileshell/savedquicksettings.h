@@ -15,17 +15,13 @@
 #include <QQmlListProperty>
 #include <QTimer>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
 /**
  * @short A model that reads quick settings configurations
  * from the config and presents models to display them.
  *
  * @author Devin Lin <devin@kde.org>
  **/
-class MOBILESHELL_EXPORT SavedQuickSettings : public QObject
+class SavedQuickSettings : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(SavedQuickSettingsModel *enabledModel READ enabledQuickSettingsModel CONSTANT)
@@ -51,5 +47,3 @@ private:
 
     QTimer *m_updateTimer;
 };
-
-} // namespace MobileShell

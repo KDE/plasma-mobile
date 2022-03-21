@@ -18,8 +18,6 @@
 #include "shellutil.h"
 #include "taskswitcher/displaysmodel.h"
 
-using namespace MobileShell;
-
 QUrl resolvePath(std::string str)
 {
     return QUrl("qrc:/org/kde/plasma/private/mobileshell/qml/" + QString::fromStdString(str));

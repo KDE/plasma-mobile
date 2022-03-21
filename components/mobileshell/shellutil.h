@@ -12,12 +12,7 @@
 #include <KConfigWatcher>
 #include <KSharedConfig>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
-
-class MOBILESHELL_EXPORT ShellUtil : public QObject
+class ShellUtil : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool isSystem24HourFormat READ isSystem24HourFormat NOTIFY isSystem24HourFormatChanged);
@@ -40,5 +35,3 @@ private:
     KConfigWatcher::Ptr m_localeConfigWatcher;
     KSharedConfig::Ptr m_localeConfig;
 };
-
-} // namespace MobileShell

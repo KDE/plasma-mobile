@@ -15,12 +15,7 @@
 #include <QAbstractListModel>
 #include <QQmlListProperty>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
-
-class MOBILESHELL_EXPORT QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
+class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
 {
     Q_OBJECT
     Q_INTERFACES(QQmlParserStatus)
@@ -35,6 +30,7 @@ public:
 
     void classBegin() override;
     void componentComplete() override;
+
 private:
     void loadQuickSettings();
 
@@ -42,5 +38,3 @@ private:
     QList<QuickSetting *> m_quickSettings;
     SavedQuickSettings *m_savedQuickSettings;
 };
-
-} // namespace MobileShell

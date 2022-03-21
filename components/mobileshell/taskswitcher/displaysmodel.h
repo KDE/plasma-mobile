@@ -17,12 +17,7 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
-
-class MOBILESHELL_EXPORT DisplaysModel : public QAbstractListModel
+class DisplaysModel : public QAbstractListModel
 {
 public:
     enum Roles {
@@ -47,5 +42,3 @@ private:
 
     QVector<KWayland::Client::Output *> m_outputs;
 };
-
-} // namespace MobileShell

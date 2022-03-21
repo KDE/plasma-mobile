@@ -12,16 +12,12 @@
 #include <QAbstractListModel>
 #include <QQmlListProperty>
 
-#include "mobileshell_export.h"
-
-namespace MobileShell
-{
 /**
  * @short A list model for serving quick settings metadata.
  *
  * @author Devin Lin <devin@kde.org>
  **/
-class MOBILESHELL_EXPORT SavedQuickSettingsModel : public QAbstractListModel
+class SavedQuickSettingsModel : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -53,5 +49,3 @@ Q_SIGNALS:
 private:
     QList<KPluginMetaData *> m_data;
 };
-
-} // namespace MobileShell

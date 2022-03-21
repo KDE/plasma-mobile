@@ -3,8 +3,6 @@
 
 #include "savedquicksettingsmodel.h"
 
-using namespace MobileShell;
-
 SavedQuickSettingsModel::SavedQuickSettingsModel(QObject *parent)
     : QAbstractListModel{parent}
 {

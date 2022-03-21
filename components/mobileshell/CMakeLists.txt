@@ -6,6 +6,11 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
                                  
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
+    mobileshellsettings.cpp
+    quicksetting.cpp
+    quicksettingsmodel.cpp
+    savedquicksettings.cpp
+    savedquicksettingsmodel.cpp
     shellutil.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
@@ -23,7 +28,6 @@ add_library(mobileshellplugin SHARED ${mobileshellplugin_SRCS} ${RESOURCES})
 target_link_libraries(mobileshellplugin 
     PUBLIC
         Qt::Core
-        mobileshell
     PRIVATE
         Qt::DBus
         Qt::Qml

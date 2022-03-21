@@ -7,8 +7,6 @@
 
 #include <QFileInfo>
 
-using namespace MobileShell;
-
 SavedQuickSettings::SavedQuickSettings(QObject *parent)
     : QObject{parent}
     , m_settings{new MobileShellSettings{this}}

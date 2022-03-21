@@ -13,8 +13,6 @@
 #include <QQmlComponent>
 #include <QQmlEngine>
 
-using namespace MobileShell;
-
 QuickSettingsModel::QuickSettingsModel(QObject *parent)
     : QAbstractListModel{parent}
     , m_savedQuickSettings{new SavedQuickSettings{this}}

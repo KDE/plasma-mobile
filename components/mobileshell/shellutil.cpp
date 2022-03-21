@@ -29,8 +29,6 @@
 
 #define FORMAT24H "HH:mm:ss"
 
-using namespace MobileShell;
-
 ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
 {

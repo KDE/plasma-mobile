@@ -8,8 +8,6 @@
 
 #include <QDebug>
 
-using namespace MobileShell;
-
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
 const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
