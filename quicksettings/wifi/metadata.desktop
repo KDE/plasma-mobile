@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Wi-Fi
+Name[az]=Wi-Fi
 Name[ca]=Wi-Fi
 Name[ca@valencia]=Wi-Fi
 Name[es]=Wifi
@@ -17,6 +18,7 @@ Name[uk]=Wi-Fi
 Name[x-test]=xxWi-Fixx
 Icon=network-wireless-signal
 Description=Wi-Fi quick setting
+Description[az]=Wi-Fi sürətli ayarı
 Description[ca]=Configuració ràpida de la Wi-Fi
 Description[ca@valencia]=Configuració ràpida de la Wi-Fi
 Description[es]=Ajuste rápido del wifi

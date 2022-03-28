@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Battery
+Name[az]=Batareya
 Name[ca]=Bateria
 Name[ca@valencia]=Bateria
 Name[es]=Batería
@@ -17,6 +18,7 @@ Name[uk]=Акумулятор
 Name[x-test]=xxBatteryxx
 Icon=battery-full
 Description=Battery quick setting
+Description[az]=Batareya sürətli ayarı
 Description[ca]=Configuració ràpida de la bateria
 Description[ca@valencia]=Configuració ràpida de la bateria
 Description[es]=Ajuste rápido de la batería

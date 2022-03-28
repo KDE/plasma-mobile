@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Bluetooth
+Name[az]=Bluetooth
 Name[ca]=Bluetooth
 Name[ca@valencia]=Bluetooth
 Name[es]=Bluetooth
@@ -17,6 +18,7 @@ Name[uk]=Bluetooth
 Name[x-test]=xxBluetoothxx
 Icon=network-bluetooth
 Description=Bluetooth quick setting
+Description[az]=Bluetooth sürətli ayarı
 Description[ca]=Configuració ràpida del Bluetooth
 Description[ca@valencia]=Configuració ràpida del Bluetooth
 Description[es]=Ajuste rápido del Bluetooth

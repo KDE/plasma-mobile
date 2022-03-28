@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Audio
+Name[az]=Səs
 Name[ca]=Àudio
 Name[ca@valencia]=Àudio
 Name[es]=Sonido
@@ -17,6 +18,7 @@ Name[uk]=Звук
 Name[x-test]=xxAudioxx
 Icon=audio-speakers-symbolic
 Description=Audio quick setting
+Description[az]=Səs sürətli ayarı
 Description[ca]=Configuració ràpida de l'àudio
 Description[ca@valencia]=Configuració ràpida de l'àudio
 Description[es]=Ajuste rápido del sonido

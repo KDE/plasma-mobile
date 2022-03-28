@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Screenshot
+Name[az]=Ekran şəkli
 Name[ca]=Captura de pantalla
 Name[ca@valencia]=Captura de pantalla
 Name[es]=Captura de pantalla
@@ -17,6 +18,7 @@ Name[uk]=Знімок вікна
 Name[x-test]=xxScreenshotxx
 Icon=spectacle
 Description=Screenshot quick setting
+Description[az]=Ekran şəkli sürətli ayarı
 Description[ca]=Configuració ràpida de la captura de pantalla
 Description[ca@valencia]=Configuració ràpida de la captura de pantalla
 Description[es]=Ajuste rápido de la captura de pantalla

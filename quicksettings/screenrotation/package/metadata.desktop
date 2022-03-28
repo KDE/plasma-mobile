@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Screen rotation
+Name[az]=Ekran dönməsi
 Name[ca]=Gir de la pantalla
 Name[ca@valencia]=Gir de la pantalla
 Name[es]=Rotación de la pantalla
@@ -17,6 +18,7 @@ Name[uk]=Реалізовано обертання зображення на е�
 Name[x-test]=xxScreen rotationxx
 Icon=rotation-allowed
 Description=Screen rotation quick setting
+Description[az]=Ekran dönməsi sürətli ayarı
 Description[ca]=Configuració ràpida del gir de pantalla
 Description[ca@valencia]=Configuració ràpida del gir de pantalla
 Description[es]=Ajuste rápido de la rotación de la pantalla

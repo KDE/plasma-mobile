@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Name=Flashlight
+Name[az]=Fənər
 Name[ca]=Llum de flaix
 Name[ca@valencia]=Llum de flaix
 Name[es]=Linterna
@@ -17,6 +18,7 @@ Name[uk]=Спалах
 Name[x-test]=xxFlashlightxx
 Icon=flashlight-on
 Description=Flashlight quick setting
+Description[az]=Fənər sürətli ayarı
 Description[ca]=Configuració ràpida del llum de flaix
 Description[ca@valencia]=Configuració ràpida del llum de flaix
 Description[es]=Ajuste rápido de la linterna

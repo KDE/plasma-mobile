@@ -35,6 +35,7 @@ Name[x-test]=xxAirplane Modexx
 Name[zh_CN]=飞行模式
 Icon=network-flightmode-on
 Description=Airplane mode quick setting
+Description[az]=Təyyarə rejimi sürətli ayarı
 Description[ca]=Configuració ràpida del mode avió
 Description[ca@valencia]=Configuració ràpida del mode avió
 Description[es]=Ajuste rápido del modo avión
