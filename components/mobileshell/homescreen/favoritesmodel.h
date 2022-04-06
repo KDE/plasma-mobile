@@ -7,13 +7,13 @@
 #pragma once
 
 // Qt
-#include <QObject>
 #include <QAbstractListModel>
 #include <QList>
+#include <QObject>
 #include <QSet>
 
-#include "homescreenutils.h"
 #include "applicationlistmodel.h"
+#include "homescreenutils.h"
 
 class QString;
 
@@ -28,13 +28,19 @@ class PlasmaWindow;
 
 class FavoritesModel;
 
-class FavoritesModel : public ApplicationListModel {
+class FavoritesModel : public ApplicationListModel
+{
     Q_OBJECT
 
 public:
     FavoritesModel(QObject *parent = nullptr);
     ~FavoritesModel() override;
 
+    static FavoritesModel *instance()
+    {
+        static FavoritesModel *model = new FavoritesModel;
+        return model;
+    }
 
     QString storageToUniqueId(const QString &storageId) const;
     QString uniqueToStorageId(const QString &uniqueId) const;
@@ -43,7 +49,4 @@ public:
     Q_INVOKABLE void removeFavorite(int row);
 
     Q_INVOKABLE void loadApplications() override;
-
-
 };
-

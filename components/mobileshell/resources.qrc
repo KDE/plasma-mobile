@@ -31,6 +31,8 @@
         <file>qml/dataproviders/VolumeProvider.qml</file>
         <file>qml/dataproviders/WifiProvider.qml</file>
         
+        <file>qml/homescreen/HomeScreen.qml</file>
+        
         <file>qml/navigationpanel/NavigationGestureArea.qml</file>
         <file>qml/navigationpanel/NavigationPanel.qml</file>
         <file>qml/navigationpanel/NavigationPanelAction.qml</file>

@@ -1,16 +1,16 @@
 /*
  *   SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef APPLICATIONLISTMODEL_H
-#define APPLICATIONLISTMODEL_H
+#pragma once
 
 // Qt
-#include <QObject>
 #include <QAbstractListModel>
 #include <QList>
+#include <QObject>
 #include <QSet>
 
 #include "homescreenutils.h"
@@ -33,7 +33,8 @@ class AppletQuickItem;
 
 class ApplicationListModel;
 
-class ApplicationListModel : public QAbstractListModel {
+class ApplicationListModel : public QAbstractListModel
+{
     Q_OBJECT
 
     Q_PROPERTY(PlasmaQuick::AppletQuickItem *applet READ applet WRITE setApplet NOTIFY appletChanged)
@@ -43,11 +44,7 @@ class ApplicationListModel : public QAbstractListModel {
     Q_PROPERTY(int maxFavoriteCount READ maxFavoriteCount WRITE setMaxFavoriteCount NOTIFY maxFavoriteCountChanged)
 
 public:
-    enum LauncherLocation {
-        Grid = 0,
-        Favorites,
-        Desktop
-    };
+    enum LauncherLocation { Grid = 0, Favorites, Desktop };
     Q_ENUM(LauncherLocation)
 
     struct ApplicationData {
@@ -76,14 +73,26 @@ public:
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
 
+    static ApplicationListModel *instance()
+    {
+        static ApplicationListModel *model = new ApplicationListModel;
+        return model;
+    }
+
     void loadSettings();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
 
     void moveRow(const QModelIndex &sourceParent, int sourceRow, const QModelIndex &destinationParent, int destinationChild);
 
-    int count() const { return m_applicationList.count(); }
-    int favoriteCount() const { return m_favorites.count();}
+    int count() const
+    {
+        return m_applicationList.count();
+    }
+    int favoriteCount() const
+    {
+        return m_favorites.count();
+    }
 
     int maxFavoriteCount() const;
     void setMaxFavoriteCount(int count);
@@ -109,7 +118,7 @@ public:
     Q_INVOKABLE void unsetMinimizedDelegate(int row, QQuickItem *delegate);
 
 public Q_SLOTS:
-     void sycocaDbChanged(const QStringList &change);
+    void sycocaDbChanged(const QStringList &change);
 
 Q_SIGNALS:
     void countChanged();
@@ -131,5 +140,3 @@ protected:
     QSet<QString> m_desktopItems;
     QHash<QString, int> m_appPositions;
 };
-
-#endif // APPLICATIONLISTMODEL_H

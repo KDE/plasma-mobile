@@ -18,7 +18,6 @@ QtObject {
 
     signal openHomeScreen()
     signal resetHomeScreenPosition()
-    signal snapHomeScreenPosition()
     signal requestRelativeScroll(point pos)
     
     signal openAppLaunchAnimation(string splashIcon, string title, real x, real y, real sourceIconSize)

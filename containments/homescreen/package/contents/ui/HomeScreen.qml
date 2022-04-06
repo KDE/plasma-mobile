@@ -21,8 +21,6 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
-
 Item {
     id: root
     
@@ -68,8 +66,10 @@ Item {
             
             // listen to app launch errors
             Connections {
-                target: HomeScreenComponents.ApplicationListModel
-                onLaunchError: MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+                target: MobileShell.ApplicationListModel
+                function onLaunchError(msg) {
+                    MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+                }
             }
             
             // horizontal pages
@@ -109,7 +109,7 @@ Item {
 
                     appletsLayout: contents.appletsLayout
                     visible: favoriteStrip.flow.children.length > 0 || contents.launcherDragManager.active || contents.containsDrag
-                    opacity: contents.launcherDragManager.active && HomeScreenComponents.ApplicationListModel.favoriteCount >= HomeScreenComponents.ApplicationListModel.maxFavoriteCount ? 0.3 : 1
+                    opacity: contents.launcherDragManager.active && MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ? 0.3 : 1
 
                     TapHandler {
                         target: favoriteStrip

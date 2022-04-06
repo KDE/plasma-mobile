@@ -12,6 +12,10 @@
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 
+#include "homescreen/applicationlistmodel.h"
+#include "homescreen/favoritesmodel.h"
+#include "homescreen/homescreenutils.h"
+
 #include "mobileshellsettings.h"
 #include "quicksetting.h"
 #include "quicksettingsmodel.h"
@@ -40,7 +44,19 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<SavedQuickSettings>(uri, 1, 0, "SavedQuickSettings");
     qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
 
+    // taskswitcher
     qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
+
+    // homescreen
+    qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return ApplicationListModel::instance();
+    });
+    qmlRegisterSingletonType<FavoritesModel>(uri, 1, 0, "FavoritesModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return FavoritesModel::instance();
+    });
+    qmlRegisterSingletonType<HomeScreenUtils>(uri, 1, 0, "HomeScreenUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return HomeScreenUtils::instance();
+    });
 
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");
@@ -64,6 +80,9 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType(resolvePath("dataproviders/SignalStrengthProvider.qml"), uri, 1, 0, "SignalStrengthProvider");
     qmlRegisterSingletonType(resolvePath("dataproviders/VolumeProvider.qml"), uri, 1, 0, "VolumeProvider");
     qmlRegisterSingletonType(resolvePath("dataproviders/WifiProvider.qml"), uri, 1, 0, "WifiProvider");
+
+    // /homescreen
+    qmlRegisterType(resolvePath("homescreen/HomeScreen.qml"), uri, 1, 0, "HomeScreen");
 
     // /navigationpanel
     qmlRegisterType(resolvePath("navigationpanel/NavigationGestureArea.qml"), uri, 1, 0, "NavigationGestureArea");

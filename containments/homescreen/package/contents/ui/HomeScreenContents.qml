@@ -18,8 +18,6 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
-
 import "private" as Private
 
 DragDrop.DropArea {
@@ -67,7 +65,7 @@ DragDrop.DropArea {
     onDragMove: {
         let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
         if (posInFavorites.y > 0) {
-            if (HomeScreenComponents.ApplicationListModel.favoriteCount >= HomeScreenComponents.ApplicationListModel.maxFavoriteCount ) {
+            if (MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ) {
                 launcherDragManager.hideSpacer();
             } else {
                 launcherDragManager.showSpacerAtPos(event.x, event.y, favoriteStrip);
@@ -110,12 +108,12 @@ DragDrop.DropArea {
 
             let posInFavorites = favoriteStrip.flow.mapFromItem(this, event.x, event.y);
             if (posInFavorites.y > 0) {
-                if (HomeScreenComponents.ApplicationListModel.favoriteCount >= HomeScreenComponents.ApplicationListModel.maxFavoriteCount ) {
+                if (MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ) {
                     return;
                 }
 
-                let pos = Math.min(HomeScreenComponents.FavoritesModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
-                HomeScreenComponents.FavoritesModel.addFavorite(storageId, pos, HomeScreenComponents.ApplicationListModel.Favorites)
+                let pos = Math.min(MobileShell.FavoritesModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
+                MobileShell.FavoritesModel.addFavorite(storageId, pos, MobileShell.ApplicationListModel.Favorites)
                 let item = launcherRepeater.itemAt(pos);
 
                 if (item) {
@@ -129,8 +127,8 @@ DragDrop.DropArea {
                 return;
             }
 
-            let pos = HomeScreenComponents.FavoritesModel.count;
-            HomeScreenComponents.FavoritesModel.addFavorite(storageId, pos, HomeScreenComponents.ApplicationListModel.Desktop)
+            let pos = MobileShell.FavoritesModel.count;
+            MobileShell.FavoritesModel.addFavorite(storageId, pos, MobileShell.ApplicationListModel.Desktop)
             let item = launcherRepeater.itemAt(pos);
 
             event.accept(event.proposedAction);

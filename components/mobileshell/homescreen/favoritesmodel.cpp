@@ -9,8 +9,8 @@
 
 // Qt
 #include <QByteArray>
-#include <QModelIndex>
 #include <QDebug>
+#include <QModelIndex>
 
 // KDE
 #include <KService>
@@ -27,7 +27,6 @@ FavoritesModel::FavoritesModel(QObject *parent)
 }
 
 FavoritesModel::~FavoritesModel() = default;
-
 
 QString FavoritesModel::storageToUniqueId(const QString &storageId) const
 {
@@ -54,10 +53,8 @@ QString FavoritesModel::uniqueToStorageId(const QString &uniqueId) const
     return uniqueId.split(QLatin1Char('-')).first();
 }
 
-
 void FavoritesModel::loadApplications()
 {
-
     beginResetModel();
 
     m_applicationList.clear();
@@ -97,7 +94,7 @@ void FavoritesModel::loadApplications()
         }
         m_desktopItems.remove(uniqueId);
     }
-    
+
     endResetModel();
     emit countChanged();
 
@@ -185,4 +182,3 @@ void FavoritesModel::removeFavorite(int row)
 }
 
 #include "moc_favoritesmodel.cpp"
-

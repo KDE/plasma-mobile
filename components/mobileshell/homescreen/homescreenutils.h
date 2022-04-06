@@ -6,7 +6,6 @@
 
 #pragma once
 
-
 #include <QObject>
 
 class QQuickItem;
@@ -17,16 +16,21 @@ class HomeScreenUtils : public QObject
     Q_OBJECT
 
 public:
-    HomeScreenUtils( QObject *parent = 0);
+    HomeScreenUtils(QObject *parent = 0);
     ~HomeScreenUtils() override;
+
+    static HomeScreenUtils *instance()
+    {
+        static HomeScreenUtils *model = new HomeScreenUtils;
+        return model;
+    }
 
     Q_INVOKABLE void stackBefore(QQuickItem *item1, QQuickItem *item2);
     Q_INVOKABLE void stackAfter(QQuickItem *item1, QQuickItem *item2);
 
 protected:
-   // void configChanged() override;
+    // void configChanged() override;
 
 private:
     bool m_showAllApps = false;
 };
-

@@ -3,5 +3,4 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 add_subdirectory(mmplugin)
-add_subdirectory(mobilehomescreencomponents)
 add_subdirectory(mobileshell)

@@ -16,7 +16,6 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobilehomescreencomponents 0.1 as HomeScreenComponents
 
 import "private" as Private
 
@@ -49,9 +48,9 @@ ContainmentLayoutManager.ItemContainer {
         }
 
         if (!MobileShell.HomeScreenControls.taskSwitcherVisible) {
-            HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
+            MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
         } else {
-            HomeScreenComponents.ApplicationListModel.unsetMinimizedDelegate(index, delegate);
+            MobileShell.ApplicationListModel.unsetMinimizedDelegate(index, delegate);
         }
     }
 
@@ -96,8 +95,8 @@ ContainmentLayoutManager.ItemContainer {
                 delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
             }
 
-            HomeScreenComponents.ApplicationListModel.setMinimizedDelegate(index, delegate);
-            HomeScreenComponents.ApplicationListModel.runApplication(modelData.applicationStorageId);
+            MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
+            MobileShell.ApplicationListModel.runApplication(modelData.applicationStorageId);
         }
 
         //preventStealing: true
@@ -158,9 +157,9 @@ ContainmentLayoutManager.ItemContainer {
 
                 //FIXME: export smallestReadableFont
                 font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
-                color: "white"//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
+                color: "white"//model.applicationLocation == MobileShell.ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
 
-                layer.enabled: true//model.applicationLocation == HomeScreenComponents.ApplicationListModel.Desktop
+                layer.enabled: true//model.applicationLocation == MobileShell.ApplicationListModel.Desktop
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2

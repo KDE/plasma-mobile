@@ -24,25 +24,6 @@ void HomeScreen::configChanged()
     Plasma::Containment::configChanged();
 }
 
-
-void HomeScreen::stackBefore(QQuickItem *item1, QQuickItem *item2)
-{
-    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
-        return;
-    }
-
-    item1->stackBefore(item2);
-}
-
-void HomeScreen::stackAfter(QQuickItem *item1, QQuickItem *item2)
-{
-    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
-        return;
-    }
-
-    item1->stackAfter(item2);
-}
-
 bool HomeScreen::showingDesktop() const
 {
     return KWindowSystem::showingDesktop();
