@@ -30,6 +30,7 @@ PlasmaCore.ColorScope {
             color: "white"
             level: 1
             text: i18n("Applications")
+            font.weight: Font.Medium
         }
         Item { Layout.fillWidth: true }
         PlasmaComponents.ToolButton {

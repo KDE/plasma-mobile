@@ -99,7 +99,6 @@ MouseArea {
 
             text:  model.applicationName
 
-            //FIXME: export smallestReadableFont
             font.pointSize: Math.round(theme.defaultFont.pointSize * 1.1)
             color: "white"
         }

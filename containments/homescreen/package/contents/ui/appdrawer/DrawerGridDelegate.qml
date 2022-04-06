@@ -85,9 +85,11 @@ MouseArea {
 
             Layout.fillWidth: true
             Layout.preferredHeight: delegate.reservedSpaceForLabel
+            Layout.topMargin: PlasmaCore.Units.smallSpacing
+            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing * 2
+            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing * 2
+            
             wrapMode: Text.WordWrap
-            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
-            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
             maximumLineCount: 2
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
@@ -95,8 +97,8 @@ MouseArea {
 
             text:  model.applicationName
 
-            //FIXME: export smallestReadableFont
-            font.pointSize: theme.defaultFont.pointSize * 0.9
+            font.pointSize: theme.defaultFont.pointSize * 0.8
+            font.weight: Font.Bold
             color: "white"
         }
     }

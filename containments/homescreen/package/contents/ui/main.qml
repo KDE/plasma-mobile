@@ -103,5 +103,13 @@ MobileShell.HomeScreen {
             searchWidget.updateGestureOffset(-offset);
         }
     }
+    
+    // listen to app launch errors
+    Connections {
+        target: MobileShell.ApplicationListModel
+        function onLaunchError(msg) {
+            MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+        }
+    }
 }
 

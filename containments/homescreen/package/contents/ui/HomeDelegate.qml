@@ -144,22 +144,24 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: delegate.reservedSpaceForLabel
-                wrapMode: Text.WordWrap
                 Layout.alignment: Qt.AlignTop
-                Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
-                Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
+                Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing * 2
+                Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing * 2
+                
+                wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignTop
                 maximumLineCount: 2
                 elide: Text.ElideRight
 
-                text:  model.applicationName
+                text: model.applicationName
 
-                //FIXME: export smallestReadableFont
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
-                color: "white"//model.applicationLocation == MobileShell.ApplicationListModel.Desktop ? "white" : PlasmaCore.Theme.textColor
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8
+                font.weight: Font.Bold
+                color: "white"
 
-                layer.enabled: true//model.applicationLocation == MobileShell.ApplicationListModel.Desktop
+                layer.enabled: true
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2
