@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.4
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import QtGraphicalEffects 1.6
@@ -28,14 +28,7 @@ MouseArea {
     signal launch(int x, int y, var source, string title, string storageId)
     signal dragStarted(string imageSource, int x, int y, string mimeData)
 
-    onPressAndHold: {
-        delegate.grabToImage(function(result) {
-            delegate.Drag.imageSource = result.url
-            dragStarted(result.url, width/2, height/2, model.applicationStorageId)
-        })
-    }
-
-    onClicked: {
+    function launchApp() {
         // launch app
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
@@ -43,6 +36,60 @@ MouseArea {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
         }
     }
+    
+    onPressAndHold: {
+        delegate.grabToImage(function(result) {
+            delegate.Drag.imageSource = result.url
+            dragStarted(result.url, width/2, height/2, model.applicationStorageId)
+        })
+    }
+
+    // grow/shrink animation
+    property real zoomScale: 1
+    transform: Scale { 
+        origin.x: delegate.width / 2; 
+        origin.y: delegate.height / 2; 
+        xScale: delegate.zoomScale
+        yScale: delegate.zoomScale
+    }
+    
+    property bool launchAppRequested: false
+    
+    NumberAnimation on zoomScale {
+        id: shrinkAnim
+        duration: 80
+        to: 0.8
+        onFinished: {
+            if (!delegate.pressed) {
+                growAnim.restart();
+            }
+        }
+    }
+    
+    NumberAnimation on zoomScale {
+        id: growAnim
+        duration: 80
+        to: 1
+        onFinished: {
+            if (delegate.launchAppRequested) {
+                delegate.launchApp();
+                delegate.launchAppRequested = false;
+            }
+        }
+    }
+    
+    cursorShape: Qt.PointingHandCursor
+    hoverEnabled: true
+    onPressedChanged: {
+        if (pressed) {
+            growAnim.stop();
+            shrinkAnim.restart();
+        } else if (!pressed && !shrinkAnim.running) {
+            growAnim.restart();
+        }
+    }
+    // launch app handled by press animation
+    onClicked: launchAppRequested = true;
 
     //preventStealing: true
     ColumnLayout {
@@ -76,6 +123,14 @@ MouseArea {
                 width: PlasmaCore.Units.smallSpacing
                 height: width
                 color: theme.highlightColor
+            }
+            
+            // darken effect when hovered/pressed
+            layer {
+                enabled: delegate.pressed || delegate.containsMouse
+                effect: ColorOverlay {
+                    color: Qt.rgba(0, 0, 0, 0.3)
+                }
             }
         }
 

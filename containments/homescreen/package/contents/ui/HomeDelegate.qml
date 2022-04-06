@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.4
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import QtGraphicalEffects 1.6
@@ -53,6 +53,17 @@ ContainmentLayoutManager.ItemContainer {
             MobileShell.ApplicationListModel.unsetMinimizedDelegate(index, delegate);
         }
     }
+    
+    function launchApp() {
+        if (modelData.applicationRunning) {
+            delegate.launch(0, 0, "", modelData.applicationName);
+        } else {
+            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
+        }
+
+        MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
+        MobileShell.ApplicationListModel.runApplication(modelData.applicationStorageId);
+    }
 
     readonly property bool applicationRunning: model.applicationRunning
     onApplicationRunningChanged: {
@@ -88,18 +99,54 @@ ContainmentLayoutManager.ItemContainer {
 
     contentItem: MouseArea {
         id: mouseArea
-        onClicked: {
-            if (modelData.applicationRunning) {
-                delegate.launch(0, 0, "", modelData.applicationName);
-            } else {
-                delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
-            }
-
-            MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
-            MobileShell.ApplicationListModel.runApplication(modelData.applicationStorageId);
+        
+        // grow/shrink animation
+        property real zoomScale: 1
+        transform: Scale { 
+            origin.x: mouseArea.width / 2; 
+            origin.y: mouseArea.height / 2; 
+            xScale: mouseArea.zoomScale
+            yScale: mouseArea.zoomScale
         }
+        
+        property bool launchAppRequested: false
+        
+        NumberAnimation on zoomScale {
+            id: shrinkAnim
+            duration: 80
+            to: 0.8
+            onFinished: {
+                if (!mouseArea.pressed) {
+                    growAnim.restart();
+                }
+            }
+        }
+        
+        NumberAnimation on zoomScale {
+            id: growAnim
+            duration: 80
+            to: 1
+            onFinished: {
+                if (mouseArea.launchAppRequested) {
+                    delegate.launchApp();
+                    mouseArea.launchAppRequested = false;
+                }
+            }
+        }
+        
+        cursorShape: Qt.PointingHandCursor
+        hoverEnabled: true
+        onPressedChanged: {
+            if (pressed) {
+                growAnim.stop();
+                shrinkAnim.restart();
+            } else if (!pressed && !shrinkAnim.running) {
+                growAnim.restart();
+            }
+        }
+        // launch app handled by press animation
+        onClicked: launchAppRequested = true;
 
-        //preventStealing: true
         ColumnLayout {
             anchors {
                 fill: parent
@@ -132,6 +179,15 @@ ContainmentLayoutManager.ItemContainer {
                     height: width
                     color: PlasmaCore.Theme.highlightColor
                 }
+                
+                // darken effect when hovered/pressed
+                layer {
+                    enabled: mouseArea.pressed || mouseArea.containsMouse
+                    effect: ColorOverlay {
+                        color: Qt.rgba(0, 0, 0, 0.3)
+                    }
+                }
+                
                 //TODO: in loader?
                 Private.DelegateRemoveButton {
                     id: removeButton
@@ -165,10 +221,10 @@ ContainmentLayoutManager.ItemContainer {
                 layer.effect: DropShadow {
                     horizontalOffset: 0
                     verticalOffset: 2
-                    radius: 8.0
-                    samples: 16
+                    radius: 6.0
+                    samples: 10
                     cached: true
-                    color: Qt.rgba(0, 0, 0, 1)
+                    color: Qt.rgba(0, 0, 0, 0.3)
                 }
             }
             Item {Layout.fillHeight:true}
