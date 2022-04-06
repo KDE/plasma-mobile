@@ -16,11 +16,13 @@
 #include "homescreen/favoritesmodel.h"
 #include "homescreen/homescreenutils.h"
 
+#include "taskswitcher/displaysmodel.h"
+
 #include "mobileshellsettings.h"
 #include "quicksetting.h"
 #include "quicksettingsmodel.h"
 #include "shellutil.h"
-#include "taskswitcher/displaysmodel.h"
+#include "windowutil.h"
 
 QUrl resolvePath(std::string str)
 {
@@ -43,6 +45,9 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");
     qmlRegisterType<SavedQuickSettings>(uri, 1, 0, "SavedQuickSettings");
     qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
+    qmlRegisterSingletonType<WindowUtil>(uri, 1, 0, "WindowUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return WindowUtil::instance();
+    });
 
     // taskswitcher
     qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");

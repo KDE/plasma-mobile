@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.NavigationPanel {
     id: root
-    property bool appIsShown: !plasmoid.nativeInterface.allMinimized
+    property bool appIsShown: !MobileShell.WindowUtil.allWindowsMinimized
     
     // background is:
     // - opaque if an app is shown or vkbd is shown
@@ -48,7 +48,7 @@ MobileShell.NavigationPanel {
         iconSizeFactor: 0.75
         
         onTriggered: {
-            plasmoid.nativeInterface.showDesktop = false;
+            MobileShell.WindowUtil.showDesktop = false;
             
             if (!root.taskSwitcher.visible) {
                 root.taskSwitcher.show(true);
@@ -74,7 +74,7 @@ MobileShell.NavigationPanel {
         
         onTriggered: {
             MobileShell.HomeScreenControls.openHomeScreen();
-            plasmoid.nativeInterface.allMinimizedChanged();
+            MobileShell.WindowUtil.allWindowsMinimizedChanged();
         }
     }
     
@@ -82,7 +82,7 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
         
-        enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || plasmoid.nativeInterface.hasCloseableActiveWindow
+        enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || MobileShell.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
         iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
@@ -96,7 +96,7 @@ MobileShell.NavigationPanel {
                 let indexToClose = root.taskSwitcher.tasksModel.index(root.taskSwitcher.currentTaskIndex, 0);
                 root.taskSwitcher.tasksModel.requestClose(indexToClose);
                 
-            } else if (plasmoid.nativeInterface.hasCloseableActiveWindow) {
+            } else if (MobileShell.WindowUtil.hasCloseableActiveWindow) {
                 // if task switcher is closed, but there is an active window
                 if (root.taskSwitcher.tasksModel.activeTask !== 0) {
                     root.taskSwitcher.tasksModel.requestClose(root.taskSwitcher.tasksModel.activeTask);

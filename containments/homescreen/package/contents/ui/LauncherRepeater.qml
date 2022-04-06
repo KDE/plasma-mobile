@@ -104,7 +104,6 @@ Repeater {
 
         onLaunch: (x, y, icon, title) => {
             if (icon !== "") {
-                print(delegate.iconItem)
                 MobileShell.HomeScreenControls.openAppLaunchAnimation(
                         icon,
                         title,

@@ -24,7 +24,7 @@ PlasmaCore.ColorScope {
     width: 360
     
     // contrasting colour
-    colorGroup: !plasmoid.nativeInterface.allMinimized ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    colorGroup: !MobileShell.WindowUtil.allWindowsMinimized ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
     readonly property color backgroundColor: PlasmaCore.ColorScope.backgroundColor
 
@@ -66,9 +66,9 @@ PlasmaCore.ColorScope {
     }
 
     Connections {
-        target: plasmoid.nativeInterface
-        function onAllMinimizedChanged() {
-            MobileShell.HomeScreenControls.homeScreenVisible = plasmoid.nativeInterface.allMinimized
+        target: MobileShell.WindowUtil
+        function onAllWindowsMinimizedChanged() {
+            MobileShell.HomeScreenControls.homeScreenVisible = MobileShell.WindowUtil.allWindowsMinimized
         }
     }
     
@@ -79,9 +79,9 @@ PlasmaCore.ColorScope {
             return;
 
         // ensure that Plasma sets the correct offset
-        Window.window.offset = Qt.binding(() => {
-            return (plasmoid.formFactor === PlasmaCore.Types.Vertical) ? MobileShell.TopPanelControls.panelHeight : MobileShell.TopPanelControls.panelWidth
-        });
+        //Window.window.offset = Qt.binding(() => {
+            //return (plasmoid.formFactor !== PlasmaCore.Types.Vertical) ? MobileShell.TaskPanelControls.panelHeight : MobileShell.TaskPanelControls.panelWidth
+        //});
     }
     
     // bottom navigation panel component

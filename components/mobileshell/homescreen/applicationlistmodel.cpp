@@ -7,6 +7,7 @@
 
 // Self
 #include "applicationlistmodel.h"
+#include "../windowutil.h"
 
 // Qt
 #include <QByteArray>
@@ -36,12 +37,12 @@ constexpr int MAX_FAVOURITES = 5;
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
-// m_applet(parent)
 {
     connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged), this, &ApplicationListModel::sycocaDbChanged);
 
+    connect(WindowUtil::instance(), &WindowUtil::windowCreated, this, &ApplicationListModel::windowCreated);
+
     loadSettings();
-    initWayland();
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
@@ -94,57 +95,36 @@ void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
     loadApplications();
 }
 
+void ApplicationListModel::windowCreated(KWayland::Client::PlasmaWindow *window)
+{
+    if (window->appId() == QStringLiteral("org.kde.plasmashell")) {
+        return;
+    }
+    int idx = 0;
+    for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+        if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+            (*i).window = window;
+            emit dataChanged(index(idx, 0), index(idx, 0));
+            connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window]() {
+                int idx = 0;
+                for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
+                    if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
+                        (*i).window = nullptr;
+                        emit dataChanged(index(idx, 0), index(idx, 0));
+                        break;
+                    }
+                    idx++;
+                }
+            });
+            break;
+        }
+        idx++;
+    }
+}
+
 bool appNameLessThan(const ApplicationListModel::ApplicationData &a1, const ApplicationListModel::ApplicationData &a2)
 {
     return a1.name.compare(a2.name, Qt::CaseInsensitive) < 0;
-}
-
-void ApplicationListModel::initWayland()
-{
-    if (!QGuiApplication::platformName().startsWith(QLatin1String("wayland"), Qt::CaseInsensitive)) {
-        return;
-    }
-    using namespace KWayland::Client;
-    ConnectionThread *connection = ConnectionThread::fromApplication(this);
-
-    if (!connection) {
-        return;
-    }
-    auto *registry = new Registry(this);
-    registry->create(connection);
-    connect(registry, &Registry::plasmaWindowManagementAnnounced, this, [this, registry](quint32 name, quint32 version) {
-        m_windowManagement = registry->createPlasmaWindowManagement(name, version, this);
-        qRegisterMetaType<QVector<int>>("QVector<int>");
-
-        connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated, this, [this](KWayland::Client::PlasmaWindow *window) {
-            if (window->appId() == QStringLiteral("org.kde.plasmashell")) {
-                return;
-            }
-            int idx = 0;
-            for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
-                if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
-                    (*i).window = window;
-                    emit dataChanged(index(idx, 0), index(idx, 0));
-                    connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window]() {
-                        int idx = 0;
-                        for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
-                            if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
-                                (*i).window = nullptr;
-                                emit dataChanged(index(idx, 0), index(idx, 0));
-                                break;
-                            }
-                            idx++;
-                        }
-                    });
-                    break;
-                }
-                idx++;
-            }
-        });
-    });
-
-    registry->setup();
-    connection->roundtrip();
 }
 
 void ApplicationListModel::loadApplications()

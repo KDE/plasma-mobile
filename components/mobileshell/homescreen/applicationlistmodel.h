@@ -119,6 +119,7 @@ public:
 
 public Q_SLOTS:
     void sycocaDbChanged(const QStringList &change);
+    void windowCreated(KWayland::Client::PlasmaWindow *window);
 
 Q_SIGNALS:
     void countChanged();
@@ -128,11 +129,8 @@ Q_SIGNALS:
     void launchError(const QString &msg);
 
 protected:
-    void initWayland();
-
     QList<ApplicationData> m_applicationList;
 
-    KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;
     PlasmaQuick::AppletQuickItem *m_applet = nullptr;
     int m_maxFavoriteCount = 0;
     QStringList m_appOrder;
