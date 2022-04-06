@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
  * The base homescreen component, implementing features that simplify
  * homescreen implementation.
  */
-FocusScope {
+Item {
     id: root
 
     /**
@@ -35,29 +35,29 @@ FocusScope {
     signal requestRelativeScroll(var pos)
     
     /**
-     * The requested opacity of homescreen elements (for opacity animations).
+     * The visual item that is the homescreen.
      */
-    property real homeScreenOpacity: 1
-    
+    property alias contentItem: itemContainer.contentItem
+
     /**
      * Whether a component is being shown on top of the homescreen within the same
      * window.
      */
     property bool overlayShown: taskSwitcher.visible || startupFeedback.visible
-
-    NumberAnimation on homeScreenOpacity {
-        id: opacityAnimation
-        duration: PlasmaCore.Units.longDuration
-    }
     
     //BEGIN API implementation
     Connections {
         target: MobileShell.HomeScreenControls
         
         function onOpenHomeScreen() {
+            if (!MobileShell.WindowUtil.allWindowsMinimized) {
+                itemContainer.zoomIn();
+            }
+            
             MobileShell.HomeScreenControls.resetHomeScreenPosition();
             taskSwitcher.visible = false; // will trigger homescreen open
             taskSwitcher.minimizeAll();
+            
             root.homeTriggered();
         }
         
@@ -102,15 +102,64 @@ FocusScope {
         }
     }
     
-    // task switcher component
-    TaskManager.VirtualDesktopInfo {
-        id: virtualDesktopInfo
-    }
-
-    TaskManager.ActivityInfo {
-        id: activityInfo
+    // homescreen visual component
+    MobileShell.BaseItem {
+        id: itemContainer
+        anchors.fill: parent
+        
+        // animations
+        opacity: 0
+        property real zoomScale: 0.8
+        
+        Component.onCompleted: zoomIn()
+        
+        function zoomIn() {
+            scaleAnim.to = 1;
+            scaleAnim.restart();
+            opacityAnim.to = 1;
+            opacityAnim.restart();
+        }
+        function zoomOut() {
+            scaleAnim.to = 0.8;
+            scaleAnim.restart();
+            opacityAnim.to = 0;
+            opacityAnim.restart();
+        }
+        
+        NumberAnimation on opacity {
+            id: opacityAnim
+            duration: 300
+            running: false
+        }
+        
+        NumberAnimation on zoomScale {
+            id: scaleAnim
+            duration: 600
+            running: false
+            easing.type: Easing.OutExpo
+        }
+        
+        Connections {
+            target: MobileShell.WindowUtil
+            
+            function onActiveWindowIsShellChanged() {
+                if (MobileShell.WindowUtil.activeWindowIsShell && !taskSwitcher.visible) {
+                    itemContainer.zoomIn();
+                } else {
+                    itemContainer.zoomOut();
+                }
+            }
+        }
+        
+        transform: Scale { 
+            origin.x: itemContainer.width / 2; 
+            origin.y: itemContainer.height / 2; 
+            xScale: itemContainer.zoomScale
+            yScale: itemContainer.zoomScale
+        }
     }
     
+    // task switcher component
     MobileShell.TaskSwitcher {
         id: taskSwitcher
         z: 999999
@@ -125,6 +174,14 @@ FocusScope {
             activity: activityInfo.currentActivity
         }
 
+        TaskManager.VirtualDesktopInfo {
+            id: virtualDesktopInfo
+        }
+        
+        TaskManager.ActivityInfo {
+            id: activityInfo
+        }
+        
         anchors.fill: parent
         
         // hide homescreen elements to make use of wallpaper
@@ -134,15 +191,14 @@ FocusScope {
                 
                 // only animate if going from homescreen
                 if (taskSwitcher.wasInActiveTask) {
-                    opacityAnimation.to = 0;
-                    opacityAnimation.restart();
+                    itemContainer.zoomOut();
                 } else {
-                    root.homeScreenOpacity = 0;
+                    itemContainer.zoomOut();
+                    //itemContainer.opacity = 0;
                 }
                 
             } else {
-                opacityAnimation.to = 1;
-                opacityAnimation.restart();
+                itemContainer.zoomIn();
             }
         }
     }

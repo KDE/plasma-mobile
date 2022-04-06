@@ -19,6 +19,8 @@ WindowUtil::WindowUtil(QObject *parent)
     m_activeWindowTimer->setInterval(ACTIVE_WINDOW_UPDATE_INVERVAL);
     connect(m_activeWindowTimer, &QTimer::timeout, this, &WindowUtil::updateActiveWindow);
 
+    connect(this, &WindowUtil::activeWindowChanged, this, &WindowUtil::updateActiveWindowIsShell);
+
     initWayland();
 }
 
@@ -36,6 +38,11 @@ bool WindowUtil::isShowingDesktop() const
 bool WindowUtil::allWindowsMinimized() const
 {
     return m_allWindowsMinimized;
+}
+
+bool WindowUtil::activeWindowIsShell() const
+{
+    return m_activeWindowIsShell;
 }
 
 void WindowUtil::initWayland()
@@ -84,6 +91,7 @@ void WindowUtil::updateActiveWindow()
         disconnect(m_activeWindow.data(), &PlasmaWindow::unmapped, this, &WindowUtil::forgetActiveWindow);
     }
     m_activeWindow = m_windowManagement->activeWindow();
+    Q_EMIT activeWindowChanged();
 
     if (m_activeWindow) {
         connect(m_activeWindow.data(), &PlasmaWindow::closeableChanged, this, &WindowUtil::hasCloseableActiveWindowChanged);
@@ -130,6 +138,19 @@ void WindowUtil::updateShowingDesktop(bool showing)
     if (showing != m_showingDesktop) {
         m_showingDesktop = showing;
         Q_EMIT showingDesktopChanged(m_showingDesktop);
+    }
+}
+
+void WindowUtil::updateActiveWindowIsShell()
+{
+    if (m_activeWindow) {
+        if (m_activeWindow->appId() == QStringLiteral("org.kde.plasmashell") && !m_activeWindowIsShell) {
+            m_activeWindowIsShell = true;
+            Q_EMIT activeWindowIsShellChanged();
+        } else if (m_activeWindow->appId() != QStringLiteral("org.kde.plasmashell") && m_activeWindowIsShell) {
+            m_activeWindowIsShell = false;
+            Q_EMIT activeWindowIsShellChanged();
+        }
     }
 }
 

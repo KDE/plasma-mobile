@@ -24,6 +24,7 @@ class WindowUtil : public QObject
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool allWindowsMinimized READ allWindowsMinimized NOTIFY allWindowsMinimizedChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
+    Q_PROPERTY(bool activeWindowIsShell READ activeWindowIsShell NOTIFY activeWindowIsShellChanged)
 
 public:
     WindowUtil(QObject *parent = nullptr);
@@ -31,6 +32,7 @@ public:
 
     bool isShowingDesktop() const;
     bool allWindowsMinimized() const;
+    bool activeWindowIsShell() const;
 
     bool hasCloseableActiveWindow() const;
     Q_INVOKABLE void closeActiveWindow();
@@ -41,8 +43,11 @@ Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
     void allWindowsMinimizedChanged();
     void hasCloseableActiveWindowChanged();
+    void activeWindowChanged();
+    void activeWindowIsShellChanged();
 
 private Q_SLOTS:
+    void updateActiveWindowIsShell();
     void forgetActiveWindow();
     void updateShowingDesktop(bool showing);
 
@@ -55,5 +60,6 @@ private:
     QTimer *m_activeWindowTimer;
 
     bool m_showingDesktop = false;
-    bool m_allWindowsMinimized;
+    bool m_allWindowsMinimized = true;
+    bool m_activeWindowIsShell = false;
 };

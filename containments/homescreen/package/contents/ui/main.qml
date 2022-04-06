@@ -71,23 +71,32 @@ MobileShell.HomeScreen {
         }
     }
     
-    // homescreen component
-    HomeScreen {
-        id: homescreen
-        anchors.fill: parent
-        opacity: root.homeScreenOpacity * (1 - searchWidget.openFactor)
+    contentItem: Item {
+        // homescreen component
+        HomeScreen {
+            id: homescreen
+            anchors.fill: parent
+            opacity: (1 - searchWidget.openFactor)
+            
+            // make the homescreen not interactable when task switcher or startup feedback is on
+            interactive: !root.overlayShown
+        }
         
-        // make the homescreen not interactable when task switcher or startup feedback is on
-        interactive: !root.overlayShown
-    }
-        
-    // search component
-    MobileShell.KRunnerWidget {
-        id: searchWidget
-        anchors.fill: parent
-        
-        opacity: root.homeScreenOpacity
-        visible: openFactor > 0
+        // search component
+        MobileShell.KRunnerWidget {
+            id: searchWidget
+            anchors.fill: parent
+            
+            visible: openFactor > 0
+            
+            // close search component when task switcher is shown or hidden
+            Connections {
+                target: MobileShell.HomeScreenControls.taskSwitcher
+                function onVisibleChanged() {
+                    searchWidget.close();
+                }
+            }
+        }
     }
     
     Connections {
