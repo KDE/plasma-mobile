@@ -145,7 +145,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                             }
                         }
                         // slight pause to give slower devices time to catch up when the item becomes visible
-                        PauseAnimation { duration: 50 }
+                        PauseAnimation { duration: 20 }
                         ParallelAnimation {
                             id: parallelAnim
                             property real animationDuration: PlasmaCore.Units.longDuration + PlasmaCore.Units.shortDuration
