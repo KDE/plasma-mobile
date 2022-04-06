@@ -57,6 +57,7 @@ MouseArea {
     
     NumberAnimation on zoomScale {
         id: shrinkAnim
+        running: false
         duration: 80
         to: 0.8
         onFinished: {
@@ -68,6 +69,7 @@ MouseArea {
     
     NumberAnimation on zoomScale {
         id: growAnim
+        running: false
         duration: 80
         to: 1
         onFinished: {
