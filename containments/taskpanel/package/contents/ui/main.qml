@@ -78,10 +78,10 @@ PlasmaCore.ColorScope {
         if (!Window.window)
             return;
 
-        // ensure that Plasma sets the correct offset
-        //Window.window.offset = Qt.binding(() => {
-            //return (plasmoid.formFactor !== PlasmaCore.Types.Vertical) ? MobileShell.TaskPanelControls.panelHeight : MobileShell.TaskPanelControls.panelWidth
-        //});
+        // set offset from top panel
+        Window.window.offset = Qt.binding(() => {
+            return (root.state === "landscape") ? MobileShell.TopPanelControls.panelHeight : 0
+        });
     }
     
     // bottom navigation panel component
