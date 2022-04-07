@@ -8,10 +8,6 @@
 
 #include "shellutil.h"
 
-#include <fcntl.h>
-#include <qplatformdefs.h>
-#include <unistd.h>
-
 #include <KConfigGroup>
 #include <KIO/ApplicationLauncherJob>
 #include <KLocalizedString>
@@ -21,11 +17,7 @@
 #include <QDateTime>
 #include <QDebug>
 #include <QFile>
-#include <QGuiApplication>
 #include <QProcess>
-#include <QScreen>
-#include <QStandardPaths>
-#include <QtConcurrent/QtConcurrent>
 
 #define FORMAT24H "HH:mm:ss"
 
@@ -45,12 +37,28 @@ ShellUtil::ShellUtil(QObject *parent)
     });
 }
 
-ShellUtil::~ShellUtil() = default;
-
 ShellUtil *ShellUtil::instance()
 {
     static ShellUtil *inst = new ShellUtil(nullptr);
     return inst;
+}
+
+void ShellUtil::stackItemBefore(QQuickItem *item1, QQuickItem *item2)
+{
+    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
+        return;
+    }
+
+    item1->stackBefore(item2);
+}
+
+void ShellUtil::stackItemAfter(QQuickItem *item1, QQuickItem *item2)
+{
+    if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {
+        return;
+    }
+
+    item1->stackAfter(item2);
 }
 
 void ShellUtil::executeCommand(const QString &command)

@@ -14,7 +14,6 @@
 
 #include "homescreen/applicationlistmodel.h"
 #include "homescreen/favoritesmodel.h"
-#include "homescreen/homescreenutils.h"
 
 #include "taskswitcher/displaysmodel.h"
 
@@ -58,9 +57,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     });
     qmlRegisterSingletonType<FavoritesModel>(uri, 1, 0, "FavoritesModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return FavoritesModel::instance();
-    });
-    qmlRegisterSingletonType<HomeScreenUtils>(uri, 1, 0, "HomeScreenUtils", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return HomeScreenUtils::instance();
     });
 
     // notifications

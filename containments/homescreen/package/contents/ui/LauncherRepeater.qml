@@ -116,10 +116,10 @@ Repeater {
             if (!launcherDragManager.active && parent != parentFromLocation) {
                 parent = parentFromLocation;
                 if (model.applicationLocation === MobileShell.ApplicationListModel.Favorites) {
-                    MobileShell.HomeScreenUtils.stackBefore(delegate, parentFromLocation.children[index]);
+                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[index]);
 
                 } else if (model.applicationLocation === MobileShell.ApplicationListModel.Grid) {
-                    MobileShell.HomeScreenUtils.stackBefore(delegate, parentFromLocation.children[Math.max(0, index - MobileShell.ApplicationListModel.favoriteCount)]);
+                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[Math.max(0, index - MobileShell.ApplicationListModel.favoriteCount)]);
                 }
             }
         }

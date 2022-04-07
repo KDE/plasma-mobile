@@ -93,9 +93,9 @@ Item {
         var pos = container.flow.mapFromItem(item, dragCenterX, dragCenterY);
 
         if (pos.x < child.x + child.width / 2) {
-            MobileShell.HomeScreenUtils.stackBefore(spacer, child);
+            MobileShell.ShellUtil.stackItemBefore(spacer, child);
         } else {
-            MobileShell.HomeScreenUtils.stackAfter(spacer, child);
+            MobileShell.ShellUtil.stackItemAfter(spacer, child);
         }
 
         internal.putItemInDragSpace(item);
@@ -129,9 +129,9 @@ Item {
         spacer.parent = container.flow
 
         if (pos.x < child.x + child.width / 2) {
-            MobileShell.HomeScreenUtils.stackBefore(spacer, child);
+            MobileShell.ShellUtil.stackItemBefore(spacer, child);
         } else {
-            MobileShell.HomeScreenUtils.stackAfter(spacer, child);
+            MobileShell.ShellUtil.stackItemAfter(spacer, child);
         }
 
         spacer.visible = true;
@@ -296,7 +296,7 @@ Item {
             var child = nearestChild(item, dragCenterX, dragCenterY, container);
 
             putInContainerLayout(item, container);
-            MobileShell.HomeScreenUtils.stackBefore(item, spacer);
+            MobileShell.ShellUtil.stackItemBefore(item, spacer);
             spacer.visible = false;
             spacer.parent = root;
         }

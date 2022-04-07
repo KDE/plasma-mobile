@@ -13,7 +13,6 @@
 #include <QSet>
 
 #include "applicationlistmodel.h"
-#include "homescreenutils.h"
 
 class QString;
 

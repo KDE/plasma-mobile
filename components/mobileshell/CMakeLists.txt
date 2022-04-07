@@ -17,7 +17,6 @@ set(mobileshellplugin_SRCS
     notifications/notificationfilemenu.cpp
     homescreen/applicationlistmodel.cpp
     homescreen/favoritesmodel.cpp
-    homescreen/homescreenutils.cpp
     taskswitcher/displaysmodel.cpp
 )
 

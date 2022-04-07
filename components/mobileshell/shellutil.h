@@ -1,6 +1,6 @@
 /*
  *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+ *  SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -8,10 +8,16 @@
 #pragma once
 
 #include <QObject>
+#include <QQuickItem>
 
 #include <KConfigWatcher>
 #include <KSharedConfig>
 
+/**
+ * Miscellaneous class to put utility functions used in the shell.
+ *
+ * @author Devin Lin <devin@kde.org>
+ **/
 class ShellUtil : public QObject
 {
     Q_OBJECT
@@ -19,14 +25,42 @@ class ShellUtil : public QObject
 
 public:
     ShellUtil(QObject *parent = nullptr);
-    ~ShellUtil() override;
     static ShellUtil *instance();
 
-public Q_SLOTS:
-    void executeCommand(const QString &command);
-    void launchApp(const QString &app);
+    /**
+     * Change the stacking order to have the first item behind the second item.
+     *
+     * @param item1 The item to move behind.
+     * @param item2 The item to move in front.
+     */
+    Q_INVOKABLE void stackItemBefore(QQuickItem *item1, QQuickItem *item2);
 
-    bool isSystem24HourFormat();
+    /**
+     * Change the stacking order to have the first item in front of the second item.
+     *
+     * @param item1 The item to move in front.
+     * @param item2 The item to move behind.
+     */
+    Q_INVOKABLE void stackItemAfter(QQuickItem *item1, QQuickItem *item2);
+
+    /**
+     * Execute the command given.
+     *
+     * @param command The command to execute.
+     */
+    Q_INVOKABLE void executeCommand(const QString &command);
+
+    /**
+     * Launch an application by name.
+     *
+     * @param app The name of the application to launch.
+     */
+    Q_INVOKABLE void launchApp(const QString &app);
+
+    /**
+     * Whether the system is using 24 hour format.
+     */
+    Q_INVOKABLE bool isSystem24HourFormat();
 
 Q_SIGNALS:
     void isSystem24HourFormatChanged();

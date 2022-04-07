@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
  *  SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
@@ -18,6 +19,11 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+/**
+ * Utility class that provides useful functions related to windows and KWin+KWayland.
+ *
+ * @author Devin Lin <devin@kde.org>
+ **/
 class WindowUtil : public QObject
 {
     Q_OBJECT
@@ -64,6 +70,8 @@ public:
 
     /**
      * Toggle whether we are in the "desktop showing" mode.
+     *
+     * @param showingDesktop Whether "desktop showing" mode should be enabled.
      */
     Q_INVOKABLE void requestShowingDesktop(bool showingDesktop);
 

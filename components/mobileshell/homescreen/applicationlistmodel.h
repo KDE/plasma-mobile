@@ -11,9 +11,8 @@
 #include <QAbstractListModel>
 #include <QList>
 #include <QObject>
+#include <QQuickItem>
 #include <QSet>
-
-#include "homescreenutils.h"
 
 class QString;
 
