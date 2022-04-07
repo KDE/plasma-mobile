@@ -59,10 +59,13 @@ Item {
         }
     }
     
-    Item {
+    MouseArea {
         id: control
         width: parent.width
         height: parent.height
+        
+        // set cursor shape here, since taphandler seems to not be able to do it
+        cursorShape: Qt.PointingHandCursor
         
         property bool movingUp: false
         property real oldY: y
@@ -75,7 +78,6 @@ Item {
         DragHandler {
             id: dragHandler
             target: parent
-            cursorShape: Qt.PointingHandCursor
             
             yAxis.enabled: true
             xAxis.enabled: false
@@ -191,8 +193,8 @@ Item {
                 color: PlasmaCore.Theme.backgroundColor
                 clip: true
                 
-                // scale animation on press (for longer than 50ms)
-                property real zoomScale: (tapHandler.pressed && tapHandler.timeHeld > 0.05) ? 0.9 : 1
+                // scale animation on press
+                property real zoomScale: tapHandler.pressed ? 0.9 : 1
                 Behavior on zoomScale {
                     NumberAnimation {
                         duration: 200

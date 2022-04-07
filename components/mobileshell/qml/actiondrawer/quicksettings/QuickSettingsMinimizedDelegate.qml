@@ -39,6 +39,7 @@ QuickSettingsDelegate {
         id: mouseArea
         onClicked: root.delegateClick()
         onPressAndHold: root.delegatePressAndHold()
+        cursorShape: Qt.PointingHandCursor
         
         PlasmaCore.IconItem {
             id: icon
