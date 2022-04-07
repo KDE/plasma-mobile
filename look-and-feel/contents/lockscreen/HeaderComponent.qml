@@ -27,6 +27,7 @@ Loader {
     asynchronous: true
     
     sourceComponent: Item {
+        // top status bar
         MobileShell.StatusBar {
             id: statusBar
             
@@ -42,16 +43,17 @@ Loader {
             showSecondRow: false
             showDropShadow: true
             showTime: false
-            disableSystemTray: true // HACK: prevent SIGABRT
+            disableSystemTray: true // prevent SIGABRT, since loading the system tray on the lockscreen leads to bad... things
         }
         
+        // drag down gesture to open action drawer
         MobileShell.ActionDrawerOpenSurface {
             id: swipeArea
             actionDrawer: drawer
             anchors.fill: statusBar
         }
         
-        // swipe-down drawer component
+        // action drawer component
         MobileShell.ActionDrawer {
             id: drawer
             anchors.fill: parent
@@ -64,12 +66,15 @@ Loader {
             
             property bool requestNotificationAction: false
             
+            // notification button clicked, requesting auth
             onPermissionsRequested: {
                 requestNotificationAction = true;
+                drawer.close();
                 root.passwordRequested();
             }
         }
         
+        // listen to authentication events
         Connections {
             target: authenticator
             function onSucceeded() {
