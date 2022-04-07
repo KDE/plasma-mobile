@@ -60,7 +60,7 @@ QuickSettingsDelegate {
                 elide: Text.ElideRight
                 text: root.text
                 font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 0.8 // TODO base height off of size of delegate
-                font.weight: Font.DemiBold
+                font.weight: Font.Bold
             }
             PlasmaComponents.Label {
                 Layout.fillWidth: true
