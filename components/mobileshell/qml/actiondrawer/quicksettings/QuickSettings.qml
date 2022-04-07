@@ -69,6 +69,8 @@ Item {
                     padding: PlasmaCore.Units.smallSpacing
                     
                     contentItem: QuickSettingsFullDelegate {
+                        restrictedPermissions: actionDrawer.restrictedPermissions
+                        
                         text: modelData.text
                         status: modelData.status
                         icon: modelData.icon
@@ -119,6 +121,8 @@ Item {
                 visible: index <= root.minimizedColumns
                 
                 contentItem: QuickSettingsMinimizedDelegate {
+                    restrictedPermissions: actionDrawer.restrictedPermissions
+                    
                     text: modelData.text
                     status: modelData.status
                     icon: modelData.icon

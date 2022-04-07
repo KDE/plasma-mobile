@@ -20,6 +20,8 @@ import "../../components" as Components
 Components.BaseItem {
     id: root
     
+    required property bool restrictedPermissions
+    
     // Model interface
     required property string text
     required property string status
@@ -61,7 +63,7 @@ Components.BaseItem {
             root.toggle();
         } else if (root.toggleFunction) {
             root.toggleFunction();
-        } else if (root.settingsCommand) {
+        } else if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
             MobileShell.HomeScreenControls.openAppLaunchAnimation(
                 root.icon,
@@ -74,7 +76,7 @@ Components.BaseItem {
     }
     
     function delegatePressAndHold() {
-        if (root.settingsCommand) {
+        if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
             MobileShell.HomeScreenControls.openAppLaunchAnimation(
                 root.icon,

@@ -95,7 +95,18 @@ PlasmaCore.ColorScope {
         MobileShell.NotificationsWidget {
             id: notificationWidget
             historyModel: root.actionDrawer.notificationModel
+            historyModelType: root.actionDrawer.notificationModelType
             notificationSettings: root.actionDrawer.notificationSettings
+            actionsRequireUnlock: root.actionDrawer.restrictedPermissions
+            onUnlockRequested: root.actionDrawer.permissionsRequested()
+            
+            Connections {
+                target: root.actionDrawer
+                
+                function onRunPendingNotificationAction() {
+                    notificationWidget.runPendingAction();
+                }
+            }
             
             // don't allow notifications widget to get too wide
             Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25

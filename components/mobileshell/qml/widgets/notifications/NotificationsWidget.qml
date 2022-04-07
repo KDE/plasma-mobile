@@ -60,8 +60,17 @@ Item {
         WatchedNotificationsModel // used on the lockscreen
     }
     
+    /**
+     * Signal emitted when authentication is requested for an action.
+     * Listeners should call runPendingAction() if authentication is successful.
+     * 
+     * Only emitted if actionsRequireUnlock is enabled.
+     */
     signal unlockRequested()
     
+    /**
+     * Run pending action that was pending for authentication when unlockRequested() was emitted.
+     */
     function runPendingAction() {
         list.pendingNotificationWithAction.runPendingAction();
     }

@@ -42,6 +42,17 @@ PlasmaCore.ColorScope {
             blur: root.notificationsShown || root.drawerOpen // only blur once animation finished for performance
         }
     }
+    
+    // header bar and action drawer
+    HeaderComponent {
+        id: headerBar
+        z: 1 // on top of flick area
+        anchors.fill: parent
+        
+        openFactor: flickable.openFactor
+        notificationsModel: notifModel
+        onPasswordRequested: root.askPassword()
+    }
 
     FlickContainer {
         id: flickable
@@ -69,22 +80,19 @@ PlasmaCore.ColorScope {
             height: flickable.height
             y: flickable.contentY // effectively anchored to the screen
             
-            // header bar
-            StatusBarComponent {
-                id: statusBar
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                opacity: 1 - flickable.openFactor
-            }
-            
             LockScreenNarrowContent {
                 id: phoneComponent
+                
                 visible: !isWidescreen
                 active: visible
                 opacity: 1 - flickable.openFactor
                 
                 fullHeight: root.height
+                
+                notificationsModel: notifModel
+                onNotificationsShownChanged: root.notificationsShown = notificationsShown
+                
+                onPasswordRequested: root.askPassword()
                 
                 anchors.top: parent.top
                 anchors.bottom: scrollUpIcon.top
@@ -101,7 +109,13 @@ PlasmaCore.ColorScope {
                 active: visible
                 opacity: 1 - flickable.openFactor
                 
-                anchors.top: statusBar.bottom
+                notificationsModel: notifModel
+                onNotificationsShownChanged: root.notificationsShown = notificationsShown
+                
+                onPasswordRequested: root.askPassword()
+                
+                anchors.topMargin: headerBar.statusBarHeight
+                anchors.top: parent.top
                 anchors.bottom: scrollUpIcon.top
                 anchors.left: parent.left
                 anchors.right: parent.right

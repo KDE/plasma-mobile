@@ -68,6 +68,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     // /actiondrawer
     qmlRegisterType(resolvePath("actiondrawer/ActionDrawer.qml"), uri, 1, 0, "ActionDrawer");
     qmlRegisterType(resolvePath("actiondrawer/ActionDrawerOpenSurface.qml"), uri, 1, 0, "ActionDrawerOpenSurface");
+    qmlRegisterType(resolvePath("actiondrawer/ActionDrawerWindow.qml"), uri, 1, 0, "ActionDrawerWindow");
 
     // /components
     qmlRegisterType(resolvePath("components/BaseItem.qml"), uri, 1, 0, "BaseItem");

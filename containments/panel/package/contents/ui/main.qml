@@ -41,7 +41,7 @@ Item {
     Binding {
         target: MobileShell.TopPanelControls
         property: "inSwipe"
-        value: drawer.dragging
+        value: drawer.actionDrawer.dragging
     }
     Binding {
         target: MobileShell.TopPanelControls
@@ -62,10 +62,10 @@ Item {
             swipeArea.updateOffset(offsetY);
         }
         function onCloseActionDrawer() {
-            drawer.close();
+            drawer.actionDrawer.close();
         }
         function onOpenActionDrawer() {
-            drawer.open();
+            drawer.actionDrawer.open();
         }
     }
     
@@ -88,30 +88,30 @@ Item {
     
     MobileShell.ActionDrawerOpenSurface {
         id: swipeArea
-        actionDrawer: drawer
+        actionDrawer: drawer.actionDrawer
         anchors.fill: parent
     }
     
     // swipe-down drawer component
-    MobileShell.ActionDrawer {
+    MobileShell.ActionDrawerWindow {
         id: drawer
         
-        notificationSettings: NotificationManager.Settings {}
+        actionDrawer.notificationSettings: NotificationManager.Settings {}
         
-        notificationModel: NotificationManager.Notifications {
+        actionDrawer.notificationModel: NotificationManager.Notifications {
             showExpired: true
             showDismissed: true
-            showJobs: drawer.notificationSettings.jobsInNotifications
+            showJobs: drawer.actionDrawer.notificationSettings.jobsInNotifications
             sortMode: NotificationManager.Notifications.SortByTypeAndUrgency
             groupMode: NotificationManager.Notifications.GroupApplicationsFlat
             groupLimit: 2
             expandUnread: true
-            blacklistedDesktopEntries: drawer.notificationSettings.historyBlacklistedApplications
-            blacklistedNotifyRcNames: drawer.notificationSettings.historyBlacklistedServices
+            blacklistedDesktopEntries: drawer.actionDrawer.notificationSettings.historyBlacklistedApplications
+            blacklistedNotifyRcNames: drawer.actionDrawer.notificationSettings.historyBlacklistedServices
             urgencies: {
                 var urgencies = NotificationManager.Notifications.CriticalUrgency
                             | NotificationManager.Notifications.NormalUrgency;
-                if (drawer.notificationSettings.lowPriorityHistory) {
+                if (drawer.actionDrawer.notificationSettings.lowPriorityHistory) {
                     urgencies |= NotificationManager.Notifications.LowUrgency;
                 }
                 return urgencies;

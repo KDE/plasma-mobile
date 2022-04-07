@@ -14,10 +14,14 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Loader {
     id: root
-    asynchronous: true
+    
+    property var notificationsModel: []
 
-    property real fullHeight
     property bool notificationsShown: false
+    
+    property real fullHeight
+    
+    signal passwordRequested()
     
     // avoid topMargin animation when item is being loaded
     onLoaded: loadTimer.restart();
@@ -29,6 +33,7 @@ Loader {
     // move while swiping up
     transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
     
+    asynchronous: true
     sourceComponent: Item {
         ColumnLayout {
             id: column
@@ -62,6 +67,8 @@ Loader {
             
             NotificationsComponent {
                 id: notificationComponent
+                notificationsModel: root.notificationsModel
+                
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.maximumWidth: PlasmaCore.Units.gridUnit * (25 + 2) // clip margins 
@@ -69,6 +76,7 @@ Loader {
                 leftMargin: PlasmaCore.Units.gridUnit
                 rightMargin: PlasmaCore.Units.gridUnit
                 
+                onPasswordRequested: root.passwordRequested()
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
             }
         }

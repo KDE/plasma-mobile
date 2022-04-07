@@ -13,14 +13,18 @@ import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Loader {
-    id: tabletComponent
-    asynchronous: true
+    id: root
+    
+    property var notificationsModel: []
     
     property bool notificationsShown: false
     
+    signal passwordRequested()
+    
+    asynchronous: true
     sourceComponent: Item {
         Item {
-            id: tabletClockComponent
+            id: clock
             width: parent.width / 2   
             anchors {
                 top: parent.top
@@ -54,13 +58,14 @@ Loader {
             anchors {
                 top: parent.top
                 bottom: parent.bottom
-                left: tabletClockComponent.right
+                left: clock.right
                 right: parent.right
                 rightMargin: PlasmaCore.Units.gridUnit
             }
             
             NotificationsComponent {
                 id: notificationComponent
+                notificationsModel: root.notificationsModel
                 
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillWidth: true
@@ -75,6 +80,7 @@ Loader {
                 bottomMargin: PlasmaCore.Units.gridUnit
                 topMargin: PlasmaCore.Units.gridUnit
                 
+                onPasswordRequested: root.passwordRequested()
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
             }
         }

@@ -13,18 +13,12 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
 
-/**
- * Swipe top left - minimized quick settings, fully shown notifications list
- * Swipe top right - full quick settings, minimized notifications list
- * Swiping up and down on notifications list toggle minimized/maximized
- * Swiping up and down on panel hides and shows the panel
- */
-
-NanoShell.FullScreenOverlay {
-    id: window
+Item {
+    id: root
     
     /**
      * The model for the notification widget.
@@ -32,10 +26,22 @@ NanoShell.FullScreenOverlay {
     property var notificationModel
     
     /**
+     * The model type for the notification widget.
+     */
+    property var notificationModelType: MobileShell.NotificationsModelType.NotificationsModel
+    
+    /**
      * The notification settings object to be used in the notification widget.
      */
     property var notificationSettings
 
+    /**
+     * Whether actions should be subject to restricted permissions (ex. lockscreen).
+     * 
+     * The permissionsRequested() signal emits when authentication is requested.
+     */
+    property bool restrictedPermissions: false
+    
     /**
      * The amount of pixels moved by touch/mouse in the process of opening/closing the panel.
      */
@@ -56,6 +62,9 @@ NanoShell.FullScreenOverlay {
      */
     property int direction: Components.Direction.None
     
+    /**
+     * The mode of the action drawer (portrait or landscape).
+     */
     property int mode: (height > width && width <= largePortraitThreshold) ? ActionDrawer.Portrait : ActionDrawer.Landscape
     
     /**
@@ -68,18 +77,32 @@ NanoShell.FullScreenOverlay {
         Landscape
     }
     
-    width: Screen.width
-    height: Screen.height
+    /**
+     * Emitted when the drawer has closed.
+     */
+    signal drawerClosed()
     
-    color: "transparent"
+    /**
+     * Emitted when the drawer has opened.
+     */
+    signal drawerOpened()
+    
+    /**
+     * Emitted when permissions are requested (ex. unlocking the phone).
+     * 
+     * Only gets emitted when restrictedPermissions is set to true.
+     */
+    signal permissionsRequested()
+    
+    /**
+     * Runs the held notification action that was pending for authentication.
+     * 
+     * Should be called by users if authentication is successful after permissionsRequested() was emitted.
+     */
+    signal runPendingNotificationAction()
 
     onOpenedChanged: {
         if (opened) flickable.focus = true;
-    }
-    onActiveChanged: {
-        if (!active) {
-            close();
-        }
     }
     
     property real oldOffset
@@ -87,15 +110,15 @@ NanoShell.FullScreenOverlay {
         if (offset < 0) {
             offset = 0;
         }
-        window.direction = (oldOffset === offset) 
+        root.direction = (oldOffset === offset) 
                             ? Components.Direction.None 
                             : (offset > oldOffset ? Components.Direction.Down : Components.Direction.Up);
             
         oldOffset = offset;
         
         // close panel immediately after panel is not shown, and the flickable is not being dragged
-        if (opened && window.offset <= 0 && !flickable.dragging && !closeAnim.running && !openAnim.running) {
-            window.updateState();
+        if (opened && root.offset <= 0 && !flickable.dragging && !closeAnim.running && !openAnim.running) {
+            root.updateState();
             focus = false;
         }
     }
@@ -125,25 +148,25 @@ NanoShell.FullScreenOverlay {
         cancelAnimations();
         let openThreshold = PlasmaCore.Units.gridUnit;
         
-        if (window.offset <= 0) {
+        if (root.offset <= 0) {
             // close immediately, so that we don't have to wait PlasmaCore.Units.longDuration 
-            window.visible = false;
+            root.visible = false;
             close();
-        } else if (window.direction === Components.Direction.None || !window.opened) {
-            if (window.offset < openThreshold) {
+        } else if (root.direction === Components.Direction.None || !root.opened) {
+            if (root.offset < openThreshold) {
                 close();
             } else {
                 open();
             }
-        } else if (window.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
+        } else if (root.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
             expand();
-        } else if (window.offset > contentContainerLoader.minimizedQuickSettingsOffset) {
-            if (window.direction === Components.Direction.Down) {
+        } else if (root.offset > contentContainerLoader.minimizedQuickSettingsOffset) {
+            if (root.direction === Components.Direction.Down) {
                 expand();
             } else {
                 open();
             }
-        } else if (window.direction === Components.Direction.Down) {
+        } else if (root.direction === Components.Direction.Down) {
             open();
         } else {
             close();
@@ -161,8 +184,8 @@ NanoShell.FullScreenOverlay {
         easing.type: Easing.InOutQuad
         to: 0
         onFinished: {
-            window.visible = false;
-            window.opened = false;
+            root.visible = false;
+            root.opened = false;
         }
     }
     PropertyAnimation on offset {
@@ -170,31 +193,31 @@ NanoShell.FullScreenOverlay {
         duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
         to: contentContainerLoader.minimizedQuickSettingsOffset
-        onFinished: window.opened = true
+        onFinished: root.opened = true
     }
     PropertyAnimation on offset {
         id: expandAnim
         duration: PlasmaCore.Units.longDuration
         easing.type: Easing.InOutQuad
         to: contentContainerLoader.maximizedQuickSettingsOffset
-        onFinished: window.opened = true;
+        onFinished: root.opened = true;
     }
     
     Flickable {
         id: flickable
         anchors.fill: parent
         
-        contentWidth: window.width
-        contentHeight: window.height + 999999
+        contentWidth: root.width
+        contentHeight: root.height + 999999
         contentY: contentHeight / 2
         
-        // if the recent window.offset change was due to this flickable
+        // if the recent root.offset change was due to this flickable
         property bool offsetChangedDueToContentY: false
         Connections {
-            target: window
+            target: root
             function onOffsetChanged() {
                 if (!flickable.offsetChangedDueToContentY) {
-                    // ensure the flickable's contentY is not moving when other sources change window.offset
+                    // ensure the flickable's contentY is not moving when other sources change root.offset
                     flickable.cancelFlick(); 
                 }
                 flickable.offsetChangedDueToContentY = false;
@@ -204,34 +227,34 @@ NanoShell.FullScreenOverlay {
         property real oldContentY
         onContentYChanged: {
             offsetChangedDueToContentY = true;
-            window.offset += oldContentY - contentY;
+            root.offset += oldContentY - contentY;
             oldContentY = contentY;
         }
         
         onMovementStarted: {
-            window.cancelAnimations();
-            window.dragging = true;
+            root.cancelAnimations();
+            root.dragging = true;
         }
-        onFlickStarted: window.dragging = true;
+        onFlickStarted: root.dragging = true;
         onMovementEnded: {
-            window.dragging = false;
-            window.updateState();
+            root.dragging = false;
+            root.updateState();
         }
         onFlickEnded: {
-            window.dragging = true;
-            window.updateState();
+            root.dragging = true;
+            root.updateState();
         }
         
         onDraggingChanged: {
             if (!dragging) {
-                window.dragging = false;
+                root.dragging = false;
                 flickable.cancelFlick();
-                window.updateState();
+                root.updateState();
             }
         }
         
         // the flickable is only used to measure drag changes, we implement our own UI component movements
-        // the window element is not affected by contentY changes (it's effectively anchored to the flickable)
+        // the root element is not affected by contentY changes (it's effectively anchored to the flickable)
         Loader {
             id: contentContainerLoader
             
@@ -239,27 +262,27 @@ NanoShell.FullScreenOverlay {
             property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
             
             y: flickable.contentY
-            width: window.width
-            height: window.height
+            width: root.width
+            height: root.height
             
-            sourceComponent: window.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
+            sourceComponent: root.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
         }
         
         Component {
             id: portraitContentContainer
             PortraitContentContainer {
-                actionDrawer: window
-                width: window.width
-                height: window.height
+                actionDrawer: root
+                width: root.width
+                height: root.height
             }
         }
         
         Component {
             id: landscapeContentContainer
             LandscapeContentContainer {
-                actionDrawer: window
-                width: window.width
-                height: window.height
+                actionDrawer: root
+                width: root.width
+                height: root.height
             }
         }
     }

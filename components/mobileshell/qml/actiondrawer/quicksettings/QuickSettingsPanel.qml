@@ -77,6 +77,9 @@ Components.BaseItem {
                 showSecondRow: false
                 showDropShadow: false
                 showTime: false
+                
+                // security reasons, system tray also doesn't work on lockscreen
+                disableSystemTray: actionDrawer.restrictedPermissions
             }
             
             PlasmaComponents.ScrollView {

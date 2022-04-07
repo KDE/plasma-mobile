@@ -16,6 +16,7 @@
         
         <file>qml/actiondrawer/ActionDrawer.qml</file>
         <file>qml/actiondrawer/ActionDrawerOpenSurface.qml</file>
+        <file>qml/actiondrawer/ActionDrawerWindow.qml</file>
         <file>qml/actiondrawer/LandscapeContentContainer.qml</file>
         <file>qml/actiondrawer/PortraitContentContainer.qml</file>
         

@@ -85,6 +85,9 @@ Components.BaseItem {
                 backgroundColor: "transparent"
                 showSecondRow: true
                 showDropShadow: false
+                
+                // security reasons, system tray also doesn't work on lockscreen
+                disableSystemTray: actionDrawer.restrictedPermissions
             }
             
             QuickSettings {

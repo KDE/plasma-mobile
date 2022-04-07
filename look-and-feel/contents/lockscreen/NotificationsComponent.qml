@@ -16,7 +16,11 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Rectangle {
     id: rect
     
+    property var notificationsModel: []
+    
     readonly property bool notificationsShown: notificationsList.hasNotifications
+    
+    signal passwordRequested()
     
     property real leftMargin: 0
     property real rightMargin: 0
@@ -54,13 +58,13 @@ Rectangle {
             
             historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
             actionsRequireUnlock: true
-            historyModel: notifModel
+            historyModel: rect.notificationsModel
         
             property bool requestNotificationAction: false
             
             onUnlockRequested: {
                 requestNotificationAction = true;
-                root.askPassword();
+                root.passwordRequested();
             }
         }
     }
