@@ -27,6 +27,8 @@ Item {
     property bool interactive: true
     
     property var homeScreenState: HomeScreenState {
+        interactive: root.interactive
+        
         totalPagesWidth: pages.contentWidth
         
         appDrawerFlickable: appDrawer.flickable
@@ -105,16 +107,17 @@ Item {
 
                     TapHandler {
                         target: favoriteStrip
+                        enabled: homeScreenState.interactive
                         onTapped: {
                             //Hides icons close button
                             contents.appletsLayout.appletsLayoutInteracted();
                             contents.appletsLayout.editMode = false;
                         }
                         onLongPressed: {
-                             if (homeScreenState.currentSwipeState === HomeScreenState.DeterminingType) {
+                            if (homeScreenState.currentSwipeState === HomeScreenState.DeterminingType) {
                                 // only go into edit mode when not in a swipe
                                 contents.appletsLayout.editMode = true;
-                             }
+                            }
                         }
                         onPressedChanged: root.parent.focus = true;
                     }

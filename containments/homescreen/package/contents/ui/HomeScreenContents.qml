@@ -159,7 +159,7 @@ DragDrop.DropArea {
 
         TapHandler {
             target: homeScreenPages
-            enabled: homeScreenState.currentView === HomeScreenState.PageView
+            enabled: homeScreenState.currentView === HomeScreenState.PageView && homeScreenState.interactive
             onTapped: {
                 //Hides icons close button
                 appletsLayout.appletsLayoutInteracted();

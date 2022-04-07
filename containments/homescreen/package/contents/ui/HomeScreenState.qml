@@ -18,6 +18,9 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 QtObject {
     id: root
     
+    // whether the homescreen elements should be interactive, or disabled
+    required property bool interactive
+    
     required property real totalPagesWidth
     
     required property var appDrawerFlickable 
