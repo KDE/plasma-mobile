@@ -189,13 +189,11 @@ Item {
             if (visible) {
                 startupFeedback.visible = false;
                 
-                // only animate if going from homescreen
-                if (taskSwitcher.wasInActiveTask) {
-                    itemContainer.zoomOut();
-                } else {
-                    itemContainer.zoomOut();
-                    //itemContainer.opacity = 0;
+                // hide immediately when going from homescreen
+                if (!taskSwitcher.wasInActiveTask) {
+                    itemContainer.opacity = 0;
                 }
+                itemContainer.zoomOut();
                 
             } else {
                 itemContainer.zoomIn();
