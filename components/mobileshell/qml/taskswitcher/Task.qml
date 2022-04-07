@@ -190,6 +190,22 @@ Item {
                 color: PlasmaCore.Theme.backgroundColor
                 clip: true
                 
+                // scale animation on press (for longer than 50ms)
+                property real zoomScale: (tapHandler.pressed && tapHandler.timeHeld > 0.05) ? 0.9 : 1
+                Behavior on zoomScale {
+                    NumberAnimation {
+                        duration: 200
+                        easing.type: Easing.OutExpo
+                    }
+                }
+                
+                transform: Scale { 
+                    origin.x: appView.width / 2; 
+                    origin.y: appView.height / 2; 
+                    xScale: appView.zoomScale
+                    yScale: appView.zoomScale
+                }
+                
                 Item {
                     id: item
                     anchors.fill: parent
@@ -216,6 +232,8 @@ Item {
                     }
                     
                     TapHandler {
+                        id: tapHandler
+                        cursorShape: Qt.PointingHandCursor
                         onTapped: delegate.activateApp()
                     }
                 }
