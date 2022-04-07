@@ -23,6 +23,7 @@ class WindowUtil : public QObject
     Q_OBJECT
     Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool allWindowsMinimized READ allWindowsMinimized NOTIFY allWindowsMinimizedChanged)
+    Q_PROPERTY(bool allWindowsMinimizedExcludingShell READ allWindowsMinimizedExcludingShell NOTIFY allWindowsMinimizedExcludingShellChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(bool activeWindowIsShell READ activeWindowIsShell NOTIFY activeWindowIsShellChanged)
 
@@ -30,18 +31,47 @@ public:
     WindowUtil(QObject *parent = nullptr);
     static WindowUtil *instance();
 
+    /**
+     * Whether the shell is in "desktop showing" mode, where all windows
+     * are moved aside.
+     */
     bool isShowingDesktop() const;
+
+    /**
+     * Whether all windows are minimized, including shell windows.
+     */
     bool allWindowsMinimized() const;
+
+    /**
+     * Whether all windows are minimized, ignoring shell windows.
+     */
+    bool allWindowsMinimizedExcludingShell() const;
+
+    /**
+     * Whether the active window being shown is a shell window.
+     */
     bool activeWindowIsShell() const;
 
+    /**
+     * Whether the current active window can be closed.
+     */
     bool hasCloseableActiveWindow() const;
+
+    /**
+     * Close the current active window.
+     */
     Q_INVOKABLE void closeActiveWindow();
+
+    /**
+     * Toggle whether we are in the "desktop showing" mode.
+     */
     Q_INVOKABLE void requestShowingDesktop(bool showingDesktop);
 
 Q_SIGNALS:
     void windowCreated(KWayland::Client::PlasmaWindow *window);
     void showingDesktopChanged(bool showingDesktop);
     void allWindowsMinimizedChanged();
+    void allWindowsMinimizedExcludingShellChanged();
     void hasCloseableActiveWindowChanged();
     void activeWindowChanged();
     void activeWindowIsShellChanged();
@@ -61,5 +91,6 @@ private:
 
     bool m_showingDesktop = false;
     bool m_allWindowsMinimized = true;
+    bool m_allWindowsMinimizedExcludingShell = true;
     bool m_activeWindowIsShell = false;
 };

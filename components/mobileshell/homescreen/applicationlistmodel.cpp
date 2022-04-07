@@ -104,13 +104,13 @@ void ApplicationListModel::windowCreated(KWayland::Client::PlasmaWindow *window)
     for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
         if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
             (*i).window = window;
-            emit dataChanged(index(idx, 0), index(idx, 0));
+            Q_EMIT dataChanged(index(idx, 0), index(idx, 0));
             connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, window]() {
                 int idx = 0;
                 for (auto i = m_applicationList.begin(); i != m_applicationList.end(); i++) {
                     if ((*i).storageId == window->appId() + QStringLiteral(".desktop")) {
                         (*i).window = nullptr;
-                        emit dataChanged(index(idx, 0), index(idx, 0));
+                        Q_EMIT dataChanged(index(idx, 0), index(idx, 0));
                         break;
                     }
                     idx++;

@@ -40,6 +40,11 @@ bool WindowUtil::allWindowsMinimized() const
     return m_allWindowsMinimized;
 }
 
+bool WindowUtil::allWindowsMinimizedExcludingShell() const
+{
+    return m_allWindowsMinimizedExcludingShell;
+}
+
 bool WindowUtil::activeWindowIsShell() const
 {
     return m_activeWindowIsShell;
@@ -98,17 +103,28 @@ void WindowUtil::updateActiveWindow()
         connect(m_activeWindow.data(), &PlasmaWindow::unmapped, this, &WindowUtil::forgetActiveWindow);
     }
 
+    // loop through windows
     bool newAllMinimized = true;
+    bool newAllMinimizedExcludingShell = true;
     for (auto *w : m_windowManagement->windows()) {
-        if (!w->isMinimized() && !w->skipTaskbar() && !w->isFullscreen() /*&& w->appId() != QStringLiteral("org.kde.plasmashell")*/) {
+        if (!w->isMinimized() && !w->skipTaskbar() && !w->isFullscreen()) {
             newAllMinimized = false;
-            break;
+
+            if (w->appId() != QStringLiteral("org.kde.plasmashell")) {
+                newAllMinimizedExcludingShell = false;
+            }
         }
     }
+
     if (newAllMinimized != m_allWindowsMinimized) {
         m_allWindowsMinimized = newAllMinimized;
         Q_EMIT allWindowsMinimizedChanged();
     }
+    if (newAllMinimizedExcludingShell != m_allWindowsMinimizedExcludingShell) {
+        m_allWindowsMinimizedExcludingShell = newAllMinimizedExcludingShell;
+        Q_EMIT allWindowsMinimizedExcludingShellChanged();
+    }
+
     // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
     Q_EMIT hasCloseableActiveWindowChanged();
 }

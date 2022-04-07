@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.NavigationPanel {
     id: root
-    property bool appIsShown: !MobileShell.WindowUtil.allWindowsMinimized
+    property bool appIsShown: !MobileShell.WindowUtil.allWindowsMinimizedExcludingShell
     
     // background is:
     // - opaque if an app is shown or vkbd is shown

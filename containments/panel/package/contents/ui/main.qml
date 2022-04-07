@@ -23,7 +23,7 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 Item {
     id: root
     
-    readonly property bool showingApp: !MobileShell.HomeScreenControls.homeScreenVisible
+    readonly property bool showingApp: !MobileShell.WindowUtil.allWindowsMinimizedExcludingShell
     readonly property color backgroundColor: topPanel.colorScopeColor
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
