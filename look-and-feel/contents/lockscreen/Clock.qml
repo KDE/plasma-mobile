@@ -10,12 +10,14 @@ import QtGraphicalEffects 1.12
 
 import org.kde.plasma.core 2.0
 
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
 ColumnLayout {
     id: root
     property int layoutAlignment
     
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
-    readonly property bool is24HourTime: Qt.locale().timeFormat(Locale.ShortFormat).toLowerCase().indexOf("ap") === -1
+    readonly property bool is24HourTime: MobileShell.ShellUtil.isSystem24HourFormat
     
     Layout.alignment: layoutAlignment
     spacing: Units.gridUnit
