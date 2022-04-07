@@ -40,10 +40,10 @@ KCM.SimpleKCM {
                 MobileForm.FormSwitchDelegate {
                     text: i18n("Gesture-only Mode")
                     description: i18n("Whether to hide the navigation panel.")
-                    checked: !kcm.navigationPanelEnabled
+                    checked: !MobileShell.MobileShellSettings.navigationPanelEnabled
                     onCheckedChanged: {
-                        if (checked != !kcm.navigationPanelEnabled) {
-                            kcm.navigationPanelEnabled = !checked;
+                        if (checked != !MobileShell.MobileShellSettings.navigationPanelEnabled) {
+                            MobileShell.MobileShellSettings.navigationPanelEnabled = !checked;
                         }
                     }
                 }

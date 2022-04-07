@@ -12,14 +12,10 @@
 class KCMMobileShell : public KQuickAddons::ManagedConfigModule
 {
     Q_OBJECT
-    Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
 
 public:
     KCMMobileShell(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     virtual ~KCMMobileShell() override = default;
-
-    bool navigationPanelEnabled() const;
-    void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
 Q_SIGNALS:
     void navigationPanelEnabledChanged();

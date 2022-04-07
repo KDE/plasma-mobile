@@ -17,7 +17,6 @@ This repository contains shell components for Plasma Mobile.
 ### Locations
 * [components/mobileshell](components/mobileshell) - private shell component library (API not guaranteed to be stable!)
 * [containments](containments) - shell panels (homescreen, status bar, task panel)
-* [homescreens](homescreens) - homescreen packages
 * [kcms](kcms) - settings modules
 * [look-and-feel](look-and-feel/contents) - Plasma look-and-feel packages (ex. lockscreen, logout, etc.)
 * [quicksettings](quicksettings) - quick settings packages for the action drawer

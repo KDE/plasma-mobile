@@ -25,7 +25,6 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     m_configWatcher = KConfigWatcher::create(m_config);
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
-        qDebug() << "config changed"; // TODO
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT navigationPanelEnabledChanged();
         } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
