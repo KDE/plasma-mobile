@@ -40,6 +40,22 @@ Components.BaseItem {
     readonly property color disabledButtonColor: PlasmaCore.Theme.backgroundColor
     readonly property color disabledButtonPressedColor: Qt.darker(disabledButtonColor, 1.1)
     
+    // scale animation on press
+    property real zoomScale: 1
+    Behavior on zoomScale {
+        NumberAnimation {
+            duration: 200
+            easing.type: Easing.OutExpo
+        }
+    }
+    
+    transform: Scale { 
+        origin.x: root.width / 2; 
+        origin.y: root.height / 2; 
+        xScale: root.zoomScale
+        yScale: root.zoomScale
+    }
+    
     function delegateClick() {
         if (root.toggle) {
             root.toggle();

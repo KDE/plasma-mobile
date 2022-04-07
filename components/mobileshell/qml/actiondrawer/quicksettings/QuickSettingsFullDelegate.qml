@@ -22,8 +22,13 @@ QuickSettingsDelegate {
     padding: PlasmaCore.Units.smallSpacing * 2
     iconItem: icon
     
+    // scale animation on press
+    zoomScale: mouseArea.pressed ? 0.9 : 1
+    
     background: Rectangle {
+        anchors.fill: parent
         radius: PlasmaCore.Units.smallSpacing
+        border.width: 1
         border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
         color: {
             if (root.enabled) {
@@ -38,6 +43,7 @@ QuickSettingsDelegate {
         id: mouseArea
         onClicked: root.delegateClick()
         onPressAndHold: root.delegatePressAndHold()
+        cursorShape: Qt.PointingHandCursor
         
         PlasmaCore.IconItem {
             id: icon

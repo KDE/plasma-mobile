@@ -75,6 +75,7 @@ Item {
         DragHandler {
             id: dragHandler
             target: parent
+            cursorShape: Qt.PointingHandCursor
             
             yAxis.enabled: true
             xAxis.enabled: false
@@ -233,7 +234,6 @@ Item {
                     
                     TapHandler {
                         id: tapHandler
-                        cursorShape: Qt.PointingHandCursor
                         onTapped: delegate.activateApp()
                     }
                 }
