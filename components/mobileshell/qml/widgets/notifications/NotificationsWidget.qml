@@ -69,6 +69,11 @@ Item {
     signal unlockRequested()
     
     /**
+     * Emitted when the background is clicked (not a notification or other element).
+     */
+    signal backgroundClicked()
+    
+    /**
      * Run pending action that was pending for authentication when unlockRequested() was emitted.
      */
     function runPendingAction() {
@@ -119,6 +124,11 @@ Item {
             criteria: ViewSection.FullString
         }
 
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.backgroundClicked()
+        }
+        
         PlasmaExtras.PlaceholderMessage {
             anchors.centerIn: parent
             width: parent.width - (PlasmaCore.Units.largeSpacing * 4)

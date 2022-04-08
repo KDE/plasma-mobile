@@ -92,6 +92,8 @@ PlasmaCore.ColorScope {
             }
         }
         
+        onBackgroundClicked: root.actionDrawer.close();
+        
         anchors {
             top: quickSettings.top
             topMargin: quickSettings.height + translate.y

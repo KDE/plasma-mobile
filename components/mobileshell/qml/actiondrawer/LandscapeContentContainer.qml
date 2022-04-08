@@ -54,85 +54,94 @@ PlasmaCore.ColorScope {
         interval: 60 * 1000
     }
     
-    // left side
-    ColumnLayout {
-        opacity: applyMinMax(root.actionDrawer.offset / root.maximizedQuickSettingsOffset)
-        spacing: 0
-        anchors {
-            top: parent.top
-            topMargin: Math.min(root.width, root.height) * 0.06
-            bottom: parent.bottom
-            bottomMargin: Math.min(root.width, root.height) * 0.06
-            right: quickSettings.left
-            rightMargin: Math.min(root.width, root.height) * 0.06
-            left: parent.left
-            leftMargin: Math.min(root.width, root.height) * 0.06
-        }
+    MouseArea {
+        anchors.fill: parent
         
-        PlasmaComponents.Label {
-            id: clock
-            text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
-            verticalAlignment: Qt.AlignTop
-            Layout.fillWidth: true
-
-            font.pixelSize: Math.min(40, Math.min(root.width, root.height) * 0.1)
-            font.weight: Font.ExtraLight
-            elide: Text.ElideRight
-        }
+        // dismiss drawer when background is clicked
+        onClicked: root.actionDrawer.close();
         
-        PlasmaComponents.Label {
-            id: date
-            text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
-            verticalAlignment: Qt.AlignTop
-            color: PlasmaCore.ColorScope.disabledTextColor
-            Layout.fillWidth: true
-            Layout.topMargin: PlasmaCore.Units.smallSpacing
-
-            font.pixelSize: Math.min(20, Math.min(root.width, root.height) * 0.05)
-            font.weight: Font.Light
-        }
-        
-        MobileShell.NotificationsWidget {
-            id: notificationWidget
-            historyModel: root.actionDrawer.notificationModel
-            historyModelType: root.actionDrawer.notificationModelType
-            notificationSettings: root.actionDrawer.notificationSettings
-            actionsRequireUnlock: root.actionDrawer.restrictedPermissions
-            onUnlockRequested: root.actionDrawer.permissionsRequested()
-            
-            Connections {
-                target: root.actionDrawer
-                
-                function onRunPendingNotificationAction() {
-                    notificationWidget.runPendingAction();
-                }
+        // left side 
+        ColumnLayout {
+            opacity: applyMinMax(root.actionDrawer.offset / root.maximizedQuickSettingsOffset)
+            spacing: 0
+            anchors {
+                top: parent.top
+                topMargin: Math.min(root.width, root.height) * 0.06
+                bottom: parent.bottom
+                bottomMargin: Math.min(root.width, root.height) * 0.06
+                right: quickSettings.left
+                rightMargin: Math.min(root.width, root.height) * 0.06
+                left: parent.left
+                leftMargin: Math.min(root.width, root.height) * 0.06
             }
             
-            // don't allow notifications widget to get too wide
-            Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            Layout.topMargin: Math.min(root.width, root.height) * 0.02
+            PlasmaComponents.Label {
+                id: clock
+                text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
+                verticalAlignment: Qt.AlignTop
+                Layout.fillWidth: true
+
+                font.pixelSize: Math.min(40, Math.min(root.width, root.height) * 0.1)
+                font.weight: Font.ExtraLight
+                elide: Text.ElideRight
+            }
+            
+            PlasmaComponents.Label {
+                id: date
+                text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
+                verticalAlignment: Qt.AlignTop
+                color: PlasmaCore.ColorScope.disabledTextColor
+                Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
+
+                font.pixelSize: Math.min(20, Math.min(root.width, root.height) * 0.05)
+                font.weight: Font.Light
+            }
+            
+            MobileShell.NotificationsWidget {
+                id: notificationWidget
+                historyModel: root.actionDrawer.notificationModel
+                historyModelType: root.actionDrawer.notificationModelType
+                notificationSettings: root.actionDrawer.notificationSettings
+                actionsRequireUnlock: root.actionDrawer.restrictedPermissions
+                onUnlockRequested: root.actionDrawer.permissionsRequested()
+                
+                Connections {
+                    target: root.actionDrawer
+                    
+                    function onRunPendingNotificationAction() {
+                        notificationWidget.runPendingAction();
+                    }
+                }
+                
+                onBackgroundClicked: root.actionDrawer.close();
+                
+                // don't allow notifications widget to get too wide
+                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                Layout.topMargin: Math.min(root.width, root.height) * 0.02
+            }
         }
-    }
-    
-    // right sidebar
-    QuickSettingsPanel {
-        id: quickSettings
-        height: Math.min(root.height, Math.max(quickSettings.minimizedHeight, actionDrawer.offset))
-        width: intendedWidth
         
-        readonly property real intendedWidth: 360
-        
-        anchors.top: parent.top
-        anchors.right: parent.right
-        
-        actionDrawer: root.actionDrawer
-        fullHeight: root.height
-        
-        transform: Translate {
-            id: translate
-            y: Math.min(root.actionDrawer.offset - quickSettings.minimizedHeight, 0)
+        // right sidebar
+        QuickSettingsPanel {
+            id: quickSettings
+            height: Math.min(root.height, Math.max(quickSettings.minimizedHeight, actionDrawer.offset))
+            width: intendedWidth
+            
+            readonly property real intendedWidth: 360
+            
+            anchors.top: parent.top
+            anchors.right: parent.right
+            
+            actionDrawer: root.actionDrawer
+            fullHeight: root.height
+            
+            transform: Translate {
+                id: translate
+                y: Math.min(root.actionDrawer.offset - quickSettings.minimizedHeight, 0)
+            }
         }
     }
 }
