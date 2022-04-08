@@ -124,9 +124,11 @@ Item {
             criteria: ViewSection.FullString
         }
 
+        // implement background clicking signal
         MouseArea {
             anchors.fill: parent
             onClicked: root.backgroundClicked()
+            z: -1 // ensure that this is below notification items so we don't steal button clicks
         }
         
         PlasmaExtras.PlaceholderMessage {
