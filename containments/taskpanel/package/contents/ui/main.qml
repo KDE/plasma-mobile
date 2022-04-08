@@ -38,6 +38,7 @@ PlasmaCore.ColorScope {
         // 3 - VisibilityMode.WindowsGoBelow
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 3
     }
+    
     Binding {
         target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
         property: "thickness"
@@ -46,6 +47,46 @@ PlasmaCore.ColorScope {
         // - if gestures only is enabled: 8 (just large enough for touch swipe to register, without blocking app content)
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
     }
+    
+    Binding {
+        target: plasmoid.Window.window
+        property: "location"
+        value: {
+            if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
+                return PlasmaCore.Types.BottomEdge;
+            } else if (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) {
+                return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
+            }
+        }
+    }
+    
+    // HACK: really really really make sure the dimensions are set properly
+    function setBindings() {
+        plasmoid.Window.window.offset = Qt.binding(() => {
+            return (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) ? MobileShell.TopPanelControls.panelHeight : 0;
+        });
+        plasmoid.Window.window.thickness = Qt.binding(() => {
+            return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
+        });
+        plasmoid.Window.window.length = Qt.binding(() => {
+            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+        });
+        plasmoid.Window.window.maximumLength = Qt.binding(() => {
+            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+        });
+        plasmoid.Window.window.minimumLength = Qt.binding(() => {
+            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+        });
+    }
+    
+    Connections {
+        target: plasmoid.Window.window
+        function onThicknessChanged() {
+            root.setBindings();
+        }
+    }
+    
+    Component.onCompleted: setBindings();
     
 //BEGIN API implementation
 
@@ -75,13 +116,9 @@ PlasmaCore.ColorScope {
 //END API implementation
     
     Window.onWindowChanged: {
-        if (!Window.window)
+        if (!Window.window) {
             return;
-
-        // set offset from top panel
-        Window.window.offset = Qt.binding(() => {
-            return (root.state === "landscape") ? MobileShell.TopPanelControls.panelHeight : 0
-        });
+        }
     }
     
     // bottom navigation panel component
@@ -106,24 +143,4 @@ PlasmaCore.ColorScope {
         anchors.fill: parent
         sourceComponent: MobileShell.MobileShellSettings.navigationPanelEnabled ? navigationPanel : navigationGesture
     }
-    
-    // landscape vs. portrait orientation of panel
-    states: [
-        State {
-            name: "landscape"
-            when: MobileShell.Shell.orientation === MobileShell.Shell.Landscape
-            PropertyChanges {
-                target: plasmoid.nativeInterface
-                // only show on right edge if gestures are not enabled
-                location: MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
-            }
-        }, State {
-            name: "portrait"
-            when: MobileShell.Shell.orientation === MobileShell.Shell.Portrait
-            PropertyChanges {
-                target: plasmoid.nativeInterface
-                location: PlasmaCore.Types.BottomEdge
-            }
-        }
-    ]
 }

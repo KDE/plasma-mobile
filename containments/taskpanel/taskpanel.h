@@ -29,7 +29,6 @@ class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
-    Q_PROPERTY(Plasma::Types::Location location READ location WRITE setLocation NOTIFY locationChanged)
 
 public:
     TaskPanel(QObject *parent, const QVariantList &args);
