@@ -7,12 +7,15 @@
 
 This repository contains shell components for Plasma Mobile.
 
-### Links
-* Project page: https://invent.kde.org/plasma/plasma-mobile
-* Documentation: https://invent.kde.org/plasma/plasma-mobile/-/wikis/home
-* Issues relating to the shell: https://invent.kde.org/plasma/plasma-mobile/-/issues
-* General Plasma Mobile issues: https://invent.kde.org/teams/plasma-mobile/issues/-/issues
-* Development channel: https://matrix.to/#/#plasmamobile:matrix.org
+* Project page: [plasma-mobile.org](https://plasma-mobile.org)
+* Respository: [invent.kde.org/plasma/plasma-mobile](https://invent.kde.org/plasma/plasma-mobile)
+* Documentation: [invent.kde.org/plasma/plasma-mobile/-/wikis/home](https://invent.kde.org/plasma/plasma-mobile/-/wikis/home)
+* Development channel: [matrix.to/#/#plasmamobile:matrix.org](https://matrix.to/#/#plasmamobile:matrix.org)
+
+### Reporting issues
+* How to report issues: [invent.kde.org/plasma/plasma-mobile/-/wikis/Issue-Tracking](https://invent.kde.org/plasma/plasma-mobile/-/wikis/Issue-Tracking)
+* Shell issue tracker: [invent.kde.org/plasma/plasma-mobile/-/issues](https://invent.kde.org/plasma/plasma-mobile/-/issues)
+* General issue tracker: [https://invent.kde.org/teams/plasma-mobile/issues/-/issues](https://invent.kde.org/teams/plasma-mobile/issues/-/issues)
 
 ### Locations
 * [components/mobileshell](components/mobileshell) - private shell component library (API not guaranteed to be stable!)
@@ -20,6 +23,8 @@ This repository contains shell components for Plasma Mobile.
 * [kcms](kcms) - settings modules
 * [look-and-feel](look-and-feel/contents) - Plasma look-and-feel packages (ex. lockscreen, logout, etc.)
 * [quicksettings](quicksettings) - quick settings packages for the action drawer
+
+<img src="https://plasma-mobile.org/screenshots/screenshot-2022-04-1.png" width=300px/>
 
 ### Test on a development machine
 
@@ -35,3 +40,12 @@ To start the phone homescreen in a window, run:
 ```
 QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.phoneshell"
 ```
+
+
+---
+
+<img src="https://invent.kde.org/plasma/plasma-mobile/-/wikis/uploads/19a607bb68faa76bbc9f888e33a3aa9a/konqi-calling.png" width=200px>
+
+<br/>
+
+<img src="https://invent.kde.org/plasma/plasma-mobile/-/wikis/uploads/9238173a7cae1d8832d83350eda74f85/developers.png" width=300px>
