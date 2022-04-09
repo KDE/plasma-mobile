@@ -12,25 +12,52 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 PlasmaCore.DataSource {
     id: mpris2Source
 
-    readonly property string source: "@multiplex"
-    readonly property var playerData: data[source]
+    engine: "mpris2"
+    connectedSources: sources
+    
+    readonly property string multiplexSource: "@multiplex"
+    
+    property var mprisSourcesModel: []
+    
+    readonly property bool hasPlayer: sources.length > 1
 
-    readonly property bool hasPlayer: sources.length > 1 && !!playerData
-    readonly property string identity: hasPlayer ? playerData.Identity : ""
-    readonly property bool playing: hasPlayer && playerData.PlaybackStatus === "Playing"
-    readonly property bool canControl: hasPlayer && playerData.CanControl
-    readonly property bool canGoBack: hasPlayer && playerData.CanGoPrevious
-    readonly property bool canGoNext: hasPlayer && playerData.CanGoNext
+    function startOperation(src, op) {
+        var service = serviceForSource(src)
+        var operation = service.operationDescription(op)
+        return service.startOperationCall(operation)
+    }
 
-    readonly property var currentMetadata: hasPlayer ? playerData.Metadata : ({})
-
-    readonly property string track: {
-        const xesamTitle = currentMetadata["xesam:title"]
+    function goPrevious(source) {
+        startOperation(source, "Previous");
+    }
+    function goNext(source) {
+        startOperation(source, "Next");
+    }
+    function playPause(source) {
+        startOperation(source, "PlayPause");
+    }
+    function isPlaying(source) {
+        return data[source] ? data[source].PlaybackStatus === "Playing" : false;
+    }
+    function canControl(source) {
+        return data[source] ? data[source].CanControl : false;
+    }
+    function canGoBack(source) {
+        return data[source] ? data[source].CanGoPrevious : false;
+    }
+    function canGoNext(source) {
+        return data[source] ? data[source].CanGoNext : false;
+    }
+    function track(source) {
+        if (!data[source]) {
+            return "";
+        }
+        const xesamTitle = data[source].Metadata["xesam:title"]
         if (xesamTitle) {
             return xesamTitle
         }
         // if no track title is given, print out the file name
-        const xesamUrl = currentMetadata["xesam:url"] ? currentMetadata["xesam:url"].toString() : ""
+        const xesamUrl = data[source].Metadata["xesam:url"] ? data[source].Metadata["xesam:url"].toString() : ""
         if (!xesamUrl) {
             return ""
         }
@@ -41,25 +68,43 @@ PlasmaCore.DataSource {
         const lastUrlPart = xesamUrl.substring(lastSlashPos + 1)
         return decodeURIComponent(lastUrlPart)
     }
-    readonly property string artist: currentMetadata["xesam:artist"] || ""
-    readonly property string albumArt: currentMetadata["mpris:artUrl"] || ""
+    function artist(source) {
+        return data[source] ? data[source].Metadata["xesam:artist"] || "" : "";
+    }
+    function albumArt(source) {
+        return data[source] ? data[source].Metadata["mpris:artUrl"] || "" : "";
+    }
+    
+    function updateMprisSourcesModel() {
+        let model = [];
+        
+        let sources = mpris2Source.sources;
+        for (let i = 0; i < sources.length; ++i) {
+            let source = sources[i];
+            if (source === mpris2Source.multiplexSource) {
+                continue;
+            }
+            
+            const playerData = mpris2Source.data[source];
+            // source data is removed before its name is removed from the list
+            if (!playerData) {
+                continue;
+            }
 
-    engine: "mpris2"
-    connectedSources: [source]
-
-    function startOperation(op) {
-        var service = serviceForSource(source)
-        var operation = service.operationDescription(op)
-        return service.startOperationCall(operation)
+            model.push({
+                'application': playerData["Identity"],
+                'source': source,
+            });
+        }
+        
+        mprisSourcesModel = model;
     }
-
-    function goPrevious() {
-        startOperation("Previous");
+    
+    Component.onCompleted: {
+        mpris2Source.serviceForSource("@multiplex").enableGlobalShortcuts()
+        updateMprisSourcesModel()
     }
-    function goNext() {
-        startOperation("Next");
-    }
-    function playPause(source) {
-        startOperation("PlayPause");
-    }
+    
+    onSourceAdded: updateMprisSourcesModel()
+    onSourceRemoved: updateMprisSourcesModel();
 }
