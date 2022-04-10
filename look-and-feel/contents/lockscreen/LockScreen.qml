@@ -12,6 +12,11 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
 
+/**
+ * Lockscreen component that is loaded after the device is locked.
+ * 
+ * Special attention must be paid to ensuring the GUI loads as fast as possible.
+ */
 PlasmaCore.ColorScope {
     id: root
 
@@ -95,7 +100,7 @@ PlasmaCore.ColorScope {
                 onPasswordRequested: root.askPassword()
                 
                 anchors.top: parent.top
-                anchors.bottom: scrollUpIcon.top
+                anchors.bottom: scrollUpIconLoader.top
                 anchors.left: parent.left
                 anchors.right: parent.right
                 
@@ -116,7 +121,7 @@ PlasmaCore.ColorScope {
                 
                 anchors.topMargin: headerBar.statusBarHeight
                 anchors.top: parent.top
-                anchors.bottom: scrollUpIcon.top
+                anchors.bottom: scrollUpIconLoader.top
                 anchors.left: parent.left
                 anchors.right: parent.right
                 
@@ -125,45 +130,55 @@ PlasmaCore.ColorScope {
             }
             
             // scroll up icon
-            PlasmaCore.IconItem {
-                id: scrollUpIcon
+            Loader {
+                id: scrollUpIconLoader
+                asynchronous: true
+                
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: PlasmaCore.Units.gridUnit + flickable.position * 0.5
                 anchors.horizontalCenter: parent.horizontalCenter
-                implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
-                implicitHeight: PlasmaCore.Units.iconSizes.smallMedium 
-                opacity: 1 - flickable.openFactor
                 
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                source: "arrow-up"
+                sourceComponent: PlasmaCore.IconItem {
+                    id: scrollUpIcon
+                    implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
+                    implicitHeight: PlasmaCore.Units.iconSizes.smallMedium 
+                    opacity: 1 - flickable.openFactor
+                    
+                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                    source: "arrow-up"
+                }
             }
             
             // password keypad
-            ColumnLayout {
-                id: passwordLayout
-                anchors.bottom: parent.bottom
-                transform: Translate { y: flickable.keypadHeight - flickable.position }
-                
+            Loader {
                 width: parent.width
-                spacing: PlasmaCore.Units.gridUnit
+                asynchronous: true
                 
-                // scroll down icon
-                PlasmaCore.IconItem {
-                    Layout.alignment: Qt.AlignHCenter
-                    implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
-                    implicitHeight: PlasmaCore.Units.iconSizes.smallMedium
-                    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                    source: "arrow-down"
-                    opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
-                }
-
-                Keypad {
-                    id: keypad
-                    Layout.fillWidth: true
+                anchors.bottom: parent.bottom
+                
+                sourceComponent: ColumnLayout {
+                    transform: Translate { y: flickable.keypadHeight - flickable.position }
                     
-                    focus: true
-                    swipeProgress: flickable.openFactor
-                    onPasswordChanged: flickable.goToOpenPosition()
+                    spacing: PlasmaCore.Units.gridUnit
+                    
+                    // scroll down icon
+                    PlasmaCore.IconItem {
+                        Layout.alignment: Qt.AlignHCenter
+                        implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
+                        implicitHeight: PlasmaCore.Units.iconSizes.smallMedium
+                        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                        source: "arrow-down"
+                        opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
+                    }
+
+                    Keypad {
+                        id: keypad
+                        Layout.fillWidth: true
+                        
+                        focus: true
+                        swipeProgress: flickable.openFactor
+                        onPasswordChanged: flickable.goToOpenPosition()
+                    }
                 }
             }
         }

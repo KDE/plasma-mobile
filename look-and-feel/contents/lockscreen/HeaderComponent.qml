@@ -23,7 +23,6 @@ Loader {
     
     signal passwordRequested()
     
-    active: true
     asynchronous: true
     
     sourceComponent: Item {
