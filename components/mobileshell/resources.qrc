@@ -21,7 +21,6 @@
         <file>qml/actiondrawer/PortraitContentContainer.qml</file>
         
         <file>qml/components/BaseItem.qml</file>
-        <file>qml/components/Direction.qml</file>
         <file>qml/components/StartupFeedback.qml</file>
         <file>qml/components/util.js</file>
         <file>qml/components/VelocityCalculator.qml</file>

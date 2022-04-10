@@ -9,6 +9,8 @@
 #include <QQmlContext>
 #include <QQuickItem>
 
+#include "components/direction.h"
+
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 
@@ -48,8 +50,8 @@ void MobileShellPlugin::registerTypes(const char *uri)
         return WindowUtil::instance();
     });
 
-    // taskswitcher
-    qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
+    // components
+    qmlRegisterType<Direction>(uri, 1, 0, "Direction");
 
     // homescreen
     qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
@@ -63,6 +65,9 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");
     qmlRegisterType<NotificationFileMenu>(uri, 1, 0, "NotificationFileMenu");
 
+    // taskswitcher
+    qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
+
     // qml modules
 
     // /actiondrawer
@@ -72,7 +77,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     // /components
     qmlRegisterType(resolvePath("components/BaseItem.qml"), uri, 1, 0, "BaseItem");
-    qmlRegisterType(resolvePath("components/Direction.qml"), uri, 1, 0, "Direction");
     qmlRegisterType(resolvePath("components/StartupFeedback.qml"), uri, 1, 0, "StartupFeedback");
     qmlRegisterType(resolvePath("components/VelocityCalculator.qml"), uri, 1, 0, "VelocityCalculator");
 

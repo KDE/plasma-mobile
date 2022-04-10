@@ -15,8 +15,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import "../components" as Components
-
 Item {
     id: root
     
@@ -60,7 +58,7 @@ Item {
     /**
      * Direction the panel is currently moving in.
      */
-    property int direction: Components.Direction.None
+    property int direction: MobileShell.Direction.None
     
     /**
      * The mode of the action drawer (portrait or landscape).
@@ -111,8 +109,8 @@ Item {
             offset = 0;
         }
         root.direction = (oldOffset === offset) 
-                            ? Components.Direction.None 
-                            : (offset > oldOffset ? Components.Direction.Down : Components.Direction.Up);
+                            ? MobileShell.Direction.None 
+                            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
             
         oldOffset = offset;
         
@@ -152,7 +150,7 @@ Item {
             // close immediately, so that we don't have to wait PlasmaCore.Units.longDuration 
             root.visible = false;
             close();
-        } else if (root.direction === Components.Direction.None || !root.opened) {
+        } else if (root.direction === MobileShell.Direction.None || !root.opened) {
             if (root.offset < openThreshold) {
                 close();
             } else {
@@ -161,12 +159,12 @@ Item {
         } else if (root.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
             expand();
         } else if (root.offset > contentContainerLoader.minimizedQuickSettingsOffset) {
-            if (root.direction === Components.Direction.Down) {
+            if (root.direction === MobileShell.Direction.Down) {
                 expand();
             } else {
                 open();
             }
-        } else if (root.direction === Components.Direction.Down) {
+        } else if (root.direction === MobileShell.Direction.Down) {
             open();
         } else {
             close();

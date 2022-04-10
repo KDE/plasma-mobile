@@ -13,6 +13,7 @@ set(mobileshellplugin_SRCS
     savedquicksettingsmodel.cpp
     shellutil.cpp
     windowutil.cpp
+    components/direction.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
     homescreen/applicationlistmodel.cpp
