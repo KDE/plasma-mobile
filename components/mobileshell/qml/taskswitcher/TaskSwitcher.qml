@@ -141,7 +141,8 @@ Item {
     }
     
     function minimizeAll() {
-        MobileShell.WindowUtil.minimizeAll(root);
+        MobileShell.WindowUtil.unsetAllMinimizedGeometries(root);
+        MobileShell.WindowUtil.minimizeAll();
     }
 
 //END functions

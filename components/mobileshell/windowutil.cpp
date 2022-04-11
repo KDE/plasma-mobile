@@ -151,28 +151,43 @@ void WindowUtil::requestShowingDesktop(bool showingDesktop)
     m_windowManagement->setShowingDesktop(showingDesktop);
 }
 
-void WindowUtil::minimizeAll(QQuickItem *parent)
+void WindowUtil::minimizeAll()
 {
     if (!m_windowManagement) {
         qWarning() << "Ignoring request for minimizing all windows since window management hasn't been announced yet!";
         return;
     }
 
-    KWayland::Client::Surface *surface = nullptr;
-    if (parent) {
-        QWindow *window = parent->window();
-        if (window) {
-            surface = KWayland::Client::Surface::fromWindow(window);
+    for (auto *w : m_windowManagement->windows()) {
+        if (!w->isMinimized()) {
+            w->requestToggleMinimized();
         }
+    }
+}
+
+void WindowUtil::unsetAllMinimizedGeometries(QQuickItem *parent)
+{
+    if (!m_windowManagement) {
+        qWarning() << "Ignoring request for minimizing all windows since window management hasn't been announced yet!";
+        return;
+    }
+
+    if (!parent) {
+        return;
+    }
+
+    QWindow *window = parent->window();
+    if (!window) {
+        return;
+    }
+
+    KWayland::Client::Surface *surface = KWayland::Client::Surface::fromWindow(window);
+    if (!surface) {
+        return;
     }
 
     for (auto *w : m_windowManagement->windows()) {
-        if (!w->isMinimized()) {
-            if (surface) {
-                w->unsetMinimizedGeometry(surface);
-            }
-            w->requestToggleMinimized();
-        }
+        w->unsetMinimizedGeometry(surface);
     }
 }
 

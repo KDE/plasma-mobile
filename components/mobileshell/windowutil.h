@@ -80,11 +80,16 @@ public:
     Q_INVOKABLE void requestShowingDesktop(bool showingDesktop);
 
     /**
-     * Minimize all windows, while also unsetting their respective minimized geometries of the window given.
+     * Minimize all windows.
+     */
+    Q_INVOKABLE void minimizeAll();
+
+    /**
+     * Unset minimized geometries of all windows for an item's window.
      *
      * @param parent The parent item, which is of the same window that will have geometries unset.
      */
-    Q_INVOKABLE void minimizeAll(QQuickItem *parent);
+    Q_INVOKABLE void unsetAllMinimizedGeometries(QQuickItem *parent);
 
 Q_SIGNALS:
     void windowCreated(KWayland::Client::PlasmaWindow *window);
