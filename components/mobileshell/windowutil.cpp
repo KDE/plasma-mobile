@@ -9,12 +9,13 @@
 
 #include <QGuiApplication>
 
-constexpr int ACTIVE_WINDOW_UPDATE_INVERVAL = 250;
+constexpr int ACTIVE_WINDOW_UPDATE_INVERVAL = 0;
 
 WindowUtil::WindowUtil(QObject *parent)
     : QObject{parent}
     , m_activeWindowTimer{new QTimer{this}}
 {
+    // use 0 tick timer to update active window to ensure window state has finished changing
     m_activeWindowTimer->setSingleShot(true);
     m_activeWindowTimer->setInterval(ACTIVE_WINDOW_UPDATE_INVERVAL);
     connect(m_activeWindowTimer, &QTimer::timeout, this, &WindowUtil::updateActiveWindow);

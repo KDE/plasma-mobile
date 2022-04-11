@@ -22,6 +22,8 @@
 /**
  * Utility class that provides useful functions related to windows and KWin+KWayland.
  *
+ * TODO: Add per-screen support
+ *
  * @author Devin Lin <devin@kde.org>
  **/
 class WindowUtil : public QObject
