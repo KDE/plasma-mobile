@@ -106,6 +106,7 @@ QtObject {
         let subtract = (maxScale - 1) * (yPosition / openedYPosition);
         let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
         
+        // animate scale only if we are *not* opening from the homescreen
         if (wasInActiveTask || !currentlyBeingOpened) {
             return finalScale;
         }
@@ -200,7 +201,7 @@ QtObject {
         target: root
         property: "yPosition"
         to: openedYPosition 
-        duration: PlasmaCore.Units.longDuration * 2
+        duration: 300
         easing.type: Easing.OutBack
         
         onFinished: {

@@ -163,8 +163,8 @@ Item {
         anchors.fill: parent
         
         color: {
-            // animate background colour only if opening from the homescreen
-            if (taskSwitcherState.wasInActiveTask) {
+            // animate background colour only if we are *not* opening from the homescreen
+            if (taskSwitcherState.wasInActiveTask || !taskSwitcherState.currentlyBeingOpened) {
                 return Qt.rgba(0, 0, 0, 0.6);
             } else {
                 return Qt.rgba(0, 0, 0, 0.6 * Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition));
@@ -190,6 +190,16 @@ Item {
             // the item is effectively anchored to the flickable bounds
             TaskList {
                 taskSwitcher: root
+                
+                opacity: {
+                    // animate opacity only if we are *not* opening from the homescreen
+                    if (taskSwitcherState.wasInActiveTask || !taskSwitcherState.currentlyBeingOpened) {
+                        return 1;
+                    } else {
+                        Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition);
+                    }
+                }
+                
                 x: flickable.contentX
                 width: flickable.width
                 height: flickable.height

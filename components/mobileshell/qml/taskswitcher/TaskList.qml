@@ -19,8 +19,6 @@ Item {
     required property var taskSwitcher    
     readonly property var taskSwitcherState: taskSwitcher.taskSwitcherState
     
-    opacity: taskSwitcherState.wasInActiveTask ? 1 : Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition)
-    
     transform: Scale {
         origin.x: root.width / 2
         origin.y: root.height / 2
