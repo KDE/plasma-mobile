@@ -143,10 +143,13 @@ Item {
             target: MobileShell.WindowUtil
             
             function onActiveWindowIsShellChanged() {
-                if (MobileShell.WindowUtil.activeWindowIsShell && !taskSwitcher.visible) {
-                    itemContainer.zoomIn();
-                } else {
-                    itemContainer.zoomOut();
+                // only animate if homescreen is visible
+                if (!taskSwitcher.visible) {
+                    if (MobileShell.WindowUtil.activeWindowIsShell) {
+                        itemContainer.zoomIn();
+                    } else {
+                        itemContainer.zoomOut();
+                    }
                 }
             }
         }
