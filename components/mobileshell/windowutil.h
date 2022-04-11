@@ -9,6 +9,8 @@
 
 #include <QObject>
 #include <QPointer>
+#include <QQuickItem>
+#include <QQuickWindow>
 #include <QTimer>
 
 #include <KConfigWatcher>
@@ -76,6 +78,13 @@ public:
      * @param showingDesktop Whether "desktop showing" mode should be enabled.
      */
     Q_INVOKABLE void requestShowingDesktop(bool showingDesktop);
+
+    /**
+     * Minimize all windows, while also unsetting their respective minimized geometries of the window given.
+     *
+     * @param parent The parent item, which is of the same window that will have geometries unset.
+     */
+    Q_INVOKABLE void minimizeAll(QQuickItem *parent);
 
 Q_SIGNALS:
     void windowCreated(KWayland::Client::PlasmaWindow *window);

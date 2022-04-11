@@ -18,6 +18,9 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
 
+/**
+ * Component that provides a task switcher.
+ */
 Item {
     id: root
     visible: false
@@ -28,15 +31,27 @@ Item {
         taskSwitcher: root
     }
     
-    // task list model
+    /**
+     * The task manager model to use for the tasks switcher.
+     */
     property TaskManager.TasksModel tasksModel
+    
+    /**
+     * The number of tasks in the given task manager model.
+     */
     readonly property int tasksCount: tasksModel.count
 
+    /**
+     * The screen model to be used for moving windows between screens.
+     */
     property var displaysModel: MobileShell.DisplaysModel {}
     
-    // if a window has popped up in front, close the task switcher
+    /**
+     * Whether the window is active.
+     */
     property bool windowActive: Window.active
     onWindowActiveChanged: {
+        // if a window has popped up in front, close the task switcher
         if (visible && !windowActive) {
             hide();
         }
@@ -126,12 +141,7 @@ Item {
     }
     
     function minimizeAll() {
-        for (var i = 0 ; i < tasksModel.count; i++) {
-            var idx = tasksModel.makeModelIndex(i);
-            if (!tasksModel.data(idx, TaskManager.AbstractTasksModel.IsMinimized)) {
-                tasksModel.requestToggleMinimized(idx);
-            }
-        }
+        MobileShell.WindowUtil.minimizeAll(root);
     }
 
 //END functions
