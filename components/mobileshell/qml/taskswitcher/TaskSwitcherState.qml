@@ -229,8 +229,8 @@ QtObject {
         target: root 
         property: "yPosition"
         to: 0
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+        duration: 300
+        easing.type: Easing.OutQuint
         
         onFinished: {
             root.currentlyBeingOpened = false;
