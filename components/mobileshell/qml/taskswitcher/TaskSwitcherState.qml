@@ -157,12 +157,12 @@ QtObject {
     // called after a user finishes an interaction (ex. lets go of the screen)
     function updateState() {
         cancelAnimations();
-        
+
         // update vertical state
-        if (movingUp || root.yPosition >= openedYPosition) { 
+        if (movingUp || root.yPosition >= openedYPosition) {
             // open task switcher and stay
             openAnim.restart();
-        } else { 
+        } else {
             // close task switcher and return to app
             closeAnim.restart();
         }
@@ -221,6 +221,7 @@ QtObject {
             taskSwitcher.instantHide();
             
             if (root.wasInActiveTask) {
+                taskSwitcher.tasksModel.requestLastActivatedReorderDelay(5000);
                 taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             }
         }

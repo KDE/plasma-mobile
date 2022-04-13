@@ -171,7 +171,7 @@ Item {
             groupMode: TaskManager.TasksModel.GroupDisabled
 
             screenGeometry: plasmoid.screenGeometry
-            sortMode: TaskManager.TasksModel.SortAlpha
+            sortMode: TaskManager.TasksModel.SortLastActivated
 
             virtualDesktop: virtualDesktopInfo.currentDesktop
             activity: activityInfo.currentActivity

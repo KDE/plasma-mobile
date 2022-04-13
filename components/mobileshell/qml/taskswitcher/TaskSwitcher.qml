@@ -25,7 +25,7 @@ Item {
     id: root
     visible: false
     opacity: 0
-    
+
     // state object
     property var taskSwitcherState: TaskSwitcherState {
         taskSwitcher: root
@@ -82,10 +82,15 @@ Item {
         taskSwitcherState.xPosition = 0;
         taskSwitcherState.wasInActiveTask = tasksModel.activeTask.row >= 0;
         taskSwitcherState.currentlyBeingOpened = true;
-        
+
+        // disable reorder feature and the relative delay
+        taskSwitcher.tasksModel.requestLastActivatedReorderDelay(0);
+
         // skip to first active task
         if (taskSwitcherState.wasInActiveTask) {
             taskSwitcherState.goToTaskIndex(tasksModel.activeTask.row);
+        } else {
+            taskSwitcherState.goToTaskIndex(tasksCount - 1);
         }
         
         // show task switcher, hide all running apps
