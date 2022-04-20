@@ -31,8 +31,8 @@ target_link_libraries(screenshotplugin
 set_property(TARGET screenshotplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/screenshot)
 file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/screenshot)
 
-install(TARGETS screenshotplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/screenshot)
-install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/screenshot)
+install(TARGETS screenshotplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/screenshot)
+install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/screenshot)
 
 plasma_install_package(package org.kde.plasma.quicksetting.screenshot quicksettings)
 

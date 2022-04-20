@@ -34,7 +34,7 @@ target_link_libraries(nightcolorplugin
 set_property(TARGET nightcolorplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/nightcolor)
 file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/nightcolor)
 
-install(TARGETS nightcolorplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/nightcolor)
-install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/quicksetting/nightcolor)
+install(TARGETS nightcolorplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/nightcolor)
+install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/nightcolor)
 
 plasma_install_package(package org.kde.plasma.quicksetting.nightcolor quicksettings)

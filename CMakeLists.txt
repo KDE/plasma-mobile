@@ -77,7 +77,7 @@ include(CheckIncludeFiles)
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
-install(FILES plasma_phone_components.notifyrc DESTINATION ${KNOTIFYRC_INSTALL_DIR})
+install(FILES plasma_phone_components.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFY5RCDIR})
 
 add_subdirectory(bin)
 add_subdirectory(containments)

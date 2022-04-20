@@ -16,5 +16,5 @@ target_link_libraries(ppc-mmqmlplugin
 set_property(TARGET ppc-mmqmlplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mm)
 file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mm)
 
-install(TARGETS ppc-mmqmlplugin DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mm)
-install(FILES qmldir ${qml_SRC} DESTINATION ${QML_INSTALL_DIR}/org/kde/plasma/mm)
+install(TARGETS ppc-mmqmlplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mm)
+install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mm)
