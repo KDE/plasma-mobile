@@ -50,6 +50,8 @@ DragDrop.DropArea {
         favoriteStrip: dropArea.favoriteStrip
     }
 
+    property bool inAppletEditMode: false
+
     Connections {
         target: plasmoid
         function onEditModeChanged() {
@@ -200,6 +202,10 @@ DragDrop.DropArea {
         appletContainerComponent: MobileAppletContainer {
             homeScreenState: dropArea.homeScreenState
             launcherDragManager: dropArea.launcherDragManager
+
+            onEditModeChanged: {
+                inAppletEditMode = editMode;
+            }
         }
 
         placeHolder: ContainmentLayoutManager.PlaceHolder {}

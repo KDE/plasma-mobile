@@ -25,10 +25,10 @@ Item {
     id: root
     
     property bool interactive: true
-    
+
     property var homeScreenState: HomeScreenState {
         interactive: root.interactive
-        
+
         totalPagesWidth: pages.contentWidth
         
         appDrawerFlickable: appDrawer.flickable
@@ -56,8 +56,8 @@ Item {
         homeScreenState: root.homeScreenState
         
         // disable flick tracking when necessary
-        interactive: root.interactive && homeScreenState.currentView !== HomeScreenState.AppDrawerView
-        
+        interactive: root.interactive && homeScreenState.currentView !== HomeScreenState.AppDrawerView && !contents.inAppletEditMode
+
         // item is effectively anchored to root, while allowing flickContainer
         // to keep track of flicks
         Item {
