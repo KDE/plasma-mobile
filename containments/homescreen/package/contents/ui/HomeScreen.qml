@@ -107,7 +107,7 @@ Item {
 
                     TapHandler {
                         target: favoriteStrip
-                        enabled: homeScreenState.interactive
+                        enabled: flickContainer.interactive // only interactive when we flick on homescreen
                         onTapped: {
                             //Hides icons close button
                             contents.appletsLayout.appletsLayoutInteracted();
