@@ -7,8 +7,8 @@
 
 #include "phonepanel.h"
 
-PhonePanel::PhonePanel(QObject *parent, const QVariantList &args)
-    : Plasma::Containment(parent, args)
+PhonePanel::PhonePanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Containment(parent, data, args)
 {
 }
 

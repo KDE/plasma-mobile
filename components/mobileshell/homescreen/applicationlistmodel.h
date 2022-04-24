@@ -8,6 +8,7 @@
 #pragma once
 
 // Qt
+#include <PlasmaQuick/AppletQuickItem>
 #include <QAbstractListModel>
 #include <QList>
 #include <QObject>
@@ -23,11 +24,6 @@ namespace Client
 class PlasmaWindowManagement;
 class PlasmaWindow;
 }
-}
-
-namespace PlasmaQuick
-{
-class AppletQuickItem;
 }
 
 class ApplicationListModel;

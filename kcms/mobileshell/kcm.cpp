@@ -12,7 +12,7 @@ K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "metadata.json")
 KCMMobileShell::KCMMobileShell(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, data, args)
 {
-    setButtons(0);
+    setButtons({});
 }
 
 #include "kcm.moc"

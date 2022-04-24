@@ -8,7 +8,7 @@ target_sources(ppc-mmqmlplugin PRIVATE
 )
 
 target_link_libraries(ppc-mmqmlplugin
-    Qt5::Qml
+    Qt::Qml
     KF5::ModemManagerQt
     KF5::NetworkManagerQt
 )

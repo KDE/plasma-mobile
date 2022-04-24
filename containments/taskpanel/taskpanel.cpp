@@ -21,8 +21,8 @@
 
 #include <virtualkeyboardinterface.h>
 
-TaskPanel::TaskPanel(QObject *parent, const QVariantList &args)
-    : Plasma::Containment(parent, args)
+TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Containment(parent, data, args)
 {
     setHasConfigurationInterface(true);
     initWayland();

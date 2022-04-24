@@ -31,7 +31,6 @@
 #include <KWayland/Client/surface.h>
 
 #include <Plasma/Applet>
-#include <PlasmaQuick/AppletQuickItem>
 
 constexpr int MAX_FAVOURITES = 5;
 

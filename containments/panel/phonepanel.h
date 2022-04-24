@@ -14,7 +14,7 @@ class PhonePanel : public Plasma::Containment
     Q_OBJECT
 
 public:
-    PhonePanel(QObject *parent, const QVariantList &args);
+    PhonePanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~PhonePanel() override;
 };
 

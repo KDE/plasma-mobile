@@ -5,7 +5,7 @@
 #pragma once
 
 #include <ModemManagerQt/Manager>
-#include <ModemManagerQt/modem3gpp.h>
+#include <ModemManagerQt/Modem3Gpp>
 
 #include <NetworkManagerQt/Connection>
 #include <NetworkManagerQt/ModemDevice>

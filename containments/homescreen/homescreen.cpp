@@ -10,8 +10,8 @@
 #include <QQuickItem>
 #include <QtQml>
 
-HomeScreen::HomeScreen(QObject *parent, const QVariantList &args)
-    : Plasma::Containment(parent, args)
+HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
+    : Plasma::Containment(parent, data, args)
 {
     setHasConfigurationInterface(true);
     connect(KWindowSystem::self(), &KWindowSystem::showingDesktopChanged, this, &HomeScreen::showingDesktopChanged);

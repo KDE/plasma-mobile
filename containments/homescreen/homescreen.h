@@ -14,7 +14,7 @@ class HomeScreen : public Plasma::Containment
     Q_PROPERTY(bool showingDesktop READ showingDesktop WRITE setShowingDesktop NOTIFY showingDesktopChanged)
 
 public:
-    HomeScreen(QObject *parent, const QVariantList &args);
+    HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~HomeScreen() override;
 
     void configChanged() override;

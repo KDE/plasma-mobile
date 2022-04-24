@@ -8,6 +8,7 @@
 #define TASKPANEL_H
 
 #include <Plasma/Containment>
+#include <QWindow>
 
 class OutputsModel;
 class QAbstractItemModel;
@@ -31,7 +32,7 @@ class TaskPanel : public Plasma::Containment
     Q_PROPERTY(QWindow *panel READ panel WRITE setPanel NOTIFY panelChanged)
 
 public:
-    TaskPanel(QObject *parent, const QVariantList &args);
+    TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     QWindow *panel();
     void setPanel(QWindow *panel);
