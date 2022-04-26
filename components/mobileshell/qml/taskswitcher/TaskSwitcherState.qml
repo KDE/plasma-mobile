@@ -221,7 +221,6 @@ QtObject {
             taskSwitcher.instantHide();
             
             if (root.wasInActiveTask) {
-                taskSwitcher.tasksModel.requestLastActivatedReorderDelay(5000);
                 taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             }
         }

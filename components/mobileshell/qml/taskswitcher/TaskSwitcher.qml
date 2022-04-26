@@ -83,9 +83,6 @@ Item {
         taskSwitcherState.wasInActiveTask = tasksModel.activeTask.row >= 0;
         taskSwitcherState.currentlyBeingOpened = true;
 
-        // disable reorder feature and the relative delay
-        taskSwitcher.tasksModel.requestLastActivatedReorderDelay(0);
-
         // skip to first active task
         if (taskSwitcherState.wasInActiveTask) {
             taskSwitcherState.goToTaskIndex(tasksModel.activeTask.row);
