@@ -27,7 +27,7 @@ QtObject {
     // 
     // xPosition:
     // We start at 0, which is the position at which the first task in the task switcher is centered on the screen.
-    // Increasing xPosition results in the task switcher moving forward (to the second task, third task, etc).
+    // Decreasing xPosition results in the task switcher moving forward (to the second task, third task, etc), being the layout direction Right to Left.
     //
     // yPosition:
     // 0 - Start of swipe up gesture, if window was showing, the thumbnail is the size of it
@@ -43,7 +43,7 @@ QtObject {
     property real oldXPosition: 0
     property real oldYPosition: 0
     onXPositionChanged: {
-        movingRight = xPosition > oldXPosition;
+        movingRight = xPosition < oldXPosition;
         oldXPosition = xPosition;
     }
     onYPositionChanged: {
@@ -63,7 +63,7 @@ QtObject {
     property bool currentlyBeingOpened: false
     
     readonly property int currentTaskIndex: {
-        let candidateIndex = Math.round(xPosition / (taskSpacing + taskWidth));        
+        let candidateIndex = Math.round(-xPosition / (taskSpacing + taskWidth));
         return Math.max(0, Math.min(taskSwitcher.tasksCount - 1, candidateIndex));
     }
     
@@ -139,7 +139,7 @@ QtObject {
     
     // get the xPosition where the task will be centered on the screen
     function xPositionFromTaskIndex(index) {
-        return index * (taskWidth + taskSpacing);
+        return -index * (taskWidth + taskSpacing);
     }
     
     // instantly go to the task index
@@ -173,7 +173,7 @@ QtObject {
             animateGoToTaskIndex(currentTaskIndex, duration);
         } else {
             let currentTaskIndexPosition = xPositionFromTaskIndex(currentTaskIndex);
-            if (xPosition < currentTaskIndexPosition) {
+            if (xPosition > currentTaskIndexPosition) {
                 if (movingRight) {
                     animateGoToTaskIndex(currentTaskIndex, duration);
                 } else {

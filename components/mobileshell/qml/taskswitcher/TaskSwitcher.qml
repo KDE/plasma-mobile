@@ -87,7 +87,7 @@ Item {
         if (taskSwitcherState.wasInActiveTask) {
             taskSwitcherState.goToTaskIndex(tasksModel.activeTask.row);
         } else {
-            taskSwitcherState.goToTaskIndex(tasksCount - 1);
+            taskSwitcherState.goToTaskIndex(0);
         }
         
         // show task switcher, hide all running apps
