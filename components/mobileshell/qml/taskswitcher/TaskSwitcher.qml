@@ -73,6 +73,14 @@ Item {
         oldTasksCount = tasksCount;
     }
 
+    Timer {
+        id: reorderTimer
+
+        interval: 5000
+
+        onTriggered: tasksModel.taskReorderingEnabled = true
+    }
+
 //BEGIN functions
 
     function show(animation) {
@@ -82,6 +90,9 @@ Item {
         taskSwitcherState.xPosition = 0;
         taskSwitcherState.wasInActiveTask = tasksModel.activeTask.row >= 0;
         taskSwitcherState.currentlyBeingOpened = true;
+
+        reorderTimer.stop();
+        tasksModel.taskReorderingEnabled = false;
 
         // skip to first active task
         if (taskSwitcherState.wasInActiveTask) {
@@ -140,6 +151,12 @@ Item {
         }
         
         instantHide();
+
+        if (taskSwitcherState.wasInActiveTask) {
+            reorderTimer.restart();
+        } else {
+            tasksModel.taskReorderingEnabled = true;
+        }
     }
     
     function minimizeAll() {
@@ -156,6 +173,7 @@ Item {
         easing.type: Easing.InOutQuad
         onFinished: {
             root.visible = false;
+            tasksModel.taskReorderingEnabled = true;
         }
     }
 

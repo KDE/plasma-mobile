@@ -46,6 +46,7 @@ Item {
     }
     
     function activateApp() {
+        taskSwitcherState.wasInActiveTask = false;
         taskSwitcher.activateWindow(model.index);
     }
 //END functions
