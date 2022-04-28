@@ -5,7 +5,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.12 as Kirigami
@@ -18,14 +18,14 @@ import "../../components" as Components
 
 QuickSettingsDelegate {
     id: root
-
+    
     padding: PlasmaCore.Units.smallSpacing * 2
     iconItem: icon
     
     // scale animation on press
     zoomScale: mouseArea.pressed ? 0.9 : 1
     
-    background: Rectangle {
+    background: Rectangle {       
         anchors.fill: parent
         radius: PlasmaCore.Units.smallSpacing
         border.width: 1
@@ -65,16 +65,18 @@ QuickSettingsDelegate {
                 Layout.fillWidth: true
                 elide: Text.ElideRight
                 text: root.text
-                font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 0.8 // TODO base height off of size of delegate
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8 // TODO base height off of size of delegate
                 font.weight: Font.Bold
             }
-            PlasmaComponents.Label {
-                Layout.fillWidth: true
-                elide: Text.ElideRight
+            
+            Components.MarqueeLabel {
                 // if no status is given, just use On/Off
-                text: root.status ? root.status : (root.enabled ? i18n("On") : i18n("Off"))
+                inputText: status ? status : (enabled ? i18n("On") : i18n("Off"))
+                rightPadding: root.rightPadding
+                
+                Layout.fillWidth: true
                 opacity: 0.6
-                font.pixelSize: PlasmaCore.Theme.defaultFont.pixelSize * 0.8
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8
             }
         }
     }
