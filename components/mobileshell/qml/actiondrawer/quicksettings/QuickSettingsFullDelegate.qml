@@ -65,18 +65,18 @@ QuickSettingsDelegate {
                 Layout.fillWidth: true
                 elide: Text.ElideRight
                 text: root.text
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8 // TODO base height off of size of delegate
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.75 // TODO base height off of size of delegate
                 font.weight: Font.Bold
             }
             
             Components.MarqueeLabel {
                 // if no status is given, just use On/Off
                 inputText: status ? status : (enabled ? i18n("On") : i18n("Off"))
-                rightPadding: root.rightPadding
+                rightPadding: 0 // root.rightPadding
+                opacity: 0.6
                 
                 Layout.fillWidth: true
-                opacity: 0.6
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.75
             }
         }
     }

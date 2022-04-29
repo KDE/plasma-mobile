@@ -27,9 +27,9 @@ PlasmaComponents.Label {
     property int step: 0
     
     TextMetrics {
-      id: txtMeter
-      font.pointSize: root.font.pointSize
-      text: inputText
+        id: txtMeter
+        font.pointSize: root.font.pointSize
+        text: inputText
     }
     
     Timer {              
