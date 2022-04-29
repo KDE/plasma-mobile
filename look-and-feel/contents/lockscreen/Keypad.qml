@@ -8,9 +8,12 @@ import QtQuick 2.12
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
 import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
@@ -188,6 +191,7 @@ Rectangle {
                             anchors.fill: parent
                             onPressedChanged: {
                                 if (pressed) {
+                                    MobileShell.Haptics.buttonVibrate();
                                     parent.color = keypadRoot.buttonPressedColor;
                                 } else {
                                     parent.color = keypadRoot.buttonColor;
@@ -205,6 +209,7 @@ Rectangle {
                             }
                             onPressAndHold: {
                                 if (modelData === "R") {
+                                    MobileShell.Haptics.buttonVibrate();
                                     passwordBar.clear();
                                 }
                             }

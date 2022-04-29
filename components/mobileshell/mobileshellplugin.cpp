@@ -19,6 +19,7 @@
 
 #include "taskswitcher/displaysmodel.h"
 
+#include "haptics.h"
 #include "mobileshellsettings.h"
 #include "quicksetting.h"
 #include "quicksettingsmodel.h"
@@ -36,6 +37,10 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<ShellUtil>(uri, 1, 0, "ShellUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return ShellUtil::instance();
+    });
+
+    qmlRegisterSingletonType<Haptics>(uri, 1, 0, "Haptics", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return Haptics::self();
     });
 
     qmlRegisterSingletonType<MobileShellSettings>(uri, 1, 0, "MobileShellSettings", [](QQmlEngine *, QJSEngine *) -> QObject * {

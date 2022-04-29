@@ -5,8 +5,10 @@
  */
 
 import QtQuick 2.8
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Item {
     id: root
@@ -19,6 +21,7 @@ Item {
     property alias circleVisiblity: iconCircle.visible
     property int fontSize: config.fontSize
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
+    
     signal clicked
 
     activeFocusOnTab: true
@@ -102,6 +105,7 @@ Item {
         id: mouseArea
         hoverEnabled: true
         onClicked: root.clicked()
+        onPressed: MobileShell.Haptics.buttonVibrate();
         anchors.fill: parent
     }
 

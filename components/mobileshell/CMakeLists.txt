@@ -6,6 +6,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
                                  
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
+    haptics.cpp
     mobileshellsettings.cpp
     quicksetting.cpp
     quicksettingsmodel.cpp
@@ -37,6 +38,7 @@ target_link_libraries(mobileshellplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
+        Qt::Feedback
         KF5::ConfigWidgets # for KStandardAction
         KF5::KIOGui
         KF5::Plasma

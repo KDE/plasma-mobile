@@ -14,12 +14,16 @@
 class MobileShellSettings : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool vibrationsEnabled READ vibrationsEnabled WRITE setVibrationsEnabled NOTIFY vibrationsEnabledChanged)
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
 
 public:
     static MobileShellSettings *self();
 
     MobileShellSettings(QObject *parent = nullptr);
+
+    bool vibrationsEnabled() const;
+    void setVibrationsEnabled(bool vibrationsEnabled);
 
     bool navigationPanelEnabled() const;
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
@@ -31,6 +35,7 @@ public:
     void setDisabledQuickSettings(QList<QString> &list);
 
 Q_SIGNALS:
+    void vibrationsEnabledChanged();
     void navigationPanelEnabledChanged();
     void enabledQuickSettingsChanged();
     void disabledQuickSettingsChanged();

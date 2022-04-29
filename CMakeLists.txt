@@ -46,6 +46,7 @@ find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
     Qml
     Quick
     QuickCompiler
+    Feedback
 )
 
 if (QUICK_COMPILER)

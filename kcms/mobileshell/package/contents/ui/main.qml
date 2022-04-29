@@ -34,6 +34,30 @@ KCM.SimpleKCM {
                 spacing: 0
                 
                 MobileForm.FormCardHeader {
+                    title: i18n("General")
+                }
+                
+                MobileForm.FormSwitchDelegate {
+                    text: i18n("Shell Vibrations")
+                    description: i18n("Whether to have vibrations enabled in the shell.")
+                    checked: !MobileShell.MobileShellSettings.vibrationsEnabled
+                    onCheckedChanged: {
+                        if (checked != !MobileShell.MobileShellSettings.vibrationsEnabled) {
+                            MobileShell.MobileShellSettings.vibrationsEnabled = !checked;
+                        }
+                    }
+                }
+            }
+        }
+        
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            
+            contentItem: ColumnLayout {
+                spacing: 0
+                
+                MobileForm.FormCardHeader {
                     title: i18n("Navigation Panel")
                 }
                 

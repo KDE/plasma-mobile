@@ -61,6 +61,9 @@ Item {
             startMouseX = oldMouseX = mouse.y;
             startMouseY = oldMouseY = mouse.y;
             activeButton = icons.childAt(mouse.x, mouse.y);
+            if (activeButton && activeButton.enabled) {
+                MobileShell.Haptics.buttonVibrate();
+            }
         }
         
         onPositionChanged: {

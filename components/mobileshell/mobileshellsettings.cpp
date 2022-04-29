@@ -26,12 +26,26 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
         if (group.name() == GENERAL_CONFIG_GROUP) {
+            Q_EMIT vibrationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
         } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
             Q_EMIT enabledQuickSettingsChanged();
             Q_EMIT disabledQuickSettingsChanged();
         }
     });
+}
+
+bool MobileShellSettings::vibrationsEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("vibrationsEnabled", true);
+}
+
+void MobileShellSettings::setVibrationsEnabled(bool vibrationsEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("vibrationsEnabled", vibrationsEnabled, KConfigGroup::Notify);
+    m_config->sync();
 }
 
 bool MobileShellSettings::navigationPanelEnabled() const
