@@ -13,6 +13,7 @@ import QtQuick.Controls 2.2 as QQC2
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Item {
     id: delegate
@@ -195,7 +196,7 @@ Item {
                 clip: true
                 
                 // scale animation on press
-                property real zoomScale: tapHandler.pressed ? 0.9 : 1
+                property real zoomScale: (MobileShell.MobileShellSettings.animationsEnabled && tapHandler.pressed) ? 0.9 : 1
                 Behavior on zoomScale {
                     NumberAnimation {
                         duration: 200

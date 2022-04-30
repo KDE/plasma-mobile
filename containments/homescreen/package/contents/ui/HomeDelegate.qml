@@ -114,8 +114,8 @@ ContainmentLayoutManager.ItemContainer {
         NumberAnimation on zoomScale {
             id: shrinkAnim
             running: false
-            duration: 80
-            to: 0.8
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
+            to: MobileShell.MobileShellSettings.animationsEnabled ? 0.8 : 1
             onFinished: {
                 if (!mouseArea.pressed) {
                     growAnim.restart();
@@ -126,7 +126,7 @@ ContainmentLayoutManager.ItemContainer {
         NumberAnimation on zoomScale {
             id: growAnim
             running: false
-            duration: 80
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
             to: 1
             onFinished: {
                 if (mouseArea.launchAppRequested) {

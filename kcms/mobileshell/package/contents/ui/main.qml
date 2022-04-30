@@ -40,10 +40,21 @@ KCM.SimpleKCM {
                 MobileForm.FormSwitchDelegate {
                     text: i18n("Shell Vibrations")
                     description: i18n("Whether to have vibrations enabled in the shell.")
-                    checked: !MobileShell.MobileShellSettings.vibrationsEnabled
+                    checked: MobileShell.MobileShellSettings.vibrationsEnabled
                     onCheckedChanged: {
                         if (checked != !MobileShell.MobileShellSettings.vibrationsEnabled) {
                             MobileShell.MobileShellSettings.vibrationsEnabled = !checked;
+                        }
+                    }
+                }
+                
+                MobileForm.FormSwitchDelegate {
+                    text: i18n("Animations")
+                    description: i18n("If this is off, animations will be reduced as much as possible.")
+                    checked: MobileShell.MobileShellSettings.animationsEnabled
+                    onCheckedChanged: {
+                        if (checked != !MobileShell.MobileShellSettings.animationsEnabled) {
+                            MobileShell.MobileShellSettings.animationsEnabled = !checked;
                         }
                     }
                 }

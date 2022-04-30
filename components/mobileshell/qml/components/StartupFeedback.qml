@@ -136,11 +136,49 @@ MouseArea { // use mousearea to ensure clicks don't go behind
             ]
 
             transitions: [
+            
+                // no-animation mode transition
                 Transition {
                     from: "closed"
+                    enabled: !MobileShell.MobileShellSettings.animationsEnabled
+                    SequentialAnimation {
+                        ScriptAction {
+                            script: {
+                                root.opacity = 0;
+                                root.visible = true;
+                                background.scale = 1;
+                                iconParent.scale = 1;
+                                backgroundParent.x = 0;
+                                backgroundParent.y = 0;
+                            }
+                        }
+                        
+                        NumberAnimation {
+                            target: root
+                            properties: "opacity"
+                            from: 0
+                            to: 1
+                            duration: PlasmaCore.Units.longDuration
+                            easing.type: Easing.OutCubic
+                        }
+
+                        ScriptAction {
+                            script: {
+                                // close the app drawer after it isn't visible
+                                MobileShell.HomeScreenControls.resetHomeScreenPosition();
+                            }
+                        }
+                    }
+                },
+                
+                // full animation transition
+                Transition {
+                    from: "closed"
+                    enabled: MobileShell.MobileShellSettings.animationsEnabled
                     SequentialAnimation {
                         ScriptAction {
                             script: { 
+                                root.opacity = 1;
                                 root.visible = true;
                             }
                         }

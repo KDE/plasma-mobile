@@ -201,7 +201,7 @@ QtObject {
         target: root
         property: "yPosition"
         to: openedYPosition 
-        duration: 300
+        duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
         easing.type: Easing.OutBack
         
         onFinished: {
@@ -213,7 +213,7 @@ QtObject {
         target: root 
         property: "yPosition"
         to: 0
-        duration: PlasmaCore.Units.longDuration
+        duration: MobileShell.MobileShellSettings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
         easing.type: Easing.InOutQuad
         
         onFinished: {
@@ -230,7 +230,7 @@ QtObject {
         target: root 
         property: "yPosition"
         to: 0
-        duration: 300
+        duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
         easing.type: Easing.OutQuint
         
         onFinished: {
