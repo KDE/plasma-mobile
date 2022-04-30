@@ -10,25 +10,22 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 /**
- * This is a simple marquee (flowing) label based on PlasmaComponents Label.Array()
- * 
- * 
+ * This is a simple marquee (flowing) label based on PlasmaComponents Label.
  */
 PlasmaComponents.Label {
     id: root
                 
     required property string inputText
-    required property real rightPadding
     
-    property int interval: PlasmaCore.Units.veryLongDuration
+    property int interval: PlasmaCore.Units.longDuration
     
-    readonly property int charactersOverflow: Math.ceil((txtMeter.width - parent.width + 2*rightPadding) / font.pointSize)
+    readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / inputText.length))
     readonly property string displayedText: inputText.substring(step, step + inputText.length - charactersOverflow)
     property int step: 0
     
     TextMetrics {
         id: txtMeter
-        font.pointSize: root.font.pointSize
+        font: root.font
         text: inputText
     }
     
@@ -41,16 +38,16 @@ PlasmaComponents.Label {
         onTriggered: {
             if (paused) {
                 if (step != 0) {
+                    interval = PlasmaCore.Units.veryLongDuration;
                     step = 0;
                 } else {
-                    interval /= 3;
+                    interval = root.interval;
                     paused = false;
-                }                        
+                }
             } else {
                 step = (step + 1) % inputText.length;
-                    
                 if (step === charactersOverflow) {
-                    interval *= 3;
+                    interval = PlasmaCore.Units.veryLongDuration * 3;
                     paused = true;
                 }
             }
