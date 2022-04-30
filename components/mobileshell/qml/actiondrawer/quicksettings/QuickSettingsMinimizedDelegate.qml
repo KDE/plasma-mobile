@@ -22,7 +22,7 @@ QuickSettingsDelegate {
     iconItem: icon
     
     // scale animation on press
-    zoomScale: mouseArea.pressed ? 0.9 : 1
+    zoomScale: (MobileShell.MobileShellSettings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
     
     background: Rectangle {
         radius: PlasmaCore.Units.smallSpacing

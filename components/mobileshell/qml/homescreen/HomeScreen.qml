@@ -114,27 +114,30 @@ Item {
         Component.onCompleted: zoomIn()
         
         function zoomIn() {
+            // don't use check animationsEnabled here, so we ensure the scale and opacity is always 1 when disabled
             scaleAnim.to = 1;
             scaleAnim.restart();
             opacityAnim.to = 1;
             opacityAnim.restart();
         }
         function zoomOut() {
-            scaleAnim.to = 0.8;
-            scaleAnim.restart();
-            opacityAnim.to = 0;
-            opacityAnim.restart();
+            if (MobileShell.MobileShellSettings.animationsEnabled) {
+                scaleAnim.to = 0.8;
+                scaleAnim.restart();
+                opacityAnim.to = 0;
+                opacityAnim.restart();
+            }
         }
         
         NumberAnimation on opacity {
             id: opacityAnim
-            duration: 300
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
             running: false
         }
         
         NumberAnimation on zoomScale {
             id: scaleAnim
-            duration: 600
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 600 : 0
             running: false
             easing.type: Easing.OutExpo
         }
