@@ -62,6 +62,9 @@ QtObject {
     // whether we are in a swipe up gesture to open the task switcher
     property bool currentlyBeingOpened: false
     
+    // whether we are in a swipe left/right gesture to walk through tasks
+    property bool scrollingTasks: false
+    
     readonly property int currentTaskIndex: {
         let candidateIndex = Math.round(-xPosition / (taskSpacing + taskWidth));
         return Math.max(0, Math.min(taskSwitcher.tasksCount - 1, candidateIndex));
@@ -107,10 +110,10 @@ QtObject {
         let finalScale = Math.max(0, Math.min(maxScale, maxScale - subtract));
         
         // animate scale only if we are *not* opening from the homescreen
-        if (wasInActiveTask || !currentlyBeingOpened) {
+        if ((wasInActiveTask || !currentlyBeingOpened) && !scrollingTasks) {
             return finalScale;
         }
-        return 1;
+        return scrollingTasks ? maxScale : 1;
     }
     
     // ~~ signals and functions ~~
@@ -159,7 +162,7 @@ QtObject {
         cancelAnimations();
 
         // update vertical state
-        if (movingUp || root.yPosition >= openedYPosition) {
+        if ((movingUp || root.yPosition >= openedYPosition) && !scrollingTasks) {
             // open task switcher and stay
             openAnim.restart();
         } else {
@@ -197,20 +200,20 @@ QtObject {
         easing.type: Easing.OutBack
     }
     
-    property var openAnim: NumberAnimation {
+    property var openAnim: NumberAnimation { 
         target: root
         property: "yPosition"
-        to: openedYPosition 
+        to: openedYPosition
         duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
-        easing.type: Easing.OutBack
+        easing.type: Easing.OutBack     
         
         onFinished: {
             root.currentlyBeingOpened = false;
         }
     }
-        
+    
     property var closeAnim: NumberAnimation { 
-        target: root 
+        target: root
         property: "yPosition"
         to: 0
         duration: MobileShell.MobileShellSettings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
@@ -218,8 +221,9 @@ QtObject {
         
         onFinished: {
             root.currentlyBeingOpened = false;
+            scrollingTasks = false;
             taskSwitcher.instantHide();
-            
+
             if (root.wasInActiveTask) {
                 taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             }

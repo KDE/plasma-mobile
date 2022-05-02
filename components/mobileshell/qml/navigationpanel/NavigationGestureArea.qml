@@ -21,11 +21,10 @@ Item {
     id: root
 
     property var taskSwitcher
-    
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent
-        drag.filterChildren: true
         
         // drag gesture
         property int oldMouseY: 0
@@ -33,37 +32,36 @@ Item {
         property int oldMouseX: 0
         property int startMouseX: 0
         property bool opening: false
+
+        enabled: !taskSwitcher.visible
         
         onPressed: {
-            startMouseX = oldMouseX = mouse.y;
+            startMouseX = oldMouseX = mouse.x;
             startMouseY = oldMouseY = mouse.y;
         }
-        
-        onPositionChanged: {
-            if (!opening && Math.abs(startMouseY - oldMouseY) < root.height) {
-                oldMouseY = mouse.y;
-                return;
-            } else if (mouseArea.pressed) {
-                opening = true;
-            }
 
-            if (root.taskSwitcher.visible) {
+        onPositionChanged: {
+            if (root.taskSwitcher.visible || taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
                 // update task switcher drag
                 let offsetY = (mouse.y - oldMouseY) * 0.5; // we want to make the gesture take a longer swipe than it being pixel perfect
                 let offsetX = (mouse.x - oldMouseX) * 0.7; // we want to make the gesture not too hard to swipe, but not too easy
                 taskSwitcher.taskSwitcherState.yPosition = Math.max(0, taskSwitcher.taskSwitcherState.yPosition - offsetY);
-                taskSwitcher.taskSwitcherState.xPosition -= offsetX;
+                taskSwitcher.taskSwitcherState.xPosition = taskSwitcher.taskSwitcherState.xPosition - offsetX;
             }
 
-            if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
-                // start task switcher gesture
+            if (!root.taskSwitcher.visible && Math.abs(startMouseX - mouse.x) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount && taskSwitcher.tasksModel.activeTask.row >= 0){
+                // start switch task gesture
+                taskSwitcher.taskSwitcherState.scrollingTasks = true;
+                root.taskSwitcher.show(false);
+            } else if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
+                // start task switcher opening gesture
                 root.taskSwitcher.show(false);
             }
-            
+
             oldMouseY = mouse.y;
             oldMouseX = mouse.x;
         }
-        
+
         onReleased: {
             if (taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
                 taskSwitcher.taskSwitcherState.updateState();
