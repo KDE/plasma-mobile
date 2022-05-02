@@ -65,6 +65,7 @@ Item {
         id: control
         width: parent.width
         height: parent.height
+        enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
         
         // set cursor shape here, since taphandler seems to not be able to do it
         cursorShape: Qt.PointingHandCursor
@@ -80,6 +81,8 @@ Item {
         DragHandler {
             id: dragHandler
             target: parent
+            
+            enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
             
             yAxis.enabled: true
             xAxis.enabled: false
@@ -238,6 +241,7 @@ Item {
                     
                     TapHandler {
                         id: tapHandler
+                        enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
                         onTapped: delegate.activateApp()
                     }
                 }

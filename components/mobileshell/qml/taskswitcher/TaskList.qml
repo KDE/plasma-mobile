@@ -28,6 +28,8 @@ Item {
     
     // taphandler activates even if delegate touched
     TapHandler {
+        enabled: !taskSwitcherState.currentlyBeingOpened
+        
         onTapped: {
             // if tapped on the background, then hide
             if (root.childAt(eventPoint.position.x, eventPoint.position.y) === null) {
