@@ -67,13 +67,13 @@ void MobileShellSettings::setVibrationDuration(int vibrationDuration)
 qreal MobileShellSettings::vibrationIntensity() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("vibrationDuration", 0.5);
+    return group.readEntry("vibrationIntensity", 0.5);
 }
 
 void MobileShellSettings::setVibrationIntensity(qreal vibrationIntensity)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    group.writeEntry("vibrationDuration", vibrationIntensity, KConfigGroup::Notify);
+    group.writeEntry("vibrationIntensity", vibrationIntensity, KConfigGroup::Notify);
     m_config->sync();
 }
 
