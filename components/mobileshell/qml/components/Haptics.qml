@@ -16,8 +16,8 @@ QtObject {
     function buttonVibrate() {
         if (MobileShell.MobileShellSettings.vibrationsEnabled) {
             if (hapticsEffect.status == Loader.Ready) {
-                hapticsEffect.item.intensity = 0.5;
-                hapticsEffect.item.duration = 100;
+                hapticsEffect.item.intensity = MobileShell.MobileShellSettings.vibrationIntensity;
+                hapticsEffect.item.duration = MobileShell.MobileShellSettings.vibrationDuration;
                 hapticsEffect.item.start();
             }
         }

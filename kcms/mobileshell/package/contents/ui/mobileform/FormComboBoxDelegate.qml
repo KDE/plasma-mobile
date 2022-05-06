@@ -17,8 +17,28 @@ AbstractFormDelegate {
     
     // TODO
     property string currentValue: ""
+    property alias dialogDelegate: repeater.delegate
+    property alias model: repeater.model
     
     Layout.fillWidth: true
+    
+    onClicked: dialog.open()
+    
+    Kirigami.Dialog {
+        id: dialog
+        showCloseButton: false
+        title: root.text
+        
+        ColumnLayout {
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.View
+            spacing: 0
+            
+            Repeater {
+                id: repeater
+            }
+        }
+    }
     
     contentItem: RowLayout {
         ColumnLayout {

@@ -37,18 +37,21 @@ KCM.SimpleKCM {
                     title: i18n("General")
                 }
                 
-                MobileForm.FormSwitchDelegate {
+                MobileForm.FormButtonDelegate {
+                    id: shellVibrationsButton
                     text: i18n("Shell Vibrations")
-                    description: i18n("Whether to have vibrations enabled in the shell.")
-                    checked: MobileShell.MobileShellSettings.vibrationsEnabled
-                    onCheckedChanged: {
-                        if (checked != MobileShell.MobileShellSettings.vibrationsEnabled) {
-                            MobileShell.MobileShellSettings.vibrationsEnabled = checked;
-                        }
-                    }
+                    onClicked: kcm.push("VibrationForm.qml")
+                }
+                
+                Kirigami.Separator {
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.fillWidth: true
+                    opacity: (!shellVibrationsButton.controlHovered && !animationsSwitch.controlHovered) ? 0.5 : 0
                 }
                 
                 MobileForm.FormSwitchDelegate {
+                    id: animationsSwitch
                     text: i18n("Animations")
                     description: i18n("If this is off, animations will be reduced as much as possible.")
                     checked: MobileShell.MobileShellSettings.animationsEnabled
