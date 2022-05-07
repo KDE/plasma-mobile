@@ -39,11 +39,13 @@ Item {
     
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
-    
-    readonly property int settingsPerPage: Math.max(6, Math.floor(width/columnWidth) * 2)
-    readonly property real quickSettingsHeight: 2 * rowHeight
 
     readonly property MobileShell.QuickSettingsModel quickSettingsModel: MobileShell.QuickSettingsModel {}
+    
+    readonly property int rowCount: Math.floor((Window.height * 60/100) / rowHeight)
+    readonly property int columnCount: Math.floor(width/columnWidth)
+    readonly property int pageSize: rowCount * columnCount
+    readonly property int quickSettingsCount: quickSettingsModel.count
     
     
     function resetSwipeView() {
@@ -77,10 +79,10 @@ Item {
             id: swipeView
 
             Layout.fillWidth: true
-            Layout.preferredHeight: quickSettingsHeight
+            Layout.minimumHeight: Math.min(quickSettingsCount / columnCount * rowHeight, rowCount * rowHeight)
 
             Repeater {
-                model: Math.ceil(quickSettingsModel.count / settingsPerPage)
+                model: Math.ceil(quickSettingsCount / pageSize)
                 delegate: Flow {
                     id: flow
                     spacing: 0
@@ -90,8 +92,8 @@ Item {
                     Repeater {
                         model: MobileShell.PaginateModel {
                             sourceModel: quickSettingsModel
-                            pageSize: settingsPerPage
-                            firstItem: settingsPerPage * flow.index
+                            pageSize: root.pageSize
+                            firstItem: pageSize * flow.index
                         }
                         delegate: Components.BaseItem {
 
@@ -120,27 +122,24 @@ Item {
                 }
             }
         }
-        PageIndicator {
-            id: indicator
-
-            count: swipeView.count
-            currentIndex: swipeView.currentIndex
-
+        Loader {
+            id: indicatorLoader
+            active: swipeView.count > 1
+            
             Layout.alignment: Qt.AlignHCenter
             
-            delegate: Rectangle {
-                implicitWidth: 8
-                implicitHeight: 8
+            sourceComponent: PageIndicator {
+                count: swipeView.count
+                currentIndex: swipeView.currentIndex
+                    
+                delegate: Rectangle {
+                    implicitWidth: 8
+                    implicitHeight: 8
 
-                radius: width / 2
-                color: PlasmaCore.Theme.buttonFocusColor
+                    radius: width / 2
+                    color: PlasmaCore.Theme.disabledTextColor
 
-                opacity: index === indicator.currentIndex ? 0.95 : 0.45
-
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: MobileShell.MobileShellSettings.animationsEnabled ? 100 : 0
-                    }
+                    opacity: index === currentIndex ? 0.95 : 0.45
                 }
             }
         }
