@@ -8,6 +8,7 @@ set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     mobileshellsettings.cpp
     quicksetting.cpp
+    paginatemodel.cpp
     quicksettingsmodel.cpp
     savedquicksettings.cpp
     savedquicksettingsmodel.cpp

@@ -20,6 +20,7 @@
 #include "taskswitcher/displaysmodel.h"
 
 #include "mobileshellsettings.h"
+#include "paginatemodel.h"
 #include "quicksetting.h"
 #include "quicksettingsmodel.h"
 #include "shellutil.h"
@@ -44,6 +45,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterType<QuickSetting>(uri, 1, 0, "QuickSetting");
     qmlRegisterType<QuickSettingsModel>(uri, 1, 0, "QuickSettingsModel");
+    qmlRegisterType<PaginateModel>(uri, 1, 0, "PaginateModel");
     qmlRegisterType<SavedQuickSettings>(uri, 1, 0, "SavedQuickSettings");
     qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
     qmlRegisterSingletonType<WindowUtil>(uri, 1, 0, "WindowUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {

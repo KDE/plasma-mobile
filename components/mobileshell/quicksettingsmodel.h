@@ -21,15 +21,19 @@ class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
     Q_INTERFACES(QQmlParserStatus)
     QML_ELEMENT
 
+    Q_PROPERTY(int count READ rowCount NOTIFY countChanged)
+
 public:
     QuickSettingsModel(QObject *parent = nullptr);
 
     QVariant data(const QModelIndex &index, int role) const override;
-    int rowCount(const QModelIndex &parent) const override;
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QHash<int, QByteArray> roleNames() const override;
 
     void classBegin() override;
     void componentComplete() override;
+
+    Q_SIGNAL void countChanged();
 
 private:
     void loadQuickSettings();

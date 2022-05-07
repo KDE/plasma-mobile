@@ -27,7 +27,7 @@ Item {
     
     readonly property real columns: Math.round(Util.applyMinMaxRange(3, 6, width / intendedColumnWidth))
     readonly property real columnWidth: Math.floor(width / columns)
-    readonly property real minimizedColumns: Math.round(Util.applyMinMaxRange(5, 8, width / intendedMinimizedColumnWidth))
+    readonly property int minimizedColumns: Math.round(Util.applyMinMaxRange(5, 8, width / intendedMinimizedColumnWidth))
     readonly property real minimizedColumnWidth: Math.floor(width / minimizedColumns)
     
     readonly property real rowHeight: columnWidth * 0.7
@@ -40,11 +40,31 @@ Item {
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
     
-    readonly property var quickSettingsModel: MobileShell.QuickSettingsModel {}
+    readonly property int settingsPerPage: Math.max(6, Math.floor(width/columnWidth) * 2)
+    readonly property real quickSettingsHeight: 2 * rowHeight
+
+    readonly property MobileShell.QuickSettingsModel quickSettingsModel: MobileShell.QuickSettingsModel {}
+    
+    
+    function resetSwipeView() {
+        swipeView.currentIndex = 0;
+    }
+
+    // return to the first page when the action drawer is closed
+    Connections {
+        target: actionDrawer
+
+        onOpenedChanged: {
+            if(!actionDrawer.opened) {
+                resetSwipeView();
+            }
+        }
+    }
     
     // view when fully open
     ColumnLayout {
         id: fullView
+        height: 1
         opacity: root.fullViewProgress
         visible: opacity !== 0
         transform: Translate { y: (1 - fullView.opacity) * root.rowHeight }
@@ -53,39 +73,77 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         
-        // TODO add pages
-        Flow {
-            id: flow
-            spacing: 0
+        SwipeView {
+            id: swipeView
+
             Layout.fillWidth: true
-            
+            Layout.preferredHeight: quickSettingsHeight
+
             Repeater {
-                model: root.quickSettingsModel
-                delegate: Components.BaseItem {
-                    required property var modelData
+                model: Math.ceil(quickSettingsModel.count / settingsPerPage)
+                delegate: Flow {
+                    id: flow
+                    spacing: 0
                     
-                    height: root.rowHeight
-                    width: root.columnWidth
-                    padding: PlasmaCore.Units.smallSpacing
+                    required property int index
                     
-                    contentItem: QuickSettingsFullDelegate {
-                        restrictedPermissions: actionDrawer.restrictedPermissions
-                        
-                        text: modelData.text
-                        status: modelData.status
-                        icon: modelData.icon
-                        enabled: modelData.enabled
-                        settingsCommand: modelData.settingsCommand
-                        toggleFunction: modelData.toggle
-                        
-                        onCloseRequested: {
-                            actionDrawer.close();
+                    Repeater {
+                        model: MobileShell.PaginateModel {
+                            sourceModel: quickSettingsModel
+                            pageSize: settingsPerPage
+                            firstItem: settingsPerPage * flow.index
+                        }
+                        delegate: Components.BaseItem {
+
+                            required property var modelData
+                            
+                            height: root.rowHeight
+                            width: root.columnWidth
+                            padding: PlasmaCore.Units.smallSpacing
+
+                            contentItem: QuickSettingsFullDelegate {
+                                restrictedPermissions: actionDrawer.restrictedPermissions
+
+                                text: modelData.text
+                                status: modelData.status
+                                icon: modelData.icon
+                                enabled: modelData.enabled
+                                settingsCommand: modelData.settingsCommand
+                                toggleFunction: modelData.toggle
+
+                                onCloseRequested: {
+                                    actionDrawer.close();
+                                }
+                            }
                         }
                     }
                 }
             }
         }
-        
+        PageIndicator {
+            id: indicator
+
+            count: swipeView.count
+            currentIndex: swipeView.currentIndex
+
+            Layout.alignment: Qt.AlignHCenter
+            
+            delegate: Rectangle {
+                implicitWidth: 8
+                implicitHeight: 8
+
+                radius: width / 2
+                color: PlasmaCore.Theme.buttonFocusColor
+
+                opacity: index === indicator.currentIndex ? 0.95 : 0.45
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: MobileShell.MobileShellSettings.animationsEnabled ? 100 : 0
+                    }
+                }
+            }
+        }
         BrightnessItem {
             id: brightnessItem
             Layout.topMargin: PlasmaCore.Units.smallSpacing * 2
@@ -109,16 +167,17 @@ Item {
         anchors.right: parent.right
         
         Repeater {
-            model: root.quickSettingsModel
+            model: MobileShell.PaginateModel {
+                sourceModel: quickSettingsModel
+                pageSize: minimizedColumns
+            }
             delegate: Components.BaseItem {
                 required property var modelData
-                required property var index
                 
                 implicitHeight: root.minimizedRowHeight
                 implicitWidth: root.minimizedColumnWidth
                 horizontalPadding: (width - PlasmaCore.Units.gridUnit * 3) / 2
                 verticalPadding: (height - PlasmaCore.Units.gridUnit * 3) / 2
-                visible: index <= root.minimizedColumns
                 
                 contentItem: QuickSettingsMinimizedDelegate {
                     restrictedPermissions: actionDrawer.restrictedPermissions
