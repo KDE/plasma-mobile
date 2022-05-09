@@ -42,14 +42,16 @@ Item {
 
     readonly property MobileShell.QuickSettingsModel quickSettingsModel: MobileShell.QuickSettingsModel {}
     
-    readonly property int rowCount: Math.floor((Window.height * 60/100) / rowHeight)
+    readonly property real pageHeight: (Window.height * 60/100)
+    readonly property int rowCount: Math.floor(pageHeight / rowHeight)
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int pageSize: rowCount * columnCount
     readonly property int quickSettingsCount: quickSettingsModel.count
-    
-    
+        
     function resetSwipeView() {
-        swipeView.currentIndex = 0;
+        if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
+            pageLoader.item.view.currentIndex = 0;
+        }
     }
 
     // return to the first page when the action drawer is closed
@@ -75,77 +77,18 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         
-        SwipeView {
-            id: swipeView
-
-            Layout.fillWidth: true
-            Layout.minimumHeight: Math.min(quickSettingsCount / columnCount * rowHeight, rowCount * rowHeight)
-
-            Repeater {
-                model: Math.ceil(quickSettingsCount / pageSize)
-                delegate: Flow {
-                    id: flow
-                    spacing: 0
-                    
-                    required property int index
-                    
-                    Repeater {
-                        model: MobileShell.PaginateModel {
-                            sourceModel: quickSettingsModel
-                            pageSize: root.pageSize
-                            firstItem: pageSize * flow.index
-                        }
-                        delegate: Components.BaseItem {
-
-                            required property var modelData
-                            
-                            height: root.rowHeight
-                            width: root.columnWidth
-                            padding: PlasmaCore.Units.smallSpacing
-
-                            contentItem: QuickSettingsFullDelegate {
-                                restrictedPermissions: actionDrawer.restrictedPermissions
-
-                                text: modelData.text
-                                status: modelData.status
-                                icon: modelData.icon
-                                enabled: modelData.enabled
-                                settingsCommand: modelData.settingsCommand
-                                toggleFunction: modelData.toggle
-
-                                onCloseRequested: {
-                                    actionDrawer.close();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        // Dynamically loads the appropriate view
         Loader {
-            id: indicatorLoader
-            active: swipeView.count > 1
+            id: pageLoader
             
-            Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
             
-            sourceComponent: PageIndicator {
-                count: swipeView.count
-                currentIndex: swipeView.currentIndex
-                    
-                delegate: Rectangle {
-                    implicitWidth: 8
-                    implicitHeight: 8
-
-                    radius: width / 2
-                    color: PlasmaCore.Theme.disabledTextColor
-
-                    opacity: index === currentIndex ? 0.95 : 0.45
-                }
-            }
+            asynchronous: true
+            sourceComponent: MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? swipeViewComponent : scrollViewComponent
         }
+        
         BrightnessItem {
             id: brightnessItem
-            Layout.topMargin: PlasmaCore.Units.smallSpacing * 2
             Layout.bottomMargin: PlasmaCore.Units.smallSpacing * 2
             Layout.leftMargin: PlasmaCore.Units.smallSpacing
             Layout.rightMargin: PlasmaCore.Units.smallSpacing
@@ -191,6 +134,136 @@ Item {
                     onCloseRequested: {
                         actionDrawer.close();
                     }
+                }
+            }
+        }
+    }
+    
+    // Loaded when in portrait mode
+    Component {
+        id: swipeViewComponent
+        
+        ColumnLayout {
+            readonly property var view: swipeView
+            
+            SwipeView {
+                id: swipeView
+                
+                Layout.fillWidth: true
+                Layout.preferredHeight: rowCount * rowHeight
+                
+                Repeater {
+                    model: Math.ceil(quickSettingsCount / pageSize)
+                    delegate: Flow {
+                        id: flow
+                        spacing: 0
+                        
+                        required property int index
+                        
+                        Repeater {
+                            model: MobileShell.PaginateModel {
+                                sourceModel: quickSettingsModel
+                                pageSize: root.pageSize
+                                firstItem: pageSize * flow.index
+                            }
+                            delegate: Loader {
+                                required property var modelData
+                                
+                                asynchronous: true
+                                
+                                sourceComponent: quickSettingComponent
+                            }
+                        }
+                    }
+                }
+            }
+            
+            Loader {
+                id: indicatorLoader
+                
+                Layout.alignment: Qt.AlignCenter
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
+                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.rightMargin: PlasmaCore.Units.smallSpacing
+                
+                // Avoid wasting space when not loaded
+                Layout.maximumHeight: active ? item.implicitHeight : 0
+                
+                active: swipeView.count > 1 ? true: false
+                asynchronous: true
+                
+                sourceComponent: PageIndicator {
+                    count: swipeView.count
+                    currentIndex: swipeView.currentIndex
+                        
+                    delegate: Rectangle {
+                        implicitWidth: 8
+                        implicitHeight: count > 1 ? 8 : 0
+
+                        radius: parent.width / 2
+                        color: PlasmaCore.Theme.disabledTextColor
+
+                        opacity: index === currentIndex ? 0.95 : 0.45
+                    }
+                }
+            }
+        }
+    }
+    
+    // Loaded when in landscape mode
+    Component {
+        id: scrollViewComponent
+        
+        Flickable {
+            clip: true
+            height: pageHeight
+            
+            contentWidth: parent.width
+            contentHeight: quickSettingsCount / columnCount * rowHeight
+            
+            Flow {                
+                width: parent.width
+                
+                height: quickSettingsCount / columnCount * rowHeight
+                
+                spacing: 0
+                                    
+                Repeater {
+                    model: quickSettingsModel
+                    delegate: Loader {
+                        required property var modelData
+                        
+                        asynchronous: true
+                        
+                        sourceComponent: quickSettingComponent
+                    }
+                }
+            }
+        }
+    }
+    
+    // Quick setting component
+    Component {
+        id: quickSettingComponent
+        
+        Components.BaseItem {
+                                                
+            height: root.rowHeight
+            width: root.columnWidth
+            padding: PlasmaCore.Units.smallSpacing
+
+            contentItem: QuickSettingsFullDelegate {
+                restrictedPermissions: actionDrawer.restrictedPermissions
+                
+                text: modelData.text
+                status: modelData.status
+                icon: modelData.icon
+                enabled: modelData.enabled
+                settingsCommand: modelData.settingsCommand
+                toggleFunction: modelData.toggle
+                
+                onCloseRequested: {
+                    actionDrawer.close();
                 }
             }
         }
