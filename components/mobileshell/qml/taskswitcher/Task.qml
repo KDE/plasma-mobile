@@ -221,15 +221,20 @@ Item {
                     // app icon (behind window preview in-case it doesn't load)
                     TaskIcon {
                         // decrease the opacity faster
-                        opacity: delegate.opacity
+                        opacity: pipeWireLoader.item && pipeWireLoader.item.uuid ? 0 : delegate.opacity
                         anchors.centerIn: parent
                     }
 
                     // attempt to load window preview
                     Loader {
                         id: pipeWireLoader
+                        active: taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled
                         anchors.fill: parent
                         source: Qt.resolvedUrl("./Thumbnail.qml")
+                        
+                        asynchronous: true
+                        
+                        onLoaded: this.item.refresh()
                     }
                     
                     // darken effect
