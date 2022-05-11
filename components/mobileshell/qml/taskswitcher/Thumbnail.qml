@@ -11,13 +11,8 @@ import QtQuick.Window 2.2
 import org.kde.taskmanager 0.1 as TaskManager
 
 TaskManager.PipeWireSourceItem {
+    id: root
     visible: false
-    nodeId: waylandItem.nodeId
-    
-    // Visible only if casting has begun
-    onNodeIdChanged: {
-        visible = true;
-    }
     
     readonly property string uuid: waylandItem.uuid
 
@@ -30,6 +25,12 @@ TaskManager.PipeWireSourceItem {
     TaskManager.ScreencastingRequest {
         id: waylandItem
         uuid: ""
+    
+        // Visible only if casting has begun
+        onNodeIdChanged: {
+            root.nodeId = nodeId;
+            root.visible = true;
+        }
     }
 }
 
