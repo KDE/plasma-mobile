@@ -12,9 +12,10 @@ import org.kde.taskmanager 0.1 as TaskManager
 
 TaskManager.PipeWireSourceItem {
     id: root
-    visible: false
+    visible: nodeId > 0
+    nodeId: waylandItem.nodeId
     
-    readonly property string uuid: waylandItem.uuid
+    readonly property alias uuid: waylandItem.uuid
 
     function refresh() {
         if (model.WinIdList) {
@@ -25,12 +26,6 @@ TaskManager.PipeWireSourceItem {
     TaskManager.ScreencastingRequest {
         id: waylandItem
         uuid: ""
-    
-        // Visible only if casting has begun
-        onNodeIdChanged: {
-            root.nodeId = nodeId;
-            root.visible = true;
-        }
     }
 }
 
