@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../components" as Components
@@ -42,8 +43,7 @@ Item {
 
     readonly property MobileShell.QuickSettingsModel quickSettingsModel: MobileShell.QuickSettingsModel {}
     
-    readonly property real pageHeight: (Window.height * 60/100)
-    readonly property int rowCount: Math.floor(pageHeight / rowHeight)
+    readonly property int rowCount: Math.floor(Window.height * 65/100 / rowHeight)
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int pageSize: rowCount * columnCount
     readonly property int quickSettingsCount: quickSettingsModel.count
@@ -82,7 +82,8 @@ Item {
             id: pageLoader
             
             Layout.fillWidth: true
-            
+            Layout.minimumHeight: rowCount * rowHeight
+
             asynchronous: true
             sourceComponent: MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? swipeViewComponent : scrollViewComponent
         }
@@ -139,7 +140,7 @@ Item {
         }
     }
     
-    // Loaded when in portrait mode
+    // Loads portrait quick settings view
     Component {
         id: swipeViewComponent
         
@@ -210,32 +211,64 @@ Item {
         }
     }
     
-    // Loaded when in landscape mode
+    // Loads landscape quick settings view
     Component {
         id: scrollViewComponent
         
-        Flickable {
-            clip: true
-            height: pageHeight
+        Item {
+            width: parent.width
+            height: rowCount * rowHeight
             
-            contentWidth: parent.width
-            contentHeight: quickSettingsCount / columnCount * rowHeight
+            PlasmaComponents.ScrollView {
+                enabled: pageSize <= quickSettingsCount
+
+                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.policy: ScrollBar.AlwaysOff
+                ScrollBar.vertical.interactive:false
+                
+                anchors.fill: parent
+                contentWidth: width
+                contentHeight: height
+                contentItem: flickable
+            }
             
-            Flow {                
-                width: parent.width
+            Flickable {
+                id: flickable
+                anchors.fill: parent
+                contentWidth: width
+                contentHeight: flow.height
                 
-                height: quickSettingsCount / columnCount * rowHeight
+                clip: true
                 
-                spacing: 0
-                                    
-                Repeater {
-                    model: quickSettingsModel
-                    delegate: Loader {
-                        required property var modelData
-                        
-                        asynchronous: true
-                        
-                        sourceComponent: quickSettingComponent
+                ScrollIndicator.vertical: ScrollIndicator {
+                    active: true
+
+                    visible: quickSettingsCount > pageSize ? true : false
+                    
+                    position: 0.1
+                    
+                    contentItem: Rectangle {
+                        implicitWidth: PlasmaCore.Units.smallSpacing/4
+                        color: PlasmaCore.Theme.textColor
+                        opacity: 0.5
+                    }
+                }
+                
+                Flow {
+                    id: flow
+                    width: parent.width
+                    height: Math.ceil(quickSettingsCount / columnCount) * rowHeight
+                    spacing: 0
+                    
+                    Repeater {
+                        model: quickSettingsModel
+                        delegate: Loader {
+                            required property var modelData
+                            
+                            asynchronous: true
+                            
+                            sourceComponent: quickSettingComponent
+                        }
                     }
                 }
             }

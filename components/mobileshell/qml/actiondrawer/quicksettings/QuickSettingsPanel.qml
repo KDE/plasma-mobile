@@ -13,7 +13,6 @@ import QtGraphicalEffects 1.12
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../statusbar" as StatusBar
@@ -82,25 +81,20 @@ Components.BaseItem {
                 disableSystemTray: actionDrawer.restrictedPermissions
             }
             
-            PlasmaComponents.ScrollView {
-                id: scrollView
+            QuickSettings {
+                id: quickSettings
+                
+                width: column.width
+                implicitHeight: quickSettings.fullHeight
+                
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.maximumHeight: root.fullHeight - root.topPadding - root.bottomPadding - statusBar.height - mediaWidget.fullHeight - PlasmaCore.Units.smallSpacing
                 Layout.maximumWidth: column.width
                 
-                QQC2.ScrollBar.horizontal.policy: QQC2.ScrollBar.AlwaysOff
-                clip: true
-                
-                QuickSettings {
-                    id: quickSettings
-                    width: column.width
-                    implicitHeight: quickSettings.fullHeight
-                    
-                    actionDrawer: root.actionDrawer
-                    minimizedViewProgress: 0
-                    fullViewProgress: 1
-                }
+                actionDrawer: root.actionDrawer
+                minimizedViewProgress: 0
+                fullViewProgress: 1
             }
             
             Item { Layout.fillHeight: true }
