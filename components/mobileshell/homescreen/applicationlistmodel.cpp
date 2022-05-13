@@ -55,12 +55,8 @@ void ApplicationListModel::loadSettings()
         return;
     }
     m_favorites = m_applet->applet()->config().readEntry("Favorites", QStringList());
-#if (QT_VERSION >= QT_VERSION_CHECK(5, 14, 0))
     const auto di = m_applet->applet()->config().readEntry("DesktopItems", QStringList());
     m_desktopItems = QSet<QString>(di.begin(), di.end());
-#else
-    m_desktopItems = m_applet->applet()->config().readEntry("DesktopItems", QStringList()).toSet();
-#endif
     m_appOrder = m_applet->applet()->config().readEntry("AppOrder", QStringList());
     m_maxFavoriteCount = m_applet->applet()->config().readEntry("MaxFavoriteCount", MAX_FAVOURITES);
 
