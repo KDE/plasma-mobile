@@ -37,8 +37,11 @@ constexpr int MAX_FAVOURITES = 5;
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged), this, &ApplicationListModel::sycocaDbChanged);
+#else
     connect(KSycoca::self(), &KSycoca::databaseChanged, this, &ApplicationListModel::sycocaDbChanged);
-
+#endif
     connect(WindowUtil::instance(), &WindowUtil::windowCreated, this, &ApplicationListModel::windowCreated);
 
     loadSettings();
