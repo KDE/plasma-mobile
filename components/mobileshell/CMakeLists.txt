@@ -20,13 +20,15 @@ set(mobileshellplugin_SRCS
     homescreen/favoritesmodel.cpp
     taskswitcher/displaysmodel.cpp
 )
-
-if(QUICK_COMPILER)
-    qtquick_compiler_add_resources(RESOURCES resources.qrc)
+if (QT_MAJOR_VERSION STREQUAL "5")
+    if(QUICK_COMPILER)
+        qtquick_compiler_add_resources(RESOURCES resources.qrc)
+    else()
+        qt5_add_resources(RESOURCES resources.qrc)
+    endif()
 else()
     qt5_add_resources(RESOURCES resources.qrc)
 endif()
-
 add_library(mobileshellplugin SHARED ${mobileshellplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellplugin 

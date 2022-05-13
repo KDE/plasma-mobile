@@ -41,15 +41,15 @@ include(FeatureSummary)
 
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED
+find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
-    QuickCompiler
 )
-
-if (QUICK_COMPILER)
-    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED QuickCompiler)
+if (QT_MAJOR_VERSION STREQUAL "5")
+    if (QUICK_COMPILER)
+        find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED QuickCompiler)
+    endif()
 endif()
 
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
