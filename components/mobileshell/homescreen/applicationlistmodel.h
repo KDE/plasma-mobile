@@ -113,7 +113,7 @@ public:
     Q_INVOKABLE void unsetMinimizedDelegate(int row, QQuickItem *delegate);
 
 public Q_SLOTS:
-    void sycocaDbChanged(const QStringList &change);
+    void sycocaDbChanged();
     void windowCreated(KWayland::Client::PlasmaWindow *window);
 
 Q_SIGNALS:

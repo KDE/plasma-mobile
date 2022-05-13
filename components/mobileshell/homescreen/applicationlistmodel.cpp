@@ -37,7 +37,7 @@ constexpr int MAX_FAVOURITES = 5;
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
 {
-    connect(KSycoca::self(), qOverload<const QStringList &>(&KSycoca::databaseChanged), this, &ApplicationListModel::sycocaDbChanged);
+    connect(KSycoca::self(), &KSycoca::databaseChanged, this, &ApplicationListModel::sycocaDbChanged);
 
     connect(WindowUtil::instance(), &WindowUtil::windowCreated, this, &ApplicationListModel::windowCreated);
 
@@ -83,12 +83,8 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
             {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")}};
 }
 
-void ApplicationListModel::sycocaDbChanged(const QStringList &changes)
+void ApplicationListModel::sycocaDbChanged()
 {
-    if (!changes.contains(QStringLiteral("apps")) && !changes.contains(QStringLiteral("xdgdata-apps"))) {
-        return;
-    }
-
     m_applicationList.clear();
 
     loadApplications();
