@@ -27,7 +27,7 @@ if (QT_MAJOR_VERSION STREQUAL "5")
         qt5_add_resources(RESOURCES resources.qrc)
     endif()
 else()
-    qt5_add_resources(RESOURCES resources.qrc)
+    qt_add_resources(RESOURCES resources.qrc)
 endif()
 add_library(mobileshellplugin SHARED ${mobileshellplugin_SRCS} ${RESOURCES})
 
