@@ -106,7 +106,7 @@ Item {
         id: list
         model: historyModel
         currentIndex: -1
-        
+        clip: true
         property var pendingNotificationWithAction
         
         boundsBehavior: Flickable.StopAtBounds

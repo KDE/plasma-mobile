@@ -89,7 +89,7 @@ Components.BaseItem {
                 
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.maximumHeight: root.fullHeight - root.topPadding - root.bottomPadding - statusBar.height - mediaWidget.fullHeight - PlasmaCore.Units.smallSpacing
+                Layout.maximumHeight: root.fullHeight - root.topPadding - root.bottomPadding - statusBar.height - PlasmaCore.Units.smallSpacing
                 Layout.maximumWidth: column.width
                 
                 actionDrawer: root.actionDrawer
@@ -98,15 +98,6 @@ Components.BaseItem {
             }
             
             Item { Layout.fillHeight: true }
-        }
-        
-        MobileShell.MediaControlsWidget {
-            id: mediaWidget
-            property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
-            anchors.left: parent.left
-            anchors.right: parent.right
-            anchors.bottom: column.bottom
-            anchors.bottomMargin: root.bottomPadding * 2 + PlasmaCore.Units.smallSpacing * 2 // HACK: can't figure out a cleaner way to position
         }
         
         Handle {

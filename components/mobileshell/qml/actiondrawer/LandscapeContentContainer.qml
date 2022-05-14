@@ -28,6 +28,7 @@ PlasmaCore.ColorScope {
     
     readonly property real minimizedQuickSettingsOffset: height
     readonly property real maximizedQuickSettingsOffset: height
+    readonly property bool isOnLargeScreen: width > quickSettings.width * 2.5
     
     colorGroup: PlasmaCore.Theme.ViewColorGroup
     
@@ -62,11 +63,12 @@ PlasmaCore.ColorScope {
         
         // left side 
         ColumnLayout {
+            id: columnLayout
+            
             opacity: applyMinMax(root.actionDrawer.offset / root.maximizedQuickSettingsOffset)
             spacing: 0
             anchors {
-                top: parent.top
-                topMargin: Math.min(root.width, root.height) * 0.06
+                top: mediaWidget.bottom
                 bottom: parent.bottom
                 bottomMargin: Math.min(root.width, root.height) * 0.06
                 right: quickSettings.left
@@ -75,28 +77,7 @@ PlasmaCore.ColorScope {
                 leftMargin: Math.min(root.width, root.height) * 0.06
             }
             
-            PlasmaComponents.Label {
-                id: clock
-                text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
-                verticalAlignment: Qt.AlignTop
-                Layout.fillWidth: true
-
-                font.pixelSize: Math.min(40, Math.min(root.width, root.height) * 0.1)
-                font.weight: Font.ExtraLight
-                elide: Text.ElideRight
-            }
             
-            PlasmaComponents.Label {
-                id: date
-                text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
-                verticalAlignment: Qt.AlignTop
-                color: PlasmaCore.ColorScope.disabledTextColor
-                Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-
-                font.pixelSize: Math.min(20, Math.min(root.width, root.height) * 0.05)
-                font.weight: Font.Light
-            }
             
             MobileShell.NotificationsWidget {
                 id: notificationWidget
@@ -121,6 +102,59 @@ PlasmaCore.ColorScope {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.topMargin: Math.min(root.width, root.height) * 0.02
+            }
+        }
+        
+        PlasmaComponents.Label {
+            id: clock
+            text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
+            verticalAlignment: Qt.AlignVCenter
+            opacity: columnLayout.opacity
+            
+            anchors {
+                left: parent.left
+                top: parent.top
+                topMargin: columnLayout.anchors.topMargin / 2
+                leftMargin: columnLayout.anchors.leftMargin
+            }
+            
+            font.pixelSize: Math.min(40, Math.min(root.width, root.height) * 0.1)
+            font.weight: Font.ExtraLight
+            elide: Text.ElideRight
+        }
+        
+        PlasmaComponents.Label {
+            id: date
+            text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
+            verticalAlignment: Qt.AlignTop
+            color: PlasmaCore.ColorScope.disabledTextColor
+            opacity: columnLayout.opacity
+
+            anchors {
+                left: parent.left
+                top: clock.bottom
+                bottom: isOnLargeScreen ? columnLayout.top : mediaWidget.top
+                topMargin: PlasmaCore.Units.smallSpacing
+                leftMargin: columnLayout.anchors.leftMargin
+            }
+
+            font.pixelSize: Math.min(20, Math.min(root.width, root.height) * 0.05)
+            font.weight: Font.Light
+        }
+        
+        MobileShell.MediaControlsWidget {
+            id: mediaWidget
+            property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
+            
+            y: isOnLargeScreen ? date.y - height + date.implicitHeight : date.y + date.implicitHeight + columnLayout.anchors.topMargin / 2
+            
+            opacity: columnLayout.opacity
+                        
+            anchors {
+                right: quickSettings.left
+                left: isOnLargeScreen ? date.right : parent.left
+                leftMargin: columnLayout.anchors.leftMargin
+                rightMargin: columnLayout.anchors.rightMargin - quickSettings.leftPadding
             }
         }
         
