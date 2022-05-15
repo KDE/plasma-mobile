@@ -29,12 +29,10 @@ PlasmaCore.ColorScope {
     readonly property real minimizedQuickSettingsOffset: height
     readonly property real maximizedQuickSettingsOffset: height
     readonly property bool isOnLargeScreen: width > quickSettings.width * 2.5
+    readonly property real minWidthHeight: Math.min(root.width, root.height)
+    readonly property real opacityValue: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     
     colorGroup: PlasmaCore.Theme.ViewColorGroup
-    
-    function applyMinMax(val) {
-        return Math.max(0, Math.min(1, val));
-    }
     
     // fullscreen background
     Rectangle {
@@ -45,7 +43,7 @@ PlasmaCore.ColorScope {
                        PlasmaCore.Theme.backgroundColor.b, 
                        notificationWidget.hasNotifications ? 0.95 : 0.9)
         Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
-        opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
+        opacity: opacityValue
     }
     
     PlasmaCore.DataSource {
@@ -65,16 +63,16 @@ PlasmaCore.ColorScope {
         ColumnLayout {
             id: columnLayout
             
-            opacity: applyMinMax(root.actionDrawer.offset / root.maximizedQuickSettingsOffset)
+            opacity: opacityValue
             spacing: 0
             anchors {
                 top: mediaWidget.bottom
                 bottom: parent.bottom
-                bottomMargin: Math.min(root.width, root.height) * 0.06
+                bottomMargin: minWidthHeight * 0.06
                 right: quickSettings.left
-                rightMargin: Math.min(root.width, root.height) * 0.06
+                rightMargin: minWidthHeight * 0.06
                 left: parent.left
-                leftMargin: Math.min(root.width, root.height) * 0.06
+                leftMargin: minWidthHeight * 0.06
             }
             
             
@@ -101,7 +99,7 @@ PlasmaCore.ColorScope {
                 Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.topMargin: Math.min(root.width, root.height) * 0.02
+                Layout.topMargin: minWidthHeight * 0.02
             }
         }
         
@@ -118,7 +116,7 @@ PlasmaCore.ColorScope {
                 leftMargin: columnLayout.anchors.leftMargin
             }
             
-            font.pixelSize: Math.min(40, Math.min(root.width, root.height) * 0.1)
+            font.pixelSize: Math.min(40, minWidthHeight * 0.1)
             font.weight: Font.ExtraLight
             elide: Text.ElideRight
         }
@@ -138,7 +136,7 @@ PlasmaCore.ColorScope {
                 leftMargin: columnLayout.anchors.leftMargin
             }
 
-            font.pixelSize: Math.min(20, Math.min(root.width, root.height) * 0.05)
+            font.pixelSize: Math.min(20, minWidthHeight * 0.05)
             font.weight: Font.Light
         }
         
