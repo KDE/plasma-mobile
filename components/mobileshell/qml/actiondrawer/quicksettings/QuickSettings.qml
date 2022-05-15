@@ -68,7 +68,6 @@ Item {
     // view when fully open
     ColumnLayout {
         id: fullView
-        height: 1
         opacity: root.fullViewProgress
         visible: opacity !== 0
         transform: Translate { y: (1 - fullView.opacity) * root.rowHeight }
