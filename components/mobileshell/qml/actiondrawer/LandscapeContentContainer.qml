@@ -63,21 +63,18 @@ PlasmaCore.ColorScope {
         // left side 
         ColumnLayout {
             id: columnLayout
-            
+                        
             opacity: opacityValue
             spacing: 0
+            
             anchors {
                 top: mediaWidget.bottom
-                topMargin: minWidthHeight * 0.06
+                topMargin: 0
                 bottom: parent.bottom
-                bottomMargin: minWidthHeight * 0.06
                 right: quickSettings.left
-                rightMargin: minWidthHeight * 0.06
                 left: parent.left
-                leftMargin: minWidthHeight * 0.06
             }
-            
-            
+            anchors.margins: minWidthHeight * 0.06
             
             MobileShell.NotificationsWidget {
                 id: notificationWidget
@@ -114,8 +111,8 @@ PlasmaCore.ColorScope {
             anchors {
                 left: parent.left
                 top: parent.top
-                topMargin: columnLayout.anchors.topMargin / 2
-                leftMargin: columnLayout.anchors.leftMargin
+                topMargin: columnLayout.anchors.margins / 2
+                leftMargin: columnLayout.anchors.margins
             }
             
             font.pixelSize: Math.min(40, minWidthHeight * 0.1)
@@ -135,7 +132,7 @@ PlasmaCore.ColorScope {
                 top: clock.bottom
                 bottom: isOnLargeScreen ? columnLayout.top : mediaWidget.top
                 topMargin: PlasmaCore.Units.smallSpacing
-                leftMargin: columnLayout.anchors.leftMargin
+                leftMargin: columnLayout.anchors.margins
             }
 
             font.pixelSize: Math.min(20, minWidthHeight * 0.05)
@@ -146,15 +143,15 @@ PlasmaCore.ColorScope {
             id: mediaWidget
             property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
             
-            y: isOnLargeScreen ? date.y - height + date.implicitHeight : date.y + date.implicitHeight + columnLayout.anchors.topMargin / 2
+            y: isOnLargeScreen ? date.y - height + date.implicitHeight : date.y + date.implicitHeight + columnLayout.anchors.margins / 2
             
             opacity: columnLayout.opacity
                         
             anchors {
                 right: quickSettings.left
                 left: isOnLargeScreen ? date.right : parent.left
-                leftMargin: columnLayout.anchors.leftMargin
-                rightMargin: columnLayout.anchors.rightMargin - quickSettings.leftPadding
+                leftMargin: columnLayout.anchors.margins
+                rightMargin: columnLayout.anchors.margins - quickSettings.leftPadding
             }
         }
         
