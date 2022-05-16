@@ -37,6 +37,7 @@ PlasmaCore.ColorScope {
     // fullscreen background
     Rectangle {
         anchors.fill: parent
+        
         // darken if there are notifications
         color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
                        PlasmaCore.Theme.backgroundColor.g, 
@@ -67,6 +68,7 @@ PlasmaCore.ColorScope {
             spacing: 0
             anchors {
                 top: mediaWidget.bottom
+                topMargin: minWidthHeight * 0.06
                 bottom: parent.bottom
                 bottomMargin: minWidthHeight * 0.06
                 right: quickSettings.left
