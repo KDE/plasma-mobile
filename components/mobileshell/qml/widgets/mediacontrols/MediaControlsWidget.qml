@@ -103,26 +103,22 @@ Item {
                             Layout.fillWidth: true
                             spacing: Kirigami.Units.smallSpacing
 
-                            QQC2.Label {
+                            Components.MarqueeLabel {
                                 Layout.fillWidth: true
-                                wrapMode: Text.NoWrap
-                                elide: Text.ElideRight
-                                text: mpris2Source.track(playerItem.source) || i18n("No media playing")
+
+                                inputText: mpris2Source.track(playerItem.source) || i18n("No media playing")
                                 textFormat: Text.PlainText
                                 font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
-                                maximumLineCount: 1
                                 color: "white"
                             }
 
-                            QQC2.Label {
+                            Components.MarqueeLabel {
                                 Layout.fillWidth: true
-                                wrapMode: Text.NoWrap
-                                elide: Text.ElideRight
+
                                 // if no artist is given, show player name instead
-                                text: mpris2Source.artist(playerItem.source) || modelData.application || ""
+                                inputText: mpris2Source.artist(playerItem.source) || modelData.application || ""
                                 textFormat: Text.PlainText
                                 font.pointSize: PlasmaCore.Theme.smallestFont.pointSize
-                                maximumLineCount: 1
                                 opacity: 0.9
                                 color: "white"
                             }
