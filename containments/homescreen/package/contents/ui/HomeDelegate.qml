@@ -22,7 +22,7 @@ import "private" as Private
 ContainmentLayoutManager.ItemContainer {
     id: delegate
 
-    enabled: homeScreenState.currentView === HomeScreenState.PageView
+    enabled: homeScreenState.currentView === HomeScreenState.PageView || homeScreenState.currentSwipeState === HomeScreenState.SwipingAppDrawerVisibility
     
     property var homeScreenState
     
