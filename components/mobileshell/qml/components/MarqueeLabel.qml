@@ -20,7 +20,6 @@ PlasmaComponents.Label {
     property int interval: PlasmaCore.Units.longDuration
     
     readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / inputText.length))
-    readonly property string displayedText: inputText.substring(step, step + inputText.length - charactersOverflow)
     property int step: 0
     
     TextMetrics {
@@ -60,5 +59,5 @@ PlasmaComponents.Label {
         }
     }
     
-    text: displayedText
+    text: inputText.substring(step, step + inputText.length - charactersOverflow)
 }
