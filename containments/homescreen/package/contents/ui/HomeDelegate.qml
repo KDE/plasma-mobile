@@ -22,6 +22,8 @@ import "private" as Private
 ContainmentLayoutManager.ItemContainer {
     id: delegate
 
+    enabled: homeScreenState.currentView === HomeScreenState.PageView
+    
     property var homeScreenState
     
     z: dragActive ? 1 : 0
