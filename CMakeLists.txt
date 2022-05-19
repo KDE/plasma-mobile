@@ -34,6 +34,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(ECMQMLModules)
 include(ECMGenerateQmlTypes)
+include(ECMFindQmlModule)
 include(GenerateExportHeader)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
@@ -73,6 +74,8 @@ set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus inter
 )
 
 include(CheckIncludeFiles)
+
+ecm_find_qmlmodule(org.kde.pipewire 0.1)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)

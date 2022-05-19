@@ -8,9 +8,9 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
-import org.kde.taskmanager 0.1 as TaskManager
+import org.kde.pipewire 0.1 as PipeWire
 
-TaskManager.PipeWireSourceItem {
+PipeWire.PipeWireSourceItem {
     id: root
     visible: nodeId > 0
     nodeId: waylandItem.nodeId
@@ -23,7 +23,7 @@ TaskManager.PipeWireSourceItem {
         }
     }
 
-    TaskManager.ScreencastingRequest {
+    PipeWire.ScreencastingRequest {
         id: waylandItem
         uuid: ""
     }
