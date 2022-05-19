@@ -9,6 +9,7 @@ plasma_install_package(caffeine org.kde.plasma.quicksetting.caffeine quicksettin
 plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle quicksettings)
 plasma_install_package(location org.kde.plasma.quicksetting.location quicksettings)
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
+plasma_install_package(record org.kde.plasma.quicksetting.record quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
 add_subdirectory(flashlight)

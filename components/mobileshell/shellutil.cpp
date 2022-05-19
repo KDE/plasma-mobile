@@ -9,6 +9,7 @@
 #include "shellutil.h"
 
 #include <KConfigGroup>
+#include <KFileUtils>
 #include <KIO/ApplicationLauncherJob>
 #include <KLocalizedString>
 #include <KNotification>
@@ -85,4 +86,24 @@ void ShellUtil::launchApp(const QString &app)
     }
     auto job = new KIO::ApplicationLauncherJob(appService, this);
     job->start();
+}
+
+QString ShellUtil::videoLocation(const QString &name)
+{
+    QString path = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+    QString newPath(path + '/' + name);
+    if (QFile::exists(newPath)) {
+        newPath = path + '/' + KFileUtils::suggestName(QUrl::fromLocalFile(newPath), name);
+    }
+    return newPath;
+}
+
+void ShellUtil::showNotification(const QString &title, const QString &text, const QString &filePath)
+{
+    KNotification *notif = new KNotification("captured");
+    notif->setComponentName(QStringLiteral("plasma_phone_components"));
+    notif->setTitle(title);
+    notif->setUrls({QUrl::fromLocalFile(filePath)});
+    notif->setText(text);
+    notif->sendEvent();
 }

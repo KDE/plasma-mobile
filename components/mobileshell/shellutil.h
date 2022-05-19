@@ -62,6 +62,19 @@ public:
      */
     Q_INVOKABLE bool isSystem24HourFormat();
 
+    /**
+     * Allows us to get a filename in the standard videos directory (~/Videos by default)
+     * with a name that starts with @p name
+     *
+     * @returns a non-existing path that can be written into
+     *
+     * @see QStandardPaths::writableLocation()
+     * @see KFileUtil::suggestName()
+     */
+    Q_INVOKABLE QString videoLocation(const QString &name);
+
+    Q_INVOKABLE void showNotification(const QString &title, const QString &text, const QString &filePath);
+
 Q_SIGNALS:
     void isSystem24HourFormatChanged();
 
