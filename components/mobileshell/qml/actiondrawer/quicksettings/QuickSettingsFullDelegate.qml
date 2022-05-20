@@ -78,7 +78,7 @@ QuickSettingsDelegate {
             
             Components.MarqueeLabel {
                 // if no status is given, just use On/Off
-                inputText: status ? status : (enabled ? i18n("On") : i18n("Off"))
+                inputText: root.status ? root.status : (root.enabled ? i18n("On") : i18n("Off"))
                 opacity: 0.6
                 
                 Layout.fillWidth: true
