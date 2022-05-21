@@ -19,11 +19,18 @@
 class MobileShellSettings : public QObject
 {
     Q_OBJECT
+
+    // general
     Q_PROPERTY(bool vibrationsEnabled READ vibrationsEnabled WRITE setVibrationsEnabled NOTIFY vibrationsEnabledChanged)
     Q_PROPERTY(int vibrationDuration READ vibrationDuration WRITE setVibrationDuration NOTIFY vibrationDurationChanged)
     Q_PROPERTY(qreal vibrationIntensity READ vibrationIntensity WRITE setVibrationIntensity NOTIFY vibrationIntensityChanged)
     Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
+
+    // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
+
+    // task switcher
+    Q_PROPERTY(bool taskSwitcherPreviewsEnabled READ taskSwitcherPreviewsEnabled WRITE setTaskSwitcherPreviewsEnabled NOTIFY taskSwitcherPreviewsEnabledChanged)
 
 public:
     static MobileShellSettings *self();
@@ -99,6 +106,18 @@ public:
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
     /**
+     * Whether task switcher application previews are enabled.
+     */
+    bool taskSwitcherPreviewsEnabled() const;
+
+    /**
+     * Set whether task switcher application previews are enabled.
+     *
+     * @param taskSwitcherPreviewsEnabled Whether task switcher previews are enabled.
+     */
+    void setTaskSwitcherPreviewsEnabled(bool taskSwitcherPreviewsEnabled);
+
+    /**
      * Get the list of IDs of quick settings that are enabled.
      */
     QList<QString> enabledQuickSettings() const;
@@ -128,6 +147,7 @@ Q_SIGNALS:
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
     void animationsEnabledChanged();
+    void taskSwitcherPreviewsEnabledChanged();
     void enabledQuickSettingsChanged();
     void disabledQuickSettingsChanged();
 

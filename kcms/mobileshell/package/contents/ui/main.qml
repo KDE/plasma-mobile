@@ -96,6 +96,30 @@ KCM.SimpleKCM {
                 spacing: 0
                 
                 MobileForm.FormCardHeader {
+                    title: i18n("Task Switcher")
+                }
+                
+                MobileForm.FormSwitchDelegate {
+                    text: i18n("Show Application Previews")
+                    description: i18n("Turning this off may help improve performance.")
+                    checked: MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
+                    onCheckedChanged: {
+                        if (checked != MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled) {
+                            MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled = checked;
+                        }
+                    }
+                }
+            }
+        }
+        
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            
+            contentItem: ColumnLayout {
+                spacing: 0
+                
+                MobileForm.FormCardHeader {
                     title: i18n("Quick Settings")
                     subtitle: i18n("Customize the order of quick settings in the pull-down panel.")
                 }

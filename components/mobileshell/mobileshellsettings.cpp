@@ -31,6 +31,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT taskSwitcherPreviewsEnabledChanged();
         } else if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
             Q_EMIT enabledQuickSettingsChanged();
             Q_EMIT disabledQuickSettingsChanged();
@@ -100,6 +101,19 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::taskSwitcherPreviewsEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("taskSwitcherPreviewsEnabled", true);
+}
+
+void MobileShellSettings::setTaskSwitcherPreviewsEnabled(bool taskSwitcherPreviewsEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("taskSwitcherPreviewsEnabled", taskSwitcherPreviewsEnabled, KConfigGroup::Notify);
     m_config->sync();
 }
 

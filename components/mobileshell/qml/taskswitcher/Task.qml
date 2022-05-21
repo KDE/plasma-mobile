@@ -228,7 +228,7 @@ Item {
                     // attempt to load window preview
                     Loader {
                         id: pipeWireLoader
-                        active: taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled
+                        active: (taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled) && MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
                         anchors.fill: parent
                         source: Qt.resolvedUrl("./Thumbnail.qml")
                         
