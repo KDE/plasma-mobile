@@ -15,6 +15,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Loader {
     id: root
     
+    required property var lockScreenState
     property var notificationsModel: []
 
     property bool notificationsShown: false
@@ -67,6 +68,7 @@ Loader {
             
             NotificationsComponent {
                 id: notificationComponent
+                lockScreenState: root.lockScreenState
                 notificationsModel: root.notificationsModel
                 
                 Layout.fillHeight: true

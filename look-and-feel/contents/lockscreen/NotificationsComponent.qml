@@ -14,8 +14,8 @@ import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Rectangle {
-    id: rect
-    
+    id: root
+    required property var lockScreenState
     property var notificationsModel: []
     
     readonly property bool notificationsShown: notificationsList.hasNotifications
@@ -30,27 +30,29 @@ Rectangle {
     color: "transparent"
     clip: true
     
-    PlasmaCore.ColorScope {
-        anchors.fill: parent
-        anchors.topMargin: rect.topMargin
-        anchors.bottomMargin: rect.bottomMargin
-        anchors.leftMargin: rect.leftMargin
-        anchors.rightMargin: rect.rightMargin
-        colorGroup: PlasmaCore.Theme.NormalColorGroup
+    Connections {
+        target: lockScreenState
         
-        Connections {
-            target: authenticator
-            function onSucceeded() {
-                // run pending action if successfully unlocked
-                if (notificationsList.requestNotificationAction) {
-                    notificationsList.runPendingAction();
-                    notificationsList.requestNotificationAction = false;
-                }
-            }
-            function onFailed() {
+        function onUnlockSucceeded() {
+            // run pending action if successfully unlocked
+            if (notificationsList.requestNotificationAction) {
+                notificationsList.runPendingAction();
                 notificationsList.requestNotificationAction = false;
             }
         }
+        
+        function onUnlockFailed() {
+            notificationsList.requestNotificationAction = false;
+        }
+    }
+    
+    PlasmaCore.ColorScope {
+        anchors.fill: parent
+        anchors.topMargin: root.topMargin
+        anchors.bottomMargin: root.bottomMargin
+        anchors.leftMargin: root.leftMargin
+        anchors.rightMargin: root.rightMargin
+        colorGroup: PlasmaCore.Theme.NormalColorGroup
         
         MobileShell.NotificationsWidget {
             id: notificationsList
@@ -58,7 +60,7 @@ Rectangle {
             
             historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
             actionsRequireUnlock: true
-            historyModel: rect.notificationsModel
+            historyModel: root.notificationsModel
         
             property bool requestNotificationAction: false
             

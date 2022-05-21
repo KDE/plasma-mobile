@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2020-2021 Devin Lin <espidev@gmail.com>
+ * SPDX-FileCopyrightText: 2020-2022 Devin Lin <espidev@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -7,67 +7,77 @@ import QtQuick 2.12
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
 import QtGraphicalEffects 1.12
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
-import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
+
+import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
     id: root
     implicitHeight: PlasmaCore.Units.gridUnit * 2.5
     
+    required property var lockScreenState
+    
     // toggle between pin and password mode
     property bool isPinMode: true
     
-    property string password
-    
     // for displaying temporary number in pin dot display
-    property int previewCharIndex
+    property int previewCharIndex: -2
     
-    property string pinLabel
+    property string pinLabel: qsTr("Enter PIN")
+    
     property bool keypadOpen
     
-    // if waiting for result of auth
-    property bool waitingForAuth: false
+    readonly property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
+    readonly property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
     
-    property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
-    property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
-    
-    signal changePassword();
-    
-    // keypad functions
-    function reset() {
-        waitingForAuth = false;
-        root.password = "";
-        changePassword();
-        root.pinLabel = qsTr("Enter PIN");
+    // model for shown dots
+    // we need to use a listmodel to avoid all delegates from reloading
+    ListModel {
+        id: dotDisplayModel
     }
     
+    Connections {
+        target: root.lockScreenState
+        
+        function onUnlockSucceeded() {
+            root.pinLabel = qsTr("Logging in...");
+        }
+        
+        function onUnlockFailed() {
+            root.pinLabel = qsTr("Wrong PIN");
+        }
+        
+        function onPasswordChanged() {
+            while (root.lockScreenState.password.length < dotDisplayModel.count) {
+                dotDisplayModel.remove(dotDisplayModel.count - 1);
+            }
+            while (root.lockScreenState.password.length > dotDisplayModel.count) {
+                dotDisplayModel.append({"char": root.lockScreenState.password.charAt(dotDisplayModel.count)});
+            }
+        }
+    }
+    
+    // keypad functions
     function backspace() {
-        if (!root.waitingForAuth) {
+        if (!lockScreenState.waitingForAuth) {
             root.previewCharIndex = -2;
-            root.password = root.password.substr(0, root.password.length - 1);
-            changePassword();
+            lockScreenState.password = lockScreenState.password.substr(0, lockScreenState.password.length - 1);
         }
     }
 
     function clear() {
-        if (!root.waitingForAuth) {
+        if (!lockScreenState.waitingForAuth) {
             root.previewCharIndex = -2;
-            root.password = "";
-            changePassword();
+            lockScreenState.resetPassword();
         }
     }
     
     function enter() {
-        if (root.password !== "") { // prevent typing lock when password is empty
-            root.waitingForAuth = true;
-        }
+        lockScreenState.tryPassword();
         
-        // don't try to unlock if there is a timeout (unlock once unlocked)
-        if (!authenticator.graceLocked) {
-            authenticator.tryUnlock(root.password);
-        }
         if (keypadOpen && !isPinMode) {
             // make sure keyboard doesn't close
             openKeyboardTimer.restart();
@@ -75,13 +85,14 @@ Rectangle {
     }
     
     function keyPress(data) {
-        if (!root.waitingForAuth) {
+        if (!lockScreenState.waitingForAuth) {
+            
             if (root.pinLabel !== qsTr("Enter PIN")) {
                 root.pinLabel = qsTr("Enter PIN");
             }
-            root.previewCharIndex = root.password.length;
-            root.password += data
-            changePassword();
+            
+            root.previewCharIndex = lockScreenState.password.length;
+            lockScreenState.password += data
             
             // trigger turning letter into dot later
             letterTimer.restart();
@@ -108,19 +119,6 @@ Rectangle {
         }
     }
     
-    // we need to use a listmodel to avoid all delegates from reloading
-    ListModel {
-        id: dotDisplayModel
-    }
-    onPasswordChanged: {
-        while (password.length < dotDisplayModel.count) {
-            dotDisplayModel.remove(dotDisplayModel.count - 1);
-        }
-        while (password.length > dotDisplayModel.count) {
-            dotDisplayModel.append({"char": password.charAt(dotDisplayModel.count)});
-        }
-    }
-    
     // hidden textfield so that the virtual keyboard shows up
     TextField {
         id: textField
@@ -139,19 +137,22 @@ Rectangle {
         property string prevText: ""
         
         Connections {
-            target: root
-            function onChangePassword() {
-                if (textField.text != root.password) {
+            target: root.lockScreenState
+
+            function onPasswordChanged() {
+                if (textField.text != root.lockScreenState.password) {
                     textField.externalEdit = true;
-                    textField.text = root.password;
+                    textField.text = root.lockScreenState.password;
                 }
             }
         }
+        
         onEditingFinished: {
             if (textField.focus) {
                 root.enter();
             }
         }
+        
         onTextChanged: {
             if (!externalEdit) {
                 if (prevText.length > text.length) { // backspace
@@ -194,7 +195,7 @@ Rectangle {
         
         // label ("wrong pin", "enter pin")
         Label {
-            opacity: password.length === 0 ? 1 : 0
+            opacity: root.lockScreenState.password.length === 0 ? 1 : 0
             anchors.centerIn: parent
             text: root.pinLabel
             font.pointSize: 12
@@ -255,7 +256,7 @@ Rectangle {
                         scale: 0
                         anchors.fill: parent
                         radius: width
-                        color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                        color: lockScreenState.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
                         
                         PropertyAnimation {
                             id: dotAnimation
@@ -269,7 +270,7 @@ Rectangle {
                         id: charLabel
                         scale: 0
                         anchors.centerIn: parent
-                        color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                        color: lockScreenState.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
                         text: model.char
                         font.pointSize: 12
                         
