@@ -6,11 +6,13 @@
  */
 
 import QtQuick 2.12
-import QtQuick.Controls 1.1
-import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
+
+import org.kde.kirigami 2.12 as Kirigami
 
 /**
  * Lockscreen component that is loaded after the device is locked.
@@ -20,23 +22,16 @@ import org.kde.notificationmanager 1.1 as Notifications
 PlasmaCore.ColorScope {
     id: root
 
-    property string password
+    property var lockScreenState: LockScreenState {}
+    property var notifModel: Notifications.WatchedNotificationsModel {}
     
     property bool isWidescreen: root.height < root.width * 0.75
     property bool notificationsShown: false
     
     readonly property bool drawerOpen: flickable.openFactor >= 1
     
-    function askPassword() {
-        flickable.goToOpenPosition();
-    }
-    
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
-    
-    Notifications.WatchedNotificationsModel {
-        id: notifModel
-    }
     
     // wallpaper blur 
     Loader {
@@ -55,8 +50,17 @@ PlasmaCore.ColorScope {
         anchors.fill: parent
         
         openFactor: flickable.openFactor
-        notificationsModel: notifModel
+        notificationsModel: root.notifModel
         onPasswordRequested: root.askPassword()
+    }
+    
+    Connections {
+        target: root.lockScreenState
+        
+        // ensure keypad is opened when password is updated (ex. keyboard)
+        function onPasswordChanged() {
+            flickable.goToOpenPosition()
+        }
     }
 
     FlickContainer {
@@ -67,11 +71,13 @@ PlasmaCore.ColorScope {
         
         keypadHeight: PlasmaCore.Units.gridUnit * 20
         
+        // go to closed position when loaded
         Component.onCompleted: {
             flickable.position = 0;
             flickable.goToClosePosition();
         }
         
+        // update position, and cap it at the keypad height
         onPositionChanged: {
             if (position > keypadHeight) {
                 position = keypadHeight;
@@ -94,10 +100,11 @@ PlasmaCore.ColorScope {
                 
                 fullHeight: root.height
                 
-                notificationsModel: notifModel
+                lockScreenState: root.lockScreenState
+                notificationsModel: root.notifModel
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
                 
-                onPasswordRequested: root.askPassword()
+                onPasswordRequested: flickable.goToOpenPosition()
                 
                 anchors.top: parent.top
                 anchors.bottom: scrollUpIconLoader.top
@@ -110,14 +117,16 @@ PlasmaCore.ColorScope {
             
             LockScreenWideScreenContent {
                 id: tabletComponent
+                
                 visible: isWidescreen
                 active: visible
                 opacity: 1 - flickable.openFactor
                 
-                notificationsModel: notifModel
+                lockScreenState: root.lockScreenState
+                notificationsModel: root.notifModel
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
                 
-                onPasswordRequested: root.askPassword()
+                onPasswordRequested: flickable.goToOpenPosition()
                 
                 anchors.topMargin: headerBar.statusBarHeight
                 anchors.top: parent.top
@@ -159,11 +168,31 @@ PlasmaCore.ColorScope {
                 sourceComponent: ColumnLayout {
                     transform: Translate { y: flickable.keypadHeight - flickable.position }
                     
-                    spacing: PlasmaCore.Units.gridUnit
+                    spacing: 0
+                    
+                    // info notification text
+                    Label {
+                        Layout.fillWidth: true
+                        Layout.rightMargin: Kirigami.Units.largeSpacing
+                        Layout.leftMargin: Kirigami.Units.largeSpacing
+                        Layout.bottomMargin: PlasmaCore.Units.smallSpacing * 2
+                        font.pointSize: 9
+                        
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignHCenter
+                        text: root.lockScreenState.info
+                        opacity: (root.lockScreenState.info.length === 0 || flickable.openFactor < 1) ? 0 : 1
+                        color: 'white'
+                        
+                        Behavior on opacity {
+                            NumberAnimation { duration: 200 }
+                        }
+                    }
                     
                     // scroll down icon
                     PlasmaCore.IconItem {
                         Layout.alignment: Qt.AlignHCenter
+                        Layout.bottomMargin: PlasmaCore.Units.gridUnit
                         implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
                         implicitHeight: PlasmaCore.Units.iconSizes.smallMedium
                         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
@@ -174,10 +203,10 @@ PlasmaCore.ColorScope {
                     Keypad {
                         id: keypad
                         Layout.fillWidth: true
-                        
                         focus: true
+                        
+                        lockScreenState: root.lockScreenState
                         swipeProgress: flickable.openFactor
-                        onPasswordChanged: flickable.goToOpenPosition()
                     }
                 }
             }

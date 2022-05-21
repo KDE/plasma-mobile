@@ -1,7 +1,7 @@
 /*
-SPDX-FileCopyrightText: 2020-2021 Devin Lin <espidev@gmail.com>
-
-SPDX-License-Identifier: GPL-2.0-or-later
+ * SPDX-FileCopyrightText: 2020-2022 Devin Lin <espidev@gmail.com>
+ * 
+ * SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 import QtQuick 2.12
@@ -19,19 +19,20 @@ import org.kde.kirigami 2.12 as Kirigami
 Rectangle {
     id: keypadRoot
     
+    required property var lockScreenState
+    
     // 0 - keypad is not shown, 1 - keypad is shown
     property double swipeProgress
     
     // slightly translucent background, for key contrast
     color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.9*255})
-    property string pinLabel: qsTr("Enter PIN")
     
     // colour calculations
-    property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
-    property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
-    property color buttonTextColor: PlasmaCore.Theme.textColor
-    property color dropShadowColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
-    property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    readonly property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    readonly property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
+    readonly property color buttonTextColor: PlasmaCore.Theme.textColor
+    readonly property color dropShadowColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
+    readonly property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
@@ -47,31 +48,6 @@ Rectangle {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
-        }
-    }
-    
-    signal passwordChanged()
-    
-    function reset() {
-        passwordBar.reset();
-    }
-    
-    Connections {
-        target: authenticator
-        function onSucceeded() {
-            passwordBar.pinLabel = qsTr("Logging in...");
-            passwordBar.waitingForAuth = false;
-        }
-        function onFailed() {
-            root.password = "";
-            passwordBar.pinLabel = qsTr("Wrong PIN");
-            passwordBar.waitingForAuth = false;
-        }
-        function onGraceLockedChanged() {
-            // try authenticating if it was waiting for grace lock to stop and it has stopped
-            if (!authenticator.graceLocked && passwordBar.waitingForAuth) {
-                authenticator.tryUnlock(root.password);
-            }
         }
     }
     
@@ -107,30 +83,25 @@ Rectangle {
     // pin display and bar
     PasswordBar {
         id: passwordBar
+        
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+        
         color: keypadRoot.headerBackgroundColor
         opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+
+        lockScreenState: keypadRoot.lockScreenState
         
         keypadOpen: swipeProgress === 1
-        password: root.password
         previewCharIndex: -2
-        pinLabel: qsTr("Enter PIN")
-        onPasswordChanged: keypadRoot.passwordChanged()
-        
-        onChangePassword: root.password = password
-        Binding {
-            target: passwordBar
-            property: "password"
-            value: root.password
-        }
     }
     
     // actual number keys
     ColumnLayout {
         visible: opacity > 0
         opacity: passwordBar.isPinMode ? 1 : 0
+        
         Behavior on opacity {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
