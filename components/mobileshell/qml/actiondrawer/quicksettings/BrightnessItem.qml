@@ -29,7 +29,6 @@ Item {
             return;
         
         root.disableBrightnessUpdate = true;
-        console.log(pmSource.data["PowerDevil"]["Screen Brightness"]);
         root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
         root.disableBrightnessUpdate = false;
     }
