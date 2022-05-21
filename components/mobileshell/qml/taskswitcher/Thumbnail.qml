@@ -9,16 +9,18 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
 import org.kde.taskmanager 0.1 as TaskManager
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 TaskManager.PipeWireSourceItem {
     id: root
-    visible: nodeId > 0
+    visible: (taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled) && MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
+    opacity: nodeId > 0 ? 1 : 0
     nodeId: waylandItem.nodeId
     
     readonly property alias uuid: waylandItem.uuid
 
-    function refresh() {
-        if (model.WinIdList) {
+    onVisibleChanged: {
+        if (model.WinIdList && visible) {
             waylandItem.uuid = model.WinIdList[0];
         }
     }
