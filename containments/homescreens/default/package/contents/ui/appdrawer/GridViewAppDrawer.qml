@@ -26,7 +26,12 @@ AbstractAppDrawer {
     contentItem: GridView {
         id: gridView
         clip: true
-        interactive: root.homeScreenState.appDrawerInteractive
+        
+        /*
+         * HACK: When the number of apps is less than the one that would fit in the first shown part of the drawer, make
+         * this flickable interactive, in order to steal inputs that would normally be delivered to home.
+         */
+        interactive: contentHeight <= height ? true : root.homeScreenState.appDrawerInteractive
         
         cellWidth: root.contentWidth / Math.floor(root.contentWidth / ((root.availableCellHeight - root.reservedSpaceForLabel) + PlasmaCore.Units.smallSpacing*4))
         cellHeight: root.availableCellHeight

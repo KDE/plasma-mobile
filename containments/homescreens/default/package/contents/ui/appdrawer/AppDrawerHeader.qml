@@ -46,4 +46,9 @@ PlasmaCore.ColorScope {
             onClicked: root.switchToGridRequested()
         }
     }
+    
+    //HACK: Here only to steal inputs the would normally be delivered to home
+    MouseArea {
+        anchors.fill: parent
+    }
 }
