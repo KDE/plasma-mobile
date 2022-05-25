@@ -56,6 +56,11 @@ Item {
     property bool opened: false
 
     /**
+     * Whether the panel can be opened with one stroke.
+     */
+    property bool expandable: false
+    
+    /**
      * Direction the panel is currently moving in.
      */
     property int direction: MobileShell.Direction.None
@@ -108,6 +113,11 @@ Item {
         if (offset < 0) {
             offset = 0;
         }
+        
+        if (offset >= contentContainerLoader.minimizedQuickSettingsOffset && expandable) {
+            root.opened = true;
+        }
+        
         root.direction = (oldOffset === offset) 
                             ? MobileShell.Direction.None 
                             : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);

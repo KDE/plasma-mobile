@@ -43,6 +43,9 @@ MouseArea {
     anchors.fill: parent
     onPressed: {
         oldMouseY = mouse.y;
+                
+        actionDrawer.expandable = mouse.x < root.width/2 ? true : false;
+        
         startSwipe();
     }
     onReleased: endSwipe()
