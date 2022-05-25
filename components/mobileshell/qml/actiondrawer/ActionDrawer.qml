@@ -56,9 +56,10 @@ Item {
     property bool opened: false
 
     /**
-     * Whether the panel can be opened with one stroke.
+     * Whether the panel should open to pinned mode first, with a second stroke needed to full open.
+     * Only applies to portrait mode.
      */
-    property bool expandable: false
+    property bool openToPinnedMode: true
     
     /**
      * Direction the panel is currently moving in.
@@ -114,7 +115,7 @@ Item {
             offset = 0;
         }
         
-        if (offset >= contentContainerLoader.minimizedQuickSettingsOffset && expandable) {
+        if (offset >= contentContainerLoader.minimizedQuickSettingsOffset && !openToPinnedMode) {
             root.opened = true;
         }
         

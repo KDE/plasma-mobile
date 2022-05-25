@@ -44,7 +44,7 @@ MouseArea {
     onPressed: {
         oldMouseY = mouse.y;
                 
-        actionDrawer.expandable = mouse.x < root.width/2 ? true : false;
+        actionDrawer.openToPinnedMode = mouse.x < root.width/2 ? false : true;
         
         startSwipe();
     }
