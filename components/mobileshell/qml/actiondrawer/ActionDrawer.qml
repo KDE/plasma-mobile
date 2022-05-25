@@ -56,6 +56,12 @@ Item {
     property bool opened: false
 
     /**
+     * Whether the panel should open to pinned mode first, with a second stroke needed to full open.
+     * Only applies to portrait mode.
+     */
+    property bool openToPinnedMode: true
+    
+    /**
      * Direction the panel is currently moving in.
      */
     property int direction: MobileShell.Direction.None
@@ -108,6 +114,11 @@ Item {
         if (offset < 0) {
             offset = 0;
         }
+        
+        if (offset >= contentContainerLoader.minimizedQuickSettingsOffset && !openToPinnedMode) {
+            root.opened = true;
+        }
+        
         root.direction = (oldOffset === offset) 
                             ? MobileShell.Direction.None 
                             : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
