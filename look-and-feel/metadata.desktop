@@ -2,45 +2,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 [Desktop Entry]
-Name=Plasma Phone
-Name[ast]=Plasma Phone
-Name[az]=Plasma Telefon
-Name[ca]=Telèfon del Plasma
-Name[ca@valencia]=Telèfon de Plasma
-Name[cs]=Plasma Phone
-Name[da]=Plasma Phone
-Name[de]=Plasma Phone
-Name[en_GB]=Plasma Phone
-Name[es]=Plasma Phone
-Name[et]=Plasma telefon
-Name[eu]=Plasma telefonoa
-Name[fi]=Plasma Phone
-Name[fr]=Plasma Phone
-Name[gl]=Plasma Phone
-Name[hi]=प्लाज़्मा फोन
-Name[hu]=Plasma Phone
-Name[ia]=Plasma Phone
-Name[id]=Ponsel Plasma
-Name[it]=Plasma Phone
-Name[ka]=Plasma-ის ტელეფონი
-Name[ko]=Plasma 전화
-Name[lt]=Plasma telefonas
-Name[nl]=Plasma telefoon
-Name[nn]=Plasma-telefon
-Name[pa]=ਪਲਾਜ਼ਮਾ ਫ਼ੋਨ
-Name[pl]=Telefon Plazmy
-Name[pt]=Plasma para Telefones
-Name[pt_BR]=Celular do Plasma
-Name[ro]=Plasma Phone
-Name[ru]=Plasma Phone
-Name[sk]=Plasma telefón
-Name[sl]=Plasma Phone
-Name[sv]=Plasma telefon
-Name[tr]=Plasma Telefonu
-Name[uk]=Телефон Плазми
-Name[x-test]=xxPlasma Phonexx
-Name[zh_CN]=Plasma Phone
-Name[zh_TW]=Plasma 電話
+Name=Plasma Mobile
 Comment=Plasma workspace for smartphones
 Comment[ast]=La estaya de trabayu de Plasma pa teléfonos intelixentes
 Comment[az]=Smartfonlar üçün Plasma iş sahəsi
