@@ -115,10 +115,6 @@ Item {
             offset = 0;
         }
         
-        if (offset >= contentContainerLoader.minimizedQuickSettingsOffset && !openToPinnedMode) {
-            root.opened = true;
-        }
-        
         root.direction = (oldOffset === offset) 
                             ? MobileShell.Direction.None 
                             : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
@@ -136,23 +132,32 @@ Item {
         closeAnim.stop();
         openAnim.stop();
     }
+    
     function open() {
         cancelAnimations();
-        openAnim.restart();
+        if (openToPinnedMode) {
+            openAnim.restart(); // go to pinned height
+        } else {
+            expandAnim.restart(); // go to maximized height
+        }
     }
+    
     function closeImmediately() {
         cancelAnimations();
         offset = 0;
         closeAnim.finished();
     }
+    
     function close() {
         cancelAnimations();
         closeAnim.restart();
     }
+    
     function expand() {
         cancelAnimations();
         expandAnim.restart();
     }
+    
     function updateState() {
         cancelAnimations();
         let openThreshold = PlasmaCore.Units.gridUnit;
@@ -162,22 +167,27 @@ Item {
             root.visible = false;
             close();
         } else if (root.direction === MobileShell.Direction.None || !root.opened) {
-            if (root.offset < openThreshold) {
-                close();
-            } else {
-                open();
-            }
+            
+            // if the panel has not been opened yet, run open animation only if drag passed threshold
+            (root.offset < openThreshold) ? close() : open();
+            
         } else if (root.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
+            // if drag has gone past the fully expanded view
             expand();
         } else if (root.offset > contentContainerLoader.minimizedQuickSettingsOffset) {
+            // if drag is between pinned view and fully expanded view
             if (root.direction === MobileShell.Direction.Down) {
                 expand();
             } else {
-                open();
+                // go back to pinned, or close if pinned mode is disabled
+                openToPinnedMode ? open() : close();
             }
+            
         } else if (root.direction === MobileShell.Direction.Down) {
+            // if drag is between pinned view and open view, and dragging down
             open();
         } else {
+            // if drag is between pinned view and open view, and dragging up
             close();
         }
     }

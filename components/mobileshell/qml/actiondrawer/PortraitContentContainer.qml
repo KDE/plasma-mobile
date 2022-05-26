@@ -24,7 +24,10 @@ PlasmaCore.ColorScope {
     
     required property var actionDrawer
     
+    // pinned position (disabled when openToPinnedMode is false)
     readonly property real minimizedQuickSettingsOffset: quickSettings.minimizedHeight
+    
+    // fully open position
     readonly property real maximizedQuickSettingsOffset: minimizedQuickSettingsOffset + quickSettings.maxAddedHeight
     
     colorGroup: PlasmaCore.Theme.ViewColorGroup
@@ -54,25 +57,38 @@ PlasmaCore.ColorScope {
         
         actionDrawer: root.actionDrawer
         
-        // opacity and move animation
+        // opacity and move animation (disabled when openToPinnedMode is false)
         property real offsetDist: actionDrawer.offset - minimizedQuickSettingsOffset
         property real totalOffsetDist: maximizedQuickSettingsOffset - minimizedQuickSettingsOffset
-        minimizedToFullProgress: actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0
+        minimizedToFullProgress: actionDrawer.openToPinnedMode ? (actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
         
+        // this drawer opens in two stages when pinned mode is enabled:
+        // ---
+        // stage 1: the transform effect is used, the drawer physically moves down to the pinned mode
+        // stage 2: the rectangle increases height to reveal content, but the content stays still
+        // when pinned mode is disabled, only stage 1 happens
+        
+        // increase height of drawer when between pinned mode <-> maximized mode
         addedHeight: {
-            if (!actionDrawer.opened) {
+            if (!actionDrawer.openToPinnedMode) {
+                // if pinned mode disabled, just go to full height
+                return quickSettings.maxAddedHeight;
+            } else if (!actionDrawer.opened) {
                 // over-scroll effect for initial opening
                 let progress = (root.actionDrawer.offset - minimizedQuickSettingsOffset) / quickSettings.maxAddedHeight;
                 let effectProgress = Math.atan(Math.max(0, progress));
                 return quickSettings.maxAddedHeight * 0.25 * effectProgress;
             } else {
+                // as the drawer opens, add height to the rectangle, revealing content
                 return Math.max(0, Math.min(quickSettings.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
             }
         }
         
+        // physically move the drawer when between closed <-> pinned mode
         transform: Translate {
             id: translate
-            y: Math.min(root.actionDrawer.offset - minimizedQuickSettingsOffset, 0)
+            readonly property real offsetHeight: actionDrawer.openToPinnedMode ? minimizedQuickSettingsOffset : maximizedQuickSettingsOffset
+            y: Math.min(root.actionDrawer.offset - offsetHeight, 0)
         }
     }
     
