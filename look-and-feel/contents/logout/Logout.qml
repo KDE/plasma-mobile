@@ -13,7 +13,6 @@ import QtQuick.Controls 2.8 as Controls
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kcoreaddons 1.0 as KCoreAddons
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.sessions 2.0
 
 PlasmaCore.ColorScope {
@@ -27,8 +26,6 @@ PlasmaCore.ColorScope {
     signal rebootRequested2(int opt)
     signal cancelRequested()
     signal lockScreenRequested()
-
-    Component.onCompleted: MobileShell.Haptics.buttonVibrate();
 
     Controls.Action {
         onTriggered: root.cancelRequested()
