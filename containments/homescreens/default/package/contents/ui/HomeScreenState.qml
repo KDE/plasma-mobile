@@ -60,6 +60,13 @@ QtObject {
     onYPositionChanged: {
         movingUp = yPosition > oldYPosition;
         oldYPosition = yPosition;
+        
+        // speed up the animation
+        if (currentSwipeState == HomeScreenState.SwipingAppDrawerVisibility && yPosition <= 0) {
+            root.currentView = HomeScreenState.AppDrawerBeginningView;
+            root.resetSwipeState();
+            openDrawerAnim.stop();
+        }
     }
     
     // yPosition when the homescreen pages are visible
