@@ -19,6 +19,11 @@ PlasmaCore.ColorScope {
     
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     
+    // HACK: Here only to steal inputs the would normally be delivered to home
+    MouseArea {
+        anchors.fill: parent
+    }
+    
     RowLayout {
         anchors.topMargin: PlasmaCore.Units.smallSpacing
         anchors.leftMargin: PlasmaCore.Units.largeSpacing
@@ -45,10 +50,5 @@ PlasmaCore.ColorScope {
             implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.1)
             onClicked: root.switchToGridRequested()
         }
-    }
-    
-    //HACK: Here only to steal inputs the would normally be delivered to home
-    MouseArea {
-        anchors.fill: parent
     }
 }
