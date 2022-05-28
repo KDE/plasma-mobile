@@ -5,7 +5,7 @@
 Name=Airplane Mode
 Name[az]=Uçuş rejimi
 Name[ca]=Mode avió
-Name[ca@valencia]=Mode avió
+Name[ca@valencia]=Modo avió
 Name[cs]=Režim v Letadle
 Name[da]=Flytilstand
 Name[de]=Flugzeug-Modus
@@ -39,7 +39,7 @@ Icon=network-flightmode-on
 Description=Airplane mode quick setting
 Description[az]=Təyyarə rejimi sürətli ayarı
 Description[ca]=Configuració ràpida del mode avió
-Description[ca@valencia]=Configuració ràpida del mode avió
+Description[ca@valencia]=Configuració ràpida del modo avió
 Description[en_GB]=Airplane mode quick setting
 Description[es]=Ajuste rápido del modo avión
 Description[fi]=Lentokonetilan pika-asetus
