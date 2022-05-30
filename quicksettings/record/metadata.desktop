@@ -3,6 +3,28 @@
 
 [Desktop Entry]
 Name=Screenshot
+Name[az]=Ekran şəkli
+Name[ca]=Captura de pantalla
+Name[ca@valencia]=Captura de pantalla
+Name[cs]=Snímek obrazovky
+Name[en_GB]=Screenshot
+Name[es]=Captura de pantalla
+Name[fi]=Ruutukaappaus
+Name[fr]=Copie d'écran
+Name[it]=Schermata
+Name[ka]=ეკრანის ანაბეჭდი
+Name[ko]=스크린샷
+Name[nl]=Schermafdruk
+Name[pt]=Captura
+Name[pt_BR]=Captura de tela
+Name[ro]=Captură de ecran
+Name[sk]=Snímka obrazovky
+Name[sl]=Slika zaslona
+Name[sv]= Skärmbild
+Name[tr]=Ekran görüntüsü
+Name[uk]=Знімок вікна
+Name[x-test]=xxScreenshotxx
+Name[zh_CN]=屏幕截图
 Icon=spectacle
 
 Type=Service
