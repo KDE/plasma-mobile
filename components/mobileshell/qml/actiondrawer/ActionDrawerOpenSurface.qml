@@ -1,10 +1,12 @@
 /*
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+ *  SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 import QtQuick 2.15
+
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 /**
  * Component that triggers the opening and closing of an ActionDrawer when dragged on with touch or mouse.
@@ -43,8 +45,13 @@ MouseArea {
     anchors.fill: parent
     onPressed: {
         oldMouseY = mouse.y;
-                
-        actionDrawer.openToPinnedMode = mouse.x < root.width/2 ? false : true;
+        
+        // if the user swiped from the top left, otherwise it's from the top right
+        if (mouse.x < root.width / 2) {
+            actionDrawer.openToPinnedMode = MobileShell.MobileShellSettings.actionDrawerTopLeftMode == MobileShell.MobileShellSettings.Pinned;
+        } else {
+            actionDrawer.openToPinnedMode = MobileShell.MobileShellSettings.actionDrawerTopRightMode == MobileShell.MobileShellSettings.Pinned;
+        }
         
         startSwipe();
     }

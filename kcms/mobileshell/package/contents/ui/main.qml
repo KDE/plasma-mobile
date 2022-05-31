@@ -117,6 +117,7 @@ KCM.SimpleKCM {
             Layout.topMargin: Kirigami.Units.largeSpacing
             
             contentItem: ColumnLayout {
+                id: parentCol
                 spacing: 0
                 
                 MobileForm.FormCardHeader {
@@ -127,6 +128,93 @@ KCM.SimpleKCM {
                     id: quickSettingsButton
                     text: i18n("Quick Settings")
                     onClicked: kcm.push("QuickSettingsForm.qml")
+                }
+                
+                Kirigami.Separator {
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.fillWidth: true
+                    opacity: (!quickSettingsButton.controlHovered && !topLeftActionDrawerModeDelegate.controlHovered) ? 0.5 : 0
+                }
+                
+                property string pinnedString: i18nc("Pinned action drawer mode", "Pinned Mode")
+                property string expandedString: i18nc("Expanded action drawer mode", "Expanded Mode")
+                
+                MobileForm.FormComboBoxDelegate {
+                    id: topLeftActionDrawerModeDelegate
+                    text: i18n("Top Left Drawer Mode")
+                    description: i18n("Mode when opening from the top left.")
+                    
+                    currentValue: {
+                        let mode = MobileShell.MobileShellSettings.actionDrawerTopLeftMode;
+                        if (mode === MobileShell.MobileShellSettings.Expanded) {
+                            return parentCol.expandedString;
+                        } else{
+                            return parentCol.pinnedString;
+                        }
+                    }
+                    model: ListModel {
+                        // we can't use i18n with ListElement
+                        Component.onCompleted: {
+                            append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
+                            append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+                        }
+                    }
+                    dialogDelegate: QQC2.RadioDelegate {
+                        implicitWidth: Kirigami.Units.gridUnit * 16
+                        topPadding: Kirigami.Units.smallSpacing * 2
+                        bottomPadding: Kirigami.Units.smallSpacing * 2
+                        
+                        text: name
+                        checked: topLeftActionDrawerModeDelegate.currentValue === name
+                        onCheckedChanged: {
+                            if (checked) {
+                                MobileShell.MobileShellSettings.actionDrawerTopLeftMode = value;
+                            }
+                        }
+                    }
+                }
+                
+                Kirigami.Separator {
+                    Layout.leftMargin: Kirigami.Units.largeSpacing
+                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.fillWidth: true
+                    opacity: (!topLeftActionDrawerModeDelegate.controlHovered && !topRightActionDrawerModeDelegate.controlHovered) ? 0.5 : 0
+                }
+                
+                MobileForm.FormComboBoxDelegate {
+                    id: topRightActionDrawerModeDelegate
+                    text: i18n("Top Right Drawer Mode")
+                    description: i18n("Mode when opening from from the top right.")
+                    
+                    currentValue: {
+                        let mode = MobileShell.MobileShellSettings.actionDrawerTopRightMode;
+                        if (mode === MobileShell.MobileShellSettings.Expanded) {
+                            return parentCol.expandedString;
+                        } else {
+                            return parentCol.pinnedString;
+                        }
+                    }
+                    model: ListModel {
+                        // we can't use i18n with ListElement
+                        Component.onCompleted: {
+                            append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
+                            append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+                        }
+                    }
+                    dialogDelegate: QQC2.RadioDelegate {
+                        implicitWidth: Kirigami.Units.gridUnit * 16
+                        topPadding: Kirigami.Units.smallSpacing * 2
+                        bottomPadding: Kirigami.Units.smallSpacing * 2
+                        
+                        text: name
+                        checked: topRightActionDrawerModeDelegate.currentValue === name
+                        onCheckedChanged: {
+                            if (checked) {
+                                MobileShell.MobileShellSettings.actionDrawerTopRightMode = value;
+                            }
+                        }
+                    }
                 }
             }
         }

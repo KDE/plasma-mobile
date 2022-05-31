@@ -32,10 +32,20 @@ class MobileShellSettings : public QObject
     // task switcher
     Q_PROPERTY(bool taskSwitcherPreviewsEnabled READ taskSwitcherPreviewsEnabled WRITE setTaskSwitcherPreviewsEnabled NOTIFY taskSwitcherPreviewsEnabledChanged)
 
+    // action drawer
+    Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
+    Q_PROPERTY(ActionDrawerMode actionDrawerTopRightMode READ actionDrawerTopRightMode WRITE setActionDrawerTopRightMode NOTIFY actionDrawerTopRightModeChanged)
+
 public:
     static MobileShellSettings *self();
 
     MobileShellSettings(QObject *parent = nullptr);
+
+    enum ActionDrawerMode {
+        Pinned = 0, /** The drawer when pulled down is in its pinned mode. A second swipe fully expands it.*/
+        Expanded /** The drawer is fully expanded when pulled down.*/
+    };
+    Q_ENUM(ActionDrawerMode)
 
     /**
      * Get whether shell vibrations are enabled.
@@ -118,6 +128,30 @@ public:
     void setTaskSwitcherPreviewsEnabled(bool taskSwitcherPreviewsEnabled);
 
     /**
+     * The mode of the action drawer when swiped down from the top left.
+     */
+    ActionDrawerMode actionDrawerTopLeftMode() const;
+
+    /**
+     * Set the mode of the action drawer when swiped down from the top left.
+     *
+     * @param actionDrawerMode The mode of the action drawer.
+     */
+    void setActionDrawerTopLeftMode(ActionDrawerMode actionDrawerMode);
+
+    /**
+     * The mode of the action drawer when swiped down from the top right.
+     */
+    ActionDrawerMode actionDrawerTopRightMode() const;
+
+    /**
+     * Set the mode of the action drawer when swiped down from the top right.
+     *
+     * @param actionDrawerMode The mode of the action drawer.
+     */
+    void setActionDrawerTopRightMode(ActionDrawerMode actionDrawerMode);
+
+    /**
      * Get the list of IDs of quick settings that are enabled.
      */
     QList<QString> enabledQuickSettings() const;
@@ -148,6 +182,8 @@ Q_SIGNALS:
     void navigationPanelEnabledChanged();
     void animationsEnabledChanged();
     void taskSwitcherPreviewsEnabledChanged();
+    void actionDrawerTopLeftModeChanged();
+    void actionDrawerTopRightModeChanged();
     void enabledQuickSettingsChanged();
     void disabledQuickSettingsChanged();
 
