@@ -35,10 +35,10 @@ Components.BaseItem {
     // set by children
     property var iconItem
     
-    readonly property color enabledButtonBorderColor: Qt.darker(Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {}), 1.25)
-    readonly property color disabledButtonBorderColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.textColor, {"alpha": 0.2*255})
-    readonly property color enabledButtonColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {alpha: 0.4*255})
-    readonly property color enabledButtonPressedColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.ColorScope.highlightColor, {alpha: 0.6*255});
+    readonly property color enabledButtonBorderColor: Qt.darker(PlasmaCore.ColorScope.highlightColor, 1.25)
+    readonly property color disabledButtonBorderColor: Kirigami.ColorUtils.tintWithAlpha(PlasmaCore.ColorScope.textColor, PlasmaCore.ColorScope.backgroundColor, 0.75)
+    readonly property color enabledButtonColor: Kirigami.ColorUtils.tintWithAlpha(PlasmaCore.ColorScope.highlightColor, PlasmaCore.ColorScope.backgroundColor, 0.6)
+    readonly property color enabledButtonPressedColor: Kirigami.ColorUtils.tintWithAlpha(PlasmaCore.ColorScope.highlightColor, PlasmaCore.ColorScope.backgroundColor, 0.4);
     readonly property color disabledButtonColor: PlasmaCore.Theme.backgroundColor
     readonly property color disabledButtonPressedColor: Qt.darker(disabledButtonColor, 1.1)
     

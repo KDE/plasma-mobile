@@ -26,16 +26,31 @@ QuickSettingsDelegate {
     // scale animation on press
     zoomScale: (MobileShell.MobileShellSettings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
     
-    background: Rectangle {       
-        anchors.fill: parent
-        radius: PlasmaCore.Units.smallSpacing
-        border.width: 1
-        border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
-        color: {
-            if (root.enabled) {
-                return mouseArea.pressed ? root.enabledButtonPressedColor : root.enabledButtonColor
-            } else {
-                return mouseArea.pressed ? root.disabledButtonPressedColor : root.disabledButtonColor
+    background: Item {
+        // very simple shadow for performance
+        Rectangle {
+            anchors.top: parent.top
+            anchors.topMargin: 1
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: parent.height
+            
+            radius: PlasmaCore.Units.smallSpacing
+            color: Qt.rgba(0, 0, 0, 0.075)
+        }
+    
+        // background color
+        Rectangle {
+            anchors.fill: parent
+            radius: PlasmaCore.Units.smallSpacing
+            border.width: 1
+            border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
+            color: {
+                if (root.enabled) {
+                    return mouseArea.pressed ? root.enabledButtonPressedColor : root.enabledButtonColor
+                } else {
+                    return mouseArea.pressed ? root.disabledButtonPressedColor : root.disabledButtonColor
+                }
             }
         }
     }
