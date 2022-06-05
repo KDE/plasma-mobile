@@ -227,8 +227,7 @@ Item {
         anchors.fill: parent
         
         contentWidth: root.width
-        contentHeight: root.height + 999999
-        contentY: contentHeight / 2
+        contentHeight: root.width
         
         // if the recent root.offset change was due to this flickable
         property bool offsetChangedDueToContentY: false
@@ -243,11 +242,11 @@ Item {
             }
         }
         
-        property real oldContentY
-        onContentYChanged: {
+        property real oldOvershoot
+        onVerticalOvershootChanged: {
             offsetChangedDueToContentY = true;
-            root.offset += oldContentY - contentY;
-            oldContentY = contentY;
+            root.offset += draggingVertically ? -verticalOvershoot - oldOvershoot : 0;
+            oldOvershoot = -verticalOvershoot;
         }
         
         onMovementStarted: {
