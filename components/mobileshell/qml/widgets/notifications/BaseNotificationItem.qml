@@ -149,15 +149,15 @@ Item {
         let action = () => {
             if (notificationsModelType === NotificationsModelType.WatchedNotificationsModel) {
                 if (actionName === "") {
-                    notificationsModel.invokeDefaultAction(model.notificationId);
+                    notificationsModel.invokeDefaultAction(model.notificationId, NotificationManager.None);
                 } else {
-                    notificationsModel.invokeAction(notificationItem.model.notificationId, actionName);
+                    notificationsModel.invokeAction(notificationItem.model.notificationId, actionName, NotificationManager.None);
                 }
             } else if (notificationsModelType === NotificationsModelType.NotificationsModel) {
                 if (actionName === "default") {
-                    notificationsModel.invokeDefaultAction(notificationsModel.index(modelIndex, 0));
+                    notificationsModel.invokeDefaultAction(notificationsModel.index(modelIndex, 0),  NotificationManager.Close); // notification closes 
                 } else {
-                    notificationsModel.invokeAction(notificationsModel.index(modelIndex, 0), actionName);
+                    notificationsModel.invokeAction(notificationsModel.index(modelIndex, 0), actionName,  NotificationManager.Close); // notification closes 
                 }
             }
             expire();
