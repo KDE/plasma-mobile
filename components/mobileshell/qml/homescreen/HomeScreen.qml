@@ -213,4 +213,12 @@ Item {
         z: 999999
         anchors.fill: parent
     }
+    
+    // listen to app launch errors
+    Connections {
+        target: MobileShell.ApplicationListModel
+        function onLaunchError(msg) {
+            MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+        }
+    }
 }
