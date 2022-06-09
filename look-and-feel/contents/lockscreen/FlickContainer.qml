@@ -49,13 +49,12 @@ Flickable {
     
     // we use flickable solely for capturing flicks, not positioning elements
     contentWidth: width
-    contentHeight: height + 99999
+    contentHeight: height * 2
     contentX: 0
     contentY: startContentY
     
     readonly property real startContentY: contentHeight / 2
     
-    property bool positionChangedDueToFlickable: false
     
     property int oldPosition: position
     property bool movingUp: false 
@@ -63,18 +62,11 @@ Flickable {
     onPositionChanged: {
         movingUp = oldPosition <= position;
         oldPosition = position;
-        
-        // ensure that flickable is not moving when other sources are changing position
-        if (!positionChangedDueToFlickable) {
-            cancelMovement();
-        }
-        positionChangedDueToFlickable = true;
     }
     
     // update position from flickable movement
     property real oldContentY
     onContentYChanged: {
-        positionChangedDueToFlickable = true;
         position = Math.max(0, Math.min(keypadHeight, position + (contentY - oldContentY)));
         oldContentY = contentY;
     }
@@ -86,11 +78,12 @@ Flickable {
         }
         resetPosition();
     }
+    
+    onFlickStarted: root.cancelFlick()
     onFlickEnded: resetPosition();
     
     onDraggingChanged: {
         if (!dragging) {
-            cancelMovement();
             resetPosition();
             if (!positionAnim.running) {
                 root.updateState();
@@ -100,15 +93,7 @@ Flickable {
         }
     }
     
-    function cancelMovement() {
-        root.cancelFlick();
-        
-        // HACK: cancelFlick() doesn't seem to cancel flicks...
-        root.flick(-horizontalVelocity, -verticalVelocity);
-    }
-    
     function resetPosition() {
-        positionChangedDueToFlickable = true;
         oldContentY = startContentY;
         contentY = startContentY;
     }

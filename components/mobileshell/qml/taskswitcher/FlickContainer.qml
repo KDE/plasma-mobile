@@ -19,36 +19,15 @@ Flickable {
     required property var taskSwitcherState
     
     // we use flickable solely for capturing flicks, not positioning elements
-    contentWidth: width + 99999
+    contentWidth: width * tasksCount
     contentHeight: height
     contentX: startContentX
     
-    readonly property real startContentX: contentWidth / 2
-    
-    property bool positionChangedDueToFlickable: false
-    
-    // ensure that flickable is not moving when other sources are changing position
-    Connections {
-        target: root.taskSwitcherState
+    readonly property real startContentX: 0
         
-        onXPositionChanged: {
-            if (!root.positionChangedDueToFlickable) {
-                root.cancelMovement();
-            }
-            root.positionChangedDueToFlickable = true;
-        }
-        onYPositionChanged: {
-            if (!root.positionChangedDueToFlickable) {
-                root.cancelMovement();
-            }
-            root.positionChangedDueToFlickable = true;
-        }
-    }
-    
     // update position from horizontal flickable movement
     property real oldContentX
     onContentXChanged: {
-        positionChangedDueToFlickable = true;
         taskSwitcherState.xPosition += contentX - oldContentX;
         oldContentX = contentX;
     }
@@ -58,6 +37,10 @@ Flickable {
         resetPosition();
         taskSwitcherState.updateState();
     }
+    
+    onFlickStarted: {
+        root.cancelFlick();
+    }
     onFlickEnded: {
         resetPosition();
         taskSwitcherState.updateState();
@@ -65,7 +48,6 @@ Flickable {
     
     onDraggingChanged: {
         if (!dragging) {
-            cancelMovement();
             resetPosition();
             taskSwitcherState.updateState();
         } else {
@@ -73,15 +55,7 @@ Flickable {
         }
     }
     
-    function cancelMovement() {
-        root.cancelFlick();
-        
-        // HACK: cancelFlick() doesn't seem to cancel flicks...
-        root.flick(-horizontalVelocity, 0);
-    }
-    
     function resetPosition() {
-        positionChangedDueToFlickable = true;
         oldContentX = startContentX;
         contentX = startContentX;
     }
