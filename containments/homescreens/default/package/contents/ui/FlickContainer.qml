@@ -26,37 +26,15 @@ Flickable {
     
     readonly property real startContentX: contentWidth / 2
     readonly property real startContentY: contentHeight / 2
-    
-    property bool positionChangedDueToFlickable: false
-    
-    // ensure that flickable is not moving when other sources are changing position
-    Connections {
-        target: root.homeScreenState
-        
-        onXPositionChanged: {
-            if (!root.positionChangedDueToFlickable) {
-                root.cancelMovement();
-            }
-            root.positionChangedDueToFlickable = true;
-        }
-        onYPositionChanged: {
-            if (!root.positionChangedDueToFlickable) {
-                root.cancelMovement();
-            }
-            root.positionChangedDueToFlickable = true;
-        }
-    }
-    
+
     // update position from flickable movement
     property real oldContentX
     property real oldContentY
     onContentXChanged: {
-        positionChangedDueToFlickable = true;
         homeScreenState.updatePositionWithOffset(contentX - oldContentX, 0);
         oldContentX = contentX;
     }
     onContentYChanged: {
-        positionChangedDueToFlickable = true;
         homeScreenState.updatePositionWithOffset(0, -(contentY - oldContentY));
         oldContentY = contentY;
     }
@@ -75,11 +53,13 @@ Flickable {
     
     onDragStarted: homeScreenState.cancelEditModeForItemsRequested()
     onDragEnded: homeScreenState.cancelEditModeForItemsRequested()
-    onFlickStarted: homeScreenState.cancelEditModeForItemsRequested()
+    onFlickStarted: {
+        homeScreenState.cancelEditModeForItemsRequested();
+        root.cancelFlick();
+    }
     
     onDraggingChanged: {
         if (!dragging) {
-            cancelMovement();
             resetPosition();
             if (!homeScreenState.animationsRunning) {
                 homeScreenState.updateState();
@@ -89,15 +69,7 @@ Flickable {
         }
     }
     
-    function cancelMovement() {
-        root.cancelFlick();
-        
-        // HACK: cancelFlick() doesn't seem to cancel flicks...
-        root.flick(-horizontalVelocity, -verticalVelocity);
-    }
-    
     function resetPosition() {
-        positionChangedDueToFlickable = true;
         oldContentX = startContentX;
         contentX = startContentX;
         oldContentY = startContentY;
