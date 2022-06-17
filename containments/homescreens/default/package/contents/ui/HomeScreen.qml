@@ -20,6 +20,7 @@ import "appdrawer"
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 Item {
     id: root
@@ -103,7 +104,7 @@ Item {
 
                     appletsLayout: contents.appletsLayout
                     visible: favoriteStrip.flow.children.length > 0 || contents.launcherDragManager.active || contents.containsDrag
-                    opacity: contents.launcherDragManager.active && MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ? 0.3 : 1
+                    opacity: contents.launcherDragManager.active && HomeScreenLib.DesktopModel.favoriteCount >= HomeScreenLib.DesktopModel.maxFavoriteCount ? 0.3 : 1
 
                     TapHandler {
                         target: favoriteStrip

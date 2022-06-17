@@ -16,6 +16,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 import "private" as Private
 
@@ -50,9 +51,9 @@ ContainmentLayoutManager.ItemContainer {
         }
 
         if (!MobileShell.HomeScreenControls.taskSwitcherVisible) {
-            MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
+            HomeScreenLib.DesktopModel.setMinimizedDelegate(index, delegate);
         } else {
-            MobileShell.ApplicationListModel.unsetMinimizedDelegate(index, delegate);
+            HomeScreenLib.DesktopModel.unsetMinimizedDelegate(index, delegate);
         }
     }
     
@@ -63,8 +64,8 @@ ContainmentLayoutManager.ItemContainer {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
         }
 
-        MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
-        MobileShell.ApplicationListModel.runApplication(modelData.applicationStorageId);
+        HomeScreenLib.DesktopModel.setMinimizedDelegate(index, delegate);
+        HomeScreenLib.DesktopModel.runApplication(modelData.applicationStorageId);
     }
 
     readonly property bool applicationRunning: model.applicationRunning
@@ -231,7 +232,7 @@ ContainmentLayoutManager.ItemContainer {
                     color: Qt.rgba(0, 0, 0, 0.3)
                 }
             }
-            Item {Layout.fillHeight:true}
+            Item { Layout.fillHeight: true }
         }
     }
 }

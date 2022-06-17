@@ -16,6 +16,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 PC3.RoundButton {
     id: removeButton
@@ -55,7 +56,7 @@ PC3.RoundButton {
         ScriptAction {
             script: {
                 appletsLayout.releaseSpace(delegate);
-                MobileShell.FavoritesModel.removeFavorite(index);
+                HomeScreenLib.DesktopModel.removeFavorite(index);
             }
         }
     }

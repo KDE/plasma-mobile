@@ -48,6 +48,10 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         
         MobileShell.HomeScreenControls.taskSwitcher.minimizeAll();
     }
+    
+    function close() {
+        visible = false;
+    }
 
     // close when an app opens
     property bool windowActive: Window.active

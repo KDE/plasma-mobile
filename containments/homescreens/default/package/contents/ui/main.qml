@@ -14,6 +14,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 MobileShell.HomeScreen {
     id: root
@@ -31,24 +32,9 @@ MobileShell.HomeScreen {
     
     property bool componentComplete: false
     
-    function recalculateMaxFavoriteCount() {
-        if (!componentComplete) {
-            return;
-        }
-        MobileShell.ApplicationListModel.maxFavoriteCount = Math.max(4, Math.floor(Math.min(width, height) / homescreen.homeScreenContents.favoriteStrip.cellWidth));
-    }
-
-    onWidthChanged: recalculateMaxFavoriteCount()
-    onHeightChanged: recalculateMaxFavoriteCount()
-    
     Component.onCompleted: {
-        // ApplicationListModel doesn't have a plasmoid as is not the one that should be doing writing
-        MobileShell.ApplicationListModel.loadApplications();
-        MobileShell.FavoritesModel.applet = plasmoid;
-        MobileShell.FavoritesModel.loadApplications();
-
-        componentComplete = true;
-        recalculateMaxFavoriteCount()
+        HomeScreenLib.ApplicationListModel.loadApplications();
+        HomeScreenLib.DesktopModel.load();
         
         // ensure the gestures work immediately on load
         forceActiveFocus();
@@ -115,7 +101,7 @@ MobileShell.HomeScreen {
     
     // listen to app launch errors
     Connections {
-        target: MobileShell.ApplicationListModel
+        target: HomeScreenLib.ApplicationListModel
         function onLaunchError(msg) {
             MobileShell.HomeScreenControls.closeAppLaunchAnimation()
         }

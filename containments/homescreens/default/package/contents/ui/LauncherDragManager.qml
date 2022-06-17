@@ -6,8 +6,10 @@
 
 import QtQuick 2.4
 
+import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 Item {
     id: root
@@ -16,7 +18,8 @@ Item {
     property FavoriteStrip favoriteStrip
     property ContainmentLayoutManager.ItemContainer currentlyDraggedDelegate
     property bool active
-    property QtObject model: MobileShell.ApplicationListModel
+    
+    property var desktopModel: HomeScreenLib.DesktopModel
 
     readonly property Item spacer: Item {
         width: favoriteStrip.cellWidth
@@ -41,15 +44,12 @@ Item {
             var pos = favoriteStrip.flow.mapFromItem(delegate, 0, 0);
             newRow = Math.floor((pos.x + dragCenterX) / delegate.width);
 
-            //root.model.setLocation(delegate.modelData.index, MobileShell.ApplicationListModel.Favorites);
-
             showSpacer(delegate, dragCenterX, dragCenterY);
-            root.model.moveItem(delegate.modelData.index, newRow);
+            HomeScreenLib.DesktopModel.moveItem(delegate.modelData.index, newRow);
 
         // Put it on desktop
         } else {
             var pos = appletsLayout.mapFromItem(delegate, 0, 0);
-            //root.model.setLocation(delegate.modelData.index, MobileShell.ApplicationListModel.Desktop);
 
             showSpacer(delegate, dragCenterX, dragCenterY);
             return;
@@ -162,8 +162,8 @@ Item {
             if (!item.modelData) {
                 return appletsLayout;
             } else if (favoriteStrip.contains(Qt.point(0,favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY).y))
-                && (item.modelData.applicationLocation == MobileShell.ApplicationListModel.Favorites
-                    || root.model.favoriteCount < root.model.maxFavoriteCount)) {
+                && (item.modelData.applicationLocation == HomeScreenLib.DesktopModel.Favorites
+                    || HomeScreenLib.DesktopModel.favoriteCount < HomeScreenLib.DesktopModel.maxFavoriteCount)) {
                 return favoriteStrip;
             } else {
                 return appletsLayout;
@@ -257,14 +257,6 @@ Item {
                 }
             }
 
-            if (!child) {
-               /* if (item.y < container.flow.height/2) {
-                    child = container.flow.children[0];
-                } else {
-                    child = container.flow.children[container.flow.children.length - 1];
-                }*/
-            }
-
             return child;
         }
 
@@ -277,7 +269,7 @@ Item {
 
             if (container == appletsLayout) {
                 if (item.modelData) {
-                    root.model.setLocation(item.modelData.index, MobileShell.ApplicationListModel.Desktop);
+                    HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.Desktop);
                 }
                 var pos = appletsLayout.mapFromItem(item, 0, 0);
                 item.parent = appletsLayout;
@@ -288,9 +280,9 @@ Item {
                 
                 return;
             } else if (container == favoriteStrip) {
-                root.model.setLocation(item.modelData.index, MobileShell.ApplicationListModel.Favorites);
+                HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.Favorites);
             } else {
-                root.model.setLocation(item.modelData.index, MobileShell.ApplicationListModel.Grid);
+                HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.None);
             }
 
             var child = nearestChild(item, dragCenterX, dragCenterY, container);

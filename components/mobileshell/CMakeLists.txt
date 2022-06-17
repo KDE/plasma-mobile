@@ -17,8 +17,6 @@ set(mobileshellplugin_SRCS
     components/direction.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
-    homescreen/applicationlistmodel.cpp
-    homescreen/favoritesmodel.cpp
     taskswitcher/displaysmodel.cpp
 )
 if (QT_MAJOR_VERSION STREQUAL "5")

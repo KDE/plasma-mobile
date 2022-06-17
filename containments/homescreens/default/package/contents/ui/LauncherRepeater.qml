@@ -16,11 +16,12 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 import org.kde.kirigami 2.14 as Kirigami
 
 Repeater {
     id: launcherRepeater
-    model: MobileShell.FavoritesModel
+    model: HomeScreenLib.DesktopModel
     
     required property var homeScreenState
     
@@ -51,15 +52,15 @@ Repeater {
         reservedSpaceForLabel: metrics.height
         property Item parentFromLocation: {
             switch (model.applicationLocation) {
-            case MobileShell.ApplicationListModel.Favorites:
-                return favoriteStrip.flow;
-            case MobileShell.ApplicationListModel.Desktop:
-            default:
-                return appletsLayout;
+                case HomeScreenLib.DesktopModel.Favorites:
+                    return favoriteStrip.flow;
+                case HomeScreenLib.DesktopModel.Desktop:
+                default:
+                    return appletsLayout;
             }
         }
         Component.onCompleted: {
-            if (model.applicationLocation === MobileShell.ApplicationListModel.Desktop) {
+            if (model.applicationLocation === HomeScreenLib.DesktopModel.Desktop) {
                 appletsLayout.restoreItem(delegate);
             }
         }
@@ -115,11 +116,10 @@ Repeater {
         onParentFromLocationChanged: {
             if (!launcherDragManager.active && parent != parentFromLocation) {
                 parent = parentFromLocation;
-                if (model.applicationLocation === MobileShell.ApplicationListModel.Favorites) {
+                if (model.applicationLocation === HomeScreenLib.DesktopModel.Favorites) {
                     MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[index]);
-
-                } else if (model.applicationLocation === MobileShell.ApplicationListModel.Grid) {
-                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[Math.max(0, index - MobileShell.ApplicationListModel.favoriteCount)]);
+                } else if (model.applicationLocation === HomeScreenLib.DesktopModel.None) {
+                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[Math.max(0, index - HomeScreenLib.DesktopModel.favoriteCount)]);
                 }
             }
         }

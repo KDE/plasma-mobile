@@ -1,12 +1,14 @@
-/*
-    SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
-
-    SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
 
 #include <Plasma/Containment>
+#include <QSortFilterProxyModel>
+
+#include <applicationlistmodel.h>
+#include <desktopmodel.h>
 
 class HomeScreen : public Plasma::Containment
 {
@@ -24,7 +26,4 @@ public:
 
 Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
-
-private:
-    bool m_showAllApps = false;
 };

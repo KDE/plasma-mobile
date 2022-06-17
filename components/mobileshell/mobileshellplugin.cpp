@@ -14,9 +14,6 @@
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 
-#include "homescreen/applicationlistmodel.h"
-#include "homescreen/favoritesmodel.h"
-
 #include "taskswitcher/displaysmodel.h"
 
 #include "mobileshellsettings.h"
@@ -54,14 +51,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     // components
     qmlRegisterType<Direction>(uri, 1, 0, "Direction");
-
-    // homescreen
-    qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return ApplicationListModel::instance();
-    });
-    qmlRegisterSingletonType<FavoritesModel>(uri, 1, 0, "FavoritesModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return FavoritesModel::instance();
-    });
 
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");

@@ -17,6 +17,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 import "private" as Private
 
@@ -51,6 +52,9 @@ DragDrop.DropArea {
     }
 
     property bool inAppletEditMode: false
+    
+    property var applicationListModel: HomeScreenLib.ApplicationListModel
+    property var desktopModel: HomeScreenLib.DesktopModel
 
     Connections {
         target: plasmoid
@@ -67,7 +71,7 @@ DragDrop.DropArea {
     onDragMove: {
         let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
         if (posInFavorites.y > 0) {
-            if (MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ) {
+            if (desktopModel.favoriteCount >= desktopModel.maxFavoriteCount) {
                 launcherDragManager.hideSpacer();
             } else {
                 launcherDragManager.showSpacerAtPos(event.x, event.y, favoriteStrip);
@@ -110,12 +114,12 @@ DragDrop.DropArea {
 
             let posInFavorites = favoriteStrip.flow.mapFromItem(this, event.x, event.y);
             if (posInFavorites.y > 0) {
-                if (MobileShell.ApplicationListModel.favoriteCount >= MobileShell.ApplicationListModel.maxFavoriteCount ) {
+                if (desktopModel.favoriteCount >= desktopModel.maxFavoriteCount ) {
                     return;
                 }
 
-                let pos = Math.min(MobileShell.FavoritesModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
-                MobileShell.FavoritesModel.addFavorite(storageId, pos, MobileShell.ApplicationListModel.Favorites)
+                let pos = Math.min(desktopModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
+                desktopModel.addFavorite(storageId, pos, HomeScreenLib.ApplicationListModel.Favorites)
                 let item = launcherRepeater.itemAt(pos);
 
                 if (item) {
@@ -129,8 +133,8 @@ DragDrop.DropArea {
                 return;
             }
 
-            let pos = MobileShell.FavoritesModel.count;
-            MobileShell.FavoritesModel.addFavorite(storageId, pos, MobileShell.ApplicationListModel.Desktop)
+            let pos = desktopModel.count;
+            desktopModel.addFavorite(storageId, pos, HomeScreenLib.ApplicationListModel.Desktop)
             let item = launcherRepeater.itemAt(pos);
 
             event.accept(event.proposedAction);
@@ -229,5 +233,4 @@ DragDrop.DropArea {
         }
     }
 }
-
 
