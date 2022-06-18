@@ -1,8 +1,5 @@
-/*
- *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
@@ -15,6 +12,8 @@ Flickable {
     property int position: 0
     
     required property real keypadHeight
+    
+    signal opened()
     
     function cancelAnimations() {
         positionAnim.stop();
@@ -45,6 +44,12 @@ Flickable {
         id: positionAnim
         duration: PlasmaCore.Units.longDuration * 2
         easing.type: Easing.OutCubic
+        
+        onFinished: {
+            if (root.position === keypadHeight) {
+                root.opened();
+            }
+        }
     }
     
     // we use flickable solely for capturing flicks, not positioning elements
@@ -54,7 +59,6 @@ Flickable {
     contentY: startContentY
     
     readonly property real startContentY: contentHeight / 2
-    
     
     property int oldPosition: position
     property bool movingUp: false 

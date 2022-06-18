@@ -1,8 +1,5 @@
-/*
- * SPDX-FileCopyrightText: 2022 Devin Lin <espidev@gmail.com>
- * 
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2022 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQml 2.15
 import QtQuick 2.15
@@ -16,7 +13,11 @@ QtObject {
     // whether waiting for authentication after trying password
     property bool waitingForAuth: false
     
+    // the info message given
     property string info: ""
+    
+    // whether the lockscreen was passwordless
+    property bool passwordless: true
     
     signal reset()
     signal unlockSucceeded()
@@ -26,6 +27,7 @@ QtObject {
         if (root.password !== '') { // prevent typing lock when password is empty
             waitingForAuth = true;
         }
+        connections.hasPrompt = true;
         authenticator.tryUnlock();
     }
     
@@ -34,21 +36,35 @@ QtObject {
         root.reset();
     }
     
+    Component.onCompleted: {
+        // determine whether we have passwordless login
+        // if we do, authenticator will emit a success signal, otherwise it will emit failure
+        authenticator.tryUnlock();
+    }
+    
     property var connections: Connections {
         target: authenticator
         
+        // false for our test of whether we have passwordless login, otherwise it's true
+        property bool hasPrompt: false
+        
         function onSucceeded() {
-            console.log('login succeeded');
-            root.waitingForAuth = false;
-            root.unlockSucceeded();
-            Qt.quit();
+            if (hasPrompt) {
+                console.log('login succeeded');
+                root.waitingForAuth = false;
+                root.unlockSucceeded();
+                Qt.quit();
+            }
         }
         
         function onFailed() {
-            console.log('login failed');
-            root.waitingForAuth = false;
-            root.password = "";
-            root.unlockFailed();
+            root.passwordless = false;
+            if (hasPrompt) {
+                console.log('login failed');
+                root.waitingForAuth = false;
+                root.password = "";
+                root.unlockFailed();
+            }
         }
         
         function onInfoMessage(msg) {

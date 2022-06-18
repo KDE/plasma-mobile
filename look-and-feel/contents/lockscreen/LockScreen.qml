@@ -69,6 +69,13 @@ PlasmaCore.ColorScope {
         
         property real openFactor: position / keypadHeight
         
+        onOpened: {
+            if (root.lockScreenState.passwordless) {
+                // try unlocking if flicked to the top, and we have passwordless login
+                root.lockScreenState.tryPassword();
+            }
+        }
+        
         keypadHeight: PlasmaCore.Units.gridUnit * 20
         
         // go to closed position when loaded
@@ -162,6 +169,7 @@ PlasmaCore.ColorScope {
             Loader {
                 width: parent.width
                 asynchronous: true
+                active: !root.lockScreenState.passwordless // only load keypad if not passwordless
                 
                 anchors.bottom: parent.bottom
                 
