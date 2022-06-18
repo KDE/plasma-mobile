@@ -23,6 +23,7 @@ This repository contains shell components for Plasma Mobile.
 * [kcms](kcms) - settings modules
 * [look-and-feel](look-and-feel/contents) - Plasma look-and-feel packages (ex. lockscreen, logout, etc.)
 * [quicksettings](quicksettings) - quick settings packages for the action drawer
+* [tests](tests) - small runnable snippets that can be used to test parts of the shell without loading all of Plasma
 
 <img src="https://plasma-mobile.org/screenshots/screenshot-2022-04-1.png" width=300px/>
 

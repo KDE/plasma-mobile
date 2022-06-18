@@ -16,10 +16,11 @@
 
 #include "taskswitcher/displaysmodel.h"
 
+#include "quicksettings/paginatemodel.h"
+#include "quicksettings/quicksetting.h"
+#include "quicksettings/quicksettingsmodel.h"
+
 #include "mobileshellsettings.h"
-#include "paginatemodel.h"
-#include "quicksetting.h"
-#include "quicksettingsmodel.h"
 #include "shellutil.h"
 #include "windowutil.h"
 

@@ -7,14 +7,14 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     mobileshellsettings.cpp
-    quicksetting.cpp
-    paginatemodel.cpp
-    quicksettingsmodel.cpp
-    savedquicksettings.cpp
-    savedquicksettingsmodel.cpp
     shellutil.cpp
     windowutil.cpp
     components/direction.cpp
+    quicksettings/quicksetting.cpp
+    quicksettings/paginatemodel.cpp
+    quicksettings/quicksettingsmodel.cpp
+    quicksettings/savedquicksettings.cpp
+    quicksettings/savedquicksettingsmodel.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
     taskswitcher/displaysmodel.cpp

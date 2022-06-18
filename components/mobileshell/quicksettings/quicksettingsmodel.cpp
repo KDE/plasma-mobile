@@ -91,7 +91,6 @@ void QuickSettingsModel::loadQuickSettings()
             }
             delete created;
         } else {
-            qDebug() << "Loaded quicksetting" << metaData->fileName();
             m_quickSettings.push_back(createdSetting);
         }
     }
