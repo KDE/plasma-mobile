@@ -13,12 +13,19 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
 MouseArea {
     id: delegate
+    
     property alias iconItem: icon
+    property Halcyon.Application application: model.application
+    
+    readonly property string applicationName: application ? application.name : ""
+    readonly property string applicationStorageId: application ? application.storageId : ""
+    readonly property string applicationIcon: application ? application.icon : ""
     
     signal launch(int x, int y, var source, string title, string storageId)
     signal dragStarted(string imageSource, int x, int y, string mimeData)
@@ -33,8 +40,8 @@ MouseArea {
                     Math.min(delegate.iconItem.width, delegate.iconItem.height));
         }
 
-        MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
-        MobileShell.ApplicationListModel.runApplication(storageId);
+        application.setMinimizedDelegate(delegate);
+        application.runApplication();
     }
     
     onPressAndHold: {
@@ -44,10 +51,10 @@ MouseArea {
 
     onClicked: {
         // launch app
-        if (model.applicationRunning) {
-            delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
+        if (application.running) {
+            delegate.launch(0, 0, "", applicationName, applicationStorageId);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
+            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
         }
     }
     hoverEnabled: true
@@ -63,7 +70,7 @@ MouseArea {
                 icon.name: "emblem-favorite"
                 text: i18n("Remove from favourites")
                 onClicked: {
-                    MobileShell.FavoritesModel.removeFavorite(model.index);
+                    Halcyon.PinnedModel.removeApp(model.index);
                 }
             }
             onClosed: dialogLoader.active = false
@@ -98,14 +105,14 @@ MouseArea {
             Layout.preferredHeight: Layout.minimumHeight
 
             usesPlasmaTheme: false
-            source: model.applicationIcon
+            source: applicationIcon
 
             Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
                 }
-                visible: model.applicationRunning
+                visible: application.running
                 radius: width
                 width: PlasmaCore.Units.smallSpacing
                 height: width
@@ -132,7 +139,7 @@ MouseArea {
             maximumLineCount: 1
             elide: Text.ElideRight
 
-            text: model.applicationName
+            text: applicationName
 
             font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
             font.weight: Font.Bold

@@ -1,29 +1,19 @@
-/*
- *   SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
- *   SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
+// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
 
-// Qt
 #include <QAbstractListModel>
 #include <QList>
 #include <QObject>
 #include <QQuickItem>
 #include <QSet>
 
-class QString;
-
-namespace KWayland
-{
-namespace Client
-{
-class PlasmaWindowManagement;
-class PlasmaWindow;
-}
-}
+#include <KWayland/Client/connection_thread.h>
+#include <KWayland/Client/plasmawindowmanagement.h>
+#include <KWayland/Client/registry.h>
+#include <KWayland/Client/surface.h>
 
 /**
  * @short The base application list, used directly by the app drawer.
@@ -63,8 +53,6 @@ public:
 
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
-
-    static ApplicationListModel *instance();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;

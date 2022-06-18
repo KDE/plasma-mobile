@@ -1,14 +1,9 @@
-/*
- *   SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
- *   SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
+// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-// Self
 #include "applicationlistmodel.h"
 
-// Qt
 #include <QByteArray>
 #include <QDebug>
 #include <QModelIndex>
@@ -16,7 +11,6 @@
 #include <QQuickItem>
 #include <QQuickWindow>
 
-// KDE
 #include <KApplicationTrader>
 #include <KConfigGroup>
 #include <KIO/ApplicationLauncherJob>
@@ -24,11 +18,6 @@
 #include <KService>
 #include <KSharedConfig>
 #include <KSycoca>
-
-#include <KWayland/Client/connection_thread.h>
-#include <KWayland/Client/plasmawindowmanagement.h>
-#include <KWayland/Client/registry.h>
-#include <KWayland/Client/surface.h>
 
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -70,12 +59,6 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
             {ApplicationRunningRole, QByteArrayLiteral("applicationRunning")},
             {ApplicationUniqueIdRole, QByteArrayLiteral("applicationUniqueId")},
             {ApplicationLocationRole, QByteArrayLiteral("applicationLocation")}};
-}
-
-ApplicationListModel *ApplicationListModel::instance()
-{
-    static ApplicationListModel *model = new ApplicationListModel;
-    return model;
 }
 
 void ApplicationListModel::sycocaDbChanged()
@@ -232,19 +215,16 @@ void ApplicationListModel::setMinimizedDelegate(int row, QQuickItem *delegate)
     }
 
     QWindow *delegateWindow = delegate->window();
-
     if (!delegateWindow) {
         return;
     }
 
-    using namespace KWayland::Client;
     KWayland::Client::PlasmaWindow *window = m_applicationList[row].window;
     if (!window) {
         return;
     }
 
-    Surface *surface = Surface::fromWindow(delegateWindow);
-
+    KWayland::Client::Surface *surface = KWayland::Client::Surface::fromWindow(delegateWindow);
     if (!surface) {
         return;
     }
@@ -261,19 +241,16 @@ void ApplicationListModel::unsetMinimizedDelegate(int row, QQuickItem *delegate)
     }
 
     QWindow *delegateWindow = delegate->window();
-
     if (!delegateWindow) {
         return;
     }
 
-    using namespace KWayland::Client;
     KWayland::Client::PlasmaWindow *window = m_applicationList[row].window;
     if (!window) {
         return;
     }
 
-    Surface *surface = Surface::fromWindow(delegateWindow);
-
+    KWayland::Client::Surface *surface = KWayland::Client::Surface::fromWindow(delegateWindow);
     if (!surface) {
         return;
     }

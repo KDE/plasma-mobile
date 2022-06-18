@@ -15,6 +15,7 @@ import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 GridView {
     id: gridView
@@ -32,7 +33,7 @@ GridView {
     
     cacheBuffer: Math.max(0, rows * cellHeight)
 
-    model: MobileShell.ApplicationListModel
+    model: Halcyon.ApplicationListModel
 
     header: Controls.Control {
         implicitWidth: gridView.width
@@ -59,6 +60,8 @@ GridView {
     delegate: GridAppDelegate {
         id: delegate
         
+        property Halcyon.Application application: model.application
+        
         width: gridView.cellWidth
         height: gridView.cellHeight
         reservedSpaceForLabel: gridView.reservedSpaceForLabel
@@ -73,8 +76,8 @@ GridView {
                         Math.min(delegate.iconItem.width, delegate.iconItem.height));
             }
 
-            MobileShell.ApplicationListModel.setMinimizedDelegate(index, delegate);
-            MobileShell.ApplicationListModel.runApplication(storageId);
+            application.setMinimizedDelegate(delegate);
+            application.runApplication();
             gridView.launched();
         }
     }

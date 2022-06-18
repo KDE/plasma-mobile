@@ -10,6 +10,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 MobileShell.HomeScreen {
     id: root
@@ -23,10 +24,7 @@ MobileShell.HomeScreen {
     }
     
     Component.onCompleted: {
-        MobileShell.ApplicationListModel.loadApplications();
-        MobileShell.FavoritesModel.applet = plasmoid;
-        MobileShell.FavoritesModel.loadApplications();
-        
+        Halcyon.ApplicationListModel.loadApplications();
         forceActiveFocus();
     }
     
@@ -61,7 +59,7 @@ MobileShell.HomeScreen {
             Connections {
                 target: MobileShell.HomeScreenControls.taskSwitcher
                 function onVisibleChanged() {
-                    searchWidget.close();
+                    search.close();
                 }
             }
         }

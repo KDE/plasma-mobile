@@ -13,6 +13,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 Item {
     id: root
@@ -60,7 +61,7 @@ Item {
                     }
                 }
                 
-                model: MobileShell.FavoritesModel
+                model: Halcyon.PinnedModel
                 header: MobileShell.BaseItem {
                     topPadding: Math.round(swipeView.height * 0.2)
                     bottomPadding: PlasmaCore.Units.largeSpacing

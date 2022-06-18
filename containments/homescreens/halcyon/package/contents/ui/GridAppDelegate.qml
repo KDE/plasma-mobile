@@ -16,6 +16,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -24,6 +25,8 @@ MouseArea {
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
 
+    property Halcyon.Application application: model.application
+    
     property int reservedSpaceForLabel
     property alias iconItem: icon
 
@@ -38,10 +41,10 @@ MouseArea {
     
     function launchApp() {
         // launch app
-        if (model.applicationRunning) {
-            delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
+        if (application.running) {
+            delegate.launch(0, 0, "", application.name, application.storageId);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
+            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
         }
     }
     
@@ -56,7 +59,7 @@ MouseArea {
                 icon.name: "emblem-favorite"
                 text: i18n("Add to favourites")
                 onClicked: {
-                    MobileShell.FavoritesModel.addFavorite(model.applicationStorageId, 0, MobileShell.ApplicationListModel.Favorites);
+                    Halcyon.PinnedModel.addApp(application.storageId, 0);
                 }
             }
             onClosed: dialogLoader.active = false
@@ -131,14 +134,14 @@ MouseArea {
             Layout.preferredHeight: Layout.minimumHeight
 
             usesPlasmaTheme: false
-            source: model.applicationIcon
+            source: application.icon
 
             Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
                 }
-                visible: model.applicationRunning
+                visible: application.running
                 radius: width
                 width: PlasmaCore.Units.smallSpacing
                 height: width
@@ -161,7 +164,7 @@ MouseArea {
             verticalAlignment: Text.AlignTop
             elide: Text.ElideRight
 
-            text: model.applicationName
+            text: application.name
 
             font.pointSize: theme.defaultFont.pointSize * 0.85
             font.weight: Font.Bold
