@@ -13,7 +13,7 @@
 #include <QSet>
 
 /**
- * @short The base application list, used directly by the app drawer.
+ * @short The base application list, used directly by the full app list page.
  */
 class ApplicationListModel : public QAbstractListModel
 {

@@ -15,6 +15,9 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+/**
+ * @short Object that represents an application.
+ */
 class Application : public QObject
 {
     Q_OBJECT

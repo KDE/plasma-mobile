@@ -44,7 +44,7 @@ QHash<int, QByteArray> PinnedModel::roleNames() const
 
 void PinnedModel::addApp(const QString &storageId, int row)
 {
-    if (row < 0 && row > m_applications.size()) {
+    if (row < 0 || row > m_applications.size()) {
         return;
     }
 
@@ -53,7 +53,7 @@ void PinnedModel::addApp(const QString &storageId, int row)
 
         beginInsertRows(QModelIndex(), row, row);
         m_applications.insert(row, app);
-        m_folders.insert(0, nullptr); // maintain indicies
+        m_folders.insert(row, nullptr); // maintain indicies
         endInsertRows();
 
         save();
@@ -62,7 +62,7 @@ void PinnedModel::addApp(const QString &storageId, int row)
 
 void PinnedModel::removeApp(int row)
 {
-    if (row < 0 && row >= m_applications.size()) {
+    if (row < 0 || row >= m_applications.size()) {
         return;
     }
 
@@ -70,6 +70,37 @@ void PinnedModel::removeApp(int row)
     m_applications[row]->deleteLater();
     m_applications.removeAt(row);
     m_folders.removeAt(row); // maintain indicies
+    endRemoveRows();
+
+    save();
+}
+
+void PinnedModel::addFolder(QString name, int row)
+{
+    if (row < 0 || row > m_applications.size()) {
+        return;
+    }
+
+    ApplicationFolder *folder = new ApplicationFolder(this, name);
+    connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+
+    beginInsertRows(QModelIndex(), row, row);
+    m_applications.insert(row, nullptr);
+    m_folders.insert(row, folder);
+    endInsertRows();
+
+    save();
+}
+
+void PinnedModel::removeFolder(int row)
+{
+    if (row < 0 || row >= m_applications.size()) {
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), row, row);
+    m_applications.removeAt(row);
+    m_folders.removeAt(row);
     endRemoveRows();
 
     save();
@@ -99,6 +130,8 @@ void PinnedModel::load()
         } else if (obj[QStringLiteral("type")].toString() == "folder") {
             // read folder
             ApplicationFolder *folder = ApplicationFolder::fromJson(obj, this);
+            connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+
             if (folder) {
                 m_applications.append(nullptr);
                 m_folders.append(folder);

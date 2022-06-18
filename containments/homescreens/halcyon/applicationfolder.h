@@ -15,6 +15,9 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+/**
+ * @short Object that represents an application folder on the main page.
+ */
 class ApplicationFolder : public QObject
 {
     Q_OBJECT
@@ -22,7 +25,7 @@ class ApplicationFolder : public QObject
     Q_PROPERTY(QList<Application *> applications READ applications NOTIFY applicationsChanged)
 
 public:
-    ApplicationFolder(QObject *parent = nullptr);
+    ApplicationFolder(QObject *parent = nullptr, QString name = QString{});
 
     static ApplicationFolder *fromJson(QJsonObject &obj, QObject *parent);
     QJsonObject toJson();
@@ -33,9 +36,13 @@ public:
     QList<Application *> applications();
     void setApplications(QList<Application *> applications);
 
+    Q_INVOKABLE void addApp(const QString &storageId, int row);
+    Q_INVOKABLE void removeApp(int row);
+
 Q_SIGNALS:
     void nameChanged();
     void applicationsChanged();
+    void saveRequested();
 
 private:
     QString m_name;

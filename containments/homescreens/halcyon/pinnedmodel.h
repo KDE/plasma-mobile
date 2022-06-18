@@ -19,6 +19,9 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+/**
+ * @short The applications and folders model on the main page.
+ */
 class PinnedModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -35,6 +38,8 @@ public:
 
     Q_INVOKABLE void addApp(const QString &storageId, int row);
     Q_INVOKABLE void removeApp(int row);
+    Q_INVOKABLE void addFolder(QString name, int row);
+    Q_INVOKABLE void removeFolder(int row);
 
     Q_INVOKABLE void load();
     void save();

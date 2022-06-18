@@ -5,7 +5,9 @@
 
 #include <QJsonArray>
 
-ApplicationFolder::ApplicationFolder(QObject *parent)
+ApplicationFolder::ApplicationFolder(QObject *parent, QString name)
+    : QObject{parent}
+    , m_name{name}
 {
 }
 
@@ -19,8 +21,7 @@ ApplicationFolder *ApplicationFolder::fromJson(QJsonObject &obj, QObject *parent
         }
     }
 
-    ApplicationFolder *folder = new ApplicationFolder(parent);
-    folder->setName(name);
+    ApplicationFolder *folder = new ApplicationFolder(parent, name);
     folder->setApplications(apps);
     return folder;
 }
@@ -50,6 +51,7 @@ void ApplicationFolder::setName(QString &name)
 {
     m_name = name;
     Q_EMIT nameChanged();
+    Q_EMIT saveRequested();
 }
 
 QList<Application *> ApplicationFolder::applications()
@@ -61,4 +63,31 @@ void ApplicationFolder::setApplications(QList<Application *> applications)
 {
     m_applications = applications;
     Q_EMIT applicationsChanged();
+    Q_EMIT saveRequested();
+}
+
+void ApplicationFolder::addApp(const QString &storageId, int row)
+{
+    if (row < 0 || row > m_applications.size()) {
+        return;
+    }
+
+    if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
+        Application *app = new Application(this, service);
+        m_applications.insert(row, app);
+        Q_EMIT applicationsChanged();
+        Q_EMIT saveRequested();
+    }
+}
+
+void ApplicationFolder::removeApp(int row)
+{
+    if (row < 0 || row >= m_applications.size()) {
+        return;
+    }
+
+    m_applications[row]->deleteLater();
+    m_applications.removeAt(row);
+    Q_EMIT applicationsChanged();
+    Q_EMIT saveRequested();
 }
