@@ -5,6 +5,7 @@
 Encoding=UTF-8
 Keywords=
 Name=Halcyon
+Name[az]=Halcyon
 Name[ca]=Halcyon
 Name[ca@valencia]=Halcyon
 Name[es]=Halcyon
@@ -17,7 +18,9 @@ Name[sv]=Halcyon
 Name[tr]=Halikon
 Name[uk]=Альціон
 Name[x-test]=xxHalcyonxx
+Name[zh_CN]=Halcyon
 Description=A mobile homescreen focused on simplicity and ease-of-use.
+Description[az]=Mobil cihazlardakı ev ekranında daha çox sadəlik və istifadə rahatlığı nəzərə alınıb.
 Description[ca]=Una pantalla d'inici del mòbil enfocada a la senzillesa i facilitat d'ús.
 Description[ca@valencia]=Una pantalla d'inici del mòbil enfocada a la senzillesa i facilitat d'ús.
 Description[es]=Pantalla de inicio para móvil centrada en la simplicidad y en la facilidad de uso.
@@ -30,6 +33,7 @@ Description[sv]=En hemskärm för mobiler fokuserad på enkelhet och användbarh
 Description[tr]=Yalınlığa ve kullanım kolaylığına odaklanmış, taşınabilir bir ana ekran.
 Description[uk]=Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.
 Description[x-test]=xxA mobile homescreen focused on simplicity and ease-of-use.xx
+Description[zh_CN]=简约易用的手机主屏幕应用
 Type=Service
 
 X-KDE-ServiceTypes=Plasma/Applet,Plasma/Containment
