@@ -20,7 +20,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MouseArea {
+MobileShell.ExtendedAbstractButton {
     id: delegate
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
@@ -34,10 +34,15 @@ MouseArea {
 
     signal launch(int x, int y, var source, string title, string storageId)
     
-    onPressAndHold: {
+    function openContextMenu() {
         dialogLoader.active = true;
         dialogLoader.item.open();
     }
+    
+    cursorShape: Qt.PointingHandCursor
+    hoverEnabled: true
+    onPressAndHold: openContextMenu()
+    onRightClickPressed: openContextMenu()
     
     function launchApp() {
         // launch app
@@ -54,6 +59,7 @@ MouseArea {
         
         sourceComponent: PlasmaComponents.Menu {
             title: label.text
+            closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
             
             PlasmaComponents.MenuItem {
                 icon.name: "emblem-favorite"
@@ -102,8 +108,6 @@ MouseArea {
         }
     }
     
-    cursorShape: Qt.PointingHandCursor
-    hoverEnabled: true
     onPressedChanged: {
         if (pressed) {
             growAnim.stop();
@@ -146,6 +150,14 @@ MouseArea {
                 width: PlasmaCore.Units.smallSpacing
                 height: width
                 color: theme.highlightColor
+            }
+            
+            // darken effect when hovered/pressed
+            layer {
+                enabled: delegate.pressed || delegate.hovered
+                effect: ColorOverlay {
+                    color: Qt.rgba(0, 0, 0, 0.3)
+                }
             }
         }
 

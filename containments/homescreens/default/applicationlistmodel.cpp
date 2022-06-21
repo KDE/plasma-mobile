@@ -63,7 +63,6 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
 
 void ApplicationListModel::sycocaDbChanged()
 {
-    m_applicationList.clear();
     loadApplications();
 }
 

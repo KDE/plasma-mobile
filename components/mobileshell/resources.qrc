@@ -21,6 +21,7 @@
         <file>qml/actiondrawer/PortraitContentContainer.qml</file>
         
         <file>qml/components/BaseItem.qml</file>
+        <file>qml/components/ExtendedAbstractButton.qml</file>
         <file>qml/components/Haptics.qml</file>
         <file>qml/components/HapticsEffectWrapper.qml</file>
         <file>qml/components/MarqueeLabel.qml</file>

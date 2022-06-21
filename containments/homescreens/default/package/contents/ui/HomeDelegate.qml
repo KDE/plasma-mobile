@@ -100,7 +100,7 @@ ContainmentLayoutManager.ItemContainer {
         }
     }
 
-    contentItem: MouseArea {
+    contentItem: MobileShell.ExtendedAbstractButton {
         id: mouseArea
         
         // grow/shrink animation
@@ -187,7 +187,7 @@ ContainmentLayoutManager.ItemContainer {
                 
                 // darken effect when hovered/pressed
                 layer {
-                    enabled: mouseArea.pressed || mouseArea.containsMouse
+                    enabled: mouseArea.pressed || mouseArea.hovered
                     effect: ColorOverlay {
                         color: Qt.rgba(0, 0, 0, 0.3)
                     }
