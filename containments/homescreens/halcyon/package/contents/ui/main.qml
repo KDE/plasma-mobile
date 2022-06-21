@@ -30,7 +30,7 @@ MobileShell.HomeScreen {
     
     Rectangle {
         id: darkenBackground
-        color: homescreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2)
+        color: root.overlayShown ? 'transparent' : (homescreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
         anchors.fill: parent
         z: -1
         Behavior on color { 

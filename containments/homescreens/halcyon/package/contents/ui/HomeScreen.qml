@@ -28,6 +28,12 @@ Item {
         favouritesList.contentY = favouritesList.originY;
     }
     
+    function openConfigure() {
+        console.log('triggered')
+        plasmoid.action("configure").trigger();
+        plasmoid.editMode = false;
+    }
+    
     QQC2.SwipeView {
         id: swipeView
         opacity: 1 - searchWidget.openFactor
@@ -42,6 +48,11 @@ Item {
         Item {
             height: swipeView.height
             width: swipeView.width
+            
+            // open wallpaper menu when held on click
+            TapHandler {
+                onLongPressed: root.openConfigure()
+            }
                     
             ListView {
                 id: favouritesList
@@ -53,20 +64,16 @@ Item {
                 anchors.leftMargin: Math.round(parent.width * 0.1)
                 anchors.rightMargin: Math.round(parent.width * 0.1)
                 
-                // open wallpaper menu when held on click
-                TapHandler {
-                    onLongPressed: {
-                        plasmoid.action("configure").trigger();
-                        plasmoid.editMode = false;
-                    }
-                }
-                
                 model: Halcyon.PinnedModel
                 header: MobileShell.BaseItem {
                     topPadding: Math.round(swipeView.height * 0.2)
                     bottomPadding: PlasmaCore.Units.largeSpacing
                     implicitWidth: favouritesList.width
 
+                    background: Rectangle {
+                        color: 'transparent'
+                        TapHandler { onLongPressed: root.openConfigure() } // open wallpaper menu when held on click
+                    }
                     contentItem: Clock {}
                 }
                 
@@ -75,6 +82,11 @@ Item {
                     
                     width: favouritesList.width
                     height: visible ? favouritesList.delegateHeight : 0
+                }
+                
+                // open wallpaper menu when held on click
+                TapHandler {
+                    onLongPressed: root.openConfigure()
                 }
                 
                 ColumnLayout {
