@@ -75,6 +75,7 @@ set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus inter
 
 include(CheckIncludeFiles)
 
+ecm_find_qmlmodule(org.kde.kirigamiaddons.labs.mobileform 0.1)
 ecm_find_qmlmodule(org.kde.pipewire 0.1)
 
 plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)

@@ -36,6 +36,8 @@ It is recommended to use `kdesrc-build` to build this from source. See [this pag
 Dependencies:
 * KDE Frameworks 5 setup (plasma-framework and its dependencies)
 * Plasma Nano
+* Kirigami
+* Kirigami Addons
 
 To start the phone homescreen in a window, run:
 ```

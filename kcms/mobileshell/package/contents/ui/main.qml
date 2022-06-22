@@ -10,8 +10,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kcm 1.3 as KCM
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-
-import "mobileform" as MobileForm
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 KCM.SimpleKCM {
     id: root
@@ -43,12 +42,7 @@ KCM.SimpleKCM {
                     onClicked: kcm.push("VibrationForm.qml")
                 }
                 
-                Kirigami.Separator {
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                    Layout.fillWidth: true
-                    opacity: (!shellVibrationsButton.controlHovered && !animationsSwitch.controlHovered) ? 0.5 : 0
-                }
+                MobileForm.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
                 
                 MobileForm.FormSwitchDelegate {
                     id: animationsSwitch
@@ -130,12 +124,7 @@ KCM.SimpleKCM {
                     onClicked: kcm.push("QuickSettingsForm.qml")
                 }
                 
-                Kirigami.Separator {
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                    Layout.fillWidth: true
-                    opacity: (!quickSettingsButton.controlHovered && !topLeftActionDrawerModeDelegate.controlHovered) ? 0.5 : 0
-                }
+                MobileForm.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
                 
                 property string pinnedString: i18nc("Pinned action drawer mode", "Pinned Mode")
                 property string expandedString: i18nc("Expanded action drawer mode", "Expanded Mode")
@@ -160,6 +149,7 @@ KCM.SimpleKCM {
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
                         }
                     }
+                    dialog.parent: root
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2
@@ -175,12 +165,7 @@ KCM.SimpleKCM {
                     }
                 }
                 
-                Kirigami.Separator {
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
-                    Layout.fillWidth: true
-                    opacity: (!topLeftActionDrawerModeDelegate.controlHovered && !topRightActionDrawerModeDelegate.controlHovered) ? 0.5 : 0
-                }
+                MobileForm.FormDelegateSeparator { above: topLeftActionDrawerModeDelegate; below: topRightActionDrawerModeDelegate }
                 
                 MobileForm.FormComboBoxDelegate {
                     id: topRightActionDrawerModeDelegate
@@ -202,6 +187,7 @@ KCM.SimpleKCM {
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
                         }
                     }
+                    dialog.parent: root
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2
