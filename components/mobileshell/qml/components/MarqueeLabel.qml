@@ -1,8 +1,5 @@
-/*
- *   SPDX-FileCopyrightText: 2022 Yari Polla <skilvingr@gmail.com>
- *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2022 Yari Polla <skilvingr@gmail.com>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.15
 
@@ -12,6 +9,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 /**
  * This is a simple marquee (flowing) label based on PlasmaComponents Label.
  */
+
 PlasmaComponents.Label {
     id: root
                 

@@ -1,9 +1,6 @@
-/*
- *   SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
- *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
+// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
@@ -19,6 +16,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 /**
  * Component that animates an app opening from a location.
  */
+
 MouseArea { // use mousearea to ensure clicks don't go behind
     id: root
     visible: false

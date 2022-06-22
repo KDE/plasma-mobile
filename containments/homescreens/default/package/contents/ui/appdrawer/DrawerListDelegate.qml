@@ -18,7 +18,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-MobileShell.ExtendedAbstractButton {
+MouseArea {
     id: delegate
     property int reservedSpaceForLabel
     property alias iconItem: icon
@@ -45,7 +45,7 @@ MobileShell.ExtendedAbstractButton {
     
     Rectangle {
         anchors.fill: parent
-        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.hovered ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
+        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
         Behavior on color { 
             ColorAnimation { duration: PlasmaCore.Units.shortDuration } 
         }

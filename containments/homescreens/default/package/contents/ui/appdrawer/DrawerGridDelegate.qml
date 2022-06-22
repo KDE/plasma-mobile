@@ -17,7 +17,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-MobileShell.ExtendedAbstractButton {
+MouseArea {
     id: delegate
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
@@ -129,7 +129,7 @@ MobileShell.ExtendedAbstractButton {
             
             // darken effect when hovered/pressed
             layer {
-                enabled: delegate.pressed || delegate.hovered
+                enabled: delegate.pressed || delegate.containsMouse
                 effect: ColorOverlay {
                     color: Qt.rgba(0, 0, 0, 0.3)
                 }
