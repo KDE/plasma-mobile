@@ -25,6 +25,7 @@ MobileShell.HomeScreen {
     
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
+        Halcyon.PinnedModel.load();
         forceActiveFocus();
     }
     
