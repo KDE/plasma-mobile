@@ -7,6 +7,7 @@ import QtQuick.Window 2.15
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.pipewire 0.1 as PipeWire
 import org.kde.pipewire.record 0.1 as PWRec
+import org.kde.taskmanager 0.1 as TaskManager
 
 MobileShell.QuickSetting {
     id: root
@@ -45,7 +46,7 @@ MobileShell.QuickSetting {
         active: root.enabled
 
     }
-    PipeWire.ScreencastingRequest {
+    TaskManager.ScreencastingRequest {
         id: waylandItem
         outputName: root.enabled ? Screen.name : ""
     }
