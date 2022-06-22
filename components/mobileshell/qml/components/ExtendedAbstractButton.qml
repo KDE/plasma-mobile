@@ -20,35 +20,9 @@ QQC2.AbstractButton {
     property alias cursorShape: mouseArea.cursorShape
     
     /**
-     * This property holds the elapsed time in milliseconds before pressAndHold is emitted.
-     */
-    property real pressAndHoldInterval: 1000
-    
-    /**
-     * Signal that is emitted when the button has been held for a certain amount of time.
-     */
-    signal pressAndHold()
-    
-    /**
      * Signal that is emitted when the right click button is pressed.
      */
     signal rightClickPressed()
-    
-    Timer {
-        id: timer
-        interval: pressAndHoldInterval
-        repeat: false
-        running: false
-        onTriggered: root.pressAndHold()
-    }
-    
-    onPressedChanged: {
-        if (pressed) {
-            timer.restart();
-        } else {
-            timer.stop();
-        }
-    }
 
     MouseArea {
         id: mouseArea
