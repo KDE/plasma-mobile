@@ -7,8 +7,6 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-
 pragma Singleton
 
 /**
