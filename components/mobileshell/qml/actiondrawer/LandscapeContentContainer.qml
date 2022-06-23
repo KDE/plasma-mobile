@@ -71,6 +71,7 @@ PlasmaCore.ColorScope {
                 top: mediaWidget.bottom
                 topMargin: 0
                 bottom: parent.bottom
+                bottomMargin: 0
                 right: quickSettings.left
                 left: parent.left
             }
