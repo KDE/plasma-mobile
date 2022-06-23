@@ -10,7 +10,6 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.configuration 2.0
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 AppletConfiguration {
     id: root
@@ -45,8 +44,6 @@ AppletConfiguration {
             horizontal: root.horizontal
         }
     }
-    
-    Component.onCompleted: MobileShell.Haptics.buttonVibrate();
     
     MouseArea {
         z: -1
