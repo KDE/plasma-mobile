@@ -79,17 +79,21 @@ Controls.Drawer {
                     width: PlasmaCore.Units.iconSizes.large
                     height: width
                     icon: "view-preview"
-                    visible: !walliePreview.visible
+                    visible: !wallpaperPreviewLoader.visible
                 }
 
-                Addons.QPixmapItem {
-                    id: walliePreview
-                    anchors.fill: parent
+                Loader {
+                    id: wallpaperPreviewLoader
                     visible: model.screenshot != null
-                    smooth: true
-                    pixmap: model.screenshot
-                    fillMode: Image.PreserveAspectCrop
-                    
+                    anchors.fill: parent
+                    active: true
+                    asynchronous: true
+                    sourceComponent: Addons.QPixmapItem {
+                        id: walliePreview
+                        smooth: true
+                        pixmap: model.screenshot
+                        fillMode: Image.PreserveAspectCrop
+                    }
                 }
             }
             onClicked: {
