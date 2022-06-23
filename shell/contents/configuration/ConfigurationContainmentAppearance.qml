@@ -6,19 +6,19 @@
 
 import QtQuick 2.15
 import org.kde.plasma.configuration 2.0
-import QtQuick.Controls 2.3 as QQC2
-import QtQuick.Layouts 1.1
+import QtQuick.Controls 2.15 as QQC2
+import QtQuick.Layouts 1.15
 
 import org.kde.newstuff 1.62 as NewStuff
-import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 ColumnLayout {
     id: root
 
-    property int formAlignment: wallpaperComboBox.Kirigami.ScenePosition.x - root.Kirigami.ScenePosition.x + (PlasmaCore.Units.largeSpacing/2)
     property string currentWallpaper: ""
-    property string containmentPlugin: ""
+    property string containmentPlugin: configDialog.containmentPlugin
     signal configurationChanged
 
 //BEGIN functions
@@ -37,17 +37,6 @@ ColumnLayout {
     }
 //END functions
 
-    Component.onCompleted: {
-        for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
-            var data = configDialog.wallpaperConfigModel.get(i);
-            if (configDialog.currentWallpaper == data.pluginName) {
-                wallpaperComboBox.currentIndex = i
-                wallpaperComboBox.activated(i);
-                break;
-            }
-        }
-    }
-
     Kirigami.InlineMessage {
         visible: plasmoid.immutable || animating
         text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes have been restricted by the system administrator")
@@ -58,65 +47,111 @@ ColumnLayout {
         Layout.bottomMargin: Kirigami.Units.smallSpacing * 2 // we need this because ColumnLayout's spacing is 0
     }
 
-    Kirigami.FormLayout {
+    ColumnLayout {
+        spacing: 0
         Layout.fillWidth: true
         
-        Component.onCompleted: {
-            for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
-                var data = configDialog.containmentPluginsConfigModel.get(i);
-                if (configDialog.containmentPlugin === data.pluginName) {
-                    pluginComboBox.currentIndex = i
-                    pluginComboBox.activated(i);
-                    break;
-                }
-            }
-
-            for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
-                var data = configDialog.wallpaperConfigModel.get(i);
-                if (configDialog.currentWallpaper === data.pluginName) {
-                    wallpaperComboBox.currentIndex = i
-                    wallpaperComboBox.activated(i);
-                    break;
-                }
-            }
-        }
-        
-        QQC2.ComboBox {
-            id: pluginComboBox
-            Layout.preferredWidth: Math.max(implicitWidth, wallpaperComboBox.implicitWidth)
-            Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout:")
-            enabled: !plasmoid.immutable
-            model: configDialog.containmentPluginsConfigModel
-            textRole: "name"
-            visible: count > 1 // only show if there are multiple plugins
-            onActivated: {
-                var model = configDialog.containmentPluginsConfigModel.get(currentIndex)
-                root.containmentPlugin = model.pluginName
-                root.settingValueChanged()
-            }
-        }
-        
-        RowLayout {
+        MobileForm.FormCard {
             Layout.fillWidth: true
-            Kirigami.FormData.label: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Type:")
-            QQC2.ComboBox {
-                id: wallpaperComboBox
-                Layout.preferredWidth: Math.max(implicitWidth, pluginComboBox.implicitWidth)
-                model: configDialog.wallpaperConfigModel
-                width: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 24
-                textRole: "name"
-                onActivated: {
-                    var model = configDialog.wallpaperConfigModel.get(currentIndex)
-                    root.currentWallpaper = model.pluginName
-                    configDialog.currentWallpaper = model.pluginName
-                    main.sourceFile = model.source
-                    root.configurationChanged()
+            
+            contentItem: ColumnLayout {
+                spacing: 0
+                
+                MobileForm.FormCardHeader {
+                    title: i18n("General")
                 }
-            }
-            NewStuff.Button {
-                configFile: "wallpaperplugin.knsrc"
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins…")
-                Layout.preferredHeight: wallpaperComboBox.height
+                
+                MobileForm.FormComboBoxDelegate {
+                    id: layoutSelectComboBox
+                    enabled: !plasmoid.immutable
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Homescreen Layout")
+                    description: i18n("The homescreen layout to use.")
+                    visible: model.count > 1 // only show if there are multiple plugins
+                    
+                    currentValue: {
+                        for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
+                            var data = configDialog.containmentPluginsConfigModel.get(i);
+                            if (configDialog.containmentPlugin === data.pluginName) {
+                                return data.name;
+                            }
+                        }
+                        return "";
+                    }
+                    model: configDialog.containmentPluginsConfigModel
+                    dialogDelegate: QQC2.RadioDelegate {
+                        implicitWidth: Kirigami.Units.gridUnit * 16
+                        topPadding: Kirigami.Units.smallSpacing * 2
+                        bottomPadding: Kirigami.Units.smallSpacing * 2
+                        
+                        text: model.name
+                        checked: layoutSelectComboBox.currentValue === model.name
+                        onCheckedChanged: {
+                            if (checked) {
+                                layoutSelectComboBox.currentValue = name;
+                                var model = configDialog.containmentPluginsConfigModel.get(index);
+                                root.containmentPlugin = pluginName;
+                                root.configurationChanged();
+                            }
+                        }
+                    }
+                }
+                
+                MobileForm.FormDelegateSeparator { above: layoutSelectComboBox; below: wallpaperPluginSelectComboBox }
+                
+                MobileForm.FormComboBoxDelegate {
+                    id: wallpaperPluginSelectComboBox
+                    text: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Plugin")
+                    description: i18n("The wallpaper plugin to use.")
+                    
+                    currentValue: {
+                        for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
+                            var data = configDialog.wallpaperConfigModel.get(i);
+                            if (configDialog.currentWallpaper === data.pluginName) {
+                                return data.name;
+                            }
+                        }
+                        return "";
+                    }
+                    model: configDialog.wallpaperConfigModel
+                    dialogDelegate: QQC2.RadioDelegate {
+                        implicitWidth: Kirigami.Units.gridUnit * 16
+                        topPadding: Kirigami.Units.smallSpacing * 2
+                        bottomPadding: Kirigami.Units.smallSpacing * 2
+                        
+                        text: model.name
+                        checked: wallpaperPluginSelectComboBox.currentValue === model.name
+                        onCheckedChanged: {
+                            if (checked) {
+                                wallpaperPluginSelectComboBox.currentValue = name;
+                                var model = configDialog.wallpaperConfigModel.get(index);
+                                root.currentWallpaper = pluginName;
+                                configDialog.currentWallpaper = pluginName;
+                                main.sourceFile = source;
+                                root.configurationChanged();
+                            }
+                        }
+                    }
+                }
+                
+                MobileForm.FormDelegateSeparator { above: wallpaperPluginSelectComboBox }
+                
+                MobileForm.AbstractFormDelegate {
+                    id: wallpaperPluginButton
+                    Layout.fillWidth: true
+                    background: Item {}
+                    
+                    contentItem: RowLayout {
+                        QQC2.Label {
+                            Layout.fillWidth: true
+                            text: i18n("Wallpaper Plugins")
+                        }
+                        
+                        NewStuff.Button {
+                            configFile: "wallpaperplugin.knsrc"
+                            text: i18nd("plasma_shell_org.kde.plasma.desktop", "Get New Plugins…")
+                        }
+                    }
+                }
             }
         }
     }
