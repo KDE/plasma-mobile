@@ -73,12 +73,14 @@ Item {
                 onVerticalOvershootChanged: {
                     if (dragging && verticalOvershoot < 0) {
                         if (!openingSearchWidget) {
-                            openingSearchWidget = true;
-                            root.searchWidget.startGesture();
+                            if (oldVerticalOvershoot === 0) {
+                                openingSearchWidget = true;
+                                root.searchWidget.startGesture();
+                            }
+                        } else {
+                            let offset = -(verticalOvershoot - oldVerticalOvershoot);
+                            root.searchWidget.updateGestureOffset(-offset);
                         }
-                        
-                        let offset = -(verticalOvershoot - oldVerticalOvershoot);
-                        root.searchWidget.updateGestureOffset(-offset);
                     }
                     oldVerticalOvershoot = verticalOvershoot;
                 }

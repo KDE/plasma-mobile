@@ -35,7 +35,7 @@ GridView {
 
     header: Controls.Control {
         implicitWidth: gridView.width
-        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.2)
+        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.25)
         bottomPadding: PlasmaCore.Units.largeSpacing
         leftPadding: PlasmaCore.Units.smallSpacing
         
