@@ -136,12 +136,6 @@ ColumnLayout {
             text: i18nd("plasma_shell_org.kde.plasma.desktop", "Apply now")
             onClicked: saveConfig()
         }
-
-        Binding {
-            target: categoriesScroll //from parent scope AppletConfiguration
-            property: "enabled"
-            value: !switchContainmentWarning.visible
-        }
     }
 
     Item {
