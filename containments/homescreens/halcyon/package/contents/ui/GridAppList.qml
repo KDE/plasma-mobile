@@ -21,15 +21,13 @@ GridView {
     id: gridView
     clip: true
     
-    signal launched
-    
     readonly property int reservedSpaceForLabel: metrics.height
     
     cellWidth: width / Math.min(Math.floor(width / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
     property int columns: Math.floor(width / cellWidth)
-    property int rows: Math.ceil(model.count / columns)
+    property int rows: Math.ceil(Halcyon.ApplicationListModel.count / columns)
     
     cacheBuffer: Math.max(0, rows * cellHeight)
 
@@ -37,13 +35,13 @@ GridView {
 
     header: Controls.Control {
         implicitWidth: gridView.width
-        topPadding: PlasmaCore.Units.largeSpacing
+        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.2)
         bottomPadding: PlasmaCore.Units.largeSpacing
         leftPadding: PlasmaCore.Units.smallSpacing
         
-        contentItem: PlasmaExtras.Heading {
+        contentItem: PC3.Label {
             color: "white"
-            level: 1
+            font.pointSize: 16
             font.weight: Font.Bold
             text: i18n("Applications")
         }
@@ -78,7 +76,6 @@ GridView {
 
             application.setMinimizedDelegate(delegate);
             application.runApplication();
-            gridView.launched();
         }
     }
 }

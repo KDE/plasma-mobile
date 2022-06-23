@@ -58,11 +58,36 @@ Item {
                 id: favouritesList
                 clip: true
                 interactive: root.interactive
+                boundsMovement: Flickable.StopAtBounds
+                boundsBehavior: Flickable.DragOverBounds
+                
                 property real delegateHeight: PlasmaCore.Units.gridUnit * 3
                 
                 anchors.fill: parent
                 anchors.leftMargin: Math.round(parent.width * 0.1)
                 anchors.rightMargin: Math.round(parent.width * 0.1)
+                
+                // search widget open gesture
+                property bool openingSearchWidget: false
+                property real oldVerticalOvershoot: verticalOvershoot
+                onVerticalOvershootChanged: {
+                    if (dragging && verticalOvershoot < 0) {
+                        if (!openingSearchWidget) {
+                            openingSearchWidget = true;
+                            root.searchWidget.startGesture();
+                        }
+                        
+                        let offset = -(verticalOvershoot - oldVerticalOvershoot);
+                        root.searchWidget.updateGestureOffset(-offset);
+                    }
+                    oldVerticalOvershoot = verticalOvershoot;
+                }
+                onDraggingChanged: {
+                    if (!dragging && openingSearchWidget) {
+                        openingSearchWidget = false;
+                        root.searchWidget.endGesture();
+                    }
+                }
                 
                 model: Halcyon.PinnedModel
                 header: MobileShell.BaseItem {
@@ -79,7 +104,6 @@ Item {
                 
                 delegate: DrawerListDelegate {
                     id: delegate
-                    
                     width: favouritesList.width
                     height: visible ? favouritesList.delegateHeight : 0
                 }
@@ -134,13 +158,6 @@ Item {
                 Layout.rightMargin: column.horizontalMargin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                
-                // open search widget when pulled down
-                onDraggingChanged: {
-                    if (!dragging && (contentY < originY - PlasmaCore.Units.gridUnit * 3)) {
-                        searchWidget.open();
-                    }
-                }
             }
         }
     }
