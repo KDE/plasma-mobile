@@ -58,15 +58,13 @@ Item {
                 id: favouritesList
                 clip: true
                 interactive: root.interactive
-                boundsMovement: Flickable.StopAtBounds
-                boundsBehavior: Flickable.DragOverBounds
-                
-                property real delegateHeight: PlasmaCore.Units.gridUnit * 3
-                
                 anchors.fill: parent
-                anchors.leftMargin: Math.round(parent.width * 0.1)
-                anchors.rightMargin: Math.round(parent.width * 0.1)
                 
+                // don't set anchors.margins since we want everywhere to be draggable
+                readonly property real leftMargin: Math.round(parent.width * 0.1)
+                readonly property real rightMargin: Math.round(parent.width * 0.1)
+                readonly property real delegateHeight: PlasmaCore.Units.gridUnit * 3
+                                
                 // search widget open gesture
                 property bool openingSearchWidget: false
                 property real oldVerticalOvershoot: verticalOvershoot
@@ -95,6 +93,8 @@ Item {
                 header: MobileShell.BaseItem {
                     topPadding: Math.round(swipeView.height * 0.2)
                     bottomPadding: PlasmaCore.Units.largeSpacing
+                    leftPadding: favouritesList.leftMargin
+                    rightPadding: favouritesList.rightMargin
                     implicitWidth: favouritesList.width
 
                     background: Rectangle {
@@ -104,10 +104,14 @@ Item {
                     contentItem: Clock {}
                 }
                 
-                delegate: DrawerListDelegate {
-                    id: delegate
-                    width: favouritesList.width
-                    height: visible ? favouritesList.delegateHeight : 0
+                delegate: MobileShell.BaseItem {
+                    leftPadding: favouritesList.leftMargin
+                    rightPadding: favouritesList.rightMargin
+                    
+                    contentItem: DrawerListDelegate {
+                        implicitWidth: favouritesList.width - favouritesList.leftMargin - favouritesList.rightMargin
+                        implicitHeight: visible ? favouritesList.delegateHeight : 0
+                    }
                 }
                 
                 // open wallpaper menu when held on click
@@ -121,8 +125,10 @@ Item {
                     visible: favouritesList.count == 0
                     opacity: 0.9
                     
-                    anchors.topMargin: Math.round(swipeView.height * 0.2) - (favouritesList.contentY - favouritesList.originY)
                     anchors.fill: parent
+                    anchors.topMargin: Math.round(swipeView.height * 0.2) - (favouritesList.contentY - favouritesList.originY)
+                    anchors.leftMargin: favouritesList.leftMargin
+                    anchors.rightMargin: favouritesList.rightMargin
                     
                     Kirigami.Icon {
                         id: icon

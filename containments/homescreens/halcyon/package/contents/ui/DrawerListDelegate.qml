@@ -17,7 +17,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MobileShell.ExtendedAbstractButton {
+MouseArea {
     id: delegate
     
     property alias iconItem: icon
@@ -51,14 +51,18 @@ MobileShell.ExtendedAbstractButton {
     
     hoverEnabled: true
     onPressAndHold: openContextMenu()
-    onRightClickPressed: openContextMenu()
-
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    
     onClicked: {
-        // launch app
-        if (application.running) {
-            delegate.launch(0, 0, "", applicationName, applicationStorageId);
+        if (mouse.button === Qt.RightButton) {
+            openContextMenu();
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
+            // launch app
+            if (application.running) {
+                delegate.launch(0, 0, "", applicationName, applicationStorageId);
+            } else {
+                delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
+            }
         }
     }
     
@@ -81,83 +85,79 @@ MobileShell.ExtendedAbstractButton {
         }
     }
     
-    background: Rectangle {
+    Rectangle {
+        anchors.fill: parent
         radius: height / 2        
-        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
+        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
     }
     
-    contentItem: Item {
-        implicitHeight: rowLayout.height + rowLayout.anchors.topMargin + rowLayout.anchors.bottomMargin
-        implicitWidth: rowLayout.width + rowLayout.anchors.rightMargin + rowLayout.anchors.leftMargin
-        
-        RowLayout {
-            id: rowLayout
-            anchors {
-                fill: parent
-                leftMargin: PlasmaCore.Units.smallSpacing * 2
-                topMargin: PlasmaCore.Units.smallSpacing
-                rightMargin: PlasmaCore.Units.smallSpacing * 2
-                bottomMargin: PlasmaCore.Units.smallSpacing
+    RowLayout {
+        id: rowLayout
+        anchors {
+            fill: parent
+            leftMargin: PlasmaCore.Units.smallSpacing * 2
+            topMargin: PlasmaCore.Units.smallSpacing
+            rightMargin: PlasmaCore.Units.smallSpacing * 2
+            bottomMargin: PlasmaCore.Units.smallSpacing
+        }
+        spacing: 0
+
+        PlasmaCore.IconItem {
+            id: icon
+
+            Layout.alignment: Qt.AlignLeft
+            Layout.minimumWidth: Layout.minimumHeight
+            Layout.preferredWidth: Layout.minimumHeight
+            Layout.minimumHeight: parent.height
+            Layout.preferredHeight: Layout.minimumHeight
+
+            usesPlasmaTheme: false
+            source: applicationIcon
+
+            Rectangle {
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                }
+                visible: application ? application.running : false
+                radius: width
+                width: PlasmaCore.Units.smallSpacing
+                height: width
+                color: PlasmaCore.Theme.highlightColor
             }
-            spacing: 0
-
-            PlasmaCore.IconItem {
-                id: icon
-
-                Layout.alignment: Qt.AlignLeft
-                Layout.minimumWidth: Layout.minimumHeight
-                Layout.preferredWidth: Layout.minimumHeight
-                Layout.minimumHeight: parent.height
-                Layout.preferredHeight: Layout.minimumHeight
-
-                usesPlasmaTheme: false
-                source: applicationIcon
-
-                Rectangle {
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: parent.bottom
-                    }
-                    visible: application ? application.running : false
-                    radius: width
-                    width: PlasmaCore.Units.smallSpacing
-                    height: width
-                    color: PlasmaCore.Theme.highlightColor
-                }
-                
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+            
+            layer.enabled: true
+            layer.effect: DropShadow {
+                verticalOffset: 1
+                radius: 4
+                samples: 6
+                color: Qt.rgba(0, 0, 0, 0.5)
             }
+        }
 
-            PlasmaComponents.Label {
-                id: label
-                visible: text.length > 0
+        PlasmaComponents.Label {
+            id: label
+            visible: text.length > 0
 
-                Layout.fillWidth: true
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-                Layout.rightMargin: PlasmaCore.Units.largeSpacing
-                wrapMode: Text.WordWrap
-                maximumLineCount: 1
-                elide: Text.ElideRight
+            Layout.fillWidth: true
+            Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
+            Layout.rightMargin: PlasmaCore.Units.largeSpacing
+            wrapMode: Text.WordWrap
+            maximumLineCount: 1
+            elide: Text.ElideRight
 
-                text: applicationName
+            text: applicationName
 
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
-                font.weight: Font.Bold
-                color: "white"
-                
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+            font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+            font.weight: Font.Bold
+            color: "white"
+            
+            layer.enabled: true
+            layer.effect: DropShadow {
+                verticalOffset: 1
+                radius: 4
+                samples: 6
+                color: Qt.rgba(0, 0, 0, 0.5)
             }
         }
     }
