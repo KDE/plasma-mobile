@@ -80,7 +80,7 @@ Item {
         anchors.leftMargin: MobileShell.Shell.leftMargin
         anchors.rightMargin: MobileShell.Shell.rightMargin
         
-        contentHeight: flickable.height + root.closedContentY + 999999
+        contentHeight: root.closedContentY
         contentY: root.closedContentY
         property real oldContentY: contentY
         property bool opening: false
