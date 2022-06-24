@@ -87,6 +87,10 @@ Item {
      */
     function clearHistory() {
         historyModel.clear(NotificationManager.Notifications.ClearExpired);
+        
+        if (historyModel.count === 0) {
+            backgroundClicked();
+        }
     }
 
     /**
