@@ -158,12 +158,12 @@ Item {
             height: swipeView.height
             width: swipeView.width
             
-            property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, column.width * 0.1 / 2)
+            property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, root.width * 0.1 / 2)
             
             GridAppList {
                 interactive: root.interactive
-                Layout.leftMargin: column.horizontalMargin
-                Layout.rightMargin: column.horizontalMargin
+                leftMargin: column.horizontalMargin
+                rightMargin: column.horizontalMargin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }

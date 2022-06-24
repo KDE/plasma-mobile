@@ -166,11 +166,12 @@ MobileShell.ExtendedAbstractButton {
             visible: text.length > 0
 
             Layout.fillWidth: true
-            Layout.topMargin: PlasmaCore.Units.smallSpacing
             Layout.preferredHeight: delegate.reservedSpaceForLabel
-            wrapMode: Text.WordWrap
+            Layout.topMargin: PlasmaCore.Units.smallSpacing
             Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
             Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
+            
+            wrapMode: Text.WordWrap
             maximumLineCount: 2
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop

@@ -22,20 +22,21 @@ GridView {
     clip: true
     
     readonly property int reservedSpaceForLabel: metrics.height
+    readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     
-    cellWidth: width / Math.min(Math.floor(width / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
+    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
-    property int columns: Math.floor(width / cellWidth)
+    property int columns: Math.floor(effectiveContentWidth / cellWidth)
     property int rows: Math.ceil(Halcyon.ApplicationListModel.count / columns)
     
     cacheBuffer: Math.max(0, rows * cellHeight)
 
     model: Halcyon.ApplicationListModel
 
-    header: Controls.Control {
-        implicitWidth: gridView.width
-        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.25)
+    header: MobileShell.BaseItem {
+        implicitWidth: gridView.effectiveContentWidth
+        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.2)
         bottomPadding: PlasmaCore.Units.largeSpacing
         leftPadding: PlasmaCore.Units.smallSpacing
         
@@ -76,6 +77,23 @@ GridView {
 
             application.setMinimizedDelegate(delegate);
             application.runApplication();
+        }
+    }
+    
+    PC3.ScrollBar.vertical: PC3.ScrollBar {
+        id: scrollBar
+        interactive: true
+        enabled: true
+        Behavior on opacity {
+            OpacityAnimator {
+                duration: PlasmaCore.Units.longDuration * 2
+                easing.type: Easing.InOutQuad
+            }
+        }
+        implicitWidth: PlasmaCore.Units.smallSpacing
+        contentItem: Rectangle {
+            radius: width/2
+            color: Qt.rgba(1, 1, 1, 0.3)
         }
     }
 }
