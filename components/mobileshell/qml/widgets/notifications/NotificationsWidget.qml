@@ -372,7 +372,11 @@ Item {
             }
             
             PlasmaComponents3.ToolButton {
+                id: doNotDisturbButton
+                
                 Layout.alignment: hasNotifications ? Qt.AlignLeft : Qt.AlignHCenter
+                
+                visible: actionsRequireUnlock ? false : true
                 
                 font.bold: true
                 
@@ -384,7 +388,7 @@ Item {
             PlasmaComponents3.ToolButton {
                 id: clearButton
                 
-                Layout.alignment: Qt.AlignRight
+                Layout.alignment: doNotDisturbButton.visible ? Qt.AlignRight : Qt.AlignHCenter
                 
                 visible: hasNotifications
                 
