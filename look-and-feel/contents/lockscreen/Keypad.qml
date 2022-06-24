@@ -21,6 +21,8 @@ Rectangle {
     
     required property var lockScreenState
     
+    property alias passwordBar: passwordBar
+    
     // 0 - keypad is not shown, 1 - keypad is shown
     property double swipeProgress
     
@@ -48,25 +50,6 @@ Rectangle {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
-        }
-    }
-    
-    // listen for keyboard events
-    Keys.onPressed: {
-        if (event.modifiers === Qt.NoModifier) {
-            if (event.key === Qt.Key_Backspace) {
-                passwordBar.backspace();
-            } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                passwordBar.enter();
-            } else if (event.text != "") {
-                passwordBar.keyPress(event.text);
-            }
-        }
-
-        if (event.modifiers & Qt.ControlModifier) {
-            if (event.key === Qt.Key_Backspace) {
-                passwordBar.clear();
-            }
         }
     }
 

@@ -20,6 +20,8 @@ Rectangle {
     
     required property var lockScreenState
     
+    property alias textField: textField
+    
     // toggle between pin and password mode
     property bool isPinMode: true
     

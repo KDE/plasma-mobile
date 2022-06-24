@@ -29,9 +29,18 @@ PlasmaCore.ColorScope {
     property bool notificationsShown: false
     
     readonly property bool drawerOpen: flickable.openFactor >= 1
+    property var passwordBar: keypadLoader.item.passwordBar
     
     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     anchors.fill: parent
+    
+    // listen for keyboard events, and focus on input area
+    Component.onCompleted: forceActiveFocus();
+    Keys.onPressed: {
+        passwordBar.isPinMode = false;
+        flickable.goToOpenPosition();
+        passwordBar.textField.forceActiveFocus();
+    }
     
     // wallpaper blur 
     Loader {
@@ -167,6 +176,7 @@ PlasmaCore.ColorScope {
             
             // password keypad
             Loader {
+                id: keypadLoader
                 width: parent.width
                 asynchronous: true
                 active: !root.lockScreenState.passwordless // only load keypad if not passwordless
@@ -174,8 +184,9 @@ PlasmaCore.ColorScope {
                 anchors.bottom: parent.bottom
                 
                 sourceComponent: ColumnLayout {
-                    transform: Translate { y: flickable.keypadHeight - flickable.position }
+                    property alias passwordBar: keypad.passwordBar
                     
+                    transform: Translate { y: flickable.keypadHeight - flickable.position }
                     spacing: 0
                     
                     // info notification text
