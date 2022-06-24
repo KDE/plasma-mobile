@@ -351,7 +351,7 @@ Item {
                 right: toolButtons.right
             }
             
-            height: visible ? 1 : 0
+            height: 1
             
             opacity: 0.25
             color: PlasmaCore.Theme.textColor
