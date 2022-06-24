@@ -43,7 +43,7 @@ PlasmaCore.ColorScope {
         color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
                        PlasmaCore.Theme.backgroundColor.g, 
                        PlasmaCore.Theme.backgroundColor.b, 
-                       notificationWidget.hasNotifications ? 0.95 : 0.7)
+                       0.95)
         Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
@@ -114,11 +114,8 @@ PlasmaCore.ColorScope {
             top: quickSettings.top
             topMargin: quickSettings.height + translate.y
             bottom: parent.bottom
-            bottomMargin: PlasmaCore.Units.largeSpacing
             left: parent.left
-            leftMargin: PlasmaCore.Units.largeSpacing
             right: parent.right
-            rightMargin: PlasmaCore.Units.largeSpacing
         }
         opacity: applyMinMax(root.actionDrawer.offset / root.minimizedQuickSettingsOffset)
     }

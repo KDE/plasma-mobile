@@ -13,10 +13,13 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
+import org.kde.notificationmanager 1.0 as NotificationManager
+
 Rectangle {
     id: root
     required property var lockScreenState
     property var notificationsModel: []
+    property var notificationSettings: NotificationManager.Settings {}
     
     readonly property bool notificationsShown: notificationsList.hasNotifications
     
@@ -61,6 +64,7 @@ Rectangle {
             historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
             actionsRequireUnlock: true
             historyModel: root.notificationsModel
+            notificationSettings: root.notificationSettings
         
             property bool requestNotificationAction: false
             
