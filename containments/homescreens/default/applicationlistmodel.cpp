@@ -63,7 +63,7 @@ QHash<int, QByteArray> ApplicationListModel::roleNames() const
 
 void ApplicationListModel::sycocaDbChanged()
 {
-    loadApplications();
+    load();
 }
 
 void ApplicationListModel::windowCreated(KWayland::Client::PlasmaWindow *window)
@@ -93,7 +93,7 @@ void ApplicationListModel::windowCreated(KWayland::Client::PlasmaWindow *window)
     }
 }
 
-void ApplicationListModel::loadApplications()
+void ApplicationListModel::load()
 {
     auto cfg = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
     auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));

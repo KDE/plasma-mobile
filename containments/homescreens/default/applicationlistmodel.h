@@ -58,7 +58,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE virtual void loadApplications();
+    Q_INVOKABLE virtual void load();
     Q_INVOKABLE void runApplication(const QString &storageId);
 
     Q_INVOKABLE void setMinimizedDelegate(int row, QQuickItem *delegate);

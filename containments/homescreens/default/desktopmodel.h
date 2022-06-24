@@ -33,7 +33,7 @@ public:
     QString uniqueToStorageId(const QString &uniqueId) const;
 
     void loadSettings();
-    Q_INVOKABLE void load();
+    Q_INVOKABLE void load() override;
 
     int count();
     int favoriteCount();

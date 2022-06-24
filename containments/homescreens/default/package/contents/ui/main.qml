@@ -33,7 +33,7 @@ MobileShell.HomeScreen {
     property bool componentComplete: false
     
     Component.onCompleted: {
-        HomeScreenLib.ApplicationListModel.loadApplications();
+        HomeScreenLib.ApplicationListModel.load();
         HomeScreenLib.DesktopModel.load();
         
         // ensure the gestures work immediately on load
