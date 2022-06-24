@@ -330,7 +330,9 @@ Item {
     
     Item {
         id: toolButtons
-                    
+        
+        visible: !root.actionsRequireUnlock
+        
         width: root.width
         height: toolLayout.implicitHeight + spacer.height
         
@@ -376,8 +378,6 @@ Item {
                 
                 Layout.alignment: hasNotifications ? Qt.AlignLeft : Qt.AlignHCenter
                 
-                visible: actionsRequireUnlock ? false : true
-                
                 font.bold: true
                 
                 icon.name: doNotDisturbModeEnabled ? "notifications" : "notifications-disabled"
@@ -388,7 +388,7 @@ Item {
             PlasmaComponents3.ToolButton {
                 id: clearButton
                 
-                Layout.alignment: doNotDisturbButton.visible ? Qt.AlignRight : Qt.AlignHCenter
+                Layout.alignment: Qt.AlignRight
                 
                 visible: hasNotifications
                 
