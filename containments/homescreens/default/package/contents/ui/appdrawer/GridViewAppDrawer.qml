@@ -34,11 +34,16 @@ AbstractAppDrawer {
          */
         interactive: contentHeight <= height ? true : root.homeScreenState.appDrawerInteractive
         
-        cellWidth: root.contentWidth / Math.floor(root.contentWidth / ((root.availableCellHeight - root.reservedSpaceForLabel) + PlasmaCore.Units.smallSpacing*4))
-        cellHeight: root.availableCellHeight
+        readonly property real effectiveContentWidth: root.contentWidth - 2 * horizontalMargin
+        readonly property real horizontalMargin: root.width * 0.1 / 2
+        leftMargin: horizontalMargin
+        rightMargin: horizontalMargin
+        
+        cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
+        cellHeight: cellWidth + root.reservedSpaceForLabel
 
-        property int columns: Math.floor(root.contentWidth / cellWidth)
-        property int rows: Math.ceil(gridView.count / columns)
+        readonly property int columns: Math.floor(effectiveContentWidth / cellWidth)
+        readonly property int rows: Math.ceil(gridView.count / columns)
         
         cacheBuffer: Math.max(0, rows * cellHeight)
 

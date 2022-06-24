@@ -21,9 +21,11 @@ MouseArea {
     id: delegate
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
-
+    
     property int reservedSpaceForLabel
     property alias iconItem: icon
+    
+    readonly property real margins: Math.floor(width * 0.2)
 
     signal launch(int x, int y, var source, string title, string storageId)
     signal dragStarted(string imageSource, int x, int y, string mimeData)
@@ -97,10 +99,10 @@ MouseArea {
     ColumnLayout {
         anchors {
             fill: parent
-            leftMargin: PlasmaCore.Units.smallSpacing * 2
-            topMargin: PlasmaCore.Units.smallSpacing * 2
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
-            bottomMargin: PlasmaCore.Units.smallSpacing * 2
+            leftMargin: margins
+            topMargin: margins
+            rightMargin: margins
+            bottomMargin: margins
         }
         spacing: 0
 
@@ -109,7 +111,7 @@ MouseArea {
 
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: true
-            Layout.minimumHeight: parent.height - delegate.reservedSpaceForLabel
+            Layout.minimumHeight: Math.floor(parent.height - delegate.reservedSpaceForLabel)
             Layout.preferredHeight: Layout.minimumHeight
 
             usesPlasmaTheme: false
@@ -143,8 +145,8 @@ MouseArea {
             Layout.fillWidth: true
             Layout.preferredHeight: delegate.reservedSpaceForLabel
             Layout.topMargin: PlasmaCore.Units.smallSpacing
-            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing * 2
-            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing * 2
+            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
+            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
             
             wrapMode: Text.WordWrap
             maximumLineCount: 2
@@ -152,7 +154,7 @@ MouseArea {
             verticalAlignment: Text.AlignTop
             elide: Text.ElideRight
 
-            text:  model.applicationName
+            text: model.applicationName
 
             font.pointSize: theme.defaultFont.pointSize * 0.8
             font.weight: Font.Bold
