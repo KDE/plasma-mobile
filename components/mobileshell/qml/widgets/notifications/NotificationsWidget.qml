@@ -343,7 +343,7 @@ Item {
         Rectangle {
             id: spacer
             
-            visible: hasNotifications
+            visible: list.listOverflowing
                                 
             anchors {
                 top: toolButtons.top
