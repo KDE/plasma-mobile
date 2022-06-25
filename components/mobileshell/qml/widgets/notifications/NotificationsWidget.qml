@@ -333,7 +333,7 @@ Item {
     
     Item {
         id: toolButtons
-        height: spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin
+        height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
         
         // do not show on lockscreen
         visible: !root.actionsRequireUnlock

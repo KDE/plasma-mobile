@@ -71,12 +71,11 @@ Loader {
                 lockScreenState: root.lockScreenState
                 notificationsModel: root.notificationsModel
                 
+                Layout.alignment: Qt.AlignHCenter
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.maximumWidth: PlasmaCore.Units.gridUnit * (25 + 2) // clip margins 
                 topMargin: PlasmaCore.Units.gridUnit
-                leftMargin: PlasmaCore.Units.gridUnit
-                rightMargin: PlasmaCore.Units.gridUnit
                 
                 onPasswordRequested: root.passwordRequested()
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
