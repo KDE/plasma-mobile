@@ -22,7 +22,7 @@ GridView {
     clip: true
     
     readonly property int reservedSpaceForLabel: metrics.height
-    readonly property real effectiveContentWidth: width - leftMargin - rightMargin
+    required property real effectiveContentWidth
     
     cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel

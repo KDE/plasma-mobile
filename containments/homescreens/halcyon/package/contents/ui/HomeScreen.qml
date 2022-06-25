@@ -164,6 +164,7 @@ Item {
                 interactive: root.interactive
                 leftMargin: column.horizontalMargin
                 rightMargin: column.horizontalMargin
+                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
                 Layout.fillWidth: true
                 Layout.fillHeight: true
             }

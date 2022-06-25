@@ -34,10 +34,15 @@ AppletConfiguration {
     }
 //END model
 
+    // the wallpaper selector is quite heavy, so only load it when needed
     Loader {
         id: wallpaperSelectorLoader
         asynchronous: true
-        active: true
+        active: false
+        
+        onLoaded: {
+            wallpaperSelectorLoader.item.open();
+        }
         
         sourceComponent: WallpaperSelector {
             visible: false
@@ -88,7 +93,7 @@ AppletConfiguration {
                         opacityAnim.from = 1;
                         opacityAnim.to = 0;
                         opacityAnim.restart();
-                        wallpaperSelectorLoader.item.open();
+                        wallpaperSelectorLoader.active = true;
                     }
                 }
                 
@@ -104,7 +109,6 @@ AppletConfiguration {
                     text: i18n("Configure")
                     onClicked: {
                         appComponent.visible = true;
-                        wallpaperSelectorLoader.item.close()
                     }
                 }
             }
