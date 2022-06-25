@@ -14,13 +14,15 @@ import org.kde.plasma.configuration 2.0
 AppletConfiguration {
     id: root
     isContainment: true
-
-    appComponent.visible: false
-    appComponent.width: root.width < root.height ? root.width : Math.min(root.width, Math.max(appComponent.implicitWidth, PlasmaCore.Units.gridUnit * 45))
-    appComponent.height: Math.min(root.height, Math.max(appComponent.implicitHeight, PlasmaCore.Units.gridUnit * 29))
+    loadApp: false
 
     readonly property bool horizontal: root.width > root.height
 
+    onAppLoaded: {
+        app.width = root.width < root.height ? root.width : Math.min(root.width, Math.max(app.implicitWidth, PlasmaCore.Units.gridUnit * 45));
+        app.height = Math.min(root.height, Math.max(app.implicitHeight, PlasmaCore.Units.gridUnit * 29));
+    }
+    
 //BEGIN model
     globalConfigModel: globalContainmentConfigModel
 
@@ -108,7 +110,7 @@ AppletConfiguration {
                     icon.height: PlasmaCore.Units.iconSizes.medium
                     text: i18n("Configure")
                     onClicked: {
-                        appComponent.visible = true;
+                        root.loadApp = true;
                     }
                 }
             }

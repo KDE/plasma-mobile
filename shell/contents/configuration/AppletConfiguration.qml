@@ -21,7 +21,10 @@ Rectangle {
 //BEGIN properties
     
     property bool isContainment: false
-    property alias appComponent: app
+    property alias app: appLoader.item
+    property bool loadApp: true
+    
+    signal appLoaded()
     
 //END properties
 
@@ -119,16 +122,6 @@ Rectangle {
             }
         }
     }
-
-    Component.onCompleted: {
-        // if we are a containment then the first item will be ConfigurationContainmentAppearance
-        // if the applet does not have own configs then the first item will be Shortcuts
-        if (isContainment || !configDialog.configModel || configDialog.configModel.count === 0) {
-            open(root.globalConfigModel.get(0))
-        } else {
-            open(configDialog.configModel.get(0))
-        }
-    }
     
 //END connections
 
@@ -138,82 +131,108 @@ Rectangle {
         id: configurationKcmPageComponent
         ConfigurationKcmPage {}
     }
-
-    Component {
-        id: configCategoryDelegate
-        Kirigami.NavigationTabButton {
-            icon.name: model.icon
-            text: model.name
-//             recolorIcon: false
-            QQC2.ButtonGroup.group: footerBar.tabGroup
+    
+    Loader {
+        id: appLoader
+        anchors.fill: parent
+        asynchronous: true
+        active: root.loadApp
+        onLoaded: {
+            // if we are a containment then the first item will be ConfigurationContainmentAppearance
+            // if the applet does not have own configs then the first item will be Shortcuts
+            if (isContainment || !configDialog.configModel || configDialog.configModel.count === 0) {
+                root.open(root.globalConfigModel.get(0))
+            } else {
+                root.open(configDialog.configModel.get(0))
+            }
             
-            onClicked: {
-                if (checked) {
-                    root.open(model);
+            root.appLoaded();
+        }
+        
+        sourceComponent: Kirigami.ApplicationItem {
+            id: app
+            
+            // animation on show
+            opacity: 0
+            NumberAnimation on opacity {
+                to: 1
+                running: true
+                duration: Kirigami.Units.longDuration
+                easing.type: Easing.InOutQuad
+            }
+            
+            pageStack.globalToolBar.canContainHandles: true
+            pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
+            pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton;
+            
+            property var currentConfigPage: null
+            property bool isAboutPage: false
+            
+            // pop pages when not in use
+            Connections {
+                target: app.pageStack
+                function onCurrentIndexChanged() {
+                    // wait for animation to finish before popping pages
+                    timer.restart();
                 }
             }
             
-            checked: {
-                if (app.pageStack.currentItem) {
-                    if (model.kcm && app.pageStack.currentItem.kcm) {
-                        return model.kcm == app.pageStack.currentItem.kcm;
-                    } else if (app.pageStack.currentItem.configItem) {
-                        return model.source == app.pageStack.currentItem.configItem.source;
-                    } else {
-                        return app.pageStack.currentItem.source == Qt.resolvedUrl(model.source);
+            Timer {
+                id: timer
+                interval: 300
+                onTriggered: {
+                    let currentIndex = app.pageStack.currentIndex;
+                    while (app.pageStack.depth > (currentIndex + 1) && currentIndex >= 0) {
+                        app.pageStack.pop();
                     }
                 }
-                return false;
             }
-        }
-    }
-    
-    Kirigami.ApplicationItem {
-        id: app
-        anchors.fill: parent
-        
-        pageStack.globalToolBar.canContainHandles: true
-        pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
-        pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton;
-        
-        property var currentConfigPage: null
-        property bool isAboutPage: false
-        
-        // pop pages when not in use
-        Connections {
-            target: app.pageStack
-            function onCurrentIndexChanged() {
-                // wait for animation to finish before popping pages
-                timer.restart();
-            }
-        }
-        
-        Timer {
-            id: timer
-            interval: 300
-            onTriggered: {
-                let currentIndex = app.pageStack.currentIndex;
-                while (app.pageStack.depth > (currentIndex + 1) && currentIndex >= 0) {
-                    app.pageStack.pop();
+
+            footer: Kirigami.NavigationTabBar {
+                id: footerBar
+                visible: count > 1
+                height: visible ? implicitHeight : 0
+                Repeater {
+                    model: root.isContainment ? globalConfigModel : undefined
+                    delegate: configCategoryDelegate
+                }
+                Repeater {
+                    model: configDialogFilterModel
+                    delegate: configCategoryDelegate
+                }
+                Repeater {
+                    model: !root.isContainment ? globalConfigModel : undefined
+                    delegate: configCategoryDelegate
                 }
             }
-        }
-
-        footer: Kirigami.NavigationTabBar {
-            id: footerBar
-            visible: count > 1
-            height: visible ? implicitHeight : 0
-            Repeater {
-                model: root.isContainment ? globalConfigModel : undefined
-                delegate: configCategoryDelegate
-            }
-            Repeater {
-                model: configDialogFilterModel
-                delegate: configCategoryDelegate
-            }
-            Repeater {
-                model: !root.isContainment ? globalConfigModel : undefined
-                delegate: configCategoryDelegate
+            
+            Component {
+                id: configCategoryDelegate
+                Kirigami.NavigationTabButton {
+                    icon.name: model.icon
+                    text: model.name
+        //             recolorIcon: false
+                    QQC2.ButtonGroup.group: footerBar.tabGroup
+                    
+                    onClicked: {
+                        if (checked) {
+                            root.open(model);
+                        }
+                    }
+                    
+                    checked: {
+                        if (app.pageStack.currentItem) {
+                            if (model.kcm && app.pageStack.currentItem.kcm) {
+                                return model.kcm == app.pageStack.currentItem.kcm;
+                            } else if (app.pageStack.currentItem.configItem) {
+                                return model.source == app.pageStack.currentItem.configItem.source;
+                            } else {
+                                return app.pageStack.currentItem.source == Qt.resolvedUrl(model.source);
+                            }
+                        }
+                        return false;
+                    }
+                }
             }
         }
     }
