@@ -145,11 +145,10 @@ Item {
         readonly property int animationDuration: MobileShell.MobileShellSettings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
         
         // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
-        readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + bottomMargin + spacing >= root.height
+        readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + spacing >= root.height
         
-        bottomMargin: spacing * 2
-        
-        height: count === 0 ? 0 : listOverflowing ? root.height - toolButtons.height - bottomMargin : contentItem.childrenRect.height + spacing
+        bottomMargin: spacing
+        height: count === 0 ? 0 : (listOverflowing ? root.height - toolButtons.height : contentItem.childrenRect.height + bottomMargin)
         
         anchors {
             top: parent.top
@@ -334,11 +333,10 @@ Item {
     
     Item {
         id: toolButtons
+        height: spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin
         
+        // do not show on lockscreen
         visible: !root.actionsRequireUnlock
-        
-        width: root.width
-        height: toolLayout.implicitHeight + spacer.height
         
         anchors {
             top: list.bottom
@@ -348,32 +346,25 @@ Item {
         
         Rectangle {
             id: spacer
+            anchors.left: parent.left
+            anchors.right: parent.right
             
             visible: list.listOverflowing
-                                
-            anchors {
-                top: toolButtons.top
-                left: toolButtons.left
-                right: toolButtons.right
-            }
-            
-            height: 1
-            
+            height: 1            
             opacity: 0.25
             color: PlasmaCore.Theme.textColor
         }
         
         RowLayout {
             id: toolLayout
-            
+
             anchors {
                 top: spacer.bottom
-                topMargin: list.spacing
-                left: parent.left
-                leftMargin: PlasmaCore.Units.smallSpacing
                 right: parent.right
-                rightMargin: PlasmaCore.Units.smallSpacing
-                bottom: parent.bottom
+                left: parent.left
+                leftMargin: PlasmaCore.Units.largeSpacing
+                rightMargin: PlasmaCore.Units.largeSpacing
+                topMargin: list.spacing
                 bottomMargin: list.spacing
             }
             
@@ -383,6 +374,7 @@ Item {
                 Layout.alignment: hasNotifications ? Qt.AlignLeft : Qt.AlignHCenter
                 
                 font.bold: true
+                font.pointSize: Kirigami.Theme.smallFont.pointSize
                 
                 icon.name: doNotDisturbModeEnabled ? "notifications" : "notifications-disabled"
                 text: doNotDisturbModeEnabled ? "Enable Notifications" : "Do Not Disturb"
@@ -397,6 +389,7 @@ Item {
                 visible: hasNotifications
                 
                 font.bold: true
+                font.pointSize: Kirigami.Theme.smallFont.pointSize
                 
                 icon.name: "edit-clear-history"
                 text: "Clear All Notifications"
