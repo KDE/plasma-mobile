@@ -72,6 +72,7 @@ ColumnLayout {
                 level: 2
                 text: i18n("Outputs")
                 Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
                 Layout.leftMargin: PlasmaCore.Units.smallSpacing
             }
             
@@ -82,6 +83,7 @@ ColumnLayout {
                 model: paSinkFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
+                    Layout.margins: PlasmaCore.Units.smallSpacing
                     type: "sink"
                     onlyone: sinkView.count === 1
                 }
@@ -100,6 +102,7 @@ ColumnLayout {
                 level: 2
                 text: i18n("Inputs")
                 Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
                 Layout.leftMargin: PlasmaCore.Units.smallSpacing
             }
             
@@ -110,6 +113,7 @@ ColumnLayout {
                 model: paSourceFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
+                    Layout.margins: PlasmaCore.Units.smallSpacing
                     type: "source"
                     onlyone: sinkView.count === 1
                 }
@@ -129,6 +133,7 @@ ColumnLayout {
                 level: 2
                 text: i18n("Playback Streams")
                 Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
                 Layout.leftMargin: PlasmaCore.Units.smallSpacing
             }
             
@@ -142,6 +147,7 @@ ColumnLayout {
                 }
                 delegate: StreamListItem {
                     Layout.fillWidth: true
+                    Layout.margins: PlasmaCore.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
                     devicesModel: sourceView.model
@@ -159,6 +165,7 @@ ColumnLayout {
 
                 delegate: StreamListItem {
                     Layout.fillWidth: true
+                    Layout.margins: PlasmaCore.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
                     devicesModel: sourceView.model
@@ -179,6 +186,7 @@ ColumnLayout {
                 level: 2
                 text: i18n("Recording Streams")
                 Layout.fillWidth: true
+                Layout.topMargin: PlasmaCore.Units.smallSpacing
                 Layout.leftMargin: PlasmaCore.Units.smallSpacing
             }
             
@@ -192,6 +200,7 @@ ColumnLayout {
                 }
                 delegate: StreamListItem {
                     Layout.fillWidth: true
+                    Layout.margins: PlasmaCore.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "source-output"
                     devicesModel: sourceView.model

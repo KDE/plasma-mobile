@@ -31,11 +31,6 @@ Kirigami.SwipeListItem {
     property alias iconUsesPlasmaTheme: clientIcon.usesPlasmaTheme
     property string type // sink, source, source-output
     
-    topPadding: PlasmaCore.Units.smallSpacing
-    bottomPadding: PlasmaCore.Units.smallSpacing
-    leftPadding: PlasmaCore.Units.smallSpacing
-    rightPadding: PlasmaCore.Units.smallSpacing
-
     alwaysVisibleActions: true
     
     backgroundColor: "transparent" // we use panel background, no need for the same colour to be on top
