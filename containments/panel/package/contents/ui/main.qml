@@ -18,12 +18,14 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
+import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.notificationmanager 1.0 as NotificationManager
 
 Item {
     id: root
     
-    readonly property bool showingApp: !MobileShell.WindowUtil.allWindowsMinimizedExcludingShell
+    // only opaque if there are no maximized windows on this screen
+    readonly property bool showingApp: visibleMaximizedWindowsModel.count > 0
     readonly property color backgroundColor: topPanel.colorScopeColor
 
     Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
@@ -76,6 +78,34 @@ Item {
         MobileShell.VolumeProvider.bindShortcuts = true;
     }
     
+    TaskManager.VirtualDesktopInfo {
+        id: virtualDesktopInfo
+    }
+
+    TaskManager.ActivityInfo {
+        id: activityInfo
+    }
+
+    PlasmaCore.SortFilterModel {
+        id: visibleMaximizedWindowsModel
+        filterRole: 'IsMinimized'
+        filterRegExp: 'false'
+        sourceModel: TaskManager.TasksModel {
+            id: tasksModel
+            filterByVirtualDesktop: true
+            filterByActivity: true
+            filterNotMaximized: true
+            filterByScreen: true
+            filterHidden: true
+
+//             screenGeometry: panel.screenGeometry
+            virtualDesktop: virtualDesktopInfo.currentDesktop
+            activity: activityInfo.currentActivity
+
+            groupMode: TaskManager.TasksModel.GroupDisabled
+        }
+    }
+    
     // top panel component
     MobileShell.StatusBar {
         id: topPanel
@@ -97,7 +127,6 @@ Item {
         id: drawer
         
         actionDrawer.notificationSettings: NotificationManager.Settings {}
-        
         actionDrawer.notificationModel: NotificationManager.Notifications {
             showExpired: true
             showDismissed: true

@@ -21,13 +21,6 @@ import org.kde.plasma.phone.taskpanel 1.0 as TaskPanel
 
 PlasmaCore.ColorScope {
     id: root
-    width: 360
-    
-    // contrasting colour
-    colorGroup: !MobileShell.WindowUtil.allWindowsMinimized ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-
-    readonly property color backgroundColor: PlasmaCore.ColorScope.backgroundColor
-
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
     // toggle visibility of navigation bar (show, or use gestures only)
@@ -114,18 +107,47 @@ PlasmaCore.ColorScope {
     }
     
 //END API implementation
-    
-    Window.onWindowChanged: {
-        if (!Window.window) {
-            return;
+
+    TaskManager.VirtualDesktopInfo {
+        id: virtualDesktopInfo
+    }
+
+    TaskManager.ActivityInfo {
+        id: activityInfo
+    }
+
+    PlasmaCore.SortFilterModel {
+        id: visibleMaximizedWindowsModel
+        filterRole: 'IsMinimized'
+        filterRegExp: 'false'
+        sourceModel: TaskManager.TasksModel {
+            id: tasksModel
+            filterByVirtualDesktop: true
+            filterByActivity: true
+            filterNotMaximized: true
+            filterByScreen: true
+            filterHidden: true
+
+//             screenGeometry: panel.screenGeometry
+            virtualDesktop: virtualDesktopInfo.currentDesktop
+            activity: activityInfo.currentActivity
+
+            groupMode: TaskManager.TasksModel.GroupDisabled
         }
     }
+
+    // only opaque if there are no maximized windows on this screen
+    readonly property bool opaqueBar: visibleMaximizedWindowsModel.count > 0
+    
+    // contrasting colour
+    colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
     
     // bottom navigation panel component
     Component {
         id: navigationPanel 
         NavigationPanelComponent {
             taskSwitcher: MobileShell.HomeScreenControls.taskSwitcher
+            opaqueBar: root.opaqueBar
         }
     }
     

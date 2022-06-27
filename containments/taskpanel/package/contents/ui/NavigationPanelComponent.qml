@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.NavigationPanel {
     id: root
-    property bool appIsShown: !MobileShell.WindowUtil.allWindowsMinimizedExcludingShell
+    required property bool opaqueBar
     
     // background is:
     // - opaque if an app is shown or vkbd is shown
@@ -26,11 +26,11 @@ MobileShell.NavigationPanel {
         if (root.taskSwitcher.visible) {
             return Qt.rgba(0, 0, 0, 0.1);
         } else {
-            return (Keyboards.KWinVirtualKeyboard.visible || appIsShown) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
+            return (Keyboards.KWinVirtualKeyboard.visible || opaqueBar) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
         }
     }
-    foregroundColorGroup: (!root.taskSwitcher.visible && appIsShown) ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-    shadow: !appIsShown
+    foregroundColorGroup: (!root.taskSwitcher.visible && opaqueBar) ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    shadow: !opaqueBar
         
     // do not enable drag gesture when task switcher is already open
     // also don't disable drag gesture mid-drag
