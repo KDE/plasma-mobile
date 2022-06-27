@@ -32,6 +32,13 @@ Item {
     
     width: 480
     height: PlasmaCore.Units.gridUnit
+
+    // enforce thickness
+    Binding {
+        target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
+        property: "thickness"
+        value: PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing
+    }
     
 //BEGIN API implementation
 
@@ -98,7 +105,6 @@ Item {
             filterByScreen: true
             filterHidden: true
 
-//             screenGeometry: panel.screenGeometry
             virtualDesktop: virtualDesktopInfo.currentDesktop
             activity: activityInfo.currentActivity
 
