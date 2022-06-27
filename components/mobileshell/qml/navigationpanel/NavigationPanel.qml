@@ -173,20 +173,19 @@ Item {
             when: root.width < root.height
             PropertyChanges {
                 target: icons
-                buttonLength: icons.height * 0.8 / 3
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.9 / 3)
             }
             AnchorChanges {
                 target: leftButton
                 anchors {
                     horizontalCenter: parent.horizontalCenter
-                    top: parent.top
+                    top: middleButton.bottom
                 }
             }
             PropertyChanges {
                 target: leftButton
                 width: parent.width
                 height: icons.buttonLength
-                anchors.topMargin: parent.height * 0.1
             }
             PropertyChanges {
                 target: middleButton
@@ -197,34 +196,32 @@ Item {
                 target: rightButton
                 anchors {
                     horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
+                    bottom: middleButton.top
                 }
             }
             PropertyChanges {
                 target: rightButton
                 height: icons.buttonLength
                 width: icons.width
-                anchors.bottomMargin: parent.height * 0.1
             }
         }, State {
             name: "portrait"
             when: root.width >= root.height
             PropertyChanges {
                 target: icons
-                buttonLength: icons.width * 0.8 / 3
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.9 / 3)
             }
             AnchorChanges {
                 target: leftButton
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    left: parent.left
+                    right: middleButton.left
                 }
             }
             PropertyChanges {
                 target: leftButton
                 height: parent.height
                 width: icons.buttonLength
-                anchors.leftMargin: parent.width * 0.1
             }
             PropertyChanges {
                 target: middleButton
@@ -235,14 +232,13 @@ Item {
                 target: rightButton
                 anchors {
                     verticalCenter: parent.verticalCenter
-                    right: parent.right
+                    left: middleButton.right
                 }
             }
             PropertyChanges {
                 target: rightButton
                 height: parent.height
                 width: icons.buttonLength
-                anchors.rightMargin: parent.width * 0.1
             }
         }
     ]
