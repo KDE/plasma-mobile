@@ -128,7 +128,6 @@ PlasmaCore.ColorScope {
             filterByScreen: true
             filterHidden: true
 
-//             screenGeometry: panel.screenGeometry
             virtualDesktop: virtualDesktopInfo.currentDesktop
             activity: activityInfo.currentActivity
 
