@@ -10,3 +10,8 @@ install(FILES
         ${CMAKE_CURRENT_BINARY_DIR}/plasma-mobile.desktop
         DESTINATION ${KDE_INSTALL_DATADIR}/wayland-sessions
 )
+
+# For Plasma developers
+configure_file(startplasmamobile-dev.sh.cmake ${CMAKE_CURRENT_BINARY_DIR}/startplasmamobile-dev.sh)
+configure_file(plasma-mobile-dev.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/plasma-mobile-dev.desktop)
+configure_file(install-sessions.sh.cmake ${CMAKE_CURRENT_BINARY_DIR}/install-sessions.sh)
