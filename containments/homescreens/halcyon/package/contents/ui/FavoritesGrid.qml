@@ -73,12 +73,12 @@ GridView {
     
     delegate: MobileShell.BaseItem {
         id: baseItem
-        readonly property bool isLeftColumn: !root.twoColumn || (root.count % model.index !== 0)
-        readonly property bool isRightColumn: !root.twoColumn || (root.count % model.index === 0)
+        readonly property bool isLeftColumn: !root.twoColumn || ((model.index % 2) === 0)
+        readonly property bool isRightColumn: !root.twoColumn || ((model.index % 2) !== 0)
         leftPadding: isLeftColumn ? root.leftMargin : 0
         rightPadding: isRightColumn ? root.rightMargin : 0
         
-        contentItem: DrawerListDelegate {
+        contentItem: FavoritesAppDelegate {
             implicitWidth: root.cellWidth - (baseItem.isLeftColumn ? root.leftMargin : 0) - (baseItem.isRightColumn ? root.rightMargin : 0)
             implicitHeight: visible ? root.cellHeight : 0
         }

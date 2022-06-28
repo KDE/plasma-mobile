@@ -45,6 +45,6 @@ QQC2.AbstractButton {
     HoverHandler {
         id: hoverHandler
         acceptedDevices: PointerDevice.Mouse
-        acceptedPointerTypes: PointerDevice.Generic
+        acceptedPointerTypes: PointerDevice.GenericPointer
     }
 }
