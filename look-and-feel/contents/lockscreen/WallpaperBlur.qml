@@ -10,16 +10,13 @@ FastBlur {
     id: fastBlur
     cached: true
     radius: 50
-    opacity: 0
     
     property bool blur
+    opacity: blur ? 1 : 0
     
-    Behavior on blur {
+    Behavior on opacity {
         NumberAnimation {
-            target: fastBlur
-            property: "opacity"
             duration: 1000
-            to: fastBlur.blur ? 0 : 1
             easing.type: Easing.InOutQuad
         }
     }
