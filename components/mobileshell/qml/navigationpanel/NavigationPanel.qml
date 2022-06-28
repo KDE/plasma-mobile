@@ -173,7 +173,7 @@ Item {
             when: root.width < root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.9 / 3)
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.8 / 3)
             }
             AnchorChanges {
                 target: leftButton
@@ -209,7 +209,7 @@ Item {
             when: root.width >= root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.9 / 3)
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.8 / 3)
             }
             AnchorChanges {
                 target: leftButton
