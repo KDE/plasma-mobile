@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <espidev@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.4
+import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import QtGraphicalEffects 1.6
@@ -17,7 +17,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MouseArea {
+Item {
     id: delegate
     
     property alias iconItem: icon
@@ -49,21 +49,27 @@ MouseArea {
         dialogLoader.item.open();
     }
     
-    hoverEnabled: true
-    onPressAndHold: openContextMenu()
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    
-    onClicked: {
-        if (mouse.button === Qt.RightButton) {
-            openContextMenu();
+    function launchApp() {
+        if (application.running) {
+            delegate.launch(0, 0, "", applicationName, applicationStorageId);
         } else {
-            // launch app
-            if (application.running) {
-                delegate.launch(0, 0, "", applicationName, applicationStorageId);
-            } else {
-                delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
-            }
+            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
         }
+    }
+    
+    TapHandler {
+        id: tapHandler
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        
+        onLongPressed: delegate.openContextMenu()
+        onTapped: (eventPoint.event.button === Qt.RightButton) ? delegate.openContextMenu() : delegate.launchApp();
+        
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+    }
+    
+    HoverHandler {
+        id: hoverHandler
+        acceptedPointerTypes: PointerDevice.GenericPointer | PointerDevice.Cursor | PointerDevice.Pen
     }
     
     Loader {
@@ -88,7 +94,7 @@ MouseArea {
     Rectangle {
         anchors.fill: parent
         radius: height / 2        
-        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
+        color: tapHandler.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
     }
     
     RowLayout {
