@@ -17,7 +17,6 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 GridView {
     id: root
-    layer.enabled: true // cache
     
     required property var searchWidget
     signal openConfigureRequested()

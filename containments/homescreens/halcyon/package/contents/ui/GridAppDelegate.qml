@@ -20,7 +20,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MobileShell.ExtendedAbstractButton {
+Item {
     id: delegate
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
@@ -39,11 +39,6 @@ MobileShell.ExtendedAbstractButton {
         dialogLoader.item.open();
     }
     
-    cursorShape: Qt.PointingHandCursor
-    hoverEnabled: true
-    onPressAndHold: openContextMenu()
-    onRightClickPressed: openContextMenu()
-    
     function launchApp() {
         // launch app
         if (application.running) {
@@ -51,6 +46,32 @@ MobileShell.ExtendedAbstractButton {
         } else {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
         }
+    }
+    
+    TapHandler {
+        id: tapHandler
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        
+        // launch app handled by press animation
+        onTapped: (eventPoint.event.button === Qt.RightButton) ? delegate.openContextMenu() : delegate.launchAppRequested = true;
+        onLongPressed: delegate.openContextMenu()
+        
+        onPressedChanged: {
+            if (pressed) {
+                growAnim.stop();
+                shrinkAnim.restart();
+            } else if (!pressed && !shrinkAnim.running) {
+                growAnim.restart();
+            }
+        }
+        
+        gesturePolicy: TapHandler.ReleaseWithinBounds
+    }
+    
+    HoverHandler {
+        id: hoverHandler
+        cursorShape: Qt.PointingHandCursor
+        acceptedPointerTypes: PointerDevice.GenericPointer | PointerDevice.Cursor | PointerDevice.Pen
     }
     
     Loader {
@@ -89,7 +110,7 @@ MobileShell.ExtendedAbstractButton {
         duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
         to: MobileShell.MobileShellSettings.animationsEnabled ? 0.8 : 1
         onFinished: {
-            if (!delegate.pressed) {
+            if (!tapHandler.pressed) {
                 growAnim.restart();
             }
         }
@@ -107,17 +128,6 @@ MobileShell.ExtendedAbstractButton {
             }
         }
     }
-    
-    onPressedChanged: {
-        if (pressed) {
-            growAnim.stop();
-            shrinkAnim.restart();
-        } else if (!pressed && !shrinkAnim.running) {
-            growAnim.restart();
-        }
-    }
-    // launch app handled by press animation
-    onClicked: launchAppRequested = true;
     
     ColumnLayout {
         anchors {
@@ -154,7 +164,7 @@ MobileShell.ExtendedAbstractButton {
             
             // darken effect when hovered/pressed
             layer {
-                enabled: delegate.pressed || delegate.hovered
+                enabled: tapHandler.pressed || hoverHandler.hovered
                 effect: ColorOverlay {
                     color: Qt.rgba(0, 0, 0, 0.3)
                 }

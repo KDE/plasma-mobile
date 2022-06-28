@@ -64,8 +64,8 @@ Item {
     Connections {
         target: actionDrawer
 
-        onOpenedChanged: {
-            if(!actionDrawer.opened) {
+        function onOpenedChanged() {
+            if (!actionDrawer.opened) {
                 resetSwipeView();
             }
         }
