@@ -17,7 +17,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-Item {
+MobileShell.ExtendedAbstractButton {
     id: delegate
     
     property alias iconItem: icon
@@ -57,18 +57,9 @@ Item {
         }
     }
     
-    TapHandler {
-        id: tapHandler
-        acceptedButtons: Qt.LeftButton | Qt.RightButton
-        
-        onLongPressed: delegate.openContextMenu()
-        onTapped: (eventPoint.event.button === Qt.RightButton) ? delegate.openContextMenu() : delegate.launchApp();
-    }
-    
-    HoverHandler {
-        id: hoverHandler
-        acceptedPointerTypes: PointerDevice.GenericPointer | PointerDevice.Cursor | PointerDevice.Pen
-    }
+    onRightClickPressed: openContextMenu()
+    onClicked: launchApp();
+    onPressAndHold: openContextMenu()
     
     Loader {
         id: dialogLoader
@@ -92,7 +83,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: height / 2        
-        color: tapHandler.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
+        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.mouseHovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
     }
     
     RowLayout {

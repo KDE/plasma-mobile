@@ -17,7 +17,12 @@ QQC2.AbstractButton {
     /**
      * The cursor shape when the mouse is over the button.
      */
-    property alias cursorShape: mouseArea.cursorShape
+    property alias cursorShape: hoverHandler.cursorShape
+    
+    /**
+     * Whether a mouse is hovering over the button (not touch).
+     */
+    readonly property bool mouseHovered: hoverHandler.hovered
     
     /**
      * Signal that is emitted when the right click button is pressed.
@@ -35,5 +40,11 @@ QQC2.AbstractButton {
                 mouse.accepted = false;
             }
         }
+    }
+    
+    HoverHandler {
+        id: hoverHandler
+        acceptedDevices: PointerDevice.Mouse
+        acceptedPointerTypes: PointerDevice.Generic
     }
 }
