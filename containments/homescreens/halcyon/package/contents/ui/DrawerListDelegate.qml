@@ -63,8 +63,6 @@ Item {
         
         onLongPressed: delegate.openContextMenu()
         onTapped: (eventPoint.event.button === Qt.RightButton) ? delegate.openContextMenu() : delegate.launchApp();
-        
-        gesturePolicy: TapHandler.ReleaseWithinBounds
     }
     
     HoverHandler {

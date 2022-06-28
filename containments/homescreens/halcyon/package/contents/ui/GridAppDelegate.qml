@@ -64,8 +64,6 @@ Item {
                 growAnim.restart();
             }
         }
-        
-        gesturePolicy: TapHandler.ReleaseWithinBounds
     }
     
     HoverHandler {
