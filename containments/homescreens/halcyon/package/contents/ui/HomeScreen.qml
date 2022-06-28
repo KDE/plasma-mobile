@@ -19,7 +19,7 @@ Item {
     id: root
     
     property bool interactive: true
-    property var searchWidget
+    required property var searchWidget
     
     property alias page: swipeView.currentIndex
     
@@ -54,102 +54,12 @@ Item {
                 onLongPressed: root.openConfigure()
             }
                     
-            ListView {
-                id: favouritesList
-                clip: true
-                interactive: root.interactive
+            FavoritesGrid {
                 anchors.fill: parent
+                searchWidget: root.searchWidget
+                interactive: root.interactive
                 
-                // don't set anchors.margins since we want everywhere to be draggable
-                readonly property real leftMargin: Math.round(parent.width * 0.1)
-                readonly property real rightMargin: Math.round(parent.width * 0.1)
-                readonly property real delegateHeight: PlasmaCore.Units.gridUnit * 3
-                                
-                // search widget open gesture
-                property bool openingSearchWidget: false
-                property real oldVerticalOvershoot: verticalOvershoot
-                onVerticalOvershootChanged: {
-                    if (dragging && verticalOvershoot < 0) {
-                        if (!openingSearchWidget) {
-                            if (oldVerticalOvershoot === 0) {
-                                openingSearchWidget = true;
-                                root.searchWidget.startGesture();
-                            }
-                        } else {
-                            let offset = -(verticalOvershoot - oldVerticalOvershoot);
-                            root.searchWidget.updateGestureOffset(-offset);
-                        }
-                    }
-                    oldVerticalOvershoot = verticalOvershoot;
-                }
-                onDraggingChanged: {
-                    if (!dragging && openingSearchWidget) {
-                        openingSearchWidget = false;
-                        root.searchWidget.endGesture();
-                    }
-                }
-                
-                model: Halcyon.PinnedModel
-                header: MobileShell.BaseItem {
-                    topPadding: Math.round(swipeView.height * 0.2)
-                    bottomPadding: PlasmaCore.Units.largeSpacing
-                    leftPadding: favouritesList.leftMargin
-                    rightPadding: favouritesList.rightMargin
-                    implicitWidth: favouritesList.width
-
-                    background: Rectangle {
-                        color: 'transparent'
-                        TapHandler { onLongPressed: root.openConfigure() } // open wallpaper menu when held on click
-                    }
-                    contentItem: Clock {}
-                }
-                
-                delegate: MobileShell.BaseItem {
-                    leftPadding: favouritesList.leftMargin
-                    rightPadding: favouritesList.rightMargin
-                    
-                    contentItem: DrawerListDelegate {
-                        implicitWidth: favouritesList.width - favouritesList.leftMargin - favouritesList.rightMargin
-                        implicitHeight: visible ? favouritesList.delegateHeight : 0
-                    }
-                }
-                
-                // open wallpaper menu when held on click
-                TapHandler {
-                    onLongPressed: root.openConfigure()
-                }
-                
-                ColumnLayout {
-                    id: placeholder
-                    spacing: PlasmaCore.Units.gridUnit
-                    visible: favouritesList.count == 0
-                    opacity: 0.9
-                    
-                    anchors.fill: parent
-                    anchors.topMargin: Math.round(swipeView.height * 0.2) - (favouritesList.contentY - favouritesList.originY)
-                    anchors.leftMargin: favouritesList.leftMargin
-                    anchors.rightMargin: favouritesList.rightMargin
-                    
-                    Kirigami.Icon {
-                        id: icon
-                        Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-                        implicitWidth: PlasmaCore.Units.iconSizes.large
-                        implicitHeight: width
-                        source: "emblem-favorite"
-                        color: "white"
-                    }
-                    
-                    PlasmaExtras.Heading {
-                        Layout.fillWidth: true
-                        Layout.maximumWidth: placeholder.width * 0.75
-                        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                        color: "white"
-                        level: 3
-                        wrapMode: Text.Wrap
-                        horizontalAlignment: Text.AlignHCenter
-                        text: i18n("Add applications to your favourites so they show up here.")
-                    }
-                }
+                onOpenConfigureRequested: root.openConfigure()
             }
         }
         

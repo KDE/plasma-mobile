@@ -7,6 +7,7 @@
 
 import QtQuick 2.12
 import QtQuick.Layouts 1.3
+import QtQuick.Window 2.15
 import QtQml.Models 2.12
 
 import org.kde.kirigami 2.12 as Kirigami

@@ -19,7 +19,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 GridView {
     id: gridView
-    clip: true
+    layer.enabled: true // caching
     
     readonly property int reservedSpaceForLabel: metrics.height
     required property real effectiveContentWidth
