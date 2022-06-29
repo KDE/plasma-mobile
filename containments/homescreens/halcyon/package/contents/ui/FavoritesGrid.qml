@@ -4,6 +4,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
+import QtQml.Models 2.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -56,7 +57,11 @@ GridView {
         }
     }
     
-    model: Halcyon.PinnedModel
+    // open wallpaper menu when held on click
+    TapHandler {
+        onLongPressed: root.openConfigureRequested()
+    }
+    
     header: MobileShell.BaseItem {
         topPadding: Math.round(swipeView.height * 0.2)
         bottomPadding: PlasmaCore.Units.largeSpacing
@@ -71,22 +76,76 @@ GridView {
         contentItem: Clock {}
     }
     
-    delegate: MobileShell.BaseItem {
-        id: baseItem
-        readonly property bool isLeftColumn: !root.twoColumn || ((model.index % 2) === 0)
-        readonly property bool isRightColumn: !root.twoColumn || ((model.index % 2) !== 0)
-        leftPadding: isLeftColumn ? root.leftMargin : 0
-        rightPadding: isRightColumn ? root.rightMargin : 0
+    model: DelegateModel {
+        id: visualModel
+        model: Halcyon.PinnedModel
         
-        contentItem: FavoritesAppDelegate {
-            implicitWidth: root.cellWidth - (baseItem.isLeftColumn ? root.leftMargin : 0) - (baseItem.isRightColumn ? root.rightMargin : 0)
-            implicitHeight: visible ? root.cellHeight : 0
+        delegate: DropArea {
+            id: delegateRoot
+            property var application: model.application
+            
+            property int modelIndex
+            property int visualIndex: DelegateModel.itemsIndex
+            
+            width: root.cellWidth
+            height: root.cellHeight
+            
+            onEntered: (drag) => {
+                let from = (drag.source as MobileShell.BaseItem).visualIndex;
+                let to = appDelegate.visualIndex;
+                visualModel.items.move(from, to);
+                Halcyon.PinnedModel.moveEntry(from, to);
+            }
+            
+            //onDropped: (drag) => {
+                //let from = modelIndex;
+                //let to = (drag.source as MobileShell.BaseItem).visualIndex
+                //Halcyon.PinnedModel.moveEntry(from, to);
+            //}
+            
+            FavoritesAppDelegate {
+                id: appDelegate
+                visualIndex: delegateRoot.visualIndex
+                application: delegateRoot.application
+                
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    verticalCenter: parent.verticalCenter
+                }
+                
+                readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
+                readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)
+                leftPadding: isLeftColumn ? root.leftMargin : 0
+                rightPadding: isRightColumn ? root.rightMargin : 0
+                
+                implicitWidth: root.cellWidth
+                implicitHeight: visible ? root.cellHeight : 0
+                
+                states: [
+                    State {
+                        when: appDelegate.drag.active
+                        ParentChange {
+                            target: appDelegate
+                            parent: root
+                        }
+                        
+                        AnchorChanges {
+                            target: appDelegate
+                            anchors.horizontalCenter: undefined
+                            anchors.verticalCenter: undefined
+                        }
+                    }
+                ]
+            }
         }
     }
     
-    // open wallpaper menu when held on click
-    TapHandler {
-        onLongPressed: root.openConfigureRequested()
+    // animations
+    displaced: Transition {
+        NumberAnimation {
+            properties: "x,y"
+            easing.type: Easing.OutQuad
+        }
     }
     
     ColumnLayout {

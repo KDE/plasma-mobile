@@ -106,6 +106,40 @@ void PinnedModel::removeFolder(int row)
     save();
 }
 
+void PinnedModel::moveEntry(int fromRow, int toRow)
+{
+    if (fromRow < 0 || toRow < 0 || fromRow >= m_applications.length() || toRow >= m_applications.length() || fromRow == toRow) {
+        return;
+    }
+    if (toRow > fromRow) {
+        ++toRow;
+    }
+
+    beginMoveRows(QModelIndex(), fromRow, fromRow, QModelIndex(), toRow);
+    if (toRow > fromRow) {
+        Application *app = m_applications.at(fromRow);
+        m_applications.insert(toRow, app);
+        m_applications.takeAt(fromRow);
+
+        ApplicationFolder *folder = m_folders.at(fromRow);
+        m_folders.insert(toRow, folder);
+        m_folders.takeAt(fromRow);
+
+    } else {
+        Application *app = m_applications.takeAt(fromRow);
+        m_applications.insert(toRow, app);
+
+        ApplicationFolder *folder = m_folders.takeAt(fromRow);
+        m_folders.insert(toRow, folder);
+    }
+    endMoveRows();
+
+    save();
+
+    // HACK: didn't seem to persist
+    m_applet->config().sync();
+}
+
 void PinnedModel::load()
 {
     if (!m_applet) {

@@ -17,11 +17,16 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MobileShell.ExtendedAbstractButton {
+MouseArea {
     id: delegate
+
+    property int visualIndex: 0
+    
+    property real leftPadding
+    property real rightPadding
     
     property alias iconItem: icon
-    property Halcyon.Application application: model.application
+    property var application
     
     readonly property string applicationName: application ? application.name : ""
     readonly property string applicationStorageId: application ? application.storageId : ""
@@ -30,6 +35,11 @@ MobileShell.ExtendedAbstractButton {
     signal launch(int x, int y, var source, string title, string storageId)
     signal dragStarted(string imageSource, int x, int y, string mimeData)
 
+    anchors {
+        horizontalCenter: parent.horizontalCenter
+        verticalCenter: parent.verticalCenter
+    }
+    
     onLaunch: {
          if (icon !== "") {
             MobileShell.HomeScreenControls.openAppLaunchAnimation(
@@ -57,9 +67,27 @@ MobileShell.ExtendedAbstractButton {
         }
     }
     
-    onRightClickPressed: openContextMenu()
-    onClicked: launchApp();
-    onPressAndHold: openContextMenu()
+    property bool inDrag: false
+    
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
+    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launchApp();
+    onReleased: {
+        parent.Drag.drop();
+        inDrag = false;
+    }
+    onPressAndHold: { inDrag = true; openContextMenu() }
+    
+    drag.target: inDrag ? delegate : undefined
+    Drag.active: delegate.drag.active
+    Drag.source: delegate
+    Drag.hotSpot.x: delegate.width / 2
+    Drag.hotSpot.y: delegate.height / 2
+    
+    HoverHandler {
+        id: hoverHandler
+        acceptedDevices: PointerDevice.Mouse
+        acceptedPointerTypes: PointerDevice.GenericPointer
+    }
     
     Loader {
         id: dialogLoader
@@ -80,79 +108,86 @@ MobileShell.ExtendedAbstractButton {
         }
     }
     
-    Rectangle {
+    Item {
+        id: baseItem
         anchors.fill: parent
-        radius: height / 2        
-        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.mouseHovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
-    }
-    
-    RowLayout {
-        id: rowLayout
-        anchors {
-            fill: parent
-            leftMargin: PlasmaCore.Units.smallSpacing * 2
-            topMargin: PlasmaCore.Units.smallSpacing
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
-            bottomMargin: PlasmaCore.Units.smallSpacing
+        
+        Rectangle {
+            anchors.fill: parent
+            anchors.leftMargin: delegate.leftPadding
+            anchors.rightMargin: delegate.rightPadding
+            radius: height / 2        
+            color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
         }
-        spacing: 0
+        
+        RowLayout {
+            id: rowLayout
+            anchors {
+                fill: parent
+                leftMargin: PlasmaCore.Units.smallSpacing * 2 + delegate.leftPadding
+                topMargin: PlasmaCore.Units.smallSpacing
+                rightMargin: PlasmaCore.Units.smallSpacing * 2 + delegate.rightPadding
+                bottomMargin: PlasmaCore.Units.smallSpacing
+            }
+            spacing: 0
 
-        PlasmaCore.IconItem {
-            id: icon
+            PlasmaCore.IconItem {
+                id: icon
 
-            Layout.alignment: Qt.AlignLeft
-            Layout.minimumWidth: Layout.minimumHeight
-            Layout.preferredWidth: Layout.minimumHeight
-            Layout.minimumHeight: parent.height
-            Layout.preferredHeight: Layout.minimumHeight
+                Layout.alignment: Qt.AlignLeft
+                Layout.minimumWidth: Layout.minimumHeight
+                Layout.preferredWidth: Layout.minimumHeight
+                Layout.minimumHeight: parent.height
+                Layout.preferredHeight: Layout.minimumHeight
 
-            usesPlasmaTheme: false
-            source: applicationIcon
+                usesPlasmaTheme: false
+                source: delegate.applicationIcon
 
-            Rectangle {
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
+                Rectangle {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                    }
+                    visible: application ? application.running : false
+                    radius: width
+                    width: PlasmaCore.Units.smallSpacing
+                    height: width
+                    color: PlasmaCore.Theme.highlightColor
                 }
-                visible: application ? application.running : false
-                radius: width
-                width: PlasmaCore.Units.smallSpacing
-                height: width
-                color: PlasmaCore.Theme.highlightColor
+                
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
             }
-            
-            layer.enabled: true
-            layer.effect: DropShadow {
-                verticalOffset: 1
-                radius: 4
-                samples: 6
-                color: Qt.rgba(0, 0, 0, 0.5)
-            }
-        }
 
-        PlasmaComponents.Label {
-            id: label
-            visible: text.length > 0
+            PlasmaComponents.Label {
+                id: label
+                visible: text.length > 0
 
-            Layout.fillWidth: true
-            Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-            Layout.rightMargin: PlasmaCore.Units.largeSpacing
-            wrapMode: Text.WordWrap
-            maximumLineCount: 1
-            elide: Text.ElideRight
+                Layout.fillWidth: true
+                Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
+                Layout.rightMargin: PlasmaCore.Units.largeSpacing
+                wrapMode: Text.WordWrap
+                maximumLineCount: 1
+                elide: Text.ElideRight
 
-            text: applicationName
+                text: delegate.applicationName
 
-            font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
-            font.weight: Font.Bold
-            color: "white"
-            
-            layer.enabled: true
-            layer.effect: DropShadow {
-                verticalOffset: 1
-                radius: 4
-                samples: 6
-                color: Qt.rgba(0, 0, 0, 0.5)
+                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                font.weight: Font.Bold
+                color: "white"
+                
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
             }
         }
     }

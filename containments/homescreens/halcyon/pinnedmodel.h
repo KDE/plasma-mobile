@@ -41,6 +41,8 @@ public:
     Q_INVOKABLE void addFolder(QString name, int row);
     Q_INVOKABLE void removeFolder(int row);
 
+    Q_INVOKABLE void moveEntry(int fromRow, int toRow);
+
     Q_INVOKABLE void load();
     void save();
 

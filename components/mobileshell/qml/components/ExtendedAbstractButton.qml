@@ -20,6 +20,11 @@ QQC2.AbstractButton {
     property alias cursorShape: hoverHandler.cursorShape
     
     /**
+     * Alias to MouseArea used in the button.
+     */
+    property alias mouseArea: mouseArea
+    
+    /**
      * Whether a mouse is hovering over the button (not touch).
      */
     readonly property bool mouseHovered: hoverHandler.hovered
