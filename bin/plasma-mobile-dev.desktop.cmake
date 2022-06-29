@@ -5,6 +5,13 @@
 Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed @CMAKE_INSTALL_FULL_LIBEXECDIR@/startplasmamobile-dev.sh
 DesktopNames=KDE
 Name=Plasma Mobile (Development)
+Name[az]=Plasma Mobil (Tərtibat)
+Name[ca]=Plasma Mobile (Desenvolupament)
+Name[es]=Plasma Mobile (desarrollo)
+Name[nl]=Plasma-mobiel (ontwikkeling)
+Name[tr]=Plasma Mobile (Geliştirme)
+Name[uk]=Мобільна Плазма (версія у розробці)
+Name[x-test]=xxPlasma Mobile (Development)xx
 Comment=Plasma Mobile by KDE
 Comment[ast]=Plasma Mobile, por KDE
 Comment[az]=KDE Plasma Mobil
