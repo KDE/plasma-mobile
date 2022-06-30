@@ -5,6 +5,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
 import QtQml.Models 2.15
+import QtGraphicalEffects 1.12
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -18,43 +19,22 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 GridView {
     id: root
-    required property var searchWidget
+    property Halcyon.ApplicationFolder folder: null
     
-    signal openConfigureRequested()
-    signal requestOpenFolder(Halcyon.ApplicationFolder folder)
+    property string folderName: folder ? folder.name : ""
+    property var folderModel: folder ? folder.applications : []
     
     // don't set anchors.margins since we want everywhere to be draggable
     required property real leftMargin
     required property real rightMargin
     required property bool twoColumn
-                    
-    // search widget open gesture
-    property bool openingSearchWidget: false
-    property real oldVerticalOvershoot: verticalOvershoot
-    onVerticalOvershootChanged: {
-        if (dragging && verticalOvershoot < 0) {
-            if (!openingSearchWidget) {
-                if (oldVerticalOvershoot === 0) {
-                    openingSearchWidget = true;
-                    root.searchWidget.startGesture();
-                }
-            } else {
-                let offset = -(verticalOvershoot - oldVerticalOvershoot);
-                root.searchWidget.updateGestureOffset(-offset);
-            }
-        }
-        oldVerticalOvershoot = verticalOvershoot;
-    }
-    onDraggingChanged: {
-        if (!dragging && openingSearchWidget) {
-            openingSearchWidget = false;
-            root.searchWidget.endGesture();
-        }
-    }
     
-    // open wallpaper menu when held on click
+    signal openConfigureRequested()
+    signal closeRequested()
+    
     TapHandler {
         onLongPressed: root.openConfigureRequested()
+        onTapped: root.closeRequested()
     }
     
     header: MobileShell.BaseItem {
@@ -66,17 +46,62 @@ GridView {
 
         background: Rectangle {
             color: 'transparent'
-            TapHandler { onLongPressed: root.openConfigureRequested() } // open wallpaper menu when held on click
+            TapHandler { 
+                onLongPressed: root.openConfigureRequested()
+                onTapped: root.closeRequested()
+            }
         }
-        contentItem: Clock {}
+        contentItem: RowLayout {
+            spacing: PlasmaCore.Units.gridUnit
+            Kirigami.Icon {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
+                Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
+                isMask: true
+                color: 'white'
+                source: 'arrow-left'
+
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
+            }
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: root.folderName
+                color: "white"
+                style: Text.Normal
+                styleColor: "transparent"
+                horizontalAlignment: Text.AlignLeft
+                
+                elide: Text.ElideRight
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
+
+                font.weight: Font.Bold
+                font.pointSize: 18
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
+            }
+        }
     }
     
     model: DelegateModel {
         id: visualModel
-        model: Halcyon.PinnedModel
+        model: root.folderModel
         
         delegate: DropArea {
             id: delegateRoot
+            property var application: model.application
+            
             property int modelIndex
             property int visualIndex: DelegateModel.itemsIndex
             
@@ -87,7 +112,7 @@ GridView {
                 let from = (drag.source as MobileShell.BaseItem).visualIndex;
                 let to = appDelegate.visualIndex;
                 visualModel.items.move(from, to);
-                Halcyon.PinnedModel.moveEntry(from, to);
+                root.folder.moveEntry(from, to);
             }
             
             //onDropped: (drag) => {
@@ -100,11 +125,8 @@ GridView {
                 id: appDelegate
                 visualIndex: delegateRoot.visualIndex
                 
-                isFolder: model.isFolder
-                folder: model.folder
-                application: model.application
-                
-                onFolderOpenRequested: root.requestOpenFolder(model.folder)
+                isFolder: false
+                application: modelData
                 
                 readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
                 readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)
@@ -141,38 +163,6 @@ GridView {
         NumberAnimation {
             properties: "x,y"
             easing.type: Easing.OutQuad
-        }
-    }
-    
-    ColumnLayout {
-        id: placeholder
-        spacing: PlasmaCore.Units.gridUnit
-        visible: root.count == 0
-        opacity: 0.9
-        
-        anchors.fill: parent
-        anchors.topMargin: Math.round(swipeView.height * 0.2) - (root.contentY - root.originY)
-        anchors.leftMargin: root.leftMargin
-        anchors.rightMargin: root.rightMargin
-        
-        Kirigami.Icon {
-            id: icon
-            Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-            implicitWidth: PlasmaCore.Units.iconSizes.large
-            implicitHeight: width
-            source: "emblem-favorite"
-            color: "white"
-        }
-        
-        PlasmaExtras.Heading {
-            Layout.fillWidth: true
-            Layout.maximumWidth: placeholder.width * 0.75
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            color: "white"
-            level: 3
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            text: i18n("Add applications to your favourites so they show up here.")
         }
     }
 }

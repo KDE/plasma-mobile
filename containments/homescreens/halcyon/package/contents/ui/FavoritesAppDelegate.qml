@@ -19,58 +19,61 @@ import org.kde.kirigami 2.19 as Kirigami
 
 MouseArea {
     id: delegate
-
     property int visualIndex: 0
     
     property real leftPadding
     property real rightPadding
     
-    property alias iconItem: icon
-    property var application
+    // whether this delegate is a folder
+    property bool isFolder
     
+    // folder object
+    property var folder
+    readonly property string folderName: folder ? folder.name : ""
+    
+    // app object
+    property var application
     readonly property string applicationName: application ? application.name : ""
     readonly property string applicationStorageId: application ? application.storageId : ""
     readonly property string applicationIcon: application ? application.icon : ""
     
-    signal launch(int x, int y, var source, string title, string storageId)
-    signal dragStarted(string imageSource, int x, int y, string mimeData)
-
-    anchors {
-        horizontalCenter: parent.horizontalCenter
-        verticalCenter: parent.verticalCenter
-    }
-    
-    onLaunch: {
-         if (icon !== "") {
-            MobileShell.HomeScreenControls.openAppLaunchAnimation(
-                    icon,
-                    title,
-                    delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
-                    delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
-                    Math.min(delegate.iconItem.width, delegate.iconItem.height));
-        }
-
-        application.setMinimizedDelegate(delegate);
-        application.runApplication();
-    }
+    signal folderOpenRequested()
     
     function openContextMenu() {
         dialogLoader.active = true;
         dialogLoader.item.open();
     }
     
-    function launchApp() {
-        if (application.running) {
-            delegate.launch(0, 0, "", applicationName, applicationStorageId);
+    function launch() {
+        if (isFolder) {
+            folderOpenRequested();
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, applicationName, applicationStorageId);
+            if (application.running) {
+                launchAppWithAnim(0, 0, "", applicationName, applicationStorageId);
+            } else {
+                launchAppWithAnim(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), iconLoader.source, applicationName, applicationStorageId);
+            }
         }
+    }
+    
+    function launchAppWithAnim(x: int, y: int, source, title: string, storageId: string) {
+         if (source !== "") {
+            MobileShell.HomeScreenControls.openAppLaunchAnimation(
+                    source,
+                    title,
+                    iconLoader.Kirigami.ScenePosition.x + iconLoader.width/2,
+                    iconLoader.Kirigami.ScenePosition.y + iconLoader.height/2,
+                    Math.min(iconLoader.width, iconLoader.height));
+        }
+
+        application.setMinimizedDelegate(delegate);
+        application.runApplication();
     }
     
     property bool inDrag: false
     
     acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launchApp();
+    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launch();
     onReleased: {
         parent.Drag.drop();
         inDrag = false;
@@ -131,37 +134,15 @@ MouseArea {
             }
             spacing: 0
 
-            PlasmaCore.IconItem {
-                id: icon
-
+            Loader {
+                id: iconLoader
                 Layout.alignment: Qt.AlignLeft
                 Layout.minimumWidth: Layout.minimumHeight
                 Layout.preferredWidth: Layout.minimumHeight
                 Layout.minimumHeight: parent.height
                 Layout.preferredHeight: Layout.minimumHeight
 
-                usesPlasmaTheme: false
-                source: delegate.applicationIcon
-
-                Rectangle {
-                    anchors {
-                        horizontalCenter: parent.horizontalCenter
-                        bottom: parent.bottom
-                    }
-                    visible: application ? application.running : false
-                    radius: width
-                    width: PlasmaCore.Units.smallSpacing
-                    height: width
-                    color: PlasmaCore.Theme.highlightColor
-                }
-                
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+                sourceComponent: delegate.isFolder ? folderIconComponent : appIconComponent
             }
 
             PlasmaComponents.Label {
@@ -175,7 +156,7 @@ MouseArea {
                 maximumLineCount: 1
                 elide: Text.ElideRight
 
-                text: delegate.applicationName
+                text: delegate.isFolder ? delegate.folderName : delegate.applicationName
 
                 font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
                 font.weight: Font.Bold
@@ -187,6 +168,96 @@ MouseArea {
                     radius: 4
                     samples: 6
                     color: Qt.rgba(0, 0, 0, 0.5)
+                }
+            }
+            
+            Kirigami.Icon {
+                Layout.alignment: Qt.AlignRight
+                Layout.minimumWidth: Layout.minimumHeight
+                Layout.preferredWidth: Layout.minimumHeight
+                Layout.minimumHeight: Math.round(parent.height * 0.5)
+                Layout.preferredHeight: Layout.minimumHeight
+
+                isMask: true
+                color: 'white'
+                source: 'arrow-right'
+                visible: delegate.isFolder
+
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
+            }
+        }
+    }
+    
+    Component {
+        id: appIconComponent
+        
+        PlasmaCore.IconItem {
+            usesPlasmaTheme: false
+            source: delegate.isFolder ? 'document-open-folder' : delegate.applicationIcon
+
+            Rectangle {
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                }
+                visible: application ? application.running : false
+                radius: width
+                width: PlasmaCore.Units.smallSpacing
+                height: width
+                color: PlasmaCore.Theme.highlightColor
+            }
+            
+            layer.enabled: true
+            layer.effect: DropShadow {
+                verticalOffset: 1
+                radius: 4
+                samples: 6
+                color: Qt.rgba(0, 0, 0, 0.5)
+            }
+        }
+    }
+    
+    Component {
+        id: folderIconComponent
+        
+        Item {
+            Rectangle {
+                anchors.fill: parent
+                anchors.margins: PlasmaCore.Units.smallSpacing
+                color: Qt.rgba(255, 255, 255, 0.2)
+                radius: PlasmaCore.Units.smallSpacing
+                
+                Grid {
+                    id: grid
+                    anchors.fill: parent
+                    anchors.margins: PlasmaCore.Units.smallSpacing
+                    columns: 2
+                    spacing: PlasmaCore.Units.smallSpacing
+                    
+                    property var previews: model.folder.appPreviews
+                    
+                    Repeater {
+                        model: grid.previews
+                        delegate: Kirigami.Icon {
+                            implicitWidth: (grid.width - PlasmaCore.Units.smallSpacing) / 2
+                            implicitHeight: (grid.width - PlasmaCore.Units.smallSpacing) / 2
+                            source: modelData.icon
+                            
+                            layer.enabled: true
+                            layer.effect: DropShadow {
+                                verticalOffset: 1
+                                radius: 4
+                                samples: 3
+                                color: Qt.rgba(0, 0, 0, 0.5)
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -22,6 +22,7 @@ class ApplicationFolder : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(QList<Application *> appPreviews READ appPreviews NOTIFY applicationsChanged)
     Q_PROPERTY(QList<Application *> applications READ applications NOTIFY applicationsChanged)
 
 public:
@@ -33,9 +34,12 @@ public:
     QString name() const;
     void setName(QString &name);
 
+    QList<Application *> appPreviews();
+
     QList<Application *> applications();
     void setApplications(QList<Application *> applications);
 
+    Q_INVOKABLE void moveEntry(int fromRow, int toRow);
     Q_INVOKABLE void addApp(const QString &storageId, int row);
     Q_INVOKABLE void removeApp(int row);
 

@@ -54,6 +54,16 @@ void ApplicationFolder::setName(QString &name)
     Q_EMIT saveRequested();
 }
 
+QList<Application *> ApplicationFolder::appPreviews()
+{
+    QList<Application *> previews;
+    // we give a maximum of 4 icons
+    for (int i = 0; i < std::min(m_applications.length(), 4); ++i) {
+        previews.push_back(m_applications[i]);
+    }
+    return previews;
+}
+
 QList<Application *> ApplicationFolder::applications()
 {
     return m_applications;
@@ -62,6 +72,28 @@ QList<Application *> ApplicationFolder::applications()
 void ApplicationFolder::setApplications(QList<Application *> applications)
 {
     m_applications = applications;
+    Q_EMIT applicationsChanged();
+    Q_EMIT saveRequested();
+}
+
+void ApplicationFolder::moveEntry(int fromRow, int toRow)
+{
+    if (fromRow < 0 || toRow < 0 || fromRow >= m_applications.length() || toRow >= m_applications.length() || fromRow == toRow) {
+        return;
+    }
+    if (toRow > fromRow) {
+        ++toRow;
+    }
+
+    if (toRow > fromRow) {
+        Application *app = m_applications.at(fromRow);
+        m_applications.insert(toRow, app);
+        m_applications.takeAt(fromRow);
+
+    } else {
+        Application *app = m_applications.takeAt(fromRow);
+        m_applications.insert(toRow, app);
+    }
     Q_EMIT applicationsChanged();
     Q_EMIT saveRequested();
 }

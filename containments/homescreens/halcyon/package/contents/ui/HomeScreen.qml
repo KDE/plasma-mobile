@@ -25,11 +25,9 @@ Item {
     
     function triggerHomescreen() {
         swipeView.setCurrentIndex(0);
-        favouritesList.contentY = favouritesList.originY;
     }
     
     function openConfigure() {
-        console.log('triggered')
         plasmoid.action("configure").trigger();
         plasmoid.editMode = false;
     }
@@ -53,12 +51,11 @@ Item {
             TapHandler {
                 onLongPressed: root.openConfigure()
             }
-                    
-            FavoritesGrid {
+            
+            FavoritesView {
                 anchors.fill: parent
                 searchWidget: root.searchWidget
                 interactive: root.interactive
-                
                 onOpenConfigureRequested: root.openConfigure()
             }
         }
