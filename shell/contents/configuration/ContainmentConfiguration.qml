@@ -49,6 +49,8 @@ AppletConfiguration {
         sourceComponent: WallpaperSelector {
             visible: false
             horizontal: root.horizontal
+            edge: root.horizontal ? Qt.LeftEdge : Qt.BottomEdge
+            onClosed: configDialog.close()
         }
     }
     

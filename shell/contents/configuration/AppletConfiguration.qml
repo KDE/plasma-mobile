@@ -151,6 +151,7 @@ Rectangle {
         
         sourceComponent: Kirigami.ApplicationItem {
             id: app
+            anchors.fill: parent
             
             // animation on show
             opacity: 0
@@ -211,7 +212,7 @@ Rectangle {
                 Kirigami.NavigationTabButton {
                     icon.name: model.icon
                     text: model.name
-        //             recolorIcon: false
+                    recolorIcon: false
                     QQC2.ButtonGroup.group: footerBar.tabGroup
                     
                     onClicked: {
