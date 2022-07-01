@@ -173,10 +173,8 @@ MouseArea {
             
             Kirigami.Icon {
                 Layout.alignment: Qt.AlignRight
-                Layout.minimumWidth: Layout.minimumHeight
-                Layout.preferredWidth: Layout.minimumHeight
-                Layout.minimumHeight: Math.round(parent.height * 0.5)
-                Layout.preferredHeight: Layout.minimumHeight
+                Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                Layout.preferredHeight: Kirigami.Units.iconSizes.small
 
                 isMask: true
                 color: 'white'
