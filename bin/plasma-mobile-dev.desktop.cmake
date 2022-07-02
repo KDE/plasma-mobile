@@ -7,6 +7,7 @@ DesktopNames=KDE
 Name=Plasma Mobile (Development)
 Name[az]=Plasma Mobil (Tərtibat)
 Name[ca]=Plasma Mobile (Desenvolupament)
+Name[ca@valencia]=Plasma Mobile (Desenvolupament)
 Name[es]=Plasma Mobile (desarrollo)
 Name[fr]=Plasma Mobile (Développement)
 Name[ia]=Plasma Mobile (Disveloppamento)
