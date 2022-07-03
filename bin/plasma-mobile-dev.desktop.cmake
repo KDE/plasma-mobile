@@ -17,6 +17,7 @@ Name[sl]=Plasma Mobile (Razvoj)
 Name[tr]=Plasma Mobile (Geliştirme)
 Name[uk]=Мобільна Плазма (версія у розробці)
 Name[x-test]=xxPlasma Mobile (Development)xx
+Name[zh_CN]=Plasma Mobile (开发)
 Comment=Plasma Mobile by KDE
 Comment[ast]=Plasma Mobile, por KDE
 Comment[az]=KDE Plasma Mobil
