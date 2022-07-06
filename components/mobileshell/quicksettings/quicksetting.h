@@ -18,6 +18,7 @@ class QuickSetting : public QObject
     Q_PROPERTY(QString icon READ iconName WRITE setIconName REQUIRED NOTIFY iconNameChanged)
     Q_PROPERTY(QString settingsCommand READ settingsCommand WRITE setSettingsCommand NOTIFY settingsCommandChanged)
     Q_PROPERTY(bool enabled READ isEnabled WRITE setEnabled NOTIFY enabledChanged)
+    Q_PROPERTY(bool available READ isAvailable WRITE setAvailable NOTIFY availableChanged)
     Q_PROPERTY(QQmlListProperty<QObject> children READ children CONSTANT)
     Q_CLASSINFO("DefaultProperty", "children")
     QML_NAMED_ELEMENT("QuickSetting")
@@ -44,16 +45,22 @@ public:
     {
         return m_enabled;
     }
+    bool isAvailable() const
+    {
+        return m_available;
+    }
 
     void setText(const QString &text);
     void setStatus(const QString &status);
     void setIconName(const QString &iconName);
     void setSettingsCommand(const QString &settingsCommand);
     void setEnabled(bool enabled);
+    void setAvailable(bool available);
     QQmlListProperty<QObject> children();
 
 Q_SIGNALS:
     void enabledChanged(bool enabled);
+    void availableChanged(bool available);
     void textChanged(const QString &text);
     void statusChanged(const QString &text);
     void iconNameChanged(const QString &icon);
@@ -61,6 +68,7 @@ Q_SIGNALS:
 
 private:
     bool m_enabled = true;
+    bool m_available = true;
     QString m_text;
     QString m_status;
     QString m_iconName;

@@ -20,6 +20,15 @@ void QuickSetting::setEnabled(bool enabled)
     Q_EMIT enabledChanged(enabled);
 }
 
+void QuickSetting::setAvailable(bool available)
+{
+    if (m_available == available)
+        return;
+
+    m_available = available;
+    Q_EMIT availableChanged(available);
+}
+
 void QuickSetting::setSettingsCommand(const QString &settingsCommand)
 {
     if (m_settingsCommand == settingsCommand)

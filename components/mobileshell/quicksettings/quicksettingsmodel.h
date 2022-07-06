@@ -37,6 +37,7 @@ public:
 
 private:
     void loadQuickSettings();
+    void availabilityChanged();
 
     bool m_loaded = false;
     QList<QuickSetting *> m_quickSettings;

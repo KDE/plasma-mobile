@@ -91,11 +91,35 @@ void QuickSettingsModel::loadQuickSettings()
             }
             delete created;
         } else {
-            m_quickSettings.push_back(createdSetting);
+            if (createdSetting->isAvailable()) {
+                m_quickSettings.push_back(createdSetting);
+            }
+            connect(createdSetting, &QuickSetting::availableChanged, this, &QuickSettingsModel::availabilityChanged);
         }
     }
 
     delete c;
 
     endResetModel();
+}
+
+void QuickSettingsModel::availabilityChanged()
+{
+    auto setting = qobject_cast<QuickSetting *>(sender());
+
+    if (setting->isAvailable()) {
+        if (!m_quickSettings.contains(setting)) {
+            auto idx = m_quickSettings.count();
+            beginInsertRows({}, idx, idx);
+            m_quickSettings.append(setting);
+            endInsertRows();
+        }
+    } else {
+        auto idx = m_quickSettings.indexOf(setting);
+        if (idx >= 0) {
+            beginRemoveRows({}, idx, idx);
+            m_quickSettings.removeAt(idx);
+            endRemoveRows();
+        }
+    }
 }
