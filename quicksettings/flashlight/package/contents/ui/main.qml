@@ -10,6 +10,7 @@ MobileShell.QuickSetting {
     text: i18n("Flashlight")
     icon: "flashlight-on"
     enabled: FlashlightUtil.torchEnabled
+    available: FlashlightUtil.available
     function toggle() {
         FlashlightUtil.toggleTorch()
     }

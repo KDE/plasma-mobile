@@ -11,6 +11,10 @@
 #include <unistd.h>
 
 #include <QDebug>
+#include <QFileInfo>
+
+// FIXME this is hardcoded to the PinePhone for now
+static const char *FLASH_SYSFS_PATH = "/sys/devices/platform/led-controller/leds/white:flash/brightness";
 
 FlashlightUtil::FlashlightUtil(QObject *parent)
     : QObject{parent}
@@ -20,8 +24,6 @@ FlashlightUtil::FlashlightUtil(QObject *parent)
 
 void FlashlightUtil::toggleTorch()
 {
-    // FIXME this is hardcoded to the PinePhone for now
-    static auto FLASH_SYSFS_PATH = "/sys/devices/platform/led-controller/leds/white:flash/brightness";
     int fd = open(FLASH_SYSFS_PATH, O_WRONLY);
 
     if (fd < 0) {
@@ -38,4 +40,9 @@ void FlashlightUtil::toggleTorch()
 bool FlashlightUtil::torchEnabled() const
 {
     return m_torchEnabled;
+}
+
+bool FlashlightUtil::isAvailable() const
+{
+    return QFileInfo::exists(FLASH_SYSFS_PATH);
 }
