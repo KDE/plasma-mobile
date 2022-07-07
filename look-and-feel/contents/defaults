@@ -4,11 +4,22 @@
 # SPDX-FileCopyrightText: 2014 Aaron J. Seigo
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+[Wallpaper]
+Image=Next
+
+## kdeglobals
+
+[kdeglobals][Icons]
+Theme=breeze
+
+[kdeglobals][General]
+ColorScheme=BreezeLight
+Name=Breeze
+
+## kwinrc
+
 [kwinrc][Windows]
 Placement=Maximizing
 
-[plasmashellrc][Shell]
-ShellPackage=org.kde.plasma.phoneshell
-
-[Wallpaper]
-Image=Next
+[kwinrc][org.kde.kdecoration2]
+NoPlugin=true
