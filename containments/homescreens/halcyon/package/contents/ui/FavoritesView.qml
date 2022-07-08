@@ -18,6 +18,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 Item {
     id: root
+    layer.enabled: true
     
     required property bool interactive
     required property var searchWidget

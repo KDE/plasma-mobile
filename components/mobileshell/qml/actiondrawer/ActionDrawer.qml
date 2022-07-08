@@ -222,7 +222,7 @@ Item {
         onFinished: root.opened = true;
     }
     
-    Flickable {
+    MobileShell.Flickable {
         id: flickable
         anchors.fill: parent
         

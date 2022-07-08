@@ -22,8 +22,11 @@
         
         <file>qml/components/BaseItem.qml</file>
         <file>qml/components/ExtendedAbstractButton.qml</file>
+        <file>qml/components/Flickable.qml</file>
+        <file>qml/components/GridView.qml</file>
         <file>qml/components/Haptics.qml</file>
         <file>qml/components/HapticsEffectWrapper.qml</file>
+        <file>qml/components/ListView.qml</file>
         <file>qml/components/MarqueeLabel.qml</file>
         <file>qml/components/StartupFeedback.qml</file>
         <file>qml/components/util.js</file>

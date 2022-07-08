@@ -24,7 +24,7 @@ import "../private"
 AbstractAppDrawer {
     id: root
     
-    contentItem: GridView {
+    contentItem: MobileShell.GridView {
         id: gridView
         clip: true
         

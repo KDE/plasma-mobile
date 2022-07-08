@@ -13,7 +13,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-Flickable {
+MobileShell.Flickable {
     id: root
     
     required property var homeScreenState

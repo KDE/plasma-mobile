@@ -16,7 +16,7 @@ import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
-GridView {
+MobileShell.GridView {
     id: root
     required property var searchWidget
     

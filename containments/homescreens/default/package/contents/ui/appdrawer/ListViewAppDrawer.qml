@@ -24,7 +24,7 @@ import "../private"
 AbstractAppDrawer {
     id: root
     
-    contentItem: ListView {
+    contentItem: MobileShell.ListView {
         id: listView
         clip: true
         reuseItems: true
