@@ -37,11 +37,12 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE void addApp(const QString &storageId, int row);
-    Q_INVOKABLE void removeApp(int row);
     Q_INVOKABLE void addFolder(QString name, int row);
-    Q_INVOKABLE void removeFolder(int row);
-
+    Q_INVOKABLE void removeEntry(int row);
     Q_INVOKABLE void moveEntry(int fromRow, int toRow);
+
+    Q_INVOKABLE void createFolderFromApps(int sourceAppRow, int draggedAppRow);
+    Q_INVOKABLE void addAppToFolder(int appRow, int folderRow);
 
     Q_INVOKABLE void load();
     void save();

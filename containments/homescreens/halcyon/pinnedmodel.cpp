@@ -6,6 +6,8 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
+#include <KLocalizedString>
+
 PinnedModel::PinnedModel(QObject *parent, Plasma::Applet *applet)
     : QAbstractListModel{parent}
     , m_applet{applet}
@@ -60,21 +62,6 @@ void PinnedModel::addApp(const QString &storageId, int row)
     }
 }
 
-void PinnedModel::removeApp(int row)
-{
-    if (row < 0 || row >= m_applications.size()) {
-        return;
-    }
-
-    beginRemoveRows(QModelIndex(), row, row);
-    m_applications[row]->deleteLater();
-    m_applications.removeAt(row);
-    m_folders.removeAt(row); // maintain indicies
-    endRemoveRows();
-
-    save();
-}
-
 void PinnedModel::addFolder(QString name, int row)
 {
     if (row < 0 || row > m_applications.size()) {
@@ -92,13 +79,19 @@ void PinnedModel::addFolder(QString name, int row)
     save();
 }
 
-void PinnedModel::removeFolder(int row)
+void PinnedModel::removeEntry(int row)
 {
     if (row < 0 || row >= m_applications.size()) {
         return;
     }
 
     beginRemoveRows(QModelIndex(), row, row);
+    if (m_folders[row]) {
+        m_folders[row]->deleteLater();
+    }
+    if (m_applications[row]) {
+        m_applications[row]->deleteLater();
+    }
     m_applications.removeAt(row);
     m_folders.removeAt(row);
     endRemoveRows();
@@ -138,6 +131,51 @@ void PinnedModel::moveEntry(int fromRow, int toRow)
 
     // HACK: didn't seem to persist
     m_applet->config().sync();
+}
+
+void PinnedModel::createFolderFromApps(int sourceAppRow, int draggedAppRow)
+{
+    if (sourceAppRow < 0 || sourceAppRow >= m_applications.size() || draggedAppRow < 0 || draggedAppRow >= m_applications.size()) {
+        return;
+    }
+
+    if (sourceAppRow == draggedAppRow || !m_applications[sourceAppRow] || !m_applications[draggedAppRow]) {
+        return;
+    }
+
+    // replace source app with folder containing both apps
+    ApplicationFolder *folder = new ApplicationFolder(this, i18nc("Default application folder name.", "Folder"));
+    connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+
+    folder->addApp(m_applications[sourceAppRow]->storageId(), 0);
+    folder->addApp(m_applications[draggedAppRow]->storageId(), 0);
+
+    m_applications[sourceAppRow]->deleteLater();
+    m_applications[sourceAppRow] = nullptr;
+    m_folders[sourceAppRow] = folder;
+
+    Q_EMIT dataChanged(index(sourceAppRow, 0), index(sourceAppRow, 0), {IsFolderRole, ApplicationRole, FolderRole});
+    save();
+
+    // remove dragged app after
+    removeEntry(draggedAppRow);
+}
+
+void PinnedModel::addAppToFolder(int appRow, int folderRow)
+{
+    if (appRow < 0 || appRow >= m_applications.size() || folderRow < 0 || folderRow >= m_applications.size()) {
+        return;
+    }
+
+    if (!m_applications[appRow] || !m_folders[folderRow]) {
+        return;
+    }
+
+    ApplicationFolder *folder = m_folders[folderRow];
+    Application *app = m_applications[appRow];
+    folder->addApp(app->storageId(), folder->applications().count());
+
+    removeEntry(appRow);
 }
 
 void PinnedModel::load()

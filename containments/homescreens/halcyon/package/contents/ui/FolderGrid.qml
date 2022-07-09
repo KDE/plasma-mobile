@@ -98,28 +98,23 @@ MobileShell.GridView {
         id: visualModel
         model: root.folderModel
         
-        delegate: DropArea {
-            id: delegateRoot
-            property var application: model.application
-            
-            property int modelIndex
-            property int visualIndex: DelegateModel.itemsIndex
-            
+        delegate: Item {
+            id: delegateRoot    
             width: root.cellWidth
             height: root.cellHeight
             
-            onEntered: (drag) => {
-                let from = (drag.source as MobileShell.BaseItem).visualIndex;
-                let to = appDelegate.visualIndex;
-                visualModel.items.move(from, to);
-                root.folder.moveEntry(from, to);
-            }
+            property var application: model.application
+            property int visualIndex: DelegateModel.itemsIndex
             
-            //onDropped: (drag) => {
-                //let from = modelIndex;
-                //let to = (drag.source as MobileShell.BaseItem).visualIndex
-                //Halcyon.PinnedModel.moveEntry(from, to);
-            //}
+            DropArea {
+                anchors.fill: parent
+                onEntered: (drag) => {
+                    let from = drag.source.visualIndex;
+                    let to = appDelegate.visualIndex;
+                    visualModel.items.move(from, to);
+                    root.folder.moveEntry(from, to);
+                }
+            }
             
             FavoritesAppDelegate {
                 id: appDelegate

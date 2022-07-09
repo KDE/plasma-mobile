@@ -20,17 +20,18 @@ MobileShell.GridView {
     id: root
     required property var searchWidget
     
-    signal openConfigureRequested()
-    signal requestOpenFolder(Halcyon.ApplicationFolder folder)
-    
     // don't set anchors.margins since we want everywhere to be draggable
     required property real leftMargin
     required property real rightMargin
     required property bool twoColumn
-                    
+    
+    signal openConfigureRequested()
+    signal requestOpenFolder(Halcyon.ApplicationFolder folder)
+
     // search widget open gesture
     property bool openingSearchWidget: false
     property real oldVerticalOvershoot: verticalOvershoot
+    
     onVerticalOvershootChanged: {
         if (dragging && verticalOvershoot < 0) {
             if (!openingSearchWidget) {
@@ -75,27 +76,134 @@ MobileShell.GridView {
         id: visualModel
         model: Halcyon.PinnedModel
         
-        delegate: DropArea {
+        delegate: Item {
             id: delegateRoot
-            property int modelIndex
             property int visualIndex: DelegateModel.itemsIndex
             
             width: root.cellWidth
             height: root.cellHeight
             
-            onEntered: (drag) => {
-                let from = (drag.source as MobileShell.BaseItem).visualIndex;
-                let to = appDelegate.visualIndex;
-                visualModel.items.move(from, to);
-                Halcyon.PinnedModel.moveEntry(from, to);
+            function moveDragToCurrentPos(from, to) {
+                if (from !== to) {
+                    console.log(from + ' ' + to)
+                    visualModel.items.move(from, to);
+                    Halcyon.PinnedModel.moveEntry(from, to);
+                }
             }
             
-            //onDropped: (drag) => {
-                //let from = modelIndex;
-                //let to = (drag.source as MobileShell.BaseItem).visualIndex
-                //Halcyon.PinnedModel.moveEntry(from, to);
-            //}
+            function topDragEnter(drag) {
+                if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                    
+                let fromIndex = drag.source.visualIndex;
+                let delegateVisualIndex = appDelegate.visualIndex;
+                let reorderIndex = -1;
+                
+                if (fromIndex < delegateVisualIndex) { // dragged item from above
+                    // move to spot above
+                    reorderIndex = delegateVisualIndex - (root.twoColumn ? 2 : 1);
+                } else { // dragged item from below
+                    // move to current spot
+                    reorderIndex = delegateVisualIndex;
+                }
+                
+                if (reorderIndex >= 0 && reorderIndex < root.count) {
+                    delegateRoot.moveDragToCurrentPos(fromIndex, reorderIndex)
+                }
+            }
             
+            function bottomDragEnter(drag) {
+                if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                
+                let fromIndex = drag.source.visualIndex;
+                let delegateVisualIndex = appDelegate.visualIndex;
+                let reorderIndex = -1;
+                
+                if (fromIndex < delegateVisualIndex) { // dragged item from above
+                    // move to current spot
+                    reorderIndex = delegateVisualIndex;
+                } else { // dragged item from below
+                    // move to spot below
+                    reorderIndex = delegateVisualIndex + (root.twoColumn ? 2 : 1);
+                }
+                
+                if (reorderIndex >= 0 && reorderIndex < root.count) {
+                    delegateRoot.moveDragToCurrentPos(fromIndex, reorderIndex);
+                }
+            }
+
+            // top drop area
+            DropArea {
+                id: topDropArea
+                anchors.top: parent.top
+                anchors.left: leftDropArea.right
+                anchors.right: rightDropArea.left
+                height: delegateRoot.height * 0.2
+                onEntered: (drag) => delegateRoot.topDragEnter(drag)
+            }
+            
+            // bottom drop area
+            DropArea {
+                id: bottomDropArea
+                anchors.bottom: parent.bottom
+                anchors.left: leftDropArea.right
+                anchors.right: rightDropArea.left
+                height: delegateRoot.height * 0.2
+                onEntered: (drag) => delegateRoot.bottomDragEnter(drag)
+            }
+            
+            // left drop area
+            DropArea {
+                id: leftDropArea
+                anchors.bottom: parent.bottom
+                anchors.top: parent.top
+                anchors.left: parent.left
+                width: root.twoColumn ? Math.max(appDelegate.leftPadding, delegateRoot.width * 0.1) : 0
+                onEntered: (drag) => delegateRoot.topDragEnter(drag)
+            }
+            
+            // right drop area
+            DropArea {
+                id: rightDropArea
+                anchors.bottom: parent.bottom
+                anchors.top: parent.top
+                anchors.right: parent.right
+                width: root.twoColumn ? Math.max(appDelegate.rightPadding, delegateRoot.width * 0.1) : 0
+                onEntered: (drag) => delegateRoot.bottomDragEnter(drag)
+            }
+            
+            // folder drop area
+            DropArea {
+                anchors.top: topDropArea.bottom
+                anchors.bottom: bottomDropArea.top
+                anchors.left: leftDropArea.right
+                anchors.right: rightDropArea.left
+                onEntered: (drag) => {
+                    if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                    folderAnim.to = 1;
+                    folderAnim.restart();
+                }
+                onExited: () => {
+                    folderAnim.to = 0;
+                    folderAnim.restart();
+                }
+                onDropped: (drop) => {
+                    if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                    if (appDelegate.isFolder) {
+                        Halcyon.PinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
+                    } else {
+                        Halcyon.PinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
+                    }
+                }
+                
+                NumberAnimation {
+                    id: folderAnim
+                    target: appDelegate
+                    properties: "dragFolderAnimationProgress"
+                    duration: 100
+                }
+            }
+            
+            // actual visual delegate
             FavoritesAppDelegate {
                 id: appDelegate
                 visualIndex: delegateRoot.visualIndex
@@ -139,6 +247,7 @@ MobileShell.GridView {
     // animations
     displaced: Transition {
         NumberAnimation {
+            id: transitionAnim
             properties: "x,y"
             easing.type: Easing.OutQuad
         }

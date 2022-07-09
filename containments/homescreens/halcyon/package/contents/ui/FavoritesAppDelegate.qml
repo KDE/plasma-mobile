@@ -24,6 +24,8 @@ Item {
     property real leftPadding
     property real rightPadding
     
+    property real dragFolderAnimationProgress: 0
+    
     // whether this delegate is a folder
     property bool isFolder
     
@@ -44,6 +46,18 @@ Item {
     Drag.source: delegate
     Drag.hotSpot.x: delegate.width / 2
     Drag.hotSpot.y: delegate.height / 2
+    
+    // close context menu if drag move
+    onXChanged: {
+        if (dialogLoader.item) {
+            dialogLoader.item.close()
+        }
+    }
+    onYChanged: {
+        if (dialogLoader.item) {
+            dialogLoader.item.close()
+        }
+    }
     
     function openContextMenu() {
         dialogLoader.active = true;
@@ -88,7 +102,7 @@ Item {
                 icon.name: "emblem-favorite"
                 text: i18n("Remove from favourites")
                 onClicked: {
-                    Halcyon.PinnedModel.removeApp(model.index);
+                    Halcyon.PinnedModel.removeEntry(model.index);
                 }
             }
             onClosed: dialogLoader.active = false
@@ -107,7 +121,7 @@ Item {
         acceptedButtons: Qt.LeftButton | Qt.RightButton
         onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launch();
         onReleased: {
-            delegate.parent.Drag.drop();
+            delegate.Drag.drop();
             inDrag = false;
         }
         onPressAndHold: { inDrag = true; openContextMenu() }
@@ -198,28 +212,47 @@ Item {
     Component {
         id: appIconComponent
         
-        PlasmaCore.IconItem {
-            usesPlasmaTheme: false
-            source: delegate.isFolder ? 'document-open-folder' : delegate.applicationIcon
-
+        Item {
             Rectangle {
-                anchors {
-                    horizontalCenter: parent.horizontalCenter
-                    bottom: parent.bottom
-                }
-                visible: application ? application.running : false
-                radius: width
-                width: PlasmaCore.Units.smallSpacing
-                height: width
-                color: PlasmaCore.Theme.highlightColor
+                anchors.fill: parent
+                anchors.margins: PlasmaCore.Units.smallSpacing
+                color: Qt.rgba(255, 255, 255, 0.2)
+                radius: PlasmaCore.Units.smallSpacing
+                opacity: delegate.dragFolderAnimationProgress
             }
             
-            layer.enabled: true
-            layer.effect: DropShadow {
-                verticalOffset: 1
-                radius: 4
-                samples: 6
-                color: Qt.rgba(0, 0, 0, 0.5)
+            PlasmaCore.IconItem {
+                id: icon
+                anchors.fill: parent
+                usesPlasmaTheme: false
+                source: delegate.isFolder ? 'document-open-folder' : delegate.applicationIcon
+                
+                transform: Scale { 
+                    origin.x: icon.width / 2 
+                    origin.y: icon.height / 2
+                    xScale: 1 - delegate.dragFolderAnimationProgress * 0.5
+                    yScale: 1 - delegate.dragFolderAnimationProgress * 0.5
+                }
+
+                Rectangle {
+                    anchors {
+                        horizontalCenter: parent.horizontalCenter
+                        bottom: parent.bottom
+                    }
+                    visible: application ? application.running : false
+                    radius: width
+                    width: PlasmaCore.Units.smallSpacing
+                    height: width
+                    color: PlasmaCore.Theme.highlightColor
+                }
+                
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
             }
         }
     }
@@ -229,34 +262,42 @@ Item {
         
         Item {
             Rectangle {
+                id: rect
                 anchors.fill: parent
                 anchors.margins: PlasmaCore.Units.smallSpacing
                 color: Qt.rgba(255, 255, 255, 0.2)
                 radius: PlasmaCore.Units.smallSpacing
                 
-                Grid {
-                    id: grid
-                    anchors.fill: parent
-                    anchors.margins: PlasmaCore.Units.smallSpacing
-                    columns: 2
-                    spacing: PlasmaCore.Units.smallSpacing
-                    
-                    property var previews: model.folder.appPreviews
-                    
-                    Repeater {
-                        model: grid.previews
-                        delegate: Kirigami.Icon {
-                            implicitWidth: (grid.width - PlasmaCore.Units.smallSpacing) / 2
-                            implicitHeight: (grid.width - PlasmaCore.Units.smallSpacing) / 2
-                            source: modelData.icon
-                            
-                            layer.enabled: true
-                            layer.effect: DropShadow {
-                                verticalOffset: 1
-                                radius: 4
-                                samples: 3
-                                color: Qt.rgba(0, 0, 0, 0.5)
-                            }
+                transform: Scale { 
+                    origin.x: rect.width / 2 
+                    origin.y: rect.height / 2
+                    xScale: 1 + delegate.dragFolderAnimationProgress * 0.5
+                    yScale: 1 + delegate.dragFolderAnimationProgress * 0.5
+                }
+            }
+            
+            Grid {
+                id: grid
+                anchors.fill: parent
+                anchors.margins: PlasmaCore.Units.smallSpacing * 2
+                columns: 2
+                spacing: PlasmaCore.Units.smallSpacing
+                
+                property var previews: model.folder.appPreviews
+                
+                Repeater {
+                    model: grid.previews
+                    delegate: Kirigami.Icon {
+                        implicitWidth: (grid.width - PlasmaCore.Units.smallSpacing) / 2
+                        implicitHeight: (grid.width - PlasmaCore.Units.smallSpacing) / 2
+                        source: modelData.icon
+                        
+                        layer.enabled: true
+                        layer.effect: DropShadow {
+                            verticalOffset: 1
+                            radius: 4
+                            samples: 3
+                            color: Qt.rgba(0, 0, 0, 0.5)
                         }
                     }
                 }
