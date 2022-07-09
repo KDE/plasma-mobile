@@ -17,7 +17,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MouseArea {
+Item {
     id: delegate
     property int visualIndex: 0
     
@@ -38,6 +38,12 @@ MouseArea {
     readonly property string applicationIcon: application ? application.icon : ""
     
     signal folderOpenRequested()
+    
+    property alias drag: mouseArea.drag
+    Drag.active: delegate.drag.active
+    Drag.source: delegate
+    Drag.hotSpot.x: delegate.width / 2
+    Drag.hotSpot.y: delegate.height / 2
     
     function openContextMenu() {
         dialogLoader.active = true;
@@ -70,28 +76,6 @@ MouseArea {
         application.runApplication();
     }
     
-    property bool inDrag: false
-    
-    acceptedButtons: Qt.LeftButton | Qt.RightButton
-    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launch();
-    onReleased: {
-        parent.Drag.drop();
-        inDrag = false;
-    }
-    onPressAndHold: { inDrag = true; openContextMenu() }
-    
-    drag.target: inDrag ? delegate : undefined
-    Drag.active: delegate.drag.active
-    Drag.source: delegate
-    Drag.hotSpot.x: delegate.width / 2
-    Drag.hotSpot.y: delegate.height / 2
-    
-    HoverHandler {
-        id: hoverHandler
-        acceptedDevices: PointerDevice.Mouse
-        acceptedPointerTypes: PointerDevice.GenericPointer
-    }
-    
     Loader {
         id: dialogLoader
         active: false
@@ -111,25 +95,44 @@ MouseArea {
         }
     }
     
-    Item {
-        id: baseItem
+    MouseArea {
+        id: mouseArea
+        
         anchors.fill: parent
+        anchors.leftMargin: delegate.leftPadding
+        anchors.rightMargin: delegate.rightPadding
+        
+        property bool inDrag: false
+    
+        acceptedButtons: Qt.LeftButton | Qt.RightButton
+        onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launch();
+        onReleased: {
+            delegate.parent.Drag.drop();
+            inDrag = false;
+        }
+        onPressAndHold: { inDrag = true; openContextMenu() }
+        
+        drag.target: inDrag ? delegate : undefined
+        
+        HoverHandler {
+            id: hoverHandler
+            acceptedDevices: PointerDevice.Mouse
+            acceptedPointerTypes: PointerDevice.GenericPointer
+        }
         
         Rectangle {
             anchors.fill: parent
-            anchors.leftMargin: delegate.leftPadding
-            anchors.rightMargin: delegate.rightPadding
             radius: height / 2        
-            color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
+            color: mouseArea.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
         }
         
         RowLayout {
             id: rowLayout
             anchors {
                 fill: parent
-                leftMargin: PlasmaCore.Units.smallSpacing * 2 + delegate.leftPadding
+                leftMargin: PlasmaCore.Units.smallSpacing * 2
                 topMargin: PlasmaCore.Units.smallSpacing
-                rightMargin: PlasmaCore.Units.smallSpacing * 2 + delegate.rightPadding
+                rightMargin: PlasmaCore.Units.smallSpacing * 2
                 bottomMargin: PlasmaCore.Units.smallSpacing
             }
             spacing: 0
