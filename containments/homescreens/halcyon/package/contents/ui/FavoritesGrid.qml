@@ -85,7 +85,6 @@ MobileShell.GridView {
             
             function moveDragToCurrentPos(from, to) {
                 if (from !== to) {
-                    console.log(from + ' ' + to)
                     visualModel.items.move(from, to);
                     Halcyon.PinnedModel.moveEntry(from, to);
                 }
@@ -193,6 +192,8 @@ MobileShell.GridView {
                     } else {
                         Halcyon.PinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
                     }
+                    folderAnim.to = 0;
+                    folderAnim.restart();
                 }
                 
                 NumberAnimation {
