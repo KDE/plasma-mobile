@@ -123,6 +123,8 @@ MobileShell.GridView {
                 isFolder: false
                 application: modelData
                 
+                onRemoveRequested: root.folder.removeApp(model.index);
+                
                 readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
                 readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)
                 leftPadding: isLeftColumn ? root.leftMargin : 0

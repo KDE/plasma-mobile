@@ -40,6 +40,7 @@ Item {
     readonly property string applicationIcon: application ? application.icon : ""
     
     signal folderOpenRequested()
+    signal removeRequested()
     
     property alias drag: mouseArea.drag
     Drag.active: delegate.drag.active
@@ -101,9 +102,7 @@ Item {
             PlasmaComponents.MenuItem {
                 icon.name: "emblem-favorite"
                 text: i18n("Remove from favourites")
-                onClicked: {
-                    Halcyon.PinnedModel.removeEntry(model.index);
-                }
+                onClicked: delegate.removeRequested()
             }
             onClosed: dialogLoader.active = false
         }

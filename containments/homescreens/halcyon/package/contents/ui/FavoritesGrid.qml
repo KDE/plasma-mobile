@@ -177,7 +177,7 @@ MobileShell.GridView {
                 anchors.left: leftDropArea.right
                 anchors.right: rightDropArea.left
                 onEntered: (drag) => {
-                    if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                    if (transitionAnim.running || appDelegate.drag.active || drag.source.isFolder) return; // don't do anything when reordering
                     folderAnim.to = 1;
                     folderAnim.restart();
                 }
@@ -186,7 +186,7 @@ MobileShell.GridView {
                     folderAnim.restart();
                 }
                 onDropped: (drop) => {
-                    if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
+                    if (transitionAnim.running || appDelegate.drag.active || drag.source.isFolder) return; // don't do anything when reordering
                     if (appDelegate.isFolder) {
                         Halcyon.PinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
                     } else {
@@ -214,6 +214,7 @@ MobileShell.GridView {
                 application: model.application
                 
                 onFolderOpenRequested: root.requestOpenFolder(model.folder)
+                onRemoveRequested: Halcyon.PinnedModel.removeEntry(model.index);
                 
                 readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
                 readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)
