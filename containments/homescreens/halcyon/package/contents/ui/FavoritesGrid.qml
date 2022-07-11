@@ -30,10 +30,11 @@ MobileShell.GridView {
 
     // search widget open gesture
     property bool openingSearchWidget: false
+    property bool canOpenSearchWidget: false
     property real oldVerticalOvershoot: verticalOvershoot
     
     onVerticalOvershootChanged: {
-        if (dragging && verticalOvershoot < 0) {
+        if (dragging && canOpenSearchWidget && verticalOvershoot < 0) {
             if (!openingSearchWidget) {
                 if (oldVerticalOvershoot === 0) {
                     openingSearchWidget = true;
@@ -47,7 +48,9 @@ MobileShell.GridView {
         oldVerticalOvershoot = verticalOvershoot;
     }
     onDraggingChanged: {
-        if (!dragging && openingSearchWidget) {
+        if (dragging) {
+            canOpenSearchWidget = root.contentY <= 0;
+        } else if (!dragging && openingSearchWidget) {
             openingSearchWidget = false;
             root.searchWidget.endGesture();
         }
