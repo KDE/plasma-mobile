@@ -45,7 +45,7 @@ Item {
     
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {
-        let totalRows = quickSettingsCount / columnCount;
+        let totalRows = Math.ceil(quickSettingsCount / columnCount);
         let isPortrait = MobileShell.Shell.orientation === MobileShell.Shell.Portrait;
         let targetRows = Math.floor(Window.height * (isPortrait ? 0.65 : 0.8) / rowHeight);
         return Math.min(totalRows, targetRows);
@@ -229,7 +229,7 @@ Item {
 
                 ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
                 ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-                ScrollBar.vertical.interactive:false
+                ScrollBar.vertical.interactive: false
                 
                 anchors.fill: parent
                 contentWidth: width
@@ -253,7 +253,7 @@ Item {
                     position: 0.1
                     
                     contentItem: Rectangle {
-                        implicitWidth: PlasmaCore.Units.smallSpacing/4
+                        implicitWidth: PlasmaCore.Units.smallSpacing / 4
                         color: PlasmaCore.Theme.textColor
                         opacity: 0.5
                     }
@@ -285,7 +285,6 @@ Item {
         id: quickSettingComponent
         
         Components.BaseItem {
-                                                
             height: root.rowHeight
             width: root.columnWidth
             padding: PlasmaCore.Units.smallSpacing
