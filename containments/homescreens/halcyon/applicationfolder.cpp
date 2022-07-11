@@ -123,3 +123,13 @@ void ApplicationFolder::removeApp(int row)
     Q_EMIT applicationsChanged();
     Q_EMIT saveRequested();
 }
+
+void ApplicationFolder::moveAppOut(int row)
+{
+    if (row < 0 || row >= m_applications.size()) {
+        return;
+    }
+
+    Q_EMIT moveAppOutRequested(m_applications[row]->storageId());
+    removeApp(row);
+}

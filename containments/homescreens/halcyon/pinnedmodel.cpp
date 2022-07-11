@@ -70,6 +70,7 @@ void PinnedModel::addFolder(QString name, int row)
 
     ApplicationFolder *folder = new ApplicationFolder(this, name);
     connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+    connect(folder, &ApplicationFolder::moveAppOutRequested, this, &PinnedModel::addAppFromFolder);
 
     beginInsertRows(QModelIndex(), row, row);
     m_applications.insert(row, nullptr);
@@ -146,6 +147,7 @@ void PinnedModel::createFolderFromApps(int sourceAppRow, int draggedAppRow)
     // replace source app with folder containing both apps
     ApplicationFolder *folder = new ApplicationFolder(this, i18nc("Default application folder name.", "Folder"));
     connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+    connect(folder, &ApplicationFolder::moveAppOutRequested, this, &PinnedModel::addAppFromFolder);
 
     folder->addApp(m_applications[sourceAppRow]->storageId(), 0);
     folder->addApp(m_applications[draggedAppRow]->storageId(), 0);
@@ -203,6 +205,7 @@ void PinnedModel::load()
             // read folder
             ApplicationFolder *folder = ApplicationFolder::fromJson(obj, this);
             connect(folder, &ApplicationFolder::saveRequested, this, &PinnedModel::save);
+            connect(folder, &ApplicationFolder::moveAppOutRequested, this, &PinnedModel::addAppFromFolder);
 
             if (folder) {
                 m_applications.append(nullptr);
@@ -232,4 +235,9 @@ void PinnedModel::save()
 
     m_applet->config().writeEntry("Pinned", QString::fromStdString(data.toStdString()));
     Q_EMIT m_applet->configNeedsSaving();
+}
+
+void PinnedModel::addAppFromFolder(const QString &storageId)
+{
+    addApp(storageId, 0);
 }

@@ -42,11 +42,13 @@ public:
     Q_INVOKABLE void moveEntry(int fromRow, int toRow);
     Q_INVOKABLE void addApp(const QString &storageId, int row);
     Q_INVOKABLE void removeApp(int row);
+    Q_INVOKABLE void moveAppOut(int row); // moves app to main page
 
 Q_SIGNALS:
     void nameChanged();
     void applicationsChanged();
     void saveRequested();
+    void moveAppOutRequested(const QString &storageId);
 
 private:
     QString m_name;

@@ -217,7 +217,14 @@ MobileShell.GridView {
                 application: model.application
                 
                 onFolderOpenRequested: root.requestOpenFolder(model.folder)
-                onRemoveRequested: Halcyon.PinnedModel.removeEntry(model.index);
+                
+                menuActions: [
+                    Kirigami.Action {
+                        iconName: "emblem-favorite"
+                        text: i18n("Remove from favourites")
+                        onTriggered: root.folder.removeApp(model.index)
+                    }
+                ]
                 
                 readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
                 readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)

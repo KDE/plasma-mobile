@@ -47,6 +47,9 @@ public:
     Q_INVOKABLE void load();
     void save();
 
+public Q_SLOTS:
+    void addAppFromFolder(const QString &storageId);
+
 private:
     QList<Application *> m_applications;
     QList<ApplicationFolder *> m_folders;

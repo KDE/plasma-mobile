@@ -26,6 +26,8 @@ Item {
     
     property real dragFolderAnimationProgress: 0
     
+    property list<Kirigami.Action> menuActions
+    
     // whether this delegate is a folder
     property bool isFolder
     
@@ -40,7 +42,6 @@ Item {
     readonly property string applicationIcon: application ? application.icon : ""
     
     signal folderOpenRequested()
-    signal removeRequested()
     
     property alias drag: mouseArea.drag
     Drag.active: delegate.drag.active
@@ -96,14 +97,19 @@ Item {
         active: false
         
         sourceComponent: PlasmaComponents.Menu {
+            id: menu
             title: label.text
             closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
             
-            PlasmaComponents.MenuItem {
-                icon.name: "emblem-favorite"
-                text: i18n("Remove from favourites")
-                onClicked: delegate.removeRequested()
+            Repeater {
+                model: menuActions
+                delegate: PlasmaComponents.MenuItem {
+                    icon.name: modelData.iconName
+                    text: modelData.text
+                    onClicked: modelData.triggered()
+                }
             }
+            
             onClosed: dialogLoader.active = false
         }
     }
