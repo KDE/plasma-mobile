@@ -52,23 +52,42 @@ MobileShell.GridView {
             }
         }
         contentItem: RowLayout {
-            spacing: PlasmaCore.Units.gridUnit
-            Kirigami.Icon {
+            spacing: PlasmaCore.Units.smallSpacing * 2
+            
+            // close button
+            MouseArea {
+                id: button
                 Layout.alignment: Qt.AlignVCenter
-                Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
-                Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
-                isMask: true
-                color: 'white'
-                source: 'arrow-left'
+                implicitHeight: PlasmaCore.Units.iconSizes.small + PlasmaCore.Units.largeSpacing
+                implicitWidth: PlasmaCore.Units.iconSizes.small + PlasmaCore.Units.largeSpacing
+                
+                cursorShape: Qt.PointingHandCursor
+                onClicked: root.closeRequested()
+                
+                Rectangle {
+                    anchors.fill: parent
+                    color: Qt.rgba(255, 255, 255, button.pressed ? 0.2 : 0)
+                    radius: button.width / 2
+                }
+                
+                Kirigami.Icon {
+                    anchors.centerIn: parent
+                    implicitHeight: PlasmaCore.Units.iconSizes.small
+                    implicitWidth: PlasmaCore.Units.iconSizes.small
+                    isMask: true
+                    color: 'white'
+                    source: 'arrow-left'
 
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                    layer.enabled: true
+                    layer.effect: DropShadow {
+                        verticalOffset: 1
+                        radius: 4
+                        samples: 6
+                        color: Qt.rgba(0, 0, 0, 0.5)
+                    }
                 }
             }
+            
             QQC2.Label {
                 Layout.fillWidth: true
                 text: root.folderName
