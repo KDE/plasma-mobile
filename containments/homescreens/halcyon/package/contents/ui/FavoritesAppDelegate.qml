@@ -170,6 +170,7 @@ Item {
             PlasmaComponents.Label {
                 id: label
                 visible: text.length > 0
+                textFormat: Text.MarkdownText
 
                 Layout.fillWidth: true
                 Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2

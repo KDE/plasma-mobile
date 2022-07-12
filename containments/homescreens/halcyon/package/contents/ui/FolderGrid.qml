@@ -32,6 +32,8 @@ MobileShell.GridView {
     signal openConfigureRequested()
     signal closeRequested()
     
+    property bool inFolderTitleEditMode: false
+    
     TapHandler {
         onLongPressed: root.openConfigureRequested()
         onTapped: root.closeRequested()
@@ -51,10 +53,77 @@ MobileShell.GridView {
                 onTapped: root.closeRequested()
             }
         }
+        
+        Component {
+            id: folderTitleEdit
+            
+            TextEdit {
+                text: root.folderName
+                color: "white"
+                selectByMouse: true
+                wrapMode: TextEdit.Wrap
+                
+                Component.onCompleted: forceActiveFocus()
+                
+                font.weight: Font.Bold
+                font.pointSize: 18
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
+                
+                onTextChanged: {
+                    if (text.includes('\n')) {
+                        // exit text edit mode when new line is entered
+                        root.inFolderTitleEditMode = false;
+                    } else {
+                        root.folder.name = text;
+                    }
+                }
+                onEditingFinished: root.inFolderTitleEditMode = false
+            }
+        }
+        
+        Component {
+            id: folderTitleLabel
+            
+            QQC2.Label {
+                text: root.folderName
+                color: "white"
+                style: Text.Normal
+                styleColor: "transparent"
+                horizontalAlignment: Text.AlignLeft
+                textFormat: Text.MarkdownText
+                
+                elide: Text.ElideRight
+                wrapMode: Text.Wrap
+                maximumLineCount: 2
+
+                font.weight: Font.Bold
+                font.pointSize: 18
+                layer.enabled: true
+                layer.effect: DropShadow {
+                    verticalOffset: 1
+                    radius: 4
+                    samples: 6
+                    color: Qt.rgba(0, 0, 0, 0.5)
+                }
+                
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: root.inFolderTitleEditMode = true
+                }
+            }
+        }
+        
         contentItem: RowLayout {
+            id: rowLayout
             spacing: PlasmaCore.Units.smallSpacing * 2
             
-            // close button
+            // close folder button
             MouseArea {
                 id: button
                 Layout.alignment: Qt.AlignVCenter
@@ -64,12 +133,14 @@ MobileShell.GridView {
                 cursorShape: Qt.PointingHandCursor
                 onClicked: root.closeRequested()
                 
+                // button background
                 Rectangle {
                     anchors.fill: parent
                     color: Qt.rgba(255, 255, 255, button.pressed ? 0.2 : 0)
                     radius: button.width / 2
                 }
                 
+                // button icon
                 Kirigami.Icon {
                     anchors.centerIn: parent
                     implicitHeight: PlasmaCore.Units.iconSizes.small
@@ -88,27 +159,12 @@ MobileShell.GridView {
                 }
             }
             
-            QQC2.Label {
+            // folder title
+            Loader {
+                Layout.alignment: Qt.AlignVCenter
                 Layout.fillWidth: true
-                text: root.folderName
-                color: "white"
-                style: Text.Normal
-                styleColor: "transparent"
-                horizontalAlignment: Text.AlignLeft
-                
-                elide: Text.ElideRight
-                wrapMode: Text.Wrap
-                maximumLineCount: 2
-
-                font.weight: Font.Bold
-                font.pointSize: 18
-                layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+                Layout.maximumWidth: rowLayout.width - button.width - rowLayout.spacing
+                sourceComponent: root.inFolderTitleEditMode ? folderTitleEdit : folderTitleLabel
             }
         }
     }
