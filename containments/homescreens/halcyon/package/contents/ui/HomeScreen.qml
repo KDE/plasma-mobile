@@ -25,6 +25,9 @@ Item {
     
     function triggerHomescreen() {
         swipeView.setCurrentIndex(0);
+        favoritesView.closeFolder();
+        favoritesView.goToBeginning();
+        gridAppList.goToBeginning();
     }
     
     function openConfigure() {
@@ -53,6 +56,7 @@ Item {
             }
             
             FavoritesView {
+                id: favoritesView
                 anchors.fill: parent
                 searchWidget: root.searchWidget
                 interactive: root.interactive
@@ -67,13 +71,17 @@ Item {
             
             property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, root.width * 0.1 / 2)
             
-            GridAppList {
-                interactive: root.interactive
-                leftMargin: column.horizontalMargin
-                rightMargin: column.horizontalMargin
-                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
+            QQC2.ScrollView {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                
+                GridAppList {
+                    id: gridAppList
+                    interactive: root.interactive
+                    leftMargin: column.horizontalMargin
+                    rightMargin: column.horizontalMargin
+                    effectiveContentWidth: swipeView.width - leftMargin - rightMargin
+                }
             }
         }
     }

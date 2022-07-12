@@ -38,6 +38,16 @@ Item {
     
     signal openConfigureRequested()
     
+    function goToBeginning() {
+        goToBeginningAnim.restart();
+    }
+    
+    function closeFolder() {
+        if (folderShown) {
+            folderShown = false;
+        }
+    }
+    
     FavoritesGrid {
         id: favoritesGrid
         anchors.fill: parent
@@ -77,12 +87,21 @@ Item {
         twoColumn: root.twoColumn
         
         onOpenConfigureRequested: root.openConfigureRequested()
-        onCloseRequested: root.folderShown = false
+        onCloseRequested: root.closeFolder()
         
         property real translateX: 0
         transform: Translate { x: folderGrid.translateX }
         opacity: 0
         visible: opacity !== 0
+    }
+    
+    NumberAnimation {
+        id: goToBeginningAnim
+        target: favoritesGrid
+        properties: 'contentY'
+        to: favoritesGrid.originY
+        duration: 200
+        easing.type: Easing.InOutQuad
     }
     
     SequentialAnimation {

@@ -32,6 +32,17 @@ MobileShell.GridView {
     
     cacheBuffer: Math.max(0, rows * cellHeight)
 
+    function goToBeginning() {
+        goToBeginningAnim.restart();
+    }
+    
+    NumberAnimation on contentY {
+        id: goToBeginningAnim
+        to: gridView.originY
+        duration: 200
+        easing.type: Easing.InOutQuad
+    }
+    
     model: Halcyon.ApplicationListModel
 
     header: MobileShell.BaseItem {
