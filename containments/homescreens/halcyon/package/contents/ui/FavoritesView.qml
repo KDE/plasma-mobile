@@ -92,7 +92,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'translateX'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 0
                 to: -PlasmaCore.Units.gridUnit
                 easing.type: Easing.InOutQuad
@@ -100,7 +100,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'opacity'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 1
                 to: 0
                 easing.type: Easing.InOutQuad
@@ -111,7 +111,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'translateX'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: PlasmaCore.Units.gridUnit
                 to: 0
                 easing.type: Easing.InOutQuad
@@ -119,7 +119,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'opacity'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 0
                 to: 1
                 easing.type: Easing.InOutQuad
@@ -134,7 +134,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'translateX'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 0
                 to: PlasmaCore.Units.gridUnit
                 easing.type: Easing.InOutQuad
@@ -142,7 +142,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'opacity'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 1
                 to: 0
                 easing.type: Easing.InOutQuad
@@ -153,7 +153,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'translateX'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: -PlasmaCore.Units.gridUnit
                 to: 0
                 easing.type: Easing.InOutQuad
@@ -161,7 +161,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'opacity'
-                duration: 200
+                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
                 from: 0
                 to: 1
                 easing.type: Easing.InOutQuad
