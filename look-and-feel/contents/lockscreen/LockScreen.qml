@@ -26,7 +26,8 @@ PlasmaCore.ColorScope {
     property var lockScreenState: LockScreenState {}
     property var notifModel: Notifications.WatchedNotificationsModel {}
     
-    property bool isWidescreen: root.height < root.width * 0.75
+    // only show widescreen mode for short height devices (ex. phone landscape)
+    property bool isWidescreen: root.height < 720 && (root.height < root.width * 0.75)
     property bool notificationsShown: false
     
     readonly property bool drawerOpen: flickable.openFactor >= 1
