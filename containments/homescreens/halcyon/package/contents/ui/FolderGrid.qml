@@ -174,11 +174,10 @@ MobileShell.GridView {
         model: root.folderModel
         
         delegate: Item {
-            id: delegateRoot    
+            id: delegateRoot
             width: root.cellWidth
             height: root.cellHeight
             
-            property var application: model.application
             property int visualIndex: DelegateModel.itemsIndex
             
             DropArea {
@@ -196,7 +195,7 @@ MobileShell.GridView {
                 visualIndex: delegateRoot.visualIndex
                 
                 isFolder: false
-                application: modelData
+                application: model.application
                 
                 menuActions: [
                     Kirigami.Action {

@@ -8,6 +8,7 @@
 ApplicationFolder::ApplicationFolder(QObject *parent, QString name)
     : QObject{parent}
     , m_name{name}
+    , m_applicationFolderModel{nullptr}
 {
 }
 
@@ -64,64 +65,44 @@ QList<Application *> ApplicationFolder::appPreviews()
     return previews;
 }
 
-QList<Application *> ApplicationFolder::applications()
+ApplicationFolderModel *ApplicationFolder::applications()
 {
-    return m_applications;
+    return m_applicationFolderModel;
 }
 
 void ApplicationFolder::setApplications(QList<Application *> applications)
 {
+    if (m_applicationFolderModel) {
+        m_applicationFolderModel->deleteLater();
+    }
+
     m_applications = applications;
     Q_EMIT applicationsChanged();
+    Q_EMIT applicationsReset();
     Q_EMIT saveRequested();
+
+    m_applicationFolderModel = new ApplicationFolderModel{this};
 }
 
 void ApplicationFolder::moveEntry(int fromRow, int toRow)
 {
-    if (fromRow < 0 || toRow < 0 || fromRow >= m_applications.length() || toRow >= m_applications.length() || fromRow == toRow) {
-        return;
+    if (m_applicationFolderModel) {
+        m_applicationFolderModel->moveEntry(fromRow, toRow);
     }
-    if (toRow > fromRow) {
-        ++toRow;
-    }
-
-    if (toRow > fromRow) {
-        Application *app = m_applications.at(fromRow);
-        m_applications.insert(toRow, app);
-        m_applications.takeAt(fromRow);
-
-    } else {
-        Application *app = m_applications.takeAt(fromRow);
-        m_applications.insert(toRow, app);
-    }
-    Q_EMIT applicationsChanged();
-    Q_EMIT saveRequested();
 }
 
 void ApplicationFolder::addApp(const QString &storageId, int row)
 {
-    if (row < 0 || row > m_applications.size()) {
-        return;
-    }
-
-    if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
-        Application *app = new Application(this, service);
-        m_applications.insert(row, app);
-        Q_EMIT applicationsChanged();
-        Q_EMIT saveRequested();
+    if (m_applicationFolderModel) {
+        m_applicationFolderModel->addApp(storageId, row);
     }
 }
 
 void ApplicationFolder::removeApp(int row)
 {
-    if (row < 0 || row >= m_applications.size()) {
-        return;
+    if (m_applicationFolderModel) {
+        m_applicationFolderModel->removeApp(row);
     }
-
-    m_applications[row]->deleteLater();
-    m_applications.removeAt(row);
-    Q_EMIT applicationsChanged();
-    Q_EMIT saveRequested();
 }
 
 void ApplicationFolder::moveAppOut(int row)
@@ -132,4 +113,89 @@ void ApplicationFolder::moveAppOut(int row)
 
     Q_EMIT moveAppOutRequested(m_applications[row]->storageId());
     removeApp(row);
+}
+
+ApplicationFolderModel::ApplicationFolderModel(ApplicationFolder *folder)
+    : QAbstractListModel{folder}
+    , m_folder{folder}
+{
+}
+
+int ApplicationFolderModel::rowCount(const QModelIndex &parent) const
+{
+    return m_folder->m_applications.size();
+}
+
+QVariant ApplicationFolderModel::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid()) {
+        return QVariant();
+    }
+
+    switch (role) {
+    case ApplicationRole:
+        return QVariant::fromValue(m_folder->m_applications.at(index.row()));
+    }
+
+    return QVariant();
+}
+
+QHash<int, QByteArray> ApplicationFolderModel::roleNames() const
+{
+    return {{ApplicationRole, "application"}};
+}
+
+void ApplicationFolderModel::moveEntry(int fromRow, int toRow)
+{
+    if (fromRow < 0 || toRow < 0 || fromRow >= m_folder->m_applications.length() || toRow >= m_folder->m_applications.length() || fromRow == toRow) {
+        return;
+    }
+    if (toRow > fromRow) {
+        ++toRow;
+    }
+
+    beginMoveRows(QModelIndex(), fromRow, fromRow, QModelIndex(), toRow);
+    if (toRow > fromRow) {
+        Application *app = m_folder->m_applications.at(fromRow);
+        m_folder->m_applications.insert(toRow, app);
+        m_folder->m_applications.takeAt(fromRow);
+    } else {
+        Application *app = m_folder->m_applications.takeAt(fromRow);
+        m_folder->m_applications.insert(toRow, app);
+    }
+    endMoveRows();
+    Q_EMIT m_folder->applicationsChanged();
+    Q_EMIT m_folder->saveRequested();
+}
+
+void ApplicationFolderModel::addApp(const QString &storageId, int row)
+{
+    if (row < 0 || row > m_folder->m_applications.size()) {
+        return;
+    }
+
+    if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
+        beginInsertRows(QModelIndex(), row, row);
+        Application *app = new Application(this, service);
+        m_folder->m_applications.insert(row, app);
+        endInsertRows();
+
+        Q_EMIT m_folder->applicationsChanged();
+        Q_EMIT m_folder->saveRequested();
+    }
+}
+
+void ApplicationFolderModel::removeApp(int row)
+{
+    if (row < 0 || row >= m_folder->m_applications.size()) {
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), row, row);
+    m_folder->m_applications[row]->deleteLater();
+    m_folder->m_applications.removeAt(row);
+    endRemoveRows();
+
+    Q_EMIT m_folder->applicationsChanged();
+    Q_EMIT m_folder->saveRequested();
 }

@@ -175,7 +175,7 @@ void PinnedModel::addAppToFolder(int appRow, int folderRow)
 
     ApplicationFolder *folder = m_folders[folderRow];
     Application *app = m_applications[appRow];
-    folder->addApp(app->storageId(), folder->applications().count());
+    folder->addApp(app->storageId(), folder->applications() ? folder->applications()->rowCount() : 0);
 
     removeEntry(appRow);
 }
