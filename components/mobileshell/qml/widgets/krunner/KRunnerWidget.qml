@@ -177,7 +177,6 @@ Item {
                     NumberAnimation { duration: PlasmaCore.Units.shortDuration }
                 }
                 
-                Layout.fillHeight: true
                 Layout.fillWidth: true
 
                 Milou.ResultsListView {
@@ -207,8 +206,8 @@ Item {
                         Rectangle {
                             anchors.fill: parent
                             color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
-                            Behavior on color { 
-                                ColorAnimation { duration: PlasmaCore.Units.shortDuration } 
+                            Behavior on color {
+                                ColorAnimation { duration: PlasmaCore.Units.shortDuration }
                             }
                         }
                         
@@ -282,6 +281,13 @@ Item {
                         }
                     }
                 }
+            }
+
+            MouseArea {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                onClicked: close()
             }
         }
     }
