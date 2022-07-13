@@ -8,7 +8,7 @@
 ApplicationFolder::ApplicationFolder(QObject *parent, QString name)
     : QObject{parent}
     , m_name{name}
-    , m_applicationFolderModel{nullptr}
+    , m_applicationFolderModel{new ApplicationFolderModel{this}}
 {
 }
 
@@ -77,32 +77,26 @@ void ApplicationFolder::setApplications(QList<Application *> applications)
     }
 
     m_applications = applications;
+    m_applicationFolderModel = new ApplicationFolderModel{this};
+
     Q_EMIT applicationsChanged();
     Q_EMIT applicationsReset();
     Q_EMIT saveRequested();
-
-    m_applicationFolderModel = new ApplicationFolderModel{this};
 }
 
 void ApplicationFolder::moveEntry(int fromRow, int toRow)
 {
-    if (m_applicationFolderModel) {
-        m_applicationFolderModel->moveEntry(fromRow, toRow);
-    }
+    m_applicationFolderModel->moveEntry(fromRow, toRow);
 }
 
 void ApplicationFolder::addApp(const QString &storageId, int row)
 {
-    if (m_applicationFolderModel) {
-        m_applicationFolderModel->addApp(storageId, row);
-    }
+    m_applicationFolderModel->addApp(storageId, row);
 }
 
 void ApplicationFolder::removeApp(int row)
 {
-    if (m_applicationFolderModel) {
-        m_applicationFolderModel->removeApp(row);
-    }
+    m_applicationFolderModel->removeApp(row);
 }
 
 void ApplicationFolder::moveAppOut(int row)
