@@ -123,15 +123,62 @@ Item {
         
         property bool inDrag: false
     
+        cursorShape: Qt.PointingHandCursor
         acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launch();
         onReleased: {
             delegate.Drag.drop();
             inDrag = false;
         }
         onPressAndHold: { inDrag = true; openContextMenu() }
-        
         drag.target: inDrag ? delegate : undefined
+        
+        // grow/shrink animation
+        property real zoomScale: 1
+        transform: Scale { 
+            origin.x: mouseArea.width / 2; 
+            origin.y: mouseArea.height / 2; 
+            xScale: mouseArea.zoomScale
+            yScale: mouseArea.zoomScale
+        }
+        
+        property bool launchAppRequested: false
+        
+        NumberAnimation on zoomScale {
+            id: shrinkAnim
+            running: false
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
+            to: MobileShell.MobileShellSettings.animationsEnabled ? 0.95 : 1
+            onFinished: {
+                if (!mouseArea.pressed) {
+                    growAnim.restart();
+                }
+            }
+        }
+        
+        NumberAnimation on zoomScale {
+            id: growAnim
+            running: false
+            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
+            to: 1
+            onFinished: {
+                if (mouseArea.launchAppRequested) {
+                    delegate.launch();
+                    mouseArea.launchAppRequested = false;
+                }
+            }
+        }
+        
+        onPressedChanged: {
+            if (pressed) {
+                growAnim.stop();
+                shrinkAnim.restart();
+            } else if (!pressed && !shrinkAnim.running) {
+                growAnim.restart();
+            }
+        }
+        
+        // launch app handled by press animation
+        onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launchAppRequested = true;
         
         HoverHandler {
             id: hoverHandler
@@ -142,7 +189,7 @@ Item {
         Rectangle {
             anchors.fill: parent
             radius: height / 2        
-            color: mouseArea.pressed ? Qt.rgba(255, 255, 255, 0.2) : (hoverHandler.hovered ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
+            color: mouseArea.pressed ? Qt.rgba(255, 255, 255, 0.2) : "transparent"
         }
         
         RowLayout {

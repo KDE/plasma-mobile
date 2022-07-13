@@ -64,24 +64,19 @@ Item {
             }
         }
         
-        ColumnLayout {
-            id: column 
-            height: swipeView.height
+        QQC2.ScrollView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
             width: swipeView.width
+            height: swipeView.height
             
-            property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, root.width * 0.1 / 2)
-            
-            QQC2.ScrollView {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                
-                GridAppList {
-                    id: gridAppList
-                    interactive: root.interactive
-                    leftMargin: column.horizontalMargin
-                    rightMargin: column.horizontalMargin
-                    effectiveContentWidth: swipeView.width - leftMargin - rightMargin
-                }
+            GridAppList {
+                id: gridAppList
+                property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, swipeView.width * 0.1 / 2)
+                interactive: root.interactive
+                leftMargin: horizontalMargin
+                rightMargin: horizontalMargin
+                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
             }
         }
     }

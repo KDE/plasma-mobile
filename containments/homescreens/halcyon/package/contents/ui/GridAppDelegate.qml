@@ -20,7 +20,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
-MobileShell.ExtendedAbstractButton {
+MouseArea {
     id: delegate
     width: GridView.view.cellWidth
     height: GridView.view.cellHeight
@@ -40,8 +40,8 @@ MobileShell.ExtendedAbstractButton {
     }
     
     cursorShape: Qt.PointingHandCursor
+    acceptedButtons: Qt.LeftButton | Qt.RightButton
     onPressAndHold: openContextMenu()
-    onRightClickPressed: openContextMenu()
     
     function launchApp() {
         // launch app
@@ -116,7 +116,7 @@ MobileShell.ExtendedAbstractButton {
         }
     }
     // launch app handled by press animation
-    onClicked: launchAppRequested = true;
+    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launchAppRequested = true
     
     ColumnLayout {
         anchors {
@@ -153,7 +153,7 @@ MobileShell.ExtendedAbstractButton {
             
             // darken effect when hovered/pressed
             layer {
-                enabled: delegate.pressed || delegate.mouseHovered
+                enabled: delegate.pressed
                 effect: ColorOverlay {
                     color: Qt.rgba(0, 0, 0, 0.3)
                 }
