@@ -1,0 +1,64 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mart@kde.org",
+                "Name": "Marco Martin"
+            }
+        ],
+        "Category": "Containments",
+        "Id": "org.kde.phone.homescreen",
+        "License": "GPLv2+",
+        "Name": "Phone Homescreen",
+        "Name[ast]": "Pantalla d'aniciu del teléfonu",
+        "Name[az]": "Telefon ana ekranı",
+        "Name[ca@valencia]": "Pantalla d'inici del telèfon",
+        "Name[ca]": "Pantalla d'inici del telèfon",
+        "Name[cs]": "Domácí obrazovka telefonu",
+        "Name[da]": "Hjemmeskærm til telefon",
+        "Name[en_GB]": "Phone Homescreen",
+        "Name[es]": "Pantalla de inicio del teléfono",
+        "Name[et]": "Telefoni koduekraan",
+        "Name[eu]": "Telefonoko etxeko pantaila",
+        "Name[fi]": "Phonen aloitusnäyttö",
+        "Name[fr]": "Page d'accueil du téléphone",
+        "Name[gl]": "Pantalla de inicio do teléfono",
+        "Name[hi]": "फोन होमस्क्रीन",
+        "Name[hu]": "Telefon kezdőképernyő",
+        "Name[ia]": "Schermo Initial de Phone",
+        "Name[id]": "Homescreen Ponsel",
+        "Name[it]": "Schermata home del telefono",
+        "Name[ka]": "ტელეფონის საწყისი ეკრანი",
+        "Name[ko]": "전화 홈 화면",
+        "Name[lt]": "Telefono pradžios ekranas",
+        "Name[nl]": "Standaardscherm van de telefoon",
+        "Name[nn]": "Heimebilete for telefon",
+        "Name[pa]": "ਫ਼ੋਨ ਦੀ ਮੁੱਖ-ਸਕਰੀਨ",
+        "Name[pl]": "Ekran domowy telefonu",
+        "Name[pt]": "Ecrã Inicial",
+        "Name[pt_BR]": "Tela inicial do celular",
+        "Name[ro]": "Ecran de pornire al telefonului",
+        "Name[ru]": "Главный экран телефона",
+        "Name[sk]": "Domovská obrazovka telefónu",
+        "Name[sl]": "Domači zaslon telefona",
+        "Name[sv]": "Telefonens hemskärm",
+        "Name[tr]": "Telefon Ana Ekranı",
+        "Name[uk]": "Домашня сторінка телефону",
+        "Name[x-test]": "xxPhone Homescreenxx",
+        "Name[zh_CN]": "手机主屏幕",
+        "Name[zh_TW]": "手機的主畫面",
+        "ServiceTypes": [
+            "Plasma/Applet",
+            "Plasma/Containment"
+        ],
+        "Version": "",
+        "Website": ""
+    },
+    "Keywords": "",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-ContainmentType": "Desktop",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.launchermenu"
+    ]
+}

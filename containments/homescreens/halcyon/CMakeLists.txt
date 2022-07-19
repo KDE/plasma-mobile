@@ -12,8 +12,6 @@ set(homescreen_SRCS
 
 add_library(plasma_containment_phone_homescreen_halcyon MODULE ${homescreen_SRCS})
 
-kcoreaddons_desktop_to_json(plasma_containment_phone_homescreen_halcyon package/metadata.desktop)
-
 target_link_libraries(plasma_containment_phone_homescreen_halcyon
                       Qt::Gui
                       KF5::Plasma

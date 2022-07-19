@@ -1,0 +1,65 @@
+{
+    "Description": "A mobile homescreen focused on simplicity and ease-of-use.",
+    "Description[az]": "Mobil cihazlardakı ev ekranında daha çox sadəlik və istifadə rahatlığı nəzərə alınıb.",
+    "Description[ca@valencia]": "Una pantalla d'inici del mòbil enfocada a la senzillesa i facilitat d'ús.",
+    "Description[ca]": "Una pantalla d'inici del mòbil enfocada a la senzillesa i facilitat d'ús.",
+    "Description[es]": "Pantalla de inicio para móvil centrada en la simplicidad y en la facilidad de uso.",
+    "Description[eu]": "Sinpletasuna eta erabilerraztasuna helburu duen mugikorrerako etxeko pantaila bat.",
+    "Description[fi]": "Yksinkertaisuuteen ja helppokäyttöisyyteen keskittyvä mobiilikotinäyttö.",
+    "Description[fr]": "Un écran d'accueil pour périphérique mobile, centré sur la simplicité et la facilité d'utilisation.",
+    "Description[ko]": "간단함과 사용 편의성에 초점을 맞춘 모바일 홈 화면입니다.",
+    "Description[nl]": "Een startscherm voor een mobiel gericht op eenvoud en gebruiksgemak.",
+    "Description[pa]": "ਮੋਬਾਈਲ ਮੁੱਖ-ਸਕਰੀਨ, ਜੋ ਕਿ ਸਰਲ ਅਤੇ ਵਰਤਣ ਲਈ ਸੌਖੇ ਟੀਚੇ ਉੱਤੇ ਕੇਂਦਰਿਤ ਹੈ।",
+    "Description[pt]": "Um ecrã inicial para dispositivos móveis focado na simplicidade e facilidade de uso.",
+    "Description[pt_BR]": "Uma tela inicial móvel focada na simplicidade e facilidade de uso.",
+    "Description[sl]": "Mobilni domači zaslon, enostavnega videza in uporabe.",
+    "Description[sv]": "En hemskärm för mobiler fokuserad på enkelhet och användbarhet.",
+    "Description[tr]": "Yalınlığa ve kullanım kolaylığına odaklanmış, taşınabilir bir ana ekran.",
+    "Description[uk]": "Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.",
+    "Description[x-test]": "xxA mobile homescreen focused on simplicity and ease-of-use.xx",
+    "Description[zh_CN]": "简约易用的手机主屏幕应用",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Category": "Containments",
+        "Id": "org.kde.phone.homescreen.halcyon",
+        "License": "GPLv2+",
+        "Name": "Halcyon",
+        "Name[az]": "Halcyon",
+        "Name[ca@valencia]": "Halcyon",
+        "Name[ca]": "Halcyon",
+        "Name[es]": "Halcyon",
+        "Name[eu]": "Halcyon",
+        "Name[fi]": "Halcyon",
+        "Name[fr]": "Halcyon",
+        "Name[ia]": "Halcyon",
+        "Name[ko]": "Halcyon",
+        "Name[nl]": "Halcyon",
+        "Name[pa]": "ਹਲਕਿਆਨ",
+        "Name[pt]": "Halcyon",
+        "Name[pt_BR]": "Halcyon",
+        "Name[sl]": "Halcyon",
+        "Name[sv]": "Halcyon",
+        "Name[tr]": "Halikon",
+        "Name[uk]": "Альціон",
+        "Name[x-test]": "xxHalcyonxx",
+        "Name[zh_CN]": "Halcyon",
+        "ServiceTypes": [
+            "Plasma/Applet",
+            "Plasma/Containment"
+        ],
+        "Version": "",
+        "Website": ""
+    },
+    "Keywords": "",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-ContainmentType": "Desktop",
+    "X-Plasma-MainScript": "ui/main.qml",
+    "X-Plasma-Provides": [
+        "org.kde.plasma.launchermenu"
+    ]
+}

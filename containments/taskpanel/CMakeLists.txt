@@ -7,8 +7,6 @@ qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_VIRTUALKEYBOARD_INTERFACE})
 
 add_library(plasma_containment_phone_taskpanel MODULE taskpanel.cpp ${DBUS_SRCS})
 
-kcoreaddons_desktop_to_json(plasma_containment_phone_taskpanel package/metadata.desktop)
-
 target_link_libraries(plasma_containment_phone_taskpanel
                       Qt::Gui
                       Qt::DBus

@@ -1,0 +1,60 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mart@kde.org",
+                "Name": "Marco Martin"
+            }
+        ],
+        "Category": "Containments",
+        "Id": "org.kde.phone.taskpanel",
+        "License": "GPLv2+",
+        "Name": "Phone Task panel",
+        "Name[ast]": "Panel de xeres del teléfonu",
+        "Name[az]": "Telefon tapşırıq paneli",
+        "Name[ca@valencia]": "Quadro de tasques del telèfon",
+        "Name[ca]": "Plafó de tasques del telèfon",
+        "Name[da]": "Opgavepanel til telefon",
+        "Name[en_GB]": "Phone Task panel",
+        "Name[es]": "Panel de tareas del teléfono",
+        "Name[et]": "Telefoni ülesannete paneel",
+        "Name[eu]": "Telefonoko ataza panela",
+        "Name[fi]": "Phonen tehtäväpaneeli",
+        "Name[fr]": "Tableau de bord des tâches du téléphone",
+        "Name[gl]": "Panel de tarefas do teléfono",
+        "Name[hi]": "फोन टास्क पैनल",
+        "Name[hu]": "Telefon feladatpanel",
+        "Name[ia]": "Pannello de carga de Phone",
+        "Name[id]": "Panel Task Ponsel",
+        "Name[it]": "Pannello delle attività del telefono",
+        "Name[ka]": "ტელეფონის ამოცანების პანელი",
+        "Name[ko]": "전화 작업 패널",
+        "Name[lt]": "Telefono užduočių skydelis",
+        "Name[nl]": "Telefoontakenpaneel",
+        "Name[nn]": "Oppgåvepanel for telefon",
+        "Name[pa]": "ਫ਼ੋਨ ਟਾਸਕ ਪੈਨਲ",
+        "Name[pl]": "Panel zadań telefonu",
+        "Name[pt]": "Painel de Tarefas do Telefone",
+        "Name[pt_BR]": "Painel de tarefas do celular",
+        "Name[ro]": "Panou de sarcini al telefonului",
+        "Name[ru]": "Панель задач телефона",
+        "Name[sk]": "Panel úloh telefónu",
+        "Name[sl]": "Kontrolna plošča opravil telefona",
+        "Name[sv]": "Telefonaktivitetspanel",
+        "Name[tr]": "Telefon İş panosu",
+        "Name[uk]": "Панель завдань телефону",
+        "Name[x-test]": "xxPhone Task panelxx",
+        "Name[zh_CN]": "手机任务面板",
+        "Name[zh_TW]": "手機工作列",
+        "ServiceTypes": [
+            "Plasma/Applet",
+            "Plasma/Containment"
+        ],
+        "Version": "",
+        "Website": ""
+    },
+    "Keywords": "",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-ContainmentType": "Panel",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

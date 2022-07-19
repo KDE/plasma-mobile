@@ -114,6 +114,6 @@ void TaskPanel::updatePanelVisibility()
     }
 }
 
-K_PLUGIN_CLASS_WITH_JSON(TaskPanel, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(TaskPanel, "package/metadata.json")
 
 #include "taskpanel.moc"

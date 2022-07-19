@@ -1,0 +1,62 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "mart@kde.org",
+                "Name": "Marco Martin"
+            }
+        ],
+        "Category": "Containments",
+        "Id": "org.kde.phone.panel",
+        "License": "GPLv2+",
+        "Name": "Phone Panel",
+        "Name[ast]": "Panel del teléfonu",
+        "Name[az]": "Telefon paneli",
+        "Name[ca@valencia]": "Quadro del telèfon",
+        "Name[ca]": "Plafó del telèfon",
+        "Name[cs]": "Panel telefonu",
+        "Name[da]": "Panel til telefon",
+        "Name[en_GB]": "Phone Panel",
+        "Name[es]": "Panel del teléfono",
+        "Name[et]": "Telefoni paneel",
+        "Name[eu]": "Telefonoko panela",
+        "Name[fi]": "Phonen paneeli",
+        "Name[fr]": "Tableau de bord du téléphone",
+        "Name[gl]": "Panel do teléfono",
+        "Name[hi]": "फोन पैनल",
+        "Name[hu]": "Telefon panel",
+        "Name[ia]": "Panello de telephono",
+        "Name[id]": "Panel Ponsel",
+        "Name[it]": "Pannello del telefono",
+        "Name[ka]": "ტელეფონის პანელი",
+        "Name[ko]": "전화 패널",
+        "Name[lt]": "Telefono skydelis",
+        "Name[nl]": "Telefoonpaneel",
+        "Name[nn]": "Telefonpanel",
+        "Name[pa]": "ਫ਼ੋਨ ਦਾ ਪੈਨਲ",
+        "Name[pl]": "Panel telefonu",
+        "Name[pt]": "Painel do Telefone",
+        "Name[pt_BR]": "Painel do celular",
+        "Name[ro]": "Panoul telefonului",
+        "Name[ru]": "Панель телефона",
+        "Name[sk]": "Panel telefónu",
+        "Name[sl]": "Kontrolna plošča telefona",
+        "Name[sv]": "Telefonpanel",
+        "Name[tr]": "Telefon Panosu",
+        "Name[uk]": "Панель телефону",
+        "Name[x-test]": "xxPhone Panelxx",
+        "Name[zh_CN]": "手机面板",
+        "Name[zh_TW]": "手機面板",
+        "ServiceTypes": [
+            "Plasma/Applet",
+            "Plasma/Containment"
+        ],
+        "Version": "",
+        "Website": ""
+    },
+    "Keywords": "",
+    "X-KDE-ParentApp": "",
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-ContainmentType": "Panel",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
