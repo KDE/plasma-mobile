@@ -7,7 +7,7 @@
 
 #include <KPluginFactory>
 
-K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "kcm_mobileshell.json")
 
 KCMMobileShell::KCMMobileShell(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, data, args)

@@ -27,11 +27,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Config
 )
 
-set(mobileshellsettings_SRCS
-    kcm.cpp
-)
-
-add_library(kcm_mobileshell MODULE ${mobileshellsettings_SRCS})
+kcoreaddons_add_plugin(kcm_mobileshell SOURCES kcm.cpp INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobileshell
     Qt::Core
@@ -41,10 +37,6 @@ target_link_libraries(kcm_mobileshell
     KF5::QuickAddons
 )
 
-kcoreaddons_desktop_to_json(kcm_mobileshell "package/metadata.desktop")
-
-install(TARGETS kcm_mobileshell DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
-install(FILES package/metadata.desktop RENAME kcm_mobileshell.desktop DESTINATION ${KDE_INSTALL_KSERVICESDIR}) # Install the desktop file
-
+kcmutils_generate_desktop_file(kcm_mobileshell)
 
 kpackage_install_package(package kcm_mobileshell kcms) # Install our QML kpackage.
