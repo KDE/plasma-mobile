@@ -1,0 +1,47 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Icon": "system-shutdown-symbolic",
+        "Id": "org.kde.plasma.quicksetting.powermenu",
+        "License": "GPL",
+        "Name": "Power Menu",
+        "Name[az]": "Güc menyusu",
+        "Name[ca@valencia]": "Menú d'energia",
+        "Name[ca]": "Menú d'energia",
+        "Name[en_GB]": "Power Menu",
+        "Name[es]": "Menú de energía",
+        "Name[eu]": "Energia menua",
+        "Name[fi]": "Virranhallintavalikko",
+        "Name[fr]": "Menu « Énergie »",
+        "Name[hi]": "शक्ती मेन्यू",
+        "Name[hu]": "Energia menü",
+        "Name[ia]": "Menu de Potentia",
+        "Name[it]": "Menu accensione",
+        "Name[ka]": "კვების მენიუ",
+        "Name[ko]": "전원 메뉴",
+        "Name[nl]": "Energiemenu",
+        "Name[nn]": "Kraftmeny",
+        "Name[pa]": "ਪਾਵਰ ਮੇਨੂ",
+        "Name[pl]": "Menu zasilania",
+        "Name[pt]": "Menu de Energia",
+        "Name[pt_BR]": "Menu de energia",
+        "Name[ro]": "Meniu avansat",
+        "Name[sk]": "Ponuka napájania",
+        "Name[sl]": "Meni energije",
+        "Name[sv]": "Strömmeny",
+        "Name[tr]": "Güç Menüsü",
+        "Name[uk]": "Меню живлення",
+        "Name[x-test]": "xxPower Menuxx",
+        "Name[zh_CN]": "电源菜单",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}

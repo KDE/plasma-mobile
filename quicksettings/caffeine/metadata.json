@@ -1,0 +1,48 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Icon": "system-suspend-hibernate",
+        "Id": "org.kde.plasma.quicksetting.caffeine",
+        "License": "GPL",
+        "Name": "Caffeine",
+        "Name[az]": "Caffeine",
+        "Name[ca@valencia]": "Caffeine",
+        "Name[ca]": "Caffeine",
+        "Name[cs]": "Caffeine",
+        "Name[en_GB]": "Caffeine",
+        "Name[es]": "Cafeína",
+        "Name[eu]": "Caffeine",
+        "Name[fi]": "Caffeine",
+        "Name[fr]": "Caffeine",
+        "Name[hi]": "कैफीन",
+        "Name[hu]": "Caffeine",
+        "Name[ia]": "Caffeine",
+        "Name[it]": "Caffeina",
+        "Name[ka]": "კაფეინი",
+        "Name[ko]": "카페인",
+        "Name[nl]": "Cafeïne",
+        "Name[nn]": "Caffeine",
+        "Name[pa]": "ਕੈਫ਼਼ੀਨ",
+        "Name[pl]": "Kofeina",
+        "Name[pt]": "Cafeína",
+        "Name[pt_BR]": "Cafeína",
+        "Name[ro]": "Cafeină",
+        "Name[sk]": "Kofeín",
+        "Name[sl]": "Caffeine",
+        "Name[sv]": "Koffein",
+        "Name[tr]": "Caffeine",
+        "Name[uk]": "Кофеїн",
+        "Name[x-test]": "xxCaffeinexx",
+        "Name[zh_CN]": "Caffeine",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}

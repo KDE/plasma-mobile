@@ -1,0 +1,45 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "aleixpol@kde.org",
+                "Name": "Aleix Pol i Gonzalez"
+            }
+        ],
+        "Icon": "spectacle",
+        "Id": "org.kde.plasma.quicksetting.record",
+        "License": "GPL-2.0+",
+        "Name": "Screenshot",
+        "Name[az]": "Ekran şəkli",
+        "Name[ca@valencia]": "Captura de pantalla",
+        "Name[ca]": "Captura de pantalla",
+        "Name[cs]": "Snímek obrazovky",
+        "Name[en_GB]": "Screenshot",
+        "Name[es]": "Captura de pantalla",
+        "Name[eu]": "Pantaila-argazkia",
+        "Name[fi]": "Ruutukaappaus",
+        "Name[fr]": "Copie d'écran",
+        "Name[ia]": "Instantanee de schermo",
+        "Name[it]": "Schermata",
+        "Name[ka]": "ეკრანის ანაბეჭდი",
+        "Name[ko]": "스크린샷",
+        "Name[nl]": "Schermafdruk",
+        "Name[pa]": "ਸਕਰੀਨਸ਼ਾਟ",
+        "Name[pl]": "Zrzut ekranu",
+        "Name[pt]": "Captura",
+        "Name[pt_BR]": "Captura de tela",
+        "Name[ro]": "Captură de ecran",
+        "Name[sk]": "Snímka obrazovky",
+        "Name[sl]": "Slika zaslona",
+        "Name[sv]": "Skärmbild",
+        "Name[tr]": "Ekran görüntüsü",
+        "Name[uk]": "Знімок вікна",
+        "Name[x-test]": "xxScreenshotxx",
+        "Name[zh_CN]": "屏幕截图",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}
