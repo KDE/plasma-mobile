@@ -1,0 +1,9 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: plasma-mobile
+Upstream-Contact: Alexander Lohnau <alexander.lohnau@gmx.de>
+Source: https://invent.kde.org/plasma/plasma-mobile!
+
+Files: *.json
+Copyright: Plasma-Mobile contributors
+License: GPL-2.0-or-later
+
