@@ -62,6 +62,9 @@ QtObject {
     // whether we are in a swipe up gesture to open the task switcher
     property bool currentlyBeingOpened: false
     
+    // whether the task switcher is being closed: an animation is running
+    property bool currentlyBeingClosed: false
+    
     // whether we are in a swipe left/right gesture to walk through tasks
     property bool scrollingTasks: false
     
@@ -237,7 +240,10 @@ QtObject {
         duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
         easing.type: Easing.OutQuint
         
+        onStarted: root.currentlyBeingClosed = true
+        
         onFinished: {
+            root.currentlyBeingClosed = false;
             root.currentlyBeingOpened = false;
             taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             taskSwitcher.instantHide();

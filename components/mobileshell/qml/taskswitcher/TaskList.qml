@@ -16,14 +16,31 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Item {
     id: root
     
-    required property var taskSwitcher    
+    required property var taskSwitcher
     readonly property var taskSwitcherState: taskSwitcher.taskSwitcherState
+    
+    // account for system header and footer offset (center the preview image)
+    readonly property real taskY: {
+        let headerHeight = MobileShell.Shell.topMargin;
+        let footerHeight = MobileShell.Shell.bottomMargin;
+        let diff = headerHeight - footerHeight;
+        
+        let baseY = (taskSwitcher.height / 2) - (taskSwitcherState.taskHeight / 2) - (taskSwitcherState.taskHeaderHeight / 2)
+        
+        return baseY + diff / 2 - MobileShell.TopPanelControls.panelHeight;
+    }
     
     transform: Scale {
         origin.x: root.width / 2
         origin.y: root.height / 2
         xScale: taskSwitcherState.currentScale
         yScale: taskSwitcherState.currentScale
+    }
+    
+    function closeAll() {
+        for (var i = 0; i < repeater.count; i++) {
+            repeater.itemAt(i).closeApp();
+        }
     }
     
     // taphandler activates even if delegate touched
@@ -69,16 +86,7 @@ Item {
             // this is the actual displayed x-position on screen
             x: listX + repeater.leftMargin - taskSwitcherState.xPosition
             
-            // account for system header and footer offset (center the preview image)
-            y: {
-                let headerHeight = MobileShell.Shell.topMargin;
-                let footerHeight = MobileShell.Shell.bottomMargin;
-                let diff = headerHeight - footerHeight;
-                
-                let baseY = (taskSwitcher.height / 2) - (height / 2) - (taskSwitcherState.taskHeaderHeight / 2)
-                
-                return baseY + diff / 2 - MobileShell.TopPanelControls.panelHeight;
-            }
+            y: root.taskY
             
             // ensure current task is above others
             z: taskSwitcherState.currentTaskIndex === currentIndex ? 1 : 0
