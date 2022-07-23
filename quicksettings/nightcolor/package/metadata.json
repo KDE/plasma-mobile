@@ -3,7 +3,14 @@
         "Authors": [
             {
                 "Email": "aleixpol@kde.org",
-                "Name": "Aleix Pol"
+                "Name": "Aleix Pol",
+                "Name[az]": "Aleix Pol",
+                "Name[ca]": "Aleix Pol",
+                "Name[en_GB]": "Aleix Pol",
+                "Name[pt]": "Aleix Pol",
+                "Name[tr]": "Aleix Pol",
+                "Name[uk]": "Aleix Pol",
+                "Name[x-test]": "xxAleix Polxx"
             }
         ],
         "Icon": "redshift-status-on",

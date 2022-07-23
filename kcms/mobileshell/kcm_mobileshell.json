@@ -3,11 +3,25 @@
         "Authors": [
             {
                 "Email": "espidev@gmail.com",
-                "Name": "Devin Lin"
+                "Name": "Devin Lin",
+                "Name[az]": "Devin Lin",
+                "Name[ca]": "Devin Lin",
+                "Name[en_GB]": "Devin Lin",
+                "Name[pt]": "Devin Lin",
+                "Name[tr]": "Devin Lin",
+                "Name[uk]": "Devin Lin",
+                "Name[x-test]": "xxDevin Linxx"
             }
         ],
         "Category": "System Information",
         "Description": "Configure the system shell",
+        "Description[az]": "Sistem üz qabığını tənzimləyin",
+        "Description[ca]": "Configura l'intèrpret d'ordres del sistema",
+        "Description[en_GB]": "Configure the system shell",
+        "Description[pt]": "Configurar a consola do sistema",
+        "Description[tr]": "Sistem kabuğunu yapılandır",
+        "Description[uk]": "Налаштувати командну оболонку системи",
+        "Description[x-test]": "xxConfigure the system shellxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",

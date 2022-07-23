@@ -27,7 +27,14 @@
         "Authors": [
             {
                 "Email": "bshah@kde.org",
-                "Name": "Bhushan Shah"
+                "Name": "Bhushan Shah",
+                "Name[az]": "Bhushan Shah",
+                "Name[ca]": "Bhushan Shah",
+                "Name[en_GB]": "Bhushan Shah",
+                "Name[pt]": "Bhushan Shah",
+                "Name[tr]": "Buşan Şah",
+                "Name[uk]": "Bhushan Shah",
+                "Name[x-test]": "xxBhushan Shahxx"
             }
         ],
         "Icon": "network-flightmode-on",

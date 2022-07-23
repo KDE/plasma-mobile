@@ -27,7 +27,14 @@
         "Authors": [
             {
                 "Email": "devin@kde.org",
-                "Name": "Devin Lin"
+                "Name": "Devin Lin",
+                "Name[az]": "Devin Lin",
+                "Name[ca]": "Devin Lin",
+                "Name[en_GB]": "Devin Lin",
+                "Name[pt]": "Devin Lin",
+                "Name[tr]": "Devin Lin",
+                "Name[uk]": "Devin Lin",
+                "Name[x-test]": "xxDevin Linxx"
             }
         ],
         "Icon": "gps",

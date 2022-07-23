@@ -3,7 +3,14 @@
         "Authors": [
             {
                 "Email": "aleixpol@kde.org",
-                "Name": "Aleix Pol i Gonzalez"
+                "Name": "Aleix Pol i Gonzalez",
+                "Name[az]": "Aleix Pol i Gonzalez",
+                "Name[ca]": "Aleix Pol i Gonzalez",
+                "Name[en_GB]": "Aleix Pol i Gonzalez",
+                "Name[pt]": "Aleix Pol i Gonzalez",
+                "Name[tr]": "Aleix Pol i Gonzalez",
+                "Name[uk]": "Aleix Pol i Gonzalez",
+                "Name[x-test]": "xxAleix Pol i Gonzalezxx"
             }
         ],
         "Icon": "spectacle",
