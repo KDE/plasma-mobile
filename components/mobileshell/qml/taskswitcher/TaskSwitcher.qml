@@ -254,6 +254,7 @@ Item {
                     }
                     
                     icon.name: "edit-clear-history"
+                    font.bold: true
                     
                     text: closeRequested ? "Confirm Close All" : "Close All"
                     
