@@ -29,7 +29,7 @@ Item {
     readonly property bool showingApp: visibleMaximizedWindowsModel.count > 0
     readonly property color backgroundColor: topPanel.colorScopeColor
 
-    Plasmoid.backgroundHints: showingApp ? PlasmaCore.Types.StandardBackground : PlasmaCore.Types.NoBackground
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
     width: 480
     height: PlasmaCore.Units.gridUnit
