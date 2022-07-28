@@ -99,6 +99,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("taskswitcher/TaskSwitcher.qml"), uri, 1, 0, "TaskSwitcher");
 
     // /widgets
+    qmlRegisterType(resolvePath("widgets/dialercontrols/DialerControlsWidget.qml"), uri, 1, 0, "DialerControlsWidget");
     qmlRegisterType(resolvePath("widgets/krunner/KRunnerWidget.qml"), uri, 1, 0, "KRunnerWidget");
     qmlRegisterType(resolvePath("widgets/mediacontrols/MediaControlsWidget.qml"), uri, 1, 0, "MediaControlsWidget");
     qmlRegisterType(resolvePath("widgets/notifications/NotificationsWidget.qml"), uri, 1, 0, "NotificationsWidget");

@@ -71,6 +71,8 @@
         <file>qml/taskswitcher/TaskSwitcherState.qml</file>
         <file>qml/taskswitcher/Thumbnail.qml</file>
         
+        <file>qml/widgets/dialercontrols/DialerControlsWidget.qml</file>
+        
         <file>qml/widgets/krunner/KRunnerWidget.qml</file>
         
         <file>qml/widgets/mediacontrols/BlurredBackground.qml</file>

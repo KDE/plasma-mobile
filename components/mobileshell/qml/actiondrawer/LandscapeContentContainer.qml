@@ -68,7 +68,7 @@ PlasmaCore.ColorScope {
             spacing: 0
             
             anchors {
-                top: mediaWidget.bottom
+                top: dialerWidget.bottom
                 topMargin: 0
                 bottom: parent.bottom
                 bottomMargin: 0
@@ -151,6 +151,22 @@ PlasmaCore.ColorScope {
             anchors {
                 right: quickSettings.left
                 left: isOnLargeScreen ? date.right : parent.left
+                leftMargin: columnLayout.anchors.margins
+                rightMargin: columnLayout.anchors.margins - quickSettings.leftPadding
+            }
+        }
+
+        MobileShell.DialerControlsWidget {
+            id: dialerWidget
+            property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
+
+            y: isOnLargeScreen ? mediaWidget.y - height + mediaWidget.implicitHeight : mediaWidget.y + mediaWidget.implicitHeight + columnLayout.anchors.margins / 2
+
+            opacity: columnLayout.opacity
+
+            anchors {
+                right: quickSettings.left
+                left: isOnLargeScreen ? mediaWidget.right : parent.left
                 leftMargin: columnLayout.anchors.margins
                 rightMargin: columnLayout.anchors.margins - quickSettings.leftPadding
             }
