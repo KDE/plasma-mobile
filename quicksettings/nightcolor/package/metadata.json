@@ -10,6 +10,7 @@
                 "Name[de]": "Aleix Pol",
                 "Name[en_GB]": "Aleix Pol",
                 "Name[es]": "Aleix Pol",
+                "Name[eu]": "Aleix Pol",
                 "Name[fr]": "Aleix Pol",
                 "Name[it]": "Aleix Pol",
                 "Name[nl]": "Aleix Pol",
@@ -17,7 +18,8 @@
                 "Name[sl]": "Aleix Pol",
                 "Name[tr]": "Aleix Pol",
                 "Name[uk]": "Aleix Pol",
-                "Name[x-test]": "xxAleix Polxx"
+                "Name[x-test]": "xxAleix Polxx",
+                "Name[zh_CN]": "Aleix Pol"
             }
         ],
         "Icon": "redshift-status-on",

@@ -10,6 +10,7 @@
                 "Name[de]": "Devin Lin",
                 "Name[en_GB]": "Devin Lin",
                 "Name[es]": "Devin Lin",
+                "Name[eu]": "Devin Lin",
                 "Name[fr]": "Devin Lin",
                 "Name[it]": "Devin Lin",
                 "Name[nl]": "Devin Lin",
@@ -17,7 +18,8 @@
                 "Name[sl]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx"
+                "Name[x-test]": "xxDevin Linxx",
+                "Name[zh_CN]": "Devin Lin"
             }
         ],
         "Category": "System Information",
@@ -27,6 +29,7 @@
         "Description[ca]": "Configura l'intèrpret d'ordres del sistema",
         "Description[en_GB]": "Configure the system shell",
         "Description[es]": "Configurar el intérprete de órdenes del sistema",
+        "Description[eu]": "Konfiguratu sistemaren oskola",
         "Description[fr]": "Configurer le shell du système",
         "Description[it]": "Configura la shell di sistema",
         "Description[nl]": "De systeem-shell configureren",
@@ -35,6 +38,7 @@
         "Description[tr]": "Sistem kabuğunu yapılandır",
         "Description[uk]": "Налаштувати командну оболонку системи",
         "Description[x-test]": "xxConfigure the system shellxx",
+        "Description[zh_CN]": "配置系统外壳程序",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",

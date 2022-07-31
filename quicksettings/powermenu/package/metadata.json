@@ -10,6 +10,7 @@
                 "Name[de]": "Devin Lin",
                 "Name[en_GB]": "Devin Lin",
                 "Name[es]": "Devin Lin",
+                "Name[eu]": "Devin Lin",
                 "Name[fr]": "Devin Lin",
                 "Name[it]": "Devin Lin",
                 "Name[nl]": "Devin Lin",
@@ -17,7 +18,8 @@
                 "Name[sl]": "Devin Lin",
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
-                "Name[x-test]": "xxDevin Linxx"
+                "Name[x-test]": "xxDevin Linxx",
+                "Name[zh_CN]": "Devin Lin"
             }
         ],
         "Icon": "system-shutdown-symbolic",

@@ -10,6 +10,7 @@
                 "Name[de]": "Marco Martin",
                 "Name[en_GB]": "Marco Martin",
                 "Name[es]": "Marco Martin",
+                "Name[eu]": "Marco Martin",
                 "Name[fr]": "Marco Martin",
                 "Name[it]": "Marco Martin",
                 "Name[nl]": "Marco Martin",
@@ -17,7 +18,8 @@
                 "Name[sl]": "Marco Martin",
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx"
+                "Name[x-test]": "xxMarco Martinxx",
+                "Name[zh_CN]": "Marco Martin"
             }
         ],
         "Category": "Containments",
