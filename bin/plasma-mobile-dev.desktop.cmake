@@ -21,6 +21,7 @@ Name[pl]=Przenośna Plazma (Rozwój)
 Name[pt]=Plasma Mobile (Desenvolvimento)
 Name[pt_BR]=Plasma Mobile (desenvolvimento)
 Name[sl]=Plasma Mobile (Razvoj)
+Name[sv]=Plasma mobil (utvecklingsversion)
 Name[tr]=Plasma Mobile (Geliştirme)
 Name[uk]=Мобільна Плазма (версія у розробці)
 Name[x-test]=xxPlasma Mobile (Development)xx
