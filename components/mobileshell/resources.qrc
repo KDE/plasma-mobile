@@ -36,7 +36,6 @@
         <file>qml/dataproviders/BluetoothProvider.qml</file>
         <file>qml/dataproviders/SignalStrengthProvider.qml</file>
         <file>qml/dataproviders/VolumeProvider.qml</file>
-        <file>qml/dataproviders/WifiProvider.qml</file>
         
         <file>qml/homescreen/HomeScreen.qml</file>
         
@@ -57,7 +56,7 @@
         <file>qml/statusbar/indicators/BluetoothIndicator.qml</file>
         <file>qml/statusbar/indicators/SignalStrengthIndicator.qml</file>
         <file>qml/statusbar/indicators/VolumeIndicator.qml</file>
-        <file>qml/statusbar/indicators/WifiIndicator.qml</file>
+        <file>qml/statusbar/indicators/InternetIndicator.qml</file>
         
         <file>qml/statusbar/ClockText.qml</file>
         <file>qml/statusbar/StatusBar.qml</file>

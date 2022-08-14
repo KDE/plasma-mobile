@@ -15,9 +15,31 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 PlasmaCore.IconItem {
     id: connectionIcon
-    property MobileShell.WifiProvider provider: MobileShell.WifiProvider
+    
+    // data
+    
+    readonly property string icon: connectionIconProvider.connectionIcon
+    readonly property bool indicatorRunning: connectionIconProvider.connecting
+    
+    readonly property var networkStatus: PlasmaNM.NetworkStatus {
+        id: networkStatus
+    }
 
-    source: provider.icon
+    readonly property var networkModel: PlasmaNM.NetworkModel {
+        id: connectionModel
+    }
+
+    readonly property var handler: PlasmaNM.Handler {
+        id: handler
+    }
+
+    readonly property var connectionIcon: PlasmaNM.ConnectionIcon {
+        id: connectionIconProvider
+    }
+    
+    // implementation
+    
+    source: icon
     colorGroup: PlasmaCore.ColorScope.colorGroup
 
     Layout.fillHeight: true
@@ -27,7 +49,7 @@ PlasmaCore.IconItem {
         id: connectingIndicator
 
         anchors.fill: parent
-        running: provider.indicatorRunning
+        running: connectionIcon.indicatorRunning
         visible: running
     }
 }

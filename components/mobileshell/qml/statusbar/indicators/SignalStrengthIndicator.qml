@@ -15,6 +15,8 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Item {
     property MobileShell.SignalStrengthProvider provider: MobileShell.SignalStrengthProvider
     
+    required property InternetIndicator internetIndicator
+    
     property bool showLabel: true
     property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
     

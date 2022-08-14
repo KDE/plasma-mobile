@@ -179,11 +179,13 @@ Item {
                             Layout.fillHeight: true
                             showLabel: false
                             visible: root.showTime
+                            internetIndicator: internetIndicatorItem
                         }
                         Indicators.BluetoothIndicator { 
                             Layout.fillHeight: true
                         }
-                        Indicators.WifiIndicator { 
+                        Indicators.InternetIndicator {
+                            id: internetIndicatorItem
                             Layout.fillHeight: true
                         }
                         Indicators.VolumeIndicator { 

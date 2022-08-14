@@ -5,7 +5,7 @@ import QtQuick 2.15
 
 /**
  * Serves a similar function as a QQC2.Control, but does not 
- * take input events, preventing conflicts with Flickable.
+ * take touch input events, preventing conflicts with Flickable.
  */
 
 Item {
