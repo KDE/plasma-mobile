@@ -17,6 +17,9 @@ Item {
     
     required property InternetIndicator internetIndicator
     
+    // check if the internet indicator icon is a mobile data related one
+    readonly property bool isInternetIndicatorMobileData: internetIndicator.icon.startsWith('network-mobile-')
+    
     property bool showLabel: true
     property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
     
@@ -32,6 +35,9 @@ Item {
         height: parent.height
 
         source: provider.icon
+        
+        // don't show mobile indicator icon if the networkmanager one is already showing
+        visible: !isInternetIndicatorMobileData
     }
     
     PlasmaComponents.Label {
