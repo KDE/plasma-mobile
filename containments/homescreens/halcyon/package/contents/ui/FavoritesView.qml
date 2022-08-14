@@ -34,7 +34,6 @@ Item {
     readonly property real delegateHeight: PlasmaCore.Units.gridUnit * 3
     
     property bool folderShown: false
-    onFolderShownChanged: folderShown ? openFolderAnim.restart() : closeFolderAnim.restart()
     
     signal openConfigureRequested()
     
@@ -43,14 +42,21 @@ Item {
     }
     
     function closeFolder() {
-        if (folderShown) {
-            folderShown = false;
-        }
+        folderShown = false;
+        closeFolderAnim.restart()
+    }
+    
+    function openFolder() {
+        folderShown = true;
+        openFolderAnim.restart()
     }
     
     FavoritesGrid {
         id: favoritesGrid
+        
+        property real openFolderProgress: 0
         anchors.fill: parent
+        
         interactive: root.interactive
         searchWidget: root.searchWidget
         
@@ -64,18 +70,22 @@ Item {
         onOpenConfigureRequested: root.openConfigureRequested()
         onRequestOpenFolder: (folder) => {
             folderGrid.folder = folder;
-            root.folderShown = true;
+            root.openFolder();
         }
         
-        property real translateX: 0
+        property real translateX: openFolderProgress * -PlasmaCore.Units.gridUnit
         transform: Translate { x: favoritesGrid.translateX }
+        opacity: 1 - openFolderProgress
         visible: opacity !== 0
     }
  
     FolderGrid {
         id: folderGrid
+        
+        property real openProgress: 0
         anchors.fill: parent
-        folder: null 
+        
+        folder: null
         
         interactive: root.interactive
         
@@ -89,10 +99,40 @@ Item {
         onOpenConfigureRequested: root.openConfigureRequested()
         onCloseRequested: root.closeFolder()
         
-        property real translateX: 0
+        property real translateX: (1 - openProgress) * PlasmaCore.Units.gridUnit
         transform: Translate { x: folderGrid.translateX }
-        opacity: 0
+        opacity: openProgress
         visible: opacity !== 0
+    }
+    
+    // handle horizontal dragging in a folder
+    DragHandler {
+        id: dragHandler
+        target: folderGrid
+        enabled: folderGrid.visible
+        
+        yAxis.enabled: false
+        xAxis.enabled: true
+        xAxis.minimum: -PlasmaCore.Units.gridUnit * 5
+        xAxis.maximum: 0
+        
+        property real oldTranslationX
+        property bool isClosing: false
+        
+        // when dragged
+        onTranslationChanged: {
+            let moveAmount = Math.max(0, translation.x) / (PlasmaCore.Units.gridUnit * 5);
+            folderGrid.openProgress = 1 - Math.min(1, Math.max(0, moveAmount));
+            isClosing = translation.x > oldTranslationX;
+            oldTranslationX = translation.x;
+        }
+        
+        // when drag is let go
+        onActiveChanged: {
+            if (!active) {
+                isClosing ? closeFolder() : openFolder();
+            }
+        }
     }
     
     NumberAnimation {
@@ -110,18 +150,9 @@ Item {
         ParallelAnimation {
             NumberAnimation {
                 target: favoritesGrid
-                properties: 'translateX'
+                properties: 'openFolderProgress'
                 duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 0
-                to: -PlasmaCore.Units.gridUnit
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: favoritesGrid
-                properties: 'opacity'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 1
-                to: 0
+                to: 1
                 easing.type: Easing.InOutQuad
             }
         }
@@ -129,17 +160,8 @@ Item {
         ParallelAnimation {
             NumberAnimation {
                 target: folderGrid
-                properties: 'translateX'
+                properties: 'openProgress'
                 duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: PlasmaCore.Units.gridUnit
-                to: 0
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: folderGrid
-                properties: 'opacity'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 0
                 to: 1
                 easing.type: Easing.InOutQuad
             }
@@ -152,17 +174,8 @@ Item {
         ParallelAnimation {
             NumberAnimation {
                 target: folderGrid
-                properties: 'translateX'
+                properties: 'openProgress'
                 duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 0
-                to: PlasmaCore.Units.gridUnit
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: folderGrid
-                properties: 'opacity'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 1
                 to: 0
                 easing.type: Easing.InOutQuad
             }
@@ -171,18 +184,9 @@ Item {
         ParallelAnimation {
             NumberAnimation {
                 target: favoritesGrid
-                properties: 'translateX'
+                properties: 'openFolderProgress'
                 duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: -PlasmaCore.Units.gridUnit
                 to: 0
-                easing.type: Easing.InOutQuad
-            }
-            NumberAnimation {
-                target: favoritesGrid
-                properties: 'opacity'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
-                from: 0
-                to: 1
                 easing.type: Easing.InOutQuad
             }
         }
