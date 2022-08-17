@@ -5,7 +5,6 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.pipewire 0.1 as PipeWire
 import org.kde.pipewire.record 0.1 as PWRec
 import org.kde.taskmanager 0.1 as TaskManager
 
@@ -13,29 +12,30 @@ MobileShell.QuickSetting {
     id: root
     text: switch(record.state) {
         case PWRec.PipeWireRecord.Idle:
-            return i18n("Record")
+            return i18n("Record Screen")
         case PWRec.PipeWireRecord.Recording:
-            return i18n("Recording...")
+            return i18n("Recording…")
         case PWRec.PipeWireRecord.Rendering:
-            i18n("Writing...")
+            i18n("Writing…")
     }
     status: switch(record.state) {
         case PWRec.PipeWireRecord.Idle:
-            return i18n("Start Recording")
+            return i18n("Tap to start recording")
         case PWRec.PipeWireRecord.Recording:
-            return i18n("Action! 📽️")
+            return i18n("Screen is being captured…")
         case PWRec.PipeWireRecord.Rendering:
-            i18n("Please wait...")
+            i18n("Please wait…")
     }
     icon: "media-record"
     enabled: false
 
     function toggle() {
         if (!record.active) {
-            record.output = MobileShell.ShellUtil.videoLocation("screen-recording.mp4")
+            record.output = MobileShell.ShellUtil.videoLocation("screen-recording.mp4");
         } else {
             MobileShell.ShellUtil.showNotification(i18n("New Screen Recording"), i18n("New Screen Recording saved in %1", record.output), record.output);
         }
+        
         enabled = !enabled
         MobileShell.TopPanelControls.closeActionDrawer();
     }
@@ -44,7 +44,6 @@ MobileShell.QuickSetting {
         id: record
         nodeId: waylandItem.nodeId
         active: root.enabled
-
     }
     TaskManager.ScreencastingRequest {
         id: waylandItem
