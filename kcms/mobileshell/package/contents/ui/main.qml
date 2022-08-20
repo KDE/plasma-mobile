@@ -149,7 +149,9 @@ KCM.SimpleKCM {
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
                         }
                     }
-                    dialog.parent: root
+                    
+                    Component.onCompleted: dialog.parent = root
+
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2
@@ -187,7 +189,7 @@ KCM.SimpleKCM {
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
                         }
                     }
-                    dialog.parent: root
+                    Component.onCompleted: dialog.parent = root
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2

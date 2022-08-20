@@ -71,7 +71,7 @@ Kirigami.ScrollablePage {
                             append({"name": vibrationIntensityDelegate.lowIntensityString, "value": 0.2});
                         }
                     }
-                    dialog.parent: root
+                    Component.onCompleted: dialog.parent = root
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2
@@ -116,7 +116,7 @@ Kirigami.ScrollablePage {
                             append({"name": vibrationDurationDelegate.shortString, "value": 15});
                         }
                     }
-                    dialog.parent: root
+                    Component.onCompleted: dialog.parent = root
                     dialogDelegate: QQC2.RadioDelegate {
                         implicitWidth: Kirigami.Units.gridUnit * 16
                         topPadding: Kirigami.Units.smallSpacing * 2
