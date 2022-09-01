@@ -28,11 +28,11 @@
                 "Name[zh_CN]": "Aleix Pol i Gonzalez"
             }
         ],
+        "Description": "Screen recording quick setting",
         "Icon": "media-record",
         "Id": "org.kde.plasma.quicksetting.record",
         "License": "GPL-2.0+",
         "Name": "Record Screen",
-        "Description": "Screen recording quick setting",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
