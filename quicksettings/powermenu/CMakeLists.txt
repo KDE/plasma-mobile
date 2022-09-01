@@ -13,7 +13,7 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Declarative
 )
 
-find_package(PW::KWorkspace)
+find_package(LibKWorkspace)
 
 target_link_libraries(powermenuplugin
         PUBLIC
