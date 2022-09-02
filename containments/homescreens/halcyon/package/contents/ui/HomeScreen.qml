@@ -74,9 +74,9 @@ Item {
                 id: gridAppList
                 property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, swipeView.width * 0.1 / 2)
                 interactive: root.interactive
+                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
                 leftMargin: horizontalMargin
                 rightMargin: horizontalMargin
-                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
             }
         }
     }
