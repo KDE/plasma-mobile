@@ -58,6 +58,7 @@
         "Name[uk]": "Перемикання віртуальної клавіатури",
         "Name[x-test]": "xxVirtual Keyboard Togglexx",
         "Name[zh_CN]": "虚拟键盘开关",
+        "Description": "Quick setting for keyboard toggle",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

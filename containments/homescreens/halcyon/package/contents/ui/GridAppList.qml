@@ -31,6 +31,8 @@ MobileShell.GridView {
     property int rows: Math.ceil(Halcyon.ApplicationListModel.count / columns)
     
     cacheBuffer: Math.max(0, rows * cellHeight)
+    
+    onWidthChanged: gridView.forceLayout()
 
     function goToBeginning() {
         goToBeginningAnim.restart();

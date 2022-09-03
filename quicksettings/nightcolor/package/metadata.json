@@ -65,6 +65,7 @@
         "Name[uk]": "Нічні кольори",
         "Name[x-test]": "xxNight Colorxx",
         "Name[zh_CN]": "夜间颜色",
+        "Description": "Night color quick setting",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

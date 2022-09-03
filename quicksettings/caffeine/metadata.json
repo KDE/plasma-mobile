@@ -62,6 +62,7 @@
         "Name[uk]": "Кофеїн",
         "Name[x-test]": "xxCaffeinexx",
         "Name[zh_CN]": "Caffeine",
+        "Description": "Quick setting to suspend system sleep",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
