@@ -28,6 +28,7 @@
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
+        "Description": "Power menu quick setting",
         "Icon": "system-shutdown-symbolic",
         "Id": "org.kde.plasma.quicksetting.powermenu",
         "License": "GPL",
@@ -61,7 +62,6 @@
         "Name[uk]": "Меню живлення",
         "Name[x-test]": "xxPower Menuxx",
         "Name[zh_CN]": "电源菜单",
-        "Description": "Power menu quick setting",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

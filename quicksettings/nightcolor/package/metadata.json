@@ -28,6 +28,7 @@
                 "Name[zh_CN]": "Aleix Pol"
             }
         ],
+        "Description": "Night color quick setting",
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.quicksetting.nightcolor",
         "License": "GPL",
@@ -65,7 +66,6 @@
         "Name[uk]": "Нічні кольори",
         "Name[x-test]": "xxNight Colorxx",
         "Name[zh_CN]": "夜间颜色",
-        "Description": "Night color quick setting",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

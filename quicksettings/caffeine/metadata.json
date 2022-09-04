@@ -28,6 +28,7 @@
                 "Name[zh_CN]": "Devin Lin"
             }
         ],
+        "Description": "Quick setting to suspend system sleep",
         "Icon": "system-suspend-hibernate",
         "Id": "org.kde.plasma.quicksetting.caffeine",
         "License": "GPL",
@@ -62,7 +63,6 @@
         "Name[uk]": "Кофеїн",
         "Name[x-test]": "xxCaffeinexx",
         "Name[zh_CN]": "Caffeine",
-        "Description": "Quick setting to suspend system sleep",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

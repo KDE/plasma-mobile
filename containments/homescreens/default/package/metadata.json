@@ -29,6 +29,7 @@
             }
         ],
         "Category": "Containments",
+        "Description": "Mobile homescreen with a focus on customizability.",
         "Id": "org.kde.phone.homescreen",
         "License": "GPLv2+",
         "Name": "Phone Homescreen",
@@ -70,7 +71,6 @@
         "Name[x-test]": "xxPhone Homescreenxx",
         "Name[zh_CN]": "手机主屏幕",
         "Name[zh_TW]": "手機的主畫面",
-        "Description": "Mobile homescreen with a focus on customizability.",
         "ServiceTypes": [
             "Plasma/Applet",
             "Plasma/Containment"

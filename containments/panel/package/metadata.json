@@ -29,6 +29,7 @@
             }
         ],
         "Category": "Containments",
+        "Description": "Top panel for Plasma Mobile",
         "Id": "org.kde.phone.panel",
         "License": "GPLv2+",
         "Name": "Phone Panel",
@@ -70,7 +71,6 @@
         "Name[x-test]": "xxPhone Panelxx",
         "Name[zh_CN]": "手机面板",
         "Name[zh_TW]": "手機面板",
-        "Description": "Top panel for Plasma Mobile",
         "ServiceTypes": [
             "Plasma/Applet",
             "Plasma/Containment"
