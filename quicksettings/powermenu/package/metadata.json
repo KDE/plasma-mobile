@@ -29,6 +29,13 @@
             }
         ],
         "Description": "Power menu quick setting",
+        "Description[ca@valencia]": "Configuració ràpida del menú d'energia",
+        "Description[ca]": "Configuració ràpida del menú d'energia",
+        "Description[eu]": "Indar-menuaren ezarpen azkarra",
+        "Description[nl]": "Snelle instelling energiemenu",
+        "Description[tr]": "Güç menüsü tez ayarı",
+        "Description[uk]": "Швидке налаштовування меню живлення",
+        "Description[x-test]": "xxPower menu quick settingxx",
         "Icon": "system-shutdown-symbolic",
         "Id": "org.kde.plasma.quicksetting.powermenu",
         "License": "GPL",

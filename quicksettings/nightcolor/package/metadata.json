@@ -29,6 +29,13 @@
             }
         ],
         "Description": "Night color quick setting",
+        "Description[ca@valencia]": "Configuració ràpida del color de nit",
+        "Description[ca]": "Configuració ràpida del color de nit",
+        "Description[eu]": "Gaueko kolorearen ezarpen azkarra",
+        "Description[nl]": "Snelle instelling voor nachtkleur",
+        "Description[tr]": "Gece rengi tez ayarı",
+        "Description[uk]": "Швидке налаштовування нічних кольорів",
+        "Description[x-test]": "xxNight color quick settingxx",
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.quicksetting.nightcolor",
         "License": "GPL",

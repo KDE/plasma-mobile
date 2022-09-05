@@ -29,6 +29,13 @@
             }
         ],
         "Description": "Quick setting for keyboard toggle",
+        "Description[ca@valencia]": "Configuració ràpida del canvi de teclat",
+        "Description[ca]": "Configuració ràpida del canvi de teclat",
+        "Description[eu]": "Teklatua txandakatzeko ezarpen azkarrak",
+        "Description[nl]": "Snelle instelling voor omschakelen van toetsenbord",
+        "Description[tr]": "Klavye aç/kapat için tez ayar",
+        "Description[uk]": "Швидке налаштовування перемикання розкладки клавіатури",
+        "Description[x-test]": "xxQuick setting for keyboard togglexx",
         "Icon": "input-keyboard-virtual",
         "Id": "org.kde.plasma.quicksetting.keyboardtoggle",
         "License": "GPL",
