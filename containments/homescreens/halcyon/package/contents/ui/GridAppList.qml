@@ -22,17 +22,13 @@ MobileShell.GridView {
     layer.enabled: true
     
     readonly property int reservedSpaceForLabel: metrics.height
-    required property real effectiveContentWidth
+    readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     
-    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
+    cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(gridView.effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
-    property int columns: Math.floor(effectiveContentWidth / cellWidth)
+    property int columns: Math.floor(gridView.effectiveContentWidth / cellWidth)
     property int rows: Math.ceil(Halcyon.ApplicationListModel.count / columns)
-    
-    cacheBuffer: Math.max(0, rows * cellHeight)
-    
-    onWidthChanged: gridView.forceLayout()
 
     function goToBeginning() {
         goToBeginningAnim.restart();

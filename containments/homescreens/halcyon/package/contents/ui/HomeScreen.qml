@@ -4,6 +4,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.1
+import QtQuick.Window 2.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -65,16 +66,14 @@ Item {
         }
         
         QQC2.ScrollView {
-            Layout.fillWidth: true
-            Layout.fillHeight: true
             width: swipeView.width
             height: swipeView.height
             
             GridAppList {
                 id: gridAppList
-                property real horizontalMargin: Math.max(Kirigami.Units.largeSpacing, swipeView.width * 0.1 / 2)
+                
+                property int horizontalMargin: Math.round(swipeView.width  * 0.05)
                 interactive: root.interactive
-                effectiveContentWidth: swipeView.width - leftMargin - rightMargin
                 leftMargin: horizontalMargin
                 rightMargin: horizontalMargin
             }
