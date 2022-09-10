@@ -28,6 +28,7 @@ class MobileShellSettings : public QObject
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
+    Q_PROPERTY(bool keyboardButtonEnabled READ keyboardButtonEnabled WRITE setKeyboardButtonEnabled NOTIFY keyboardButtonEnabledChanged)
 
     // task switcher
     Q_PROPERTY(bool taskSwitcherPreviewsEnabled READ taskSwitcherPreviewsEnabled WRITE setTaskSwitcherPreviewsEnabled NOTIFY taskSwitcherPreviewsEnabledChanged)
@@ -116,6 +117,18 @@ public:
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
     /**
+     * Whether the keyboard toggle button on the navigation panel is enabled.
+     */
+    bool keyboardButtonEnabled() const;
+
+    /**
+     * Set whether the keyboard toggle button on the navigation panel is enabled.
+     *
+     * @param keyboardButtonEnabled Whether the keyboard button on the navigation panel should be enabled.
+     */
+    void setKeyboardButtonEnabled(bool keyboardButtonEnabled);
+
+    /**
      * Whether task switcher application previews are enabled.
      */
     bool taskSwitcherPreviewsEnabled() const;
@@ -180,6 +193,7 @@ Q_SIGNALS:
     void vibrationIntensityChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
+    void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();

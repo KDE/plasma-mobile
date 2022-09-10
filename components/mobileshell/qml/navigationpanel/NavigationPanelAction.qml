@@ -8,6 +8,7 @@ import QtQuick 2.15
 
 QtObject {
     property bool enabled
+    property bool visible: true
     property string iconSource
     property real iconSizeFactor
     

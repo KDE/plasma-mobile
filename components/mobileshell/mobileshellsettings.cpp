@@ -31,6 +31,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT keyboardButtonEnabledChanged();
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
@@ -103,6 +104,19 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::keyboardButtonEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("keyboardButtonEnabled", false);
+}
+
+void MobileShellSettings::setKeyboardButtonEnabled(bool keyboardButtonEnabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("keyboardButtonEnabled", keyboardButtonEnabled, KConfigGroup::Notify);
     m_config->sync();
 }
 

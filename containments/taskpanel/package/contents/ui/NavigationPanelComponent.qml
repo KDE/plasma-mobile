@@ -104,4 +104,20 @@ MobileShell.NavigationPanel {
             }
         }
     }
+    
+    rightCornerAction: MobileShell.NavigationPanelAction {
+        id: keyboardToggleAction
+        visible: MobileShell.MobileShellSettings.keyboardButtonEnabled
+        enabled: Keyboards.KWinVirtualKeyboard.available
+        iconSource: "input-keyboard-virtual-symbolic"
+        iconSizeFactor: 0.75
+        
+        onTriggered: {
+            if (Keyboards.KWinVirtualKeyboard.visible) {
+                Keyboards.KWinVirtualKeyboard.active = false;
+            } else {
+                Keyboards.KWinVirtualKeyboard.forceActivate();
+            }
+        }
+    }
 }

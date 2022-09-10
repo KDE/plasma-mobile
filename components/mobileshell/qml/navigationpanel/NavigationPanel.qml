@@ -31,6 +31,9 @@ Item {
     property NavigationPanelAction middleAction
     property NavigationPanelAction rightAction
     
+    property NavigationPanelAction leftCornerAction
+    property NavigationPanelAction rightCornerAction
+    
     DropShadow {
         anchors.fill: mouseArea
         visible: shadow
@@ -124,6 +127,7 @@ Item {
             // button row (anchors provided by state)
             NavigationPanelButton {
                 id: leftButton
+                visible: root.leftAction.visible
                 mouseArea: mouseArea
                 colorGroup: root.foregroundColorGroup
                 enabled: root.leftAction.enabled
@@ -139,6 +143,7 @@ Item {
             NavigationPanelButton {
                 id: middleButton
                 anchors.centerIn: parent
+                visible: root.middleAction.visible
                 mouseArea: mouseArea
                 colorGroup: root.foregroundColorGroup
                 enabled: root.middleAction.enabled
@@ -153,6 +158,7 @@ Item {
 
             NavigationPanelButton {
                 id: rightButton
+                visible: root.rightAction.visible
                 mouseArea: mouseArea
                 colorGroup: root.foregroundColorGroup
                 enabled: root.rightAction.enabled
@@ -161,6 +167,21 @@ Item {
                 onClicked: {
                     if (enabled) {
                         root.rightAction.triggered();
+                    }
+                }
+            }
+            
+            NavigationPanelButton {
+                id: rightCornerButton
+                visible: root.rightCornerAction.visible
+                mouseArea: mouseArea
+                colorGroup: root.foregroundColorGroup
+                enabled: root.rightCornerButton.enabled
+                iconSizeFactor: root.rightCornerAction.iconSizeFactor
+                iconSource: root.rightCornerAction.iconSource
+                onClicked: {
+                    if (enabled) {
+                        root.rightCornerAction.triggered();
                     }
                 }
             }
@@ -173,7 +194,7 @@ Item {
             when: root.width < root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.8 / 3)
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.7 / 3)
             }
             AnchorChanges {
                 target: leftButton
@@ -204,12 +225,24 @@ Item {
                 height: icons.buttonLength
                 width: icons.width
             }
+            AnchorChanges {
+                target: rightCornerButton
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    top: parent.top
+                }
+            }
+            PropertyChanges {
+                target: rightCornerButton
+                height: PlasmaCore.Units.gridUnit * 2
+                width: icons.width
+            }
         }, State {
             name: "portrait"
             when: root.width >= root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.8 / 3)
+                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.7 / 3)
             }
             AnchorChanges {
                 target: leftButton
@@ -239,6 +272,18 @@ Item {
                 target: rightButton
                 height: parent.height
                 width: icons.buttonLength
+            }
+            AnchorChanges {
+                target: rightCornerButton
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    right: parent.right
+                }
+            }
+            PropertyChanges {
+                target: rightCornerButton
+                height: parent.height
+                width: PlasmaCore.Units.gridUnit * 2
             }
         }
     ]
