@@ -9,7 +9,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.QuickSetting {
     text: i18n("Do Not Disturb")
-    icon: enabled ? "notifications" : "notifications-disabled"
+    icon: enabled ? "notifications-disabled" : "notifications"
     status: ""
     enabled: MobileShell.TopPanelControls.notificationsWidget && MobileShell.TopPanelControls.notificationsWidget.doNotDisturbModeEnabled
     available: MobileShell.TopPanelControls.notificationsWidget
