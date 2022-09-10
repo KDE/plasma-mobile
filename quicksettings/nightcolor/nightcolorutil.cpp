@@ -33,9 +33,7 @@ bool NightColorUtil::enabled()
 
 void NightColorUtil::setEnabled(bool enabled)
 {
-    m_settings->setModeEnabled(true);
     m_settings->setMode(ColorCorrect::NightColorMode::Constant);
-    m_settings->setActiveEnabled(true);
     m_settings->setActive(enabled);
     m_settings->save();
 }
