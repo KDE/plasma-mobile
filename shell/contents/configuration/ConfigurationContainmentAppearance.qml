@@ -94,7 +94,8 @@ ColumnLayout {
                                 layoutSelectComboBox.currentValue = name;
                                 var model = configDialog.containmentPluginsConfigModel.get(index);
                                 root.containmentPlugin = pluginName;
-                                root.configurationChanged();
+                                // don't apply configuration immediately
+                                //root.configurationChanged();
                             }
                         }
                     }

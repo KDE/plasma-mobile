@@ -51,7 +51,7 @@
         "Description[tr]": "Ayarlar uygulaması tez ayarı",
         "Description[uk]": "Швидке налаштовування параметрів програм",
         "Description[x-test]": "xxSettings application quick settingxx",
-        "Icon": "spectacle",
+        "Icon": "settings-configure",
         "Id": "org.kde.plasma.quicksetting.settingsapp",
         "License": "GPL-2.0+",
         "Name": "Settings",
