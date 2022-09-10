@@ -14,6 +14,7 @@ Kirigami.Page {
     required property Item internalPage
 
     signal settingValueChanged()
+    onSettingValueChanged: saveConfig(); // we save config immediately on mobile
 
     title: kcm.name
     topPadding: 0

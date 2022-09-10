@@ -13,6 +13,7 @@ Kirigami.ScrollablePage {
     required property var configItem
 
     signal settingValueChanged()
+    onSettingValueChanged: saveConfig() // we save config immediately on mobile
 
     function saveConfig() {
         for (let key in plasmoid.configuration) {
