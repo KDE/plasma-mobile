@@ -1,0 +1,21 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Description": "Quick setting to toggle do not disturb mode",
+        "Icon": "notifications",
+        "Id": "org.kde.plasma.quicksetting.donotdisturb",
+        "License": "GPL",
+        "Name": "Do Not Disturb",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}
+

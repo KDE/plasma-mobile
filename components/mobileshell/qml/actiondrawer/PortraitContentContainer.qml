@@ -24,6 +24,8 @@ PlasmaCore.ColorScope {
     
     required property var actionDrawer
     
+    property alias notificationsWidget: notificationWidget
+    
     // pinned position (disabled when openToPinnedMode is false)
     readonly property real minimizedQuickSettingsOffset: quickSettings.minimizedHeight
     

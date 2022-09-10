@@ -59,6 +59,12 @@ Item {
         value: drawer.visible
     }
     
+    Binding {
+        target: MobileShell.TopPanelControls
+        property: "notificationsWidget"
+        value: drawer.actionDrawer.notificationsWidget
+    }
+    
     Connections {
         target: MobileShell.TopPanelControls
         

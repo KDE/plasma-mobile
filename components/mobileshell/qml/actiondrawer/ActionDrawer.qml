@@ -67,6 +67,11 @@ Item {
     property int direction: MobileShell.Direction.None
     
     /**
+     * The notifications widget being shown. May be null.
+     */
+    property var notificationsWidget: contentContainerLoader.item.notificationsWidget
+    
+    /**
      * The mode of the action drawer (portrait or landscape).
      */
     property int mode: (height > width && width <= largePortraitThreshold) ? ActionDrawer.Portrait : ActionDrawer.Landscape

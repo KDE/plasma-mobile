@@ -18,7 +18,7 @@ Item {
     required property InternetIndicator internetIndicator
     
     // check if the internet indicator icon is a mobile data related one
-    readonly property bool isInternetIndicatorMobileData: internetIndicator.icon.startsWith('network-mobile-')
+    readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')
     
     property bool showLabel: true
     property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6

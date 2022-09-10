@@ -26,6 +26,8 @@ PlasmaCore.ColorScope {
     
     required property var actionDrawer
     
+    property alias notificationsWidget: notificationWidget
+    
     readonly property real minimizedQuickSettingsOffset: height
     readonly property real maximizedQuickSettingsOffset: height
     readonly property bool isOnLargeScreen: width > quickSettings.width * 2.5

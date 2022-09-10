@@ -369,22 +369,9 @@ Item {
             }
             
             PlasmaComponents3.ToolButton {
-                id: doNotDisturbButton
-                
-                Layout.alignment: hasNotifications ? Qt.AlignLeft : Qt.AlignHCenter
-                
-                font.bold: true
-                font.pointSize: Kirigami.Theme.smallFont.pointSize
-                
-                icon.name: doNotDisturbModeEnabled ? "notifications" : "notifications-disabled"
-                text: doNotDisturbModeEnabled ? "Enable Notifications" : "Do Not Disturb"
-                onClicked: toggleDoNotDisturbMode()
-            }
-            
-            PlasmaComponents3.ToolButton {
                 id: clearButton
                 
-                Layout.alignment: Qt.AlignRight
+                Layout.alignment: Qt.AlignCenter
                 
                 visible: hasNotifications
                 
@@ -392,7 +379,7 @@ Item {
                 font.pointSize: Kirigami.Theme.smallFont.pointSize
                 
                 icon.name: "edit-clear-history"
-                text: "Clear All Notifications"
+                text: i18n("Clear All Notifications")
                 onClicked: clearHistory()
             }
         }
