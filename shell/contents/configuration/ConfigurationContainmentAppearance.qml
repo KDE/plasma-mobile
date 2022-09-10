@@ -16,6 +16,7 @@ import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 ColumnLayout {
     id: root
+    spacing: 0
 
     property string currentWallpaper: ""
     property string containmentPlugin: configDialog.containmentPlugin
@@ -38,6 +39,7 @@ ColumnLayout {
 //END functions
 
     Kirigami.InlineMessage {
+        Layout.alignment: Qt.AlignTop
         visible: plasmoid.immutable || animating
         text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes have been restricted by the system administrator")
         showCloseButton: true
@@ -48,7 +50,9 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        id: generalConfig
         spacing: 0
+        Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
         
         MobileForm.FormCard {
@@ -158,6 +162,7 @@ ColumnLayout {
 
     ColumnLayout {
         id: switchContainmentWarning
+        Layout.alignment: Qt.AlignTop
         Layout.fillWidth: true
         visible: configDialog.containmentPlugin !== root.containmentPlugin
         QQC2.Label {
@@ -174,19 +179,23 @@ ColumnLayout {
     }
 
     Item {
-        Layout.fillHeight: true
+        Layout.alignment: Qt.AlignTop
+        Layout.fillHeight: switchContainmentWarning.visible
         visible: switchContainmentWarning.visible
     }
     
     Item {
         id: emptyConfig
+        Layout.alignment: Qt.AlignTop
     }
 
     QQC2.StackView {
         id: main
 
-        Layout.fillHeight: true;
-        Layout.fillWidth: true;
+        Layout.alignment: Qt.AlignTop
+        Layout.fillHeight: true
+        Layout.maximumHeight: root.height - generalConfig.height - 70 // HACK: wallpaper configs seem to go over the provisioned height
+        Layout.fillWidth: true
 
         visible: !switchContainmentWarning.visible
         
