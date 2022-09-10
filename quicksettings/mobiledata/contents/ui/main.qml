@@ -9,12 +9,25 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 MobileShell.QuickSetting {
     text: i18n("Mobile Data")
     icon: "network-modem"
-    status: PlasmaMM.SignalIndicator.mobileDataSupported 
-                ? (enabled ? i18n("On") : i18n("Off"))
-                : i18n("Not Available")
+    status: {
+        if (PlasmaMM.SignalIndicator.needsAPNAdded) {
+            return i18n("APN needs to be configured in the settings");
+        } else if (PlasmaMM.SignalIndicator.mobileDataSupported) {
+            return enabled ? i18n("On") : i18n("Off");
+        } else {
+            return i18n("Not Available");
+        }
+    }
+                
     settingsCommand: "plasma-open-settings kcm_mobile_broadband"
     enabled: PlasmaMM.SignalIndicator.mobileDataEnabled
+    
     function toggle() {
-        PlasmaMM.SignalIndicator.mobileDataEnabled = !PlasmaMM.SignalIndicator.mobileDataEnabled
+        if (PlasmaMM.SignalIndicator.needsAPNAdded || !PlasmaMM.SignalIndicator.mobileDataSupported) {
+            // open settings if unable to toggle mobile data
+            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_mobile_broadband");
+        } else {
+            PlasmaMM.SignalIndicator.mobileDataEnabled = !PlasmaMM.SignalIndicator.mobileDataEnabled;
+        }
     }
 }

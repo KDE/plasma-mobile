@@ -23,6 +23,7 @@ class SignalIndicator : public QObject
     Q_PROPERTY(bool available READ available NOTIFY availableChanged)
     Q_PROPERTY(bool mobileDataSupported READ mobileDataSupported NOTIFY mobileDataSupportedChanged)
     Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
+    Q_PROPERTY(bool needsAPNAdded READ needsAPNAdded NOTIFY mobileDataEnabledChanged)
 
 public:
     SignalIndicator();
@@ -33,6 +34,7 @@ public:
     bool available() const;
     bool mobileDataSupported() const;
     bool mobileDataEnabled() const;
+    bool needsAPNAdded() const;
 
     void setMobileDataEnabled(bool enabled);
 
