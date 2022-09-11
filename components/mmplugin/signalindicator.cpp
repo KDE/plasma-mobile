@@ -75,7 +75,7 @@ bool SignalIndicator::mobileDataEnabled() const
 
 bool SignalIndicator::needsAPNAdded() const
 {
-    return m_nmModem && m_nmModem->availableConnections().count() == 0;
+    return m_nmModem && mobileDataSupported() && m_nmModem->availableConnections().count() == 0;
 }
 
 void SignalIndicator::setMobileDataEnabled(bool enabled)
