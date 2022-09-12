@@ -6,6 +6,7 @@
 
 #include "taskpanel.h"
 
+#include <QDBusPendingReply>
 #include <QDebug>
 #include <QQuickItem>
 #include <QQuickWindow>
@@ -21,6 +22,9 @@
 
 #include <virtualkeyboardinterface.h>
 
+// register type for Keyboards.KWinVirtualKeyboard.forceActivate();
+Q_DECLARE_METATYPE(QDBusPendingReply<>)
+
 TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment(parent, data, args)
 {
@@ -28,6 +32,9 @@ TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVarian
     initWayland();
 
     qmlRegisterUncreatableType<KWayland::Client::Output>("org.kde.plasma.phone.taskpanel", 1, 0, "Output", "nope");
+
+    // register type for Keyboards.KWinVirtualKeyboard.forceActivate();
+    qRegisterMetaType<QDBusPendingReply<>>();
 
     connect(this, &Plasma::Containment::locationChanged, this, &TaskPanel::locationChanged);
     connect(this, &Plasma::Containment::locationChanged, this, [this] {
