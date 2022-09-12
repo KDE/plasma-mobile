@@ -107,19 +107,6 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     m_config->sync();
 }
 
-bool MobileShellSettings::keyboardButtonEnabled() const
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("keyboardButtonEnabled", false);
-}
-
-void MobileShellSettings::setKeyboardButtonEnabled(bool keyboardButtonEnabled)
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    group.writeEntry("keyboardButtonEnabled", keyboardButtonEnabled, KConfigGroup::Notify);
-    m_config->sync();
-}
-
 bool MobileShellSettings::taskSwitcherPreviewsEnabled() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};

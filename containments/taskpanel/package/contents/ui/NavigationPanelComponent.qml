@@ -107,8 +107,8 @@ MobileShell.NavigationPanel {
     
     rightCornerAction: MobileShell.NavigationPanelAction {
         id: keyboardToggleAction
-        visible: MobileShell.MobileShellSettings.keyboardButtonEnabled
-        enabled: Keyboards.KWinVirtualKeyboard.available
+        visible: Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput
+        enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
         iconSizeFactor: 0.75
         

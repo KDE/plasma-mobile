@@ -80,25 +80,6 @@ KCM.SimpleKCM {
                         }
                     }
                 }
-                
-                MobileForm.FormDelegateSeparator { 
-                    visible: MobileShell.MobileShellSettings.navigationPanelEnabled
-                    above: gestureDelegate
-                    below: keyboardButtonDelegate 
-                }
-                
-                MobileForm.FormSwitchDelegate {
-                    id: keyboardButtonDelegate
-                    visible: MobileShell.MobileShellSettings.navigationPanelEnabled
-                    text: i18n("Keyboard Toggle")
-                    description: i18n("Whether to show a keyboard button on the navigation panel.")
-                    checked: MobileShell.MobileShellSettings.keyboardButtonEnabled
-                    onCheckedChanged: {
-                        if (checked != MobileShell.MobileShellSettings.keyboardButtonEnabled) {
-                            MobileShell.MobileShellSettings.keyboardButtonEnabled = checked;
-                        }
-                    }
-                }
             }
         }
         
