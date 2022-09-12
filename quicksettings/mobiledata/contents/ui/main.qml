@@ -14,18 +14,20 @@ MobileShell.QuickSetting {
             return i18n("APN needs to be configured in the settings");
         } else if (PlasmaMM.SignalIndicator.mobileDataSupported) {
             return enabled ? i18n("On") : i18n("Off");
+        } else if (PlasmaMM.SignalIndicator.simEmpty) {
+            return i18n("No SIM inserted");
         } else {
             return i18n("Not Available");
         }
     }
                 
-    settingsCommand: "plasma-open-settings kcm_mobile_broadband"
+    settingsCommand: "plasma-open-settings kcm_cellular_network"
     enabled: PlasmaMM.SignalIndicator.mobileDataEnabled
     
     function toggle() {
         if (PlasmaMM.SignalIndicator.needsAPNAdded || !PlasmaMM.SignalIndicator.mobileDataSupported) {
             // open settings if unable to toggle mobile data
-            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_mobile_broadband");
+            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_cellular_network");
         } else {
             PlasmaMM.SignalIndicator.mobileDataEnabled = !PlasmaMM.SignalIndicator.mobileDataEnabled;
         }

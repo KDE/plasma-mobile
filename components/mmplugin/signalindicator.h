@@ -20,6 +20,7 @@ class SignalIndicator : public QObject
     Q_PROPERTY(int strength READ strength NOTIFY strengthChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(bool simLocked READ simLocked NOTIFY simLockedChanged)
+    Q_PROPERTY(bool simEmpty READ simEmpty NOTIFY simEmptyChanged)
     Q_PROPERTY(bool available READ available NOTIFY availableChanged)
     Q_PROPERTY(bool mobileDataSupported READ mobileDataSupported NOTIFY mobileDataSupportedChanged)
     Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
@@ -31,6 +32,7 @@ public:
     int strength() const;
     QString name() const;
     bool simLocked() const;
+    bool simEmpty() const;
     bool available() const;
     bool mobileDataSupported() const;
     bool mobileDataEnabled() const;
@@ -42,6 +44,7 @@ Q_SIGNALS:
     void strengthChanged();
     void nameChanged();
     void simLockedChanged();
+    void simEmptyChanged();
     void availableChanged();
     void mobileDataSupportedChanged();
     void mobileDataEnabledChanged();

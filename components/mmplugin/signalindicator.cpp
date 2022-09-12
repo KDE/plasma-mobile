@@ -35,6 +35,14 @@ bool SignalIndicator::simLocked() const
     return m_modem->unlockRequired() == MM_MODEM_LOCK_SIM_PIN;
 }
 
+bool SignalIndicator::simEmpty() const
+{
+    if (!m_modem) {
+        return false;
+    }
+    return m_modemDevice && m_modemDevice->sim() && m_modemDevice->sim()->uni() == QStringLiteral("/");
+}
+
 bool SignalIndicator::available() const
 {
     return !ModemManager::modemDevices().isEmpty();
@@ -42,7 +50,7 @@ bool SignalIndicator::available() const
 
 bool SignalIndicator::mobileDataSupported() const
 {
-    return m_nmModem && m_modemDevice->sim();
+    return m_nmModem && m_modemDevice->sim() && !simEmpty();
 }
 
 bool SignalIndicator::mobileDataEnabled() const
@@ -142,6 +150,8 @@ void SignalIndicator::updateModem()
             });
         }
     }
+    
+    connect(m_modemDevice->sim().get(), &ModemManager::Sim::simIdentifierChanged, this, &SignalIndicator::simEmptyChanged);
 
     if (m_modem) {
         connect(m_modem.get(), &ModemManager::Modem::signalQualityChanged, this, &SignalIndicator::strengthChanged);
