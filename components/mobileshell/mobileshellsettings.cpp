@@ -178,9 +178,9 @@ QList<QString> MobileShellSettings::enabledQuickSettings() const
                                           QStringLiteral("org.kde.plasma.quicksetting.nightcolor"),
                                           QStringLiteral("org.kde.plasma.quicksetting.screenshot"),
                                           QStringLiteral("org.kde.plasma.quicksetting.powermenu"),
-                                          QStringLiteral("org.kde.plasma.quicksetting.keyboardtoggle"),
-                                          QStringLiteral("org.kde.plasma.quicksetting.caffeine"),
                                           QStringLiteral("org.kde.plasma.quicksetting.donotdisturb"),
+                                          QStringLiteral("org.kde.plasma.quicksetting.caffeine"),
+                                          QStringLiteral("org.kde.plasma.quicksetting.keyboardtoggle"),
                                           QStringLiteral("org.kde.plasma.quicksetting.record")});
 }
 
