@@ -20,6 +20,7 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 MobileShell.GridView {
     id: gridView
     layer.enabled: true
+    reuseItems: true
     
     readonly property int reservedSpaceForLabel: metrics.height
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
