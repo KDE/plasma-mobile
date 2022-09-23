@@ -40,20 +40,23 @@ MobileShell.HomeScreen {
         forceActiveFocus();
     }
     
-    Plasmoid.onActivated: {
-        console.log("Triggered!", plasmoid.nativeInterface.showingDesktop)
+    Plasmoid.onActivated: {        
+        // Always close action drawer
+        if (MobileShell.TopPanelControls.actionDrawerVisible) {
+            MobileShell.TopPanelControls.closeActionDrawer();
+        }
         
         // there's a couple of steps:
-        // - minimize windows
+        // - minimize windows (only if we are in an app)
         // - open app drawer
-        // - restore windows
-        if (!plasmoid.nativeInterface.showingDesktop) {
+        // - close app drawer and, if necessary, restore windows
+        if (!plasmoid.nativeInterface.showingDesktop && !MobileShell.HomeScreenControls.homeScreenVisible) {
             plasmoid.nativeInterface.showingDesktop = true;
-        } else if (homescreen.homeScreenState.currentView === MobileShell.HomeScreenState.PageView) {
-            homescreen.homeScreenState.openAppDrawer()
+        } else if (homescreen.homeScreenState.currentView === HomeScreenState.PageView) {
+            homescreen.homeScreenState.openAppDrawer();
         } else {
-            plasmoid.nativeInterface.showingDesktop = false
-            homescreen.homeScreenState.closeAppDrawer()
+            plasmoid.nativeInterface.showingDesktop = false;
+            homescreen.homeScreenState.closeAppDrawer();
         }
     }
     
