@@ -224,19 +224,6 @@ Item {
             width: parent.width
             height: rowCount * rowHeight
             
-            PlasmaComponents.ScrollView {
-                enabled: pageSize <= quickSettingsCount
-
-                ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-                ScrollBar.vertical.policy: ScrollBar.AlwaysOff
-                ScrollBar.vertical.interactive: false
-                
-                anchors.fill: parent
-                contentWidth: width
-                contentHeight: height
-                contentItem: flickable
-            }
-            
             Flickable {
                 id: flickable
                 anchors.fill: parent
@@ -246,16 +233,23 @@ Item {
                 clip: true
                 
                 ScrollIndicator.vertical: ScrollIndicator {
-                    active: true
-
+                    id: scrollIndicator
                     visible: quickSettingsCount > pageSize ? true : false
-                    
                     position: 0.1
                     
-                    contentItem: Rectangle {
+                    contentItem: Item {
                         implicitWidth: PlasmaCore.Units.smallSpacing / 4
-                        color: PlasmaCore.Theme.textColor
-                        opacity: 0.5
+                        Rectangle {
+                            // shift over the indicator a bit to the right
+                            anchors.fill: parent
+                            anchors.leftMargin: 2
+                            anchors.rightMargin: -2
+                            
+                            color: PlasmaCore.Theme.textColor
+                            opacity: scrollIndicator.active ? 0.5 : 0
+                            
+                            Behavior on opacity { NumberAnimation {} }
+                        }
                     }
                 }
                 
