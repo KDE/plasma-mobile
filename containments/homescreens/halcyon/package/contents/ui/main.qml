@@ -39,6 +39,26 @@ MobileShell.HomeScreen {
         }
     }
     
+    Plasmoid.onActivated: {        
+        // Always close action drawer
+        if (MobileShell.TopPanelControls.actionDrawerVisible) {
+            MobileShell.TopPanelControls.closeActionDrawer();
+        }
+        
+        // there's a couple of steps:
+        // - minimize windows (only if we are in an app)
+        // - open app drawer
+        // - close app drawer and, if necessary, restore windows
+        if (!plasmoid.nativeInterface.showingDesktop && !MobileShell.HomeScreenControls.homeScreenVisible) {
+            plasmoid.nativeInterface.showingDesktop = true;
+        } else if (homescreen.page == 0) {
+            homescreen.page = 1;
+        } else {
+            plasmoid.nativeInterface.showingDesktop = false;
+            homescreen.page = 0;
+        }
+    }
+    
     // homescreen component
     contentItem: Item {
         HomeScreen {
