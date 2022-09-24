@@ -112,7 +112,10 @@ Item {
                     }
                     factor: root.openFactor
                     flickable: view
-                    onOpenRequested: homeScreenState.openAppDrawer();
+                    onOpenRequested: {
+                        contentItem.positionViewAtBeginning();
+                        homeScreenState.openAppDrawer();
+                    }
                     onCloseRequested: homeScreenState.closeAppDrawer();
                 }
             }
