@@ -58,6 +58,7 @@ Item {
     readonly property real closedContentY: PlasmaCore.Units.gridUnit * 5
     readonly property real openedContentY: 0
     readonly property real openFactor: Math.max(0, Math.min(1, 1 - flickable.contentY / closedContentY))
+    readonly property bool isOpen: openFactor != 0
     
     Rectangle {
         anchors.fill: parent
