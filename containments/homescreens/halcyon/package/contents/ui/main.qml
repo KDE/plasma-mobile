@@ -45,6 +45,11 @@ MobileShell.HomeScreen {
             MobileShell.TopPanelControls.closeActionDrawer();
         }
         
+        // Always close the search widget as well
+        if (search.isOpen) {
+            search.close();
+        }
+        
         // there's a couple of steps:
         // - minimize windows (only if we are in an app)
         // - open app drawer
