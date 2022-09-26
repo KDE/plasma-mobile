@@ -281,7 +281,7 @@ MobileShell.GridView {
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
             implicitWidth: PlasmaCore.Units.iconSizes.large
             implicitHeight: width
-            source: "emblem-favorite"
+            source: "arrow-right-double"
             color: "white"
         }
         
@@ -294,6 +294,10 @@ MobileShell.GridView {
             wrapMode: Text.Wrap
             horizontalAlignment: Text.AlignHCenter
             text: i18n("Add applications to your favourites so they show up here.")
+        }
+        
+        TapHandler {
+            onLongPressed: root.openConfigureRequested()
         }
     }
 }
