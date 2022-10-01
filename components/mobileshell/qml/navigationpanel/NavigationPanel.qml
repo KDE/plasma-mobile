@@ -176,7 +176,7 @@ Item {
                 visible: root.rightCornerAction.visible
                 mouseArea: mouseArea
                 colorGroup: root.foregroundColorGroup
-                enabled: root.rightCornerButton.enabled
+                enabled: root.rightCornerAction.enabled
                 iconSizeFactor: root.rightCornerAction.iconSizeFactor
                 iconSource: root.rightCornerAction.iconSource
                 onClicked: {
