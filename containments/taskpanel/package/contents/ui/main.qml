@@ -31,34 +31,21 @@ PlasmaCore.ColorScope {
         // 3 - VisibilityMode.WindowsGoBelow
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 3
     }
-    
-    Binding {
-        target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
-        property: "thickness"
-        // height of panel:
-        // - if navigation panel is enabled: PlasmaCore.Units.gridUnit * 2
-        // - if gestures only is enabled: 8 (just large enough for touch swipe to register, without blocking app content)
-        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
-    }
-    
-    Binding {
-        target: plasmoid.Window.window
-        property: "location"
-        value: {
-            if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
-                return PlasmaCore.Types.BottomEdge;
-            } else if (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) {
-                return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
-            }
-        }
-    }
-    
-    // HACK: really really really make sure the dimensions are set properly
+
+    // HACK: There seems to be some component that overrides our initial bindings for the panel,
+    //   which is particularly problematic on first start (since the panel is misplaced)
+    // - We set an event to override any attempts to override our bindings.
     function setBindings() {
+        
+        // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
+        
         plasmoid.Window.window.offset = Qt.binding(() => {
             return (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) ? MobileShell.TopPanelControls.panelHeight : 0;
         });
         plasmoid.Window.window.thickness = Qt.binding(() => {
+            // height of panel:
+            // - if navigation panel is enabled: PlasmaCore.Units.gridUnit * 2
+            // - if gestures only is enabled: 8 (just large enough for touch swipe to register, without blocking app content)
             return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
         });
         plasmoid.Window.window.length = Qt.binding(() => {
@@ -70,11 +57,21 @@ PlasmaCore.ColorScope {
         plasmoid.Window.window.minimumLength = Qt.binding(() => {
             return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
         });
+        plasmoid.Window.window.location = Qt.binding(() => {
+            if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
+                return PlasmaCore.Types.BottomEdge;
+            } else if (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) {
+                return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
+            }
+        });
     }
     
     Connections {
         target: plasmoid.Window.window
         function onThicknessChanged() {
+            root.setBindings();
+        }
+        function onLocationChanged() {
             root.setBindings();
         }
     }
