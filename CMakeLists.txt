@@ -63,6 +63,8 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     Wayland
     ModemManagerQt
     NetworkManagerQt
+    KCMUtils
+    Declarative
 )
 
 find_package(LibKWorkspace CONFIG REQUIRED)
