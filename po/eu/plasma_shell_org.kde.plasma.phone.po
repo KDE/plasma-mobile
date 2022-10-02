@@ -1,0 +1,73 @@
+# Translation for plasma_shell_org.kde.plasma.phone.po to Euskara/Basque (eu).
+# Copyright (C) 2022, This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+#
+# Translators:
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"PO-Revision-Date: 2022-07-10 15:28+0200\n"
+"Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
+"Language: eu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Antolaeran aldaketak murriztu ditu administratzaileak"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr "Orokorra"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr "Etxeko pantailaren antolaera"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr "Etxeko pantailarekin erabili beharreko antolaera."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+msgid "Wallpaper Plugin"
+msgstr "Horma-paper plugina"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+msgid "The wallpaper plugin to use."
+msgstr "Horma-paperarekin erabili beharreko plugina."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+msgid "Wallpaper Plugins"
+msgstr "Horma-paper pluginak"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+msgid "Get New Plugins…"
+msgstr "Lortu plugin berriak..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "Antolaera aldaketak ezarri behar dira beste aldaketarik egin aurretik"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+msgid "Apply now"
+msgstr "Ezarri orain"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr "Horma-papera"
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr "Aldatu horma-papera"
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr "Konfiguratu"

@@ -1,0 +1,83 @@
+# Spanish translations for plasma_shell_org.kde.plasma.phone.po package.
+# Copyright (C) 2022 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Automatically generated, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_shell_org\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"PO-Revision-Date: 2022-06-25 14:36+0200\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "El administrador del sistema ha restringido el cambio del diseño"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr "General"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr "Diseño de la pantalla de inicio"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr "El diseño de pantalla de inicio a usar."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+msgid "Wallpaper Plugin"
+msgstr "Complemento de fondo del escritorio"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+msgid "The wallpaper plugin to use."
+msgstr "El complemento de fondo de escritorio a usar."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+msgid "Wallpaper Plugins"
+msgstr "Complementos de fondo del escritorio"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+msgid "Get New Plugins…"
+msgstr "Obtener nuevos complementos..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"Los cambios en la disposición de elementos se deben aplicar antes de hacer "
+"más cambios"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+msgid "Apply now"
+msgstr "Aplicar ahora"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr "Fondo del escritorio"
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr "Cambiar fondo del escritorio"
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr "Configurar"
+
+#~ msgid "Layout:"
+#~ msgstr "Disposición:"
+
+#~ msgid "Wallpaper Type:"
+#~ msgstr "Tipo de fondo del escritorio:"
+
+#~ msgid "Customize..."
+#~ msgstr "Personalizar..."

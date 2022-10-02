@@ -1,0 +1,81 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"PO-Revision-Date: 2022-06-25 10:54+0200\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Wijzigingen in de indeling zijn beperkt door de systeembeheerder"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr "Algemeen"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr "Indeling van standaardscherm"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr "De te gebruiken indeling van het standaardscherm."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+msgid "Wallpaper Plugin"
+msgstr "Plug-in voor achtergrond"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+msgid "The wallpaper plugin to use."
+msgstr "De te gebruiken achtergrond-plugin."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+msgid "Wallpaper Plugins"
+msgstr "Achtergrond-plug-ins"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+msgid "Get New Plugins…"
+msgstr "Haal nieuwe plug-ins op…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"Wijzigingen aan indeling moeten worden toegepast alvorens andere wijzigingen "
+"gemaakt kunnen worden"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+msgid "Apply now"
+msgstr "Nu toepassen"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr "Achtergrondafbeelding"
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr "Achtergrondafbeelding wijzigen"
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr "Configureren"
+
+#~ msgid "Layout:"
+#~ msgstr "Indeling:"
+
+#~ msgid "Wallpaper Type:"
+#~ msgstr "Type achtergrondafbeelding:"
+
+#~ msgid "Customize..."
+#~ msgstr "Aanpassen..."

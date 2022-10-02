@@ -1,0 +1,50 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:47+0000\n"
+"PO-Revision-Date: 2022-08-03 09:41+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FolderGrid.qml:203
+#, kde-format
+msgid "Remove from favourites"
+msgstr "Ta bort från favoriter"
+
+#: package/contents/ui/FavoritesGrid.qml:296
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "Lägg till applikationer i dina favoriter så att de visas här."
+
+#: package/contents/ui/FolderGrid.qml:208
+#, kde-format
+msgid "Move out of folder"
+msgstr "Flytta ut ur katalog"
+
+#: package/contents/ui/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "Lägg till i favoriter"
+
+#: package/contents/ui/GridAppList.qml:57
+#, kde-format
+msgid "Applications"
+msgstr "Applikationer"
+
+#: pinnedmodel.cpp:148
+#, kde-format
+msgctxt "Default application folder name."
+msgid "Folder"
+msgstr "Katalog"

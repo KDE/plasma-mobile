@@ -1,0 +1,52 @@
+# Translation of plasma_applet_org.kde.phone.homescreen.simple.po to Catalan (Valencian)
+# Copyright (C) 2022 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-19 00:47+0000\n"
+"PO-Revision-Date: 2022-07-12 11:40+0200\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
+"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
+"Language: ca@valencia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.12.0\n"
+
+#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FolderGrid.qml:203
+#, kde-format
+msgid "Remove from favourites"
+msgstr "Elimina de les preferides"
+
+#: package/contents/ui/FavoritesGrid.qml:296
+#, kde-format
+msgid "Add applications to your favourites so they show up here."
+msgstr "Afig aplicacions a les preferides de manera que es mostren ací."
+
+#: package/contents/ui/FolderGrid.qml:208
+#, kde-format
+msgid "Move out of folder"
+msgstr "Mou fora de la carpeta"
+
+#: package/contents/ui/GridAppDelegate.qml:65
+#, kde-format
+msgid "Add to favourites"
+msgstr "Afig a les preferides"
+
+#: package/contents/ui/GridAppList.qml:57
+#, kde-format
+msgid "Applications"
+msgstr "Aplicacions"
+
+#: pinnedmodel.cpp:148
+#, kde-format
+msgctxt "Default application folder name."
+msgid "Folder"
+msgstr "Carpeta"

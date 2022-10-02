@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"PO-Revision-Date: 2022-09-20 01:56\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/plasma-mobile/plasma_shell_org.kde."
+"plasma.phone.pot\n"
+"X-Crowdin-File-ID: 40672\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "布局更改操作已被系统管理员限制使用"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr "常规"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr "主屏幕布局"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr "要使用的主屏幕布局。"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+msgid "Wallpaper Plugin"
+msgstr "壁纸插件"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+msgid "The wallpaper plugin to use."
+msgstr "要使用的壁纸插件。"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+msgid "Wallpaper Plugins"
+msgstr "壁纸插件"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+msgid "Get New Plugins…"
+msgstr "获取新插件…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "必须先应用布局更改才能更改其他选项"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+msgid "Apply now"
+msgstr "立即应用"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr "壁纸"
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr "更换壁纸"
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr "配置"
