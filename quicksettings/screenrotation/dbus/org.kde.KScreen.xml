@@ -1,7 +1,7 @@
 <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN"
 "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
-<!-- 
-- SPDX-FileCopyrightText: 2020 Luca Weiss
+<!--
+- SPDX-FileCopyrightText: 2020-2022 Luca Weiss <luca@z3ntu.xyz>
 - SPDX-FileCopyrightText: 2020 Bhushan Shah <bshah@kde.org>
 - SPDX-FileCopyrightText: 2018 Kai Uwe Broulik <kde@privat.broulik.de>
 - SPDX-FileCopyrightText: 2013-2014 Daniel Vrátil <dvratil@kde.org>
@@ -17,6 +17,9 @@
         </method>
         <method name="setAutoRotate">
             <arg type="b" name="value" direction="in" />
+        </method>
+        <method name="isAutoRotateAvailable">
+            <arg type="b" direction="out" />
         </method>
         <signal name="outputConnected">
             <arg type="s" name="outputName" direction="out" />

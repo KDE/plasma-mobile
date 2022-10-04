@@ -11,6 +11,7 @@ MobileShell.QuickSetting {
     icon: "rotation-allowed"
     settingsCommand: "plasma-open-settings kcm_kscreen"
     enabled: ScreenRotationUtil.screenRotationEnabled
+    available: ScreenRotationUtil.available
     function toggle() {
         ScreenRotationUtil.screenRotationEnabled = !enabled
     }
