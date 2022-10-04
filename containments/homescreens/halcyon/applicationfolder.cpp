@@ -59,7 +59,7 @@ QList<Application *> ApplicationFolder::appPreviews()
 {
     QList<Application *> previews;
     // we give a maximum of 4 icons
-    for (int i = 0; i < std::min(m_applications.length(), 4); ++i) {
+    for (int i = 0; i < std::min<int>(m_applications.length(), 4); ++i) {
         previews.push_back(m_applications[i]);
     }
     return previews;
