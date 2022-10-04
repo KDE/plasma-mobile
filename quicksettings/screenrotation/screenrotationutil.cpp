@@ -39,3 +39,15 @@ void ScreenRotationUtil::setScreenRotation(bool value)
         Q_EMIT screenRotationChanged(value);
     }
 }
+
+bool ScreenRotationUtil::isAvailable()
+{
+    QDBusPendingReply<bool> reply = m_kscreenInterface->isAutoRotateAvailable();
+    reply.waitForFinished();
+    if (reply.isError()) {
+        qWarning() << "Getting available failed:" << reply.error().name() << reply.error().message();
+        return false;
+    } else {
+        return reply.value();
+    }
+}
