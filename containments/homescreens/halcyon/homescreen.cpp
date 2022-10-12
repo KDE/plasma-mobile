@@ -7,6 +7,7 @@
 #include "pinnedmodel.h"
 #include "windowlistener.h"
 
+#include <KIO/ApplicationLauncherJob>
 #include <KWindowSystem>
 
 #include <QDebug>

@@ -8,6 +8,7 @@
 #include <QQuickItem>
 #include <QString>
 
+#include <KIO/ApplicationLauncherJob>
 #include <KService>
 
 #include <KWayland/Client/connection_thread.h>
@@ -43,7 +44,6 @@ public:
     void setStorageId(QString &storageId);
     void setWindow(KWayland::Client::PlasmaWindow *window);
 
-    Q_INVOKABLE void runApplication();
     Q_INVOKABLE void setMinimizedDelegate(QQuickItem *delegate);
     Q_INVOKABLE void unsetMinimizedDelegate(QQuickItem *delegate);
 
