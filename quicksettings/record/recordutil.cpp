@@ -6,7 +6,16 @@
 
 #include "recordutil.h"
 
+#include <QFile>
+#include <QStandardPaths>
+
+#include <KFileUtils>
 #include <KNotification>
+
+RecordUtil::RecordUtil(QObject *parent)
+    : QObject{parent}
+{
+}
 
 QString RecordUtil::videoLocation(const QString &name)
 {

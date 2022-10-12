@@ -14,7 +14,7 @@ class RecordUtil : public QObject
     Q_OBJECT
 
 public:
-    ScreenShotUtil(QObject *parent = nullptr);
+    RecordUtil(QObject *parent = nullptr);
 
     /**
      * Allows us to get a filename in the standard videos directory (~/Videos by default)
