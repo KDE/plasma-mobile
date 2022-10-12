@@ -7,10 +7,11 @@ import QtQuick.Window 2.15
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.pipewire.record 0.1 as PWRec
 import org.kde.taskmanager 0.1 as TaskManager
+import org.kde.plasma.quicksetting.record 1.0
 
 MobileShell.QuickSetting {
     id: root
-    text: switch(record.state) {
+    text: switch (record.state) {
         case PWRec.PipeWireRecord.Idle:
             return i18n("Record Screen")
         case PWRec.PipeWireRecord.Recording:
@@ -31,9 +32,9 @@ MobileShell.QuickSetting {
 
     function toggle() {
         if (!record.active) {
-            record.output = MobileShell.ShellUtil.videoLocation("screen-recording.mp4");
+            record.output = RecordUtil.videoLocation("screen-recording.mp4");
         } else {
-            MobileShell.ShellUtil.showNotification(i18n("New Screen Recording"), i18n("New Screen Recording saved in %1", record.output), record.output);
+            RecordUtil.showNotification(i18n("New Screen Recording"), i18n("New Screen Recording saved in %1", record.output), record.output);
         }
         
         enabled = !enabled
