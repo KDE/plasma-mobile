@@ -59,7 +59,6 @@ public:
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
     Q_INVOKABLE virtual void load();
-    Q_INVOKABLE void runApplication(const QString &storageId);
 
     Q_INVOKABLE void setMinimizedDelegate(int row, QQuickItem *delegate);
     Q_INVOKABLE void unsetMinimizedDelegate(int row, QQuickItem *delegate);

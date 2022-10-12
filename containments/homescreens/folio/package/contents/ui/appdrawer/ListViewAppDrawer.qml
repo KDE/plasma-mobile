@@ -65,7 +65,7 @@ AbstractAppDrawer {
                 }
 
                 HomeScreenLib.ApplicationListModel.setMinimizedDelegate(index, delegate);
-                HomeScreenLib.ApplicationListModel.runApplication(storageId);
+                MobileShell.ShellUtil.launchApp(storageId);
                 root.launched();
             }
         }
