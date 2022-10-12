@@ -65,7 +65,7 @@ ContainmentLayoutManager.ItemContainer {
         }
 
         HomeScreenLib.DesktopModel.setMinimizedDelegate(index, delegate);
-        HomeScreenLib.DesktopModel.runApplication(modelData.applicationStorageId);
+        MobileShell.ShellUtil.launchApp(modelData.applicationStorageId);
     }
 
     readonly property bool applicationRunning: model.applicationRunning

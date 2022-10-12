@@ -11,6 +11,7 @@ import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami 2.12 as Kirigami
 
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -67,103 +68,116 @@ Item {
                 
                 asynchronous: true
                 
-                sourceComponent: Components.BaseItem {
-                    id: playerItem
+                sourceComponent: MouseArea {
+                    id: mouseArea
+                    implicitHeight: playerItem.implicitHeight
+                    implicitWidth: playerItem.implicitWidth
                     
-                    property string source: modelData.source
-                    
-                    padding: root.padding
-                    implicitHeight: root.contentHeight + root.padding * 2
-                    implicitWidth: root.width
-                    
-                    background: BlurredBackground {
-                        imageSource: mpris2Source.albumArt(playerItem.source)
+                    onClicked: {
+                        MobileShell.ShellUtil.launchApp(modelData.desktopEntry + ".desktop");
+                        MobileShell.TopPanelControls.closeActionDrawer();
                     }
                     
-                    contentItem: PlasmaCore.ColorScope {
-                        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-                        width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
+                    Components.BaseItem {
+                        id: playerItem
+                        anchors.fill: parent
                         
-                        RowLayout {
-                            id: controlsRow
-                            width: parent.width
-                            height: parent.height
-                            spacing: 0
+                        property string source: modelData.source
+                        
+                        padding: root.padding
+                        implicitHeight: root.contentHeight + root.padding * 2
+                        implicitWidth: root.width
+                        
+                        background: BlurredBackground {
+                            darken: mouseArea.pressed
+                            imageSource: mpris2Source.albumArt(playerItem.source)
+                        }
+                        
+                        contentItem: PlasmaCore.ColorScope {
+                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                            width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
+                            
+                            RowLayout {
+                                id: controlsRow
+                                width: parent.width
+                                height: parent.height
+                                spacing: 0
 
-                            enabled: mpris2Source.canControl(playerItem.source)
+                                enabled: mpris2Source.canControl(playerItem.source)
 
-                            Image {
-                                id: albumArt
-                                Layout.preferredWidth: height
-                                Layout.fillHeight: true
-                                asynchronous: true
-                                fillMode: Image.PreserveAspectFit
-                                source: mpris2Source.albumArt(playerItem.source)
-                                sourceSize.height: height
-                                visible: status === Image.Loading || status === Image.Ready
-                            }
-
-                            ColumnLayout {
-                                Layout.leftMargin: albumArt.visible ? Kirigami.Units.largeSpacing : 0
-                                Layout.fillWidth: true
-                                spacing: Kirigami.Units.smallSpacing
-
-                                Components.MarqueeLabel {
-                                    Layout.fillWidth: true
-
-                                    inputText: mpris2Source.track(playerItem.source) || i18n("No media playing")
-                                    textFormat: Text.PlainText
-                                    font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
-                                    color: "white"
+                                Image {
+                                    id: albumArt
+                                    Layout.preferredWidth: height
+                                    Layout.fillHeight: true
+                                    asynchronous: true
+                                    fillMode: Image.PreserveAspectFit
+                                    source: mpris2Source.albumArt(playerItem.source)
+                                    sourceSize.height: height
+                                    visible: status === Image.Loading || status === Image.Ready
                                 }
 
-                                Components.MarqueeLabel {
+                                ColumnLayout {
+                                    Layout.leftMargin: albumArt.visible ? Kirigami.Units.largeSpacing : 0
                                     Layout.fillWidth: true
+                                    spacing: Kirigami.Units.smallSpacing
 
-                                    // if no artist is given, show player name instead
-                                    inputText: mpris2Source.artist(playerItem.source) || modelData.application || ""
-                                    textFormat: Text.PlainText
-                                    font.pointSize: PlasmaCore.Theme.smallestFont.pointSize
-                                    opacity: 0.9
-                                    color: "white"
+                                    Components.MarqueeLabel {
+                                        Layout.fillWidth: true
+
+                                        inputText: mpris2Source.track(playerItem.source) || i18n("No media playing")
+                                        textFormat: Text.PlainText
+                                        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                                        color: "white"
+                                    }
+
+                                    Components.MarqueeLabel {
+                                        Layout.fillWidth: true
+
+                                        // if no artist is given, show player name instead
+                                        inputText: mpris2Source.artist(playerItem.source) || modelData.application || ""
+                                        textFormat: Text.PlainText
+                                        font.pointSize: PlasmaCore.Theme.smallestFont.pointSize
+                                        opacity: 0.9
+                                        color: "white"
+                                    }
                                 }
-                            }
 
-                            PlasmaComponents3.ToolButton {
-                                Layout.fillHeight: true
-                                Layout.preferredWidth: height
-                                
-                                enabled: mpris2Source.canGoBack(playerItem.source)
-                                icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
-                                icon.width: PlasmaCore.Units.iconSizes.small
-                                icon.height: PlasmaCore.Units.iconSizes.small
-                                onClicked: mpris2Source.goPrevious(playerItem.source)
-                                visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
-                                Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Previous track")
-                            }
+                                PlasmaComponents3.ToolButton {
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: height
+                                    
+                                    enabled: mpris2Source.canGoBack(playerItem.source)
+                                    icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
+                                    icon.width: PlasmaCore.Units.iconSizes.small
+                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    onClicked: mpris2Source.goPrevious(playerItem.source)
+                                    visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
+                                    Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Previous track")
+                                }
 
-                            PlasmaComponents3.ToolButton {
-                                Layout.fillHeight: true
-                                Layout.preferredWidth: height
-                                
-                                icon.name: mpris2Source.isPlaying(playerItem.source) ? "media-playback-pause" : "media-playback-start"
-                                icon.width: PlasmaCore.Units.iconSizes.small
-                                icon.height: PlasmaCore.Units.iconSizes.small
-                                onClicked: mpris2Source.playPause(playerItem.source)
-                                Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Play or Pause media")
-                            }
+                                PlasmaComponents3.ToolButton {
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: height
+                                    
+                                    icon.name: mpris2Source.isPlaying(playerItem.source) ? "media-playback-pause" : "media-playback-start"
+                                    icon.width: PlasmaCore.Units.iconSizes.small
+                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    onClicked: mpris2Source.playPause(playerItem.source)
+                                    Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Play or Pause media")
+                                }
 
-                            PlasmaComponents3.ToolButton {
-                                Layout.fillHeight: true
-                                Layout.preferredWidth: height
-                                
-                                enabled: mpris2Source.canGoBack(playerItem.source)
-                                icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
-                                icon.width: PlasmaCore.Units.iconSizes.small
-                                icon.height: PlasmaCore.Units.iconSizes.small
-                                onClicked: mpris2Source.goNext(playerItem.source)
-                                visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
-                                Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Next track")
+                                PlasmaComponents3.ToolButton {
+                                    Layout.fillHeight: true
+                                    Layout.preferredWidth: height
+                                    
+                                    enabled: mpris2Source.canGoBack(playerItem.source)
+                                    icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
+                                    icon.width: PlasmaCore.Units.iconSizes.small
+                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    onClicked: mpris2Source.goNext(playerItem.source)
+                                    visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
+                                    Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Next track")
+                                }
                             }
                         }
                     }

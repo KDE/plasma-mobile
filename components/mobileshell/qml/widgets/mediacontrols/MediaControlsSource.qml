@@ -94,6 +94,7 @@ PlasmaCore.DataSource {
             model.push({
                 'application': playerData["Identity"],
                 'source': source,
+                'desktopEntry': playerData["DesktopEntry"]
             });
         }
         

@@ -11,7 +11,9 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 
 Item {
     id: root
+    
     property string imageSource
+    property bool darken: false
     
     // clip corners so that the image has rounded corners
     layer.enabled: true
@@ -39,7 +41,7 @@ Item {
         // ensure text is readable
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, 0.6)
+            color: Qt.rgba(0, 0, 0, root.darken ? 0.8 : 0.6)
         }
         
         // apply lighten, saturate and blur effect
