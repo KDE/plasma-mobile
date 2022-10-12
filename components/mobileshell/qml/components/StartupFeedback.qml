@@ -22,10 +22,6 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     visible: false
 
     property alias backgroundColor: background.color
-    Kirigami.ImageColors {
-        id: colorGenerator
-        source: icon.source
-    }
 
     function open(splashIcon, title, x, y, sourceIconSize, color) {
         iconParent.scale = sourceIconSize/iconParent.width;
@@ -82,6 +78,11 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         if (!visible) {
             background.state = "closed";
         }
+    }
+    
+    Kirigami.ImageColors {
+        id: colorGenerator
+        source: icon.source
     }
 
     Item {

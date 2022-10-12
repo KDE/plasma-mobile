@@ -27,7 +27,7 @@ PlasmaComponents.Label {
 
     TapHandler {
         onTapped: {
-            MobileShell.ShellUtil.launchApp("org.kde.kclock");
+            MobileShell.ShellUtil.launchApp("org.kde.kclock.desktop");
         }
     }
 }

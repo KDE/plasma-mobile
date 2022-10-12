@@ -68,6 +68,11 @@ public:
     bool hasCloseableActiveWindow() const;
 
     /**
+     * Get the list of windows associated to a storage id.
+     */
+    QList<KWayland::Client::PlasmaWindow *> windowsFromStorageId(const QString &storageId) const;
+
+    /**
      * Close the current active window.
      */
     Q_INVOKABLE void closeActiveWindow();
@@ -99,11 +104,13 @@ Q_SIGNALS:
     void hasCloseableActiveWindowChanged();
     void activeWindowChanged();
     void activeWindowIsShellChanged();
+    void windowChanged(QString storageId); // emitted on window open or close
 
 private Q_SLOTS:
     void updateActiveWindowIsShell();
     void forgetActiveWindow();
     void updateShowingDesktop(bool showing);
+    void windowCreatedSlot(KWayland::Client::PlasmaWindow *window);
 
 private:
     void initWayland();
@@ -117,4 +124,6 @@ private:
     bool m_allWindowsMinimized = true;
     bool m_allWindowsMinimizedExcludingShell = true;
     bool m_activeWindowIsShell = false;
+
+    QHash<QString, QList<KWayland::Client::PlasmaWindow *>> m_windows; // <storageId, window>
 };

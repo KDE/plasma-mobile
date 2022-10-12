@@ -7,12 +7,13 @@
  */
 
 #include "shellutil.h"
+#include "windowutil.h"
 
 #include <KConfigGroup>
 #include <KFileUtils>
-#include <KIO/ApplicationLauncherJob>
 #include <KLocalizedString>
 #include <KNotification>
+#include <KNotificationJobUiDelegate>
 
 #include <QDBusPendingReply>
 #include <QDateTime>
@@ -24,6 +25,7 @@
 
 ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
+    , m_launchingApp{nullptr}
 {
     m_localeConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
@@ -77,13 +79,54 @@ bool ShellUtil::isSystem24HourFormat()
     return timeFormat == QStringLiteral(FORMAT24H);
 }
 
-void ShellUtil::launchApp(const QString &app)
+void ShellUtil::launchApp(const QString &storageId)
 {
-    const KService::Ptr appService = KService::serviceByDesktopName(app);
-    if (!appService) {
-        qWarning() << "Could not find" << app;
+    // try to activate a running window first
+    auto windows = WindowUtil::instance()->windowsFromStorageId(storageId);
+
+    if (!windows.empty()) {
+        windows[0]->requestActivate();
         return;
     }
-    auto job = new KIO::ApplicationLauncherJob(appService, this);
+
+    // now try launching the window
+    KService::Ptr service = KService::serviceByStorageId(storageId);
+    if (!service) {
+        qWarning() << "Could not find" << storageId;
+        return;
+    }
+
+    auto job = new KIO::ApplicationLauncherJob(service, this);
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
     job->start();
+
+    setLaunchingApp(job);
+}
+
+bool ShellUtil::isLaunchingApp()
+{
+    return m_launchingApp != nullptr;
+}
+
+void ShellUtil::setLaunchingApp(KIO::ApplicationLauncherJob *launcherJob)
+{
+    m_launchingApp = launcherJob;
+    connect(launcherJob, &KIO::ApplicationLauncherJob::result, this, [this](auto *job) {
+        m_launchingAppPids = m_launchingApp->pids();
+    });
+    Q_EMIT isLaunchingAppChanged();
+}
+
+void ShellUtil::cancelLaunchingApp()
+{
+    for (auto pid : m_launchingAppPids) {
+        QProcess::execute("kill", {QString::number(pid)});
+    }
+    clearLaunchingApp();
+}
+
+void ShellUtil::clearLaunchingApp()
+{
+    m_launchingApp = nullptr;
+    Q_EMIT isLaunchingAppChanged();
 }

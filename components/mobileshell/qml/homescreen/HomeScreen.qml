@@ -243,5 +243,12 @@ Item {
         id: startupFeedback
         z: 999999
         anchors.fill: parent
+        
+        // if the startup feedback closes, clear the shell's stored launching app
+        onVisibleChanged: {
+            if (!visible) {
+                MobileShell.ShellUtil.clearLaunchingApp();
+            }
+        }
     }
 }

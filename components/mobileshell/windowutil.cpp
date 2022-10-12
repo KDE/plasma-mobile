@@ -75,6 +75,7 @@ void WindowUtil::initWayland()
         connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated, this, [this](KWayland::Client::PlasmaWindow *window) {
             Q_EMIT windowCreated(window);
         });
+        connect(m_windowManagement, &KWayland::Client::PlasmaWindowManagement::windowCreated, this, &WindowUtil::windowCreatedSlot);
 
         connect(m_windowManagement, &PlasmaWindowManagement::showingDesktopChanged, this, &WindowUtil::updateShowingDesktop);
         connect(m_windowManagement, &PlasmaWindowManagement::activeWindowChanged, m_activeWindowTimer, qOverload<>(&QTimer::start));
@@ -221,4 +222,35 @@ void WindowUtil::forgetActiveWindow()
     }
     m_activeWindow.clear();
     Q_EMIT hasCloseableActiveWindowChanged();
+}
+
+QList<KWayland::Client::PlasmaWindow *> WindowUtil::windowsFromStorageId(const QString &storageId) const
+{
+    if (!m_windows.contains(storageId)) {
+        return {};
+    }
+    return m_windows[storageId];
+}
+
+void WindowUtil::windowCreatedSlot(KWayland::Client::PlasmaWindow *window)
+{
+    QString storageId = window->appId() + QStringLiteral(".desktop");
+
+    // ignore empty windows
+    if (storageId == ".desktop" || storageId == "org.kde.plasmashell.desktop") {
+        return;
+    }
+
+    if (!m_windows.contains(storageId)) {
+        m_windows[storageId] = {};
+    }
+    m_windows[storageId].push_back(window);
+
+    // listen for window close
+    connect(window, &KWayland::Client::PlasmaWindow::unmapped, this, [this, storageId]() {
+        m_windows.remove(storageId);
+        Q_EMIT windowChanged(storageId);
+    });
+
+    Q_EMIT windowChanged(storageId);
 }
