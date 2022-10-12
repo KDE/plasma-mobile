@@ -110,7 +110,8 @@ bool ShellUtil::isLaunchingApp()
 
 void ShellUtil::setLaunchingApp(KIO::ApplicationLauncherJob *launcherJob)
 {
-    m_launchingApp = launcherJob;
+    m_launchingAppPids = {};
+    m_launchingApp = launcherJob; // do not assume that the pointer is valid, KJobs destroy themselves
     connect(launcherJob, &KIO::ApplicationLauncherJob::result, this, [this](auto *job) {
         m_launchingAppPids = m_launchingApp->pids();
     });
