@@ -26,8 +26,8 @@
 ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
     , m_launchingApp{nullptr}
+    , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
 {
-    m_localeConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
 
     // watch for changes to locale config, to update 12/24 hour time

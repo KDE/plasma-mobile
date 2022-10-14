@@ -20,8 +20,8 @@ MobileShellSettings *MobileShellSettings::self()
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
+    , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
 {
-    m_config = KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig);
     m_configWatcher = KConfigWatcher::create(m_config);
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
