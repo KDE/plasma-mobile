@@ -1,52 +1,50 @@
-# Translation of plasma_applet_org.kde.phone.homescreen.simple to Norwegian Nynorsk
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022.
+# Sveinn í Felli <sv1@fellsnet.is>, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-13 00:48+0000\n"
-"PO-Revision-Date: 2022-06-18 14:50+0200\n"
-"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
-"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
-"Language: nn\n"
+"PO-Revision-Date: 2022-10-14 16:54+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
+"Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
-"X-Environment: kde\n"
-"X-Accelerator-Marker: &\n"
-"X-Text-Markup: kde4\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/ui/FavoritesGrid.qml:223
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
-msgstr "Fjern frå favorittar"
+msgstr "Fjarlægja úr eftirlætum"
 
 #: package/contents/ui/FavoritesGrid.qml:295
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "Merk appar som favorittar for å visa dei her."
+msgstr "Þú getur bætt forritum í eftirlætin þin og þau munu birtast hérna."
 
 #: package/contents/ui/FolderGrid.qml:207
 #, kde-format
 msgid "Move out of folder"
-msgstr ""
+msgstr "Færa út úr möppu"
 
 #: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
 msgid "Add to favourites"
-msgstr "Legg til favorittar"
+msgstr "Bæta í eftirlæti"
 
 #: package/contents/ui/GridAppList.qml:56
 #, kde-format
 msgid "Applications"
-msgstr "Program"
+msgstr "Forrit"
 
 #: pinnedmodel.cpp:148
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
-msgstr ""
+msgstr "Mappa"
