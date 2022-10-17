@@ -33,7 +33,7 @@ msgstr "Disposició de la pantalla d'inici"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
-msgstr "La disposició de la pantalla d'inici a emprar."
+msgstr "La disposició de la pantalla d'inici que s'utilitzarà."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:108
 msgid "Wallpaper Plugin"
@@ -41,7 +41,7 @@ msgstr "Connector de fons de pantalla"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:109
 msgid "The wallpaper plugin to use."
-msgstr "El connector de fons de pantalla a emprar."
+msgstr "El connector de fons de pantalla que s'utilitzarà."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:151
 msgid "Wallpaper Plugins"
