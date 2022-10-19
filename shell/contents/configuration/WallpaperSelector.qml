@@ -73,11 +73,11 @@ Controls.Drawer {
             
             z: wallpapersView.currentIndex === index ? 2 : 0
             contentItem: Item {
-                Addons.QIconItem {
+                PlasmaCore.IconItem {
                     anchors.centerIn: parent
                     width: PlasmaCore.Units.iconSizes.large
                     height: width
-                    icon: "view-preview"
+                    source: "view-preview"
                     visible: !walliePreview.visible
                 }
 
