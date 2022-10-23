@@ -9,7 +9,12 @@
 
 #include "signalindicator.h"
 
-SignalIndicator::SignalIndicator()
+SignalIndicator::SignalIndicator(QObject *parent)
+    : QObject{parent}
+    , m_nmModem{nullptr}
+    , m_modemDevice{nullptr}
+    , m_modem{nullptr}
+    , m_3gppModem{nullptr}
 {
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModemManagerModem);
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModemManagerModem);
@@ -48,7 +53,7 @@ QString SignalIndicator::name() const
 
 bool SignalIndicator::modemAvailable() const
 {
-    return m_modem;
+    return !m_modem.isNull();
 }
 
 bool SignalIndicator::simLocked() const
@@ -61,7 +66,7 @@ bool SignalIndicator::simLocked() const
 
 bool SignalIndicator::simEmpty() const
 {
-    if (!m_modem) {
+    if (!m_modemDevice) {
         return false;
     }
     return m_modemDevice && m_modemDevice->sim() && m_modemDevice->sim()->uni() == QStringLiteral("/");
@@ -146,6 +151,10 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
 
 void SignalIndicator::updateModemManagerModem()
 {
+    m_modemDevice = nullptr;
+    m_modem = nullptr;
+    m_3gppModem = nullptr;
+
     if (ModemManager::modemDevices().isEmpty()) {
         qWarning() << "No modems available";
         return;
@@ -175,6 +184,7 @@ void SignalIndicator::updateModemManagerModem()
 
 void SignalIndicator::updateNetworkManagerModem()
 {
+    m_nmModem = nullptr;
     if (!m_modemDevice) {
         return;
     }

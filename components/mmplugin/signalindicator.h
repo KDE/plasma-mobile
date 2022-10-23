@@ -27,7 +27,7 @@ class SignalIndicator : public QObject
     Q_PROPERTY(bool needsAPNAdded READ needsAPNAdded NOTIFY mobileDataEnabledChanged)
 
 public:
-    SignalIndicator();
+    SignalIndicator(QObject *parent = nullptr);
 
     int strength() const;
     QString name() const;
