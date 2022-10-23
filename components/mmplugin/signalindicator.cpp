@@ -4,14 +4,33 @@
 
 #include <NetworkManagerQt/GsmSetting>
 #include <NetworkManagerQt/Manager>
+#include <NetworkManagerQt/Settings>
+#include <NetworkManagerQt/Utils>
 
 #include "signalindicator.h"
 
 SignalIndicator::SignalIndicator()
 {
-    connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModem);
-    connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModem);
-    updateModem();
+    connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModemManagerModem);
+    connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModemManagerModem);
+
+    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionAdded, this, [this]() {
+        Q_EMIT mobileDataEnabledChanged();
+    });
+    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionRemoved, this, [this]() {
+        Q_EMIT mobileDataEnabledChanged();
+    });
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionAdded, this, [this]() {
+        Q_EMIT mobileDataEnabledChanged();
+    });
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionRemoved, this, [this]() {
+        Q_EMIT mobileDataEnabledChanged();
+    });
+
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceAdded, this, &SignalIndicator::updateNetworkManagerModem);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceRemoved, this, &SignalIndicator::updateNetworkManagerModem);
+
+    updateModemManagerModem();
 }
 
 int SignalIndicator::strength() const
@@ -25,6 +44,11 @@ int SignalIndicator::strength() const
 QString SignalIndicator::name() const
 {
     return m_3gppModem ? m_3gppModem->operatorName() : QString();
+}
+
+bool SignalIndicator::modemAvailable() const
+{
+    return m_modem;
 }
 
 bool SignalIndicator::simLocked() const
@@ -43,14 +67,9 @@ bool SignalIndicator::simEmpty() const
     return m_modemDevice && m_modemDevice->sim() && m_modemDevice->sim()->uni() == QStringLiteral("/");
 }
 
-bool SignalIndicator::available() const
-{
-    return !ModemManager::modemDevices().isEmpty();
-}
-
 bool SignalIndicator::mobileDataSupported() const
 {
-    return m_nmModem && m_modemDevice->sim() && !simEmpty();
+    return m_nmModem && !simEmpty();
 }
 
 bool SignalIndicator::mobileDataEnabled() const
@@ -98,7 +117,7 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
             con->settings()->setAutoconnect(false);
             con->update(con->settings()->toMap());
         }
-        m_nmModem->disconnectInterface().waitForFinished();
+        m_nmModem->disconnectInterface();
     } else {
         m_nmModem->setAutoconnect(true);
         // activate the connection that was last used
@@ -125,17 +144,40 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
     }
 }
 
-void SignalIndicator::updateModem()
+void SignalIndicator::updateModemManagerModem()
 {
-    if (!available()) {
+    if (ModemManager::modemDevices().isEmpty()) {
         qWarning() << "No modems available";
         return;
     }
 
-    // we assume that there is a single modem
+    // TODO: we assume that there is a single modem for the time being
     m_modemDevice = ModemManager::modemDevices()[0];
     m_modem = m_modemDevice->modemInterface();
     m_3gppModem = m_modemDevice->interface(ModemManager::ModemDevice::GsmInterface).objectCast<ModemManager::Modem3gpp>();
+
+    connect(m_modemDevice->sim().get(), &ModemManager::Sim::simIdentifierChanged, this, &SignalIndicator::simEmptyChanged);
+
+    if (m_modem) {
+        connect(m_modem.get(), &ModemManager::Modem::signalQualityChanged, this, &SignalIndicator::strengthChanged);
+        connect(m_modem.get(), &ModemManager::Modem::unlockRequiredChanged, this, &SignalIndicator::simLockedChanged);
+    }
+    if (m_3gppModem) {
+        connect(m_3gppModem.get(), &ModemManager::Modem3gpp::operatorNameChanged, this, &SignalIndicator::nameChanged);
+    }
+
+    updateNetworkManagerModem();
+
+    Q_EMIT nameChanged();
+    Q_EMIT strengthChanged();
+    Q_EMIT modemAvailableChanged();
+}
+
+void SignalIndicator::updateNetworkManagerModem()
+{
+    if (!m_modemDevice) {
+        return;
+    }
 
     // find networkmanager modem
     for (NetworkManager::Device::Ptr nmDevice : NetworkManager::networkInterfaces()) {
@@ -150,18 +192,7 @@ void SignalIndicator::updateModem()
             });
         }
     }
-    
-    connect(m_modemDevice->sim().get(), &ModemManager::Sim::simIdentifierChanged, this, &SignalIndicator::simEmptyChanged);
-
-    if (m_modem) {
-        connect(m_modem.get(), &ModemManager::Modem::signalQualityChanged, this, &SignalIndicator::strengthChanged);
-        connect(m_modem.get(), &ModemManager::Modem::unlockRequiredChanged, this, &SignalIndicator::simLockedChanged);
-    }
-    if (m_3gppModem) {
-        connect(m_3gppModem.get(), &ModemManager::Modem3gpp::operatorNameChanged, this, &SignalIndicator::nameChanged);
-    }
 
     Q_EMIT mobileDataSupportedChanged();
-    Q_EMIT nameChanged();
-    Q_EMIT availableChanged();
+    Q_EMIT mobileDataEnabledChanged();
 }

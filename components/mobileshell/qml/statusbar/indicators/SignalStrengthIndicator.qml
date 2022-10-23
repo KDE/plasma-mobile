@@ -37,7 +37,7 @@ Item {
         source: provider.icon
         
         // don't show mobile indicator icon if the networkmanager one is already showing
-        visible: !isInternetIndicatorMobileData
+        visible: !isInternetIndicatorMobileData && provider.showIndicator
     }
     
     PlasmaComponents.Label {
