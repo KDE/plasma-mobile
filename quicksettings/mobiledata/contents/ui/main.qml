@@ -10,7 +10,9 @@ MobileShell.QuickSetting {
     text: i18n("Mobile Data")
     icon: "network-modem"
     status: {
-        if (PlasmaMM.SignalIndicator.needsAPNAdded) {
+        if (!PlasmaMM.SignalIndicator.modemAvailable) {
+            return i18n("Not Available");
+        } else if (PlasmaMM.SignalIndicator.needsAPNAdded) {
             return i18n("APN needs to be configured in the settings");
         } else if (PlasmaMM.SignalIndicator.mobileDataSupported) {
             return enabled ? i18n("On") : i18n("Off");

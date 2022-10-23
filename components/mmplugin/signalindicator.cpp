@@ -19,19 +19,10 @@ SignalIndicator::SignalIndicator(QObject *parent)
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemAdded, this, &SignalIndicator::updateModemManagerModem);
     connect(ModemManager::notifier(), &ModemManager::Notifier::modemRemoved, this, &SignalIndicator::updateModemManagerModem);
 
-    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionAdded, this, [this]() {
-        Q_EMIT mobileDataEnabledChanged();
-    });
-    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionRemoved, this, [this]() {
-        Q_EMIT mobileDataEnabledChanged();
-    });
-    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionAdded, this, [this]() {
-        Q_EMIT mobileDataEnabledChanged();
-    });
-    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionRemoved, this, [this]() {
-        Q_EMIT mobileDataEnabledChanged();
-    });
-
+    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionAdded, this, &SignalIndicator::mobileDataEnabledChanged);
+    connect(NetworkManager::settingsNotifier(), &NetworkManager::SettingsNotifier::connectionRemoved, this, &SignalIndicator::mobileDataEnabledChanged);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionAdded, this, &SignalIndicator::mobileDataEnabledChanged);
+    connect(NetworkManager::notifier(), &NetworkManager::Notifier::activeConnectionRemoved, this, &SignalIndicator::mobileDataEnabledChanged);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceAdded, this, &SignalIndicator::updateNetworkManagerModem);
     connect(NetworkManager::notifier(), &NetworkManager::Notifier::deviceRemoved, this, &SignalIndicator::updateNetworkManagerModem);
 
@@ -191,12 +182,10 @@ void SignalIndicator::updateNetworkManagerModem()
         if (nmDevice->udi() == m_modemDevice->uni()) {
             m_nmModem = nmDevice.objectCast<NetworkManager::ModemDevice>();
 
-            connect(m_nmModem.get(), &NetworkManager::Device::autoconnectChanged, this, [this]() {
-                Q_EMIT mobileDataEnabledChanged();
-            });
-            connect(m_nmModem.get(), &NetworkManager::Device::stateChanged, this, [this](auto, auto, auto) {
-                Q_EMIT mobileDataEnabledChanged();
-            });
+            connect(m_nmModem.get(), &NetworkManager::Device::autoconnectChanged, this, &SignalIndicator::mobileDataEnabledChanged);
+            connect(m_nmModem.get(), &NetworkManager::Device::stateChanged, this, &SignalIndicator::mobileDataEnabledChanged);
+            connect(m_nmModem.get(), &NetworkManager::Device::availableConnectionAppeared, this, &SignalIndicator::mobileDataEnabledChanged);
+            connect(m_nmModem.get(), &NetworkManager::Device::availableConnectionDisappeared, this, &SignalIndicator::mobileDataEnabledChanged);
         }
     }
 
