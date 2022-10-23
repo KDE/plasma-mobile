@@ -17,5 +17,7 @@ QtObject {
     
     property string label: !SignalIndicator.available ? ""
                          : SignalIndicator.simLocked ? i18n("SIM Locked") : SignalIndicator.name
+                         
+    property bool showIndicator: SignalIndicator.modemAvailable
 }
 

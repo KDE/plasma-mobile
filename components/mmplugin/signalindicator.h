@@ -19,9 +19,9 @@ class SignalIndicator : public QObject
 
     Q_PROPERTY(int strength READ strength NOTIFY strengthChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
+    Q_PROPERTY(bool modemAvailable READ modemAvailable NOTIFY modemAvailableChanged)
     Q_PROPERTY(bool simLocked READ simLocked NOTIFY simLockedChanged)
     Q_PROPERTY(bool simEmpty READ simEmpty NOTIFY simEmptyChanged)
-    Q_PROPERTY(bool available READ available NOTIFY availableChanged)
     Q_PROPERTY(bool mobileDataSupported READ mobileDataSupported NOTIFY mobileDataSupportedChanged)
     Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
     Q_PROPERTY(bool needsAPNAdded READ needsAPNAdded NOTIFY mobileDataEnabledChanged)
@@ -31,9 +31,9 @@ public:
 
     int strength() const;
     QString name() const;
+    bool modemAvailable() const;
     bool simLocked() const;
     bool simEmpty() const;
-    bool available() const;
     bool mobileDataSupported() const;
     bool mobileDataEnabled() const;
     bool needsAPNAdded() const;
@@ -43,9 +43,9 @@ public:
 Q_SIGNALS:
     void strengthChanged();
     void nameChanged();
+    void modemAvailableChanged();
     void simLockedChanged();
     void simEmptyChanged();
-    void availableChanged();
     void mobileDataSupportedChanged();
     void mobileDataEnabledChanged();
 
@@ -55,5 +55,6 @@ private:
     ModemManager::Modem::Ptr m_modem;
     ModemManager::Modem3gpp::Ptr m_3gppModem;
 
-    void updateModem();
+    void updateModemManagerModem();
+    void updateNetworkManagerModem();
 };
