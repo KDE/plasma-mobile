@@ -66,10 +66,7 @@ bool SignalIndicator::simLocked() const
 
 bool SignalIndicator::simEmpty() const
 {
-    if (!m_modemDevice) {
-        return false;
-    }
-    return m_modemDevice && m_modemDevice->sim() && m_modemDevice->sim()->uni() == QStringLiteral("/");
+    return !m_modemDevice || !m_modemDevice->sim() || (m_modemDevice->sim()->uni() == QStringLiteral("/"));
 }
 
 bool SignalIndicator::mobileDataSupported() const
