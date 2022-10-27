@@ -5,13 +5,12 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.7
-import QtGraphicalEffects 1.0
-import QtQuick.Controls 2.3
+import QtQuick 2.15
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
-import org.kde.plasma.workspace.components 2.0 as PlasmaWorkspace
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kirigami 2.20 as Kirigami
 
 Rectangle {
     id: root
@@ -62,4 +61,48 @@ Rectangle {
     Component.onCompleted: {
         visible = true
     }
+    
+    // This is taken from plasma-desktop's shell package, try to keep it in sync
+    Loader {
+        id: wallpaperColors
+
+        active: desktop.usedInAccentColor && root.containment && root.containment.wallpaper
+        asynchronous: true
+
+        sourceComponent: Kirigami.ImageColors {
+            id: imageColors
+            source: root.containment.wallpaper
+
+            readonly property color backgroundColor: PlasmaCore.Theme.backgroundColor
+            readonly property color textColor: PlasmaCore.Theme.textColor
+
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.backgroundColor: backgroundColor
+            Kirigami.Theme.textColor: textColor
+
+            onBackgroundColorChanged: Qt.callLater(update)
+            onTextColorChanged: Qt.callLater(update)
+
+            property Binding colorBinding: Binding {
+                target: desktop
+                property: "accentColor"
+                value: {
+                    if (imageColors.palette.length === 0) {
+                        return "#00000000";
+                    }
+                    return imageColors.dominant;
+                }
+            }
+
+            property Connections repaintConnection: Connections {
+                target: root.containment.wallpaper
+                function onRepaintNeeded() {
+                    imageColors.update();
+                }
+            }
+        }
+
+        onLoaded: item.update()
+    }
+
 }
