@@ -40,6 +40,7 @@ Loader {
                 
                 Clock {
                     layoutAlignment: Qt.AlignLeft
+                    Layout.alignment: Qt.AlignLeft
                     Layout.fillWidth: true
                     Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
                 }

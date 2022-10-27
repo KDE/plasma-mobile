@@ -54,6 +54,7 @@ Loader {
             
             Clock {
                 layoutAlignment: Qt.AlignHCenter
+                Layout.alignment: Qt.AlignHCenter
                 Layout.bottomMargin: PlasmaCore.Units.gridUnit * 2 // keep spacing even if media controls are gone
             }
             
