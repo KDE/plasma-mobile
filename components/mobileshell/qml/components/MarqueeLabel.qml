@@ -14,16 +14,17 @@ PlasmaComponents.Label {
     id: root
                 
     required property string inputText
+    readonly property string filteredText: inputText.replace(/\n/g, ' ') // remove new line characters
     
     property int interval: PlasmaCore.Units.longDuration
     
-    readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / inputText.length))
+    readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / filteredText.length))
     property int step: 0
     
     TextMetrics {
         id: txtMeter
         font: root.font
-        text: inputText
+        text: filteredText
     }
     
     Timer {              
@@ -42,7 +43,7 @@ PlasmaComponents.Label {
                     paused = false;
                 }
             } else {
-                step = (step + 1) % inputText.length;
+                step = (step + 1) % filteredText.length;
                 if (step === charactersOverflow) {
                     interval = PlasmaCore.Units.veryLongDuration * 3;
                     paused = true;
@@ -57,5 +58,5 @@ PlasmaComponents.Label {
         }
     }
     
-    text: inputText.substring(step, step + inputText.length - charactersOverflow)
+    text: filteredText.substring(step, step + filteredText.length - charactersOverflow)
 }
