@@ -54,7 +54,8 @@ Item {
     property alias colorScopeColor: icons.backgroundColor
     property alias applets: appletIconsRow
     
-    readonly property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
+    readonly property real textPixelSize: 11
+    readonly property real smallerTextPixelSize: 9
     readonly property real elementSpacing: PlasmaCore.Units.smallSpacing * 1.5
     
     PlasmaCore.DataSource {
@@ -208,14 +209,14 @@ Item {
                     PlasmaComponents.Label {
                         text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
                         color: PlasmaCore.ColorScope.disabledTextColor
-                        font.pixelSize: root.textPixelSize * 0.8
+                        font.pixelSize: root.smallerTextPixelSize
                     }
                     Item { Layout.fillWidth: true }
                     PlasmaComponents.Label {
                         visible: root.showTime
                         text: MobileShell.SignalStrengthProvider.label
                         color: PlasmaCore.ColorScope.disabledTextColor
-                        font.pixelSize: root.textPixelSize * 0.8
+                        font.pixelSize: root.smallerTextPixelSize
                         horizontalAlignment: Qt.AlignRight
                     }
                 }
