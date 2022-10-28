@@ -46,6 +46,7 @@ Rectangle {
                             PlasmaCore.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight);
         }
     }
+    
     Behavior on implicitHeight {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
@@ -103,92 +104,90 @@ Rectangle {
         spacing: PlasmaCore.Units.gridUnit
 
         GridLayout {
-            property string thePw
+            id: grid
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
             Layout.leftMargin: PlasmaCore.Units.gridUnit * 0.5
             Layout.rightMargin: PlasmaCore.Units.gridUnit * 0.5
             Layout.maximumWidth: PlasmaCore.Units.gridUnit * 22
             Layout.maximumHeight: PlasmaCore.Units.gridUnit * 12.5
+            opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+            
             columns: 4
-
+            
+            readonly property real keyRadius: 5
+            
             // numpad keys
             Repeater {
                 model: ["1", "2", "3", "R", "4", "5", "6", "0", "7", "8", "9", "E"]
 
-                delegate: Item {
+                delegate: AbstractButton {
+                    id: button
                     Layout.fillWidth: true
                     Layout.fillHeight: true
+                    visible: modelData.length > 0
+                    opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
 
-                    RectangularGlow {
-                        anchors.topMargin: 1
-                        anchors.fill: keyRect
-                        cornerRadius: keyRect.radius * 2
-                        cached: true
-                        glowRadius: 2
-                        spread: 0.2
-                        color: keypadRoot.dropShadowColor
-                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-                    }
-
-                    Rectangle {
+                    background: Rectangle {
                         id: keyRect
-                        anchors.centerIn: parent
-                        width: parent.width
-                        height: parent.height
-                        radius: 5
-                        color: keypadRoot.buttonColor
+                        radius: grid.keyRadius
+                        color: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.buttonColor
                         
-                        visible: modelData.length > 0
-                        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-
-                        AbstractButton {
+                        RectangularGlow {
+                            anchors.topMargin: 1
                             anchors.fill: parent
-                            onPressedChanged: {
-                                if (pressed) {
-                                    MobileShell.Haptics.buttonVibrate();
-                                    parent.color = keypadRoot.buttonPressedColor;
-                                } else {
-                                    parent.color = keypadRoot.buttonColor;
-                                }
-                            }
-
-                            onClicked: {
-                                if (modelData === "R") {
-                                    passwordBar.backspace();
-                                } else if (modelData === "E") {
-                                    passwordBar.enter();
-                                } else {
-                                    passwordBar.keyPress(modelData);
-                                }
-                            }
-                            onPressAndHold: {
-                                if (modelData === "R") {
-                                    MobileShell.Haptics.buttonVibrate();
-                                    passwordBar.clear();
-                                }
-                            }
+                            
+                            z: -1
+                            cornerRadius: keyRect.radius * 2
+                            cached: true
+                            glowRadius: 2
+                            spread: 0.2
+                            color: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.dropShadowColor
                         }
                     }
 
-                    PlasmaComponents.Label {
-                        visible: modelData !== "R" && modelData !== "E"
-                        text: modelData
-                        anchors.centerIn: parent
-                        font.pointSize: 18
-                        font.weight: Font.Light
-                        color: keypadRoot.buttonTextColor
+                    onPressedChanged: {
+                        if (pressed) {
+                            MobileShell.Haptics.buttonVibrate();
+                        }
                     }
 
-                    PlasmaCore.IconItem {
-                        visible: modelData === "R"
-                        anchors.centerIn: parent
-                        source: "edit-clear"
+                    onClicked: {
+                        if (modelData === "R") {
+                            passwordBar.backspace();
+                        } else if (modelData === "E") {
+                            passwordBar.enter();
+                        } else {
+                            passwordBar.keyPress(modelData);
+                        }
                     }
+                    onPressAndHold: {
+                        if (modelData === "R") {
+                            MobileShell.Haptics.buttonVibrate();
+                            passwordBar.clear();
+                        }
+                    }
+                    
+                    contentItem: Item {
+                        PlasmaComponents.Label {
+                            visible: modelData !== "R" && modelData !== "E"
+                            text: modelData
+                            anchors.centerIn: parent
+                            font.pointSize: 18
+                            font.weight: Font.Light
+                            color: keypadRoot.buttonTextColor
+                        }
 
-                    PlasmaCore.IconItem {
-                        visible: modelData === "E"
-                        anchors.centerIn: parent
-                        source: "go-next"
+                        PlasmaCore.IconItem {
+                            visible: modelData === "R"
+                            anchors.centerIn: parent
+                            source: "edit-clear"
+                        }
+
+                        PlasmaCore.IconItem {
+                            visible: modelData === "E"
+                            anchors.centerIn: parent
+                            source: "go-next"
+                        }
                     }
                 }
             }
