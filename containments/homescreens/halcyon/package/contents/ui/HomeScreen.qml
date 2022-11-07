@@ -68,7 +68,10 @@ Item {
         QQC2.ScrollView {
             width: swipeView.width
             height: swipeView.height
-            
+
+            // disable horizontal scrollbar
+            QQC2.ScrollBar.horizontal: QQC2.ScrollBar { policy: QQC2.ScrollBar.AlwaysOff }
+
             GridAppList {
                 id: gridAppList
                 
