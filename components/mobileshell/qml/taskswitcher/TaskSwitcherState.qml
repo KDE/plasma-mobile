@@ -9,6 +9,7 @@ import QtQuick 2.15
 import org.kde.plasma.core 2.1 as PlasmaCore
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 /**
  * State object for the task switcher.
@@ -76,8 +77,8 @@ QtObject {
     // ~~ measurement constants ~~
     
     // dimensions of a real window on the screen
-    readonly property real windowHeight: taskSwitcher.height - MobileShell.Shell.topMargin - MobileShell.Shell.bottomMargin
-    readonly property real windowWidth: taskSwitcher.width - MobileShell.Shell.leftMargin - MobileShell.Shell.rightMargin
+    readonly property real windowHeight: taskSwitcher.height - MobileShellState.Shell.topMargin - MobileShellState.Shell.bottomMargin
+    readonly property real windowWidth: taskSwitcher.width - MobileShellState.Shell.leftMargin - MobileShellState.Shell.rightMargin
     
     // dimensions of the task previews
     readonly property real previewHeight: windowHeight * scalingFactor

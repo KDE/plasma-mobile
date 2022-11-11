@@ -13,9 +13,9 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Item {
-    property MobileShell.SignalStrengthProvider provider: MobileShell.SignalStrengthProvider
-    
     required property InternetIndicator internetIndicator
+    
+    readonly property var provider: MobileShell.SignalStrengthInfo {}
     
     // check if the internet indicator icon is a mobile data related one
     readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')

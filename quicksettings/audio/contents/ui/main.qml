@@ -8,10 +8,10 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 MobileShell.QuickSetting {
     text: i18n("Sound")
     icon: "audio-speakers-symbolic"
-    status: i18n("%1%", MobileShell.VolumeProvider.volumeValue) 
+    status: i18n("%1%", MobileShell.AudioProvider.volumeValue) 
     enabled: false
     settingsCommand: "plasma-open-settings kcm_pulseaudio"
     function toggle() {
-        MobileShell.VolumeProvider.showVolumeOverlay()
+        MobileShell.AudioProvider.showVolumeOverlay()
     }
 }

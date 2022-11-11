@@ -1,9 +1,6 @@
-/*
- *  SPDX-FileCopyrightText: 2020 Marco Martin <mart@kde.org>
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2020 Marco Martin <mart@kde.org>
+// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.12
 import QtQuick.Window 2.2

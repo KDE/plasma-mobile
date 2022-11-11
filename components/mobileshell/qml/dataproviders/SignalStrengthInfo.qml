@@ -9,14 +9,11 @@
 import QtQuick 2.1
 import org.kde.plasma.mm 1.0
 
-pragma Singleton
-
 QtObject {
+    readonly property string icon: "network-mobile-" + Math.floor(SignalIndicator.strength / 20) * 20
 
-    property string icon: "network-mobile-" + Math.floor(SignalIndicator.strength / 20) * 20
-    
-    property string label: SignalIndicator.simLocked ? i18n("SIM Locked") : SignalIndicator.name
-                         
-    property bool showIndicator: SignalIndicator.modemAvailable
+    readonly property string label: SignalIndicator.simLocked ? i18n("SIM Locked") : SignalIndicator.name
+
+    readonly property bool showIndicator: SignalIndicator.modemAvailable
 }
 

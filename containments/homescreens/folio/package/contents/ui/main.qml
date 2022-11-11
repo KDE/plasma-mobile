@@ -14,6 +14,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 
 MobileShell.HomeScreen {
@@ -45,13 +46,13 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!plasmoid.nativeInterface.showingDesktop && !MobileShell.HomeScreenControls.homeScreenVisible
-            || MobileShell.TopPanelControls.actionDrawerVisible 
+        if (!plasmoid.nativeInterface.showingDesktop && !MobileShellState.Shell.homeScreenVisible
+            || MobileShellState.Shell.actionDrawerVisible 
             || searchWidget.isOpen
         ) {
             // Always close action drawer
-            if (MobileShell.TopPanelControls.actionDrawerVisible) {
-                MobileShell.TopPanelControls.closeActionDrawer();
+            if (MobileShellState.Shell.actionDrawerVisible) {
+                MobileShellState.Shell.closeActionDrawer();
             }
             
             // Always close the search widget as well
@@ -88,7 +89,7 @@ MobileShell.HomeScreen {
             
             // close search component when task switcher is shown or hidden
             Connections {
-                target: MobileShell.HomeScreenControls.taskSwitcher
+                target: MobileShellState.HomeScreenControls.taskSwitcher
                 function onVisibleChanged() {
                     searchWidget.close();
                 }
@@ -114,7 +115,7 @@ MobileShell.HomeScreen {
     Connections {
         target: HomeScreenLib.ApplicationListModel
         function onLaunchError(msg) {
-            MobileShell.HomeScreenControls.closeAppLaunchAnimation()
+            MobileShellState.Shell.closeAppLaunchAnimation()
         }
     }
 }

@@ -13,6 +13,7 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "../../components" as Components
 import "../../components/util.js" as Util
@@ -46,7 +47,7 @@ Item {
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {
         let totalRows = Math.ceil(quickSettingsCount / columnCount);
-        let isPortrait = MobileShell.Shell.orientation === MobileShell.Shell.Portrait;
+        let isPortrait = MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait;
         let maxRows = 5; // more than 5 is just disorienting
         let targetRows = Math.floor(Window.height * (isPortrait ? 0.65 : 0.8) / rowHeight);
         return Math.min(maxRows, Math.min(totalRows, targetRows));
@@ -56,7 +57,7 @@ Item {
     readonly property int quickSettingsCount: quickSettingsModel.count
         
     function resetSwipeView() {
-        if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
+        if (MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait) {
             pageLoader.item.view.currentIndex = 0;
         }
     }
@@ -91,7 +92,7 @@ Item {
             Layout.minimumHeight: rowCount * rowHeight
 
             asynchronous: true
-            sourceComponent: MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? swipeViewComponent : scrollViewComponent
+            sourceComponent: MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? swipeViewComponent : scrollViewComponent
         }
         
         BrightnessItem {

@@ -15,6 +15,7 @@ import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "../components" as Components
 
@@ -58,7 +59,7 @@ Item {
     }
     
     // update API property
-    onVisibleChanged: MobileShell.HomeScreenControls.taskSwitcherVisible = visible;
+    onVisibleChanged: MobileShellState.HomeScreenControls.taskSwitcherVisible = visible;
     
     // keep track of task list events
     property int oldTasksCount: tasksCount
@@ -200,10 +201,10 @@ Item {
         
         // provide shell margins
         anchors.fill: parent
-        anchors.leftMargin: MobileShell.Shell.leftMargin
-        anchors.rightMargin: MobileShell.Shell.rightMargin
-        anchors.bottomMargin: MobileShell.Shell.bottomMargin
-        anchors.topMargin: MobileShell.Shell.topMargin
+        anchors.leftMargin: MobileShellState.Shell.leftMargin
+        anchors.rightMargin: MobileShellState.Shell.rightMargin
+        anchors.bottomMargin: MobileShellState.Shell.bottomMargin
+        anchors.topMargin: MobileShellState.Shell.topMargin
         
         FlickContainer {
             id: flickable

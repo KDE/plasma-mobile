@@ -15,6 +15,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
 import org.kde.kirigami 2.14 as Kirigami
@@ -105,7 +106,7 @@ Repeater {
 
         onLaunch: (x, y, icon, title) => {
             if (icon !== "") {
-                MobileShell.HomeScreenControls.openAppLaunchAnimation(
+                MobileShellState.Shell.openAppLaunchAnimation(
                         icon,
                         title,
                         delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

@@ -6,9 +6,11 @@ import QtQuick 2.15
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MobileShell.QuickSetting {
+    property var batteryInfo: MobileShell.BatteryInfo {}
+    
     text: i18n("Battery")
-    status: i18n("%1%", MobileShell.BatteryProvider.percent) 
-    icon: "battery-full" + (MobileShell.BatteryProvider.pluggedIn ? "-charging" : "")
+    status: i18n("%1%", batteryInfo.percent) 
+    icon: "battery-full" + (batteryInfo.pluggedIn ? "-charging" : "")
     enabled: false
     settingsCommand: "plasma-open-settings kcm_mobile_power"
 }

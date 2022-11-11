@@ -11,6 +11,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.taskmanager 0.1 as TaskManager
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 /**
  * The base homescreen component, implementing features that simplify
@@ -47,14 +48,14 @@ Item {
     
     //BEGIN API implementation
     Connections {
-        target: MobileShell.HomeScreenControls
+        target: MobileShellState.HomeScreenControls
         
         function onOpenHomeScreen() {
             if (!MobileShell.WindowUtil.allWindowsMinimized) {
                 itemContainer.zoomIn();
             }
             
-            MobileShell.HomeScreenControls.resetHomeScreenPosition();
+            MobileShellState.HomeScreenControls.resetHomeScreenPosition();
             taskSwitcher.visible = false; // will trigger homescreen open
             taskSwitcher.minimizeAll();
             
@@ -82,13 +83,13 @@ Item {
     
     Plasmoid.onScreenChanged: {
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.taskSwitcher = taskSwitcher;
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
+            MobileShellState.HomeScreenControls.taskSwitcher = taskSwitcher;
+            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
     Window.onWindowChanged: {
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
+            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
 
@@ -97,8 +98,8 @@ Item {
     Component.onCompleted: {
         // set API variables
         if (plasmoid.screen == 0) {
-            MobileShell.HomeScreenControls.taskSwitcher = taskSwitcher;
-            MobileShell.HomeScreenControls.homeScreenWindow = root.Window.window;
+            MobileShellState.HomeScreenControls.taskSwitcher = taskSwitcher;
+            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
     

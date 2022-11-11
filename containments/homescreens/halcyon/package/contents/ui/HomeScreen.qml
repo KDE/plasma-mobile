@@ -13,7 +13,7 @@ import org.kde.plasma.components 3.0 as PC3
 import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.kirigami 2.19 as Kirigami
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 Item {
@@ -42,10 +42,10 @@ Item {
         interactive: root.interactive
         
         anchors.fill: parent
-        anchors.topMargin: MobileShell.Shell.topMargin
-        anchors.bottomMargin: MobileShell.Shell.bottomMargin
-        anchors.leftMargin: MobileShell.Shell.leftMargin
-        anchors.rightMargin: MobileShell.Shell.rightMargin
+        anchors.topMargin: MobileShellState.Shell.topMargin
+        anchors.bottomMargin: MobileShellState.Shell.bottomMargin
+        anchors.leftMargin: MobileShellState.Shell.leftMargin
+        anchors.rightMargin: MobileShellState.Shell.rightMargin
         
         Item {
             height: swipeView.height

@@ -14,7 +14,7 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 PlasmaCore.IconItem {
     id: paIcon
-    property MobileShell.VolumeProvider provider: MobileShell.VolumeProvider
+    readonly property var provider: MobileShell.AudioProvider
     
     Layout.fillHeight: true
     Layout.preferredWidth: height

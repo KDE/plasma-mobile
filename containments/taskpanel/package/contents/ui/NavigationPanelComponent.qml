@@ -13,6 +13,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 MobileShell.NavigationPanel {
     id: root
@@ -73,7 +74,7 @@ MobileShell.NavigationPanel {
         iconSizeFactor: 1
         
         onTriggered: {
-            MobileShell.HomeScreenControls.openHomeScreen();
+            MobileShellState.HomeScreenControls.openHomeScreen();
             MobileShell.WindowUtil.allWindowsMinimizedChanged();
         }
     }
@@ -101,11 +102,11 @@ MobileShell.NavigationPanel {
                 if (root.taskSwitcher.tasksModel.activeTask !== 0) {
                     root.taskSwitcher.tasksModel.requestClose(root.taskSwitcher.tasksModel.activeTask);
                 }
-                MobileShell.HomeScreenControls.closeAppLaunchAnimation();
+                MobileShellState.Shell.closeAppLaunchAnimation();
             } else if (MobileShell.ShellUtil.isLaunchingApp) {
                 
                 // cancel the launching of the app
-                MobileShell.HomeScreenControls.closeAppLaunchAnimation();
+                MobileShellState.Shell.closeAppLaunchAnimation();
                 MobileShell.ShellUtil.cancelLaunchingApp();
             }
         }

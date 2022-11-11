@@ -147,7 +147,7 @@ Rectangle {
 
                     onPressedChanged: {
                         if (pressed) {
-                            MobileShell.Haptics.buttonVibrate();
+                            MobileShell.ShellUtil.buttonVibrate();
                         }
                     }
 
@@ -162,7 +162,7 @@ Rectangle {
                     }
                     onPressAndHold: {
                         if (modelData === "R") {
-                            MobileShell.Haptics.buttonVibrate();
+                            MobileShell.ShellUtil.buttonVibrate();
                             passwordBar.clear();
                         }
                     }

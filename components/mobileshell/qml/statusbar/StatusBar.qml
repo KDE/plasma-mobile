@@ -15,6 +15,7 @@ import QtGraphicalEffects 1.12
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "indicators" as Indicators
 
@@ -121,7 +122,7 @@ Item {
                 RowLayout {
                     id: row
                     Layout.fillWidth: true
-                    Layout.maximumHeight: MobileShell.TopPanelControls.panelHeight - control.topPadding - control.bottomPadding
+                    Layout.maximumHeight: MobileShellState.TopPanelControls.panelHeight - control.topPadding - control.bottomPadding
                     spacing: 0
                     
                     // clock
@@ -211,10 +212,14 @@ Item {
                         color: PlasmaCore.ColorScope.disabledTextColor
                         font.pixelSize: root.smallerTextPixelSize
                     }
+                    
                     Item { Layout.fillWidth: true }
+                    
                     PlasmaComponents.Label {
+                        property var signalStrengthInfo: MobileShell.SignalStrengthInfo {}
+                        
                         visible: root.showTime
-                        text: MobileShell.SignalStrengthProvider.label
+                        text: signalStrengthInfo.label
                         color: PlasmaCore.ColorScope.disabledTextColor
                         font.pixelSize: root.smallerTextPixelSize
                         horizontalAlignment: Qt.AlignRight

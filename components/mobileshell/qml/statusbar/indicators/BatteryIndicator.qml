@@ -14,8 +14,9 @@ import org.kde.plasma.workspace.components 2.0 as PW
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 RowLayout {
-    property MobileShell.BatteryProvider provider: MobileShell.BatteryProvider
+    readonly property var provider: MobileShell.BatteryInfo {}
     property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
+    
     visible: provider.isVisible
 
     PW.BatteryIcon {

@@ -58,10 +58,10 @@ QuickSettingsDelegate {
     contentItem: MouseArea {
         id: mouseArea
         
-        onPressed: MobileShell.Haptics.buttonVibrate()
+        onPressed: MobileShell.ShellUtil.buttonVibrate()
         onClicked: root.delegateClick()
         onPressAndHold: {
-            MobileShell.Haptics.buttonVibrate();
+            MobileShell.ShellUtil.buttonVibrate();
             root.delegatePressAndHold();
         }
         

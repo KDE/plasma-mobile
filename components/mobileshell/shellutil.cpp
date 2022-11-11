@@ -7,6 +7,7 @@
  */
 
 #include "shellutil.h"
+#include "mobileshellsettings.h"
 #include "windowutil.h"
 
 #include <KConfigGroup>
@@ -18,6 +19,7 @@
 #include <QDBusPendingReply>
 #include <QDateTime>
 #include <QDebug>
+#include <QFeedbackHapticsEffect>
 #include <QFile>
 #include <QProcess>
 
@@ -25,8 +27,8 @@
 
 ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
-    , m_launchingApp{nullptr}
     , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
+    , m_launchingApp{nullptr}
 {
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
 
@@ -130,4 +132,14 @@ void ShellUtil::clearLaunchingApp()
 {
     m_launchingApp = nullptr;
     Q_EMIT isLaunchingAppChanged();
+}
+
+void ShellUtil::buttonVibrate()
+{
+    if (MobileShellSettings::self()->vibrationsEnabled()) {
+        QFeedbackHapticsEffect rumble;
+        rumble.setDuration(MobileShellSettings::self()->vibrationDuration());
+        rumble.setIntensity(MobileShellSettings::self()->vibrationIntensity());
+        rumble.start();
+    }
 }

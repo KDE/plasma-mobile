@@ -18,6 +18,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.notificationmanager 1.0 as NotificationManager
@@ -44,29 +45,29 @@ Item {
 //BEGIN API implementation
 
     Binding {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.TopPanelControls
         property: "panelHeight"
         value: root.height
     }
     Binding {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.TopPanelControls
         property: "inSwipe"
         value: drawer.actionDrawer.dragging
     }
     Binding {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.TopPanelControls
         property: "actionDrawerVisible"
         value: drawer.visible
     }
     
     Binding {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.TopPanelControls
         property: "notificationsWidget"
         value: drawer.actionDrawer.notificationsWidget
     }
     
     Connections {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.TopPanelControls
         
         function onStartSwipe() {
             swipeArea.startSwipe();
@@ -89,7 +90,7 @@ Item {
     
     Component.onCompleted: {
         // we want to bind global volume shortcuts here
-        MobileShell.VolumeProvider.bindShortcuts = true;
+        MobileShell.AudioProvider.bindShortcuts = true;
     }
     
     TaskManager.VirtualDesktopInfo {

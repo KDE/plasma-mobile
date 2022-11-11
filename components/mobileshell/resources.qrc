@@ -24,18 +24,16 @@
         <file>qml/components/ExtendedAbstractButton.qml</file>
         <file>qml/components/Flickable.qml</file>
         <file>qml/components/GridView.qml</file>
-        <file>qml/components/Haptics.qml</file>
-        <file>qml/components/HapticsEffectWrapper.qml</file>
         <file>qml/components/ListView.qml</file>
         <file>qml/components/MarqueeLabel.qml</file>
         <file>qml/components/StartupFeedback.qml</file>
         <file>qml/components/util.js</file>
         <file>qml/components/VelocityCalculator.qml</file>
         
-        <file>qml/dataproviders/BatteryProvider.qml</file>
-        <file>qml/dataproviders/BluetoothProvider.qml</file>
-        <file>qml/dataproviders/SignalStrengthProvider.qml</file>
-        <file>qml/dataproviders/VolumeProvider.qml</file>
+        <file>qml/dataproviders/BatteryInfo.qml</file>
+        <file>qml/dataproviders/BluetoothInfo.qml</file>
+        <file>qml/dataproviders/SignalStrengthInfo.qml</file>
+        <file>qml/dataproviders/AudioProvider.qml</file>
         
         <file>qml/homescreen/HomeScreen.qml</file>
         
@@ -88,11 +86,6 @@
         <file>qml/widgets/notifications/NotificationTimeText.qml</file>
         <file>qml/widgets/notifications/ThumbnailStrip.qml</file>
         <file>qml/widgets/notifications/util.js</file>
-        
-        <file>qml/HomeScreenControls.qml</file>
-        <file>qml/Shell.qml</file>
-        <file>qml/TaskPanelControls.qml</file>
-        <file>qml/TopPanelControls.qml</file>
         
     </qresource>
 </RCC>

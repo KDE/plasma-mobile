@@ -1,0 +1,14 @@
+<!--
+- Copyright 2022 Devin Lin <devin@kde.org>
+- SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<RCC>
+    <qresource prefix="/org/kde/plasma/private/mobileshell/state/">
+        <file>qml/HomeScreenControls.qml</file>
+        <file>qml/Shell.qml</file>
+        <file>qml/TaskPanelControls.qml</file>
+        <file>qml/TopPanelControls.qml</file>
+        
+    </qresource>
+</RCC>
+

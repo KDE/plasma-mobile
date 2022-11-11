@@ -4,6 +4,7 @@
 import QtQuick 2.15
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.quicksetting.screenshot 1.0
 
 MobileShell.QuickSetting {
@@ -16,11 +17,11 @@ MobileShell.QuickSetting {
     
     function toggle() {
         screenshotRequested = true;
-        MobileShell.TopPanelControls.closeActionDrawer();
+        MobileShellState.Shell.closeActionDrawer();
     }
     
     Connections {
-        target: MobileShell.TopPanelControls
+        target: MobileShellState.Shell
         function onActionDrawerVisibleChanged(visible) {
             if (!visible && screenshotRequested) {
                 screenshotRequested = false;

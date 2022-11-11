@@ -73,15 +73,14 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("components/Flickable.qml"), uri, 1, 0, "Flickable");
     qmlRegisterType(resolvePath("components/GridView.qml"), uri, 1, 0, "GridView");
     qmlRegisterType(resolvePath("components/ListView.qml"), uri, 1, 0, "ListView");
-    qmlRegisterSingletonType(resolvePath("components/Haptics.qml"), uri, 1, 0, "Haptics");
     qmlRegisterType(resolvePath("components/StartupFeedback.qml"), uri, 1, 0, "StartupFeedback");
     qmlRegisterType(resolvePath("components/VelocityCalculator.qml"), uri, 1, 0, "VelocityCalculator");
 
     // /dataproviders
-    qmlRegisterSingletonType(resolvePath("dataproviders/BatteryProvider.qml"), uri, 1, 0, "BatteryProvider");
-    qmlRegisterSingletonType(resolvePath("dataproviders/BluetoothProvider.qml"), uri, 1, 0, "BluetoothProvider");
-    qmlRegisterSingletonType(resolvePath("dataproviders/SignalStrengthProvider.qml"), uri, 1, 0, "SignalStrengthProvider");
-    qmlRegisterSingletonType(resolvePath("dataproviders/VolumeProvider.qml"), uri, 1, 0, "VolumeProvider");
+    qmlRegisterType(resolvePath("dataproviders/BatteryInfo.qml"), uri, 1, 0, "BatteryInfo");
+    qmlRegisterType(resolvePath("dataproviders/BluetoothInfo.qml"), uri, 1, 0, "BluetoothInfo");
+    qmlRegisterType(resolvePath("dataproviders/SignalStrengthInfo.qml"), uri, 1, 0, "SignalStrengthInfo");
+    qmlRegisterSingletonType(resolvePath("dataproviders/AudioProvider.qml"), uri, 1, 0, "AudioProvider");
 
     // /homescreen
     qmlRegisterType(resolvePath("homescreen/HomeScreen.qml"), uri, 1, 0, "HomeScreen");
@@ -102,10 +101,4 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("widgets/mediacontrols/MediaControlsWidget.qml"), uri, 1, 0, "MediaControlsWidget");
     qmlRegisterType(resolvePath("widgets/notifications/NotificationsWidget.qml"), uri, 1, 0, "NotificationsWidget");
     qmlRegisterType(resolvePath("widgets/notifications/NotificationsModelType.qml"), uri, 1, 0, "NotificationsModelType");
-
-    // /
-    qmlRegisterSingletonType(resolvePath("HomeScreenControls.qml"), uri, 1, 0, "HomeScreenControls");
-    qmlRegisterSingletonType(resolvePath("Shell.qml"), uri, 1, 0, "Shell");
-    qmlRegisterSingletonType(resolvePath("TaskPanelControls.qml"), uri, 1, 0, "TaskPanelControls");
-    qmlRegisterSingletonType(resolvePath("TopPanelControls.qml"), uri, 1, 0, "TopPanelControls");
 }

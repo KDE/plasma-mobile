@@ -14,6 +14,7 @@ import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 MobileShell.GridView {
@@ -76,7 +77,7 @@ MobileShell.GridView {
 
         onLaunch: (x, y, icon, title, storageId) => {
             if (icon !== "") {
-                MobileShell.HomeScreenControls.openAppLaunchAnimation(
+                MobileShellState.Shell.openAppLaunchAnimation(
                         icon,
                         title,
                         delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

@@ -81,6 +81,11 @@ public:
      */
     Q_INVOKABLE void clearLaunchingApp();
 
+    /**
+     * Initiates a vibration event, meant for a button.
+     */
+    Q_INVOKABLE void buttonVibrate();
+
 Q_SIGNALS:
     void isSystem24HourFormatChanged();
     void isLaunchingAppChanged();

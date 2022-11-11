@@ -16,7 +16,8 @@ import org.kde.bluezqt 1.0 as BluezQt
 
 PlasmaCore.IconItem {
     id: connectionIcon
-    property MobileShell.BluetoothProvider provider: MobileShell.BluetoothProvider
+    
+    readonly property var provider: MobileShell.BluetoothInfo {}
 
     source: provider.icon
     colorGroup: PlasmaCore.ColorScope.colorGroup

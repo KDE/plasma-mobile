@@ -17,7 +17,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.phone.taskpanel 1.0 as TaskPanel
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 PlasmaCore.ColorScope {
     id: root
@@ -40,7 +40,7 @@ PlasmaCore.ColorScope {
         // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
         
         plasmoid.Window.window.offset = Qt.binding(() => {
-            return (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) ? MobileShell.TopPanelControls.panelHeight : 0;
+            return (MobileShellState.Shell.orientation === MobileShellState.Shell.Landscape) ? MobileShellState.TopPanelControls.panelHeight : 0;
         });
         plasmoid.Window.window.thickness = Qt.binding(() => {
             // height of panel:
@@ -49,18 +49,18 @@ PlasmaCore.ColorScope {
             return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
         });
         plasmoid.Window.window.length = Qt.binding(() => {
-            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
         });
         plasmoid.Window.window.maximumLength = Qt.binding(() => {
-            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
         });
         plasmoid.Window.window.minimumLength = Qt.binding(() => {
-            return MobileShell.Shell.orientation === MobileShell.Shell.Portrait ? Screen.width : Screen.height;
+            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
         });
         plasmoid.Window.window.location = Qt.binding(() => {
-            if (MobileShell.Shell.orientation === MobileShell.Shell.Portrait) {
+            if (MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait) {
                 return PlasmaCore.Types.BottomEdge;
-            } else if (MobileShell.Shell.orientation === MobileShell.Shell.Landscape) {
+            } else if (MobileShellState.Shell.orientation === MobileShellState.Shell.Landscape) {
                 return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
             }
         });
@@ -81,17 +81,17 @@ PlasmaCore.ColorScope {
 //BEGIN API implementation
 
     Binding {
-        target: MobileShell.TaskPanelControls
+        target: MobileShellState.TaskPanelControls
         property: "isPortrait"
         value: Screen.width <= Screen.height
     }
     Binding {
-        target: MobileShell.TaskPanelControls
+        target: MobileShellState.TaskPanelControls
         property: "panelHeight"
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? root.height : 0
     }
     Binding {
-        target: MobileShell.TaskPanelControls
+        target: MobileShellState.TaskPanelControls
         property: "panelWidth"
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? root.width : 0
     }
@@ -99,7 +99,7 @@ PlasmaCore.ColorScope {
     Connections {
         target: MobileShell.WindowUtil
         function onAllWindowsMinimizedChanged() {
-            MobileShell.HomeScreenControls.homeScreenVisible = MobileShell.WindowUtil.allWindowsMinimized
+            MobileShellState.HomeScreenControls.homeScreenVisible = MobileShell.WindowUtil.allWindowsMinimized
         }
     }
     
@@ -142,7 +142,7 @@ PlasmaCore.ColorScope {
     Component {
         id: navigationPanel 
         NavigationPanelComponent {
-            taskSwitcher: MobileShell.HomeScreenControls.taskSwitcher
+            taskSwitcher: MobileShellState.HomeScreenControls.taskSwitcher
             opaqueBar: root.opaqueBar
         }
     }
@@ -151,7 +151,7 @@ PlasmaCore.ColorScope {
     Component {
         id: navigationGesture 
         MobileShell.NavigationGestureArea {
-            taskSwitcher: MobileShell.HomeScreenControls.taskSwitcher
+            taskSwitcher: MobileShellState.HomeScreenControls.taskSwitcher
         }
     }
     

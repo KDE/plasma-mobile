@@ -24,15 +24,15 @@ QtObject {
      */
     property bool bindShortcuts: false
     
-    property bool isVisible: paSinkModel.preferredSink && paSinkModel.preferredSink.muted
+    readonly property bool isVisible: paSinkModel.preferredSink && paSinkModel.preferredSink.muted
     
-    property string icon: paSinkModel.preferredSink && !isDummyOutput(paSinkModel.preferredSink)
-                          ? iconName(paSinkModel.preferredSink.volume, paSinkModel.preferredSink.muted)
-                          : iconName(0, true)
+    readonly property string icon: paSinkModel.preferredSink && !isDummyOutput(paSinkModel.preferredSink)
+                                    ? iconName(paSinkModel.preferredSink.volume, paSinkModel.preferredSink.muted)
+                                    : iconName(0, true)
     
-    property bool volumeFeedback: true
-    property int maxVolumeValue: Math.round(100 * PulseAudio.NormalVolume / 100.0)
-    property int volumeStep: Math.round(5 * PulseAudio.NormalVolume / 100.0)
+    readonly property int maxVolumeValue: Math.round(100 * PulseAudio.NormalVolume / 100.0)
+    readonly property int volumeStep: Math.round(5 * PulseAudio.NormalVolume / 100.0)
+    
     property int volumeValue
     
     readonly property string dummyOutputName: "auto_null"
@@ -75,9 +75,6 @@ QtObject {
     }
 
     function playFeedback(sinkIndex) {
-        if (!volumeFeedback){
-            return;
-        }
         if (sinkIndex == undefined) {
             sinkIndex = paSinkModel.preferredSink.index;
         }
@@ -112,8 +109,6 @@ QtObject {
         osd.showOverlay();
         playFeedback();
     }
-
-
 
     function muteVolume() {
         if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {

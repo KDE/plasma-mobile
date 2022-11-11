@@ -12,6 +12,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
@@ -79,7 +80,7 @@ Item {
     
     function launchAppWithAnim(x: int, y: int, source, title: string, storageId: string) {
          if (source !== "") {
-            MobileShell.HomeScreenControls.openAppLaunchAnimation(
+            MobileShellState.Shell.openAppLaunchAnimation(
                     source,
                     title,
                     iconLoader.Kirigami.ScenePosition.x + iconLoader.width/2,
