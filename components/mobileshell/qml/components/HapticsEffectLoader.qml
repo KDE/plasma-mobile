@@ -6,7 +6,7 @@ import QtQuick 2.15
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Loader {
-    source: "qrc:/HapticsEffectWrapper.qml"
+    source: "qrc:/org/kde/plasma/private/mobileshell/qml/components/HapticsEffectWrapper.qml"
     property bool valid: item !== null
     
     function buttonVibrate() {
