@@ -40,7 +40,6 @@ Dependencies:
 * Plasma Nano
 * Kirigami
 * Kirigami Addons
-* Qt Feedback
 
 To start the phone homescreen in a window, run:
 ```

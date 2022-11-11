@@ -7,7 +7,6 @@
 
 #pragma once
 
-#include <QFeedbackHapticsEffect>
 #include <QObject>
 #include <QQuickItem>
 
@@ -82,11 +81,6 @@ public:
      */
     Q_INVOKABLE void clearLaunchingApp();
 
-    /**
-     * Initiates a vibration event, meant for a button.
-     */
-    Q_INVOKABLE void buttonVibrate();
-
 Q_SIGNALS:
     void isSystem24HourFormatChanged();
     void isLaunchingAppChanged();
@@ -99,6 +93,4 @@ private:
 
     KIO::ApplicationLauncherJob *m_launchingApp;
     QVector<qint64> m_launchingAppPids;
-
-    std::unique_ptr<QFeedbackHapticsEffect> m_hapticsEffect;
 };

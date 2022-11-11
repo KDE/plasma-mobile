@@ -46,7 +46,6 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
-    Feedback
 )
 if (QT_MAJOR_VERSION STREQUAL "5")
     if (QUICK_COMPILER)

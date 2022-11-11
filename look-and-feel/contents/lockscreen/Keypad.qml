@@ -54,6 +54,10 @@ Rectangle {
         }
     }
 
+    MobileShell.HapticsEffectLoader {
+        id: haptics
+    }
+    
     RectangularGlow {
         anchors.topMargin: 1
         anchors.fill: passwordBar
@@ -147,7 +151,7 @@ Rectangle {
 
                     onPressedChanged: {
                         if (pressed) {
-                            MobileShell.ShellUtil.buttonVibrate();
+                            haptics.buttonVibrate();
                         }
                     }
 
@@ -162,7 +166,7 @@ Rectangle {
                     }
                     onPressAndHold: {
                         if (modelData === "R") {
-                            MobileShell.ShellUtil.buttonVibrate();
+                            haptics.buttonVibrate();
                             passwordBar.clear();
                         }
                     }

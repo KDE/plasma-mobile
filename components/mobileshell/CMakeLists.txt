@@ -38,7 +38,6 @@ target_link_libraries(mobileshellplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
-        Qt::Feedback
         KF5::ConfigWidgets # for KStandardAction
         KF5::KIOGui
         KF5::Plasma

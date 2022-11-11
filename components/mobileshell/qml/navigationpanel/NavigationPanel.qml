@@ -61,12 +61,16 @@ Item {
         
         property NavigationPanelButton activeButton
 
+        MobileShell.HapticsEffectLoader {
+            id: haptics
+        }
+        
         onPressed: {
             startMouseX = oldMouseX = mouse.y;
             startMouseY = oldMouseY = mouse.y;
             activeButton = icons.childAt(mouse.x, mouse.y);
             if (activeButton && activeButton.enabled) {
-                MobileShell.ShellUtil.buttonVibrate();
+                haptics.buttonVibrate();
             }
         }
         
