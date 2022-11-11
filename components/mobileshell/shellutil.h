@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <QFeedbackHapticsEffect>
 #include <QObject>
 #include <QQuickItem>
 
@@ -98,4 +99,6 @@ private:
 
     KIO::ApplicationLauncherJob *m_launchingApp;
     QVector<qint64> m_launchingAppPids;
+
+    std::unique_ptr<QFeedbackHapticsEffect> m_hapticsEffect;
 };

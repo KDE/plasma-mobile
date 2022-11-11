@@ -19,7 +19,6 @@
 #include <QDBusPendingReply>
 #include <QDateTime>
 #include <QDebug>
-#include <QFeedbackHapticsEffect>
 #include <QFile>
 #include <QProcess>
 
@@ -29,6 +28,7 @@ ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
     , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
     , m_launchingApp{nullptr}
+    , m_hapticsEffect{std::make_unique<QFeedbackHapticsEffect>()}
 {
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
 
@@ -137,9 +137,8 @@ void ShellUtil::clearLaunchingApp()
 void ShellUtil::buttonVibrate()
 {
     if (MobileShellSettings::self()->vibrationsEnabled()) {
-        QFeedbackHapticsEffect rumble;
-        rumble.setDuration(MobileShellSettings::self()->vibrationDuration());
-        rumble.setIntensity(MobileShellSettings::self()->vibrationIntensity());
-        rumble.start();
+        m_hapticsEffect->setDuration(MobileShellSettings::self()->vibrationDuration());
+        m_hapticsEffect->setIntensity(MobileShellSettings::self()->vibrationIntensity());
+        m_hapticsEffect->start();
     }
 }
