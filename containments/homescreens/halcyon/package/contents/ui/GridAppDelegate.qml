@@ -127,15 +127,19 @@ MouseArea {
         }
         spacing: 0
 
-        PlasmaCore.IconItem {
+        // Use Kirigami.Icon to have better icon dimension options
+        Kirigami.Icon {
             id: icon
 
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+            
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: true
-            Layout.minimumHeight: Math.floor(parent.height - delegate.reservedSpaceForLabel)
-            Layout.preferredHeight: Layout.minimumHeight
+            Layout.preferredHeight: Math.floor(parent.height - delegate.reservedSpaceForLabel)
+            Layout.maximumHeight: labelFontMetrics.height * 7
+            Layout.topMargin: Math.max(0, Layout.preferredHeight - height)
 
-            usesPlasmaTheme: false
             source: application.icon
 
             Rectangle {
@@ -156,6 +160,11 @@ MouseArea {
                 effect: ColorOverlay {
                     color: Qt.rgba(0, 0, 0, 0.3)
                 }
+            }
+            
+            FontMetrics {
+                id: labelFontMetrics
+                font: label.font
             }
         }
 
