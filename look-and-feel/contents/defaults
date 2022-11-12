@@ -13,7 +13,7 @@ Image=Next
 Theme=breeze
 
 [kdeglobals][General]
-ColorScheme=BreezeDark
+ColorScheme=BreezeLight
 Name=Breeze
 
 ## kwinrc
