@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-13 00:48+0000\n"
+"POT-Creation-Date: 2022-11-13 00:47+0000\n"
 "PO-Revision-Date: 2022-07-13 12:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -38,7 +38,7 @@ msgstr "폴더 밖으로 이동"
 msgid "Add to favourites"
 msgstr "책갈피에 추가"
 
-#: package/contents/ui/GridAppList.qml:56
+#: package/contents/ui/GridAppList.qml:57
 #, kde-format
 msgid "Applications"
 msgstr "프로그램"
