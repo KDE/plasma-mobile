@@ -53,38 +53,24 @@ Kirigami.ScrollablePage {
                     property string mediumIntensityString: i18nc("Medium intensity", "Medium")
                     property string highIntensityString: i18nc("High intensity", "High")
                     
-                    currentValue: {
-                        let intensity = MobileShell.MobileShellSettings.vibrationIntensity;
-                        if (intensity <= 0.2) {
-                            return lowIntensityString;
-                        } else if (intensity <= 0.5) {
-                            return mediumIntensityString;
-                        } else {
-                            return highIntensityString;
-                        }
-                    }
+                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.vibrationIntensity)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
                             append({"name": vibrationIntensityDelegate.highIntensityString, "value": 1.0});
                             append({"name": vibrationIntensityDelegate.mediumIntensityString, "value": 0.5});
                             append({"name": vibrationIntensityDelegate.lowIntensityString, "value": 0.2});
+                            
+                            // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                            vibrationIntensityDelegate.currentIndex = vibrationIntensityDelegate.indexOfValue(MobileShell.MobileShellSettings.vibrationIntensity)
                         }
                     }
+                    
+                    textRole: "name"
+                    valueRole: "value"
+                    
                     Component.onCompleted: dialog.parent = root
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: name
-                        checked: vibrationIntensityDelegate.currentValue === name
-                        onCheckedChanged: {
-                            if (checked) {
-                                MobileShell.MobileShellSettings.vibrationIntensity = value;
-                            }
-                        }
-                    }
+                    onCurrentValueChanged: MobileShell.MobileShellSettings.vibrationIntensity = currentValue;
                 }
                 
                 MobileForm.FormDelegateSeparator { above: vibrationIntensityDelegate; below: vibrationDurationDelegate }
@@ -98,38 +84,24 @@ Kirigami.ScrollablePage {
                     property string mediumString: i18nc("Medium duration", "Medium")
                     property string shortString: i18nc("Short duration", "Short")
                     
-                    currentValue: {
-                        let duration = MobileShell.MobileShellSettings.vibrationDuration;
-                        if (duration >= 100) {
-                            return longString;
-                        } else if (duration >= 50) {
-                            return mediumString;
-                        } else {
-                            return shortString;
-                        }
-                    }
+                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.vibrationDuration)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
                             append({"name": vibrationDurationDelegate.longString, "value": 100});
                             append({"name": vibrationDurationDelegate.mediumString, "value": 50});
                             append({"name": vibrationDurationDelegate.shortString, "value": 15});
+                            
+                            // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                            vibrationDurationDelegate.currentIndex = vibrationDurationDelegate.indexOfValue(MobileShell.MobileShellSettings.vibrationDuration)
                         }
                     }
+                    
+                    textRole: "name"
+                    valueRole: "value"
+                    
                     Component.onCompleted: dialog.parent = root
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: name
-                        checked: vibrationDurationDelegate.currentValue === name
-                        onCheckedChanged: {
-                            if (checked) {
-                                MobileShell.MobileShellSettings.vibrationDuration = value;
-                            }
-                        }
-                    }
+                    onCurrentValueChanged: MobileShell.MobileShellSettings.vibrationDuration = currentValue;
                 }
             }
         }
