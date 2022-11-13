@@ -135,37 +135,23 @@ KCM.SimpleKCM {
                     text: i18n("Top Left Drawer Mode")
                     description: i18n("Mode when opening from the top left.")
                     
-                    currentValue: {
-                        let mode = MobileShell.MobileShellSettings.actionDrawerTopLeftMode;
-                        if (mode === MobileShell.MobileShellSettings.Expanded) {
-                            return parentCol.expandedString;
-                        } else{
-                            return parentCol.pinnedString;
-                        }
-                    }
+                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopLeftMode)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
                             append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+                            
+                            // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                            topLeftActionDrawerModeDelegate.currentIndex = topLeftActionDrawerModeDelegate.indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopLeftMode)
                         }
                     }
                     
+                    textRole: "name"
+                    valueRole: "value"
+                    
                     Component.onCompleted: dialog.parent = root
-
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: name
-                        checked: topLeftActionDrawerModeDelegate.currentValue === name
-                        onCheckedChanged: {
-                            if (checked) {
-                                MobileShell.MobileShellSettings.actionDrawerTopLeftMode = value;
-                            }
-                        }
-                    }
+                    onCurrentValueChanged: MobileShell.MobileShellSettings.actionDrawerTopLeftMode = currentValue
                 }
                 
                 MobileForm.FormDelegateSeparator { above: topLeftActionDrawerModeDelegate; below: topRightActionDrawerModeDelegate }
@@ -175,35 +161,24 @@ KCM.SimpleKCM {
                     text: i18n("Top Right Drawer Mode")
                     description: i18n("Mode when opening from from the top right.")
                     
-                    currentValue: {
-                        let mode = MobileShell.MobileShellSettings.actionDrawerTopRightMode;
-                        if (mode === MobileShell.MobileShellSettings.Expanded) {
-                            return parentCol.expandedString;
-                        } else {
-                            return parentCol.pinnedString;
-                        }
-                    }
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
                             append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
                             append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+
+                            // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                            topRightActionDrawerModeDelegate.currentIndex = topRightActionDrawerModeDelegate.indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopRightMode)
                         }
                     }
-                    Component.onCompleted: dialog.parent = root
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: name
-                        checked: topRightActionDrawerModeDelegate.currentValue === name
-                        onCheckedChanged: {
-                            if (checked) {
-                                MobileShell.MobileShellSettings.actionDrawerTopRightMode = value;
-                            }
-                        }
+                    
+                    textRole: "name"
+                    valueRole: "value"
+                    
+                    Component.onCompleted: {
+                        dialog.parent = root
                     }
+                    onCurrentValueChanged: MobileShell.MobileShellSettings.actionDrawerTopRightMode = currentValue
                 }
             }
         }
