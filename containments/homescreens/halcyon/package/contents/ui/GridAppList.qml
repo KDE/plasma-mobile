@@ -19,16 +19,19 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 MobileShell.GridView {
     id: gridView
-    layer.enabled: true
+    cacheBuffer: cellHeight * 20 // 10 rows above and below
     reuseItems: true
+    
+    // ensure items aren't visible out of bounds
+    layer.enabled: true
     
     readonly property int reservedSpaceForLabel: metrics.height
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     
-    cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(gridView.effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
+    cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
-    property int columns: Math.floor(gridView.effectiveContentWidth / cellWidth)
+    property int columns: Math.floor(effectiveContentWidth / cellWidth)
     property int rows: Math.ceil(Halcyon.ApplicationListModel.count / columns)
 
     function goToBeginning() {
