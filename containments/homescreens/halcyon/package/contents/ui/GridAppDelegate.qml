@@ -128,8 +128,7 @@ MouseArea {
         }
         spacing: 0
 
-        // Use Kirigami.Icon to have better icon dimension options
-        Kirigami.Icon {
+        PlasmaCore.IconItem {
             id: icon
 
             Kirigami.Theme.inherit: false
