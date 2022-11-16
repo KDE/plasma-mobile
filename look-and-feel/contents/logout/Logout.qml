@@ -2,6 +2,7 @@
  *   SPDX-FileCopyrightText: 2014 Aleix Pol Gonzalez <aleixpol@blue-systems.com>
  *   SPDX-FileCopyrightText: 2020 Linus Jahn <lnj@kaidan.im>
  *   SPDX-FileCopyrightText: 2020 Marco Martin <mart@kde.org
+ *   SPDX-FileCopyrightText: 2022 Seshan Ravikumar <seshan10@me.com>
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -56,13 +57,6 @@ PlasmaCore.ColorScope {
     ParallelAnimation {
         id: openAnim
         running: true
-        ScaleAnimator {
-            target: lay
-            from: 10
-            to: 1
-            duration: PlasmaCore.Units.longDuration
-            easing.type: Easing.InOutQuad
-        }
         OpacityAnimator {
             target: lay
             from: 0
@@ -82,20 +76,13 @@ PlasmaCore.ColorScope {
     SequentialAnimation {
         id: closeAnim
         running: false
-        
+
         property var callback
         function execute(call) {
             callback = call;
             closeAnim.restart();
         }
         ParallelAnimation {
-            ScaleAnimator {
-                target: lay
-                from: 1
-                to: 10
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
             OpacityAnimator {
                 target: lay
                 from: 1
@@ -122,13 +109,15 @@ PlasmaCore.ColorScope {
             }
         }
     }
-    GridLayout {
+    ColumnLayout {
         id: lay
-        anchors.centerIn: parent
-        columns: 2
-        rowSpacing: PlasmaCore.Units.gridUnit * 2
-        columnSpacing: PlasmaCore.Units.gridUnit * 2
-        scale: 2
+        anchors {
+            //top: root.top
+            //horizontalCenter: root.horizontalCenter
+            centerIn: root
+        }
+
+        spacing: PlasmaCore.Units.gridUnit
         opacity: 0
         ActionButton {
             iconSource: "system-reboot"
@@ -147,14 +136,24 @@ PlasmaCore.ColorScope {
         }
 
         ActionButton {
-            //Remove this when we have more buttons
-            Layout.columnSpan: 2
-            Layout.alignment: Qt.AlignCenter
+            iconSource: "system-log-out"
+            text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Log Out")
+            onClicked: {
+                closeAnim.execute(root.logoutRequested);
+            }
+        }
+    }
+    ActionButton {
+            anchors {
+                bottom: root.bottom
+                bottomMargin: PlasmaCore.Units.largeSpacing
+                horizontalCenter: parent.horizontalCenter
+            }
             iconSource: "dialog-cancel"
             text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Cancel")
             onClicked: {
                 closeAnim.execute(root.cancelRequested);
             }
-        }
     }
+
 }

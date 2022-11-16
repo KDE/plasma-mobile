@@ -1,5 +1,6 @@
 /*
  *   SPDX-FileCopyrightText: 2016 David Edmundson <davidedmundson@kde.org>
+ *   SPDX-FileCopyrightText: 2022 Seshan Ravikumar <seshan10@me.com>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -16,81 +17,51 @@ Item {
     property alias containsMouse: mouseArea.containsMouse
     property alias font: label.font
     property alias labelRendering: label.renderType
-    property alias circleOpacity: iconCircle.opacity
-    property alias circleVisiblity: iconCircle.visible
+    property alias circleOpacity: buttonRect.opacity
+    property alias circleVisiblity: buttonRect.visible
     property int fontSize: config.fontSize
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
-    
+
     signal clicked
 
     activeFocusOnTab: true
 
-    property int iconSize: PlasmaCore.Units.gridUnit * 3
+    property int iconSize: PlasmaCore.Units.gridUnit
 
-    implicitWidth: Math.max(iconSize + PlasmaCore.Units.largeSpacing * 2, label.contentWidth)
+    implicitWidth: PlasmaCore.Units.gridUnit * 14
     implicitHeight: iconSize + PlasmaCore.Units.smallSpacing + label.implicitHeight
 
-    opacity: activeFocus || containsMouse ? 1 : 0.85
-        Behavior on opacity {
-            PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
-                duration: PlasmaCore.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-    }
-
     Rectangle {
-        id: iconCircle
-        anchors.centerIn: icon
-        width: iconSize + PlasmaCore.Units.smallSpacing
-        height: width
-        radius: width / 2
-        color: softwareRendering ?  PlasmaCore.ColorScope.backgroundColor : PlasmaCore.ColorScope.textColor
-        opacity: activeFocus || containsMouse ? (softwareRendering ? 0.8 : 0.15) : (softwareRendering ? 0.6 : 0)
-        Behavior on opacity {
-                PropertyAnimation { // OpacityAnimator makes it turn black at random intervals
-                    duration: PlasmaCore.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-        }
-    }
-
-    Rectangle {
-        anchors.centerIn: iconCircle
-        width: iconCircle.width
-        height: width
-        radius: width / 2
-        scale: mouseArea.containsPress ? 1 : 0
-        color: PlasmaCore.ColorScope.textColor
-        opacity: 0.15
-        Behavior on scale {
-                PropertyAnimation {
-                    duration: PlasmaCore.Units.shortDuration
-                    easing.type: Easing.InOutQuart
-                }
+        id: buttonRect
+        width: root.width
+        height: iconSize * 2.2
+        radius: PlasmaCore.Units.smallSpacing
+        color: PlasmaCore.ColorScope.backgroundColor
+        opacity: mouseArea.containsPress ? 0.8 : 0.3
+        border {
+            color: Qt.rgba(255, 255, 255, 0.8)
+            width: 1
         }
     }
 
     PlasmaCore.IconItem {
         id: icon
         anchors {
-            top: parent.top
-            horizontalCenter: parent.horizontalCenter
+            verticalCenter: buttonRect.verticalCenter
+            left: buttonRect.left
+            leftMargin: PlasmaCore.Units.mediumSpacing
         }
         width: iconSize
         height: iconSize
 
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        active: mouseArea.containsMouse || root.activeFocus
     }
 
     PlasmaComponents3.Label {
         id: label
         font.pointSize: Math.max(fontSize + 1,PlasmaCore.Theme.defaultFont.pointSize + 1)
         anchors {
-            top: icon.bottom
-            topMargin: (softwareRendering ? 1.5 : 1) * PlasmaCore.Units.smallSpacing
-            left: parent.left
-            right: parent.right
+            centerIn: buttonRect
         }
         style: softwareRendering ? Text.Outline : Text.Normal
         styleColor: softwareRendering ? PlasmaCore.ColorScope.backgroundColor : "transparent" //no outline, doesn't matter
