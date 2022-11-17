@@ -37,7 +37,7 @@ Item {
         height: iconSize * 2.2
         radius: PlasmaCore.Units.smallSpacing
         color: PlasmaCore.ColorScope.backgroundColor
-        opacity: mouseArea.containsPress ? 0.8 : 0.3
+        opacity: mouseArea.containsPress ? 1 : 0.6
         border {
             color: Qt.rgba(255, 255, 255, 0.8)
             width: 1
