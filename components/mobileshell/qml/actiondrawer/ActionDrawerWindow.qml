@@ -33,6 +33,10 @@ NanoShell.FullScreenOverlay {
     width: Screen.width
     height: Screen.height
     
+    onVisibleChanged: {
+        blurBackground = visible;
+    }
+    
     color: "transparent"
     
     onActiveChanged: {
