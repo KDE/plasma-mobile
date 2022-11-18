@@ -72,32 +72,22 @@ ColumnLayout {
                     description: i18n("The homescreen layout to use.")
                     visible: model.count > 1 // only show if there are multiple plugins
                     
-                    currentValue: {
+                    model: configDialog.containmentPluginsConfigModel
+                    textRole: "name"
+                    valueRole: "pluginName"
+                    currentIndex: determineCurrentIndex()
+                    onCurrentIndexChanged: {
+                        root.containmentPlugin = configDialog.containmentPluginsConfigModel.get(currentIndex).pluginName;
+                    }
+                    
+                    function determineCurrentIndex() {
                         for (var i = 0; i < configDialog.containmentPluginsConfigModel.count; ++i) {
                             var data = configDialog.containmentPluginsConfigModel.get(i);
                             if (configDialog.containmentPlugin === data.pluginName) {
-                                return data.name;
+                                return i;
                             }
                         }
-                        return "";
-                    }
-                    model: configDialog.containmentPluginsConfigModel
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: model.name
-                        checked: layoutSelectComboBox.currentValue === model.name
-                        onCheckedChanged: {
-                            if (checked) {
-                                layoutSelectComboBox.currentValue = name;
-                                var model = configDialog.containmentPluginsConfigModel.get(index);
-                                root.containmentPlugin = pluginName;
-                                // don't apply configuration immediately
-                                //root.configurationChanged();
-                            }
-                        }
+                        return -1;
                     }
                 }
                 
@@ -108,33 +98,26 @@ ColumnLayout {
                     text: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Plugin")
                     description: i18n("The wallpaper plugin to use.")
                     
-                    currentValue: {
+                    model: configDialog.wallpaperConfigModel
+                    textRole: "name"
+                    valueRole: "pluginName"
+                    currentIndex: determineCurrentIndex()
+                    onCurrentIndexChanged: {
+                        var model = configDialog.wallpaperConfigModel.get(currentIndex);
+                        root.currentWallpaper = model.pluginName;
+                        configDialog.currentWallpaper = model.pluginName;
+                        main.sourceFile = model.source;
+                        root.configurationChanged();
+                    }
+                    
+                    function determineCurrentIndex() {
                         for (var i = 0; i < configDialog.wallpaperConfigModel.count; ++i) {
                             var data = configDialog.wallpaperConfigModel.get(i);
                             if (configDialog.currentWallpaper === data.pluginName) {
-                                return data.name;
+                                return i;
                             }
                         }
-                        return "";
-                    }
-                    model: configDialog.wallpaperConfigModel
-                    dialogDelegate: QQC2.RadioDelegate {
-                        implicitWidth: Kirigami.Units.gridUnit * 16
-                        topPadding: Kirigami.Units.smallSpacing * 2
-                        bottomPadding: Kirigami.Units.smallSpacing * 2
-                        
-                        text: model.name
-                        checked: wallpaperPluginSelectComboBox.currentValue === model.name
-                        onCheckedChanged: {
-                            if (checked) {
-                                wallpaperPluginSelectComboBox.currentValue = name;
-                                var model = configDialog.wallpaperConfigModel.get(index);
-                                root.currentWallpaper = pluginName;
-                                configDialog.currentWallpaper = pluginName;
-                                main.sourceFile = source;
-                                root.configurationChanged();
-                            }
-                        }
+                        return -1;
                     }
                 }
                 
