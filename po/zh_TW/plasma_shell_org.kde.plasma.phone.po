@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2022-10-19 06:53+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -36,27 +36,27 @@ msgstr "主畫面佈局"
 msgid "The homescreen layout to use."
 msgstr "要使用的主畫面佈局。"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "桌布外掛程式"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "要使用的桌布外掛程式。"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "桌布外掛程式"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "取得新的外掛程式…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "佈局變更必須先套用才能進行其他變更"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "立刻套用"
 

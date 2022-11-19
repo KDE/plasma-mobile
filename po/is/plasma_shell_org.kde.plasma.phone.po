@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2022-10-14 16:57+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -33,29 +33,29 @@ msgstr "Framsetning upphafsskjás"
 msgid "The homescreen layout to use."
 msgstr "Framsetning sem á að nota fyrir upphafsskjáinn."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Bakgrunnsmyndaviðbót"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Bakgrunnsmyndaviðbót sem á að nota."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Íforrit fyrir bakgrunnsmyndir"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Ná í nýjar forritsviðbætur…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Breytingar á framsetningu verður að virkja áður en hægt er að gera aðrar "
 "breytingar"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Sæktu um núna"
 

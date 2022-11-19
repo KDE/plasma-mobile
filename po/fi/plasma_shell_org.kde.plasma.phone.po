@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2022-07-03 22:58+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -33,28 +33,28 @@ msgstr "Kotinäytön asettelu"
 msgid "The homescreen layout to use."
 msgstr "Käytettävä kotinäytön asettelu."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Taustakuvaliitännäinen"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Käytettävä taustakuvaliitännäinen."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Taustakuvaliitännäiset"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Etsi uusia liitännäisiä…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Asettelumuutokset on otettava käyttöön ennen muiden muutosten tekemistä."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Ota käyttöön nyt"
 

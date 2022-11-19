@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-11 00:46+0000\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
 "PO-Revision-Date: 2022-08-28 20:40+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -34,27 +34,27 @@ msgstr "Układ ekranu domowego"
 msgid "The homescreen layout to use."
 msgstr "Używany układ ekranu domowego."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:108
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Wtyczka tapet"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:109
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Używana wtyczka tapet."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:151
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Wtyczki tapet"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:156
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Pobierz nowe wtyczki…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:171
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Zmiany układu należy zastosować przed zastosowaniem kolejnych zmian"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:177
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Zastosuj teraz"
 
