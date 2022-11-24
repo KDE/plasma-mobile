@@ -161,14 +161,13 @@ QList<QString> MobileShellSettings::enabledQuickSettings() const
                                           QStringLiteral("org.kde.plasma.quicksetting.airplanemode"),
                                           QStringLiteral("org.kde.plasma.quicksetting.audio"),
                                           QStringLiteral("org.kde.plasma.quicksetting.battery"),
-                                          QStringLiteral("org.kde.plasma.quicksetting.location"),
+                                          QStringLiteral("org.kde.plasma.quicksetting.record"),
                                           QStringLiteral("org.kde.plasma.quicksetting.nightcolor"),
                                           QStringLiteral("org.kde.plasma.quicksetting.screenshot"),
                                           QStringLiteral("org.kde.plasma.quicksetting.powermenu"),
                                           QStringLiteral("org.kde.plasma.quicksetting.donotdisturb"),
                                           QStringLiteral("org.kde.plasma.quicksetting.caffeine"),
-                                          QStringLiteral("org.kde.plasma.quicksetting.keyboardtoggle"),
-                                          QStringLiteral("org.kde.plasma.quicksetting.record")});
+                                          QStringLiteral("org.kde.plasma.quicksetting.keyboardtoggle")});
 }
 
 void MobileShellSettings::setEnabledQuickSettings(QList<QString> &list)
