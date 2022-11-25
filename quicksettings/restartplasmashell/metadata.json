@@ -1,0 +1,23 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "skilvingr@gmail.com",
+                "Name": "Yari Polla",
+                "Name[x-test]": "xxYari Pollaxx"
+            }
+        ],
+        "Description": "Quick setting to restart Plasma shell",
+        "Description[x-test]": "xxQuick setting to restart Plasma shellxx",
+        "Icon": "system-reboot",
+        "Id": "org.kde.plasma.quicksetting.restartplasmashell",
+        "License": "GPL",
+        "Name": "Restart Shell",
+        "Name[x-test]": "xxRestart Shellxx",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}

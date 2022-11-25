@@ -10,6 +10,7 @@ plasma_install_package(donotdisturb org.kde.plasma.quicksetting.donotdisturb qui
 plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle quicksettings)
 plasma_install_package(location org.kde.plasma.quicksetting.location quicksettings)
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
+plasma_install_package(restartplasmashell org.kde.plasma.quicksetting.restartplasmashell quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
 add_subdirectory(flashlight)
