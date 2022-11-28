@@ -19,7 +19,6 @@ Item {
     property alias labelRendering: label.renderType
     property alias circleOpacity: buttonRect.opacity
     property alias circleVisiblity: buttonRect.visible
-    property int fontSize: config.fontSize
     readonly property bool softwareRendering: GraphicsInfo.api === GraphicsInfo.Software
 
     signal clicked
@@ -59,7 +58,7 @@ Item {
 
     PlasmaComponents3.Label {
         id: label
-        font.pointSize: Math.max(fontSize + 1,PlasmaCore.Theme.defaultFont.pointSize + 1)
+        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize + 1
         anchors {
             centerIn: buttonRect
         }
