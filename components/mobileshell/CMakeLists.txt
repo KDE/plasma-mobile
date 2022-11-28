@@ -48,6 +48,7 @@ target_link_libraries(mobileshellplugin
         KF5::KIOWidgets # for PreviewJob
         KF5::WaylandClient
         KF5::Service
+        KF5::Package
 )
 
 # we compiled the qml files, just install qmldir
