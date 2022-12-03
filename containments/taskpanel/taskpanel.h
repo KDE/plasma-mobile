@@ -11,6 +11,8 @@
 
 #include <kscreen/config.h>
 
+class FakeInput;
+
 class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
@@ -18,11 +20,13 @@ class TaskPanel : public Plasma::Containment
 
 public:
     TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    virtual ~TaskPanel();
 
     Q_INVOKABLE void triggerTaskSwitcher() const;
 
     bool showRotationButton() const;
     Q_INVOKABLE void rotateToSuggestedRotation();
+    Q_INVOKABLE void sendBackButtonEvent();
 
 Q_SIGNALS:
     void showRotationButtonChanged();
@@ -31,8 +35,13 @@ private Q_SLOTS:
     void updateShowRotationButton();
 
 private:
+    void initWayland();
+
     bool m_showRotationButton{false};
     KScreen::Output::Rotation m_rotateTo;
+
+    std::unique_ptr<FakeInput> m_fakeInput;
+    bool m_waylandFakeInputAuthRequested;
 
     KScreen::ConfigPtr m_config{nullptr};
     QOrientationSensor *m_sensor{nullptr};

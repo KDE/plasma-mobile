@@ -16,6 +16,13 @@
 #include <kscreen/output.h>
 #include <kscreen/setconfigoperation.h>
 
+#include <KLocalizedString>
+
+#include "qwayland-fake-input.h"
+#include <QtWaylandClient/qwaylandclientextension.h>
+
+#include <linux/input.h>
+
 // register type for Keyboards.KWinVirtualKeyboard.forceActivate();
 Q_DECLARE_METATYPE(QDBusPendingReply<>)
 
@@ -38,8 +45,19 @@ KScreen::Output::Rotation mapReadingOrientation(QOrientationReading::Orientation
     return KScreen::Output::Rotation::None;
 }
 
+class FakeInput : public QWaylandClientExtensionTemplate<FakeInput>, public QtWayland::org_kde_kwin_fake_input
+{
+public:
+    FakeInput()
+        : QWaylandClientExtensionTemplate<FakeInput>(4)
+    {
+    }
+};
+
 TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment(parent, data, args)
+    , m_fakeInput{std::make_unique<FakeInput>()}
+    , m_waylandFakeInputAuthRequested{false}
     , m_sensor{new QOrientationSensor(this)}
 {
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
@@ -60,6 +78,9 @@ TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVarian
     connect(m_sensor, &QOrientationSensor::readingChanged, this, &TaskPanel::updateShowRotationButton);
     m_sensor->start();
 }
+
+TaskPanel::~TaskPanel()
+{}
 
 void TaskPanel::triggerTaskSwitcher() const
 {
@@ -141,6 +162,24 @@ void TaskPanel::updateShowRotationButton()
 
     m_showRotationButton = false;
     Q_EMIT showRotationButtonChanged();
+}
+
+void TaskPanel::sendBackButtonEvent()
+{
+    qDebug() << m_fakeInput->isActive();
+    if (!m_fakeInput->isActive()) {
+        return;
+    }
+
+    if (!m_waylandFakeInputAuthRequested) {
+        m_fakeInput->authenticate(i18n("Plasma Shell"), i18n("Use the back button"));
+        m_waylandFakeInputAuthRequested = true;
+    }
+
+    m_fakeInput->button(KEY_LEFTALT, WL_POINTER_BUTTON_STATE_PRESSED);
+    m_fakeInput->button(BTN_LEFT, WL_POINTER_BUTTON_STATE_PRESSED);
+    m_fakeInput->button(BTN_LEFT, WL_POINTER_BUTTON_STATE_RELEASED);
+    m_fakeInput->button(KEY_LEFTALT, WL_POINTER_BUTTON_STATE_RELEASED);
 }
 
 K_PLUGIN_CLASS(TaskPanel)
