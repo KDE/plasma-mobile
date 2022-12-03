@@ -46,6 +46,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
+    WaylandClient
 )
 if (QT_MAJOR_VERSION STREQUAL "5")
     if (QUICK_COMPILER)
@@ -70,11 +71,17 @@ find_package(KF5KirigamiAddons 0.6 REQUIRED)
 
 find_package(LibKWorkspace CONFIG REQUIRED)
 
+find_package(Wayland 1.9 REQUIRED Client)
+find_package(PlasmaWaylandProtocols REQUIRED)
 find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
     TYPE REQUIRED
     PURPOSE "Needed for virtual keyboard toggle button"
 )
+
+if (QT_MAJOR_VERSION EQUAL "5")
+    find_package(QtWaylandScanner REQUIRED)
+endif()
 
 include(CheckIncludeFiles)
 

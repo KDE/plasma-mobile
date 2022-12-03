@@ -18,16 +18,33 @@
 #include <KWayland/Client/plasmawindowmanagement.h>
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
+#include <KLocalizedString>
 #include <Plasma/Package>
+
+#include <QtWaylandClient/qwaylandclientextension.h>
+#include "qwayland-fake-input.h"
+
+#include <linux/input.h>
 
 #include <virtualkeyboardinterface.h>
 
 // register type for Keyboards.KWinVirtualKeyboard.forceActivate();
 Q_DECLARE_METATYPE(QDBusPendingReply<>)
 
+class FakeInput : public QWaylandClientExtensionTemplate<FakeInput>, public QtWayland::org_kde_kwin_fake_input
+{
+public:
+    FakeInput()
+        : QWaylandClientExtensionTemplate<FakeInput>(4)
+    {
+    }
+};
+
 TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment(parent, data, args)
+    , m_waylandFakeInputAuthRequested{false}
 {
+    m_fakeInput = new FakeInput;
     setHasConfigurationInterface(true);
     initWayland();
 
@@ -41,6 +58,11 @@ TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVarian
         auto l = location();
         setFormFactor(l == Plasma::Types::LeftEdge || l == Plasma::Types::RightEdge ? Plasma::Types::Vertical : Plasma::Types::Horizontal);
     });
+}
+
+TaskPanel::~TaskPanel()
+{
+    delete m_fakeInput;
 }
 
 void TaskPanel::initWayland()
@@ -119,6 +141,23 @@ void TaskPanel::updatePanelVisibility()
     if (m_shellSurface) {
         m_shellSurface->setSkipTaskbar(true);
     }
+}
+
+void TaskPanel::sendBackButtonEvent()
+{
+    if (!m_fakeInput->isActive()) {
+        return;
+    }
+    
+    if (!m_waylandFakeInputAuthRequested) {
+        m_fakeInput->authenticate(i18n("Plasma Shell"), i18n("Use the back button"));
+        m_waylandFakeInputAuthRequested = true;
+    }
+    
+    m_fakeInput->button(KEY_LEFTALT, WL_POINTER_BUTTON_STATE_PRESSED);
+    m_fakeInput->button(BTN_LEFT, WL_POINTER_BUTTON_STATE_PRESSED);
+    m_fakeInput->button(BTN_LEFT, WL_POINTER_BUTTON_STATE_RELEASED);
+    m_fakeInput->button(KEY_LEFTALT, WL_POINTER_BUTTON_STATE_RELEASED);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(TaskPanel, "package/metadata.json")

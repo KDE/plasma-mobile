@@ -84,30 +84,16 @@ MobileShell.NavigationPanel {
         id: closeAppAction
         
         enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || MobileShell.WindowUtil.hasCloseableActiveWindow || MobileShell.ShellUtil.isLaunchingApp
-        iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+        iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "go-previous-symbolic"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-        iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
+        iconSizeFactor: 1
         
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.active) {
                 // close keyboard if it is open
                 Keyboards.KWinVirtualKeyboard.active = false;
             } else if (taskSwitcher.visible) { 
-                // if task switcher is open, close the current window shown
-                let indexToClose = root.taskSwitcher.tasksModel.index(root.taskSwitcher.currentTaskIndex, 0);
-                root.taskSwitcher.tasksModel.requestClose(indexToClose);
-                
-            } else if (MobileShell.WindowUtil.hasCloseableActiveWindow) {
-                // if task switcher is closed, but there is an active window
-                if (root.taskSwitcher.tasksModel.activeTask !== 0) {
-                    root.taskSwitcher.tasksModel.requestClose(root.taskSwitcher.tasksModel.activeTask);
-                }
-                MobileShellState.Shell.closeAppLaunchAnimation();
-            } else if (MobileShell.ShellUtil.isLaunchingApp) {
-                
-                // cancel the launching of the app
-                MobileShellState.Shell.closeAppLaunchAnimation();
-                MobileShell.ShellUtil.cancelLaunchingApp();
+                plasmoid.nativeInterface.sendBackButtonEvent();
             }
         }
     }

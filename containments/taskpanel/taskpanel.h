@@ -26,6 +26,8 @@ class Surface;
 }
 }
 
+class FakeInput;
+
 class TaskPanel : public Plasma::Containment
 {
     Q_OBJECT
@@ -33,11 +35,14 @@ class TaskPanel : public Plasma::Containment
 
 public:
     TaskPanel(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    virtual ~TaskPanel();
 
     QWindow *panel();
     void setPanel(QWindow *panel);
 
     Q_INVOKABLE void setPanelHeight(qreal height);
+    
+    Q_INVOKABLE void sendBackButtonEvent();
 
     QAbstractItemModel *outputs() const;
 
@@ -48,7 +53,9 @@ Q_SIGNALS:
 private:
     void initWayland();
     void updatePanelVisibility();
+    bool m_waylandFakeInputAuthRequested;
     QWindow *m_panel = nullptr;
+    FakeInput *m_fakeInput;
     KWayland::Client::PlasmaShellSurface *m_shellSurface = nullptr;
     KWayland::Client::Surface *m_surface = nullptr;
     KWayland::Client::PlasmaShell *m_shellInterface = nullptr;
