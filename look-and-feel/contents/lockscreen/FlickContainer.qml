@@ -42,8 +42,8 @@ Flickable {
     
     NumberAnimation on position {
         id: positionAnim
-        duration: PlasmaCore.Units.longDuration * 2
-        easing.type: Easing.OutCubic
+        duration: PlasmaCore.Units.veryLongDuration
+        easing.type: Easing.OutExpo
         
         onFinished: {
             if (root.position === keypadHeight) {

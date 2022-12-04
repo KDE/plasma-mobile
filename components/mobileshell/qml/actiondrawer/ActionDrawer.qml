@@ -204,8 +204,8 @@ Item {
 
     PropertyAnimation on offset {
         id: closeAnim
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+        duration: PlasmaCore.Units.veryLongDuration
+        easing.type: Easing.OutExpo
         to: 0
         onFinished: {
             root.visible = false;
@@ -214,15 +214,15 @@ Item {
     }
     PropertyAnimation on offset {
         id: openAnim
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+        duration: PlasmaCore.Units.veryLongDuration
+        easing.type: Easing.OutExpo
         to: contentContainerLoader.minimizedQuickSettingsOffset
         onFinished: root.opened = true
     }
     PropertyAnimation on offset {
         id: expandAnim
-        duration: PlasmaCore.Units.longDuration
-        easing.type: Easing.InOutQuad
+        duration: PlasmaCore.Units.veryLongDuration
+        easing.type: Easing.OutExpo
         to: contentContainerLoader.maximizedQuickSettingsOffset
         onFinished: root.opened = true;
     }
