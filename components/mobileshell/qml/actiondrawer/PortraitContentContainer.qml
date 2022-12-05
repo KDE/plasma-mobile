@@ -120,5 +120,8 @@ PlasmaCore.ColorScope {
             right: parent.right
         }
         opacity: applyMinMax(root.actionDrawer.offset / root.minimizedQuickSettingsOffset)
+        
+        // HACK: there are weird issues with text rendering black regardless of opacity, just set the text to be invisible once it's out
+        visible: opacity > 0.05
     }
 }
