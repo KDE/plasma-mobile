@@ -173,7 +173,7 @@ PlasmaCore.ColorScope {
         // right sidebar
         QuickSettingsPanel {
             id: quickSettings
-            height: Math.min(root.height, Math.max(quickSettings.minimizedHeight, actionDrawer.offset))
+            height: quickSettings.contentImplicitHeight + quickSettings.topPadding + quickSettings.bottomPadding
             width: intendedWidth
             
             readonly property real intendedWidth: 360
@@ -182,11 +182,12 @@ PlasmaCore.ColorScope {
             anchors.right: parent.right
             
             actionDrawer: root.actionDrawer
-            fullHeight: root.height
+            fullScreenHeight: root.height
             
             transform: Translate {
                 id: translate
-                y: Math.min(root.actionDrawer.offset - quickSettings.minimizedHeight, 0)
+                property real offsetRatio: quickSettings.height / root.height
+                y: Math.min(root.actionDrawer.offset * offsetRatio - quickSettings.height, 0)
             }
         }
     }

@@ -28,12 +28,7 @@ Components.BaseItem {
     
     required property var actionDrawer
     
-    required property real fullHeight
-    
-    /**
-     * Height of panel when first pulled down.
-     */
-    readonly property real minimizedHeight: bottomPadding + topPadding + statusBar.height + quickSettings.rowHeight
+    required property real fullScreenHeight
     
     /**
      * Implicit height of the contents of the panel.
@@ -53,7 +48,6 @@ Components.BaseItem {
 
     contentItem: Item {
         id: containerItem
-        clip: true
         
         // use container item so that our column doesn't get stretched if base item is anchored
         ColumnLayout {
@@ -61,7 +55,7 @@ Components.BaseItem {
             anchors.left: parent.left
             anchors.right: parent.right
             anchors.top: parent.top
-            height: root.fullHeight
+            height: root.fullScreenHeight
             spacing: 0
             
             StatusBar.StatusBar {
@@ -89,7 +83,7 @@ Components.BaseItem {
                 
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.maximumHeight: root.fullHeight - root.topPadding - root.bottomPadding - statusBar.height - PlasmaCore.Units.smallSpacing
+                Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBar.height - PlasmaCore.Units.smallSpacing
                 Layout.maximumWidth: column.width
                 
                 actionDrawer: root.actionDrawer

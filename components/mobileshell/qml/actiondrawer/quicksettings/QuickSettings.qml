@@ -47,9 +47,18 @@ Item {
     readonly property int rowCount: {
         let totalRows = Math.ceil(quickSettingsCount / columnCount);
         let isPortrait = MobileShell.Shell.orientation === MobileShell.Shell.Portrait;
-        let maxRows = 5; // more than 5 is just disorienting
-        let targetRows = Math.floor(Window.height * (isPortrait ? 0.65 : 0.8) / rowHeight);
-        return Math.min(maxRows, Math.min(totalRows, targetRows));
+        
+        if (isPortrait) {
+            // portrait orientation
+            let maxRows = 5; // more than 5 is just disorienting
+            let targetRows = Math.floor(Window.height * 0.65 / rowHeight);
+            return Math.min(maxRows, Math.min(totalRows, targetRows));
+            
+        } else { 
+            // horizontal orientation
+            let targetRows = Math.floor(Window.height * 0.8 / rowHeight);
+            return Math.min(totalRows, targetRows);
+        }
     }
     
     readonly property int pageSize: rowCount * columnCount
