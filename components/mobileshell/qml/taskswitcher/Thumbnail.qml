@@ -13,13 +13,14 @@ import org.kde.taskmanager 0.1 as TaskManager
 
 PipeWire.PipeWireSourceItem {
     id: root
-    visible: nodeId > 0
+    visible: (taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled) 
+    opacity: (nodeId > 0) ? 1 : 0
     nodeId: waylandItem.nodeId
     
     readonly property alias uuid: waylandItem.uuid
 
-    function refresh() {
-        if (model.WinIdList) {
+    onVisibleChanged: {
+        if (model.WinIdList && visible) {
             waylandItem.uuid = model.WinIdList[0];
         }
     }
