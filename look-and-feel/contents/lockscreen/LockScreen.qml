@@ -41,18 +41,6 @@ Item {
         passwordBar.textField.forceActiveFocus();
     }
 
-    // HACK: kscreenlocker doesn't draw the wallpaper (shows up as black)
-    Loader {
-        anchors.fill: parent
-        asynchronous: true
-        sourceComponent: FastBlur {
-            cached: true
-            radius: 0
-            source: wallpaper
-            anchors.fill: parent
-        }
-    }
-
     // wallpaper blur
     Loader {
         anchors.fill: parent
