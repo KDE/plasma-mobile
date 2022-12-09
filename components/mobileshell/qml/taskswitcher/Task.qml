@@ -227,10 +227,13 @@ Item {
                     // attempt to load window preview
                     Loader {
                         id: pipeWireLoader
-                        active: MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
+                        active: (taskSwitcher.visible || taskSwitcher.tasksModel.taskReorderingEnabled) && MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
                         anchors.fill: parent
                         source: Qt.resolvedUrl("./Thumbnail.qml")
+                        
                         asynchronous: true
+                        
+                        onLoaded: this.item.refresh()
                     }
                     
                     // darken effect
