@@ -49,10 +49,26 @@ Item {
     /**
      * Margins for the homescreen, taking panels into account.
      */
-    readonly property real topMargin: plasmoid.availableScreenRect.y
-    readonly property real bottomMargin: root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height)
-    readonly property real leftMargin: plasmoid.availableScreenRect.x
-    readonly property real rightMargin: root.width - (plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width)
+    property real topMargin
+    property real bottomMargin
+    property real leftMargin
+    property real rightMargin
+
+    function evaluateMargins() {
+        topMargin = plasmoid.availableScreenRect.y
+        bottomMargin = root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height)
+        leftMargin = plasmoid.availableScreenRect.x
+        rightMargin = root.width - (plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width)
+    }
+
+    Connections {
+        target: plasmoid
+
+        // avoid binding loops with root.height and root.width changing along with the availableScreenRect
+        function onAvailableScreenRectChanged() {
+            Qt.callLater(() => root.evaluateMargins());
+        }
+    }
 
     //BEGIN API implementation
 
@@ -105,6 +121,9 @@ Item {
 //END API implementation
 
     Component.onCompleted: {
+        // determine the margins used
+        evaluateMargins();
+
         // set API variables
         if (plasmoid.screen == 0) {
             MobileShellState.HomeScreenControls.taskSwitcher = taskSwitcher;
