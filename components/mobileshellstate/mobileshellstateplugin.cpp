@@ -18,6 +18,5 @@ void MobileShellStatePlugin::registerTypes(const char *uri)
     // /
     qmlRegisterSingletonType(resolvePath("HomeScreenControls.qml"), uri, 1, 0, "HomeScreenControls");
     qmlRegisterSingletonType(resolvePath("Shell.qml"), uri, 1, 0, "Shell");
-    qmlRegisterSingletonType(resolvePath("TaskPanelControls.qml"), uri, 1, 0, "TaskPanelControls");
     qmlRegisterSingletonType(resolvePath("TopPanelControls.qml"), uri, 1, 0, "TopPanelControls");
 }

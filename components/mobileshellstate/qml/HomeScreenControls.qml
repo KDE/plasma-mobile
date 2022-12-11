@@ -5,13 +5,15 @@
 import QtQuick 2.12
 import QtQuick.Window 2.2
 
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
 pragma Singleton
 
 /**
  * Provides access to the homescreen plasmoid containment within the shell.
  */
 QtObject {
-    id: delegate
+    id: root
 
     signal openHomeScreen()
     signal resetHomeScreenPosition()
@@ -22,6 +24,16 @@ QtObject {
     
     property var taskSwitcher
     property QtObject homeScreenWindow
-    property bool homeScreenVisible: true
     property bool taskSwitcherVisible: false
+
+    // this state is updated from WindowUtil
+    property bool homeScreenVisible: true
+
+    property var windowListener: Connections {
+        target: MobileShell.WindowUtil
+
+        function onAllWindowsMinimizedChanged() {
+            root.homeScreenVisible = MobileShell.WindowUtil.allWindowsMinimized
+        }
+    }
 }

@@ -14,14 +14,16 @@ import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 Item {
     id: root
+    required property real shellTopMargin
+    required property real shellBottomMargin
     
     required property var taskSwitcher
     readonly property var taskSwitcherState: taskSwitcher.taskSwitcherState
     
     // account for system header and footer offset (center the preview image)
     readonly property real taskY: {
-        let headerHeight = MobileShellState.Shell.topMargin;
-        let footerHeight = MobileShellState.Shell.bottomMargin;
+        let headerHeight = shellTopMargin;
+        let footerHeight = shellBottomMargin;
         let diff = headerHeight - footerHeight;
         
         let baseY = (taskSwitcher.height / 2) - (taskSwitcherState.taskHeight / 2) - (taskSwitcherState.taskHeaderHeight / 2)

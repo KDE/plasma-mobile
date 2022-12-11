@@ -23,6 +23,9 @@ PlasmaCore.ColorScope {
     id: root
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
+    width: 480
+    height: PlasmaCore.Units.gridUnit * 2
+
     // toggle visibility of navigation bar (show, or use gestures only)
     Binding {
         target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
@@ -32,78 +35,65 @@ PlasmaCore.ColorScope {
         value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 3
     }
 
-    // HACK: There seems to be some component that overrides our initial bindings for the panel,
-    //   which is particularly problematic on first start (since the panel is misplaced)
-    // - We set an event to override any attempts to override our bindings.
-    function setBindings() {
-        
+    // we have the following scenarios:
+    // - system is in landscape orientation & nav panel is enabled (panel on right)
+    // - system is in landscape orientation & gesture mode is enabled (panel on bottom)
+    // - system is in portrait orientation (panel on bottom)
+    readonly property bool inLandscape: Screen.width > Screen.height;
+    readonly property bool isInLandscapeNavPanelMode: inLandscape && MobileShell.MobileShellSettings.navigationPanelEnabled
+
+    readonly property real navigationPanelHeight: PlasmaCore.Units.gridUnit * 2
+    readonly property real gesturePanelHeight: 8
+
+    readonly property real intendedWindowThickness: MobileShell.MobileShellSettings.navigationPanelEnabled ? navigationPanelHeight : gesturePanelHeight
+    readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
+    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? MobileShellState.TopPanelControls.panelHeight : 0; // offset for top panel
+    readonly property int intendedWindowLocation: isInLandscapeNavPanelMode ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
+
+    onIntendedWindowThicknessChanged: plasmoid.Window.window.thickness = intendedWindowThickness
+    onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
+    onIntendedWindowOffsetChanged: plasmoid.Window.window.offset = intendedWindowOffset
+    onIntendedWindowLocationChanged: locationChangeTimer.restart()
+
+    // use a timer so we don't have to maximize for every single pixel
+    // - improves performance if the shell is run in a window, and can be resized
+    Timer {
+        id: maximizeTimer
+        running: false
+        interval: 100
+        onTriggered: plasmoid.Window.window.maximize()
+    }
+
+    // use a timer so that rotation events are faster (offload the panel movement to later, after everything is figured out)
+    Timer {
+        id: locationChangeTimer
+        running: false
+        interval: 100
+        onTriggered: plasmoid.Window.window.location = intendedWindowLocation
+    }
+
+    function setWindowProperties() {
         // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
-        
-        plasmoid.Window.window.offset = Qt.binding(() => {
-            return (MobileShellState.Shell.orientation === MobileShellState.Shell.Landscape) ? MobileShellState.TopPanelControls.panelHeight : 0;
-        });
-        plasmoid.Window.window.thickness = Qt.binding(() => {
-            // height of panel:
-            // - if navigation panel is enabled: PlasmaCore.Units.gridUnit * 2
-            // - if gestures only is enabled: 8 (just large enough for touch swipe to register, without blocking app content)
-            return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Units.gridUnit * 2 : 8
-        });
-        plasmoid.Window.window.length = Qt.binding(() => {
-            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
-        });
-        plasmoid.Window.window.maximumLength = Qt.binding(() => {
-            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
-        });
-        plasmoid.Window.window.minimumLength = Qt.binding(() => {
-            return MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait ? Screen.width : Screen.height;
-        });
-        plasmoid.Window.window.location = Qt.binding(() => {
-            if (MobileShellState.Shell.orientation === MobileShellState.Shell.Portrait) {
-                return PlasmaCore.Types.BottomEdge;
-            } else if (MobileShellState.Shell.orientation === MobileShellState.Shell.Landscape) {
-                return MobileShell.MobileShellSettings.navigationPanelEnabled ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
-            }
-        });
+        plasmoid.Window.window.offset = intendedWindowOffset;
+        plasmoid.Window.window.thickness = intendedWindowThickness;
+        plasmoid.Window.window.location = intendedWindowLocation;
+        plasmoid.Window.window.maximize();
     }
     
     Connections {
         target: plasmoid.Window.window
-        function onThicknessChanged() {
-            root.setBindings();
-        }
+
+        // HACK: There seems to be some component that overrides our initial bindings for the panel,
+        //   which is particularly problematic on first start (since the panel is misplaced)
+        // - We set an event to override any attempts to override our bindings.
         function onLocationChanged() {
-            root.setBindings();
+            if (plasmoid.Window.window.location !== root.intendedWindowLocation) {
+                root.setWindowProperties();
+            }
         }
     }
-    
-    Component.onCompleted: setBindings();
-    
-//BEGIN API implementation
 
-    Binding {
-        target: MobileShellState.TaskPanelControls
-        property: "isPortrait"
-        value: Screen.width <= Screen.height
-    }
-    Binding {
-        target: MobileShellState.TaskPanelControls
-        property: "panelHeight"
-        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? root.height : 0
-    }
-    Binding {
-        target: MobileShellState.TaskPanelControls
-        property: "panelWidth"
-        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? root.width : 0
-    }
-
-    Connections {
-        target: MobileShell.WindowUtil
-        function onAllWindowsMinimizedChanged() {
-            MobileShellState.HomeScreenControls.homeScreenVisible = MobileShell.WindowUtil.allWindowsMinimized
-        }
-    }
-    
-//END API implementation
+    Component.onCompleted: setWindowProperties();
 
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo

@@ -74,8 +74,14 @@ MobileShell.HomeScreen {
         HomeScreen {
             id: homescreen
             anchors.fill: parent
+
+            topMargin: root.topMargin
+            bottomMargin: root.bottomMargin
+            leftMargin: root.leftMargin
+            rightMargin: root.rightMargin
+
             opacity: (1 - searchWidget.openFactor)
-            
+
             // make the homescreen not interactable when task switcher or startup feedback is on
             interactive: !root.overlayShown
         }
@@ -86,6 +92,11 @@ MobileShell.HomeScreen {
             anchors.fill: parent
             
             visible: openFactor > 0
+
+            topMargin: root.topMargin
+            bottomMargin: root.bottomMargin
+            leftMargin: root.leftMargin
+            rightMargin: root.rightMargin
             
             // close search component when task switcher is shown or hidden
             Connections {

@@ -77,8 +77,8 @@ QtObject {
     // ~~ measurement constants ~~
     
     // dimensions of a real window on the screen
-    readonly property real windowHeight: taskSwitcher.height - MobileShellState.Shell.topMargin - MobileShellState.Shell.bottomMargin
-    readonly property real windowWidth: taskSwitcher.width - MobileShellState.Shell.leftMargin - MobileShellState.Shell.rightMargin
+    readonly property real windowHeight: taskSwitcher.height - taskSwitcher.topMargin - taskSwitcher.bottomMargin
+    readonly property real windowWidth: taskSwitcher.width - taskSwitcher.leftMargin - taskSwitcher.rightMargin
     
     // dimensions of the task previews
     readonly property real previewHeight: windowHeight * scalingFactor

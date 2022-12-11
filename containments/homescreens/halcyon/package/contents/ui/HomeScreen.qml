@@ -19,7 +19,12 @@ import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 Item {
     id: root
     
-    property bool interactive: true
+    required property real topMargin
+    required property real bottomMargin
+    required property real leftMargin
+    required property real rightMargin
+
+    required property bool interactive
     required property var searchWidget
     
     property alias page: swipeView.currentIndex
@@ -42,10 +47,10 @@ Item {
         interactive: root.interactive
         
         anchors.fill: parent
-        anchors.topMargin: MobileShellState.Shell.topMargin
-        anchors.bottomMargin: MobileShellState.Shell.bottomMargin
-        anchors.leftMargin: MobileShellState.Shell.leftMargin
-        anchors.rightMargin: MobileShellState.Shell.rightMargin
+        anchors.topMargin: root.topMargin
+        anchors.bottomMargin: root.bottomMargin
+        anchors.leftMargin: root.leftMargin
+        anchors.rightMargin: root.rightMargin
         
         Item {
             height: swipeView.height

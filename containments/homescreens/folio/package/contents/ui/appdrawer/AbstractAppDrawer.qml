@@ -106,7 +106,9 @@ Item {
                 OpenDrawerButton {
                     id: openDrawerButton
                     anchors {
+                        leftMargin: root.leftPadding
                         left: parent.left
+                        rightMargin: root.rightPadding
                         right: parent.right
                         bottom: parent.bottom
                     }

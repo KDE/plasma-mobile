@@ -78,6 +78,7 @@ Components.BaseItem {
             QuickSettings {
                 id: quickSettings
                 
+                mode: QuickSettings.ScrollView
                 width: column.width
                 implicitHeight: quickSettings.fullHeight
                 

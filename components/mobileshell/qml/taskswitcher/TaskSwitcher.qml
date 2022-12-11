@@ -27,6 +27,14 @@ Item {
     visible: false
     opacity: 0
 
+    /**
+     * Margins for the content (taking shell panels into account).
+     */
+    required property real topMargin
+    required property real bottomMargin
+    required property real leftMargin
+    required property real rightMargin
+
     // state object
     property var taskSwitcherState: TaskSwitcherState {
         taskSwitcher: root
@@ -201,10 +209,10 @@ Item {
         
         // provide shell margins
         anchors.fill: parent
-        anchors.leftMargin: MobileShellState.Shell.leftMargin
-        anchors.rightMargin: MobileShellState.Shell.rightMargin
-        anchors.bottomMargin: MobileShellState.Shell.bottomMargin
-        anchors.topMargin: MobileShellState.Shell.topMargin
+        anchors.leftMargin: root.leftMargin
+        anchors.rightMargin: root.rightMargin
+        anchors.bottomMargin: root.bottomMargin
+        anchors.topMargin: root.topMargin
         
         FlickContainer {
             id: flickable
@@ -216,6 +224,8 @@ Item {
             // the item is effectively anchored to the flickable bounds
             TaskList {
                 id: taskList
+                shellTopMargin: root.topMargin
+                shellBottomMargin: root.bottomMargin
                 
                 taskSwitcher: root
                 

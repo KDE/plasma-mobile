@@ -44,9 +44,18 @@ Item {
      * Whether a component is being shown on top of the homescreen within the same
      * window.
      */
-    property bool overlayShown: taskSwitcher.visible || startupFeedback.visible
+    readonly property bool overlayShown: taskSwitcher.visible || startupFeedback.visible
     
+    /**
+     * Margins for the homescreen, taking panels into account.
+     */
+    readonly property real topMargin: plasmoid.availableScreenRect.y
+    readonly property real bottomMargin: root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height)
+    readonly property real leftMargin: plasmoid.availableScreenRect.x
+    readonly property real rightMargin: root.width - (plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width)
+
     //BEGIN API implementation
+
     Connections {
         target: MobileShellState.HomeScreenControls
         
@@ -94,7 +103,7 @@ Item {
     }
 
 //END API implementation
-    
+
     Component.onCompleted: {
         // set API variables
         if (plasmoid.screen == 0) {
@@ -210,6 +219,11 @@ Item {
         id: taskSwitcher
         z: 999999
         
+        topMargin: root.topMargin
+        bottomMargin: root.bottomMargin
+        leftMargin: root.leftMargin
+        rightMargin: root.rightMargin
+
         tasksModel: TaskManager.TasksModel {
             groupMode: TaskManager.TasksModel.GroupDisabled
 

@@ -13,36 +13,6 @@ QtObject {
     id: delegate
 
     /**
-     * Top margin from the screen edge where application windows would display.
-     */
-    readonly property real topMargin: TopPanelControls.panelHeight
-    
-    /**
-     * Bottom margin from the screen edge where application windows would display.
-     */
-    readonly property real bottomMargin: TaskPanelControls.isPortrait ? TaskPanelControls.panelHeight : 0
-    
-    /**
-     * Left margin from the screen edge where application windows would display.
-     */
-    readonly property real leftMargin: 0
-    
-    /**
-     * Right margin from the screen edge where application windows would display.
-     */
-    readonly property real rightMargin: !TaskPanelControls.isPortrait ? TaskPanelControls.panelWidth : 0
-    
-    /**
-     * Orientation of the mobile device.
-     */
-    readonly property int orientation: TaskPanelControls.isPortrait ? Shell.Portrait : Shell.Landscape
-
-    enum Orientation {
-        Landscape,
-        Portrait
-    }
-    
-    /**
      * Whether the task switcher is open.
      */
     readonly property bool taskSwitcherVisible: HomeScreenControls.taskSwitcherVisible

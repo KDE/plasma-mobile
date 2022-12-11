@@ -97,6 +97,7 @@ Components.BaseItem {
                 Layout.topMargin: PlasmaCore.Units.smallSpacing
                 Layout.fillWidth: true
                 
+                mode: QuickSettings.Pages
                 actionDrawer: root.actionDrawer
                 minimizedViewProgress: 1 - root.minimizedToFullProgress
                 fullViewProgress: root.minimizedToFullProgress
