@@ -61,7 +61,11 @@ PlasmaCore.ColorScope {
         id: maximizeTimer
         running: false
         interval: 100
-        onTriggered: plasmoid.Window.window.maximize()
+        onTriggered: {
+            // maximize first, then we can apply offsets (otherwise they are overridden)
+            plasmoid.Window.window.maximize()
+            plasmoid.Window.window.offset = intendedWindowOffset;
+        }
     }
 
     // use a timer so that rotation events are faster (offload the panel movement to later, after everything is figured out)
@@ -74,10 +78,10 @@ PlasmaCore.ColorScope {
 
     function setWindowProperties() {
         // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
+        plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
         plasmoid.Window.window.offset = intendedWindowOffset;
         plasmoid.Window.window.thickness = intendedWindowThickness;
         plasmoid.Window.window.location = intendedWindowLocation;
-        plasmoid.Window.window.maximize();
     }
     
     Connections {
