@@ -91,6 +91,12 @@ PlasmaCore.ColorScope {
                 root.setWindowProperties();
             }
         }
+
+        function onThicknessChanged() {
+            if (plasmoid.Window.window.thickness !== root.intendedWindowThickness) {
+                root.setWindowProperties();
+            }
+        }
     }
 
     Component.onCompleted: setWindowProperties();
