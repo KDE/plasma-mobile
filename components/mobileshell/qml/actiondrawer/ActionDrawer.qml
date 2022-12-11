@@ -289,6 +289,7 @@ Item {
             width: root.width
             height: root.height
             
+            asynchronous: true
             sourceComponent: root.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
         }
         
