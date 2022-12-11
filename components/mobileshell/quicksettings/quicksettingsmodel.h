@@ -33,7 +33,8 @@ public:
     void classBegin() override;
     void componentComplete() override;
 
-    Q_SIGNAL void countChanged();
+Q_SIGNALS:
+    void countChanged();
 
 private:
     void loadQuickSettings();

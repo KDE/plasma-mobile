@@ -101,6 +101,7 @@ void QuickSettingsModel::loadQuickSettings()
     delete c;
 
     endResetModel();
+    Q_EMIT countChanged();
 }
 
 void QuickSettingsModel::availabilityChanged()
@@ -122,4 +123,6 @@ void QuickSettingsModel::availabilityChanged()
             endRemoveRows();
         }
     }
+
+    Q_EMIT countChanged();
 }
