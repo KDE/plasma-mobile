@@ -4,6 +4,7 @@
 [Desktop Entry]
 Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed ${CMAKE_INSTALL_FULL_BINDIR}/startplasmamobile
 TryExec=${CMAKE_INSTALL_FULL_BINDIR}/startplasmamobile
+Type=Application
 DesktopNames=KDE
 Name=Plasma Mobile
 Name[az]=Plasma Mobil
