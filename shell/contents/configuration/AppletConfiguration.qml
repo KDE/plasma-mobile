@@ -212,6 +212,7 @@ Rectangle {
                 Kirigami.NavigationTabButton {
                     icon.name: model.icon
                     text: model.name
+                    width: footerBar.buttonWidth
                     recolorIcon: false
                     QQC2.ButtonGroup.group: footerBar.tabGroup
                     
