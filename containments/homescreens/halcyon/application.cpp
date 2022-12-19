@@ -7,7 +7,6 @@
 #include <QQuickWindow>
 
 #include <KNotificationJobUiDelegate>
-#include <KService>
 
 Application::Application(QObject *parent, KService::Ptr service)
     : QObject{parent}

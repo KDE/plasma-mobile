@@ -8,7 +8,6 @@
 #include <QDebug>
 #include <QModelIndex>
 #include <QProcess>
-#include <QQuickItem>
 #include <QQuickWindow>
 
 #include <KApplicationTrader>

@@ -14,7 +14,6 @@
 #include <KService>
 #include <KSharedConfig>
 
-#include <Plasma/Applet>
 #include <PlasmaQuick/AppletQuickItem>
 
 const int MAX_FAVORITES = 5;
