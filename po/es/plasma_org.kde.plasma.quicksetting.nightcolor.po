@@ -1,0 +1,25 @@
+# Spanish translations for plasma_org.kde.plasma.quicksetting.nightcolor.po package.
+# Copyright (C) 2022 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Automatically generated, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_org\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2022-12-21 01:31+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.0\n"
+
+#: package/contents/ui/main.qml:14
+#, kde-format
+msgid "Night Color"
+msgstr "Color nocturno"
