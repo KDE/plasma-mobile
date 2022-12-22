@@ -31,7 +31,7 @@
             }
         ],
         "Description": "Power menu quick setting",
-        "Description[ca@valencia]": "Configuració ràpida del menú d'energia",
+        "Description[ca@valencia]": "Configuració ràpida del menú d'iniciada",
         "Description[ca]": "Configuració ràpida del menú d'engegada",
         "Description[en_GB]": "Power menu quick setting",
         "Description[es]": "Ajuste rápido del menú de energía",
@@ -55,7 +55,7 @@
         "License": "GPL",
         "Name": "Power Menu",
         "Name[az]": "Güc menyusu",
-        "Name[ca@valencia]": "Menú d'energia",
+        "Name[ca@valencia]": "Menú d'iniciada",
         "Name[ca]": "Menú d'engegada",
         "Name[en_GB]": "Power Menu",
         "Name[es]": "Menú de energía",
