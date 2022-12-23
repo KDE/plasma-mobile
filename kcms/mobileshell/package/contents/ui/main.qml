@@ -159,7 +159,7 @@ KCM.SimpleKCM {
                 MobileForm.FormComboBoxDelegate {
                     id: topRightActionDrawerModeDelegate
                     text: i18n("Top Right Drawer Mode")
-                    description: i18n("Mode when opening from from the top right.")
+                    description: i18n("Mode when opening from the top right.")
                     
                     model: ListModel {
                         // we can't use i18n with ListElement
