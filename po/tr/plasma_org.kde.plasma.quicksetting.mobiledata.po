@@ -1,0 +1,48 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Emir SARI <emir_sari@icloud.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2022-12-23 21:11+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.12.0\n"
+
+#: contents/ui/main.qml:10
+#, kde-format
+msgid "Mobile Data"
+msgstr "Taşınabilir Veri"
+
+#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#, kde-format
+msgid "Not Available"
+msgstr "Kullanılamıyor"
+
+#: contents/ui/main.qml:16
+#, kde-format
+msgid "APN needs to be configured in the settings"
+msgstr "Ayarlarda APN'in yapılandırılması gerekiyor"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "On"
+msgstr "Açık"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "Off"
+msgstr "Kapalı"
+
+#: contents/ui/main.qml:20
+#, kde-format
+msgid "No SIM inserted"
+msgstr "Takılı SIM yok"

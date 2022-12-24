@@ -1,0 +1,307 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Emir SARI <emir_sari@icloud.com>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2022-12-23 21:04+0300\n"
+"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.12.0\n"
+
+#: notifications/notificationfilemenu.cpp:109
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "İçeren Klasörü Aç"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "Ko&pyala"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "Konumu Kopyala"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "Özellikler"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "On"
+msgstr "Açık"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "Off"
+msgstr "Kapalı"
+
+#: qml/dataproviders/AudioProvider.qml:171
+#, kde-format
+msgid "Audio"
+msgstr "Ses"
+
+#: qml/dataproviders/AudioProvider.qml:175
+#, kde-format
+msgid "Increase Volume"
+msgstr "Ses Düzeyini Artır"
+
+#: qml/dataproviders/AudioProvider.qml:182
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Ses Düzeyini Azalt"
+
+#: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Mute"
+msgstr "Sessize Al"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:15
+#, kde-format
+msgid "SIM Locked"
+msgstr "SIM Kilitli"
+
+#: qml/osd/volume/AudioApplet.qml:73
+#, kde-format
+msgid "Outputs"
+msgstr "Çıkışlar"
+
+#: qml/osd/volume/AudioApplet.qml:103
+#, kde-format
+msgid "Inputs"
+msgstr "Girişler"
+
+#: qml/osd/volume/AudioApplet.qml:134
+#, kde-format
+msgid "Playback Streams"
+msgstr "Çalma Akışları"
+
+#: qml/osd/volume/AudioApplet.qml:187
+#, kde-format
+msgid "Recording Streams"
+msgstr "Kayıt Akışları"
+
+#: qml/osd/volume/DeviceListItem.qml:25
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/osd/volume/DeviceListItem.qml:34
+#, kde-format
+msgid "Device name not found"
+msgstr "Aygıt adı bulunamadı"
+
+#: qml/osd/volume/ListItemBase.qml:104
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "%1 ek seçeneklerini göster"
+
+#: qml/osd/volume/ListItemBase.qml:160
+#, kde-format
+msgctxt "Accessibility data on volume slider"
+msgid "Adjust volume for %1"
+msgstr "%1 ses düzeyini ayarla"
+
+#: qml/osd/volume/ListItemBase.qml:242
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%​%1"
+
+#: qml/osd/volume/ListItemBase.qml:257
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "%​100"
+
+#: qml/osd/volume/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "Bildirim Sesleri"
+
+#: qml/osd/volume/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/osd/volume/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "Akış adı bulunamadı"
+
+#: qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Unmute"
+msgstr "Sesini Aç"
+
+#: qml/osd/volume/VolumeOSD.qml:132
+#, kde-format
+msgid "100%"
+msgstr "%​100"
+
+#: qml/osd/volume/VolumeOSD.qml:142
+#, kde-format
+msgctxt "Percentage value"
+msgid "%1%"
+msgstr "%​%1"
+
+#: qml/osd/volume/VolumeOSD.qml:162
+#, kde-format
+msgid "Open audio settings"
+msgstr "Ses ayarlarını aç"
+
+#: qml/osd/volume/VolumeOSD.qml:175
+#, kde-format
+msgid "Audio Settings"
+msgstr "Ses Ayarları"
+
+#: qml/osd/volume/VolumeOSD.qml:182
+#, kde-format
+msgid "Toggle showing audio streams"
+msgstr "Ses akışlarını göstermeyi aç/kapat"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#, kde-format
+msgid "%1%"
+msgstr "%​%1"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:175
+#, kde-format
+msgid "Search…"
+msgstr "Ara…"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
+#, kde-format
+msgid "No media playing"
+msgstr "Çalınan ortam yok"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
+#, kde-format
+msgid "Previous track"
+msgstr "Önceki parça"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
+#, kde-format
+msgid "Play or Pause media"
+msgstr "Ortamı Çal/Duraklat"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
+#, kde-format
+msgid "Next track"
+msgstr "Sonraki parça"
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:55
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "Yanıtla"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "Yanıt yaz…"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "Gönder"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:176
+#, kde-format
+msgid "Notification service not available"
+msgstr "Bildirim hizmeti kullanılamıyor"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:185
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "Bildirimler şu anda '%1 %2' tarafından sağlanıyor"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:321
+#, kde-format
+msgid "Show Fewer"
+msgstr "Daha Az Göster"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:323
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "%1 Daha Çok Göster"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:382
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Tüm Bildirimleri Temizle"
+
+#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#, kde-format
+msgid "More Options…"
+msgstr "Daha Çok Seçenek…"
+
+#: qml/widgets/notifications/util.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1 (Duraklatıldı)"
+
+#: qml/widgets/notifications/util.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1 (Başarısız)"
+
+#: qml/widgets/notifications/util.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr "İş Başarısız"
+
+#: qml/widgets/notifications/util.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1 (Bitti)"
+
+#: qml/widgets/notifications/util.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr "İş Bitti"
+
+#: qml/widgets/notifications/util.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "%1 dk önce"
+
+#: qml/widgets/notifications/util.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "%1 sn kaldı"
+
+#: qml/widgets/notifications/util.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "%1 dk kaldı"
+
+#: qml/widgets/notifications/util.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "%1 sa kaldı"
