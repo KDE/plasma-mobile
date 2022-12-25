@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-20 11:45+0200\n"
-"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
+"PO-Revision-Date: 2022-12-24 08:47+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -106,7 +106,7 @@ msgstr "Режим верхньої лівої висувної панелі"
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "Режим відкриття з від верхнього лівого кута."
+msgstr "Режим відкриття від верхнього лівого кута."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -114,10 +114,9 @@ msgid "Top Right Drawer Mode"
 msgstr "Режим верхньої правої висувної панелі"
 
 #: package/contents/ui/main.qml:162
-#, fuzzy, kde-format
-#| msgid "Mode when opening from from the top right."
+#, kde-format
 msgid "Mode when opening from the top right."
-msgstr "Режим відкриття з від верхнього правого кута."
+msgstr "Режим відкриття від верхнього правого кута."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format

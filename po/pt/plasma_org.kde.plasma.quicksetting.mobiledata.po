@@ -11,11 +11,12 @@ msgstr ""
 "PO-Revision-Date: 2022-12-23 15:13+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
-"Language: \n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POFile-SpellExtra: APN\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: contents/ui/main.qml:10
 #, kde-format

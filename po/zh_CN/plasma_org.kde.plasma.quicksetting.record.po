@@ -1,42 +1,42 @@
-# Copyright (C) YEAR This file is copyright:
-# This file is distributed under the same license as the plasma-mobile package.
-#
-# Alexander Yavorsky <kekcuha@gmail.com>, 2022.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma-mobile\n"
+"Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2022-12-23 11:25+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
-"Language: ru\n"
+"PO-Revision-Date: 2022-12-24 11:42\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
-"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/plasma-mobile/plasma_org.kde.plasma."
+"quicksetting.record.pot\n"
+"X-Crowdin-File-ID: 41311\n"
 
 #: package/contents/ui/main.qml:17
 #, kde-format
 msgid "Record Screen"
-msgstr "Запись экрана"
+msgstr ""
 
 #: package/contents/ui/main.qml:19
 #, kde-format
 msgid "Recording…"
-msgstr "Выполняется запись…"
+msgstr ""
 
 #: package/contents/ui/main.qml:21
 #, kde-format
 msgid "Writing…"
-msgstr "Запись…"
+msgstr ""
 
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Tap to start recording"
-msgstr "Нажмите чтобы начать запись"
+msgstr ""
 
 #: package/contents/ui/main.qml:27
 #, kde-format
@@ -46,7 +46,7 @@ msgstr ""
 #: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Please wait…"
-msgstr "Подождите…"
+msgstr ""
 
 #: package/contents/ui/main.qml:38
 #, kde-format

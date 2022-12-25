@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2022-12-21 01:27+0100\n"
+"PO-Revision-Date: 2022-12-24 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -43,12 +43,12 @@ msgstr "Propiedades"
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "On"
-msgstr ""
+msgstr "Activado"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "Desactivado"
 
 #: qml/dataproviders/AudioProvider.qml:171
 #, kde-format
@@ -88,12 +88,12 @@ msgstr "Entradas"
 #: qml/osd/volume/AudioApplet.qml:134
 #, kde-format
 msgid "Playback Streams"
-msgstr ""
+msgstr "Emisiones en reproducción"
 
 #: qml/osd/volume/AudioApplet.qml:187
 #, kde-format
 msgid "Recording Streams"
-msgstr ""
+msgstr "Emisiones en grabación"
 
 #: qml/osd/volume/DeviceListItem.qml:25
 #, kde-format
@@ -233,7 +233,7 @@ msgstr "Servicio de notificaciones no disponible"
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
-msgstr ""
+msgstr "Notificaciones proporcionadas en la actualidad por «%1 %2»"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:321
 #, kde-format

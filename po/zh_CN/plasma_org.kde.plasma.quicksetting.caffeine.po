@@ -1,0 +1,39 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2022-12-24 11:42\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/plasma-mobile/plasma_org.kde.plasma."
+"quicksetting.caffeine.pot\n"
+"X-Crowdin-File-ID: 41305\n"
+
+#: contents/ui/main.qml:11
+#, kde-format
+msgid "Caffeine"
+msgstr ""
+
+#: contents/ui/main.qml:13
+#, kde-format
+msgid "Tap to disable sleep suspension"
+msgstr ""
+
+#: contents/ui/main.qml:13
+#, kde-format
+msgid "Tap to suspend sleep"
+msgstr ""
+
+#: contents/ui/main.qml:36
+#, kde-format
+msgid "Plasma Mobile has enabled system-wide inhibition"
+msgstr ""

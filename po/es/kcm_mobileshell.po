@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-21 01:23+0100\n"
+"PO-Revision-Date: 2022-12-24 21:08+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -44,6 +44,7 @@ msgstr "Animaciones"
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr ""
+"Si está desactivado, las animaciones se reducirán tanto como sea posible."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
@@ -53,12 +54,12 @@ msgstr "Panel de navegación"
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "Modo de solo gestos"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr ""
+msgstr "Si se debe ocultar el panel de navegación."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
@@ -68,17 +69,17 @@ msgstr "Selector de tareas"
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr ""
+msgstr "Mostrar vistas previas de aplicaciones"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr ""
+msgstr "Desactivar esto puede ayudar a mejorar el rendimiento."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Cajón de acciones"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
@@ -91,7 +92,7 @@ msgstr "Preferencias rápidas"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Modo anclado"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
@@ -102,27 +103,27 @@ msgstr "Modo expandido"
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Modo de cajón superior izquierdo"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Modo al abrir desde la parte superior izquierda."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Modo de cajón superior derecho"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Modo al abrir desde la parte superior derecha."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr ""
+msgstr "Personalizar el orden de los ajustes rápidos en el panel desplegable."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
@@ -132,35 +133,35 @@ msgstr ""
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr ""
+msgstr "Intensidad de la vibración"
 
 #: package/contents/ui/VibrationForm.qml:50
-#, kde-format
+#, fuzzy, kde-format
 msgid "How intense shell vibrations should be."
-msgstr ""
+msgstr "Intensidad que deberían tener las vibraciones."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr ""
+msgstr "Baja"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr ""
+msgstr "Media"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr ""
+msgstr "Alta"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr ""
+msgstr "Duración de la vibración"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
@@ -171,19 +172,19 @@ msgstr ""
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr ""
+msgstr "Larga"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr ""
+msgstr "Media"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr ""
+msgstr "Corta"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
@@ -191,3 +192,5 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"Las vibraciones del teclado se controlan de forma separada en el módulo de "
+"ajustes del teclado."
