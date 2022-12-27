@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-24 21:08+0100\n"
+"PO-Revision-Date: 2022-12-26 11:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr ""
+msgstr "Intérprete de órdenes"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
@@ -33,7 +33,7 @@ msgstr "General"
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "Vibraciones del intérprete de órdenes"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
@@ -128,7 +128,7 @@ msgstr "Personalizar el orden de los ajustes rápidos en el panel desplegable."
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Si se deben activar las vibraciones en el intérprete de órdenes"
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
@@ -136,9 +136,9 @@ msgid "Vibration Intensity"
 msgstr "Intensidad de la vibración"
 
 #: package/contents/ui/VibrationForm.qml:50
-#, fuzzy, kde-format
+#, kde-format
 msgid "How intense shell vibrations should be."
-msgstr "Intensidad que deberían tener las vibraciones."
+msgstr "Intensidad que deben tener las vibraciones del intérprete de órdenes."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
@@ -166,7 +166,7 @@ msgstr "Duración de la vibración"
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Duración que deben tener las vibraciones del intérprete de órdenes."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
