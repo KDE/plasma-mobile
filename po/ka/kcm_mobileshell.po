@@ -1,194 +1,192 @@
-# Xavier Besnard <xavier.besnard@neuf.fr>, 2022.
-# Xavier BESNARD <xavier.besnard]neuf.fr>, 2022.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-27 22:01+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
-"Language-Team: fr\n"
-"Language: fr\n"
+"PO-Revision-Date: 2022-12-28 08:46+0100\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "Shell"
+msgstr "გარსი"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr "Général"
+msgstr "მთავარი"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr "Vibrations du shell"
+msgstr "ვიბრაციები გარსიდან"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr "Animations"
+msgstr "ანიმაციები"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
-"Si cette option est désactivée, les animations seront réduites autant que "
-"possible."
+msgstr "თუ გამორთულია, ანიმაციები მაქსიმალურად შემცირდება."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr "Panneau de navigation"
+msgstr "ნავიგაციის პანელი"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr "Mode « Gestes uniquement »"
+msgstr "მხოლოდ-ჟესტების რეჟიმი"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr "Masquer ou afficher le panneau de navigation."
+msgstr "ნავიგაციის პანელის დამალვის ჩართ/გამორთ."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr "Commutateur de tâches"
+msgstr "ამოცანების გადამრთველი"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr "Afficher les aperçus des applications"
+msgstr "აპლიკაციების მინიატურების ჩვენება"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr "La désactivation de ceci peut améliorer les performances."
+msgstr "ამისმა გამორთვამ შეიძლება წარმადობას უშველოს."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr "Tiroir à actions"
+msgstr "ქმედებების უჯრა"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
 #: package/contents/ui/QuickSettingsForm.qml:34
 #, kde-format
 msgid "Quick Settings"
-msgstr "Configuration rapide"
+msgstr "სწრაფი მორგება"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr "Mode épinglé"
+msgstr "მიჭიკარტებული  რეჟიმი"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "Mode étendu"
+msgstr "გაფართოებული რეჟიმი"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr "Mode avec tiroir supérieur gauche"
+msgstr "ზედა მარცხენა უჯრის რეჟიმი"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "Mode à l'ouverture à partir du coté gauche supérieur."
+msgstr "ზედა მარცხენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr "Mode avec tiroir supérieur droit"
+msgstr "ზედა მარჯვენა უჯრის რეჟიმი"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr "Mode à l'ouverture à partir du coté droit supérieur."
+msgstr "ზედა მარჯვენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr ""
-"Personnaliser l’ordre de la configuration rapide dans le panneau déroulant."
+msgstr "ჩამოსაწევ პანელში ნაჩვენები სწრაფი პარამეტრების მიმდევრობის მორგება."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "Définit s’il faut activer ou non les vibrations dans le shell."
+msgstr "ჩართულია თუ არა ვიბრაცია გარსიდან."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr "Intensité des vibrations"
+msgstr "ვიბრაციის ინტენსივობა"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr "De quelle intensité devraient être les vibrations du shell."
+msgstr "როგორი ინტენსიური იქნება გარსის ვიბრაცია."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "Faible"
+msgstr "დაბალი"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "Moyen"
+msgstr "საშუალო"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "Élevé"
+msgstr "მაღალი"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr "Durée des vibrations"
+msgstr "ვიბრაციის ხანგრძლივობა"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "De quelle longueur devrait être la vibration."
+msgstr "რამდენი ხანი გაგრძელდება ვიბრაცია."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "Long"
+msgstr "გრძელი"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "Moyen"
+msgstr "საშუალო"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "Court"
+msgstr "მოკლე"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr ""
-"Les vibrations du clavier sont contrôlées séparément dans le module de "
-"configuration du clavier."
+msgstr "კლავიატურის ვიბრაცია ცალკე, კლავიატურის მორგების მოდულში კონტროლდება."
