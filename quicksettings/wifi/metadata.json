@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Wi-Fi quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida de la Wi-Fi per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la Wi-Fi per al Plasma Mobile",
         "Description[es]": "Ajuste rápido del wifi para Plasma Mobile",
         "Description[eu]": "Wi-Fi ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide du Wifi pour Plasma Mobile",
         "Description[ka]": "Wi-Fi-ის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling van Wi-Fi voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve Wi-Fi za Plasma Mobile",

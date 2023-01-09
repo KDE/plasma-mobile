@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Quick setting to suspend system sleep for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida per a suspendre el repòs del sistema per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida per suspendre el repòs del sistema per al Plasma Mobile",
         "Description[es]": "Ajuste rápido para suspender el reposo del sistema para Plasma Mobile",
         "Description[eu]": "Sistemaren loa geldiarazteko ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide pour annuler la veille du système pour Plasma Mobile",
         "Description[ka]": "სისტემის ძილის შეწყვეტის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling systeemslaap te onderbreken voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve za preprečevanje sistemskega dremeža za Plasma Mobile",

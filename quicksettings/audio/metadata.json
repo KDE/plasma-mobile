@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Audio quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida de l'àudio per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de l'àudio per al Plasma Mobile",
         "Description[es]": "Ajuste rápido del sonido para Plasma Mobile",
         "Description[eu]": "Audioaren ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide de l'audio pour Plasma Mobile",
         "Description[ka]": "ხმის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling van audio voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve zvoka za Plasma Mobile",

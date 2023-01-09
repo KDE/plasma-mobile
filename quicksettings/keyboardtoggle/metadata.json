@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Quick setting for keyboard toggle for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida del canvi de teclat per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del canvi de teclat per al Plasma Mobile",
         "Description[es]": "Ajuste rápido para conmutar el teclado para Plasma Mobile",
         "Description[eu]": "Teklatua txandakatzeko ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide pour le basculement de clavier pour Plasma Mobile",
         "Description[ka]": "პარამეტრების აპლიკაციის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling voor omschakelen van toetsenbord voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve za preklop tipkovnice za Plasma Mobile",

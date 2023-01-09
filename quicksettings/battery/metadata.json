@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Battery quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida de la bateria per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la bateria per al Plasma Mobile",
         "Description[es]": "Ajuste rápido de la batería para Plasma Mobile",
         "Description[eu]": "Bateriaren ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide de la batterie pour Plasma Mobile",
         "Description[ka]": "ელემენტის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling van batterij voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve baterije za Plasma Mobile",

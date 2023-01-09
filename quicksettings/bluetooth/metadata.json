@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Bluetooth quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida de Bluetooth per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del Bluetooth per al Plasma Mobile",
         "Description[es]": "Ajuste rápido del Bluetooth para Plasma Mobile",
         "Description[eu]": "Bluetooth-aren ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide de Bluetooth pour Plasma Mobile",
         "Description[ka]": "ბლუთუზის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling van bluetooth voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve Bluetooth za Plasma Mobile",

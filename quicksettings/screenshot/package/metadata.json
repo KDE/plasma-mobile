@@ -31,9 +31,11 @@
             }
         ],
         "Description": "Screenshot quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida de la captura de pantalla per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la captura de pantalla per al Plasma Mobile",
         "Description[es]": "Ajuste rápido de la captura de pantalla para Plasma Mobile",
         "Description[eu]": "Pantaila-argazkietarako ezarpen azkarra Plasma Mugikorrerako",
+        "Description[fr]": "Configuration rapide des copies d'écran pour Plasma Mobile",
         "Description[ka]": "ეკრანის ანაბეჭდის სწრაფი მორგების პარამეტრი Plasma Mobile-სთვის",
         "Description[nl]": "Snelle instelling van schermafdruk voor Plasma Mobile",
         "Description[sl]": "Hitre nastavitve slike zaslona za Plasma Mobile",
