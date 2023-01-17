@@ -169,7 +169,7 @@ msgstr "Obri la configuració d'àudio"
 #: qml/osd/volume/VolumeOSD.qml:175
 #, kde-format
 msgid "Audio Settings"
-msgstr "Configuració d'àudio"
+msgstr "Configureu l'àudio"
 
 #: qml/osd/volume/VolumeOSD.qml:182
 #, kde-format
