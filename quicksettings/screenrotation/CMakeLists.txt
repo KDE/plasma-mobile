@@ -4,8 +4,8 @@
 qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KScreen.xml)
 
 set(screenrotationplugin_SRCS
-    screenrotationplugin.cpp
-    screenrotationutil.cpp
+    screenrotationplugin.cpp screenrotationplugin.h
+    screenrotationutil.cpp screenrotationutil.h
     ${DBUS_SRCS}
 )
 

@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-kcoreaddons_add_plugin(kcm_mobileshell SOURCES kcm.cpp INSTALL_NAMESPACE "plasma/kcms/systemsettings")
+kcoreaddons_add_plugin(kcm_mobileshell SOURCES kcm.cpp kcm.h INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobileshell
     Qt::Core

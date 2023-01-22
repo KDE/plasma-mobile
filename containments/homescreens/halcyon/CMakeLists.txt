@@ -3,11 +3,11 @@
 
 set(homescreen_SRCS
     homescreen.cpp
-    application.cpp
-    applicationfolder.cpp
-    applicationlistmodel.cpp
-    pinnedmodel.cpp
-    windowlistener.cpp
+    application.cpp application.h
+    applicationfolder.cpp applicationfolder.h
+    applicationlistmodel.cpp applicationlistmodel.h
+    pinnedmodel.cpp pinnedmodel.h
+    windowlistener.cpp windowlistener.h
 )
 
 add_library(plasma_containment_phone_homescreen_halcyon MODULE ${homescreen_SRCS})

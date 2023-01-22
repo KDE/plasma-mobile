@@ -5,8 +5,8 @@ set_source_files_properties(${KWIN_COLORCORRECT_INTERFACE} PROPERTIES NO_NAMESPA
 qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_COLORCORRECT_INTERFACE})
 
 set(nightcolorplugin_SRCS
-    nightcolorplugin.cpp
-    nightcolorutil.cpp
+    nightcolorplugin.cpp nightcolorplugin.h
+    nightcolorutil.cpp nightcolorutil.h
     enum.h
     ${DBUS_SRCS}
 )

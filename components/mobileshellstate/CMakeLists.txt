@@ -5,7 +5,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/..)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
                                  
 set(mobileshellstateplugin_SRCS
-    mobileshellstateplugin.cpp
+    mobileshellstateplugin.cpp mobileshellstateplugin.h
 )
 if (QT_MAJOR_VERSION STREQUAL "5")
     if(QUICK_COMPILER)

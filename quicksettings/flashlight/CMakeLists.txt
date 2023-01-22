@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set(flashlightplugin_SRCS
-    flashlightplugin.cpp
-    flashlightutil.cpp
+    flashlightplugin.cpp flashlightplugin.h
+    flashlightutil.cpp flashlightutil.h
     ${DBUS_SRCS}
 )
 

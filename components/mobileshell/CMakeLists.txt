@@ -5,19 +5,19 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/..)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
                                  
 set(mobileshellplugin_SRCS
-    mobileshellplugin.cpp
-    mobileshellsettings.cpp
-    shellutil.cpp
-    windowutil.cpp
-    components/direction.cpp
-    quicksettings/quicksetting.cpp
-    quicksettings/paginatemodel.cpp
+    mobileshellplugin.cpp mobileshellplugin.h
+    mobileshellsettings.cpp mobileshellsettings.h
+    shellutil.cpp shellutil.h
+    windowutil.cpp windowutil.h
+    components/direction.cpp components/direction.h
+    quicksettings/quicksetting.cpp quicksettings/quicksetting.h
+    quicksettings/paginatemodel.cpp quicksettings/paginatemodel.h
     quicksettings/quicksettingsmodel.cpp
-    quicksettings/savedquicksettings.cpp
-    quicksettings/savedquicksettingsmodel.cpp
-    notifications/notificationthumbnailer.cpp
-    notifications/notificationfilemenu.cpp
-    taskswitcher/displaysmodel.cpp
+    quicksettings/savedquicksettings.cpp quicksettings/savedquicksettings.h
+    quicksettings/savedquicksettingsmodel.cpp quicksettings/savedquicksettingsmodel.h
+    notifications/notificationthumbnailer.cpp notifications/notificationthumbnailer.h
+    notifications/notificationfilemenu.cpp notifications/notificationfilemenu.h
+    taskswitcher/displaysmodel.cpp taskswitcher/displaysmodel.h
 )
 if (QT_MAJOR_VERSION STREQUAL "5")
     if(QUICK_COMPILER)

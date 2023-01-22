@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set(recordplugin_SRCS
-    recordplugin.cpp
-    recordutil.cpp
+    recordplugin.cpp recordplugin.h
+    recordutil.cpp recordutil.h
 )
 
 add_library(recordplugin ${recordplugin_SRCS})

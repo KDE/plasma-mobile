@@ -4,8 +4,8 @@
 qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.KWin.ScreenShot2.xml)
 
 set(screenshotplugin_SRCS
-    screenshotplugin.cpp
-    screenshotutil.cpp
+    screenshotplugin.cpp screenshotplugin.h
+    screenshotutil.cpp screenshotutil.h
     ${DBUS_SRCS}
 )
 
