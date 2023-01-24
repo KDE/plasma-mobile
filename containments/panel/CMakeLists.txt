@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set(phonepanel_SRCS
-    phonepanel.cpp phonepanel.h
+    phonepanel.cpp
 )
 
 add_library(plasma_applet_phonepanel MODULE ${phonepanel_SRCS})

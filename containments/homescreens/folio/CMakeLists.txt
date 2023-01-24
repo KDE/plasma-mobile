@@ -3,8 +3,8 @@
 
 set(homescreen_SRCS
     homescreen.cpp
-    desktopmodel.cpp desktopmodel.h
-    applicationlistmodel.cpp applicationlistmodel.h
+    desktopmodel.cpp
+    applicationlistmodel.cpp
 )
 
 add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})

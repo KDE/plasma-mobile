@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 set(powermenuplugin_SRCS
-    powermenuplugin.cpp powermenuplugin.h
-    powermenuutil.cpp powermenuutil.h
+    powermenuplugin.cpp
+    powermenuutil.cpp
 )
 
 add_library(powermenuplugin ${powermenuplugin_SRCS})
