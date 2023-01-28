@@ -1,0 +1,74 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# giovanni <g.sora@tiscali.it>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"PO-Revision-Date: 2023-01-27 12:09+0100\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.1\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr ""
+"Modificationes de disposition ha essite restringite per le administrator de "
+"systema"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+msgid "General"
+msgstr "General"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+msgid "Homescreen Layout"
+msgstr "Disposition de schermo initial (Homescreen)"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+msgid "The homescreen layout to use."
+msgstr "Le disposition de schermo initial a usar."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+msgid "Wallpaper Plugin"
+msgstr "Plugin de tapete de papiro"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+msgid "The wallpaper plugin to use."
+msgstr "Le plugin de tapete de papiro a usar."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Wallpaper Plugins"
+msgstr "Plugins de tapete de papiro"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+msgid "Get New Plugins…"
+msgstr "Obtene nove plugins…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+msgid "Layout changes must be applied before other changes can be made"
+msgstr ""
+"Cambiamentos  de disposition debe esser applicate ante altere modificationes "
+"pote esser facite"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+msgid "Apply now"
+msgstr "Applica hora"
+
+#: contents/configuration/ContainmentConfiguration.qml:32
+msgid "Wallpaper"
+msgstr "Tapete de papiro"
+
+#: contents/configuration/ContainmentConfiguration.qml:95
+msgid "Change Wallpaper"
+msgstr "Campia tapete de papiro"
+
+#: contents/configuration/ContainmentConfiguration.qml:113
+msgid "Configure"
+msgstr "Configura"
