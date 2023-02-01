@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2023-01-27 12:21+0100\n"
+"PO-Revision-Date: 2023-01-31 23:05+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -42,6 +42,8 @@ msgstr "Animationes"
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr ""
+"Si isto es of (dishabilitate) , animationes essera reducite le plus "
+"possibile."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
@@ -72,11 +74,12 @@ msgstr "Monstra Vistas preliminar de applicationes"
 #, kde-format
 msgid "Turning this off may help improve performance."
 msgstr ""
+"Poner isto a off (dishabilitar lo) pote ajutar a meliorar prestationes."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Designator de action"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
@@ -89,38 +92,39 @@ msgstr "Preferentias rapide"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Modo attachate"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "Modo expandite"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Modo de designator a sinistra in alto"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Modo quando aperir ex le sinistra in alto."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Modo de designator a dextera in alto"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Modo quando aperir ex le dextera in alto."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
 msgstr ""
+"Personaliza le ordine de preferentias rapide in le pannello de abbassar"
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
@@ -130,7 +134,7 @@ msgstr "Si ha vibrationes habilitate in le concha (shell)."
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr ""
+msgstr "Intensitate de Vibration"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
