@@ -55,6 +55,7 @@
         "Description[tr]": "Plasma Mobile için üst panel",
         "Description[uk]": "Верхня панель для мобільної Плазми",
         "Description[x-test]": "xxTop panel for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的顶部面板",
         "Id": "org.kde.phone.panel",
         "License": "GPLv2+",
         "Name": "Phone Panel",

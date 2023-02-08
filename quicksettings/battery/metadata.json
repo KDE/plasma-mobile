@@ -49,6 +49,7 @@
         "Description[tr]": "Plasma Mobile pil tez ayarı",
         "Description[uk]": "Швидке налаштовування акумулятора для Мобільної Плазми",
         "Description[x-test]": "xxBattery quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的电池快捷设置",
         "Icon": "battery-full",
         "Id": "org.kde.plasma.quicksetting.battery",
         "License": "GPL-2.0+",

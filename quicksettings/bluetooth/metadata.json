@@ -49,6 +49,7 @@
         "Description[tr]": "Plasma Mobile Bluetooth tez ayarı",
         "Description[uk]": "Швидке налаштовування Bluetooth для Мобільної Плазми",
         "Description[x-test]": "xxBluetooth quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的蓝牙快捷设置",
         "Icon": "network-bluetooth",
         "Id": "org.kde.plasma.quicksetting.bluetooth",
         "License": "GPL-2.0+",

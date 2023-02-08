@@ -49,6 +49,7 @@
         "Description[tr]": "Plasma Mobile sistem uykusunu askıya alma tez ayarı",
         "Description[uk]": "Швидке налаштовування призупинення роботи системи для Мобільної Плазми",
         "Description[x-test]": "xxQuick setting to suspend system sleep for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的暂停息屏快捷设置",
         "Icon": "system-suspend-hibernate",
         "Id": "org.kde.plasma.quicksetting.caffeine",
         "License": "GPL",
@@ -83,7 +84,7 @@
         "Name[tr]": "Caffeine",
         "Name[uk]": "Кофеїн",
         "Name[x-test]": "xxCaffeinexx",
-        "Name[zh_CN]": "Caffeine",
+        "Name[zh_CN]": "保持亮屏",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

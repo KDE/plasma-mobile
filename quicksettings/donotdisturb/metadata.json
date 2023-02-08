@@ -49,6 +49,7 @@
         "Description[tr]": "Plasma Mobile rahatsız etme kipini açma/kapatma tez ayarı",
         "Description[uk]": "Швидке встановлення режиму «не турбувати» для Мобільної Плазми",
         "Description[x-test]": "xxQuick setting to toggle do not disturb mode for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的勿扰模式快捷设置",
         "Icon": "notifications",
         "Id": "org.kde.plasma.quicksetting.donotdisturb",
         "License": "GPL",
@@ -75,6 +76,7 @@
         "Name[tr]": "Rahatsız Etme",
         "Name[uk]": "Не турбувати",
         "Name[x-test]": "xxDo Not Disturbxx",
+        "Name[zh_CN]": "勿扰模式",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
