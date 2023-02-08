@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2023-01-12 10:31\n"
+"PO-Revision-Date: 2023-02-07 11:06\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,46 +14,46 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/plasma-mobile/plasma_org.kde.plasma."
+"X-Crowdin-File: /kf5-stable/messages/plasma-mobile/plasma_org.kde.plasma."
 "quicksetting.record.pot\n"
-"X-Crowdin-File-ID: 41311\n"
+"X-Crowdin-File-ID: 41645\n"
 
 #: package/contents/ui/main.qml:17
 #, kde-format
 msgid "Record Screen"
-msgstr ""
+msgstr "屏幕录像"
 
 #: package/contents/ui/main.qml:19
 #, kde-format
 msgid "Recording…"
-msgstr ""
+msgstr "正在录屏…"
 
 #: package/contents/ui/main.qml:21
 #, kde-format
 msgid "Writing…"
-msgstr ""
+msgstr "正在写入…"
 
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Tap to start recording"
-msgstr ""
+msgstr "点击开始录屏"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Screen is being captured…"
-msgstr ""
+msgstr "正在捕获屏幕内容…"
 
 #: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Please wait…"
-msgstr ""
+msgstr "请稍候…"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording"
-msgstr ""
+msgstr "新建屏幕录像"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording saved in %1"
-msgstr ""
+msgstr "新屏幕录像已保存到 %1"
