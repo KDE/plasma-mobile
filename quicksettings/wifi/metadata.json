@@ -50,6 +50,7 @@
         "Description[tr]": "Plasma Mobile Wi-Fi tez ayarı",
         "Description[uk]": "Швидке налаштовування Wi-Fi для Мобільної Плазми",
         "Description[x-test]": "xxWi-Fi quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的 Wi-Fi 快捷设置",
         "Icon": "network-wireless-signal",
         "Id": "org.kde.plasma.quicksetting.wifi",
         "License": "GPL-2.0+",
@@ -82,7 +83,7 @@
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "Wi-Fi",
         "Name[x-test]": "xxWi-Fixx",
-        "Name[zh_CN]": "无线网络",
+        "Name[zh_CN]": "Wi-Fi",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

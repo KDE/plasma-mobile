@@ -55,6 +55,7 @@
         "Description[tr]": "Plasma Mobile için dolaşım paneli",
         "Description[uk]": "Панель навігації для мобільної Плазми",
         "Description[x-test]": "xxNavigation panel for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma 移动版导航面板",
         "Id": "org.kde.phone.taskpanel",
         "License": "GPLv2+",
         "Name": "Phone Task panel",

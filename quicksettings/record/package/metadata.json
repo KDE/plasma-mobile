@@ -48,6 +48,7 @@
         "Description[tr]": "Plasma Mobile ekran kaydetme tez ayarı",
         "Description[uk]": "Швидке налаштовування запису з екрана для Мобільної Плазми",
         "Description[x-test]": "xxScreen recording quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的屏幕录像快捷设置",
         "Icon": "media-record",
         "Id": "org.kde.plasma.quicksetting.record",
         "License": "GPL-2.0+",
@@ -73,6 +74,7 @@
         "Name[tr]": "Ekranı Kaydet",
         "Name[uk]": "Запис з екрана",
         "Name[x-test]": "xxRecord Screenxx",
+        "Name[zh_CN]": "屏幕录像",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

@@ -50,6 +50,7 @@
         "Description[tr]": "Plasma Mobile ayarlar uygulaması tez ayarı",
         "Description[uk]": "Швидке налаштовування параметрів програм для Мобільної Плазми",
         "Description[x-test]": "xxSettings application quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的设置页面快捷设置",
         "Icon": "settings-configure",
         "Id": "org.kde.plasma.quicksetting.settingsapp",
         "License": "GPL-2.0+",
