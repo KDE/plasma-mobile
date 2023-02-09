@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2022-12-23 11:25+0300\n"
+"PO-Revision-Date: 2023-02-08 09:17+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -41,7 +41,7 @@ msgstr "Нажмите чтобы начать запись"
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Screen is being captured…"
-msgstr ""
+msgstr "Выполняется запись экрана…"
 
 #: package/contents/ui/main.qml:29
 #, kde-format
@@ -51,9 +51,9 @@ msgstr "Подождите…"
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording"
-msgstr ""
+msgstr "Новая запись экрана"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording saved in %1"
-msgstr ""
+msgstr "Запись экрана сохранена в %1"

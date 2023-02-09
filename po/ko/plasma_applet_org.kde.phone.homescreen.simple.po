@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-15 00:48+0000\n"
+"POT-Creation-Date: 2023-02-09 03:10+0000\n"
 "PO-Revision-Date: 2022-07-13 12:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
+#: package/contents/ui/FavoritesGrid.qml:224
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "책갈피에서 삭제"
 
-#: package/contents/ui/FavoritesGrid.qml:295
+#: package/contents/ui/FavoritesGrid.qml:304
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "책갈피에 프로그램을 추가하면 여기에 표시됩니다."

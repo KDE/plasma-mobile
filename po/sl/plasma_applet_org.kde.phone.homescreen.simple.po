@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-15 00:48+0000\n"
+"POT-Creation-Date: 2023-02-09 03:10+0000\n"
 "PO-Revision-Date: 2022-07-13 05:11+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
+#: package/contents/ui/FavoritesGrid.qml:224
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Odstrani iz priljubljenih"
 
-#: package/contents/ui/FavoritesGrid.qml:295
+#: package/contents/ui/FavoritesGrid.qml:304
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Dodaj aplikacije k vašim priljubljenim, tako da se prikažejo tukaj."

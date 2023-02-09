@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-15 00:48+0000\n"
+"POT-Creation-Date: 2023-02-09 03:10+0000\n"
 "PO-Revision-Date: 2022-08-03 09:41+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
+#: package/contents/ui/FavoritesGrid.qml:224
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Ta bort från favoriter"
 
-#: package/contents/ui/FavoritesGrid.qml:295
+#: package/contents/ui/FavoritesGrid.qml:304
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Lägg till applikationer i dina favoriter så att de visas här."
