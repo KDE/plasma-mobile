@@ -14,7 +14,7 @@ class ScreenRotationUtil : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool screenRotationEnabled READ screenRotation WRITE setScreenRotation NOTIFY screenRotationChanged);
-    Q_PROPERTY(bool available READ isAvailable);
+    Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged);
 
 public:
     ScreenRotationUtil(QObject *parent = nullptr);
@@ -26,7 +26,10 @@ public:
 
 Q_SIGNALS:
     void screenRotationChanged(bool value);
+    void availableChanged(bool value);
 
 private:
     org::kde::KScreen *m_kscreenInterface;
+
+    bool m_available;
 };
