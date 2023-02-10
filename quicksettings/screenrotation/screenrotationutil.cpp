@@ -43,11 +43,22 @@ void ScreenRotationUtil::setScreenRotation(bool value)
 bool ScreenRotationUtil::isAvailable()
 {
     QDBusPendingReply<bool> reply = m_kscreenInterface->isAutoRotateAvailable();
-    reply.waitForFinished();
-    if (reply.isError()) {
-        qWarning() << "Getting available failed:" << reply.error().name() << reply.error().message();
-        return false;
-    } else {
-        return reply.value();
-    }
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<bool> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Getting available failed:" << reply.error().name() << reply.error().message();
+        } else {
+            // make sure we don't go into an infinite loop
+            if (m_available != reply.value()) {
+                Q_EMIT availableChanged(m_available);
+            }
+
+            m_available = reply.value();
+        }
+        watcher->deleteLater();
+    });
+
+    return m_available;
 }
