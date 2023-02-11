@@ -37,8 +37,10 @@ Item {
     }
     
     function openConfigure() {
-        plasmoid.action("configure").trigger();
-        plasmoid.editMode = false;
+        if (!MobileShellState.Shell.taskSwitcherVisible) {
+            plasmoid.action("configure").trigger();
+            plasmoid.editMode = false;
+        }
     }
     
     QQC2.SwipeView {
