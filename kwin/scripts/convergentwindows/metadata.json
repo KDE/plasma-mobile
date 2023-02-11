@@ -1,0 +1,24 @@
+{
+    "KPlugin": {
+        "Name": "Convergent Windows",
+        "Description": "Removes window decorations and maximizes windows on the first screen only.",
+        "Icon": "preferences-system-windows",
+
+        "Authors": [
+            {
+                "Email": "plata.hill@kdemail.net",
+                "Name": "Plata Hill"
+            }
+        ],
+        "Id": "convergentwindows",
+        "ServiceTypes": [
+            "KWin/Script"
+        ],
+        "Version": "1.0",
+        "Licsense": "LGPL-2.1-or-later",
+        "Website": "https://invent.kde.org/plata/convergentwindows"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js"
+}
+
