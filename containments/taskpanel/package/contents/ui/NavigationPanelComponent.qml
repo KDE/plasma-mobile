@@ -83,7 +83,7 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
         
-        enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || MobileShell.WindowUtil.hasCloseableActiveWindow || MobileShell.ShellUtil.isLaunchingApp
+        enabled: Keyboards.KWinVirtualKeyboard.visible || root.taskSwitcher.visible || MobileShell.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
         iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
@@ -103,11 +103,6 @@ MobileShell.NavigationPanel {
                     root.taskSwitcher.tasksModel.requestClose(root.taskSwitcher.tasksModel.activeTask);
                 }
                 MobileShellState.Shell.closeAppLaunchAnimation();
-            } else if (MobileShell.ShellUtil.isLaunchingApp) {
-                
-                // cancel the launching of the app
-                MobileShellState.Shell.closeAppLaunchAnimation();
-                MobileShell.ShellUtil.cancelLaunchingApp();
             }
         }
     }
