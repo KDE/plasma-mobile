@@ -27,7 +27,6 @@
 ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
     , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
-    , m_launchingApp{nullptr}
 {
     m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
 
@@ -100,35 +99,4 @@ void ShellUtil::launchApp(const QString &storageId)
     auto job = new KIO::ApplicationLauncherJob(service, this);
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
     job->start();
-
-    setLaunchingApp(job);
-}
-
-bool ShellUtil::isLaunchingApp()
-{
-    return m_launchingApp != nullptr;
-}
-
-void ShellUtil::setLaunchingApp(KIO::ApplicationLauncherJob *launcherJob)
-{
-    m_launchingAppPids = {};
-    m_launchingApp = launcherJob; // do not assume that the pointer is valid, KJobs destroy themselves
-    connect(launcherJob, &KIO::ApplicationLauncherJob::result, this, [this](auto *job) {
-        m_launchingAppPids = m_launchingApp->pids();
-    });
-    Q_EMIT isLaunchingAppChanged();
-}
-
-void ShellUtil::cancelLaunchingApp()
-{
-    for (auto pid : m_launchingAppPids) {
-        QProcess::execute("kill", {QString::number(pid)});
-    }
-    clearLaunchingApp();
-}
-
-void ShellUtil::clearLaunchingApp()
-{
-    m_launchingApp = nullptr;
-    Q_EMIT isLaunchingAppChanged();
 }
