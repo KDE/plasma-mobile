@@ -5,6 +5,7 @@
 IconName=preferences-system-windows-effect-screenshot
 Name=Plasma
 Name[ast]=Plasma
+Name[bg]=Plasma
 Name[ca]=Plasma
 Name[ca@valencia]=Plasma
 Name[cs]=Plasma
@@ -38,6 +39,7 @@ Name[zh_CN]=Plasma
 
 [Event/captured]
 Name=Captured
+Name[bg]=Заснето
 Name[ca]=Capturat
 Name[ca@valencia]=Capturat
 Name[cs]=Zachyceno
@@ -69,6 +71,7 @@ Name[uk]=Захоплено
 Name[x-test]=xxCapturedxx
 Name[zh_CN]=已捕获
 Comment=Captured
+Comment[bg]=Заснето
 Comment[ca]=Capturat
 Comment[ca@valencia]=Capturat
 Comment[cs]=Zachyceno
