@@ -15,8 +15,8 @@ Loader {
     id: root
     
     required property var lockScreenState
-    
     property var notificationsModel: []
+    
     property bool notificationsShown: false
     
     signal passwordRequested()
