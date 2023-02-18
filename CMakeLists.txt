@@ -22,7 +22,7 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 set(KF_IGNORE_PLATFORM_CHECK ON CACHE BOOL "Don't check platform that is being built on")
 
-option(QUICK_COMPILER "Use QtQuick compiler to improve performance" TRUE)
+option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
