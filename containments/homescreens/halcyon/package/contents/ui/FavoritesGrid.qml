@@ -276,14 +276,6 @@ MobileShell.GridView {
         anchors.leftMargin: root.leftMargin
         anchors.rightMargin: root.rightMargin
         
-        layer.enabled: true
-        layer.effect: DropShadow {
-            verticalOffset: 1
-            radius: 4
-            samples: 6
-            color: Qt.rgba(0, 0, 0, 0.5)
-        }
-        
         Kirigami.Icon {
             id: icon
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
