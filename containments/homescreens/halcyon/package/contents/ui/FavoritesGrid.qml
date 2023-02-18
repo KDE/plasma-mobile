@@ -282,6 +282,7 @@ MobileShell.GridView {
             radius: 4
             samples: 6
             color: Qt.rgba(0, 0, 0, 0.5)
+            cached: true
         }
         
         Kirigami.Icon {
