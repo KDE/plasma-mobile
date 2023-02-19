@@ -17,9 +17,9 @@ msgstr ""
 #: package/contents/ui/appdrawer/AppDrawerHeader.qml:37
 #, kde-format
 msgid "Applications"
-msgstr ""
+msgstr "アプリケーション"
 
 #: package/contents/ui/private/ConfigOverlay.qml:98
 #, kde-format
 msgid "Remove"
-msgstr ""
+msgstr "取り除く"
