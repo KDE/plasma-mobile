@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen.simple\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 03:10+0000\n"
+"POT-Creation-Date: 2023-02-19 02:57+0000\n"
 "PO-Revision-Date: 2022-06-11 20:11+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Remove from favourites"
 msgstr "Odstrániť z obľúbených"
 
-#: package/contents/ui/FavoritesGrid.qml:304
+#: package/contents/ui/FavoritesGrid.qml:296
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr ""

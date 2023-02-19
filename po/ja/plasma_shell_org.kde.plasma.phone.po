@@ -16,52 +16,52 @@ msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
+msgstr "システム管理者によってレイアウトの変更が制限されている場合"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
-msgstr ""
+msgstr "概要"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
-msgstr ""
+msgstr "ホーム画面のレイアウト"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
-msgstr ""
+msgstr "ホーム画面のレイアウトで使える"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
-msgstr ""
+msgstr "壁紙用プラグイン"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
-msgstr ""
+msgstr "壁紙のプラグインとして使える"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
-msgstr ""
+msgstr "壁紙用プラグイン"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
-msgstr ""
+msgstr "新しいプラグインを入手する…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
+msgstr "レイアウトの変更は他の変更の前に行う必要があります"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
-msgstr ""
+msgstr "決定する"
 
 #: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Wallpaper"
-msgstr ""
+msgstr "壁紙"
 
 #: contents/configuration/ContainmentConfiguration.qml:95
 msgid "Change Wallpaper"
-msgstr ""
+msgstr "壁紙を変更する"
 
 #: contents/configuration/ContainmentConfiguration.qml:113
 msgid "Configure"
-msgstr ""
+msgstr "設定"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-09 03:10+0000\n"
+"POT-Creation-Date: 2023-02-19 02:57+0000\n"
 "PO-Revision-Date: 2022-10-14 16:54+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Remove from favourites"
 msgstr "Fjarlægja úr eftirlætum"
 
-#: package/contents/ui/FavoritesGrid.qml:304
+#: package/contents/ui/FavoritesGrid.qml:296
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Þú getur bætt forritum í eftirlætin þin og þau munu birtast hérna."
