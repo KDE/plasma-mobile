@@ -1,0 +1,193 @@
+# Translation of kcm_mobileshell to Norwegian Nynorsk
+#
+# Karl Ove Hufthammer <karl@huftis.org>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"PO-Revision-Date: 2023-02-21 21:26+0100\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.2\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: package/contents/ui/main.qml:18
+#, kde-format
+msgid "Shell"
+msgstr "Skal"
+
+#: package/contents/ui/main.qml:36
+#, kde-format
+msgid "General"
+msgstr "Generelt"
+
+#: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
+#: package/contents/ui/VibrationForm.qml:35
+#, kde-format
+msgid "Shell Vibrations"
+msgstr "Skalvibrering"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Animations"
+msgstr "Animasjonar"
+
+#: package/contents/ui/main.qml:50
+#, kde-format
+msgid "If this is off, animations will be reduced as much as possible."
+msgstr "Viss dette er av, vert animasjonane reduserte så mykje som mogleg."
+
+#: package/contents/ui/main.qml:69
+#, kde-format
+msgid "Navigation Panel"
+msgstr "Navigasjonspanel"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Gesture-only Mode"
+msgstr "«Berre fingerrørsler»-modus"
+
+#: package/contents/ui/main.qml:75
+#, kde-format
+msgid "Whether to hide the navigation panel."
+msgstr "Om navigasjonspanelet skal gøymast."
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Task Switcher"
+msgstr "Oppgåvevekslar"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "Show Application Previews"
+msgstr "Vis førehandsvising av program"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgid "Turning this off may help improve performance."
+msgstr "Ytinga kan vera betre om du slår dette av."
+
+#: package/contents/ui/main.qml:119
+#, kde-format
+msgid "Action Drawer"
+msgstr "Handlingsskuff"
+
+#: package/contents/ui/main.qml:124 package/contents/ui/QuickSettingsForm.qml:17
+#: package/contents/ui/QuickSettingsForm.qml:34
+#, kde-format
+msgid "Quick Settings"
+msgstr "Snøgginnstillingar"
+
+#: package/contents/ui/main.qml:130
+#, kde-format
+msgctxt "Pinned action drawer mode"
+msgid "Pinned Mode"
+msgstr "Festa-modus"
+
+#: package/contents/ui/main.qml:131
+#, kde-format
+msgctxt "Expanded action drawer mode"
+msgid "Expanded Mode"
+msgstr "Utvida-modus"
+
+#: package/contents/ui/main.qml:135
+#, kde-format
+msgid "Top Left Drawer Mode"
+msgstr "Øvre venstre skuff-modus"
+
+#: package/contents/ui/main.qml:136
+#, kde-format
+msgid "Mode when opening from the top left."
+msgstr "Modus ved opning frå oppe til venstre."
+
+#: package/contents/ui/main.qml:161
+#, kde-format
+msgid "Top Right Drawer Mode"
+msgstr "Øvre høgre skuff-modus"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgid "Mode when opening from the top right."
+msgstr "Modus ved opning frå oppe til høgre."
+
+#: package/contents/ui/QuickSettingsForm.qml:35
+#, kde-format
+msgid "Customize the order of quick settings in the pull-down panel."
+msgstr "Tilpassa rekkjefølgja på snøgginnstillingane i nedtrekkspanelet."
+
+#: package/contents/ui/VibrationForm.qml:36
+#, kde-format
+msgid "Whether to have vibrations enabled in the shell."
+msgstr "Om vibrasjonar skal vera slått på i skalet."
+
+#: package/contents/ui/VibrationForm.qml:49
+#, kde-format
+msgid "Vibration Intensity"
+msgstr "Vibrasjonsintensitet"
+
+#: package/contents/ui/VibrationForm.qml:50
+#, kde-format
+msgid "How intense shell vibrations should be."
+msgstr "Kor intens skalvibreringa skal vera."
+
+#: package/contents/ui/VibrationForm.qml:52
+#, kde-format
+msgctxt "Low intensity"
+msgid "Low"
+msgstr "Låg"
+
+#: package/contents/ui/VibrationForm.qml:53
+#, kde-format
+msgctxt "Medium intensity"
+msgid "Medium"
+msgstr "Middels"
+
+#: package/contents/ui/VibrationForm.qml:54
+#, kde-format
+msgctxt "High intensity"
+msgid "High"
+msgstr "Høg"
+
+#: package/contents/ui/VibrationForm.qml:80
+#, kde-format
+msgid "Vibration Duration"
+msgstr "Vibrasjonstid"
+
+#: package/contents/ui/VibrationForm.qml:81
+#, kde-format
+msgid "How long shell vibrations should be."
+msgstr "Kor lenge skalvibreringa skal vara."
+
+#: package/contents/ui/VibrationForm.qml:83
+#, kde-format
+msgctxt "Long duration"
+msgid "Long"
+msgstr "Lang"
+
+#: package/contents/ui/VibrationForm.qml:84
+#, kde-format
+msgctxt "Medium duration"
+msgid "Medium"
+msgstr "Middels"
+
+#: package/contents/ui/VibrationForm.qml:85
+#, kde-format
+msgctxt "Short duration"
+msgid "Short"
+msgstr "Kort"
+
+#: package/contents/ui/VibrationForm.qml:110
+#, kde-format
+msgid ""
+"Keyboard vibrations are controlled separately in the keyboard settings "
+"module."
+msgstr ""
+"Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
