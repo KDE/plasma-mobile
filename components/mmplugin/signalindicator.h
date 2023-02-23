@@ -22,8 +22,10 @@ class SignalIndicator : public QObject
     Q_PROPERTY(bool modemAvailable READ modemAvailable NOTIFY modemAvailableChanged)
     Q_PROPERTY(bool simLocked READ simLocked NOTIFY simLockedChanged)
     Q_PROPERTY(bool simEmpty READ simEmpty NOTIFY simEmptyChanged)
+
     Q_PROPERTY(bool mobileDataSupported READ mobileDataSupported NOTIFY mobileDataSupportedChanged)
     Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
+
     Q_PROPERTY(bool needsAPNAdded READ needsAPNAdded NOTIFY mobileDataEnabledChanged)
 
 public:

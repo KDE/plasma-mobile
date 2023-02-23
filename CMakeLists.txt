@@ -42,6 +42,11 @@ include(FeatureSummary)
 
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 
+ecm_setup_version(${PROJECT_VERSION}
+    VARIABLE_PREFIX PLASMA_MOBILE
+    VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/version.h
+)
+
 find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
@@ -56,6 +61,7 @@ endif()
 find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     KIO
+    DBusAddons
     Plasma
     PlasmaQuick
     Service
@@ -90,6 +96,7 @@ add_subdirectory(containments)
 add_subdirectory(components)
 add_subdirectory(quicksettings)
 add_subdirectory(kcms)
+add_subdirectory(kded)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES

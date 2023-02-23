@@ -15,11 +15,3 @@ Theme=breeze
 [kdeglobals][General]
 ColorScheme=BreezeLight
 Name=Breeze
-
-## kwinrc
-
-[kwinrc][Windows]
-Placement=Maximizing
-
-[kwinrc][org.kde.kdecoration2]
-NoPlugin=true

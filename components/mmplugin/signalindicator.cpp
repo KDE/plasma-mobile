@@ -1,13 +1,15 @@
 // SPDX-FileCopyrightText: 2021 Tobias Fella <fella@posteo.de>
-// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2022-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
+
+#include "signalindicator.h"
 
 #include <NetworkManagerQt/GsmSetting>
 #include <NetworkManagerQt/Manager>
 #include <NetworkManagerQt/Settings>
 #include <NetworkManagerQt/Utils>
 
-#include "signalindicator.h"
+#include <KUser>
 
 SignalIndicator::SignalIndicator(QObject *parent)
     : QObject{parent}
