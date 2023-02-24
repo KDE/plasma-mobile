@@ -1,12 +1,12 @@
 # Translation of plasma_applet_org.kde.phone.homescreen.simple to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-19 02:57+0000\n"
-"PO-Revision-Date: 2022-06-18 14:50+0200\n"
+"PO-Revision-Date: 2023-02-23 17:53+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -33,7 +33,7 @@ msgstr "Merk appar som favorittar for å visa dei her."
 #: package/contents/ui/FolderGrid.qml:207
 #, kde-format
 msgid "Move out of folder"
-msgstr ""
+msgstr "Flytt ut av mappa"
 
 #: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
@@ -49,4 +49,4 @@ msgstr "Program"
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
-msgstr ""
+msgstr "Mappe"
