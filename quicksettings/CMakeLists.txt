@@ -11,6 +11,7 @@ plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
+plasma_install_package(hotspot org.kde.plasma.quicksetting.hotspot quicksettings)
 add_subdirectory(flashlight)
 add_subdirectory(nightcolor)
 add_subdirectory(powermenu)
