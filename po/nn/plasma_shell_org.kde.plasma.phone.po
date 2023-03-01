@@ -53,8 +53,7 @@ msgstr "Hent nye tillegg …"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Du må ta i bruk utformings­endringane før du kan gjera andre endringar."
+msgstr "Du må ta i bruk utformings­endringane før du kan gjera andre endringar."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
