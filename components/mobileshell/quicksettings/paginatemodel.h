@@ -4,8 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef PAGINATEMODEL_H
-#define PAGINATEMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 
@@ -118,5 +117,3 @@ private:
     class PaginateModelPrivate;
     QScopedPointer<PaginateModelPrivate> d;
 };
-
-#endif

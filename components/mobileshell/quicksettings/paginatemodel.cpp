@@ -170,12 +170,15 @@ void PaginateModel::previousPage()
 
 int PaginateModel::currentPage() const
 {
+    if (d->m_pageSize == 0)
+        return 0;
+
     return d->m_firstItem / d->m_pageSize;
 }
 
 int PaginateModel::pageCount() const
 {
-    if (!d->m_sourceModel)
+    if (!d->m_sourceModel || d->m_pageSize == 0)
         return 0;
     const int rc = d->m_sourceModel->rowCount();
     const int r = (rc % d->m_pageSize == 0) ? 1 : 0;
