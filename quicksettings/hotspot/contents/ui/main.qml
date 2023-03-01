@@ -9,8 +9,6 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 MobileShell.QuickSetting {
     id: root
 
-    readonly property string defaultStatus: i18n("Tap to enable hotspot")
-
     PlasmaNM.Handler {
         id: nmHandler
     }
@@ -19,7 +17,6 @@ MobileShell.QuickSetting {
     icon: "network-wireless-hotspot"
 
     enabled: false
-    status: defaultStatus
 
     function toggle() {
         if (!enabled) {
@@ -34,12 +31,10 @@ MobileShell.QuickSetting {
 
         function onHotspotCreated() {
             root.enabled = true;
-            root.status = "";
         }
 
         function onHotspotDisabled() {
             root.enabled = false;
-            root.status = defaultStatus;
         }
     }
 
