@@ -11,7 +11,7 @@
 #include "settings.h"
 #include "startdaemon.h"
 
-K_PLUGIN_CLASS_WITH_JSON(PlasmaMobileStartDaemon, "kded_plasma-mobile-start.json")
+K_PLUGIN_CLASS_WITH_JSON(PlasmaMobileStartDaemon, "kded_plasma_mobile_start.json")
 
 PlasmaMobileStartDaemon::PlasmaMobileStartDaemon(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
