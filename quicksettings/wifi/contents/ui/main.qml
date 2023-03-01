@@ -14,13 +14,13 @@ MobileShell.QuickSetting {
     PlasmaNM.EnabledConnections {
         id: enabledConnections
     }
-    
-    PlasmaNM.NetworkStatus {
-        id: networkStatus
+
+    PlasmaNM.WirelessStatus {
+        id: wirelessStatus
     }
 
     text: i18n("Wi-Fi")
-    status: enabledConnections.wirelessEnabled ? networkStatus.activeConnections : ""
+    status: enabledConnections.wirelessEnabled ? wirelessStatus.wifiSSID : ""
     icon: "network-wireless-signal"
     settingsCommand: "plasma-open-settings kcm_mobile_wifi"
     function toggle() {
