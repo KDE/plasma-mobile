@@ -15,20 +15,15 @@ kconfig_add_kcfg_files(nightcolorplugin_SRCS nightcolorsettings.kcfgc GENERATE_M
 
 add_library(nightcolorplugin ${nightcolorplugin_SRCS})
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS 
-    Config
-    Declarative
-)
-
 target_link_libraries(nightcolorplugin
         PUBLIC
             Qt::Core
         PRIVATE
             Qt::DBus
-            KF5::CoreAddons
-            KF5::QuickAddons
-            KF5::ConfigCore
-            KF5::ConfigGui
+            KF6::CoreAddons
+            KF6::QuickAddons
+            KF6::ConfigCore
+            KF6::ConfigGui
     )
 
 set_property(TARGET nightcolorplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/nightcolor)

@@ -5,10 +5,10 @@ kcoreaddons_add_plugin(kcm_mobileshell SOURCES kcm.cpp INSTALL_NAMESPACE "plasma
 
 target_link_libraries(kcm_mobileshell
     Qt::Core
-    KF5::CoreAddons
-    KF5::KCMUtils
-    KF5::I18n
-    KF5::QuickAddons
+    KF6::CoreAddons
+    KF6::KCMUtils
+    KF6::I18n
+    KF6::QuickAddons
 )
 
 kcmutils_generate_desktop_file(kcm_mobileshell)

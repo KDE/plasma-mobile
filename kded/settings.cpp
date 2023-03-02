@@ -17,7 +17,7 @@ const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString INITIAL_START_CONFIG_GROUP = QStringLiteral("InitialStart");
 const QString SAVED_CONFIG_GROUP = QStringLiteral("SavedConfig");
 
-const QString MOBILE_LOOK_AND_FEEL = QStringLiteral("org.kde.plasma.phone");
+const QString MOBILE_LOOK_AND_FEEL = QStringLiteral("org.kde.breeze.mobile");
 const QString LOOK_AND_FEEL_KEY = QStringLiteral("LookAndFeelPackage");
 
 Settings::Settings(QObject *parent)

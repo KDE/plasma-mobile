@@ -8,22 +8,17 @@ set(recordplugin_SRCS
 
 add_library(recordplugin ${recordplugin_SRCS})
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS 
-    Declarative
-    Notifications
-)
-
 target_link_libraries(recordplugin
     PUBLIC
         Qt::Core
     PRIVATE
         Qt::DBus
-        KF5::CoreAddons
-        KF5::QuickAddons
-        KF5::ConfigCore
-        KF5::ConfigGui
-        KF5::I18n
-        KF5::Notifications
+        KF6::CoreAddons
+        KF6::QuickAddons
+        KF6::ConfigCore
+        KF6::ConfigGui
+        KF6::I18n
+        KF6::Notifications
 )
 
 set_property(TARGET recordplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/record)

@@ -4,7 +4,7 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 [kdeglobals][KDE]
-LookAndFeelPackage=org.kde.plasma.phone
+LookAndFeelPackage=org.kde.breeze.mobile
 
 [Desktop]
 Containment=org.kde.phone.homescreen.halcyon

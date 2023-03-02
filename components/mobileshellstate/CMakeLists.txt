@@ -7,15 +7,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
 set(mobileshellstateplugin_SRCS
     mobileshellstateplugin.cpp
 )
-if (QT_MAJOR_VERSION STREQUAL "5")
-    if(QUICK_COMPILER)
-        qtquick_compiler_add_resources(RESOURCES resources.qrc)
-    else()
-        qt5_add_resources(RESOURCES resources.qrc)
-    endif()
-else()
-    qt_add_resources(RESOURCES resources.qrc)
-endif()
+qt_add_resources(RESOURCES resources.qrc)
 add_library(mobileshellstateplugin SHARED ${mobileshellstateplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellstateplugin 
@@ -26,10 +18,10 @@ target_link_libraries(mobileshellstateplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
-        KF5::Plasma
-        KF5::I18n
-        KF5::Notifications
-        KF5::PlasmaQuick
+        KF6::Plasma
+        KF6::I18n
+        KF6::Notifications
+        KF6::PlasmaQuick
 )
 
 # we compiled the qml files, just install qmldir

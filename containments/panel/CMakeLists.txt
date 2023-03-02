@@ -12,9 +12,9 @@ add_library(plasma_applet_phonepanel MODULE ${phonepanel_SRCS})
 target_link_libraries(plasma_applet_phonepanel
                       Qt::Gui
                       Qt::DBus
-                      KF5::Plasma
-                      KF5::I18n
-                      KF5::Service
+                      KF6::Plasma
+                      KF6::I18n
+                      KF6::Service
                      )
 
 install(TARGETS plasma_applet_phonepanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)

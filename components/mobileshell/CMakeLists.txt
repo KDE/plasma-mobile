@@ -19,15 +19,7 @@ set(mobileshellplugin_SRCS
     notifications/notificationfilemenu.cpp
     taskswitcher/displaysmodel.cpp
 )
-if (QT_MAJOR_VERSION STREQUAL "5")
-    if(QUICK_COMPILER)
-        qtquick_compiler_add_resources(RESOURCES resources.qrc)
-    else()
-        qt5_add_resources(RESOURCES resources.qrc)
-    endif()
-else()
-    qt_add_resources(RESOURCES resources.qrc)
-endif()
+qt_add_resources(RESOURCES resources.qrc)
 add_library(mobileshellplugin SHARED ${mobileshellplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellplugin 
@@ -38,17 +30,17 @@ target_link_libraries(mobileshellplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
-        KF5::ConfigWidgets # for KStandardAction
-        KF5::KIOGui
-        KF5::Plasma
-        KF5::I18n
-        KF5::Notifications
-        KF5::PlasmaQuick
-        KF5::KIOGui
-        KF5::KIOWidgets # for PreviewJob
-        KF5::WaylandClient
-        KF5::Service
-        KF5::Package
+        KF6::ConfigWidgets # for KStandardAction
+        KF6::KIOGui
+        KF6::Plasma
+        KF6::I18n
+        KF6::Notifications
+        KF6::PlasmaQuick
+        KF6::KIOGui
+        KF6::KIOWidgets # for PreviewJob
+        KF6::WaylandClient
+        KF6::Service
+        KF6::Package
 )
 
 # we compiled the qml files, just install qmldir

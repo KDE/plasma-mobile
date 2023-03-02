@@ -12,10 +12,10 @@ target_sources(kded_plasma_mobile_start PRIVATE
 
 target_link_libraries(kded_plasma_mobile_start PRIVATE
     Qt::Core
-    KF5::DBusAddons
-    KF5::ConfigWidgets
-    KF5::KIOGui
-    KF5::Notifications
-    KF5::Package
+    KF6::DBusAddons
+    KF6::ConfigWidgets
+    KF6::KIOGui
+    KF6::Notifications
+    KF6::Package
 )
 

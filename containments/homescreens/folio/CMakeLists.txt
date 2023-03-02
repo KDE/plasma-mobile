@@ -11,15 +11,15 @@ add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
 
 target_link_libraries(plasma_containment_phone_homescreen
                       Qt::Gui
-                      KF5::Plasma
                       Qt::Qml
                       Qt::Quick
-                      KF5::I18n
-                      KF5::Service
-                      KF5::KIOGui
-                      KF5::Notifications
-                      KF5::WaylandClient
-                      KF5::WindowSystem
+                      KF6::Plasma
+                      KF6::I18n
+                      KF6::Service
+                      KF6::KIOGui
+                      KF6::Notifications
+                      KF6::WaylandClient
+                      KF6::WindowSystem
 )
 
 

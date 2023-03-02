@@ -10,19 +10,17 @@ project(plasma-mobile)
 set(PROJECT_VERSION "5.27.80")
 set(PROJECT_VERSION_MAJOR 5)
 
-set(QT_MIN_VERSION "5.15.2")
-set(KF5_MIN_VERSION "5.102.0")
+set(QT_MIN_VERSION "6.4.0")
+set(KF6_MIN_VERSION "5.240.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 set(KF_IGNORE_PLATFORM_CHECK ON CACHE BOOL "Don't check platform that is being built on")
-
-option(QUICK_COMPILER "Use QtQuick compiler to improve performance" FALSE)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -52,15 +50,11 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Qml
     Quick
 )
-if (QT_MAJOR_VERSION STREQUAL "5")
-    if (QUICK_COMPILER)
-        find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED QuickCompiler)
-    endif()
-endif()
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     KIO
+    Config
     DBusAddons
     Plasma
     PlasmaQuick
@@ -86,7 +80,7 @@ include(CheckIncludeFiles)
 
 ecm_find_qmlmodule(org.kde.pipewire 0.1)
 
-plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
+plasma_install_package(look-and-feel org.kde.breeze.mobile look-and-feel lookandfeel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})

@@ -8,19 +8,14 @@ set(powermenuplugin_SRCS
 
 add_library(powermenuplugin ${powermenuplugin_SRCS})
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS 
-    Config
-    Declarative
-)
-
 find_package(LibKWorkspace)
 
 target_link_libraries(powermenuplugin
         PUBLIC
             Qt::Core
         PRIVATE
-            KF5::CoreAddons
-            KF5::QuickAddons
+            KF6::CoreAddons
+            KF6::QuickAddons
             PW::KWorkspace
     )
     

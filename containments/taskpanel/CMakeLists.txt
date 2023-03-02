@@ -10,12 +10,12 @@ add_library(plasma_containment_phone_taskpanel MODULE taskpanel.cpp ${DBUS_SRCS}
 target_link_libraries(plasma_containment_phone_taskpanel
                       Qt::Gui
                       Qt::DBus
-                      KF5::Plasma
                       Qt::Qml
                       Qt::Quick
-                      KF5::I18n
-                      KF5::Service
-                      KF5::WaylandClient
+                      KF6::Plasma
+                      KF6::I18n
+                      KF6::Service
+                      KF6::WaylandClient
                      )
 
 
