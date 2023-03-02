@@ -4,7 +4,6 @@
 #include <KIO/CommandLauncherJob>
 #include <KNotificationJobUiDelegate>
 #include <KPluginFactory>
-#include <KPluginLoader>
 
 #include <QProcess>
 

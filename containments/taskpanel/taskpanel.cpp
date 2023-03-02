@@ -18,7 +18,6 @@
 #include <KWayland/Client/plasmawindowmanagement.h>
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
-#include <Plasma/Package>
 
 #include <virtualkeyboardinterface.h>
 
