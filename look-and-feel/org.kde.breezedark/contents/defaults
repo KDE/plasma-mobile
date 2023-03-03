@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: 2021 Aleix Pol <apol@kde.org>
+# SPDX-FileCopyrightText: 2016 Marco Martin <mart@kde.org>
+# SPDX-FileCopyrightText: 2014 Pier Luigi Fiorini
+# SPDX-FileCopyrightText: 2014 Aaron J. Seigo
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[Wallpaper]
+Image=Next
+
+## kdeglobals
+
+[kdeglobals][Icons]
+Theme=breeze-dark
+
+[kdeglobals][General]
+ColorScheme=BreezeDark
+Name=Breeze Dark Phone

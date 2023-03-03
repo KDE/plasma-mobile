@@ -86,7 +86,9 @@ include(CheckIncludeFiles)
 
 ecm_find_qmlmodule(org.kde.pipewire 0.1)
 
-plasma_install_package(look-and-feel org.kde.plasma.phone look-and-feel)
+plasma_install_package(look-and-feel/org.kde.breeze org.kde.breeze.phone look-and-feel)
+plasma_install_package(look-and-feel/org.kde.breezedark org.kde.breezedark.phone look-and-feel)
+
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
 install(FILES plasma_phone_components.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
