@@ -4,15 +4,18 @@
             {
                 "Email": "skilvingr@gmail.com",
                 "Name": "Yari Polla",
+                "Name[uk]": "Yari Polla",
                 "Name[x-test]": "xxYari Pollaxx"
             }
         ],
         "Description": "Hotspot quick setting for Plasma Mobile",
+        "Description[uk]": "Швидке налаштовування точки доступу для Мобільної Плазми",
         "Description[x-test]": "xxHotspot quick setting for Plasma Mobilexx",
         "Icon": "network-wireless-hotspot",
         "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
         "Name": "Hotspot",
+        "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
         "ServiceTypes": [
             "KPackage/GenericQML"
