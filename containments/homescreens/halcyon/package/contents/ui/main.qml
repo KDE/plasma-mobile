@@ -13,6 +13,8 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
+Item {}
+/*
 MobileShell.HomeScreen {
     id: root
 
@@ -104,6 +106,6 @@ MobileShell.HomeScreen {
             }
         }
     }
-}
+}*/
 
 

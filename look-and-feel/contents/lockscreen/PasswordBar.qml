@@ -6,7 +6,7 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.1
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0

@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.4
-import QtGraphicalEffects 1.6
+import Qt5Compat.GraphicalEffects
 import org.kde.plasma.core 2.0 as PlasmaCore
  
 PlasmaCore.SvgItem {

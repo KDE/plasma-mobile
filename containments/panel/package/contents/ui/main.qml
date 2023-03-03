@@ -25,7 +25,7 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 
 Item {
     id: root
-    
+    /*
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingApp: visibleMaximizedWindowsModel.count > 0
     readonly property color backgroundColor: topPanel.colorScopeColor
@@ -160,5 +160,5 @@ Item {
                 return urgencies;
             }
         }
-    }
+    }*/
 }

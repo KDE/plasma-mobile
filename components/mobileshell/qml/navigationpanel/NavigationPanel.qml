@@ -8,7 +8,7 @@
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore

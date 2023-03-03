@@ -10,7 +10,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.12 as Controls
 import QtQuick.Layouts 1.3
 import QtQml.Models 2.12
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
