@@ -18,12 +18,10 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.plasma.private.volume 0.1
 
-import org.kde.kirigami 2.12 as Kirigami
-
 import "icon.js" as Icon
 
 // adapted from https://invent.kde.org/plasma/plasma-pa/-/blob/master/applet/contents/ui/ListItemBase.qml
-Kirigami.SwipeListItem {
+Controls.ItemDelegate {
     id: baseItem
     
     property string label
@@ -31,10 +29,8 @@ Kirigami.SwipeListItem {
     property alias iconUsesPlasmaTheme: clientIcon.usesPlasmaTheme
     property string type // sink, source, source-output
     
-    alwaysVisibleActions: true
-    
-    backgroundColor: "transparent" // we use panel background, no need for the same colour to be on top
-    activeBackgroundColor: selectButton.visible ? PlasmaCore.Theme.highlightColor : "transparent"
+    // backgroundColor: "transparent" // we use panel background, no need for the same colour to be on top
+    // activeBackgroundColor: selectButton.visible ? PlasmaCore.Theme.highlightColor : "transparent"
     
     onClicked: {
         if (selectButton.visible) {
