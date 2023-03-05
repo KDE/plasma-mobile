@@ -99,12 +99,12 @@ Item {
         sourceComponent: PlasmaComponents.Menu {
             id: menu
             title: label.text
-            closePolicy: PlasmaExtras.Menu.CloseOnReleaseOutside | PlasmaExtras.Menu.CloseOnEscape
+            closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
             
             Repeater {
                 model: menuActions
-                delegate: PlasmaExtras.MenuItem {
-                    icon: modelData.iconName
+                delegate: PlasmaComponents.MenuItem {
+                    icon.name: modelData.iconName
                     text: modelData.text
                     onClicked: modelData.triggered()
                 }

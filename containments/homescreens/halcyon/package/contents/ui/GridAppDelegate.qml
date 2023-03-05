@@ -59,8 +59,8 @@ MouseArea {
             title: label.text
             closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
             
-            PlasmaExtras.MenuItem {
-                icon: "emblem-favorite"
+            PlasmaComponents.MenuItem {
+                icon.name: "emblem-favorite"
                 text: i18n("Add to favourites")
                 onClicked: {
                     Halcyon.PinnedModel.addApp(application.storageId, 0);
