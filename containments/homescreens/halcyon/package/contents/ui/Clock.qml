@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 ColumnLayout {
     id: root

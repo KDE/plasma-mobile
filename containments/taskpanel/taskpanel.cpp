@@ -30,7 +30,7 @@ TaskPanel::TaskPanel(QObject *parent, const KPluginMetaData &data, const QVarian
     setHasConfigurationInterface(true);
     initWayland();
 
-    qmlRegisterUncreatableType<KWayland::Client::Output>("org.kde.plasma.phone.taskpanel", 1, 0, "Output", "nope");
+    qmlRegisterUncreatableType<KWayland::Client::Output>("org.kde.plasma.mobile.taskpanel", 1, 0, "Output", "nope");
 
     // register type for Keyboards.KWinVirtualKeyboard.forceActivate();
     qRegisterMetaType<QDBusPendingReply<>>();

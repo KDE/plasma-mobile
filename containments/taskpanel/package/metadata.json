@@ -60,7 +60,7 @@
         "Description[uk]": "Панель навігації для мобільної Плазми",
         "Description[x-test]": "xxNavigation panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma 移动版导航面板",
-        "Id": "org.kde.phone.taskpanel",
+        "Id": "org.kde.plasma.mobile.taskpanel",
         "License": "GPLv2+",
         "Name": "Phone Task panel",
         "Name[az]": "Telefon tapşırıq paneli",

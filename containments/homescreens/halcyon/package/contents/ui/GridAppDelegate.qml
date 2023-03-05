@@ -4,20 +4,20 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.15 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.kquickcontrolsaddons 2.0
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.kquickcontrolsaddons
 
-import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.private.mobile.homescreen.halcyon as Halcyon
 
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami as Kirigami
 
 MouseArea {
     id: delegate
@@ -59,8 +59,8 @@ MouseArea {
             title: label.text
             closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
             
-            PlasmaComponents.MenuItem {
-                icon.name: "emblem-favorite"
+            PlasmaExtras.MenuItem {
+                icon: "emblem-favorite"
                 text: i18n("Add to favourites")
                 onClicked: {
                     Halcyon.PinnedModel.addApp(application.storageId, 0);

@@ -1,20 +1,19 @@
-// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2022-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import QtQuick.Window
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.draganddrop 2.0 as DragDrop
+import org.kde.draganddrop as DragDrop
 
-import org.kde.kirigami 2.19 as Kirigami
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
     id: root

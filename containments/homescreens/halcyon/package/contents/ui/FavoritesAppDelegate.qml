@@ -1,19 +1,19 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <espidev@gmail.com>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.1
-import QtQuick.Controls 2.3 as Controls
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
 
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -99,12 +99,12 @@ Item {
         sourceComponent: PlasmaComponents.Menu {
             id: menu
             title: label.text
-            closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
+            closePolicy: PlasmaExtras.Menu.CloseOnReleaseOutside | PlasmaExtras.Menu.CloseOnEscape
             
             Repeater {
                 model: menuActions
-                delegate: PlasmaComponents.MenuItem {
-                    icon.name: modelData.iconName
+                delegate: PlasmaExtras.MenuItem {
+                    icon: modelData.iconName
                     text: modelData.text
                     onClicked: modelData.triggered()
                 }

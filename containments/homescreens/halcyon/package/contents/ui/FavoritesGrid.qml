@@ -1,20 +1,20 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.1
-import QtQml.Models 2.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import QtQml.Models
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.draganddrop 2.0 as DragDrop
+import org.kde.draganddrop as DragDrop
 
-import org.kde.kirigami 2.19 as Kirigami
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.private.mobile.homescreen.halcyon as Halcyon
 
 MobileShell.GridView {
     id: root
@@ -56,6 +56,11 @@ MobileShell.GridView {
         }
     }
     
+    Halcyon.PinnedModel {
+        id: pinnedModel
+        applet: plasmoid.nativeInterface
+    }
+
     // open wallpaper menu when held on click
     TapHandler {
         onLongPressed: root.openConfigureRequested()
@@ -77,7 +82,7 @@ MobileShell.GridView {
     
     model: DelegateModel {
         id: visualModel
-        model: Halcyon.PinnedModel
+        model: pinnedModel
         
         delegate: Item {
             id: delegateRoot
@@ -89,7 +94,7 @@ MobileShell.GridView {
             function moveDragToCurrentPos(from, to) {
                 if (from !== to) {
                     visualModel.items.move(from, to);
-                    Halcyon.PinnedModel.moveEntry(from, to);
+                    pinnedModel.moveEntry(from, to);
                 }
             }
             
@@ -191,9 +196,9 @@ MobileShell.GridView {
                 onDropped: (drop) => {
                     if (transitionAnim.running || appDelegate.drag.active || drag.source.isFolder) return; // don't do anything when reordering
                     if (appDelegate.isFolder) {
-                        Halcyon.PinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
+                        pinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
                     } else {
-                        Halcyon.PinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
+                        pinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
                     }
                     folderAnim.to = 0;
                     folderAnim.restart();
@@ -222,7 +227,7 @@ MobileShell.GridView {
                     Kirigami.Action {
                         iconName: "emblem-favorite"
                         text: i18n("Remove from favourites")
-                        onTriggered: Halcyon.PinnedModel.removeEntry(model.index)
+                        onTriggered: pinnedModel.removeEntry(model.index)
                     }
                 ]
                 
