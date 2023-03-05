@@ -65,6 +65,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     NetworkManagerQt
     KCMUtils
     Declarative
+    Package
 )
 find_package(KF5KirigamiAddons 0.6 REQUIRED)
 
