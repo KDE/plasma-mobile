@@ -8,22 +8,22 @@ let bottomFound = false
 
 for (let i in panels()) {
     print(panels()[i].type)
-    if (panels()[i].type === "org.kde.phone.panel") {
+    if (panels()[i].type === "org.kde.plasma.mobile.panel") {
         topFound = true;
-    } else if (panels()[i].type === "org.kde.phone.taskpanel") {
+    } else if (panels()[i].type === "org.kde.plasma.mobile.taskpanel") {
         bottomFound = true;
     }
 }
 
 if (!topFound) {
     // keep widget list synced with the layout.js
-    let topPanel = new Panel("org.kde.phone.panel")
+    let topPanel = new Panel("org.kde.plasma.mobile.panel")
     topPanel.addWidget("org.kde.plasma.notifications");
     topPanel.location = "top";
     topPanel.height = 1.25 * gridUnit;
 }
 if (!bottomFound) {
-    let bottomPanel = new Panel("org.kde.phone.taskpanel")
+    let bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
     bottomPanel.location = "bottom";
     bottomPanel.height = 2 * gridUnit;
 }
