@@ -15,7 +15,6 @@ import org.kde.kirigami 2.20 as Kirigami
 Rectangle {
     id: root
 
-    visible: false //adjust borders is run during setup. We want to avoid painting till completed
     property Item containment
 
     color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : PlasmaCore.Theme.textColor
@@ -53,13 +52,17 @@ Rectangle {
     }
 
     onContainmentChanged: {
+        if (containment == null) {
+            return;
+        }
+
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
     }
 
     Component.onCompleted: {
-        visible = true
+        // desktop.windowType = Shell.Desktop.Desktop;
     }
     
     // This is taken from plasma-desktop's shell package, try to keep it in sync
