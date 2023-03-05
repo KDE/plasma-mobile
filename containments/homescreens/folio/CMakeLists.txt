@@ -14,6 +14,7 @@ target_link_libraries(plasma_containment_phone_homescreen
                       Qt::Qml
                       Qt::Quick
                       KF6::Plasma
+                      KF6::PlasmaQuick
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui
