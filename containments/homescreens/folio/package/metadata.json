@@ -60,7 +60,7 @@
         "Description[uk]": "Домашня сторінка для мобільних пристроїв із акцентом на можливості налаштовування.",
         "Description[x-test]": "xxMobile homescreen with a focus on customizability.xx",
         "Description[zh_CN]": "高可定制性的手机主屏幕方案。",
-        "Id": "org.kde.phone.homescreen",
+        "Id": "org.kde.plasma.mobile.homescreen.folio",
         "License": "GPLv2+",
         "Name": "Folio",
         "Name[ca@valencia]": "Folio",

@@ -25,11 +25,12 @@
 class PinnedModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(Plasma::Applet *applet READ applet WRITE setApplet CONSTANT)
 
 public:
     enum Roles { IsFolderRole = Qt::UserRole + 1, ApplicationRole, FolderRole };
 
-    PinnedModel(QObject *parent = nullptr, Plasma::Applet *applet = nullptr);
+    PinnedModel(QObject *parent = nullptr);
     ~PinnedModel() override;
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -44,13 +45,17 @@ public:
     Q_INVOKABLE void createFolderFromApps(int sourceAppRow, int draggedAppRow);
     Q_INVOKABLE void addAppToFolder(int appRow, int folderRow);
 
-    Q_INVOKABLE void load();
     void save();
+
+    Plasma::Applet *applet();
+    void setApplet(Plasma::Applet *applet);
 
 public Q_SLOTS:
     void addAppFromFolder(const QString &storageId);
 
 private:
+    void load();
+
     QList<Application *> m_applications;
     QList<ApplicationFolder *> m_folders;
 

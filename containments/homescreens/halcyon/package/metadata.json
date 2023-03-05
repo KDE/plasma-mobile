@@ -62,7 +62,7 @@
         "Description[uk]": "Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.",
         "Description[x-test]": "xxA mobile homescreen focused on simplicity and ease-of-use.xx",
         "Description[zh_CN]": "简约易用的手机主屏幕方案。",
-        "Id": "org.kde.phone.homescreen.halcyon",
+        "Id": "org.kde.plasma.mobile.homescreen.halcyon",
         "License": "GPLv2+",
         "Name": "Halcyon",
         "Name[az]": "Halcyon",

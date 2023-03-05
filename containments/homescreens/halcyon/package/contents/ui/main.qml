@@ -1,17 +1,17 @@
-// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2022-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.halcyon 1.0 as Halcyon
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.private.mobile.homescreen.halcyon as Halcyon
 
 MobileShell.HomeScreen {
     id: root
@@ -26,7 +26,6 @@ MobileShell.HomeScreen {
     
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
-        Halcyon.PinnedModel.load();
         forceActiveFocus();
     }
     

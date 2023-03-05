@@ -5,8 +5,6 @@
 
 #include <Plasma/Containment>
 
-#include <applicationlistmodel.h>
-
 class HomeScreen : public Plasma::Containment
 {
     Q_OBJECT

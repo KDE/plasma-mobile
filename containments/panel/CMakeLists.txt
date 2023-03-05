@@ -20,5 +20,5 @@ target_link_libraries(plasma_applet_phonepanel
 install(TARGETS plasma_applet_phonepanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 #install(FILES plasma-phonepanel-default.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
-plasma_install_package(package org.kde.phone.panel)
+plasma_install_package(package org.kde.plasma.mobile.panel)
 

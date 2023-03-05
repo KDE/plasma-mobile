@@ -8,9 +8,8 @@
 
 #include <KLocalizedString>
 
-PinnedModel::PinnedModel(QObject *parent, Plasma::Applet *applet)
+PinnedModel::PinnedModel(QObject *parent)
     : QAbstractListModel{parent}
-    , m_applet{applet}
 {
 }
 
@@ -240,4 +239,15 @@ void PinnedModel::save()
 void PinnedModel::addAppFromFolder(const QString &storageId)
 {
     addApp(storageId, 0);
+}
+
+Plasma::Applet *PinnedModel::applet()
+{
+    return m_applet;
+}
+
+void PinnedModel::setApplet(Plasma::Applet *applet)
+{
+    m_applet = applet;
+    load();
 }

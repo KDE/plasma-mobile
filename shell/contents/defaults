@@ -7,7 +7,7 @@
 LookAndFeelPackage=org.kde.breeze.mobile
 
 [Desktop]
-Containment=org.kde.phone.homescreen.halcyon
+Containment=org.kde.plasma.mobile.homescreen.halcyon
 ToolBox=org.kde.plasma.nano.desktoptoolbox
 
 [Desktop][ContainmentActions]
