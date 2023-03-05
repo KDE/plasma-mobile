@@ -4,14 +4,32 @@
         "Authors": [
             {
                 "Email": "plasma-mobile@kde.org",
-                "Name": "KDE Visual Design Group"
+                "Name": "KDE Visual Design Group",
+                "Name[es]": "El grupo de diseño visual de KDE",
+                "Name[fr]": "Groupe de conception graphique de KDE",
+                "Name[ka]": "KDE-ის ვიზუალური დიზაინის ჯგუფი",
+                "Name[nn]": "KDE Visual Design Group",
+                "Name[tr]": "KDE Görsel Tasarım Grubu",
+                "Name[x-test]": "xxKDE Visual Design Groupxx"
             }
         ],
         "Category": "",
         "Description": "Plasma for mobile devices",
+        "Description[es]": "Plasma para dispositivos móviles",
+        "Description[fr]": "Plasma pour périphériques mobiles",
+        "Description[ka]": "Plasma მობილური მოწყობილობებისთვის",
+        "Description[nn]": "Plasma for telefonar og nettbrett",
+        "Description[tr]": "Taşınabilir aygıtlar için Plasma",
+        "Description[x-test]": "xxPlasma for mobile devicesxx",
         "Id": "org.kde.breeze.mobile",
         "License": "GPLv2+",
         "Name": "Plasma Mobile Breeze",
+        "Name[es]": "Brisa de Plasma Mobile",
+        "Name[fr]": "Thème « Breeze » pour Plasma Mobile",
+        "Name[ka]": "Plasma მობილური ნიავი",
+        "Name[nn]": "Plasma Mobile Breeze",
+        "Name[tr]": "Plasma Mobile Esinti",
+        "Name[x-test]": "xxPlasma Mobile Breezexx",
         "Version": "2.0",
         "Website": "https://www.kde.org"
     },
