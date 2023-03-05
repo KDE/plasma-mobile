@@ -5,9 +5,9 @@ set(homescreen_SRCS
     homescreen.cpp
 )
 
-add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
+add_library(org.kde.plasma.mobile.homescreen.folio MODULE ${homescreen_SRCS})
 
-target_link_libraries(plasma_containment_phone_homescreen
+target_link_libraries(org.kde.plasma.mobile.homescreen.folio
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
@@ -22,7 +22,7 @@ target_link_libraries(plasma_containment_phone_homescreen
 )
 
 
-install(TARGETS plasma_containment_phone_homescreen DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
+install(TARGETS org.kde.plasma.mobile.homescreen.folio DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 
 plasma_install_package(package org.kde.plasma.mobile.homescreen.folio)
 

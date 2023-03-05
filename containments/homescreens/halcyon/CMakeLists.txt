@@ -5,9 +5,9 @@ set(homescreen_SRCS
     homescreen.cpp
 )
 
-add_library(plasma_containment_phone_homescreen_halcyon MODULE ${homescreen_SRCS})
+add_library(org.kde.plasma.mobile.homescreen.halcyon MODULE ${homescreen_SRCS})
 
-target_link_libraries(plasma_containment_phone_homescreen_halcyon
+target_link_libraries(org.kde.plasma.mobile.homescreen.halcyon
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
@@ -20,7 +20,7 @@ target_link_libraries(plasma_containment_phone_homescreen_halcyon
                       KF6::WindowSystem
 )
 
-install(TARGETS plasma_containment_phone_homescreen_halcyon DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
+install(TARGETS org.kde.plasma.mobile.homescreen.halcyon DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 
 plasma_install_package(package org.kde.plasma.mobile.homescreen.halcyon)
 

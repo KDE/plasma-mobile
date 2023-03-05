@@ -7,9 +7,9 @@ set(phonepanel_SRCS
     phonepanel.cpp
 )
 
-add_library(plasma_applet_phonepanel MODULE ${phonepanel_SRCS})
+add_library(org.kde.plasma.mobile.panel MODULE ${phonepanel_SRCS})
 
-target_link_libraries(plasma_applet_phonepanel
+target_link_libraries(org.kde.plasma.mobile.panel
                       Qt::Gui
                       Qt::DBus
                       KF6::Plasma
@@ -17,7 +17,7 @@ target_link_libraries(plasma_applet_phonepanel
                       KF6::Service
                      )
 
-install(TARGETS plasma_applet_phonepanel DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
+install(TARGETS org.kde.plasma.mobile.panel DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 #install(FILES plasma-phonepanel-default.desktop DESTINATION ${KDE_INSTALL_KSERVICES5DIR})
 
 plasma_install_package(package org.kde.plasma.mobile.panel)
