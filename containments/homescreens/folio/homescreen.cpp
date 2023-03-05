@@ -14,20 +14,6 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     : Plasma::Containment{parent, data, args}
 {
     setHasConfigurationInterface(true);
-
-    ApplicationListModel *applicationListModel = new ApplicationListModel{this};
-    DesktopModel *desktopModel = new DesktopModel{this, this};
-    qmlRegisterSingletonType<ApplicationListModel>("org.kde.phone.homescreen.default",
-                                                   1,
-                                                   0,
-                                                   "ApplicationListModel",
-                                                   [applicationListModel](QQmlEngine *, QJSEngine *) -> QObject * {
-                                                       return applicationListModel;
-                                                   });
-    qmlRegisterSingletonType<DesktopModel>("org.kde.phone.homescreen.default", 1, 0, "DesktopModel", [desktopModel](QQmlEngine *, QJSEngine *) -> QObject * {
-        return desktopModel;
-    });
-
     connect(KWindowSystem::self(), &KWindowSystem::showingDesktopChanged, this, &HomeScreen::showingDesktopChanged);
 }
 

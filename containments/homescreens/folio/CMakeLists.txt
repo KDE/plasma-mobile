@@ -3,8 +3,6 @@
 
 set(homescreen_SRCS
     homescreen.cpp
-    desktopmodel.cpp
-    applicationlistmodel.cpp
 )
 
 add_library(plasma_containment_phone_homescreen MODULE ${homescreen_SRCS})
@@ -27,3 +25,5 @@ target_link_libraries(plasma_containment_phone_homescreen
 install(TARGETS plasma_containment_phone_homescreen DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
 
 plasma_install_package(package org.kde.plasma.mobile.homescreen.folio)
+
+add_subdirectory(plugin)

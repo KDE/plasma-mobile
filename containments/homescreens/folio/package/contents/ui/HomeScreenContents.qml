@@ -17,7 +17,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 import "private" as Private
 
@@ -25,7 +25,10 @@ DragDrop.DropArea {
     id: dropArea
     
     required property var homeScreenState
-    
+
+    required property Folio.DesktopModel desktopModel
+    property var applicationListModel: Folio.ApplicationListModel
+
     property alias launcherDelegate: launcherRepeater.delegate
     property alias launcherModel: launcherRepeater.model
     property alias launcherRepeater: launcherRepeater
@@ -52,9 +55,7 @@ DragDrop.DropArea {
     }
 
     property bool inAppletEditMode: false
-    
-    property var applicationListModel: HomeScreenLib.ApplicationListModel
-    property var desktopModel: HomeScreenLib.DesktopModel
+
 
     Connections {
         target: plasmoid
@@ -119,7 +120,7 @@ DragDrop.DropArea {
                 }
 
                 let pos = Math.min(desktopModel.count, Math.floor(posInFavorites.x/favoriteStrip.cellWidth))
-                desktopModel.addFavorite(storageId, pos, HomeScreenLib.ApplicationListModel.Favorites)
+                desktopModel.addFavorite(storageId, pos, Folio.ApplicationListModel.Favorites)
                 let item = launcherRepeater.itemAt(pos);
 
                 if (item) {
@@ -134,7 +135,7 @@ DragDrop.DropArea {
             }
 
             let pos = desktopModel.count;
-            desktopModel.addFavorite(storageId, pos, HomeScreenLib.ApplicationListModel.Desktop)
+            desktopModel.addFavorite(storageId, pos, Folio.ApplicationListModel.Desktop)
             let item = launcherRepeater.itemAt(pos);
 
             event.accept(event.proposedAction);
@@ -222,6 +223,7 @@ DragDrop.DropArea {
         }
         LauncherRepeater {
             id: launcherRepeater
+            desktopModel: dropArea.desktopModel
             homeScreenState: dropArea.homeScreenState
             cellWidth: appletsLayout.cellWidth
             cellHeight: appletsLayout.cellHeight

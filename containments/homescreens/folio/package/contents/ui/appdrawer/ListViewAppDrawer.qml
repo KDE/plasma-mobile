@@ -17,7 +17,7 @@ import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 import "../private"
 
@@ -34,7 +34,7 @@ AbstractAppDrawer {
         
         property int delegateHeight: PlasmaCore.Units.gridUnit * 3
 
-        model: HomeScreenLib.ApplicationListModel
+        model: Folio.ApplicationListModel
 
         delegate: DrawerListDelegate {
             id: delegate
@@ -64,7 +64,7 @@ AbstractAppDrawer {
                             Math.min(delegate.iconItem.width, delegate.iconItem.height));
                 }
 
-                HomeScreenLib.ApplicationListModel.setMinimizedDelegate(index, delegate);
+                Folio.ApplicationListModel.setMinimizedDelegate(index, delegate);
                 MobileShell.ShellUtil.launchApp(storageId);
                 root.launched();
             }

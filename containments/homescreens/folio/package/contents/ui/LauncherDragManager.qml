@@ -9,7 +9,7 @@ import QtQuick 2.4
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 Item {
     id: root
@@ -19,7 +19,7 @@ Item {
     property ContainmentLayoutManager.ItemContainer currentlyDraggedDelegate
     property bool active
     
-    property var desktopModel: HomeScreenLib.DesktopModel
+    required property Folio.DesktopModel desktopModel
 
     readonly property Item spacer: Item {
         width: favoriteStrip.cellWidth
@@ -45,7 +45,7 @@ Item {
             newRow = Math.floor((pos.x + dragCenterX) / delegate.width);
 
             showSpacer(delegate, dragCenterX, dragCenterY);
-            HomeScreenLib.DesktopModel.moveItem(delegate.modelData.index, newRow);
+            desktopModel.moveItem(delegate.modelData.index, newRow);
 
         // Put it on desktop
         } else {
@@ -162,8 +162,8 @@ Item {
             if (!item.modelData) {
                 return appletsLayout;
             } else if (favoriteStrip.contains(Qt.point(0,favoriteStrip.frame.mapFromItem(item, dragCenterX, dragCenterY).y))
-                && (item.modelData.applicationLocation == HomeScreenLib.DesktopModel.Favorites
-                    || HomeScreenLib.DesktopModel.favoriteCount < HomeScreenLib.DesktopModel.maxFavoriteCount)) {
+                && (item.modelData.applicationLocation == Folio.DesktopModel.Favorites
+                    || desktopModel.favoriteCount < desktopModel.maxFavoriteCount)) {
                 return favoriteStrip;
             } else {
                 return appletsLayout;
@@ -269,7 +269,7 @@ Item {
 
             if (container == appletsLayout) {
                 if (item.modelData) {
-                    HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.Desktop);
+                    desktopModel.setLocation(item.modelData.index, Folio.DesktopModel.Desktop);
                 }
                 var pos = appletsLayout.mapFromItem(item, 0, 0);
                 item.parent = appletsLayout;
@@ -280,9 +280,9 @@ Item {
                 
                 return;
             } else if (container == favoriteStrip) {
-                HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.Favorites);
+                desktopModel.setLocation(item.modelData.index, Folio.DesktopModel.Favorites);
             } else {
-                HomeScreenLib.DesktopModel.setLocation(item.modelData.index, HomeScreenLib.DesktopModel.None);
+                desktopModel.setLocation(item.modelData.index, Folio.DesktopModel.None);
             }
 
             var child = nearestChild(item, dragCenterX, dragCenterY, container);

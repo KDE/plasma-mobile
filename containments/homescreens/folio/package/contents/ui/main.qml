@@ -15,7 +15,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 MobileShell.HomeScreen {
     id: root
@@ -34,9 +34,6 @@ MobileShell.HomeScreen {
     property bool componentComplete: false
     
     Component.onCompleted: {
-        HomeScreenLib.ApplicationListModel.load();
-        HomeScreenLib.DesktopModel.load();
-        
         // ensure the gestures work immediately on load
         forceActiveFocus();
     }
@@ -124,7 +121,7 @@ MobileShell.HomeScreen {
     
     // listen to app launch errors
     Connections {
-        target: HomeScreenLib.ApplicationListModel
+        target: Folio.ApplicationListModel
         function onLaunchError(msg) {
             MobileShellState.Shell.closeAppLaunchAnimation()
         }

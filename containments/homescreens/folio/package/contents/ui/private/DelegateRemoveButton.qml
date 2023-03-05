@@ -16,10 +16,13 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 PC3.RoundButton {
     id: removeButton
+
+    required property Folio.DesktopModel desktopModel
+
     anchors {
         right: parent.right
         top: parent.top
@@ -35,6 +38,7 @@ PC3.RoundButton {
         removeButtonScaleAnim.to = 1;
         removeButtonAnim.running = true;
     }
+
     function hide() {
         if (!visible) {
             return;
@@ -43,6 +47,7 @@ PC3.RoundButton {
         removeButtonScaleAnim.to = 0;
         removeButtonAnim.running = true;
     }
+
     SequentialAnimation {
         id: delegateDestructionAnim
         NumberAnimation {
@@ -56,7 +61,7 @@ PC3.RoundButton {
         ScriptAction {
             script: {
                 appletsLayout.releaseSpace(delegate);
-                HomeScreenLib.DesktopModel.removeFavorite(index);
+                desktopModel.removeFavorite(index);
             }
         }
     }

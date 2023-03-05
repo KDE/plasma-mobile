@@ -17,12 +17,13 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 import "private" as Private
 
 ContainmentLayoutManager.ItemContainer {
     id: delegate
+    required property Folio.DesktopModel desktopModel
 
     enabled: homeScreenState.currentView === HomeScreenState.PageView || homeScreenState.currentSwipeState === HomeScreenState.SwipingAppDrawerVisibility
     
@@ -52,9 +53,9 @@ ContainmentLayoutManager.ItemContainer {
         }
 
         if (!MobileShellState.Shell.taskSwitcherVisible) {
-            HomeScreenLib.DesktopModel.setMinimizedDelegate(index, delegate);
+            desktopModel.setMinimizedDelegate(index, delegate);
         } else {
-            HomeScreenLib.DesktopModel.unsetMinimizedDelegate(index, delegate);
+            desktopModel.unsetMinimizedDelegate(index, delegate);
         }
     }
     
@@ -65,7 +66,7 @@ ContainmentLayoutManager.ItemContainer {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
         }
 
-        HomeScreenLib.DesktopModel.setMinimizedDelegate(index, delegate);
+        desktopModel.setMinimizedDelegate(index, delegate);
         MobileShell.ShellUtil.launchApp(modelData.applicationStorageId);
     }
 
@@ -197,6 +198,7 @@ ContainmentLayoutManager.ItemContainer {
                 //TODO: in loader?
                 Private.DelegateRemoveButton {
                     id: removeButton
+                    desktopModel: delegate.desktopModel
                 }
             }
 

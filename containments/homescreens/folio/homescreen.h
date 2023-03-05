@@ -7,9 +7,6 @@
 #include <Plasma/Containment>
 #include <QSortFilterProxyModel>
 
-#include <applicationlistmodel.h>
-#include <desktopmodel.h>
-
 class HomeScreen : public Plasma::Containment
 {
     Q_OBJECT
