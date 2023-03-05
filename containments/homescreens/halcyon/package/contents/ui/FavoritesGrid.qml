@@ -55,11 +55,6 @@ MobileShell.GridView {
             root.searchWidget.endGesture();
         }
     }
-    
-    Halcyon.PinnedModel {
-        id: pinnedModel
-        applet: plasmoid.nativeInterface
-    }
 
     // open wallpaper menu when held on click
     TapHandler {
@@ -82,7 +77,7 @@ MobileShell.GridView {
     
     model: DelegateModel {
         id: visualModel
-        model: pinnedModel
+        model: Halcyon.PinnedModel
         
         delegate: Item {
             id: delegateRoot
@@ -94,7 +89,7 @@ MobileShell.GridView {
             function moveDragToCurrentPos(from, to) {
                 if (from !== to) {
                     visualModel.items.move(from, to);
-                    pinnedModel.moveEntry(from, to);
+                    Halcyon.PinnedModel.moveEntry(from, to);
                 }
             }
             
@@ -196,9 +191,9 @@ MobileShell.GridView {
                 onDropped: (drop) => {
                     if (transitionAnim.running || appDelegate.drag.active || drag.source.isFolder) return; // don't do anything when reordering
                     if (appDelegate.isFolder) {
-                        pinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
+                        Halcyon.PinnedModel.addAppToFolder(drop.source.visualIndex, appDelegate.visualIndex);
                     } else {
-                        pinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
+                        Halcyon.PinnedModel.createFolderFromApps(drop.source.visualIndex, appDelegate.visualIndex);
                     }
                     folderAnim.to = 0;
                     folderAnim.restart();
@@ -227,7 +222,7 @@ MobileShell.GridView {
                     Kirigami.Action {
                         iconName: "emblem-favorite"
                         text: i18n("Remove from favourites")
-                        onTriggered: pinnedModel.removeEntry(model.index)
+                        onTriggered: Halcyon.PinnedModel.removeEntry(model.index)
                     }
                 ]
                 
