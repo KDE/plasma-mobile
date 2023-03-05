@@ -58,8 +58,6 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE virtual void load();
-
     Q_INVOKABLE void setMinimizedDelegate(int row, QQuickItem *delegate);
     Q_INVOKABLE void unsetMinimizedDelegate(int row, QQuickItem *delegate);
 
@@ -71,6 +69,8 @@ Q_SIGNALS:
     void launchError(const QString &msg);
 
 protected:
+    virtual void load();
+
     QList<ApplicationData> m_applicationList;
 
     KWayland::Client::PlasmaWindowManagement *m_windowManagement = nullptr;

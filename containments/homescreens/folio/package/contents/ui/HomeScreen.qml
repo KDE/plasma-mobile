@@ -21,7 +21,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 
 Item {
     id: root
@@ -54,6 +54,8 @@ Item {
         homeScreenState.goToPageIndex(0);
         homeScreenState.resetSwipeState();
     }
+
+    property var desktopModel: Folio.DesktopModel {}
     
     // the parent of the homescreen is a flickable that captures all flicks
     FlickContainer {
@@ -96,6 +98,7 @@ Item {
 
                 HomeScreenContents {
                     id: contents
+                    desktopModel: root.desktopModel
                     homeScreenState: root.homeScreenState
                     
                     height: pages.height
@@ -110,7 +113,7 @@ Item {
 
                     appletsLayout: contents.appletsLayout
                     visible: favoriteStrip.flow.children.length > 0 || contents.launcherDragManager.active || contents.containsDrag
-                    opacity: contents.launcherDragManager.active && HomeScreenLib.DesktopModel.favoriteCount >= HomeScreenLib.DesktopModel.maxFavoriteCount ? 0.3 : 1
+                    opacity: contents.launcherDragManager.active && root.desktopModel.favoriteCount >= root.desktopModel.maxFavoriteCount ? 0.3 : 1
 
                     TapHandler {
                         target: favoriteStrip

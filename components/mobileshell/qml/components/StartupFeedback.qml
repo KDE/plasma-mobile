@@ -62,15 +62,16 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         }
     }
     
-    Connections {
-        target: NanoShell.StartupNotifier
-        enabled: NanoShell.StartupNotifier.isValid
-
-        function onActivationStarted(appId, iconName) {
-            icon.source = iconName
-            background.state = "open";
-        }
-    }
+    // TODO
+    // Connections {
+    //     target: NanoShell.StartupNotifier
+    //     enabled: NanoShell.StartupNotifier.isValid
+    //
+    //     function onActivationStarted(appId, iconName) {
+    //         icon.source = iconName
+    //         background.state = "open";
+    //     }
+    // }
 
     property alias state: background.state
     property alias icon: icon.source

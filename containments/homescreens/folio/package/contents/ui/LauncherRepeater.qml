@@ -17,15 +17,15 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.phone.homescreen.default 1.0 as HomeScreenLib
+import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
 import org.kde.kirigami 2.14 as Kirigami
 
 Repeater {
     id: launcherRepeater
-    model: HomeScreenLib.DesktopModel
-    
+
     required property var homeScreenState
-    
+    required property Folio.DesktopModel desktopModel
+
     property ContainmentLayoutManager.AppletsLayout appletsLayout
     property FavoriteStrip favoriteStrip
     property int cellWidth
@@ -37,6 +37,7 @@ Repeater {
 
     delegate: HomeDelegate {
         id: delegate
+        desktopModel: launcherRepeater.desktopModel
         homeScreenState: launcherRepeater.homeScreenState
         
         width: launcherRepeater.cellWidth
@@ -53,15 +54,15 @@ Repeater {
         reservedSpaceForLabel: metrics.height
         property Item parentFromLocation: {
             switch (model.applicationLocation) {
-                case HomeScreenLib.DesktopModel.Favorites:
+                case Folio.DesktopModel.Favorites:
                     return favoriteStrip.flow;
-                case HomeScreenLib.DesktopModel.Desktop:
+                case Folio.DesktopModel.Desktop:
                 default:
                     return appletsLayout;
             }
         }
         Component.onCompleted: {
-            if (model.applicationLocation === HomeScreenLib.DesktopModel.Desktop) {
+            if (model.applicationLocation === Folio.DesktopModel.Desktop) {
                 appletsLayout.restoreItem(delegate);
             }
         }
@@ -117,10 +118,10 @@ Repeater {
         onParentFromLocationChanged: {
             if (!launcherDragManager.active && parent != parentFromLocation) {
                 parent = parentFromLocation;
-                if (model.applicationLocation === HomeScreenLib.DesktopModel.Favorites) {
+                if (model.applicationLocation === Folio.DesktopModel.Favorites) {
                     MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[index]);
-                } else if (model.applicationLocation === HomeScreenLib.DesktopModel.None) {
-                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[Math.max(0, index - HomeScreenLib.DesktopModel.favoriteCount)]);
+                } else if (model.applicationLocation === Folio.DesktopModel.None) {
+                    MobileShell.ShellUtil.stackItemBefore(delegate, parentFromLocation.children[Math.max(0, index - desktopModel.favoriteCount)]);
                 }
             }
         }

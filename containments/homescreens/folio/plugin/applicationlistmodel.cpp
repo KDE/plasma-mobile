@@ -40,6 +40,8 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
 
     registry->setup();
     connection->roundtrip();
+
+    load();
 }
 
 ApplicationListModel::~ApplicationListModel() = default;

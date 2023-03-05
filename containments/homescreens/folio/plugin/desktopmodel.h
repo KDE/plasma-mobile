@@ -33,7 +33,6 @@ public:
     QString uniqueToStorageId(const QString &uniqueId) const;
 
     void loadSettings();
-    Q_INVOKABLE void load() override;
 
     int count();
     int favoriteCount();
@@ -50,6 +49,8 @@ Q_SIGNALS:
     void favoriteCountChanged();
 
 private:
+    void load() override;
+
     QStringList m_appOrder;
     QStringList m_favorites;
     QSet<QString> m_desktopItems;

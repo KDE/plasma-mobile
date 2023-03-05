@@ -26,5 +26,5 @@ target_link_libraries(halcyonplugin
                       KF6::WaylandClient
                       KF6::WindowSystem)
 
-set_property(TARGET halcyonplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mm)
+set_property(TARGET halcyonplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/private/mobile/homescreen/halcyon)
 install(TARGETS halcyonplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/mobile/homescreen/halcyon)

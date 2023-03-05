@@ -19,7 +19,7 @@
 const int MAX_FAVORITES = 5;
 
 DesktopModel::DesktopModel(QObject *parent, Plasma::Applet *applet)
-    : ApplicationListModel(parent)
+    : ApplicationListModel(parent) // constructor calls load()
     , m_applet{applet}
 {
 }

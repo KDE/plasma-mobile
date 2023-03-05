@@ -16,13 +16,16 @@ for (var j = 0; j < desktopsArray.length; j++) {
     }
 }
 
-
 // keep this list in sync with shell/contents/updates/panelsfix.js
-var panel = new Panel("org.kde.plasma.mobile.panel");
-panel.location = "top";
-panel.addWidget("org.kde.plasma.notifications");
-panel.height = 1.25 * gridUnit; // HACK: supposed to be gridUnit + smallSpacing, but it doesn't seem to give the correct number
-
-var bottomPanel = new Panel("org.kde.desktopcontainment")
-bottomPanel.location = "bottom";
-bottomPanel.height = 2 * gridUnit;
+// var panel = new Panel("org.kde.plasma.mobile.panel");
+// panel.location = "top";
+// panel.addWidget("org.kde.plasma.notifications");
+// panel.height = 1.25 * gridUnit; // HACK: supposed to be gridUnit + smallSpacing, but it doesn't seem to give the correct number
+//
+// console.log('script');
+//
+// var bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
+// bottomPanel.location = "bottom";
+// bottomPanel.height = 2 * gridUnit;
+//
+// console.log('script');
