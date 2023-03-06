@@ -26,6 +26,7 @@ MobileShell.HomeScreen {
     
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
+        Halcyon.PinnedModel.applet = plasmoid.nativeInterface;
         forceActiveFocus();
     }
     
