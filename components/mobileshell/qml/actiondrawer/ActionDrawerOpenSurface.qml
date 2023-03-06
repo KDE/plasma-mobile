@@ -43,7 +43,7 @@ MouseArea {
     }
     
     anchors.fill: parent
-    onPressed: {
+    onPressed: mouse => {
         oldMouseY = mouse.y;
         
         // if the user swiped from the top left, otherwise it's from the top right
@@ -57,7 +57,7 @@ MouseArea {
     }
     onReleased: endSwipe()
     onCanceled: endSwipe()
-    onPositionChanged: {
+    onPositionChanged: mouse => {
         updateOffset(mouse.y - oldMouseY);
         oldMouseY = mouse.y;
     }
