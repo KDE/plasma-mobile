@@ -41,9 +41,19 @@ Kirigami.ScrollablePage {
         // If it is zero fall back to the height of its children
         // Also make it at least as high as the page itself. Some existing configs assume they fill the whole space
         // TODO KF6 clean this up by making all configs based on SimpleKCM/ScrollViewKCM/GridViewKCM
-        height: Math.max(root.availableHeight, item.implicitHeight ? item.implicitHeight : item.childrenRect.height)
+        height: {
+            if (item) {
+                return Math.max(root.availableHeight, item.implicitHeight ? item.implicitHeight : item.childrenRect.height);
+            } else {
+                return root.availableHeight;
+            }
+        }
 
         Component.onCompleted: {
+            if (!plasmoid) {
+                return;
+            }
+
             const plasmoidConfig = plasmoid.configuration
 
             const props = {}
