@@ -3,6 +3,7 @@
 
 import QtQuick 2.0
 
+import org.kde.plasma.plasmoid
 import org.kde.kirigami 2.10 as Kirigami
 
 Kirigami.ScrollablePage {
@@ -16,9 +17,9 @@ Kirigami.ScrollablePage {
     onSettingValueChanged: saveConfig() // we save config immediately on mobile
 
     function saveConfig() {
-        for (let key in plasmoid.configuration) {
+        for (let key in Plasmoid.configuration) {
             if (loader.item["cfg_" + key] != undefined) {
-                plasmoid.configuration[key] = loader.item["cfg_" + key]
+                Plasmoid.configuration[key] = loader.item["cfg_" + key]
             }
         }
 
@@ -50,22 +51,18 @@ Kirigami.ScrollablePage {
         }
 
         Component.onCompleted: {
-            if (!plasmoid) {
-                return;
-            }
-
-            const plasmoidConfig = plasmoid.configuration
+            const plasmoidConfig = Plasmoid.configuration
 
             const props = {}
             for (let key in plasmoidConfig) {
-                props["cfg_" + key] = plasmoid.configuration[key]
+                props["cfg_" + key] = Plasmoid.configuration[key]
             }
 
             setSource(configItem.source, props)
         }
 
         onLoaded: {
-            const plasmoidConfig = plasmoid.configuration;
+            const plasmoidConfig = Plasmoid.configuration;
 
             for (let key in plasmoidConfig) {
                 const changedSignal = item["cfg_" + key + "Changed"]

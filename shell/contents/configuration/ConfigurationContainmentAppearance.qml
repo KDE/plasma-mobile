@@ -9,6 +9,7 @@ import org.kde.plasma.configuration 2.0
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
+import org.kde.plasma.plasmoid
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -40,7 +41,7 @@ ColumnLayout {
 
     Kirigami.InlineMessage {
         Layout.alignment: Qt.AlignTop
-        visible: plasmoid.immutable || animating
+        visible: Plasmoid.immutable || animating
         text: i18nd("plasma_shell_org.kde.plasma.desktop", "Layout changes have been restricted by the system administrator")
         showCloseButton: true
         Layout.fillWidth: true
@@ -67,7 +68,7 @@ ColumnLayout {
                 
                 MobileForm.FormComboBoxDelegate {
                     id: layoutSelectComboBox
-                    enabled: !plasmoid.immutable
+                    enabled: !Plasmoid.immutable
                     text: i18nd("plasma_shell_org.kde.plasma.desktop", "Homescreen Layout")
                     description: i18n("The homescreen layout to use.")
                     visible: model.count > 1 // only show if there are multiple plugins

@@ -7,6 +7,7 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 
+import org.kde.plasma.plasmoid
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.configuration 2.0
 import org.kde.kitemmodels 1.0 as KItemModels
@@ -52,25 +53,25 @@ Rectangle {
         if (app.pageStack.currentItem.saveConfig) {
             app.pageStack.currentItem.saveConfig()
         }
-        for (var key in plasmoid.configuration) {
+        for (var key in Plasmoid.configuration) {
             if (app.pageStack.currentItem["cfg_"+key] !== undefined) {
-                plasmoid.configuration[key] = app.pageStack.currentItem["cfg_"+key]
+                Plasmoid.configuration[key] = app.pageStack.currentItem["cfg_"+key]
             }
         }
     }
 
     function configurationHasChanged() {
-        for (var key in plasmoid.configuration) {
+        for (var key in Plasmoid.configuration) {
             if (app.pageStack.currentItem["cfg_"+key] !== undefined) {
                 //for objects == doesn't work
-                if (typeof plasmoid.configuration[key] == 'object') {
-                    for (var i in plasmoid.configuration[key]) {
-                        if (plasmoid.configuration[key][i] != app.pageStack.currentItem["cfg_"+key][i]) {
+                if (typeof Plasmoid.configuration[key] == 'object') {
+                    for (var i in Plasmoid.configuration[key]) {
+                        if (Plasmoid.configuration[key][i] != app.pageStack.currentItem["cfg_"+key][i]) {
                             return true;
                         }
                     }
                     return false;
-                } else if (app.pageStack.currentItem["cfg_"+key] != plasmoid.configuration[key]) {
+                } else if (app.pageStack.currentItem["cfg_"+key] != Plasmoid.configuration[key]) {
                     return true;
                 }
             }
