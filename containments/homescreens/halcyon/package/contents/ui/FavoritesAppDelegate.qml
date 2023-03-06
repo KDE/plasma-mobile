@@ -189,7 +189,7 @@ Item {
         HoverHandler {
             id: hoverHandler
             acceptedDevices: PointerDevice.Mouse
-            acceptedPointerTypes: PointerDevice.GenericPointer
+            acceptedPointerTypes: PointerDevice.Generic
         }
         
         Rectangle {
