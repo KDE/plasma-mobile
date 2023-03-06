@@ -7,7 +7,7 @@ set(folioplugin_SRCS
     desktopmodel.cpp
 )
 
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/plasma/mobile/homescreen/halcyon)
+install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/mobile/homescreen/folio)
 
 add_library(folioplugin SHARED ${folioplugin_SRCS})
 
@@ -24,6 +24,6 @@ target_link_libraries(folioplugin
                       KF6::WaylandClient
                       KF6::WindowSystem)
 
-set_property(TARGET folioplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/private/plasma/mobile/homescreen/folio)
-install(TARGETS folioplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/plasma/mobile/homescreen/folio)
+set_property(TARGET folioplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/private/mobile/homescreen/folio)
+install(TARGETS folioplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/mobile/homescreen/folio)
 

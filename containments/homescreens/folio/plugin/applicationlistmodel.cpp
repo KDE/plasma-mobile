@@ -46,6 +46,12 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
 
 ApplicationListModel::~ApplicationListModel() = default;
 
+ApplicationListModel *ApplicationListModel::self()
+{
+    static ApplicationListModel *inst = new ApplicationListModel(nullptr);
+    return inst;
+}
+
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {
     return {{ApplicationNameRole, QByteArrayLiteral("applicationName")},

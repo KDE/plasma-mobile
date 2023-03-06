@@ -17,7 +17,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
+import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.kirigami 2.14 as Kirigami
 
 Repeater {

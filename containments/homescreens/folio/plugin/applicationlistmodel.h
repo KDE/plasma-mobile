@@ -53,6 +53,7 @@ public:
 
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
+    static ApplicationListModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;

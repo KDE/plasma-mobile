@@ -7,23 +7,23 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
-import QtGraphicalEffects 1.0
+import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
-import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
+import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.private.plasma.mobile.homescreen.folio 1.0 as Folio
+import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 import "private" as Private
 
 DragDrop.DropArea {
     id: dropArea
-    
+
     required property var homeScreenState
 
     required property Folio.DesktopModel desktopModel
@@ -52,6 +52,7 @@ DragDrop.DropArea {
         z: 999999
         appletsLayout: dropArea.appletsLayout
         favoriteStrip: dropArea.favoriteStrip
+        desktopModel: dropArea.desktopModel
     }
 
     property bool inAppletEditMode: false
@@ -68,7 +69,7 @@ DragDrop.DropArea {
         event.accept(event.proposedAction);
         launcherDragManager.active = true;
     }
-    
+
     onDragMove: {
         let posInFavorites = favoriteStrip.mapFromItem(this, event.x, event.y);
         if (posInFavorites.y > 0) {
