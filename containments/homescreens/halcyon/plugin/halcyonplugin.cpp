@@ -14,9 +14,8 @@ void HalcyonPlugin::registerTypes(const char *uri)
 
     WindowListener::instance(); // ensure it is created
 
-    ApplicationListModel *applicationListModel = new ApplicationListModel{this};
-    qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [applicationListModel](QQmlEngine *, QJSEngine *) -> QObject * {
-        return applicationListModel;
+    qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return ApplicationListModel::self();
     });
 
     PinnedModel *pinnedModel = new PinnedModel{this};
