@@ -89,9 +89,6 @@
         "Name[uk]": "Спалах",
         "Name[x-test]": "xxFlashlightxx",
         "Name[zh_CN]": "手电筒",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

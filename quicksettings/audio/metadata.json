@@ -89,9 +89,6 @@
         "Name[uk]": "Звук",
         "Name[x-test]": "xxAudioxx",
         "Name[zh_CN]": "声音",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

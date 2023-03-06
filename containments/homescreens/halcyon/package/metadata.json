@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -91,10 +92,6 @@
         "Name[uk]": "Альціон",
         "Name[x-test]": "xxHalcyonxx",
         "Name[zh_CN]": "Halcyon",
-        "ServiceTypes": [
-            "Plasma/Applet",
-            "Plasma/Containment"
-        ],
         "Version": "",
         "Website": ""
     },

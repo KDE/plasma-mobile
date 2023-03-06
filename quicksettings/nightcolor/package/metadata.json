@@ -92,9 +92,6 @@
         "Name[uk]": "Нічні кольори",
         "Name[x-test]": "xxNight Colorxx",
         "Name[zh_CN]": "夜间颜色",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

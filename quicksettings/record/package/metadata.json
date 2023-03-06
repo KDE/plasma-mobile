@@ -82,9 +82,6 @@
         "Name[uk]": "Запис з екрана",
         "Name[x-test]": "xxRecord Screenxx",
         "Name[zh_CN]": "屏幕录像",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

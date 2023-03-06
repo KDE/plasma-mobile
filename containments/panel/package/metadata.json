@@ -101,10 +101,6 @@
         "Name[x-test]": "xxPhone Panelxx",
         "Name[zh_CN]": "手机面板",
         "Name[zh_TW]": "手機面板",
-        "ServiceTypes": [
-            "Plasma/Applet",
-            "Plasma/Containment"
-        ],
         "Version": "",
         "Website": ""
     },

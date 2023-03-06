@@ -90,9 +90,6 @@
         "Name[uk]": "Параметри",
         "Name[x-test]": "xxSettingsxx",
         "Name[zh_CN]": "设置",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -86,10 +87,6 @@
         "Name[uk]": "Фоліо",
         "Name[x-test]": "xxFolioxx",
         "Name[zh_CN]": "Folio",
-        "ServiceTypes": [
-            "Plasma/Applet",
-            "Plasma/Containment"
-        ],
         "Version": "",
         "Website": ""
     },

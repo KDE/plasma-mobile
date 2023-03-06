@@ -87,9 +87,6 @@
         "Name[uk]": "Перемикання віртуальної клавіатури",
         "Name[x-test]": "xxVirtual Keyboard Togglexx",
         "Name[zh_CN]": "虚拟键盘开关",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

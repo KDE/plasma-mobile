@@ -104,9 +104,6 @@
         "Name[uk]": "Оболонка",
         "Name[x-test]": "xxShellxx",
         "Name[zh_CN]": "外壳程序",
-        "ServiceTypes": [
-            "KCModule"
-        ],
         "Version": "0.1",
         "Website": "https://plasma-mobile.org/"
     },

@@ -89,9 +89,6 @@
         "Name[uk]": "Мобільні дані",
         "Name[x-test]": "xxMobile Dataxx",
         "Name[zh_CN]": "移动数据",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

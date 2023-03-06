@@ -48,9 +48,6 @@
         "Name[tr]": "Erişim Noktası",
         "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

@@ -90,9 +90,6 @@
         "Name[uk]": "Wi-Fi",
         "Name[x-test]": "xxWi-Fixx",
         "Name[zh_CN]": "Wi-Fi",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

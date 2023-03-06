@@ -100,10 +100,6 @@
         "Name[x-test]": "xxPhone Task panelxx",
         "Name[zh_CN]": "手机任务面板",
         "Name[zh_TW]": "手機工作列",
-        "ServiceTypes": [
-            "Plasma/Applet",
-            "Plasma/Containment"
-        ],
         "Version": "",
         "Website": ""
     },

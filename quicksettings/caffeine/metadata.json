@@ -90,9 +90,6 @@
         "Name[uk]": "Кофеїн",
         "Name[x-test]": "xxCaffeinexx",
         "Name[zh_CN]": "保持亮屏",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }

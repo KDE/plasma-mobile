@@ -84,9 +84,6 @@
         "Name[uk]": "Не турбувати",
         "Name[x-test]": "xxDo Not Disturbxx",
         "Name[zh_CN]": "勿扰模式",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Version": "0.1",
         "Website": "https://kde.org"
     }
