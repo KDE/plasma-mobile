@@ -17,11 +17,11 @@ MobileShell.QuickSetting {
         id: pmSource
         engine: "powermanagement"
         connectedSources: sources
-        onSourceAdded: {
+        onSourceAdded: source => {
             disconnectSource(source);
             connectSource(source);
         }
-        onSourceRemoved: {
+        onSourceRemoved: source => {
             disconnectSource(source);
         }
     }
