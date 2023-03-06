@@ -128,12 +128,6 @@ void PinnedModel::moveEntry(int fromRow, int toRow)
     endMoveRows();
 
     save();
-
-    // HACK: didn't seem to persist
-    if (!m_applet) {
-        return;
-    }
-    m_applet->config().sync();
 }
 
 void PinnedModel::createFolderFromApps(int sourceAppRow, int draggedAppRow)
