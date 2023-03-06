@@ -47,7 +47,7 @@ MouseArea {
 
     focus: true
 
-    onPressed: mouse.accepted = mouse.source !== Qt.MouseEventNotSynthesized
+    onPressed: mouse => { mouse.accepted = mouse.source !== Qt.MouseEventNotSynthesized; }
     onVerticalScrollBarPolicyChanged: {
         scrollBarCreationTimer.restart();
     }

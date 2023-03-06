@@ -35,12 +35,12 @@ Item {
 
         enabled: !taskSwitcher.visible
         
-        onPressed: {
+        onPressed: mouse => {
             startMouseX = oldMouseX = mouse.x;
             startMouseY = oldMouseY = mouse.y;
         }
 
-        onPositionChanged: {
+        onPositionChanged: mouse => {
             if (root.taskSwitcher.visible || taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
                 // update task switcher drag
                 let offsetY = (mouse.y - oldMouseY) * 0.5; // we want to make the gesture take a longer swipe than it being pixel perfect

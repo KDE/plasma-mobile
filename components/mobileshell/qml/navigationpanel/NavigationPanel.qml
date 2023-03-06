@@ -65,7 +65,7 @@ Item {
             id: haptics
         }
         
-        onPressed: {
+        onPressed: mouse => {
             startMouseX = oldMouseX = mouse.y;
             startMouseY = oldMouseY = mouse.y;
             activeButton = icons.childAt(mouse.x, mouse.y);
@@ -74,7 +74,7 @@ Item {
             }
         }
         
-        onPositionChanged: {
+        onPositionChanged: mouse => {
             let newButton = icons.childAt(mouse.x, mouse.y);
             if (newButton != activeButton) {
                 activeButton = null;

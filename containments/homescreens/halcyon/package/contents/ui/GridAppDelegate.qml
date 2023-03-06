@@ -115,7 +115,13 @@ MouseArea {
         }
     }
     // launch app handled by press animation
-    onClicked: (mouse.button === Qt.RightButton) ? openContextMenu() : launchAppRequested = true
+    onClicked: mouse => {
+                   if (mouse.button === Qt.RightButton) {
+                       openContextMenu();
+                   } else {
+                       launchAppRequested = true;
+                   }
+               }
     
     ColumnLayout {
         anchors {

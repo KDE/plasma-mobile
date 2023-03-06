@@ -38,7 +38,7 @@ QQC2.AbstractButton {
         id: mouseArea
         anchors.fill: parent
         acceptedButtons: Qt.LeftButton | Qt.RightButton
-        onPressed: {
+        onPressed: mouse => {
             if (mouse.button === Qt.RightButton) {
                 root.rightClickPressed();
             } else {
