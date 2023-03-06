@@ -40,8 +40,6 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         }
 
         background.state = "open";
-        
-        MobileShellState.HomeScreenControls.taskSwitcher.minimizeAll();
     }
     
     function close() {

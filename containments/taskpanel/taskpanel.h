@@ -41,6 +41,8 @@ public:
 
     QAbstractItemModel *outputs() const;
 
+    Q_INVOKABLE void triggerTaskSwitcher() const;
+
 Q_SIGNALS:
     void panelChanged();
     void locationChanged();

@@ -95,9 +95,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     // /statusbar
     qmlRegisterType(resolvePath("statusbar/StatusBar.qml"), uri, 1, 0, "StatusBar");
 
-    // /taskswitcher
-    qmlRegisterType(resolvePath("taskswitcher/TaskSwitcher.qml"), uri, 1, 0, "TaskSwitcher");
-
     // /widgets
     qmlRegisterType(resolvePath("widgets/krunner/KRunnerWidget.qml"), uri, 1, 0, "KRunnerWidget");
     qmlRegisterType(resolvePath("widgets/mediacontrols/MediaControlsWidget.qml"), uri, 1, 0, "MediaControlsWidget");

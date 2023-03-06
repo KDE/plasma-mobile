@@ -44,7 +44,7 @@ Item {
      * Whether a component is being shown on top of the homescreen within the same
      * window.
      */
-    readonly property bool overlayShown: taskSwitcher.visible || startupFeedback.visible
+    readonly property bool overlayShown: startupFeedback.visible
     
     /**
      * Margins for the homescreen, taking panels into account.
@@ -82,9 +82,10 @@ Item {
             }
             
             MobileShellState.HomeScreenControls.resetHomeScreenPosition();
-            taskSwitcher.visible = false; // will trigger homescreen open
-            taskSwitcher.minimizeAll();
-            
+
+            MobileShell.WindowUtil.unsetAllMinimizedGeometries(root);
+            MobileShell.WindowUtil.minimizeAll();
+
             root.homeTriggered();
         }
         
@@ -109,7 +110,6 @@ Item {
     
     Plasmoid.onScreenChanged: {
         if (plasmoid.screen == 0) {
-            MobileShellState.HomeScreenControls.taskSwitcher = taskSwitcher;
             MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
@@ -127,7 +127,6 @@ Item {
 
         // set API variables
         if (plasmoid.screen == 0) {
-            MobileShellState.HomeScreenControls.taskSwitcher = taskSwitcher;
             MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
@@ -203,12 +202,10 @@ Item {
         
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if (!taskSwitcher.visible) {
-                if (!visibleMaximizedWindowsModel.isWindowMaximized || MobileShell.WindowUtil.activeWindowIsShell) {
-                    itemContainer.zoomIn();
-                } else {
-                    itemContainer.zoomOut();
-                }
+            if (!visibleMaximizedWindowsModel.isWindowMaximized || MobileShell.WindowUtil.activeWindowIsShell) {
+                itemContainer.zoomIn();
+            } else {
+                itemContainer.zoomOut();
             }
         }
         
@@ -231,45 +228,6 @@ Item {
             origin.y: itemContainer.height / 2; 
             xScale: itemContainer.zoomScale
             yScale: itemContainer.zoomScale
-        }
-    }
-    
-    // task switcher component
-    MobileShell.TaskSwitcher {
-        id: taskSwitcher
-        z: 999999
-        
-        topMargin: root.topMargin
-        bottomMargin: root.bottomMargin
-        leftMargin: root.leftMargin
-        rightMargin: root.rightMargin
-
-        tasksModel: TaskManager.TasksModel {
-            groupMode: TaskManager.TasksModel.GroupDisabled
-
-            screenGeometry: plasmoid.screenGeometry
-            sortMode: TaskManager.TasksModel.SortLastActivated
-
-            virtualDesktop: virtualDesktopInfo.currentDesktop
-            activity: activityInfo.currentActivity
-        }
-        
-        anchors.fill: parent
-        
-        // hide homescreen elements to make use of wallpaper
-        onVisibleChanged: {
-            if (visible) {
-                startupFeedback.visible = false;
-                
-                // hide immediately when going from homescreen
-                if (!taskSwitcher.wasInActiveTask) {
-                    itemContainer.opacity = 0;
-                }
-                itemContainer.zoomOut();
-                
-            } else {
-                itemContainer.zoomIn();
-            }
         }
     }
     

@@ -63,14 +63,6 @@
         <file>qml/statusbar/StatusBar.qml</file>
         <file>qml/statusbar/TaskWidget.qml</file>
         
-        <file>qml/taskswitcher/FlickContainer.qml</file>
-        <file>qml/taskswitcher/Task.qml</file>
-        <file>qml/taskswitcher/TaskIcon.qml</file>
-        <file>qml/taskswitcher/TaskList.qml</file>
-        <file>qml/taskswitcher/TaskSwitcher.qml</file>
-        <file>qml/taskswitcher/TaskSwitcherState.qml</file>
-        <file>qml/taskswitcher/Thumbnail.qml</file>
-        
         <file>qml/widgets/krunner/KRunnerWidget.qml</file>
         
         <file>qml/widgets/mediacontrols/BlurredBackground.qml</file>

@@ -13,11 +13,6 @@ QtObject {
     id: delegate
 
     /**
-     * Whether the task switcher is open.
-     */
-    readonly property bool taskSwitcherVisible: HomeScreenControls.taskSwitcherVisible
-    
-    /**
      * Whether the homescreen is currently visible.
      */
     readonly property bool homeScreenVisible: HomeScreenControls.homeScreenVisible

@@ -37,10 +37,8 @@ Item {
     }
     
     function openConfigure() {
-        if (!MobileShellState.Shell.taskSwitcherVisible) {
-            plasmoid.action("configure").trigger();
-            plasmoid.editMode = false;
-        }
+        plasmoid.action("configure").trigger();
+        plasmoid.editMode = false;
     }
 
     Connections {

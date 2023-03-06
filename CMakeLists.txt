@@ -14,7 +14,7 @@ set(QT_MIN_VERSION "6.4.0")
 set(KF6_MIN_VERSION "5.240.0")
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
@@ -53,6 +53,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
+    GlobalAccel
     KIO
     Config
     DBusAddons
@@ -74,6 +75,12 @@ pkg_check_modules(GOBJECT gobject-2.0 REQUIRED IMPORTED_TARGET)
 pkg_check_modules(GIO gio-2.0 REQUIRED IMPORTED_TARGET)
 
 find_package(KF6KirigamiAddons 0.6 REQUIRED)
+find_package(epoxy REQUIRED)
+find_package(XCB REQUIRED COMPONENTS XCB)
+find_package(KWinEffects 5.27.0 REQUIRED COMPONENTS
+    kwineffects
+)
+
 find_package(LibKWorkspace CONFIG REQUIRED)
 
 find_package(KWinDBusInterface)

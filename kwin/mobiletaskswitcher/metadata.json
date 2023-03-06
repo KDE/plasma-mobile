@@ -1,0 +1,12 @@
+{
+    "KPlugin": {
+        "Category": "Window Management",
+        "Description": "Allows you to switch between running tasks with a mobile interface.",
+        "EnabledByDefault": true,
+        "Id": "mobiletaskswitcher",
+        "License": "GPL",
+        "Name": "Mobile Task Switcher"
+    },
+    "X-KWin-Border-Activate": true
+}
+
