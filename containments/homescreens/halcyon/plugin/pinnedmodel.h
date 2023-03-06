@@ -32,6 +32,7 @@ public:
 
     PinnedModel(QObject *parent = nullptr);
     ~PinnedModel() override;
+    static PinnedModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

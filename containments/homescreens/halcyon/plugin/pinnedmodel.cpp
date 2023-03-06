@@ -15,6 +15,12 @@ PinnedModel::PinnedModel(QObject *parent)
 
 PinnedModel::~PinnedModel() = default;
 
+PinnedModel *PinnedModel::self()
+{
+    static PinnedModel *inst = new PinnedModel();
+    return inst;
+}
+
 int PinnedModel::rowCount(const QModelIndex &parent) const
 {
     return m_applications.count();

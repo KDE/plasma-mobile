@@ -18,9 +18,8 @@ void HalcyonPlugin::registerTypes(const char *uri)
         return ApplicationListModel::self();
     });
 
-    PinnedModel *pinnedModel = new PinnedModel{this};
-    qmlRegisterSingletonType<PinnedModel>(uri, 1, 0, "PinnedModel", [pinnedModel](QQmlEngine *, QJSEngine *) -> QObject * {
-        return pinnedModel;
+    qmlRegisterSingletonType<PinnedModel>(uri, 1, 0, "PinnedModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return PinnedModel::self();
     });
 
     qmlRegisterType<Application>(uri, 1, 0, "Application");
