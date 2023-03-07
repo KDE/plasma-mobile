@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-07 02:22+0000\n"
 "PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,43 +18,43 @@ msgstr ""
 "plasma.phone.pot\n"
 "X-Crowdin-File-ID: 40672\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/ConfigurationContainmentAppearance.qml:45
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "布局更改操作已被系统管理员限制使用"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "General"
 msgstr "常规"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "Homescreen Layout"
 msgstr "主屏幕布局"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:73
 msgid "The homescreen layout to use."
 msgstr "要使用的主屏幕布局。"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Plugin"
 msgstr "壁纸插件"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "The wallpaper plugin to use."
 msgstr "要使用的壁纸插件。"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Wallpaper Plugins"
 msgstr "壁纸插件"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:140
 msgid "Get New Plugins…"
 msgstr "获取新插件…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:155
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "必须先应用布局更改才能更改其他选项"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:161
 msgid "Apply now"
 msgstr "立即应用"
 

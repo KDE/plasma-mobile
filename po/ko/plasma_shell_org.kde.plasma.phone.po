@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-07 02:22+0000\n"
 "PO-Revision-Date: 2022-07-13 12:05+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,43 +17,43 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/ConfigurationContainmentAppearance.qml:45
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "시스템 관리자가 레이아웃 변경을 제한함"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "General"
 msgstr "일반"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "Homescreen Layout"
 msgstr "홈 화면 레이아웃"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:73
 msgid "The homescreen layout to use."
 msgstr "사용할 홈 화면 레이아웃입니다."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Plugin"
 msgstr "배경 그림 플러그인"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "The wallpaper plugin to use."
 msgstr "사용할 배경 그림 플러그인입니다."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Wallpaper Plugins"
 msgstr "배경 그림 플러그인"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:140
 msgid "Get New Plugins…"
 msgstr "새 플러그인 가져오기…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:155
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "다른 항목을 변경하기 전 레이아웃 변경 사항을 적용해야 합니다"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:161
 msgid "Apply now"
 msgstr "지금 적용하기"
 

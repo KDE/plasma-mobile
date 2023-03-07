@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-07 02:22+0000\n"
 "PO-Revision-Date: 2022-07-10 15:28+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -20,43 +20,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/ConfigurationContainmentAppearance.qml:45
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Antolaeran aldaketak murriztu ditu administratzaileak"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "General"
 msgstr "Orokorra"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "Homescreen Layout"
 msgstr "Etxeko pantailaren antolaera"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:73
 msgid "The homescreen layout to use."
 msgstr "Etxeko pantailarekin erabili beharreko antolaera."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Plugin"
 msgstr "Horma-paper plugina"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "The wallpaper plugin to use."
 msgstr "Horma-paperarekin erabili beharreko plugina."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Wallpaper Plugins"
 msgstr "Horma-paper pluginak"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:140
 msgid "Get New Plugins…"
 msgstr "Lortu plugin berriak..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:155
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Antolaera aldaketak ezarri behar dira beste aldaketarik egin aurretik"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:161
 msgid "Apply now"
 msgstr "Ezarri orain"
 

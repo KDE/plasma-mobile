@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-07 02:22+0000\n"
 "PO-Revision-Date: 2022-06-25 01:51+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -12,46 +12,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+#: contents/configuration/ConfigurationContainmentAppearance.qml:45
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 "As mudanças de disposição estão restritas pelo administrador de sistemas"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "General"
 msgstr "Geral"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "Homescreen Layout"
 msgstr "Disposição do Ecrã Inicial"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:73
 msgid "The homescreen layout to use."
 msgstr "A disposição do ecrã inicial a usar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Plugin"
 msgstr "'Plugin' do Papel de Parede"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "The wallpaper plugin to use."
 msgstr "O 'plugin' do papel de parede a usar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Wallpaper Plugins"
 msgstr "'Plugins' do Papel de Parede"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:140
 msgid "Get New Plugins…"
 msgstr "Obter Novos 'Plugins'…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:155
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "As mudanças de disposição devem ser aplicadas antes de se poderem fazer "
 "outras alterações"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:161
 msgid "Apply now"
 msgstr "Aplicar agora"
 
