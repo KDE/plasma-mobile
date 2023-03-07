@@ -5,6 +5,7 @@
             {
                 "Email": "plasma-mobile@kde.org",
                 "Name": "KDE Visual Design Group",
+                "Name[ca@valencia]": "Grup de disseny visual de KDE",
                 "Name[ca]": "Grup de disseny visual de KDE",
                 "Name[es]": "El grupo de diseño visual de KDE",
                 "Name[eu]": "KDE Ikus-diseinu taldea",
@@ -20,6 +21,7 @@
         ],
         "Category": "",
         "Description": "Plasma for mobile devices",
+        "Description[ca@valencia]": "Plasma per a dispositius mòbils",
         "Description[ca]": "Plasma per a dispositius mòbils",
         "Description[es]": "Plasma para dispositivos móviles",
         "Description[eu]": "Plasma gailu mugikorretarako",
@@ -34,6 +36,7 @@
         "Id": "org.kde.breeze.mobile",
         "License": "GPLv2+",
         "Name": "Plasma Mobile Breeze",
+        "Name[ca@valencia]": "Plasma Mobile Brisa",
         "Name[ca]": "Plasma Mobile Brisa",
         "Name[es]": "Brisa de Plasma Mobile",
         "Name[eu]": "Plasma Mugikorra Breeze",

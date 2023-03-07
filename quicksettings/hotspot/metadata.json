@@ -5,6 +5,7 @@
             {
                 "Email": "skilvingr@gmail.com",
                 "Name": "Yari Polla",
+                "Name[ca@valencia]": "Yari Polla",
                 "Name[ca]": "Yari Polla",
                 "Name[es]": "Yari Polla",
                 "Name[eu]": "Yari Polla",
@@ -20,6 +21,7 @@
             }
         ],
         "Description": "Hotspot quick setting for Plasma Mobile",
+        "Description[ca@valencia]": "Configuració ràpida del punt d'accés per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del punt d'accés per al Plasma Mobile",
         "Description[es]": "Ajuste rápido del punto de acceso para Plasma Mobile",
         "Description[eu]": "Berogunearen ezarpen azkarra Plasma Mugikorrerako",
@@ -36,6 +38,7 @@
         "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
         "Name": "Hotspot",
+        "Name[ca@valencia]": "Punt d'accés",
         "Name[ca]": "Punt d'accés",
         "Name[es]": "Punto de acceso",
         "Name[eu]": "Berogunea",
