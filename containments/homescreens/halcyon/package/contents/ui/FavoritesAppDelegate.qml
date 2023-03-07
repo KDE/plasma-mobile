@@ -73,7 +73,7 @@ Item {
             if (application.running) {
                 launchAppWithAnim(0, 0, "", applicationName, applicationStorageId);
             } else {
-                launchAppWithAnim(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), iconLoader.source, applicationName, applicationStorageId);
+                launchAppWithAnim(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), delegate.applicationIcon, applicationName, applicationStorageId);
             }
         }
     }
