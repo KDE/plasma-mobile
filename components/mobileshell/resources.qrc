@@ -28,6 +28,7 @@
         <file>qml/components/HapticsEffectWrapper.qml</file>
         <file>qml/components/ListView.qml</file>
         <file>qml/components/MarqueeLabel.qml</file>
+        <file>qml/components/PopupMenu.qml</file>
         <file>qml/components/StartupFeedback.qml</file>
         <file>qml/components/util.js</file>
         <file>qml/components/VelocityCalculator.qml</file>
