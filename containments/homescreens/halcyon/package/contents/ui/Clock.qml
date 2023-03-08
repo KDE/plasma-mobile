@@ -7,6 +7,7 @@ import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 
 import org.kde.plasma.private.mobileshell as MobileShell
 
@@ -58,7 +59,7 @@ ColumnLayout {
         }
     }
     
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: timeSource
         engine: "time"
         connectedSources: ["Local"]

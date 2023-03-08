@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PC3
 
 Item {
@@ -49,7 +50,7 @@ Item {
         }
     }
     
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: pmSource
         engine: "powermanagement"
         connectedSources: ["PowerDevil"]

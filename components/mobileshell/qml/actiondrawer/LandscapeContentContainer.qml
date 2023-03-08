@@ -12,6 +12,7 @@ import QtQuick.Window 2.2
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
@@ -49,7 +50,7 @@ PlasmaCore.ColorScope {
         opacity: opacityValue
     }
     
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: timeSource
         engine: "time"
         connectedSources: ["Local"]

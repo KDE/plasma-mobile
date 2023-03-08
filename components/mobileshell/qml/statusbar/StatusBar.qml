@@ -13,6 +13,7 @@ import QtQml.Models 2.12
 import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
@@ -59,7 +60,7 @@ Item {
     readonly property real smallerTextPixelSize: 9
     readonly property real elementSpacing: PlasmaCore.Units.smallSpacing * 1.5
     
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: timeSource
         engine: "time"
         connectedSources: ["Local"]
@@ -72,7 +73,7 @@ Item {
     Loader {
         id: statusNotifierSourceLoader
         active: !disableSystemTray
-        sourceComponent: PlasmaCore.DataSource {
+        sourceComponent: P5Support.DataSource {
             id: statusNotifierSource
             engine: "statusnotifieritem"
             interval: 0

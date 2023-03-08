@@ -8,8 +8,9 @@
 import QtQuick 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 
-PlasmaCore.DataSource {
+P5Support.DataSource {
     id: mpris2Source
 
     engine: "mpris2"

@@ -11,6 +11,7 @@ import QtQuick.Window 2.2
 import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -37,7 +38,7 @@ Item {
     property var model
     property int modelIndex
     
-    property PlasmaCore.DataSource timeSource
+    property P5Support.DataSource timeSource
     
     readonly property int notificationType: model.type
 

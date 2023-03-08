@@ -13,6 +13,7 @@ import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -117,7 +118,7 @@ Item {
         MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_notifications");
     }
 
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: timeDataSource
         engine: "time"
         connectedSources: ["Local"]
