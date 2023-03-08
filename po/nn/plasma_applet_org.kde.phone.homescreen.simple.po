@@ -1,4 +1,4 @@
-# Translation of plasma_applet_org.kde.phone.homescreen.simple to Norwegian Nynorsk
+# Translation of plasma_applet_org.kde.plasma.mobile.homescreen.halcyon to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
 msgid ""
