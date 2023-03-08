@@ -52,18 +52,17 @@ Item {
     // close context menu if drag move
     onXChanged: {
         if (dialogLoader.item) {
-            dialogLoader.item.close()
+            dialogLoader.active = false;
         }
     }
     onYChanged: {
         if (dialogLoader.item) {
-            dialogLoader.item.close()
+            dialogLoader.active = false;
         }
     }
     
     function openContextMenu() {
         dialogLoader.active = true;
-        dialogLoader.item.open();
     }
     
     function launch() {
@@ -91,27 +90,28 @@ Item {
         application.setMinimizedDelegate(delegate);
         MobileShell.ShellUtil.launchApp(application.storageId);
     }
-    
+
     Loader {
         id: dialogLoader
         active: false
         
-        sourceComponent: PlasmaComponents.Menu {
-            id: menu
+        sourceComponent: MobileShell.PopupMenu {
+            id: popup
+
+            mappedGlobalCoordinates: delegate.mapToGlobal(delegate.x, delegate.y)
+            relatedTo: delegate
+
             title: label.text
-            closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
-            
-            Repeater {
-                model: menuActions
-                delegate: PlasmaComponents.MenuItem {
-                    icon.name: modelData.iconName
-                    text: modelData.text
-                    onClicked: modelData.triggered()
+            menuActions: delegate.menuActions
+
+            onVisibleChanged: {
+                if (!popup.visible) {
+                    dialogLoader.active = false;
                 }
             }
-            
-            onClosed: dialogLoader.active = false
         }
+
+        onLoaded: item.showOverlay()
     }
     
     MouseArea {

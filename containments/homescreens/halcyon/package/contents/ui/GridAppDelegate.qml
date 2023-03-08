@@ -35,7 +35,6 @@ MouseArea {
     
     function openContextMenu() {
         dialogLoader.active = true;
-        dialogLoader.item.open();
     }
     
     cursorShape: Qt.PointingHandCursor
@@ -50,24 +49,34 @@ MouseArea {
             delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
         }
     }
-    
+
     Loader {
         id: dialogLoader
         active: false
-        
-        sourceComponent: PlasmaComponents.Menu {
+
+        sourceComponent: MobileShell.PopupMenu {
+            id: popup
+
+            mappedGlobalCoordinates: icon.mapToGlobal(icon.x, icon.y)
+            relatedTo: icon
+
             title: label.text
-            closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
-            
-            PlasmaComponents.MenuItem {
-                icon.name: "emblem-favorite"
-                text: i18n("Add to favourites")
-                onClicked: {
-                    Halcyon.PinnedModel.addApp(application.storageId, 0);
+            menuActions: [
+                Kirigami.Action {
+                    iconName: "emblem-favorite"
+                    text: i18n("Add to favourites")
+                    onTriggered: Halcyon.PinnedModel.addApp(application.storageId, 0);
+                }
+            ]
+
+            onVisibleChanged: {
+                if (!popup.visible) {
+                    dialogLoader.active = false;
                 }
             }
-            onClosed: dialogLoader.active = false
         }
+
+        onLoaded: item.showOverlay()
     }
 
     // grow/shrink animation
@@ -124,6 +133,8 @@ MouseArea {
                }
     
     ColumnLayout {
+        id: columnLayout
+
         anchors {
             fill: parent
             leftMargin: margins
