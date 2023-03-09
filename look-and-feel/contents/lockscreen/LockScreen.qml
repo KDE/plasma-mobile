@@ -50,7 +50,7 @@ Item {
             blur: root.notificationsShown || root.drawerOpen // only blur once animation finished for performance
         }
     }
-
+    
     Connections {
         target: root.lockScreenState
 

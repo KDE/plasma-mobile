@@ -29,6 +29,9 @@ Item {
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingApp: visibleMaximizedWindowsModel.count > 0
     readonly property color backgroundColor: topPanel.colorScopeColor
+    
+    // whether this is an overlay over the lockscreen
+    readonly property bool lockscreenShown: plasmoid.nativeInterface.lockscreenShown
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     
@@ -91,6 +94,9 @@ Item {
     Component.onCompleted: {
         // we want to bind global volume shortcuts here
         MobileShell.AudioProvider.bindShortcuts = true;
+        
+        // initialize lockscreen overlay
+        plasmoid.nativeInterface.initializeOverlay(plasmoid.Window.window);
     }
     
     TaskManager.VirtualDesktopInfo {
@@ -125,9 +131,12 @@ Item {
         id: topPanel
         anchors.fill: parent
         
-        showDropShadow: !root.showingApp
-        colorGroup: root.showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-        backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
+        showDropShadow: root.lockscreenShown || !root.showingApp
+        colorGroup: (!root.lockscreenShown && root.showingApp) ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        backgroundColor: (!root.lockscreenShown && root.showingApp) ? root.backgroundColor : "transparent"
+        
+        showSecondRow: false
+        showTime: !root.lockscreenShown
     }
     
     MobileShell.ActionDrawerOpenSurface {
