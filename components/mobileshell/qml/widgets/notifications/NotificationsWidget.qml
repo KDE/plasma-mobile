@@ -123,7 +123,7 @@ Item {
         engine: "time"
         connectedSources: ["Local"]
         interval: 60000 // 1 min
-        intervalAlignment: PlasmaCore.Types.AlignToMinute
+        intervalAlignment: P5Support.Types.AlignToMinute
     }
     
     // implement background clicking signal
