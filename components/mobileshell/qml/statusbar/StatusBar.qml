@@ -152,7 +152,7 @@ Item {
                         model: PlasmaCore.SortFilterModel {
                             id: filteredStatusNotifiers
                             filterRole: "Title"
-                            sourceModel: PlasmaCore.DataModel {
+                            sourceModel: P5Support.DataModel {
                                 dataSource: statusNotifierSource ? statusNotifierSource : null
                             }
                         }
