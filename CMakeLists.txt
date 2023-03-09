@@ -34,6 +34,7 @@ include(ECMMarkNonGuiExecutable)
 include(ECMGenerateHeaders)
 include(ECMFindQmlModule)
 include(ECMGenerateQmlTypes)
+include(ECMConfiguredInstall)
 include(ECMFindQmlModule)
 include(GenerateExportHeader)
 include(KDEGitCommitHooks)
@@ -55,10 +56,6 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Sensors
     WaylandClient
 )
-
-if(Qt6WaylandClient_VERSION VERSION_GREATER_EQUAL "6.10.0")
-    find_package(Qt6 REQUIRED COMPONENTS WaylandClientPrivate)
-endif()
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
@@ -100,6 +97,14 @@ find_package(KWin ${PROJECT_DEP_VERSION} REQUIRED COMPONENTS
 )
 
 find_package(LayerShellQt REQUIRED)
+find_package(Wayland REQUIRED)
+find_package(PlasmaWaylandProtocols 1.8 CONFIG)
+set_package_properties(PlasmaWaylandProtocols PROPERTIES
+    TYPE REQUIRED
+    PURPOSE "Collection of Plasma-specific Wayland protocols"
+    URL "https://invent.kde.org/libraries/plasma-wayland-protocols/"
+)
+
 
 find_package(LibKWorkspace CONFIG REQUIRED)
 find_package(Libudev REQUIRED)
