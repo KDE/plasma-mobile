@@ -95,17 +95,6 @@ Item {
         id: lockscreenContainer
         anchors.fill: parent
 
-        // Header bar and action drawer
-        HeaderComponent {
-            id: headerBar
-            z: 1
-            anchors.fill: parent
-            statusBarHeight: MobileShell.Constants.topPanelHeight
-            openFactor: flickableLoader.item ? flickableLoader.item.flickable.openFactor : 0
-            notificationsModel: root.notifModel
-            onPasswordRequested: root.askPassword()
-        }
-
         // Add loading indicator when status bar has not loaded yet
         PC3.BusyIndicator {
             id: flickableLoadingBusyIndicator
@@ -239,11 +228,10 @@ Item {
                     onNotificationsShownChanged: root.notificationsShown = notificationsShown
                     onPasswordRequested: flickable.goToOpenPosition()
 
-                    scrollLock: headerBar.actionDrawerVisible || (flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false)
+                    scrollLock: (flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false)
                     z: scrollLock ? -1 : 0
 
                     anchors {
-                        //topMargin: headerBar.statusBarHeight
                         top: item.top
                         bottom: item.bottom
                         left: item.left
