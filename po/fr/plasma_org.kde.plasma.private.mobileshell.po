@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 02:13+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2022-12-27 18:07+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -219,29 +219,29 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Envoyer"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:176
+#: qml/widgets/notifications/NotificationsWidget.qml:177
 #, kde-format
 msgid "Notification service not available"
 msgstr "Le service de notifications est non disponible."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:185
+#: qml/widgets/notifications/NotificationsWidget.qml:186
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Les notifications sont actuellement fournies par « %1 %2 »."
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:322
 #, kde-format
 msgid "Show Fewer"
 msgstr "En afficher moins"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:324
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Afficher %1 de plus"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:383
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Effacer toutes les notifications"

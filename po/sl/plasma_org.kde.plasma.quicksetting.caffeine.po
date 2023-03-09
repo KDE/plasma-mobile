@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2023-01-20 08:40+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 22.12.1\n"
 
-#: contents/ui/main.qml:11
+#: contents/ui/main.qml:12
 #, kde-format
 msgid "Caffeine"
 msgstr "Caffeine"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:14
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Tapnite, da onemogočite preprečevanje spanja"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:14
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Tapnite, da preprečite spanje"
 
-#: contents/ui/main.qml:36
+#: contents/ui/main.qml:37
 #, kde-format
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr ""

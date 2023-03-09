@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 02:13+0000\n"
+"POT-Creation-Date: 2023-03-09 02:16+0000\n"
 "PO-Revision-Date: 2022-12-20 11:47+0200\n"
 "Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -223,29 +223,29 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Надіслати"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:176
+#: qml/widgets/notifications/NotificationsWidget.qml:177
 #, kde-format
 msgid "Notification service not available"
 msgstr "Немає доступу до служби сповіщень"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:185
+#: qml/widgets/notifications/NotificationsWidget.qml:186
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "За роботу сповіщень зараз відповідає «%1 %2»"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:322
 #, kde-format
 msgid "Show Fewer"
 msgstr "Показувати менше"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:324
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Показати ще %1"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:383
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Вилучити усі сповіщення"
