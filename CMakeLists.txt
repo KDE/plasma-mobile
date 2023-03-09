@@ -67,7 +67,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Declarative
     Package
 )
-find_package(KF5KirigamiAddons 0.6 REQUIRED)
+find_package(KF6KirigamiAddons 0.6 REQUIRED)
 
 find_package(LibKWorkspace CONFIG REQUIRED)
 

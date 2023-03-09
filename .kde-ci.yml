@@ -19,6 +19,6 @@ Dependencies:
     'frameworks/plasma-framework': '@latest-kf6'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
-    'libraries/kirigami-addons': '@latest'
+    'libraries/kirigami-addons': '@latest-kf6'
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
