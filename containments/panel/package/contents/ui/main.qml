@@ -77,6 +77,17 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: MobileShellState.LockscreenDBusClient
+
+        // Raise panel over the lockscreen
+        function onLockscreenActiveChanged() {
+            if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                Plasmoid.raiseOverlay();
+            }
+        }
+    }
+
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
     readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
@@ -145,6 +156,9 @@ ContainmentItem {
         // Initialize notification popups.
         // Initialize action popup buttons.
         MobileShell.PopupProviderLoader.load();
+
+        // initialize lockscreen overlay
+        Plasmoid.initializeOverlay(Window.window);
     }
 
     MobileShell.StartupFeedbackPanelFill {
