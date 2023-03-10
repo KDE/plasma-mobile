@@ -1,3 +1,9 @@
+/*
+ *  SPDX-FileCopyrightText: 2023 Yari Polla <skilvingr@gmail.com>
+ *
+ *  SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
 import QtQuick
 import QtQuick.Layouts
 
