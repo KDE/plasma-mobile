@@ -23,7 +23,6 @@ NanoShell.FullScreenOverlay {
     visible: false
     color: "transparent"
 
-
     property point mappedGlobalCoordinates
     property Item relatedTo: null
     property string title
@@ -31,7 +30,7 @@ NanoShell.FullScreenOverlay {
 
     function showOverlay() {
         if (!overlay.visible) {
-            overlay.showMaximized();
+            overlay.visible = true;
             menu.open();
         }
     }
@@ -63,7 +62,7 @@ NanoShell.FullScreenOverlay {
             title: overlay.title
             closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
 
-            onClosed: overlay.hide()
+            onClosed: overlay.close()
 
             Component.onCompleted: {
                 for (var i = 0; i < menuActions.length; i++) {
