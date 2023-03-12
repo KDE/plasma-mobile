@@ -22,6 +22,16 @@ MobileShell.GridView {
     cacheBuffer: cellHeight * 20 // 10 rows above and below
     reuseItems: true
     
+    Controls.ScrollBar.vertical: Controls.ScrollBar {
+        policy: Controls.ScrollBar.AlwaysOn
+    }
+
+    onFocusChanged: {
+        if (focus) {
+            forceActiveFocus();
+        }
+    }
+
     // ensure items aren't visible out of bounds
     layer.enabled: true
     
@@ -69,6 +79,7 @@ MobileShell.GridView {
         font.weight: Font.Bold
     }
     
+    Keys.onReturnPressed: currentItem.launchApp()
     delegate: GridAppDelegate {
         id: delegate
         

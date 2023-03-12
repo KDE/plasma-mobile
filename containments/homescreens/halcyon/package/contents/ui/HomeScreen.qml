@@ -30,6 +30,7 @@ Item {
     
     function triggerHomescreen() {
         swipeView.setCurrentIndex(0);
+        swipeView.focusChild();
         favoritesView.closeFolder();
         favoritesView.goToBeginning();
         gridAppList.goToBeginning();
@@ -41,7 +42,17 @@ Item {
             plasmoid.editMode = false;
         }
     }
-    
+
+    Connections {
+        target: MobileShellState.HomeScreenControls
+
+        function onHomeScreenVisibleChanged(){
+            if (MobileShellState.HomeScreenControls.homeScreenVisible) {
+                swipeView.focusChild();
+            }
+        }
+    }
+
     QQC2.SwipeView {
         id: swipeView
         opacity: 1 - searchWidget.openFactor
@@ -52,13 +63,28 @@ Item {
         anchors.bottomMargin: root.bottomMargin
         anchors.leftMargin: root.leftMargin
         anchors.rightMargin: root.rightMargin
-        
+
+        function focusChild() {
+            currentItem.childFocus = true;
+        }
+
+        onCurrentIndexChanged: focusChild()
+
         Item {
             height: swipeView.height
             width: swipeView.width
-            
+
+
+            property alias childFocus: favoritesView.focus
+
             // open wallpaper menu when held on click
             TapHandler {
+                onPressedChanged: {
+                    if (pressed) {
+                        favoritesView.resetHighlight();
+                    }
+                }
+
                 onLongPressed: root.openConfigure()
             }
             
@@ -70,17 +96,18 @@ Item {
                 onOpenConfigureRequested: root.openConfigure()
             }
         }
-        
-        QQC2.ScrollView {
+
+        Item {
             width: swipeView.width
             height: swipeView.height
 
-            // disable horizontal scrollbar
-            QQC2.ScrollBar.horizontal: QQC2.ScrollBar { policy: QQC2.ScrollBar.AlwaysOff }
+            property alias childFocus: gridAppList.focus
 
             GridAppList {
                 id: gridAppList
                 
+                anchors.fill: parent
+
                 property int horizontalMargin: Math.round(swipeView.width  * 0.05)
                 interactive: root.interactive
                 leftMargin: horizontalMargin

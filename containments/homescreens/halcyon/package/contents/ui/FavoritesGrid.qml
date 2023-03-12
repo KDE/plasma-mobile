@@ -75,6 +75,7 @@ MobileShell.GridView {
         contentItem: Clock {}
     }
     
+    Keys.onReturnPressed: currentItem.appDelegate.launch()
     model: DelegateModel {
         id: visualModel
         model: Halcyon.PinnedModel
@@ -82,7 +83,8 @@ MobileShell.GridView {
         delegate: Item {
             id: delegateRoot
             property int visualIndex: DelegateModel.itemsIndex
-            
+            property alias appDelegate: appDelegate
+
             width: root.cellWidth
             height: root.cellHeight
             

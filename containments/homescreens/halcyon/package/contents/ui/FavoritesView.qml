@@ -18,6 +18,12 @@ Item {
     id: root
     layer.enabled: true
     
+    onFocusChanged: {
+        if (focus) {
+            favoritesGrid.forceActiveFocus();
+        }
+    }
+
     required property bool interactive
     required property var searchWidget
     
@@ -47,6 +53,10 @@ Item {
     function openFolder() {
         folderShown = true;
         openFolderAnim.restart()
+    }
+
+    function resetHighlight() {
+        favoritesGrid.currentIndex = -1;
     }
     
     FavoritesGrid {
