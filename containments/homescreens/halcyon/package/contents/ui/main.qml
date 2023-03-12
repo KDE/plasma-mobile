@@ -40,30 +40,26 @@ MobileShell.HomeScreen {
         }
     }
     
-    Plasmoid.onActivated: {       
+    Plasmoid.onActivated: {
         // there's a couple of steps:
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!plasmoid.nativeInterface.showingDesktop && !MobileShellState.Shell.homeScreenVisible
-            || MobileShellState.Shell.actionDrawerVisible 
+        if (!MobileShell.WindowUtil.showDesktop && !MobileShellState.Shell.homeScreenVisible
             || search.isOpen
         ) {
-            // Always close action drawer
-            if (MobileShellState.Shell.actionDrawerVisible) {
-                MobileShellState.Shell.closeActionDrawer();
-            }
-            
-            // Always close the search widget as well
+            // Always close the search widget
             if (search.isOpen) {
                 search.close();
             }
-            
-            plasmoid.nativeInterface.showingDesktop = true;
+
+            homescreen.page = 0;
+
+            MobileShell.WindowUtil.showDesktop = true;
         } else if (homescreen.page == 0) {
             homescreen.page = 1;
         } else {
-            plasmoid.nativeInterface.showingDesktop = false;
+            MobileShell.WindowUtil.showDesktop = false;
             homescreen.page = 0;
         }
     }
