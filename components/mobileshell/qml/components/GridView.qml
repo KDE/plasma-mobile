@@ -19,6 +19,12 @@ GridView {
         }
     }
 
+    onDraggingChanged: {
+        if (dragging) {
+            currentIndex = -1;
+        }
+    }
+
     Component {
         id: highlightComponent
         Rectangle {
