@@ -59,7 +59,7 @@ MobileShell.GridView {
 
     header: MobileShell.BaseItem {
         implicitWidth: gridView.effectiveContentWidth
-        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.2)
+        topPadding: PlasmaCore.Units.largeSpacing + Math.round(gridView.height * 0.1)
         bottomPadding: PlasmaCore.Units.largeSpacing
         leftPadding: PlasmaCore.Units.smallSpacing
         
@@ -102,5 +102,9 @@ MobileShell.GridView {
             application.setMinimizedDelegate(delegate);
             MobileShell.ShellUtil.launchApp(application.storageId);
         }
+    }
+
+    Component.onCompleted: {
+        goToBeginning();
     }
 }
