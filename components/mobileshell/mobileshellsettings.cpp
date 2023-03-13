@@ -31,6 +31,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT opaqueAppDrawerChanged();
             Q_EMIT keyboardButtonEnabledChanged();
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
             Q_EMIT actionDrawerTopLeftModeChanged();
@@ -104,6 +105,19 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::opaqueAppDrawer() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("opaqueAppDrawer", true);
+}
+
+void MobileShellSettings::setOpaqueAppDrawer(bool opaqueAppDrawer)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("opaqueAppDrawer", opaqueAppDrawer, KConfigGroup::Notify);
     m_config->sync();
 }
 

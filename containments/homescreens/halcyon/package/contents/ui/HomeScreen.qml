@@ -13,6 +13,7 @@ import org.kde.plasma.components 3.0 as PC3
 import org.kde.draganddrop as DragDrop
 
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
@@ -47,6 +48,8 @@ Item {
         opacity: 1 - searchWidget.openFactor
         interactive: root.interactive
         
+        clip: MobileShell.MobileShellSettings.opaqueAppDrawer
+
         anchors.fill: parent
         anchors.topMargin: root.topMargin
         anchors.bottomMargin: root.bottomMargin
@@ -71,17 +74,19 @@ Item {
             }
         }
         
-        QQC2.ScrollView {
+        Rectangle {
             width: swipeView.width
             height: swipeView.height
-
-            // disable horizontal scrollbar
-            QQC2.ScrollBar.horizontal: QQC2.ScrollBar { policy: QQC2.ScrollBar.AlwaysOff }
+            radius: PlasmaCore.Units.smallSpacing
+            color: MobileShell.MobileShellSettings.opaqueAppDrawer ? PlasmaCore.Theme.backgroundColor : "transparent"
 
             GridAppList {
                 id: gridAppList
                 
+                anchors.fill: parent
+
                 property int horizontalMargin: Math.round(swipeView.width  * 0.05)
+
                 interactive: root.interactive
                 leftMargin: horizontalMargin
                 rightMargin: horizontalMargin

@@ -86,6 +86,30 @@ KCM.SimpleKCM {
         MobileForm.FormCard {
             Layout.fillWidth: true
             Layout.topMargin: Kirigami.Units.largeSpacing
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormCardHeader {
+                    title: i18n("App Drawer")
+                }
+
+                MobileForm.FormSwitchDelegate {
+                    text: i18n("Opaque App Drawer")
+                    description: i18n("Makes the app drawer opaque.")
+                    checked: MobileShell.MobileShellSettings.opaqueAppDrawer
+                    onCheckedChanged: {
+                        if (checked !== MobileShell.MobileShellSettings.opaqueAppDrawer) {
+                            MobileShell.MobileShellSettings.opaqueAppDrawer = checked;
+                        }
+                    }
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
             
             contentItem: ColumnLayout {
                 spacing: 0

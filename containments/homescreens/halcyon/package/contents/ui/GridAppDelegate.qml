@@ -193,7 +193,7 @@ MouseArea {
 
             font.pointSize: theme.defaultFont.pointSize * 0.85
             font.weight: Font.Bold
-            color: "white"
+            color: MobileShell.MobileShellSettings.opaqueAppDrawer ? PlasmaCore.Theme.textColor : PlasmaCore.Theme.complementaryTextColor
         }
     }
 }

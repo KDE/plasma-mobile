@@ -22,6 +22,8 @@ MobileShell.GridView {
     cacheBuffer: cellHeight * 20 // 10 rows above and below
     reuseItems: true
     
+    Controls.ScrollBar.vertical: Controls.ScrollBar {}
+
     // ensure items aren't visible out of bounds
     layer.enabled: true
     
@@ -54,7 +56,7 @@ MobileShell.GridView {
         leftPadding: PlasmaCore.Units.smallSpacing
         
         contentItem: PC3.Label {
-            color: "white"
+            color: MobileShell.MobileShellSettings.opaqueAppDrawer ? PlasmaCore.Theme.textColor : PlasmaCore.Theme.complementaryTextColor
             font.pointSize: 16
             font.weight: Font.Bold
             text: i18n("Applications")

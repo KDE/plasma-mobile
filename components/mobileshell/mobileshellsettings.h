@@ -29,6 +29,9 @@ class MobileShellSettings : public QObject
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
 
+    // app drawer
+    Q_PROPERTY(bool opaqueAppDrawer READ opaqueAppDrawer WRITE setOpaqueAppDrawer NOTIFY opaqueAppDrawerChanged)
+
     // task switcher
     Q_PROPERTY(bool taskSwitcherPreviewsEnabled READ taskSwitcherPreviewsEnabled WRITE setTaskSwitcherPreviewsEnabled NOTIFY taskSwitcherPreviewsEnabledChanged)
 
@@ -116,6 +119,20 @@ public:
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
     /**
+     * Whether the app drawer background is opaque.
+     *
+     * If this is true, then app drawer background is opaque.
+     */
+    bool opaqueAppDrawer() const;
+
+    /**
+     * Set whether the app drawer background should be opaque.
+     *
+     * @param opaqueAppDrawer Whether the app drawer background should be opaque.
+     */
+    void setOpaqueAppDrawer(bool opaqueAppDrawer);
+
+    /**
      * Whether task switcher application previews are enabled.
      */
     bool taskSwitcherPreviewsEnabled() const;
@@ -180,6 +197,7 @@ Q_SIGNALS:
     void vibrationIntensityChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
+    void opaqueAppDrawerChanged();
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
     void taskSwitcherPreviewsEnabledChanged();
