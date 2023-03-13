@@ -34,6 +34,9 @@ public:
     SavedQuickSettingsModel *enabledQuickSettingsModel() const;
     SavedQuickSettingsModel *disabledQuickSettingsModel() const;
 
+    Q_INVOKABLE void enableQS(int index);
+    Q_INVOKABLE void disableQS(int index);
+
 private:
     void refreshModel();
     void saveModel();

@@ -57,6 +57,21 @@ void SavedQuickSettingsModel::insertRow(KPluginMetaData *metaData, int index)
     Q_EMIT dataUpdated(m_data);
 }
 
+KPluginMetaData *SavedQuickSettingsModel::takeRow(int index)
+{
+    if (index < 0 || index >= m_data.size()) {
+        return {};
+    }
+
+    Q_EMIT beginRemoveRows(QModelIndex(), index, index);
+    KPluginMetaData *tmp = m_data.takeAt(index);
+    Q_EMIT endRemoveRows();
+
+    Q_EMIT dataUpdated(m_data);
+
+    return tmp;
+}
+
 void SavedQuickSettingsModel::removeRow(int index)
 {
     if (index < 0 || index >= m_data.size()) {

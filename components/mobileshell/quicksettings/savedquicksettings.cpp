@@ -98,6 +98,28 @@ SavedQuickSettingsModel *SavedQuickSettings::disabledQuickSettingsModel() const
     return m_disabledQSModel;
 }
 
+void SavedQuickSettings::enableQS(int index)
+{
+    KPluginMetaData *tmp = m_disabledQSModel->takeRow(index);
+
+    if (!tmp) {
+        return;
+    }
+
+    m_enabledQSModel->insertRow(tmp, m_enabledQSModel->rowCount({}));
+}
+
+void SavedQuickSettings::disableQS(int index)
+{
+    KPluginMetaData *tmp = m_enabledQSModel->takeRow(index);
+
+    if (!tmp) {
+        return;
+    }
+
+    m_disabledQSModel->insertRow(tmp, m_disabledQSModel->rowCount({}));
+}
+
 void SavedQuickSettings::refreshModel()
 {
     QList<QString> enabledQS = m_settings->enabledQuickSettings();

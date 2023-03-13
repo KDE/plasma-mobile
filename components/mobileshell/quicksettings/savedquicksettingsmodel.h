@@ -36,6 +36,7 @@ public:
 
     Q_INVOKABLE void moveRow(int oldIndex, int newIndex);
     Q_INVOKABLE void insertRow(KPluginMetaData *metaData, int index);
+    Q_INVOKABLE KPluginMetaData *takeRow(int index);
     Q_INVOKABLE void removeRow(int index);
 
     QList<KPluginMetaData *> list() const;
