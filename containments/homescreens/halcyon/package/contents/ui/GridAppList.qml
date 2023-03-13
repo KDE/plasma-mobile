@@ -22,12 +22,12 @@ MobileShell.GridView {
     cacheBuffer: cellHeight * 20 // 10 rows above and below
     reuseItems: true
     
-    Controls.ScrollBar.vertical: Controls.ScrollBar {
-        policy: Controls.ScrollBar.AlwaysOn
-    }
+    Controls.ScrollBar.vertical: Controls.ScrollBar {}
 
-    onFocusChanged: {
-        if (focus) {
+    Connections {
+        target: parent
+
+        function onFocusRequested() {
             forceActiveFocus();
         }
     }

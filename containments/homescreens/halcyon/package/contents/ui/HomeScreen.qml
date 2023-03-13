@@ -65,7 +65,7 @@ Item {
         anchors.rightMargin: root.rightMargin
 
         function focusChild() {
-            currentItem.childFocus = true;
+            currentItem.focusRequested();
         }
 
         onCurrentIndexChanged: focusChild()
@@ -74,8 +74,7 @@ Item {
             height: swipeView.height
             width: swipeView.width
 
-
-            property alias childFocus: favoritesView.focus
+            signal focusRequested()
 
             // open wallpaper menu when held on click
             TapHandler {
@@ -101,7 +100,7 @@ Item {
             width: swipeView.width
             height: swipeView.height
 
-            property alias childFocus: gridAppList.focus
+            signal focusRequested()
 
             GridAppList {
                 id: gridAppList

@@ -17,12 +17,6 @@ import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 Item {
     id: root
     layer.enabled: true
-    
-    onFocusChanged: {
-        if (focus) {
-            favoritesGrid.forceActiveFocus();
-        }
-    }
 
     required property bool interactive
     required property var searchWidget
@@ -41,6 +35,14 @@ Item {
     
     signal openConfigureRequested()
     
+    Connections {
+        target: parent
+
+        function onFocusRequested() {
+            favoritesGrid.forceActiveFocus();
+        }
+    }
+
     function goToBeginning() {
         goToBeginningAnim.restart();
     }
