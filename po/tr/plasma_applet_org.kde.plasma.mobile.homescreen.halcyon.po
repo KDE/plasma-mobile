@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
 "PO-Revision-Date: 2023-03-06 12:44+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FavoritesGrid.qml:226
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Sık kullanılanlardan kaldır"
 
-#: package/contents/ui/FavoritesGrid.qml:305
+#: package/contents/ui/FavoritesGrid.qml:307
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Uygulamaları kolayca başlatmak için sık kullanılanlara ekleyin."
@@ -33,12 +33,12 @@ msgstr "Uygulamaları kolayca başlatmak için sık kullanılanlara ekleyin."
 msgid "Move out of folder"
 msgstr "Klasörden dışarı taşı"
 
-#: package/contents/ui/GridAppDelegate.qml:64
+#: package/contents/ui/GridAppDelegate.qml:67
 #, kde-format
 msgid "Add to favourites"
 msgstr "Sık kullanılanlara ekle"
 
-#: package/contents/ui/GridAppList.qml:60
+#: package/contents/ui/GridAppList.qml:70
 #, kde-format
 msgid "Applications"
 msgstr "Uygulamalar"

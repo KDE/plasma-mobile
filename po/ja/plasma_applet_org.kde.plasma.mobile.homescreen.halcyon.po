@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
 "PO-Revision-Date: 2022-06-10 23:41-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -14,13 +14,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FavoritesGrid.qml:226
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "お気に入りから削除する"
 
-#: package/contents/ui/FavoritesGrid.qml:305
+#: package/contents/ui/FavoritesGrid.qml:307
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "アプリケーションをお気に入りに登録して、ここに表示させる。"
@@ -30,12 +30,12 @@ msgstr "アプリケーションをお気に入りに登録して、ここに表
 msgid "Move out of folder"
 msgstr "フォルダーの外に移動する"
 
-#: package/contents/ui/GridAppDelegate.qml:64
+#: package/contents/ui/GridAppDelegate.qml:67
 #, kde-format
 msgid "Add to favourites"
 msgstr "お気に入りに追加する"
 
-#: package/contents/ui/GridAppList.qml:60
+#: package/contents/ui/GridAppList.qml:70
 #, kde-format
 msgid "Applications"
 msgstr "アプリケーション"

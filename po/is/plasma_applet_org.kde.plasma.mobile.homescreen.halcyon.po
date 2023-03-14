@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
 "PO-Revision-Date: 2022-10-14 16:54+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FavoritesGrid.qml:226
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Fjarlægja úr eftirlætum"
 
-#: package/contents/ui/FavoritesGrid.qml:305
+#: package/contents/ui/FavoritesGrid.qml:307
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Þú getur bætt forritum í eftirlætin þin og þau munu birtast hérna."
@@ -33,12 +33,12 @@ msgstr "Þú getur bætt forritum í eftirlætin þin og þau munu birtast hérn
 msgid "Move out of folder"
 msgstr "Færa út úr möppu"
 
-#: package/contents/ui/GridAppDelegate.qml:64
+#: package/contents/ui/GridAppDelegate.qml:67
 #, kde-format
 msgid "Add to favourites"
 msgstr "Bæta í eftirlæti"
 
-#: package/contents/ui/GridAppList.qml:60
+#: package/contents/ui/GridAppList.qml:70
 #, kde-format
 msgid "Applications"
 msgstr "Forrit"

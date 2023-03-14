@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
 "PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,13 +18,13 @@ msgstr ""
 "phone.homescreen.simple.pot\n"
 "X-Crowdin-File-ID: 40670\n"
 
-#: package/contents/ui/FavoritesGrid.qml:224
+#: package/contents/ui/FavoritesGrid.qml:226
 #: package/contents/ui/FolderGrid.qml:202
 #, kde-format
 msgid "Remove from favourites"
 msgstr "移出常用应用"
 
-#: package/contents/ui/FavoritesGrid.qml:305
+#: package/contents/ui/FavoritesGrid.qml:307
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "将应用程序添加到常用程序后，它们将在此显示"
@@ -34,12 +34,12 @@ msgstr "将应用程序添加到常用程序后，它们将在此显示"
 msgid "Move out of folder"
 msgstr "移出文件夹"
 
-#: package/contents/ui/GridAppDelegate.qml:64
+#: package/contents/ui/GridAppDelegate.qml:67
 #, kde-format
 msgid "Add to favourites"
 msgstr "添加到常用应用"
 
-#: package/contents/ui/GridAppList.qml:60
+#: package/contents/ui/GridAppList.qml:70
 #, kde-format
 msgid "Applications"
 msgstr "应用程序"
