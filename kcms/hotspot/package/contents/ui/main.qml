@@ -17,15 +17,20 @@ SimpleKCM {
         id: handler
     }
 
+    PlasmaNM.WirelessStatus {
+        id: wirelessStatus
+    }
+
     Kirigami.FormLayout {
         Controls.Switch {
             id: hotspotToggle
             Kirigami.FormData.label: i18n("Enabled:")
+            checked: wirelessStatus.hotspotSSID.length !== 0
             onToggled: {
                 if (hotspotToggle.checked) {
-                    handler.createHotspot()
+                    handler.createHotspot();
                 } else {
-                    handler.stopHotspot()
+                    handler.stopHotspot();
                 }
             }
         }
