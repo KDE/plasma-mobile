@@ -4,7 +4,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.15 as Controls
-import QtGraphicalEffects 1.12
+import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.12 as Kirigami
 
 Controls.Dialog {
