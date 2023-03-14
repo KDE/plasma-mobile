@@ -1,8 +1,5 @@
-/*
-    SPDX-FileCopyrightText: 2021 Devin Lin <espidev@gmail.com>
-
-    SPDX-License-Identifier: GPL-3.0-or-later
-*/
+// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "modemdetails.h"
 

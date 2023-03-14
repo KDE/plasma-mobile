@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2014 Kai Uwe Broulik <kde@privat.broulik.de>
+# SPDX-FileCopyrightText: 2014 Martin Klapetek <mklapetek@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
 [Domain]
 Name=Date and Time Control Module
 Name[az]=Tarix və Vaxta Nəzarət Modulu

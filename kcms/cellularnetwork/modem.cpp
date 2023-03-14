@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
-// SPDX-License-Identifier: GPL-3.0-or-later
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "modem.h"
 
