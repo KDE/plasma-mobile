@@ -28,7 +28,7 @@ SimpleKCM {
             checked: wirelessStatus.hotspotSSID.length !== 0
             onToggled: {
                 if (hotspotToggle.checked) {
-                    handler.createHotspot();
+                    handler.createHotspotUnconditionally();
                 } else {
                     handler.stopHotspot();
                 }

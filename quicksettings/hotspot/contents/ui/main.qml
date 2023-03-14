@@ -26,7 +26,7 @@ MobileShell.QuickSetting {
 
     function toggle() {
         if (!enabled) {
-            nmHandler.createHotspot();
+            nmHandler.createHotspotUnconditionally();
         } else {
             nmHandler.stopHotspot();
         }
