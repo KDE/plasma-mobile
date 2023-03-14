@@ -34,6 +34,7 @@ Item {
     property bool folderShown: false
     
     signal openConfigureRequested()
+    signal pageForwardRequested();
     
     Connections {
         target: parent
@@ -87,6 +88,10 @@ Item {
         transform: Translate { x: favoritesGrid.translateX }
         opacity: 1 - openFolderProgress
         visible: opacity !== 0
+
+        rightEdgeCallback: () => {
+                               pageForwardRequested();
+                           }
     }
  
     FolderGrid {

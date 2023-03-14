@@ -93,6 +93,12 @@ Item {
                 searchWidget: root.searchWidget
                 interactive: root.interactive
                 onOpenConfigureRequested: root.openConfigure()
+
+                onPageForwardRequested: {
+                    swipeView.setCurrentIndex(1);
+                    swipeView.focusChild();
+                    resetHighlight();
+                }
             }
         }
 
@@ -111,6 +117,12 @@ Item {
                 interactive: root.interactive
                 leftMargin: horizontalMargin
                 rightMargin: horizontalMargin
+
+                leftEdgeCallback: () => {
+                                      swipeView.setCurrentIndex(0);
+                                      swipeView.focusChild();
+                                      currentIndex = -1;
+                                  }
             }
         }
     }
