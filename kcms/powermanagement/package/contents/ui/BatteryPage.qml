@@ -9,7 +9,7 @@ import QtQuick.Controls 2.10 as QQC2
 import QtQuick.Layouts 1.11
 
 import org.kde.kirigami 2.10 as Kirigami
-import org.kde.plasma.components 2.0 as PlasmaComponents
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kcm 1.2
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
