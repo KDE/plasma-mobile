@@ -29,15 +29,17 @@ SimpleKCM {
                                     && manualIPprefix.acceptableInput
                                     && manualIPdns.acceptableInput))
 
-    actions.main: Kirigami.Action {
-        icon.name: "dialog-ok"
-        text: i18n("Save")
-        enabled: enabledSave
-        onTriggered: {
-            save()
-            kcm.pop()
+    actions: [
+        Kirigami.Action {
+            icon.name: "dialog-ok"
+            text: i18n("Save")
+            enabled: enabledSave
+            onTriggered: {
+                save()
+                kcm.pop()
+            }
         }
-    }
+    ]
 
     Kirigami.FormLayout {
         Item {
