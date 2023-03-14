@@ -67,8 +67,13 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Declarative
     Package
 )
-find_package(KF6KirigamiAddons 0.6 REQUIRED)
 
+find_package(PkgConfig REQUIRED)
+
+pkg_check_modules(GOBJECT gobject-2.0 REQUIRED IMPORTED_TARGET)
+pkg_check_modules(GIO gio-2.0 REQUIRED IMPORTED_TARGET)
+
+find_package(KF6KirigamiAddons 0.6 REQUIRED)
 find_package(LibKWorkspace CONFIG REQUIRED)
 
 find_package(KWinDBusInterface)
