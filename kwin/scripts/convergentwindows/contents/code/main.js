@@ -12,7 +12,7 @@ function run(client) {
 
 workspace.clientAdded.connect((client) => {
   if (client.normalWindow) {
-    client.clientFinishUserMovedResized.connect((client) => {
+    client.interactiveMoveResizeFinished.connect((client) => {
       run(client);
     });
     run(client);
@@ -22,7 +22,7 @@ workspace.clientAdded.connect((client) => {
 // Windows are moved from the external screen
 // to the internal screen if the external screen
 // is disconnected.
-workspace.numberScreensChanged.connect((count) => {
+workspace.screensChanged.connect(() => {
   const clients = workspace.clientList();
 
   for (var i = 0; i < clients.length; i++) {
