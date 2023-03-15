@@ -1,60 +1,82 @@
-/*
-    SPDX-FileCopyrightText: 2020 Tobias Fella <fella@posteo.de>
+// SPDX-FileCopyrightText: 2020 Tobias Fella <fella@posteo.de>
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
-    SPDX-License-Identifier: LGPL-2.0-or-later
-*/
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as Controls
-import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
-import org.kde.kirigami 2.10 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.plasma.networkmanagement as PlasmaNM
+import org.kde.kirigami as Kirigami
+import org.kde.kcm
+import org.kde.kirigamiaddons.labs.mobileform as MobileForm
 
 SimpleKCM {
+    id: root
 
-    PlasmaNM.Handler {
-        id: handler
-    }
+    leftPadding: 0
+    rightPadding: 0
+    topPadding: Kirigami.Units.gridUnit
+    bottomPadding: Kirigami.Units.gridUnit
 
-    PlasmaNM.WirelessStatus {
-        id: wirelessStatus
-    }
+    ColumnLayout {
+        spacing: 0
+        width: root.width
 
-    Kirigami.FormLayout {
-        Controls.Switch {
-            id: hotspotToggle
-            Kirigami.FormData.label: i18n("Enabled:")
-            checked: wirelessStatus.hotspotSSID.length !== 0
-            onToggled: {
-                if (hotspotToggle.checked) {
-                    handler.createHotspot();
-                } else {
-                    handler.stopHotspot();
+        PlasmaNM.Handler {
+            id: handler
+        }
+
+        PlasmaNM.WirelessStatus {
+            id: wirelessStatus
+        }
+
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormSwitchDelegate {
+                    id: hotspotToggle
+                    text: i18n("Hotspot")
+                    description: i18n("Whether the wireless hotspot is enabled.");
+
+                    checked: wirelessStatus.hotspotSSID.length !== 0
+
+                    onToggled: {
+                        if (hotspotToggle.checked) {
+                            handler.createHotspot();
+                        } else {
+                            handler.stopHotspot();
+                        }
+                    }
                 }
             }
         }
 
-        Controls.TextField {
-            id: hotspotName
-            Kirigami.FormData.label: i18n("SSID:")
-            text: PlasmaNM.Configuration.hotspotName
-        }
+        MobileForm.FormCard {
+            Layout.fillWidth: true
+            Layout.topMargin: Kirigami.Units.largeSpacing
 
-        Kirigami.PasswordField {
-            id: hotspotPassword
-            Kirigami.FormData.label: i18n("Password:")
-            text: PlasmaNM.Configuration.hotspotPassword
-        }
+            contentItem: ColumnLayout {
+                spacing: 0
 
-        Controls.Button {
-            text: i18n("Save")
-            onClicked: {
-                PlasmaNM.Configuration.hotspotName = hotspotName.text
-                PlasmaNM.Configuration.hotspotPassword = hotspotPassword.text
-                if (hotspotToggle.checked) {
-                    handler.stopHotspot()
-                    handler.createHotspot()
+                MobileForm.FormTextFieldDelegate {
+                    label: i18n("Hotspot SSID")
+                    enabled: !hotspotToggle.checked
+                    text: PlasmaNM.Configuration.hotspotName
+                    onTextChanged: PlasmaNM.Configuration.hotspotName = text
+                }
+
+                MobileForm.FormDelegateSeparator {}
+
+                MobileForm.FormTextFieldDelegate {
+                    label: i18n("Hotspot Password")
+                    enabled: !hotspotToggle.checked
+                    echoMode: MobileForm.FormTextFieldDelegate.Password
+                    text: PlasmaNM.Configuration.hotspotPassword
+                    onTextChanged: PlasmaNM.Configuration.hotspotPassword = text
                 }
             }
         }
