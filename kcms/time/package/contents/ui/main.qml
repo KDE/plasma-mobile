@@ -153,12 +153,14 @@ SimpleKCM {
             }
         }
         ListView {
+            id: listView
+
             clip: true
             anchors.fill: parent
             implicitWidth: 18 * Kirigami.Units.gridUnit
             model: kcm.timeZonesModel
             delegate: Kirigami.DelegateRecycler {
-                width: parent.width
+                width: listView.width
 
                 sourceComponent: listDelegateComponent
             }
