@@ -5,3 +5,4 @@
 add_subdirectory(mmplugin)
 add_subdirectory(mobileshell)
 add_subdirectory(mobileshellstate)
+add_subdirectory(windowplugin)

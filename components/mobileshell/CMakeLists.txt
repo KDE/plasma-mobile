@@ -8,7 +8,6 @@ set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     mobileshellsettings.cpp
     shellutil.cpp
-    windowutil.cpp
     components/direction.cpp
     quicksettings/quicksetting.cpp
     quicksettings/paginatemodel.cpp

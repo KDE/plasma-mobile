@@ -73,6 +73,14 @@ public:
     QList<KWayland::Client::PlasmaWindow *> windowsFromStorageId(const QString &storageId) const;
 
     /**
+     * Activates the first window by its associated storage id.
+     *
+     * @param storageId the window's storage id
+     * @returns whether a window was activated
+     */
+    Q_INVOKABLE bool activateWindowByStorageId(const QString &storageId);
+
+    /**
      * Close the current active window.
      */
     Q_INVOKABLE void closeActiveWindow();

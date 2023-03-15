@@ -8,7 +8,6 @@
 
 #include "shellutil.h"
 #include "mobileshellsettings.h"
-#include "windowutil.h"
 
 #include <KConfigGroup>
 #include <KFileUtils>
@@ -81,15 +80,6 @@ bool ShellUtil::isSystem24HourFormat()
 
 void ShellUtil::launchApp(const QString &storageId)
 {
-    // try to activate a running window first
-    auto windows = WindowUtil::instance()->windowsFromStorageId(storageId);
-
-    if (!windows.empty()) {
-        windows[0]->requestActivate();
-        return;
-    }
-
-    // now try launching the window
     KService::Ptr service = KService::serviceByStorageId(storageId);
     if (!service) {
         qWarning() << "Could not find" << storageId;

@@ -25,10 +25,4 @@ PlasmaComponents.Label {
     text: Qt.formatTime(source.data.Local.DateTime, is24HourTime ? "h:mm" : "h:mm ap")
     color: PlasmaCore.ColorScope.textColor
     verticalAlignment: Qt.AlignVCenter
-
-    TapHandler {
-        onTapped: {
-            MobileShell.ShellUtil.launchApp("org.kde.kclock.desktop");
-        }
-    }
 }

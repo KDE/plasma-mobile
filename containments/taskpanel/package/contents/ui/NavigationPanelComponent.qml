@@ -1,17 +1,18 @@
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.4
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Window
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.workspace.keyboardlayout as Keyboards
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.taskmanager 0.1 as TaskManager
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.taskmanager as TaskManager
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 MobileShell.NavigationPanel {
     id: root
@@ -77,7 +78,7 @@ MobileShell.NavigationPanel {
         
         onTriggered: {
             MobileShellState.HomeScreenControls.openHomeScreen();
-            MobileShell.WindowUtil.allWindowsMinimizedChanged();
+            WindowPlugin.WindowUtil.allWindowsMinimizedChanged();
         }
     }
     
@@ -85,7 +86,7 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
         
-        enabled: Keyboards.KWinVirtualKeyboard.visible || MobileShell.WindowUtil.hasCloseableActiveWindow
+        enabled: Keyboards.KWinVirtualKeyboard.visible || WindowPlugin.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
         iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
@@ -94,7 +95,7 @@ MobileShell.NavigationPanel {
             if (Keyboards.KWinVirtualKeyboard.active) {
                 // close keyboard if it is open
                 Keyboards.KWinVirtualKeyboard.active = false;
-            } else if (MobileShell.WindowUtil.hasCloseableActiveWindow) {
+            } else if (WindowPlugin.WindowUtil.hasCloseableActiveWindow) {
                 // if task switcher is closed, but there is an active window
                 if (tasksModel.activeTask !== 0) {
                     tasksModel.requestClose(tasksModel.activeTask);

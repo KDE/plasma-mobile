@@ -100,7 +100,7 @@ MobileShell.GridView {
             }
 
             application.setMinimizedDelegate(delegate);
-            MobileShell.ShellUtil.launchApp(application.storageId);
+            MobileShell.AppLaunch.launchOrActivateApp(application.storageId);
         }
     }
 

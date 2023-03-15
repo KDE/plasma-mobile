@@ -20,6 +20,7 @@
         <file>qml/actiondrawer/LandscapeContentContainer.qml</file>
         <file>qml/actiondrawer/PortraitContentContainer.qml</file>
         
+        <file>qml/components/AppLaunch.qml</file>
         <file>qml/components/BaseItem.qml</file>
         <file>qml/components/ExtendedAbstractButton.qml</file>
         <file>qml/components/Flickable.qml</file>

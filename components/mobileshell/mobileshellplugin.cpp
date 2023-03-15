@@ -22,7 +22,6 @@
 
 #include "mobileshellsettings.h"
 #include "shellutil.h"
-#include "windowutil.h"
 
 QUrl resolvePath(std::string str)
 {
@@ -46,9 +45,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType<PaginateModel>(uri, 1, 0, "PaginateModel");
     qmlRegisterType<SavedQuickSettings>(uri, 1, 0, "SavedQuickSettings");
     qmlRegisterType<SavedQuickSettingsModel>(uri, 1, 0, "SavedQuickSettingsModel");
-    qmlRegisterSingletonType<WindowUtil>(uri, 1, 0, "WindowUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return WindowUtil::instance();
-    });
 
     // components
     qmlRegisterType<Direction>(uri, 1, 0, "Direction");
@@ -68,6 +64,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("actiondrawer/ActionDrawerWindow.qml"), uri, 1, 0, "ActionDrawerWindow");
 
     // /components
+    qmlRegisterSingletonType(resolvePath("components/AppLaunch.qml"), uri, 1, 0, "AppLaunch");
     qmlRegisterType(resolvePath("components/BaseItem.qml"), uri, 1, 0, "BaseItem");
     qmlRegisterType(resolvePath("components/ExtendedAbstractButton.qml"), uri, 1, 0, "ExtendedAbstractButton");
     qmlRegisterType(resolvePath("components/Flickable.qml"), uri, 1, 0, "Flickable");

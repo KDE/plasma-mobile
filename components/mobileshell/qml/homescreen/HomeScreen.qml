@@ -3,15 +3,16 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Window
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasmoid 2.0
-import org.kde.taskmanager 0.1 as TaskManager
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
+import org.kde.taskmanager as TaskManager
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 /**
  * The base homescreen component, implementing features that simplify
@@ -77,14 +78,14 @@ Item {
         target: MobileShellState.HomeScreenControls
         
         function onOpenHomeScreen() {
-            if (!MobileShell.WindowUtil.allWindowsMinimized) {
+            if (!WindowPlugin.WindowUtil.allWindowsMinimized) {
                 itemContainer.zoomIn();
             }
             
             MobileShellState.HomeScreenControls.resetHomeScreenPosition();
 
-            MobileShell.WindowUtil.unsetAllMinimizedGeometries(root);
-            MobileShell.WindowUtil.minimizeAll();
+            WindowPlugin.WindowUtil.unsetAllMinimizedGeometries(root);
+            WindowPlugin.WindowUtil.minimizeAll();
 
             root.homeTriggered();
         }
@@ -202,7 +203,7 @@ Item {
         
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if (!visibleMaximizedWindowsModel.isWindowMaximized || MobileShell.WindowUtil.activeWindowIsShell) {
+            if (!visibleMaximizedWindowsModel.isWindowMaximized || WindowPlugin.WindowUtil.activeWindowIsShell) {
                 itemContainer.zoomIn();
             } else {
                 itemContainer.zoomOut();
@@ -210,7 +211,7 @@ Item {
         }
         
         Connections {
-            target: MobileShell.WindowUtil
+            target: WindowPlugin.WindowUtil
             function onActiveWindowIsShellChanged() {
                 itemContainer.evaluateAnimChange();
             }

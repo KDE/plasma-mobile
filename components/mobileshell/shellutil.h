@@ -52,7 +52,7 @@ public:
     Q_INVOKABLE void executeCommand(const QString &command);
 
     /**
-     * Launch an application by name. Sets the internal "launched app" state.
+     * Launch an application by name.
      *
      * @param storageId The storage id of the application to launch.
      */

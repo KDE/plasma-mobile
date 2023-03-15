@@ -137,6 +137,18 @@ bool WindowUtil::hasCloseableActiveWindow() const
     return m_activeWindow && m_activeWindow->isCloseable() /*&& !m_activeWindow->isMinimized()*/;
 }
 
+bool WindowUtil::activateWindowByStorageId(const QString &storageId)
+{
+    auto windows = windowsFromStorageId(storageId);
+
+    if (!windows.empty()) {
+        windows[0]->requestActivate();
+        return true;
+    }
+
+    return false;
+}
+
 void WindowUtil::closeActiveWindow()
 {
     if (m_activeWindow) {

@@ -75,7 +75,7 @@ Item {
                     implicitWidth: playerItem.implicitWidth
                     
                     onClicked: {
-                        MobileShell.ShellUtil.launchApp(modelData.desktopEntry + ".desktop");
+                        Components.AppLaunch.launchOrActivateApp(modelData.desktopEntry + ".desktop");
                         MobileShellState.Shell.closeActionDrawer();
                     }
                     

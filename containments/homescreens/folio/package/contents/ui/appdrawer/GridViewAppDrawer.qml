@@ -79,7 +79,7 @@ AbstractAppDrawer {
                 }
 
                 Folio.ApplicationListModel.setMinimizedDelegate(index, delegate);
-                MobileShell.ShellUtil.launchApp(storageId);
+                MobileShell.AppLaunch.launchOrActivateApp(storageId);
                 root.launched();
             }
         }
