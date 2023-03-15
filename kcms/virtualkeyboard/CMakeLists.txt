@@ -5,17 +5,17 @@ set(MALIIT_KEYBOARD_LANGUAGES_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/maliit/keyboard2
 
 add_definitions(-DQT_NO_KEYWORDS)
 
-set(onscreenkeyboard_SRCS
+set(virtualkeyboard_SRCS
     languagemodel.cpp
     gsettingsitem.cpp
     virtualkeyboard.cpp
 )
 
-add_library(kcm_mobile_onscreenkeyboard MODULE ${onscreenkeyboard_SRCS})
+add_library(kcm_mobile_virtualkeyboard MODULE ${virtualkeyboard_SRCS})
 
-target_compile_definitions(kcm_mobile_onscreenkeyboard PRIVATE "MALIIT_KEYBOARD_LANGUAGES_DIR=\"${MALIIT_KEYBOARD_LANGUAGES_DIR}\"")
+target_compile_definitions(kcm_mobile_virtualkeyboard PRIVATE "MALIIT_KEYBOARD_LANGUAGES_DIR=\"${MALIIT_KEYBOARD_LANGUAGES_DIR}\"")
 
-target_link_libraries(kcm_mobile_onscreenkeyboard
+target_link_libraries(kcm_mobile_virtualkeyboard
     Qt::Core
     KF6::CoreAddons
     KF6::I18n
@@ -25,6 +25,6 @@ target_link_libraries(kcm_mobile_onscreenkeyboard
     PkgConfig::GOBJECT
 )
 
-install(TARGETS kcm_mobile_onscreenkeyboard DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
+install(TARGETS kcm_mobile_virtualkeyboard DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
 
 kpackage_install_package(package kcm_mobile_virtualkeyboard kcms)

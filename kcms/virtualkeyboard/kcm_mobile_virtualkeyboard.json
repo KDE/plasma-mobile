@@ -33,14 +33,14 @@
                 "Name[zh_CN]": "Bhushan Shah"
             }
         ],
-        "Description": "On-Screen Keyboard configuration",
+        "Description": "Virtual Keyboard configuration",
         "FormFactors": [
             "handset",
             "tablet"
         ],
         "Icon": "input-keyboard",
         "License": "GPL",
-        "Name": "On-Screen Keyboard",
+        "Name": "Virtual Keyboard",
         "Version": "1.0",
         "Website": "https://plasma-mobile.org"
     },

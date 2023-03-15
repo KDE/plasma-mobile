@@ -14,12 +14,12 @@ MobileShell.QuickSetting {
     status: enabled ? i18n("On") : 
                       (Keyboards.KWinVirtualKeyboard.available ? i18n("Off") : i18n("Tap to open settings"))
     enabled: Keyboards.KWinVirtualKeyboard.enabled && Keyboards.KWinVirtualKeyboard.available
-    settingsCommand: "plasma-open-settings kcm_mobile_onscreenkeyboard"
+    settingsCommand: "plasma-open-settings kcm_mobile_virtualkeyboard"
     
     function toggle() {
         if (!Keyboards.KWinVirtualKeyboard.available) {
             // select a keyboard in the settings (none is likely set)
-            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_virtualkeyboard");
+            MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_mobile_virtualkeyboard");
         } else {
             Keyboards.KWinVirtualKeyboard.enabled = !enabled;
         }

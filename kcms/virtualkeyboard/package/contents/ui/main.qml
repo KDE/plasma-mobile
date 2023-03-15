@@ -17,7 +17,7 @@ import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 KCM.SimpleKCM {
     id: root
 
-    title: i18n("On-Screen Keyboard")
+    title: i18n("Virtual Keyboard")
 
     leftPadding: 0
     rightPadding: 0

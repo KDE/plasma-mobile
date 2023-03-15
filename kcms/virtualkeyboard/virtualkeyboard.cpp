@@ -26,7 +26,7 @@
 
 // clang-format on
 
-K_PLUGIN_CLASS_WITH_JSON(VirtualKeyboard, "metadata.json")
+K_PLUGIN_CLASS_WITH_JSON(VirtualKeyboard, "kcm_mobile_virtualkeyboard.json")
 
 VirtualKeyboard::VirtualKeyboard(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : KQuickAddons::ConfigModule(parent, metaData, args)
