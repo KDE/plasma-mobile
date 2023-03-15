@@ -79,7 +79,6 @@ Kirigami.ScrollablePage {
                             xMax: history.lastDataPointTime
                             xDuration: history.duration
                 
-                            yUnits: i18nc("literal percent sign","%")
                             yMax: 100
                             yStep: 20
                             visible: history.count > 1
@@ -127,7 +126,7 @@ Kirigami.ScrollablePage {
                 MobileForm.FormTextDelegate {
                     id: currentChargeDelegate
                     text: i18n("Current Charge")
-                    description: i18nc("%1 is value, %2 is unit", "%1 %2", Number(battery.chargePercent).toLocaleString(Qt.locale(), "f", 0), i18n("%"))
+                    description: i18nc("%1 is percentage value", "%1 %", Number(battery.chargePercent).toLocaleString(Qt.locale(), "f", 0))
                 }
                 
                 MobileForm.FormDelegateSeparator {}
@@ -135,7 +134,7 @@ Kirigami.ScrollablePage {
                 MobileForm.FormTextDelegate {
                     id: healthDelegate
                     text: i18n("Health")
-                    description: i18nc("%1 is value, %2 is unit", "%1 %2", Number(battery.capacity).toLocaleString(Qt.locale(), "f", 0), i18n("%"))
+                    description: i18nc("%1 is percentage value", "%1 %", Number(battery.capacity).toLocaleString(Qt.locale(), "f", 0))
                 }
                 
                 MobileForm.FormDelegateSeparator {}

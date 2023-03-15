@@ -40,9 +40,6 @@ Canvas
     property real xMin: 0
     property real yStep: 20
 
-    property string yUnits: ""
-    property string xUnits: ""
-
     property real xDuration: 3600
     property real xDivisions: 6
     property real xDivisionWidth: 600000
@@ -141,7 +138,7 @@ Canvas
         for(var i = 0; i <=  yMax; i += yStep) {
             var y = scalePoint(Qt.point(0,i)).y;
 
-            c.fillText(i + canvas.yUnits, xPadding - 10, y);
+            c.fillText(i18nc("%1 is a percentage value", "%1%", i), xPadding - 10, y);
 
             //grid line
             c.moveTo(xPadding, y)
