@@ -12,6 +12,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.halcyon as Halcyon
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 MobileShell.HomeScreen {
     id: root
@@ -45,7 +46,7 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!MobileShell.WindowUtil.showDesktop && !MobileShellState.Shell.homeScreenVisible
+        if (!WindowPlugin.WindowUtil.showDesktop && !MobileShellState.Shell.homeScreenVisible
             || search.isOpen
         ) {
             // Always close action drawer
@@ -60,11 +61,11 @@ MobileShell.HomeScreen {
 
             homescreen.page = 0;
 
-            MobileShell.WindowUtil.showDesktop = true;
+            WindowPlugin.WindowUtil.showDesktop = true;
         } else if (homescreen.page == 0) {
             homescreen.page = 1;
         } else {
-            MobileShell.WindowUtil.showDesktop = false;
+            WindowPlugin.WindowUtil.showDesktop = false;
             homescreen.page = 0;
         }
     }
