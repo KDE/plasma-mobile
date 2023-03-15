@@ -2,13 +2,27 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Timezone, Date Display",
+        "Description[ca@valencia]": "Zona horària, Mostra la data",
+        "Description[ca]": "Zona horària, Mostra la data",
+        "Description[en_GB]": "Timezone, Date Display",
+        "Description[es]": "Zona horaria, visor de la fecha",
+        "Description[nl]": "Tijdzone, datumweergave",
+        "Description[tr]": "Zaman Dilimi; Tarih Gösterimi",
+        "Description[x-test]": "xxTimezone, Date Displayxx",
         "FormFactors": [
             "handset",
             "tablet",
             "mediacenter"
         ],
         "Icon": "preferences-system-time",
-        "Name": "Time and Date"
+        "Name": "Time and Date",
+        "Name[ca@valencia]": "Hora i data",
+        "Name[ca]": "Hora i data",
+        "Name[en_GB]": "Time and Date",
+        "Name[es]": "Fecha y hora",
+        "Name[nl]": "Tijd en datum",
+        "Name[tr]": "Tarih ve Saat",
+        "Name[x-test]": "xxTime and Datexx"
     },
     "X-KDE-Keywords": "theme, look, feel",
     "X-KDE-Keywords[ast]": "estilu, aspeutu",

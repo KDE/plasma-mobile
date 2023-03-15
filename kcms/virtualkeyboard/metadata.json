@@ -34,6 +34,13 @@
             }
         ],
         "Description": "On-Screen Keyboard configuration",
+        "Description[ca@valencia]": "Configureu el teclat en pantalla",
+        "Description[ca]": "Configuració del teclat en pantalla",
+        "Description[en_GB]": "On-Screen Keyboard configuration",
+        "Description[es]": "Configuración del teclado en pantalla",
+        "Description[nl]": "Configuratie van toetsenbord op het scherm",
+        "Description[tr]": "Ekran Klavyesi yapılandırması",
+        "Description[x-test]": "xxOn-Screen Keyboard configurationxx",
         "FormFactors": [
             "handset",
             "tablet"
@@ -41,6 +48,13 @@
         "Icon": "input-keyboard",
         "License": "GPL",
         "Name": "On-Screen Keyboard",
+        "Name[ca@valencia]": "Teclat en pantalla",
+        "Name[ca]": "Teclat en pantalla",
+        "Name[en_GB]": "On-Screen Keyboard",
+        "Name[es]": "Teclado en pantalla",
+        "Name[nl]": "Toetsenbord op scherm",
+        "Name[tr]": "Ekran Klavyesi",
+        "Name[x-test]": "xxOn-Screen Keyboardxx",
         "Version": "1.0",
         "Website": "https://plasma-mobile.org"
     },

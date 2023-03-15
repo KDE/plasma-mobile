@@ -2,13 +2,27 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Management of cellular networks",
+        "Description[ca@valencia]": "Gestió de xarxes de telefonia mòbil",
+        "Description[ca]": "Gestió de xarxes de telefonia mòbil",
+        "Description[en_GB]": "Management of cellular networks",
+        "Description[es]": "Gestión de redes móviles",
+        "Description[nl]": "Beheer van cellulaire netwerken",
+        "Description[tr]": "Hücresel ağların yönetimi",
+        "Description[x-test]": "xxManagement of cellular networksxx",
         "FormFactors": [
             "handset",
             "tablet",
             "mediacenter"
         ],
         "Icon": "smartphone",
-        "Name": "Cellular Network"
+        "Name": "Cellular Network",
+        "Name[ca@valencia]": "Xarxa de telefonia mòbil",
+        "Name[ca]": "Xarxa de telefonia mòbil",
+        "Name[en_GB]": "Cellular Network",
+        "Name[es]": "Red móvil",
+        "Name[nl]": "Cellulair netwerk",
+        "Name[tr]": "Hücresel Ağ",
+        "Name[x-test]": "xxCellular Networkxx"
     },
     "X-KDE-Keywords": "mobile,data,network",
     "X-KDE-Keywords[az]": "mobile,data,network,verilənlər,şəbəkə,mobil",
