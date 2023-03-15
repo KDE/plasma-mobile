@@ -11,7 +11,7 @@ set(onscreenkeyboard_SRCS
     virtualkeyboard.cpp
 )
 
-add_library(kcm_mobile_onscreenkeyboard MODULE ${onscreenkeyboard_SRCS})
+kcoreaddons_add_plugin(kcm_mobile_onscreenkeyboard SOURCES ${onscreenkeyboard_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_compile_definitions(kcm_mobile_onscreenkeyboard PRIVATE "MALIIT_KEYBOARD_LANGUAGES_DIR=\"${MALIIT_KEYBOARD_LANGUAGES_DIR}\"")
 
@@ -25,6 +25,5 @@ target_link_libraries(kcm_mobile_onscreenkeyboard
     PkgConfig::GOBJECT
 )
 
-install(TARGETS kcm_mobile_onscreenkeyboard DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
-
-kpackage_install_package(package kcm_mobile_virtualkeyboard kcms)
+kcmutils_generate_desktop_file(kcm_mobile_onscreenkeyboard)
+kpackage_install_package(package kcm_mobile_onscreenkeyboard kcms)

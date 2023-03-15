@@ -31,7 +31,7 @@
 #define FORMAT24H "HH:mm:ss"
 #define FORMAT12H "h:mm:ss ap"
 
-K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "timesettings.json", registerPlugin<TimeSettings>();)
+K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "kcm_mobile_time.json", registerPlugin<TimeSettings>();)
 
 TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : KQuickAddons::ConfigModule(parent, metaData, args)

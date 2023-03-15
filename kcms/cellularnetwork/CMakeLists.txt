@@ -10,7 +10,7 @@ set (cellularnetworksettings_SRCS
     profilesettings.cpp
 )
 
-add_library(kcm_cellular_network MODULE ${cellularnetworksettings_SRCS})
+kcoreaddons_add_plugin(kcm_cellular_network SOURCES ${cellularnetworksettings_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_cellular_network
     Qt::DBus
@@ -25,5 +25,5 @@ target_link_libraries(kcm_cellular_network
     KF6::QuickAddons
 )
 
-install(TARGETS kcm_cellular_network DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
+kcmutils_generate_desktop_file(kcm_cellular_network)
 kpackage_install_package(package kcm_cellular_network kcms)

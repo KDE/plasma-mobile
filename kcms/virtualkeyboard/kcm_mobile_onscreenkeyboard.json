@@ -89,5 +89,6 @@
     "X-KDE-Keywords[uk]": "virtualkeyboard,keyboard,екранна,віртуальна,клавіатура,клавіші",
     "X-KDE-Keywords[vi]": "virtualkeyboard,keyboard,bàn phím ảo,bàn phím",
     "X-KDE-Keywords[x-test]": "xxvirtualkeyboardxx,xxkeyboardxx",
-    "X-KDE-Keywords[zh_CN]": "virtualkeyboard,keyboard,虚拟键盘,键盘"
+    "X-KDE-Keywords[zh_CN]": "virtualkeyboard,keyboard,虚拟键盘,键盘",
+    "X-KDE-System-Settings-Parent-Category": "input-devices"
 }

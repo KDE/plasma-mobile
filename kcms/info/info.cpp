@@ -11,7 +11,7 @@
 #include <QClipboard>
 #include <QGuiApplication>
 
-K_PLUGIN_CLASS_WITH_JSON(Info, "info.json")
+K_PLUGIN_CLASS_WITH_JSON(Info, "kcm_mobile_info.json")
 
 Info::Info(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : KQuickAddons::ConfigModule(parent, metaData, args)

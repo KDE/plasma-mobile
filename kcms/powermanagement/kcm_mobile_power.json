@@ -62,6 +62,7 @@
     "X-KDE-Keywords[x-test]": "xxvideoxx,xx monitorxx,xx graphicsxx,xx timeoutxx,xx sleepxx,xx lockxx,xx screenlockerxx,xx screensaverxx",
     "X-KDE-Keywords[zh_CN]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, 视频, 显示器, 监视器, 图形, 图像, 超时, 睡眠, 锁屏, 屏幕保护, 屏幕锁定, 屏保, 锁定",
     "X-KDE-Keywords[zh_TW]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, 影片, 顯示器, 圖形, 顯示卡, 逾時, 休眠, 鎖定, 螢幕鎖定, 螢幕保護程式",
-    "X-KDE-System-Settings-Parent-Category": "display",
-    "X-KDE-Weight": 70
+    "X-KDE-System-Settings-Parent-Category": "power-management",
+    "X-KDE-Weight": 70,
+    "X-Plasma-MainScript": "ui/main.qml"
 }

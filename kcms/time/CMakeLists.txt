@@ -10,7 +10,7 @@ set(timesettings_SRCS
 
 qt_add_dbus_interface(timesettings_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/timedated1.xml timedated_interface)
 
-add_library(kcm_mobile_time MODULE ${timesettings_SRCS})
+kcoreaddons_add_plugin(kcm_mobile_time SOURCES ${timesettings_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobile_time
     Qt::Quick
@@ -23,5 +23,5 @@ target_link_libraries(kcm_mobile_time
 
 # Time and Date
 
-install(TARGETS kcm_mobile_time DESTINATION ${KDE_INSTALL_QTPLUGINDIR}/kcms)
+kcmutils_generate_desktop_file(kcm_mobile_time)
 kpackage_install_package(package kcm_mobile_time kcms)

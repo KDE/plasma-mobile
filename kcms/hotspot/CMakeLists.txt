@@ -3,7 +3,7 @@
 
 set (hotspotsettings_SRCS hotspotsettings.cpp)
 
-add_library(kcm_mobile_hotspot MODULE ${hotspotsettings_SRCS})
+kcoreaddons_add_plugin(kcm_mobile_hotspot SOURCES ${hotspotsettings_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobile_hotspot
     Qt::Quick
@@ -13,6 +13,5 @@ target_link_libraries(kcm_mobile_hotspot
     KF6::QuickAddons
 )
 
-install(TARGETS kcm_mobile_hotspot DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
 kpackage_install_package(package kcm_mobile_hotspot kcms)
 kcmutils_generate_desktop_file(kcm_mobile_hotspot)

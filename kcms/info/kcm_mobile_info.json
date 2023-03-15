@@ -60,5 +60,6 @@
     "X-KDE-Keywords[vi]": "info,distro,system,thông tin,bản phân phối,hệ thống",
     "X-KDE-Keywords[x-test]": "xxinfoxx,xx distroxx,xx systemxx",
     "X-KDE-Keywords[zh_CN]": "info, distro, system, 信息, 发行版, 系统",
-    "X-KDE-Keywords[zh_TW]": "info, distro, system, 資訊, 發行版, 系統, 信息"
+    "X-KDE-Keywords[zh_TW]": "info, distro, system, 資訊, 發行版, 系統, 信息",
+    "X-KDE-System-Settings-Parent-Category": "system-administration"
 }

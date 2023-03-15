@@ -11,7 +11,7 @@
 
 #include <Solid/Battery>
 
-K_PLUGIN_CLASS_WITH_JSON(MobilePower, "powermanagement.json")
+K_PLUGIN_CLASS_WITH_JSON(MobilePower, "kcm_mobile_power.json")
 
 enum {
     THIRTY_SECONDS,

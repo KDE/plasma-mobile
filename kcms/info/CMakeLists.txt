@@ -8,7 +8,7 @@ set(info_SRCS # Specify source files for the library
     hardwareinfo.cpp
 )
 
-add_library(kcm_mobile_info MODULE ${info_SRCS})
+kcoreaddons_add_plugin(kcm_mobile_info SOURCES ${info_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobile_info
     Qt::Core
@@ -19,7 +19,6 @@ target_link_libraries(kcm_mobile_info
     KF6::Solid
 )
 
-install(TARGETS kcm_mobile_info DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms) # Install the library to the kcm location
-
-kpackage_install_package(package kcm_mobile_info kcms) # Finally install our QML kpackage.
+kpackage_install_package(package kcm_mobile_info kcms)
+kcmutils_generate_desktop_file(kcm_mobile_info)
 

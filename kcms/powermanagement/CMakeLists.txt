@@ -3,11 +3,13 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"kcm_mobile_power\")
 
-add_library(kcm_mobile_power MODULE 
+set(kcm_mobile_power_SRCS
     mobilepower.cpp
     batterymodel.cpp
     statisticsprovider.cpp
 )
+
+kcoreaddons_add_plugin(kcm_mobile_power SOURCES ${kcm_mobile_power_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
 
 target_link_libraries(kcm_mobile_power
     Qt::DBus
@@ -19,6 +21,5 @@ target_link_libraries(kcm_mobile_power
     KF6::Solid
 )
 
-install(TARGETS kcm_mobile_power DESTINATION ${KDE_INSTALL_PLUGINDIR}/kcms)
-
+kcmutils_generate_desktop_file(kcm_mobile_power)
 kpackage_install_package(package kcm_mobile_power kcms)
