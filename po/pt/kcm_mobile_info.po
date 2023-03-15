@@ -1,0 +1,108 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-07 11:13+0100\n"
+"Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-POFile-SpellExtra: Brüchert SO Jonah\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Informações do Sistema"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "Sistema Operativo"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr "Página Web"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "Versão do Plasma do KDE"
+
+#: package/contents/ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "Versão das Plataformas do KDE"
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "Versão do Qt"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "Versão do 'Kernel'"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr "Tipo de SO"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-bits"
+
+#: package/contents/ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Processador"
+msgstr[1] "Processadores"
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr "Memória"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 de RAM"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Desconhecida"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "Copiar para a área de transferência"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "José Nuno Pires"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "zepires@gmail.com"
+
+#~ msgid "Info"
+#~ msgstr "Informação"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"

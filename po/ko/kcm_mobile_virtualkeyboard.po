@@ -1,0 +1,120 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# Shinjo Park <kde@peremen.name>, 2021, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-13 12:04+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "언어"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr "적용"
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr "가상 키보드"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr "여기에 아무것이나 입력하십시오..."
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr "소리"
+
+#: package/contents/ui/main.qml:64
+#, kde-format
+msgid "Whether to emit a sound on keypress."
+msgstr "키를 누를 때 소리 재생 여부입니다."
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr "진동"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Whether to vibrate on keypress."
+msgstr "키를 누를 때 진동할지 여부입니다."
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "입력한 문자열의 맞춤법 검사"
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "문장 첫 글자를 대문자로 변환"
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "Space 키를 누를 때 현재 단어를 첫 제안으로 자동 완성"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "단어 막대에 단어 제안 표시"
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "Space 키를 누 번 눌렀을 때 마침표 삽입"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr "언어 설정"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "박신조"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "kde@peremen.name"
+
+#~ msgid "Virtual Keyboard"
+#~ msgstr "가상 키보드"
+
+#~ msgid "Bhushan Shah"
+#~ msgstr "Bhushan Shah"
+
+#~ msgid "Test keyboard:"
+#~ msgstr "키보드 시험:"
+
+#~ msgid "Feedback:"
+#~ msgstr "피드백:"
+
+#~ msgid "Text correction:"
+#~ msgstr "문자열 자동 고침:"
+
+#~ msgid "Languages:"
+#~ msgstr "언어"
+
+#~ msgid "Theme:"
+#~ msgstr "테마:"
+
+#~ msgid "Other:"
+#~ msgstr "기타:"

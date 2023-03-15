@@ -1,0 +1,112 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-13 09:24+0200\n"
+"Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
+"Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 22.04.1\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Thông tin hệ thống"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "Hệ điều hành"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr "Trang web"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "Phiên bản Plasma KDE"
+
+#: package/contents/ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "Phiên bản Các Kết cấu KDE"
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "Phiên bản Qt"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "Phiên bản nhân"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr "Kiểu HĐH"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-bit"
+
+#: package/contents/ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Bộ xử lí"
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr "Bộ nhớ"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 RAM"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Không rõ"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "Chép vào bảng nháp"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Nguyễn Hùng Phú"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "phu.nguyen@kdemail.net"
+
+#~ msgid "Info"
+#~ msgstr "Thông tin"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "Phần mềm"
+
+#~ msgid "Hardware"
+#~ msgstr "Phần cứng"

@@ -1,0 +1,116 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# Paolo Zamponi <zapaolo@email.it>, 2019, 2020, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-09 19:20+0200\n"
+"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.04.2\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Informazioni sul sistema"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "Sistema operativo"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr "Pagina web"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "Versione di KDE Plasma"
+
+#: package/contents/ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "Versione di KDE Frameworks"
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "Versione di Qt"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "Versione del kernel"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr "Tipo di SO"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-bit"
+
+#: package/contents/ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Processore"
+msgstr[1] "Processori:"
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr "Memoria"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 di RAM"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Sconosciuta"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "Copia negli appunti"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Paolo Zamponi"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "zapaolo@email.it"
+
+#~ msgid "Info"
+#~ msgstr "Informazioni"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "Software"
+
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#~ msgid "Information About This System"
+#~ msgstr "Informazioni su questo sistema"

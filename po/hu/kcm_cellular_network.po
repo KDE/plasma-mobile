@@ -1,0 +1,1103 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# Kristof Kiszel <kiszel.kristof@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2021-10-17 14:08+0200\n"
+"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.08.2\n"
+
+#: modem.cpp:126
+#, kde-format
+msgid "Error resetting the modem: %1"
+msgstr "Hiba a modem visszaállításakor: %1"
+
+#: modem.cpp:245 modem.cpp:414
+#, kde-format
+msgid "Error updating connection settings for %1: %2."
+msgstr "Hiba a(z) %1 kapcsolatbeállításainak frissítésekor: %2."
+
+#: modem.cpp:325
+#, kde-format
+msgid "Error activating connection: %1"
+msgstr "Hiba a kapcsolat aktiválásakor: %1"
+
+#: modem.cpp:360
+#, kde-format
+msgid "Error adding connection: %1"
+msgstr "Hiba a kapcsolat hozzáadásakor: %1"
+
+#: modem.cpp:378
+#, kde-format
+msgid "Error removing connection: %1"
+msgstr "Hiba a kapcsolat törlésekor: %1"
+
+#: modem.cpp:500 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modemdetails.cpp:428 modemdetails.cpp:458
+#, kde-format
+msgid "Unknown"
+msgstr "Ismeretlen"
+
+#: modem.cpp:502
+#, kde-format
+msgid "Unmanaged"
+msgstr "Nem kezelt"
+
+#: modem.cpp:504
+#, kde-format
+msgid "Unavailable"
+msgstr "Nem érhető el"
+
+#: modem.cpp:506
+#, kde-format
+msgid "Disconnected"
+msgstr "Nincs kapcsolat"
+
+#: modem.cpp:508
+#, kde-format
+msgid "Preparing"
+msgstr "Előkészítés"
+
+#: modem.cpp:510
+#, kde-format
+msgid "ConfiguringHardware"
+msgstr "Hardver konfigurálása"
+
+#: modem.cpp:512
+#, kde-format
+msgid "NeedAuth"
+msgstr "Azonosítás szükséges"
+
+#: modem.cpp:514
+#, kde-format
+msgid "ConfiguringIp"
+msgstr "IP-cím beállítása"
+
+#: modem.cpp:516
+#, kde-format
+msgid "CheckingIp"
+msgstr "IP-cím ellenőrzése"
+
+#: modem.cpp:518
+#, kde-format
+msgid "WaitingForSecondaries"
+msgstr "Várakozás másodlagosra"
+
+#: modem.cpp:520
+#, kde-format
+msgid "Activated"
+msgstr "Aktiválva"
+
+#: modem.cpp:522
+#, kde-format
+msgid "Deactivating"
+msgstr "Deaktiválás"
+
+#: modem.cpp:524 modemdetails.cpp:250
+#, kde-format
+msgid "Failed"
+msgstr "Sikertelen"
+
+#: modemdetails.cpp:121 modemdetails.cpp:461
+#, kde-format
+msgid "POTS"
+msgstr "POTS"
+
+#: modemdetails.cpp:124
+#, kde-format
+msgid "GSM"
+msgstr "GSM"
+
+#: modemdetails.cpp:127
+#, kde-format
+msgid "GSM Compact"
+msgstr "GSM Compact"
+
+#: modemdetails.cpp:130
+#, kde-format
+msgid "GPRS"
+msgstr "GPRS"
+
+#: modemdetails.cpp:133
+#, kde-format
+msgid "EDGE"
+msgstr "EDGE"
+
+#: modemdetails.cpp:136
+#, kde-format
+msgid "UMTS"
+msgstr "UMTS"
+
+#: modemdetails.cpp:139
+#, kde-format
+msgid "HSDPA"
+msgstr "HSDPA"
+
+#: modemdetails.cpp:142
+#, kde-format
+msgid "HSUPA"
+msgstr "HSUPA"
+
+#: modemdetails.cpp:145
+#, kde-format
+msgid "HSPA"
+msgstr "HSPA"
+
+#: modemdetails.cpp:148
+#, kde-format
+msgid "HSPA+"
+msgstr "HSPA+"
+
+#: modemdetails.cpp:151
+#, kde-format
+msgid "CDMA2000 1xRTT"
+msgstr "CDMA2000 1xRTT"
+
+#: modemdetails.cpp:154
+#, kde-format
+msgid "CDMA2000 EVDO-0"
+msgstr "CDMA2000 EVDO-0"
+
+#: modemdetails.cpp:157
+#, kde-format
+msgid "CDMA2000 EVDO-A"
+msgstr "CDMA2000 EVDO-A"
+
+#: modemdetails.cpp:160
+#, kde-format
+msgid "CDMA2000 EVDO-B"
+msgstr "CDMA2000 EVDO-B"
+
+#: modemdetails.cpp:163
+#, kde-format
+msgid "LTE"
+msgstr "LTE"
+
+#: modemdetails.cpp:166
+#, kde-format
+msgid "5GNR"
+msgstr "5GNR"
+
+#: modemdetails.cpp:222
+#, kde-format
+msgid "Off"
+msgstr "Ki"
+
+#: modemdetails.cpp:224
+#, kde-format
+msgid "Low-power mode"
+msgstr "Energiatakarékos mód"
+
+#: modemdetails.cpp:226
+#, kde-format
+msgid "Full power mode"
+msgstr "Teljes üzem mód"
+
+#: modemdetails.cpp:254
+#, kde-format
+msgid "Initializing"
+msgstr "Előkészítés"
+
+#: modemdetails.cpp:256 package/contents/ui/SimPage.qml:137
+#, kde-format
+msgid "Locked"
+msgstr "Zárolva"
+
+#: modemdetails.cpp:258
+#, kde-format
+msgid "Disabled"
+msgstr "Letiltva"
+
+#: modemdetails.cpp:260
+#, kde-format
+msgid "Disabling"
+msgstr "Letiltás"
+
+#: modemdetails.cpp:262
+#, kde-format
+msgid "Enabling"
+msgstr "Engedélyezés"
+
+#: modemdetails.cpp:264 package/contents/ui/ModemPage.qml:110
+#, kde-format
+msgid "Enabled"
+msgstr "Engedélyezve"
+
+#: modemdetails.cpp:266
+#, kde-format
+msgid "Searching for network provider"
+msgstr "Hálózatszolgáltató keresése"
+
+#: modemdetails.cpp:268
+#, kde-format
+msgid "Registered with network provider"
+msgstr "Regisztrálva a hálózatszolgáltatónál"
+
+#: modemdetails.cpp:270
+#, kde-format
+msgid "Disconnecting"
+msgstr "Kapcsolat bontása"
+
+#: modemdetails.cpp:272
+#, kde-format
+msgid "Connecting"
+msgstr "Kapcsolódás"
+
+#: modemdetails.cpp:274
+#, kde-format
+msgid "Connected"
+msgstr "Kapcsolódva"
+
+#: modemdetails.cpp:283
+#, kde-format
+msgid "No error."
+msgstr "nincs hiba."
+
+#: modemdetails.cpp:285
+#, kde-format
+msgid "Unknown error."
+msgstr "Ismeretlen hiba."
+
+#: modemdetails.cpp:287
+#, kde-format
+msgid "SIM is required but missing."
+msgstr "SIM szükséges, de hiányzik."
+
+#: modemdetails.cpp:289
+#, kde-format
+msgid "SIM is available but unusable."
+msgstr "A SIM elérhető, de nem használható."
+
+#: modemdetails.cpp:312
+#, kde-format
+msgid "Not registered, not searching for new operator to register."
+msgstr "Nem regisztált, nem keres új szolgáltatót regisztrációhoz."
+
+#: modemdetails.cpp:314
+#, kde-format
+msgid "Registered on home network."
+msgstr "Regisztrálva az otthoni hálózaton."
+
+#: modemdetails.cpp:316
+#, kde-format
+msgid "Not registered, searching for new operator to register with."
+msgstr "Nem regisztrált, új szolgáltató keresése regisztrációhoz."
+
+#: modemdetails.cpp:318
+#, kde-format
+msgid "Registration denied."
+msgstr "Regisztráció megtagadva."
+
+#: modemdetails.cpp:320
+#, kde-format
+msgid "Unknown registration status."
+msgstr "Ismeretlen regisztrációs állapot."
+
+#: modemdetails.cpp:322
+#, kde-format
+msgid "Registered on a roaming network."
+msgstr "Regisztrálva barangoló hálózaton."
+
+#: modemdetails.cpp:324
+#, kde-format
+msgid "Registered for \"SMS only\", on home network."
+msgstr "„Csak SMS” regisztrálva, otthoni hálózaton."
+
+#: modemdetails.cpp:326
+#, kde-format
+msgid "Registered for \"SMS only\", roaming network."
+msgstr "„Csak SMS” regisztrálva, barangoló hálózaton."
+
+#: modemdetails.cpp:328
+#, kde-format
+msgid "Emergency services only."
+msgstr "Csak segélyszolgáltatások."
+
+#: modemdetails.cpp:330
+#, kde-format
+msgid "Registered for \"CSFB not preferred\", home network."
+msgstr "„CSFB nem preferált” regisztrálva, otthoni hálózat."
+
+#: modemdetails.cpp:332
+#, kde-format
+msgid "Registered for \"CSFB not preferred\", roaming network."
+msgstr "„CSFB nem preferált” regisztrálva, barangoló hálózat."
+
+#: modemdetails.cpp:334
+#, kde-format
+msgid "Attached for access to Restricted Local Operator Services."
+msgstr ""
+"Csatlakozatva a korlátozott helyi üzemeltetői szolgáltatások (RLOS) "
+"eléréséhez."
+
+#: modemdetails.cpp:373
+#, kde-format
+msgid "Scanning networks failed: %1"
+msgstr "Sikertelen hálózatkeresés: %1"
+
+#: modemdetails.cpp:430 package/contents/ui/ModemPage.qml:203
+#: package/contents/ui/SimPage.qml:138
+#, kde-format
+msgid "Yes"
+msgstr "Igen"
+
+#: modemdetails.cpp:432 package/contents/ui/ModemPage.qml:203
+#: package/contents/ui/SimPage.qml:138
+#, kde-format
+msgid "No"
+msgstr "Nem"
+
+#: modemdetails.cpp:434
+#, kde-format
+msgid "GuessYes"
+msgstr "Talán igen"
+
+#: modemdetails.cpp:436
+#, kde-format
+msgid "GuessNo"
+msgstr "Talán nem"
+
+#: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
+#: modemdetails.cpp:473 package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "2G"
+msgstr "2G"
+
+#: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
+#: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
+#: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
+#, kde-format
+msgid "3G"
+msgstr "3G"
+
+#: modemdetails.cpp:503
+#, kde-format
+msgid "4G"
+msgstr "4G"
+
+#: modemdetails.cpp:506
+#, kde-format
+msgid "5G"
+msgstr "5G"
+
+#: modemdetails.cpp:509 package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Any"
+msgstr "Bármely"
+
+#: package/contents/ui/AvailableNetworks.qml:13
+#, kde-format
+msgid "Available Networks"
+msgstr "Elérhető hálózatok"
+
+#: package/contents/ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "none"
+msgstr "nincs"
+
+#: package/contents/ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "Current operator: %1"
+msgstr "Jelenlegi szolgáltató: %1"
+
+#: package/contents/ui/AvailableNetworks.qml:40
+#, kde-format
+msgid "Scan For Networks"
+msgstr "Hálózatkeresés"
+
+#: package/contents/ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "APN szerkesztése"
+
+#: package/contents/ui/EditProfileDialog.qml:41
+#, kde-format
+msgid "Name"
+msgstr "Név"
+
+#: package/contents/ui/EditProfileDialog.qml:46
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: package/contents/ui/EditProfileDialog.qml:51
+#, kde-format
+msgid "Username"
+msgstr "Felhasználónév"
+
+#: package/contents/ui/EditProfileDialog.qml:56
+#, kde-format
+msgid "Password"
+msgstr "Jelszó"
+
+#: package/contents/ui/EditProfileDialog.qml:61
+#, kde-format
+msgid "Network type"
+msgstr "Hálózattípus"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 4G"
+msgstr "Csak 4G"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 3G"
+msgstr "Csak 3G"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 2G"
+msgstr "Csak 2G"
+
+#: package/contents/ui/main.qml:35
+#, kde-format
+msgid "Modem not available"
+msgstr "A modem nem érhető el"
+
+#: package/contents/ui/main.qml:74
+#, fuzzy, kde-format
+#| msgid "Mobile data:"
+msgid "Mobile data"
+msgstr "Mobil adatkapcsolat:"
+
+#: package/contents/ui/main.qml:79
+#, fuzzy, kde-format
+#| msgid "SIM is not locked"
+msgid "No SIM is inserted."
+msgstr "A SIM nem zárolt"
+
+#: package/contents/ui/main.qml:81
+#, kde-format
+msgid "Mobile data is not available with this modem."
+msgstr ""
+
+#: package/contents/ui/main.qml:83
+#, kde-format
+msgid "An APN needs to be configured to have mobile data."
+msgstr ""
+
+#: package/contents/ui/main.qml:85
+#, kde-format
+msgid "Whether mobile data is enabled."
+msgstr ""
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "Data Usage:"
+msgid "Data Usage"
+msgstr "Adathasználat:"
+
+#: package/contents/ui/main.qml:117
+#, fuzzy, kde-format
+#| msgid "View Data Usage"
+msgid "View data usage."
+msgstr "Adathasználat megjelenítése"
+
+#: package/contents/ui/main.qml:133 package/contents/ui/SimPage.qml:17
+#, kde-format
+msgid "SIM"
+msgstr "SIM"
+
+#: package/contents/ui/main.qml:133
+#, kde-format
+msgid "SIMs"
+msgstr "SIM-ek"
+
+#: package/contents/ui/main.qml:153
+#, kde-format
+msgid "SIM %1"
+msgstr "%1. SIM"
+
+#: package/contents/ui/main.qml:154
+#, fuzzy, kde-format
+#| msgid "View Modem Details"
+msgid "View SIM %1 details."
+msgstr "Modem részleteinek megjelenítése"
+
+#: package/contents/ui/ModemPage.qml:16
+#, kde-format
+msgid "Modem %1"
+msgstr "%1. modem"
+
+#: package/contents/ui/ModemPage.qml:41
+#, fuzzy, kde-format
+#| msgid "Modem Control:"
+msgid "Modem Control"
+msgstr "Modemvezérlés:"
+
+#: package/contents/ui/ModemPage.qml:50
+#, fuzzy, kde-format
+#| msgid "Force Modem Restart"
+msgid "Modem Restart"
+msgstr "Kényszerített újraindítás"
+
+#: package/contents/ui/ModemPage.qml:53
+#, kde-format
+msgid "Force Modem Restart"
+msgstr "Kényszerített újraindítás"
+
+#: package/contents/ui/ModemPage.qml:69 package/contents/ui/SimPage.qml:117
+#, kde-format
+msgid "Modem Details"
+msgstr "Modem részletei"
+
+#: package/contents/ui/ModemPage.qml:82
+#, fuzzy, kde-format
+#| msgid "Access Technologies:"
+msgid "Access Technologies"
+msgstr "Hozzáférési technológiák:"
+
+#: package/contents/ui/ModemPage.qml:102
+#, fuzzy, kde-format
+#| msgid "IMEI:"
+msgid "IMEI"
+msgstr "IMEI:"
+
+#: package/contents/ui/ModemPage.qml:118
+#, fuzzy, kde-format
+#| msgid "Manufacturer:"
+msgid "Manufacturer"
+msgstr "Gyártó: "
+
+#: package/contents/ui/ModemPage.qml:126
+#, fuzzy, kde-format
+#| msgid "Model:"
+msgid "Model"
+msgstr "Modell:"
+
+#: package/contents/ui/ModemPage.qml:142
+#, kde-format
+msgid "Owned Numbers:"
+msgstr "Saját számok:"
+
+#: package/contents/ui/ModemPage.qml:162
+#, fuzzy, kde-format
+#| msgid "Revision:"
+msgid "Revision"
+msgstr "Revízió: "
+
+#: package/contents/ui/ModemPage.qml:170
+#, fuzzy, kde-format
+#| msgid "Signal Quality:"
+msgid "Signal Quality"
+msgstr "Jelminőség:"
+
+#: package/contents/ui/ModemPage.qml:178
+#, fuzzy, kde-format
+#| msgid "State:"
+msgid "State"
+msgstr "Állapot:"
+
+#: package/contents/ui/ModemPage.qml:186
+#, fuzzy, kde-format
+#| msgid "Failure Reason:"
+msgid "Failure Reason"
+msgstr "Hiba oka:"
+
+#: package/contents/ui/ModemPage.qml:194
+#, fuzzy, kde-format
+#| msgid "Registration State:"
+msgid "Registration State"
+msgstr "Regisztrációs állapot:"
+
+#: package/contents/ui/ModemPage.qml:202
+#, fuzzy, kde-format
+#| msgid "Roaming:"
+msgid "Roaming"
+msgstr "Barangolás:"
+
+#: package/contents/ui/ModemPage.qml:210
+#, fuzzy, kde-format
+#| msgid "Firmware Version:"
+msgid "Firmware Version"
+msgstr "Szoftververzió:"
+
+#: package/contents/ui/ModemPage.qml:218
+#, fuzzy, kde-format
+#| msgid "Interface Name:"
+msgid "Interface Name"
+msgstr "Csatoló neve:"
+
+#: package/contents/ui/ModemPage.qml:226
+#, fuzzy, kde-format
+#| msgid "Metered:"
+msgid "Metered"
+msgstr "Forgalmi díjas:"
+
+#: package/contents/ui/ModemPage.qml:234
+#, fuzzy, kde-format
+#| msgid "Active NetworkManager Connection:"
+msgid "Active NetworkManager Connection"
+msgstr "Aktív NetworkManager kapcsolat:"
+
+#: package/contents/ui/ModemPage.qml:242
+#, fuzzy, kde-format
+#| msgid "Device:"
+msgid "Device"
+msgstr "Eszköz:"
+
+#: package/contents/ui/ModemPage.qml:250
+#, fuzzy, kde-format
+#| msgid "Device ID:"
+msgid "Device ID"
+msgstr "Eszközazonosító:"
+
+#: package/contents/ui/ModemPage.qml:266
+#, kde-format
+msgid "Drivers:"
+msgstr "Illesztőprogramok:"
+
+#: package/contents/ui/ModemPage.qml:286
+#, fuzzy, kde-format
+#| msgid "Plugin:"
+msgid "Plugin"
+msgstr "Bővítmény:"
+
+#: package/contents/ui/ModemPage.qml:294
+#, fuzzy, kde-format
+#| msgid "Power State:"
+msgid "Power State"
+msgstr "Energiaállapot:"
+
+#: package/contents/ui/ModemPage.qml:302
+#, fuzzy, kde-format
+#| msgid "SIM Path:"
+msgid "SIM Path"
+msgstr "SIM útvonal:"
+
+#: package/contents/ui/ProfileList.qml:12
+#, kde-format
+msgid "APNs"
+msgstr "APN-ek"
+
+#: package/contents/ui/ProfileList.qml:26
+#, kde-format
+msgid "No APNs configured"
+msgstr "Nincsenek beállítva APN-ek"
+
+#: package/contents/ui/ProfileList.qml:31
+#, kde-format
+msgid "Add Connection"
+msgstr "Kapcsolat hozzáadása"
+
+#: package/contents/ui/ProfileList.qml:98
+#, kde-format
+msgid "Add APN"
+msgstr "APN hozzáadása"
+
+#: package/contents/ui/ProfileList.qml:121
+#, kde-format
+msgid "Autodetect APN"
+msgstr "APN automatikus felismerése"
+
+#: package/contents/ui/ProfileList.qml:133
+#, kde-format
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: package/contents/ui/ProfileList.qml:141
+#, kde-format
+msgid "Delete"
+msgstr "Törlés"
+
+#: package/contents/ui/SimLockPage.qml:16 package/contents/ui/SimPage.qml:106
+#, kde-format
+msgid "SIM Lock"
+msgstr "SIM zár"
+
+#: package/contents/ui/SimLockPage.qml:47
+#, kde-format
+msgid "SIM is locked"
+msgstr "A SIM zárolt"
+
+#: package/contents/ui/SimLockPage.qml:48
+#, kde-format
+msgid "In order to use this SIM, you must first unlock it."
+msgstr "A SIM használatához előbb fel kell oldania azt."
+
+#: package/contents/ui/SimLockPage.qml:70
+#, kde-format
+msgid "SIM is not locked"
+msgstr "A SIM nem zárolt"
+
+#: package/contents/ui/SimLockPage.qml:71
+#, kde-format
+msgid ""
+"You can lock your SIM to require a set PIN code for phone calls and mobile "
+"data."
+msgstr ""
+"Zárolhatja SIM-kártyáját, hogy az egy előre megadott PIN-kódot kérjen "
+"telefonhívások indításához és a mobil adatkapcsolat engedélyezéséhez."
+
+#: package/contents/ui/SimLockPage.qml:75
+#, kde-format
+msgid "Lock SIM"
+msgstr "SIM zárolása"
+
+#: package/contents/ui/SimLockPage.qml:89
+#, fuzzy, kde-format
+#| msgid "Disable Modem"
+msgid "Disable SIM Lock"
+msgstr "Kikapcsolás"
+
+#: package/contents/ui/SimLockPage.qml:90
+#, kde-format
+msgid "Disable the SIM lock feature and remove the passcode on the SIM."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:103
+#, kde-format
+msgid "Change PIN"
+msgstr "SIM módosítása"
+
+#: package/contents/ui/SimLockPage.qml:104
+#, kde-format
+msgid "Change the passcode set on the SIM."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:119
+#, kde-format
+msgid "Unlock SIM"
+msgstr "SIM feloldása"
+
+#: package/contents/ui/SimLockPage.qml:127
+#, kde-format
+msgid "Attempts left: %1"
+msgstr "Próbálkozások: %1"
+
+#: package/contents/ui/SimLockPage.qml:131
+#, kde-format
+msgid "Enter PIN"
+msgstr "PIN megadása"
+
+#: package/contents/ui/SimLockPage.qml:139
+#, kde-format
+msgid "Change SIM PIN"
+msgstr "SIM PIN módosítása"
+
+#: package/contents/ui/SimLockPage.qml:158
+#: package/contents/ui/SimLockPage.qml:223
+#, kde-format
+msgid "PINs don't match!"
+msgstr "A PIN-ek nem egyeznek!"
+
+#: package/contents/ui/SimLockPage.qml:164
+#: package/contents/ui/SimLockPage.qml:229
+#, kde-format
+msgid "PINs must be between 4 and 8 digits!"
+msgstr "A PIN hossza négy-nyolc számjegy lehet!"
+
+#: package/contents/ui/SimLockPage.qml:169
+#: package/contents/ui/SimLockPage.qml:196
+#, kde-format
+msgid "Current PIN"
+msgstr "Jelenlegi PIN"
+
+#: package/contents/ui/SimLockPage.qml:174
+#: package/contents/ui/SimLockPage.qml:234
+#, kde-format
+msgid "New PIN"
+msgstr "Új PIN"
+
+#: package/contents/ui/SimLockPage.qml:179
+#: package/contents/ui/SimLockPage.qml:239
+#, kde-format
+msgid "Confirm PIN"
+msgstr "PIN megerősítése"
+
+#: package/contents/ui/SimLockPage.qml:187
+#, kde-format
+msgid "Remove SIM PIN"
+msgstr "SIM PIN eltávolítása"
+
+#: package/contents/ui/SimLockPage.qml:204
+#, kde-format
+msgid "Add SIM PIN"
+msgstr "SIM PIN hozzáadása"
+
+#: package/contents/ui/SimPage.qml:72
+#, fuzzy, kde-format
+#| msgid "Data roaming:"
+msgid "Data Roaming"
+msgstr "Adatbarangolás"
+
+#: package/contents/ui/SimPage.qml:73
+#, kde-format
+msgid "Allow your device to use networks other than your carrier."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:84
+#, fuzzy, kde-format
+#| msgid "Edit APN"
+msgid "Modify APNs"
+msgstr "APN szerkesztése"
+
+#: package/contents/ui/SimPage.qml:85
+#, kde-format
+msgid "Configure access point names for your carrier."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:95
+#, fuzzy, kde-format
+#| msgid "Networks:"
+msgid "Networks"
+msgstr "Hálózatok:"
+
+#: package/contents/ui/SimPage.qml:96
+#, fuzzy, kde-format
+#| msgid "Select Network Operator"
+msgid "Select a network operator."
+msgstr "Hálózatüzemeltető kiválasztása"
+
+#: package/contents/ui/SimPage.qml:107
+#, fuzzy, kde-format
+#| msgid "Modify SIM Lock"
+msgid "Modify SIM lock settings."
+msgstr "SIM zár módosítása"
+
+#: package/contents/ui/SimPage.qml:118
+#, kde-format
+msgid "View the details of the modem this SIM is connected to."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:132
+#, kde-format
+msgid "SIM Details"
+msgstr "SIM részletei"
+
+#: package/contents/ui/SimPage.qml:145
+#, fuzzy, kde-format
+#| msgid "IMSI:"
+msgid "IMSI"
+msgstr "IMSI:"
+
+#: package/contents/ui/SimPage.qml:153
+#, fuzzy, kde-format
+#| msgid "EID:"
+msgid "EID"
+msgstr "EID:"
+
+#: package/contents/ui/SimPage.qml:161
+#, fuzzy, kde-format
+#| msgid "Operator Code (modem):"
+msgid "Operator Code (modem)"
+msgstr "Üzemeltető kódja (modem):"
+
+#: package/contents/ui/SimPage.qml:169
+#, fuzzy, kde-format
+#| msgid "Operator Name (modem):"
+msgid "Operator Name (modem)"
+msgstr "Üzemeltető neve (modem):"
+
+#: package/contents/ui/SimPage.qml:177
+#, fuzzy, kde-format
+#| msgid "Operator Code (provided by SIM):"
+msgid "Operator Code (provided by SIM)"
+msgstr "Üzemeltető kódja (SIM-tól származó):"
+
+#: package/contents/ui/SimPage.qml:185
+#, fuzzy, kde-format
+#| msgid "Operator Name (provided by SIM):"
+msgid "Operator Name (provided by SIM)"
+msgstr "Üzemeltető neve (SIM-től származó):"
+
+#: package/contents/ui/SimPage.qml:193
+#, fuzzy, kde-format
+#| msgid "SIM ID:"
+msgid "SIM ID"
+msgstr "SIM azonosító:"
+
+#: package/contents/ui/SimPage.qml:210
+#, fuzzy, kde-format
+#| msgid "Emergency Numbers:"
+msgid "Emergency Numbers"
+msgstr "Segélyhívó számok:"
+
+#: sim.cpp:64
+#, kde-format
+msgid "Lock reason unknown."
+msgstr "A zárolási ok ismeretlen."
+
+#: sim.cpp:66
+#, kde-format
+msgid "Modem is unlocked."
+msgstr "A modem feloldva."
+
+#: sim.cpp:68
+#, kde-format
+msgid "SIM requires the PIN code."
+msgstr "A SIM PIN kódot igényel."
+
+#: sim.cpp:70
+#, kde-format
+msgid "SIM requires the PIN2 code."
+msgstr "A SIM PIN2 kódot igényel."
+
+#: sim.cpp:72
+#, kde-format
+msgid "SIM requires the PUK code."
+msgstr "A SIM PUK kódot igényel."
+
+#: sim.cpp:74
+#, kde-format
+msgid "SIM requires the PUK2 code."
+msgstr "A SIM PUK2 kódot igényel."
+
+#: sim.cpp:76
+#, kde-format
+msgid "Modem requires the service provider PIN code."
+msgstr "A modem a szolgáltató PIN kódját igényli."
+
+#: sim.cpp:78
+#, kde-format
+msgid "Modem requires the service provider PUK code."
+msgstr "A modem a szolgáltató PUK kódját igényli."
+
+#: sim.cpp:80
+#, kde-format
+msgid "Modem requires the network PIN code."
+msgstr "A modem a hálózat PIN kódját igényli."
+
+#: sim.cpp:82
+#, kde-format
+msgid "Modem requires the network PUK code."
+msgstr "A modem a hálózat PUK kódját igényli."
+
+#: sim.cpp:84
+#, kde-format
+msgid "Modem requires the PIN code."
+msgstr "A modem PIN kódot igényel."
+
+#: sim.cpp:86
+#, kde-format
+msgid "Modem requires the corporate PIN code."
+msgstr "A modem a társaság PIN kódját igényli."
+
+#: sim.cpp:88
+#, kde-format
+msgid "Modem requires the corporate PUK code."
+msgstr "A modem a társaság PUK kódját igényli."
+
+#: sim.cpp:90
+#, kde-format
+msgid "Modem requires the PH-FSIM PIN code."
+msgstr "A modem PH-FSIM PIN kódot igényel."
+
+#: sim.cpp:92
+#, kde-format
+msgid "Modem requires the PH-FSIM PUK code."
+msgstr "A modem PH-FSIM PUK kódot igényel."
+
+#: sim.cpp:94
+#, kde-format
+msgid "Modem requires the network subset PIN code."
+msgstr "A modem a hálózat részhalmaz PIN kódját igényli."
+
+#: sim.cpp:96
+#, kde-format
+msgid "Modem requires the network subset PUK code."
+msgstr "A modem a hálózat részhalmaz PUK kódját igényli."
+
+#: sim.cpp:140
+#, kde-format
+msgid "(empty)"
+msgstr "(üres)"
+
+#: sim.cpp:155
+#, kde-format
+msgid "Error toggling SIM lock: %1"
+msgstr "Hiba a SIM-zárolás kapcsolásakor: %1"
+
+#: sim.cpp:165
+#, kde-format
+msgid "Error changing the PIN: %1"
+msgstr "Hiba a PIN módosításakor: %1"
+
+#: sim.cpp:176
+#, kde-format
+msgid "Error sending the PIN: %1"
+msgstr "Hiba a PIN küldésekor: %1"
+
+#: sim.cpp:188
+#, kde-format
+msgid "Error sending the PUK: %1"
+msgstr "Hiba a PUK küldésekor: %1"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Kiszel Kristóf"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "kiszel.kristof@gmail.com"
+
+#~ msgid "Cellular Networks"
+#~ msgstr "Mobilhálózatok"
+
+#~ msgid "Devin Lin"
+#~ msgstr "Devin Lin"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"
+
+#, fuzzy
+#~| msgid "Power State:"
+#~ msgid "Modem State"
+#~ msgstr "Energiaállapot:"
+
+#~ msgid "Disable Modem"
+#~ msgstr "Kikapcsolás"
+
+#~ msgid "Enable Modem"
+#~ msgstr "Bekapcsolás"
+
+#~ msgid "On"
+#~ msgstr "Be"
+
+#~ msgid "Enabled:"
+#~ msgstr "Bekapcsolva:"
+
+#~ msgid "Hide Detailed Information"
+#~ msgstr "Részletes információk elrejtése"
+
+#~ msgid "Show Detailed Information"
+#~ msgstr "Részletes információk megjelenítése"
+
+#~ msgid "APNs:"
+#~ msgstr "APN-ek:"
+
+#~ msgid "Modify Access Point Names"
+#~ msgstr "APN-ek módosítása"
+
+#~ msgid "SIM Lock:"
+#~ msgstr "SIM zár:"
+
+#~ msgid "Modem:"
+#~ msgstr "Modem:"
+
+#~ msgid "Locked:"
+#~ msgstr "Zárolva:"
+
+#~ msgid "Change PIN:"
+#~ msgstr "SIM módosítása:"

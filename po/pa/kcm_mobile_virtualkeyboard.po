@@ -1,0 +1,124 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# A S Alam <aalam.yellow@gmail.com>, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2021-04-25 09:33-0700\n"
+"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "ਭਾਸ਼ਾਵਾਂ"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr "ਲਾਗੂ ਕਰੋ"
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr ""
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr ""
+
+#: package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Emit sound on key press"
+msgid "Whether to emit a sound on keypress."
+msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਆਵਾਜ਼ ਕੱਢੋ"
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr ""
+
+#: package/contents/ui/main.qml:74
+#, fuzzy, kde-format
+#| msgid "Vibrate on key press"
+msgid "Whether to vibrate on keypress."
+msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਕੰਪਨ"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "ਲਿਖੀ ਲਿਖਤੀ ਵਾਸਤੇ ਸ਼ਬਦ-ਜੋੜ ਦੀ ਜਾਂਚ ਕਰੋ"
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "ਹਰ ਵਾਕ ਦੇ ਪਹਿਲੇ ਅੱਖਰ ਨੂੰ ਵੱਡਾ ਬਣਾਓ"
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "ਜਦੋਂ ਖਾਲੀ ਥਾਂ ਪਾਈ ਜਾਵੇ ਤਾਂ ਮੌਜੂਦਾ ਸ਼ਬਦ ਨੂੰ ਪਹਿਲੇ ਸੁਝਾਅ ਨਾਲ ਪੂਰਾ ਕਰੋ"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "ਸ਼ਬਦ-ਫੱਟੀ ਵਿੱਚ ਸੰਭਾਵੀ ਸ਼ਬਦਾਂ ਦਾ ਸੁਝਾਅ ਦਿਓ"
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "ਜਦੋਂ ਖਾਲੀ ਥਾਂ ਨੂੰ ਦੋ ਵਾਰ ਦਬਾਇਆ ਜਾਵੇ ਤਾਂ ਵਿਰਾਮ-ਚਿੰਨ੍ਹ ਪਾਓ"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr "ਭਾਸ਼ਾਵਾਂ ਦੀ ਸੰਰਚਨਾ"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੨੦"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "alam.yellow@gmail.com"
+
+#~ msgid "Virtual Keyboard"
+#~ msgstr "ਫ਼ਰਜ਼ੀ ਕੀਬੋਰਡ"
+
+#~ msgid "Bhushan Shah"
+#~ msgstr "ਭੂਸ਼ਨ ਸ਼ਾਹ"
+
+#, fuzzy
+#~| msgid "Virtual Keyboard"
+#~ msgid "Test keyboard:"
+#~ msgstr "ਫ਼ਰਜ਼ੀ ਕੀਬੋਰਡ"
+
+#~ msgid "Feedback:"
+#~ msgstr "ਸੁਝਾਅ:"
+
+#~ msgid "Text correction:"
+#~ msgstr "ਲਿਖਤ ਲਈ ਸੋਧੋ:"
+
+#~ msgid "Languages:"
+#~ msgstr "ਭਾਸ਼ਾਵਾਂ:"
+
+#~ msgid "Theme:"
+#~ msgstr "ਥੀਮ:"
+
+#~ msgid "Other:"
+#~ msgstr "ਹੋਰ:"

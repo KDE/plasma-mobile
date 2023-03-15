@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-12-24 10:42+0100\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -80,7 +80,7 @@ msgstr ""
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:34
+#: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr ""
@@ -117,9 +117,20 @@ msgstr ""
 msgid "Mode when opening from the top right."
 msgstr ""
 
-#: package/contents/ui/QuickSettingsForm.qml:35
+#: package/contents/ui/QuickSettingsForm.qml:115
 #, kde-format
-msgid "Customize the order of quick settings in the pull-down panel."
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+
+#: package/contents/ui/QuickSettingsForm.qml:137
+#, kde-format
+msgid "Disabled Quick Settings"
+msgstr ""
+
+#: package/contents/ui/QuickSettingsForm.qml:138
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
 msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:36

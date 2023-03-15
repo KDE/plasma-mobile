@@ -1,0 +1,290 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# Vit Pelcak <vit@pelcak.org>, 2021, 2022, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"PO-Revision-Date: 2023-01-06 14:59+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
+"Language: cs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 22.12.0\n"
+
+#: mobilepower.cpp:27
+#, kde-format
+msgid "30 sec"
+msgstr "30 sec"
+
+#: mobilepower.cpp:28
+#, kde-format
+msgid "1 min"
+msgstr "1 min"
+
+#: mobilepower.cpp:29
+#, kde-format
+msgid "2 min"
+msgstr "2 min"
+
+#: mobilepower.cpp:30
+#, kde-format
+msgid "5 min"
+msgstr "5 min"
+
+#: mobilepower.cpp:31
+#, kde-format
+msgid "10 min"
+msgstr "10 min"
+
+#: mobilepower.cpp:32
+#, kde-format
+msgid "15 min"
+msgstr "15 min"
+
+#: mobilepower.cpp:33
+#, kde-format
+msgid "Never"
+msgstr "Nikdy"
+
+#: package/contents/ui/BatteryPage.qml:26
+#, kde-format
+msgid "Battery Information"
+msgstr "Informace o baterii"
+
+#: package/contents/ui/BatteryPage.qml:51
+#, kde-format
+msgid "Usage Graph"
+msgstr "Graf použití"
+
+#: package/contents/ui/BatteryPage.qml:99
+#, kde-format
+msgid "Information"
+msgstr "Informace"
+
+#: package/contents/ui/BatteryPage.qml:104
+#, kde-format
+msgid "Is Rechargeable"
+msgstr "Je nabíjecí"
+
+#: package/contents/ui/BatteryPage.qml:105
+#, kde-format
+msgid "Yes"
+msgstr "Ano"
+
+#: package/contents/ui/BatteryPage.qml:105
+#, kde-format
+msgid "No"
+msgstr "Ne"
+
+#: package/contents/ui/BatteryPage.qml:112
+#, kde-format
+msgid "Charge State"
+msgstr "Stav nabití"
+
+#: package/contents/ui/BatteryPage.qml:115
+#, kde-format
+msgid "Not charging"
+msgstr "Nenabíjí se"
+
+#: package/contents/ui/BatteryPage.qml:116
+#, kde-format
+msgid "Charging"
+msgstr "Nabíjí se"
+
+#: package/contents/ui/BatteryPage.qml:117
+#, kde-format
+msgid "Discharging"
+msgstr "Vybíjí se"
+
+#: package/contents/ui/BatteryPage.qml:118
+#, kde-format
+msgid "Fully charged"
+msgstr "Plně nabitá"
+
+#: package/contents/ui/BatteryPage.qml:119
+#, kde-format
+msgid "Unknown"
+msgstr "Neznámý"
+
+#: package/contents/ui/BatteryPage.qml:128
+#, kde-format
+msgid "Current Charge"
+msgstr "Aktuální nabití"
+
+#: package/contents/ui/BatteryPage.qml:129
+#: package/contents/ui/BatteryPage.qml:137
+#, fuzzy, kde-format
+#| msgctxt "%1 is value, %2 is unit"
+#| msgid "%1 %2"
+msgctxt "%1 is percentage value"
+msgid "%1 %"
+msgstr "%1 %2"
+
+#: package/contents/ui/BatteryPage.qml:136
+#, kde-format
+msgid "Health"
+msgstr "Zdraví"
+
+#: package/contents/ui/BatteryPage.qml:144
+#, kde-format
+msgid "Vendor"
+msgstr "Prodejce"
+
+#: package/contents/ui/BatteryPage.qml:152
+#, kde-format
+msgid "Model"
+msgstr "Model"
+
+#: package/contents/ui/BatteryPage.qml:160
+#, kde-format
+msgid "Serial Number"
+msgstr "Sériové číslo"
+
+#: package/contents/ui/BatteryPage.qml:168
+#, kde-format
+msgid "Technology"
+msgstr "Technologie"
+
+#: package/contents/ui/BatteryPage.qml:171
+#, kde-format
+msgid "Lithium ion"
+msgstr "Lithium Ion"
+
+#: package/contents/ui/BatteryPage.qml:172
+#, kde-format
+msgid "Lithium polymer"
+msgstr "Lithium Polymer"
+
+#: package/contents/ui/BatteryPage.qml:173
+#, kde-format
+msgid "Lithium iron phosphate"
+msgstr "Lithium-železo fosfát"
+
+#: package/contents/ui/BatteryPage.qml:174
+#, kde-format
+msgid "Lead acid"
+msgstr "Kyselina olovitá"
+
+#: package/contents/ui/BatteryPage.qml:175
+#, kde-format
+msgid "Nickel cadmium"
+msgstr "Nikl-kadmium"
+
+#: package/contents/ui/BatteryPage.qml:176
+#, kde-format
+msgid "Nickel metal hydride"
+msgstr "Nikl-metal hydrid"
+
+#: package/contents/ui/BatteryPage.qml:177
+#, kde-format
+msgid "Unknown technology"
+msgstr "Neznámá technologie"
+
+#: package/contents/ui/Graph.qml:141
+#, fuzzy, kde-format
+#| msgctxt "%1 is value, %2 is unit"
+#| msgid "%1%2"
+msgctxt "%1 is a percentage value"
+msgid "%1%"
+msgstr "%1%2"
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Devices"
+msgstr "Zařízení"
+
+#: package/contents/ui/main.qml:85
+#, kde-format
+msgid "Internal battery"
+msgstr "Vnitřní baterie"
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "UPS battery"
+msgstr "Baterie UPS"
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgid "Monitor battery"
+msgstr "Baterie monitoru"
+
+#: package/contents/ui/main.qml:88
+#, kde-format
+msgid "Mouse battery"
+msgstr "Baterie myši"
+
+#: package/contents/ui/main.qml:89
+#, kde-format
+msgid "Keyboard battery"
+msgstr "Baterie klávesnice"
+
+#: package/contents/ui/main.qml:90
+#, kde-format
+msgid "PDA battery"
+msgstr "Baterie PDA"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Phone battery"
+msgstr "Baterie telefonu"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgid "Unknown battery"
+msgstr "Neznámá baterie"
+
+#: package/contents/ui/main.qml:95
+#, kde-format
+msgid "%"
+msgstr "%"
+
+#: package/contents/ui/main.qml:95
+#, kde-format
+msgctxt "%1 is value, %2 is unit"
+msgid "%1%2"
+msgstr "%1%2"
+
+#: package/contents/ui/main.qml:97
+#, kde-format
+msgctxt "%1 is battery type, %2 is charge percent"
+msgid "%1 %2 (Charging)"
+msgstr "%1 %2 (Nabíjí se)"
+
+#: package/contents/ui/main.qml:97
+#, kde-format
+msgctxt "%1 is battery type, %2 is charge percent"
+msgid "%1 %2"
+msgstr "%1 %2"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgid "Screen"
+msgstr "Obrazovka"
+
+#: package/contents/ui/main.qml:134
+#, kde-format
+msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
+msgid "Dim screen after"
+msgstr "Ztmavit obrazovku po"
+
+#: package/contents/ui/main.qml:145
+#, kde-format
+msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
+msgid "Turn off screen after"
+msgstr "Vypnout monitor po"
+
+#: package/contents/ui/main.qml:156
+#, kde-format
+msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
+msgid "Suspend device after"
+msgstr "Uspat zařízení po"
+
+#~ msgctxt "literal percent sign"
+#~ msgid "%"
+#~ msgstr "%"

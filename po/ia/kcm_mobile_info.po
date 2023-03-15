@@ -1,0 +1,116 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# giovanni <g.sora@tiscali.it>, 2020, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-15 12:12+0200\n"
+"Last-Translator: giovanni <g.sora@tiscali.it>\n"
+"Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
+"Language: ia\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Information de Systema"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "Systema operative"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr "Pagina de Web "
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "Version de SC de KDE"
+
+#: package/contents/ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "Version de KDE Frameworks "
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "Version de Qt"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "Version de Kernel"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr "Typo de SO"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-bit"
+
+#: package/contents/ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Processor"
+msgstr[1] "Processores:"
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr "Memoria"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 de RAM"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Incognite"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "Copia in area de transferentia"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Giovanni Sora"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "g.sora@tiscali.it"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "Software"
+
+#~ msgid "Hardware"
+#~ msgstr "Hardware"
+
+#~ msgid "Information About This System"
+#~ msgstr "Information re iste systema"

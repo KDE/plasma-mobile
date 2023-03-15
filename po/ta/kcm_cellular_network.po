@@ -1,0 +1,1040 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# gobinathal <gobinathal8@gmail.com>, 2021.
+# Kishore G <kishore96@gmail.com>, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-10-25 21:33+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.08.2\n"
+
+#: modem.cpp:126
+#, kde-format
+msgid "Error resetting the modem: %1"
+msgstr ""
+
+#: modem.cpp:245 modem.cpp:414
+#, kde-format
+msgid "Error updating connection settings for %1: %2."
+msgstr "%1-க்கான இணைப்பமைவுகளை புதுப்பிப்பதில் சிக்கல்: %2"
+
+#: modem.cpp:325
+#, kde-format
+msgid "Error activating connection: %1"
+msgstr "இணைப்பை செயற்படுத்துவதில் சிக்கல்: %1"
+
+#: modem.cpp:360
+#, kde-format
+msgid "Error adding connection: %1"
+msgstr "இணைப்பைச் சேர்ப்பதில் சிக்கல்: %1"
+
+#: modem.cpp:378
+#, kde-format
+msgid "Error removing connection: %1"
+msgstr "இணைப்பை நீக்குவதில் சிக்கல்: %1"
+
+#: modem.cpp:500 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modemdetails.cpp:428 modemdetails.cpp:458
+#, kde-format
+msgid "Unknown"
+msgstr "தெரியாதது"
+
+#: modem.cpp:502
+#, kde-format
+msgid "Unmanaged"
+msgstr "நிர்வகிக்கப்படாத‍து"
+
+#: modem.cpp:504
+#, kde-format
+msgid "Unavailable"
+msgstr "கிட்டவில்லை"
+
+#: modem.cpp:506
+#, kde-format
+msgid "Disconnected"
+msgstr "துண்டிக்கபட்டது"
+
+#: modem.cpp:508
+#, kde-format
+msgid "Preparing"
+msgstr "தயாராகிறது"
+
+#: modem.cpp:510
+#, kde-format
+msgid "ConfiguringHardware"
+msgstr ""
+
+#: modem.cpp:512
+#, kde-format
+msgid "NeedAuth"
+msgstr ""
+
+#: modem.cpp:514
+#, kde-format
+msgid "ConfiguringIp"
+msgstr ""
+
+#: modem.cpp:516
+#, kde-format
+msgid "CheckingIp"
+msgstr ""
+
+#: modem.cpp:518
+#, kde-format
+msgid "WaitingForSecondaries"
+msgstr ""
+
+#: modem.cpp:520
+#, kde-format
+msgid "Activated"
+msgstr ""
+
+#: modem.cpp:522
+#, kde-format
+msgid "Deactivating"
+msgstr ""
+
+#: modem.cpp:524 modemdetails.cpp:250
+#, kde-format
+msgid "Failed"
+msgstr ""
+
+#: modemdetails.cpp:121 modemdetails.cpp:461
+#, kde-format
+msgid "POTS"
+msgstr ""
+
+#: modemdetails.cpp:124
+#, kde-format
+msgid "GSM"
+msgstr ""
+
+#: modemdetails.cpp:127
+#, kde-format
+msgid "GSM Compact"
+msgstr ""
+
+#: modemdetails.cpp:130
+#, kde-format
+msgid "GPRS"
+msgstr ""
+
+#: modemdetails.cpp:133
+#, kde-format
+msgid "EDGE"
+msgstr ""
+
+#: modemdetails.cpp:136
+#, kde-format
+msgid "UMTS"
+msgstr ""
+
+#: modemdetails.cpp:139
+#, kde-format
+msgid "HSDPA"
+msgstr ""
+
+#: modemdetails.cpp:142
+#, kde-format
+msgid "HSUPA"
+msgstr ""
+
+#: modemdetails.cpp:145
+#, kde-format
+msgid "HSPA"
+msgstr ""
+
+#: modemdetails.cpp:148
+#, kde-format
+msgid "HSPA+"
+msgstr ""
+
+#: modemdetails.cpp:151
+#, kde-format
+msgid "CDMA2000 1xRTT"
+msgstr ""
+
+#: modemdetails.cpp:154
+#, kde-format
+msgid "CDMA2000 EVDO-0"
+msgstr ""
+
+#: modemdetails.cpp:157
+#, kde-format
+msgid "CDMA2000 EVDO-A"
+msgstr ""
+
+#: modemdetails.cpp:160
+#, kde-format
+msgid "CDMA2000 EVDO-B"
+msgstr ""
+
+#: modemdetails.cpp:163
+#, kde-format
+msgid "LTE"
+msgstr ""
+
+#: modemdetails.cpp:166
+#, kde-format
+msgid "5GNR"
+msgstr ""
+
+#: modemdetails.cpp:222
+#, kde-format
+msgid "Off"
+msgstr ""
+
+#: modemdetails.cpp:224
+#, kde-format
+msgid "Low-power mode"
+msgstr "குறைவாற்றல் பயன்முறை"
+
+#: modemdetails.cpp:226
+#, kde-format
+msgid "Full power mode"
+msgstr "முழுவாற்றல் பயன்முறை"
+
+#: modemdetails.cpp:254
+#, kde-format
+msgid "Initializing"
+msgstr ""
+
+#: modemdetails.cpp:256 package/contents/ui/SimPage.qml:137
+#, kde-format
+msgid "Locked"
+msgstr "பூட்டப்பட்டது"
+
+#: modemdetails.cpp:258
+#, kde-format
+msgid "Disabled"
+msgstr "முடக்கப்பட்டது"
+
+#: modemdetails.cpp:260
+#, kde-format
+msgid "Disabling"
+msgstr "முடக்கப்படுகிறது"
+
+#: modemdetails.cpp:262
+#, kde-format
+msgid "Enabling"
+msgstr "செயற்படுத்தப்படுகிறது"
+
+#: modemdetails.cpp:264 package/contents/ui/ModemPage.qml:110
+#, kde-format
+msgid "Enabled"
+msgstr "இயக்கப்பட்டது"
+
+#: modemdetails.cpp:266
+#, kde-format
+msgid "Searching for network provider"
+msgstr "பிணைய வழங்குநருக்காக தேடுகிறது"
+
+#: modemdetails.cpp:268
+#, kde-format
+msgid "Registered with network provider"
+msgstr ""
+
+#: modemdetails.cpp:270
+#, kde-format
+msgid "Disconnecting"
+msgstr "துண்டிக்கப்படுகிறது"
+
+#: modemdetails.cpp:272
+#, kde-format
+msgid "Connecting"
+msgstr "இணைக்கப்படுகிறது"
+
+#: modemdetails.cpp:274
+#, kde-format
+msgid "Connected"
+msgstr "இணைக்கப்பட்டது"
+
+#: modemdetails.cpp:283
+#, kde-format
+msgid "No error."
+msgstr "சிக்கல் இல்லை."
+
+#: modemdetails.cpp:285
+#, kde-format
+msgid "Unknown error."
+msgstr ""
+
+#: modemdetails.cpp:287
+#, kde-format
+msgid "SIM is required but missing."
+msgstr ""
+
+#: modemdetails.cpp:289
+#, kde-format
+msgid "SIM is available but unusable."
+msgstr ""
+
+#: modemdetails.cpp:312
+#, kde-format
+msgid "Not registered, not searching for new operator to register."
+msgstr ""
+
+#: modemdetails.cpp:314
+#, kde-format
+msgid "Registered on home network."
+msgstr ""
+
+#: modemdetails.cpp:316
+#, kde-format
+msgid "Not registered, searching for new operator to register with."
+msgstr ""
+
+#: modemdetails.cpp:318
+#, kde-format
+msgid "Registration denied."
+msgstr ""
+
+#: modemdetails.cpp:320
+#, kde-format
+msgid "Unknown registration status."
+msgstr ""
+
+#: modemdetails.cpp:322
+#, kde-format
+msgid "Registered on a roaming network."
+msgstr ""
+
+#: modemdetails.cpp:324
+#, kde-format
+msgid "Registered for \"SMS only\", on home network."
+msgstr ""
+
+#: modemdetails.cpp:326
+#, kde-format
+msgid "Registered for \"SMS only\", roaming network."
+msgstr ""
+
+#: modemdetails.cpp:328
+#, kde-format
+msgid "Emergency services only."
+msgstr ""
+
+#: modemdetails.cpp:330
+#, kde-format
+msgid "Registered for \"CSFB not preferred\", home network."
+msgstr ""
+
+#: modemdetails.cpp:332
+#, kde-format
+msgid "Registered for \"CSFB not preferred\", roaming network."
+msgstr ""
+
+#: modemdetails.cpp:334
+#, kde-format
+msgid "Attached for access to Restricted Local Operator Services."
+msgstr ""
+
+#: modemdetails.cpp:373
+#, kde-format
+msgid "Scanning networks failed: %1"
+msgstr "பிணையங்களை கண்டறிவது தோல்வியடைந்தது: %1"
+
+#: modemdetails.cpp:430 package/contents/ui/ModemPage.qml:203
+#: package/contents/ui/SimPage.qml:138
+#, kde-format
+msgid "Yes"
+msgstr "ஆம்"
+
+#: modemdetails.cpp:432 package/contents/ui/ModemPage.qml:203
+#: package/contents/ui/SimPage.qml:138
+#, kde-format
+msgid "No"
+msgstr "இல்லை"
+
+#: modemdetails.cpp:434
+#, kde-format
+msgid "GuessYes"
+msgstr ""
+
+#: modemdetails.cpp:436
+#, kde-format
+msgid "GuessNo"
+msgstr ""
+
+#: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
+#: modemdetails.cpp:473 package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "2G"
+msgstr "2ஜி"
+
+#: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
+#: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
+#: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
+#, kde-format
+msgid "3G"
+msgstr "3ஜி"
+
+#: modemdetails.cpp:503
+#, kde-format
+msgid "4G"
+msgstr "4ஜி"
+
+#: modemdetails.cpp:506
+#, kde-format
+msgid "5G"
+msgstr "5ஜி"
+
+#: modemdetails.cpp:509 package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Any"
+msgstr "ஏதேனும்"
+
+#: package/contents/ui/AvailableNetworks.qml:13
+#, kde-format
+msgid "Available Networks"
+msgstr "கிடைக்கிற பிணையங்கள்"
+
+#: package/contents/ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "none"
+msgstr "ஏதுமில்லை"
+
+#: package/contents/ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "Current operator: %1"
+msgstr "தற்போதைய நிறுவனம்: %1"
+
+#: package/contents/ui/AvailableNetworks.qml:40
+#, kde-format
+msgid "Scan For Networks"
+msgstr "பிணையங்களை கண்டறி"
+
+#: package/contents/ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr ""
+
+#: package/contents/ui/EditProfileDialog.qml:41
+#, kde-format
+msgid "Name"
+msgstr "பெயர்"
+
+#: package/contents/ui/EditProfileDialog.qml:46
+#, kde-format
+msgid "APN"
+msgstr ""
+
+#: package/contents/ui/EditProfileDialog.qml:51
+#, kde-format
+msgid "Username"
+msgstr "பயனர் பெயர்"
+
+#: package/contents/ui/EditProfileDialog.qml:56
+#, kde-format
+msgid "Password"
+msgstr "கடவுச்சொல்"
+
+#: package/contents/ui/EditProfileDialog.qml:61
+#, kde-format
+msgid "Network type"
+msgstr "பிணைய வகை"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4ஜி/3ஜி/2ஜி"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "3G/2G"
+msgstr "3ஜி/2ஜி"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 4G"
+msgstr "4ஜி மட்டும்"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 3G"
+msgstr "3ஜி மட்டும்"
+
+#: package/contents/ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 2G"
+msgstr "2ஜி மட்டும்"
+
+#: package/contents/ui/main.qml:35
+#, kde-format
+msgid "Modem not available"
+msgstr "இணக்கி கிடைக்கவில்லை"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Mobile data"
+msgstr "கைபேசி தரவு"
+
+#: package/contents/ui/main.qml:79
+#, kde-format
+msgid "No SIM is inserted."
+msgstr ""
+
+#: package/contents/ui/main.qml:81
+#, kde-format
+msgid "Mobile data is not available with this modem."
+msgstr ""
+
+#: package/contents/ui/main.qml:83
+#, kde-format
+msgid "An APN needs to be configured to have mobile data."
+msgstr ""
+
+#: package/contents/ui/main.qml:85
+#, kde-format
+msgid "Whether mobile data is enabled."
+msgstr ""
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "View Data Usage"
+msgid "Data Usage"
+msgstr "தரவு உபயோகத்தை பாருங்கள்"
+
+#: package/contents/ui/main.qml:117
+#, fuzzy, kde-format
+#| msgid "View Data Usage"
+msgid "View data usage."
+msgstr "தரவு உபயோகத்தை பாருங்கள்"
+
+#: package/contents/ui/main.qml:133 package/contents/ui/SimPage.qml:17
+#, kde-format
+msgid "SIM"
+msgstr ""
+
+#: package/contents/ui/main.qml:133
+#, kde-format
+msgid "SIMs"
+msgstr ""
+
+#: package/contents/ui/main.qml:153
+#, kde-format
+msgid "SIM %1"
+msgstr ""
+
+#: package/contents/ui/main.qml:154
+#, kde-format
+msgid "View SIM %1 details."
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:16
+#, kde-format
+msgid "Modem %1"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:41
+#, kde-format
+msgid "Modem Control"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:50
+#, kde-format
+msgid "Modem Restart"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:53
+#, kde-format
+msgid "Force Modem Restart"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:69 package/contents/ui/SimPage.qml:117
+#, kde-format
+msgid "Modem Details"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:82
+#, fuzzy, kde-format
+#| msgid "Access Technologies:"
+msgid "Access Technologies"
+msgstr "அணுகல் தொழில்நுட்பங்கள்:"
+
+#: package/contents/ui/ModemPage.qml:102
+#, kde-format
+msgid "IMEI"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:118
+#, fuzzy, kde-format
+#| msgid "Manufacturer:"
+msgid "Manufacturer"
+msgstr "உற்பத்தியாளர்:"
+
+#: package/contents/ui/ModemPage.qml:126
+#, fuzzy, kde-format
+#| msgid "Model:"
+msgid "Model"
+msgstr "வகை:"
+
+#: package/contents/ui/ModemPage.qml:142
+#, kde-format
+msgid "Owned Numbers:"
+msgstr "இது கையாளும் எண்கள்:"
+
+#: package/contents/ui/ModemPage.qml:162
+#, fuzzy, kde-format
+#| msgid "Revision:"
+msgid "Revision"
+msgstr "சீராய்வு"
+
+#: package/contents/ui/ModemPage.qml:170
+#, fuzzy, kde-format
+#| msgid "Signal Quality:"
+msgid "Signal Quality"
+msgstr "குறிப்பலை தரம்:"
+
+#: package/contents/ui/ModemPage.qml:178
+#, kde-format
+msgid "State"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:186
+#, fuzzy, kde-format
+#| msgid "Failure Reason:"
+msgid "Failure Reason"
+msgstr "தோல்விக்கான காரணம்:"
+
+#: package/contents/ui/ModemPage.qml:194
+#, kde-format
+msgid "Registration State"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:202
+#, kde-format
+msgid "Roaming"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:210
+#, fuzzy, kde-format
+#| msgid "Firmware Version:"
+msgid "Firmware Version"
+msgstr "சாதனநிரல் பதிப்பு:"
+
+#: package/contents/ui/ModemPage.qml:218
+#, fuzzy, kde-format
+#| msgid "Interface Name:"
+msgid "Interface Name"
+msgstr "இடைமுகப்பின் பெயர்:"
+
+#: package/contents/ui/ModemPage.qml:226
+#, kde-format
+msgid "Metered"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:234
+#, kde-format
+msgid "Active NetworkManager Connection"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:242
+#, fuzzy, kde-format
+#| msgid "Device:"
+msgid "Device"
+msgstr "சாதனம்:"
+
+#: package/contents/ui/ModemPage.qml:250
+#, fuzzy, kde-format
+#| msgid "Device:"
+msgid "Device ID"
+msgstr "சாதனம்:"
+
+#: package/contents/ui/ModemPage.qml:266
+#, kde-format
+msgid "Drivers:"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:286
+#, fuzzy, kde-format
+#| msgid "Plugin:"
+msgid "Plugin"
+msgstr "செருகுநிரல்:"
+
+#: package/contents/ui/ModemPage.qml:294
+#, kde-format
+msgid "Power State"
+msgstr ""
+
+#: package/contents/ui/ModemPage.qml:302
+#, kde-format
+msgid "SIM Path"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:12
+#, kde-format
+msgid "APNs"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:26
+#, kde-format
+msgid "No APNs configured"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:31
+#, kde-format
+msgid "Add Connection"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:98
+#, kde-format
+msgid "Add APN"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:121
+#, kde-format
+msgid "Autodetect APN"
+msgstr ""
+
+#: package/contents/ui/ProfileList.qml:133
+#, kde-format
+msgid "Edit"
+msgstr "திருத்து"
+
+#: package/contents/ui/ProfileList.qml:141
+#, kde-format
+msgid "Delete"
+msgstr "நீக்கு"
+
+#: package/contents/ui/SimLockPage.qml:16 package/contents/ui/SimPage.qml:106
+#, kde-format
+msgid "SIM Lock"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:47
+#, kde-format
+msgid "SIM is locked"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:48
+#, kde-format
+msgid "In order to use this SIM, you must first unlock it."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:70
+#, kde-format
+msgid "SIM is not locked"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:71
+#, kde-format
+msgid ""
+"You can lock your SIM to require a set PIN code for phone calls and mobile "
+"data."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:75
+#, kde-format
+msgid "Lock SIM"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:89
+#, kde-format
+msgid "Disable SIM Lock"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:90
+#, kde-format
+msgid "Disable the SIM lock feature and remove the passcode on the SIM."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:103
+#, kde-format
+msgid "Change PIN"
+msgstr "கடவெண்ணை மாற்று"
+
+#: package/contents/ui/SimLockPage.qml:104
+#, kde-format
+msgid "Change the passcode set on the SIM."
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:119
+#, kde-format
+msgid "Unlock SIM"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:127
+#, kde-format
+msgid "Attempts left: %1"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:131
+#, kde-format
+msgid "Enter PIN"
+msgstr "கடவெண்ணை உள்ளிடுங்கள்"
+
+#: package/contents/ui/SimLockPage.qml:139
+#, kde-format
+msgid "Change SIM PIN"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:158
+#: package/contents/ui/SimLockPage.qml:223
+#, kde-format
+msgid "PINs don't match!"
+msgstr "கடவெண்கள் ஒன்றாயில்லை!"
+
+#: package/contents/ui/SimLockPage.qml:164
+#: package/contents/ui/SimLockPage.qml:229
+#, kde-format
+msgid "PINs must be between 4 and 8 digits!"
+msgstr "கடவெண்களின் நீளம் 4-இலிருந்து 8 இலக்கங்களாக இருக்க வேண்டும்!"
+
+#: package/contents/ui/SimLockPage.qml:169
+#: package/contents/ui/SimLockPage.qml:196
+#, kde-format
+msgid "Current PIN"
+msgstr "தற்போதைய கடவெண்"
+
+#: package/contents/ui/SimLockPage.qml:174
+#: package/contents/ui/SimLockPage.qml:234
+#, kde-format
+msgid "New PIN"
+msgstr "புதிய கடவெண்"
+
+#: package/contents/ui/SimLockPage.qml:179
+#: package/contents/ui/SimLockPage.qml:239
+#, kde-format
+msgid "Confirm PIN"
+msgstr "கடவெண்ணை உறுதி செய்யவும்"
+
+#: package/contents/ui/SimLockPage.qml:187
+#, kde-format
+msgid "Remove SIM PIN"
+msgstr ""
+
+#: package/contents/ui/SimLockPage.qml:204
+#, kde-format
+msgid "Add SIM PIN"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:72
+#, kde-format
+msgid "Data Roaming"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:73
+#, kde-format
+msgid "Allow your device to use networks other than your carrier."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:84
+#, kde-format
+msgid "Modify APNs"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:85
+#, kde-format
+msgid "Configure access point names for your carrier."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:95
+#, fuzzy, kde-format
+#| msgid "Networks:"
+msgid "Networks"
+msgstr "பிணையங்கள்:"
+
+#: package/contents/ui/SimPage.qml:96
+#, fuzzy, kde-format
+#| msgid "Searching for network provider"
+msgid "Select a network operator."
+msgstr "பிணைய வழங்குநருக்காக தேடுகிறது"
+
+#: package/contents/ui/SimPage.qml:107
+#, kde-format
+msgid "Modify SIM lock settings."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:118
+#, kde-format
+msgid "View the details of the modem this SIM is connected to."
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:132
+#, kde-format
+msgid "SIM Details"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:145
+#, kde-format
+msgid "IMSI"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:153
+#, kde-format
+msgid "EID"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:161
+#, kde-format
+msgid "Operator Code (modem)"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:169
+#, kde-format
+msgid "Operator Name (modem)"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:177
+#, kde-format
+msgid "Operator Code (provided by SIM)"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:185
+#, kde-format
+msgid "Operator Name (provided by SIM)"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:193
+#, kde-format
+msgid "SIM ID"
+msgstr ""
+
+#: package/contents/ui/SimPage.qml:210
+#, kde-format
+msgid "Emergency Numbers"
+msgstr ""
+
+#: sim.cpp:64
+#, kde-format
+msgid "Lock reason unknown."
+msgstr "பூட்டியதன் காரணம் தெரியாத‍து."
+
+#: sim.cpp:66
+#, kde-format
+msgid "Modem is unlocked."
+msgstr ""
+
+#: sim.cpp:68
+#, kde-format
+msgid "SIM requires the PIN code."
+msgstr ""
+
+#: sim.cpp:70
+#, kde-format
+msgid "SIM requires the PIN2 code."
+msgstr ""
+
+#: sim.cpp:72
+#, kde-format
+msgid "SIM requires the PUK code."
+msgstr ""
+
+#: sim.cpp:74
+#, kde-format
+msgid "SIM requires the PUK2 code."
+msgstr ""
+
+#: sim.cpp:76
+#, kde-format
+msgid "Modem requires the service provider PIN code."
+msgstr ""
+
+#: sim.cpp:78
+#, kde-format
+msgid "Modem requires the service provider PUK code."
+msgstr ""
+
+#: sim.cpp:80
+#, kde-format
+msgid "Modem requires the network PIN code."
+msgstr ""
+
+#: sim.cpp:82
+#, kde-format
+msgid "Modem requires the network PUK code."
+msgstr ""
+
+#: sim.cpp:84
+#, kde-format
+msgid "Modem requires the PIN code."
+msgstr ""
+
+#: sim.cpp:86
+#, kde-format
+msgid "Modem requires the corporate PIN code."
+msgstr ""
+
+#: sim.cpp:88
+#, kde-format
+msgid "Modem requires the corporate PUK code."
+msgstr ""
+
+#: sim.cpp:90
+#, kde-format
+msgid "Modem requires the PH-FSIM PIN code."
+msgstr ""
+
+#: sim.cpp:92
+#, kde-format
+msgid "Modem requires the PH-FSIM PUK code."
+msgstr ""
+
+#: sim.cpp:94
+#, kde-format
+msgid "Modem requires the network subset PIN code."
+msgstr ""
+
+#: sim.cpp:96
+#, kde-format
+msgid "Modem requires the network subset PUK code."
+msgstr ""
+
+#: sim.cpp:140
+#, kde-format
+msgid "(empty)"
+msgstr "(காலி)"
+
+#: sim.cpp:155
+#, kde-format
+msgid "Error toggling SIM lock: %1"
+msgstr ""
+
+#: sim.cpp:165
+#, kde-format
+msgid "Error changing the PIN: %1"
+msgstr ""
+
+#: sim.cpp:176
+#, kde-format
+msgid "Error sending the PIN: %1"
+msgstr ""
+
+#: sim.cpp:188
+#, kde-format
+msgid "Error sending the PUK: %1"
+msgstr ""
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "gobinath"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "gobinathal8@gmail.com"
+
+#~ msgid "Enabled:"
+#~ msgstr "இயக்கப்பட்டுள்ளதா:"
+
+#~ msgid "Hide Detailed Information"
+#~ msgstr "விவரமான தகவல்களை மறை"
+
+#~ msgid "Show Detailed Information"
+#~ msgstr "விவரமான தகவல்களை காட்டு"
+
+#~ msgid "Locked:"
+#~ msgstr "பூட்டப்பட்டதா:"
+
+#~ msgid "Change PIN:"
+#~ msgstr "கடவெண்ணை மாற்று:"

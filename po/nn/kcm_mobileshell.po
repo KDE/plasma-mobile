@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2023-02-21 21:26+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -82,7 +82,7 @@ msgstr "Handlingsskuff"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:34
+#: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snøgginnstillingar"
@@ -119,10 +119,23 @@ msgstr "Øvre høgre skuff-modus"
 msgid "Mode when opening from the top right."
 msgstr "Modus ved opning frå oppe til høgre."
 
-#: package/contents/ui/QuickSettingsForm.qml:35
-#, kde-format
-msgid "Customize the order of quick settings in the pull-down panel."
+#: package/contents/ui/QuickSettingsForm.qml:115
+#, fuzzy, kde-format
+#| msgid "Customize the order of quick settings in the pull-down panel."
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
 msgstr "Tilpassa rekkjefølgja på snøgginnstillingane i nedtrekkspanelet."
+
+#: package/contents/ui/QuickSettingsForm.qml:137
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Disabled Quick Settings"
+msgstr "Snøgginnstillingar"
+
+#: package/contents/ui/QuickSettingsForm.qml:138
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format

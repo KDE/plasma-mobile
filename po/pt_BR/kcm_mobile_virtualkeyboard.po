@@ -1,0 +1,122 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2021, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-07-14 10:42-0300\n"
+"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "Idiomas"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr "Aplicar"
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr "Teclado virtual"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr "Digite qualquer coisa aqui..."
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr "Som"
+
+#: package/contents/ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Emit sound on key press"
+msgid "Whether to emit a sound on keypress."
+msgstr "Emitir som ao pressionar tecla"
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr "Vibração"
+
+#: package/contents/ui/main.qml:74
+#, fuzzy, kde-format
+#| msgid "Vibrate on key press"
+msgid "Whether to vibrate on keypress."
+msgstr "Vibrar ao pressionar tecla"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "Verificação ortográfica do texto digitado"
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "Colocar a primeira letra de cada sentença em maiúscula"
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "Completar a palavra atual com a primeira sugestão ao tocar no espaço"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "Sugerir palavras em potencial na faixa de palavras"
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "Inserir ponto final quando o espaço é tocado duas vezes"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr "Configurar idiomas"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Luiz Fernando Ranghetti"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "elchevive@opensuse.org"
+
+#~ msgid "Virtual Keyboard"
+#~ msgstr "Teclado virtual"
+
+#~ msgid "Bhushan Shah"
+#~ msgstr "Bhushan Shah"
+
+#~ msgid "Test keyboard:"
+#~ msgstr "Testar teclado:"
+
+#~ msgid "Feedback:"
+#~ msgstr "Comentários:"
+
+#~ msgid "Text correction:"
+#~ msgstr "Correção de texto:"
+
+#~ msgid "Languages:"
+#~ msgstr "Idiomas:"
+
+#~ msgid "Theme:"
+#~ msgstr "Tema:"
+
+#~ msgid "Other:"
+#~ msgstr "Outro:"

@@ -1,0 +1,330 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# Kristóf Kiszel <kiszel.kristof@gmail.com>, 2021.
+# Kristof Kiszel <ulysses@fsf.hu>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"PO-Revision-Date: 2022-02-09 17:27+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.07.70\n"
+
+#: mobilepower.cpp:27
+#, kde-format
+msgid "30 sec"
+msgstr "30 másodperc"
+
+#: mobilepower.cpp:28
+#, kde-format
+msgid "1 min"
+msgstr "1 perc után"
+
+#: mobilepower.cpp:29
+#, kde-format
+msgid "2 min"
+msgstr "2 perc után"
+
+#: mobilepower.cpp:30
+#, kde-format
+msgid "5 min"
+msgstr "5 perc után"
+
+#: mobilepower.cpp:31
+#, kde-format
+msgid "10 min"
+msgstr "10 perc után"
+
+#: mobilepower.cpp:32
+#, kde-format
+msgid "15 min"
+msgstr "15 perc után"
+
+#: mobilepower.cpp:33
+#, kde-format
+msgid "Never"
+msgstr "Soha"
+
+#: package/contents/ui/BatteryPage.qml:26
+#, kde-format
+msgid "Battery Information"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:51
+#, kde-format
+msgid "Usage Graph"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:99
+#, kde-format
+msgid "Information"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:104
+#, kde-format
+msgid "Is Rechargeable"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:105
+#, kde-format
+msgid "Yes"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:105
+#, kde-format
+msgid "No"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:112
+#, kde-format
+msgid "Charge State"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:115
+#, kde-format
+msgid "Not charging"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:116
+#, kde-format
+msgid "Charging"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:117
+#, kde-format
+msgid "Discharging"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:118
+#, kde-format
+msgid "Fully charged"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:119
+#, kde-format
+msgid "Unknown"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:128
+#, kde-format
+msgid "Current Charge"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:129
+#: package/contents/ui/BatteryPage.qml:137
+#, kde-format
+msgctxt "%1 is percentage value"
+msgid "%1 %"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:136
+#, kde-format
+msgid "Health"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:144
+#, kde-format
+msgid "Vendor"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:152
+#, kde-format
+msgid "Model"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:160
+#, kde-format
+msgid "Serial Number"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:168
+#, kde-format
+msgid "Technology"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:171
+#, kde-format
+msgid "Lithium ion"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:172
+#, kde-format
+msgid "Lithium polymer"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:173
+#, kde-format
+msgid "Lithium iron phosphate"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:174
+#, kde-format
+msgid "Lead acid"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:175
+#, kde-format
+msgid "Nickel cadmium"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:176
+#, kde-format
+msgid "Nickel metal hydride"
+msgstr ""
+
+#: package/contents/ui/BatteryPage.qml:177
+#, kde-format
+msgid "Unknown technology"
+msgstr ""
+
+#: package/contents/ui/Graph.qml:141
+#, kde-format
+msgctxt "%1 is a percentage value"
+msgid "%1%"
+msgstr ""
+
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgid "Devices"
+msgstr ""
+
+#: package/contents/ui/main.qml:85
+#, kde-format
+msgid "Internal battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "UPS battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:87
+#, kde-format
+msgid "Monitor battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:88
+#, kde-format
+msgid "Mouse battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:89
+#, kde-format
+msgid "Keyboard battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:90
+#, kde-format
+msgid "PDA battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Phone battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgid "Unknown battery"
+msgstr ""
+
+#: package/contents/ui/main.qml:95
+#, fuzzy, kde-format
+#| msgid "0%"
+msgid "%"
+msgstr "0%"
+
+#: package/contents/ui/main.qml:95
+#, kde-format
+msgctxt "%1 is value, %2 is unit"
+msgid "%1%2"
+msgstr ""
+
+#: package/contents/ui/main.qml:97
+#, kde-format
+msgctxt "%1 is battery type, %2 is charge percent"
+msgid "%1 %2 (Charging)"
+msgstr ""
+
+#: package/contents/ui/main.qml:97
+#, kde-format
+msgctxt "%1 is battery type, %2 is charge percent"
+msgid "%1 %2"
+msgstr ""
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgid "Screen"
+msgstr ""
+
+#: package/contents/ui/main.qml:134
+#, fuzzy, kde-format
+#| msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
+#| msgid "Dim screen after:"
+msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
+msgid "Dim screen after"
+msgstr "Képernyő elsötétítése:"
+
+#: package/contents/ui/main.qml:145
+#, fuzzy, kde-format
+#| msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
+#| msgid "Turn off screen after:"
+msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
+msgid "Turn off screen after"
+msgstr "Képernyő kikapcsolása:"
+
+#: package/contents/ui/main.qml:156
+#, fuzzy, kde-format
+#| msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
+#| msgid "Suspend device after:"
+msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
+msgid "Suspend device after"
+msgstr "Eszköz felfüggesztése:"
+
+#, fuzzy
+#~| msgid "0%"
+#~ msgctxt "literal percent sign"
+#~ msgid "%"
+#~ msgstr "0%"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Kiszel Kristóf"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "ulysses@fsf.hu"
+
+#~ msgid "Energy Settings"
+#~ msgstr "Energiagazdálkodási beállítások"
+
+#~ msgid "Tomaz Canabrava"
+#~ msgstr "Tomaz Canabrava"
+
+#~ msgctxt "Part of a sentence like 'Dim Display after 5 minutes'"
+#~ msgid "Dim Display"
+#~ msgstr "Kijelző elsötétítése"
+
+#~ msgctxt "Part of a sentence like 'Suspend Session after 5 minutes'"
+#~ msgid "Suspend Session"
+#~ msgstr "Munkamenet felfüggesztése"
+
+#, fuzzy
+#~| msgid "Lock screen and Sleep"
+#~ msgctxt "Part of a sentence like 'Lock screen and sleep after 5 minutes'"
+#~ msgid "Lock Screen and Sleep"
+#~ msgstr "Képernyő zárolása és alvás"
+
+#~ msgid "Screen Brightness"
+#~ msgstr "Fényerő"
+
+#~ msgid "100%"
+#~ msgstr "100%"

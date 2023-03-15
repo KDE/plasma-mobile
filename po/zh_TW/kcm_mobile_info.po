@@ -1,0 +1,126 @@
+# Chinese translations for plasma-settings package
+# plasma-settings 套件的正體中文翻譯.
+# Copyright (C) 2019 This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# Automatically generated, 2019.
+# pan93412 <pan93412@gmail.com>, 2019, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2020-02-28 01:43+0800\n"
+"Last-Translator: pan93412 <pan93412@gmail.com>\n"
+"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 19.12.2\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "系統資訊"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr ""
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "KDE Plasma Version:"
+msgid "KDE Plasma Version"
+msgstr "KDE Plasma 版本："
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "KDE Frameworks Version:"
+msgid "KDE Frameworks Version"
+msgstr "KDE Frameworks 版本："
+
+#: package/contents/ui/main.qml:84
+#, fuzzy, kde-format
+#| msgid "Qt Version:"
+msgid "Qt Version"
+msgstr "Qt 版本："
+
+#: package/contents/ui/main.qml:91
+#, fuzzy, kde-format
+#| msgid "Kernel Version:"
+msgid "Kernel Version"
+msgstr "核心版本："
+
+#: package/contents/ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "OS Type:"
+msgid "OS Type"
+msgstr "作業系統類型："
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1 位元"
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "Processor:"
+#| msgid_plural "Processors:"
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "處理器："
+
+#: package/contents/ui/main.qml:123
+#, fuzzy, kde-format
+#| msgid "Memory:"
+msgid "Memory"
+msgstr "記憶體："
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 記憶體"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "未知"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "複製至剪貼簿"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "pan93412"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "pan93412@gmail.com"
+
+#~ msgid "Info"
+#~ msgstr "資訊"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "軟體"
+
+#~ msgid "Hardware"
+#~ msgstr "硬體"
+
+#~ msgid "Information About This System"
+#~ msgstr "關於此系統的資訊"

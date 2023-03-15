@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2023-03-12 08:39+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -78,7 +78,7 @@ msgstr ""
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:34
+#: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rýchle nastavenia"
@@ -115,9 +115,21 @@ msgstr ""
 msgid "Mode when opening from the top right."
 msgstr ""
 
-#: package/contents/ui/QuickSettingsForm.qml:35
+#: package/contents/ui/QuickSettingsForm.qml:115
 #, kde-format
-msgid "Customize the order of quick settings in the pull-down panel."
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
+msgstr ""
+
+#: package/contents/ui/QuickSettingsForm.qml:137
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Disabled Quick Settings"
+msgstr "Rýchle nastavenia"
+
+#: package/contents/ui/QuickSettingsForm.qml:138
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
 msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:36

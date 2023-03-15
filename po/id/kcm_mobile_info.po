@@ -1,0 +1,121 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# Wantoyèk <wantoyek@gmail.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-03-18 07:14+0700\n"
+"Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
+"Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
+"Language: id\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Informasi Sistem"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr ""
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "KDE Plasma Version:"
+msgid "KDE Plasma Version"
+msgstr "Versi KDE Plasma:"
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "KDE Frameworks Version:"
+msgid "KDE Frameworks Version"
+msgstr "Versi KDE Frameworks:"
+
+#: package/contents/ui/main.qml:84
+#, fuzzy, kde-format
+#| msgid "Qt Version:"
+msgid "Qt Version"
+msgstr "Versi Qt:"
+
+#: package/contents/ui/main.qml:91
+#, fuzzy, kde-format
+#| msgid "Kernel Version:"
+msgid "Kernel Version"
+msgstr "Versi Kernel:"
+
+#: package/contents/ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "OS Type:"
+msgid "OS Type"
+msgstr "Tipe OS:"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-bit"
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "Processor:"
+#| msgid_plural "Processors:"
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "Prosesor:"
+msgstr[1] "Prosesor:"
+
+#: package/contents/ui/main.qml:123
+#, fuzzy, kde-format
+#| msgid "Memory:"
+msgid "Memory"
+msgstr "Memori:"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "RAM %1"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "Tak diketahui"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "Salin ke clipboard"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Wantoyèk"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "wantoyek@gmail.com"
+
+#~ msgid "Info"
+#~ msgstr "Info"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "Perangkat Lunak"
+
+#~ msgid "Hardware"
+#~ msgstr "Perangkat Keras"

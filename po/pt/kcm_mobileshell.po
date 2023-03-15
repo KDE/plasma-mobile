@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-12-24 07:23+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -75,7 +75,7 @@ msgstr "Área de Acções"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:34
+#: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr "Configuração Rápida"
@@ -112,10 +112,23 @@ msgstr "Modo Superior-Direito da Área"
 msgid "Mode when opening from the top right."
 msgstr "O modo ao abrir no canto superior-direito."
 
-#: package/contents/ui/QuickSettingsForm.qml:35
-#, kde-format
-msgid "Customize the order of quick settings in the pull-down panel."
+#: package/contents/ui/QuickSettingsForm.qml:115
+#, fuzzy, kde-format
+#| msgid "Customize the order of quick settings in the pull-down panel."
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
 msgstr "Personaliza a ordem das configurações rápidas no painel deslizante."
+
+#: package/contents/ui/QuickSettingsForm.qml:137
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Disabled Quick Settings"
+msgstr "Configuração Rápida"
+
+#: package/contents/ui/QuickSettingsForm.qml:138
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format

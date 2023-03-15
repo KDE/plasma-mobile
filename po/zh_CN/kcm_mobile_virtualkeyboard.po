@@ -1,0 +1,89 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2023-03-11 04:53\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf5-trunk/messages/plasma-settings/"
+"kcm_mobile_virtualkeyboard.pot\n"
+"X-Crowdin-File-ID: 24948\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "语言"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr "应用"
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr "屏幕键盘"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr "请在此随意输入一些内容…"
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr "声音"
+
+#: package/contents/ui/main.qml:64
+#, kde-format
+msgid "Whether to emit a sound on keypress."
+msgstr "是否在按键时发出按键音。"
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr "振动"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Whether to vibrate on keypress."
+msgstr "是否在按键时震动。"
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "检查输入文本的拼写"
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "句首字母大写"
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "点击空格键使用第一个建议完成当前单词"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "在候选中建议可能的词语"
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "两次点击空格键插入句号"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr "配置语言"

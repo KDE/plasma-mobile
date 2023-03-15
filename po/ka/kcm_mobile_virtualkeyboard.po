@@ -1,0 +1,118 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2022-08-20 08:16+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "ენები"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr "გამოყენება"
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr "ეკრანის კლავიატურა"
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr "აქ აკრიფეთ ნებისმიერი რამ…"
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr "ხმა"
+
+#: package/contents/ui/main.qml:64
+#, kde-format
+msgid "Whether to emit a sound on keypress."
+msgstr "ღილაკის დაწოლისას ხმის გამოცემა."
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr "ვიბრაცია"
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Whether to vibrate on keypress."
+msgstr "ვიბრაცია ღილაკის დაწოლისას."
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr "შეყვანილი ტექსტის სპელინგის შემოწმება"
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr "წინადადების პირველი ასოს გადიდება"
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr "მიმდინარე სიტყვის პირველი მინიშნებით დასრულება ჰარეთი"
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr "პოტენციური სიტყვების შემოთავაზება"
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr "ჰარეს ორჯერ დაწოლისას სრული გაჩერების ჩასმა"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr "ენების მორგება"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Temuri Doghonadze"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "Temuri.doghonadze@gmail.com"
+
+#~ msgid "Virtual Keyboard"
+#~ msgstr "ვირტუალური კლავიატურა"
+
+#~ msgid "Bhushan Shah"
+#~ msgstr "Bhushan Shah"
+
+#~ msgid "Test keyboard:"
+#~ msgstr "კლავიატურის ტესტი:"
+
+#~ msgid "Theme:"
+#~ msgstr "თემა:"
+
+#~ msgid "Feedback:"
+#~ msgstr "უკუკავშირი:"
+
+#~ msgid "Text correction:"
+#~ msgstr "ტექსტის ჩასწორება:"
+
+#~ msgid "Languages:"
+#~ msgstr "ენები:"

@@ -1,0 +1,119 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# gobinathal <gobinathal8@gmail.com>, 2021.
+# Kishore G <kishore96@gmail.com>, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2021-10-31 16:43+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 21.08.2\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "கணினி விவரங்கள்"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr ""
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "KDE Plasma Version:"
+msgid "KDE Plasma Version"
+msgstr "கே.டீ.யீ பிளாஸ்மா பதிப்பு:"
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "KDE Frameworks Version:"
+msgid "KDE Frameworks Version"
+msgstr "கே.டீ.யீ. நிரலகங்களின் பதிப்பு:"
+
+#: package/contents/ui/main.qml:84
+#, fuzzy, kde-format
+#| msgid "Qt Version:"
+msgid "Qt Version"
+msgstr "Qt பதிப்பு:"
+
+#: package/contents/ui/main.qml:91
+#, fuzzy, kde-format
+#| msgid "Qt Version:"
+msgid "Kernel Version"
+msgstr "Qt பதிப்பு:"
+
+#: package/contents/ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "OS Type:"
+msgid "OS Type"
+msgstr "இயங்குதள வகை:"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr ""
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "Processor:"
+#| msgid_plural "Processors:"
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "கணிப்பி:"
+msgstr[1] "கணிப்பிகள்:"
+
+#: package/contents/ui/main.qml:123
+#, fuzzy, kde-format
+#| msgid "Memory:"
+msgid "Memory"
+msgstr "நினைவகம்:"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 RAM"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "தெரியாதது"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "பிடிப்புப்பலகைக்கு நகலெடு"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "gobinath"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "gobinathal8@gmail.com"
+
+#~ msgid "Info"
+#~ msgstr "விவரங்கள்"
+
+#~ msgid "Software"
+#~ msgstr "மென்பொருள்"
+
+#~ msgid "Hardware"
+#~ msgstr "வன்பொருள்"

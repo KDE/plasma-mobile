@@ -1,0 +1,121 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-settings package.
+#
+# A S Alam <aalam.yellow@gmail.com>, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-settings\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2020-12-19 13:09-0800\n"
+"Last-Translator: A S Alam <aalam.yellow@gmail.com>\n"
+"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 20.08.1\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "ਸਿਸਟਮ ਦੀ ਜਾਣਕਾਰੀ"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr ""
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "KDE Plasma Version:"
+msgid "KDE Plasma Version"
+msgstr "KDE ਪਲਾਜ਼ਮਾ ਵਰਜ਼ਨ:"
+
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "KDE Frameworks Version:"
+msgid "KDE Frameworks Version"
+msgstr "KDE ਫਰੇਮਵਰਕਸ ਵਰਜ਼ਨ:"
+
+#: package/contents/ui/main.qml:84
+#, fuzzy, kde-format
+#| msgid "Qt Version:"
+msgid "Qt Version"
+msgstr "Qt ਵਰਜ਼ਨ:"
+
+#: package/contents/ui/main.qml:91
+#, fuzzy, kde-format
+#| msgid "Kernel Version:"
+msgid "Kernel Version"
+msgstr "ਕਰਨਲ ਦਾ ਵਰਜ਼ਨ:"
+
+#: package/contents/ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "OS Type:"
+msgid "OS Type"
+msgstr "ਓ.ਸਿ. ਕਿਸਮ:"
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-ਬਿੱਟ"
+
+#: package/contents/ui/main.qml:116
+#, fuzzy, kde-format
+#| msgid "Processor:"
+#| msgid_plural "Processors:"
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "ਪਰੋਸੈਸਰ:"
+msgstr[1] "ਪਰੋਸੈਸਰ:"
+
+#: package/contents/ui/main.qml:123
+#, fuzzy, kde-format
+#| msgid "Memory:"
+msgid "Memory"
+msgstr "ਮੈਮੋਰੀ:"
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 ਰੈਮ"
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "ਅਣਪਛਾਤਾ"
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੨੦"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "alam.yellow@gmail.com"
+
+#~ msgid "Info"
+#~ msgstr "ਜਾਣਕਾਰੀ"
+
+#~ msgid "Jonah Brüchert"
+#~ msgstr "Jonah Brüchert"
+
+#~ msgid "Software"
+#~ msgstr "ਸਾਫਟਵੇਅਰ"
+
+#~ msgid "Hardware"
+#~ msgstr "ਹਾਰਡਵੇਅਰ"

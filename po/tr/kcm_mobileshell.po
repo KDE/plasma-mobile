@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-12-26 21:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -80,7 +80,7 @@ msgstr "Eylem Çekmecesi"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:34
+#: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr "Hızlı Ayarlar"
@@ -117,10 +117,23 @@ msgstr "Sağ Üst Çekmece Kipi"
 msgid "Mode when opening from the top right."
 msgstr "Sağ üstten açıldığı zamanki kip."
 
-#: package/contents/ui/QuickSettingsForm.qml:35
-#, kde-format
-msgid "Customize the order of quick settings in the pull-down panel."
+#: package/contents/ui/QuickSettingsForm.qml:115
+#, fuzzy, kde-format
+#| msgid "Customize the order of quick settings in the pull-down panel."
+msgid ""
+"Customize the order of quick settings in the pull-down panel and hide them."
 msgstr "Aşağı çekilen paneldeki hızlı ayarların sırasını düzenleyin."
+
+#: package/contents/ui/QuickSettingsForm.qml:137
+#, fuzzy, kde-format
+#| msgid "Quick Settings"
+msgid "Disabled Quick Settings"
+msgstr "Hızlı Ayarlar"
+
+#: package/contents/ui/QuickSettingsForm.qml:138
+#, kde-format
+msgid "Re-enable previously disabled quick settings."
+msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
