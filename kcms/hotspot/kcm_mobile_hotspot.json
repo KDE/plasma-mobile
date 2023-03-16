@@ -3,11 +3,29 @@
         "Authors": [
             {
                 "Email": "fella@posteo.de",
-                "Name": "Tobias Fella"
+                "Name": "Tobias Fella",
+                "Name[ca@valencia]": "Tobias Fella",
+                "Name[ca]": "Tobias Fella",
+                "Name[es]": "Tobias Fella",
+                "Name[ka]": "Tobias Fella",
+                "Name[nl]": "Tobias Fella",
+                "Name[sl]": "Tobias Fella",
+                "Name[tr]": "Tobias Fella",
+                "Name[uk]": "Tobias Fella",
+                "Name[x-test]": "xxTobias Fellaxx"
             }
         ],
         "Category": "System Information",
         "Description": "Wi-Fi Hotspot",
+        "Description[ca@valencia]": "Punt d'accés Wi-Fi",
+        "Description[ca]": "Punt d'accés Wi-Fi",
+        "Description[es]": "Punto de acceso wifi",
+        "Description[ka]": "Wi-Fi ჰოტსპოტი",
+        "Description[nl]": "Wi-Fi-hotspot",
+        "Description[sl]": "Wi-Fi vroča točka",
+        "Description[tr]": "Wi-Fi Erişim Noktası",
+        "Description[uk]": "Хот-спот Wi-Fi",
+        "Description[x-test]": "xxWi-Fi Hotspotxx",
         "EnabledByDefault": true,
         "FormFactors": [
             "handset",

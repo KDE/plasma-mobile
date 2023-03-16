@@ -2,6 +2,15 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Wireless network setting",
+        "Description[ca@valencia]": "Configureu la xarxa sense fil",
+        "Description[ca]": "Configuració de la xarxa sense fil",
+        "Description[es]": "Preferencias de la red inalámbrica",
+        "Description[ka]": "უსადენო ქსელის მორგება",
+        "Description[nl]": "Instelling van draadloos netwerk",
+        "Description[sl]": "Nastavitve brezžičnega omrežja",
+        "Description[tr]": "Kablosuz ağ ayarı",
+        "Description[uk]": "Налаштовування бездротової мережі",
+        "Description[x-test]": "xxWireless network settingxx",
         "FormFactors": [
             "handset",
             "tablet",

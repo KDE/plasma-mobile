@@ -2,10 +2,28 @@
     "KPlugin": {
         "Category": "Window Management",
         "Description": "Allows you to switch between running tasks with a mobile interface.",
+        "Description[ca@valencia]": "Us permet canviar entre les tasques diferents en execució amb una interfície mòbil.",
+        "Description[ca]": "Us permet canviar entre les tasques diferents en execució amb una interfície mòbil.",
+        "Description[es]": "Le permite cambiar entre tareas en ejecución con una interfaz móvil.",
+        "Description[ka]": "საშუალებას გაძლევთ მობილურ ინტერფეისში გაშვებულ ამოცანებს შორის გადაერთოთ.",
+        "Description[nl]": "Biedt u het omschakelen tussen actieve taken met een mobiel-interface.",
+        "Description[sl]": "Dovoljuje preklapljanje med tekočimi opravili z mobilnim vmesnikom.",
+        "Description[tr]": "Bir taşınabilir arayüzden çalışan görevler arasında geçiş yapmanıza izin verir.",
+        "Description[uk]": "Надає вам змогу перемикати запущені завдання за допомогою інтерфейсу для мобільних пристроїв.",
+        "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
         "EnabledByDefault": true,
         "Id": "mobiletaskswitcher",
         "License": "GPL",
-        "Name": "Mobile Task Switcher"
+        "Name": "Mobile Task Switcher",
+        "Name[ca@valencia]": "Commutador de tasques del mòbil",
+        "Name[ca]": "Commutador de tasques del mòbil",
+        "Name[es]": "Selector de tareas móvil",
+        "Name[ka]": "მობილური ამოცანების გადამრთველი",
+        "Name[nl]": "Taakschakelaar van mobiel",
+        "Name[sl]": "Preklopnik mobilnih opravil",
+        "Name[tr]": "Taşınabilir Görev Değiştirici",
+        "Name[uk]": "Мобільний перемикач завдань",
+        "Name[x-test]": "xxMobile Task Switcherxx"
     },
     "X-KWin-Border-Activate": true
 }
