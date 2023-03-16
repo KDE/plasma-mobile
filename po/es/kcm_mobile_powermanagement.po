@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobile_powermanagement\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-14 17:56+0100\n"
+"PO-Revision-Date: 2023-03-15 16:54+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -121,12 +121,10 @@ msgstr "Carga actual"
 
 #: package/contents/ui/BatteryPage.qml:129
 #: package/contents/ui/BatteryPage.qml:137
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1%"
 
 #: package/contents/ui/BatteryPage.qml:136
 #, kde-format
@@ -189,12 +187,10 @@ msgid "Unknown technology"
 msgstr "Tecnología desconocida"
 
 #: package/contents/ui/Graph.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1%2"
+msgstr "%1%"
 
 #: package/contents/ui/main.qml:40
 #, kde-format

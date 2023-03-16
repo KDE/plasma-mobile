@@ -1,0 +1,203 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-nm package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-nm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-11-11 06:30+0100\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.2\n"
+
+#: package/contents/ui/ConnectDialog.qml:136
+#, kde-format
+msgid "Invalid input."
+msgstr "არასწორი შეყვანა."
+
+#: package/contents/ui/ConnectionItemDelegate.qml:108
+#, kde-format
+msgid "Connect to"
+msgstr "დაკავშირება"
+
+#: package/contents/ui/main.qml:82
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr "Wi-Fi გამორთულია"
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "Enable"
+msgstr "ჩართვა"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Disable Wi-Fi"
+msgstr "Wi-Fi-ის გამორთვა"
+
+#: package/contents/ui/main.qml:102
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "დაამატეთ მორგებული კავშირი"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Show Saved Connections"
+msgstr "შენახული კავშირების ჩვენება"
+
+#: package/contents/ui/NetworkSettings.qml:14
+#, kde-format
+msgid "Add new Connection"
+msgstr "ახალი შეერთების დამატება"
+
+#: package/contents/ui/NetworkSettings.qml:35
+#, kde-format
+msgid "Save"
+msgstr "შენახვა"
+
+#: package/contents/ui/NetworkSettings.qml:46
+#, kde-format
+msgid "General"
+msgstr "ძირითადი"
+
+#: package/contents/ui/NetworkSettings.qml:51
+#, kde-format
+msgid "SSID:"
+msgstr "SSID:"
+
+#: package/contents/ui/NetworkSettings.qml:60
+#, kde-format
+msgid "Hidden Network:"
+msgstr "დამალული ქსელი:"
+
+#: package/contents/ui/NetworkSettings.qml:66
+#, kde-format
+msgid "Security"
+msgstr "უსაფრთხოება"
+
+#: package/contents/ui/NetworkSettings.qml:72
+#, kde-format
+msgid "Security type:"
+msgstr "დაცვის ტიპი:"
+
+#: package/contents/ui/NetworkSettings.qml:81
+#, kde-format
+msgid "None"
+msgstr "არაფერი"
+
+#: package/contents/ui/NetworkSettings.qml:82
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP გასაღები"
+
+#: package/contents/ui/NetworkSettings.qml:83
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "დინამიკური WEP"
+
+#: package/contents/ui/NetworkSettings.qml:84
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 პერსონალური"
+
+#: package/contents/ui/NetworkSettings.qml:85
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 საწარმოო"
+
+#: package/contents/ui/NetworkSettings.qml:110
+#, kde-format
+msgid "Password:"
+msgstr "პაროლი:"
+
+#: package/contents/ui/NetworkSettings.qml:118
+#, kde-format
+msgid "Authentication:"
+msgstr "ავთენტიკაცია:"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "LEAP"
+msgstr "LEAP"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "FAST"
+msgstr "FAST"
+
+#: package/contents/ui/NetworkSettings.qml:122
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "TLS გვირაბი (TTLS)"
+
+#: package/contents/ui/NetworkSettings.qml:123
+#, kde-format
+msgid "Protected EAP"
+msgstr "დაცული EAP"
+
+#: package/contents/ui/NetworkSettings.qml:132
+#, kde-format
+msgid "IP settings"
+msgstr "IP-ის მორგება"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Automatic"
+msgstr "ავტომატური"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Manual"
+msgstr "ხელით"
+
+#: package/contents/ui/NetworkSettings.qml:148
+#, kde-format
+msgid "IP Address:"
+msgstr "IP მისამართი:"
+
+#: package/contents/ui/NetworkSettings.qml:160
+#, kde-format
+msgid "Gateway:"
+msgstr "ნაგულისხმები რაუტერი:"
+
+#: package/contents/ui/NetworkSettings.qml:172
+#, kde-format
+msgid "Network prefix length:"
+msgstr "ქსელის პრეფიქსის სიგრძე:"
+
+#: package/contents/ui/NetworkSettings.qml:185
+#, kde-format
+msgid "DNS:"
+msgstr "DNS:"
+
+#: package/contents/ui/PasswordField.qml:13
+#, kde-format
+msgid "Password…"
+msgstr "პაროლი…"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Temuri Doghonadze"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "Temuri.doghonadze@gmail.com"
+
+#~ msgid "Wi-Fi networks"
+#~ msgstr "Wi-Fi ქსელები"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
 "PO-Revision-Date: 2022-07-13 09:22+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -128,19 +128,19 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Chọn múi giờ"
 
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:206
-#: package/contents/ui/main.qml:251
+#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:253
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Đóng"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgid "Pick Time"
 msgstr "Chọn giờ"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:217
 #, kde-format
 msgid "Pick Date"
 msgstr "Chọn ngày"

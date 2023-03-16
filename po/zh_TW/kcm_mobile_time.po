@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
 "PO-Revision-Date: 2019-10-19 14:49+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -136,19 +136,19 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "挑選時區"
 
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:206
-#: package/contents/ui/main.qml:251
+#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:253
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "關閉"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgid "Pick Time"
 msgstr "挑選時間"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:217
 #, kde-format
 msgid "Pick Date"
 msgstr "挑選日期"

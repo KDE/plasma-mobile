@@ -1,0 +1,282 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-nm package.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-nm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"PO-Revision-Date: 2021-07-09 15:19+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: package/contents/ui/ConnectDialog.qml:136
+#, kde-format
+msgid "Invalid input."
+msgstr "Virheellinen syöte."
+
+#: package/contents/ui/ConnectionItemDelegate.qml:108
+#, kde-format
+msgid "Connect to"
+msgstr "Yhdistä"
+
+#: package/contents/ui/main.qml:82
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr "Langaton verkko ei ole käytössä"
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "Enable"
+msgstr "Käytä"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Disable Wi-Fi"
+msgstr "Poista langaton verkko käytöstä"
+
+#: package/contents/ui/main.qml:102
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Lisää mukautettu yhteys"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Show Saved Connections"
+msgstr "Näytä tallennetut yhteydet"
+
+#: package/contents/ui/NetworkSettings.qml:14
+#, kde-format
+msgid "Add new Connection"
+msgstr "Lisää uusi yhteys"
+
+#: package/contents/ui/NetworkSettings.qml:35
+#, kde-format
+msgid "Save"
+msgstr "Tallenna"
+
+#: package/contents/ui/NetworkSettings.qml:46
+#, kde-format
+msgid "General"
+msgstr "Perusasetukset"
+
+#: package/contents/ui/NetworkSettings.qml:51
+#, kde-format
+msgid "SSID:"
+msgstr "SSID:"
+
+#: package/contents/ui/NetworkSettings.qml:60
+#, kde-format
+msgid "Hidden Network:"
+msgstr "Piiloverkko:"
+
+#: package/contents/ui/NetworkSettings.qml:66
+#, kde-format
+msgid "Security"
+msgstr "Turvallisuus"
+
+#: package/contents/ui/NetworkSettings.qml:72
+#, kde-format
+msgid "Security type:"
+msgstr "Turvallisuustyyppi:"
+
+#: package/contents/ui/NetworkSettings.qml:81
+#, kde-format
+msgid "None"
+msgstr "Ei mikään"
+
+#: package/contents/ui/NetworkSettings.qml:82
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP-avain"
+
+#: package/contents/ui/NetworkSettings.qml:83
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "Dynaaminen WEP"
+
+#: package/contents/ui/NetworkSettings.qml:84
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 Personal"
+
+#: package/contents/ui/NetworkSettings.qml:85
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Enterprise"
+
+#: package/contents/ui/NetworkSettings.qml:110
+#, kde-format
+msgid "Password:"
+msgstr "Salasana:"
+
+#: package/contents/ui/NetworkSettings.qml:118
+#, kde-format
+msgid "Authentication:"
+msgstr "Todennus:"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "LEAP"
+msgstr "LEAP"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "FAST"
+msgstr "FAST"
+
+#: package/contents/ui/NetworkSettings.qml:122
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "Tunneloitu TLS"
+
+#: package/contents/ui/NetworkSettings.qml:123
+#, kde-format
+msgid "Protected EAP"
+msgstr "Suojattu EAP"
+
+#: package/contents/ui/NetworkSettings.qml:132
+#, kde-format
+msgid "IP settings"
+msgstr "IP-asetukset"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Automatic"
+msgstr "Automaattinen"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Manual"
+msgstr "Mukautettu"
+
+#: package/contents/ui/NetworkSettings.qml:148
+#, kde-format
+msgid "IP Address:"
+msgstr "IP-osoite:"
+
+#: package/contents/ui/NetworkSettings.qml:160
+#, kde-format
+msgid "Gateway:"
+msgstr "Yhdyskäytävä:"
+
+#: package/contents/ui/NetworkSettings.qml:172
+#, kde-format
+msgid "Network prefix length:"
+msgstr "Verkkoetuliitteen pituus:"
+
+#: package/contents/ui/NetworkSettings.qml:185
+#, kde-format
+msgid "DNS:"
+msgstr "Nimipalvelin:"
+
+#: package/contents/ui/PasswordField.qml:13
+#, kde-format
+msgid "Password…"
+msgstr "Salasana…"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Tommi Nieminen"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "translator@legisign.org"
+
+#~ msgid "Wi-Fi networks"
+#~ msgstr "Langattomat verkot"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Peru"
+
+#~ msgctxt "@action:button"
+#~ msgid "Done"
+#~ msgstr "Valmis"
+
+#~ msgid "Password..."
+#~ msgstr "Salasana…"
+
+#~ msgid "Create Hotspot"
+#~ msgstr "Luo tukiasema"
+
+#~ msgid "Wi-Fi Hotspot"
+#~ msgstr "Langaton tukiasema"
+
+#~ msgid "Configure"
+#~ msgstr "Aseta"
+
+#~ msgid "SSID"
+#~ msgstr "SSID"
+
+#~ msgid "My Hotspot"
+#~ msgstr "Oma tukiasema"
+
+#~ msgid "Hide this network"
+#~ msgstr "Piilota tämä verkko"
+
+#~ msgid "Protect hotspot with WPA2/PSK password"
+#~ msgstr "Suojaa tukiasema WPA2/PSK-salasanalla"
+
+#~ msgid "Save Hotspot configuration"
+#~ msgstr "Tallenna tukiasema-asetukset"
+
+#~ msgid "Disable Wi-Fi Hotspot"
+#~ msgstr "Poista langaton tukiasema käytöstä"
+
+#~ msgid "Enable Wi-Fi Hotspot"
+#~ msgstr "Ota langaton tukiasema käyttöön"
+
+#~ msgid "Hotspot is inactive"
+#~ msgstr "Tukiasema ei ole käytössä"
+
+#~ msgid "Not possible to start Access point."
+#~ msgstr "Tukiasemaa ei voida käynnistää."
+
+#~ msgid "Access point running: %1"
+#~ msgstr "Tukiasema käynnissä: %1"
+
+#~ msgid "No suitable configuration found."
+#~ msgstr "Sopivaa määritystä ei löytynyt."
+
+#~ msgid "Access point available: %1"
+#~ msgstr "Tukiasema käytettävissä: %1"
+
+#~ msgid "Connection Name"
+#~ msgstr "Yhteyden nimi"
+
+#~ msgid "(Unchanged)"
+#~ msgstr "(ei muutettu)"
+
+#~ msgid "Delete connection %1 from device?"
+#~ msgstr "Poistetaanko laitteelta yhteys %1?"
+
+#~ msgid "Delete"
+#~ msgstr "Poista"
+
+#~ msgid "Saved networks"
+#~ msgstr "Tallennetut verkot"
+
+#~ msgid "Available networks"
+#~ msgstr "Saatavilla olevat verkot"
+
+#~ msgid "DNS"
+#~ msgstr "Nimipalvelin"
+
+#~ msgid "Wi-fi"
+#~ msgstr "Langaton verkko"

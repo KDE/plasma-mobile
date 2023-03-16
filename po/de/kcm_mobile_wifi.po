@@ -1,0 +1,283 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-nm package.
+# Burkhard Lück <lueck@hube-lueck.de>, 2018, 2019, 2020, 2021.
+# Frederik Schwarzer <schwarzer@kde.org>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-nm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-07-23 23:47+0200\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.07.70\n"
+
+#: package/contents/ui/ConnectDialog.qml:136
+#, kde-format
+msgid "Invalid input."
+msgstr "Ungültige Eingabe."
+
+#: package/contents/ui/ConnectionItemDelegate.qml:108
+#, kde-format
+msgid "Connect to"
+msgstr "Verbinden mit"
+
+#: package/contents/ui/main.qml:82
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr "WLAN ist deaktiviert"
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "Enable"
+msgstr "Aktivieren"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Disable Wi-Fi"
+msgstr "WLAN deaktivieren"
+
+#: package/contents/ui/main.qml:102
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Benutzerdefinierte Verbindung hinzufügen"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Show Saved Connections"
+msgstr "Gespeicherte Verbindungen anzeigen"
+
+#: package/contents/ui/NetworkSettings.qml:14
+#, kde-format
+msgid "Add new Connection"
+msgstr "Neue Verbindung hinzufügen"
+
+#: package/contents/ui/NetworkSettings.qml:35
+#, kde-format
+msgid "Save"
+msgstr "Speichern"
+
+#: package/contents/ui/NetworkSettings.qml:46
+#, kde-format
+msgid "General"
+msgstr "Allgemein"
+
+#: package/contents/ui/NetworkSettings.qml:51
+#, kde-format
+msgid "SSID:"
+msgstr "SSID:"
+
+#: package/contents/ui/NetworkSettings.qml:60
+#, kde-format
+msgid "Hidden Network:"
+msgstr "Verborgenes Netzwerk:"
+
+#: package/contents/ui/NetworkSettings.qml:66
+#, kde-format
+msgid "Security"
+msgstr "Sicherheit"
+
+#: package/contents/ui/NetworkSettings.qml:72
+#, kde-format
+msgid "Security type:"
+msgstr "Sicherheitsmodus:"
+
+#: package/contents/ui/NetworkSettings.qml:81
+#, kde-format
+msgid "None"
+msgstr "Kein"
+
+#: package/contents/ui/NetworkSettings.qml:82
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP-Schlüssel"
+
+#: package/contents/ui/NetworkSettings.qml:83
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "Dynamisches WEP"
+
+#: package/contents/ui/NetworkSettings.qml:84
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 Personal"
+
+#: package/contents/ui/NetworkSettings.qml:85
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Enterprise"
+
+#: package/contents/ui/NetworkSettings.qml:110
+#, kde-format
+msgid "Password:"
+msgstr "Passwort:"
+
+#: package/contents/ui/NetworkSettings.qml:118
+#, kde-format
+msgid "Authentication:"
+msgstr "Authentifizierung:"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "LEAP"
+msgstr "LEAP"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "FAST"
+msgstr "FAST"
+
+#: package/contents/ui/NetworkSettings.qml:122
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "Getunneltes TLS"
+
+#: package/contents/ui/NetworkSettings.qml:123
+#, kde-format
+msgid "Protected EAP"
+msgstr "Geschütztes EAP"
+
+#: package/contents/ui/NetworkSettings.qml:132
+#, kde-format
+msgid "IP settings"
+msgstr "IP-Einstellungen"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Automatic"
+msgstr "Automatisch"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Manual"
+msgstr "Manuell"
+
+#: package/contents/ui/NetworkSettings.qml:148
+#, kde-format
+msgid "IP Address:"
+msgstr "IP-Adresse:"
+
+#: package/contents/ui/NetworkSettings.qml:160
+#, kde-format
+msgid "Gateway:"
+msgstr "Gateway:"
+
+#: package/contents/ui/NetworkSettings.qml:172
+#, kde-format
+msgid "Network prefix length:"
+msgstr "Länge des Netzwerkpräfix:"
+
+#: package/contents/ui/NetworkSettings.qml:185
+#, kde-format
+msgid "DNS:"
+msgstr "DNS:"
+
+#: package/contents/ui/PasswordField.qml:13
+#, kde-format
+msgid "Password…"
+msgstr "Passwort ..."
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Deutsches KDE-Übersetzerteam"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "kde-i18n-de@kde.org"
+
+#~ msgid "Wi-Fi networks"
+#~ msgstr "Wi-Fi-Netzwerke"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"
+
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Abbrechen"
+
+#~ msgctxt "@action:button"
+#~ msgid "Done"
+#~ msgstr "Abgeschlossen"
+
+#~ msgid "Password..."
+#~ msgstr "Passwort ..."
+
+#~ msgid "Create Hotspot"
+#~ msgstr "Hotspot erstellen"
+
+#~ msgid "Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi-Hotspot"
+
+#~ msgid "Configure"
+#~ msgstr "Einrichten"
+
+#~ msgid "SSID"
+#~ msgstr "SSID"
+
+#~ msgid "My Hotspot"
+#~ msgstr "Mein Hotspot"
+
+#~ msgid "Hide this network"
+#~ msgstr "Diese Netzwerk verstecken"
+
+#~ msgid "Protect hotspot with WPA2/PSK password"
+#~ msgstr "Hotspot mit Passwort für WPA2/PSK schützen"
+
+#~ msgid "Save Hotspot configuration"
+#~ msgstr "Hotspot-Einrichtung speichern"
+
+#~ msgid "Disable Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi-Hotspot deaktivieren"
+
+#~ msgid "Enable Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi-Hotspot aktivieren"
+
+#~ msgid "Hotspot is inactive"
+#~ msgstr "Hotspot ist nicht aktiv"
+
+#~ msgid "Not possible to start Access point."
+#~ msgstr "Zugangspunkt kann nicht gestartet werden."
+
+#~ msgid "Access point running: %1"
+#~ msgstr "Zugangspunkt läuft: %1"
+
+#~ msgid "No suitable configuration found."
+#~ msgstr "Es wurde keine passende Einrichtung gefunden."
+
+#~ msgid "Access point available: %1"
+#~ msgstr "Zugangspunkt verfügbar: %1"
+
+#~ msgid "Connection Name"
+#~ msgstr "Verbindungsname"
+
+#~ msgid "(Unchanged)"
+#~ msgstr "(Unverändert)"
+
+#~ msgid "Delete connection %1 from device?"
+#~ msgstr "Verbindung %1 von diesem Gerät löschen?"
+
+#~ msgid "Delete"
+#~ msgstr "Löschen"
+
+#~ msgid "Saved networks"
+#~ msgstr "Gespeicherte Netzwerke"
+
+#~ msgid "Available networks"
+#~ msgstr "Verfügbare Netzwerke"
+
+#~ msgid "DNS"
+#~ msgstr "DNS"
+
+#~ msgid "Wi-fi"
+#~ msgstr "Wi-Fi"

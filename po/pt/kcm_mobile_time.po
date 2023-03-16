@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgeography\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
 "PO-Revision-Date: 2022-07-07 11:14+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -876,19 +876,19 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Escolher o Fuso-Horário"
 
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:206
-#: package/contents/ui/main.qml:251
+#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:253
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Fechar"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgid "Pick Time"
 msgstr "Escolher a Hora"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:217
 #, kde-format
 msgid "Pick Date"
 msgstr "Escolher a Data"

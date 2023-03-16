@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-14 10:35+0100\n"
+"PO-Revision-Date: 2023-03-15 15:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -121,12 +121,10 @@ msgstr "Càrrega actual"
 
 #: package/contents/ui/BatteryPage.qml:129
 #: package/contents/ui/BatteryPage.qml:137
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: package/contents/ui/BatteryPage.qml:136
 #, kde-format
@@ -189,12 +187,10 @@ msgid "Unknown technology"
 msgstr "Tecnologia desconeguda"
 
 #: package/contents/ui/Graph.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1%2"
+msgstr "%1%"
 
 #: package/contents/ui/main.qml:40
 #, kde-format

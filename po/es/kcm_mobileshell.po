@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-12-26 11:57+0100\n"
+"PO-Revision-Date: 2023-03-15 16:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -121,22 +121,22 @@ msgid "Mode when opening from the top right."
 msgstr "Modo al abrir desde la parte superior derecha."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
-#, fuzzy, kde-format
-#| msgid "Customize the order of quick settings in the pull-down panel."
+#, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr "Personalizar el orden de los ajustes rápidos en el panel desplegable."
+msgstr ""
+"Personalizar el orden de los ajustes rápidos en el panel desplegable y "
+"ocultarlos."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Preferencias rápidas"
+msgstr "Preferencias rápidas desactivadas"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Volver a activar las preferencias rápidas anteriormente desactivadas."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format

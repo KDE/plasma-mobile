@@ -1,0 +1,202 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-nm package.
+#
+# Mincho Kondarev <mkondarev@yahoo.de>, 2022.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-nm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"PO-Revision-Date: 2022-05-22 13:09+0200\n"
+"Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.04.0\n"
+
+#: package/contents/ui/ConnectDialog.qml:136
+#, kde-format
+msgid "Invalid input."
+msgstr "Невалиден вход."
+
+#: package/contents/ui/ConnectionItemDelegate.qml:108
+#, kde-format
+msgid "Connect to"
+msgstr "Свързване с"
+
+#: package/contents/ui/main.qml:82
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr "Wi-Fi е деактивиран"
+
+#: package/contents/ui/main.qml:86
+#, kde-format
+msgid "Enable"
+msgstr "Активиране"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Disable Wi-Fi"
+msgstr "Деактивиране на Wi-Fi"
+
+#: package/contents/ui/main.qml:102
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Добавяне на персонализирана връзка"
+
+#: package/contents/ui/main.qml:108
+#, kde-format
+msgid "Show Saved Connections"
+msgstr "Запазени връзки"
+
+#: package/contents/ui/NetworkSettings.qml:14
+#, kde-format
+msgid "Add new Connection"
+msgstr "Добавяне на нова връзка"
+
+#: package/contents/ui/NetworkSettings.qml:35
+#, kde-format
+msgid "Save"
+msgstr "Запазване"
+
+#: package/contents/ui/NetworkSettings.qml:46
+#, kde-format
+msgid "General"
+msgstr "Общи"
+
+#: package/contents/ui/NetworkSettings.qml:51
+#, kde-format
+msgid "SSID:"
+msgstr "SSID:"
+
+#: package/contents/ui/NetworkSettings.qml:60
+#, kde-format
+msgid "Hidden Network:"
+msgstr "Скрита мрежа:"
+
+#: package/contents/ui/NetworkSettings.qml:66
+#, kde-format
+msgid "Security"
+msgstr "Сигурност"
+
+#: package/contents/ui/NetworkSettings.qml:72
+#, kde-format
+msgid "Security type:"
+msgstr "Тип защита:"
+
+#: package/contents/ui/NetworkSettings.qml:81
+#, kde-format
+msgid "None"
+msgstr "Без"
+
+#: package/contents/ui/NetworkSettings.qml:82
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP ключ"
+
+#: package/contents/ui/NetworkSettings.qml:83
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "Динамичен WEP"
+
+#: package/contents/ui/NetworkSettings.qml:84
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 Personal"
+
+#: package/contents/ui/NetworkSettings.qml:85
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Enterprise"
+
+#: package/contents/ui/NetworkSettings.qml:110
+#, kde-format
+msgid "Password:"
+msgstr "Парола:"
+
+#: package/contents/ui/NetworkSettings.qml:118
+#, kde-format
+msgid "Authentication:"
+msgstr "Удостоверяване:"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "LEAP"
+msgstr "LEAP"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "FAST"
+msgstr "FAST"
+
+#: package/contents/ui/NetworkSettings.qml:122
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "Тунелен TLS"
+
+#: package/contents/ui/NetworkSettings.qml:123
+#, kde-format
+msgid "Protected EAP"
+msgstr "Защитена EAP"
+
+#: package/contents/ui/NetworkSettings.qml:132
+#, kde-format
+msgid "IP settings"
+msgstr "IP настройки"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Automatic"
+msgstr "Автоматично"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Manual"
+msgstr "Ръчно"
+
+#: package/contents/ui/NetworkSettings.qml:148
+#, kde-format
+msgid "IP Address:"
+msgstr "IP адрес:"
+
+#: package/contents/ui/NetworkSettings.qml:160
+#, kde-format
+msgid "Gateway:"
+msgstr "Шлюз:"
+
+#: package/contents/ui/NetworkSettings.qml:172
+#, kde-format
+msgid "Network prefix length:"
+msgstr "Дължина на мрежовия префикс:"
+
+#: package/contents/ui/NetworkSettings.qml:185
+#, kde-format
+msgid "DNS:"
+msgstr "DNS:"
+
+#: package/contents/ui/PasswordField.qml:13
+#, kde-format
+msgid "Password…"
+msgstr "Парола…"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Минчо Кондарев"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "mkondarev@yahoo.de"
+
+#~ msgid "Wi-Fi networks"
+#~ msgstr "Wi-Fi мрежи"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"

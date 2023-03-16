@@ -1,0 +1,267 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-nm package.
+#
+# Marek Laane <qiilaq69@gmail.com>, 2019, 2020.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-nm\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"PO-Revision-Date: 2020-04-15 12:12+0300\n"
+"Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
+"Language-Team: Estonian <kde-et@lists.linux.ee>\n"
+"Language: et\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: package/contents/ui/ConnectDialog.qml:136
+#, kde-format
+msgid "Invalid input."
+msgstr ""
+
+#: package/contents/ui/ConnectionItemDelegate.qml:108
+#, fuzzy, kde-format
+#| msgid "Connection Editor"
+msgid "Connect to"
+msgstr "Ühenduste redaktor"
+
+#: package/contents/ui/main.qml:82
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr ""
+
+#: package/contents/ui/main.qml:86
+#, fuzzy, kde-format
+#| msgid "Enable Wi-Fi"
+msgid "Enable"
+msgstr "Wi-Fi lubamine"
+
+#: package/contents/ui/main.qml:96
+#, kde-format
+msgid "Disable Wi-Fi"
+msgstr "Wi-Fi keelamine"
+
+#: package/contents/ui/main.qml:102
+#, fuzzy, kde-format
+#| msgid "Add custom connection"
+msgid "Add Custom Connection"
+msgstr "Kohandatud ühenduse lisamine"
+
+#: package/contents/ui/main.qml:108
+#, fuzzy, kde-format
+#| msgid "Saved Connections"
+msgid "Show Saved Connections"
+msgstr "Salvestatud ühendused"
+
+#: package/contents/ui/NetworkSettings.qml:14
+#, kde-format
+msgid "Add new Connection"
+msgstr "Lisa uus ühendus"
+
+#: package/contents/ui/NetworkSettings.qml:35
+#, kde-format
+msgid "Save"
+msgstr "Salvesta"
+
+#: package/contents/ui/NetworkSettings.qml:46
+#, kde-format
+msgid "General"
+msgstr "Üldine"
+
+#: package/contents/ui/NetworkSettings.qml:51
+#, kde-format
+msgid "SSID:"
+msgstr "SSID:"
+
+#: package/contents/ui/NetworkSettings.qml:60
+#, kde-format
+msgid "Hidden Network:"
+msgstr "Varjatud võrk:"
+
+#: package/contents/ui/NetworkSettings.qml:66
+#, kde-format
+msgid "Security"
+msgstr "Turvalisus"
+
+#: package/contents/ui/NetworkSettings.qml:72
+#, kde-format
+msgid "Security type:"
+msgstr "Turbetüüp:"
+
+#: package/contents/ui/NetworkSettings.qml:81
+#, kde-format
+msgid "None"
+msgstr "Puudub"
+
+#: package/contents/ui/NetworkSettings.qml:82
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP võti"
+
+#: package/contents/ui/NetworkSettings.qml:83
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "Dünaamiline WEP"
+
+#: package/contents/ui/NetworkSettings.qml:84
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 Personal"
+
+#: package/contents/ui/NetworkSettings.qml:85
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 Enterprise"
+
+#: package/contents/ui/NetworkSettings.qml:110
+#, kde-format
+msgid "Password:"
+msgstr "Parool:"
+
+#: package/contents/ui/NetworkSettings.qml:118
+#, kde-format
+msgid "Authentication:"
+msgstr "Autentimine:"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "LEAP"
+msgstr "LEAP"
+
+#: package/contents/ui/NetworkSettings.qml:121
+#, kde-format
+msgid "FAST"
+msgstr "FAST"
+
+#: package/contents/ui/NetworkSettings.qml:122
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "Tunneldatud TLS"
+
+#: package/contents/ui/NetworkSettings.qml:123
+#, kde-format
+msgid "Protected EAP"
+msgstr "Kaitstud EAP"
+
+#: package/contents/ui/NetworkSettings.qml:132
+#, kde-format
+msgid "IP settings"
+msgstr "IP seadistused"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Automatic"
+msgstr "Automaatne"
+
+#: package/contents/ui/NetworkSettings.qml:138
+#, kde-format
+msgid "Manual"
+msgstr "Käsitsi"
+
+#: package/contents/ui/NetworkSettings.qml:148
+#, kde-format
+msgid "IP Address:"
+msgstr "IP-aadress:"
+
+#: package/contents/ui/NetworkSettings.qml:160
+#, kde-format
+msgid "Gateway:"
+msgstr "Lüüs:"
+
+#: package/contents/ui/NetworkSettings.qml:172
+#, kde-format
+msgid "Network prefix length:"
+msgstr "Võrguprefiksi pikkus:"
+
+#: package/contents/ui/NetworkSettings.qml:185
+#, kde-format
+msgid "DNS:"
+msgstr "DNS:"
+
+#: package/contents/ui/PasswordField.qml:13
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password…"
+msgstr "Parool:"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Marek Laane"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "qiilaq69@gmail.com"
+
+#~ msgid "Wi-Fi networks"
+#~ msgstr "Wi-Fi võrgud"
+
+#~ msgid "Martin Kacej"
+#~ msgstr "Martin Kacej"
+
+#, fuzzy
+#~| msgid "Cancel"
+#~ msgctxt "@action:button"
+#~ msgid "Cancel"
+#~ msgstr "Loobu"
+
+#~ msgid "Password..."
+#~ msgstr "Parool ..."
+
+#~ msgid "Create Hotspot"
+#~ msgstr "Loo pääsupunkt"
+
+#~ msgid "Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi pääsupunkt"
+
+#~ msgid "Configure"
+#~ msgstr "Seadista"
+
+#~ msgid "SSID"
+#~ msgstr "SSID"
+
+#~ msgid "My Hotspot"
+#~ msgstr "Minu pääsupunkt"
+
+#~ msgid "Hide this network"
+#~ msgstr "See võrk peidetakse"
+
+#~ msgid "Protect hotspot with WPA2/PSK password"
+#~ msgstr "Pääsupunkti kaitsmine WPA2/PSK parooliga"
+
+#~ msgid "Save Hotspot configuration"
+#~ msgstr "Salvesta pääsupunkti seadistus"
+
+#~ msgid "Disable Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi pääsupunkti keelamine"
+
+#~ msgid "Enable Wi-Fi Hotspot"
+#~ msgstr "Wi-Fi pääsupunkti lubamine"
+
+#~ msgid "Hotspot is inactive"
+#~ msgstr "Pääsupunkt ei tööta"
+
+#~ msgid "Not possible to start Access point."
+#~ msgstr "Pääsupunkti käivitamine ei ole võimalik."
+
+#~ msgid "Access point running: %1"
+#~ msgstr "Pääsupunkt töötab: %1"
+
+#~ msgid "No suitable configuration found."
+#~ msgstr "Sobivat seadistust ei leitud."
+
+#~ msgid "Access point available: %1"
+#~ msgstr "Pääsupunkt saadaval: %1"
+
+#~ msgid "Connection Name"
+#~ msgstr "Ühenduse nimi"
+
+#~ msgid "(Unchanged)"
+#~ msgstr "(muutmata)"
