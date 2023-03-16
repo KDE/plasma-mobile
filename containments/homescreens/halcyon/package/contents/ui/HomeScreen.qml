@@ -14,6 +14,7 @@ import org.kde.draganddrop as DragDrop
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 Item {
     id: root
@@ -45,7 +46,7 @@ Item {
         target: MobileShellState.HomeScreenControls
 
         function onHomeScreenVisibleChanged(){
-            if (MobileShellState.HomeScreenControls.homeScreenVisible) {
+            if (WindowPlugin.WindowUtil.allWindowsMinimized) {
                 swipeView.focusChild();
             }
         }

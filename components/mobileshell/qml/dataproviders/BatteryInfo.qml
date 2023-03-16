@@ -5,15 +5,14 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.6
-import QtQuick.Layouts 1.4
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.plasma5support 2.0 as P5Support
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.workspace.components 2.0 as PW
+import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasma5support as P5Support
+import org.kde.plasma.workspace.components as PW
 
-Item {
+QtObject {
     property bool isVisible: pmSource.data["Battery"]["Has Cumulative"]
     property int percent: pmSource.data["Battery"]["Percent"]
     property bool pluggedIn: pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false

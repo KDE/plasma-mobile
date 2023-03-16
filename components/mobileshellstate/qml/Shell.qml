@@ -13,11 +13,6 @@ QtObject {
     id: delegate
 
     /**
-     * Whether the homescreen is currently visible.
-     */
-    readonly property bool homeScreenVisible: HomeScreenControls.homeScreenVisible
-    
-    /**
      * Whether the action drawer is currently open.
      */
     readonly property bool actionDrawerVisible: TopPanelControls.actionDrawerVisible

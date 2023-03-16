@@ -29,9 +29,6 @@ Controls.ItemDelegate {
     property alias iconUsesPlasmaTheme: clientIcon.usesPlasmaTheme
     property string type // sink, source, source-output
     
-    // backgroundColor: "transparent" // we use panel background, no need for the same colour to be on top
-    // activeBackgroundColor: selectButton.visible ? PlasmaCore.Theme.highlightColor : "transparent"
-    
     onClicked: {
         if (selectButton.visible) {
             model.PulseObject.default = true;
@@ -215,10 +212,6 @@ Controls.ItemDelegate {
                             // whereas PA rejected the volume change and is
                             // still at v15 (e.g.).
                             updateTimer.restart();
-
-                            if (baseItem.type == "sink") {
-                                playFeedback(Index); // goes to providers/VolumeProvider.qml
-                            }
                         }
                     }
 

@@ -37,7 +37,7 @@
         <file>qml/dataproviders/BatteryInfo.qml</file>
         <file>qml/dataproviders/BluetoothInfo.qml</file>
         <file>qml/dataproviders/SignalStrengthInfo.qml</file>
-        <file>qml/dataproviders/AudioProvider.qml</file>
+        <file>qml/dataproviders/AudioInfo.qml</file>
         
         <file>qml/homescreen/HomeScreen.qml</file>
         
@@ -46,13 +46,13 @@
         <file>qml/navigationpanel/NavigationPanelAction.qml</file>
         <file>qml/navigationpanel/NavigationPanelButton.qml</file>
         
-        <file>qml/osd/volume/AudioApplet.qml</file>
-        <file>qml/osd/volume/DeviceListItem.qml</file>
-        <file>qml/osd/volume/icon.js</file>
-        <file>qml/osd/volume/ListItemBase.qml</file>
-        <file>qml/osd/volume/PopupCard.qml</file>
-        <file>qml/osd/volume/StreamListItem.qml</file>
-        <file>qml/osd/volume/VolumeOSD.qml</file>
+        <file>qml/volumeosd/AudioApplet.qml</file>
+        <file>qml/volumeosd/DeviceListItem.qml</file>
+        <file>qml/volumeosd/icon.js</file>
+        <file>qml/volumeosd/ListItemBase.qml</file>
+        <file>qml/volumeosd/PopupCard.qml</file>
+        <file>qml/volumeosd/StreamListItem.qml</file>
+        <file>qml/volumeosd/VolumeOSD.qml</file>
         
         <file>qml/statusbar/indicators/BatteryIndicator.qml</file>
         <file>qml/statusbar/indicators/BluetoothIndicator.qml</file>

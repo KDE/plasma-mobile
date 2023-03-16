@@ -46,9 +46,7 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!WindowPlugin.WindowUtil.showDesktop && !MobileShellState.Shell.homeScreenVisible
-            || search.isOpen
-        ) {
+        if (!WindowPlugin.WindowUtil.showDesktop && !WindowPlugin.WindowUtil.allWindowsMinimized || search.isOpen) {
             // Always close action drawer
             if (MobileShellState.Shell.actionDrawerVisible) {
                 MobileShellState.Shell.closeActionDrawer();

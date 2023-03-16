@@ -16,6 +16,7 @@ void MobileShellStatePlugin::registerTypes(const char *uri)
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mobileshell.state"));
 
     // /
+    qmlRegisterSingletonType(resolvePath("AudioProvider.qml"), uri, 1, 0, "AudioProvider");
     qmlRegisterSingletonType(resolvePath("HomeScreenControls.qml"), uri, 1, 0, "HomeScreenControls");
     qmlRegisterSingletonType(resolvePath("Shell.qml"), uri, 1, 0, "Shell");
     qmlRegisterSingletonType(resolvePath("TopPanelControls.qml"), uri, 1, 0, "TopPanelControls");

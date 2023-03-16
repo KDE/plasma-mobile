@@ -5,42 +5,32 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as Controls
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
+import QtQuick.Window
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtra
-import org.kde.kquickcontrolsaddons 2.0 as KQCAddons
+import org.kde.plasma.extras as PlasmaExtra
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.kquickcontrolsaddons as KQCAddons
 
-import org.kde.plasma.private.volume 0.1
+import org.kde.plasma.private.volume
 
-// adapted version of https://invent.kde.org/plasma/plasma-pa/-/blob/master/applet/contents/ui/main.qml
-
-// most audio functions are in VolumeProvider.qml (which will be a parent)
 // capture presses on the audio applet so it doesn't close the overlay
 ColumnLayout {
     spacing: 0
     
-    // pulseaudio models
-    
-    function isDummyOutput(output) {
-        return output && output.name === dummyOutputName;
-    }
-    
-    SinkModel {
-        id: paSinkModel
-    }
+    required property MobileShell.AudioInfo audioInfo
     
     PulseObjectFilterModel {
         id: paSinkFilterModel
         sortRole: "SortByDefault"
         sortOrder: Qt.DescendingOrder
         filterOutInactiveDevices: true
-        sourceModel: paSinkModel
+        sourceModel: audioInfo.paSinkModel
     }
 
     SourceModel {

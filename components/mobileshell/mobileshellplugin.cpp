@@ -76,10 +76,10 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("components/VelocityCalculator.qml"), uri, 1, 0, "VelocityCalculator");
 
     // /dataproviders
+    qmlRegisterType(resolvePath("dataproviders/AudioInfo.qml"), uri, 1, 0, "AudioInfo");
     qmlRegisterType(resolvePath("dataproviders/BatteryInfo.qml"), uri, 1, 0, "BatteryInfo");
     qmlRegisterType(resolvePath("dataproviders/BluetoothInfo.qml"), uri, 1, 0, "BluetoothInfo");
     qmlRegisterType(resolvePath("dataproviders/SignalStrengthInfo.qml"), uri, 1, 0, "SignalStrengthInfo");
-    qmlRegisterSingletonType(resolvePath("dataproviders/AudioProvider.qml"), uri, 1, 0, "AudioProvider");
 
     // /homescreen
     qmlRegisterType(resolvePath("homescreen/HomeScreen.qml"), uri, 1, 0, "HomeScreen");
@@ -91,6 +91,9 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     // /statusbar
     qmlRegisterType(resolvePath("statusbar/StatusBar.qml"), uri, 1, 0, "StatusBar");
+
+    // /volumeosd
+    qmlRegisterType(resolvePath("volumeosd/VolumeOSD.qml"), uri, 1, 0, "VolumeOSD");
 
     // /widgets
     qmlRegisterType(resolvePath("widgets/krunner/KRunnerWidget.qml"), uri, 1, 0, "KRunnerWidget");

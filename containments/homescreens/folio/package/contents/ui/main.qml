@@ -16,6 +16,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 MobileShell.HomeScreen {
     id: root
@@ -43,7 +44,7 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!plasmoid.nativeInterface.showingDesktop && !MobileShellState.Shell.homeScreenVisible
+        if (!plasmoid.nativeInterface.showingDesktop && !WindowPlugin.WindowUtil.allWindowsMinimized
             || MobileShellState.Shell.actionDrawerVisible 
             || searchWidget.isOpen
         ) {

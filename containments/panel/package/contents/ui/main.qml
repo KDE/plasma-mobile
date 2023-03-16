@@ -90,7 +90,7 @@ Item {
     
     Component.onCompleted: {
         // we want to bind global volume shortcuts here
-        MobileShell.AudioProvider.bindShortcuts = true;
+        MobileShellState.AudioProvider.bindShortcuts = true;
     }
     
     TaskManager.VirtualDesktopInfo {

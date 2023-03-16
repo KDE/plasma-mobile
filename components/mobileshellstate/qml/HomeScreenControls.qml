@@ -5,9 +5,6 @@
 import QtQuick 2.12
 import QtQuick.Window 2.2
 
-import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
-
 pragma Singleton
 
 /**
@@ -26,15 +23,4 @@ QtObject {
     property var taskSwitcher
     property QtObject homeScreenWindow
     property bool taskSwitcherVisible: false
-
-    // this state is updated from WindowUtil
-    property bool homeScreenVisible: true
-
-    property var windowListener: Connections {
-        target: WindowPlugin.WindowUtil
-
-        function onAllWindowsMinimizedChanged() {
-            root.homeScreenVisible = WindowPlugin.WindowUtil.allWindowsMinimized
-        }
-    }
 }

@@ -8,13 +8,14 @@
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.4
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.private.volume 0.1
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 PlasmaCore.IconItem {
     id: paIcon
-    readonly property var provider: MobileShell.AudioProvider
+    readonly property var provider: MobileShell.AudioInfo {}
     
     Layout.fillHeight: true
     Layout.preferredWidth: height
