@@ -43,9 +43,9 @@ Item {
     }
 
     Connections {
-        target: MobileShellState.HomeScreenControls
+        target: WindowPlugin.WindowUtil
 
-        function onHomeScreenVisibleChanged(){
+        function onAllWindowsMinimizedChanged(){
             if (WindowPlugin.WindowUtil.allWindowsMinimized) {
                 swipeView.focusChild();
             }
@@ -118,10 +118,10 @@ Item {
                 rightMargin: horizontalMargin
 
                 leftEdgeCallback: () => {
-                                      swipeView.setCurrentIndex(0);
-                                      swipeView.focusChild();
-                                      currentIndex = -1;
-                                  }
+                    swipeView.setCurrentIndex(0);
+                    swipeView.focusChild();
+                    currentIndex = -1;
+                }
             }
         }
     }
