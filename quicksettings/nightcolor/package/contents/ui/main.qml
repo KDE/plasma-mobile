@@ -7,10 +7,10 @@
  */
 
 import org.kde.colorcorrect 0.1 as CC
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.quicksetting.nightcolor 1.0 as NightColor
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     text: i18n("Night Color")
     icon: "redshift-status-on"
     enabled: NightColor.NightColorUtil.enabled

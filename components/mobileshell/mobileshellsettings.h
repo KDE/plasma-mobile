@@ -151,30 +151,6 @@ public:
      */
     void setActionDrawerTopRightMode(ActionDrawerMode actionDrawerMode);
 
-    /**
-     * Get the list of IDs of quick settings that are enabled.
-     */
-    QList<QString> enabledQuickSettings() const;
-
-    /**
-     * Set the list of quick settings that are enabled.
-     *
-     * @param list A list of quick setting IDs.
-     */
-    void setEnabledQuickSettings(QList<QString> &list);
-
-    /**
-     * Get the list of IDs of quick settings that are disabled.
-     */
-    QList<QString> disabledQuickSettings() const;
-
-    /**
-     * Set the list of quick settings that are disabled.
-     *
-     * @param list A list of quick setting IDs.
-     */
-    void setDisabledQuickSettings(QList<QString> &list);
-
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationIntensityChanged();
@@ -185,8 +161,6 @@ Q_SIGNALS:
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
-    void enabledQuickSettingsChanged();
-    void disabledQuickSettingsChanged();
 
 private:
     KConfigWatcher::Ptr m_configWatcher;

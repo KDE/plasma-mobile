@@ -4,9 +4,9 @@
 import QtQuick 2.15
 
 import org.kde.bluezqt 1.0 as BluezQt
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     property QtObject btManager: BluezQt.Manager
     property var connectedDevices: []
 

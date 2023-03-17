@@ -14,9 +14,9 @@ import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
-import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+
+import "../components" as Components
 
 Item {
     id: root
@@ -61,7 +61,7 @@ Item {
         
         property NavigationPanelButton activeButton
 
-        MobileShell.HapticsEffectLoader {
+        Components.HapticsEffectLoader {
             id: haptics
         }
         

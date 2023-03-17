@@ -3,11 +3,11 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.quicksetting.screenshot 1.0
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     text: i18n("Screenshot")
     status: i18n("Tap to screenshot")
     icon: "spectacle"

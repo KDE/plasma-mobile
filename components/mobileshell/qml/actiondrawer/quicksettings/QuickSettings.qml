@@ -12,8 +12,8 @@ import QtQuick.Window 2.2
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 import "../../components" as Components
 import "../../components/util.js" as Util
@@ -48,7 +48,7 @@ Item {
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
 
-    readonly property MobileShell.QuickSettingsModel quickSettingsModel: MobileShell.QuickSettingsModel {}
+    readonly property QS.QuickSettingsModel quickSettingsModel: QS.QuickSettingsModel {}
     
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {
@@ -131,7 +131,7 @@ Item {
         anchors.right: parent.right
         
         Repeater {
-            model: MobileShell.PaginateModel {
+            model: QS.PaginateModel {
                 sourceModel: quickSettingsModel
                 pageSize: minimizedColumns
             }
@@ -183,7 +183,7 @@ Item {
                         required property int index
                         
                         Repeater {
-                            model: MobileShell.PaginateModel {
+                            model: QS.PaginateModel {
                                 sourceModel: quickSettingsModel
                                 pageSize: root.pageSize
                                 firstItem: pageSize * flow.index

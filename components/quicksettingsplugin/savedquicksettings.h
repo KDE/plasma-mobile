@@ -3,9 +3,9 @@
 
 #pragma once
 
-#include "mobileshellsettings.h"
 #include "qqml.h"
 #include "quicksetting.h"
+#include "quicksettingsconfig.h"
 #include "savedquicksettingsmodel.h"
 
 #include <KPackage/Package>
@@ -41,7 +41,7 @@ private:
     void refreshModel();
     void saveModel();
 
-    MobileShellSettings *m_settings;
+    QuickSettingsConfig *m_settings;
     QList<KPluginMetaData *> m_validPackages;
     QList<KPluginMetaData *> m_enabledPackages;
     QList<KPluginMetaData *> m_disabledPackages;

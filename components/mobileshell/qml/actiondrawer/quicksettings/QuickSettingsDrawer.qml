@@ -13,11 +13,11 @@ import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "../../statusbar" as StatusBar
 import "../../components" as Components
+import "../../widgets/mediacontrols" as MediaControls
 import "../"
 
 /**
@@ -105,7 +105,7 @@ Components.BaseItem {
                 width: parent.width
             }
             
-            MobileShell.MediaControlsWidget {
+            MediaControls.MediaControlsWidget {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
                 Layout.fillWidth: true

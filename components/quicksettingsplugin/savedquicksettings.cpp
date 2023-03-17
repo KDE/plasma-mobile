@@ -9,7 +9,7 @@
 
 SavedQuickSettings::SavedQuickSettings(QObject *parent)
     : QObject{parent}
-    , m_settings{new MobileShellSettings{this}}
+    , m_settings{new QuickSettingsConfig{this}}
     , m_validPackages{}
     , m_enabledPackages{}
     , m_disabledPackages{}
@@ -45,10 +45,10 @@ SavedQuickSettings::SavedQuickSettings(QObject *parent)
     }
 
     // subscribe to config changes
-    connect(m_settings, &MobileShellSettings::enabledQuickSettingsChanged, this, [this]() {
+    connect(m_settings, &QuickSettingsConfig::enabledQuickSettingsChanged, this, [this]() {
         m_updateTimer->start();
     });
-    connect(m_settings, &MobileShellSettings::disabledQuickSettingsChanged, this, [this]() {
+    connect(m_settings, &QuickSettingsConfig::disabledQuickSettingsChanged, this, [this]() {
         m_updateTimer->start();
     });
 

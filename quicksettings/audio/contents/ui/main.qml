@@ -5,8 +5,9 @@ import QtQuick
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     text: i18n("Sound")
     icon: "audio-speakers-symbolic"
     status: i18n("%1%", MobileShellState.AudioProvider.volumeValue)

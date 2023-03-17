@@ -13,7 +13,6 @@ import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../../statusbar" as StatusBar
 import "../../components" as Components

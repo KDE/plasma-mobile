@@ -3,9 +3,10 @@
 
 import QtQuick 2.15
 
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     property var batteryInfo: MobileShell.BatteryInfo {}
     
     text: i18n("Battery")

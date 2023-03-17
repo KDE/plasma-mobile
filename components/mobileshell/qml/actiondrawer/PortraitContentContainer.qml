@@ -14,6 +14,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
+import "../widgets/notifications" as Notifications
 import "quicksettings"
 
 /**
@@ -94,7 +95,7 @@ PlasmaCore.ColorScope {
         }
     }
     
-    MobileShell.NotificationsWidget {
+    Notifications.NotificationsWidget {
         id: notificationWidget
         historyModel: root.actionDrawer.notificationModel
         historyModelType: root.actionDrawer.notificationModelType

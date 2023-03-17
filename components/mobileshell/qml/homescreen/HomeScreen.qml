@@ -14,6 +14,8 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
+import "../components" as Components
+
 /**
  * The base homescreen component, implementing features that simplify
  * homescreen implementation.
@@ -162,7 +164,7 @@ Item {
     }
     
     // homescreen visual component
-    MobileShell.BaseItem {
+    Components.BaseItem {
         id: itemContainer
         anchors.fill: parent
         
@@ -233,7 +235,7 @@ Item {
     }
     
     // start app animation component
-    MobileShell.StartupFeedback {
+    Components.StartupFeedback {
         id: startupFeedback
         z: 999999
         anchors.fill: parent

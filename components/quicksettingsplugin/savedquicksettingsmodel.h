@@ -3,7 +3,6 @@
 
 #pragma once
 
-#include "mobileshellsettings.h"
 #include "qqml.h"
 #include "quicksetting.h"
 

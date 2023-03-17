@@ -9,11 +9,6 @@ set(mobileshellplugin_SRCS
     mobileshellsettings.cpp
     shellutil.cpp
     components/direction.cpp
-    quicksettings/quicksetting.cpp
-    quicksettings/paginatemodel.cpp
-    quicksettings/quicksettingsmodel.cpp
-    quicksettings/savedquicksettings.cpp
-    quicksettings/savedquicksettingsmodel.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
     taskswitcher/displaysmodel.cpp

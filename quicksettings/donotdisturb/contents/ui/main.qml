@@ -5,10 +5,10 @@
  */
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     text: i18n("Do Not Disturb")
     icon: enabled ? "notifications-disabled" : "notifications"
     status: ""

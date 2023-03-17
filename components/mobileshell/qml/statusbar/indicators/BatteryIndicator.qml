@@ -13,8 +13,10 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PW
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
+import "../../dataproviders" as DataProviders
+
 RowLayout {
-    readonly property var provider: MobileShell.BatteryInfo {}
+    readonly property var provider: DataProviders.BatteryInfo {}
     property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
     
     visible: provider.isVisible

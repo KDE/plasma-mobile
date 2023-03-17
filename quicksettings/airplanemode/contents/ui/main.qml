@@ -5,10 +5,10 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     text: i18n("Airplane Mode")
     icon: "network-flightmode-on"
     status: ""

@@ -4,9 +4,9 @@
 import QtQuick 2.15
 
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     PlasmaNM.Handler {
         id: nmHandler
     }

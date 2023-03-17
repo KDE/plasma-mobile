@@ -7,7 +7,6 @@
  */
 
 #include "shellutil.h"
-#include "mobileshellsettings.h"
 
 #include <KConfigGroup>
 #include <KFileUtils>

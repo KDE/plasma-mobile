@@ -17,6 +17,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "../components" as Components
+import "../widgets/mediacontrols" as MediaControls
+import "../widgets/notifications" as Notifications
 import "quicksettings"
 
 /**
@@ -80,7 +82,7 @@ PlasmaCore.ColorScope {
             }
             anchors.margins: minWidthHeight * 0.06
             
-            MobileShell.NotificationsWidget {
+            Notifications.NotificationsWidget {
                 id: notificationWidget
                 historyModel: root.actionDrawer.notificationModel
                 historyModelType: root.actionDrawer.notificationModelType
@@ -143,7 +145,7 @@ PlasmaCore.ColorScope {
             font.weight: Font.Light
         }
         
-        MobileShell.MediaControlsWidget {
+        MediaControls.MediaControlsWidget {
             id: mediaWidget
             property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
             

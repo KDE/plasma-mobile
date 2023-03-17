@@ -14,9 +14,6 @@ import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
-import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-
 Item {
     id: root
 

@@ -4,13 +4,13 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.pipewire.record 0.1 as PWRec
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.quicksetting.record 1.0
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-MobileShell.QuickSetting {
+QS.QuickSetting {
     id: root
     text: switch (record.state) {
         case PWRec.PipeWireRecord.Idle:
