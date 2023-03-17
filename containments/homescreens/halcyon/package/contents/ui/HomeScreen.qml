@@ -90,7 +90,7 @@ Item {
                 id: favoritesView
                 anchors.fill: parent
                 searchWidget: root.searchWidget
-                interactive: root.interactive
+                interactive: root.interactive && swipeView.contentItem.contentX === 0
                 onOpenConfigureRequested: root.openConfigure()
 
                 onPageForwardRequested: {
