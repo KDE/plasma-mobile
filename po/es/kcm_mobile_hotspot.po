@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-nm package.
 #
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_hotspot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2020-04-24 01:45+0200\n"
+"PO-Revision-Date: 2023-03-16 19:58+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.03.90\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:42
 #, kde-format
@@ -27,19 +27,17 @@ msgstr "Punto de acceso"
 #: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
-msgstr ""
+msgstr "Indica si el punto de acceso inalámbrico está activado."
 
 #: package/contents/ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Punto de acceso"
+msgstr "SSID del punto de acceso"
 
 #: package/contents/ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Contraseña:"
+msgstr "Contraseña del punto de acceso"
 
 #~ msgid "Enabled:"
 #~ msgstr "Activado:"

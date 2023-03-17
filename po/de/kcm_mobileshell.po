@@ -1,31 +1,33 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Automatically generated, 2023.
+# Frederik Schwarzer <schwarzer@kde.org>, 2023.
 #
+# Automatically generated, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-12-24 10:42+0100\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-03-12 17:29+0100\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr ""
+msgstr "Shell"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Allgemein"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
@@ -36,7 +38,7 @@ msgstr ""
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr ""
+msgstr "Animationen"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
@@ -46,7 +48,7 @@ msgstr ""
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr ""
+msgstr "Navigationsbereich"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
@@ -61,7 +63,7 @@ msgstr ""
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr ""
+msgstr "Anwendungsumschalter"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
@@ -83,7 +85,7 @@ msgstr ""
 #: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
-msgstr ""
+msgstr "Schnelleinstellungen"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
@@ -152,24 +154,24 @@ msgstr ""
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr ""
+msgstr "Niedrig"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr ""
+msgstr "Mittel"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr ""
+msgstr "Hoch"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr ""
+msgstr "Vibrationsdauer"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
@@ -180,19 +182,19 @@ msgstr ""
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr ""
+msgstr "Lang"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr ""
+msgstr "Mittel"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr ""
+msgstr "Kurz"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format

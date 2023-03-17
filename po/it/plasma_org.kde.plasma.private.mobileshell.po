@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-03-17 02:33+0000\n"
 "PO-Revision-Date: 2022-12-21 19:07+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -48,136 +48,121 @@ msgstr "Acceso"
 msgid "Off"
 msgstr "Spento"
 
-#: qml/dataproviders/AudioProvider.qml:171
-#, kde-format
-msgid "Audio"
-msgstr "Audio"
-
-#: qml/dataproviders/AudioProvider.qml:175
-#, kde-format
-msgid "Increase Volume"
-msgstr "Aumenta il volume"
-
-#: qml/dataproviders/AudioProvider.qml:182
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Diminuisci il volume"
-
-#: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
-#, kde-format
-msgid "Mute"
-msgstr "Silenzia"
-
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
 msgstr "SIM bloccata"
 
-#: qml/osd/volume/AudioApplet.qml:73
+#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/volumeosd/AudioApplet.qml:63
 #, kde-format
 msgid "Outputs"
 msgstr "Uscite"
 
-#: qml/osd/volume/AudioApplet.qml:103
+#: qml/volumeosd/AudioApplet.qml:93
 #, kde-format
 msgid "Inputs"
 msgstr "Ingressi"
 
-#: qml/osd/volume/AudioApplet.qml:134
+#: qml/volumeosd/AudioApplet.qml:124
 #, kde-format
 msgid "Playback Streams"
 msgstr "Riproduzione flussi"
 
-#: qml/osd/volume/AudioApplet.qml:187
+#: qml/volumeosd/AudioApplet.qml:177
 #, kde-format
 msgid "Recording Streams"
 msgstr "Registrazione flussi"
 
-#: qml/osd/volume/DeviceListItem.qml:25
+#: qml/volumeosd/DeviceListItem.qml:25
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/osd/volume/DeviceListItem.qml:34
+#: qml/volumeosd/DeviceListItem.qml:34
 #, kde-format
 msgid "Device name not found"
 msgstr "Nome del dispositivo non trovato"
 
-#: qml/osd/volume/ListItemBase.qml:100
+#: qml/volumeosd/ListItemBase.qml:97
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Mostra opzioni aggiuntive per %1"
 
-#: qml/osd/volume/ListItemBase.qml:156
+#: qml/volumeosd/ListItemBase.qml:153
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Regola il volume per %1"
 
-#: qml/osd/volume/ListItemBase.qml:238
+#: qml/volumeosd/ListItemBase.qml:231
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/osd/volume/ListItemBase.qml:253
+#: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
 msgstr "100%"
 
-#: qml/osd/volume/StreamListItem.qml:21
+#: qml/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "Suoni delle notifiche"
 
-#: qml/osd/volume/StreamListItem.qml:24
+#: qml/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/osd/volume/StreamListItem.qml:29
+#: qml/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "Nome del flusso non trovato"
 
-#: qml/osd/volume/VolumeOSD.qml:108
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Unmute"
 msgstr "Attiva l'audio"
 
-#: qml/osd/volume/VolumeOSD.qml:132
+#: qml/volumeosd/VolumeOSD.qml:115
+#, kde-format
+msgid "Mute"
+msgstr "Silenzia"
+
+#: qml/volumeosd/VolumeOSD.qml:139
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/osd/volume/VolumeOSD.qml:142
+#: qml/volumeosd/VolumeOSD.qml:149
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/osd/volume/VolumeOSD.qml:162
+#: qml/volumeosd/VolumeOSD.qml:169
 #, kde-format
 msgid "Open audio settings"
 msgstr "Apri impostazioni audio"
 
-#: qml/osd/volume/VolumeOSD.qml:175
+#: qml/volumeosd/VolumeOSD.qml:182
 #, kde-format
 msgid "Audio Settings"
 msgstr "Impostazioni audio"
 
-#: qml/osd/volume/VolumeOSD.qml:182
+#: qml/volumeosd/VolumeOSD.qml:189
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Mostra o nascondi i flussi audio"
-
-#: qml/statusbar/indicators/BatteryIndicator.qml:36
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
@@ -305,3 +290,12 @@ msgstr "%1m rimanenti"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h rimanenti"
+
+#~ msgid "Audio"
+#~ msgstr "Audio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Aumenta il volume"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Diminuisci il volume"

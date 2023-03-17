@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-02-01 22:46+0100\n"
+"PO-Revision-Date: 2023-03-16 11:15+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 21.12.1\n"
 
 #: mobilepower.cpp:27
 #, kde-format
@@ -119,12 +119,10 @@ msgstr "Cargamento currente"
 
 #: package/contents/ui/BatteryPage.qml:129
 #: package/contents/ui/BatteryPage.qml:137
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: package/contents/ui/BatteryPage.qml:136
 #, kde-format
@@ -187,12 +185,10 @@ msgid "Unknown technology"
 msgstr "Technologia incognite"
 
 #: package/contents/ui/Graph.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1%2"
+msgstr "%1%"
 
 #: package/contents/ui/main.qml:40
 #, kde-format

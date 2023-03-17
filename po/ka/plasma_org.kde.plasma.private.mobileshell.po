@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-03-17 02:33+0000\n"
 "PO-Revision-Date: 2022-12-28 07:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -49,136 +49,121 @@ msgstr "ჩართული"
 msgid "Off"
 msgstr "გამორთული"
 
-#: qml/dataproviders/AudioProvider.qml:171
-#, kde-format
-msgid "Audio"
-msgstr "აუდიო"
-
-#: qml/dataproviders/AudioProvider.qml:175
-#, kde-format
-msgid "Increase Volume"
-msgstr "ხმის აწევა"
-
-#: qml/dataproviders/AudioProvider.qml:182
-#, kde-format
-msgid "Decrease Volume"
-msgstr "ხმის დაწევა"
-
-#: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
-#, kde-format
-msgid "Mute"
-msgstr "დადუმება"
-
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
 msgstr "SIM-ი დაბლოკილია"
 
-#: qml/osd/volume/AudioApplet.qml:73
+#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/volumeosd/AudioApplet.qml:63
 #, kde-format
 msgid "Outputs"
 msgstr "გამოტანა"
 
-#: qml/osd/volume/AudioApplet.qml:103
+#: qml/volumeosd/AudioApplet.qml:93
 #, kde-format
 msgid "Inputs"
 msgstr "შეყვანები"
 
-#: qml/osd/volume/AudioApplet.qml:134
+#: qml/volumeosd/AudioApplet.qml:124
 #, kde-format
 msgid "Playback Streams"
 msgstr "დასაკრავი ნაკადები"
 
-#: qml/osd/volume/AudioApplet.qml:187
+#: qml/volumeosd/AudioApplet.qml:177
 #, kde-format
 msgid "Recording Streams"
 msgstr "ჩამწერი ნააკდები"
 
-#: qml/osd/volume/DeviceListItem.qml:25
+#: qml/volumeosd/DeviceListItem.qml:25
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/osd/volume/DeviceListItem.qml:34
+#: qml/volumeosd/DeviceListItem.qml:34
 #, kde-format
 msgid "Device name not found"
 msgstr "მოწყობილობა ნაპოვნი არაა"
 
-#: qml/osd/volume/ListItemBase.qml:100
+#: qml/volumeosd/ListItemBase.qml:97
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "%1-სთვის დამატებითი პარამეტრების ჩვენება"
 
-#: qml/osd/volume/ListItemBase.qml:156
+#: qml/volumeosd/ListItemBase.qml:153
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "%1-ის ხმის მორგება"
 
-#: qml/osd/volume/ListItemBase.qml:238
+#: qml/volumeosd/ListItemBase.qml:231
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/osd/volume/ListItemBase.qml:253
+#: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
 msgstr "100%"
 
-#: qml/osd/volume/StreamListItem.qml:21
+#: qml/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "გაფრთხილების ხმა"
 
-#: qml/osd/volume/StreamListItem.qml:24
+#: qml/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/osd/volume/StreamListItem.qml:29
+#: qml/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "ნაკადის სახელი ვერ ვიპოვე"
 
-#: qml/osd/volume/VolumeOSD.qml:108
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Unmute"
 msgstr "დადუმების გამორთვა"
 
-#: qml/osd/volume/VolumeOSD.qml:132
+#: qml/volumeosd/VolumeOSD.qml:115
+#, kde-format
+msgid "Mute"
+msgstr "დადუმება"
+
+#: qml/volumeosd/VolumeOSD.qml:139
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/osd/volume/VolumeOSD.qml:142
+#: qml/volumeosd/VolumeOSD.qml:149
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/osd/volume/VolumeOSD.qml:162
+#: qml/volumeosd/VolumeOSD.qml:169
 #, kde-format
 msgid "Open audio settings"
 msgstr "აუდიოს მორგება"
 
-#: qml/osd/volume/VolumeOSD.qml:175
+#: qml/volumeosd/VolumeOSD.qml:182
 #, kde-format
 msgid "Audio Settings"
 msgstr "აუდიოს პარამეტრები"
 
-#: qml/osd/volume/VolumeOSD.qml:182
+#: qml/volumeosd/VolumeOSD.qml:189
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "აუდიონაკადების ჩვენების გადართვა"
-
-#: qml/statusbar/indicators/BatteryIndicator.qml:36
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
@@ -306,3 +291,12 @@ msgstr "%1წთ დარჩენილია"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1სთ დარჩენილია"
+
+#~ msgid "Audio"
+#~ msgstr "აუდიო"
+
+#~ msgid "Increase Volume"
+#~ msgstr "ხმის აწევა"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "ხმის დაწევა"

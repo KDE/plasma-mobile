@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-02-01 23:04+0100\n"
+"PO-Revision-Date: 2023-03-16 23:23+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -121,23 +121,22 @@ msgid "Mode when opening from the top right."
 msgstr "Modo quando aperir ex le dextera in alto."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
-#, fuzzy, kde-format
-#| msgid "Customize the order of quick settings in the pull-down panel."
+#, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
-"Personaliza le ordine de preferentias rapide in le pannello de abbassar"
+"Personaliza le ordine de preferentias rapide in le pannello de abbassar e "
+"cela los."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Preferentias rapide"
+msgstr "Dishabilita Preferentias rapide"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Rehabilita preferentias rapide dishabilitate previemente."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
