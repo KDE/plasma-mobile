@@ -128,8 +128,7 @@ Item {
         
         yAxis.enabled: false
         xAxis.enabled: true
-        xAxis.minimum: -PlasmaCore.Units.gridUnit * 5
-        xAxis.maximum: 0
+        grabPermissions: PointerHandler.TakeOverForbidden
         
         property real oldTranslationX
         property bool isClosing: false
