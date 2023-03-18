@@ -13,6 +13,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import org.kde.kirigami 2.19 as Kirigami
@@ -146,8 +147,8 @@ Item {
         NumberAnimation on zoomScale {
             id: shrinkAnim
             running: false
-            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
-            to: MobileShell.MobileShellSettings.animationsEnabled ? 0.95 : 1
+            duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
+            to: ShellSettings.Settings.animationsEnabled ? 0.95 : 1
             onFinished: {
                 if (!mouseArea.pressed) {
                     growAnim.restart();
@@ -158,7 +159,7 @@ Item {
         NumberAnimation on zoomScale {
             id: growAnim
             running: false
-            duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
+            duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
             to: 1
             onFinished: {
                 if (mouseArea.launchAppRequested) {

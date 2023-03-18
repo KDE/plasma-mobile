@@ -15,7 +15,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 MouseArea {
     id: delegate
@@ -60,8 +60,8 @@ MouseArea {
     NumberAnimation on zoomScale {
         id: shrinkAnim
         running: false
-        duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
-        to: MobileShell.MobileShellSettings.animationsEnabled ? 0.8 : 1
+        duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
+        to: ShellSettings.Settings.animationsEnabled ? 0.8 : 1
         onFinished: {
             if (!delegate.pressed) {
                 growAnim.restart();
@@ -72,7 +72,7 @@ MouseArea {
     NumberAnimation on zoomScale {
         id: growAnim
         running: false
-        duration: MobileShell.MobileShellSettings.animationsEnabled ? 80 : 1
+        duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
         to: 1
         onFinished: {
             if (delegate.launchAppRequested) {

@@ -16,7 +16,6 @@
 
 #include "taskswitcher/displaysmodel.h"
 
-#include "mobileshellsettings.h"
 #include "shellutil.h"
 
 QUrl resolvePath(std::string str)
@@ -30,10 +29,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     qmlRegisterSingletonType<ShellUtil>(uri, 1, 0, "ShellUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return ShellUtil::instance();
-    });
-
-    qmlRegisterSingletonType<MobileShellSettings>(uri, 1, 0, "MobileShellSettings", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return MobileShellSettings::self();
     });
 
     // components

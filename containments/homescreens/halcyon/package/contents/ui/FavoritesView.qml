@@ -13,6 +13,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
     id: root
@@ -165,7 +166,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'openFolderProgress'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
                 to: 1
                 easing.type: Easing.InOutQuad
             }
@@ -175,7 +176,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'openProgress'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
                 to: 1
                 easing.type: Easing.InOutQuad
             }
@@ -189,7 +190,7 @@ Item {
             NumberAnimation {
                 target: folderGrid
                 properties: 'openProgress'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
                 to: 0
                 easing.type: Easing.InOutQuad
             }
@@ -199,7 +200,7 @@ Item {
             NumberAnimation {
                 target: favoritesGrid
                 properties: 'openFolderProgress'
-                duration: MobileShell.MobileShellSettings.animationsEnabled ? 200 : 0
+                duration: ShellSettings.Settings.animationsEnabled ? 200 : 0
                 to: 0
                 easing.type: Easing.InOutQuad
             }

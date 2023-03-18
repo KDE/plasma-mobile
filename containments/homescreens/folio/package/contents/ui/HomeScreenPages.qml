@@ -20,7 +20,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-Flickable {
+MobileShell.Flickable {
     id: mainFlickable
     
     required property var homeScreenState

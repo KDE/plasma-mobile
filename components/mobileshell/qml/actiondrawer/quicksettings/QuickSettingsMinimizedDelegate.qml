@@ -11,7 +11,7 @@ import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import "../../components" as Components
@@ -22,7 +22,7 @@ QuickSettingsDelegate {
     iconItem: icon
     
     // scale animation on press
-    zoomScale: (MobileShell.MobileShellSettings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
+    zoomScale: (ShellSettings.Settings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
     
     background: Item {
         // very simple shadow for performance
@@ -52,7 +52,7 @@ QuickSettingsDelegate {
         }
     }
     
-    MobileShell.HapticsEffectLoader {
+    Components.HapticsEffectLoader {
         id: haptics
     }
     

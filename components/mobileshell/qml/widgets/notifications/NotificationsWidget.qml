@@ -15,6 +15,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
@@ -143,7 +144,7 @@ Item {
         
         property var pendingNotificationWithAction
 
-        readonly property int animationDuration: MobileShell.MobileShellSettings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
+        readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
         
         // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
         readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + spacing >= root.height

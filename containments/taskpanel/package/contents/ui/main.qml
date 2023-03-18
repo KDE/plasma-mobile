@@ -16,7 +16,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 PlasmaCore.ColorScope {
@@ -32,7 +32,7 @@ PlasmaCore.ColorScope {
         property: "visibilityMode"
         // 0 - VisibilityMode.NormalPanel
         // 2 - VisibilityMode.LetWindowsCover HACK: TODO one day we make delete the panel component instead of making it invisible in gesture-only mode
-        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 2
+        value: ShellSettings.Settings.navigationPanelEnabled ? 0 : 2
     }
 
     // we have the following scenarios:
@@ -40,7 +40,7 @@ PlasmaCore.ColorScope {
     // - system is in landscape orientation & gesture mode is enabled (panel on bottom)
     // - system is in portrait orientation (panel on bottom)
     readonly property bool inLandscape: Screen.width > Screen.height;
-    readonly property bool isInLandscapeNavPanelMode: inLandscape && MobileShell.MobileShellSettings.navigationPanelEnabled
+    readonly property bool isInLandscapeNavPanelMode: inLandscape && ShellSettings.Settings.navigationPanelEnabled
 
     readonly property real navigationPanelHeight: PlasmaCore.Units.gridUnit * 2
 
@@ -141,7 +141,7 @@ PlasmaCore.ColorScope {
     // load appropriate system navigation component
     Loader {
         id: navigationLoader
-        active: MobileShell.MobileShellSettings.navigationPanelEnabled
+        active: ShellSettings.Settings.navigationPanelEnabled
         anchors.fill: parent
         sourceComponent: NavigationPanelComponent {
             opaqueBar: root.opaqueBar

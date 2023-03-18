@@ -22,6 +22,8 @@ import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import org.kde.kirigami as Kirigami
 
+import "../dataproviders" as DataProviders
+
 Window {
     id: window
 
@@ -67,7 +69,7 @@ Window {
         }
     }
 
-    MobileShell.AudioInfo {
+    DataProviders.AudioInfo {
         id: audioInfo
     }
     

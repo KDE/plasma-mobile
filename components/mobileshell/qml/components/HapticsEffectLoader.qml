@@ -3,14 +3,14 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Loader {
     // source: "qrc:/org/kde/plasma/private/mobileshell/qml/components/HapticsEffectWrapper.qml"
     property bool valid: item !== null
     
     function buttonVibrate() {
-        if (valid && MobileShell.MobileShellSettings.vibrationsEnabled) {
+        if (valid && ShellSettings.Settings.vibrationsEnabled) {
             // TODO we need a haptics stack for Qt 6
             // item.intensity = MobileShell.MobileShellSettings.vibrationIntensity;
             // item.duration = MobileShell.MobileShellSettings.vibrationDuration;

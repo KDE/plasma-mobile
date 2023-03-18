@@ -16,7 +16,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 MouseArea {
     id: delegate

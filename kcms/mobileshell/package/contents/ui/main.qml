@@ -9,8 +9,8 @@ import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kcm 1.3 as KCM
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 KCM.SimpleKCM {
     id: root
@@ -48,10 +48,10 @@ KCM.SimpleKCM {
                     id: animationsSwitch
                     text: i18n("Animations")
                     description: i18n("If this is off, animations will be reduced as much as possible.")
-                    checked: MobileShell.MobileShellSettings.animationsEnabled
+                    checked: ShellSettings.Settings.animationsEnabled
                     onCheckedChanged: {
-                        if (checked != MobileShell.MobileShellSettings.animationsEnabled) {
-                            MobileShell.MobileShellSettings.animationsEnabled = checked;
+                        if (checked != ShellSettings.Settings.animationsEnabled) {
+                            ShellSettings.Settings.animationsEnabled = checked;
                         }
                     }
                 }
@@ -73,10 +73,10 @@ KCM.SimpleKCM {
                     id: gestureDelegate
                     text: i18n("Gesture-only Mode")
                     description: i18n("Whether to hide the navigation panel.")
-                    checked: !MobileShell.MobileShellSettings.navigationPanelEnabled
+                    checked: !ShellSettings.Settings.navigationPanelEnabled
                     onCheckedChanged: {
-                        if (checked != !MobileShell.MobileShellSettings.navigationPanelEnabled) {
-                            MobileShell.MobileShellSettings.navigationPanelEnabled = !checked;
+                        if (checked != !ShellSettings.Settings.navigationPanelEnabled) {
+                            ShellSettings.Settings.navigationPanelEnabled = !checked;
                         }
                     }
                 }
@@ -97,10 +97,10 @@ KCM.SimpleKCM {
                 MobileForm.FormSwitchDelegate {
                     text: i18n("Show Application Previews")
                     description: i18n("Turning this off may help improve performance.")
-                    checked: MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled
+                    checked: ShellSettings.Settings.taskSwitcherPreviewsEnabled
                     onCheckedChanged: {
-                        if (checked != MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled) {
-                            MobileShell.MobileShellSettings.taskSwitcherPreviewsEnabled = checked;
+                        if (checked != ShellSettings.Settings.taskSwitcherPreviewsEnabled) {
+                            ShellSettings.Settings.taskSwitcherPreviewsEnabled = checked;
                         }
                     }
                 }
@@ -135,15 +135,15 @@ KCM.SimpleKCM {
                     text: i18n("Top Left Drawer Mode")
                     description: i18n("Mode when opening from the top left.")
                     
-                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopLeftMode)
+                    currentIndex: indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
-                            append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
-                            append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+                            append({"name": parentCol.pinnedString, "value": ShellSettings.Settings.Pinned});
+                            append({"name": parentCol.expandedString, "value": ShellSettings.Settings.Expanded});
                             
                             // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                            topLeftActionDrawerModeDelegate.currentIndex = topLeftActionDrawerModeDelegate.indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopLeftMode)
+                            topLeftActionDrawerModeDelegate.currentIndex = topLeftActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
                         }
                     }
                     
@@ -151,7 +151,7 @@ KCM.SimpleKCM {
                     valueRole: "value"
                     
                     Component.onCompleted: dialog.parent = root
-                    onCurrentValueChanged: MobileShell.MobileShellSettings.actionDrawerTopLeftMode = currentValue
+                    onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopLeftMode = currentValue
                 }
                 
                 MobileForm.FormDelegateSeparator { above: topLeftActionDrawerModeDelegate; below: topRightActionDrawerModeDelegate }
@@ -164,11 +164,11 @@ KCM.SimpleKCM {
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
-                            append({"name": parentCol.pinnedString, "value": MobileShell.MobileShellSettings.Pinned});
-                            append({"name": parentCol.expandedString, "value": MobileShell.MobileShellSettings.Expanded});
+                            append({"name": parentCol.pinnedString, "value": ShellSettings.Settings.Pinned});
+                            append({"name": parentCol.expandedString, "value": ShellSettings.Settings.Expanded});
 
                             // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                            topRightActionDrawerModeDelegate.currentIndex = topRightActionDrawerModeDelegate.indexOfValue(MobileShell.MobileShellSettings.actionDrawerTopRightMode)
+                            topRightActionDrawerModeDelegate.currentIndex = topRightActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopRightMode)
                         }
                     }
                     
@@ -178,7 +178,7 @@ KCM.SimpleKCM {
                     Component.onCompleted: {
                         dialog.parent = root
                     }
-                    onCurrentValueChanged: MobileShell.MobileShellSettings.actionDrawerTopRightMode = currentValue
+                    onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopRightMode = currentValue
                 }
             }
         }

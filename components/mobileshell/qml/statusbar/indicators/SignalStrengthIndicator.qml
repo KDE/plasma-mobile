@@ -5,17 +5,18 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+
+import "../../dataproviders" as DataProviders
 
 Item {
     required property InternetIndicator internetIndicator
     
-    readonly property var provider: MobileShell.SignalStrengthInfo {}
+    readonly property var provider: DataProviders.SignalStrengthInfo {}
     
     // check if the internet indicator icon is a mobile data related one
     readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')

@@ -14,16 +14,17 @@ import Qt5Compat.GraphicalEffects
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtra
-import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kquickcontrolsaddons as KQCAddons
 
 import org.kde.plasma.private.volume
+
+import "../dataproviders" as DataProviders
 
 // capture presses on the audio applet so it doesn't close the overlay
 ColumnLayout {
     spacing: 0
     
-    required property MobileShell.AudioInfo audioInfo
+    required property DataProviders.AudioInfo audioInfo
     
     PulseObjectFilterModel {
         id: paSinkFilterModel

@@ -10,7 +10,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.taskmanager as TaskManager
 
-import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
@@ -60,7 +60,7 @@ Item {
     function evaluateMargins() {
         topMargin = plasmoid.availableScreenRect.y
         // add a specific check for the nav panel for now, since the gesture mode still technically has height
-        bottomMargin = MobileShell.MobileShellSettings.navigationPanelEnabled ? root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height) : 0;
+        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height) : 0;
         leftMargin = plasmoid.availableScreenRect.x
         rightMargin = root.width - (plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width)
     }
@@ -182,7 +182,7 @@ Item {
             opacityAnim.restart();
         }
         function zoomOut() {
-            if (MobileShell.MobileShellSettings.animationsEnabled) {
+            if (ShellSettings.Settings.animationsEnabled) {
                 scaleAnim.to = 0.8;
                 scaleAnim.restart();
                 opacityAnim.to = 0;
@@ -192,13 +192,13 @@ Item {
         
         NumberAnimation on opacity {
             id: opacityAnim
-            duration: MobileShell.MobileShellSettings.animationsEnabled ? 300 : 0
+            duration: ShellSettings.Settings.animationsEnabled ? 300 : 0
             running: false
         }
         
         NumberAnimation on zoomScale {
             id: scaleAnim
-            duration: MobileShell.MobileShellSettings.animationsEnabled ? 600 : 0
+            duration: ShellSettings.Settings.animationsEnabled ? 600 : 0
             running: false
             easing.type: Easing.OutExpo
         }

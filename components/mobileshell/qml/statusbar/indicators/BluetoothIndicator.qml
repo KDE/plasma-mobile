@@ -6,18 +6,18 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-import QtQuick 2.2
-import QtQuick.Layouts 1.4
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.core as PlasmaCore
+import org.kde.bluezqt as BluezQt
 
-import org.kde.bluezqt 1.0 as BluezQt
+import "../../dataproviders" as DataProviders
 
 PlasmaCore.IconItem {
     id: connectionIcon
     
-    readonly property var provider: MobileShell.BluetoothInfo {}
+    readonly property var provider: DataProviders.BluetoothInfo {}
 
     source: provider.icon
     colorGroup: PlasmaCore.ColorScope.colorGroup

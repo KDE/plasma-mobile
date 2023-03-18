@@ -15,10 +15,10 @@ import Qt5Compat.GraphicalEffects
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "indicators" as Indicators
+import "../dataproviders" as DataProviders
 
 Item {
     id: root
@@ -217,7 +217,7 @@ Item {
                     Item { Layout.fillWidth: true }
                     
                     PlasmaComponents.Label {
-                        property var signalStrengthInfo: MobileShell.SignalStrengthInfo {}
+                        property var signalStrengthInfo: DataProviders.SignalStrengthInfo {}
                         
                         visible: root.showTime
                         text: signalStrengthInfo.label

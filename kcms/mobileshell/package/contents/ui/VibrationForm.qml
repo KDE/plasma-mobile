@@ -9,8 +9,8 @@ import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kcm 1.3 as KCM
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Kirigami.ScrollablePage {
     id: root
@@ -34,10 +34,10 @@ Kirigami.ScrollablePage {
                     id: shellVibrationsSwitch
                     text: i18n("Shell Vibrations")
                     description: i18n("Whether to have vibrations enabled in the shell.")
-                    checked: MobileShell.MobileShellSettings.vibrationsEnabled
+                    checked: ShellSettings.Settings.vibrationsEnabled
                     onCheckedChanged: {
-                        if (checked != MobileShell.MobileShellSettings.vibrationsEnabled) {
-                            MobileShell.MobileShellSettings.vibrationsEnabled = checked;
+                        if (checked != ShellSettings.Settings.vibrationsEnabled) {
+                            ShellSettings.Settings.vibrationsEnabled = checked;
                         }
                     }
                 }
@@ -53,7 +53,7 @@ Kirigami.ScrollablePage {
                     property string mediumIntensityString: i18nc("Medium intensity", "Medium")
                     property string highIntensityString: i18nc("High intensity", "High")
                     
-                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.vibrationIntensity)
+                    currentIndex: indexOfValue(ShellSettings.Settings.vibrationIntensity)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
@@ -62,7 +62,7 @@ Kirigami.ScrollablePage {
                             append({"name": vibrationIntensityDelegate.lowIntensityString, "value": 0.2});
                             
                             // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                            vibrationIntensityDelegate.currentIndex = vibrationIntensityDelegate.indexOfValue(MobileShell.MobileShellSettings.vibrationIntensity)
+                            vibrationIntensityDelegate.currentIndex = vibrationIntensityDelegate.indexOfValue(ShellSettings.Settings.vibrationIntensity)
                         }
                     }
                     
@@ -70,7 +70,7 @@ Kirigami.ScrollablePage {
                     valueRole: "value"
                     
                     Component.onCompleted: dialog.parent = root
-                    onCurrentValueChanged: MobileShell.MobileShellSettings.vibrationIntensity = currentValue;
+                    onCurrentValueChanged: ShellSettings.Settings.vibrationIntensity = currentValue;
                 }
                 
                 MobileForm.FormDelegateSeparator { above: vibrationIntensityDelegate; below: vibrationDurationDelegate }
@@ -84,7 +84,7 @@ Kirigami.ScrollablePage {
                     property string mediumString: i18nc("Medium duration", "Medium")
                     property string shortString: i18nc("Short duration", "Short")
                     
-                    currentIndex: indexOfValue(MobileShell.MobileShellSettings.vibrationDuration)
+                    currentIndex: indexOfValue(ShellSettings.Settings.vibrationDuration)
                     model: ListModel {
                         // we can't use i18n with ListElement
                         Component.onCompleted: {
@@ -93,7 +93,7 @@ Kirigami.ScrollablePage {
                             append({"name": vibrationDurationDelegate.shortString, "value": 15});
                             
                             // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                            vibrationDurationDelegate.currentIndex = vibrationDurationDelegate.indexOfValue(MobileShell.MobileShellSettings.vibrationDuration)
+                            vibrationDurationDelegate.currentIndex = vibrationDurationDelegate.indexOfValue(ShellSettings.Settings.vibrationDuration)
                         }
                     }
                     
@@ -101,7 +101,7 @@ Kirigami.ScrollablePage {
                     valueRole: "value"
                     
                     Component.onCompleted: dialog.parent = root
-                    onCurrentValueChanged: MobileShell.MobileShellSettings.vibrationDuration = currentValue;
+                    onCurrentValueChanged: ShellSettings.Settings.vibrationDuration = currentValue;
                 }
             }
         }

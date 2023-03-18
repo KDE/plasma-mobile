@@ -15,7 +15,6 @@ import org.kde.plasma.components 3.0 as PC3
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 PC3.RoundButton {

@@ -11,7 +11,7 @@ import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.13 as Kirigami
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 /**
@@ -143,7 +143,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 // no-animation mode transition
                 Transition {
                     from: "closed"
-                    enabled: !MobileShell.MobileShellSettings.animationsEnabled
+                    enabled: !ShellSettings.Settings.animationsEnabled
                     SequentialAnimation {
                         ScriptAction {
                             script: {
@@ -177,7 +177,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 // full animation transition
                 Transition {
                     from: "closed"
-                    enabled: MobileShell.MobileShellSettings.animationsEnabled
+                    enabled: ShellSettings.Settings.animationsEnabled
                     SequentialAnimation {
                         ScriptAction {
                             script: { 
