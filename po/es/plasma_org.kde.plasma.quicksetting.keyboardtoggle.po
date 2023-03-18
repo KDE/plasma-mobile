@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2022-12-21 01:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Virtual Keyboard"
 msgstr "Teclado virtual"
 
-#: contents/ui/main.qml:14
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "On"
 msgstr "Activado"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Off"
 msgstr "Desactivado"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Tap to open settings"
 msgstr "Toque para abrir las preferencias"

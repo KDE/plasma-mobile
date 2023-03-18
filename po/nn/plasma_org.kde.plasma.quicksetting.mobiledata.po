@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2023-02-23 17:46+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,32 +19,32 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: contents/ui/main.qml:10
+#: contents/ui/main.qml:11
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobildata"
 
-#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#: contents/ui/main.qml:15 contents/ui/main.qml:23
 #, kde-format
 msgid "Not Available"
 msgstr "Ikkje tilgjengeleg"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "APN needs to be configured in the settings"
 msgstr "APN må setjast opp i innstillingane"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "On"
 msgstr "På"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "Off"
 msgstr "Av"
 
-#: contents/ui/main.qml:20
+#: contents/ui/main.qml:21
 #, kde-format
 msgid "No SIM inserted"
 msgstr "Manglar SIM-kort"

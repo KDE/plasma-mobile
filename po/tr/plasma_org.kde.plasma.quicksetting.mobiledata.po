@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2023-03-14 13:06+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -17,32 +17,32 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: contents/ui/main.qml:10
+#: contents/ui/main.qml:11
 #, kde-format
 msgid "Mobile Data"
 msgstr "Taşınabilir Veri"
 
-#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#: contents/ui/main.qml:15 contents/ui/main.qml:23
 #, kde-format
 msgid "Not Available"
 msgstr "Kullanılamıyor"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "APN needs to be configured in the settings"
 msgstr "Ayarlarda erişim noktası adının yapılandırılması gerekiyor"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "On"
 msgstr "Açık"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "Off"
 msgstr "Kapalı"
 
-#: contents/ui/main.qml:20
+#: contents/ui/main.qml:21
 #, kde-format
 msgid "No SIM inserted"
 msgstr "Takılı SIM yok"

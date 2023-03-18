@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-12-28 08:46+0100\n"
+"PO-Revision-Date: 2023-03-17 05:25+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -119,22 +119,22 @@ msgid "Mode when opening from the top right."
 msgstr "ზედა მარჯვენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
-#, fuzzy, kde-format
-#| msgid "Customize the order of quick settings in the pull-down panel."
+#, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr "ჩამოსაწევ პანელში ნაჩვენები სწრაფი პარამეტრების მიმდევრობის მორგება."
+msgstr ""
+"ჩამოსაწევ პანელში ნაჩვენები სწრაფი პარამეტრების მიმდევრობის მორგება და "
+"დამალვა."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "სწრაფი მორგება"
+msgstr "სწრაფი პარამეტრები გამორთულია"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "ადრე გამორთული სწრაფი პარამეტრების თავიდან ჩართვა."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format

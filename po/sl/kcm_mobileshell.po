@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-12-25 09:01+0100\n"
+"PO-Revision-Date: 2023-03-17 21:47+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -119,22 +119,20 @@ msgid "Mode when opening from the top right."
 msgstr "Način z odpiranjem zgoraj desno."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
-#, fuzzy, kde-format
-#| msgid "Customize the order of quick settings in the pull-down panel."
+#, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr "Prilagodi vrstni red hitrih nastavitev v pogovornem oknu."
+msgstr "Prilagodi vrstni red hitrih nastavitev v spustni plošči in jih skrij."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Hitre nastavitve"
+msgstr "Onemogočene hitre nastavitve"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Ponovno omogoči prej onemogočene hitre nastavitve."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format

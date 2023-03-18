@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 02:33+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2023-02-23 19:21+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -40,12 +40,12 @@ msgstr "Kopier adresse"
 msgid "Properties"
 msgstr "Eigenskapar"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "On"
 msgstr "På"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "Off"
 msgstr "Av"
@@ -55,7 +55,7 @@ msgstr "Av"
 msgid "SIM Locked"
 msgstr "Sim låst"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
 msgid "%1%"
 msgstr "%1 %"
@@ -292,12 +292,3 @@ msgstr "%1 minutt att"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 time att"
-
-#~ msgid "Audio"
-#~ msgstr "Lyd"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Høgare lyd"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Lågare lyd"

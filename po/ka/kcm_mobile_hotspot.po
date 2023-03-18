@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-09-15 10:30+0200\n"
+"PO-Revision-Date: 2023-03-17 05:23+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/ui/main.qml:42
 #, kde-format
@@ -26,19 +26,17 @@ msgstr "ჰოტსპოტი"
 #: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
-msgstr ""
+msgstr "ჩართულია ჰოტსპოტი, თუ არა."
 
 #: package/contents/ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "ჰოტსპოტი"
+msgstr "ჰოტსპოტის SSID"
 
 #: package/contents/ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "პაროლი:"
+msgstr "ჰოტსპოტის პაროლი"
 
 #~ msgid "Enabled:"
 #~ msgstr "ჩართულია:"

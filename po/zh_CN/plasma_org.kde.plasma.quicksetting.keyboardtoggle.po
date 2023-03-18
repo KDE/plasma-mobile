@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,22 +18,22 @@ msgstr ""
 "quicksetting.keyboardtoggle.pot\n"
 "X-Crowdin-File-ID: 41307\n"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Virtual Keyboard"
 msgstr "虚拟键盘"
 
-#: contents/ui/main.qml:14
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "On"
 msgstr "开"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Off"
 msgstr "关"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Tap to open settings"
 msgstr "点击打开设置"

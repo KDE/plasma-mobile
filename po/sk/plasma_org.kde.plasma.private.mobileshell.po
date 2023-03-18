@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 02:33+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2023-03-12 08:40+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -36,12 +36,12 @@ msgstr "Kopírovať umiestnenie"
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "On"
 msgstr "Zapnuté"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "Off"
 msgstr "Vypnuté"
@@ -51,7 +51,7 @@ msgstr "Vypnuté"
 msgid "SIM Locked"
 msgstr ""
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

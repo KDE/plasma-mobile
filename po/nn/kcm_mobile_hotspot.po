@@ -22,7 +22,7 @@ msgstr ""
 #: package/contents/ui/main.qml:42
 #, kde-format
 msgid "Hotspot"
-msgstr ""
+msgstr "Trådlaussone"
 
 #: package/contents/ui/main.qml:43
 #, kde-format
@@ -39,12 +39,3 @@ msgstr ""
 #| msgid "Password:"
 msgid "Hotspot Password"
 msgstr "Passord:"
-
-#~ msgid "Enabled:"
-#~ msgstr "På:"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Save"
-#~ msgstr "Lagra"

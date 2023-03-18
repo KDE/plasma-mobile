@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-17 02:33+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2022-12-24 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -40,12 +40,12 @@ msgstr "Copiar ubicación"
 msgid "Properties"
 msgstr "Propiedades"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "On"
 msgstr "Activado"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
 #, kde-format
 msgid "Off"
 msgstr "Desactivado"
@@ -55,7 +55,7 @@ msgstr "Desactivado"
 msgid "SIM Locked"
 msgstr "SIM bloqueada"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
 msgid "%1%"
 msgstr "%1%"

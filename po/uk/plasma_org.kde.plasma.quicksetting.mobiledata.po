@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2022-12-20 11:27+0200\n"
 "Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -18,32 +18,32 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: contents/ui/main.qml:10
+#: contents/ui/main.qml:11
 #, kde-format
 msgid "Mobile Data"
 msgstr "Мобільні дані"
 
-#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#: contents/ui/main.qml:15 contents/ui/main.qml:23
 #, kde-format
 msgid "Not Available"
 msgstr "Немає доступу"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:17
 #, kde-format
 msgid "APN needs to be configured in the settings"
 msgstr "Слід налаштувати APN у параметрах"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "On"
 msgstr "Увімкнено"
 
-#: contents/ui/main.qml:18
+#: contents/ui/main.qml:19
 #, kde-format
 msgid "Off"
 msgstr "Вимкнено"
 
-#: contents/ui/main.qml:20
+#: contents/ui/main.qml:21
 #, kde-format
 msgid "No SIM inserted"
 msgstr "Не вставлено SIM-картки"

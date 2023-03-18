@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-03-18 02:34+0000\n"
 "PO-Revision-Date: 2022-12-21 12:26+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Virtual Keyboard"
 msgstr "Tastiera virtuale"
 
-#: contents/ui/main.qml:14
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "On"
 msgstr "On"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Off"
 msgstr "Off"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Tap to open settings"
 msgstr "Tocca per aprire le impostazioni"
