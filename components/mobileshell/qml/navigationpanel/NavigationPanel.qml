@@ -25,9 +25,6 @@ Item {
     property color backgroundColor
     property var foregroundColorGroup
     
-    property bool dragGestureEnabled: false
-    property var taskSwitcher
-    
     property NavigationPanelAction leftAction
     property NavigationPanelAction middleAction
     property NavigationPanelAction rightAction
@@ -36,7 +33,7 @@ Item {
     property NavigationPanelAction rightCornerAction
     
     DropShadow {
-        anchors.fill: mouseArea
+        anchors.fill: root
         visible: shadow
         cached: true
         horizontalOffset: 0
@@ -46,148 +43,73 @@ Item {
         color: Qt.rgba(0,0,0,0.8)
         source: icons
     }
-    
-    MouseArea {
-        id: mouseArea
+        
+    Item {
+        id: icons
         anchors.fill: parent
-        drag.filterChildren: true
-        
-        // drag gesture
-        property int oldMouseY: 0
-        property int startMouseY: 0
-        property int oldMouseX: 0
-        property int startMouseX: 0
-        property bool opening: false
-        
-        property NavigationPanelButton activeButton
 
-        Components.HapticsEffectLoader {
-            id: haptics
-        }
-        
-        onPressed: mouse => {
-            startMouseX = oldMouseX = mouse.y;
-            startMouseY = oldMouseY = mouse.y;
-            activeButton = icons.childAt(mouse.x, mouse.y);
-            if (activeButton && activeButton.enabled) {
-                haptics.buttonVibrate();
-            }
-        }
-        
-        onPositionChanged: mouse => {
-            let newButton = icons.childAt(mouse.x, mouse.y);
-            if (newButton != activeButton) {
-                activeButton = null;
-            }
-            
-            if (root.dragGestureEnabled) {
-                if (!opening && Math.abs(startMouseY - oldMouseY) < root.height) {
-                    oldMouseY = mouse.y;
-                    return;
-                } else if (mouseArea.pressed) {
-                    opening = true;
-                }
+        property real buttonLength: 0
 
-                if (root.taskSwitcher.visible) {
-                    // update task switcher drag
-                    let offsetY = (mouse.y - oldMouseY) * 0.5; // we want to make the gesture take a longer swipe than it being pixel perfect
-                    let offsetX = (mouse.x - oldMouseX) * 0.7; // we want to make the gesture not too hard to swipe, but not too easy
-                    taskSwitcher.taskSwitcherState.yPosition = Math.max(0, taskSwitcher.taskSwitcherState.yPosition - offsetY);
-                    taskSwitcher.taskSwitcherState.xPosition -= offsetX;
-                }
-
-                if (!root.taskSwitcher.visible && Math.abs(startMouseY - mouse.y) > PlasmaCore.Units.gridUnit && taskSwitcher.tasksCount) {
-                    // start task switcher gesture
-                    activeButton = null;
-                    root.taskSwitcher.show(false);
-                } else if (taskSwitcher.tasksCount === 0) { // no tasks, let's scroll up the homescreen instead
-                    MobileShellState.HomeScreenControls.requestRelativeScroll(Qt.point(mouse.x - oldMouseX, mouse.y - oldMouseY));
-                }
-                
-                oldMouseY = mouse.y;
-                oldMouseX = mouse.x;
-            }
-        }
-        
-        onReleased: {
-            if (activeButton) {
-                activeButton.clicked();
-            } else if (root.dragGestureEnabled && taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
-                taskSwitcher.taskSwitcherState.updateState();
-            }
-        }
-        
-        Item {
-            id: icons
+        // background colour
+        Rectangle {
             anchors.fill: parent
+            color: root.backgroundColor
+        }
 
-            property real buttonLength: 0
-
-            // background colour
-            Rectangle {
-                anchors.fill: parent
-                color: root.backgroundColor
-            }
-
-            // button row (anchors provided by state)
-            NavigationPanelButton {
-                id: leftButton
-                visible: root.leftAction.visible
-                mouseArea: mouseArea
-                colorGroup: root.foregroundColorGroup
-                enabled: root.leftAction.enabled
-                iconSizeFactor: root.leftAction.iconSizeFactor
-                iconSource: root.leftAction.iconSource
-                onClicked: {
-                    if (enabled) {
-                        root.leftAction.triggered();
-                    }
+        // button row (anchors provided by state)
+        NavigationPanelButton {
+            id: leftButton
+            visible: root.leftAction.visible
+            colorGroup: root.foregroundColorGroup
+            enabled: root.leftAction.enabled
+            iconSizeFactor: root.leftAction.iconSizeFactor
+            iconSource: root.leftAction.iconSource
+            onClicked: {
+                if (enabled) {
+                    root.leftAction.triggered();
                 }
             }
+        }
 
-            NavigationPanelButton {
-                id: middleButton
-                anchors.centerIn: parent
-                visible: root.middleAction.visible
-                mouseArea: mouseArea
-                colorGroup: root.foregroundColorGroup
-                enabled: root.middleAction.enabled
-                iconSizeFactor: root.middleAction.iconSizeFactor
-                iconSource: root.middleAction.iconSource
-                onClicked: {
-                    if (enabled) {
-                        root.middleAction.triggered();
-                    }
+        NavigationPanelButton {
+            id: middleButton
+            anchors.centerIn: parent
+            visible: root.middleAction.visible
+            colorGroup: root.foregroundColorGroup
+            enabled: root.middleAction.enabled
+            iconSizeFactor: root.middleAction.iconSizeFactor
+            iconSource: root.middleAction.iconSource
+            onClicked: {
+                if (enabled) {
+                    root.middleAction.triggered();
                 }
             }
+        }
 
-            NavigationPanelButton {
-                id: rightButton
-                visible: root.rightAction.visible
-                mouseArea: mouseArea
-                colorGroup: root.foregroundColorGroup
-                enabled: root.rightAction.enabled
-                iconSizeFactor: root.rightAction.iconSizeFactor
-                iconSource: root.rightAction.iconSource
-                onClicked: {
-                    if (enabled) {
-                        root.rightAction.triggered();
-                    }
+        NavigationPanelButton {
+            id: rightButton
+            visible: root.rightAction.visible
+            colorGroup: root.foregroundColorGroup
+            enabled: root.rightAction.enabled
+            iconSizeFactor: root.rightAction.iconSizeFactor
+            iconSource: root.rightAction.iconSource
+            onClicked: {
+                if (enabled) {
+                    root.rightAction.triggered();
                 }
             }
-            
-            NavigationPanelButton {
-                id: rightCornerButton
-                visible: root.rightCornerAction.visible
-                mouseArea: mouseArea
-                colorGroup: root.foregroundColorGroup
-                enabled: root.rightCornerAction.enabled
-                iconSizeFactor: root.rightCornerAction.iconSizeFactor
-                iconSource: root.rightCornerAction.iconSource
-                onClicked: {
-                    if (enabled) {
-                        root.rightCornerAction.triggered();
-                    }
+        }
+
+        NavigationPanelButton {
+            id: rightCornerButton
+            visible: root.rightCornerAction.visible
+            colorGroup: root.foregroundColorGroup
+            enabled: root.rightCornerAction.enabled
+            iconSizeFactor: root.rightCornerAction.iconSizeFactor
+            iconSource: root.rightCornerAction.iconSource
+            onClicked: {
+                if (enabled) {
+                    root.rightCornerAction.triggered();
                 }
             }
         }

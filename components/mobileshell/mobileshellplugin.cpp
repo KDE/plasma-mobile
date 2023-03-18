@@ -75,7 +75,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("homescreen/HomeScreen.qml"), uri, 1, 0, "HomeScreen");
 
     // /navigationpanel
-    qmlRegisterType(resolvePath("navigationpanel/NavigationGestureArea.qml"), uri, 1, 0, "NavigationGestureArea");
     qmlRegisterType(resolvePath("navigationpanel/NavigationPanel.qml"), uri, 1, 0, "NavigationPanel");
     qmlRegisterType(resolvePath("navigationpanel/NavigationPanelAction.qml"), uri, 1, 0, "NavigationPanelAction");
 

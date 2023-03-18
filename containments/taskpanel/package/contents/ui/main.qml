@@ -31,8 +31,8 @@ PlasmaCore.ColorScope {
         target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
         property: "visibilityMode"
         // 0 - VisibilityMode.NormalPanel
-        // 3 - VisibilityMode.WindowsGoBelow
-        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 3
+        // 2 - VisibilityMode.LetWindowsCover HACK: TODO one day we make delete the panel component instead of making it invisible in gesture-only mode
+        value: MobileShell.MobileShellSettings.navigationPanelEnabled ? 0 : 2
     }
 
     // we have the following scenarios:
@@ -43,14 +43,12 @@ PlasmaCore.ColorScope {
     readonly property bool isInLandscapeNavPanelMode: inLandscape && MobileShell.MobileShellSettings.navigationPanelEnabled
 
     readonly property real navigationPanelHeight: PlasmaCore.Units.gridUnit * 2
-    readonly property real gesturePanelHeight: 8
 
-    readonly property real intendedWindowThickness: MobileShell.MobileShellSettings.navigationPanelEnabled ? navigationPanelHeight : gesturePanelHeight
+    readonly property real intendedWindowThickness: navigationPanelHeight
     readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
     readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? MobileShellState.TopPanelControls.panelHeight : 0; // offset for top panel
     readonly property int intendedWindowLocation: isInLandscapeNavPanelMode ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
-    onIntendedWindowThicknessChanged: plasmoid.Window.window.thickness = intendedWindowThickness
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
     onIntendedWindowOffsetChanged: plasmoid.Window.window.offset = intendedWindowOffset
     onIntendedWindowLocationChanged: locationChangeTimer.restart()
@@ -78,10 +76,12 @@ PlasmaCore.ColorScope {
 
     function setWindowProperties() {
         // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
-        plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
-        plasmoid.Window.window.offset = intendedWindowOffset;
-        plasmoid.Window.window.thickness = intendedWindowThickness;
-        plasmoid.Window.window.location = intendedWindowLocation;
+        if (plasmoid) {
+            plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
+            plasmoid.Window.window.offset = intendedWindowOffset;
+            plasmoid.Window.window.thickness = navigationPanelHeight;
+            plasmoid.Window.window.location = intendedWindowLocation;
+        }
     }
 
     Connections {
@@ -138,24 +138,13 @@ PlasmaCore.ColorScope {
     // contrasting colour
     colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
 
-    // bottom navigation panel component
-    Component {
-        id: navigationPanel
-        NavigationPanelComponent {
-            opaqueBar: root.opaqueBar
-        }
-    }
-
-    // bottom navigation gesture area component
-    Component {
-        id: navigationGesture 
-        MobileShell.NavigationGestureArea {}
-    }
-
     // load appropriate system navigation component
     Loader {
         id: navigationLoader
+        active: MobileShell.MobileShellSettings.navigationPanelEnabled
         anchors.fill: parent
-        sourceComponent: MobileShell.MobileShellSettings.navigationPanelEnabled ? navigationPanel : navigationGesture
+        sourceComponent: NavigationPanelComponent {
+            opaqueBar: root.opaqueBar
+        }
     }
 }

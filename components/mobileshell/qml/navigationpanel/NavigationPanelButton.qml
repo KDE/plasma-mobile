@@ -5,25 +5,22 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
-Item {
+Controls.AbstractButton {
     id: button
     width: Math.min(parent.width, parent.height)
     height: width
 
-    property MouseArea mouseArea
-    readonly property bool pressed: mouseArea.pressed && mouseArea.activeButton == button
     property double iconSizeFactor: 1
     property alias iconSource: icon.source
     property alias colorGroup: icon.colorGroup
     
-    signal clicked()
-
     Rectangle {
         id: rect
         radius: height/2
@@ -64,6 +61,7 @@ Item {
             }
         }
     }
+
     PlasmaCore.IconItem {
         id: icon
         readonly property real side: Math.min(button.width, button.height)
@@ -72,6 +70,5 @@ Item {
             margins: Math.round((side - side * iconSizeFactor * 0.6) / 2)
         }
         colorGroup: PlasmaCore.ColorScope.colorGroup
-        //enabled: button.enabled && button.clickable
     }
 }

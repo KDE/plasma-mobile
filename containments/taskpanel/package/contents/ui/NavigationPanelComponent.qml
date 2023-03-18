@@ -26,10 +26,6 @@ MobileShell.NavigationPanel {
     foregroundColorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
     shadow: !opaqueBar
         
-    // do not enable drag gesture when task switcher is already open
-    // also don't disable drag gesture mid-drag
-    dragGestureEnabled: false // !root.taskSwitcher.visible || root.taskSwitcher.taskSwitcherState.currentlyBeingOpened
-    
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
     }
