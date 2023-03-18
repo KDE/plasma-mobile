@@ -18,7 +18,7 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
 #include "timezonemodel.h"
 
@@ -33,7 +33,7 @@ class TimeSettingsPrivate;
  * This is done from one class in order to simplify the code. You can export any QObject-based
  * class through qmlRegisterType(), however.
  */
-class TimeSettings : public KQuickAddons::ConfigModule
+class TimeSettings : public KQuickConfigModule
 {
     Q_OBJECT
 

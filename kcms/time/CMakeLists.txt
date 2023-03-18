@@ -16,7 +16,7 @@ target_link_libraries(kcm_mobile_time
     Qt::Quick
     Qt::Qml
     Qt::DBus
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
     KF6::ConfigCore
     KF6::I18n
 )

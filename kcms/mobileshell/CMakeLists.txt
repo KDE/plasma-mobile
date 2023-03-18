@@ -8,7 +8,7 @@ target_link_libraries(kcm_mobileshell
     KF6::CoreAddons
     KF6::KCMUtils
     KF6::I18n
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
 )
 
 kcmutils_generate_desktop_file(kcm_mobileshell)

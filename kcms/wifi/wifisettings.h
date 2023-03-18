@@ -7,9 +7,9 @@
 #ifndef WIFISETTINGS_H
 #define WIFISETTINGS_H
 
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
-class WifiSettings : public KQuickAddons::ConfigModule
+class WifiSettings : public KQuickConfigModule
 {
     Q_OBJECT
 public:

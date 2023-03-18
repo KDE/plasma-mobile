@@ -5,7 +5,7 @@
 */
 
 #include "languagemodel.h"
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
 #include <QList>
 #include <QString>
@@ -13,7 +13,7 @@
 #ifndef VIRTUALKEYBOARD_H
 #define VIRTUALKEYBOARD_H
 
-class VirtualKeyboard : public KQuickAddons::ConfigModule
+class VirtualKeyboard : public KQuickConfigModule
 {
     Q_OBJECT
     Q_PROPERTY(LanguageModel *languageModel MEMBER m_langModel CONSTANT)

@@ -7,12 +7,12 @@
 #include "distroinfo.h"
 #include "hardwareinfo.h"
 #include "softwareinfo.h"
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
 #ifndef INFO_H
 #define INFO_H
 
-class Info : public KQuickAddons::ConfigModule
+class Info : public KQuickConfigModule
 {
     Q_OBJECT
 

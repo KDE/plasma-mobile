@@ -10,7 +10,7 @@ target_link_libraries(kcm_mobile_hotspot
     Qt::Qml
     KF6::I18n
     KF6::CoreAddons
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
 )
 
 kpackage_install_package(package kcm_mobile_hotspot kcms)

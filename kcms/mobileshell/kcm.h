@@ -6,10 +6,10 @@
 #pragma once
 
 #include <KConfigGroup>
-#include <KQuickAddons/ManagedConfigModule>
+#include <KQuickManagedConfigModule>
 #include <KSharedConfig>
 
-class KCMMobileShell : public KQuickAddons::ManagedConfigModule
+class KCMMobileShell : public KQuickManagedConfigModule
 {
     Q_OBJECT
 

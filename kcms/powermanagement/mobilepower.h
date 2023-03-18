@@ -5,11 +5,11 @@
 
 #include "batterymodel.h"
 
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 #include <KSharedConfig>
 #include <memory>
 
-class MobilePower : public KQuickAddons::ConfigModule
+class MobilePower : public KQuickConfigModule
 {
     Q_OBJECT
     Q_PROPERTY(BatteryModel *batteries READ batteries CONSTANT)

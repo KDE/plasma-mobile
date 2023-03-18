@@ -46,7 +46,7 @@ const QMap<int, qreal> idxToMinutes = {
 };
 
 MobilePower::MobilePower(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickAddons::ConfigModule(parent, metaData, args)
+    : KQuickConfigModule(parent, metaData, args)
     , m_batteries{new BatteryModel(this)}
     , m_profilesConfig{KSharedConfig::openConfig("powermanagementprofilesrc", KConfig::SimpleConfig | KConfig::CascadeConfig)}
 {
@@ -54,7 +54,7 @@ MobilePower::MobilePower(QObject *parent, const KPluginMetaData &metaData, const
     qmlRegisterUncreatableType<Solid::Battery>("org.kde.kcm.power.mobile.private", 1, 0, "Battery", "");
     qmlRegisterType<StatisticsProvider>("org.kde.kcm.power.mobile.private", 1, 0, "HistoryModel");
 
-    setButtons(KQuickAddons::ConfigModule::NoAdditionalButton);
+    setButtons(KQuickConfigModule::NoAdditionalButton);
     load();
 }
 

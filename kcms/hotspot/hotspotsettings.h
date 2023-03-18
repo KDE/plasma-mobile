@@ -7,9 +7,9 @@
 #ifndef HOTSPOTSETTINGS_H
 #define HOTSPOTSETTINGS_H
 
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
-class HotspotSettings : public KQuickAddons::ConfigModule
+class HotspotSettings : public KQuickConfigModule
 {
     Q_OBJECT
 public:

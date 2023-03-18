@@ -19,7 +19,7 @@ target_link_libraries(kcm_mobile_onscreenkeyboard
     Qt::Core
     KF6::CoreAddons
     KF6::I18n
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
     KF6::ConfigCore
     PkgConfig::GIO
     PkgConfig::GOBJECT

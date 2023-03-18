@@ -15,7 +15,7 @@ target_link_libraries(kcm_mobile_wifi
     KF6::I18n
     KF6::NetworkManagerQt
     KF6::Plasma
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
 )
 
 kpackage_install_package(package kcm_mobile_wifi kcms)

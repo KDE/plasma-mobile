@@ -34,7 +34,7 @@
 K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "kcm_mobile_time.json", registerPlugin<TimeSettings>();)
 
 TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickAddons::ConfigModule(parent, metaData, args)
+    : KQuickConfigModule(parent, metaData, args)
     , m_useNtp(true)
 {
     qDebug() << "time settings init";

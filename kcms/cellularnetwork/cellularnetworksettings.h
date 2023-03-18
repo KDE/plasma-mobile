@@ -9,7 +9,7 @@
 
 #include <QSharedPointer>
 
-#include <KQuickAddons/ConfigModule>
+#include <KQuickConfigModule>
 
 #include "mobileproviders.h"
 #include "modem.h"
@@ -59,7 +59,7 @@ private:
     QString m_message;
 };
 
-class CellularNetworkSettings : public KQuickAddons::ConfigModule
+class CellularNetworkSettings : public KQuickConfigModule
 {
     Q_OBJECT
     Q_PROPERTY(bool modemFound READ modemFound NOTIFY modemFoundChanged)

@@ -22,7 +22,7 @@ target_link_libraries(kcm_cellular_network
     KF6::I18n
     KF6::NetworkManagerQt
     KF6::ModemManagerQt
-    KF6::QuickAddons
+    KF6::KCMUtilsQuick
 )
 
 kcmutils_generate_desktop_file(kcm_cellular_network)
