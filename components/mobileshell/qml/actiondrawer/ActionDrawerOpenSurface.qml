@@ -48,7 +48,7 @@ MouseArea {
         
         // if the user swiped from the top left, otherwise it's from the top right
         if (mouse.x < root.width / 2) {
-            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settingss.Pinned;
+            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settings.Pinned;
         } else {
             actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopRightMode == ShellSettings.Settings.Pinned;
         }
