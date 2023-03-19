@@ -176,7 +176,6 @@ Item {
         
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            console.log('EVAL');
             if (!WindowPlugin.WindowMaximizedTracker.showingWindow || WindowPlugin.WindowUtil.activeWindowIsShell) {
                 itemContainer.zoomIn();
             } else {

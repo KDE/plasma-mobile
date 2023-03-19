@@ -41,9 +41,6 @@ PlasmaCore.IconItem {
     source: icon
     colorGroup: PlasmaCore.ColorScope.colorGroup
 
-    Layout.fillHeight: true
-    Layout.preferredWidth: height
-
     PlasmaComponents.BusyIndicator {
         id: connectingIndicator
 

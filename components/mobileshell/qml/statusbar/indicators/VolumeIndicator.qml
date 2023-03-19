@@ -18,8 +18,6 @@ PlasmaCore.IconItem {
     id: paIcon
     readonly property var provider: DataProviders.AudioInfo {}
     
-    Layout.fillHeight: true
-    Layout.preferredWidth: height
     source: provider.icon
 
     colorGroup: PlasmaCore.ColorScope.colorGroup

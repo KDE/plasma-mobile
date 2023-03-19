@@ -9,7 +9,7 @@ QtObject {
     property SinkModel paSinkModel: SinkModel {}
 
     // whether the audio icon should be visible in the status bar
-    readonly property bool isVisible: paSinkModel.preferredSink && paSinkModel.preferredSink.muted
+    readonly property bool isVisible: paSinkModel.preferredSink
 
     // the icon that should be displayed in the status bar
     readonly property string icon: paSinkModel.preferredSink && !isDummyOutput(paSinkModel.preferredSink)

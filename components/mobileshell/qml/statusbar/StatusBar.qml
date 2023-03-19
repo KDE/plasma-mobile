@@ -54,7 +54,6 @@ Item {
     property bool disableSystemTray: false
     
     property alias colorScopeColor: icons.backgroundColor
-    property alias applets: appletIconsRow
     
     readonly property real textPixelSize: 11
     readonly property real smallerTextPixelSize: 9
@@ -162,15 +161,6 @@ Item {
                         }
                     }
                     
-                    // applet indicators
-                    RowLayout {
-                        id: appletIconsRow
-                        Layout.leftMargin: root.elementSpacing
-                        Layout.fillHeight: true
-                        spacing: root.elementSpacing
-                        visible: children.length > 0
-                    }
-                    
                     // system indicators
                     RowLayout {
                         id: indicators
@@ -179,25 +169,30 @@ Item {
                         spacing: root.elementSpacing
 
                         Indicators.SignalStrengthIndicator {
-                            Layout.fillHeight: true
                             showLabel: false
                             visible: root.showTime
                             internetIndicator: internetIndicatorItem
+                            Layout.fillHeight: true
+                            Layout.preferredWidth: height
                         }
                         Indicators.BluetoothIndicator { 
                             Layout.fillHeight: true
+                            Layout.preferredWidth: height
                         }
                         Indicators.InternetIndicator {
                             id: internetIndicatorItem
                             Layout.fillHeight: true
+                            Layout.preferredWidth: height
                         }
                         Indicators.VolumeIndicator { 
                             Layout.fillHeight: true
+                            Layout.preferredWidth: height
                         }
                         Indicators.BatteryIndicator {
                             spacing: root.elementSpacing
                             textPixelSize: root.textPixelSize
                             Layout.fillHeight: true
+                            Layout.preferredWidth: height
                         }
                     }
                 }

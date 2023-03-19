@@ -19,11 +19,8 @@ PlasmaCore.IconItem {
     
     readonly property var provider: DataProviders.BluetoothInfo {}
 
-    source: provider.icon
+    source: "network-bluetooth" // provider.icon
     colorGroup: PlasmaCore.ColorScope.colorGroup
 
     visible: provider.isVisible
-
-    Layout.fillHeight: true
-    Layout.preferredWidth: height
 }
