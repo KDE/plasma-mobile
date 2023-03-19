@@ -1,11 +1,10 @@
 // SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.kwin 3.0 as KWinComponents
@@ -28,7 +27,7 @@ Item {
 
         let baseY = (taskSwitcher.height / 2) - (taskSwitcherState.taskHeight / 2) - (taskSwitcherState.taskHeaderHeight / 2)
 
-        return baseY + diff / 2;
+        return baseY + diff / 2 - shellTopMargin;
     }
 
     function closeAll() {

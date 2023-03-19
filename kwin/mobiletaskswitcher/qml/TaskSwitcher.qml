@@ -2,17 +2,14 @@
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
-import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.kirigami 2.19 as Kirigami
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.kwin.private.effects 1.0
@@ -27,8 +24,8 @@ FocusScope {
     readonly property QtObject effect: KWinComponents.SceneView.effect
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
-    readonly property real topMargin: 0
-    readonly property real bottomMargin: 0
+    readonly property real topMargin: MobileShell.Constants.topPanelHeight
+    readonly property real bottomMargin: MobileShell.Constants.bottomPanelHeight
     readonly property real leftMargin: 0
     readonly property real rightMargin: 0
 
@@ -184,13 +181,13 @@ FocusScope {
 
             anchors.centerIn: parent
 
-            Kirigami.Icon {
+            PlasmaCore.IconItem {
                 id: icon
                 Layout.alignment: Qt.AlignHCenter
                 implicitWidth: PlasmaCore.Units.iconSizes.large
                 implicitHeight: PlasmaCore.Units.iconSizes.large
                 source: "window"
-                color: "white"
+                // color: "white"
             }
 
             PlasmaExtras.Heading {

@@ -1,12 +1,7 @@
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-
-import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.core 2.1 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import QtQuick
 
 Flickable {
     id: root
