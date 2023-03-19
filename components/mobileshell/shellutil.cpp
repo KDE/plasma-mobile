@@ -26,16 +26,6 @@ ShellUtil::ShellUtil(QObject *parent)
     : QObject{parent}
     , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
 {
-    m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
-
-    // watch for changes to locale config, to update 12/24 hour time
-    connect(m_localeConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
-        if (group.name() == "Locale") {
-            // we have to reparse for new changes (from system settings)
-            m_localeConfig->reparseConfiguration();
-            Q_EMIT isSystem24HourFormatChanged();
-        }
-    });
 }
 
 ShellUtil *ShellUtil::instance()
@@ -71,6 +61,20 @@ void ShellUtil::executeCommand(const QString &command)
 
 bool ShellUtil::isSystem24HourFormat()
 {
+    // only load the config watcher if this function is actually used once
+    if (!m_localeConfigWatcher) {
+        m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
+
+        // watch for changes to locale config, to update 12/24 hour time
+        connect(m_localeConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+            if (group.name() == "Locale") {
+                // we have to reparse for new changes (from system settings)
+                m_localeConfig->reparseConfiguration();
+                Q_EMIT isSystem24HourFormatChanged();
+            }
+        });
+    }
+
     KConfigGroup localeSettings = KConfigGroup(m_localeConfig, "Locale");
 
     QString timeFormat = localeSettings.readEntry("TimeFormat", QStringLiteral(FORMAT24H));
