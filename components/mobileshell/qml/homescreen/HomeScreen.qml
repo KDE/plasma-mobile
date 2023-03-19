@@ -134,35 +134,6 @@ Item {
         }
     }
     
-    TaskManager.VirtualDesktopInfo {
-        id: virtualDesktopInfo
-    }
-
-    TaskManager.ActivityInfo {
-        id: activityInfo
-    }
-
-    PlasmaCore.SortFilterModel {
-        id: visibleMaximizedWindowsModel
-        readonly property bool isWindowMaximized: count > 0
-        
-        filterRole: 'IsMinimized'
-        filterRegExp: 'false'
-        sourceModel: TaskManager.TasksModel {
-            id: tasksModel
-            filterByVirtualDesktop: true
-            filterByActivity: true
-            filterNotMaximized: true
-            filterByScreen: true
-            filterHidden: true
-
-            virtualDesktop: virtualDesktopInfo.currentDesktop
-            activity: activityInfo.currentActivity
-
-            groupMode: TaskManager.TasksModel.GroupDisabled
-        }
-    }
-    
     // homescreen visual component
     Components.BaseItem {
         id: itemContainer
@@ -205,7 +176,8 @@ Item {
         
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if (!visibleMaximizedWindowsModel.isWindowMaximized || WindowPlugin.WindowUtil.activeWindowIsShell) {
+            console.log('EVAL');
+            if (!WindowPlugin.WindowMaximizedTracker.showingWindow || WindowPlugin.WindowUtil.activeWindowIsShell) {
                 itemContainer.zoomIn();
             } else {
                 itemContainer.zoomOut();
@@ -214,14 +186,16 @@ Item {
         
         Connections {
             target: WindowPlugin.WindowUtil
+
             function onActiveWindowIsShellChanged() {
                 itemContainer.evaluateAnimChange();
             }
         }
-        
+
         Connections {
-            target: visibleMaximizedWindowsModel
-            function onIsWindowMaximizedChanged() {
+            target: WindowPlugin.WindowMaximizedTracker
+
+            function onShowingWindowChanged() {
                 itemContainer.evaluateAnimChange();
             }
         }
