@@ -46,7 +46,7 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!WindowPlugin.WindowUtil.showDesktop && !WindowPlugin.WindowUtil.allWindowsMinimized || search.isOpen) {
+        if (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow || search.isOpen) {
             // Always close action drawer
             if (MobileShellState.Shell.actionDrawerVisible) {
                 MobileShellState.Shell.closeActionDrawer();
@@ -59,11 +59,11 @@ MobileShell.HomeScreen {
 
             homescreen.page = 0;
 
-            WindowPlugin.WindowUtil.showDesktop = true;
+            WindowPlugin.WindowUtil.isShowingDesktop = true;
         } else if (homescreen.page == 0) {
             homescreen.page = 1;
         } else {
-            WindowPlugin.WindowUtil.showDesktop = false;
+            WindowPlugin.WindowUtil.isShowingDesktop = false;
             homescreen.page = 0;
         }
     }

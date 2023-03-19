@@ -7,6 +7,8 @@
 
 #include "windowutil.h"
 
+#include <KApplicationTrader>
+
 #include <QGuiApplication>
 
 constexpr int ACTIVE_WINDOW_UPDATE_INVERVAL = 0;
@@ -34,16 +36,6 @@ WindowUtil *WindowUtil::instance()
 bool WindowUtil::isShowingDesktop() const
 {
     return m_showingDesktop;
-}
-
-bool WindowUtil::allWindowsMinimized() const
-{
-    return m_allWindowsMinimized;
-}
-
-bool WindowUtil::allWindowsMinimizedExcludingShell() const
-{
-    return m_allWindowsMinimizedExcludingShell;
 }
 
 bool WindowUtil::activeWindowIsShell() const
@@ -83,6 +75,40 @@ void WindowUtil::initWayland()
         m_activeWindowTimer->start();
     });
 
+    connect(registry, &Registry::plasmaActivationFeedbackAnnounced, this, [this, registry](quint32 name, quint32 version) {
+        auto iface = registry->createPlasmaActivationFeedback(name, version, this);
+
+        connect(iface, &PlasmaActivationFeedback::activation, this, [this](PlasmaActivation *activation) {
+            connect(activation, &PlasmaActivation::applicationId, this, [this](const QString &appId) {
+                const auto servicesFound = KApplicationTrader::query([&appId](const KService::Ptr &service) {
+                    if (service->exec().isEmpty())
+                        return false;
+
+                    if (service->desktopEntryName().compare(appId, Qt::CaseInsensitive) == 0)
+                        return true;
+
+                    const auto idWithoutDesktop = QString(appId).remove(QStringLiteral(".desktop"));
+                    if (service->desktopEntryName().compare(idWithoutDesktop, Qt::CaseInsensitive) == 0)
+                        return true;
+
+                    const auto renamedFrom = service->property(QStringLiteral("X-Flatpak-RenamedFrom")).toStringList();
+                    if (renamedFrom.contains(appId, Qt::CaseInsensitive) || renamedFrom.contains(idWithoutDesktop, Qt::CaseInsensitive))
+                        return true;
+
+                    return false;
+                });
+
+                if (!servicesFound.isEmpty()) {
+                    Q_EMIT appActivationStarted(appId, servicesFound.constFirst()->icon());
+                } else {
+                    qDebug() << "WindowUtil: Could not find service" << appId;
+                }
+            });
+
+            connect(activation, &PlasmaActivation::finished, this, &WindowUtil::appActivationFinished);
+        });
+    });
+
     registry->setup();
     connection->roundtrip();
 }
@@ -98,6 +124,7 @@ void WindowUtil::updateActiveWindow()
         disconnect(m_activeWindow.data(), &PlasmaWindow::closeableChanged, this, &WindowUtil::hasCloseableActiveWindowChanged);
         disconnect(m_activeWindow.data(), &PlasmaWindow::unmapped, this, &WindowUtil::forgetActiveWindow);
     }
+
     m_activeWindow = m_windowManagement->activeWindow();
     Q_EMIT activeWindowChanged();
 
@@ -106,29 +133,6 @@ void WindowUtil::updateActiveWindow()
         connect(m_activeWindow.data(), &PlasmaWindow::unmapped, this, &WindowUtil::forgetActiveWindow);
     }
 
-    // loop through windows
-    bool newAllMinimized = true;
-    bool newAllMinimizedExcludingShell = true;
-    for (auto *w : m_windowManagement->windows()) {
-        if (!w->isMinimized() && !w->skipTaskbar() && !w->isFullscreen()) {
-            newAllMinimized = false;
-
-            if (w->appId() != QStringLiteral("org.kde.plasmashell")) {
-                newAllMinimizedExcludingShell = false;
-            }
-        }
-    }
-
-    if (newAllMinimized != m_allWindowsMinimized) {
-        m_allWindowsMinimized = newAllMinimized;
-        Q_EMIT allWindowsMinimizedChanged();
-    }
-    if (newAllMinimizedExcludingShell != m_allWindowsMinimizedExcludingShell) {
-        m_allWindowsMinimizedExcludingShell = newAllMinimizedExcludingShell;
-        Q_EMIT allWindowsMinimizedExcludingShellChanged();
-    }
-
-    // TODO: connect to closeableChanged, not needed right now as KWin doesn't provide this changeable
     Q_EMIT hasCloseableActiveWindowChanged();
 }
 
@@ -214,11 +218,12 @@ void WindowUtil::updateShowingDesktop(bool showing)
 
 void WindowUtil::updateActiveWindowIsShell()
 {
-    if (m_activeWindow) {
-        if (m_activeWindow->appId() == QStringLiteral("org.kde.plasmashell") && !m_activeWindowIsShell) {
+    auto activeWindow = m_windowManagement->activeWindow();
+    if (activeWindow) {
+        if (activeWindow->appId() == QStringLiteral("org.kde.plasmashell") && !m_activeWindowIsShell) {
             m_activeWindowIsShell = true;
             Q_EMIT activeWindowIsShellChanged();
-        } else if (m_activeWindow->appId() != QStringLiteral("org.kde.plasmashell") && m_activeWindowIsShell) {
+        } else if (activeWindow->appId() != QStringLiteral("org.kde.plasmashell") && m_activeWindowIsShell) {
             m_activeWindowIsShell = false;
             Q_EMIT activeWindowIsShellChanged();
         }

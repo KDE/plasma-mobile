@@ -44,7 +44,7 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
-        if (!plasmoid.nativeInterface.showingDesktop && !WindowPlugin.WindowUtil.allWindowsMinimized
+        if (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow
             || MobileShellState.Shell.actionDrawerVisible 
             || searchWidget.isOpen
         ) {
@@ -58,11 +58,9 @@ MobileShell.HomeScreen {
                 searchWidget.close();
             }
             
-            plasmoid.nativeInterface.showingDesktop = true;
         } else if (homescreen.homeScreenState.currentView === HomeScreenState.PageView) {
             homescreen.homeScreenState.openAppDrawer();
         } else {
-            plasmoid.nativeInterface.showingDesktop = false;
             homescreen.homeScreenState.closeAppDrawer();
         }
     }

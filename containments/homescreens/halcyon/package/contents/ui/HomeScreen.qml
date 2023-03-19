@@ -43,10 +43,10 @@ Item {
     }
 
     Connections {
-        target: WindowPlugin.WindowUtil
+        target: WindowPlugin.WindowMaximizedTracker
 
-        function onAllWindowsMinimizedChanged(){
-            if (WindowPlugin.WindowUtil.allWindowsMinimized) {
+        function onShowingWindowChanged(){
+            if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
                 swipeView.focusChild();
             }
         }

@@ -16,8 +16,9 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.notificationmanager 1.0 as NotificationManager
@@ -26,7 +27,7 @@ Item {
     id: root
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingApp: visibleMaximizedWindowsModel.count > 0
+    readonly property bool showingApp: WindowPlugin.WindowMaximizedTracker.showingWindow
     readonly property color backgroundColor: topPanel.colorScopeColor
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
@@ -90,33 +91,6 @@ Item {
     Component.onCompleted: {
         // we want to bind global volume shortcuts here
         MobileShellState.AudioProvider.bindShortcuts = true;
-    }
-    
-    TaskManager.VirtualDesktopInfo {
-        id: virtualDesktopInfo
-    }
-
-    TaskManager.ActivityInfo {
-        id: activityInfo
-    }
-
-    PlasmaCore.SortFilterModel {
-        id: visibleMaximizedWindowsModel
-        filterRole: 'IsMinimized'
-        filterRegExp: 'false'
-        sourceModel: TaskManager.TasksModel {
-            id: tasksModel
-            filterByVirtualDesktop: true
-            filterByActivity: true
-            filterNotMaximized: true
-            filterByScreen: true
-            filterHidden: true
-
-            virtualDesktop: virtualDesktopInfo.currentDesktop
-            activity: activityInfo.currentActivity
-
-            groupMode: TaskManager.TasksModel.GroupDisabled
-        }
     }
     
     // top panel component

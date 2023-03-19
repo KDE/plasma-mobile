@@ -24,16 +24,6 @@ void HomeScreen::configChanged()
     Plasma::Containment::configChanged();
 }
 
-bool HomeScreen::showingDesktop() const
-{
-    return KWindowSystem::showingDesktop();
-}
-
-void HomeScreen::setShowingDesktop(bool showingDesktop)
-{
-    KWindowSystem::setShowingDesktop(showingDesktop);
-}
-
 K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "package/metadata.json")
 
 #include "homescreen.moc"

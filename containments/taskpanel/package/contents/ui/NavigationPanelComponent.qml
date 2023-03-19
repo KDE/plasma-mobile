@@ -74,7 +74,6 @@ MobileShell.NavigationPanel {
         
         onTriggered: {
             MobileShellState.HomeScreenControls.openHomeScreen();
-            WindowPlugin.WindowUtil.allWindowsMinimizedChanged();
         }
     }
     

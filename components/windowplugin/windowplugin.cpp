@@ -7,6 +7,11 @@
 #include <QQmlContext>
 #include <QQuickItem>
 
+QUrl resolvePath(std::string str)
+{
+    return QUrl("qrc:/org/kde/plasma/private/mobileshell/windowplugin/qml/" + QString::fromStdString(str));
+}
+
 void WindowPlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mobileshell.windowplugin"));
@@ -14,4 +19,6 @@ void WindowPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType<WindowUtil>(uri, 1, 0, "WindowUtil", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return WindowUtil::instance();
     });
+
+    qmlRegisterSingletonType(resolvePath("WindowMaximizedTracker.qml"), uri, 1, 0, "WindowMaximizedTracker");
 }

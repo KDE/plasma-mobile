@@ -24,16 +24,12 @@
 /**
  * Utility class that provides useful functions related to windows and KWin+KWayland.
  *
- * TODO: Add per-screen support
- *
  * @author Devin Lin <devin@kde.org>
  **/
 class WindowUtil : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool showDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
-    Q_PROPERTY(bool allWindowsMinimized READ allWindowsMinimized NOTIFY allWindowsMinimizedChanged)
-    Q_PROPERTY(bool allWindowsMinimizedExcludingShell READ allWindowsMinimizedExcludingShell NOTIFY allWindowsMinimizedExcludingShellChanged)
+    Q_PROPERTY(bool isShowingDesktop READ isShowingDesktop WRITE requestShowingDesktop NOTIFY showingDesktopChanged)
     Q_PROPERTY(bool hasCloseableActiveWindow READ hasCloseableActiveWindow NOTIFY hasCloseableActiveWindowChanged)
     Q_PROPERTY(bool activeWindowIsShell READ activeWindowIsShell NOTIFY activeWindowIsShellChanged)
 
@@ -46,16 +42,6 @@ public:
      * are moved aside.
      */
     bool isShowingDesktop() const;
-
-    /**
-     * Whether all windows are minimized, including shell windows.
-     */
-    bool allWindowsMinimized() const;
-
-    /**
-     * Whether all windows are minimized, ignoring shell windows.
-     */
-    bool allWindowsMinimizedExcludingShell() const;
 
     /**
      * Whether the active window being shown is a shell window.
@@ -105,14 +91,21 @@ public:
     Q_INVOKABLE void unsetAllMinimizedGeometries(QQuickItem *parent);
 
 Q_SIGNALS:
+    // Emitted when a window has been opened
     void windowCreated(KWayland::Client::PlasmaWindow *window);
     void showingDesktopChanged(bool showingDesktop);
-    void allWindowsMinimizedChanged();
-    void allWindowsMinimizedExcludingShellChanged();
     void hasCloseableActiveWindowChanged();
     void activeWindowChanged();
     void activeWindowIsShellChanged();
-    void windowChanged(QString storageId); // emitted on window open or close
+
+    // Emitted on window open or close
+    void windowChanged(QString storageId);
+
+    // Emitted when an application is launched
+    void appActivationStarted(const QString &appId, const QString &iconName);
+
+    // Emitted the application has finished launching
+    void appActivationFinished();
 
 private Q_SLOTS:
     void updateActiveWindowIsShell();
@@ -129,8 +122,6 @@ private:
     QTimer *m_activeWindowTimer;
 
     bool m_showingDesktop = false;
-    bool m_allWindowsMinimized = true;
-    bool m_allWindowsMinimizedExcludingShell = true;
     bool m_activeWindowIsShell = false;
 
     QHash<QString, QList<KWayland::Client::PlasmaWindow *>> m_windows; // <storageId, window>

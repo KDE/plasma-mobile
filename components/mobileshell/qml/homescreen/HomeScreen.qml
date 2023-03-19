@@ -80,7 +80,7 @@ Item {
         target: MobileShellState.HomeScreenControls
         
         function onOpenHomeScreen() {
-            if (!WindowPlugin.WindowUtil.allWindowsMinimized) {
+            if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
             

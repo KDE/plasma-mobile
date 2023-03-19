@@ -17,7 +17,8 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 PlasmaCore.ColorScope {
     id: root
@@ -105,35 +106,8 @@ PlasmaCore.ColorScope {
 
     Component.onCompleted: setWindowProperties();
 
-    TaskManager.VirtualDesktopInfo {
-        id: virtualDesktopInfo
-    }
-
-    TaskManager.ActivityInfo {
-        id: activityInfo
-    }
-
-    PlasmaCore.SortFilterModel {
-        id: visibleMaximizedWindowsModel
-        filterRole: 'IsMinimized'
-        filterRegExp: 'false'
-        sourceModel: TaskManager.TasksModel {
-            id: tasksModel
-            filterByVirtualDesktop: true
-            filterByActivity: true
-            filterNotMaximized: true
-            filterByScreen: true
-            filterHidden: true
-
-            virtualDesktop: virtualDesktopInfo.currentDesktop
-            activity: activityInfo.currentActivity
-
-            groupMode: TaskManager.TasksModel.GroupDisabled
-        }
-    }
-
     // only opaque if there are no maximized windows on this screen
-    readonly property bool opaqueBar: visibleMaximizedWindowsModel.count > 0
+    readonly property bool opaqueBar: WindowPlugin.WindowMaximizedTracker.showingWindow
 
     // contrasting colour
     colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup

@@ -1,11 +1,12 @@
 # SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-add_library(windowplugin)
-target_sources(windowplugin PRIVATE
+set(windowplugin_SRCS
     windowplugin.cpp
     windowutil.cpp
 )
+qt_add_resources(RESOURCES resources.qrc)
+add_library(windowplugin SHARED ${windowplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(windowplugin
     Qt::Qml
