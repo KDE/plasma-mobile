@@ -10,7 +10,6 @@ set(mobileshellplugin_SRCS
     components/direction.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
-    taskswitcher/displaysmodel.cpp
 )
 qt_add_resources(RESOURCES resources.qrc)
 add_library(mobileshellplugin SHARED ${mobileshellplugin_SRCS} ${RESOURCES})

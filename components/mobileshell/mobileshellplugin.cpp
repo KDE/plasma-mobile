@@ -14,8 +14,6 @@
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
 
-#include "taskswitcher/displaysmodel.h"
-
 #include "shellutil.h"
 
 QUrl resolvePath(std::string str)
@@ -37,9 +35,6 @@ void MobileShellPlugin::registerTypes(const char *uri)
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");
     qmlRegisterType<NotificationFileMenu>(uri, 1, 0, "NotificationFileMenu");
-
-    // taskswitcher
-    qmlRegisterType<DisplaysModel>(uri, 1, 0, "DisplaysModel");
 
     // qml modules
 
