@@ -34,7 +34,9 @@ Item {
     }
     
     onScreenBrightnessChanged: {
-        brightnessSlider.value = root.screenBrightness
+        if (!brightnessSlider.pressed && !brightnessTimer.running) {
+            brightnessSlider.value = root.screenBrightness;
+        }
         
         if (!disableBrightnessUpdate) {
             var service = pmSource.serviceForSource("PowerDevil");
@@ -61,6 +63,22 @@ Item {
         }
         onDataChanged: root.updateBrightnessUI()
     }
+
+    // we want to smoothen the slider so it doesn't jump immediately after you let go
+    Timer {
+        id: brightnessTimer
+        interval: 500
+        onTriggered: {
+            brightnessSlider.value = root.screenBrightness;
+        }
+    }
+
+    // send brightness events a maximum of 5 times a second
+    Timer {
+        id: sendEventTimer
+        interval: 200
+        onTriggered: root.screenBrightness = brightnessSlider.value
+    }
     
     RowLayout {
         id: brightnessRow
@@ -86,7 +104,20 @@ Item {
             to: root.maximumScreenBrightness
             value: root.screenBrightness
             
-            onMoved: root.screenBrightness = value;
+            onMoved: {
+                if (!sendEventTimer.running) {
+                    root.screenBrightness = value;
+                    sendEventTimer.restart();
+                }
+            }
+
+            onPressedChanged: {
+                if (!pressed) {
+                    brightnessTimer.restart();
+                } else {
+                    brightnessTimer.stop();
+                }
+            }
         }
         
         PlasmaCore.IconItem {
