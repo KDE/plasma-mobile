@@ -31,6 +31,7 @@ Name[tr]=Plasma Mobile (Geliştirme)
 Name[uk]=Мобільна Плазма (версія у розробці)
 Name[x-test]=xxPlasma Mobile (Development)xx
 Name[zh_CN]=Plasma Mobile (开发)
+Name[zh_TW]=Plasma 行動（開發）
 Comment=Plasma Mobile by KDE
 Comment[az]=KDE Plasma Mobil
 Comment[ca]=Plasma Mobile, creat per la comunitat KDE
