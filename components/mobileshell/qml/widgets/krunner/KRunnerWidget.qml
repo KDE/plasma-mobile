@@ -15,7 +15,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-// import org.kde.milou 0.1 as Milou
+import org.kde.milou 0.1 as Milou
 import org.kde.kirigami 2.19 as Kirigami
 
 import "../../components" as Components
@@ -58,6 +58,9 @@ Item {
         anim.to = closedContentY;
         anim.restart();
     }
+
+    // emitted when an item on the ListView is triggered
+    signal actionTriggered()
     
     readonly property real closedContentY: PlasmaCore.Units.gridUnit * 5
     readonly property real openedContentY: 0
@@ -184,108 +187,110 @@ Item {
                 
                 Layout.fillWidth: true
 
-//                 Milou.ResultsListView {
-//                     id: listView
-//                     queryString: queryField.text
-//                     highlight: null
-//                     clip: true
-//                     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
-//
-//                     onActivated: queryField.text = "";
-//                     onUpdateQueryString: {
-//                         queryField.text = text
-//                         queryField.cursorPosition = cursorPosition
-//                     }
-//
-//                     delegate: MouseArea {
-//                         id: delegate
-//                         height: rowLayout.height
-//                         width: listView.width
-//
-//                         onClicked: {
-//                             listView.currentIndex = model.index;
-//                             listView.runCurrentIndex();
-//                         }
-//                         hoverEnabled: true
-//
-//                         Rectangle {
-//                             anchors.fill: parent
-//                             color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
-//                             Behavior on color {
-//                                 ColorAnimation { duration: PlasmaCore.Units.shortDuration }
-//                             }
-//                         }
-//
-//                         RowLayout {
-//                             id: rowLayout
-//                             height: PlasmaCore.Units.gridUnit * 3
-//                             anchors.top: parent.top
-//                             anchors.left: parent.left
-//                             anchors.right: parent.right
-//                             anchors.leftMargin: PlasmaCore.Units.largeSpacing
-//                             anchors.rightMargin: PlasmaCore.Units.largeSpacing
-//
-//                             Kirigami.Icon {
-//                                 Layout.alignment: Qt.AlignVCenter
-//                                 source: model.decoration
-//                                 implicitWidth: PlasmaCore.Units.iconSizes.medium
-//                                 implicitHeight: PlasmaCore.Units.iconSizes.medium
-//                             }
-//
-//                             ColumnLayout {
-//                                 Layout.fillWidth: true
-//                                 Layout.alignment: Qt.AlignVCenter
-//                                 spacing: PlasmaCore.Units.smallSpacing
-//
-//                                 PlasmaComponents.Label {
-//                                     id: title
-//                                     Layout.fillWidth: true
-//                                     Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-//                                     Layout.rightMargin: PlasmaCore.Units.largeSpacing
-//
-//                                     maximumLineCount: 1
-//                                     elide: Text.ElideRight
-//                                     text: typeof modelData !== "undefined" ? modelData : model.display
-//                                     color: "white"
-//
-//                                     font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
-//                                 }
-//                                 PlasmaComponents.Label {
-//                                     id: subtitle
-//                                     Layout.fillWidth: true
-//                                     Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-//                                     Layout.rightMargin: PlasmaCore.Units.largeSpacing
-//
-//                                     maximumLineCount: 1
-//                                     elide: Text.ElideRight
-//                                     text: model.subtext || ""
-//                                     color: "white"
-//                                     opacity: 0.8
-//
-//                                     font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 0.8)
-//                                 }
-//                             }
-//
-//                             Repeater {
-//                                 id: actionsRepeater
-//                                 model: typeof actions !== "undefined" ? actions : []
-//
-//                                 Controls.ToolButton {
-//                                     icon: modelData.icon || ""
-//                                     visible: modelData.visible || true
-//                                     enabled: modelData.enabled || true
-//
-//                                     Accessible.role: Accessible.Button
-//                                     Accessible.name: modelData.text
-//                                     checkable: checked
-//                                     checked: delegate.activeAction === index
-//                                     focus: delegate.activeAction === index
-//                                     onClicked: delegate.ListView.view.runAction(index)
-//                                 }
-//                             }
-//                         }
-//                     }
-//                 }
+                Milou.ResultsListView {
+                    id: listView
+                    queryString: queryField.text
+                    highlight: null
+                    clip: true
+                    PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+
+                    onActivated: queryField.text = "";
+                    onUpdateQueryString: {
+                        queryField.text = text
+                        queryField.cursorPosition = cursorPosition
+                    }
+
+                    delegate: MouseArea {
+                        id: delegate
+                        height: rowLayout.height
+                        width: listView.width
+
+                        onClicked: {
+                            listView.currentIndex = model.index;
+                            listView.runCurrentIndex();
+
+                            root.actionTriggered();
+                        }
+                        hoverEnabled: true
+
+                        Rectangle {
+                            anchors.fill: parent
+                            color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
+                            Behavior on color {
+                                ColorAnimation { duration: PlasmaCore.Units.shortDuration }
+                            }
+                        }
+
+                        RowLayout {
+                            id: rowLayout
+                            height: PlasmaCore.Units.gridUnit * 3
+                            anchors.top: parent.top
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.leftMargin: PlasmaCore.Units.largeSpacing
+                            anchors.rightMargin: PlasmaCore.Units.largeSpacing
+
+                            Kirigami.Icon {
+                                Layout.alignment: Qt.AlignVCenter
+                                source: model.decoration
+                                implicitWidth: PlasmaCore.Units.iconSizes.medium
+                                implicitHeight: PlasmaCore.Units.iconSizes.medium
+                            }
+
+                            ColumnLayout {
+                                Layout.fillWidth: true
+                                Layout.alignment: Qt.AlignVCenter
+                                spacing: PlasmaCore.Units.smallSpacing
+
+                                PlasmaComponents.Label {
+                                    id: title
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
+                                    Layout.rightMargin: PlasmaCore.Units.largeSpacing
+
+                                    maximumLineCount: 1
+                                    elide: Text.ElideRight
+                                    text: typeof modelData !== "undefined" ? modelData : model.display
+                                    color: "white"
+
+                                    font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                                }
+                                PlasmaComponents.Label {
+                                    id: subtitle
+                                    Layout.fillWidth: true
+                                    Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
+                                    Layout.rightMargin: PlasmaCore.Units.largeSpacing
+
+                                    maximumLineCount: 1
+                                    elide: Text.ElideRight
+                                    text: model.subtext || ""
+                                    color: "white"
+                                    opacity: 0.8
+
+                                    font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 0.8)
+                                }
+                            }
+
+                            Repeater {
+                                id: actionsRepeater
+                                model: typeof actions !== "undefined" ? actions : []
+
+                                Controls.ToolButton {
+                                    icon: modelData.icon || ""
+                                    visible: modelData.visible || true
+                                    enabled: modelData.enabled || true
+
+                                    Accessible.role: Accessible.Button
+                                    Accessible.name: modelData.text
+                                    checkable: checked
+                                    checked: delegate.activeAction === index
+                                    focus: delegate.activeAction === index
+                                    onClicked: delegate.ListView.view.runAction(index)
+                                }
+                            }
+                        }
+                    }
+                }
             }
 
             MouseArea {

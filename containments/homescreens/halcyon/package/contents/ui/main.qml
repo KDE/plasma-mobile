@@ -89,6 +89,8 @@ MobileShell.HomeScreen {
             id: search
             anchors.fill: parent
             visible: openFactor > 0
+
+            onActionTriggered: search.close()
             
             topMargin: root.topMargin
             bottomMargin: root.bottomMargin
