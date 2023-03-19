@@ -23,6 +23,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     visible: false
 
     property alias backgroundColor: background.color
+    property alias icon: icon.source
 
     function open(splashIcon, title, x, y, sourceIconSize, color) {
         iconParent.scale = sourceIconSize/iconParent.width;
@@ -39,7 +40,11 @@ MouseArea { // use mousearea to ensure clicks don't go behind
             background.color = Qt.binding(function() { return colorGenerator.dominant})
         }
 
-        background.state = "open";
+        if (ShellSettings.Settings.animationsEnabled) {
+            openAnimComplex.restart();
+        } else {
+            openAnimSimple.restart();
+        }
     }
     
     function close() {
@@ -48,54 +53,137 @@ MouseArea { // use mousearea to ensure clicks don't go behind
 
     // close when an app opens
     property bool windowActive: Window.active
-    onWindowActiveChanged: {
-        background.state = "closed";
-    }
+    onWindowActiveChanged: root.close();
     
     // close when homescreen requested
     Connections {
         target: MobileShellState.HomeScreenControls
         function onOpenHomeScreen() {
-            background.state = "closed";
+            root.close();
         }
     }
     
-    // TODO
+    // open startupfeedback when notifier gives an app
     // Connections {
     //     target: NanoShell.StartupNotifier
     //     enabled: NanoShell.StartupNotifier.isValid
     //
     //     function onActivationStarted(appId, iconName) {
     //         icon.source = iconName
-    //         background.state = "open";
+    //         openAnimSimple.restart();
     //     }
     // }
 
-    property alias state: background.state
-    property alias icon: icon.source
-
-    onVisibleChanged: {
-        if (!visible) {
-            background.state = "closed";
-        }
-    }
-    
     Kirigami.ImageColors {
         id: colorGenerator
         source: icon.source
+    }
+
+    // animation that moves the icon
+    SequentialAnimation {
+        id: openAnimComplex
+
+        ScriptAction {
+            script: {
+                root.opacity = 1;
+                root.visible = true;
+            }
+        }
+        // slight pause to give slower devices time to catch up when the item becomes visible
+        PauseAnimation { duration: 20 }
+
+        ParallelAnimation {
+            id: parallelAnim
+            property real animationDuration: PlasmaCore.Units.longDuration + PlasmaCore.Units.shortDuration
+
+            ScaleAnimator {
+                target: background
+                from: background.scale
+                to: 1
+                duration: parallelAnim.animationDuration
+                easing.type: Easing.OutCubic
+            }
+            ScaleAnimator {
+                target: iconParent
+                from: iconParent.scale
+                to: 1
+                duration: parallelAnim.animationDuration
+                easing.type: Easing.OutCubic
+            }
+            XAnimator {
+                target: backgroundParent
+                from: backgroundParent.x
+                to: 0
+                duration: parallelAnim.animationDuration
+                easing.type: Easing.OutCubic
+            }
+            YAnimator {
+                target: backgroundParent
+                from: backgroundParent.y
+                to: 0
+                duration: parallelAnim.animationDuration
+                easing.type: Easing.OutCubic
+            }
+        }
+
+        ScriptAction {
+            script: {
+                // close the app drawer after it isn't visible
+                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
+            }
+        }
+    }
+
+    // animation that just fades in
+    SequentialAnimation {
+        id: openAnimSimple
+
+        ScriptAction {
+            script: {
+                root.opacity = 0;
+                root.visible = true;
+                background.scale = 1;
+                iconParent.scale = 1;
+                backgroundParent.x = 0;
+                backgroundParent.y = 0;
+            }
+        }
+
+        NumberAnimation {
+            target: root
+            properties: "opacity"
+            from: 0
+            to: 1
+            duration: PlasmaCore.Units.longDuration
+            easing.type: Easing.OutCubic
+        }
+
+        ScriptAction {
+            script: {
+                // close the app drawer after it isn't visible
+                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
+            }
+        }
     }
 
     Item {
         id: backgroundParent
         width: root.width
         height: root.height
+        
+        Rectangle {
+            id: background
+            anchors.fill: parent
+
+            color: colorGenerator.dominant
+        }
 
         Item {
             id: iconParent
-            z: 2
             anchors.centerIn: background
             width: PlasmaCore.Units.iconSizes.enormous
             height: width
+
             PlasmaCore.IconItem {
                 id: icon
                 anchors.fill: parent
@@ -110,126 +198,6 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 color: "#80000000"
                 source: icon
             }
-        }
-        
-        Rectangle {
-            id: background
-            anchors.fill: parent
-
-            color: colorGenerator.dominant
-
-            state: "closed"
-
-            states: [
-                State {
-                    name: "closed"
-                    PropertyChanges {
-                        target: root
-                        visible: false
-                    }
-                },
-                State {
-                    name: "open"
-
-                    PropertyChanges {
-                        target: root
-                        visible: true
-                    }
-                }
-            ]
-
-            transitions: [
-            
-                // no-animation mode transition
-                Transition {
-                    from: "closed"
-                    enabled: !ShellSettings.Settings.animationsEnabled
-                    SequentialAnimation {
-                        ScriptAction {
-                            script: {
-                                root.opacity = 0;
-                                root.visible = true;
-                                background.scale = 1;
-                                iconParent.scale = 1;
-                                backgroundParent.x = 0;
-                                backgroundParent.y = 0;
-                            }
-                        }
-                        
-                        NumberAnimation {
-                            target: root
-                            properties: "opacity"
-                            from: 0
-                            to: 1
-                            duration: PlasmaCore.Units.longDuration
-                            easing.type: Easing.OutCubic
-                        }
-
-                        ScriptAction {
-                            script: {
-                                // close the app drawer after it isn't visible
-                                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
-                            }
-                        }
-                    }
-                },
-                
-                // full animation transition
-                Transition {
-                    from: "closed"
-                    enabled: ShellSettings.Settings.animationsEnabled
-                    SequentialAnimation {
-                        ScriptAction {
-                            script: { 
-                                root.opacity = 1;
-                                root.visible = true;
-                            }
-                        }
-                        // slight pause to give slower devices time to catch up when the item becomes visible
-                        PauseAnimation { duration: 20 }
-                        ParallelAnimation {
-                            id: parallelAnim
-                            property real animationDuration: PlasmaCore.Units.longDuration + PlasmaCore.Units.shortDuration
-                            
-                            ScaleAnimator {
-                                target: background
-                                from: background.scale
-                                to: 1
-                                duration: parallelAnim.animationDuration
-                                easing.type: Easing.OutCubic
-                            }
-                            ScaleAnimator {
-                                target: iconParent
-                                from: iconParent.scale
-                                to: 1
-                                duration: parallelAnim.animationDuration
-                                easing.type: Easing.OutCubic
-                            }
-                            XAnimator {
-                                target: backgroundParent
-                                from: backgroundParent.x
-                                to: 0
-                                duration: parallelAnim.animationDuration
-                                easing.type: Easing.OutCubic
-                            }
-                            YAnimator {
-                                target: backgroundParent
-                                from: backgroundParent.y
-                                to: 0
-                                duration: parallelAnim.animationDuration
-                                easing.type: Easing.OutCubic
-                            }
-                        }
-                        
-                        ScriptAction {
-                            script: {
-                                // close the app drawer after it isn't visible
-                                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
-                            }
-                        }
-                    }
-                }
-            ]
         }
     }
 }
