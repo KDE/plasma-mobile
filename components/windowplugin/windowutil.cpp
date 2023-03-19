@@ -80,6 +80,11 @@ void WindowUtil::initWayland()
 
         connect(iface, &PlasmaActivationFeedback::activation, this, [this](PlasmaActivation *activation) {
             connect(activation, &PlasmaActivation::applicationId, this, [this](const QString &appId) {
+                // do not show activation screen for the plasmashell process
+                if (appId == "org.kde.plasmashell") {
+                    return;
+                }
+
                 const auto servicesFound = KApplicationTrader::query([&appId](const KService::Ptr &service) {
                     if (service->exec().isEmpty())
                         return false;

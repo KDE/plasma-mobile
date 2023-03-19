@@ -10,9 +10,9 @@ import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.13 as Kirigami
 
-import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 /**
  * Component that animates an app opening from a location.
@@ -64,15 +64,15 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     }
     
     // open startupfeedback when notifier gives an app
-    // Connections {
-    //     target: NanoShell.StartupNotifier
-    //     enabled: NanoShell.StartupNotifier.isValid
-    //
-    //     function onActivationStarted(appId, iconName) {
-    //         icon.source = iconName
-    //         openAnimSimple.restart();
-    //     }
-    // }
+    Connections {
+        target: WindowPlugin.WindowUtil
+
+        function onAppActivationStarted(appId, iconName) {
+            console.log(appId);
+            icon.source = iconName
+            openAnimSimple.restart();
+        }
+    }
 
     Kirigami.ImageColors {
         id: colorGenerator
