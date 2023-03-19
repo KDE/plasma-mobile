@@ -46,11 +46,6 @@ Item {
 
     Binding {
         target: MobileShellState.TopPanelControls
-        property: "panelHeight"
-        value: root.height
-    }
-    Binding {
-        target: MobileShellState.TopPanelControls
         property: "inSwipe"
         value: drawer.actionDrawer.dragging
     }

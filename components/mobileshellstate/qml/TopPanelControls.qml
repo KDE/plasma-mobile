@@ -21,7 +21,6 @@ QtObject {
     signal closeActionDrawer()
     signal openActionDrawer()
     property bool inSwipe: false
-    property real panelHeight: PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing // set and updated in panel containment
     property bool actionDrawerVisible: false
     property var notificationsWidget: null // updated in panel containment
 }

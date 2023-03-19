@@ -17,7 +17,6 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 PlasmaCore.ColorScope {
@@ -47,7 +46,7 @@ PlasmaCore.ColorScope {
 
     readonly property real intendedWindowThickness: navigationPanelHeight
     readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
-    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? MobileShellState.TopPanelControls.panelHeight : 0; // offset for top panel
+    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? Components.Constants.topPanelHeight : 0; // offset for top panel
     readonly property int intendedWindowLocation: isInLandscapeNavPanelMode ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen

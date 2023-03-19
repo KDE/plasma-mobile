@@ -19,6 +19,7 @@ import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "indicators" as Indicators
 import "../dataproviders" as DataProviders
+import "../components" as Components
 
 Item {
     id: root
@@ -122,9 +123,9 @@ Item {
                 RowLayout {
                     id: row
                     Layout.fillWidth: true
-                    Layout.maximumHeight: MobileShellState.TopPanelControls.panelHeight - control.topPadding - control.bottomPadding
+                    Layout.maximumHeight: Components.Constants.topPanelHeight - control.topPadding - control.bottomPadding
                     spacing: 0
-                    
+
                     // clock
                     ClockText {
                         visible: root.showTime
@@ -175,7 +176,7 @@ Item {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                         }
-                        Indicators.BluetoothIndicator { 
+                        Indicators.BluetoothIndicator {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                         }
@@ -184,7 +185,7 @@ Item {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                         }
-                        Indicators.VolumeIndicator { 
+                        Indicators.VolumeIndicator {
                             Layout.fillHeight: true
                             Layout.preferredWidth: height
                         }

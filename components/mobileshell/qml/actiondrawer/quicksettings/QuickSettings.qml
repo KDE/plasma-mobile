@@ -13,7 +13,6 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
-import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 import "../../components" as Components
 import "../../components/util.js" as Util

@@ -22,6 +22,7 @@
         
         <file>qml/components/AppLaunch.qml</file>
         <file>qml/components/BaseItem.qml</file>
+        <file>qml/components/Constants.qml</file>
         <file>qml/components/ExtendedAbstractButton.qml</file>
         <file>qml/components/Flickable.qml</file>
         <file>qml/components/GridView.qml</file>

@@ -20,8 +20,6 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
-import org.kde.kirigami as Kirigami
-
 import "../dataproviders" as DataProviders
 
 Window {

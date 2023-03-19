@@ -46,6 +46,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     // /components
     qmlRegisterSingletonType(resolvePath("components/AppLaunch.qml"), uri, 1, 0, "AppLaunch");
     qmlRegisterType(resolvePath("components/BaseItem.qml"), uri, 1, 0, "BaseItem");
+    qmlRegisterSingletonType(resolvePath("components/Constants.qml"), uri, 1, 0, "Constants");
     qmlRegisterType(resolvePath("components/ExtendedAbstractButton.qml"), uri, 1, 0, "ExtendedAbstractButton");
     qmlRegisterType(resolvePath("components/Flickable.qml"), uri, 1, 0, "Flickable");
     qmlRegisterType(resolvePath("components/GridView.qml"), uri, 1, 0, "GridView");
