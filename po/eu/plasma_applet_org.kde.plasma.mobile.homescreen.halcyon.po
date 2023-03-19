@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-03-19 02:06+0000\n"
 "PO-Revision-Date: 2023-03-06 07:47+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque\n"
@@ -36,12 +36,12 @@ msgstr "Gehitu aplikazioak zure gogokoetara hemen ager daitezen."
 msgid "Move out of folder"
 msgstr "Eraman karpetatik kanpora"
 
-#: package/contents/ui/GridAppDelegate.qml:67
+#: package/contents/ui/GridAppDelegate.qml:68
 #, kde-format
 msgid "Add to favourites"
 msgstr "Gehitu gogokoetara"
 
-#: package/contents/ui/GridAppList.qml:70
+#: package/contents/ui/GridAppList.qml:69
 #, kde-format
 msgid "Applications"
 msgstr "Aplikazioak"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
+"POT-Creation-Date: 2023-03-19 02:06+0000\n"
 "PO-Revision-Date: 2022-12-31 18:53+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -53,27 +53,27 @@ msgstr "Off"
 msgid "SIM Locked"
 msgstr "SIM Locked"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:38
+#: qml/statusbar/indicators/BatteryIndicator.qml:37
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:63
+#: qml/volumeosd/AudioApplet.qml:64
 #, kde-format
 msgid "Outputs"
 msgstr "Outputs"
 
-#: qml/volumeosd/AudioApplet.qml:93
+#: qml/volumeosd/AudioApplet.qml:94
 #, kde-format
 msgid "Inputs"
 msgstr "Inputs"
 
-#: qml/volumeosd/AudioApplet.qml:124
+#: qml/volumeosd/AudioApplet.qml:125
 #, kde-format
 msgid "Playback Streams"
 msgstr "Playback Streams"
 
-#: qml/volumeosd/AudioApplet.qml:177
+#: qml/volumeosd/AudioApplet.qml:178
 #, kde-format
 msgid "Recording Streams"
 msgstr "Recording Streams"
@@ -89,24 +89,24 @@ msgstr "%1 (%2)"
 msgid "Device name not found"
 msgstr "Device name not found"
 
-#: qml/volumeosd/ListItemBase.qml:97
+#: qml/volumeosd/ListItemBase.qml:96
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Show additional options for %1"
 
-#: qml/volumeosd/ListItemBase.qml:153
+#: qml/volumeosd/ListItemBase.qml:152
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Adjust volume for %1"
 
-#: qml/volumeosd/ListItemBase.qml:231
+#: qml/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/volumeosd/ListItemBase.qml:245
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -128,63 +128,63 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Stream name not found"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:117
 #, kde-format
 msgid "Unmute"
 msgstr "Unmute"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:117
 #, kde-format
 msgid "Mute"
 msgstr "Mute"
 
-#: qml/volumeosd/VolumeOSD.qml:139
+#: qml/volumeosd/VolumeOSD.qml:141
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:149
+#: qml/volumeosd/VolumeOSD.qml:151
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:169
+#: qml/volumeosd/VolumeOSD.qml:171
 #, kde-format
 msgid "Open audio settings"
 msgstr "Open audio settings"
 
-#: qml/volumeosd/VolumeOSD.qml:182
+#: qml/volumeosd/VolumeOSD.qml:184
 #, kde-format
 msgid "Audio Settings"
 msgstr "Audio Settings"
 
-#: qml/volumeosd/VolumeOSD.qml:189
+#: qml/volumeosd/VolumeOSD.qml:191
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Toggle showing audio streams"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:175
+#: qml/widgets/krunner/KRunnerWidget.qml:173
 #, kde-format
 msgid "Search…"
 msgstr "Search…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:127
 #, kde-format
 msgid "No media playing"
 msgstr "No media playing"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:155
 #, kde-format
 msgid "Previous track"
 msgstr "Previous track"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Play or Pause media"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:179
 #, kde-format
 msgid "Next track"
 msgstr "Next track"
@@ -207,29 +207,29 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Send"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:177
+#: qml/widgets/notifications/NotificationsWidget.qml:178
 #, kde-format
 msgid "Notification service not available"
 msgstr "Notification service not available"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:186
+#: qml/widgets/notifications/NotificationsWidget.qml:187
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Notifications are currently provided by '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:322
+#: qml/widgets/notifications/NotificationsWidget.qml:323
 #, kde-format
 msgid "Show Fewer"
 msgstr "Show Fewer"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:324
+#: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Show %1 More"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:383
+#: qml/widgets/notifications/NotificationsWidget.qml:384
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Clear All Notifications"
