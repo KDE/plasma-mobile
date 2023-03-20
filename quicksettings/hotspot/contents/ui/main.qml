@@ -23,6 +23,7 @@ QS.QuickSetting {
     enabled: wirelessStatus.hotspotSSID.length !== 0
     status: enabled ? wirelessStatus.hotspotSSID : ""
 
+    settingsCommand: "plasma-open-settings kcm_mobile_hotspot"
     function toggle() {
         if (!enabled) {
             nmHandler.createHotspot();
