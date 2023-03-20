@@ -1,16 +1,15 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick
-import QtQuick.Controls
+import QtQuick as QQ
 
-import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami as Kirigami
+import org.kde.plasma.extras as PlasmaExtras
 
-GridView {
+QQ.GridView {
+    id: root
+
     maximumFlickVelocity: 5000
 
-    highlightFollowsCurrentItem: true
     highlight: highlightComponent
 
     /** These function are called when the user tries to move the highlight outside the allowed surface by using arrow keys.
@@ -21,7 +20,7 @@ GridView {
     property var leftEdgeCallback: null
     property var rightEdgeCallback: null
 
-    Keys.onPressed: event => {
+    QQ.Keys.onPressed: event => {
                         if (!currentItem) {
                             return;
                         }
@@ -70,14 +69,9 @@ GridView {
         }
     }
 
-    Component {
+    QQ.Component {
         id: highlightComponent
-        Rectangle {
-            color: Kirigami.ColorUtils.tintWithAlpha(PlasmaCore.ColorScope.highlightColor, PlasmaCore.ColorScope.backgroundColor, 0.6)
-            radius: PlasmaCore.Units.smallSpacing
 
-            Behavior on x { SpringAnimation { spring: 3; damping: 0.2 } }
-            Behavior on y { SpringAnimation { spring: 3; damping: 0.2 } }
-        }
+        PlasmaExtras.Highlight {}
     }
 }
