@@ -94,7 +94,7 @@ Item {
         anchors.leftMargin: root.leftMargin
         anchors.rightMargin: root.rightMargin
         
-        contentHeight: flickable.height + root.closedContentY + 999999
+        contentHeight: flickable.height + root.closedContentY
         contentY: root.closedContentY
         property real oldContentY: contentY
         property bool opening: false
