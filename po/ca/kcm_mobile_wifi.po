@@ -190,28 +190,3 @@ msgstr "DNS:"
 #, kde-format
 msgid "Password…"
 msgstr "Contrasenya…"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Josep M. Ferrer"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "txemaq@gmail.com"
-
-#~ msgid "Wi-Fi networks"
-#~ msgstr "Xarxes Wi-Fi"
-
-#~ msgid "Martin Kacej"
-#~ msgstr "Martin Kacej"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Cancel·la"
-
-#~ msgctxt "@action:button"
-#~ msgid "Done"
-#~ msgstr "Fet"
-
-#~ msgid "Password..."
-#~ msgstr "Contrasenya..."

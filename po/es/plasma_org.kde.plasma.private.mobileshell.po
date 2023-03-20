@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:06+0000\n"
+"POT-Creation-Date: 2023-03-20 02:18+0000\n"
 "PO-Revision-Date: 2022-12-24 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -130,43 +130,43 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Nombre de emisión no encontrado"
 
-#: qml/volumeosd/VolumeOSD.qml:117
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Unmute"
 msgstr "Reanudar el sonido"
 
-#: qml/volumeosd/VolumeOSD.qml:117
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Mute"
 msgstr "Silenciar"
 
-#: qml/volumeosd/VolumeOSD.qml:141
+#: qml/volumeosd/VolumeOSD.qml:139
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:151
+#: qml/volumeosd/VolumeOSD.qml:149
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:171
+#: qml/volumeosd/VolumeOSD.qml:169
 #, kde-format
 msgid "Open audio settings"
 msgstr "Abrir las preferencias de sonido"
 
-#: qml/volumeosd/VolumeOSD.qml:184
+#: qml/volumeosd/VolumeOSD.qml:182
 #, kde-format
 msgid "Audio Settings"
 msgstr "Preferencias de sonido"
 
-#: qml/volumeosd/VolumeOSD.qml:191
+#: qml/volumeosd/VolumeOSD.qml:189
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Conmutar la visualización de emisiones de sonido"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:173
+#: qml/widgets/krunner/KRunnerWidget.qml:176
 #, kde-format
 msgid "Search…"
 msgstr "Buscar..."

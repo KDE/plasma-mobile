@@ -70,12 +70,3 @@ msgstr "Canvia el fons de pantalla"
 #: contents/configuration/ContainmentConfiguration.qml:113
 msgid "Configure"
 msgstr "Configura"
-
-#~ msgid "Layout:"
-#~ msgstr "Disposició:"
-
-#~ msgid "Wallpaper Type:"
-#~ msgstr "Tipus de fons de pantalla:"
-
-#~ msgid "Customize..."
-#~ msgstr "Personalitza..."

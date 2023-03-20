@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:06+0000\n"
+"POT-Creation-Date: 2023-03-20 02:18+0000\n"
 "PO-Revision-Date: 2022-12-20 10:43+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -128,43 +128,43 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Streamnaam niet gevonden"
 
-#: qml/volumeosd/VolumeOSD.qml:117
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Unmute"
 msgstr "Dempen opheffen"
 
-#: qml/volumeosd/VolumeOSD.qml:117
+#: qml/volumeosd/VolumeOSD.qml:115
 #, kde-format
 msgid "Mute"
 msgstr "Dempen"
 
-#: qml/volumeosd/VolumeOSD.qml:141
+#: qml/volumeosd/VolumeOSD.qml:139
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:151
+#: qml/volumeosd/VolumeOSD.qml:149
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:171
+#: qml/volumeosd/VolumeOSD.qml:169
 #, kde-format
 msgid "Open audio settings"
 msgstr "Audio-instellingen openen"
 
-#: qml/volumeosd/VolumeOSD.qml:184
+#: qml/volumeosd/VolumeOSD.qml:182
 #, kde-format
 msgid "Audio Settings"
 msgstr "Audio-instellingen"
 
-#: qml/volumeosd/VolumeOSD.qml:191
+#: qml/volumeosd/VolumeOSD.qml:189
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Tonen van audiostreams omschakelen"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:173
+#: qml/widgets/krunner/KRunnerWidget.qml:176
 #, kde-format
 msgid "Search…"
 msgstr "Zoeken…"
