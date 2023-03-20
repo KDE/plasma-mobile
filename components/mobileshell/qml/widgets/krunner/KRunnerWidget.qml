@@ -186,6 +186,7 @@ Item {
                 }
                 
                 Layout.fillWidth: true
+                Layout.fillHeight: true
 
                 Milou.ResultsListView {
                     id: listView
