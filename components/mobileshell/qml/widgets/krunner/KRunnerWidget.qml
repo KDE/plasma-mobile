@@ -79,6 +79,12 @@ Item {
         }
     }
     
+    Keys.onPressed: event => {
+                        if (event.key === Qt.Key_Down) {
+                            listView.forceActiveFocus();
+                        }
+                    }
+
     Flickable {
         id: flickable
         
@@ -186,16 +192,24 @@ Item {
                 }
                 
                 Layout.fillWidth: true
-                Layout.fillHeight: true
+                Layout.fillHeight: listView.contentHeight > availableHeight
 
                 Milou.ResultsListView {
                     id: listView
                     queryString: queryField.text
-                    highlight: null
                     clip: true
                     PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
 
-                    onActivated: queryField.text = "";
+                    highlight: activeFocus ? highlightComponent : null
+                    Component{
+                        id: highlightComponent
+
+                        PlasmaExtras.Highlight {}
+                    }
+
+                    onActivated: {
+                        root.close();
+                    }
                     onUpdateQueryString: {
                         queryField.text = text
                         queryField.cursorPosition = cursorPosition
@@ -213,6 +227,12 @@ Item {
                             root.actionTriggered();
                         }
                         hoverEnabled: true
+
+                        function activateNextAction() {
+                            queryField.forceActiveFocus();
+                            queryField.selectAll();
+                            listView.currentIndex = -1;
+                        }
 
                         Rectangle {
                             anchors.fill: parent
