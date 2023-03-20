@@ -135,7 +135,7 @@ void ScreenShotUtil::handleMetaDataReceived(const QVariantMap &metadata, int fd)
             qWarning() << "Screenshot failed";
         } else {
             KNotification *notif = new KNotification("captured");
-            notif->setComponentName(QStringLiteral("plasma_phone_components"));
+            notif->setComponentName(QStringLiteral("plasma_mobile_quicksetting_screenshot"));
             notif->setTitle(i18n("New Screenshot"));
             notif->setUrls({QUrl::fromLocalFile(filePath)});
             notif->setText(i18n("New screenshot saved to %1", filePath));

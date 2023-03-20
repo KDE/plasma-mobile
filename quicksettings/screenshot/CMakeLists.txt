@@ -29,6 +29,7 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 
 install(TARGETS screenshotplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/screenshot)
 install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/screenshot)
+install(FILES plasma_mobile_quicksetting_screenshot.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
 
 plasma_install_package(package org.kde.plasma.quicksetting.screenshot quicksettings)
 

@@ -96,8 +96,6 @@ ecm_find_qmlmodule(org.kde.pipewire 0.1)
 plasma_install_package(look-and-feel org.kde.breeze.mobile look-and-feel lookandfeel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
-install(FILES plasma_phone_components.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
-
 add_subdirectory(bin)
 add_subdirectory(containments)
 add_subdirectory(components)

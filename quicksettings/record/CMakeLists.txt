@@ -26,5 +26,6 @@ file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/qu
 
 install(TARGETS recordplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/record)
 install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/record)
+install(FILES plasma_mobile_quicksetting_record.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
 
 plasma_install_package(package org.kde.plasma.quicksetting.record quicksettings)
