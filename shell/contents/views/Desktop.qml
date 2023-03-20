@@ -11,6 +11,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Rectangle {
     id: root
@@ -61,10 +62,9 @@ Rectangle {
         containment.anchors.fill = root;
     }
 
-    Component.onCompleted: {
-        // desktop.windowType = Shell.Desktop.Desktop;
-    }
-    
+    // Load shell dbus object
+    MobileShellState.ShellDBusObject {}
+
     // This is taken from plasma-desktop's shell package, try to keep it in sync
     Loader {
         id: wallpaperColors

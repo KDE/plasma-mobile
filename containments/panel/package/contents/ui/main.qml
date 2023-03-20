@@ -44,43 +44,31 @@ Item {
     
 //BEGIN API implementation
 
-    Binding {
-        target: MobileShellState.TopPanelControls
-        property: "inSwipe"
-        value: drawer.actionDrawer.dragging
-    }
-    Binding {
-        target: MobileShellState.TopPanelControls
-        property: "actionDrawerVisible"
-        value: drawer.visible
-    }
-    
-    Binding {
-        target: MobileShellState.TopPanelControls
-        property: "notificationsWidget"
-        value: drawer.actionDrawer.notificationsWidget
-    }
-    
     Connections {
-        target: MobileShellState.TopPanelControls
-        
-        function onStartSwipe() {
-            swipeArea.startSwipe();
-        }
-        function onEndSwipe() {
-            swipeArea.endSwipe();
-        }
-        function onRequestRelativeScroll(offsetY) {
-            swipeArea.updateOffset(offsetY);
-        }
-        function onCloseActionDrawer() {
-            drawer.actionDrawer.close();
-        }
-        function onOpenActionDrawer() {
+        target: MobileShellState.ShellDBusClient
+
+        function onOpenActionDrawerRequested() {
             drawer.actionDrawer.open();
         }
+
+        function onCloseActionDrawerRequested() {
+            console.log('action drawer close');
+            drawer.actionDrawer.close();
+        }
+
+        function onDoNotDisturbChanged() {
+            if (drawer.actionDrawer.notificationsWidget.doNotDisturbModeEnabled !== MobileShellState.ShellDBusClient.doNotDisturb) {
+                drawer.actionDrawer.notificationsWidget.toggleDoNotDisturbMode();
+            }
+        }
     }
-    
+
+    Binding {
+        target: MobileShellState.ShellDBusClient
+        property: "isActionDrawerOpen"
+        value: drawer.visible
+    }
+
 //END API implementation
     
     Component.onCompleted: {

@@ -75,7 +75,7 @@ Item {
                     
                     onClicked: {
                         Components.AppLaunch.launchOrActivateApp(modelData.desktopEntry + ".desktop");
-                        MobileShellState.Shell.closeActionDrawer();
+                        MobileShellState.ShellDBusClient.closeActionDrawer();
                     }
                     
                     Components.BaseItem {

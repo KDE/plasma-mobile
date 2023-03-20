@@ -80,7 +80,7 @@ Item {
     
     function launchAppWithAnim(x: int, y: int, source, title: string, storageId: string) {
          if (source !== "") {
-            MobileShellState.Shell.openAppLaunchAnimation(
+            MobileShellState.ShellDBusClient.openAppLaunchAnimation(
                     source,
                     title,
                     iconLoader.Kirigami.ScenePosition.x + iconLoader.width/2,

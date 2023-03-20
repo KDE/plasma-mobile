@@ -4,20 +4,17 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import QtQuick
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
     text: i18n("Do Not Disturb")
     icon: enabled ? "notifications-disabled" : "notifications"
     status: ""
-    enabled: MobileShellState.TopPanelControls.notificationsWidget && MobileShellState.TopPanelControls.notificationsWidget.doNotDisturbModeEnabled
-    available: MobileShellState.TopPanelControls.notificationsWidget
+    enabled: MobileShellState.ShellDBusClient.doNotDisturb
 
     function toggle() {
-        if (MobileShellState.TopPanelControls.notificationsWidget) {
-            MobileShellState.TopPanelControls.notificationsWidget.toggleDoNotDisturbMode();
-        }
+        MobileShellState.ShellDBusClient.doNotDisturb = !MobileShellState.ShellDBusClient.doNotDisturb;
     }
 }

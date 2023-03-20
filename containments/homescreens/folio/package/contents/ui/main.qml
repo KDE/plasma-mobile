@@ -44,14 +44,16 @@ MobileShell.HomeScreen {
         // - minimize windows (only if we are in an app)
         // - open app drawer
         // - close app drawer and, if necessary, restore windows
+
+        // Always close action drawer
+        if (MobileShellState.ShellDBusClient.isActionDrawerOpen) {
+            MobileShellState.ShellDBusClient.closeActionDrawer();
+        }
+
         if (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow
-            || MobileShellState.Shell.actionDrawerVisible 
+            || MobileShellState.ShellDBusClient.isActionDrawerOpen
             || searchWidget.isOpen
         ) {
-            // Always close action drawer
-            if (MobileShellState.Shell.actionDrawerVisible) {
-                MobileShellState.Shell.closeActionDrawer();
-            }
             
             // Always close the search widget as well
             if (searchWidget.isOpen) {
@@ -93,14 +95,6 @@ MobileShell.HomeScreen {
             bottomMargin: root.bottomMargin
             leftMargin: root.leftMargin
             rightMargin: root.rightMargin
-            
-            // close search component when task switcher is shown or hidden
-            Connections {
-                target: MobileShellState.HomeScreenControls.taskSwitcher
-                function onVisibleChanged() {
-                    searchWidget.close();
-                }
-            }
         }
     }
     

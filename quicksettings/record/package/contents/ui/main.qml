@@ -39,7 +39,7 @@ QS.QuickSetting {
         }
         
         enabled = !enabled
-        MobileShellState.Shell.closeActionDrawer();
+        MobileShellState.ShellDBusClient.closeActionDrawer();
     }
 
     PWRec.PipeWireRecord {

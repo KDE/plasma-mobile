@@ -90,7 +90,7 @@ MobileShell.GridView {
 
         onLaunch: (x, y, icon, title, storageId) => {
             if (icon !== "") {
-                MobileShellState.Shell.openAppLaunchAnimation(
+                MobileShellState.ShellDBusClient.openAppLaunchAnimation(
                         icon,
                         title,
                         delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,

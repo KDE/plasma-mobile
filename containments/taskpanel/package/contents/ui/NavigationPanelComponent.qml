@@ -73,7 +73,7 @@ MobileShell.NavigationPanel {
         iconSizeFactor: 1
         
         onTriggered: {
-            MobileShellState.HomeScreenControls.openHomeScreen();
+            MobileShellState.ShellDBusClient.openHomeScreen();
         }
     }
     
@@ -95,7 +95,7 @@ MobileShell.NavigationPanel {
                 if (tasksModel.activeTask !== 0) {
                     tasksModel.requestClose(tasksModel.activeTask);
                 }
-                MobileShellState.Shell.closeAppLaunchAnimation();
+                MobileShellState.ShellDBusClient.closeAppLaunchAnimation();
             }
         }
     }

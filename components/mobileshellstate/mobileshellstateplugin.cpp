@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "mobileshellstateplugin.h"
+#include "shelldbusclient.h"
+#include "shelldbusobject.h"
 
 #include <QQmlContext>
 #include <QQuickItem>
@@ -15,9 +17,11 @@ void MobileShellStatePlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mobileshell.state"));
 
+    qmlRegisterType<ShellDBusObject>(uri, 1, 0, "ShellDBusObject");
+    qmlRegisterSingletonType<ShellDBusClient>(uri, 1, 0, "ShellDBusClient", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return ShellDBusClient::self();
+    });
+
     // /
     qmlRegisterSingletonType(resolvePath("AudioProvider.qml"), uri, 1, 0, "AudioProvider");
-    qmlRegisterSingletonType(resolvePath("HomeScreenControls.qml"), uri, 1, 0, "HomeScreenControls");
-    qmlRegisterSingletonType(resolvePath("Shell.qml"), uri, 1, 0, "Shell");
-    qmlRegisterSingletonType(resolvePath("TopPanelControls.qml"), uri, 1, 0, "TopPanelControls");
 }

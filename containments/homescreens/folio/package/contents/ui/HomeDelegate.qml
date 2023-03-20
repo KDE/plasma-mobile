@@ -87,12 +87,6 @@ ContainmentLayoutManager.ItemContainer {
         }
     }
     Connections {
-        target: MobileShellState.Shell
-        function onTaskSwitcherVisibleChanged() {
-            syncDelegateGeometry();
-        }
-    }
-    Connections {
         target: appletsLayout
         function onAppletsLayoutInteracted() {
             removeButton.hide();

@@ -179,7 +179,7 @@ Window {
 
                             onClicked: {
                                 let coords = mapToItem(flickable, 0, 0);
-                                MobileShellState.Shell.openAppLaunchAnimation("audio-volume-high", i18n("Audio Settings"), coords.x, coords.y, PlasmaCore.Units.iconSizes.medium);
+                                MobileShellState.ShellDBusClient.openAppLaunchAnimation("audio-volume-high", i18n("Audio Settings"), coords.x, coords.y, PlasmaCore.Units.iconSizes.medium);
                                 MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_pulseaudio");
                             }
                         }

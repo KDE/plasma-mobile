@@ -66,7 +66,7 @@ Components.BaseItem {
             root.toggleFunction();
         } else if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
-            MobileShellState.Shell.openAppLaunchAnimation(
+            MobileShellState.ShellDBusClient.openAppLaunchAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
@@ -79,7 +79,7 @@ Components.BaseItem {
     function delegatePressAndHold() {
         if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
-            MobileShellState.Shell.openAppLaunchAnimation(
+            MobileShellState.ShellDBusClient.openAppLaunchAnimation(
                 root.icon,
                 root.text,
                 iconItem.Kirigami.ScenePosition.x + iconItem.width/2,

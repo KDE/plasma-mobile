@@ -77,14 +77,14 @@ Item {
     //BEGIN API implementation
 
     Connections {
-        target: MobileShellState.HomeScreenControls
+        target: MobileShellState.ShellDBusClient
         
-        function onOpenHomeScreen() {
+        function onOpenHomeScreenRequested() {
             if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
             
-            MobileShellState.HomeScreenControls.resetHomeScreenPosition();
+            resetHomeScreenPosition();
 
             WindowPlugin.WindowUtil.unsetAllMinimizedGeometries(root);
             WindowPlugin.WindowUtil.minimizeAll();
@@ -92,33 +92,16 @@ Item {
             root.homeTriggered();
         }
         
-        function onResetHomeScreenPosition() {
+        function onResetHomeScreenPositionRequested() {
             root.resetHomeScreenPosition();
         }
         
-        function onRequestRelativeScroll(pos) {
-            // TODO
-            //homescreen.appDrawer.offset -= pos.y;
-            //lastRequestedPosition = pos.y;
-        }
-        
-        function onOpenAppLaunchAnimation(splashIcon, title, x, y, sourceIconSize) {
+        function onOpenAppLaunchAnimationRequested(splashIcon, title, x, y, sourceIconSize) {
             startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
         }
         
-        function onCloseAppLaunchAnimation() {
+        function onCloseAppLaunchAnimationRequested() {
             startupFeedback.close();
-        }
-    }
-    
-    Plasmoid.onScreenChanged: {
-        if (plasmoid.screen == 0) {
-            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
-        }
-    }
-    Window.onWindowChanged: {
-        if (plasmoid.screen == 0) {
-            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
         }
     }
 
@@ -127,11 +110,6 @@ Item {
     Component.onCompleted: {
         // determine the margins used
         evaluateMargins();
-
-        // set API variables
-        if (plasmoid.screen == 0) {
-            MobileShellState.HomeScreenControls.homeScreenWindow = root.Window.window;
-        }
     }
     
     // homescreen visual component

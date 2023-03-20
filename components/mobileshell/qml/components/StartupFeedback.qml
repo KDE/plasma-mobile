@@ -57,8 +57,8 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     
     // close when homescreen requested
     Connections {
-        target: MobileShellState.HomeScreenControls
-        function onOpenHomeScreen() {
+        target: MobileShellState.ShellDBusClient
+        function onOpenHomeScreenRequested() {
             root.close();
         }
     }
@@ -129,7 +129,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         ScriptAction {
             script: {
                 // close the app drawer after it isn't visible
-                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
+                MobileShellState.ShellDBusClient.resetHomeScreenPosition();
             }
         }
     }
@@ -161,7 +161,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         ScriptAction {
             script: {
                 // close the app drawer after it isn't visible
-                MobileShellState.HomeScreenControls.resetHomeScreenPosition();
+                MobileShellState.ShellDBusClient.resetHomeScreenPosition();
             }
         }
     }
