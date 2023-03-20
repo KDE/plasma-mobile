@@ -53,6 +53,8 @@
         <file>qml/volumeosd/PopupCard.qml</file>
         <file>qml/volumeosd/StreamListItem.qml</file>
         <file>qml/volumeosd/VolumeOSD.qml</file>
+        <file>qml/volumeosd/VolumeOSDProvider.qml</file>
+        <file>qml/volumeosd/VolumeOSDProviderLoader.qml</file>
         
         <file>qml/statusbar/indicators/BatteryIndicator.qml</file>
         <file>qml/statusbar/indicators/BluetoothIndicator.qml</file>

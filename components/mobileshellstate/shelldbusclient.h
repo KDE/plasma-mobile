@@ -33,6 +33,7 @@ public:
 
     Q_INVOKABLE void openHomeScreen();
     Q_INVOKABLE void resetHomeScreenPosition();
+    Q_INVOKABLE void showVolumeOSD();
 
 Q_SIGNALS:
     void isActionDrawerOpenChanged();
@@ -43,6 +44,7 @@ Q_SIGNALS:
     void closeAppLaunchAnimationRequested();
     void openHomeScreenRequested();
     void resetHomeScreenPositionRequested();
+    void showVolumeOSDRequested();
 
 private Q_SLOTS:
     void updateDoNotDisturb();

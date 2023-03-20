@@ -9,8 +9,21 @@
 ShellDBusObject::ShellDBusObject(QObject *parent)
     : QObject{parent}
 {
-    new PlasmashellAdaptor{this};
-    QDBusConnection::sessionBus().registerObject(QStringLiteral("/Mobile"), this);
+}
+
+ShellDBusObject *ShellDBusObject::self()
+{
+    static ShellDBusObject *instance = new ShellDBusObject;
+    return instance;
+}
+
+void ShellDBusObject::registerObject()
+{
+    if (!m_initialized) {
+        new PlasmashellAdaptor{this};
+        QDBusConnection::sessionBus().registerObject(QStringLiteral("/Mobile"), this);
+        m_initialized = true;
+    }
 }
 
 bool ShellDBusObject::doNotDisturb()
@@ -67,4 +80,9 @@ void ShellDBusObject::openHomeScreen()
 void ShellDBusObject::resetHomeScreenPosition()
 {
     Q_EMIT resetHomeScreenPositionRequested();
+}
+
+void ShellDBusObject::showVolumeOSD()
+{
+    Q_EMIT showVolumeOSDRequested();
 }

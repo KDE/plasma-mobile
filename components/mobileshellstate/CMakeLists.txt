@@ -22,7 +22,6 @@ qt_add_dbus_interface(mobileshellstateplugin_SRCS ${CMAKE_CURRENT_BINARY_DIR}/or
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.plasmashell.Mobile.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
 
-qt_add_resources(RESOURCES resources.qrc)
 add_library(mobileshellstateplugin SHARED ${mobileshellstateplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellstateplugin 

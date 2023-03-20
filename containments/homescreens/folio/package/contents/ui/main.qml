@@ -116,7 +116,7 @@ MobileShell.HomeScreen {
     Connections {
         target: Folio.ApplicationListModel
         function onLaunchError(msg) {
-            MobileShellState.Shell.closeAppLaunchAnimation()
+            MobileShellState.ShellDBusClient.closeAppLaunchAnimation()
         }
     }
 }

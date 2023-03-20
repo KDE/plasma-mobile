@@ -6,6 +6,8 @@ import QtQuick
 import org.kde.plasma.private.volume
 
 QtObject {
+    id: root
+
     property SinkModel paSinkModel: SinkModel {}
 
     // whether the audio icon should be visible in the status bar
@@ -24,6 +26,9 @@ QtObject {
 
     // step that increments when adjusting the volume
     readonly property int volumeStep: Math.round(5 * PulseAudio.NormalVolume / 100.0)
+
+    // The current audio volume (updated by connecting to sinks)
+    property int volumeValue
 
     function isDummyOutput(output) {
         return output && output.name === dummyOutputName;
@@ -86,5 +91,34 @@ QtObject {
             icon = prefix + "-high";
         }
         return icon;
+    }
+
+    // emitted when the volume changed, but not due to sink switching
+    signal volumeChanged()
+
+    property var updateVolume: Connections {
+        target: root.paSinkModel ? (root.paSinkModel.preferredSink ? root.paSinkModel.preferredSink : null) : null
+        enabled: target !== null
+
+        function onVolumeChanged() {
+            root.volumeValue = root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            root.volumeChanged();
+        }
+
+        function onMutedChanged() {
+            root.volumeValue = root.paSinkModel.preferredSink.muted ? 0 : root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            root.volumeChanged();
+        }
+    }
+
+    property var updateVolumeOnSinkChange: Connections {
+        target: root.paSinkModel ? root.paSinkModel : null
+        enabled: target !== null
+
+        function onPreferredSinkChanged() {
+            if (root.paSinkModel.preferredSink) {
+                root.volumeValue = root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            }
+        }
     }
 }

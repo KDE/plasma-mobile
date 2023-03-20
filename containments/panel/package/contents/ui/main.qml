@@ -52,7 +52,6 @@ Item {
         }
 
         function onCloseActionDrawerRequested() {
-            console.log('action drawer close');
             drawer.actionDrawer.close();
         }
 
@@ -70,10 +69,14 @@ Item {
     }
 
 //END API implementation
-    
+
     Component.onCompleted: {
-        // we want to bind global volume shortcuts here
-        MobileShellState.AudioProvider.bindShortcuts = true;
+        // register dbus
+        MobileShellState.ShellDBusObject.registerObject();
+
+        // HACK: we need to initialize the DBus server somewhere, it might as well be here...
+        // initialize the volume osd, and volume keys
+        MobileShell.VolumeOSDProviderLoader.load();
     }
     
     // top panel component
@@ -86,6 +89,7 @@ Item {
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
     }
     
+    // swiping area for swipe-down drawer
     MobileShell.ActionDrawerOpenSurface {
         id: swipeArea
         actionDrawer: drawer.actionDrawer

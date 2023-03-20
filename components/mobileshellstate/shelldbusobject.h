@@ -13,6 +13,10 @@ class ShellDBusObject : public QObject
 
 public:
     ShellDBusObject(QObject *parent = nullptr);
+    static ShellDBusObject *self();
+
+    // called by QML
+    Q_INVOKABLE void registerObject();
 
 Q_SIGNALS:
     Q_SCRIPTABLE void doNotDisturbChanged();
@@ -23,11 +27,13 @@ Q_SIGNALS:
     Q_SCRIPTABLE void closeAppLaunchAnimationRequested();
     Q_SCRIPTABLE void openHomeScreenRequested();
     Q_SCRIPTABLE void resetHomeScreenPositionRequested();
+    Q_SCRIPTABLE void showVolumeOSDRequested();
 
 public Q_SLOTS:
     Q_SCRIPTABLE bool doNotDisturb();
     Q_SCRIPTABLE void setDoNotDisturb(bool value);
 
+    // TODO: Account for multiple action drawers?
     Q_SCRIPTABLE bool isActionDrawerOpen();
     Q_SCRIPTABLE void setIsActionDrawerOpen(bool value);
 
@@ -39,8 +45,11 @@ public Q_SLOTS:
 
     Q_SCRIPTABLE void openHomeScreen();
     Q_SCRIPTABLE void resetHomeScreenPosition();
+    Q_SCRIPTABLE void showVolumeOSD();
 
 private:
+    bool m_initialized = false;
+
     bool m_doNotDisturb = false;
     bool m_isActionDrawerOpen = false;
 };

@@ -22,7 +22,7 @@ import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 
 import "../dataproviders" as DataProviders
 
-Window {
+NanoShell.FullScreenOverlay {
     id: window
 
     required property int volume

@@ -9,9 +9,9 @@ import QtQuick 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.shell 2.0 as Shell
+
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Rectangle {
     id: root
@@ -29,29 +29,6 @@ Rectangle {
         }
     }
 
-    Loader {
-        id: widgetExplorerStack
-        z: 99
-        asynchronous: true
-        y: containment ? containment.availableScreenRect.y : 0
-        height: containment ? containment.availableScreenRect.height : parent.height
-        width: parent.width
-        
-        onLoaded: {
-            if (widgetExplorerStack.item) {
-                item.closed.connect(function() {
-                    widgetExplorerStack.source = ""
-                });
-
-                item.topPanelHeight = containment.availableScreenRect.y
-                item.bottomPanelHeight = root.height - (containment.availableScreenRect.height + containment.availableScreenRect.y)
-
-                item.leftPanelWidth = containment.availableScreenRect.x
-                item.rightPanelWidth = root.width - (containment.availableScreenRect.width + containment.availableScreenRect.x)
-            }
-        }
-    }
-
     onContainmentChanged: {
         if (containment == null) {
             return;
@@ -62,10 +39,8 @@ Rectangle {
         containment.anchors.fill = root;
     }
 
-    // Load shell dbus object
-    MobileShellState.ShellDBusObject {}
-
     // This is taken from plasma-desktop's shell package, try to keep it in sync
+    // Handles taking accent color from wallpaper
     Loader {
         id: wallpaperColors
 
@@ -108,4 +83,26 @@ Rectangle {
         onLoaded: item.update()
     }
 
+    Loader {
+        id: widgetExplorerStack
+        z: 99
+        asynchronous: true
+        y: containment ? containment.availableScreenRect.y : 0
+        height: containment ? containment.availableScreenRect.height : parent.height
+        width: parent.width
+
+        onLoaded: {
+            if (widgetExplorerStack.item) {
+                item.closed.connect(function() {
+                    widgetExplorerStack.source = ""
+                });
+
+                item.topPanelHeight = containment.availableScreenRect.y
+                item.bottomPanelHeight = root.height - (containment.availableScreenRect.height + containment.availableScreenRect.y)
+
+                item.leftPanelWidth = containment.availableScreenRect.x
+                item.rightPanelWidth = root.width - (containment.availableScreenRect.width + containment.availableScreenRect.x)
+            }
+        }
+    }
 }

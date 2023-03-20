@@ -44,6 +44,7 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::closeAppLaunchAnimationRequested, this, &ShellDBusClient::closeAppLaunchAnimationRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::openHomeScreenRequested, this, &ShellDBusClient::openHomeScreenRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::resetHomeScreenPositionRequested, this, &ShellDBusClient::resetHomeScreenPositionRequested);
+    connect(m_interface, &OrgKdePlasmashellInterface::showVolumeOSDRequested, this, &ShellDBusClient::showVolumeOSDRequested);
 
     updateIsActionDrawerOpen();
     updateDoNotDisturb();
@@ -97,6 +98,11 @@ void ShellDBusClient::openHomeScreen()
 void ShellDBusClient::resetHomeScreenPosition()
 {
     m_interface->resetHomeScreenPosition();
+}
+
+void ShellDBusClient::showVolumeOSD()
+{
+    m_interface->showVolumeOSD();
 }
 
 void ShellDBusClient::updateDoNotDisturb()

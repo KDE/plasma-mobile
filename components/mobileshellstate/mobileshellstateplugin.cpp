@@ -17,11 +17,10 @@ void MobileShellStatePlugin::registerTypes(const char *uri)
 {
     Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mobileshell.state"));
 
-    qmlRegisterType<ShellDBusObject>(uri, 1, 0, "ShellDBusObject");
     qmlRegisterSingletonType<ShellDBusClient>(uri, 1, 0, "ShellDBusClient", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return ShellDBusClient::self();
     });
-
-    // /
-    qmlRegisterSingletonType(resolvePath("AudioProvider.qml"), uri, 1, 0, "AudioProvider");
+    qmlRegisterSingletonType<ShellDBusObject>(uri, 1, 0, "ShellDBusObject", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return ShellDBusObject::self();
+    });
 }
