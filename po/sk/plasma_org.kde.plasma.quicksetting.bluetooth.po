@@ -1,0 +1,21 @@
+# translation of plasma_org.kde.plasma.quicksetting.bluetooth.po to Slovak
+# Roman Paholík <wizzardsk@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_org.kde.plasma.quicksetting.bluetooth\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2023-03-20 17:22+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 22.12.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: contents/ui/main.qml:10
+#, kde-format
+msgid "Bluetooth"
+msgstr "Bluetooth"

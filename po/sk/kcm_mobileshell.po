@@ -1,21 +1,19 @@
-# Copyright (C) YEAR This file is copyright:
-# This file is distributed under the same license as the plasma-mobile package.
-# Vit Pelcak <vit@pelcak.org>, 2023.
-#
+# translation of kcm_mobileshell.po to Slovak
+# Roman Paholík <wizzardsk@gmail.com>, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma-mobile\n"
+"Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2023-01-04 22:21+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
-"Language-Team: Czech <kde-i18n-doc@kde.org>\n"
-"Language: cs\n"
+"PO-Revision-Date: 2023-03-20 17:21+0100\n"
+"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.3\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -25,7 +23,7 @@ msgstr "Shell"
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr "Obecné"
+msgstr "Všeobecné"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
@@ -36,7 +34,7 @@ msgstr ""
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr "Animace"
+msgstr "Animácie"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
@@ -61,7 +59,7 @@ msgstr ""
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr "Přepínač úloh"
+msgstr "Prepínač úloh"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
@@ -83,7 +81,7 @@ msgstr ""
 #: package/contents/ui/QuickSettingsForm.qml:34
 #, kde-format
 msgid "Quick Settings"
-msgstr "Rychlé nastavení"
+msgstr "Rýchle nastavenia"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
@@ -130,7 +128,7 @@ msgstr ""
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr "Intenzita vibrací"
+msgstr ""
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
@@ -141,19 +139,19 @@ msgstr ""
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "Nízká"
+msgstr "Nízke"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "Střední"
+msgstr "Stredné"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "Vysoká"
+msgstr "Vysoké"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
@@ -169,19 +167,19 @@ msgstr ""
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "Dlouhá"
+msgstr "Dlhé"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "Střední"
+msgstr "Stredné"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "Krátká"
+msgstr "Stručné"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
