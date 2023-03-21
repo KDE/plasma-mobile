@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-14 02:17+0000\n"
-"PO-Revision-Date: 2023-02-01 22:43+0100\n"
+"PO-Revision-Date: 2023-03-20 12:49+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: modem.cpp:126
 #, kde-format
@@ -486,17 +486,17 @@ msgstr "Nulle SIM insertate."
 #: package/contents/ui/main.qml:81
 #, kde-format
 msgid "Mobile data is not available with this modem."
-msgstr ""
+msgstr "Datos mobile non es disponibile con iste modem."
 
 #: package/contents/ui/main.qml:83
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr ""
+msgstr "Un APN necessita esser configurate pro haber datos mobile."
 
 #: package/contents/ui/main.qml:85
 #, kde-format
 msgid "Whether mobile data is enabled."
-msgstr ""
+msgstr "Si datos mobiloe es habilitate."
 
 #: package/contents/ui/main.qml:116
 #, kde-format
@@ -736,6 +736,8 @@ msgstr "Dishabilita Bloco de SIM"
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
 msgstr ""
+"Dishabilita le characteristica de bloco de SIM e remove le passcode sur le "
+"SIM."
 
 #: package/contents/ui/SimLockPage.qml:103
 #, kde-format
@@ -745,7 +747,7 @@ msgstr "Modifica PIN"
 #: package/contents/ui/SimLockPage.qml:104
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr ""
+msgstr "Cambia le passcode fixate sur le SIM."
 
 #: package/contents/ui/SimLockPage.qml:119
 #, kde-format
@@ -816,6 +818,7 @@ msgstr "Roaming de datos"
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
+"Permitte que tu dispositivo pote usar altere retes que tu portator (carrier)."
 
 #: package/contents/ui/SimPage.qml:84
 #, kde-format
@@ -825,7 +828,7 @@ msgstr "Modifica APNs"
 #: package/contents/ui/SimPage.qml:85
 #, kde-format
 msgid "Configure access point names for your carrier."
-msgstr ""
+msgstr "Configura nomines de puncto de accesso per tu portator (carrier)"
 
 #: package/contents/ui/SimPage.qml:95
 #, kde-format
@@ -845,7 +848,7 @@ msgstr "Modifica preferentias de  Bloco de SIM"
 #: package/contents/ui/SimPage.qml:118
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
-msgstr ""
+msgstr "Vide le detalios del modem al qual iste SIM es connectite."
 
 #: package/contents/ui/SimPage.qml:132
 #, kde-format

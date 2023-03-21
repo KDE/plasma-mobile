@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-01-04 22:21+0100\n"
+"PO-Revision-Date: 2023-03-16 16:26+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -124,10 +124,9 @@ msgid ""
 msgstr ""
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Rychlé nastavení"
+msgstr "Vypnuto rychlé nastavení"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format

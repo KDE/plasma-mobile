@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2023-01-04 19:25+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -136,7 +136,7 @@ msgstr "Korronte-izena ez da aurkitu"
 msgid "Unmute"
 msgstr "Ozendu"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Isilarazi"
@@ -167,7 +167,22 @@ msgstr "Audio-ezarpenak"
 msgid "Toggle showing audio streams"
 msgstr "Txandakatu audio-korronteak erakustea"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "Audioa"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "Igo bolumena"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Jaitsi bolumena"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Bilatu..."
@@ -293,12 +308,3 @@ msgstr "%1 min amaitzeko"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h amaitzeko"
-
-#~ msgid "Audio"
-#~ msgstr "Audioa"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Igo bolumena"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Jaitsi bolumena"

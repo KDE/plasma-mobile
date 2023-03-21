@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2023-01-05 12:05+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Název proudu nenalezen"
 msgid "Unmute"
 msgstr "Povolit zvuk"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Ztlumit"
@@ -164,7 +164,22 @@ msgstr "Nastavení audio"
 msgid "Toggle showing audio streams"
 msgstr "Přepnout zobrazení proudů audio"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr ""
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr ""
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr ""
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Hledat…"
@@ -290,12 +305,3 @@ msgstr "Zbývá %1 m"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Zbývá %1 h"
-
-#~ msgid "Audio"
-#~ msgstr "Audio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Zvýšit hlasitost"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Snížit hlasitost"

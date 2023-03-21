@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2022-12-31 18:53+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Stream name not found"
 msgid "Unmute"
 msgstr "Unmute"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Mute"
@@ -164,7 +164,22 @@ msgstr "Audio Settings"
 msgid "Toggle showing audio streams"
 msgstr "Toggle showing audio streams"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "Audio"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "Increase Volume"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Decrease Volume"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Search…"
@@ -290,12 +305,3 @@ msgstr "%1m remaining"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1h remaining"
-
-#~ msgid "Audio"
-#~ msgstr "Audio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Increase Volume"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Decrease Volume"

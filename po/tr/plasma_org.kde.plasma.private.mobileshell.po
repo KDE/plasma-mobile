@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2022-12-23 21:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Akış adı bulunamadı"
 msgid "Unmute"
 msgstr "Sesini Aç"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Sessize Al"
@@ -164,7 +164,22 @@ msgstr "Ses Ayarları"
 msgid "Toggle showing audio streams"
 msgstr "Ses akışlarını göstermeyi aç/kapat"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "Ses"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "Ses Düzeyini Artır"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Ses Düzeyini Azalt"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Ara…"
@@ -290,12 +305,3 @@ msgstr "%1 dk kaldı"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 sa kaldı"
-
-#~ msgid "Audio"
-#~ msgstr "Ses"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Ses Düzeyini Artır"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Ses Düzeyini Azalt"

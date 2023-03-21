@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2022-12-20 12:15+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -135,7 +135,7 @@ msgstr "No s'ha trobat el nom del flux"
 msgid "Unmute"
 msgstr "Activa el so"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Silenci"
@@ -166,7 +166,22 @@ msgstr "Configureu l'àudio"
 msgid "Toggle showing audio streams"
 msgstr "Canvia la visualització dels fluxos d'àudio"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr ""
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr ""
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr ""
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Busca…"
@@ -292,12 +307,3 @@ msgstr "Resten %1 min"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Resten %1 h"
-
-#~ msgid "Audio"
-#~ msgstr "Àudio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Apuja el volum"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Abaixa el volum"

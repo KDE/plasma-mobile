@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2023-03-12 08:40+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -131,7 +131,7 @@ msgstr "Názov prúdu nebol nájdený"
 msgid "Unmute"
 msgstr "Zrušiť stlmenie"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Stlmiť"
@@ -162,7 +162,22 @@ msgstr "Nastavenia zvuku"
 msgid "Toggle showing audio streams"
 msgstr ""
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "Zvuk"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "Zvýšiť hlasitosť"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Znížiť hlasitosť"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Hľadať..."
@@ -288,12 +303,3 @@ msgstr ""
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Zostávajú %1 hodiny"
-
-#~ msgid "Audio"
-#~ msgstr "Zvuk"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Zvýšiť hlasitosť"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Znížiť hlasitosť"

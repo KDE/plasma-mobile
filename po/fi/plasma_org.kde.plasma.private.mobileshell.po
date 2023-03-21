@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-20 02:18+0000\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
 "PO-Revision-Date: 2023-01-18 16:46+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Virran nimeä ei löytynyt"
 msgid "Unmute"
 msgstr "Poista vaimennus"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Vaimenna"
@@ -164,7 +164,22 @@ msgstr "Ääniasetukset"
 msgid "Toggle showing audio streams"
 msgstr "Näytä tai piilota äänivirrat"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:176
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "Ääni"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "Lisää äänenvoimakkuutta"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "Vähennä äänenvoimakkuutta"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
 msgid "Search…"
 msgstr "Etsi…"
@@ -290,12 +305,3 @@ msgstr "%1 min jäljellä"
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 t jäljellä"
-
-#~ msgid "Audio"
-#~ msgstr "Ääni"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Lisää äänenvoimakkuutta"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Vähennä äänenvoimakkuutta"
