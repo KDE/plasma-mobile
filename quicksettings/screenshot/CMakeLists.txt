@@ -12,16 +12,15 @@ set(screenshotplugin_SRCS
 add_library(screenshotplugin ${screenshotplugin_SRCS})
 
 target_link_libraries(screenshotplugin
-    PUBLIC
-        Qt::Core
-    PRIVATE
-        Qt::DBus
-        KF6::CoreAddons
-        KF6::QuickAddons
-        KF6::ConfigCore
-        KF6::ConfigGui
-        KF6::I18n
-        KF6::Notifications
+    Qt::Core
+    Qt::Qml
+    Qt::Quick
+    Qt::DBus
+    KF6::CoreAddons
+    KF6::ConfigCore
+    KF6::ConfigGui
+    KF6::I18n
+    KF6::Notifications
 )
 
 set_property(TARGET screenshotplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/screenshot)
