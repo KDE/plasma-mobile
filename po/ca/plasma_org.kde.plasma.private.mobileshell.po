@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.private.mobileshell.po to Catalan
-# Copyright (C) 2022 This_file_is_part_of_KDE
+# Copyright (C) 2022-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-21 02:29+0000\n"
-"PO-Revision-Date: 2022-12-20 12:15+0100\n"
+"PO-Revision-Date: 2023-03-21 10:16+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -169,17 +169,17 @@ msgstr "Commuta la visualització dels fluxos d'àudio"
 #: qml/volumeosd/VolumeOSDProvider.qml:47
 #, kde-format
 msgid "Audio"
-msgstr ""
+msgstr "Àudio"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:51
 #, kde-format
 msgid "Increase Volume"
-msgstr ""
+msgstr "Apuja el volum"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:58
 #, kde-format
 msgid "Decrease Volume"
-msgstr ""
+msgstr "Abaixa el volum"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format

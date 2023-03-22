@@ -167,17 +167,17 @@ msgstr "Přepnout zobrazení proudů audio"
 #: qml/volumeosd/VolumeOSDProvider.qml:47
 #, kde-format
 msgid "Audio"
-msgstr ""
+msgstr "Audio"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:51
 #, kde-format
 msgid "Increase Volume"
-msgstr ""
+msgstr "Zvýšit hlasitost"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:58
 #, kde-format
 msgid "Decrease Volume"
-msgstr ""
+msgstr "Snížit hlasitost"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
