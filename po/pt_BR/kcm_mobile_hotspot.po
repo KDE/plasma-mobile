@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2020-04-27 15:43-0300\n"
+"PO-Revision-Date: 2023-03-22 10:47-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.03.80\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/ui/main.qml:42
 #, kde-format
@@ -25,19 +25,17 @@ msgstr "Ponto de acesso"
 #: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
-msgstr ""
+msgstr "Se o ponto de acesso sem fio está ativado."
 
 #: package/contents/ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Ponto de acesso"
+msgstr "SSID do ponto de acesso"
 
 #: package/contents/ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Senha:"
+msgstr "Senha do ponto de acesso"
 
 #~ msgid "Enabled:"
 #~ msgstr "Habilitado:"

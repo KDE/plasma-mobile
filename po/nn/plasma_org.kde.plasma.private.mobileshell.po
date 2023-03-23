@@ -169,17 +169,17 @@ msgstr "Vis/gøym lydstraumar"
 #: qml/volumeosd/VolumeOSDProvider.qml:47
 #, kde-format
 msgid "Audio"
-msgstr ""
+msgstr "Lyd"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:51
 #, kde-format
 msgid "Increase Volume"
-msgstr ""
+msgstr "Høgare lyd"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:58
 #, kde-format
 msgid "Decrease Volume"
-msgstr ""
+msgstr "Lågare lyd"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:182
 #, kde-format
