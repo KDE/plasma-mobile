@@ -8,6 +8,7 @@ set(mobileshellstateplugin_SRCS
     mobileshellstateplugin.cpp
     shelldbusobject.cpp
     shelldbusclient.cpp
+    lockscreendbusclient.cpp
 )
 
 qt_generate_dbus_interface(

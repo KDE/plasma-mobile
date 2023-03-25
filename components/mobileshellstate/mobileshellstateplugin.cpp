@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "mobileshellstateplugin.h"
+#include "lockscreendbusclient.h"
 #include "shelldbusclient.h"
 #include "shelldbusobject.h"
 
@@ -22,5 +23,8 @@ void MobileShellStatePlugin::registerTypes(const char *uri)
     });
     qmlRegisterSingletonType<ShellDBusObject>(uri, 1, 0, "ShellDBusObject", [](QQmlEngine *, QJSEngine *) -> QObject * {
         return ShellDBusObject::self();
+    });
+    qmlRegisterSingletonType<LockscreenDBusClient>(uri, 1, 0, "LockscreenDBusClient", [](QQmlEngine *, QJSEngine *) -> QObject * {
+        return LockscreenDBusClient::self();
     });
 }

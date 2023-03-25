@@ -107,6 +107,19 @@ Item {
 
 //END API implementation
 
+    Connections {
+        target: MobileShellState.LockscreenDBusClient
+
+        function onLockscreenActiveChanged() {
+            // run zoom animation after login
+            if (!MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                itemContainer.opacity = 0;
+                itemContainer.zoomScale = 0.8;
+                itemContainer.zoomIn();
+            }
+        }
+    }
+
     Component.onCompleted: {
         // determine the margins used
         evaluateMargins();
