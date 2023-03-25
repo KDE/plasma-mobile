@@ -21,6 +21,7 @@ public:
 Q_SIGNALS:
     Q_SCRIPTABLE void doNotDisturbChanged();
     Q_SCRIPTABLE void isActionDrawerOpenChanged();
+    Q_SCRIPTABLE void isTaskSwitcherVisibleChanged();
     Q_SCRIPTABLE void openActionDrawerRequested();
     Q_SCRIPTABLE void closeActionDrawerRequested();
     Q_SCRIPTABLE void openAppLaunchAnimationRequested(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
@@ -37,6 +38,9 @@ public Q_SLOTS:
     Q_SCRIPTABLE bool isActionDrawerOpen();
     Q_SCRIPTABLE void setIsActionDrawerOpen(bool value);
 
+    Q_SCRIPTABLE bool isTaskSwitcherVisible();
+    Q_SCRIPTABLE void setIsTaskSwitcherVisible(bool value);
+
     Q_SCRIPTABLE void openActionDrawer();
     Q_SCRIPTABLE void closeActionDrawer();
 
@@ -52,4 +56,5 @@ private:
 
     bool m_doNotDisturb = false;
     bool m_isActionDrawerOpen = false;
+    bool m_isTaskSwitcherVisible = false;
 };

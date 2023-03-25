@@ -4,6 +4,9 @@
 
 #include "mobiletaskswitchereffect.h"
 
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusReply>
 #include <QKeyEvent>
 #include <QMetaObject>
 #include <QQuickItem>
@@ -151,6 +154,7 @@ void MobileTaskSwitcherEffect::activate()
 
     m_status = Status::Active;
     setRunning(true);
+    setDBusState(true);
 }
 
 void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
@@ -165,6 +169,8 @@ void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
 
     setGestureInProgress(false);
     setPartialActivationFactor(0.0);
+
+    setDBusState(false);
 }
 
 void MobileTaskSwitcherEffect::partialActivate(qreal factor)
@@ -248,5 +254,15 @@ void MobileTaskSwitcherEffect::setPartialActivationFactor(qreal factor)
         m_partialActivationFactor = factor;
         Q_EMIT partialActivationFactorChanged();
     }
+}
+
+void MobileTaskSwitcherEffect::setDBusState(bool active)
+{
+    QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.kde.plasmashell"),
+                                                          QStringLiteral("/Mobile"),
+                                                          QStringLiteral("org.kde.plasmashell"),
+                                                          QStringLiteral("setIsTaskSwitcherVisible"));
+    request.setArguments({active});
+    const QDBusReply<bool> response = QDBusConnection::sessionBus().call(request);
 }
 }

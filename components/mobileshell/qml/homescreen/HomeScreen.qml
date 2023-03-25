@@ -103,6 +103,14 @@ Item {
         function onCloseAppLaunchAnimationRequested() {
             startupFeedback.close();
         }
+
+        function onIsTaskSwitcherVisibleChanged() {
+            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+                itemContainer.zoomOutImmediately();
+            } else {
+                itemContainer.zoomIn();
+            }
+        }
     }
 
 //END API implementation
@@ -132,9 +140,9 @@ Item {
         
         // animations
         opacity: 0
-        property real zoomScale: 0.8
+        property real zoomScale: 1
         
-        Component.onCompleted: zoomIn()
+        readonly property real zoomScaleOut: 0.8
         
         function zoomIn() {
             // don't use check animationsEnabled here, so we ensure the scale and opacity is always 1 when disabled
@@ -143,31 +151,36 @@ Item {
             opacityAnim.to = 1;
             opacityAnim.restart();
         }
+
         function zoomOut() {
-            if (ShellSettings.Settings.animationsEnabled) {
-                scaleAnim.to = 0.8;
-                scaleAnim.restart();
-                opacityAnim.to = 0;
-                opacityAnim.restart();
-            }
+            scaleAnim.to = zoomScaleOut;
+            scaleAnim.restart();
+            opacityAnim.to = 0;
+            opacityAnim.restart();
+        }
+
+        function zoomOutImmediately() {
+            zoomScale = zoomScaleOut;
+            opacity = 0;
         }
         
         NumberAnimation on opacity {
             id: opacityAnim
-            duration: ShellSettings.Settings.animationsEnabled ? 300 : 0
+            duration: 300
             running: false
         }
         
         NumberAnimation on zoomScale {
             id: scaleAnim
-            duration: ShellSettings.Settings.animationsEnabled ? 600 : 0
+            duration: 600
             running: false
             easing.type: Easing.OutExpo
         }
         
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if (!WindowPlugin.WindowMaximizedTracker.showingWindow || WindowPlugin.WindowUtil.activeWindowIsShell) {
+            if ((!WindowPlugin.WindowMaximizedTracker.showingWindow || WindowPlugin.WindowUtil.activeWindowIsShell) &&
+                !MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
                 itemContainer.zoomIn();
             } else {
                 itemContainer.zoomOut();

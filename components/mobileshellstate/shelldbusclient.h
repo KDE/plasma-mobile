@@ -12,18 +12,21 @@
 class ShellDBusClient : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool doNotDisturb READ doNotDisturb WRITE setDoNotDisturb NOTIFY doNotDisturbChanged);
-    Q_PROPERTY(bool isActionDrawerOpen READ isActionDrawerOpen WRITE setIsActionDrawerOpen NOTIFY isActionDrawerOpenChanged);
+    Q_PROPERTY(bool doNotDisturb READ doNotDisturb WRITE setDoNotDisturb NOTIFY doNotDisturbChanged)
+    Q_PROPERTY(bool isActionDrawerOpen READ isActionDrawerOpen WRITE setIsActionDrawerOpen NOTIFY isActionDrawerOpenChanged)
+    Q_PROPERTY(bool isTaskSwitcherVisible READ isTaskSwitcherVisible NOTIFY isTaskSwitcherVisibleChanged)
 
 public:
     explicit ShellDBusClient(QObject *parent = nullptr);
     static ShellDBusClient *self();
 
-    bool doNotDisturb();
+    bool doNotDisturb() const;
     void setDoNotDisturb(bool value);
 
-    bool isActionDrawerOpen();
+    bool isActionDrawerOpen() const;
     void setIsActionDrawerOpen(bool value);
+
+    bool isTaskSwitcherVisible() const;
 
     Q_INVOKABLE void openActionDrawer();
     Q_INVOKABLE void closeActionDrawer();
@@ -38,6 +41,7 @@ public:
 Q_SIGNALS:
     void isActionDrawerOpenChanged();
     void doNotDisturbChanged();
+    void isTaskSwitcherVisibleChanged();
     void openActionDrawerRequested();
     void closeActionDrawerRequested();
     void openAppLaunchAnimationRequested(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
@@ -49,6 +53,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void updateDoNotDisturb();
     void updateIsActionDrawerOpen();
+    void updateIsTaskSwitcherVisible();
 
 private:
     void connectSignals();
@@ -56,7 +61,9 @@ private:
     OrgKdePlasmashellInterface *m_interface;
     QDBusServiceWatcher *m_watcher;
 
-    bool m_doNotDisturb;
-    bool m_isActionDrawerOpen;
-    bool m_connected;
+    bool m_doNotDisturb = false;
+    bool m_isActionDrawerOpen = false;
+    bool m_isTaskSwitcherVisible = false;
+
+    bool m_connected = false;
 };

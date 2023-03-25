@@ -8,10 +8,9 @@
 ShellDBusClient::ShellDBusClient(QObject *parent)
     : QObject{parent}
     , m_interface{new OrgKdePlasmashellInterface{QStringLiteral("org.kde.plasmashell"), QStringLiteral("/Mobile"), QDBusConnection::sessionBus(), this}}
+    , m_watcher{new QDBusServiceWatcher(QStringLiteral("org.kde.plasmashell"), QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this)}
     , m_connected{false}
 {
-    m_watcher = new QDBusServiceWatcher(QStringLiteral("org.kde.plasmashell"), QDBusConnection::sessionBus(), QDBusServiceWatcher::WatchForOwnerChange, this);
-
     if (m_interface->isValid()) {
         connectSignals();
     }
@@ -38,6 +37,7 @@ void ShellDBusClient::connectSignals()
 {
     connect(m_interface, &OrgKdePlasmashellInterface::isActionDrawerOpenChanged, this, &ShellDBusClient::updateIsActionDrawerOpen);
     connect(m_interface, &OrgKdePlasmashellInterface::doNotDisturbChanged, this, &ShellDBusClient::updateDoNotDisturb);
+    connect(m_interface, &OrgKdePlasmashellInterface::isTaskSwitcherVisibleChanged, this, &ShellDBusClient::updateIsTaskSwitcherVisible);
     connect(m_interface, &OrgKdePlasmashellInterface::openActionDrawerRequested, this, &ShellDBusClient::openActionDrawerRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::closeActionDrawerRequested, this, &ShellDBusClient::closeActionDrawerRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::openAppLaunchAnimationRequested, this, &ShellDBusClient::openAppLaunchAnimationRequested);
@@ -48,9 +48,10 @@ void ShellDBusClient::connectSignals()
 
     updateIsActionDrawerOpen();
     updateDoNotDisturb();
+    updateIsTaskSwitcherVisible();
 }
 
-bool ShellDBusClient::doNotDisturb()
+bool ShellDBusClient::doNotDisturb() const
 {
     return m_doNotDisturb;
 }
@@ -60,7 +61,7 @@ void ShellDBusClient::setDoNotDisturb(bool value)
     m_interface->setDoNotDisturb(value);
 }
 
-bool ShellDBusClient::isActionDrawerOpen()
+bool ShellDBusClient::isActionDrawerOpen() const
 {
     return m_isActionDrawerOpen;
 }
@@ -78,6 +79,11 @@ void ShellDBusClient::openActionDrawer()
 void ShellDBusClient::closeActionDrawer()
 {
     m_interface->closeActionDrawer();
+}
+
+bool ShellDBusClient::isTaskSwitcherVisible() const
+{
+    return m_isTaskSwitcherVisible;
 }
 
 void ShellDBusClient::openAppLaunchAnimation(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
@@ -115,4 +121,10 @@ void ShellDBusClient::updateIsActionDrawerOpen()
 {
     m_isActionDrawerOpen = m_interface->isActionDrawerOpen();
     Q_EMIT isActionDrawerOpenChanged();
+}
+
+void ShellDBusClient::updateIsTaskSwitcherVisible()
+{
+    m_isTaskSwitcherVisible = m_interface->isTaskSwitcherVisible();
+    Q_EMIT isTaskSwitcherVisibleChanged();
 }

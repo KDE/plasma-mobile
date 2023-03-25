@@ -43,6 +43,8 @@ public:
     void reconfigure(ReconfigureFlags flags) override;
     void grabbedKeyboardEvent(QKeyEvent *keyEvent) override;
 
+    void setDBusState(bool active);
+
 public Q_SLOTS:
     void activate();
     void realDeactivate();

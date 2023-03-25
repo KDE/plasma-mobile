@@ -52,6 +52,19 @@ void ShellDBusObject::setIsActionDrawerOpen(bool value)
     }
 }
 
+bool ShellDBusObject::isTaskSwitcherVisible()
+{
+    return m_isTaskSwitcherVisible;
+}
+
+void ShellDBusObject::setIsTaskSwitcherVisible(bool value)
+{
+    if (value != m_isTaskSwitcherVisible) {
+        m_isTaskSwitcherVisible = value;
+        Q_EMIT isTaskSwitcherVisibleChanged();
+    }
+}
+
 void ShellDBusObject::openActionDrawer()
 {
     Q_EMIT openActionDrawerRequested();

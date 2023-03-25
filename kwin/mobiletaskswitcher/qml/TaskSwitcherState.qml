@@ -227,10 +227,6 @@ QtObject {
             root.currentlyBeingOpened = false;
             scrollingTasks = false;
             taskSwitcher.instantHide();
-
-            if (root.wasInActiveTask) {
-                taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
-            }
         }
     }
 
@@ -246,7 +242,6 @@ QtObject {
         onFinished: {
             root.currentlyBeingClosed = false;
             root.currentlyBeingOpened = false;
-            taskSwitcher.setSingleActiveWindow(root.currentTaskIndex);
             taskSwitcher.instantHide();
         }
     }
