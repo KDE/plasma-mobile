@@ -122,14 +122,6 @@ FocusScope {
         outputName: targetScreen.name
     }
 
-    FastBlur {
-        source: backgroundItem
-        anchors.fill: parent
-        opacity: container.opacity
-        radius: 50
-        cached: true
-    }
-
     // background colour
     Rectangle {
         id: backgroundRect
