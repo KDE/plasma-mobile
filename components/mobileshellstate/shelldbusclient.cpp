@@ -113,18 +113,36 @@ void ShellDBusClient::showVolumeOSD()
 
 void ShellDBusClient::updateDoNotDisturb()
 {
-    m_doNotDisturb = m_interface->doNotDisturb();
-    Q_EMIT doNotDisturbChanged();
+    auto reply = m_interface->doNotDisturb();
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
+        QDBusPendingReply<bool> reply = *watcher;
+        m_doNotDisturb = reply.argumentAt<0>();
+        Q_EMIT doNotDisturbChanged();
+    });
 }
 
 void ShellDBusClient::updateIsActionDrawerOpen()
 {
-    m_isActionDrawerOpen = m_interface->isActionDrawerOpen();
-    Q_EMIT isActionDrawerOpenChanged();
+    auto reply = m_interface->isActionDrawerOpen();
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
+        QDBusPendingReply<bool> reply = *watcher;
+        m_isActionDrawerOpen = reply.argumentAt<0>();
+        Q_EMIT isActionDrawerOpenChanged();
+    });
 }
 
 void ShellDBusClient::updateIsTaskSwitcherVisible()
 {
-    m_isTaskSwitcherVisible = m_interface->isTaskSwitcherVisible();
-    Q_EMIT isTaskSwitcherVisibleChanged();
+    auto reply = m_interface->isTaskSwitcherVisible();
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
+        QDBusPendingReply<bool> reply = *watcher;
+        m_isTaskSwitcherVisible = reply.argumentAt<0>();
+        Q_EMIT isTaskSwitcherVisibleChanged();
+    });
 }
