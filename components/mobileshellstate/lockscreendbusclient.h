@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include <QDBusError>
 #include <QDBusServiceWatcher>
 #include <QObject>
 #include <QString>
@@ -20,10 +21,14 @@ public:
 
 Q_SIGNALS:
     void lockscreenActiveChanged();
+    void lockscreenUnlocked();
+    void lockscreenLocked();
 
 public Q_SLOTS:
     void slotLockscreenActiveChanged(bool active);
+    void dbusError(QDBusError error);
 
 private:
-    bool m_lockscreenActive;
+    bool m_lockscreenActive = false;
+    bool m_firstPropertySet = false;
 };

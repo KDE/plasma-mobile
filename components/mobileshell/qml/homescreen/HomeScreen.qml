@@ -118,13 +118,15 @@ Item {
     Connections {
         target: MobileShellState.LockscreenDBusClient
 
-        function onLockscreenActiveChanged() {
+        function onLockscreenLocked() {
+            itemContainer.zoomOut();
+        }
+
+        function onLockscreenUnlocked() {
             // run zoom animation after login
-            if (!MobileShellState.LockscreenDBusClient.lockscreenActive) {
-                itemContainer.opacity = 0;
-                itemContainer.zoomScale = 0.8;
-                itemContainer.zoomIn();
-            }
+            itemContainer.opacity = 0;
+            itemContainer.zoomScale = 0.8;
+            itemContainer.zoomIn();
         }
     }
 

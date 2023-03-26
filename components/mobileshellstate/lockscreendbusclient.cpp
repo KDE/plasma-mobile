@@ -15,17 +15,17 @@ LockscreenDBusClient::LockscreenDBusClient(QObject *parent)
                                                           QStringLiteral("/ScreenSaver"),
                                                           QStringLiteral("org.freedesktop.ScreenSaver"),
                                                           QStringLiteral("GetActive"));
+
     const QDBusReply<bool> response = QDBusConnection::sessionBus().call(request);
 
-    m_lockscreenActive = response.isValid() ? response.value() : false;
-    Q_EMIT lockscreenActiveChanged();
+    QDBusConnection::sessionBus().callWithCallback(request, this, SLOT(slotLockscreenActiveChanged(bool)), SLOT(dbusError(QDBusError)));
 
     QDBusConnection::sessionBus().connect(QStringLiteral("org.freedesktop.ScreenSaver"),
                                           QStringLiteral("/ScreenSaver"),
                                           QStringLiteral("org.freedesktop.ScreenSaver"),
                                           QStringLiteral("ActiveChanged"),
                                           this,
-                                          SLOT(slotLockscreenActiveChanged));
+                                          SLOT(slotLockscreenActiveChanged(bool)));
 }
 
 LockscreenDBusClient *LockscreenDBusClient::self()
@@ -43,6 +43,19 @@ void LockscreenDBusClient::slotLockscreenActiveChanged(bool active)
 {
     if (active != m_lockscreenActive) {
         m_lockscreenActive = active;
+
         Q_EMIT lockscreenActiveChanged();
+
+        // we don't want to trigger a lockscreen changing signal for the first property fetch (in constructor),
+        // since it's just getting the current state
+        if (m_firstPropertySet) {
+            m_lockscreenActive ? Q_EMIT lockscreenLocked() : Q_EMIT lockscreenUnlocked();
+        }
+        m_firstPropertySet = true;
     }
+}
+
+void LockscreenDBusClient::dbusError(QDBusError error)
+{
+    qDebug() << "Error fetching lockscreen state using DBus:" << error.message();
 }
