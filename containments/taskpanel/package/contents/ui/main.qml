@@ -15,7 +15,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
-import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
@@ -46,12 +46,16 @@ PlasmaCore.ColorScope {
 
     readonly property real intendedWindowThickness: navigationPanelHeight
     readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
-    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? Components.Constants.topPanelHeight : 0; // offset for top panel
+    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? MobileShell.Constants.topPanelHeight : 0; // offset for top panel
     readonly property int intendedWindowLocation: isInLandscapeNavPanelMode ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
-    onIntendedWindowOffsetChanged: plasmoid.Window.window.offset = intendedWindowOffset
     onIntendedWindowLocationChanged: locationChangeTimer.restart()
+    onIntendedWindowOffsetChanged: {
+        if (plasmoid && plasmoid.Window.window) {
+            plasmoid.Window.window.offset = intendedWindowOffset;
+        }
+    }
 
     // use a timer so we don't have to maximize for every single pixel
     // - improves performance if the shell is run in a window, and can be resized
@@ -76,7 +80,7 @@ PlasmaCore.ColorScope {
 
     function setWindowProperties() {
         // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
-        if (plasmoid) {
+        if (plasmoid && plasmoid.Window.window) {
             plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
             plasmoid.Window.window.offset = intendedWindowOffset;
             plasmoid.Window.window.thickness = navigationPanelHeight;

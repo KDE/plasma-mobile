@@ -107,7 +107,7 @@ Item {
         function onIsTaskSwitcherVisibleChanged() {
             if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
                 itemContainer.zoomOutImmediately();
-            } else {
+            } else if (!WindowPlugin.WindowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
         }
@@ -124,8 +124,7 @@ Item {
 
         function onLockscreenUnlocked() {
             // run zoom animation after login
-            itemContainer.opacity = 0;
-            itemContainer.zoomScale = 0.8;
+            itemContainer.zoomOutImmediately();
             itemContainer.zoomIn();
         }
     }
@@ -162,6 +161,8 @@ Item {
         }
 
         function zoomOutImmediately() {
+            scaleAnim.stop();
+            opacityAnim.stop();
             zoomScale = zoomScaleOut;
             opacity = 0;
         }
@@ -178,22 +179,13 @@ Item {
             running: false
             easing.type: Easing.OutExpo
         }
-        
+
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if ((!WindowPlugin.WindowMaximizedTracker.showingWindow || WindowPlugin.WindowUtil.activeWindowIsShell) &&
-                !MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+            if (!WindowPlugin.WindowMaximizedTracker.showingWindow && !MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
                 itemContainer.zoomIn();
             } else {
                 itemContainer.zoomOut();
-            }
-        }
-        
-        Connections {
-            target: WindowPlugin.WindowUtil
-
-            function onActiveWindowIsShellChanged() {
-                itemContainer.evaluateAnimChange();
             }
         }
 
