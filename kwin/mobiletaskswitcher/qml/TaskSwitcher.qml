@@ -74,7 +74,6 @@ FocusScope {
     Component.onCompleted: {
         taskList.jumpToFirstVisibleWindow();
         taskList.minimizeAll();
-        taskSwitcherState.currentlyBeingOpened = true;
 
         // fully open the panel (if this is a button press, not gesture)
         if (!root.effect.gestureInProgress) {

@@ -57,7 +57,7 @@ QtObject {
     property bool wasInActiveTask: false
 
     // whether we are in a swipe up gesture to open the task switcher
-    property bool currentlyBeingOpened: false
+    property bool currentlyBeingOpened: true // assume that task switcher is loaded on open
 
     // whether the task switcher is being closed: an animation is running
     property bool currentlyBeingClosed: false
