@@ -263,6 +263,6 @@ void MobileTaskSwitcherEffect::setDBusState(bool active)
                                                           QStringLiteral("org.kde.plasmashell"),
                                                           QStringLiteral("setIsTaskSwitcherVisible"));
     request.setArguments({active});
-    const QDBusReply<bool> response = QDBusConnection::sessionBus().call(request);
+    const QDBusReply<bool> response = QDBusConnection::sessionBus().call(request, QDBus::NoBlock);
 }
 }
