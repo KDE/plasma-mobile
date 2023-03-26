@@ -60,8 +60,8 @@
         "Name[uk]": "Збіжні вікна",
         "Name[x-test]": "xxConvergent Windowsxx",
         "Version": "1.0",
-        "Website": "https://invent.kde.org/plata/convergentwindows"
+        "Website": "https://invent.kde.org/plasma/plasma-mobile"
     },
-    "X-Plasma-API": "javascript",
-    "X-Plasma-MainScript": "code/main.js"
+    "X-Plasma-API": "declarativescript",
+    "X-Plasma-MainScript": "ui/main.qml"
 }
