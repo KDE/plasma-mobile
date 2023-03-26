@@ -9,12 +9,12 @@ Item {
     id: root
 
     function run(client) {
-        if (client.screen === 0) {
+        // if (client.output === 0) {
             client.setMaximize(true, true);
             client.noBorder = true;
-        } else {
-            client.noBorder = false;
-        }
+        // } else {
+            // client.noBorder = false;
+        // }
     }
 
     Connections {
@@ -33,7 +33,7 @@ Item {
             // Windows are moved from the external screen
             // to the internal screen if the external screen
             // is disconnected.
-            const clients = Workspace.clientList();
+            const clients = Workspace.clients;
 
             for (var i = 0; i < clients.length; i++) {
                 if (clients[i].normalWindow) {
