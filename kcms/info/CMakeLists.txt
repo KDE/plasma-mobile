@@ -12,6 +12,7 @@ kcoreaddons_add_plugin(kcm_mobile_info SOURCES ${info_SRCS} INSTALL_NAMESPACE "p
 
 target_link_libraries(kcm_mobile_info
     Qt::Core
+    Qt::Gui
     KF6::CoreAddons
     KF6::I18n
     KF6::KCMUtilsQuick
