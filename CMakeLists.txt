@@ -49,6 +49,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
+    Gui
 )
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
