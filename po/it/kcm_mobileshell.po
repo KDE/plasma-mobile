@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Paolo Zamponi <zapaolo@email.it>, 2022.
+# Paolo Zamponi <zapaolo@email.it>, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-12-25 15:17+0100\n"
+"PO-Revision-Date: 2023-03-19 17:07+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -119,23 +119,22 @@ msgid "Mode when opening from the top right."
 msgstr "Modalità quando si apre dall'alto a destra."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
-#, fuzzy, kde-format
-#| msgid "Customize the order of quick settings in the pull-down panel."
+#, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
-"Personalizza l'ordine delle impostazioni rapide nel pannello a discesa."
+"Personalizza l'ordine delle impostazioni rapide nel pannello a discesa e "
+"nascondile."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Impostazioni rapide"
+msgstr "Impostazioni rapide disabilitate"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Abilita di nuovo le impostazioni rapide disabilitate in precedenza."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
