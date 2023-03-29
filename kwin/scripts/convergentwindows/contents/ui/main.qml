@@ -4,17 +4,32 @@
 
 import QtQuick
 import org.kde.kwin
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
     id: root
 
     function run(client) {
-        // if (client.output === 0) {
+        if (!ShellSettings.Settings.convergenceModeEnabled) {
             client.setMaximize(true, true);
             client.noBorder = true;
-        // } else {
-            // client.noBorder = false;
-        // }
+        } else {
+            client.noBorder = false;
+        }
+    }
+
+    Connections {
+        target: ShellSettings.Settings
+
+        function onConvergenceModeEnabledChanged() {
+            const clients = Workspace.clients;
+
+            for (let i = 0; i < clients.length; i++) {
+                if (clients[i].normalWindow) {
+                    root.run(clients[i]);
+                }
+            }
+        }
     }
 
     Connections {

@@ -34,6 +34,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
+            Q_EMIT convergenceModeEnabledChanged();
         }
     });
 }
@@ -139,5 +140,18 @@ void MobileShellSettings::setActionDrawerTopRightMode(ActionDrawerMode actionDra
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("actionDrawerTopRightMode", (int)actionDrawerMode, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::convergenceModeEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("convergenceModeEnabled", false);
+}
+
+void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("convergenceModeEnabled", enabled, KConfigGroup::Notify);
     m_config->sync();
 }

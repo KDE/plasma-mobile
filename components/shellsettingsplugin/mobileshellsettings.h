@@ -36,6 +36,9 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
     Q_PROPERTY(ActionDrawerMode actionDrawerTopRightMode READ actionDrawerTopRightMode WRITE setActionDrawerTopRightMode NOTIFY actionDrawerTopRightModeChanged)
 
+    // convergence mode
+    Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
+
 public:
     static MobileShellSettings *self();
 
@@ -151,6 +154,18 @@ public:
      */
     void setActionDrawerTopRightMode(ActionDrawerMode actionDrawerMode);
 
+    /**
+     * Whether convergence/docked mode is enabled.
+     */
+    bool convergenceModeEnabled() const;
+
+    /**
+     * Set whether convergence/docked mode is enabled.
+     *
+     * @param enabled
+     */
+    void setConvergenceModeEnabled(bool enabled);
+
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationIntensityChanged();
@@ -161,6 +176,7 @@ Q_SIGNALS:
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
+    void convergenceModeEnabledChanged();
 
 private:
     KConfigWatcher::Ptr m_configWatcher;
