@@ -173,7 +173,7 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
     }
 
     // remove saved config option
-    // keyGroup.deleteEntry(key);
+    keyGroup.deleteEntry(key);
     return value;
 }
 
