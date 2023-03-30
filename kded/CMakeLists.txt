@@ -4,10 +4,7 @@
 kcoreaddons_add_plugin(kded_plasma_mobile_start INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/kded")
 
 target_sources(kded_plasma_mobile_start PRIVATE
-    startdaemon.cpp
-    settings.cpp
-    config.h
-    utils.h
+    start.cpp
 )
 
 target_link_libraries(kded_plasma_mobile_start PRIVATE

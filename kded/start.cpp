@@ -7,16 +7,15 @@
 
 #include <QProcess>
 
-#include "settings.h"
-#include "startdaemon.h"
-
-K_PLUGIN_CLASS_WITH_JSON(PlasmaMobileStartDaemon, "kded_plasma_mobile_start.json")
+#include "start.h"
 
 PlasmaMobileStartDaemon::PlasmaMobileStartDaemon(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
 {
-    // apply configuration
-    Settings::self()->applyConfiguration();
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-envmanager --apply-settings"), {});
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
+    job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
+    job->start();
 }
 
-#include "startdaemon.moc"
+#include "start.moc"

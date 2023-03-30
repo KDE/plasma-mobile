@@ -9,11 +9,8 @@
 #include <QString>
 #include <QVariant>
 
-// kwinrc
-const QMap<QString, QMap<QString, QVariant>> KWINRC_SETTINGS = {
-    {"Plugins", {{"blurEnabled", false}, {"convergentwindowsEnabled", true}}},
-    {"Wayland", {{"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, {"VirtualKeyboardEnabled", true}}},
-};
+#include <KConfigGroup>
+#include <KSharedConfig>
 
 // applications-blacklistrc
 // NOTE: we only write these entries if they are not already defined in the config
@@ -27,3 +24,17 @@ const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_SETTINGS = {
 // kdeglobals
 // NOTE: we only write these entries if they are not already defined in the config
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_SETTINGS = {{"General", {{"BrowserApplication", "angelfish"}}}};
+
+// kwinrc
+QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mobileConfig)
+{
+    auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
+    bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
+
+    return {
+        {"Plugins", {{"blurEnabled", false}, {"convergentwindowsEnabled", true}}},
+        {"Wayland", {{"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, {"VirtualKeyboardEnabled", true}}},
+        {"org.kde.kdecoration2",
+         {{"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}}} // ButtonsOnRight changes depending on whether the device is in convergence mode
+    };
+}

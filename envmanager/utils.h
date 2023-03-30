@@ -7,6 +7,6 @@
 
 static const QLoggingCategory &LOGGING_CATEGORY()
 {
-    static const QLoggingCategory category("plasma-mobile-initial-start");
+    static const QLoggingCategory category("plasma-mobile-envmanager");
     return category;
 }

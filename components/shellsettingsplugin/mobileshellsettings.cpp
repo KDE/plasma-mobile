@@ -6,6 +6,9 @@
 
 #include "mobileshellsettings.h"
 
+#include <KIO/CommandLauncherJob>
+#include <KNotificationJobUiDelegate>
+#include <KPluginFactory>
 #include <QDebug>
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
@@ -154,4 +157,10 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("convergenceModeEnabled", enabled, KConfigGroup::Notify);
     m_config->sync();
+
+    // update environment settings
+    auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-envmanager --apply-settings"), {});
+    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
+    job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
+    job->start();
 }

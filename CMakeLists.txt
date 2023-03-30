@@ -103,6 +103,7 @@ add_subdirectory(quicksettings)
 add_subdirectory(kcms)
 add_subdirectory(kded)
 add_subdirectory(kwin)
+add_subdirectory(envmanager)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES

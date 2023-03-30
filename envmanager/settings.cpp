@@ -23,10 +23,11 @@ const QString LOOK_AND_FEEL_KEY = QStringLiteral("LookAndFeelPackage");
 Settings::Settings(QObject *parent)
     : QObject{parent}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(QStringLiteral("phone"))}
-    , m_initialStartConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
+    , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
     , m_kwinrcConfig{KSharedConfig::openConfig(QStringLiteral("kwinrc"), KConfig::SimpleConfig)}
     , m_appBlacklistConfig{KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"), KConfig::SimpleConfig)}
     , m_kdeglobalsConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
+    , m_configWatcher{KConfigWatcher::create(m_mobileConfig)}
 {
 }
 
@@ -34,23 +35,6 @@ Settings *Settings::self()
 {
     static Settings *settings = new Settings;
     return settings;
-}
-
-bool Settings::shouldStartWizard()
-{
-    if (!m_isMobilePlatform) {
-        return false;
-    }
-
-    const auto group = KConfigGroup{m_initialStartConfig, INITIAL_START_CONFIG_GROUP};
-    return !group.readEntry("wizardRun", false);
-}
-
-void Settings::setWizardFinished()
-{
-    auto group = KConfigGroup{m_initialStartConfig, INITIAL_START_CONFIG_GROUP};
-    group.writeEntry("wizardRun", true, KConfigGroup::Notify);
-    m_initialStartConfig->sync();
 }
 
 void Settings::applyConfiguration()
@@ -72,7 +56,7 @@ void Settings::loadSavedConfiguration()
     loadSavedConfigSetting(m_kdeglobalsConfig, QStringLiteral("kdeglobals"), QStringLiteral("KDE"), LOOK_AND_FEEL_KEY);
 
     // kwinrc
-    loadKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, KWINRC_SETTINGS);
+    loadKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
     m_kwinrcConfig->sync();
     reloadKWinConfig();
 
@@ -85,7 +69,7 @@ void Settings::loadSavedConfiguration()
     m_kdeglobalsConfig->sync();
 
     // save our changes
-    m_initialStartConfig->sync();
+    m_mobileConfig->sync();
 }
 
 void Settings::applyMobileConfiguration()
@@ -102,7 +86,7 @@ void Settings::applyMobileConfiguration()
     }
 
     // kwinrc
-    writeKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, KWINRC_SETTINGS, false);
+    writeKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig), false);
     m_kwinrcConfig->sync();
     reloadKWinConfig();
 
@@ -117,7 +101,7 @@ void Settings::applyMobileConfiguration()
     m_kdeglobalsConfig->sync();
 
     // save our changes
-    m_initialStartConfig->sync();
+    m_mobileConfig->sync();
 }
 
 void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty)
@@ -151,7 +135,7 @@ void Settings::loadKeys(const QString &fileName, KSharedConfig::Ptr &config, con
 // NOTE: this only saves a value if it hasn't already been saved
 void Settings::saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value)
 {
-    auto savedGroup = KConfigGroup{m_initialStartConfig, SAVED_CONFIG_GROUP};
+    auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
     auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
@@ -164,7 +148,7 @@ void Settings::saveConfigSetting(const QString &fileName, const QString &group, 
 // NOTE: this deletes the stored value from the config after loading
 void Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key)
 {
-    const auto savedGroup = KConfigGroup{m_initialStartConfig, SAVED_CONFIG_GROUP};
+    const auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
     const auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
