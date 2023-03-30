@@ -1,8 +1,8 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-#include <QApplication>
 #include <QCommandLineParser>
+#include <QCoreApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -17,7 +17,7 @@
 QCommandLineParser *createParser()
 {
     QCommandLineParser *parser = new QCommandLineParser;
-    parser->addOption(QCommandLineOption(QStringLiteral("apply-settings"), i18n("Applies the correct system settings for the current environment.")));
+    parser->addOption(QCommandLineOption(QStringLiteral("apply-settings"), "Applies the correct system settings for the current environment."));
     parser->addVersionOption();
     parser->addHelpOption();
     return parser;
@@ -25,7 +25,7 @@ QCommandLineParser *createParser()
 
 int main(int argc, char *argv[])
 {
-    QApplication app(argc, argv);
+    QCoreApplication app(argc, argv);
 
     // parse command
     QScopedPointer<QCommandLineParser> parser{createParser()};

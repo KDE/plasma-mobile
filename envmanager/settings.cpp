@@ -53,7 +53,8 @@ void Settings::applyConfiguration()
 void Settings::loadSavedConfiguration()
 {
     // check look and feel
-    loadSavedConfigSetting(m_kdeglobalsConfig, QStringLiteral("kdeglobals"), QStringLiteral("KDE"), LOOK_AND_FEEL_KEY);
+    QString lnf = loadSavedConfigSetting(m_kdeglobalsConfig, QStringLiteral("kdeglobals"), QStringLiteral("KDE"), LOOK_AND_FEEL_KEY, false);
+    QProcess::execute("plasma-apply-lookandfeel", {"-a", lnf});
 
     // kwinrc
     loadKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
@@ -146,14 +147,14 @@ void Settings::saveConfigSetting(const QString &fileName, const QString &group, 
 }
 
 // NOTE: this deletes the stored value from the config after loading
-void Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key)
+const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write)
 {
     const auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
     const auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
-        return;
+        return {};
     }
 
     const auto value = keyGroup.readEntry(key);
@@ -161,7 +162,7 @@ void Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString 
     // write to real config
     auto configGroup = KConfigGroup{config, group};
 
-    if (!configGroup.hasKey(key) || configGroup.readEntry(key) != value) {
+    if ((!configGroup.hasKey(key) || configGroup.readEntry(key) != value) && write) {
         qCDebug(LOGGING_CATEGORY) << "In" << fileName << "loading saved value of" << key << "which is" << value;
 
         if (value.isEmpty()) { // delete blank entries!
@@ -172,7 +173,8 @@ void Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString 
     }
 
     // remove saved config option
-    keyGroup.deleteEntry(key);
+    // keyGroup.deleteEntry(key);
+    return value;
 }
 
 void Settings::reloadKWinConfig()
