@@ -1,14 +1,14 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-kcoreaddons_add_plugin(kwin4_effect_mobiletaskswitcher INSTALL_NAMESPACE "kwin/effects/plugins")
-target_sources(kwin4_effect_mobiletaskswitcher PRIVATE
+kcoreaddons_add_plugin(mobiletaskswitcher INSTALL_NAMESPACE "kwin/effects/plugins")
+target_sources(mobiletaskswitcher PRIVATE
     main.cpp
     mobiletaskswitchereffect.cpp
 )
-install(FILES metadata.json DESTINATION ${KDE_INSTALL_DATADIR}/kwin/builtin-effects/kwin4_effect_mobiletaskswitcher/)
+install(FILES mobiletaskswitcher.json DESTINATION ${KDE_INSTALL_DATADIR}/kwin/builtin-effects)
 
-target_link_libraries(kwin4_effect_mobiletaskswitcher
+target_link_libraries(mobiletaskswitcher
     KF6::ConfigGui
     KF6::GlobalAccel
     KF6::I18n

@@ -6,7 +6,7 @@
 namespace KWin
 {
 
-KWIN_EFFECT_FACTORY_SUPPORTED(MobileTaskSwitcherEffect, "metadata.json", return MobileTaskSwitcherEffect::supported();)
+KWIN_EFFECT_FACTORY_SUPPORTED(MobileTaskSwitcherEffect, "mobiletaskswitcher.json", return MobileTaskSwitcherEffect::supported();)
 
 } // namespace KWin
 
