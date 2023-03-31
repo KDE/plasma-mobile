@@ -63,28 +63,51 @@ Item {
         }
 
         onClicked: {
-            if (!taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
+            if (!taskSwitcher.taskSwitcherState.currentlyBeingOpened && !passedDragThreshold) {
                 delegate.activateApp();
             }
         }
 
-        // drag up gesture
-        DragHandler {
-            id: dragHandler
-            target: parent
+        // pixels before we start treating it as drag event
+        readonly property real dragThreshold: 5
 
-            enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
+        property real startPosition: 0
+        property bool hasStartPosition: false
+        property bool passedDragThreshold: false
 
-            yAxis.enabled: true
-            xAxis.enabled: false
-            yAxis.maximum: 0
+        onPositionChanged: (mouse) => {
+            // map it to the root area, so that it doesn't jitter (since this item is moving)
+            const yPos = control.mapToItem(delegate, mouse.x, mouse.y).y
 
-            // y > 0 - dragging down (opening the app)
+            // reset start position
+            if (!hasStartPosition) {
+                startPosition = yPos;
+                hasStartPosition = true;
+            }
+
+            // set threshold
+            if (!passedDragThreshold && Math.abs(y) > dragThreshold) {
+                passedDragThreshold = true;
+                // TODO: request that FlickContainer be not interactive (so we don't change position in list while swiping up)
+            }
+
+            // update position
             // y < 0 - dragging up (dismissing the app)
-            onActiveChanged: {
-                yAnimator.stop();
+            y = Math.min(0, yPos - startPosition);
+        }
 
-                if (control.movingUp && parent.y < -PlasmaCore.Units.gridUnit * 2) {
+        onPressedChanged: {
+            yAnimator.stop();
+
+            // reset values
+            if (pressed) {
+                hasStartPosition = false;
+                passedDragThreshold = false;
+            }
+
+            // run animation when finger lets go
+            if (!pressed) {
+                if (control.movingUp && control.y < -PlasmaCore.Units.gridUnit * 2) {
                     yAnimator.to = -root.height;
                 } else {
                     yAnimator.to = 0;
@@ -105,7 +128,7 @@ Item {
 
         NumberAnimation on y {
             id: yAnimator
-            running: !dragHandler.active
+            running: !control.pressed
             duration: PlasmaCore.Units.longDuration
             easing.type: Easing.InOutQuad
             to: 0
