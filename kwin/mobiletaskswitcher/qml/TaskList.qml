@@ -69,7 +69,6 @@ MouseArea {
     }
 
     onClicked: {
-        console.log('tapped')
         // if tapped on the background, then hide
         if (!taskSwitcherState.currentlyBeingOpened) {
             taskSwitcher.hide();
@@ -77,7 +76,6 @@ MouseArea {
     }
 
     onPressedChanged: {
-        console.log('pressed')
         if (!taskSwitcherState.currentlyBeingOpened && pressed) {
             // ensure animations aren't running when finger is pressed
             taskSwitcherState.cancelAnimations();

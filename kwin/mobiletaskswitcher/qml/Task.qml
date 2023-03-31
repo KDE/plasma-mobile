@@ -62,6 +62,12 @@ Item {
             oldY = y;
         }
 
+        onClicked: {
+            if (!taskSwitcher.taskSwitcherState.currentlyBeingOpened) {
+                delegate.activateApp();
+            }
+        }
+
         // drag up gesture
         DragHandler {
             id: dragHandler
@@ -168,7 +174,7 @@ Item {
                 clip: true
 
                 // scale animation on press
-                property real zoomScale: tapHandler.pressed ? 0.9 : 1
+                property real zoomScale: control.pressed ? 0.9 : 1
                 Behavior on zoomScale {
                     NumberAnimation {
                         duration: 200
@@ -198,12 +204,6 @@ Item {
                                 color: Qt.rgba(0, 0, 0, delegate.darken)
                             }
                         }
-                    }
-
-                    TapHandler {
-                        id: tapHandler
-                        enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
-                        onTapped: delegate.activateApp()
                     }
                 }
             }
