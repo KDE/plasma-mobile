@@ -9,7 +9,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.kwin 3.0 as KWinComponents
 
-Item {
+MouseArea {
     id: root
     readonly property int count: repeater.count
 
@@ -68,22 +68,19 @@ Item {
         yScale: taskSwitcherState.currentScale
     }
 
-    // taphandler activates even if delegate touched
-    TapHandler {
-        enabled: !taskSwitcherState.currentlyBeingOpened
-
-        onTapped: {
-            // if tapped on the background, then hide
-            if (root.childAt(eventPoint.position.x, eventPoint.position.y) === null) {
-                taskSwitcher.hide();
-            }
+    onClicked: {
+        console.log('tapped')
+        // if tapped on the background, then hide
+        if (!taskSwitcherState.currentlyBeingOpened) {
+            taskSwitcher.hide();
         }
+    }
 
-        onPressedChanged: {
-            if (pressed) {
-                // ensure animations aren't running when finger is pressed
-                taskSwitcherState.cancelAnimations();
-            }
+    onPressedChanged: {
+        console.log('pressed')
+        if (!taskSwitcherState.currentlyBeingOpened && pressed) {
+            // ensure animations aren't running when finger is pressed
+            taskSwitcherState.cancelAnimations();
         }
     }
 
