@@ -5,13 +5,14 @@ import QtQuick
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.taskmanager as TaskManager
+import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 pragma Singleton
 
 // Helper component that uses Plasma's tasks model to provide whether a maximized window is showing on the current screen.
 
 QtObject {
-    readonly property bool showingWindow: __internal.count > 0
+    readonly property bool showingWindow: __internal.count > 0 && !WindowPlugin.WindowUtil.isShowingDesktop
 
     property var __internal: PlasmaCore.SortFilterModel {
         id: visibleMaximizedWindowsModel
