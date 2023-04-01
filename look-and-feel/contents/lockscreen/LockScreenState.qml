@@ -17,13 +17,14 @@ QtObject {
     property string info: ""
     
     // whether the lockscreen was passwordless
-    property bool passwordless: true
+    property bool passwordless: false // TODO true
     
     signal reset()
     signal unlockSucceeded()
     signal unlockFailed()
     
     function tryPassword() {
+        console.log('try')
         if (root.password !== '') { // prevent typing lock when password is empty
             waitingForAuth = true;
         }
@@ -39,7 +40,9 @@ QtObject {
     Component.onCompleted: {
         // determine whether we have passwordless login
         // if we do, authenticator will emit a success signal, otherwise it will emit failure
-        authenticator.tryUnlock();
+
+        // TODO: Disabled for the time being, since it seems to cause an infinite loop
+        // authenticator.tryUnlock();
     }
     
     property var connections: Connections {
@@ -58,7 +61,7 @@ QtObject {
         }
         
         function onFailed() {
-            root.passwordless = false;
+            // root.passwordless = false;
             if (hasPrompt) {
                 console.log('login failed');
                 root.waitingForAuth = false;
@@ -84,8 +87,10 @@ QtObject {
         
         function onPromptForSecret(msg) {
             console.log('prompt secret: ' + msg);
-            authenticator.respond(root.password);
-            authenticator.tryUnlock();
+            if (root.password !== "") {
+                authenticator.respond(root.password);
+                authenticator.tryUnlock();
+            }
         }
         
     }
