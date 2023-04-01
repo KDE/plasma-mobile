@@ -32,6 +32,10 @@ MouseArea {
         return baseY + diff / 2 - shellTopMargin;
     }
 
+    function getTaskAt(index) {
+        return repeater.itemAt(index);
+    }
+
     function closeAll() {
         for (var i = 0; i < repeater.count; i++) {
             repeater.itemAt(i).closeApp();

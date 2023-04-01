@@ -141,7 +141,7 @@ void Settings::saveConfigSetting(const QString &fileName, const QString &group, 
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
-        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "set" << key << "to" << value;
+        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "saved" << key << "to" << value;
         keyGroup.writeEntry(key, value);
     }
 }

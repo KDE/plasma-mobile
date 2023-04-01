@@ -11,6 +11,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.kwin.private.effects 1.0
@@ -25,10 +26,13 @@ FocusScope {
     readonly property QtObject effect: KWinComponents.SceneView.effect
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
+    readonly property bool inLandscape: width > height;
+    readonly property bool isInLandscapeNavPanelMode: inLandscape && ShellSettings.Settings.navigationPanelEnabled
+
     readonly property real topMargin: MobileShell.Constants.topPanelHeight
-    readonly property real bottomMargin: MobileShell.Constants.bottomPanelHeight
+    readonly property real bottomMargin: isInLandscapeNavPanelMode ? 0 : MobileShell.Constants.bottomPanelHeight
     readonly property real leftMargin: 0
-    readonly property real rightMargin: 0
+    readonly property real rightMargin: isInLandscapeNavPanelMode ? MobileShell.Constants.bottomPanelHeight : 0
 
     property var taskSwitcherState: TaskSwitcherState {
         taskSwitcher: root
@@ -114,6 +118,7 @@ FocusScope {
         }
     }
 
+    // view of the desktop background
     KWinComponents.DesktopBackground {
         id: backgroundItem
         activity: KWinComponents.Workspace.currentActivity
@@ -137,6 +142,104 @@ FocusScope {
         }
     }
 
+    // status bar
+    MobileShell.StatusBar {
+        id: statusBar
+        z: 1
+        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        backgroundColor: "transparent"
+
+        height: root.topMargin
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+    }
+
+    // navigation panel
+    MobileShell.NavigationPanel {
+        id: navigationPanel
+        z: 1
+        visible: ShellSettings.Settings.navigationPanelEnabled
+        backgroundColor: Qt.rgba(0, 0, 0, 0.1)
+        foregroundColorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        shadow: false
+
+        leftAction: MobileShell.NavigationPanelAction {
+            enabled: true
+            iconSource: "mobile-task-switcher"
+            iconSizeFactor: 0.75
+
+            onTriggered: {
+                if (taskList.count === 0) {
+                    root.hide();
+                } else {
+                    const currentIndex = taskSwitcherState.currentTaskIndex;
+                    taskSwitcherState.openApp(taskSwitcherState.currentTaskIndex, taskList.getTaskAt(currentIndex).window);
+                }
+            }
+        }
+
+        // home button
+        middleAction: MobileShell.NavigationPanelAction {
+            enabled: true
+            iconSource: "start-here-kde"
+            iconSizeFactor: 1
+            onTriggered: root.hide()
+        }
+
+        // close app/keyboard button
+        rightAction: MobileShell.NavigationPanelAction {
+            enabled: true
+            iconSource: "mobile-close-app"
+            iconSizeFactor: 0.75
+
+            onTriggered: {
+                taskList.getTaskAt(taskSwitcherState.currentTaskIndex).closeApp();
+            }
+        }
+
+        rightCornerAction: MobileShell.NavigationPanelAction {
+            visible: false
+        }
+    }
+
+    states: [
+        State {
+            name: "landscape"
+            when: root.width > root.height
+            AnchorChanges {
+                target: navigationPanel
+                anchors {
+                    right: root.right
+                    top: root.top
+                    bottom: root.bottom
+                }
+            }
+            PropertyChanges {
+                target: navigationPanel
+                width: root.rightMargin
+                anchors.topMargin: root.topMargin
+            }
+        },
+        State {
+            name: "portrait"
+            when: root.width <= root.height
+            AnchorChanges {
+                target: navigationPanel
+                anchors {
+                    right: root.right
+                    left: root.left
+                    bottom: root.bottom
+                }
+            }
+            PropertyChanges {
+                target: navigationPanel
+                height: root.bottomMargin
+            }
+        }
+    ]
+
+    // task list
     Item {
         id: container
 
