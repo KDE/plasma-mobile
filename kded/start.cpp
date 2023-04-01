@@ -12,10 +12,15 @@
 Start::Start(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
 {
-    auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-envmanager --apply-settings"), {});
-    job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
-    job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
-    job->start();
+    auto *envmanagerJob = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-envmanager --apply-settings"), {});
+    envmanagerJob->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
+    envmanagerJob->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
+    envmanagerJob->start();
+
+    auto *initialstartJob = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-initial-start"), {});
+    initialstartJob->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
+    initialstartJob->setDesktopName(QStringLiteral("org.kde.plasma-mobile-initial-start"));
+    initialstartJob->start();
 }
 
 #include "start.moc"

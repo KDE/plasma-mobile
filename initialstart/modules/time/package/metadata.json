@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Description": "Time initialstart module for Plasma Mobile",
+        "Id": "org.kde.plasma.mobileinitialstart.time",
+        "License": "GPL-2.0+",
+        "Name": "Time",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}
+

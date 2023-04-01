@@ -67,6 +67,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     NetworkManagerQt
     KCMUtils
     Package
+    DBusAddons
 )
 
 find_package(PkgConfig REQUIRED)
@@ -104,6 +105,7 @@ add_subdirectory(kcms)
 add_subdirectory(kded)
 add_subdirectory(kwin)
 add_subdirectory(envmanager)
+add_subdirectory(initialstart)
 
 find_program(PlasmaOpenSettings plasma-open-settings)
 set_package_properties(PlasmaOpenSettings PROPERTIES

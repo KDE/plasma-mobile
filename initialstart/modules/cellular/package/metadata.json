@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Description": "Cellular initialstart module for Plasma Mobile",
+        "Id": "org.kde.plasma.mobileinitialstart.cellular",
+        "License": "GPL-2.0+",
+        "Name": "Cellular",
+        "ServiceTypes": [
+            "KPackage/GenericQML"
+        ],
+        "Version": "0.1",
+        "Website": "https://kde.org"
+    }
+}

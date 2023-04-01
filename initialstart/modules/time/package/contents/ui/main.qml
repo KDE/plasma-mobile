@@ -1,0 +1,121 @@
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
+
+import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.plasma.mobileinitialstart.time 1.0 as Time
+
+Item {
+    id: root
+    property string name: i18n("Time and Date")
+
+    readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
+
+    ColumnLayout {
+        anchors {
+            fill: parent
+            topMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.largeSpacing
+        }
+
+        width: root.width
+        spacing: Kirigami.Units.gridUnit
+
+        Label {
+            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.rightMargin: Kirigami.Units.gridUnit
+            Layout.alignment: Qt.AlignTop
+            Layout.fillWidth: true
+
+            wrapMode: Text.Wrap
+            horizontalAlignment: Text.AlignHCenter
+            text: i18n("Select your time zone and preferred time format.")
+        }
+
+        MobileForm.FormCard {
+            maximumWidth: root.cardWidth
+
+            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+            Layout.fillWidth: true
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                MobileForm.FormSwitchDelegate {
+                    Layout.fillWidth: true
+                    text: i18n("24-Hour Format")
+                    checked: Time.TimeUtil.is24HourTime
+                    onCheckedChanged: {
+                        if (checked !== Time.TimeUtil.is24HourTime) {
+                            Time.TimeUtil.is24HourTime = checked;
+                        }
+                    }
+                }
+            }
+        }
+
+        MobileForm.FormCard {
+            maximumWidth: root.cardWidth
+
+            Layout.fillHeight: true
+            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+            Layout.fillWidth: true
+
+            contentItem: ColumnLayout {
+                spacing: 0
+
+                ListView {
+                    clip: true
+                    id: listView
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: Time.TimeUtil.timeZones
+
+                    header: Control {
+                        width: listView.width
+                        leftPadding: Kirigami.Units.largeSpacing
+                        rightPadding: Kirigami.Units.largeSpacing
+                        topPadding: Kirigami.Units.largeSpacing
+                        bottomPadding: Kirigami.Units.largeSpacing
+
+                        contentItem: Kirigami.SearchField {
+                            id: searchField
+
+                            onTextChanged: {
+                                Time.TimeUtil.timeZones.filterString = text;
+                                // HACK: search field seems to lose focus every time the text changes
+                                focusTimer.restart();
+                            }
+
+                            Timer {
+                                id: focusTimer
+                                interval: 1
+                                onTriggered: searchField.forceActiveFocus()
+                            }
+                        }
+                    }
+
+                    delegate: MobileForm.FormRadioDelegate {
+                        required property string timeZoneId
+
+                        width: ListView.view.width
+                        text: timeZoneId
+                        checked: Time.TimeUtil.currentTimeZone === timeZoneId
+                        onCheckedChanged: {
+                            if (checked && timeZoneId !== Time.TimeUtil.currentTimeZone) {
+                                Time.TimeUtil.currentTimeZone = model.timeZoneId;
+                                checked = Qt.binding(() => Time.TimeUtil.currentTimeZone === timeZoneId);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+

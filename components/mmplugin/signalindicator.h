@@ -12,6 +12,8 @@
 
 #include <QObject>
 
+#include "profilesettings.h"
+
 // We make the assumption that there is only one modem.
 class SignalIndicator : public QObject
 {
@@ -27,6 +29,8 @@ class SignalIndicator : public QObject
     Q_PROPERTY(bool mobileDataEnabled READ mobileDataEnabled WRITE setMobileDataEnabled NOTIFY mobileDataEnabledChanged)
 
     Q_PROPERTY(bool needsAPNAdded READ needsAPNAdded NOTIFY mobileDataEnabledChanged)
+    Q_PROPERTY(QList<ProfileSettings *> profiles READ profileList NOTIFY profileListChanged)
+    Q_PROPERTY(QString activeConnectionUni READ activeConnectionUni NOTIFY activeConnectionUniChanged)
 
 public:
     SignalIndicator(QObject *parent = nullptr);
@@ -39,8 +43,22 @@ public:
     bool mobileDataSupported() const;
     bool mobileDataEnabled() const;
     bool needsAPNAdded() const;
+    QString activeConnectionUni() const;
 
     void setMobileDataEnabled(bool enabled);
+
+    // connection profiles
+    QList<ProfileSettings *> &profileList();
+    void refreshProfiles();
+    Q_INVOKABLE void activateProfile(const QString &connectionUni);
+    Q_INVOKABLE void addProfile(const QString &name, const QString &apn, const QString &username, const QString &password, const QString &networkType);
+    Q_INVOKABLE void removeProfile(const QString &connectionUni);
+    Q_INVOKABLE void updateProfile(const QString &connectionUni,
+                                   const QString &name,
+                                   const QString &apn,
+                                   const QString &username,
+                                   const QString &password,
+                                   const QString &networkType);
 
 Q_SIGNALS:
     void strengthChanged();
@@ -50,12 +68,16 @@ Q_SIGNALS:
     void simEmptyChanged();
     void mobileDataSupportedChanged();
     void mobileDataEnabledChanged();
+    void profileListChanged();
+    void activeConnectionUniChanged();
 
 private:
     NetworkManager::ModemDevice::Ptr m_nmModem;
     ModemManager::ModemDevice::Ptr m_modemDevice;
     ModemManager::Modem::Ptr m_modem;
     ModemManager::Modem3gpp::Ptr m_3gppModem;
+
+    QList<ProfileSettings *> m_profileList;
 
     void updateModemManagerModem();
     void updateNetworkManagerModem();
