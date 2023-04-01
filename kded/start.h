@@ -5,10 +5,10 @@
 
 #include <kdedmodule.h>
 
-class PlasmaMobileStartDaemon : public KDEDModule
+class Start : public KDEDModule
 {
     Q_OBJECT
 
 public:
-    PlasmaMobileStartDaemon(QObject *parent, const QList<QVariant> &);
+    Start(QObject *parent, const QList<QVariant> &);
 };

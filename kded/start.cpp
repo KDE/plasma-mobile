@@ -9,7 +9,7 @@
 
 #include "start.h"
 
-PlasmaMobileStartDaemon::PlasmaMobileStartDaemon(QObject *parent, const QList<QVariant> &)
+Start::Start(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
 {
     auto *job = new KIO::CommandLauncherJob(QStringLiteral("plasma-mobile-envmanager --apply-settings"), {});
