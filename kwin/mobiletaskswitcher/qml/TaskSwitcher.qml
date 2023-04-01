@@ -196,6 +196,9 @@ FocusScope {
 
             taskSwitcherState: root.taskSwitcherState
 
+            // don't allow FlickContainer to steal from swiping on tasks
+            interactive: taskList.taskInteractingCount === 0
+
             // the item is effectively anchored to the flickable bounds
             TaskList {
                 id: taskList

@@ -24,7 +24,6 @@ QtObject {
     signal unlockFailed()
     
     function tryPassword() {
-        console.log('try')
         if (root.password !== '') { // prevent typing lock when password is empty
             waitingForAuth = true;
         }

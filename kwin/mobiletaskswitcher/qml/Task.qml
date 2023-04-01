@@ -25,7 +25,13 @@ Item {
 
     readonly property real dragOffset: -control.y
 
+    // whether this task is being interacted with
+    readonly property bool interactingActive: control.pressed && control.passedDragThreshold
+
+    // whether to show the text header
     property bool showHeader: true
+
+    // the amount to darken the task preview by
     property real darken: 0
 
     opacity: 1 - dragOffset / taskSwitcher.height
@@ -88,7 +94,6 @@ Item {
             // set threshold
             if (!passedDragThreshold && Math.abs(y) > dragThreshold) {
                 passedDragThreshold = true;
-                // TODO: request that FlickContainer be not interactive (so we don't change position in list while swiping up)
             }
 
             // update position

@@ -19,6 +19,8 @@ MouseArea {
     required property var taskSwitcher
     readonly property var taskSwitcherState: taskSwitcher.taskSwitcherState
 
+    property int taskInteractingCount: 0
+
     // account for system header and footer offset (center the preview image)
     readonly property real taskY: {
         let headerHeight = shellTopMargin;
@@ -95,7 +97,6 @@ MouseArea {
 
             // this is the x-position with respect to the list
             property real listX: taskSwitcherState.xPositionFromTaskIndex(currentIndex);
-
             Behavior on listX {
                 NumberAnimation {
                     duration: PlasmaCore.Units.longDuration
@@ -118,6 +119,12 @@ MouseArea {
                 let distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherState.taskWidth;
                 let upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;
                 return Math.max(0, upperBoundAdjust);
+            }
+
+            // update count of tasks being interacted with, so we know whether we are in a swipe up action
+            onInteractingActiveChanged: {
+                let offset = interactingActive ? 1 : -1;
+                taskInteractingCount = Math.max(0, taskInteractingCount + offset);
             }
 
             width: taskSwitcherState.taskWidth
