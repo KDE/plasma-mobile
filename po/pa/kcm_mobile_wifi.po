@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# A S Alam <aalam.yellow@gmail.com>, 2021.
+# A S Alam <aalam.yellow@gmail.com>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2021-06-08 22:12-0700\n"
+"PO-Revision-Date: 2023-04-01 20:24-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/ConnectDialog.qml:136
 #, kde-format
@@ -30,30 +30,27 @@ msgstr "ਕਨੈਕਟ ਕਰੋ"
 #: package/contents/ui/main.qml:82
 #, kde-format
 msgid "Wi-Fi is disabled"
-msgstr ""
+msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
 
 #: package/contents/ui/main.qml:86
-#, fuzzy, kde-format
-#| msgid "Enable Wi-Fi"
+#, kde-format
 msgid "Enable"
-msgstr "ਵਾਈ-ਫਾਈ ਸਮਰੱਥ ਕਰੋ"
+msgstr "ਸਮਰੱਥ"
 
 #: package/contents/ui/main.qml:96
 #, kde-format
 msgid "Disable Wi-Fi"
-msgstr "Wi-Fi ਅਸਮਰੱਥ ਕਰੋ"
+msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਕਰੋ"
 
 #: package/contents/ui/main.qml:102
-#, fuzzy, kde-format
-#| msgid "Add custom connection"
+#, kde-format
 msgid "Add Custom Connection"
 msgstr "ਕਸਟਮ ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
 
 #: package/contents/ui/main.qml:108
-#, fuzzy, kde-format
-#| msgid "Saved Connections"
+#, kde-format
 msgid "Show Saved Connections"
-msgstr "ਕਨੈਕਸ਼ਨ ਸੰਭਾਲੇ"
+msgstr "ਸੰਭਾਲੇ ਹੋਏ ਕਨੈਕਸ਼ਨ ਵੇਖਾਓ"
 
 #: package/contents/ui/NetworkSettings.qml:14
 #, kde-format

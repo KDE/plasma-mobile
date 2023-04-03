@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# A S Alam <aalam.yellow@gmail.com>, 2020, 2021.
+# A S Alam <aalam.yellow@gmail.com>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-14 02:17+0000\n"
-"PO-Revision-Date: 2021-04-25 09:33-0700\n"
+"PO-Revision-Date: 2023-04-01 20:25-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/languages.qml:20
 #, kde-format
@@ -30,17 +30,17 @@ msgstr "ਲਾਗੂ ਕਰੋ"
 #: package/contents/ui/main.qml:20
 #, kde-format
 msgid "On-Screen Keyboard"
-msgstr ""
+msgstr "ਆਨ-ਸਕਰੀਨ ਕੀਬੋਰਡ"
 
 #: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Type anything here…"
-msgstr ""
+msgstr "ਇੱਥੇ ਕੁਝ ਵੀ ਦਿਖਾਓ…"
 
 #: package/contents/ui/main.qml:63
 #, kde-format
 msgid "Sound"
-msgstr ""
+msgstr "ਸਾਊਂਡ"
 
 #: package/contents/ui/main.qml:64
 #, fuzzy, kde-format
@@ -51,13 +51,12 @@ msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਆਵਾਜ਼ ਕੱਢੋ"
 #: package/contents/ui/main.qml:73
 #, kde-format
 msgid "Vibration"
-msgstr ""
+msgstr "ਕੰਪਨ"
 
 #: package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Vibrate on key press"
+#, kde-format
 msgid "Whether to vibrate on keypress."
-msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਕੰਪਨ"
+msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਕੰਪਨ ਹੈ।"
 
 #: package/contents/ui/main.qml:94
 #, kde-format

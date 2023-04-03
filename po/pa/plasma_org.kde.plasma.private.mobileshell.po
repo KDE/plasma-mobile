@@ -1,0 +1,307 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# A S Alam <aalam@satluj.org>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-21 02:29+0000\n"
+"PO-Revision-Date: 2023-04-01 19:29-0700\n"
+"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
+
+#: notifications/notificationfilemenu.cpp:109
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "ਰੱਖਣ ਵਾਲਾ ਫੋਲਡਰ ਖੋਲ੍ਹੋ"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "ਕਾਪੀ ਕਰੋ(&C)"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "ਟਿਕਾਣਾ ਕਾਪੀ ਕਰੋ"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "ਵਿਸ਼ੇਸ਼ਤਾ"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#, kde-format
+msgid "On"
+msgstr "ਚਾਲੂ"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#, kde-format
+msgid "Off"
+msgstr "ਬੰਦ"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:15
+#, kde-format
+msgid "SIM Locked"
+msgstr "ਸਿਮ ਲਾਕ ਹੈ"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:37
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/volumeosd/AudioApplet.qml:64
+#, kde-format
+msgid "Outputs"
+msgstr "ਆਉਟਪੁੱਟ"
+
+#: qml/volumeosd/AudioApplet.qml:94
+#, kde-format
+msgid "Inputs"
+msgstr "ਇਨਪੁੱਟ"
+
+#: qml/volumeosd/AudioApplet.qml:125
+#, kde-format
+msgid "Playback Streams"
+msgstr "ਪਲੇਅਬੈਕ ਸਟਰੀਮਾਂ"
+
+#: qml/volumeosd/AudioApplet.qml:178
+#, kde-format
+msgid "Recording Streams"
+msgstr "ਰਿਕਾਰਡਿੰਗ ਸਟਰੀਮਾਂ"
+
+#: qml/volumeosd/DeviceListItem.qml:25
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/volumeosd/DeviceListItem.qml:34
+#, kde-format
+msgid "Device name not found"
+msgstr "ਡਿਵਾਈਸ ਨਾਂ ਨਹੀਂ ਲੱਭਿਆ"
+
+#: qml/volumeosd/ListItemBase.qml:96
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "%1 ਲਈ ਹੋਰ ਚੋਣਾਂ ਵੇਖਾਓ"
+
+#: qml/volumeosd/ListItemBase.qml:152
+#, kde-format
+msgctxt "Accessibility data on volume slider"
+msgid "Adjust volume for %1"
+msgstr "%1 ਲਈ ਵਾਲੀਅਮ ਅਡਜੱਸਟ ਕਰੋ"
+
+#: qml/volumeosd/ListItemBase.qml:230
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/volumeosd/ListItemBase.qml:245
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "100%"
+
+#: qml/volumeosd/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਸਾਊਂਡ"
+
+#: qml/volumeosd/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/volumeosd/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "ਸਟਰੀਮ ਦਾ ਨਾਂ ਨਹੀਂ ਲੱਭਿਆ"
+
+#: qml/volumeosd/VolumeOSD.qml:115
+#, kde-format
+msgid "Unmute"
+msgstr "ਨਾ-ਚੁੱਪ"
+
+#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
+#, kde-format
+msgid "Mute"
+msgstr "ਚੁੱਪ"
+
+#: qml/volumeosd/VolumeOSD.qml:139
+#, kde-format
+msgid "100%"
+msgstr "100%"
+
+#: qml/volumeosd/VolumeOSD.qml:149
+#, kde-format
+msgctxt "Percentage value"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/volumeosd/VolumeOSD.qml:169
+#, kde-format
+msgid "Open audio settings"
+msgstr "ਆਡੀਓ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ"
+
+#: qml/volumeosd/VolumeOSD.qml:182
+#, kde-format
+msgid "Audio Settings"
+msgstr "ਆਡੀਓ ਸੈਟਿੰਗਾਂ"
+
+#: qml/volumeosd/VolumeOSD.qml:189
+#, kde-format
+msgid "Toggle showing audio streams"
+msgstr "ਦਿਖਾਈਆਂ ਆਡੀਓ ਸਟਰੀਮਾਂ ਨੂੰ ਬਦਲੋ"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:47
+#, kde-format
+msgid "Audio"
+msgstr "ਆਡੀਓ"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:51
+#, kde-format
+msgid "Increase Volume"
+msgstr "ਵਾਲੀਅਮ ਵਧਾਓ"
+
+#: qml/volumeosd/VolumeOSDProvider.qml:58
+#, kde-format
+msgid "Decrease Volume"
+msgstr "ਵਾਲੀਅਮ ਘਟਾਓ"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:182
+#, kde-format
+msgid "Search…"
+msgstr "…ਖੋਜੋ"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:127
+#, kde-format
+msgid "No media playing"
+msgstr "ਕੋਈ ਮੀਡੀਆ ਨਹੀਂ ਚੱਲ ਰਿਹਾ ਹੈ"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:155
+#, kde-format
+msgid "Previous track"
+msgstr "ਪਿਛਲਾ ਟਰੈਕ"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#, kde-format
+msgid "Play or Pause media"
+msgstr "ਮੀਡਿਆ ਚਲਾਓ ਜਾਂ ਰੋਕੋ"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:179
+#, kde-format
+msgid "Next track"
+msgstr "ਅਗਲਾ ਟਰੈਕ"
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:55
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "ਜਵਾਬ ਦਿਓ"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "…ਜਵਾਬ ਲਿਖੋ"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "ਭੇਜੋ"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:178
+#, kde-format
+msgid "Notification service not available"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਸੇਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:187
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ ਇਸ ਵੇਲੇ '%1 %2' ਵਲੋਂ ਦਿੱਤੇ ਜਾ ਰਹੇ ਹਨ"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:323
+#, kde-format
+msgid "Show Fewer"
+msgstr "ਘੱਟ ਵੇਖਾਓ"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:325
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "%1 ਹੋਰ ਵੇਖਾਓ"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:384
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਮਿਟਾਓ"
+
+#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#, kde-format
+msgid "More Options…"
+msgstr "…ਹੋਰ ਚੋਣਾਂ"
+
+#: qml/widgets/notifications/util.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1 (ਵਿਰਾਮ ਹੈ)"
+
+#: qml/widgets/notifications/util.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1 (ਫੇਲ੍ਹ ਹੈ)"
+
+#: qml/widgets/notifications/util.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr "ਜਾਬ ਅਸਫ਼ਲ ਹੋਈ"
+
+#: qml/widgets/notifications/util.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1 (ਮੁਕੰਮਲ)"
+
+#: qml/widgets/notifications/util.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr "ਜਾਬ ਪੂਰੀ ਹੋਈ"
+
+#: qml/widgets/notifications/util.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "%1 ਮਿੰਟ ਪਹਿਲਾਂ"
+
+#: qml/widgets/notifications/util.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "%1 ਸ ਬਾਕੀ"
+
+#: qml/widgets/notifications/util.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "%1 ਮਿੰਟ ਬਾਕੀ"
+
+#: qml/widgets/notifications/util.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "%1 ਘੰਟਾ ਬਾਕੀ"

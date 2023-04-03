@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# A S Alam <aalam.yellow@gmail.com>, 2020, 2021, 2022.
+# A S Alam <aalam.yellow@gmail.com>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2022-11-19 06:08-0800\n"
+"PO-Revision-Date: 2023-04-01 20:37-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/DatePicker.qml:121
 #, kde-format
@@ -175,7 +175,7 @@ msgstr "ਤੁਹਾਡਾ ਸਿਸਟਮ ਸਮਾਂ ਖੇਤਰ"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Abidjan"
-msgstr "ਅਦੀਬਜਾਨ"
+msgstr "ਅਬੀਦਜਾਨ"
 
 #: timezonesi18n.cpp:46
 #, kde-format
@@ -229,7 +229,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Amsterdam"
-msgstr "ਅੰਸਟਰਡੈਮ"
+msgstr "ਐਸਟਰਡੈਮ"
 
 #: timezonesi18n.cpp:55
 #, kde-format
@@ -379,7 +379,7 @@ msgstr "ਬਹਿਰੀਨ"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Baku"
-msgstr "ਬਾਕੁ"
+msgstr "ਬਾਕੂ"
 
 #: timezonesi18n.cpp:80
 #, kde-format
@@ -502,12 +502,10 @@ msgid "Boise"
 msgstr "ਬੋਈਲੀ"
 
 #: timezonesi18n.cpp:100
-#, fuzzy, kde-format
-#| msgctxt "This is a city associated with particular time zone"
-#| msgid "Brazzaville"
+#, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bougainville"
-msgstr "ਬਰੱਜ਼ਾਵੀਲੀ"
+msgstr "ਬੌਜਿਨਵਿਲੇ"
 
 #: timezonesi18n.cpp:101
 #, kde-format
@@ -2169,7 +2167,7 @@ msgstr "ਰਾਯਕਾਜੋਵਿਕ"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Riga"
-msgstr ""
+msgstr "ਰੀਗਾ"
 
 #: timezonesi18n.cpp:378
 #, kde-format
@@ -2481,7 +2479,7 @@ msgstr "ਤਹਿਰਾਨ"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Tell City"
-msgstr ""
+msgstr "ਟੈਲ ਸਿਟੀ"
 
 #: timezonesi18n.cpp:430
 #, kde-format
