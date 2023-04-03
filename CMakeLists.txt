@@ -94,7 +94,7 @@ include(CheckIncludeFiles)
 
 ecm_find_qmlmodule(org.kde.pipewire 0.1)
 
-plasma_install_package(look-and-feel org.kde.breeze.mobile look-and-feel lookandfeel)
+plasma_install_package(lookandfeel org.kde.breeze.mobile look-and-feel lookandfeel)
 plasma_install_package(shell org.kde.plasma.phoneshell shells)
 
 add_subdirectory(bin)

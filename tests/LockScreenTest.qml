@@ -11,7 +11,7 @@ import org.kde.notificationmanager 1.1 as Notifications
 
 import org.kde.notificationmanager 1.0 as NotificationManager
 
-import "../look-and-feel/contents/lockscreen" as LockScreen
+import "../lookandfeel/contents/lockscreen" as LockScreen
 
 // This is a test app for the lockscreen, simulating kscreenlocker.
 //
