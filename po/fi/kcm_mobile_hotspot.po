@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# Tommi Nieminen <translator@legisign.org>, 2020.
+# Tommi Nieminen <translator@legisign.org>, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2020-06-07 17:15+0300\n"
+"PO-Revision-Date: 2023-03-30 12:05+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:42
 #, kde-format
@@ -25,19 +25,17 @@ msgstr "Tukiasema"
 #: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
-msgstr ""
+msgstr "Onko langaton tukiasema käytössä."
 
 #: package/contents/ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Tukiasema"
+msgstr "Tukiaseman SSID"
 
 #: package/contents/ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Salasana:"
+msgstr "Tukiaseman salasana"
 
 #~ msgid "Enabled:"
 #~ msgstr "Käytössä:"
