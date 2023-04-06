@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:08+0000\n"
-"PO-Revision-Date: 2023-04-04 19:31+0200\n"
+"PO-Revision-Date: 2023-04-05 04:59+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -30,9 +30,9 @@ msgid "Your emails"
 msgstr "ecuadra@eloihr.net"
 
 #: main.cpp:21
-#, kde-format
+#, fuzzy, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "Abre el asistente del primer inicio sin modificar la configuración"
 
 #: main.cpp:52
 #, kde-format
@@ -254,9 +254,9 @@ msgid "Next"
 msgstr "Siguiente"
 
 #: qml/main.qml:19
-#, kde-format
+#, fuzzy, kde-format
 msgid "Initial Start"
-msgstr ""
+msgstr "Primer inicio"
 
 #: qml/Wizard.qml:295
 #, kde-format
