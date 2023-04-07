@@ -9,6 +9,8 @@
 
 #include "start.h"
 
+K_PLUGIN_FACTORY_WITH_JSON(StartFactory, "kded_plasma_mobile_start.json", registerPlugin<Start>();)
+
 Start::Start(QObject *parent, const QList<QVariant> &)
     : KDEDModule{parent}
 {
