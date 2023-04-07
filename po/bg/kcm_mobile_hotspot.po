@@ -36,23 +36,3 @@ msgstr "SSID на точка за достъп"
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Парола на точка на достъп"
-
-#~ msgid "Enabled:"
-#~ msgstr "Активирано:"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Save"
-#~ msgstr "Запазване"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Минчо Кондарев"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "mkondarev@yahoo.de"
-
-#~ msgid "Tobias Fella"
-#~ msgstr "Tobias Fella"
