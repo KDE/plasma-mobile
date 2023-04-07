@@ -68,7 +68,6 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         target: WindowPlugin.WindowUtil
 
         function onAppActivationStarted(appId, iconName) {
-            console.log(appId);
             icon.source = iconName
             openAnimSimple.restart();
         }
