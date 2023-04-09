@@ -1,43 +1,41 @@
-# German translations for plasma-mobile package.
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
 #
-# Automatically generated, 2023.
+# Steve Allewell <steve.allewell@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:08+0000\n"
-"PO-Revision-Date: 2023-04-03 15:50+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-04-08 11:05+0100\n"
+"Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
+"Language-Team: British English\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.70\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr "Deutsches KDE-Übersetzerteam"
+msgstr "Steve Allewell"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
-msgstr "kde-i18n-de@kde.org"
+msgstr "steve.allewell@gmail.com"
 
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "Opens the initial start wizard without modifying configuration"
 
 #: main.cpp:52
 #, kde-format
 msgid "© 2023 KDE Community"
-msgstr "Copyright © 2023 KDE-Gemeinschaft"
+msgstr "© 2023 KDE Community"
 
 #: main.cpp:53
 #, kde-format
@@ -47,7 +45,7 @@ msgstr "Devin Lin"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr "APN bearbeiten"
+msgstr "Edit APN"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
 #, kde-format
@@ -62,17 +60,17 @@ msgstr "APN"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
 #, kde-format
 msgid "Username"
-msgstr "Benutzername"
+msgstr "Username"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
 #, kde-format
 msgid "Password"
-msgstr "Passwort"
+msgstr "Password"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
 #, kde-format
 msgid "Network type"
-msgstr "Netztyp"
+msgstr "Network type"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
@@ -92,33 +90,33 @@ msgstr "2G"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 4G"
-msgstr "Nur 4G"
+msgstr "Only 4G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 3G"
-msgstr "Nur 3G"
+msgstr "Only 3G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 2G"
-msgstr "Nur 2G"
+msgstr "Only 2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Any"
-msgstr "Beliebig"
+msgstr "Any"
 
 #: modules/cellular/package/contents/ui/main.qml:14
 #, kde-format
 msgid "Cellular"
-msgstr "Mobilfunk"
+msgstr "Cellular"
 
 #: modules/cellular/package/contents/ui/main.qml:51
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Your device does not have a modem available."
-msgstr "Ihr Gerät verfügt nicht über ein Modem."
+msgstr "Your device does not have a modem available."
 
 #: modules/cellular/package/contents/ui/main.qml:53
 #, kde-format
@@ -126,140 +124,142 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
+"Please configure your APN below for mobile data, further information will be "
+"available with your carrier."
 
 #: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr "Sie sind mit dem Mobilfunknetz verbunden."
+msgstr "You are connected to the mobile network."
 
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr "Bitte setzen Sie eine SIM-Karte in Ihr Gerät ein."
+msgstr "Please insert a SIM card into your device."
 
 #: modules/cellular/package/contents/ui/main.qml:76
 #, kde-format
 msgid "Mobile Data"
-msgstr "Mobile Daten"
+msgstr "Mobile Data"
 
 #: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Edit"
-msgstr "Bearbeiten"
+msgstr "Edit"
 
 #: modules/cellular/package/contents/ui/main.qml:132
 #, kde-format
 msgid "Delete"
-msgstr "Löschen"
+msgstr "Delete"
 
 #: modules/cellular/package/contents/ui/main.qml:141
 #, kde-format
 msgid "Add APN"
-msgstr "APN hinzufügen"
+msgstr "Add APN"
 
 #: modules/finished/contents/ui/main.qml:12
 #, kde-format
 msgid "Complete!"
-msgstr "Abgeschlossen."
+msgstr "Complete!"
 
 #: modules/finished/contents/ui/main.qml:21
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
-msgstr ""
-"Ihr Gerät ist jetzt bereit.<br /><br />Viel Freude mit <b>Plasma 6.0</b>!"
+msgstr "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:16
 #, kde-format
 msgid "Before we get started…"
-msgstr "Bevor es losgeht ..."
+msgstr "Before we get started…"
 
 #: modules/prepare/package/contents/ui/main.qml:83
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
+"Adjust the screen brightness to be comfortable for the installation process."
 
 #: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Adjust the size of elements on the screen."
-msgstr ""
+msgstr "Adjust the size of elements on the screen."
 
 #: modules/prepare/package/contents/ui/main.qml:151
 #, kde-format
 msgid "Display Scaling"
-msgstr "Anzeigeskalierung"
+msgstr "Display Scaling"
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
-msgstr "Zeit und Datum"
+msgstr "Time and Date"
 
 #: modules/time/package/contents/ui/main.qml:37
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr ""
+msgstr "Select your time zone and preferred time format."
 
 #: modules/time/package/contents/ui/main.qml:51
 #, kde-format
 msgid "24-Hour Format"
-msgstr "24-Stunden-Format"
+msgstr "24-Hour Format"
 
 #: modules/wifi/package/contents/ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
-msgstr "Ungültige Eingabe."
+msgstr "Invalid input."
 
 #: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
 #, kde-format
 msgid "Connect to"
-msgstr "Verbinden mit"
+msgstr "Connect to"
 
 #: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
-msgstr "Netzwerk"
+msgstr "Network"
 
 #: modules/wifi/package/contents/ui/main.qml:69
 #, kde-format
 msgid "Connect to a WiFi network for network access."
-msgstr ""
+msgstr "Connect to a WiFi network for network access."
 
 #: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Wi-Fi is disabled"
-msgstr "WLAN ist deaktiviert"
+msgstr "Wi-Fi is disabled"
 
 #: modules/wifi/package/contents/ui/main.qml:104
 #, kde-format
 msgid "Enable"
-msgstr "Aktivieren"
+msgstr "Enable"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
 msgid "Password…"
-msgstr "Passwort ..."
+msgstr "Password…"
 
 #: qml/LandingComponent.qml:81
 #, kde-format
 msgid "Welcome to <b>Plasma</b>"
-msgstr "Willkommen zu <b>Plasma</b>"
+msgstr "Welcome to <b>Plasma</b>"
 
 #: qml/LandingComponent.qml:102 qml/Wizard.qml:314
 #, kde-format
 msgid "Next"
-msgstr "Weiter"
+msgstr "Next"
 
 #: qml/main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr "Erster Start"
+msgstr "Initial Start"
 
 #: qml/Wizard.qml:295
 #, kde-format
 msgid "Back"
-msgstr "Zurück"
+msgstr "Back"
 
 #: qml/Wizard.qml:331
 #, kde-format
 msgid "Finish"
-msgstr "Fertigstellen"
+msgstr "Finish"
