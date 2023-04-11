@@ -25,7 +25,7 @@
 class PinnedModel : public QAbstractListModel
 {
     Q_OBJECT
-    Q_PROPERTY(Plasma::Applet *applet READ applet WRITE setApplet CONSTANT)
+    Q_PROPERTY(Plasma::Applet *applet READ applet WRITE setApplet NOTIFY appletChanged)
 
 public:
     enum Roles { IsFolderRole = Qt::UserRole + 1, ApplicationRole, FolderRole };
@@ -53,6 +53,9 @@ public:
 
 public Q_SLOTS:
     void addAppFromFolder(const QString &storageId);
+
+Q_SIGNALS:
+    void appletChanged();
 
 private:
     void load();

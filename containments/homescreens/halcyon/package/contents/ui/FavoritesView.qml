@@ -22,15 +22,15 @@ Item {
     required property bool interactive
     required property var searchWidget
     
-    readonly property real twoColumnThreshold: PlasmaCore.Units.gridUnit * 10
+    readonly property real twoColumnThreshold: PlasmaCore.Units.gridUnit * 16
     readonly property bool twoColumn: root.width / 2 > twoColumnThreshold
     
-    readonly property real cellWidth: twoColumn ? root.width / 2 : root.width
+    readonly property real cellWidth: twoColumn ? (root.width - leftMargin - rightMargin) / 2 : (root.width - leftMargin - rightMargin)
     readonly property real cellHeight: delegateHeight
     
-    readonly property real leftMargin: Math.round(parent.width * 0.1)
-    readonly property real rightMargin: Math.round(parent.width * 0.1)
-    readonly property real delegateHeight: PlasmaCore.Units.gridUnit * 3
+    readonly property real leftMargin: Math.round(width * 0.1)
+    readonly property real rightMargin: Math.round(width * 0.1)
+    readonly property real delegateHeight: Math.round(PlasmaCore.Units.gridUnit * 3.25)
     
     property bool folderShown: false
     
@@ -91,8 +91,8 @@ Item {
         visible: opacity !== 0
 
         rightEdgeCallback: () => {
-                               pageForwardRequested();
-                           }
+            pageForwardRequested();
+        }
     }
  
     FolderGrid {

@@ -252,5 +252,6 @@ Plasma::Applet *PinnedModel::applet()
 void PinnedModel::setApplet(Plasma::Applet *applet)
 {
     m_applet = applet;
+    Q_EMIT appletChanged();
     load();
 }

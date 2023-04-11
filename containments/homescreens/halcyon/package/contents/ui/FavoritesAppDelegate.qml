@@ -22,9 +22,6 @@ Item {
     id: delegate
     property int visualIndex: 0
     
-    property real leftPadding
-    property real rightPadding
-    
     property real dragFolderAnimationProgress: 0
     
     property list<Kirigami.Action> menuActions
@@ -119,8 +116,6 @@ Item {
         id: mouseArea
         
         anchors.fill: parent
-        anchors.leftMargin: delegate.leftPadding
-        anchors.rightMargin: delegate.rightPadding
         
         property bool inDrag: false
     
@@ -135,7 +130,7 @@ Item {
         
         // grow/shrink animation
         property real zoomScale: 1
-        transform: Scale { 
+        transform: Scale {
             origin.x: mouseArea.width / 2; 
             origin.y: mouseArea.height / 2; 
             xScale: mouseArea.zoomScale
@@ -180,12 +175,12 @@ Item {
         
         // launch app handled by press animation
         onClicked: mouse => {
-                       if (mouse.button === Qt.RightButton) {
-                           openContextMenu();
-                       } else {
-                           launchAppRequested = true;
-                       }
-                   }
+            if (mouse.button === Qt.RightButton) {
+                openContextMenu();
+            } else {
+                launchAppRequested = true;
+            }
+        }
         
         HoverHandler {
             id: hoverHandler
