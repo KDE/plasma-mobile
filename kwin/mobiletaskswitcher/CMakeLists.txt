@@ -6,7 +6,6 @@ target_sources(mobiletaskswitcher PRIVATE
     main.cpp
     mobiletaskswitchereffect.cpp
 )
-install(FILES mobiletaskswitcher.json DESTINATION ${KDE_INSTALL_DATADIR}/kwin/builtin-effects)
 
 target_link_libraries(mobiletaskswitcher
     KF6::ConfigGui
