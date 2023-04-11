@@ -143,17 +143,18 @@ FocusScope {
     }
 
     // status bar
-    MobileShell.StatusBar {
-        id: statusBar
-        z: 1
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
-        backgroundColor: "transparent"
-
-        height: root.topMargin
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-    }
+    // TODO: improve load times, it is quite slow
+    // MobileShell.StatusBar {
+    //     id: statusBar
+    //     z: 1
+    //     colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    //     backgroundColor: "transparent"
+    //
+    //     height: root.topMargin
+    //     anchors.top: parent.top
+    //     anchors.left: parent.left
+    //     anchors.right: parent.right
+    // }
 
     // navigation panel
     MobileShell.NavigationPanel {
