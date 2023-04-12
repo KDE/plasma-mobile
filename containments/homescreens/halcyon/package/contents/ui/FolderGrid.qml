@@ -38,8 +38,8 @@ MobileShell.GridView {
     header: MobileShell.BaseItem {
         topPadding: Math.round(root.height * 0.2)
         bottomPadding: PlasmaCore.Units.largeSpacing
-        leftPadding: root.leftMargin
-        rightPadding: root.rightMargin
+        leftPadding: 0
+        rightPadding: 0
         implicitWidth: root.width
 
         background: Rectangle {
