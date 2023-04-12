@@ -23,9 +23,6 @@ MobileShell.GridView {
     property string folderName: folder ? folder.name : ""
     property var folderModel: folder ? folder.applications : []
     
-    // don't set anchors.margins since we want everywhere to be draggable
-    required property real leftMargin
-    required property real rightMargin
     required property bool twoColumn
     
     signal openConfigureRequested()
@@ -208,11 +205,6 @@ MobileShell.GridView {
                         onTriggered: root.folder.moveAppOut(model.index)
                     }
                 ]
-                
-                readonly property bool isLeftColumn: !root.twoColumn || ((visualIndex % 2) === 0)
-                readonly property bool isRightColumn: !root.twoColumn || ((visualIndex % 2) !== 0)
-                leftPadding: isLeftColumn ? root.leftMargin : 0
-                rightPadding: isRightColumn ? root.rightMargin : 0
                 
                 implicitWidth: root.cellWidth
                 implicitHeight: visible ? root.cellHeight : 0

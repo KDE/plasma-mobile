@@ -20,8 +20,8 @@ import org.kde.kirigami 2.19 as Kirigami
 
 Item {
     id: delegate
+
     property int visualIndex: 0
-    
     property real dragFolderAnimationProgress: 0
     
     property list<Kirigami.Action> menuActions
