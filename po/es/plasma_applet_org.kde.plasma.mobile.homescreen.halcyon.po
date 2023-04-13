@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:13+0000\n"
+"POT-Creation-Date: 2023-04-13 02:17+0000\n"
 "PO-Revision-Date: 2023-03-06 12:56+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/FavoritesGrid.qml:224
-#: package/contents/ui/FolderGrid.qml:202
+#: package/contents/ui/FolderGrid.qml:199
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Eliminar de favoritas"
@@ -30,7 +30,7 @@ msgstr "Eliminar de favoritas"
 msgid "Add applications to your favourites so they show up here."
 msgstr "Añada aplicaciones a sus favoritas para que se muestren aquí."
 
-#: package/contents/ui/FolderGrid.qml:207
+#: package/contents/ui/FolderGrid.qml:204
 #, kde-format
 msgid "Move out of folder"
 msgstr "Sacar de la carpeta"

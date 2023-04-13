@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:13+0000\n"
+"POT-Creation-Date: 2023-04-13 02:17+0000\n"
 "PO-Revision-Date: 2023-03-06 10:04+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/FavoritesGrid.qml:224
-#: package/contents/ui/FolderGrid.qml:202
+#: package/contents/ui/FolderGrid.qml:199
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Uit favorieten verwijderen"
@@ -28,7 +28,7 @@ msgstr "Uit favorieten verwijderen"
 msgid "Add applications to your favourites so they show up here."
 msgstr "Toepassingen aan uw favorieten toevoegen zodat ze zich hier vertonen."
 
-#: package/contents/ui/FolderGrid.qml:207
+#: package/contents/ui/FolderGrid.qml:204
 #, kde-format
 msgid "Move out of folder"
 msgstr "Uit de map verplaatsen"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-12 02:13+0000\n"
+"POT-Creation-Date: 2023-04-13 02:17+0000\n"
 "PO-Revision-Date: 2022-08-15 15:07+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Generator: Poedit 3.1.1\n"
 
 #: package/contents/ui/FavoritesGrid.qml:224
-#: package/contents/ui/FolderGrid.qml:202
+#: package/contents/ui/FolderGrid.qml:199
 #, kde-format
 msgid "Remove from favourites"
 msgstr "რჩეულებიდან წაშლა"
@@ -29,7 +29,7 @@ msgstr "რჩეულებიდან წაშლა"
 msgid "Add applications to your favourites so they show up here."
 msgstr "პროგრამების რჩეულებში ჩამატება. ისინი აქ გამოჩნდება."
 
-#: package/contents/ui/FolderGrid.qml:207
+#: package/contents/ui/FolderGrid.qml:204
 #, kde-format
 msgid "Move out of folder"
 msgstr "საქაღალდიდან გატანა"
