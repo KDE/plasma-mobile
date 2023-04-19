@@ -1,204 +1,205 @@
-# German translations for plasma-mobile package.
-# Copyright (C) 2023 This file is copyright:
+# translation of kcm_mobileshell.pot to Esperanto
+# Copyright (C) 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
-# Automatically generated, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2023-03-12 17:29+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-04-18 09:30+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "Shell"
+msgstr "Ŝelo"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr "Allgemein"
+msgstr "Generalo"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "Ŝelaj Vibradoj"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr "Animationen"
+msgstr "Animacioj"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr ""
+"Se ĉi tio estas malŝaltita, kuraĝigoj estos reduktitaj kiel eble plej multe."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr "Navigationsbereich"
+msgstr "Navigada Panelo"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "Nur gesta Reĝimo"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr ""
+msgstr "Ĉu kaŝi la navigadan panelon."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr "Anwendungsumschalter"
+msgstr "Taskŝanĝilo"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr ""
+msgstr "Montri Aplikajn Antaŭrigardojn"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr ""
+msgstr "Malŝalti ĉi tion povas helpi plibonigi rendimenton."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Ago-Kesto"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
 #: package/contents/ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
-msgstr "Schnelleinstellungen"
+msgstr "Rapidaj Agordoj"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Alpinglita Reĝimo"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "Vastigita Reĝimo"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Supra Maldekstra Kesto-Reĝimo"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Reĝimo malfermante de la supro maldekstre."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Supra Dekstra Kesto-Reĝimo"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Reĝimo malfermante de supre dekstre."
 
 #: package/contents/ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
+"Agordu la ordon de rapidaj agordoj en la tiro-malsupren panelo kaj kaŝu ilin."
 
 #: package/contents/ui/QuickSettingsForm.qml:137
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr ""
+msgstr "Malŝaltitaj Rapidaj Agordoj"
 
 #: package/contents/ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "Reŝalti antaŭe malŝaltitajn rapidajn agordojn."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Ĉu havi vibrojn ebligitaj en la ŝelo."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr ""
+msgstr "Vibra Intenseco"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr ""
+msgstr "Kiel intensaj ŝelvibroj devus esti."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "Niedrig"
+msgstr "Malalta"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "Mittel"
+msgstr "Meza"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "Hoch"
+msgstr "Alta"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr "Vibrationsdauer"
+msgstr "Vibrado Daŭro"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Kiom longaj ŝelvibroj devus esti."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "Lang"
+msgstr "Longa"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "Mittel"
+msgstr "Meza"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "Kurz"
+msgstr "Mallonga"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr ""
+msgstr "Klavaraj vibroj estas regataj aparte en la klavar-agorda modulo."

@@ -1,74 +1,72 @@
-# German translations for plasma-mobile package.
-# Copyright (C) 2022 This file is copyright:
+# translation of plasma_shell_org.kde.plasma.phone.pot to Esperanto
+# Copyright (C) 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the plasma-mobile package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
-# Automatically generated, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-07 02:22+0000\n"
-"PO-Revision-Date: 2023-03-12 17:34+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
-"Language-Team: German <kde-i18n-de@kde.org>\n"
-"Language: de\n"
+"PO-Revision-Date: 2023-04-18 09:30+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:45
 msgid "Layout changes have been restricted by the system administrator"
-msgstr "Layout-Änderungen sind vom Systemverwalter deaktiviert worden"
+msgstr "Aranĝŝanĝoj estis limigitaj de la sistemadministranto"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "General"
-msgstr "Allgemein"
+msgstr "Ĝeneralo"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "Homescreen Layout"
-msgstr ""
+msgstr "Hejma ekrano Aranĝo"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:73
 msgid "The homescreen layout to use."
-msgstr ""
+msgstr "La hejmekrana aranĝo por uzi."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "Wallpaper Plugin"
-msgstr "Hintergrundbild-Modul"
+msgstr "Tapeta Kromaĵo"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:100
 msgid "The wallpaper plugin to use."
-msgstr ""
+msgstr "La tapeta kromaĵo por uzi."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:135
 msgid "Wallpaper Plugins"
-msgstr "Hintergrundbild-Module"
+msgstr "Tapetaj Kromaĵoj"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:140
 msgid "Get New Plugins…"
-msgstr "Neue Module holen ..."
+msgstr "Akiri novajn kromaĵojn…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:155
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
-"Layout-Änderungen müssen angewendet werden, bevor eine weitere Bearbeitung "
-"möglich ist"
+"Aranĝoŝanĝoj devas esti aplikataj antaŭ ol aliaj ŝanĝoj povas esti faritaj"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:161
 msgid "Apply now"
-msgstr "Jetzt anwenden"
+msgstr "Apliki nun"
 
 #: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Wallpaper"
-msgstr "Hintergrundbild"
+msgstr "Tapeto"
 
 #: contents/configuration/ContainmentConfiguration.qml:95
 msgid "Change Wallpaper"
-msgstr "Hintergrundbild ändern"
+msgstr "Ŝanĝi Tapeton"
 
 #: contents/configuration/ContainmentConfiguration.qml:113
 msgid "Configure"
-msgstr "Einrichten"
+msgstr "Agordi"
