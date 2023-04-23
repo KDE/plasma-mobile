@@ -63,7 +63,8 @@ ColumnLayout {
         id: timeSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: 1000
+        interval: 60000
+        intervalAlignment: P5Support.Types.AlignToMinute
     }
 
 }
