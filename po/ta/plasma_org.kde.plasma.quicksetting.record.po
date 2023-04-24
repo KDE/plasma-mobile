@@ -1,0 +1,58 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Kishore G <kishore96@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2023-04-23 17:04+0530\n"
+"Last-Translator: Kishore G <kishore96@gmail.com>\n"
+"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language: ta\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.04.0\n"
+
+#: package/contents/ui/main.qml:17
+#, kde-format
+msgid "Record Screen"
+msgstr "திரையை பதிவு செய்"
+
+#: package/contents/ui/main.qml:19
+#, kde-format
+msgid "Recording…"
+msgstr "பதிவு செய்கிறது…"
+
+#: package/contents/ui/main.qml:21
+#, kde-format
+msgid "Writing…"
+msgstr "சேமிக்கிறது"
+
+#: package/contents/ui/main.qml:25
+#, kde-format
+msgid "Tap to start recording"
+msgstr "திரைப்பதிவை துவக்க தட்டவும்"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "திரை பதிவுசெய்யப்படுகிறது…"
+
+#: package/contents/ui/main.qml:29
+#, kde-format
+msgid "Please wait…"
+msgstr "காத்திருக்கவும்…"
+
+#: package/contents/ui/main.qml:38
+#, kde-format
+msgid "New Screen Recording"
+msgstr "புதிய திரைப்பதிவு"
+
+#: package/contents/ui/main.qml:38
+#, kde-format
+msgid "New Screen Recording saved in %1"
+msgstr "புதிய திரைப்பதிவு %1 என்பதில் செமிக்கப்பட்டுள்ளது"
