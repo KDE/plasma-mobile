@@ -1,20 +1,22 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-#
 # Burkhard Lück <lueck@hube-lueck.de>, 2019, 2020, 2021.
+# Frederik Schwarzer <schwarzer@kde.org>, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-14 02:17+0000\n"
-"PO-Revision-Date: 2021-04-24 10:35+0200\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2023-04-26 20:28+0200\n"
+"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.07.70\n"
 
 #: package/contents/ui/main.qml:16
 #, kde-format
@@ -24,42 +26,37 @@ msgstr "Systeminformation"
 #: package/contents/ui/main.qml:42
 #, kde-format
 msgid "Operating System"
-msgstr ""
+msgstr "Betriebssystem"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Webpage"
-msgstr ""
+msgstr "Webseite"
 
 #: package/contents/ui/main.qml:70
-#, fuzzy, kde-format
-#| msgid "KDE Plasma Version:"
+#, kde-format
 msgid "KDE Plasma Version"
-msgstr "KDE-Plasma-Version:"
+msgstr "KDE-Plasma-Version"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid "KDE Frameworks Version:"
+#, kde-format
 msgid "KDE Frameworks Version"
-msgstr "KDE-Frameworks-Version:"
+msgstr "KDE-Frameworks-Version"
 
 #: package/contents/ui/main.qml:84
-#, fuzzy, kde-format
-#| msgid "Qt Version:"
+#, kde-format
 msgid "Qt Version"
-msgstr "Qt-Version:"
+msgstr "Qt-Version"
 
 #: package/contents/ui/main.qml:91
-#, fuzzy, kde-format
-#| msgid "Kernel Version:"
+#, kde-format
 msgid "Kernel Version"
-msgstr "Kernel-Version:"
+msgstr "Kernel-Version"
 
 #: package/contents/ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "OS Type:"
+#, kde-format
 msgid "OS Type"
-msgstr "Art des Betriebssystems:"
+msgstr "Art des Betriebssystems"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
@@ -68,19 +65,16 @@ msgid "%1-bit"
 msgstr "%1-bit"
 
 #: package/contents/ui/main.qml:116
-#, fuzzy, kde-format
-#| msgid "Processor:"
-#| msgid_plural "Processors:"
+#, kde-format
 msgid "Processor"
 msgid_plural "Processors"
-msgstr[0] "Prozessor:"
-msgstr[1] "Prozessoren:"
+msgstr[0] "Prozessor"
+msgstr[1] "Prozessoren"
 
 #: package/contents/ui/main.qml:123
-#, fuzzy, kde-format
-#| msgid "Memory:"
+#, kde-format
 msgid "Memory"
-msgstr "Speicher:"
+msgstr "Speicher"
 
 #: package/contents/ui/main.qml:127
 #, kde-format

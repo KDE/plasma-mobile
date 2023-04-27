@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
+# Frederik Schwarzer <schwarzer@kde.org>, 2020, 2023.
 #
-# Frederik Schwarzer <schwarzer@kde.org>, 2020.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-16 02:20+0000\n"
-"PO-Revision-Date: 2020-09-06 20:43+0200\n"
+"PO-Revision-Date: 2023-04-26 20:28+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -15,6 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.07.70\n"
 
 #: package/contents/ui/main.qml:42
 #, kde-format
@@ -27,16 +28,14 @@ msgid "Whether the wireless hotspot is enabled."
 msgstr ""
 
 #: package/contents/ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Hotspot"
+msgstr "Hotspot-SSID"
 
 #: package/contents/ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Passwort:"
+msgstr "Hotspot-Passwort"
 
 #~ msgid "Enabled:"
 #~ msgstr "Aktiv:"
