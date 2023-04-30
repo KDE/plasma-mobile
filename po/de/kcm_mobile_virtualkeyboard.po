@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-14 02:17+0000\n"
-"PO-Revision-Date: 2023-04-26 20:15+0200\n"
+"PO-Revision-Date: 2023-04-29 12:11+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -44,10 +44,9 @@ msgid "Sound"
 msgstr "Klänge"
 
 #: package/contents/ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Emit sound on key press"
+#, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr "Klang bei Tastendruck"
+msgstr "Ob bei Tastendruck ein Klang abgespielt werden soll."
 
 #: package/contents/ui/main.qml:73
 #, kde-format
