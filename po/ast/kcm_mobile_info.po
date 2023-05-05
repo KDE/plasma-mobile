@@ -1,0 +1,93 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Enol P. <enolp@softastur.org>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2023-05-03 23:29+0200\n"
+"Last-Translator: Enol P. <enolp@softastur.org>\n"
+"Language-Team: \n"
+"Language: ast_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.04.0\n"
+
+#: package/contents/ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "Información del sistema"
+
+#: package/contents/ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "Sistema operativu"
+
+#: package/contents/ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr ""
+
+#: package/contents/ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr ""
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "Versión de Qt"
+
+#: package/contents/ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "Versión del kernel"
+
+#: package/contents/ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr ""
+
+#: package/contents/ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1 bits"
+
+#: package/contents/ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr ""
+
+#: package/contents/ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr ""
+
+#: package/contents/ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr ""
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr ""

@@ -1,0 +1,88 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Enol P. <enolp@softastur.org>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"PO-Revision-Date: 2023-05-01 23:41+0200\n"
+"Last-Translator: Enol P. <enolp@softastur.org>\n"
+"Language-Team: \n"
+"Language: ast_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.04.0\n"
+
+#: package/contents/ui/languages.qml:20
+#, kde-format
+msgid "Languages"
+msgstr "Llingües"
+
+#: package/contents/ui/languages.qml:46
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/main.qml:20
+#, kde-format
+msgid "On-Screen Keyboard"
+msgstr ""
+
+#: package/contents/ui/main.qml:43
+#, kde-format
+msgid "Type anything here…"
+msgstr ""
+
+#: package/contents/ui/main.qml:63
+#, kde-format
+msgid "Sound"
+msgstr ""
+
+#: package/contents/ui/main.qml:64
+#, kde-format
+msgid "Whether to emit a sound on keypress."
+msgstr ""
+
+#: package/contents/ui/main.qml:73
+#, kde-format
+msgid "Vibration"
+msgstr ""
+
+#: package/contents/ui/main.qml:74
+#, kde-format
+msgid "Whether to vibrate on keypress."
+msgstr ""
+
+#: package/contents/ui/main.qml:94
+#, kde-format
+msgid "Check spelling of entered text"
+msgstr ""
+
+#: package/contents/ui/main.qml:103
+#, kde-format
+msgid "Capitalize the first letter of each sentence"
+msgstr ""
+
+#: package/contents/ui/main.qml:112
+#, kde-format
+msgid "Complete current word with first suggestion when hitting space"
+msgstr ""
+
+#: package/contents/ui/main.qml:121
+#, kde-format
+msgid "Suggest potential words in word ribbon"
+msgstr ""
+
+#: package/contents/ui/main.qml:132
+#, kde-format
+msgid "Insert a full-stop when space is pressed twice"
+msgstr ""
+
+#: package/contents/ui/main.qml:143
+#, kde-format
+msgid "Configure Languages"
+msgstr ""
