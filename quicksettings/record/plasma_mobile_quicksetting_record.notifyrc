@@ -4,6 +4,7 @@
 [Global]
 IconName=preferences-system-windows-effect-screenshot
 Name=Plasma
+Name[ast]=Plasma
 Name[az]=Plasma
 Name[ca]=Plasma
 Name[ca@valencia]=Plasma
