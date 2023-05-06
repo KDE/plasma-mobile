@@ -5,14 +5,13 @@ set(MALIIT_KEYBOARD_LANGUAGES_DIR "${CMAKE_INSTALL_FULL_LIBDIR}/maliit/keyboard2
 
 add_definitions(-DQT_NO_KEYWORDS)
 
-set(onscreenkeyboard_SRCS
+kcmutils_add_qml_kcm(kcm_mobile_onscreenkeyboard)
+
+target_sources(kcm_mobile_onscreenkeyboard PRIVATE
     languagemodel.cpp
     gsettingsitem.cpp
     virtualkeyboard.cpp
 )
-
-kcoreaddons_add_plugin(kcm_mobile_onscreenkeyboard SOURCES ${onscreenkeyboard_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
-
 target_compile_definitions(kcm_mobile_onscreenkeyboard PRIVATE "MALIIT_KEYBOARD_LANGUAGES_DIR=\"${MALIIT_KEYBOARD_LANGUAGES_DIR}\"")
 
 target_link_libraries(kcm_mobile_onscreenkeyboard
@@ -24,6 +23,3 @@ target_link_libraries(kcm_mobile_onscreenkeyboard
     PkgConfig::GIO
     PkgConfig::GOBJECT
 )
-
-kcmutils_generate_desktop_file(kcm_mobile_onscreenkeyboard)
-kpackage_install_package(package kcm_mobile_onscreenkeyboard kcms)

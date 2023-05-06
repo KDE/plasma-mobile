@@ -1,12 +1,7 @@
 # SPDX-FileCopyrightText: 2018 Martin Kacej <m.kacej@atlas.sk>
 # SPDX-License-Identifier: LGPL-2.0-or-later
 
-project (kcm_mobile_wifi)
-
-set (wifisettings_SRCS wifisettings.cpp)
-
-kcoreaddons_add_plugin(kcm_mobile_wifi SOURCES ${wifisettings_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
-
+kcmutils_add_qml_kcm(kcm_mobile_wifi SOURCES wifisettings.cpp)
 target_link_libraries(kcm_mobile_wifi
     Qt::DBus
     Qt::Gui
@@ -18,5 +13,3 @@ target_link_libraries(kcm_mobile_wifi
     KF6::KCMUtilsQuick
 )
 
-kpackage_install_package(package kcm_mobile_wifi kcms)
-kcmutils_generate_desktop_file(kcm_mobile_wifi)

@@ -1,7 +1,9 @@
 # SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-set (cellularnetworksettings_SRCS 
+kcmutils_add_qml_kcm(kcm_cellular_network)
+
+target_sources(kcm_cellular_network PRIVATE
     cellularnetworksettings.cpp 
     modem.cpp
     modemdetails.cpp
@@ -9,9 +11,6 @@ set (cellularnetworksettings_SRCS
     mobileproviders.cpp
     profilesettings.cpp
 )
-
-kcoreaddons_add_plugin(kcm_cellular_network SOURCES ${cellularnetworksettings_SRCS} INSTALL_NAMESPACE "plasma/kcms/systemsettings")
-
 target_link_libraries(kcm_cellular_network
     Qt::DBus
     Qt::Gui
@@ -24,6 +23,3 @@ target_link_libraries(kcm_cellular_network
     KF6::ModemManagerQt
     KF6::KCMUtilsQuick
 )
-
-kcmutils_generate_desktop_file(kcm_cellular_network)
-kpackage_install_package(package kcm_cellular_network kcms)
