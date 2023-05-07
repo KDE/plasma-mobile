@@ -66,24 +66,24 @@ Kirigami.SwipeListItem {
 
     actions: [
         Kirigami.Action {
-            iconName: "network-connect"
+            icon.name: "network-connect"
             visible: ConnectionState != PlasmaNM.Enums.Activated
             onTriggered: changeState()
         },
         Kirigami.Action {
-            iconName: "network-disconnect"
+            icon.name: "network-disconnect"
             visible: ConnectionState == PlasmaNM.Enums.Activated
             onTriggered: handler.deactivateConnection(ConnectionPath, DevicePath)
         },
         Kirigami.Action {
-            iconName: "configure"
+            icon.name: "configure"
             visible: (Uuid != "")? true : false
             onTriggered: {
                 kcm.push("NetworkSettings.qml", {path: ConnectionPath})
             }
         },
         Kirigami.Action {
-            iconName: "entry-delete"
+            icon.name: "entry-delete"
             visible: (Uuid != "")? true : false
             onTriggered: handler.removeConnection(ConnectionPath)
         }

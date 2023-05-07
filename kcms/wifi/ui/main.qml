@@ -82,7 +82,7 @@ ScrollViewKCM {
             text: i18n("Wi-Fi is disabled")
             icon.name: "network-wireless-disconnected"
             helpfulAction: Kirigami.Action {
-                iconName: "network-wireless-connected"
+                icon.name: "network-wireless-connected"
                 text: i18n("Enable")
                 onTriggered: handler.enableWireless(true)
             }
