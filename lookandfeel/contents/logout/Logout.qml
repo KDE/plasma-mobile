@@ -12,7 +12,7 @@ import QtQuick.Layouts 1.12
 import QtQuick.Controls 2.8 as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.kcoreaddons 1.0 as KCoreAddons
+import org.kde.coreaddons 1.0 as KCoreAddons
 
 import org.kde.plasma.private.sessions 2.0
 

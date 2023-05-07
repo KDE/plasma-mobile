@@ -17,7 +17,7 @@ import org.kde.notificationmanager 1.0 as NotificationManager
 
 import org.kde.kirigami 2.12 as Kirigami
 
-import org.kde.kcoreaddons 1.0 as KCoreAddons
+import org.kde.coreaddons 1.0 as KCoreAddons
 
 import "util.js" as Util
 
