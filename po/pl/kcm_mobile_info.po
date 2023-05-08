@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-07-31 09:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,53 +18,53 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.03.70\n"
 
-#: package/contents/ui/main.qml:16
+#: ui/main.qml:16
 #, kde-format
 msgid "System Information"
 msgstr "Informacje systemowe"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Operating System"
 msgstr "System operacyjny"
 
-#: package/contents/ui/main.qml:49
+#: ui/main.qml:49
 #, kde-format
 msgid "Webpage"
 msgstr "Strona sieciowa"
 
-#: package/contents/ui/main.qml:70
+#: ui/main.qml:70
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Wersja Plazmy KDE"
 
-#: package/contents/ui/main.qml:77
+#: ui/main.qml:77
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Wersja Szkieletów KDE"
 
-#: package/contents/ui/main.qml:84
+#: ui/main.qml:84
 #, kde-format
 msgid "Qt Version"
 msgstr "Wersja Qt"
 
-#: package/contents/ui/main.qml:91
+#: ui/main.qml:91
 #, kde-format
 msgid "Kernel Version"
 msgstr "Wersja jądra"
 
-#: package/contents/ui/main.qml:98
+#: ui/main.qml:98
 #, kde-format
 msgid "OS Type"
 msgstr "Rodzaj systemu"
 
-#: package/contents/ui/main.qml:99
+#: ui/main.qml:99
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bity"
 
-#: package/contents/ui/main.qml:116
+#: ui/main.qml:116
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -72,24 +72,24 @@ msgstr[0] "Procesor"
 msgstr[1] "Procesory:"
 msgstr[2] "Procesorów:"
 
-#: package/contents/ui/main.qml:123
+#: ui/main.qml:123
 #, kde-format
 msgid "Memory"
 msgstr "Pamięć"
 
-#: package/contents/ui/main.qml:127
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM-u"
 
-#: package/contents/ui/main.qml:129
+#: ui/main.qml:129
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Nieznana"
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Skopiuj do schowka"

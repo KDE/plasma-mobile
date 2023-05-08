@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-03-16 16:26+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr "Zda je povolen bezdrátový hotspot."
 
-#: package/contents/ui/main.qml:66
+#: ui/main.qml:66
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "SSID hotspotu"
 
-#: package/contents/ui/main.qml:75
+#: ui/main.qml:75
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Heslo hotspotu"

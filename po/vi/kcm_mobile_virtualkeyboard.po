@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-07-13 09:23+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -17,72 +17,72 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: package/contents/ui/languages.qml:20
+#: ui/languages.qml:20
 #, kde-format
 msgid "Languages"
 msgstr "Ngôn ngữ"
 
-#: package/contents/ui/languages.qml:46
+#: ui/languages.qml:46
 #, kde-format
 msgid "Apply"
 msgstr "Áp dụng"
 
-#: package/contents/ui/main.qml:20
+#: ui/main.qml:20
 #, kde-format
 msgid "On-Screen Keyboard"
 msgstr "Bàn phím trên màn hình"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Type anything here…"
 msgstr "Gõ vào đây..."
 
-#: package/contents/ui/main.qml:63
+#: ui/main.qml:63
 #, kde-format
 msgid "Sound"
 msgstr "Âm thanh"
 
-#: package/contents/ui/main.qml:64
+#: ui/main.qml:64
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Có phát tiếng khi ấn phím không."
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "Vibration"
 msgstr "Rung"
 
-#: package/contents/ui/main.qml:74
+#: ui/main.qml:74
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Có rung khi ấn phím không."
 
-#: package/contents/ui/main.qml:94
+#: ui/main.qml:94
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Kiểm tra đánh vần của văn bản được nhập"
 
-#: package/contents/ui/main.qml:103
+#: ui/main.qml:103
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Viết hoa chữ cái đầu mỗi câu"
 
-#: package/contents/ui/main.qml:112
+#: ui/main.qml:112
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Khi ấn nút cách, hoàn tất từ hiện tại bằng gợi ý đầu tiên"
 
-#: package/contents/ui/main.qml:121
+#: ui/main.qml:121
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Gợi ý các từ tiềm năng trong dải từ"
 
-#: package/contents/ui/main.qml:132
+#: ui/main.qml:132
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Chèn dấu chấm hết câu khi nút cách được ấn hai lần"
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Configure Languages"
 msgstr "Cấu hình ngôn ngữ"

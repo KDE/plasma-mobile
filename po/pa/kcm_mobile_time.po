@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-04-01 20:37-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -16,134 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jan"
-msgstr "ਜਨ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Feb"
-msgstr "ਫਰ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Mar"
-msgstr "ਮਾਰ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Apr"
-msgstr "ਅਪ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "May"
-msgstr "ਮਈ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jun"
-msgstr "ਜੂਨ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jul"
-msgstr "ਜੁਲਾ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Aug"
-msgstr "ਅਗ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Sep"
-msgstr "ਸਤੰ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Oct"
-msgstr "ਅਕਤੂ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Nov"
-msgstr "ਨਵੰ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Dec"
-msgstr "ਦਸੰ"
-
-#: package/contents/ui/main.qml:57
-#, kde-format
-msgid "Display"
-msgstr "ਡਿਸਪਲੇਅ"
-
-#: package/contents/ui/main.qml:62
-#, kde-format
-msgid "24-Hour Format"
-msgstr "24-ਘੰਟੇ ਰੂਪ ਵਿੱਚ"
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Whether to use a 24-hour format for clocks."
-msgstr "ਕੀ ਘੜੀਆਂ ਲਈ ਸਮਾਂ 24-ਘੰਟਿਆਂ ਦੇ ਰੂਪ ਵਿੱਚ ਵਰਤਣਾ ਹੈ।"
-
-#: package/contents/ui/main.qml:74
-#, kde-format
-msgid "Timezone"
-msgstr "ਸਮਾਂ-ਖੇਤਰ"
-
-#: package/contents/ui/main.qml:89
-#, kde-format
-msgid "Time and Date"
-msgstr "ਸਮਾਂ ਤੇ ਤਾਰੀਖ"
-
-#: package/contents/ui/main.qml:94
-#, kde-format
-msgid "Automatic Time Synchronization"
-msgstr "ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸਿੰਕ ਕਰੋ"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Whether to set the time automatically."
-msgstr "ਕੀ ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸੈਟ ਕਰਨਾ ਹੈ।"
-
-#: package/contents/ui/main.qml:112
-#, kde-format
-msgid "Current Time"
-msgstr "ਮੌਜੂਦਾ ਸਮਾਂ"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Date"
-msgstr "ਤਾਰੀਖ"
-
-#: package/contents/ui/main.qml:135
-#, kde-format
-msgctxt "@title:window"
-msgid "Pick Timezone"
-msgstr "ਸਮਾਂ-ਖੇਤਰ ਚੁਣੋ"
-
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
-#: package/contents/ui/main.qml:253
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "ਬੰਦ ਕਰੋ"
-
-#: package/contents/ui/main.qml:172
-#, kde-format
-msgid "Pick Time"
-msgstr "ਸਮਾਂ ਚੁਣੋ"
-
-#: package/contents/ui/main.qml:217
-#, kde-format
-msgid "Pick Date"
-msgstr "ਤਾਰੀਖ ਚੁਣੋ"
 
 #: timesettings.cpp:147
 #, kde-format
@@ -3050,6 +2922,133 @@ msgstr "ਇੰਡੀਅਨ"
 msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "ਪ੍ਰਸ਼ਾਂਤ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jan"
+msgstr "ਜਨ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Feb"
+msgstr "ਫਰ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Mar"
+msgstr "ਮਾਰ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Apr"
+msgstr "ਅਪ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "May"
+msgstr "ਮਈ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jun"
+msgstr "ਜੂਨ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jul"
+msgstr "ਜੁਲਾ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Aug"
+msgstr "ਅਗ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Sep"
+msgstr "ਸਤੰ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Oct"
+msgstr "ਅਕਤੂ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Nov"
+msgstr "ਨਵੰ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Dec"
+msgstr "ਦਸੰ"
+
+#: ui/main.qml:57
+#, kde-format
+msgid "Display"
+msgstr "ਡਿਸਪਲੇਅ"
+
+#: ui/main.qml:62
+#, kde-format
+msgid "24-Hour Format"
+msgstr "24-ਘੰਟੇ ਰੂਪ ਵਿੱਚ"
+
+#: ui/main.qml:63
+#, kde-format
+msgid "Whether to use a 24-hour format for clocks."
+msgstr "ਕੀ ਘੜੀਆਂ ਲਈ ਸਮਾਂ 24-ਘੰਟਿਆਂ ਦੇ ਰੂਪ ਵਿੱਚ ਵਰਤਣਾ ਹੈ।"
+
+#: ui/main.qml:74
+#, kde-format
+msgid "Timezone"
+msgstr "ਸਮਾਂ-ਖੇਤਰ"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Time and Date"
+msgstr "ਸਮਾਂ ਤੇ ਤਾਰੀਖ"
+
+#: ui/main.qml:94
+#, kde-format
+msgid "Automatic Time Synchronization"
+msgstr "ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸਿੰਕ ਕਰੋ"
+
+#: ui/main.qml:95
+#, kde-format
+msgid "Whether to set the time automatically."
+msgstr "ਕੀ ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸੈਟ ਕਰਨਾ ਹੈ।"
+
+#: ui/main.qml:112
+#, kde-format
+msgid "Current Time"
+msgstr "ਮੌਜੂਦਾ ਸਮਾਂ"
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Date"
+msgstr "ਤਾਰੀਖ"
+
+#: ui/main.qml:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Pick Timezone"
+msgstr "ਸਮਾਂ-ਖੇਤਰ ਚੁਣੋ"
+
+#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "ਬੰਦ ਕਰੋ"
+
+#: ui/main.qml:172
+#, kde-format
+msgid "Pick Time"
+msgstr "ਸਮਾਂ ਚੁਣੋ"
+
+#: ui/main.qml:217
+#, kde-format
+msgid "Pick Date"
+msgstr "ਤਾਰੀਖ ਚੁਣੋ"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

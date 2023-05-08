@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-02-05 07:10+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -209,7 +209,7 @@ msgstr "სრული კვების რეჟიმი"
 msgid "Initializing"
 msgstr "ინიციალიზაცია"
 
-#: modemdetails.cpp:256 package/contents/ui/SimPage.qml:137
+#: modemdetails.cpp:256 ui/SimPage.qml:137
 #, kde-format
 msgid "Locked"
 msgstr "ჩაკეტილი"
@@ -229,7 +229,7 @@ msgstr "გათიშვა"
 msgid "Enabling"
 msgstr "ჩართვა"
 
-#: modemdetails.cpp:264 package/contents/ui/ModemPage.qml:110
+#: modemdetails.cpp:264 ui/ModemPage.qml:110
 #, kde-format
 msgid "Enabled"
 msgstr "ჩართულია"
@@ -346,14 +346,12 @@ msgstr ""
 msgid "Scanning networks failed: %1"
 msgstr "ქსელების სკანირების შეცდომა: %1"
 
-#: modemdetails.cpp:430 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:430 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "Yes"
 msgstr "დიახ"
 
-#: modemdetails.cpp:432 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:432 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "No"
 msgstr "არა"
@@ -369,7 +367,7 @@ msgid "GuessNo"
 msgstr "ალბათ არა"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "2G"
 msgstr "2G"
@@ -391,511 +389,10 @@ msgstr "4G"
 msgid "5G"
 msgstr "5G"
 
-#: modemdetails.cpp:509 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Any"
 msgstr "ნებისმიერი"
-
-#: package/contents/ui/AvailableNetworks.qml:13
-#, kde-format
-msgid "Available Networks"
-msgstr "ხელმისაწვდომი ქსელები"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "none"
-msgstr "არცერთი"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "Current operator: %1"
-msgstr "მიმდინარე ოპერატორი: %1"
-
-#: package/contents/ui/AvailableNetworks.qml:40
-#, kde-format
-msgid "Scan For Networks"
-msgstr "ქსელების სკანირება"
-
-#: package/contents/ui/EditProfileDialog.qml:14
-#, kde-format
-msgid "Edit APN"
-msgstr "APN-ის ჩასწორება"
-
-#: package/contents/ui/EditProfileDialog.qml:41
-#, kde-format
-msgid "Name"
-msgstr "სახელი"
-
-#: package/contents/ui/EditProfileDialog.qml:46
-#, kde-format
-msgid "APN"
-msgstr "APN"
-
-#: package/contents/ui/EditProfileDialog.qml:51
-#, kde-format
-msgid "Username"
-msgstr "მომხმარებლის სახელი"
-
-#: package/contents/ui/EditProfileDialog.qml:56
-#, kde-format
-msgid "Password"
-msgstr "პაროლი"
-
-#: package/contents/ui/EditProfileDialog.qml:61
-#, kde-format
-msgid "Network type"
-msgstr "ქსელის ტიპი"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "4G/3G/2G"
-msgstr "4G/3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "3G/2G"
-msgstr "3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 4G"
-msgstr "მხოლოდ 4G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 3G"
-msgstr "მხოლოდ 3G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 2G"
-msgstr "მხოლოდ 2G"
-
-#: package/contents/ui/main.qml:35
-#, kde-format
-msgid "Modem not available"
-msgstr "მოდემი ხელმიუწვდომელია"
-
-#: package/contents/ui/main.qml:74
-#, kde-format
-msgid "Mobile data"
-msgstr "მობილური ინტერნეტი"
-
-#: package/contents/ui/main.qml:79
-#, kde-format
-msgid "No SIM is inserted."
-msgstr "SIM ბარათი არ დევს."
-
-#: package/contents/ui/main.qml:81
-#, kde-format
-msgid "Mobile data is not available with this modem."
-msgstr "ამ მოდემით მობილურ ინტერნეტთან მიერთება შეუძლებელია."
-
-#: package/contents/ui/main.qml:83
-#, kde-format
-msgid "An APN needs to be configured to have mobile data."
-msgstr "მობილური ინტერნეტისთვის APN-ის მორგება სავალდებულოა."
-
-#: package/contents/ui/main.qml:85
-#, kde-format
-msgid "Whether mobile data is enabled."
-msgstr "მობილური ინტერნეტი ჩართულია, თუ არა."
-
-#: package/contents/ui/main.qml:116
-#, kde-format
-msgid "Data Usage"
-msgstr "ინტერნეტის გამოყენება"
-
-#: package/contents/ui/main.qml:117
-#, kde-format
-msgid "View data usage."
-msgstr "ინტერნეტის გამოყენების ნახვა."
-
-#: package/contents/ui/main.qml:133 package/contents/ui/SimPage.qml:17
-#, kde-format
-msgid "SIM"
-msgstr "SIM"
-
-#: package/contents/ui/main.qml:133
-#, kde-format
-msgid "SIMs"
-msgstr "SIM-ები"
-
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgid "SIM %1"
-msgstr "SIM %1"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgid "View SIM %1 details."
-msgstr "SIM %1-ის დეტალების ნახვა."
-
-#: package/contents/ui/ModemPage.qml:16
-#, kde-format
-msgid "Modem %1"
-msgstr "მოდემი %1"
-
-#: package/contents/ui/ModemPage.qml:41
-#, kde-format
-msgid "Modem Control"
-msgstr "მოდემის კონტროლი"
-
-#: package/contents/ui/ModemPage.qml:50
-#, kde-format
-msgid "Modem Restart"
-msgstr "მოდემის გადატვირთვა"
-
-#: package/contents/ui/ModemPage.qml:53
-#, kde-format
-msgid "Force Modem Restart"
-msgstr "მოდემის ძალით გადატვირთვა"
-
-#: package/contents/ui/ModemPage.qml:69 package/contents/ui/SimPage.qml:117
-#, kde-format
-msgid "Modem Details"
-msgstr "მოდემის დეტალები"
-
-#: package/contents/ui/ModemPage.qml:82
-#, kde-format
-msgid "Access Technologies"
-msgstr "წვდომის ტექნოლოგიები"
-
-#: package/contents/ui/ModemPage.qml:102
-#, kde-format
-msgid "IMEI"
-msgstr "IMEI"
-
-#: package/contents/ui/ModemPage.qml:118
-#, kde-format
-msgid "Manufacturer"
-msgstr "მწარმოებელი"
-
-#: package/contents/ui/ModemPage.qml:126
-#, kde-format
-msgid "Model"
-msgstr "მოდელი"
-
-#: package/contents/ui/ModemPage.qml:142
-#, kde-format
-msgid "Owned Numbers:"
-msgstr "კუთვნილი ნომრები:"
-
-#: package/contents/ui/ModemPage.qml:162
-#, kde-format
-msgid "Revision"
-msgstr "რევიზია"
-
-#: package/contents/ui/ModemPage.qml:170
-#, kde-format
-msgid "Signal Quality"
-msgstr "სიგნალის ხარისხი"
-
-#: package/contents/ui/ModemPage.qml:178
-#, kde-format
-msgid "State"
-msgstr "State"
-
-#: package/contents/ui/ModemPage.qml:186
-#, kde-format
-msgid "Failure Reason"
-msgstr "შეცდომის მიზეზი"
-
-#: package/contents/ui/ModemPage.qml:194
-#, kde-format
-msgid "Registration State"
-msgstr "რეგისტრაციის მდგომარეობა"
-
-#: package/contents/ui/ModemPage.qml:202
-#, kde-format
-msgid "Roaming"
-msgstr "როუმინგი"
-
-#: package/contents/ui/ModemPage.qml:210
-#, kde-format
-msgid "Firmware Version"
-msgstr "მიკროკოდის ვერსია"
-
-#: package/contents/ui/ModemPage.qml:218
-#, kde-format
-msgid "Interface Name"
-msgstr "ინტერფეისის სახელი"
-
-#: package/contents/ui/ModemPage.qml:226
-#, kde-format
-msgid "Metered"
-msgstr "დათვლადი"
-
-#: package/contents/ui/ModemPage.qml:234
-#, kde-format
-msgid "Active NetworkManager Connection"
-msgstr "NetworkManager-ის აქტიური შეერთება"
-
-#: package/contents/ui/ModemPage.qml:242
-#, kde-format
-msgid "Device"
-msgstr "მოწყობილობა"
-
-#: package/contents/ui/ModemPage.qml:250
-#, kde-format
-msgid "Device ID"
-msgstr "მოწყობილობის ID"
-
-#: package/contents/ui/ModemPage.qml:266
-#, kde-format
-msgid "Drivers:"
-msgstr "დრაივერები:"
-
-#: package/contents/ui/ModemPage.qml:286
-#, kde-format
-msgid "Plugin"
-msgstr "დამატება"
-
-#: package/contents/ui/ModemPage.qml:294
-#, kde-format
-msgid "Power State"
-msgstr "კვების მდგომარეობა"
-
-#: package/contents/ui/ModemPage.qml:302
-#, kde-format
-msgid "SIM Path"
-msgstr "SIM-ის ბილიკი"
-
-#: package/contents/ui/ProfileList.qml:12
-#, kde-format
-msgid "APNs"
-msgstr "APN-ები"
-
-#: package/contents/ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "მორგებული APN-ების გარეშე"
-
-#: package/contents/ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "შეერთების დამატება"
-
-#: package/contents/ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "APN-ის დამატება"
-
-#: package/contents/ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "APN-ის ავტომატური დადგენა"
-
-#: package/contents/ui/ProfileList.qml:133
-#, kde-format
-msgid "Edit"
-msgstr "ჩასწორება"
-
-#: package/contents/ui/ProfileList.qml:141
-#, kde-format
-msgid "Delete"
-msgstr "წაშლა"
-
-#: package/contents/ui/SimLockPage.qml:16 package/contents/ui/SimPage.qml:106
-#, kde-format
-msgid "SIM Lock"
-msgstr "SIM-ის ბლოკირება"
-
-#: package/contents/ui/SimLockPage.qml:47
-#, kde-format
-msgid "SIM is locked"
-msgstr "SIM-ი დაბლოკილია"
-
-#: package/contents/ui/SimLockPage.qml:48
-#, kde-format
-msgid "In order to use this SIM, you must first unlock it."
-msgstr "SIM-ის გამოსაყენებლად ჯერ ბლოკის მოხსნაა საჭირო."
-
-#: package/contents/ui/SimLockPage.qml:70
-#, kde-format
-msgid "SIM is not locked"
-msgstr "SIM-ი დაბლოკილი არაა"
-
-#: package/contents/ui/SimLockPage.qml:71
-#, kde-format
-msgid ""
-"You can lock your SIM to require a set PIN code for phone calls and mobile "
-"data."
-msgstr ""
-"შეგიძლიათ დაბლოკოთ თქვენი SIM ბარათი ისე, რომ მან PIN კოდი ყველა ზარისა და "
-"ინტერნეტის ჩართვისთვის მოითხოვოს."
-
-#: package/contents/ui/SimLockPage.qml:75
-#, kde-format
-msgid "Lock SIM"
-msgstr "SIM-ის დაბლოკვა"
-
-#: package/contents/ui/SimLockPage.qml:89
-#, kde-format
-msgid "Disable SIM Lock"
-msgstr "SIM-ის დაბლოკვის გამორთვა"
-
-#: package/contents/ui/SimLockPage.qml:90
-#, kde-format
-msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr "SIM-ის დაბლოკვის გამორთვა და პაროლის მოცილება."
-
-#: package/contents/ui/SimLockPage.qml:103
-#, kde-format
-msgid "Change PIN"
-msgstr "PIN კოდის შეცვლა"
-
-#: package/contents/ui/SimLockPage.qml:104
-#, kde-format
-msgid "Change the passcode set on the SIM."
-msgstr "SIM-ზე დაყენებული პაროლის შეცვლა."
-
-#: package/contents/ui/SimLockPage.qml:119
-#, kde-format
-msgid "Unlock SIM"
-msgstr "SIM-ის განბლოკვა"
-
-#: package/contents/ui/SimLockPage.qml:127
-#, kde-format
-msgid "Attempts left: %1"
-msgstr "დარჩენილი ცდები: %1"
-
-#: package/contents/ui/SimLockPage.qml:131
-#, kde-format
-msgid "Enter PIN"
-msgstr "შეიყვანეთ PIN კოდი"
-
-#: package/contents/ui/SimLockPage.qml:139
-#, kde-format
-msgid "Change SIM PIN"
-msgstr "SIM PIN-ის შეცვლა"
-
-#: package/contents/ui/SimLockPage.qml:158
-#: package/contents/ui/SimLockPage.qml:223
-#, kde-format
-msgid "PINs don't match!"
-msgstr "შეყვანილი 2 PIN კოდი არ ემთხვევა!"
-
-#: package/contents/ui/SimLockPage.qml:164
-#: package/contents/ui/SimLockPage.qml:229
-#, kde-format
-msgid "PINs must be between 4 and 8 digits!"
-msgstr "PIN კოდი 4-დან 8 სიმბოლომდე უნდა იყოს!"
-
-#: package/contents/ui/SimLockPage.qml:169
-#: package/contents/ui/SimLockPage.qml:196
-#, kde-format
-msgid "Current PIN"
-msgstr "მიმდინარე PIN კოდი"
-
-#: package/contents/ui/SimLockPage.qml:174
-#: package/contents/ui/SimLockPage.qml:234
-#, kde-format
-msgid "New PIN"
-msgstr "ახალი PIN კოდი"
-
-#: package/contents/ui/SimLockPage.qml:179
-#: package/contents/ui/SimLockPage.qml:239
-#, kde-format
-msgid "Confirm PIN"
-msgstr "დაადასტურეთ PIN-კოდი"
-
-#: package/contents/ui/SimLockPage.qml:187
-#, kde-format
-msgid "Remove SIM PIN"
-msgstr "SIM PIN-ის წაშლა"
-
-#: package/contents/ui/SimLockPage.qml:204
-#, kde-format
-msgid "Add SIM PIN"
-msgstr "SIM PIN-ის დამატება"
-
-#: package/contents/ui/SimPage.qml:72
-#, kde-format
-msgid "Data Roaming"
-msgstr "ინტერნეტის როუმინგი"
-
-#: package/contents/ui/SimPage.qml:73
-#, kde-format
-msgid "Allow your device to use networks other than your carrier."
-msgstr ""
-"საშუალებას გაძლევთ თქვენი მოწყობილობა საწყისი ქსელის გარდა, სხვაგანაც "
-"გამოიყენოთ."
-
-#: package/contents/ui/SimPage.qml:84
-#, kde-format
-msgid "Modify APNs"
-msgstr "APN-ების ჩასწორება"
-
-#: package/contents/ui/SimPage.qml:85
-#, kde-format
-msgid "Configure access point names for your carrier."
-msgstr "თქვენი პროვაიდერის წვდომის წერტილის მორგება."
-
-#: package/contents/ui/SimPage.qml:95
-#, kde-format
-msgid "Networks"
-msgstr "ქსელები"
-
-#: package/contents/ui/SimPage.qml:96
-#, kde-format
-msgid "Select a network operator."
-msgstr "აირჩიეთ ქსელის ოპერატორი."
-
-#: package/contents/ui/SimPage.qml:107
-#, kde-format
-msgid "Modify SIM lock settings."
-msgstr "SIM-ის ბლოკირების მორგება."
-
-#: package/contents/ui/SimPage.qml:118
-#, kde-format
-msgid "View the details of the modem this SIM is connected to."
-msgstr "მოდემის, რომელზეც ეს SIM ბარათია მიმაგრებულ, დეტალების ნახვა."
-
-#: package/contents/ui/SimPage.qml:132
-#, kde-format
-msgid "SIM Details"
-msgstr "SIM-ის დეტალები"
-
-#: package/contents/ui/SimPage.qml:145
-#, kde-format
-msgid "IMSI"
-msgstr "IMSI"
-
-#: package/contents/ui/SimPage.qml:153
-#, kde-format
-msgid "EID"
-msgstr "EID"
-
-#: package/contents/ui/SimPage.qml:161
-#, kde-format
-msgid "Operator Code (modem)"
-msgstr "ოპერატორის კოდი (მოდემი)"
-
-#: package/contents/ui/SimPage.qml:169
-#, kde-format
-msgid "Operator Name (modem)"
-msgstr "ოპერატორის სახელი (მოდემი)"
-
-#: package/contents/ui/SimPage.qml:177
-#, kde-format
-msgid "Operator Code (provided by SIM)"
-msgstr "ოპერატორის კოდი (SIM ბარათიდან)"
-
-#: package/contents/ui/SimPage.qml:185
-#, kde-format
-msgid "Operator Name (provided by SIM)"
-msgstr "ოპრატორის სახელი (SIM ბარათიდან)"
-
-#: package/contents/ui/SimPage.qml:193
-#, kde-format
-msgid "SIM ID"
-msgstr "SIM ID"
-
-#: package/contents/ui/SimPage.qml:210
-#, kde-format
-msgid "Emergency Numbers"
-msgstr "სასწრაფო ნომრები"
 
 #: sim.cpp:64
 #, kde-format
@@ -1006,6 +503,502 @@ msgstr "PIN-ის გაგზავნის შეცდომა: %1"
 #, kde-format
 msgid "Error sending the PUK: %1"
 msgstr "PUK-ის გაგზავნის შეცდომა: %1"
+
+#: ui/AvailableNetworks.qml:13
+#, kde-format
+msgid "Available Networks"
+msgstr "ხელმისაწვდომი ქსელები"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "none"
+msgstr "არცერთი"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "Current operator: %1"
+msgstr "მიმდინარე ოპერატორი: %1"
+
+#: ui/AvailableNetworks.qml:40
+#, kde-format
+msgid "Scan For Networks"
+msgstr "ქსელების სკანირება"
+
+#: ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "APN-ის ჩასწორება"
+
+#: ui/EditProfileDialog.qml:41
+#, kde-format
+msgid "Name"
+msgstr "სახელი"
+
+#: ui/EditProfileDialog.qml:46
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: ui/EditProfileDialog.qml:51
+#, kde-format
+msgid "Username"
+msgstr "მომხმარებლის სახელი"
+
+#: ui/EditProfileDialog.qml:56
+#, kde-format
+msgid "Password"
+msgstr "პაროლი"
+
+#: ui/EditProfileDialog.qml:61
+#, kde-format
+msgid "Network type"
+msgstr "ქსელის ტიპი"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 4G"
+msgstr "მხოლოდ 4G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 3G"
+msgstr "მხოლოდ 3G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 2G"
+msgstr "მხოლოდ 2G"
+
+#: ui/main.qml:35
+#, kde-format
+msgid "Modem not available"
+msgstr "მოდემი ხელმიუწვდომელია"
+
+#: ui/main.qml:74
+#, kde-format
+msgid "Mobile data"
+msgstr "მობილური ინტერნეტი"
+
+#: ui/main.qml:79
+#, kde-format
+msgid "No SIM is inserted."
+msgstr "SIM ბარათი არ დევს."
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Mobile data is not available with this modem."
+msgstr "ამ მოდემით მობილურ ინტერნეტთან მიერთება შეუძლებელია."
+
+#: ui/main.qml:83
+#, kde-format
+msgid "An APN needs to be configured to have mobile data."
+msgstr "მობილური ინტერნეტისთვის APN-ის მორგება სავალდებულოა."
+
+#: ui/main.qml:85
+#, kde-format
+msgid "Whether mobile data is enabled."
+msgstr "მობილური ინტერნეტი ჩართულია, თუ არა."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Data Usage"
+msgstr "ინტერნეტის გამოყენება"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "View data usage."
+msgstr "ინტერნეტის გამოყენების ნახვა."
+
+#: ui/main.qml:133 ui/SimPage.qml:17
+#, kde-format
+msgid "SIM"
+msgstr "SIM"
+
+#: ui/main.qml:133
+#, kde-format
+msgid "SIMs"
+msgstr "SIM-ები"
+
+#: ui/main.qml:153
+#, kde-format
+msgid "SIM %1"
+msgstr "SIM %1"
+
+#: ui/main.qml:154
+#, kde-format
+msgid "View SIM %1 details."
+msgstr "SIM %1-ის დეტალების ნახვა."
+
+#: ui/ModemPage.qml:16
+#, kde-format
+msgid "Modem %1"
+msgstr "მოდემი %1"
+
+#: ui/ModemPage.qml:41
+#, kde-format
+msgid "Modem Control"
+msgstr "მოდემის კონტროლი"
+
+#: ui/ModemPage.qml:50
+#, kde-format
+msgid "Modem Restart"
+msgstr "მოდემის გადატვირთვა"
+
+#: ui/ModemPage.qml:53
+#, kde-format
+msgid "Force Modem Restart"
+msgstr "მოდემის ძალით გადატვირთვა"
+
+#: ui/ModemPage.qml:69 ui/SimPage.qml:117
+#, kde-format
+msgid "Modem Details"
+msgstr "მოდემის დეტალები"
+
+#: ui/ModemPage.qml:82
+#, kde-format
+msgid "Access Technologies"
+msgstr "წვდომის ტექნოლოგიები"
+
+#: ui/ModemPage.qml:102
+#, kde-format
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ui/ModemPage.qml:118
+#, kde-format
+msgid "Manufacturer"
+msgstr "მწარმოებელი"
+
+#: ui/ModemPage.qml:126
+#, kde-format
+msgid "Model"
+msgstr "მოდელი"
+
+#: ui/ModemPage.qml:142
+#, kde-format
+msgid "Owned Numbers:"
+msgstr "კუთვნილი ნომრები:"
+
+#: ui/ModemPage.qml:162
+#, kde-format
+msgid "Revision"
+msgstr "რევიზია"
+
+#: ui/ModemPage.qml:170
+#, kde-format
+msgid "Signal Quality"
+msgstr "სიგნალის ხარისხი"
+
+#: ui/ModemPage.qml:178
+#, kde-format
+msgid "State"
+msgstr "State"
+
+#: ui/ModemPage.qml:186
+#, kde-format
+msgid "Failure Reason"
+msgstr "შეცდომის მიზეზი"
+
+#: ui/ModemPage.qml:194
+#, kde-format
+msgid "Registration State"
+msgstr "რეგისტრაციის მდგომარეობა"
+
+#: ui/ModemPage.qml:202
+#, kde-format
+msgid "Roaming"
+msgstr "როუმინგი"
+
+#: ui/ModemPage.qml:210
+#, kde-format
+msgid "Firmware Version"
+msgstr "მიკროკოდის ვერსია"
+
+#: ui/ModemPage.qml:218
+#, kde-format
+msgid "Interface Name"
+msgstr "ინტერფეისის სახელი"
+
+#: ui/ModemPage.qml:226
+#, kde-format
+msgid "Metered"
+msgstr "დათვლადი"
+
+#: ui/ModemPage.qml:234
+#, kde-format
+msgid "Active NetworkManager Connection"
+msgstr "NetworkManager-ის აქტიური შეერთება"
+
+#: ui/ModemPage.qml:242
+#, kde-format
+msgid "Device"
+msgstr "მოწყობილობა"
+
+#: ui/ModemPage.qml:250
+#, kde-format
+msgid "Device ID"
+msgstr "მოწყობილობის ID"
+
+#: ui/ModemPage.qml:266
+#, kde-format
+msgid "Drivers:"
+msgstr "დრაივერები:"
+
+#: ui/ModemPage.qml:286
+#, kde-format
+msgid "Plugin"
+msgstr "დამატება"
+
+#: ui/ModemPage.qml:294
+#, kde-format
+msgid "Power State"
+msgstr "კვების მდგომარეობა"
+
+#: ui/ModemPage.qml:302
+#, kde-format
+msgid "SIM Path"
+msgstr "SIM-ის ბილიკი"
+
+#: ui/ProfileList.qml:12
+#, kde-format
+msgid "APNs"
+msgstr "APN-ები"
+
+#: ui/ProfileList.qml:26
+#, kde-format
+msgid "No APNs configured"
+msgstr "მორგებული APN-ების გარეშე"
+
+#: ui/ProfileList.qml:31
+#, kde-format
+msgid "Add Connection"
+msgstr "შეერთების დამატება"
+
+#: ui/ProfileList.qml:98
+#, kde-format
+msgid "Add APN"
+msgstr "APN-ის დამატება"
+
+#: ui/ProfileList.qml:121
+#, kde-format
+msgid "Autodetect APN"
+msgstr "APN-ის ავტომატური დადგენა"
+
+#: ui/ProfileList.qml:133
+#, kde-format
+msgid "Edit"
+msgstr "ჩასწორება"
+
+#: ui/ProfileList.qml:141
+#, kde-format
+msgid "Delete"
+msgstr "წაშლა"
+
+#: ui/SimLockPage.qml:16 ui/SimPage.qml:106
+#, kde-format
+msgid "SIM Lock"
+msgstr "SIM-ის ბლოკირება"
+
+#: ui/SimLockPage.qml:47
+#, kde-format
+msgid "SIM is locked"
+msgstr "SIM-ი დაბლოკილია"
+
+#: ui/SimLockPage.qml:48
+#, kde-format
+msgid "In order to use this SIM, you must first unlock it."
+msgstr "SIM-ის გამოსაყენებლად ჯერ ბლოკის მოხსნაა საჭირო."
+
+#: ui/SimLockPage.qml:70
+#, kde-format
+msgid "SIM is not locked"
+msgstr "SIM-ი დაბლოკილი არაა"
+
+#: ui/SimLockPage.qml:71
+#, kde-format
+msgid ""
+"You can lock your SIM to require a set PIN code for phone calls and mobile "
+"data."
+msgstr ""
+"შეგიძლიათ დაბლოკოთ თქვენი SIM ბარათი ისე, რომ მან PIN კოდი ყველა ზარისა და "
+"ინტერნეტის ჩართვისთვის მოითხოვოს."
+
+#: ui/SimLockPage.qml:75
+#, kde-format
+msgid "Lock SIM"
+msgstr "SIM-ის დაბლოკვა"
+
+#: ui/SimLockPage.qml:89
+#, kde-format
+msgid "Disable SIM Lock"
+msgstr "SIM-ის დაბლოკვის გამორთვა"
+
+#: ui/SimLockPage.qml:90
+#, kde-format
+msgid "Disable the SIM lock feature and remove the passcode on the SIM."
+msgstr "SIM-ის დაბლოკვის გამორთვა და პაროლის მოცილება."
+
+#: ui/SimLockPage.qml:103
+#, kde-format
+msgid "Change PIN"
+msgstr "PIN კოდის შეცვლა"
+
+#: ui/SimLockPage.qml:104
+#, kde-format
+msgid "Change the passcode set on the SIM."
+msgstr "SIM-ზე დაყენებული პაროლის შეცვლა."
+
+#: ui/SimLockPage.qml:119
+#, kde-format
+msgid "Unlock SIM"
+msgstr "SIM-ის განბლოკვა"
+
+#: ui/SimLockPage.qml:127
+#, kde-format
+msgid "Attempts left: %1"
+msgstr "დარჩენილი ცდები: %1"
+
+#: ui/SimLockPage.qml:131
+#, kde-format
+msgid "Enter PIN"
+msgstr "შეიყვანეთ PIN კოდი"
+
+#: ui/SimLockPage.qml:139
+#, kde-format
+msgid "Change SIM PIN"
+msgstr "SIM PIN-ის შეცვლა"
+
+#: ui/SimLockPage.qml:158 ui/SimLockPage.qml:223
+#, kde-format
+msgid "PINs don't match!"
+msgstr "შეყვანილი 2 PIN კოდი არ ემთხვევა!"
+
+#: ui/SimLockPage.qml:164 ui/SimLockPage.qml:229
+#, kde-format
+msgid "PINs must be between 4 and 8 digits!"
+msgstr "PIN კოდი 4-დან 8 სიმბოლომდე უნდა იყოს!"
+
+#: ui/SimLockPage.qml:169 ui/SimLockPage.qml:196
+#, kde-format
+msgid "Current PIN"
+msgstr "მიმდინარე PIN კოდი"
+
+#: ui/SimLockPage.qml:174 ui/SimLockPage.qml:234
+#, kde-format
+msgid "New PIN"
+msgstr "ახალი PIN კოდი"
+
+#: ui/SimLockPage.qml:179 ui/SimLockPage.qml:239
+#, kde-format
+msgid "Confirm PIN"
+msgstr "დაადასტურეთ PIN-კოდი"
+
+#: ui/SimLockPage.qml:187
+#, kde-format
+msgid "Remove SIM PIN"
+msgstr "SIM PIN-ის წაშლა"
+
+#: ui/SimLockPage.qml:204
+#, kde-format
+msgid "Add SIM PIN"
+msgstr "SIM PIN-ის დამატება"
+
+#: ui/SimPage.qml:72
+#, kde-format
+msgid "Data Roaming"
+msgstr "ინტერნეტის როუმინგი"
+
+#: ui/SimPage.qml:73
+#, kde-format
+msgid "Allow your device to use networks other than your carrier."
+msgstr ""
+"საშუალებას გაძლევთ თქვენი მოწყობილობა საწყისი ქსელის გარდა, სხვაგანაც "
+"გამოიყენოთ."
+
+#: ui/SimPage.qml:84
+#, kde-format
+msgid "Modify APNs"
+msgstr "APN-ების ჩასწორება"
+
+#: ui/SimPage.qml:85
+#, kde-format
+msgid "Configure access point names for your carrier."
+msgstr "თქვენი პროვაიდერის წვდომის წერტილის მორგება."
+
+#: ui/SimPage.qml:95
+#, kde-format
+msgid "Networks"
+msgstr "ქსელები"
+
+#: ui/SimPage.qml:96
+#, kde-format
+msgid "Select a network operator."
+msgstr "აირჩიეთ ქსელის ოპერატორი."
+
+#: ui/SimPage.qml:107
+#, kde-format
+msgid "Modify SIM lock settings."
+msgstr "SIM-ის ბლოკირების მორგება."
+
+#: ui/SimPage.qml:118
+#, kde-format
+msgid "View the details of the modem this SIM is connected to."
+msgstr "მოდემის, რომელზეც ეს SIM ბარათია მიმაგრებულ, დეტალების ნახვა."
+
+#: ui/SimPage.qml:132
+#, kde-format
+msgid "SIM Details"
+msgstr "SIM-ის დეტალები"
+
+#: ui/SimPage.qml:145
+#, kde-format
+msgid "IMSI"
+msgstr "IMSI"
+
+#: ui/SimPage.qml:153
+#, kde-format
+msgid "EID"
+msgstr "EID"
+
+#: ui/SimPage.qml:161
+#, kde-format
+msgid "Operator Code (modem)"
+msgstr "ოპერატორის კოდი (მოდემი)"
+
+#: ui/SimPage.qml:169
+#, kde-format
+msgid "Operator Name (modem)"
+msgstr "ოპერატორის სახელი (მოდემი)"
+
+#: ui/SimPage.qml:177
+#, kde-format
+msgid "Operator Code (provided by SIM)"
+msgstr "ოპერატორის კოდი (SIM ბარათიდან)"
+
+#: ui/SimPage.qml:185
+#, kde-format
+msgid "Operator Name (provided by SIM)"
+msgstr "ოპრატორის სახელი (SIM ბარათიდან)"
+
+#: ui/SimPage.qml:193
+#, kde-format
+msgid "SIM ID"
+msgstr "SIM ID"
+
+#: ui/SimPage.qml:210
+#, kde-format
+msgid "Emergency Numbers"
+msgstr "სასწრაფო ნომრები"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

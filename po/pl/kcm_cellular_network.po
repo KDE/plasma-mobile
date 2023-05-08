@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-12-03 09:40+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -209,7 +209,7 @@ msgstr "Tryb pełnego zasilania"
 msgid "Initializing"
 msgstr "Przygotowywanie"
 
-#: modemdetails.cpp:256 package/contents/ui/SimPage.qml:137
+#: modemdetails.cpp:256 ui/SimPage.qml:137
 #, kde-format
 msgid "Locked"
 msgstr "Zablokowana"
@@ -229,7 +229,7 @@ msgstr "Wyłączanie"
 msgid "Enabling"
 msgstr "Włączanie"
 
-#: modemdetails.cpp:264 package/contents/ui/ModemPage.qml:110
+#: modemdetails.cpp:264 ui/ModemPage.qml:110
 #, kde-format
 msgid "Enabled"
 msgstr "Włączony"
@@ -346,14 +346,12 @@ msgstr ""
 msgid "Scanning networks failed: %1"
 msgstr "Nie udało się wyszukać sieci : %1"
 
-#: modemdetails.cpp:430 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:430 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "Yes"
 msgstr "Tak"
 
-#: modemdetails.cpp:432 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:432 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "No"
 msgstr "Nie"
@@ -369,7 +367,7 @@ msgid "GuessNo"
 msgstr "Zgadywanie na nie"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "2G"
 msgstr "2G"
@@ -391,510 +389,10 @@ msgstr "4G"
 msgid "5G"
 msgstr "5G"
 
-#: modemdetails.cpp:509 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Any"
 msgstr "Dowolny"
-
-#: package/contents/ui/AvailableNetworks.qml:13
-#, kde-format
-msgid "Available Networks"
-msgstr "Dostępne sieci"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "none"
-msgstr "brak"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "Current operator: %1"
-msgstr "Bieżący operator: %1"
-
-#: package/contents/ui/AvailableNetworks.qml:40
-#, kde-format
-msgid "Scan For Networks"
-msgstr "Szukaj sieci"
-
-#: package/contents/ui/EditProfileDialog.qml:14
-#, kde-format
-msgid "Edit APN"
-msgstr "Zmień APN"
-
-#: package/contents/ui/EditProfileDialog.qml:41
-#, kde-format
-msgid "Name"
-msgstr "Nazwa"
-
-#: package/contents/ui/EditProfileDialog.qml:46
-#, kde-format
-msgid "APN"
-msgstr "APN"
-
-#: package/contents/ui/EditProfileDialog.qml:51
-#, kde-format
-msgid "Username"
-msgstr "Nazwa użytkownika"
-
-#: package/contents/ui/EditProfileDialog.qml:56
-#, kde-format
-msgid "Password"
-msgstr "Hasło"
-
-#: package/contents/ui/EditProfileDialog.qml:61
-#, kde-format
-msgid "Network type"
-msgstr "Rodzaj sieci"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "4G/3G/2G"
-msgstr "4G/3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "3G/2G"
-msgstr "3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 4G"
-msgstr "Tylko 4G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 3G"
-msgstr "Tylko 3G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 2G"
-msgstr "Tylko 2G"
-
-#: package/contents/ui/main.qml:35
-#, kde-format
-msgid "Modem not available"
-msgstr "Modem jest niedostępny"
-
-#: package/contents/ui/main.qml:74
-#, kde-format
-msgid "Mobile data"
-msgstr "Dane komórkowe"
-
-#: package/contents/ui/main.qml:79
-#, kde-format
-msgid "No SIM is inserted."
-msgstr "Nie włożono karty SIM."
-
-#: package/contents/ui/main.qml:81
-#, kde-format
-msgid "Mobile data is not available with this modem."
-msgstr "Dane komórkowe są niedostępne dla tego modemu."
-
-#: package/contents/ui/main.qml:83
-#, kde-format
-msgid "An APN needs to be configured to have mobile data."
-msgstr "Aby mieć dane komórkowe, należy ustawić APN."
-
-#: package/contents/ui/main.qml:85
-#, kde-format
-msgid "Whether mobile data is enabled."
-msgstr "Określa czy dane komórkowe są włączone."
-
-#: package/contents/ui/main.qml:116
-#, kde-format
-msgid "Data Usage"
-msgstr "Wykorzystanie danych"
-
-#: package/contents/ui/main.qml:117
-#, kde-format
-msgid "View data usage."
-msgstr "Zobacz wykorzystanie danych."
-
-#: package/contents/ui/main.qml:133 package/contents/ui/SimPage.qml:17
-#, kde-format
-msgid "SIM"
-msgstr "SIM"
-
-#: package/contents/ui/main.qml:133
-#, kde-format
-msgid "SIMs"
-msgstr "Karty SIM"
-
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgid "SIM %1"
-msgstr "Karta SIM %1"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgid "View SIM %1 details."
-msgstr "Pokaż szczegóły karty SIM %1."
-
-#: package/contents/ui/ModemPage.qml:16
-#, kde-format
-msgid "Modem %1"
-msgstr "Modem %1"
-
-#: package/contents/ui/ModemPage.qml:41
-#, kde-format
-msgid "Modem Control"
-msgstr "Sterowanie modemem"
-
-#: package/contents/ui/ModemPage.qml:50
-#, kde-format
-msgid "Modem Restart"
-msgstr "Uruchom modem ponownie"
-
-#: package/contents/ui/ModemPage.qml:53
-#, kde-format
-msgid "Force Modem Restart"
-msgstr "Wymuś ponowne uruchomienie modemu"
-
-#: package/contents/ui/ModemPage.qml:69 package/contents/ui/SimPage.qml:117
-#, kde-format
-msgid "Modem Details"
-msgstr "Szczegóły modemu"
-
-#: package/contents/ui/ModemPage.qml:82
-#, kde-format
-msgid "Access Technologies"
-msgstr "Technologie dostępu"
-
-#: package/contents/ui/ModemPage.qml:102
-#, kde-format
-msgid "IMEI"
-msgstr "IMEI"
-
-#: package/contents/ui/ModemPage.qml:118
-#, kde-format
-msgid "Manufacturer"
-msgstr "Wytwórca"
-
-#: package/contents/ui/ModemPage.qml:126
-#, kde-format
-msgid "Model"
-msgstr "Model"
-
-#: package/contents/ui/ModemPage.qml:142
-#, kde-format
-msgid "Owned Numbers:"
-msgstr "Posiadane numery:"
-
-#: package/contents/ui/ModemPage.qml:162
-#, kde-format
-msgid "Revision"
-msgstr "Wydanie"
-
-#: package/contents/ui/ModemPage.qml:170
-#, kde-format
-msgid "Signal Quality"
-msgstr "Jakość sygnału"
-
-#: package/contents/ui/ModemPage.qml:178
-#, kde-format
-msgid "State"
-msgstr "Stan"
-
-#: package/contents/ui/ModemPage.qml:186
-#, kde-format
-msgid "Failure Reason"
-msgstr "Powód niepowodzenia"
-
-#: package/contents/ui/ModemPage.qml:194
-#, kde-format
-msgid "Registration State"
-msgstr "Stan rejestracji"
-
-#: package/contents/ui/ModemPage.qml:202
-#, kde-format
-msgid "Roaming"
-msgstr "Roaming"
-
-#: package/contents/ui/ModemPage.qml:210
-#, kde-format
-msgid "Firmware Version"
-msgstr "Wersja oprogramowania układowego"
-
-#: package/contents/ui/ModemPage.qml:218
-#, kde-format
-msgid "Interface Name"
-msgstr "Nazwa interfejsu"
-
-#: package/contents/ui/ModemPage.qml:226
-#, kde-format
-msgid "Metered"
-msgstr "Taryfowa"
-
-#: package/contents/ui/ModemPage.qml:234
-#, kde-format
-msgid "Active NetworkManager Connection"
-msgstr "Bieżące połączenie sieciowe"
-
-#: package/contents/ui/ModemPage.qml:242
-#, kde-format
-msgid "Device"
-msgstr "Urządzenie"
-
-#: package/contents/ui/ModemPage.qml:250
-#, kde-format
-msgid "Device ID"
-msgstr "ID urządzenia"
-
-#: package/contents/ui/ModemPage.qml:266
-#, kde-format
-msgid "Drivers:"
-msgstr "Sterowniki:"
-
-#: package/contents/ui/ModemPage.qml:286
-#, kde-format
-msgid "Plugin"
-msgstr "Wtyczka"
-
-#: package/contents/ui/ModemPage.qml:294
-#, kde-format
-msgid "Power State"
-msgstr "Stan zasilania"
-
-#: package/contents/ui/ModemPage.qml:302
-#, kde-format
-msgid "SIM Path"
-msgstr "Ścieżka karty SIM"
-
-#: package/contents/ui/ProfileList.qml:12
-#, kde-format
-msgid "APNs"
-msgstr "Punkty APN"
-
-#: package/contents/ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "Nie ustawiono żadnego APN"
-
-#: package/contents/ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "Dodaj połączenie"
-
-#: package/contents/ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "Dodaj APN"
-
-#: package/contents/ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "Sam wykryj APN"
-
-#: package/contents/ui/ProfileList.qml:133
-#, kde-format
-msgid "Edit"
-msgstr "Edytuj"
-
-#: package/contents/ui/ProfileList.qml:141
-#, kde-format
-msgid "Delete"
-msgstr "Usuń"
-
-#: package/contents/ui/SimLockPage.qml:16 package/contents/ui/SimPage.qml:106
-#, kde-format
-msgid "SIM Lock"
-msgstr "Blokada karty SIM"
-
-#: package/contents/ui/SimLockPage.qml:47
-#, kde-format
-msgid "SIM is locked"
-msgstr "Karta SIM jest zablokowana"
-
-#: package/contents/ui/SimLockPage.qml:48
-#, kde-format
-msgid "In order to use this SIM, you must first unlock it."
-msgstr "Aby użyć swojej karty SIM, musisz ją najpierw odblokować."
-
-#: package/contents/ui/SimLockPage.qml:70
-#, kde-format
-msgid "SIM is not locked"
-msgstr "Karta SIM nie jest zablokowana"
-
-#: package/contents/ui/SimLockPage.qml:71
-#, kde-format
-msgid ""
-"You can lock your SIM to require a set PIN code for phone calls and mobile "
-"data."
-msgstr ""
-"Możesz wymagać numeru PIN dla karty SIM do wykonywania połączeń "
-"telefonicznych i przesyłania danych w sieci komórkowej."
-
-#: package/contents/ui/SimLockPage.qml:75
-#, kde-format
-msgid "Lock SIM"
-msgstr "Zablokuj kartę SIM"
-
-#: package/contents/ui/SimLockPage.qml:89
-#, kde-format
-msgid "Disable SIM Lock"
-msgstr "Wyłącz blokadę karty SIM"
-
-#: package/contents/ui/SimLockPage.qml:90
-#, kde-format
-msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr "Wyłącz blokadę karty SIM i usuń kod dostępu do niej."
-
-#: package/contents/ui/SimLockPage.qml:103
-#, kde-format
-msgid "Change PIN"
-msgstr "Zmień PIN"
-
-#: package/contents/ui/SimLockPage.qml:104
-#, kde-format
-msgid "Change the passcode set on the SIM."
-msgstr "Zmień hasło chroniące kartę SIM."
-
-#: package/contents/ui/SimLockPage.qml:119
-#, kde-format
-msgid "Unlock SIM"
-msgstr "Odblokuj kartę SIM"
-
-#: package/contents/ui/SimLockPage.qml:127
-#, kde-format
-msgid "Attempts left: %1"
-msgstr "Liczba pozostałych prób: %1"
-
-#: package/contents/ui/SimLockPage.qml:131
-#, kde-format
-msgid "Enter PIN"
-msgstr "Wpisz numer PIN"
-
-#: package/contents/ui/SimLockPage.qml:139
-#, kde-format
-msgid "Change SIM PIN"
-msgstr "Zmień numer PIN karty SIM"
-
-#: package/contents/ui/SimLockPage.qml:158
-#: package/contents/ui/SimLockPage.qml:223
-#, kde-format
-msgid "PINs don't match!"
-msgstr "Numer PIN nie zgadzają się ze sobą!"
-
-#: package/contents/ui/SimLockPage.qml:164
-#: package/contents/ui/SimLockPage.qml:229
-#, kde-format
-msgid "PINs must be between 4 and 8 digits!"
-msgstr "PIN musi zawierać od 4 do 8 cyfr!"
-
-#: package/contents/ui/SimLockPage.qml:169
-#: package/contents/ui/SimLockPage.qml:196
-#, kde-format
-msgid "Current PIN"
-msgstr "Bieżący PIN"
-
-#: package/contents/ui/SimLockPage.qml:174
-#: package/contents/ui/SimLockPage.qml:234
-#, kde-format
-msgid "New PIN"
-msgstr "Nowy numer PIN"
-
-#: package/contents/ui/SimLockPage.qml:179
-#: package/contents/ui/SimLockPage.qml:239
-#, kde-format
-msgid "Confirm PIN"
-msgstr "Potwierdź PIN"
-
-#: package/contents/ui/SimLockPage.qml:187
-#, kde-format
-msgid "Remove SIM PIN"
-msgstr "Usuń numer PIN karty SIM"
-
-#: package/contents/ui/SimLockPage.qml:204
-#, kde-format
-msgid "Add SIM PIN"
-msgstr "Dodaj numer PIN do karty SIM"
-
-#: package/contents/ui/SimPage.qml:72
-#, kde-format
-msgid "Data Roaming"
-msgstr "Dane w roamingu"
-
-#: package/contents/ui/SimPage.qml:73
-#, kde-format
-msgid "Allow your device to use networks other than your carrier."
-msgstr ""
-"Zezwól swojemu urządzeniu na używanie sieci innych niż swojego dostawcy."
-
-#: package/contents/ui/SimPage.qml:84
-#, kde-format
-msgid "Modify APNs"
-msgstr "Zmień APN"
-
-#: package/contents/ui/SimPage.qml:85
-#, kde-format
-msgid "Configure access point names for your carrier."
-msgstr "Nadaj nazwy punktów dostępowych swojego dostawcy."
-
-#: package/contents/ui/SimPage.qml:95
-#, kde-format
-msgid "Networks"
-msgstr "Sieci"
-
-#: package/contents/ui/SimPage.qml:96
-#, kde-format
-msgid "Select a network operator."
-msgstr "Wybierz operatora sieci."
-
-#: package/contents/ui/SimPage.qml:107
-#, kde-format
-msgid "Modify SIM lock settings."
-msgstr "Zmień ustawienia blokady karty SIM."
-
-#: package/contents/ui/SimPage.qml:118
-#, kde-format
-msgid "View the details of the modem this SIM is connected to."
-msgstr "Obejrzyj szczegóły modemu, do którego włożona jest ta karta SIM."
-
-#: package/contents/ui/SimPage.qml:132
-#, kde-format
-msgid "SIM Details"
-msgstr "Szczegóły SIM"
-
-#: package/contents/ui/SimPage.qml:145
-#, kde-format
-msgid "IMSI"
-msgstr "IMSI"
-
-#: package/contents/ui/SimPage.qml:153
-#, kde-format
-msgid "EID"
-msgstr "EID"
-
-#: package/contents/ui/SimPage.qml:161
-#, kde-format
-msgid "Operator Code (modem)"
-msgstr "Kod operatora (modem)"
-
-#: package/contents/ui/SimPage.qml:169
-#, kde-format
-msgid "Operator Name (modem)"
-msgstr "Nazwa operatora (modem)"
-
-#: package/contents/ui/SimPage.qml:177
-#, kde-format
-msgid "Operator Code (provided by SIM)"
-msgstr "Kod operatora (dostarczony przez kartę SIM)"
-
-#: package/contents/ui/SimPage.qml:185
-#, kde-format
-msgid "Operator Name (provided by SIM)"
-msgstr "Nazwa operatora (dostarczona przez kartę SIM)"
-
-#: package/contents/ui/SimPage.qml:193
-#, kde-format
-msgid "SIM ID"
-msgstr "ID karty SIM"
-
-#: package/contents/ui/SimPage.qml:210
-#, kde-format
-msgid "Emergency Numbers"
-msgstr "Numery alarmowe"
 
 #: sim.cpp:64
 #, kde-format
@@ -1005,6 +503,501 @@ msgstr "Błąd wysyłania numeru PIN: %1"
 #, kde-format
 msgid "Error sending the PUK: %1"
 msgstr "Błąd wysyłania numeru PUK: %1"
+
+#: ui/AvailableNetworks.qml:13
+#, kde-format
+msgid "Available Networks"
+msgstr "Dostępne sieci"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "none"
+msgstr "brak"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "Current operator: %1"
+msgstr "Bieżący operator: %1"
+
+#: ui/AvailableNetworks.qml:40
+#, kde-format
+msgid "Scan For Networks"
+msgstr "Szukaj sieci"
+
+#: ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "Zmień APN"
+
+#: ui/EditProfileDialog.qml:41
+#, kde-format
+msgid "Name"
+msgstr "Nazwa"
+
+#: ui/EditProfileDialog.qml:46
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: ui/EditProfileDialog.qml:51
+#, kde-format
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+#: ui/EditProfileDialog.qml:56
+#, kde-format
+msgid "Password"
+msgstr "Hasło"
+
+#: ui/EditProfileDialog.qml:61
+#, kde-format
+msgid "Network type"
+msgstr "Rodzaj sieci"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 4G"
+msgstr "Tylko 4G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 3G"
+msgstr "Tylko 3G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 2G"
+msgstr "Tylko 2G"
+
+#: ui/main.qml:35
+#, kde-format
+msgid "Modem not available"
+msgstr "Modem jest niedostępny"
+
+#: ui/main.qml:74
+#, kde-format
+msgid "Mobile data"
+msgstr "Dane komórkowe"
+
+#: ui/main.qml:79
+#, kde-format
+msgid "No SIM is inserted."
+msgstr "Nie włożono karty SIM."
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Mobile data is not available with this modem."
+msgstr "Dane komórkowe są niedostępne dla tego modemu."
+
+#: ui/main.qml:83
+#, kde-format
+msgid "An APN needs to be configured to have mobile data."
+msgstr "Aby mieć dane komórkowe, należy ustawić APN."
+
+#: ui/main.qml:85
+#, kde-format
+msgid "Whether mobile data is enabled."
+msgstr "Określa czy dane komórkowe są włączone."
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Data Usage"
+msgstr "Wykorzystanie danych"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "View data usage."
+msgstr "Zobacz wykorzystanie danych."
+
+#: ui/main.qml:133 ui/SimPage.qml:17
+#, kde-format
+msgid "SIM"
+msgstr "SIM"
+
+#: ui/main.qml:133
+#, kde-format
+msgid "SIMs"
+msgstr "Karty SIM"
+
+#: ui/main.qml:153
+#, kde-format
+msgid "SIM %1"
+msgstr "Karta SIM %1"
+
+#: ui/main.qml:154
+#, kde-format
+msgid "View SIM %1 details."
+msgstr "Pokaż szczegóły karty SIM %1."
+
+#: ui/ModemPage.qml:16
+#, kde-format
+msgid "Modem %1"
+msgstr "Modem %1"
+
+#: ui/ModemPage.qml:41
+#, kde-format
+msgid "Modem Control"
+msgstr "Sterowanie modemem"
+
+#: ui/ModemPage.qml:50
+#, kde-format
+msgid "Modem Restart"
+msgstr "Uruchom modem ponownie"
+
+#: ui/ModemPage.qml:53
+#, kde-format
+msgid "Force Modem Restart"
+msgstr "Wymuś ponowne uruchomienie modemu"
+
+#: ui/ModemPage.qml:69 ui/SimPage.qml:117
+#, kde-format
+msgid "Modem Details"
+msgstr "Szczegóły modemu"
+
+#: ui/ModemPage.qml:82
+#, kde-format
+msgid "Access Technologies"
+msgstr "Technologie dostępu"
+
+#: ui/ModemPage.qml:102
+#, kde-format
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ui/ModemPage.qml:118
+#, kde-format
+msgid "Manufacturer"
+msgstr "Wytwórca"
+
+#: ui/ModemPage.qml:126
+#, kde-format
+msgid "Model"
+msgstr "Model"
+
+#: ui/ModemPage.qml:142
+#, kde-format
+msgid "Owned Numbers:"
+msgstr "Posiadane numery:"
+
+#: ui/ModemPage.qml:162
+#, kde-format
+msgid "Revision"
+msgstr "Wydanie"
+
+#: ui/ModemPage.qml:170
+#, kde-format
+msgid "Signal Quality"
+msgstr "Jakość sygnału"
+
+#: ui/ModemPage.qml:178
+#, kde-format
+msgid "State"
+msgstr "Stan"
+
+#: ui/ModemPage.qml:186
+#, kde-format
+msgid "Failure Reason"
+msgstr "Powód niepowodzenia"
+
+#: ui/ModemPage.qml:194
+#, kde-format
+msgid "Registration State"
+msgstr "Stan rejestracji"
+
+#: ui/ModemPage.qml:202
+#, kde-format
+msgid "Roaming"
+msgstr "Roaming"
+
+#: ui/ModemPage.qml:210
+#, kde-format
+msgid "Firmware Version"
+msgstr "Wersja oprogramowania układowego"
+
+#: ui/ModemPage.qml:218
+#, kde-format
+msgid "Interface Name"
+msgstr "Nazwa interfejsu"
+
+#: ui/ModemPage.qml:226
+#, kde-format
+msgid "Metered"
+msgstr "Taryfowa"
+
+#: ui/ModemPage.qml:234
+#, kde-format
+msgid "Active NetworkManager Connection"
+msgstr "Bieżące połączenie sieciowe"
+
+#: ui/ModemPage.qml:242
+#, kde-format
+msgid "Device"
+msgstr "Urządzenie"
+
+#: ui/ModemPage.qml:250
+#, kde-format
+msgid "Device ID"
+msgstr "ID urządzenia"
+
+#: ui/ModemPage.qml:266
+#, kde-format
+msgid "Drivers:"
+msgstr "Sterowniki:"
+
+#: ui/ModemPage.qml:286
+#, kde-format
+msgid "Plugin"
+msgstr "Wtyczka"
+
+#: ui/ModemPage.qml:294
+#, kde-format
+msgid "Power State"
+msgstr "Stan zasilania"
+
+#: ui/ModemPage.qml:302
+#, kde-format
+msgid "SIM Path"
+msgstr "Ścieżka karty SIM"
+
+#: ui/ProfileList.qml:12
+#, kde-format
+msgid "APNs"
+msgstr "Punkty APN"
+
+#: ui/ProfileList.qml:26
+#, kde-format
+msgid "No APNs configured"
+msgstr "Nie ustawiono żadnego APN"
+
+#: ui/ProfileList.qml:31
+#, kde-format
+msgid "Add Connection"
+msgstr "Dodaj połączenie"
+
+#: ui/ProfileList.qml:98
+#, kde-format
+msgid "Add APN"
+msgstr "Dodaj APN"
+
+#: ui/ProfileList.qml:121
+#, kde-format
+msgid "Autodetect APN"
+msgstr "Sam wykryj APN"
+
+#: ui/ProfileList.qml:133
+#, kde-format
+msgid "Edit"
+msgstr "Edytuj"
+
+#: ui/ProfileList.qml:141
+#, kde-format
+msgid "Delete"
+msgstr "Usuń"
+
+#: ui/SimLockPage.qml:16 ui/SimPage.qml:106
+#, kde-format
+msgid "SIM Lock"
+msgstr "Blokada karty SIM"
+
+#: ui/SimLockPage.qml:47
+#, kde-format
+msgid "SIM is locked"
+msgstr "Karta SIM jest zablokowana"
+
+#: ui/SimLockPage.qml:48
+#, kde-format
+msgid "In order to use this SIM, you must first unlock it."
+msgstr "Aby użyć swojej karty SIM, musisz ją najpierw odblokować."
+
+#: ui/SimLockPage.qml:70
+#, kde-format
+msgid "SIM is not locked"
+msgstr "Karta SIM nie jest zablokowana"
+
+#: ui/SimLockPage.qml:71
+#, kde-format
+msgid ""
+"You can lock your SIM to require a set PIN code for phone calls and mobile "
+"data."
+msgstr ""
+"Możesz wymagać numeru PIN dla karty SIM do wykonywania połączeń "
+"telefonicznych i przesyłania danych w sieci komórkowej."
+
+#: ui/SimLockPage.qml:75
+#, kde-format
+msgid "Lock SIM"
+msgstr "Zablokuj kartę SIM"
+
+#: ui/SimLockPage.qml:89
+#, kde-format
+msgid "Disable SIM Lock"
+msgstr "Wyłącz blokadę karty SIM"
+
+#: ui/SimLockPage.qml:90
+#, kde-format
+msgid "Disable the SIM lock feature and remove the passcode on the SIM."
+msgstr "Wyłącz blokadę karty SIM i usuń kod dostępu do niej."
+
+#: ui/SimLockPage.qml:103
+#, kde-format
+msgid "Change PIN"
+msgstr "Zmień PIN"
+
+#: ui/SimLockPage.qml:104
+#, kde-format
+msgid "Change the passcode set on the SIM."
+msgstr "Zmień hasło chroniące kartę SIM."
+
+#: ui/SimLockPage.qml:119
+#, kde-format
+msgid "Unlock SIM"
+msgstr "Odblokuj kartę SIM"
+
+#: ui/SimLockPage.qml:127
+#, kde-format
+msgid "Attempts left: %1"
+msgstr "Liczba pozostałych prób: %1"
+
+#: ui/SimLockPage.qml:131
+#, kde-format
+msgid "Enter PIN"
+msgstr "Wpisz numer PIN"
+
+#: ui/SimLockPage.qml:139
+#, kde-format
+msgid "Change SIM PIN"
+msgstr "Zmień numer PIN karty SIM"
+
+#: ui/SimLockPage.qml:158 ui/SimLockPage.qml:223
+#, kde-format
+msgid "PINs don't match!"
+msgstr "Numer PIN nie zgadzają się ze sobą!"
+
+#: ui/SimLockPage.qml:164 ui/SimLockPage.qml:229
+#, kde-format
+msgid "PINs must be between 4 and 8 digits!"
+msgstr "PIN musi zawierać od 4 do 8 cyfr!"
+
+#: ui/SimLockPage.qml:169 ui/SimLockPage.qml:196
+#, kde-format
+msgid "Current PIN"
+msgstr "Bieżący PIN"
+
+#: ui/SimLockPage.qml:174 ui/SimLockPage.qml:234
+#, kde-format
+msgid "New PIN"
+msgstr "Nowy numer PIN"
+
+#: ui/SimLockPage.qml:179 ui/SimLockPage.qml:239
+#, kde-format
+msgid "Confirm PIN"
+msgstr "Potwierdź PIN"
+
+#: ui/SimLockPage.qml:187
+#, kde-format
+msgid "Remove SIM PIN"
+msgstr "Usuń numer PIN karty SIM"
+
+#: ui/SimLockPage.qml:204
+#, kde-format
+msgid "Add SIM PIN"
+msgstr "Dodaj numer PIN do karty SIM"
+
+#: ui/SimPage.qml:72
+#, kde-format
+msgid "Data Roaming"
+msgstr "Dane w roamingu"
+
+#: ui/SimPage.qml:73
+#, kde-format
+msgid "Allow your device to use networks other than your carrier."
+msgstr ""
+"Zezwól swojemu urządzeniu na używanie sieci innych niż swojego dostawcy."
+
+#: ui/SimPage.qml:84
+#, kde-format
+msgid "Modify APNs"
+msgstr "Zmień APN"
+
+#: ui/SimPage.qml:85
+#, kde-format
+msgid "Configure access point names for your carrier."
+msgstr "Nadaj nazwy punktów dostępowych swojego dostawcy."
+
+#: ui/SimPage.qml:95
+#, kde-format
+msgid "Networks"
+msgstr "Sieci"
+
+#: ui/SimPage.qml:96
+#, kde-format
+msgid "Select a network operator."
+msgstr "Wybierz operatora sieci."
+
+#: ui/SimPage.qml:107
+#, kde-format
+msgid "Modify SIM lock settings."
+msgstr "Zmień ustawienia blokady karty SIM."
+
+#: ui/SimPage.qml:118
+#, kde-format
+msgid "View the details of the modem this SIM is connected to."
+msgstr "Obejrzyj szczegóły modemu, do którego włożona jest ta karta SIM."
+
+#: ui/SimPage.qml:132
+#, kde-format
+msgid "SIM Details"
+msgstr "Szczegóły SIM"
+
+#: ui/SimPage.qml:145
+#, kde-format
+msgid "IMSI"
+msgstr "IMSI"
+
+#: ui/SimPage.qml:153
+#, kde-format
+msgid "EID"
+msgstr "EID"
+
+#: ui/SimPage.qml:161
+#, kde-format
+msgid "Operator Code (modem)"
+msgstr "Kod operatora (modem)"
+
+#: ui/SimPage.qml:169
+#, kde-format
+msgid "Operator Name (modem)"
+msgstr "Nazwa operatora (modem)"
+
+#: ui/SimPage.qml:177
+#, kde-format
+msgid "Operator Code (provided by SIM)"
+msgstr "Kod operatora (dostarczony przez kartę SIM)"
+
+#: ui/SimPage.qml:185
+#, kde-format
+msgid "Operator Name (provided by SIM)"
+msgstr "Nazwa operatora (dostarczona przez kartę SIM)"
+
+#: ui/SimPage.qml:193
+#, kde-format
+msgid "SIM ID"
+msgstr "ID karty SIM"
+
+#: ui/SimPage.qml:210
+#, kde-format
+msgid "Emergency Numbers"
+msgstr "Numery alarmowe"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

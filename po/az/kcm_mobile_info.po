@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-07-20 09:12+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -17,77 +17,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.3\n"
 
-#: package/contents/ui/main.qml:16
+#: ui/main.qml:16
 #, kde-format
 msgid "System Information"
 msgstr "Sistem Məlumatları"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Operating System"
 msgstr "Əməliyyat Sistemi"
 
-#: package/contents/ui/main.qml:49
+#: ui/main.qml:49
 #, kde-format
 msgid "Webpage"
 msgstr "Veb-səhifə"
 
-#: package/contents/ui/main.qml:70
+#: ui/main.qml:70
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma versiyası"
 
-#: package/contents/ui/main.qml:77
+#: ui/main.qml:77
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE Framework versiyası"
 
-#: package/contents/ui/main.qml:84
+#: ui/main.qml:84
 #, kde-format
 msgid "Qt Version"
 msgstr "QT versiyası"
 
-#: package/contents/ui/main.qml:91
+#: ui/main.qml:91
 #, kde-format
 msgid "Kernel Version"
 msgstr "Nüvə versiyası"
 
-#: package/contents/ui/main.qml:98
+#: ui/main.qml:98
 #, kde-format
 msgid "OS Type"
 msgstr "ƏS növü"
 
-#: package/contents/ui/main.qml:99
+#: ui/main.qml:99
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: package/contents/ui/main.qml:116
+#: ui/main.qml:116
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "Prosessor"
 msgstr[1] "Prosessorlar"
 
-#: package/contents/ui/main.qml:123
+#: ui/main.qml:123
 #, kde-format
 msgid "Memory"
 msgstr "Yaddaş"
 
-#: package/contents/ui/main.qml:127
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "Əməliyyat Yaddaşı: %1"
 
-#: package/contents/ui/main.qml:129
+#: ui/main.qml:129
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Naməlum"
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Mübadilə buferinə kopyalamaq"

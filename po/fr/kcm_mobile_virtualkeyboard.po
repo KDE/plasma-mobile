@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-07-08 10:14+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -14,74 +14,74 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: package/contents/ui/languages.qml:20
+#: ui/languages.qml:20
 #, kde-format
 msgid "Languages"
 msgstr "Langues"
 
-#: package/contents/ui/languages.qml:46
+#: ui/languages.qml:46
 #, kde-format
 msgid "Apply"
 msgstr "Appliquer"
 
-#: package/contents/ui/main.qml:20
+#: ui/main.qml:20
 #, kde-format
 msgid "On-Screen Keyboard"
 msgstr "Clavier en incrustation vidéo"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Type anything here…"
 msgstr "Saisissez n'importe quoi ici..."
 
-#: package/contents/ui/main.qml:63
+#: ui/main.qml:63
 #, kde-format
 msgid "Sound"
 msgstr "Son"
 
-#: package/contents/ui/main.qml:64
+#: ui/main.qml:64
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Émettre ou non un son sur un appui de touche"
 
-#: package/contents/ui/main.qml:73
+#: ui/main.qml:73
 #, kde-format
 msgid "Vibration"
 msgstr "Vibration"
 
-#: package/contents/ui/main.qml:74
+#: ui/main.qml:74
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Vibrer ou non sur un appui de touche."
 
-#: package/contents/ui/main.qml:94
+#: ui/main.qml:94
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Vérification orthographique du texte saisi"
 
-#: package/contents/ui/main.qml:103
+#: ui/main.qml:103
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Mettre en majuscule la première lettre de chaque phrase."
 
-#: package/contents/ui/main.qml:112
+#: ui/main.qml:112
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr ""
 "Compléter le mot courant avec la première suggestion après appui sur la "
 "barre d'espace."
 
-#: package/contents/ui/main.qml:121
+#: ui/main.qml:121
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Suggérer des mots potentiels dans le ruban de mots."
 
-#: package/contents/ui/main.qml:132
+#: ui/main.qml:132
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Insérer un point lors d'un double appui sur la barre d'espace."
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Configure Languages"
 msgstr "Configurer les langues"

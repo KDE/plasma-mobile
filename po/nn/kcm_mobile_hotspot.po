@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-03-19 14:43+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Hotspot"
 msgstr "Trådlaussone"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr "Om trådlaussona er sett i bruk."
 
-#: package/contents/ui/main.qml:66
+#: ui/main.qml:66
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "Trådlaussone-SSID"
 
-#: package/contents/ui/main.qml:75
+#: ui/main.qml:75
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Passord for trådlaussone"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-03-15 08:08+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -18,107 +18,104 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: package/contents/ui/main.qml:18
+#: ui/main.qml:18
 #, kde-format
 msgid "Shell"
 msgstr "Оболонка"
 
-#: package/contents/ui/main.qml:36
+#: ui/main.qml:36
 #, kde-format
 msgid "General"
 msgstr "Загальне"
 
-#: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
-#: package/contents/ui/VibrationForm.qml:35
+#: ui/main.qml:41 ui/VibrationForm.qml:17 ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
 msgstr "Вібрації оболонки"
 
-#: package/contents/ui/main.qml:49
+#: ui/main.qml:49
 #, kde-format
 msgid "Animations"
 msgstr "Анімації"
 
-#: package/contents/ui/main.qml:50
+#: ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Якщо вимкнено, використання анімацій буде обмежено до мінімального."
 
-#: package/contents/ui/main.qml:69
+#: ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Панель навігації"
 
-#: package/contents/ui/main.qml:74
+#: ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Режим лише жестів"
 
-#: package/contents/ui/main.qml:75
+#: ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Визначає, чи слід ховати панель навігації."
 
-#: package/contents/ui/main.qml:94
+#: ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
 msgstr "Перемикання задач"
 
-#: package/contents/ui/main.qml:98
+#: ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
 msgstr "Показувати перегляди програм"
 
-#: package/contents/ui/main.qml:99
+#: ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
 msgstr "Вимикання може підвищити швидкодію."
 
-#: package/contents/ui/main.qml:119
+#: ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
 msgstr "Висувна панель дій"
 
-#: package/contents/ui/main.qml:124
-#: package/contents/ui/QuickSettingsForm.qml:17
-#: package/contents/ui/QuickSettingsForm.qml:114
+#: ui/main.qml:124 ui/QuickSettingsForm.qml:17 ui/QuickSettingsForm.qml:114
 #, kde-format
 msgid "Quick Settings"
 msgstr "Швидке налаштовування"
 
-#: package/contents/ui/main.qml:130
+#: ui/main.qml:130
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Пришпилений режим"
 
-#: package/contents/ui/main.qml:131
+#: ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Розширений режим"
 
-#: package/contents/ui/main.qml:135
+#: ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Режим верхньої лівої висувної панелі"
 
-#: package/contents/ui/main.qml:136
+#: ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Режим відкриття від верхнього лівого кута."
 
-#: package/contents/ui/main.qml:161
+#: ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Режим верхньої правої висувної панелі"
 
-#: package/contents/ui/main.qml:162
+#: ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Режим відкриття від верхнього правого кута."
 
-#: package/contents/ui/QuickSettingsForm.qml:115
+#: ui/QuickSettingsForm.qml:115
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
@@ -126,78 +123,78 @@ msgstr ""
 "Налаштуйте порядок списку швидкого доступу до параметрів на спадній панелі і "
 "приховайте їх."
 
-#: package/contents/ui/QuickSettingsForm.qml:137
+#: ui/QuickSettingsForm.qml:137
 #, kde-format
 msgid "Disabled Quick Settings"
 msgstr "Вимкнені швидкі параметри"
 
-#: package/contents/ui/QuickSettingsForm.qml:138
+#: ui/QuickSettingsForm.qml:138
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr "Повторно увімкнути раніше вимкнені швидкі параметри."
 
-#: package/contents/ui/VibrationForm.qml:36
+#: ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
 msgstr "Визначає, чи буде увімкнено вібрацію в оболонці."
 
-#: package/contents/ui/VibrationForm.qml:49
+#: ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
 msgstr "Інтенсивність вібрації"
 
-#: package/contents/ui/VibrationForm.qml:50
+#: ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
 msgstr "Наскільки інтенсивними мають бути вібрації."
 
-#: package/contents/ui/VibrationForm.qml:52
+#: ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
 msgstr "Низька"
 
-#: package/contents/ui/VibrationForm.qml:53
+#: ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
 msgstr "Середня"
 
-#: package/contents/ui/VibrationForm.qml:54
+#: ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
 msgstr "Висока"
 
-#: package/contents/ui/VibrationForm.qml:80
+#: ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
 msgstr "Тривалість вібрації"
 
-#: package/contents/ui/VibrationForm.qml:81
+#: ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Наскільки довгими мають бути вібрації оболонки."
 
-#: package/contents/ui/VibrationForm.qml:83
+#: ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Довга"
 
-#: package/contents/ui/VibrationForm.qml:84
+#: ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Середня"
 
-#: package/contents/ui/VibrationForm.qml:85
+#: ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Коротка"
 
-#: package/contents/ui/VibrationForm.qml:110
+#: ui/VibrationForm.qml:110
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

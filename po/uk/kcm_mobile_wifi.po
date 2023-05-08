@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2021-06-21 08:59+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,172 +20,172 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: package/contents/ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:136
 #, kde-format
 msgid "Invalid input."
 msgstr "Некоректні вхідні дані."
 
-#: package/contents/ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:108
 #, kde-format
 msgid "Connect to"
 msgstr "З'єднатися з"
 
-#: package/contents/ui/main.qml:82
+#: ui/main.qml:82
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi вимкнено"
 
-#: package/contents/ui/main.qml:86
+#: ui/main.qml:86
 #, kde-format
 msgid "Enable"
 msgstr "Увімкнути"
 
-#: package/contents/ui/main.qml:96
+#: ui/main.qml:96
 #, kde-format
 msgid "Disable Wi-Fi"
 msgstr "Вимкнути Wi-Fi"
 
-#: package/contents/ui/main.qml:102
+#: ui/main.qml:102
 #, kde-format
 msgid "Add Custom Connection"
 msgstr "Додати нетипове з'єднання"
 
-#: package/contents/ui/main.qml:108
+#: ui/main.qml:108
 #, kde-format
 msgid "Show Saved Connections"
 msgstr "Показати збережені з'єднання"
 
-#: package/contents/ui/NetworkSettings.qml:14
+#: ui/NetworkSettings.qml:14
 #, kde-format
 msgid "Add new Connection"
 msgstr "Додати нове з'єднання"
 
-#: package/contents/ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:35
 #, kde-format
 msgid "Save"
 msgstr "Зберегти"
 
-#: package/contents/ui/NetworkSettings.qml:46
+#: ui/NetworkSettings.qml:46
 #, kde-format
 msgid "General"
 msgstr "Загальні"
 
-#: package/contents/ui/NetworkSettings.qml:51
+#: ui/NetworkSettings.qml:51
 #, kde-format
 msgid "SSID:"
 msgstr "SSID:"
 
-#: package/contents/ui/NetworkSettings.qml:60
+#: ui/NetworkSettings.qml:60
 #, kde-format
 msgid "Hidden Network:"
 msgstr "Прихована мережа:"
 
-#: package/contents/ui/NetworkSettings.qml:66
+#: ui/NetworkSettings.qml:66
 #, kde-format
 msgid "Security"
 msgstr "Безпека"
 
-#: package/contents/ui/NetworkSettings.qml:72
+#: ui/NetworkSettings.qml:72
 #, kde-format
 msgid "Security type:"
 msgstr "Тип захисту:"
 
-#: package/contents/ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:81
 #, kde-format
 msgid "None"
 msgstr "Немає"
 
-#: package/contents/ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:82
 #, kde-format
 msgid "WEP Key"
 msgstr "Ключ WEP"
 
-#: package/contents/ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:83
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "Динамічна WEP"
 
-#: package/contents/ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:84
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "Особиста WPA/WPA2"
 
-#: package/contents/ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:85
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "Промислова WPA/WPA2"
 
-#: package/contents/ui/NetworkSettings.qml:110
+#: ui/NetworkSettings.qml:110
 #, kde-format
 msgid "Password:"
 msgstr "Пароль:"
 
-#: package/contents/ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:118
 #, kde-format
 msgid "Authentication:"
 msgstr "Розпізнавання:"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: package/contents/ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:122
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "Тунельоване TLS"
 
-#: package/contents/ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:123
 #, kde-format
 msgid "Protected EAP"
 msgstr "Захищена EAP"
 
-#: package/contents/ui/NetworkSettings.qml:132
+#: ui/NetworkSettings.qml:132
 #, kde-format
 msgid "IP settings"
 msgstr "Параметри IP"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Automatic"
 msgstr "Автоматично"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Manual"
 msgstr "Вручну"
 
-#: package/contents/ui/NetworkSettings.qml:148
+#: ui/NetworkSettings.qml:148
 #, kde-format
 msgid "IP Address:"
 msgstr "IP-адреса:"
 
-#: package/contents/ui/NetworkSettings.qml:160
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "Gateway:"
 msgstr "Шлюз:"
 
-#: package/contents/ui/NetworkSettings.qml:172
+#: ui/NetworkSettings.qml:172
 #, kde-format
 msgid "Network prefix length:"
 msgstr "Довжина префікса мережі:"
 
-#: package/contents/ui/NetworkSettings.qml:185
+#: ui/NetworkSettings.qml:185
 #, kde-format
 msgid "DNS:"
 msgstr "DNS:"
 
-#: package/contents/ui/PasswordField.qml:13
+#: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Пароль…"

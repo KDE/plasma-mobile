@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -19,77 +19,77 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: package/contents/ui/main.qml:16
+#: ui/main.qml:16
 #, kde-format
 msgid "System Information"
 msgstr "Sistema Informo"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Operating System"
 msgstr "Operacia sistemo"
 
-#: package/contents/ui/main.qml:49
+#: ui/main.qml:49
 #, kde-format
 msgid "Webpage"
 msgstr "Retpaĝo"
 
-#: package/contents/ui/main.qml:70
+#: ui/main.qml:70
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma Versio"
 
-#: package/contents/ui/main.qml:77
+#: ui/main.qml:77
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Versio de KDE Frameworks"
 
-#: package/contents/ui/main.qml:84
+#: ui/main.qml:84
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt-Versio"
 
-#: package/contents/ui/main.qml:91
+#: ui/main.qml:91
 #, kde-format
 msgid "Kernel Version"
 msgstr "Kerna Versio"
 
-#: package/contents/ui/main.qml:98
+#: ui/main.qml:98
 #, kde-format
 msgid "OS Type"
 msgstr "OS Tipo"
 
-#: package/contents/ui/main.qml:99
+#: ui/main.qml:99
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bita"
 
-#: package/contents/ui/main.qml:116
+#: ui/main.qml:116
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "Procesoro"
 msgstr[1] "Procesoroj"
 
-#: package/contents/ui/main.qml:123
+#: ui/main.qml:123
 #, kde-format
 msgid "Memory"
 msgstr "Memoro"
 
-#: package/contents/ui/main.qml:127
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 el RAM"
 
-#: package/contents/ui/main.qml:129
+#: ui/main.qml:129
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Nekonata"
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Kopii al tondujo"

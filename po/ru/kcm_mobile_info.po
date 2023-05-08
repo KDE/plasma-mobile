@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-09-29 10:44+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -19,53 +19,53 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.08.3\n"
 
-#: package/contents/ui/main.qml:16
+#: ui/main.qml:16
 #, kde-format
 msgid "System Information"
 msgstr "Сведения о системе"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Operating System"
 msgstr "Операционная система"
 
-#: package/contents/ui/main.qml:49
+#: ui/main.qml:49
 #, kde-format
 msgid "Webpage"
 msgstr "Веб-страница"
 
-#: package/contents/ui/main.qml:70
+#: ui/main.qml:70
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Версия KDE Plasma"
 
-#: package/contents/ui/main.qml:77
+#: ui/main.qml:77
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Версия KDE Frameworks"
 
-#: package/contents/ui/main.qml:84
+#: ui/main.qml:84
 #, kde-format
 msgid "Qt Version"
 msgstr "Версия Qt"
 
-#: package/contents/ui/main.qml:91
+#: ui/main.qml:91
 #, kde-format
 msgid "Kernel Version"
 msgstr "Версия ядра"
 
-#: package/contents/ui/main.qml:98
+#: ui/main.qml:98
 #, kde-format
 msgid "OS Type"
 msgstr "Архитектура"
 
-#: package/contents/ui/main.qml:99
+#: ui/main.qml:99
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-битная"
 
-#: package/contents/ui/main.qml:116
+#: ui/main.qml:116
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -74,24 +74,24 @@ msgstr[1] "Процессоры"
 msgstr[2] "Процессоры"
 msgstr[3] "Процессор"
 
-#: package/contents/ui/main.qml:123
+#: ui/main.qml:123
 #, kde-format
 msgid "Memory"
 msgstr "Память"
 
-#: package/contents/ui/main.qml:127
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 ОЗУ"
 
-#: package/contents/ui/main.qml:129
+#: ui/main.qml:129
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: package/contents/ui/main.qml:143
+#: ui/main.qml:143
 #, kde-format
 msgid "Copy to clipboard"
 msgstr "Копировать в буфер обмена"

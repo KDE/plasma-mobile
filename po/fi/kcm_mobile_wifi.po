@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2021-07-09 15:19+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,172 +17,172 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: package/contents/ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:136
 #, kde-format
 msgid "Invalid input."
 msgstr "Virheellinen syöte."
 
-#: package/contents/ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:108
 #, kde-format
 msgid "Connect to"
 msgstr "Yhdistä"
 
-#: package/contents/ui/main.qml:82
+#: ui/main.qml:82
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Langaton verkko ei ole käytössä"
 
-#: package/contents/ui/main.qml:86
+#: ui/main.qml:86
 #, kde-format
 msgid "Enable"
 msgstr "Käytä"
 
-#: package/contents/ui/main.qml:96
+#: ui/main.qml:96
 #, kde-format
 msgid "Disable Wi-Fi"
 msgstr "Poista langaton verkko käytöstä"
 
-#: package/contents/ui/main.qml:102
+#: ui/main.qml:102
 #, kde-format
 msgid "Add Custom Connection"
 msgstr "Lisää mukautettu yhteys"
 
-#: package/contents/ui/main.qml:108
+#: ui/main.qml:108
 #, kde-format
 msgid "Show Saved Connections"
 msgstr "Näytä tallennetut yhteydet"
 
-#: package/contents/ui/NetworkSettings.qml:14
+#: ui/NetworkSettings.qml:14
 #, kde-format
 msgid "Add new Connection"
 msgstr "Lisää uusi yhteys"
 
-#: package/contents/ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:35
 #, kde-format
 msgid "Save"
 msgstr "Tallenna"
 
-#: package/contents/ui/NetworkSettings.qml:46
+#: ui/NetworkSettings.qml:46
 #, kde-format
 msgid "General"
 msgstr "Perusasetukset"
 
-#: package/contents/ui/NetworkSettings.qml:51
+#: ui/NetworkSettings.qml:51
 #, kde-format
 msgid "SSID:"
 msgstr "SSID:"
 
-#: package/contents/ui/NetworkSettings.qml:60
+#: ui/NetworkSettings.qml:60
 #, kde-format
 msgid "Hidden Network:"
 msgstr "Piiloverkko:"
 
-#: package/contents/ui/NetworkSettings.qml:66
+#: ui/NetworkSettings.qml:66
 #, kde-format
 msgid "Security"
 msgstr "Turvallisuus"
 
-#: package/contents/ui/NetworkSettings.qml:72
+#: ui/NetworkSettings.qml:72
 #, kde-format
 msgid "Security type:"
 msgstr "Turvallisuustyyppi:"
 
-#: package/contents/ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:81
 #, kde-format
 msgid "None"
 msgstr "Ei mikään"
 
-#: package/contents/ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:82
 #, kde-format
 msgid "WEP Key"
 msgstr "WEP-avain"
 
-#: package/contents/ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:83
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "Dynaaminen WEP"
 
-#: package/contents/ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:84
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "WPA/WPA2 Personal"
 
-#: package/contents/ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:85
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
-#: package/contents/ui/NetworkSettings.qml:110
+#: ui/NetworkSettings.qml:110
 #, kde-format
 msgid "Password:"
 msgstr "Salasana:"
 
-#: package/contents/ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:118
 #, kde-format
 msgid "Authentication:"
 msgstr "Todennus:"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: package/contents/ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:122
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "Tunneloitu TLS"
 
-#: package/contents/ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:123
 #, kde-format
 msgid "Protected EAP"
 msgstr "Suojattu EAP"
 
-#: package/contents/ui/NetworkSettings.qml:132
+#: ui/NetworkSettings.qml:132
 #, kde-format
 msgid "IP settings"
 msgstr "IP-asetukset"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Automatic"
 msgstr "Automaattinen"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Manual"
 msgstr "Mukautettu"
 
-#: package/contents/ui/NetworkSettings.qml:148
+#: ui/NetworkSettings.qml:148
 #, kde-format
 msgid "IP Address:"
 msgstr "IP-osoite:"
 
-#: package/contents/ui/NetworkSettings.qml:160
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "Gateway:"
 msgstr "Yhdyskäytävä:"
 
-#: package/contents/ui/NetworkSettings.qml:172
+#: ui/NetworkSettings.qml:172
 #, kde-format
 msgid "Network prefix length:"
 msgstr "Verkkoetuliitteen pituus:"
 
-#: package/contents/ui/NetworkSettings.qml:185
+#: ui/NetworkSettings.qml:185
 #, kde-format
 msgid "DNS:"
 msgstr "Nimipalvelin:"
 
-#: package/contents/ui/PasswordField.qml:13
+#: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Salasana…"

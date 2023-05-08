@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-02-07 23:05+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -18,87 +18,87 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.03.70\n"
 
-#: package/contents/ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:136
 #, kde-format
 msgid "Invalid input."
 msgstr "無效輸入。"
 
-#: package/contents/ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:108
 #, kde-format
 msgid "Connect to"
 msgstr "連線到"
 
-#: package/contents/ui/main.qml:82
+#: ui/main.qml:82
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi 已停用"
 
-#: package/contents/ui/main.qml:86
+#: ui/main.qml:86
 #, kde-format
 msgid "Enable"
 msgstr "啟用"
 
-#: package/contents/ui/main.qml:96
+#: ui/main.qml:96
 #, kde-format
 msgid "Disable Wi-Fi"
 msgstr "停用 Wi-Fi"
 
-#: package/contents/ui/main.qml:102
+#: ui/main.qml:102
 #, kde-format
 msgid "Add Custom Connection"
 msgstr "新增自訂連線"
 
-#: package/contents/ui/main.qml:108
+#: ui/main.qml:108
 #, kde-format
 msgid "Show Saved Connections"
 msgstr "顯示已儲存的連線"
 
-#: package/contents/ui/NetworkSettings.qml:14
+#: ui/NetworkSettings.qml:14
 #, kde-format
 msgid "Add new Connection"
 msgstr "新增連線"
 
-#: package/contents/ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:35
 #, kde-format
 msgid "Save"
 msgstr "儲存"
 
-#: package/contents/ui/NetworkSettings.qml:46
+#: ui/NetworkSettings.qml:46
 #, kde-format
 msgid "General"
 msgstr "一般"
 
-#: package/contents/ui/NetworkSettings.qml:51
+#: ui/NetworkSettings.qml:51
 #, kde-format
 msgid "SSID:"
 msgstr "SSID："
 
-#: package/contents/ui/NetworkSettings.qml:60
+#: ui/NetworkSettings.qml:60
 #, kde-format
 msgid "Hidden Network:"
 msgstr "隱藏的網路："
 
-#: package/contents/ui/NetworkSettings.qml:66
+#: ui/NetworkSettings.qml:66
 #, kde-format
 msgid "Security"
 msgstr "安全性"
 
-#: package/contents/ui/NetworkSettings.qml:72
+#: ui/NetworkSettings.qml:72
 #, kde-format
 msgid "Security type:"
 msgstr "安全性類型："
 
-#: package/contents/ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:81
 #, kde-format
 msgid "None"
 msgstr "無"
 
-#: package/contents/ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:82
 #, kde-format
 msgid "WEP Key"
 msgstr "WEP 金鑰"
 
-#: package/contents/ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:83
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "動態 WEP"
@@ -106,87 +106,87 @@ msgstr "動態 WEP"
 # 不要翻譯它。
 #
 # 這是個 Wi-Fi 密碼加密方式，也因此翻譯此加密方式毫無意義。
-#: package/contents/ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:84
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "WPA/WPA2 Personal"
 
-#: package/contents/ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:85
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
-#: package/contents/ui/NetworkSettings.qml:110
+#: ui/NetworkSettings.qml:110
 #, kde-format
 msgid "Password:"
 msgstr "密碼："
 
-#: package/contents/ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:118
 #, kde-format
 msgid "Authentication:"
 msgstr "身份驗證："
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: package/contents/ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:121
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: package/contents/ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:122
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "隧道 TLS (Tunneled TLS)"
 
-#: package/contents/ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:123
 #, kde-format
 msgid "Protected EAP"
 msgstr "受保護 EAP"
 
-#: package/contents/ui/NetworkSettings.qml:132
+#: ui/NetworkSettings.qml:132
 #, kde-format
 msgid "IP settings"
 msgstr "IP 設定"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Automatic"
 msgstr "自動設定"
 
-#: package/contents/ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:138
 #, kde-format
 msgid "Manual"
 msgstr "手動設定"
 
-#: package/contents/ui/NetworkSettings.qml:148
+#: ui/NetworkSettings.qml:148
 #, kde-format
 msgid "IP Address:"
 msgstr "IP 位址："
 
-#: package/contents/ui/NetworkSettings.qml:160
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "Gateway:"
 msgstr "閘道："
 
-#: package/contents/ui/NetworkSettings.qml:172
+#: ui/NetworkSettings.qml:172
 #, kde-format
 msgid "Network prefix length:"
 msgstr "網路前置詞長度："
 
-#: package/contents/ui/NetworkSettings.qml:185
+#: ui/NetworkSettings.qml:185
 #, kde-format
 msgid "DNS:"
 msgstr "DNS："
 
-#: package/contents/ui/PasswordField.qml:13
+#: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "密碼…"

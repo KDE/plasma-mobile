@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2021-08-30 17:56+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -15,140 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 21.08.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jan"
-msgstr "Jan"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Feb"
-msgstr "Feb"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Mar"
-msgstr "Mar"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Apr"
-msgstr "Apr"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "May"
-msgstr "Máj"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jun"
-msgstr "Jún"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jul"
-msgstr "Júl"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Aug"
-msgstr "Aug"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Sep"
-msgstr "Sep"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Oct"
-msgstr "Okt"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Nov"
-msgstr "Nov"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Dec"
-msgstr "Dec"
-
-#: package/contents/ui/main.qml:57
-#, fuzzy, kde-format
-#| msgid "Time Display"
-msgid "Display"
-msgstr "Zobrazenie času"
-
-#: package/contents/ui/main.qml:62
-#, kde-format
-msgid "24-Hour Format"
-msgstr ""
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Whether to use a 24-hour format for clocks."
-msgstr ""
-
-#: package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Timezone:"
-msgid "Timezone"
-msgstr "Časové pásmo:"
-
-#: package/contents/ui/main.qml:89
-#, fuzzy, kde-format
-#| msgid "Set Time and Date"
-msgid "Time and Date"
-msgstr "Nastaviť čas a dátum"
-
-#: package/contents/ui/main.qml:94
-#, kde-format
-msgid "Automatic Time Synchronization"
-msgstr ""
-
-#: package/contents/ui/main.qml:95
-#, fuzzy, kde-format
-#| msgid "Set time automatically:"
-msgid "Whether to set the time automatically."
-msgstr "Nastaviť čas automaticky"
-
-#: package/contents/ui/main.qml:112
-#, fuzzy, kde-format
-#| msgctxt "This is a city associated with particular time zone"
-#| msgid "Currie"
-msgid "Current Time"
-msgstr "Currie"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Date"
-msgstr "Dátum"
-
-#: package/contents/ui/main.qml:135
-#, kde-format
-msgctxt "@title:window"
-msgid "Pick Timezone"
-msgstr "Vybrať časové pásmo"
-
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
-#: package/contents/ui/main.qml:253
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "Zavrieť"
-
-#: package/contents/ui/main.qml:172
-#, kde-format
-msgid "Pick Time"
-msgstr "Vybrať čas"
-
-#: package/contents/ui/main.qml:217
-#, kde-format
-msgid "Pick Date"
-msgstr "Vybrať dátum"
 
 #: timesettings.cpp:147
 #, kde-format
@@ -3055,6 +2921,139 @@ msgstr "Indický"
 msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Pacifik"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jan"
+msgstr "Jan"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Feb"
+msgstr "Feb"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Mar"
+msgstr "Mar"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Apr"
+msgstr "Apr"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "May"
+msgstr "Máj"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jun"
+msgstr "Jún"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jul"
+msgstr "Júl"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Aug"
+msgstr "Aug"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Sep"
+msgstr "Sep"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Oct"
+msgstr "Okt"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Nov"
+msgstr "Nov"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Dec"
+msgstr "Dec"
+
+#: ui/main.qml:57
+#, fuzzy, kde-format
+#| msgid "Time Display"
+msgid "Display"
+msgstr "Zobrazenie času"
+
+#: ui/main.qml:62
+#, kde-format
+msgid "24-Hour Format"
+msgstr ""
+
+#: ui/main.qml:63
+#, kde-format
+msgid "Whether to use a 24-hour format for clocks."
+msgstr ""
+
+#: ui/main.qml:74
+#, fuzzy, kde-format
+#| msgid "Timezone:"
+msgid "Timezone"
+msgstr "Časové pásmo:"
+
+#: ui/main.qml:89
+#, fuzzy, kde-format
+#| msgid "Set Time and Date"
+msgid "Time and Date"
+msgstr "Nastaviť čas a dátum"
+
+#: ui/main.qml:94
+#, kde-format
+msgid "Automatic Time Synchronization"
+msgstr ""
+
+#: ui/main.qml:95
+#, fuzzy, kde-format
+#| msgid "Set time automatically:"
+msgid "Whether to set the time automatically."
+msgstr "Nastaviť čas automaticky"
+
+#: ui/main.qml:112
+#, fuzzy, kde-format
+#| msgctxt "This is a city associated with particular time zone"
+#| msgid "Currie"
+msgid "Current Time"
+msgstr "Currie"
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Date"
+msgstr "Dátum"
+
+#: ui/main.qml:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Pick Timezone"
+msgstr "Vybrať časové pásmo"
+
+#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Zavrieť"
+
+#: ui/main.qml:172
+#, kde-format
+msgid "Pick Time"
+msgstr "Vybrať čas"
+
+#: ui/main.qml:217
+#, kde-format
+msgid "Pick Date"
+msgstr "Vybrať dátum"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2020-09-19 09:53+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -17,139 +17,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jan"
-msgstr "Ian"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Feb"
-msgstr "Feb"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Mar"
-msgstr "Mar"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Apr"
-msgstr "Apr"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "May"
-msgstr "Mai"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jun"
-msgstr "Iun"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jul"
-msgstr "Iul"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Aug"
-msgstr "Aug"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Sep"
-msgstr "Sep"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Oct"
-msgstr "Oct"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Nov"
-msgstr "Noi"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Dec"
-msgstr "Dec"
-
-#: package/contents/ui/main.qml:57
-#, fuzzy, kde-format
-#| msgid "Time Display"
-msgid "Display"
-msgstr "Afișare oră"
-
-#: package/contents/ui/main.qml:62
-#, kde-format
-msgid "24-Hour Format"
-msgstr ""
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Whether to use a 24-hour format for clocks."
-msgstr ""
-
-#: package/contents/ui/main.qml:74
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Pick Timezone"
-msgid "Timezone"
-msgstr "Alege fusul orar"
-
-#: package/contents/ui/main.qml:89
-#, fuzzy, kde-format
-#| msgid "Set Time and Date"
-msgid "Time and Date"
-msgstr "Stabilește ora și data"
-
-#: package/contents/ui/main.qml:94
-#, kde-format
-msgid "Automatic Time Synchronization"
-msgstr ""
-
-#: package/contents/ui/main.qml:95
-#, fuzzy, kde-format
-#| msgid "Set time automatically:"
-msgid "Whether to set the time automatically."
-msgstr "Stabilește ora automat:"
-
-#: package/contents/ui/main.qml:112
-#, kde-format
-msgid "Current Time"
-msgstr ""
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Date"
-msgstr "Dată"
-
-#: package/contents/ui/main.qml:135
-#, kde-format
-msgctxt "@title:window"
-msgid "Pick Timezone"
-msgstr "Alege fusul orar"
-
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
-#: package/contents/ui/main.qml:253
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "Închide"
-
-#: package/contents/ui/main.qml:172
-#, kde-format
-msgid "Pick Time"
-msgstr "Alege ora"
-
-#: package/contents/ui/main.qml:217
-#, kde-format
-msgid "Pick Date"
-msgstr "Alege data"
 
 #: timesettings.cpp:147
 #, kde-format
@@ -3057,6 +2924,138 @@ msgstr ""
 msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr ""
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jan"
+msgstr "Ian"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Feb"
+msgstr "Feb"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Mar"
+msgstr "Mar"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Apr"
+msgstr "Apr"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "May"
+msgstr "Mai"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jun"
+msgstr "Iun"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jul"
+msgstr "Iul"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Aug"
+msgstr "Aug"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Sep"
+msgstr "Sep"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Oct"
+msgstr "Oct"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Nov"
+msgstr "Noi"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Dec"
+msgstr "Dec"
+
+#: ui/main.qml:57
+#, fuzzy, kde-format
+#| msgid "Time Display"
+msgid "Display"
+msgstr "Afișare oră"
+
+#: ui/main.qml:62
+#, kde-format
+msgid "24-Hour Format"
+msgstr ""
+
+#: ui/main.qml:63
+#, kde-format
+msgid "Whether to use a 24-hour format for clocks."
+msgstr ""
+
+#: ui/main.qml:74
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Pick Timezone"
+msgid "Timezone"
+msgstr "Alege fusul orar"
+
+#: ui/main.qml:89
+#, fuzzy, kde-format
+#| msgid "Set Time and Date"
+msgid "Time and Date"
+msgstr "Stabilește ora și data"
+
+#: ui/main.qml:94
+#, kde-format
+msgid "Automatic Time Synchronization"
+msgstr ""
+
+#: ui/main.qml:95
+#, fuzzy, kde-format
+#| msgid "Set time automatically:"
+msgid "Whether to set the time automatically."
+msgstr "Stabilește ora automat:"
+
+#: ui/main.qml:112
+#, kde-format
+msgid "Current Time"
+msgstr ""
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Date"
+msgstr "Dată"
+
+#: ui/main.qml:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Pick Timezone"
+msgstr "Alege fusul orar"
+
+#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "Închide"
+
+#: ui/main.qml:172
+#, kde-format
+msgid "Pick Time"
+msgstr "Alege ora"
+
+#: ui/main.qml:217
+#, kde-format
+msgid "Pick Date"
+msgstr "Alege data"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_hotspot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2020-04-27 21:37+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15,23 +15,23 @@ msgstr ""
 "X-Generator: Lokalize 19.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Hotspot"
 msgstr "Prístupový bod"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr ""
 
-#: package/contents/ui/main.qml:66
+#: ui/main.qml:66
 #, fuzzy, kde-format
 #| msgid "Hotspot"
 msgid "Hotspot SSID"
 msgstr "Prístupový bod"
 
-#: package/contents/ui/main.qml:75
+#: ui/main.qml:75
 #, fuzzy, kde-format
 #| msgid "Password:"
 msgid "Hotspot Password"

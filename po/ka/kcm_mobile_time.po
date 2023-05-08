@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2022-08-20 08:15+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -17,134 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.1.1\n"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jan"
-msgstr "იან"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Feb"
-msgstr "თებ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Mar"
-msgstr "მარ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Apr"
-msgstr "აპრ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "May"
-msgstr "მაი"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jun"
-msgstr "ივნ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Jul"
-msgstr "ივლ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Aug"
-msgstr "აგვ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Sep"
-msgstr "სექ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Oct"
-msgstr "ოქტ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Nov"
-msgstr "ნოემ"
-
-#: package/contents/ui/DatePicker.qml:121
-#, kde-format
-msgid "Dec"
-msgstr "დეკ"
-
-#: package/contents/ui/main.qml:57
-#, kde-format
-msgid "Display"
-msgstr "დროის ჩვენება"
-
-#: package/contents/ui/main.qml:62
-#, kde-format
-msgid "24-Hour Format"
-msgstr "24-საათიანი ფორმატი"
-
-#: package/contents/ui/main.qml:63
-#, kde-format
-msgid "Whether to use a 24-hour format for clocks."
-msgstr "გამოიყენება თუ არა 24-საათიანი ფორმატი საათებისთვის."
-
-#: package/contents/ui/main.qml:74
-#, kde-format
-msgid "Timezone"
-msgstr "დროის სარტყელი"
-
-#: package/contents/ui/main.qml:89
-#, kde-format
-msgid "Time and Date"
-msgstr "თარიღი და დრო"
-
-#: package/contents/ui/main.qml:94
-#, kde-format
-msgid "Automatic Time Synchronization"
-msgstr "დროის ავტომატური სინქრონიზაცია"
-
-#: package/contents/ui/main.qml:95
-#, kde-format
-msgid "Whether to set the time automatically."
-msgstr "დროის ავტომატურად დაყენება."
-
-#: package/contents/ui/main.qml:112
-#, kde-format
-msgid "Current Time"
-msgstr "მიმდინარე დრო"
-
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgid "Date"
-msgstr "თარიღი"
-
-#: package/contents/ui/main.qml:135
-#, kde-format
-msgctxt "@title:window"
-msgid "Pick Timezone"
-msgstr "დროის სარტყელის არჩევა"
-
-#: package/contents/ui/main.qml:150 package/contents/ui/main.qml:208
-#: package/contents/ui/main.qml:253
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "დახურვა"
-
-#: package/contents/ui/main.qml:172
-#, kde-format
-msgid "Pick Time"
-msgstr "დროის არჩევა"
-
-#: package/contents/ui/main.qml:217
-#, kde-format
-msgid "Pick Date"
-msgstr "თარიღის არჩევა"
 
 #: timesettings.cpp:147
 #, kde-format
@@ -3051,6 +2923,133 @@ msgstr "ინდური"
 msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "წყნარი ოკეანე"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jan"
+msgstr "იან"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Feb"
+msgstr "თებ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Mar"
+msgstr "მარ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Apr"
+msgstr "აპრ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "May"
+msgstr "მაი"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jun"
+msgstr "ივნ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Jul"
+msgstr "ივლ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Aug"
+msgstr "აგვ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Sep"
+msgstr "სექ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Oct"
+msgstr "ოქტ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Nov"
+msgstr "ნოემ"
+
+#: ui/DatePicker.qml:121
+#, kde-format
+msgid "Dec"
+msgstr "დეკ"
+
+#: ui/main.qml:57
+#, kde-format
+msgid "Display"
+msgstr "დროის ჩვენება"
+
+#: ui/main.qml:62
+#, kde-format
+msgid "24-Hour Format"
+msgstr "24-საათიანი ფორმატი"
+
+#: ui/main.qml:63
+#, kde-format
+msgid "Whether to use a 24-hour format for clocks."
+msgstr "გამოიყენება თუ არა 24-საათიანი ფორმატი საათებისთვის."
+
+#: ui/main.qml:74
+#, kde-format
+msgid "Timezone"
+msgstr "დროის სარტყელი"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Time and Date"
+msgstr "თარიღი და დრო"
+
+#: ui/main.qml:94
+#, kde-format
+msgid "Automatic Time Synchronization"
+msgstr "დროის ავტომატური სინქრონიზაცია"
+
+#: ui/main.qml:95
+#, kde-format
+msgid "Whether to set the time automatically."
+msgstr "დროის ავტომატურად დაყენება."
+
+#: ui/main.qml:112
+#, kde-format
+msgid "Current Time"
+msgstr "მიმდინარე დრო"
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Date"
+msgstr "თარიღი"
+
+#: ui/main.qml:135
+#, kde-format
+msgctxt "@title:window"
+msgid "Pick Timezone"
+msgstr "დროის სარტყელის არჩევა"
+
+#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#, kde-format
+msgctxt "@action:button"
+msgid "Close"
+msgstr "დახურვა"
+
+#: ui/main.qml:172
+#, kde-format
+msgid "Pick Time"
+msgstr "დროის არჩევა"
+
+#: ui/main.qml:217
+#, kde-format
+msgid "Pick Date"
+msgstr "თარიღის არჩევა"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-14 02:17+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-04-01 20:32-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -208,7 +208,7 @@ msgstr "ਪੂਰੀ ਪਾਵਰ ਢੰਗ"
 msgid "Initializing"
 msgstr "ਸ਼ੁਰੂ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: modemdetails.cpp:256 package/contents/ui/SimPage.qml:137
+#: modemdetails.cpp:256 ui/SimPage.qml:137
 #, kde-format
 msgid "Locked"
 msgstr "ਲਾਕ ਹੈ"
@@ -228,7 +228,7 @@ msgstr "ਅਸਮਰੱਥ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 msgid "Enabling"
 msgstr "ਸਮਰੱਥ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
 
-#: modemdetails.cpp:264 package/contents/ui/ModemPage.qml:110
+#: modemdetails.cpp:264 ui/ModemPage.qml:110
 #, kde-format
 msgid "Enabled"
 msgstr "ਸਮਰੱਥ ਹੈ"
@@ -343,14 +343,12 @@ msgstr ""
 msgid "Scanning networks failed: %1"
 msgstr "ਨੈੱਟਵਰਕ ਦੀ ਪੜਤਾਲ ਕਰਨੀ ਅਸਫ਼਼ਲ ਹੈ: %1"
 
-#: modemdetails.cpp:430 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:430 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "Yes"
 msgstr "ਹਾਂ"
 
-#: modemdetails.cpp:432 package/contents/ui/ModemPage.qml:203
-#: package/contents/ui/SimPage.qml:138
+#: modemdetails.cpp:432 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
 msgid "No"
 msgstr "ਨਹੀਂ"
@@ -366,7 +364,7 @@ msgid "GuessNo"
 msgstr ""
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "2G"
 msgstr "2G"
@@ -388,507 +386,10 @@ msgstr "4G"
 msgid "5G"
 msgstr "5G"
 
-#: modemdetails.cpp:509 package/contents/ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Any"
 msgstr "ਕੋਈ ਵੀ"
-
-#: package/contents/ui/AvailableNetworks.qml:13
-#, kde-format
-msgid "Available Networks"
-msgstr "ਮੌਜੂਦਾ ਨੈੱਟਵਰਕ"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "none"
-msgstr "ਕੋਈ ਨਹੀਂ"
-
-#: package/contents/ui/AvailableNetworks.qml:37
-#, kde-format
-msgid "Current operator: %1"
-msgstr "ਮੌਜੂਰਾ ਓਪਰੇਟਰ: %1"
-
-#: package/contents/ui/AvailableNetworks.qml:40
-#, kde-format
-msgid "Scan For Networks"
-msgstr "ਨੈੱਟਵਰਕ ਲਈ ਸਕੈਨ ਕਰੋ"
-
-#: package/contents/ui/EditProfileDialog.qml:14
-#, kde-format
-msgid "Edit APN"
-msgstr "APN ਸੋਧੋ"
-
-#: package/contents/ui/EditProfileDialog.qml:41
-#, kde-format
-msgid "Name"
-msgstr "ਨਾਂ"
-
-#: package/contents/ui/EditProfileDialog.qml:46
-#, kde-format
-msgid "APN"
-msgstr "APN"
-
-#: package/contents/ui/EditProfileDialog.qml:51
-#, kde-format
-msgid "Username"
-msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ"
-
-#: package/contents/ui/EditProfileDialog.qml:56
-#, kde-format
-msgid "Password"
-msgstr "ਪਾਸਵਰਡ"
-
-#: package/contents/ui/EditProfileDialog.qml:61
-#, kde-format
-msgid "Network type"
-msgstr "ਨੈੱਟਵਰਕ ਦੀ ਕਿਸਮ"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "4G/3G/2G"
-msgstr "4G/3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "3G/2G"
-msgstr "3G/2G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 4G"
-msgstr "ਸਿਰਫ਼ 4G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 3G"
-msgstr "ਸਿਰਫ਼ 3G"
-
-#: package/contents/ui/EditProfileDialog.qml:62
-#, kde-format
-msgid "Only 2G"
-msgstr "ਸਿਰਫ਼ 2G"
-
-#: package/contents/ui/main.qml:35
-#, kde-format
-msgid "Modem not available"
-msgstr "ਮਾਡਮ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
-
-#: package/contents/ui/main.qml:74
-#, kde-format
-msgid "Mobile data"
-msgstr "ਮੋਬਾਈਲ ਡਾਟਾ"
-
-#: package/contents/ui/main.qml:79
-#, kde-format
-msgid "No SIM is inserted."
-msgstr "ਕੋਈ ਸਿਮ ਲਾਕ ਨਹੀਂ ਪਾਇਆ।"
-
-#: package/contents/ui/main.qml:81
-#, kde-format
-msgid "Mobile data is not available with this modem."
-msgstr "ਮੋਬਾਈਲ ਡਾਟਾ ਇਸ ਮਾਡਲ ਲਈ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
-
-#: package/contents/ui/main.qml:83
-#, kde-format
-msgid "An APN needs to be configured to have mobile data."
-msgstr ""
-
-#: package/contents/ui/main.qml:85
-#, kde-format
-msgid "Whether mobile data is enabled."
-msgstr "ਕੀ ਮੋਬਾਈਲ ਡਾਟਾ ਸਮਰੱਥ ਹੈ।"
-
-#: package/contents/ui/main.qml:116
-#, kde-format
-msgid "Data Usage"
-msgstr "ਡਾਟਾ ਵਰਤੋ"
-
-#: package/contents/ui/main.qml:117
-#, kde-format
-msgid "View data usage."
-msgstr "ਡਾਟਾ ਵਰਤੋ ਵੇਖੋ।"
-
-#: package/contents/ui/main.qml:133 package/contents/ui/SimPage.qml:17
-#, kde-format
-msgid "SIM"
-msgstr "SIM"
-
-#: package/contents/ui/main.qml:133
-#, kde-format
-msgid "SIMs"
-msgstr "SIM"
-
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgid "SIM %1"
-msgstr "SIM %1"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgid "View SIM %1 details."
-msgstr "ਸਿਮ %1 ਦੇ ਵੇਰਵੇ ਵੇਖੋ"
-
-#: package/contents/ui/ModemPage.qml:16
-#, kde-format
-msgid "Modem %1"
-msgstr "ਮਾਡਮ %1"
-
-#: package/contents/ui/ModemPage.qml:41
-#, kde-format
-msgid "Modem Control"
-msgstr "ਮਾਡਮ ਕੰਟਰੋਲ"
-
-#: package/contents/ui/ModemPage.qml:50
-#, kde-format
-msgid "Modem Restart"
-msgstr "ਮਾਡਮ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
-
-#: package/contents/ui/ModemPage.qml:53
-#, kde-format
-msgid "Force Modem Restart"
-msgstr "ਮਾਡਮ ਨੂੰ ਧੱਕੇ ਨਾਲ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
-
-#: package/contents/ui/ModemPage.qml:69 package/contents/ui/SimPage.qml:117
-#, kde-format
-msgid "Modem Details"
-msgstr "ਮਾਡਮ ਦੇ ਵੇਰਵੇ"
-
-#: package/contents/ui/ModemPage.qml:82
-#, kde-format
-msgid "Access Technologies"
-msgstr "ਪਹੁੰਚ ਤਕਨੀਕਾਂ"
-
-#: package/contents/ui/ModemPage.qml:102
-#, kde-format
-msgid "IMEI"
-msgstr "IMEI"
-
-#: package/contents/ui/ModemPage.qml:118
-#, kde-format
-msgid "Manufacturer"
-msgstr "ਨਿਰਮਾਤਾ"
-
-#: package/contents/ui/ModemPage.qml:126
-#, kde-format
-msgid "Model"
-msgstr "ਮਾਡਮ"
-
-#: package/contents/ui/ModemPage.qml:142
-#, kde-format
-msgid "Owned Numbers:"
-msgstr "ਤੁਹਾਡੇ ਨੰਬਰ"
-
-#: package/contents/ui/ModemPage.qml:162
-#, kde-format
-msgid "Revision"
-msgstr "ਰੀਵਿਜ਼ਨ"
-
-#: package/contents/ui/ModemPage.qml:170
-#, kde-format
-msgid "Signal Quality"
-msgstr "ਸਿਗਨਲ ਕੁਆਲਟੀ"
-
-#: package/contents/ui/ModemPage.qml:178
-#, kde-format
-msgid "State"
-msgstr "ਸਥਿਤੀ"
-
-#: package/contents/ui/ModemPage.qml:186
-#, kde-format
-msgid "Failure Reason"
-msgstr "ਅਸਫ਼ਲਤਾ ਦਾ ਕਾਰਨ"
-
-#: package/contents/ui/ModemPage.qml:194
-#, kde-format
-msgid "Registration State"
-msgstr "ਰਜਿਸਟਰੇਸ਼ਨ ਸਥਿਤੀ"
-
-#: package/contents/ui/ModemPage.qml:202
-#, kde-format
-msgid "Roaming"
-msgstr "ਰੋਮਿੰਗ"
-
-#: package/contents/ui/ModemPage.qml:210
-#, kde-format
-msgid "Firmware Version"
-msgstr "ਫਿਰਮਵੇਅਰ ਵਰਜ਼ਨ"
-
-#: package/contents/ui/ModemPage.qml:218
-#, kde-format
-msgid "Interface Name"
-msgstr "ਇੰਟਰਫੇਸ ਦਾ ਨਾਂ"
-
-#: package/contents/ui/ModemPage.qml:226
-#, kde-format
-msgid "Metered"
-msgstr "ਮੀਟਰ ਵਾਲਾ"
-
-#: package/contents/ui/ModemPage.qml:234
-#, kde-format
-msgid "Active NetworkManager Connection"
-msgstr "ਨੈੱਟਵਰਕ-ਮੈਨੇਜਰ ਕਨੈਕਸ਼ਨ ਸਰਗਰਮ ਕਰੋ"
-
-#: package/contents/ui/ModemPage.qml:242
-#, kde-format
-msgid "Device"
-msgstr "ਡਿਵਾਈਸ"
-
-#: package/contents/ui/ModemPage.qml:250
-#, kde-format
-msgid "Device ID"
-msgstr "ਡਿਵਾਈਸ ID"
-
-#: package/contents/ui/ModemPage.qml:266
-#, kde-format
-msgid "Drivers:"
-msgstr "ਡਰਾਇਵਰ"
-
-#: package/contents/ui/ModemPage.qml:286
-#, kde-format
-msgid "Plugin"
-msgstr "ਪਲੱਗਇਨ"
-
-#: package/contents/ui/ModemPage.qml:294
-#, kde-format
-msgid "Power State"
-msgstr "ਪਾਵਰ ਹਾਲਤ"
-
-#: package/contents/ui/ModemPage.qml:302
-#, kde-format
-msgid "SIM Path"
-msgstr "SIM ਮਾਰਗ"
-
-#: package/contents/ui/ProfileList.qml:12
-#, kde-format
-msgid "APNs"
-msgstr "APN"
-
-#: package/contents/ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "ਕੋਈ APN ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ"
-
-#: package/contents/ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
-
-#: package/contents/ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "APN ਜੋੜੋ"
-
-#: package/contents/ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr ""
-
-#: package/contents/ui/ProfileList.qml:133
-#, kde-format
-msgid "Edit"
-msgstr "ਸੋਧੋ"
-
-#: package/contents/ui/ProfileList.qml:141
-#, kde-format
-msgid "Delete"
-msgstr "ਹਟਾਓ"
-
-#: package/contents/ui/SimLockPage.qml:16 package/contents/ui/SimPage.qml:106
-#, kde-format
-msgid "SIM Lock"
-msgstr "ਸਿਮ ਲਾਕ"
-
-#: package/contents/ui/SimLockPage.qml:47
-#, kde-format
-msgid "SIM is locked"
-msgstr "ਸਿਮ ਲਾਕ ਹੈ"
-
-#: package/contents/ui/SimLockPage.qml:48
-#, kde-format
-msgid "In order to use this SIM, you must first unlock it."
-msgstr "ਇਹ ਸਿਮ ਵਰਤਣ ਲਈ ਤੁਹਾਨੂੰ ਪਹਿਲਾਂ ਇਸ ਨੂੰ ਅਣ-ਲਾਕ ਕਰਨਾ ਪਵੇਗਾ।"
-
-#: package/contents/ui/SimLockPage.qml:70
-#, kde-format
-msgid "SIM is not locked"
-msgstr "ਸਿਮ ਲਾਕ ਨਹੀਂ ਹੈ"
-
-#: package/contents/ui/SimLockPage.qml:71
-#, kde-format
-msgid ""
-"You can lock your SIM to require a set PIN code for phone calls and mobile "
-"data."
-msgstr ""
-
-#: package/contents/ui/SimLockPage.qml:75
-#, kde-format
-msgid "Lock SIM"
-msgstr "ਸਿਮ ਲਾਕ ਕਰੋ"
-
-#: package/contents/ui/SimLockPage.qml:89
-#, kde-format
-msgid "Disable SIM Lock"
-msgstr "ਸਿਮ ਅਸਮਰੱਥ ਕਰੋ"
-
-#: package/contents/ui/SimLockPage.qml:90
-#, kde-format
-msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr ""
-
-#: package/contents/ui/SimLockPage.qml:103
-#, kde-format
-msgid "Change PIN"
-msgstr "ਪਿੰਨ ਬਦਲੋ"
-
-#: package/contents/ui/SimLockPage.qml:104
-#, kde-format
-msgid "Change the passcode set on the SIM."
-msgstr ""
-
-#: package/contents/ui/SimLockPage.qml:119
-#, kde-format
-msgid "Unlock SIM"
-msgstr "ਸਿਮ ਅਣ-ਲਾਕ ਕਰੋ"
-
-#: package/contents/ui/SimLockPage.qml:127
-#, kde-format
-msgid "Attempts left: %1"
-msgstr "ਬਾਕੀ ਕੋਸ਼ਿਸ਼ਾਂ: %1"
-
-#: package/contents/ui/SimLockPage.qml:131
-#, kde-format
-msgid "Enter PIN"
-msgstr "ਪਿੰਨ ਦਿਓ"
-
-#: package/contents/ui/SimLockPage.qml:139
-#, kde-format
-msgid "Change SIM PIN"
-msgstr "ਸਿਮ ਪਿੰਨ ਦਿਓ"
-
-#: package/contents/ui/SimLockPage.qml:158
-#: package/contents/ui/SimLockPage.qml:223
-#, kde-format
-msgid "PINs don't match!"
-msgstr "ਪਿੰਨ ਮਿਲਦੇ ਨਹੀਂ ਹਨ!"
-
-#: package/contents/ui/SimLockPage.qml:164
-#: package/contents/ui/SimLockPage.qml:229
-#, kde-format
-msgid "PINs must be between 4 and 8 digits!"
-msgstr "ਪਿੰਨ 4 ਤੋਂ 8 ਅੰਕਾਂ ਵਿਚਾਲੇ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ!"
-
-#: package/contents/ui/SimLockPage.qml:169
-#: package/contents/ui/SimLockPage.qml:196
-#, kde-format
-msgid "Current PIN"
-msgstr "ਮੌਜੂਦਾ ਪਿੰਨ"
-
-#: package/contents/ui/SimLockPage.qml:174
-#: package/contents/ui/SimLockPage.qml:234
-#, kde-format
-msgid "New PIN"
-msgstr "ਨਵਾਂ ਪਿੰਨ"
-
-#: package/contents/ui/SimLockPage.qml:179
-#: package/contents/ui/SimLockPage.qml:239
-#, kde-format
-msgid "Confirm PIN"
-msgstr "ਪਿੰਨ ਦੀ ਤਸਦੀਕ ਕਰੋ"
-
-#: package/contents/ui/SimLockPage.qml:187
-#, kde-format
-msgid "Remove SIM PIN"
-msgstr "ਸਿਮ ਦਾ ਪਿੰਨ ਹਟਾਓ"
-
-#: package/contents/ui/SimLockPage.qml:204
-#, kde-format
-msgid "Add SIM PIN"
-msgstr "ਸਿਮ ਲਈ ਪਿੰਨ ਜੋੜੋ"
-
-#: package/contents/ui/SimPage.qml:72
-#, kde-format
-msgid "Data Roaming"
-msgstr "ਡਾਟਾ ਰੋਮਿੰਗ"
-
-#: package/contents/ui/SimPage.qml:73
-#, kde-format
-msgid "Allow your device to use networks other than your carrier."
-msgstr ""
-
-#: package/contents/ui/SimPage.qml:84
-#, kde-format
-msgid "Modify APNs"
-msgstr "APN ਸੋਧੋ"
-
-#: package/contents/ui/SimPage.qml:85
-#, kde-format
-msgid "Configure access point names for your carrier."
-msgstr ""
-
-#: package/contents/ui/SimPage.qml:95
-#, kde-format
-msgid "Networks"
-msgstr "ਨੈੱਟਵਰਕ"
-
-#: package/contents/ui/SimPage.qml:96
-#, kde-format
-msgid "Select a network operator."
-msgstr "ਨੈੱਟਵਰਕ ਓਪਰੇਟਰ ਚੁਣੋ।"
-
-#: package/contents/ui/SimPage.qml:107
-#, kde-format
-msgid "Modify SIM lock settings."
-msgstr "ਸਿਮ ਲਾਕ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸੋਧੋ।"
-
-#: package/contents/ui/SimPage.qml:118
-#, kde-format
-msgid "View the details of the modem this SIM is connected to."
-msgstr ""
-
-#: package/contents/ui/SimPage.qml:132
-#, kde-format
-msgid "SIM Details"
-msgstr "SIM ਵੇਰਵੇ"
-
-#: package/contents/ui/SimPage.qml:145
-#, kde-format
-msgid "IMSI"
-msgstr "IMSI"
-
-#: package/contents/ui/SimPage.qml:153
-#, kde-format
-msgid "EID"
-msgstr "EID"
-
-#: package/contents/ui/SimPage.qml:161
-#, kde-format
-msgid "Operator Code (modem)"
-msgstr "ਓਪਰੇਟਰ ਕੋਡ (ਮਾਡਮ)"
-
-#: package/contents/ui/SimPage.qml:169
-#, kde-format
-msgid "Operator Name (modem)"
-msgstr "ਓਪਰੇਟਰ ਦਾ ਨਾਂ (ਮਾਡਮ)"
-
-#: package/contents/ui/SimPage.qml:177
-#, kde-format
-msgid "Operator Code (provided by SIM)"
-msgstr "ਓਪਰੇਟਰ ਕੋਡ (ਸਿਮ ਵਲੋਂ ਦਿੱਤਾ)"
-
-#: package/contents/ui/SimPage.qml:185
-#, kde-format
-msgid "Operator Name (provided by SIM)"
-msgstr "ਓਪਰੇਟਰ ਦਾ ਨਾਂ (ਸਿਮ ਵਲੋਂ ਦਿੱਤਾ)"
-
-#: package/contents/ui/SimPage.qml:193
-#, kde-format
-msgid "SIM ID"
-msgstr "SIM ID"
-
-#: package/contents/ui/SimPage.qml:210
-#, kde-format
-msgid "Emergency Numbers"
-msgstr "ਐਮਰਜੈਂਸੀ ਨੰਬਰ"
 
 #: sim.cpp:64
 #, kde-format
@@ -999,6 +500,498 @@ msgstr ""
 #, kde-format
 msgid "Error sending the PUK: %1"
 msgstr ""
+
+#: ui/AvailableNetworks.qml:13
+#, kde-format
+msgid "Available Networks"
+msgstr "ਮੌਜੂਦਾ ਨੈੱਟਵਰਕ"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "none"
+msgstr "ਕੋਈ ਨਹੀਂ"
+
+#: ui/AvailableNetworks.qml:37
+#, kde-format
+msgid "Current operator: %1"
+msgstr "ਮੌਜੂਰਾ ਓਪਰੇਟਰ: %1"
+
+#: ui/AvailableNetworks.qml:40
+#, kde-format
+msgid "Scan For Networks"
+msgstr "ਨੈੱਟਵਰਕ ਲਈ ਸਕੈਨ ਕਰੋ"
+
+#: ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "APN ਸੋਧੋ"
+
+#: ui/EditProfileDialog.qml:41
+#, kde-format
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: ui/EditProfileDialog.qml:46
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: ui/EditProfileDialog.qml:51
+#, kde-format
+msgid "Username"
+msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ"
+
+#: ui/EditProfileDialog.qml:56
+#, kde-format
+msgid "Password"
+msgstr "ਪਾਸਵਰਡ"
+
+#: ui/EditProfileDialog.qml:61
+#, kde-format
+msgid "Network type"
+msgstr "ਨੈੱਟਵਰਕ ਦੀ ਕਿਸਮ"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 4G"
+msgstr "ਸਿਰਫ਼ 4G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 3G"
+msgstr "ਸਿਰਫ਼ 3G"
+
+#: ui/EditProfileDialog.qml:62
+#, kde-format
+msgid "Only 2G"
+msgstr "ਸਿਰਫ਼ 2G"
+
+#: ui/main.qml:35
+#, kde-format
+msgid "Modem not available"
+msgstr "ਮਾਡਮ ਮੌਜੂਦ ਨਹੀਂ ਹੈ"
+
+#: ui/main.qml:74
+#, kde-format
+msgid "Mobile data"
+msgstr "ਮੋਬਾਈਲ ਡਾਟਾ"
+
+#: ui/main.qml:79
+#, kde-format
+msgid "No SIM is inserted."
+msgstr "ਕੋਈ ਸਿਮ ਲਾਕ ਨਹੀਂ ਪਾਇਆ।"
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Mobile data is not available with this modem."
+msgstr "ਮੋਬਾਈਲ ਡਾਟਾ ਇਸ ਮਾਡਲ ਲਈ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
+
+#: ui/main.qml:83
+#, kde-format
+msgid "An APN needs to be configured to have mobile data."
+msgstr ""
+
+#: ui/main.qml:85
+#, kde-format
+msgid "Whether mobile data is enabled."
+msgstr "ਕੀ ਮੋਬਾਈਲ ਡਾਟਾ ਸਮਰੱਥ ਹੈ।"
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Data Usage"
+msgstr "ਡਾਟਾ ਵਰਤੋ"
+
+#: ui/main.qml:117
+#, kde-format
+msgid "View data usage."
+msgstr "ਡਾਟਾ ਵਰਤੋ ਵੇਖੋ।"
+
+#: ui/main.qml:133 ui/SimPage.qml:17
+#, kde-format
+msgid "SIM"
+msgstr "SIM"
+
+#: ui/main.qml:133
+#, kde-format
+msgid "SIMs"
+msgstr "SIM"
+
+#: ui/main.qml:153
+#, kde-format
+msgid "SIM %1"
+msgstr "SIM %1"
+
+#: ui/main.qml:154
+#, kde-format
+msgid "View SIM %1 details."
+msgstr "ਸਿਮ %1 ਦੇ ਵੇਰਵੇ ਵੇਖੋ"
+
+#: ui/ModemPage.qml:16
+#, kde-format
+msgid "Modem %1"
+msgstr "ਮਾਡਮ %1"
+
+#: ui/ModemPage.qml:41
+#, kde-format
+msgid "Modem Control"
+msgstr "ਮਾਡਮ ਕੰਟਰੋਲ"
+
+#: ui/ModemPage.qml:50
+#, kde-format
+msgid "Modem Restart"
+msgstr "ਮਾਡਮ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
+
+#: ui/ModemPage.qml:53
+#, kde-format
+msgid "Force Modem Restart"
+msgstr "ਮਾਡਮ ਨੂੰ ਧੱਕੇ ਨਾਲ ਮੁੜ-ਚਾਲੂ ਕਰੋ"
+
+#: ui/ModemPage.qml:69 ui/SimPage.qml:117
+#, kde-format
+msgid "Modem Details"
+msgstr "ਮਾਡਮ ਦੇ ਵੇਰਵੇ"
+
+#: ui/ModemPage.qml:82
+#, kde-format
+msgid "Access Technologies"
+msgstr "ਪਹੁੰਚ ਤਕਨੀਕਾਂ"
+
+#: ui/ModemPage.qml:102
+#, kde-format
+msgid "IMEI"
+msgstr "IMEI"
+
+#: ui/ModemPage.qml:118
+#, kde-format
+msgid "Manufacturer"
+msgstr "ਨਿਰਮਾਤਾ"
+
+#: ui/ModemPage.qml:126
+#, kde-format
+msgid "Model"
+msgstr "ਮਾਡਮ"
+
+#: ui/ModemPage.qml:142
+#, kde-format
+msgid "Owned Numbers:"
+msgstr "ਤੁਹਾਡੇ ਨੰਬਰ"
+
+#: ui/ModemPage.qml:162
+#, kde-format
+msgid "Revision"
+msgstr "ਰੀਵਿਜ਼ਨ"
+
+#: ui/ModemPage.qml:170
+#, kde-format
+msgid "Signal Quality"
+msgstr "ਸਿਗਨਲ ਕੁਆਲਟੀ"
+
+#: ui/ModemPage.qml:178
+#, kde-format
+msgid "State"
+msgstr "ਸਥਿਤੀ"
+
+#: ui/ModemPage.qml:186
+#, kde-format
+msgid "Failure Reason"
+msgstr "ਅਸਫ਼ਲਤਾ ਦਾ ਕਾਰਨ"
+
+#: ui/ModemPage.qml:194
+#, kde-format
+msgid "Registration State"
+msgstr "ਰਜਿਸਟਰੇਸ਼ਨ ਸਥਿਤੀ"
+
+#: ui/ModemPage.qml:202
+#, kde-format
+msgid "Roaming"
+msgstr "ਰੋਮਿੰਗ"
+
+#: ui/ModemPage.qml:210
+#, kde-format
+msgid "Firmware Version"
+msgstr "ਫਿਰਮਵੇਅਰ ਵਰਜ਼ਨ"
+
+#: ui/ModemPage.qml:218
+#, kde-format
+msgid "Interface Name"
+msgstr "ਇੰਟਰਫੇਸ ਦਾ ਨਾਂ"
+
+#: ui/ModemPage.qml:226
+#, kde-format
+msgid "Metered"
+msgstr "ਮੀਟਰ ਵਾਲਾ"
+
+#: ui/ModemPage.qml:234
+#, kde-format
+msgid "Active NetworkManager Connection"
+msgstr "ਨੈੱਟਵਰਕ-ਮੈਨੇਜਰ ਕਨੈਕਸ਼ਨ ਸਰਗਰਮ ਕਰੋ"
+
+#: ui/ModemPage.qml:242
+#, kde-format
+msgid "Device"
+msgstr "ਡਿਵਾਈਸ"
+
+#: ui/ModemPage.qml:250
+#, kde-format
+msgid "Device ID"
+msgstr "ਡਿਵਾਈਸ ID"
+
+#: ui/ModemPage.qml:266
+#, kde-format
+msgid "Drivers:"
+msgstr "ਡਰਾਇਵਰ"
+
+#: ui/ModemPage.qml:286
+#, kde-format
+msgid "Plugin"
+msgstr "ਪਲੱਗਇਨ"
+
+#: ui/ModemPage.qml:294
+#, kde-format
+msgid "Power State"
+msgstr "ਪਾਵਰ ਹਾਲਤ"
+
+#: ui/ModemPage.qml:302
+#, kde-format
+msgid "SIM Path"
+msgstr "SIM ਮਾਰਗ"
+
+#: ui/ProfileList.qml:12
+#, kde-format
+msgid "APNs"
+msgstr "APN"
+
+#: ui/ProfileList.qml:26
+#, kde-format
+msgid "No APNs configured"
+msgstr "ਕੋਈ APN ਸੰਰਚਿਤ ਨਹੀਂ ਹੈ"
+
+#: ui/ProfileList.qml:31
+#, kde-format
+msgid "Add Connection"
+msgstr "ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
+
+#: ui/ProfileList.qml:98
+#, kde-format
+msgid "Add APN"
+msgstr "APN ਜੋੜੋ"
+
+#: ui/ProfileList.qml:121
+#, kde-format
+msgid "Autodetect APN"
+msgstr ""
+
+#: ui/ProfileList.qml:133
+#, kde-format
+msgid "Edit"
+msgstr "ਸੋਧੋ"
+
+#: ui/ProfileList.qml:141
+#, kde-format
+msgid "Delete"
+msgstr "ਹਟਾਓ"
+
+#: ui/SimLockPage.qml:16 ui/SimPage.qml:106
+#, kde-format
+msgid "SIM Lock"
+msgstr "ਸਿਮ ਲਾਕ"
+
+#: ui/SimLockPage.qml:47
+#, kde-format
+msgid "SIM is locked"
+msgstr "ਸਿਮ ਲਾਕ ਹੈ"
+
+#: ui/SimLockPage.qml:48
+#, kde-format
+msgid "In order to use this SIM, you must first unlock it."
+msgstr "ਇਹ ਸਿਮ ਵਰਤਣ ਲਈ ਤੁਹਾਨੂੰ ਪਹਿਲਾਂ ਇਸ ਨੂੰ ਅਣ-ਲਾਕ ਕਰਨਾ ਪਵੇਗਾ।"
+
+#: ui/SimLockPage.qml:70
+#, kde-format
+msgid "SIM is not locked"
+msgstr "ਸਿਮ ਲਾਕ ਨਹੀਂ ਹੈ"
+
+#: ui/SimLockPage.qml:71
+#, kde-format
+msgid ""
+"You can lock your SIM to require a set PIN code for phone calls and mobile "
+"data."
+msgstr ""
+
+#: ui/SimLockPage.qml:75
+#, kde-format
+msgid "Lock SIM"
+msgstr "ਸਿਮ ਲਾਕ ਕਰੋ"
+
+#: ui/SimLockPage.qml:89
+#, kde-format
+msgid "Disable SIM Lock"
+msgstr "ਸਿਮ ਅਸਮਰੱਥ ਕਰੋ"
+
+#: ui/SimLockPage.qml:90
+#, kde-format
+msgid "Disable the SIM lock feature and remove the passcode on the SIM."
+msgstr ""
+
+#: ui/SimLockPage.qml:103
+#, kde-format
+msgid "Change PIN"
+msgstr "ਪਿੰਨ ਬਦਲੋ"
+
+#: ui/SimLockPage.qml:104
+#, kde-format
+msgid "Change the passcode set on the SIM."
+msgstr ""
+
+#: ui/SimLockPage.qml:119
+#, kde-format
+msgid "Unlock SIM"
+msgstr "ਸਿਮ ਅਣ-ਲਾਕ ਕਰੋ"
+
+#: ui/SimLockPage.qml:127
+#, kde-format
+msgid "Attempts left: %1"
+msgstr "ਬਾਕੀ ਕੋਸ਼ਿਸ਼ਾਂ: %1"
+
+#: ui/SimLockPage.qml:131
+#, kde-format
+msgid "Enter PIN"
+msgstr "ਪਿੰਨ ਦਿਓ"
+
+#: ui/SimLockPage.qml:139
+#, kde-format
+msgid "Change SIM PIN"
+msgstr "ਸਿਮ ਪਿੰਨ ਦਿਓ"
+
+#: ui/SimLockPage.qml:158 ui/SimLockPage.qml:223
+#, kde-format
+msgid "PINs don't match!"
+msgstr "ਪਿੰਨ ਮਿਲਦੇ ਨਹੀਂ ਹਨ!"
+
+#: ui/SimLockPage.qml:164 ui/SimLockPage.qml:229
+#, kde-format
+msgid "PINs must be between 4 and 8 digits!"
+msgstr "ਪਿੰਨ 4 ਤੋਂ 8 ਅੰਕਾਂ ਵਿਚਾਲੇ ਹੋਣਾ ਚਾਹੀਦਾ ਹੈ!"
+
+#: ui/SimLockPage.qml:169 ui/SimLockPage.qml:196
+#, kde-format
+msgid "Current PIN"
+msgstr "ਮੌਜੂਦਾ ਪਿੰਨ"
+
+#: ui/SimLockPage.qml:174 ui/SimLockPage.qml:234
+#, kde-format
+msgid "New PIN"
+msgstr "ਨਵਾਂ ਪਿੰਨ"
+
+#: ui/SimLockPage.qml:179 ui/SimLockPage.qml:239
+#, kde-format
+msgid "Confirm PIN"
+msgstr "ਪਿੰਨ ਦੀ ਤਸਦੀਕ ਕਰੋ"
+
+#: ui/SimLockPage.qml:187
+#, kde-format
+msgid "Remove SIM PIN"
+msgstr "ਸਿਮ ਦਾ ਪਿੰਨ ਹਟਾਓ"
+
+#: ui/SimLockPage.qml:204
+#, kde-format
+msgid "Add SIM PIN"
+msgstr "ਸਿਮ ਲਈ ਪਿੰਨ ਜੋੜੋ"
+
+#: ui/SimPage.qml:72
+#, kde-format
+msgid "Data Roaming"
+msgstr "ਡਾਟਾ ਰੋਮਿੰਗ"
+
+#: ui/SimPage.qml:73
+#, kde-format
+msgid "Allow your device to use networks other than your carrier."
+msgstr ""
+
+#: ui/SimPage.qml:84
+#, kde-format
+msgid "Modify APNs"
+msgstr "APN ਸੋਧੋ"
+
+#: ui/SimPage.qml:85
+#, kde-format
+msgid "Configure access point names for your carrier."
+msgstr ""
+
+#: ui/SimPage.qml:95
+#, kde-format
+msgid "Networks"
+msgstr "ਨੈੱਟਵਰਕ"
+
+#: ui/SimPage.qml:96
+#, kde-format
+msgid "Select a network operator."
+msgstr "ਨੈੱਟਵਰਕ ਓਪਰੇਟਰ ਚੁਣੋ।"
+
+#: ui/SimPage.qml:107
+#, kde-format
+msgid "Modify SIM lock settings."
+msgstr "ਸਿਮ ਲਾਕ ਸੈਟਿੰਗਾਂ ਨੂੰ ਸੋਧੋ।"
+
+#: ui/SimPage.qml:118
+#, kde-format
+msgid "View the details of the modem this SIM is connected to."
+msgstr ""
+
+#: ui/SimPage.qml:132
+#, kde-format
+msgid "SIM Details"
+msgstr "SIM ਵੇਰਵੇ"
+
+#: ui/SimPage.qml:145
+#, kde-format
+msgid "IMSI"
+msgstr "IMSI"
+
+#: ui/SimPage.qml:153
+#, kde-format
+msgid "EID"
+msgstr "EID"
+
+#: ui/SimPage.qml:161
+#, kde-format
+msgid "Operator Code (modem)"
+msgstr "ਓਪਰੇਟਰ ਕੋਡ (ਮਾਡਮ)"
+
+#: ui/SimPage.qml:169
+#, kde-format
+msgid "Operator Name (modem)"
+msgstr "ਓਪਰੇਟਰ ਦਾ ਨਾਂ (ਮਾਡਮ)"
+
+#: ui/SimPage.qml:177
+#, kde-format
+msgid "Operator Code (provided by SIM)"
+msgstr "ਓਪਰੇਟਰ ਕੋਡ (ਸਿਮ ਵਲੋਂ ਦਿੱਤਾ)"
+
+#: ui/SimPage.qml:185
+#, kde-format
+msgid "Operator Name (provided by SIM)"
+msgstr "ਓਪਰੇਟਰ ਦਾ ਨਾਂ (ਸਿਮ ਵਲੋਂ ਦਿੱਤਾ)"
+
+#: ui/SimPage.qml:193
+#, kde-format
+msgid "SIM ID"
+msgstr "SIM ID"
+
+#: ui/SimPage.qml:210
+#, kde-format
+msgid "Emergency Numbers"
+msgstr "ਐਮਰਜੈਂਸੀ ਨੰਬਰ"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

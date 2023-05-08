@@ -1,0 +1,98 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"PO-Revision-Date: 2023-05-07 20:08+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: ui/main.qml:16
+#, kde-format
+msgid "System Information"
+msgstr "معلومات النظام"
+
+#: ui/main.qml:42
+#, kde-format
+msgid "Operating System"
+msgstr "نظام التشغيل"
+
+#: ui/main.qml:49
+#, kde-format
+msgid "Webpage"
+msgstr "صفة الويب"
+
+#: ui/main.qml:70
+#, kde-format
+msgid "KDE Plasma Version"
+msgstr "إصدارة كِيدِي بلازما"
+
+#: ui/main.qml:77
+#, kde-format
+msgid "KDE Frameworks Version"
+msgstr "إصدارة إطار كِيدِي"
+
+#: ui/main.qml:84
+#, kde-format
+msgid "Qt Version"
+msgstr "إصدار كيوت"
+
+#: ui/main.qml:91
+#, kde-format
+msgid "Kernel Version"
+msgstr "إصدارة النّواة"
+
+#: ui/main.qml:98
+#, kde-format
+msgid "OS Type"
+msgstr "نوع النظام"
+
+#: ui/main.qml:99
+#, kde-format
+msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
+msgid "%1-bit"
+msgstr "%1-بت"
+
+#: ui/main.qml:116
+#, kde-format
+msgid "Processor"
+msgid_plural "Processors"
+msgstr[0] "معالج"
+msgstr[1] "معالج"
+msgstr[2] "معالجين"
+msgstr[3] "معالجات"
+msgstr[4] "معالجاً"
+msgstr[5] "معالج"
+
+#: ui/main.qml:123
+#, kde-format
+msgid "Memory"
+msgstr "الذاكرة"
+
+#: ui/main.qml:127
+#, kde-format
+msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
+msgid "%1 of RAM"
+msgstr "%1 من الذّاكرة العشوائيّة"
+
+#: ui/main.qml:129
+#, kde-format
+msgctxt "Unknown amount of RAM"
+msgid "Unknown"
+msgstr "مجهول"
+
+#: ui/main.qml:143
+#, kde-format
+msgid "Copy to clipboard"
+msgstr "انسخ إلى الحافظة"

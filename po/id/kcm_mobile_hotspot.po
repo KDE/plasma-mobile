@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-16 02:20+0000\n"
+"POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2020-04-23 18:41+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -16,23 +16,23 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/main.qml:42
+#: ui/main.qml:42
 #, kde-format
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: package/contents/ui/main.qml:43
+#: ui/main.qml:43
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr ""
 
-#: package/contents/ui/main.qml:66
+#: ui/main.qml:66
 #, fuzzy, kde-format
 #| msgid "Hotspot"
 msgid "Hotspot SSID"
 msgstr "Hotspot"
 
-#: package/contents/ui/main.qml:75
+#: ui/main.qml:75
 #, fuzzy, kde-format
 #| msgid "Password:"
 msgid "Hotspot Password"
