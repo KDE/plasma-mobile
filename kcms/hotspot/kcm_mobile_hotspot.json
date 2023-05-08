@@ -4,6 +4,7 @@
             {
                 "Email": "fella@posteo.de",
                 "Name": "Tobias Fella",
+                "Name[ar]": "توبياس فلة",
                 "Name[ca@valencia]": "Tobias Fella",
                 "Name[ca]": "Tobias Fella",
                 "Name[cs]": "Tobias Fella",
@@ -58,6 +59,7 @@
         "Id": "kcm_mobile_hotspot",
         "License": "GPL",
         "Name": "Hotspot",
+        "Name[ar]": "هوت-سبوت",
         "Name[ca@valencia]": "Punt d'accés",
         "Name[ca]": "Punt d'accés",
         "Name[cs]": "Hotspot",

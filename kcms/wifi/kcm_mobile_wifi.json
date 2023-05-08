@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Wireless network setting",
+        "Description[ar]": "إعدادات الشبكة اللاسلكية",
         "Description[ca@valencia]": "Configureu la xarxa sense fil",
         "Description[ca]": "Configuració de la xarxa sense fil",
         "Description[cs]": "Nastavení bezdrátové sítě",
@@ -30,6 +31,7 @@
         ],
         "Icon": "network-wireless-symbolic",
         "Name": "Wi-Fi",
+        "Name[ar]": "واي فاي",
         "Name[az]": "Wi-Fi",
         "Name[ca@valencia]": "Wi-Fi",
         "Name[ca]": "Wi-Fi",

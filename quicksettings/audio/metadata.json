@@ -5,6 +5,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -64,6 +65,7 @@
         "Id": "org.kde.plasma.quicksetting.audio",
         "License": "GPL-2.0+",
         "Name": "Audio",
+        "Name[ar]": "الصوت",
         "Name[az]": "Səs",
         "Name[ca@valencia]": "Àudio",
         "Name[ca]": "Àudio",

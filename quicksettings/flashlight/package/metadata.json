@@ -5,6 +5,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -64,6 +65,7 @@
         "Id": "org.kde.plasma.quicksetting.flashlight",
         "License": "GPL-2.0+",
         "Name": "Flashlight",
+        "Name[ar]": "مشعل كهربائي",
         "Name[az]": "Fənər",
         "Name[ca@valencia]": "Llum de flaix",
         "Name[ca]": "Llum de flaix",

@@ -5,6 +5,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -65,6 +66,7 @@
         "Id": "org.kde.plasma.quicksetting.settingsapp",
         "License": "GPL-2.0+",
         "Name": "Settings",
+        "Name[ar]": "الإعدادات",
         "Name[az]": "Ayarlar",
         "Name[ca@valencia]": "Configuració",
         "Name[ca]": "Configuració",

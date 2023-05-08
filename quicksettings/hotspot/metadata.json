@@ -52,6 +52,7 @@
         "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
         "Name": "Hotspot",
+        "Name[ar]": "هوت-سبوت",
         "Name[ca@valencia]": "Punt d'accés",
         "Name[ca]": "Punt d'accés",
         "Name[cs]": "Hotspot",

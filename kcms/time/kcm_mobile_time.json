@@ -30,6 +30,7 @@
         ],
         "Icon": "preferences-system-time",
         "Name": "Time and Date",
+        "Name[ar]": "الوقت والتّاريخ",
         "Name[ca@valencia]": "Hora i data",
         "Name[ca]": "Hora i data",
         "Name[cs]": "Datum a čas",

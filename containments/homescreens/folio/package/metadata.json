@@ -5,6 +5,7 @@
             {
                 "Email": "mart@kde.org",
                 "Name": "Marco Martin",
+                "Name[ar]": "ماركو مارتن",
                 "Name[az]": "Marco Martin",
                 "Name[ca@valencia]": "Marco Martin",
                 "Name[ca]": "Marco Martin",
@@ -67,6 +68,7 @@
         "Id": "org.kde.plasma.mobile.homescreen.folio",
         "License": "GPLv2+",
         "Name": "Folio",
+        "Name[ar]": "مطوية",
         "Name[ca@valencia]": "Folio",
         "Name[ca]": "Folio",
         "Name[de]": "Folio",

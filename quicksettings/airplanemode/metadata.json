@@ -5,6 +5,7 @@
             {
                 "Email": "bshah@kde.org",
                 "Name": "Bhushan Shah",
+                "Name[ar]": "Bhushan Shah",
                 "Name[az]": "Bhushan Shah",
                 "Name[ca@valencia]": "Bhushan Shah",
                 "Name[ca]": "Bhushan Shah",
@@ -64,6 +65,7 @@
         "Id": "org.kde.plasma.quicksetting.airplanemode",
         "License": "GPL-2.0+",
         "Name": "Airplane Mode",
+        "Name[ar]": "خارج نطاق التغطية",
         "Name[az]": "Uçuş rejimi",
         "Name[ca@valencia]": "Mode avió",
         "Name[ca]": "Mode avió",

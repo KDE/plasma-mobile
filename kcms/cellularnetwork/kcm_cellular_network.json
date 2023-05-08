@@ -30,6 +30,7 @@
         ],
         "Icon": "smartphone",
         "Name": "Cellular Network",
+        "Name[ar]": "شبكة خليوية",
         "Name[ca@valencia]": "Xarxa de telefonia mòbil",
         "Name[ca]": "Xarxa de telefonia mòbil",
         "Name[cs]": "Mobilní síť",

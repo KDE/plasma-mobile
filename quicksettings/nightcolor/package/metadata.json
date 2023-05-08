@@ -5,6 +5,7 @@
             {
                 "Email": "aleixpol@kde.org",
                 "Name": "Aleix Pol",
+                "Name[ar]": "ألكس بول",
                 "Name[ast]": "Aleix Pol",
                 "Name[az]": "Aleix Pol",
                 "Name[ca@valencia]": "Aleix Pol",
@@ -64,6 +65,7 @@
         "Id": "org.kde.plasma.quicksetting.nightcolor",
         "License": "GPL",
         "Name": "Night Color",
+        "Name[ar]": "لون ليلي",
         "Name[az]": "Gecə rəngi",
         "Name[ca@valencia]": "Color de nit",
         "Name[ca]": "Color de nit",

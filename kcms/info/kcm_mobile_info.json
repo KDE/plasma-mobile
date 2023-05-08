@@ -30,6 +30,7 @@
         ],
         "Icon": "dialog-information",
         "Name": "Information",
+        "Name[ar]": "معلومات",
         "Name[ca@valencia]": "Informació",
         "Name[ca]": "Informació",
         "Name[cs]": "Informace",

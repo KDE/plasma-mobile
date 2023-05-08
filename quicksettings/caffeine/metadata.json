@@ -5,6 +5,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -63,6 +64,7 @@
         "Id": "org.kde.plasma.quicksetting.caffeine",
         "License": "GPL",
         "Name": "Caffeine",
+        "Name[ar]": "كافيين",
         "Name[az]": "Caffeine",
         "Name[ca@valencia]": "Caffeine",
         "Name[ca]": "Caffeine",

@@ -30,6 +30,7 @@
         ],
         "Icon": "preferences-system-power-management",
         "Name": "Energy",
+        "Name[ar]": "الطاقة",
         "Name[ca@valencia]": "Energia",
         "Name[ca]": "Energia",
         "Name[cs]": "Energie",
