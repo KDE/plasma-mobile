@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-08 02:08+0000\n"
-"PO-Revision-Date: 2023-05-03 23:28+0200\n"
+"PO-Revision-Date: 2023-05-09 00:23+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -544,7 +544,7 @@ msgstr ""
 #: ui/EditProfileDialog.qml:56
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "Contraseña"
 
 #: ui/EditProfileDialog.qml:61
 #, kde-format
@@ -554,12 +554,12 @@ msgstr ""
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
@@ -619,7 +619,7 @@ msgstr ""
 #: ui/main.qml:133 ui/SimPage.qml:17
 #, kde-format
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ui/main.qml:133
 #, kde-format
@@ -669,7 +669,7 @@ msgstr ""
 #: ui/ModemPage.qml:102
 #, kde-format
 msgid "IMEI"
-msgstr ""
+msgstr "IMEI"
 
 #: ui/ModemPage.qml:118
 #, kde-format
@@ -689,7 +689,7 @@ msgstr ""
 #: ui/ModemPage.qml:162
 #, kde-format
 msgid "Revision"
-msgstr ""
+msgstr "Revisión"
 
 #: ui/ModemPage.qml:170
 #, kde-format
@@ -714,12 +714,12 @@ msgstr ""
 #: ui/ModemPage.qml:202
 #, kde-format
 msgid "Roaming"
-msgstr ""
+msgstr "Roaming"
 
 #: ui/ModemPage.qml:210
 #, kde-format
 msgid "Firmware Version"
-msgstr ""
+msgstr "Versión del firmware"
 
 #: ui/ModemPage.qml:218
 #, kde-format
@@ -739,7 +739,7 @@ msgstr ""
 #: ui/ModemPage.qml:242
 #, kde-format
 msgid "Device"
-msgstr ""
+msgstr "Preséu"
 
 #: ui/ModemPage.qml:250
 #, kde-format
@@ -754,7 +754,7 @@ msgstr ""
 #: ui/ModemPage.qml:286
 #, kde-format
 msgid "Plugin"
-msgstr ""
+msgstr "Plugin"
 
 #: ui/ModemPage.qml:294
 #, kde-format
@@ -956,12 +956,12 @@ msgstr ""
 #: ui/SimPage.qml:145
 #, kde-format
 msgid "IMSI"
-msgstr ""
+msgstr "IMSI"
 
 #: ui/SimPage.qml:153
 #, kde-format
 msgid "EID"
-msgstr ""
+msgstr "EID"
 
 #: ui/SimPage.qml:161
 #, kde-format
@@ -991,4 +991,4 @@ msgstr ""
 #: ui/SimPage.qml:210
 #, kde-format
 msgid "Emergency Numbers"
-msgstr ""
+msgstr "Númberos d'emerxencia"

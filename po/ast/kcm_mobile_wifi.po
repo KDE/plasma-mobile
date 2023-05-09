@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-08 02:08+0000\n"
-"PO-Revision-Date: 2023-05-03 23:31+0200\n"
+"PO-Revision-Date: 2023-05-09 00:14+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -70,7 +70,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:51
 #, kde-format
 msgid "SSID:"
-msgstr ""
+msgstr "SSID:"
 
 #: ui/NetworkSettings.qml:60
 #, kde-format
@@ -80,7 +80,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:66
 #, kde-format
 msgid "Security"
-msgstr ""
+msgstr "Seguranza"
 
 #: ui/NetworkSettings.qml:72
 #, kde-format
@@ -95,7 +95,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:82
 #, kde-format
 msgid "WEP Key"
-msgstr ""
+msgstr "Clave WEP"
 
 #: ui/NetworkSettings.qml:83
 #, kde-format
@@ -115,12 +115,12 @@ msgstr ""
 #: ui/NetworkSettings.qml:110
 #, kde-format
 msgid "Password:"
-msgstr ""
+msgstr "Contraseña:"
 
 #: ui/NetworkSettings.qml:118
 #, kde-format
 msgid "Authentication:"
-msgstr ""
+msgstr "Autenticación:"
 
 #: ui/NetworkSettings.qml:121
 #, kde-format
@@ -180,9 +180,9 @@ msgstr ""
 #: ui/NetworkSettings.qml:185
 #, kde-format
 msgid "DNS:"
-msgstr ""
+msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
-msgstr ""
+msgstr "Contraseña…"
