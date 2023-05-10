@@ -220,7 +220,7 @@ MobileShell.GridView {
                 
                 menuActions: [
                     Kirigami.Action {
-                        iconName: "emblem-favorite"
+                        icon.name: "emblem-favorite"
                         text: i18n("Remove from favourites")
                         onTriggered: Halcyon.PinnedModel.removeEntry(model.index)
                     }

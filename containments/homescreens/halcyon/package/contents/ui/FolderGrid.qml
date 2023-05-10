@@ -195,12 +195,12 @@ MobileShell.GridView {
                 
                 menuActions: [
                     Kirigami.Action {
-                        iconName: "emblem-favorite"
+                        icon.name: "emblem-favorite"
                         text: i18n("Remove from favourites")
                         onTriggered: root.folder.removeApp(model.index)
                     },
                     Kirigami.Action {
-                        iconName: "document-open-folder"
+                        icon.name: "document-open-folder"
                         text: i18n("Move out of folder")
                         onTriggered: root.folder.moveAppOut(model.index)
                     }
