@@ -14,7 +14,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import "../../dataproviders" as DataProviders
 
 Item {
-    required property InternetIndicator internetIndicator
+    property InternetIndicator internetIndicator
     
     readonly property var provider: DataProviders.SignalStrengthInfo {}
     
