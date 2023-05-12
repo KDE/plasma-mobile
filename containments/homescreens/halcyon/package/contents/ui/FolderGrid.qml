@@ -4,8 +4,8 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Effects
 import QtQml.Models
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.extras as PlasmaExtras
@@ -63,13 +63,9 @@ MobileShell.GridView {
                 
                 font.weight: Font.Bold
                 font.pointSize: 18
+
                 layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+                layer.effect: MobileShell.TextDropShadow {}
                 
                 onTextChanged: {
                     if (text.includes('\n')) {
@@ -100,13 +96,9 @@ MobileShell.GridView {
 
                 font.weight: Font.Bold
                 font.pointSize: 18
+
                 layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+                layer.effect: MobileShell.TextDropShadow {}
                 
                 MouseArea {
                     anchors.fill: parent
@@ -146,11 +138,11 @@ MobileShell.GridView {
                     source: 'arrow-left'
 
                     layer.enabled: true
-                    layer.effect: DropShadow {
-                        verticalOffset: 1
-                        radius: 4
-                        samples: 6
-                        color: Qt.rgba(0, 0, 0, 0.5)
+                    layer.effect: MultiEffect {
+                        shadowEnabled: true
+                        shadowVerticalOffset: 1
+                        blurMax: 8
+                        shadowOpacity: 0.6
                     }
                 }
             }

@@ -4,7 +4,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as Controls
-import Qt5Compat.GraphicalEffects
+import QtQuick.Effects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -235,12 +235,7 @@ Item {
                 color: "white"
                 
                 layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
+                layer.effect: MobileShell.TextDropShadow {}
             }
             
             Kirigami.Icon {
@@ -254,11 +249,11 @@ Item {
                 visible: delegate.isFolder
 
                 layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowVerticalOffset: 1
+                    blurMax: 8
+                    shadowOpacity: 0.7
                 }
             }
         }
@@ -302,11 +297,11 @@ Item {
                 }
                 
                 layer.enabled: true
-                layer.effect: DropShadow {
-                    verticalOffset: 1
-                    radius: 4
-                    samples: 6
-                    color: Qt.rgba(0, 0, 0, 0.5)
+                layer.effect: MultiEffect {
+                    shadowEnabled: true
+                    shadowVerticalOffset: 1
+                    blurMax: 16
+                    shadowOpacity: 0.5
                 }
             }
         }
@@ -348,11 +343,11 @@ Item {
                         source: modelData.icon
                         
                         layer.enabled: true
-                        layer.effect: DropShadow {
-                            verticalOffset: 1
-                            radius: 4
-                            samples: 3
-                            color: Qt.rgba(0, 0, 0, 0.5)
+                        layer.effect: MultiEffect {
+                            shadowEnabled: true
+                            shadowVerticalOffset: 1
+                            blurMax: 16
+                            shadowOpacity: 0.6
                         }
                     }
                 }

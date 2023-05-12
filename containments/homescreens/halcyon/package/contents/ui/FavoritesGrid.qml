@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQml.Models
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.extras as PlasmaExtras
@@ -272,13 +271,7 @@ MobileShell.GridView {
         anchors.rightMargin: root.rightMargin
         
         layer.enabled: true
-        layer.effect: DropShadow {
-            verticalOffset: 1
-            radius: 4
-            samples: 6
-            color: Qt.rgba(0, 0, 0, 0.5)
-            cached: true
-        }
+        layer.effect: MobileShell.TextDropShadow {}
         
         Kirigami.Icon {
             id: icon

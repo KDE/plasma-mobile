@@ -4,7 +4,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
@@ -28,15 +27,12 @@ ColumnLayout {
         Layout.fillWidth: true
         
         horizontalAlignment: Text.AlignLeft
+
         font.weight: Font.Bold // this font weight may switch to regular on distros that don't have a light variant
         font.pointSize: 28
+
         layer.enabled: true
-        layer.effect: DropShadow {
-            verticalOffset: 1
-            radius: 4
-            samples: 6
-            color: Qt.rgba(0, 0, 0, 0.5)
-        }
+        layer.effect: MobileShell.TextDropShadow {}
     }
     
     Label {
@@ -50,13 +46,9 @@ ColumnLayout {
         styleColor: softwareRendering ? ColorScope.backgroundColor : "transparent" // no outline, doesn't matter
         
         font.pointSize: 12
+
         layer.enabled: true
-        layer.effect: DropShadow {
-            verticalOffset: 1
-            radius: 4
-            samples: 6
-            color: Qt.rgba(0, 0, 0, 0.5)
-        }
+        layer.effect: MobileShell.TextDropShadow {}
     }
     
     P5Support.DataSource {

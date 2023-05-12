@@ -6,8 +6,8 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import QtQuick.Controls as Controls
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -163,8 +163,9 @@ MouseArea {
             // darken effect when hovered/pressed
             layer {
                 enabled: delegate.pressed
-                effect: ColorOverlay {
-                    color: Qt.rgba(0, 0, 0, 0.3)
+                effect: MultiEffect {
+                    colorization: 1.0
+                    colorizationColor: Qt.rgba(0, 0, 0, 0.3)
                 }
             }
             
