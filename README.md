@@ -36,8 +36,13 @@ See the [documentation page](https://invent.kde.org/plasma/plasma-mobile/-/wikis
 It is recommended to use `kdesrc-build` to build this from source. See [this page](https://community.kde.org/Get_Involved/development) in order to set it up.
 
 Dependencies:
-* KDE Frameworks 5 setup (plasma-framework and its dependencies)
-* Plasma Nano
+* KDE Frameworks 6 setup (plasma-framework and its dependencies)
+* plasma-nano
+* plasma-workspace
+* plasma-nm
+* plasma-pa
+* bluez-qt
+* Milou (for search)
 * Kirigami
 * Kirigami Addons
 
