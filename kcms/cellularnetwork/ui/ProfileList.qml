@@ -27,7 +27,7 @@ Kirigami.ScrollablePage {
             icon.name: "globe"
             
             helpfulAction: Kirigami.Action {
-                iconName: "list-add"
+                icon.name: "list-add"
                 text: i18n("Add Connection")
                 onTriggered: {
                     profileDialog.profile = null;
@@ -129,7 +129,7 @@ Kirigami.ScrollablePage {
             
             actions: [
                 Kirigami.Action {
-                    iconName: "entry-edit"
+                    icon.name: "entry-edit"
                     text: i18n("Edit")
                     onTriggered: {
                         profileDialog.profile = modelData;
@@ -137,7 +137,7 @@ Kirigami.ScrollablePage {
                     }
                 },
                 Kirigami.Action {
-                    iconName: "delete"
+                    icon.name: "delete"
                     text: i18n("Delete")
                     onTriggered: modem.removeProfile(modelData.connectionUni)
                 }
