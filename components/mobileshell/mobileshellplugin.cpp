@@ -54,6 +54,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("components/ListView.qml"), uri, 1, 0, "ListView");
     qmlRegisterType(resolvePath("components/PopupMenu.qml"), uri, 1, 0, "PopupMenu");
     qmlRegisterType(resolvePath("components/StartupFeedback.qml"), uri, 1, 0, "StartupFeedback");
+    qmlRegisterType(resolvePath("components/TextDropShadow.qml"), uri, 1, 0, "TextDropShadow");
     qmlRegisterType(resolvePath("components/VelocityCalculator.qml"), uri, 1, 0, "VelocityCalculator");
 
     // /dataproviders
