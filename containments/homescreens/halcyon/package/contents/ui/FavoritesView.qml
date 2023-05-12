@@ -30,7 +30,7 @@ Item {
     
     readonly property real leftMargin: Math.round(width * 0.1)
     readonly property real rightMargin: Math.round(width * 0.1)
-    readonly property real delegateHeight: Math.round(PlasmaCore.Units.gridUnit * 3.25)
+    readonly property real delegateHeight: Math.round(PlasmaCore.Units.gridUnit * 3)
     
     property bool folderShown: false
     
