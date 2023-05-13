@@ -6,16 +6,16 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as Controls
-import QtQuick.Layouts 1.15
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Controls as Controls
+import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-import org.kde.milou 0.1 as Milou
+import org.kde.milou as Milou
 import org.kde.kirigami 2.19 as Kirigami
 
 import "../../components" as Components
@@ -150,16 +150,17 @@ Item {
                 background: Item {
                     
                     // shadow for search window
-                    RectangularGlow {
-                        anchors.topMargin: 1 
+                    MultiEffect {
                         anchors.fill: parent
-                        cached: true
-                        glowRadius: 4
-                        spread: 0.2
-                        color: Qt.rgba(0, 0, 0, 0.15)
+                        source: rectBackground
+                        blurMax: 16
+                        shadowEnabled: true
+                        shadowVerticalOffset: 1
+                        shadowOpacity: 0.15
                     }
                     
                     Rectangle {
+                        id: rectBackground
                         anchors.fill: parent
                         color: PlasmaCore.Theme.backgroundColor
                         radius: PlasmaCore.Units.smallSpacing

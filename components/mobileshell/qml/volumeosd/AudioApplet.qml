@@ -6,10 +6,9 @@
  */
 
 import QtQuick
-import QtQuick.Controls as Controls
 import QtQuick.Layouts
 import QtQuick.Window
-import Qt5Compat.GraphicalEffects
+import QtQuick.Controls as Controls
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents

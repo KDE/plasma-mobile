@@ -1,14 +1,14 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
-// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
+import QtQuick
+import QtQuick.Effects
+import QtQuick.Layouts
+import QtQuick.Window
 import org.kde.plasma.core 2.0 as PlasmaCore
-import Qt5Compat.GraphicalEffects
 
-import org.kde.kirigami 2.13 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
@@ -188,14 +188,13 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 anchors.fill: parent
                 colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
             }
-            DropShadow {
+
+            MultiEffect {
                 anchors.fill: icon
-                horizontalOffset: 0
-                verticalOffset: 0
-                radius: 8.0
-                samples: 17
-                color: "#80000000"
                 source: icon
+                shadowEnabled: true
+                blurMax: 16
+                shadowColor: "#80000000"
             }
         }
     }

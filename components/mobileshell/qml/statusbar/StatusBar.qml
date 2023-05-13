@@ -6,11 +6,11 @@
  */
 
 
-import QtQuick 2.12
-import QtQuick.Controls 2.12 as Controls
-import QtQuick.Layouts 1.3
-import QtQml.Models 2.12
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
+import QtQuick.Controls as Controls
+import QtQml.Models
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
@@ -85,16 +85,15 @@ Item {
         }
     }
 
-    DropShadow {
+    // drop shadow for icons
+    MultiEffect {
         anchors.fill: icons
         visible: showDropShadow
-        cached: true
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 6.0
-        samples: 17
-        color: Qt.rgba(0,0,0,0.6)
         source: icons
+        blurMax: 16
+        shadowEnabled: true
+        shadowVerticalOffset: 1
+        shadowOpacity: 0.8
     }
 
     // screen top panel

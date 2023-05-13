@@ -5,10 +5,10 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.4
-import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Window
+import QtQuick.Effects
 
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -31,17 +31,16 @@ Item {
     
     property NavigationPanelAction leftCornerAction
     property NavigationPanelAction rightCornerAction
-    
-    DropShadow {
+
+    // drop shadow for icons
+    MultiEffect {
         anchors.fill: root
         visible: shadow
-        cached: true
-        horizontalOffset: 0
-        verticalOffset: 1
-        radius: 4.0
-        samples: 17
-        color: Qt.rgba(0,0,0,0.8)
         source: icons
+        blurMax: 16
+        shadowEnabled: true
+        shadowVerticalOffset: 1
+        shadowOpacity: 0.8
     }
         
     Item {
