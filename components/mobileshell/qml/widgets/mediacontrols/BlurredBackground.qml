@@ -1,10 +1,8 @@
-/*
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *  SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.15
+import QtQuick
+import QtQuick.Effects
 import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -21,6 +19,7 @@ Item {
         maskSource: Item {
             width: img.width
             height: img.height
+
             Rectangle {
                 anchors.centerIn: parent
                 width: img.width
@@ -29,7 +28,7 @@ Item {
             }
         }
     }
-    
+
     Image {
         id: img
         source: root.imageSource
@@ -46,18 +45,15 @@ Item {
         
         // apply lighten, saturate and blur effect
         layer.enabled: true
-        layer.effect: HueSaturation {
-            cached: true
-
-            lightness: 0.2
+        layer.effect: MultiEffect {
+            brightness: 0.2
             saturation: 1.5
 
-            layer.enabled: true
-            layer.effect: FastBlur {
-                cached: true
-                radius: 64
-                transparentBorder: false
-            }
+            blurEnabled: true
+            blurMax: 32
+            blur: 1.0
+            blurMultiplier: 2
+            autoPaddingEnabled: false
         }
     }
 }

@@ -7,7 +7,6 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
@@ -29,19 +28,8 @@ Item {
         intervalAlignment: P5Support.Types.AlignToMinute
     }
     
-    DropShadow {
-        anchors.fill: parent
-        source: clockColumn
-        cached: true
-        verticalOffset: 1
-        radius: 4
-        samples: 6
-        color: Qt.rgba(0, 0, 0, 0.4)
-    }
-    
     ColumnLayout {
         id: clockColumn
-        opacity: 0.8
         spacing: PlasmaCore.Units.gridUnit
         
         anchors.top: parent.top
@@ -55,6 +43,11 @@ Item {
             Layout.alignment: root.layoutAlignment
             font.weight: Font.Bold
             font.pointSize: 36
+
+            layer.enabled: true
+            layer.effect: MobileShell.TextDropShadow {
+                blurMax: 16
+            }
         }
         
         PC3.Label {
@@ -64,6 +57,11 @@ Item {
             Layout.alignment: root.layoutAlignment
             font.weight: Font.Bold
             font.pointSize: 10
+
+            layer.enabled: true
+            layer.effect: MobileShell.TextDropShadow {
+                blurMax: 16
+            }
         }
     }
 }

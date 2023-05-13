@@ -120,8 +120,8 @@ MouseArea {
 
             // darken effect as task gets away from the centre of the screen
             darken: {
-                let distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherState.taskWidth;
-                let upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;
+                const distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherState.taskWidth;
+                const upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;
                 return Math.max(0, upperBoundAdjust);
             }
 

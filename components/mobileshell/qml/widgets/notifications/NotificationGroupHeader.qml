@@ -57,9 +57,10 @@ RowLayout {
         id: applicationNameLabel
         Layout.leftMargin: PlasmaCore.Units.smallSpacing
         Layout.fillWidth: true
-        opacity: 0.8
+        opacity: 0.6
         textFormat: Text.PlainText
         elide: Text.ElideLeft
+        font.bold: true
         text: notificationHeading.applicationName + (notificationHeading.originName ? " · " + notificationHeading.originName : "")
     }
 

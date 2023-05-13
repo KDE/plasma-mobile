@@ -4,7 +4,6 @@
 
 import QtQuick
 import QtQuick.Layouts
-import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents

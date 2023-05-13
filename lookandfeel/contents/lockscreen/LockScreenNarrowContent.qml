@@ -1,10 +1,9 @@
-/*
- * SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
@@ -64,6 +63,15 @@ Loader {
                 Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
                 Layout.leftMargin: PlasmaCore.Units.gridUnit
                 Layout.rightMargin: PlasmaCore.Units.gridUnit
+
+                layer.enabled: true
+                layer.effect: MultiEffect {
+                    blurMax: 16
+                    shadowEnabled: true
+                    shadowVerticalOffset: 1
+                    shadowOpacity: 0.5
+                    shadowColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
+                }
             }
 
             NotificationsComponent {

@@ -1,11 +1,8 @@
-/*
- * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- * 
- * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 
-import QtQuick 2.15
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Effects
 
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -46,16 +43,16 @@ Item {
         }
     }
     
-    // glow
-    RectangularGlow {
-        visible: Math.abs(dragOffset) !== root.width
-        anchors.topMargin: 1
-        anchors.leftMargin: 1
+    // shadow
+    MultiEffect {
         anchors.fill: mainCard
-        cornerRadius: mainCard.radius * 2
-        glowRadius: 2
-        spread: 0.2
-        color: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
+        visible: Math.abs(dragOffset) !== root.width
+        source: mainCard
+        blurMax: 16
+        shadowEnabled: true
+        shadowVerticalOffset: 1
+        shadowOpacity: 0.5
+        shadowColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
     }
 
     // shadow
@@ -65,7 +62,7 @@ Item {
         anchors.leftMargin: -1
         anchors.rightMargin: -1
         anchors.bottomMargin: -1
-        
+
         color: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.3)
         radius: PlasmaCore.Units.smallSpacing
     }

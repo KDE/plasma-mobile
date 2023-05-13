@@ -1,12 +1,9 @@
-/*
- * SPDX-FileCopyrightText: 2020-2022 Devin Lin <espidev@gmail.com>
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2020-2022 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Controls 2.1
-import QtQuick.Layouts 1.1
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0

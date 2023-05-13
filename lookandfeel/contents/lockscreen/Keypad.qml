@@ -1,13 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 2020-2022 Devin Lin <espidev@gmail.com>
- * 
- * SPDX-License-Identifier: GPL-2.0-or-later
-*/
+// SPDX-FileCopyrightText: 2020-2023 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Controls 2.1
-import QtQuick.Layouts 1.1
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -57,17 +54,7 @@ Rectangle {
     MobileShell.HapticsEffectLoader {
         id: haptics
     }
-    
-    RectangularGlow {
-        anchors.topMargin: 1
-        anchors.fill: passwordBar
-        cached: true
-        glowRadius: 4
-        spread: 0.2
-        color: keypadRoot.dropShadowColor
-        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-    }
-    
+
     // pin display and bar
     PasswordBar {
         id: passwordBar
@@ -83,6 +70,15 @@ Rectangle {
         
         keypadOpen: swipeProgress === 1
         previewCharIndex: -2
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            blurMax: 16
+            shadowEnabled: true
+            shadowVerticalOffset: 1
+            shadowOpacity: 0.3
+            shadowColor: keypadRoot.dropShadowColor
+        }
     }
     
     // actual number keys
@@ -135,18 +131,15 @@ Rectangle {
                         id: keyRect
                         radius: grid.keyRadius
                         color: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.buttonColor
-                        
-                        RectangularGlow {
-                            anchors.topMargin: 1
-                            anchors.fill: parent
-                            
-                            z: -1
-                            cornerRadius: keyRect.radius * 2
-                            cached: true
-                            glowRadius: 2
-                            spread: 0.2
-                            color: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.dropShadowColor
-                        }
+                    }
+
+                    layer.enabled: true
+                    layer.effect: MultiEffect {
+                        blurMax: 16
+                        shadowEnabled: true
+                        shadowVerticalOffset: 1
+                        shadowOpacity: 0.3
+                        shadowColor: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.dropShadowColor
                     }
 
                     onPressedChanged: {

@@ -226,11 +226,9 @@ Item {
                         wId: delegate.window.internalId
                         anchors.fill: parent
 
-                        layer {
-                            enabled: true
-                            effect: ColorOverlay {
-                                color: Qt.rgba(0, 0, 0, delegate.darken)
-                            }
+                        layer.enabled: true
+                        layer.effect: ColorOverlay {
+                            color: Qt.rgba(0, 0, 0, delegate.darken)
                         }
                     }
                 }

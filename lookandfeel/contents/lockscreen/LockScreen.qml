@@ -1,14 +1,10 @@
-/*
- * SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
- * SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
+// SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
@@ -47,7 +43,7 @@ Item {
         asynchronous: true
         sourceComponent: WallpaperBlur {
             source: wallpaper
-            blur: root.notificationsShown || root.drawerOpen // only blur once animation finished for performance
+            shouldBlur: root.notificationsShown || root.drawerOpen // only blur once animation finished for performance
         }
     }
 

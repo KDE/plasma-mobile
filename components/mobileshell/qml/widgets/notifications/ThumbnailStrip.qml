@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -62,13 +62,16 @@ MouseArea {
         id: previewBackground
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
-        layer.enabled: true
         opacity: 0.25
         pixmap: thumbnailer.pixmap
-        layer.effect: FastBlur {
+
+        layer.enabled: true
+        layer.effect: MultiEffect {
             source: previewBackground
             anchors.fill: parent
-            radius: 30
+            autoPaddingEnabled: false
+            blurEnabled: true
+            blur: 1.0
         }
     }
 

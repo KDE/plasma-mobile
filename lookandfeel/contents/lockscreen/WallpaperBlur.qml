@@ -3,16 +3,17 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.12
-import Qt5Compat.GraphicalEffects
+import QtQuick
+import QtQuick.Effects
 
-FastBlur {
-    id: fastBlur
-    cached: true
-    radius: 50
+MultiEffect {
+    autoPaddingEnabled: false
+    blurEnabled: true
+    blurMax: 50
+    blur: 1.0
     
-    property bool blur
-    opacity: blur ? 1 : 0
+    property bool shouldBlur
+    opacity: shouldBlur ? 1 : 0
     
     Behavior on opacity {
         NumberAnimation {
