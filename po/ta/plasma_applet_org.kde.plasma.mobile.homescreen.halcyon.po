@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-13 02:17+0000\n"
+"POT-Creation-Date: 2023-05-13 02:04+0000\n"
 "PO-Revision-Date: 2023-04-23 17:12+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: package/contents/ui/FavoritesGrid.qml:224
-#: package/contents/ui/FolderGrid.qml:199
+#: package/contents/ui/FavoritesGrid.qml:223
+#: package/contents/ui/FolderGrid.qml:191
 #, kde-format
 msgid "Remove from favourites"
 msgstr "பிடித்தவற்றிலிருந்து நீக்கு"
 
-#: package/contents/ui/FavoritesGrid.qml:300
+#: package/contents/ui/FavoritesGrid.qml:293
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "செயலிகளை இங்கு காட்ட அவற்றை பிடித்தவற்றின் பட்டியலில் சேர்க்கவும்"
 
-#: package/contents/ui/FolderGrid.qml:204
+#: package/contents/ui/FolderGrid.qml:196
 #, kde-format
 msgid "Move out of folder"
 msgstr "அடைவிலிருந்து வெளியே நகர்த்து"
