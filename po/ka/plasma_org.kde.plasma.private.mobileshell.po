@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-21 02:29+0000\n"
+"POT-Creation-Date: 2023-05-14 02:27+0000\n"
 "PO-Revision-Date: 2022-12-28 07:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -59,22 +59,22 @@ msgstr "SIM-ი დაბლოკილია"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:64
+#: qml/volumeosd/AudioApplet.qml:63
 #, kde-format
 msgid "Outputs"
 msgstr "გამოტანა"
 
-#: qml/volumeosd/AudioApplet.qml:94
+#: qml/volumeosd/AudioApplet.qml:93
 #, kde-format
 msgid "Inputs"
 msgstr "შეყვანები"
 
-#: qml/volumeosd/AudioApplet.qml:125
+#: qml/volumeosd/AudioApplet.qml:124
 #, kde-format
 msgid "Playback Streams"
 msgstr "დასაკრავი ნაკადები"
 
-#: qml/volumeosd/AudioApplet.qml:178
+#: qml/volumeosd/AudioApplet.qml:177
 #, kde-format
 msgid "Recording Streams"
 msgstr "ჩამწერი ნააკდები"
@@ -129,38 +129,38 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "ნაკადის სახელი ვერ ვიპოვე"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:114
 #, kde-format
 msgid "Unmute"
 msgstr "დადუმების გამორთვა"
 
-#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
+#: qml/volumeosd/VolumeOSD.qml:114 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "დადუმება"
 
-#: qml/volumeosd/VolumeOSD.qml:139
+#: qml/volumeosd/VolumeOSD.qml:138
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:149
+#: qml/volumeosd/VolumeOSD.qml:148
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:169
+#: qml/volumeosd/VolumeOSD.qml:168
 #, kde-format
 msgid "Open audio settings"
 msgstr "აუდიოს მორგება"
 
-#: qml/volumeosd/VolumeOSD.qml:182
+#: qml/volumeosd/VolumeOSD.qml:181
 #, kde-format
 msgid "Audio Settings"
 msgstr "აუდიოს პარამეტრები"
 
-#: qml/volumeosd/VolumeOSD.qml:189
+#: qml/volumeosd/VolumeOSD.qml:188
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "აუდიონაკადების ჩვენების გადართვა"
@@ -180,7 +180,7 @@ msgstr "ხმის აწევა"
 msgid "Decrease Volume"
 msgstr "ხმის დაწევა"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:182
+#: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"
 msgstr "ძებნა…"
@@ -250,7 +250,7 @@ msgstr "კიდევ %1-ის ჩვენება"
 msgid "Clear All Notifications"
 msgstr "ყველა შეტყობინების გასუფთავება"
 
-#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#: qml/widgets/notifications/ThumbnailStrip.qml:135
 #, kde-format
 msgid "More Options…"
 msgstr "მეტი პარამეტრი…"

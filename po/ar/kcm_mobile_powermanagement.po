@@ -21,32 +21,32 @@ msgstr ""
 #: mobilepower.cpp:27
 #, kde-format
 msgid "30 sec"
-msgstr "٣٠ ث"
+msgstr "30 ث"
 
 #: mobilepower.cpp:28
 #, kde-format
 msgid "1 min"
-msgstr "١ دق"
+msgstr "1 دق"
 
 #: mobilepower.cpp:29
 #, kde-format
 msgid "2 min"
-msgstr "٢ دق"
+msgstr "2 دق"
 
 #: mobilepower.cpp:30
 #, kde-format
 msgid "5 min"
-msgstr "٥ دق"
+msgstr "5 دق"
 
 #: mobilepower.cpp:31
 #, kde-format
 msgid "10 min"
-msgstr "١٠ دق"
+msgstr "10 دق"
 
 #: mobilepower.cpp:32
 #, kde-format
 msgid "15 min"
-msgstr "١٥ دق"
+msgstr "15 دق"
 
 #: mobilepower.cpp:33
 #, kde-format

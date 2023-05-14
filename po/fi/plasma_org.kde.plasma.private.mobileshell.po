@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-21 02:29+0000\n"
+"POT-Creation-Date: 2023-05-14 02:27+0000\n"
 "PO-Revision-Date: 2023-01-18 16:46+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -58,22 +58,22 @@ msgstr "SIM lukittu"
 msgid "%1%"
 msgstr "%1 %"
 
-#: qml/volumeosd/AudioApplet.qml:64
+#: qml/volumeosd/AudioApplet.qml:63
 #, kde-format
 msgid "Outputs"
 msgstr "Ulostulot"
 
-#: qml/volumeosd/AudioApplet.qml:94
+#: qml/volumeosd/AudioApplet.qml:93
 #, kde-format
 msgid "Inputs"
 msgstr "Sisäänmenot"
 
-#: qml/volumeosd/AudioApplet.qml:125
+#: qml/volumeosd/AudioApplet.qml:124
 #, kde-format
 msgid "Playback Streams"
 msgstr "Toistovirrat"
 
-#: qml/volumeosd/AudioApplet.qml:178
+#: qml/volumeosd/AudioApplet.qml:177
 #, kde-format
 msgid "Recording Streams"
 msgstr "Nauhoitusvirrat"
@@ -128,38 +128,38 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Virran nimeä ei löytynyt"
 
-#: qml/volumeosd/VolumeOSD.qml:115
+#: qml/volumeosd/VolumeOSD.qml:114
 #, kde-format
 msgid "Unmute"
 msgstr "Poista vaimennus"
 
-#: qml/volumeosd/VolumeOSD.qml:115 qml/volumeosd/VolumeOSDProvider.qml:65
+#: qml/volumeosd/VolumeOSD.qml:114 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Vaimenna"
 
-#: qml/volumeosd/VolumeOSD.qml:139
+#: qml/volumeosd/VolumeOSD.qml:138
 #, kde-format
 msgid "100%"
 msgstr "100 %"
 
-#: qml/volumeosd/VolumeOSD.qml:149
+#: qml/volumeosd/VolumeOSD.qml:148
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1 %"
 
-#: qml/volumeosd/VolumeOSD.qml:169
+#: qml/volumeosd/VolumeOSD.qml:168
 #, kde-format
 msgid "Open audio settings"
 msgstr "Avaa ääniasetukset"
 
-#: qml/volumeosd/VolumeOSD.qml:182
+#: qml/volumeosd/VolumeOSD.qml:181
 #, kde-format
 msgid "Audio Settings"
 msgstr "Ääniasetukset"
 
-#: qml/volumeosd/VolumeOSD.qml:189
+#: qml/volumeosd/VolumeOSD.qml:188
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Näytä tai piilota äänivirrat"
@@ -179,7 +179,7 @@ msgstr "Lisää äänenvoimakkuutta"
 msgid "Decrease Volume"
 msgstr "Vähennä äänenvoimakkuutta"
 
-#: qml/widgets/krunner/KRunnerWidget.qml:182
+#: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"
 msgstr "Etsi…"
@@ -249,7 +249,7 @@ msgstr "Näytä %1 lisää"
 msgid "Clear All Notifications"
 msgstr "Tyhjennä kaikki ilmoitukset"
 
-#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#: qml/widgets/notifications/ThumbnailStrip.qml:135
 #, kde-format
 msgid "More Options…"
 msgstr "Lisää valintoja…"
