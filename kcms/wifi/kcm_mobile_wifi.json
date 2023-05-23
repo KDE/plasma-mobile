@@ -24,6 +24,7 @@
         "Description[tr]": "Kablosuz ağ ayarı",
         "Description[uk]": "Налаштовування бездротової мережі",
         "Description[x-test]": "xxWireless network settingxx",
+        "Description[zh_CN]": "无线网络设置",
         "FormFactors": [
             "handset",
             "tablet",

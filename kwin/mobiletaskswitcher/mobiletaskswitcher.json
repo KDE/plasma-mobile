@@ -21,6 +21,7 @@
         "Description[tr]": "Bir taşınabilir arayüzden çalışan görevler arasında geçiş yapmanıza izin verir.",
         "Description[uk]": "Надає вам змогу перемикати запущені завдання за допомогою інтерфейсу для мобільних пристроїв.",
         "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
+        "Description[zh_CN]": "允许您使用移动界面在正在运行的任务之间切换。",
         "EnabledByDefault": true,
         "Id": "mobiletaskswitcher",
         "License": "GPL",
@@ -43,7 +44,8 @@
         "Name[sl]": "Preklopnik mobilnih opravil",
         "Name[tr]": "Taşınabilir Görev Değiştirici",
         "Name[uk]": "Мобільний перемикач завдань",
-        "Name[x-test]": "xxMobile Task Switcherxx"
+        "Name[x-test]": "xxMobile Task Switcherxx",
+        "Name[zh_CN]": "移动任务切换"
     },
     "X-KWin-Border-Activate": true
 }

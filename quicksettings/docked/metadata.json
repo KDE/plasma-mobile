@@ -56,6 +56,7 @@
         "Description[tr]": "Plasma Cep için rıhtımlanmış kip aç/kapat tez ayarı",
         "Description[uk]": "Швидке встановлення швартованого режиму для Мобільної Плазми",
         "Description[x-test]": "xxQuick setting to toggle docked mode for Plasma Mobilexx",
+        "Description[zh_CN]": "快速设置以切换 Plasma Mobile 的停靠模式",
         "Icon": "preferences-desktop-display-randr",
         "Id": "org.kde.plasma.quicksetting.docked",
         "License": "GPL",
@@ -79,6 +80,7 @@
         "Name[tr]": "Rıhtımlanmış Kip",
         "Name[uk]": "Швартований режим",
         "Name[x-test]": "xxDocked Modexx",
+        "Name[zh_CN]": "停靠模式",
         "Version": "0.1",
         "Website": "https://kde.org"
     }

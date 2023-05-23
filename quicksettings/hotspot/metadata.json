@@ -48,6 +48,7 @@
         "Description[tr]": "Plasm Mobile erişim noktası tez ayarı",
         "Description[uk]": "Швидке налаштовування точки доступу для Мобільної Плазми",
         "Description[x-test]": "xxHotspot quick setting for Plasma Mobilexx",
+        "Description[zh_CN]": "Plasma Mobile 的热点快捷设置",
         "Icon": "network-wireless-hotspot",
         "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
@@ -74,6 +75,7 @@
         "Name[tr]": "Erişim Noktası",
         "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
+        "Name[zh_CN]": "无线热点",
         "Version": "0.1",
         "Website": "https://kde.org"
     }

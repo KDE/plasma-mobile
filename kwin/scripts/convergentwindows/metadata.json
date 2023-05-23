@@ -47,6 +47,7 @@
         "Description[tr]": "Pencere dekorasyonlarını kaldırır ve pencereleri yalnızca ilk ekranda kaplatır.",
         "Description[uk]": "Вилучає оздоблення вікон та максимізує вікна лише на першому екрані.",
         "Description[x-test]": "xxRemoves window decorations and maximizes windows on the first screen only.xx",
+        "Description[zh_CN]": "删除窗口装饰并最大化第一个屏幕上的窗口。",
         "Icon": "preferences-system-windows",
         "Id": "convergentwindows",
         "Licsense": "LGPL-2.1-or-later",
@@ -69,6 +70,7 @@
         "Name[tr]": "Yakınsak Pencereler",
         "Name[uk]": "Збіжні вікна",
         "Name[x-test]": "xxConvergent Windowsxx",
+        "Name[zh_CN]": "聚合窗口",
         "Version": "1.0",
         "Website": "https://invent.kde.org/plasma/plasma-mobile"
     },

@@ -23,6 +23,7 @@
         "Description[tr]": "Hücresel ağların yönetimi",
         "Description[uk]": "Керування стільниковими мережами",
         "Description[x-test]": "xxManagement of cellular networksxx",
+        "Description[zh_CN]": "管理移动网络",
         "FormFactors": [
             "handset",
             "tablet",
@@ -51,7 +52,8 @@
         "Name[sl]": "Celično omrežje",
         "Name[tr]": "Hücresel Ağ",
         "Name[uk]": "Стільникова мережа",
-        "Name[x-test]": "xxCellular Networkxx"
+        "Name[x-test]": "xxCellular Networkxx",
+        "Name[zh_CN]": "移动网络"
     },
     "X-KDE-Keywords": "mobile,data,network",
     "X-KDE-Keywords[az]": "mobile,data,network,verilənlər,şəbəkə,mobil",

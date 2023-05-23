@@ -21,6 +21,7 @@
         "Description[tr]": "Oturum başlangıcı sırasında Plasma Cep başlangıç görevlerini çalıştır",
         "Description[uk]": "Запуск початкових завдань для Plasma Mobile під час запуску сеансу",
         "Description[x-test]": "xxRun initial tasks for Plasma Mobile during session startupxx",
+        "Description[zh_CN]": "会话启动时为 Plasma Mobile 运行初始任务",
         "Name": "Plasma Mobile Start",
         "Name[ca@valencia]": "Inici de Plasma Mobile",
         "Name[ca]": "Inici del Plasma Mobile",
@@ -43,7 +44,8 @@
         "Name[sl]": "Zagon Plasma Mobile",
         "Name[tr]": "Plasma Cep Başlangıç",
         "Name[uk]": "Запуск Plasma Mobile",
-        "Name[x-test]": "xxPlasma Mobile Startxx"
+        "Name[x-test]": "xxPlasma Mobile Startxx",
+        "Name[zh_CN]": "Plasma Mobile 启动程序"
     },
     "X-KDE-Kded-autoload": true,
     "X-KDE-Kded-phase": 1,

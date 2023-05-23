@@ -49,6 +49,7 @@
         "Description[tr]": "Wi-Fi Erişim Noktası",
         "Description[uk]": "Хот-спот Wi-Fi",
         "Description[x-test]": "xxWi-Fi Hotspotxx",
+        "Description[zh_CN]": "Wi-Fi 热点",
         "EnabledByDefault": true,
         "FormFactors": [
             "handset",
@@ -81,6 +82,7 @@
         "Name[tr]": "Erişim Noktası",
         "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
+        "Name[zh_CN]": "无线热点",
         "ServiceTypes": [
             "KCModule"
         ],

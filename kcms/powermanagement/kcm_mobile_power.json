@@ -23,6 +23,7 @@
         "Description[tr]": "Güç yönetimi ayarlarını yapılandır",
         "Description[uk]": "Налаштовування керування живленням",
         "Description[x-test]": "xxConfigure power management settingsxx",
+        "Description[zh_CN]": "配置电源管理设置。",
         "FormFactors": [
             "handset",
             "tablet",
@@ -51,7 +52,8 @@
         "Name[sl]": "Energija",
         "Name[tr]": "Enerji",
         "Name[uk]": "Живлення",
-        "Name[x-test]": "xxEnergyxx"
+        "Name[x-test]": "xxEnergyxx",
+        "Name[zh_CN]": "电量"
     },
     "X-KDE-Keywords": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",
     "X-KDE-Keywords[ast]": "videu,monitor,gráficos,dormir,dormición,bloquiar,bloquéu,curiapantalles,bloquiador de pantalla",
