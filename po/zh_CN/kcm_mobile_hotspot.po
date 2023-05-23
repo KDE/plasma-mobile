@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-08 02:08+0000\n"
-"PO-Revision-Date: 2023-02-24 12:43\n"
+"PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-trunk/messages/plasma-nm/kcm_mobile_hotspot.pot\n"
-"X-Crowdin-File-ID: 12220\n"
+"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_mobile_hotspot.pot\n"
+"X-Crowdin-File-ID: 43643\n"
 
 #: ui/main.qml:42
 #, kde-format
@@ -28,33 +28,11 @@ msgid "Whether the wireless hotspot is enabled."
 msgstr ""
 
 #: ui/main.qml:66
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "无线热点"
+msgstr ""
 
 #: ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "密码："
-
-#~ msgid "Enabled:"
-#~ msgstr "启用："
-
-#~ msgid "SSID:"
-#~ msgstr "SSID："
-
-#~ msgid "Save"
-#~ msgstr "保存"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "KDE 中国, csslayer, Tyson Tan"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "kde-china@kde.org, csslayer@kde.org, tysontan@tysontan.com"
-
-#~ msgid "Tobias Fella"
-#~ msgstr "Tobias Fella"
+msgstr ""
