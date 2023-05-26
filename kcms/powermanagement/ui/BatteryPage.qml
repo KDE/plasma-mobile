@@ -43,6 +43,7 @@ Kirigami.ScrollablePage {
         
         MobileForm.FormCard {
             Layout.fillWidth: true
+            visible: history.count > 1
             
             contentItem: ColumnLayout {
                 spacing: 0
