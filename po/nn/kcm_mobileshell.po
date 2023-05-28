@@ -80,7 +80,8 @@ msgstr "Ytinga kan vera betre om du slår dette av."
 msgid "Action Drawer"
 msgstr "Handlingsskuff"
 
-#: package/contents/ui/main.qml:124 package/contents/ui/QuickSettingsForm.qml:17
+#: package/contents/ui/main.qml:124
+#: package/contents/ui/QuickSettingsForm.qml:17
 #: package/contents/ui/QuickSettingsForm.qml:34
 #, kde-format
 msgid "Quick Settings"
