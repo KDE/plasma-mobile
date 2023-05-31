@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-05-31 03:09+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -58,128 +58,128 @@ msgstr "从不"
 msgid "Battery Information"
 msgstr "电池信息"
 
-#: ui/BatteryPage.qml:51
+#: ui/BatteryPage.qml:52
 #, kde-format
 msgid "Usage Graph"
 msgstr "电量使用情况图表"
 
-#: ui/BatteryPage.qml:99
+#: ui/BatteryPage.qml:100
 #, kde-format
 msgid "Information"
 msgstr "信息"
 
-#: ui/BatteryPage.qml:104
+#: ui/BatteryPage.qml:105
 #, kde-format
 msgid "Is Rechargeable"
 msgstr "可充电"
 
-#: ui/BatteryPage.qml:105
+#: ui/BatteryPage.qml:106
 #, kde-format
 msgid "Yes"
 msgstr "是"
 
-#: ui/BatteryPage.qml:105
+#: ui/BatteryPage.qml:106
 #, kde-format
 msgid "No"
 msgstr "否"
 
-#: ui/BatteryPage.qml:112
+#: ui/BatteryPage.qml:113
 #, kde-format
 msgid "Charge State"
 msgstr "电量状态"
 
-#: ui/BatteryPage.qml:115
+#: ui/BatteryPage.qml:116
 #, kde-format
 msgid "Not charging"
 msgstr "不在充电"
 
-#: ui/BatteryPage.qml:116
+#: ui/BatteryPage.qml:117
 #, kde-format
 msgid "Charging"
 msgstr "正在充电"
 
-#: ui/BatteryPage.qml:117
+#: ui/BatteryPage.qml:118
 #, kde-format
 msgid "Discharging"
 msgstr "正在放电"
 
-#: ui/BatteryPage.qml:118
+#: ui/BatteryPage.qml:119
 #, kde-format
 msgid "Fully charged"
 msgstr "完全充满"
 
-#: ui/BatteryPage.qml:119
+#: ui/BatteryPage.qml:120
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
 
-#: ui/BatteryPage.qml:128
+#: ui/BatteryPage.qml:129
 #, kde-format
 msgid "Current Charge"
 msgstr "当前电量"
 
-#: ui/BatteryPage.qml:129 ui/BatteryPage.qml:137
+#: ui/BatteryPage.qml:130 ui/BatteryPage.qml:138
 #, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
 msgstr ""
 
-#: ui/BatteryPage.qml:136
+#: ui/BatteryPage.qml:137
 #, kde-format
 msgid "Health"
 msgstr "健康水平"
 
-#: ui/BatteryPage.qml:144
+#: ui/BatteryPage.qml:145
 #, kde-format
 msgid "Vendor"
 msgstr "厂商"
 
-#: ui/BatteryPage.qml:152
+#: ui/BatteryPage.qml:153
 #, kde-format
 msgid "Model"
 msgstr "型号"
 
-#: ui/BatteryPage.qml:160
+#: ui/BatteryPage.qml:161
 #, kde-format
 msgid "Serial Number"
 msgstr "序列号"
 
-#: ui/BatteryPage.qml:168
+#: ui/BatteryPage.qml:169
 #, kde-format
 msgid "Technology"
 msgstr "技术"
 
-#: ui/BatteryPage.qml:171
+#: ui/BatteryPage.qml:172
 #, kde-format
 msgid "Lithium ion"
 msgstr "锂离子"
 
-#: ui/BatteryPage.qml:172
+#: ui/BatteryPage.qml:173
 #, kde-format
 msgid "Lithium polymer"
 msgstr "锂聚合物"
 
-#: ui/BatteryPage.qml:173
+#: ui/BatteryPage.qml:174
 #, kde-format
 msgid "Lithium iron phosphate"
 msgstr "磷酸铁锂"
 
-#: ui/BatteryPage.qml:174
+#: ui/BatteryPage.qml:175
 #, kde-format
 msgid "Lead acid"
 msgstr "铅酸"
 
-#: ui/BatteryPage.qml:175
+#: ui/BatteryPage.qml:176
 #, kde-format
 msgid "Nickel cadmium"
 msgstr "镍镉"
 
-#: ui/BatteryPage.qml:176
+#: ui/BatteryPage.qml:177
 #, kde-format
 msgid "Nickel metal hydride"
 msgstr "镍氢"
 
-#: ui/BatteryPage.qml:177
+#: ui/BatteryPage.qml:178
 #, kde-format
 msgid "Unknown technology"
 msgstr "未知技术"

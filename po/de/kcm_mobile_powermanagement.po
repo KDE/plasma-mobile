@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-05-31 03:09+0000\n"
 "PO-Revision-Date: 2023-04-26 20:25+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -58,128 +58,128 @@ msgstr "Nie"
 msgid "Battery Information"
 msgstr "Akkuinformationen"
 
-#: ui/BatteryPage.qml:51
+#: ui/BatteryPage.qml:52
 #, kde-format
 msgid "Usage Graph"
 msgstr "Verwendungsstatistiken"
 
-#: ui/BatteryPage.qml:99
+#: ui/BatteryPage.qml:100
 #, kde-format
 msgid "Information"
 msgstr "Informationen"
 
-#: ui/BatteryPage.qml:104
+#: ui/BatteryPage.qml:105
 #, kde-format
 msgid "Is Rechargeable"
 msgstr "Ist wiederaufladbar"
 
-#: ui/BatteryPage.qml:105
+#: ui/BatteryPage.qml:106
 #, kde-format
 msgid "Yes"
 msgstr "Ja"
 
-#: ui/BatteryPage.qml:105
+#: ui/BatteryPage.qml:106
 #, kde-format
 msgid "No"
 msgstr "Nein"
 
-#: ui/BatteryPage.qml:112
+#: ui/BatteryPage.qml:113
 #, kde-format
 msgid "Charge State"
 msgstr "Ladestatus"
 
-#: ui/BatteryPage.qml:115
+#: ui/BatteryPage.qml:116
 #, kde-format
 msgid "Not charging"
 msgstr "Wird nicht geladen"
 
-#: ui/BatteryPage.qml:116
+#: ui/BatteryPage.qml:117
 #, kde-format
 msgid "Charging"
 msgstr "Wird geladen"
 
-#: ui/BatteryPage.qml:117
+#: ui/BatteryPage.qml:118
 #, kde-format
 msgid "Discharging"
 msgstr "Wird entladen"
 
-#: ui/BatteryPage.qml:118
+#: ui/BatteryPage.qml:119
 #, kde-format
 msgid "Fully charged"
 msgstr "Vollständig geladen"
 
-#: ui/BatteryPage.qml:119
+#: ui/BatteryPage.qml:120
 #, kde-format
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: ui/BatteryPage.qml:128
+#: ui/BatteryPage.qml:129
 #, kde-format
 msgid "Current Charge"
 msgstr "Aktueller Ladezustand"
 
-#: ui/BatteryPage.qml:129 ui/BatteryPage.qml:137
+#: ui/BatteryPage.qml:130 ui/BatteryPage.qml:138
 #, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: ui/BatteryPage.qml:136
+#: ui/BatteryPage.qml:137
 #, kde-format
 msgid "Health"
 msgstr "Alterungszustand"
 
-#: ui/BatteryPage.qml:144
+#: ui/BatteryPage.qml:145
 #, kde-format
 msgid "Vendor"
 msgstr "Hersteller"
 
-#: ui/BatteryPage.qml:152
+#: ui/BatteryPage.qml:153
 #, kde-format
 msgid "Model"
 msgstr "Modell"
 
-#: ui/BatteryPage.qml:160
+#: ui/BatteryPage.qml:161
 #, kde-format
 msgid "Serial Number"
 msgstr "Seriennummer"
 
-#: ui/BatteryPage.qml:168
+#: ui/BatteryPage.qml:169
 #, kde-format
 msgid "Technology"
 msgstr "Technologie"
 
-#: ui/BatteryPage.qml:171
+#: ui/BatteryPage.qml:172
 #, kde-format
 msgid "Lithium ion"
 msgstr "Lithium-Ionen"
 
-#: ui/BatteryPage.qml:172
+#: ui/BatteryPage.qml:173
 #, kde-format
 msgid "Lithium polymer"
 msgstr "Lithium-Polymer"
 
-#: ui/BatteryPage.qml:173
+#: ui/BatteryPage.qml:174
 #, kde-format
 msgid "Lithium iron phosphate"
 msgstr "Lithium-Eisen-Phosphat"
 
-#: ui/BatteryPage.qml:174
+#: ui/BatteryPage.qml:175
 #, kde-format
 msgid "Lead acid"
 msgstr "Bleisäure"
 
-#: ui/BatteryPage.qml:175
+#: ui/BatteryPage.qml:176
 #, kde-format
 msgid "Nickel cadmium"
 msgstr "Nickel-Cadmium"
 
-#: ui/BatteryPage.qml:176
+#: ui/BatteryPage.qml:177
 #, kde-format
 msgid "Nickel metal hydride"
 msgstr "Nickel-Metall-Hybrid"
 
-#: ui/BatteryPage.qml:177
+#: ui/BatteryPage.qml:178
 #, kde-format
 msgid "Unknown technology"
 msgstr "Unbekannte Technologie"
