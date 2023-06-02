@@ -45,7 +45,7 @@ ecm_setup_version(${PROJECT_VERSION}
     VERSION_HEADER ${CMAKE_CURRENT_BINARY_DIR}/version.h
 )
 
-find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
+find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Qml
     Quick
