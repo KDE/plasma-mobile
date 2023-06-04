@@ -74,7 +74,7 @@ SimpleKCM {
                 MobileForm.FormTextFieldDelegate {
                     label: i18n("Hotspot Password")
                     enabled: !hotspotToggle.checked
-                    echoMode: MobileForm.FormTextFieldDelegate.Password
+                    echoMode: TextInput.Password
                     text: PlasmaNM.Configuration.hotspotPassword
                     onTextChanged: PlasmaNM.Configuration.hotspotPassword = text
                 }
