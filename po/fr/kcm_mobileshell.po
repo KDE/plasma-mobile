@@ -6,7 +6,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-08 02:08+0000\n"
 "PO-Revision-Date: 2023-03-15 21:01+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -119,7 +119,7 @@ msgstr "Mode à l'ouverture à partir du coté droit supérieur."
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
-"Personnaliser l’ordre des configurations rapides dans le panneau déroulant "
+"Personnaliser l'ordre des configurations rapides dans le panneau déroulant "
 "et les masquer."
 
 #: ui/QuickSettingsForm.qml:137
@@ -135,7 +135,7 @@ msgstr "Ré-activer la configuration rapide précédemment désactivée"
 #: ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "Définit s’il faut activer ou non les vibrations dans le shell."
+msgstr "Définit s'il faut activer ou non les vibrations dans le shell."
 
 #: ui/VibrationForm.qml:49
 #, kde-format

@@ -5,7 +5,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-04-02 02:08+0000\n"
 "PO-Revision-Date: 2023-04-05 08:33+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "xavier.besnard@neuf.fr"
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
 msgstr ""
-"Ouvre l’assistant de démarrage initial sans modification de la configuration"
+"Ouvre l'assistant de démarrage initial sans modification de la configuration"
 
 #: main.cpp:52
 #, kde-format
