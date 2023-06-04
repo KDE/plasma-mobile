@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-27 22:01+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-03-15 21:01+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -121,12 +121,12 @@ msgstr "Mode à l'ouverture à partir du coté droit supérieur."
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
 msgstr ""
-"Personnaliser l’ordre de la configuration rapide dans le panneau déroulant."
+"Personnaliser l'ordre de la configuration rapide dans le panneau déroulant."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "Définit s’il faut activer ou non les vibrations dans le shell."
+msgstr "Définit s'il faut activer ou non les vibrations dans le shell."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
