@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.3 as Controls
 
 import org.kde.kirigami 2.10 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.kcmutils
 import org.kde.timesettings 1.0
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 

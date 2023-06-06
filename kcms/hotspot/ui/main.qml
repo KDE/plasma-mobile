@@ -8,7 +8,7 @@ import QtQuick.Controls as Controls
 
 import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.kirigami as Kirigami
-import org.kde.kcm
+import org.kde.kcmutils
 import org.kde.kirigamiaddons.labs.mobileform as MobileForm
 
 SimpleKCM {

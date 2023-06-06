@@ -12,7 +12,7 @@ import org.kde.plasma.configuration 2.0
 
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 import org.kde.kquickcontrolsaddons 2.0 as Addons
-import org.kde.kcm 1.1 as KCM
+import org.kde.kcmutils as KCM
 
 Controls.Drawer {
     id: imageWallpaperDrawer

@@ -9,7 +9,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.2 as Controls
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami 2.12 as Kirigami
-import org.kde.kcm 1.2
+import org.kde.kcmutils
 
 ScrollViewKCM {
     id: main

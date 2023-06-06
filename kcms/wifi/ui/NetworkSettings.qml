@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.2 as Controls
 import org.kde.kirigami 2.3 as Kirigami
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
-import org.kde.kcm 1.1
+import org.kde.kcmutils
 
 SimpleKCM {
     title: path ?  wirelessSettings["ssid"] : i18n("Add new Connection")

@@ -9,7 +9,7 @@ import QtQuick.Controls 2.12 as Controls
 
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami 2.19 as Kirigami
-import org.kde.kcm 1.3 as KCM
+import org.kde.kcmutils as KCM
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 import cellularnetworkkcm 1.0
