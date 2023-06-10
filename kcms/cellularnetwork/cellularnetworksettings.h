@@ -68,7 +68,7 @@ class CellularNetworkSettings : public KQuickConfigModule
     Q_PROPERTY(QList<InlineMessage *> messages READ messages NOTIFY messagesChanged)
 
 public:
-    CellularNetworkSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    CellularNetworkSettings(QObject *parent, const KPluginMetaData &metaData);
 
     static CellularNetworkSettings *instance();
 

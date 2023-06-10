@@ -24,7 +24,7 @@ class Info : public KQuickConfigModule
     HardwareInfo *hardwareInfo() const;
 
 public:
-    Info(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    Info(QObject *parent, const KPluginMetaData &metaData);
 
     Q_INVOKABLE void copyInfoToClipboard() const;
 

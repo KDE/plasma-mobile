@@ -14,8 +14,7 @@ class KCMMobileShell : public KQuickManagedConfigModule
     Q_OBJECT
 
 public:
-    KCMMobileShell(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
-    virtual ~KCMMobileShell() override = default;
+    KCMMobileShell(QObject *parent, const KPluginMetaData &data);
 
 Q_SIGNALS:
     void navigationPanelEnabledChanged();

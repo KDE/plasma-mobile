@@ -25,12 +25,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(WifiSettings, "kcm_mobile_wifi.json")
 
-WifiSettings::WifiSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
-{
-}
-
-WifiSettings::~WifiSettings()
+WifiSettings::WifiSettings(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
 {
 }
 

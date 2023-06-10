@@ -45,8 +45,8 @@ const QMap<int, qreal> idxToMinutes = {
     {NEVER, 0},
 };
 
-MobilePower::MobilePower(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
+MobilePower::MobilePower(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
     , m_batteries{new BatteryModel(this)}
     , m_profilesConfig{KSharedConfig::openConfig("powermanagementprofilesrc", KConfig::SimpleConfig | KConfig::CascadeConfig)}
 {
@@ -57,8 +57,6 @@ MobilePower::MobilePower(QObject *parent, const KPluginMetaData &metaData, const
     setButtons(KQuickConfigModule::NoAdditionalButton);
     load();
 }
-
-MobilePower::~MobilePower() = default;
 
 // contents of powermanagementprofilesrc
 //

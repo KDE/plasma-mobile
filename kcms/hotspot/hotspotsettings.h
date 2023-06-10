@@ -13,8 +13,7 @@ class HotspotSettings : public KQuickConfigModule
 {
     Q_OBJECT
 public:
-    HotspotSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-    virtual ~HotspotSettings() override;
+    HotspotSettings(QObject *parent, const KPluginMetaData &metaData);
 };
 
 #endif // HOTSPOTSETTINGS_H

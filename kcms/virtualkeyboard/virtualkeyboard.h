@@ -28,7 +28,7 @@ class VirtualKeyboard : public KQuickConfigModule
     Q_PROPERTY(bool vibrateFeedback MEMBER m_vibrateFeedback WRITE setVibrateFeedback NOTIFY vibrateFeedbackChanged)
 
 public:
-    VirtualKeyboard(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    VirtualKeyboard(QObject *parent, const KPluginMetaData &metaData);
 
     void setSpellCheck(bool enabled);
     void setAutoCapitalize(bool enabled);

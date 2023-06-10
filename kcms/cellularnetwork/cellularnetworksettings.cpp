@@ -17,8 +17,8 @@ K_PLUGIN_CLASS_WITH_JSON(CellularNetworkSettings, "kcm_cellular_network.json")
 
 CellularNetworkSettings *CellularNetworkSettings::staticInst = nullptr;
 
-CellularNetworkSettings::CellularNetworkSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
+CellularNetworkSettings::CellularNetworkSettings(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
     , m_modemList{}
     , m_simList{}
 {

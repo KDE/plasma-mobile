@@ -48,14 +48,7 @@ class TimeSettings : public KQuickConfigModule
     Q_PROPERTY(QString errorString READ errorString NOTIFY errorStringChanged)
 
 public:
-    /**
-     * @name Settings Module Constructor
-     *
-     * @arg parent The parent object
-     * @arg list Arguments, currently unused
-     */
-    TimeSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-    ~TimeSettings() override;
+    TimeSettings(QObject *parent, const KPluginMetaData &metaData);
 
     QString currentTimeText();
     QTime currentTime() const;

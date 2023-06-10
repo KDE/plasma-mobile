@@ -9,8 +9,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "kcm_mobileshell.json")
 
-KCMMobileShell::KCMMobileShell(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
-    : KQuickManagedConfigModule(parent, data, args)
+KCMMobileShell::KCMMobileShell(QObject *parent, const KPluginMetaData &data)
+    : KQuickManagedConfigModule(parent, data)
 {
     setButtons({});
 }

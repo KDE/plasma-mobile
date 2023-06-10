@@ -11,12 +11,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(HotspotSettings, "kcm_mobile_hotspot.json")
 
-HotspotSettings::HotspotSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
-{
-}
-
-HotspotSettings::~HotspotSettings()
+HotspotSettings::HotspotSettings(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
 {
 }
 

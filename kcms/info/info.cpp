@@ -13,8 +13,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(Info, "kcm_mobile_info.json")
 
-Info::Info(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
+Info::Info(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
     , m_distroInfo(new DistroInfo(this))
     , m_softwareInfo(new SoftwareInfo(this))
     , m_hardwareInfo(new HardwareInfo(this))

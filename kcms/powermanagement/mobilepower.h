@@ -18,8 +18,7 @@ class MobilePower : public KQuickConfigModule
     Q_PROPERTY(int suspendSessionIdx READ suspendSessionIdx WRITE setSuspendSessionIdx NOTIFY suspendSessionIdxChanged)
 
 public:
-    MobilePower(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
-    ~MobilePower();
+    MobilePower(QObject *parent, const KPluginMetaData &metaData);
 
     Q_INVOKABLE QStringList timeOptions() const;
 

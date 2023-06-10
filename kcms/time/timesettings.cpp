@@ -31,10 +31,10 @@
 #define FORMAT24H "HH:mm:ss"
 #define FORMAT12H "h:mm:ss ap"
 
-K_PLUGIN_FACTORY_WITH_JSON(TimeSettingsFactory, "kcm_mobile_time.json", registerPlugin<TimeSettings>();)
+K_PLUGIN_CLASS_WITH_JSON(TimeSettings, "kcm_mobile_time.json")
 
-TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KQuickConfigModule(parent, metaData, args)
+TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData)
+    : KQuickConfigModule(parent, metaData)
     , m_useNtp(true)
 {
     qDebug() << "time settings init";
@@ -49,10 +49,6 @@ TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData, con
     initSettings();
     initTimeZones();
     qDebug() << "TimeSettings module loaded.";
-}
-
-TimeSettings::~TimeSettings()
-{
 }
 
 void TimeSettings::initTimeZones()
