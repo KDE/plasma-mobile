@@ -3,16 +3,30 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "kcm.h"
-
 #include <KPluginFactory>
 
-K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "kcm_mobileshell.json")
+#include <KConfigGroup>
+#include <KQuickManagedConfigModule>
+#include <KSharedConfig>
 
-KCMMobileShell::KCMMobileShell(QObject *parent, const KPluginMetaData &data)
-    : KQuickManagedConfigModule(parent, data)
+class KCMMobileShell : public KQuickManagedConfigModule
 {
-    setButtons({});
-}
+    Q_OBJECT
+
+public:
+    KCMMobileShell(QObject *parent, const KPluginMetaData &data)
+        : KQuickManagedConfigModule(parent, data)
+    {
+        setButtons({});
+    }
+
+Q_SIGNALS:
+    void navigationPanelEnabledChanged();
+
+private:
+    KSharedConfig::Ptr m_config;
+};
+
+K_PLUGIN_CLASS_WITH_JSON(KCMMobileShell, "kcm_mobileshell.json")
 
 #include "kcm.moc"
