@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-06-12 02:34+0000\n"
 "PO-Revision-Date: 2022-07-31 09:06+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.03.70\n"
 
-#: timesettings.cpp:147
+#: timesettings.cpp:143
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Nie można zmienić ustawień NTP"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Nie można ustawić bieżącego czasu"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:182
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nie można ustawić strefy czasowej"

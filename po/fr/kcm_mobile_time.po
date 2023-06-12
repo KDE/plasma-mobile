@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-06-12 02:34+0000\n"
 "PO-Revision-Date: 2022-07-08 10:16+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -14,17 +14,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: timesettings.cpp:147
+#: timesettings.cpp:143
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Impossible de modifier les paramètres « NTP »"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Impossible de définir l'heure actuelle"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:182
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Impossible de définir un fuseau horaire"

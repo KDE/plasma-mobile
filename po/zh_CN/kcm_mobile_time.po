@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-06-12 02:34+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,17 +17,17 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_mobile_time.pot\n"
 "X-Crowdin-File-ID: 43759\n"
 
-#: timesettings.cpp:147
+#: timesettings.cpp:143
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "无法修改 NTP 设置"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
 msgstr "无法设置当前时间"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:182
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "无法设置时区"

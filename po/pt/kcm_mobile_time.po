@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgeography\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-06-12 02:34+0000\n"
 "PO-Revision-Date: 2022-07-07 11:14+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -765,17 +765,17 @@ msgstr ""
 "X-POFile-SpellExtra: Set Out Nov Sebastian Kügler NTP Bougainville\n"
 "X-POFile-SpellExtra: Srednekolymsk\n"
 
-#: timesettings.cpp:147
+#: timesettings.cpp:143
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Não é possível mudar a configuração do NTP"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Não é possível ajustar a hora actual"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:182
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Não é possível mudar o fuso-horário"

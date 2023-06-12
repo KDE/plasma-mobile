@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-06-12 02:34+0000\n"
 "PO-Revision-Date: 2021-08-30 17:56+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -16,17 +16,17 @@ msgstr ""
 "X-Generator: Lokalize 21.08.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: timesettings.cpp:147
+#: timesettings.cpp:143
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "Nemôžem zmeniť NTP nastavenia"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Nepodarilo sa nastaviť aktuálny čas"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:182
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nepodarilo sa nastaviť časové pásmo"
