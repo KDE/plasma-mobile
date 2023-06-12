@@ -14,31 +14,13 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.halcyon as Halcyon
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
-MobileShell.HomeScreen {
+ContainmentItem {
     id: root
-
-    onResetHomeScreenPosition: {
-        homescreen.triggerHomescreen();
-    }
-    
-    onHomeTriggered: {
-        search.close();
-    }
     
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
-        Halcyon.PinnedModel.applet = plasmoid.nativeInterface;
+        Halcyon.PinnedModel.applet = Plasmoid.nativeInterface;
         forceActiveFocus();
-    }
-    
-    Rectangle {
-        id: darkenBackground
-        color: root.overlayShown ? 'transparent' : (homescreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
-        anchors.fill: parent
-        z: -1
-        Behavior on color { 
-            ColorAnimation { duration: PlasmaCore.Units.longDuration } 
-        }
     }
     
     Plasmoid.onActivated: {
@@ -58,45 +40,68 @@ MobileShell.HomeScreen {
                 search.close();
             }
 
-            homescreen.page = 0;
+            halcyonHomeScreen.page = 0;
 
             WindowPlugin.WindowUtil.isShowingDesktop = true;
-        } else if (homescreen.page == 0) {
-            homescreen.page = 1;
+        } else if (halcyonHomeScreen.page == 0) {
+            halcyonHomeScreen.page = 1;
         } else {
             WindowPlugin.WindowUtil.isShowingDesktop = false;
-            homescreen.page = 0;
+            halcyonHomeScreen.page = 0;
         }
     }
-    
-    // homescreen component
-    contentItem: Item {
-        HomeScreen {
-            id: homescreen
-            anchors.fill: parent
-            
-            topMargin: root.topMargin
-            bottomMargin: root.bottomMargin
-            leftMargin: root.leftMargin
-            rightMargin: root.rightMargin
 
-            // make the homescreen not interactable when task switcher or startup feedback is on
-            interactive: !root.overlayShown
-            searchWidget: search
+    Rectangle {
+        id: darkenBackground
+        color: homeScreen.overlayShown ? 'transparent' : (halcyonHomeScreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
+        anchors.fill: parent
+        z: -1
+        Behavior on color {
+            ColorAnimation { duration: PlasmaCore.Units.longDuration }
         }
-        
-        // search component
-        MobileShell.KRunnerWidget {
-            id: search
-            anchors.fill: parent
-            visible: openFactor > 0
+    }
 
-            onActionTriggered: search.close()
-            
-            topMargin: root.topMargin
-            bottomMargin: root.bottomMargin
-            leftMargin: root.leftMargin
-            rightMargin: root.rightMargin
+    MobileShell.HomeScreen {
+        id: homeScreen
+        anchors.fill: parent
+
+        onResetHomeScreenPosition: {
+            halcyonHomeScreen.triggerHomescreen();
+        }
+
+        onHomeTriggered: {
+            search.close();
+        }
+
+        // homescreen component
+        contentItem: Item {
+            HomeScreen {
+                id: halcyonHomeScreen
+                anchors.fill: parent
+
+                topMargin: homeScreen.topMargin
+                bottomMargin: homeScreen.bottomMargin
+                leftMargin: homeScreen.leftMargin
+                rightMargin: homeScreen.rightMargin
+
+                // make the homescreen not interactable when task switcher or startup feedback is on
+                interactive: !homeScreen.overlayShown
+                searchWidget: search
+            }
+
+            // search component
+            MobileShell.KRunnerWidget {
+                id: search
+                anchors.fill: parent
+                visible: openFactor > 0
+
+                onActionTriggered: search.close()
+
+                topMargin: homeScreen.topMargin
+                bottomMargin: homeScreen.bottomMargin
+                leftMargin: homeScreen.leftMargin
+                rightMargin: homeScreen.rightMargin
+            }
         }
     }
 }

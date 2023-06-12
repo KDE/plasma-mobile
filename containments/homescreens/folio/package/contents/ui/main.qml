@@ -18,28 +18,16 @@ import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
-MobileShell.HomeScreen {
-    id: root
-    width: 640
-    height: 480
 
-    onResetHomeScreenPosition: {
-        homescreen.homeScreenState.animateGoToPageIndex(0, PlasmaCore.Units.longDuration);
-        homescreen.homeScreenState.closeAppDrawer();
-    }
-    
-    onHomeTriggered: {
-        searchWidget.close();
-    }
-    
-    property bool componentComplete: false
-    
+ContainmentItem {
+    id: root
+
     Component.onCompleted: {
         // ensure the gestures work immediately on load
         forceActiveFocus();
     }
-    
-    Plasmoid.onActivated: {       
+
+    Plasmoid.onActivated: {
         // there's a couple of steps:
         // - minimize windows (only if we are in an app)
         // - open app drawer
@@ -54,70 +42,84 @@ MobileShell.HomeScreen {
             || MobileShellState.ShellDBusClient.isActionDrawerOpen
             || searchWidget.isOpen
         ) {
-            
+
             // Always close the search widget as well
             if (searchWidget.isOpen) {
                 searchWidget.close();
             }
-            
-        } else if (homescreen.homeScreenState.currentView === HomeScreenState.PageView) {
-            homescreen.homeScreenState.openAppDrawer();
+
+        } else if (folioHomeScreen.homeScreenState.currentView === HomeScreenState.PageView) {
+            folioHomeScreen.homeScreenState.openAppDrawer();
         } else {
-            homescreen.homeScreenState.closeAppDrawer();
+            folioHomeScreen.homeScreenState.closeAppDrawer();
         }
     }
-    
-    contentItem: Item {
-        // homescreen component
-        HomeScreen {
-            id: homescreen
-            anchors.fill: parent
 
-            topMargin: root.topMargin
-            bottomMargin: root.bottomMargin
-            leftMargin: root.leftMargin
-            rightMargin: root.rightMargin
+    MobileShell.HomeScreen {
+        id: homeScreen
 
-            opacity: (1 - searchWidget.openFactor)
+        onResetHomeScreenPosition: {
+            folioHomeScreen.homeScreenState.animateGoToPageIndex(0, PlasmaCore.Units.longDuration);
+            folioHomeScreen.homeScreenState.closeAppDrawer();
+        }
 
-            // make the homescreen not interactable when task switcher or startup feedback is on
-            interactive: !root.overlayShown
+        onHomeTriggered: {
+            searchWidget.close();
         }
-        
-        // search component
-        MobileShell.KRunnerWidget {
-            id: searchWidget
-            anchors.fill: parent
-            
-            visible: openFactor > 0
 
-            topMargin: root.topMargin
-            bottomMargin: root.bottomMargin
-            leftMargin: root.leftMargin
-            rightMargin: root.rightMargin
+        property bool componentComplete: false
+
+        contentItem: Item {
+            // homescreen component
+            HomeScreen {
+                id: folioHomeScreen
+                anchors.fill: parent
+
+                topMargin: homeScreen.topMargin
+                bottomMargin: homeScreen.bottomMargin
+                leftMargin: homeScreen.leftMargin
+                rightMargin: homeScreen.rightMargin
+
+                opacity: (1 - searchWidget.openFactor)
+
+                // make the homescreen not interactable when task switcher or startup feedback is on
+                interactive: !homeScreen.overlayShown
+            }
+
+            // search component
+            MobileShell.KRunnerWidget {
+                id: searchWidget
+                anchors.fill: parent
+
+                visible: openFactor > 0
+
+                topMargin: homeScreen.topMargin
+                bottomMargin: homeScreen.bottomMargin
+                leftMargin: homeScreen.leftMargin
+                rightMargin: homeScreen.rightMargin
+            }
         }
-    }
-    
-    Connections {
-        target: homescreen.homeScreenState
-        
-        function onSwipeDownGestureBegin() {
-            searchWidget.startGesture();
+
+        Connections {
+            target: folioHomeScreen.homeScreenState
+
+            function onSwipeDownGestureBegin() {
+                searchWidget.startGesture();
+            }
+            function onSwipeDownGestureEnd() {
+                searchWidget.endGesture();
+            }
+            function onSwipeDownGestureOffset(offset) {
+                searchWidget.updateGestureOffset(-offset);
+            }
         }
-        function onSwipeDownGestureEnd() {
-            searchWidget.endGesture();
-        }
-        function onSwipeDownGestureOffset(offset) {
-            searchWidget.updateGestureOffset(-offset);
-        }
-    }
-    
-    // listen to app launch errors
-    Connections {
-        target: Folio.ApplicationListModel
-        function onLaunchError(msg) {
-            MobileShellState.ShellDBusClient.closeAppLaunchAnimation()
+
+        // listen to app launch errors
+        Connections {
+            target: Folio.ApplicationListModel
+            function onLaunchError(msg) {
+                MobileShellState.ShellDBusClient.closeAppLaunchAnimation()
+            }
         }
     }
 }
-

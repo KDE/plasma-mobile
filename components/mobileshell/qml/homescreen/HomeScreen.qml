@@ -1,7 +1,5 @@
-/*
- * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- * SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Window
@@ -20,6 +18,7 @@ import "../components" as Components
  * The base homescreen component, implementing features that simplify
  * homescreen implementation.
  */
+
 Item {
     id: root
 
@@ -27,17 +26,17 @@ Item {
      * Emitted when an action is triggered to open the homescreen.
      */
     signal homeTriggered()
-    
+
     /**
      * Emitted when resetting the homescreen position is requested.
      */
     signal resetHomeScreenPosition()
-    
+
     /**
      * Emitted when moving the homescreen position is requested.
      */
     signal requestRelativeScroll(var pos)
-    
+
     /**
      * The visual item that is the homescreen.
      */
@@ -48,7 +47,7 @@ Item {
      * window.
      */
     readonly property bool overlayShown: startupFeedback.visible
-    
+
     /**
      * Margins for the homescreen, taking panels into account.
      */
@@ -58,15 +57,15 @@ Item {
     property real rightMargin
 
     function evaluateMargins() {
-        topMargin = plasmoid.availableScreenRect.y
+        topMargin = Plasmoid.availableScreenRect.y
         // add a specific check for the nav panel for now, since the gesture mode still technically has height
-        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (plasmoid.availableScreenRect.y + plasmoid.availableScreenRect.height) : 0;
-        leftMargin = plasmoid.availableScreenRect.x
-        rightMargin = root.width - (plasmoid.availableScreenRect.x + plasmoid.availableScreenRect.width)
+        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (Plasmoid.availableScreenRect.y + Plasmoid.availableScreenRect.height) : 0;
+        leftMargin = Plasmoid.availableScreenRect.x
+        rightMargin = root.width - (Plasmoid.availableScreenRect.x + Plasmoid.availableScreenRect.width)
     }
 
     Connections {
-        target: plasmoid
+        target: Plasmoid
 
         // avoid binding loops with root.height and root.width changing along with the availableScreenRect
         function onAvailableScreenRectChanged() {
@@ -78,12 +77,12 @@ Item {
 
     Connections {
         target: MobileShellState.ShellDBusClient
-        
+
         function onOpenHomeScreenRequested() {
             if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
-            
+
             resetHomeScreenPosition();
 
             WindowPlugin.WindowUtil.unsetAllMinimizedGeometries(root);
@@ -91,15 +90,15 @@ Item {
 
             root.homeTriggered();
         }
-        
+
         function onResetHomeScreenPositionRequested() {
             root.resetHomeScreenPosition();
         }
-        
+
         function onOpenAppLaunchAnimationRequested(splashIcon, title, x, y, sourceIconSize) {
             startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
         }
-        
+
         function onCloseAppLaunchAnimationRequested() {
             startupFeedback.close();
         }
@@ -133,18 +132,18 @@ Item {
         // determine the margins used
         evaluateMargins();
     }
-    
+
     // homescreen visual component
     Components.BaseItem {
         id: itemContainer
         anchors.fill: parent
-        
+
         // animations
         opacity: 0
         property real zoomScale: 1
-        
+
         readonly property real zoomScaleOut: 0.8
-        
+
         function zoomIn() {
             // don't use check animationsEnabled here, so we ensure the scale and opacity is always 1 when disabled
             scaleAnim.to = 1;
@@ -166,13 +165,13 @@ Item {
             zoomScale = zoomScaleOut;
             opacity = 0;
         }
-        
+
         NumberAnimation on opacity {
             id: opacityAnim
             duration: 300
             running: false
         }
-        
+
         NumberAnimation on zoomScale {
             id: scaleAnim
             duration: 600
@@ -196,15 +195,15 @@ Item {
                 itemContainer.evaluateAnimChange();
             }
         }
-        
-        transform: Scale { 
-            origin.x: itemContainer.width / 2; 
-            origin.y: itemContainer.height / 2; 
+
+        transform: Scale {
+            origin.x: itemContainer.width / 2;
+            origin.y: itemContainer.height / 2;
             xScale: itemContainer.zoomScale
             yScale: itemContainer.zoomScale
         }
     }
-    
+
     // start app animation component
     Components.StartupFeedback {
         id: startupFeedback
