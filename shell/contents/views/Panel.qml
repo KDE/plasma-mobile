@@ -4,10 +4,10 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 
 Rectangle {
     id: root
@@ -15,13 +15,26 @@ Rectangle {
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
     property Item containment
 
-    color: !containment || containment.backgroundHints == PlasmaCore.Types.NoBackground ? "transparent" : PlasmaCore.Theme.textColor
+    color: !containment || containment.plasmoid.backgroundHints == PlasmaCore.Types.NoBackground ? "transparent" : PlasmaCore.Theme.textColor
 
     onContainmentChanged: {
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
-        panel.backgroundHints = containment.backgroundHints;
+    }
+
+    Binding {
+        target: panel
+        property: "backgroundHints"
+        when: containment
+        value: {
+            if (!containment) {
+                return;
+            }
+
+            return containment.plasmoid.backgroundHints;
+        }
+        restoreMode: Binding.RestoreBinding
     }
 
     Component.onCompleted: {

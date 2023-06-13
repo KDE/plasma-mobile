@@ -1,18 +1,15 @@
-/*
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.3
-import QtQuick.Window 2.15
-import QtQml.Models 2.12
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Window
+import QtQml.Models
 
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.plasmoid
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
@@ -20,28 +17,24 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
-import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.taskmanager as TaskManager
+import org.kde.notificationmanager as NotificationManager
 
-Item {
+ContainmentItem {
     id: root
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingApp: WindowPlugin.WindowMaximizedTracker.showingWindow
     readonly property color backgroundColor: topPanel.colorScopeColor
 
-    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
-    
-    width: 480
-    height: PlasmaCore.Units.gridUnit
-
     // enforce thickness
     Binding {
-        target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
+        target: Plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
         property: "thickness"
         value: PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing
     }
-    
+
 //BEGIN API implementation
 
     Connections {
@@ -78,28 +71,28 @@ Item {
         // initialize the volume osd, and volume keys
         MobileShell.VolumeOSDProviderLoader.load();
     }
-    
+
     // top panel component
     MobileShell.StatusBar {
         id: topPanel
         anchors.fill: parent
-        
+
         showDropShadow: !root.showingApp
         colorGroup: root.showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
     }
-    
+
     // swiping area for swipe-down drawer
     MobileShell.ActionDrawerOpenSurface {
         id: swipeArea
         actionDrawer: drawer.actionDrawer
         anchors.fill: parent
     }
-    
+
     // swipe-down drawer component
     MobileShell.ActionDrawerWindow {
         id: drawer
-        
+
         actionDrawer.notificationSettings: NotificationManager.Settings {}
         actionDrawer.notificationModel: NotificationManager.Notifications {
             showExpired: true

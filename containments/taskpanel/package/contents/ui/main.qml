@@ -1,9 +1,6 @@
-/*
- *  SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *  SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2015 Marco Martin <mart@kde.org>
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
@@ -18,12 +15,9 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
-PlasmaCore.ColorScope {
+ContainmentItem {
     id: root
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
-
-    width: 480
-    height: PlasmaCore.Units.gridUnit * 2
 
     // toggle visibility of navigation bar (show, or use gestures only)
     Binding {
@@ -111,16 +105,20 @@ PlasmaCore.ColorScope {
     // only opaque if there are no maximized windows on this screen
     readonly property bool opaqueBar: WindowPlugin.WindowMaximizedTracker.showingWindow
 
-    // contrasting colour
-    colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
-
-    // load appropriate system navigation component
-    Loader {
-        id: navigationLoader
-        active: ShellSettings.Settings.navigationPanelEnabled
+    PlasmaCore.ColorScope {
         anchors.fill: parent
-        sourceComponent: NavigationPanelComponent {
-            opaqueBar: root.opaqueBar
+
+        // contrasting colour
+        colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+
+        // load appropriate system navigation component
+        Loader {
+            id: navigationLoader
+            active: ShellSettings.Settings.navigationPanelEnabled
+            anchors.fill: parent
+            sourceComponent: NavigationPanelComponent {
+                opaqueBar: root.opaqueBar
+            }
         }
     }
 }

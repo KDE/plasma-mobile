@@ -19,7 +19,7 @@ ContainmentItem {
     
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
-        Halcyon.PinnedModel.applet = Plasmoid.nativeInterface;
+        Halcyon.PinnedModel.applet = root.plasmoid;
         forceActiveFocus();
     }
     

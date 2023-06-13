@@ -60,7 +60,7 @@ MobileShell.NavigationPanel {
         iconSizeFactor: 0.75
         
         onTriggered: {
-            plasmoid.nativeInterface.triggerTaskSwitcher();
+            Plasmoid.triggerTaskSwitcher();
         }
     }
     
