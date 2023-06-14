@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-12 02:34+0000\n"
-"PO-Revision-Date: 2023-05-08 23:39+0200\n"
+"PO-Revision-Date: 2023-06-13 22:25+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #: timesettings.cpp:143
 #, kde-format
@@ -2995,7 +2995,7 @@ msgstr "24-Stunden-Format"
 #: ui/main.qml:63
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
-msgstr ""
+msgstr "Gibt an, ob Uhren das 24-Stunden-Format verwenden."
 
 #: ui/main.qml:74
 #, kde-format
@@ -3013,10 +3013,9 @@ msgid "Automatic Time Synchronization"
 msgstr "Automatischer Zeitabgleich"
 
 #: ui/main.qml:95
-#, fuzzy, kde-format
-#| msgid "Set time automatically:"
+#, kde-format
 msgid "Whether to set the time automatically."
-msgstr "Uhrzeit automatisch einstellen:"
+msgstr "Gibt an, ob die Uhrzeit automatisch eingestellt wird."
 
 #: ui/main.qml:112
 #, kde-format
