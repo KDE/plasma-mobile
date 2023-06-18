@@ -23,7 +23,8 @@
                 "Name[sl]": "Yari Polla",
                 "Name[tr]": "Yari Polla",
                 "Name[uk]": "Yari Polla",
-                "Name[x-test]": "xxYari Pollaxx"
+                "Name[x-test]": "xxYari Pollaxx",
+                "Name[zh_CN]": "Yari Polla"
             }
         ],
         "Description": "Hotspot quick setting for Plasma Mobile",

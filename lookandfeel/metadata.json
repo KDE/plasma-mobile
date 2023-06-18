@@ -52,6 +52,7 @@
         "Description[tr]": "Taşınabilir aygıtlar için Plasma",
         "Description[uk]": "Плазма для мобільних пристроїв",
         "Description[x-test]": "xxPlasma for mobile devicesxx",
+        "Description[zh_CN]": "针对手机设备设计的 Plasma 环境",
         "Id": "org.kde.breeze.mobile",
         "License": "GPLv2+",
         "Name": "Plasma Mobile Breeze",
@@ -75,6 +76,7 @@
         "Name[tr]": "Plasma Cep Esinti",
         "Name[uk]": "Breeze для мобільної Плазми",
         "Name[x-test]": "xxPlasma Mobile Breezexx",
+        "Name[zh_CN]": "Plasma Mobile Breeze 微风",
         "Version": "2.0",
         "Website": "https://www.kde.org"
     },

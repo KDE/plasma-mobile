@@ -82,6 +82,7 @@
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "WiFi",
         "Name[x-test]": "xxWiFixx",
+        "Name[zh_CN]": "WiFi",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
