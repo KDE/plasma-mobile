@@ -173,7 +173,7 @@ SimpleKCM {
         TimePicker {
             id: timePicker
             enabled: !ntpCheckBox.checked
-            twentyFour: twentyFourSwitch.checked
+            twentyFour: hourFormatSwitch.checked
 
             implicitWidth: width > Kirigami.Units.gridUnit * 15 ? width : Kirigami.Units.gridUnit * 15
 
