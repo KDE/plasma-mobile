@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2023-06-07 14:05-0300\n"
+"PO-Revision-Date: 2023-06-26 17:05-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -35,12 +35,12 @@ msgstr "Gravando..."
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Tap to start recording"
-msgstr ""
+msgstr "Toque para iniciar a gravação"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Screen is being captured…"
-msgstr ""
+msgstr "A tela está sendo capturada..."
 
 #: package/contents/ui/main.qml:29
 #, kde-format
@@ -50,9 +50,9 @@ msgstr "Aguarde…"
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording"
-msgstr ""
+msgstr "Nova gravação de tela"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording saved in %1"
-msgstr ""
+msgstr "Nova gravação de tela salva em %1"
