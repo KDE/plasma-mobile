@@ -14,7 +14,7 @@
 ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
     : QObject{parent}
 {
-    m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded5"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
+    m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded6"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
 }
 
 bool ScreenRotationUtil::screenRotation()
