@@ -27,7 +27,7 @@ KCM.ScrollViewKCM {
         model: KItemModel.KSortFilterProxyModel {
             sourceModel: kcm.languageModel
             sortRole: "name"
-            sortOrder: Qt.Ascending
+            sortOrder: Qt.AscendingOrder
         }
 
         delegate: Kirigami.AbstractListItem {
