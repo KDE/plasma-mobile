@@ -7,15 +7,16 @@
 import QtQuick 2.4
 import Qt5Compat.GraphicalEffects
 import org.kde.plasma.core 2.0 as PlasmaCore
- 
-PlasmaCore.SvgItem {
+import org.kde.ksvg 1.0 as KSvg
+
+KSvg.SvgItem {
     id: scrollIndicator
     
     anchors.verticalCenter: parent.verticalCenter
 
     z: 2
     opacity: 0
-    svg: PlasmaCore.Svg {
+    svg: KSvg.Svg {
         imagePath: "widgets/arrows"
         colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
     }

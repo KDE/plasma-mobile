@@ -10,6 +10,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.ksvg 1.0 as KSvg
 
 MobileForm.AbstractFormDelegate {
     topPadding: Kirigami.Units.smallSpacing
@@ -53,11 +54,11 @@ MobileForm.AbstractFormDelegate {
             Layout.preferredWidth: Kirigami.Units.gridUnit
             Layout.preferredHeight: Kirigami.Units.gridUnit
 
-            PlasmaCore.SvgItem {
+            KSvg.SvgItem {
                 id: connectionSvgIcon
                 elementId: mobileProxyModel.showSavedMode ? "network-wireless-connected-100" : ConnectionIcon
 
-                svg: PlasmaCore.Svg {
+                svg: KSvg.Svg {
                     multipleImages: true
                     imagePath: "icons/network"
                     colorGroup: PlasmaCore.ColorScope.colorGroup

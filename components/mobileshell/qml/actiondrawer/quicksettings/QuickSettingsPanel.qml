@@ -9,6 +9,7 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
 import org.kde.kirigami 2.12 as Kirigami
+import org.kde.ksvg 1.0 as KSvg
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 
@@ -38,7 +39,7 @@ Components.BaseItem {
     rightPadding: PlasmaCore.Units.smallSpacing * 4
     bottomPadding: PlasmaCore.Units.smallSpacing * 4
     
-    background: PlasmaCore.FrameSvgItem {
+    background: KSvg.FrameSvgItem {
         enabledBorders: PlasmaCore.FrameSvg.AllBorders
         imagePath: "widgets/background"
     }

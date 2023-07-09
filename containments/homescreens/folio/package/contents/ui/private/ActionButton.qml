@@ -7,6 +7,7 @@
 
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 
 PlasmaCore.ToolTipArea {
     id: button
@@ -16,7 +17,7 @@ PlasmaCore.ToolTipArea {
     mainItem: toolTipDelegate
 
     //API
-    property PlasmaCore.Svg svg
+    property KSvg.Svg svg
     property alias elementId: icon.elementId
     property QtObject action
     property bool backgroundVisible: false
@@ -51,12 +52,12 @@ PlasmaCore.ToolTipArea {
         }
     }
 
-    PlasmaCore.Svg {
+    KSvg.Svg {
         id: buttonSvg
         imagePath: "widgets/actionbutton"
     }
 
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         id: shadowItem
         svg: buttonSvg
         elementId: "shadow"
@@ -72,7 +73,7 @@ PlasmaCore.ToolTipArea {
             width: buttonItem.visible?buttonItem.width:iconSize
             height: buttonItem.visible?buttonItem.height:iconSize
 
-            PlasmaCore.SvgItem {
+            KSvg.SvgItem {
                 id: buttonItem
                 svg: buttonSvg
                 elementId: "normal"
@@ -81,7 +82,7 @@ PlasmaCore.ToolTipArea {
                 visible: backgroundVisible
             }
 
-            PlasmaCore.SvgItem {
+            KSvg.SvgItem {
                 id: icon
                 width: iconSize
                 height: iconSize

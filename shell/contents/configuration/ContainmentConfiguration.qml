@@ -77,7 +77,7 @@ AppletConfiguration {
                 duration: PlasmaCore.Units.longDuration
             }
             
-            background: PlasmaCore.FrameSvgItem {
+            background: KSvg.FrameSvgItem {
                 enabledBorders: PlasmaCore.FrameSvg.AllBorders
                 imagePath: "widgets/background"
             }

@@ -11,6 +11,7 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -151,7 +152,7 @@ Controls.ItemDelegate {
                     
                     Accessible.name: i18nc("Accessibility data on volume slider", "Adjust volume for %1", baseItem.label)
 
-                    background: PlasmaCore.FrameSvgItem {
+                    background: KSvg.FrameSvgItem {
                         imagePath: "widgets/slider"
                         prefix: "groove"
                         width: parent.availableWidth
@@ -159,7 +160,7 @@ Controls.ItemDelegate {
                         anchors.centerIn: parent
                         scale: parent.mirrored ? -1 : 1
 
-                        PlasmaCore.FrameSvgItem {
+                        KSvg.FrameSvgItem {
                             imagePath: "widgets/slider"
                             prefix: "groove-highlight"
                             anchors.left: parent.left
