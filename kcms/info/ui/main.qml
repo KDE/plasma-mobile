@@ -19,6 +19,14 @@ KCM.SimpleKCM {
     rightPadding: 0
     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
+    actions: [
+        Kirigami.Action {
+            icon.name: "edit-copy"
+            text: i18nc("@action:button", "Copy")
+            onTriggered: kcm.copyInfoToClipboard()
+        }
+    ]
+
     ColumnLayout {
         width: parent.width
         spacing: 0
@@ -131,18 +139,6 @@ KCM.SimpleKCM {
                     }
                 }
             }
-        }
-    }
-
-    footer: RowLayout {
-        Item {
-            Layout.fillWidth: true
-        }
-
-        Controls.Button {
-            text: i18n("Copy to clipboard")
-            icon.name: "edit-copy"
-            onClicked: kcm.copyInfoToClipboard()
         }
     }
 }
