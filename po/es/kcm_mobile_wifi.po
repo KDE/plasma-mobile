@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-03-15 17:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr "Entrada no válida."
 
-#: ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:109
 #, kde-format
 msgid "Connect to"
 msgstr "Conectar a"

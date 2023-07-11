@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 02:13+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-09-05 12:14+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Applications"
 msgstr "Приложения"
 
-#: package/contents/ui/private/ConfigOverlay.qml:98
+#: package/contents/ui/private/ConfigOverlay.qml:99
 #, kde-format
 msgid "Remove"
 msgstr "Удалить"

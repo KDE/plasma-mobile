@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-05-07 20:41+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr "إدخال غير صحيح"
 
-#: ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:109
 #, kde-format
 msgid "Connect to"
 msgstr "متصل ب"

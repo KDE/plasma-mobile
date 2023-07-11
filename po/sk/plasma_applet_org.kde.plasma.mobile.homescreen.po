@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-06 02:13+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-04-08 18:34+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -20,7 +20,7 @@ msgstr ""
 msgid "Applications"
 msgstr "Aplikácie"
 
-#: package/contents/ui/private/ConfigOverlay.qml:98
+#: package/contents/ui/private/ConfigOverlay.qml:99
 #, kde-format
 msgid "Remove"
 msgstr "Odstrániť"

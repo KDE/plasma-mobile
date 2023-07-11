@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 02:27+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-05-07 20:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -90,24 +90,24 @@ msgstr ""
 msgid "Device name not found"
 msgstr "لم يعثر على اسم الجهاز"
 
-#: qml/volumeosd/ListItemBase.qml:96
+#: qml/volumeosd/ListItemBase.qml:97
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "أظهر خيارات إضافية لـ%1"
 
-#: qml/volumeosd/ListItemBase.qml:152
+#: qml/volumeosd/ListItemBase.qml:153
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "اضبط المستوى إلى %1"
 
-#: qml/volumeosd/ListItemBase.qml:230
+#: qml/volumeosd/ListItemBase.qml:231
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr ""
 
-#: qml/volumeosd/ListItemBase.qml:245
+#: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
