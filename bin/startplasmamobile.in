@@ -25,4 +25,4 @@ fi
 
 # TODO port away from PLASMA_DEFAULT_SHELL into QT_QPA_PLATFORM=offscreen plasma-apply-lookandfeel --apply org.kde.plasma.phone
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.phoneshell
-startplasma-wayland --xwayland --lockscreen --inputmethod maliit-keyboard --exit-with-session=@KDE_INSTALL_FULL_LIBEXECDIR@/startplasma-waylandsession
+startplasma-wayland --xwayland --lockscreen --inputmethod maliit-keyboard
