@@ -26,7 +26,7 @@ msgstr "책갈피에서 삭제"
 #: package/contents/ui/FavoritesGrid.qml:296
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "책갈피에 프로그램을 추가하면 여기에 표시됩니다."
+msgstr "책갈피에 앱을 추가하면 여기에 표시됩니다."
 
 #: package/contents/ui/FolderGrid.qml:207
 #, kde-format
@@ -41,7 +41,7 @@ msgstr "책갈피에 추가"
 #: package/contents/ui/GridAppList.qml:60
 #, kde-format
 msgid "Applications"
-msgstr "프로그램"
+msgstr "앱"
 
 #: pinnedmodel.cpp:148
 #, kde-format

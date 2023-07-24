@@ -20,7 +20,7 @@ msgstr ""
 #: package/contents/ui/appdrawer/AppDrawerHeader.qml:37
 #, kde-format
 msgid "Applications"
-msgstr "프로그램"
+msgstr "앱"
 
 #: package/contents/ui/private/ConfigOverlay.qml:98
 #, kde-format
