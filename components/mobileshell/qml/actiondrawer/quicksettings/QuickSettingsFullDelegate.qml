@@ -85,7 +85,7 @@ QuickSettingsDelegate {
             anchors.right: parent.right
             anchors.left: parent.left
             anchors.bottom: parent.bottom
-            
+
             PlasmaComponents.Label {
                 Layout.fillWidth: true
                 elide: Text.ElideRight
@@ -93,12 +93,12 @@ QuickSettingsDelegate {
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.75 // TODO base height off of size of delegate
                 font.weight: Font.Bold
             }
-            
+
             Components.MarqueeLabel {
                 // if no status is given, just use On/Off
                 inputText: root.status ? root.status : (root.enabled ? i18n("On") : i18n("Off"))
                 opacity: 0.6
-                
+
                 Layout.fillWidth: true
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.75
             }

@@ -40,9 +40,9 @@ Item {
     readonly property real rowHeight: columnWidth * 0.7
     readonly property real fullHeight: fullView.implicitHeight
     
-    readonly property real intendedColumnWidth: 120
-    readonly property real intendedMinimizedColumnWidth: Kirigami.Units.gridUnit * 3 + Kirigami.Units.gridUnit
-    readonly property real minimizedRowHeight: Kirigami.Units.gridUnit * 3 + Kirigami.Units.gridUnit
+    readonly property real intendedColumnWidth: Kirigami.Units.gridUnit * 7
+    readonly property real intendedMinimizedColumnWidth: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
+    readonly property real minimizedRowHeight: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
     
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
