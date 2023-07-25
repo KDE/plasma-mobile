@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-04-01 19:30-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -17,54 +17,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:45
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "ਖਾਕਾ ਤਬਦੀਲੀਆਂ ਉੱਤੇ ਸਿਸਟਮ ਪਰਸ਼ਾਸ਼ਕ ਵਲੋਂ ਪਾਬੰਦੀਆਂ ਲਾਈਆਂ ਗਈਆਂ ਹਨ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
 msgstr "ਆਮ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
 msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਖਾਕਾ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:73
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
 msgstr "ਵਰਤਣ ਲਈ ਮੁੱਖ-ਸਕਰੀਨ ਖਾਕਾ ਹੈ।"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "ਵਾਲਪੇਪਰ ਪਲੱਗਇਨ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "ਵਰਤਣ ਲਈ ਵਾਲਪੇਪਰ ਪਲੱਗਇਨ ਹੈ।"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "ਵਾਲਪੇਪਰ ਪਲੱਗਇਨਾਂ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:140
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "…ਨਵੀਆਂ ਪਲੱਗਇਨਾਂ ਲਵੋ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:155
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "ਹੋਰ ਤਬਦੀਲੀਆਂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ ਖਾਕਾ ਤਬਦੀਲੀਆਂ ਨੂੰ ਲਾਗੂ ਕਰਨੀਆਂ ਪੈਣਗੀਆਂ"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:161
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "ਹੁਣੇ ਲਾਗੂ ਕਰੋ"
 
-#: contents/configuration/ContainmentConfiguration.qml:32
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr "ਵਾਲਪੇਪਰ"
 
-#: contents/configuration/ContainmentConfiguration.qml:95
+#: contents/configuration/ContainmentConfiguration.qml:96
 msgid "Change Wallpaper"
 msgstr "ਵਾਲਪੇਪਰ ਬਦਲੋ"
 
-#: contents/configuration/ContainmentConfiguration.qml:113
+#: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr "ਸੰਰਚਨਾ"

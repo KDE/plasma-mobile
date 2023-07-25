@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-05-03 23:34+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -17,54 +17,54 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:45
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:73
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:140
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:155
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:161
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:32
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:95
+#: contents/configuration/ContainmentConfiguration.qml:96
 msgid "Change Wallpaper"
 msgstr ""
 
-#: contents/configuration/ContainmentConfiguration.qml:113
+#: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr ""

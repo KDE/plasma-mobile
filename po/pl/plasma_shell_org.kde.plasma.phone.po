@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2022-08-28 20:40+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,54 +18,54 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:45
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Zmiany układu zostały ograniczone przez administratora systemu"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
 msgstr "Ogólne"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
 msgstr "Układ ekranu domowego"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:73
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
 msgstr "Używany układ ekranu domowego."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Wtyczka tapet"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Używana wtyczka tapet."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Wtyczki tapet"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:140
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Pobierz nowe wtyczki…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:155
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Zmiany układu należy zastosować przed zastosowaniem kolejnych zmian"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:161
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Zastosuj teraz"
 
-#: contents/configuration/ContainmentConfiguration.qml:32
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr "Tapeta"
 
-#: contents/configuration/ContainmentConfiguration.qml:95
+#: contents/configuration/ContainmentConfiguration.qml:96
 msgid "Change Wallpaper"
 msgstr "Zmień tapetę"
 
-#: contents/configuration/ContainmentConfiguration.qml:113
+#: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr "Ustawienia"

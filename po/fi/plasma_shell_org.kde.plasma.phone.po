@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2022-07-03 22:58+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,55 +17,55 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:45
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Järjestelmän ylläpito on rajoittanut asettelumuutoksia"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
 msgstr "Perusasetukset"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
 msgstr "Kotinäytön asettelu"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:73
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
 msgstr "Käytettävä kotinäytön asettelu."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Taustakuvaliitännäinen"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Käytettävä taustakuvaliitännäinen."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Taustakuvaliitännäiset"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:140
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Etsi uusia liitännäisiä…"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:155
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Asettelumuutokset on otettava käyttöön ennen muiden muutosten tekemistä."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:161
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Ota käyttöön nyt"
 
-#: contents/configuration/ContainmentConfiguration.qml:32
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr "Taustakuva"
 
-#: contents/configuration/ContainmentConfiguration.qml:95
+#: contents/configuration/ContainmentConfiguration.qml:96
 msgid "Change Wallpaper"
 msgstr "Vaihda taustakuva"
 
-#: contents/configuration/ContainmentConfiguration.qml:113
+#: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr "Asetukset"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2022-12-20 10:43+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -53,27 +53,27 @@ msgstr "Uit"
 msgid "SIM Locked"
 msgstr "SIM is vergrendeld"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:37
+#: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:63
+#: qml/volumeosd/AudioApplet.qml:62
 #, kde-format
 msgid "Outputs"
 msgstr "Uitvoer"
 
-#: qml/volumeosd/AudioApplet.qml:93
+#: qml/volumeosd/AudioApplet.qml:92
 #, kde-format
 msgid "Inputs"
 msgstr "Invoer"
 
-#: qml/volumeosd/AudioApplet.qml:124
+#: qml/volumeosd/AudioApplet.qml:123
 #, kde-format
 msgid "Playback Streams"
 msgstr "Afspeelstromen"
 
-#: qml/volumeosd/AudioApplet.qml:177
+#: qml/volumeosd/AudioApplet.qml:176
 #, kde-format
 msgid "Recording Streams"
 msgstr "Streams worden opgenomen"
@@ -128,38 +128,38 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Streamnaam niet gevonden"
 
-#: qml/volumeosd/VolumeOSD.qml:114
+#: qml/volumeosd/VolumeOSD.qml:112
 #, kde-format
 msgid "Unmute"
 msgstr "Dempen opheffen"
 
-#: qml/volumeosd/VolumeOSD.qml:114 qml/volumeosd/VolumeOSDProvider.qml:65
+#: qml/volumeosd/VolumeOSD.qml:112 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Dempen"
 
-#: qml/volumeosd/VolumeOSD.qml:138
+#: qml/volumeosd/VolumeOSD.qml:136
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:148
+#: qml/volumeosd/VolumeOSD.qml:146
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:168
+#: qml/volumeosd/VolumeOSD.qml:166
 #, kde-format
 msgid "Open audio settings"
 msgstr "Audio-instellingen openen"
 
-#: qml/volumeosd/VolumeOSD.qml:181
+#: qml/volumeosd/VolumeOSD.qml:179
 #, kde-format
 msgid "Audio Settings"
 msgstr "Audio-instellingen"
 
-#: qml/volumeosd/VolumeOSD.qml:188
+#: qml/volumeosd/VolumeOSD.qml:186
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Tonen van audiostreams omschakelen"
@@ -184,22 +184,22 @@ msgstr "Volume verlagen"
 msgid "Search…"
 msgstr "Zoeken…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:127
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
 #, kde-format
 msgid "No media playing"
 msgstr "Er speelt geen medium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:155
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
 #, kde-format
 msgid "Previous track"
 msgstr "Vorige track"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Afspelen of pauzeren van medium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:179
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
 #, kde-format
 msgid "Next track"
 msgstr "Volgende track"
@@ -222,29 +222,29 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "Verzenden"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:178
+#: qml/widgets/notifications/NotificationsWidget.qml:177
 #, kde-format
 msgid "Notification service not available"
 msgstr "Meldingenservice niet beschikbaar"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:187
+#: qml/widgets/notifications/NotificationsWidget.qml:186
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Meldingen worden nu geleverd door '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:322
 #, kde-format
 msgid "Show Fewer"
 msgstr "Minder tonen"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:324
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 meer tonen"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:384
+#: qml/widgets/notifications/NotificationsWidget.qml:383
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Alle meldingen wissen"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-07 02:22+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-02-23 17:43+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,54 +19,54 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:45
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Utformingsendringar er låste av systemadministratoren"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+#: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
 msgstr "Generelt"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
 msgstr "Heimeskjerm-utforming"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:73
+#: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
 msgstr "Heimeskjerm-utforminga som skal brukast."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
 msgstr "Bakgrunnsbilete-tillegg"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:100
+#: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
 msgstr "Bakgrunnsbilete-tillegget som skal brukast."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:135
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
 msgstr "Bakgrunnsbilete-tillegg"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:140
+#: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
 msgstr "Hent nye tillegg …"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:155
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Du må ta i bruk utformings­endringane før du kan gjera andre endringar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:161
+#: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
 msgstr "Bruk no"
 
-#: contents/configuration/ContainmentConfiguration.qml:32
+#: contents/configuration/ContainmentConfiguration.qml:33
 msgid "Wallpaper"
 msgstr "Bakgrunnsbilete"
 
-#: contents/configuration/ContainmentConfiguration.qml:95
+#: contents/configuration/ContainmentConfiguration.qml:96
 msgid "Change Wallpaper"
 msgstr "Byt bakgrunnsbilete"
 
-#: contents/configuration/ContainmentConfiguration.qml:113
+#: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr "Set opp"

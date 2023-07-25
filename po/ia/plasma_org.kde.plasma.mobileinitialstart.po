@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-04-02 21:27+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -170,12 +170,12 @@ msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
 msgstr ""
 "Tu dispositivo es nunc preste. <br /><br /> Gaude de <b>Plasma 6.0</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:16
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "Ante que nos initia ..."
 
-#: modules/prepare/package/contents/ui/main.qml:83
+#: modules/prepare/package/contents/ui/main.qml:82
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -183,27 +183,27 @@ msgstr ""
 "Adapta le brillantia de schermo a esser confortabile per le processo de "
 "installation."
 
-#: modules/prepare/package/contents/ui/main.qml:136
+#: modules/prepare/package/contents/ui/main.qml:135
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Adapta le grandor de elementos sur le schermo."
 
-#: modules/prepare/package/contents/ui/main.qml:151
+#: modules/prepare/package/contents/ui/main.qml:150
 #, kde-format
 msgid "Display Scaling"
 msgstr "Scalar de monstrator"
 
-#: modules/time/package/contents/ui/main.qml:15
+#: modules/time/package/contents/ui/main.qml:14
 #, kde-format
 msgid "Time and Date"
 msgstr "Tempore e Data"
 
-#: modules/time/package/contents/ui/main.qml:37
+#: modules/time/package/contents/ui/main.qml:36
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Selige tu fuso horari e formato de tempore preferite."
 
-#: modules/time/package/contents/ui/main.qml:51
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "Formato a 24 horas"
@@ -213,27 +213,27 @@ msgstr "Formato a 24 horas"
 msgid "Invalid input."
 msgstr "Entrata invalide."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:42
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
 #, kde-format
 msgid "Connect to"
 msgstr "Connecte a"
 
-#: modules/wifi/package/contents/ui/main.qml:17
+#: modules/wifi/package/contents/ui/main.qml:16
 #, kde-format
 msgid "Network"
 msgstr "Rete"
 
-#: modules/wifi/package/contents/ui/main.qml:69
+#: modules/wifi/package/contents/ui/main.qml:68
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Connecte a unrete WiFi per accesso de rete."
 
-#: modules/wifi/package/contents/ui/main.qml:100
+#: modules/wifi/package/contents/ui/main.qml:99
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi es dishabilitate"
 
-#: modules/wifi/package/contents/ui/main.qml:104
+#: modules/wifi/package/contents/ui/main.qml:103
 #, kde-format
 msgid "Enable"
 msgstr "Habilita"
@@ -248,7 +248,7 @@ msgstr "Contrasigno…"
 msgid "Welcome to <b>Plasma</b>"
 msgstr "Benvenite a <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:314
+#: qml/LandingComponent.qml:102 qml/Wizard.qml:313
 #, kde-format
 msgid "Next"
 msgstr "Proxime"
@@ -258,12 +258,12 @@ msgstr "Proxime"
 msgid "Initial Start"
 msgstr "Startar initial"
 
-#: qml/Wizard.qml:295
+#: qml/Wizard.qml:294
 #, kde-format
 msgid "Back"
 msgstr "Retro"
 
-#: qml/Wizard.qml:331
+#: qml/Wizard.qml:330
 #, kde-format
 msgid "Finish"
 msgstr "Termina"

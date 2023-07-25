@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.powermenu\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-03-12 08:41+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15,12 +15,12 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: package/contents/ui/main.qml:12
+#: package/contents/ui/main.qml:11
 #, kde-format
 msgid "Shut Down"
 msgstr "Vypnúť"
 
-#: package/contents/ui/main.qml:14
+#: package/contents/ui/main.qml:13
 #, kde-format
 msgid "Open power menu"
 msgstr "Otvoriť ponuku napájania"

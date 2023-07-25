@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-07-23 12:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -54,27 +54,27 @@ msgstr "关"
 msgid "SIM Locked"
 msgstr "SIM 卡已锁定"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:37
+#: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:63
+#: qml/volumeosd/AudioApplet.qml:62
 #, kde-format
 msgid "Outputs"
 msgstr "输出"
 
-#: qml/volumeosd/AudioApplet.qml:93
+#: qml/volumeosd/AudioApplet.qml:92
 #, kde-format
 msgid "Inputs"
 msgstr "输入"
 
-#: qml/volumeosd/AudioApplet.qml:124
+#: qml/volumeosd/AudioApplet.qml:123
 #, kde-format
 msgid "Playback Streams"
 msgstr "播放流"
 
-#: qml/volumeosd/AudioApplet.qml:177
+#: qml/volumeosd/AudioApplet.qml:176
 #, kde-format
 msgid "Recording Streams"
 msgstr "录制流"
@@ -129,38 +129,38 @@ msgstr "%1：%2"
 msgid "Stream name not found"
 msgstr "未发现流名称"
 
-#: qml/volumeosd/VolumeOSD.qml:114
+#: qml/volumeosd/VolumeOSD.qml:112
 #, kde-format
 msgid "Unmute"
 msgstr "取消静音"
 
-#: qml/volumeosd/VolumeOSD.qml:114 qml/volumeosd/VolumeOSDProvider.qml:65
+#: qml/volumeosd/VolumeOSD.qml:112 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "静音"
 
-#: qml/volumeosd/VolumeOSD.qml:138
+#: qml/volumeosd/VolumeOSD.qml:136
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:148
+#: qml/volumeosd/VolumeOSD.qml:146
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:168
+#: qml/volumeosd/VolumeOSD.qml:166
 #, kde-format
 msgid "Open audio settings"
 msgstr "打开音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:181
+#: qml/volumeosd/VolumeOSD.qml:179
 #, kde-format
 msgid "Audio Settings"
 msgstr "音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:188
+#: qml/volumeosd/VolumeOSD.qml:186
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "切换显示音频流"
@@ -185,22 +185,22 @@ msgstr "降低音量"
 msgid "Search…"
 msgstr "搜索"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:127
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
 #, kde-format
 msgid "No media playing"
 msgstr "没有正在播放的媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:155
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
 #, kde-format
 msgid "Previous track"
 msgstr "上一首"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
 #, kde-format
 msgid "Play or Pause media"
 msgstr "播放或暂停媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:179
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
 #, kde-format
 msgid "Next track"
 msgstr "下一首"
@@ -223,29 +223,29 @@ msgctxt "@action:button"
 msgid "Send"
 msgstr "发送"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:178
+#: qml/widgets/notifications/NotificationsWidget.qml:177
 #, kde-format
 msgid "Notification service not available"
 msgstr "通知服务不可用"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:187
+#: qml/widgets/notifications/NotificationsWidget.qml:186
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "通知由 %1 %2 提供"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:322
 #, kde-format
 msgid "Show Fewer"
 msgstr "显示更少"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:324
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "显示其他 %1 条"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:384
+#: qml/widgets/notifications/NotificationsWidget.qml:383
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "清除所有通知"

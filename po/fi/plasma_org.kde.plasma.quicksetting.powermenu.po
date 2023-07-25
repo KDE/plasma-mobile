@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-01-18 16:39+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: package/contents/ui/main.qml:12
+#: package/contents/ui/main.qml:11
 #, kde-format
 msgid "Shut Down"
 msgstr "Sammuta"
 
-#: package/contents/ui/main.qml:14
+#: package/contents/ui/main.qml:13
 #, kde-format
 msgid "Open power menu"
 msgstr "Avaa virranhallintavalikko"

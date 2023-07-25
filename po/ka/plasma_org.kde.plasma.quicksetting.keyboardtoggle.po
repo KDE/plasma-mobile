@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2022-12-28 08:34+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:12
 #, kde-format
 msgid "Virtual Keyboard"
 msgstr "ვირტუალური კლავიატურა"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:14
 #, kde-format
 msgid "On"
 msgstr "ჩართული"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "Off"
 msgstr "გამორთული"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "Tap to open settings"
 msgstr "დაატყაპუნეთ მორგების ფანჯრის გასახსნელად"

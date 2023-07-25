@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2022-09-05 12:14+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -18,12 +18,12 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.04.3\n"
 
-#: package/contents/ui/appdrawer/AppDrawerHeader.qml:37
+#: package/contents/ui/appdrawer/AppDrawerHeader.qml:38
 #, kde-format
 msgid "Applications"
 msgstr "Приложения"
 
-#: package/contents/ui/private/ConfigOverlay.qml:99
+#: package/contents/ui/private/ConfigOverlay.qml:100
 #, kde-format
 msgid "Remove"
 msgstr "Удалить"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 02:04+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-06-18 19:05+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -17,28 +17,28 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.2\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
-#: package/contents/ui/FolderGrid.qml:191
+#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "Retirar das favoritas"
 
-#: package/contents/ui/FavoritesGrid.qml:293
+#: package/contents/ui/FavoritesGrid.qml:291
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "Engada aplicacións ás favoritas para que aparezan aquí."
 
-#: package/contents/ui/FolderGrid.qml:196
+#: package/contents/ui/FolderGrid.qml:194
 #, kde-format
 msgid "Move out of folder"
 msgstr "Sacar do cartafol"
 
-#: package/contents/ui/GridAppDelegate.qml:65
+#: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
 msgid "Add to favourites"
 msgstr "Engadir ás favoritas"
 
-#: package/contents/ui/GridAppList.qml:69
+#: package/contents/ui/GridAppList.qml:67
 #, kde-format
 msgid "Applications"
 msgstr "Aplicacións"

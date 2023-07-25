@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2021-11-12 01:24+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.08.1\n"
 
-#: package/contents/ui/appdrawer/AppDrawerHeader.qml:37
+#: package/contents/ui/appdrawer/AppDrawerHeader.qml:38
 #, kde-format
 msgid "Applications"
 msgstr "앱"
 
-#: package/contents/ui/private/ConfigOverlay.qml:99
+#: package/contents/ui/private/ConfigOverlay.qml:100
 #, kde-format
 msgid "Remove"
 msgstr "삭제"

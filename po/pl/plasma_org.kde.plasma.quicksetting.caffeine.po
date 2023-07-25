@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-09 02:16+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-04-09 16:18+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,22 +18,22 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: contents/ui/main.qml:12
+#: contents/ui/main.qml:11
 #, kde-format
 msgid "Caffeine"
 msgstr "Kofeina"
 
-#: contents/ui/main.qml:14
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to disable sleep suspension"
 msgstr "Stuknij, aby wyłączyć wstrzymanie uśpienia"
 
-#: contents/ui/main.qml:14
+#: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to suspend sleep"
 msgstr "Stuknij, aby wstrzymać uśpienie"
 
-#: contents/ui/main.qml:37
+#: contents/ui/main.qml:36
 #, kde-format
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "Przenośna Plazma ma włączone zapobieganie uśpieniu"

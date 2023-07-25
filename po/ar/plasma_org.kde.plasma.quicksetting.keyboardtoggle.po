@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-18 02:34+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-05-07 20:50+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,22 +18,22 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: contents/ui/main.qml:13
+#: contents/ui/main.qml:12
 #, kde-format
 msgid "Virtual Keyboard"
 msgstr "لوحة المفاتيح الوهميّة"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:14
 #, kde-format
 msgid "On"
 msgstr "يعمل"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "Off"
 msgstr "مغلق"
 
-#: contents/ui/main.qml:16
+#: contents/ui/main.qml:15
 #, kde-format
 msgid "Tap to open settings"
 msgstr "اطرق لتفتح الإعدادات"

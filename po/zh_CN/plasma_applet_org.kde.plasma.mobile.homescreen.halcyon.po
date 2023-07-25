@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-13 02:04+0000\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
 "PO-Revision-Date: 2023-07-23 12:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,28 +18,28 @@ msgstr ""
 "plasma.mobile.homescreen.halcyon.pot\n"
 "X-Crowdin-File-ID: 43223\n"
 
-#: package/contents/ui/FavoritesGrid.qml:223
-#: package/contents/ui/FolderGrid.qml:191
+#: package/contents/ui/FavoritesGrid.qml:221
+#: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
 msgstr "移出常用应用"
 
-#: package/contents/ui/FavoritesGrid.qml:293
+#: package/contents/ui/FavoritesGrid.qml:291
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
 msgstr "将应用程序添加到常用程序后，它们将在此显示"
 
-#: package/contents/ui/FolderGrid.qml:196
+#: package/contents/ui/FolderGrid.qml:194
 #, kde-format
 msgid "Move out of folder"
 msgstr "移出文件夹"
 
-#: package/contents/ui/GridAppDelegate.qml:65
+#: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
 msgid "Add to favourites"
 msgstr "添加到常用应用"
 
-#: package/contents/ui/GridAppList.qml:69
+#: package/contents/ui/GridAppList.qml:67
 #, kde-format
 msgid "Applications"
 msgstr "应用程序"
