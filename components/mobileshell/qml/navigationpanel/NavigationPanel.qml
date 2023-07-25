@@ -10,8 +10,8 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Effects
 
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
@@ -120,7 +120,7 @@ Item {
             when: root.width < root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 10, icons.height * 0.7 / 3)
+                buttonLength: Math.min(Kirigami.Units.gridUnit * 10, icons.height * 0.7 / 3)
             }
             AnchorChanges {
                 target: leftButton
@@ -160,7 +160,7 @@ Item {
             }
             PropertyChanges {
                 target: rightCornerButton
-                height: PlasmaCore.Units.gridUnit * 2
+                height: Kirigami.Units.gridUnit * 2
                 width: icons.width
             }
         }, State {
@@ -168,7 +168,7 @@ Item {
             when: root.width >= root.height
             PropertyChanges {
                 target: icons
-                buttonLength: Math.min(PlasmaCore.Units.gridUnit * 8, icons.width * 0.7 / 3)
+                buttonLength: Math.min(Kirigami.Units.gridUnit * 8, icons.width * 0.7 / 3)
             }
             AnchorChanges {
                 target: leftButton
@@ -209,7 +209,7 @@ Item {
             PropertyChanges {
                 target: rightCornerButton
                 height: parent.height
-                width: PlasmaCore.Units.gridUnit * 2
+                width: Kirigami.Units.gridUnit * 2
             }
         }
     ]

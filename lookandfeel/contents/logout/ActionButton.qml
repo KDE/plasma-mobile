@@ -9,6 +9,7 @@ import QtQuick 2.8
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     id: root
@@ -25,17 +26,17 @@ Item {
 
     activeFocusOnTab: true
 
-    property int iconSize: PlasmaCore.Units.gridUnit
+    property int iconSize: Kirigami.Units.gridUnit
 
-    implicitWidth: PlasmaCore.Units.gridUnit * 14
-    implicitHeight: iconSize + PlasmaCore.Units.smallSpacing + label.implicitHeight
+    implicitWidth: Kirigami.Units.gridUnit * 14
+    implicitHeight: iconSize + Kirigami.Units.smallSpacing + label.implicitHeight
 
     Rectangle {
         id: buttonRect
         width: root.width
         height: iconSize * 2.2
-        radius: PlasmaCore.Units.smallSpacing
-        color: PlasmaCore.ColorScope.backgroundColor
+        radius: Kirigami.Units.smallSpacing
+        color: Kirigami.Theme.backgroundColor
         opacity: mouseArea.containsPress ? 1 : 0.6
         border {
             color: Qt.rgba(255, 255, 255, 0.8)
@@ -48,22 +49,22 @@ Item {
         anchors {
             verticalCenter: buttonRect.verticalCenter
             left: buttonRect.left
-            leftMargin: PlasmaCore.Units.mediumSpacing
+            leftMargin: Kirigami.Units.mediumSpacing
         }
         width: iconSize
         height: iconSize
 
-        colorGroup: PlasmaCore.ColorScope.colorGroup
+        colorSet: Kirigami.Theme.colorSet
     }
 
     PlasmaComponents3.Label {
         id: label
-        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize + 1
+        font.pointSize: Kirigami.Theme.defaultFont.pointSize + 1
         anchors {
             centerIn: buttonRect
         }
         style: softwareRendering ? Text.Outline : Text.Normal
-        styleColor: softwareRendering ? PlasmaCore.ColorScope.backgroundColor : "transparent" //no outline, doesn't matter
+        styleColor: softwareRendering ? Kirigami.Theme.backgroundColor : "transparent" //no outline, doesn't matter
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignTop
         wrapMode: Text.WordWrap

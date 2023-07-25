@@ -62,7 +62,7 @@ Item {
     // emitted when an item on the ListView is triggered
     signal actionTriggered()
     
-    readonly property real closedContentY: PlasmaCore.Units.gridUnit * 5
+    readonly property real closedContentY: Kirigami.Units.gridUnit * 5
     readonly property real openedContentY: 0
     readonly property real openFactor: Math.max(0, Math.min(1, 1 - flickable.contentY / closedContentY))
     readonly property bool isOpen: openFactor != 0
@@ -118,7 +118,7 @@ Item {
         
         NumberAnimation on contentY {
             id: anim
-            duration: PlasmaCore.Units.longDuration * 2
+            duration: Kirigami.Units.longDuration * 2
             easing.type: Easing.OutQuad
             running: false
             onFinished: {
@@ -136,16 +136,16 @@ Item {
             Controls.Control {
                 opacity: root.openFactor
                 Layout.fillWidth: true
-                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 30
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 30
                 Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: PlasmaCore.Units.gridUnit
-                Layout.leftMargin: PlasmaCore.Units.gridUnit
-                Layout.rightMargin: PlasmaCore.Units.gridUnit
+                Layout.topMargin: Kirigami.Units.gridUnit
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
                 
-                leftPadding: PlasmaCore.Units.smallSpacing 
-                rightPadding: PlasmaCore.Units.smallSpacing 
-                topPadding: PlasmaCore.Units.smallSpacing 
-                bottomPadding: PlasmaCore.Units.smallSpacing 
+                leftPadding: Kirigami.Units.smallSpacing 
+                rightPadding: Kirigami.Units.smallSpacing 
+                topPadding: Kirigami.Units.smallSpacing 
+                bottomPadding: Kirigami.Units.smallSpacing 
                 
                 background: Item {
                     
@@ -162,8 +162,8 @@ Item {
                     Rectangle {
                         id: rectBackground
                         anchors.fill: parent
-                        color: PlasmaCore.Theme.backgroundColor
-                        radius: PlasmaCore.Units.smallSpacing
+                        color: Kirigami.Theme.backgroundColor
+                        radius: Kirigami.Units.smallSpacing
                     }
                 }
                 
@@ -189,7 +189,7 @@ Item {
             Controls.ScrollView {
                 opacity: root.openFactor === 1 ? 1 : 0
                 Behavior on opacity {
-                    NumberAnimation { duration: PlasmaCore.Units.shortDuration }
+                    NumberAnimation { duration: Kirigami.Units.shortDuration }
                 }
                 
                 Layout.fillWidth: true
@@ -199,7 +199,7 @@ Item {
                     id: listView
                     queryString: queryField.text
                     clip: true
-                    PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
                     highlight: activeFocus ? highlightComponent : null
                     Component{
@@ -239,49 +239,49 @@ Item {
                             anchors.fill: parent
                             color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
                             Behavior on color {
-                                ColorAnimation { duration: PlasmaCore.Units.shortDuration }
+                                ColorAnimation { duration: Kirigami.Units.shortDuration }
                             }
                         }
 
                         RowLayout {
                             id: rowLayout
-                            height: PlasmaCore.Units.gridUnit * 3
+                            height: Kirigami.Units.gridUnit * 3
                             anchors.top: parent.top
                             anchors.left: parent.left
                             anchors.right: parent.right
-                            anchors.leftMargin: PlasmaCore.Units.largeSpacing
-                            anchors.rightMargin: PlasmaCore.Units.largeSpacing
+                            anchors.leftMargin: Kirigami.Units.gridUnit
+                            anchors.rightMargin: Kirigami.Units.gridUnit
 
                             Kirigami.Icon {
                                 Layout.alignment: Qt.AlignVCenter
                                 source: model.decoration
-                                implicitWidth: PlasmaCore.Units.iconSizes.medium
-                                implicitHeight: PlasmaCore.Units.iconSizes.medium
+                                implicitWidth: Kirigami.Units.iconSizes.medium
+                                implicitHeight: Kirigami.Units.iconSizes.medium
                             }
 
                             ColumnLayout {
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
-                                spacing: PlasmaCore.Units.smallSpacing
+                                spacing: Kirigami.Units.smallSpacing
 
                                 PlasmaComponents.Label {
                                     id: title
                                     Layout.fillWidth: true
-                                    Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-                                    Layout.rightMargin: PlasmaCore.Units.largeSpacing
+                                    Layout.leftMargin: Kirigami.Units.smallSpacing * 2
+                                    Layout.rightMargin: Kirigami.Units.gridUnit
 
                                     maximumLineCount: 1
                                     elide: Text.ElideRight
                                     text: typeof modelData !== "undefined" ? modelData : model.display
                                     color: "white"
 
-                                    font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                                    font.pointSize: Kirigami.Theme.defaultFont.pointSize
                                 }
                                 PlasmaComponents.Label {
                                     id: subtitle
                                     Layout.fillWidth: true
-                                    Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-                                    Layout.rightMargin: PlasmaCore.Units.largeSpacing
+                                    Layout.leftMargin: Kirigami.Units.smallSpacing * 2
+                                    Layout.rightMargin: Kirigami.Units.gridUnit
 
                                     maximumLineCount: 1
                                     elide: Text.ElideRight
@@ -289,7 +289,7 @@ Item {
                                     color: "white"
                                     opacity: 0.8
 
-                                    font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 0.8)
+                                    font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 0.8)
                                 }
                             }
 

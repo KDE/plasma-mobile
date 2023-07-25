@@ -6,8 +6,6 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import QtQml.Models
 
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.draganddrop as DragDrop
 
@@ -60,7 +58,7 @@ MobileShell.GridView {
     
     header: MobileShell.BaseItem {
         topPadding: Math.round(root.height * 0.2)
-        bottomPadding: PlasmaCore.Units.largeSpacing
+        bottomPadding: Kirigami.Units.gridUnit
         // leftPadding: root.leftMargin
         // rightPadding: root.rightMargin
         implicitWidth: root.width
@@ -261,7 +259,7 @@ MobileShell.GridView {
     
     ColumnLayout {
         id: placeholder
-        spacing: PlasmaCore.Units.gridUnit
+        spacing: Kirigami.Units.gridUnit
         visible: root.count == 0
         opacity: 0.9
         
@@ -276,13 +274,13 @@ MobileShell.GridView {
         Kirigami.Icon {
             id: icon
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
-            implicitWidth: PlasmaCore.Units.iconSizes.large
+            implicitWidth: Kirigami.Units.iconSizes.large
             implicitHeight: width
             source: "arrow-left"
             color: "white"
         }
         
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             Layout.fillWidth: true
             Layout.maximumWidth: placeholder.width * 0.75
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter

@@ -10,7 +10,6 @@ import QtQuick.Layouts 1.11
 
 import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kcmutils
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.kcm.power.mobile.private 1.0
@@ -91,7 +90,7 @@ Kirigami.ScrollablePage {
         
         MobileForm.FormCard {
             Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.topMargin: Kirigami.Units.gridUnit
             
             contentItem: ColumnLayout {
                 spacing: 0

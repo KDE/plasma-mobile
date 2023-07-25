@@ -12,7 +12,6 @@ import QtQuick.Layouts 1.15
 import org.kde.plasma.plasmoid
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.kirigami 2.19 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 
 ColumnLayout {

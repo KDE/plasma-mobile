@@ -4,7 +4,6 @@
 import QtQuick
 import QtQuick.Window
 
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.taskmanager as TaskManager
 

@@ -12,7 +12,6 @@ import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.12 as Kirigami
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
@@ -144,7 +143,7 @@ Item {
         
         property var pendingNotificationWithAction
 
-        readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? PlasmaCore.Units.longDuration : 0
+        readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
         
         // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
         readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + spacing >= root.height
@@ -159,7 +158,7 @@ Item {
         }
                 
         boundsBehavior: Flickable.StopAtBounds
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.gridUnit
 
         // TODO keyboard focus
         highlightMoveDuration: 0
@@ -173,7 +172,7 @@ Item {
         
         PlasmaExtras.PlaceholderMessage {
             anchors.centerIn: parent
-            width: parent.width - (PlasmaCore.Units.largeSpacing * 4)
+            width: parent.width - (Kirigami.Units.gridUnit * 4)
 
             text: i18n("Notification service not available")
             visible: list.count === 0 && !NotificationManager.Server.valid && historyModelType === NotificationsModelType.NotificationsModel
@@ -230,9 +229,9 @@ Item {
             
             anchors {
                 left: parent ? parent.left : undefined
-                leftMargin: PlasmaCore.Units.largeSpacing
+                leftMargin: Kirigami.Units.gridUnit
                 right: parent ? parent.right : undefined
-                rightMargin: PlasmaCore.Units.largeSpacing
+                rightMargin: Kirigami.Units.gridUnit
             }
             
             height: model.isGroup ? groupDelegate.height : notificationDelegate.height
@@ -263,7 +262,7 @@ Item {
                 id: notificationDelegate
                 
                 Column {
-                    spacing: PlasmaCore.Units.smallSpacing
+                    spacing: Kirigami.Units.smallSpacing
                     
                     height: notificationItem.height + showMoreLoader.height
                     
@@ -354,7 +353,7 @@ Item {
             visible: list.listOverflowing
             height: 1            
             opacity: 0.25
-            color: PlasmaCore.Theme.textColor
+            color: Kirigami.Theme.textColor
         }
         
         RowLayout {
@@ -364,8 +363,8 @@ Item {
                 top: spacer.bottom
                 right: parent.right
                 left: parent.left
-                leftMargin: PlasmaCore.Units.largeSpacing
-                rightMargin: PlasmaCore.Units.largeSpacing
+                leftMargin: Kirigami.Units.gridUnit
+                rightMargin: Kirigami.Units.gridUnit
                 topMargin: list.spacing
                 bottomMargin: list.spacing
             }

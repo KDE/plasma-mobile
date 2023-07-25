@@ -11,7 +11,6 @@ import QtQuick.Controls as Controls
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kquickcontrolsaddons
 
 import org.kde.plasma.private.mobileshell as MobileShell
@@ -48,7 +47,7 @@ MouseArea {
         if (application.running) {
             delegate.launch(0, 0, "", application.name, application.storageId);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
+            delegate.launch(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
         }
     }
     
@@ -155,7 +154,7 @@ MouseArea {
                 }
                 visible: application.running
                 radius: width
-                width: PlasmaCore.Units.smallSpacing
+                width: Kirigami.Units.smallSpacing
                 height: width
                 color: theme.highlightColor
             }
@@ -181,9 +180,9 @@ MouseArea {
 
             Layout.fillWidth: true
             Layout.preferredHeight: delegate.reservedSpaceForLabel
-            Layout.topMargin: PlasmaCore.Units.smallSpacing
-            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
-            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
+            Layout.topMargin: Kirigami.Units.smallSpacing
+            Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
+            Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
             
             wrapMode: Text.WordWrap
             maximumLineCount: 2

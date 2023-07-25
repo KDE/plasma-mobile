@@ -77,7 +77,7 @@ ScrollViewKCM {
 
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
-            width: parent.width - (Kirigami.Units.largeSpacing * 4)
+            width: parent.width - (Kirigami.Units.gridUnit * 4)
             visible: !enabledConnections.wirelessEnabled
             text: i18n("Wi-Fi is disabled")
             icon.name: "network-wireless-disconnected"

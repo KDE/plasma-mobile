@@ -6,7 +6,6 @@ import QtQuick.Layouts
 import QtQuick.Window
 
 import org.kde.plasma.plasmoid
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout as Keyboards
 
 import org.kde.plasma.private.mobileshell as MobileShell
@@ -22,8 +21,8 @@ MobileShell.NavigationPanel {
     // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
-    backgroundColor: (Keyboards.KWinVirtualKeyboard.visible || opaqueBar) ? PlasmaCore.ColorScope.backgroundColor : "transparent";
-    foregroundColorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    backgroundColor: (Keyboards.KWinVirtualKeyboard.visible || opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent";
+    foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.ComplementaryColorGroup
     shadow: !opaqueBar
         
     TaskManager.VirtualDesktopInfo {

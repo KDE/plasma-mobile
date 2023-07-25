@@ -6,7 +6,6 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15 as Controls
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami 2.2 as Kirigami
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
@@ -48,7 +47,7 @@ MobileForm.AbstractFormDelegate {
     }
 
     contentItem: RowLayout {
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.gridUnit
 
         Item {
             Layout.preferredWidth: Kirigami.Units.gridUnit
@@ -61,7 +60,7 @@ MobileForm.AbstractFormDelegate {
                 svg: KSvg.Svg {
                     multipleImages: true
                     imagePath: "icons/network"
-                    colorGroup: PlasmaCore.ColorScope.colorGroup
+                    colorSet: Kirigami.Theme.colorSet
                 }
             }
 

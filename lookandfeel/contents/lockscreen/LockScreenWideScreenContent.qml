@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
@@ -29,25 +29,25 @@ Loader {
                 top: parent.top
                 bottom: parent.bottom
                 left: parent.left
-                leftMargin: PlasmaCore.Units.gridUnit * 3
+                leftMargin: Kirigami.Units.gridUnit * 3
             }
             
             ColumnLayout {
                 id: tabletLayout
                 anchors.centerIn: parent
-                spacing: PlasmaCore.Units.gridUnit
+                spacing: Kirigami.Units.gridUnit
                 
                 Clock {
                     layoutAlignment: Qt.AlignLeft
                     Layout.alignment: Qt.AlignLeft
                     Layout.fillWidth: true
-                    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
+                    Layout.minimumWidth: Kirigami.Units.gridUnit * 20
                 }
                 
                 MobileShell.MediaControlsWidget {
                     Layout.alignment: Qt.AlignLeft
                     Layout.fillWidth: true
-                    Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                    Layout.maximumWidth: Kirigami.Units.gridUnit * 25
 
                     layer.enabled: true
                     layer.effect: MultiEffect {
@@ -55,7 +55,7 @@ Loader {
                         shadowEnabled: true
                         shadowVerticalOffset: 1
                         shadowOpacity: 0.5
-                        shadowColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
+                        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.1)
                     }
                 }
             }
@@ -69,7 +69,7 @@ Loader {
                 bottom: parent.bottom
                 left: clock.right
                 right: parent.right
-                rightMargin: PlasmaCore.Units.gridUnit
+                rightMargin: Kirigami.Units.gridUnit
             }
             
             NotificationsComponent {
@@ -80,15 +80,15 @@ Loader {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.topMargin: PlasmaCore.Units.gridUnit * 2
-                Layout.bottomMargin: PlasmaCore.Units.gridUnit
-                Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
-                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                Layout.topMargin: Kirigami.Units.gridUnit * 2
+                Layout.bottomMargin: Kirigami.Units.gridUnit
+                Layout.minimumWidth: Kirigami.Units.gridUnit * 15
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 25
                 
-                leftMargin: PlasmaCore.Units.gridUnit
-                rightMargin: PlasmaCore.Units.gridUnit
-                bottomMargin: PlasmaCore.Units.gridUnit
-                topMargin: PlasmaCore.Units.gridUnit
+                leftMargin: Kirigami.Units.gridUnit
+                rightMargin: Kirigami.Units.gridUnit
+                bottomMargin: Kirigami.Units.gridUnit
+                topMargin: Kirigami.Units.gridUnit
                 
                 onPasswordRequested: root.passwordRequested()
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown

@@ -29,7 +29,7 @@ Controls.Dialog {
     
     header: Item {
         transform: Translate { y: dialog.translateY }
-        implicitHeight: heading.implicitHeight + Kirigami.Units.largeSpacing * 2
+        implicitHeight: heading.implicitHeight + Kirigami.Units.gridUnit * 2
 
         Kirigami.Heading {
             id: heading
@@ -38,7 +38,7 @@ Controls.Dialog {
             elide: Text.ElideRight
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: Kirigami.Units.largeSpacing
+            anchors.leftMargin: Kirigami.Units.gridUnit
             anchors.verticalCenter: parent.verticalCenter
             
             // use tooltip for long text that is elided

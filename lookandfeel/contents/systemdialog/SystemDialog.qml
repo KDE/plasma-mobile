@@ -149,10 +149,10 @@ Item {
             contentItem: RowLayout {
                 Kirigami.Heading {
                     Layout.fillWidth: true
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    Layout.bottomMargin: Kirigami.Units.largeSpacing
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.topMargin: Kirigami.Units.gridUnit
+                    Layout.bottomMargin: Kirigami.Units.gridUnit
+                    Layout.leftMargin: Kirigami.Units.gridUnit
+                    Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.alignment: Qt.AlignVCenter
                     level: 2
                     text: root.mainText
@@ -184,8 +184,8 @@ Item {
                 Label {
                     id: subtitleLabel
                     Layout.fillWidth: true
-                    Layout.topMargin: Kirigami.Units.largeSpacing
-                    Layout.bottomMargin: Kirigami.Units.largeSpacing
+                    Layout.topMargin: Kirigami.Units.gridUnit
+                    Layout.bottomMargin: Kirigami.Units.gridUnit
                     Layout.leftMargin: Kirigami.Units.gridUnit * 3
                     Layout.rightMargin: Kirigami.Units.gridUnit * 3
                     visible: root.subtitle !== ""

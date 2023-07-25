@@ -12,9 +12,7 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import "../../components" as Components
 
@@ -25,8 +23,8 @@ Item {
     id: root
     visible: mpris2Source.hasPlayer
     
-    readonly property real padding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
-    readonly property real contentHeight: PlasmaCore.Units.gridUnit * 2 + PlasmaCore.Units.smallSpacing
+    readonly property real padding: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+    readonly property real contentHeight: Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing
     implicitHeight: visible ? padding * 2 + contentHeight : 0
     
     MediaControlsSource {
@@ -93,8 +91,9 @@ Item {
                             imageSource: mpris2Source.albumArt(playerItem.source)
                         }
                         
-                        contentItem: PlasmaCore.ColorScope {
-                            colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                        contentItem: Item {
+                            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+                            Kirigami.Theme.inherit: false
                             width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
                             
                             RowLayout {
@@ -117,7 +116,7 @@ Item {
                                 }
 
                                 ColumnLayout {
-                                    Layout.leftMargin: albumArt.visible ? Kirigami.Units.largeSpacing : 0
+                                    Layout.leftMargin: albumArt.visible ? Kirigami.Units.gridUnit : 0
                                     Layout.fillWidth: true
                                     spacing: Kirigami.Units.smallSpacing
 
@@ -126,7 +125,7 @@ Item {
 
                                         inputText: mpris2Source.track(playerItem.source) || i18n("No media playing")
                                         textFormat: Text.PlainText
-                                        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                                        font.pointSize: Kirigami.Theme.defaultFont.pointSize
                                         color: "white"
                                     }
 
@@ -136,7 +135,7 @@ Item {
                                         // if no artist is given, show player name instead
                                         inputText: mpris2Source.artist(playerItem.source) || modelData.application || ""
                                         textFormat: Text.PlainText
-                                        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
+                                        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                                         opacity: 0.9
                                         color: "white"
                                     }
@@ -148,8 +147,8 @@ Item {
                                     
                                     enabled: mpris2Source.canGoBack(playerItem.source)
                                     icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
-                                    icon.width: PlasmaCore.Units.iconSizes.small
-                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.small
+                                    icon.height: Kirigami.Units.iconSizes.small
                                     onClicked: mpris2Source.goPrevious(playerItem.source)
                                     visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Previous track")
@@ -160,8 +159,8 @@ Item {
                                     Layout.preferredWidth: height
                                     
                                     icon.name: mpris2Source.isPlaying(playerItem.source) ? "media-playback-pause" : "media-playback-start"
-                                    icon.width: PlasmaCore.Units.iconSizes.small
-                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.small
+                                    icon.height: Kirigami.Units.iconSizes.small
                                     onClicked: mpris2Source.playPause(playerItem.source)
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Play or Pause media")
                                 }
@@ -172,8 +171,8 @@ Item {
                                     
                                     enabled: mpris2Source.canGoBack(playerItem.source)
                                     icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
-                                    icon.width: PlasmaCore.Units.iconSizes.small
-                                    icon.height: PlasmaCore.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.small
+                                    icon.height: Kirigami.Units.iconSizes.small
                                     onClicked: mpris2Source.goNext(playerItem.source)
                                     visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Next track")

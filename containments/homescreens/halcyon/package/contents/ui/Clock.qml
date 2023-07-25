@@ -5,8 +5,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 
@@ -36,7 +36,7 @@ ColumnLayout {
     }
     
     Label {
-        Layout.topMargin: PlasmaCore.Units.smallSpacing
+        Layout.topMargin: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
         
         horizontalAlignment: Text.AlignLeft

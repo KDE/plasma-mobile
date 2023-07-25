@@ -32,7 +32,7 @@ ContainmentItem {
     Binding {
         target: Plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
         property: "thickness"
-        value: PlasmaCore.Units.gridUnit + PlasmaCore.Units.smallSpacing
+        value: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
     }
 
 //BEGIN API implementation
@@ -78,7 +78,7 @@ ContainmentItem {
         anchors.fill: parent
 
         showDropShadow: !root.showingApp
-        colorGroup: root.showingApp ? PlasmaCore.Theme.HeaderColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        colorGroup: root.showingApp ? Kirigami.Theme.HeaderColorGroup : Kirigami.Theme.ComplementaryColorGroup
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
     }
 

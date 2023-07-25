@@ -24,7 +24,7 @@ import "quicksettings"
 /**
  * Root element that contains all of the ActionDrawer's contents, and is anchored to the screen.
  */
-PlasmaCore.ColorScope {
+Item {
     id: root
     
     required property var actionDrawer
@@ -37,18 +37,19 @@ PlasmaCore.ColorScope {
     readonly property real minWidthHeight: Math.min(root.width, root.height)
     readonly property real opacityValue: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     
-    colorGroup: PlasmaCore.Theme.ViewColorGroup
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
     
     // fullscreen background
     Rectangle {
         anchors.fill: parent
         
         // darken if there are notifications
-        color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
-                       PlasmaCore.Theme.backgroundColor.g, 
-                       PlasmaCore.Theme.backgroundColor.b, 
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, 
+                       Kirigami.Theme.backgroundColor.g, 
+                       Kirigami.Theme.backgroundColor.b, 
                        notificationWidget.hasNotifications ? 0.95 : 0.9)
-        Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
+        Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration } }
         opacity: opacityValue
     }
     
@@ -101,7 +102,7 @@ PlasmaCore.ColorScope {
                 onBackgroundClicked: root.actionDrawer.close();
                 
                 // don't allow notifications widget to get too wide
-                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 25
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.topMargin: minWidthHeight * 0.02
@@ -137,7 +138,7 @@ PlasmaCore.ColorScope {
                 left: parent.left
                 top: clock.bottom
                 bottom: isOnLargeScreen ? columnLayout.top : mediaWidget.top
-                topMargin: PlasmaCore.Units.smallSpacing
+                topMargin: Kirigami.Units.smallSpacing
                 leftMargin: columnLayout.anchors.margins
             }
 
@@ -147,7 +148,7 @@ PlasmaCore.ColorScope {
         
         MediaControls.MediaControlsWidget {
             id: mediaWidget
-            property real fullHeight: visible ? height + PlasmaCore.Units.smallSpacing * 6 : 0
+            property real fullHeight: visible ? height + Kirigami.Units.smallSpacing * 6 : 0
             
             y: isOnLargeScreen ? date.y - height + date.implicitHeight : date.y + date.implicitHeight + columnLayout.anchors.margins / 2
             

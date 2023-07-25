@@ -10,7 +10,6 @@ import QtQuick.Controls 2.3 as Controls
 import Qt5Compat.GraphicalEffects
 
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
@@ -77,10 +76,10 @@ Repeater {
             var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
 
             //SCROLL LEFT
-            if (pos.x < PlasmaCore.Units.gridUnit) {
+            if (pos.x < Kirigami.Units.gridUnit) {
                 launcherRepeater.scrollLeftRequested();
             //SCROLL RIGHT
-            } else if (pos.x > homeScreenState.pageWidth - PlasmaCore.Units.gridUnit) {
+            } else if (pos.x > homeScreenState.pageWidth - Kirigami.Units.gridUnit) {
                 launcherRepeater.scrollRightRequested();
             //DON't SCROLL
             } else {

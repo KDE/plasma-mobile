@@ -5,7 +5,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
@@ -123,7 +122,7 @@ Kirigami.Page {
 
         height: Kirigami.Units.gridUnit * 1.25
 
-        colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        colorGroup: Kirigami.Theme.ComplementaryColorGroup
         backgroundColor: "transparent"
 
         showSecondRow: false
@@ -287,8 +286,8 @@ Kirigami.Page {
                     Layout.leftMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.largeSpacing
-                    bottomPadding: Kirigami.Units.largeSpacing
+                    topPadding: Kirigami.Units.gridUnit
+                    bottomPadding: Kirigami.Units.gridUnit
                     leftPadding: Kirigami.Units.gridUnit
                     rightPadding: Kirigami.Units.gridUnit
 
@@ -305,8 +304,8 @@ Kirigami.Page {
                     Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.largeSpacing
-                    bottomPadding: Kirigami.Units.largeSpacing
+                    topPadding: Kirigami.Units.gridUnit
+                    bottomPadding: Kirigami.Units.gridUnit
                     leftPadding: Kirigami.Units.gridUnit
                     rightPadding: Kirigami.Units.gridUnit
 
@@ -322,8 +321,8 @@ Kirigami.Page {
                     Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.largeSpacing
-                    bottomPadding: Kirigami.Units.largeSpacing
+                    topPadding: Kirigami.Units.gridUnit
+                    bottomPadding: Kirigami.Units.gridUnit
                     leftPadding: Kirigami.Units.gridUnit
                     rightPadding: Kirigami.Units.gridUnit
 

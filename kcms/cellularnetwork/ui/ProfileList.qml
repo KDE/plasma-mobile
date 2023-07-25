@@ -21,7 +21,7 @@ Kirigami.ScrollablePage {
             anchors.centerIn: parent
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.margins: Kirigami.Units.largeSpacing
+            anchors.margins: Kirigami.Units.gridUnit
             visible: profileListView.count === 0
             text: i18n("No APNs configured")
             icon.name: "globe"
@@ -52,14 +52,14 @@ Kirigami.ScrollablePage {
                 id: messagesList
                 visible: count != 0
                 Layout.fillWidth: true
-                Layout.margins: Kirigami.Units.largeSpacing
+                Layout.margins: Kirigami.Units.gridUnit
                 model: kcm.messages
             }
             
             Kirigami.InlineMessage {
                 id: cannotFindWarning
-                Layout.margins: visible ? Kirigami.Units.largeSpacing : 0
-                Layout.topMargin: visible && !messagesList.visible ? Kirigami.Units.largeSpacing : 0
+                Layout.margins: visible ? Kirigami.Units.gridUnit : 0
+                Layout.topMargin: visible && !messagesList.visible ? Kirigami.Units.gridUnit : 0
                 Layout.fillWidth: true
                 
                 visible: false

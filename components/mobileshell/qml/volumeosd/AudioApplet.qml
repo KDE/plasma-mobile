@@ -10,9 +10,8 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Controls as Controls
 
-import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras as PlasmaExtra
 import org.kde.kquickcontrolsaddons as KQCAddons
 
 import org.kde.plasma.private.volume
@@ -53,17 +52,17 @@ ColumnLayout {
     
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
-        Layout.bottomMargin: PlasmaCore.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
-            anchors.rightMargin: PlasmaCore.Units.smallSpacing
-            anchors.leftMargin: PlasmaCore.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            anchors.leftMargin: Kirigami.Units.smallSpacing
             
-            PlasmaExtra.Heading {
+            Kirigami.Heading {
                 level: 2
                 text: i18n("Outputs")
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
             
             Repeater {
@@ -73,7 +72,7 @@ ColumnLayout {
                 model: paSinkFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
-                    Layout.margins: PlasmaCore.Units.smallSpacing
+                    Layout.margins: Kirigami.Units.smallSpacing
                     type: "sink"
                     onlyone: sinkView.count === 1
                 }
@@ -83,17 +82,17 @@ ColumnLayout {
     
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
-        Layout.bottomMargin: PlasmaCore.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
-            anchors.rightMargin: PlasmaCore.Units.smallSpacing
-            anchors.leftMargin: PlasmaCore.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            anchors.leftMargin: Kirigami.Units.smallSpacing
             
-            PlasmaExtra.Heading {
+            Kirigami.Heading {
                 level: 2
                 text: i18n("Inputs")
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
             
             Repeater {
@@ -103,7 +102,7 @@ ColumnLayout {
                 model: paSourceFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
-                    Layout.margins: PlasmaCore.Units.smallSpacing
+                    Layout.margins: Kirigami.Units.smallSpacing
                     type: "source"
                     onlyone: sinkView.count === 1
                 }
@@ -114,17 +113,17 @@ ColumnLayout {
     PopupCard {
         visible: sourceInputView.model.count + sourceMediaInputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
-        Layout.bottomMargin: PlasmaCore.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
-            anchors.rightMargin: PlasmaCore.Units.smallSpacing
-            anchors.leftMargin: PlasmaCore.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            anchors.leftMargin: Kirigami.Units.smallSpacing
             
-            PlasmaExtra.Heading {
+            Kirigami.Heading {
                 level: 2
                 text: i18n("Playback Streams")
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
             
             Repeater {
@@ -137,7 +136,7 @@ ColumnLayout {
                 }
                 delegate: StreamListItem {
                     Layout.fillWidth: true
-                    Layout.margins: PlasmaCore.Units.smallSpacing
+                    Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
                     devicesModel: sourceView.model
@@ -155,7 +154,7 @@ ColumnLayout {
 
                 delegate: StreamListItem {
                     Layout.fillWidth: true
-                    Layout.margins: PlasmaCore.Units.smallSpacing
+                    Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "sink-input"
                     devicesModel: sourceView.model
@@ -167,17 +166,17 @@ ColumnLayout {
     PopupCard {
         visible: sourceOutputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
-        Layout.bottomMargin: PlasmaCore.Units.largeSpacing
+        Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
-            anchors.rightMargin: PlasmaCore.Units.smallSpacing
-            anchors.leftMargin: PlasmaCore.Units.smallSpacing
+            anchors.rightMargin: Kirigami.Units.smallSpacing
+            anchors.leftMargin: Kirigami.Units.smallSpacing
             
-            PlasmaExtra.Heading {
+            Kirigami.Heading {
                 level: 2
                 text: i18n("Recording Streams")
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.smallSpacing
             }
             
             Repeater {
@@ -190,7 +189,7 @@ ColumnLayout {
                 }
                 delegate: StreamListItem {
                     Layout.fillWidth: true
-                    Layout.margins: PlasmaCore.Units.smallSpacing
+                    Layout.margins: Kirigami.Units.smallSpacing
                     width: sourceOutputView.width
                     type: "source-output"
                     devicesModel: sourceView.model

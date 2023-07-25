@@ -79,7 +79,7 @@ SimpleKCM {
         }
         
         MobileForm.FormCard {
-            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.topMargin: Kirigami.Units.gridUnit
             Layout.fillWidth: true
             
             contentItem: ColumnLayout {

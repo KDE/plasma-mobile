@@ -9,8 +9,8 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.kirigami 2.20 as Kirigami
 
 import "../components" as Components
 import "../widgets/notifications" as Notifications
@@ -19,7 +19,7 @@ import "quicksettings"
 /**
  * Root element that contains all of the ActionDrawer's contents, and is anchored to the screen.
  */
-PlasmaCore.ColorScope {
+Item {
     id: root
     
     required property var actionDrawer
@@ -32,7 +32,8 @@ PlasmaCore.ColorScope {
     // fully open position
     readonly property real maximizedQuickSettingsOffset: minimizedQuickSettingsOffset + quickSettings.maxAddedHeight
     
-    colorGroup: PlasmaCore.Theme.ViewColorGroup
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
     
     function applyMinMax(val) {
         return Math.max(0, Math.min(1, val));
@@ -42,11 +43,11 @@ PlasmaCore.ColorScope {
     Rectangle {
         anchors.fill: parent
         // darken if there are notifications
-        color: Qt.rgba(PlasmaCore.Theme.backgroundColor.r, 
-                       PlasmaCore.Theme.backgroundColor.g, 
-                       PlasmaCore.Theme.backgroundColor.b, 
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, 
+                       Kirigami.Theme.backgroundColor.g, 
+                       Kirigami.Theme.backgroundColor.b, 
                        0.95)
-        Behavior on color { ColorAnimation { duration: PlasmaCore.Units.longDuration } }
+        Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration } }
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
     

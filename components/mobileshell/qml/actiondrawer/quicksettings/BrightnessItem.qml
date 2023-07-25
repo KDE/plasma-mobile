@@ -83,7 +83,7 @@ Item {
     
     RowLayout {
         id: brightnessRow
-        spacing: PlasmaCore.Units.smallSpacing * 2
+        spacing: Kirigami.Units.smallSpacing * 2
         
         anchors.left: parent.left
         anchors.right: parent.right
@@ -91,8 +91,8 @@ Item {
 
         PlasmaCore.IconItem {
             Layout.alignment: Qt.AlignVCenter
-            Layout.leftMargin: PlasmaCore.Units.smallSpacing
-            Layout.preferredWidth: PlasmaCore.Units.iconSizes.smallMedium
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
             Layout.preferredHeight: width
             source: "low-brightness"
         }
@@ -123,8 +123,8 @@ Item {
         
         PlasmaCore.IconItem {
             Layout.alignment: Qt.AlignVCenter
-            Layout.rightMargin: PlasmaCore.Units.smallSpacing
-            Layout.preferredWidth: PlasmaCore.Units.iconSizes.smallMedium
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
             Layout.preferredHeight: width
             source: "high-brightness"
         }

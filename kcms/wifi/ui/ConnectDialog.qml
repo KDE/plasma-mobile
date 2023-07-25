@@ -103,7 +103,7 @@ Controls.Dialog {
     
     header: Item {
         transform: Translate { y: dialogRoot.translateY }
-        implicitHeight: heading.implicitHeight + Kirigami.Units.largeSpacing * 2
+        implicitHeight: heading.implicitHeight + Kirigami.Units.gridUnit * 2
 
         Kirigami.Heading {
             id: heading
@@ -112,7 +112,7 @@ Controls.Dialog {
             wrapMode: Text.WordWrap
             anchors.left: parent.left
             anchors.right: parent.right
-            anchors.leftMargin: Kirigami.Units.largeSpacing
+            anchors.leftMargin: Kirigami.Units.gridUnit
             anchors.verticalCenter: parent.verticalCenter
         }
     }
@@ -122,7 +122,7 @@ Controls.Dialog {
     ColumnLayout {
         id: column
         transform: Translate { y: dialogRoot.translateY }
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.gridUnit
         
         PasswordField {
             id: passwordField

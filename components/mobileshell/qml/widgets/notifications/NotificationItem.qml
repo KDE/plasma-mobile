@@ -11,7 +11,6 @@ import QtQuick.Window 2.2
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.notificationmanager 1.0 as NotificationManager
 
@@ -33,8 +32,8 @@ BaseNotificationItem {
         anchors.left: parent.left
         anchors.right: parent.right
 
-        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.HeaderColorGroup
-        PlasmaCore.ColorScope.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Header
+        Kirigami.Theme.inherit: false
 
         visible: !notificationItem.inGroup
         height: visible ? implicitHeight : 0
@@ -54,7 +53,7 @@ BaseNotificationItem {
     // notification
     NotificationCard {
         id: mainCard
-        anchors.topMargin: notificationHeading.visible ? Kirigami.Units.largeSpacing : 0
+        anchors.topMargin: notificationHeading.visible ? Kirigami.Units.gridUnit : 0
         anchors.top: notificationHeading.bottom
         anchors.left: parent.left
         anchors.right: parent.right
@@ -71,7 +70,7 @@ BaseNotificationItem {
             // notification summary row
             RowLayout {
                 Layout.fillWidth: true
-                Layout.bottomMargin: PlasmaCore.Units.smallSpacing
+                Layout.bottomMargin: Kirigami.Units.smallSpacing
                 
                 // notification summary
                 PlasmaComponents.Label {
@@ -101,7 +100,7 @@ BaseNotificationItem {
             // notification contents
             RowLayout {
                 Layout.fillWidth: true
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
 
                 // notification text
                 NotificationBodyLabel {
@@ -112,7 +111,7 @@ BaseNotificationItem {
                     // HACK RichText does not allow to specify link color and since LineEdit
                     // does not support StyledText, we have to inject some CSS to force the color,
                     // cf. QTBUG-81463 and to some extent QTBUG-80354
-                    text: "<style>a { color: " + PlasmaCore.Theme.linkColor + "; }</style>" + notificationItem.body
+                    text: "<style>a { color: " + Kirigami.Theme.linkColor + "; }</style>" + notificationItem.body
 
                     // Cannot do text !== "" because RichText adds some HTML tags even when empty
                     visible: notificationItem.body !== ""
@@ -121,10 +120,10 @@ BaseNotificationItem {
                 // notification icon
                 Item {
                     id: iconContainer
-                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.large
-                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.large
-                    Layout.topMargin: PlasmaCore.Units.smallSpacing
-                    Layout.bottomMargin: PlasmaCore.Units.smallSpacing
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
+                    Layout.topMargin: Kirigami.Units.smallSpacing
+                    Layout.bottomMargin: Kirigami.Units.smallSpacing
 
                     visible: iconItem.active
 
@@ -151,7 +150,7 @@ BaseNotificationItem {
             // thumbnails
             Loader {
                 id: thumbnailStripLoader
-                Layout.topMargin: Kirigami.Units.largeSpacing
+                Layout.topMargin: Kirigami.Units.gridUnit
                 Layout.fillWidth: true
                 active: notificationItem.urls.length > 0
                 visible: active

@@ -10,6 +10,7 @@ import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.kirigami 2.20 as Kirigami
 
 import "../../dataproviders" as DataProviders
 
@@ -22,14 +23,14 @@ Item {
     readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')
     
     property bool showLabel: true
-    property real textPixelSize: PlasmaCore.Units.gridUnit * 0.6
+    property real textPixelSize: Kirigami.Units.gridUnit * 0.6
     
     width: strengthIcon.width + label.width
     Layout.minimumWidth: strengthIcon.width + label.width
 
     PlasmaCore.IconItem {
         id: strengthIcon
-        colorGroup: PlasmaCore.ColorScope.colorGroup
+        colorSet: Kirigami.Theme.colorSet
         anchors.left: parent.left
         anchors.verticalCenter: parent.verticalCenter
         width: height
@@ -45,12 +46,12 @@ Item {
         id: label
         visible: showLabel
         width: visible ? implicitWidth : 0
-        anchors.leftMargin: PlasmaCore.Units.smallSpacing
+        anchors.leftMargin: Kirigami.Units.smallSpacing
         anchors.left: strengthIcon.right
         anchors.verticalCenter: parent.verticalCenter
 
         text: provider.label
-        color: PlasmaCore.ColorScope.textColor
+        color: Kirigami.Theme.textColor
         font.pixelSize: textPixelSize
     }
 }

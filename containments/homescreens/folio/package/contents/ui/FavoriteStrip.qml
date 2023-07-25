@@ -8,8 +8,9 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kquickcontrolsaddons 2.0
 
 
@@ -26,13 +27,13 @@ LauncherContainer {
 
     Behavior on height {
         NumberAnimation {
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on opacity {
         OpacityAnimator {
-            duration: PlasmaCore.Units.longDuration * 4
+            duration: Kirigami.Units.longDuration * 4
             easing.type: Easing.InOutQuad
         }
     }

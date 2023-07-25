@@ -9,6 +9,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -35,7 +37,7 @@ MouseArea {
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
+            delegate.launch(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
         }
     }
     
@@ -124,7 +126,7 @@ MouseArea {
                 }
                 visible: model.applicationRunning
                 radius: width
-                width: PlasmaCore.Units.smallSpacing
+                width: Kirigami.Units.smallSpacing
                 height: width
                 color: theme.highlightColor
             }
@@ -144,9 +146,9 @@ MouseArea {
 
             Layout.fillWidth: true
             Layout.preferredHeight: delegate.reservedSpaceForLabel
-            Layout.topMargin: PlasmaCore.Units.smallSpacing
-            Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing
-            Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing
+            Layout.topMargin: Kirigami.Units.smallSpacing
+            Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
+            Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
             
             wrapMode: Text.WordWrap
             maximumLineCount: 2

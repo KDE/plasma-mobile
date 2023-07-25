@@ -10,6 +10,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0
 
 Controls.AbstractButton {
@@ -26,7 +27,7 @@ Controls.AbstractButton {
         radius: height/2
         anchors.fill: parent
         opacity: 0
-        color: PlasmaCore.ColorScope.textColor
+        color: Kirigami.Theme.textColor
         
         // this way of calculating animations lets the animation fully complete before switching back (tap runs the full animation)
         property bool buttonHeld: button.pressed && button.enabled
@@ -49,7 +50,7 @@ Controls.AbstractButton {
         }
         NumberAnimation on opacity {
             id: opacityAnimator
-            duration: PlasmaCore.Units.shortDuration
+            duration: Kirigami.Units.shortDuration
             easing.type: Easing.InOutQuad
             onFinished: {
                 // animate the state back
@@ -69,6 +70,6 @@ Controls.AbstractButton {
             fill: parent
             margins: Math.round((side - side * iconSizeFactor * 0.6) / 2)
         }
-        colorGroup: PlasmaCore.ColorScope.colorGroup
+        colorSet: Kirigami.Theme.colorSet
     }
 }

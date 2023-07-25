@@ -9,8 +9,9 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -89,10 +90,10 @@ DragDrop.DropArea {
 
             let scenePos = mapToItem(null, event.x, event.y);
             //SCROLL LEFT
-            if (scenePos.x < PlasmaCore.Units.gridUnit) {
+            if (scenePos.x < Kirigami.Units.gridUnit) {
                 homeScreenPages.scrollLeft();
             //SCROLL RIGHT
-            } else if (scenePos.x > homeScreenPages.width - PlasmaCore.Units.gridUnit) {
+            } else if (scenePos.x > homeScreenPages.width - Kirigami.Units.gridUnit) {
                 homeScreenPages.scrollRight();
             //DON't SCROLL
             } else {
@@ -194,10 +195,10 @@ DragDrop.DropArea {
         // Sets the containment in edit mode when we go in edit mode as well
         onEditModeChanged: plasmoid.editMode = editMode;
 
-        minimumItemWidth: PlasmaCore.Units.gridUnit * 3
+        minimumItemWidth: Kirigami.Units.gridUnit * 3
         minimumItemHeight: minimumItemWidth
 
-        defaultItemWidth: PlasmaCore.Units.gridUnit * 6
+        defaultItemWidth: Kirigami.Units.gridUnit * 6
         defaultItemHeight: defaultItemWidth
 
         acceptsAppletCallback: function(applet, x, y) {
@@ -219,7 +220,7 @@ DragDrop.DropArea {
             id: metrics
             text: "M\nM"
             visible: false
-            font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.9
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
         }
         LauncherRepeater {
             id: launcherRepeater

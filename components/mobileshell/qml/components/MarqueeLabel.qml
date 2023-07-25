@@ -3,7 +3,7 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 /**
@@ -16,7 +16,7 @@ PlasmaComponents.Label {
     required property string inputText
     readonly property string filteredText: inputText.replace(/\n/g, ' ') // remove new line characters
     
-    property int interval: PlasmaCore.Units.longDuration
+    property int interval: Kirigami.Units.longDuration
     
     readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / filteredText.length))
     property int step: 0
@@ -36,7 +36,7 @@ PlasmaComponents.Label {
         onTriggered: {
             if (paused) {
                 if (step != 0) {
-                    interval = PlasmaCore.Units.veryLongDuration;
+                    interval = Kirigami.Units.veryLongDuration;
                     step = 0;
                 } else {
                     interval = root.interval;
@@ -45,7 +45,7 @@ PlasmaComponents.Label {
             } else {
                 step = (step + 1) % filteredText.length;
                 if (step === charactersOverflow) {
-                    interval = PlasmaCore.Units.veryLongDuration * 3;
+                    interval = Kirigami.Units.veryLongDuration * 3;
                     paused = true;
                 }
             }

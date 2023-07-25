@@ -45,7 +45,7 @@ Components.BaseItem {
     /**
      * Height of just the QuickSettings component in minimized mode.
      */
-    readonly property real minimizedQuickSettingsHeight: quickSettings.minimizedRowHeight + PlasmaCore.Units.gridUnit
+    readonly property real minimizedQuickSettingsHeight: quickSettings.minimizedRowHeight + Kirigami.Units.gridUnit
     
     /**
      * Progress of showing the full quick settings view from pinned.
@@ -53,10 +53,10 @@ Components.BaseItem {
     property real minimizedToFullProgress: 1
     
     // we need extra padding if the background side border is enabled
-    topPadding: PlasmaCore.Units.smallSpacing 
-    leftPadding: PlasmaCore.Units.smallSpacing 
-    rightPadding: PlasmaCore.Units.smallSpacing
-    bottomPadding: PlasmaCore.Units.smallSpacing * 4
+    topPadding: Kirigami.Units.smallSpacing 
+    leftPadding: Kirigami.Units.smallSpacing 
+    rightPadding: Kirigami.Units.smallSpacing
+    bottomPadding: Kirigami.Units.smallSpacing * 4
     
     background: KSvg.FrameSvgItem {
         enabledBorders: PlasmaCore.FrameSvg.BottomBorder
@@ -78,9 +78,9 @@ Components.BaseItem {
             StatusBar.StatusBar {
                 id: statusBar
                 Layout.fillWidth: true
-                Layout.preferredHeight: Components.Constants.topPanelHeight + PlasmaCore.Units.gridUnit * 0.8
+                Layout.preferredHeight: Components.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
                 
-                colorGroup: PlasmaCore.Theme.NormalColorGroup
+                colorGroup: Kirigami.Theme.Window
                 backgroundColor: "transparent"
                 showSecondRow: true
                 showDropShadow: false
@@ -92,7 +92,7 @@ Components.BaseItem {
             QuickSettings {
                 id: quickSettings
                 Layout.preferredHeight: root.minimizedQuickSettingsHeight + root.addedHeight
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.fillWidth: true
                 
                 mode: QuickSettings.Pages
@@ -107,16 +107,16 @@ Components.BaseItem {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.largeSpacing
-                Layout.rightMargin: Kirigami.Units.largeSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
             }
             
             Handle {
                 id: handle
                 property real fullHeight: height + Layout.topMargin
                 Layout.alignment: Qt.AlignHCenter
-                Layout.topMargin: PlasmaCore.Units.smallSpacing * 2
+                Layout.topMargin: Kirigami.Units.smallSpacing * 2
                 
                 onTapped: {
                     if (root.minimizedToFullProgress < 0.5) {

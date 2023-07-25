@@ -8,7 +8,6 @@ import QtQuick.Effects
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutManager 
@@ -71,7 +70,7 @@ Item {
             if (application.running) {
                 launchAppWithAnim(0, 0, "", applicationName, applicationStorageId);
             } else {
-                launchAppWithAnim(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), delegate.applicationIcon, applicationName, applicationStorageId);
+                launchAppWithAnim(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), delegate.applicationIcon, applicationName, applicationStorageId);
             }
         }
     }
@@ -198,10 +197,10 @@ Item {
             id: rowLayout
             anchors {
                 fill: parent
-                leftMargin: PlasmaCore.Units.smallSpacing * 2
-                topMargin: PlasmaCore.Units.smallSpacing
-                rightMargin: PlasmaCore.Units.smallSpacing * 2
-                bottomMargin: PlasmaCore.Units.smallSpacing
+                leftMargin: Kirigami.Units.smallSpacing * 2
+                topMargin: Kirigami.Units.smallSpacing
+                rightMargin: Kirigami.Units.smallSpacing * 2
+                bottomMargin: Kirigami.Units.smallSpacing
             }
             spacing: 0
 
@@ -222,15 +221,15 @@ Item {
                 textFormat: Text.MarkdownText
 
                 Layout.fillWidth: true
-                Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-                Layout.rightMargin: PlasmaCore.Units.largeSpacing
+                Layout.leftMargin: Kirigami.Units.smallSpacing * 2
+                Layout.rightMargin: Kirigami.Units.gridUnit
                 wrapMode: Text.WordWrap
                 maximumLineCount: 1
                 elide: Text.ElideRight
 
                 text: delegate.isFolder ? delegate.folderName : delegate.applicationName
 
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize
                 font.weight: Font.Bold
                 color: "white"
                 
@@ -265,9 +264,9 @@ Item {
         Item {
             Rectangle {
                 anchors.fill: parent
-                anchors.margins: PlasmaCore.Units.smallSpacing
+                anchors.margins: Kirigami.Units.smallSpacing
                 color: Qt.rgba(255, 255, 255, 0.2)
-                radius: PlasmaCore.Units.smallSpacing
+                radius: Kirigami.Units.smallSpacing
                 opacity: delegate.dragFolderAnimationProgress
             }
             
@@ -291,9 +290,9 @@ Item {
                     }
                     visible: application ? application.running : false
                     radius: width
-                    width: PlasmaCore.Units.smallSpacing
+                    width: Kirigami.Units.smallSpacing
                     height: width
-                    color: PlasmaCore.Theme.highlightColor
+                    color: Kirigami.Theme.highlightColor
                 }
                 
                 layer.enabled: true
@@ -314,9 +313,9 @@ Item {
             Rectangle {
                 id: rect
                 anchors.fill: parent
-                anchors.margins: PlasmaCore.Units.smallSpacing
+                anchors.margins: Kirigami.Units.smallSpacing
                 color: Qt.rgba(255, 255, 255, 0.2)
-                radius: PlasmaCore.Units.smallSpacing
+                radius: Kirigami.Units.smallSpacing
                 
                 transform: Scale { 
                     origin.x: rect.width / 2 
@@ -329,17 +328,17 @@ Item {
             Grid {
                 id: grid
                 anchors.fill: parent
-                anchors.margins: PlasmaCore.Units.smallSpacing * 2
+                anchors.margins: Kirigami.Units.smallSpacing * 2
                 columns: 2
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
                 
                 property var previews: model.folder.appPreviews
                 
                 Repeater {
                     model: grid.previews
                     delegate: Kirigami.Icon {
-                        implicitWidth: (grid.width - PlasmaCore.Units.smallSpacing) / 2
-                        implicitHeight: (grid.width - PlasmaCore.Units.smallSpacing) / 2
+                        implicitWidth: (grid.width - Kirigami.Units.smallSpacing) / 2
+                        implicitHeight: (grid.width - Kirigami.Units.smallSpacing) / 2
                         source: modelData.icon
                         
                         layer.enabled: true

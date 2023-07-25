@@ -6,6 +6,8 @@ import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.15
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -35,7 +37,7 @@ ContainmentItem {
     readonly property bool inLandscape: Screen.width > Screen.height;
     readonly property bool isInLandscapeNavPanelMode: inLandscape && ShellSettings.Settings.navigationPanelEnabled
 
-    readonly property real navigationPanelHeight: PlasmaCore.Units.gridUnit * 2
+    readonly property real navigationPanelHeight: Kirigami.Units.gridUnit * 2
 
     readonly property real intendedWindowThickness: navigationPanelHeight
     readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
@@ -105,11 +107,12 @@ ContainmentItem {
     // only opaque if there are no maximized windows on this screen
     readonly property bool opaqueBar: WindowPlugin.WindowMaximizedTracker.showingWindow
 
-    PlasmaCore.ColorScope {
+    Item {
         anchors.fill: parent
 
         // contrasting colour
-        colorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+        Kirigami.Theme.colorSet: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
+        Kirigami.Theme.inherit: false
 
         // load appropriate system navigation component
         Loader {

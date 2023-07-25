@@ -9,8 +9,9 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -82,7 +83,7 @@ MobileShell.Flickable {
         repeat: true
         interval: 1500
         onTriggered: {
-            homeScreenState.animateGoToPageIndex(Math.max(0, homeScreenState.currentPageIndex + (scrollRight ? 1 : -1)), PlasmaCore.Units.longDuration * 2);
+            homeScreenState.animateGoToPageIndex(Math.max(0, homeScreenState.currentPageIndex + (scrollRight ? 1 : -1)), Kirigami.Units.longDuration * 2);
         }
     }
     
@@ -94,8 +95,8 @@ MobileShell.Flickable {
             bottomMargin: mainFlickable.footer ? mainFlickable.footer.height : 0
         }
         
-        PlasmaCore.ColorScope.inherit: false
-        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
         
         parent: mainFlickable
         visible: count > 1
@@ -105,11 +106,11 @@ MobileShell.Flickable {
         
         delegate: Rectangle {
             property bool isAddPageIndicator: index === pageIndicator.count-1 && mainFlickable.showAddPageIndicator
-            implicitWidth: PlasmaCore.Units.gridUnit/2
+            implicitWidth: Kirigami.Units.gridUnit/2
             implicitHeight: implicitWidth
             
             radius: width
-            color: isAddPageIndicator ? "transparent" : PlasmaCore.ColorScope.textColor
+            color: isAddPageIndicator ? "transparent" : Kirigami.Theme.textColor
 
             PlasmaComponents.Label {
                 anchors.centerIn: parent
@@ -120,7 +121,7 @@ MobileShell.Flickable {
             opacity: index === pageIndicator.currentIndex ? 0.9 : pressed ? 0.7 : 0.5
             Behavior on opacity {
                 OpacityAnimator {
-                    duration: PlasmaCore.Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
@@ -142,7 +143,7 @@ MobileShell.Flickable {
             id: scrollLeftIndicator
             anchors {
                 left: parent.left
-                leftMargin: PlasmaCore.Units.smallSpacing
+                leftMargin: Kirigami.Units.smallSpacing
             }
             elementId: "left-arrow"
         }
@@ -150,7 +151,7 @@ MobileShell.Flickable {
             id: scrollRightIndicator
             anchors {
                 right: parent.right
-                rightMargin: PlasmaCore.Units.smallSpacing
+                rightMargin: Kirigami.Units.smallSpacing
             }
             elementId: "right-arrow"
         }

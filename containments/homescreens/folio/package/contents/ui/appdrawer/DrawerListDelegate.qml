@@ -10,6 +10,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -37,7 +39,7 @@ MouseArea {
         if (model.applicationRunning) {
             delegate.launch(0, 0, "", model.applicationName, model.applicationStorageId);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
+            delegate.launch(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), icon.source, model.applicationName, model.applicationStorageId);
         }
     }
     hoverEnabled: true
@@ -46,17 +48,17 @@ MouseArea {
         anchors.fill: parent
         color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
         Behavior on color { 
-            ColorAnimation { duration: PlasmaCore.Units.shortDuration } 
+            ColorAnimation { duration: Kirigami.Units.shortDuration } 
         }
     }
     
     RowLayout {
         anchors {
             fill: parent
-            leftMargin: PlasmaCore.Units.smallSpacing * 2
-            topMargin: PlasmaCore.Units.smallSpacing
-            rightMargin: PlasmaCore.Units.smallSpacing * 2
-            bottomMargin: PlasmaCore.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing * 2
+            topMargin: Kirigami.Units.smallSpacing
+            rightMargin: Kirigami.Units.smallSpacing * 2
+            bottomMargin: Kirigami.Units.smallSpacing
         }
         spacing: 0
 
@@ -79,7 +81,7 @@ MouseArea {
                 }
                 visible: model.applicationRunning
                 radius: width
-                width: PlasmaCore.Units.smallSpacing
+                width: Kirigami.Units.smallSpacing
                 height: width
                 color: theme.highlightColor
             }
@@ -91,8 +93,8 @@ MouseArea {
 
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
-            Layout.leftMargin: PlasmaCore.Units.smallSpacing * 2
-            Layout.rightMargin: PlasmaCore.Units.largeSpacing
+            Layout.leftMargin: Kirigami.Units.smallSpacing * 2
+            Layout.rightMargin: Kirigami.Units.gridUnit
             maximumLineCount: 1
             elide: Text.ElideRight
 

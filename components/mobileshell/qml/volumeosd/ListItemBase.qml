@@ -11,11 +11,11 @@ import QtQuick.Controls 2.15 as Controls
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.plasma.private.volume 0.1
 
 import "icon.js" as Icon
@@ -37,12 +37,12 @@ Controls.ItemDelegate {
     
     contentItem: RowLayout {
         id: row
-        spacing: PlasmaCore.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
         
         PlasmaComponents.RadioButton {
             id: selectButton
             Layout.alignment: Qt.AlignTop
-            Layout.topMargin: Math.round(row.height / 2 - implicitHeight - PlasmaCore.Units.smallSpacing / 2) // align with text
+            Layout.topMargin: Math.round(row.height / 2 - implicitHeight - Kirigami.Units.smallSpacing / 2) // align with text
             checked: model.PulseObject.hasOwnProperty("default") ? model.PulseObject.default : false
             visible: (baseItem.type == "sink" && sinkView.model.count > 1) || (baseItem.type == "source" && sourceView.model.count > 1)
             onClicked: model.PulseObject.default = true
@@ -52,9 +52,9 @@ Controls.ItemDelegate {
         PlasmaCore.IconItem {
             id: clientIcon
             Layout.alignment: Qt.AlignVCenter
-            Layout.rightMargin: PlasmaCore.Units.smallSpacing
-            Layout.preferredWidth: PlasmaCore.Units.iconSizes.smallMedium
-            Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+            Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
             visible: type === "sink-input" || type === "source-output"
             source: "unknown"
             onSourceChanged: {
@@ -67,11 +67,11 @@ Controls.ItemDelegate {
         ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
-            spacing: PlasmaCore.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
             
             RowLayout {
                 Layout.fillWidth: true
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
                 Layout.alignment: Qt.AlignBottom
                 
                 PlasmaComponents.Label {
@@ -84,7 +84,7 @@ Controls.ItemDelegate {
                 
                 PlasmaComponents.ToolButton {
                     Layout.alignment: Qt.AlignBottom
-                    Layout.bottomMargin: -PlasmaCore.Units.smallSpacing
+                    Layout.bottomMargin: -Kirigami.Units.smallSpacing
                     icon.name: "application-menu"
                     checkable: true
                     checked: contextMenu.visible && contextMenu.visualParent === this
@@ -127,7 +127,7 @@ Controls.ItemDelegate {
             
             RowLayout {
                 Layout.fillWidth: true
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
                 
                 // this slider was effectively copied from the source (linked at the top of the file)
                 PlasmaComponents.Slider {
@@ -175,7 +175,7 @@ Controls.ItemDelegate {
                             Behavior on width {
                                 NumberAnimation  {
                                     id: animation
-                                    duration: PlasmaCore.Units.shortDuration
+                                    duration: Kirigami.Units.shortDuration
                                     easing.type: Easing.OutQuad
                                 }
                             }
@@ -231,11 +231,11 @@ Controls.ItemDelegate {
                     text: i18nc("volume percentage", "%1%", displayValue)
                     color: {
                         if (displayValue <= 100) {
-                            return PlasmaCore.Theme.textColor
+                            return Kirigami.Theme.textColor
                         } else if (displayValue > 100 && displayValue <= 125) {
-                            return PlasmaCore.Theme.neutralTextColor
+                            return Kirigami.Theme.neutralTextColor
                         } else {
-                            return PlasmaCore.Theme.negativeTextColor
+                            return Kirigami.Theme.negativeTextColor
                         }
                     }
                 }

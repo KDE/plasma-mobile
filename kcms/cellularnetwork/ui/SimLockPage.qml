@@ -28,7 +28,7 @@ Kirigami.ScrollablePage {
         
         MessagesList {
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.largeSpacing
+            Layout.margins: Kirigami.Units.gridUnit
             model: kcm.messages
         }
 
@@ -92,8 +92,8 @@ Kirigami.ScrollablePage {
                 }
                 
                 Kirigami.Separator {
-                    Layout.leftMargin: Kirigami.Units.largeSpacing
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.leftMargin: Kirigami.Units.gridUnit
+                    Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.fillWidth: true
                     opacity: (!disableSimLockButton.controlHovered && !changePinButton.controlHovered) ? 0.5 : 0
                 }
@@ -118,7 +118,7 @@ Kirigami.ScrollablePage {
             id: unlockPinDialog
             title: i18n("Unlock SIM")
             standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
-            padding: Kirigami.Units.largeSpacing
+            padding: Kirigami.Units.gridUnit
             
             onAccepted: sim.sendPin(unlockPinCurPin.text)
             
@@ -138,7 +138,7 @@ Kirigami.ScrollablePage {
             id: changePinDialog
             title: i18n("Change SIM PIN")
             standardButtons: isValid ? Controls.Dialog.Ok | Controls.Dialog.Cancel : Controls.Dialog.Cancel
-            padding: Kirigami.Units.largeSpacing
+            padding: Kirigami.Units.gridUnit
             
             property bool isValid: changePinNewPin.text == changePinConfirmPin.text && 
                                    changePinNewPin.text.length >= 4 && changePinNewPin.text.length <= 8 // SIM PINs are between 4-8 digits
@@ -186,7 +186,7 @@ Kirigami.ScrollablePage {
             id: removePinDialog
             title: i18n("Remove SIM PIN")
             standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel 
-            padding: Kirigami.Units.largeSpacing
+            padding: Kirigami.Units.gridUnit
             
             onAccepted: sim.togglePinEnabled(removePinCurPin.text);
             
@@ -203,7 +203,7 @@ Kirigami.ScrollablePage {
             id: createPinDialog
             title: i18n("Add SIM PIN")
             standardButtons: isValid ? Controls.Dialog.Ok | Controls.Dialog.Cancel : Controls.Dialog.Cancel
-            padding: Kirigami.Units.largeSpacing
+            padding: Kirigami.Units.gridUnit
             
             property bool isValid: createPinNewPin.text == createPinConfirmPin.text && 
                                    createPinNewPin.text.length >= 4 && createPinNewPin.text.length <= 8 // SIM PINs are between 4-8 digits

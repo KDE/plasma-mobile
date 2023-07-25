@@ -7,8 +7,9 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.ksvg 1.0 as KSvg
 
@@ -21,7 +22,7 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
     signal requestRemoveTrigger
     signal requestEditModeClose
     
-    readonly property int iconSize: PlasmaCore.Units.iconSizes.medium
+    readonly property int iconSize: Kirigami.Units.iconSizes.medium
     KSvg.Svg {
         id: configIconsSvg
         imagePath: "widgets/configuration-icons"
@@ -45,7 +46,7 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
             property: "scale"
             from: 1
             to: 0
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
         ScriptAction {
@@ -65,7 +66,7 @@ ContainmentLayoutManager.ConfigOverlayWithHandles {
 
         RowLayout {
             id: layout
-            spacing: PlasmaCore.Units.largeSpacing
+            spacing: Kirigami.Units.gridUnit
             anchors {
                 fill: parent
                 topMargin: parent.margins.top

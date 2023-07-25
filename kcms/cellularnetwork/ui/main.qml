@@ -28,7 +28,7 @@ KCM.SimpleKCM {
         anchors.centerIn: parent
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.margins: Kirigami.Units.largeSpacing
+        anchors.margins: Kirigami.Units.gridUnit
         
         visible: !enabledConnections.wwanHwEnabled || !availableDevices.modemDeviceAvailable || !kcm.modemFound
         icon.name: "auth-sim-missing"
@@ -59,7 +59,7 @@ KCM.SimpleKCM {
         
         MessagesList {
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.largeSpacing
+            Layout.margins: Kirigami.Units.gridUnit
             model: kcm.messages
         }
         
@@ -124,7 +124,7 @@ KCM.SimpleKCM {
         
         MobileForm.FormCard {
             Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.topMargin: Kirigami.Units.gridUnit
             
             contentItem: ColumnLayout {
                 spacing: 0
@@ -142,8 +142,8 @@ KCM.SimpleKCM {
                         
                         Kirigami.Separator {
                             visible: model.index !== 0
-                            Layout.leftMargin: Kirigami.Units.largeSpacing
-                            Layout.rightMargin: Kirigami.Units.largeSpacing
+                            Layout.leftMargin: Kirigami.Units.gridUnit
+                            Layout.rightMargin: Kirigami.Units.gridUnit
                             Layout.fillWidth: true
                             opacity: (!(model.index && repeater.itemAt(model.index - 1).controlHovered) && !simDelegate.controlHovered) ? 0.5 : 0
                         }

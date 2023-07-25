@@ -5,7 +5,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
@@ -39,14 +39,14 @@ Loader {
             spacing: 0
 
             // center clock when no notifications are shown, otherwise move the clock upward
-            anchors.topMargin: !root.notificationsShown ? Math.round(root.fullHeight / 2 - (column.implicitHeight / 2)) : PlasmaCore.Units.gridUnit * 5
-            anchors.bottomMargin: PlasmaCore.Units.gridUnit
+            anchors.topMargin: !root.notificationsShown ? Math.round(root.fullHeight / 2 - (column.implicitHeight / 2)) : Kirigami.Units.gridUnit * 5
+            anchors.bottomMargin: Kirigami.Units.gridUnit
             anchors.fill: parent
 
             // animate
             Behavior on anchors.topMargin {
                 NumberAnimation {
-                    duration: loadTimer.running ? 0 : PlasmaCore.Units.veryLongDuration
+                    duration: loadTimer.running ? 0 : Kirigami.Units.veryLongDuration
                     easing.type: Easing.InOutExpo
                 }
             }
@@ -54,15 +54,15 @@ Loader {
             Clock {
                 layoutAlignment: Qt.AlignHCenter
                 Layout.alignment: Qt.AlignHCenter
-                Layout.bottomMargin: PlasmaCore.Units.gridUnit * 2 // keep spacing even if media controls are gone
+                Layout.bottomMargin: Kirigami.Units.gridUnit * 2 // keep spacing even if media controls are gone
             }
 
             MobileShell.MediaControlsWidget {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillWidth: true
-                Layout.maximumWidth: PlasmaCore.Units.gridUnit * 25
-                Layout.leftMargin: PlasmaCore.Units.gridUnit
-                Layout.rightMargin: PlasmaCore.Units.gridUnit
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 25
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
 
                 layer.enabled: true
                 layer.effect: MultiEffect {
@@ -70,7 +70,7 @@ Loader {
                     shadowEnabled: true
                     shadowVerticalOffset: 1
                     shadowOpacity: 0.5
-                    shadowColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
+                    shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.1)
                 }
             }
 
@@ -82,8 +82,8 @@ Loader {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.maximumWidth: PlasmaCore.Units.gridUnit * (25 + 2) // clip margins
-                topMargin: PlasmaCore.Units.gridUnit
+                Layout.maximumWidth: Kirigami.Units.gridUnit * (25 + 2) // clip margins
+                topMargin: Kirigami.Units.gridUnit
 
                 onPasswordRequested: root.passwordRequested()
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown

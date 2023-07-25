@@ -5,7 +5,6 @@
  */
 
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 
 QS.QuickSetting {

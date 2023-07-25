@@ -47,8 +47,8 @@ Kirigami.ScrollablePage {
         
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.largeSpacing
-            Layout.bottomMargin: visible && !messagesList.visible ? Kirigami.Units.largeSpacing : 0
+            Layout.margins: Kirigami.Units.gridUnit
+            Layout.bottomMargin: visible && !messagesList.visible ? Kirigami.Units.gridUnit : 0
             visible: !simEnabled
             type: Kirigami.MessageType.Error
             text: qsTr("This SIM slot is empty, a SIM card needs to be inserted in order for it to be used.")
@@ -57,7 +57,7 @@ Kirigami.ScrollablePage {
         MessagesList {
             id: messagesList
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.largeSpacing
+            Layout.margins: Kirigami.Units.gridUnit
             model: kcm.messages
         }
         
@@ -123,7 +123,7 @@ Kirigami.ScrollablePage {
         
         MobileForm.FormCard {
             Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.topMargin: Kirigami.Units.gridUnit
             
             contentItem: ColumnLayout {
                 spacing: 0

@@ -10,9 +10,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as Controls
 
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
@@ -39,7 +37,7 @@ AbstractAppDrawer {
         leftMargin: horizontalMargin
         rightMargin: horizontalMargin
         
-        cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (PlasmaCore.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
+        cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Kirigami.Units.iconSizes.huge + Kirigami.Units.gridUnit * 2)), 8)
         cellHeight: cellWidth + root.reservedSpaceForLabel
 
         readonly property int columns: Math.floor(effectiveContentWidth / cellWidth)
@@ -89,11 +87,11 @@ AbstractAppDrawer {
             enabled: true
             Behavior on opacity {
                 OpacityAnimator {
-                    duration: PlasmaCore.Units.longDuration * 2
+                    duration: Kirigami.Units.longDuration * 2
                     easing.type: Easing.InOutQuad
                 }
             }
-            implicitWidth: PlasmaCore.Units.smallSpacing
+            implicitWidth: Kirigami.Units.smallSpacing
             contentItem: Rectangle {
                 radius: width/2
                 color: Qt.rgba(1, 1, 1, 0.3)

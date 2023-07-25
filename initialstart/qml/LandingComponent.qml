@@ -67,7 +67,7 @@ Item {
 
     ColumnLayout {
         opacity: root.contentOpacity
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.gridUnit
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
@@ -93,8 +93,8 @@ Item {
         anchors.right: parent.right
         anchors.margins: Kirigami.Units.gridUnit
 
-        topPadding: Kirigami.Units.largeSpacing
-        bottomPadding: Kirigami.Units.largeSpacing
+        topPadding: Kirigami.Units.gridUnit
+        bottomPadding: Kirigami.Units.gridUnit
         leftPadding: Kirigami.Units.gridUnit
         rightPadding: Kirigami.Units.gridUnit
 

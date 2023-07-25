@@ -6,7 +6,6 @@ import QtQuick.Effects
 
 import org.kde.kirigami 2.12 as Kirigami
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
@@ -27,7 +26,7 @@ Item {
     onContentItemChanged: {
         contentItem.parent = contentParent;
         contentItem.anchors.fill = contentParent;
-        contentItem.anchors.margins = Kirigami.Units.largeSpacing;
+        contentItem.anchors.margins = Kirigami.Units.gridUnit;
         contentParent.children.push(contentItem);
     }
     
@@ -35,7 +34,7 @@ Item {
     
     NumberAnimation on dragOffset {
         id: dragAnim
-        duration: PlasmaCore.Units.longDuration
+        duration: Kirigami.Units.longDuration
         onFinished: {
             if (to !== 0) {
                 root.dismissRequested();
@@ -52,7 +51,7 @@ Item {
         shadowEnabled: true
         shadowVerticalOffset: 1
         shadowOpacity: 0.5
-        shadowColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 0.1)
+        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.1)
     }
 
     // shadow
@@ -63,8 +62,8 @@ Item {
         anchors.rightMargin: -1
         anchors.bottomMargin: -1
 
-        color: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.3)
-        radius: PlasmaCore.Units.smallSpacing
+        color: Qt.darker(Kirigami.Theme.backgroundColor, 1.3)
+        radius: Kirigami.Units.smallSpacing
     }
 
     // card
@@ -76,8 +75,8 @@ Item {
         anchors.rightMargin: root.dragOffset < 0 ? -root.dragOffset : 0
         anchors.top: parent.top
         
-        color: (root.tapEnabled && mouseArea.pressed) ? Qt.darker(PlasmaCore.Theme.backgroundColor, 1.1) : PlasmaCore.Theme.backgroundColor
-        radius: PlasmaCore.Units.smallSpacing 
+        color: (root.tapEnabled && mouseArea.pressed) ? Qt.darker(Kirigami.Theme.backgroundColor, 1.1) : Kirigami.Theme.backgroundColor
+        radius: Kirigami.Units.smallSpacing 
         implicitHeight: contentParent.implicitHeight
         clip: true
         
@@ -127,7 +126,7 @@ Item {
             startActive = active;
             
             if (!active) { // release event
-                let threshold = PlasmaCore.Units.gridUnit * 5; // drag threshold
+                let threshold = Kirigami.Units.gridUnit * 5; // drag threshold
                 if (root.dragOffset > threshold) {
                     dragAnim.to = root.width;
                 } else if (root.dragOffset < -threshold) {

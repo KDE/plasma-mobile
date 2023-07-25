@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 
@@ -13,7 +12,7 @@ import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
     id: root
-    implicitHeight: PlasmaCore.Units.gridUnit * 2.5
+    implicitHeight: Kirigami.Units.gridUnit * 2.5
     
     required property var lockScreenState
     
@@ -29,8 +28,8 @@ Rectangle {
     
     property bool keypadOpen
     
-    readonly property color headerTextColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.75*255})
-    readonly property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {"alpha": 0.4*255})
+    readonly property color headerTextColor: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 0.75*255})
+    readonly property color headerTextInactiveColor: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {"alpha": 0.4*255})
     
     // model for shown dots
     // we need to use a listmodel to avoid all delegates from reloading
@@ -181,7 +180,7 @@ Rectangle {
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
-            anchors.margins: PlasmaCore.Units.smallSpacing
+            anchors.margins: Kirigami.Units.smallSpacing
             implicitWidth: height
             icon.name: root.isPinMode ? "input-keyboard-virtual-symbolic" : "input-dialpad-symbolic"
             onClicked: {
@@ -211,7 +210,7 @@ Rectangle {
             
             ListView {
                 id: dotDisplay
-                property int dotWidth: Math.round(PlasmaCore.Units.gridUnit * 0.35)
+                property int dotWidth: Math.round(Kirigami.Units.gridUnit * 0.35)
                 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.bottomMargin: Math.round(dotWidth / 2)

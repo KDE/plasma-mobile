@@ -18,7 +18,7 @@ Rectangle {
 
     property Item containment
 
-    color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : PlasmaCore.Theme.textColor
+    color: (containment && containment.backgroundHints == PlasmaCore.Types.NoBackground) ? "transparent" : Kirigami.Theme.textColor
 
     function toggleWidgetExplorer(containment) {
         console.log("Widget Explorer toggled");
@@ -51,8 +51,8 @@ Rectangle {
             id: imageColors
             source: root.containment.wallpaper
 
-            readonly property color backgroundColor: PlasmaCore.Theme.backgroundColor
-            readonly property color textColor: PlasmaCore.Theme.textColor
+            readonly property color backgroundColor: Kirigami.Theme.backgroundColor
+            readonly property color textColor: Kirigami.Theme.textColor
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.backgroundColor: backgroundColor

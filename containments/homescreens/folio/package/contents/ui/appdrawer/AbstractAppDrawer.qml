@@ -10,9 +10,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as Controls
 
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.extras 2.0 as PlasmaExtra
 import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
@@ -41,9 +39,9 @@ Item {
     signal dragStarted
 
     readonly property int reservedSpaceForLabel: metrics.height
-    property int availableCellHeight: PlasmaCore.Units.iconSizes.huge + reservedSpaceForLabel
+    property int availableCellHeight: Kirigami.Units.iconSizes.huge + reservedSpaceForLabel
 
-    readonly property real openFactor: factorNormalize(view.contentY / (PlasmaCore.Units.gridUnit * 10))
+    readonly property real openFactor: factorNormalize(view.contentY / (Kirigami.Units.gridUnit * 10))
 
     // height from top of screen that the drawer starts
     readonly property real drawerTopMargin: height - topPadding - bottomPadding - closedPositionOffset
@@ -63,7 +61,7 @@ Item {
         id: metrics
         text: "M\nM"
         visible: false
-        font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8
+        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.8
         font.weight: Font.Bold
     }
     
@@ -137,7 +135,7 @@ Item {
                     opacity: 0.6 * root.openFactor
                     
                     // remove radius 
-                    radius: view.contentY > (topMargin.height - PlasmaCore.Units.gridUnit) ? 0 : PlasmaCore.Units.gridUnit
+                    radius: view.contentY > (topMargin.height - Kirigami.Units.gridUnit) ? 0 : Kirigami.Units.gridUnit
                     Behavior on radius {
                         NumberAnimation { duration: Kirigami.Units.shortDuration; easing.type: Easing.InOutQuad }
                     }

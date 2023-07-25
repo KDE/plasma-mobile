@@ -8,7 +8,6 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
@@ -23,6 +22,6 @@ PlasmaComponents.Label {
     property bool is24HourTime: MobileShell.ShellUtil.isSystem24HourFormat
     
     text: Qt.formatTime(source.data.Local.DateTime, is24HourTime ? "h:mm" : "h:mm ap")
-    color: PlasmaCore.ColorScope.textColor
+    color: Kirigami.Theme.textColor
     verticalAlignment: Qt.AlignVCenter
 }

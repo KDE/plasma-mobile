@@ -8,6 +8,7 @@
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.ksvg 1.0 as KSvg
+import org.kde.kirigami 2.20 as Kirigami
 
 PlasmaCore.ToolTipArea {
     id: button
@@ -21,7 +22,7 @@ PlasmaCore.ToolTipArea {
     property alias elementId: icon.elementId
     property QtObject action
     property bool backgroundVisible: false
-    property int iconSize: PlasmaCore.Units.iconSizes.large
+    property int iconSize: Kirigami.Units.iconSizes.large
     property int pressedOffset: 1
     property bool checked: false
     property bool toggle: false
@@ -37,7 +38,7 @@ PlasmaCore.ToolTipArea {
 
     Behavior on opacity {
         NumberAnimation {
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
@@ -95,7 +96,7 @@ PlasmaCore.ToolTipArea {
             id: actionText
             text: button.text
             style: Text.Outline
-            color: PlasmaCore.Theme.textColor
+            color: Kirigami.Theme.textColor
             styleColor: Qt.rgba(1,1,1,0.4)
             anchors.verticalCenter: parent.verticalCenter
         }

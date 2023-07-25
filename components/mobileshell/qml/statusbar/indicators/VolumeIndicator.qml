@@ -11,6 +11,7 @@ import QtQuick.Layouts
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.private.volume 0.1
+import org.kde.kirigami 2.20 as Kirigami
 
 import "../../dataproviders" as DataProviders
 
@@ -20,7 +21,7 @@ PlasmaCore.IconItem {
     
     source: provider.icon
 
-    colorGroup: PlasmaCore.ColorScope.colorGroup
+    colorSet: Kirigami.Theme.colorSet
 
     visible: provider.isVisible
 }

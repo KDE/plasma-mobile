@@ -6,7 +6,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
 import org.kde.plasma.plasma5support 2.0 as P5Support

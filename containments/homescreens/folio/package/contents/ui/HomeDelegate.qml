@@ -9,6 +9,8 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
@@ -60,7 +62,7 @@ ContainmentLayoutManager.ItemContainer {
         if (modelData.applicationRunning) {
             delegate.launch(0, 0, "", modelData.applicationName);
         } else {
-            delegate.launch(delegate.x + (PlasmaCore.Units.smallSpacing * 2), delegate.y + (PlasmaCore.Units.smallSpacing * 2), icon.source, modelData.applicationName);
+            delegate.launch(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), icon.source, modelData.applicationName);
         }
 
         desktopModel.setMinimizedDelegate(index, delegate);
@@ -148,10 +150,10 @@ ContainmentLayoutManager.ItemContainer {
         ColumnLayout {
             anchors {
                 fill: parent
-                leftMargin: PlasmaCore.Units.smallSpacing * 2
-                topMargin: PlasmaCore.Units.smallSpacing * 2
-                rightMargin: PlasmaCore.Units.smallSpacing * 2
-                bottomMargin: PlasmaCore.Units.smallSpacing * 2
+                leftMargin: Kirigami.Units.smallSpacing * 2
+                topMargin: Kirigami.Units.smallSpacing * 2
+                rightMargin: Kirigami.Units.smallSpacing * 2
+                bottomMargin: Kirigami.Units.smallSpacing * 2
             }
             spacing: 0
 
@@ -160,7 +162,7 @@ ContainmentLayoutManager.ItemContainer {
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.minimumHeight: Math.min(PlasmaCore.Units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
+                Layout.minimumHeight: Math.min(Kirigami.Units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
                 Layout.preferredHeight: Layout.minimumHeight
 
                 usesPlasmaTheme: false
@@ -173,9 +175,9 @@ ContainmentLayoutManager.ItemContainer {
                     }
                     visible: model.applicationRunning
                     radius: width
-                    width: PlasmaCore.Units.smallSpacing
+                    width: Kirigami.Units.smallSpacing
                     height: width
-                    color: PlasmaCore.Theme.highlightColor
+                    color: Kirigami.Theme.highlightColor
                 }
                 
                 // darken effect when hovered/pressed
@@ -200,9 +202,9 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.fillWidth: true
                 Layout.preferredHeight: delegate.reservedSpaceForLabel
                 Layout.alignment: Qt.AlignTop
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.leftMargin: -parent.anchors.leftMargin + PlasmaCore.Units.smallSpacing * 2
-                Layout.rightMargin: -parent.anchors.rightMargin + PlasmaCore.Units.smallSpacing * 2
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing * 2
+                Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing * 2
                 
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignHCenter
@@ -212,7 +214,7 @@ ContainmentLayoutManager.ItemContainer {
 
                 text: model.applicationName
 
-                font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 0.8
+                font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.8
                 font.weight: Font.Bold
                 color: "white"
 

@@ -8,9 +8,9 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Effects
 
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.kquickcontrolsaddons 2.0 as KQCAddons
@@ -95,7 +95,7 @@ MouseArea {
         PlasmaCore.IconItem {
             anchors.centerIn: parent
             width: height
-            height: PlasmaCore.Units.roundToIconSize(parent.height)
+            height: Kirigami.Units.iconSizes.roundedIconSize(parent.height)
             usesPlasmaTheme: false
             source: !thumbnailer.busy && !thumbnailer.hasPreview ? thumbnailer.iconName : ""
         }
@@ -111,7 +111,7 @@ MouseArea {
             anchors {
                 top: parent.top
                 right: parent.right
-                margins: PlasmaCore.Units.smallSpacing
+                margins: Kirigami.Units.smallSpacing
             }
             Accessible.name: tooltip.text
             icon.name: "application-menu"

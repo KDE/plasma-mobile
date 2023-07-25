@@ -12,6 +12,8 @@ import QtQuick.Effects
 import QtQuick.Controls as Controls
 import QtQml.Models
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -57,7 +59,7 @@ Item {
     
     readonly property real textPixelSize: 11
     readonly property real smallerTextPixelSize: 9
-    readonly property real elementSpacing: PlasmaCore.Units.smallSpacing * 1.5
+    readonly property real elementSpacing: Kirigami.Units.smallSpacing * 1.5
     
     P5Support.DataSource {
         id: timeSource
@@ -97,18 +99,19 @@ Item {
     }
 
     // screen top panel
-    PlasmaCore.ColorScope {
+    Item {
         id: icons
         z: 1
-        colorGroup: root.colorGroup
+        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
+        Kirigami.Theme.inherit: false
         anchors.fill: parent
         
         Controls.Control {
             id: control
-            topPadding: PlasmaCore.Units.smallSpacing
-            bottomPadding: PlasmaCore.Units.smallSpacing
-            rightPadding: PlasmaCore.Units.smallSpacing * 3
-            leftPadding: PlasmaCore.Units.smallSpacing * 3
+            topPadding: Kirigami.Units.smallSpacing
+            bottomPadding: Kirigami.Units.smallSpacing
+            rightPadding: Kirigami.Units.smallSpacing * 3
+            leftPadding: Kirigami.Units.smallSpacing * 3
             
             anchors.fill: parent
             background: Rectangle {
@@ -116,7 +119,7 @@ Item {
             }
             
             contentItem: ColumnLayout {
-                spacing: PlasmaCore.Units.smallSpacing / 2
+                spacing: Kirigami.Units.smallSpacing / 2
                 
                 RowLayout {
                     id: row
@@ -163,7 +166,7 @@ Item {
                     // system indicators
                     RowLayout {
                         id: indicators
-                        Layout.leftMargin: PlasmaCore.Units.smallSpacing // applets have different spacing needs
+                        Layout.leftMargin: Kirigami.Units.smallSpacing // applets have different spacing needs
                         Layout.fillHeight: true
                         spacing: root.elementSpacing
 

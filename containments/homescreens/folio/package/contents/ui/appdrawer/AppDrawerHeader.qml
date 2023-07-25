@@ -7,17 +7,18 @@
 import QtQuick 2.12
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtra
+import org.kde.kirigami 2.20 as Kirigami
 
-PlasmaCore.ColorScope {
+import org.kde.plasma.components 3.0 as PlasmaComponents
+
+Item {
     id: root
     
     signal switchToListRequested()
     signal switchToGridRequested()
     
-    colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+    Kirigami.Theme.inherit: false
     
     // HACK: Here only to steal inputs the would normally be delivered to home
     MouseArea {
@@ -25,13 +26,13 @@ PlasmaCore.ColorScope {
     }
     
     RowLayout {
-        anchors.topMargin: PlasmaCore.Units.smallSpacing
-        anchors.leftMargin: PlasmaCore.Units.largeSpacing
-        anchors.rightMargin: PlasmaCore.Units.largeSpacing
+        anchors.topMargin: Kirigami.Units.smallSpacing
+        anchors.leftMargin: Kirigami.Units.gridUnit
+        anchors.rightMargin: Kirigami.Units.gridUnit
         anchors.fill: parent
-        spacing: PlasmaCore.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
         
-        PlasmaExtra.Heading {
+        Kirigami.Heading {
             color: "white"
             level: 1
             text: i18n("Applications")
@@ -40,14 +41,14 @@ PlasmaCore.ColorScope {
         Item { Layout.fillWidth: true }
         PlasmaComponents.ToolButton {
             icon.name: "view-list-symbolic"
-            implicitWidth: Math.round(PlasmaCore.Units.gridUnit * 2.1)
-            implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.1)
+            implicitWidth: Math.round(Kirigami.Units.gridUnit * 2.1)
+            implicitHeight: Math.round(Kirigami.Units.gridUnit * 2.1)
             onClicked: root.switchToListRequested()
         }
         PlasmaComponents.ToolButton {
             icon.name: "view-grid-symbolic"
-            implicitWidth: Math.round(PlasmaCore.Units.gridUnit * 2.1)
-            implicitHeight: Math.round(PlasmaCore.Units.gridUnit * 2.1)
+            implicitWidth: Math.round(Kirigami.Units.gridUnit * 2.1)
+            implicitHeight: Math.round(Kirigami.Units.gridUnit * 2.1)
             onClicked: root.switchToGridRequested()
         }
     }

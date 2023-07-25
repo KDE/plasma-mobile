@@ -24,23 +24,23 @@ Rectangle {
     property double swipeProgress
     
     // slightly translucent background, for key contrast
-    color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.backgroundColor, {"alpha": 0.9*255})
+    color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.backgroundColor, {"alpha": 0.9*255})
     
     // colour calculations
-    readonly property color buttonColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
-    readonly property color buttonPressedColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.08)
-    readonly property color buttonTextColor: PlasmaCore.Theme.textColor
-    readonly property color dropShadowColor: Qt.darker(PlasmaCore.Theme.backgroundColor, 1.2)
-    readonly property color headerBackgroundColor: Qt.lighter(PlasmaCore.Theme.backgroundColor, 1.3)
+    readonly property color buttonColor: Qt.lighter(Kirigami.Theme.backgroundColor, 1.3)
+    readonly property color buttonPressedColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.08)
+    readonly property color buttonTextColor: Kirigami.Theme.textColor
+    readonly property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
+    readonly property color headerBackgroundColor: Qt.lighter(Kirigami.Theme.backgroundColor, 1.3)
     
     opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
     
     implicitHeight: {
         if (passwordBar.isPinMode && !Qt.inputMethod.visible) {
-            return PlasmaCore.Units.gridUnit * 17;
+            return Kirigami.Units.gridUnit * 17;
         } else {
             return Math.min(root.height - passwordBar.implicitHeight, // don't make the password bar go off the screen
-                            PlasmaCore.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight);
+                            Kirigami.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight);
         }
     }
     
@@ -98,18 +98,18 @@ Rectangle {
             right: parent.right
             top: passwordBar.bottom
             bottom: parent.bottom
-            topMargin: PlasmaCore.Units.gridUnit
-            bottomMargin: PlasmaCore.Units.gridUnit
+            topMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.gridUnit
         }
-        spacing: PlasmaCore.Units.gridUnit
+        spacing: Kirigami.Units.gridUnit
 
         GridLayout {
             id: grid
             Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.leftMargin: PlasmaCore.Units.gridUnit * 0.5
-            Layout.rightMargin: PlasmaCore.Units.gridUnit * 0.5
-            Layout.maximumWidth: PlasmaCore.Units.gridUnit * 22
-            Layout.maximumHeight: PlasmaCore.Units.gridUnit * 12.5
+            Layout.leftMargin: Kirigami.Units.gridUnit * 0.5
+            Layout.rightMargin: Kirigami.Units.gridUnit * 0.5
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
+            Layout.maximumHeight: Kirigami.Units.gridUnit * 12.5
             opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
             
             columns: 4

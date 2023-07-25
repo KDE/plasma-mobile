@@ -15,7 +15,7 @@ Rectangle {
     visible: false //adjust borders is run during setup. We want to avoid painting till completed
     property Item containment
 
-    color: !containment || containment.plasmoid.backgroundHints == PlasmaCore.Types.NoBackground ? "transparent" : PlasmaCore.Theme.textColor
+    color: !containment || containment.plasmoid.backgroundHints == PlasmaCore.Types.NoBackground ? "transparent" : Kirigami.Theme.textColor
 
     onContainmentChanged: {
         containment.parent = root;

@@ -6,7 +6,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.plasma.mobileinitialstart.time 1.0 as Time
 
@@ -20,7 +19,7 @@ Item {
         anchors {
             fill: parent
             topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.largeSpacing
+            bottomMargin: Kirigami.Units.gridUnit
         }
 
         width: root.width
@@ -78,10 +77,10 @@ Item {
 
                     header: Control {
                         width: listView.width
-                        leftPadding: Kirigami.Units.largeSpacing
-                        rightPadding: Kirigami.Units.largeSpacing
-                        topPadding: Kirigami.Units.largeSpacing
-                        bottomPadding: Kirigami.Units.largeSpacing
+                        leftPadding: Kirigami.Units.gridUnit
+                        rightPadding: Kirigami.Units.gridUnit
+                        topPadding: Kirigami.Units.gridUnit
+                        bottomPadding: Kirigami.Units.gridUnit
 
                         contentItem: Kirigami.SearchField {
                             id: searchField

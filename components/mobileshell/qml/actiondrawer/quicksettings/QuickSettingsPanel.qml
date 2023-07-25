@@ -34,10 +34,10 @@ Components.BaseItem {
     readonly property real contentImplicitHeight: column.implicitHeight
     
     // we need extra padding since the background side border is enabled
-    topPadding: PlasmaCore.Units.smallSpacing * 4
-    leftPadding: PlasmaCore.Units.smallSpacing * 4
-    rightPadding: PlasmaCore.Units.smallSpacing * 4
-    bottomPadding: PlasmaCore.Units.smallSpacing * 4
+    topPadding: Kirigami.Units.smallSpacing * 4
+    leftPadding: Kirigami.Units.smallSpacing * 4
+    rightPadding: Kirigami.Units.smallSpacing * 4
+    bottomPadding: Kirigami.Units.smallSpacing * 4
     
     background: KSvg.FrameSvgItem {
         enabledBorders: PlasmaCore.FrameSvg.AllBorders
@@ -63,7 +63,7 @@ Components.BaseItem {
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
                 
-                colorGroup: PlasmaCore.Theme.NormalColorGroup
+                colorGroup: Kirigami.Theme.Window
                 backgroundColor: "transparent"
                 showSecondRow: false
                 showDropShadow: false
@@ -82,7 +82,7 @@ Components.BaseItem {
                 
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBar.height - PlasmaCore.Units.smallSpacing
+                Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBar.height - Kirigami.Units.smallSpacing
                 Layout.maximumWidth: column.width
                 
                 actionDrawer: root.actionDrawer

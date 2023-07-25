@@ -33,14 +33,14 @@ QuickSettingsDelegate {
             anchors.right: parent.right
             height: parent.height
             
-            radius: PlasmaCore.Units.smallSpacing
+            radius: Kirigami.Units.smallSpacing
             color: Qt.rgba(0, 0, 0, 0.075)
         }
         
         // background
         Rectangle {
             anchors.fill: parent
-            radius: PlasmaCore.Units.smallSpacing
+            radius: Kirigami.Units.smallSpacing
             border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
             color: {
                 if (root.enabled) {
@@ -71,7 +71,7 @@ QuickSettingsDelegate {
         PlasmaCore.IconItem {
             id: icon
             anchors.centerIn: parent
-            implicitWidth: PlasmaCore.Units.iconSizes.smallMedium
+            implicitWidth: Kirigami.Units.iconSizes.smallMedium
             implicitHeight: width
             source: root.icon
         }

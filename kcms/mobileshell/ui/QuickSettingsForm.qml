@@ -31,7 +31,7 @@ Kirigami.ScrollablePage {
             contentItem: RowLayout {
                 Kirigami.ListItemDragHandle {
                     visible: qsDelegate.isEnabled
-                    Layout.rightMargin: Kirigami.Units.largeSpacing
+                    Layout.rightMargin: Kirigami.Units.gridUnit
                     listItem: qsDelegate
                     listView: qsDelegate.parent ? qsDelegate.parent.parentView : null
                     onMoveRequested: savedQuickSettings.enabledModel.moveRow(oldIndex, newIndex)
@@ -42,7 +42,7 @@ Kirigami.ScrollablePage {
 
                     visible: iconAvailable
                     source: model ? model.icon : ""
-                    Layout.rightMargin: iconAvailable ? Kirigami.Units.largeSpacing : 0
+                    Layout.rightMargin: iconAvailable ? Kirigami.Units.gridUnit : 0
                     implicitWidth: iconAvailable ? Kirigami.Units.iconSizes.small : 0
                     implicitHeight: iconAvailable ? Kirigami.Units.iconSizes.small : 0
                 }

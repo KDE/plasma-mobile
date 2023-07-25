@@ -7,7 +7,6 @@
 
 import QtQuick
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 
 P5Support.DataSource {

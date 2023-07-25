@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Layouts
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kwin 3.0 as KWinComponents
@@ -112,7 +113,7 @@ Item {
 
             // run animation when finger lets go
             if (!pressed) {
-                if (control.movingUp && control.y < -PlasmaCore.Units.gridUnit * 2) {
+                if (control.movingUp && control.y < -Kirigami.Units.gridUnit * 2) {
                     yAnimator.to = -root.height;
                 } else {
                     yAnimator.to = 0;
@@ -134,7 +135,7 @@ Item {
         NumberAnimation on y {
             id: yAnimator
             running: !control.pressed
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
             to: 0
             onFinished: {
@@ -157,16 +158,16 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumHeight: column.height - appView.height
-                spacing: PlasmaCore.Units.smallSpacing * 2
+                spacing: Kirigami.Units.smallSpacing * 2
                 opacity: delegate.showHeader ? 1 : 0
 
                 Behavior on opacity {
-                    NumberAnimation { duration: PlasmaCore.Units.shortDuration }
+                    NumberAnimation { duration: Kirigami.Units.shortDuration }
                 }
 
                 PlasmaCore.IconItem {
-                    Layout.preferredHeight: PlasmaCore.Units.iconSizes.smallMedium
-                    Layout.preferredWidth: PlasmaCore.Units.iconSizes.smallMedium
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     Layout.alignment: Qt.AlignVCenter
                     usesPlasmaTheme: false
                     source: delegate.window.icon
@@ -184,8 +185,8 @@ Item {
                     Layout.alignment: Qt.AlignVCenter
                     z: 99
                     icon.name: "window-close"
-                    icon.width: PlasmaCore.Units.iconSizes.smallMedium
-                    icon.height: PlasmaCore.Units.iconSizes.smallMedium
+                    icon.width: Kirigami.Units.iconSizes.smallMedium
+                    icon.height: Kirigami.Units.iconSizes.smallMedium
                     onClicked: delegate.closeApp()
                 }
             }

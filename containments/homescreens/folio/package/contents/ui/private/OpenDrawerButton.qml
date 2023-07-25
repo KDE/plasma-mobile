@@ -9,8 +9,9 @@ import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
 import Qt5Compat.GraphicalEffects
 
+import org.kde.kirigami 2.20 as Kirigami
+
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.draganddrop 2.0 as DragDrop
 
@@ -24,7 +25,7 @@ MouseArea {
     property real factor: 0
 
     cursorShape: Qt.PointingHandCursor
-    height: PlasmaCore.Units.iconSizes.smallMedium
+    height: Kirigami.Units.iconSizes.smallMedium
     signal openRequested
     signal closeRequested
     
@@ -35,7 +36,7 @@ MouseArea {
     Item {
         anchors.centerIn: parent
 
-        width: PlasmaCore.Units.iconSizes.smallMedium
+        width: Kirigami.Units.iconSizes.smallMedium
         height: width
 
         Rectangle {

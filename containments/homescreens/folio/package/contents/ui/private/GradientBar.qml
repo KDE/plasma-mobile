@@ -5,12 +5,12 @@
  */
 
 import QtQuick 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     Behavior on opacity {
         OpacityAnimator {
-            duration: PlasmaCore.Units.longDuration * 2
+            duration: Kirigami.Units.longDuration * 2
             easing.type: Easing.InOutQuad
         }
     }
@@ -20,8 +20,8 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            leftMargin: PlasmaCore.Units.gridUnit + root.leftPadding
-            rightMargin: PlasmaCore.Units.gridUnit + root.rightPadding
+            leftMargin: Kirigami.Units.gridUnit + root.leftPadding
+            rightMargin: Kirigami.Units.gridUnit + root.rightPadding
         }
         height: 1
         gradient: Gradient {

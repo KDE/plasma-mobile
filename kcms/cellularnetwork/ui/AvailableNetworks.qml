@@ -25,7 +25,7 @@ Kirigami.ScrollablePage {
             MessagesList {
                 visible: count != 0
                 Layout.fillWidth: true
-                Layout.margins: Kirigami.Units.largeSpacing
+                Layout.margins: Kirigami.Units.gridUnit
                 model: kcm.messages
             }
         }

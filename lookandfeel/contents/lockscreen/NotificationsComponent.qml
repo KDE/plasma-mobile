@@ -4,7 +4,6 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
@@ -56,13 +55,14 @@ Loader {
 
         property alias notificationsList: notificationsList
 
-        PlasmaCore.ColorScope {
+        Item {
             anchors.fill: parent
             anchors.topMargin: root.topMargin
             anchors.bottomMargin: root.bottomMargin
             anchors.leftMargin: root.leftMargin
             anchors.rightMargin: root.rightMargin
-            colorGroup: PlasmaCore.Theme.NormalColorGroup
+            Kirigami.Theme.colorSet: Kirigami.Theme.Window
+            Kirigami.Theme.inherit: false
 
             MobileShell.NotificationsWidget {
                 id: notificationsList

@@ -93,7 +93,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
 
         ParallelAnimation {
             id: parallelAnim
-            property real animationDuration: PlasmaCore.Units.longDuration + PlasmaCore.Units.shortDuration
+            property real animationDuration: Kirigami.Units.longDuration + Kirigami.Units.shortDuration
 
             ScaleAnimator {
                 target: background
@@ -153,7 +153,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
             properties: "opacity"
             from: 0
             to: 1
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.OutCubic
         }
 
@@ -180,13 +180,13 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         Item {
             id: iconParent
             anchors.centerIn: background
-            width: PlasmaCore.Units.iconSizes.enormous
+            width: Kirigami.Units.iconSizes.enormous
             height: width
 
             PlasmaCore.IconItem {
                 id: icon
                 anchors.fill: parent
-                colorGroup: PlasmaCore.Theme.ComplementaryColorGroup
+                colorGroup: Kirigami.Theme.ComplementaryColorGroup
             }
 
             MultiEffect {

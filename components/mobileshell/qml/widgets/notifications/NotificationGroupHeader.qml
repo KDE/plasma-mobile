@@ -14,7 +14,6 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.notificationmanager 1.0 as NotificationManager
 
@@ -39,15 +38,15 @@ RowLayout {
     property real timeout: 5000
     property real remainingTime: 0
 
-    spacing: PlasmaCore.Units.smallSpacing
-    Layout.preferredHeight: Math.max(applicationNameLabel.implicitHeight, PlasmaCore.Units.iconSizes.small)
+    spacing: Kirigami.Units.smallSpacing
+    Layout.preferredHeight: Math.max(applicationNameLabel.implicitHeight, Kirigami.Units.iconSizes.small)
 
     PlasmaCore.IconItem {
         id: applicationIconItem
-        Layout.topMargin: PlasmaCore.Units.smallSpacing
-        Layout.bottomMargin: PlasmaCore.Units.smallSpacing
-        Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
-        Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
+        Layout.topMargin: Kirigami.Units.smallSpacing
+        Layout.bottomMargin: Kirigami.Units.smallSpacing
+        Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        Layout.preferredHeight: Kirigami.Units.iconSizes.small
         source: notificationHeading.applicationIconSource
         usesPlasmaTheme: false
         visible: valid
@@ -55,7 +54,7 @@ RowLayout {
 
     PlasmaComponents.Label {
         id: applicationNameLabel
-        Layout.leftMargin: PlasmaCore.Units.smallSpacing
+        Layout.leftMargin: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
         opacity: 0.6
         textFormat: Text.PlainText

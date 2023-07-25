@@ -7,7 +7,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.plasma.mobileinitialstart.wifi 1.0 as WiFi
@@ -54,7 +53,7 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         anchors.topMargin: Kirigami.Units.gridUnit
-        anchors.bottomMargin: Kirigami.Units.largeSpacing
+        anchors.bottomMargin: Kirigami.Units.gridUnit
         width: root.width
         spacing: Kirigami.Units.gridUnit
 
@@ -95,7 +94,7 @@ Item {
 
                     Kirigami.PlaceholderMessage {
                         anchors.centerIn: parent
-                        width: parent.width - (Kirigami.Units.largeSpacing * 4)
+                        width: parent.width - (Kirigami.Units.gridUnit * 4)
                         visible: !enabledConnections.wirelessEnabled
                         text: i18n("Wi-Fi is disabled")
                         icon.name: "network-wireless-disconnected"
