@@ -6,6 +6,7 @@ import QtQuick.Layouts
 
 import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.kirigami as Kirigami
 
 import org.kde.notificationmanager 1.0 as NotificationManager
 
@@ -61,6 +62,7 @@ Loader {
             anchors.bottomMargin: root.bottomMargin
             anchors.leftMargin: root.leftMargin
             anchors.rightMargin: root.rightMargin
+
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 

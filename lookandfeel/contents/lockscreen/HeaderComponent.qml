@@ -7,6 +7,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import org.kde.notificationmanager 1.0 as NotificationManager
@@ -30,7 +31,9 @@ Item {
 
         height: root.statusBarHeight
 
-        colorGroup: Kirigami.Theme.ComplementaryColorGroup
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
         backgroundColor: "transparent"
 
         showSecondRow: false
