@@ -9,19 +9,17 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.bluezqt as BluezQt
 
 import "../../dataproviders" as DataProviders
 
-PlasmaCore.IconItem {
+Kirigami.Icon {
     id: connectionIcon
     
     readonly property var provider: DataProviders.BluetoothInfo {}
 
     source: "network-bluetooth" // provider.icon
-    colorSet: Kirigami.Theme.colorSet
 
     visible: provider.isVisible
 }

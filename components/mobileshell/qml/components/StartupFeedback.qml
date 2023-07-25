@@ -6,7 +6,6 @@ import QtQuick
 import QtQuick.Effects
 import QtQuick.Layouts
 import QtQuick.Window
-import org.kde.plasma.core 2.0 as PlasmaCore
 
 import org.kde.kirigami as Kirigami
 
@@ -183,10 +182,9 @@ MouseArea { // use mousearea to ensure clicks don't go behind
             width: Kirigami.Units.iconSizes.enormous
             height: width
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: icon
                 anchors.fill: parent
-                colorGroup: Kirigami.Theme.ComplementaryColorGroup
             }
 
             MultiEffect {

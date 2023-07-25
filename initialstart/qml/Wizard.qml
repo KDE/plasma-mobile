@@ -122,7 +122,6 @@ Kirigami.Page {
 
         height: Kirigami.Units.gridUnit * 1.25
 
-        colorGroup: Kirigami.Theme.ComplementaryColorGroup
         backgroundColor: "transparent"
 
         showSecondRow: false

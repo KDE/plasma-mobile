@@ -63,7 +63,9 @@ Components.BaseItem {
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
                 
-                colorGroup: Kirigami.Theme.Window
+                Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                Kirigami.Theme.inherit: false
+
                 backgroundColor: "transparent"
                 showSecondRow: false
                 showDropShadow: false

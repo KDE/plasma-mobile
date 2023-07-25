@@ -70,6 +70,5 @@ Controls.AbstractButton {
             fill: parent
             margins: Math.round((side - side * iconSizeFactor * 0.6) / 2)
         }
-        colorSet: Kirigami.Theme.colorSet
     }
 }

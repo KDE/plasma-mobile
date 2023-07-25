@@ -8,12 +8,11 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
-PlasmaCore.IconItem {
+Kirigami.Icon {
     id: connectionIcon
     
     // data
@@ -40,7 +39,6 @@ PlasmaCore.IconItem {
     // implementation
     
     source: icon
-    colorSet: Kirigami.Theme.colorSet
 
     PlasmaComponents.BusyIndicator {
         id: connectingIndicator

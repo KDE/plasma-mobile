@@ -12,7 +12,7 @@ import QtQuick.Effects
 import QtQuick.Controls as Controls
 import QtQml.Models
 
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
@@ -24,11 +24,6 @@ import "../components" as Components
 
 Item {
     id: root
-    
-    /**
-     * The color group used for status bar elements.
-     */
-    required property var colorGroup
     
     /**
      * Whether to show a drop shadow under the status bar.
@@ -55,7 +50,7 @@ Item {
      */
     property bool disableSystemTray: false
     
-    property alias colorScopeColor: icons.backgroundColor
+    property color colorScopeColor: Kirigami.Theme.backgroundColor
     
     readonly property real textPixelSize: 11
     readonly property real smallerTextPixelSize: 9
@@ -102,8 +97,6 @@ Item {
     Item {
         id: icons
         z: 1
-        Kirigami.Theme.colorSet: root.Kirigami.Theme.colorSet
-        Kirigami.Theme.inherit: false
         anchors.fill: parent
         
         Controls.Control {
@@ -115,6 +108,7 @@ Item {
             
             anchors.fill: parent
             background: Rectangle {
+                id: panelBackground
                 color: backgroundColor
             }
             

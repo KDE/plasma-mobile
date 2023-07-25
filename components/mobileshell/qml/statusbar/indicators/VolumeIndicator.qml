@@ -9,19 +9,16 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.private.volume 0.1
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import "../../dataproviders" as DataProviders
 
-PlasmaCore.IconItem {
+Kirigami.Icon {
     id: paIcon
     readonly property var provider: DataProviders.AudioInfo {}
     
     source: provider.icon
-
-    colorSet: Kirigami.Theme.colorSet
 
     visible: provider.isVisible
 }

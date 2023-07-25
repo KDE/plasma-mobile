@@ -77,8 +77,10 @@ ContainmentItem {
         id: topPanel
         anchors.fill: parent
 
+        Kirigami.Theme.colorSet: root.showingApp ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
+        Kirigami.Theme.inherit: false
+
         showDropShadow: !root.showingApp
-        colorGroup: root.showingApp ? Kirigami.Theme.HeaderColorGroup : Kirigami.Theme.ComplementaryColorGroup
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
     }
 

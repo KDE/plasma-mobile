@@ -80,7 +80,9 @@ Components.BaseItem {
                 Layout.fillWidth: true
                 Layout.preferredHeight: Components.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
                 
-                colorGroup: Kirigami.Theme.Window
+                Kirigami.Theme.colorSet: Kirigami.Theme.Window
+                Kirigami.Theme.inherit: false
+
                 backgroundColor: "transparent"
                 showSecondRow: true
                 showDropShadow: false
