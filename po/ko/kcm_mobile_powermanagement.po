@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Shinjo Park <kde@peremen.name>, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2022-10-03 15:32+0200\n"
+"PO-Revision-Date: 2023-07-26 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-i18n-doc@kde.org>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: mobilepower.cpp:27
 #, kde-format
@@ -118,12 +118,10 @@ msgid "Current Charge"
 msgstr "현재 충전"
 
 #: ui/BatteryPage.qml:129 ui/BatteryPage.qml:137
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1%"
 
 #: ui/BatteryPage.qml:136
 #, kde-format
@@ -186,12 +184,10 @@ msgid "Unknown technology"
 msgstr "알 수 없는 기술"
 
 #: ui/Graph.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1%2"
+msgstr "%1%"
 
 #: ui/main.qml:39
 #, kde-format

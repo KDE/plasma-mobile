@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-26 02:02+0000\n"
 "PO-Revision-Date: 2023-03-14 20:41+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -22,72 +22,76 @@ msgstr ""
 msgid "System Information"
 msgstr "System Information"
 
-#: ui/main.qml:42
+#: ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
 msgstr "Operating System"
 
-#: ui/main.qml:49
+#: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
 msgstr "Webpage"
 
-#: ui/main.qml:70
+#: ui/main.qml:78
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma Version"
 
-#: ui/main.qml:77
+#: ui/main.qml:85
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE Frameworks Version"
 
-#: ui/main.qml:84
+#: ui/main.qml:92
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt Version"
 
-#: ui/main.qml:91
+#: ui/main.qml:99
 #, kde-format
 msgid "Kernel Version"
 msgstr "Kernel Version"
 
-#: ui/main.qml:98
+#: ui/main.qml:106
 #, kde-format
 msgid "OS Type"
 msgstr "OS Type"
 
-#: ui/main.qml:99
+#: ui/main.qml:107
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: ui/main.qml:116
+#: ui/main.qml:124
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "Processor"
 msgstr[1] "Processors"
 
-#: ui/main.qml:123
+#: ui/main.qml:131
 #, kde-format
 msgid "Memory"
 msgstr "Memory"
 
-#: ui/main.qml:127
+#: ui/main.qml:135
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 of RAM"
 
-#: ui/main.qml:129
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Unknown"
 
-#: ui/main.qml:143
-#, kde-format
-msgid "Copy to clipboard"
-msgstr "Copy to clipboard"
+#~ msgid "Copy to clipboard"
+#~ msgstr "Copy to clipboard"

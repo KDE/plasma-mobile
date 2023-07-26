@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-07-26 02:02+0000\n"
 "PO-Revision-Date: 2023-04-02 21:27+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "Contrasigno…"
 msgid "Welcome to <b>Plasma</b>"
 msgstr "Benvenite a <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:313
+#: qml/LandingComponent.qml:102 qml/Wizard.qml:312
 #, kde-format
 msgid "Next"
 msgstr "Proxime"
@@ -258,12 +258,12 @@ msgstr "Proxime"
 msgid "Initial Start"
 msgstr "Startar initial"
 
-#: qml/Wizard.qml:294
+#: qml/Wizard.qml:293
 #, kde-format
 msgid "Back"
 msgstr "Retro"
 
-#: qml/Wizard.qml:330
+#: qml/Wizard.qml:329
 #, kde-format
 msgid "Finish"
 msgstr "Termina"

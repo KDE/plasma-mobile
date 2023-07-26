@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-26 02:02+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -24,72 +24,76 @@ msgstr ""
 msgid "System Information"
 msgstr "Sistema Informo"
 
-#: ui/main.qml:42
+#: ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
 msgstr "Operacia sistemo"
 
-#: ui/main.qml:49
+#: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
 msgstr "Retpaĝo"
 
-#: ui/main.qml:70
+#: ui/main.qml:78
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma Versio"
 
-#: ui/main.qml:77
+#: ui/main.qml:85
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Versio de KDE Frameworks"
 
-#: ui/main.qml:84
+#: ui/main.qml:92
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt-Versio"
 
-#: ui/main.qml:91
+#: ui/main.qml:99
 #, kde-format
 msgid "Kernel Version"
 msgstr "Kerna Versio"
 
-#: ui/main.qml:98
+#: ui/main.qml:106
 #, kde-format
 msgid "OS Type"
 msgstr "OS Tipo"
 
-#: ui/main.qml:99
+#: ui/main.qml:107
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bita"
 
-#: ui/main.qml:116
+#: ui/main.qml:124
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "Procesoro"
 msgstr[1] "Procesoroj"
 
-#: ui/main.qml:123
+#: ui/main.qml:131
 #, kde-format
 msgid "Memory"
 msgstr "Memoro"
 
-#: ui/main.qml:127
+#: ui/main.qml:135
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 el RAM"
 
-#: ui/main.qml:129
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Nekonata"
 
-#: ui/main.qml:143
-#, kde-format
-msgid "Copy to clipboard"
-msgstr "Kopii al tondujo"
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopii al tondujo"

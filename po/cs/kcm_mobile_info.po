@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-26 02:02+0000\n"
 "PO-Revision-Date: 2023-01-04 22:23+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -22,48 +22,54 @@ msgstr ""
 msgid "System Information"
 msgstr "Systémové informace"
 
-#: ui/main.qml:42
+#: ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
 msgstr "Operační systém"
 
-#: ui/main.qml:49
+#: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
 msgstr "Webová stránka"
 
-#: ui/main.qml:70
+#: ui/main.qml:78
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Verze Plasma KDE"
 
-#: ui/main.qml:77
+#: ui/main.qml:85
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Verze KDE Frameworks"
 
-#: ui/main.qml:84
+#: ui/main.qml:92
 #, kde-format
 msgid "Qt Version"
 msgstr "Verze Qt"
 
-#: ui/main.qml:91
+#: ui/main.qml:99
 #, kde-format
 msgid "Kernel Version"
 msgstr "Verze jádra"
 
-#: ui/main.qml:98
+#: ui/main.qml:106
 #, kde-format
 msgid "OS Type"
 msgstr "Typ OS"
 
-#: ui/main.qml:99
+#: ui/main.qml:107
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: ui/main.qml:116
+#: ui/main.qml:124
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -71,24 +77,22 @@ msgstr[0] "Procesor"
 msgstr[1] "Procesory"
 msgstr[2] "Procesory"
 
-#: ui/main.qml:123
+#: ui/main.qml:131
 #, kde-format
 msgid "Memory"
 msgstr "Paměť"
 
-#: ui/main.qml:127
+#: ui/main.qml:135
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM"
 
-#: ui/main.qml:129
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Neznámý"
 
-#: ui/main.qml:143
-#, kde-format
-msgid "Copy to clipboard"
-msgstr "Zkopírovat do schránky"
+#~ msgid "Copy to clipboard"
+#~ msgstr "Zkopírovat do schránky"

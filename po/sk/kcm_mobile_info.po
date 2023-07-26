@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-07-26 02:02+0000\n"
 "PO-Revision-Date: 2020-05-29 17:21+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -21,53 +21,59 @@ msgstr ""
 msgid "System Information"
 msgstr "Systémové informácie"
 
-#: ui/main.qml:42
+#: ui/main.qml:25
+#, kde-format
+msgctxt "@action:button"
+msgid "Copy"
+msgstr ""
+
+#: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
 msgstr ""
 
-#: ui/main.qml:49
+#: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
 msgstr ""
 
-#: ui/main.qml:70
+#: ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid "KDE Plasma Version:"
 msgid "KDE Plasma Version"
 msgstr "Verzia KDE Plasma:"
 
-#: ui/main.qml:77
+#: ui/main.qml:85
 #, fuzzy, kde-format
 #| msgid "KDE Frameworks Version:"
 msgid "KDE Frameworks Version"
 msgstr "Verzia KDE Frameworks:"
 
-#: ui/main.qml:84
+#: ui/main.qml:92
 #, fuzzy, kde-format
 #| msgid "Qt Version:"
 msgid "Qt Version"
 msgstr "Verzia Qt:"
 
-#: ui/main.qml:91
+#: ui/main.qml:99
 #, fuzzy, kde-format
 #| msgid "Kernel Version:"
 msgid "Kernel Version"
 msgstr "Verzia jadra:"
 
-#: ui/main.qml:98
+#: ui/main.qml:106
 #, fuzzy, kde-format
 #| msgid "OS Type:"
 msgid "OS Type"
 msgstr "Typ OS:"
 
-#: ui/main.qml:99
+#: ui/main.qml:107
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bitové"
 
-#: ui/main.qml:116
+#: ui/main.qml:124
 #, fuzzy, kde-format
 #| msgid "Processor:"
 #| msgid_plural "Processors:"
@@ -77,28 +83,26 @@ msgstr[0] "Procesor:"
 msgstr[1] "Procesory:"
 msgstr[2] "Procesory:"
 
-#: ui/main.qml:123
+#: ui/main.qml:131
 #, fuzzy, kde-format
 #| msgid "Memory:"
 msgid "Memory"
 msgstr "Pamäť:"
 
-#: ui/main.qml:127
+#: ui/main.qml:135
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM"
 
-#: ui/main.qml:129
+#: ui/main.qml:137
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: ui/main.qml:143
-#, kde-format
-msgid "Copy to clipboard"
-msgstr "Kopírovať do schránky"
+#~ msgid "Copy to clipboard"
+#~ msgstr "Kopírovať do schránky"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
