@@ -1,0 +1,307 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Shinjo Park <kde@peremen.name>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2023-07-26 00:13+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 22.12.3\n"
+
+#: notifications/notificationfilemenu.cpp:109
+#, kde-format
+msgid "Open Containing Folder"
+msgstr "포함하는 폴더 열기"
+
+#: notifications/notificationfilemenu.cpp:123
+#, kde-format
+msgid "&Copy"
+msgstr "복사(&C)"
+
+#: notifications/notificationfilemenu.cpp:131
+#, kde-format
+msgctxt "@action:incontextmenu"
+msgid "Copy Location"
+msgstr "위치 복사"
+
+#: notifications/notificationfilemenu.cpp:176
+#, kde-format
+msgid "Properties"
+msgstr "속성"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "On"
+msgstr "켬"
+
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
+#, kde-format
+msgid "Off"
+msgstr "끔"
+
+#: qml/dataproviders/AudioProvider.qml:171
+#, kde-format
+msgid "Audio"
+msgstr "오디오"
+
+#: qml/dataproviders/AudioProvider.qml:175
+#, kde-format
+msgid "Increase Volume"
+msgstr "음량 증가"
+
+#: qml/dataproviders/AudioProvider.qml:182
+#, kde-format
+msgid "Decrease Volume"
+msgstr "음량 감소"
+
+#: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Mute"
+msgstr "음소거"
+
+#: qml/dataproviders/SignalStrengthInfo.qml:15
+#, kde-format
+msgid "SIM Locked"
+msgstr "SIM 잠김"
+
+#: qml/osd/volume/AudioApplet.qml:73
+#, kde-format
+msgid "Outputs"
+msgstr "출력"
+
+#: qml/osd/volume/AudioApplet.qml:103
+#, kde-format
+msgid "Inputs"
+msgstr "입력"
+
+#: qml/osd/volume/AudioApplet.qml:134
+#, kde-format
+msgid "Playback Streams"
+msgstr "재생 스트림"
+
+#: qml/osd/volume/AudioApplet.qml:187
+#, kde-format
+msgid "Recording Streams"
+msgstr "녹음 스트림"
+
+#: qml/osd/volume/DeviceListItem.qml:25
+#, kde-format
+msgctxt "label of device items"
+msgid "%1 (%2)"
+msgstr "%1(%2)"
+
+#: qml/osd/volume/DeviceListItem.qml:34
+#, kde-format
+msgid "Device name not found"
+msgstr "장치 이름을 찾을 수 없음"
+
+#: qml/osd/volume/ListItemBase.qml:104
+#, kde-format
+msgid "Show additional options for %1"
+msgstr "%1의 추가 설정 표시"
+
+#: qml/osd/volume/ListItemBase.qml:160
+#, kde-format
+msgctxt "Accessibility data on volume slider"
+msgid "Adjust volume for %1"
+msgstr "%1 음량 조정"
+
+#: qml/osd/volume/ListItemBase.qml:242
+#, kde-format
+msgctxt "volume percentage"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/osd/volume/ListItemBase.qml:257
+#, kde-format
+msgctxt "only used for sizing, should be widest possible string"
+msgid "100%"
+msgstr "100%"
+
+#: qml/osd/volume/StreamListItem.qml:21
+#, kde-format
+msgid "Notification Sounds"
+msgstr "알림음"
+
+#: qml/osd/volume/StreamListItem.qml:24
+#, kde-format
+msgctxt "label of stream items"
+msgid "%1: %2"
+msgstr "%1: %2"
+
+#: qml/osd/volume/StreamListItem.qml:29
+#, kde-format
+msgid "Stream name not found"
+msgstr "스트림 이름을 찾을 수 없음"
+
+#: qml/osd/volume/VolumeOSD.qml:108
+#, kde-format
+msgid "Unmute"
+msgstr "음소거 해제"
+
+#: qml/osd/volume/VolumeOSD.qml:132
+#, kde-format
+msgid "100%"
+msgstr "100%"
+
+#: qml/osd/volume/VolumeOSD.qml:142
+#, kde-format
+msgctxt "Percentage value"
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/osd/volume/VolumeOSD.qml:162
+#, kde-format
+msgid "Open audio settings"
+msgstr "오디오 설정 열기"
+
+#: qml/osd/volume/VolumeOSD.qml:175
+#, kde-format
+msgid "Audio Settings"
+msgstr "오디오 설정"
+
+#: qml/osd/volume/VolumeOSD.qml:182
+#, kde-format
+msgid "Toggle showing audio streams"
+msgstr "오디오 스트림 표시 전환"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:36
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
+
+#: qml/widgets/krunner/KRunnerWidget.qml:175
+#, kde-format
+msgid "Search…"
+msgstr "검색…"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
+#, kde-format
+msgid "No media playing"
+msgstr "재생 중인 미디어 없음"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
+#, kde-format
+msgid "Previous track"
+msgstr "이전 트랙"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
+#, kde-format
+msgid "Play or Pause media"
+msgstr "미디어 재생/일시 정지"
+
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
+#, kde-format
+msgid "Next track"
+msgstr "다음 트랙"
+
+#: qml/widgets/notifications/NotificationFooterActions.qml:55
+#, kde-format
+msgctxt "Reply to message"
+msgid "Reply"
+msgstr "답장"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:36
+#, kde-format
+msgctxt "Text field placeholder"
+msgid "Type a reply…"
+msgstr "답장 입력…"
+
+#: qml/widgets/notifications/NotificationReplyField.qml:55
+#, kde-format
+msgctxt "@action:button"
+msgid "Send"
+msgstr "보내기"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:176
+#, kde-format
+msgid "Notification service not available"
+msgstr "알림 서비스를 사용할 수 없음"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:185
+#, kde-format
+msgctxt "Vendor and product name"
+msgid "Notifications are currently provided by '%1 %2'"
+msgstr "'%1 %2'에서 알림 서비스 제공 중"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:321
+#, kde-format
+msgid "Show Fewer"
+msgstr "적게 표시"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:323
+#, kde-format
+msgctxt "Expand to show n more notifications"
+msgid "Show %1 More"
+msgstr "%1개 더 보기"
+
+#: qml/widgets/notifications/NotificationsWidget.qml:382
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "모든 알림 지우기"
+
+#: qml/widgets/notifications/ThumbnailStrip.qml:132
+#, kde-format
+msgid "More Options…"
+msgstr "옵션 더 보기…"
+
+#: qml/widgets/notifications/util.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1(일시 정지됨)"
+
+#: qml/widgets/notifications/util.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1(실패함)"
+
+#: qml/widgets/notifications/util.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr "작업 실패함"
+
+#: qml/widgets/notifications/util.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1(완료됨)"
+
+#: qml/widgets/notifications/util.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr "작업 완료됨"
+
+#: qml/widgets/notifications/util.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "%1분 전"
+
+#: qml/widgets/notifications/util.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "%1초 남음"
+
+#: qml/widgets/notifications/util.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "%1분 남음"
+
+#: qml/widgets/notifications/util.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "%1시간 남음"
