@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2019, 2020, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 02:02+0000\n"
-"PO-Revision-Date: 2022-07-07 09:13+0300\n"
+"PO-Revision-Date: 2023-07-26 22:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -29,7 +29,7 @@ msgstr "Дані щодо системи"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Копіювати"
 
 #: ui/main.qml:50
 #, kde-format

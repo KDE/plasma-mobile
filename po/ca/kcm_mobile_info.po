@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 02:02+0000\n"
-"PO-Revision-Date: 2023-03-14 10:34+0100\n"
+"PO-Revision-Date: 2023-07-26 07:39+0300\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ui/main.qml:16
 #, kde-format
@@ -28,7 +28,7 @@ msgstr "Informació del sistema"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: ui/main.qml:50
 #, kde-format
@@ -94,6 +94,3 @@ msgstr "%1 de RAM"
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Desconeguda"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copia al porta-retalls"
