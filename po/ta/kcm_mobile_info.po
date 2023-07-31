@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-settings package.
 #
 # gobinathal <gobinathal8@gmail.com>, 2021.
-# Kishore G <kishore96@gmail.com>, 2021.
+# Kishore G <kishore96@gmail.com>, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 02:02+0000\n"
-"PO-Revision-Date: 2021-10-31 16:43+0530\n"
+"PO-Revision-Date: 2023-07-30 12:09+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.08.2\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: ui/main.qml:16
 #, kde-format
@@ -27,68 +27,60 @@ msgstr "கணினி விவரங்கள்"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "நகலெடு"
 
 #: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
-msgstr ""
+msgstr "இயக்குதளம்"
 
 #: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
-msgstr ""
+msgstr "இணையதளம்"
 
 #: ui/main.qml:78
-#, fuzzy, kde-format
-#| msgid "KDE Plasma Version:"
+#, kde-format
 msgid "KDE Plasma Version"
-msgstr "கே.டீ.யீ பிளாஸ்மா பதிப்பு:"
+msgstr "கே.டீ.யீ. பிளாஸ்மா பதிப்பு"
 
 #: ui/main.qml:85
-#, fuzzy, kde-format
-#| msgid "KDE Frameworks Version:"
+#, kde-format
 msgid "KDE Frameworks Version"
-msgstr "கே.டீ.யீ. நிரலகங்களின் பதிப்பு:"
+msgstr "கே.டீ.யீ. நிரலகங்களின் பதிப்பு"
 
 #: ui/main.qml:92
-#, fuzzy, kde-format
-#| msgid "Qt Version:"
+#, kde-format
 msgid "Qt Version"
-msgstr "Qt பதிப்பு:"
+msgstr "Qt பதிப்பு"
 
 #: ui/main.qml:99
-#, fuzzy, kde-format
-#| msgid "Qt Version:"
+#, kde-format
 msgid "Kernel Version"
-msgstr "Qt பதிப்பு:"
+msgstr "கருனி பதிப்பு"
 
 #: ui/main.qml:106
-#, fuzzy, kde-format
-#| msgid "OS Type:"
+#, kde-format
 msgid "OS Type"
-msgstr "இயங்குதள வகை:"
+msgstr "இயங்குதள வகை"
 
 #: ui/main.qml:107
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
-msgstr ""
+msgstr "%1-பிட்டு"
 
 #: ui/main.qml:124
-#, fuzzy, kde-format
-#| msgid "Processor:"
-#| msgid_plural "Processors:"
+#, kde-format
 msgid "Processor"
 msgid_plural "Processors"
-msgstr[0] "கணிப்பி:"
-msgstr[1] "கணிப்பிகள்:"
+msgstr[0] "கணிப்பி"
+msgstr[1] "கணிப்பிகள்"
 
 #: ui/main.qml:131
-#, fuzzy, kde-format
-#| msgid "Memory:"
+#, kde-format
 msgid "Memory"
-msgstr "நினைவகம்:"
+msgstr "நினைவகம்"
 
 #: ui/main.qml:135
 #, kde-format
