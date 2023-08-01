@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-12 02:34+0000\n"
-"PO-Revision-Date: 2023-03-14 10:36+0100\n"
+"PO-Revision-Date: 2023-07-31 13:08+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: timesettings.cpp:143
 #, kde-format
@@ -2926,61 +2926,73 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Pacífic"
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Jan"
 msgstr "Gen."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Feb"
 msgstr "Febr."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Mar"
 msgstr "Mar."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Apr"
 msgstr "Abr."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "May"
 msgstr "Mai."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Jun"
 msgstr "Jun."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Jul"
 msgstr "Jul."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Aug"
 msgstr "Ago."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Sep"
 msgstr "Set."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Oct"
 msgstr "Oct."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Nov"
 msgstr "Nov."
 
+# skip-rule: punctuation-period-no
 #: ui/DatePicker.qml:121
 #, kde-format
 msgid "Dec"
