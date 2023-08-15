@@ -1,19 +1,20 @@
 # translation of kcm_mobile_powermanagement.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2020.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2021.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_powermanagement\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2021-08-11 20:05+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-07-26 18:39+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.07.90\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: mobilepower.cpp:27
@@ -54,233 +55,230 @@ msgstr "Nikdy"
 #: ui/BatteryPage.qml:25
 #, kde-format
 msgid "Battery Information"
-msgstr ""
+msgstr "Informácie o batérii"
 
 #: ui/BatteryPage.qml:51
 #, kde-format
 msgid "Usage Graph"
-msgstr ""
+msgstr "Graf používania"
 
 #: ui/BatteryPage.qml:99
 #, kde-format
 msgid "Information"
-msgstr ""
+msgstr "Informácie"
 
 #: ui/BatteryPage.qml:104
 #, kde-format
 msgid "Is Rechargeable"
-msgstr ""
+msgstr "Je dobíjateľná"
 
 #: ui/BatteryPage.qml:105
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "Áno"
 
 #: ui/BatteryPage.qml:105
 #, kde-format
 msgid "No"
-msgstr ""
+msgstr "Nie"
 
 #: ui/BatteryPage.qml:112
 #, kde-format
 msgid "Charge State"
-msgstr ""
+msgstr "Stav nabitia"
 
 #: ui/BatteryPage.qml:115
 #, kde-format
 msgid "Not charging"
-msgstr ""
+msgstr "Nenabíja sa"
 
 #: ui/BatteryPage.qml:116
 #, kde-format
 msgid "Charging"
-msgstr ""
+msgstr "Nabíja sa"
 
 #: ui/BatteryPage.qml:117
 #, kde-format
 msgid "Discharging"
-msgstr ""
+msgstr "Vybíja sa"
 
 #: ui/BatteryPage.qml:118
 #, kde-format
 msgid "Fully charged"
-msgstr ""
+msgstr "Plne nabitá"
 
 #: ui/BatteryPage.qml:119
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "Neznáme"
 
 #: ui/BatteryPage.qml:128
 #, kde-format
 msgid "Current Charge"
-msgstr ""
+msgstr "Aktuálne nabitie"
 
 #: ui/BatteryPage.qml:129 ui/BatteryPage.qml:137
 #, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr ""
+msgstr "%1 %"
 
 #: ui/BatteryPage.qml:136
 #, kde-format
 msgid "Health"
-msgstr ""
+msgstr "Zdravie"
 
 #: ui/BatteryPage.qml:144
 #, kde-format
 msgid "Vendor"
-msgstr ""
+msgstr "Výrobca"
 
 #: ui/BatteryPage.qml:152
 #, kde-format
 msgid "Model"
-msgstr ""
+msgstr "Model"
 
 #: ui/BatteryPage.qml:160
 #, kde-format
 msgid "Serial Number"
-msgstr ""
+msgstr "Sériové číslo"
 
 #: ui/BatteryPage.qml:168
 #, kde-format
 msgid "Technology"
-msgstr ""
+msgstr "Technológia"
 
 #: ui/BatteryPage.qml:171
 #, kde-format
 msgid "Lithium ion"
-msgstr ""
+msgstr "Lítium-iónová"
 
 #: ui/BatteryPage.qml:172
 #, kde-format
 msgid "Lithium polymer"
-msgstr ""
+msgstr "Lítium-polymérová"
 
 #: ui/BatteryPage.qml:173
 #, kde-format
 msgid "Lithium iron phosphate"
-msgstr ""
+msgstr "Lítium-železo-fosfátová"
 
 #: ui/BatteryPage.qml:174
 #, kde-format
 msgid "Lead acid"
-msgstr ""
+msgstr "Olovená"
 
 #: ui/BatteryPage.qml:175
 #, kde-format
 msgid "Nickel cadmium"
-msgstr ""
+msgstr "Nikel-kadmiová"
 
 #: ui/BatteryPage.qml:176
 #, kde-format
 msgid "Nickel metal hydride"
-msgstr ""
+msgstr "Nikel-metalhydridová"
 
 #: ui/BatteryPage.qml:177
 #, kde-format
 msgid "Unknown technology"
-msgstr ""
+msgstr "Neznáma technológia"
 
 #: ui/Graph.qml:141
 #, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ui/main.qml:39
 #, kde-format
 msgid "Devices"
-msgstr ""
+msgstr "Zariadenia"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "Internal battery"
-msgstr ""
+msgstr "Vnútorná batéria"
 
 #: ui/main.qml:85
 #, kde-format
 msgid "UPS battery"
-msgstr ""
+msgstr "Batéria UPS"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Monitor battery"
-msgstr ""
+msgstr "Batéria monitora"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Mouse battery"
-msgstr ""
+msgstr "Batéria myši"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Keyboard battery"
-msgstr ""
+msgstr "Batéria klávesnice"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "PDA battery"
-msgstr ""
+msgstr "Batéria PDA"
 
 #: ui/main.qml:90
 #, kde-format
 msgid "Phone battery"
-msgstr ""
+msgstr "Batéria telefónu"
 
 #: ui/main.qml:91
 #, kde-format
 msgid "Unknown battery"
-msgstr ""
+msgstr "Neznáma batéria"
 
 #: ui/main.qml:94
-#, fuzzy, kde-format
-#| msgid "0%"
+#, kde-format
 msgid "%"
-msgstr "0%"
+msgstr "%"
 
 #: ui/main.qml:94
 #, kde-format
 msgctxt "%1 is value, %2 is unit"
 msgid "%1%2"
-msgstr ""
+msgstr "%1%2"
 
 #: ui/main.qml:96
 #, kde-format
 msgctxt "%1 is battery type, %2 is charge percent"
 msgid "%1 %2 (Charging)"
-msgstr ""
+msgstr "%1 %2 (Nabíja sa)"
 
 #: ui/main.qml:96
 #, kde-format
 msgctxt "%1 is battery type, %2 is charge percent"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #: ui/main.qml:128
 #, kde-format
 msgid "Screen"
-msgstr ""
+msgstr "Obrazovka"
 
 #: ui/main.qml:133
-#, fuzzy, kde-format
-#| msgid "Turn off the screen"
+#, kde-format
 msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
-msgstr "Vypnúť obrazovku"
+msgstr "Stmaviť obrazovku po"
 
 #: ui/main.qml:144
-#, fuzzy, kde-format
-#| msgid "Turn off the screen"
+#, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
-msgstr "Vypnúť obrazovku"
+msgstr "Vypnúť obrazovku po"
 
 #: ui/main.qml:155
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
-msgstr ""
+msgstr "Uspať zariadenie po"
 
 #, fuzzy
 #~| msgid "0%"

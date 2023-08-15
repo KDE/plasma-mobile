@@ -1,18 +1,19 @@
 # translation of plasma_org.kde.plasma.mobileinitialstart.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2023.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 02:02+0000\n"
-"PO-Revision-Date: 2023-04-03 18:25+0200\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2023-07-28 15:18+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #, kde-format
@@ -28,7 +29,7 @@ msgstr "wizzardsk@gmail.com"
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "Otvorí sprievodcu úvodným spustením bez úpravy konfigurácie"
 
 #: main.cpp:52
 #, kde-format
@@ -68,7 +69,7 @@ msgstr "Heslo"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "Typ siete"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
@@ -114,7 +115,7 @@ msgstr "Mobilné"
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Your device does not have a modem available."
-msgstr ""
+msgstr "Vaše zariadenie nemá k dispozícii modem."
 
 #: modules/cellular/package/contents/ui/main.qml:53
 #, kde-format
@@ -122,16 +123,18 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
+"Nižšie si nakonfigurujte APN pre mobilné dáta, ďalšie informácie vám "
+"poskytne váš operátor."
 
 #: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr ""
+msgstr "Ste pripojení k mobilnej sieti."
 
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr ""
+msgstr "Prosím, vložte kartu SIM do zariadenia."
 
 #: modules/cellular/package/contents/ui/main.qml:76
 #, kde-format
@@ -151,7 +154,7 @@ msgstr "Vymazať"
 #: modules/cellular/package/contents/ui/main.qml:141
 #, kde-format
 msgid "Add APN"
-msgstr ""
+msgstr "Pridať APN"
 
 #: modules/finished/contents/ui/main.qml:12
 #, kde-format
@@ -162,27 +165,28 @@ msgstr "Dokončené"
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
 msgstr ""
+"Vaše zariadenie je teraz pripravené. <br /><br />Užite si <b>Plasma 6.0</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
-msgstr ""
+msgstr "Skôr než začneme..."
 
 #: modules/prepare/package/contents/ui/main.qml:82
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
-msgstr ""
+msgstr "Upravte jas obrazovky tak, aby bol pohodlný pre proces inštalácie."
 
 #: modules/prepare/package/contents/ui/main.qml:135
 #, kde-format
 msgid "Adjust the size of elements on the screen."
-msgstr ""
+msgstr "Upravte veľkosť prvkov na obrazovke."
 
 #: modules/prepare/package/contents/ui/main.qml:150
 #, kde-format
 msgid "Display Scaling"
-msgstr ""
+msgstr "Mierka zobrazenia displeja"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -192,12 +196,12 @@ msgstr "Čas a dátum"
 #: modules/time/package/contents/ui/main.qml:36
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr ""
+msgstr "Vyberte časové pásmo a preferovaný formát času."
 
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
-msgstr ""
+msgstr "24-hodinový formát"
 
 #: modules/wifi/package/contents/ui/ConnectDialog.qml:57
 #, kde-format
@@ -217,7 +221,7 @@ msgstr "Sieť"
 #: modules/wifi/package/contents/ui/main.qml:68
 #, kde-format
 msgid "Connect to a WiFi network for network access."
-msgstr ""
+msgstr "Pripojenie k sieti WiFi kvôli prístupu k sieti."
 
 #: modules/wifi/package/contents/ui/main.qml:99
 #, kde-format
@@ -237,7 +241,7 @@ msgstr "Heslo..."
 #: qml/LandingComponent.qml:81
 #, kde-format
 msgid "Welcome to <b>Plasma</b>"
-msgstr ""
+msgstr "Vitajte v <b>Plasma</b>"
 
 #: qml/LandingComponent.qml:102 qml/Wizard.qml:312
 #, kde-format
@@ -247,7 +251,7 @@ msgstr "Ďalej"
 #: qml/main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr ""
+msgstr "Úvodné spustenie"
 
 #: qml/Wizard.qml:293
 #, kde-format

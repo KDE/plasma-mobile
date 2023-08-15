@@ -1,18 +1,19 @@
 # translation of plasma_org.kde.plasma.private.mobileshell.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2023.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2023-03-12 08:40+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2023-07-28 16:07+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: notifications/notificationfilemenu.cpp:109
@@ -49,7 +50,7 @@ msgstr "Vypnuté"
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
-msgstr ""
+msgstr "Uzamknutá SIM"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:38
 #, kde-format
@@ -64,7 +65,7 @@ msgstr "Výstupy"
 #: qml/volumeosd/AudioApplet.qml:92
 #, kde-format
 msgid "Inputs"
-msgstr ""
+msgstr "Vstupy"
 
 #: qml/volumeosd/AudioApplet.qml:123
 #, kde-format
@@ -93,7 +94,7 @@ msgid "Show additional options for %1"
 msgstr "Zobraziť dodatočné voľby pre %1"
 
 #: qml/volumeosd/ListItemBase.qml:153
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Upraviť hlasitosť pre %1"
@@ -150,7 +151,7 @@ msgstr "%1%"
 #: qml/volumeosd/VolumeOSD.qml:166
 #, kde-format
 msgid "Open audio settings"
-msgstr ""
+msgstr "Otvoriť nastavenia zvuku"
 
 #: qml/volumeosd/VolumeOSD.qml:179
 #, kde-format
@@ -160,7 +161,7 @@ msgstr "Nastavenia zvuku"
 #: qml/volumeosd/VolumeOSD.qml:186
 #, kde-format
 msgid "Toggle showing audio streams"
-msgstr ""
+msgstr "Prepnúť zobrazovanie zvukových prúdov"
 
 #: qml/volumeosd/VolumeOSDProvider.qml:47
 #, kde-format
@@ -259,10 +260,10 @@ msgid "%1 (Paused)"
 msgstr "%1 (Pozastavené)"
 
 #: qml/widgets/notifications/util.js:19
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr "Zlyhalo."
+msgstr "%1 (Zlyhalo)"
 
 #: qml/widgets/notifications/util.js:21
 #, kde-format
@@ -284,22 +285,22 @@ msgstr "Úloha dokončená"
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "pred %1m"
 
 #: qml/widgets/notifications/util.js:81
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr "Zostávajú %1 sekundy"
+msgstr "%1 s zostáva"
 
 #: qml/widgets/notifications/util.js:84
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "%1m zostáva"
 
 #: qml/widgets/notifications/util.js:87
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr "Zostávajú %1 hodiny"
+msgstr "%1h zostáva"

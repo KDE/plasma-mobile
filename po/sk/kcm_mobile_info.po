@@ -1,19 +1,20 @@
 # translation of kcm_mobile_info.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2019.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-26 02:02+0000\n"
-"PO-Revision-Date: 2020-05-29 17:21+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-07-22 15:32+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.04.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: ui/main.qml:16
@@ -30,42 +31,37 @@ msgstr ""
 #: ui/main.qml:50
 #, kde-format
 msgid "Operating System"
-msgstr ""
+msgstr "Operačný systém"
 
 #: ui/main.qml:57
 #, kde-format
 msgid "Webpage"
-msgstr ""
+msgstr "Webová stránka"
 
 #: ui/main.qml:78
-#, fuzzy, kde-format
-#| msgid "KDE Plasma Version:"
+#, kde-format
 msgid "KDE Plasma Version"
-msgstr "Verzia KDE Plasma:"
+msgstr "Verzia KDE Plasma"
 
 #: ui/main.qml:85
-#, fuzzy, kde-format
-#| msgid "KDE Frameworks Version:"
+#, kde-format
 msgid "KDE Frameworks Version"
-msgstr "Verzia KDE Frameworks:"
+msgstr "Verzia KDE Frameworks"
 
 #: ui/main.qml:92
-#, fuzzy, kde-format
-#| msgid "Qt Version:"
+#, kde-format
 msgid "Qt Version"
-msgstr "Verzia Qt:"
+msgstr "Verzia Qt"
 
 #: ui/main.qml:99
-#, fuzzy, kde-format
-#| msgid "Kernel Version:"
+#, kde-format
 msgid "Kernel Version"
-msgstr "Verzia jadra:"
+msgstr "Verzia jadra"
 
 #: ui/main.qml:106
-#, fuzzy, kde-format
-#| msgid "OS Type:"
+#, kde-format
 msgid "OS Type"
-msgstr "Typ OS:"
+msgstr "Typ OS"
 
 #: ui/main.qml:107
 #, kde-format
@@ -74,20 +70,17 @@ msgid "%1-bit"
 msgstr "%1-bitové"
 
 #: ui/main.qml:124
-#, fuzzy, kde-format
-#| msgid "Processor:"
-#| msgid_plural "Processors:"
+#, kde-format
 msgid "Processor"
 msgid_plural "Processors"
-msgstr[0] "Procesor:"
-msgstr[1] "Procesory:"
-msgstr[2] "Procesory:"
+msgstr[0] "Procesor"
+msgstr[1] "Procesory"
+msgstr[2] "Procesory"
 
 #: ui/main.qml:131
-#, fuzzy, kde-format
-#| msgid "Memory:"
+#, kde-format
 msgid "Memory"
-msgstr "Pamäť:"
+msgstr "Pamäť"
 
 #: ui/main.qml:135
 #, kde-format

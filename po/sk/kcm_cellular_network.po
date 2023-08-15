@@ -1,48 +1,49 @@
 # translation of kcm_cellular_network.po to Slovak
 # Roman Paholík <wizzardsk@gmail.com>, 2021.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_cellular_network\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-08 02:08+0000\n"
-"PO-Revision-Date: 2021-09-21 17:12+0200\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
-"Language-Team: Slovak <kde-sk@linux.sk>\n"
+"PO-Revision-Date: 2023-08-14 17:25+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: modem.cpp:126
 #, kde-format
 msgid "Error resetting the modem: %1"
-msgstr ""
+msgstr "Chyba pri resetovaní modemu: %1"
 
 #: modem.cpp:245 modem.cpp:414
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
-msgstr ""
+msgstr "Chyba pri aktualizácii nastavení pripojenia pre %1: %2."
 
 #: modem.cpp:325
 #, kde-format
 msgid "Error activating connection: %1"
-msgstr ""
+msgstr "Chyba pri aktivácii pripojenia: %1"
 
 #: modem.cpp:360
 #, kde-format
 msgid "Error adding connection: %1"
-msgstr ""
+msgstr "Chyba pri pridávaní pripojenia: %1"
 
 #: modem.cpp:378
 #, kde-format
 msgid "Error removing connection: %1"
-msgstr ""
+msgstr "Chyba pri odstraňovaní pripojenia: %1"
 
 #: modem.cpp:500 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
-#, fuzzy, kde-format
+#, kde-format
 msgid "Unknown"
 msgstr "Neznáme"
 
@@ -57,39 +58,39 @@ msgid "Unavailable"
 msgstr "Nedostupné"
 
 #: modem.cpp:506
-#, fuzzy, kde-format
+#, kde-format
 msgid "Disconnected"
 msgstr "Odpojené"
 
 #: modem.cpp:508
-#, fuzzy, kde-format
+#, kde-format
 msgid "Preparing"
-msgstr "Pripravujem"
+msgstr "Príprava"
 
 #: modem.cpp:510
 #, kde-format
 msgid "ConfiguringHardware"
-msgstr ""
+msgstr "KonfiguráciaHardvéru"
 
 #: modem.cpp:512
 #, kde-format
 msgid "NeedAuth"
-msgstr ""
+msgstr "PotrebaOverenia"
 
 #: modem.cpp:514
 #, kde-format
 msgid "ConfiguringIp"
-msgstr ""
+msgstr "KonfiguáciaIp"
 
 #: modem.cpp:516
 #, kde-format
 msgid "CheckingIp"
-msgstr ""
+msgstr "KontrolaIp"
 
 #: modem.cpp:518
 #, kde-format
 msgid "WaitingForSecondaries"
-msgstr ""
+msgstr "ČakanieNaSekundárne"
 
 #: modem.cpp:520
 #, kde-format
@@ -99,17 +100,17 @@ msgstr "Aktivované"
 #: modem.cpp:522
 #, kde-format
 msgid "Deactivating"
-msgstr ""
+msgstr "Deaktivovanie"
 
 #: modem.cpp:524 modemdetails.cpp:250
-#, fuzzy, kde-format
+#, kde-format
 msgid "Failed"
-msgstr "Zlyhalo"
+msgstr "Neúspešné"
 
 #: modemdetails.cpp:121 modemdetails.cpp:461
 #, kde-format
 msgid "POTS"
-msgstr ""
+msgstr "POTS"
 
 #: modemdetails.cpp:124
 #, kde-format
@@ -119,7 +120,7 @@ msgstr "GSM"
 #: modemdetails.cpp:127
 #, kde-format
 msgid "GSM Compact"
-msgstr ""
+msgstr "GSM Compact"
 
 #: modemdetails.cpp:130
 #, kde-format
@@ -164,17 +165,17 @@ msgstr "CDMA2000 1xRTT"
 #: modemdetails.cpp:154
 #, kde-format
 msgid "CDMA2000 EVDO-0"
-msgstr ""
+msgstr "CDMA2000 EVDO-0"
 
 #: modemdetails.cpp:157
 #, kde-format
 msgid "CDMA2000 EVDO-A"
-msgstr ""
+msgstr "CDMA2000 EVDO-A"
 
 #: modemdetails.cpp:160
 #, kde-format
 msgid "CDMA2000 EVDO-B"
-msgstr ""
+msgstr "CDMA2000 EVDO-B"
 
 #: modemdetails.cpp:163
 #, kde-format
@@ -184,22 +185,22 @@ msgstr "LTE"
 #: modemdetails.cpp:166
 #, kde-format
 msgid "5GNR"
-msgstr ""
+msgstr "5GNR"
 
 #: modemdetails.cpp:222
-#, fuzzy, kde-format
+#, kde-format
 msgid "Off"
 msgstr "Vypnuté"
 
 #: modemdetails.cpp:224
 #, kde-format
 msgid "Low-power mode"
-msgstr ""
+msgstr "Režim nízkej spotreby"
 
 #: modemdetails.cpp:226
 #, kde-format
 msgid "Full power mode"
-msgstr ""
+msgstr "Režim plného výkonu"
 
 #: modemdetails.cpp:254
 #, kde-format
@@ -212,7 +213,7 @@ msgid "Locked"
 msgstr "Zamknuté"
 
 #: modemdetails.cpp:258
-#, fuzzy, kde-format
+#, kde-format
 msgid "Disabled"
 msgstr "Zakázané"
 
@@ -227,19 +228,19 @@ msgid "Enabling"
 msgstr "Povoľuje sa"
 
 #: modemdetails.cpp:264 ui/ModemPage.qml:110
-#, fuzzy, kde-format
+#, kde-format
 msgid "Enabled"
 msgstr "Povolené"
 
 #: modemdetails.cpp:266
 #, kde-format
 msgid "Searching for network provider"
-msgstr ""
+msgstr "Vyhľadávanie poskytovateľa siete"
 
 #: modemdetails.cpp:268
 #, kde-format
 msgid "Registered with network provider"
-msgstr ""
+msgstr "Registrované u poskytovateľa siete"
 
 #: modemdetails.cpp:270
 #, kde-format
@@ -247,19 +248,19 @@ msgid "Disconnecting"
 msgstr "Odpája sa"
 
 #: modemdetails.cpp:272
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connecting"
-msgstr "Pripájam"
+msgstr "Pripájanie"
 
 #: modemdetails.cpp:274
-#, fuzzy, kde-format
+#, kde-format
 msgid "Connected"
 msgstr "Pripojené"
 
 #: modemdetails.cpp:283
-#, fuzzy, kde-format
+#, kde-format
 msgid "No error."
-msgstr "Žiadna chyba"
+msgstr "Žiadna chyba."
 
 #: modemdetails.cpp:285
 #, kde-format
@@ -269,77 +270,77 @@ msgstr "Neznáma chyba."
 #: modemdetails.cpp:287
 #, kde-format
 msgid "SIM is required but missing."
-msgstr ""
+msgstr "Vyžaduje sa SIM, ale chýba."
 
 #: modemdetails.cpp:289
 #, kde-format
 msgid "SIM is available but unusable."
-msgstr ""
+msgstr "SIM je dostupná, ale nepoužiteľná."
 
 #: modemdetails.cpp:312
 #, kde-format
 msgid "Not registered, not searching for new operator to register."
-msgstr ""
+msgstr "Nie je zaregistrované, nehľadá nového operátora na registráciu."
 
 #: modemdetails.cpp:314
 #, kde-format
 msgid "Registered on home network."
-msgstr ""
+msgstr "Registrované v domácej sieti."
 
 #: modemdetails.cpp:316
 #, kde-format
 msgid "Not registered, searching for new operator to register with."
-msgstr ""
+msgstr "Nie je zaregistrované, hľadá nového operátora na registráciu."
 
 #: modemdetails.cpp:318
 #, kde-format
 msgid "Registration denied."
-msgstr ""
+msgstr "Registrácia zamietnutá."
 
 #: modemdetails.cpp:320
 #, kde-format
 msgid "Unknown registration status."
-msgstr ""
+msgstr "Neznámy stav registrácie."
 
 #: modemdetails.cpp:322
 #, kde-format
 msgid "Registered on a roaming network."
-msgstr ""
+msgstr "Registrované v roamingovej sieti."
 
 #: modemdetails.cpp:324
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
-msgstr ""
+msgstr "Registrované pre \"iba SMS\", v domácej sieti."
 
 #: modemdetails.cpp:326
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
-msgstr ""
+msgstr "Registrované pre \"iba SMS\", roamingová sieť."
 
 #: modemdetails.cpp:328
 #, kde-format
 msgid "Emergency services only."
-msgstr ""
+msgstr "Len núdzové služby."
 
 #: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
-msgstr ""
+msgstr "Registrované pre \"CSFB sa nepreferuje\", v domácej sieti."
 
 #: modemdetails.cpp:332
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
-msgstr ""
+msgstr "Registrované pre \"CSFB sa nepreferuje\", roamingová sieť."
 
 #: modemdetails.cpp:334
 #, kde-format
 msgid "Attached for access to Restricted Local Operator Services."
-msgstr ""
+msgstr "Pripojené pre prístup k službám obmedzeného lokálneho operátora."
 
 #: modemdetails.cpp:373
 #, kde-format
 msgid "Scanning networks failed: %1"
-msgstr ""
+msgstr "Skenovanie sietí zlyhalo: %1"
 
 #: modemdetails.cpp:430 ui/ModemPage.qml:203 ui/SimPage.qml:138
 #, kde-format
@@ -354,40 +355,40 @@ msgstr "Nie"
 #: modemdetails.cpp:434
 #, kde-format
 msgid "GuessYes"
-msgstr ""
+msgstr "Hádam áno"
 
 #: modemdetails.cpp:436
 #, kde-format
 msgid "GuessNo"
-msgstr ""
+msgstr "Hádam nie"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
 #: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
-#, fuzzy, kde-format
+#, kde-format
 msgid "2G"
-msgstr "G"
+msgstr "2G"
 
 #: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
 #: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
 #: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
-#, fuzzy, kde-format
+#, kde-format
 msgid "3G"
-msgstr "G"
+msgstr "3G"
 
 #: modemdetails.cpp:503
-#, fuzzy, kde-format
+#, kde-format
 msgid "4G"
-msgstr "G"
+msgstr "4G"
 
 #: modemdetails.cpp:506
-#, fuzzy, kde-format
+#, kde-format
 msgid "5G"
-msgstr "G"
+msgstr "5G"
 
 #: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
-#, fuzzy, kde-format
+#, kde-format
 msgid "Any"
-msgstr "Hocičo"
+msgstr "Čokoľvek"
 
 #: sim.cpp:64
 #, kde-format
@@ -482,42 +483,42 @@ msgstr "(prázdne)"
 #: sim.cpp:155
 #, kde-format
 msgid "Error toggling SIM lock: %1"
-msgstr ""
+msgstr "Chyba pri prepínaní zámku SIM: %1"
 
 #: sim.cpp:165
 #, kde-format
 msgid "Error changing the PIN: %1"
-msgstr ""
+msgstr "Chyba pri zmene PIN: %1"
 
 #: sim.cpp:176
 #, kde-format
 msgid "Error sending the PIN: %1"
-msgstr ""
+msgstr "Chyba pri odosielaní PIN: %1"
 
 #: sim.cpp:188
 #, kde-format
 msgid "Error sending the PUK: %1"
-msgstr ""
+msgstr "Chyba pri odosielaní PUK: %1"
 
 #: ui/AvailableNetworks.qml:13
 #, kde-format
 msgid "Available Networks"
-msgstr ""
+msgstr "Dostupné siete"
 
 #: ui/AvailableNetworks.qml:37
-#, fuzzy, kde-format
+#, kde-format
 msgid "none"
 msgstr "žiadne"
 
 #: ui/AvailableNetworks.qml:37
 #, kde-format
 msgid "Current operator: %1"
-msgstr ""
+msgstr "Aktuálny operátor: %1"
 
 #: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Scan For Networks"
-msgstr ""
+msgstr "Vyhľadávanie sietí"
 
 #: ui/EditProfileDialog.qml:14
 #, kde-format
@@ -525,17 +526,17 @@ msgid "Edit APN"
 msgstr "Upraviť APN"
 
 #: ui/EditProfileDialog.qml:41
-#, fuzzy, kde-format
+#, kde-format
 msgid "Name"
 msgstr "Názov"
 
 #: ui/EditProfileDialog.qml:46
-#, fuzzy, kde-format
+#, kde-format
 msgid "APN"
-msgstr "APN:"
+msgstr "APN"
 
 #: ui/EditProfileDialog.qml:51
-#, fuzzy, kde-format
+#, kde-format
 msgid "Username"
 msgstr "Používateľské meno"
 
@@ -547,92 +548,92 @@ msgstr "Heslo"
 #: ui/EditProfileDialog.qml:61
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "Typ siete"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "Iba 4G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "Iba 3G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "Iba 2G"
 
 #: ui/main.qml:35
 #, kde-format
 msgid "Modem not available"
-msgstr ""
+msgstr "Modem nie je dostupný"
 
 #: ui/main.qml:74
-#, fuzzy, kde-format
+#, kde-format
 msgid "Mobile data"
 msgstr "Mobilné dáta"
 
 #: ui/main.qml:79
 #, kde-format
 msgid "No SIM is inserted."
-msgstr ""
+msgstr "Nie je vložená žiadna SIM."
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Mobile data is not available with this modem."
-msgstr ""
+msgstr "S týmto modemom nie sú k dispozícii mobilné dáta."
 
 #: ui/main.qml:83
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr ""
+msgstr "Na využívanie mobilných dát je potrebné nakonfigurovať APN."
 
 #: ui/main.qml:85
 #, kde-format
 msgid "Whether mobile data is enabled."
-msgstr ""
+msgstr "Či sú mobilné dáta povolené."
 
 #: ui/main.qml:116
-#, fuzzy, kde-format
+#, kde-format
 msgid "Data Usage"
 msgstr "Využitie dát"
 
 #: ui/main.qml:117
 #, kde-format
 msgid "View data usage."
-msgstr ""
+msgstr "Zobraziť využívanie dát."
 
 #: ui/main.qml:133 ui/SimPage.qml:17
 #, kde-format
 msgid "SIM"
-msgstr ""
+msgstr "SIM"
 
 #: ui/main.qml:133
 #, kde-format
 msgid "SIMs"
-msgstr ""
+msgstr "SIM"
 
 #: ui/main.qml:153
 #, kde-format
 msgid "SIM %1"
-msgstr ""
+msgstr "SIM %1"
 
 #: ui/main.qml:154
 #, kde-format
 msgid "View SIM %1 details."
-msgstr ""
+msgstr "Zobraziť podrobnosti SIM %1."
 
 #: ui/ModemPage.qml:16
 #, kde-format
@@ -642,189 +643,182 @@ msgstr "Modem %1"
 #: ui/ModemPage.qml:41
 #, kde-format
 msgid "Modem Control"
-msgstr ""
+msgstr "Ovládanie modemu"
 
 #: ui/ModemPage.qml:50
 #, kde-format
 msgid "Modem Restart"
-msgstr ""
+msgstr "Reštart modemu"
 
 #: ui/ModemPage.qml:53
 #, kde-format
 msgid "Force Modem Restart"
-msgstr ""
+msgstr "Vynútiť reštart modemu"
 
 #: ui/ModemPage.qml:69 ui/SimPage.qml:117
 #, kde-format
 msgid "Modem Details"
-msgstr ""
+msgstr "Podrobnosti modemu"
 
 #: ui/ModemPage.qml:82
 #, kde-format
 msgid "Access Technologies"
-msgstr ""
+msgstr "Prístupové technológie"
 
 #: ui/ModemPage.qml:102
-#, fuzzy, kde-format
-#| msgid "IMEI:"
+#, kde-format
 msgid "IMEI"
-msgstr "IMEI:"
+msgstr "IMEI"
 
 #: ui/ModemPage.qml:118
-#, fuzzy, kde-format
-#| msgid "Manufacturer:"
+#, kde-format
 msgid "Manufacturer"
-msgstr "Výrobca:"
+msgstr "Výrobca"
 
 #: ui/ModemPage.qml:126
-#, fuzzy, kde-format
-#| msgid "Model:"
+#, kde-format
 msgid "Model"
-msgstr "Model:"
+msgstr "Model"
 
 #: ui/ModemPage.qml:142
 #, kde-format
 msgid "Owned Numbers:"
-msgstr ""
+msgstr "Vlastnené čísla:"
 
 #: ui/ModemPage.qml:162
-#, fuzzy, kde-format
-#| msgid "Revision:"
+#, kde-format
 msgid "Revision"
-msgstr "Revízia:"
+msgstr "Revízia"
 
 #: ui/ModemPage.qml:170
-#, fuzzy, kde-format
+#, kde-format
 msgid "Signal Quality"
 msgstr "Kvalita signálu"
 
 #: ui/ModemPage.qml:178
-#, fuzzy, kde-format
+#, kde-format
 msgid "State"
-msgstr "Stav:"
+msgstr "Stav"
 
 #: ui/ModemPage.qml:186
 #, kde-format
 msgid "Failure Reason"
-msgstr ""
+msgstr "Dôvod zlyhania"
 
 #: ui/ModemPage.qml:194
 #, kde-format
 msgid "Registration State"
-msgstr ""
+msgstr "Stav registrácie"
 
 #: ui/ModemPage.qml:202
 #, kde-format
 msgid "Roaming"
-msgstr ""
+msgstr "Roaming"
 
 #: ui/ModemPage.qml:210
-#, fuzzy, kde-format
+#, kde-format
 msgid "Firmware Version"
 msgstr "Verzia firmvéru"
 
 #: ui/ModemPage.qml:218
-#, fuzzy, kde-format
+#, kde-format
 msgid "Interface Name"
-msgstr "Názov rozhrania:"
+msgstr "Názov rozhrania"
 
 #: ui/ModemPage.qml:226
-#, fuzzy, kde-format
-#| msgid "Metered:"
+#, kde-format
 msgid "Metered"
-msgstr "Merané podľa objemu dát:"
+msgstr "Merané"
 
 #: ui/ModemPage.qml:234
 #, kde-format
 msgid "Active NetworkManager Connection"
-msgstr ""
+msgstr "Aktívne pripojenie NetworkManager"
 
 #: ui/ModemPage.qml:242
-#, fuzzy, kde-format
-#| msgid "Device:"
+#, kde-format
 msgid "Device"
-msgstr "Zariadenie:"
+msgstr "Zariadenie"
 
 #: ui/ModemPage.qml:250
-#, fuzzy, kde-format
-#| msgid "Device ID:"
+#, kde-format
 msgid "Device ID"
-msgstr "ID zariadenia:"
+msgstr "ID zariadenia"
 
 #: ui/ModemPage.qml:266
-#, fuzzy, kde-format
+#, kde-format
 msgid "Drivers:"
-msgstr "ovládače"
+msgstr "Ovládače:"
 
 #: ui/ModemPage.qml:286
-#, fuzzy, kde-format
+#, kde-format
 msgid "Plugin"
-msgstr "Plugin"
+msgstr "Zásuvný modul"
 
 #: ui/ModemPage.qml:294
-#, fuzzy, kde-format
+#, kde-format
 msgid "Power State"
-msgstr "Výkonový stav"
+msgstr "Stav napájania"
 
 #: ui/ModemPage.qml:302
 #, kde-format
 msgid "SIM Path"
-msgstr ""
+msgstr "Cesta SIM"
 
 #: ui/ProfileList.qml:12
 #, kde-format
 msgid "APNs"
-msgstr ""
+msgstr "APN"
 
 #: ui/ProfileList.qml:26
 #, kde-format
 msgid "No APNs configured"
-msgstr ""
+msgstr "Nie sú nastavené žiadne APN"
 
 #: ui/ProfileList.qml:31
-#, fuzzy, kde-format
+#, kde-format
 msgid "Add Connection"
-msgstr "Pridať spojenie..."
+msgstr "Pridať pripojenie"
 
 #: ui/ProfileList.qml:98
 #, kde-format
 msgid "Add APN"
-msgstr ""
+msgstr "Pridať APN"
 
 #: ui/ProfileList.qml:121
 #, kde-format
 msgid "Autodetect APN"
-msgstr ""
+msgstr "Automatické zisťovanie APN"
 
 #: ui/ProfileList.qml:133
-#, fuzzy, kde-format
+#, kde-format
 msgid "Edit"
 msgstr "Upraviť"
 
 #: ui/ProfileList.qml:141
-#, fuzzy, kde-format
+#, kde-format
 msgid "Delete"
 msgstr "Vymazať"
 
 #: ui/SimLockPage.qml:16 ui/SimPage.qml:106
 #, kde-format
 msgid "SIM Lock"
-msgstr ""
+msgstr "Zámok SIM"
 
 #: ui/SimLockPage.qml:47
 #, kde-format
 msgid "SIM is locked"
-msgstr ""
+msgstr "SIM je uzamknutá"
 
 #: ui/SimLockPage.qml:48
 #, kde-format
 msgid "In order to use this SIM, you must first unlock it."
-msgstr ""
+msgstr "Ak chcete túto SIM používať, musíte ju najprv odomknúť."
 
 #: ui/SimLockPage.qml:70
 #, kde-format
 msgid "SIM is not locked"
-msgstr ""
+msgstr "SIM nie je uzamknutá"
 
 #: ui/SimLockPage.qml:71
 #, kde-format
@@ -832,21 +826,23 @@ msgid ""
 "You can lock your SIM to require a set PIN code for phone calls and mobile "
 "data."
 msgstr ""
+"SIM môžete uzamknúť tak, aby vyžadovala nastavený kód PIN pre telefónne "
+"hovory a mobilné dáta."
 
 #: ui/SimLockPage.qml:75
 #, kde-format
 msgid "Lock SIM"
-msgstr ""
+msgstr "Zamknúť SIM"
 
 #: ui/SimLockPage.qml:89
 #, kde-format
 msgid "Disable SIM Lock"
-msgstr ""
+msgstr "Zakázať zámok SIM"
 
 #: ui/SimLockPage.qml:90
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr ""
+msgstr "Zakázať funkciu zámku SIM a odstrániť prístupový kód na SIM."
 
 #: ui/SimLockPage.qml:103
 #, kde-format
@@ -856,47 +852,47 @@ msgstr "Zmeniť PIN"
 #: ui/SimLockPage.qml:104
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr ""
+msgstr "Zmeniť prístupový kód nastavený na SIM."
 
 #: ui/SimLockPage.qml:119
 #, kde-format
 msgid "Unlock SIM"
-msgstr ""
+msgstr "Odomknúť SIM"
 
 #: ui/SimLockPage.qml:127
-#, fuzzy, kde-format
+#, kde-format
 msgid "Attempts left: %1"
-msgstr "Ostáva %1 pokusov"
+msgstr "Zostávajúce pokusy: %1"
 
 #: ui/SimLockPage.qml:131
 #, kde-format
 msgid "Enter PIN"
-msgstr ""
+msgstr "Zadať PIN"
 
 #: ui/SimLockPage.qml:139
 #, kde-format
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Zmeniť PIN pre SIM"
 
 #: ui/SimLockPage.qml:158 ui/SimLockPage.qml:223
 #, kde-format
 msgid "PINs don't match!"
-msgstr ""
+msgstr "PIN kódy sa nezhodujú!"
 
 #: ui/SimLockPage.qml:164 ui/SimLockPage.qml:229
 #, kde-format
 msgid "PINs must be between 4 and 8 digits!"
-msgstr ""
+msgstr "PIN musí mať 4 až 8 číslic!"
 
 #: ui/SimLockPage.qml:169 ui/SimLockPage.qml:196
 #, kde-format
 msgid "Current PIN"
-msgstr ""
+msgstr "Aktuálny PIN"
 
 #: ui/SimLockPage.qml:174 ui/SimLockPage.qml:234
-#, fuzzy, kde-format
+#, kde-format
 msgid "New PIN"
-msgstr "nový pin"
+msgstr "Nový PIN"
 
 #: ui/SimLockPage.qml:179 ui/SimLockPage.qml:239
 #, kde-format
@@ -906,99 +902,98 @@ msgstr "Potvrdiť PIN"
 #: ui/SimLockPage.qml:187
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr ""
+msgstr "Odstrániť PIN pre SIM"
 
 #: ui/SimLockPage.qml:204
 #, kde-format
 msgid "Add SIM PIN"
-msgstr ""
+msgstr "Pridať PIN pre SIM"
 
 #: ui/SimPage.qml:72
-#, fuzzy, kde-format
+#, kde-format
 msgid "Data Roaming"
-msgstr "Využitie dát"
+msgstr "Dátový roaming"
 
 #: ui/SimPage.qml:73
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
+"Povoľte svojmu zariadeniu používať iné siete ako siete vášho operátora."
 
 #: ui/SimPage.qml:84
-#, fuzzy, kde-format
-#| msgid "Edit APN"
+#, kde-format
 msgid "Modify APNs"
 msgstr "Upraviť APN"
 
 #: ui/SimPage.qml:85
 #, kde-format
 msgid "Configure access point names for your carrier."
-msgstr ""
+msgstr "Konfigurácia názvov prístupových bodov pre vášho operátora."
 
 #: ui/SimPage.qml:95
-#, fuzzy, kde-format
+#, kde-format
 msgid "Networks"
 msgstr "Siete"
 
 #: ui/SimPage.qml:96
 #, kde-format
 msgid "Select a network operator."
-msgstr ""
+msgstr "Vybrať sieťového operátora."
 
 #: ui/SimPage.qml:107
 #, kde-format
 msgid "Modify SIM lock settings."
-msgstr ""
+msgstr "Upraviť nastavenia zámku SIM."
 
 #: ui/SimPage.qml:118
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
-msgstr ""
+msgstr "Zobraziť podrobnosti o modeme, ku ktorému je táto SIM pripojená."
 
 #: ui/SimPage.qml:132
 #, kde-format
 msgid "SIM Details"
-msgstr ""
+msgstr "Podrobnosti SIM"
 
 #: ui/SimPage.qml:145
-#, fuzzy, kde-format
-#| msgid "IMSI:"
+#, kde-format
 msgid "IMSI"
-msgstr "IMSI:"
+msgstr "IMSI"
 
 #: ui/SimPage.qml:153
-#, fuzzy, kde-format
+#, kde-format
 msgid "EID"
 msgstr "EID"
 
 #: ui/SimPage.qml:161
 #, kde-format
 msgid "Operator Code (modem)"
-msgstr ""
+msgstr "Kód operátora (modem)"
 
 #: ui/SimPage.qml:169
 #, kde-format
 msgid "Operator Name (modem)"
-msgstr ""
+msgstr "Názvov operátora (modem)"
 
 #: ui/SimPage.qml:177
 #, kde-format
 msgid "Operator Code (provided by SIM)"
-msgstr ""
+msgstr "Kód operátora (poskytnutý SIM)"
 
 #: ui/SimPage.qml:185
 #, kde-format
 msgid "Operator Name (provided by SIM)"
-msgstr ""
+msgstr "Názvov operátora (poskytnutý SIM)"
 
 #: ui/SimPage.qml:193
 #, kde-format
 msgid "SIM ID"
-msgstr ""
+msgstr "SIM ID"
 
 #: ui/SimPage.qml:210
 #, kde-format
 msgid "Emergency Numbers"
-msgstr ""
+msgstr "Čísla tiesňového volania"
 
 #, fuzzy
 #~ msgctxt "NAME OF TRANSLATORS"

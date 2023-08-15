@@ -1,19 +1,20 @@
 # translation of kcm_mobile_time.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2019, 2020.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2020, 2021.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-12 02:34+0000\n"
-"PO-Revision-Date: 2021-08-30 17:56+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-08-14 17:29+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: timesettings.cpp:143
@@ -2983,50 +2984,44 @@ msgid "Dec"
 msgstr "Dec"
 
 #: ui/main.qml:57
-#, fuzzy, kde-format
-#| msgid "Time Display"
+#, kde-format
 msgid "Display"
-msgstr "Zobrazenie času"
+msgstr "Zobrazenie"
 
 #: ui/main.qml:62
 #, kde-format
 msgid "24-Hour Format"
-msgstr ""
+msgstr "24-hodinový formát"
 
 #: ui/main.qml:63
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
-msgstr ""
+msgstr "Či sa má pre hodiny používať 24-hodinový formát."
 
 #: ui/main.qml:74
-#, fuzzy, kde-format
-#| msgid "Timezone:"
+#, kde-format
 msgid "Timezone"
-msgstr "Časové pásmo:"
+msgstr "Časové pásmo"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgid "Set Time and Date"
+#, kde-format
 msgid "Time and Date"
-msgstr "Nastaviť čas a dátum"
+msgstr "Čas a dátum"
 
 #: ui/main.qml:94
 #, kde-format
 msgid "Automatic Time Synchronization"
-msgstr ""
+msgstr "Automatická synchronizácia času"
 
 #: ui/main.qml:95
-#, fuzzy, kde-format
-#| msgid "Set time automatically:"
+#, kde-format
 msgid "Whether to set the time automatically."
-msgstr "Nastaviť čas automaticky"
+msgstr "Či sa má čas nastaviť automaticky."
 
 #: ui/main.qml:112
-#, fuzzy, kde-format
-#| msgctxt "This is a city associated with particular time zone"
-#| msgid "Currie"
+#, kde-format
 msgid "Current Time"
-msgstr "Currie"
+msgstr "Aktuálny čas"
 
 #: ui/main.qml:123
 #, kde-format
