@@ -165,11 +165,10 @@ Item {
                     NumberAnimation { duration: Kirigami.Units.shortDuration }
                 }
 
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
                     Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
                     Layout.alignment: Qt.AlignVCenter
-                    usesPlasmaTheme: false
                     source: delegate.window.icon
                 }
 

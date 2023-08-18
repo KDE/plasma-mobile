@@ -68,7 +68,7 @@ QuickSettingsDelegate {
         
         cursorShape: Qt.PointingHandCursor
         
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
             anchors.centerIn: parent
             implicitWidth: Kirigami.Units.iconSizes.smallMedium

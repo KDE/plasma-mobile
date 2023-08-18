@@ -169,13 +169,13 @@ Item {
                     anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
                     anchors.horizontalCenter: parent.horizontalCenter
 
-                    sourceComponent: PlasmaCore.IconItem {
+                    sourceComponent: Kirigami.Icon {
                         id: scrollUpIcon
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         opacity: 1 - flickable.openFactor
 
-                        colorGroup: Kirigami.Theme.ComplementaryColorGroup
+                        Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
                         source: "arrow-up"
                     }
                 }
@@ -215,12 +215,12 @@ Item {
                         }
 
                         // scroll down icon
-                        PlasmaCore.IconItem {
+                        Kirigami.Icon {
                             Layout.alignment: Qt.AlignHCenter
                             Layout.bottomMargin: Kirigami.Units.gridUnit
                             implicitWidth: Kirigami.Units.iconSizes.smallMedium
                             implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                            colorGroup: Kirigami.Theme.ComplementaryColorGroup
+                            Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
                             source: "arrow-down"
                             opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
                         }

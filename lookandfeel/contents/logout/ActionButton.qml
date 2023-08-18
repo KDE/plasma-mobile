@@ -44,7 +44,7 @@ Item {
         }
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: icon
         anchors {
             verticalCenter: buttonRect.verticalCenter
@@ -53,8 +53,6 @@ Item {
         }
         width: iconSize
         height: iconSize
-
-        colorSet: Kirigami.Theme.colorSet
     }
 
     PlasmaComponents3.Label {

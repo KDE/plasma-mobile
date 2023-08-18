@@ -73,7 +73,7 @@ Controls.Drawer {
             
             z: wallpapersView.currentIndex === index ? 2 : 0
             contentItem: Item {
-                PlasmaCore.IconItem {
+                Kirigami.Icon {
                     anchors.centerIn: parent
                     width: Kirigami.Units.iconSizes.large
                     height: width

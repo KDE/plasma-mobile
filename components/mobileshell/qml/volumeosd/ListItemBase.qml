@@ -26,7 +26,6 @@ Controls.ItemDelegate {
     
     property string label
     property alias listIcon: clientIcon.source
-    property alias iconUsesPlasmaTheme: clientIcon.usesPlasmaTheme
     property string type // sink, source, source-output
     
     onClicked: {
@@ -49,7 +48,7 @@ Controls.ItemDelegate {
         }
         
         // application icon
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: clientIcon
             Layout.alignment: Qt.AlignVCenter
             Layout.rightMargin: Kirigami.Units.smallSpacing

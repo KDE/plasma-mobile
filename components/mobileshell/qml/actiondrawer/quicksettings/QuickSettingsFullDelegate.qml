@@ -70,7 +70,7 @@ QuickSettingsDelegate {
         
         cursorShape: Qt.PointingHandCursor
         
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
             anchors.top: parent.top
             anchors.left: parent.left

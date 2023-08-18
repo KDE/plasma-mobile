@@ -171,7 +171,7 @@ Item {
                     Item {
                         implicitHeight: queryField.height
                         implicitWidth: height
-                        PlasmaCore.IconItem {
+                        Kirigami.Icon {
                             anchors.fill: parent
                             anchors.margins: Math.round(Kirigami.Units.smallSpacing)
                             source: "start-here-symbolic"

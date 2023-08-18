@@ -271,7 +271,7 @@ FocusScope {
 
             anchors.centerIn: parent
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: icon
                 Layout.alignment: Qt.AlignHCenter
                 implicitWidth: Kirigami.Units.iconSizes.large

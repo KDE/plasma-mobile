@@ -41,14 +41,13 @@ RowLayout {
     spacing: Kirigami.Units.smallSpacing
     Layout.preferredHeight: Math.max(applicationNameLabel.implicitHeight, Kirigami.Units.iconSizes.small)
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: applicationIconItem
         Layout.topMargin: Kirigami.Units.smallSpacing
         Layout.bottomMargin: Kirigami.Units.smallSpacing
         Layout.preferredWidth: Kirigami.Units.iconSizes.small
         Layout.preferredHeight: Kirigami.Units.iconSizes.small
         source: notificationHeading.applicationIconSource
-        usesPlasmaTheme: false
         visible: valid
     }
 

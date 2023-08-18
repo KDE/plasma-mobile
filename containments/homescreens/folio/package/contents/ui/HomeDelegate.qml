@@ -157,7 +157,7 @@ ContainmentLayoutManager.ItemContainer {
             }
             spacing: 0
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: icon
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
@@ -165,7 +165,6 @@ ContainmentLayoutManager.ItemContainer {
                 Layout.minimumHeight: Math.min(Kirigami.Units.iconSizes.large, parent.height - delegate.reservedSpaceForLabel)
                 Layout.preferredHeight: Layout.minimumHeight
 
-                usesPlasmaTheme: false
                 source: modelData ? modelData.applicationIcon : ""
 
                 Rectangle {

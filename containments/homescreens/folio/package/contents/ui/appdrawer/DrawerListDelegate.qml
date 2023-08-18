@@ -62,7 +62,7 @@ MouseArea {
         }
         spacing: 0
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
 
             Layout.alignment: Qt.AlignLeft
@@ -71,7 +71,6 @@ MouseArea {
             Layout.minimumHeight: parent.height
             Layout.preferredHeight: Layout.minimumHeight
 
-            usesPlasmaTheme: false
             source: model.applicationIcon
 
             Rectangle {

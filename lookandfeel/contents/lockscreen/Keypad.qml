@@ -174,13 +174,13 @@ Rectangle {
                             color: keypadRoot.buttonTextColor
                         }
 
-                        PlasmaCore.IconItem {
+                        Kirigami.Icon {
                             visible: modelData === "R"
                             anchors.centerIn: parent
                             source: "edit-clear"
                         }
 
-                        PlasmaCore.IconItem {
+                        Kirigami.Icon {
                             visible: modelData === "E"
                             anchors.centerIn: parent
                             source: "go-next"

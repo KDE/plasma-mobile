@@ -92,11 +92,10 @@ MouseArea {
             fillMode: Image.PreserveAspectFit
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             anchors.centerIn: parent
             width: height
             height: Kirigami.Units.iconSizes.roundedIconSize(parent.height)
-            usesPlasmaTheme: false
             source: !thumbnailer.busy && !thumbnailer.hasPreview ? thumbnailer.iconName : ""
         }
 

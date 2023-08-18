@@ -133,7 +133,7 @@ MouseArea {
         }
         spacing: 0
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
 
             Kirigami.Theme.inherit: false

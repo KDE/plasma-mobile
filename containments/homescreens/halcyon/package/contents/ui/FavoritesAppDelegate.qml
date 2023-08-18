@@ -270,10 +270,9 @@ Item {
                 opacity: delegate.dragFolderAnimationProgress
             }
             
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: icon
                 anchors.fill: parent
-                usesPlasmaTheme: false
                 source: delegate.isFolder ? 'document-open-folder' : delegate.applicationIcon
                 
                 transform: Scale { 

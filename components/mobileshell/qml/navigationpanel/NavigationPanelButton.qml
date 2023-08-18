@@ -63,7 +63,7 @@ Controls.AbstractButton {
         }
     }
 
-    PlasmaCore.IconItem {
+    Kirigami.Icon {
         id: icon
         readonly property real side: Math.min(button.width, button.height)
         anchors {

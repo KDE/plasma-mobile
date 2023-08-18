@@ -8,7 +8,7 @@
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
-import org.kde.kirigami 2.12 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
@@ -89,7 +89,7 @@ Item {
         anchors.right: parent.right
         anchors.top: parent.top
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             Layout.alignment: Qt.AlignVCenter
             Layout.leftMargin: Kirigami.Units.smallSpacing
             Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
@@ -121,7 +121,7 @@ Item {
             }
         }
         
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             Layout.alignment: Qt.AlignVCenter
             Layout.rightMargin: Kirigami.Units.smallSpacing
             Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
