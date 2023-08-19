@@ -68,6 +68,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KCMUtils
     Package
     DBusAddons
+    JobWidgets
 )
 
 find_package(PkgConfig REQUIRED)

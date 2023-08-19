@@ -17,7 +17,7 @@ target_link_libraries(shellsettingsplugin
     KF6::ConfigWidgets
     KF6::Package
     KF6::KIOGui
-    KF6::Notifications
+    KF6::JobWidgets
 )
 
 set_property(TARGET shellsettingsplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/private/mobileshell/shellsettingsplugin)

@@ -22,7 +22,7 @@ target_link_libraries(halcyonplugin
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui
-                      KF6::Notifications
+                      KF6::JobWidgets
                       KF6::WaylandClient
                       KF6::WindowSystem)
 

@@ -17,6 +17,7 @@ Dependencies:
     'frameworks/modemmanager-qt': '@latest-kf6'
     'frameworks/networkmanager-qt': '@latest-kf6'
     'frameworks/plasma-framework': '@latest-kf6'
+    'frameworks/kjobwidgets': '@latest-kf6'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
     'libraries/kirigami-addons': '@latest-kf6'
