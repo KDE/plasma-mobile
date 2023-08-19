@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-08-19 01:57+0000\n"
 "PO-Revision-Date: 2022-12-24 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -91,24 +91,24 @@ msgstr "%1 (%2)"
 msgid "Device name not found"
 msgstr "Nombre de dispositivo no encontrado"
 
-#: qml/volumeosd/ListItemBase.qml:97
+#: qml/volumeosd/ListItemBase.qml:96
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Mostrar opciones adicionales de %1"
 
-#: qml/volumeosd/ListItemBase.qml:153
+#: qml/volumeosd/ListItemBase.qml:152
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Ajustar el volumen de %1"
 
-#: qml/volumeosd/ListItemBase.qml:231
+#: qml/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/volumeosd/ListItemBase.qml:245
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -251,7 +251,7 @@ msgstr "Mostrar %1 más"
 msgid "Clear All Notifications"
 msgstr "Borrar todas las notificaciones"
 
-#: qml/widgets/notifications/ThumbnailStrip.qml:135
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
 msgstr "Más opciones..."

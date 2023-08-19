@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-08-19 01:57+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -88,24 +88,24 @@ msgstr "%1 (%2)"
 msgid "Device name not found"
 msgstr "Názov zariadenia nebol nájdený"
 
-#: qml/volumeosd/ListItemBase.qml:97
+#: qml/volumeosd/ListItemBase.qml:96
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Zobraziť dodatočné voľby pre %1"
 
-#: qml/volumeosd/ListItemBase.qml:153
+#: qml/volumeosd/ListItemBase.qml:152
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Upraviť hlasitosť pre %1"
 
-#: qml/volumeosd/ListItemBase.qml:231
+#: qml/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/volumeosd/ListItemBase.qml:245
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -248,7 +248,7 @@ msgstr "Zobraziť ďalších %1"
 msgid "Clear All Notifications"
 msgstr "Vymazať všetky oznámenia"
 
-#: qml/widgets/notifications/ThumbnailStrip.qml:135
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
 msgstr "Viac možností..."

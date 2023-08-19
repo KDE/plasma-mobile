@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-08-19 01:57+0000\n"
 "PO-Revision-Date: 2023-07-26 00:13+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -89,24 +89,24 @@ msgstr "%1(%2)"
 msgid "Device name not found"
 msgstr "장치 이름을 찾을 수 없음"
 
-#: qml/volumeosd/ListItemBase.qml:97
+#: qml/volumeosd/ListItemBase.qml:96
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "%1의 추가 설정 표시"
 
-#: qml/volumeosd/ListItemBase.qml:153
+#: qml/volumeosd/ListItemBase.qml:152
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "%1 음량 조정"
 
-#: qml/volumeosd/ListItemBase.qml:231
+#: qml/volumeosd/ListItemBase.qml:230
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/volumeosd/ListItemBase.qml:245
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -249,7 +249,7 @@ msgstr "%1개 더 보기"
 msgid "Clear All Notifications"
 msgstr "모든 알림 지우기"
 
-#: qml/widgets/notifications/ThumbnailStrip.qml:135
+#: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
 msgstr "옵션 더 보기…"
