@@ -17,6 +17,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.kitemmodels as KItemModels
 
 import "indicators" as Indicators
 import "../dataproviders" as DataProviders
@@ -144,9 +145,9 @@ Item {
                     // system tray
                     Repeater {
                         id: statusNotifierRepeater
-                        model: PlasmaCore.SortFilterModel {
+                        model: KItemModels.KSortFilterProxyModel {
                             id: filteredStatusNotifiers
-                            filterRole: "Title"
+                            filterRoleName: "Title"
                             sourceModel: P5Support.DataModel {
                                 dataSource: statusNotifierSource ? statusNotifierSource : null
                             }

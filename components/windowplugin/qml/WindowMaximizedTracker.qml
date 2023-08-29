@@ -6,6 +6,7 @@ import QtQuick
 import org.kde.plasma.core as PlasmaCore
 import org.kde.taskmanager as TaskManager
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.kitemmodels as KItemModels
 
 pragma Singleton
 
@@ -14,10 +15,10 @@ pragma Singleton
 QtObject {
     readonly property bool showingWindow: __internal.count > 0 && !WindowPlugin.WindowUtil.isShowingDesktop
 
-    property var __internal: PlasmaCore.SortFilterModel {
+    property var __internal: KItemModels.KSortFilterProxyModel {
         id: visibleMaximizedWindowsModel
-        filterRole: 'IsMinimized'
-        filterRegExp: 'false'
+        filterRoleName: 'IsMinimized'
+        filterString: 'false'
         sourceModel: TaskManager.TasksModel {
             id: tasksModel
             filterByVirtualDesktop: true
