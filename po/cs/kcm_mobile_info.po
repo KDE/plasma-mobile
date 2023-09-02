@@ -26,7 +26,7 @@ msgstr "Systémové informace"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovat"
 
 #: ui/main.qml:50
 #, kde-format
@@ -93,6 +93,3 @@ msgstr "%1 RAM"
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Neznámý"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Zkopírovat do schránky"
