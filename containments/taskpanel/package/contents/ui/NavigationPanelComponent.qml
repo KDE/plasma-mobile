@@ -25,7 +25,7 @@ MobileShell.NavigationPanel {
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
     backgroundColor: (Keyboards.KWinVirtualKeyboard.visible || opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent";
-    foregroundColorGroup: opaqueBar ? PlasmaCore.Theme.NormalColorGroup : PlasmaCore.Theme.ComplementaryColorGroup
+    foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
     shadow: !opaqueBar
         
     TaskManager.VirtualDesktopInfo {

@@ -20,7 +20,6 @@ Controls.AbstractButton {
 
     property double iconSizeFactor: 1
     property alias iconSource: icon.source
-    property alias colorGroup: icon.colorGroup
     
     Rectangle {
         id: rect

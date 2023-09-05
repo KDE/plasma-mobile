@@ -16,10 +16,11 @@ KSvg.SvgItem {
 
     z: 2
     opacity: 0
-    svg: KSvg.Svg {
-        imagePath: "widgets/arrows"
-        colorGroup: Kirigami.Theme.ComplementaryColorGroup
-    }
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+    Kirigami.Theme.inherit: false
+
+    imagePath: "widgets/arrows"
     elementId: "left-arrow"
     width: Kirigami.Units.iconSizes.large
     height: width

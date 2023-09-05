@@ -59,7 +59,8 @@ Item {
         NavigationPanelButton {
             id: leftButton
             visible: root.leftAction.visible
-            colorGroup: root.foregroundColorGroup
+            Kirigami.Theme.colorSet: root.foregroundColorGroup
+            Kirigami.Theme.inherit: false
             enabled: root.leftAction.enabled
             iconSizeFactor: root.leftAction.iconSizeFactor
             iconSource: root.leftAction.iconSource
@@ -74,7 +75,8 @@ Item {
             id: middleButton
             anchors.centerIn: parent
             visible: root.middleAction.visible
-            colorGroup: root.foregroundColorGroup
+            Kirigami.Theme.colorSet: root.foregroundColorGroup
+            Kirigami.Theme.inherit: false
             enabled: root.middleAction.enabled
             iconSizeFactor: root.middleAction.iconSizeFactor
             iconSource: root.middleAction.iconSource
@@ -88,7 +90,8 @@ Item {
         NavigationPanelButton {
             id: rightButton
             visible: root.rightAction.visible
-            colorGroup: root.foregroundColorGroup
+            Kirigami.Theme.colorSet: root.foregroundColorGroup
+            Kirigami.Theme.inherit: false
             enabled: root.rightAction.enabled
             iconSizeFactor: root.rightAction.iconSizeFactor
             iconSource: root.rightAction.iconSource
@@ -102,7 +105,8 @@ Item {
         NavigationPanelButton {
             id: rightCornerButton
             visible: root.rightCornerAction.visible
-            colorGroup: root.foregroundColorGroup
+            Kirigami.Theme.colorSet: root.foregroundColorGroup
+            Kirigami.Theme.inherit: false
             enabled: root.rightCornerAction.enabled
             iconSizeFactor: root.rightCornerAction.iconSizeFactor
             iconSource: root.rightCornerAction.iconSource
