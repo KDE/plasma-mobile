@@ -11,7 +11,7 @@ import QtQuick.Layouts
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 
 import "../../statusbar" as StatusBar
 import "../../components" as Components

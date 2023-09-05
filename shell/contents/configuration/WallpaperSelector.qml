@@ -6,7 +6,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.0
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.3 as Controls
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.configuration 2.0
 
 import org.kde.kirigami 2.20 as Kirigami

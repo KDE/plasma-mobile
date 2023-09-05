@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.12 as Kirigami
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
