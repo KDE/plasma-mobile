@@ -8,6 +8,7 @@
 
 #include <QDBusPendingReply>
 #include <QDebug>
+#include <QGuiApplication>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QtQml>
