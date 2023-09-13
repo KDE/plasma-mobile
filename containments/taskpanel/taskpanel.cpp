@@ -130,6 +130,6 @@ void TaskPanel::triggerTaskSwitcher() const
     QDBusConnection::sessionBus().send(message);
 }
 
-K_PLUGIN_CLASS_WITH_JSON(TaskPanel, "package/metadata.json")
+K_PLUGIN_CLASS(TaskPanel)
 
 #include "taskpanel.moc"

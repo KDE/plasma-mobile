@@ -24,6 +24,6 @@ void HomeScreen::configChanged()
     Plasma::Containment::configChanged();
 }
 
-K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "package/metadata.json")
+K_PLUGIN_CLASS(HomeScreen)
 
 #include "homescreen.moc"

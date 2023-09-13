@@ -14,6 +14,6 @@ PhonePanel::PhonePanel(QObject *parent, const KPluginMetaData &data, const QVari
 
 PhonePanel::~PhonePanel() = default;
 
-K_PLUGIN_CLASS_WITH_JSON(PhonePanel, "package/metadata.json")
+K_PLUGIN_CLASS(PhonePanel)
 
 #include "phonepanel.moc"

@@ -18,6 +18,6 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
 
 HomeScreen::~HomeScreen() = default;
 
-K_PLUGIN_CLASS_WITH_JSON(HomeScreen, "package/metadata.json")
+K_PLUGIN_CLASS(HomeScreen)
 
 #include "homescreen.moc"
