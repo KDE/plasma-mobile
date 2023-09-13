@@ -90,13 +90,7 @@
         "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
         "Name[zh_CN]": "无线热点",
-        "ServiceTypes": [
-            "KCModule"
-        ],
-        "Version": "0.1",
         "Website": "https://plasma-mobile.org/"
     },
-    "X-KDE-System-Settings-Parent-Category": "network",
-    "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-Package": "kcm_mobile_hotspot"
+    "X-KDE-System-Settings-Parent-Category": "network"
 }

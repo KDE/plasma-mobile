@@ -66,10 +66,7 @@
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "Wi-Fi",
         "Name[x-test]": "xxWi-Fixx",
-        "Name[zh_CN]": "Wi-Fi",
-        "ServiceTypes": [
-            "KCModule"
-        ]
+        "Name[zh_CN]": "Wi-Fi"
     },
     "X-KDE-Keywords": "wifi,network",
     "X-KDE-Keywords[ar]": "واي فاي,شبكة",

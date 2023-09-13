@@ -145,6 +145,5 @@
     "X-KDE-Keywords[x-test]": "xxsystemxx,xxshellxx,xxpanelxx",
     "X-KDE-Keywords[zh_CN]": "system,shell,panel,系统,外壳,系统外壳,外壳程序,系统外壳程序,面板,",
     "X-KDE-ParentApp": "kcontrol",
-    "X-KDE-System-Settings-Parent-Category": "personalization",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-KDE-System-Settings-Parent-Category": "personalization"
 }
