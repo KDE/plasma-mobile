@@ -12,7 +12,7 @@ qt_add_dbus_interface(timesettings_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/timedated1.x
 
 kcmutils_add_qml_kcm(kcm_mobile_time SOURCES ${timesettings_SRCS})
 
-target_link_libraries(kcm_mobile_time
+target_link_libraries(kcm_mobile_time PRIVATE
     Qt::Quick
     Qt::Qml
     Qt::DBus

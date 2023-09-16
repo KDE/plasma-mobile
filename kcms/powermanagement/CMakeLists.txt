@@ -10,7 +10,7 @@ target_sources(kcm_mobile_power PRIVATE
     batterymodel.cpp
     statisticsprovider.cpp
 )
-target_link_libraries(kcm_mobile_power
+target_link_libraries(kcm_mobile_power PRIVATE
     Qt::DBus
     Qt::Core
     KF6::CoreAddons

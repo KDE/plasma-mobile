@@ -3,7 +3,7 @@
 
 kcmutils_add_qml_kcm(kcm_mobileshell SOURCES kcm.cpp)
 
-target_link_libraries(kcm_mobileshell
+target_link_libraries(kcm_mobileshell PRIVATE
     Qt::Core
     KF6::CoreAddons
     KF6::KCMUtils

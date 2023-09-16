@@ -14,7 +14,7 @@ target_sources(kcm_mobile_onscreenkeyboard PRIVATE
 )
 target_compile_definitions(kcm_mobile_onscreenkeyboard PRIVATE "MALIIT_KEYBOARD_LANGUAGES_DIR=\"${MALIIT_KEYBOARD_LANGUAGES_DIR}\"")
 
-target_link_libraries(kcm_mobile_onscreenkeyboard
+target_link_libraries(kcm_mobile_onscreenkeyboard PRIVATE
     Qt::Core
     KF6::CoreAddons
     KF6::I18n

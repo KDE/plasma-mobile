@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: LGPL-2.0-or-later
 
 kcmutils_add_qml_kcm(kcm_mobile_wifi SOURCES wifisettings.cpp)
-target_link_libraries(kcm_mobile_wifi
+target_link_libraries(kcm_mobile_wifi PRIVATE
     Qt::DBus
     Qt::Gui
     Qt::Quick

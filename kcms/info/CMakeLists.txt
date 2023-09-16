@@ -9,7 +9,7 @@ target_sources(kcm_mobile_info PRIVATE
     softwareinfo.cpp
     hardwareinfo.cpp
 )
-target_link_libraries(kcm_mobile_info
+target_link_libraries(kcm_mobile_info PRIVATE
     Qt::Core
     Qt::Gui
     KF6::CoreAddons

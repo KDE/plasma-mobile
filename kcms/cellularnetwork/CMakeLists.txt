@@ -11,7 +11,7 @@ target_sources(kcm_cellular_network PRIVATE
     mobileproviders.cpp
     profilesettings.cpp
 )
-target_link_libraries(kcm_cellular_network
+target_link_libraries(kcm_cellular_network PRIVATE
     Qt::DBus
     Qt::Gui
     Qt::Quick
