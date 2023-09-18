@@ -48,7 +48,7 @@ msgstr "Versió de Plasma de KDE"
 #: ui/main.qml:85
 #, kde-format
 msgid "KDE Frameworks Version"
-msgstr "Versió de Frameworks de KDE"
+msgstr "Versió dels Frameworks de KDE"
 
 #: ui/main.qml:92
 #, kde-format
