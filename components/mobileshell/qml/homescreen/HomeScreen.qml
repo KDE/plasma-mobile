@@ -48,6 +48,11 @@ Item {
     readonly property bool overlayShown: startupFeedback.visible
 
     /**
+     * The root PlasmoidItem of the containment this is used into
+     */
+    property PlasmoidItem plasmoidItem
+
+    /**
      * Margins for the homescreen, taking panels into account.
      */
     property real topMargin
@@ -56,11 +61,11 @@ Item {
     property real rightMargin
 
     function evaluateMargins() {
-        topMargin = Plasmoid.availableScreenRect.y
+        topMargin = plasmoidItem.availableScreenRect.y
         // add a specific check for the nav panel for now, since the gesture mode still technically has height
-        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (Plasmoid.availableScreenRect.y + Plasmoid.availableScreenRect.height) : 0;
-        leftMargin = Plasmoid.availableScreenRect.x
-        rightMargin = root.width - (Plasmoid.availableScreenRect.x + Plasmoid.availableScreenRect.width)
+        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height) : 0;
+        leftMargin = plasmoidItem.availableScreenRect.x
+        rightMargin = root.width - (plasmoidItem.availableScreenRect.x + plasmoidItem.availableScreenRect.width)
     }
 
     Connections {

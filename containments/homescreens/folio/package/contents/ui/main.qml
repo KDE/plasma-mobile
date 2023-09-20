@@ -59,6 +59,7 @@ ContainmentItem {
     MobileShell.HomeScreen {
         id: homeScreen
 
+        plasmoidItem: root
         onResetHomeScreenPosition: {
             folioHomeScreen.homeScreenState.animateGoToPageIndex(0, Kirigami.Units.longDuration);
             folioHomeScreen.homeScreenState.closeAppDrawer();

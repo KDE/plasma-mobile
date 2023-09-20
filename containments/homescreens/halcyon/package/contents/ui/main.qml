@@ -64,6 +64,7 @@ ContainmentItem {
     MobileShell.HomeScreen {
         id: homeScreen
         anchors.fill: parent
+        plasmoidItem: root
 
         onResetHomeScreenPosition: {
             halcyonHomeScreen.triggerHomescreen();
