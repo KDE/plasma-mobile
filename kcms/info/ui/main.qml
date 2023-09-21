@@ -10,14 +10,15 @@ import QtQuick.Controls 2.2 as Controls
 
 import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.10 as Kirigami
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.kirigamiaddons.formcard 1 as FormCard
 
 KCM.SimpleKCM {
     title: i18n("System Information")
 
     leftPadding: 0
     rightPadding: 0
-    Kirigami.Theme.colorSet: Kirigami.Theme.Window
+    topPadding: 0
+    bottomPadding: Kirigami.Units.gridUnit
 
     actions: [
         Kirigami.Action {
@@ -28,7 +29,6 @@ KCM.SimpleKCM {
     ]
 
     ColumnLayout {
-        width: parent.width
         spacing: 0
 
         Kirigami.Icon {
@@ -39,103 +39,85 @@ KCM.SimpleKCM {
             implicitHeight: width
             source: kcm.distroInfo.logo ? kcm.distroInfo.logo : "kde"
         }
-        
-        MobileForm.FormCard {
+
+        FormCard.FormCard {
             Layout.fillWidth: true
-            
-            contentItem: ColumnLayout {
-                spacing: 0
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("Operating System")
-                    description: kcm.distroInfo.name
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormButtonDelegate {
-                    text: i18n("Webpage")
-                    description: kcm.distroInfo.homeUrl
-                    onClicked: {
-                        Qt.openUrlExternally(kcm.distroInfo.homeUrl)
-                    }
+
+            FormCard.FormTextDelegate {
+                text: i18n("Operating System")
+                description: kcm.distroInfo.name
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormButtonDelegate {
+                text: i18n("Webpage")
+                description: kcm.distroInfo.homeUrl
+                onClicked: {
+                    Qt.openUrlExternally(kcm.distroInfo.homeUrl)
                 }
             }
         }
-        
-        MobileForm.FormCard {
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.gridUnit
-            
-            contentItem: ColumnLayout {
-                spacing: 0
-                
-                MobileForm.FormCardHeader {
-                    title: "Software"
-                }
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("KDE Plasma Version")
-                    description: kcm.softwareInfo.plasmaVersion
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("KDE Frameworks Version")
-                    description: kcm.softwareInfo.frameworksVersion
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("Qt Version")
-                    description: kcm.softwareInfo.qtVersion
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("Kernel Version")
-                    description: kcm.softwareInfo.kernelRelease
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("OS Type")
-                    description: i18nc("@label %1 is the CPU bit width (e.g. 32 or 64)", "%1-bit", kcm.softwareInfo.osType)
-                }
+
+        FormCard.FormHeader {
+            title: i18nc("@title:group", "Software")
+        }
+
+        FormCard.FormCard {
+            FormCard.FormTextDelegate {
+                text: i18n("KDE Plasma Version")
+                description: kcm.softwareInfo.plasmaVersion
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("KDE Frameworks Version")
+                description: kcm.softwareInfo.frameworksVersion
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("Qt Version")
+                description: kcm.softwareInfo.qtVersion
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("Kernel Version")
+                description: kcm.softwareInfo.kernelRelease
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("OS Type")
+                description: i18nc("@label %1 is the CPU bit width (e.g. 32 or 64)", "%1-bit", kcm.softwareInfo.osType)
             }
         }
-        
-        MobileForm.FormCard {
-            Layout.fillWidth: true
-            Layout.topMargin: Kirigami.Units.gridUnit
-            
-            contentItem: ColumnLayout {
-                spacing: 0
-                
-                MobileForm.FormCardHeader {
-                    title: "Hardware"
-                }
-                
-                MobileForm.FormTextDelegate {
-                    text: i18np("Processor", "Processors", kcm.hardwareInfo.processorCount);
-                    description: kcm.hardwareInfo.processors
-                }
-                
-                MobileForm.FormDelegateSeparator {}
-                
-                MobileForm.FormTextDelegate {
-                    text: i18n("Memory")
-                    description: {
-                        if (kcm.hardwareInfo.memory !== "0 B") {
-                            return i18nc("@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)",
-                                "%1 of RAM", kcm.hardwareInfo.memory)
-                        } else {
-                            return i18nc("Unknown amount of RAM", "Unknown")
-                        }
+
+        FormCard.FormHeader {
+            title: i18nc("@title:group", "Hardware")
+        }
+
+        FormCard.FormCard {
+            FormCard.FormTextDelegate {
+                text: i18np("Processor", "Processors", kcm.hardwareInfo.processorCount);
+                description: kcm.hardwareInfo.processors
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("Memory")
+                description: {
+                    if (kcm.hardwareInfo.memory !== "0 B") {
+                        return i18nc("@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)",
+                            "%1 of RAM", kcm.hardwareInfo.memory)
+                    } else {
+                        return i18nc("Unknown amount of RAM", "Unknown")
                     }
                 }
             }
