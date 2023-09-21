@@ -58,30 +58,32 @@ TimeZoneModel::~TimeZoneModel()
 
 int TimeZoneModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent);
-    return m_data.count();
+    return parent.isValid() ? 0 : m_data.count();
 }
 
 QVariant TimeZoneModel::data(const QModelIndex &index, int role) const
 {
-    if (index.isValid()) {
-        TimeZoneData currentData = m_data.at(index.row());
+    Q_ASSERT(checkIndex(index, QAbstractItemModel::CheckIndexOption::IndexIsValid));
 
-        switch (role) {
-        case TimeZoneIdRole:
+    const TimeZoneData &currentData = m_data.at(index.row());
+
+    switch (role) {
+    case TimeZoneIdRole:
+        return currentData.id;
+    case RegionRole: {
+        return currentData.region;
+    case CityRole:
+        if (currentData.city.isEmpty())
             return currentData.id;
-        case RegionRole:
-            return currentData.region;
-        case CityRole:
-            return currentData.city;
-        case CommentRole:
-            return currentData.comment;
-        case CheckedRole:
-            return currentData.checked;
         }
+        return currentData.city;
+    case CommentRole:
+        return currentData.comment;
+    case CheckedRole:
+        return currentData.checked;
     }
 
-    return QVariant();
+    return {};
 }
 
 bool TimeZoneModel::setData(const QModelIndex &index, const QVariant &value, int role)
@@ -120,7 +122,7 @@ void TimeZoneModel::update()
     const QStringList data = QString::fromUtf8(localZone.id()).split(QLatin1Char('/'));
 
     TimeZoneData local;
-    local.id = QStringLiteral("Local");
+    local.id = "Local";
     local.region = i18nc("This means \"Local Timezone\"", "Local");
     local.city = m_timezonesI18n->i18nCity(data.last());
     local.comment = i18n("Your system time zone");
@@ -131,21 +133,22 @@ void TimeZoneModel::update()
     QStringList cities;
     QHash<QString, QTimeZone> zonesByCity;
 
-    const QList<QByteArray> systemTimeZones = QTimeZone::availableTimeZoneIds();
+    const auto systemTimeZones = QTimeZone::availableTimeZoneIds();
 
-    for (auto it = systemTimeZones.constBegin(); it != systemTimeZones.constEnd(); ++it) {
-        const QTimeZone zone(*it);
-        const QStringList splitted = QString::fromUtf8(zone.id()).split(QStringLiteral("/"));
+    for (const auto &id : systemTimeZones) {
+        const QTimeZone zone(id);
+
+        const QStringList splitted = QString::fromUtf8(id).split(QStringLiteral("/"));
 
         // CITY | COUNTRY | CONTINENT
-        const QString key = QStringLiteral("%1|%2|%3").arg(splitted.last(), QLocale::countryToString(zone.country()), splitted.first());
+        const QString key = QStringLiteral("%1|%2|%3").arg(splitted.last(), QLocale::territoryToString(zone.territory()), splitted.first());
 
         cities.append(key);
         zonesByCity.insert(key, zone);
     }
     cities.sort(Qt::CaseInsensitive);
 
-    Q_FOREACH (const QString &key, cities) {
+    for (const QString &key : std::as_const(cities)) {
         const QTimeZone timeZone = zonesByCity.value(key);
         QString comment = timeZone.comment();
 
@@ -157,10 +160,10 @@ void TimeZoneModel::update()
         const QStringList cityCountryContinent = key.split(QLatin1Char('|'));
 
         TimeZoneData newData;
-        newData.id = QString::fromUtf8(timeZone.id());
-        newData.region = timeZone.country() == QLocale::AnyCountry
+        newData.id = timeZone.id();
+        newData.region = timeZone.territory() == QLocale::AnyCountry
             ? QString()
-            : m_timezonesI18n->i18nContinents(cityCountryContinent.at(2)) + QLatin1Char('/') + m_timezonesI18n->i18nCountry(timeZone.country());
+            : m_timezonesI18n->i18nContinents(cityCountryContinent.at(2)) + QLatin1Char('/') + m_timezonesI18n->i18nCountry(timeZone.territory());
         newData.city = m_timezonesI18n->i18nCity(cityCountryContinent.at(0));
         newData.comment = comment;
         newData.checked = false;

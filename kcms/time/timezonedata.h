@@ -12,7 +12,7 @@
 class TimeZoneData
 {
 public:
-    QString id;
+    QByteArray id;
     QString region;
     QString city;
     QString comment;

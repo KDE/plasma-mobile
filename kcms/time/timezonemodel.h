@@ -5,11 +5,11 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#ifndef TIMEZONEMODEL_H
-#define TIMEZONEMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
 #include <QSortFilterProxyModel>
+#include <QTimeZone>
 
 #include "timezonedata.h"
 
@@ -76,5 +76,3 @@ private:
     QStringList m_selectedTimeZones;
     TimezonesI18n *m_timezonesI18n;
 };
-
-#endif // TIMEZONEMODEL_H
