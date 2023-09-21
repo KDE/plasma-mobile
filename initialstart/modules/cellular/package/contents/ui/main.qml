@@ -1,13 +1,13 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
-import org.kde.plasma.mm 1.0 as PlasmaMM
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.formcard 1 as FormCard
+import org.kde.plasma.mm 1 as PlasmaMM
 
 Item {
     id: root
@@ -61,92 +61,79 @@ Item {
             }
         }
 
-        MobileForm.FormCard {
+        FormCard.FormCard {
             visible: PlasmaMM.SignalIndicator.modemAvailable && PlasmaMM.SignalIndicator.mobileDataSupported
             maximumWidth: root.cardWidth
 
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            Layout.fillWidth: true
 
-            contentItem: ColumnLayout {
-                spacing: 0
-
-                MobileForm.FormSwitchDelegate {
-                    Layout.fillWidth: true
-                    text: i18n("Mobile Data")
-                    checked: PlasmaMM.SignalIndicator.mobileDataEnabled
-                    onCheckedChanged: {
-                        if (checked !== PlasmaMM.SignalIndicator.mobileDataEnabled) {
-                            root.toggleMobileData();
-                        }
+            FormCard.FormSwitchDelegate {
+                text: i18n("Mobile Data")
+                checked: PlasmaMM.SignalIndicator.mobileDataEnabled
+                onCheckedChanged: {
+                    if (checked !== PlasmaMM.SignalIndicator.mobileDataEnabled) {
+                        root.toggleMobileData();
                     }
                 }
             }
         }
 
-        MobileForm.FormCard {
+        FormCard.FormCard {
             visible: PlasmaMM.SignalIndicator.modemAvailable && !PlasmaMM.SignalIndicator.simEmpty
             maximumWidth: root.cardWidth
 
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            Layout.fillWidth: true
 
-            contentItem: ColumnLayout {
-                spacing: 0
+            ListView {
+                id: listView
+                currentIndex: -1
+                clip: true
 
-                ListView {
-                    id: listView
-                    currentIndex: -1
-                    clip: true
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+                model: PlasmaMM.SignalIndicator.profiles
 
-                    model: PlasmaMM.SignalIndicator.profiles
+                delegate: FormCard.FormRadioDelegate {
+                    width: listView.width
+                    text: modelData.name
+                    description: modelData.apn
+                    checked: modem.activeConnectionUni == modelData.connectionUni
 
-                    delegate: MobileForm.FormRadioDelegate {
-                        width: listView.width
-                        text: modelData.name
-                        description: modelData.apn
-                        checked: modem.activeConnectionUni == modelData.connectionUni
+                    onCheckedChanged: {
+                        if (checked) {
+                            PlasmaMM.SignalIndicator.activateProfile(modelData.connectionUni);
+                            checked = Qt.binding(() => { return modem.activeConnectionUni == modelData.connectionUni });
+                        }
+                    }
 
-                        onCheckedChanged: {
-                            if (checked) {
-                                PlasmaMM.SignalIndicator.activateProfile(modelData.connectionUni);
-                                checked = Qt.binding(() => { return modem.activeConnectionUni == modelData.connectionUni });
+                    trailing: RowLayout {
+                        ToolButton {
+                            icon.name: "entry-edit"
+                            text: i18n("Edit")
+                            onClicked: {
+                                profileDialog.profile = modelData;
+                                profileDialog.open();
                             }
                         }
-
-                        trailing: RowLayout {
-                            ToolButton {
-                                icon.name: "entry-edit"
-                                text: i18n("Edit")
-                                onClicked: {
-                                    profileDialog.profile = modelData;
-                                    profileDialog.open();
-                                }
-                            }
-                            ToolButton {
-                                icon.name: "delete"
-                                text: i18n("Delete")
-                                onClicked: PlasmaMM.SignalIndicator.removeProfile(modelData.connectionUni)
-                            }
+                        ToolButton {
+                            icon.name: "delete"
+                            text: i18n("Delete")
+                            onClicked: PlasmaMM.SignalIndicator.removeProfile(modelData.connectionUni)
                         }
                     }
                 }
+            }
 
-                MobileForm.FormButtonDelegate {
-                    icon.name: "list-add"
-                    text: i18n("Add APN")
-                    onClicked: {
-                        profileDialog.profile = null;
-                        profileDialog.open();
-                    }
+            FormCard.FormButtonDelegate {
+                icon.name: "list-add"
+                text: i18n("Add APN")
+                onClicked: {
+                    profileDialog.profile = null;
+                    profileDialog.open();
                 }
             }
         }
     }
 }
-
-

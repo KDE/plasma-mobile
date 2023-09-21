@@ -2,12 +2,12 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.plasma.mobileinitialstart.wifi 1.0 as WiFi
 
@@ -68,46 +68,42 @@ Item {
             text: i18n("Connect to a WiFi network for network access.")
         }
 
-        MobileForm.FormCard {
+        FormCard.FormCard {
             maximumWidth: root.cardWidth
 
             Layout.fillHeight: true
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
             Layout.fillWidth: true
 
-            contentItem: ColumnLayout {
-                spacing: 0
+            ListView {
+                id: listView
+                currentIndex: -1
+                clip: true
+                Layout.fillWidth: true
+                Layout.fillHeight: true
 
-                ListView {
-                    id: listView
-                    currentIndex: -1
-                    clip: true
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
+                section.property: "Section"
+                section.delegate: Kirigami.ListSectionHeader {
+                    text: section
+                }
 
-                    section.property: "Section"
-                    section.delegate: Kirigami.ListSectionHeader {
-                        text: section
+                model: mobileProxyModel
+
+                Kirigami.PlaceholderMessage {
+                    anchors.centerIn: parent
+                    width: parent.width - (Kirigami.Units.gridUnit * 4)
+                    visible: !enabledConnections.wirelessEnabled
+                    text: i18n("Wi-Fi is disabled")
+                    icon.name: "network-wireless-disconnected"
+                    helpfulAction: Kirigami.Action {
+                        icon.name: "network-wireless-connected"
+                        text: i18n("Enable")
+                        onTriggered: handler.enableWireless(true)
                     }
+                }
 
-                    model: mobileProxyModel
-
-                    Kirigami.PlaceholderMessage {
-                        anchors.centerIn: parent
-                        width: parent.width - (Kirigami.Units.gridUnit * 4)
-                        visible: !enabledConnections.wirelessEnabled
-                        text: i18n("Wi-Fi is disabled")
-                        icon.name: "network-wireless-disconnected"
-                        helpfulAction: Kirigami.Action {
-                            icon.name: "network-wireless-connected"
-                            text: i18n("Enable")
-                            onTriggered: handler.enableWireless(true)
-                        }
-                    }
-
-                    delegate: ConnectionItemDelegate {
-                        width: listView.width
-                    }
+                delegate: ConnectionItemDelegate {
+                    width: listView.width
                 }
             }
         }

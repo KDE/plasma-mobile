@@ -6,7 +6,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
 import org.kde.plasma.plasma5support 2.0 as P5Support
 
@@ -82,43 +82,36 @@ Item {
                 text: i18n("Adjust the screen brightness to be comfortable for the installation process.")
             }
 
-            MobileForm.FormCard {
+            FormCard.FormCard {
                 maximumWidth: root.cardWidth
 
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.fillWidth: true
 
-                contentItem: ColumnLayout {
-                    spacing: 0
+                FormCard.AbstractFormDelegate {
+                    background: null
 
-                    MobileForm.AbstractFormDelegate {
-                        Layout.fillWidth: true
+                    contentItem: RowLayout {
+                        spacing: Kirigami.Units.gridUnit
 
-                        background: Item {}
+                        Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                            source: "brightness-low"
+                        }
 
-                        contentItem: RowLayout {
-                            spacing: Kirigami.Units.gridUnit
+                        Slider {
+                            id: brightnessSlider
+                            Layout.fillWidth: true
+                            from: 1
+                            to: root.maximumScreenBrightness
+                            value: root.screenBrightness
+                            onMoved: root.screenBrightness = value;
+                        }
 
-                            Kirigami.Icon {
-                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                source: "brightness-low"
-                            }
-
-                            Slider {
-                                id: brightnessSlider
-                                Layout.fillWidth: true
-                                from: 1
-                                to: root.maximumScreenBrightness
-                                value: root.screenBrightness
-                                onMoved: root.screenBrightness = value;
-                            }
-
-                            Kirigami.Icon {
-                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                                source: "brightness-high"
-                            }
+                        Kirigami.Icon {
+                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                            source: "brightness-high"
                         }
                     }
                 }
@@ -135,26 +128,20 @@ Item {
                 text: i18n("Adjust the size of elements on the screen.")
             }
 
-            MobileForm.FormCard {
+            FormCard.FormCard {
                 maximumWidth: root.cardWidth
 
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.fillWidth: true
 
-                contentItem: ColumnLayout {
-                    spacing: 0
+                FormCard.FormComboBoxDelegate {
+                    id: displayScaling
+                    text: i18n("Display Scaling")
+                    displayMode: FormCard.FormComboBoxDelegate.Dialog
+                    currentIndex: Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
+                    model: Prepare.PrepareUtil.scalingOptions
 
-                    MobileForm.FormComboBoxDelegate {
-                        id: displayScaling
-                        Layout.fillWidth: true
-                        text: i18n("Display Scaling")
-                        displayMode: MobileForm.FormComboBoxDelegate.Dialog
-                        currentIndex: Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
-                        model: Prepare.PrepareUtil.scalingOptions
-
-                        // remove % suffix
-                        onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
-                    }
+                    // remove % suffix
+                    onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
                 }
             }
         }

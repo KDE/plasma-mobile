@@ -8,18 +8,18 @@
 
 import QtQuick
 import QtQuick.Layouts
-import org.kde.plasma.components 3.0 as PlasmaComponents
+import QtQuick.Controls as QQC2
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami as Kirigami
 
 Kirigami.Icon {
     id: connectionIcon
-    
+
     // data
-    
+
     readonly property string icon: connectionIconProvider.connectionIcon
     readonly property bool indicatorRunning: connectionIconProvider.connecting
-    
+
     readonly property var networkStatus: PlasmaNM.NetworkStatus {
         id: networkStatus
     }
@@ -35,12 +35,11 @@ Kirigami.Icon {
     readonly property var connectionIcon: PlasmaNM.ConnectionIcon {
         id: connectionIconProvider
     }
-    
+
     // implementation
-    
     source: icon
 
-    PlasmaComponents.BusyIndicator {
+    QQC2.BusyIndicator {
         id: connectingIndicator
 
         anchors.fill: parent

@@ -8,10 +8,10 @@ import QtQuick.Controls 2.15 as Controls
 
 import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
 import org.kde.kirigami 2.2 as Kirigami
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.ksvg 1.0 as KSvg
 
-MobileForm.AbstractFormDelegate {
+FormCard.AbstractFormDelegate {
     topPadding: Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.smallSpacing
 

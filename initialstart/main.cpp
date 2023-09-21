@@ -53,10 +53,10 @@ int main(int argc, char *argv[])
     aboutData.addAuthor(i18n("Devin Lin"), QString(), QStringLiteral("devin@kde.org"));
     KAboutData::setApplicationData(aboutData);
 
-    QQmlApplicationEngine *engine = new QQmlApplicationEngine;
-    engine->rootContext()->setContextObject(new KLocalizedContext{engine});
+    QQmlApplicationEngine engine;
+    engine.rootContext()->setContextObject(new KLocalizedContext{&engine});
 
-    Wizard *wizard = new Wizard{nullptr, engine};
+    Wizard *wizard = new Wizard{nullptr, &engine};
     wizard->setTestingMode(testWizard);
     wizard->load();
 
@@ -64,7 +64,7 @@ int main(int argc, char *argv[])
         return wizard;
     });
 
-    engine->load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
 
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("start-here-symbolic")));
 
