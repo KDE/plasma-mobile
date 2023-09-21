@@ -75,7 +75,7 @@ QVariant TimeZoneModel::data(const QModelIndex &index, int role) const
     case CityRole:
         if (currentData.city.isEmpty())
             return currentData.id;
-        }
+    }
         return currentData.city;
     case CommentRole:
         return currentData.comment;
