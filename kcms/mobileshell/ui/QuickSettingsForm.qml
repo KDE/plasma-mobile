@@ -9,145 +9,117 @@ import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kirigami 2.19 as Kirigami
 import org.kde.kcmutils as KCM
-import org.kde.kirigamiaddons.labs.mobileform 0.1 as MobileForm
+import org.kde.kirigamiaddons.formcard as FormCard
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
-Kirigami.ScrollablePage {
+FormCard.FormCardPage {
     id: root
+
     title: i18n("Quick Settings")
-    leftPadding: 0
-    rightPadding: 0
-    topPadding: Kirigami.Units.gridUnit
-    bottomPadding: Kirigami.Units.gridUnit
-    
-    Component {
-        id: listItemComponent
 
-        MobileForm.AbstractFormDelegate {
-            id: qsDelegate
+    component Delegate : FormCard.AbstractFormDelegate {
+        id: qsDelegate
 
-            readonly property bool isEnabled: parent ? parent.parentView.isEnabled : false
+        property bool isEnabled: false
 
-            contentItem: RowLayout {
-                Kirigami.ListItemDragHandle {
-                    visible: qsDelegate.isEnabled
-                    Layout.rightMargin: Kirigami.Units.gridUnit
-                    listItem: qsDelegate
-                    listView: qsDelegate.parent ? qsDelegate.parent.parentView : null
-                    onMoveRequested: savedQuickSettings.enabledModel.moveRow(oldIndex, newIndex)
-                }
+        width: ListView.view.width
 
-                Kirigami.Icon {
-                    readonly property bool iconAvailable: model && model.icon !== ""
+        background: null
+        contentItem: RowLayout {
+            Kirigami.ListItemDragHandle {
+                visible: qsDelegate.isEnabled
+                Layout.rightMargin: Kirigami.Units.gridUnit
+                listItem: qsDelegate
+                listView: qsDelegate.ListView.view
+                onMoveRequested: savedQuickSettings.enabledModel.moveRow(oldIndex, newIndex)
+            }
 
-                    visible: iconAvailable
-                    source: model ? model.icon : ""
-                    Layout.rightMargin: iconAvailable ? Kirigami.Units.gridUnit : 0
-                    implicitWidth: iconAvailable ? Kirigami.Units.iconSizes.small : 0
-                    implicitHeight: iconAvailable ? Kirigami.Units.iconSizes.small : 0
-                }
+            Kirigami.Icon {
+                readonly property bool iconAvailable: model && model.icon !== ""
 
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    spacing: Kirigami.Units.smallSpacing
+                visible: iconAvailable
+                source: model ? model.icon : ""
+                Layout.rightMargin: iconAvailable ? Kirigami.Units.gridUnit : 0
+                implicitWidth: iconAvailable ? Kirigami.Units.iconSizes.small : 0
+                implicitHeight: iconAvailable ? Kirigami.Units.iconSizes.small : 0
+            }
 
-                    QQC2.Label {
-                        Layout.fillWidth: true
-                        text: model ? model.name : ""
-                        elide: Text.ElideRight
-                    }
-                }
+            QQC2.Label {
+                Layout.fillWidth: true
+                text: model ? model.name : ""
+                elide: Text.ElideRight
+            }
 
-                QQC2.ToolButton {
-                    icon.name: model ? qsDelegate.isEnabled ? "hide_table_row" : "show_table_row" : ""
-                    onClicked: qsDelegate.isEnabled ? savedQuickSettings.disableQS(model.index) : savedQuickSettings.enableQS(model.index)
-                }
+            QQC2.ToolButton {
+                display: QQC2.AbstractButton.IconOnly
+                text: qsDelegate.isEnabled ? i18nc("@action:button", "Hide") : i18nc("@action:button", "Show")
+                icon.name: qsDelegate.isEnabled ? "hide_table_row" : "show_table_row"
+                onClicked: qsDelegate.isEnabled ? savedQuickSettings.disableQS(model.index) : savedQuickSettings.enableQS(model.index)
+
+                QQC2.ToolTip.visible: hovered
+                QQC2.ToolTip.text: text
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
         }
     }
 
-    Component {
-        id: listViewComponent
-
-        ListView {
-            id: listView
-            Layout.fillWidth: true
-            Layout.preferredHeight: contentHeight
-            interactive: false
-
-            property bool isEnabled: false
-            model: isEnabled ? savedQuickSettings.enabledModel : savedQuickSettings.disabledModel
-
-            moveDisplaced: Transition {
-                YAnimator {
-                    duration: Kirigami.Units.longDuration
-                    easing.type: Easing.InOutQuad
-                }
-            }
-
-            delegate: Kirigami.DelegateRecycler {
-                id: delegate
-
-                width: listView.width
-                sourceComponent: listItemComponent
-
-                readonly property ListView parentView: ListView.view
-            }
-        }
-    }
-
-    QS.SavedQuickSettings {
+    data: QS.SavedQuickSettings {
         id: savedQuickSettings
     }
 
-    ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
-        width: root.width
-        
-        MobileForm.FormCard {
-            Layout.fillWidth: true
-            
-            contentItem: ColumnLayout {
-                spacing: 0
-                
-                MobileForm.FormCardHeader {
-                    title: i18n("Quick Settings")
-                    subtitle: i18n("Customize the order of quick settings in the pull-down panel and hide them.")
-                }
+    FormCard.FormHeader {
+        title: i18n("Quick Settings")
+        visible: enabledRepeater.count > 0
+    }
 
-                Loader {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: item ? item.contentHeight : 0
+    FormCard.FormSectionText {
+        text: i18n("Customize the order of quick settings in the pull-down panel and hide them.")
+        visible: enabledRepeater.count > 0
+    }
 
-                    asynchronous: true
-                    sourceComponent: listViewComponent
+    FormCard.FormCard {
+        visible: enabledRepeater.count > 0
 
-                    onLoaded: item.isEnabled = true
-                }
+        ListView {
+            id: enabledRepeater
+
+            interactive: false
+
+            model: savedQuickSettings.enabledModel
+            delegate: Delegate {
+                isEnabled: true
             }
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight
         }
+    }
 
-        MobileForm.FormCard {
-            Layout.fillWidth: true
+    FormCard.FormHeader {
+        title: i18n("Disabled Quick Settings")
+        visible: disabledRepeater.count > 0
+    }
 
-            contentItem: ColumnLayout {
-                spacing: 0
+    FormCard.FormSectionText {
+        text: i18n("Re-enable previously disabled quick settings.")
+        visible: disabledRepeater.count > 0
+    }
 
-                MobileForm.FormCardHeader {
-                    title: i18n("Disabled Quick Settings")
-                    subtitle: i18n("Re-enable previously disabled quick settings.")
-                }
+    FormCard.FormCard {
+        visible: disabledRepeater.count > 0
 
-                Loader {
-                    Layout.fillWidth: true
-                    Layout.preferredHeight: item ? item.contentHeight : 0
+        ListView {
+            id: disabledRepeater
 
-                    asynchronous: true
-                    sourceComponent: listViewComponent
+            interactive: false
 
-                    onLoaded: item.isEnabled = false
-                }
+            model: savedQuickSettings.disabledModel
+            delegate: Delegate {
+                isEnabled: false
             }
+
+            Layout.fillWidth: true
+            Layout.preferredHeight: contentHeight
         }
     }
 }
