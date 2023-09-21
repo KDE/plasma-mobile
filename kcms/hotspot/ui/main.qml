@@ -9,75 +9,68 @@ import QtQuick.Controls as Controls
 import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils
-import org.kde.kirigamiaddons.labs.mobileform as MobileForm
+import org.kde.kirigamiaddons.formcard as FormCard
 
 SimpleKCM {
     id: root
 
     leftPadding: 0
     rightPadding: 0
-    topPadding: Kirigami.Units.gridUnit
-    bottomPadding: Kirigami.Units.gridUnit
+    topPadding: 0
+    bottomPadding: 0
 
-    ColumnLayout {
-        spacing: 0
-        width: root.width
-
+    data: [
         PlasmaNM.Handler {
             id: handler
-        }
+        },
 
         PlasmaNM.WirelessStatus {
             id: wirelessStatus
         }
+    ]
 
-        MobileForm.FormCard {
-            Layout.fillWidth: true
+    ColumnLayout {
+        spacing: 0
 
-            contentItem: ColumnLayout {
-                spacing: 0
+        FormCard.FormCard {
+            Layout.topMargin: Kirigami.Units.gridUnit
 
-                MobileForm.FormSwitchDelegate {
-                    id: hotspotToggle
-                    text: i18n("Hotspot")
-                    description: i18n("Whether the wireless hotspot is enabled.");
+            FormCard.FormSwitchDelegate {
+                id: hotspotToggle
+                text: i18n("Hotspot")
+                description: i18n("Whether the wireless hotspot is enabled.");
 
-                    checked: wirelessStatus.hotspotSSID.length !== 0
+                checked: wirelessStatus.hotspotSSID.length !== 0
 
-                    onToggled: {
-                        if (hotspotToggle.checked) {
-                            handler.createHotspot();
-                        } else {
-                            handler.stopHotspot();
-                        }
+                onToggled: {
+                    if (hotspotToggle.checked) {
+                        handler.createHotspot();
+                    } else {
+                        handler.stopHotspot();
                     }
                 }
             }
         }
 
-        MobileForm.FormCard {
-            Layout.fillWidth: true
+        FormCard.FormCard {
             Layout.topMargin: Kirigami.Units.gridUnit
+            Layout.bottomMargin: Kirigami.Units.gridUnit
 
-            contentItem: ColumnLayout {
-                spacing: 0
+            FormCard.FormTextFieldDelegate {
+                label: i18n("Hotspot SSID")
+                enabled: !hotspotToggle.checked
+                text: PlasmaNM.Configuration.hotspotName
+                onTextChanged: PlasmaNM.Configuration.hotspotName = text
+            }
 
-                MobileForm.FormTextFieldDelegate {
-                    label: i18n("Hotspot SSID")
-                    enabled: !hotspotToggle.checked
-                    text: PlasmaNM.Configuration.hotspotName
-                    onTextChanged: PlasmaNM.Configuration.hotspotName = text
-                }
+            FormCard.FormDelegateSeparator {}
 
-                MobileForm.FormDelegateSeparator {}
-
-                MobileForm.FormTextFieldDelegate {
-                    label: i18n("Hotspot Password")
-                    enabled: !hotspotToggle.checked
-                    echoMode: TextInput.Password
-                    text: PlasmaNM.Configuration.hotspotPassword
-                    onTextChanged: PlasmaNM.Configuration.hotspotPassword = text
-                }
+            FormCard.FormTextFieldDelegate {
+                label: i18n("Hotspot Password")
+                enabled: !hotspotToggle.checked
+                echoMode: TextInput.Password
+                text: PlasmaNM.Configuration.hotspotPassword
+                onTextChanged: PlasmaNM.Configuration.hotspotPassword = text
             }
         }
     }
