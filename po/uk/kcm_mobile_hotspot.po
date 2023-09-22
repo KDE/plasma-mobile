@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_hotspot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-03-17 14:24+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,22 +20,22 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: ui/main.qml:42
+#: ui/main.qml:40
 #, kde-format
 msgid "Hotspot"
 msgstr "Хот-спот"
 
-#: ui/main.qml:43
+#: ui/main.qml:41
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr "Визначає чи увімкнено бездротовий хот-спот."
 
-#: ui/main.qml:66
+#: ui/main.qml:60
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "SSID хот-споту"
 
-#: ui/main.qml:75
+#: ui/main.qml:69
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Пароль до хот-споту"

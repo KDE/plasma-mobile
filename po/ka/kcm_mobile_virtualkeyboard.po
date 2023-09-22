@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-08-20 08:16+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -33,57 +33,71 @@ msgstr "გამოყენება"
 msgid "On-Screen Keyboard"
 msgstr "ეკრანის კლავიატურა"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "აქ აკრიფეთ ნებისმიერი რამ…"
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "უკუკავშირი:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr "ხმა"
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "ღილაკის დაწოლისას ხმის გამოცემა."
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr "ვიბრაცია"
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "ვიბრაცია ღილაკის დაწოლისას."
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "ტექსტის ჩასწორება:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "შეყვანილი ტექსტის სპელინგის შემოწმება"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "წინადადების პირველი ასოს გადიდება"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "მიმდინარე სიტყვის პირველი მინიშნებით დასრულება ჰარეთი"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "პოტენციური სიტყვების შემოთავაზება"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "ჰარეს ორჯერ დაწოლისას სრული გაჩერების ჩასმა"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "ენების მორგება"
@@ -107,12 +121,6 @@ msgstr "ენების მორგება"
 
 #~ msgid "Theme:"
 #~ msgstr "თემა:"
-
-#~ msgid "Feedback:"
-#~ msgstr "უკუკავშირი:"
-
-#~ msgid "Text correction:"
-#~ msgstr "ტექსტის ჩასწორება:"
 
 #~ msgid "Languages:"
 #~ msgstr "ენები:"

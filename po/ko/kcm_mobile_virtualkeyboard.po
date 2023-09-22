@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-07-13 12:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -32,57 +32,71 @@ msgstr "적용"
 msgid "On-Screen Keyboard"
 msgstr "가상 키보드"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "여기에 아무것이나 입력하십시오..."
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "피드백:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr "소리"
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "키를 누를 때 소리 재생 여부입니다."
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr "진동"
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "키를 누를 때 진동할지 여부입니다."
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "문자열 자동 고침:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "입력한 문자열의 맞춤법 검사"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "문장 첫 글자를 대문자로 변환"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Space 키를 누를 때 현재 단어를 첫 제안으로 자동 완성"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "단어 막대에 단어 제안 표시"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Space 키를 누 번 눌렀을 때 마침표 삽입"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "언어 설정"
@@ -103,12 +117,6 @@ msgstr "언어 설정"
 
 #~ msgid "Test keyboard:"
 #~ msgstr "키보드 시험:"
-
-#~ msgid "Feedback:"
-#~ msgstr "피드백:"
-
-#~ msgid "Text correction:"
-#~ msgstr "문자열 자동 고침:"
 
 #~ msgid "Languages:"
 #~ msgstr "언어"

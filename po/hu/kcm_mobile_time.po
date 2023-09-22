@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 02:34+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2021-09-06 11:02+0200\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -32,13 +32,13 @@ msgstr "Nem lehet beállítani a jelenlegi időt"
 msgid "Unable to set timezone"
 msgstr "Nem lehet beállítani az időzónát"
 
-#: timezonemodel.cpp:124
+#: timezonemodel.cpp:126
 #, kde-format
 msgctxt "This means \"Local Timezone\""
 msgid "Local"
 msgstr "Helyi"
 
-#: timezonemodel.cpp:126
+#: timezonemodel.cpp:128
 #, kde-format
 msgid "Your system time zone"
 msgstr "A rendszer időzónája"
@@ -2983,75 +2983,75 @@ msgstr "Nov"
 msgid "Dec"
 msgstr "Dec"
 
-#: ui/main.qml:57
+#: ui/main.qml:30
 #, fuzzy, kde-format
 #| msgid "Time Display"
 msgid "Display"
 msgstr "Időformátum"
 
-#: ui/main.qml:62
+#: ui/main.qml:36
 #, kde-format
 msgid "24-Hour Format"
 msgstr ""
 
-#: ui/main.qml:63
+#: ui/main.qml:37
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr ""
 
-#: ui/main.qml:74
+#: ui/main.qml:48
 #, fuzzy, kde-format
 #| msgid "Timezone:"
 msgid "Timezone"
 msgstr "Időzóna:"
 
-#: ui/main.qml:89
+#: ui/main.qml:55
 #, fuzzy, kde-format
 #| msgid "Set Time and Date"
 msgid "Time and Date"
 msgstr "Dátum- és időbeállítás"
 
-#: ui/main.qml:94
+#: ui/main.qml:61
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr ""
 
-#: ui/main.qml:95
+#: ui/main.qml:62
 #, fuzzy, kde-format
 #| msgid "Set time automatically:"
 msgid "Whether to set the time automatically."
 msgstr "Idő beállítása automatikusan:"
 
-#: ui/main.qml:112
+#: ui/main.qml:79
 #, fuzzy, kde-format
 #| msgctxt "This is a city associated with particular time zone"
 #| msgid "Currie"
 msgid "Current Time"
 msgstr "Currie"
 
-#: ui/main.qml:123
+#: ui/main.qml:90
 #, kde-format
 msgid "Date"
 msgstr "Dátum"
 
-#: ui/main.qml:135
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Időzóna-választás"
 
-#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Bezárás"
 
-#: ui/main.qml:172
+#: ui/main.qml:156
 #, kde-format
 msgid "Pick Time"
 msgstr "Válassza ki az időt"
 
-#: ui/main.qml:217
+#: ui/main.qml:201
 #, kde-format
 msgid "Pick Date"
 msgstr "Válassza ki a dátumot"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-04-12 22:54+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -140,22 +140,22 @@ msgstr "Mugikorreko sarera konektatuta zaude."
 msgid "Please insert a SIM card into your device."
 msgstr "Mesedez, sartu SIM txartel bat zure gailuan."
 
-#: modules/cellular/package/contents/ui/main.qml:76
+#: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mugikorreko datuak"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:114
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
 
-#: modules/cellular/package/contents/ui/main.qml:132
+#: modules/cellular/package/contents/ui/main.qml:122
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: modules/cellular/package/contents/ui/main.qml:141
+#: modules/cellular/package/contents/ui/main.qml:131
 #, kde-format
 msgid "Add APN"
 msgstr "Gehitu APN"
@@ -181,12 +181,12 @@ msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "Doitu pantailaren distira, instalazio-prozesurako erosoa izan dadin."
 
-#: modules/prepare/package/contents/ui/main.qml:135
+#: modules/prepare/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Doitu pantailako elementuen neurria."
 
-#: modules/prepare/package/contents/ui/main.qml:150
+#: modules/prepare/package/contents/ui/main.qml:138
 #, kde-format
 msgid "Display Scaling"
 msgstr "Azaldutakoaren eskala"
@@ -201,7 +201,7 @@ msgstr "Ordua eta data"
 msgid "Select your time zone and preferred time format."
 msgstr "Hautatu zure ordu-eremua eta gogoko ordu-formatua."
 
-#: modules/time/package/contents/ui/main.qml:50
+#: modules/time/package/contents/ui/main.qml:47
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 orduko formatua"
@@ -226,12 +226,12 @@ msgstr "Sarea"
 msgid "Connect to a WiFi network for network access."
 msgstr "Konektatu Wi-Fi sare batera sareko sarbiderako."
 
-#: modules/wifi/package/contents/ui/main.qml:99
+#: modules/wifi/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi ezgaituta dago"
 
-#: modules/wifi/package/contents/ui/main.qml:103
+#: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Enable"
 msgstr "Gaituta"

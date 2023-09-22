@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-06-30 21:38+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -33,59 +33,73 @@ msgstr "செயல்படுத்து"
 msgid "On-Screen Keyboard"
 msgstr "திரை விசைப்பலகை"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "எதையாவது இங்கு தட்டச்சிடுங்கள்…"
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "பின்னூட்டம்:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr ""
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid "Emit sound on key press"
 msgid "Whether to emit a sound on keypress."
 msgstr "விசையழுத்துகையில் ஒலியெழுப்பு"
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr ""
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, fuzzy, kde-format
 #| msgid "Vibrate on key press"
 msgid "Whether to vibrate on keypress."
 msgstr "விசையழுத்துகையில் அதிரச்செய்"
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "உரை திருத்தம்:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "உள்ளிட்ட உரையின் எழுத்துக்கூட்டலை சரிபார்"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "ஒவ்வொரு வாக்கியத்தின் முதலெழுத்தைப் பேரெழுத்தாக்கு"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "இடைவெளி விசையை தட்டும்போது தற்போதைய சொல்லை முதல் பரிந்துரைக்கு மாற்று"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "பயன்படுத்தக்கூடிய சொற்களை சொல் பட்டையில் பரிந்துரைக்கவும்"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "இடைவெளியை இருமுறை அழுத்தினால் முற்றுப்புள்ளியை உள்ளிடு"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "மொழிகளை அமை"
@@ -106,12 +120,6 @@ msgstr "மொழிகளை அமை"
 
 #~ msgid "Test keyboard:"
 #~ msgstr "விசைப்பலகை சோதனை:"
-
-#~ msgid "Feedback:"
-#~ msgstr "பின்னூட்டம்:"
-
-#~ msgid "Text correction:"
-#~ msgstr "உரை திருத்தம்:"
 
 #~ msgid "Languages:"
 #~ msgstr "மொழிகள்:"

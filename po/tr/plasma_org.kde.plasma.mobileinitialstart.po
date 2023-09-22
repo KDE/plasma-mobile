@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-04-02 17:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -137,22 +137,22 @@ msgstr "Taşınabilir ağa bağlısınız."
 msgid "Please insert a SIM card into your device."
 msgstr "Lütfen aygıtınıza bir SIM kart takın."
 
-#: modules/cellular/package/contents/ui/main.qml:76
+#: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Mobile Data"
 msgstr "Taşınabilir Veri"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:114
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
 
-#: modules/cellular/package/contents/ui/main.qml:132
+#: modules/cellular/package/contents/ui/main.qml:122
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: modules/cellular/package/contents/ui/main.qml:141
+#: modules/cellular/package/contents/ui/main.qml:131
 #, kde-format
 msgid "Add APN"
 msgstr "Erişim Noktası Adı Ekle"
@@ -180,12 +180,12 @@ msgid ""
 msgstr ""
 "Kurulum süreci için ekran parlaklığını sizin için rahat bir düzeye ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:135
+#: modules/prepare/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ekrandaki ögelerin boyutunu ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:150
+#: modules/prepare/package/contents/ui/main.qml:138
 #, kde-format
 msgid "Display Scaling"
 msgstr "Ekran Ölçekleme"
@@ -200,7 +200,7 @@ msgstr "Tarih ve Zaman"
 msgid "Select your time zone and preferred time format."
 msgstr "Zaman dilimini ve yeğlediğiniz zaman biçimini seçin."
 
-#: modules/time/package/contents/ui/main.qml:50
+#: modules/time/package/contents/ui/main.qml:47
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 Saat Biçimi"
@@ -225,12 +225,12 @@ msgstr "Ağ"
 msgid "Connect to a WiFi network for network access."
 msgstr "Ağ erişimi için bir Wi-Fi ağına bağlanın."
 
-#: modules/wifi/package/contents/ui/main.qml:99
+#: modules/wifi/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi devre dışı."
 
-#: modules/wifi/package/contents/ui/main.qml:103
+#: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Enable"
 msgstr "Etkinleştir"

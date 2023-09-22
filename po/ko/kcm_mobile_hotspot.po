@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-07-26 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: ui/main.qml:42
+#: ui/main.qml:40
 #, kde-format
 msgid "Hotspot"
 msgstr "핫스팟"
 
-#: ui/main.qml:43
+#: ui/main.qml:41
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
 msgstr "무선 핫스팟 활성화 여부입니다."
 
-#: ui/main.qml:66
+#: ui/main.qml:60
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "핫스팟 SSID"
 
-#: ui/main.qml:75
+#: ui/main.qml:69
 #, kde-format
 msgid "Hotspot Password"
 msgstr "핫스팟 암호"

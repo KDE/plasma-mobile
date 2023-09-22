@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-06-25 14:36+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -23,41 +23,41 @@ msgstr ""
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "El administrador del sistema ha restringido el cambio del diseño"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:59
 msgid "General"
 msgstr "General"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "Homescreen Layout"
 msgstr "Diseño de la pantalla de inicio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:67
 msgid "The homescreen layout to use."
 msgstr "El diseño de pantalla de inicio a usar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:93
 msgid "Wallpaper Plugin"
 msgstr "Complemento de fondo del escritorio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:94
 msgid "The wallpaper plugin to use."
 msgstr "El complemento de fondo de escritorio a usar."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Wallpaper Plugins"
 msgstr "Complementos de fondo del escritorio"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
 msgstr "Obtener nuevos complementos..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:148
 msgid "Layout changes must be applied before other changes can be made"
 msgstr ""
 "Los cambios en la disposición de elementos se deben aplicar antes de hacer "
 "más cambios"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Apply now"
 msgstr "Aplicar ahora"
 

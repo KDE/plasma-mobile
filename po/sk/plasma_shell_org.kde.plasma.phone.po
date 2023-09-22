@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-07-22 15:27+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -20,39 +20,39 @@ msgstr ""
 msgid "Layout changes have been restricted by the system administrator"
 msgstr "Zmeny rozloženia boli zakázané systémovým administrátorom"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:65
+#: contents/configuration/ConfigurationContainmentAppearance.qml:59
 msgid "General"
 msgstr "Všeobecné"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:71
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "Homescreen Layout"
 msgstr "Rozloženie domovskej obrazovky"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:72
+#: contents/configuration/ConfigurationContainmentAppearance.qml:67
 msgid "The homescreen layout to use."
 msgstr "Rozloženie domovskej obrazovky, ktoré sa má používať."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:98
+#: contents/configuration/ConfigurationContainmentAppearance.qml:93
 msgid "Wallpaper Plugin"
 msgstr "Doplnok tapety"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:99
+#: contents/configuration/ConfigurationContainmentAppearance.qml:94
 msgid "The wallpaper plugin to use."
 msgstr "Modul tapiet, ktorý sa má použiť."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Wallpaper Plugins"
 msgstr "Doplnky tapety"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:139
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
 msgstr "Získať nové doplnky..."
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+#: contents/configuration/ConfigurationContainmentAppearance.qml:148
 msgid "Layout changes must be applied before other changes can be made"
 msgstr "Zmeny rozloženia sa musia použiť pred inými zmenami"
 
-#: contents/configuration/ConfigurationContainmentAppearance.qml:160
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Apply now"
 msgstr "Použiť teraz"
 

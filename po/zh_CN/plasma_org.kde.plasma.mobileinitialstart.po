@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-09-16 10:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -136,22 +136,22 @@ msgstr "您已连接到移动网络。"
 msgid "Please insert a SIM card into your device."
 msgstr "请在您的设备中插入一张 SIM 卡。"
 
-#: modules/cellular/package/contents/ui/main.qml:76
+#: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Mobile Data"
 msgstr "移动数据"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:114
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
 
-#: modules/cellular/package/contents/ui/main.qml:132
+#: modules/cellular/package/contents/ui/main.qml:122
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: modules/cellular/package/contents/ui/main.qml:141
+#: modules/cellular/package/contents/ui/main.qml:131
 #, kde-format
 msgid "Add APN"
 msgstr "添加 APN"
@@ -177,12 +177,12 @@ msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "调整屏幕亮度，以便在安装过程中舒适地阅读屏幕显示的内容。"
 
-#: modules/prepare/package/contents/ui/main.qml:135
+#: modules/prepare/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "调整屏幕显示的元素大小。"
 
-#: modules/prepare/package/contents/ui/main.qml:150
+#: modules/prepare/package/contents/ui/main.qml:138
 #, kde-format
 msgid "Display Scaling"
 msgstr "显示缩放"
@@ -197,7 +197,7 @@ msgstr "时间和日期"
 msgid "Select your time zone and preferred time format."
 msgstr "选择您的时区和首选的时间格式。"
 
-#: modules/time/package/contents/ui/main.qml:50
+#: modules/time/package/contents/ui/main.qml:47
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 小时格式"
@@ -222,12 +222,12 @@ msgstr "网络"
 msgid "Connect to a WiFi network for network access."
 msgstr "连接到 WiFi 网络以访问互联网。"
 
-#: modules/wifi/package/contents/ui/main.qml:99
+#: modules/wifi/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi 已禁用"
 
-#: modules/wifi/package/contents/ui/main.qml:103
+#: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Enable"
 msgstr "启用"

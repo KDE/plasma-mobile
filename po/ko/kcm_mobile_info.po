@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-08-06 22:34+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -22,71 +22,85 @@ msgstr ""
 msgid "System Information"
 msgstr "시스템 정보"
 
-#: ui/main.qml:25
+#: ui/main.qml:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr "복사"
 
-#: ui/main.qml:50
+#: ui/main.qml:47
 #, kde-format
 msgid "Operating System"
 msgstr "운영 체제"
 
-#: ui/main.qml:57
+#: ui/main.qml:54
 #, kde-format
 msgid "Webpage"
 msgstr "웹 페이지"
 
-#: ui/main.qml:78
+#: ui/main.qml:63
+#, fuzzy, kde-format
+#| msgid "Software"
+msgctxt "@title:group"
+msgid "Software"
+msgstr "소프트웨어"
+
+#: ui/main.qml:68
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma 버전"
 
-#: ui/main.qml:85
+#: ui/main.qml:75
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE 프레임워크 버전"
 
-#: ui/main.qml:92
+#: ui/main.qml:82
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt 버전"
 
-#: ui/main.qml:99
+#: ui/main.qml:89
 #, kde-format
 msgid "Kernel Version"
 msgstr "커널 버전"
 
-#: ui/main.qml:106
+#: ui/main.qml:96
 #, kde-format
 msgid "OS Type"
 msgstr "OS 종류"
 
-#: ui/main.qml:107
+#: ui/main.qml:97
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1비트"
 
-#: ui/main.qml:124
+#: ui/main.qml:102
+#, fuzzy, kde-format
+#| msgid "Hardware"
+msgctxt "@title:group"
+msgid "Hardware"
+msgstr "하드웨어"
+
+#: ui/main.qml:107
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "프로세서"
 
-#: ui/main.qml:131
+#: ui/main.qml:114
 #, kde-format
 msgid "Memory"
 msgstr "메모리"
 
-#: ui/main.qml:135
+#: ui/main.qml:118
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "RAM %1"
 
-#: ui/main.qml:137
+#: ui/main.qml:120
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
@@ -108,12 +122,6 @@ msgstr "알 수 없음"
 
 #~ msgid "Jonah Brüchert"
 #~ msgstr "Jonah Brüchert"
-
-#~ msgid "Software"
-#~ msgstr "소프트웨어"
-
-#~ msgid "Hardware"
-#~ msgstr "하드웨어"
 
 #~ msgid "Information About This System"
 #~ msgstr "이 시스템 정보"

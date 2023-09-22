@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-04-04 10:09+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -33,59 +33,73 @@ msgstr "Aplică"
 msgid "On-Screen Keyboard"
 msgstr "Tastatură pe ecran"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "Tastați aici orice…"
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "Reacție:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr ""
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid "Emit sound on key press"
 msgid "Whether to emit a sound on keypress."
 msgstr "Emite sunet la apăsarea tastelor"
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr ""
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, fuzzy, kde-format
 #| msgid "Vibrate on key press"
 msgid "Whether to vibrate on keypress."
 msgstr "Vibrează la apăsarea tastelor"
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "Corectare text:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Verifică ortografia textului introdus"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Fă prima literă majusculă în fiecare propoziție"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Completează cuvântul actual cu prima sugestie la apăsarea spațiului"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Sugerează cuvinte posibile în panglica cu cuvinte"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Inserează un punct la apăsarea dublă pe spațiu"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "Configurează limbile"
@@ -106,12 +120,6 @@ msgstr "Configurează limbile"
 
 #~ msgid "Test keyboard:"
 #~ msgstr "Testați tastatura:"
-
-#~ msgid "Feedback:"
-#~ msgstr "Reacție:"
-
-#~ msgid "Text correction:"
-#~ msgstr "Corectare text:"
 
 #~ msgid "Languages:"
 #~ msgstr "Limbi:"

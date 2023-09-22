@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-04-09 16:09+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -138,22 +138,22 @@ msgstr "Jesteś podłączony do sieci przenośnej."
 msgid "Please insert a SIM card into your device."
 msgstr "Włóż kartę SIM do swojego urządzenia."
 
-#: modules/cellular/package/contents/ui/main.qml:76
+#: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Mobile Data"
 msgstr "Dane komórkowe"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:114
 #, kde-format
 msgid "Edit"
 msgstr "Edytuj"
 
-#: modules/cellular/package/contents/ui/main.qml:132
+#: modules/cellular/package/contents/ui/main.qml:122
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
 
-#: modules/cellular/package/contents/ui/main.qml:141
+#: modules/cellular/package/contents/ui/main.qml:131
 #, kde-format
 msgid "Add APN"
 msgstr "Dodaj APN"
@@ -180,12 +180,12 @@ msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "Dostosuj jasność, aby wygodnie przejść przez wgrywanie."
 
-#: modules/prepare/package/contents/ui/main.qml:135
+#: modules/prepare/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Dostosuj rozmiar rzeczy na ekranie."
 
-#: modules/prepare/package/contents/ui/main.qml:150
+#: modules/prepare/package/contents/ui/main.qml:138
 #, kde-format
 msgid "Display Scaling"
 msgstr "Wyświetl skalowanie"
@@ -200,7 +200,7 @@ msgstr "Czas i data"
 msgid "Select your time zone and preferred time format."
 msgstr "Ustaw swoją strefę czasową i zapis czasu."
 
-#: modules/time/package/contents/ui/main.qml:50
+#: modules/time/package/contents/ui/main.qml:47
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 godzinny zapis czasu"
@@ -225,12 +225,12 @@ msgstr "Sieć"
 msgid "Connect to a WiFi network for network access."
 msgstr "Podłącz się do WiFi, aby uzyskać dostęp do sieci."
 
-#: modules/wifi/package/contents/ui/main.qml:99
+#: modules/wifi/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi jest wyłączone"
 
-#: modules/wifi/package/contents/ui/main.qml:103
+#: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Enable"
 msgstr "Włącz"

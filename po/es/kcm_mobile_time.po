@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 02:34+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-03-14 20:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -34,13 +34,13 @@ msgstr "No se ha podido definir la hora actual"
 msgid "Unable to set timezone"
 msgstr "No se ha podido definir la zona horaria"
 
-#: timezonemodel.cpp:124
+#: timezonemodel.cpp:126
 #, kde-format
 msgctxt "This means \"Local Timezone\""
 msgid "Local"
 msgstr "Local"
 
-#: timezonemodel.cpp:126
+#: timezonemodel.cpp:128
 #, kde-format
 msgid "Your system time zone"
 msgstr "La zona horaria de su sistema"
@@ -2985,69 +2985,69 @@ msgstr "nov"
 msgid "Dec"
 msgstr "dic"
 
-#: ui/main.qml:57
+#: ui/main.qml:30
 #, kde-format
 msgid "Display"
 msgstr "Mostrar"
 
-#: ui/main.qml:62
+#: ui/main.qml:36
 #, kde-format
 msgid "24-Hour Format"
 msgstr "Formato de 24 horas"
 
-#: ui/main.qml:63
+#: ui/main.qml:37
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "Indica si se debe usar el formato de 24 horas en los relojes."
 
-#: ui/main.qml:74
+#: ui/main.qml:48
 #, kde-format
 msgid "Timezone"
 msgstr "Zona horaria"
 
-#: ui/main.qml:89
+#: ui/main.qml:55
 #, kde-format
 msgid "Time and Date"
 msgstr "Fecha y hora"
 
-#: ui/main.qml:94
+#: ui/main.qml:61
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "Sincronización horaria automática"
 
-#: ui/main.qml:95
+#: ui/main.qml:62
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "Indica si se debe ajustar la hora automáticamente."
 
-#: ui/main.qml:112
+#: ui/main.qml:79
 #, kde-format
 msgid "Current Time"
 msgstr "Hora actual"
 
-#: ui/main.qml:123
+#: ui/main.qml:90
 #, kde-format
 msgid "Date"
 msgstr "Fecha"
 
-#: ui/main.qml:135
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Seleccionar zona horaria"
 
-#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Cerrar"
 
-#: ui/main.qml:172
+#: ui/main.qml:156
 #, kde-format
 msgid "Pick Time"
 msgstr "Seleccionar hora"
 
-#: ui/main.qml:217
+#: ui/main.qml:201
 #, kde-format
 msgid "Pick Date"
 msgstr "Seleccionar fecha"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-02-21 21:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -34,58 +34,70 @@ msgstr "Bruk"
 msgid "On-Screen Keyboard"
 msgstr "Skjermtastatur"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "Skriv noko her …"
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, kde-format
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr ""
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr "Lyd"
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Om lyd skal spelast ved tastetrykk."
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr "Vibrering"
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Om eininga skal vibrera ved tastetrykk."
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, kde-format
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr ""
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Kontroller stavinga i innskriven tekst"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Gjer første bokstav i kvar setning om til stor bokstav"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr ""
 "Autofullfør det gjeldande ordet med første forslag ved trykk på mellomrom"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Føreslå ord på ordlinja"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Set inn punktum ved to trykk på mellomrom"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "Set opp språk"

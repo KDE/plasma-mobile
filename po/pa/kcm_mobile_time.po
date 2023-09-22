@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-12 02:34+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-04-01 20:37-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -32,13 +32,13 @@ msgstr "ਮੌਜੂਦਾ ਸਮਾਂ ਸੈੱਟ ਕਰਨ ਲਈ ਅਸਮ�
 msgid "Unable to set timezone"
 msgstr "ਸਮਾਂ-ਖੇਤਰ ਸੈੱਟ ਕਰਨ ਲਈ ਅਸਮਰੱਥ"
 
-#: timezonemodel.cpp:124
+#: timezonemodel.cpp:126
 #, kde-format
 msgctxt "This means \"Local Timezone\""
 msgid "Local"
 msgstr "ਲੋਕਲ"
 
-#: timezonemodel.cpp:126
+#: timezonemodel.cpp:128
 #, kde-format
 msgid "Your system time zone"
 msgstr "ਤੁਹਾਡਾ ਸਿਸਟਮ ਸਮਾਂ ਖੇਤਰ"
@@ -2983,69 +2983,69 @@ msgstr "ਨਵੰ"
 msgid "Dec"
 msgstr "ਦਸੰ"
 
-#: ui/main.qml:57
+#: ui/main.qml:30
 #, kde-format
 msgid "Display"
 msgstr "ਡਿਸਪਲੇਅ"
 
-#: ui/main.qml:62
+#: ui/main.qml:36
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24-ਘੰਟੇ ਰੂਪ ਵਿੱਚ"
 
-#: ui/main.qml:63
+#: ui/main.qml:37
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "ਕੀ ਘੜੀਆਂ ਲਈ ਸਮਾਂ 24-ਘੰਟਿਆਂ ਦੇ ਰੂਪ ਵਿੱਚ ਵਰਤਣਾ ਹੈ।"
 
-#: ui/main.qml:74
+#: ui/main.qml:48
 #, kde-format
 msgid "Timezone"
 msgstr "ਸਮਾਂ-ਖੇਤਰ"
 
-#: ui/main.qml:89
+#: ui/main.qml:55
 #, kde-format
 msgid "Time and Date"
 msgstr "ਸਮਾਂ ਤੇ ਤਾਰੀਖ"
 
-#: ui/main.qml:94
+#: ui/main.qml:61
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸਿੰਕ ਕਰੋ"
 
-#: ui/main.qml:95
+#: ui/main.qml:62
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "ਕੀ ਸਮਾਂ ਆਪਣੇ-ਆਪ ਸੈਟ ਕਰਨਾ ਹੈ।"
 
-#: ui/main.qml:112
+#: ui/main.qml:79
 #, kde-format
 msgid "Current Time"
 msgstr "ਮੌਜੂਦਾ ਸਮਾਂ"
 
-#: ui/main.qml:123
+#: ui/main.qml:90
 #, kde-format
 msgid "Date"
 msgstr "ਤਾਰੀਖ"
 
-#: ui/main.qml:135
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "ਸਮਾਂ-ਖੇਤਰ ਚੁਣੋ"
 
-#: ui/main.qml:150 ui/main.qml:208 ui/main.qml:253
+#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"
 msgstr "ਬੰਦ ਕਰੋ"
 
-#: ui/main.qml:172
+#: ui/main.qml:156
 #, kde-format
 msgid "Pick Time"
 msgstr "ਸਮਾਂ ਚੁਣੋ"
 
-#: ui/main.qml:217
+#: ui/main.qml:201
 #, kde-format
 msgid "Pick Date"
 msgstr "ਤਾਰੀਖ ਚੁਣੋ"

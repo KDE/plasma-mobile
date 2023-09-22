@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-26 02:02+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2023-07-26 00:13+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -137,22 +137,22 @@ msgstr "모바일 네트워크에 연결되어 있습니다."
 msgid "Please insert a SIM card into your device."
 msgstr "장치에 SIM 카드를 삽입하십시오."
 
-#: modules/cellular/package/contents/ui/main.qml:76
+#: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Mobile Data"
 msgstr "모바일 데이터"
 
-#: modules/cellular/package/contents/ui/main.qml:124
+#: modules/cellular/package/contents/ui/main.qml:114
 #, kde-format
 msgid "Edit"
 msgstr "편집"
 
-#: modules/cellular/package/contents/ui/main.qml:132
+#: modules/cellular/package/contents/ui/main.qml:122
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: modules/cellular/package/contents/ui/main.qml:141
+#: modules/cellular/package/contents/ui/main.qml:131
 #, kde-format
 msgid "Add APN"
 msgstr "APN 추가"
@@ -179,12 +179,12 @@ msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "설치 과정을 편하게 볼 수 있도록 화면 밝기를 조정하십시오."
 
-#: modules/prepare/package/contents/ui/main.qml:135
+#: modules/prepare/package/contents/ui/main.qml:128
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "화면 구성 요소의 크기를 조정하십시오."
 
-#: modules/prepare/package/contents/ui/main.qml:150
+#: modules/prepare/package/contents/ui/main.qml:138
 #, kde-format
 msgid "Display Scaling"
 msgstr "디스플레이 크기 조정"
@@ -199,7 +199,7 @@ msgstr "날짜와 시간"
 msgid "Select your time zone and preferred time format."
 msgstr "시간대와 선호하는 날짜 형식을 선택하십시오."
 
-#: modules/time/package/contents/ui/main.qml:50
+#: modules/time/package/contents/ui/main.qml:47
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24시간제 형식"
@@ -224,12 +224,12 @@ msgstr "네트워크"
 msgid "Connect to a WiFi network for network access."
 msgstr "네트워크 접근을 위해서 Wi-Fi 네트워크에 연결합니다."
 
-#: modules/wifi/package/contents/ui/main.qml:99
+#: modules/wifi/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Wi-Fi is disabled"
 msgstr "Wi-Fi가 비활성화됨"
 
-#: modules/wifi/package/contents/ui/main.qml:103
+#: modules/wifi/package/contents/ui/main.qml:100
 #, kde-format
 msgid "Enable"
 msgstr "활성화"

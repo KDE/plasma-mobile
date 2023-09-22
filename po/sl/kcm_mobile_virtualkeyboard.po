@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-07-08 07:08+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -33,57 +33,71 @@ msgstr "Uveljavi"
 msgid "On-Screen Keyboard"
 msgstr "Tipkovnica na zaslonu"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "Vtipkajte karkoli tu…"
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "Povratni odziv:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr "Zvok"
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Ali naj oddaja zvok ob pritisku tipke."
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr "Tresenje"
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Ali naj se zatrese ob pritisku tipke."
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "Popravek besedila:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Preverjanje črkovanja vnesenega besedila"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Postavi veliko začetnico na začetek vsakega stavka"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Dokončaj trenutno besedo s prvim predlogom po pritisku preslednice"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Predlagaj možne besede v pasu besed"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Vstavi piko ob dvakratnem pritisku preslednice"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "Nastavi jezike"
@@ -104,12 +118,6 @@ msgstr "Nastavi jezike"
 
 #~ msgid "Test keyboard:"
 #~ msgstr "Testna tipkovnica:"
-
-#~ msgid "Feedback:"
-#~ msgstr "Povratni odziv:"
-
-#~ msgid "Text correction:"
-#~ msgstr "Popravek besedila:"
 
 #~ msgid "Languages:"
 #~ msgstr "Jeziki:"

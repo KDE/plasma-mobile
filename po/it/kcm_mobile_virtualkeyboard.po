@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-22 01:46+0000\n"
 "PO-Revision-Date: 2022-07-09 19:20+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -32,59 +32,73 @@ msgstr "Applica"
 msgid "On-Screen Keyboard"
 msgstr "Tastiera su schermo"
 
-#: ui/main.qml:43
+#: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
 msgstr "Scrivi qualcosa qui..."
 
-#: ui/main.qml:63
+#: ui/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Feedback:"
+msgctxt "@title:group"
+msgid "Feedback"
+msgstr "Riscontro:"
+
+#: ui/main.qml:46
 #, kde-format
 msgid "Sound"
 msgstr "Suono"
 
-#: ui/main.qml:64
+#: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Se emettere un suono alla pressione di un tasto"
 
-#: ui/main.qml:73
+#: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
 msgstr "Vibrazione"
 
-#: ui/main.qml:74
+#: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Se vibrare alla pressione di un tasto"
 
-#: ui/main.qml:94
+#: ui/main.qml:64
+#, fuzzy, kde-format
+#| msgid "Text correction:"
+msgctxt "@title:group"
+msgid "Text Correction"
+msgstr "Correzioni al testo:"
+
+#: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Controlla l'ortografia del testo inserito"
 
-#: ui/main.qml:103
+#: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Metti in maiuscolo la prima lettera di ogni frase"
 
-#: ui/main.qml:112
+#: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr ""
 "Completa la parola corrente con il primo suggerimento quando si preme lo "
 "spazio"
 
-#: ui/main.qml:121
+#: ui/main.qml:98
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Suggerisci possibili parole nell'elenco delle parole"
 
-#: ui/main.qml:132
+#: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Inserisci un punto se viene premuto due volte lo spazio"
 
-#: ui/main.qml:143
+#: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
 msgstr "Configura le lingue"
@@ -105,12 +119,6 @@ msgstr "Configura le lingue"
 
 #~ msgid "Test keyboard:"
 #~ msgstr "Prova la tastiera:"
-
-#~ msgid "Feedback:"
-#~ msgstr "Riscontro:"
-
-#~ msgid "Text correction:"
-#~ msgstr "Correzioni al testo:"
 
 #~ msgid "Languages:"
 #~ msgstr "Lingue:"
