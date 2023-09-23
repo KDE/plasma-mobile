@@ -8,7 +8,7 @@ import QtQuick 2.12
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.12 as Controls
 
-import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.kirigamiaddons.formcard 1 as FormCard

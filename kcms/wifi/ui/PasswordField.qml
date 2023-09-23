@@ -6,7 +6,7 @@
 
 import QtQuick 2.15
 import org.kde.kirigami 2.10 as Kirigami
-import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.plasma.networkmanagement as PlasmaNM
 
 Kirigami.PasswordField {
     property int securityType

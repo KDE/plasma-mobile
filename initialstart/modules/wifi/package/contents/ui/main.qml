@@ -8,7 +8,7 @@ import QtQuick.Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
-import org.kde.plasma.networkmanagement 0.2 as PlasmaNM
+import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.plasma.mobileinitialstart.wifi 1.0 as WiFi
 
 Item {
