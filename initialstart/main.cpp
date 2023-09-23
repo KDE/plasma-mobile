@@ -43,7 +43,7 @@ int main(int argc, char *argv[])
     }
 
     // start wizard
-    KLocalizedString::setApplicationDomain("plasma-mobile-initial-start");
+    KLocalizedString::setApplicationDomain("plasma_org.kde.plasma.mobileinitialstart");
     KAboutData aboutData(QStringLiteral("plasma-mobile-initial-start"),
                          QStringLiteral("Initial Start"),
                          QStringLiteral(PLASMA_MOBILE_VERSION_STRING),

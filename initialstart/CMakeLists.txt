@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+add_definitions(-DTRANSLATION_DOMAIN=\"plasma_org.kde.plasma.mobileinitialstart\")
+
 set(plasma-mobile-initial-start_SRCS
     main.cpp
     wizard.cpp
