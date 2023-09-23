@@ -42,7 +42,7 @@ msgstr "Web Sayfası"
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
-msgstr ""
+msgstr "Yazılım"
 
 #: ui/main.qml:68
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "%1 bit"
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
-msgstr ""
+msgstr "Donanım"
 
 #: ui/main.qml:107
 #, kde-format
@@ -104,6 +104,3 @@ msgstr "%1 RAM"
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Bilinmiyor"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Panoya Kopyala"

@@ -279,7 +279,3 @@ msgstr "Ekranı şundan sonra kapat"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Aygıtı şundan sonra askıya al"
-
-#~ msgctxt "literal percent sign"
-#~ msgid "%"
-#~ msgstr "%"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-07-26 07:39+0300\n"
+"PO-Revision-Date: 2023-09-22 10:35+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -44,7 +44,7 @@ msgstr "Pàgina web"
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
-msgstr ""
+msgstr "Programari"
 
 #: ui/main.qml:68
 #, kde-format
@@ -81,7 +81,7 @@ msgstr "%1 bits"
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
-msgstr ""
+msgstr "Maquinari"
 
 #: ui/main.qml:107
 #, kde-format

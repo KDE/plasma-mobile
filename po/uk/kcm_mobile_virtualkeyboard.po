@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_virtualkeyboard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2022-07-07 09:13+0300\n"
+"PO-Revision-Date: 2023-09-22 08:39+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -41,11 +41,10 @@ msgid "Type anything here…"
 msgstr "Введіть тут щось…"
 
 #: ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "Відгук:"
+msgstr "Реакція"
 
 #: ui/main.qml:46
 #, kde-format
@@ -68,11 +67,10 @@ msgid "Whether to vibrate on keypress."
 msgstr "Визначає, чи слід супроводжувати натискання клавіш вібрацією."
 
 #: ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "Виправлення тексту:"
+msgstr "Виправлення тексту"
 
 #: ui/main.qml:71
 #, kde-format

@@ -68,12 +68,3 @@ msgstr "Duvar Kağıdını Değiştir"
 #: contents/configuration/ContainmentConfiguration.qml:114
 msgid "Configure"
 msgstr "Yapılandır"
-
-#~ msgid "Layout:"
-#~ msgstr "Yerleşim:"
-
-#~ msgid "Wallpaper Type:"
-#~ msgstr "Duvar Kağıdı Türü:"
-
-#~ msgid "Customize..."
-#~ msgstr "Özelleştir..."

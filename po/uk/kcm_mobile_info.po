@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-07-26 22:38+0300\n"
+"PO-Revision-Date: 2023-09-22 08:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -42,8 +42,7 @@ msgid "Webpage"
 msgstr "Вебсторінка"
 
 #: ui/main.qml:63
-#, fuzzy, kde-format
-#| msgid "Software"
+#, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Програмне забезпечення"
@@ -80,8 +79,7 @@ msgid "%1-bit"
 msgstr "%1-бітова"
 
 #: ui/main.qml:102
-#, fuzzy, kde-format
-#| msgid "Hardware"
+#, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Обладнання"

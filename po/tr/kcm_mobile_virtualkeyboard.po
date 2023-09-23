@@ -41,7 +41,7 @@ msgstr "Bir şeyler yaz…"
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr ""
+msgstr "Geri Bildirim"
 
 #: ui/main.qml:46
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "Düğme vuruşunda titreyip titremeyeceği."
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr ""
+msgstr "Metin Düzeltme"
 
 #: ui/main.qml:71
 #, kde-format

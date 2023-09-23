@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2023.
+# SPDX-FileCopyrightText: 2023 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-03-14 13:36+0100\n"
+"PO-Revision-Date: 2023-09-22 10:42+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: ui/languages.qml:20
 #, kde-format
@@ -41,7 +41,7 @@ msgstr "Hier iets typen…"
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr ""
+msgstr "Terugkoppeling"
 
 #: ui/main.qml:46
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "Of er vibratie is bij indrukken van een toets."
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr ""
+msgstr "Tekstcorrectie"
 
 #: ui/main.qml:71
 #, kde-format

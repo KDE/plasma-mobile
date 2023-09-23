@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-08 02:08+0000\n"
+"POT-Creation-Date: 2023-09-23 01:46+0000\n"
 "PO-Revision-Date: 2023-03-04 15:51+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -210,7 +210,7 @@ msgstr ""
 msgid "Initializing"
 msgstr "Klargjer"
 
-#: modemdetails.cpp:256 ui/SimPage.qml:137
+#: modemdetails.cpp:256 ui/SimPage.qml:116
 #, kde-format
 msgid "Locked"
 msgstr "Låst"
@@ -230,7 +230,7 @@ msgstr "Tek ut av bruk"
 msgid "Enabling"
 msgstr "Tek i bruk"
 
-#: modemdetails.cpp:264 ui/ModemPage.qml:110
+#: modemdetails.cpp:264 ui/ModemPage.qml:83
 #, kde-format
 msgid "Enabled"
 msgstr "Teke i bruk"
@@ -345,12 +345,12 @@ msgstr ""
 msgid "Scanning networks failed: %1"
 msgstr ""
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:203 ui/SimPage.qml:138
+#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:117
 #, kde-format
 msgid "Yes"
 msgstr ""
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:203 ui/SimPage.qml:138
+#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:117
 #, kde-format
 msgid "No"
 msgstr ""
@@ -583,187 +583,180 @@ msgstr "Berre 2G"
 msgid "Modem not available"
 msgstr ""
 
-#: ui/main.qml:74
+#: ui/main.qml:69
 #, kde-format
 msgid "Mobile data"
 msgstr "Mobildata"
 
-#: ui/main.qml:79
+#: ui/main.qml:74
 #, kde-format
 msgid "No SIM is inserted."
 msgstr "Manglar SIM-kort."
 
-#: ui/main.qml:81
+#: ui/main.qml:76
 #, kde-format
 msgid "Mobile data is not available with this modem."
 msgstr "Mobildata er ikkje tilgjengeleg med dette modemet."
 
-#: ui/main.qml:83
+#: ui/main.qml:78
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
 msgstr ""
 
-#: ui/main.qml:85
+#: ui/main.qml:80
 #, kde-format
 msgid "Whether mobile data is enabled."
 msgstr ""
 
-#: ui/main.qml:116
+#: ui/main.qml:111
 #, kde-format
 msgid "Data Usage"
 msgstr ""
 
-#: ui/main.qml:117
+#: ui/main.qml:112
 #, kde-format
 msgid "View data usage."
 msgstr ""
 
-#: ui/main.qml:133 ui/SimPage.qml:17
-#, kde-format
+#: ui/main.qml:120 ui/SimPage.qml:35
+#, fuzzy, kde-format
+#| msgid "SIM"
 msgid "SIM"
-msgstr "SIM"
+msgid_plural "SIMs"
+msgstr[0] "SIM"
+msgstr[1] "SIM"
 
-#: ui/main.qml:133
-#, kde-format
-msgid "SIMs"
-msgstr ""
-
-#: ui/main.qml:153
+#: ui/main.qml:141
 #, kde-format
 msgid "SIM %1"
 msgstr ""
 
-#: ui/main.qml:154
+#: ui/main.qml:142
 #, kde-format
 msgid "View SIM %1 details."
 msgstr ""
 
-#: ui/ModemPage.qml:16
+#: ui/ModemPage.qml:20
 #, kde-format
 msgid "Modem %1"
 msgstr ""
 
-#: ui/ModemPage.qml:41
+#: ui/ModemPage.qml:30
 #, kde-format
 msgid "Modem Control"
 msgstr ""
 
-#: ui/ModemPage.qml:50
-#, kde-format
-msgid "Modem Restart"
-msgstr ""
-
-#: ui/ModemPage.qml:53
+#: ui/ModemPage.qml:36
 #, kde-format
 msgid "Force Modem Restart"
 msgstr ""
 
-#: ui/ModemPage.qml:69 ui/SimPage.qml:117
+#: ui/ModemPage.qml:42 ui/SimPage.qml:103
 #, kde-format
 msgid "Modem Details"
 msgstr ""
 
-#: ui/ModemPage.qml:82
+#: ui/ModemPage.qml:55
 #, kde-format
 msgid "Access Technologies"
 msgstr ""
 
-#: ui/ModemPage.qml:102
+#: ui/ModemPage.qml:75
 #, kde-format
 msgid "IMEI"
 msgstr "IMEI"
 
-#: ui/ModemPage.qml:118
+#: ui/ModemPage.qml:91
 #, kde-format
 msgid "Manufacturer"
 msgstr "Produsent"
 
-#: ui/ModemPage.qml:126
+#: ui/ModemPage.qml:99
 #, kde-format
 msgid "Model"
 msgstr "Modell"
 
-#: ui/ModemPage.qml:142
+#: ui/ModemPage.qml:114
 #, kde-format
 msgid "Owned Numbers:"
 msgstr "Eigde nummer:"
 
-#: ui/ModemPage.qml:162
+#: ui/ModemPage.qml:135
 #, kde-format
 msgid "Revision"
 msgstr "Revisjon"
 
-#: ui/ModemPage.qml:170
+#: ui/ModemPage.qml:143
 #, kde-format
 msgid "Signal Quality"
 msgstr "Signalkvalitet"
 
-#: ui/ModemPage.qml:178
+#: ui/ModemPage.qml:151
 #, kde-format
 msgid "State"
 msgstr "Tilstand"
 
-#: ui/ModemPage.qml:186
+#: ui/ModemPage.qml:159
 #, kde-format
 msgid "Failure Reason"
 msgstr "Grunn til feil"
 
-#: ui/ModemPage.qml:194
+#: ui/ModemPage.qml:167
 #, kde-format
 msgid "Registration State"
 msgstr "Registreringstilstand"
 
-#: ui/ModemPage.qml:202
+#: ui/ModemPage.qml:175
 #, kde-format
 msgid "Roaming"
 msgstr "Nettveksling"
 
-#: ui/ModemPage.qml:210
+#: ui/ModemPage.qml:183
 #, kde-format
 msgid "Firmware Version"
 msgstr "Fastvare-versjon"
 
-#: ui/ModemPage.qml:218
+#: ui/ModemPage.qml:191
 #, kde-format
 msgid "Interface Name"
 msgstr "Grensesnittnamn"
 
-#: ui/ModemPage.qml:226
+#: ui/ModemPage.qml:199
 #, kde-format
 msgid "Metered"
 msgstr "Forbruksmålt"
 
-#: ui/ModemPage.qml:234
+#: ui/ModemPage.qml:207
 #, kde-format
 msgid "Active NetworkManager Connection"
 msgstr ""
 
-#: ui/ModemPage.qml:242
+#: ui/ModemPage.qml:215
 #, kde-format
 msgid "Device"
 msgstr "Eining"
 
-#: ui/ModemPage.qml:250
+#: ui/ModemPage.qml:223
 #, kde-format
 msgid "Device ID"
 msgstr "Einings-ID"
 
-#: ui/ModemPage.qml:266
+#: ui/ModemPage.qml:238
 #, kde-format
 msgid "Drivers:"
 msgstr "Drivarar:"
 
-#: ui/ModemPage.qml:286
+#: ui/ModemPage.qml:258
 #, kde-format
 msgid "Plugin"
 msgstr "Programtillegg"
 
-#: ui/ModemPage.qml:294
+#: ui/ModemPage.qml:266
 #, kde-format
 msgid "Power State"
 msgstr "Straumstatus"
 
-#: ui/ModemPage.qml:302
+#: ui/ModemPage.qml:274
 #, kde-format
 msgid "SIM Path"
 msgstr ""
@@ -803,194 +796,201 @@ msgstr "Rediger"
 msgid "Delete"
 msgstr "Slett"
 
-#: ui/SimLockPage.qml:16 ui/SimPage.qml:106
+#: ui/SimLockPage.qml:19 ui/SimPage.qml:92
 #, kde-format
 msgid "SIM Lock"
 msgstr "SIM-lås"
 
-#: ui/SimLockPage.qml:47
+#: ui/SimLockPage.qml:38
 #, kde-format
 msgid "SIM is locked"
 msgstr ""
 
-#: ui/SimLockPage.qml:48
+#: ui/SimLockPage.qml:39
 #, kde-format
 msgid "In order to use this SIM, you must first unlock it."
 msgstr ""
 
-#: ui/SimLockPage.qml:70
+#: ui/SimLockPage.qml:61
 #, kde-format
 msgid "SIM is not locked"
 msgstr ""
 
-#: ui/SimLockPage.qml:71
+#: ui/SimLockPage.qml:62
 #, kde-format
 msgid ""
 "You can lock your SIM to require a set PIN code for phone calls and mobile "
 "data."
 msgstr ""
 
-#: ui/SimLockPage.qml:75
+#: ui/SimLockPage.qml:66
 #, kde-format
 msgid "Lock SIM"
 msgstr "Lås SIM-kort"
 
-#: ui/SimLockPage.qml:89
+#: ui/SimLockPage.qml:78
 #, kde-format
 msgid "Disable SIM Lock"
 msgstr ""
 
-#: ui/SimLockPage.qml:90
+#: ui/SimLockPage.qml:79
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
 msgstr ""
 
-#: ui/SimLockPage.qml:103
+#: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:104
+#: ui/SimLockPage.qml:92
 #, kde-format
 msgid "Change the passcode set on the SIM."
 msgstr ""
 
-#: ui/SimLockPage.qml:119
+#: ui/SimLockPage.qml:106
 #, kde-format
 msgid "Unlock SIM"
 msgstr "Lås opp SIM-kort"
 
-#: ui/SimLockPage.qml:127
+#: ui/SimLockPage.qml:114
 #, kde-format
 msgid "Attempts left: %1"
 msgstr ""
 
-#: ui/SimLockPage.qml:131
+#: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:139
+#: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:158 ui/SimLockPage.qml:223
+#: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
 msgid "PINs don't match!"
 msgstr ""
 
-#: ui/SimLockPage.qml:164 ui/SimLockPage.qml:229
+#: ui/SimLockPage.qml:151 ui/SimLockPage.qml:216
 #, kde-format
 msgid "PINs must be between 4 and 8 digits!"
 msgstr ""
 
-#: ui/SimLockPage.qml:169 ui/SimLockPage.qml:196
+#: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
 msgid "Current PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:174 ui/SimLockPage.qml:234
+#: ui/SimLockPage.qml:161 ui/SimLockPage.qml:221
 #, kde-format
 msgid "New PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:179 ui/SimLockPage.qml:239
+#: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:187
+#: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
 msgstr ""
 
-#: ui/SimLockPage.qml:204
+#: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
 msgstr ""
 
-#: ui/SimPage.qml:72
+#: ui/SimPage.qml:45
+#, kde-format
+msgid ""
+"This SIM slot is empty, a SIM card needs to be inserted in order for it to "
+"be used."
+msgstr ""
+
+#: ui/SimPage.qml:58
 #, kde-format
 msgid "Data Roaming"
 msgstr ""
 
-#: ui/SimPage.qml:73
+#: ui/SimPage.qml:59
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
 
-#: ui/SimPage.qml:84
+#: ui/SimPage.qml:70
 #, kde-format
 msgid "Modify APNs"
 msgstr ""
 
-#: ui/SimPage.qml:85
+#: ui/SimPage.qml:71
 #, kde-format
 msgid "Configure access point names for your carrier."
 msgstr ""
 
-#: ui/SimPage.qml:95
+#: ui/SimPage.qml:81
 #, kde-format
 msgid "Networks"
 msgstr ""
 
-#: ui/SimPage.qml:96
+#: ui/SimPage.qml:82
 #, kde-format
 msgid "Select a network operator."
 msgstr ""
 
-#: ui/SimPage.qml:107
+#: ui/SimPage.qml:93
 #, kde-format
 msgid "Modify SIM lock settings."
 msgstr ""
 
-#: ui/SimPage.qml:118
+#: ui/SimPage.qml:104
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
 msgstr ""
 
-#: ui/SimPage.qml:132
+#: ui/SimPage.qml:110
 #, kde-format
 msgid "SIM Details"
 msgstr ""
 
-#: ui/SimPage.qml:145
+#: ui/SimPage.qml:124
 #, kde-format
 msgid "IMSI"
 msgstr ""
 
-#: ui/SimPage.qml:153
+#: ui/SimPage.qml:132
 #, kde-format
 msgid "EID"
 msgstr ""
 
-#: ui/SimPage.qml:161
+#: ui/SimPage.qml:140
 #, kde-format
 msgid "Operator Code (modem)"
 msgstr ""
 
-#: ui/SimPage.qml:169
+#: ui/SimPage.qml:148
 #, kde-format
 msgid "Operator Name (modem)"
 msgstr ""
 
-#: ui/SimPage.qml:177
+#: ui/SimPage.qml:156
 #, kde-format
 msgid "Operator Code (provided by SIM)"
 msgstr ""
 
-#: ui/SimPage.qml:185
+#: ui/SimPage.qml:164
 #, kde-format
 msgid "Operator Name (provided by SIM)"
 msgstr ""
 
-#: ui/SimPage.qml:193
+#: ui/SimPage.qml:172
 #, kde-format
 msgid "SIM ID"
 msgstr ""
 
-#: ui/SimPage.qml:210
+#: ui/SimPage.qml:188
 #, kde-format
 msgid "Emergency Numbers"
 msgstr ""
