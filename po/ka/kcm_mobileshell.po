@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-03-17 05:25+0100\n"
+"PO-Revision-Date: 2023-09-23 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -119,13 +119,13 @@ msgstr "ზედა მარჯვენა ადგილიდან გა
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "დამალვა"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "ჩვენება"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format

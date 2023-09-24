@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-03-17 21:47+0100\n"
+"PO-Revision-Date: 2023-09-23 09:32+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -119,13 +119,13 @@ msgstr "Način z odpiranjem zgoraj desno."
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Skrij"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Prikaži"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format

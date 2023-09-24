@@ -118,13 +118,13 @@ msgstr "Sağ üstten açıldığı zamanki kip."
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Gizle"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format

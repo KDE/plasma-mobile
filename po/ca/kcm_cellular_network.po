@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-03-14 10:31+0100\n"
+"PO-Revision-Date: 2023-09-23 15:34+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: modem.cpp:126
 #, kde-format
@@ -619,8 +619,7 @@ msgid "View data usage."
 msgstr "Mostra l'ús de les dades."
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
@@ -913,6 +912,8 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"Aquest sòcol de SIM està buit. Cal inserir una targeta SIM per tal que es "
+"pugui fer servir."
 
 #: ui/SimPage.qml:58
 #, kde-format
@@ -998,9 +999,3 @@ msgstr "ID de la SIM"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Números d'emergència"
-
-#~ msgid "SIMs"
-#~ msgstr "SIM"
-
-#~ msgid "Modem Restart"
-#~ msgstr "Reinici del mòdem"

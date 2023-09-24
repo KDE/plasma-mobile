@@ -619,8 +619,7 @@ msgid "View data usage."
 msgstr "Veri kullanımını görüntüle."
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
@@ -911,6 +910,7 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"Bu SIM yuvası boş; kullanılabilmesi için bir SIM kartın takılması gerekiyor."
 
 #: ui/SimPage.qml:58
 #, kde-format
@@ -996,9 +996,3 @@ msgstr "SIM Kimliği"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Acil Durum Numaraları"
-
-#~ msgid "SIMs"
-#~ msgstr "SIM'ler"
-
-#~ msgid "Modem Restart"
-#~ msgstr "Modemi Yeniden Başlat"
