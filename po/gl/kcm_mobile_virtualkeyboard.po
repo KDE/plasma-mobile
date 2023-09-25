@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2023.
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-08-05 12:38+0200\n"
+"PO-Revision-Date: 2023-09-24 13:27+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: ui/languages.qml:20
 #, kde-format
@@ -41,7 +41,7 @@ msgstr "Escriba algo aquí…"
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr ""
+msgstr "Achegas"
 
 #: ui/main.qml:46
 #, kde-format
@@ -67,7 +67,7 @@ msgstr "Se vibrar ao premer unha tecla."
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr ""
+msgstr "Corrección de texto"
 
 #: ui/main.qml:71
 #, kde-format

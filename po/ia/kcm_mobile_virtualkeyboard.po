@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2020, 2021, 2022.
+# Giovanni Sora <g.sora@tiscali.it>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2022-07-15 12:15+0200\n"
+"PO-Revision-Date: 2023-09-24 17:59+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -38,11 +38,10 @@ msgid "Type anything here…"
 msgstr "Typa alique hic ..."
 
 #: ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "Retorno :"
+msgstr "Retorno "
 
 #: ui/main.qml:46
 #, kde-format
@@ -65,11 +64,10 @@ msgid "Whether to vibrate on keypress."
 msgstr "Si Vibrar sur pression de clave"
 
 #: ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "Correction de texto:"
+msgstr "Correction de texto"
 
 #: ui/main.qml:71
 #, kde-format

@@ -1,16 +1,16 @@
 # Translation for kcm_cellular_network.po to Euskera/Basque (eu).
-# Copyright (C) 2021-2022 This file is copyright:
+# Copyright (C) 2021-2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2022-10-25 07:42+0200\n"
+"PO-Revision-Date: 2023-09-24 09:17+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: modem.cpp:126
 #, kde-format
@@ -621,8 +621,7 @@ msgid "View data usage."
 msgstr "Ikusi datuen erabilera."
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
@@ -913,6 +912,8 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"SIM erreten hori hutsik dago, SIM txartel bat sartu behar zaio hura erabili "
+"ahal izateko."
 
 #: ui/SimPage.qml:58
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-07-27 06:44+0200\n"
+"PO-Revision-Date: 2023-09-24 04:43+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -40,8 +40,7 @@ msgid "Webpage"
 msgstr "ვებ-გვერდი"
 
 #: ui/main.qml:63
-#, fuzzy, kde-format
-#| msgid "Software"
+#, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "პროგრამები"
@@ -78,8 +77,7 @@ msgid "%1-bit"
 msgstr "%1-ბიტიანი"
 
 #: ui/main.qml:102
-#, fuzzy, kde-format
-#| msgid "Hardware"
+#, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "აპარატურა"
