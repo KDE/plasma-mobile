@@ -42,7 +42,7 @@ msgstr "Webová stránka"
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
-msgstr ""
+msgstr "Software"
 
 #: ui/main.qml:68
 #, kde-format
@@ -79,7 +79,7 @@ msgstr "%1-bit"
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
-msgstr ""
+msgstr "Hardware"
 
 #: ui/main.qml:107
 #, kde-format

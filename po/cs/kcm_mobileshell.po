@@ -118,13 +118,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Skrýt"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Zobrazit"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format

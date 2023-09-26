@@ -617,13 +617,12 @@ msgid "View data usage."
 msgstr ""
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
-msgstr[0] "SIM"
-msgstr[1] "SIM"
-msgstr[2] "SIM"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: ui/main.qml:141
 #, kde-format
@@ -993,6 +992,3 @@ msgstr "ID SIM"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr ""
-
-#~ msgid "SIMs"
-#~ msgstr "SIMky"
