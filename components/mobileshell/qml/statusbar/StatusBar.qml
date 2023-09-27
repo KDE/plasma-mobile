@@ -202,7 +202,7 @@ Item {
                     
                     PlasmaComponents.Label {
                         text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
-                        color: PlasmaCore.ColorScope.disabledTextColor
+                        color: Kirigami.Theme.disabledTextColor
                         font.pixelSize: root.smallerTextPixelSize
                     }
                     
@@ -213,7 +213,7 @@ Item {
                         
                         visible: root.showTime
                         text: signalStrengthInfo.label
-                        color: PlasmaCore.ColorScope.disabledTextColor
+                        color: Kirigami.Theme.disabledTextColor
                         font.pixelSize: root.smallerTextPixelSize
                         horizontalAlignment: Qt.AlignRight
                     }

@@ -131,7 +131,7 @@ Item {
             id: date
             text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
             verticalAlignment: Qt.AlignTop
-            color: PlasmaCore.ColorScope.disabledTextColor
+            color: Kirigami.Theme.disabledTextColor
             opacity: columnLayout.opacity
             
             anchors {
