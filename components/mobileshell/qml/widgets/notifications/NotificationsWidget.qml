@@ -18,7 +18,7 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.notificationmanager as NotificationManager
 
 /**
  * Embeddable notification list widget optimized for mobile and touch.

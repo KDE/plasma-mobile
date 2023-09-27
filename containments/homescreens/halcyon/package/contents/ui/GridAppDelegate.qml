@@ -156,7 +156,7 @@ MouseArea {
                 radius: width
                 width: Kirigami.Units.smallSpacing
                 height: width
-                color: theme.highlightColor
+                color: Kirigami.Theme.highlightColor
             }
             
             // darken effect when hovered/pressed
@@ -192,7 +192,7 @@ MouseArea {
 
             text: application.name
 
-            font.pointSize: theme.defaultFont.pointSize * 0.85
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
             font.weight: Font.Bold
             color: "white"
         }

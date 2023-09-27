@@ -12,7 +12,7 @@ import QtQuick.Window 2.2
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.notificationmanager as NotificationManager
 
 import org.kde.kirigami 2.12 as Kirigami
 
