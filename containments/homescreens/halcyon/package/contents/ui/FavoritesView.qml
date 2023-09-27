@@ -28,7 +28,7 @@ Item {
     
     readonly property real leftMargin: Math.round(width * 0.1)
     readonly property real rightMargin: Math.round(width * 0.1)
-    readonly property real delegateHeight: Math.round(Kirigami.Units.gridUnit * 3.5)
+    readonly property real delegateHeight: Math.round(Kirigami.Units.gridUnit * 3)
     
     property bool folderShown: false
     
