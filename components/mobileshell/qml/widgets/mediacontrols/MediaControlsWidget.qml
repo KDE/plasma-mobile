@@ -1,9 +1,6 @@
-/*
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *  SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
- *
- *  SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Layouts
@@ -14,6 +11,8 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
+import org.kde.plasma.private.mpris as Mpris
+
 import "../../components" as Components
 
 /**
@@ -21,10 +20,10 @@ import "../../components" as Components
  */
 Item {
     id: root
-    visible: mpris2Source.hasPlayer
+    visible: sourceRepeater.count > 0
     
-    readonly property real padding: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-    readonly property real contentHeight: Kirigami.Units.gridUnit * 2 + Kirigami.Units.smallSpacing
+    readonly property real padding: Kirigami.Units.gridUnit
+    readonly property real contentHeight: Kirigami.Units.gridUnit * 2
     implicitHeight: visible ? padding * 2 + contentHeight : 0
     
     MediaControlsSource {
@@ -36,7 +35,7 @@ Item {
         z: 1
         visible: view.count > 1
         spacing: Kirigami.Units.smallSpacing
-        anchors.bottomMargin: Kirigami.Units.smallSpacing * 2
+        anchors.bottomMargin: Kirigami.Units.smallSpacing
         anchors.bottom: view.bottom
         anchors.horizontalCenter: parent.horizontalCenter
         
@@ -59,20 +58,39 @@ Item {
         anchors.fill: parent
         
         Repeater {
-            model: mpris2Source.mprisSourcesModel
+            id: sourceRepeater
+            model: mpris2Source.mpris2Model
             
             delegate: Loader {
-                active: modelData
-                
+                id: delegate
+                // NOTE: model is PlayerContainer from KMpris in plasma-workspace
+
                 asynchronous: true
                 
+                function getTrackName() {
+                    console.log('track name: ' + model.title);
+                    if (model.title) {
+                        return model.title;
+                    }
+                    // if no track title is given, print out the file name
+                    if (!model.url) {
+                        return "";
+                    }
+                    const lastSlashPos = model.url.lastIndexOf('/')
+                    if (lastSlashPos < 0) {
+                        return ""
+                    }
+                    const lastUrlPart = model.url.substring(lastSlashPos + 1);
+                    return decodeURIComponent(lastUrlPart);
+                }
+
                 sourceComponent: MouseArea {
                     id: mouseArea
                     implicitHeight: playerItem.implicitHeight
                     implicitWidth: playerItem.implicitWidth
                     
                     onClicked: {
-                        Components.AppLaunch.launchOrActivateApp(modelData.desktopEntry + ".desktop");
+                        Components.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
                         MobileShellState.ShellDBusClient.closeActionDrawer();
                     }
                     
@@ -80,15 +98,13 @@ Item {
                         id: playerItem
                         anchors.fill: parent
                         
-                        property string source: modelData.source
-                        
                         padding: root.padding
                         implicitHeight: root.contentHeight + root.padding * 2
                         implicitWidth: root.width
                         
                         background: BlurredBackground {
                             darken: mouseArea.pressed
-                            imageSource: mpris2Source.albumArt(playerItem.source)
+                            imageSource: model.artUrl
                         }
                         
                         contentItem: Item {
@@ -102,7 +118,7 @@ Item {
                                 height: parent.height
                                 spacing: 0
 
-                                enabled: mpris2Source.canControl(playerItem.source)
+                                enabled: model.canControl
 
                                 Image {
                                     id: albumArt
@@ -110,7 +126,7 @@ Item {
                                     Layout.fillHeight: true
                                     asynchronous: true
                                     fillMode: Image.PreserveAspectFit
-                                    source: mpris2Source.albumArt(playerItem.source)
+                                    source: model.artUrl
                                     sourceSize.height: height
                                     visible: status === Image.Loading || status === Image.Ready
                                 }
@@ -120,20 +136,24 @@ Item {
                                     Layout.fillWidth: true
                                     spacing: Kirigami.Units.smallSpacing
 
+                                    // media track name text
                                     Components.MarqueeLabel {
+                                        id: trackLabel
                                         Layout.fillWidth: true
 
-                                        inputText: mpris2Source.track(playerItem.source) || i18n("No media playing")
+                                        inputText: model.track || i18n("No media playing");
                                         textFormat: Text.PlainText
                                         font.pointSize: Kirigami.Theme.defaultFont.pointSize
                                         color: "white"
                                     }
 
+                                    // media artist name text
                                     Components.MarqueeLabel {
+                                        id: artistLabel
                                         Layout.fillWidth: true
 
                                         // if no artist is given, show player name instead
-                                        inputText: mpris2Source.artist(playerItem.source) || modelData.application || ""
+                                        inputText: model.artist || model.identity || ""
                                         textFormat: Text.PlainText
                                         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                                         opacity: 0.9
@@ -145,12 +165,15 @@ Item {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
-                                    enabled: mpris2Source.canGoBack(playerItem.source)
+                                    enabled: model.canGoPrevious
                                     icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
                                     icon.width: Kirigami.Units.iconSizes.small
                                     icon.height: Kirigami.Units.iconSizes.small
-                                    onClicked: mpris2Source.goPrevious(playerItem.source)
-                                    visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
+                                    onClicked: {
+                                        mpris2Source.setIndex(model.index);
+                                        mpris2Source.goPrevious();
+                                    }
+                                    visible: model.canGoPrevious || model.canGoNext
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Previous track")
                                 }
 
@@ -158,10 +181,13 @@ Item {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
-                                    icon.name: mpris2Source.isPlaying(playerItem.source) ? "media-playback-pause" : "media-playback-start"
+                                    icon.name: (model.playbackStatus === Mpris.PlaybackStatus.Playing) ? "media-playback-pause" : "media-playback-start"
                                     icon.width: Kirigami.Units.iconSizes.small
                                     icon.height: Kirigami.Units.iconSizes.small
-                                    onClicked: mpris2Source.playPause(playerItem.source)
+                                    onClicked: {
+                                        mpris2Source.setIndex(model.index);
+                                        mpris2Source.playPause();
+                                    }
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Play or Pause media")
                                 }
 
@@ -169,12 +195,15 @@ Item {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
-                                    enabled: mpris2Source.canGoBack(playerItem.source)
+                                    enabled: model.canGoNext
                                     icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
                                     icon.width: Kirigami.Units.iconSizes.small
                                     icon.height: Kirigami.Units.iconSizes.small
-                                    onClicked: mpris2Source.goNext(playerItem.source)
-                                    visible: mpris2Source.canGoBack(playerItem.source) || mpris2Source.canGoNext(playerItem.source)
+                                    onClicked: {
+                                        mpris2Source.setIndex(model.index);
+                                        mpris2Source.goNext();
+                                    }
+                                    visible: model.canGoPrevious || model.canGoNext
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Next track")
                                 }
                             }

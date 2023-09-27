@@ -1,25 +1,17 @@
-/*
- *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *  SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
- *
- *  SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2016 Kai Uwe Broulik <kde@privat.broulik.de>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 
-import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.private.mpris as Mpris
 
-P5Support.DataSource {
-    id: mpris2Source
+QtObject {
+    property var mpris2Model: Mpris.Mpris2Model {}
 
-    engine: "mpris2"
-    connectedSources: sources
-    
     readonly property string multiplexSource: "@multiplex"
-    
+
     property var mprisSourcesModel: []
-    
-    readonly property bool hasPlayer: sources.length > 1
 
     function startOperation(src, op) {
         var service = serviceForSource(src)
@@ -27,85 +19,16 @@ P5Support.DataSource {
         return service.startOperationCall(operation)
     }
 
-    function goPrevious(source) {
-        startOperation(source, "Previous");
+    function setIndex(index) {
+        mpris2Model.currentIndex = index;
     }
-    function goNext(source) {
-        startOperation(source, "Next");
+    function goPrevious() {
+        mpris2Model.currentPlayer.Previous();
     }
-    function playPause(source) {
-        startOperation(source, "PlayPause");
+    function goNext() {
+        mpris2Model.currentPlayer.Next();
     }
-    function isPlaying(source) {
-        return data[source] ? data[source].PlaybackStatus === "Playing" : false;
+    function playPause() {
+        mpris2Model.currentPlayer.PlayPause();
     }
-    function canControl(source) {
-        return data[source] ? data[source].CanControl : false;
-    }
-    function canGoBack(source) {
-        return data[source] ? data[source].CanGoPrevious : false;
-    }
-    function canGoNext(source) {
-        return data[source] ? data[source].CanGoNext : false;
-    }
-    function track(source) {
-        if (!data[source]) {
-            return "";
-        }
-        const xesamTitle = data[source].Metadata["xesam:title"]
-        if (xesamTitle) {
-            return xesamTitle
-        }
-        // if no track title is given, print out the file name
-        const xesamUrl = data[source].Metadata["xesam:url"] ? data[source].Metadata["xesam:url"].toString() : ""
-        if (!xesamUrl) {
-            return ""
-        }
-        const lastSlashPos = xesamUrl.lastIndexOf('/')
-        if (lastSlashPos < 0) {
-            return ""
-        }
-        const lastUrlPart = xesamUrl.substring(lastSlashPos + 1)
-        return decodeURIComponent(lastUrlPart)
-    }
-    function artist(source) {
-        return data[source] ? data[source].Metadata["xesam:artist"] || "" : "";
-    }
-    function albumArt(source) {
-        return data[source] ? data[source].Metadata["mpris:artUrl"] || "" : "";
-    }
-    
-    function updateMprisSourcesModel() {
-        let model = [];
-        
-        let sources = mpris2Source.sources;
-        for (let i = 0; i < sources.length; ++i) {
-            let source = sources[i];
-            if (source === mpris2Source.multiplexSource) {
-                continue;
-            }
-            
-            const playerData = mpris2Source.data[source];
-            // source data is removed before its name is removed from the list
-            if (!playerData) {
-                continue;
-            }
-
-            model.push({
-                'application': playerData["Identity"],
-                'source': source,
-                'desktopEntry': playerData["DesktopEntry"]
-            });
-        }
-        
-        mprisSourcesModel = model;
-    }
-    
-    Component.onCompleted: {
-        mpris2Source.serviceForSource("@multiplex").enableGlobalShortcuts()
-        updateMprisSourcesModel()
-    }
-    
-    onSourceAdded: updateMprisSourcesModel()
-    onSourceRemoved: updateMprisSourcesModel();
 }
