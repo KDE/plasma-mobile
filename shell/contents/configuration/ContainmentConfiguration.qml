@@ -79,7 +79,7 @@ AppletConfiguration {
             }
             
             background: KSvg.FrameSvgItem {
-                enabledBorders: PlasmaCore.FrameSvg.AllBorders
+                enabledBorders: KSvg.FrameSvgItem.AllBorders
                 imagePath: "widgets/background"
             }
             

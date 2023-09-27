@@ -40,7 +40,7 @@ Components.BaseItem {
     bottomPadding: Kirigami.Units.smallSpacing * 4
     
     background: KSvg.FrameSvgItem {
-        enabledBorders: PlasmaCore.FrameSvg.AllBorders
+        enabledBorders: KSvg.FrameSvgItem.AllBorders
         imagePath: "widgets/background"
     }
 
