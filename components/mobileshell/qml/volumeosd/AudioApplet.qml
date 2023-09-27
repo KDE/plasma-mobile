@@ -26,7 +26,7 @@ ColumnLayout {
     
     PulseObjectFilterModel {
         id: paSinkFilterModel
-        sortRole: "SortByDefault"
+        sortRoleName: "SortByDefault"
         sortOrder: Qt.DescendingOrder
         filterOutInactiveDevices: true
         sourceModel: audioInfo.paSinkModel
@@ -38,7 +38,7 @@ ColumnLayout {
 
     PulseObjectFilterModel {
         id: paSourceFilterModel
-        sortRole: "SortByDefault"
+        sortRoleName: "SortByDefault"
         sortOrder: Qt.DescendingOrder
         filterOutInactiveDevices: true
         sourceModel: paSourceModel
