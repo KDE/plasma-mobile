@@ -116,6 +116,9 @@ Kirigami.Page {
         id: statusBar
         z: 1
 
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
