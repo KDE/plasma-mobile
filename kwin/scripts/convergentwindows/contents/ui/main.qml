@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.1-or-later
 
 import QtQuick
-import org.kde.kwin
+import org.kde.kwin as KWinComponents
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
@@ -22,7 +22,7 @@ Item {
         target: ShellSettings.Settings
 
         function onConvergenceModeEnabledChanged() {
-            const clients = Workspace.clients;
+            const clients = KWinComponents.Workspace.stackingOrder;
 
             for (let i = 0; i < clients.length; i++) {
                 if (clients[i].normalWindow) {
@@ -48,7 +48,7 @@ Item {
             // Windows are moved from the external screen
             // to the internal screen if the external screen
             // is disconnected.
-            const clients = Workspace.clients;
+            const clients = KWinComponents.Workspace.stackingOrder;
 
             for (var i = 0; i < clients.length; i++) {
                 if (clients[i].normalWindow) {
