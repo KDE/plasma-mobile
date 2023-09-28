@@ -36,8 +36,8 @@ Item {
     }
     
     function openConfigure() {
-        plasmoid.action("configure").trigger();
-        plasmoid.editMode = false;
+        Plasmoid.internalAction("configure").trigger();
+        Plasmoid.editMode = false;
     }
 
     Connections {
