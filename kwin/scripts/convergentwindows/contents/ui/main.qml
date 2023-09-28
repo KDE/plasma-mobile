@@ -22,7 +22,7 @@ Item {
         target: ShellSettings.Settings
 
         function onConvergenceModeEnabledChanged() {
-            const clients = KWinComponents.Workspace.stackingOrder;
+            const clients = KWinComponents.Workspace.windows;
 
             for (let i = 0; i < clients.length; i++) {
                 if (clients[i].normalWindow) {
@@ -35,7 +35,7 @@ Item {
     Connections {
         target: Workspace
 
-        function onClientAdded(client) {
+        function onWindowAdded(client) {
             if (client.normalWindow) {
                 client.interactiveMoveResizeFinished.connect((client) => {
                     root.run(client);
@@ -48,7 +48,7 @@ Item {
             // Windows are moved from the external screen
             // to the internal screen if the external screen
             // is disconnected.
-            const clients = KWinComponents.Workspace.stackingOrder;
+            const clients = KWinComponents.Workspace.windows;
 
             for (var i = 0; i < clients.length; i++) {
                 if (clients[i].normalWindow) {
