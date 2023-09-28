@@ -99,7 +99,7 @@ FocusScope {
 
     // scroll to delegate index, and activate it
     function activateWindow(index, window) {
-        KWinComponents.Workspace.activeClient = window;
+        KWinComponents.Workspace.activeWindow = window;
         taskSwitcherState.openApp(index, window);
     }
 

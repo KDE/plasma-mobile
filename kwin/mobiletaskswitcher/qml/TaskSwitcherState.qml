@@ -138,7 +138,7 @@ QtObject {
     function openApp(index, window) {
         animateGoToTaskIndex(index, Kirigami.Units.shortDuration);
         openAppAnim.restart();
-        KWinComponents.Workspace.activeClient = window
+        KWinComponents.Workspace.activeWindow = window
     }
 
     // get the xPosition where the task will be centered on the screen
