@@ -26,7 +26,7 @@ KCM.ScrollViewKCM {
 
         model: KItemModel.KSortFilterProxyModel {
             sourceModel: kcm.languageModel
-            sortRole: "name"
+            sortRoleName: "name"
             sortOrder: Qt.AscendingOrder
         }
 
