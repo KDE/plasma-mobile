@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 01:57+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-05-07 20:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -185,22 +185,22 @@ msgstr "اخفض الصوت"
 msgid "Search…"
 msgstr "ابحث..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
 #, kde-format
 msgid "No media playing"
 msgstr "لا وسائط تعمل"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
 #, kde-format
 msgid "Previous track"
 msgstr "المقطوعة السابقة"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
 #, kde-format
 msgid "Play or Pause media"
 msgstr "شغّل أو أوقف الوسيط"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
 #, kde-format
 msgid "Next track"
 msgstr "المقطوعة التالية"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 01:57+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -185,22 +185,22 @@ msgstr "Malpliigi Laŭtecon"
 msgid "Search…"
 msgstr "Serĉi…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
 #, kde-format
 msgid "No media playing"
 msgstr "Neniu aŭdvidaĵo ludanta"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
 #, kde-format
 msgid "Previous track"
 msgstr "Antaŭa trako"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Ludi aŭ Paŭzi aŭdvidaĵon"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
 #, kde-format
 msgid "Next track"
 msgstr "Sekva trako"

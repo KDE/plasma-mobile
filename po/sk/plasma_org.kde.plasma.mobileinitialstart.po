@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-07-28 15:18+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -243,7 +243,7 @@ msgstr "Heslo..."
 msgid "Welcome to <b>Plasma</b>"
 msgstr "Vitajte v <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:312
+#: qml/LandingComponent.qml:102 qml/Wizard.qml:315
 #, kde-format
 msgid "Next"
 msgstr "Ďalej"
@@ -253,12 +253,12 @@ msgstr "Ďalej"
 msgid "Initial Start"
 msgstr "Úvodné spustenie"
 
-#: qml/Wizard.qml:293
+#: qml/Wizard.qml:296
 #, kde-format
 msgid "Back"
 msgstr "Späť"
 
-#: qml/Wizard.qml:329
+#: qml/Wizard.qml:332
 #, kde-format
 msgid "Finish"
 msgstr "Dokončiť"

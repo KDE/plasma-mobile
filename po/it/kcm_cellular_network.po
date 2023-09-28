@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2022-10-26 11:31+0200\n"
+"PO-Revision-Date: 2023-09-24 19:16+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: modem.cpp:126
 #, kde-format
@@ -619,12 +619,11 @@ msgid "View data usage."
 msgstr "Visualizza l'utilizzo dei dati."
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
-msgstr[0] "PUK SIM"
-msgstr[1] "PUK SIM"
+msgstr[0] "SIM"
+msgstr[1] "SIM"
 
 #: ui/main.qml:141
 #, kde-format
@@ -913,6 +912,8 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"Questo slot SIM è vuoto, è necessario inserire una scheda SIM per poterlo "
+"utilizzare."
 
 #: ui/SimPage.qml:58
 #, kde-format

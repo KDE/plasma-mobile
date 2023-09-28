@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-04-08 00:31+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -248,7 +248,7 @@ msgstr "Contraseña..."
 msgid "Welcome to <b>Plasma</b>"
 msgstr "Bienvenido a <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:312
+#: qml/LandingComponent.qml:102 qml/Wizard.qml:315
 #, kde-format
 msgid "Next"
 msgstr "Siguiente"
@@ -258,12 +258,12 @@ msgstr "Siguiente"
 msgid "Initial Start"
 msgstr "Primer inicio"
 
-#: qml/Wizard.qml:293
+#: qml/Wizard.qml:296
 #, kde-format
 msgid "Back"
 msgstr "Atrás"
 
-#: qml/Wizard.qml:329
+#: qml/Wizard.qml:332
 #, kde-format
 msgid "Finish"
 msgstr "Finalizar"

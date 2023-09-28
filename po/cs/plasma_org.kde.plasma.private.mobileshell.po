@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 01:57+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-01-05 12:05+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -184,22 +184,22 @@ msgstr "Snížit hlasitost"
 msgid "Search…"
 msgstr "Hledat…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
 #, kde-format
 msgid "No media playing"
 msgstr "Nepřehrává se žádné médium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
 #, kde-format
 msgid "Previous track"
 msgstr "Předchozí skladba"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Přehrát nebo pozastavit přehrávání"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
 #, kde-format
 msgid "Next track"
 msgstr "Následující skladba"

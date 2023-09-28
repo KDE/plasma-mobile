@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-04-02 16:37+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -241,7 +241,7 @@ msgstr "Salasana…"
 msgid "Welcome to <b>Plasma</b>"
 msgstr "Tervetuloa <b>Plasmaan</b>"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:312
+#: qml/LandingComponent.qml:102 qml/Wizard.qml:315
 #, kde-format
 msgid "Next"
 msgstr "Seuraava"
@@ -251,12 +251,12 @@ msgstr "Seuraava"
 msgid "Initial Start"
 msgstr "Ensikäynnistys"
 
-#: qml/Wizard.qml:293
+#: qml/Wizard.qml:296
 #, kde-format
 msgid "Back"
 msgstr "Takaisin"
 
-#: qml/Wizard.qml:329
+#: qml/Wizard.qml:332
 #, kde-format
 msgid "Finish"
 msgstr "Viimeistele"

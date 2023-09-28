@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-19 01:57+0000\n"
+"POT-Creation-Date: 2023-09-28 01:41+0000\n"
 "PO-Revision-Date: 2023-02-23 19:21+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -186,22 +186,22 @@ msgstr "Lågare lyd"
 msgid "Search…"
 msgstr "Søk …"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:126
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
 #, kde-format
 msgid "No media playing"
 msgstr "Inkje medium vert spela av"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:154
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
 #, kde-format
 msgid "Previous track"
 msgstr "Førre spor"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:165
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Spel/pause"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:178
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
 #, kde-format
 msgid "Next track"
 msgstr "Neste spor"
