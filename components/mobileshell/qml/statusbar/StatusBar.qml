@@ -85,9 +85,9 @@ Item {
 
     // drop shadow for icons
     MultiEffect {
-        anchors.fill: icons
+        anchors.fill: control
         visible: showDropShadow
-        source: icons
+        source: control
         blurMax: 16
         shadowEnabled: true
         shadowVerticalOffset: 1
@@ -95,128 +95,128 @@ Item {
     }
 
     // screen top panel
-    Item {
-        id: icons
+    Controls.Control {
+        id: control
         z: 1
+        topPadding: Kirigami.Units.smallSpacing
+        bottomPadding: Kirigami.Units.smallSpacing
+        rightPadding: Kirigami.Units.smallSpacing * 3
+        leftPadding: Kirigami.Units.smallSpacing * 3
+
         anchors.fill: parent
-        
-        Controls.Control {
-            id: control
-            topPadding: Kirigami.Units.smallSpacing
-            bottomPadding: Kirigami.Units.smallSpacing
-            rightPadding: Kirigami.Units.smallSpacing * 3
-            leftPadding: Kirigami.Units.smallSpacing * 3
-            
-            anchors.fill: parent
-            background: Rectangle {
-                id: panelBackground
-                color: backgroundColor
-            }
-            
-            contentItem: ColumnLayout {
-                spacing: Kirigami.Units.smallSpacing / 2
-                
-                RowLayout {
-                    id: row
+        background: Rectangle {
+            id: panelBackground
+            color: backgroundColor
+        }
+
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing / 2
+
+            RowLayout {
+                id: mainRow
+                readonly property real rowHeight: Components.Constants.topPanelHeight - Kirigami.Units.smallSpacing * 2
+
+                Layout.fillWidth: true
+                Layout.preferredHeight: rowHeight
+
+                spacing: 0
+
+                // clock
+                ClockText {
+                    visible: root.showTime
+                    Layout.fillHeight: true
+                    font.pixelSize: textPixelSize
+                    source: timeSource
+                }
+
+                Indicators.SignalStrengthIndicator {
+                    Layout.fillHeight: true
+                    showLabel: true
+                    visible: !root.showTime
+                    textPixelSize: root.textPixelSize
+                }
+
+                // spacing in the middle
+                Item {
                     Layout.fillWidth: true
-                    Layout.maximumHeight: Components.Constants.topPanelHeight - control.topPadding - control.bottomPadding
-                    spacing: 0
+                }
 
-                    // clock
-                    ClockText {
-                        visible: root.showTime
-                        Layout.fillHeight: true
-                        font.pixelSize: textPixelSize
-                        source: timeSource
-                    }
-                    
-                    Indicators.SignalStrengthIndicator {
-                        Layout.fillHeight: true
-                        showLabel: true
-                        visible: !root.showTime
-                        textPixelSize: root.textPixelSize
-                    }
-                    
-                    // spacing in the middle
-                    Item {
-                        Layout.fillWidth: true
-                    }
-                    
-                    // system tray
-                    Repeater {
-                        id: statusNotifierRepeater
-                        model: KItemModels.KSortFilterProxyModel {
-                            id: filteredStatusNotifiers
-                            filterRoleName: "Title"
-                            sourceModel: P5Support.DataModel {
-                                dataSource: statusNotifierSource ? statusNotifierSource : null
-                            }
+                // system tray
+                Repeater {
+                    id: statusNotifierRepeater
+                    model: KItemModels.KSortFilterProxyModel {
+                        id: filteredStatusNotifiers
+                        filterRoleName: "Title"
+                        sourceModel: P5Support.DataModel {
+                            dataSource: statusNotifierSource ? statusNotifierSource : null
                         }
+                    }
 
-                        delegate: TaskWidget {
-                            Layout.leftMargin: root.elementSpacing
-                        }
-                    }
-                    
-                    // system indicators
-                    RowLayout {
-                        id: indicators
-                        Layout.leftMargin: Kirigami.Units.smallSpacing // applets have different spacing needs
-                        Layout.fillHeight: true
-                        spacing: root.elementSpacing
-
-                        Indicators.SignalStrengthIndicator {
-                            showLabel: false
-                            visible: root.showTime
-                            internetIndicator: internetIndicatorItem
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                        }
-                        Indicators.BluetoothIndicator {
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                        }
-                        Indicators.InternetIndicator {
-                            id: internetIndicatorItem
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                        }
-                        Indicators.VolumeIndicator {
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                        }
-                        Indicators.BatteryIndicator {
-                            spacing: root.elementSpacing
-                            textPixelSize: root.textPixelSize
-                            Layout.fillHeight: true
-                            Layout.preferredWidth: height
-                        }
+                    delegate: TaskWidget {
+                        Layout.leftMargin: root.elementSpacing
                     }
                 }
-                
-                // extra row with date and mobile provider (for quicksettings panel)
+
+                // system indicators
+                // using Layout.fillHeight here seems to cause polish loops, instead just define the height of the row
                 RowLayout {
-                    spacing: 0
-                    visible: root.showSecondRow
-                    Layout.fillWidth: true
-                    
-                    PlasmaComponents.Label {
-                        text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
-                        color: Kirigami.Theme.disabledTextColor
-                        font.pixelSize: root.smallerTextPixelSize
-                    }
-                    
-                    Item { Layout.fillWidth: true }
-                    
-                    PlasmaComponents.Label {
-                        property var signalStrengthInfo: DataProviders.SignalStrengthInfo {}
-                        
+                    id: indicators
+                    Layout.leftMargin: Kirigami.Units.smallSpacing // applets have different spacing needs
+                    Layout.maximumHeight: mainRow.rowHeight
+
+                    spacing: root.elementSpacing
+
+                    Indicators.SignalStrengthIndicator {
+                        showLabel: false
                         visible: root.showTime
-                        text: signalStrengthInfo.label
-                        color: Kirigami.Theme.disabledTextColor
-                        font.pixelSize: root.smallerTextPixelSize
-                        horizontalAlignment: Qt.AlignRight
+                        internetIndicator: internetIndicatorItem
+                        implicitHeight: mainRow.rowHeight
+                        Layout.preferredWidth: height
                     }
+                    Indicators.BluetoothIndicator {
+                        implicitHeight: mainRow.rowHeight
+                        Layout.preferredWidth: height
+                    }
+                    Indicators.InternetIndicator {
+                        id: internetIndicatorItem
+                        implicitHeight: mainRow.rowHeight
+                        Layout.preferredWidth: height
+                    }
+                    Indicators.VolumeIndicator {
+                        implicitHeight: mainRow.rowHeight
+                        Layout.preferredWidth: height
+                    }
+                    Indicators.BatteryIndicator {
+                        spacing: root.elementSpacing
+                        textPixelSize: root.textPixelSize
+                        implicitHeight: mainRow.rowHeight
+                        Layout.preferredWidth: height
+                    }
+                }
+            }
+
+            // extra row with date and mobile provider (for quicksettings panel)
+            RowLayout {
+                spacing: 0
+                visible: root.showSecondRow
+                Layout.fillWidth: true
+
+                PlasmaComponents.Label {
+                    text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd. MMMM d")
+                    color: Kirigami.Theme.disabledTextColor
+                    font.pixelSize: root.smallerTextPixelSize
+                }
+
+                Item { Layout.fillWidth: true }
+
+                PlasmaComponents.Label {
+                    property var signalStrengthInfo: DataProviders.SignalStrengthInfo {}
+
+                    visible: root.showTime
+                    text: signalStrengthInfo.label
+                    color: Kirigami.Theme.disabledTextColor
+                    font.pixelSize: root.smallerTextPixelSize
+                    horizontalAlignment: Qt.AlignRight
                 }
             }
         }
