@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-29 01:40+0000\n"
 "PO-Revision-Date: 2022-06-24 08:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -58,15 +58,15 @@ msgstr "Перш ніж вносити інші зміни, слід засто�
 msgid "Apply now"
 msgstr "Застосувати зараз"
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Зображення тла"
 
-#: contents/configuration/ContainmentConfiguration.qml:96
+#: contents/configuration/ContainmentConfiguration.qml:97
 msgid "Change Wallpaper"
 msgstr "Змінити зображення тла"
 
-#: contents/configuration/ContainmentConfiguration.qml:114
+#: contents/configuration/ContainmentConfiguration.qml:115
 msgid "Configure"
 msgstr "Налаштувати"
 

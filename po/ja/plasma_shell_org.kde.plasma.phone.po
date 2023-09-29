@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-29 01:40+0000\n"
 "PO-Revision-Date: 2022-06-24 10:36-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -54,14 +54,14 @@ msgstr "レイアウトの変更は他の変更の前に行う必要がありま
 msgid "Apply now"
 msgstr "決定する"
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "壁紙"
 
-#: contents/configuration/ContainmentConfiguration.qml:96
+#: contents/configuration/ContainmentConfiguration.qml:97
 msgid "Change Wallpaper"
 msgstr "壁紙を変更する"
 
-#: contents/configuration/ContainmentConfiguration.qml:114
+#: contents/configuration/ContainmentConfiguration.qml:115
 msgid "Configure"
 msgstr "設定"

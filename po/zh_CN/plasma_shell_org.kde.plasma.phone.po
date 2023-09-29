@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-29 01:40+0000\n"
 "PO-Revision-Date: 2023-09-16 10:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -58,14 +58,14 @@ msgstr "必须先应用布局更改才能更改其他选项"
 msgid "Apply now"
 msgstr "立即应用"
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "壁纸"
 
-#: contents/configuration/ContainmentConfiguration.qml:96
+#: contents/configuration/ContainmentConfiguration.qml:97
 msgid "Change Wallpaper"
 msgstr "更换壁纸"
 
-#: contents/configuration/ContainmentConfiguration.qml:114
+#: contents/configuration/ContainmentConfiguration.qml:115
 msgid "Configure"
 msgstr "配置"

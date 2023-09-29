@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-09-29 01:40+0000\n"
 "PO-Revision-Date: 2022-07-13 12:05+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -57,14 +57,14 @@ msgstr "다른 항목을 변경하기 전 레이아웃 변경 사항을 적용�
 msgid "Apply now"
 msgstr "지금 적용하기"
 
-#: contents/configuration/ContainmentConfiguration.qml:33
+#: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "배경 그림"
 
-#: contents/configuration/ContainmentConfiguration.qml:96
+#: contents/configuration/ContainmentConfiguration.qml:97
 msgid "Change Wallpaper"
 msgstr "배경 그림 바꾸기"
 
-#: contents/configuration/ContainmentConfiguration.qml:114
+#: contents/configuration/ContainmentConfiguration.qml:115
 msgid "Configure"
 msgstr "설정"
