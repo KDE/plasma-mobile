@@ -108,131 +108,125 @@ Item {
                 }
             }
 
-            Item {
-                width: flickable.width
-                height: flickable.height
-                y: flickable.contentY // effectively anchored to the screen
+            LockScreenNarrowContent {
+                id: phoneComponent
 
-                LockScreenNarrowContent {
-                    id: phoneComponent
+                visible: !isWidescreen
+                active: visible
+                opacity: 1 - flickable.openFactor
 
-                    visible: !isWidescreen
-                    active: visible
+                fullHeight: root.height
+
+                lockScreenState: root.lockScreenState
+                notificationsModel: root.notifModel
+                onNotificationsShownChanged: root.notificationsShown = notificationsShown
+
+                onPasswordRequested: flickable.goToOpenPosition()
+
+                anchors.top: parent.top
+                anchors.bottom: scrollUpIconLoader.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                // move while swiping up
+                transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
+            }
+
+            LockScreenWideScreenContent {
+                id: tabletComponent
+
+                visible: isWidescreen
+                active: visible
+                opacity: 1 - flickable.openFactor
+
+                lockScreenState: root.lockScreenState
+                notificationsModel: root.notifModel
+                onNotificationsShownChanged: root.notificationsShown = notificationsShown
+
+                onPasswordRequested: flickable.goToOpenPosition()
+
+                anchors.topMargin: headerBarLoader.statusBarHeight
+                anchors.top: parent.top
+                anchors.bottom: scrollUpIconLoader.top
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                // move while swiping up
+                transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
+            }
+
+            // scroll up icon
+            Loader {
+                id: scrollUpIconLoader
+                asynchronous: true
+
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                sourceComponent: Kirigami.Icon {
+                    id: scrollUpIcon
+                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
                     opacity: 1 - flickable.openFactor
 
-                    fullHeight: root.height
-
-                    lockScreenState: root.lockScreenState
-                    notificationsModel: root.notifModel
-                    onNotificationsShownChanged: root.notificationsShown = notificationsShown
-
-                    onPasswordRequested: flickable.goToOpenPosition()
-
-                    anchors.top: parent.top
-                    anchors.bottom: scrollUpIconLoader.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-
-                    // move while swiping up
-                    transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
+                    Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
+                    source: "arrow-up"
                 }
+            }
 
-                LockScreenWideScreenContent {
-                    id: tabletComponent
+            // password keypad
+            Loader {
+                id: keypadLoader
+                width: parent.width
+                asynchronous: true
+                active: !root.lockScreenState.passwordless // only load keypad if not passwordless
 
-                    visible: isWidescreen
-                    active: visible
-                    opacity: 1 - flickable.openFactor
+                anchors.bottom: parent.bottom
 
-                    lockScreenState: root.lockScreenState
-                    notificationsModel: root.notifModel
-                    onNotificationsShownChanged: root.notificationsShown = notificationsShown
+                sourceComponent: ColumnLayout {
+                    property alias passwordBar: keypad.passwordBar
 
-                    onPasswordRequested: flickable.goToOpenPosition()
+                    transform: Translate { y: flickable.keypadHeight - flickable.position }
+                    spacing: 0
 
-                    anchors.topMargin: headerBarLoader.statusBarHeight
-                    anchors.top: parent.top
-                    anchors.bottom: scrollUpIconLoader.top
-                    anchors.left: parent.left
-                    anchors.right: parent.right
+                    // info notification text
+                    Label {
+                        Layout.fillWidth: true
+                        Layout.rightMargin: Kirigami.Units.gridUnit
+                        Layout.leftMargin: Kirigami.Units.gridUnit
+                        Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
+                        font.pointSize: 9
 
-                    // move while swiping up
-                    transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
-                }
+                        elide: Text.ElideRight
+                        horizontalAlignment: Text.AlignHCenter
+                        text: root.lockScreenState.info
+                        opacity: (root.lockScreenState.info.length === 0 || flickable.openFactor < 1) ? 0 : 1
+                        color: 'white'
 
-                // scroll up icon
-                Loader {
-                    id: scrollUpIconLoader
-                    asynchronous: true
+                        Behavior on opacity {
+                            NumberAnimation { duration: 200 }
+                        }
+                    }
 
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
-                    anchors.horizontalCenter: parent.horizontalCenter
-
-                    sourceComponent: Kirigami.Icon {
-                        id: scrollUpIcon
+                    // scroll down icon
+                    Kirigami.Icon {
+                        Layout.alignment: Qt.AlignHCenter
+                        Layout.bottomMargin: Kirigami.Units.gridUnit
                         implicitWidth: Kirigami.Units.iconSizes.smallMedium
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        opacity: 1 - flickable.openFactor
-
                         Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
-                        source: "arrow-up"
+                        source: "arrow-down"
+                        opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
                     }
-                }
 
-                // password keypad
-                Loader {
-                    id: keypadLoader
-                    width: parent.width
-                    asynchronous: true
-                    active: !root.lockScreenState.passwordless // only load keypad if not passwordless
+                    Keypad {
+                        id: keypad
+                        Layout.fillWidth: true
+                        focus: true
 
-                    anchors.bottom: parent.bottom
-
-                    sourceComponent: ColumnLayout {
-                        property alias passwordBar: keypad.passwordBar
-
-                        transform: Translate { y: flickable.keypadHeight - flickable.position }
-                        spacing: 0
-
-                        // info notification text
-                        Label {
-                            Layout.fillWidth: true
-                            Layout.rightMargin: Kirigami.Units.gridUnit
-                            Layout.leftMargin: Kirigami.Units.gridUnit
-                            Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-                            font.pointSize: 9
-
-                            elide: Text.ElideRight
-                            horizontalAlignment: Text.AlignHCenter
-                            text: root.lockScreenState.info
-                            opacity: (root.lockScreenState.info.length === 0 || flickable.openFactor < 1) ? 0 : 1
-                            color: 'white'
-
-                            Behavior on opacity {
-                                NumberAnimation { duration: 200 }
-                            }
-                        }
-
-                        // scroll down icon
-                        Kirigami.Icon {
-                            Layout.alignment: Qt.AlignHCenter
-                            Layout.bottomMargin: Kirigami.Units.gridUnit
-                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                            Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
-                            source: "arrow-down"
-                            opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
-                        }
-
-                        Keypad {
-                            id: keypad
-                            Layout.fillWidth: true
-                            focus: true
-
-                            lockScreenState: root.lockScreenState
-                            swipeProgress: flickable.openFactor
-                        }
+                        lockScreenState: root.lockScreenState
+                        swipeProgress: flickable.openFactor
                     }
                 }
             }

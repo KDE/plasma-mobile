@@ -5,8 +5,9 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.mobileshell as MobileShell
 
-Flickable {
+MobileShell.SwipeArea {
     id: root
     
     property int position: 0
@@ -52,14 +53,6 @@ Flickable {
         }
     }
     
-    // we use flickable solely for capturing flicks, not positioning elements
-    contentWidth: width
-    contentHeight: height * 2
-    contentX: 0
-    contentY: startContentY
-    
-    readonly property real startContentY: contentHeight / 2
-    
     property int oldPosition: position
     property bool movingUp: false 
     
@@ -68,38 +61,15 @@ Flickable {
         oldPosition = position;
     }
     
-    // update position from flickable movement
-    property real oldContentY
-    onContentYChanged: {
-        position = Math.max(0, Math.min(keypadHeight, position + (contentY - oldContentY)));
-        oldContentY = contentY;
-    }
-    
-    onMovementStarted: cancelAnimations();
-    onMovementEnded: {
+    onSwipeStarted: cancelAnimations();
+    onSwipeEnded: {
         if (!positionAnim.running) {
             updateState();
         }
-        resetPosition();
     }
-    
-    onFlickStarted: root.cancelFlick()
-    onFlickEnded: resetPosition();
-    
-    onDraggingChanged: {
-        if (!dragging) {
-            resetPosition();
-            if (!positionAnim.running) {
-                root.updateState();
-            }
-        } else {
-            cancelAnimations();
-        }
-    }
-    
-    function resetPosition() {
-        oldContentY = startContentY;
-        contentY = startContentY;
+
+    onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
+        position = Math.max(0, Math.min(keypadHeight, position + deltaY));
     }
 }
 
