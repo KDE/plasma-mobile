@@ -134,7 +134,7 @@ void ApplicationListModel::load()
         data.storageId = service->storageId();
         data.uniqueId = service->storageId();
         data.entryPath = service->exec();
-        data.startupNotify = service->property(QStringLiteral("StartupNotify")).toBool();
+        data.startupNotify = service->startupNotify().value_or(false);
         unorderedList << data;
     }
 
