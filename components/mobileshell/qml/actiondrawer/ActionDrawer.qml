@@ -113,9 +113,9 @@ Item {
     signal runPendingNotificationAction()
 
     onOpenedChanged: {
-        if (opened) flickable.focus = true;
+        if (opened) swipeArea.focus = true;
     }
-    
+
     property real oldOffset
     onOffsetChanged: {
         if (offset < 0) {
@@ -129,7 +129,7 @@ Item {
         oldOffset = offset;
         
         // close panel immediately after panel is not shown, and the flickable is not being dragged
-        if (opened && root.offset <= 0 && !flickable.dragging && !closeAnim.running && !openAnim.running) {
+        if (opened && root.offset <= 0 && !swipeArea.moving && !closeAnim.running && !openAnim.running) {
             root.updateState();
             focus = false;
         }
@@ -229,67 +229,28 @@ Item {
         onFinished: root.opened = true;
     }
     
-    Components.Flickable {
-        id: flickable
+    MobileShell.SwipeArea {
+        id: swipeArea
         anchors.fill: parent
-        
-        contentWidth: root.width
-        contentHeight: root.height + 999999
-        contentY: contentHeight / 2
-        
-        // if the recent root.offset change was due to this flickable
-        property bool offsetChangedDueToContentY: false
-        Connections {
-            target: root
-            function onOffsetChanged() {
-                if (!flickable.offsetChangedDueToContentY) {
-                    // ensure the flickable's contentY is not moving when other sources change root.offset
-                    flickable.cancelFlick(); 
-                }
-                flickable.offsetChangedDueToContentY = false;
-            }
-        }
-        
-        property real oldContentY
-        onContentYChanged: {
-            offsetChangedDueToContentY = true;
-            root.offset += oldContentY - contentY;
-            oldContentY = contentY;
-        }
-        
-        onMovementStarted: {
+
+        onSwipeStarted: {
             root.cancelAnimations();
             root.dragging = true;
         }
-        onFlickStarted: root.dragging = true;
-        onMovementEnded: {
+        onSwipeEnded: {
             root.dragging = false;
             root.updateState();
         }
-        onFlickEnded: {
-            root.dragging = true;
-            root.updateState();
+        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
+            root.offset += deltaY;
         }
-        
-        onDraggingChanged: {
-            if (!dragging) {
-                root.dragging = false;
-                flickable.cancelFlick();
-                root.updateState();
-            }
-        }
-        
-        // the flickable is only used to measure drag changes, we implement our own UI component movements
-        // the root element is not affected by contentY changes (it's effectively anchored to the flickable)
+
         Loader {
             id: contentContainerLoader
+            anchors.fill: parent
             
             property real minimizedQuickSettingsOffset: item ? item.minimizedQuickSettingsOffset : 0
             property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
-            
-            y: flickable.contentY
-            width: root.width
-            height: root.height
             
             asynchronous: true
             sourceComponent: root.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer

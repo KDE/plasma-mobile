@@ -7,11 +7,12 @@
 import QtQuick 2.15
 
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell as MobileShell
 
 /**
  * Component that triggers the opening and closing of an ActionDrawer when dragged on with touch or mouse.
  */
-MouseArea {
+MobileShell.SwipeArea {
     id: root
     
     required property ActionDrawer actionDrawer
@@ -43,22 +44,17 @@ MouseArea {
     }
     
     anchors.fill: parent
-    onPressed: mouse => {
-        oldMouseY = mouse.y;
-        
+
+    onSwipeStarted: (point) => {
         // if the user swiped from the top left, otherwise it's from the top right
-        if (mouse.x < root.width / 2) {
+        if (point.x < root.width / 2) {
             actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settings.Pinned;
         } else {
             actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopRightMode == ShellSettings.Settings.Pinned;
         }
-        
+
         startSwipe();
     }
-    onReleased: endSwipe()
-    onCanceled: endSwipe()
-    onPositionChanged: mouse => {
-        updateOffset(mouse.y - oldMouseY);
-        oldMouseY = mouse.y;
-    }
+    onSwipeEnded: endSwipe()
+    onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => updateOffset(deltaY);
 }
