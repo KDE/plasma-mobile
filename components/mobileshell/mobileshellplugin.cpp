@@ -10,6 +10,7 @@
 #include <QQuickItem>
 
 #include "components/direction.h"
+#include "components/swipearea.h"
 
 #include "notifications/notificationfilemenu.h"
 #include "notifications/notificationthumbnailer.h"
@@ -31,6 +32,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
 
     // components
     qmlRegisterType<Direction>(uri, 1, 0, "Direction");
+    qmlRegisterType<SwipeArea>(uri, 1, 0, "SwipeArea");
 
     // notifications
     qmlRegisterType<NotificationThumbnailer>(uri, 1, 0, "NotificationThumbnailer");

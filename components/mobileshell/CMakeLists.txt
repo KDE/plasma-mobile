@@ -8,6 +8,7 @@ set(mobileshellplugin_SRCS
     mobileshellplugin.cpp
     shellutil.cpp
     components/direction.cpp
+    components/swipearea.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
 )
