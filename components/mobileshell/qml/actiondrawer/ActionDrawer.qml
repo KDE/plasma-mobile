@@ -231,6 +231,7 @@ Item {
     
     MobileShell.SwipeArea {
         id: swipeArea
+        mode: MobileShell.SwipeArea.VerticalOnly
         anchors.fill: parent
 
         onSwipeStarted: {

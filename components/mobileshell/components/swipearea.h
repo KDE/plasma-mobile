@@ -22,6 +22,7 @@
 class SwipeArea : public QQuickItem
 {
     Q_OBJECT
+    Q_PROPERTY(SwipeArea::Mode mode READ mode WRITE setMode NOTIFY modeChanged)
     Q_PROPERTY(bool interactive READ interactive NOTIFY interactiveChanged)
     Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged)
@@ -31,11 +32,18 @@ class SwipeArea : public QQuickItem
 public:
     SwipeArea(QQuickItem *parent = nullptr);
 
+    enum Mode { BothAxis = 0, VerticalOnly, HorizontalOnly };
+    Q_ENUM(Mode)
+
+    Mode mode();
+    void setMode(Mode mode);
+
     bool interactive();
     bool moving();
     bool pressed();
 
 Q_SIGNALS:
+    void modeChanged();
     void interactiveChanged();
     void movingChanged();
     void pressedChanged();
@@ -69,6 +77,7 @@ private:
 
     void resetSwipe();
 
+    Mode m_mode = Mode::BothAxis;
     bool m_interactive = true;
     bool m_pressed = false;
 

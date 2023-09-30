@@ -9,6 +9,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 MobileShell.SwipeArea {
     id: root
+    mode: MobileShell.SwipeArea.VerticalOnly
     
     property int position: 0
     

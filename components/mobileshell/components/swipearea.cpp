@@ -22,6 +22,17 @@ SwipeArea::SwipeArea(QQuickItem *parent)
     setFiltersChildMouseEvents(true);
 }
 
+SwipeArea::Mode SwipeArea::mode()
+{
+    return m_mode;
+}
+
+void SwipeArea::setMode(Mode mode)
+{
+    m_mode = mode;
+    Q_EMIT modeChanged();
+}
+
 bool SwipeArea::interactive()
 {
     return m_interactive;
@@ -251,7 +262,11 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 
     if (!m_stealMouse) {
         // if we haven't reached the swipe registering threshold yet, don't start the swipe
-        if (qAbs(point.manhattanLength() - m_pressPos.manhattanLength()) < SWIPE_REGISTER_THRESHOLD) {
+        if (m_mode == Mode::VerticalOnly && qAbs(point.y() - m_pressPos.y()) < SWIPE_REGISTER_THRESHOLD) {
+            return;
+        } else if (m_mode == Mode::HorizontalOnly && qAbs(point.x() - m_pressPos.x()) < SWIPE_REGISTER_THRESHOLD) {
+            return;
+        } else if (m_mode == Mode::BothAxis && qAbs(point.manhattanLength() - m_pressPos.manhattanLength()) < SWIPE_REGISTER_THRESHOLD) {
             return;
         }
 
