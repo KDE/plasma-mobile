@@ -33,7 +33,7 @@ Item {
     }
 
     Connections {
-        target: Workspace
+        target: KWinComponents.Workspace
 
         function onWindowAdded(client) {
             if (client.normalWindow) {
