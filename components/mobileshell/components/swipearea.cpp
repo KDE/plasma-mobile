@@ -249,8 +249,11 @@ void SwipeArea::handlePressEvent(QPointerEvent *event, QPointF point)
 
 void SwipeArea::handleReleaseEvent(QPointerEvent *event, QPointF point)
 {
+    // if we are in a swipe
+    if (m_moving) {
+        Q_EMIT swipeEnded();
+    }
     resetSwipe();
-    Q_EMIT swipeEnded();
 }
 
 void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
