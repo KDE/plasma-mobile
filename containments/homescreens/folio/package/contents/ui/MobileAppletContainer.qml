@@ -4,6 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
@@ -55,7 +56,7 @@ ContainmentLayoutManager.BasicAppletContainer {
             appletContainer.forceActiveFocus();
         } else {
             launcherDragManager.dropItem(appletContainer, dragCenterX, dragCenterY);
-            plasmoid.editMode = false;
+            Plasmoid.editMode = false;
             launcherRepeater.stopScrollRequested();
             launcherDragManager.currentlyDraggedDelegate = null;
             forceActiveFocus();
@@ -66,7 +67,7 @@ ContainmentLayoutManager.BasicAppletContainer {
         dragCenterY = dragCenter.y;
         launcherDragManager.dragItem(appletContainer, dragCenter.x, dragCenter.y);
 
-        var pos = plasmoid.fullRepresentationItem.mapFromItem(appletContainer, dragCenter.x, dragCenter.y);
+        var pos = Plasmoid.fullRepresentationItem.mapFromItem(appletContainer, dragCenter.x, dragCenter.y);
 
         //SCROLL LEFT
         if (pos.x < Kirigami.Units.gridUnit) {

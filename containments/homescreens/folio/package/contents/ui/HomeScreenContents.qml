@@ -4,6 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Layouts 1.1
@@ -61,7 +62,7 @@ DragDrop.DropArea {
     Connections {
         target: plasmoid
         function onEditModeChanged() {
-            appletsLayout.editMode = plasmoid.editMode
+            appletsLayout.editMode = Plasmoid.editMode
         }
     }
 
@@ -148,7 +149,7 @@ DragDrop.DropArea {
             }
             appletsLayout.hidePlaceHolder();
         } else {
-            plasmoid.processMimeData(event.mimeData,
+            Plasmoid.processMimeData(event.mimeData,
                         event.x - appletsLayout.placeHolder.width / 2, event.y - appletsLayout.placeHolder.height / 2);
             event.accept(event.proposedAction);
             appletsLayout.hidePlaceHolder();
@@ -188,12 +189,12 @@ DragDrop.DropArea {
 
         configKey: width > height ? "ItemGeometriesHorizontal" : "ItemGeometriesVertical"
         containment: plasmoid
-        editModeCondition: plasmoid.immutable
+        editModeCondition: Plasmoid.immutable
                 ? ContainmentLayoutManager.AppletsLayout.Manual
                 : ContainmentLayoutManager.AppletsLayout.AfterPressAndHold
 
         // Sets the containment in edit mode when we go in edit mode as well
-        onEditModeChanged: plasmoid.editMode = editMode;
+        onEditModeChanged: Plasmoid.editMode = editMode;
 
         minimumItemWidth: Kirigami.Units.gridUnit * 3
         minimumItemHeight: minimumItemWidth

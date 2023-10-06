@@ -2,6 +2,7 @@
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.4
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.15
@@ -23,7 +24,7 @@ ContainmentItem {
 
     // toggle visibility of navigation bar (show, or use gestures only)
     Binding {
-        target: plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
+        target: Plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
         property: "visibilityMode"
         // 0 - VisibilityMode.NormalPanel
         // 2 - VisibilityMode.LetWindowsCover HACK: TODO one day we make delete the panel component instead of making it invisible in gesture-only mode
@@ -47,8 +48,8 @@ ContainmentItem {
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
     onIntendedWindowLocationChanged: locationChangeTimer.restart()
     onIntendedWindowOffsetChanged: {
-        if (plasmoid && plasmoid.Window.window) {
-            plasmoid.Window.window.offset = intendedWindowOffset;
+        if (plasmoid && Plasmoid.Window.window) {
+            Plasmoid.Window.window.offset = intendedWindowOffset;
         }
     }
 
@@ -60,8 +61,8 @@ ContainmentItem {
         interval: 100
         onTriggered: {
             // maximize first, then we can apply offsets (otherwise they are overridden)
-            plasmoid.Window.window.maximize()
-            plasmoid.Window.window.offset = intendedWindowOffset;
+            Plasmoid.Window.window.maximize()
+            Plasmoid.Window.window.offset = intendedWindowOffset;
         }
     }
 
@@ -70,33 +71,33 @@ ContainmentItem {
         id: locationChangeTimer
         running: false
         interval: 100
-        onTriggered: plasmoid.Window.window.location = intendedWindowLocation
+        onTriggered: Plasmoid.Window.window.location = intendedWindowLocation
     }
 
     function setWindowProperties() {
-        // plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
-        if (plasmoid && plasmoid.Window.window) {
-            plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
-            plasmoid.Window.window.offset = intendedWindowOffset;
-            plasmoid.Window.window.thickness = navigationPanelHeight;
-            plasmoid.Window.window.location = intendedWindowLocation;
+        // Plasmoid.Window.window is assumed to be plasma-workspace "PanelView" component
+        if (plasmoid && Plasmoid.Window.window) {
+            Plasmoid.Window.window.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
+            Plasmoid.Window.window.offset = intendedWindowOffset;
+            Plasmoid.Window.window.thickness = navigationPanelHeight;
+            Plasmoid.Window.window.location = intendedWindowLocation;
         }
     }
 
     Connections {
-        target: plasmoid.Window.window
+        target: Plasmoid.Window.window
 
         // HACK: There seems to be some component that overrides our initial bindings for the panel,
         //   which is particularly problematic on first start (since the panel is misplaced)
         // - We set an event to override any attempts to override our bindings.
         function onLocationChanged() {
-            if (plasmoid.Window.window.location !== root.intendedWindowLocation) {
+            if (Plasmoid.Window.window.location !== root.intendedWindowLocation) {
                 root.setWindowProperties();
             }
         }
 
         function onThicknessChanged() {
-            if (plasmoid.Window.window.thickness !== root.intendedWindowThickness) {
+            if (Plasmoid.Window.window.thickness !== root.intendedWindowThickness) {
                 root.setWindowProperties();
             }
         }

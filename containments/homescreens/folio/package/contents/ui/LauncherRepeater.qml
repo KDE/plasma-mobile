@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.14
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.3 as Controls
@@ -73,7 +74,7 @@ Repeater {
             delegate.width = appletsLayout.cellWidth;
             delegate.height = appletsLayout.cellHeight;
 
-            var pos = plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
+            var pos = Plasmoid.fullRepresentationItem.mapFromItem(delegate, dragCenter.x, dragCenter.y);
 
             //SCROLL LEFT
             if (pos.x < Kirigami.Units.gridUnit) {
@@ -95,7 +96,7 @@ Repeater {
                 launcherDragManager.currentlyDraggedDelegate = delegate;
             } else {
                 launcherDragManager.dropItem(delegate, dragCenterX, dragCenterY);
-                plasmoid.editMode = false;
+                Plasmoid.editMode = false;
                 editMode = false;
                 launcherRepeater.stopScrollRequested();
                 launcherDragManager.currentlyDraggedDelegate = null;
