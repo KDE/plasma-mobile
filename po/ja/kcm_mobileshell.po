@@ -1,211 +1,208 @@
-# Copyright (C) YEAR This file is copyright:
-# This file is distributed under the same license as the plasma-mobile package.
-# Shinjo Park <kde@peremen.name>, 2023.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-10-08 23:47+0200\n"
-"Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-kr@kde.org>\n"
-"Language: ko\n"
+"PO-Revision-Date: 2022-12-20 22:48-0800\n"
+"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
+"Language-Team: Japanese <kde-jp@kde.org>\n"
+"Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "셸"
+msgstr ""
 
 #: ui/main.qml:27
 #, kde-format
 msgid "General"
-msgstr "일반"
+msgstr ""
 
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr "셸 진동"
+msgstr ""
 
 #: ui/main.qml:41
 #, kde-format
 msgid "Animations"
-msgstr "애니메이션"
+msgstr ""
 
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr "이 설정을 사용하지 않으면 애니메이션을 최소화합니다."
+msgstr ""
 
 #: ui/main.qml:53
 #, kde-format
 msgid "Navigation Panel"
-msgstr "탐색 패널"
+msgstr ""
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr "제스처 전용 모드"
+msgstr ""
 
 #: ui/main.qml:60
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr "탐색 패널을 숨길지 여부입니다."
+msgstr ""
 
 #: ui/main.qml:71
 #, kde-format
 msgid "Task Switcher"
-msgstr "작업 전환기"
+msgstr ""
 
 #: ui/main.qml:76
 #, kde-format
 msgid "Show Application Previews"
-msgstr "앱 미리 보기 표시"
+msgstr ""
 
 #: ui/main.qml:77
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr "이 설정을 사용하지 않으면 성능을 개선할 수 있습니다."
+msgstr ""
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Action Drawer"
-msgstr "동작 서랍"
+msgstr ""
 
 #: ui/main.qml:94
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr "핀 모드"
+msgstr ""
 
 #: ui/main.qml:95
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "확장 모드"
+msgstr ""
 
 #: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
-msgstr "빠른 설정"
+msgstr ""
 
 #: ui/main.qml:107
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr "왼쪽 위 서랍 모드"
+msgstr ""
 
 #: ui/main.qml:108
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "왼쪽 위에서 열었을 때 모드입니다."
+msgstr ""
 
 #: ui/main.qml:133
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr "오른쪽 위 서랍 모드"
+msgstr ""
 
 #: ui/main.qml:134
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr "오른쪽 위에서 열었을 때 모드입니다."
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr "숨기기"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "표시"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr "풀다운 패널의 빠른 설정 순서를 변경하거나 숨길 수 있습니다."
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:99
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr "비활성화된 빠른 설정"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:104
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr "이전에 비활성화된 빠른 설정을 활성화합니다."
+msgstr ""
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "셸에 진동 단추를 활성화할지 여부입니다."
+msgstr ""
 
 #: ui/VibrationForm.qml:39
 #, kde-format
 msgid "Vibration Intensity"
-msgstr "진동 강도"
+msgstr ""
 
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr "셸 진동의 강도입니다."
+msgstr ""
 
 #: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "낮음"
+msgstr ""
 
 #: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "중간"
+msgstr ""
 
 #: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "높음"
+msgstr ""
 
 #: ui/VibrationForm.qml:70
 #, kde-format
 msgid "Vibration Duration"
-msgstr "진동 시간"
+msgstr ""
 
 #: ui/VibrationForm.qml:71
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "셸 진동의 지속 시간입니다."
+msgstr ""
 
 #: ui/VibrationForm.qml:73
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "길게"
+msgstr ""
 
 #: ui/VibrationForm.qml:74
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "중간"
+msgstr ""
 
 #: ui/VibrationForm.qml:75
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "짧게"
+msgstr ""
 
 #: ui/VibrationForm.qml:99
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr "키보드 진동은 키보드 설정 모듈에서 별도로 관리됩니다."
+msgstr ""
