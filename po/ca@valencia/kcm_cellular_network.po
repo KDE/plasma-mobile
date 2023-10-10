@@ -28,7 +28,8 @@ msgstr "S'ha produït un error en reiniciar el mòdem: %1"
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr ""
-"S'ha produït un error en actualitzar els paràmetres de connexió de %1: %2."
+"S'ha produït un error durant l'actualització dels paràmetres de connexió de "
+"%1: %2."
 
 #: modem.cpp:325
 #, kde-format
