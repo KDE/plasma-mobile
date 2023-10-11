@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-09-16 10:05\n"
+"PO-Revision-Date: 2023-10-10 14:24\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -617,11 +617,10 @@ msgid "View data usage."
 msgstr "查看流量使用情况。"
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
-msgstr[0] "SIM"
+msgstr[0] "SIM 卡"
 
 #: ui/main.qml:141
 #, kde-format
@@ -905,7 +904,7 @@ msgstr "添加 SIM 卡 PIN 码"
 msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
-msgstr ""
+msgstr "此 SIM 卡槽为空，必须插入一张 SIM 才能使用。"
 
 #: ui/SimPage.qml:58
 #, kde-format
@@ -991,9 +990,3 @@ msgstr "SIM 卡 ID"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "紧急电话号码"
-
-#~ msgid "SIMs"
-#~ msgstr "SIM 卡"
-
-#~ msgid "Modem Restart"
-#~ msgstr "调制解调器重启"
