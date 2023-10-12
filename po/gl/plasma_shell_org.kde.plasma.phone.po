@@ -39,7 +39,7 @@ msgstr "Complemento de fondos de pantalla"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
-msgstr "O complemento de fondo de pantalla para usar."
+msgstr "O complemento de fondo para usar."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
