@@ -33,13 +33,11 @@ Item {
     onContentItemChanged: {
         contentItem.parent = contentItemLoader;
         contentItem.anchors.fill = contentItemLoader;
-        contentItemLoader.children.push(contentItem);
     }
     
     onBackgroundChanged: {
         background.parent = backgroundLoader;
         background.anchors.fill = backgroundLoader;
-        backgroundLoader.children.push(background);
     }
     
     Item {
