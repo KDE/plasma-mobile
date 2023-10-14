@@ -30,6 +30,9 @@ RuntimeDependencies:
   'require':
     'plasma/plasma-nm': '@same'
     'plasma/plasma-pa': '@same'
+    'plasma/bluedevil': '@same'
+    'plasma/milou': '@same'
+    'plasma/qqc2-breeze-style': '@same'
     'frameworks/bluez-qt': '@latest-kf6'
 - 'on': ['Linux', 'FreeBSD']
   'require':
