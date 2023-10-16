@@ -97,9 +97,7 @@
         "Name[uk]": "Мобільна Плазма",
         "Name[x-test]": "xxPlasma Mobilexx",
         "Name[zh_CN]": "Plasma Mobile",
-        "Version": "0.1",
         "Website": "https://plasma-mobile.org"
     },
-    "X-KDE-ParentApp": "",
     "X-Plasma-FallbackPackage": "org.kde.plasma.nano"
 }

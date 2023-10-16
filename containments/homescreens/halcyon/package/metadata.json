@@ -100,14 +100,9 @@
         "Name[tr]": "Halikon",
         "Name[uk]": "Альціон",
         "Name[x-test]": "xxHalcyonxx",
-        "Name[zh_CN]": "Halcyon",
-        "Version": "",
-        "Website": ""
+        "Name[zh_CN]": "Halcyon"
     },
-    "Keywords": "",
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-ContainmentType": "Desktop",
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
     ]

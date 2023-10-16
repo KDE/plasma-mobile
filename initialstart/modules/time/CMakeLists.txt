@@ -28,6 +28,3 @@ install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma
 
 plasma_install_package(package org.kde.plasma.mobileinitialstart.time mobileinitialstart)
 
-
-
-

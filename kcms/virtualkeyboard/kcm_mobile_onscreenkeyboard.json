@@ -93,7 +93,6 @@
         "Name[uk]": "Екранна клавіатура",
         "Name[x-test]": "xxOn-Screen Keyboardxx",
         "Name[zh_CN]": "屏幕键盘",
-        "Version": "1.0",
         "Website": "https://plasma-mobile.org"
     },
     "X-KDE-Keywords": "onscreen,osk,virtualkeyboard,keyboard",

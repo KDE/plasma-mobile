@@ -90,7 +90,6 @@
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],
-        "Version": "0.1",
         "Website": "https://kde.org"
     }
 }

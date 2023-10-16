@@ -99,14 +99,9 @@
         "Name[tr]": "Folyo",
         "Name[uk]": "Фоліо",
         "Name[x-test]": "xxFolioxx",
-        "Name[zh_CN]": "Folio",
-        "Version": "",
-        "Website": ""
+        "Name[zh_CN]": "Folio"
     },
-    "Keywords": "",
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-ContainmentType": "Desktop",
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
     ]

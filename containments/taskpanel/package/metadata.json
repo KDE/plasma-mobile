@@ -107,12 +107,7 @@
         "Name[uk]": "Панель завдань телефону",
         "Name[x-test]": "xxPhone Task panelxx",
         "Name[zh_CN]": "手机任务面板",
-        "Name[zh_TW]": "手機工作列",
-        "Version": "",
-        "Website": ""
+        "Name[zh_TW]": "手機工作列"
     },
-    "Keywords": "",
-    "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-ContainmentType": "Panel",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-ContainmentType": "Panel"
 }
