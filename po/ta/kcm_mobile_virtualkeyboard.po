@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
 # gobinathal <gobinathal8@gmail.com>, 2021.
-# Kishore G <kishore96@gmail.com>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2023 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2022-06-30 21:38+0530\n"
+"PO-Revision-Date: 2023-10-15 12:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: ui/languages.qml:20
 #, kde-format
@@ -39,40 +39,36 @@ msgid "Type anything here…"
 msgstr "எதையாவது இங்கு தட்டச்சிடுங்கள்…"
 
 #: ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "பின்னூட்டம்:"
+msgstr "பின்னூட்டம்"
 
 #: ui/main.qml:46
 #, kde-format
 msgid "Sound"
-msgstr ""
+msgstr "ஒலி"
 
 #: ui/main.qml:47
-#, fuzzy, kde-format
-#| msgid "Emit sound on key press"
+#, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr "விசையழுத்துகையில் ஒலியெழுப்பு"
+msgstr "விசையழுத்துகையில் ஒலியெழுப்ப வேண்டுமா."
 
 #: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
-msgstr ""
+msgstr "அதிர்வு"
 
 #: ui/main.qml:57
-#, fuzzy, kde-format
-#| msgid "Vibrate on key press"
+#, kde-format
 msgid "Whether to vibrate on keypress."
-msgstr "விசையழுத்துகையில் அதிரச்செய்"
+msgstr "விசையழுத்துகையில் அதிரச்செய்ய வேண்டுமா."
 
 #: ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "உரை திருத்தம்:"
+msgstr "உரை திருத்தம்"
 
 #: ui/main.qml:71
 #, kde-format
