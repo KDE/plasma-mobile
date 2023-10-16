@@ -72,7 +72,7 @@ void QuickSettingsModel::loadQuickSettings()
     // loop through enabled quick settings metadata
     for (const auto &metaData : m_savedQuickSettings->enabledQuickSettingsModel()->list()) {
         // load kpackage
-        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData->fileName()).path());
+        KPackage::Package package = KPackage::PackageLoader::self()->loadPackage("KPackage/GenericQML", QFileInfo(metaData.fileName()).path());
         if (!package.isValid()) {
             continue;
         }

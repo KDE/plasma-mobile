@@ -42,9 +42,9 @@ private:
     void saveModel();
 
     QuickSettingsConfig *m_settings;
-    QList<KPluginMetaData *> m_validPackages;
-    QList<KPluginMetaData *> m_enabledPackages;
-    QList<KPluginMetaData *> m_disabledPackages;
+    QList<KPluginMetaData> m_validPackages;
+    QList<KPluginMetaData> m_enabledPackages;
+    QList<KPluginMetaData> m_disabledPackages;
 
     SavedQuickSettingsModel *m_enabledQSModel;
     SavedQuickSettingsModel *m_disabledQSModel;

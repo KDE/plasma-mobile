@@ -15,11 +15,11 @@ QVariant SavedQuickSettingsModel::data(const QModelIndex &index, int role) const
     }
 
     if (role == NameRole) {
-        return m_data[index.row()]->name();
+        return m_data[index.row()].name();
     } else if (role == IconRole) {
-        return m_data[index.row()]->iconName();
+        return m_data[index.row()].iconName();
     } else if (role == IdRole) {
-        return m_data[index.row()]->pluginId();
+        return m_data[index.row()].pluginId();
     }
     return QVariant();
 }
@@ -48,7 +48,7 @@ void SavedQuickSettingsModel::moveRow(int oldIndex, int newIndex)
     Q_EMIT dataUpdated(m_data);
 }
 
-void SavedQuickSettingsModel::insertRow(KPluginMetaData *metaData, int index)
+void SavedQuickSettingsModel::insertRow(KPluginMetaData metaData, int index)
 {
     Q_EMIT beginInsertRows(QModelIndex(), index, index);
     m_data.insert(index, metaData);
@@ -57,14 +57,14 @@ void SavedQuickSettingsModel::insertRow(KPluginMetaData *metaData, int index)
     Q_EMIT dataUpdated(m_data);
 }
 
-KPluginMetaData *SavedQuickSettingsModel::takeRow(int index)
+KPluginMetaData SavedQuickSettingsModel::takeRow(int index)
 {
     if (index < 0 || index >= m_data.size()) {
         return {};
     }
 
     Q_EMIT beginRemoveRows(QModelIndex(), index, index);
-    KPluginMetaData *tmp = m_data.takeAt(index);
+    KPluginMetaData tmp = m_data.takeAt(index);
     Q_EMIT endRemoveRows();
 
     Q_EMIT dataUpdated(m_data);
@@ -85,12 +85,12 @@ void SavedQuickSettingsModel::removeRow(int index)
     Q_EMIT dataUpdated(m_data);
 }
 
-QList<KPluginMetaData *> SavedQuickSettingsModel::list() const
+QList<KPluginMetaData> SavedQuickSettingsModel::list() const
 {
     return m_data;
 }
 
-void SavedQuickSettingsModel::updateData(QList<KPluginMetaData *> data)
+void SavedQuickSettingsModel::updateData(QList<KPluginMetaData> data)
 {
     Q_EMIT beginResetModel();
 
