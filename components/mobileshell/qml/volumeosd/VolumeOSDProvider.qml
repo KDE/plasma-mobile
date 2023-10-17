@@ -39,7 +39,7 @@ QtObject {
     }
 
     property var osd: VolumeOSD {
-        volume: component.audioInfo.volumeValue
+        audioInfo: component.audioInfo
     }
 
     property var actionCollection: VolumeLib.GlobalActionCollection {
