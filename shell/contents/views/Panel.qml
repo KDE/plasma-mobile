@@ -21,6 +21,11 @@ Rectangle {
         containment.parent = root;
         containment.visible = true;
         containment.anchors.fill = root;
+
+        // HACK: add PanelView into the containment so that it can be used
+        if (containment.panel !== undefined) {
+            containment.panel = panel;
+        }
     }
 
     Binding {
