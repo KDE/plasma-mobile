@@ -33,8 +33,10 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 
     return {
         {"Plugins", {{"blurEnabled", false}, {"convergentwindowsEnabled", true}}},
+        {"Windows", {{"Placement", convergenceModeEnabled ? "PlacementDefault" : "Maximizing"}}},
         {"Wayland", {{"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, {"VirtualKeyboardEnabled", true}}},
         {"org.kde.kdecoration2",
-         {{"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}}} // ButtonsOnRight changes depending on whether the device is in convergence mode
+         {{"NoPlugin", !convergenceModeEnabled},
+          {"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}}} // ButtonsOnRight changes depending on whether the device is in convergence mode
     };
 }
