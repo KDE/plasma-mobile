@@ -62,7 +62,7 @@ void DesktopModel::loadSettings()
     m_appOrder = m_applet->config().readEntry("AppOrder", QStringList());
 
     int i = 0;
-    for (const QString &app : qAsConst(m_appOrder)) {
+    for (const QString &app : std::as_const(m_appOrder)) {
         m_appPositions[app] = i;
         ++i;
     }
@@ -223,7 +223,7 @@ void DesktopModel::moveItem(int row, int destination)
     m_appOrder.clear();
     m_appPositions.clear();
     int i = 0;
-    for (const ApplicationData &app : qAsConst(m_applicationList)) {
+    for (const ApplicationData &app : std::as_const(m_applicationList)) {
         m_appOrder << app.uniqueId;
         m_appPositions[app.uniqueId] = i;
         ++i;

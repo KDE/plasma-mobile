@@ -30,7 +30,7 @@ void LanguageModel::loadPlugins()
         langPaths << it.next();
     }
     m_languages.clear();
-    for (const auto &langPath : qAsConst(langPaths)) {
+    for (const auto &langPath : std::as_const(langPaths)) {
         QPluginLoader langPlugin(langPath);
         const auto &metadata = langPlugin.metaData().value("MetaData").toObject();
         Data lang;
@@ -79,7 +79,7 @@ bool LanguageModel::setData(const QModelIndex &index, const QVariant &value, int
     }
 
     QStringList enabledLangs;
-    for (const auto &data : qAsConst(m_languages)) {
+    for (const auto &data : std::as_const(m_languages)) {
         if (data.enabled) {
             enabledLangs << data.langCode;
         }
