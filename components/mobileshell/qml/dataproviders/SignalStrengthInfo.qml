@@ -6,6 +6,8 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+pragma Singleton
+
 import QtQuick 2.1
 import org.kde.plasma.mm 1.0
 

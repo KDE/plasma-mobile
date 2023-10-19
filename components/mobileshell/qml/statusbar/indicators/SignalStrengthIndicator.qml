@@ -11,14 +11,11 @@ import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami as Kirigami
-
-import "../../dataproviders" as DataProviders
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Item {
     property InternetIndicator internetIndicator
-    
-    readonly property var provider: DataProviders.SignalStrengthInfo {}
-    
+        
     // check if the internet indicator icon is a mobile data related one
     readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')
     
@@ -35,10 +32,10 @@ Item {
         width: height
         height: parent.height
 
-        source: provider.icon
+        source: MobileShell.SignalStrengthInfo.icon
         
         // don't show mobile indicator icon if the networkmanager one is already showing
-        visible: !isInternetIndicatorMobileData && provider.showIndicator
+        visible: !isInternetIndicatorMobileData && MobileShell.SignalStrengthInfo.showIndicator
     }
     
     PlasmaComponents.Label {
@@ -49,7 +46,7 @@ Item {
         anchors.left: strengthIcon.right
         anchors.verticalCenter: parent.verticalCenter
 
-        text: provider.label
+        text: MobileShell.SignalStrengthInfo.label
         color: Kirigami.Theme.textColor
         font.pixelSize: textPixelSize
     }

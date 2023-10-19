@@ -18,9 +18,9 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 import "indicators" as Indicators
-import "../dataproviders" as DataProviders
 import "../components" as Components
 
 Item {
@@ -210,10 +210,8 @@ Item {
                 Item { Layout.fillWidth: true }
 
                 PlasmaComponents.Label {
-                    property var signalStrengthInfo: DataProviders.SignalStrengthInfo {}
-
                     visible: root.showTime
-                    text: signalStrengthInfo.label
+                    text: MobileShell.SignalStrengthInfo.label
                     color: Kirigami.Theme.disabledTextColor
                     font.pixelSize: root.smallerTextPixelSize
                     horizontalAlignment: Qt.AlignRight
