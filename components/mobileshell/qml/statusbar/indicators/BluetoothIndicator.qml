@@ -10,16 +10,12 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.bluezqt as BluezQt
-
-import "../../dataproviders" as DataProviders
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Kirigami.Icon {
     id: connectionIcon
     
-    readonly property var provider: DataProviders.BluetoothInfo {}
+    source: "network-bluetooth"
 
-    source: "network-bluetooth" // provider.icon
-
-    visible: provider.isVisible
+    visible: MobileShell.BluetoothInfo.isVisible
 }
