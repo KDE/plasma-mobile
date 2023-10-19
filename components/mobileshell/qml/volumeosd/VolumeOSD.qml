@@ -22,8 +22,6 @@ import "../dataproviders" as DataProviders
 NanoShell.FullScreenOverlay {
     id: window
 
-    required property var audioInfo
-
     // used by context menus opened in the applet to not autoclose the osd
     property bool suppressActiveClose: false
 
@@ -104,8 +102,8 @@ NanoShell.FullScreenOverlay {
                         anchors.rightMargin: Kirigami.Units.smallSpacing
 
                         PlasmaComponents.ToolButton {
-                            icon.name: !window.audioInfo.paSinkModel.preferredSink || window.audioInfo.paSinkModel.preferredSink.muted ? "audio-volume-muted" : "audio-volume-high"
-                            text: !window.audioInfo.paSinkModel.preferredSink || window.audioInfo.paSinkModel.preferredSink.muted ? i18n("Unmute") : i18n("Mute")
+                            icon.name: !MobileShell.AudioInfo.paSinkModel.preferredSink || MobileShell.AudioInfo.paSinkModel.preferredSink.muted ? "audio-volume-muted" : "audio-volume-high"
+                            text: !MobileShell.AudioInfo.paSinkModel.preferredSink || MobileShell.AudioInfo.paSinkModel.preferredSink.muted ? i18n("Unmute") : i18n("Mute")
                             display: Controls.AbstractButton.IconOnly
                             Layout.alignment: Qt.AlignVCenter
                             Layout.preferredWidth: Kirigami.Units.iconSizes.medium
@@ -119,9 +117,9 @@ NanoShell.FullScreenOverlay {
                             Layout.fillWidth: true
                             Layout.alignment: Qt.AlignVCenter
                             Layout.rightMargin: Kirigami.Units.smallSpacing * 2
-                            value: window.audioInfo.volumeValue
+                            value: MobileShell.AudioInfo.volumeValue
                             from: 0
-                            to: window.audioInfo.maxVolumePercent
+                            to: MobileShell.AudioInfo.maxVolumePercent
                             Behavior on value { NumberAnimation { duration: Kirigami.Units.shortDuration } }
                         }
 
@@ -139,7 +137,7 @@ NanoShell.FullScreenOverlay {
                             Layout.alignment: Qt.AlignVCenter
                             Layout.rightMargin: Kirigami.Units.smallSpacing
                             level: 3
-                            text: i18nc("Percentage value", "%1%", window.audioInfo.volumeValue)
+                            text: i18nc("Percentage value", "%1%", MobileShell.AudioInfo.volumeValue)
 
                             // Display a subtle visual indication that the volume might be
                             // dangerously high
@@ -147,9 +145,9 @@ NanoShell.FullScreenOverlay {
                             // Keep this in sync with the copies in plasma-pa:ListItemBase.qml
                             // and plasma-pa:VolumeSlider.qml
                             color: {
-                                if (window.audioInfo.volumeValue <= 100) {
+                                if (MobileShell.AudioInfo.volumeValue <= 100) {
                                     return Kirigami.Theme.textColor
-                                } else if (window.audioInfo.volumeValue > 100 && window.audioInfo.volumeValue <= 125) {
+                                } else if (MobileShell.AudioInfo.volumeValue > 100 && MobileShell.AudioInfo.volumeValue <= 125) {
                                     return Kirigami.Theme.neutralTextColor
                                 } else {
                                     return Kirigami.Theme.negativeTextColor
@@ -203,9 +201,6 @@ NanoShell.FullScreenOverlay {
                     Layout.topMargin: Kirigami.Units.gridUnit
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: cards.width
-
-                    audioInfo: window.audioInfo
-
                     opacity: window.showFullApplet ? 1 : 0
                     visible: opacity !== 0
                     transform: Translate {

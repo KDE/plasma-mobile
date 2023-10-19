@@ -11,8 +11,7 @@ import QtQuick.Layouts
 
 import org.kde.plasma.private.volume 0.1 as VolumeLib
 import org.kde.plasma.private.mobileshell.state as MobileShellState
-
-import "../dataproviders" as DataProviders
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 /**
  * This imports the volume OSD and also sets up keyboard/hardware button bindings.
@@ -24,10 +23,8 @@ QtObject {
         osd.showOverlay();
     }
 
-    property var audioInfo: DataProviders.AudioInfo {
-        onVolumeChanged: {
-            component.osd.showOverlay();
-        }
+    Component.onCompleted: {
+        MobileShell.AudioInfo.volumeChanged.connect(showVolumeOverlay);
     }
 
     property var apiListener: Connections {
@@ -38,9 +35,7 @@ QtObject {
         }
     }
 
-    property var osd: VolumeOSD {
-        audioInfo: component.audioInfo
-    }
+    property var osd: VolumeOSD {}
 
     property var actionCollection: VolumeLib.GlobalActionCollection {
         name: "kmix"
@@ -50,21 +45,21 @@ QtObject {
             objectName: "increase_volume"
             text: i18n("Increase Volume")
             shortcut: Qt.Key_VolumeUp
-            onTriggered: component.audioInfo.increaseVolume()
+            onTriggered: MobileShell.AudioInfo.increaseVolume()
         }
 
         VolumeLib.GlobalAction {
             objectName: "decrease_volume"
             text: i18n("Decrease Volume")
             shortcut: Qt.Key_VolumeDown
-            onTriggered: component.audioInfo.decreaseVolume()
+            onTriggered: MobileShell.AudioInfo.decreaseVolume()
         }
 
         VolumeLib.GlobalAction {
             objectName: "mute"
             text: i18n("Mute")
             shortcut: Qt.Key_VolumeMute
-            onTriggered: component.audioInfo.muteVolume()
+            onTriggered: MobileShell.AudioInfo.muteVolume()
         }
     }
 }

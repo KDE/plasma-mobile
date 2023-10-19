@@ -60,7 +60,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterType(resolvePath("components/VelocityCalculator.qml"), uri, 1, 0, "VelocityCalculator");
 
     // /dataproviders
-    qmlRegisterType(resolvePath("dataproviders/AudioInfo.qml"), uri, 1, 0, "AudioInfo");
+    qmlRegisterSingletonType(resolvePath("dataproviders/AudioInfo.qml"), uri, 1, 0, "AudioInfo");
     qmlRegisterType(resolvePath("dataproviders/BatteryInfo.qml"), uri, 1, 0, "BatteryInfo");
     qmlRegisterType(resolvePath("dataproviders/BluetoothInfo.qml"), uri, 1, 0, "BluetoothInfo");
     qmlRegisterType(resolvePath("dataproviders/SignalStrengthInfo.qml"), uri, 1, 0, "SignalStrengthInfo");

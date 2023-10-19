@@ -12,13 +12,12 @@ import QtQuick.Layouts
 import org.kde.plasma.private.volume 0.1
 import org.kde.kirigami as Kirigami
 
-import "../../dataproviders" as DataProviders
+import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
 Kirigami.Icon {
     id: paIcon
-    readonly property var provider: DataProviders.AudioInfo {}
     
-    source: provider.icon
+    source: MobileShell.AudioInfo.icon
 
-    visible: provider.isVisible
+    visible: MobileShell.AudioInfo.isVisible
 }
