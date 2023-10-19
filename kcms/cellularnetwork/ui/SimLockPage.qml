@@ -228,6 +228,6 @@ FormCard.FormCardPage {
                 }
             }
         }
-    }
+    ]
 }
 
