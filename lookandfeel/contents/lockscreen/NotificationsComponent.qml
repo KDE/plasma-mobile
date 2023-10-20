@@ -4,11 +4,10 @@
 import QtQuick
 import QtQuick.Layouts
 
-import org.kde.notificationmanager 1.1 as Notifications
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 import org.kde.kirigami as Kirigami
 
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.notificationmanager as NotificationManager
 
 Loader {
     id: root

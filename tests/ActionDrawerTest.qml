@@ -11,9 +11,8 @@ import QtQuick.Controls 2.15
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.notificationmanager 1.1 as Notifications
 
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.notificationmanager as NotificationManager
 
 // This is a test app to conveniently test the Quick Settings that are available
 // on the system without having to load a full Plasma Mobile shell.
@@ -67,7 +66,7 @@ ApplicationWindow {
         
         notificationSettings: NotificationManager.Settings {}
         notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
-        notificationModel: Notifications.WatchedNotificationsModel {}
+        notificationModel: NotificationManager.WatchedNotificationsModel {}
     }
     
     PC3.Label {

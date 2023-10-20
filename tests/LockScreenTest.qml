@@ -6,9 +6,6 @@ import QtQuick.Controls 2.15
 
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.notificationmanager 1.1 as Notifications
-
-import org.kde.notificationmanager 1.0 as NotificationManager
 
 import "../lookandfeel/contents/lockscreen" as LockScreen
 

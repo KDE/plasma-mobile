@@ -7,7 +7,7 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.notificationmanager 1.1 as Notifications
+import org.kde.notificationmanager as Notifications
 
 import org.kde.kirigami 2.12 as Kirigami
 

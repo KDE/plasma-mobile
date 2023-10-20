@@ -10,7 +10,7 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell 1.0 as MobileShell
 
-import org.kde.notificationmanager 1.0 as NotificationManager
+import org.kde.notificationmanager as NotificationManager
 
 Item {
     id: root
