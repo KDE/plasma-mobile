@@ -125,17 +125,17 @@ BaseNotificationItem {
                     Layout.topMargin: Kirigami.Units.smallSpacing
                     Layout.bottomMargin: Kirigami.Units.smallSpacing
 
-                    visible: iconItem.active
+                    visible: iconItem.shouldBeShown
 
                     Kirigami.Icon {
                         id: iconItem
                         // don't show two identical icons
-                        readonly property bool active: valid && source != notificationItem.applicationIconSource
+                        readonly property bool shouldBeShown: valid && source != notificationItem.applicationIconSource
                         anchors.fill: parent
                         smooth: true
                         // don't show a generic "info" icon since this is a notification already
                         source: notificationItem.icon !== "dialog-information" ? notificationItem.icon : ""
-                        visible: active
+                        visible: shouldBeShown
                     }
                 }
             }
