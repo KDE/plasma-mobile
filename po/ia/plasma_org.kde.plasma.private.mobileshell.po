@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:41+0000\n"
+"POT-Creation-Date: 2023-10-21 01:39+0000\n"
 "PO-Revision-Date: 2023-01-27 12:30+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -128,38 +128,38 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Nomine de fluxo (stream) non trovate"
 
-#: qml/volumeosd/VolumeOSD.qml:112
+#: qml/volumeosd/VolumeOSD.qml:108
 #, kde-format
 msgid "Unmute"
 msgstr "Non silente"
 
-#: qml/volumeosd/VolumeOSD.qml:112 qml/volumeosd/VolumeOSDProvider.qml:65
+#: qml/volumeosd/VolumeOSD.qml:108 qml/volumeosd/VolumeOSDProvider.qml:65
 #, kde-format
 msgid "Mute"
 msgstr "Mute"
 
-#: qml/volumeosd/VolumeOSD.qml:136
+#: qml/volumeosd/VolumeOSD.qml:132
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:146
+#: qml/volumeosd/VolumeOSD.qml:142
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:166
+#: qml/volumeosd/VolumeOSD.qml:162
 #, kde-format
 msgid "Open audio settings"
 msgstr "Aperi preferentias de audio"
 
-#: qml/volumeosd/VolumeOSD.qml:179
+#: qml/volumeosd/VolumeOSD.qml:175
 #, kde-format
 msgid "Audio Settings"
 msgstr "Preferentias de audio"
 
-#: qml/volumeosd/VolumeOSD.qml:186
+#: qml/volumeosd/VolumeOSD.qml:182
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Commuta monstrar fluxo audio"
