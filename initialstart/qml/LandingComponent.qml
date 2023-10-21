@@ -93,10 +93,10 @@ Item {
         anchors.right: parent.right
         anchors.margins: Kirigami.Units.gridUnit
 
-        topPadding: Kirigami.Units.gridUnit
-        bottomPadding: Kirigami.Units.gridUnit
-        leftPadding: Kirigami.Units.gridUnit
-        rightPadding: Kirigami.Units.gridUnit
+        topPadding: Kirigami.Units.largeSpacing
+        bottomPadding: Kirigami.Units.largeSpacing
+        leftPadding: Kirigami.Units.largeSpacing
+        rightPadding: Kirigami.Units.largeSpacing
 
         opacity: root.contentOpacity
         text: i18n("Next")

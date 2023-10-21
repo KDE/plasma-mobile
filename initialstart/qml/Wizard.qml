@@ -288,10 +288,10 @@ Kirigami.Page {
                     Layout.leftMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.gridUnit
-                    bottomPadding: Kirigami.Units.gridUnit
-                    leftPadding: Kirigami.Units.gridUnit
-                    rightPadding: Kirigami.Units.gridUnit
+                    topPadding: Kirigami.Units.largeSpacing
+                    bottomPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.largeSpacing
+                    rightPadding: Kirigami.Units.largeSpacing
 
                     text: i18n("Back")
                     icon.name: "arrow-left"
@@ -306,10 +306,10 @@ Kirigami.Page {
                     Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.gridUnit
-                    bottomPadding: Kirigami.Units.gridUnit
-                    leftPadding: Kirigami.Units.gridUnit
-                    rightPadding: Kirigami.Units.gridUnit
+                    topPadding: Kirigami.Units.largeSpacing
+                    bottomPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.largeSpacing
+                    rightPadding: Kirigami.Units.largeSpacing
 
                     visible: !root.onFinalPage
                     text: i18n("Next")
@@ -323,10 +323,10 @@ Kirigami.Page {
                     Layout.rightMargin: Kirigami.Units.gridUnit
                     Layout.bottomMargin: Kirigami.Units.gridUnit
 
-                    topPadding: Kirigami.Units.gridUnit
-                    bottomPadding: Kirigami.Units.gridUnit
-                    leftPadding: Kirigami.Units.gridUnit
-                    rightPadding: Kirigami.Units.gridUnit
+                    topPadding: Kirigami.Units.largeSpacing
+                    bottomPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.largeSpacing
+                    rightPadding: Kirigami.Units.largeSpacing
 
                     visible: root.onFinalPage
                     text: i18n("Finish")
