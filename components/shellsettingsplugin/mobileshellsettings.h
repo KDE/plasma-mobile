@@ -9,6 +9,7 @@
 #include <KConfigGroup>
 #include <KConfigWatcher>
 #include <KSharedConfig>
+#include <QDBusConnection>
 #include <QObject>
 
 /**
@@ -179,6 +180,8 @@ Q_SIGNALS:
     void convergenceModeEnabledChanged();
 
 private:
+    void updateNavigationBarsInPlasma(bool navigationPanelEnabled);
+
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;
 };

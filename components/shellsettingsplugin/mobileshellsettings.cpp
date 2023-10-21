@@ -9,6 +9,10 @@
 #include <KIO/CommandLauncherJob>
 #include <KNotificationJobUiDelegate>
 #include <KPluginFactory>
+
+#include <QDBusConnection>
+#include <QDBusMessage>
+#include <QDBusPendingCall>
 #include <QDebug>
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
@@ -105,6 +109,8 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
     m_config->sync();
+
+    updateNavigationBarsInPlasma(navigationPanelEnabled);
 }
 
 bool MobileShellSettings::taskSwitcherPreviewsEnabled() const
@@ -163,4 +169,37 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
     job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
     job->start();
+}
+
+void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)
+{
+    auto message = QDBusMessage::createMethodCall(QLatin1String("org.kde.plasmashell"),
+                                                  QLatin1String("/PlasmaShell"),
+                                                  QLatin1String("org.kde.PlasmaShell"),
+                                                  QLatin1String("evaluateScript"));
+
+    if (navigationPanelEnabled) {
+        QString createNavigationPanelScript = R"(
+            var bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
+            bottomPanel.location = "bottom";
+            bottomPanel.height = 2 * gridUnit;
+        )";
+
+        message << createNavigationPanelScript;
+
+    } else {
+        QString deleteNavigationPanelScript = R"(
+            let allPanels = panels();
+            for (var i = 0; i < allPanels.length; i++) {
+                if (allPanels[i].type === "org.kde.plasma.mobile.taskpanel") {
+                    allPanels[i].remove();
+                }
+            }
+        )";
+
+        message << deleteNavigationPanelScript;
+    }
+
+    // TODO check for error response
+    QDBusConnection::sessionBus().asyncCall(message);
 }

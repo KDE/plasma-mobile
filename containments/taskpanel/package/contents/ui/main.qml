@@ -28,28 +28,14 @@ ContainmentItem {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
-    // toggle visibility of navigation bar (show, or use gestures only)
-    Binding {
-        target: root.panel // assumed to be plasma-workspace "PanelView" component
-        property: "visibilityMode"
-        // 0 - VisibilityMode.NormalPanel
-        // 2 - VisibilityMode.LetWindowsCover HACK: TODO one day we delete the panel component instead of making it invisible in gesture-only mode
-        value: ShellSettings.Settings.navigationPanelEnabled ? 0 : 2
-    }
-
-    // we have the following scenarios:
-    // - system is in landscape orientation & nav panel is enabled (panel on right)
-    // - system is in landscape orientation & gesture mode is enabled (panel on bottom)
-    // - system is in portrait orientation (panel on bottom)
     readonly property bool inLandscape: Screen.width > Screen.height;
-    readonly property bool isInLandscapeNavPanelMode: inLandscape && ShellSettings.Settings.navigationPanelEnabled
 
     readonly property real navigationPanelHeight: Kirigami.Units.gridUnit * 2
 
     readonly property real intendedWindowThickness: navigationPanelHeight
-    readonly property real intendedWindowLength: isInLandscapeNavPanelMode ? Screen.height : Screen.width
-    readonly property real intendedWindowOffset: isInLandscapeNavPanelMode ? MobileShell.Constants.topPanelHeight : 0; // offset for top panel
-    readonly property int intendedWindowLocation: isInLandscapeNavPanelMode ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
+    readonly property real intendedWindowLength: inLandscape ? Screen.height : Screen.width
+    readonly property real intendedWindowOffset: inLandscape ? MobileShell.Constants.topPanelHeight : 0; // offset for top panel
+    readonly property int intendedWindowLocation: inLandscape ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
     onIntendedWindowLocationChanged: locationChangeTimer.restart()
@@ -121,13 +107,9 @@ ContainmentItem {
         Kirigami.Theme.inherit: false
 
         // load appropriate system navigation component
-        Loader {
-            id: navigationLoader
-            active: ShellSettings.Settings.navigationPanelEnabled
+        NavigationPanelComponent {
             anchors.fill: parent
-            sourceComponent: NavigationPanelComponent {
-                opaqueBar: root.opaqueBar
-            }
+            opaqueBar: root.opaqueBar
         }
     }
 }
