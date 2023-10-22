@@ -106,6 +106,20 @@ void FolioSettings::setShowFavouritesBarBackground(bool showFavouritesBarBackgro
     }
 }
 
+FolioSettings::PageTransitionEffect FolioSettings::pageTransitionEffect() const
+{
+    return m_pageTransitionEffect;
+}
+
+void FolioSettings::setPageTransitionEffect(PageTransitionEffect pageTransitionEffect)
+{
+    if (m_pageTransitionEffect != pageTransitionEffect) {
+        m_pageTransitionEffect = pageTransitionEffect;
+        Q_EMIT pageTransitionEffectChanged();
+        save();
+    }
+}
+
 void FolioSettings::setApplet(Plasma::Applet *applet)
 {
     m_applet = applet;
@@ -123,6 +137,7 @@ void FolioSettings::save()
     m_applet->config().writeEntry("showFavouritesAppLabels", m_showFavouritesAppLabels);
     m_applet->config().writeEntry("delegateIconSize", m_delegateIconSize);
     m_applet->config().writeEntry("showFavouritesBarBackground", m_showFavouritesBarBackground);
+    m_applet->config().writeEntry("pageTransitionEffect", (int)m_pageTransitionEffect);
 
     Q_EMIT m_applet->configNeedsSaving();
 }
@@ -139,6 +154,7 @@ void FolioSettings::load()
     m_showFavouritesAppLabels = m_applet->config().readEntry("showFavoritesAppLabels", false);
     m_delegateIconSize = m_applet->config().readEntry("delegateIconSize", 48);
     m_showFavouritesBarBackground = m_applet->config().readEntry("showFavoritesBarBackground", true);
+    m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_applet->config().readEntry("pageTransitionEffect", (int)SlideTransition));
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
@@ -196,6 +212,9 @@ bool FolioSettings::loadLayoutFromFile(QString path)
     // TODO error checking
     FavouritesModel::self()->loadFromJson(obj[QStringLiteral("Favourites")].toArray());
     PageListModel::self()->loadFromJson(obj[QStringLiteral("Pages")].toArray());
+
+    FavouritesModel::self()->save();
+    PageListModel::self()->save();
 
     return true;
 }

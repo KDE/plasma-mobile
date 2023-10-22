@@ -128,7 +128,7 @@ Kirigami.ApplicationWindow {
             }
 
             FormCard.FormHeader {
-                title: i18n("Labels")
+                title: i18n("Homescreen")
             }
 
             FormCard.FormCard {
@@ -154,6 +154,30 @@ Kirigami.ApplicationWindow {
                             Folio.FolioSettings.showFavouritesAppLabels = checked;
                         }
                     }
+                }
+
+                FormCard.FormDelegateSeparator { above: showLabelsInFavourites; below: pageTransitionCombobox }
+
+                FormCard.FormComboBoxDelegate {
+                    id: pageTransitionCombobox
+                    text: i18n("Page transition effect")
+
+                    currentIndex: indexOfValue(Folio.FolioSettings.pageTransitionEffect)
+                    model: ListModel {
+                        // we can't use i18n with ListElement
+                        Component.onCompleted: {
+                            append({"name": i18n("Slide"), "value": Folio.FolioSettings.SlideTransition});
+                            append({"name": i18n("Cube"), "value": Folio.FolioSettings.CubeTransition});
+
+                            // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                            pageTransitionCombobox.currentIndex = pageTransitionCombobox.indexOfValue(Folio.FolioSettings.pageTransitionEffect)
+                        }
+                    }
+
+                    textRole: "name"
+                    valueRole: "value"
+
+                    onCurrentValueChanged: Folio.FolioSettings.pageTransitionEffect = currentValue
                 }
             }
 

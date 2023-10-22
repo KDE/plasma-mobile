@@ -16,11 +16,20 @@ class FolioSettings : public QObject
     Q_PROPERTY(bool showFavouritesAppLabels READ showFavouritesAppLabels WRITE setShowFavouritesAppLabels NOTIFY showFavouritesAppLabelsChanged)
     Q_PROPERTY(int delegateIconSize READ delegateIconSize WRITE setDelegateIconSize NOTIFY delegateIconSizeChanged)
     Q_PROPERTY(bool showFavouritesBarBackground READ showFavouritesBarBackground WRITE setShowFavouritesBarBackground NOTIFY showFavouritesBarBackgroundChanged)
+    Q_PROPERTY(
+        FolioSettings::PageTransitionEffect pageTransitionEffect READ pageTransitionEffect WRITE setPageTransitionEffect NOTIFY pageTransitionEffectChanged)
 
 public:
     FolioSettings(QObject *parent = nullptr);
 
     static FolioSettings *self();
+
+    // ensure that existing enum values are the same when modifying, since this value is saved
+    enum PageTransitionEffect {
+        SlideTransition = 0,
+        CubeTransition = 1,
+    };
+    Q_ENUM(PageTransitionEffect)
 
     // number of rows and columns in the config for the homescreen
     // NOTE: use HomeScreenState.pageRows() instead in UI logic since we may have the rows and
@@ -43,6 +52,9 @@ public:
     bool showFavouritesBarBackground() const;
     void setShowFavouritesBarBackground(bool showFavouritesBarBackground);
 
+    PageTransitionEffect pageTransitionEffect() const;
+    void setPageTransitionEffect(PageTransitionEffect pageTransitionEffect);
+
     Q_INVOKABLE void load();
 
     Q_INVOKABLE bool saveLayoutToFile(QString path);
@@ -57,6 +69,7 @@ Q_SIGNALS:
     void showFavouritesAppLabelsChanged();
     void delegateIconSizeChanged();
     void showFavouritesBarBackgroundChanged();
+    void pageTransitionEffectChanged();
 
 private:
     void save();
@@ -67,6 +80,7 @@ private:
     bool m_showFavouritesAppLabels{false};
     qreal m_delegateIconSize{48};
     bool m_showFavouritesBarBackground{false};
+    PageTransitionEffect m_pageTransitionEffect{SlideTransition};
 
     Plasma::Applet *m_applet{nullptr};
 };

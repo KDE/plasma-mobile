@@ -35,12 +35,29 @@ MouseArea {
             anchors.bottomMargin: root.verticalMargin
 
             // animation so that full opacity is only when the page is in view
-            opacity: 1 - Math.min(1, Math.max(0, Math.abs(-Folio.HomeScreenState.pageViewX - root.width * pageNum) / root.width))
+            readonly property real distanceToCenter: Math.abs(-Folio.HomeScreenState.pageViewX - root.width * pageNum)
+            readonly property real positionX: root.width * index + Folio.HomeScreenState.pageViewX
+
+            opacity: 1 - Math.min(1, Math.max(0, distanceToCenter / root.width))
 
             // x position of page
-            transform: Translate {
-                x: root.width * index + Folio.HomeScreenState.pageViewX
-            }
+            transform: [
+                Translate {
+                    x: homeScreenPage.positionX
+                },
+                Rotation {
+                    origin.x: Folio.HomeScreenState.pageWidth / 2;
+                    origin.y: Folio.HomeScreenState.pageHeight / 2;
+                    axis { x: 0; y: 1; z: 0 }
+                    angle: {
+                        if (Folio.FolioSettings.pageTransitionEffect !== Folio.FolioSettings.CubeTransition) {
+                            return 0;
+                        }
+
+                        return Math.min(1, Math.max(0, distanceToCenter / root.width)) * 90 * ((positionX > 0) ? 1 : -1)
+                    }
+                }
+            ]
         }
     }
 }
