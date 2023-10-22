@@ -68,23 +68,6 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormHeader {
-            title: i18n("Task Switcher")
-        }
-
-        FormCard.FormCard {
-            FormCard.FormSwitchDelegate {
-                text: i18n("Show Application Previews")
-                description: i18n("Turning this off may help improve performance.")
-                checked: ShellSettings.Settings.taskSwitcherPreviewsEnabled
-                onCheckedChanged: {
-                    if (checked != ShellSettings.Settings.taskSwitcherPreviewsEnabled) {
-                        ShellSettings.Settings.taskSwitcherPreviewsEnabled = checked;
-                    }
-                }
-            }
-        }
-
-        FormCard.FormHeader {
             title: i18n("Action Drawer")
         }
 

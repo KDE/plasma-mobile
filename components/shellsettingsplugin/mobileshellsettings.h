@@ -30,9 +30,6 @@ class MobileShellSettings : public QObject
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
 
-    // task switcher
-    Q_PROPERTY(bool taskSwitcherPreviewsEnabled READ taskSwitcherPreviewsEnabled WRITE setTaskSwitcherPreviewsEnabled NOTIFY taskSwitcherPreviewsEnabledChanged)
-
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
     Q_PROPERTY(ActionDrawerMode actionDrawerTopRightMode READ actionDrawerTopRightMode WRITE setActionDrawerTopRightMode NOTIFY actionDrawerTopRightModeChanged)
@@ -118,18 +115,6 @@ public:
      * @param navigationPanelEnabled Whether the navigation panel should be enabled.
      */
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
-
-    /**
-     * Whether task switcher application previews are enabled.
-     */
-    bool taskSwitcherPreviewsEnabled() const;
-
-    /**
-     * Set whether task switcher application previews are enabled.
-     *
-     * @param taskSwitcherPreviewsEnabled Whether task switcher previews are enabled.
-     */
-    void setTaskSwitcherPreviewsEnabled(bool taskSwitcherPreviewsEnabled);
 
     /**
      * The mode of the action drawer when swiped down from the top left.

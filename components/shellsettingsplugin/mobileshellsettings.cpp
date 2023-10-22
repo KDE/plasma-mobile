@@ -113,19 +113,6 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     updateNavigationBarsInPlasma(navigationPanelEnabled);
 }
 
-bool MobileShellSettings::taskSwitcherPreviewsEnabled() const
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("taskSwitcherPreviewsEnabled", true);
-}
-
-void MobileShellSettings::setTaskSwitcherPreviewsEnabled(bool taskSwitcherPreviewsEnabled)
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    group.writeEntry("taskSwitcherPreviewsEnabled", taskSwitcherPreviewsEnabled, KConfigGroup::Notify);
-    m_config->sync();
-}
-
 MobileShellSettings::ActionDrawerMode MobileShellSettings::actionDrawerTopLeftMode() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
