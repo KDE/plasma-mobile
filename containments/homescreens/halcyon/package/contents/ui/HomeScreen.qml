@@ -110,7 +110,7 @@ Item {
                 
                 anchors.fill: parent
 
-                property int horizontalMargin: Math.round(swipeView.width  * 0.05)
+                property int horizontalMargin: Math.round(swipeView.width * 0.05)
                 interactive: root.interactive
                 leftMargin: horizontalMargin
                 rightMargin: horizontalMargin

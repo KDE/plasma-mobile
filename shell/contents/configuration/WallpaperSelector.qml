@@ -46,9 +46,10 @@ Controls.Drawer {
         keyNavigationEnabled: true
         highlightFollowsCurrentItem: true
         snapMode: ListView.SnapToItem
-        model: imageWallpaper.wallpaperModel
-        onCountChanged: currentIndex =  Math.min(model.indexOf(configDialog.wallpaperConfiguration["Image"]), model.rowCount()-1)
+        model: imageWallpaper.slidePaths
+        // onCountChanged: currentIndex =  Math.min(model.indexOf(configDialog.wallpaperConfiguration["Image"]), model.rowCount()-1)
         headerPositioning: ListView.PullBackHeader
+
         delegate: Controls.ItemDelegate {
             width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
             height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : parent.height

@@ -23,7 +23,7 @@ class SwipeArea : public QQuickItem
 {
     Q_OBJECT
     Q_PROPERTY(SwipeArea::Mode mode READ mode WRITE setMode NOTIFY modeChanged)
-    Q_PROPERTY(bool interactive READ interactive NOTIFY interactiveChanged)
+    Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
     Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged)
 
@@ -35,12 +35,16 @@ public:
     enum Mode { BothAxis = 0, VerticalOnly, HorizontalOnly };
     Q_ENUM(Mode)
 
-    Mode mode();
+    Mode mode() const;
     void setMode(Mode mode);
 
-    bool interactive();
-    bool moving();
-    bool pressed();
+    bool interactive() const;
+    void setInteractive(bool interactive);
+
+    bool moving() const;
+    bool pressed() const;
+
+    Q_INVOKABLE void setSkipSwipeThreshold(bool value);
 
 Q_SIGNALS:
     void modeChanged();
@@ -65,7 +69,6 @@ protected:
     void touchUngrabEvent() override;
 
 private:
-    void setInteractive(bool interactive);
     void setMoving(bool moving);
     void setPressed(bool pressed);
 
@@ -95,6 +98,9 @@ private:
 
     // the previous point where interaction was at
     QPointF m_lastPos;
+
+    // whether to skip trying to measure the swipe threshold
+    bool m_skipSwipeThreshold;
 };
 
 QML_DECLARE_TYPE(SwipeArea)

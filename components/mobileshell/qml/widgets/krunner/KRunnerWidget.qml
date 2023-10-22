@@ -202,7 +202,7 @@ Item {
                     Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
                     highlight: activeFocus ? highlightComponent : null
-                    Component{
+                    Component {
                         id: highlightComponent
 
                         PlasmaExtras.Highlight {}

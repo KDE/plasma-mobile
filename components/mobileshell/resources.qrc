@@ -67,6 +67,7 @@
         <file>qml/statusbar/StatusBar.qml</file>
         <file>qml/statusbar/TaskWidget.qml</file>
         
+        <file>qml/widgets/krunner/KRunnerScreen.qml</file>
         <file>qml/widgets/krunner/KRunnerWidget.qml</file>
         
         <file>qml/widgets/mediacontrols/BlurredBackground.qml</file>

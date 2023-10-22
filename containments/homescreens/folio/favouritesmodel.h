@@ -1,0 +1,80 @@
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#include <QObject>
+
+#include <QAbstractListModel>
+#include <QList>
+#include <QObject>
+#include <QQuickItem>
+#include <QSet>
+
+#include <Plasma/Applet>
+
+#include "foliodelegate.h"
+
+struct FavouritesDelegate {
+    FolioDelegate *delegate;
+    qreal xPosition;
+};
+
+class FavouritesModel : public QAbstractListModel
+{
+    Q_OBJECT
+
+public:
+    enum Roles {
+        DelegateRole = Qt::UserRole + 1,
+        XPositionRole,
+    };
+
+    FavouritesModel(QObject *parent = nullptr);
+    static FavouritesModel *self();
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    QHash<int, QByteArray> roleNames() const override;
+
+    Q_INVOKABLE void removeEntry(int row);
+    void moveEntry(int fromRow, int toRow);
+    bool addEntry(int row, FolioDelegate *delegate);
+    FolioDelegate *getEntryAt(int row);
+
+    // for use with drag and drop, as the delegate is dragged around
+    // ghost - fake delegate exists at an index, so a gap is created
+    // invisible - existing delegate looks like it doesn't exist
+    int getGhostEntryPosition();
+    void setGhostEntry(int row);
+    void replaceGhostEntry(FolioDelegate *delegate);
+    void deleteGhostEntry();
+
+    // whether the position given is in between 2 delegates, or at the edge.
+    // this would return false if dropping should place the delegate into a folder/create a folder.
+    bool dropPositionIsEdge(qreal x, qreal y) const;
+
+    // the index that dropping at the position given would place the delegate at.
+    int dropInsertPosition(qreal x, qreal y) const;
+
+    QPointF getDelegateScreenPosition(int position) const;
+
+    Q_INVOKABLE void load();
+
+    void setApplet(Plasma::Applet *applet);
+
+private:
+    void save();
+    void evaluateDelegatePositions(bool emitSignal = true);
+
+    // get the x (or y) position where delegates start being placed
+    qreal getDelegateRowStartPos() const;
+
+    // adjusts the index in relation to the page orientation
+    // this is so that we only have to calculate positions assuming one orientation
+    int adjustIndex(int index) const;
+
+    QList<FavouritesDelegate> m_delegates;
+
+    Plasma::Applet *m_applet{nullptr};
+};

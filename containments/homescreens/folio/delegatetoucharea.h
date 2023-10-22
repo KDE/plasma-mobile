@@ -1,0 +1,81 @@
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#include <QQuickItem>
+#include <QTimer>
+#include <Qt>
+
+/**
+ * @short A component that is similar to MouseArea but allows for a
+ * simpler tracking of dragging movements after pressing and holding.
+ *
+ * @author Devin Lin <devin@kde.org>
+ */
+class DelegateTouchArea : public QQuickItem
+{
+    Q_OBJECT
+
+    Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged FINAL)
+    Q_PROPERTY(bool hovered READ hovered NOTIFY hoveredChanged FINAL)
+    Q_PROPERTY(bool dragging READ dragging NOTIFY draggingChanged FINAL)
+    Q_PROPERTY(Qt::CursorShape cursorShape READ cursorShape WRITE setCursorShape RESET unsetCursor NOTIFY cursorShapeChanged FINAL)
+
+    QML_NAMED_ELEMENT(DelegateTouchArea)
+
+public:
+    DelegateTouchArea(QQuickItem *parent = nullptr);
+
+    bool pressed();
+    bool hovered();
+    bool dragging();
+    Qt::CursorShape cursorShape();
+    void setCursorShape(Qt::CursorShape cursorShape);
+    void unsetCursor();
+
+Q_SIGNALS:
+    void clicked();
+    void rightMousePress();
+    void pressAndHold();
+    void pressAndHoldReleased();
+    void drag(qreal x, qreal y);
+    void pressedChanged(bool pressed);
+    void hoveredChanged(bool hovered);
+    void draggingChanged(bool dragging);
+    void cursorShapeChanged();
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseUngrabEvent() override;
+    void touchEvent(QTouchEvent *event) override;
+    void touchUngrabEvent() override;
+    void hoverEnterEvent(QHoverEvent *event) override;
+    void hoverLeaveEvent(QHoverEvent *event) override;
+    // bool childMouseEventFilter(QQuickItem *i, QEvent *e) override;
+
+private Q_SLOTS:
+    void startPressAndHold();
+
+private:
+    // bool filterPointerEvent(QQuickItem *receiver, QPointerEvent *event);
+    void setPressed(bool pressed);
+    void setHovered(bool hovered);
+    void setDragging(bool dragging);
+
+    void handlePressEvent(QPointerEvent *event, QPointF point);
+    void handleReleaseEvent(QPointerEvent *event, bool click);
+    void handleMoveEvent(QPointerEvent *event, QPointF point);
+
+    bool m_pressed{false};
+    bool m_hovered{false};
+    bool m_dragging{false};
+    bool m_pressAndHeld{false};
+    Qt::CursorShape m_cursorShape{Qt::ArrowCursor};
+
+    QTimer *m_pressAndHoldTimer{nullptr};
+};
+
+QML_DECLARE_TYPE(DelegateTouchArea)

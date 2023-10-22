@@ -81,6 +81,7 @@ void MobileShellPlugin::registerTypes(const char *uri)
     qmlRegisterSingletonType(resolvePath("volumeosd/VolumeOSDProviderLoader.qml"), uri, 1, 0, "VolumeOSDProviderLoader");
 
     // /widgets
+    qmlRegisterType(resolvePath("widgets/krunner/KRunnerScreen.qml"), uri, 1, 0, "KRunnerScreen");
     qmlRegisterType(resolvePath("widgets/krunner/KRunnerWidget.qml"), uri, 1, 0, "KRunnerWidget");
     qmlRegisterType(resolvePath("widgets/mediacontrols/MediaControlsWidget.qml"), uri, 1, 0, "MediaControlsWidget");
     qmlRegisterType(resolvePath("widgets/notifications/NotificationsWidget.qml"), uri, 1, 0, "NotificationsWidget");

@@ -4,7 +4,17 @@
 set(folioplugin_SRCS
     folioplugin.cpp
     applicationlistmodel.cpp
-    desktopmodel.cpp
+    homescreenstate.cpp
+    windowlistener.cpp
+    favouritesmodel.cpp
+    folioapplication.cpp
+    folioapplicationfolder.cpp
+    foliodelegate.cpp
+    foliosettings.cpp
+    pagemodel.cpp
+    pagelistmodel.cpp
+    delegatetoucharea.cpp
+    dragstate.cpp
 )
 
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/mobile/homescreen/folio)
@@ -26,4 +36,3 @@ target_link_libraries(folioplugin
 
 set_property(TARGET folioplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/private/mobile/homescreen/folio)
 install(TARGETS folioplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/private/mobile/homescreen/folio)
-

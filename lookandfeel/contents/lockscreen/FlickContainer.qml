@@ -70,7 +70,7 @@ MobileShell.SwipeArea {
     }
 
     onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
-        position = Math.max(0, Math.min(keypadHeight, position + deltaY));
+        position = Math.max(0, Math.min(keypadHeight, position - deltaY));
     }
 }
 
