@@ -644,7 +644,7 @@ QPointF HomeScreenState::getFavouritesDelegateScreenPosition(int position)
 
 QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
 {
-    if (!m_currentFolder) {
+    if (!m_currentFolder || position < 0 || position >= m_currentFolder->applications()->rowCount()) {
         return {0, 0};
     }
     auto pos = m_currentFolder->applications()->getDelegatePosition(position);

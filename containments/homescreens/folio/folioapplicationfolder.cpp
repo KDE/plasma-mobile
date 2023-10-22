@@ -265,6 +265,9 @@ void ApplicationFolderModel::removeDelegate(int index)
 
 QPointF ApplicationFolderModel::getDelegatePosition(int index)
 {
+    if (index < 0 || index >= m_folder->m_delegates.size()) {
+        return {0, 0};
+    }
     auto delegate = m_folder->m_delegates[index];
     return {delegate.xPosition, delegate.yPosition};
 }

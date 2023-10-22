@@ -94,16 +94,22 @@ bool PageListModel::isLastPageEmpty()
     return m_pages.size() == 0 ? true : m_pages[m_pages.size() - 1]->isPageEmpty();
 }
 
+QJsonArray PageListModel::exportToJson()
+{
+    QJsonArray arr;
+    for (auto &page : m_pages) {
+        arr.push_back(page->toJson());
+    }
+    return arr;
+}
+
 void PageListModel::save()
 {
     if (!m_applet) {
         return;
     }
 
-    QJsonArray arr;
-    for (auto &page : m_pages) {
-        arr.push_back(page->toJson());
-    }
+    QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
     m_applet->config().writeEntry("Pages", QString::fromStdString(data.toStdString()));
@@ -117,12 +123,16 @@ void PageListModel::load()
     }
 
     QJsonDocument doc = QJsonDocument::fromJson(m_applet->config().readEntry("Pages", "{}").toUtf8());
+    loadFromJson(doc.array());
+}
 
+void PageListModel::loadFromJson(QJsonArray arr)
+{
     beginResetModel();
 
     m_pages.clear();
 
-    for (QJsonValueRef r : doc.array()) {
+    for (QJsonValueRef r : arr) {
         QJsonArray obj = r.toArray();
 
         PageModel *page = PageModel::fromJson(obj, this);

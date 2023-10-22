@@ -212,12 +212,8 @@ void FavouritesModel::deleteGhostEntry()
     }
 }
 
-void FavouritesModel::save()
+QJsonArray FavouritesModel::exportToJson()
 {
-    if (!m_applet) {
-        return;
-    }
-
     QJsonArray arr;
     for (int i = 0; i < m_delegates.size(); i++) {
         FolioDelegate *delegate = m_delegates[i].delegate;
@@ -229,6 +225,16 @@ void FavouritesModel::save()
 
         arr.append(delegate->toJson());
     }
+    return arr;
+}
+
+void FavouritesModel::save()
+{
+    if (!m_applet) {
+        return;
+    }
+
+    QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
     m_applet->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
@@ -242,12 +248,16 @@ void FavouritesModel::load()
     }
 
     QJsonDocument doc = QJsonDocument::fromJson(m_applet->config().readEntry("Favourites", "{}").toUtf8());
+    loadFromJson(doc.array());
+}
 
+void FavouritesModel::loadFromJson(QJsonArray arr)
+{
     beginResetModel();
 
     m_delegates.clear();
 
-    for (QJsonValueRef r : doc.array()) {
+    for (QJsonValueRef r : arr) {
         QJsonObject obj = r.toObject();
         FolioDelegate *delegate = FolioDelegate::fromJson(obj, this);
 

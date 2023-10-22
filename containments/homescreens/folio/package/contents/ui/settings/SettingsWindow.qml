@@ -4,6 +4,7 @@
 import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
+import QtQuick.Dialogs
 import QtQuick.Controls as QQC2
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -178,6 +179,7 @@ Kirigami.ApplicationWindow {
             }
 
             FormCard.FormCard {
+                Layout.bottomMargin: Kirigami.Units.gridUnit
                 FormCard.FormButtonDelegate {
                     id: containmentSettings
                     text: i18n('Switch Homescreen')
@@ -189,20 +191,73 @@ Kirigami.ApplicationWindow {
 
                 FormCard.FormButtonDelegate {
                     id: exportSettings
-                    enabled: false
-                    text: 'Export layout (in development)'
+                    text: i18n('Export layout')
                     icon.name: 'document-export'
+                    onClicked: exportFileDialog.open()
                 }
 
                 FormCard.FormDelegateSeparator { above: exportSettings; below: importSettings }
 
                 FormCard.FormButtonDelegate {
                     id: importSettings
-                    enabled: false
-                    text: 'Import layout (in development)'
+                    text: i18n('Import layout')
                     icon.name: 'document-import'
+                    onClicked: importFileDialog.open()
                 }
             }
+        }
+
+        FileDialog {
+            id: exportFileDialog
+            title: i18n("Export layout to")
+            currentFolder: StandardPaths.standardLocations(StandardPaths.DownloadsLocation)
+            fileMode: FileDialog.SaveFile
+            defaultSuffix: 'json'
+            nameFilters: ["JSON files (*.json)"]
+            onAccepted: {
+                console.log('saving layout to ' + selectedFile);
+                if (selectedFile) {
+                    let status = Folio.FolioSettings.saveLayoutToFile(selectedFile);
+                    if (status) {
+                        exportedSuccessfullyPrompt.open();
+                    } else {
+                        exportFailedPrompt.open();
+                    }
+                }
+            }
+        }
+
+        FileDialog {
+            id: importFileDialog
+            currentFolder: StandardPaths.standardLocations(StandardPaths.DownloadsLocation)
+            fileMode: FileDialog.OpenFile
+            nameFilters: ["JSON files (*.json)"]
+            onAccepted: {
+                console.log('about to load layout from ' + selectedFile);
+                confirmImportPrompt.open();
+            }
+        }
+
+        Kirigami.PromptDialog {
+            id: exportFailedPrompt
+            title: i18n("Export Status")
+            subtitle: i18n("Failed to export to %1", String(exportFileDialog.selectedFile).substring('file://'.length))
+            standardButtons: Kirigami.Dialog.Close
+        }
+
+        Kirigami.PromptDialog {
+            id: exportedSuccessfullyPrompt
+            title: i18n("Export Status")
+            subtitle: i18n("Homescreen layout exported successfully to %1", String(exportFileDialog.selectedFile).substring('file://'.length))
+            standardButtons: Kirigami.Dialog.Close
+        }
+
+        Kirigami.PromptDialog {
+            id: confirmImportPrompt
+            title: i18n("Confirm Import")
+            subtitle: i18n("This will overwrite your existing homescreen layout!")
+            standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
+            onAccepted: Folio.FolioSettings.loadLayoutFromFile(importFileDialog.selectedFile);
         }
     }
 }

@@ -33,8 +33,10 @@ public:
     Q_INVOKABLE void addPageAtEnd();
     bool isLastPageEmpty();
 
+    QJsonArray exportToJson();
     void save();
     Q_INVOKABLE void load();
+    void loadFromJson(QJsonArray arr);
 
     void setApplet(Plasma::Applet *applet);
 

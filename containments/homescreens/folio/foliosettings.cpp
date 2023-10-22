@@ -2,6 +2,13 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "foliosettings.h"
+#include "favouritesmodel.h"
+#include "pagelistmodel.h"
+
+#include <QFile>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QTextStream>
 
 FolioSettings::FolioSettings(QObject *parent)
     : QObject{parent}
@@ -138,4 +145,57 @@ void FolioSettings::load()
     Q_EMIT showPagesAppLabels();
     Q_EMIT showFavouritesAppLabelsChanged();
     Q_EMIT delegateIconSizeChanged();
+}
+
+bool FolioSettings::saveLayoutToFile(QString path)
+{
+    if (path.startsWith(QStringLiteral("file://"))) {
+        path = path.replace(QStringLiteral("file://"), QString());
+    }
+
+    QJsonArray favourites = FavouritesModel::self()->exportToJson();
+    QJsonArray pages = PageListModel::self()->exportToJson();
+
+    QJsonObject obj;
+    obj[QStringLiteral("Favourites")] = favourites;
+    obj[QStringLiteral("Pages")] = pages;
+
+    QByteArray data = QJsonDocument(obj).toJson(QJsonDocument::Compact);
+
+    QFile file{path};
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        file.write(data);
+    } else {
+        qDebug() << "failed to write to file:" << file.errorString();
+        return false;
+    }
+    file.close();
+
+    return true;
+}
+
+bool FolioSettings::loadLayoutFromFile(QString path)
+{
+    if (path.startsWith(QStringLiteral("file://"))) {
+        path = path.replace(QStringLiteral("file://"), QString());
+    }
+
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly)) {
+        qDebug() << "failed to open file:" << file.errorString();
+        return false;
+    }
+
+    QTextStream in(&file);
+    QString contents = in.readAll();
+    file.close();
+
+    QJsonDocument doc = QJsonDocument::fromJson(contents.toUtf8());
+    QJsonObject obj = doc.object();
+
+    // TODO error checking
+    FavouritesModel::self()->loadFromJson(obj[QStringLiteral("Favourites")].toArray());
+    PageListModel::self()->loadFromJson(obj[QStringLiteral("Pages")].toArray());
+
+    return true;
 }

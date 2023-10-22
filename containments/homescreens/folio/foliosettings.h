@@ -45,6 +45,9 @@ public:
 
     Q_INVOKABLE void load();
 
+    Q_INVOKABLE bool saveLayoutToFile(QString path);
+    Q_INVOKABLE bool loadLayoutFromFile(QString path);
+
     Q_INVOKABLE void setApplet(Plasma::Applet *applet);
 
 Q_SIGNALS:

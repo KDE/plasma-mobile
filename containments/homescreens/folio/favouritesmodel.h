@@ -59,12 +59,14 @@ public:
 
     QPointF getDelegateScreenPosition(int position) const;
 
+    QJsonArray exportToJson();
+    void save();
     Q_INVOKABLE void load();
+    void loadFromJson(QJsonArray arr);
 
     void setApplet(Plasma::Applet *applet);
 
 private:
-    void save();
     void evaluateDelegatePositions(bool emitSignal = true);
 
     // get the x (or y) position where delegates start being placed
