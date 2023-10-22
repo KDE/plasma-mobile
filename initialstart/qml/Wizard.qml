@@ -64,8 +64,8 @@ Kirigami.Page {
     }
 
     function finishFinalPage() {
+        // the app exits
         InitialStart.Wizard.wizardFinished();
-        applicationWindow().close();
     }
 
     function requestNextPage() {

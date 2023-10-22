@@ -96,4 +96,5 @@ QList<QQuickItem *> Wizard::steps()
 void Wizard::wizardFinished()
 {
     Settings::self()->setWizardFinished();
+    QCoreApplication::quit();
 }
