@@ -13,7 +13,7 @@ import org.kde.kirigami 2.10 as Kirigami
 
 import "./delegate"
 
-Item {
+MouseArea {
     id: root
 
     property var homeScreen
@@ -23,6 +23,8 @@ Item {
     property real topMargin
 
     signal delegateDragRequested(var item)
+
+    onPressAndHold: Folio.HomeScreenState.openSettingsView()
 
     Repeater {
         model: Folio.FavouritesModel
