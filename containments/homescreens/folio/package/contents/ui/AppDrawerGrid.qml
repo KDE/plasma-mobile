@@ -23,7 +23,6 @@ MobileShell.GridView {
 
     property var homeScreen
 
-
     readonly property int reservedSpaceForLabel: Folio.HomeScreenState.pageDelegateLabelHeight
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     readonly property real horizontalMargin: Math.round(width * 0.05)
@@ -53,7 +52,9 @@ MobileShell.GridView {
         }
 
         function onAppDrawerGridYChanged(y) {
-            root.contentY = Math.max(0, root.contentY - y);
+            const maxContentY = Math.max(0, root.contentHeight - root.height);
+            const minContentY = 0;
+            root.contentY = Math.min(maxContentY, Math.max(minContentY, root.contentY - y));
             velocityCalculator.changePosition(root.contentY);
         }
 
