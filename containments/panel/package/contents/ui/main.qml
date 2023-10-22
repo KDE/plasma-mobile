@@ -24,15 +24,18 @@ ContainmentItem {
     id: root
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
+    // filled in by the shell (Panel.qml) with the plasma-workspace PanelView
+    property var panel: null
+
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingApp: WindowPlugin.WindowMaximizedTracker.showingWindow
     readonly property color backgroundColor: topPanel.colorScopeColor
 
     // enforce thickness
     Binding {
-        target: Plasmoid.Window.window // assumed to be plasma-workspace "PanelView" component
+        target: panel // assumed to be plasma-workspace "PanelView" component
         property: "thickness"
-        value: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+        value: MobileShell.Constants.topPanelHeight
     }
 
 //BEGIN API implementation
