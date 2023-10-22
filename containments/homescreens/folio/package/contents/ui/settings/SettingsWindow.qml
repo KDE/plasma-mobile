@@ -210,7 +210,6 @@ Kirigami.ApplicationWindow {
         FileDialog {
             id: exportFileDialog
             title: i18n("Export layout to")
-            currentFolder: StandardPaths.standardLocations(StandardPaths.DownloadsLocation)
             fileMode: FileDialog.SaveFile
             defaultSuffix: 'json'
             nameFilters: ["JSON files (*.json)"]
@@ -229,7 +228,6 @@ Kirigami.ApplicationWindow {
 
         FileDialog {
             id: importFileDialog
-            currentFolder: StandardPaths.standardLocations(StandardPaths.DownloadsLocation)
             fileMode: FileDialog.OpenFile
             nameFilters: ["JSON files (*.json)"]
             onAccepted: {
