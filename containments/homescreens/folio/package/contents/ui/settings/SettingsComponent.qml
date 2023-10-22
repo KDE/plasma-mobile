@@ -69,7 +69,11 @@ Item {
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
 
-                onClicked: settingsWindow.showMaximized()
+                onClicked: {
+                    // ensure that if the window is already opened, it gets raised to the top
+                    settingsWindow.hide();
+                    settingsWindow.showMaximized();
+                }
             }
 
             QQC2.ToolButton {
