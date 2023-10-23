@@ -37,6 +37,7 @@ MouseArea {
             // animation so that full opacity is only when the page is in view
             readonly property real distanceToCenter: Math.abs(-Folio.HomeScreenState.pageViewX - root.width * pageNum)
             readonly property real positionX: root.width * index + Folio.HomeScreenState.pageViewX
+            readonly property real progressToCenter: 1 - Math.min(1, Math.max(0, distanceToCenter / root.width))
 
             opacity: 1 - Math.min(1, Math.max(0, distanceToCenter / root.width))
 
@@ -46,7 +47,9 @@ MouseArea {
                     x: homeScreenPage.positionX
                 },
                 Rotation {
-                    origin.x: Folio.HomeScreenState.pageWidth / 2;
+                    origin.x: (positionX < 0) ?
+                                (Folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
+                                (Folio.HomeScreenState.pageWidth / 2) + (Folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
                     origin.y: Folio.HomeScreenState.pageHeight / 2;
                     axis { x: 0; y: 1; z: 0 }
                     angle: {
