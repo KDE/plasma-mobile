@@ -28,6 +28,9 @@ public:
     enum PageTransitionEffect {
         SlideTransition = 0,
         CubeTransition = 1,
+        FadeTransition = 2,
+        StackTransition = 3,
+        RotationTransition = 4,
     };
     Q_ENUM(PageTransitionEffect)
 

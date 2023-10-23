@@ -168,6 +168,9 @@ Kirigami.ApplicationWindow {
                         Component.onCompleted: {
                             append({"name": i18n("Slide"), "value": Folio.FolioSettings.SlideTransition});
                             append({"name": i18n("Cube"), "value": Folio.FolioSettings.CubeTransition});
+                            append({"name": i18n("Fade"), "value": Folio.FolioSettings.FadeTransition});
+                            append({"name": i18n("Stack"), "value": Folio.FolioSettings.StackTransition});
+                            append({"name": i18n("Rotation"), "value": Folio.FolioSettings.RotationTransition});
 
                             // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
                             pageTransitionCombobox.currentIndex = pageTransitionCombobox.indexOfValue(Folio.FolioSettings.pageTransitionEffect)
