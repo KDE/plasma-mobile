@@ -51,20 +51,22 @@ Item {
             anchors.centerIn: parent
             spacing: Kirigami.Units.largeSpacing
 
-            QQC2.ToolButton {
-                icon.source: 'edit-image'
+            PC3.ToolButton {
                 text: i18n('Wallpapers')
                 enabled: false
-                display: QQC2.ToolButton.TextUnderIcon
+                display: PC3.ToolButton.TextUnderIcon
+
+                icon.name: 'edit-image'
 
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
             }
 
-            QQC2.ToolButton {
-                icon.source: 'settings-configure'
+            PC3.ToolButton {
                 text: ('Settings')
-                display: QQC2.ToolButton.TextUnderIcon
+                display: PC3.ToolButton.TextUnderIcon
+
+                icon.name: 'settings-configure'
 
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
@@ -76,11 +78,12 @@ Item {
                 }
             }
 
-            QQC2.ToolButton {
-                icon.source: 'widget-alternatives'
+            PC3.ToolButton {
                 text: 'Widgets'
                 enabled: false
-                display: QQC2.ToolButton.TextUnderIcon
+                display: PC3.ToolButton.TextUnderIcon
+
+                icon.name: 'widget-alternatives'
 
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
