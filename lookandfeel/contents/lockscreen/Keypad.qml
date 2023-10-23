@@ -177,12 +177,16 @@ Rectangle {
                         Kirigami.Icon {
                             visible: modelData === "R"
                             anchors.centerIn: parent
+                            width: Kirigami.Units.iconSizes.small
+                            height: Kirigami.Units.iconSizes.small
                             source: "edit-clear"
                         }
 
                         Kirigami.Icon {
                             visible: modelData === "E"
                             anchors.centerIn: parent
+                            width: Kirigami.Units.iconSizes.small
+                            height: Kirigami.Units.iconSizes.small
                             source: "go-next"
                         }
                     }

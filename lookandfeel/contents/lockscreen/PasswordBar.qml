@@ -210,22 +210,26 @@ Rectangle {
             
             ListView {
                 id: dotDisplay
-                property int dotWidth: Math.round(Kirigami.Units.gridUnit * 0.35)
+
+                property int dotWidth: 6
                 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.bottomMargin: Math.round(dotWidth / 2)
-                orientation: ListView.Horizontal
+
+                implicitHeight: dotWidth
                 implicitWidth: count * dotWidth + spacing * (count - 1)
+
+                orientation: ListView.Horizontal
                 spacing: 8
                 model: dotDisplayModel
                 
                 Behavior on implicitWidth {
                     NumberAnimation { duration: 50 }
                 }
-                
+
                 delegate: Item {
-                    implicitWidth: dotDisplay.dotWidth
-                    implicitHeight: dotDisplay.dotWidth
+                    width: dotDisplay.dotWidth
+                    height: dotDisplay.dotWidth
                     property bool showChar: index === root.previewCharIndex
                     
                     Component.onCompleted: {

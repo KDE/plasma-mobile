@@ -58,8 +58,6 @@ Item {
 
     Item {
         anchors.fill: parent
-        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-        Kirigami.Theme.inherit: false
 
         // header bar and action drawer
         Loader {
@@ -124,7 +122,7 @@ Item {
                 onPasswordRequested: flickable.goToOpenPosition()
 
                 anchors.top: parent.top
-                anchors.bottom: scrollUpIconLoader.top
+                anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
 
@@ -147,7 +145,7 @@ Item {
 
                 anchors.topMargin: headerBarLoader.statusBarHeight
                 anchors.top: parent.top
-                anchors.bottom: scrollUpIconLoader.top
+                anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
 
@@ -160,17 +158,40 @@ Item {
                 id: scrollUpIconLoader
                 asynchronous: true
 
+                property real animationY: 0
+                readonly property real fullYOffset: Kirigami.Units.largeSpacing
+
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
+                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5 + scrollUpIconLoader.animationY
                 anchors.horizontalCenter: parent.horizontalCenter
+
+                // animate it going up and down
+                NumberAnimation on animationY {
+                    id: animateUpAndDown
+                    running: true
+                    duration: 800
+                    easing.type: Easing.InCubic
+                    to: scrollUpIconLoader.fullYOffset
+
+                    onFinished: {
+                        if (scrollUpIconLoader.animationY === scrollUpIconLoader.fullYOffset) {
+                            to = 0;
+                            easing.type = Easing.OutCubic;
+                        } else {
+                            to = scrollUpIconLoader.fullYOffset;
+                            easing.type = Easing.InCubic;
+                        }
+                        restart();
+                    }
+                }
 
                 sourceComponent: Kirigami.Icon {
                     id: scrollUpIcon
-                    implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                    implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                    implicitWidth: Kirigami.Units.iconSizes.small
+                    implicitHeight: Kirigami.Units.iconSizes.small
                     opacity: 1 - flickable.openFactor
 
-                    Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                     source: "arrow-up"
                 }
             }
@@ -213,9 +234,9 @@ Item {
                     Kirigami.Icon {
                         Layout.alignment: Qt.AlignHCenter
                         Layout.bottomMargin: Kirigami.Units.gridUnit
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        Kirigami.Theme.colorSet: Kirigami.Theme.ComplementaryColorGroup
+                        implicitWidth: Kirigami.Units.iconSizes.small
+                        implicitHeight: Kirigami.Units.iconSizes.small
+                        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                         source: "arrow-down"
                         opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
                     }
