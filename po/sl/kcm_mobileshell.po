@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-09-23 09:32+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -60,57 +60,42 @@ msgstr "Ali naj se skrije krmilna plošča."
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Preklopnik opravil"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Prikaži predogled aplikacij"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "Izklop tega bi lahko izboljšalo hitrost."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Predal aktivnosti"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Pripeti način"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Razširjeni način"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Hitre nastavitve"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Način zgornjega levega predala"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Način z odpiranjem zgoraj levo."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Način zgornjega desnega predala"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Način z odpiranjem zgoraj desno."
@@ -211,3 +196,12 @@ msgid ""
 "module."
 msgstr ""
 "Vibracije tipkovnice so nadzorovane posebej v modulu nastavitev tipkovnice."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Preklopnik opravil"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Prikaži predogled aplikacij"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "Izklop tega bi lahko izboljšalo hitrost."

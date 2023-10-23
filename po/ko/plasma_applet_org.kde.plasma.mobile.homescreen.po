@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2021-11-12 01:24+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,12 +17,122 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 21.08.1\n"
 
-#: package/contents/ui/appdrawer/AppDrawerHeader.qml:38
+#: dragstate.cpp:14
+#, kde-format
+msgid "Folder"
+msgstr ""
+
+#: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
 msgid "Applications"
 msgstr "앱"
 
-#: package/contents/ui/private/ConfigOverlay.qml:100
+#: package/contents/ui/FavouritesBar.qml:144
+#: package/contents/ui/FavouritesBar.qml:216
+#: package/contents/ui/FolderView.qml:267
+#: package/contents/ui/HomeScreenPage.qml:160
+#: package/contents/ui/HomeScreenPage.qml:233
 #, kde-format
 msgid "Remove"
 msgstr "삭제"
+
+#: package/contents/ui/settings/SettingsWindow.qml:43
+#, kde-format
+msgid "Homescreen Settings"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:52
+#, kde-format
+msgid "Icons"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:83
+#, kde-format
+msgid "Number of rows"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:84
+#, kde-format
+msgid "Number of columns"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:88
+#, kde-format
+msgid "Size of icons on homescreen"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:127
+#, kde-format
+msgid "The rows and columns will swap depending on the screen rotation."
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:131
+#, kde-format
+msgid "Homescreen"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:137
+#, kde-format
+msgid "Show labels on homescreen"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:150
+#, kde-format
+msgid "Show labels in favorites bar"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:163
+#, kde-format
+msgid "Page transition effect"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:169
+#, kde-format
+msgid "Slide"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:170
+#, kde-format
+msgid "Cube"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:185
+#, kde-format
+msgid "Favorites Bar"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:202
+#, kde-format
+msgid "General"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:236
+#, kde-format
+msgid "Export layout to"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:265
+#: package/contents/ui/settings/SettingsWindow.qml:272
+#, kde-format
+msgid "Export Status"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:266
+#, kde-format
+msgid "Failed to export to %1"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:273
+#, kde-format
+msgid "Homescreen layout exported successfully to %1"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:279
+#, kde-format
+msgid "Confirm Import"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:280
+#, kde-format
+msgid "This will overwrite your existing homescreen layout!"
+msgstr ""

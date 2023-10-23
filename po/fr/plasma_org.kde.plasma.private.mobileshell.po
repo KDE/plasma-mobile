@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:06+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2022-12-27 18:07+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -176,6 +176,7 @@ msgstr "Augmenter le volume"
 msgid "Decrease Volume"
 msgstr "Diminuer le volume"
 
+#: qml/widgets/krunner/KRunnerScreen.qml:82
 #: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"

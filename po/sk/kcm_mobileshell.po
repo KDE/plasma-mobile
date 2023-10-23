@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-07-23 18:09+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -58,57 +58,42 @@ msgstr "Či sa má skryť navigačný panel."
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Prepínač úloh"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Zobraziť náhľady aplikácií"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "Vypnutie tejto funkcie môže pomôcť zlepšiť výkon."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Ťahania akcií"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Režim pripnutia"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Rozšírený režim"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rýchle nastavenia"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Režim ťahania zľava hore"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Režim pri otvorení z ľavého horného rohu."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Režim ťahania sprava hore"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Režim pri otvorení z pravého horného rohu."
@@ -210,3 +195,12 @@ msgid ""
 "module."
 msgstr ""
 "Vibrácie klávesnice sa ovládajú samostatne v module nastavení klávesnice."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Prepínač úloh"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Zobraziť náhľady aplikácií"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "Vypnutie tejto funkcie môže pomôcť zlepšiť výkon."

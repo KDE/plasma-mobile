@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:06+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -178,6 +178,7 @@ msgstr "Zvýšiť hlasitosť"
 msgid "Decrease Volume"
 msgstr "Znížiť hlasitosť"
 
+#: qml/widgets/krunner/KRunnerScreen.qml:82
 #: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"

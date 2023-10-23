@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-03-15 11:50+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -59,57 +59,42 @@ msgstr "Dolaşım panelinin gizlenip gizlenmeyeceği."
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Görev Değiştirici"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Uygulama Önizlemelerini Göster"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "Bunu kapatmak başarımı artırmaya yardımcı olabilir."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Eylem Çekmecesi"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Sabitlenmiş Kip"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Genişletilmiş Kip"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Tez Ayarlar"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Sol Üst Çekmece Kipi"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Sol üstten açıldığı zamanki kip."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Sağ Üst Çekmece Kipi"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Sağ üstten açıldığı zamanki kip."
@@ -210,3 +195,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Klavye titreşimleri, klavye ayarları modülünden ayrıca denetlenir."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Görev Değiştirici"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Uygulama Önizlemelerini Göster"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "Bunu kapatmak başarımı artırmaya yardımcı olabilir."

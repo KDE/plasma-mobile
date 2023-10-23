@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-09-23 08:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -61,57 +61,42 @@ msgstr "Ĉu kaŝi la navigadan panelon."
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Taskŝanĝilo"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Montri Aplikajn Antaŭrigardojn"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "Malŝalti ĉi tion povas helpi plibonigi rendimenton."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Ago-Kesto"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Alpinglita Reĝimo"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Vastigita Reĝimo"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rapidaj Agordoj"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Supra Maldekstra Kesto-Reĝimo"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Reĝimo malfermante de la supro maldekstre."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Supra Dekstra Kesto-Reĝimo"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Reĝimo malfermante de supre dekstre."
@@ -212,3 +197,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Klavaraj vibroj estas regataj aparte en la klavar-agorda modulo."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Taskŝanĝilo"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Montri Aplikajn Antaŭrigardojn"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "Malŝalti ĉi tion povas helpi plibonigi rendimenton."

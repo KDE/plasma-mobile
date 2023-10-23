@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-09-24 18:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -60,57 +60,42 @@ msgstr "Визначає, чи слід ховати панель навігац
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Перемикання задач"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Показувати перегляди програм"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "Вимикання може підвищити швидкодію."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Висувна панель дій"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Пришпилений режим"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Розширений режим"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Швидке налаштовування"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Режим верхньої лівої висувної панелі"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Режим відкриття від верхнього лівого кута."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Режим верхньої правої висувної панелі"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Режим відкриття від верхнього правого кута."
@@ -214,3 +199,12 @@ msgid ""
 msgstr ""
 "Керування вібраціями клавіатури виконується окремо у модулі параметрів "
 "клавіатури."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Перемикання задач"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Показувати перегляди програм"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "Вимикання може підвищити швидкодію."

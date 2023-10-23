@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-09-23 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -60,57 +60,42 @@ msgstr "ნავიგაციის პანელის დამალვ�
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "ამოცანების გადამრთველი"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "აპლიკაციების მინიატურების ჩვენება"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr "ამისმა გამორთვამ შეიძლება წარმადობას უშველოს."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "ქმედებების უჯრა"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "მიჭიკარტებული  რეჟიმი"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "გაფართოებული რეჟიმი"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "სწრაფი მორგება"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "ზედა მარცხენა უჯრის რეჟიმი"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "ზედა მარცხენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "ზედა მარჯვენა უჯრის რეჟიმი"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "ზედა მარჯვენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
@@ -212,3 +197,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "კლავიატურის ვიბრაცია ცალკე, კლავიატურის მორგების მოდულში კონტროლდება."
+
+#~ msgid "Task Switcher"
+#~ msgstr "ამოცანების გადამრთველი"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "აპლიკაციების მინიატურების ჩვენება"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr "ამისმა გამორთვამ შეიძლება წარმადობას უშველოს."

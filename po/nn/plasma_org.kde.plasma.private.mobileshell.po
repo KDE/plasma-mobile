@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:06+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-02-23 19:21+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -181,6 +181,7 @@ msgstr "Høgare lyd"
 msgid "Decrease Volume"
 msgstr "Lågare lyd"
 
+#: qml/widgets/krunner/KRunnerScreen.qml:82
 #: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"

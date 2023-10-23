@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-09-24 18:00+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -61,58 +61,42 @@ msgstr "Si celar le pannello de navigation"
 
 #: ui/main.qml:71
 #, kde-format
-msgid "Task Switcher"
-msgstr "Commutator de carga"
-
-#: ui/main.qml:76
-#, kde-format
-msgid "Show Application Previews"
-msgstr "Monstra Vistas preliminar de applicationes"
-
-#: ui/main.qml:77
-#, kde-format
-msgid "Turning this off may help improve performance."
-msgstr ""
-"Poner isto a off (dishabilitar lo) pote ajutar a meliorar prestationes."
-
-#: ui/main.qml:88
-#, kde-format
 msgid "Action Drawer"
 msgstr "Designator de action"
 
-#: ui/main.qml:94
+#: ui/main.qml:77
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modo attachate"
 
-#: ui/main.qml:95
+#: ui/main.qml:78
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modo expandite"
 
-#: ui/main.qml:99 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Preferentias rapide"
 
-#: ui/main.qml:107
+#: ui/main.qml:90
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modo de designator a sinistra in alto"
 
-#: ui/main.qml:108
+#: ui/main.qml:91
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modo quando aperir ex le sinistra in alto."
 
-#: ui/main.qml:133
+#: ui/main.qml:116
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modo de designator a dextera in alto"
 
-#: ui/main.qml:134
+#: ui/main.qml:117
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modo quando aperir ex le dextera in alto."
@@ -216,3 +200,13 @@ msgid ""
 msgstr ""
 "Vibrationes de claviero es controlate separatemente inle modulo de "
 "preferentias de claviero."
+
+#~ msgid "Task Switcher"
+#~ msgstr "Commutator de carga"
+
+#~ msgid "Show Application Previews"
+#~ msgstr "Monstra Vistas preliminar de applicationes"
+
+#~ msgid "Turning this off may help improve performance."
+#~ msgstr ""
+#~ "Poner isto a off (dishabilitar lo) pote ajutar a meliorar prestationes."

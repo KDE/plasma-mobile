@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-22 02:06+0000\n"
+"POT-Creation-Date: 2023-10-23 01:41+0000\n"
 "PO-Revision-Date: 2023-01-04 19:25+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -182,6 +182,7 @@ msgstr "Igo bolumena"
 msgid "Decrease Volume"
 msgstr "Jaitsi bolumena"
 
+#: qml/widgets/krunner/KRunnerScreen.qml:82
 #: qml/widgets/krunner/KRunnerWidget.qml:183
 #, kde-format
 msgid "Search…"
