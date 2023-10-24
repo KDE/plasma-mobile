@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-23 01:41+0000\n"
-"PO-Revision-Date: 2022-04-07 08:33+0300\n"
+"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"PO-Revision-Date: 2023-10-23 16:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -21,7 +21,7 @@ msgstr ""
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Тека"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -40,100 +40,116 @@ msgstr "Вилучити"
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Параметри домашньої сторінки"
 
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Піктограми"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Кількість рядків"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Кількість стовпчиків"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Розмір піктограм на домашній сторінці"
 
 #: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "Рядки і стовпчики мінятимуться місцями, залежно від обертання екрана."
 
 #: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Домашня сторінка"
 
 #: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Показувати мітки на домашньому екрані"
 
 #: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Показувати мітки на панелі улюбленого"
 
 #: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Ефект переходу між сторінками"
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Ковзання"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
+msgstr "Куб"
+
+#: package/contents/ui/settings/SettingsWindow.qml:171
+#, kde-format
+msgid "Fade"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:185
+#: package/contents/ui/settings/SettingsWindow.qml:172
+#, kde-format
+msgid "Stack"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:173
+#, kde-format
+msgid "Rotation"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Панель улюблених"
 
-#: package/contents/ui/settings/SettingsWindow.qml:202
+#: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Загальне"
 
-#: package/contents/ui/settings/SettingsWindow.qml:236
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Експортувати компонування до"
 
-#: package/contents/ui/settings/SettingsWindow.qml:265
-#: package/contents/ui/settings/SettingsWindow.qml:272
+#: package/contents/ui/settings/SettingsWindow.qml:268
+#: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Стан експортування"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "Не вдалося експортувати до %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:273
+#: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "Компонування домашньої сторінки успішно експортовано до %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:279
+#: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Підтвердження імпортування"
 
-#: package/contents/ui/settings/SettingsWindow.qml:280
+#: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""
+"У результаті буде перезаписано ваше наявне компонування домашньої сторінки!"

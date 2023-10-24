@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-23 01:41+0000\n"
+"POT-Creation-Date: 2023-10-24 01:42+0000\n"
 "PO-Revision-Date: 2022-05-28 01:02+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -97,43 +97,58 @@ msgstr ""
 msgid "Cube"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:185
+#: package/contents/ui/settings/SettingsWindow.qml:171
+#, kde-format
+msgid "Fade"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:172
+#, kde-format
+msgid "Stack"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:173
+#, kde-format
+msgid "Rotation"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:202
+#: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:236
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:265
-#: package/contents/ui/settings/SettingsWindow.qml:272
+#: package/contents/ui/settings/SettingsWindow.qml:268
+#: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:273
+#: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:279
+#: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
 msgstr ""
 
-#: package/contents/ui/settings/SettingsWindow.qml:280
+#: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""
