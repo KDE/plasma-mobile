@@ -17,7 +17,7 @@ target_link_libraries(mobiletaskswitcher
     Qt::Quick
     Qt::Core
 
-    KWinEffects::kwineffects
+    KWin::kwin
 )
 
 # install(TARGETS kwin4_effect_taskswitcher DESTINATION ${PLUGIN_INSTALL_DIR}/kwin/effects/plugins)

@@ -80,8 +80,8 @@ pkg_check_modules(GIO gio-2.0 REQUIRED IMPORTED_TARGET)
 find_package(KF6KirigamiAddons 0.6 REQUIRED)
 find_package(epoxy REQUIRED)
 find_package(XCB REQUIRED COMPONENTS XCB)
-find_package(KWinEffects ${PROJECT_VERSION} REQUIRED COMPONENTS
-    kwineffects
+find_package(KWin ${PROJECT_VERSION} REQUIRED COMPONENTS
+    kwin
 )
 
 find_package(LibKWorkspace CONFIG REQUIRED)
