@@ -1,5 +1,13 @@
 {
+    "KPackageStructure": "KWin/Effect",
     "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin",
+                "Name[x-test]": "xxDevin Linxx"
+            }
+        ],
         "Category": "Window Management",
         "Description": "Allows you to switch between running tasks with a mobile interface.",
         "Description[ca@valencia]": "Us permet canviar entre les tasques diferents en execució amb una interfície mòbil.",
@@ -19,6 +27,7 @@
         "Description[nn]": "Byt mellom oppgåver som køyrer, via ei mobil brukarflate.",
         "Description[pa]": "ਮੋਬਾਈਲ ਇੰਟਰਫ਼ੇਸ ਨਾਲ ਚੱਲ ਰਹੇ ਟਾਸਕਾਂ ਨੂੰ ਬਦਲਣ ਦੀ ਮਨਜ਼ੂਰੀ ਦਿੰਦੀ ਹੈ।",
         "Description[pl]": "Umożliwia przełączanie pomiędzy działającymi zadaniami przy użyciu przenośnego interfejsu.",
+        "Description[ru]": "Позволяет переключать запущенные задачи с помощью интерфейса для мобильных устройств",
         "Description[sk]": "Umožňuje prepínať medzi spustenými úlohami pomocou rozhrania mobilného telefónu.",
         "Description[sl]": "Dovoljuje preklapljanje med tekočimi opravili z mobilnim vmesnikom.",
         "Description[tr]": "Bir taşınabilir arayüzden çalışan görevler arasında geçiş yapmanıza izin verir.",
@@ -26,8 +35,8 @@
         "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
         "Description[zh_CN]": "允许您使用移动界面在正在运行的任务之间切换。",
         "EnabledByDefault": true,
-        "Id": "mobiletaskswitcher",
-        "License": "GPL",
+        "Id": "mobile-task-switcher",
+        "License": "GPL-2.0-or-later",
         "Name": "Mobile Task Switcher",
         "Name[ca@valencia]": "Commutador de tasques del mòbil",
         "Name[ca]": "Commutador de tasques del mòbil",
@@ -46,6 +55,7 @@
         "Name[nn]": "Mobil oppgåvevekslar",
         "Name[pa]": "ਮੋਬਾਈਲ ਟਾਸਕ ਸਵਿੱਚਰ",
         "Name[pl]": "Przenośny przełącznik zadań",
+        "Name[ru]": "Мобильный переключатель задач",
         "Name[sk]": "Mobilný prepínač úloh",
         "Name[sl]": "Preklopnik mobilnih opravil",
         "Name[tr]": "Taşınabilir Görev Değiştirici",
@@ -53,5 +63,8 @@
         "Name[x-test]": "xxMobile Task Switcherxx",
         "Name[zh_CN]": "移动任务切换"
     },
-    "X-KWin-Border-Activate": true
+    "X-KDE-ConfigModule": "kcm_kwin4_genericscripted",
+    "X-KDE-Ordering": 60,
+    "X-KWin-Border-Activate": true,
+    "X-Plasma-API": "declarativescript"
 }
