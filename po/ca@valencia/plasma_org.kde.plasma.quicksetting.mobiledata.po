@@ -32,7 +32,7 @@ msgstr "No disponible"
 #: contents/ui/main.qml:16
 #, kde-format
 msgid "APN needs to be configured in the settings"
-msgstr "Cal configurar un APN a la configuració"
+msgstr "Cal configurar un APN en la configuració"
 
 #: contents/ui/main.qml:18
 #, kde-format
