@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2023-10-23 12:56+0300\n"
+"PO-Revision-Date: 2023-10-24 12:43+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -99,17 +99,17 @@ msgstr "Küp"
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Soldur"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Yığ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Döndür"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format

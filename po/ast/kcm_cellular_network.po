@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Enol P. <enolp@softastur.org>, 2023.
+# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-23 01:46+0000\n"
-"PO-Revision-Date: 2023-05-09 00:23+0200\n"
+"PO-Revision-Date: 2023-10-24 13:39+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
 "Language: ast\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: modem.cpp:126
 #, kde-format
@@ -346,12 +346,12 @@ msgstr ""
 #: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:117
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "Sí"
 
 #: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:117
 #, kde-format
 msgid "No"
-msgstr ""
+msgstr "Non"
 
 #: modemdetails.cpp:434
 #, kde-format
@@ -367,24 +367,24 @@ msgstr ""
 #: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "2G"
-msgstr ""
+msgstr "2G"
 
 #: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
 #: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
 #: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
 #, kde-format
 msgid "3G"
-msgstr ""
+msgstr "3G"
 
 #: modemdetails.cpp:503
 #, kde-format
 msgid "4G"
-msgstr ""
+msgstr "4G"
 
 #: modemdetails.cpp:506
 #, kde-format
 msgid "5G"
-msgstr ""
+msgstr "5G"
 
 #: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
 #, kde-format
@@ -399,27 +399,27 @@ msgstr ""
 #: sim.cpp:66
 #, kde-format
 msgid "Modem is unlocked."
-msgstr ""
+msgstr "El módem ta desbloquiáu."
 
 #: sim.cpp:68
 #, kde-format
 msgid "SIM requires the PIN code."
-msgstr ""
+msgstr "La SIM rique'l códigu PIN."
 
 #: sim.cpp:70
 #, kde-format
 msgid "SIM requires the PIN2 code."
-msgstr ""
+msgstr "La SIM rique'l códigu PIN2."
 
 #: sim.cpp:72
 #, kde-format
 msgid "SIM requires the PUK code."
-msgstr ""
+msgstr "La SIM rique'l códigu PUK."
 
 #: sim.cpp:74
 #, kde-format
 msgid "SIM requires the PUK2 code."
-msgstr ""
+msgstr "La SIM rique'l códigu PUK2."
 
 #: sim.cpp:76
 #, kde-format
@@ -534,7 +534,7 @@ msgstr ""
 #: ui/EditProfileDialog.qml:46
 #, kde-format
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: ui/EditProfileDialog.qml:51
 #, kde-format
@@ -564,22 +564,22 @@ msgstr "3G/2G"
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "Namás 4G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "Namás 3G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "Namás 2G"
 
 #: ui/main.qml:35
 #, kde-format
 msgid "Modem not available"
-msgstr ""
+msgstr "El módem nun ta disponible"
 
 #: ui/main.qml:69
 #, kde-format
@@ -617,17 +617,16 @@ msgid "View data usage."
 msgstr ""
 
 #: ui/main.qml:120 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
-msgstr[1] "SIM"
+msgstr[1] "SIMs"
 
 #: ui/main.qml:141
 #, kde-format
 msgid "SIM %1"
-msgstr ""
+msgstr "SIM %1"
 
 #: ui/main.qml:142
 #, kde-format
@@ -637,7 +636,7 @@ msgstr ""
 #: ui/ModemPage.qml:20
 #, kde-format
 msgid "Modem %1"
-msgstr ""
+msgstr "Módem %1"
 
 #: ui/ModemPage.qml:30
 #, kde-format
@@ -672,7 +671,7 @@ msgstr ""
 #: ui/ModemPage.qml:99
 #, kde-format
 msgid "Model"
-msgstr ""
+msgstr "Modelu"
 
 #: ui/ModemPage.qml:114
 #, kde-format
@@ -762,7 +761,7 @@ msgstr ""
 #: ui/ProfileList.qml:12
 #, kde-format
 msgid "APNs"
-msgstr ""
+msgstr "APNs"
 
 #: ui/ProfileList.qml:26
 #, kde-format
@@ -931,7 +930,7 @@ msgstr ""
 #: ui/SimPage.qml:81
 #, kde-format
 msgid "Networks"
-msgstr ""
+msgstr "Redes"
 
 #: ui/SimPage.qml:82
 #, kde-format

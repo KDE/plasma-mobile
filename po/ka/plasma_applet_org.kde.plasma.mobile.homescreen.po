@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2022-08-15 15:05+0200\n"
+"PO-Revision-Date: 2023-10-24 06:30+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.4\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "საქაღალდე"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -40,115 +40,116 @@ msgstr "წაშლა"
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "საწყის ეკრანის მორგება"
 
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "ხატულები"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "მწკრივების რიცხვი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "სვეტების რაოდენობა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "ხატულების ზომა საწყის ეკრანზე"
 
 #: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr ""
+"მწკრივები და სვეტები ადგილს გაცვლიან, ეკრანის შემობრუნებაზე დამოკიდებულებით."
 
 #: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "საწყისი ეკრანი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "ჭდეების ჩვენება საწყის ეკრანზე"
 
 #: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "ჭდეების ჩვენება სანიშნეების პანელზე"
 
 #: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "გვერდის გადასვლის ეფექტი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "სლაიდი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "კუბი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "მინავლება"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "დასტა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "შემობრუნება"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "სანიშნეების პანელი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "გატანის განლაგება, როგორც"
 
 #: package/contents/ui/settings/SettingsWindow.qml:268
 #: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "გადატანის სტატუსი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1-ზე გატანა ჩავარდა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "საწყისი ეკრანის განლაგების %1-ზე გადატანა წარმატებით დასრულდა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "გატანის დადასტურება"
 
 #: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "ეს თქვენს არსებულ საწყისი ეკრანის განლაგებას თავზე გადააწერს!"

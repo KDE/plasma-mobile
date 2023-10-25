@@ -1,7 +1,7 @@
 # Translation for plasma_applet_org.kde.plasma.mobile.homescreen.po to Euskara/Basque (eu).
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
@@ -10,20 +10,20 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2023-03-06 07:46+0100\n"
+"PO-Revision-Date: 2023-10-24 21:41+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
-"Language-Team: Basque\n"
+"Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Karpeta"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -42,115 +42,116 @@ msgstr "Kendu"
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Pantaila nagusiaren ezarpenak"
 
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Ikonoak"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Errenkada-kopurua"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Zutabe-kopurua"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Pantaila nagusiko ikonoen neurria"
 
 #: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr ""
+"Errenkadak eta zutabeak trukatu egingo dira pantaila biraketaren arabera."
 
 #: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Pantaila nagusia"
 
 #: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Erakutsi etiketak pantaila nagusian"
 
 #: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Erakutsi etiketak gogokoen barran"
 
 #: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Orrialde trantsizio efektua"
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Irristada"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Kuboa"
 
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Margultzea"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Pila"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Biraketa"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Gogokoen barra"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Orokorra"
 
 #: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Esportatu antolaera hona,"
 
 #: package/contents/ui/settings/SettingsWindow.qml:268
 #: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Esportatu egoera"
 
 #: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1(e)ra esportatzea huts egin du"
 
 #: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "Pantaila nagusiaren antolaera ondo esportatu da %1(e)ra"
 
 #: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Baieztatu inportatzea"
 
 #: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "Horrek zure pantaila nagusiaren antolaera gainidatziko du!"

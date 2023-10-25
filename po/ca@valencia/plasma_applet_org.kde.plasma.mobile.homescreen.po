@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2023-03-06 11:15+0100\n"
+"PO-Revision-Date: 2023-10-23 10:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Carpeta"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -41,62 +41,62 @@ msgstr "Elimina"
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Configureu la pàgina d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Icones"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Nombre de files"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Nombre de columnes"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Mida de les icones en la pàgina d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "Les files i columnes s'intercanviaran depenent del gir de la pantalla."
 
 #: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Pantalla d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Mostra les etiquetes a la pàgina d'inici"
 
 #: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Mostra les etiquetes a la barra de preferits"
 
 #: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Efecte de transició de pàgina"
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Lliscament"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Cub"
 
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
@@ -116,40 +116,40 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Barra de preferits"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Exporta la disposició a"
 
 #: package/contents/ui/settings/SettingsWindow.qml:268
 #: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Estat de l'exportació"
 
 #: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "No s'ha pogut exportar cap a %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "La disposició de la pantalla d'inici s'ha exportat correctament a %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Confirmació de la importació"
 
 #: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "Sobreescriurà la vostra disposició existent de la pantalla d'inici!"
