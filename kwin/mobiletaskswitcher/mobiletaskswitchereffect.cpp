@@ -102,7 +102,7 @@ void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
         m_touchBorderActivate.append(ElectricBorder(border));
         effects->registerRealtimeTouchBorder(ElectricBorder(border),
                                              m_realtimeToggleAction,
-                                             [this](ElectricBorder border, const QPointF &deltaProgress, const EffectScreen *screen) {
+                                             [this](ElectricBorder border, const QPointF &deltaProgress, const Output *screen) {
                                                  if (m_status == Status::Active) {
                                                      return;
                                                  }
