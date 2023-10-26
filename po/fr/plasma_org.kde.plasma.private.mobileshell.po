@@ -1,18 +1,18 @@
-# Xavier BESNARD <xavier.besnard@neuf.fr>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 Xavier BESNARD <xavier.besnard@neuf.fr>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2022-12-27 18:07+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-10-24 20:31+0200\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
@@ -184,7 +184,7 @@ msgstr "Rechercher..."
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
 #, kde-format
 msgid "No media playing"
-msgstr "Aucun media en lecture"
+msgstr "Aucun média en lecture"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
 #, kde-format
@@ -194,7 +194,7 @@ msgstr "Piste précédente"
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
 #, kde-format
 msgid "Play or Pause media"
-msgstr "Lire ou mettre en pause un media"
+msgstr "Lire ou mettre en pause un média"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
 #, kde-format
