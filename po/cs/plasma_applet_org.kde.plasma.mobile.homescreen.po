@@ -20,7 +20,7 @@ msgstr ""
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Složka"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -44,17 +44,17 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Ikony"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Počet řádků"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Počet sloupců"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
@@ -89,27 +89,27 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Snímek"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Třetí mocnina"
 
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Blednutí"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Zásobník"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Rotace"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
@@ -119,7 +119,7 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format

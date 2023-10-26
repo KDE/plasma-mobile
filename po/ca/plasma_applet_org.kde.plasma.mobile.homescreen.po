@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2023-10-23 10:49+0200\n"
+"PO-Revision-Date: 2023-10-25 09:13+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -101,17 +101,17 @@ msgstr "Cub"
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Esvaïment"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Pila"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Gir"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format

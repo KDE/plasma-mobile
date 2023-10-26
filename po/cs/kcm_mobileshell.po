@@ -194,6 +194,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
-
-#~ msgid "Task Switcher"
-#~ msgstr "Přepínač úloh"
