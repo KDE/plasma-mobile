@@ -63,6 +63,13 @@ public:
      */
     Q_INVOKABLE bool isSystem24HourFormat();
 
+    /**
+     * Change task switcher visibility
+     *
+     * @param visible Should task switcher be visible
+     */
+    Q_INVOKABLE void setIsTaskSwitcherVisible(bool visible);
+
 Q_SIGNALS:
     void isSystem24HourFormatChanged();
 

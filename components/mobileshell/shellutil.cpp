@@ -14,6 +14,7 @@
 #include <KNotification>
 #include <KNotificationJobUiDelegate>
 
+#include <QDBusConnection>
 #include <QDBusPendingReply>
 #include <QDateTime>
 #include <QDebug>
@@ -79,6 +80,18 @@ bool ShellUtil::isSystem24HourFormat()
 
     QString timeFormat = localeSettings.readEntry("TimeFormat", QStringLiteral(FORMAT24H));
     return timeFormat == QStringLiteral(FORMAT24H);
+}
+
+void ShellUtil::setIsTaskSwitcherVisible(bool visible)
+{
+    QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.kde.plasmashell"),
+                                                          QStringLiteral("/Mobile"),
+                                                          QStringLiteral("org.kde.plasmashell"),
+                                                          QStringLiteral("setIsTaskSwitcherVisible"));
+    request.setArguments({visible});
+
+    // this does not block, so it won't necessarily be called before the method returns
+    QDBusConnection::sessionBus().send(request);
 }
 
 void ShellUtil::launchApp(const QString &storageId)
