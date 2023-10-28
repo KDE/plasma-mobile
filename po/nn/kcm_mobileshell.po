@@ -198,12 +198,3 @@ msgid ""
 "module."
 msgstr ""
 "Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
-
-#~ msgid "Task Switcher"
-#~ msgstr "Oppgåvevekslar"
-
-#~ msgid "Show Application Previews"
-#~ msgstr "Vis førehandsvising av program"
-
-#~ msgid "Turning this off may help improve performance."
-#~ msgstr "Ytinga kan vera betre om du slår dette av."
