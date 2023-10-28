@@ -9,12 +9,12 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 Item {
     id: root
 
-    function run(client) {
+    function run(window) {
         if (!ShellSettings.Settings.convergenceModeEnabled) {
-            client.setMaximize(true, true);
-            client.noBorder = true;
+            window.noBorder = true;
+            window.setMaximize(true, true);
         } else {
-            client.noBorder = false;
+            window.noBorder = false;
         }
     }
 
@@ -22,11 +22,11 @@ Item {
         target: ShellSettings.Settings
 
         function onConvergenceModeEnabledChanged() {
-            const clients = KWinComponents.Workspace.windows;
+            const windows = KWinComponents.Workspace.windows;
 
-            for (let i = 0; i < clients.length; i++) {
-                if (clients[i].normalWindow) {
-                    root.run(clients[i]);
+            for (let i = 0; i < windows.length; i++) {
+                if (windows[i].normalWindow) {
+                    root.run(windows[i]);
                 }
             }
         }
@@ -35,12 +35,12 @@ Item {
     Connections {
         target: KWinComponents.Workspace
 
-        function onWindowAdded(client) {
-            if (client.normalWindow) {
-                client.interactiveMoveResizeFinished.connect((client) => {
-                    root.run(client);
+        function onWindowAdded(window) {
+            if (window.normalWindow) {
+                window.interactiveMoveResizeFinished.connect((window) => {
+                    root.run(window);
                 });
-                root.run(client);
+                root.run(window);
             }
         }
 
@@ -48,11 +48,11 @@ Item {
             // Windows are moved from the external screen
             // to the internal screen if the external screen
             // is disconnected.
-            const clients = KWinComponents.Workspace.windows;
+            const windows = KWinComponents.Workspace.windows;
 
-            for (var i = 0; i < clients.length; i++) {
-                if (clients[i].normalWindow) {
-                    root.run(clients[i]);
+            for (var i = 0; i < windows.length; i++) {
+                if (windows[i].normalWindow) {
+                    root.run(windows[i]);
                 }
             }
         }
