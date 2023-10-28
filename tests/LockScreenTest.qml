@@ -30,26 +30,28 @@ ApplicationWindow {
     QtObject {
         id: authenticator // id passed in by kscreenlocker
         
+        property string infoMessage: ""
+        property string errorMessage: ""
+        property string prompt: ""
+        property string promptForSecret: ""
+
         signal succeeded()
         signal failed()
-        signal infoMessage(string msg)
-        signal errorMessage(string msg)
-        signal prompt(string msg)
-        signal promptForSecret(string msg)
         
         // these are not kscreenlocker properties, for test purposes only
         property string password: ""
-        property bool prompt: true
+        property bool shouldPrompt: true
         
-        function tryUnlock() {
-            if (prompt) {
-                prompt = false;
-                promptForSecret("Password:");
+        function startAuthenticating() {
+            if (shouldPrompt) {
+                shouldPrompt = false;
+                promptForSecret = "Password:";
+                promptForSecretChanged();
             } else if (password === "123456") {
-                prompt = true;
+                shouldPrompt = true;
                 succeeded();
             } else {
-                prompt = true;
+                shouldPrompt = true;
                 failed();
             }
         }

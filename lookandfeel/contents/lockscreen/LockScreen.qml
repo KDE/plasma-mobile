@@ -154,46 +154,13 @@ Item {
             }
 
             // scroll up icon
-            Loader {
+            BottomIconIndicator {
                 id: scrollUpIconLoader
-                asynchronous: true
-
-                property real animationY: 0
-                readonly property real fullYOffset: Kirigami.Units.largeSpacing
+                lockScreenState: root.lockScreenState
 
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5 + scrollUpIconLoader.animationY
                 anchors.horizontalCenter: parent.horizontalCenter
-
-                // animate it going up and down
-                NumberAnimation on animationY {
-                    id: animateUpAndDown
-                    running: true
-                    duration: 800
-                    easing.type: Easing.InCubic
-                    to: scrollUpIconLoader.fullYOffset
-
-                    onFinished: {
-                        if (scrollUpIconLoader.animationY === scrollUpIconLoader.fullYOffset) {
-                            to = 0;
-                            easing.type = Easing.OutCubic;
-                        } else {
-                            to = scrollUpIconLoader.fullYOffset;
-                            easing.type = Easing.InCubic;
-                        }
-                        restart();
-                    }
-                }
-
-                sourceComponent: Kirigami.Icon {
-                    id: scrollUpIcon
-                    implicitWidth: Kirigami.Units.iconSizes.small
-                    implicitHeight: Kirigami.Units.iconSizes.small
-                    opacity: 1 - flickable.openFactor
-
-                    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-                    source: "arrow-up"
-                }
             }
 
             // password keypad
