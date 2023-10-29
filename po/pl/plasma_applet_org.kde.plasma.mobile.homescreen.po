@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-24 01:42+0000\n"
-"PO-Revision-Date: 2022-06-05 11:19+0200\n"
+"PO-Revision-Date: 2023-10-28 09:22+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,12 +16,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Katalog"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -40,115 +40,115 @@ msgstr "Usuń"
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Ustawienia ekranu domowego"
 
 #: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Ikony"
 
 #: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Liczba wierszy"
 
 #: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Liczba kolumn"
 
 #: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Rozmiar ikon na ekranie domowym"
 
 #: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "Wiersze z kolumnami zamienią się w zależności od obrotu ekranu."
 
 #: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Ekran domowy"
 
 #: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Pokaż etykiety na ekranie domowym"
 
 #: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Pokaż etykiety na pasku ulubionych"
 
 #: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Efekt przejścia strony"
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Wślizg"
 
 #: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Sześcian"
 
 #: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Zanikanie"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Stos"
 
 #: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Obrót"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Pasek ulubionych"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Ogólne"
 
 #: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Wyeksportuj układ do"
 
 #: package/contents/ui/settings/SettingsWindow.qml:268
 #: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Wyeksportuj stan"
 
 #: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "Nie udało się wyeksportować do %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "Pomyślnie wyeksportowano układ ekranu domowego do %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Potwierdź import"
 
 #: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "To zastąpi twój istniejący układ ekranu domowego!"
