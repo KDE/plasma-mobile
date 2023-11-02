@@ -5,10 +5,13 @@
 
 #include <QObject>
 #include <QProcess>
+#include <qqmlregistration.h>
 
 class PrepareUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
     Q_PROPERTY(int scaling READ scaling WRITE setScaling NOTIFY scalingChanged);
     Q_PROPERTY(QStringList scalingOptions READ scalingOptions CONSTANT);
 

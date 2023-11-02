@@ -1,14 +1,15 @@
 # SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+ecm_add_qml_module(prepareplugin URI org.kde.plasma.mobileinitialstart.prepare GENERATE_PLUGIN_SOURCE)
+
 set(prepareplugin_SRCS
-    prepareplugin.cpp
     prepareutil.cpp
 )
 
-add_library(prepareplugin ${prepareplugin_SRCS})
+target_sources(prepareplugin PRIVATE ${prepareplugin_SRCS})
 
-target_link_libraries(prepareplugin
+target_link_libraries(prepareplugin PRIVATE
     Qt::Core
     Qt::DBus
     Qt::Quick
@@ -19,13 +20,4 @@ target_link_libraries(prepareplugin
     KF6::Notifications
 )
 
-set_property(TARGET prepareplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mobileinitialstart/prepare)
-file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mobileinitialstart/prepare)
-
-install(TARGETS prepareplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobileinitialstart/prepare)
-install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/mobileinitialstart/prepare)
-
-plasma_install_package(package org.kde.plasma.mobileinitialstart.prepare mobileinitialstart)
-
-
-
+ecm_finalize_qml_module(mobileshellplugin)

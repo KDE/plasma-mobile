@@ -7,7 +7,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
-import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
+import org.kde.plasma.mobileinitialstart.prepare as Prepare
 import org.kde.plasma.plasma5support 2.0 as P5Support
 
 Item {
