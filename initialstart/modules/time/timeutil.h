@@ -5,12 +5,16 @@
 
 #include <QObject>
 #include <QProcess>
+#include <qqmlregistration.h>
 
 #include "timezonemodel.h"
 
 class TimeUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
+
     Q_PROPERTY(bool is24HourTime READ is24HourTime WRITE setIs24HourTime NOTIFY is24HourTimeChanged);
     Q_PROPERTY(QString currentTimeZone READ currentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged);
     Q_PROPERTY(TimeZoneFilterProxy *timeZones READ timeZones CONSTANT);
