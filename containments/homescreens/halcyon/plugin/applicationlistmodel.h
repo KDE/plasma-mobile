@@ -18,13 +18,14 @@
 class ApplicationListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     enum Roles { ApplicationRole = Qt::UserRole + 1 };
 
     ApplicationListModel(QObject *parent = nullptr);
     ~ApplicationListModel() override;
-    static ApplicationListModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;

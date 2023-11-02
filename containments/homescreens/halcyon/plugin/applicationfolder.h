@@ -24,6 +24,8 @@ class ApplicationFolderModel;
 class ApplicationFolder : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(QString name READ name WRITE setName NOTIFY nameChanged)
     Q_PROPERTY(QList<Application *> appPreviews READ appPreviews NOTIFY applicationsChanged)
     Q_PROPERTY(ApplicationFolderModel *applications READ applications NOTIFY applicationsReset)

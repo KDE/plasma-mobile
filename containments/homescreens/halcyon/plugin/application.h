@@ -22,6 +22,8 @@
 class Application : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(bool running READ running NOTIFY windowChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)
     Q_PROPERTY(QString icon READ icon NOTIFY iconChanged)

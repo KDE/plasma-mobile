@@ -1,5 +1,0 @@
-# SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
-# SPDX-License-Identifier: GPL-2.0-or-later
-
-module org.kde.private.mobile.homescreen.halcyon
-plugin halcyonplugin

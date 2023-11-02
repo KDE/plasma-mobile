@@ -25,6 +25,8 @@
 class PinnedModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
     Q_PROPERTY(Plasma::Applet *applet READ applet WRITE setApplet NOTIFY appletChanged)
 
 public:
@@ -32,7 +34,6 @@ public:
 
     PinnedModel(QObject *parent = nullptr);
     ~PinnedModel() override;
-    static PinnedModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
