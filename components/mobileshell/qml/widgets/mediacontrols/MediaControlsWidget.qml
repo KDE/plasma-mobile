@@ -8,12 +8,11 @@ import QtQuick.Controls as QQC2
 
 import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.plasma.private.mpris as Mpris
-
-import "../../components" as Components
 
 /**
  * Embeddable component that provides MPRIS control.
@@ -90,11 +89,11 @@ Item {
                     implicitWidth: playerItem.implicitWidth
                     
                     onClicked: {
-                        Components.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
+                        MobileShell.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
                         MobileShellState.ShellDBusClient.closeActionDrawer();
                     }
                     
-                    Components.BaseItem {
+                    MobileShell.BaseItem {
                         id: playerItem
                         anchors.fill: parent
                         
@@ -137,7 +136,7 @@ Item {
                                     spacing: Kirigami.Units.smallSpacing
 
                                     // media track name text
-                                    Components.MarqueeLabel {
+                                    MobileShell.MarqueeLabel {
                                         id: trackLabel
                                         Layout.fillWidth: true
 
@@ -148,7 +147,7 @@ Item {
                                     }
 
                                     // media artist name text
-                                    Components.MarqueeLabel {
+                                    MobileShell.MarqueeLabel {
                                         id: artistLabel
                                         Layout.fillWidth: true
 

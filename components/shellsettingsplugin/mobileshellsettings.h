@@ -11,6 +11,7 @@
 #include <KSharedConfig>
 #include <QDBusConnection>
 #include <QObject>
+#include <qqmlregistration.h>
 
 /**
  * @short Wrapper class to access and control mobile shell specific settings.
@@ -20,6 +21,8 @@
 class MobileShellSettings : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Settings)
+    QML_SINGLETON
 
     // general
     Q_PROPERTY(bool vibrationsEnabled READ vibrationsEnabled WRITE setVibrationsEnabled NOTIFY vibrationsEnabledChanged)
@@ -38,8 +41,6 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
 
 public:
-    static MobileShellSettings *self();
-
     MobileShellSettings(QObject *parent = nullptr);
 
     enum ActionDrawerMode {

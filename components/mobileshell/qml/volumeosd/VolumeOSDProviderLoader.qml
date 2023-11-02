@@ -2,6 +2,7 @@
 // SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 
 import QtQuick
+import org.kde.plasma.private.mobileshell as MobileShell
 
 pragma Singleton
 
@@ -11,7 +12,9 @@ pragma Singleton
  */
 Loader {
     id: root
-    source: "qrc:/org/kde/plasma/private/mobileshell/qml/volumeosd/VolumeOSDProvider.qml"
+    sourceComponent: Component {
+        MobileShell.VolumeOSDProvider {}
+    }
 
     // WARNING: only call this load from within the plasmashell process, because
     // multiple bindings of the shortcut may break it entirely (hardware volume keys)

@@ -7,11 +7,10 @@ import QtQuick.Window
 import org.kde.plasma.plasmoid
 import org.kde.taskmanager as TaskManager
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
-
-import "../components" as Components
 
 /**
  * The base homescreen component, implementing features that simplify
@@ -138,7 +137,7 @@ Item {
     }
 
     // homescreen visual component
-    Components.BaseItem {
+    MobileShell.BaseItem {
         id: itemContainer
         anchors.fill: parent
 
@@ -209,7 +208,7 @@ Item {
     }
 
     // start app animation component
-    Components.StartupFeedback {
+    MobileShell.StartupFeedback {
         id: startupFeedback
         z: 999999
         anchors.fill: parent

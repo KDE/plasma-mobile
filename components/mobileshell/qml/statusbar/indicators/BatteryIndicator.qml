@@ -12,7 +12,7 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PW
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 RowLayout {
     property real textPixelSize: Kirigami.Units.gridUnit * 0.6

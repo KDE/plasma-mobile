@@ -11,12 +11,6 @@ ShellDBusObject::ShellDBusObject(QObject *parent)
 {
 }
 
-ShellDBusObject *ShellDBusObject::self()
-{
-    static ShellDBusObject *instance = new ShellDBusObject;
-    return instance;
-}
-
 void ShellDBusObject::registerObject()
 {
     if (!m_initialized) {

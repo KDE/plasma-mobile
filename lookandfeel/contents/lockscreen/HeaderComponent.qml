@@ -8,7 +8,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.notificationmanager as NotificationManager
 

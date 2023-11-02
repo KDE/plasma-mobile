@@ -7,6 +7,7 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <qqmlregistration.h>
 
 /**
  * @class PaginateModel
@@ -19,6 +20,8 @@
 class PaginateModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
+
     /** Holds the number of elements that will fit in a page */
     Q_PROPERTY(int pageSize READ pageSize WRITE setPageSize NOTIFY pageSizeChanged)
 

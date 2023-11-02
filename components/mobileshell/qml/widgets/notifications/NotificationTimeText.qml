@@ -9,6 +9,7 @@ import QtQuick 2.8
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
@@ -16,8 +17,6 @@ import org.kde.kirigami as Kirigami
 import org.kde.notificationmanager as NotificationManager
 
 import org.kde.coreaddons 1.0 as KCoreAddons
-
-import "util.js" as Util
 
 PlasmaComponents.Label {
     id: ageLabel
@@ -43,7 +42,7 @@ PlasmaComponents.Label {
     Component.onCompleted: updateAgoText()
     
     function updateAgoText() {
-        ageLabel.agoText = Util.generateNotificationHeaderAgoText(time, jobState);
+        ageLabel.agoText = MobileShell.NotificationsUtils.generateNotificationHeaderAgoText(time, jobState);
     }
     
     font.pixelSize: Kirigami.Theme.defaultFont.pixelSize * 0.8
@@ -53,5 +52,5 @@ PlasmaComponents.Label {
     property string agoText: ""
     visible: text !== ""
     opacity: 0.6
-    text: Util.generateNotificationHeaderRemainingText(notificationType, jobState, jobDetails) || agoText
+    text: MobileShell.NotificationsUtils.generateNotificationHeaderRemainingText(notificationType, jobState, jobDetails) || agoText
 }

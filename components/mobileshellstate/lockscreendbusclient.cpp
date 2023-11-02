@@ -28,12 +28,6 @@ LockscreenDBusClient::LockscreenDBusClient(QObject *parent)
                                           SLOT(slotLockscreenActiveChanged(bool)));
 }
 
-LockscreenDBusClient *LockscreenDBusClient::self()
-{
-    static LockscreenDBusClient *instance = new LockscreenDBusClient;
-    return instance;
-}
-
 bool LockscreenDBusClient::lockscreenActive() const
 {
     return m_lockscreenActive;

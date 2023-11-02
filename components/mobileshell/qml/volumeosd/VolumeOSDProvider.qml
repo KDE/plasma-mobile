@@ -11,7 +11,7 @@ import QtQuick.Layouts
 
 import org.kde.plasma.private.volume 0.1 as VolumeLib
 import org.kde.plasma.private.mobileshell.state as MobileShellState
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 /**
  * This imports the volume OSD and also sets up keyboard/hardware button bindings.

@@ -10,12 +10,10 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.kirigami 2.20 as Kirigami
-
-import "../../components" as Components
-import "../../components/util.js" as Util
 
 /**
  * Quick settings elements layout, change the height to clip.
@@ -32,9 +30,9 @@ Item {
         ScrollView
     }
 
-    readonly property real columns: Math.round(Util.applyMinMaxRange(3, 6, width / intendedColumnWidth))
+    readonly property real columns: Math.round(Math.min(6, Math.max(3, width / intendedColumnWidth)))
     readonly property real columnWidth: Math.floor(width / columns)
-    readonly property int minimizedColumns: Math.round(Util.applyMinMaxRange(5, 8, width / intendedMinimizedColumnWidth))
+    readonly property int minimizedColumns: Math.round(Math.min(8, Math.max(5, width / intendedMinimizedColumnWidth)))
     readonly property real minimizedColumnWidth: Math.floor(width / minimizedColumns)
     
     readonly property real rowHeight: columnWidth * 0.7
@@ -134,7 +132,7 @@ Item {
                 sourceModel: quickSettingsModel
                 pageSize: minimizedColumns
             }
-            delegate: Components.BaseItem {
+            delegate: MobileShell.BaseItem {
                 required property var modelData
                 
                 implicitHeight: root.minimizedRowHeight
@@ -293,7 +291,7 @@ Item {
     Component {
         id: quickSettingComponent
         
-        Components.BaseItem {
+        MobileShell.BaseItem {
             height: root.rowHeight
             width: root.columnWidth
             padding: Kirigami.Units.smallSpacing

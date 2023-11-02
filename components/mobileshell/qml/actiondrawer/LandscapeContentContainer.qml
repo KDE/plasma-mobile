@@ -14,12 +14,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-
-import "../components" as Components
-import "../widgets/mediacontrols" as MediaControls
-import "../widgets/notifications" as Notifications
-import "quicksettings"
+import org.kde.plasma.private.mobileshell as MobileShell
 
 /**
  * Root element that contains all of the ActionDrawer's contents, and is anchored to the screen.
@@ -83,7 +78,7 @@ Item {
             }
             anchors.margins: minWidthHeight * 0.06
             
-            Notifications.NotificationsWidget {
+            MobileShell.NotificationsWidget {
                 id: notificationWidget
                 historyModel: root.actionDrawer.notificationModel
                 historyModelType: root.actionDrawer.notificationModelType
@@ -146,7 +141,7 @@ Item {
             font.weight: Font.Light
         }
         
-        MediaControls.MediaControlsWidget {
+        MobileShell.MediaControlsWidget {
             id: mediaWidget
             property real fullHeight: visible ? height + Kirigami.Units.smallSpacing * 6 : 0
             
@@ -163,7 +158,7 @@ Item {
         }
         
         // right sidebar
-        QuickSettingsPanel {
+        MobileShell.QuickSettingsPanel {
             id: quickSettings
             height: quickSettings.contentImplicitHeight + quickSettings.topPadding + quickSettings.bottomPadding
             width: intendedWidth

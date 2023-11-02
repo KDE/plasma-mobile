@@ -9,12 +9,9 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami 2.20 as Kirigami
-
-import "../components" as Components
-import "../widgets/notifications" as Notifications
-import "quicksettings"
 
 /**
  * Root element that contains all of the ActionDrawer's contents, and is anchored to the screen.
@@ -51,7 +48,7 @@ Item {
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
     
-    QuickSettingsDrawer {
+    MobileShell.QuickSettingsDrawer {
         id: quickSettings
         z: 1 // ensure it's above notifications
         anchors.top: parent.top
@@ -95,7 +92,7 @@ Item {
         }
     }
     
-    Notifications.NotificationsWidget {
+    MobileShell.NotificationsWidget {
         id: notificationWidget
         historyModel: root.actionDrawer.notificationModel
         historyModelType: root.actionDrawer.notificationModelType

@@ -27,12 +27,6 @@ WindowUtil::WindowUtil(QObject *parent)
     initWayland();
 }
 
-WindowUtil *WindowUtil::instance()
-{
-    static WindowUtil *inst = new WindowUtil();
-    return inst;
-}
-
 bool WindowUtil::isShowingDesktop() const
 {
     return m_showingDesktop;

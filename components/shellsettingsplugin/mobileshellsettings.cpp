@@ -18,12 +18,6 @@
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
 
-MobileShellSettings *MobileShellSettings::self()
-{
-    static MobileShellSettings *singleton = new MobileShellSettings();
-    return singleton;
-}
-
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
     , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}

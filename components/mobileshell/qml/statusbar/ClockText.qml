@@ -10,11 +10,9 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.kirigami as Kirigami
-
-import "indicators" as Indicators
 
 PlasmaComponents.Label {
     id: clock

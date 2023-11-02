@@ -6,7 +6,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import initialstart 1.0 as InitialStart
 

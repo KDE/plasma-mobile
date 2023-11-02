@@ -10,8 +10,8 @@ import QtQuick.Controls 2.15 as Controls
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.kirigami 2.10 as Kirigami
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.halcyon 1.0 as Halcyon
 
 MobileShell.GridView {

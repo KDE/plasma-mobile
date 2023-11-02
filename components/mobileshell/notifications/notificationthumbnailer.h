@@ -12,10 +12,12 @@
 #include <QPixmap>
 #include <QSize>
 #include <QUrl>
+#include <qqmlregistration.h>
 
 class NotificationThumbnailer : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_INTERFACES(QQmlParserStatus)
 
     Q_PROPERTY(QUrl url READ url WRITE setUrl NOTIFY urlChanged)

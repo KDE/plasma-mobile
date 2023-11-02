@@ -11,10 +11,9 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.components 3.0 as PlasmaComponents
-
-import "../../components" as Components
 
 QuickSettingsDelegate {
     id: root
@@ -54,7 +53,7 @@ QuickSettingsDelegate {
         }
     }
     
-    Components.HapticsEffectLoader {
+    MobileShell.HapticsEffectLoader {
         id: haptics
     }
     
@@ -94,7 +93,7 @@ QuickSettingsDelegate {
                 font.weight: Font.Bold
             }
 
-            Components.MarqueeLabel {
+            MobileShell.MarqueeLabel {
                 // if no status is given, just use On/Off
                 inputText: root.status ? root.status : (root.enabled ? i18n("On") : i18n("Off"))
                 opacity: 0.6

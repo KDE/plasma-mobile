@@ -11,12 +11,6 @@
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString QUICKSETTINGS_CONFIG_GROUP = QStringLiteral("QuickSettings");
 
-QuickSettingsConfig *QuickSettingsConfig::self()
-{
-    static QuickSettingsConfig *singleton = new QuickSettingsConfig();
-    return singleton;
-}
-
 QuickSettingsConfig::QuickSettingsConfig(QObject *parent)
     : QObject{parent}
     , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}

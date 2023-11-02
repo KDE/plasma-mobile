@@ -12,17 +12,13 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 
 import org.kde.plasma.core as PlasmaCore
-
-import "../../statusbar" as StatusBar
-import "../../components" as Components
-import "../../widgets/mediacontrols" as MediaControls
-import "../"
+import org.kde.plasma.private.mobileshell as MobileShell
 
 /**
  * Quick settings drawer pulled down from the top (for portrait mode).
  * For the landscape view quicksettings container, see QuickSettingsPanel.
  */
-Components.BaseItem {
+MobileShell.BaseItem {
     id: root
     
     required property var actionDrawer
@@ -75,10 +71,10 @@ Components.BaseItem {
             anchors.top: parent.top
             spacing: 0
             
-            StatusBar.StatusBar {
+            MobileShell.StatusBar {
                 id: statusBar
                 Layout.fillWidth: true
-                Layout.preferredHeight: Components.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
+                Layout.preferredHeight: MobileShell.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
                 
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
                 Kirigami.Theme.inherit: false
@@ -91,7 +87,7 @@ Components.BaseItem {
                 disableSystemTray: actionDrawer.restrictedPermissions
             }
             
-            QuickSettings {
+            MobileShell.QuickSettings {
                 id: quickSettings
                 Layout.preferredHeight: root.minimizedQuickSettingsHeight + root.addedHeight
                 Layout.topMargin: Kirigami.Units.smallSpacing
@@ -105,7 +101,7 @@ Components.BaseItem {
                 width: parent.width
             }
             
-            MediaControls.MediaControlsWidget {
+            MobileShell.MediaControlsWidget {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
                 Layout.fillWidth: true

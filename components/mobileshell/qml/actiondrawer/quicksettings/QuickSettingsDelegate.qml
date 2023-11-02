@@ -16,9 +16,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
-import "../../components" as Components
-
-Components.BaseItem {
+MobileShell.BaseItem {
     id: root
     
     required property bool restrictedPermissions

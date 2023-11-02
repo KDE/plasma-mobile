@@ -13,10 +13,7 @@ import QtQuick.Effects
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.kquickcontrolsaddons 2.0
-
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-
-import "../components" as Components
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
     id: root

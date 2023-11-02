@@ -1,6 +1,0 @@
-# SPDX-FileCopyrightText: 2021 Tobias Fella <fella@posteo.de>
-# SPDX-License-Identifier: GPL-2.0-or-later
-
-module org.kde.plasma.mm
-plugin ppc-mmqmlplugin
-classname MmQmlPlugin

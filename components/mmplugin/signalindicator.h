@@ -11,6 +11,7 @@
 #include <NetworkManagerQt/ModemDevice>
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 #include "profilesettings.h"
 
@@ -18,6 +19,8 @@
 class SignalIndicator : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
     Q_PROPERTY(int strength READ strength NOTIFY strengthChanged)
     Q_PROPERTY(QString name READ name NOTIFY nameChanged)

@@ -7,6 +7,7 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Loader {
     // source: "qrc:/org/kde/plasma/private/mobileshell/qml/components/HapticsEffectWrapper.qml"
+    // FIXME: the source above will have to be ported to Component type, as in `VolumeOSDProviderLoader.qml`
     property bool valid: item !== null
     
     function buttonVibrate() {

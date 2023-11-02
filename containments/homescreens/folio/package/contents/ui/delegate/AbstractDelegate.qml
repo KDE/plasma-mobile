@@ -14,7 +14,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Folio.DelegateTouchArea {
     id: delegate

@@ -18,8 +18,6 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.milou as Milou
 import org.kde.kirigami 2.19 as Kirigami
 
-import "../../components" as Components
-
 /**
  * Search widget that is embedded into the homescreen. The dimensions of 
  * the root item is assumed to be the available screen area for applications.

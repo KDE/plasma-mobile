@@ -9,6 +9,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
@@ -17,8 +18,6 @@ import org.kde.notificationmanager as NotificationManager
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.coreaddons 1.0 as KCoreAddons
-
-import "util.js" as Util
 
 // notification properties are in BaseNotificationItem
 BaseNotificationItem {
@@ -80,7 +79,7 @@ BaseNotificationItem {
                     maximumLineCount: 3
                     wrapMode: Text.WordWrap
                     elide: Text.ElideRight
-                    text: Util.determineNotificationHeadingText(notificationItem)
+                    text: MobileShell.NotificationsUtils.determineNotificationHeadingText(notificationItem)
                     visible: text !== ""
                     font.weight: Font.DemiBold
                 }

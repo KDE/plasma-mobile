@@ -1,11 +1,7 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/..)
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/..)
-                                 
 set(mobileshellstateplugin_SRCS
-    mobileshellstateplugin.cpp
     shelldbusobject.cpp
     shelldbusclient.cpp
     lockscreendbusclient.cpp
@@ -23,7 +19,10 @@ qt_add_dbus_interface(mobileshellstateplugin_SRCS ${CMAKE_CURRENT_BINARY_DIR}/or
 
 install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.plasmashell.Mobile.xml DESTINATION ${KDE_INSTALL_DBUSINTERFACEDIR})
 
-add_library(mobileshellstateplugin SHARED ${mobileshellstateplugin_SRCS} ${RESOURCES})
+
+ecm_add_qml_module(mobileshellstateplugin URI org.kde.plasma.private.mobileshell.state GENERATE_PLUGIN_SOURCE)
+
+target_sources(mobileshellstateplugin PRIVATE ${mobileshellstateplugin_SRCS} ${RESOURCES})
 
 target_link_libraries(mobileshellstateplugin 
     PUBLIC
@@ -40,9 +39,4 @@ target_link_libraries(mobileshellstateplugin
         KF6::PlasmaQuick
 )
 
-# we compiled the qml files, just install qmldir
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell/state)
-
-ecm_generate_qmltypes(org.kde.plasma.private.mobileshell.state 1.0 DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell/state)
-install(TARGETS mobileshellstateplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mobileshell/state)
-
+ecm_finalize_qml_module(mobileshellstateplugin)

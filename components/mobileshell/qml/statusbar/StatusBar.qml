@@ -18,10 +18,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-
-import "indicators" as Indicators
-import "../components" as Components
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     id: root
@@ -114,7 +111,7 @@ Item {
 
             RowLayout {
                 id: mainRow
-                readonly property real rowHeight: Components.Constants.topPanelHeight - Kirigami.Units.smallSpacing * 2
+                readonly property real rowHeight: MobileShell.Constants.topPanelHeight - Kirigami.Units.smallSpacing * 2
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: rowHeight
@@ -129,7 +126,7 @@ Item {
                     source: timeSource
                 }
 
-                Indicators.SignalStrengthIndicator {
+                MobileShell.SignalStrengthIndicator {
                     Layout.fillHeight: true
                     showLabel: true
                     visible: !root.showTime
@@ -166,27 +163,27 @@ Item {
 
                     spacing: root.elementSpacing
 
-                    Indicators.SignalStrengthIndicator {
+                    MobileShell.SignalStrengthIndicator {
                         showLabel: false
                         visible: root.showTime
                         internetIndicator: internetIndicatorItem
                         implicitHeight: mainRow.rowHeight
                         Layout.preferredWidth: height
                     }
-                    Indicators.BluetoothIndicator {
+                    MobileShell.BluetoothIndicator {
                         implicitHeight: mainRow.rowHeight
                         Layout.preferredWidth: height
                     }
-                    Indicators.InternetIndicator {
+                    MobileShell.InternetIndicator {
                         id: internetIndicatorItem
                         implicitHeight: mainRow.rowHeight
                         Layout.preferredWidth: height
                     }
-                    Indicators.VolumeIndicator {
+                    MobileShell.VolumeIndicator {
                         implicitHeight: mainRow.rowHeight
                         Layout.preferredWidth: height
                     }
-                    Indicators.BatteryIndicator {
+                    MobileShell.BatteryIndicator {
                         spacing: root.elementSpacing
                         textPixelSize: root.textPixelSize
                         implicitHeight: mainRow.rowHeight

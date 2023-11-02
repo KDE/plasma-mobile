@@ -4,7 +4,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.pipewire.record 0.1 as PWRec
 import org.kde.taskmanager 0.1 as TaskManager
 import org.kde.plasma.quicksetting.record 1.0

@@ -12,7 +12,7 @@ import QtQuick.Layouts
 import org.kde.plasma.private.volume 0.1
 import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Kirigami.Icon {
     id: paIcon

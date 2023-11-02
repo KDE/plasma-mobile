@@ -13,6 +13,8 @@
 class QuickSetting : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(QString text READ text WRITE setText REQUIRED NOTIFY textChanged)
     Q_PROPERTY(QString status READ status WRITE setStatus NOTIFY statusChanged) // if no status is explicitly set, On/Off is used by default
     Q_PROPERTY(QString icon READ iconName WRITE setIconName REQUIRED NOTIFY iconNameChanged)
@@ -21,7 +23,7 @@ class QuickSetting : public QObject
     Q_PROPERTY(bool available READ isAvailable WRITE setAvailable NOTIFY availableChanged)
     Q_PROPERTY(QQmlListProperty<QObject> children READ children CONSTANT)
     Q_CLASSINFO("DefaultProperty", "children")
-    QML_NAMED_ELEMENT("QuickSetting")
+
 public:
     QuickSetting(QObject *parent = nullptr);
 

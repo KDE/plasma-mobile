@@ -24,6 +24,8 @@
 class SavedQuickSettings : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(SavedQuickSettingsModel *enabledModel READ enabledQuickSettingsModel CONSTANT)
     Q_PROPERTY(SavedQuickSettingsModel *disabledModel READ disabledQuickSettingsModel CONSTANT)
 

@@ -19,6 +19,7 @@
 class SavedQuickSettingsModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     SavedQuickSettingsModel(QObject *parent = nullptr);

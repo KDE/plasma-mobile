@@ -7,10 +7,12 @@
 #pragma once
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 class Direction : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     enum Type { None = 0, Up, Down, Left, Right };

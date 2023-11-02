@@ -7,7 +7,7 @@ import QtQuick.Controls 2.12 as Controls
 
 import org.kde.kirigami 2.19 as Kirigami
 
-import org.kde.plasma.mm 1.0 as PlasmaMM
+import org.kde.plasma.mm as PlasmaMM
 
 Kirigami.Dialog {
     id: dialog

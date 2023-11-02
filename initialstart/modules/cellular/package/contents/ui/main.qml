@@ -7,7 +7,7 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.formcard 1 as FormCard
-import org.kde.plasma.mm 1 as PlasmaMM
+import org.kde.plasma.mm as PlasmaMM
 
 Item {
     id: root

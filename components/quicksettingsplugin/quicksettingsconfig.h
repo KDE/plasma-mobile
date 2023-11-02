@@ -22,8 +22,6 @@ class QuickSettingsConfig : public QObject
     Q_OBJECT
 
 public:
-    static QuickSettingsConfig *self();
-
     QuickSettingsConfig(QObject *parent = nullptr);
 
     /**

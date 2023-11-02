@@ -5,7 +5,7 @@
  */
 
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 
 QS.QuickSetting {

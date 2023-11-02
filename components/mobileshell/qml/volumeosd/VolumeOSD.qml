@@ -14,10 +14,8 @@ import QtQuick.Window
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
-import org.kde.plasma.private.mobileshell.state 1.0 as MobileShellState
-
-import "../dataproviders" as DataProviders
+import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 NanoShell.FullScreenOverlay {
     id: window

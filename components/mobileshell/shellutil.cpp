@@ -28,12 +28,6 @@ ShellUtil::ShellUtil(QObject *parent)
 {
 }
 
-ShellUtil *ShellUtil::instance()
-{
-    static ShellUtil *inst = new ShellUtil(nullptr);
-    return inst;
-}
-
 void ShellUtil::stackItemBefore(QQuickItem *item1, QQuickItem *item2)
 {
     if (!item1 || !item2 || item1 == item2 || item1->parentItem() != item2->parentItem()) {

@@ -10,18 +10,14 @@ import QtQuick.Layouts
 
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
-
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.core as PlasmaCore
-
-import "../../statusbar" as StatusBar
-import "../../components" as Components
-import "../"
 
 /**
  * Quick settings panel for landscape view (right sidebar).
  * For the portrait view quicksettings container, see QuickSettingsDrawer.
  */
-Components.BaseItem {
+MobileShell.BaseItem {
     id: root
     
     required property var actionDrawer
@@ -56,7 +52,7 @@ Components.BaseItem {
             height: root.fullScreenHeight
             spacing: 0
             
-            StatusBar.StatusBar {
+            MobileShell.StatusBar {
                 id: statusBar
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
@@ -75,7 +71,7 @@ Components.BaseItem {
                 disableSystemTray: actionDrawer.restrictedPermissions
             }
             
-            QuickSettings {
+            MobileShell.QuickSettings {
                 id: quickSettings
                 
                 mode: QuickSettings.ScrollView

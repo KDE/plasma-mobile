@@ -12,8 +12,6 @@ import QtQuick.Window 2.2
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 
-import "../components" as Components
-
 /**
  * Window with the ActionDrawer component embedded in it.
  * 

@@ -22,12 +22,11 @@
 class SwipeArea : public QQuickItem
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_PROPERTY(SwipeArea::Mode mode READ mode WRITE setMode NOTIFY modeChanged)
     Q_PROPERTY(bool interactive READ interactive WRITE setInteractive NOTIFY interactiveChanged)
     Q_PROPERTY(bool moving READ moving NOTIFY movingChanged)
     Q_PROPERTY(bool pressed READ pressed NOTIFY pressedChanged)
-
-    QML_NAMED_ELEMENT(SwipeArea)
 
 public:
     SwipeArea(QQuickItem *parent = nullptr);

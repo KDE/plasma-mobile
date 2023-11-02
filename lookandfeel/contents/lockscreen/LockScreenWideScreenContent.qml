@@ -8,7 +8,7 @@ import QtQuick.Effects
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager as Notifications
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Loader {
     id: root

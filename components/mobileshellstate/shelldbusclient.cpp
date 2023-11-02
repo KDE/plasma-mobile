@@ -27,12 +27,6 @@ ShellDBusClient::ShellDBusClient(QObject *parent)
     });
 }
 
-ShellDBusClient *ShellDBusClient::self()
-{
-    static ShellDBusClient *instance = new ShellDBusClient;
-    return instance;
-}
-
 void ShellDBusClient::connectSignals()
 {
     connect(m_interface, &OrgKdePlasmashellInterface::isActionDrawerOpenChanged, this, &ShellDBusClient::updateIsActionDrawerOpen);

@@ -4,7 +4,7 @@
 import QtQuick 2.15
 
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
-import org.kde.plasma.private.mobileshell 1.0 as MobileShell
+import org.kde.plasma.private.mobileshell as MobileShell
 
 QS.QuickSetting {    
     text: i18n("Battery")

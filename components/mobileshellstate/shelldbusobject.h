@@ -5,15 +5,17 @@
 
 #include <QObject>
 #include <QString>
+#include <qqmlregistration.h>
 
 class ShellDBusObject : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
     Q_CLASSINFO("D-Bus Interface", "org.kde.plasmashell")
 
 public:
     ShellDBusObject(QObject *parent = nullptr);
-    static ShellDBusObject *self();
 
     // called by QML
     Q_INVOKABLE void registerObject();
