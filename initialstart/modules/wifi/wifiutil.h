@@ -5,10 +5,13 @@
 
 #include <QObject>
 #include <QProcess>
+#include <qqmlregistration.h>
 
 class WiFiUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     WiFiUtil(QObject *parent = nullptr);
