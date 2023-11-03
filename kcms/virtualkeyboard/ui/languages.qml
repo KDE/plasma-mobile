@@ -8,7 +8,6 @@ import QtQuick 2.7
 import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.11 as QQC2
 
-import org.kde.kirigami 2.10 as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.kitemmodels 1.0 as KItemModel
 
@@ -30,13 +29,12 @@ KCM.ScrollViewKCM {
             sortOrder: Qt.AscendingOrder
         }
 
-        delegate: QQC2.ItemDelegate {
-            contentItem: QQC2.CheckBox {
-                text: model.name
-                checked: model.enabled
-                onCheckedChanged: {
-                    model.enabled = checked
-                }
+        delegate: QQC2.CheckDelegate {
+            width: ListView.view.width
+            text: model.name
+            checked: model.enabled
+            onToggled: {
+                model.enabled = checked
             }
         }
     }
