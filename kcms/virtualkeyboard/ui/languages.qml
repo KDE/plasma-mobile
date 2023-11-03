@@ -30,8 +30,8 @@ KCM.ScrollViewKCM {
             sortOrder: Qt.AscendingOrder
         }
 
-        delegate: Kirigami.AbstractListItem {
-            QQC2.CheckBox {
+        delegate: QQC2.ItemDelegate {
+            contentItem: QQC2.CheckBox {
                 text: model.name
                 checked: model.enabled
                 onCheckedChanged: {
