@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-23 01:41+0000\n"
+"POT-Creation-Date: 2023-11-03 01:40+0000\n"
 "PO-Revision-Date: 2023-10-21 13:51\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -39,12 +39,12 @@ msgstr "复制地址"
 msgid "Properties"
 msgstr "属性"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr "开"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr "关"
@@ -129,38 +129,38 @@ msgstr "%1：%2"
 msgid "Stream name not found"
 msgstr "未发现流名称"
 
-#: qml/volumeosd/VolumeOSD.qml:106
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Unmute"
 msgstr "取消静音"
 
-#: qml/volumeosd/VolumeOSD.qml:106 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
 #, kde-format
 msgid "Mute"
 msgstr "静音"
 
-#: qml/volumeosd/VolumeOSD.qml:130
+#: qml/volumeosd/VolumeOSD.qml:128
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:140
+#: qml/volumeosd/VolumeOSD.qml:138
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:160
+#: qml/volumeosd/VolumeOSD.qml:158
 #, kde-format
 msgid "Open audio settings"
 msgstr "打开音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:173
+#: qml/volumeosd/VolumeOSD.qml:171
 #, kde-format
 msgid "Audio Settings"
 msgstr "音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:180
+#: qml/volumeosd/VolumeOSD.qml:178
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "切换显示音频流"
@@ -180,28 +180,28 @@ msgstr "增加音量"
 msgid "Decrease Volume"
 msgstr "降低音量"
 
-#: qml/widgets/krunner/KRunnerScreen.qml:82
-#: qml/widgets/krunner/KRunnerWidget.qml:183
+#: qml/widgets/krunner/KRunnerScreen.qml:80
+#: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"
 msgstr "搜索"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:143
 #, kde-format
 msgid "No media playing"
 msgstr "没有正在播放的媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:176
 #, kde-format
 msgid "Previous track"
 msgstr "上一首"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:190
 #, kde-format
 msgid "Play or Pause media"
 msgstr "播放或暂停媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:206
 #, kde-format
 msgid "Next track"
 msgstr "下一首"
@@ -223,6 +223,58 @@ msgstr "输入回复"
 msgctxt "@action:button"
 msgid "Send"
 msgstr "发送"
+
+#: qml/widgets/notifications/NotificationsUtils.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr "%1 (已暂停)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr "%1 (已失败)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr "任务失败"
+
+#: qml/widgets/notifications/NotificationsUtils.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr "%1 (已完成)"
+
+#: qml/widgets/notifications/NotificationsUtils.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr "任务已完成"
+
+#: qml/widgets/notifications/NotificationsUtils.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr "%1分钟前"
+
+#: qml/widgets/notifications/NotificationsUtils.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr "剩余 %1秒"
+
+#: qml/widgets/notifications/NotificationsUtils.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr "剩余 %1分钟"
+
+#: qml/widgets/notifications/NotificationsUtils.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
+msgstr "剩余 %1小时"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:177
 #, kde-format
@@ -255,55 +307,3 @@ msgstr "清除所有通知"
 #, kde-format
 msgid "More Options…"
 msgstr "更多选项"
-
-#: qml/widgets/notifications/util.js:14
-#, kde-format
-msgctxt "Job name, e.g. Copying is paused"
-msgid "%1 (Paused)"
-msgstr "%1 (已暂停)"
-
-#: qml/widgets/notifications/util.js:19
-#, kde-format
-msgctxt "Job name, e.g. Copying has failed"
-msgid "%1 (Failed)"
-msgstr "%1 (已失败)"
-
-#: qml/widgets/notifications/util.js:21
-#, kde-format
-msgid "Job Failed"
-msgstr "任务失败"
-
-#: qml/widgets/notifications/util.js:24
-#, kde-format
-msgctxt "Job name, e.g. Copying has finished"
-msgid "%1 (Finished)"
-msgstr "%1 (已完成)"
-
-#: qml/widgets/notifications/util.js:26
-#, kde-format
-msgid "Job Finished"
-msgstr "任务已完成"
-
-#: qml/widgets/notifications/util.js:49
-#, kde-format
-msgctxt "Notification was added minutes ago, keep short"
-msgid "%1m ago"
-msgstr "%1分钟前"
-
-#: qml/widgets/notifications/util.js:81
-#, kde-format
-msgctxt "seconds remaining, keep short"
-msgid "%1 s remaining"
-msgstr "剩余 %1秒"
-
-#: qml/widgets/notifications/util.js:84
-#, kde-format
-msgctxt "minutes remaining, keep short"
-msgid "%1m remaining"
-msgstr "剩余 %1分钟"
-
-#: qml/widgets/notifications/util.js:87
-#, kde-format
-msgctxt "hours remaining, keep short"
-msgid "%1h remaining"
-msgstr "剩余 %1小时"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-23 01:41+0000\n"
+"POT-Creation-Date: 2023-11-03 01:40+0000\n"
 "PO-Revision-Date: 2022-12-20 22:48-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -35,12 +35,12 @@ msgstr ""
 msgid "Properties"
 msgstr ""
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "On"
 msgstr ""
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:99
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
 #, kde-format
 msgid "Off"
 msgstr ""
@@ -125,38 +125,38 @@ msgstr ""
 msgid "Stream name not found"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:106
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Unmute"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:106 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
 #, kde-format
 msgid "Mute"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:130
+#: qml/volumeosd/VolumeOSD.qml:128
 #, kde-format
 msgid "100%"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:140
+#: qml/volumeosd/VolumeOSD.qml:138
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:160
+#: qml/volumeosd/VolumeOSD.qml:158
 #, kde-format
 msgid "Open audio settings"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:173
+#: qml/volumeosd/VolumeOSD.qml:171
 #, kde-format
 msgid "Audio Settings"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:180
+#: qml/volumeosd/VolumeOSD.qml:178
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr ""
@@ -176,28 +176,28 @@ msgstr ""
 msgid "Decrease Volume"
 msgstr ""
 
-#: qml/widgets/krunner/KRunnerScreen.qml:82
-#: qml/widgets/krunner/KRunnerWidget.qml:183
+#: qml/widgets/krunner/KRunnerScreen.qml:80
+#: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"
 msgstr ""
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:144
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:143
 #, kde-format
 msgid "No media playing"
 msgstr ""
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:177
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:176
 #, kde-format
 msgid "Previous track"
 msgstr ""
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:191
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:190
 #, kde-format
 msgid "Play or Pause media"
 msgstr ""
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:206
 #, kde-format
 msgid "Next track"
 msgstr ""
@@ -218,6 +218,58 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Send"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:14
+#, kde-format
+msgctxt "Job name, e.g. Copying is paused"
+msgid "%1 (Paused)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:19
+#, kde-format
+msgctxt "Job name, e.g. Copying has failed"
+msgid "%1 (Failed)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:21
+#, kde-format
+msgid "Job Failed"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:24
+#, kde-format
+msgctxt "Job name, e.g. Copying has finished"
+msgid "%1 (Finished)"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:26
+#, kde-format
+msgid "Job Finished"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:49
+#, kde-format
+msgctxt "Notification was added minutes ago, keep short"
+msgid "%1m ago"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:81
+#, kde-format
+msgctxt "seconds remaining, keep short"
+msgid "%1 s remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:84
+#, kde-format
+msgctxt "minutes remaining, keep short"
+msgid "%1m remaining"
+msgstr ""
+
+#: qml/widgets/notifications/NotificationsUtils.js:87
+#, kde-format
+msgctxt "hours remaining, keep short"
+msgid "%1h remaining"
 msgstr ""
 
 #: qml/widgets/notifications/NotificationsWidget.qml:177
@@ -250,56 +302,4 @@ msgstr ""
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:14
-#, kde-format
-msgctxt "Job name, e.g. Copying is paused"
-msgid "%1 (Paused)"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:19
-#, kde-format
-msgctxt "Job name, e.g. Copying has failed"
-msgid "%1 (Failed)"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:21
-#, kde-format
-msgid "Job Failed"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:24
-#, kde-format
-msgctxt "Job name, e.g. Copying has finished"
-msgid "%1 (Finished)"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:26
-#, kde-format
-msgid "Job Finished"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:49
-#, kde-format
-msgctxt "Notification was added minutes ago, keep short"
-msgid "%1m ago"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:81
-#, kde-format
-msgctxt "seconds remaining, keep short"
-msgid "%1 s remaining"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:84
-#, kde-format
-msgctxt "minutes remaining, keep short"
-msgid "%1m remaining"
-msgstr ""
-
-#: qml/widgets/notifications/util.js:87
-#, kde-format
-msgctxt "hours remaining, keep short"
-msgid "%1h remaining"
 msgstr ""
