@@ -41,7 +41,7 @@ MobileShell.NavigationPanel {
         id: tasksModel
         filterByVirtualDesktop: true
         filterByActivity: true
-        filterNotMaximized: true
+        filterNotMaximized: false
         filterByScreen: true
         filterHidden: true
 
