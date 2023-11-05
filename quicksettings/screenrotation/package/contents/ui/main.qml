@@ -10,9 +10,10 @@ QS.QuickSetting {
     text: i18n("Auto-rotate")
     icon: "rotation-allowed"
     settingsCommand: "plasma-open-settings kcm_kscreen"
-    enabled: ScreenRotationUtil.screenRotationEnabled
+    enabled: ScreenRotationUtil.autoScreenRotationEnabled
     available: ScreenRotationUtil.available
+
     function toggle() {
-        ScreenRotationUtil.screenRotationEnabled = !enabled
+        ScreenRotationUtil.autoScreenRotationEnabled = !enabled
     }
 }

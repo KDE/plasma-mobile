@@ -18,6 +18,7 @@ Dependencies:
     'frameworks/modemmanager-qt': '@latest-kf6'
     'frameworks/networkmanager-qt': '@latest-kf6'
     'frameworks/kjobwidgets': '@latest-kf6'
+    'plasma/libkscreen': '@same'
     'plasma/plasma-framework': '@same'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'

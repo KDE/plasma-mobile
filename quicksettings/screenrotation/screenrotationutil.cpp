@@ -1,64 +1,68 @@
-/*
- * SPDX-FileCopyrightText: 2022 by Devin Lin <devin@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2022-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "screenrotationutil.h"
 
 #include <fcntl.h>
 #include <unistd.h>
 
+#include <kscreen/configmonitor.h>
+#include <kscreen/getconfigoperation.h>
+#include <kscreen/output.h>
+#include <kscreen/setconfigoperation.h>
+
 #include <QDebug>
+#include <QOrientationSensor>
 
 ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
     : QObject{parent}
+    , m_config{nullptr}
+    , m_sensor{new QOrientationSensor(this)}
 {
-    m_kscreenInterface = new org::kde::KScreen(QStringLiteral("org.kde.kded6"), QStringLiteral("/modules/kscreen"), QDBusConnection::sessionBus(), this);
+    connect(m_sensor, &QOrientationSensor::activeChanged, this, &ScreenRotationUtil::availableChanged);
+
+    connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
+        m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
+
+        Q_EMIT autoScreenRotationEnabledChanged();
+    });
 }
 
-bool ScreenRotationUtil::screenRotation()
+bool ScreenRotationUtil::autoScreenRotationEnabled()
 {
-    QDBusPendingReply<bool> reply = m_kscreenInterface->getAutoRotate();
-    reply.waitForFinished();
-    if (reply.isError()) {
-        qWarning() << "Getting auto rotate failed:" << reply.error().name() << reply.error().message();
+    if (!m_config) {
         return false;
-    } else {
-        return reply.value();
     }
+    const auto outputs = m_config->outputs();
+
+    for (KScreen::OutputPtr output : outputs) {
+        if (output->autoRotatePolicy() != KScreen::Output::AutoRotatePolicy::Always) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
-void ScreenRotationUtil::setScreenRotation(bool value)
+void ScreenRotationUtil::setAutoScreenRotationEnabled(bool value)
 {
-    QDBusPendingReply<> reply = m_kscreenInterface->setAutoRotate(value);
-    reply.waitForFinished();
-    if (reply.isError()) {
-        qWarning() << "Setting auto rotate failed:" << reply.error().name() << reply.error().message();
-    } else {
-        Q_EMIT screenRotationChanged(value);
+    if (!m_config) {
+        return;
     }
+
+    KScreen::Output::AutoRotatePolicy policy = value ? KScreen::Output::AutoRotatePolicy::Always : KScreen::Output::AutoRotatePolicy::Never;
+
+    const auto outputs = m_config->outputs();
+    for (KScreen::OutputPtr output : outputs) {
+        if (output->autoRotatePolicy() != policy) {
+            output->setAutoRotatePolicy(policy);
+        }
+    }
+
+    Q_EMIT autoScreenRotationEnabledChanged();
 }
 
 bool ScreenRotationUtil::isAvailable()
 {
-    QDBusPendingReply<bool> reply = m_kscreenInterface->isAutoRotateAvailable();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<bool> reply = *watcher;
-        if (reply.isError()) {
-            qWarning() << "Getting available failed:" << reply.error().name() << reply.error().message();
-        } else {
-            // make sure we don't go into an infinite loop
-            if (m_available != reply.value()) {
-                Q_EMIT availableChanged(m_available);
-            }
-
-            m_available = reply.value();
-        }
-        watcher->deleteLater();
-    });
-
-    return m_available;
+    return m_sensor->connectToBackend();
 }

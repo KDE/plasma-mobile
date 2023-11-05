@@ -50,6 +50,7 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Qml
     Quick
     Gui
+    Sensors
 )
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
@@ -71,6 +72,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     DBusAddons
     JobWidgets
 )
+
+find_package(KF6Screen CONFIG REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 

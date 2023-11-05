@@ -1,35 +1,34 @@
-/*
- * SPDX-FileCopyrightText: 2022 by Devin Lin <devin@kde.org>
- *
- * SPDX-License-Identifier: GPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2022-2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
 
 #include <QObject>
+#include <QOrientationSensor>
 
-#include "kscreeninterface.h"
+#include <kscreen/config.h>
 
 class ScreenRotationUtil : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(bool screenRotationEnabled READ screenRotation WRITE setScreenRotation NOTIFY screenRotationChanged);
+    Q_PROPERTY(bool autoScreenRotationEnabled READ autoScreenRotationEnabled WRITE setAutoScreenRotationEnabled NOTIFY autoScreenRotationEnabledChanged);
     Q_PROPERTY(bool available READ isAvailable NOTIFY availableChanged);
 
 public:
     ScreenRotationUtil(QObject *parent = nullptr);
 
-    bool screenRotation();
-    void setScreenRotation(bool value);
+    bool autoScreenRotationEnabled();
+    void setAutoScreenRotationEnabled(bool value);
 
     bool isAvailable();
 
 Q_SIGNALS:
-    void screenRotationChanged(bool value);
-    void availableChanged(bool value);
+    void autoScreenRotationEnabledChanged();
+    void availableChanged();
 
 private:
-    org::kde::KScreen *m_kscreenInterface;
+    KScreen::ConfigPtr m_config;
+    QOrientationSensor *m_sensor;
 
     bool m_available;
 };
