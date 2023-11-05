@@ -18,16 +18,16 @@ As such, all of the positioning and placement of delegates on the screen are top
 - If an app gets uninstalled, the homescreen UI needs to ensure that delegates are updated
 - BUG: landscape favourites bar duplication when dragging icon from it sometimes
 - BUG: can't insert delegates in-between very well in landscape favourites bar
-- can make the touch area only the icon?
+- BUG: drag and drop animation when rejected on a different page
+- IMPROVEMENT: can make the touch area only the icon?
+
 - FEATURE: add widget import/export
 - FEATURE: keyboard navigation
 - FEATURE: touchpad navigation
 - FEATURE: option to darken wallpaper
 - FEATURE: option to turn off row/column swap
-- BUG: drag and drop animation when rejected on a different page
-
 - FEATURE: animate homescreen config opening
 
-- RESTORE app drawer overshoot
+- RESTORE: app drawer overshoot
 
 - PERFORMANCE: ensure that the widget config overlays are in loaders

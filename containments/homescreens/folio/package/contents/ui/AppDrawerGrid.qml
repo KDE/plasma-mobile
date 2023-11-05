@@ -34,7 +34,7 @@ MobileShell.GridView {
     cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Folio.FolioSettings.delegateIconSize + Kirigami.Units.largeSpacing * 3.5)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
-    boundsBehavior: Flickable.StopAtBounds
+    boundsBehavior: Flickable.DragAndOvershootBounds
 
     readonly property int columns: Math.floor(effectiveContentWidth / cellWidth)
     readonly property int rows: Math.ceil(root.count / columns)
@@ -90,8 +90,8 @@ MobileShell.GridView {
             Folio.HomeScreenState.startDelegateAppDrawerDrag(
                 centerX - Folio.HomeScreenState.pageCellWidth / 2,
                 centerY - Folio.HomeScreenState.pageCellHeight / 2,
-                delegate.pressPosition.x,
-                delegate.pressPosition.y,
+                delegate.pressPosition.x * (Folio.HomeScreenState.pageCellWidth / root.cellWidth),
+                delegate.pressPosition.y * (Folio.HomeScreenState.pageCellHeight / root.cellHeight),
                 model.delegate.application.storageId
             );
         }

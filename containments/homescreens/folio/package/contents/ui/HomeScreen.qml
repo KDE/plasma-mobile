@@ -101,11 +101,11 @@ Item {
 
         interactive: root.interactive &&
             settings.homeScreenInteractive &&
-            !appDrawer.flickable.moving &&
-            (appDrawer.flickable.atYBeginning || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
+            (appDrawer.flickable.contentY <= 10 || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
                 Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
                 Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
-                Folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid)
+                Folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
+                Folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
 
         onSwipeStarted: {
             homeScreenState.swipeStarted();

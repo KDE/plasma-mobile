@@ -1050,7 +1050,7 @@ void HomeScreenState::determineSwipeTypeAfterThreshold(qreal totalDeltaX, qreal 
                 break;
             case ViewState::AppDrawerView:
                 setSwipeState(SwipeState::SwipingAppDrawerGrid);
-                cancelAppDrawerAnimations();
+                // don't call cancelAppDrawerAnimations(), so we don't have it half open
             case ViewState::FolderView:
             case ViewState::SettingsView:
                 // no vertical behaviour in folder or settings view
