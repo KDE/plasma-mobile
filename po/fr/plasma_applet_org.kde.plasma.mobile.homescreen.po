@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2023-11-05 10:43+0000\n"
 "PO-Revision-Date: 2023-10-28 15:16+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -31,14 +31,19 @@ msgstr "Dossier"
 msgid "Applications"
 msgstr "Applications"
 
-#: package/contents/ui/FavouritesBar.qml:144
-#: package/contents/ui/FavouritesBar.qml:216
-#: package/contents/ui/FolderView.qml:267
-#: package/contents/ui/HomeScreenPage.qml:160
-#: package/contents/ui/HomeScreenPage.qml:233
+#: package/contents/ui/FavouritesBar.qml:146
+#: package/contents/ui/FavouritesBar.qml:220
+#: package/contents/ui/FolderView.qml:269
+#: package/contents/ui/HomeScreenPage.qml:205
+#: package/contents/ui/HomeScreenPage.qml:285
 #, kde-format
 msgid "Remove"
 msgstr "Supprimer"
+
+#: package/contents/ui/settings/AppletListViewer.qml:39
+#, kde-format
+msgid "Widgets"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2023-11-05 10:43+0000\n"
 "PO-Revision-Date: 2023-10-24 23:15+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -28,14 +28,19 @@ msgstr "Dosierujo"
 msgid "Applications"
 msgstr "Aplikaĵoj"
 
-#: package/contents/ui/FavouritesBar.qml:144
-#: package/contents/ui/FavouritesBar.qml:216
-#: package/contents/ui/FolderView.qml:267
-#: package/contents/ui/HomeScreenPage.qml:160
-#: package/contents/ui/HomeScreenPage.qml:233
+#: package/contents/ui/FavouritesBar.qml:146
+#: package/contents/ui/FavouritesBar.qml:220
+#: package/contents/ui/FolderView.qml:269
+#: package/contents/ui/HomeScreenPage.qml:205
+#: package/contents/ui/HomeScreenPage.qml:285
 #, kde-format
 msgid "Remove"
 msgstr "Forigi"
+
+#: package/contents/ui/settings/AppletListViewer.qml:39
+#, kde-format
+msgid "Widgets"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
