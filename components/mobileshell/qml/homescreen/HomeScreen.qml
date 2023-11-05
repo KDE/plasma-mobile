@@ -61,8 +61,7 @@ Item {
 
     function evaluateMargins() {
         topMargin = plasmoidItem.availableScreenRect.y
-        // add a specific check for the nav panel for now, since the gesture mode still technically has height
-        bottomMargin = ShellSettings.Settings.navigationPanelEnabled ? root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height) : 0;
+        bottomMargin = root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height)
         leftMargin = plasmoidItem.availableScreenRect.x
         rightMargin = root.width - (plasmoidItem.availableScreenRect.x + plasmoidItem.availableScreenRect.width)
     }
