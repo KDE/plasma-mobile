@@ -107,6 +107,8 @@ MouseArea {
                         Folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
                             mappedCoords.y,
+                            appDelegate.pressPosition.x,
+                            appDelegate.pressPosition.y,
                             delegate.index
                         );
 
@@ -178,6 +180,8 @@ MouseArea {
                         Folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
                             mappedCoords.y,
+                            appFolderDelegate.pressPosition.x,
+                            appFolderDelegate.pressPosition.y,
                             delegate.index
                         );
 

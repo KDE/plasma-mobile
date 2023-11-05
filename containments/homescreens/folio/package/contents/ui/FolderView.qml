@@ -229,6 +229,8 @@ Folio.DelegateTouchArea {
                                     Folio.HomeScreenState.startDelegateFolderDrag(
                                         mappedCoords.x,
                                         mappedCoords.y,
+                                        appDelegate.pressPosition.x,
+                                        appDelegate.pressPosition.y,
                                         root.folder,
                                         delegate.index
                                     );

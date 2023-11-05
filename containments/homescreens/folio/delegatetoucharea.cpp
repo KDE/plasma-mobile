@@ -5,6 +5,8 @@
 #include "delegatetoucharea.h"
 
 #include <QCursor>
+#include <QGuiApplication>
+#include <QStyleHints>
 
 // Some code taken from MouseArea
 
@@ -12,7 +14,6 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     : QQuickItem{parent}
     , m_pressAndHoldTimer{new QTimer{this}}
 {
-    // TODO: currently hardcoded 2s press and hold interval
     m_pressAndHoldTimer->setInterval(600);
     m_pressAndHoldTimer->setSingleShot(true);
     connect(m_pressAndHoldTimer, &QTimer::timeout, this, &DelegateTouchArea::startPressAndHold);
@@ -24,7 +25,7 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
 
     setAcceptHoverEvents(true);
     setAcceptTouchEvents(true);
-    // setFiltersChildMouseEvents(true);
+    setFlags(QQuickItem::ItemIsFocusScope);
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton);
 }
 
@@ -54,19 +55,6 @@ void DelegateTouchArea::setHovered(bool hovered)
     }
 }
 
-bool DelegateTouchArea::dragging()
-{
-    return m_dragging;
-}
-
-void DelegateTouchArea::setDragging(bool dragging)
-{
-    if (dragging != m_dragging) {
-        m_dragging = dragging;
-        Q_EMIT draggingChanged(dragging);
-    }
-}
-
 Qt::CursorShape DelegateTouchArea::cursorShape()
 {
     return cursor().shape();
@@ -85,6 +73,11 @@ void DelegateTouchArea::setCursorShape(Qt::CursorShape cursorShape)
 void DelegateTouchArea::unsetCursor()
 {
     setCursorShape(Qt::ArrowCursor);
+}
+
+QPointF DelegateTouchArea::pressPosition()
+{
+    return m_mouseDownPosition;
 }
 
 void DelegateTouchArea::mousePressEvent(QMouseEvent *event)
@@ -178,86 +171,6 @@ void DelegateTouchArea::hoverLeaveEvent(QHoverEvent *event)
     event->ignore();
 }
 
-// bool DelegateTouchArea::childMouseEventFilter(QQuickItem *item, QEvent *event)
-// {
-//     if (!isVisible() || !isEnabled()) {
-//         handleReleaseEvent(nullptr, false);
-//         return QQuickItem::childMouseEventFilter(item, event);
-//     }
-//
-//     if (event->isPointerEvent() && event->type() != QEvent::UngrabMouse) {
-//         return filterPointerEvent(item, static_cast<QPointerEvent *>(event));
-//     }
-//
-//     return QQuickItem::childMouseEventFilter(item, event);
-// }
-//
-// // take exclusive grab from children
-// bool DelegateTouchArea::filterPointerEvent(QQuickItem *receiver, QPointerEvent *event)
-// {
-//     // only filter mouse, touch or tablet events
-//     if (!dynamic_cast<QMouseEvent *>(event) && !dynamic_cast<QTabletEvent *>(event) && !dynamic_cast<QTouchEvent *>(event)) {
-//         return false;
-//     }
-//
-//     const auto &firstPoint = event->points().first();
-//
-//     if (event->pointCount() == 1 && event->exclusiveGrabber(firstPoint) == this) {
-//         // We have an exclusive grab (since we're e.g dragging), but at the same time, we have
-//         // a child with a passive grab (which is why this filter is being called). And because
-//         // of that, we end up getting the same pointer events twice; First in our own event
-//         // handlers (because of the grab), then once more in here, since we filter the child.
-//         // To avoid processing the event twice (e.g avoid calling handleReleaseEvent once more
-//         // from below), we mark the event as filtered, and simply return.
-//         event->setAccepted(true);
-//         return true;
-//     }
-//
-//     QPointF localPos = mapFromScene(firstPoint.scenePosition());
-//     bool receiverDisabled = receiver && !receiver->isEnabled();
-//     bool receiverKeepsGrab = receiver && (receiver->keepMouseGrab() || receiver->keepTouchGrab());
-//
-//     if ((m_pressAndHeld || contains(localPos)) && (!receiver || !receiverKeepsGrab || receiverDisabled)) {
-//         // clone the event, and set the first point's local position
-//         // HACK: we can't change QPointerEvent's points since it's const, so we have to pass localPos into the handlers
-//         QPointerEvent *localizedEvent = event->clone();
-//         localizedEvent->setAccepted(false);
-//
-//         switch (firstPoint.state()) {
-//         case QEventPoint::State::Updated:
-//             handleMoveEvent(localizedEvent, localPos);
-//             break;
-//         case QEventPoint::State::Pressed:
-//             handlePressEvent(localizedEvent, localPos);
-//             break;
-//         case QEventPoint::State::Released:
-//             handleReleaseEvent(localizedEvent, true);
-//             break;
-//         case QEventPoint::State::Stationary:
-//         case QEventPoint::State::Unknown:
-//             break;
-//         }
-//
-//         if ((receiver && m_pressAndHeld && !receiverKeepsGrab && receiver != this) || receiverDisabled) {
-//             event->setExclusiveGrabber(firstPoint, this);
-//         }
-//
-//         bool filtered = m_pressAndHeld || receiverDisabled;
-//         if (filtered) {
-//             event->setAccepted(true);
-//         }
-//
-//         return filtered;
-//     }
-//
-//     if (firstPoint.state() == QEventPoint::State::Released || (receiverKeepsGrab && !receiverDisabled)) {
-//         // mouse released, or another item has claimed the grab
-//         handleReleaseEvent(nullptr, false);
-//     }
-//
-//     return false;
-// }
-
 void DelegateTouchArea::handlePressEvent(QPointerEvent *event, QPointF point)
 {
     // ignore multiple press events
@@ -266,6 +179,11 @@ void DelegateTouchArea::handlePressEvent(QPointerEvent *event, QPointF point)
     }
 
     setPressed(true);
+    forceActiveFocus(Qt::MouseFocusReason);
+
+    m_mouseDownPosition = point;
+    Q_EMIT pressPositionChanged();
+
     m_pressAndHoldTimer->start();
 }
 
@@ -273,10 +191,10 @@ void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
 {
     // NOTE: event can be nullptr!
 
+    bool wasPressed = m_pressed;
     setPressed(false);
-    setDragging(false);
 
-    if (!m_pressAndHeld && click) {
+    if (!m_pressAndHeld && click && wasPressed) {
         Q_EMIT clicked();
     }
 
@@ -290,8 +208,9 @@ void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
 
 void DelegateTouchArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 {
-    if (m_pressAndHeld) {
-        // TODO
+    if (QPointF(point - m_mouseDownPosition).manhattanLength() >= QGuiApplication::styleHints()->startDragDistance()) {
+        m_pressAndHoldTimer->stop();
+        setPressed(false);
     }
 }
 

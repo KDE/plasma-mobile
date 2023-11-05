@@ -22,6 +22,7 @@ MobileShell.GridView {
     layer.enabled: true
 
     property var homeScreen
+    property real headerHeight
 
     readonly property int reservedSpaceForLabel: Folio.HomeScreenState.pageDelegateLabelHeight
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
@@ -30,7 +31,7 @@ MobileShell.GridView {
     leftMargin: horizontalMargin
     rightMargin: horizontalMargin
 
-    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Folio.FolioSettings.delegateIconSize + Kirigami.Units.largeSpacing * 3)), 8)
+    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Folio.FolioSettings.delegateIconSize + Kirigami.Units.largeSpacing * 3.5)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
     boundsBehavior: Flickable.StopAtBounds
@@ -79,11 +80,18 @@ MobileShell.GridView {
         height: root.cellHeight
 
         onPressAndHold: {
+            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, delegate.delegateItem);
             Folio.HomeScreenState.closeAppDrawer();
-            let mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, delegate.delegateItem);
+
+            // we need to adjust because app drawer delegates have a different size than regular homescreen delegates
+            const centerX = mappedCoords.x + root.cellWidth / 2;
+            const centerY = mappedCoords.y + root.cellHeight / 2;
+
             Folio.HomeScreenState.startDelegateAppDrawerDrag(
-                mappedCoords.x,
-                mappedCoords.y,
+                centerX - Folio.HomeScreenState.pageCellWidth / 2,
+                centerY - Folio.HomeScreenState.pageCellHeight / 2,
+                delegate.pressPosition.x,
+                delegate.pressPosition.y,
                 model.delegate.application.storageId
             );
         }

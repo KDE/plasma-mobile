@@ -24,7 +24,7 @@ class DelegateDragPosition : public QObject
     Q_PROPERTY(FolioApplicationFolder *folder READ folder NOTIFY folderChanged)
 
 public:
-    enum Location { Pages, Favourites, AppDrawer, Folder };
+    enum Location { Pages, Favourites, AppDrawer, Folder, WidgetList };
     Q_ENUM(Location)
 
     DelegateDragPosition(QObject *parent = nullptr);
@@ -94,6 +94,9 @@ Q_SIGNALS:
     void dropDelegateChanged();
     void delegateDroppedAndPlaced();
 
+    // if you drop a new delegate on an invalid spot
+    void newDelegateDropAbandoned();
+
 private Q_SLOTS:
     void onDelegateDragPositionChanged();
     void onDelegateDragPositionOverFolderViewChanged();
@@ -105,6 +108,7 @@ private Q_SLOTS:
     void onDelegateDragFromFavouritesStarted(int position);
     void onDelegateDragFromAppDrawerStarted(QString storageId);
     void onDelegateDragFromFolderStarted(FolioApplicationFolder *folder, int position);
+    void onDelegateDragFromWidgetListStarted(QString appletPluginId);
     void onDelegateDropped();
 
     void onLeaveCurrentFolder();
@@ -120,8 +124,8 @@ private:
     // deletes the delegate at m_startPosition
     void deleteStartPositionDelegate();
 
-    // deletes the delegate at m_candidateDropPosition
-    void createDropPositionDelegate();
+    // places the delegate at m_candidateDropPosition, returning whether it was successful
+    bool createDropPositionDelegate();
 
     // whether m_startPosition = m_candidateDropPosition
     bool isStartPositionEqualDropPosition();
@@ -129,6 +133,10 @@ private:
     // we need to adjust so that the coord is in the center of the delegate
     qreal getDraggedDelegateX();
     qreal getDraggedDelegateY();
+
+    // position of the dragging pointer
+    qreal getPointerX();
+    qreal getPointerY();
 
     QTimer *m_changePageTimer{nullptr};
     QTimer *m_openFolderTimer{nullptr};
@@ -151,6 +159,9 @@ private:
 
     // this is the original start position of the drag
     DelegateDragPosition *const m_startPosition{nullptr};
+
+    // when dropping a new widget, this is the applet name
+    QString m_createdAppletPluginId{};
 
     HomeScreenState *m_state{nullptr};
 };

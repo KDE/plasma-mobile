@@ -31,7 +31,7 @@ public:
     FolioApplication(QObject *parent = nullptr, KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr});
 
     static FolioApplication *fromJson(QJsonObject &obj, QObject *parent); // may return nullptr
-    QJsonObject toJson();
+    QJsonObject toJson() const;
 
     bool running() const;
     QString name() const;

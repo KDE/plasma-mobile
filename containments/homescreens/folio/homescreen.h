@@ -19,4 +19,8 @@ public:
 
 Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
+
+private Q_SLOTS:
+    void onAppletAdded(Plasma::Applet *applet, const QRectF &geometryHint);
+    void onAppletAboutToBeRemoved(Plasma::Applet *applet);
 };

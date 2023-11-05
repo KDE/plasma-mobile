@@ -6,11 +6,12 @@ import QtQuick.Layouts
 import QtQuick.Controls as Controls
 import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.kirigami 2.10 as Kirigami
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
+
+import 'private'
 
 Item {
     id: root
@@ -58,26 +59,13 @@ Item {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
             opacity: 0
+            headerHeight: root.headerHeight
         }
 
         // opacity gradient at grid edges
-        OpacityMask {
+        FlickableOpacityGradient {
             anchors.fill: appDrawerGrid
-            source: appDrawerGrid
-            maskSource: Rectangle {
-                id: mask
-                width: appDrawerGrid.width
-                height: appDrawerGrid.height
-
-                property real gradientPct: (Kirigami.Units.gridUnit * 2) / appDrawerGrid.height
-
-                gradient: Gradient {
-                    GradientStop { position: 0.0; color: appDrawerGrid.atYBeginning ? 'white' : 'transparent' }
-                    GradientStop { position: mask.gradientPct; color: 'white' }
-                    GradientStop { position: 1.0 - mask.gradientPct; color: 'white' }
-                    GradientStop { position: 1.0; color: appDrawerGrid.atYEnd ? 'white' : 'transparent' }
-                }
-            }
+            flickable: appDrawerGrid
         }
     }
 }

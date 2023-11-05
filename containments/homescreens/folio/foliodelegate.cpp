@@ -9,6 +9,7 @@ FolioDelegate::FolioDelegate(QObject *parent)
     , m_type{FolioDelegate::None}
     , m_application{nullptr}
     , m_folder{nullptr}
+    , m_widget{nullptr}
 {
 }
 
@@ -17,6 +18,7 @@ FolioDelegate::FolioDelegate(FolioApplication *application, QObject *parent)
     , m_type{FolioDelegate::Application}
     , m_application{application}
     , m_folder{nullptr}
+    , m_widget{nullptr}
 {
 }
 
@@ -25,6 +27,16 @@ FolioDelegate::FolioDelegate(FolioApplicationFolder *folder, QObject *parent)
     , m_type{FolioDelegate::Folder}
     , m_application{nullptr}
     , m_folder{folder}
+    , m_widget{nullptr}
+{
+}
+
+FolioDelegate::FolioDelegate(FolioWidget *widget, QObject *parent)
+    : QObject{parent}
+    , m_type{FolioDelegate::Widget}
+    , m_application{nullptr}
+    , m_folder{nullptr}
+    , m_widget{widget}
 {
 }
 
@@ -47,6 +59,13 @@ FolioDelegate *FolioDelegate::fromJson(QJsonObject &obj, QObject *parent)
             return new FolioDelegate{folder, parent};
         }
 
+    } else if (type == "widget") {
+        // read widget
+        FolioWidget *widget = FolioWidget::fromJson(obj, parent);
+
+        if (widget) {
+            return new FolioDelegate{widget, parent};
+        }
     } else if (type == "none") {
         return new FolioDelegate{parent};
     }
@@ -61,6 +80,8 @@ QJsonObject FolioDelegate::toJson() const
         return m_application->toJson();
     case FolioDelegate::Folder:
         return m_folder->toJson();
+    case FolioDelegate::Widget:
+        return m_widget->toJson();
     case FolioDelegate::None: {
         QJsonObject obj;
         obj[QStringLiteral("type")] = "none";
@@ -85,4 +106,9 @@ FolioApplication *FolioDelegate::application()
 FolioApplicationFolder *FolioDelegate::folder()
 {
     return m_folder;
+}
+
+FolioWidget *FolioDelegate::widget()
+{
+    return m_widget;
 }

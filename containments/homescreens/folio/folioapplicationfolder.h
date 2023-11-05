@@ -36,7 +36,7 @@ public:
     FolioApplicationFolder(QObject *parent = nullptr, QString name = QString{});
 
     static FolioApplicationFolder *fromJson(QJsonObject &obj, QObject *parent);
-    QJsonObject toJson();
+    QJsonObject toJson() const;
 
     QString name() const;
     void setName(QString &name);
@@ -92,6 +92,7 @@ public:
 
     FolioDelegate *getDelegate(int index);
     void moveEntry(int fromRow, int toRow);
+    bool canAddDelegate(FolioDelegate *delegate, int index);
     bool addDelegate(FolioDelegate *delegate, int index);
     void removeDelegate(int index);
     QPointF getDelegatePosition(int index);

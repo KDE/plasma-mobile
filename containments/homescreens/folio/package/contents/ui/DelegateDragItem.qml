@@ -18,15 +18,18 @@ Item {
 
     readonly property real dropAnimationRunning: dragXAnim.running || dragYAnim.running
 
+    // ignore widget dragging, that is not handled by this component
+    readonly property bool isWidgetDrag: Folio.HomeScreenState.dragState.dropDelegate && Folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
+
     visible: false
-    x: Math.round(Folio.HomeScreenState.delegateDragX)
-    y: Math.round(Folio.HomeScreenState.delegateDragY)
+    x: Folio.HomeScreenState.delegateDragX
+    y: Folio.HomeScreenState.delegateDragY
 
     function setXBinding() {
-        x = Qt.binding(() => Math.round(Folio.HomeScreenState.delegateDragX));
+        x = Qt.binding(() => Folio.HomeScreenState.delegateDragX);
     }
     function setYBinding() {
-        y = Qt.binding(() => Math.round(Folio.HomeScreenState.delegateDragY));
+        y = Qt.binding(() => Folio.HomeScreenState.delegateDragY);
     }
 
     // animate drop x
@@ -70,7 +73,7 @@ Item {
 
         // reset and show drag item
         function onSwipeStateChanged() {
-            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate && !isWidgetDrag) {
                 root.scale = 1.0;
                 root.visible = true;
             }
@@ -78,6 +81,10 @@ Item {
 
         // save the existing delegate at the spot (this is called before the delegate is dropped)
         function onDelegateDragEnded() {
+            if (root.isWidgetDrag) {
+                return;
+            }
+
             let dragState = Folio.HomeScreenState.dragState;
             let dropPosition = dragState.candidateDropPosition;
 
@@ -89,7 +96,7 @@ Item {
                     stateWatcher.delegateDroppedOn = Folio.HomeScreenState.getFavouritesDelegateAt(dropPosition.favouritesPosition);
                     break;
                 case Folio.DelegateDragPosition.Folder:
-                    stateWatcher.delegateDroppedOn = null
+                    stateWatcher.delegateDroppedOn = null;
                     break;
             }
         }
@@ -100,6 +107,10 @@ Item {
 
         // animate from when the delegate is dropped to its drop position
         function onDelegateDroppedAndPlaced() {
+            if (root.isWidgetDrag) {
+                return;
+            }
+
             let dragState = Folio.HomeScreenState.dragState;
             let dropPosition = dragState.candidateDropPosition;
 
@@ -129,6 +140,11 @@ Item {
                 // scale animation if we are creating, or inserting into a folder
                 scaleAnim.restart();
             }
+        }
+
+        // if the drop has been abandoned, just hide
+        function onNewDelegateDropAbandoned() {
+            root.visible = false;
         }
     }
 

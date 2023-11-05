@@ -44,7 +44,7 @@ FolioApplication *FolioApplication::fromJson(QJsonObject &obj, QObject *parent)
     return nullptr;
 }
 
-QJsonObject FolioApplication::toJson()
+QJsonObject FolioApplication::toJson() const
 {
     QJsonObject obj;
     obj[QStringLiteral("type")] = "application";

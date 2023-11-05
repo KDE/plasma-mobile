@@ -29,8 +29,13 @@ Item {
 
     property Folio.HomeScreenState homeScreenState: Folio.HomeScreenState
 
-    readonly property bool dropAnimationRunning: delegateDragItem.dropAnimationRunning
+    // non-widget drop animation
+    readonly property bool dropAnimationRunning: delegateDragItem.dropAnimationRunning || widgetDragItem.dropAnimationRunning
 
+    // widget that is currently being dragged (or dropped)
+    readonly property Folio.FolioWidget currentlyDraggedWidget: widgetDragItem.widget
+
+    // how much to scale out in the settings mode
     readonly property real settingsModeHomeScreenScale: 0.8
 
     onTopMarginChanged: Folio.HomeScreenState.viewTopPadding = root.topMargin
@@ -43,7 +48,9 @@ Item {
     function prepareStartDelegateDrag(delegate, item) {
         swipeArea.setSkipSwipeThreshold(true);
 
-        delegateDragItem.delegate = delegate;
+        if (delegate) {
+            delegateDragItem.delegate = delegate;
+        }
         return root.mapFromItem(item, 0, 0);
     }
 
@@ -82,12 +89,18 @@ Item {
         onHeightChanged: Folio.HomeScreenState.viewHeight = height;
     }
 
+    // a way of stopping focus
+    FocusScope {
+        id: noFocus
+    }
+
     // area that can be swiped
     MobileShell.SwipeArea {
         id: swipeArea
         anchors.fill: parent
 
         interactive: root.interactive &&
+            settings.homeScreenInteractive &&
             !appDrawer.flickable.moving &&
             (appDrawer.flickable.atYBeginning || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
                 Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
@@ -104,12 +117,24 @@ Item {
             homeScreenState.swipeMoved(totalDeltaX, totalDeltaY, deltaX, deltaY);
         }
 
+        onPressedChanged: {
+            if (pressed) {
+                // ensures that components like the widget settings overlay close when swiping
+                noFocus.forceActiveFocus();
+            }
+        }
+
         SettingsComponent {
             id: settings
-            anchors.fill: parent
+            width: parent.width
+            height: parent.height
             opacity: Folio.HomeScreenState.settingsOpenProgress
-            visible: opacity > 0
             z: 1
+
+            // move the settings out of the way if it is not visible
+            // NOTE: we do this instead of setting visible to false, because
+            //       it doesn't mess with widget drag and drop
+            y: (opacity > 0) ? 0 : parent.height
 
             settingsModeHomeScreenScale: root.settingsModeHomeScreenScale
             homeScreen: root
@@ -331,6 +356,11 @@ Item {
         // drag and drop component
         DelegateDragItem {
             id: delegateDragItem
+        }
+
+        // drag and drop for widgets
+        WidgetDragItem {
+            id: widgetDragItem
         }
 
         // bottom app drawer

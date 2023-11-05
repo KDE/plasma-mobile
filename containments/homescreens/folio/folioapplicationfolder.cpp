@@ -29,7 +29,7 @@ FolioApplicationFolder *FolioApplicationFolder::fromJson(QJsonObject &obj, QObje
     return folder;
 }
 
-QJsonObject FolioApplicationFolder::toJson()
+QJsonObject FolioApplicationFolder::toJson() const
 {
     QJsonObject obj;
     obj[QStringLiteral("type")] = "folder";
@@ -213,13 +213,22 @@ void ApplicationFolderModel::moveEntry(int fromRow, int toRow)
     Q_EMIT m_folder->saveRequested();
 }
 
-bool ApplicationFolderModel::addDelegate(FolioDelegate *delegate, int index)
+bool ApplicationFolderModel::canAddDelegate(FolioDelegate *delegate, int index)
 {
     if (index < 0 || index > m_folder->m_delegates.size()) {
         return false;
     }
 
     if (!delegate) {
+        return false;
+    }
+
+    return true;
+}
+
+bool ApplicationFolderModel::addDelegate(FolioDelegate *delegate, int index)
+{
+    if (!canAddDelegate(delegate, index)) {
         return false;
     }
 

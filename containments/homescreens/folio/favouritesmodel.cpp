@@ -119,13 +119,22 @@ void FavouritesModel::moveEntry(int fromRow, int toRow)
     save();
 }
 
-bool FavouritesModel::addEntry(int row, FolioDelegate *delegate)
+bool FavouritesModel::canAddEntry(int row, FolioDelegate *delegate)
 {
     if (!delegate) {
         return false;
     }
 
     if (row < 0 || row > m_delegates.size()) {
+        return false;
+    }
+
+    return true;
+}
+
+bool FavouritesModel::addEntry(int row, FolioDelegate *delegate)
+{
+    if (!canAddEntry(row, delegate)) {
         return false;
     }
 
@@ -142,6 +151,9 @@ bool FavouritesModel::addEntry(int row, FolioDelegate *delegate)
         evaluateDelegatePositions(false);
         endInsertRows();
     }
+
+    // ensure saves are connected when requested by the delegate
+    connectSaveRequests(delegate);
 
     evaluateDelegatePositions();
 
@@ -230,24 +242,24 @@ QJsonArray FavouritesModel::exportToJson()
 
 void FavouritesModel::save()
 {
-    if (!m_applet) {
+    if (!m_containment) {
         return;
     }
 
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_applet->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_applet->configNeedsSaving();
+    m_containment->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
+    Q_EMIT m_containment->configNeedsSaving();
 }
 
 void FavouritesModel::load()
 {
-    if (!m_applet) {
+    if (!m_containment) {
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_applet->config().readEntry("Favourites", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_containment->config().readEntry("Favourites", "{}").toUtf8());
     loadFromJson(doc.array());
 }
 
@@ -262,10 +274,7 @@ void FavouritesModel::loadFromJson(QJsonArray arr)
         FolioDelegate *delegate = FolioDelegate::fromJson(obj, this);
 
         if (delegate) {
-            if (delegate->type() == FolioDelegate::Folder) {
-                connect(delegate->folder(), &FolioApplicationFolder::saveRequested, this, &FavouritesModel::save);
-            }
-
+            connectSaveRequests(delegate);
             m_delegates.append({delegate, 0});
         }
     }
@@ -274,9 +283,16 @@ void FavouritesModel::loadFromJson(QJsonArray arr)
     endResetModel();
 }
 
-void FavouritesModel::setApplet(Plasma::Applet *applet)
+void FavouritesModel::connectSaveRequests(FolioDelegate *delegate)
 {
-    m_applet = applet;
+    if (delegate->type() == FolioDelegate::Folder && delegate->folder()) {
+        connect(delegate->folder(), &FolioApplicationFolder::saveRequested, this, &FavouritesModel::save);
+    }
+}
+
+void FavouritesModel::setContainment(Plasma::Containment *containment)
+{
+    m_containment = containment;
 }
 
 bool FavouritesModel::dropPositionIsEdge(qreal x, qreal y) const

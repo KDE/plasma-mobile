@@ -8,7 +8,7 @@
 #include <QAbstractListModel>
 #include <QList>
 
-#include <Plasma/Applet>
+#include <Plasma/Containment>
 
 class PageListModel : public QAbstractListModel
 {
@@ -38,7 +38,7 @@ public:
     Q_INVOKABLE void load();
     void loadFromJson(QJsonArray arr);
 
-    void setApplet(Plasma::Applet *applet);
+    void setContainment(Plasma::Containment *containment);
 
 Q_SIGNALS:
     void lengthChanged();
@@ -46,5 +46,5 @@ Q_SIGNALS:
 private:
     QList<PageModel *> m_pages;
 
-    Plasma::Applet *m_applet{nullptr};
+    Plasma::Containment *m_containment{nullptr};
 };

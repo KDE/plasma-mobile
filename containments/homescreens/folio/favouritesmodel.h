@@ -11,7 +11,7 @@
 #include <QQuickItem>
 #include <QSet>
 
-#include <Plasma/Applet>
+#include <Plasma/Containment>
 
 #include "foliodelegate.h"
 
@@ -39,6 +39,7 @@ public:
 
     Q_INVOKABLE void removeEntry(int row);
     void moveEntry(int fromRow, int toRow);
+    bool canAddEntry(int row, FolioDelegate *delegate);
     bool addEntry(int row, FolioDelegate *delegate);
     FolioDelegate *getEntryAt(int row);
 
@@ -64,9 +65,10 @@ public:
     Q_INVOKABLE void load();
     void loadFromJson(QJsonArray arr);
 
-    void setApplet(Plasma::Applet *applet);
+    void setContainment(Plasma::Containment *containment);
 
 private:
+    void connectSaveRequests(FolioDelegate *delegate);
     void evaluateDelegatePositions(bool emitSignal = true);
 
     // get the x (or y) position where delegates start being placed
@@ -78,5 +80,5 @@ private:
 
     QList<FavouritesDelegate> m_delegates;
 
-    Plasma::Applet *m_applet{nullptr};
+    Plasma::Containment *m_containment{nullptr};
 };

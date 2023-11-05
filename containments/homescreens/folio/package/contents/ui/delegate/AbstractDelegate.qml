@@ -9,7 +9,6 @@ import QtQuick.Effects
 
 import org.kde.kirigami 2.20 as Kirigami
 
-import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
