@@ -41,8 +41,6 @@ Folio.WidgetContainer {
             return;
         }
 
-        widget.visualApplet.expanded = true;
-
         widget.visualApplet.parent = widgetHolder;
         widget.visualApplet.anchors.fill = widgetHolder;
         if (widget.visualApplet.fullRepresentationItem) {
