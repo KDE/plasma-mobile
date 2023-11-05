@@ -65,6 +65,21 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { visible: keyboardToggleDelegate.visible; above: gestureDelegate; below: keyboardToggleDelegate }
+
+            FormCard.FormSwitchDelegate {
+                id: keyboardToggleDelegate
+                visible: !gestureDelegate.checked
+                text: i18n("Always show keyboard toggle")
+                description: i18n("Whether to always show the keyboard toggle button on the navigation panel.")
+                checked: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel) {
+                        ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {

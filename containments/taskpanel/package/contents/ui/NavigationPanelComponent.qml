@@ -13,6 +13,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.taskmanager as TaskManager
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 import org.kde.kirigami as Kirigami
 
@@ -104,7 +105,8 @@ MobileShell.NavigationPanel {
     
     rightCornerAction: MobileShell.NavigationPanelAction {
         id: keyboardToggleAction
-        visible: Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput
+        visible: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel || 
+                 (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput)
         enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
         iconSizeFactor: 0.75

@@ -31,6 +31,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
+            Q_EMIT alwaysShowKeyboardToggleOnNavigationPanelChanged();
             Q_EMIT keyboardButtonEnabledChanged();
             Q_EMIT taskSwitcherPreviewsEnabledChanged();
             Q_EMIT actionDrawerTopLeftModeChanged();
@@ -105,6 +106,19 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     m_config->sync();
 
     updateNavigationBarsInPlasma(navigationPanelEnabled);
+}
+
+bool MobileShellSettings::alwaysShowKeyboardToggleOnNavigationPanel() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("alwaysShowKeyboardToggleOnNavigationPanel", false);
+}
+
+void MobileShellSettings::setAlwaysShowKeyboardToggleOnNavigationPanel(bool alwaysShowKeyboardToggleOnNavigationPanel)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("alwaysShowKeyboardToggleOnNavigationPanel", alwaysShowKeyboardToggleOnNavigationPanel, KConfigGroup::Notify);
+    m_config->sync();
 }
 
 MobileShellSettings::ActionDrawerMode MobileShellSettings::actionDrawerTopLeftMode() const

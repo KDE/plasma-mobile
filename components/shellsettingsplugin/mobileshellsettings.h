@@ -32,6 +32,8 @@ class MobileShellSettings : public QObject
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
+    Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel
+                   NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
 
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
@@ -118,6 +120,23 @@ public:
     void setNavigationPanelEnabled(bool navigationPanelEnabled);
 
     /**
+     * Set whether the keyboard toggle button should always show on the navigation panel, regardless of
+     * whether the app properly supports virtual keyboards.
+     *
+     * If this is false, then the keyboard toggle only shows on the navigation panel if the app doesn't
+     * support virtual keyboards.
+     */
+    bool alwaysShowKeyboardToggleOnNavigationPanel() const;
+
+    /**
+     * Set whether the keyboard toggle button should always show on the navigation panel, regardless of
+     * whether the app properly supports virtual keyboards.
+     *
+     * @param alwaysShowKeyboardToggleOnNavigationPanel
+     */
+    void setAlwaysShowKeyboardToggleOnNavigationPanel(bool alwaysShowKeyboardToggleOnNavigationPanel);
+
+    /**
      * The mode of the action drawer when swiped down from the top left.
      */
     ActionDrawerMode actionDrawerTopLeftMode() const;
@@ -158,6 +177,7 @@ Q_SIGNALS:
     void vibrationIntensityChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
+    void alwaysShowKeyboardToggleOnNavigationPanelChanged();
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
     void taskSwitcherPreviewsEnabledChanged();
