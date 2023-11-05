@@ -6,7 +6,7 @@
 
 #include "powermenuutil.h"
 
-#include <kworkspace.h>
+#include <sessionmanagement.h>
 
 PowerMenuUtil::PowerMenuUtil(QObject *parent)
     : QObject{parent}
@@ -15,5 +15,6 @@ PowerMenuUtil::PowerMenuUtil(QObject *parent)
 
 void PowerMenuUtil::openShutdownScreen()
 {
-    KWorkSpace::requestShutDown(KWorkSpace::ShutdownConfirmYes);
+    SessionManagement sessionManagement;
+    sessionManagement.requestShutdown();
 }
