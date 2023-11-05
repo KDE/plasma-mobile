@@ -33,15 +33,30 @@ MouseArea {
         color: Qt.rgba(0, 0, 0, 0.7)
     }
 
-    PC3.Label {
-        id: heading
-        color: 'white'
-        text: i18n("Widgets")
-        font.weight: Font.Bold
-        font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
-        anchors.horizontalCenter: parent.horizontalCenter
+    RowLayout {
+        id: header
+        spacing: Kirigami.Units.largeSpacing
+        anchors.left: parent.left
+        anchors.leftMargin: Kirigami.Units.gridUnit
         anchors.top: parent.top
         anchors.topMargin: Kirigami.Units.gridUnit * 3 + root.homeScreen.topMargin
+
+        PC3.ToolButton {
+            Layout.alignment: Qt.AlignVCenter
+            icon.name: 'go-previous'
+            implicitWidth: Kirigami.Units.gridUnit * 2
+            implicitHeight: Kirigami.Units.gridUnit * 2
+            padding: Kirigami.Units.smallSpacing
+            onClicked: root.requestClose()
+        }
+
+        PC3.Label {
+            id: heading
+            color: 'white'
+            text: i18n("Widgets")
+            font.weight: Font.Bold
+            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+        }
     }
 
     GridView {
@@ -51,7 +66,7 @@ MouseArea {
 
         opacity: 0 // we display with the opacity gradient below
 
-        anchors.top: heading.bottom
+        anchors.top: header.bottom
         anchors.topMargin: Kirigami.Units.gridUnit
         anchors.left: parent.left
         anchors.leftMargin: root.homeScreen.leftMargin
@@ -86,6 +101,16 @@ MouseArea {
 
             cursorShape: Qt.PointingHandCursor
             hoverEnabled: true
+
+            property real zoomScale: pressed ? 0.8 : 1
+            transform: Scale {
+                origin.x: delegate.width / 2;
+                origin.y: delegate.height / 2;
+                xScale: delegate.zoomScale
+                yScale: delegate.zoomScale
+            }
+
+            Behavior on zoomScale { NumberAnimation { duration: 80 } }
 
             readonly property string pluginName: model.pluginName
 

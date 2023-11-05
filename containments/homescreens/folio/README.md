@@ -14,20 +14,15 @@ Most of the homescreen is in C++ in order to keep logic together, with QML only 
 As such, all of the positioning and placement of delegates on the screen are top down from the model, as well as drag and drop behaviour.
 
 #### TODO
-- Add folio/halcyon switcher in initial-start
-- If an app gets uninstalled, the homescreen UI needs to ensure that delegates are updated
+- BUG: If an app gets uninstalled, the homescreen UI needs to ensure that delegates are updated
 - BUG: landscape favourites bar duplication when dragging icon from it sometimes
 - BUG: can't insert delegates in-between very well in landscape favourites bar
 - BUG: drag and drop animation when rejected on a different page
 - IMPROVEMENT: can make the touch area only the icon?
-
+- FEATURE: Add folio/halcyon switcher in initial-start
 - FEATURE: add widget import/export
 - FEATURE: keyboard navigation
 - FEATURE: touchpad navigation
 - FEATURE: option to darken wallpaper
 - FEATURE: option to turn off row/column swap
-- FEATURE: animate homescreen config opening
-
-- RESTORE: app drawer overshoot
-
 - PERFORMANCE: ensure that the widget config overlays are in loaders
