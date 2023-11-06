@@ -8,55 +8,12 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
-import org.kde.plasma.plasma5support 2.0 as P5Support
 
 Item {
     id: root
     property string name: i18n("Before we get started…")
 
     readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
-
-    // brightness controls
-    property int screenBrightness: 0
-    property bool disableBrightnessUpdate: true
-    readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
-    property QtObject updateScreenBrightnessJob
-
-    function updateBrightnessUI() {
-        if (updateScreenBrightnessJob)
-            return;
-
-        root.disableBrightnessUpdate = true;
-        root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
-        root.disableBrightnessUpdate = false;
-    }
-
-    onScreenBrightnessChanged: {
-        brightnessSlider.value = root.screenBrightness
-
-        if (!disableBrightnessUpdate) {
-            const service = pmSource.serviceForSource("PowerDevil");
-            const operation = service.operationDescription("setBrightness");
-            operation.brightness = screenBrightness;
-            operation.silent = true; // don't show OSD
-
-            updateScreenBrightnessJob = service.startOperationCall(operation);
-            updateScreenBrightnessJob.finished.connect(function (job) {
-                root.updateBrightnessUI();
-            });
-        }
-    }
-
-    P5Support.DataSource {
-        id: pmSource
-        engine: "powermanagement"
-        connectedSources: ["PowerDevil"]
-        onSourceAdded: if (source === "PowerDevil") {
-            disconnectSource(source);
-            connectSource(source);
-        }
-        onDataChanged: root.updateBrightnessUI()
-    }
 
     ScrollView {
         anchors {
@@ -77,12 +34,15 @@ Item {
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
 
+                visible: Prepare.PrepareUtil.brightnessAvailable
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
                 text: i18n("Adjust the screen brightness to be comfortable for the installation process.")
             }
 
             FormCard.FormCard {
+                id: brightnessCard
+                visible: Prepare.PrepareUtil.brightnessAvailable
                 maximumWidth: root.cardWidth
 
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
@@ -103,9 +63,17 @@ Item {
                             id: brightnessSlider
                             Layout.fillWidth: true
                             from: 1
-                            to: root.maximumScreenBrightness
-                            value: root.screenBrightness
-                            onMoved: root.screenBrightness = value;
+                            to: Prepare.PrepareUtil.maxBrightness
+                            value: Prepare.PrepareUtil.brightness
+                            onMoved: Prepare.PrepareUtil.brightness = value;
+
+                            // HACK: for some reason, the slider initial value doesn't set without being done after the component completes loading
+                            Timer {
+                                interval: 0
+                                running: true
+                                repeat: false
+                                onTriggered: brightnessSlider.value = Qt.binding(() => Prepare.PrepareUtil.brightness)
+                            }
                         }
 
                         Kirigami.Icon {
@@ -129,6 +97,7 @@ Item {
             }
 
             FormCard.FormCard {
+                id: scalingCard
                 maximumWidth: root.cardWidth
 
                 Layout.alignment: Qt.AlignTop | Qt.AlignHCenter

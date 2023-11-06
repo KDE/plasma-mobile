@@ -1,0 +1,33 @@
+<!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+<!--
+- SPDX-FileCopyrightText: 2015 Kai Uwe Broulik <kbroulik@kde.org>
+- SPDX-License-Identifier: GPL-2.0-or-later
+-->
+<node>
+  <interface name="org.kde.Solid.PowerManagement.Actions.BrightnessControl">
+    <method name="setBrightness">
+      <arg type="i" direction="in" />
+    </method>
+    <method name="setBrightnessSilent">
+      <arg type="i" direction="in" />
+    </method>
+    <method name="brightness">
+      <arg type="i" direction="out" />
+    </method>
+    <method name="brightnessMax">
+      <arg type="i" direction="out" />
+    </method>
+
+    <signal name="brightnessChanged">
+      <arg type="i" direction="out" />
+    </signal>
+    <signal name="brightnessMaxChanged">
+      <arg type="i" direction="out" />
+    </signal>
+
+    <method name="brightnessSteps">
+      <arg type="i" direction="out" />
+    </method>
+
+  </interface>
+</node>
