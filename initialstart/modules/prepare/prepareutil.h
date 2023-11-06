@@ -6,6 +6,8 @@
 #include <QObject>
 #include <QProcess>
 
+#include <kscreen/config.h>
+
 class PrepareUtil : public QObject
 {
     Q_OBJECT
@@ -23,12 +25,7 @@ public:
 Q_SIGNALS:
     void scalingChanged();
 
-public Q_SLOTS:
-    void receiveScalingFactor(int exitCode, QProcess::ExitStatus exitStatus);
-
 private:
     int m_scaling;
-    QString m_display;
-
-    QProcess *m_process;
+    KScreen::ConfigPtr m_config;
 };

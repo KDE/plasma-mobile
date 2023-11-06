@@ -17,6 +17,7 @@ target_link_libraries(prepareplugin
     KF6::ConfigGui
     KF6::I18n
     KF6::Notifications
+    KF6::Screen
 )
 
 set_property(TARGET prepareplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/mobileinitialstart/prepare)
