@@ -59,12 +59,9 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KIO
     Config
     DBusAddons
-    Plasma
-    PlasmaQuick
     ItemModels
     Service
     Notifications
-    Wayland
     ModemManagerQt
     NetworkManagerQt
     KCMUtils
@@ -73,6 +70,9 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     JobWidgets
 )
 
+find_package(KF6Plasma CONFIG REQUIRED)
+find_package(KF6PlasmaQuick CONFIG REQUIRED)
+find_package(KF6Wayland CONFIG REQUIRED)
 find_package(KF6Screen CONFIG REQUIRED)
 
 find_package(PkgConfig REQUIRED)
