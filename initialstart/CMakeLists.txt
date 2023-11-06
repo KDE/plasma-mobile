@@ -13,6 +13,7 @@ set(plasma-mobile-initial-start_SRCS
 qt_add_resources(RESOURCES resources.qrc)
 
 add_subdirectory(modules)
+add_subdirectory(plugin)
 
 add_executable(plasma-mobile-initial-start ${plasma-mobile-initial-start_SRCS} ${RESOURCES})
 target_link_libraries(plasma-mobile-initial-start
