@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-23 01:41+0000\n"
+"POT-Creation-Date: 2023-11-06 01:40+0000\n"
 "PO-Revision-Date: 2023-02-19 17:59+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -58,44 +58,56 @@ msgstr "Режим «только жесты»"
 msgid "Whether to hide the navigation panel."
 msgstr "Сокрытие панели навигации."
 
-#: ui/main.qml:71
+#: ui/main.qml:74
+#, kde-format
+msgid "Always show keyboard toggle"
+msgstr ""
+
+#: ui/main.qml:75
+#, fuzzy, kde-format
+#| msgid "Whether to hide the navigation panel."
+msgid ""
+"Whether to always show the keyboard toggle button on the navigation panel."
+msgstr "Сокрытие панели навигации."
+
+#: ui/main.qml:86
 #, kde-format
 msgid "Action Drawer"
 msgstr ""
 
-#: ui/main.qml:77
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Фиксированный режим"
 
-#: ui/main.qml:78
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Растянутый режим"
 
-#: ui/main.qml:82 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Быстрая настройка"
 
-#: ui/main.qml:90
+#: ui/main.qml:105
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr ""
 
-#: ui/main.qml:91
+#: ui/main.qml:106
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr ""
 
-#: ui/main.qml:116
+#: ui/main.qml:131
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr ""
 
-#: ui/main.qml:117
+#: ui/main.qml:132
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr ""
