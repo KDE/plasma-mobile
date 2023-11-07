@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-08-28 18:01+0300\n"
+"PO-Revision-Date: 2023-09-26 18:08+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -39,8 +39,7 @@ msgid "Webpage"
 msgstr "Verkkosivu"
 
 #: ui/main.qml:63
-#, fuzzy, kde-format
-#| msgid "Software"
+#, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Ohjelmisto"
@@ -77,8 +76,7 @@ msgid "%1-bit"
 msgstr "%1-bittinen"
 
 #: ui/main.qml:102
-#, fuzzy, kde-format
-#| msgid "Hardware"
+#, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Laitteisto"

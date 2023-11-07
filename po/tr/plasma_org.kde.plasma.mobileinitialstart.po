@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:41+0000\n"
+"POT-Creation-Date: 2023-11-07 02:44+0000\n"
 "PO-Revision-Date: 2023-04-02 17:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -157,35 +157,36 @@ msgstr "Sil"
 msgid "Add APN"
 msgstr "Erişim Noktası Adı Ekle"
 
-#: modules/finished/contents/ui/main.qml:12
+#: modules/finished/contents/ui/main.qml:15
 #, kde-format
 msgid "Complete!"
 msgstr "Tamamlandı!"
 
-#: modules/finished/contents/ui/main.qml:21
-#, kde-format
-msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#: modules/finished/contents/ui/main.qml:24
+#, fuzzy, kde-format
+#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Aygıtınız artık hazır. <br /><br /><b>Plasma 6.0</b>'nın keyfini çıkarın!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
 msgid "Before we get started…"
 msgstr "Başlamadan önce…"
 
-#: modules/prepare/package/contents/ui/main.qml:82
+#: modules/prepare/package/contents/ui/main.qml:40
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 "Kurulum süreci için ekran parlaklığını sizin için rahat bir düzeye ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:128
+#: modules/prepare/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ekrandaki ögelerin boyutunu ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:138
+#: modules/prepare/package/contents/ui/main.qml:107
 #, kde-format
 msgid "Display Scaling"
 msgstr "Ekran Ölçekleme"
@@ -240,12 +241,13 @@ msgstr "Etkinleştir"
 msgid "Password…"
 msgstr "Parola…"
 
-#: qml/LandingComponent.qml:81
-#, kde-format
-msgid "Welcome to <b>Plasma</b>"
+#: qml/LandingComponent.qml:84
+#, fuzzy, kde-format
+#| msgid "Welcome to <b>Plasma</b>"
+msgid "Welcome to<br/><b>%1</b>"
 msgstr "<b>Plasma</b>'ya Hoş Geldiniz"
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:315
+#: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format
 msgid "Next"
 msgstr "Sonraki"

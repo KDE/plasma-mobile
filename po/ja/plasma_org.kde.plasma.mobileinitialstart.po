@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-28 01:41+0000\n"
+"POT-Creation-Date: 2023-11-07 02:44+0000\n"
 "PO-Revision-Date: 2023-04-06 00:04-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -152,33 +152,33 @@ msgstr ""
 msgid "Add APN"
 msgstr ""
 
-#: modules/finished/contents/ui/main.qml:12
+#: modules/finished/contents/ui/main.qml:15
 #, kde-format
 msgid "Complete!"
 msgstr ""
 
-#: modules/finished/contents/ui/main.qml:21
+#: modules/finished/contents/ui/main.qml:24
 #, kde-format
-msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
 msgid "Before we get started…"
 msgstr ""
 
-#: modules/prepare/package/contents/ui/main.qml:82
+#: modules/prepare/package/contents/ui/main.qml:40
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 
-#: modules/prepare/package/contents/ui/main.qml:128
+#: modules/prepare/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr ""
 
-#: modules/prepare/package/contents/ui/main.qml:138
+#: modules/prepare/package/contents/ui/main.qml:107
 #, kde-format
 msgid "Display Scaling"
 msgstr ""
@@ -233,12 +233,12 @@ msgstr ""
 msgid "Password…"
 msgstr ""
 
-#: qml/LandingComponent.qml:81
+#: qml/LandingComponent.qml:84
 #, kde-format
-msgid "Welcome to <b>Plasma</b>"
+msgid "Welcome to<br/><b>%1</b>"
 msgstr ""
 
-#: qml/LandingComponent.qml:102 qml/Wizard.qml:315
+#: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format
 msgid "Next"
 msgstr ""
