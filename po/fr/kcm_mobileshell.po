@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-06 01:40+0000\n"
-"PO-Revision-Date: 2023-09-26 10:32+0200\n"
+"PO-Revision-Date: 2023-11-07 09:43+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -60,14 +60,15 @@ msgstr "Masquer ou afficher le panneau de navigation."
 #: ui/main.qml:74
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "Toujours afficher le commutateur de claviers"
 
 #: ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Masquer ou afficher le panneau de navigation."
+msgstr ""
+"Définit si le bouton de commutation de claviers doit toujours être affiché "
+"ou non dans le panneau de navigation."
 
 #: ui/main.qml:86
 #, kde-format

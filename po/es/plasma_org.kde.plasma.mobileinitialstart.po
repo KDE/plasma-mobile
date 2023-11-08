@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2023.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2023.
+# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-07 02:44+0000\n"
-"PO-Revision-Date: 2023-04-08 00:31+0200\n"
+"PO-Revision-Date: 2023-11-07 21:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.90\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -118,7 +118,7 @@ msgstr "Móvil"
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Your device does not have a modem available."
-msgstr "Su dispositivo no dispone de un módem."
+msgstr "El dispositivo no dispone de un módem."
 
 #: modules/cellular/package/contents/ui/main.qml:53
 #, kde-format
@@ -137,7 +137,7 @@ msgstr "Se ha conectado a la red móvil."
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr "Inserte una tarjeta SIM en su dispositivo."
+msgstr "Inserte una tarjeta SIM en el dispositivo."
 
 #: modules/cellular/package/contents/ui/main.qml:71
 #, kde-format
@@ -165,11 +165,9 @@ msgid "Complete!"
 msgstr "Completado"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"Su dispositivo ya está preparado.<br /><br />¡Disfrute de <b>Plasma 6.0</b>!"
+msgstr "El dispositivo ya está preparado.<br /><br />¡Disfrute de <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -245,10 +243,9 @@ msgid "Password…"
 msgstr "Contraseña..."
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Bienvenido a <b>Plasma</b>"
+msgstr "Bienvenido a<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format

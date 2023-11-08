@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-07 02:44+0000\n"
-"PO-Revision-Date: 2023-04-02 20:19+0300\n"
+"PO-Revision-Date: 2023-11-07 13:26+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -164,11 +164,9 @@ msgid "Complete!"
 msgstr "Завершено!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"Тепер ваш пристрій готовий. <br /><br />Насолоджуйтеся <b>Плазмою 6.0</b>!"
+msgstr "Тепер ваш пристрій готовий. <br /><br />Насолоджуйтеся <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -244,10 +242,9 @@ msgid "Password…"
 msgstr "Пароль…"
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Вітаємо у <b>Плазмі</b>"
+msgstr "Вітаємо у<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format
