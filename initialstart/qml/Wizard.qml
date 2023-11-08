@@ -290,8 +290,8 @@ Kirigami.Page {
 
                     topPadding: Kirigami.Units.largeSpacing
                     bottomPadding: Kirigami.Units.largeSpacing
-                    leftPadding: Kirigami.Units.largeSpacing
-                    rightPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.gridUnit
+                    rightPadding: Kirigami.Units.gridUnit
 
                     text: i18n("Back")
                     icon.name: "arrow-left"
@@ -308,8 +308,8 @@ Kirigami.Page {
 
                     topPadding: Kirigami.Units.largeSpacing
                     bottomPadding: Kirigami.Units.largeSpacing
-                    leftPadding: Kirigami.Units.largeSpacing
-                    rightPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.gridUnit
+                    rightPadding: Kirigami.Units.gridUnit
 
                     visible: !root.onFinalPage
                     text: i18n("Next")
@@ -325,8 +325,8 @@ Kirigami.Page {
 
                     topPadding: Kirigami.Units.largeSpacing
                     bottomPadding: Kirigami.Units.largeSpacing
-                    leftPadding: Kirigami.Units.largeSpacing
-                    rightPadding: Kirigami.Units.largeSpacing
+                    leftPadding: Kirigami.Units.gridUnit
+                    rightPadding: Kirigami.Units.gridUnit
 
                     visible: root.onFinalPage
                     text: i18n("Finish")

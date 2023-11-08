@@ -181,8 +181,8 @@ Item {
                     // info notification text
                     Label {
                         Layout.fillWidth: true
-                        Layout.rightMargin: Kirigami.Units.gridUnit
-                        Layout.leftMargin: Kirigami.Units.gridUnit
+                        Layout.rightMargin: Kirigami.Units.largeSpacing
+                        Layout.leftMargin: Kirigami.Units.largeSpacing
                         Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
                         font.pointSize: 9
 

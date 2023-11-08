@@ -35,7 +35,7 @@ MobileShell.GridView {
     readonly property int reservedSpaceForLabel: metrics.height
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     
-    cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Kirigami.Units.iconSizes.large + Kirigami.Units.gridUnit * 2)), 8)
+    cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Kirigami.Units.iconSizes.large + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
     property int columns: Math.floor(effectiveContentWidth / cellWidth)

@@ -158,7 +158,7 @@ Item {
         }
                 
         boundsBehavior: Flickable.StopAtBounds
-        spacing: Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.largeSpacing
 
         // TODO keyboard focus
         highlightMoveDuration: 0
@@ -363,8 +363,8 @@ Item {
                 top: spacer.bottom
                 right: parent.right
                 left: parent.left
-                leftMargin: Kirigami.Units.gridUnit
-                rightMargin: Kirigami.Units.gridUnit
+                leftMargin: PlasmaCore.Units.largeSpacing
+                rightMargin: PlasmaCore.Units.largeSpacing
                 topMargin: list.spacing
                 bottomMargin: list.spacing
             }

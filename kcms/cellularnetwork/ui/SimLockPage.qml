@@ -81,8 +81,8 @@ FormCard.FormCardPage {
         }
 
         Kirigami.Separator {
-            Layout.leftMargin: Kirigami.Units.gridUnit
-            Layout.rightMargin: Kirigami.Units.gridUnit
+            Layout.leftMargin: Kirigami.Units.largeSpacing
+            Layout.rightMargin: Kirigami.Units.largeSpacing
             opacity: (!disableSimLockButton.controlHovered && !changePinButton.controlHovered) ? 0.5 : 0
         }
 
@@ -105,7 +105,7 @@ FormCard.FormCardPage {
             id: unlockPinDialog
             title: i18n("Unlock SIM")
             standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
-            padding: Kirigami.Units.gridUnit
+            padding: Kirigami.Units.largeSpacing
 
             onAccepted: sim.sendPin(unlockPinCurPin.text)
 
@@ -125,7 +125,7 @@ FormCard.FormCardPage {
             id: changePinDialog
             title: i18n("Change SIM PIN")
             standardButtons: isValid ? Controls.Dialog.Ok | Controls.Dialog.Cancel : Controls.Dialog.Cancel
-            padding: Kirigami.Units.gridUnit
+            padding: Kirigami.Units.largeSpacing
 
             property bool isValid: changePinNewPin.text == changePinConfirmPin.text &&
                                    changePinNewPin.text.length >= 4 && changePinNewPin.text.length <= 8 // SIM PINs are between 4-8 digits
@@ -173,7 +173,7 @@ FormCard.FormCardPage {
             id: removePinDialog
             title: i18n("Remove SIM PIN")
             standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
-            padding: Kirigami.Units.gridUnit
+            padding: Kirigami.Units.largeSpacing
 
             onAccepted: sim.togglePinEnabled(removePinCurPin.text);
 
@@ -190,7 +190,7 @@ FormCard.FormCardPage {
             id: createPinDialog
             title: i18n("Add SIM PIN")
             standardButtons: isValid ? Controls.Dialog.Ok | Controls.Dialog.Cancel : Controls.Dialog.Cancel
-            padding: Kirigami.Units.gridUnit
+            padding: Kirigami.Units.largeSpacing
 
             property bool isValid: createPinNewPin.text == createPinConfirmPin.text &&
                                    createPinNewPin.text.length >= 4 && createPinNewPin.text.length <= 8 // SIM PINs are between 4-8 digits

@@ -53,8 +53,8 @@ SimpleKCM {
         }
 
         FormCard.FormCard {
-            Layout.topMargin: Kirigami.Units.gridUnit
-            Layout.bottomMargin: Kirigami.Units.gridUnit
+            Layout.topMargin: Kirigami.Units.largeSpacing
+            Layout.bottomMargin: Kirigami.Units.largeSpacing
 
             FormCard.FormTextFieldDelegate {
                 label: i18n("Hotspot SSID")

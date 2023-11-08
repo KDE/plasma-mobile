@@ -59,7 +59,7 @@ KCM.SimpleKCM {
 
         MessagesList {
             Layout.fillWidth: true
-            Layout.margins: Kirigami.Units.gridUnit
+            Layout.margins: Kirigami.Units.largeSpacing
             model: kcm.messages
         }
 

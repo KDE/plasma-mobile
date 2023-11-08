@@ -19,7 +19,7 @@ Item {
         anchors {
             fill: parent
             topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.largeSpacing
         }
 
         width: root.width
@@ -71,10 +71,10 @@ Item {
 
                 header: Control {
                     width: listView.width
-                    leftPadding: Kirigami.Units.gridUnit
-                    rightPadding: Kirigami.Units.gridUnit
-                    topPadding: Kirigami.Units.gridUnit
-                    bottomPadding: Kirigami.Units.gridUnit
+                    leftPadding: Kirigami.Units.largeSpacing
+                    rightPadding: Kirigami.Units.largeSpacing
+                    topPadding: Kirigami.Units.largeSpacing
+                    bottomPadding: Kirigami.Units.largeSpacing
 
                     contentItem: Kirigami.SearchField {
                         id: searchField

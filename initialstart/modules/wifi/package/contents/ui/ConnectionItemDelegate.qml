@@ -47,7 +47,7 @@ FormCard.AbstractFormDelegate {
     }
 
     contentItem: RowLayout {
-        spacing: Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.largeSpacing
 
         Item {
             Layout.preferredWidth: Kirigami.Units.gridUnit

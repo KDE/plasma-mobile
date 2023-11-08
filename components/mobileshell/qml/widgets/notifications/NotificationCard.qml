@@ -26,7 +26,7 @@ Item {
     onContentItemChanged: {
         contentItem.parent = contentParent;
         contentItem.anchors.fill = contentParent;
-        contentItem.anchors.margins = Kirigami.Units.gridUnit;
+        contentItem.anchors.margins = Kirigami.Units.largeSpacing;
         contentParent.children.push(contentItem);
     }
     

@@ -28,7 +28,7 @@ FormCard.FormCardPage {
         contentItem: RowLayout {
             Kirigami.ListItemDragHandle {
                 visible: qsDelegate.isEnabled
-                Layout.rightMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.largeSpacing
                 listItem: qsDelegate
                 listView: qsDelegate.ListView.view
                 onMoveRequested: savedQuickSettings.enabledModel.moveRow(oldIndex, newIndex)

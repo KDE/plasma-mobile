@@ -23,7 +23,7 @@ ColumnLayout {
         model: root.model
         
         delegate: Kirigami.InlineMessage {
-            Layout.bottomMargin: Kirigami.Units.gridUnit
+            Layout.bottomMargin: Kirigami.Units.largeSpacing
             Layout.fillWidth: true
             visible: true
             text: modelData.message

@@ -53,7 +53,7 @@ Item {
     ColumnLayout {
         anchors.fill: parent
         anchors.topMargin: Kirigami.Units.gridUnit
-        anchors.bottomMargin: Kirigami.Units.gridUnit
+        anchors.bottomMargin: Kirigami.Units.largeSpacing
         width: root.width
         spacing: Kirigami.Units.gridUnit
 

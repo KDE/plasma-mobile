@@ -50,10 +50,10 @@ AbstractButton {
         }
     }
     
-    leftPadding: Kirigami.Units.gridUnit
-    rightPadding: Kirigami.Units.gridUnit
-    topPadding: Kirigami.Units.gridUnit
-    bottomPadding: Kirigami.Units.gridUnit
+    leftPadding: Kirigami.Units.largeSpacing
+    rightPadding: Kirigami.Units.largeSpacing
+    topPadding: Kirigami.Units.largeSpacing
+    bottomPadding: Kirigami.Units.largeSpacing
     
     contentItem: Item {
         implicitHeight: row.height + Kirigami.Units.smallSpacing

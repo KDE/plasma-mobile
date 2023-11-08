@@ -33,7 +33,7 @@ Item {
         anchors {
             fill: parent
             topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.largeSpacing
         }
         width: root.width
         spacing: Kirigami.Units.gridUnit

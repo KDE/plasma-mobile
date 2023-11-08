@@ -106,8 +106,8 @@ MobileShell.BaseItem {
                 property real fullHeight: height + Layout.topMargin
                 Layout.fillWidth: true
                 Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.rightMargin: Kirigami.Units.gridUnit
+                Layout.leftMargin: Kirigami.Units.largeSpacing
+                Layout.rightMargin: Kirigami.Units.largeSpacing
             }
             
             Handle {

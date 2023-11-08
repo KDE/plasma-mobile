@@ -70,7 +70,7 @@ Item {
 
     ColumnLayout {
         opacity: root.contentOpacity
-        spacing: Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.largeSpacing
 
         anchors.verticalCenter: parent.verticalCenter
         anchors.left: parent.left
