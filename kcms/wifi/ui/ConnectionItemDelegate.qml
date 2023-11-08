@@ -22,41 +22,23 @@ Kirigami.SwipeListItem {
                                                      SecurityType == PlasmaNM.Enums.Wpa2Psk ||
                                                      SecurityType == PlasmaNM.Enums.SAE)
 
-    RowLayout {
-        anchors.leftMargin: Kirigami.Units.largeSpacing * 5
+    contentItem: RowLayout {
         spacing: Kirigami.Units.largeSpacing
-        Kirigami.Separator {}
 
-        Item {
-            Layout.preferredWidth: Kirigami.Units.gridUnit
-            Layout.preferredHeight: Kirigami.Units.gridUnit
+        Kirigami.Icon {
+            Layout.alignment: Qt.AlignVCenter
+            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
 
-            KSvg.SvgItem {
-                id: connectionSvgIcon
-                elementId: mobileProxyModel.showSavedMode ? "network-wireless-connected-100" : ConnectionIcon
-
-                svg: KSvg.Svg {
-                    multipleImages: true
-                    imagePath: "icons/network"
-                    colorSet: Kirigami.Theme.colorSet
-                }
-            }
+            source: mobileProxyModel.showSavedMode ? "network-wireless-connected-100" : ConnectionIcon
 
             Controls.BusyIndicator {
-                id: connectingIndicator
-
-                anchors {
-                    horizontalCenter: connectionSvgIcon.horizontalCenter
-                    verticalCenter: connectionSvgIcon.verticalCenter
-                }
+                anchors.fill: parent
                 running: ConnectionState == PlasmaNM.Enums.Activating
-                visible: running
             }
         }
 
         Controls.Label {
-            id: connectionNameLabel
-
             Layout.fillWidth: true
             elide: Text.ElideRight
             text: ItemUniqueName
