@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-07 02:44+0000\n"
-"PO-Revision-Date: 2023-04-02 17:19+0300\n"
+"PO-Revision-Date: 2023-11-08 21:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -163,11 +163,10 @@ msgid "Complete!"
 msgstr "Tamamlandı!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
-"Aygıtınız artık hazır. <br /><br /><b>Plasma 6.0</b>'nın keyfini çıkarın!"
+"Aygıtınız artık hazır. <br /><br /><b>%1</b> sisteminin keyfini çıkarın!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -242,10 +241,9 @@ msgid "Password…"
 msgstr "Parola…"
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "<b>Plasma</b>'ya Hoş Geldiniz"
+msgstr "<b>%1</b> sistemine hoş geldiniz"
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format
