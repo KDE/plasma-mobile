@@ -13,6 +13,7 @@
 
 PrepareUtil::PrepareUtil(QObject *parent)
     : QObject{parent}
+    , m_colorsSettings{new ColorsSettings(this)}
 {
     m_brightnessInterface =
         new org::kde::Solid::PowerManagement::Actions::BrightnessControl(QStringLiteral("org.kde.Solid.PowerManagement"),
@@ -57,6 +58,9 @@ PrepareUtil::PrepareUtil(QObject *parent)
     connect(m_brightnessInterfaceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this]() -> void {
         Q_EMIT brightnessAvailableChanged();
     });
+
+    // set property initially
+    m_usingDarkTheme = m_colorsSettings->colorScheme() == "BreezeDark";
 }
 
 int PrepareUtil::scaling() const
@@ -107,6 +111,24 @@ int PrepareUtil::maxBrightness() const
 bool PrepareUtil::brightnessAvailable() const
 {
     return m_brightnessInterface->isValid();
+}
+
+bool PrepareUtil::usingDarkTheme() const
+{
+    return m_usingDarkTheme;
+}
+
+void PrepareUtil::setUsingDarkTheme(bool usingDarkTheme)
+{
+    // use plasma-apply-colorscheme since it has logic for notifying the shell of changes
+    if (usingDarkTheme) {
+        QProcess::execute("plasma-apply-colorscheme", {QStringLiteral("BreezeDark")});
+    } else {
+        QProcess::execute("plasma-apply-colorscheme", {QStringLiteral("BreezeLight")});
+    }
+
+    m_usingDarkTheme = usingDarkTheme;
+    Q_EMIT usingDarkThemeChanged();
 }
 
 void PrepareUtil::fetchBrightness()

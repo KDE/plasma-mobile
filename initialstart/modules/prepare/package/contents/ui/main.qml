@@ -113,6 +113,24 @@ Item {
                     onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
                 }
             }
+
+            FormCard.FormCard {
+                id: darkThemeCard
+                maximumWidth: root.cardWidth
+
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+
+                FormCard.FormSwitchDelegate {
+                    id: darkThemeSwitch
+                    text: i18n("Dark Theme")
+                    checked: Prepare.PrepareUtil.usingDarkTheme
+                    onCheckedChanged: {
+                        if (checked !== Prepare.PrepareUtil.usingDarkTheme) {
+                            Prepare.PrepareUtil.usingDarkTheme = checked;
+                        }
+                    }
+                }
+            }
         }
     }
 }
