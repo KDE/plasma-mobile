@@ -1,10 +1,10 @@
-# Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
+# SPDX-FileCopyrightText: 2023 Xavier BESNARD <xavier.besnard@neuf.fr>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-07 02:44+0000\n"
-"PO-Revision-Date: 2023-04-05 08:33+0200\n"
+"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"PO-Revision-Date: 2023-11-08 11:46+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -161,12 +161,10 @@ msgid "Complete!"
 msgstr "Terminé !"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
-"Votre périphérique est prêt maintenant. <br /><br />Profitez de <b>Plasma "
-"6.0</b> !"
+"Votre périphérique est prêt maintenant. <br /><br />Profitez de <b>%1</b> !"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -190,6 +188,11 @@ msgstr "Ajuster la taille des éléments sur l'écran."
 #, kde-format
 msgid "Display Scaling"
 msgstr "Mise à l'échelle de l'affichage"
+
+#: modules/prepare/package/contents/ui/main.qml:125
+#, kde-format
+msgid "Dark Theme"
+msgstr ""
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -242,10 +245,9 @@ msgid "Password…"
 msgstr "Mot de passe…"
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Bienvenue dans <b>KDE Plasma</b>"
+msgstr "Bienvenue dans <br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format

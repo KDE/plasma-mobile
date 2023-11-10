@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
-"PO-Revision-Date: 2023-11-09 12:29+0000\n"
+"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"PO-Revision-Date: 2023-11-07 12:57+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
@@ -28,132 +28,128 @@ msgstr "Mappa"
 msgid "Applications"
 msgstr "Forrit"
 
-#: package/contents/ui/FavouritesBar.qml:146
-#: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:205
-#: package/contents/ui/HomeScreenPage.qml:285
+#: package/contents/ui/FavouritesBar.qml:144
+#: package/contents/ui/FavouritesBar.qml:216
+#: package/contents/ui/FolderView.qml:267
+#: package/contents/ui/HomeScreenPage.qml:160
+#: package/contents/ui/HomeScreenPage.qml:233
 #, kde-format
 msgid "Remove"
 msgstr "Fjarlægja"
 
-#: package/contents/ui/settings/AppletListViewer.qml:56
-#, kde-format
-msgid "Widgets"
-msgstr "Græjur"
-
-#: package/contents/ui/settings/SettingsWindow.qml:78
+#: package/contents/ui/settings/SettingsWindow.qml:43
 #, kde-format
 msgid "Homescreen Settings"
 msgstr "Stillingar heimaskjás"
 
-#: package/contents/ui/settings/SettingsWindow.qml:87
+#: package/contents/ui/settings/SettingsWindow.qml:52
 #, kde-format
 msgid "Icons"
 msgstr "Tákn"
 
-#: package/contents/ui/settings/SettingsWindow.qml:118
+#: package/contents/ui/settings/SettingsWindow.qml:83
 #, kde-format
 msgid "Number of rows"
 msgstr "Fjöldi raða"
 
-#: package/contents/ui/settings/SettingsWindow.qml:119
+#: package/contents/ui/settings/SettingsWindow.qml:84
 #, kde-format
 msgid "Number of columns"
 msgstr "Fjöldi dálka"
 
-#: package/contents/ui/settings/SettingsWindow.qml:123
+#: package/contents/ui/settings/SettingsWindow.qml:88
 #, kde-format
 msgid "Size of icons on homescreen"
 msgstr "Stærð tákna á heimaskjá"
 
-#: package/contents/ui/settings/SettingsWindow.qml:162
+#: package/contents/ui/settings/SettingsWindow.qml:127
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr "Fjöldi raða og dálka breytist eftir því hvernig skjárinn snýr."
 
-#: package/contents/ui/settings/SettingsWindow.qml:166
+#: package/contents/ui/settings/SettingsWindow.qml:131
 #, kde-format
 msgid "Homescreen"
 msgstr "Heimaskjár"
 
-#: package/contents/ui/settings/SettingsWindow.qml:172
+#: package/contents/ui/settings/SettingsWindow.qml:137
 #, kde-format
 msgid "Show labels on homescreen"
 msgstr "Sýna merki á heimaskjá"
 
-#: package/contents/ui/settings/SettingsWindow.qml:185
+#: package/contents/ui/settings/SettingsWindow.qml:150
 #, kde-format
 msgid "Show labels in favorites bar"
 msgstr "Sýna merki á eftirlætastiku"
 
-#: package/contents/ui/settings/SettingsWindow.qml:198
+#: package/contents/ui/settings/SettingsWindow.qml:163
 #, kde-format
 msgid "Page transition effect"
 msgstr "Umskiptiaðferð síðu"
 
-#: package/contents/ui/settings/SettingsWindow.qml:204
+#: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Slide"
 msgstr "Renna"
 
-#: package/contents/ui/settings/SettingsWindow.qml:205
+#: package/contents/ui/settings/SettingsWindow.qml:170
 #, kde-format
 msgid "Cube"
 msgstr "Teningur"
 
-#: package/contents/ui/settings/SettingsWindow.qml:206
+#: package/contents/ui/settings/SettingsWindow.qml:171
 #, kde-format
 msgid "Fade"
-msgstr "Dofna"
+msgstr "Deyfa"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Stack"
 msgstr "Stafla"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:173
 #, kde-format
 msgid "Rotation"
-msgstr "Snúningur"
+msgstr "Snúa"
 
-#: package/contents/ui/settings/SettingsWindow.qml:223
+#: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Eftirlætastika"
 
-#: package/contents/ui/settings/SettingsWindow.qml:240
+#: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "General"
 msgstr "Almennt"
 
-#: package/contents/ui/settings/SettingsWindow.qml:274
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Export layout to"
 msgstr "Flytja út framsetningu í"
 
-#: package/contents/ui/settings/SettingsWindow.qml:303
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:268
+#: package/contents/ui/settings/SettingsWindow.qml:275
 #, kde-format
 msgid "Export Status"
 msgstr "Útflutningsstaða"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:269
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Mistókst að flytja út í %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:276
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Framsetning heimaskjás flutt út í %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:317
+#: package/contents/ui/settings/SettingsWindow.qml:282
 #, kde-format
 msgid "Confirm Import"
 msgstr "Staðfesta innflutning"
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:283
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Þetta skrifar yfir núverandi framsetningu á heimaskjánum!"
+

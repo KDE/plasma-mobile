@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2023-11-10 01:48+0000\n"
 "PO-Revision-Date: 2021-07-25 13:11+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr "Date de intrare nevalide."
 
-#: ui/ConnectionItemDelegate.qml:108
+#: ui/ConnectionItemDelegate.qml:90
 #, kde-format
 msgid "Connect to"
 msgstr "Conectează la"

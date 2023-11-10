@@ -2,31 +2,32 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Sveinn í Felli <sv1@fellsnet.is>, 2022.
+# Guðmundur Erlingsson <gudmundure@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2022-10-14 16:54+0000\n"
-"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
-"Language-Team: Icelandic\n"
+"PO-Revision-Date: 2023-10-29 17:36+0000\n"
+"Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
+"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: package/contents/ui/FavoritesGrid.qml:221
 #: package/contents/ui/FolderGrid.qml:189
 #, kde-format
 msgid "Remove from favourites"
-msgstr "Fjarlægja úr eftirlætum"
+msgstr "Fjarlægja úr eftirlæti"
 
 #: package/contents/ui/FavoritesGrid.qml:291
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr "Þú getur bætt forritum í eftirlætin þin og þau munu birtast hérna."
+msgstr "Bættu forritum við eftirlætin þín og þá birtast þau hér."
 
 #: package/contents/ui/FolderGrid.qml:194
 #, kde-format
@@ -36,7 +37,7 @@ msgstr "Færa út úr möppu"
 #: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
 msgid "Add to favourites"
-msgstr "Bæta í eftirlæti"
+msgstr "Bæta við eftirlæti"
 
 #: package/contents/ui/GridAppList.qml:67
 #, kde-format

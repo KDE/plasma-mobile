@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-07 02:44+0000\n"
+"POT-Creation-Date: 2023-11-10 01:48+0000\n"
 "PO-Revision-Date: 2023-11-08 03:00+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -188,6 +188,11 @@ msgstr "მოირგეთ ეკრანზე არსებული ე
 #, kde-format
 msgid "Display Scaling"
 msgstr "ეკრანის მასშტაბი"
+
+#: modules/prepare/package/contents/ui/main.qml:125
+#, kde-format
+msgid "Dark Theme"
+msgstr ""
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format

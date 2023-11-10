@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-07 02:44+0000\n"
+"POT-Creation-Date: 2023-11-10 01:48+0000\n"
 "PO-Revision-Date: 2023-11-07 06:43+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -188,6 +188,11 @@ msgstr "Alĝustigu la grandecon de elementoj sur la ekrano."
 #, kde-format
 msgid "Display Scaling"
 msgstr "Montra Skalado"
+
+#: modules/prepare/package/contents/ui/main.qml:125
+#, kde-format
+msgid "Dark Theme"
+msgstr ""
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
