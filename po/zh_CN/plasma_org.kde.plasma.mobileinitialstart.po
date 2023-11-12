@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:48+0000\n"
-"PO-Revision-Date: 2023-10-21 13:51\n"
+"PO-Revision-Date: 2023-11-11 07:19\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -162,10 +162,9 @@ msgid "Complete!"
 msgstr "完成"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr "您的设备已经准备就绪。<br /><br />请随心所欲地使用 <b>Plasma 6.0</b>！"
+msgstr ""
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -244,10 +243,9 @@ msgid "Password…"
 msgstr "密码…"
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "欢迎使用 <b>Plasma</b>"
+msgstr ""
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:315
 #, kde-format
