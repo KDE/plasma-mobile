@@ -53,14 +53,20 @@ MobileShell.GridView {
         }
 
         function onAppDrawerGridYChanged(y) {
-            const maxContentY = Math.max(0, root.contentHeight - root.height);
             const minContentY = 0;
-            root.contentY = Math.min(maxContentY, Math.max(minContentY, root.contentY - y));
+            const maxContentY = Math.max(0, root.contentHeight - root.height);
+            let contentY = Math.max(minContentY, root.contentY - y);
+
+            if (root.contentHeight < root.height) {
+                // prevent overscroll only if contents are smaller than the view
+                contentY = Math.min(maxContentY, contentY);
+            }
+
+            root.contentY = contentY;
             velocityCalculator.changePosition(root.contentY);
         }
 
         function onAppDrawerGridFlickRequested() {
-            root.returnToBounds();
             root.flick(0, -velocityCalculator.velocity);
         }
     }
