@@ -6,7 +6,7 @@ import QtQuick
 import org.kde.kwin as KWinComponents
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
-Item {
+Loader {
     id: root
 
     function run(window) {
