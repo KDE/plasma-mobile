@@ -363,8 +363,8 @@ Item {
                 top: spacer.bottom
                 right: parent.right
                 left: parent.left
-                leftMargin: PlasmaCore.Units.largeSpacing
-                rightMargin: PlasmaCore.Units.largeSpacing
+                leftMargin: Kirigami.Units.largeSpacing
+                rightMargin: Kirigami.Units.largeSpacing
                 topMargin: list.spacing
                 bottomMargin: list.spacing
             }
