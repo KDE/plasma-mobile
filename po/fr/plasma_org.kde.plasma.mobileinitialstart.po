@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-10 01:48+0000\n"
-"PO-Revision-Date: 2023-11-08 11:46+0100\n"
+"PO-Revision-Date: 2023-11-11 10:59+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -12,7 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -192,7 +192,7 @@ msgstr "Mise à l'échelle de l'affichage"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "Thème sombre"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
