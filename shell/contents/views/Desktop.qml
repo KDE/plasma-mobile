@@ -53,6 +53,7 @@ Rectangle {
 
             readonly property color backgroundColor: Kirigami.Theme.backgroundColor
             readonly property color textColor: Kirigami.Theme.textColor
+            property color colorFromPlugin: "transparent"
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.backgroundColor: backgroundColor
@@ -65,17 +66,25 @@ Rectangle {
                 target: desktop
                 property: "accentColor"
                 value: {
+                    if (!Qt.colorEqual(imageColors.colorFromPlugin, "transparent")) {
+                        return imageColors.colorFromPlugin;
+                    }
                     if (imageColors.palette.length === 0) {
-                        return "#00000000";
+                        return "transparent";
                     }
                     return imageColors.dominant;
                 }
+                when: desktop.usedInAccentColor // Without this, accentColor may still be updated after usedInAccentColor becomes false
             }
 
             property Connections repaintConnection: Connections {
                 target: root.containment.wallpaper
-                function onRepaintNeeded() {
-                    imageColors.update();
+                function onRepaintNeeded(color) {
+                    imageColors.colorFromPlugin = color;
+
+                    if (Qt.colorEqual(color, "transparent")) {
+                        imageColors.update();
+                    }
                 }
             }
         }

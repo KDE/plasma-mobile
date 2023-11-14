@@ -19,6 +19,7 @@ import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 ContainmentItem {
     id: root
+    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // filled in by the shell (Panel.qml) with the plasma-workspace PanelView
     property var panel: null
@@ -26,7 +27,13 @@ ContainmentItem {
         setWindowProperties()
     }
 
-    Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
+    // filled in by the shell (Panel.qml)
+    property var tabBar: null
+    onTabBarChanged: {
+        if (tabBar) {
+            tabBar.visible = false;
+        }
+    }
 
     readonly property bool inLandscape: Screen.width > Screen.height;
 
@@ -68,6 +75,7 @@ ContainmentItem {
 
     function setWindowProperties() {
         if (root.panel) {
+            root.panel.floating = false;
             root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
             root.panel.offset = intendedWindowOffset;
             root.panel.thickness = navigationPanelHeight;
