@@ -46,6 +46,7 @@ Item {
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
+        anchors.bottomMargin: Kirigami.Units.largeSpacing
         height: root.height * (1 - settingsModeHomeScreenScale)
 
         RowLayout {
@@ -54,24 +55,50 @@ Item {
             spacing: Kirigami.Units.largeSpacing
 
             PC3.ToolButton {
-                text: i18n('Wallpapers')
+                opacity: 0.9
                 enabled: false
-                display: PC3.ToolButton.TextUnderIcon
-
-                icon.name: 'edit-image'
-
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    Kirigami.Icon {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        source: 'edit-image'
+                    }
+                    
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        text: i18n('Wallpapers')
+                        font.bold: true
+                    }
+                }
             }
 
             PC3.ToolButton {
-                text: ('Settings')
-                display: PC3.ToolButton.TextUnderIcon
-
-                icon.name: 'settings-configure'
-
+                opacity: 0.9
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    Kirigami.Icon {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        source: 'settings-configure'
+                    }
+                    
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        text: i18n('Settings')
+                        font.bold: true
+                    }
+                }
 
                 onClicked: {
                     // ensure that if the window is already opened, it gets raised to the top
@@ -81,13 +108,26 @@ Item {
             }
 
             PC3.ToolButton {
-                text: 'Widgets'
-                display: PC3.ToolButton.TextUnderIcon
-
-                icon.name: 'widget-alternatives'
-
+                opacity: 0.9
                 implicitHeight: Kirigami.Units.gridUnit * 4
                 implicitWidth: Kirigami.Units.gridUnit * 5
+
+                contentItem: ColumnLayout {
+                    spacing: Kirigami.Units.largeSpacing
+
+                    Kirigami.Icon {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                        source: 'widget-alternatives'
+                    }
+                    
+                    QQC2.Label {
+                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                        text: i18n('Widgets')
+                        font.bold: true
+                    }
+                }
 
                 onClicked: {
                     appletListViewer.open = true;
