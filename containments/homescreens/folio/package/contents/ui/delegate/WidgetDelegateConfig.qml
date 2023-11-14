@@ -189,6 +189,7 @@ Item {
                 id: button
                 icon.name: 'settings-configure'
                 text: i18n('Options')
+                display: (resizeFrame.handleContainer.width > Kirigami.Units.gridUnit * 7) ? PC3.Button.TextBesideIcon : PC3.Button.IconOnly
 
                 readonly property var handleContainer: resizeFrame.handleContainer
                 x: Math.round(handleContainer.x + (handleContainer.width / 2) - (width / 2))

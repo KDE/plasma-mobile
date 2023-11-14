@@ -187,7 +187,7 @@ Item {
         x: resizeOutline.x + Math.round(resizeOutline.width / 2) - Math.round(width / 2)
         y: resizeOutline.y - Math.round(height / 2)
 
-        width: Math.round(Math.max(height, resizeOutline.width * 0.3))
+        width: Math.round(Math.max(height, resizeOutline.width * 0.3)) + touchPadding * 2
 
         onPressed: pressedHandler(orientation)
         onDragEvent: (leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta) => dragHandler(orientation, leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta)
@@ -201,7 +201,7 @@ Item {
         x: resizeOutline.x - (width / 2)
         y: resizeOutline.y + (resizeOutline.height / 2) - (height / 2)
 
-        height: Math.round(Math.max(width, resizeOutline.height * 0.3))
+        height: Math.round(Math.max(width, resizeOutline.height * 0.3)) + touchPadding * 2
 
         onPressed: pressedHandler(orientation)
         onDragEvent: (leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta) => dragHandler(orientation, leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta)
@@ -215,7 +215,7 @@ Item {
         x: resizeOutline.x + resizeOutline.width - (width / 2)
         y: resizeOutline.y + (resizeOutline.height / 2) - (height / 2)
 
-        height: Math.round(Math.max(width, resizeOutline.height * 0.3))
+        height: Math.round(Math.max(width, resizeOutline.height * 0.3)) + touchPadding * 2
 
         onPressed: pressedHandler(orientation)
         onDragEvent: (leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta) => dragHandler(orientation, leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta)
@@ -229,7 +229,7 @@ Item {
         x: resizeOutline.x + (resizeOutline.width / 2) - (width / 2)
         y: resizeOutline.y + resizeOutline.height - (height / 2)
 
-        width: Math.round(Math.max(height, resizeOutline.width * 0.3))
+        width: Math.round(Math.max(height, resizeOutline.width * 0.3)) + touchPadding * 2
 
         onPressed: pressedHandler(orientation)
         onDragEvent: (leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta) => dragHandler(orientation, leftEdgeDelta, rightEdgeDelta, topEdgeDelta, bottomEdgeDelta)

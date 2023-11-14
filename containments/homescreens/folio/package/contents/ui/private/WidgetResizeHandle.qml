@@ -7,14 +7,16 @@ import '../delegate'
 
 MouseArea {
     id: root
-    height: 10
-    width: 10
+    height: 10 + touchPadding * 2
+    width: 10 + touchPadding * 2
 
-    cursorShape: Qt.PointingHandCursor
+    readonly property real touchPadding: 20
 
     property int orientation
 
     signal dragEvent(real leftEdgeDelta, real rightEdgeDelta, real topEdgeDelta, real bottomEdgeDelta)
+
+    cursorShape: Qt.PointingHandCursor
 
     drag {
         target: root
@@ -72,7 +74,9 @@ MouseArea {
     }
 
     Rectangle {
+        id: rect
         anchors.fill: parent
+        anchors.margins: root.touchPadding
         color: 'white'
         radius: width / 2
 
@@ -85,8 +89,8 @@ MouseArea {
 
             xScale: scaleFactor
             yScale: scaleFactor
-            origin.x: root.width / 2
-            origin.y: root.height / 2
+            origin.x: rect.width / 2
+            origin.y: rect.height / 2
         }
     }
 }
