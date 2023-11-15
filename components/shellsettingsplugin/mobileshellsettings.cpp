@@ -27,7 +27,6 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT vibrationsEnabledChanged();
-            Q_EMIT vibrationIntensityChanged();
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT navigationPanelEnabledChanged();
@@ -57,26 +56,13 @@ void MobileShellSettings::setVibrationsEnabled(bool vibrationsEnabled)
 int MobileShellSettings::vibrationDuration() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("vibrationDuration", 100);
+    return group.readEntry("vibrationDuration", 10);
 }
 
 void MobileShellSettings::setVibrationDuration(int vibrationDuration)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("vibrationDuration", vibrationDuration, KConfigGroup::Notify);
-    m_config->sync();
-}
-
-qreal MobileShellSettings::vibrationIntensity() const
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("vibrationIntensity", 0.5);
-}
-
-void MobileShellSettings::setVibrationIntensity(qreal vibrationIntensity)
-{
-    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    group.writeEntry("vibrationIntensity", vibrationIntensity, KConfigGroup::Notify);
     m_config->sync();
 }
 

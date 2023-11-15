@@ -27,7 +27,6 @@ class MobileShellSettings : public QObject
     // general
     Q_PROPERTY(bool vibrationsEnabled READ vibrationsEnabled WRITE setVibrationsEnabled NOTIFY vibrationsEnabledChanged)
     Q_PROPERTY(int vibrationDuration READ vibrationDuration WRITE setVibrationDuration NOTIFY vibrationDurationChanged)
-    Q_PROPERTY(qreal vibrationIntensity READ vibrationIntensity WRITE setVibrationIntensity NOTIFY vibrationIntensityChanged)
     Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
 
     // navigation panel
@@ -75,19 +74,6 @@ public:
      * @param vibrationDuration The duration of a standard vibration event.
      */
     void setVibrationDuration(int vibrationDuration);
-
-    /**
-     * Get the intensity of a standard vibration event, which is a value between
-     * zero and one.
-     */
-    qreal vibrationIntensity() const;
-
-    /**
-     * Set the intensity of a standard vibration event.
-     *
-     * @param vibrationIntensity The intensity of a standard vibration event, between zero and one.
-     */
-    void setVibrationIntensity(qreal vibrationIntensity);
 
     /**
      * Whether animations are enabled in the shell.
@@ -174,7 +160,6 @@ public:
 
 Q_SIGNALS:
     void vibrationsEnabledChanged();
-    void vibrationIntensityChanged();
     void vibrationDurationChanged();
     void navigationPanelEnabledChanged();
     void alwaysShowKeyboardToggleOnNavigationPanelChanged();

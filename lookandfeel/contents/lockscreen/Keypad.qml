@@ -51,7 +51,7 @@ Rectangle {
         }
     }
 
-    MobileShell.HapticsEffectLoader {
+    MobileShell.HapticsEffect {
         id: haptics
     }
 

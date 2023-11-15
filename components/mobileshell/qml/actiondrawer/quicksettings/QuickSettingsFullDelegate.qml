@@ -53,7 +53,7 @@ QuickSettingsDelegate {
         }
     }
     
-    MobileShell.HapticsEffectLoader {
+    MobileShell.HapticsEffect {
         id: haptics
     }
     

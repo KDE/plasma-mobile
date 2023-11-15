@@ -45,6 +45,7 @@ Dependencies:
 * Milou (for search)
 * Kirigami
 * Kirigami Addons
+* hfd-service (optional: for vibrations)
 
 To start the phone homescreen in a window, run:
 ```

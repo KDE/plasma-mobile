@@ -32,38 +32,7 @@ FormCard.FormCardPage {
             }
         }
 
-        FormCard.FormDelegateSeparator { above: shellVibrationsSwitch; below: vibrationIntensityDelegate }
-
-        FormCard.FormComboBoxDelegate {
-            id: vibrationIntensityDelegate
-            text: i18n("Vibration Intensity")
-            description: i18n("How intense shell vibrations should be.")
-
-            property string lowIntensityString: i18nc("Low intensity", "Low")
-            property string mediumIntensityString: i18nc("Medium intensity", "Medium")
-            property string highIntensityString: i18nc("High intensity", "High")
-
-            currentIndex: indexOfValue(ShellSettings.Settings.vibrationIntensity)
-            model: ListModel {
-                // we can't use i18n with ListElement
-                Component.onCompleted: {
-                    append({"name": vibrationIntensityDelegate.highIntensityString, "value": 1.0});
-                    append({"name": vibrationIntensityDelegate.mediumIntensityString, "value": 0.5});
-                    append({"name": vibrationIntensityDelegate.lowIntensityString, "value": 0.2});
-
-                    // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                    vibrationIntensityDelegate.currentIndex = vibrationIntensityDelegate.indexOfValue(ShellSettings.Settings.vibrationIntensity)
-                }
-            }
-
-            textRole: "name"
-            valueRole: "value"
-
-            Component.onCompleted: dialog.parent = root
-            onCurrentValueChanged: ShellSettings.Settings.vibrationIntensity = currentValue;
-        }
-
-        FormCard.FormDelegateSeparator { above: vibrationIntensityDelegate; below: vibrationDurationDelegate }
+        FormCard.FormDelegateSeparator { above: shellVibrationsSwitch; below: vibrationDurationDelegate }
 
         FormCard.FormComboBoxDelegate {
             id: vibrationDurationDelegate
@@ -80,7 +49,7 @@ FormCard.FormCardPage {
                 Component.onCompleted: {
                     append({"name": vibrationDurationDelegate.longString, "value": 100});
                     append({"name": vibrationDurationDelegate.mediumString, "value": 50});
-                    append({"name": vibrationDurationDelegate.shortString, "value": 15});
+                    append({"name": vibrationDurationDelegate.shortString, "value": 10});
 
                     // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
                     vibrationDurationDelegate.currentIndex = vibrationDurationDelegate.indexOfValue(ShellSettings.Settings.vibrationDuration)
