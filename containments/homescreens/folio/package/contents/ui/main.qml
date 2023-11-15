@@ -15,6 +15,8 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
+import Qt5Compat.GraphicalEffects
+
 ContainmentItem {
     id: root
 
@@ -26,6 +28,18 @@ ContainmentItem {
 
         // ensure the gestures work immediately on load
         forceActiveFocus();
+    }
+
+    // wallpaper blur
+    FastBlur {
+        radius: 50
+        source: Plasmoid.wallpaperGraphicsObject
+        anchors.fill: parent
+        opacity: Math.max(
+            Folio.HomeScreenState.appDrawerOpenProgress, 
+            Folio.HomeScreenState.searchWidgetOpenProgress, 
+            Folio.HomeScreenState.folderOpenProgress
+        )
     }
 
     function homeAction() {
