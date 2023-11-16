@@ -4,6 +4,7 @@
 
 #pragma once
 
+#include <libkwineffects/kwineffects.h>
 #include <libkwineffects/kwinquickeffect.h>
 
 #include <span>
