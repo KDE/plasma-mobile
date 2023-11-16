@@ -25,6 +25,10 @@ Item {
         queryField.forceActiveFocus();
     }
 
+    function clearField() {
+        queryField.text = "";
+    }
+
     signal requestedClose()
 
     ColumnLayout {

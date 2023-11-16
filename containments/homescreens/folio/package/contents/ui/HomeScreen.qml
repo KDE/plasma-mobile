@@ -410,6 +410,13 @@ Item {
             visible: opacity > 0
             transform: Translate { y: (1 - homeScreenState.searchWidgetOpenProgress) * (-Kirigami.Units.gridUnit * 2) }
 
+            onVisibleChanged: {
+                if (!visible) {
+                    // clear search bar when closed
+                    searchWidget.clearField();
+                }
+            }
+
             // focus the search bar if it opens
             Connections {
                 target: Folio.HomeScreenState
