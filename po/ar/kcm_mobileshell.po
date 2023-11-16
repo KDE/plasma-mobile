@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-05-07 20:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -146,66 +146,50 @@ msgstr ""
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
+msgid "Vibration Duration"
 msgstr ""
 
 #: ui/VibrationForm.qml:40
 #, kde-format
-msgid "How intense shell vibrations should be."
-msgstr ""
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "منخفض"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "متوسط"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "عالي"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
-msgid "Vibration Duration"
-msgstr ""
-
-#: ui/VibrationForm.qml:71
-#, kde-format
 msgid "How long shell vibrations should be."
 msgstr ""
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, fuzzy, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "طويل"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "متوسط"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "قصير"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "منخفض"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "متوسط"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "عالي"
 
 #~ msgid "Task Switcher"
 #~ msgstr "مبدّل المهام"

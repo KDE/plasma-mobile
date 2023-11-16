@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-11-06 05:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -150,66 +150,56 @@ msgstr "ჩართულია თუ არა ვიბრაცია გ�
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "ვიბრაციის ინტენსივობა"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "როგორი ინტენსიური იქნება გარსის ვიბრაცია."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "დაბალი"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "საშუალო"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "მაღალი"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "ვიბრაციის ხანგრძლივობა"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "რამდენი ხანი გაგრძელდება ვიბრაცია."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "გრძელი"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "საშუალო"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "მოკლე"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "კლავიატურის ვიბრაცია ცალკე, კლავიატურის მორგების მოდულში კონტროლდება."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "ვიბრაციის ინტენსივობა"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "როგორი ინტენსიური იქნება გარსის ვიბრაცია."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "დაბალი"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "საშუალო"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "მაღალი"
 
 #~ msgid "Task Switcher"
 #~ msgstr "ამოცანების გადამრთველი"

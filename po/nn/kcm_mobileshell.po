@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-03-19 14:42+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -149,64 +149,54 @@ msgstr "Om vibrasjonar skal vera slått på i skalet."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "Vibrasjonsintensitet"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "Kor intens skalvibreringa skal vera."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "Låg"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "Middels"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "Høg"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "Vibrasjonstid"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Kor lenge skalvibreringa skal vara."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Lang"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Middels"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Kort"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
 "Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "Vibrasjonsintensitet"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "Kor intens skalvibreringa skal vera."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "Låg"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "Middels"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "Høg"

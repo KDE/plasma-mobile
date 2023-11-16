@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-11-06 09:16+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -153,61 +153,33 @@ msgstr "Si s'ha activat la vibració en l'intèrpret d'ordres."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "Intensitat de la vibració"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "Quant intensa ha de ser la vibració en l'intèrpret d'ordres."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "Baixa"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "Mitjana"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "Alta"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "Durada de la vibració"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Quant llarga ha de ser la vibració en l'intèrpret d'ordres."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Llarga"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Mitjana"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Curta"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -215,3 +187,21 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla separadament en el mòdul de configuració "
 "del teclat."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "Intensitat de la vibració"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "Quant intensa ha de ser la vibració en l'intèrpret d'ordres."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "Baixa"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "Mitjana"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "Alta"

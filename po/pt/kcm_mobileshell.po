@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2022-12-24 07:23+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -143,61 +143,33 @@ msgstr "Se deve ter as vibrações activas na linha de comandos."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "Intensidade das Vibrações"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "Quão intensas deverão ser as vibrações da linha de comandos."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "Baixa"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "Média"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "Alta"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "Duração das Vibrações"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Quão longas deverão ser as vibrações da consola."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Longa"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Média"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Curta"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -205,6 +177,24 @@ msgid ""
 msgstr ""
 "As vibrações do teclado são controladas em separado no módulo de "
 "configuração do teclado."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "Intensidade das Vibrações"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "Quão intensas deverão ser as vibrações da linha de comandos."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "Baixa"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "Média"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "Alta"
 
 #~ msgid "Task Switcher"
 #~ msgstr "Selector de Tarefas"

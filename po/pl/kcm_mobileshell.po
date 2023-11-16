@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-09-24 08:19+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -147,66 +147,56 @@ msgstr "Określa czy drgania mają być włączone w powłoce."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "Natężenie drgań"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "Jak bardzo natężone mają być drgania powłoki."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "Niska"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "Średnia"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "Wysoka"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "Czas trwania drgań"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Jak długo mają trwać drgania powłoki."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Długi"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Średni"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Krótki"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Drgania klawiatury są ustawiane osobne w członie do jej ustawień."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "Natężenie drgań"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "Jak bardzo natężone mają być drgania powłoki."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "Niska"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "Średnia"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "Wysoka"
 
 #~ msgid "Task Switcher"
 #~ msgstr "Przełącznik zadań"

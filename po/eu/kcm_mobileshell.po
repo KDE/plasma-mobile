@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-11-16 01:46+0000\n"
 "PO-Revision-Date: 2023-11-07 23:37+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -152,61 +152,33 @@ msgstr "Oskolean bibrazioak gaituta egon behar duten edo ez."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
-msgid "Vibration Intensity"
-msgstr "Bibrazioaren intentsitatea"
-
-#: ui/VibrationForm.qml:40
-#, kde-format
-msgid "How intense shell vibrations should be."
-msgstr "Oskoleko bibrazioen intentsitatea zenbatekoa izan behar den."
-
-#: ui/VibrationForm.qml:42
-#, kde-format
-msgctxt "Low intensity"
-msgid "Low"
-msgstr "Baxua"
-
-#: ui/VibrationForm.qml:43
-#, kde-format
-msgctxt "Medium intensity"
-msgid "Medium"
-msgstr "Ertaina"
-
-#: ui/VibrationForm.qml:44
-#, kde-format
-msgctxt "High intensity"
-msgid "High"
-msgstr "Altua"
-
-#: ui/VibrationForm.qml:70
-#, kde-format
 msgid "Vibration Duration"
 msgstr "Bibrazioen iraupena"
 
-#: ui/VibrationForm.qml:71
+#: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
 msgstr "Oskoleko bibrazioek zenbat iraun behar duten."
 
-#: ui/VibrationForm.qml:73
+#: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Luzea"
 
-#: ui/VibrationForm.qml:74
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Ertaina"
 
-#: ui/VibrationForm.qml:75
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Laburra"
 
-#: ui/VibrationForm.qml:99
+#: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
@@ -214,6 +186,24 @@ msgid ""
 msgstr ""
 "Teklatuaren bibrazioak bereizita kontrolatzen dira teklatuaren ezarpen "
 "moduluan."
+
+#~ msgid "Vibration Intensity"
+#~ msgstr "Bibrazioaren intentsitatea"
+
+#~ msgid "How intense shell vibrations should be."
+#~ msgstr "Oskoleko bibrazioen intentsitatea zenbatekoa izan behar den."
+
+#~ msgctxt "Low intensity"
+#~ msgid "Low"
+#~ msgstr "Baxua"
+
+#~ msgctxt "Medium intensity"
+#~ msgid "Medium"
+#~ msgstr "Ertaina"
+
+#~ msgctxt "High intensity"
+#~ msgid "High"
+#~ msgstr "Altua"
 
 #~ msgid "Task Switcher"
 #~ msgstr "Ataza-aldarazlea"
