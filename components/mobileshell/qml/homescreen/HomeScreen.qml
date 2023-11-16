@@ -130,7 +130,6 @@ Item {
 
         function onLockscreenUnlocked() {
             // run zoom animation after login
-            itemContainer.zoomOutImmediately();
             itemContainer.zoomIn();
         }
     }
