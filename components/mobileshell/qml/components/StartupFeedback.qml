@@ -67,8 +67,14 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         target: WindowPlugin.WindowUtil
 
         function onAppActivationStarted(appId, iconName) {
-            icon.source = iconName
-            openAnimSimple.restart();
+            if (!openAnimComplex.running) {
+                iconParent.scale = 0.5;
+                background.scale = 0.5;
+                backgroundParent.x = 0
+                backgroundParent.y = 0
+                icon.source = iconName
+                openAnimComplex.restart();
+            }
         }
     }
 
@@ -87,6 +93,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 root.visible = true;
             }
         }
+
         // slight pause to give slower devices time to catch up when the item becomes visible
         PauseAnimation { duration: 20 }
 
