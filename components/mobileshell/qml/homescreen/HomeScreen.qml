@@ -59,6 +59,11 @@ Item {
     property real leftMargin
     property real rightMargin
 
+    /**
+     * The opacity value that the homescreen content gets.
+     */
+    readonly property real contentOpacity: itemContainer.opacity
+
     function evaluateMargins() {
         topMargin = plasmoidItem.availableScreenRect.y
         bottomMargin = root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height)

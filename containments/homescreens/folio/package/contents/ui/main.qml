@@ -1,9 +1,10 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Window
+import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -14,8 +15,6 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
-
-import Qt5Compat.GraphicalEffects
 
 ContainmentItem {
     id: root
@@ -31,11 +30,14 @@ ContainmentItem {
     }
 
     // wallpaper blur
-    FastBlur {
-        radius: 50
+    MultiEffect {
+        blurEnabled: true
+        blur: 1.0
+        blurMax: 50
         source: Plasmoid.wallpaperGraphicsObject
         anchors.fill: parent
         opacity: Math.max(
+            1 - homeScreen.contentOpacity,
             Folio.HomeScreenState.appDrawerOpenProgress, 
             Folio.HomeScreenState.searchWidgetOpenProgress, 
             Folio.HomeScreenState.folderOpenProgress
