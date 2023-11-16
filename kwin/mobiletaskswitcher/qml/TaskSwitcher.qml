@@ -277,7 +277,7 @@ FocusScope {
                 implicitWidth: Kirigami.Units.iconSizes.large
                 implicitHeight: Kirigami.Units.iconSizes.large
                 source: "window"
-                // color: "white"
+                color: "white"
             }
 
             Kirigami.Heading {

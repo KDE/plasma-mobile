@@ -6,6 +6,8 @@
 
 #include <libkwineffects/effects.h>
 #include <libkwineffects/quickeffect.h>
+#include <libkwineffects/effect.h>
+#include <libkwineffects/effecttogglablestate.h>
 
 #include <span>
 
@@ -34,10 +36,8 @@ public:
     void setAnimationDuration(int duration);
 
     bool gestureInProgress() const;
-    void setGestureInProgress(bool gesture);
 
     qreal partialActivationFactor() const;
-    void setPartialActivationFactor(qreal factor);
 
     int requestedEffectChainPosition() const override;
     bool borderActivated(ElectricBorder border) override;
@@ -49,10 +49,6 @@ public:
 public Q_SLOTS:
     void activate();
     void realDeactivate();
-    void partialActivate(qreal factor);
-    void cancelPartialActivate();
-    void partialDeactivate(qreal factor);
-    void cancelPartialDeactivate();
     void deactivate(bool deactivateInstantly);
     void quickDeactivate();
     void toggle();
@@ -63,18 +59,17 @@ Q_SIGNALS:
     void partialActivationFactorChanged();
 
 private:
+    EffectTogglableState *const m_taskSwitcherState;
+    EffectTogglableTouchBorder *const m_border;
+    QList<ElectricBorder> m_borderActivate;
+
     QAction *m_realtimeToggleAction = nullptr;
     QAction *m_toggleAction = nullptr;
     QList<QKeySequence> m_toggleShortcut;
-    Status m_status = Status::Inactive;
-    ;
+
     QTimer *m_shutdownTimer;
-    QList<ElectricBorder> m_borderActivate;
-    QList<ElectricBorder> m_touchBorderActivate;
 
     int m_animationDuration = 400;
-    qreal m_partialActivationFactor = 0;
-    bool m_gestureInProgress = false;
 };
 
 } // namespace KWin
