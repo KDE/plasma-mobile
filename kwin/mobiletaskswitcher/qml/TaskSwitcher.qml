@@ -107,7 +107,7 @@ FocusScope {
         target: root.effect
 
         function onPartialActivationFactorChanged() {
-            taskSwitcherState.positionY = taskSwitcherState.openedYPosition * root.effect.partialActivationFactor;
+            taskSwitcherState.yPosition = taskSwitcherState.openedYPosition * root.effect.partialActivationFactor;
         }
 
         function onGestureInProgressChanged() {
