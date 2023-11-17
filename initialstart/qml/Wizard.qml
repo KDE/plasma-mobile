@@ -111,28 +111,6 @@ Kirigami.Page {
         }
     }
 
-    // top status bar
-    MobileShell.StatusBar {
-        id: statusBar
-        z: 1
-
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        height: Kirigami.Units.gridUnit * 1.25
-
-        backgroundColor: "transparent"
-
-        showSecondRow: false
-        showDropShadow: true
-        showTime: true
-        disableSystemTray: true // prevent SIGABRT, since loading the system tray leads to bad... things
-    }
-
     LandingComponent {
         id: landingComponent
         anchors.fill: parent

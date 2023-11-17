@@ -14,7 +14,7 @@ Kirigami.ApplicationWindow {
 
     width: 360
     height: 720
-    visibility: InitialStart.Wizard.testingMode ? "Windowed" : "FullScreen"
+    visibility: "Windowed"
 
     title: i18n("Initial Start")
 
