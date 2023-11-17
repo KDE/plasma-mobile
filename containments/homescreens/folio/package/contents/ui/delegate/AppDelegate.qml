@@ -96,7 +96,7 @@ AbstractDelegate {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
-                    bottomMargin: Kirigami.Units.smallSpacing
+                    bottomMargin: -Kirigami.Units.smallSpacing
                 }
                 visible: root.application.running
                 radius: width
