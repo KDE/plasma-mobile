@@ -27,6 +27,11 @@ ContainmentItem {
 
     // filled in by the shell (Panel.qml) with the plasma-workspace PanelView
     property var panel: null
+    onPanelChanged: {
+        if (panel) {
+            panel.floating = false;
+        }
+    }
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingApp: WindowPlugin.WindowMaximizedTracker.showingWindow
