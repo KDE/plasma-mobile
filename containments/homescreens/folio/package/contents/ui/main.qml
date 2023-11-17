@@ -29,11 +29,21 @@ ContainmentItem {
         forceActiveFocus();
     }
 
+    // wallpaper
+    MultiEffect {
+        blurEnabled: true
+        blur: 0.0
+        autoPaddingEnabled: false
+        source: Plasmoid.wallpaperGraphicsObject
+        anchors.fill: parent
+    }
+
     // wallpaper blur
     MultiEffect {
         blurEnabled: true
         blur: 1.0
         blurMax: 50
+        autoPaddingEnabled: false
         source: Plasmoid.wallpaperGraphicsObject
         anchors.fill: parent
         opacity: Math.max(
