@@ -41,7 +41,9 @@ MobileShell.GridView {
 
     // HACK: the first swipe from the top of the app drawer is done from HomeScreenState, not the flickable
     //       due to issues with Flickable getting its swipe stolen by SwipeArea
-    interactive: !atYBeginning && Folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
+    interactive: (dragging || !atYBeginning) // allow us to drag to the top 
+                    && Folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
+
     Connections {
         target: Folio.HomeScreenState
 
@@ -53,12 +55,11 @@ MobileShell.GridView {
         }
 
         function onAppDrawerGridYChanged(y) {
-            const minContentY = 0;
             const maxContentY = Math.max(0, root.contentHeight - root.height);
-            let contentY = Math.max(minContentY, root.contentY - y);
+            let contentY = root.contentY - y;
 
             if (root.contentHeight < root.height) {
-                // prevent overscroll only if contents are smaller than the view
+                // prevent bottom overscroll only if contents are smaller than the view
                 contentY = Math.min(maxContentY, contentY);
             }
 
