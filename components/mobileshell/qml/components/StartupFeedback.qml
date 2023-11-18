@@ -24,21 +24,14 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     property alias backgroundColor: background.color
     property alias icon: icon.source
 
-    function open(splashIcon, title, x, y, sourceIconSize, color) {
+    function open(splashIcon, title, x, y, sourceIconSize) {
         iconParent.scale = sourceIconSize/iconParent.width;
         background.scale = 0;
         backgroundParent.x = -root.width/2 + x
         backgroundParent.y = -root.height/2 + y
+        colorGenerator.resetColor();
         icon.source = splashIcon;
         
-        if (color !== undefined) {
-            // Break binding to use custom color
-            background.color = color
-        } else {
-            // Recreate binding
-            background.color = Qt.binding(function() { return colorGenerator.dominant})
-        }
-
         if (ShellSettings.Settings.animationsEnabled) {
             openAnimComplex.restart();
         } else {
@@ -48,6 +41,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     
     function close() {
         visible = false;
+        colorGenerator.resetColor();
     }
 
     // close when an app opens
@@ -72,6 +66,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 background.scale = 0.5;
                 backgroundParent.x = 0
                 backgroundParent.y = 0
+                colorGenerator.resetColor();
                 icon.source = iconName
                 openAnimComplex.restart();
             }
@@ -81,6 +76,17 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     Kirigami.ImageColors {
         id: colorGenerator
         source: icon.source
+
+        // the colors are generated async from the icon, so we need to ensure we don't display an old color
+        // for a moment when an app opens
+        property color colorToUse: 'transparent'
+
+        function resetColor() {
+            colorToUse = 'transparent';
+        }
+        onPaletteChanged: {
+            colorToUse = colorGenerator.dominant;
+        }
     }
 
     // animation that moves the icon
@@ -180,7 +186,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
             id: background
             anchors.fill: parent
 
-            color: colorGenerator.dominant
+            color: colorGenerator.colorToUse
         }
 
         Item {
