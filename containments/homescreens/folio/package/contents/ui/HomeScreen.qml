@@ -152,10 +152,11 @@ Item {
 
             transform: [
                 Scale {
+                    property real scaleFactor: Math.max(homeScreenState.appDrawerOpenProgress, homeScreenState.searchWidgetOpenProgress)
                     origin.x: mainHomeScreen.width / 2
                     origin.y: mainHomeScreen.height / 2
-                    yScale: 1 - (homeScreenState.appDrawerOpenProgress * 2) * 0.1
-                    xScale: 1 - (homeScreenState.appDrawerOpenProgress * 2) * 0.1
+                    yScale: 1 - (scaleFactor * 2) * 0.1
+                    xScale: 1 - (scaleFactor * 2) * 0.1
                 }
             ]
 
