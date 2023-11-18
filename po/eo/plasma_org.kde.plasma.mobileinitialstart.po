@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-11-18 01:37+0000\n"
 "PO-Revision-Date: 2023-11-07 06:43+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -249,7 +249,7 @@ msgstr "Pasvorto…"
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "Bonvenon al<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:105 qml/Wizard.qml:315
+#: qml/LandingComponent.qml:105 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Poste"
@@ -259,12 +259,12 @@ msgstr "Poste"
 msgid "Initial Start"
 msgstr "Komenca Komenco"
 
-#: qml/Wizard.qml:296
+#: qml/Wizard.qml:274
 #, kde-format
 msgid "Back"
 msgstr "Reen"
 
-#: qml/Wizard.qml:332
+#: qml/Wizard.qml:310
 #, kde-format
 msgid "Finish"
 msgstr "Fini"
