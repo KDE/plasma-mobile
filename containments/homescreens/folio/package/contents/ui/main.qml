@@ -46,11 +46,13 @@ ContainmentItem {
         autoPaddingEnabled: false
         source: Plasmoid.wallpaperGraphicsObject
         anchors.fill: parent
-        opacity: Math.max(
-            1 - homeScreen.contentOpacity,
-            Folio.HomeScreenState.appDrawerOpenProgress, 
-            Folio.HomeScreenState.searchWidgetOpenProgress, 
-            Folio.HomeScreenState.folderOpenProgress
+        opacity: Math.min(1, 
+            Math.max(
+                1 - homeScreen.contentOpacity,
+                Folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
+                Folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
+                Folio.HomeScreenState.folderOpenProgress
+            )
         )
     }
 
