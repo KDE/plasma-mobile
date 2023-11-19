@@ -1,4 +1,4 @@
-# Translation of plasma_applet_org.kde.plasma.mobile.homescreen to Norwegian Nynorsk
+# Translation of plasma_applet_org.kde.plasma.mobile.homescreen.folio to Norwegian Nynorsk
 #
 # Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2021, 2022.
 msgid ""

@@ -182,21 +182,3 @@ msgid ""
 "module."
 msgstr ""
 "Tastaturvibrasjonar vert kontrollerte for seg, i modulen for tastaturoppsett."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Vibrasjonsintensitet"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Kor intens skalvibreringa skal vera."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Låg"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Middels"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Høg"
