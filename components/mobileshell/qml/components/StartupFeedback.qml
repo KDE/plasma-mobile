@@ -29,8 +29,7 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         background.scale = 0;
         backgroundParent.x = -root.width/2 + x
         backgroundParent.y = -root.height/2 + y
-        colorGenerator.resetColor();
-        icon.source = splashIcon;
+        updateIconSource(splashIcon);
         
         if (ShellSettings.Settings.animationsEnabled) {
             openAnimComplex.restart();
@@ -66,11 +65,22 @@ MouseArea { // use mousearea to ensure clicks don't go behind
                 background.scale = 0.5;
                 backgroundParent.x = 0
                 backgroundParent.y = 0
-                colorGenerator.resetColor();
-                icon.source = iconName
+                root.updateIconSource(iconName);
                 openAnimComplex.restart();
             }
         }
+    }
+
+    function updateIconSource(source) {
+        if (icon.source !== source) {
+            // the colors are generated async from the icon, so we need to ensure we don't display an old color
+            // for a moment when an app opens
+            colorGenerator.resetColor();
+        } else {
+            // case where we set the same icon, ensure the color is set
+            colorGenerator.updateColor();
+        }
+        icon.source = source;
     }
 
     Kirigami.ImageColors {
@@ -84,8 +94,12 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         function resetColor() {
             colorToUse = 'transparent';
         }
-        onPaletteChanged: {
+        function updateColor() {
             colorToUse = colorGenerator.dominant;
+        }
+        onPaletteChanged: {
+            // update color once palette has loaded
+            updateColor();
         }
     }
 
