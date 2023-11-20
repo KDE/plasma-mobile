@@ -112,5 +112,6 @@
         "Name[zh_CN]": "手机面板",
         "Name[zh_TW]": "手機面板"
     },
+    "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Panel"
 }
