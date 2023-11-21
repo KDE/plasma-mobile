@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include <libkwineffects/effects.h>
-#include <libkwineffects/quickeffect.h>
-#include <libkwineffects/effect.h>
-#include <libkwineffects/effecttogglablestate.h>
+#include <effect/effecthandler.h>
+#include <effect/quickeffect.h>
+#include <effect/effect.h>
+#include <effect/effecttogglablestate.h>
 
 #include <span>
 
