@@ -1,7 +1,7 @@
 // SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
+import QtQuick
 import QtQuick.Layouts 1.2
 import QtQuick.Controls 2.12 as Controls
 
@@ -95,9 +95,9 @@ FormCard.FormCardPage {
     }
 
     data: [
-        RegExpValidator {
+        RegularExpressionValidator {
             id: pinValidator
-            regExp: /[0-9]+/
+            regularExpression: /[0-9]+/
         },
         // dialogs
 

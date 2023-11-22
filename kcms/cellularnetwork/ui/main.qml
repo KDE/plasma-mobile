@@ -25,6 +25,23 @@ KCM.SimpleKCM {
     topPadding: 0
     bottomPadding: 0
 
+    PlasmaNM.Handler {
+        id: nmHandler
+    }
+
+    PlasmaNM.AvailableDevices {
+        id: availableDevices
+    }
+
+    PlasmaNM.EnabledConnections {
+        id: enabledConnections
+    }
+
+    SimPage {
+        id: simPage
+        visible: false
+    }
+
     Kirigami.PlaceholderMessage {
         id: noModem
         anchors.centerIn: parent
@@ -40,23 +57,6 @@ KCM.SimpleKCM {
         width: root.width
         visible: !noModem.visible
 
-        PlasmaNM.Handler {
-            id: nmHandler
-        }
-
-        PlasmaNM.AvailableDevices {
-            id: availableDevices
-        }
-
-        PlasmaNM.EnabledConnections {
-            id: enabledConnections
-        }
-
-        SimPage {
-            id: simPage
-            visible: false
-        }
-
         MessagesList {
             Layout.fillWidth: true
             Layout.margins: Kirigami.Units.largeSpacing
@@ -64,6 +64,8 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormCard {
+            Layout.topMargin: Kirigami.Units.gridUnit
+
             FormCard.FormSwitchDelegate {
                 id: mobileDataSwitch
                 text: i18n("Mobile data")

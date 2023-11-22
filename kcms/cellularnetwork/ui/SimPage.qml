@@ -53,6 +53,8 @@ FormCard.FormCardPage {
     }
 
     FormCard.FormCard {
+        Layout.topMargin: Kirigami.Units.gridUnit
+
         FormCard.FormSwitchDelegate {
             id: dataRoamingCheckBox
             text: i18n("Data Roaming")
@@ -91,7 +93,7 @@ FormCard.FormCardPage {
             icon.name: "unlock"
             text: i18n("SIM Lock")
             description: i18n("Modify SIM lock settings.")
-            enabled: simEnabled
+            // enabled: simEnabled
             onClicked: kcm.push("SimLockPage.qml", { "sim": sim });
         }
 
