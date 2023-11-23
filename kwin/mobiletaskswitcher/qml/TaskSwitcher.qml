@@ -164,6 +164,8 @@ FocusScope {
         foregroundColorGroup: Kirigami.Theme.Complementary
         shadow: false
 
+        isVertical: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
+
         leftAction: MobileShell.NavigationPanelAction {
             enabled: true
             iconSource: "mobile-task-switcher"
@@ -206,7 +208,7 @@ FocusScope {
     states: [
         State {
             name: "landscape"
-            when: root.width > root.height
+            when: MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
             AnchorChanges {
                 target: navigationPanel
                 anchors {
@@ -223,7 +225,7 @@ FocusScope {
         },
         State {
             name: "portrait"
-            when: root.width <= root.height
+            when: !MobileShell.Constants.navigationPanelOnSide(root.width, root.height)
             AnchorChanges {
                 target: navigationPanel
                 anchors {

@@ -29,6 +29,8 @@ Item {
     property NavigationPanelAction leftCornerAction
     property NavigationPanelAction rightCornerAction
 
+    property bool isVertical: false
+
     // drop shadow for icons
     MultiEffect {
         anchors.fill: root
@@ -117,8 +119,8 @@ Item {
 
     states: [
         State {
-            name: "landscape"
-            when: root.width < root.height
+            name: "vertical"
+            when: root.isVertical
             PropertyChanges {
                 target: icons
                 buttonLength: Math.min(Kirigami.Units.gridUnit * 10, icons.height * 0.7 / 3)
@@ -165,8 +167,8 @@ Item {
                 width: icons.width
             }
         }, State {
-            name: "portrait"
-            when: root.width >= root.height
+            name: "horizontal"
+            when: !root.isVertical
             PropertyChanges {
                 target: icons
                 buttonLength: Math.min(Kirigami.Units.gridUnit * 8, icons.width * 0.7 / 3)

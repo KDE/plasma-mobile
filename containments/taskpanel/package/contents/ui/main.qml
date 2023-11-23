@@ -36,7 +36,7 @@ ContainmentItem {
         }
     }
 
-    readonly property bool inLandscape: Screen.width > Screen.height;
+    readonly property bool inLandscape: MobileShell.Constants.navigationPanelOnSide(Screen.width, Screen.height)
 
     readonly property real navigationPanelHeight: Kirigami.Units.gridUnit * 2
 
@@ -46,7 +46,9 @@ ContainmentItem {
     readonly property int intendedWindowLocation: inLandscape ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
-    onIntendedWindowLocationChanged: locationChangeTimer.restart()
+    onIntendedWindowLocationChanged: {
+        root.panel.location = intendedWindowLocation;
+    }
     onIntendedWindowOffsetChanged: {
         if (root.panel) {
             root.panel.offset = intendedWindowOffset;
@@ -66,13 +68,6 @@ ContainmentItem {
         }
     }
 
-    // use a timer so that rotation events are faster (offload the panel movement to later, after everything is figured out)
-    Timer {
-        id: locationChangeTimer
-        running: false
-        interval: 100
-        onTriggered: root.panel.location = intendedWindowLocation
-    }
 
     function setWindowProperties() {
         if (root.panel) {
@@ -117,8 +112,10 @@ ContainmentItem {
 
         // load appropriate system navigation component
         NavigationPanelComponent {
+            id: navigationPanel
             anchors.fill: parent
             opaqueBar: root.opaqueBar
+            isVertical: root.inLandscape
         }
     }
 }
