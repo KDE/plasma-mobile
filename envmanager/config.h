@@ -14,7 +14,7 @@
 
 // applications-blacklistrc
 // NOTE: we only write these entries if they are not already defined in the config
-const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_SETTINGS = {
+const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS = {
     {"Applications",
      {{"blacklist",
        "cuttlefish,org.kde.plasma.themeexplorer,org.kde.klipper,ciborium,syncmonitorhelper,org.kde.okular,wordview,assistant,assistant-qt5,designer,designer-"
@@ -23,7 +23,7 @@ const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_SETTINGS = {
 
 // kdeglobals
 // NOTE: we only write these entries if they are not already defined in the config
-const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_SETTINGS = {{"General", {{"BrowserApplication", "angelfish"}}}};
+const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_DEFAULT_SETTINGS = {{"General", {{"BrowserApplication", "angelfish"}}}};
 
 // kwinrc
 QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mobileConfig)

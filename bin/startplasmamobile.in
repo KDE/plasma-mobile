@@ -23,6 +23,9 @@ then
 	export KDE_COREDUMP_NOTIFY=1
 fi
 
-# TODO port away from PLASMA_DEFAULT_SHELL into QT_QPA_PLATFORM=offscreen plasma-apply-lookandfeel --apply org.kde.plasma.phone
+# ensure that we have our environment settings set properly prior to the shell being loaded (otherwise there is a race condition with autostart)
+QT_QPA_PLATFORM=offscreen plasma-mobile-envmanager --apply-settings
+
+# start the shell
 export PLASMA_DEFAULT_SHELL=org.kde.plasma.mobileshell
 startplasma-wayland --xwayland --inputmethod maliit-keyboard

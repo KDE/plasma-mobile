@@ -61,11 +61,11 @@ void Settings::loadSavedConfiguration()
     reloadKWinConfig();
 
     // applications-blacklistrc
-    loadKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_SETTINGS);
+    loadKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
     m_appBlacklistConfig->sync();
 
     // kdeglobals
-    loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS);
+    loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS);
     m_kdeglobalsConfig->sync();
 
     // save our changes
@@ -92,12 +92,12 @@ void Settings::applyMobileConfiguration()
 
     // applications-blacklistrc
     // NOTE: we only write entries if they are not already defined in the config
-    writeKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_SETTINGS, true);
+    writeKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS, true);
     m_appBlacklistConfig->sync();
 
     // kdeglobals
     // NOTE: we only write entries if they are not already defined in the config
-    writeKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, true);
+    writeKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS, true);
     m_kdeglobalsConfig->sync();
 
     // save our changes
