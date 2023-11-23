@@ -48,7 +48,7 @@ target_link_libraries(mobileshellplugin
         KF6::PlasmaQuick
         KF6::KIOGui
         KF6::KIOWidgets # for PreviewJob
-        KF6::WaylandClient
+        Plasma::KWaylandClient
         KF6::Service
         KF6::Package
 )

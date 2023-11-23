@@ -72,8 +72,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
 
 find_package(KF6Plasma CONFIG REQUIRED)
 find_package(KF6PlasmaQuick CONFIG REQUIRED)
-find_package(KF6Wayland CONFIG REQUIRED)
 find_package(KF6Screen CONFIG REQUIRED)
+find_package(KWayland CONFIG REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 

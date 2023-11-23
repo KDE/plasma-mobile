@@ -13,7 +13,7 @@ target_link_libraries(windowplugin PRIVATE
     Qt::DBus
     Qt::Gui
     Qt::Quick
-    KF6::WaylandClient
+    Plasma::KWaylandClient
     KF6::Service
     KF6::ConfigWidgets
 )

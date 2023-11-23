@@ -32,7 +32,7 @@ target_link_libraries(org.kde.plasma.mobile.homescreen.folio
                       KF6::Service
                       KF6::KIOGui
                       KF6::Notifications
-                      KF6::WaylandClient
+                      Plasma::KWaylandClient
                       KF6::WindowSystem
                       KF6::JobWidgets
 )

@@ -23,7 +23,7 @@ target_link_libraries(halcyonplugin
                       KF6::Service
                       KF6::KIOGui
                       KF6::JobWidgets
-                      KF6::WaylandClient
+                      Plasma::KWaylandClient
                       KF6::WindowSystem)
 
 set_property(TARGET halcyonplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/private/mobile/homescreen/halcyon)
