@@ -24,23 +24,30 @@ MouseArea { // use mousearea to ensure clicks don't go behind
     property alias backgroundColor: background.color
     property alias icon: icon.source
 
+    property bool __openRequested: false
+
     function open(splashIcon, title, x, y, sourceIconSize) {
         iconParent.scale = sourceIconSize/iconParent.width;
         background.scale = 0;
         backgroundParent.x = -root.width/2 + x
         backgroundParent.y = -root.height/2 + y
+        __openRequested = true;
         updateIconSource(splashIcon);
-        
-        if (ShellSettings.Settings.animationsEnabled) {
-            openAnimComplex.restart();
-        } else {
-            openAnimSimple.restart();
-        }
     }
     
     function close() {
         visible = false;
         colorGenerator.resetColor();
+    }
+
+    // call this after everything has loaded
+    function actuallyOpen() {
+        __openRequested = false;
+        if (ShellSettings.Settings.animationsEnabled) {
+            openAnimComplex.restart();
+        } else {
+            openAnimSimple.restart();
+        }
     }
 
     // close when an app opens
@@ -60,13 +67,13 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         target: WindowPlugin.WindowUtil
 
         function onAppActivationStarted(appId, iconName) {
-            if (!openAnimComplex.running) {
+            if (!openAnimComplex.running && !root.__openRequested) {
                 iconParent.scale = 0.5;
                 background.scale = 0.5;
                 backgroundParent.x = 0
                 backgroundParent.y = 0
+                root.__openRequested = true;
                 root.updateIconSource(iconName);
-                openAnimComplex.restart();
             }
         }
     }
@@ -96,6 +103,11 @@ MouseArea { // use mousearea to ensure clicks don't go behind
         }
         function updateColor() {
             colorToUse = colorGenerator.dominant;
+
+            // once color is finished updating, start the animation
+            if (root.__openRequested) {
+                root.actuallyOpen();
+            }
         }
         onPaletteChanged: {
             // update color once palette has loaded
