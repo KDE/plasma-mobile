@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-11-23 01:39+0000\n"
 "PO-Revision-Date: 2023-09-24 19:16+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -209,7 +209,7 @@ msgstr "Modalità a piena potenza"
 msgid "Initializing"
 msgstr "Inizializzazione"
 
-#: modemdetails.cpp:256 ui/SimPage.qml:116
+#: modemdetails.cpp:256 ui/SimPage.qml:118
 #, kde-format
 msgid "Locked"
 msgstr "Bloccato"
@@ -345,12 +345,12 @@ msgstr ""
 msgid "Scanning networks failed: %1"
 msgstr "Scansione delle reti non riuscita: %1"
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
 msgstr "Sì"
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
 msgstr "No"
@@ -578,59 +578,59 @@ msgstr "Solo 3G"
 msgid "Only 2G"
 msgstr "Solo 2G"
 
-#: ui/main.qml:35
+#: ui/main.qml:52
 #, kde-format
 msgid "Modem not available"
 msgstr "Modem non disponibile"
 
-#: ui/main.qml:69
+#: ui/main.qml:71
 #, kde-format
 msgid "Mobile data"
 msgstr "Dati mobili"
 
-#: ui/main.qml:74
+#: ui/main.qml:76
 #, kde-format
 msgid "No SIM is inserted."
 msgstr "Nessuna SIM inserita."
 
-#: ui/main.qml:76
+#: ui/main.qml:78
 #, kde-format
 msgid "Mobile data is not available with this modem."
 msgstr "I dati mobili non sono disponibili con questo modem."
 
-#: ui/main.qml:78
+#: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
 msgstr "Un APN deve essere configurato per avere dati mobili."
 
-#: ui/main.qml:80
+#: ui/main.qml:82
 #, kde-format
 msgid "Whether mobile data is enabled."
 msgstr "Se i dati mobili sono abilitati."
 
-#: ui/main.qml:111
+#: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
 msgstr "Utilizzo dei dati"
 
-#: ui/main.qml:112
+#: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
 msgstr "Visualizza l'utilizzo dei dati."
 
-#: ui/main.qml:120 ui/SimPage.qml:35
+#: ui/main.qml:122 ui/SimPage.qml:35
 #, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
 msgstr[1] "SIM"
 
-#: ui/main.qml:141
+#: ui/main.qml:143
 #, kde-format
 msgid "SIM %1"
 msgstr "SIM %1"
 
-#: ui/main.qml:142
+#: ui/main.qml:144
 #, kde-format
 msgid "View SIM %1 details."
 msgstr "Visualizza dettagli della SIM %1."
@@ -650,7 +650,7 @@ msgstr "Controllo del modem"
 msgid "Force Modem Restart"
 msgstr "Forza il riavvio del modem"
 
-#: ui/ModemPage.qml:42 ui/SimPage.qml:103
+#: ui/ModemPage.qml:42 ui/SimPage.qml:105
 #, kde-format
 msgid "Modem Details"
 msgstr "Dettagli del modem"
@@ -795,7 +795,7 @@ msgstr "Modifica"
 msgid "Delete"
 msgstr "Elimina"
 
-#: ui/SimLockPage.qml:19 ui/SimPage.qml:92
+#: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
 msgid "SIM Lock"
 msgstr "Blocco della SIM"
@@ -915,88 +915,88 @@ msgstr ""
 "Questo slot SIM è vuoto, è necessario inserire una scheda SIM per poterlo "
 "utilizzare."
 
-#: ui/SimPage.qml:58
+#: ui/SimPage.qml:60
 #, kde-format
 msgid "Data Roaming"
 msgstr "Roaming dati"
 
-#: ui/SimPage.qml:59
+#: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
 "Consenti al tuo dispositivo di utilizzare reti diverse dal tuo operatore."
 
-#: ui/SimPage.qml:70
+#: ui/SimPage.qml:72
 #, kde-format
 msgid "Modify APNs"
 msgstr "Modifica APN"
 
-#: ui/SimPage.qml:71
+#: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
 msgstr "Configura i nomi dei punti di accesso per il tuo operatore."
 
-#: ui/SimPage.qml:81
+#: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
 msgstr "Reti"
 
-#: ui/SimPage.qml:82
+#: ui/SimPage.qml:84
 #, kde-format
 msgid "Select a network operator."
 msgstr "Seleziona un operatore di rete."
 
-#: ui/SimPage.qml:93
+#: ui/SimPage.qml:95
 #, kde-format
 msgid "Modify SIM lock settings."
 msgstr "Modifica le impostazioni di blocco della SIM."
 
-#: ui/SimPage.qml:104
+#: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
 msgstr "Visualizza i dettagli del modem a cui è collegata questa SIM."
 
-#: ui/SimPage.qml:110
+#: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
 msgstr "Dettagli SIM"
 
-#: ui/SimPage.qml:124
+#: ui/SimPage.qml:126
 #, kde-format
 msgid "IMSI"
 msgstr "IMSI"
 
-#: ui/SimPage.qml:132
+#: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
 msgstr "EID"
 
-#: ui/SimPage.qml:140
+#: ui/SimPage.qml:142
 #, kde-format
 msgid "Operator Code (modem)"
 msgstr "Codice operatore (modem)"
 
-#: ui/SimPage.qml:148
+#: ui/SimPage.qml:150
 #, kde-format
 msgid "Operator Name (modem)"
 msgstr "Nome operatore (modem)"
 
-#: ui/SimPage.qml:156
+#: ui/SimPage.qml:158
 #, kde-format
 msgid "Operator Code (provided by SIM)"
 msgstr "Codice operatore (fornito dalla SIM)"
 
-#: ui/SimPage.qml:164
+#: ui/SimPage.qml:166
 #, kde-format
 msgid "Operator Name (provided by SIM)"
 msgstr "Nome operatore (fornito dalla SIM)"
 
-#: ui/SimPage.qml:172
+#: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
 msgstr "ID SIM"
 
-#: ui/SimPage.qml:188
+#: ui/SimPage.qml:190
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Numeri di emergenza"

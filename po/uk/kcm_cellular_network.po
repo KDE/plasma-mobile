@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-11-23 01:39+0000\n"
 "PO-Revision-Date: 2023-09-24 18:48+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -209,7 +209,7 @@ msgstr "Режим повного споживання"
 msgid "Initializing"
 msgstr "Ініціалізація"
 
-#: modemdetails.cpp:256 ui/SimPage.qml:116
+#: modemdetails.cpp:256 ui/SimPage.qml:118
 #, kde-format
 msgid "Locked"
 msgstr "Заблоковано"
@@ -344,12 +344,12 @@ msgstr "Долучено для доступу до обмежених лока�
 msgid "Scanning networks failed: %1"
 msgstr "Помилка сканування мереж: %1"
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
 msgstr "Так"
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
 msgstr "Ні"
@@ -577,47 +577,47 @@ msgstr "Лише 3G"
 msgid "Only 2G"
 msgstr "Лише 2G"
 
-#: ui/main.qml:35
+#: ui/main.qml:52
 #, kde-format
 msgid "Modem not available"
 msgstr "Немає доступу до модема"
 
-#: ui/main.qml:69
+#: ui/main.qml:71
 #, kde-format
 msgid "Mobile data"
 msgstr "Мобільні дані"
 
-#: ui/main.qml:74
+#: ui/main.qml:76
 #, kde-format
 msgid "No SIM is inserted."
 msgstr "Не вставлено жодної SIM-картки."
 
-#: ui/main.qml:76
+#: ui/main.qml:78
 #, kde-format
 msgid "Mobile data is not available with this modem."
 msgstr "Дані щодо мобільного зв'язку є недоступним для цього модема."
 
-#: ui/main.qml:78
+#: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
 msgstr "Для отримання даних щодо мобільного зв'язку має бути налаштовано APN."
 
-#: ui/main.qml:80
+#: ui/main.qml:82
 #, kde-format
 msgid "Whether mobile data is enabled."
 msgstr "Визначає, чи увімкнено обмін даними мобільним зв'язком."
 
-#: ui/main.qml:111
+#: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
 msgstr "Використання даних"
 
-#: ui/main.qml:112
+#: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
 msgstr "Переглянути обмін даними."
 
-#: ui/main.qml:120 ui/SimPage.qml:35
+#: ui/main.qml:122 ui/SimPage.qml:35
 #, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
@@ -626,12 +626,12 @@ msgstr[1] "SIM-картки"
 msgstr[2] "SIM-картки"
 msgstr[3] "SIM-картка"
 
-#: ui/main.qml:141
+#: ui/main.qml:143
 #, kde-format
 msgid "SIM %1"
 msgstr "SIM-картка %1"
 
-#: ui/main.qml:142
+#: ui/main.qml:144
 #, kde-format
 msgid "View SIM %1 details."
 msgstr "Переглянути параметри SIM-картки %1."
@@ -651,7 +651,7 @@ msgstr "Керування модемом"
 msgid "Force Modem Restart"
 msgstr "Примусовий перезапуск модема"
 
-#: ui/ModemPage.qml:42 ui/SimPage.qml:103
+#: ui/ModemPage.qml:42 ui/SimPage.qml:105
 #, kde-format
 msgid "Modem Details"
 msgstr "Параметри модема"
@@ -796,7 +796,7 @@ msgstr "Змінити"
 msgid "Delete"
 msgstr "Вилучити"
 
-#: ui/SimLockPage.qml:19 ui/SimPage.qml:92
+#: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
 msgid "SIM Lock"
 msgstr "Блокування SIM"
@@ -917,89 +917,89 @@ msgstr ""
 "Це гніздо SIM-картки порожнє, слід вставити SIM-картку, щоб ним можна було "
 "скористатися."
 
-#: ui/SimPage.qml:58
+#: ui/SimPage.qml:60
 #, kde-format
 msgid "Data Roaming"
 msgstr "Роумінг даних"
 
-#: ui/SimPage.qml:59
+#: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
 "Дозволити вашому пристрою використовувати мережі, відмінні від мереж вашого "
 "оператора."
 
-#: ui/SimPage.qml:70
+#: ui/SimPage.qml:72
 #, kde-format
 msgid "Modify APNs"
 msgstr "Змінити APN"
 
-#: ui/SimPage.qml:71
+#: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
 msgstr "Налаштувати назви точок доступу для цього оператора."
 
-#: ui/SimPage.qml:81
+#: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
 msgstr "Мережі"
 
-#: ui/SimPage.qml:82
+#: ui/SimPage.qml:84
 #, kde-format
 msgid "Select a network operator."
 msgstr "Виберіть оператора мережі."
 
-#: ui/SimPage.qml:93
+#: ui/SimPage.qml:95
 #, kde-format
 msgid "Modify SIM lock settings."
 msgstr "Змінити параметри блокування SIM-картки."
 
-#: ui/SimPage.qml:104
+#: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
 msgstr "Переглянути параметри модема, з яким з'єднано цю SIM-картку."
 
-#: ui/SimPage.qml:110
+#: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
 msgstr "Параметри SIM-картки"
 
-#: ui/SimPage.qml:124
+#: ui/SimPage.qml:126
 #, kde-format
 msgid "IMSI"
 msgstr "IMSI"
 
-#: ui/SimPage.qml:132
+#: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
 msgstr "EID"
 
-#: ui/SimPage.qml:140
+#: ui/SimPage.qml:142
 #, kde-format
 msgid "Operator Code (modem)"
 msgstr "Код оператора (модем)"
 
-#: ui/SimPage.qml:148
+#: ui/SimPage.qml:150
 #, kde-format
 msgid "Operator Name (modem)"
 msgstr "Назва оператора (модем)"
 
-#: ui/SimPage.qml:156
+#: ui/SimPage.qml:158
 #, kde-format
 msgid "Operator Code (provided by SIM)"
 msgstr "Код оператора (наданий SIM-карткою)"
 
-#: ui/SimPage.qml:164
+#: ui/SimPage.qml:166
 #, kde-format
 msgid "Operator Name (provided by SIM)"
 msgstr "Назва оператора (надана SIM-карткою)"
 
-#: ui/SimPage.qml:172
+#: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
 msgstr "Ід. SIM"
 
-#: ui/SimPage.qml:188
+#: ui/SimPage.qml:190
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Номери надзвичайних служб"

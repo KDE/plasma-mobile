@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-23 01:46+0000\n"
+"POT-Creation-Date: 2023-11-23 01:39+0000\n"
 "PO-Revision-Date: 2023-09-23 09:34+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -209,7 +209,7 @@ msgstr "Način polne moči"
 msgid "Initializing"
 msgstr "Inicializiranje"
 
-#: modemdetails.cpp:256 ui/SimPage.qml:116
+#: modemdetails.cpp:256 ui/SimPage.qml:118
 #, kde-format
 msgid "Locked"
 msgstr "Zaklenjeno"
@@ -344,12 +344,12 @@ msgstr "Priključen za dostop do omejenih lokalnih operaterskih storitev."
 msgid "Scanning networks failed: %1"
 msgstr "Prečesavanje omrežij ni uspelo: %1"
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
 msgstr "Da"
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:117
+#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
 msgstr "Ne"
@@ -577,47 +577,47 @@ msgstr "Samo 3G"
 msgid "Only 2G"
 msgstr "Samo 2G"
 
-#: ui/main.qml:35
+#: ui/main.qml:52
 #, kde-format
 msgid "Modem not available"
 msgstr "Modem ni na voljo"
 
-#: ui/main.qml:69
+#: ui/main.qml:71
 #, kde-format
 msgid "Mobile data"
 msgstr "Mobilni podatki"
 
-#: ui/main.qml:74
+#: ui/main.qml:76
 #, kde-format
 msgid "No SIM is inserted."
 msgstr "Ni vstavljene SIM."
 
-#: ui/main.qml:76
+#: ui/main.qml:78
 #, kde-format
 msgid "Mobile data is not available with this modem."
 msgstr "Mobilni podatki niso na voljo s tem modemom."
 
-#: ui/main.qml:78
+#: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
 msgstr "Za mobilne podatke mora biti konfiguriran APN."
 
-#: ui/main.qml:80
+#: ui/main.qml:82
 #, kde-format
 msgid "Whether mobile data is enabled."
 msgstr "Ali so omogočeni mobilni podatki."
 
-#: ui/main.qml:111
+#: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
 msgstr "Raba podatkov"
 
-#: ui/main.qml:112
+#: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
 msgstr "Pogled rabe podatkov."
 
-#: ui/main.qml:120 ui/SimPage.qml:35
+#: ui/main.qml:122 ui/SimPage.qml:35
 #, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
@@ -626,12 +626,12 @@ msgstr[1] "SIM"
 msgstr[2] "SIM"
 msgstr[3] "SIM"
 
-#: ui/main.qml:141
+#: ui/main.qml:143
 #, kde-format
 msgid "SIM %1"
 msgstr "SIM %1"
 
-#: ui/main.qml:142
+#: ui/main.qml:144
 #, kde-format
 msgid "View SIM %1 details."
 msgstr "Pogled podrobnosti SIM %1."
@@ -651,7 +651,7 @@ msgstr "Upravljanje modema"
 msgid "Force Modem Restart"
 msgstr "Prisili ponovni zagon modema"
 
-#: ui/ModemPage.qml:42 ui/SimPage.qml:103
+#: ui/ModemPage.qml:42 ui/SimPage.qml:105
 #, kde-format
 msgid "Modem Details"
 msgstr "Podrobnosti modema"
@@ -796,7 +796,7 @@ msgstr "Uredi"
 msgid "Delete"
 msgstr "Zbriši"
 
-#: ui/SimLockPage.qml:19 ui/SimPage.qml:92
+#: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
 msgid "SIM Lock"
 msgstr "Zaklep SIM"
@@ -914,88 +914,88 @@ msgstr ""
 "Ta reža za SIM je prazna, treba je vstaviti SIM, da bi lahko režo "
 "uporabljali."
 
-#: ui/SimPage.qml:58
+#: ui/SimPage.qml:60
 #, kde-format
 msgid "Data Roaming"
 msgstr "Podatkovno gostovanje"
 
-#: ui/SimPage.qml:59
+#: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
 msgstr ""
 "Dovoli napravi uporabo še kakega drugega omrežja razen vašega operaterja."
 
-#: ui/SimPage.qml:70
+#: ui/SimPage.qml:72
 #, kde-format
 msgid "Modify APNs"
 msgstr "Uredi APN"
 
-#: ui/SimPage.qml:71
+#: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
 msgstr "Sestavi dostopne točke vašega operaterja."
 
-#: ui/SimPage.qml:81
+#: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
 msgstr "Omrežja"
 
-#: ui/SimPage.qml:82
+#: ui/SimPage.qml:84
 #, kde-format
 msgid "Select a network operator."
 msgstr "Izberi mrežnega operaterja."
 
-#: ui/SimPage.qml:93
+#: ui/SimPage.qml:95
 #, kde-format
 msgid "Modify SIM lock settings."
 msgstr "Spremeni nastavitve zaklepanje SIMa."
 
-#: ui/SimPage.qml:104
+#: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
 msgstr "Pogled podrobnosti modema, kamor je SIM povezan."
 
-#: ui/SimPage.qml:110
+#: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
 msgstr "Podrobnosti SIMa"
 
-#: ui/SimPage.qml:124
+#: ui/SimPage.qml:126
 #, kde-format
 msgid "IMSI"
 msgstr "IMSI"
 
-#: ui/SimPage.qml:132
+#: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
 msgstr "EID"
 
-#: ui/SimPage.qml:140
+#: ui/SimPage.qml:142
 #, kde-format
 msgid "Operator Code (modem)"
 msgstr "Operaterska koda (modem)"
 
-#: ui/SimPage.qml:148
+#: ui/SimPage.qml:150
 #, kde-format
 msgid "Operator Name (modem)"
 msgstr "Ime operaterja (modem)"
 
-#: ui/SimPage.qml:156
+#: ui/SimPage.qml:158
 #, kde-format
 msgid "Operator Code (provided by SIM)"
 msgstr "Koda operaterja (pridobljena iz SIMa)"
 
-#: ui/SimPage.qml:164
+#: ui/SimPage.qml:166
 #, kde-format
 msgid "Operator Name (provided by SIM)"
 msgstr "Ime operaterja (pridobljeno iz SIMa)"
 
-#: ui/SimPage.qml:172
+#: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
 msgstr "ID SIM"
 
-#: ui/SimPage.qml:188
+#: ui/SimPage.qml:190
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Številke klica v sili"
