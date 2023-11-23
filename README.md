@@ -49,7 +49,7 @@ Dependencies:
 
 To start the phone homescreen in a window, run:
 ```
-QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.phoneshell"
+QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.mobileshell"
 ```
 
 ---
