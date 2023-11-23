@@ -18,7 +18,7 @@ target_link_libraries(halcyonplugin
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
-                      KF6::Plasma
+                      Plasma::Plasma
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui

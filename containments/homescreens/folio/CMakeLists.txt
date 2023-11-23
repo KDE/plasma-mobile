@@ -26,8 +26,8 @@ target_link_libraries(org.kde.plasma.mobile.homescreen.folio
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
-                      KF6::Plasma
-                      KF6::PlasmaQuick
+                      Plasma::Plasma
+                      Plasma::PlasmaQuick
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui

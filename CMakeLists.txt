@@ -70,8 +70,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     JobWidgets
 )
 
-find_package(KF6Plasma CONFIG REQUIRED)
-find_package(KF6PlasmaQuick CONFIG REQUIRED)
+find_package(Plasma CONFIG REQUIRED)
+find_package(PlasmaQuick CONFIG REQUIRED)
 find_package(KF6Screen CONFIG REQUIRED)
 find_package(KWayland CONFIG REQUIRED)
 

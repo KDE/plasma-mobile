@@ -42,10 +42,10 @@ target_link_libraries(mobileshellplugin
         Qt::Quick
         KF6::ConfigWidgets # for KStandardAction
         KF6::KIOGui
-        KF6::Plasma
+        Plasma::Plasma
         KF6::I18n
         KF6::Notifications
-        KF6::PlasmaQuick
+        Plasma::PlasmaQuick
         KF6::KIOGui
         KF6::KIOWidgets # for PreviewJob
         Plasma::KWaylandClient

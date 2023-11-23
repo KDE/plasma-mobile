@@ -17,7 +17,7 @@ target_link_libraries(kcm_cellular_network PRIVATE
     Qt::Quick
     Qt::Qml
     Qt::Xml
-    KF6::Plasma
+    Plasma::Plasma
     KF6::I18n
     KF6::NetworkManagerQt
     KF6::ModemManagerQt

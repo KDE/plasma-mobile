@@ -33,10 +33,10 @@ target_link_libraries(mobileshellstateplugin
         Qt::Gui
         Qt::Quick
         Qt::DBus
-        KF6::Plasma
+        Plasma::Plasma
         KF6::I18n
         KF6::Notifications
-        KF6::PlasmaQuick
+        Plasma::PlasmaQuick
 )
 
 ecm_finalize_qml_module(mobileshellstateplugin)

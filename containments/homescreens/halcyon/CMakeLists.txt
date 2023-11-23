@@ -11,7 +11,7 @@ target_link_libraries(org.kde.plasma.mobile.homescreen.halcyon
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
-                      KF6::Plasma
+                      Plasma::Plasma
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui

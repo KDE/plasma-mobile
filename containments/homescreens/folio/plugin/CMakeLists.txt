@@ -25,8 +25,8 @@ target_link_libraries(folioplugin
                       Qt::Gui
                       Qt::Qml
                       Qt::Quick
-                      KF6::Plasma
-                      KF6::PlasmaQuick
+                      Plasma::Plasma
+                      Plasma::PlasmaQuick
                       KF6::I18n
                       KF6::Service
                       KF6::KIOGui

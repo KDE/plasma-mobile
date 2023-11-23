@@ -10,7 +10,7 @@ target_link_libraries(org.kde.plasma.mobile.taskpanel
                       Qt::DBus
                       Qt::Qml
                       Qt::Quick
-                      KF6::Plasma
+                      Plasma::Plasma
                      )
 
 

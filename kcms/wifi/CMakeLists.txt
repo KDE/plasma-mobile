@@ -9,7 +9,7 @@ target_link_libraries(kcm_mobile_wifi PRIVATE
     Qt::Qml
     KF6::I18n
     KF6::NetworkManagerQt
-    KF6::Plasma
+    Plasma::Plasma
     KF6::KCMUtilsQuick
 )
 
