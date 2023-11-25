@@ -19,7 +19,7 @@ Dependencies:
     'frameworks/kjobwidgets': '@latest-kf6'
     'plasma/kwayland': '@same'
     'plasma/libkscreen': '@same'
-    'plasma/plasma-framework': '@same'
+    'plasma/libplasma': '@same'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
     'libraries/kirigami-addons': '@latest-kf6'
