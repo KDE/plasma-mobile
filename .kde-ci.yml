@@ -16,7 +16,7 @@ Dependencies:
     'frameworks/modemmanager-qt': '@latest'
     'frameworks/networkmanager-qt': '@latest'
     'plasma/kwayland': 'kf5'
-    'plasma/plasma-framework': 'kf5'
+    'plasma/libplasma': 'kf5'
     'plasma/kwin': '@same'
     'plasma/plasma-workspace': '@same'
     'libraries/kirigami-addons': '@latest'
