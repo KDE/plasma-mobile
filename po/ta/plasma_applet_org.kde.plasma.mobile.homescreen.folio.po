@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Kishore G <kishore96@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-06 01:40+0000\n"
-"PO-Revision-Date: 2023-04-23 17:12+0530\n"
+"PO-Revision-Date: 2023-12-07 21:19+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "அடைவு"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -39,120 +39,120 @@ msgstr "நீக்கு"
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "பிளாஸ்மாய்டுகள்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "முகப்பிற்கான அமைப்புகள்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:87
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "சின்னங்கள்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:118
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "வரிசைகளின் &எண்ணிக்கை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:119
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "நெடுவரிசைகளின் எண்ணிக்கை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:123
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "முகப்பிலுள்ள சின்னங்களின் அளவு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:162
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "திரையின் நோக்குநிலையைப் பொறுத்து வரிகளும் நெடுவரிகளும் இடமாறும்."
 
 #: package/contents/ui/settings/SettingsWindow.qml:166
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "முகப்பு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "முகப்பில் பெயர்களைக் காட்டு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:185
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "பிடித்தவை பட்டையில் பெயர்களைக் காட்டு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:198
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "பக்கமாற்ற அசைவூட்டம்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:204
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "நழுவுவது"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "கனசதுரம்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:206
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "மங்குவது"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "அடுக்கு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "சுழற்சி"
 
 #: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "பிடித்தவை பட்டை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "பொதுவானவை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "தளவமைப்பு ஏற்றுமதி செய்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:303
 #: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "ஏற்றுமதி நிலை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1 என்பதற்கு ஏற்றுமதி செய்ய முடியவில்லை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "முகப்பின் தளவமைப்பு வெற்றிகரமாக %1 என்பதற்கு ஏற்றுமதி செய்யப்பட்டுள்ளது"
 
 #: package/contents/ui/settings/SettingsWindow.qml:317
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "இறக்குமதியை உறுதிசெய்யவும்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "தற்போதைய முகப்பின் தளவமைப்பை இது மேலெழுதும்!"
