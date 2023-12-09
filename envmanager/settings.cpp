@@ -16,9 +16,6 @@
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString SAVED_CONFIG_GROUP = QStringLiteral("SavedConfig");
 
-const QString MOBILE_LOOK_AND_FEEL = QStringLiteral("org.kde.breeze.mobile");
-const QString LOOK_AND_FEEL_KEY = QStringLiteral("LookAndFeelPackage");
-
 Settings::Settings(QObject *parent)
     : QObject{parent}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(QStringLiteral("phone"))}
@@ -51,10 +48,6 @@ void Settings::applyConfiguration()
 
 void Settings::loadSavedConfiguration()
 {
-    // check look and feel
-    QString lnf = loadSavedConfigSetting(m_kdeglobalsConfig, QStringLiteral("kdeglobals"), QStringLiteral("KDE"), LOOK_AND_FEEL_KEY, false);
-    QProcess::execute("plasma-apply-lookandfeel", {"-a", lnf});
-
     // kwinrc
     loadKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
     m_kwinrcConfig->sync();
@@ -66,6 +59,7 @@ void Settings::loadSavedConfiguration()
 
     // kdeglobals
     loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS);
+    loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS);
     m_kdeglobalsConfig->sync();
 
     // save our changes
@@ -74,30 +68,24 @@ void Settings::loadSavedConfiguration()
 
 void Settings::applyMobileConfiguration()
 {
-    // check look and feel
-    KPackage::Package package = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/LookAndFeel"));
-
-    if (package.path() != MOBILE_LOOK_AND_FEEL) {
-        // save it to be loaded when back on desktop
-        saveConfigSetting(QStringLiteral("kdeglobals"), QStringLiteral("KDE"), LOOK_AND_FEEL_KEY, package.path());
-
-        // ensure correct look and feel is applied
-        QProcess::execute("plasma-apply-lookandfeel", {"-a", MOBILE_LOOK_AND_FEEL});
-    }
-
     // kwinrc
     writeKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig), false);
     m_kwinrcConfig->sync();
     reloadKWinConfig();
 
     // applications-blacklistrc
-    // NOTE: we only write entries if they are not already defined in the config
-    writeKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS, true);
+    writeKeys(QStringLiteral("applications-blacklistrc"),
+              m_appBlacklistConfig,
+              APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS,
+              true); // only write entries if they are not already defined in the config
     m_appBlacklistConfig->sync();
 
     // kdeglobals
-    // NOTE: we only write entries if they are not already defined in the config
-    writeKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS, true);
+    writeKeys(QStringLiteral("kdeglobals"),
+              m_kdeglobalsConfig,
+              KDEGLOBALS_DEFAULT_SETTINGS,
+              true); // only write entries if they are not already defined in the config
+    writeKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, false);
     m_kdeglobalsConfig->sync();
 
     // save our changes
@@ -140,7 +128,7 @@ void Settings::saveConfigSetting(const QString &fileName, const QString &group, 
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
-        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "saved" << key << "to" << value;
+        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "saved" << key << "=" << value;
         keyGroup.writeEntry(key, value);
     }
 }
