@@ -16,6 +16,7 @@ plasma_install_package(hotspot org.kde.plasma.quicksetting.hotspot quicksettings
 add_subdirectory(flashlight)
 add_subdirectory(nightcolor)
 add_subdirectory(powermenu)
-add_subdirectory(record)
+# TODO: Disable screen recording quick setting, as it does not work properly
+# add_subdirectory(record)
 add_subdirectory(screenshot)
 add_subdirectory(screenrotation)
