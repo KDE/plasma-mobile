@@ -290,6 +290,7 @@ Window {
 
             FileDialog {
                 id: importFileDialog
+                title: i18n("Import layout from")
                 fileMode: FileDialog.OpenFile
                 nameFilters: ["JSON files (*.json)"]
                 onAccepted: {
