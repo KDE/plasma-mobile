@@ -1,11 +1,14 @@
-// SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.12 as Controls
-import org.kde.kirigami 2.12 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+
+import org.kde.kirigami as Kirigami
 import org.kde.kcmutils
+import org.kde.kirigamiaddons.formcard 1 as FormCard
+
 import cellularnetworkkcm 1.0
 
 Kirigami.ScrollablePage {
@@ -52,39 +55,18 @@ Kirigami.ScrollablePage {
         
         model: modem.details.networks
         
-        delegate: Kirigami.SwipeListItem {
+        delegate: FormCard.FormRadioDelegate {
+            checked: modelData.isCurrentlyUsed
+
             onClicked: {
                 if (!modelData.isCurrentlyUsed) {
                     modelData.registerToNetwork();
                     modem.details.scanNetworks();
                 }
             }
-            
-            contentItem: RowLayout {
-                Layout.fillWidth: true
-                
-                ColumnLayout {
-                    spacing: Kirigami.Units.smallSpacing
-                    Kirigami.Heading {
-                        level: 3
-                        text: modelData.operatorLong + " | " + modelData.operatorShort + "(" + modelData.operatorCode + ")"
-                    }
-                    Controls.Label {
-                        text: modelData.accessTechnology
-                    }
-                }
-                Controls.RadioButton {
-                    Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
-                    checked: modelData.isCurrentlyUsed
-                    onClicked: {
-                        if (!modelData.isCurrentlyUsed) {
-                            modelData.registerToNetwork();
-                            modem.details.scanNetworks();
-                        }
-                        checked = modelData.isCurrentlyUsed;
-                    }
-                }
-            }
+
+            text: modelData.operatorLong + " | " + modelData.operatorShort + "(" + modelData.operatorCode + ")"
+            description: modelData.accessTechnology
         }
     }
 }
