@@ -89,7 +89,7 @@ KCM.SimpleKCM {
                     checked = shouldBeChecked;
                 }
 
-                enabled: kcm.selectedModem.mobileDataSupported && !kcm.selectedModem.needsAPNAdded
+                enabled: kcm.selectedModem && kcm.selectedModem.mobileDataSupported && !kcm.selectedModem.needsAPNAdded
                 checked: shouldBeChecked
 
                 onCheckedChanged: {

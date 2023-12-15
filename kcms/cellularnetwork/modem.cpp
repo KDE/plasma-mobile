@@ -7,6 +7,9 @@
 
 #include <KLocalizedString>
 #include <KUser>
+#include <QDBusReply>
+
+#include <QCoroDBusPendingReply>
 
 Modem::Modem(QObject *parent)
     : QObject{parent}
@@ -116,12 +119,13 @@ QString Modem::activeConnectionUni() const
     return QString();
 }
 
-void Modem::reset()
+QCoro::Task<void> Modem::reset()
 {
     qDebug() << QStringLiteral("Resetting the modem...");
-    QDBusPendingReply<void> reply = m_mmInterface->reset();
-    reply.waitForFinished();
-    if (reply.isError()) {
+
+    QDBusReply<void> reply = co_await m_mmInterface->reset();
+
+    if (reply.isValid()) {
         qDebug() << QStringLiteral("Error resetting the modem:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error resetting the modem: %1", reply.error().message()));
     }
@@ -207,51 +211,43 @@ void Modem::setMobileDataEnabled(bool enabled)
 
 bool Modem::isRoaming() const
 {
-    if (!m_nmModem) {
+    if (!m_nmModem || !m_nmModem->activeConnection() || !m_nmModem->activeConnection()->connection()) {
         return false;
     }
 
-    if (m_nmModem->activeConnection() && m_nmModem->activeConnection()->connection()) {
-        auto connection = m_nmModem->activeConnection()->connection();
-        NetworkManager::GsmSetting::Ptr gsmSetting = connection->settings()->setting(NetworkManager::Setting::Gsm).dynamicCast<NetworkManager::GsmSetting>();
-        if (gsmSetting) {
-            return !gsmSetting->homeOnly();
-        }
-    }
+    auto connection = m_nmModem->activeConnection()->connection();
+    NetworkManager::GsmSetting::Ptr gsmSetting = connection->settings()->setting(NetworkManager::Setting::Gsm).dynamicCast<NetworkManager::GsmSetting>();
 
-    return false;
+    return gsmSetting ? !gsmSetting->homeOnly() : false;
 }
 
-void Modem::setIsRoaming(bool roaming)
+QCoro::Task<void> Modem::setIsRoaming(bool roaming)
 {
-    if (!m_nmModem) {
-        return;
+    if (!m_nmModem || !m_nmModem->activeConnection() || !m_nmModem->activeConnection()->connection()) {
+        co_return;
     }
 
-    if (m_nmModem->activeConnection() && m_nmModem->activeConnection()->connection()) {
-        auto connection = m_nmModem->activeConnection()->connection();
+    auto connection = m_nmModem->activeConnection()->connection();
 
-        NetworkManager::GsmSetting::Ptr gsmSetting = connection->settings()->setting(NetworkManager::Setting::Gsm).dynamicCast<NetworkManager::GsmSetting>();
-        if (gsmSetting) {
-            gsmSetting->setHomeOnly(!roaming); // set roaming setting
+    NetworkManager::GsmSetting::Ptr gsmSetting = connection->settings()->setting(NetworkManager::Setting::Gsm).dynamicCast<NetworkManager::GsmSetting>();
+    if (gsmSetting) {
+        gsmSetting->setHomeOnly(!roaming); // set roaming setting
 
-            QDBusPendingReply reply = connection->update(connection->settings()->toMap());
-            reply.waitForFinished();
-            if (reply.isError()) {
-                qWarning() << QStringLiteral("Error updating connection settings for") << connection->uuid() << QStringLiteral(":") << reply.error().message()
-                           << QStringLiteral(".");
-                CellularNetworkSettings::instance()->addMessage(
-                    InlineMessage::Error,
-                    i18n("Error updating connection settings for %1: %2.", connection->uuid(), reply.error().message()));
-            } else {
-                qDebug() << QStringLiteral("Successfully updated connection settings") << connection->uuid() << QStringLiteral(".");
-            }
+        QDBusReply<void> reply = co_await connection->update(connection->settings()->toMap());
+        if (reply.isValid()) {
+            qWarning() << QStringLiteral("Error updating connection settings for") << connection->uuid() << QStringLiteral(":") << reply.error().message()
+                       << QStringLiteral(".");
+            CellularNetworkSettings::instance()->addMessage(
+                InlineMessage::Error,
+                i18n("Error updating connection settings for %1: %2.", connection->uuid(), reply.error().message()));
+        } else {
+            qDebug() << QStringLiteral("Successfully updated connection settings") << connection->uuid() << QStringLiteral(".");
         }
-
-        // the connection uni has changed, refresh the profiles list
-        refreshProfiles();
-        Q_EMIT activeConnectionUniChanged();
     }
+
+    // the connection uni has changed, refresh the profiles list
+    refreshProfiles();
+    Q_EMIT activeConnectionUniChanged();
 }
 
 bool Modem::hasSim() const
@@ -287,11 +283,11 @@ void Modem::refreshProfiles()
     Q_EMIT profileListChanged();
 }
 
-void Modem::activateProfile(const QString &connectionUni)
+QCoro::Task<void> Modem::activateProfile(const QString &connectionUni)
 {
     if (!m_nmModem) {
         qWarning() << "Cannot activate profile since there is no NetworkManager modem";
-        return;
+        co_return;
     }
 
     qDebug() << QStringLiteral("Activating profile on modem") << m_nmModem->uni() << QStringLiteral("for connection") << connectionUni << ".";
@@ -313,28 +309,27 @@ void Modem::activateProfile(const QString &connectionUni)
 
     if (!con) {
         qDebug() << QStringLiteral("Connection") << connectionUni << QStringLiteral("not found.");
-        return;
+        co_return;
     }
 
     // activate connection manually
     // despite the documentation saying otherwise, activateConnection seems to need the DBus path, not uuid of the connection
-    QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::activateConnection(con->path(), m_nmModem->uni(), "");
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::activateConnection(con->path(), m_nmModem->uni(), "");
+    if (reply.isValid()) {
         qWarning() << QStringLiteral("Error activating connection:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error activating connection: %1", reply.error().message()));
-        return;
+        co_return;
     }
 
     // set roaming settings separately (since it changes the uni)
-    setIsRoaming(roaming);
+    co_await setIsRoaming(roaming);
 }
 
-void Modem::addProfile(QString name, QString apn, QString username, QString password, QString networkType)
+QCoro::Task<void> Modem::addProfile(QString name, QString apn, QString username, QString password, QString networkType)
 {
     if (!m_nmModem) {
         qWarning() << "Cannot add profile since there is no NetworkManager modem";
-        return;
+        co_return;
     }
 
     NetworkManager::ConnectionSettings::Ptr settings{new NetworkManager::ConnectionSettings(NetworkManager::ConnectionSettings::Gsm)};
@@ -353,9 +348,8 @@ void Modem::addProfile(QString name, QString apn, QString username, QString pass
 
     gsmSetting->setInitialized(true);
 
-    QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), "");
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), "");
+    if (reply.isValid()) {
         qWarning() << QStringLiteral("Error adding connection:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error adding connection: %1", reply.error().message()));
     } else {
@@ -363,34 +357,33 @@ void Modem::addProfile(QString name, QString apn, QString username, QString pass
     }
 }
 
-void Modem::removeProfile(const QString &connectionUni)
+QCoro::Task<void> Modem::removeProfile(const QString &connectionUni)
 {
     NetworkManager::Connection::Ptr con = NetworkManager::findConnectionByUuid(connectionUni);
     if (!con) {
         qWarning() << QStringLiteral("Could not find connection") << connectionUni << QStringLiteral("to update!");
-        return;
+        co_return;
     }
 
-    QDBusPendingReply reply = con->remove();
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<void> reply = co_await con->remove();
+    if (reply.isValid()) {
         qWarning() << QStringLiteral("Error removing connection") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error removing connection: %1", reply.error().message()));
     }
 }
 
-void Modem::updateProfile(QString connectionUni, QString name, QString apn, QString username, QString password, QString networkType)
+QCoro::Task<void> Modem::updateProfile(QString connectionUni, QString name, QString apn, QString username, QString password, QString networkType)
 {
     NetworkManager::Connection::Ptr con = NetworkManager::findConnectionByUuid(connectionUni);
     if (!con) {
         qWarning() << QStringLiteral("Could not find connection") << connectionUni << QStringLiteral("to update!");
-        return;
+        co_return;
     }
 
     NetworkManager::ConnectionSettings::Ptr conSettings = con->settings();
     if (!conSettings) {
         qWarning() << QStringLiteral("Could not find connection settings for") << connectionUni << QStringLiteral("to update!");
-        return;
+        co_return;
     }
 
     conSettings->setId(name);
@@ -405,9 +398,8 @@ void Modem::updateProfile(QString connectionUni, QString name, QString apn, QStr
 
     gsmSetting->setInitialized(true);
 
-    QDBusPendingReply reply = con->update(conSettings->toMap());
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<void> reply = con->update(conSettings->toMap());
+    if (reply.isValid()) {
         qWarning() << QStringLiteral("Error updating connection settings for") << connectionUni << QStringLiteral(":") << reply.error().message()
                    << QStringLiteral(".");
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error,

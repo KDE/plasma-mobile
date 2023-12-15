@@ -77,6 +77,9 @@ find_package(KWayland CONFIG REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 
+find_package(QCoro6 REQUIRED COMPONENTS DBus)
+qcoro_enable_coroutines()
+
 pkg_check_modules(GOBJECT gobject-2.0 REQUIRED IMPORTED_TARGET)
 pkg_check_modules(GIO gio-2.0 REQUIRED IMPORTED_TARGET)
 

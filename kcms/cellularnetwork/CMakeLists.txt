@@ -22,4 +22,5 @@ target_link_libraries(kcm_cellular_network PRIVATE
     KF6::NetworkManagerQt
     KF6::ModemManagerQt
     KF6::KCMUtilsQuick
+    QCoro::DBus
 )

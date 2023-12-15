@@ -20,6 +20,8 @@
 #include <ModemManagerQt/Modem3Gpp>
 #include <ModemManagerQt/ModemDevice>
 
+#include <QCoroDBusPendingReply>
+
 class Modem;
 
 class Sim : public QObject
@@ -62,10 +64,10 @@ public:
     QString displayId();
     Modem *modem();
 
-    Q_INVOKABLE void togglePinEnabled(const QString &pin);
-    Q_INVOKABLE void changePin(const QString &oldPin, const QString &newPin);
-    Q_INVOKABLE void sendPin(const QString &pin);
-    Q_INVOKABLE void sendPuk(const QString &pin, const QString &puk);
+    Q_INVOKABLE QCoro::Task<void> togglePinEnabled(const QString &pin);
+    Q_INVOKABLE QCoro::Task<void> changePin(const QString &oldPin, const QString &newPin);
+    Q_INVOKABLE QCoro::Task<void> sendPin(const QString &pin);
+    Q_INVOKABLE QCoro::Task<void> sendPuk(const QString &pin, const QString &puk);
 
 Q_SIGNALS:
     void enabledChanged();

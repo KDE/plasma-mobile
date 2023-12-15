@@ -23,6 +23,8 @@
 #include <ModemManagerQt/Modem3Gpp>
 #include <ModemManagerQt/ModemDevice>
 
+#include <QCoroDBusPendingReply>
+
 class ProfileSettings;
 class Sim;
 class AvailableNetwork;
@@ -55,7 +57,7 @@ public:
     QString uni() const;
     QString activeConnectionUni() const;
 
-    Q_INVOKABLE void reset();
+    Q_INVOKABLE QCoro::Task<void> reset();
 
     bool mobileDataEnabled() const;
     void setMobileDataEnabled(bool enabled);
@@ -63,16 +65,16 @@ public:
     bool needsAPNAdded() const;
 
     bool isRoaming() const;
-    void setIsRoaming(bool roaming);
+    QCoro::Task<void> setIsRoaming(bool roaming);
     bool hasSim() const;
 
     // connection profiles
     QList<ProfileSettings *> &profileList();
     void refreshProfiles();
-    Q_INVOKABLE void activateProfile(const QString &connectionUni);
-    Q_INVOKABLE void addProfile(QString name, QString apn, QString username, QString password, QString networkType);
-    Q_INVOKABLE void removeProfile(const QString &connectionUni);
-    Q_INVOKABLE void updateProfile(QString connectionUni, QString name, QString apn, QString username, QString password, QString networkType);
+    Q_INVOKABLE QCoro::Task<void> activateProfile(const QString &connectionUni);
+    Q_INVOKABLE QCoro::Task<void> addProfile(QString name, QString apn, QString username, QString password, QString networkType);
+    Q_INVOKABLE QCoro::Task<void> removeProfile(const QString &connectionUni);
+    Q_INVOKABLE QCoro::Task<void> updateProfile(QString connectionUni, QString name, QString apn, QString username, QString password, QString networkType);
     Q_INVOKABLE void addDetectedProfileSettings(); // detect modem connection settings (ex. apn) and add a new connection
 
     QList<Sim *> sims();
