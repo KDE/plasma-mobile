@@ -159,7 +159,7 @@ QCoro::Task<void> Sim::togglePinEnabled(const QString &pin)
 {
     bool isPinEnabled = pinEnabled();
     QDBusReply<void> reply = co_await m_mmSim->enablePin(pin, !isPinEnabled);
-    if (reply.isValid()) {
+    if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error toggling SIM lock to") << isPinEnabled << QStringLiteral(":") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error toggling SIM lock: %1", reply.error().message()));
     }
@@ -168,7 +168,7 @@ QCoro::Task<void> Sim::togglePinEnabled(const QString &pin)
 QCoro::Task<void> Sim::changePin(const QString &oldPin, const QString &newPin)
 {
     QDBusReply<void> reply = co_await m_mmSim->changePin(oldPin, newPin);
-    if (reply.isValid()) {
+    if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error changing the PIN:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error changing the PIN: %1", reply.error().message()));
     }
@@ -181,7 +181,7 @@ QCoro::Task<void> Sim::sendPin(const QString &pin)
     }
 
     QDBusReply<void> reply = co_await m_mmSim->sendPin(pin);
-    if (reply.isValid()) {
+    if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error sending the PIN:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error sending the PIN: %1", reply.error().message()));
     }
@@ -194,7 +194,7 @@ QCoro::Task<void> Sim::sendPuk(const QString &pin, const QString &puk)
     }
 
     QDBusReply<void> reply = co_await m_mmSim->sendPuk(pin, puk);
-    if (reply.isValid()) {
+    if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error sending the PUK:") << reply.error().message();
         CellularNetworkSettings::instance()->addMessage(InlineMessage::Error, i18n("Error sending the PUK: %1", reply.error().message()));
     }
