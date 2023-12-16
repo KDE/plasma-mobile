@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-12-16 01:38+0000\n"
 "PO-Revision-Date: 2023-11-06 05:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -133,28 +133,34 @@ msgstr "ზოგადი"
 msgid "Export layout to"
 msgstr "გატანის განლაგება, როგორც"
 
-#: package/contents/ui/settings/SettingsWindow.qml:303
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:293
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Import layout from"
+msgstr "გატანის განლაგება, როგორც"
+
+#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
 msgstr "გადატანის სტატუსი"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1-ზე გატანა ჩავარდა"
 
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "საწყისი ეკრანის განლაგების %1-ზე გადატანა წარმატებით დასრულდა"
 
-#: package/contents/ui/settings/SettingsWindow.qml:317
+#: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "Confirm Import"
 msgstr "გატანის დადასტურება"
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "ეს თქვენს არსებულ საწყისი ეკრანის განლაგებას თავზე გადააწერს!"

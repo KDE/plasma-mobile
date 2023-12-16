@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-23 01:39+0000\n"
+"POT-Creation-Date: 2023-12-16 01:38+0000\n"
 "PO-Revision-Date: 2023-09-24 08:19+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,93 +18,93 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 23.04.3\n"
 
-#: modem.cpp:126
+#: modem.cpp:130
 #, kde-format
 msgid "Error resetting the modem: %1"
 msgstr "Błąd zerowania modemu: %1"
 
-#: modem.cpp:245 modem.cpp:414
+#: modem.cpp:242 modem.cpp:406
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "Błąd uaktualniania ustawień połączenia dla %1: %2."
 
-#: modem.cpp:325
+#: modem.cpp:320
 #, kde-format
 msgid "Error activating connection: %1"
 msgstr "Błąd nawiązywania połączenia: %1"
 
-#: modem.cpp:360
+#: modem.cpp:354
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Błąd dodawania połączenia: %1"
 
-#: modem.cpp:378
+#: modem.cpp:371
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Błąd usuwania połączenia: %1"
 
-#: modem.cpp:500 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Nieznana"
 
-#: modem.cpp:502
+#: modem.cpp:494
 #, kde-format
 msgid "Unmanaged"
 msgstr "Niezarządzana"
 
-#: modem.cpp:504
+#: modem.cpp:496
 #, kde-format
 msgid "Unavailable"
 msgstr "Niedostępny"
 
-#: modem.cpp:506
+#: modem.cpp:498
 #, kde-format
 msgid "Disconnected"
 msgstr "Rozłączony"
 
-#: modem.cpp:508
+#: modem.cpp:500
 #, kde-format
 msgid "Preparing"
 msgstr "Przygotowywanie"
 
-#: modem.cpp:510
+#: modem.cpp:502
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "Ustawianie sprzętu"
 
-#: modem.cpp:512
+#: modem.cpp:504
 #, kde-format
 msgid "NeedAuth"
 msgstr "Wymaga uwierzytelnienia"
 
-#: modem.cpp:514
+#: modem.cpp:506
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "Ustawianie IP"
 
-#: modem.cpp:516
+#: modem.cpp:508
 #, kde-format
 msgid "CheckingIp"
 msgstr "Sprawdzanie IP"
 
-#: modem.cpp:518
+#: modem.cpp:510
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "Oczekiwanie na innych"
 
-#: modem.cpp:520
+#: modem.cpp:512
 #, kde-format
 msgid "Activated"
 msgstr "Włączona"
 
-#: modem.cpp:522
+#: modem.cpp:514
 #, kde-format
 msgid "Deactivating"
 msgstr "Wyłączanie"
 
-#: modem.cpp:524 modemdetails.cpp:250
+#: modem.cpp:516 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Niepowodzenie"
@@ -394,112 +394,112 @@ msgstr "5G"
 msgid "Any"
 msgstr "Dowolny"
 
-#: sim.cpp:64
+#: sim.cpp:74
 #, kde-format
 msgid "Lock reason unknown."
 msgstr "Przyczyna zablokowania nieznana"
 
-#: sim.cpp:66
+#: sim.cpp:76
 #, kde-format
 msgid "Modem is unlocked."
 msgstr "Modem jest odblokowany."
 
-#: sim.cpp:68
+#: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
 msgstr "Karta SIM wymaga kodu PIN."
 
-#: sim.cpp:70
+#: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
 msgstr "Karta SIM wymaga kodu PIN2."
 
-#: sim.cpp:72
+#: sim.cpp:82
 #, kde-format
 msgid "SIM requires the PUK code."
 msgstr "Karta SIM wymaga kodu PUK."
 
-#: sim.cpp:74
+#: sim.cpp:84
 #, kde-format
 msgid "SIM requires the PUK2 code."
 msgstr "Karta SIM wymaga kodu PUK2."
 
-#: sim.cpp:76
+#: sim.cpp:86
 #, kde-format
 msgid "Modem requires the service provider PIN code."
 msgstr "Modem wymaga kodu PIN operatora."
 
-#: sim.cpp:78
+#: sim.cpp:88
 #, kde-format
 msgid "Modem requires the service provider PUK code."
 msgstr "Modem wymaga kodu PUK operatora."
 
-#: sim.cpp:80
+#: sim.cpp:90
 #, kde-format
 msgid "Modem requires the network PIN code."
 msgstr "Modem wymaga kodu PIN sieci."
 
-#: sim.cpp:82
+#: sim.cpp:92
 #, kde-format
 msgid "Modem requires the network PUK code."
 msgstr "Modem wymaga kodu PUK sieci."
 
-#: sim.cpp:84
+#: sim.cpp:94
 #, kde-format
 msgid "Modem requires the PIN code."
 msgstr "Modem wymaga kodu PIN."
 
-#: sim.cpp:86
+#: sim.cpp:96
 #, kde-format
 msgid "Modem requires the corporate PIN code."
 msgstr "Modem wymaga firmowego kodu PIN."
 
-#: sim.cpp:88
+#: sim.cpp:98
 #, kde-format
 msgid "Modem requires the corporate PUK code."
 msgstr "Modem wymaga firmowego kodu PUK."
 
-#: sim.cpp:90
+#: sim.cpp:100
 #, kde-format
 msgid "Modem requires the PH-FSIM PIN code."
 msgstr "Modem wymaga kodu PIN PH-FSIM."
 
-#: sim.cpp:92
+#: sim.cpp:102
 #, kde-format
 msgid "Modem requires the PH-FSIM PUK code."
 msgstr "Modem wymaga kodu PUK PH-FSIM."
 
-#: sim.cpp:94
+#: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
 msgstr "Modem wymaga kodu PIN podsieci."
 
-#: sim.cpp:96
+#: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
 msgstr "Modem wymaga kodu PUK podsieci."
 
-#: sim.cpp:140
+#: sim.cpp:150
 #, kde-format
 msgid "(empty)"
 msgstr "(pusta)"
 
-#: sim.cpp:155
+#: sim.cpp:164
 #, kde-format
 msgid "Error toggling SIM lock: %1"
 msgstr "Błąd przestawiania blokady SIM: %1"
 
-#: sim.cpp:165
+#: sim.cpp:173
 #, kde-format
 msgid "Error changing the PIN: %1"
 msgstr "Błąd zmiany numeru PIN: %1"
 
-#: sim.cpp:176
+#: sim.cpp:186
 #, kde-format
 msgid "Error sending the PIN: %1"
 msgstr "Błąd wysyłania numeru PIN: %1"
 
-#: sim.cpp:188
+#: sim.cpp:199
 #, kde-format
 msgid "Error sending the PUK: %1"
 msgstr "Błąd wysyłania numeru PUK: %1"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-12-16 01:38+0000\n"
 "PO-Revision-Date: 2023-11-05 17:45+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -132,28 +132,34 @@ msgstr "Ĝenerala"
 msgid "Export layout to"
 msgstr "Eksporti aranĝon al"
 
-#: package/contents/ui/settings/SettingsWindow.qml:303
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:293
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Import layout from"
+msgstr "Eksporti aranĝon al"
+
+#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
 msgstr "Eksportostato"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Malsukcesis eksporti al %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Eksportis hejmekranan aranĝon sukcese al %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:317
+#: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "Confirm Import"
 msgstr "Konfirmi Importon"
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Tio superskribos vian ekzistantan hejmekranan aranĝon!"

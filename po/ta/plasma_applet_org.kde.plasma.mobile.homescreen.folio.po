@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-06 01:40+0000\n"
+"POT-Creation-Date: 2023-12-16 01:38+0000\n"
 "PO-Revision-Date: 2023-12-07 21:19+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -131,28 +131,34 @@ msgstr "பொதுவானவை"
 msgid "Export layout to"
 msgstr "தளவமைப்பு ஏற்றுமதி செய்"
 
-#: package/contents/ui/settings/SettingsWindow.qml:303
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:293
+#, fuzzy, kde-format
+#| msgid "Export layout to"
+msgid "Import layout from"
+msgstr "தளவமைப்பு ஏற்றுமதி செய்"
+
+#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
 msgstr "ஏற்றுமதி நிலை"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
+#: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1 என்பதற்கு ஏற்றுமதி செய்ய முடியவில்லை"
 
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "முகப்பின் தளவமைப்பு வெற்றிகரமாக %1 என்பதற்கு ஏற்றுமதி செய்யப்பட்டுள்ளது"
 
-#: package/contents/ui/settings/SettingsWindow.qml:317
+#: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "Confirm Import"
 msgstr "இறக்குமதியை உறுதிசெய்யவும்"
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "தற்போதைய முகப்பின் தளவமைப்பை இது மேலெழுதும்!"

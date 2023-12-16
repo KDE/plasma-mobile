@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-23 01:39+0000\n"
+"POT-Creation-Date: 2023-12-16 01:38+0000\n"
 "PO-Revision-Date: 2023-09-23 08:20+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,93 +18,93 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: modem.cpp:126
+#: modem.cpp:130
 #, kde-format
 msgid "Error resetting the modem: %1"
 msgstr "Eraro rekomencigante la modemon: %1"
 
-#: modem.cpp:245 modem.cpp:414
+#: modem.cpp:242 modem.cpp:406
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "Eraro dum ĝisdatigo de konekto-agordoj por %1: %2."
 
-#: modem.cpp:325
+#: modem.cpp:320
 #, kde-format
 msgid "Error activating connection: %1"
 msgstr "Eraro aktivigante konekton: %1"
 
-#: modem.cpp:360
+#: modem.cpp:354
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Eraro aldonante konekton: %1"
 
-#: modem.cpp:378
+#: modem.cpp:371
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Eraro forigante konekton: %1"
 
-#: modem.cpp:500 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Nekonata"
 
-#: modem.cpp:502
+#: modem.cpp:494
 #, kde-format
 msgid "Unmanaged"
 msgstr "Neadministrata"
 
-#: modem.cpp:504
+#: modem.cpp:496
 #, kde-format
 msgid "Unavailable"
 msgstr "Nedisponebla"
 
-#: modem.cpp:506
+#: modem.cpp:498
 #, kde-format
 msgid "Disconnected"
 msgstr "Malkonektita"
 
-#: modem.cpp:508
+#: modem.cpp:500
 #, kde-format
 msgid "Preparing"
 msgstr "Preparante"
 
-#: modem.cpp:510
+#: modem.cpp:502
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "Agordo de Aparataro"
 
-#: modem.cpp:512
+#: modem.cpp:504
 #, kde-format
 msgid "NeedAuth"
 msgstr "NeedAuth"
 
-#: modem.cpp:514
+#: modem.cpp:506
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "AgordoIp"
 
-#: modem.cpp:516
+#: modem.cpp:508
 #, kde-format
 msgid "CheckingIp"
 msgstr "KontrolantaIp"
 
-#: modem.cpp:518
+#: modem.cpp:510
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "WaitingForSecondaries"
 
-#: modem.cpp:520
+#: modem.cpp:512
 #, kde-format
 msgid "Activated"
 msgstr "Aktivigita"
 
-#: modem.cpp:522
+#: modem.cpp:514
 #, kde-format
 msgid "Deactivating"
 msgstr "Malaktivigo"
 
-#: modem.cpp:524 modemdetails.cpp:250
+#: modem.cpp:516 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Malsukcesis"
@@ -392,112 +392,112 @@ msgstr "5G"
 msgid "Any"
 msgstr "Ajna"
 
-#: sim.cpp:64
+#: sim.cpp:74
 #, kde-format
 msgid "Lock reason unknown."
 msgstr "Ŝlosa kialo nekonata."
 
-#: sim.cpp:66
+#: sim.cpp:76
 #, kde-format
 msgid "Modem is unlocked."
 msgstr "Modemo estas malŝlosita."
 
-#: sim.cpp:68
+#: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
 msgstr "SIM postulas la PIN-kodon."
 
-#: sim.cpp:70
+#: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
 msgstr "SIM postulas la PIN2-kodon."
 
-#: sim.cpp:72
+#: sim.cpp:82
 #, kde-format
 msgid "SIM requires the PUK code."
 msgstr "SIM postulas la PUK-kodon."
 
-#: sim.cpp:74
+#: sim.cpp:84
 #, kde-format
 msgid "SIM requires the PUK2 code."
 msgstr "SIM postulas la PUK2-kodon."
 
-#: sim.cpp:76
+#: sim.cpp:86
 #, kde-format
 msgid "Modem requires the service provider PIN code."
 msgstr "Modemo postulas la PIN-kodon de la servoprovizanto."
 
-#: sim.cpp:78
+#: sim.cpp:88
 #, kde-format
 msgid "Modem requires the service provider PUK code."
 msgstr "Modemo postulas la servoprovizanto PUK-kodo."
 
-#: sim.cpp:80
+#: sim.cpp:90
 #, kde-format
 msgid "Modem requires the network PIN code."
 msgstr "Modemo postulas la retan PIN-kodon."
 
-#: sim.cpp:82
+#: sim.cpp:92
 #, kde-format
 msgid "Modem requires the network PUK code."
 msgstr "Modemo postulas la retan PUK-kodon."
 
-#: sim.cpp:84
+#: sim.cpp:94
 #, kde-format
 msgid "Modem requires the PIN code."
 msgstr "Modemo postulas la PIN-kodon."
 
-#: sim.cpp:86
+#: sim.cpp:96
 #, kde-format
 msgid "Modem requires the corporate PIN code."
 msgstr "Modemo postulas la kompanian PIN-kodon."
 
-#: sim.cpp:88
+#: sim.cpp:98
 #, kde-format
 msgid "Modem requires the corporate PUK code."
 msgstr "Modemo postulas la kompanian PUK-kodon."
 
-#: sim.cpp:90
+#: sim.cpp:100
 #, kde-format
 msgid "Modem requires the PH-FSIM PIN code."
 msgstr "Modemo postulas la PIN-kodon PH-FSIM."
 
-#: sim.cpp:92
+#: sim.cpp:102
 #, kde-format
 msgid "Modem requires the PH-FSIM PUK code."
 msgstr "Modemo postulas la PH-FSIM PUK-kodon."
 
-#: sim.cpp:94
+#: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
 msgstr "Modemo postulas la reto-subaron PIN-kodon."
 
-#: sim.cpp:96
+#: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
 msgstr "Modemo postulas la retan subaron PUK-kodon."
 
-#: sim.cpp:140
+#: sim.cpp:150
 #, kde-format
 msgid "(empty)"
 msgstr "(malplena)"
 
-#: sim.cpp:155
+#: sim.cpp:164
 #, kde-format
 msgid "Error toggling SIM lock: %1"
 msgstr "Eraro ĉesigante SIM-ŝlosadon: %1"
 
-#: sim.cpp:165
+#: sim.cpp:173
 #, kde-format
 msgid "Error changing the PIN: %1"
 msgstr "Eraro ŝanĝante la PIN: %1"
 
-#: sim.cpp:176
+#: sim.cpp:186
 #, kde-format
 msgid "Error sending the PIN: %1"
 msgstr "Eraro sendante la PIN: %1"
 
-#: sim.cpp:188
+#: sim.cpp:199
 #, kde-format
 msgid "Error sending the PUK: %1"
 msgstr "Eraro sendante la PUK: %1"
