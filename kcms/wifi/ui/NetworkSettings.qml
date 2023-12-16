@@ -1,17 +1,18 @@
-/*
-    SPDX-FileCopyrightText: 2017 Martin Kacej <m.kacej@atlas.sk>
+// SPDX-FileCopyrightText: 2017 Martin Kacej <m.kacej@atlas.sk>
+// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
-    SPDX-License-Identifier: LGPL-2.0-or-later
-*/
-import QtQuick 2.15
-import QtQuick.Layouts 1.2
-import QtQuick.Controls 2.2 as Controls
-import org.kde.kirigami 2.3 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as Controls
+
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.kcmutils
+import org.kde.kirigamiaddons.formcard 1 as FormCard
 
-SimpleKCM {
-    title: path ?  wirelessSettings["ssid"] : i18n("Add new Connection")
+Kirigami.ScrollablePage {
+    title: path ?  wirelessSettings["ssid"] : i18n("Add New Connection")
 
     property var path
 
@@ -41,154 +42,210 @@ SimpleKCM {
         }
     ]
 
-    Kirigami.FormLayout {
-        Item {
-            Kirigami.FormData.label: i18n("General")
-            Kirigami.FormData.isSection: true
+    topPadding: Kirigami.Units.gridUnit
+    bottomPadding: Kirigami.Units.gridUnit
+    leftPadding: 0
+    rightPadding: 0
+
+    ColumnLayout {
+        FormCard.FormHeader {
+            title: i18n('General')
         }
-        Controls.TextField {
-            id: ssidField
-            Kirigami.FormData.label: i18n("SSID:")
-            text: wirelessSettings["ssid"] ? wirelessSettings["ssid"] : ""
-            enabled: true
-            onTextChanged: {
-                ipSettings["id"] = text
+
+        FormCard.FormCard {
+            FormCard.FormTextFieldDelegate {
+                id: ssidField
+                label: i18n('SSID')
+                text: wirelessSettings["ssid"] ? wirelessSettings["ssid"] : ""
+                enabled: true
+                onTextChanged: {
+                    ipSettings["id"] = text
+                }
+            }
+
+            FormCard.FormDelegateSeparator {
+                above: ssidField
+                below: hidden
+            }
+
+            FormCard.FormSwitchDelegate {
+                id: hidden
+                text: i18n("Hidden Network")
+                checked: wirelessSettings["hidden"] ? wirelessSettings["hidden"] : false
+                onToggled: ipSettings["hidden"] = checked
             }
         }
-        Controls.CheckBox {
-            id: hidden
-            Kirigami.FormData.label: i18n("Hidden Network:")
-            checked: wirelessSettings["hidden"] ? wirelessSettings["hidden"] : false
-            onToggled: ipSettings["hidden"] = checked
+
+        FormCard.FormHeader {
+            title: i18n('Security')
         }
 
-        Kirigami.Separator {
-            Kirigami.FormData.label: i18n("Security")
-            Kirigami.FormData.isSection: true
-        }
-
-        Controls.ComboBox {
-            id: securityCombobox
-            Kirigami.FormData.label: i18n("Security type:")
-            model: ListModel {
-                id: securityTypesModel
-                // FIXME just placeholder element to set "text" property as default
-                ListElement {
-                    text: "placeholder"
-                }
-                function load() {
-                    clear()
-                    append({ "text": i18n("None"), "type": PlasmaNM.Enums.NoneSecurity })
-                    append({ "text": i18n("WEP Key"), "type": PlasmaNM.Enums.StaticWep })
-                    append({ "text": i18n("Dynamic WEP"), "type": PlasmaNM.Enums.DynamicWep })
-                    append({ "text": i18n("WPA/WPA2 Personal"), "type": PlasmaNM.Enums.Wpa2Psk })
-                    append({ "text": i18n("WPA/WPA2 Enterprise"), "type": PlasmaNM.Enums.Wpa2Eap })
-                    switch (securitySettings["key-mgmt"]) {
-                    case "none":
-                        securityCombobox.currentIndex = 0
-                        break
-                    case "ieee8021x":
-                        securityCombobox.currentIndex = 1
-                        break
-                    case "wpa-psk":
-                        securityCombobox.currentIndex = 3
-                        break
-                    case "wpa-eap":
-                        securityCombobox.currentIndex = 4
-                        break
-                    default:
-                        securityCombobox.currentIndex = 0
-                        break
+        FormCard.FormCard {
+            FormCard.FormComboBoxDelegate {
+                id: securityCombobox
+                currentIndex: 0
+                text: i18n('Security type')
+                model: ListModel {
+                    id: securityTypesModel
+                    // FIXME just placeholder element to set "text" property as default
+                    ListElement {
+                        text: "placeholder"
+                    }
+                    function load() {
+                        clear()
+                        append({ "text": i18n("None"), "type": PlasmaNM.Enums.NoneSecurity })
+                        append({ "text": i18n("WEP Key"), "type": PlasmaNM.Enums.StaticWep })
+                        append({ "text": i18n("Dynamic WEP"), "type": PlasmaNM.Enums.DynamicWep })
+                        append({ "text": i18n("WPA/WPA2 Personal"), "type": PlasmaNM.Enums.Wpa2Psk })
+                        append({ "text": i18n("WPA/WPA2 Enterprise"), "type": PlasmaNM.Enums.Wpa2Eap })
+                        switch (securitySettings["key-mgmt"]) {
+                        case "none":
+                            securityCombobox.currentIndex = 0
+                            break
+                        case "ieee8021x":
+                            securityCombobox.currentIndex = 1
+                            break
+                        case "wpa-psk":
+                            securityCombobox.currentIndex = 3
+                            break
+                        case "wpa-eap":
+                            securityCombobox.currentIndex = 4
+                            break
+                        default:
+                            securityCombobox.currentIndex = 0
+                            break
+                        }
                     }
                 }
             }
 
-        }
+            FormCard.FormDelegateSeparator {
+                above: securityCombobox
+                below: passwordDelegate
+                visible: passwordDelegate.visible
+            }
 
-        PasswordField {
-            id: passwordField
-            Kirigami.FormData.label: i18n("Password:")
-            text: secrets["psk"]
-            visible: securityTypesModel.get(securityCombobox.currentIndex).type !== PlasmaNM.Enums.NoneSecurity
-            onTextChanged: securitySettings["password"] = text
-        }
+            FormCard.FormTextFieldDelegate {
+                id: passwordDelegate
+                label: i18n('Password')
+                echoMode: TextInput.Password
+                inputMethodHints: Qt.ImhHiddenText
+                text: secrets["psk"]
+                visible: securityTypesModel.get(securityCombobox.currentIndex).type !== PlasmaNM.Enums.NoneSecurity
+                onTextChanged: securitySettings["password"] = text
+            }
 
-        Controls.ComboBox {
-            id: authComboBox
-            Kirigami.FormData.label: i18n("Authentication:")
-            visible: securityCombobox.currentIndex === 2
-                     || securityCombobox.currentIndex === 4
-            model: [i18n("TLS"), i18n("LEAP"), i18n("FAST"), i18n(
-                    "Tunneled TLS"), i18n(
-                    "Protected EAP")] // more - SIM, AKA, PWD ?
-        }
-        Controls.Label {
-            visible: securityCombobox.currentIndex !== 3 && securityCombobox.currentIndex !== 0
-            text: "----Not yet implemented----"
-            color: "red"
-        }
+            FormCard.FormDelegateSeparator {
+                above: passwordDelegate
+                below: authComboBox
+                visible: authComboBox.visible
+            }
 
-        Kirigami.Separator {
-            Kirigami.FormData.label: i18n("IP settings")
-            Kirigami.FormData.isSection: true
-        }
+            FormCard.FormComboBoxDelegate {
+                id: authComboBox
+                text: i18n("Authentication:")
+                currentIndex: 0
+                visible: securityCombobox.currentIndex === 2
+                        || securityCombobox.currentIndex === 4
+                model: [i18n("TLS"), i18n("LEAP"), i18n("FAST"), i18n(
+                        "Tunneled TLS"), i18n(
+                        "Protected EAP")] // more - SIM, AKA, PWD ?
+            }
 
-        Controls.ComboBox {
-            id: ipMethodCombobox
-            model: [i18n("Automatic"), i18n("Manual")]
-            currentIndex: ipSettings["method"] === "manual" ? 1 : 0
-            property var manualIp: currentIndex === 1
-            onCurrentIndexChanged: {
-                ipSettings["method"] = currentIndex === 1 ? "manual" : "auto"
+            Controls.Label {
+                visible: securityCombobox.currentIndex !== 3 && securityCombobox.currentIndex !== 0
+                text: "----Not yet implemented----"
+                color: "red"
             }
         }
 
-        Controls.TextField {
-            id: manualIPaddress
-            Kirigami.FormData.label: i18n("IP Address:")
-            visible: ipMethodCombobox.manualIp
-            placeholderText: "192.168.1.128"
-            text: ipSettings["address"] ? ipSettings["address"] : ""
-            onTextChanged: ipSettings["address"] = text
-            validator: RegularExpressionValidator {
-                regularExpression: ipRegex
-            }
+        FormCard.FormHeader {
+            title: i18n('IP Settings')
         }
 
-        Controls.TextField {
-            id: manualIPgateway
-            Kirigami.FormData.label: i18n("Gateway:")
-            visible: ipMethodCombobox.manualIp
-            placeholderText: "192.168.1.1"
-            text: ipSettings["gateway"] ? ipSettings["gateway"] : ""
-            onTextChanged: ipSettings["gateway"] = text
-            validator: RegularExpressionValidator {
-                regularExpression: ipRegex
+        FormCard.FormCard {
+            FormCard.FormComboBoxDelegate {
+                id: ipMethodCombobox
+                text: i18n('Method')
+                model: [i18n("Automatic"), i18n("Manual")]
+                currentIndex: ipSettings["method"] === "manual" ? 1 : 0
+                property var manualIp: currentIndex === 1
+                onCurrentIndexChanged: {
+                    ipSettings["method"] = currentIndex === 1 ? "manual" : "auto"
+                }
             }
-        }
 
-        Controls.TextField {
-            id: manualIPprefix
-            Kirigami.FormData.label: i18n("Network prefix length:")
-            visible: ipMethodCombobox.manualIp
-            placeholderText: "16"
-            text: ipSettings["prefix"] ? ipSettings["prefix"] : ""
-            onTextChanged: ipSettings["prefix"] = text
-            validator: IntValidator {
-                bottom: 1
-                top: 32
+            FormCard.FormDelegateSeparator {
+                above: ipMethodCombobox
+                below: manualIPaddress
+                visible: manualIPaddress.visible
             }
-        }
 
-        Controls.TextField {
-            id: manualIPdns
-            Kirigami.FormData.label: i18n("DNS:")
-            visible: ipMethodCombobox.manualIp
-            placeholderText: "8.8.8.8"
-            text: ipSettings["dns"] ? ipSettings["dns"] : ""
-            onTextChanged: ipSettings["dns"] = text
-            validator: RegularExpressionValidator {
-                regularExpression: ipRegex
+            FormCard.FormTextFieldDelegate {
+                id: manualIPaddress
+                label: i18n("IP Address")
+                visible: ipMethodCombobox.manualIp
+                placeholderText: "192.168.1.128"
+                text: ipSettings["address"] ? ipSettings["address"] : ""
+                onTextChanged: ipSettings["address"] = text
+                validator: RegularExpressionValidator {
+                    regularExpression: ipRegex
+                }
+            }
+
+            FormCard.FormDelegateSeparator {
+                above: manualIPaddress
+                below: manualIPgateway
+                visible: manualIPgateway.visible
+            }
+
+            FormCard.FormTextFieldDelegate {
+                id: manualIPgateway
+                label: i18n("Gateway")
+                visible: ipMethodCombobox.manualIp
+                placeholderText: "192.168.1.1"
+                text: ipSettings["gateway"] ? ipSettings["gateway"] : ""
+                onTextChanged: ipSettings["gateway"] = text
+                validator: RegularExpressionValidator {
+                    regularExpression: ipRegex
+                }
+            }
+
+            FormCard.FormDelegateSeparator {
+                above: manualIPgateway
+                below: manualIPprefix
+                visible: manualIPprefix.visible
+            }
+
+            FormCard.FormTextFieldDelegate {
+                id: manualIPprefix
+                label: i18n("Network prefix length")
+                visible: ipMethodCombobox.manualIp
+                placeholderText: "16"
+                text: ipSettings["prefix"] ? ipSettings["prefix"] : ""
+                onTextChanged: ipSettings["prefix"] = text
+                validator: IntValidator {
+                    bottom: 1
+                    top: 32
+                }
+            }
+
+            FormCard.FormDelegateSeparator {
+                above: manualIPprefix
+                below: manualIPdns
+                visible: manualIPdns.visible
+            }
+
+            FormCard.FormTextFieldDelegate {
+                id: manualIPdns
+                label: i18n("DNS")
+                visible: ipMethodCombobox.manualIp
+                placeholderText: "8.8.8.8"
+                text: ipSettings["dns"] ? ipSettings["dns"] : ""
+                onTextChanged: ipSettings["dns"] = text
+                validator: RegularExpressionValidator {
+                    regularExpression: ipRegex
+                }
             }
         }
     }
