@@ -69,11 +69,6 @@ bool CellularNetworkSettings::modemFound()
 
 void CellularNetworkSettings::updateModemList()
 {
-    // find modems
-    ModemManager::scanDevices();
-
-    qDebug() << QStringLiteral("Scanning for modems...");
-
     // loop over every modem
     for (ModemManager::ModemDevice::Ptr device : ModemManager::modemDevices()) {
         ModemManager::Modem::Ptr modem = device->modemInterface();
