@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2021-10-17 16:07+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -23,170 +23,170 @@ msgstr ""
 msgid "Invalid input."
 msgstr "Érvénytelen bemenet."
 
-#: ui/ConnectionItemDelegate.qml:90
+#: ui/ConnectionItemDelegate.qml:117
 #, kde-format
 msgid "Connect to"
 msgstr "Kapcsolódás ehhez:"
 
-#: ui/main.qml:82
+#: ui/main.qml:26
 #, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "A Wi-Fi ki van kapcsolva"
+msgid "Edit"
+msgstr ""
 
 #: ui/main.qml:86
 #, kde-format
-msgid "Enable"
-msgstr "Bekapcsolás"
+msgid "Wi-Fi"
+msgstr ""
 
-#: ui/main.qml:96
-#, kde-format
-msgid "Disable Wi-Fi"
-msgstr "Wi-Fi kikapcsolása"
+#: ui/main.qml:117
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgid "Available Networks"
+msgstr "Rejtett hálózat:"
 
-#: ui/main.qml:102
-#, kde-format
-msgid "Add Custom Connection"
-msgstr "Saját kapcsolat hozzáadása"
-
-#: ui/main.qml:108
-#, kde-format
-msgid "Show Saved Connections"
-msgstr "Mentett kapcsolatok megjelenítése"
-
-#: ui/NetworkSettings.qml:14
-#, kde-format
-msgid "Add new Connection"
+#: ui/NetworkSettings.qml:15
+#, fuzzy, kde-format
+#| msgid "Add new Connection"
+msgid "Add New Connection"
 msgstr "Új kapcsolat hozzáadása"
 
-#: ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:36
 #, kde-format
 msgid "Save"
 msgstr "Mentés"
 
-#: ui/NetworkSettings.qml:46
-#, kde-format
-msgid "General"
-msgstr "Általános"
-
-#: ui/NetworkSettings.qml:51
-#, kde-format
-msgid "SSID:"
-msgstr "SSID:"
-
-#: ui/NetworkSettings.qml:60
-#, kde-format
-msgid "Hidden Network:"
+#: ui/NetworkSettings.qml:73
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgid "Hidden Network"
 msgstr "Rejtett hálózat:"
 
-#: ui/NetworkSettings.qml:66
-#, kde-format
-msgid "Security"
-msgstr "Biztonság"
-
-#: ui/NetworkSettings.qml:72
-#, kde-format
-msgid "Security type:"
-msgstr "Biztonságtípus:"
-
-#: ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:96
 #, kde-format
 msgid "None"
 msgstr "Nincs"
 
-#: ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
 msgstr "WEP kulcs"
 
-#: ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:98
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "Dinamikus WEP"
 
-#: ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "WPA/WPA2 Personal"
 
-#: ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
-#: ui/NetworkSettings.qml:110
-#, kde-format
-msgid "Password:"
-msgstr "Jelszó:"
-
-#: ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:146
 #, kde-format
 msgid "Authentication:"
 msgstr "Hitelesítés:"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
 msgstr "Gyors"
 
-#: ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:151
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "Alagutas TLS"
 
-#: ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:152
 #, kde-format
 msgid "Protected EAP"
 msgstr "Védett EAP"
 
-#: ui/NetworkSettings.qml:132
-#, kde-format
-msgid "IP settings"
-msgstr "IP beállítások"
-
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Automatic"
 msgstr "Automatikus"
 
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Manual"
 msgstr "Kézi"
 
-#: ui/NetworkSettings.qml:148
-#, kde-format
-msgid "IP Address:"
+#: ui/NetworkSettings.qml:186
+#, fuzzy, kde-format
+#| msgid "IP Address:"
+msgid "IP Address"
 msgstr "IP-cím:"
 
-#: ui/NetworkSettings.qml:160
-#, kde-format
-msgid "Gateway:"
+#: ui/NetworkSettings.qml:204
+#, fuzzy, kde-format
+#| msgid "Gateway:"
+msgid "Gateway"
 msgstr "Átjáró:"
 
-#: ui/NetworkSettings.qml:172
-#, kde-format
-msgid "Network prefix length:"
+#: ui/NetworkSettings.qml:222
+#, fuzzy, kde-format
+#| msgid "Network prefix length:"
+msgid "Network prefix length"
 msgstr "Hálózati előtag hossza:"
 
-#: ui/NetworkSettings.qml:185
-#, kde-format
-msgid "DNS:"
+#: ui/NetworkSettings.qml:241
+#, fuzzy, kde-format
+#| msgid "DNS:"
+msgid "DNS"
 msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Jelszó…"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "A Wi-Fi ki van kapcsolva"
+
+#~ msgid "Enable"
+#~ msgstr "Bekapcsolás"
+
+#~ msgid "Disable Wi-Fi"
+#~ msgstr "Wi-Fi kikapcsolása"
+
+#~ msgid "Add Custom Connection"
+#~ msgstr "Saját kapcsolat hozzáadása"
+
+#~ msgid "Show Saved Connections"
+#~ msgstr "Mentett kapcsolatok megjelenítése"
+
+#~ msgid "General"
+#~ msgstr "Általános"
+
+#~ msgid "SSID:"
+#~ msgstr "SSID:"
+
+#~ msgid "Security"
+#~ msgstr "Biztonság"
+
+#~ msgid "Security type:"
+#~ msgstr "Biztonságtípus:"
+
+#~ msgid "Password:"
+#~ msgstr "Jelszó:"
+
+#~ msgid "IP settings"
+#~ msgstr "IP beállítások"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

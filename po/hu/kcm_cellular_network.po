@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Kristof Kiszel <kiszel.kristof@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2023 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2021-10-17 14:08+0200\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
+"PO-Revision-Date: 2023-12-16 21:08+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.08.2\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -503,22 +503,22 @@ msgstr "Hiba a PIN küldésekor: %1"
 msgid "Error sending the PUK: %1"
 msgstr "Hiba a PUK küldésekor: %1"
 
-#: ui/AvailableNetworks.qml:13
+#: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
 msgstr "Elérhető hálózatok"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
 msgstr "nincs"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
 msgstr "Jelenlegi szolgáltató: %1"
 
-#: ui/AvailableNetworks.qml:40
+#: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
 msgstr "Hálózatkeresés"
@@ -584,51 +584,46 @@ msgid "Modem not available"
 msgstr "A modem nem érhető el"
 
 #: ui/main.qml:71
-#, fuzzy, kde-format
-#| msgid "Mobile data:"
+#, kde-format
 msgid "Mobile data"
-msgstr "Mobil adatkapcsolat:"
+msgstr "Mobil adatkapcsolat"
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "No SIM is inserted."
-msgstr "A SIM nem zárolt"
+msgstr "Nincs behelyezve SIM-kártya."
 
 #: ui/main.qml:78
 #, kde-format
 msgid "Mobile data is not available with this modem."
-msgstr ""
+msgstr "Nem érhető el mobil adatkapcsolat ezzel a modemmel."
 
 #: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr ""
+msgstr "Az APN-t be kell állítani a mobil adatkapcsolathoz."
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Whether mobile data is enabled."
-msgstr ""
+msgstr "Be van-e kapcsolva a mobil adatkapcsolat."
 
 #: ui/main.qml:113
-#, fuzzy, kde-format
-#| msgid "Data Usage:"
+#, kde-format
 msgid "Data Usage"
-msgstr "Adathasználat:"
+msgstr "Adathasználat"
 
 #: ui/main.qml:114
-#, fuzzy, kde-format
-#| msgid "View Data Usage"
+#, kde-format
 msgid "View data usage."
-msgstr "Adathasználat megjelenítése"
+msgstr "Adathasználat megjelenítése."
 
 #: ui/main.qml:122 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
-msgstr[1] "SIM"
+msgstr[1] "SIM-ek"
 
 #: ui/main.qml:143
 #, kde-format
@@ -636,10 +631,9 @@ msgid "SIM %1"
 msgstr "%1. SIM"
 
 #: ui/main.qml:144
-#, fuzzy, kde-format
-#| msgid "View Modem Details"
+#, kde-format
 msgid "View SIM %1 details."
-msgstr "Modem részleteinek megjelenítése"
+msgstr "A(z) %1. SIM részletei.nek megjelenítése."
 
 #: ui/ModemPage.qml:20
 #, kde-format
@@ -647,10 +641,9 @@ msgid "Modem %1"
 msgstr "%1. modem"
 
 #: ui/ModemPage.qml:30
-#, fuzzy, kde-format
-#| msgid "Modem Control:"
+#, kde-format
 msgid "Modem Control"
-msgstr "Modemvezérlés:"
+msgstr "Modemvezérlés"
 
 #: ui/ModemPage.qml:36
 #, kde-format
@@ -663,28 +656,24 @@ msgid "Modem Details"
 msgstr "Modem részletei"
 
 #: ui/ModemPage.qml:55
-#, fuzzy, kde-format
-#| msgid "Access Technologies:"
+#, kde-format
 msgid "Access Technologies"
-msgstr "Hozzáférési technológiák:"
+msgstr "Hozzáférési technológiák"
 
 #: ui/ModemPage.qml:75
-#, fuzzy, kde-format
-#| msgid "IMEI:"
+#, kde-format
 msgid "IMEI"
-msgstr "IMEI:"
+msgstr "IMEI"
 
 #: ui/ModemPage.qml:91
-#, fuzzy, kde-format
-#| msgid "Manufacturer:"
+#, kde-format
 msgid "Manufacturer"
-msgstr "Gyártó: "
+msgstr "Gyártó"
 
 #: ui/ModemPage.qml:99
-#, fuzzy, kde-format
-#| msgid "Model:"
+#, kde-format
 msgid "Model"
-msgstr "Modell:"
+msgstr "Modell"
 
 #: ui/ModemPage.qml:114
 #, kde-format
@@ -692,76 +681,64 @@ msgid "Owned Numbers:"
 msgstr "Saját számok:"
 
 #: ui/ModemPage.qml:135
-#, fuzzy, kde-format
-#| msgid "Revision:"
+#, kde-format
 msgid "Revision"
-msgstr "Revízió: "
+msgstr "Revízió"
 
 #: ui/ModemPage.qml:143
-#, fuzzy, kde-format
-#| msgid "Signal Quality:"
+#, kde-format
 msgid "Signal Quality"
-msgstr "Jelminőség:"
+msgstr "Jelminőség"
 
 #: ui/ModemPage.qml:151
-#, fuzzy, kde-format
-#| msgid "State:"
+#, kde-format
 msgid "State"
-msgstr "Állapot:"
+msgstr "Állapot"
 
 #: ui/ModemPage.qml:159
-#, fuzzy, kde-format
-#| msgid "Failure Reason:"
+#, kde-format
 msgid "Failure Reason"
-msgstr "Hiba oka:"
+msgstr "Hiba oka"
 
 #: ui/ModemPage.qml:167
-#, fuzzy, kde-format
-#| msgid "Registration State:"
+#, kde-format
 msgid "Registration State"
-msgstr "Regisztrációs állapot:"
+msgstr "Regisztrációs állapot"
 
 #: ui/ModemPage.qml:175
-#, fuzzy, kde-format
-#| msgid "Roaming:"
+#, kde-format
 msgid "Roaming"
-msgstr "Barangolás:"
+msgstr "Barangolás"
 
 #: ui/ModemPage.qml:183
-#, fuzzy, kde-format
-#| msgid "Firmware Version:"
+#, kde-format
 msgid "Firmware Version"
-msgstr "Szoftververzió:"
+msgstr "Szoftververzió"
 
 #: ui/ModemPage.qml:191
-#, fuzzy, kde-format
-#| msgid "Interface Name:"
+#, kde-format
 msgid "Interface Name"
-msgstr "Csatoló neve:"
+msgstr "Csatoló neve"
 
 #: ui/ModemPage.qml:199
-#, fuzzy, kde-format
-#| msgid "Metered:"
+#, kde-format
 msgid "Metered"
-msgstr "Forgalmi díjas:"
+msgstr "Forgalmi díjas"
 
 #: ui/ModemPage.qml:207
-#, fuzzy, kde-format
-#| msgid "Active NetworkManager Connection:"
+#, kde-format
 msgid "Active NetworkManager Connection"
-msgstr "Aktív NetworkManager kapcsolat:"
+msgstr "Aktív NetworkManager kapcsolat"
 
 #: ui/ModemPage.qml:215
-#, fuzzy, kde-format
-#| msgid "Device:"
+#, kde-format
 msgid "Device"
-msgstr "Eszköz:"
+msgstr "Eszköz"
 
 #: ui/ModemPage.qml:223
-#, fuzzy, kde-format
-#| msgid "Device ID:"
+#, kde-format
 msgid "Device ID"
-msgstr "Eszközazonosító:"
+msgstr "Eszközazonosító"
 
 #: ui/ModemPage.qml:238
 #, kde-format
@@ -769,57 +746,57 @@ msgid "Drivers:"
 msgstr "Illesztőprogramok:"
 
 #: ui/ModemPage.qml:258
-#, fuzzy, kde-format
-#| msgid "Plugin:"
+#, kde-format
 msgid "Plugin"
-msgstr "Bővítmény:"
+msgstr "Bővítmény"
 
 #: ui/ModemPage.qml:266
-#, fuzzy, kde-format
-#| msgid "Power State:"
+#, kde-format
 msgid "Power State"
-msgstr "Energiaállapot:"
+msgstr "Energiaállapot"
 
 #: ui/ModemPage.qml:274
-#, fuzzy, kde-format
-#| msgid "SIM Path:"
+#, kde-format
 msgid "SIM Path"
-msgstr "SIM útvonal:"
+msgstr "SIM útvonal"
 
-#: ui/ProfileList.qml:12
+#: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
 msgstr "APN-ek"
 
-#: ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "Nincsenek beállítva APN-ek"
-
-#: ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "Kapcsolat hozzáadása"
-
-#: ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "APN hozzáadása"
-
-#: ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "APN automatikus felismerése"
-
-#: ui/ProfileList.qml:133
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ui/ProfileList.qml:141
+#: ui/ProfileList.qml:61
+#, kde-format
+msgid ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
+msgstr ""
+
+#: ui/ProfileList.qml:72
+#, kde-format
+msgid "APN List"
+msgstr ""
+
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
+
+#: ui/ProfileList.qml:116
+#, kde-format
+msgid "Add APN"
+msgstr "APN hozzáadása"
+
+#: ui/ProfileList.qml:125
+#, fuzzy, kde-format
+#| msgid "Autodetect APN"
+msgid "Automatically detect APN"
+msgstr "APN automatikus felismerése"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -856,25 +833,25 @@ msgid "Lock SIM"
 msgstr "SIM zárolása"
 
 #: ui/SimLockPage.qml:78
-#, fuzzy, kde-format
-#| msgid "Disable Modem"
+#, kde-format
 msgid "Disable SIM Lock"
-msgstr "Kikapcsolás"
+msgstr "SIM-zárolás kikapcsolása"
 
 #: ui/SimLockPage.qml:79
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
 msgstr ""
+"Kikapcsolja a SIM-zárolás funkciót, és eltávolítja a jelszót a SIM-kártyáról."
 
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr "SIM módosítása"
+msgstr "PIN-kód módosítása"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr ""
+msgstr "A SIM-kártyán beállított jelszó módosítása."
 
 #: ui/SimLockPage.qml:106
 #, kde-format
@@ -937,51 +914,49 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"A SIM-foglalat üres, be kell helyezni egy SIM-kártyát, hogy használni "
+"lehessen."
 
 #: ui/SimPage.qml:60
-#, fuzzy, kde-format
-#| msgid "Data roaming:"
+#, kde-format
 msgid "Data Roaming"
 msgstr "Adatbarangolás"
 
 #: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
-msgstr ""
+msgstr "Lehetővé teszi az eszköznek más szolgáltatók hálózatainak használatát."
 
 #: ui/SimPage.qml:72
-#, fuzzy, kde-format
-#| msgid "Edit APN"
+#, kde-format
 msgid "Modify APNs"
-msgstr "APN szerkesztése"
+msgstr "APN-ek módosítása"
 
 #: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
-msgstr ""
+msgstr "A szolgáltatója hozzáférési pontjai neveinek beállítása."
 
 #: ui/SimPage.qml:83
-#, fuzzy, kde-format
-#| msgid "Networks:"
+#, kde-format
 msgid "Networks"
-msgstr "Hálózatok:"
+msgstr "Hálózatok"
 
 #: ui/SimPage.qml:84
-#, fuzzy, kde-format
-#| msgid "Select Network Operator"
+#, kde-format
 msgid "Select a network operator."
-msgstr "Hálózatüzemeltető kiválasztása"
+msgstr "Hálózatüzemeltető kiválasztása."
 
 #: ui/SimPage.qml:95
-#, fuzzy, kde-format
-#| msgid "Modify SIM Lock"
+#, kde-format
 msgid "Modify SIM lock settings."
-msgstr "SIM zár módosítása"
+msgstr "SIM-zár beállítások módosítása."
 
 #: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
 msgstr ""
+"A modem, amihez a SIM-kártya csatlakoztatva van, részleteinek megtekintése."
 
 #: ui/SimPage.qml:112
 #, kde-format
@@ -989,52 +964,50 @@ msgid "SIM Details"
 msgstr "SIM részletei"
 
 #: ui/SimPage.qml:126
-#, fuzzy, kde-format
-#| msgid "IMSI:"
+#, kde-format
 msgid "IMSI"
-msgstr "IMSI:"
+msgstr "IMSI"
 
 #: ui/SimPage.qml:134
-#, fuzzy, kde-format
-#| msgid "EID:"
+#, kde-format
 msgid "EID"
-msgstr "EID:"
+msgstr "EID"
 
 #: ui/SimPage.qml:142
-#, fuzzy, kde-format
-#| msgid "Operator Code (modem):"
+#, kde-format
 msgid "Operator Code (modem)"
-msgstr "Üzemeltető kódja (modem):"
+msgstr "Üzemeltető kódja (modem)"
 
 #: ui/SimPage.qml:150
-#, fuzzy, kde-format
-#| msgid "Operator Name (modem):"
+#, kde-format
 msgid "Operator Name (modem)"
-msgstr "Üzemeltető neve (modem):"
+msgstr "Üzemeltető neve (modem)"
 
 #: ui/SimPage.qml:158
-#, fuzzy, kde-format
-#| msgid "Operator Code (provided by SIM):"
+#, kde-format
 msgid "Operator Code (provided by SIM)"
-msgstr "Üzemeltető kódja (SIM-tól származó):"
+msgstr "Üzemeltető kódja (SIM-tól származó)"
 
 #: ui/SimPage.qml:166
-#, fuzzy, kde-format
-#| msgid "Operator Name (provided by SIM):"
+#, kde-format
 msgid "Operator Name (provided by SIM)"
-msgstr "Üzemeltető neve (SIM-től származó):"
+msgstr "Üzemeltető neve (SIM-től származó)"
 
 #: ui/SimPage.qml:174
-#, fuzzy, kde-format
-#| msgid "SIM ID:"
+#, kde-format
 msgid "SIM ID"
-msgstr "SIM azonosító:"
+msgstr "SIM azonosító"
 
 #: ui/SimPage.qml:190
-#, fuzzy, kde-format
-#| msgid "Emergency Numbers:"
+#, kde-format
 msgid "Emergency Numbers"
-msgstr "Segélyhívó számok:"
+msgstr "Segélyhívó számok"
+
+#~ msgid "No APNs configured"
+#~ msgstr "Nincsenek beállítva APN-ek"
+
+#~ msgid "Add Connection"
+#~ msgstr "Kapcsolat hozzáadása"
 
 #~ msgid "SIMs"
 #~ msgstr "SIM-ek"

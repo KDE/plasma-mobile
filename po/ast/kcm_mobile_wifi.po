@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-05-09 00:14+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -22,167 +22,137 @@ msgstr ""
 msgid "Invalid input."
 msgstr ""
 
-#: ui/ConnectionItemDelegate.qml:90
+#: ui/ConnectionItemDelegate.qml:117
 #, kde-format
 msgid "Connect to"
 msgstr ""
 
-#: ui/main.qml:82
+#: ui/main.qml:26
 #, kde-format
-msgid "Wi-Fi is disabled"
+msgid "Edit"
 msgstr ""
 
 #: ui/main.qml:86
 #, kde-format
-msgid "Enable"
+msgid "Wi-Fi"
 msgstr ""
 
-#: ui/main.qml:96
+#: ui/main.qml:117
 #, kde-format
-msgid "Disable Wi-Fi"
+msgid "Available Networks"
 msgstr ""
 
-#: ui/main.qml:102
+#: ui/NetworkSettings.qml:15
 #, kde-format
-msgid "Add Custom Connection"
+msgid "Add New Connection"
 msgstr ""
 
-#: ui/main.qml:108
-#, kde-format
-msgid "Show Saved Connections"
-msgstr ""
-
-#: ui/NetworkSettings.qml:14
-#, kde-format
-msgid "Add new Connection"
-msgstr ""
-
-#: ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:36
 #, kde-format
 msgid "Save"
 msgstr ""
 
-#: ui/NetworkSettings.qml:46
+#: ui/NetworkSettings.qml:73
 #, kde-format
-msgid "General"
+msgid "Hidden Network"
 msgstr ""
 
-#: ui/NetworkSettings.qml:51
-#, kde-format
-msgid "SSID:"
-msgstr "SSID:"
-
-#: ui/NetworkSettings.qml:60
-#, kde-format
-msgid "Hidden Network:"
-msgstr ""
-
-#: ui/NetworkSettings.qml:66
-#, kde-format
-msgid "Security"
-msgstr "Seguranza"
-
-#: ui/NetworkSettings.qml:72
-#, kde-format
-msgid "Security type:"
-msgstr ""
-
-#: ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:96
 #, kde-format
 msgid "None"
 msgstr ""
 
-#: ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
 msgstr "Clave WEP"
 
-#: ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:98
 #, kde-format
 msgid "Dynamic WEP"
 msgstr ""
 
-#: ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr ""
 
-#: ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr ""
 
-#: ui/NetworkSettings.qml:110
-#, kde-format
-msgid "Password:"
-msgstr "Contraseña:"
-
-#: ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:146
 #, kde-format
 msgid "Authentication:"
 msgstr "Autenticación:"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:151
 #, kde-format
 msgid "Tunneled TLS"
 msgstr ""
 
-#: ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:152
 #, kde-format
 msgid "Protected EAP"
 msgstr ""
 
-#: ui/NetworkSettings.qml:132
-#, kde-format
-msgid "IP settings"
-msgstr ""
-
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Automatic"
 msgstr ""
 
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Manual"
 msgstr ""
 
-#: ui/NetworkSettings.qml:148
+#: ui/NetworkSettings.qml:186
 #, kde-format
-msgid "IP Address:"
+msgid "IP Address"
 msgstr ""
 
-#: ui/NetworkSettings.qml:160
+#: ui/NetworkSettings.qml:204
 #, kde-format
-msgid "Gateway:"
+msgid "Gateway"
 msgstr ""
 
-#: ui/NetworkSettings.qml:172
+#: ui/NetworkSettings.qml:222
 #, kde-format
-msgid "Network prefix length:"
+msgid "Network prefix length"
 msgstr ""
 
-#: ui/NetworkSettings.qml:185
-#, kde-format
-msgid "DNS:"
+#: ui/NetworkSettings.qml:241
+#, fuzzy, kde-format
+#| msgid "DNS:"
+msgid "DNS"
 msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Contraseña…"
+
+#~ msgid "SSID:"
+#~ msgstr "SSID:"
+
+#~ msgid "Security"
+#~ msgstr "Seguranza"
+
+#~ msgid "Password:"
+#~ msgstr "Contraseña:"

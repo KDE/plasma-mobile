@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2023-11-05 17:00+0100\n"
+"PO-Revision-Date: 2023-12-16 11:04+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -133,10 +133,9 @@ msgid "Export layout to"
 msgstr "Indeling exporteren naar"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "Indeling exporteren naar"
+msgstr "Indeling importeren uit"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2020-04-15 12:12+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -22,168 +22,132 @@ msgstr ""
 msgid "Invalid input."
 msgstr ""
 
-#: ui/ConnectionItemDelegate.qml:90
+#: ui/ConnectionItemDelegate.qml:117
 #, fuzzy, kde-format
 #| msgid "Connection Editor"
 msgid "Connect to"
 msgstr "Ühenduste redaktor"
 
-#: ui/main.qml:82
+#: ui/main.qml:26
 #, kde-format
-msgid "Wi-Fi is disabled"
+msgid "Edit"
 msgstr ""
 
 #: ui/main.qml:86
-#, fuzzy, kde-format
-#| msgid "Enable Wi-Fi"
-msgid "Enable"
-msgstr "Wi-Fi lubamine"
-
-#: ui/main.qml:96
 #, kde-format
-msgid "Disable Wi-Fi"
-msgstr "Wi-Fi keelamine"
+msgid "Wi-Fi"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:117
 #, fuzzy, kde-format
-#| msgid "Add custom connection"
-msgid "Add Custom Connection"
-msgstr "Kohandatud ühenduse lisamine"
+#| msgid "Hidden Network:"
+msgid "Available Networks"
+msgstr "Varjatud võrk:"
 
-#: ui/main.qml:108
+#: ui/NetworkSettings.qml:15
 #, fuzzy, kde-format
-#| msgid "Saved Connections"
-msgid "Show Saved Connections"
-msgstr "Salvestatud ühendused"
-
-#: ui/NetworkSettings.qml:14
-#, kde-format
-msgid "Add new Connection"
+#| msgid "Add new Connection"
+msgid "Add New Connection"
 msgstr "Lisa uus ühendus"
 
-#: ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:36
 #, kde-format
 msgid "Save"
 msgstr "Salvesta"
 
-#: ui/NetworkSettings.qml:46
-#, kde-format
-msgid "General"
-msgstr "Üldine"
-
-#: ui/NetworkSettings.qml:51
-#, kde-format
-msgid "SSID:"
-msgstr "SSID:"
-
-#: ui/NetworkSettings.qml:60
-#, kde-format
-msgid "Hidden Network:"
+#: ui/NetworkSettings.qml:73
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgid "Hidden Network"
 msgstr "Varjatud võrk:"
 
-#: ui/NetworkSettings.qml:66
-#, kde-format
-msgid "Security"
-msgstr "Turvalisus"
-
-#: ui/NetworkSettings.qml:72
-#, kde-format
-msgid "Security type:"
-msgstr "Turbetüüp:"
-
-#: ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:96
 #, kde-format
 msgid "None"
 msgstr "Puudub"
 
-#: ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
 msgstr "WEP võti"
 
-#: ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:98
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "Dünaamiline WEP"
 
-#: ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "WPA/WPA2 Personal"
 
-#: ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
-#: ui/NetworkSettings.qml:110
-#, kde-format
-msgid "Password:"
-msgstr "Parool:"
-
-#: ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:146
 #, kde-format
 msgid "Authentication:"
 msgstr "Autentimine:"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:151
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "Tunneldatud TLS"
 
-#: ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:152
 #, kde-format
 msgid "Protected EAP"
 msgstr "Kaitstud EAP"
 
-#: ui/NetworkSettings.qml:132
-#, kde-format
-msgid "IP settings"
-msgstr "IP seadistused"
-
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Automatic"
 msgstr "Automaatne"
 
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Manual"
 msgstr "Käsitsi"
 
-#: ui/NetworkSettings.qml:148
-#, kde-format
-msgid "IP Address:"
+#: ui/NetworkSettings.qml:186
+#, fuzzy, kde-format
+#| msgid "IP Address:"
+msgid "IP Address"
 msgstr "IP-aadress:"
 
-#: ui/NetworkSettings.qml:160
-#, kde-format
-msgid "Gateway:"
+#: ui/NetworkSettings.qml:204
+#, fuzzy, kde-format
+#| msgid "Gateway:"
+msgid "Gateway"
 msgstr "Lüüs:"
 
-#: ui/NetworkSettings.qml:172
-#, kde-format
-msgid "Network prefix length:"
+#: ui/NetworkSettings.qml:222
+#, fuzzy, kde-format
+#| msgid "Network prefix length:"
+msgid "Network prefix length"
 msgstr "Võrguprefiksi pikkus:"
 
-#: ui/NetworkSettings.qml:185
-#, kde-format
-msgid "DNS:"
+#: ui/NetworkSettings.qml:241
+#, fuzzy, kde-format
+#| msgid "DNS:"
+msgid "DNS"
 msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
@@ -191,6 +155,42 @@ msgstr "DNS:"
 #| msgid "Password:"
 msgid "Password…"
 msgstr "Parool:"
+
+#, fuzzy
+#~| msgid "Enable Wi-Fi"
+#~ msgid "Enable"
+#~ msgstr "Wi-Fi lubamine"
+
+#~ msgid "Disable Wi-Fi"
+#~ msgstr "Wi-Fi keelamine"
+
+#, fuzzy
+#~| msgid "Add custom connection"
+#~ msgid "Add Custom Connection"
+#~ msgstr "Kohandatud ühenduse lisamine"
+
+#, fuzzy
+#~| msgid "Saved Connections"
+#~ msgid "Show Saved Connections"
+#~ msgstr "Salvestatud ühendused"
+
+#~ msgid "General"
+#~ msgstr "Üldine"
+
+#~ msgid "SSID:"
+#~ msgstr "SSID:"
+
+#~ msgid "Security"
+#~ msgstr "Turvalisus"
+
+#~ msgid "Security type:"
+#~ msgstr "Turbetüüp:"
+
+#~ msgid "Password:"
+#~ msgstr "Parool:"
+
+#~ msgid "IP settings"
+#~ msgstr "IP seadistused"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

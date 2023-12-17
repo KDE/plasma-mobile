@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-04-01 20:24-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -22,170 +22,170 @@ msgstr ""
 msgid "Invalid input."
 msgstr "ਗਲਤ ਇੰਪੁੱਟ ਹੈ।"
 
-#: ui/ConnectionItemDelegate.qml:90
+#: ui/ConnectionItemDelegate.qml:117
 #, kde-format
 msgid "Connect to"
 msgstr "ਕਨੈਕਟ ਕਰੋ"
 
-#: ui/main.qml:82
+#: ui/main.qml:26
 #, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
+msgid "Edit"
+msgstr ""
 
 #: ui/main.qml:86
 #, kde-format
-msgid "Enable"
-msgstr "ਸਮਰੱਥ"
+msgid "Wi-Fi"
+msgstr ""
 
-#: ui/main.qml:96
-#, kde-format
-msgid "Disable Wi-Fi"
-msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਕਰੋ"
+#: ui/main.qml:117
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgid "Available Networks"
+msgstr "ਲੁਕਵਾਂ ਨੈੱਟਵਰਕ:"
 
-#: ui/main.qml:102
-#, kde-format
-msgid "Add Custom Connection"
-msgstr "ਕਸਟਮ ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
-
-#: ui/main.qml:108
-#, kde-format
-msgid "Show Saved Connections"
-msgstr "ਸੰਭਾਲੇ ਹੋਏ ਕਨੈਕਸ਼ਨ ਵੇਖਾਓ"
-
-#: ui/NetworkSettings.qml:14
-#, kde-format
-msgid "Add new Connection"
+#: ui/NetworkSettings.qml:15
+#, fuzzy, kde-format
+#| msgid "Add new Connection"
+msgid "Add New Connection"
 msgstr "ਨਵਾਂ ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
 
-#: ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:36
 #, kde-format
 msgid "Save"
 msgstr "ਸੰਭਾਲੋ"
 
-#: ui/NetworkSettings.qml:46
-#, kde-format
-msgid "General"
-msgstr "ਆਮ"
-
-#: ui/NetworkSettings.qml:51
-#, kde-format
-msgid "SSID:"
-msgstr "SSID:"
-
-#: ui/NetworkSettings.qml:60
-#, kde-format
-msgid "Hidden Network:"
+#: ui/NetworkSettings.qml:73
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgid "Hidden Network"
 msgstr "ਲੁਕਵਾਂ ਨੈੱਟਵਰਕ:"
 
-#: ui/NetworkSettings.qml:66
-#, kde-format
-msgid "Security"
-msgstr "ਸੁਰੱਖਿਆ"
-
-#: ui/NetworkSettings.qml:72
-#, kde-format
-msgid "Security type:"
-msgstr "ਸੁਰੱਖਿਆ ਦੀ ਕਿਸਮ:"
-
-#: ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:96
 #, kde-format
 msgid "None"
 msgstr "ਕੋਈ ਨਹੀਂ"
 
-#: ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
 msgstr "WEP ਕੁੰਜੀ"
 
-#: ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:98
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "ਡਾਇਨੈਮਿਕ WEP"
 
-#: ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "WPA/WPA2 ਪਰਸਨਲ"
 
-#: ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 ਇੰਟਰਪ੍ਰਾਈਜ"
 
-#: ui/NetworkSettings.qml:110
-#, kde-format
-msgid "Password:"
-msgstr "ਪਾਸਵਰਡ:"
-
-#: ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:146
 #, kde-format
 msgid "Authentication:"
 msgstr "ਪਰਮਾਣਕਿਤਾ:"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:151
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "ਟਨਲ ਕੀਤੀ TLS"
 
-#: ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:152
 #, kde-format
 msgid "Protected EAP"
 msgstr "ਸੁਰੱਖਿਅਤ EAP"
 
-#: ui/NetworkSettings.qml:132
-#, kde-format
-msgid "IP settings"
-msgstr "IP ਸੈਟਿੰਗਾਂ"
-
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Automatic"
 msgstr "ਆਟੋਮੈਟਿਕ"
 
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Manual"
 msgstr "ਖੁਦ"
 
-#: ui/NetworkSettings.qml:148
-#, kde-format
-msgid "IP Address:"
+#: ui/NetworkSettings.qml:186
+#, fuzzy, kde-format
+#| msgid "IP Address:"
+msgid "IP Address"
 msgstr "IP ਐਡਰੈਸ:"
 
-#: ui/NetworkSettings.qml:160
-#, kde-format
-msgid "Gateway:"
+#: ui/NetworkSettings.qml:204
+#, fuzzy, kde-format
+#| msgid "Gateway:"
+msgid "Gateway"
 msgstr "ਗੇਟਵੇ:"
 
-#: ui/NetworkSettings.qml:172
-#, kde-format
-msgid "Network prefix length:"
+#: ui/NetworkSettings.qml:222
+#, fuzzy, kde-format
+#| msgid "Network prefix length:"
+msgid "Network prefix length"
 msgstr "ਨੈੱਟਵਰਕ ਅਗੇਤਰ ਲੰਬਾਈ:"
 
-#: ui/NetworkSettings.qml:185
-#, kde-format
-msgid "DNS:"
+#: ui/NetworkSettings.qml:241
+#, fuzzy, kde-format
+#| msgid "DNS:"
+msgid "DNS"
 msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "…ਪਾਸਵਰਡ"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
+
+#~ msgid "Enable"
+#~ msgstr "ਸਮਰੱਥ"
+
+#~ msgid "Disable Wi-Fi"
+#~ msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਕਰੋ"
+
+#~ msgid "Add Custom Connection"
+#~ msgstr "ਕਸਟਮ ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
+
+#~ msgid "Show Saved Connections"
+#~ msgstr "ਸੰਭਾਲੇ ਹੋਏ ਕਨੈਕਸ਼ਨ ਵੇਖਾਓ"
+
+#~ msgid "General"
+#~ msgstr "ਆਮ"
+
+#~ msgid "SSID:"
+#~ msgstr "SSID:"
+
+#~ msgid "Security"
+#~ msgstr "ਸੁਰੱਖਿਆ"
+
+#~ msgid "Security type:"
+#~ msgstr "ਸੁਰੱਖਿਆ ਦੀ ਕਿਸਮ:"
+
+#~ msgid "Password:"
+#~ msgstr "ਪਾਸਵਰਡ:"
+
+#~ msgid "IP settings"
+#~ msgstr "IP ਸੈਟਿੰਗਾਂ"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-09-24 09:17+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -505,22 +505,22 @@ msgstr "Errorea PINa bidaltzean: %1"
 msgid "Error sending the PUK: %1"
 msgstr "Errorea PUKa bidaltzean: %1"
 
-#: ui/AvailableNetworks.qml:13
+#: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
 msgstr "Sare erabilgarriak"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
 msgstr "bat ere ez"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
 msgstr "Uneko operadorea: %1"
 
-#: ui/AvailableNetworks.qml:40
+#: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
 msgstr "Eskaneatu sare bila"
@@ -762,40 +762,43 @@ msgstr "Energiaren egoera"
 msgid "SIM Path"
 msgstr "SIMaren bidea-izena"
 
-#: ui/ProfileList.qml:12
+#: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
 msgstr "APNak"
 
-#: ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "Ez da APNrik konfiguratu"
-
-#: ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "Gehitu konexioa"
-
-#: ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "Gehitu APNa"
-
-#: ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "Hauteman APNak automatikoki"
-
-#: ui/ProfileList.qml:133
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
 
-#: ui/ProfileList.qml:141
+#: ui/ProfileList.qml:61
+#, kde-format
+msgid ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
+msgstr ""
+
+#: ui/ProfileList.qml:72
+#, kde-format
+msgid "APN List"
+msgstr ""
+
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
+
+#: ui/ProfileList.qml:116
+#, kde-format
+msgid "Add APN"
+msgstr "Gehitu APNa"
+
+#: ui/ProfileList.qml:125
+#, fuzzy, kde-format
+#| msgid "Autodetect APN"
+msgid "Automatically detect APN"
+msgstr "Hauteman APNak automatikoki"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -999,6 +1002,12 @@ msgstr "SIM IDa"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Larrialdiko zenbakiak"
+
+#~ msgid "No APNs configured"
+#~ msgstr "Ez da APNrik konfiguratu"
+
+#~ msgid "Add Connection"
+#~ msgstr "Gehitu konexioa"
 
 #~ msgid "SIMs"
 #~ msgstr "SIMak"

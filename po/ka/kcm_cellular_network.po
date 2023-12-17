@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-09-23 04:18+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -504,22 +504,22 @@ msgstr "PIN-ის გაგზავნის შეცდომა: %1"
 msgid "Error sending the PUK: %1"
 msgstr "PUK-ის გაგზავნის შეცდომა: %1"
 
-#: ui/AvailableNetworks.qml:13
+#: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
 msgstr "ხელმისაწვდომი ქსელები"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
 msgstr "არცერთი"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
 msgstr "მიმდინარე ოპერატორი: %1"
 
-#: ui/AvailableNetworks.qml:40
+#: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
 msgstr "ქსელების სკანირება"
@@ -761,40 +761,43 @@ msgstr "კვების მდგომარეობა"
 msgid "SIM Path"
 msgstr "SIM-ის ბილიკი"
 
-#: ui/ProfileList.qml:12
+#: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
 msgstr "APN-ები"
 
-#: ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "მორგებული APN-ების გარეშე"
-
-#: ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "შეერთების დამატება"
-
-#: ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "APN-ის დამატება"
-
-#: ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "APN-ის ავტომატური დადგენა"
-
-#: ui/ProfileList.qml:133
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
 msgstr "ჩასწორება"
 
-#: ui/ProfileList.qml:141
+#: ui/ProfileList.qml:61
+#, kde-format
+msgid ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
+msgstr ""
+
+#: ui/ProfileList.qml:72
+#, kde-format
+msgid "APN List"
+msgstr ""
+
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
+
+#: ui/ProfileList.qml:116
+#, kde-format
+msgid "Add APN"
+msgstr "APN-ის დამატება"
+
+#: ui/ProfileList.qml:125
+#, fuzzy, kde-format
+#| msgid "Autodetect APN"
+msgid "Automatically detect APN"
+msgstr "APN-ის ავტომატური დადგენა"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -998,6 +1001,12 @@ msgstr "SIM ID"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "სასწრაფო ნომრები"
+
+#~ msgid "No APNs configured"
+#~ msgstr "მორგებული APN-ების გარეშე"
+
+#~ msgid "Add Connection"
+#~ msgstr "შეერთების დამატება"
 
 #~ msgid "SIMs"
 #~ msgstr "SIM-ები"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-02-19 17:40+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -501,22 +501,22 @@ msgstr "PİN kod göndrilərkən xəta: %1"
 msgid "Error sending the PUK: %1"
 msgstr "PUK kod göndərilərkən xəta: %1"
 
-#: ui/AvailableNetworks.qml:13
+#: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
 msgstr "Əlçatan şəbəkələr"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
 msgstr "heç biri"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
 msgstr "Cari operator: %1"
 
-#: ui/AvailableNetworks.qml:40
+#: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
 msgstr "Şəbəkələr axtarılır"
@@ -759,40 +759,43 @@ msgstr "El. qidalanma vəziyyəti"
 msgid "SIM Path"
 msgstr "SİM yolu"
 
-#: ui/ProfileList.qml:12
+#: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
 msgstr "APN-lər"
 
-#: ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "APN-lər tənzimlənməyib"
-
-#: ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "Baölantı əlavə edin"
-
-#: ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "APN əlavə edin"
-
-#: ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "APN-nin aşkarlanması"
-
-#: ui/ProfileList.qml:133
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
 msgstr "Düzəliş"
 
-#: ui/ProfileList.qml:141
+#: ui/ProfileList.qml:61
+#, kde-format
+msgid ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
+msgstr ""
+
+#: ui/ProfileList.qml:72
+#, kde-format
+msgid "APN List"
+msgstr ""
+
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
 msgstr "Silin"
+
+#: ui/ProfileList.qml:116
+#, kde-format
+msgid "Add APN"
+msgstr "APN əlavə edin"
+
+#: ui/ProfileList.qml:125
+#, fuzzy, kde-format
+#| msgid "Autodetect APN"
+msgid "Automatically detect APN"
+msgstr "APN-nin aşkarlanması"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -995,6 +998,12 @@ msgstr "SIM ID-si"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Təcili yardım nömrələri"
+
+#~ msgid "No APNs configured"
+#~ msgstr "APN-lər tənzimlənməyib"
+
+#~ msgid "Add Connection"
+#~ msgstr "Baölantı əlavə edin"
 
 #~ msgid "SIMs"
 #~ msgstr "SIM kartlar"

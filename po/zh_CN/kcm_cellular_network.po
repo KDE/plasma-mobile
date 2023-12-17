@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2023-12-09 09:24\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -501,22 +501,22 @@ msgstr "发送 PIN 码时出错：%1"
 msgid "Error sending the PUK: %1"
 msgstr "发送 PUK 码时出错：%1"
 
-#: ui/AvailableNetworks.qml:13
+#: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
 msgstr "可用网络"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
 msgstr "无"
 
-#: ui/AvailableNetworks.qml:37
+#: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
 msgstr "当前运营商：%1"
 
-#: ui/AvailableNetworks.qml:40
+#: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
 msgstr "扫描网络"
@@ -757,40 +757,43 @@ msgstr "功率状态"
 msgid "SIM Path"
 msgstr "SIM 卡路径"
 
-#: ui/ProfileList.qml:12
+#: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
 msgstr "APN"
 
-#: ui/ProfileList.qml:26
-#, kde-format
-msgid "No APNs configured"
-msgstr "未配置 APN"
-
-#: ui/ProfileList.qml:31
-#, kde-format
-msgid "Add Connection"
-msgstr "添加连接"
-
-#: ui/ProfileList.qml:98
-#, kde-format
-msgid "Add APN"
-msgstr "添加 APN"
-
-#: ui/ProfileList.qml:121
-#, kde-format
-msgid "Autodetect APN"
-msgstr "自动检测 APN"
-
-#: ui/ProfileList.qml:133
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
 
-#: ui/ProfileList.qml:141
+#: ui/ProfileList.qml:61
+#, kde-format
+msgid ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
+msgstr ""
+
+#: ui/ProfileList.qml:72
+#, kde-format
+msgid "APN List"
+msgstr ""
+
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
 msgstr "删除"
+
+#: ui/ProfileList.qml:116
+#, kde-format
+msgid "Add APN"
+msgstr "添加 APN"
+
+#: ui/ProfileList.qml:125
+#, fuzzy, kde-format
+#| msgid "Autodetect APN"
+msgid "Automatically detect APN"
+msgstr "自动检测 APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -990,3 +993,9 @@ msgstr "SIM 卡 ID"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "紧急电话号码"
+
+#~ msgid "No APNs configured"
+#~ msgstr "未配置 APN"
+
+#~ msgid "Add Connection"
+#~ msgstr "添加连接"

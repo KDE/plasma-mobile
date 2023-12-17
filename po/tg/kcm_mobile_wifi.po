@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-10 01:48+0000\n"
+"POT-Creation-Date: 2023-12-17 01:36+0000\n"
 "PO-Revision-Date: 2019-11-12 21:55+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -22,171 +22,132 @@ msgstr ""
 msgid "Invalid input."
 msgstr ""
 
-#: ui/ConnectionItemDelegate.qml:90
+#: ui/ConnectionItemDelegate.qml:117
 #, fuzzy, kde-format
 #| msgid "Connection Editor"
 msgid "Connect to"
 msgstr "Муҳаррири пайвастшавӣ"
 
-#: ui/main.qml:82
+#: ui/main.qml:26
 #, kde-format
-msgid "Wi-Fi is disabled"
+msgid "Edit"
 msgstr ""
 
 #: ui/main.qml:86
-#, fuzzy, kde-format
-#| msgid "Enable Wi-Fi"
-msgid "Enable"
-msgstr "Фаъол кардани Wi-Fi"
-
-#: ui/main.qml:96
 #, kde-format
-msgid "Disable Wi-Fi"
-msgstr "Хомӯш кардани Wi-Fi"
+msgid "Wi-Fi"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:117
+#, fuzzy, kde-format
+#| msgid "Hide this network"
+msgid "Available Networks"
+msgstr "Пинҳон кардани шабакаи ҷорӣ"
+
+#: ui/NetworkSettings.qml:15
 #, fuzzy, kde-format
 #| msgid "Add custom connection"
-msgid "Add Custom Connection"
+msgid "Add New Connection"
 msgstr "Илова кардани пайвасти фармоишӣ"
 
-#: ui/main.qml:108
-#, fuzzy, kde-format
-#| msgid "Saved Connections"
-msgid "Show Saved Connections"
-msgstr "Пайвастҳои нигоҳдошташуда"
-
-#: ui/NetworkSettings.qml:14
-#, fuzzy, kde-format
-#| msgid "Add custom connection"
-msgid "Add new Connection"
-msgstr "Илова кардани пайвасти фармоишӣ"
-
-#: ui/NetworkSettings.qml:35
+#: ui/NetworkSettings.qml:36
 #, kde-format
 msgid "Save"
 msgstr "Нигоҳ доштан"
 
-#: ui/NetworkSettings.qml:46
-#, kde-format
-msgid "General"
-msgstr ""
-
-#: ui/NetworkSettings.qml:51
-#, fuzzy, kde-format
-#| msgid "SSID"
-msgid "SSID:"
-msgstr "SSID"
-
-#: ui/NetworkSettings.qml:60
+#: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hide this network"
-msgid "Hidden Network:"
+msgid "Hidden Network"
 msgstr "Пинҳон кардани шабакаи ҷорӣ"
 
-#: ui/NetworkSettings.qml:66
-#, kde-format
-msgid "Security"
-msgstr "Амният"
-
-#: ui/NetworkSettings.qml:72
-#, kde-format
-msgid "Security type:"
-msgstr "Навъи амният:"
-
-#: ui/NetworkSettings.qml:81
+#: ui/NetworkSettings.qml:96
 #, kde-format
 msgid "None"
 msgstr "Ҳеҷ чиз"
 
-#: ui/NetworkSettings.qml:82
+#: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
 msgstr "Калиди WEP"
 
-#: ui/NetworkSettings.qml:83
+#: ui/NetworkSettings.qml:98
 #, kde-format
 msgid "Dynamic WEP"
 msgstr "WEP-и серҳаракат"
 
-#: ui/NetworkSettings.qml:84
+#: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
 msgstr "Пайвасти шахсии WPA/WPA2"
 
-#: ui/NetworkSettings.qml:85
+#: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
 msgstr "Пайвасти тиҷории WPA/WPA2"
 
-#: ui/NetworkSettings.qml:110
-#, kde-format
-msgid "Password:"
-msgstr "Ниҳонвожа:"
-
-#: ui/NetworkSettings.qml:118
+#: ui/NetworkSettings.qml:146
 #, kde-format
 msgid "Authentication:"
 msgstr "Санҷиши ҳаққоният:"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:121
+#: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: ui/NetworkSettings.qml:122
+#: ui/NetworkSettings.qml:151
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "TLS-и ниҳонӣ"
 
-#: ui/NetworkSettings.qml:123
+#: ui/NetworkSettings.qml:152
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP-и ҳифзшуда"
 
-#: ui/NetworkSettings.qml:132
-#, kde-format
-msgid "IP settings"
-msgstr "Танзимоти IP"
-
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Automatic"
 msgstr "Худкор"
 
-#: ui/NetworkSettings.qml:138
+#: ui/NetworkSettings.qml:170
 #, kde-format
 msgid "Manual"
 msgstr "Дастӣ"
 
-#: ui/NetworkSettings.qml:148
-#, kde-format
-msgid "IP Address:"
+#: ui/NetworkSettings.qml:186
+#, fuzzy, kde-format
+#| msgid "IP Address:"
+msgid "IP Address"
 msgstr "Нишонии IP:"
 
-#: ui/NetworkSettings.qml:160
-#, kde-format
-msgid "Gateway:"
+#: ui/NetworkSettings.qml:204
+#, fuzzy, kde-format
+#| msgid "Gateway:"
+msgid "Gateway"
 msgstr "Нишонии асосӣ:"
 
-#: ui/NetworkSettings.qml:172
-#, kde-format
-msgid "Network prefix length:"
+#: ui/NetworkSettings.qml:222
+#, fuzzy, kde-format
+#| msgid "Network prefix length:"
+msgid "Network prefix length"
 msgstr "Дарозии пешванди шабака:"
 
-#: ui/NetworkSettings.qml:185
-#, kde-format
-msgid "DNS:"
+#: ui/NetworkSettings.qml:241
+#, fuzzy, kde-format
+#| msgid "DNS:"
+msgid "DNS"
 msgstr "DNS:"
 
 #: ui/PasswordField.qml:13
@@ -194,6 +155,41 @@ msgstr "DNS:"
 #| msgid "Password:"
 msgid "Password…"
 msgstr "Ниҳонвожа:"
+
+#, fuzzy
+#~| msgid "Enable Wi-Fi"
+#~ msgid "Enable"
+#~ msgstr "Фаъол кардани Wi-Fi"
+
+#~ msgid "Disable Wi-Fi"
+#~ msgstr "Хомӯш кардани Wi-Fi"
+
+#, fuzzy
+#~| msgid "Add custom connection"
+#~ msgid "Add Custom Connection"
+#~ msgstr "Илова кардани пайвасти фармоишӣ"
+
+#, fuzzy
+#~| msgid "Saved Connections"
+#~ msgid "Show Saved Connections"
+#~ msgstr "Пайвастҳои нигоҳдошташуда"
+
+#, fuzzy
+#~| msgid "SSID"
+#~ msgid "SSID:"
+#~ msgstr "SSID"
+
+#~ msgid "Security"
+#~ msgstr "Амният"
+
+#~ msgid "Security type:"
+#~ msgstr "Навъи амният:"
+
+#~ msgid "Password:"
+#~ msgstr "Ниҳонвожа:"
+
+#~ msgid "IP settings"
+#~ msgstr "Танзимоти IP"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

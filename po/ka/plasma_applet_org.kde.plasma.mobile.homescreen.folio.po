@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2023-11-06 05:38+0100\n"
+"PO-Revision-Date: 2023-12-16 06:07+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -131,19 +131,18 @@ msgstr "ზოგადი"
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgid "Export layout to"
-msgstr "გატანის განლაგება, როგორც"
+msgstr "განლაგების გატანა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "გატანის განლაგება, როგორც"
+msgstr "განლაგების შემოტანა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
-msgstr "გადატანის სტატუსი"
+msgstr "გატანის სტატუსი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format

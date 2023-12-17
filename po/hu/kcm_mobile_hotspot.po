@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Kristóf Kiszel <kiszel.kristof@gmail.com>, 2020.
+# SPDX-FileCopyrightText: 2020, 2023 Kristóf Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2020-12-20 13:19+0100\n"
-"Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
+"PO-Revision-Date: 2023-12-16 21:08+0100\n"
+"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.03.70\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: ui/main.qml:40
 #, kde-format
@@ -25,19 +25,17 @@ msgstr "Hotspot"
 #: ui/main.qml:41
 #, kde-format
 msgid "Whether the wireless hotspot is enabled."
-msgstr ""
+msgstr "Be van-e kapcsolva a vezeték nélküli hotspot."
 
 #: ui/main.qml:60
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Hotspot"
+msgstr "Hotspot SSID"
 
 #: ui/main.qml:69
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Jelszó:"
+msgstr "Hotspot jelszó:"
 
 #~ msgid "Enabled:"
 #~ msgstr "Bekapcsolva:"
