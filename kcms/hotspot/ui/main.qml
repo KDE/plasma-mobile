@@ -26,6 +26,43 @@ SimpleKCM {
 
         PlasmaNM.WirelessStatus {
             id: wirelessStatus
+        },
+
+        Kirigami.PromptDialog {
+            id: hotspotDialog
+            title: i18n("Configure Hotspot")
+            standardButtons: Kirigami.PromptDialog.Save | Kirigami.PromptDialog.Cancel
+
+            onOpened: {
+                hotspotSsidField.text = PlasmaNM.Configuration.hotspotName;
+                hotspotPasswordField.text = PlasmaNM.Configuration.hotspotPassword;
+            }
+
+            onAccepted: {
+                PlasmaNM.Configuration.hotspotName = hotspotSsidField.text;
+                PlasmaNM.Configuration.hotspotPassword = hotspotPasswordField.text;
+
+                // these properties need to be manually updated since they're not NOTIFYable
+                hotspotSSIDText.description = PlasmaNM.Configuration.hotspotName;
+                hotspotPasswordText.description = PlasmaNM.Configuration.hotspotPassword;
+            }
+
+            ColumnLayout {
+                Controls.Label {
+                    text: i18n('Hotspot SSID:')
+                }
+                Controls.TextField {
+                    Layout.fillWidth: true
+                    id: hotspotSsidField
+                }
+                Controls.Label {
+                    text: i18n('Hotspot Password:')
+                }
+                Controls.TextField {
+                    Layout.fillWidth: true
+                    id: hotspotPasswordField
+                }
+            }
         }
     ]
 
@@ -38,7 +75,7 @@ SimpleKCM {
             FormCard.FormSwitchDelegate {
                 id: hotspotToggle
                 text: i18n("Hotspot")
-                description: i18n("Whether the wireless hotspot is enabled.");
+                description: i18n("Share your internet connection with other devices as a Wi-Fi network.");
 
                 checked: wirelessStatus.hotspotSSID.length !== 0
 
@@ -52,25 +89,33 @@ SimpleKCM {
             }
         }
 
+        FormCard.FormHeader {
+            title: i18n("Settings")
+        }
+
         FormCard.FormCard {
             Layout.topMargin: Kirigami.Units.largeSpacing
             Layout.bottomMargin: Kirigami.Units.largeSpacing
 
-            FormCard.FormTextFieldDelegate {
-                label: i18n("Hotspot SSID")
-                enabled: !hotspotToggle.checked
-                text: PlasmaNM.Configuration.hotspotName
-                onTextChanged: PlasmaNM.Configuration.hotspotName = text
+            FormCard.FormTextDelegate {
+                id: hotspotSSIDText
+                text: i18n("Hotspot SSID")
+                description: PlasmaNM.Configuration.hotspotName
             }
 
             FormCard.FormDelegateSeparator {}
 
-            FormCard.FormTextFieldDelegate {
-                label: i18n("Hotspot Password")
-                enabled: !hotspotToggle.checked
-                echoMode: TextInput.Password
-                text: PlasmaNM.Configuration.hotspotPassword
-                onTextChanged: PlasmaNM.Configuration.hotspotPassword = text
+            FormCard.FormTextDelegate {
+                id: hotspotPasswordText
+                text: i18n("Hotspot Password")
+                description: PlasmaNM.Configuration.hotspotPassword
+            }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormButtonDelegate {
+                text: i18n('Configure')
+                onClicked: hotspotDialog.open()
             }
         }
     }
