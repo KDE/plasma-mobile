@@ -19,7 +19,7 @@ Info::Info(QObject *parent, const KPluginMetaData &metaData)
     , m_softwareInfo(new SoftwareInfo(this))
     , m_hardwareInfo(new HardwareInfo(this))
 {
-    setButtons(Apply | Default);
+    setButtons({});
 
     qDebug() << "Info module loaded.";
 }

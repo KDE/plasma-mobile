@@ -16,6 +16,7 @@ public:
     HotspotSettings(QObject *parent, const KPluginMetaData &metaData)
         : KQuickConfigModule(parent, metaData)
     {
+        setButtons({});
     }
 };
 

@@ -28,6 +28,7 @@ K_PLUGIN_CLASS_WITH_JSON(WifiSettings, "kcm_mobile_wifi.json")
 WifiSettings::WifiSettings(QObject *parent, const KPluginMetaData &metaData)
     : KQuickConfigModule(parent, metaData)
 {
+    setButtons({});
 }
 
 QVariantMap WifiSettings::getConnectionSettings(const QString &connection, const QString &type)

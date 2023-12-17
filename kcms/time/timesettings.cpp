@@ -37,11 +37,11 @@ TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData)
     : KQuickConfigModule(parent, metaData)
     , m_useNtp(true)
 {
+    setButtons({});
+
     qDebug() << "time settings init";
     m_timeZonesModel = nullptr;
     setTimeZone(QTimeZone::systemTimeZone().id());
-
-    setButtons(Apply | Default);
 
     qmlRegisterAnonymousType<TimeZoneModel>("org.kde.timesettings", 1);
     qmlRegisterAnonymousType<TimeZoneFilterProxy>("org.kde.timesettings", 1);

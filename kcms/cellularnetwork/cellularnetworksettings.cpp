@@ -22,6 +22,8 @@ CellularNetworkSettings::CellularNetworkSettings(QObject *parent, const KPluginM
     , m_modemList{}
     , m_simList{}
 {
+    setButtons({});
+
     CellularNetworkSettings::staticInst = this;
 
     qmlRegisterType<ProfileSettings>("cellularnetworkkcm", 1, 0, "ProfileSettings");

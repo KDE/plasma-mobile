@@ -33,6 +33,8 @@ VirtualKeyboard::VirtualKeyboard(QObject *parent, const KPluginMetaData &metaDat
     , m_gsettings(new GSettingsItem("/org/maliit/keyboard/maliit/", parent))
     , m_langModel(new LanguageModel(this, m_gsettings))
 {
+    setButtons({});
+
     qmlRegisterAnonymousType<LanguageModel>("org.kde.kcm.virtualkeyboard", 1);
 
     m_autoCapitalize = m_gsettings->value("auto-capitalization").toBool();
