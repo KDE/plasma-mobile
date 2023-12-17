@@ -44,7 +44,6 @@ Item {
             text: index < 10 ? "0"+index : index
             color: Kirigami.Theme.textColor
             font.pointSize: root.fontSize
-            opacity: PathView.itemOpacity
         }
 
         onMovingChanged: {

@@ -4,14 +4,12 @@
     SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-import QtQuick 2.1
+import QtQuick
+import QtQuick.Layouts
 import org.kde.kirigami 2.5 as Kirigami
-//import "private"
 
-//FIXME: shouldn't be a FrameSvgItem
 Item {
     id: root
-    clip: true
 
     //////// API
     property int day
@@ -38,16 +36,16 @@ Item {
     /////// Implementation
     Connections {
         target: root
-        onDayChanged: clockRow.day = root.day
-        onMonthChanged: clockRow.month = root.month
-        onYearChanged: clockRow.year = root.year
+        function onDayChanged() {
+            clockRow.day = root.day;
+        }
+        function onMonthChanged() {
+            clockRow.month = root.month;
+        }
+        function onYearChanged() {
+            clockRow.year = root.year;
+        }
     }
-
-
-    //imagePath: "widgets/picker"
-    width: clockRow.width + root._margin * 2
-    height: clockRow.height + root._margin * 2
-
 
     Timer {
         id: userConfiguringTimer
@@ -62,11 +60,10 @@ Item {
         }
     }
 
-    Row {
+    RowLayout {
         id: clockRow
-        spacing: 3
-        x: root._margin
-        y: root._margin
+        anchors.margins: _margin
+        anchors.fill: parent
 
         property int day
         property int month
@@ -79,6 +76,7 @@ Item {
 
         Digit {
             id: dayDigit
+            Layout.fillWidth: true
             model: {
                 var dd = new Date(year, month, 0);
                 return dd.getDate()
@@ -96,17 +94,20 @@ Item {
                 text: index+1
                 color: Kirigami.Theme.textColor
                 font.pointSize: root.fontSize
-                opacity: PathView.itemOpacity
             }
         }
-        Kirigami.Separator {
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
+        Item {
+            Layout.fillHeight: true
+                Kirigami.Separator {
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                }
             }
         }
         Digit {
             id: monthDigit
+            Layout.fillWidth: true
             model: 12
             currentIndex: month -1
             onSelectedIndexChanged: {
@@ -132,14 +133,18 @@ Item {
                 text: "0000"
             }
         }
-        Kirigami.Separator {
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
+        Item {
+            Layout.fillHeight: true
+                Kirigami.Separator {
+                anchors {
+                    top: parent.top
+                    bottom: parent.bottom
+                }
             }
         }
         Digit {
             id: yearDigit
+            Layout.fillWidth: true
             //FIXME: yes, this is a tad lame ;)
             model: 3000
             currentIndex: year

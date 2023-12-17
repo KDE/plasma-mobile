@@ -1,6 +1,7 @@
 // -*- coding: iso-8859-1 -*-
 /*
  *   SPDX-FileCopyrightText: 2011 Sebastian Kügler <sebas@kde.org>
+ *   SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -47,7 +48,7 @@ SimpleKCM {
                 id: timeZoneSelect
                 text: i18n("Timezone")
                 description: kcm.timeZone
-                onClicked: timeZonePickerSheet.open()
+                onClicked: timeZonePickerDialog.open()
             }
         }
 
@@ -64,8 +65,8 @@ SimpleKCM {
                 onCheckedChanged: {
                     kcm.useNtp = checked
                     if (!checked) {
-                        kcm.ntpServer = ""
-                        kcm.saveTime()
+                        kcm.ntpServer = "";
+                        kcm.saveTime();
                     }
                 }
             }
@@ -76,168 +77,173 @@ SimpleKCM {
                 id: timeSelect
                 enabled: !ntpCheckBox.checked
                 icon.name: "clock"
-                text: i18n("Current Time")
-                description: Qt.formatTime(kcm.currentTime, Locale.LongFormat)
-                onClicked: timePickerSheet.open()
+                text: i18n("System Time")
+                description: Qt.formatTime(kcm.currentTime, kcm.twentyFour ? 'hh:mm' : 'hh:mm ap')
+                onClicked: timePickerDialog.open()
             }
 
             FormCard.FormDelegateSeparator { above: timeSelect; below: dateSelect }
 
             FormCard.FormButtonDelegate {
                 id: dateSelect
-                enabled: !ntpCheckBox.checked
-                icon.name: "view-calendar"
-                text: i18n("Date")
+                text: i18n("System Date")
                 description: Qt.formatDate(kcm.currentDate, Locale.LongFormat)
-                onClicked: datePickerSheet.open()
+                icon.name: "view-calendar"
+                enabled: !ntpCheckBox.checked
+                onClicked: datePickerDialog.open()
             }
         }
     }
 
-    data: Kirigami.OverlaySheet {
-        id: timeZonePickerSheet
+    data: [
+        Kirigami.Dialog {
+            id: timeZonePickerDialog
+            title: i18nc("@title:window", "Pick Timezone")
+            standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
 
-        header: ColumnLayout {
-            Kirigami.Heading {
-                text: i18nc("@title:window", "Pick Timezone")
-                Layout.fillWidth: true
+            property string selectedTimeZoneId
+
+            onOpened: {
+                selectedTimeZoneId = kcm.timeZone;
             }
 
-            Kirigami.SearchField {
-                Layout.fillWidth: true
-                onTextChanged: kcm.timeZonesModel.filterString = text
+            onAccepted: {
+                kcm.saveTimeZone(selectedTimeZoneId)
             }
-        }
 
-        footer: RowLayout {
-            Controls.Button {
-                Layout.alignment: Qt.AlignHCenter
+            ListView {
+                id: listView
+                headerPositioning: ListView.OverlayHeader
+                implicitWidth: 18 * Kirigami.Units.gridUnit
+                implicitHeight: 18 * Kirigami.Units.gridUnit
 
-                text: i18nc("@action:button", "Close")
+                header: Controls.Control {
+                    z: 1
 
-                onClicked: timeZonePickerSheet.close()
-            }
-        }
+                    topPadding: Kirigami.Units.smallSpacing
+                    bottomPadding: 0
+                    leftPadding: Kirigami.Units.smallSpacing
+                    rightPadding: Kirigami.Units.smallSpacing
+                    
+                    background: Rectangle {
+                        color: Kirigami.Theme.backgroundColor
+                    }
 
-        ListView {
-            id: listView
-
-            clip: true
-            implicitWidth: 18 * Kirigami.Units.gridUnit
-
-            topMargin: Math.round(Kirigami.Units.smallSpacing / 2)
-            bottomMargin: Math.round(Kirigami.Units.smallSpacing / 2)
-
-            model: kcm.timeZonesModel
-            delegate: Delegates.RoundedItemDelegate {
-                required property string region
-                required property string city
-
-                width: ListView.view.width
-
-                text: {
-                    if (region) {
-                        return "%1 / %2".arg(region).arg(city)
-                    } else {
-                        return city
+                    contentItem: ColumnLayout {
+                        spacing: Kirigami.Units.smallSpacing
+                        Kirigami.SearchField {
+                            Layout.fillWidth: true
+                            onTextChanged: kcm.timeZonesModel.filterString = text
+                        }
+                        Kirigami.Separator { Layout.fillWidth: true }
                     }
                 }
 
-                onClicked: {
-                    timeZonePickerSheet.close()
-                    kcm.saveTimeZone(model.timeZoneId)
+                model: kcm.timeZonesModel
+                delegate: Controls.RadioDelegate {
+                    z: -1
+                    width: ListView.view.width
+                    checked: timeZonePickerDialog.selectedTimeZoneId == model.timeZoneId
+
+                    text: {
+                        if (model.region) {
+                            return "%1 / %2".arg(model.region).arg(model.city);
+                        } else {
+                            return model.city;
+                        }
+                    }
+
+                    onClicked: {
+                        timeZonePickerDialog.selectedTimeZoneId = model.timeZoneId;
+                        checked = Qt.binding(() => timeZonePickerDialog.selectedTimeZoneId == model.timeZoneId);
+                        console.log(timeZonePickerDialog.selectedTimeZoneId + ' ' + model.timeZoneId + ' ' + (timeZonePickerDialog.selectedTimeZoneId == model.timeZoneId));
+                    }
                 }
             }
-        }
-    }
+        },
 
-    Kirigami.OverlaySheet {
-        id: timePickerSheet
-        header:  Kirigami.Heading { text: i18n("Pick Time") }
-        TimePicker {
-            id: timePicker
-            enabled: !ntpCheckBox.checked
-            twentyFour: hourFormatSwitch.checked
+        Kirigami.PromptDialog {
+            id: datePickerDialog
+            title: i18n("Pick System Date")
+            topPadding: Kirigami.Units.largeSpacing
+            bottomPadding: Kirigami.Units.largeSpacing
+            preferredWidth: Kirigami.Units.gridUnit * 15
+            preferredHeight: Kirigami.Units.gridUnit * 13
 
-            implicitWidth: Kirigami.Units.gridUnit * 15
+            standardButtons: Kirigami.Dialog.Save | Kirigami.Dialog.Cancel
 
-            Component.onCompleted: {
+            onAccepted: {
+                kcm.currentDate = datePicker.isoDate;
+                kcm.saveTime();
+            }
+
+            onOpened: {
+                let date = new Date(kcm.currentDate)
+                datePicker.day = date.getDate();
+                datePicker.month = date.getMonth() + 1;
+                datePicker.year = date.getFullYear();
+            }
+
+            DatePicker {
+                id: datePicker
+                implicitHeight: Kirigami.Units.gridUnit * 6
+
+                Connections {
+                    target: kcm
+                    function onCurrentDateChanged() {
+                        if (datePickerDialog.visible) {
+                            return;
+                        }
+
+                        let date = new Date(kcm.currentDate);
+                        datePicker.day = date.getDate();
+                        datePicker.month = date.getMonth() + 1;
+                        datePicker.year = date.getFullYear();
+                    }
+                }
+            }
+        },
+
+        Kirigami.PromptDialog {
+            id: timePickerDialog
+            title: i18n("Pick System Time")
+            preferredWidth: Kirigami.Units.gridUnit * 15
+            topPadding: Kirigami.Units.largeSpacing
+            bottomPadding: Kirigami.Units.largeSpacing
+
+            standardButtons: Kirigami.Dialog.Save | Kirigami.Dialog.Cancel
+
+            onAccepted: {
+                kcm.currentTime = String(timePicker.hours).padStart(2, '0')
+                    + ':'
+                    + String(timePicker.minutes).padStart(2, '0')
+                    + ':00';
+                kcm.saveTime();
+            }
+
+            onOpened: {
                 var date = new Date(kcm.currentTime);
                 timePicker.hours = date.getHours();
                 timePicker.minutes = date.getMinutes();
-                timePicker.seconds = date.getSeconds();
+                console.log(date + ' ' + date.getHours() + date.getMinutes())
             }
-            Connections {
-                target: kcm
-                function onCurrentTimeChanged() {
-                    if (timePicker.userConfiguring) {
-                        return;
-                    }
 
-                    var date = new Date(kcm.currentTime);
-                    timePicker.hours = date.getHours();
-                    timePicker.minutes = date.getMinutes();
-                    timePicker.seconds = date.getSeconds();
+            TimePicker {
+                id: timePicker
+
+                Connections {
+                    target: kcm
+                    function onCurrentTimeChanged() {
+                        if (timePicker.userConfiguring) {
+                            return;
+                        }
+
+                        var date = new Date(kcm.currentTime);
+                        timePicker.hours = date.getHours();
+                        timePicker.minutes = date.getMinutes();
+                    }
                 }
             }
-            onUserConfiguringChanged: {
-                kcm.currentTime = timeString
-                kcm.saveTime()
-            }
         }
-        footer: RowLayout {
-            Controls.Button {
-                Layout.alignment: Qt.AlignRight
-
-                text: i18nc("@action:button", "Close")
-
-                onClicked: timePickerSheet.close()
-            }
-        }
-    }
-
-    Kirigami.OverlaySheet {
-        id: datePickerSheet
-        header: Kirigami.Heading { text: i18n("Pick Date") }
-        DatePicker {
-            id: datePicker
-            enabled: !ntpCheckBox.checked
-
-            implicitWidth: width > Kirigami.Units.gridUnit * 15 ? width : Kirigami.Units.gridUnit * 15
-
-            Component.onCompleted: {
-                var date = new Date(kcm.currentDate)
-                datePicker.day = date.getDate()
-                datePicker.month = date.getMonth()+1
-                datePicker.year = date.getFullYear()
-            }
-            Connections {
-                target: kcm
-                function onCurrentDateChanged() {
-                    if (datePicker.userConfiguring) {
-                        return
-                    }
-
-                    var date = new Date(kcm.currentDate)
-
-                    datePicker.day = date.getDate()
-                    datePicker.month = date.getMonth()+1
-                    datePicker.year = date.getFullYear()
-                }
-            }
-            onUserConfiguringChanged: {
-                kcm.currentDate = isoDate
-                kcm.saveTime()
-            }
-        }
-        footer: RowLayout {
-            Controls.Button {
-                Layout.alignment: Qt.AlignRight
-
-                text: i18nc("@action:button", "Close")
-
-                onClicked: datePickerSheet.close()
-            }
-        }
-    }
+    ]
 }
