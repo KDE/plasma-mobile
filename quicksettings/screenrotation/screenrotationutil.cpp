@@ -24,7 +24,17 @@ ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
 
+        // update all screens with event connect
         Q_EMIT autoScreenRotationEnabledChanged();
+        for (KScreen::OutputPtr output : m_config->outputs()) {
+            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &ScreenRotationUtil::autoScreenRotationEnabledChanged);
+        }
+
+        // listen to all new screens and connect
+        connect(m_config.data(), &KScreen::Config::outputAdded, this, [this](const auto &output) {
+            Q_EMIT autoScreenRotationEnabledChanged();
+            connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &ScreenRotationUtil::autoScreenRotationEnabledChanged);
+        });
     });
 }
 
