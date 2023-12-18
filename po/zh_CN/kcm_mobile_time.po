@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-12-09 09:24\n"
+"POT-Creation-Date: 2023-12-18 01:59+0000\n"
+"PO-Revision-Date: 2023-12-17 11:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -2923,129 +2923,145 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "太平洋"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jan"
 msgstr "一月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Feb"
 msgstr "二月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Mar"
 msgstr "三月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Apr"
 msgstr "四月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "May"
 msgstr "五月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jun"
 msgstr "六月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jul"
 msgstr "七月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Aug"
 msgstr "八月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Sep"
 msgstr "九月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Oct"
 msgstr "十月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Nov"
 msgstr "十一月"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Dec"
 msgstr "十二月"
 
-#: ui/main.qml:30
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr "显示"
 
-#: ui/main.qml:36
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 小时格式"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "时钟是否使用 24 小时格式显示。"
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, kde-format
 msgid "Timezone"
 msgstr "时区"
 
-#: ui/main.qml:55
+#: ui/main.qml:56
 #, kde-format
 msgid "Time and Date"
 msgstr "时间和日期"
 
-#: ui/main.qml:61
+#: ui/main.qml:62
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "自动同步时间"
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "是否自动设置时间。"
 
-#: ui/main.qml:79
+#: ui/main.qml:80
 #, kde-format
-msgid "Current Time"
-msgstr "当前时间"
+msgid "System Time"
+msgstr ""
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
-msgid "Date"
-msgstr "日期"
+msgid "System Date"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "选取时区"
 
-#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "关闭"
+#: ui/main.qml:167
+#, fuzzy, kde-format
+#| msgid "Pick Date"
+msgid "Pick System Date"
+msgstr "拾取日期"
 
-#: ui/main.qml:156
-#, kde-format
-msgid "Pick Time"
+#: ui/main.qml:209
+#, fuzzy, kde-format
+#| msgid "Pick Time"
+msgid "Pick System Time"
 msgstr "挑选时间"
 
-#: ui/main.qml:201
+#: ui/TimePicker.qml:93
 #, kde-format
-msgid "Pick Date"
-msgstr "拾取日期"
+msgid "AM"
+msgstr ""
+
+#: ui/TimePicker.qml:93
+#, kde-format
+msgid "PM"
+msgstr ""
+
+#~ msgid "Current Time"
+#~ msgstr "当前时间"
+
+#~ msgid "Date"
+#~ msgstr "日期"
+
+#~ msgctxt "@action:button"
+#~ msgid "Close"
+#~ msgstr "关闭"

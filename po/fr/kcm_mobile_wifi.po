@@ -145,7 +145,8 @@ msgid "Network prefix length"
 msgstr "Longueur du préfixe réseau :"
 
 #: ui/NetworkSettings.qml:241
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "DNS"
 msgid "DNS"
 msgstr "DNS"
 

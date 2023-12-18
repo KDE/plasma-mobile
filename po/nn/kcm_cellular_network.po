@@ -997,6 +997,3 @@ msgstr ""
 #, kde-format
 msgid "Emergency Numbers"
 msgstr ""
-
-#~ msgid "Add Connection"
-#~ msgstr "Ny tilkopling"

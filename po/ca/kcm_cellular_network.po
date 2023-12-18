@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-09-24 20:01+0200\n"
+"PO-Revision-Date: 2023-12-17 11:44+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -776,11 +776,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"No s'han pogut detectar automàticament els paràmetres de connexió del vostre "
+"operador. Cerqueu la configuració de l'APN de l'operador, ja sigui "
+"contactant amb el servei tècnic o cercant en línia."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "Llista d'APN"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -793,8 +796,7 @@ msgid "Add APN"
 msgstr "Afegeix un APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
 msgstr "Detecta automàticament l'APN"
 
@@ -1002,9 +1004,3 @@ msgstr "ID de la SIM"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Números d'emergència"
-
-#~ msgid "No APNs configured"
-#~ msgstr "No s'ha configurat cap APN"
-
-#~ msgid "Add Connection"
-#~ msgstr "Afegeix una connexió"

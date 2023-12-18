@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-12-16 21:08+0100\n"
+"PO-Revision-Date: 2023-12-17 21:02+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -776,11 +776,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Nem sikerült automatikusan felismerni a szolgáltatóhoz tartozó kapcsolati "
+"beállításokat. Kérjük, keresse meg a a szolgáltató APN-beállításait az "
+"ügyfélszolgálattal való kapcsolatfelvétellel vagy online kereséssel."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN lista"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -793,8 +796,7 @@ msgid "Add APN"
 msgstr "APN hozzáadása"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
 msgstr "APN automatikus felismerése"
 

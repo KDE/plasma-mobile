@@ -156,36 +156,3 @@ msgstr "DNS:"
 #, kde-format
 msgid "Password…"
 msgstr "Passord …"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi er slått av"
-
-#~ msgid "Enable"
-#~ msgstr "Ta i bruk"
-
-#~ msgid "Disable Wi-Fi"
-#~ msgstr "Slå av Wi-Fi"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Legg til tilpassa tilkopling"
-
-#~ msgid "Show Saved Connections"
-#~ msgstr "Vis lagra tilkoplingar"
-
-#~ msgid "General"
-#~ msgstr "Generelt"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Tryggleik"
-
-#~ msgid "Security type:"
-#~ msgstr "Tryggleikstype:"
-
-#~ msgid "Password:"
-#~ msgstr "Passord:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-innstillingar"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-12-18 01:59+0000\n"
 "PO-Revision-Date: 2022-09-24 15:03+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -2925,132 +2925,148 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Тихий океан"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jan"
 msgstr "Янв"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Feb"
 msgstr "Фев"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Mar"
 msgstr "Мар"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Apr"
 msgstr "Апр"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "May"
 msgstr "Май"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jun"
 msgstr "Июн"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jul"
 msgstr "Июл"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Aug"
 msgstr "Авг"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Sep"
 msgstr "Сен"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Oct"
 msgstr "Окт"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Nov"
 msgstr "Ноя"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Dec"
 msgstr "Дек"
 
-#: ui/main.qml:30
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr "Отображение"
 
-#: ui/main.qml:36
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24-часовой формат"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "Использовать 24-часовой формат времени."
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, kde-format
 msgid "Timezone"
 msgstr "Часовой пояс"
 
-#: ui/main.qml:55
+#: ui/main.qml:56
 #, kde-format
 msgid "Time and Date"
 msgstr "Дата и время"
 
-#: ui/main.qml:61
+#: ui/main.qml:62
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "Синхронизировать время автоматически"
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "Синхронизировать время автоматически."
 
-#: ui/main.qml:79
+#: ui/main.qml:80
 #, kde-format
-msgid "Current Time"
-msgstr "Текущее время"
+msgid "System Time"
+msgstr ""
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
-msgid "Date"
-msgstr "Дата"
+msgid "System Date"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Часовой пояс"
 
-#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "Закрыть"
+#: ui/main.qml:167
+#, fuzzy, kde-format
+#| msgid "Pick Date"
+msgid "Pick System Date"
+msgstr "Выбрать дату"
 
-#: ui/main.qml:156
-#, kde-format
-msgid "Pick Time"
+#: ui/main.qml:209
+#, fuzzy, kde-format
+#| msgid "Pick Time"
+msgid "Pick System Time"
 msgstr "Выбрать время"
 
-#: ui/main.qml:201
+#: ui/TimePicker.qml:93
 #, kde-format
-msgid "Pick Date"
-msgstr "Выбрать дату"
+msgid "AM"
+msgstr ""
+
+#: ui/TimePicker.qml:93
+#, kde-format
+msgid "PM"
+msgstr ""
+
+#~ msgid "Current Time"
+#~ msgstr "Текущее время"
+
+#~ msgid "Date"
+#~ msgstr "Дата"
+
+#~ msgctxt "@action:button"
+#~ msgid "Close"
+#~ msgstr "Закрыть"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-09-24 18:04+0200\n"
+"PO-Revision-Date: 2023-12-17 21:51+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -774,11 +774,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Incapace a autorelevar preferentias de connexion per tu portator (carrier)  "
+"Pro favor tu preferentias de APN de portator (carrier) o per concactar "
+"supporto o cercar online."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "Lista APN"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -791,10 +794,9 @@ msgid "Add APN"
 msgstr "Adde APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Autoreleva APN"
+msgstr "Automaticamente releva APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format

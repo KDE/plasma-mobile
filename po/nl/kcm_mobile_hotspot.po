@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-12-18 01:59+0000\n"
 "PO-Revision-Date: 2023-03-16 09:48+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -17,25 +17,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: ui/main.qml:40
+#: ui/main.qml:33
+#, kde-format
+msgid "Configure Hotspot"
+msgstr ""
+
+#: ui/main.qml:77
 #, kde-format
 msgid "Hotspot"
 msgstr "Hotspot"
 
-#: ui/main.qml:41
+#: ui/main.qml:78
 #, kde-format
-msgid "Whether the wireless hotspot is enabled."
-msgstr "Of de draadloze hotspot is ingeschakeld."
+msgid "Share your internet connection with other devices as a Wi-Fi network."
+msgstr ""
 
-#: ui/main.qml:60
+#: ui/main.qml:93
+#, kde-format
+msgid "Settings"
+msgstr ""
+
+#: ui/main.qml:102
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "SSID van hotspot"
 
-#: ui/main.qml:69
+#: ui/main.qml:110
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Hotspotwachtwoord"
+
+#~ msgid "Whether the wireless hotspot is enabled."
+#~ msgstr "Of de draadloze hotspot is ingeschakeld."
 
 #~ msgid "Enabled:"
 #~ msgstr "Ingeschakeld:"

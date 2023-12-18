@@ -1,32 +1,31 @@
+# Copyright (C) 2023 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2023 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2023-12-17 11:26\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2023-12-17 21:20+0100\n"
+"Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/plasma_applet_org.kde."
-"plasma.mobile.homescreen.folio.pot\n"
-"X-Crowdin-File-ID: 48272\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr "文件夹"
+msgstr "Mappa"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
 msgid "Applications"
-msgstr "应用程序"
+msgstr "Alkalmazások"
 
 #: package/contents/ui/FavouritesBar.qml:146
 #: package/contents/ui/FavouritesBar.qml:220
@@ -35,130 +34,130 @@ msgstr "应用程序"
 #: package/contents/ui/HomeScreenPage.qml:285
 #, kde-format
 msgid "Remove"
-msgstr "移除"
+msgstr "Eltávolítás"
 
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr "挂件"
+msgstr "Elemek"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
 msgid "Homescreen Settings"
-msgstr "主屏幕设置"
+msgstr "Kezdőképernyő beállításai"
 
 #: package/contents/ui/settings/SettingsWindow.qml:87
 #, kde-format
 msgid "Icons"
-msgstr "图标"
+msgstr "Ikonok"
 
 #: package/contents/ui/settings/SettingsWindow.qml:118
 #, kde-format
 msgid "Number of rows"
-msgstr "行数"
+msgstr "Sorok száma"
 
 #: package/contents/ui/settings/SettingsWindow.qml:119
 #, kde-format
 msgid "Number of columns"
-msgstr "列数"
+msgstr "Oszlopok száma"
 
 #: package/contents/ui/settings/SettingsWindow.qml:123
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr "主屏幕的图标大小"
+msgstr "A kezdőképernyő ikonjainak mérete"
 
 #: package/contents/ui/settings/SettingsWindow.qml:162
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "行和列将根据屏幕旋转进行对换。"
+msgstr "A sorok és oszlopok felcserélődnek a képernyő forgásától függően."
 
 #: package/contents/ui/settings/SettingsWindow.qml:166
 #, kde-format
 msgid "Homescreen"
-msgstr "主屏幕"
+msgstr "Kezdőképernyő"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr "主屏幕图标显示标签"
+msgstr "Címkék megjelenítése a kezdőképernyőn"
 
 #: package/contents/ui/settings/SettingsWindow.qml:185
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr "收藏栏图标显示标签"
+msgstr "Címkék megjelenítése a kedvencek sávon"
 
 #: package/contents/ui/settings/SettingsWindow.qml:198
 #, kde-format
 msgid "Page transition effect"
-msgstr "页面切换特效"
+msgstr "Oldalátmenet hatás"
 
 #: package/contents/ui/settings/SettingsWindow.qml:204
 #, kde-format
 msgid "Slide"
-msgstr "滑动"
+msgstr "Csúszás"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "Cube"
-msgstr "立方"
+msgstr "Kocka"
 
 #: package/contents/ui/settings/SettingsWindow.qml:206
 #, kde-format
 msgid "Fade"
-msgstr "渐隐渐显"
+msgstr "Elhalványulás"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Stack"
-msgstr "堆叠"
+msgstr "Kupac"
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Rotation"
-msgstr "旋转"
+msgstr "Forgatás"
 
 #: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Favorites Bar"
-msgstr "收藏栏"
+msgstr "Kedvencek sáv"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
 msgid "General"
-msgstr "常规"
+msgstr "Általános"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgid "Export layout to"
-msgstr "导出布局到"
+msgstr "Elrendezés exportálása ide"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Import layout from"
-msgstr "导入布局来源"
+msgstr "Elrendezés importálása innen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
-msgstr "导出状态"
+msgstr "Exportálás állapota"
 
 #: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format
 msgid "Failed to export to %1"
-msgstr "导出到 %1 失败"
+msgstr "Nem sikerült exportálni ide: %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr "主屏幕布局成功导出到 %1"
+msgstr "A kezdőképernyő elrendezése sikeresen exportálva ide: %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "Confirm Import"
-msgstr "确认导入"
+msgstr "Importálás megerősítése"
 
 #: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr "这将覆盖您现有的主屏幕布局！"
+msgstr "Ezzel felülírja a kezdőképernyője elrendezését!"

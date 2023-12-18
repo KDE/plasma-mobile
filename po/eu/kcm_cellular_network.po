@@ -7,10 +7,10 @@
 # Iñigo Salvador Azurmendi <xalba@ni.eus>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma-settings\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-09-24 09:17+0200\n"
+"PO-Revision-Date: 2023-12-17 08:57+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -778,11 +778,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Ez da zure operadorearen konexio-ezarpenak automatikoki hautemateko gai. "
+"Mesedez, aurkitu zure operadorearen APN ezarpenak, euskarriarekin "
+"harremanean jarrita, edo lerroan bilatuta."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN zerrenda"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -795,10 +798,9 @@ msgid "Add APN"
 msgstr "Gehitu APNa"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Hauteman APNak automatikoki"
+msgstr "APNak automatikoki hautematea"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -926,7 +928,9 @@ msgstr "Datuen ibiltaritza"
 #: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
-msgstr "Baimendu zure gailuak zure eramailea ez den beste bat erabiltzea."
+msgstr ""
+"Baimendu zure gailuak, zure operadorearenak ez diren beste sare batzuk "
+"erabiltzea."
 
 #: ui/SimPage.qml:72
 #, kde-format
@@ -936,7 +940,7 @@ msgstr "Aldatu APNak"
 #: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
-msgstr "Konfiguratu zure eramailearen sarbide puntuen izenak."
+msgstr "Konfiguratu zure operadorearen sarbide puntuen izenak."
 
 #: ui/SimPage.qml:83
 #, kde-format

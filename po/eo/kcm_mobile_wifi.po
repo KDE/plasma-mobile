@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-04-18 09:30+0100\n"
+"PO-Revision-Date: 2023-12-17 22:24+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -31,24 +31,22 @@ msgstr "Konekti al"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Redakti"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Vifio"
 
 #: ui/main.qml:117
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Available Networks"
-msgstr "Kaŝita Reto:"
+msgstr "Retoj Disponeblaj"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
-msgstr "Aldoni novan Konekton"
+msgstr "Aldoni Novan Konekton"
 
 #: ui/NetworkSettings.qml:36
 #, kde-format
@@ -56,10 +54,9 @@ msgid "Save"
 msgstr "Konservi"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Kaŝita Reto:"
+msgstr "Kaŝita Reto"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -127,63 +124,26 @@ msgid "Manual"
 msgstr "Manlibro"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP-adreso:"
+msgstr "IP-Adreso"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Enirejo:"
+msgstr "Kluzo (gateway)"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Reta prefiksa longo:"
+msgstr "Retprefiksa longeco"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS:"
+#, kde-format
 msgid "DNS"
-msgstr "DNS:"
+msgstr "DNS"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Pasvorto…"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi estas malŝaltita"
-
-#~ msgid "Enable"
-#~ msgstr "Ebligi"
-
-#~ msgid "Disable Wi-Fi"
-#~ msgstr "Malebligi Wi-Fi"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Aldoni Propran Konekton"
-
-#~ msgid "Show Saved Connections"
-#~ msgstr "Montri Konservitajn Konektojn"
-
-#~ msgid "General"
-#~ msgstr "Ĝeneralo"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Sekureco"
-
-#~ msgid "Security type:"
-#~ msgstr "Sekureca tipo:"
-
-#~ msgid "Password:"
-#~ msgstr "Pasvorto:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-agordoj"

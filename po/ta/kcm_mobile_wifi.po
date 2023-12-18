@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Kishore G <kishore96@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2023 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2021-10-10 16:10+0530\n"
+"PO-Revision-Date: 2023-12-17 16:22+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ui/ConnectDialog.qml:136
 #, kde-format
@@ -30,22 +30,20 @@ msgstr "இதற்கு இணை:"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "திருத்து"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "அருகலை"
 
 #: ui/main.qml:117
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Available Networks"
-msgstr "மறைந்துள்ள பிணையம்:"
+msgstr "கிடைக்கிற பிணையங்கள்"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "புதிய இணைப்பை சேர்"
 
@@ -55,10 +53,9 @@ msgid "Save"
 msgstr "சேமி"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "மறைந்துள்ள பிணையம்:"
+msgstr "மறைந்துள்ள பிணையம்"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -68,7 +65,7 @@ msgstr "ஏதுமில்லை"
 #: ui/NetworkSettings.qml:97
 #, kde-format
 msgid "WEP Key"
-msgstr ""
+msgstr "WEP சாவி"
 
 #: ui/NetworkSettings.qml:98
 #, kde-format
@@ -93,17 +90,17 @@ msgstr "உறுதிப்பாடு:"
 #: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "LEAP"
-msgstr ""
+msgstr "LEAP"
 
 #: ui/NetworkSettings.qml:150
 #, kde-format
 msgid "FAST"
-msgstr ""
+msgstr "FAST"
 
 #: ui/NetworkSettings.qml:151
 #, kde-format
@@ -126,10 +123,9 @@ msgid "Manual"
 msgstr "கைமுறை"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP முகவரி:"
+msgstr "IP முகவரி"
 
 #: ui/NetworkSettings.qml:204
 #, kde-format
@@ -144,7 +140,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:241
 #, kde-format
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 #: ui/PasswordField.qml:13
 #, kde-format

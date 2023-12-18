@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2023-12-07 21:19+0530\n"
+"PO-Revision-Date: 2023-12-17 16:21+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -132,10 +132,9 @@ msgid "Export layout to"
 msgstr "தளவமைப்பு ஏற்றுமதி செய்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "தளவமைப்பு ஏற்றுமதி செய்"
+msgstr "தளவமைப்பு இறக்குமதி செய்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311

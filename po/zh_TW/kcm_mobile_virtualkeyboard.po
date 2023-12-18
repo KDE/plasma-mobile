@@ -4,98 +4,100 @@
 # This file is distributed under the same license as the plasma-settings package.
 # Automatically generated, 2022.
 #
+# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:39+0000\n"
-"PO-Revision-Date: 2022-02-18 00:47+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-12-17 17:34+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ui/languages.qml:19
 #, kde-format
 msgid "Languages"
-msgstr ""
+msgstr "語言"
 
 #: ui/languages.qml:44
 #, kde-format
 msgid "Apply"
-msgstr ""
+msgstr "套用"
 
 #: ui/main.qml:20
 #, kde-format
 msgid "On-Screen Keyboard"
-msgstr ""
+msgstr "螢幕上的虛擬鍵盤"
 
 #: ui/main.qml:35
 #, kde-format
 msgid "Type anything here…"
-msgstr ""
+msgstr "在此輸入任何東西…"
 
 #: ui/main.qml:40
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr ""
+msgstr "回饋"
 
 #: ui/main.qml:46
 #, kde-format
 msgid "Sound"
-msgstr ""
+msgstr "音效"
 
 #: ui/main.qml:47
 #, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr ""
+msgstr "是否要在按下按鍵時發出聲音。"
 
 #: ui/main.qml:56
 #, kde-format
 msgid "Vibration"
-msgstr ""
+msgstr "震動"
 
 #: ui/main.qml:57
 #, kde-format
 msgid "Whether to vibrate on keypress."
-msgstr ""
+msgstr "是否要在按下按鍵時震動。"
 
 #: ui/main.qml:64
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr ""
+msgstr "文字校正"
 
 #: ui/main.qml:71
 #, kde-format
 msgid "Check spelling of entered text"
-msgstr ""
+msgstr "檢查輸入文字的拼字"
 
 #: ui/main.qml:80
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
-msgstr ""
+msgstr "讓每句話第一個字母大寫"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
-msgstr ""
+msgstr "按下空白鍵時用第一個建議來補完目前單字"
 
 #: ui/main.qml:98
-#, kde-format
+#, fuzzy, kde-format
 msgid "Suggest potential words in word ribbon"
-msgstr ""
+msgstr "在單字繃帶中建議可能單字"
 
 #: ui/main.qml:109
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
-msgstr ""
+msgstr "按下空白鍵兩次時輸入句點"
 
 #: ui/main.qml:120
 #, kde-format
 msgid "Configure Languages"
-msgstr ""
+msgstr "設定語言"

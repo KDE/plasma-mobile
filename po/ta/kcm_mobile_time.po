@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-12-18 01:59+0000\n"
 "PO-Revision-Date: 2021-10-31 16:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -2924,135 +2924,148 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "பசிபிக்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jan"
 msgstr "ஜன"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Feb"
 msgstr "பிப்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Mar"
 msgstr "மார்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Apr"
 msgstr "ஏப்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "May"
 msgstr "மே"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jun"
 msgstr "ஜூன்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jul"
 msgstr "ஜூலை"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Aug"
 msgstr "ஆக"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Sep"
 msgstr "செப்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Oct"
 msgstr "அக்"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Nov"
 msgstr "நவ"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Dec"
 msgstr "டிச"
 
-#: ui/main.qml:30
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr ""
 
-#: ui/main.qml:36
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr ""
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr ""
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, fuzzy, kde-format
 #| msgid "Timezone:"
 msgid "Timezone"
 msgstr "நேரமண்டலம்:"
 
-#: ui/main.qml:55
+#: ui/main.qml:56
 #, fuzzy, kde-format
 #| msgid "Set Time and Date"
 msgid "Time and Date"
 msgstr "நேரத்தையும் தேதியையும் அமையுங்கள்"
 
-#: ui/main.qml:61
+#: ui/main.qml:62
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr ""
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, fuzzy, kde-format
 #| msgid "Set time automatically:"
 msgid "Whether to set the time automatically."
 msgstr "நேரத்தை தானாக அமை:"
 
-#: ui/main.qml:79
+#: ui/main.qml:80
 #, kde-format
-msgid "Current Time"
+msgid "System Time"
 msgstr ""
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
-msgid "Date"
-msgstr "தேதி"
+msgid "System Date"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "நேரமண்டலத்தை தேர்ந்தெடுத்தல்"
 
-#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "மூடு"
+#: ui/main.qml:167
+#, fuzzy, kde-format
+#| msgid "Pick Date"
+msgid "Pick System Date"
+msgstr "தேதியை தேர்ந்தெடு"
 
-#: ui/main.qml:156
-#, kde-format
-msgid "Pick Time"
+#: ui/main.qml:209
+#, fuzzy, kde-format
+#| msgid "Pick Time"
+msgid "Pick System Time"
 msgstr "நேரத்தை தேர்ந்தெடு"
 
-#: ui/main.qml:201
+#: ui/TimePicker.qml:93
 #, kde-format
-msgid "Pick Date"
-msgstr "தேதியை தேர்ந்தெடு"
+msgid "AM"
+msgstr ""
+
+#: ui/TimePicker.qml:93
+#, kde-format
+msgid "PM"
+msgstr ""
+
+#~ msgid "Date"
+#~ msgstr "தேதி"
+
+#~ msgctxt "@action:button"
+#~ msgid "Close"
+#~ msgstr "மூடு"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

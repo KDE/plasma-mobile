@@ -1,16 +1,16 @@
 # Translation of kcm_mobile_wifi.po to Catalan (Valencian)
-# Copyright (C) 2018-2021 This_file_is_part_of_KDE
+# Copyright (C) 2018-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2019, 2020, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2019, 2020, 2021, 2023.
 # Empar Montoro Martín <montoro_mde@gva.es>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2021-06-21 10:26+0100\n"
+"PO-Revision-Date: 2023-12-17 11:44+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ui/ConnectDialog.qml:136
 #, kde-format
@@ -34,22 +34,20 @@ msgstr "Connecta a"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Edita"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ui/main.qml:117
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Available Networks"
-msgstr "Xarxa oculta:"
+msgstr "Xarxes disponibles"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Afig una connexió nova"
 
@@ -59,10 +57,9 @@ msgid "Save"
 msgstr "Guarda"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Xarxa oculta:"
+msgstr "Xarxa oculta"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -130,63 +127,26 @@ msgid "Manual"
 msgstr "Manual"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "Adreça IP:"
+msgstr "Adreça IP"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Passarel·la:"
+msgstr "Passarel·la"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Llargària del prefix de xarxa:"
+msgstr "Llargària del prefix de xarxa"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS:"
+#, kde-format
 msgid "DNS"
-msgstr "DNS:"
+msgstr "DNS"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Contrasenya…"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "La Wi-Fi està desactivada"
-
-#~ msgid "Enable"
-#~ msgstr "Activa"
-
-#~ msgid "Disable Wi-Fi"
-#~ msgstr "Desactiva la Wi-Fi"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Afig una connexió personalitzada"
-
-#~ msgid "Show Saved Connections"
-#~ msgstr "Mostra les connexions guardades"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Seguretat"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipus de seguretat:"
-
-#~ msgid "Password:"
-#~ msgstr "Contrasenya:"
-
-#~ msgid "IP settings"
-#~ msgstr "Configuració IP"

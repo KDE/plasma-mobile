@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2023-12-18 01:59+0000\n"
 "PO-Revision-Date: 2023-05-07 20:17+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2924,129 +2924,144 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "الهادي"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jan"
 msgstr "يناير"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Feb"
 msgstr "فبراير"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Mar"
 msgstr "مارس"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Apr"
 msgstr "أبريل"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "May"
 msgstr "مايو"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jun"
 msgstr "يونيو"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Jul"
 msgstr "يوليو"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Aug"
 msgstr "أغسطس"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Sep"
 msgstr "سبتمبر"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Oct"
 msgstr "أكتوبر"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Nov"
 msgstr "نوفمبر"
 
-#: ui/DatePicker.qml:121
+#: ui/DatePicker.qml:122
 #, kde-format
 msgid "Dec"
 msgstr "ديسمبر"
 
-#: ui/main.qml:30
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr "العرض"
 
-#: ui/main.qml:36
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr ""
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr ""
 
-#: ui/main.qml:48
+#: ui/main.qml:49
 #, kde-format
 msgid "Timezone"
 msgstr "المنطقة الزمنية"
 
-#: ui/main.qml:55
+#: ui/main.qml:56
 #, kde-format
 msgid "Time and Date"
 msgstr "الوقت والتاريخ"
 
-#: ui/main.qml:61
+#: ui/main.qml:62
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr ""
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr ""
 
-#: ui/main.qml:79
+#: ui/main.qml:80
 #, kde-format
-msgid "Current Time"
-msgstr "الوقت الحاليّ"
+msgid "System Time"
+msgstr ""
 
-#: ui/main.qml:90
+#: ui/main.qml:89
 #, kde-format
-msgid "Date"
-msgstr "التاريخ"
+msgid "System Date"
+msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr ""
 
-#: ui/main.qml:116 ui/main.qml:192 ui/main.qml:237
-#, kde-format
-msgctxt "@action:button"
-msgid "Close"
-msgstr "أغلق"
+#: ui/main.qml:167
+#, fuzzy, kde-format
+#| msgid "Pick Date"
+msgid "Pick System Date"
+msgstr "انتقِ تاريخًا"
 
-#: ui/main.qml:156
+#: ui/main.qml:209
 #, kde-format
-msgid "Pick Time"
+msgid "Pick System Time"
 msgstr ""
 
-#: ui/main.qml:201
+#: ui/TimePicker.qml:93
 #, kde-format
-msgid "Pick Date"
-msgstr "انتقِ تاريخًا"
+msgid "AM"
+msgstr ""
+
+#: ui/TimePicker.qml:93
+#, kde-format
+msgid "PM"
+msgstr ""
+
+#~ msgid "Current Time"
+#~ msgstr "الوقت الحاليّ"
+
+#~ msgid "Date"
+#~ msgstr "التاريخ"
+
+#~ msgctxt "@action:button"
+#~ msgid "Close"
+#~ msgstr "أغلق"
