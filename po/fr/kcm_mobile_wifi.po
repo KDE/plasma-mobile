@@ -127,26 +127,22 @@ msgid "Manual"
 msgstr "Manuel"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "Adresse IP :"
+msgstr "Adresse IP"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Passerelle :"
+msgstr "Passerelle"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Longueur du préfixe réseau :"
+msgstr "Longueur du préfixe réseau"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS"
+#, kde-format
 msgid "DNS"
 msgstr "DNS"
 

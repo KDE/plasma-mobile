@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-12-16 21:14+0100\n"
+"PO-Revision-Date: 2023-12-18 13:50+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -3021,12 +3021,12 @@ msgstr "Automatikusan beállítódjon-e az idő."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Rendszeridő"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Rendszerdátum"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3035,26 +3035,24 @@ msgid "Pick Timezone"
 msgstr "Időzóna-választás"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Válassza ki a dátumot"
+msgstr "Válassza ki a rendszerdátumot"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Válassza ki az időt"
+msgstr "Válassza ki a rendszeridőt"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "DE"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "DU"
 
 #~ msgid "Current Time"
 #~ msgstr "Aktuális idő"

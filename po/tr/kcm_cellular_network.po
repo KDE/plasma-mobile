@@ -776,11 +776,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Operatörünüzün bağlantı ayarları algılanamıyor. Operatörünüzün destek "
+"birimine ulaşarak veya çevrimiçi arama yaparak Erişim Noktası ayarlarınızı "
+"bulun."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "Erişim Noktası Adı Listesi"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -790,13 +793,12 @@ msgstr "Sil"
 #: ui/ProfileList.qml:116
 #, kde-format
 msgid "Add APN"
-msgstr "Erişim Noktası Adı Ekle"
+msgstr "Erişim Noktası Adı ekle"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Erişim Noktası Adını Otomatik Algıla"
+msgstr "Erişim Noktası Adını kendiliğinden algıla"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -999,9 +1001,3 @@ msgstr "SIM Kimliği"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "Acil Durum Numaraları"
-
-#~ msgid "No APNs configured"
-#~ msgstr "Yapılandırılmış Erişim Noktası Adı Yok"
-
-#~ msgid "Add Connection"
-#~ msgstr "Bağlantı Ekle"

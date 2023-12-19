@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-05-10 20:16+0100\n"
+"PO-Revision-Date: 2023-12-18 22:52+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -3022,12 +3022,12 @@ msgstr "Ĉu aŭtomate agordi la tempon."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Sistemtempo"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Sistemdato"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3036,33 +3036,21 @@ msgid "Pick Timezone"
 msgstr "Elekti Horzonon"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Elekti Daton"
+msgstr "Elekti Sistemdaton"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Elekti Tempon"
+msgstr "Elekti Sistemtempon"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
-
-#~ msgid "Current Time"
-#~ msgstr "Nuna Tempo"
-
-#~ msgid "Date"
-#~ msgstr "Dato"
-
-#~ msgctxt "@action:button"
-#~ msgid "Close"
-#~ msgstr "Fermi"
+msgstr "PM"

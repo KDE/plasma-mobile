@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-07-31 13:07+0200\n"
+"PO-Revision-Date: 2023-12-18 10:38+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Configura un punt d'accés"
 
 #: ui/main.qml:77
 #, kde-format
@@ -34,11 +34,13 @@ msgstr "Punt d'accés"
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
 msgstr ""
+"Compartiu la connexió a Internet amb altres dispositius com a una xarxa Wi-"
+"Fi."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Configuració"
 
 #: ui/main.qml:102
 #, kde-format

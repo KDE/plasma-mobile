@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-10-26 13:28+0200\n"
+"PO-Revision-Date: 2023-12-18 10:40+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -3036,12 +3036,12 @@ msgstr "Si s'ha d'establir automàticament la data i l'hora."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Hora del sistema"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Data del sistema"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3050,33 +3050,21 @@ msgid "Pick Timezone"
 msgstr "Seleccioneu la zona horària"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Seleccioneu una data"
+msgstr "Seleccioneu la data del sistema"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Seleccioneu una hora"
+msgstr "Seleccioneu l'hora del sistema"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
-
-#~ msgid "Current Time"
-#~ msgstr "Hora actual"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgctxt "@action:button"
-#~ msgid "Close"
-#~ msgstr "Tanca"
+msgstr "PM"

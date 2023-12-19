@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-11-11 23:31+0300\n"
+"PO-Revision-Date: 2023-12-18 22:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 24.01.80\n"
 
 #: timesettings.cpp:143
 #, kde-format
@@ -25,7 +25,7 @@ msgstr "NTP ayarları değiştirilemiyor"
 #: timesettings.cpp:159
 #, kde-format
 msgid "Unable to set current time"
-msgstr "Geçerli saat ayarlanamıyor"
+msgstr "Geçerli zaman ayarlanamıyor"
 
 #: timesettings.cpp:182
 #, kde-format
@@ -3006,7 +3006,7 @@ msgstr "Zaman Dilimi"
 #: ui/main.qml:56
 #, kde-format
 msgid "Time and Date"
-msgstr "Tarih ve Saat"
+msgstr "Tarih ve Zaman"
 
 #: ui/main.qml:62
 #, kde-format
@@ -3016,17 +3016,17 @@ msgstr "Otomatik Zaman Eşitlemesi"
 #: ui/main.qml:63
 #, kde-format
 msgid "Whether to set the time automatically."
-msgstr "Saatin kendiliğinden ayarlanıp ayarlanmayacağı."
+msgstr "Zamanın kendiliğinden ayarlanıp ayarlanmayacağı."
 
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Sistem Zamanı"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Sistem Tarihi"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3035,26 +3035,24 @@ msgid "Pick Timezone"
 msgstr "Zaman Dilimi Seç"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Tarih Seç"
+msgstr "Sistem Tarihini Seç"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Saat Seç"
+msgstr "Sistem Zamanını Seç"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "ÖÖ"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "ÖS"
 
 #~ msgid "Current Time"
 #~ msgstr "Geçerli Saat"

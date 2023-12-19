@@ -129,13 +129,12 @@ msgstr "Genel"
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgid "Export layout to"
-msgstr "Yerleşimi şuraya dışa aktar"
+msgstr "Şuraya yerleşimi dışa aktar"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "Yerleşimi şuraya dışa aktar"
+msgstr "Şuradan yerleşim içe aktar"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311

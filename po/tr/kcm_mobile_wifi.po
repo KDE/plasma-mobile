@@ -26,29 +26,27 @@ msgstr "Geçersiz giriş."
 #: ui/ConnectionItemDelegate.qml:117
 #, kde-format
 msgid "Connect to"
-msgstr "Bağlan:"
+msgstr "Ağlara Bağlan"
 
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Düzenle"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ui/main.qml:117
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Available Networks"
-msgstr "Gizli Ağ:"
+msgstr "Kullanılabilir Ağlar"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
-msgstr "Yeni bağlantı ekle"
+msgstr "Yeni Bağlantı Ekle"
 
 #: ui/NetworkSettings.qml:36
 #, kde-format
@@ -56,10 +54,9 @@ msgid "Save"
 msgstr "Kaydet"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Gizli Ağ:"
+msgstr "Gizli Ağ"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -127,77 +124,26 @@ msgid "Manual"
 msgstr "Elle"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP Adresi:"
+msgstr "IP Adresi"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Ağ Geçidi:"
+msgstr "Ağ Geçidi"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Ağ önek uzunluğu:"
+msgstr "Ağ önek uzunluğu"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS:"
+#, kde-format
 msgid "DNS"
-msgstr "DNS:"
+msgstr "DNS"
 
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
 msgstr "Parola…"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Kablosuz devre dışı"
-
-#~ msgid "Enable"
-#~ msgstr "Etkinleştir"
-
-#~ msgid "Disable Wi-Fi"
-#~ msgstr "Kablosuzu devre dışı bırak"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Özel Bağlantı Ekle"
-
-#~ msgid "Show Saved Connections"
-#~ msgstr "Kaydedilen Bağlantıları Göster"
-
-#~ msgid "General"
-#~ msgstr "Genel"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Güvenlik"
-
-#~ msgid "Security type:"
-#~ msgstr "Güvenlik türü:"
-
-#~ msgid "Password:"
-#~ msgstr "Parola:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP ayarları"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Emir SARI"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "emir_sari@icloud.com"
-
-#~ msgid "Wi-Fi networks"
-#~ msgstr "Kablosuz ağlar"
-
-#~ msgid "Martin Kacej"
-#~ msgstr "Martin Kacej"

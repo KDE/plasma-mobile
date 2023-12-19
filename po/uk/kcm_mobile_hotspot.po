@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobile_hotspot\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-03-17 14:24+0200\n"
+"PO-Revision-Date: 2023-12-18 16:35+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -23,7 +23,7 @@ msgstr ""
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Налаштовування хот-спота"
 
 #: ui/main.qml:77
 #, kde-format
@@ -34,11 +34,13 @@ msgstr "Хот-спот"
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
 msgstr ""
+"Поділ вашого інтернет з'єднання із іншими пристроями за допомогою мережі Wi-"
+"Fi."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Параметри"
 
 #: ui/main.qml:102
 #, kde-format
