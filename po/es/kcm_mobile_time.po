@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2023.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2023.
+# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-03-14 20:57+0100\n"
+"PO-Revision-Date: 2023-12-19 17:44+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: timesettings.cpp:143
 #, kde-format
@@ -3023,12 +3023,12 @@ msgstr "Indica si se debe ajustar la hora automáticamente."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Hora del sistema"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Fecha del sistema"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3037,26 +3037,24 @@ msgid "Pick Timezone"
 msgstr "Seleccionar zona horaria"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Seleccionar fecha"
+msgstr "Seleccionar fecha del sistema"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Seleccionar hora"
+msgstr "Seleccionar hora del sistema"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #~ msgid "Current Time"
 #~ msgstr "Hora actual"
