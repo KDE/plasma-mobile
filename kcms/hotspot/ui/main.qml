@@ -99,6 +99,7 @@ SimpleKCM {
 
             FormCard.FormTextDelegate {
                 id: hotspotSSIDText
+                enabled: !hotspotToggle.checked
                 text: i18n("Hotspot SSID")
                 description: PlasmaNM.Configuration.hotspotName
             }
@@ -107,6 +108,7 @@ SimpleKCM {
 
             FormCard.FormTextDelegate {
                 id: hotspotPasswordText
+                enabled: !hotspotToggle.checked
                 text: i18n("Hotspot Password")
                 description: PlasmaNM.Configuration.hotspotPassword
             }
@@ -114,6 +116,7 @@ SimpleKCM {
             FormCard.FormDelegateSeparator {}
 
             FormCard.FormButtonDelegate {
+                enabled: !hotspotToggle.checked
                 text: i18n('Configure')
                 onClicked: hotspotDialog.open()
             }
