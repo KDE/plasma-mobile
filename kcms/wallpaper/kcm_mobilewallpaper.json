@@ -1,0 +1,23 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "espidev@gmail.com",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Category": "System Information",
+        "Description": "Change the system wallpaper",
+        "EnabledByDefault": true,
+        "FormFactors": [
+            "handset",
+            "tablet"
+        ],
+        "Icon": "preferences-desktop-wallpaper",
+        "License": "GPL",
+        "Name": "Wallpaper",
+        "Website": "https://plasma-mobile.org/"
+    },
+    "X-KDE-Keywords": "wallpaper",
+    "X-KDE-System-Settings-Parent-Category": "personalization"
+}

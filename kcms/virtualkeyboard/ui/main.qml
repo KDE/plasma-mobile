@@ -21,7 +21,7 @@ KCM.SimpleKCM {
 
     leftPadding: 0
     rightPadding: 0
-    topPadding: 0
+    topPadding: Kirigami.Units.gridUnit
     bottomPadding: Kirigami.Units.gridUnit
 
     ColumnLayout {
@@ -29,8 +29,6 @@ KCM.SimpleKCM {
         width: parent.width
 
         FormCard.FormCard {
-            Layout.topMargin: Kirigami.Units.largeSpacing
-
             FormCard.FormTextFieldDelegate {
                 label: i18n("Type anything here…")
             }
