@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-12-17 11:26\n"
+"PO-Revision-Date: 2023-12-20 11:21\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -773,11 +773,13 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"无法自动检测您的运营商的连接设置。请联系运营商的技术支持或者通过网上搜索找到"
+"该运营商的 APN 设置。"
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN 列表"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -790,8 +792,7 @@ msgid "Add APN"
 msgstr "添加 APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
 msgstr "自动检测 APN"
 
@@ -993,9 +994,3 @@ msgstr "SIM 卡 ID"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr "紧急电话号码"
-
-#~ msgid "No APNs configured"
-#~ msgstr "未配置 APN"
-
-#~ msgid "Add Connection"
-#~ msgstr "添加连接"

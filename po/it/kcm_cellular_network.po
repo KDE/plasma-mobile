@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-09-24 19:16+0200\n"
+"PO-Revision-Date: 2023-12-17 17:23+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -776,11 +776,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Impossibile rilevare automaticamente le impostazioni di connessione per il "
+"tuo operatore. Trova le impostazioni APN del tuo operatore contattando "
+"l'assistenza o effettuando una ricerca in linea."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "Elenco APN"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -793,10 +796,9 @@ msgid "Add APN"
 msgstr "Aggiungi APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Rilevamento automatico APN"
+msgstr "Rileva automaticamente gli APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format

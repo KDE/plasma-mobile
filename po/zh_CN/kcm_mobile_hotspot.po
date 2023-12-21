@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2023-12-17 11:26\n"
+"PO-Revision-Date: 2023-12-20 11:21\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "配置热点"
 
 #: ui/main.qml:77
 #, kde-format
@@ -30,12 +30,12 @@ msgstr "无线热点"
 #: ui/main.qml:78
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
-msgstr ""
+msgstr "将您的互联网连接通过 Wi-Fi 网络共享给其他设备。"
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 #: ui/main.qml:102
 #, kde-format
@@ -46,6 +46,3 @@ msgstr "无线热点 SSID"
 #, kde-format
 msgid "Hotspot Password"
 msgstr "无线热点密码"
-
-#~ msgid "Whether the wireless hotspot is enabled."
-#~ msgstr "是否启用无线热点。"
