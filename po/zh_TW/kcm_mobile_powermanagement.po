@@ -2,281 +2,283 @@
 # plasma-settings 套件的正體中文翻譯.
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Automatically generated, 2022.
 #
+# Automatically generated, 2022.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2022-02-09 00:49+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2023-12-22 05:49+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 24.01.80\n"
 
 #: mobilepower.cpp:27
 #, kde-format
 msgid "30 sec"
-msgstr ""
+msgstr "30 秒"
 
 #: mobilepower.cpp:28
 #, kde-format
 msgid "1 min"
-msgstr ""
+msgstr "1 分鐘"
 
 #: mobilepower.cpp:29
 #, kde-format
 msgid "2 min"
-msgstr ""
+msgstr "2 分鐘"
 
 #: mobilepower.cpp:30
 #, kde-format
 msgid "5 min"
-msgstr ""
+msgstr "5 分鐘"
 
 #: mobilepower.cpp:31
 #, kde-format
 msgid "10 min"
-msgstr ""
+msgstr "10 分鐘"
 
 #: mobilepower.cpp:32
 #, kde-format
 msgid "15 min"
-msgstr ""
+msgstr "15 分鐘"
 
 #: mobilepower.cpp:33
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "永不"
 
 #: ui/BatteryPage.qml:23
 #, kde-format
 msgid "Battery Information"
-msgstr ""
+msgstr "電池資訊"
 
 #: ui/BatteryPage.qml:34
 #, kde-format
 msgid "Usage Graph"
-msgstr ""
+msgstr "用量圖表"
 
 #: ui/BatteryPage.qml:77
 #, kde-format
 msgid "Information"
-msgstr ""
+msgstr "資訊"
 
 #: ui/BatteryPage.qml:83
 #, kde-format
 msgid "Is Rechargeable"
-msgstr ""
+msgstr "可重新充電"
 
 #: ui/BatteryPage.qml:84
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: ui/BatteryPage.qml:84
 #, kde-format
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: ui/BatteryPage.qml:91
 #, kde-format
 msgid "Charge State"
-msgstr ""
+msgstr "充電狀態"
 
 #: ui/BatteryPage.qml:94
 #, kde-format
 msgid "Not charging"
-msgstr ""
+msgstr "未充電"
 
 #: ui/BatteryPage.qml:95
 #, kde-format
 msgid "Charging"
-msgstr ""
+msgstr "充電中"
 
 #: ui/BatteryPage.qml:96
 #, kde-format
 msgid "Discharging"
-msgstr ""
+msgstr "放電中"
 
 #: ui/BatteryPage.qml:97
 #, kde-format
 msgid "Fully charged"
-msgstr ""
+msgstr "已充飽"
 
 #: ui/BatteryPage.qml:98
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: ui/BatteryPage.qml:107
 #, kde-format
 msgid "Current Charge"
-msgstr ""
+msgstr "目前充電"
 
 #: ui/BatteryPage.qml:108 ui/BatteryPage.qml:116
 #, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr ""
+msgstr "%1 %"
 
 #: ui/BatteryPage.qml:115
 #, kde-format
 msgid "Health"
-msgstr ""
+msgstr "健康狀態"
 
 #: ui/BatteryPage.qml:123
 #, kde-format
 msgid "Vendor"
-msgstr ""
+msgstr "廠商"
 
 #: ui/BatteryPage.qml:131
 #, kde-format
 msgid "Model"
-msgstr ""
+msgstr "型號"
 
 #: ui/BatteryPage.qml:139
 #, kde-format
 msgid "Serial Number"
-msgstr ""
+msgstr "序號"
 
 #: ui/BatteryPage.qml:147
 #, kde-format
 msgid "Technology"
-msgstr ""
+msgstr "技術"
 
 #: ui/BatteryPage.qml:150
 #, kde-format
 msgid "Lithium ion"
-msgstr ""
+msgstr "鋰離子電池"
 
 #: ui/BatteryPage.qml:151
 #, kde-format
 msgid "Lithium polymer"
-msgstr ""
+msgstr "鋰離子聚合物電池"
 
 #: ui/BatteryPage.qml:152
 #, kde-format
 msgid "Lithium iron phosphate"
-msgstr ""
+msgstr "鐵鋰電池"
 
 #: ui/BatteryPage.qml:153
 #, kde-format
 msgid "Lead acid"
-msgstr ""
+msgstr "鉛酸蓄電池"
 
 #: ui/BatteryPage.qml:154
 #, kde-format
 msgid "Nickel cadmium"
-msgstr ""
+msgstr "鎳鎘電池"
 
 #: ui/BatteryPage.qml:155
 #, kde-format
 msgid "Nickel metal hydride"
-msgstr ""
+msgstr "鎳氫電池"
 
 #: ui/BatteryPage.qml:156
 #, kde-format
 msgid "Unknown technology"
-msgstr ""
+msgstr "未知技術"
 
 #: ui/Graph.qml:141
 #, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ui/main.qml:33
 #, kde-format
 msgid "Devices"
-msgstr ""
+msgstr "裝置"
 
 #: ui/main.qml:79
 #, kde-format
 msgid "Internal battery"
-msgstr ""
+msgstr "內部電池"
 
 #: ui/main.qml:80
 #, kde-format
 msgid "UPS battery"
-msgstr ""
+msgstr "UPS 電池"
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Monitor battery"
-msgstr ""
+msgstr "顯示器電池"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Mouse battery"
-msgstr ""
+msgstr "滑鼠電池"
 
 #: ui/main.qml:83
 #, kde-format
 msgid "Keyboard battery"
-msgstr ""
+msgstr "鍵盤電池"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "PDA battery"
-msgstr ""
+msgstr "PDA 電池"
 
 #: ui/main.qml:85
 #, kde-format
 msgid "Phone battery"
-msgstr ""
+msgstr "手機電池"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Unknown battery"
-msgstr ""
+msgstr "未知電池"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: ui/main.qml:89
 #, kde-format
 msgctxt "%1 is value, %2 is unit"
 msgid "%1%2"
-msgstr ""
+msgstr "%1%2"
 
 #: ui/main.qml:91
 #, kde-format
 msgctxt "%1 is battery type, %2 is charge percent"
 msgid "%1 %2 (Charging)"
-msgstr ""
+msgstr "%1 %2 (充電中)"
 
 #: ui/main.qml:91
 #, kde-format
 msgctxt "%1 is battery type, %2 is charge percent"
 msgid "%1 %2"
-msgstr ""
+msgstr "%1 %2"
 
 #: ui/main.qml:115
 #, kde-format
 msgid "Screen"
-msgstr ""
+msgstr "螢幕"
 
 #: ui/main.qml:121
 #, kde-format
 msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
-msgstr ""
+msgstr "多久之後將螢幕變暗"
 
 #: ui/main.qml:132
 #, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
-msgstr ""
+msgstr "多久之後關閉螢幕"
 
 #: ui/main.qml:143
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
-msgstr ""
+msgstr "多久之後暫停裝置"
