@@ -72,6 +72,7 @@
         "Description[uk]": "Панель навігації для мобільної Плазми",
         "Description[x-test]": "xxNavigation panel for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma 移动版导航面板",
+        "Description[zh_TW]": "Plasma 行動的導覽面板",
         "Id": "org.kde.plasma.mobile.taskpanel",
         "License": "GPLv2+",
         "Name": "Phone Task panel",
@@ -111,7 +112,7 @@
         "Name[uk]": "Панель завдань телефону",
         "Name[x-test]": "xxPhone Task panelxx",
         "Name[zh_CN]": "手机任务面板",
-        "Name[zh_TW]": "手機工作列"
+        "Name[zh_TW]": "手機工作列面板"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Panel"

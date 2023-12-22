@@ -105,6 +105,7 @@
         "Name[uk]": "Мобільна Плазма",
         "Name[x-test]": "xxPlasma Mobilexx",
         "Name[zh_CN]": "Plasma Mobile",
+        "Name[zh_TW]": "Plasma 行動",
         "Website": "https://plasma-mobile.org"
     },
     "X-Plasma-FallbackPackage": "org.kde.plasma.nano"

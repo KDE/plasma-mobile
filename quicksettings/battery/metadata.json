@@ -108,6 +108,7 @@
         "Name[uk]": "Акумулятор",
         "Name[x-test]": "xxBatteryxx",
         "Name[zh_CN]": "电池",
+        "Name[zh_TW]": "電池",
         "Website": "https://kde.org"
     }
 }

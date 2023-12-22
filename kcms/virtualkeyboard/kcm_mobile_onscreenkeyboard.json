@@ -67,6 +67,7 @@
         "Description[uk]": "Налаштування екранної клавіатури",
         "Description[x-test]": "xxOn-Screen Keyboard configurationxx",
         "Description[zh_CN]": "屏幕键盘配置",
+        "Description[zh_TW]": "螢幕上的虛擬鍵盤設定",
         "FormFactors": [
             "handset",
             "tablet"
@@ -101,6 +102,7 @@
         "Name[uk]": "Екранна клавіатура",
         "Name[x-test]": "xxOn-Screen Keyboardxx",
         "Name[zh_CN]": "屏幕键盘",
+        "Name[zh_TW]": "螢幕上的虛擬鍵盤",
         "Website": "https://plasma-mobile.org"
     },
     "X-KDE-Keywords": "onscreen,osk,virtualkeyboard,keyboard",

@@ -61,6 +61,7 @@
         "Description[uk]": "Хот-спот Wi-Fi",
         "Description[x-test]": "xxWi-Fi Hotspotxx",
         "Description[zh_CN]": "Wi-Fi 热点",
+        "Description[zh_TW]": "Wi-Fi 熱點",
         "EnabledByDefault": true,
         "FormFactors": [
             "handset",
@@ -99,6 +100,7 @@
         "Name[uk]": "Точка доступу",
         "Name[x-test]": "xxHotspotxx",
         "Name[zh_CN]": "无线热点",
+        "Name[zh_TW]": "熱點",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-System-Settings-Parent-Category": "network"

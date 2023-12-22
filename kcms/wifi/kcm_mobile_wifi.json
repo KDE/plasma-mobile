@@ -30,6 +30,7 @@
         "Description[uk]": "Налаштовування бездротової мережі",
         "Description[x-test]": "xxWireless network settingxx",
         "Description[zh_CN]": "无线网络设置",
+        "Description[zh_TW]": "無線網路設定",
         "FormFactors": [
             "handset",
             "tablet",
@@ -71,7 +72,8 @@
         "Name[tr]": "Wi-Fi",
         "Name[uk]": "Wi-Fi",
         "Name[x-test]": "xxWi-Fixx",
-        "Name[zh_CN]": "Wi-Fi"
+        "Name[zh_CN]": "Wi-Fi",
+        "Name[zh_TW]": "Wi-Fi"
     },
     "X-KDE-Keywords": "wifi,network",
     "X-KDE-Keywords[ar]": "واي فاي,شبكة",

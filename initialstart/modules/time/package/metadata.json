@@ -95,6 +95,7 @@
         "Name[uk]": "Час",
         "Name[x-test]": "xxTimexx",
         "Name[zh_CN]": "时间",
+        "Name[zh_TW]": "時間",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

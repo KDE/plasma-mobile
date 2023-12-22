@@ -29,6 +29,7 @@
         "Description[uk]": "Часовий пояс, показ дати",
         "Description[x-test]": "xxTimezone, Date Displayxx",
         "Description[zh_CN]": "时区、日期显示",
+        "Description[zh_TW]": "時區、日期顯示",
         "FormFactors": [
             "handset",
             "tablet",
@@ -64,7 +65,8 @@
         "Name[tr]": "Tarih ve Saat",
         "Name[uk]": "Час і дата",
         "Name[x-test]": "xxTime and Datexx",
-        "Name[zh_CN]": "时间和日期"
+        "Name[zh_CN]": "时间和日期",
+        "Name[zh_TW]": "時間與日期"
     },
     "X-KDE-Keywords": "theme, look, feel",
     "X-KDE-Keywords[ast]": "estilu, aspeutu",

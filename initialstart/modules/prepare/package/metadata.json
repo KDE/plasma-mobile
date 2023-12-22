@@ -94,6 +94,7 @@
         "Name[uk]": "Приготування",
         "Name[x-test]": "xxPreparexx",
         "Name[zh_CN]": "准备",
+        "Name[zh_TW]": "準備",
         "ServiceTypes": [
             "KPackage/GenericQML"
         ],

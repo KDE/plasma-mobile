@@ -29,6 +29,7 @@
         "Description[uk]": "Керування стільниковими мережами",
         "Description[x-test]": "xxManagement of cellular networksxx",
         "Description[zh_CN]": "管理移动网络",
+        "Description[zh_TW]": "行動網路的管理",
         "FormFactors": [
             "handset",
             "tablet",
@@ -63,7 +64,8 @@
         "Name[tr]": "Hücresel Ağ",
         "Name[uk]": "Стільникова мережа",
         "Name[x-test]": "xxCellular Networkxx",
-        "Name[zh_CN]": "移动网络"
+        "Name[zh_CN]": "移动网络",
+        "Name[zh_TW]": "行動網路"
     },
     "X-KDE-Keywords": "mobile,data,network",
     "X-KDE-Keywords[az]": "mobile,data,network,verilənlər,şəbəkə,mobil",
