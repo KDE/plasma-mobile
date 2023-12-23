@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Enol P. <enolp@softastur.org>, 2023.
+# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2023-05-03 23:29+0200\n"
+"PO-Revision-Date: 2023-12-18 10:02+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
-"Language-Team: \n"
+"Language-Team: Assamese <alministradores@softastur.org>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: mobilepower.cpp:27
 #, kde-format
@@ -50,12 +50,12 @@ msgstr ""
 #: mobilepower.cpp:33
 #, kde-format
 msgid "Never"
-msgstr ""
+msgstr "Enxamás"
 
 #: ui/BatteryPage.qml:23
 #, kde-format
 msgid "Battery Information"
-msgstr ""
+msgstr "Información de la batería"
 
 #: ui/BatteryPage.qml:34
 #, kde-format
@@ -65,12 +65,12 @@ msgstr ""
 #: ui/BatteryPage.qml:77
 #, kde-format
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 #: ui/BatteryPage.qml:83
 #, kde-format
 msgid "Is Rechargeable"
-msgstr ""
+msgstr "Ye recargable"
 
 #: ui/BatteryPage.qml:84
 #, kde-format
@@ -115,7 +115,7 @@ msgstr ""
 #: ui/BatteryPage.qml:107
 #, kde-format
 msgid "Current Charge"
-msgstr ""
+msgstr "Carga actual"
 
 #: ui/BatteryPage.qml:108 ui/BatteryPage.qml:116
 #, kde-format
@@ -136,108 +136,108 @@ msgstr ""
 #: ui/BatteryPage.qml:131
 #, kde-format
 msgid "Model"
-msgstr ""
+msgstr "Modelu"
 
 #: ui/BatteryPage.qml:139
 #, kde-format
 msgid "Serial Number"
-msgstr ""
+msgstr "Númberu de serie"
 
 #: ui/BatteryPage.qml:147
 #, kde-format
 msgid "Technology"
-msgstr ""
+msgstr "Teunoloxía"
 
 #: ui/BatteryPage.qml:150
 #, kde-format
 msgid "Lithium ion"
-msgstr ""
+msgstr "Ion de litiu"
 
 #: ui/BatteryPage.qml:151
 #, kde-format
 msgid "Lithium polymer"
-msgstr ""
+msgstr "Polímeru de litiu"
 
 #: ui/BatteryPage.qml:152
 #, kde-format
 msgid "Lithium iron phosphate"
-msgstr ""
+msgstr "Litiu ferrofosfatu"
 
 #: ui/BatteryPage.qml:153
 #, kde-format
 msgid "Lead acid"
-msgstr ""
+msgstr "Plomu ya ácidu"
 
 #: ui/BatteryPage.qml:154
 #, kde-format
 msgid "Nickel cadmium"
-msgstr ""
+msgstr "Níquel ya cadmiu"
 
 #: ui/BatteryPage.qml:155
 #, kde-format
 msgid "Nickel metal hydride"
-msgstr ""
+msgstr "Níquel ya metal d'hidruru"
 
 #: ui/BatteryPage.qml:156
 #, kde-format
 msgid "Unknown technology"
-msgstr ""
+msgstr "Teunoloxía desconocida"
 
 #: ui/Graph.qml:141
 #, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr ""
+msgstr "%1%"
 
 #: ui/main.qml:33
 #, kde-format
 msgid "Devices"
-msgstr ""
+msgstr "Preseos"
 
 #: ui/main.qml:79
 #, kde-format
 msgid "Internal battery"
-msgstr ""
+msgstr "Batería interna"
 
 #: ui/main.qml:80
 #, kde-format
 msgid "UPS battery"
-msgstr ""
+msgstr "Batería del SAI"
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Monitor battery"
-msgstr ""
+msgstr "Batería del monitor"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Mouse battery"
-msgstr ""
+msgstr "Batería del mur"
 
 #: ui/main.qml:83
 #, kde-format
 msgid "Keyboard battery"
-msgstr ""
+msgstr "Batería del tecláu"
 
 #: ui/main.qml:84
 #, kde-format
 msgid "PDA battery"
-msgstr ""
+msgstr "Batería de la PDA"
 
 #: ui/main.qml:85
 #, kde-format
 msgid "Phone battery"
-msgstr ""
+msgstr "Batería del teléfonu"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Unknown battery"
-msgstr ""
+msgstr "Batería desconocida"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "%"
-msgstr ""
+msgstr "%"
 
 #: ui/main.qml:89
 #, kde-format
