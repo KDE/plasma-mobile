@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2019, 2021, 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-18 01:59+0000\n"
-"PO-Revision-Date: 2022-07-31 09:06+0200\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"PO-Revision-Date: 2023-12-23 13:39+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: timesettings.cpp:143
 #, kde-format
@@ -3022,12 +3022,12 @@ msgstr "Określa czy ustawiać czas samoczynnie."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Czas systemowy"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Data systemowa"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3036,26 +3036,24 @@ msgid "Pick Timezone"
 msgstr "Wybierz strefę czasową"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Wybierz datę"
+msgstr "Wybierz datę systemową"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Wybierz czas"
+msgstr "Wybierz czas systemowy"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #~ msgid "Current Time"
 #~ msgstr "Bieżący czas"

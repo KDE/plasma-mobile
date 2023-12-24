@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-18 01:37+0000\n"
-"PO-Revision-Date: 2023-04-09 16:09+0200\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"PO-Revision-Date: 2023-12-23 11:22+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -164,11 +164,9 @@ msgid "Complete!"
 msgstr "Ukończone!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"Twoje urządzenie jest teraz gotowe. <br /><br />Ciesz się <b>Plazmą 6.0</b>!"
+msgstr "Twoje urządzenie jest teraz gotowe. <br /><br />Ciesz się <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -194,7 +192,7 @@ msgstr "Wyświetl skalowanie"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "Ciemny tryb"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -247,10 +245,9 @@ msgid "Password…"
 msgstr "Hasło…"
 
 #: qml/LandingComponent.qml:84
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Witaj w <b>Plazmie</b>"
+msgstr "Witaj w<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:105 qml/Wizard.qml:293
 #, kde-format

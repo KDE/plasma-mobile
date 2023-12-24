@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2023-10-28 09:22+0200\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
+"PO-Revision-Date: 2023-12-23 13:38+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "Usuń"
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "Elementy interfejsu"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
@@ -133,10 +133,9 @@ msgid "Export layout to"
 msgstr "Wyeksportuj układ do"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "Wyeksportuj układ do"
+msgstr "Zaimportuj układ z"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311
