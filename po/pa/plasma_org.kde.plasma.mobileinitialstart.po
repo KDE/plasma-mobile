@@ -1,0 +1,267 @@
+# Copyright (C) 2023 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2023 A S Alam <aalam@punlinux.org>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"PO-Revision-Date: 2023-12-24 09:06-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.4\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "ਅਮਨਪਰੀਤ ਸਿੰਘ ਆਲਮ ੨੦੨੩"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "aalam@punlinux.org"
+
+#: main.cpp:21
+#, kde-format
+msgid "Opens the initial start wizard without modifying configuration"
+msgstr "ਸੰਰਚਨਾ ਬਦਲਣ ਤੋਂ ਬਿਨਾਂ ਸ਼ੁਰੂਆਤੀ ਸਹਾਇਕ ਖੋਲ੍ਹਦਾ ਹੈ"
+
+#: main.cpp:52
+#, kde-format
+msgid "© 2023 KDE Community"
+msgstr "© 2023 ਕੇਡੀਈ ਕਮਿਊਨਟੀ"
+
+#: main.cpp:53
+#, kde-format
+msgid "Devin Lin"
+msgstr "ਡੇਵਿਨ ਲਿਨ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "APN ਸੋਧੋ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
+#, kde-format
+msgid "Name"
+msgstr "ਨਾਂ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
+#, kde-format
+msgid "Username"
+msgstr "ਵਰਤੋਂਕਾਰ-ਨਾਂ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
+#, kde-format
+msgid "Password"
+msgstr "ਪਾਸਵਰਡ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
+#, kde-format
+msgid "Network type"
+msgstr "ਨੈੱਟਵਰਕ ਦੀ ਕਿਸਮ"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "2G"
+msgstr "2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 4G"
+msgstr "ਸਿਰਫ਼ 4G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 3G"
+msgstr "ਸਿਰਫ਼ 3G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 2G"
+msgstr "ਸਿਰਫ਼ 2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Any"
+msgstr "ਕੋਈ ਵੀ"
+
+#: modules/cellular/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Cellular"
+msgstr "ਸੈਲੂਲਰ"
+
+#: modules/cellular/package/contents/ui/main.qml:51
+#: modules/cellular/package/contents/ui/main.qml:59
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਲਈ ਮਾਡਮ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
+
+#: modules/cellular/package/contents/ui/main.qml:53
+#, kde-format
+msgid ""
+"Please configure your APN below for mobile data, further information will be "
+"available with your carrier."
+msgstr "ਮੋਬਾਈਲ ਡਾਟੇ ਲਈ ਹੇਠਾਂ ਆਪਣਾ APN ਸੰਰਚਿਤ ਕਰੋ, ਹੋਰ ਜਾਣਕਾਰੀ ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਤੋਂ ਮਿਲੇਗੀ।"
+
+#: modules/cellular/package/contents/ui/main.qml:55
+#, kde-format
+msgid "You are connected to the mobile network."
+msgstr "ਤੁਸੀਂ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਹੋ।"
+
+#: modules/cellular/package/contents/ui/main.qml:57
+#, kde-format
+msgid "Please insert a SIM card into your device."
+msgstr "ਆਪਣੇ ਡਿਵਾਈਸ ਵਿੱਚ ਸਿਮ ਕਾਰਡ ਪਾਓ।"
+
+#: modules/cellular/package/contents/ui/main.qml:71
+#, kde-format
+msgid "Mobile Data"
+msgstr "ਮੋਬਾਈਲ ਡਾਟਾ"
+
+#: modules/cellular/package/contents/ui/main.qml:114
+#, kde-format
+msgid "Edit"
+msgstr "ਸੋਧੋ"
+
+#: modules/cellular/package/contents/ui/main.qml:122
+#, kde-format
+msgid "Delete"
+msgstr "ਹਟਾਓ"
+
+#: modules/cellular/package/contents/ui/main.qml:131
+#, kde-format
+msgid "Add APN"
+msgstr "APN ਜੋੜੋ"
+
+#: modules/finished/contents/ui/main.qml:15
+#, kde-format
+msgid "Complete!"
+msgstr "ਪੂਰਾ!"
+
+#: modules/finished/contents/ui/main.qml:24
+#, kde-format
+msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
+msgstr "ਤੁਹਾਡਾ ਡਿਵਾਈਸ ਤਿਆਰ ਹੈ। <br /><br /><b>%1</b> ਦਾ ਆਨੰਦ ਮਾਣੋ!"
+
+#: modules/prepare/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Before we get started…"
+msgstr "ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ…"
+
+#: modules/prepare/package/contents/ui/main.qml:40
+#, kde-format
+msgid ""
+"Adjust the screen brightness to be comfortable for the installation process."
+msgstr "ਸਕਰੀਨ ਚਮਕ ਨੂੰ ਇੰਸਟਾਲੇਸ਼ਨ ਕਾਰਵਾਈ ਲਈ ਸੌਖਾ ਰੱਖਣ ਲਈ ਮੁਆਫ਼ਕ ਕਰੋ।"
+
+#: modules/prepare/package/contents/ui/main.qml:96
+#, kde-format
+msgid "Adjust the size of elements on the screen."
+msgstr "ਸਕਰੀਨ ਉੱਤੇ ਚੀਜ਼ਾਂ ਦਾ ਆਕਾਰ ਅਡਜੱਸਟ ਕਰੋ।"
+
+#: modules/prepare/package/contents/ui/main.qml:107
+#, kde-format
+msgid "Display Scaling"
+msgstr "ਡਿਸਪਲੇਅ ਸਕੇਲਿੰਗ"
+
+#: modules/prepare/package/contents/ui/main.qml:125
+#, kde-format
+msgid "Dark Theme"
+msgstr "ਗੂੜ੍ਹਾ ਥੀਮ"
+
+#: modules/time/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Time and Date"
+msgstr "ਸਮਾਂ ਤੇ ਤਾਰੀਖ"
+
+#: modules/time/package/contents/ui/main.qml:36
+#, kde-format
+msgid "Select your time zone and preferred time format."
+msgstr "ਆਪਣਾ ਸਮਾਂ ਖੇਤਰ ਅਤੇ ਪਸੰਦੀਦਾ ਸਮਾਂ ਫਾਰਮੈਟ ਚੁਣੋ।"
+
+#: modules/time/package/contents/ui/main.qml:47
+#, kde-format
+msgid "24-Hour Format"
+msgstr "24-ਘੰਟੇ ਰੂਪ ਵਿੱਚ"
+
+#: modules/wifi/package/contents/ui/ConnectDialog.qml:57
+#, kde-format
+msgid "Invalid input."
+msgstr "ਗਲਤ ਇੰਪੁੱਟ ਹੈ।"
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#, kde-format
+msgid "Connect to"
+msgstr "ਕਨੈਕਟ ਕਰੋ"
+
+#: modules/wifi/package/contents/ui/main.qml:16
+#, kde-format
+msgid "Network"
+msgstr "ਨੈੱਟਵਰਕ"
+
+#: modules/wifi/package/contents/ui/main.qml:68
+#, kde-format
+msgid "Connect to a WiFi network for network access."
+msgstr "ਨੈੱਟਵਰਕ ਪਹੁੰਚ ਲਈ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਕਰੋ।"
+
+#: modules/wifi/package/contents/ui/main.qml:96
+#, kde-format
+msgid "Wi-Fi is disabled"
+msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
+
+#: modules/wifi/package/contents/ui/main.qml:100
+#, kde-format
+msgid "Enable"
+msgstr "ਸਮਰੱਥ"
+
+#: modules/wifi/package/contents/ui/PasswordField.qml:10
+#, kde-format
+msgid "Password…"
+msgstr "ਪਾਸਵਰਡ…"
+
+#: qml/LandingComponent.qml:84
+#, kde-format
+msgid "Welcome to<br/><b>%1</b>"
+msgstr "<br/><b>%1</b> ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
+
+#: qml/LandingComponent.qml:105 qml/Wizard.qml:293
+#, kde-format
+msgid "Next"
+msgstr "ਅੱਗੇ"
+
+#: qml/main.qml:19
+#, kde-format
+msgid "Initial Start"
+msgstr "ਸ਼ੁਰੂਆਤ"
+
+#: qml/Wizard.qml:274
+#, kde-format
+msgid "Back"
+msgstr "ਪਿੱਛੇ"
+
+#: qml/Wizard.qml:310
+#, kde-format
+msgid "Finish"
+msgstr "ਮੁਕੰਮਲ"

@@ -1,26 +1,26 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# A S Alam <aalam@satluj.org>, 2022.
+# SPDX-FileCopyrightText: 2022, 2023 A S Alam <aalam@satluj.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-16 01:38+0000\n"
-"PO-Revision-Date: 2022-06-11 09:01-0700\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2023-12-24 09:12-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "ਫੋਲਡਰ"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -39,32 +39,32 @@ msgstr "ਹਟਾਓ"
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "ਵਿਜੈਟ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਦੀਆਂ ਸੈਟਿੰਗਾਂ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:87
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "ਆਈਕਾਨ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:118
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "ਕਤਾਰਾਂ ਦੀ ਗਿਣਤੀ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:119
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "ਕਾਲਮਾ ਦੀ ਗਿਣਤੀ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:123
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਉੱਤੇ ਆਈਕਾਨਾਂ ਦਾ ਆਕਾਰ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:162
 #, kde-format
@@ -74,37 +74,37 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:166
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "ਮੁੱਖ-ਸਕਰੀਨ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਉੱਤੇ ਲੇਬਲ ਵੇਖਾਓ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:185
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "ਪਸੰਦੀਦਾ ਪੱਟੀ ਵਿੱਚ ਲੇਬਲ ਵੇਖਾਓ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:198
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "ਸਫ਼ਾ ਤਬਦੀਲ ਕਰਨ ਪ੍ਰਭਾਵ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:204
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "ਸਲਾਈਡ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "ਘਣ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:206
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "ਫਿੱਕਾ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
@@ -114,50 +114,50 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "ਘੁੰਮਾਉਣਾ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "ਪਸੰਦੀਦਾ ਪੱਟੀ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "ਆਮ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:274
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "ਲੇਆਉਟ ਐਕਸਪੋਰਟ ਕਰੋ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "ਲੇਆਉਟ ਇੰਪੋਰਟ ਕਰੋ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:304
 #: package/contents/ui/settings/SettingsWindow.qml:311
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "ਐਕਸਪੋਰਟ ਸਥਿਤੀ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:305
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1 ਉੱਤੇ ਐਕਸਪੋਰਟ ਕਰਨ ਲਈ ਫੇਲ੍ਹ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "ਮੁੱਖ-ਸਕਰੀਨ ਲੇਆਉਟ ਨੂੰ %1 ਉੱਤੇ ਕਾਮਯਾਬੀ ਨਾਲ ਐਕਸਪੋਰਟ ਕੀਤਾ ਗਿਆ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:318
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "ਇੰਪੋਰਟ ਕਰਨ ਦੀ ਤਸਦੀਕ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:319
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "ਇਹ ਤੁਹਾਡੇ ਮੌਜੂਦਾ ਮੁੱਖ-ਸਕਰੀਨ ਲੇਆਉਟ ਉੱਤੇ ਲਿਖੇਗਾ!"

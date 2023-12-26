@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# A S Alam <aalam.yellow@gmail.com>, 2020, 2021, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2023 A S Alam <aalam.yellow@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:39+0000\n"
-"PO-Revision-Date: 2023-04-01 20:25-0700\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"PO-Revision-Date: 2023-12-24 09:08-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: ui/languages.qml:19
 #, kde-format
@@ -38,11 +38,10 @@ msgid "Type anything here…"
 msgstr "ਇੱਥੇ ਕੁਝ ਵੀ ਦਿਖਾਓ…"
 
 #: ui/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "ਸੁਝਾਅ:"
+msgstr "ਸੁਝਾਅ"
 
 #: ui/main.qml:46
 #, kde-format
@@ -50,10 +49,9 @@ msgid "Sound"
 msgstr "ਸਾਊਂਡ"
 
 #: ui/main.qml:47
-#, fuzzy, kde-format
-#| msgid "Emit sound on key press"
+#, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਆਵਾਜ਼ ਕੱਢੋ"
+msgstr "ਕੀ ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਆਵਾਜ਼ ਆਵੇ।"
 
 #: ui/main.qml:56
 #, kde-format
@@ -66,11 +64,10 @@ msgid "Whether to vibrate on keypress."
 msgstr "ਸਵਿੱਚ ਦਬਾਉਣ ਉੱਤੇ ਕੰਪਨ ਹੈ।"
 
 #: ui/main.qml:64
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "ਲਿਖਤ ਲਈ ਸੋਧੋ:"
+msgstr "ਲਿਖਤ ਲਈ ਸੋਧੋ"
 
 #: ui/main.qml:71
 #, kde-format
