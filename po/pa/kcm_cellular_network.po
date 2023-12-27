@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# A S Alam <aalam@satluj.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023 A S Alam <aalam@satluj.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-04-01 20:32-0700\n"
-"Last-Translator: A S Alam <aalam@satluj.org>\n"
+"PO-Revision-Date: 2023-12-26 11:05-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -617,8 +617,7 @@ msgid "View data usage."
 msgstr "ਡਾਟਾ ਵਰਤੋ ਵੇਖੋ।"
 
 #: ui/main.qml:122 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
