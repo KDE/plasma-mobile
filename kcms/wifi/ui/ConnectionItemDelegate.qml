@@ -13,7 +13,7 @@ import org.kde.ksvg as KSvg
 import org.kde.kirigamiaddons.formcard 1 as FormCard
 
 FormCard.AbstractFormDelegate {
-    id: delegate
+    id: root
 
     property bool editMode
     property var map : []

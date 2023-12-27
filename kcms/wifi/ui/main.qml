@@ -124,7 +124,7 @@ SimpleKCM {
                     onShouldDisplayChanged: savedCard.updateCount()
                     
                     // separate property for visible since visible is false when the whole card is not visible
-                    visible: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
+                    visible: shouldDisplay
                 }
             }
         }
@@ -135,13 +135,31 @@ SimpleKCM {
         }
 
         FormCard.FormCard {
-            visible: enabledConnections.wirelessEnabled
+            id: availableCard
+            visible: enabledConnections.wirelessEnabled && count > 0
+
+            // number of visible entries
+            property int count: 0
+            function updateCount() {
+                count = 0;
+                for (let i = 0; i < availableRepeater.count; i++) {
+                    let item = availableRepeater.itemAt(i);
+                    if (item && item.shouldDisplay) {
+                        count++;
+                    }
+                }
+            }
 
             Repeater {
+                id: availableRepeater
                 model: mobileProxyModel
                 delegate: ConnectionItemDelegate {
                     editMode: root.editMode
-                    visible: !((Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated)
+
+                    property bool shouldDisplay: !((Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated)
+                    onShouldDisplayChanged: availableCard.updateCount()
+                    
+                    visible: shouldDisplay
                 }
             }
 
