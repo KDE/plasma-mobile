@@ -57,6 +57,14 @@ FormCard.AbstractFormDelegate {
         }
         
         RowLayout {
+            Kirigami.Icon {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                visible: ConnectionState === PlasmaNM.Enums.Activated
+                source: 'checkmark'
+            }
+
             // ensure that the row is always of same height
             Controls.ToolButton {
                 id: heightMetrics
