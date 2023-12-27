@@ -51,9 +51,12 @@ Item {
     }
 
     ColumnLayout {
-        anchors.fill: parent
-        anchors.topMargin: Kirigami.Units.gridUnit
-        anchors.bottomMargin: Kirigami.Units.largeSpacing
+        anchors {
+            fill: parent
+            topMargin: Kirigami.Units.gridUnit
+            bottomMargin: Kirigami.Units.largeSpacing
+        }
+
         width: root.width
         spacing: Kirigami.Units.gridUnit
 
@@ -69,41 +72,56 @@ Item {
         }
 
         FormCard.FormCard {
+            id: savedCard
             maximumWidth: root.cardWidth
+            visible: enabledConnections.wirelessEnabled && count > 0
 
+            // number of visible entries
+            property int count: 0
+            function updateCount() {
+                count = 0;
+                for (let i = 0; i < connectedRepeater.count; i++) {
+                    let item = connectedRepeater.itemAt(i);
+                    if (item && item.shouldDisplay) {
+                        count++;
+                    }
+                }
+            }
+
+            Repeater {
+                id: connectedRepeater
+                model: mobileProxyModel
+                delegate: ConnectionItemDelegate {
+                    editMode: false
+                    
+                    // connected or saved
+                    property bool shouldDisplay: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
+                    onShouldDisplayChanged: savedCard.updateCount()
+                    
+                    // separate property for visible since visible is false when the whole card is not visible
+                    visible: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
+                }
+            }
+        }
+
+        FormCard.FormCard {
             Layout.fillHeight: true
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            Layout.fillWidth: true
+            maximumWidth: root.cardWidth
+            visible: enabledConnections.wirelessEnabled
 
             ListView {
                 id: listView
-                currentIndex: -1
+
                 clip: true
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-
-                section.property: "Section"
-                section.delegate: Kirigami.ListSectionHeader {
-                    text: section
-                }
-
                 model: mobileProxyModel
 
-                Kirigami.PlaceholderMessage {
-                    anchors.centerIn: parent
-                    width: parent.width - (Kirigami.Units.gridUnit * 4)
-                    visible: !enabledConnections.wirelessEnabled
-                    text: i18n("Wi-Fi is disabled")
-                    icon.name: "network-wireless-disconnected"
-                    helpfulAction: Kirigami.Action {
-                        icon.name: "network-wireless-connected"
-                        text: i18n("Enable")
-                        onTriggered: handler.enableWireless(true)
-                    }
-                }
-
                 delegate: ConnectionItemDelegate {
-                    width: listView.width
+                    width: ListView.view.width
+                    editMode: false
+                    height: visible ? implicitHeight : 0
+                    visible: !((Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated)
                 }
             }
         }
