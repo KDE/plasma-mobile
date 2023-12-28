@@ -70,9 +70,12 @@ void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
 
     const QList<int> activateBorders = {ElectricBorder::ElectricBottom};
     for (const int &border : activateBorders) {
-        m_borderActivate.append(ElectricBorder(border));
-        effects->reserveElectricBorder(ElectricBorder(border), this);
+        ElectricBorder electricBorder = ElectricBorder(border);
+        m_borderActivate.append(electricBorder);
+        effects->reserveElectricBorder(electricBorder, this);
     }
+
+    m_border->setBorders(activateBorders);
 }
 
 int MobileTaskSwitcherEffect::requestedEffectChainPosition() const
@@ -82,10 +85,7 @@ int MobileTaskSwitcherEffect::requestedEffectChainPosition() const
 
 bool MobileTaskSwitcherEffect::borderActivated(ElectricBorder border)
 {
-    if (m_borderActivate.contains(border)) {
-        return true;
-    }
-    return false;
+    return m_borderActivate.contains(border);
 }
 
 void MobileTaskSwitcherEffect::grabbedKeyboardEvent(QKeyEvent *keyEvent)
