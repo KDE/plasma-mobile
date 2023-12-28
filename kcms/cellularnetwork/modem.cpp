@@ -438,7 +438,7 @@ void Modem::addDetectedProfileSettings()
         return;
     }
 
-    if (!hasSim()) {
+    if (!hasSim() || !m_mmModem->sim()) {
         qWarning() << "No SIM found, cannot detect profile settings";
         return;
     }
@@ -451,7 +451,7 @@ void Modem::addDetectedProfileSettings()
     bool found = false;
     static MobileProviders mobileProviders{};
 
-    QString operatorCode = m_mm3gppDevice->operatorCode();
+    QString operatorCode = m_mmModem->sim()->operatorIdentifier();
     qWarning() << QStringLiteral("Detecting profile settings. Using MCCMNC:") << operatorCode;
 
     // lookup apns with mccmnc codes
