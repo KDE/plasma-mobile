@@ -182,10 +182,13 @@ ColumnLayout {
         // hence set it to some random value initially
         property string sourceFile: "tbd"
         onSourceFileChanged: {
-            if (sourceFile) {
-                var props = {}
+            var wallpaperConfig = configDialog.wallpaperConfiguration;
 
-                var wallpaperConfig = configDialog.wallpaperConfiguration
+            if (wallpaperConfig && sourceFile) {
+                var props = {
+                    'configDialog': configDialog
+                }
+
                 for (var key in wallpaperConfig) {
                     props["cfg_" + key] = wallpaperConfig[key]
                 }
