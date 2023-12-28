@@ -69,7 +69,6 @@
             "mediacenter"
         ],
         "Icon": "network-wireless-hotspot",
-        "Id": "kcm_mobile_hotspot",
         "License": "GPL",
         "Name": "Hotspot",
         "Name[ar]": "هوت-سبوت",
