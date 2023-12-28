@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-11-10 18:23+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -216,7 +216,7 @@ msgstr "24-годинний формат"
 msgid "Invalid input."
 msgstr "Некоректні вхідні дані."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "З’єднатися з"
@@ -226,20 +226,10 @@ msgstr "З’єднатися з"
 msgid "Network"
 msgstr "Мережа"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "З'єднатися з мережею WiFi для доступу до мережі."
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi вимкнено"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "Увімкнути"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -270,3 +260,9 @@ msgstr "Назад"
 #, kde-format
 msgid "Finish"
 msgstr "Завершити"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi вимкнено"
+
+#~ msgid "Enable"
+#~ msgstr "Увімкнути"

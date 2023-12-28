@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-17 01:36+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2019-11-12 21:55+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr ""
 
-#: ui/ConnectionItemDelegate.qml:117
+#: ui/ConnectionItemDelegate.qml:125
 #, fuzzy, kde-format
 #| msgid "Connection Editor"
 msgid "Connect to"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr ""
 
-#: ui/main.qml:117
+#: ui/main.qml:134
 #, fuzzy, kde-format
 #| msgid "Hide this network"
 msgid "Available Networks"

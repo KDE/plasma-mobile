@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-17 01:36+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-12-17 08:58+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr "Sarrera baliogabea."
 
-#: ui/ConnectionItemDelegate.qml:117
+#: ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "Konektatu hona:"
@@ -40,7 +40,7 @@ msgstr "Editatu"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ui/main.qml:117
+#: ui/main.qml:134
 #, kde-format
 msgid "Available Networks"
 msgstr "Sare erabilgarriak"

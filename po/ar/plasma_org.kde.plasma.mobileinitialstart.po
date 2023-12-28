@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-05-07 20:46+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -212,7 +212,7 @@ msgstr ""
 msgid "Invalid input."
 msgstr "إدخال غير صحيح."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "متصل ب"
@@ -222,20 +222,10 @@ msgstr "متصل ب"
 msgid "Network"
 msgstr "الشبكة"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr ""
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr ""
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "مكّن"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -266,3 +256,6 @@ msgstr "عُد"
 #, kde-format
 msgid "Finish"
 msgstr "أنهِ"
+
+#~ msgid "Enable"
+#~ msgstr "مكّن"

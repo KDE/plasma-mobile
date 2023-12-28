@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-11-12 10:43+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -217,7 +217,7 @@ msgstr "Formato di 24 ore"
 msgid "Invalid input."
 msgstr "Input non valido."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "Connetti a"
@@ -227,20 +227,10 @@ msgstr "Connetti a"
 msgid "Network"
 msgstr "Rete"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Connettiti a una rete Wi-Fi per l'accesso alla rete."
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Il Wi-Fi è disabilitato"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "Abilita"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -271,3 +261,9 @@ msgstr "Indietro"
 #, kde-format
 msgid "Finish"
 msgstr "Fine"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Il Wi-Fi è disabilitato"
+
+#~ msgid "Enable"
+#~ msgstr "Abilita"

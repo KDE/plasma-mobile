@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-04-02 16:37+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -212,7 +212,7 @@ msgstr "24-tuntinen kello"
 msgid "Invalid input."
 msgstr "Virheellinen syöte."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "Yhdistä"
@@ -222,20 +222,10 @@ msgstr "Yhdistä"
 msgid "Network"
 msgstr "Verkko"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Yhdistä verkkoyhteyttä varten langattomaan verkkoon."
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Langaton verkko ei ole käytössä"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "Käytä"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -267,3 +257,9 @@ msgstr "Takaisin"
 #, kde-format
 msgid "Finish"
 msgstr "Viimeistele"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Langaton verkko ei ole käytössä"
+
+#~ msgid "Enable"
+#~ msgstr "Käytä"

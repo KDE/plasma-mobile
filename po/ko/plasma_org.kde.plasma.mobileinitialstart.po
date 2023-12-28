@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-07-26 00:13+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -215,7 +215,7 @@ msgstr "24시간제 형식"
 msgid "Invalid input."
 msgstr "잘못 입력했습니다."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "다음에 연결"
@@ -225,20 +225,10 @@ msgstr "다음에 연결"
 msgid "Network"
 msgstr "네트워크"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "네트워크 접근을 위해서 Wi-Fi 네트워크에 연결합니다."
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi가 비활성화됨"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "활성화"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -270,3 +260,9 @@ msgstr "뒤로"
 #, kde-format
 msgid "Finish"
 msgstr "완료"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi가 비활성화됨"
+
+#~ msgid "Enable"
+#~ msgstr "활성화"

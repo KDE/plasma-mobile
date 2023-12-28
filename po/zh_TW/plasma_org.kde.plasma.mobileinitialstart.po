@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-12-22 05:41+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -211,7 +211,7 @@ msgstr "24 時制"
 msgid "Invalid input."
 msgstr "無效輸入。"
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "連線到"
@@ -221,20 +221,10 @@ msgstr "連線到"
 msgid "Network"
 msgstr "網路"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "連線到 WiFi 網路來存取網路。"
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi 已停用"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "啟用"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -265,3 +255,9 @@ msgstr "返回"
 #, kde-format
 msgid "Finish"
 msgstr "完成"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi 已停用"
+
+#~ msgid "Enable"
+#~ msgstr "啟用"

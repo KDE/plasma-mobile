@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-12-24 09:06-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -211,7 +211,7 @@ msgstr "24-ਘੰਟੇ ਰੂਪ ਵਿੱਚ"
 msgid "Invalid input."
 msgstr "ਗਲਤ ਇੰਪੁੱਟ ਹੈ।"
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "ਕਨੈਕਟ ਕਰੋ"
@@ -221,20 +221,10 @@ msgstr "ਕਨੈਕਟ ਕਰੋ"
 msgid "Network"
 msgstr "ਨੈੱਟਵਰਕ"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "ਨੈੱਟਵਰਕ ਪਹੁੰਚ ਲਈ ਵਾਈ-ਫਾਈ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਕਰੋ।"
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "ਸਮਰੱਥ"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -265,3 +255,9 @@ msgstr "ਪਿੱਛੇ"
 #, kde-format
 msgid "Finish"
 msgstr "ਮੁਕੰਮਲ"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "ਵਾਈ-ਫ਼ਾਈ ਅਸਮਰੱਥ ਹੈ"
+
+#~ msgid "Enable"
+#~ msgstr "ਸਮਰੱਥ"

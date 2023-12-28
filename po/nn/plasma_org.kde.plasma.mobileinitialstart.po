@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-05-27 14:48+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -219,7 +219,7 @@ msgstr "24-times format"
 msgid "Invalid input."
 msgstr "Ugyldige inndata."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "Kopla til"
@@ -229,20 +229,10 @@ msgstr "Kopla til"
 msgid "Network"
 msgstr "Nettverk"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Kopla til Wi-Fi-nettverk for tilgang til nettet."
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi er slått av"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "Slå på"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -274,3 +264,9 @@ msgstr "Tilbake"
 #, kde-format
 msgid "Finish"
 msgstr "Fullfør"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi er slått av"
+
+#~ msgid "Enable"
+#~ msgstr "Slå på"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-11-08 14:25+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -211,7 +211,7 @@ msgstr "24-hodinový formát"
 msgid "Invalid input."
 msgstr "Neplatný vstup."
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "Připojit se k"
@@ -221,20 +221,10 @@ msgstr "Připojit se k"
 msgid "Network"
 msgstr "Síť"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr ""
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi je zakázána"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "Povolit"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -265,3 +255,9 @@ msgstr "Zpět"
 #, kde-format
 msgid "Finish"
 msgstr "Dokončit"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi je zakázána"
+
+#~ msgid "Enable"
+#~ msgstr "Povolit"

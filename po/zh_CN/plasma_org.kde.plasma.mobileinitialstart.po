@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-18 01:37+0000\n"
+"POT-Creation-Date: 2023-12-28 01:34+0000\n"
 "PO-Revision-Date: 2023-12-23 08:00\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -212,7 +212,7 @@ msgstr "24 小时格式"
 msgid "Invalid input."
 msgstr "输入的内容无效。"
 
-#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:41
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
 #, kde-format
 msgid "Connect to"
 msgstr "连接到"
@@ -222,20 +222,10 @@ msgstr "连接到"
 msgid "Network"
 msgstr "网络"
 
-#: modules/wifi/package/contents/ui/main.qml:68
+#: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "连接到 WiFi 网络以访问互联网。"
-
-#: modules/wifi/package/contents/ui/main.qml:96
-#, kde-format
-msgid "Wi-Fi is disabled"
-msgstr "Wi-Fi 已禁用"
-
-#: modules/wifi/package/contents/ui/main.qml:100
-#, kde-format
-msgid "Enable"
-msgstr "启用"
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -266,3 +256,9 @@ msgstr "上一步"
 #, kde-format
 msgid "Finish"
 msgstr "完成"
+
+#~ msgid "Wi-Fi is disabled"
+#~ msgstr "Wi-Fi 已禁用"
+
+#~ msgid "Enable"
+#~ msgstr "启用"
