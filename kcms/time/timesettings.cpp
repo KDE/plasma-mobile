@@ -26,6 +26,9 @@
 #include <KSharedConfig>
 #include <utility>
 
+#include <QCoroDBus>
+#include <QCoroTask>
+
 #include "timedated_interface.h"
 
 #define FORMAT24H "HH:mm:ss"
@@ -125,46 +128,46 @@ void TimeSettings::setUseNtp(bool ntp)
     }
 }
 
-bool TimeSettings::saveTime()
+void TimeSettings::saveTime()
 {
-    OrgFreedesktopTimedate1Interface timedateIface(QStringLiteral("org.freedesktop.timedate1"),
-                                                   QStringLiteral("/org/freedesktop/timedate1"),
-                                                   QDBusConnection::systemBus());
+    auto timedateIface = std::make_shared<OrgFreedesktopTimedate1Interface>(QStringLiteral("org.freedesktop.timedate1"),
+                                                                            QStringLiteral("/org/freedesktop/timedate1"),
+                                                                            QDBusConnection::systemBus());
 
-    bool rc = true;
     // final arg in each method is "user-interaction" i.e whether it's OK for polkit to ask for auth
 
     // we cannot send requests up front then block for all replies as we need NTP to be disabled before we can make a call to SetTime
     // timedated processes these in parallel and will return an error otherwise
 
-    auto reply = timedateIface.SetNTP(m_useNtp, true);
-    reply.waitForFinished();
-    if (reply.isError()) {
-        m_errorString = i18n("Unable to change NTP settings");
-        emit errorStringChanged();
-        qWarning() << "Failed to enable NTP" << reply.error().name() << reply.error().message();
-        rc = false;
-    }
-
-    if (!useNtp()) {
-        QDateTime userTime;
-        userTime.setTime(currentTime());
-        userTime.setDate(currentDate());
-        qDebug() << "Setting userTime: " << userTime;
-        qint64 timeDiff = userTime.toMSecsSinceEpoch() - QDateTime::currentMSecsSinceEpoch();
-        //*1000 for milliseconds -> microseconds
-        auto reply = timedateIface.SetTime(timeDiff * 1000, true, true);
-        reply.waitForFinished();
-        if (reply.isError()) {
-            m_errorString = i18n("Unable to set current time");
+    auto reply = timedateIface->SetNTP(m_useNtp, true);
+    auto r = reply;
+    QCoro::connect(std::move(reply), this, [=, this]() {
+        if (r.isError()) {
+            m_errorString = i18n("Unable to change NTP settings");
             emit errorStringChanged();
-            qWarning() << "Failed to set current time" << reply.error().name() << reply.error().message();
-            rc = false;
+            qWarning() << "Failed to enable NTP" << r.error().name() << r.error().message();
         }
-    }
-    saveTimeZone(m_timezone);
 
-    return rc;
+        if (!useNtp()) {
+            QDateTime userTime;
+            userTime.setTime(currentTime());
+            userTime.setDate(currentDate());
+            qDebug() << "Setting userTime: " << userTime;
+            qint64 timeDiff = userTime.toMSecsSinceEpoch() - QDateTime::currentMSecsSinceEpoch();
+
+            //*1000 for milliseconds -> microseconds
+            auto reply = timedateIface->SetTime(timeDiff * 1000, true, true);
+            auto r = reply;
+            QCoro::connect(std::move(reply), this, [=, this]() {
+                if (r.isError()) {
+                    m_errorString = i18n("Unable to set current time");
+                    emit errorStringChanged();
+                    qWarning() << "Failed to set current time" << r.error().name() << r.error().message();
+                }
+            });
+        }
+        saveTimeZone(m_timezone);
+    });
 }
 
 void TimeSettings::saveTimeZone(const QString &newtimezone)
@@ -177,17 +180,19 @@ void TimeSettings::saveTimeZone(const QString &newtimezone)
     if (!newtimezone.isEmpty()) {
         qDebug() << "Setting timezone: " << newtimezone;
         auto reply = timedateIface.SetTimezone(newtimezone, true);
-        reply.waitForFinished();
-        if (reply.isError()) {
-            m_errorString = i18n("Unable to set timezone");
-            emit errorStringChanged();
-            qWarning() << "Failed to set timezone" << reply.error().name() << reply.error().message();
-        }
+        auto r = reply;
+        QCoro::connect(std::move(reply), this, [=, this]() {
+            if (r.isError()) {
+                m_errorString = i18n("Unable to set timezone");
+                emit errorStringChanged();
+                qWarning() << "Failed to set timezone" << r.error().name() << r.error().message();
+            } else {
+                setTimeZone(newtimezone);
+                emit timeZoneChanged();
+                notify();
+            }
+        });
     }
-
-    setTimeZone(newtimezone);
-    emit timeZoneChanged();
-    notify();
 }
 
 QString TimeSettings::timeFormat()

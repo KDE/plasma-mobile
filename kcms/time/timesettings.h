@@ -20,6 +20,9 @@
 
 #include <KQuickConfigModule>
 
+#include <QCoroQmlTask>
+#include <QCoroTask>
+
 #include "timezonemodel.h"
 
 // #include "settingsmodule.h"
@@ -73,9 +76,9 @@ public Q_SLOTS:
     void setTimeFormat(const QString &timeFormat);
     void setTwentyFour(bool t);
     void timeout();
-    bool saveTime();
+    void saveTime();
     void notify();
-    Q_INVOKABLE void saveTimeZone(const QString &newtimezone);
+    void saveTimeZone(const QString &newtimezone);
 
 Q_SIGNALS:
     void currentTimeTextChanged();

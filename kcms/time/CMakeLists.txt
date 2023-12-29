@@ -19,5 +19,7 @@ target_link_libraries(kcm_mobile_time PRIVATE
     KF6::KCMUtilsQuick
     KF6::ConfigCore
     KF6::I18n
+    QCoro6::Core
+    QCoro6::DBus
 )
 
