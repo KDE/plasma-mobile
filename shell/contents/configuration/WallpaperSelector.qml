@@ -2,9 +2,9 @@
 // SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
-import QtQuick 2.12
-import QtQuick.Layouts 1.0
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Window
 import QtQuick.Controls 2.3 as Controls
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.configuration 2.0
@@ -20,11 +20,6 @@ Controls.Drawer {
     
     required property bool horizontal
 
-    onClosed: {
-        if (!root.appComponent.visible) {
-            configDialog.close()
-        }
-    }
     onOpened: {
         wallpapersView.forceActiveFocus()
     }
@@ -46,7 +41,7 @@ Controls.Drawer {
         keyNavigationEnabled: true
         highlightFollowsCurrentItem: true
         snapMode: ListView.SnapToItem
-        model: imageWallpaper.slidePaths
+        model: imageWallpaper.wallpaperModel
         // onCountChanged: currentIndex =  Math.min(model.indexOf(configDialog.wallpaperConfiguration["Image"]), model.rowCount()-1)
         headerPositioning: ListView.PullBackHeader
 
