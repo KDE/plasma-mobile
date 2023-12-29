@@ -37,7 +37,8 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
         {"Plugins", {{"blurEnabled", false}, {"convergentwindowsEnabled", true}}},
         {"Wayland", {{"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, {"VirtualKeyboardEnabled", true}}},
         {"org.kde.kdecoration2",
-         {{"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}}}, // ButtonsOnRight changes depending on whether the device is in convergence mode
+         {{"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}, // ButtonsOnRight changes depending on whether the device is in convergence mode
+          {"NoPlugin", false}}},
         {"Input", {{"TabletMode", convergenceModeEnabled ? "off" : "auto"}}} // TabletMode changes depending on whether the device is in convergence mode
     };
 }
