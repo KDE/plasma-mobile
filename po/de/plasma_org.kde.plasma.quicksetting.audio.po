@@ -1,15 +1,15 @@
 # German translations for plasma-mobile package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023 Johannes Obermayr <johannesobermayr@gmx.de>
 # Automatically generated, 2023.
 #
-# Johannes Obermayr <johannesobermayr@gmx.de>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-18 02:34+0000\n"
-"PO-Revision-Date: 2023-12-17 20:18+0100\n"
+"PO-Revision-Date: 2023-12-21 18:16+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: contents/ui/main.qml:11
 #, kde-format
 msgid "Sound"
-msgstr "Audio"
+msgstr "Klang"
 
 #: contents/ui/main.qml:13
 #, kde-format
