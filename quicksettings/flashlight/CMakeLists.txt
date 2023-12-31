@@ -19,6 +19,7 @@ target_link_libraries(flashlightplugin
     KF6::ConfigGui
     KF6::I18n
     KF6::Notifications
+    udev
 )
 
 set_property(TARGET flashlightplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/flashlight)

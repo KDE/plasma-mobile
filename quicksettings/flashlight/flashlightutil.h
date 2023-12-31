@@ -7,6 +7,7 @@
 #pragma once
 
 #include <QObject>
+#include <libudev.h>
 
 class FlashlightUtil : public QObject
 {
@@ -16,6 +17,7 @@ class FlashlightUtil : public QObject
 
 public:
     FlashlightUtil(QObject *parent = nullptr);
+    ~FlashlightUtil();
 
     Q_INVOKABLE void toggleTorch();
     bool torchEnabled() const;
@@ -25,5 +27,10 @@ Q_SIGNALS:
     void torchChanged(bool value);
 
 private:
-    bool m_torchEnabled;
+    struct udev_device *m_device{nullptr};
+    const char *m_maxBrightness{nullptr};
+    bool m_isAvailable{false};
+    bool m_torchEnabled{false};
+
+    void findTorchDevice();
 };
