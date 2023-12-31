@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 01:59+0000\n"
+"POT-Creation-Date: 2023-12-31 01:55+0000\n"
 "PO-Revision-Date: 2023-06-13 22:25+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -16,17 +16,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.07.70\n"
 
-#: timesettings.cpp:143
+#: timesettings.cpp:146
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "NTP-Einstellungen  können nicht geändert werden"
 
-#: timesettings.cpp:159
+#: timesettings.cpp:163
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Die aktuelle Zeit kann nicht eingestellt werden"
 
-#: timesettings.cpp:182
+#: timesettings.cpp:186
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Es kann keine Zeitzone eingestellt werden"

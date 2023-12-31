@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 01:59+0000\n"
+"POT-Creation-Date: 2023-12-31 01:55+0000\n"
 "PO-Revision-Date: 2023-12-22 05:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -21,17 +21,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 24.01.80\n"
 
-#: timesettings.cpp:143
+#: timesettings.cpp:146
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "無法變更 NTP 設定"
 
-#: timesettings.cpp:159
+#: timesettings.cpp:163
 #, kde-format
 msgid "Unable to set current time"
 msgstr "無法設定目前時間"
 
-#: timesettings.cpp:182
+#: timesettings.cpp:186
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "無法設定時區"
