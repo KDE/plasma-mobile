@@ -27,68 +27,69 @@ KCM.SimpleKCM {
         FormCard.FormCard {
             id: generalCard
 
-            FormCard.FormComboBoxDelegate {
-                id: wallpaperPluginSelectComboBox
-                text: i18nd("plasma_shell_org.kde.plasma.desktop", "Wallpaper Plugin")
-                description: i18n("The wallpaper plugin to use.")
-
-                model: WallpaperImagePlugin.WallpaperPlugin.wallpaperPluginModel
-                textRole: "name"
-                valueRole: "pluginName"
-                currentIndex: determineCurrentIndex()
-
-                property string currentWallpaperPlugin: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin
-
-                onCurrentIndexChanged: {
-                    var model = WallpaperImagePlugin.WallpaperPlugin.wallpaperPluginModel.get(currentIndex);
-                    currentWallpaperPlugin = model.pluginName;
-                }
-
-                function determineCurrentIndex() {
-                    for (var i = 0; i < WallpaperImagePlugin.WallpaperPlugin.wallpaperPluginModel.count; ++i) {
-                        var data = WallpaperImagePlugin.WallpaperPlugin.wallpaperPluginModel.get(i);
-                        if (currentWallpaperPlugin === data.pluginName) {
-                            return i;
-                        }
+            FormCard.FormButtonDelegate {
+                id: homescreenWallpaper
+                text: i18n("Change homescreen wallpaper")
+                onClicked: {
+                    if (!homescreenPage.active) {
+                        homescreenPage.active = true;
                     }
-                    return -1;
+                    kcm.push(homescreenPage.item);
                 }
             }
 
-            FormCard.FormDelegateSeparator { above: wallpaperPluginSelectComboBox }
+            FormCard.FormDelegateSeparator { above: homescreenWallpaper; below: lockscreenWallpaper }
 
-            FormCard.FormTextDelegate {
-                text: i18n("Get a new wallpaper plugin")
-                trailing: NewStuff.Button {
-                    configFile: "wallpaperplugin.knsrc"
-                    text: i18n("Get New Plugins…")
-                    visibleWhenDisabled: true // don't hide on disabled
+            FormCard.FormButtonDelegate {
+                id: lockscreenWallpaper
+                text: i18n("Change lockscreen wallpaper")
+                onClicked: {
+                    if (!lockscreenPage.active) {
+                        lockscreenPage.active = true;
+                    }
+                    kcm.push(lockscreenPage.item);
                 }
             }
         }
 
-        // FormCard.FormHeader {
-        //     visible: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin === "org.kde.image" // TODO
-        //     title: i18n("Wallpaper Selector")
-        // }
+        Loader {
+            id: homescreenPage
+            active: false
+            sourceComponent: WallpaperConfigPage {
+                title: i18n("Homescreen Wallpaper")
+                
+                currentWallpaperPlugin: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin
+                currentWallpaperPluginSource: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPluginSource
+                wallpaperPluginConfig: WallpaperImagePlugin.WallpaperPlugin.homescreenConfiguration
 
-        // FormCard.FormCard {
-        //     visible: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin === "org.kde.image"// TODO
-        // }
+                onRequestSave: {
+                    WallpaperImagePlugin.WallpaperPlugin.saveHomescreenSettings();
+                }
 
-        WallpaperImagePlugin.WallpaperPluginConfigLoader {
-            id: wallpaperPluginConfig
-            // visible: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin !== "org.kde.image" // TODO
-            Layout.fillWidth: true
-            Layout.leftMargin: Kirigami.Units.largeSpacing
-            Layout.rightMargin: Kirigami.Units.largeSpacing
-            Layout.fillHeight: true
-            Layout.preferredHeight: root.height - generalCard.height - 70
+                onRequestChangeWallpaperPlugin: (name) => {
+                    WallpaperImagePlugin.WallpaperPlugin.setHomescreenWallpaperPlugin(name);
+                }
+            }
+        }
 
-            wallpaperPlugin: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPlugin
-            wallpaperPluginSource: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPluginSource
-            wallpaperPluginConfig: WallpaperImagePlugin.WallpaperPlugin.homescreenConfiguration
-            wallpaperPluginModel: WallpaperImagePlugin.WallpaperPlugin.wallpaperPluginModel
+        Loader {
+            id: lockscreenPage
+            active: false
+            sourceComponent: WallpaperConfigPage {
+                title: i18n("Lockscreen Wallpaper")
+
+                currentWallpaperPlugin: WallpaperImagePlugin.WallpaperPlugin.lockscreenWallpaperPlugin
+                currentWallpaperPluginSource: WallpaperImagePlugin.WallpaperPlugin.lockscreenWallpaperPluginSource
+                wallpaperPluginConfig: WallpaperImagePlugin.WallpaperPlugin.lockscreenConfiguration
+
+                onRequestSave: {
+                    WallpaperImagePlugin.WallpaperPlugin.saveLockscreenSettings();
+                }
+
+                onRequestChangeWallpaperPlugin: (name) => {
+                    WallpaperImagePlugin.WallpaperPlugin.setLockscreenWallpaperPlugin(name);
+                }
+            }
         }
     }
 }

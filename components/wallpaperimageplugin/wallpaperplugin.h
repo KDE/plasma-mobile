@@ -47,10 +47,10 @@ public:
 
     QString homescreenWallpaperPlugin() const;
     QString homescreenWallpaperPluginSource();
-    void setHomescreenWallpaperPlugin(const QString &wallpaperPlugin);
+    Q_INVOKABLE void setHomescreenWallpaperPlugin(const QString &wallpaperPlugin);
     QString lockscreenWallpaperPlugin() const;
     QString lockscreenWallpaperPluginSource();
-    void setLockscreenWallpaperPlugin(const QString &wallpaperPlugin);
+    Q_INVOKABLE void setLockscreenWallpaperPlugin(const QString &wallpaperPlugin);
 
     // changes the plugin to org.kde.image and sets an image
     Q_INVOKABLE QCoro::Task<void> setHomescreenWallpaper(const QString &path);
@@ -76,7 +76,7 @@ Q_SIGNALS:
     void lockscreenWallpaperPluginChanged();
 
 private:
-    void loadConfiguration(KConfigGroup group, QString wallpaperPlugin, KConfigPropertyMap **settings, bool loadDefaults);
+    QQmlPropertyMap *loadConfiguration(KConfigGroup group, QString wallpaperPlugin, bool loadDefaults);
 
     QString m_homescreenWallpaperPlugin;
     QString m_lockscreenWallpaperPlugin;
@@ -84,9 +84,10 @@ private:
     QString m_homescreenWallpaperPath;
     QString m_lockscreenWallpaperPath;
 
-    KConfigPropertyMap *m_homescreenConfig{nullptr};
-    KConfigPropertyMap *m_lockscreenConfig{nullptr};
+    QQmlPropertyMap *m_homescreenConfig{nullptr};
+    QQmlPropertyMap *m_lockscreenConfig{nullptr};
 
+    KSharedConfig::Ptr m_homescreenConfigFile{nullptr};
     KSharedConfig::Ptr m_lockscreenConfigFile{nullptr};
     KConfigWatcher::Ptr m_lockscreenConfigWatcher{nullptr};
 

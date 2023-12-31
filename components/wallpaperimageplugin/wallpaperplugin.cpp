@@ -17,13 +17,13 @@
 
 #include <QCoroDBusPendingCall>
 #include <QFile>
-
-// #include <defaultwallpaper.h>
-
-#define PLASMA_RELATIVE_DATA_INSTALL_DIR "@PLASMA_RELATIVE_DATA_INSTALL_DIR@"
+#include <QFileInfo>
 
 WallpaperPlugin::WallpaperPlugin(QObject *parent)
     : QObject{parent}
+    , m_homescreenConfig{new QQmlPropertyMap{this}}
+    , m_lockscreenConfig{new QQmlPropertyMap{this}}
+    , m_homescreenConfigFile{KSharedConfig::openConfig("plasma-org.kde.plasma.mobileshell-appletsrc", KConfig::SimpleConfig)}
     , m_lockscreenConfigFile{KSharedConfig::openConfig("kscreenlockerrc", KConfig::SimpleConfig)}
 {
     m_lockscreenConfigWatcher = KConfigWatcher::create(m_lockscreenConfigFile);
@@ -35,7 +35,7 @@ WallpaperPlugin::WallpaperPlugin(QObject *parent)
                                                                  this,
                                                                  SLOT(loadHomescreenSettings()));
     if (!connected) {
-        qDebug() << "Could not connect to dbus service org.kde.plasmashell to listen to wallpaperChanged";
+        qWarning() << "Could not connect to dbus service org.kde.plasmashell to listen to wallpaperChanged";
     }
 
     connect(m_lockscreenConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) {
@@ -106,9 +106,25 @@ QString WallpaperPlugin::homescreenWallpaperPluginSource()
 
 void WallpaperPlugin::setHomescreenWallpaperPlugin(const QString &wallpaperPlugin)
 {
-    KConfigGroup group;
-    loadConfiguration(group, wallpaperPlugin, &m_homescreenConfig, true);
-    saveHomescreenSettings();
+    auto containmentsGroup = m_homescreenConfigFile->group(QStringLiteral("Containments"));
+
+    for (const auto &contIndex : containmentsGroup.groupList()) {
+        const auto contConfig = containmentsGroup.group(contIndex);
+        if (contConfig.readEntry("activityId").isEmpty()) {
+            continue;
+        }
+
+        QString containmentIdx = contIndex;
+        auto containmentConfigGroup = containmentsGroup.group(containmentIdx);
+
+        // pick first screen that is found to load the wallpaper plugin
+        m_homescreenConfig = loadConfiguration(containmentConfigGroup, wallpaperPlugin, true);
+        m_homescreenWallpaperPlugin = wallpaperPlugin;
+        break;
+    }
+
+    // saveHomescreenSettings();
+    Q_EMIT homescreenWallpaperPluginChanged();
 }
 
 QString WallpaperPlugin::lockscreenWallpaperPlugin() const
@@ -135,9 +151,13 @@ QString WallpaperPlugin::lockscreenWallpaperPluginSource()
 
 void WallpaperPlugin::setLockscreenWallpaperPlugin(const QString &wallpaperPlugin)
 {
-    KConfigGroup group;
-    loadConfiguration(group, wallpaperPlugin, &m_homescreenConfig, true);
+    KConfigGroup greeterGroup = m_lockscreenConfigFile->group(QStringLiteral("Greeter")).group(QStringLiteral("Wallpaper")).group(wallpaperPlugin);
+
+    m_homescreenConfig = loadConfiguration(greeterGroup, wallpaperPlugin, true);
+    m_lockscreenWallpaperPlugin = wallpaperPlugin;
     saveLockscreenSettings();
+
+    Q_EMIT lockscreenWallpaperPluginChanged();
 }
 
 QCoro::Task<void> WallpaperPlugin::setHomescreenWallpaper(const QString &path)
@@ -147,12 +167,12 @@ QCoro::Task<void> WallpaperPlugin::setHomescreenWallpaper(const QString &path)
                                                   QLatin1String("org.kde.PlasmaShell"),
                                                   QLatin1String("setWallpaper"));
 
-    for (int screen = 0; screen < qApp->screens().size(); screen++) {
+    for (uint screen = 0; screen < qApp->screens().size(); screen++) {
         message.setArguments({"org.kde.image", QVariantMap{{"Image", path}}, screen});
 
         const QDBusReply<void> reply = co_await QDBusConnection::sessionBus().asyncCall(message);
         if (!reply.isValid()) {
-            qDebug() << "Failed to set wallpaper for screen" << 0 << ":" << reply.error();
+            qWarning() << "Failed to set wallpaper for screen" << screen << ":" << reply.error();
         }
     }
 }
@@ -191,7 +211,7 @@ QCoro::Task<void> WallpaperPlugin::loadHomescreenSettings()
 
     QDBusReply<QVariantMap> reply = co_await QDBusConnection::sessionBus().asyncCall(message);
     if (!reply.isValid()) {
-        qDebug() << "unable to load homescreen wallpaper settings:" << reply.error();
+        qWarning() << "unable to load homescreen wallpaper settings:" << reply.error();
         co_return;
     }
 
@@ -199,7 +219,7 @@ QCoro::Task<void> WallpaperPlugin::loadHomescreenSettings()
     m_homescreenWallpaperPath = QString{};
 
     if (!map.contains("wallpaperPlugin")) {
-        qDebug() << "wallpaperPlugin not found in response from org.kde.PlasmaShell wallpaper(), could not retrieve wallpaper";
+        qWarning() << "wallpaperPlugin not found in response from org.kde.PlasmaShell wallpaper(), could not retrieve wallpaper";
         Q_EMIT homescreenWallpaperPathChanged();
         co_return;
     }
@@ -208,7 +228,7 @@ QCoro::Task<void> WallpaperPlugin::loadHomescreenSettings()
     if (m_homescreenConfig) {
         m_homescreenConfig->deleteLater();
     }
-    m_homescreenConfig = new KConfigPropertyMap{nullptr, this};
+    m_homescreenConfig = new QQmlPropertyMap{this};
 
     for (const auto &key : map.keys()) {
         if (key != QStringLiteral("wallpaperPlugin")) {
@@ -235,15 +255,12 @@ void WallpaperPlugin::loadLockscreenSettings()
     m_lockscreenWallpaperPlugin = greeterGroup.readEntry(QStringLiteral("WallpaperPlugin"), QString());
     m_lockscreenWallpaperPath = QString{};
 
-    greeterGroup = m_lockscreenConfigFile->group(QStringLiteral("Greeter"))
-                       .group(QStringLiteral("Wallpaper"))
-                       .group(m_lockscreenWallpaperPlugin)
-                       .group(QStringLiteral("General"));
+    greeterGroup = m_lockscreenConfigFile->group(QStringLiteral("Greeter")).group(QStringLiteral("Wallpaper")).group(m_lockscreenWallpaperPlugin);
 
-    loadConfiguration(greeterGroup, m_lockscreenWallpaperPath, &m_lockscreenConfig, false);
+    m_lockscreenConfig = static_cast<QQmlPropertyMap *>(loadConfiguration(greeterGroup, m_lockscreenWallpaperPlugin, true));
 
     if (m_lockscreenWallpaperPlugin == QStringLiteral("org.kde.image")) {
-        m_lockscreenWallpaperPath = greeterGroup.readEntry(QStringLiteral("Image"), QString());
+        m_lockscreenWallpaperPath = greeterGroup.group(QStringLiteral("General")).readEntry(QStringLiteral("Image"), QString());
     }
 
     Q_EMIT lockscreenWallpaperPluginChanged();
@@ -251,28 +268,33 @@ void WallpaperPlugin::loadLockscreenSettings()
     Q_EMIT lockscreenWallpaperPathChanged();
 }
 
-void WallpaperPlugin::loadConfiguration(KConfigGroup group, QString wallpaperPlugin, KConfigPropertyMap **settings, bool loadDefaults)
+QQmlPropertyMap *WallpaperPlugin::loadConfiguration(KConfigGroup group, QString wallpaperPlugin, bool loadDefaults)
 {
-    KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"));
-    pkg.setDefaultPackageRoot(PLASMA_RELATIVE_DATA_INSTALL_DIR + QStringLiteral("/wallpapers"));
-    pkg.setPath(wallpaperPlugin);
-    QFile file(pkg.filePath("config", QStringLiteral("main.xml")));
+    auto packages = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Wallpaper"), "plasma/wallpapers");
+    KPackage::Package pkg;
+    bool found = false;
+
+    for (auto &metaData : packages) {
+        if (metaData.pluginId() == wallpaperPlugin) {
+            found = true;
+            pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Wallpaper"), QFileInfo(metaData.fileName()).path());
+            break;
+        }
+    }
+
+    if (!found || !pkg.isValid()) {
+        qWarning() << "Could not find wallpaper plugin" << wallpaperPlugin;
+        return nullptr;
+    }
+
+    QFile file(pkg.fileUrl("config", "main.xml").toLocalFile());
 
     auto *configLoader = new KConfigLoader(group, &file, this);
     if (loadDefaults) {
         configLoader->setDefaults();
     }
-    *settings = new KConfigPropertyMap(configLoader, this);
-
-    // TODO not compiling for some reason
-    // // set the default wallpaper value
-    // auto defaultWallpaper = DefaultWallpaper::defaultWallpaperPackage().path();
-    // (*settings)->insert(QStringLiteral("ImageDefault"), defaultWallpaper);
-
-    // // set the default Image value if necessary
-    // if ((*settings)->value(QStringLiteral("Image")).isNull()) {
-    //     (*settings)->insert(QStringLiteral("Image"), defaultWallpaper);
-    // }
+    auto config = new KConfigPropertyMap(configLoader, this);
+    return config;
 }
 
 QCoro::Task<void> WallpaperPlugin::saveHomescreenSettings()
@@ -285,15 +307,16 @@ QCoro::Task<void> WallpaperPlugin::saveHomescreenSettings()
 
     QVariantMap params;
     for (const auto &key : m_homescreenConfig->keys()) {
-        params.insert(key, m_homescreenConfig->value(key));
+        params.insert(key, m_homescreenConfig->value(key).toString());
     }
 
     if (m_homescreenWallpaperPlugin == "org.kde.image") {
         params.remove("PreviewImage");
     }
 
-    for (int screen = 0; screen < qApp->screens().size(); screen++) {
-        const QDBusReply<void> response = co_await iface->asyncCall(QStringLiteral("setWallpaper"), m_homescreenWallpaperPlugin);
+    for (uint screen = 0; screen < qApp->screens().size(); screen++) {
+        QList<QVariant> args = {m_homescreenWallpaperPlugin, params, screen};
+        const QDBusReply<void> response = co_await iface->asyncCallWithArgumentList(QStringLiteral("setWallpaper"), args);
         if (!response.isValid()) {
             qWarning() << "Failed to set wallpaper:" << response.error();
         }

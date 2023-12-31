@@ -17,13 +17,18 @@ QQC2.StackView {
     property var wallpaperPluginConfig
     property var wallpaperPluginModel
 
-    property int screen
-
     property var configDialog: QtObject {
         property string currentWallpaper: root.wallpaperPlugin
     }
 
-    signal onConfigurationChanged()
+    function onConfigurationChanged() {
+        for (var key in root.wallpaperPluginConfig) {
+            const cfgKey = "cfg_" + key;
+            if (root.currentItem[cfgKey] !== undefined) {
+                root.wallpaperPluginConfig[key] = root.currentItem[cfgKey]
+            }
+        }
+    }
 
     onWallpaperPluginSourceChanged: {
         loadSourceFile();
@@ -64,7 +69,6 @@ QQC2.StackView {
         if (wallpaperConfig && wallpaperPluginSource) {
             var props = {
                 "configDialog": root.configDialog,
-                "screen": 0,
                 "wallpaperConfiguration": wallpaperConfig
             };
                                     
