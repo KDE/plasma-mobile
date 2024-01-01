@@ -92,6 +92,7 @@ find_package(KWin ${PROJECT_VERSION} REQUIRED COMPONENTS
 )
 
 find_package(LibKWorkspace CONFIG REQUIRED)
+find_package(Libudev REQUIRED)
 
 find_package(KWinDBusInterface)
 set_package_properties(KWinDBusInterface PROPERTIES DESCRIPTION "KWin DBus interface"
