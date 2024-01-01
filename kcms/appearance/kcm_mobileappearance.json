@@ -7,15 +7,15 @@
             }
         ],
         "Category": "System Information",
-        "Description": "Change the system wallpaper",
+        "Description": "Configure the look of the system",
         "EnabledByDefault": true,
         "FormFactors": [
             "handset",
             "tablet"
         ],
-        "Icon": "preferences-desktop-wallpaper",
+        "Icon": "preferences-desktop-theme-global",
         "License": "GPL",
-        "Name": "Wallpaper",
+        "Name": "Appearance",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "wallpaper",

@@ -9,18 +9,18 @@
 #include <KQuickManagedConfigModule>
 #include <KSharedConfig>
 
-class KCMMobileWallpaper : public KQuickManagedConfigModule
+class KCMMobileAppearance : public KQuickManagedConfigModule
 {
     Q_OBJECT
 
 public:
-    KCMMobileWallpaper(QObject *parent, const KPluginMetaData &data)
+    KCMMobileAppearance(QObject *parent, const KPluginMetaData &data)
         : KQuickManagedConfigModule(parent, data)
     {
         setButtons({});
     }
 };
 
-K_PLUGIN_CLASS_WITH_JSON(KCMMobileWallpaper, "kcm_mobilewallpaper.json")
+K_PLUGIN_CLASS_WITH_JSON(KCMMobileAppearance, "kcm_mobileappearance.json")
 
 #include "kcm.moc"
