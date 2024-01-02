@@ -44,7 +44,9 @@ private:
     BatteryModel *m_batteries;
     KSharedConfig::Ptr m_profilesConfig;
 
-    qreal m_suspendSessionTime;
-    qreal m_dimScreenTime;
-    qreal m_screenOffTime;
+    int m_suspendSessionTime;
+    int m_dimScreenTime;
+    bool m_dimScreen;
+    int m_screenOffTime;
+    bool m_screenOff;
 };
