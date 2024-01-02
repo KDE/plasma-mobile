@@ -26,7 +26,14 @@ Item {
     required property var searchWidget
     
     property alias page: swipeView.currentIndex
-    
+
+    property bool settingsOpen: false
+    property real settingsOpenFactor: settingsOpen ? 1 : 0
+
+    Behavior on settingsOpenFactor {
+        NumberAnimation { duration: 200 }
+    }
+
     function triggerHomescreen() {
         swipeView.setCurrentIndex(0);
         swipeView.focusChild();
@@ -36,6 +43,10 @@ Item {
     }
     
     function openConfigure() {
+        settingsOpen = true;
+    }
+
+    function openContainmentSettings() {
         Plasmoid.internalAction("configure").trigger();
         Plasmoid.editMode = false;
     }
@@ -50,9 +61,19 @@ Item {
         }
     }
 
+    SettingsScreen {
+        id: settings
+        bottomMargin: root.bottomMargin
+        anchors.fill: parent
+        opacity: root.settingsOpenFactor
+        visible: opacity > 0
+        homeScreen: root
+        z: 1
+    }
+
     QQC2.SwipeView {
         id: swipeView
-        opacity: 1 - searchWidget.openFactor
+        opacity: Math.min(1 - root.settingsOpenFactor, 1 - searchWidget.openFactor)
         interactive: root.interactive
         
         anchors.fill: parent

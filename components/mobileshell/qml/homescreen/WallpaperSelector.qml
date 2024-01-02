@@ -1,18 +1,16 @@
 // SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
-// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2022-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Window
-import QtQuick.Controls 2.3 as Controls
-import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.configuration 2.0
+import QtQuick.Controls as Controls
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
 import org.kde.kquickcontrolsaddons 2.0 as Addons
-import org.kde.kcmutils as KCM
+import org.kde.plasma.private.mobileshell.wallpaperimageplugin as WallpaperImagePlugin
 
 Controls.Drawer {
     id: imageWallpaperDrawer
@@ -23,6 +21,7 @@ Controls.Drawer {
     onOpened: {
         wallpapersView.forceActiveFocus()
     }
+    
     implicitWidth: Kirigami.Units.gridUnit * 10
     implicitHeight: Kirigami.Units.gridUnit * 8
     width: imageWallpaperDrawer.horizontal ? implicitWidth : parent.width
@@ -37,6 +36,9 @@ Controls.Drawer {
     ListView {
         id: wallpapersView
         anchors.fill: parent
+        anchors.leftMargin: imageWallpaperDrawer.leftMargin
+        anchors.rightMargin: imageWallpaperDrawer.rightMargin
+        anchors.bottomMargin: imageWallpaperDrawer.bottomMargin
         orientation: imageWallpaperDrawer.horizontal ? ListView.Vertical : ListView.Horizontal
         keyNavigationEnabled: true
         highlightFollowsCurrentItem: true
@@ -60,7 +62,7 @@ Controls.Drawer {
                 }
             }
 
-            property bool isCurrent: configDialog.wallpaperConfiguration["Image"] == model.path
+            property bool isCurrent: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPath == model.path
             onIsCurrentChanged: {
                 if (isCurrent) {
                     wallpapersView.currentIndex = index;
@@ -87,9 +89,7 @@ Controls.Drawer {
                 }
             }
             onClicked: {
-                configDialog.currentWallpaper = "org.kde.image";
-                configDialog.wallpaperConfiguration["Image"] = model.path;
-                configDialog.applyWallpaper()
+                WallpaperImagePlugin.WallpaperPlugin.setHomescreenWallpaper(model.path);
             }
             Keys.onReturnPressed: {
                 clicked();

@@ -16,7 +16,7 @@ import org.kde.ksvg 1.0 as KSvg
 AppletConfiguration {
     id: root
     isContainment: true
-    loadApp: false
+    loadApp: true
 
     readonly property bool horizontal: root.width > root.height
 
@@ -37,87 +37,4 @@ AppletConfiguration {
         }
     }
 //END model
-
-    // the wallpaper selector is quite heavy, so only load it when needed
-    Loader {
-        id: wallpaperSelectorLoader
-        asynchronous: true
-        active: false
-        
-        onLoaded: {
-            wallpaperSelectorLoader.item.open();
-        }
-        
-        sourceComponent: WallpaperSelector {
-            visible: false
-            horizontal: root.horizontal
-            edge: root.horizontal ? Qt.LeftEdge : Qt.BottomEdge
-            onClosed: configDialog.close()
-        }
-    }
-    
-    MouseArea {
-        z: -1
-        anchors.fill: parent
-        onClicked: configDialog.close()
-        
-        Controls.Control {
-            anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: Kirigami.Units.gridUnit
-            
-            leftPadding: Kirigami.Units.gridUnit
-            rightPadding: Kirigami.Units.gridUnit
-            topPadding: Kirigami.Units.gridUnit
-            bottomPadding: Kirigami.Units.gridUnit
-            
-            NumberAnimation on opacity {
-                id: opacityAnim
-                running: true
-                from: 0
-                to: 1
-                duration: Kirigami.Units.longDuration
-            }
-            
-            background: KSvg.FrameSvgItem {
-                enabledBorders: KSvg.FrameSvgItem.AllBorders
-                imagePath: "widgets/background"
-            }
-            
-            contentItem: RowLayout {
-                PlasmaComponents3.Button {
-                    Layout.alignment: Qt.AlignRight
-                    Layout.preferredHeight: Kirigami.Units.gridUnit * 4
-                    Layout.preferredWidth: Kirigami.Units.gridUnit * 8
-                    
-                    display: PlasmaComponents3.ToolButton.TextUnderIcon
-                    icon.name: "viewimage"
-                    icon.width: Kirigami.Units.iconSizes.medium
-                    icon.height: Kirigami.Units.iconSizes.medium
-                    text: i18n("Change Wallpaper")
-                    onClicked: {
-                        opacityAnim.from = 1;
-                        opacityAnim.to = 0;
-                        opacityAnim.restart();
-                        wallpaperSelectorLoader.active = true;
-                    }
-                }
-                
-                PlasmaComponents3.Button {
-                    Layout.alignment: Qt.AlignLeft
-                    Layout.preferredHeight: Kirigami.Units.gridUnit * 4
-                    Layout.preferredWidth: Kirigami.Units.gridUnit * 8
-                    
-                    display: PlasmaComponents3.ToolButton.TextUnderIcon
-                    icon.name: "configure"
-                    icon.width: Kirigami.Units.iconSizes.medium
-                    icon.height: Kirigami.Units.iconSizes.medium
-                    text: i18n("Configure")
-                    onClicked: {
-                        root.loadApp = true;
-                    }
-                }
-            }
-        }
-    }
 }

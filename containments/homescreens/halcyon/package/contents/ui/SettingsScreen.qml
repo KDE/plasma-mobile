@@ -10,17 +10,14 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell as MobileShell
-import org.kde.private.mobile.homescreen.folio 1.0 as Folio
-
-import '../delegate'
 
 Item {
     id: root
 
+    property real leftMargin
+    property real rightMargin
+    property real bottomMargin
     property var homeScreen
-    property real settingsModeHomeScreenScale
-
-    readonly property bool homeScreenInteractive: !appletListViewer.open
 
     MouseArea {
         id: closeSettings
@@ -31,25 +28,27 @@ Item {
         anchors.bottom: settingsBar.top
 
         onClicked: {
-            Folio.HomeScreenState.closeSettingsView();
+            root.homeScreen.settingsOpen = false;
         }
     }
 
     Item {
         id: settingsBar
+        height: settingsOptions.implicitHeight
 
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
         anchors.left: parent.left
+        anchors.leftMargin: root.leftMargin
         anchors.right: parent.right
+        anchors.rightMargin: parent.rightMargin
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: Kirigami.Units.largeSpacing
-        height: root.height * (1 - settingsModeHomeScreenScale)
+        anchors.bottomMargin: Kirigami.Units.largeSpacing + root.bottomMargin
 
         RowLayout {
             id: settingsOptions
-            anchors.centerIn: parent
+            anchors.horizontalCenter: parent.horizontalCenter
             spacing: Kirigami.Units.largeSpacing
 
             PC3.ToolButton {
@@ -75,8 +74,8 @@ Item {
                 }
 
                 onClicked: {
+                    root.homeScreen.settingsOpen = false;
                     wallpaperSelectorLoader.active = true;
-                    Folio.HomeScreenState.closeSettingsView();
                 }
             }
 
@@ -103,69 +102,10 @@ Item {
                 }
 
                 onClicked: {
-                    // ensure that if the window is already opened, it gets raised to the top
-                    settingsWindow.hide();
-                    settingsWindow.showMaximized();
+                    root.homeScreen.settingsOpen = false;
+                    root.homeScreen.openContainmentSettings();
                 }
             }
-
-            PC3.ToolButton {
-                opacity: 0.9
-                implicitHeight: Kirigami.Units.gridUnit * 4
-                implicitWidth: Kirigami.Units.gridUnit * 5
-
-                contentItem: ColumnLayout {
-                    spacing: Kirigami.Units.largeSpacing
-
-                    Kirigami.Icon {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                        implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                        implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                        source: 'widget-alternatives'
-                    }
-                    
-                    QQC2.Label {
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-                        text: i18n('Widgets')
-                        font.bold: true
-                    }
-                }
-
-                onClicked: {
-                    appletListViewer.open = true;
-                }
-            }
-        }
-    }
-
-    AppletListViewer {
-        id: appletListViewer
-        width: parent.width
-        height: parent.height
-
-        property bool open: false
-        onRequestClose: open = false
-
-        opacity: open ? 1 : 0
-
-        // move the settings out of the way if it is not visible
-        // NOTE: we do this instead of setting visible to false, because
-        //       it doesn't mess with widget drag and drop
-        y: (opacity === 0) ? appletListViewer.height : 0
-
-        homeScreen: root.homeScreen
-
-        Behavior on opacity {
-            NumberAnimation { duration: Kirigami.Units.shortDuration }
-        }
-    }
-
-    SettingsWindow {
-        id: settingsWindow
-        visible: false
-
-        onRequestConfigureMenu: {
-            homeScreen.openConfigure()
         }
     }
 
@@ -181,9 +121,9 @@ Item {
         sourceComponent: MobileShell.WallpaperSelector {
             horizontal: root.width > root.height
             edge: horizontal ? Qt.LeftEdge : Qt.BottomEdge
-            bottomMargin: root.homeScreen.bottomMargin
-            leftMargin: root.homeScreen.leftMargin
-            rightMargin: root.homeScreen.rightMargin
+            bottomMargin: root.bottomMargin
+            leftMargin: root.leftMargin
+            rightMargin: root.rightMargin
             onClosed: {
                 wallpaperSelectorLoader.active = false;
             }

@@ -61,6 +61,17 @@ ContainmentItem {
         }
     }
 
+    Rectangle {
+        id: darkenSettingsBackground
+        color: Qt.rgba(0, 0, 0, 0.7)
+        opacity: halcyonHomeScreen.settingsOpenFactor
+        anchors.fill: parent
+        z: -1
+        Behavior on color {
+            ColorAnimation { duration: Kirigami.Units.longDuration }
+        }
+    }
+
     MobileShell.HomeScreen {
         id: homeScreen
         anchors.fill: parent

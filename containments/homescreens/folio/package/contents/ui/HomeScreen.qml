@@ -138,8 +138,6 @@ Item {
 
             settingsModeHomeScreenScale: root.settingsModeHomeScreenScale
             homeScreen: root
-
-            onRequestLeaveSettingsMode: root.leaveSettingsMode();
         }
 
         Item {
