@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023 A S Alam <aalam@satluj.org>
+# SPDX-FileCopyrightText: 2023, 2024 A S Alam <aalam@satluj.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-16 01:46+0000\n"
-"PO-Revision-Date: 2023-12-24 09:09-0600\n"
+"PO-Revision-Date: 2024-01-01 10:11-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
@@ -63,11 +63,10 @@ msgid "Always show keyboard toggle"
 msgstr ""
 
 #: ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "ਕੀ ਨੇਵੀਗੇਸ਼ਨ ਪੈਨਲ ਨੂੰ ਓਹਲੇ ਕਰਨਾ ਹੈ।"
+msgstr "ਕੀ ਨੇਵੀਗੇਸ਼ਨ ਪੈਨਲ ਉੱਤੇ ਕੀਬੋਰਡ ਬਦਲੋ ਬਟਨ ਨੂੰ ਹਮੇਸ਼ਾਂ ਵੇਖਾਉਣਾ ਹੈ।"
 
 #: ui/main.qml:86
 #, kde-format
