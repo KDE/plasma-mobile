@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:40+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2022-08-15 15:08+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -63,10 +63,8 @@ msgstr "ახლა გადატარება"
 msgid "Wallpaper"
 msgstr "ფონური სურათი"
 
-#: contents/configuration/ContainmentConfiguration.qml:97
-msgid "Change Wallpaper"
-msgstr "ფონის სურათის შეცვლა"
+#~ msgid "Change Wallpaper"
+#~ msgstr "ფონის სურათის შეცვლა"
 
-#: contents/configuration/ContainmentConfiguration.qml:115
-msgid "Configure"
-msgstr "მორგება"
+#~ msgid "Configure"
+#~ msgstr "მორგება"

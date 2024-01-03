@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-12-18 10:02+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
@@ -17,37 +17,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: mobilepower.cpp:27
+#: mobilepower.cpp:28
 #, kde-format
 msgid "30 sec"
 msgstr ""
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:29
 #, kde-format
 msgid "1 min"
 msgstr ""
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:30
 #, kde-format
 msgid "2 min"
 msgstr ""
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:31
 #, kde-format
 msgid "5 min"
 msgstr ""
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:32
 #, kde-format
 msgid "10 min"
 msgstr ""
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:33
 #, kde-format
 msgid "15 min"
 msgstr ""
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:34
+#, kde-format
+msgid "30 min"
+msgstr ""
+
+#: mobilepower.cpp:35
 #, kde-format
 msgid "Never"
 msgstr "Enxamás"

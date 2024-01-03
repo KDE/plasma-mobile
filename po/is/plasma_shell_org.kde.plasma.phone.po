@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:40+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-11-07 12:58+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -64,10 +64,8 @@ msgstr "Sækja um núna"
 msgid "Wallpaper"
 msgstr "Veggfóður"
 
-#: contents/configuration/ContainmentConfiguration.qml:97
-msgid "Change Wallpaper"
-msgstr "Skipta um veggfóður"
+#~ msgid "Change Wallpaper"
+#~ msgstr "Skipta um veggfóður"
 
-#: contents/configuration/ContainmentConfiguration.qml:115
-msgid "Configure"
-msgstr "Grunnstilla"
+#~ msgid "Configure"
+#~ msgstr "Grunnstilla"

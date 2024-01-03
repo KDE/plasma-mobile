@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:40+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2022-10-19 06:53+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -64,10 +64,8 @@ msgstr "立刻套用"
 msgid "Wallpaper"
 msgstr "桌布"
 
-#: contents/configuration/ContainmentConfiguration.qml:97
-msgid "Change Wallpaper"
-msgstr "變更桌布"
+#~ msgid "Change Wallpaper"
+#~ msgstr "變更桌布"
 
-#: contents/configuration/ContainmentConfiguration.qml:115
-msgid "Configure"
-msgstr "設定"
+#~ msgid "Configure"
+#~ msgstr "設定"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:39+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2022-03-18 07:14+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -32,73 +32,73 @@ msgstr "Terapkan"
 msgid "On-Screen Keyboard"
 msgstr "On-Screen Keyboard"
 
-#: ui/main.qml:35
+#: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
 msgstr "Ketik apapun di sini..."
 
-#: ui/main.qml:40
+#: ui/main.qml:38
 #, fuzzy, kde-format
 #| msgid "Feedback:"
 msgctxt "@title:group"
 msgid "Feedback"
 msgstr "Tanggapan:"
 
-#: ui/main.qml:46
+#: ui/main.qml:44
 #, kde-format
 msgid "Sound"
 msgstr ""
 
-#: ui/main.qml:47
+#: ui/main.qml:45
 #, fuzzy, kde-format
 #| msgid "Emit sound on key press"
 msgid "Whether to emit a sound on keypress."
 msgstr "Bunyi suara saat tombol ditekan"
 
-#: ui/main.qml:56
+#: ui/main.qml:54
 #, kde-format
 msgid "Vibration"
 msgstr ""
 
-#: ui/main.qml:57
+#: ui/main.qml:55
 #, fuzzy, kde-format
 #| msgid "Vibrate on key press"
 msgid "Whether to vibrate on keypress."
 msgstr "Getar saat tombol ditekan"
 
-#: ui/main.qml:64
+#: ui/main.qml:62
 #, fuzzy, kde-format
 #| msgid "Text correction:"
 msgctxt "@title:group"
 msgid "Text Correction"
 msgstr "Koreksi teks:"
 
-#: ui/main.qml:71
+#: ui/main.qml:69
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Periksa ejaan teks yang dimasukkan"
 
-#: ui/main.qml:80
+#: ui/main.qml:78
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Kapitalkan hurufpertama pada setiap kalimat"
 
-#: ui/main.qml:89
+#: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Lengkapi kata saat ini dengan saran pertama ketika menekan spasi"
 
-#: ui/main.qml:98
+#: ui/main.qml:96
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Sarankan kata-kata potensial di pita kata"
 
-#: ui/main.qml:109
+#: ui/main.qml:107
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Sisipkan penghentian penuh ketika spasi tertekan ganda"
 
-#: ui/main.qml:120
+#: ui/main.qml:118
 #, kde-format
 msgid "Configure Languages"
 msgstr "Konfigurasi Bahasa"

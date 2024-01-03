@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-18 01:59+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-07-26 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -37,12 +37,12 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ui/main.qml:102
+#: ui/main.qml:103
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "핫스팟 SSID"
 
-#: ui/main.qml:110
+#: ui/main.qml:112
 #, kde-format
 msgid "Hotspot Password"
 msgstr "핫스팟 암호"

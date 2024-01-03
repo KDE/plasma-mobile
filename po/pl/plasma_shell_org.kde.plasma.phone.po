@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:40+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2022-08-28 20:40+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -62,10 +62,8 @@ msgstr "Zastosuj teraz"
 msgid "Wallpaper"
 msgstr "Tapeta"
 
-#: contents/configuration/ContainmentConfiguration.qml:97
-msgid "Change Wallpaper"
-msgstr "Zmień tapetę"
+#~ msgid "Change Wallpaper"
+#~ msgstr "Zmień tapetę"
 
-#: contents/configuration/ContainmentConfiguration.qml:115
-msgid "Configure"
-msgstr "Ustawienia"
+#~ msgid "Configure"
+#~ msgstr "Ustawienia"

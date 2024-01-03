@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-29 01:40+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-04-01 19:30-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -61,10 +61,8 @@ msgstr "ਹੁਣੇ ਲਾਗੂ ਕਰੋ"
 msgid "Wallpaper"
 msgstr "ਵਾਲਪੇਪਰ"
 
-#: contents/configuration/ContainmentConfiguration.qml:97
-msgid "Change Wallpaper"
-msgstr "ਵਾਲਪੇਪਰ ਬਦਲੋ"
+#~ msgid "Change Wallpaper"
+#~ msgstr "ਵਾਲਪੇਪਰ ਬਦਲੋ"
 
-#: contents/configuration/ContainmentConfiguration.qml:115
-msgid "Configure"
-msgstr "ਸੰਰਚਨਾ"
+#~ msgid "Configure"
+#~ msgstr "ਸੰਰਚਨਾ"

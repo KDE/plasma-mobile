@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:39+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-10-15 12:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -33,69 +33,69 @@ msgstr "செயல்படுத்து"
 msgid "On-Screen Keyboard"
 msgstr "திரை விசைப்பலகை"
 
-#: ui/main.qml:35
+#: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
 msgstr "எதையாவது இங்கு தட்டச்சிடுங்கள்…"
 
-#: ui/main.qml:40
+#: ui/main.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
 msgstr "பின்னூட்டம்"
 
-#: ui/main.qml:46
+#: ui/main.qml:44
 #, kde-format
 msgid "Sound"
 msgstr "ஒலி"
 
-#: ui/main.qml:47
+#: ui/main.qml:45
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "விசையழுத்துகையில் ஒலியெழுப்ப வேண்டுமா."
 
-#: ui/main.qml:56
+#: ui/main.qml:54
 #, kde-format
 msgid "Vibration"
 msgstr "அதிர்வு"
 
-#: ui/main.qml:57
+#: ui/main.qml:55
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "விசையழுத்துகையில் அதிரச்செய்ய வேண்டுமா."
 
-#: ui/main.qml:64
+#: ui/main.qml:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
 msgstr "உரை திருத்தம்"
 
-#: ui/main.qml:71
+#: ui/main.qml:69
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "உள்ளிட்ட உரையின் எழுத்துக்கூட்டலை சரிபார்"
 
-#: ui/main.qml:80
+#: ui/main.qml:78
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "ஒவ்வொரு வாக்கியத்தின் முதலெழுத்தைப் பேரெழுத்தாக்கு"
 
-#: ui/main.qml:89
+#: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "இடைவெளி விசையை தட்டும்போது தற்போதைய சொல்லை முதல் பரிந்துரைக்கு மாற்று"
 
-#: ui/main.qml:98
+#: ui/main.qml:96
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "பயன்படுத்தக்கூடிய சொற்களை சொல் பட்டையில் பரிந்துரைக்கவும்"
 
-#: ui/main.qml:109
+#: ui/main.qml:107
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "இடைவெளியை இருமுறை அழுத்தினால் முற்றுப்புள்ளியை உள்ளிடு"
 
-#: ui/main.qml:120
+#: ui/main.qml:118
 #, kde-format
 msgid "Configure Languages"
 msgstr "மொழிகளை அமை"

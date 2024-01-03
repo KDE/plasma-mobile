@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-12-16 21:13+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,37 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.3\n"
 
-#: mobilepower.cpp:27
+#: mobilepower.cpp:28
 #, kde-format
 msgid "30 sec"
 msgstr "30 másodperc"
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:29
 #, kde-format
 msgid "1 min"
 msgstr "1 perc után"
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:30
 #, kde-format
 msgid "2 min"
 msgstr "2 perc után"
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:31
 #, kde-format
 msgid "5 min"
 msgstr "5 perc után"
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:32
 #, kde-format
 msgid "10 min"
 msgstr "10 perc után"
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:33
 #, kde-format
 msgid "15 min"
 msgstr "15 perc után"
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:34
+#, fuzzy, kde-format
+#| msgid "10 min"
+msgid "30 min"
+msgstr "10 perc után"
+
+#: mobilepower.cpp:35
 #, kde-format
 msgid "Never"
 msgstr "Soha"

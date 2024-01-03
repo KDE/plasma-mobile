@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:39+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-03-14 11:37+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -32,69 +32,69 @@ msgstr "Uygula"
 msgid "On-Screen Keyboard"
 msgstr "Ekran Klavyesi"
 
-#: ui/main.qml:35
+#: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
 msgstr "Bir şeyler yaz…"
 
-#: ui/main.qml:40
+#: ui/main.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
 msgstr "Geri Bildirim"
 
-#: ui/main.qml:46
+#: ui/main.qml:44
 #, kde-format
 msgid "Sound"
 msgstr "Ses"
 
-#: ui/main.qml:47
+#: ui/main.qml:45
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "Bir düğme vuruşunda ses çıkıp çıkmayacağı."
 
-#: ui/main.qml:56
+#: ui/main.qml:54
 #, kde-format
 msgid "Vibration"
 msgstr "Titreşim"
 
-#: ui/main.qml:57
+#: ui/main.qml:55
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "Düğme vuruşunda titreyip titremeyeceği."
 
-#: ui/main.qml:64
+#: ui/main.qml:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
 msgstr "Metin Düzeltme"
 
-#: ui/main.qml:71
+#: ui/main.qml:69
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "Girilen metnin yazımını denetle"
 
-#: ui/main.qml:80
+#: ui/main.qml:78
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "Her bir tümcenin ilk harfini Büyük yap"
 
-#: ui/main.qml:89
+#: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Boşluk'a basıldığında geçerli sözcüğü ilk öneriyle tamamla"
 
-#: ui/main.qml:98
+#: ui/main.qml:96
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "Sözcük şeridinde olası sözcükleri öner"
 
-#: ui/main.qml:109
+#: ui/main.qml:107
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Boşluk'a iki kez basıldığında tümceyi noktayla bitir"
 
-#: ui/main.qml:120
+#: ui/main.qml:118
 #, kde-format
 msgid "Configure Languages"
 msgstr "Dilleri Yapılandır"

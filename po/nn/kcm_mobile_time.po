@@ -3060,13 +3060,3 @@ msgstr ""
 #, kde-format
 msgid "PM"
 msgstr ""
-
-#~ msgid "Current Time"
-#~ msgstr "Gjeldande klokkeslett"
-
-#~ msgid "Date"
-#~ msgstr "Dato"
-
-#~ msgctxt "@action:button"
-#~ msgid "Close"
-#~ msgstr "Lukk"

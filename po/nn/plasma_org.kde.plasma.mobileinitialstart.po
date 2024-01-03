@@ -264,9 +264,3 @@ msgstr "Tilbake"
 #, kde-format
 msgid "Finish"
 msgstr "Fullfør"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi er slått av"
-
-#~ msgid "Enable"
-#~ msgstr "Slå på"

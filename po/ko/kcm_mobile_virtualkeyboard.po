@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:39+0000\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
 "PO-Revision-Date: 2023-10-08 23:47+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -32,69 +32,69 @@ msgstr "적용"
 msgid "On-Screen Keyboard"
 msgstr "가상 키보드"
 
-#: ui/main.qml:35
+#: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
 msgstr "여기에 아무것이나 입력하십시오..."
 
-#: ui/main.qml:40
+#: ui/main.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
 msgstr "피드백"
 
-#: ui/main.qml:46
+#: ui/main.qml:44
 #, kde-format
 msgid "Sound"
 msgstr "소리"
 
-#: ui/main.qml:47
+#: ui/main.qml:45
 #, kde-format
 msgid "Whether to emit a sound on keypress."
 msgstr "키를 누를 때 소리 재생 여부입니다."
 
-#: ui/main.qml:56
+#: ui/main.qml:54
 #, kde-format
 msgid "Vibration"
 msgstr "진동"
 
-#: ui/main.qml:57
+#: ui/main.qml:55
 #, kde-format
 msgid "Whether to vibrate on keypress."
 msgstr "키를 누를 때 진동할지 여부입니다."
 
-#: ui/main.qml:64
+#: ui/main.qml:62
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
 msgstr "문자열 자동 고침"
 
-#: ui/main.qml:71
+#: ui/main.qml:69
 #, kde-format
 msgid "Check spelling of entered text"
 msgstr "입력한 문자열의 맞춤법 검사"
 
-#: ui/main.qml:80
+#: ui/main.qml:78
 #, kde-format
 msgid "Capitalize the first letter of each sentence"
 msgstr "문장 첫 글자를 대문자로 변환"
 
-#: ui/main.qml:89
+#: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
 msgstr "Space 키를 누를 때 현재 단어를 첫 제안으로 자동 완성"
 
-#: ui/main.qml:98
+#: ui/main.qml:96
 #, kde-format
 msgid "Suggest potential words in word ribbon"
 msgstr "단어 막대에 단어 제안 표시"
 
-#: ui/main.qml:109
+#: ui/main.qml:107
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
 msgstr "Space 키를 누 번 눌렀을 때 마침표 삽입"
 
-#: ui/main.qml:120
+#: ui/main.qml:118
 #, kde-format
 msgid "Configure Languages"
 msgstr "언어 설정"
