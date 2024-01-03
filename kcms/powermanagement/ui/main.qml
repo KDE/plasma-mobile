@@ -86,7 +86,7 @@ SimpleKCM {
                                         default: batteryType = i18n("Unknown battery"); break;
                                     }
 
-                                    const chargePercent = i18nc("%1 is value, %2 is unit", "%1%2", Number(battery.chargePercent).toLocaleString(Qt.locale(), "f", 0), i18n("%"));
+                                    const chargePercent = i18nc("%1 is the charge percent, % is the percent sign", "%1%", Number(battery.chargePercent).toLocaleString(Qt.locale(), "f", 0));
 
                                     return (model.battery.chargeState === Battery.Charging) ? i18nc("%1 is battery type, %2 is charge percent", "%1 %2 (Charging)", batteryType, chargePercent) : i18nc("%1 is battery type, %2 is charge percent", "%1 %2", batteryType, chargePercent);
                                 }
