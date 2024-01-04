@@ -1,16 +1,16 @@
 # Translation for kcm_mobile_powermanagement.po to Euskara/Basque (eu).
-# Copyright (C) 2021-2023 This file is copyright:
+# Copyright (C) 2021-2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2022, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-04-12 23:01+0200\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"PO-Revision-Date: 2024-01-03 21:11+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -51,10 +51,9 @@ msgid "15 min"
 msgstr "15 min"
 
 #: mobilepower.cpp:34
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 min"
+msgstr "30 min"
 
 #: mobilepower.cpp:35
 #, kde-format
@@ -244,15 +243,12 @@ msgid "Unknown battery"
 msgstr "Bateria ezezaguna"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr "%"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
-msgstr "%1%2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is a percentage value"
+#| msgid "%1%"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
+msgstr "%%1"
 
 #: ui/main.qml:91
 #, kde-format
@@ -288,6 +284,13 @@ msgstr "Itzali pantaila hau igarota:"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Eseki gailua hau igarota:"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1%2"
 
 #~ msgctxt "literal percent sign"
 #~ msgid "%"

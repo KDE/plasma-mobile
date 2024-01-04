@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2023-07-26 00:07+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -241,15 +241,12 @@ msgid "Unknown battery"
 msgstr "알 수 없는 배터리"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr "%"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
-msgstr "%1%2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is a percentage value"
+#| msgid "%1%"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
+msgstr "%1%"
 
 #: ui/main.qml:91
 #, kde-format
@@ -285,6 +282,13 @@ msgstr "다음 시간 후 화면 끄기"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "다음 시간 후 절전 모드 진입"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1%2"
 
 #~ msgctxt "literal percent sign"
 #~ msgid "%"

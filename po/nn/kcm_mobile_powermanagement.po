@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2023-03-19 14:43+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -243,15 +243,12 @@ msgid "Unknown battery"
 msgstr "Ukjent batteri"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr " %"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
-msgstr "%1 %2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is a percentage value"
+#| msgid "%1%"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
+msgstr "%1 %"
 
 #: ui/main.qml:91
 #, kde-format
@@ -287,3 +284,10 @@ msgstr "Slå av skjermen etter"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Slå av eininga etter"
+
+#~ msgid "%"
+#~ msgstr " %"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1 %2"

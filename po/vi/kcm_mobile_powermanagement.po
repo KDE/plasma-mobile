@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2022-08-24 21:34+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -245,14 +245,11 @@ msgid "Unknown battery"
 msgstr "Pin không rõ"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr "%"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is value, %2 is unit"
+#| msgid "%1%2"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
 msgstr "%1 %2"
 
 #: ui/main.qml:91
@@ -289,6 +286,13 @@ msgstr "Tắt màn hình sau"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Tạm ngưng thiết bị sau"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1 %2"
 
 #~ msgctxt "literal percent sign"
 #~ msgid "%"

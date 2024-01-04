@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-15 13:18+0100\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"PO-Revision-Date: 2024-01-03 12:21+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -48,10 +48,9 @@ msgid "15 min"
 msgstr "15 min"
 
 #: mobilepower.cpp:34
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 min"
+msgstr "30 min"
 
 #: mobilepower.cpp:35
 #, kde-format
@@ -241,15 +240,12 @@ msgid "Unknown battery"
 msgstr "Onbekende batterij"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr "%"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
-msgstr "%1%2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is a percentage value"
+#| msgid "%1%"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
+msgstr "%1%"
 
 #: ui/main.qml:91
 #, kde-format
@@ -285,6 +281,13 @@ msgstr "Scherm uitschakelen na"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Apparaat onderbreken na"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1%2"
 
 #~ msgctxt "literal percent sign"
 #~ msgid "%"

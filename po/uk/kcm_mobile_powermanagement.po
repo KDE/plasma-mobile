@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023.
+# Yuri Chornoivan <yurchor@ukr.net>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_powermanagement\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-15 08:07+0200\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"PO-Revision-Date: 2024-01-03 09:35+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -51,10 +51,9 @@ msgid "15 min"
 msgstr "15 хв."
 
 #: mobilepower.cpp:34
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 хв."
+msgstr "30 хв."
 
 #: mobilepower.cpp:35
 #, kde-format
@@ -244,15 +243,12 @@ msgid "Unknown battery"
 msgstr "Невідомий акумулятор"
 
 #: ui/main.qml:89
-#, kde-format
-msgid "%"
-msgstr "%"
-
-#: ui/main.qml:89
-#, kde-format
-msgctxt "%1 is value, %2 is unit"
-msgid "%1%2"
-msgstr "%1%2"
+#, fuzzy, kde-format
+#| msgctxt "%1 is a percentage value"
+#| msgid "%1%"
+msgctxt "%1 is the charge percent, % is the percent sign"
+msgid "%1%"
+msgstr "%1%"
 
 #: ui/main.qml:91
 #, kde-format
@@ -288,6 +284,13 @@ msgstr "Вимкнути екран за"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Приспати пристрій за"
+
+#~ msgid "%"
+#~ msgstr "%"
+
+#~ msgctxt "%1 is value, %2 is unit"
+#~ msgid "%1%2"
+#~ msgstr "%1%2"
 
 #~ msgctxt "literal percent sign"
 #~ msgid "%"
