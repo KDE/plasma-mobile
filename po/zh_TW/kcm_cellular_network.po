@@ -4,19 +4,21 @@
 # This file is distributed under the same license as the plasma-settings package.
 # Automatically generated, 2022.
 #
+# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2022-05-19 00:47+0000\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2024-01-05 05:31+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -26,68 +28,68 @@ msgstr ""
 #: modem.cpp:242 modem.cpp:406
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
-msgstr ""
+msgstr "更新 %1 的連線設定時出錯：%2。"
 
 #: modem.cpp:320
 #, kde-format
 msgid "Error activating connection: %1"
-msgstr ""
+msgstr "啟用連線時出錯：%1"
 
 #: modem.cpp:354
 #, kde-format
 msgid "Error adding connection: %1"
-msgstr ""
+msgstr "新增連線時出錯：%1"
 
 #: modem.cpp:371
 #, kde-format
 msgid "Error removing connection: %1"
-msgstr ""
+msgstr "移除連線時出錯：%1"
 
 #: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: modem.cpp:494
 #, kde-format
 msgid "Unmanaged"
-msgstr ""
+msgstr "未管理"
 
 #: modem.cpp:496
 #, kde-format
 msgid "Unavailable"
-msgstr ""
+msgstr "無法使用"
 
 #: modem.cpp:498
 #, kde-format
 msgid "Disconnected"
-msgstr ""
+msgstr "已離線"
 
 #: modem.cpp:500
 #, kde-format
 msgid "Preparing"
-msgstr ""
+msgstr "準備中"
 
 #: modem.cpp:502
 #, kde-format
 msgid "ConfiguringHardware"
-msgstr ""
+msgstr "設定硬體中"
 
 #: modem.cpp:504
 #, kde-format
 msgid "NeedAuth"
-msgstr ""
+msgstr "需要認證"
 
 #: modem.cpp:506
 #, kde-format
 msgid "ConfiguringIp"
-msgstr ""
+msgstr "設定 IP 中"
 
 #: modem.cpp:508
 #, kde-format
 msgid "CheckingIp"
-msgstr ""
+msgstr "檢查 IP 中"
 
 #: modem.cpp:510
 #, kde-format
@@ -97,102 +99,102 @@ msgstr ""
 #: modem.cpp:512
 #, kde-format
 msgid "Activated"
-msgstr ""
+msgstr "已啟動"
 
 #: modem.cpp:514
 #, kde-format
 msgid "Deactivating"
-msgstr ""
+msgstr "停用中"
 
 #: modem.cpp:516 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
-msgstr ""
+msgstr "已失敗"
 
 #: modemdetails.cpp:121 modemdetails.cpp:461
 #, kde-format
 msgid "POTS"
-msgstr ""
+msgstr "POTS"
 
 #: modemdetails.cpp:124
 #, kde-format
 msgid "GSM"
-msgstr ""
+msgstr "GSM"
 
 #: modemdetails.cpp:127
 #, kde-format
 msgid "GSM Compact"
-msgstr ""
+msgstr "GSM Compact"
 
 #: modemdetails.cpp:130
 #, kde-format
 msgid "GPRS"
-msgstr ""
+msgstr "GPRS"
 
 #: modemdetails.cpp:133
 #, kde-format
 msgid "EDGE"
-msgstr ""
+msgstr "EDGE"
 
 #: modemdetails.cpp:136
 #, kde-format
 msgid "UMTS"
-msgstr ""
+msgstr "UMTS"
 
 #: modemdetails.cpp:139
 #, kde-format
 msgid "HSDPA"
-msgstr ""
+msgstr "HSDPA"
 
 #: modemdetails.cpp:142
 #, kde-format
 msgid "HSUPA"
-msgstr ""
+msgstr "HSUPA"
 
 #: modemdetails.cpp:145
 #, kde-format
 msgid "HSPA"
-msgstr ""
+msgstr "HSPA"
 
 #: modemdetails.cpp:148
 #, kde-format
 msgid "HSPA+"
-msgstr ""
+msgstr "HSPA+"
 
 #: modemdetails.cpp:151
 #, kde-format
 msgid "CDMA2000 1xRTT"
-msgstr ""
+msgstr "CDMA2000 1xRTT"
 
 #: modemdetails.cpp:154
 #, kde-format
 msgid "CDMA2000 EVDO-0"
-msgstr ""
+msgstr "CDMA2000 EVDO-0"
 
 #: modemdetails.cpp:157
 #, kde-format
 msgid "CDMA2000 EVDO-A"
-msgstr ""
+msgstr "CDMA2000 EVDO-A"
 
 #: modemdetails.cpp:160
 #, kde-format
 msgid "CDMA2000 EVDO-B"
-msgstr ""
+msgstr "CDMA2000 EVDO-B"
 
 #: modemdetails.cpp:163
 #, kde-format
 msgid "LTE"
-msgstr ""
+msgstr "LTE"
 
 #: modemdetails.cpp:166
 #, kde-format
 msgid "5GNR"
-msgstr ""
+msgstr "5GNR"
 
 #: modemdetails.cpp:222
 #, kde-format
 msgid "Off"
-msgstr ""
+msgstr "關閉"
 
 #: modemdetails.cpp:224
 #, kde-format
@@ -207,122 +209,122 @@ msgstr ""
 #: modemdetails.cpp:254
 #, kde-format
 msgid "Initializing"
-msgstr ""
+msgstr "初始化中"
 
 #: modemdetails.cpp:256 ui/SimPage.qml:118
 #, kde-format
 msgid "Locked"
-msgstr ""
+msgstr "已鎖定"
 
 #: modemdetails.cpp:258
 #, kde-format
 msgid "Disabled"
-msgstr ""
+msgstr "已停用"
 
 #: modemdetails.cpp:260
 #, kde-format
 msgid "Disabling"
-msgstr ""
+msgstr "正在停用"
 
 #: modemdetails.cpp:262
 #, kde-format
 msgid "Enabling"
-msgstr ""
+msgstr "正在啟用"
 
 #: modemdetails.cpp:264 ui/ModemPage.qml:83
 #, kde-format
 msgid "Enabled"
-msgstr ""
+msgstr "已啟用"
 
 #: modemdetails.cpp:266
 #, kde-format
 msgid "Searching for network provider"
-msgstr ""
+msgstr "搜尋網路提供者中"
 
 #: modemdetails.cpp:268
 #, kde-format
 msgid "Registered with network provider"
-msgstr ""
+msgstr "已與網路提供者註冊"
 
 #: modemdetails.cpp:270
 #, kde-format
 msgid "Disconnecting"
-msgstr ""
+msgstr "斷線中"
 
 #: modemdetails.cpp:272
 #, kde-format
 msgid "Connecting"
-msgstr ""
+msgstr "連線中"
 
 #: modemdetails.cpp:274
 #, kde-format
 msgid "Connected"
-msgstr ""
+msgstr "已連線"
 
 #: modemdetails.cpp:283
 #, kde-format
 msgid "No error."
-msgstr ""
+msgstr "沒有錯誤。"
 
 #: modemdetails.cpp:285
 #, kde-format
 msgid "Unknown error."
-msgstr ""
+msgstr "未知的錯誤。"
 
 #: modemdetails.cpp:287
 #, kde-format
 msgid "SIM is required but missing."
-msgstr ""
+msgstr "需要 SIM 卡但沒有 SIM 卡。"
 
 #: modemdetails.cpp:289
 #, kde-format
 msgid "SIM is available but unusable."
-msgstr ""
+msgstr "有 SIM 卡但沒辦法使用。"
 
 #: modemdetails.cpp:312
 #, kde-format
 msgid "Not registered, not searching for new operator to register."
-msgstr ""
+msgstr "未註冊，不搜尋要註冊的新經營者。"
 
 #: modemdetails.cpp:314
 #, kde-format
 msgid "Registered on home network."
-msgstr ""
+msgstr "已與家網路註冊。"
 
 #: modemdetails.cpp:316
 #, kde-format
 msgid "Not registered, searching for new operator to register with."
-msgstr ""
+msgstr "未註冊，正在搜尋要註冊的新經營者。"
 
 #: modemdetails.cpp:318
 #, kde-format
 msgid "Registration denied."
-msgstr ""
+msgstr "註冊被拒。"
 
 #: modemdetails.cpp:320
 #, kde-format
 msgid "Unknown registration status."
-msgstr ""
+msgstr "未知的註冊狀態。"
 
 #: modemdetails.cpp:322
 #, kde-format
 msgid "Registered on a roaming network."
-msgstr ""
+msgstr "已與漫遊網路註冊。"
 
 #: modemdetails.cpp:324
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
-msgstr ""
+msgstr "已與家網路註冊為「僅簡訊」。"
 
 #: modemdetails.cpp:326
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
-msgstr ""
+msgstr "已與漫遊網路註冊為「僅簡訊」。"
 
 #: modemdetails.cpp:328
 #, kde-format
 msgid "Emergency services only."
-msgstr ""
+msgstr "僅緊急服務。"
 
 #: modemdetails.cpp:330
 #, kde-format
@@ -342,60 +344,60 @@ msgstr ""
 #: modemdetails.cpp:373
 #, kde-format
 msgid "Scanning networks failed: %1"
-msgstr ""
+msgstr "掃描網路失敗：%1"
 
 #: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: modemdetails.cpp:434
 #, kde-format
 msgid "GuessYes"
-msgstr ""
+msgstr "猜測是"
 
 #: modemdetails.cpp:436
 #, kde-format
 msgid "GuessNo"
-msgstr ""
+msgstr "猜測否"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
 #: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "2G"
-msgstr ""
+msgstr "2G"
 
 #: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
 #: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
 #: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
 #, kde-format
 msgid "3G"
-msgstr ""
+msgstr "3G"
 
 #: modemdetails.cpp:503
 #, kde-format
 msgid "4G"
-msgstr ""
+msgstr "4G"
 
 #: modemdetails.cpp:506
 #, kde-format
 msgid "5G"
-msgstr ""
+msgstr "5G"
 
 #: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Any"
-msgstr ""
+msgstr "任何"
 
 #: sim.cpp:74
 #, kde-format
 msgid "Lock reason unknown."
-msgstr ""
+msgstr "鎖定原因不明。"
 
 #: sim.cpp:76
 #, kde-format
@@ -405,22 +407,22 @@ msgstr ""
 #: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
-msgstr ""
+msgstr "SIM 卡要求 PIN 碼。"
 
 #: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
-msgstr ""
+msgstr "SIM 卡要求 PIN2 碼。"
 
 #: sim.cpp:82
 #, kde-format
 msgid "SIM requires the PUK code."
-msgstr ""
+msgstr "SIM 卡要求 PUK 碼。"
 
 #: sim.cpp:84
 #, kde-format
 msgid "SIM requires the PUK2 code."
-msgstr ""
+msgstr "SIM 卡要求 PUK2 碼。"
 
 #: sim.cpp:86
 #, kde-format
@@ -480,102 +482,102 @@ msgstr ""
 #: sim.cpp:150
 #, kde-format
 msgid "(empty)"
-msgstr ""
+msgstr "(空白)"
 
 #: sim.cpp:164
 #, kde-format
 msgid "Error toggling SIM lock: %1"
-msgstr ""
+msgstr "切換 SIM 卡鎖定時發生錯誤：%1"
 
 #: sim.cpp:173
 #, kde-format
 msgid "Error changing the PIN: %1"
-msgstr ""
+msgstr "變更 PIN 碼時發生錯誤：%1"
 
 #: sim.cpp:186
 #, kde-format
 msgid "Error sending the PIN: %1"
-msgstr ""
+msgstr "傳送 PIN 碼時發生錯誤：%1"
 
 #: sim.cpp:199
 #, kde-format
 msgid "Error sending the PUK: %1"
-msgstr ""
+msgstr "傳送 PUK 碼時發生錯誤：%1"
 
 #: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
-msgstr ""
+msgstr "可用的網路"
 
 #: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "none"
-msgstr ""
+msgstr "無"
 
 #: ui/AvailableNetworks.qml:40
 #, kde-format
 msgid "Current operator: %1"
-msgstr ""
+msgstr "目前經營者：%1"
 
 #: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
-msgstr ""
+msgstr "掃描網路"
 
 #: ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr ""
+msgstr "編輯 APN"
 
 #: ui/EditProfileDialog.qml:41
 #, kde-format
 msgid "Name"
-msgstr ""
+msgstr "名稱"
 
 #: ui/EditProfileDialog.qml:46
 #, kde-format
 msgid "APN"
-msgstr ""
+msgstr "APN"
 
 #: ui/EditProfileDialog.qml:51
 #, kde-format
 msgid "Username"
-msgstr ""
+msgstr "使用者名稱"
 
 #: ui/EditProfileDialog.qml:56
 #, kde-format
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 #: ui/EditProfileDialog.qml:61
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "網路類型"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "僅 4G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "僅 3G"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "僅 2G"
 
 #: ui/main.qml:52
 #, kde-format
@@ -585,12 +587,12 @@ msgstr ""
 #: ui/main.qml:71
 #, kde-format
 msgid "Mobile data"
-msgstr ""
+msgstr "行動資料"
 
 #: ui/main.qml:76
 #, kde-format
 msgid "No SIM is inserted."
-msgstr ""
+msgstr "未插入 SIM 卡。"
 
 #: ui/main.qml:78
 #, kde-format
@@ -610,28 +612,28 @@ msgstr ""
 #: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
-msgstr ""
+msgstr "資料用量"
 
 #: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
-msgstr ""
+msgstr "檢視資料用量。"
 
 #: ui/main.qml:122 ui/SimPage.qml:35
 #, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
-msgstr[0] ""
+msgstr[0] "SIM 卡"
 
 #: ui/main.qml:143
 #, kde-format
 msgid "SIM %1"
-msgstr ""
+msgstr "SIM 卡 %1"
 
 #: ui/main.qml:144
 #, kde-format
 msgid "View SIM %1 details."
-msgstr ""
+msgstr "檢視 SIM 卡 %1 詳細資料。"
 
 #: ui/ModemPage.qml:20
 #, kde-format
@@ -661,17 +663,17 @@ msgstr ""
 #: ui/ModemPage.qml:75
 #, kde-format
 msgid "IMEI"
-msgstr ""
+msgstr "IMEI"
 
 #: ui/ModemPage.qml:91
 #, kde-format
 msgid "Manufacturer"
-msgstr ""
+msgstr "製造商"
 
 #: ui/ModemPage.qml:99
 #, kde-format
 msgid "Model"
-msgstr ""
+msgstr "型號"
 
 #: ui/ModemPage.qml:114
 #, kde-format
@@ -686,7 +688,7 @@ msgstr ""
 #: ui/ModemPage.qml:143
 #, kde-format
 msgid "Signal Quality"
-msgstr ""
+msgstr "訊號品質"
 
 #: ui/ModemPage.qml:151
 #, kde-format
@@ -696,7 +698,7 @@ msgstr ""
 #: ui/ModemPage.qml:159
 #, kde-format
 msgid "Failure Reason"
-msgstr ""
+msgstr "失敗原因"
 
 #: ui/ModemPage.qml:167
 #, kde-format
@@ -706,47 +708,47 @@ msgstr ""
 #: ui/ModemPage.qml:175
 #, kde-format
 msgid "Roaming"
-msgstr ""
+msgstr "漫遊"
 
 #: ui/ModemPage.qml:183
 #, kde-format
 msgid "Firmware Version"
-msgstr ""
+msgstr "韌體版本"
 
 #: ui/ModemPage.qml:191
 #, kde-format
 msgid "Interface Name"
-msgstr ""
+msgstr "介面名稱"
 
 #: ui/ModemPage.qml:199
 #, kde-format
 msgid "Metered"
-msgstr ""
+msgstr "計量"
 
 #: ui/ModemPage.qml:207
 #, kde-format
 msgid "Active NetworkManager Connection"
-msgstr ""
+msgstr "作用中的 NetworkManager 連線"
 
 #: ui/ModemPage.qml:215
 #, kde-format
 msgid "Device"
-msgstr ""
+msgstr "裝置"
 
 #: ui/ModemPage.qml:223
 #, kde-format
 msgid "Device ID"
-msgstr ""
+msgstr "裝置 ID"
 
 #: ui/ModemPage.qml:238
 #, kde-format
 msgid "Drivers:"
-msgstr ""
+msgstr "驅動程式："
 
 #: ui/ModemPage.qml:258
 #, kde-format
 msgid "Plugin"
-msgstr ""
+msgstr "外掛程式"
 
 #: ui/ModemPage.qml:266
 #, kde-format
@@ -761,12 +763,12 @@ msgstr ""
 #: ui/ProfileList.qml:23
 #, kde-format
 msgid "APNs"
-msgstr ""
+msgstr "APN"
 
 #: ui/ProfileList.qml:26 ui/ProfileList.qml:96
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 #: ui/ProfileList.qml:61
 #, kde-format
@@ -778,129 +780,129 @@ msgstr ""
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN 列表"
 
 #: ui/ProfileList.qml:107
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: ui/ProfileList.qml:116
 #, kde-format
 msgid "Add APN"
-msgstr ""
+msgstr "新增 APN"
 
 #: ui/ProfileList.qml:125
 #, kde-format
 msgid "Automatically detect APN"
-msgstr ""
+msgstr "自動偵測 APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
 msgid "SIM Lock"
-msgstr ""
+msgstr "SIM 卡鎖定"
 
 #: ui/SimLockPage.qml:38
 #, kde-format
 msgid "SIM is locked"
-msgstr ""
+msgstr "SIM 卡已鎖定"
 
 #: ui/SimLockPage.qml:39
 #, kde-format
 msgid "In order to use this SIM, you must first unlock it."
-msgstr ""
+msgstr "要使用這張 SIM 卡，您必須先解鎖它。"
 
 #: ui/SimLockPage.qml:61
 #, kde-format
 msgid "SIM is not locked"
-msgstr ""
+msgstr "SIM 卡未被鎖定"
 
 #: ui/SimLockPage.qml:62
 #, kde-format
 msgid ""
 "You can lock your SIM to require a set PIN code for phone calls and mobile "
 "data."
-msgstr ""
+msgstr "您可以鎖定您的 SIM 卡，這樣打電話或使用行動資料前會需要輸入 PIN 碼。"
 
 #: ui/SimLockPage.qml:66
 #, kde-format
 msgid "Lock SIM"
-msgstr ""
+msgstr "鎖定 SIM 卡"
 
 #: ui/SimLockPage.qml:78
 #, kde-format
 msgid "Disable SIM Lock"
-msgstr ""
+msgstr "停用 SIM 卡鎖定"
 
 #: ui/SimLockPage.qml:79
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr ""
+msgstr "停用 SIM 卡鎖定功能並移除 SIM 卡上的密碼。"
 
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr ""
+msgstr "變更 PIN 碼"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr ""
+msgstr "變更 SIM 卡上設定的密碼。"
 
 #: ui/SimLockPage.qml:106
 #, kde-format
 msgid "Unlock SIM"
-msgstr ""
+msgstr "解鎖 SIM 卡"
 
 #: ui/SimLockPage.qml:114
 #, kde-format
 msgid "Attempts left: %1"
-msgstr ""
+msgstr "還剩幾次嘗試機會：%1"
 
 #: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
-msgstr ""
+msgstr "輸入 PIN 碼"
 
 #: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "變更 SIM 卡 PIN 碼"
 
 #: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
 msgid "PINs don't match!"
-msgstr ""
+msgstr "PIN 碼不相符！"
 
 #: ui/SimLockPage.qml:151 ui/SimLockPage.qml:216
 #, kde-format
 msgid "PINs must be between 4 and 8 digits!"
-msgstr ""
+msgstr "PIN 碼必須介於 4 到 8 位數之間！"
 
 #: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
 msgid "Current PIN"
-msgstr ""
+msgstr "目前 PIN 碼"
 
 #: ui/SimLockPage.qml:161 ui/SimLockPage.qml:221
 #, kde-format
 msgid "New PIN"
-msgstr ""
+msgstr "新 PIN 碼"
 
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr ""
+msgstr "確認 PIN 碼"
 
 #: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr ""
+msgstr "移除 SIM 卡 PIN 碼"
 
 #: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
-msgstr ""
+msgstr "新增 SIM 卡 PIN 碼"
 
 #: ui/SimPage.qml:45
 #, kde-format
@@ -912,7 +914,7 @@ msgstr ""
 #: ui/SimPage.qml:60
 #, kde-format
 msgid "Data Roaming"
-msgstr ""
+msgstr "資料漫遊"
 
 #: ui/SimPage.qml:61
 #, kde-format
@@ -922,7 +924,7 @@ msgstr ""
 #: ui/SimPage.qml:72
 #, kde-format
 msgid "Modify APNs"
-msgstr ""
+msgstr "修改 APN"
 
 #: ui/SimPage.qml:73
 #, kde-format
@@ -932,17 +934,17 @@ msgstr ""
 #: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
-msgstr ""
+msgstr "網路"
 
 #: ui/SimPage.qml:84
 #, kde-format
 msgid "Select a network operator."
-msgstr ""
+msgstr "選擇網路經營者。"
 
 #: ui/SimPage.qml:95
 #, kde-format
 msgid "Modify SIM lock settings."
-msgstr ""
+msgstr "修改 SIM 卡鎖定設定。"
 
 #: ui/SimPage.qml:106
 #, kde-format
@@ -952,17 +954,17 @@ msgstr ""
 #: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
-msgstr ""
+msgstr "SIM 卡詳細資料"
 
 #: ui/SimPage.qml:126
 #, kde-format
 msgid "IMSI"
-msgstr ""
+msgstr "IMSI"
 
 #: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
-msgstr ""
+msgstr "EID"
 
 #: ui/SimPage.qml:142
 #, kde-format
@@ -987,9 +989,9 @@ msgstr ""
 #: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
-msgstr ""
+msgstr "SIM 卡 ID"
 
 #: ui/SimPage.qml:190
 #, kde-format
 msgid "Emergency Numbers"
-msgstr ""
+msgstr "緊急電話號碼"

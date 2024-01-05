@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2024-01-03 09:50+0200\n"
+"PO-Revision-Date: 2024-01-04 08:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -242,9 +242,7 @@ msgid "Unknown battery"
 msgstr "Bateria desconeguda"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is a percentage value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
 msgstr "%1%"
