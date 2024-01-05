@@ -30,7 +30,8 @@
                 "Name[tr]": "Plata Hill",
                 "Name[uk]": "Plata Hill",
                 "Name[x-test]": "xxPlata Hillxx",
-                "Name[zh_CN]": "Plata Hill"
+                "Name[zh_CN]": "Plata Hill",
+                "Name[zh_TW]": "Plata Hill"
             }
         ],
         "Description": "Removes window decorations and maximizes windows on the first screen only.",

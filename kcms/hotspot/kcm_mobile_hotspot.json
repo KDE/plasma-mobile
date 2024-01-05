@@ -29,7 +29,8 @@
                 "Name[tr]": "Tobias Fella",
                 "Name[uk]": "Tobias Fella",
                 "Name[x-test]": "xxTobias Fellaxx",
-                "Name[zh_CN]": "Tobias Fella"
+                "Name[zh_CN]": "Tobias Fella",
+                "Name[zh_TW]": "Tobias Fella"
             }
         ],
         "Category": "System Information",

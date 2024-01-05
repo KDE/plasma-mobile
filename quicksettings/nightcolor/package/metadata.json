@@ -38,7 +38,8 @@
                 "Name[tr]": "Aleix Pol",
                 "Name[uk]": "Aleix Pol",
                 "Name[x-test]": "xxAleix Polxx",
-                "Name[zh_CN]": "Aleix Pol"
+                "Name[zh_CN]": "Aleix Pol",
+                "Name[zh_TW]": "Aleix Pol"
             }
         ],
         "Description": "Night color quick setting for Plasma Mobile",

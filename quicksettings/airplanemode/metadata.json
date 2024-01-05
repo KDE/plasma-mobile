@@ -38,7 +38,8 @@
                 "Name[tr]": "Buşan Şah",
                 "Name[uk]": "Bhushan Shah",
                 "Name[x-test]": "xxBhushan Shahxx",
-                "Name[zh_CN]": "Bhushan Shah"
+                "Name[zh_CN]": "Bhushan Shah",
+                "Name[zh_TW]": "Bhushan Shah"
             }
         ],
         "Description": "Airplane mode quick setting for Plasma Mobile",

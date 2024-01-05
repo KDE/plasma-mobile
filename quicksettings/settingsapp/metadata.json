@@ -37,7 +37,8 @@
                 "Name[tr]": "Devin Lin",
                 "Name[uk]": "Devin Lin",
                 "Name[x-test]": "xxDevin Linxx",
-                "Name[zh_CN]": "Devin Lin"
+                "Name[zh_CN]": "Devin Lin",
+                "Name[zh_TW]": "Devin Lin"
             }
         ],
         "Description": "Settings application quick setting for Plasma Mobile",
