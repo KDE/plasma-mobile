@@ -1,15 +1,15 @@
 # Translation of kcm_mobile_powermanagement.po to Catalan (Valencian)
-# Copyright (C) 2023 This_file_is_part_of_KDE
+# Copyright (C) 2023-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2023-03-15 15:02+0100\n"
+"PO-Revision-Date: 2024-01-04 08:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -50,10 +50,9 @@ msgid "15 min"
 msgstr "15 min"
 
 #: mobilepower.cpp:34
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 min"
+msgstr "30 min"
 
 #: mobilepower.cpp:35
 #, kde-format
@@ -243,9 +242,7 @@ msgid "Unknown battery"
 msgstr "Bateria desconeguda"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is a percentage value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
 msgstr "%1%"
@@ -284,10 +281,3 @@ msgstr "Apaga la pantalla després de"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Suspén el dispositiu després de"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgctxt "%1 is value, %2 is unit"
-#~ msgid "%1%2"
-#~ msgstr "%1%2"
