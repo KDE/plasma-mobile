@@ -76,24 +76,45 @@ void FlashlightUtil::findTorchDevice()
     udev_enumerate_scan_devices(enumerate);
 
     struct udev_list_entry *devices = udev_enumerate_get_list_entry(enumerate);
-    struct udev_list_entry *entry = udev_list_entry_get_next(devices);
+    struct udev_list_entry *entry = nullptr;
 
-    if (entry == nullptr) {
-        qWarning() << "No flashlight found";
-        return;
+    struct udev_device *device = nullptr;
+
+    udev_list_entry_foreach(entry, devices)
+    {
+        const char *path = udev_list_entry_get_name(entry);
+
+        if (path == nullptr) {
+            continue;
+        }
+
+        if (device != nullptr) {
+            udev_device_unref(device); // Use to free memory from previous loop iteration
+        }
+
+        device = udev_device_new_from_syspath(udev, path);
+
+        if (device == nullptr) {
+            continue;
+        }
+
+        qInfo() << "Found flashlight device : " << path;
+
+        const char *color = udev_device_get_sysattr_value(device, "color");
+
+        if (color == nullptr) {
+            continue;
+        }
+
+        qInfo() << "Flash color : " << color;
+
+        if (std::strcmp(color, "white") == 0) {
+            break;
+        }
     }
-
-    const char *path = udev_list_entry_get_name(entry);
-
-    if (path == nullptr) {
-        qWarning() << "Failed to get path from udev entry";
-        return;
-    }
-
-    struct udev_device *device = udev_device_new_from_syspath(udev, path);
 
     if (device == nullptr) {
-        qWarning() << "Failed to get udev device";
+        qWarning() << "No flashlight device found";
         return;
     }
 
@@ -104,12 +125,16 @@ void FlashlightUtil::findTorchDevice()
         return;
     }
 
+    qInfo() << "Flash maxBrightness : " << maxBrightness;
+
     const char *brightness = udev_device_get_sysattr_value(device, "brightness");
 
     if (brightness == nullptr) {
         qWarning() << "Failed to read brightness from udev device";
         return;
     }
+
+    qInfo() << "Flash brightness : " << brightness;
 
     m_maxBrightness = maxBrightness;
     m_device = device;
