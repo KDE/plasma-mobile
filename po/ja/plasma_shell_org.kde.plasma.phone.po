@@ -57,9 +57,3 @@ msgstr "決定する"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "壁紙"
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "壁紙を変更する"
-
-#~ msgid "Configure"
-#~ msgstr "設定"
