@@ -5,10 +5,13 @@
 
 #include <KOSRelease>
 #include <QObject>
+#include <QtQml>
 
 class InitialStartUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
     Q_PROPERTY(QString distroName READ distroName CONSTANT);
 
 public:

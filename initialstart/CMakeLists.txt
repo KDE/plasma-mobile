@@ -3,20 +3,25 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_org.kde.plasma.mobileinitialstart\")
 
-set(plasma-mobile-initial-start_SRCS
+add_subdirectory(modules)
+
+add_executable(plasma-mobile-initial-start
     main.cpp
     wizard.cpp
+    wizard.h
     settings.cpp
+    settings.h
     utils.h
+    initialstartutil.cpp
+    initialstartutil.h
 )
 
-qt_add_resources(RESOURCES resources.qrc)
+qt_add_qml_module(plasma-mobile-initial-start
+    URI org.kde.plasma.mobileinitialstart.initialstart
+    VERSION 1.0
+)
 
-add_subdirectory(modules)
-add_subdirectory(plugin)
-
-add_executable(plasma-mobile-initial-start ${plasma-mobile-initial-start_SRCS} ${RESOURCES})
-target_link_libraries(plasma-mobile-initial-start
+target_link_libraries(plasma-mobile-initial-start PUBLIC
     Qt::Qml
     Qt::Gui
     Qt::Widgets
@@ -27,6 +32,20 @@ target_link_libraries(plasma-mobile-initial-start
     KF6::CoreAddons
     KF6::DBusAddons
     KF6::Package
+)
+
+qt_target_qml_sources(plasma-mobile-initial-start
+    QML_FILES
+        qml/Main.qml
+        qml/Wizard.qml
+        qml/LandingComponent.qml
+)
+
+qt_add_resources(plasma-mobile-initial-start
+    PREFIX
+        "/"
+    FILES
+        assets/background.png
 )
 
 target_include_directories(plasma-mobile-initial-start PRIVATE ${CMAKE_BINARY_DIR})

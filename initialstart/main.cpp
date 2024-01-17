@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
         return wizard;
     });
 
-    engine.load(QUrl(QStringLiteral("qrc:/qml/main.qml")));
+    engine.load(QUrl(QStringLiteral("qrc:org/kde/plasma/mobileinitialstart/initialstart/qml/Main.qml")));
 
     app.setWindowIcon(QIcon::fromTheme(QStringLiteral("start-here-symbolic")));
 
