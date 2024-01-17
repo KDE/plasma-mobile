@@ -15,32 +15,16 @@
 #include "version.h"
 #include "wizard.h"
 
-QCommandLineParser *createParser()
+std::unique_ptr<QCommandLineParser> createParser()
 {
-    QCommandLineParser *parser = new QCommandLineParser;
+    auto parser = std::make_unique<QCommandLineParser>();
     parser->addOption(QCommandLineOption(QStringLiteral("test-wizard"), i18n("Opens the initial start wizard without modifying configuration")));
-    parser->addVersionOption();
-    parser->addHelpOption();
     return parser;
 }
 
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-
-    // parse command
-    QScopedPointer<QCommandLineParser> parser{createParser()};
-    parser->process(app);
-
-    bool testWizard = parser->isSet(QStringLiteral("test-wizard"));
-
-    if (!testWizard) {
-        // if the wizard has already been run, or we aren't in plasma mobile
-        if (!Settings::self()->shouldStartWizard()) {
-            qDebug() << "Wizard will not be started since either it has already been run, or the current session is not Plasma Mobile.";
-            return 0;
-        }
-    }
 
     // start wizard
     KLocalizedString::setApplicationDomain("plasma_org.kde.plasma.mobileinitialstart");
@@ -52,6 +36,21 @@ int main(int argc, char *argv[])
                          i18n("© 2023 KDE Community"));
     aboutData.addAuthor(i18n("Devin Lin"), QString(), QStringLiteral("devin@kde.org"));
     KAboutData::setApplicationData(aboutData);
+
+    // parse command
+    auto parser = createParser();
+    aboutData.setupCommandLine(parser.get());
+    parser->process(app);
+    aboutData.processCommandLine(parser.get());
+
+    const bool testWizard = parser->isSet(QStringLiteral("test-wizard"));
+    if (!testWizard) {
+        // if the wizard has already been run, or we aren't in plasma mobile
+        if (!Settings::self()->shouldStartWizard()) {
+            qDebug() << "Wizard will not be started since either it has already been run, or the current session is not Plasma Mobile.";
+            return 0;
+        }
+    }
 
     QQmlApplicationEngine engine;
     engine.rootContext()->setContextObject(new KLocalizedContext{&engine});
