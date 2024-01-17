@@ -13,16 +13,18 @@
 #include <QDebug>
 #include <QProcess>
 
-const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
-const QString SAVED_CONFIG_GROUP = QStringLiteral("SavedConfig");
+using namespace Qt::Literals::StringLiterals;
+
+const QString CONFIG_FILE = u"plasmamobilerc"_s;
+const QString SAVED_CONFIG_GROUP = u"SavedConfig"_s;
 
 Settings::Settings(QObject *parent)
     : QObject{parent}
-    , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(QStringLiteral("phone"))}
+    , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(u"phone"_s)}
     , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
-    , m_kwinrcConfig{KSharedConfig::openConfig(QStringLiteral("kwinrc"), KConfig::SimpleConfig)}
-    , m_appBlacklistConfig{KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"), KConfig::SimpleConfig)}
-    , m_kdeglobalsConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
+    , m_kwinrcConfig{KSharedConfig::openConfig(u"kwinrc"_s, KConfig::SimpleConfig)}
+    , m_appBlacklistConfig{KSharedConfig::openConfig(u"applications-blacklistrc"_s, KConfig::SimpleConfig)}
+    , m_kdeglobalsConfig{KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig)}
     , m_configWatcher{KConfigWatcher::create(m_mobileConfig)}
 {
 }
@@ -49,17 +51,17 @@ void Settings::applyConfiguration()
 void Settings::loadSavedConfiguration()
 {
     // kwinrc
-    loadKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
+    loadKeys(u"kwinrc"_s, m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
     m_kwinrcConfig->sync();
     reloadKWinConfig();
 
     // applications-blacklistrc
-    loadKeys(QStringLiteral("applications-blacklistrc"), m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
+    loadKeys(u"applications-blacklistrc"_s, m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
     m_appBlacklistConfig->sync();
 
     // kdeglobals
-    loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS);
-    loadKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS);
+    loadKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS);
+    loadKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_SETTINGS);
     m_kdeglobalsConfig->sync();
 
     // save our changes
@@ -69,23 +71,21 @@ void Settings::loadSavedConfiguration()
 void Settings::applyMobileConfiguration()
 {
     // kwinrc
-    writeKeys(QStringLiteral("kwinrc"), m_kwinrcConfig, getKwinrcSettings(m_mobileConfig), false);
+    writeKeys(u"kwinrc"_s, m_kwinrcConfig, getKwinrcSettings(m_mobileConfig), false);
     m_kwinrcConfig->sync();
     reloadKWinConfig();
 
     // applications-blacklistrc
-    writeKeys(QStringLiteral("applications-blacklistrc"),
+    writeKeys(u"applications-blacklistrc"_s,
               m_appBlacklistConfig,
               APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS,
               true); // only write entries if they are not already defined in the config
     m_appBlacklistConfig->sync();
 
     // kdeglobals
-    writeKeys(QStringLiteral("kdeglobals"),
-              m_kdeglobalsConfig,
-              KDEGLOBALS_DEFAULT_SETTINGS,
+    writeKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS,
               true); // only write entries if they are not already defined in the config
-    writeKeys(QStringLiteral("kdeglobals"), m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, false);
+    writeKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, false);
     m_kdeglobalsConfig->sync();
 
     // save our changes
@@ -166,6 +166,6 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
 
 void Settings::reloadKWinConfig()
 {
-    QDBusMessage message = QDBusMessage::createSignal(QStringLiteral("/KWin"), QStringLiteral("org.kde.KWin"), QStringLiteral("reloadConfig"));
+    QDBusMessage message = QDBusMessage::createSignal(u"/KWin"_s, u"org.kde.KWin"_s, u"reloadConfig"_s);
     QDBusConnection::sessionBus().send(message);
 }
