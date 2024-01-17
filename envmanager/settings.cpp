@@ -27,9 +27,9 @@ Settings::Settings(QObject *parent)
 {
 }
 
-Settings *Settings::self()
+Settings &Settings::self()
 {
-    static Settings *settings = new Settings;
+    static Settings settings;
     return settings;
 }
 

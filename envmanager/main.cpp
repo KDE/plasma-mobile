@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
 
     // apply configuration
     if (parser->isSet(QStringLiteral("apply-settings"))) {
-        Settings::self()->applyConfiguration();
+        Settings::self().applyConfiguration();
     } else {
         parser->showHelp();
     }

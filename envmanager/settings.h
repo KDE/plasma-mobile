@@ -15,7 +15,7 @@ class Settings : public QObject
 
 public:
     Settings(QObject *parent = nullptr);
-    static Settings *self();
+    static Settings &self();
 
     // apply the configuration
     void applyConfiguration();
