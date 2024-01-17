@@ -62,9 +62,3 @@ msgstr "Aplica ara"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Fons de pantalla"
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Canvia el fons de pantalla"
-
-#~ msgid "Configure"
-#~ msgstr "Configura"
