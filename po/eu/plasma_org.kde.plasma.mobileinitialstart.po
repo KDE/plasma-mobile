@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-19 00:38+0000\n"
 "PO-Revision-Date: 2023-11-25 11:50+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -35,12 +35,12 @@ msgstr "xalba@ni.eus"
 msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Hasierako abioko morroia irekitzen du konfigurazioa aldatu gabe"
 
-#: main.cpp:52
+#: main.cpp:36
 #, kde-format
 msgid "© 2023 KDE Community"
 msgstr "© 2023 KDE Komunitatea"
 
-#: main.cpp:53
+#: main.cpp:37
 #, kde-format
 msgid "Devin Lin"
 msgstr "Devin Lin"

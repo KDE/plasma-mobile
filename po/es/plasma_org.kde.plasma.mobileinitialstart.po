@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-19 00:38+0000\n"
 "PO-Revision-Date: 2023-11-12 00:13+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -34,12 +34,12 @@ msgstr "ecuadra@eloihr.net"
 msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Abre el asistente del primer inicio sin modificar la configuración"
 
-#: main.cpp:52
+#: main.cpp:36
 #, kde-format
 msgid "© 2023 KDE Community"
 msgstr "© 2023 La comunidad KDE"
 
-#: main.cpp:53
+#: main.cpp:37
 #, kde-format
 msgid "Devin Lin"
 msgstr "Devin Lin"

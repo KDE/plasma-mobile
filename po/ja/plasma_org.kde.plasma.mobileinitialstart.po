@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-19 00:38+0000\n"
 "PO-Revision-Date: 2023-04-06 00:04-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -29,12 +29,12 @@ msgstr ""
 msgid "Opens the initial start wizard without modifying configuration"
 msgstr ""
 
-#: main.cpp:52
+#: main.cpp:36
 #, kde-format
 msgid "© 2023 KDE Community"
 msgstr ""
 
-#: main.cpp:53
+#: main.cpp:37
 #, kde-format
 msgid "Devin Lin"
 msgstr ""

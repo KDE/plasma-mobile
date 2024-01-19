@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-19 00:38+0000\n"
 "PO-Revision-Date: 2023-11-11 03:18+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -33,12 +33,12 @@ msgstr "Temuri.doghonadze@gmail.com"
 msgid "Opens the initial start wizard without modifying configuration"
 msgstr "გახსნის საწყისი მოგების ოსტატს კონფიგურაციის შეცვლის გარეშე"
 
-#: main.cpp:52
+#: main.cpp:36
 #, kde-format
 msgid "© 2023 KDE Community"
 msgstr "© 2023 KDE-ის საზოგადოება"
 
-#: main.cpp:53
+#: main.cpp:37
 #, kde-format
 msgid "Devin Lin"
 msgstr "Devin Lin"
