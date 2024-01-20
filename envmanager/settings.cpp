@@ -136,8 +136,8 @@ void Settings::saveConfigSetting(const QString &fileName, const QString &group, 
 // NOTE: this deletes the stored value from the config after loading
 const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write)
 {
-    const auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
-    const auto fileGroup = KConfigGroup{&savedGroup, fileName};
+    auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
+    auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
