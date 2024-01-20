@@ -16,6 +16,7 @@ import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.private.systemtray as SystemTray
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
 import org.kde.plasma.private.mobileshell as MobileShell
@@ -67,17 +68,7 @@ Item {
     Loader {
         id: statusNotifierSourceLoader
         active: !disableSystemTray
-        sourceComponent: P5Support.DataSource {
-            id: statusNotifierSource
-            engine: "statusnotifieritem"
-            interval: 0
-            onSourceAdded: {
-                connectSource(source)
-            }
-            Component.onCompleted: {
-                connectedSources = sources
-            }
-        }
+        sourceComponent: SystemTray.StatusNotifierModel { }
     }
 
     // drop shadow for icons
@@ -141,13 +132,7 @@ Item {
                 // system tray
                 Repeater {
                     id: statusNotifierRepeater
-                    model: KItemModels.KSortFilterProxyModel {
-                        id: filteredStatusNotifiers
-                        filterRoleName: "Title"
-                        sourceModel: P5Support.DataModel {
-                            dataSource: statusNotifierSource ? statusNotifierSource : null
-                        }
-                    }
+                    model: root.statusNotifierSource
 
                     delegate: TaskWidget {
                         Layout.leftMargin: root.elementSpacing
