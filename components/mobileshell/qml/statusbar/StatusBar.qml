@@ -23,38 +23,38 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     id: root
-    
+
     /**
      * Whether to show a drop shadow under the status bar.
      */
     property bool showDropShadow: false
-    
+
     /**
      * The background color of the status bar.
      */
     property color backgroundColor: "transparent"
-    
+
     /**
      * Whether to show a second row of the status bar, with more information.
      */
     property bool showSecondRow: false // show extra row with date and mobile provider
-    
+
     /**
      * Whether to show time. If set to false, the signal strength indicator is moved in its place.
      */
     property bool showTime: true
-    
+
     /**
      * Disables showing system tray indicators, preventing SIGABRT when used on the lockscreen.
      */
     property bool disableSystemTray: false
-    
+
     property color colorScopeColor: Kirigami.Theme.backgroundColor
-    
+
     readonly property real textPixelSize: 11
     readonly property real smallerTextPixelSize: 9
     readonly property real elementSpacing: Kirigami.Units.smallSpacing * 1.5
-    
+
     P5Support.DataSource {
         id: timeSource
         engine: "time"
@@ -62,9 +62,9 @@ Item {
         interval: 60 * 1000
         intervalAlignment: P5Support.Types.AlignToMinute
     }
-    
+
     property alias statusNotifierSource: statusNotifierSourceLoader.item
-    
+
     Loader {
         id: statusNotifierSourceLoader
         active: !disableSystemTray
