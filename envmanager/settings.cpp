@@ -94,10 +94,12 @@ void Settings::applyMobileConfiguration()
 
 void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty)
 {
-    for (auto groupName : settings.keys()) {
+    const auto groupNames = settings.keys();
+    for (const auto &groupName : groupNames) {
         auto group = KConfigGroup{config, groupName};
 
-        for (auto key : settings[groupName].keys()) {
+        const auto keys = settings[groupName].keys();
+        for (const auto &key : keys) {
             if (!group.hasKey(key) || !overwriteOnlyIfEmpty) {
                 // save key
                 saveConfigSetting(fileName, groupName, key, group.readEntry(key));
@@ -111,10 +113,12 @@ void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, co
 
 void Settings::loadKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings)
 {
-    for (auto groupName : settings.keys()) {
-        auto group = KConfigGroup{config, groupName};
+    const auto groupNames = settings.keys();
+    for (const auto &groupName : groupNames) {
+        const auto group = KConfigGroup{config, groupName};
 
-        for (auto key : settings[groupName].keys()) {
+        const auto keys = settings[groupName].keys();
+        for (const auto &key : keys) {
             loadSavedConfigSetting(config, fileName, groupName, key);
         }
     }
@@ -123,8 +127,8 @@ void Settings::loadKeys(const QString &fileName, KSharedConfig::Ptr &config, con
 // NOTE: this only saves a value if it hasn't already been saved
 void Settings::saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value)
 {
-    auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
-    auto fileGroup = KConfigGroup{&savedGroup, fileName};
+    const auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
+    const auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
@@ -150,7 +154,7 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
     auto configGroup = KConfigGroup{config, group};
 
     if ((!configGroup.hasKey(key) || configGroup.readEntry(key) != value) && write) {
-        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "loading saved value of" << key << "which is" << value;
+        qCDebug(LOGGING_CATEGORY) << "In" << fileName << "loading saved value of" << key << "which is" << value << "in" << group;
 
         if (value.isEmpty()) { // delete blank entries!
             configGroup.deleteEntry(key);
