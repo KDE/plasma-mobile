@@ -54,19 +54,20 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormCard {
-            FormCard.FormSwitchDelegate {
-                id: gestureDelegate
-                text: i18n("Gesture-only Mode")
-                description: i18n("Whether to hide the navigation panel.")
-                checked: !ShellSettings.Settings.navigationPanelEnabled
-                onCheckedChanged: {
-                    if (checked != !ShellSettings.Settings.navigationPanelEnabled) {
-                        ShellSettings.Settings.navigationPanelEnabled = !checked;
-                    }
-                }
-            }
+            // TODO: Gesture only mode setting is disabled until we get the kwin effect gesture working: https://invent.kde.org/plasma/plasma-mobile/-/issues/300
+            // FormCard.FormSwitchDelegate {
+            //     id: gestureDelegate
+            //     text: i18n("Gesture-only Mode")
+            //     description: i18n("Whether to hide the navigation panel.")
+            //     checked: !ShellSettings.Settings.navigationPanelEnabled
+            //     onCheckedChanged: {
+            //         if (checked != !ShellSettings.Settings.navigationPanelEnabled) {
+            //             ShellSettings.Settings.navigationPanelEnabled = !checked;
+            //         }
+            //     }
+            // }
 
-            FormCard.FormDelegateSeparator { visible: keyboardToggleDelegate.visible; above: gestureDelegate; below: keyboardToggleDelegate }
+            // FormCard.FormDelegateSeparator { visible: keyboardToggleDelegate.visible; above: gestureDelegate; below: keyboardToggleDelegate }
 
             FormCard.FormSwitchDelegate {
                 id: keyboardToggleDelegate
