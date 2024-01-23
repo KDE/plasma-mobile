@@ -284,10 +284,3 @@ msgstr "Slå av skjermen etter"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Slå av eininga etter"
-
-#~ msgid "%"
-#~ msgstr " %"
-
-#~ msgctxt "%1 is value, %2 is unit"
-#~ msgid "%1%2"
-#~ msgstr "%1 %2"

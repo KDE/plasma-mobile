@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-11-06 09:16+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -51,22 +51,12 @@ msgstr ""
 msgid "Navigation Panel"
 msgstr "Quadro de navegació"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Mode de només gestos"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Si s'ha d'ocultar el quadro de navegació."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Mostra sempre el canvi del teclat"
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -74,44 +64,44 @@ msgstr ""
 "Si sempre s'ha de mostrar el botó de commutació del teclat en el quadro de "
 "navegació."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "Calaix d'accions"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Mode fixat"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Mode expandit"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Opcions ràpides"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Mode del calaix superior esquerre"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Mode en obrir des de la part superior esquerra."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Mode del calaix superior dret"
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Mode en obrir des de la part superior dreta."
@@ -187,6 +177,12 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla per separat en el mòdul de configuració "
 "del teclat."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Mode de només gestos"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Si s'ha d'ocultar el quadro de navegació."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Intensitat de la vibració"
