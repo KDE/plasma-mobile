@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-11-06 09:05+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -48,22 +48,12 @@ msgstr "Якщо вимкнено, використання анімацій б�
 msgid "Navigation Panel"
 msgstr "Панель навігації"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Режим лише жестів"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Визначає, чи слід ховати панель навігації."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Завжди показувати перемикач клавіатури"
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -71,44 +61,44 @@ msgstr ""
 "Визначає, чи слід завжди показувати кнопку перемикання клавіатури на панелі "
 "навігації."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "Висувна панель дій"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Пришпилений режим"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Розширений режим"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Швидке налаштовування"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Режим верхньої лівої висувної панелі"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Режим відкриття від верхнього лівого кута."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Режим верхньої правої висувної панелі"
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Режим відкриття від верхнього правого кута."
@@ -184,6 +174,12 @@ msgid ""
 msgstr ""
 "Керування вібраціями клавіатури виконується окремо у модулі параметрів "
 "клавіатури."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Режим лише жестів"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Визначає, чи слід ховати панель навігації."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Інтенсивність вібрації"

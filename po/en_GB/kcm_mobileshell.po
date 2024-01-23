@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-03-26 14:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -47,66 +47,56 @@ msgstr "If this is off, animations will be reduced as much as possible."
 msgid "Navigation Panel"
 msgstr "Navigation Panel"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Gesture-only Mode"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "Whether to hide the navigation panel."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Whether to hide the navigation panel."
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Whether to hide the navigation panel."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "Action Drawer"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Pinned Mode"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Expanded Mode"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Quick Settings"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Top Left Drawer Mode"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Mode when opening from the top left."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Top Right Drawer Mode"
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Mode when opening from the top right."
@@ -181,6 +171,12 @@ msgid ""
 msgstr ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Gesture-only Mode"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "Whether to hide the navigation panel."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Vibration Intensity"

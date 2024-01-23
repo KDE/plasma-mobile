@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-12-17 21:31+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -47,65 +47,55 @@ msgstr "Ha ki van kapcsolva, az animációk a lehető legjobban lecsökkennek."
 msgid "Navigation Panel"
 msgstr "Navigációs panel"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "Csak gesztusos mód"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "El legyen-e rejtve a navigációs panel."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Mindig jelenjen meg a billentyűzetváltó"
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Mindig megjelenjen-e a billentyűzetváltó gomb a navigációs panelen."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "Csúszómenü"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Rögzített mód"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Kiterjesztett mód"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Gyorsbeállítások"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Bal felső csúszómenü"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Mód a bal felső sarokból való megnyitáskor."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Jobb felső csúszómenü."
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Mód a jobb felső sarokból való megnyitáskor."
@@ -180,3 +170,9 @@ msgid ""
 "module."
 msgstr ""
 "A billentyűzet rezgése külön szabályozható a billentyűzetbeállító modulban."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "Csak gesztusos mód"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "El legyen-e rejtve a navigációs panel."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-11-06 05:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -48,22 +48,12 @@ msgstr "თუ გამორთულია, ანიმაციები �
 msgid "Navigation Panel"
 msgstr "ნავიგაციის პანელი"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "მხოლოდ-ჟესტების რეჟიმი"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "ნავიგაციის პანელის დამალვის ჩართ/გამორთ."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "კლავიატურის გადამრთველის ყოველთვის გამოტანა"
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -71,44 +61,44 @@ msgstr ""
 "ნავიგაციის პანელზე კლავიატურის გადართვის ღილაკის ყოველთვის გამოტანის "
 "გადართვა."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "ქმედებების უჯრა"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "მიჭიკარტებული  რეჟიმი"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "გაფართოებული რეჟიმი"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "სწრაფი მორგება"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "ზედა მარცხენა უჯრის რეჟიმი"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "ზედა მარცხენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "ზედა მარჯვენა უჯრის რეჟიმი"
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "ზედა მარჯვენა ადგილიდან გახსნისას გამოყენებული რეჟიმი."
@@ -182,6 +172,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "კლავიატურის ვიბრაცია ცალკე, კლავიატურის მორგების მოდულში კონტროლდება."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "მხოლოდ-ჟესტების რეჟიმი"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "ნავიგაციის პანელის დამალვის ჩართ/გამორთ."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "ვიბრაციის ინტენსივობა"

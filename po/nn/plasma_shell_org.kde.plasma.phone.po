@@ -62,9 +62,3 @@ msgstr "Bruk no"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Bakgrunnsbilete"
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Byt bakgrunnsbilete"
-
-#~ msgid "Configure"
-#~ msgstr "Set opp"

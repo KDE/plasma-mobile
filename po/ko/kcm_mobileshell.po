@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:46+0000\n"
+"POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-10-08 23:47+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -47,66 +47,56 @@ msgstr "이 설정을 사용하지 않으면 애니메이션을 최소화합니�
 msgid "Navigation Panel"
 msgstr "탐색 패널"
 
-#: ui/main.qml:59
-#, kde-format
-msgid "Gesture-only Mode"
-msgstr "제스처 전용 모드"
-
-#: ui/main.qml:60
-#, kde-format
-msgid "Whether to hide the navigation panel."
-msgstr "탐색 패널을 숨길지 여부입니다."
-
-#: ui/main.qml:74
+#: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:75
+#: ui/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Whether to hide the navigation panel."
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "탐색 패널을 숨길지 여부입니다."
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
 msgstr "동작 서랍"
 
-#: ui/main.qml:92
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "핀 모드"
 
-#: ui/main.qml:93
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "확장 모드"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "빠른 설정"
 
-#: ui/main.qml:105
+#: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "왼쪽 위 서랍 모드"
 
-#: ui/main.qml:106
+#: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "왼쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:131
+#: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "오른쪽 위 서랍 모드"
 
-#: ui/main.qml:132
+#: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "오른쪽 위에서 열었을 때 모드입니다."
@@ -178,6 +168,12 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "키보드 진동은 키보드 설정 모듈에서 별도로 관리됩니다."
+
+#~ msgid "Gesture-only Mode"
+#~ msgstr "제스처 전용 모드"
+
+#~ msgid "Whether to hide the navigation panel."
+#~ msgstr "탐색 패널을 숨길지 여부입니다."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "진동 강도"
