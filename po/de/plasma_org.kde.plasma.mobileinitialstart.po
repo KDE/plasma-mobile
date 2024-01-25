@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-19 00:38+0000\n"
+"POT-Creation-Date: 2024-01-25 00:38+0000\n"
 "PO-Revision-Date: 2023-04-03 15:50+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -246,7 +246,7 @@ msgstr "Willkommen zu <b>Plasma</b>"
 msgid "Next"
 msgstr "Weiter"
 
-#: qml/main.qml:19
+#: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
 msgstr "Erster Start"
