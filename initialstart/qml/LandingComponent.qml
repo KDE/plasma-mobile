@@ -1,6 +1,7 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+import QtCore
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
@@ -8,6 +9,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.mobileinitialstart.initialstart
+import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
 
 Item {
     id: root
@@ -38,7 +40,17 @@ Item {
     Image {
         id: backgroundImage
         anchors.fill: parent
-        source: "qrc:/assets/background.png"
+        source: {
+            if (Prepare.PrepareUtil.usingDarkTheme) {
+                const wallpaperUrl = StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images_dark/720x1440.png');
+                if (!wallpaperUrl) {
+                    return StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images/720x1440.png');
+                }
+                return wallpaperUrl;
+            } else {
+                return StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images/720x1440.png');
+            }
+        }
         fillMode: Image.PreserveAspectCrop
 
         opacity: 0
