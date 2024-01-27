@@ -41,12 +41,5 @@ qt_target_qml_sources(plasma-mobile-initial-start
         qml/LandingComponent.qml
 )
 
-qt_add_resources(plasma-mobile-initial-start
-    PREFIX
-        "/"
-    FILES
-        assets/background.png
-)
-
 target_include_directories(plasma-mobile-initial-start PRIVATE ${CMAKE_BINARY_DIR})
 install(TARGETS plasma-mobile-initial-start ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
