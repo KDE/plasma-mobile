@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-25 00:38+0000\n"
+"POT-Creation-Date: 2024-01-28 00:38+0000\n"
 "PO-Revision-Date: 2023-11-08 14:25+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -231,12 +231,12 @@ msgstr ""
 msgid "Password…"
 msgstr "Heslo…"
 
-#: qml/LandingComponent.qml:84
+#: qml/LandingComponent.qml:96
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "Vítejte ve <br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:105 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:117 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Následující"
