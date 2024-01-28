@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-28 02:28+0000\n"
 "PO-Revision-Date: 2023-12-09 22:12+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -235,17 +235,17 @@ msgstr "Ağ erişimi için bir Wi-Fi ağına bağlanın."
 msgid "Password…"
 msgstr "Parola…"
 
-#: qml/LandingComponent.qml:84
+#: qml/LandingComponent.qml:96
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "<b>%1</b> sistemine hoş geldiniz"
 
-#: qml/LandingComponent.qml:105 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:117 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Sonraki"
 
-#: qml/main.qml:19
+#: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
 msgstr "Başlangıç"

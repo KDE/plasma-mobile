@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-01-28 02:28+0000\n"
 "PO-Revision-Date: 2023-11-25 11:50+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -236,17 +236,17 @@ msgstr "Konektatu Wi-Fi sare batera sareko sarbiderako."
 msgid "Password…"
 msgstr "Pasahitza…"
 
-#: qml/LandingComponent.qml:84
+#: qml/LandingComponent.qml:96
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "Ongi etorri <b>%1</b>(e)ra"
 
-#: qml/LandingComponent.qml:105 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:117 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Hurrengoa"
 
-#: qml/main.qml:19
+#: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
 msgstr "Hasierako abioa"
