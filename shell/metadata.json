@@ -71,6 +71,7 @@
         "Description[uk]": "Оболонка Плазми для мобільних пристроїв",
         "Description[x-test]": "xxPlasma shell for mobile devicesxx",
         "Description[zh_CN]": "针对手机设备设计的 Plasma 外壳程序",
+        "Description[zh_TW]": "適用於行動裝置的 Plasma 殼層",
         "Id": "org.kde.plasma.mobileshell",
         "License": "GPLv2+",
         "Name": "Plasma Mobile",

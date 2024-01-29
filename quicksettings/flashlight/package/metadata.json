@@ -70,6 +70,7 @@
         "Description[uk]": "Швидке налаштовування спалаху для Мобільної Плазми",
         "Description[x-test]": "xxFlashlight quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的手电筒快捷设置",
+        "Description[zh_TW]": "Plasma 行動的手電筒快速設定",
         "Icon": "flashlight-on",
         "Id": "org.kde.plasma.quicksetting.flashlight",
         "License": "GPL-2.0+",

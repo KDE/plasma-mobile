@@ -69,6 +69,7 @@
         "Description[uk]": "Швидке встановлення режиму «не турбувати» для Мобільної Плазми",
         "Description[x-test]": "xxQuick setting to toggle do not disturb mode for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的勿扰模式快捷设置",
+        "Description[zh_TW]": "Plasma 行動的勿擾模式切換快速設定",
         "Icon": "notifications",
         "Id": "org.kde.plasma.quicksetting.donotdisturb",
         "License": "GPL",

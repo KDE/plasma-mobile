@@ -113,7 +113,7 @@
         "Name[uk]": "Панель завдань телефону",
         "Name[x-test]": "xxPhone Task panelxx",
         "Name[zh_CN]": "手机任务面板",
-        "Name[zh_TW]": "手機工作列面板"
+        "Name[zh_TW]": "手機工作面板"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Panel"

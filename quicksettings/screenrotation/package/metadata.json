@@ -70,6 +70,7 @@
         "Description[uk]": "Швидке встановлення обертання екрана для Мобільної Плазми",
         "Description[x-test]": "xxScreen rotation quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的屏幕旋转快捷设置",
+        "Description[zh_TW]": "Plasma 行動的螢幕旋轉快速設定",
         "Icon": "rotation-allowed",
         "Id": "org.kde.plasma.quicksetting.screenrotation",
         "License": "GPL-2.0+",

@@ -66,6 +66,7 @@
         "Description[uk]": "Модуль часу початкового запуску для мобільної Плазми",
         "Description[x-test]": "xxTime initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的时间模块初始化",
+        "Description[zh_TW]": "Plasma 行動的時間初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.time",
         "License": "GPL-2.0+",
         "Name": "Time",

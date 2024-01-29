@@ -73,6 +73,7 @@
         "Description[uk]": "Домашній екран для мобільних пристроїв із акцентом на простоті та зручності.",
         "Description[x-test]": "xxA mobile homescreen focused on simplicity and ease-of-use.xx",
         "Description[zh_CN]": "简约易用的手机主屏幕方案。",
+        "Description[zh_TW]": "著重於簡潔與易用性的手機主畫面。",
         "Id": "org.kde.plasma.mobile.homescreen.halcyon",
         "License": "GPLv2+",
         "Name": "Halcyon",
@@ -107,7 +108,8 @@
         "Name[tr]": "Halikon",
         "Name[uk]": "Альціон",
         "Name[x-test]": "xxHalcyonxx",
-        "Name[zh_CN]": "Halcyon"
+        "Name[zh_CN]": "Halcyon",
+        "Name[zh_TW]": "Halcyon"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Desktop",

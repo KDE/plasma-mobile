@@ -66,6 +66,7 @@
         "Description[uk]": "Модуль приготування початкового запуску для мобільної Плазми",
         "Description[x-test]": "xxPrepare initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "准备 Plasma Mobile 的模块初始化",
+        "Description[zh_TW]": "Plasma 行動的預先準備初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.prepare",
         "License": "GPL-2.0+",
         "Name": "Prepare",

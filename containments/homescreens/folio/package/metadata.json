@@ -73,6 +73,7 @@
         "Description[uk]": "Домашня сторінка для мобільних пристроїв із акцентом на можливості налаштовування.",
         "Description[x-test]": "xxMobile homescreen with a focus on customizability.xx",
         "Description[zh_CN]": "高可定制性的手机主屏幕方案。",
+        "Description[zh_TW]": "注重可自訂性的手機主畫面。",
         "Id": "org.kde.plasma.mobile.homescreen.folio",
         "License": "GPLv2+",
         "Name": "Folio",
@@ -106,7 +107,8 @@
         "Name[tr]": "Folyo",
         "Name[uk]": "Фоліо",
         "Name[x-test]": "xxFolioxx",
-        "Name[zh_CN]": "Folio"
+        "Name[zh_CN]": "Folio",
+        "Name[zh_TW]": "Folio"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Desktop",

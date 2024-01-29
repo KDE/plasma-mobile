@@ -66,6 +66,7 @@
         "Description[uk]": "Модуль завершення початкового запуску для мобільної Плазми",
         "Description[x-test]": "xxFinished initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "完成 Plasma Mobile 的模块初始化",
+        "Description[zh_TW]": "Plasma 行動的「已完成」畫面初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.finished",
         "License": "GPL-2.0+",
         "Name": "Finished",

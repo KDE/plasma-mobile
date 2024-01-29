@@ -72,6 +72,7 @@
         "Description[uk]": "Налаштувати командну оболонку системи",
         "Description[x-test]": "xxConfigure the system shellxx",
         "Description[zh_CN]": "配置系统外壳程序",
+        "Description[zh_TW]": "設定系統殼層介面",
         "EnabledByDefault": true,
         "FormFactors": [
             "desktop",
@@ -118,6 +119,7 @@
         "Name[uk]": "Оболонка",
         "Name[x-test]": "xxShellxx",
         "Name[zh_CN]": "外壳程序",
+        "Name[zh_TW]": "殼層",
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "system,shell,panel",

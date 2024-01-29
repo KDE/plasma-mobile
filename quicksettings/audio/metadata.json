@@ -70,6 +70,7 @@
         "Description[uk]": "Швидке налаштовування звуку для Мобільної Плазми",
         "Description[x-test]": "xxAudio quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的声音快捷设置",
+        "Description[zh_TW]": "Plasma 行動的音效快速設定",
         "Icon": "audio-speakers-symbolic",
         "Id": "org.kde.plasma.quicksetting.audio",
         "License": "GPL-2.0+",
