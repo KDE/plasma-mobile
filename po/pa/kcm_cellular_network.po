@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# SPDX-FileCopyrightText: 2022, 2023 A S Alam <aalam@satluj.org>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 A S Alam <aalam@satluj.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-12-26 11:05-0600\n"
+"PO-Revision-Date: 2024-01-28 18:12-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
@@ -40,7 +40,7 @@ msgstr ""
 #: modem.cpp:371
 #, kde-format
 msgid "Error removing connection: %1"
-msgstr ""
+msgstr "ਕਨੈਕਸ਼ਨ ਹਟਾਉਣ ਦੌਰਾਨ ਗਲਤੀ: %1"
 
 #: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
@@ -96,7 +96,7 @@ msgstr ""
 #: modem.cpp:512
 #, kde-format
 msgid "Activated"
-msgstr "ਸਰਗਰਮ ਕੀਤਾ ਜਾ ਰਿਹਾ ਹੈ"
+msgstr "ਸਰਗਰਮ ਹੈ"
 
 #: modem.cpp:514
 #, kde-format
@@ -394,87 +394,87 @@ msgstr "ਕੋਈ ਵੀ"
 #: sim.cpp:74
 #, kde-format
 msgid "Lock reason unknown."
-msgstr ""
+msgstr "ਲਾਕ ਹੋਣ ਦਾ ਕਾਰਨ ਅਣਪਛਾਤਾ ਹੈ।"
 
 #: sim.cpp:76
 #, kde-format
 msgid "Modem is unlocked."
-msgstr ""
+msgstr "ਮਾਡਮ ਅਣ-ਲਾਕ ਹੈ।"
 
 #: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
-msgstr ""
+msgstr "ਸਿਮ ਲਈ ਪਿਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
-msgstr ""
+msgstr "ਸਿਮ ਲਈ ਪਿਨ2 ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:82
 #, kde-format
 msgid "SIM requires the PUK code."
-msgstr ""
+msgstr "ਸਿਮ ਲਈ PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:84
 #, kde-format
 msgid "SIM requires the PUK2 code."
-msgstr ""
+msgstr "ਸਿਮ ਲਈ PUK2 ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:86
 #, kde-format
 msgid "Modem requires the service provider PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਸਰਵਿਸ ਪੂਰਕ ਪਿਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:88
 #, kde-format
 msgid "Modem requires the service provider PUK code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਸਰਵਿਸ ਪੂਰਕ PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:90
 #, kde-format
 msgid "Modem requires the network PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਨੈ਼ਟਵਰਕ ਪਿੰਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:92
 #, kde-format
 msgid "Modem requires the network PUK code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਨੈ਼ਟਵਰਕ PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:94
 #, kde-format
 msgid "Modem requires the PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਪਿੰਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:96
 #, kde-format
 msgid "Modem requires the corporate PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਕਾਰਪੋਰੇਟ ਪਿੰਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:98
 #, kde-format
 msgid "Modem requires the corporate PUK code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਕਾਰਪੋਰੇਟ PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:100
 #, kde-format
 msgid "Modem requires the PH-FSIM PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ PH-FSIM ਪਿੰਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:102
 #, kde-format
 msgid "Modem requires the PH-FSIM PUK code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ PH-FSIM PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਨੈ਼ੱਟਵਰਕ ਸਬ-ਸੈਟ ਪਿੰਨ ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
-msgstr ""
+msgstr "ਮਾਡਮ ਲਈ ਨੈ਼ੱਟਵਰਕ ਸਬ-ਸੈਟ PUK ਕੋਡ ਚਾਹੀਦਾ ਹੈ।"
 
 #: sim.cpp:150
 #, kde-format
@@ -484,22 +484,22 @@ msgstr "(ਖਾਲੀ)"
 #: sim.cpp:164
 #, kde-format
 msgid "Error toggling SIM lock: %1"
-msgstr ""
+msgstr "ਸਿਮ ਲਾਕ ਬਦਲਣ ਦੌਰਾਨ ਗਲਤੀ: %1"
 
 #: sim.cpp:173
 #, kde-format
 msgid "Error changing the PIN: %1"
-msgstr ""
+msgstr "ਪਿੰਨ ਬਦਲਣ ਦੌਰਾਨ ਗਲਤੀ: %1"
 
 #: sim.cpp:186
 #, kde-format
 msgid "Error sending the PIN: %1"
-msgstr ""
+msgstr "ਪਿੰਨ ਭੇਜਣ ਦੌਰਾਨ ਗਲਤੀ: %1"
 
 #: sim.cpp:199
 #, kde-format
 msgid "Error sending the PUK: %1"
-msgstr ""
+msgstr "PUK ਭੇਜਣ ਦੌਰਾਨ ਗਲਤੀ: %1"
 
 #: ui/AvailableNetworks.qml:16
 #, kde-format
@@ -778,7 +778,7 @@ msgstr ""
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN ਲਿਸਟ"
 
 #: ui/ProfileList.qml:107
 #, kde-format
