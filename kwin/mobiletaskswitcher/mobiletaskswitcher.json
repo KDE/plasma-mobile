@@ -27,6 +27,7 @@
         "Description[uk]": "Надає вам змогу перемикати запущені завдання за допомогою інтерфейсу для мобільних пристроїв.",
         "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
         "Description[zh_CN]": "允许您使用移动界面在正在运行的任务之间切换。",
+        "Description[zh_TW]": "讓您用手機介面在執行中的工作項目之間切換。",
         "EnabledByDefault": true,
         "License": "GPL",
         "Name": "Mobile Task Switcher",

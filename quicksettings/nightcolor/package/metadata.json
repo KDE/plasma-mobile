@@ -70,6 +70,7 @@
         "Description[uk]": "Швидке налаштовування нічних кольорів для Мобільної Плазми",
         "Description[x-test]": "xxNight color quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的夜间颜色快捷设置",
+        "Description[zh_TW]": "Plasma 行動的夜色模式快速設定",
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.quicksetting.nightcolor",
         "License": "GPL",

@@ -71,6 +71,7 @@
         "Description[uk]": "Швидке встановлення режиму польоту для Мобільної Плазми",
         "Description[x-test]": "xxAirplane mode quick setting for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma Mobile 的飞行模式快捷设置",
+        "Description[zh_TW]": "Plasma 行動的 Airplane mode 快速設定",
         "Icon": "network-flightmode-on",
         "Id": "org.kde.plasma.quicksetting.airplanemode",
         "License": "GPL-2.0+",

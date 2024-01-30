@@ -66,6 +66,7 @@
         "Description[uk]": "Модуль стільникової мережі початкового запуску для мобільної Плазми",
         "Description[x-test]": "xxCellular initialstart module for Plasma Mobilexx",
         "Description[zh_CN]": "Plasma 移动设备的蜂窝初始化模块",
+        "Description[zh_TW]": "Plasma 行動的行動電話初始設定模組",
         "Id": "org.kde.plasma.mobileinitialstart.cellular",
         "License": "GPL-2.0+",
         "Name": "Cellular",
