@@ -25,7 +25,6 @@ ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
 
         // update all screens with event connect
-        Q_EMIT autoScreenRotationEnabledChanged();
         for (KScreen::OutputPtr output : m_config->outputs()) {
             connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &ScreenRotationUtil::autoScreenRotationEnabledChanged);
         }
@@ -35,6 +34,9 @@ ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
             Q_EMIT autoScreenRotationEnabledChanged();
             connect(output.data(), &KScreen::Output::autoRotatePolicyChanged, this, &ScreenRotationUtil::autoScreenRotationEnabledChanged);
         });
+
+        // trigger update
+        Q_EMIT autoScreenRotationEnabledChanged();
     });
 }
 
@@ -46,7 +48,7 @@ bool ScreenRotationUtil::autoScreenRotationEnabled()
     const auto outputs = m_config->outputs();
 
     for (KScreen::OutputPtr output : outputs) {
-        if (output->autoRotatePolicy() != KScreen::Output::AutoRotatePolicy::Always) {
+        if (output->autoRotatePolicy() == KScreen::Output::AutoRotatePolicy::Never) {
             return false;
         }
     }
