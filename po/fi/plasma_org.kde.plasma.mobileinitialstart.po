@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-28 00:38+0000\n"
-"PO-Revision-Date: 2023-04-02 16:37+0300\n"
+"PO-Revision-Date: 2023-12-11 18:26+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -161,10 +161,9 @@ msgid "Complete!"
 msgstr "Valmista!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr "Laite on nyt valmiina.<br /><br />Nauti <b>Plasma 6.0</b>:sta!"
+msgstr "Laite on nyt valmis.<br /><br />Tämä on <b>%1</b>, nauti!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -190,7 +189,7 @@ msgstr "Näytön mittakaava"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "Tumma teema"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -233,10 +232,9 @@ msgid "Password…"
 msgstr "Salasana…"
 
 #: qml/LandingComponent.qml:96
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Tervetuloa <b>Plasmaan</b>"
+msgstr "<b>%1</b><br/>– tervetuloa"
 
 #: qml/LandingComponent.qml:117 qml/Wizard.qml:293
 #, kde-format

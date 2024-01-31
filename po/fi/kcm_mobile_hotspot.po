@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# Tommi Nieminen <translator@legisign.org>, 2020, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2020, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-30 12:05+0300\n"
+"PO-Revision-Date: 2024-01-29 21:56+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Aseta tukiasema"
 
 #: ui/main.qml:77
 #, kde-format
@@ -30,12 +30,12 @@ msgstr "Tukiasema"
 #: ui/main.qml:78
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
-msgstr ""
+msgstr "Jaa internetyhteys toisille laitteille langattomana verkkona."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Asetukset"
 
 #: ui/main.qml:103
 #, kde-format

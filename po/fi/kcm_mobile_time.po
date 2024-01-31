@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Tommi Nieminen <translator@legisign.org>, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2020, 2021, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-31 01:55+0000\n"
-"PO-Revision-Date: 2022-07-11 21:56+0300\n"
+"PO-Revision-Date: 2024-01-29 21:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: timesettings.cpp:146
 #, kde-format
@@ -3021,12 +3021,12 @@ msgstr "Asetetaanko aika automaattisesti."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Järjestelmän aika"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Järjestelmä päiväys"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3035,26 +3035,24 @@ msgid "Pick Timezone"
 msgstr "Valitse aikavyöhyke"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Valitse päivämäärä"
+msgstr "Poimi järjestelmän päiväys"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Valitse aika"
+msgstr "Poimi järjestelmän aika"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "ap."
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "ip."
 
 #~ msgid "Current Time"
 #~ msgstr "Nykyinen aika"
