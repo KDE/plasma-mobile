@@ -40,16 +40,24 @@ Item {
     Image {
         id: backgroundImage
         anchors.fill: parent
+
+        readonly property bool isLandscape: width >= height
+
         source: {
-            if (Prepare.PrepareUtil.usingDarkTheme) {
-                const wallpaperUrl = StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images_dark/720x1440.png');
-                if (!wallpaperUrl) {
-                    return StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images/720x1440.png');
-                }
-                return wallpaperUrl;
-            } else {
-                return StandardPaths.locate(StandardPaths.GenericDataLocation, 'wallpapers/Next/contents/images/720x1440.png');
+            // default wallpaper background
+            const imgFile = isLandscape ? '2560x1440.png' : '1080x1920.png';
+            const lightWallpaperFolder = 'wallpapers/Next/contents/images/';
+            const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
+
+            const wallpaperUrl = StandardPaths.locate(
+                StandardPaths.GenericDataLocation, 
+                (Prepare.PrepareUtil.usingDarkTheme ? darkWallpaperFolder : lightWallpaperFolder) + imgFile
+            );
+            
+            if (!wallpaperUrl) {
+                return StandardPaths.locate(StandardPaths.GenericDataLocation, lightWallpaperFolder + imgFile);
             }
+            return wallpaperUrl;
         }
         fillMode: Image.PreserveAspectCrop
 
