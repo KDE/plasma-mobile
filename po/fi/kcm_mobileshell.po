@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 02:30+0000\n"
-"PO-Revision-Date: 2023-09-26 18:09+0300\n"
+"PO-Revision-Date: 2023-11-22 21:29+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -52,14 +52,13 @@ msgstr "Navigointipaneeli"
 #: ui/main.qml:75
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "Näytä näppäimistöpainike aina"
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Piilotetaanko navigointipaneeli."
+msgstr "Näytetäänkö näppäimistön näyttämispainike navigointirivillä aina."
 
 #: ui/main.qml:87
 #, kde-format

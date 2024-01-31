@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-28 01:34+0000\n"
-"PO-Revision-Date: 2021-07-09 15:19+0300\n"
+"PO-Revision-Date: 2024-01-29 21:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ui/ConnectDialog.qml:136
 #, kde-format
@@ -30,22 +30,20 @@ msgstr "Yhdistä"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Muokkaa"
 
 #: ui/main.qml:86
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Langaton verkko"
 
 #: ui/main.qml:134
-#, fuzzy, kde-format
-#| msgid "Available networks"
+#, kde-format
 msgid "Available Networks"
 msgstr "Saatavilla olevat verkot"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Lisää uusi yhteys"
 
@@ -55,10 +53,9 @@ msgid "Save"
 msgstr "Tallenna"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Piiloverkko:"
+msgstr "Piiloverkko"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -126,22 +123,19 @@ msgid "Manual"
 msgstr "Mukautettu"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP-osoite:"
+msgstr "IP-osoite"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Yhdyskäytävä:"
+msgstr "Yhdyskäytävä"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Verkkoetuliitteen pituus:"
+msgstr "Verkkoetuliitteen pituus"
 
 #: ui/NetworkSettings.qml:241
 #, kde-format
