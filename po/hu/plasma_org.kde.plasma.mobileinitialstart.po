@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-28 02:28+0000\n"
+"POT-Creation-Date: 2024-02-01 02:29+0000\n"
 "PO-Revision-Date: 2023-12-17 21:46+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -235,12 +235,12 @@ msgstr "Kapcsolódjon egy WiFi hálózathoz a hálózati hozzáférését."
 msgid "Password…"
 msgstr "Jelszó…"
 
-#: qml/LandingComponent.qml:96
+#: qml/LandingComponent.qml:104
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "Üdvözli a(z) <br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:117 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Következő"
