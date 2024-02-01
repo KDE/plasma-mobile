@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-28 00:38+0000\n"
+"POT-Creation-Date: 2024-02-01 00:39+0000\n"
 "PO-Revision-Date: 2023-12-24 09:06-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -231,12 +231,12 @@ msgstr "ਨੈੱਟਵਰਕ ਪਹੁੰਚ ਲਈ ਵਾਈ-ਫਾਈ ਨੈ�
 msgid "Password…"
 msgstr "ਪਾਸਵਰਡ…"
 
-#: qml/LandingComponent.qml:96
+#: qml/LandingComponent.qml:104
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
 msgstr "<br/><b>%1</b> ਵਲੋਂ ਜੀ ਆਇਆਂ ਨੂੰ"
 
-#: qml/LandingComponent.qml:117 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "ਅੱਗੇ"
