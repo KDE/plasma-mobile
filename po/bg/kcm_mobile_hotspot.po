@@ -46,6 +46,3 @@ msgstr "SSID на точка за достъп"
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Парола на точка на достъп"
-
-#~ msgid "Whether the wireless hotspot is enabled."
-#~ msgstr "Проверка, дали безжичната точка за достъп е активирана."

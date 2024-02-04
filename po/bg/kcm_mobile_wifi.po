@@ -153,36 +153,3 @@ msgstr "DNS:"
 #, kde-format
 msgid "Password…"
 msgstr "Парола…"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi е деактивиран"
-
-#~ msgid "Enable"
-#~ msgstr "Активиране"
-
-#~ msgid "Disable Wi-Fi"
-#~ msgstr "Деактивиране на Wi-Fi"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Добавяне на персонализирана връзка"
-
-#~ msgid "Show Saved Connections"
-#~ msgstr "Запазени връзки"
-
-#~ msgid "General"
-#~ msgstr "Общи"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Сигурност"
-
-#~ msgid "Security type:"
-#~ msgstr "Тип защита:"
-
-#~ msgid "Password:"
-#~ msgstr "Парола:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP настройки"
