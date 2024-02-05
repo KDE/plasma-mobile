@@ -6,3 +6,15 @@ include:
     file:
       - /gitlab-templates/reuse-lint.yml
       - /gitlab-templates/linux-qt6.yml
+
+posix-script-compliance:
+  image:
+    name: debian:latest
+    entrypoint: [""]
+  stage: build
+  script:
+    - apt-get update
+    - apt-get -y install shellcheck
+    - shellcheck -x -s sh bin/startplasmamobile.in
+    - shellcheck -x -s sh bin/startplasmamobile.in
+    - shellcheck -x --exclude=1091 -s sh bin/startplasmamobile-dev.sh.cmake # ignore error from file not existing (given by cmake)
