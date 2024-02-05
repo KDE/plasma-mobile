@@ -3,6 +3,7 @@
 
 [Desktop Entry]
 Exec=@CMAKE_INSTALL_FULL_LIBEXECDIR@/plasma-dbus-run-session-if-needed @CMAKE_INSTALL_FULL_LIBEXECDIR@/startplasmamobile-dev.sh
+Type=Application
 DesktopNames=KDE
 Name=Plasma Mobile (Development)
 Name[az]=Plasma Mobil (Tərtibat)
