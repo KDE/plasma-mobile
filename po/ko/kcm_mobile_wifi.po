@@ -126,22 +126,19 @@ msgid "Manual"
 msgstr "수동"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP 주소:"
+msgstr "IP 주소"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "게이트웨이:"
+msgstr "게이트웨이"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "네트워크 접두사 길이:"
+msgstr "네트워크 접두사 길이"
 
 #: ui/NetworkSettings.qml:241
 #, kde-format
