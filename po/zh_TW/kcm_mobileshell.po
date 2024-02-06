@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 02:30+0000\n"
-"PO-Revision-Date: 2024-01-05 05:17+0900\n"
+"PO-Revision-Date: 2024-02-05 17:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr ""
+msgstr "殼層"
 
 #: ui/main.qml:27
 #, kde-format
@@ -30,7 +30,7 @@ msgstr "一般"
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "殼層震動"
 
 #: ui/main.qml:41
 #, kde-format
@@ -61,7 +61,7 @@ msgstr "是否要總是在導覽面板上顯示鍵盤切換按鈕。"
 #: ui/main.qml:87
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "動作抽屜"
 
 #: ui/main.qml:93
 #, kde-format
@@ -83,22 +83,22 @@ msgstr "快速設定"
 #: ui/main.qml:106
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "左上抽屜模式"
 
 #: ui/main.qml:107
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "從左上開啟時的模式。"
 
 #: ui/main.qml:132
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "右上抽屜模式"
 
 #: ui/main.qml:133
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "從右上開啟時的模式。"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
@@ -116,7 +116,7 @@ msgstr "顯示"
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr ""
+msgstr "自訂下拉面板中快速設定的順序以及是否隱藏。"
 
 #: ui/QuickSettingsForm.qml:99
 #, kde-format
@@ -131,7 +131,7 @@ msgstr "重新啟用之前停用的快速設定。"
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "殼層中是否要啟用震動。"
 
 #: ui/VibrationForm.qml:39
 #, kde-format
@@ -141,32 +141,32 @@ msgstr "震動時間"
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "殼層震動應該要多長。"
 
 #: ui/VibrationForm.qml:42
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr ""
+msgstr "長"
 
 #: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr ""
+msgstr "中"
 
 #: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr ""
+msgstr "短"
 
 #: ui/VibrationForm.qml:68
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr ""
+msgstr "鍵盤震動在鍵盤設定模組中有獨立設定。"
 
 #~ msgid "Gesture-only Mode"
 #~ msgstr "純手勢模式"
