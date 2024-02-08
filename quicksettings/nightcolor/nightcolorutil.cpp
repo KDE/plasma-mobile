@@ -8,7 +8,10 @@
 
 NightColorUtil::NightColorUtil(QObject *parent)
     : QObject{parent}
-    , m_ccInterface{new OrgKdeKwinColorCorrectInterface(QStringLiteral("org.kde.KWin"), QStringLiteral("/ColorCorrect"), QDBusConnection::sessionBus(), this)}
+    , m_ccInterface{new OrgKdeKWinNightLightInterface(QStringLiteral("org.kde.KWin.NightLight"),
+                                                      QStringLiteral("/org/kde/KWin/NightLight"),
+                                                      QDBusConnection::sessionBus(),
+                                                      this)}
     , m_settings{new NightColorSettings(this)}
 {
     if (!m_ccInterface->isValid()) {
@@ -17,8 +20,8 @@ NightColorUtil::NightColorUtil(QObject *parent)
         m_enabled = m_ccInterface->running();
 
         // subscribe to property updates
-        QDBusConnection::sessionBus().connect(QStringLiteral("org.kde.KWin"),
-                                              QStringLiteral("/ColorCorrect"),
+        QDBusConnection::sessionBus().connect(QStringLiteral("org.kde.KWin.NightLight"),
+                                              QStringLiteral("/org/kde/KWin/NightLight"),
                                               QStringLiteral("org.freedesktop.DBus.Properties"),
                                               QStringLiteral("PropertiesChanged"),
                                               this,

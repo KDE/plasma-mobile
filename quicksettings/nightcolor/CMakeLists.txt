@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-set_source_files_properties(${KWIN_COLORCORRECT_INTERFACE} PROPERTIES NO_NAMESPACE TRUE)
-qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_COLORCORRECT_INTERFACE})
+set_source_files_properties(${KWIN_NIGHTLIGHT_INTERFACE} PROPERTIES NO_NAMESPACE TRUE)
+qt_add_dbus_interfaces(DBUS_SRCS ${KWIN_NIGHTLIGHT_INTERFACE})
 
 set(nightcolorplugin_SRCS
     nightcolorplugin.cpp

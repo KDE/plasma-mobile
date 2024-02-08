@@ -8,8 +8,8 @@
 
 #include <QObject>
 
-#include "colorcorrectinterface.h"
 #include "nightcolorsettings.h"
+#include "nightlightinterface.h"
 
 class NightColorUtil : public QObject
 {
@@ -30,6 +30,6 @@ public Q_SLOTS:
 
 private:
     bool m_enabled;
-    OrgKdeKwinColorCorrectInterface *m_ccInterface;
+    OrgKdeKWinNightLightInterface *m_ccInterface;
     NightColorSettings *m_settings;
 };
