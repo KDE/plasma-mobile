@@ -29,31 +29,41 @@ ContainmentItem {
         forceActiveFocus();
     }
 
-    // wallpaper
-    MultiEffect {
-        blurEnabled: true
-        blur: 0.0
-        autoPaddingEnabled: false
-        source: Plasmoid.wallpaperGraphicsObject
+    Loader {
+        id: wallpaperBlurLoader
+        active: Folio.FolioSettings.showWallpaperBlur
         anchors.fill: parent
-    }
 
-    // wallpaper blur
-    MultiEffect {
-        blurEnabled: true
-        blur: 1.0
-        blurMax: 50
-        autoPaddingEnabled: false
-        source: Plasmoid.wallpaperGraphicsObject
-        anchors.fill: parent
-        opacity: Math.min(1, 
-            Math.max(
-                1 - homeScreen.contentOpacity,
-                Folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
-                Folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
-                Folio.HomeScreenState.folderOpenProgress
-            )
-        )
+        sourceComponent: Item {
+            // HACK: wallpaper (to enforce same dimensions that blur uses)
+            MultiEffect {
+                blurEnabled: true
+                blur: 0.0
+                blurMax: 0.0
+                autoPaddingEnabled: false
+                source: Plasmoid.wallpaperGraphicsObject
+                anchors.fill: parent
+            }
+
+            // wallpaper blur
+            MultiEffect {
+                blurEnabled: true
+                blur: 1.0
+                blurMax: 50
+                autoPaddingEnabled: false
+                source: Plasmoid.wallpaperGraphicsObject
+                anchors.fill: parent
+                visible: opacity > 0
+                opacity: Math.min(1, 
+                    Math.max(
+                        1 - homeScreen.contentOpacity,
+                        Folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
+                        Folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
+                        Folio.HomeScreenState.folderOpenProgress
+                    )
+                )
+            }
+        }
     }
 
     function homeAction() {
