@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Tommi Nieminen <translator@legisign.org>, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2021, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-17 01:36+0000\n"
-"PO-Revision-Date: 2023-09-26 18:09+0300\n"
+"PO-Revision-Date: 2024-02-02 13:05+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -775,11 +775,13 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Operaattorin yhteysasetuksia ei tunnistettu automaattisesti. Selvitä APN-"
+"asetukset joko itse, ota yhteyttä tukeen tai etsi niitä verkosta."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN-luettelo"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -792,8 +794,7 @@ msgid "Add APN"
 msgstr "Lisää APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
 msgstr "Tunnista APN automaattisesti"
 
