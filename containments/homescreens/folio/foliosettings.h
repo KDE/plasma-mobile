@@ -18,6 +18,7 @@ class FolioSettings : public QObject
     Q_PROPERTY(bool showFavouritesBarBackground READ showFavouritesBarBackground WRITE setShowFavouritesBarBackground NOTIFY showFavouritesBarBackgroundChanged)
     Q_PROPERTY(
         FolioSettings::PageTransitionEffect pageTransitionEffect READ pageTransitionEffect WRITE setPageTransitionEffect NOTIFY pageTransitionEffectChanged)
+    Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
 
 public:
     FolioSettings(QObject *parent = nullptr);
@@ -58,6 +59,9 @@ public:
     PageTransitionEffect pageTransitionEffect() const;
     void setPageTransitionEffect(PageTransitionEffect pageTransitionEffect);
 
+    bool showWallpaperBlur() const;
+    void setShowWallpaperBlur(bool showWallpaperBlur);
+
     Q_INVOKABLE void load();
 
     Q_INVOKABLE bool saveLayoutToFile(QString path);
@@ -73,6 +77,7 @@ Q_SIGNALS:
     void delegateIconSizeChanged();
     void showFavouritesBarBackgroundChanged();
     void pageTransitionEffectChanged();
+    void showWallpaperBlurChanged();
 
 private:
     void save();
@@ -84,6 +89,7 @@ private:
     qreal m_delegateIconSize{48};
     bool m_showFavouritesBarBackground{false};
     PageTransitionEffect m_pageTransitionEffect{SlideTransition};
+    bool m_showWallpaperBlur{false};
 
     Plasma::Applet *m_applet{nullptr};
 };

@@ -120,6 +120,20 @@ void FolioSettings::setPageTransitionEffect(PageTransitionEffect pageTransitionE
     }
 }
 
+bool FolioSettings::showWallpaperBlur() const
+{
+    return m_showWallpaperBlur;
+}
+
+void FolioSettings::setShowWallpaperBlur(bool showWallpaperBlur)
+{
+    if (m_showWallpaperBlur != showWallpaperBlur) {
+        m_showWallpaperBlur = showWallpaperBlur;
+        Q_EMIT showWallpaperBlurChanged();
+        save();
+    }
+}
+
 void FolioSettings::setApplet(Plasma::Applet *applet)
 {
     m_applet = applet;
@@ -138,6 +152,7 @@ void FolioSettings::save()
     m_applet->config().writeEntry("delegateIconSize", m_delegateIconSize);
     m_applet->config().writeEntry("showFavouritesBarBackground", m_showFavouritesBarBackground);
     m_applet->config().writeEntry("pageTransitionEffect", (int)m_pageTransitionEffect);
+    m_applet->config().writeEntry("showWallpaperBlur", m_showWallpaperBlur);
 
     Q_EMIT m_applet->configNeedsSaving();
 }
@@ -155,12 +170,14 @@ void FolioSettings::load()
     m_delegateIconSize = m_applet->config().readEntry("delegateIconSize", 48);
     m_showFavouritesBarBackground = m_applet->config().readEntry("showFavoritesBarBackground", true);
     m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_applet->config().readEntry("pageTransitionEffect", (int)SlideTransition));
+    m_showWallpaperBlur = m_applet->config().readEntry("showWallpaperBlur", false);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
     Q_EMIT showPagesAppLabels();
     Q_EMIT showFavouritesAppLabelsChanged();
     Q_EMIT delegateIconSizeChanged();
+    Q_EMIT showWallpaperBlurChanged();
 }
 
 bool FolioSettings::saveLayoutToFile(QString path)
