@@ -35,7 +35,7 @@ msgstr ""
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: ui/main.qml:103
 #, kde-format
@@ -46,6 +46,3 @@ msgstr "SSID hotspotu"
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Heslo hotspotu"
-
-#~ msgid "Whether the wireless hotspot is enabled."
-#~ msgstr "Zda je povolen bezdrátový hotspot."

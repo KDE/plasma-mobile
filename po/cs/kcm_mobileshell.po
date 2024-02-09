@@ -167,18 +167,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Intenzita vibrací"
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Nízká"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Střední"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Vysoká"

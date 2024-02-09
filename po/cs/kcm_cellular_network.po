@@ -994,6 +994,3 @@ msgstr "ID SIM"
 #, kde-format
 msgid "Emergency Numbers"
 msgstr ""
-
-#~ msgid "Add Connection"
-#~ msgstr "Přidat spojení"
