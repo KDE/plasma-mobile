@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2024-02-09 00:39+0000\n"
 "PO-Revision-Date: 2023-12-17 16:21+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -123,41 +123,59 @@ msgstr "பிடித்தவை பட்டை"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:246
+#, kde-format
+msgctxt "@option:check"
+msgid "Show wallpaper blur effect"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:257
+#, kde-format
 msgid "General"
 msgstr "பொதுவானவை"
 
-#: package/contents/ui/settings/SettingsWindow.qml:274
+#: package/contents/ui/settings/SettingsWindow.qml:264
+#, kde-format
+msgctxt "@action:button"
+msgid "Switch between homescreens and more wallpaper options"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
 msgid "Export layout to"
 msgstr "தளவமைப்பு ஏற்றுமதி செய்"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Import layout from"
 msgstr "தளவமைப்பு இறக்குமதி செய்"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:321
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export Status"
 msgstr "ஏற்றுமதி நிலை"
 
-#: package/contents/ui/settings/SettingsWindow.qml:305
+#: package/contents/ui/settings/SettingsWindow.qml:322
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1 என்பதற்கு ஏற்றுமதி செய்ய முடியவில்லை"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: package/contents/ui/settings/SettingsWindow.qml:329
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "முகப்பின் தளவமைப்பு வெற்றிகரமாக %1 என்பதற்கு ஏற்றுமதி செய்யப்பட்டுள்ளது"
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:335
 #, kde-format
 msgid "Confirm Import"
 msgstr "இறக்குமதியை உறுதிசெய்யவும்"
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:336
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "தற்போதைய முகப்பின் தளவமைப்பை இது மேலெழுதும்!"

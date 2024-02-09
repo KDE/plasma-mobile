@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-16 01:38+0000\n"
+"POT-Creation-Date: 2024-02-09 00:39+0000\n"
 "PO-Revision-Date: 2023-12-17 06:02+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -123,41 +123,59 @@ msgstr "Barra de favoritas"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
+msgctxt "@title:group settings group"
+msgid "Wallpaper"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:246
+#, kde-format
+msgctxt "@option:check"
+msgid "Show wallpaper blur effect"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:257
+#, kde-format
 msgid "General"
 msgstr "Xeral"
 
-#: package/contents/ui/settings/SettingsWindow.qml:274
+#: package/contents/ui/settings/SettingsWindow.qml:264
+#, kde-format
+msgctxt "@action:button"
+msgid "Switch between homescreens and more wallpaper options"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
 msgid "Export layout to"
 msgstr "Exportar a disposición en"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Import layout from"
 msgstr "Importar a disposición de"
 
-#: package/contents/ui/settings/SettingsWindow.qml:304
-#: package/contents/ui/settings/SettingsWindow.qml:311
+#: package/contents/ui/settings/SettingsWindow.qml:321
+#: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export Status"
 msgstr "Estado da exportación"
 
-#: package/contents/ui/settings/SettingsWindow.qml:305
+#: package/contents/ui/settings/SettingsWindow.qml:322
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Non foi posíbel exportar en %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: package/contents/ui/settings/SettingsWindow.qml:329
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "A disposición da pantalla de inicio exportouse en %1."
 
-#: package/contents/ui/settings/SettingsWindow.qml:318
+#: package/contents/ui/settings/SettingsWindow.qml:335
 #, kde-format
 msgid "Confirm Import"
 msgstr "Confirmar a importación"
 
-#: package/contents/ui/settings/SettingsWindow.qml:319
+#: package/contents/ui/settings/SettingsWindow.qml:336
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Isto sobrescribirá a súa disposición de pantalla de inicio existente!"

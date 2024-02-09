@@ -255,9 +255,3 @@ msgstr "Zpět"
 #, kde-format
 msgid "Finish"
 msgstr "Dokončit"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi je zakázána"
-
-#~ msgid "Enable"
-#~ msgstr "Povolit"

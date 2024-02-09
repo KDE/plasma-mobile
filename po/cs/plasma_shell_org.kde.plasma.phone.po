@@ -60,9 +60,3 @@ msgstr "Aplikovat nyní"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Tapeta"
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Změnit tapetu"
-
-#~ msgid "Configure"
-#~ msgstr "Nastavit"
