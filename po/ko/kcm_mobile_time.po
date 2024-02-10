@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Shinjo Park <kde@peremen.name>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-31 01:55+0000\n"
-"PO-Revision-Date: 2022-07-13 12:04+0200\n"
+"PO-Revision-Date: 2024-02-09 19:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: timesettings.cpp:146
 #, kde-format
@@ -3021,12 +3021,12 @@ msgstr "자동으로 시간 설정 여부입니다."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "시스템 시간"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "시스템 날짜"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3035,26 +3035,24 @@ msgid "Pick Timezone"
 msgstr "시간대 선택"
 
 #: ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "날짜 선택"
+msgstr "시스템 날짜 선택"
 
 #: ui/main.qml:209
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "시간 선택"
+msgstr "시스템 시간 선택"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "오전"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "오후"
 
 #~ msgid "Current Time"
 #~ msgstr "현재 시간"

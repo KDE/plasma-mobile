@@ -1,15 +1,15 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.folio.po to Catalan
-# Copyright (C) 2023 This_file_is_part_of_KDE
+# Copyright (C) 2023-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 02:34+0000\n"
-"PO-Revision-Date: 2023-12-16 13:02+0100\n"
+"PO-Revision-Date: 2024-02-09 09:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -127,13 +127,13 @@ msgstr "Barra de preferits"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Fons de pantalla"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Mostra l'efecte difuminat del fons de pantalla"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -144,7 +144,7 @@ msgstr "General"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Canvia entre pantalles d'inici i més opcions de fons de pantalla"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

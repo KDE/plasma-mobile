@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Shinjo Park <kde@peremen.name>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-01 02:29+0000\n"
-"PO-Revision-Date: 2023-07-26 00:13+0200\n"
+"PO-Revision-Date: 2024-02-09 19:37+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -163,11 +163,9 @@ msgid "Complete!"
 msgstr "완료!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"장치가 준비되었습니다. <br /><br /><b>Plasma 6.0</b>을 즐겁게 사용하세요!"
+msgstr "장치가 준비되었습니다. <br /><br /><b>%1</b>을(를) 즐겁게 사용하세요!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -193,7 +191,7 @@ msgstr "디스플레이 크기 조정"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "어두운 테마"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -236,10 +234,9 @@ msgid "Password…"
 msgstr "암호…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "<b>Plasma</b>에 오신 것을 환영합니다"
+msgstr "<b>%1</b>에<br/>오신 것을 환영합니다"
 
 #: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
