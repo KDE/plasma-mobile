@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-16 07:44+0100\n"
+"PO-Revision-Date: 2024-02-09 22:05+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -126,13 +126,13 @@ msgstr "Ŝatatobreto"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Ekranfono"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Montri ekranfonan malklar-efikon"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -143,7 +143,7 @@ msgstr "Ĝenerala"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Baskuli inter hejmekranoj kaj pliaj ekranfon-elektebloj"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

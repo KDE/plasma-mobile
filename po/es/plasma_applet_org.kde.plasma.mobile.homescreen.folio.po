@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-19 17:45+0100\n"
+"PO-Revision-Date: 2024-02-09 12:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -129,13 +129,13 @@ msgstr "Barra de favoritos"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Mostrar efecto de desenfoque del fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -146,7 +146,7 @@ msgstr "General"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Cambiar pantallas de inicio y más opciones del fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

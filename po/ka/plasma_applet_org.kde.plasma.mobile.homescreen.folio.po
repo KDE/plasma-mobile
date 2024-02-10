@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-16 06:07+0100\n"
+"PO-Revision-Date: 2024-02-09 06:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -127,13 +127,13 @@ msgstr "სანიშნეების პანელი"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "ფონური სურათი"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "ფონის სურათის გაბუნდოვნების ეფექტის ჩვენება"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -144,7 +144,7 @@ msgstr "ზოგადი"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "გადართვა საწყის ეკრანებსა და მეტ ფონის სურათის პარამეტრებს შორის"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

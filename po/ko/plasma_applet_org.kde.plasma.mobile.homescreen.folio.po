@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-phone-components package.
-# Shinjo Park <kde@peremen.name>, 2019, 2021.
+# SPDX-FileCopyrightText: 2019, 2021, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2021-11-12 01:24+0100\n"
+"PO-Revision-Date: 2024-02-09 20:06+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,17 +15,17 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "폴더"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
 msgid "Applications"
-msgstr "앱"
+msgstr "앱앱"
 
 #: package/contents/ui/FavouritesBar.qml:146
 #: package/contents/ui/FavouritesBar.qml:220
@@ -39,87 +39,87 @@ msgstr "삭제"
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "위젯"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "홈 화면 설정"
 
 #: package/contents/ui/settings/SettingsWindow.qml:87
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "아이콘"
 
 #: package/contents/ui/settings/SettingsWindow.qml:118
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "행 개수"
 
 #: package/contents/ui/settings/SettingsWindow.qml:119
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "열 개수"
 
 #: package/contents/ui/settings/SettingsWindow.qml:123
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "홈 화면 아이콘 크기"
 
 #: package/contents/ui/settings/SettingsWindow.qml:162
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "화면 회전에 따라서 행과 열을 전환합니다."
 
 #: package/contents/ui/settings/SettingsWindow.qml:166
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "홈 화면"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "홈 화면에 레이블 표시"
 
 #: package/contents/ui/settings/SettingsWindow.qml:185
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "책갈피 표시줄에 레이블 표시"
 
 #: package/contents/ui/settings/SettingsWindow.qml:198
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "페이지 전환 효과"
 
 #: package/contents/ui/settings/SettingsWindow.qml:204
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "슬라이드"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "입방체"
 
 #: package/contents/ui/settings/SettingsWindow.qml:206
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "페이드"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "스택"
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "회전"
 
 #: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "책갈피 표시줄"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
@@ -136,7 +136,7 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "일반"
 
 #: package/contents/ui/settings/SettingsWindow.qml:264
 #, kde-format
@@ -147,35 +147,35 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "레이아웃 내보내기"
 
 #: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "레이아웃 가져오기"
 
 #: package/contents/ui/settings/SettingsWindow.qml:321
 #: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "상태 내보내기"
 
 #: package/contents/ui/settings/SettingsWindow.qml:322
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "%1(으)로 내보낼 수 없음"
 
 #: package/contents/ui/settings/SettingsWindow.qml:329
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "홈 화면 레이아웃을 %1(으)로 내보냄"
 
 #: package/contents/ui/settings/SettingsWindow.qml:335
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "가져오기 확인"
 
 #: package/contents/ui/settings/SettingsWindow.qml:336
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "현재 홈 화면 레이아웃을 덮어씁니다!"

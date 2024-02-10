@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2017, 2018, 2023 Adrián Chaves <adrian@chaves.io>
+# SPDX-FileCopyrightText: 2017, 2018, 2023, 2024 Adrián Chaves <adrian@chaves.io>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-17 06:02+0100\n"
+"PO-Revision-Date: 2024-02-09 20:56+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -125,13 +125,13 @@ msgstr "Barra de favoritas"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Fondo de escritorio"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Amosar o efecto de desenfoque do fondo de escritorio."
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -143,6 +143,7 @@ msgstr "Xeral"
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
+"Cambiar entre pantallas de inicio e máis opcións de fondo de escritorio."
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
