@@ -26,8 +26,8 @@ This repository contains shell components for Plasma Mobile.
 * [quicksettings](quicksettings) - quick settings packages for the action drawer
 * [tests](tests) - small runnable snippets that can be used to test parts of the shell without loading all of Plasma
 
-<img src="/screenshots/homescreen-halcyon.png" width=300px/>
 <img src="/screenshots/homescreen-folio.png" width=300px/>
+<img src="/screenshots/homescreen-halcyon.png" width=300px/>
 
 ### Test on a development machine
 
