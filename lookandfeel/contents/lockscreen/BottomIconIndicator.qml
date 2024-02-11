@@ -13,37 +13,6 @@ Loader {
 
     property var lockScreenState
 
-    property real animationY: 0
-    readonly property real fullYOffset: Kirigami.Units.largeSpacing
-
-    // animate it going up and down
-    NumberAnimation on animationY {
-        id: animateUpAndDown
-        duration: 800
-        easing.type: Easing.InCubic
-        to: root.fullYOffset
-
-        // only bounce icon if we are showing the scroll up icon
-        running: !lockScreenState.isFingerprintSupported
-
-        onFinished: {
-            if (root.animationY === root.fullYOffset) {
-                to = 0;
-                easing.type = Easing.OutCubic;
-            } else {
-                to = root.fullYOffset;
-                easing.type = Easing.InCubic;
-            }
-            restart();
-        }
-
-        onStopped: {
-            if (lockScreenState.isFingerprintSupported) {
-                root.animationY = 0;
-            }
-        }
-    }
-
     sourceComponent: {
         if (lockScreenState.isFingerprintSupported) {
             return fingerprintIcon;
