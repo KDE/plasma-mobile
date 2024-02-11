@@ -159,7 +159,7 @@ Item {
                 lockScreenState: root.lockScreenState
 
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5 + scrollUpIconLoader.animationY
+                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 

@@ -139,7 +139,7 @@ Rectangle {
                         shadowEnabled: true
                         shadowVerticalOffset: 1
                         shadowOpacity: 0.3
-                        shadowColor: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.dropShadowColor
+                        shadowColor: keypadRoot.dropShadowColor
                     }
 
                     onPressedChanged: {
