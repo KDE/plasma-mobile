@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2024-02-09 20:06+0100\n"
+"PO-Revision-Date: 2024-02-10 22:58+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -125,13 +125,13 @@ msgstr "책갈피 표시줄"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "배경 그림"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "배경 그림 흐림 효과 표시"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "일반"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "홈 화면과 더 많은 배경 그림 옵션 전환"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

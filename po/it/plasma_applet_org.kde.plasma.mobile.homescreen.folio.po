@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-phone-components package.
 # Paolo Zamponi <feus73@gmail.com>, 2019, 2021.
-# SPDX-FileCopyrightText: 2023 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-16 13:19+0100\n"
+"PO-Revision-Date: 2024-02-09 11:54+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -127,13 +127,13 @@ msgstr "Barra dei preferiti"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Sfondo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Mostra l'effetto di sfocatura dello sfondo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -144,7 +144,7 @@ msgstr "Generale"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Passa tra le schermate Home e altre opzioni per lo sfondo"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
