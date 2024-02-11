@@ -61,6 +61,7 @@ SimpleKCM {
 
     ConnectDialog {
         id: connectionDialog
+        parent: root
     }
 
     ColumnLayout {

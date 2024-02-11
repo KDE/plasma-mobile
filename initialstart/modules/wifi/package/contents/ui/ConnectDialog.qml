@@ -1,31 +1,31 @@
-// SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
-// SPDX-License-Identifier: GPL-2.0-or-later
+// SPDX-FileCopyrightText: 2020-2024 Devin Lin <espidev@gmail.com>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15 as Controls
-
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick 2.6
+import QtQuick.Layouts 1.2
+import QtQuick.Controls 2.2 as Controls
+import org.kde.kirigami as Kirigami
 
 Kirigami.PromptDialog {
     id: dialogRoot
+    title: headingText
+
     property int securityType
     property string headingText
     property string devicePath
     property string specificPath
-
+    
     signal donePressed(string password)
-
+    
     function openAndClear() {
         warning.visible = false;
         this.open();
         passwordField.text = "";
         passwordField.focus = true;
     }
-
-    title: headingText
+    
     standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
-
+    
     onOpened: passwordField.forceActiveFocus()
     onRejected: {
         dialogRoot.close();
@@ -40,22 +40,23 @@ Kirigami.PromptDialog {
         }
         passwordField.focus = false;
     }
-
+    
     ColumnLayout {
         id: column
         spacing: Kirigami.Units.largeSpacing
-
+        
         PasswordField {
             id: passwordField
             Layout.fillWidth: true
             securityType: dialogRoot.securityType
             onAccepted: dialogRoot.accept()
         }
-
+        
         Controls.Label {
             id: warning
             text: i18n("Invalid input.")
             visible: false
         }
     }
+    
 }
