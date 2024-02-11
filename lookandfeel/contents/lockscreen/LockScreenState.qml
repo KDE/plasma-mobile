@@ -4,7 +4,7 @@
 import QtQml
 import QtQuick
 
-// import org.kde.kscreenlocker 1.0 as ScreenLocker
+import org.kde.kscreenlocker 1.0 as ScreenLocker
 
 QtObject {
     id: root
@@ -22,7 +22,7 @@ QtObject {
     property bool passwordless: false // TODO true
     
     // whether the device can login with fingerprint
-    readonly property bool isFingerprintSupported: authenticator.authenticatorTypes //& ScreenLocker.Authenticator.Fingerprint
+    readonly property bool isFingerprintSupported: authenticator.authenticatorTypes & ScreenLocker.Authenticator.Fingerprint
 
     signal reset()
     signal unlockSucceeded()
