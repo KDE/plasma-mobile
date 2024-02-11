@@ -324,6 +324,7 @@ Item {
                 anchors.rightMargin: root.rightMargin
                 anchors.bottomMargin: favouritesBarAtBottom ? 0 : (root.bottomMargin + Kirigami.Units.largeSpacing)
 
+                // show page indicator if there are multiple pages
                 QQC2.PageIndicator {
                     visible: count > 1
                     Kirigami.Theme.inherit: false
@@ -334,6 +335,30 @@ Item {
 
                     currentIndex: Folio.HomeScreenState.currentPage
                     count: Folio.PageListModel.length
+
+                    TapHandler {
+                        onTapped: Folio.HomeScreenState.openAppDrawer()
+                    }
+                }
+
+                // show arrow to open app drawer when there is 1 page
+                Kirigami.Icon {
+                    source: 'arrow-up'
+                    Kirigami.Theme.inherit: false
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+                    
+                    implicitHeight: Kirigami.Units.iconSizes.small
+                    implicitWidth: Kirigami.Units.iconSizes.small
+
+                    visible: Folio.PageListModel.length <= 1
+                    
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.bottom: parent.bottom
+                    anchors.bottomMargin: Kirigami.Units.smallSpacing
+
+                    TapHandler {
+                        onTapped: Folio.HomeScreenState.openAppDrawer()
+                    }
                 }
             }
         }
