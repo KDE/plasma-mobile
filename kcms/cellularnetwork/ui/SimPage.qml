@@ -71,7 +71,7 @@ FormCard.FormCardPage {
             icon.name: "globe"
             text: i18n("Modify APNs")
             description: i18n("Configure access point names for your carrier.")
-            enabled: simEnabled && enabledConnections.wwanEnabled
+            enabled: simEnabled
             onClicked: kcm.push("ProfileList.qml", { "modem": sim.modem });
         }
 
@@ -93,7 +93,7 @@ FormCard.FormCardPage {
             icon.name: "unlock"
             text: i18n("SIM Lock")
             description: i18n("Modify SIM lock settings.")
-            // enabled: simEnabled
+            enabled: simEnabled
             onClicked: kcm.push("SimLockPage.qml", { "sim": sim });
         }
 
