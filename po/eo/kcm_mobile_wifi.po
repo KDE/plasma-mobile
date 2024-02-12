@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 02:26+0000\n"
 "PO-Revision-Date: 2023-12-17 22:24+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr "Nevalida enigo."
@@ -33,12 +33,12 @@ msgstr "Konekti al"
 msgid "Edit"
 msgstr "Redakti"
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr "Vifio"
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Retoj Disponeblaj"

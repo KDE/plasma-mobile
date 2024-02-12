@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2022, 2023 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 02:34+0000\n"
-"PO-Revision-Date: 2023-12-23 13:38+0100\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
+"PO-Revision-Date: 2024-02-11 10:27+0100\n"
+"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -126,13 +126,13 @@ msgstr "Pasek ulubionych"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Tapeta"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Pokaż efekt rozmycia tapety"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -144,6 +144,7 @@ msgstr "Ogólne"
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
+"Przełączaj pomiędzy ekranami domowymi, a dodatkowymi ustawieniami tapety"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

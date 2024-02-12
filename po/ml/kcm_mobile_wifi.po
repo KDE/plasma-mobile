@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 02:26+0000\n"
 "PO-Revision-Date: 2019-12-12 22:31+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr ""
@@ -33,12 +33,12 @@ msgstr ""
 msgid "Edit"
 msgstr ""
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr ""
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr ""
