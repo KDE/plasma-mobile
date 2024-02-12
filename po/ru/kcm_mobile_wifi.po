@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 00:39+0000\n"
 "PO-Revision-Date: 2021-08-20 21:06+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.08.0\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr "Неверное значение."
@@ -34,12 +34,12 @@ msgstr "Подключение к"
 msgid "Edit"
 msgstr ""
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr ""
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, fuzzy, kde-format
 #| msgid "Available networks"
 msgid "Available Networks"

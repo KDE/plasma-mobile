@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 00:39+0000\n"
 "PO-Revision-Date: 2024-02-09 19:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.08.1\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr "잘못 입력했습니다."
@@ -32,12 +32,12 @@ msgstr "다음에 연결"
 msgid "Edit"
 msgstr "편집"
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "사용 가능한 네트워크"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 00:39+0000\n"
 "PO-Revision-Date: 2023-12-17 21:01+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.3\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr "Érvénytelen bemenet."
@@ -33,12 +33,12 @@ msgstr "Kapcsolódás ehhez:"
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Elérhető hálózatok"

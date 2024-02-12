@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-28 01:34+0000\n"
+"POT-Creation-Date: 2024-02-12 00:39+0000\n"
 "PO-Revision-Date: 2023-12-24 09:09-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: ui/ConnectDialog.qml:136
+#: ui/ConnectDialog.qml:57
 #, kde-format
 msgid "Invalid input."
 msgstr "ਗਲਤ ਇੰਪੁੱਟ ਹੈ।"
@@ -32,12 +32,12 @@ msgstr "ਕਨੈਕਟ ਕਰੋ"
 msgid "Edit"
 msgstr "ਸੋਧੋ"
 
-#: ui/main.qml:86
+#: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
 msgstr "ਵਾਈ-ਫਾਈ"
 
-#: ui/main.qml:134
+#: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "ਮੌਜੂਦਾ ਨੈੱਟਵਰਕ"
