@@ -71,6 +71,11 @@ bool SignalIndicator::mobileDataSupported() const
 
 bool SignalIndicator::mobileDataEnabled() const
 {
+    // if wwan is globally disabled
+    if (!NetworkManager::isWwanEnabled()) {
+        return false;
+    }
+
     // no modem -> no mobile data -> report disabled
     if (!m_nmModem) {
         return false;
@@ -104,19 +109,20 @@ bool SignalIndicator::needsAPNAdded() const
 
 void SignalIndicator::setMobileDataEnabled(bool enabled)
 {
+    // ensure that wwan is on
+    if (enabled && !NetworkManager::isWwanEnabled()) {
+        NetworkManager::setWwanEnabled(true);
+    }
+
     if (!m_nmModem) {
         return;
     }
-    if (!enabled) {
-        m_nmModem->setAutoconnect(false);
-        // we need to also set all connections to not autoconnect (#182)
-        for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
-            con->settings()->setAutoconnect(false);
-            con->update(con->settings()->toMap());
-        }
-        m_nmModem->disconnectInterface();
-    } else {
+
+    if (enabled) {
+        // enable mobile data...
+
         m_nmModem->setAutoconnect(true);
+
         // activate the connection that was last used
         QDateTime latestTimestamp;
         NetworkManager::Connection::Ptr latestCon;
@@ -131,6 +137,7 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
                 latestCon = con;
             }
         }
+
         // if we found the last used connection
         if (!latestCon.isNull()) {
             // set it to autoconnect and connect it immediately
@@ -138,6 +145,22 @@ void SignalIndicator::setMobileDataEnabled(bool enabled)
             latestCon->update(latestCon->settings()->toMap());
             NetworkManager::activateConnection(latestCon->path(), m_nmModem->uni(), "");
         }
+
+    } else {
+        // disable mobile data...
+
+        // we do not call NetworkManager::setWwanEnabled(false), because it turns off cellular
+
+        // turn off autoconnect
+        m_nmModem->setAutoconnect(false);
+        // we need to also set all connections to not autoconnect (#182)
+        for (NetworkManager::Connection::Ptr con : m_nmModem->availableConnections()) {
+            con->settings()->setAutoconnect(false);
+            con->update(con->settings()->toMap());
+        }
+
+        // disconnect network
+        m_nmModem->disconnectInterface();
     }
 }
 
