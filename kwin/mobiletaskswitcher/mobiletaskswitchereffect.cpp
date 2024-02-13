@@ -20,7 +20,7 @@ MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
     , m_shutdownTimer{new QTimer{this}}
 {
     auto gesture = new EffectTogglableGesture{m_taskSwitcherState};
-    gesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 1);
+    gesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
 
     connect(m_taskSwitcherState, &EffectTogglableState::inProgressChanged, this, &MobileTaskSwitcherEffect::gestureInProgressChanged);
     connect(m_taskSwitcherState, &EffectTogglableState::partialActivationFactorChanged, this, &MobileTaskSwitcherEffect::partialActivationFactorChanged);
