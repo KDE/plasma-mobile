@@ -3068,13 +3068,3 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
-
-#~ msgid "Current Time"
-#~ msgstr "Hora actual"
-
-#~ msgid "Date"
-#~ msgstr "Data"
-
-#~ msgctxt "@action:button"
-#~ msgid "Close"
-#~ msgstr "Tanca"

@@ -177,9 +177,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla per separat en el mòdul de configuració "
 "del teclat."
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Mode de només gestos"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Si s'ha d'ocultar el quadro de navegació."
