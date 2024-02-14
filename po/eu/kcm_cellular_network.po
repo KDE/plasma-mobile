@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-17 01:36+0000\n"
+"POT-Creation-Date: 2024-02-14 02:28+0000\n"
 "PO-Revision-Date: 2023-12-17 08:57+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -25,88 +25,88 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr "Errorea modema berrezartzean: %1"
 
-#: modem.cpp:242 modem.cpp:406
+#: modem.cpp:264 modem.cpp:428
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "Errorea %1(e)ren konexio ezarpenak eguneratzean: %2"
 
-#: modem.cpp:320
+#: modem.cpp:342
 #, kde-format
 msgid "Error activating connection: %1"
 msgstr "Errorea konexioa aktibatzean: %1"
 
-#: modem.cpp:354
+#: modem.cpp:376
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Errorea konexioa gehitzean: %1"
 
-#: modem.cpp:371
+#: modem.cpp:393
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Errorea konexioa kentzean: %1"
 
-#: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Ezezaguna"
 
-#: modem.cpp:494
+#: modem.cpp:516
 #, kde-format
 msgid "Unmanaged"
 msgstr "Kudeatu gabe"
 
-#: modem.cpp:496
+#: modem.cpp:518
 #, kde-format
 msgid "Unavailable"
 msgstr "Ez dago erabilgarri"
 
-#: modem.cpp:498
+#: modem.cpp:520
 #, kde-format
 msgid "Disconnected"
 msgstr "Deskonektatuta"
 
-#: modem.cpp:500
+#: modem.cpp:522
 #, kde-format
 msgid "Preparing"
 msgstr "Prestatzen"
 
-#: modem.cpp:502
+#: modem.cpp:524
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "Hardwarea konfiguratzea"
 
-#: modem.cpp:504
+#: modem.cpp:526
 #, kde-format
 msgid "NeedAuth"
 msgstr "Autentikatze beharra"
 
-#: modem.cpp:506
+#: modem.cpp:528
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "IPa konfiguratzea"
 
-#: modem.cpp:508
+#: modem.cpp:530
 #, kde-format
 msgid "CheckingIp"
 msgstr "IPa egiaztatzea"
 
-#: modem.cpp:510
+#: modem.cpp:532
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "Bigarren mailakoen zain"
 
-#: modem.cpp:512
+#: modem.cpp:534
 #, kde-format
 msgid "Activated"
 msgstr "Aktibatuta"
 
-#: modem.cpp:514
+#: modem.cpp:536
 #, kde-format
 msgid "Deactivating"
 msgstr "Desaktibatzen"
 
-#: modem.cpp:516 modemdetails.cpp:250
+#: modem.cpp:538 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Huts egin du"

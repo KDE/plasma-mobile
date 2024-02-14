@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-12 02:26+0000\n"
-"PO-Revision-Date: 2021-08-21 12:30+0300\n"
+"PO-Revision-Date: 2024-02-14 01:41+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -32,22 +32,20 @@ msgstr "Prisijungti prie"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Taisyti"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Belaidis (Wi-Fi)"
 
 #: ui/main.qml:135
-#, fuzzy, kde-format
-#| msgid "Available networks"
+#, kde-format
 msgid "Available Networks"
 msgstr "Prieinami tinklai"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Pridėti naują ryšį"
 
@@ -57,10 +55,9 @@ msgid "Save"
 msgstr "Įrašyti"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Paslėptas tinklas:"
+msgstr "Paslėptas tinklas"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -128,22 +125,19 @@ msgid "Manual"
 msgstr "Rankiniu būdu"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP adresas:"
+msgstr "IP adresas"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Tinklų sietuvas:"
+msgstr "Tinklų sietuvas"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Tinklo priešdėlio ilgis:"
+msgstr "Tinklo priešdėlio ilgis"
 
 #: ui/NetworkSettings.qml:241
 #, kde-format
