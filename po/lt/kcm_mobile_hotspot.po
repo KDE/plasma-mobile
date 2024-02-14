@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2020-11-02 15:34+0200\n"
+"PO-Revision-Date: 2024-02-14 01:38+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Konfigūruoti viešosios prieigos tašką"
 
 #: ui/main.qml:77
 #, kde-format
@@ -33,23 +33,23 @@ msgstr "Viešosios prieigos taškas"
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
 msgstr ""
+"Bendrinti interneto ryšį su kitais įrenginiais belaidžio (Wi-Fi) tinklo "
+"pavidalu."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Nuostatos"
 
 #: ui/main.qml:103
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Viešosios prieigos taškas"
+msgstr "Viešosios prieigos taško SSID"
 
 #: ui/main.qml:112
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Slaptažodis:"
+msgstr "Viešosios prieigos taško slaptažodis"
 
 #~ msgid "Enabled:"
 #~ msgstr "Įjungtas:"

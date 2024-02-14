@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-17 01:36+0000\n"
+"POT-Creation-Date: 2024-02-14 00:39+0000\n"
 "PO-Revision-Date: 2024-01-05 05:31+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -25,88 +25,88 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr ""
 
-#: modem.cpp:242 modem.cpp:406
+#: modem.cpp:264 modem.cpp:428
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "更新 %1 的連線設定時出錯：%2。"
 
-#: modem.cpp:320
+#: modem.cpp:342
 #, kde-format
 msgid "Error activating connection: %1"
 msgstr "啟用連線時出錯：%1"
 
-#: modem.cpp:354
+#: modem.cpp:376
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "新增連線時出錯：%1"
 
-#: modem.cpp:371
+#: modem.cpp:393
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "移除連線時出錯：%1"
 
-#: modem.cpp:492 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "未知"
 
-#: modem.cpp:494
+#: modem.cpp:516
 #, kde-format
 msgid "Unmanaged"
 msgstr "未管理"
 
-#: modem.cpp:496
+#: modem.cpp:518
 #, kde-format
 msgid "Unavailable"
 msgstr "無法使用"
 
-#: modem.cpp:498
+#: modem.cpp:520
 #, kde-format
 msgid "Disconnected"
 msgstr "已離線"
 
-#: modem.cpp:500
+#: modem.cpp:522
 #, kde-format
 msgid "Preparing"
 msgstr "準備中"
 
-#: modem.cpp:502
+#: modem.cpp:524
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "設定硬體中"
 
-#: modem.cpp:504
+#: modem.cpp:526
 #, kde-format
 msgid "NeedAuth"
 msgstr "需要認證"
 
-#: modem.cpp:506
+#: modem.cpp:528
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "設定 IP 中"
 
-#: modem.cpp:508
+#: modem.cpp:530
 #, kde-format
 msgid "CheckingIp"
 msgstr "檢查 IP 中"
 
-#: modem.cpp:510
+#: modem.cpp:532
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr ""
 
-#: modem.cpp:512
+#: modem.cpp:534
 #, kde-format
 msgid "Activated"
 msgstr "已啟動"
 
-#: modem.cpp:514
+#: modem.cpp:536
 #, kde-format
 msgid "Deactivating"
 msgstr "停用中"
 
-#: modem.cpp:516 modemdetails.cpp:250
+#: modem.cpp:538 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "已失敗"
