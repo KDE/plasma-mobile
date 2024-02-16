@@ -115,7 +115,7 @@ ApplicationFolderModel::ApplicationFolderModel(ApplicationFolder *folder)
 {
 }
 
-int ApplicationFolderModel::rowCount(const QModelIndex &parent) const
+int ApplicationFolderModel::rowCount(const QModelIndex & /*parent*/) const
 {
     return m_folder->m_applications.size();
 }

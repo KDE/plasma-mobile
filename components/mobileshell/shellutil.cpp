@@ -60,7 +60,7 @@ bool ShellUtil::isSystem24HourFormat()
         m_localeConfigWatcher = KConfigWatcher::create(m_localeConfig);
 
         // watch for changes to locale config, to update 12/24 hour time
-        connect(m_localeConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+        connect(m_localeConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group) -> void {
             if (group.name() == "Locale") {
                 // we have to reparse for new changes (from system settings)
                 m_localeConfig->reparseConfiguration();

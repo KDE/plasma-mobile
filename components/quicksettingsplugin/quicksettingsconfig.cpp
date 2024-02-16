@@ -17,7 +17,7 @@ QuickSettingsConfig::QuickSettingsConfig(QObject *parent)
 {
     m_configWatcher = KConfigWatcher::create(m_config);
 
-    connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+    connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group) -> void {
         if (group.name() == QUICKSETTINGS_CONFIG_GROUP) {
             Q_EMIT enabledQuickSettingsChanged();
             Q_EMIT disabledQuickSettingsChanged();

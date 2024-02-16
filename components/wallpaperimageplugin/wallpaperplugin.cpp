@@ -38,7 +38,7 @@ WallpaperPlugin::WallpaperPlugin(QObject *parent)
         qWarning() << "Could not connect to dbus service org.kde.plasmashell to listen to wallpaperChanged";
     }
 
-    connect(m_lockscreenConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) {
+    connect(m_lockscreenConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group) {
         loadLockscreenSettings();
     });
 

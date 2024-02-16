@@ -151,7 +151,7 @@ ApplicationFolderModel::ApplicationFolderModel(FolioApplicationFolder *folder)
     });
 }
 
-int ApplicationFolderModel::rowCount(const QModelIndex &parent) const
+int ApplicationFolderModel::rowCount(const QModelIndex & /*parent*/) const
 {
     return m_folder->m_delegates.size();
 }
