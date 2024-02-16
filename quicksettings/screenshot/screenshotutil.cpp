@@ -19,7 +19,7 @@
 #include <QImage>
 #include <QScreen>
 #include <QTimer>
-#include <QtConcurrent/QtConcurrent>
+#include <QtConcurrent/QtConcurrentRun>
 
 constexpr int SCREENSHOT_DELAY = 200;
 

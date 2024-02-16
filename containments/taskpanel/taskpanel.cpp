@@ -10,7 +10,6 @@
 #include <QDBusPendingReply>
 #include <QDebug>
 #include <QGuiApplication>
-#include <QtQml>
 
 // register type for Keyboards.KWinVirtualKeyboard.forceActivate();
 Q_DECLARE_METATYPE(QDBusPendingReply<>)

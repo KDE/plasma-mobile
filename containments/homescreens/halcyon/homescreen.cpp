@@ -8,7 +8,6 @@
 
 #include <QDebug>
 #include <QQuickItem>
-#include <QtQml>
 
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}

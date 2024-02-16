@@ -24,7 +24,6 @@
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 #include <QQuickItem>
-#include <QtQml>
 
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}

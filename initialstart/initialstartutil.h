@@ -5,7 +5,7 @@
 
 #include <KOSRelease>
 #include <QObject>
-#include <QtQml>
+#include <qqmlintegration.h>
 
 class InitialStartUtil : public QObject
 {
