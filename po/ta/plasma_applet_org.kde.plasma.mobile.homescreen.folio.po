@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 02:34+0000\n"
-"PO-Revision-Date: 2023-12-17 16:21+0530\n"
+"PO-Revision-Date: 2024-02-18 15:27+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -125,13 +125,13 @@ msgstr "பிடித்தவை பட்டை"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "பின்புலப்படம்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "பின்புலப்படத்தை மங்கலாக்கு"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "பொதுவானவை"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "முகப்புப்பக்க மற்றும் மேம்பட்ட பின்புல அமைப்புகள்"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
