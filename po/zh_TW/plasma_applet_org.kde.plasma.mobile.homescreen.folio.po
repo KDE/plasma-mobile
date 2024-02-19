@@ -4,13 +4,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2022.
-# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2023-12-22 05:35+0900\n"
+"PO-Revision-Date: 2024-02-19 08:08+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.01.80\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -128,13 +128,13 @@ msgstr "最愛列"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "桌布"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "顯示桌布模糊效果"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -145,7 +145,7 @@ msgstr "一般"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "在主畫面與更多桌布選項之間切換"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format

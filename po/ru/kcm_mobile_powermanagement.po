@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2022-09-24 14:51+0300\n"
+"PO-Revision-Date: 2024-02-18 10:13+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -246,12 +246,10 @@ msgid "Unknown battery"
 msgstr "Неизвестная батарея"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
-msgstr "%1%2"
+msgstr "%1%"
 
 #: ui/main.qml:91
 #, kde-format
@@ -286,7 +284,7 @@ msgstr "Отключение экрана"
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
-msgstr "Ждущий режим"
+msgstr "Спящий режим"
 
 #~ msgid "%"
 #~ msgstr "%"
