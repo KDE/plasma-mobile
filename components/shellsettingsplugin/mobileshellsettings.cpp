@@ -91,8 +91,7 @@ void MobileShellSettings::setNavigationPanelEnabled(bool navigationPanelEnabled)
     group.writeEntry("navigationPanelEnabled", navigationPanelEnabled, KConfigGroup::Notify);
     m_config->sync();
 
-    // TODO: Gesture only mode setting is disabled until we get the kwin effect gesture working: https://invent.kde.org/plasma/plasma-mobile/-/issues/300
-    // updateNavigationBarsInPlasma(navigationPanelEnabled);
+    updateNavigationBarsInPlasma(navigationPanelEnabled);
 }
 
 bool MobileShellSettings::alwaysShowKeyboardToggleOnNavigationPanel() const

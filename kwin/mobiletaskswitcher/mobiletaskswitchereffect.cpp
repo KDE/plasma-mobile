@@ -51,6 +51,7 @@ MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
 
     setSource(QUrl::fromLocalFile(
         QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/effects/mobiletaskswitcher/qml/TaskSwitcher.qml"))));
+    reconfigure(ReconfigureFlag::ReconfigureAll);
 }
 
 MobileTaskSwitcherEffect::~MobileTaskSwitcherEffect()
