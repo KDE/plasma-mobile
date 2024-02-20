@@ -14,39 +14,39 @@ import "private" as Private
 
 Item {
     id: root
-    
+
     default property Item mainItem
-    
+
     /**
      * Title of the dialog.
      */
     property string mainText: ""
-    
+
     /**
      * Subtitle of the dialog.
      */
     property string subtitle: ""
-    
+
     /**
      * This property holds the default padding of the content.
      */
     property real padding: Kirigami.Units.smallSpacing
-    
+
     /**
      * This property holds the left padding of the content. If not specified, it uses `padding`.
      */
     property real leftPadding: padding
-    
+
     /**
      * This property holds the right padding of the content. If not specified, it uses `padding`.
      */
     property real rightPadding: padding
-    
+
     /**
      * This property holds the top padding of the content. If not specified, it uses `padding`.
      */
     property real topPadding: padding
-    
+
     /**
      * This property holds the bottom padding of the content. If not specified, it uses `padding`.
      */
@@ -127,7 +127,7 @@ Item {
             }
         }
     }
-    
+
     readonly property var contents: ColumnLayout {
         id: column
         spacing: 0
