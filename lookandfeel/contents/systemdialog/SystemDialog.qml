@@ -6,6 +6,7 @@
 
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import QtQuick.Templates as T
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 import Qt5Compat.GraphicalEffects
@@ -55,7 +56,7 @@ Item {
 
     readonly property int flags: Qt.FramelessWindowHint | Qt.Dialog
     readonly property real dialogCornerRadius: Kirigami.Units.smallSpacing * 2
-    property list<Kirigami.Action> actions
+    property list<T.Action> actions
     property string iconName
 
     implicitWidth: loader.implicitWidth
