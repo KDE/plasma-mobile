@@ -67,13 +67,13 @@ Item {
     required property Kirigami.AbstractApplicationWindow window
 
     function present() {
-        root.window.showFullScreen()
+        window.showFullScreen()
     }
 
     onWindowChanged: {
-        window.color = Qt.binding(() => {
-            return Qt.rgba(0, 0, 0, 0.5)
-        })
+        if (window) {
+            window.color = Qt.rgba(0, 0, 0, 0.5);
+        }
     }
 
     // load in async to speed up load times (especially on embedded devices)
