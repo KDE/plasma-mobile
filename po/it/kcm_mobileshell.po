@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-02-20 00:39+0000\n"
 "PO-Revision-Date: 2023-11-08 10:30+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -47,12 +47,22 @@ msgstr "Se non è attivata, le animazioni verranno ridotte al minimo."
 msgid "Navigation Panel"
 msgstr "Pannello di navigazione"
 
-#: ui/main.qml:75
+#: ui/main.qml:59
+#, kde-format
+msgid "Gesture-only Mode"
+msgstr "Modalità solo gesti"
+
+#: ui/main.qml:60
+#, kde-format
+msgid "Whether to hide the navigation panel."
+msgstr "Se nascondere il pannello di navigazione."
+
+#: ui/main.qml:74
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Mostra sempre il pulsante di attivazione della tastiera"
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -60,44 +70,44 @@ msgstr ""
 "Se mostrare sempre il pulsante di attivazione della tastiera nel pannello di "
 "navigazione."
 
-#: ui/main.qml:87
+#: ui/main.qml:86
 #, kde-format
 msgid "Action Drawer"
 msgstr "Cassetto delle azioni"
 
-#: ui/main.qml:93
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modalità appuntata"
 
-#: ui/main.qml:94
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modalità espansa"
 
-#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Impostazioni rapide"
 
-#: ui/main.qml:106
+#: ui/main.qml:105
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modalità cassetto in alto a sinistra"
 
-#: ui/main.qml:107
+#: ui/main.qml:106
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modalità quando si apre dall'alto a sinistra."
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modalità cassetto in alto a destra"
 
-#: ui/main.qml:133
+#: ui/main.qml:132
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modalità quando si apre dall'alto a destra."
@@ -173,12 +183,6 @@ msgid ""
 msgstr ""
 "La vibrazione della tastiera è controllata separatamente nel modulo delle "
 "impostazioni della tastiera."
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Modalità solo gesti"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Se nascondere il pannello di navigazione."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Intensità della vibrazione"

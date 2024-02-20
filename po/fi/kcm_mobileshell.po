@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-02-20 00:39+0000\n"
 "PO-Revision-Date: 2023-11-22 21:29+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -49,55 +49,65 @@ msgstr ""
 msgid "Navigation Panel"
 msgstr "Navigointipaneeli"
 
-#: ui/main.qml:75
+#: ui/main.qml:59
+#, kde-format
+msgid "Gesture-only Mode"
+msgstr "Vain eleet -tila"
+
+#: ui/main.qml:60
+#, kde-format
+msgid "Whether to hide the navigation panel."
+msgstr "Piilotetaanko navigointipaneeli."
+
+#: ui/main.qml:74
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Näytä näppäimistöpainike aina"
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Näytetäänkö näppäimistön näyttämispainike navigointirivillä aina."
 
-#: ui/main.qml:87
+#: ui/main.qml:86
 #, kde-format
 msgid "Action Drawer"
 msgstr "Toimintolaatikko"
 
-#: ui/main.qml:93
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Kiinnitetty tila"
 
-#: ui/main.qml:94
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Laajennettu tila"
 
-#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Pika-asetukset"
 
-#: ui/main.qml:106
+#: ui/main.qml:105
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Ylävasemman laatikon tila"
 
-#: ui/main.qml:107
+#: ui/main.qml:106
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Tila avattaessa ylävasemmalta."
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Yläoikean laatikon tila"
 
-#: ui/main.qml:133
+#: ui/main.qml:132
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Tila avattaessa yläoikealta."
@@ -170,12 +180,6 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Näppäimistön värinä säädetään erikseen näppäimistöasetusmoduulissa."
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Vain eleet -tila"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Piilotetaanko navigointipaneeli."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Värinän voimakkuus"

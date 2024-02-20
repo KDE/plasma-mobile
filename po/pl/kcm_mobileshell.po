@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-02-20 00:39+0000\n"
 "PO-Revision-Date: 2023-12-23 11:25+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -48,12 +48,22 @@ msgstr "Po wyłączeniu tego, animacje zostaną ograniczone do niezbędnych."
 msgid "Navigation Panel"
 msgstr "Pasek przemieszczania"
 
-#: ui/main.qml:75
+#: ui/main.qml:59
+#, kde-format
+msgid "Gesture-only Mode"
+msgstr "Tryb tylko-gestów"
+
+#: ui/main.qml:60
+#, kde-format
+msgid "Whether to hide the navigation panel."
+msgstr "Określa czy ukrywać pasek przemieszczania."
+
+#: ui/main.qml:74
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Zawsze pokazuj przełącznik klawiatury"
 
-#: ui/main.qml:76
+#: ui/main.qml:75
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -61,44 +71,44 @@ msgstr ""
 "Określa czy zawsze pokazywać przełącznik klawiatury na pasku przemieszczania "
 "się."
 
-#: ui/main.qml:87
+#: ui/main.qml:86
 #, kde-format
 msgid "Action Drawer"
 msgstr "Szuflada działań"
 
-#: ui/main.qml:93
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Tryb przypięty"
 
-#: ui/main.qml:94
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Tryb rozwinięty"
 
-#: ui/main.qml:98 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Szybkie ustawienia"
 
-#: ui/main.qml:106
+#: ui/main.qml:105
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Tryb szuflady w górnym, lewym narożniku"
 
-#: ui/main.qml:107
+#: ui/main.qml:106
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Tryb otwierania z lewego, górnego narożnika."
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Tryb szuflady w górnym, prawym narożniku"
 
-#: ui/main.qml:133
+#: ui/main.qml:132
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Tryb otwierania z prawego, górnego narożnika."
@@ -170,12 +180,6 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Drgania klawiatury są ustawiane osobne w członie do jej ustawień."
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Tryb tylko-gestów"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Określa czy ukrywać pasek przemieszczania."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Natężenie drgań"
