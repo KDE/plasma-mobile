@@ -9,6 +9,7 @@ GridView {
     id: root
     currentIndex: -1
 
+    flickDeceleration: 1500
     maximumFlickVelocity: 5000
 
     highlight: highlightComponent
