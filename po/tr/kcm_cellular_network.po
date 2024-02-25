@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 00:39+0000\n"
-"PO-Revision-Date: 2023-07-06 22:45+0300\n"
+"PO-Revision-Date: 2024-02-24 10:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -311,12 +311,12 @@ msgstr "Bir dolaşım ağında kayıtlı."
 #: modemdetails.cpp:324
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
-msgstr "Ev ağında \"Yalnızca SMS\" için kayıtlı."
+msgstr "Ev ağında ‘Yalnızca SMS’ için kayıtlı."
 
 #: modemdetails.cpp:326
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
-msgstr "Dolaşım ağında \"Yalnızca SMS\" için kayıtlı."
+msgstr "Dolaşım ağında ‘Yalnızca SMS’ için kayıtlı."
 
 #: modemdetails.cpp:328
 #, kde-format
@@ -326,12 +326,12 @@ msgstr "Yalnızca acil durum hizmetleri."
 #: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
-msgstr "Ev ağında \"CSFB tercihsiz\" için kayıtlı."
+msgstr "Ev ağında ‘CSFB tercihsiz’ için kayıtlı."
 
 #: modemdetails.cpp:332
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
-msgstr "Dolaşım ağında \"CSFB tercihsiz\" için kayıtlı."
+msgstr "Dolaşım ağında ‘CSFB tercihsiz’ için kayıtlı."
 
 #: modemdetails.cpp:334
 #, kde-format
@@ -469,12 +469,12 @@ msgstr "Modem, PH-FSIM-PUK kodunu gerektiriyor."
 #: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
-msgstr "Modem, ağ alt kümesi-PIN kodunu gerektiriyor."
+msgstr "Modem, ağ alt kümesi PIN kodunu gerektiriyor."
 
 #: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
-msgstr "Modem, ağ alt kümesi-PUK kodunu gerektiriyor."
+msgstr "Modem, ağ alt kümesi PUK kodunu gerektiriyor."
 
 #: sim.cpp:150
 #, kde-format
@@ -524,7 +524,7 @@ msgstr "Ağları Tara"
 #: ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr "APN'yi Düzenle"
+msgstr "Erişim Noktası Adını Düzenle"
 
 #: ui/EditProfileDialog.qml:41
 #, kde-format
@@ -813,7 +813,7 @@ msgstr "SIM kilitli"
 #: ui/SimLockPage.qml:39
 #, kde-format
 msgid "In order to use this SIM, you must first unlock it."
-msgstr "Bu SIM'i kullanmak için onun önce kilidini açmalısınız."
+msgstr "Bu SIM’i kullanmak için onun önce kilidini açmalısınız."
 
 #: ui/SimLockPage.qml:61
 #, kde-format
@@ -826,13 +826,13 @@ msgid ""
 "You can lock your SIM to require a set PIN code for phone calls and mobile "
 "data."
 msgstr ""
-"Telefon aramaları ve taşınabilir veri için SIM'inizin bir PIN kodu "
+"Telefon aramaları ve taşınabilir veri için SIM’inizin bir PIN kodu "
 "gerektirmesini sağlayabilirsiniz."
 
 #: ui/SimLockPage.qml:66
 #, kde-format
 msgid "Lock SIM"
-msgstr "SIM'i Kilitle"
+msgstr "SIM’i Kilitle"
 
 #: ui/SimLockPage.qml:78
 #, kde-format
@@ -842,17 +842,17 @@ msgstr "SIM Kilidini Devre Dışı Bırak"
 #: ui/SimLockPage.qml:79
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr "SIM kilidi özelliğini devre dışı bırak ve SIM'deki şifreyi kaldır."
+msgstr "SIM kilidi özelliğini devre dışı bırak ve SIM’deki şifreyi kaldır."
 
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr "PIN'i Değiştir"
+msgstr "PIN’i Değiştir"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr "SIM'de ayarlı şifreyi değiştir."
+msgstr "SIM’de ayarlı şifreyi değiştir."
 
 #: ui/SimLockPage.qml:106
 #, kde-format
@@ -867,22 +867,22 @@ msgstr "Kalan deneme: %1"
 #: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
-msgstr "PIN'i Gir"
+msgstr "PIN’i Gir"
 
 #: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
-msgstr "SIM PIN'ini Değiştir"
+msgstr "SIM PIN’ini Değiştir"
 
 #: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
 msgid "PINs don't match!"
-msgstr "PIN'ler eşleşmiyor!"
+msgstr "PIN’ler eşleşmiyor!"
 
 #: ui/SimLockPage.qml:151 ui/SimLockPage.qml:216
 #, kde-format
 msgid "PINs must be between 4 and 8 digits!"
-msgstr "PIN'ler 4-8 basamak arasında olmalıdır!"
+msgstr "PIN’ler 4–8 basamak arasında olmalıdır!"
 
 #: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
@@ -897,17 +897,17 @@ msgstr "Yeni PIN"
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr "PIN'ini Onayla"
+msgstr "PIN’ini Onayla"
 
 #: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr "SIM PIN'ini Kaldır"
+msgstr "SIM PIN’ini Kaldır"
 
 #: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
-msgstr "SIM PIN'i Ekle"
+msgstr "SIM PIN’i Ekle"
 
 #: ui/SimPage.qml:45
 #, kde-format
@@ -955,7 +955,7 @@ msgstr "SIM kilidi ayarlarını değiştirin."
 #: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
-msgstr "SIM'in bağlı olduğu modemin ayrıntılarını görüntüleyin."
+msgstr "SIM’in bağlı olduğu modemin ayrıntılarını görüntüleyin."
 
 #: ui/SimPage.qml:112
 #, kde-format

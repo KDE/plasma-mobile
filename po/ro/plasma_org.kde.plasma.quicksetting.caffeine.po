@@ -1,0 +1,39 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Sergiu Bivol <sergiu@cip.md>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"PO-Revision-Date: 2024-02-24 19:01+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: contents/ui/main.qml:11
+#, kde-format
+msgid "Caffeine"
+msgstr "Cafeină"
+
+#: contents/ui/main.qml:13
+#, kde-format
+msgid "Tap to disable sleep suspension"
+msgstr "Atingeți pentru a dezactiva suspendarea adormirii"
+
+#: contents/ui/main.qml:13
+#, kde-format
+msgid "Tap to suspend sleep"
+msgstr "Atingeți pentru a suspenda adormirea"
+
+#: contents/ui/main.qml:36
+#, kde-format
+msgid "Plasma Mobile has enabled system-wide inhibition"
+msgstr "Plasma Mobile a activat inhibiția în tot sistemul"

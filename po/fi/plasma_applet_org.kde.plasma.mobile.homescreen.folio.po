@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-09 00:39+0000\n"
-"PO-Revision-Date: 2024-01-29 21:57+0200\n"
+"PO-Revision-Date: 2024-02-14 19:13+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -125,13 +125,13 @@ msgstr "Suosikkirivi"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Taustakuva"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Näytä taustakuvan sumennustehoste"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "Perusasetukset"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Kotinäyttövaihto ja lisää taustakuvavalintoja"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
