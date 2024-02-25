@@ -4,5 +4,6 @@
 import QtQuick 2.15
 
 Flickable {
+    flickDeceleration: 1500
     maximumFlickVelocity: 5000
 }

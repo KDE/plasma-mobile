@@ -5,5 +5,6 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 
 ListView {
+    flickDeceleration: 1500
     maximumFlickVelocity: 5000
 }
