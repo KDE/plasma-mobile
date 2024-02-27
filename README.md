@@ -47,9 +47,18 @@ Dependencies:
 * Kirigami Addons
 * hfd-service (optional: for vibrations)
 
-To start the phone homescreen in a window, run:
+To start the shell in a window, run:
+
 ```
 QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.mobileshell"
+```
+
+Useful options:
+- Specify the `--output-count` flag for the number of displays
+- Specify `--width` and `--height` for the window size
+
+```
+QT_QPA_PLATFORM=wayland dbus-run-session kwin_wayland --xwayland "plasmashell -p org.kde.plasma.mobileshell" --output-count 2 --width 360 --height 720
 ```
 
 ---
