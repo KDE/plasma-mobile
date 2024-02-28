@@ -1,0 +1,39 @@
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Sergiu Bivol <sergiu@cip.md>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"PO-Revision-Date: 2024-02-24 19:00+0000\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
+"20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
+
+#: contents/logout/Logout.qml:140
+#, kde-format
+msgid "Restart"
+msgstr "Repornește"
+
+#: contents/logout/Logout.qml:149
+#, kde-format
+msgid "Shut Down"
+msgstr "Oprește"
+
+#: contents/logout/Logout.qml:158
+#, kde-format
+msgid "Log Out"
+msgstr "Ieși din sistem"
+
+#: contents/logout/Logout.qml:173
+#, kde-format
+msgid "Cancel"
+msgstr "Renunță"
