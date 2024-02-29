@@ -52,11 +52,10 @@ msgstr "Navigasjonspanel"
 #: ui/main.qml:59
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "«Berre fingerrørsler»-modus"
 
 #: ui/main.qml:60
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Om navigasjonspanelet skal gøymast."
 
