@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Autodetect cellular APNs in Plasma Mobile",
+        "Description[ca@valencia]": "Detecta automàticament els APN mòbils en Plasma Mobile",
         "Description[ca]": "Detecta automàticament els APN mòbils en el Plasma Mobile",
         "Description[eo]": "Aŭtomate detekti ĉelretajn APN en Plasma-Mobile",
         "Description[es]": "Detección automática de APN móviles en Plasma Mobile",
@@ -8,6 +9,7 @@
         "Description[fr]": "Détecter automatiquement les APN cellulaires dans Plasma Mobile",
         "Description[gl]": "Detectar APN celulares automaticamente en Plasma Mobile.",
         "Description[ia]": "Auto releva APNs de cellular in Plasma Mobile",
+        "Description[it]": "Rileva automaticamente gli APN cellulari in Plasma Mobile",
         "Description[ka]": "ფიჭური APN-ების ავტომატური დადგენა Plasma Mobile-ში",
         "Description[ko]": "Plasma 모바일에서 셀룰러 APN 자동 감지",
         "Description[nl]": "Cellulaire APN's automatisch in Plasma Mobile detecteren",
@@ -17,6 +19,7 @@
         "Description[uk]": "Автоматично виявляти стільникові точки доступу у Мобільній Плазмі",
         "Description[x-test]": "xxAutodetect cellular APNs in Plasma Mobilexx",
         "Name": "Plasma Mobile Autodetect APNs",
+        "Name[ca@valencia]": "Detecció automàtica dels APN de Plasma Mobile",
         "Name[ca]": "Detecció automàtica dels APN del Plasma Mobile",
         "Name[eo]": "Atomata APN-Ekkono de Plasma-Mobile",
         "Name[es]": "Detección automática de APN en Plasma Mobile",
@@ -24,6 +27,7 @@
         "Name[fr]": "Auto-détection des APN de Plasma Mobile",
         "Name[gl]": "Detección de APN",
         "Name[ia]": "Autorelevation de APNs de Plasma Mobile",
+        "Name[it]": "Rilevamento automatico APN di Plasma Mobile",
         "Name[ka]": "Plasma Mobile-ის APN-ების ავტომატური დადგენა",
         "Name[ko]": "Plasma 모바일 APN 자동 감지",
         "Name[nl]": "Plasma Mobile automatisch APN's detecteren",
