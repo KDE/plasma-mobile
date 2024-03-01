@@ -18,6 +18,7 @@
         "Description[tr]": "Plasma Cep’teki erişim noktası adlarını kendiliğinden algıla",
         "Description[uk]": "Автоматично виявляти стільникові точки доступу у Мобільній Плазмі",
         "Description[x-test]": "xxAutodetect cellular APNs in Plasma Mobilexx",
+        "Description[zh_CN]": "在 Plasma Mobile 中自动检测蜂窝网络 APN",
         "Name": "Plasma Mobile Autodetect APNs",
         "Name[ca@valencia]": "Detecció automàtica dels APN de Plasma Mobile",
         "Name[ca]": "Detecció automàtica dels APN del Plasma Mobile",
@@ -35,7 +36,8 @@
         "Name[sl]": "Plasma Mobile je samodejno zaznala APN",
         "Name[tr]": "Plasma Cep Erişim Noktası Adlarını Kendiliğinden Algıla",
         "Name[uk]": "Автоматичне виявлення точок доступу у Мобільній Плазмі",
-        "Name[x-test]": "xxPlasma Mobile Autodetect APNsxx"
+        "Name[x-test]": "xxPlasma Mobile Autodetect APNsxx",
+        "Name[zh_CN]": "Plasma Mobile 自动检测 APN"
     },
     "OnlyShowIn": "KDE;",
     "X-KDE-Kded-autoload": true,
