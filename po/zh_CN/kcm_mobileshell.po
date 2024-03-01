@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-20 00:39+0000\n"
-"PO-Revision-Date: 2024-02-05 11:37\n"
+"PO-Revision-Date: 2024-02-29 12:52\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -50,14 +50,12 @@ msgstr "导航面板"
 #: ui/main.qml:59
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "仅手势模式"
 
 #: ui/main.qml:60
-#, fuzzy, kde-format
-#| msgid ""
-#| "Whether to always show the keyboard toggle button on the navigation panel."
+#, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr "是否总是在导航面板上显示键盘切换按钮。"
+msgstr "是否隐藏导航面板。"
 
 #: ui/main.qml:74
 #, kde-format
