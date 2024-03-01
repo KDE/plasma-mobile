@@ -11,80 +11,22 @@ import QtQuick.Layouts 1.1
 import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PC3
+import org.kde.plasma.private.brightnesscontrolplugin as BC
 
 Item {
     id: root
-    
+
     implicitHeight: brightnessRow.implicitHeight
-    
-    property int screenBrightness
-    property bool disableBrightnessUpdate: true
-    readonly property int maximumScreenBrightness: pmSource.data["PowerDevil"] ? pmSource.data["PowerDevil"]["Maximum Screen Brightness"] || 0 : 0
-    
-    property QtObject updateScreenBrightnessJob
-    
-    function updateBrightnessUI() {
-        if (updateScreenBrightnessJob)
-            return;
-        
-        root.disableBrightnessUpdate = true;
-        root.screenBrightness = pmSource.data["PowerDevil"]["Screen Brightness"];
-        root.disableBrightnessUpdate = false;
-    }
-    
-    onScreenBrightnessChanged: {
-        if (!brightnessSlider.pressed && !brightnessTimer.running) {
-            brightnessSlider.value = root.screenBrightness;
-        }
-        
-        if (!disableBrightnessUpdate) {
-            var service = pmSource.serviceForSource("PowerDevil");
-            var operation = service.operationDescription("setBrightness");
-            operation.brightness = screenBrightness;
-            operation.silent = true; // don't show OSD
-            
-            updateScreenBrightnessJob = service.startOperationCall(operation);
-            updateScreenBrightnessJob.finished.connect(function (job) {
-                root.updateBrightnessUI();
-            });
-        }
-    }
-    
-    P5Support.DataSource {
-        id: pmSource
-        engine: "powermanagement"
-        connectedSources: ["PowerDevil"]
-        onSourceAdded: {
-            if (source === "PowerDevil") {
-                disconnectSource(source);
-                connectSource(source);
-            }
-        }
-        onDataChanged: root.updateBrightnessUI()
+
+    BC.ScreenBrightnessControl {
+        id: screenBrightnessControl
     }
 
-    // we want to smoothen the slider so it doesn't jump immediately after you let go
-    Timer {
-        id: brightnessTimer
-        interval: 500
-        onTriggered: {
-            brightnessSlider.value = root.screenBrightness;
-        }
-    }
-
-    // send brightness events a maximum of 5 times a second
-    Timer {
-        id: sendEventTimer
-        interval: 200
-        onTriggered: root.screenBrightness = brightnessSlider.value
-    }
-    
     RowLayout {
         id: brightnessRow
         spacing: Kirigami.Units.smallSpacing * 2
-        
+
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
@@ -102,25 +44,14 @@ Item {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             from: 1
-            to: root.maximumScreenBrightness
-            value: root.screenBrightness
-            
-            onMoved: {
-                if (!sendEventTimer.running) {
-                    root.screenBrightness = value;
-                    sendEventTimer.restart();
-                }
-            }
+            to: screenBrightnessControl.brightnessMax
+            value: screenBrightnessControl.brightness
 
-            onPressedChanged: {
-                if (!pressed) {
-                    brightnessTimer.restart();
-                } else {
-                    brightnessTimer.stop();
-                }
+            onMoved: {
+                screenBrightnessControl.brightness = value;
             }
         }
-        
+
         Kirigami.Icon {
             Layout.alignment: Qt.AlignVCenter
             Layout.rightMargin: Kirigami.Units.smallSpacing
