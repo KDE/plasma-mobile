@@ -109,7 +109,8 @@
         "Name[uk]": "Альціон",
         "Name[x-test]": "xxHalcyonxx",
         "Name[zh_CN]": "Halcyon",
-        "Name[zh_TW]": "Halcyon"
+        "Name[zh_TW]": "Halcyon",
+        "Website": "https://plasma-mobile.org"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Desktop",
