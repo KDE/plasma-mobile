@@ -46,12 +46,21 @@ ContainmentItem {
     readonly property int intendedWindowLocation: inLandscape ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.BottomEdge
 
     onIntendedWindowLengthChanged: maximizeTimer.restart() // ensure it always takes up the full length of the screen
-    onIntendedWindowLocationChanged: {
-        root.panel.location = intendedWindowLocation;
-    }
+    onIntendedWindowLocationChanged: setPanelLocationTimer.restart()
     onIntendedWindowOffsetChanged: {
         if (root.panel) {
             root.panel.offset = intendedWindowOffset;
+        }
+    }
+
+    // HACK: the entire shell seems to crash sometimes if this is applied immediately after a display change (ex. screen rotation)
+    // see https://invent.kde.org/plasma/plasma-mobile/-/issues/321
+    Timer {
+        id: setPanelLocationTimer
+        running: false
+        interval: 100
+        onTriggered: {
+            root.panel.location = intendedWindowLocation;
         }
     }
 
