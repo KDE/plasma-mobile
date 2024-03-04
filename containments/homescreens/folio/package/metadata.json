@@ -108,7 +108,8 @@
         "Name[uk]": "Фоліо",
         "Name[x-test]": "xxFolioxx",
         "Name[zh_CN]": "Folio",
-        "Name[zh_TW]": "Folio"
+        "Name[zh_TW]": "Folio",
+        "Website": "https://plasma-mobile.org"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Desktop",

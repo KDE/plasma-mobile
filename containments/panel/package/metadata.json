@@ -114,7 +114,8 @@
         "Name[uk]": "Панель телефону",
         "Name[x-test]": "xxPhone Panelxx",
         "Name[zh_CN]": "手机面板",
-        "Name[zh_TW]": "手機面板"
+        "Name[zh_TW]": "手機面板",
+        "Website": "https://plasma-mobile.org"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-ContainmentType": "Panel"
