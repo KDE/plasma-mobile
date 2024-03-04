@@ -204,6 +204,10 @@ Item {
                 padding: 0
                 title: i18n('Widget Options')
 
+                // workaround: remove background so that it doesn't remain if the widget is deleted (and this is de-initialized without closing)
+                background: null
+                QQC2.Overlay.modal: null
+
                 // close parent dialog too
                 onClosed: configPopup.close()
 
