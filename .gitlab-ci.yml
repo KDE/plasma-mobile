@@ -11,6 +11,8 @@ posix-script-compliance:
   image:
     name: debian:latest
     entrypoint: [""]
+  tags:
+    - Linux
   stage: build
   script:
     - apt-get update
