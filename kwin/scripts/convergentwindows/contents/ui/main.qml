@@ -10,11 +10,23 @@ Loader {
     id: root
 
     function run(window) {
-        if (!ShellSettings.Settings.convergenceModeEnabled) {
-            window.noBorder = true;
-            window.setMaximize(true, true);
-        } else {
+        if (ShellSettings.Settings.convergenceModeEnabled) {
             window.noBorder = false;
+        } else {
+            const output = window.output;
+            const desktop = window.desktops[0]; // assume it's the first desktop that the window is on
+            const maximizeRect = KWinComponents.Workspace.clientArea(KWinComponents.Workspace.MaximizeArea, output, desktop);
+            
+            // set the window to the maximized size and position instantly, avoiding race condition 
+            // between maximizing and window decorations being turned off (changing window height)
+            // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/256
+            window.frameGeometry = maximizeRect;
+
+            // turn off window decorations
+            window.noBorder = true;
+
+            // run maximize after to ensure the state is maximized
+            window.setMaximize(true, true);
         }
     }
 
