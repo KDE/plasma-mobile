@@ -57,7 +57,6 @@ Item {
         id: control
         width: parent.width
         height: parent.height
-        enabled: !taskSwitcher.taskSwitcherState.currentlyBeingOpened
 
         // set cursor shape here, since taphandler seems to not be able to do it
         cursorShape: Qt.PointingHandCursor
@@ -70,7 +69,7 @@ Item {
         }
 
         onClicked: {
-            if (!taskSwitcher.taskSwitcherState.currentlyBeingOpened && !passedDragThreshold) {
+            if (!passedDragThreshold) {
                 delegate.activateApp();
             }
         }

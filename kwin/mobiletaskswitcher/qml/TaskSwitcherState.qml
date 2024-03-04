@@ -136,6 +136,10 @@ QtObject {
     }
 
     function openApp(index, window) {
+        // cancel any opening animations ongoing
+        currentlyBeingOpened = false;
+        cancelAnimations();
+        
         animateGoToTaskIndex(index, Kirigami.Units.shortDuration);
         openAppAnim.restart();
         KWinComponents.Workspace.activeWindow = window

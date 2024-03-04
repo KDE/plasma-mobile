@@ -76,9 +76,7 @@ MouseArea {
 
     onClicked: {
         // if tapped on the background, then hide
-        if (!taskSwitcherState.currentlyBeingOpened) {
-            taskSwitcher.hide();
-        }
+        taskSwitcher.hide();
     }
 
     onPressedChanged: {
