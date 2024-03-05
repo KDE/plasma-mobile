@@ -94,6 +94,14 @@ bool PageListModel::isLastPageEmpty()
     return m_pages.size() == 0 ? true : m_pages[m_pages.size() - 1]->isPageEmpty();
 }
 
+void PageListModel::deleteEmptyPagesAtEnd()
+{
+    // delete empty pages at the end if they exist
+    while (PageListModel::self()->isLastPageEmpty() && PageListModel::self()->rowCount() > 1) {
+        PageListModel::self()->removePage(PageListModel::self()->rowCount() - 1);
+    }
+}
+
 QJsonArray PageListModel::exportToJson()
 {
     QJsonArray arr;
