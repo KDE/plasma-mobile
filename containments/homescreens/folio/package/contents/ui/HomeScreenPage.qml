@@ -114,6 +114,16 @@ Item {
             visible: row >= 0 && row < Folio.HomeScreenState.pageRows &&
                      column >= 0 && column < Folio.HomeScreenState.pageColumns
 
+            // called when we want to delete this delegate
+            function removeSelf() {
+                // remove from model
+                root.pageModel.removeDelegate(delegate.row, delegate.column);
+                
+                // delete empty pages at the end, and snap position to page that exists
+                Folio.PageListModel.deleteEmptyPagesAtEnd();
+                Folio.HomeScreenState.snapPage();
+            }
+
             Loader {
                 id: loader
                 anchors.top: parent.top
@@ -203,7 +213,7 @@ Item {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
-                                onTriggered: root.pageModel.removeDelegate(delegate.row, delegate.column)
+                                onTriggered: delegate.removeSelf()
                             }
                         ]
                     }
@@ -283,7 +293,7 @@ Item {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
-                                onTriggered: root.pageModel.removeDelegate(delegate.row, delegate.column)
+                                onTriggered: delegate.removeSelf()
                             }
                         ]
                     }
@@ -364,7 +374,7 @@ Item {
                             if (widget.applet) {
                                 widget.destroyApplet();
                             }
-                            root.pageModel.removeDelegate(delegate.row, delegate.column);
+                            delegate.removeSelf();
                         }
 
                         onClosed: widgetDelegate.editMode = false

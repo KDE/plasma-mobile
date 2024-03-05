@@ -30,7 +30,9 @@ public:
 
     PageModel *getPage(int index);
     void removePage(int index);
+
     Q_INVOKABLE void addPageAtEnd();
+    Q_INVOKABLE void deleteEmptyPagesAtEnd();
     bool isLastPageEmpty();
 
     QJsonArray exportToJson();

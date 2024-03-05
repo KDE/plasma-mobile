@@ -528,9 +528,7 @@ void DragState::onDelegateDropped()
 
     // delete empty pages at the end if they exist
     // (it can be created if user drags app to new page, but doesn't place it there)
-    while (PageListModel::self()->isLastPageEmpty() && PageListModel::self()->rowCount() > 1) {
-        PageListModel::self()->removePage(PageListModel::self()->rowCount() - 1);
-    }
+    PageListModel::self()->deleteEmptyPagesAtEnd();
 
     // clear ghost position if there is one
     FavouritesModel::self()->deleteGhostEntry();
