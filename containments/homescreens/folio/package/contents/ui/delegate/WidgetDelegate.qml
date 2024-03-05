@@ -43,10 +43,12 @@ Folio.WidgetContainer {
 
         widget.visualApplet.parent = widgetHolder;
         widget.visualApplet.anchors.fill = widgetHolder;
-        if (widget.visualApplet.fullRepresentationItem) {
-            widget.visualApplet.fullRepresentationItem.parent = widgetHolder;
-            widget.visualApplet.fullRepresentationItem.anchors.fill = widgetHolder;
-        }
+
+        // seems to be unnecessary, causes issues where the fullRepresentationItem shows up over :
+        // if (widget.visualApplet.fullRepresentationItem) {
+            // widget.visualApplet.fullRepresentationItem.parent = widgetHolder;
+            // widget.visualApplet.fullRepresentationItem.anchors.fill = widgetHolder;
+        // }
     }
 
     onWidgetChanged: updateVisualApplet()
