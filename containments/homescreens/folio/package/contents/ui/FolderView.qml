@@ -267,7 +267,7 @@ Folio.DelegateTouchArea {
                                         Kirigami.Action {
                                             icon.name: "emblem-favorite"
                                             text: i18n("Remove")
-                                            onTriggered: root.folder.removeApp(delegate.index)
+                                            onTriggered: root.folder.removeDelegate(delegate.index)
                                         }
                                     ]
                                 }
