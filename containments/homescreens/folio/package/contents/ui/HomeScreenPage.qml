@@ -194,7 +194,6 @@ Item {
                         contextMenu.open();
                     }
 
-                    // TODO don't use loader, and move outside to a page to make it more performant
                     ContextMenuLoader {
                         id: contextMenu
 
@@ -274,7 +273,6 @@ Item {
                         contextMenu.open();
                     }
 
-                    // TODO don't use loader, and move outside to a page to make it more performant
                     ContextMenuLoader {
                         id: contextMenu
 
@@ -293,9 +291,15 @@ Item {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
-                                onTriggered: delegate.removeSelf()
+                                onTriggered: deleteDialog.open()
                             }
                         ]
+
+                        ConfirmDeleteFolderDialogLoader {
+                            id: deleteDialog
+                            parent: root.homeScreen
+                            onAccepted: delegate.removeSelf()
+                        }
                     }
                 }
             }

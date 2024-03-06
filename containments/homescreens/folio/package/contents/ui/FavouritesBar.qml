@@ -11,6 +11,7 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.10 as Kirigami
 
+import "./private"
 import "./delegate"
 
 MouseArea {
@@ -199,7 +200,6 @@ MouseArea {
                         contextMenu.open();
                     }
 
-                    // TODO don't use loader, and move outside to a page to make it more performant
                     ContextMenuLoader {
                         id: contextMenu
 
@@ -218,9 +218,15 @@ MouseArea {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
-                                onTriggered: Folio.FavouritesModel.removeEntry(delegate.index)
+                                onTriggered: deleteDialog.open()
                             }
                         ]
+
+                        ConfirmDeleteFolderDialogLoader {
+                            id: deleteDialog
+                            parent: root.homeScreen
+                            onAccepted: Folio.FavouritesModel.removeEntry(delegate.index)
+                        }
                     }
                 }
             }
