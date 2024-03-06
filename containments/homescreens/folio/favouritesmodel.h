@@ -43,6 +43,9 @@ public:
     bool addEntry(int row, FolioDelegate *delegate);
     FolioDelegate *getEntryAt(int row);
 
+    // whether the dock is full, we can't add any more items
+    bool isFull() const;
+
     // for use with drag and drop, as the delegate is dragged around
     // ghost - fake delegate exists at an index, so a gap is created
     // invisible - existing delegate looks like it doesn't exist

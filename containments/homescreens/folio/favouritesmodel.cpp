@@ -171,6 +171,17 @@ FolioDelegate *FavouritesModel::getEntryAt(int row)
     return m_delegates[row].delegate;
 }
 
+bool FavouritesModel::isFull() const
+{
+    bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
+
+    if (isLocationBottom) {
+        return m_delegates.size() >= HomeScreenState::self()->pageColumns();
+    } else {
+        return m_delegates.size() >= HomeScreenState::self()->pageRows();
+    }
+}
+
 int FavouritesModel::getGhostEntryPosition()
 {
     for (int i = 0; i < m_delegates.size(); i++) {
