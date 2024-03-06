@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-09 00:39+0000\n"
+"POT-Creation-Date: 2024-03-06 00:39+0000\n"
 "PO-Revision-Date: 2024-02-10 00:50+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -33,8 +33,8 @@ msgstr "Aplikazioak"
 #: package/contents/ui/FavouritesBar.qml:146
 #: package/contents/ui/FavouritesBar.qml:220
 #: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:205
-#: package/contents/ui/HomeScreenPage.qml:285
+#: package/contents/ui/HomeScreenPage.qml:215
+#: package/contents/ui/HomeScreenPage.qml:295
 #, kde-format
 msgid "Remove"
 msgstr "Kendu"

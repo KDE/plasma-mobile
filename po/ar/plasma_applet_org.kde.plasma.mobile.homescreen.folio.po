@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-09 00:39+0000\n"
+"POT-Creation-Date: 2024-03-06 00:39+0000\n"
 "PO-Revision-Date: 2023-05-07 20:45+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -31,8 +31,8 @@ msgstr "التطبيقات"
 #: package/contents/ui/FavouritesBar.qml:146
 #: package/contents/ui/FavouritesBar.qml:220
 #: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:205
-#: package/contents/ui/HomeScreenPage.qml:285
+#: package/contents/ui/HomeScreenPage.qml:215
+#: package/contents/ui/HomeScreenPage.qml:295
 #, kde-format
 msgid "Remove"
 msgstr "أزل"
