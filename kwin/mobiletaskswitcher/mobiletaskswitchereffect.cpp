@@ -11,6 +11,8 @@
 #include <QMetaObject>
 #include <QQuickItem>
 
+using namespace std::chrono_literals;
+
 namespace KWin
 {
 
@@ -60,7 +62,7 @@ MobileTaskSwitcherEffect::~MobileTaskSwitcherEffect()
 
 void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
 {
-    setAnimationDuration(animationTime(300));
+    setAnimationDuration(animationTime(300ms));
 
     for (const ElectricBorder &border : std::as_const(m_borderActivate)) {
         effects->unreserveElectricBorder(border, this);
@@ -125,7 +127,7 @@ void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
             QMetaObject::invokeMethod(view->rootItem(), "hideAnimation");
         }
     }
-    m_shutdownTimer->start(animationTime(deactivateInstantly ? 0 : 200));
+    m_shutdownTimer->start(animationTime(deactivateInstantly ? 0ms : 200ms));
 }
 
 void MobileTaskSwitcherEffect::realDeactivate()
