@@ -5,6 +5,7 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -35,23 +36,27 @@ ContainmentItem {
         anchors.fill: parent
 
         sourceComponent: Item {
-            // HACK: wallpaper (to enforce same dimensions that blur uses)
-            MultiEffect {
-                blurEnabled: true
-                blur: 0.0
-                blurMax: 0.0
-                autoPaddingEnabled: false
-                source: Plasmoid.wallpaperGraphicsObject
+            id: wallpaper
+            anchors.fill: parent
+
+            // only take samples from wallpaper when we need the blur for performance
+            ShaderEffectSource {
+                id: controlledWallpaperSource
                 anchors.fill: parent
+
+                sourceItem: Plasmoid.wallpaperGraphicsObject
+                live: blur.visible
+                hideSource: false
+                visible: false
             }
 
             // wallpaper blur
-            MultiEffect {
-                blurEnabled: true
-                blur: 1.0
-                blurMax: 50
-                autoPaddingEnabled: false
-                source: Plasmoid.wallpaperGraphicsObject
+            // we attempted to use MultiEffect in the past, but it had very poor performance on the PinePhone
+            FastBlur {
+                id: blur
+                radius: 50
+                cached: true
+                source: controlledWallpaperSource
                 anchors.fill: parent
                 visible: opacity > 0
                 opacity: Math.min(1, 
