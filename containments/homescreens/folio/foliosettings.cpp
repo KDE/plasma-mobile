@@ -170,7 +170,7 @@ void FolioSettings::load()
     m_delegateIconSize = m_applet->config().readEntry("delegateIconSize", 48);
     m_showFavouritesBarBackground = m_applet->config().readEntry("showFavoritesBarBackground", true);
     m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_applet->config().readEntry("pageTransitionEffect", (int)SlideTransition));
-    m_showWallpaperBlur = m_applet->config().readEntry("showWallpaperBlur", false);
+    m_showWallpaperBlur = m_applet->config().readEntry("showWallpaperBlur", true);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
