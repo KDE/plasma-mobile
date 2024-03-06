@@ -328,6 +328,11 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
         m_favouritesInsertBetweenTimer->stop();
     }
 
+    // ignore this event if the favourites area is full already
+    if (FavouritesModel::self()->isFull()) {
+        return;
+    }
+
     // ignore widget drop delegates (since they can't be placed in the favourites)
     if (m_dropDelegate && m_dropDelegate->type() == FolioDelegate::Widget) {
         return;
