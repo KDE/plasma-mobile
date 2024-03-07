@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-09 02:34+0000\n"
+"POT-Creation-Date: 2024-03-07 02:20+0000\n"
 "PO-Revision-Date: 2024-02-09 11:54+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -31,8 +31,8 @@ msgstr "Applicazioni"
 #: package/contents/ui/FavouritesBar.qml:146
 #: package/contents/ui/FavouritesBar.qml:220
 #: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:205
-#: package/contents/ui/HomeScreenPage.qml:285
+#: package/contents/ui/HomeScreenPage.qml:215
+#: package/contents/ui/HomeScreenPage.qml:295
 #, kde-format
 msgid "Remove"
 msgstr "Rimuovi"
