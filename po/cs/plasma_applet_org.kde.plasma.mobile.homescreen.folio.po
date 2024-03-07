@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-06 00:39+0000\n"
+"POT-Creation-Date: 2024-03-07 00:38+0000\n"
 "PO-Revision-Date: 2023-11-03 09:10+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -27,11 +27,11 @@ msgstr "Složka"
 msgid "Applications"
 msgstr "Aplikace"
 
-#: package/contents/ui/FavouritesBar.qml:146
+#: package/contents/ui/FavouritesBar.qml:147
 #: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:215
-#: package/contents/ui/HomeScreenPage.qml:295
+#: package/contents/ui/FolderView.qml:270
+#: package/contents/ui/HomeScreenPage.qml:214
+#: package/contents/ui/HomeScreenPage.qml:293
 #, kde-format
 msgid "Remove"
 msgstr "Odstranit"

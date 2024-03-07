@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-06 00:39+0000\n"
+"POT-Creation-Date: 2024-03-07 00:38+0000\n"
 "PO-Revision-Date: 2016-10-07 23:55-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -24,11 +24,11 @@ msgstr ""
 msgid "Applications"
 msgstr "アプリケーション"
 
-#: package/contents/ui/FavouritesBar.qml:146
+#: package/contents/ui/FavouritesBar.qml:147
 #: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:215
-#: package/contents/ui/HomeScreenPage.qml:295
+#: package/contents/ui/FolderView.qml:270
+#: package/contents/ui/HomeScreenPage.qml:214
+#: package/contents/ui/HomeScreenPage.qml:293
 #, kde-format
 msgid "Remove"
 msgstr "取り除く"

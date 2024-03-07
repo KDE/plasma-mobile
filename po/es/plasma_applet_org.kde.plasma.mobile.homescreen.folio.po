@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-06 00:39+0000\n"
+"POT-Creation-Date: 2024-03-07 00:38+0000\n"
 "PO-Revision-Date: 2024-02-09 12:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -29,11 +29,11 @@ msgstr "Carpeta"
 msgid "Applications"
 msgstr "Aplicaciones"
 
-#: package/contents/ui/FavouritesBar.qml:146
+#: package/contents/ui/FavouritesBar.qml:147
 #: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:269
-#: package/contents/ui/HomeScreenPage.qml:215
-#: package/contents/ui/HomeScreenPage.qml:295
+#: package/contents/ui/FolderView.qml:270
+#: package/contents/ui/HomeScreenPage.qml:214
+#: package/contents/ui/HomeScreenPage.qml:293
 #, kde-format
 msgid "Remove"
 msgstr "Eliminar"
