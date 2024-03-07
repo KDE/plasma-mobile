@@ -6,6 +6,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Effects
 import QtQuick.Controls as QQC2
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -94,6 +95,75 @@ Item {
         id: noFocus
     }
 
+    // favourites scrim background blur
+    Item {
+        id: favouritesBarBlur
+        opacity: favouritesBarScrim.opacity * mainHomeScreen.opacity
+
+        x: 0
+        y: 0
+        width: 100
+        height: 100
+
+        property real scaleFactor: Math.max(homeScreenState.appDrawerOpenProgress, homeScreenState.searchWidgetOpenProgress)
+        property real yCalc: {
+            const trueScale = 1 - (scaleFactor * 2) * 0.1;
+            const baseHeight = favouritesBar.thickness + root.bottomMargin;
+            const baseStart = root.height - baseHeight;
+            const halfHeight = root.height / 2;
+            return baseStart - (halfHeight + (baseStart - halfHeight) * trueScale);
+        }
+
+        states: [
+            State {
+                name: "bottom"
+                when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
+                PropertyChanges {
+                    target: favouritesBarBlur
+                    x: 0
+                    y: root.height - height
+                    width: swipeArea.width
+                    height: favouritesBar.thickness + root.bottomMargin + yCalc
+                }
+            }, State {
+                name: "left"
+                when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left
+                PropertyChanges {
+                    target: favouritesBarBlur
+                    x: 0
+                    y: 0
+                    width: favouritesBar.thickness + root.leftMargin
+                    height: swipeArea.height
+                }
+            }, State {
+                name: "right"
+                when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right
+                PropertyChanges {
+                    target: favouritesBarBlur
+                    x: root.width - width
+                    y: 0
+                    width: favouritesBar.thickness + root.rightMargin
+                    height: root.height
+                }
+            }
+        ]
+
+        ShaderEffectSource {
+            id: favouritesBarEffectSource
+            sourceItem: Plasmoid.wallpaperGraphicsObject
+            anchors.fill: parent
+            sourceRect: Qt.rect(favouritesBarBlur.x, favouritesBarBlur.y, width, height)
+        }
+
+        FastBlur {
+            radius: 50
+            cached: true
+            source: favouritesBarEffectSource
+            anchors.fill: parent
+            transparentBorder: false
+        }
+    }
+
     // area that can be swiped
     MobileShell.SwipeArea {
         id: swipeArea
@@ -139,7 +209,7 @@ Item {
             settingsModeHomeScreenScale: root.settingsModeHomeScreenScale
             homeScreen: root
         }
-
+    
         Item {
             id: mainHomeScreen
             anchors.fill: parent
@@ -223,7 +293,7 @@ Item {
 
             Rectangle {
                 id: favouritesBarScrim
-                color: Qt.rgba(255, 255, 255, 0.2)
+                color: Qt.rgba(0, 0, 0, 0.2)
 
                 // don't show in settings mode
                 opacity: 1 - Folio.HomeScreenState.settingsOpenProgress
@@ -251,9 +321,11 @@ Item {
                 opacity: 1 - Folio.HomeScreenState.settingsOpenProgress
                 visible: opacity > 0
 
+                readonly property real thickness: Kirigami.Units.gridUnit * 6
+
                 // one is ignored as anchors are set
-                height: Kirigami.Units.gridUnit * 6
-                width: Kirigami.Units.gridUnit * 6
+                height: thickness
+                width: thickness
 
                 anchors.topMargin: root.topMargin
                 anchors.bottomMargin: root.bottomMargin
@@ -273,7 +345,7 @@ Item {
                         }
                         PropertyChanges {
                             target: favouritesBar
-                            height: Kirigami.Units.gridUnit * 6
+                            height: favouritesBar.thickness
                         }
                     }, State {
                         name: "left"
@@ -287,7 +359,7 @@ Item {
                         }
                         PropertyChanges {
                             target: favouritesBar
-                            width: Kirigami.Units.gridUnit * 6
+                            width: favouritesBar.thickness
                         }
                     }, State {
                         name: "right"
@@ -301,7 +373,7 @@ Item {
                         }
                         PropertyChanges {
                             target: favouritesBar
-                            width: Kirigami.Units.gridUnit * 6
+                            width: favouritesBar.thickness
                         }
                     }
                 ]
