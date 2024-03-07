@@ -10,6 +10,16 @@ Loader {
     id: root
 
     function run(window) {
+        // HACK: don't maximize xwaylandvideobridge
+        // see: https://invent.kde.org/plasma/plasma-mobile/-/issues/324
+        if (window.resourceClass === 'xwaylandvideobridge') {
+            return;
+        }
+
+        if (!window.normalWindow) {
+            return;
+        }
+
         if (ShellSettings.Settings.convergenceModeEnabled) {
             window.noBorder = false;
         } else {
