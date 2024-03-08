@@ -16,6 +16,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 ContainmentItem {
     id: root
@@ -74,12 +75,22 @@ ContainmentItem {
     function homeAction() {
         const isInWindow = (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow);
 
+        // Always close action drawer
+        if (MobileShellState.ShellDBusClient.isActionDrawerOpen) {
+            MobileShellState.ShellDBusClient.closeActionDrawer();
+        }
+
         if (isInWindow) {
-            Folio.HomeScreenState.closeFolder();
-            Folio.HomeScreenState.closeSearchWidget();
-            Folio.HomeScreenState.closeAppDrawer();
-            Folio.HomeScreenState.goToPage(0);
-        } else {
+            // only minimize windows and go to homescreen when not in docked mode
+            if (!ShellSettings.Settings.convergenceModeEnabled) {
+                Folio.HomeScreenState.closeFolder();
+                Folio.HomeScreenState.closeSearchWidget();
+                Folio.HomeScreenState.closeAppDrawer();
+                Folio.HomeScreenState.goToPage(0);
+
+                WindowPlugin.WindowUtil.isShowingDesktop = true;
+            }
+        } else { // if we are on the homescreen
             switch (Folio.HomeScreenState.viewState) {
                 case Folio.HomeScreenState.PageView:
                     if (Folio.HomeScreenState.currentPage === 0) {
