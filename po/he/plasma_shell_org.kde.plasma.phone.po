@@ -1,0 +1,62 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"PO-Revision-Date: 2024-03-07 11:42+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.4\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "שינויי פריסה הוגבלו על ידי הנהלת המערכת"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:59
+msgid "General"
+msgstr "כללי"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+msgid "Homescreen Layout"
+msgstr "פריסת מסך הבית"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:67
+msgid "The homescreen layout to use."
+msgstr "פריסת מסך הבית לשימוש."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+msgid "Wallpaper Plugin"
+msgstr "תוסף תמונת רקע"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+msgid "The wallpaper plugin to use."
+msgstr "תוסף תמונת הרקע לשימוש."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+msgid "Wallpaper Plugins"
+msgstr "תוספי תמונות רקע"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Get New Plugins…"
+msgstr "הורדת תוספים חדשים…"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:148
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "יש להחיל את שינויים הפריסה לפני שאפשר לערוך שינויים נוספים"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+msgid "Apply now"
+msgstr "החלה כעת"
+
+#: contents/configuration/ContainmentConfiguration.qml:34
+msgid "Wallpaper"
+msgstr "תמונת רקע"
