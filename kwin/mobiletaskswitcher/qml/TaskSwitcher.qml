@@ -14,6 +14,7 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.kwin.private.effects 1.0
+import org.kde.kitemmodels
 
 /**
  * Component that provides a task switcher.
@@ -45,7 +46,7 @@ FocusScope {
         id: desktopModel
     }
 
-    property var tasksModel: KWinComponents.WindowFilterModel {
+    property var baseTasksModel: KWinComponents.WindowFilterModel {
         activity: KWinComponents.Workspace.currentActivity
         desktop: KWinComponents.Workspace.currentDesktop
         screenName: root.targetScreen.name
@@ -55,6 +56,16 @@ FocusScope {
                     ~KWinComponents.WindowFilterModel.Desktop &
                     ~KWinComponents.WindowFilterModel.Notification &
                     ~KWinComponents.WindowFilterModel.CriticalNotification
+    }
+
+    property var tasksModel: KSortFilterProxyModel {
+        sourceModel: baseTasksModel
+        filterRoleName: 'skipSwitcher'
+        filterRowCallback: function(source_row, source_parent) {
+            const window = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Qt.DisplayRole);
+            // ensure apps marked to skip the task switcher are skipped (ex. xwaylandvideobridge)
+            return !window.skipSwitcher;
+        }
     }
 
     readonly property int tasksCount: taskList.count
