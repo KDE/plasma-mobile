@@ -68,6 +68,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 model: Time.TimeUtil.timeZones
+                currentIndex: -1 // ensure focus is not on the listview
 
                 header: Control {
                     width: listView.width
@@ -81,14 +82,6 @@ Item {
 
                         onTextChanged: {
                             Time.TimeUtil.timeZones.filterString = text;
-                            // HACK: search field seems to lose focus every time the text changes
-                            focusTimer.restart();
-                        }
-
-                        Timer {
-                            id: focusTimer
-                            interval: 1
-                            onTriggered: searchField.forceActiveFocus()
                         }
                     }
                 }
