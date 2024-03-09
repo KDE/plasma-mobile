@@ -10,7 +10,6 @@ import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
-import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 import org.kde.plasma.private.mpris as Mpris
 
@@ -160,7 +159,7 @@ Item {
                                     }
                                 }
 
-                                PlasmaComponents3.ToolButton {
+                                QQC2.ToolButton {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
@@ -176,7 +175,7 @@ Item {
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Previous track")
                                 }
 
-                                PlasmaComponents3.ToolButton {
+                                QQC2.ToolButton {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
@@ -190,7 +189,7 @@ Item {
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Play or Pause media")
                                 }
 
-                                PlasmaComponents3.ToolButton {
+                                QQC2.ToolButton {
                                     Layout.fillHeight: true
                                     Layout.preferredWidth: height
                                     
