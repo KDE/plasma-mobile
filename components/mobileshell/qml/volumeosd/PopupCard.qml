@@ -12,10 +12,9 @@ import QtQuick.Window
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.mobileshell as MobileShell
 
 // capture presses on the audio applet so it doesn't close the overlay
-MobileShell.BaseItem {
+Controls.Control {
     id: content
     implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, parent.width - Kirigami.Units.gridUnit * 2)
     padding: Kirigami.Units.smallSpacing * 2
