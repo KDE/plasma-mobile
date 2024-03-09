@@ -4,14 +4,28 @@
 # SPDX-FileCopyrightText: 2014 Aaron J. Seigo
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-[Wallpaper]
-Image=Next
-
-## kdeglobals
-
-[kdeglobals][Icons]
-Theme=breeze
+[kdeglobals][KDE]
+widgetStyle=Breeze
 
 [kdeglobals][General]
 ColorScheme=BreezeLight
 Name=Breeze
+
+[kdeglobals][Icons]
+Theme=breeze
+
+[plasmarc][Theme]
+name=default
+
+[Wallpaper]
+Image=Next
+
+# Set default cursor theme
+[kcminputrc][Mouse]
+cursorTheme=breeze_cursors
+
+[kwinrc][org.kde.kdecoration2]
+library=org.kde.breeze
+
+[KSplash]
+Theme=org.kde.Breeze
