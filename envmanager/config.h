@@ -33,12 +33,27 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
     bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
 
-    return {
-        {"Plugins", {{"blurEnabled", false}, {"convergentwindowsEnabled", true}}},
-        {"Wayland", {{"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, {"VirtualKeyboardEnabled", true}}},
-        {"org.kde.kdecoration2",
-         {{"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}, // ButtonsOnRight changes depending on whether the device is in convergence mode
-          {"NoPlugin", false}}},
-        {"Input", {{"TabletMode", convergenceModeEnabled ? "off" : "auto"}}} // TabletMode changes depending on whether the device is in convergence mode
-    };
+    return {{"Windows",
+             {
+                 {"Placement", convergenceModeEnabled ? "Centered" : "Maximizing"} // maximize all windows by default if we aren't in convergence mode
+             }},
+            {"Plugins",
+             {
+                 {"blurEnabled", false}, // disable blur for performance reasons, we could reconsider in the future for more powerful devices
+                 {"convergentwindowsEnabled", true} // enable our convergent window plugin
+             }},
+            {"Wayland",
+             {
+                 {"InputMethod", "/usr/share/applications/com.github.maliit.keyboard.desktop"}, // ensure maliit is our vkbd
+                 {"VirtualKeyboardEnabled", true} // enable vkbd
+             }},
+            {"org.kde.kdecoration2",
+             {
+                 {"ButtonsOnRight", convergenceModeEnabled ? "HIAX" : "H"}, // ButtonsOnRight changes depending on whether the device is in convergence mode
+                 {"NoPlugin", false} // ensure that the window decoration plugin is always enabled, otherwise we get Qt default window decorations
+             }},
+            {"Input",
+             {
+                 {"TabletMode", convergenceModeEnabled ? "off" : "auto"} // TabletMode changes depending on whether the device is in convergence mode
+             }}};
 }
