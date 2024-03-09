@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Sveinn í Felli <sv1@fellsnet.is>, 2022.
-# SPDX-FileCopyrightText: 2023 Guðmundur Erlingsson <gudmundure@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-07 00:38+0000\n"
-"PO-Revision-Date: 2023-11-09 12:29+0000\n"
+"PO-Revision-Date: 2024-02-19 18:49+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -126,13 +126,13 @@ msgstr "Eftirlætastika"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Veggfóður"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Sýna móðuáhrif á veggfóðri"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -143,7 +143,7 @@ msgstr "Almennt"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Skipta á milli heimaskjáa og fleiri veggfóðursvalkosta"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
@@ -151,10 +151,9 @@ msgid "Export layout to"
 msgstr "Flytja út framsetningu í"
 
 #: package/contents/ui/settings/SettingsWindow.qml:310
-#, fuzzy, kde-format
-#| msgid "Export layout to"
+#, kde-format
 msgid "Import layout from"
-msgstr "Flytja út framsetningu í"
+msgstr "Flytja inn framsetningu frá"
 
 #: package/contents/ui/settings/SettingsWindow.qml:321
 #: package/contents/ui/settings/SettingsWindow.qml:328
