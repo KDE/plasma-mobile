@@ -5,13 +5,19 @@
 import QtQuick
 
 import org.kde.plasma.private.mpris as Mpris
+import org.kde.kitemmodels
 
 QtObject {
-    property var mpris2Model: Mpris.Mpris2Model {}
+    property var baseMpris2Model: Mpris.Mpris2Model {}
 
-    readonly property string multiplexSource: "@multiplex"
+    property var mpris2Model: KSortFilterProxyModel {
+        sourceModel: baseMpris2Model
 
-    property var mprisSourcesModel: []
+        // filter and ignore first element, because it's the multiplexer (which will look like a duplicate source)
+        filterRowCallback: function(source_row, source_parent) {
+            return source_row !== 0;
+        }
+    }
 
     function startOperation(src, op) {
         var service = serviceForSource(src)
