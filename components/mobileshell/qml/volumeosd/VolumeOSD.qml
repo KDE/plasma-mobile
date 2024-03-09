@@ -22,12 +22,9 @@ PlasmaCore.Dialog {
     id: root
     width: Kirigami.Units.gridUnit * 20
 
-    location: PlasmaCore.Types.OnScreenDisplay
-    // type: PlasmaCore.Dialog.AppletPopup
-    hideOnWindowDeactivate: true
-    backgroundHints: PlasmaCore.Types.NoBackground
-    outputOnly: false
-    // outputOnly: true
+    location: PlasmaCore.Types.Floating
+    type: PlasmaCore.Dialog.OnScreenDisplay
+    outputOnly: true
 
     // used by context menus opened in the applet to not autoclose the osd
     property bool suppressActiveClose: false
