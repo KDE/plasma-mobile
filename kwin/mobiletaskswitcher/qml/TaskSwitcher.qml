@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
-// SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -26,13 +26,10 @@ FocusScope {
     readonly property QtObject effect: KWinComponents.SceneView.effect
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
-    readonly property bool inLandscape: width > height;
-    readonly property bool isInLandscapeNavPanelMode: inLandscape && ShellSettings.Settings.navigationPanelEnabled
-
     readonly property real topMargin: MobileShell.Constants.topPanelHeight
-    readonly property real bottomMargin: isInLandscapeNavPanelMode ? 0 : MobileShell.Constants.bottomPanelHeight
+    readonly property real bottomMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? 0 : MobileShell.Constants.navigationPanelThickness
     readonly property real leftMargin: 0
-    readonly property real rightMargin: isInLandscapeNavPanelMode ? MobileShell.Constants.bottomPanelHeight : 0
+    readonly property real rightMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0
 
     property var taskSwitcherState: TaskSwitcherState {
         taskSwitcher: root
@@ -226,6 +223,7 @@ FocusScope {
                     right: root.right
                     top: root.top
                     bottom: root.bottom
+                    left: undefined
                 }
             }
             PropertyChanges {
@@ -240,6 +238,7 @@ FocusScope {
             AnchorChanges {
                 target: navigationPanel
                 anchors {
+                    top: undefined
                     right: root.right
                     left: root.left
                     bottom: root.bottom

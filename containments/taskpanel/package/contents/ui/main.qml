@@ -38,7 +38,7 @@ ContainmentItem {
 
     readonly property bool inLandscape: MobileShell.Constants.navigationPanelOnSide(Screen.width, Screen.height)
 
-    readonly property real navigationPanelHeight: Kirigami.Units.gridUnit * 2
+    readonly property real navigationPanelHeight: MobileShell.Constants.navigationPanelThickness
 
     readonly property real intendedWindowThickness: navigationPanelHeight
     readonly property real intendedWindowLength: inLandscape ? Screen.height : Screen.width
