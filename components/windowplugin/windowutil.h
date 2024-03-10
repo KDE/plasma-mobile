@@ -107,8 +107,8 @@ Q_SIGNALS:
     // Emitted when an application is launched
     void appActivationStarted(const QString &appId, const QString &iconName);
 
-    // Emitted the application has finished launching
-    void appActivationFinished();
+    // Emitted when an application has finished launching
+    void appActivationFinished(const QString &appId, const QString &iconName);
 
 private Q_SLOTS:
     void updateActiveWindowIsShell();

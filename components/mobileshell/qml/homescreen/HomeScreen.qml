@@ -102,8 +102,20 @@ Item {
             root.resetHomeScreenPosition();
         }
 
-        function onOpenAppLaunchAnimationRequested(splashIcon, title, x, y, sourceIconSize) {
-            startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
+        function onOpenAppLaunchAnimationRequested(screen, splashIcon) {
+            if (screen !== Plasmoid.screen) {
+                return;
+            }
+
+            startupFeedback.open(splashIcon);
+        }
+
+        function onOpenAppLaunchAnimationWithPositionRequested(screen, splashIcon, title, x, y, sourceIconSize) {
+            if (screen !== Plasmoid.screen) {
+                return;
+            }
+
+            startupFeedback.openWithPosition(splashIcon, x, y, sourceIconSize);
         }
 
         function onCloseAppLaunchAnimationRequested() {

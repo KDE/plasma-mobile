@@ -34,7 +34,8 @@ public:
     Q_INVOKABLE void openActionDrawer();
     Q_INVOKABLE void closeActionDrawer();
 
-    Q_INVOKABLE void openAppLaunchAnimation(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
+    Q_INVOKABLE void openAppLaunchAnimation(int screen, QString splashIcon);
+    Q_INVOKABLE void openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
     Q_INVOKABLE void closeAppLaunchAnimation();
 
     Q_INVOKABLE void openHomeScreen();
@@ -47,7 +48,8 @@ Q_SIGNALS:
     void isTaskSwitcherVisibleChanged();
     void openActionDrawerRequested();
     void closeActionDrawerRequested();
-    void openAppLaunchAnimationRequested(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
+    void openAppLaunchAnimationRequested(int screen, QString splashIcon);
+    void openAppLaunchAnimationWithPositionRequested(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
     void closeAppLaunchAnimationRequested();
     void openHomeScreenRequested();
     void resetHomeScreenPositionRequested();

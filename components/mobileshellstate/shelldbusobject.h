@@ -26,7 +26,8 @@ Q_SIGNALS:
     Q_SCRIPTABLE void isTaskSwitcherVisibleChanged();
     Q_SCRIPTABLE void openActionDrawerRequested();
     Q_SCRIPTABLE void closeActionDrawerRequested();
-    Q_SCRIPTABLE void openAppLaunchAnimationRequested(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
+    Q_SCRIPTABLE void openAppLaunchAnimationRequested(int screen, QString splashIcon);
+    Q_SCRIPTABLE void openAppLaunchAnimationWithPositionRequested(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
     Q_SCRIPTABLE void closeAppLaunchAnimationRequested();
     Q_SCRIPTABLE void openHomeScreenRequested();
     Q_SCRIPTABLE void resetHomeScreenPositionRequested();
@@ -46,7 +47,8 @@ public Q_SLOTS:
     Q_SCRIPTABLE void openActionDrawer();
     Q_SCRIPTABLE void closeActionDrawer();
 
-    Q_SCRIPTABLE void openAppLaunchAnimation(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
+    Q_SCRIPTABLE void openAppLaunchAnimation(int screen, QString splashIcon);
+    Q_SCRIPTABLE void openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize);
     Q_SCRIPTABLE void closeAppLaunchAnimation();
 
     Q_SCRIPTABLE void openHomeScreen();

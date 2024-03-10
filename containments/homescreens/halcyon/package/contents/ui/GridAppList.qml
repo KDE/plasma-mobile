@@ -13,6 +13,7 @@ import org.kde.kirigami 2.10 as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.private.mobile.homescreen.halcyon 1.0 as Halcyon
+import org.kde.plasma.plasmoid
 
 MobileShell.GridView {
     id: gridView
@@ -88,12 +89,13 @@ MobileShell.GridView {
 
         onLaunch: (x, y, icon, title, storageId) => {
             if (icon !== "") {
-                MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                        icon,
-                        title,
-                        delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
-                        delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
-                        Math.min(delegate.iconItem.width, delegate.iconItem.height));
+                MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
+                    Plasmoid.screen,
+                    icon,
+                    title,
+                    delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
+                    delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
+                    Math.min(delegate.iconItem.width, delegate.iconItem.height));
             }
 
             application.setMinimizedDelegate(delegate);

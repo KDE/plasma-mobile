@@ -64,12 +64,10 @@ MobileShell.BaseItem {
             root.toggleFunction();
         } else if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
+
             MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                root.icon,
-                root.text,
-                iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
-                iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
-                Math.min(iconItem.width, iconItem.height))
+                __getCurrentScreenNumber(),
+                root.icon);
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
         }
     }
@@ -78,14 +76,22 @@ MobileShell.BaseItem {
         if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
             MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                root.icon,
-                root.text,
-                iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
-                iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
-                Math.min(iconItem.width, iconItem.height))
+                __getCurrentScreenNumber(),
+                root.icon);
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
         } else if (root.toggleFunction) {
             root.toggleFunction();
         }
+    }
+
+    function __getCurrentScreenNumber() {
+        const screens = Qt.application.screens;
+        for (let i = 0; i < screens.length; i++) {
+            if (screens[i].name === Screen.name) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 }

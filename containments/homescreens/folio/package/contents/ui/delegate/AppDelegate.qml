@@ -11,6 +11,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.plasmoid
 
 AbstractDelegate {
     id: root
@@ -27,12 +28,13 @@ AbstractDelegate {
 
     function launchApp() {
         if (application.icon !== "") {
-            MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                    application.icon,
-                    application.name,
-                    root.iconItem.Kirigami.ScenePosition.x + root.iconItem.width/2,
-                    root.iconItem.Kirigami.ScenePosition.y + root.iconItem.height/2,
-                    Math.min(root.iconItem.width, root.iconItem.height));
+            MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
+                Plasmoid.screen,
+                application.icon,
+                application.name,
+                root.iconItem.Kirigami.ScenePosition.x + root.iconItem.width/2,
+                root.iconItem.Kirigami.ScenePosition.y + root.iconItem.height/2,
+                Math.min(root.iconItem.width, root.iconItem.height));
         }
 
         application.setMinimizedDelegate(root);

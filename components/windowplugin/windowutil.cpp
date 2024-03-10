@@ -73,7 +73,7 @@ void WindowUtil::initWayland()
         auto iface = registry->createPlasmaActivationFeedback(name, version, this);
 
         connect(iface, &PlasmaActivationFeedback::activation, this, [this](PlasmaActivation *activation) {
-            connect(activation, &PlasmaActivation::applicationId, this, [this](const QString &appId) {
+            connect(activation, &PlasmaActivation::applicationId, this, [this, activation](const QString &appId) {
                 // do not show activation screen for the plasmashell process
                 if (appId == "org.kde.plasmashell") {
                     return;
@@ -98,13 +98,19 @@ void WindowUtil::initWayland()
                 });
 
                 if (!servicesFound.isEmpty()) {
-                    Q_EMIT appActivationStarted(appId, servicesFound.constFirst()->icon());
+                    QString iconName = servicesFound.constFirst()->icon();
+
+                    // Connect signal to when activation is complete to trigger event
+                    connect(activation, &PlasmaActivation::finished, this, [this, appId, iconName]() {
+                        Q_EMIT appActivationFinished(appId, iconName);
+                    });
+
+                    // Trigger app activation event
+                    Q_EMIT appActivationStarted(appId, iconName);
                 } else {
                     qDebug() << "WindowUtil: Could not find service" << appId;
                 }
             });
-
-            connect(activation, &PlasmaActivation::finished, this, &WindowUtil::appActivationFinished);
         });
     });
 

@@ -69,9 +69,14 @@ void ShellDBusObject::closeActionDrawer()
     Q_EMIT closeActionDrawerRequested();
 }
 
-void ShellDBusObject::openAppLaunchAnimation(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+void ShellDBusObject::openAppLaunchAnimation(int screen, QString splashIcon)
 {
-    Q_EMIT openAppLaunchAnimationRequested(splashIcon, title, x, y, sourceIconSize);
+    Q_EMIT openAppLaunchAnimationRequested(screen, splashIcon);
+}
+
+void ShellDBusObject::openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+{
+    Q_EMIT openAppLaunchAnimationWithPositionRequested(screen, splashIcon, title, x, y, sourceIconSize);
 }
 
 void ShellDBusObject::closeAppLaunchAnimation()
