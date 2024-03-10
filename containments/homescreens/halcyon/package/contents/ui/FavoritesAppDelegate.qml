@@ -14,6 +14,7 @@ import org.kde.plasma.private.containmentlayoutmanager 1.0 as ContainmentLayoutM
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
+import org.kde.plasma.plasmoid
 
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -77,12 +78,13 @@ Item {
     
     function launchAppWithAnim(x: int, y: int, source, title: string, storageId: string) {
          if (source !== "") {
-            MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                    source,
-                    title,
-                    iconLoader.Kirigami.ScenePosition.x + iconLoader.width/2,
-                    iconLoader.Kirigami.ScenePosition.y + iconLoader.height/2,
-                    Math.min(iconLoader.width, iconLoader.height));
+            MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
+                Plasmoid.screen,
+                source,
+                title,
+                iconLoader.Kirigami.ScenePosition.x + iconLoader.width/2,
+                iconLoader.Kirigami.ScenePosition.y + iconLoader.height/2,
+                Math.min(iconLoader.width, iconLoader.height));
         }
 
         application.setMinimizedDelegate(delegate);

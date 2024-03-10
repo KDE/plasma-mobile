@@ -35,6 +35,10 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::openActionDrawerRequested, this, &ShellDBusClient::openActionDrawerRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::closeActionDrawerRequested, this, &ShellDBusClient::closeActionDrawerRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::openAppLaunchAnimationRequested, this, &ShellDBusClient::openAppLaunchAnimationRequested);
+    connect(m_interface,
+            &OrgKdePlasmashellInterface::openAppLaunchAnimationWithPositionRequested,
+            this,
+            &ShellDBusClient::openAppLaunchAnimationWithPositionRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::closeAppLaunchAnimationRequested, this, &ShellDBusClient::closeAppLaunchAnimationRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::openHomeScreenRequested, this, &ShellDBusClient::openHomeScreenRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::resetHomeScreenPositionRequested, this, &ShellDBusClient::resetHomeScreenPositionRequested);
@@ -80,9 +84,14 @@ bool ShellDBusClient::isTaskSwitcherVisible() const
     return m_isTaskSwitcherVisible;
 }
 
-void ShellDBusClient::openAppLaunchAnimation(QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+void ShellDBusClient::openAppLaunchAnimation(int screen, QString splashIcon)
 {
-    m_interface->openAppLaunchAnimation(splashIcon, title, x, y, sourceIconSize);
+    m_interface->openAppLaunchAnimation(screen, splashIcon);
+}
+
+void ShellDBusClient::openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+{
+    m_interface->openAppLaunchAnimationWithPosition(screen, splashIcon, title, x, y, sourceIconSize);
 }
 
 void ShellDBusClient::closeAppLaunchAnimation()

@@ -12,6 +12,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.plasmoid
 
 /**
  * Component that animates an app opening from a location.
@@ -26,7 +27,16 @@ MouseArea { // use mousearea to ensure clicks don't go behind
 
     property bool __openRequested: false
 
-    function open(splashIcon, title, x, y, sourceIconSize) {
+    function open(splashIcon) {
+        iconParent.scale = 0.5;
+        background.scale = 0.5;
+        backgroundParent.x = 0;
+        backgroundParent.y = 0;
+        __openRequested = true;
+        updateIconSource(splashIcon);
+    }
+
+    function openWithPosition(splashIcon, x, y, sourceIconSize) {
         iconParent.scale = sourceIconSize/iconParent.width;
         background.scale = 0;
         backgroundParent.x = -root.width/2 + x
@@ -68,12 +78,14 @@ MouseArea { // use mousearea to ensure clicks don't go behind
 
         function onAppActivationStarted(appId, iconName) {
             if (!openAnimComplex.running && !root.__openRequested) {
-                iconParent.scale = 0.5;
-                background.scale = 0.5;
-                backgroundParent.x = 0
-                backgroundParent.y = 0
-                root.__openRequested = true;
-                root.updateIconSource(iconName);
+
+                // TODO this doesn't work because it gets triggered on screen 0 even if the app is opening on screen 1
+                //      -> we should switch to a repeater for startup feedback
+                // HACK: we have no way of knowing which screen this app is going to open on
+                //       -> assume the first screen for now
+                if (Plasmoid.screen === 0) {
+                    root.open(iconName);
+                }
             }
         }
     }

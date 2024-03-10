@@ -9,6 +9,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
 import org.kde.kirigami 2.12 as Kirigami
+import org.kde.plasma.plasmoid
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
@@ -65,11 +66,8 @@ MobileShell.BaseItem {
         } else if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
             MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                root.icon,
-                root.text,
-                iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
-                iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
-                Math.min(iconItem.width, iconItem.height))
+                Plasmoid.containment.screen,
+                root.icon);
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
         }
     }
@@ -78,11 +76,8 @@ MobileShell.BaseItem {
         if (root.settingsCommand && !root.restrictedPermissions) {
             closeRequested();
             MobileShellState.ShellDBusClient.openAppLaunchAnimation(
-                root.icon,
-                root.text,
-                iconItem.Kirigami.ScenePosition.x + iconItem.width/2,
-                iconItem.Kirigami.ScenePosition.y + iconItem.height/2,
-                Math.min(iconItem.width, iconItem.height))
+                Plasmoid.containment.screen,
+                root.icon);
             MobileShell.ShellUtil.executeCommand(root.settingsCommand);
         } else if (root.toggleFunction) {
             root.toggleFunction();

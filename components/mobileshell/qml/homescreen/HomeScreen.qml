@@ -102,8 +102,22 @@ Item {
             root.resetHomeScreenPosition();
         }
 
-        function onOpenAppLaunchAnimationRequested(splashIcon, title, x, y, sourceIconSize) {
-            startupFeedback.open(splashIcon, title, x, y, sourceIconSize);
+        function onOpenAppLaunchAnimationRequested(screen, splashIcon) {
+            console.log('compare1 <<<<<<<<<<<<<<<<<<<<<<< ' + screen + ' ' + Plasmoid.screen)
+            if (screen !== Plasmoid.screen) {
+                return;
+            }
+
+            startupFeedback.open(splashIcon);
+        }
+
+        function onOpenAppLaunchAnimationWithPositionRequested(screen, splashIcon, title, x, y, sourceIconSize) {
+            console.log('compare2 <<<<<<<<<<<<<<<<<<<<<<< ' + screen + ' ' + Plasmoid.screen)
+            if (screen !== Plasmoid.screen) {
+                return;
+            }
+
+            startupFeedback.openWithPosition(splashIcon, x, y, sourceIconSize);
         }
 
         function onCloseAppLaunchAnimationRequested() {
