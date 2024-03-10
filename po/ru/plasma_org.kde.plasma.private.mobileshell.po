@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-03-10 00:39+0000\n"
 "PO-Revision-Date: 2023-01-29 13:41+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -186,22 +186,22 @@ msgstr "Уменьшить громкость"
 msgid "Search…"
 msgstr "Поиск…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:143
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:142
 #, kde-format
 msgid "No media playing"
 msgstr "Ничего не воспроизводится"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:176
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:175
 #, kde-format
 msgid "Previous track"
 msgstr "Предыдущая дорожка"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:190
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:189
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Начать или приостановить воспроизведение"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:206
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:205
 #, kde-format
 msgid "Next track"
 msgstr "Следующая дорожка"
