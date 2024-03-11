@@ -26,15 +26,15 @@ QtObject {
     }
 
     function setIndex(index) {
-        mpris2Model.currentIndex = index;
+        baseMpris2Model.currentIndex = index + 1; // account for first row being gone (multiplexer)
     }
     function goPrevious() {
-        mpris2Model.currentPlayer.Previous();
+        baseMpris2Model.currentPlayer.Previous();
     }
     function goNext() {
-        mpris2Model.currentPlayer.Next();
+        baseMpris2Model.currentPlayer.Next();
     }
     function playPause() {
-        mpris2Model.currentPlayer.PlayPause();
+        baseMpris2Model.currentPlayer.PlayPause();
     }
 }
