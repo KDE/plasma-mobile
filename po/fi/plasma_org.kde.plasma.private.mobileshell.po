@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-03-12 02:21+0000\n"
 "PO-Revision-Date: 2023-01-18 16:46+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -185,22 +185,22 @@ msgstr "Vähennä äänenvoimakkuutta"
 msgid "Search…"
 msgstr "Etsi…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:143
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:142
 #, kde-format
 msgid "No media playing"
 msgstr "Ei toistettavaa mediaa"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:176
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:175
 #, kde-format
 msgid "Previous track"
 msgstr "Edellinen raita"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:190
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:189
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Toista tai keskeytä mediatoisto"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:206
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:205
 #, kde-format
 msgid "Next track"
 msgstr "Seuraava raita"

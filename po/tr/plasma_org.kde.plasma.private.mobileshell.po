@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-03-12 02:21+0000\n"
 "PO-Revision-Date: 2022-12-23 21:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -185,22 +185,22 @@ msgstr "Ses Düzeyini Azalt"
 msgid "Search…"
 msgstr "Ara…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:143
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:142
 #, kde-format
 msgid "No media playing"
 msgstr "Çalınan ortam yok"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:176
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:175
 #, kde-format
 msgid "Previous track"
 msgstr "Önceki parça"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:190
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:189
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Ortamı Çal/Duraklat"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:206
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:205
 #, kde-format
 msgid "Next track"
 msgstr "Sonraki parça"
