@@ -19,6 +19,11 @@ TimeUtil::TimeUtil(QObject *parent)
     , m_filterModel{new TimeZoneFilterProxy{this}}
 {
     m_filterModel->setSourceModel(m_timeZoneModel);
+
+    // retrieve is24HourTime
+    auto config = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
+    auto group = KConfigGroup(config, "Locale");
+    m_is24HourTime = group.readEntry(QStringLiteral("TimeFormat"), FORMAT24H) == FORMAT24H;
 }
 
 bool TimeUtil::is24HourTime() const
