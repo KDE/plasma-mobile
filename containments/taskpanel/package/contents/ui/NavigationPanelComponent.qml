@@ -25,7 +25,7 @@ MobileShell.NavigationPanel {
     // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
-    backgroundColor: (Keyboards.KWinVirtualKeyboard.visible || opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent";
+    backgroundColor: (Keyboards.KWinVirtualKeyboard.active || opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent";
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
     shadow: !opaqueBar
         
@@ -84,10 +84,10 @@ MobileShell.NavigationPanel {
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
         
-        enabled: Keyboards.KWinVirtualKeyboard.visible || WindowPlugin.WindowUtil.hasCloseableActiveWindow
-        iconSource: Keyboards.KWinVirtualKeyboard.visible ? "go-down-symbolic" : "mobile-close-app"
+        enabled: Keyboards.KWinVirtualKeyboard.active || WindowPlugin.WindowUtil.hasCloseableActiveWindow
+        iconSource: Keyboards.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have less margins than icons from breeze-icons
-        iconSizeFactor: Keyboards.KWinVirtualKeyboard.visible ? 1 : 0.75
+        iconSizeFactor: Keyboards.KWinVirtualKeyboard.active ? 1 : 0.75
         
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.active) {
@@ -112,7 +112,7 @@ MobileShell.NavigationPanel {
         iconSizeFactor: 0.75
         
         onTriggered: {
-            if (Keyboards.KWinVirtualKeyboard.visible) {
+            if (Keyboards.KWinVirtualKeyboard.active) {
                 Keyboards.KWinVirtualKeyboard.active = false;
             } else {
                 Keyboards.KWinVirtualKeyboard.forceActivate();
