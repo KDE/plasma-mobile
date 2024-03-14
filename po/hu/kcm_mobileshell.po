@@ -1,191 +1,192 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2024-03-13 20:10\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-13 15:01+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/plasma-mobile/kcm_mobileshell.pot\n"
-"X-Crowdin-File-ID: 41661\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "外壳程序"
+msgstr "Felület"
 
 #: package/contents/ui/main.qml:36
 #, kde-format
 msgid "General"
-msgstr "常规"
+msgstr "Általános"
 
 #: package/contents/ui/main.qml:41 package/contents/ui/VibrationForm.qml:17
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr "外壳程序振动"
+msgstr "Rezgések"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "Animations"
-msgstr "动效"
+msgstr "Animációk"
 
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr "如果此选项被关闭，动效将被减少到最低程度。"
+msgstr "Ha ki van kapcsolva, az animációk a lehető legjobban lecsökkennek."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr "导航面板"
+msgstr "Navigációs panel"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr "仅手势模式"
+msgstr "Csak kézmozdulatos mód"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr "是否隐藏导航面板。"
+msgstr "El legyen-e rejtve a navigációs panel."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr "任务切换器"
+msgstr "Feladatváltó"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr "显示应用程序预览"
+msgstr "Alkalmazások előnézetének megjelenítése"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr "关闭此功能可能有助于提高性能。"
+msgstr "Ennek kikapcsolása javíthatja a teljesítményt."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr "操作抽屉"
+msgstr "Csúszómenü"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
 #: package/contents/ui/QuickSettingsForm.qml:34
 #, kde-format
 msgid "Quick Settings"
-msgstr "快速设置"
+msgstr "Gyorsbeállítások"
 
 #: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr "固定模式"
+msgstr "Rögzített mód"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr "扩展模式"
+msgstr "Kiterjesztett mód"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr "左上角抽屉模式"
+msgstr "Bal felső csúszómenü"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr "从左上角打开的模式。"
+msgstr "Mód a bal felső sarokból való megnyitáskor."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr "右上角抽屉模式"
+msgstr "Jobb felső csúszómenü."
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr "从右上角打开的模式。"
+msgstr "Mód a jobb felső sarokból való megnyitáskor."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr "自定义下拉面板中快速设置的排序。"
+msgstr "A gyorsbeállítások sorrendjének testreszabása a lehúzható panelen."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "是否在外壳程序中启用振动。"
+msgstr "Be legyen-e kapcsolva a rezgés a felületen."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr "振动强度"
+msgstr "Rezgés intenzitása"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr "设置振动的强度。"
+msgstr "Mennyire legyen intenzív a felület rezgése."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr "低"
+msgstr "Alacsony"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr "中"
+msgstr "Közepes"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr "高"
+msgstr "Magas"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr "振动持续时间"
+msgstr "Rezgés időtartama"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr "设置外壳程序的振动持续时间。"
+msgstr "Mennyi ideig tartson a felület rezgése."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr "长"
+msgstr "Hosszú"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr "中"
+msgstr "Közepes"
 
 #: package/contents/ui/VibrationForm.qml:85
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr "短"
+msgstr "Rövid"
 
 #: package/contents/ui/VibrationForm.qml:110
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
-msgstr "键盘振动由键盘设置模块独立控制。"
+msgstr ""
+"A billentyűzet rezgése külön szabályozható a billentyűzetbeállító modulban."

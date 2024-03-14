@@ -1,59 +1,58 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2024-03-13 20:10\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-13 15:06+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/plasma-mobile/plasma_org.kde.plasma."
-"quicksetting.record.pot\n"
-"X-Crowdin-File-ID: 41645\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: package/contents/ui/main.qml:17
 #, kde-format
 msgid "Record Screen"
-msgstr "屏幕录像"
+msgstr "Képernyőfelvétel"
 
 #: package/contents/ui/main.qml:19
 #, kde-format
 msgid "Recording…"
-msgstr "正在录屏…"
+msgstr "Felvétel…"
 
 #: package/contents/ui/main.qml:21
 #, kde-format
 msgid "Writing…"
-msgstr "正在写入…"
+msgstr "Írás…"
 
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Tap to start recording"
-msgstr "点击开始录屏"
+msgstr "Koppintson a felvétel indításához"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Screen is being captured…"
-msgstr "正在捕获屏幕内容…"
+msgstr "Képernyő rögzítése folyamatban…"
 
 #: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Please wait…"
-msgstr "请稍候…"
+msgstr "Kérem várjon…"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording"
-msgstr "新建屏幕录像"
+msgstr "Új képernyőfelvétel"
 
 #: package/contents/ui/main.qml:38
 #, kde-format
 msgid "New Screen Recording saved in %1"
-msgstr "新屏幕录像已保存到 %1"
+msgstr "Új képernyőfelvétel mentve ide: %1"

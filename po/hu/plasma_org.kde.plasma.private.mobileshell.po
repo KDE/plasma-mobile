@@ -1,98 +1,97 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2024-03-13 20:10\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-13 15:04+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/plasma-mobile/plasma_org.kde.plasma."
-"private.mobileshell.pot\n"
-"X-Crowdin-File-ID: 41643\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.04.70\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
 msgid "Open Containing Folder"
-msgstr "打开所在文件夹"
+msgstr "Tartalmazó mappa megnyitása"
 
 #: notifications/notificationfilemenu.cpp:123
 #, kde-format
 msgid "&Copy"
-msgstr "复制 (&C)"
+msgstr "&Másolás"
 
 #: notifications/notificationfilemenu.cpp:131
 #, kde-format
 msgctxt "@action:incontextmenu"
 msgid "Copy Location"
-msgstr "复制地址"
+msgstr "Hely másolása"
 
 #: notifications/notificationfilemenu.cpp:176
 #, kde-format
 msgid "Properties"
-msgstr "属性"
+msgstr "Tulajdonságok"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "On"
-msgstr "开"
+msgstr "Be"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:100
 #, kde-format
 msgid "Off"
-msgstr "关"
+msgstr "Ki"
 
 #: qml/dataproviders/AudioProvider.qml:171
 #, kde-format
 msgid "Audio"
-msgstr "音频"
+msgstr "Hang"
 
 #: qml/dataproviders/AudioProvider.qml:175
 #, kde-format
 msgid "Increase Volume"
-msgstr "增加音量"
+msgstr "Hangerő növelése"
 
 #: qml/dataproviders/AudioProvider.qml:182
 #, kde-format
 msgid "Decrease Volume"
-msgstr "降低音量"
+msgstr "Hangerő csökkentése"
 
 #: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
 #, kde-format
 msgid "Mute"
-msgstr "静音"
+msgstr "Némítás"
 
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
-msgstr "SIM 卡已锁定"
+msgstr "A SIM zárolt"
 
 #: qml/osd/volume/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
-msgstr "输出"
+msgstr "Kimenetek"
 
 #: qml/osd/volume/AudioApplet.qml:103
 #, kde-format
 msgid "Inputs"
-msgstr "输入"
+msgstr "Bemenetek"
 
 #: qml/osd/volume/AudioApplet.qml:134
 #, kde-format
 msgid "Playback Streams"
-msgstr "播放流"
+msgstr "Hanglejátszás"
 
 #: qml/osd/volume/AudioApplet.qml:187
 #, kde-format
 msgid "Recording Streams"
-msgstr "录制流"
+msgstr "Hangfelvétel"
 
 #: qml/osd/volume/DeviceListItem.qml:25
 #, kde-format
@@ -103,18 +102,18 @@ msgstr "%1 (%2)"
 #: qml/osd/volume/DeviceListItem.qml:34
 #, kde-format
 msgid "Device name not found"
-msgstr "未发现设备名称"
+msgstr "Az eszköznév nem található"
 
 #: qml/osd/volume/ListItemBase.qml:104
 #, kde-format
 msgid "Show additional options for %1"
-msgstr "显示 %1 的附加选项"
+msgstr "További beállítások ehhez: %1"
 
 #: qml/osd/volume/ListItemBase.qml:160
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
-msgstr "调整 %1 的音量"
+msgstr "%1 hangerejének beállítása"
 
 #: qml/osd/volume/ListItemBase.qml:242
 #, kde-format
@@ -131,23 +130,23 @@ msgstr "100%"
 #: qml/osd/volume/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
-msgstr "通知声音"
+msgstr "Értesítési hangok"
 
 #: qml/osd/volume/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr "%1：%2"
+msgstr "%1: %2"
 
 #: qml/osd/volume/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
-msgstr "未发现流名称"
+msgstr "Az adatfolyam neve nem található"
 
 #: qml/osd/volume/VolumeOSD.qml:108
 #, kde-format
 msgid "Unmute"
-msgstr "取消静音"
+msgstr "Visszahangosítás"
 
 #: qml/osd/volume/VolumeOSD.qml:132
 #, kde-format
@@ -163,17 +162,17 @@ msgstr "%1%"
 #: qml/osd/volume/VolumeOSD.qml:162
 #, kde-format
 msgid "Open audio settings"
-msgstr "打开音频设置"
+msgstr "Hangbeállítások megnyitása"
 
 #: qml/osd/volume/VolumeOSD.qml:175
 #, kde-format
 msgid "Audio Settings"
-msgstr "音频设置"
+msgstr "Hangbeállítások"
 
 #: qml/osd/volume/VolumeOSD.qml:182
 #, kde-format
 msgid "Toggle showing audio streams"
-msgstr "切换显示音频流"
+msgstr "Hanglejátszás megjelenítése be/ki"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:36
 #, kde-format
@@ -183,126 +182,126 @@ msgstr "%1%"
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
 msgid "Search…"
-msgstr "搜索"
+msgstr "Keresés…"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:128
 #, kde-format
 msgid "No media playing"
-msgstr "没有正在播放的媒体"
+msgstr "Nincs médialejátszás"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:156
 #, kde-format
 msgid "Previous track"
-msgstr "上一首"
+msgstr "Előző szám"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:167
 #, kde-format
 msgid "Play or Pause media"
-msgstr "播放或暂停媒体"
+msgstr "Média indítása/szüneteltetése"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:180
 #, kde-format
 msgid "Next track"
-msgstr "下一首"
+msgstr "Következő szám"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:55
 #, kde-format
 msgctxt "Reply to message"
 msgid "Reply"
-msgstr "回复"
+msgstr "Válasz"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr "输入回复"
+msgstr "Írja ide a választ…"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Send"
-msgstr "发送"
+msgstr "Küldés"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:176
 #, kde-format
 msgid "Notification service not available"
-msgstr "通知服务不可用"
+msgstr "Az értesítési szolgáltatás nem érhető el"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:185
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
-msgstr "通知由 %1 %2 提供"
+msgstr "Az értesítéseket jelenleg a(z) „%1 %2” biztosítja"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:321
 #, kde-format
 msgid "Show Fewer"
-msgstr "显示更少"
+msgstr "Kevesebb megjelenítése"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:323
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
-msgstr "显示其他 %1 条"
+msgstr "További %1 megjelenítése"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:382
 #, kde-format
 msgid "Clear All Notifications"
-msgstr "清除所有通知"
+msgstr "Összes értesítés törlése"
 
 #: qml/widgets/notifications/ThumbnailStrip.qml:132
 #, kde-format
 msgid "More Options…"
-msgstr "更多选项"
+msgstr "További beállítások…"
 
 #: qml/widgets/notifications/util.js:14
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr "%1 (已暂停)"
+msgstr "%1 (Felfüggesztve)"
 
 #: qml/widgets/notifications/util.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr "%1 (已失败)"
+msgstr "%1 (Sikertelen)"
 
 #: qml/widgets/notifications/util.js:21
 #, kde-format
 msgid "Job Failed"
-msgstr "任务失败"
+msgstr "A feladat sikertelen"
 
 #: qml/widgets/notifications/util.js:24
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
-msgstr "%1 (已完成)"
+msgstr "%1 (Befejezve)"
 
 #: qml/widgets/notifications/util.js:26
 #, kde-format
 msgid "Job Finished"
-msgstr "任务已完成"
+msgstr "A feladat befejeződött"
 
 #: qml/widgets/notifications/util.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr "%1分钟前"
+msgstr "%1 perccel ezelőtt"
 
 #: qml/widgets/notifications/util.js:81
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr "剩余 %1秒"
+msgstr "%1 másodperc van hátra"
 
 #: qml/widgets/notifications/util.js:84
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr "剩余 %1分钟"
+msgstr "%1 perc van hátra"
 
 #: qml/widgets/notifications/util.js:87
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr "剩余 %1小时"
+msgstr "%1 óra van hátra"
