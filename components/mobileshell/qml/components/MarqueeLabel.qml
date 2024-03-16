@@ -16,7 +16,9 @@ PlasmaComponents.Label {
     required property string inputText
     readonly property string filteredText: inputText.replace(/\n/g, ' ') // remove new line characters
     
-    property int interval: Kirigami.Units.longDuration
+    readonly property int interval: 200 // update position every 200 ms
+    readonly property int longDuration: 300
+    readonly property int waitDuration: 900 
     
     readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / filteredText.length))
     property int step: 0
@@ -36,7 +38,7 @@ PlasmaComponents.Label {
         onTriggered: {
             if (paused) {
                 if (step != 0) {
-                    interval = Kirigami.Units.veryLongDuration;
+                    interval = root.longDuration;
                     step = 0;
                 } else {
                     interval = root.interval;
@@ -45,7 +47,7 @@ PlasmaComponents.Label {
             } else {
                 step = (step + 1) % filteredText.length;
                 if (step === charactersOverflow) {
-                    interval = Kirigami.Units.veryLongDuration * 3;
+                    interval = root.waitDuration;
                     paused = true;
                 }
             }
