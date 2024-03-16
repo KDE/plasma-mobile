@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
+# SPDX-FileCopyrightText: 2023, 2024 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2023-12-18 10:02+0100\n"
+"PO-Revision-Date: 2024-03-15 01:17+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
 "Language: ast\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -171,17 +171,17 @@ msgstr "Litiu ferrofosfatu"
 #: ui/BatteryPage.qml:153
 #, kde-format
 msgid "Lead acid"
-msgstr "Plomu ya ácidu"
+msgstr "Plomu y ácidu"
 
 #: ui/BatteryPage.qml:154
 #, kde-format
 msgid "Nickel cadmium"
-msgstr "Níquel ya cadmiu"
+msgstr "Níquel y cadmiu"
 
 #: ui/BatteryPage.qml:155
 #, kde-format
 msgid "Nickel metal hydride"
-msgstr "Níquel ya metal d'hidruru"
+msgstr "Níquel y metal d'hidruru"
 
 #: ui/BatteryPage.qml:156
 #, kde-format
@@ -240,9 +240,7 @@ msgid "Unknown battery"
 msgstr "Batería desconocida"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is a percentage value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
 msgstr "%1%"
