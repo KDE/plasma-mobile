@@ -88,7 +88,7 @@ ContainmentItem {
                 Folio.HomeScreenState.closeAppDrawer();
                 Folio.HomeScreenState.goToPage(0);
 
-                WindowPlugin.WindowUtil.isShowingDesktop = true;
+                WindowPlugin.WindowUtil.minimizeAll();
             }
         } else { // if we are on the homescreen
             switch (Folio.HomeScreenState.viewState) {
