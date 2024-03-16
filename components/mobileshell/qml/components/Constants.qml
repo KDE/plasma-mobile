@@ -13,7 +13,7 @@ pragma Singleton
 
 QtObject {
     readonly property real topPanelHeight: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
-    readonly property real navigationPanelThickness: ShellSettings.Settings.navigationPanelEnabled ? Kirigami.Units.gridUnit * 2 : 0
+    readonly property real navigationPanelThickness: Kirigami.Units.gridUnit * 2
 
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {
         return screenWidth > screenHeight && screenHeight < 500;

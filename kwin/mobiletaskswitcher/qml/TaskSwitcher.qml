@@ -167,7 +167,6 @@ FocusScope {
     MobileShell.NavigationPanel {
         id: navigationPanel
         z: 1
-        visible: ShellSettings.Settings.navigationPanelEnabled
         backgroundColor: Qt.rgba(0, 0, 0, 0.1)
         foregroundColorGroup: Kirigami.Theme.Complementary
         shadow: false
