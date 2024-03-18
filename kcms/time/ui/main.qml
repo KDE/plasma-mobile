@@ -113,6 +113,7 @@ SimpleKCM {
 
             ListView {
                 id: listView
+                currentIndex: -1 // otherwise the vkbd will constantly open and close while typing
                 headerPositioning: ListView.OverlayHeader
                 implicitWidth: 18 * Kirigami.Units.gridUnit
                 implicitHeight: 18 * Kirigami.Units.gridUnit
