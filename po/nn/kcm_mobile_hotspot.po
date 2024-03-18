@@ -1,12 +1,11 @@
 # Translation of kcm_mobile_hotspot to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-19 14:43+0100\n"
+"PO-Revision-Date: 2024-03-17 11:08+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -22,7 +21,7 @@ msgstr ""
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Set opp trådlaussone"
 
 #: ui/main.qml:77
 #, kde-format
@@ -32,12 +31,12 @@ msgstr "Trådlaussone"
 #: ui/main.qml:78
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
-msgstr ""
+msgstr "Del Internett-tilkoplinga med andre einingar som eit Wi-Fi-nettverk."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Innstillingar"
 
 #: ui/main.qml:103
 #, kde-format
