@@ -1,21 +1,20 @@
 # Translation of kcm_mobile_wifi to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2019, 2020.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-12 00:39+0000\n"
-"PO-Revision-Date: 2021-12-15 12:49+0100\n"
-"Last-Translator: Oystein Steffensen-Alvaervik <ystein@posteo.net>\n"
+"PO-Revision-Date: 2024-03-17 11:07+0100\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -33,22 +32,20 @@ msgstr "Kopla til"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Rediger"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "Wi-Fi"
 
 #: ui/main.qml:135
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Available Networks"
-msgstr "Ikkje-synleg nettverk:"
+msgstr "Tilgjengelege nettverk"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Legg til ny tilkopling"
 
@@ -58,10 +55,9 @@ msgid "Save"
 msgstr "Lagra"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Ikkje-synleg nettverk:"
+msgstr "Ikkje-synleg nettverk"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -129,28 +125,24 @@ msgid "Manual"
 msgstr "Manuell"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP-adresse:"
+msgstr "IP-adresse"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Portnar:"
+msgstr "Portnar"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Prefikslengd for nettverk:"
+msgstr "Prefikslengd for nettverk"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS:"
+#, kde-format
 msgid "DNS"
-msgstr "DNS:"
+msgstr "DNS"
 
 #: ui/PasswordField.qml:13
 #, kde-format
