@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 01:55+0000\n"
+"POT-Creation-Date: 2024-03-19 00:39+0000\n"
 "PO-Revision-Date: 2023-12-18 13:50+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -3034,12 +3034,12 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Időzóna-választás"
 
-#: ui/main.qml:167
+#: ui/main.qml:168
 #, kde-format
 msgid "Pick System Date"
 msgstr "Válassza ki a rendszerdátumot"
 
-#: ui/main.qml:209
+#: ui/main.qml:210
 #, kde-format
 msgid "Pick System Time"
 msgstr "Válassza ki a rendszeridőt"

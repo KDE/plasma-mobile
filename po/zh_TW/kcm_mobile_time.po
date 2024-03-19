@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 01:55+0000\n"
+"POT-Creation-Date: 2024-03-19 00:39+0000\n"
 "PO-Revision-Date: 2024-02-19 08:07+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -3038,12 +3038,12 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "挑選時區"
 
-#: ui/main.qml:167
+#: ui/main.qml:168
 #, kde-format
 msgid "Pick System Date"
 msgstr "挑選系統日期"
 
-#: ui/main.qml:209
+#: ui/main.qml:210
 #, kde-format
 msgid "Pick System Time"
 msgstr "挑選系統時間"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 01:55+0000\n"
+"POT-Creation-Date: 2024-03-19 00:39+0000\n"
 "PO-Revision-Date: 2023-06-13 22:25+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -3035,13 +3035,13 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Zeitzonen auswählen"
 
-#: ui/main.qml:167
+#: ui/main.qml:168
 #, fuzzy, kde-format
 #| msgid "Pick Date"
 msgid "Pick System Date"
 msgstr "Datum aussuchen"
 
-#: ui/main.qml:209
+#: ui/main.qml:210
 #, fuzzy, kde-format
 #| msgid "Pick Time"
 msgid "Pick System Time"
