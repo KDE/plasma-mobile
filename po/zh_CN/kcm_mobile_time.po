@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 01:55+0000\n"
+"POT-Creation-Date: 2024-03-19 02:30+0000\n"
 "PO-Revision-Date: 2024-01-06 03:31\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -3034,12 +3034,12 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "选取时区"
 
-#: ui/main.qml:167
+#: ui/main.qml:168
 #, kde-format
 msgid "Pick System Date"
 msgstr "选择系统日期"
 
-#: ui/main.qml:209
+#: ui/main.qml:210
 #, kde-format
 msgid "Pick System Time"
 msgstr "选择系统时间"

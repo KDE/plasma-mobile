@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-31 01:55+0000\n"
+"POT-Creation-Date: 2024-03-19 02:30+0000\n"
 "PO-Revision-Date: 2022-03-18 07:14+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -3038,13 +3038,13 @@ msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Cukit Zona Waktu"
 
-#: ui/main.qml:167
+#: ui/main.qml:168
 #, fuzzy, kde-format
 #| msgid "Pick Date"
 msgid "Pick System Date"
 msgstr "Cukit Tanggal"
 
-#: ui/main.qml:209
+#: ui/main.qml:210
 #, fuzzy, kde-format
 #| msgid "Pick Time"
 msgid "Pick System Time"
