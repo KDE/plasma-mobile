@@ -44,21 +44,21 @@ QtObject {
         VolumeLib.GlobalAction {
             objectName: "increase_volume"
             text: i18n("Increase Volume")
-            shortcut: Qt.Key_VolumeUp
+            shortcuts: [Qt.Key_VolumeUp]
             onTriggered: MobileShell.AudioInfo.increaseVolume()
         }
 
         VolumeLib.GlobalAction {
             objectName: "decrease_volume"
             text: i18n("Decrease Volume")
-            shortcut: Qt.Key_VolumeDown
+            shortcuts: [Qt.Key_VolumeDown]
             onTriggered: MobileShell.AudioInfo.decreaseVolume()
         }
 
         VolumeLib.GlobalAction {
             objectName: "mute"
             text: i18n("Mute")
-            shortcut: Qt.Key_VolumeMute
+            shortcuts: [Qt.Key_VolumeMute]
             onTriggered: MobileShell.AudioInfo.muteVolume()
         }
     }
