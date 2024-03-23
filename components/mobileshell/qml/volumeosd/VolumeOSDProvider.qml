@@ -36,30 +36,4 @@ QtObject {
     }
 
     property var osd: VolumeOSD {}
-
-    property var actionCollection: VolumeLib.GlobalActionCollection {
-        name: "kmix"
-        displayName: i18n("Audio")
-
-        VolumeLib.GlobalAction {
-            objectName: "increase_volume"
-            text: i18n("Increase Volume")
-            shortcuts: [Qt.Key_VolumeUp]
-            onTriggered: MobileShell.AudioInfo.increaseVolume()
-        }
-
-        VolumeLib.GlobalAction {
-            objectName: "decrease_volume"
-            text: i18n("Decrease Volume")
-            shortcuts: [Qt.Key_VolumeDown]
-            onTriggered: MobileShell.AudioInfo.decreaseVolume()
-        }
-
-        VolumeLib.GlobalAction {
-            objectName: "mute"
-            text: i18n("Mute")
-            shortcuts: [Qt.Key_VolumeMute]
-            onTriggered: MobileShell.AudioInfo.muteVolume()
-        }
-    }
 }
