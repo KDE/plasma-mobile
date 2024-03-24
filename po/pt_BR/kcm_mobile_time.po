@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the plasma-settings package.
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2019.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2021, 2022, 2023.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 02:30+0000\n"
-"PO-Revision-Date: 2023-03-22 10:45-0300\n"
+"PO-Revision-Date: 2024-03-23 19:12-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: timesettings.cpp:146
 #, kde-format
@@ -3023,12 +3023,12 @@ msgstr "Se deve definir a hora automaticamente."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Hora do sistema"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Data do sistema"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3037,26 +3037,24 @@ msgid "Pick Timezone"
 msgstr "Escolher fuso horário"
 
 #: ui/main.qml:168
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Escolher data"
+msgstr "Escolher data do sistema"
 
 #: ui/main.qml:210
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Escolher hora"
+msgstr "Escolher hora do sistema"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #~ msgid "Current Time"
 #~ msgstr "Hora atual"
