@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-03-21 10:16+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -135,7 +135,7 @@ msgstr "No s'ha trobat el nom del flux"
 msgid "Unmute"
 msgstr "Activa el so"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Silenci"
@@ -165,21 +165,6 @@ msgstr "Configuració d'àudio"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Commuta la visualització dels fluxos d'àudio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Àudio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Apuja el volum"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Abaixa el volum"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -308,3 +293,12 @@ msgstr "Neteja totes les notificacions"
 #, kde-format
 msgid "More Options…"
 msgstr "Més opcions…"
+
+#~ msgid "Audio"
+#~ msgstr "Àudio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Apuja el volum"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Abaixa el volum"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-28 07:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -134,7 +134,7 @@ msgstr "ნაკადის სახელი ვერ ვიპოვე"
 msgid "Unmute"
 msgstr "დადუმების გამორთვა"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "დადუმება"
@@ -164,21 +164,6 @@ msgstr "აუდიოს პარამეტრები"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "აუდიონაკადების ჩვენების გადართვა"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "აუდიო"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "ხმის აწევა"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "ხმის დაწევა"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -307,3 +292,12 @@ msgstr "ყველა შეტყობინების გასუფთ�
 #, kde-format
 msgid "More Options…"
 msgstr "მეტი პარამეტრი…"
+
+#~ msgid "Audio"
+#~ msgstr "აუდიო"
+
+#~ msgid "Increase Volume"
+#~ msgstr "ხმის აწევა"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "ხმის დაწევა"

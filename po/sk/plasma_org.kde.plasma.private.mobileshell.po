@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -132,7 +132,7 @@ msgstr "Názov prúdu nebol nájdený"
 msgid "Unmute"
 msgstr "Zrušiť stlmenie"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Stlmiť"
@@ -162,21 +162,6 @@ msgstr "Nastavenia zvuku"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Prepnúť zobrazovanie zvukových prúdov"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Zvuk"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Zvýšiť hlasitosť"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Znížiť hlasitosť"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -305,3 +290,12 @@ msgstr "Vymazať všetky oznámenia"
 #, kde-format
 msgid "More Options…"
 msgstr "Viac možností..."
+
+#~ msgid "Audio"
+#~ msgstr "Zvuk"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Zvýšiť hlasitosť"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Znížiť hlasitosť"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-02-23 19:21+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -135,7 +135,7 @@ msgstr "Fann ikkje straumnamn"
 msgid "Unmute"
 msgstr "Lyddemping av"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Slå av lyd"
@@ -165,21 +165,6 @@ msgstr "Lydinnstillingar"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Vis/gøym lydstraumar"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Lyd"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Høgare lyd"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Lågare lyd"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -308,3 +293,12 @@ msgstr "Tøm varslingar"
 #, kde-format
 msgid "More Options…"
 msgstr "Fleire val …"
+
+#~ msgid "Audio"
+#~ msgstr "Lyd"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Høgare lyd"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Lågare lyd"

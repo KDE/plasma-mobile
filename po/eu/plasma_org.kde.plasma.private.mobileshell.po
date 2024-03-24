@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-01-04 19:25+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -136,7 +136,7 @@ msgstr "Korronte-izena ez da aurkitu"
 msgid "Unmute"
 msgstr "Ozendu"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Isilarazi"
@@ -166,21 +166,6 @@ msgstr "Audio-ezarpenak"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Txandakatu audio-korronteak erakustea"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Audioa"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Igo bolumena"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Jaitsi bolumena"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -309,3 +294,12 @@ msgstr "Garbitu jakinarazpen guztiak"
 #, kde-format
 msgid "More Options…"
 msgstr "Aukera gehiago..."
+
+#~ msgid "Audio"
+#~ msgstr "Audioa"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Igo bolumena"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Jaitsi bolumena"

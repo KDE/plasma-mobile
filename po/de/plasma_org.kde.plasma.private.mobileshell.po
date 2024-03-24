@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-03-12 17:34+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -135,7 +135,7 @@ msgstr "Name des Streams nicht gefunden"
 msgid "Unmute"
 msgstr "Stummschaltung aufheben"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Stummschalten"
@@ -165,21 +165,6 @@ msgstr "Audioeinstellungen"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr ""
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Audio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Lautstärke erhöhen"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Lautstärke verringern"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -308,3 +293,12 @@ msgstr "Alle Benachrichtigungen löschen"
 #, kde-format
 msgid "More Options…"
 msgstr "Weitere Einstellungen ..."
+
+#~ msgid "Audio"
+#~ msgstr "Audio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Lautstärke erhöhen"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Lautstärke verringern"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-07-26 00:13+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "스트림 이름을 찾을 수 없음"
 msgid "Unmute"
 msgstr "음소거 해제"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "음소거"
@@ -163,21 +163,6 @@ msgstr "오디오 설정"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "오디오 스트림 표시 전환"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "오디오"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "음량 증가"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "음량 감소"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -306,3 +291,12 @@ msgstr "모든 알림 지우기"
 #, kde-format
 msgid "More Options…"
 msgstr "옵션 더 보기…"
+
+#~ msgid "Audio"
+#~ msgstr "오디오"
+
+#~ msgid "Increase Volume"
+#~ msgstr "음량 증가"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "음량 감소"

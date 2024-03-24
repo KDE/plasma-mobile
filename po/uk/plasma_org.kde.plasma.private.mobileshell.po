@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-20 11:47+0200\n"
 "Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -134,7 +134,7 @@ msgstr "Назву потоку не знайдено"
 msgid "Unmute"
 msgstr "Увімкнути звук"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Вимкнути звук"
@@ -164,21 +164,6 @@ msgstr "Параметри звуку"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Увімкнути або вимкнути показ потоків звукових даних"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Звук"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Збільшити гучність"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Зменшити гучність"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -307,3 +292,12 @@ msgstr "Вилучити усі сповіщення"
 #, kde-format
 msgid "More Options…"
 msgstr "Додаткові параметри…"
+
+#~ msgid "Audio"
+#~ msgstr "Звук"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Збільшити гучність"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Зменшити гучність"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-24 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -135,7 +135,7 @@ msgstr "Nombre de emisión no encontrado"
 msgid "Unmute"
 msgstr "Reanudar el sonido"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Silenciar"
@@ -165,21 +165,6 @@ msgstr "Preferencias de sonido"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Conmutar la visualización de emisiones de sonido"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Sonido"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Aumentar el volumen"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Disminuir el volumen"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -308,3 +293,12 @@ msgstr "Borrar todas las notificaciones"
 #, kde-format
 msgid "More Options…"
 msgstr "Más opciones..."
+
+#~ msgid "Audio"
+#~ msgstr "Sonido"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Aumentar el volumen"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Disminuir el volumen"

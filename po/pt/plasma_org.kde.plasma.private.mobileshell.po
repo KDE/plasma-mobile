@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-23 17:15+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -128,7 +128,7 @@ msgstr "Nome da sequência não encontrado"
 msgid "Unmute"
 msgstr "Activar o Som"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Silenciar"
@@ -158,21 +158,6 @@ msgstr "Configuração do Áudio"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Comutar a apresentação das sequências de áudio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Áudio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Aumentar o Volume"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Diminuir o Volume"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -301,3 +286,12 @@ msgstr "Limpar Todas as Notificações"
 #, kde-format
 msgid "More Options…"
 msgstr "Mais Opções…"
+
+#~ msgid "Audio"
+#~ msgstr "Áudio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Aumentar o Volume"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Diminuir o Volume"

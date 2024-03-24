@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-21 08:52+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -134,7 +134,7 @@ msgstr "Ime toka ni mogoče najti"
 msgid "Unmute"
 msgstr "Odutišaj"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Utišaj"
@@ -164,21 +164,6 @@ msgstr "Nastavitve zvoka"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Preklopi prikaz zvočnih tokov"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Avdio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Povečaj glasnost"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Zmanjšaj glasnost"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -307,3 +292,12 @@ msgstr "Počisti vsa obvestila"
 #, kde-format
 msgid "More Options…"
 msgstr "Več možnosti…"
+
+#~ msgid "Audio"
+#~ msgstr "Avdio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Povečaj glasnost"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Zmanjšaj glasnost"

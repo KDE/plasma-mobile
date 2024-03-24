@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2023-12-17 21:36+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -133,7 +133,7 @@ msgstr "Az adatfolyam neve nem található"
 msgid "Unmute"
 msgstr "Visszahangosítás"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Némítás"
@@ -163,21 +163,6 @@ msgstr "Hangbeállítások"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Hanglejátszás megjelenítése be/ki"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Hang"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Hangerő növelése"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Hangerő csökkentése"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -306,3 +291,12 @@ msgstr "Összes értesítés törlése"
 #, kde-format
 msgid "More Options…"
 msgstr "További beállítások…"
+
+#~ msgid "Audio"
+#~ msgstr "Hang"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Hangerő növelése"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Hangerő csökkentése"

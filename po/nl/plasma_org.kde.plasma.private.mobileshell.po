@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-20 10:43+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -133,7 +133,7 @@ msgstr "Streamnaam niet gevonden"
 msgid "Unmute"
 msgstr "Dempen opheffen"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "Dempen"
@@ -163,21 +163,6 @@ msgstr "Audio-instellingen"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Tonen van audiostreams omschakelen"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "Audio"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "Volume verhogen"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "Volume verlagen"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -306,3 +291,12 @@ msgstr "Alle meldingen wissen"
 #, kde-format
 msgid "More Options…"
 msgstr "Meer opties…"
+
+#~ msgid "Audio"
+#~ msgstr "Audio"
+
+#~ msgid "Increase Volume"
+#~ msgstr "Volume verhogen"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "Volume verlagen"

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2021, 2022, 2023.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2020, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-22 10:46-0300\n"
+"PO-Revision-Date: 2024-03-23 19:11-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: ui/languages.qml:19
 #, kde-format
@@ -38,11 +38,10 @@ msgid "Type anything here…"
 msgstr "Digite qualquer coisa aqui..."
 
 #: ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "Comentários:"
+msgstr "Comentários"
 
 #: ui/main.qml:44
 #, kde-format
@@ -65,11 +64,10 @@ msgid "Whether to vibrate on keypress."
 msgstr "Se deve vibrar ao pressionar a tecla."
 
 #: ui/main.qml:62
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "Correção de texto:"
+msgstr "Correção de texto"
 
 #: ui/main.qml:69
 #, kde-format

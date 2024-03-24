@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-10 00:39+0000\n"
+"POT-Creation-Date: 2024-03-24 00:39+0000\n"
 "PO-Revision-Date: 2024-03-17 20:42\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -134,7 +134,7 @@ msgstr "未发现流名称"
 msgid "Unmute"
 msgstr "取消静音"
 
-#: qml/volumeosd/VolumeOSD.qml:104 qml/volumeosd/VolumeOSDProvider.qml:60
+#: qml/volumeosd/VolumeOSD.qml:104
 #, kde-format
 msgid "Mute"
 msgstr "静音"
@@ -164,21 +164,6 @@ msgstr "音频设置"
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "切换显示音频流"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:42
-#, kde-format
-msgid "Audio"
-msgstr "音频"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:46
-#, kde-format
-msgid "Increase Volume"
-msgstr "增加音量"
-
-#: qml/volumeosd/VolumeOSDProvider.qml:53
-#, kde-format
-msgid "Decrease Volume"
-msgstr "降低音量"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -307,3 +292,12 @@ msgstr "清除所有通知"
 #, kde-format
 msgid "More Options…"
 msgstr "更多选项"
+
+#~ msgid "Audio"
+#~ msgstr "音频"
+
+#~ msgid "Increase Volume"
+#~ msgstr "增加音量"
+
+#~ msgid "Decrease Volume"
+#~ msgstr "降低音量"
