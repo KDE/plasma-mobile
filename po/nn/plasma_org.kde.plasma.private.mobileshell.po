@@ -293,12 +293,3 @@ msgstr "Tøm varslingar"
 #, kde-format
 msgid "More Options…"
 msgstr "Fleire val …"
-
-#~ msgid "Audio"
-#~ msgstr "Lyd"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Høgare lyd"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Lågare lyd"
