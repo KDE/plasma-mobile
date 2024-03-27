@@ -16,6 +16,10 @@ QtObject {
     readonly property real navigationPanelThickness: ShellSettings.Settings.navigationPanelEnabled ? Kirigami.Units.gridUnit * 2 : 0
 
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {
-        return screenWidth > screenHeight && screenHeight < 500;
+        // TODO: we have this disabled for now, we might consider just removing this feature entirely due to it causing several issues:
+        //       (the feature being the navigation panel being moved to the right when the screen height is small)
+        //       => the keyboard dimensions are incorrect
+        //       => shell seems to crash randomly (attempted hotfixes with just delay timers, but not great and also doesn't work now)
+        return false; // screenWidth > screenHeight && screenHeight < 500;
     }
 }
