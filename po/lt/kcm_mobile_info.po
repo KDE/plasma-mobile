@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2022-11-16 22:29+0200\n"
+"PO-Revision-Date: 2024-03-27 23:20+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.4.2\n"
 
 #: ui/main.qml:16
 #, kde-format
@@ -28,7 +28,7 @@ msgstr "Sistemos informacija"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Kopijuoti"
 
 #: ui/main.qml:47
 #, kde-format
@@ -41,8 +41,7 @@ msgid "Webpage"
 msgstr "Internetinė svetainė"
 
 #: ui/main.qml:63
-#, fuzzy, kde-format
-#| msgid "Software"
+#, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Programinė įranga"
@@ -79,8 +78,7 @@ msgid "%1-bit"
 msgstr "%1 bitų"
 
 #: ui/main.qml:102
-#, fuzzy, kde-format
-#| msgid "Hardware"
+#, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Aparatinė įranga"

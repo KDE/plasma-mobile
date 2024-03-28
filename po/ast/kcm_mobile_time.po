@@ -1,26 +1,26 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023 Enol P. <enolp@softastur.org>
+# SPDX-FileCopyrightText: 2023, 2024 Enol P. <enolp@softastur.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:39+0000\n"
-"PO-Revision-Date: 2023-11-11 01:13+0100\n"
+"PO-Revision-Date: 2024-03-25 22:58+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
-"Language-Team: \n"
+"Language-Team: Asturian <alministradores@softastur.org>\n"
 "Language: ast\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: timesettings.cpp:146
 #, kde-format
 msgid "Unable to change NTP settings"
-msgstr ""
+msgstr "Nun ye posible camudar la configuración de NTP"
 
 #: timesettings.cpp:163
 #, kde-format
@@ -305,7 +305,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Belgrade"
-msgstr ""
+msgstr "Belgráu"
 
 #: timezonesi18n.cpp:89
 #, kde-format
@@ -317,7 +317,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Berlin"
-msgstr ""
+msgstr "Berlín"
 
 #: timezonesi18n.cpp:91
 #, kde-format
@@ -365,7 +365,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bogota"
-msgstr ""
+msgstr "Bogotá"
 
 #: timezonesi18n.cpp:99
 #, kde-format
@@ -2177,7 +2177,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Seoul"
-msgstr ""
+msgstr "Seúl"
 
 #: timezonesi18n.cpp:401
 #, kde-format
@@ -2789,7 +2789,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Warsaw"
-msgstr ""
+msgstr "Varsovia"
 
 #: timezonesi18n.cpp:503
 #, kde-format
@@ -3021,12 +3021,12 @@ msgstr ""
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "Hora del sistema"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "Data del sistema"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3047,9 +3047,9 @@ msgstr ""
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "PM"
