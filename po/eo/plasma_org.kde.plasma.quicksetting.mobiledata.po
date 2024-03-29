@@ -1,0 +1,49 @@
+# translation of plasma_org.kde.plasma.quicksetting.mobiledata.pot to Esperanto
+# Copyright (C) 2024 Free Software Foundation, Inc.
+# This file is distributed under the same license as the plasma-mobile package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2024-03-28 09:21+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo.org>\n"
+"Language: eo\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: contents/ui/main.qml:10
+#, kde-format
+msgid "Mobile Data"
+msgstr "Poŝtelefonaj Datumoj"
+
+#: contents/ui/main.qml:14 contents/ui/main.qml:22
+#, kde-format
+msgid "Not Available"
+msgstr "Ne disponebla"
+
+#: contents/ui/main.qml:16
+#, kde-format
+msgid "APN needs to be configured in the settings"
+msgstr "APN bezonas agordon en la metoj"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "On"
+msgstr "On"
+
+#: contents/ui/main.qml:18
+#, kde-format
+msgid "Off"
+msgstr "Malŝaltita"
+
+#: contents/ui/main.qml:20
+#, kde-format
+msgid "No SIM inserted"
+msgstr "Neniu SIM enigita"
