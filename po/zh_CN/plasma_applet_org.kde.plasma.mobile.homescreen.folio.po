@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-07 02:20+0000\n"
-"PO-Revision-Date: 2024-01-06 03:31\n"
+"PO-Revision-Date: 2024-03-30 19:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/plasma_applet_org.kde."
 "plasma.mobile.homescreen.folio.pot\n"
-"X-Crowdin-File-ID: 48272\n"
+"X-Crowdin-File-ID: 51964\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -126,13 +126,13 @@ msgstr "收藏栏"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "壁纸"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "显示壁纸模糊效果"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -143,7 +143,7 @@ msgstr "常规"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "在主屏幕和更多壁纸选项间切换"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
