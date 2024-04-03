@@ -291,12 +291,3 @@ msgstr "Vymazat všechna oznámení"
 #, kde-format
 msgid "More Options…"
 msgstr "Více možností…"
-
-#~ msgid "Audio"
-#~ msgstr "Audio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Zvýšit hlasitost"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Snížit hlasitost"
