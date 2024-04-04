@@ -48,7 +48,7 @@ QtObject {
         // TODO: Disabled for the time being, since it seems to cause an infinite loop
         // authenticator.startAuthenticating();
     }
-    
+
     property var connections: Connections {
         target: authenticator
         

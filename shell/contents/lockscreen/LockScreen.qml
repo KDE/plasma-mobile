@@ -8,6 +8,8 @@ import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.notificationmanager as Notifications
+import org.kde.plasma.private.mobileshell.dpmsplugin as DPMS
+
 
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -53,6 +55,16 @@ Item {
         // ensure keypad is opened when password is updated (ex. keyboard)
         function onPasswordChanged() {
             flickable.goToOpenPosition()
+        }
+    }
+
+    // when screen turns off, reset state
+    DPMS.DPMSUtil {
+        id: dpms
+
+        onDpmsTurnedOff: {
+            flickable.goToClosePosition();
+            lockScreenState.resetPassword();
         }
     }
 
