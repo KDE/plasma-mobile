@@ -62,9 +62,11 @@ Item {
     DPMS.DPMSUtil {
         id: dpms
 
-        onDpmsTurnedOff: {
-            flickable.goToClosePosition();
-            lockScreenState.resetPassword();
+        onDpmsTurnedOff: (screen) => {
+            if (screen.name === Screen.name) {
+                flickable.goToClosePosition();
+                lockScreenState.resetPassword();
+            }
         }
     }
 
