@@ -61,7 +61,7 @@ Q_SIGNALS:
 private:
     EffectTogglableState *const m_taskSwitcherState;
     EffectTogglableTouchBorder *const m_border;
-    QList<ElectricBorder> m_borderActivate;
+    QList<int> m_borderActivate = {ElectricBorder::ElectricBottom};
 
     QAction *m_realtimeToggleAction = nullptr;
     QAction *m_toggleAction = nullptr;

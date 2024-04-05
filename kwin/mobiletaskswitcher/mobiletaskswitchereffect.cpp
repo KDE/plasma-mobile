@@ -63,21 +63,7 @@ MobileTaskSwitcherEffect::~MobileTaskSwitcherEffect()
 void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
 {
     setAnimationDuration(animationTime(300ms));
-
-    for (const ElectricBorder &border : std::as_const(m_borderActivate)) {
-        effects->unreserveElectricBorder(border, this);
-    }
-
-    m_borderActivate.clear();
-
-    const QList<int> activateBorders = {ElectricBorder::ElectricBottom};
-    for (const int &border : activateBorders) {
-        ElectricBorder electricBorder = ElectricBorder(border);
-        m_borderActivate.append(electricBorder);
-        effects->reserveElectricBorder(electricBorder, this);
-    }
-
-    m_border->setBorders(activateBorders);
+    m_border->setBorders(m_borderActivate);
 }
 
 int MobileTaskSwitcherEffect::requestedEffectChainPosition() const
