@@ -1,4 +1,4 @@
-# Translation of kcm_mobile_powermanagement to Norwegian Nynorsk
+# Translation of kcm_mobile_power to Norwegian Nynorsk
 #
 msgid ""
 msgstr ""
