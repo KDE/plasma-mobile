@@ -1,0 +1,63 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"PO-Revision-Date: 2024-04-22 17:46+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:44
+msgid "Layout changes have been restricted by the system administrator"
+msgstr "Izkārtojuma izmaiņas ir ierobežojis sistēmas administrators"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:59
+msgid "General"
+msgstr "Pamata"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:66
+msgid "Homescreen Layout"
+msgstr "Māju ekrāna izkārtojums"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:67
+msgid "The homescreen layout to use."
+msgstr "Izmantojamais māju ekrāna izkārtojums."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:93
+msgid "Wallpaper Plugin"
+msgstr "Ekrāntapetes spraudnis"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:94
+msgid "The wallpaper plugin to use."
+msgstr "Izmantojamais ekrāntapetes spraudnis."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:129
+msgid "Wallpaper Plugins"
+msgstr "Ekrāntapetes spraudnis"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:134
+msgid "Get New Plugins…"
+msgstr "Iegūt jaunus spraudņus..."
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:148
+msgid "Layout changes must be applied before other changes can be made"
+msgstr "Izkārtojuma izmaiņas ir jāpiemēro pirms ir piemērotas citas izmaiņas"
+
+#: contents/configuration/ConfigurationContainmentAppearance.qml:154
+msgid "Apply now"
+msgstr "Pielietot tagad"
+
+#: contents/configuration/ContainmentConfiguration.qml:34
+msgid "Wallpaper"
+msgstr "Ekrāntapete"

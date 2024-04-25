@@ -1,0 +1,39 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"PO-Revision-Date: 2024-04-22 17:32+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
+"Language: lv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
+"2);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: package/contents/ui/main.qml:11
+#, kde-format
+msgid "Screenshot"
+msgstr "Ekrānattēls"
+
+#: package/contents/ui/main.qml:12
+#, kde-format
+msgid "Tap to screenshot"
+msgstr "Spiediet, lai uzņemtu ekrānattēlu"
+
+#: screenshotutil.cpp:139
+#, kde-format
+msgid "New Screenshot"
+msgstr "Jauns ekrānattēls"
+
+#: screenshotutil.cpp:141
+#, kde-format
+msgid "New screenshot saved to %1"
+msgstr "Jaunais ekrānattēls ir saglabāts „%1“"
