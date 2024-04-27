@@ -17,7 +17,7 @@ Kirigami.Icon {
 
     // data
 
-    readonly property string icon: connectionIconProvider.connectionIcon
+    readonly property string icon: wirelessStatus.hotspotSSID.length !== 0 ? "network-wireless-hotspot" : connectionIconProvider.connectionIcon
     readonly property bool indicatorRunning: connectionIconProvider.connecting
 
     readonly property var networkStatus: PlasmaNM.NetworkStatus {

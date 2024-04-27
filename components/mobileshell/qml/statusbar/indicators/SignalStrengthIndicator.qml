@@ -35,7 +35,7 @@ Item {
         source: MobileShell.SignalStrengthInfo.icon
         
         // don't show mobile indicator icon if the networkmanager one is already showing
-        visible: !isInternetIndicatorMobileData && MobileShell.SignalStrengthInfo.showIndicator
+        visible: (!isInternetIndicatorMobileData || wirelessStatus.hotspotSSID.length !== 0) && MobileShell.SignalStrengthInfo.showIndicator
     }
     
     PlasmaComponents.Label {
