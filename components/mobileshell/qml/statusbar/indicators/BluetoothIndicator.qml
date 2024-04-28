@@ -15,7 +15,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 Kirigami.Icon {
     id: connectionIcon
     
-    source: "network-bluetooth"
+    source: MobileShell.BluetoothInfo.icon
 
     visible: MobileShell.BluetoothInfo.isVisible
 }

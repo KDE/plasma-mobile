@@ -15,7 +15,7 @@ import org.kde.bluezqt 1.0 as BluezQt
 QtObject {
     id: root
     readonly property bool isVisible: BluezQt.Manager.bluetoothOperational
-    readonly property string icon: deviceConnected ? "preferences-system-bluetooth-activated" : "preferences-system-bluetooth"
+    readonly property string icon: deviceConnected ? "network-bluetooth-activated" : "network-bluetooth"
     
     property bool deviceConnected: false
     
