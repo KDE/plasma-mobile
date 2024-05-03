@@ -32,6 +32,10 @@ Kirigami.Icon {
         id: handler
     }
 
+    readonly property var wirelessStatus: PlasmaNM.WirelessStatus {
+        id: wirelessStatus
+    }
+
     readonly property var connectionIcon: PlasmaNM.ConnectionIcon {
         id: connectionIconProvider
     }
