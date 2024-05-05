@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@server23.cc>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "mobiletaskswitchereffect.h"
@@ -10,29 +11,202 @@
 #include <QKeyEvent>
 #include <QMetaObject>
 #include <QQuickItem>
+#include <window.h>
 
 using namespace std::chrono_literals;
 
 namespace KWin
 {
 
+MobileTaskSwitcherState::MobileTaskSwitcherState(EffectTouchBorderState *effectState)
+    : m_effectState{effectState}
+{
+    connect(m_effectState, &EffectTouchBorderState::inProgressChanged, this, &MobileTaskSwitcherState::gestureInProgressChanged);
+}
+
+bool MobileTaskSwitcherState::gestureInProgress() const
+{
+    return m_effectState->inProgress();
+}
+
+void MobileTaskSwitcherState::setGestureInProgress(bool gestureInProgress)
+{
+    if (m_status == Status::Stopped) {
+        return;
+    }
+    m_effectState->setInProgress(gestureInProgress);
+}
+
+bool MobileTaskSwitcherState::wasInActiveTask() const
+{
+    return m_wasInActiveTask;
+}
+
+void MobileTaskSwitcherState::setWasInActiveTask(bool wasInActiveTask)
+{
+    if (m_wasInActiveTask != wasInActiveTask) {
+        m_wasInActiveTask = wasInActiveTask;
+        Q_EMIT wasInActiveTaskChanged();
+    }
+}
+
+void MobileTaskSwitcherState::updateWasInActiveTask(KWin::Window *window)
+{
+    bool newWasInActiveTask = false;
+    if (window) {
+        newWasInActiveTask = !window->isDesktop();
+    }
+    setWasInActiveTask(newWasInActiveTask);
+}
+
+qreal MobileTaskSwitcherState::touchXPosition() const
+{
+    return m_touchXPosition;
+}
+
+qreal MobileTaskSwitcherState::touchYPosition() const
+{
+    return m_touchYPosition;
+}
+
+qreal MobileTaskSwitcherState::xVelocity() const
+{
+    return m_xVelocity;
+}
+
+qreal MobileTaskSwitcherState::yVelocity() const
+{
+    return m_yVelocity;
+}
+
+qreal MobileTaskSwitcherState::totalSquaredVelocity() const
+{
+    return m_totalSquaredVelocity;
+}
+
+qreal MobileTaskSwitcherState::flickVelocityThreshold() const
+{
+    return m_flickVelocityThreshold;
+}
+
+void MobileTaskSwitcherState::setFlickVelocityThreshold(qreal flickVelocityThreshold)
+{
+    if (m_flickVelocityThreshold != flickVelocityThreshold) {
+        m_flickVelocityThreshold = flickVelocityThreshold;
+        Q_EMIT flickVelocityThresholdChanged();
+    }
+}
+
+qreal MobileTaskSwitcherState::xPosition() const
+{
+    return m_xPosition;
+}
+
+void MobileTaskSwitcherState::setXPosition(qreal xPosition)
+{
+    if (m_xPosition != xPosition) {
+        m_xPosition = xPosition;
+        Q_EMIT xPositionChanged();
+    }
+}
+
+qreal MobileTaskSwitcherState::yPosition() const
+{
+    return m_yPosition;
+}
+
+void MobileTaskSwitcherState::setYPosition(qreal yPosition)
+{
+    if (m_yPosition != yPosition) {
+        m_yPosition = yPosition;
+        Q_EMIT yPositionChanged();
+    }
+}
+
+void MobileTaskSwitcherState::setStatus(Status status)
+{
+    if (m_status != status) {
+        if (status == Status::Inactive) {
+            setYPosition(0);
+        }
+        m_status = status;
+        Q_EMIT statusChanged();
+    }
+}
+
+void MobileTaskSwitcherState::setCurrentTaskIndex(int newTaskIndex)
+{
+    if (m_currentTaskIndex != newTaskIndex) {
+        m_currentTaskIndex = newTaskIndex;
+        Q_EMIT currentTaskIndexChanged();
+    }
+}
+
+void MobileTaskSwitcherState::setInitialTaskIndex(int newTaskIndex)
+{
+    if (m_initialTaskIndex != newTaskIndex) {
+        m_initialTaskIndex = newTaskIndex;
+        Q_EMIT initialTaskIndexChanged();
+    }
+}
+
+void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qreal orthogonalDelta)
+{
+    static qreal prevPrimaryDelta = 0;
+    static qreal prevOrthogonalDelta = 0;
+
+    qint64 frameTime = 0;
+    if (!m_frameTimer.isValid()) {
+        prevPrimaryDelta = 0;
+        prevOrthogonalDelta = 0;
+        m_frameTimer.start();
+        return;
+    }
+    frameTime = m_frameTimer.restart();
+    if (frameTime == 0) {
+        // Skip because otherwise we get NaN later on. Not sure why this triggers as often as it does
+        return;
+    }
+
+    qreal framePrimaryDelta = primaryDelta - prevPrimaryDelta;
+    qreal frameOrthogonalDelta = orthogonalDelta - prevOrthogonalDelta;
+    prevPrimaryDelta = primaryDelta;
+    prevOrthogonalDelta = orthogonalDelta;
+
+    // Implements an exponentially weighted moving average (EWMA) filter (= exponential smoothing)
+    // Smoothing factor is approximated each event to achieve a chosen filter time constant
+    qreal smoothingFactor = std::min(frameTime / (1000 * m_filterTimeConstant), 0.8);
+    m_yVelocity = m_yVelocity + smoothingFactor * (framePrimaryDelta / frameTime - m_yVelocity);
+    m_xVelocity = m_xVelocity + smoothingFactor * (frameOrthogonalDelta / frameTime - m_xVelocity);
+    m_totalSquaredVelocity = m_yVelocity * m_yVelocity + m_xVelocity * m_xVelocity;
+    Q_EMIT velocityChanged();
+}
+
+void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qreal orthogonalDelta)
+{
+    calculateFilteredVelocity(primaryDelta, orthogonalDelta);
+    m_touchXPosition = orthogonalDelta;
+    m_touchYPosition = primaryDelta;
+    Q_EMIT touchPositionChanged();
+}
+
 MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
-    : m_taskSwitcherState{new EffectTogglableState(this)}
-    , m_border{new EffectTogglableTouchBorder{m_taskSwitcherState}}
+    : m_effectState{new EffectTouchBorderState(this)}
+    , m_taskSwitcherState{new MobileTaskSwitcherState(m_effectState)}
+    , m_border{new EffectTouchBorder{m_effectState}}
+    , m_toggleAction{std::make_unique<QAction>()}
     , m_shutdownTimer{new QTimer{this}}
 {
-    auto gesture = new EffectTogglableGesture{m_taskSwitcherState};
-    gesture->addTouchscreenSwipeGesture(SwipeDirection::Up, 3);
+    const char *uri = "org.kde.private.mobileshell.taskswitcher";
+    qmlRegisterSingletonType<MobileTaskSwitcherState>(uri, 1, 0, "TaskSwitcherState", [this](QQmlEngine *, QJSEngine *) -> QObject * {
+        return this->m_taskSwitcherState;
+    });
 
-    connect(m_taskSwitcherState, &EffectTogglableState::inProgressChanged, this, &MobileTaskSwitcherEffect::gestureInProgressChanged);
-    connect(m_taskSwitcherState, &EffectTogglableState::partialActivationFactorChanged, this, &MobileTaskSwitcherEffect::partialActivationFactorChanged);
-    connect(m_taskSwitcherState, &EffectTogglableState::statusChanged, this, [this](EffectTogglableState::Status status) {
-        if (status == EffectTogglableState::Status::Activating || status == EffectTogglableState::Status::Active) {
-            setRunning(true);
-            setDBusState(true);
-        }
-        if (status == EffectTogglableState::Status::Inactive) {
-            deactivate(true);
+    connect(m_border, &EffectTouchBorder::touchPositionChanged, m_taskSwitcherState, &MobileTaskSwitcherState::processTouchPositionChanged);
+
+    connect(m_taskSwitcherState, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
+        if (m_taskSwitcherState->gestureInProgress()) {
+            invokeEffect();
         }
     });
 
@@ -43,11 +217,11 @@ MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
     // toggle action
     const QKeySequence defaultToggleShortcut = Qt::META | Qt::Key_C;
 
-    auto toggleAction = m_taskSwitcherState->toggleAction();
-    toggleAction->setObjectName(QStringLiteral("Mobile Task Switcher"));
-    toggleAction->setText(i18n("Toggle Mobile Task Switcher"));
-    KGlobalAccel::self()->setDefaultShortcut(toggleAction, {defaultToggleShortcut});
-    KGlobalAccel::self()->setShortcut(toggleAction, {defaultToggleShortcut});
+    m_toggleAction.get()->setObjectName(QStringLiteral("Mobile Task Switcher"));
+    m_toggleAction.get()->setText(i18n("Toggle Mobile Task Switcher"));
+    KGlobalAccel::self()->setDefaultShortcut(m_toggleAction.get(), {defaultToggleShortcut});
+    KGlobalAccel::self()->setShortcut(m_toggleAction.get(), {defaultToggleShortcut});
+    connect(m_toggleAction.get(), &QAction::triggered, this, &MobileTaskSwitcherEffect::toggle);
 
     connect(effects, &EffectsHandler::screenAboutToLock, this, &MobileTaskSwitcherEffect::realDeactivate);
 
@@ -102,7 +276,8 @@ void MobileTaskSwitcherEffect::activate()
         return;
     }
 
-    m_taskSwitcherState->activate();
+    m_effectState->setInProgress(false);
+    invokeEffect();
 }
 
 void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
@@ -118,11 +293,10 @@ void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
 
 void MobileTaskSwitcherEffect::realDeactivate()
 {
-    m_taskSwitcherState->deactivate();
-    if (m_taskSwitcherState->status() == EffectTogglableState::Status::Inactive) {
-        setRunning(false);
-        setDBusState(false);
-    }
+    m_effectState->setInProgress(false);
+    m_taskSwitcherState->setStatus(MobileTaskSwitcherState::Status::Inactive);
+    setRunning(false);
+    setDBusState(false);
 }
 
 void MobileTaskSwitcherEffect::quickDeactivate()
@@ -143,16 +317,6 @@ void MobileTaskSwitcherEffect::setAnimationDuration(int duration)
     }
 }
 
-bool MobileTaskSwitcherEffect::gestureInProgress() const
-{
-    return m_taskSwitcherState->inProgress();
-}
-
-qreal MobileTaskSwitcherEffect::partialActivationFactor() const
-{
-    return m_taskSwitcherState->partialActivationFactor();
-}
-
 void MobileTaskSwitcherEffect::setDBusState(bool active)
 {
     QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.kde.plasmashell"),
@@ -163,5 +327,13 @@ void MobileTaskSwitcherEffect::setDBusState(bool active)
 
     // this does not block, so it won't necessarily be called before the method returns
     QDBusConnection::sessionBus().send(request);
+}
+
+void MobileTaskSwitcherEffect::invokeEffect()
+{
+    m_taskSwitcherState->setInitialTaskIndex(
+        m_taskSwitcherState->currentTaskIndex()); // TODO! this is only until the crashing bug is fixed and recency sorting is in
+    setRunning(true);
+    setDBusState(true);
 }
 }

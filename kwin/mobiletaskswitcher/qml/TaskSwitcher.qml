@@ -11,10 +11,12 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.private.mobileshell.taskswitcher 1.0 as TaskSwitcherData
 
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.kwin.private.effects 1.0
 import org.kde.kitemmodels
+
 
 /**
  * Component that provides a task switcher.
@@ -24,6 +26,7 @@ FocusScope {
     focus: true
 
     readonly property QtObject effect: KWinComponents.SceneView.effect
+    readonly property TaskSwitcherData.TaskSwitcherState state: TaskSwitcherData.TaskSwitcherState
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
     readonly property real topMargin: MobileShell.Constants.topPanelHeight
@@ -31,8 +34,9 @@ FocusScope {
     readonly property real leftMargin: 0
     readonly property real rightMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0
 
-    property var taskSwitcherState: TaskSwitcherState {
+    property var taskSwitcherHelpers: TaskSwitcherHelpers {
         taskSwitcher: root
+        stateClass: TaskSwitcherData.TaskSwitcherState
     }
 
     KWinComponents.WindowModel {
@@ -57,10 +61,9 @@ FocusScope {
 
     property var tasksModel: KSortFilterProxyModel {
         sourceModel: baseTasksModel
-        filterRoleName: 'skipSwitcher'
+        filterRoleName: 'window'
         filterRowCallback: function(source_row, source_parent) {
             const window = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Qt.DisplayRole);
-            // ensure apps marked to skip the task switcher are skipped (ex. xwaylandvideobridge)
             return !window.skipSwitcher;
         }
     }
@@ -72,9 +75,9 @@ FocusScope {
     onTasksCountChanged: {
         if (tasksCount === 0 && oldTasksCount !== 0) {
             hide();
-        } else if (tasksCount < oldTasksCount && taskSwitcherState.currentTaskIndex >= tasksCount - 1) {
+        } else if (tasksCount < oldTasksCount && state.currentTaskIndex >= tasksCount) {
             // if the user is on the last task, and it is closed, scroll left
-            taskSwitcherState.animateGoToTaskIndex(tasksCount - 1, Kirigami.Units.longDuration);
+            taskSwitcherHelpers.animateGoToTaskIndex(tasksCount - 1, Kirigami.Units.longDuration);
         }
 
         oldTasksCount = tasksCount;
@@ -83,12 +86,21 @@ FocusScope {
     Keys.onEscapePressed: hide();
 
     Component.onCompleted: {
-        taskList.jumpToFirstVisibleWindow();
+        state.updateWasInActiveTask(KWinComponents.Workspace.activeWindow);
+
+        // task index from last time using the switcher
+        state.initialTaskIndex = Math.min(state.currentTaskIndex, tasksCount - 1);
+        if (state.wasInActiveTask) {
+            // if we were in an active task instead set initial task index to the position of that task
+            state.initialTaskIndex = taskSwitcherHelpers.getTaskIndexFromWindow(KWinComponents.Workspace.activeWindow);
+        }
+
+        taskSwitcherHelpers.goToTaskIndex(state.initialTaskIndex);
         taskList.minimizeAll();
 
-        // fully open the panel (if this is a button press, not gesture)
-        if (!root.effect.gestureInProgress) {
-            taskSwitcherState.open();
+        // fully open the switcher (if this is a button press, not gesture)
+        if (!root.state.gestureInProgress) {
+            taskSwitcherHelpers.open();
         }
     }
 
@@ -105,23 +117,137 @@ FocusScope {
         root.effect.deactivate(false);
     }
 
-    // scroll to delegate index, and activate it
-    function activateWindow(index, window) {
-        KWinComponents.Workspace.activeWindow = window;
-        taskSwitcherState.openApp(index, window);
-    }
-
     Connections {
-        target: root.effect
+        target: root.state
 
-        function onPartialActivationFactorChanged() {
-            taskSwitcherState.yPosition = taskSwitcherState.openedYPosition * root.effect.partialActivationFactor;
+        // task scrub mode allows scrubbing through a number of tasks with a mostly horizontal motion
+        function taskScrubMode() {
+            if (!taskSwitcherHelpers.isInTaskScrubMode) {
+                taskSwitcherHelpers.isInTaskScrubMode = true;
+                taskSwitcherHelpers.cancelAnimations();
+                taskSwitcherHelpers.open();
+            }
+            let newTaskIndex = Math.max(0, Math.min(tasksCount - 1, Math.floor(state.touchXPosition / taskSwitcherHelpers.taskScrubDistance) + state.initialTaskIndex));
+            if (newTaskIndex != state.currentTaskIndex) {
+                taskSwitcherHelpers.animateGoToTaskIndex(newTaskIndex);
+            }
         }
 
-        function onGestureInProgressChanged() {
-            if (!root.effect.gestureInProgress) {
-                taskSwitcherState.updateState();
+        function onTouchPositionChanged() {
+            if (taskSwitcherHelpers.isInTaskScrubMode || // once in scrub mode, let's not allow to go out, that can result in inconsistent UX
+                (Math.abs(state.xVelocity) > Math.abs(state.yVelocity) * 3 && // gesture needs to be almost completely horizontal
+                 Math.abs(state.xVelocity) < 2.5 && // and not with a fast flick TODO! evaluate whether to keep this, it's kinda awkward
+                 Math.abs(state.touchXPosition) > taskSwitcherHelpers.taskScrubDistance * 0.95 && // and have moved far enough sideways
+                 state.yPosition < taskSwitcherHelpers.undoYThreshold && // and be close to the screen edge
+                 tasksCount > 1 // and there needs to be more than one task open
+                )) {
+                taskScrubMode();
+            } else {
+                if (state.status == TaskSwitcherData.TaskSwitcherState.Active) {
+                    // task switcher is already open
+                    // TODO add some sort of feedback for dismissing task switcher (maybe opacity reduction?)
+                    return;
+                }
+                state.yPosition = Math.abs(state.touchYPosition);
+                state.xPosition = taskSwitcherHelpers.xPositionFromTaskIndex(state.initialTaskIndex) - state.touchXPosition;
             }
+        }
+
+        // actions on an upwards flick
+        function upwardsFlick() {
+            if (state.wasInActiveTask) {
+                // go to homescreen if we were in an active task
+                taskSwitcherHelpers.close();
+            } else {
+                // or normally open task switcher if we were on the homescreen already
+                taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
+                taskSwitcherHelpers.open();
+            }
+        }
+
+        // returns to the currently centered app. usually used to "back out" of the switcher
+        // if accidentally invoked, but can also be used to switch to an adjacent app and then open it
+        function returnToApp() {
+            let newIndex = taskSwitcherHelpers.getNearestTaskIndex();
+            let appAtNewIndex = taskList.getTaskAt(newIndex).window;
+            taskSwitcherHelpers.openApp(newIndex, appAtNewIndex);
+        }
+
+        // diagonal quick switch gesture logic
+        function quickSwitch() {
+            // should "quick switch" to adjacent app in task switcher, but only if we were in an app before
+            let newIndex = state.currentTaskIndex;
+            let shouldSwitch = false;
+            if (state.xVelocity > 0 && state.wasInActiveTask) {
+                // flick to the right, go to app to the left
+                newIndex = state.currentTaskIndex + 1, tasksCount - 1;
+                if (newIndex < tasksCount) {
+                    // switch only if flick doesn't go over end of list
+                    shouldSwitch = true;
+                }
+            } else if (state.xVelocity < 0 && state.wasInActiveTask) {
+                newIndex = Math.max(state.currentTaskIndex - 1, 0);
+                if (newIndex >= 0) {
+                    // switch only if flick doesn't go over end of list
+                    shouldSwitch = true;
+                }
+            }
+            if (shouldSwitch) {
+                let appAtNewIndex = taskList.getTaskAt(newIndex).window;
+                taskSwitcherHelpers.openApp(newIndex, appAtNewIndex);
+            } else {
+                // if not switching, just open task switcher
+                taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
+                taskSwitcherHelpers.open();
+            }
+        }
+
+        // Logic for deciding how to handle the end of a gesture input
+        function onGestureInProgressChanged() {
+            if (state.gestureInProgress) {
+                return;
+            }
+
+            if (state.status == TaskSwitcherData.TaskSwitcherState.Active) {
+                if (taskSwitcherHelpers.isInTaskScrubMode) {
+                    // TODO! do we want to handle upwards flick to dismiss in task scrub mode?
+                    // TODO do we want to show a list of thumbnails in task scrub mode?
+                    taskSwitcherHelpers.openApp(state.currentTaskIndex, taskList.getTaskAt(state.currentTaskIndex).window);
+                } else if (state.yPosition > taskSwitcherHelpers.undoYThreshold) {
+                    // close task switcher if it was already open but only if swipe was higher than the undo threshold
+                    taskSwitcherHelpers.close();
+                    return;
+                }
+            } else if (state.status == TaskSwitcherData.TaskSwitcherState.Inactive) {
+                if (state.totalSquaredVelocity > state.flickVelocityThreshold) {
+                    // flick
+                    // ratio between y and x velocity as threshold between vertical and horizontal flick
+                    let xyVelocityRatio = 1.7; // with 1.7 swipes up to ~60° from horizontal are counted as horizontal
+                    if (-state.yVelocity > Math.abs(state.xVelocity) * xyVelocityRatio) {
+                        upwardsFlick();
+                    } else if (state.yVelocity > Math.abs(state.xVelocity) * xyVelocityRatio) {
+                        // downwards flick
+                        returnToApp();
+                    } else {
+                        // sideways flick
+                        quickSwitch();
+                    }
+                } else {
+                    // no flick
+                    if (state.yPosition > taskSwitcherHelpers.undoYThreshold) {
+                        // normal task switcher open
+                        taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
+                        taskSwitcherHelpers.open();
+                    } else {
+                        // no flick and not enough activation to go to task switcher
+                        returnToApp();
+                    }
+                }
+            }
+        }
+
+        function onXPositionChanged() {
+            taskSwitcherHelpers.updateTaskIndex();
         }
     }
 
@@ -141,10 +267,10 @@ FocusScope {
         opacity: container.opacity
         color: {
             // animate background colour only if we are *not* opening from the homescreen
-            if (taskSwitcherState.wasInActiveTask || !taskSwitcherState.currentlyBeingOpened) {
+            if (state.wasInActiveTask || !state.currentlyBeingOpened) {
                 return Qt.rgba(0, 0, 0, 0.6);
             } else {
-                return Qt.rgba(0, 0, 0, 0.6 * Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition));
+                return Qt.rgba(0, 0, 0, 0.6 * Math.min(1, state.yPosition / state.openedYPosition));
             }
         }
     }
@@ -183,8 +309,8 @@ FocusScope {
                 if (taskList.count === 0) {
                     root.hide();
                 } else {
-                    const currentIndex = taskSwitcherState.currentTaskIndex;
-                    taskSwitcherState.openApp(taskSwitcherState.currentTaskIndex, taskList.getTaskAt(currentIndex).window);
+                    const currentIndex = state.currentTaskIndex;
+                    taskSwitcherHelpers.openApp(state.currentTaskIndex, taskList.getTaskAt(currentIndex).window);
                 }
             }
         }
@@ -204,7 +330,7 @@ FocusScope {
             iconSizeFactor: 0.75
 
             onTriggered: {
-                taskList.getTaskAt(taskSwitcherState.currentTaskIndex).closeApp();
+                taskList.getTaskAt(state.currentTaskIndex).closeApp();
             }
         }
 
@@ -278,7 +404,7 @@ FocusScope {
         ColumnLayout {
             id: placeholder
             spacing: Kirigami.Units.gridUnit
-            opacity: (root.tasksCount === 0 && !taskSwitcherState.currentlyBeingClosed) ? 0.9 : 0
+            opacity: (root.tasksCount === 0 && !taskSwitcherHelpers.currentlyBeingClosed) ? 0.9 : 0
             Behavior on opacity { NumberAnimation { duration: 500 } }
 
             anchors.centerIn: parent
@@ -309,7 +435,8 @@ FocusScope {
             id: flickable
             anchors.fill: parent
 
-            taskSwitcherState: root.taskSwitcherState
+            taskSwitcherState: root.state
+            taskSwitcherHelpers: root.taskSwitcherHelpers
 
             // don't allow FlickContainer to steal from swiping on tasks
             interactive: taskList.taskInteractingCount === 0
@@ -323,10 +450,11 @@ FocusScope {
 
                 opacity: {
                     // animate opacity only if we are *not* opening from the homescreen
-                    if (taskSwitcherState.wasInActiveTask || !taskSwitcherState.currentlyBeingOpened) {
+                    // TODO! do we really not want to animate it always? it's a bit harsh to look at when opening from homescreen
+                    if (state.wasInActiveTask || !state.currentlyBeingOpened) {
                         return 1;
                     } else {
-                        return Math.min(1, taskSwitcherState.yPosition / taskSwitcherState.openedYPosition);
+                        return Math.min(1, state.yPosition / state.openedYPosition);
                     }
                 }
 
@@ -337,18 +465,18 @@ FocusScope {
                 PlasmaComponents.ToolButton {
                     id: closeAllButton
                     property bool closeRequested: false
-                    visible: root.tasksCount !== 0
+                    visible: root.tasksCount !== 0 && !taskSwitcherHelpers.isInTaskScrubMode
 
                     anchors {
                         bottom: parent.bottom
-                        bottomMargin: taskList.taskY / 2
+                        bottomMargin: (taskList.taskY + taskList.trackFingerYOffset) / 2
                         horizontalCenter: parent.horizontalCenter
                     }
 
                     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                     Kirigami.Theme.inherit: false
 
-                    opacity: (taskSwitcherState.currentlyBeingOpened || taskSwitcherState.currentlyBeingClosed) ? 0.0 : 1.0
+                    opacity: (taskSwitcherHelpers.currentlyBeingClosed) ? 0.0 : 1.0
                     Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
 
                     icon.name: "edit-clear-history"

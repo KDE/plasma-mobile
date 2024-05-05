@@ -17,7 +17,8 @@ MouseArea {
     required property real shellBottomMargin
 
     required property var taskSwitcher
-    readonly property var taskSwitcherState: taskSwitcher.taskSwitcherState
+    readonly property var taskSwitcherState: taskSwitcher.state
+    readonly property var taskSwitcherHelpers: taskSwitcher.taskSwitcherHelpers
 
     property int taskInteractingCount: 0
 
@@ -27,41 +28,39 @@ MouseArea {
         let footerHeight = shellBottomMargin;
         let diff = headerHeight - footerHeight;
 
-        let baseY = (taskSwitcher.height / 2) - (taskSwitcherState.taskHeight / 2) - (taskSwitcherState.taskHeaderHeight / 2)
+        let baseY = (taskSwitcher.height / 2) - (taskSwitcherHelpers.taskHeight / 2) - (taskSwitcherHelpers.taskHeaderHeight / 2);
 
-        return baseY + diff / 2 - shellTopMargin;
+        return baseY + diff / 2 - shellTopMargin - trackFingerYOffset;
     }
+    readonly property real trackFingerYOffset: taskSwitcherHelpers.isScaleClamped ? taskSwitcherState.yPosition - taskSwitcherHelpers.openedYPosition : 0
 
     function getTaskAt(index) {
         return repeater.itemAt(index);
     }
 
     function closeAll() {
-        for (var i = 0; i < repeater.count; i++) {
+        for (let i = 0; i < repeater.count; i++) {
             repeater.itemAt(i).closeApp();
         }
     }
 
     function minimizeAll() {
-        for (var i = 0; i < repeater.count; i++) {
+        for (let i = 0; i < repeater.count; i++) {
             let item = repeater.itemAt(i);
 
-            // update property
+            // minimize window
             if (!item.window.minimized) {
-                taskSwitcherState.wasInActiveTask = true;
+                item.minimizeApp();
             }
-
-            // minimize window immediately if it shows up
-            item.minimizeApp();
         }
     }
 
     function jumpToFirstVisibleWindow() {
-        for (var i = 0; i < repeater.count; i++) {
+        for (let i = 0; i < repeater.count; i++) {
             let item = repeater.itemAt(i);
 
             if (!item.window.minimized) {
-                taskSwitcherState.goToTaskIndex(i);
+                taskSwitcherHelpers.goToTaskIndex(i);
                 break;
             }
         }
@@ -70,8 +69,8 @@ MouseArea {
     transform: Scale {
         origin.x: root.width / 2
         origin.y: root.height / 2
-        xScale: taskSwitcherState.currentScale
-        yScale: taskSwitcherState.currentScale
+        xScale: taskSwitcherHelpers.currentScale
+        yScale: taskSwitcherHelpers.currentScale
     }
 
     onClicked: {
@@ -82,7 +81,7 @@ MouseArea {
     onPressedChanged: {
         if (!taskSwitcherState.currentlyBeingOpened && pressed) {
             // ensure animations aren't running when finger is pressed
-            taskSwitcherState.cancelAnimations();
+            taskSwitcherHelpers.cancelAnimations();
         }
     }
 
@@ -91,14 +90,14 @@ MouseArea {
         model: taskSwitcher.tasksModel
 
         // left margin from root edge such that the task is centered
-        readonly property real leftMargin: (root.width / 2) - (taskSwitcherState.taskWidth / 2)
+        readonly property real leftMargin: (root.width / 2) - (taskSwitcherHelpers.taskWidth / 2)
 
         delegate: Task {
             id: task
             readonly property int currentIndex: model.index
 
             // this is the x-position with respect to the list
-            property real listX: taskSwitcherState.xPositionFromTaskIndex(currentIndex);
+            property real listX: taskSwitcherHelpers.xPositionFromTaskIndex(currentIndex);
             Behavior on listX {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
@@ -114,11 +113,11 @@ MouseArea {
             z: taskSwitcherState.currentTaskIndex === currentIndex ? 1 : 0
 
             // only show header once task switcher is opened
-            showHeader: !taskSwitcherState.currentlyBeingOpened
+            showHeader: !taskSwitcherState.gestureInProgress && !taskSwitcherHelpers.currentlyBeingClosed && !taskSwitcherHelpers.isInTaskScrubMode
 
             // darken effect as task gets away from the centre of the screen
             darken: {
-                const distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherState.taskWidth;
+                const distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherHelpers.taskWidth;
                 const upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;
                 return Math.max(0, upperBoundAdjust);
             }
@@ -129,10 +128,10 @@ MouseArea {
                 taskInteractingCount = Math.max(0, taskInteractingCount + offset);
             }
 
-            width: taskSwitcherState.taskWidth
-            height: taskSwitcherState.taskHeight
-            previewWidth: taskSwitcherState.previewWidth
-            previewHeight: taskSwitcherState.previewHeight
+            width: taskSwitcherHelpers.taskWidth
+            height: taskSwitcherHelpers.taskHeight
+            previewWidth: taskSwitcherHelpers.previewWidth
+            previewHeight: taskSwitcherHelpers.previewHeight
 
             taskSwitcher: root.taskSwitcher
         }

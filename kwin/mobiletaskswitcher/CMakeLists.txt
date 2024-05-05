@@ -5,7 +5,10 @@ kcoreaddons_add_plugin(mobiletaskswitcher INSTALL_NAMESPACE "kwin/effects/plugin
 target_sources(mobiletaskswitcher PRIVATE
     main.cpp
     mobiletaskswitchereffect.cpp
+    effecttouchborder.cpp
 )
+
+target_compile_definitions(mobiletaskswitcher PRIVATE QT_QML_DEBUG)
 
 target_link_libraries(mobiletaskswitcher
     KF6::ConfigGui

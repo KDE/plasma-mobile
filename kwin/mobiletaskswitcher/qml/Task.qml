@@ -43,9 +43,7 @@ Item {
     }
 
     function activateApp() {
-        taskSwitcherState.wasInActiveTask = false;
-        taskSwitcher.activateWindow(model.index, delegate.window);
-        delegate.window.setMaximize(true, true);
+        taskSwitcherHelpers.openApp(model.index, delegate.window);
     }
 
     function minimizeApp() {
@@ -192,16 +190,17 @@ Item {
             // app preview
             Rectangle {
                 id: appView
-                Layout.preferredWidth: delegate.previewWidth
-                Layout.preferredHeight: delegate.previewHeight
-                Layout.maximumWidth: delegate.previewWidth
-                Layout.maximumHeight: delegate.previewHeight
+                Layout.preferredWidth: taskSwitcherHelpers.previewWidth
+                Layout.preferredHeight: taskSwitcherHelpers.previewHeight
+                Layout.maximumWidth: taskSwitcherHelpers.previewWidth
+                Layout.maximumHeight: taskSwitcherHelpers.previewHeight
 
-                color: "transparent"
+                radius: Kirigami.Units.largeSpacing
+                color: Qt.rgba(0, 0, 0, 0.2)
                 clip: true
 
                 // scale animation on press
-                property real zoomScale: control.pressed ? 0.9 : 1
+                property real zoomScale: control.pressed ? 0.95 : 1
                 Behavior on zoomScale {
                     NumberAnimation {
                         duration: 200
