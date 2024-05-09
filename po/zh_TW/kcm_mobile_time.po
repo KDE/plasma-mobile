@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:39+0000\n"
-"PO-Revision-Date: 2024-05-05 17:34+0900\n"
+"PO-Revision-Date: 2024-05-08 13:15+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -897,7 +897,7 @@ msgstr "加薩"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Gibraltar"
-msgstr ""
+msgstr "直布羅陀"
 
 #: timezonesi18n.cpp:187
 #, kde-format
@@ -927,7 +927,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Grenada"
-msgstr ""
+msgstr "格瑞那達"
 
 #: timezonesi18n.cpp:192
 #, kde-format
@@ -969,7 +969,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Guyana"
-msgstr ""
+msgstr "蓋亞那"
 
 #: timezonesi18n.cpp:199
 #, kde-format
@@ -1611,7 +1611,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Midway"
-msgstr ""
+msgstr "中途島"
 
 #: timezonesi18n.cpp:306
 #, kde-format
@@ -2067,7 +2067,7 @@ msgstr ""
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Rome"
-msgstr ""
+msgstr "羅馬"
 
 #: timezonesi18n.cpp:382
 #, kde-format
