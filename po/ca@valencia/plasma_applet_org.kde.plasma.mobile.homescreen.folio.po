@@ -175,7 +175,7 @@ msgstr "La disposició de la pantalla d'inici s'ha exportat correctament a %1"
 #: package/contents/ui/settings/SettingsWindow.qml:335
 #, kde-format
 msgid "Confirm Import"
-msgstr "Confirmació de la importació"
+msgstr "Confirmeu la importació"
 
 #: package/contents/ui/settings/SettingsWindow.qml:336
 #, kde-format

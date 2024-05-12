@@ -901,7 +901,7 @@ msgstr "PIN nou"
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr "Confirmació del PIN"
+msgstr "Confirmeu el PIN"
 
 #: ui/SimLockPage.qml:174
 #, kde-format

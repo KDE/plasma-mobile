@@ -43,8 +43,7 @@ msgstr "Animacions"
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
-"Si està desactivada, les animacions es reduiran tant com siga possible."
+msgstr "Si està marcada, les animacions es reduiran tant com siga possible."
 
 #: ui/main.qml:53
 #, kde-format
@@ -149,7 +148,7 @@ msgstr "Torna a activar les opcions ràpides desactivades prèviament."
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr "Si s'ha activat la vibració en l'intèrpret d'ordres."
+msgstr "Si s'ha marcat la vibració en l'intèrpret d'ordres."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
@@ -187,21 +186,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla per separat en el mòdul de configuració "
 "del teclat."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Intensitat de la vibració"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Quant intensa ha de ser la vibració en l'intèrpret d'ordres."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Baixa"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Mitjana"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
