@@ -31,7 +31,7 @@ QtObject {
     readonly property real openedYPosition: (taskSwitcher.height - taskHeight) / 2
 
     // yPosition threshold below which opening the task switcher should be undone and returned to the previously active task
-    readonly property real undoYThreshold: openedYPosition / 3
+    readonly property real undoYThreshold: openedYPosition / 2
 
     // ~~ measurement constants ~~
 
