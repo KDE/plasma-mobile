@@ -54,7 +54,6 @@ Flickable {
         if (dragging) {
             taskSwitcherHelpers.cancelAnimations();
         } else {
-            taskSwitcherHelpers.scrollingTasks = false;
             resetPosition();
         }
     }

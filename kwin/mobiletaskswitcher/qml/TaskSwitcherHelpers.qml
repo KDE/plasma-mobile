@@ -33,13 +33,6 @@ QtObject {
     // yPosition threshold below which opening the task switcher should be undone and returned to the previously active task
     readonly property real undoYThreshold: openedYPosition / 3
 
-    // ~~ active state ~~
-
-    // whether we are in a swipe left/right gesture to walk through tasks
-    property bool scrollingTasks: false
-    // TODO! we're not using this anymore and when I hooked it up again it just produced broken-looking visuals
-    // I don't even know what this was *supposed* to do in the past, so I don't know how to fix it. I'd just remove it altogether
-
     // ~~ measurement constants ~~
 
     // dimensions of a real window on the screen
@@ -81,10 +74,10 @@ QtObject {
         let finalScale = Math.min(maxScale, maxScale - subtract);
 
         // animate scale only if we are *not* opening from the homescreen
-        if ((root.state.wasInActiveTask || !root.state.gestureInProgress) && !scrollingTasks) {
+        if (root.state.wasInActiveTask || !root.state.gestureInProgress) {
             return finalScale;
         }
-        return scrollingTasks ? maxScale : 1;
+        return 1;
     }
     readonly property bool isScaleClamped: root.state.yPosition > openedYPosition
 
@@ -231,7 +224,6 @@ QtObject {
         easing.type: Easing.InOutQuad
         onFinished: {
             root.state.status = stateClass.Inactive;
-            scrollingTasks = false;
             taskSwitcher.instantHide();
         }
     }

@@ -8,8 +8,6 @@ target_sources(mobiletaskswitcher PRIVATE
     effecttouchborder.cpp
 )
 
-target_compile_definitions(mobiletaskswitcher PRIVATE QT_QML_DEBUG)
-
 target_link_libraries(mobiletaskswitcher
     KF6::ConfigGui
     KF6::GlobalAccel
