@@ -437,20 +437,20 @@ FocusScope {
 
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: taskSwitcherHelpers.openedYPosition * 3 / 4
+            anchors.bottomMargin: taskSwitcherHelpers.openedYPosition * 1 / 4
 
             Kirigami.Icon {
                 id: iconScrubBack
                 opacity: root.state.currentTaskIndex == 0 ? 0.3 : 1
                 Behavior on opacity { NumberAnimation { duration: 200} }
                 Layout.alignment: Qt.AlignHCenter
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
+                implicitWidth: Kirigami.Units.iconSizes.medium
+                implicitHeight: Kirigami.Units.iconSizes.medium
                 source: "draw-arrow-back"
                 color: "white"
             }
 
-            Kirigami.Heading {
+            /*Kirigami.Heading {
                 Layout.fillWidth: true
                 Layout.maximumWidth: root.width * 0.75
                 Layout.alignment: Qt.AlignHCenter
@@ -459,6 +459,9 @@ FocusScope {
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
                 text: i18n("Swipe")
+            }*/
+            Item {
+                width: taskSwitcherHelpers.windowWidth / 4
             }
 
             Kirigami.Icon {
@@ -466,8 +469,8 @@ FocusScope {
                 opacity: root.state.currentTaskIndex == tasksCount - 1 ? 0.3 : 1
                 Behavior on opacity { NumberAnimation { duration: 200} }
                 Layout.alignment: Qt.AlignHCenter
-                implicitWidth: Kirigami.Units.iconSizes.small
-                implicitHeight: Kirigami.Units.iconSizes.small
+                implicitWidth: Kirigami.Units.iconSizes.medium
+                implicitHeight: Kirigami.Units.iconSizes.medium
                 source: "draw-arrow-forward"
                 color: "white"
             }
