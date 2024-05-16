@@ -69,7 +69,7 @@
         "Description[tr]": "Plasma Cep gece rengi tez ayarı",
         "Description[uk]": "Швидке налаштовування нічних кольорів для Мобільної Плазми",
         "Description[x-test]": "xxNight color quick setting for Plasma Mobilexx",
-        "Description[zh_CN]": "Plasma Mobile 的夜间颜色快捷设置",
+        "Description[zh_CN]": "Plasma Mobile 的夜间色温快捷设置",
         "Description[zh_TW]": "Plasma 行動的夜色模式快速設定",
         "Icon": "redshift-status-on",
         "Id": "org.kde.plasma.quicksetting.nightcolor",
@@ -111,7 +111,7 @@
         "Name[tr]": "Gece Rengi",
         "Name[uk]": "Нічні кольори",
         "Name[x-test]": "xxNight Colorxx",
-        "Name[zh_CN]": "夜间颜色",
+        "Name[zh_CN]": "夜间色温",
         "Name[zh_TW]": "夜色",
         "Website": "https://kde.org"
     }
