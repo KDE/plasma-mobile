@@ -14,6 +14,7 @@
 #include <NetworkManagerQt/CdmaSetting>
 #include <NetworkManagerQt/ConnectionSettings>
 #include <NetworkManagerQt/GsmSetting>
+#include <NetworkManagerQt/Ipv6Setting>
 #include <NetworkManagerQt/Manager>
 #include <NetworkManagerQt/ModemDevice>
 #include <NetworkManagerQt/Settings>

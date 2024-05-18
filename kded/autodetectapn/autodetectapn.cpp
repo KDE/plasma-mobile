@@ -18,6 +18,7 @@
 #include <NetworkManagerQt/CdmaSetting>
 #include <NetworkManagerQt/ConnectionSettings>
 #include <NetworkManagerQt/GsmSetting>
+#include <NetworkManagerQt/Ipv6Setting>
 #include <NetworkManagerQt/Manager>
 #include <NetworkManagerQt/Settings>
 
@@ -96,6 +97,14 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
         gsmSetting->setHomeOnly(false); // TODO respect modem roaming settings?
         gsmSetting->setInitialized(true);
 
+        if (
+            detectedAPN.protocol == QStringLiteral("IPV6")
+            || detectedAPN.protocol == QStringLiteral("IPV4V6")
+        ) {
+            NetworkManager::Ipv6Setting::Ptr ipv6Setting = settings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
+            ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
+        }
+
         QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), nmModem->uni(), "");
         if (!reply.isValid()) {
             qCWarning(LOGGING_CATEGORY) << "Error adding autodetected connection:" << reply.error().message();
@@ -152,7 +161,7 @@ std::optional<AutoDetectAPN::APNEntry> AutoDetectAPN::findAPN(const QString &ope
         QString mccmnc = element.attribute("mcc") + element.attribute("mnc");
 
         if (mccmnc == operatorCode) {
-            APNEntry entry{element.attribute("apn"), element.attribute("carrier")};
+            APNEntry entry{element.attribute("apn"), element.attribute("carrier"), element.attribute("protocol", "IPV4V6")};
             candidates.push_back(entry);
 
             // check if we have an MVNO match and prioritize that
