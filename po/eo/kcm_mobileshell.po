@@ -1,7 +1,7 @@
 # translation of kcm_mobileshell.pot to Esperanto
 # Copyright (C) 2022 Free Software Foundation, Inc.
 # This file is distributed under the same license as the plasma-mobile package.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 02:30+0000\n"
 "PO-Revision-Date: 2023-11-06 21:57+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -170,27 +170,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Klavaraj vibroj estas regataj aparte en la klavar-agorda modulo."
-
-#~ msgid "Gesture-only Mode"
-#~ msgstr "Nur gesta Reĝimo"
-
-#~ msgid "Whether to hide the navigation panel."
-#~ msgstr "Ĉu kaŝi la navigadan panelon."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Vibra Intenseco"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Kiel intensaj ŝelvibroj devus esti."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Malalta"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Meza"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
