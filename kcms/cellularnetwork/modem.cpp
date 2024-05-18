@@ -370,6 +370,9 @@ QCoro::Task<void> Modem::addProfile(QString name, QString apn, QString username,
 
     gsmSetting->setInitialized(true);
 
+    NetworkManager::Ipv6Setting::Ptr ipv6Setting = settings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
+    ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
+
     QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), "");
     if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error adding connection:") << reply.error().message();
@@ -419,6 +422,9 @@ QCoro::Task<void> Modem::updateProfile(QString connectionUni, QString name, QStr
     gsmSetting->setHomeOnly(!isRoaming());
 
     gsmSetting->setInitialized(true);
+
+    NetworkManager::Ipv6Setting::Ptr ipv6Setting = conSettings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
+    ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
 
     QDBusReply<void> reply = con->update(conSettings->toMap());
     if (!reply.isValid()) {
