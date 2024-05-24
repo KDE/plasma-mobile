@@ -776,7 +776,7 @@ bool DragState::createDropPositionDelegate()
         int column = m_candidateDropPosition->pageColumn();
 
         // delegate to add
-        FolioPageDelegate *delegate = new FolioPageDelegate{row, column, m_dropDelegate, page};
+        FolioPageDelegate *delegate = new FolioPageDelegate{row, column, m_dropDelegate, PageListModel::self()};
 
         // delegate that exists at the drop position
         FolioPageDelegate *existingDelegate = page->getDelegate(row, column);
