@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:39+0000\n"
-"PO-Revision-Date: 2023-03-14 20:46+0000\n"
+"PO-Revision-Date: 2024-05-24 16:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: timesettings.cpp:146
 #, kde-format
@@ -3021,12 +3021,12 @@ msgstr "Whether to set the time automatically."
 #: ui/main.qml:80
 #, kde-format
 msgid "System Time"
-msgstr ""
+msgstr "System Time"
 
 #: ui/main.qml:89
 #, kde-format
 msgid "System Date"
-msgstr ""
+msgstr "System Date"
 
 #: ui/main.qml:101
 #, kde-format
@@ -3035,26 +3035,24 @@ msgid "Pick Timezone"
 msgstr "Pick Timezone"
 
 #: ui/main.qml:168
-#, fuzzy, kde-format
-#| msgid "Pick Date"
+#, kde-format
 msgid "Pick System Date"
-msgstr "Pick Date"
+msgstr "Pick System Date"
 
 #: ui/main.qml:210
-#, fuzzy, kde-format
-#| msgid "Pick Time"
+#, kde-format
 msgid "Pick System Time"
-msgstr "Pick Time"
+msgstr "Pick System Time"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "AM"
 
 #: ui/TimePicker.qml:93
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "PM"
 
 #~ msgid "Current Time"
 #~ msgstr "Current Time"

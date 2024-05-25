@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 00:39+0000\n"
-"PO-Revision-Date: 2023-03-14 20:45+0000\n"
+"PO-Revision-Date: 2024-05-24 16:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -617,12 +617,11 @@ msgid "View data usage."
 msgstr "View data usage."
 
 #: ui/main.qml:122 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
-msgstr[1] "SIM"
+msgstr[1] "SIMs"
 
 #: ui/main.qml:143
 #, kde-format
@@ -775,11 +774,13 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Unable to autodetect connection settings for your carrier. Please find your "
+"carrier's APN settings by either contacting support or searching online."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN List"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -792,10 +793,9 @@ msgid "Add APN"
 msgstr "Add APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Autodetect APN"
+msgstr "Automatically detect APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -912,6 +912,8 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"This SIM slot is empty, a SIM card needs to be inserted in order for it to "
+"be used."
 
 #: ui/SimPage.qml:60
 #, kde-format

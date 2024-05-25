@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-20 00:39+0000\n"
-"PO-Revision-Date: 2023-03-26 14:27+0100\n"
+"PO-Revision-Date: 2024-05-24 16:27+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -60,14 +60,14 @@ msgstr "Whether to hide the navigation panel."
 #: ui/main.qml:74
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "Always show keyboard toggle"
 
 #: ui/main.qml:75
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Whether to hide the navigation panel."
+msgstr ""
+"Whether to always show the keyboard toggle button on the navigation panel."
 
 #: ui/main.qml:86
 #, kde-format
@@ -115,13 +115,13 @@ msgstr "Mode when opening from the top right."
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Hide"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Show"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format
