@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2020, 2023.
+# SPDX-FileCopyrightText: 2020, 2023, 2024 Steve Allewell <steve.allewell@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-26 14:27+0100\n"
+"PO-Revision-Date: 2024-05-24 16:26+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Configure Hotspot"
 
 #: ui/main.qml:77
 #, kde-format
@@ -30,12 +30,12 @@ msgstr "Hotspot"
 #: ui/main.qml:78
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
-msgstr ""
+msgstr "Share your internet connection with other devices as a Wi-Fi network."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 #: ui/main.qml:103
 #, kde-format
