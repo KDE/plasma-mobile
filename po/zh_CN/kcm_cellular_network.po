@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_cellular_network.pot\n"
-"X-Crowdin-File-ID: 43141\n"
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/kcm_cellular_network.pot\n"
+"X-Crowdin-File-ID: 52170\n"
 
 #: modem.cpp:130
 #, kde-format

@@ -293,12 +293,3 @@ msgstr "Neteja totes les notificacions"
 #, kde-format
 msgid "More Options…"
 msgstr "Més opcions…"
-
-#~ msgid "Audio"
-#~ msgstr "Àudio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Apuja el volum"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Abaixa el volum"
