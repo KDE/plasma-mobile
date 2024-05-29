@@ -8,7 +8,6 @@ LookAndFeelPackage=org.kde.breeze.mobile
 
 [Desktop]
 Containment=org.kde.plasma.mobile.homescreen.folio
-ToolBox=org.kde.plasma.nano.desktoptoolbox
 
 [Desktop][ContainmentActions]
 
