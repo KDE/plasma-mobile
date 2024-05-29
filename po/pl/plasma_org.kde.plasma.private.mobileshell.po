@@ -16,12 +16,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.3\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
 msgid "Open Containing Folder"
-msgstr "Otwórz jego katalog"
+msgstr "Otwórz zawierający katalog"
 
 #: notifications/notificationfilemenu.cpp:123
 #, kde-format
@@ -163,13 +162,13 @@ msgstr "Ustawienia dźwięku"
 #: qml/volumeosd/VolumeOSD.qml:178
 #, kde-format
 msgid "Toggle showing audio streams"
-msgstr "Przełącz pokazywanie strumieni dźwiękowych"
+msgstr "Przestaw pokazywanie strumieni dźwięku"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"
-msgstr "Poszukaj…"
+msgstr "Poszukaj..."
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:142
 #, kde-format
@@ -213,13 +212,13 @@ msgstr "Wyślij"
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr "%1 (Wstrzymane)"
+msgstr "%1 (wstrzymane)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr "%1 (Niepowodzenie)"
+msgstr "%1 (niepowodzenie)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:21
 #, kde-format
@@ -270,7 +269,7 @@ msgstr "Usługa powiadomień jest niedostępna"
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
-msgstr "Powiadomienia są obecnie obsługiwane przez '%1 %2'"
+msgstr "Powiadomienia są obecnie dostarczane przez '%1 %2'"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:322
 #, kde-format
