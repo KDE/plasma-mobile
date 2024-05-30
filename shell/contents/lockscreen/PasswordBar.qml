@@ -24,7 +24,7 @@ Rectangle {
     // for displaying temporary number in pin dot display
     property int previewCharIndex: -2
     
-    property string pinLabel: qsTr("Enter PIN")
+    property string pinLabel: i18n("Enter PIN")
     
     property bool keypadOpen
     
@@ -41,11 +41,11 @@ Rectangle {
         target: root.lockScreenState
         
         function onUnlockSucceeded() {
-            root.pinLabel = qsTr("Logging in...");
+            root.pinLabel = i18n("Logging in...");
         }
         
         function onUnlockFailed() {
-            root.pinLabel = qsTr("Wrong PIN");
+            root.pinLabel = i18n("Wrong PIN");
         }
         
         function onPasswordChanged() {
@@ -85,8 +85,8 @@ Rectangle {
     function keyPress(data) {
         if (!lockScreenState.waitingForAuth) {
             
-            if (root.pinLabel !== qsTr("Enter PIN")) {
-                root.pinLabel = qsTr("Enter PIN");
+            if (root.pinLabel !== i18n("Enter PIN")) {
+                root.pinLabel = i18n("Enter PIN");
             }
             
             root.previewCharIndex = lockScreenState.password.length;
