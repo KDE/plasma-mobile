@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-05-31 00:41+0000\n"
 "PO-Revision-Date: 2022-10-19 06:53+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -63,6 +63,20 @@ msgstr "立刻套用"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "桌布"
+
+#: contents/lockscreen/PasswordBar.qml:27
+#: contents/lockscreen/PasswordBar.qml:88
+#: contents/lockscreen/PasswordBar.qml:89
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:44
+msgid "Logging in..."
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:48
+msgid "Wrong PIN"
+msgstr ""
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "變更桌布"

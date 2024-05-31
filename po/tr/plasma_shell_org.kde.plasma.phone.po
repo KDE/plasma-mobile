@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-05-31 00:41+0000\n"
 "PO-Revision-Date: 2022-06-24 05:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -60,6 +60,20 @@ msgstr "Şimdi Uygula"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Duvar Kağıdı"
+
+#: contents/lockscreen/PasswordBar.qml:27
+#: contents/lockscreen/PasswordBar.qml:88
+#: contents/lockscreen/PasswordBar.qml:89
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:44
+msgid "Logging in..."
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:48
+msgid "Wrong PIN"
+msgstr ""
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Duvar Kağıdını Değiştir"

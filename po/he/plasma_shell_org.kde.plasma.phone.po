@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-05-31 00:41+0000\n"
 "PO-Revision-Date: 2024-03-07 11:42+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -61,3 +61,17 @@ msgstr "החלה כעת"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "תמונת רקע"
+
+#: contents/lockscreen/PasswordBar.qml:27
+#: contents/lockscreen/PasswordBar.qml:88
+#: contents/lockscreen/PasswordBar.qml:89
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:44
+msgid "Logging in..."
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:48
+msgid "Wrong PIN"
+msgstr ""

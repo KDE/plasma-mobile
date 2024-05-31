@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-05-31 00:41+0000\n"
 "PO-Revision-Date: 2022-07-13 12:05+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -60,6 +60,20 @@ msgstr "지금 적용하기"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "배경 그림"
+
+#: contents/lockscreen/PasswordBar.qml:27
+#: contents/lockscreen/PasswordBar.qml:88
+#: contents/lockscreen/PasswordBar.qml:89
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:44
+msgid "Logging in..."
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:48
+msgid "Wrong PIN"
+msgstr ""
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "배경 그림 바꾸기"

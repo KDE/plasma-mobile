@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2024-05-31 00:41+0000\n"
 "PO-Revision-Date: 2022-06-25 14:36+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -64,6 +64,20 @@ msgstr "Aplicar ahora"
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
 msgstr "Fondo del escritorio"
+
+#: contents/lockscreen/PasswordBar.qml:27
+#: contents/lockscreen/PasswordBar.qml:88
+#: contents/lockscreen/PasswordBar.qml:89
+msgid "Enter PIN"
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:44
+msgid "Logging in..."
+msgstr ""
+
+#: contents/lockscreen/PasswordBar.qml:48
+msgid "Wrong PIN"
+msgstr ""
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Cambiar fondo del escritorio"

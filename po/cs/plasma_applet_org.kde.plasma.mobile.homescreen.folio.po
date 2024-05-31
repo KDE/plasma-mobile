@@ -1,21 +1,22 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # SPDX-FileCopyrightText: 2016, 2023 Vít Pelčák <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2024 Vit Pelcak <vpelcak@suse.cz>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-07 00:38+0000\n"
-"PO-Revision-Date: 2023-11-03 09:10+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2024-05-30 09:48+0200\n"
+"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -125,13 +126,13 @@ msgstr "Lišta Oblíbené"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Tapeta"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Zobrazit efekt rozmazání tapety"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
@@ -152,7 +153,7 @@ msgstr "Exportovat rozložení do"
 #: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "Importovat rozložení z"
 
 #: package/contents/ui/settings/SettingsWindow.qml:321
 #: package/contents/ui/settings/SettingsWindow.qml:328
