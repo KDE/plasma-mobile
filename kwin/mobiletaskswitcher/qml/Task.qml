@@ -17,7 +17,6 @@ Item {
     required property var taskSwitcher
 
     required property QtObject window
-    required property int index
 
     required property var model
 

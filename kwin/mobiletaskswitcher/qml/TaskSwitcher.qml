@@ -431,9 +431,54 @@ FocusScope {
         }
 
         RowLayout {
+            id: scrubIconList
+            opacity: taskSwitcherHelpers.isInTaskScrubMode ? 1 : 0
+            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
+
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: taskSwitcherHelpers.openedYPosition * 5 / 8
+
+            anchors.horizontalCenterOffset: {
+                let size = Kirigami.Units.iconSizes.large + Kirigami.Units.largeSpacing * 2;
+                let offset = (root.state.currentTaskIndex - 0.5) * size;
+                return offset;
+            }
+            Behavior on anchors.horizontalCenterOffset {
+                NumberAnimation {
+                    // TODO: this duration should track the duration of xAnim but that is variable through function parameter
+                    // how do we make sure this is always the same duration?
+                    duration: Kirigami.Units.longDuration * 2;
+                    easing.type: Easing.OutBack;
+                }
+            }
+
+            spacing: Kirigami.Units.largeSpacing * 2
+
+            layoutDirection: Qt.RightToLeft
+
+            Repeater {
+                model: root.tasksModel
+
+                delegate: Kirigami.Icon {
+                    id: iconDelegate
+
+                    required property QtObject window
+                    required property int index
+
+                    readonly property bool isCenteredIcon: iconDelegate.index === root.state.currentTaskIndex;
+                    Layout.preferredHeight: isCenteredIcon ? Kirigami.Units.iconSizes.huge : Kirigami.Units.iconSizes.large
+                    Layout.preferredWidth: isCenteredIcon ? Kirigami.Units.iconSizes.huge : Kirigami.Units.iconSizes.large
+                    Layout.alignment: Qt.AlignVCenter
+                    source: iconDelegate.window.icon
+                }
+            }
+        }
+
+        RowLayout {
             id: scrubIndicator
             opacity: taskSwitcherHelpers.isInTaskScrubMode ? 1 : 0
-            Behavior on opacity { NumberAnimation { duration: 200} }
+            Behavior on opacity { NumberAnimation { duration: 200 } }
 
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
@@ -442,7 +487,7 @@ FocusScope {
             Kirigami.Icon {
                 id: iconScrubBack
                 opacity: root.state.currentTaskIndex == 0 ? 0.3 : 1
-                Behavior on opacity { NumberAnimation { duration: 200} }
+                Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration * 2; easing.type: Easing.OutExpo } }
                 Layout.alignment: Qt.AlignHCenter
                 implicitWidth: Kirigami.Units.iconSizes.medium
                 implicitHeight: Kirigami.Units.iconSizes.medium
@@ -450,16 +495,6 @@ FocusScope {
                 color: "white"
             }
 
-            /*Kirigami.Heading {
-                Layout.fillWidth: true
-                Layout.maximumWidth: root.width * 0.75
-                Layout.alignment: Qt.AlignHCenter
-                color: "white"
-                level: 3
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                text: i18n("Swipe")
-            }*/
             Item {
                 width: taskSwitcherHelpers.windowWidth / 4
             }
@@ -467,7 +502,7 @@ FocusScope {
             Kirigami.Icon {
                 id: iconScrubFront
                 opacity: root.state.currentTaskIndex == tasksCount - 1 ? 0.3 : 1
-                Behavior on opacity { NumberAnimation { duration: 200} }
+                Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration * 2; easing.type: Easing.OutExpo } }
                 Layout.alignment: Qt.AlignHCenter
                 implicitWidth: Kirigami.Units.iconSizes.medium
                 implicitHeight: Kirigami.Units.iconSizes.medium
