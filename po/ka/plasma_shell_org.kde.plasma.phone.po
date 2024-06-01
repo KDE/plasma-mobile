@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-31 00:41+0000\n"
-"PO-Revision-Date: 2022-08-15 15:08+0200\n"
+"PO-Revision-Date: 2024-05-31 06:49+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -67,15 +67,15 @@ msgstr "ფონური სურათი"
 #: contents/lockscreen/PasswordBar.qml:88
 #: contents/lockscreen/PasswordBar.qml:89
 msgid "Enter PIN"
-msgstr ""
+msgstr "შეიყვანეთ PIN კოდი"
 
 #: contents/lockscreen/PasswordBar.qml:44
 msgid "Logging in..."
-msgstr ""
+msgstr "შესვლა..."
 
 #: contents/lockscreen/PasswordBar.qml:48
 msgid "Wrong PIN"
-msgstr ""
+msgstr "არასწორი PIN-კოდი"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "ფონის სურათის შეცვლა"

@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-31 00:41+0000\n"
-"PO-Revision-Date: 2022-06-24 05:03+0300\n"
+"PO-Revision-Date: 2024-05-31 14:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -65,15 +65,15 @@ msgstr "Duvar Kağıdı"
 #: contents/lockscreen/PasswordBar.qml:88
 #: contents/lockscreen/PasswordBar.qml:89
 msgid "Enter PIN"
-msgstr ""
+msgstr "PIN Gir"
 
 #: contents/lockscreen/PasswordBar.qml:44
 msgid "Logging in..."
-msgstr ""
+msgstr "Oturum açılıyor…"
 
 #: contents/lockscreen/PasswordBar.qml:48
 msgid "Wrong PIN"
-msgstr ""
+msgstr "Yanlış PIN"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Duvar Kağıdını Değiştir"

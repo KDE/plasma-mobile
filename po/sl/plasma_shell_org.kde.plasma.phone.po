@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-31 00:41+0000\n"
-"PO-Revision-Date: 2022-06-24 07:40+0200\n"
+"PO-Revision-Date: 2024-05-31 11:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Poedit 3.4.4\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -66,15 +66,15 @@ msgstr "Tapeta"
 #: contents/lockscreen/PasswordBar.qml:88
 #: contents/lockscreen/PasswordBar.qml:89
 msgid "Enter PIN"
-msgstr ""
+msgstr "Vnesite PIN"
 
 #: contents/lockscreen/PasswordBar.qml:44
 msgid "Logging in..."
-msgstr ""
+msgstr "Prijavljanje..."
 
 #: contents/lockscreen/PasswordBar.qml:48
 msgid "Wrong PIN"
-msgstr ""
+msgstr "Napačen PIN"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Spremeni tapeto"

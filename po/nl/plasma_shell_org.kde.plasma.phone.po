@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-31 00:41+0000\n"
-"PO-Revision-Date: 2022-06-25 10:54+0200\n"
+"PO-Revision-Date: 2024-05-31 13:13+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -67,15 +67,15 @@ msgstr "Achtergrondafbeelding"
 #: contents/lockscreen/PasswordBar.qml:88
 #: contents/lockscreen/PasswordBar.qml:89
 msgid "Enter PIN"
-msgstr ""
+msgstr "PIN invoeren"
 
 #: contents/lockscreen/PasswordBar.qml:44
 msgid "Logging in..."
-msgstr ""
+msgstr "Aanmelden..."
 
 #: contents/lockscreen/PasswordBar.qml:48
 msgid "Wrong PIN"
-msgstr ""
+msgstr "Verkeerde PIN"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Achtergrondafbeelding wijzigen"

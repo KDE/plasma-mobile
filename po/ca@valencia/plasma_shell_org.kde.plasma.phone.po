@@ -1,15 +1,15 @@
 # Translation of plasma_shell_org.kde.plasma.phone.po to Catalan (Valencian)
-# Copyright (C) 2022 This_file_is_part_of_KDE
+# Copyright (C) 2022-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-31 00:41+0000\n"
-"PO-Revision-Date: 2022-06-24 20:51+0200\n"
+"PO-Revision-Date: 2024-05-31 09:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -67,18 +67,12 @@ msgstr "Fons de pantalla"
 #: contents/lockscreen/PasswordBar.qml:88
 #: contents/lockscreen/PasswordBar.qml:89
 msgid "Enter PIN"
-msgstr ""
+msgstr "Introduïu el PIN"
 
 #: contents/lockscreen/PasswordBar.qml:44
 msgid "Logging in..."
-msgstr ""
+msgstr "S'està iniciant la sessió…"
 
 #: contents/lockscreen/PasswordBar.qml:48
 msgid "Wrong PIN"
-msgstr ""
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Canvia el fons de pantalla"
-
-#~ msgid "Configure"
-#~ msgstr "Configura"
+msgstr "PIN erroni"
