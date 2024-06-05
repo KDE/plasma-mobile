@@ -7,6 +7,7 @@ TryExec=${CMAKE_INSTALL_FULL_BINDIR}/startplasmamobile
 Type=Application
 DesktopNames=KDE
 Name=Plasma Mobile
+Name[ar]=بلازما الجوال
 Name[az]=Plasma Mobil
 Name[ca]=Plasma Mobile
 Name[ca@valencia]=Plasma Mobile
