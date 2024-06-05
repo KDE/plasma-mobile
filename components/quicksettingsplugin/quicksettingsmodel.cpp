@@ -12,6 +12,8 @@
 #include <QFileInfo>
 #include <QQmlComponent>
 #include <QQmlEngine>
+#include <QQmlContext>
+#include <KLocalizedContext>
 
 QuickSettingsModel::QuickSettingsModel(QObject *parent)
     : QAbstractListModel{parent}
@@ -79,7 +81,10 @@ void QuickSettingsModel::loadQuickSettings()
 
         // load QML from kpackage
         c->loadUrl(package.fileUrl("mainscript"), QQmlComponent::PreferSynchronous);
-
+        KLocalizedContext *i18nContext = new KLocalizedContext(engine);
+        i18nContext->setTranslationDomain(QLatin1String("plasma_") + metaData.pluginId());
+        engine->rootContext()->setContextObject(i18nContext);
+        
         auto created = c->create(engine->rootContext());
         auto createdSetting = qobject_cast<QuickSetting *>(created);
 

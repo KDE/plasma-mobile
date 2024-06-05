@@ -20,6 +20,7 @@ target_link_libraries(quicksettingsplugin PRIVATE
     KF6::Service
     KF6::ConfigWidgets
     KF6::Package
+    KF6::I18n
 )
 
 ecm_finalize_qml_module(quicksettingsplugin)
