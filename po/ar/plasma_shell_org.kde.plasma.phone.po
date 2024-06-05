@@ -1,74 +1,70 @@
-# Copyright (C) 2024 This file is copyright:
+# Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2022, 2024 Paolo Zamponi <feus73@gmail.com>
+# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-19 00:47+0000\n"
-"PO-Revision-Date: 2022-06-27 15:30+0200\n"
-"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
-"Language-Team: Italian <kde-i18n-it@kde.org>\n"
-"Language: it\n"
+"PO-Revision-Date: 2023-05-07 20:53+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
-msgstr ""
-"Le modifiche alla disposizione sono state limitate dall'amministratore del "
-"sistema"
+msgstr "قُيد تغييرات التخطيط من قبل مسؤول النظام "
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:65
 msgid "General"
-msgstr "Generale"
+msgstr "عامّ"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:71
 msgid "Homescreen Layout"
-msgstr "Disposizione della schermata iniziale"
+msgstr "تخطيط الشاشة الرئيسة"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:72
 msgid "The homescreen layout to use."
-msgstr "La disposizione della schermata iniziale da usare."
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:98
 msgid "Wallpaper Plugin"
-msgstr "Estensione sfondi"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:99
 msgid "The wallpaper plugin to use."
-msgstr "L'estensione di sfondi da utilizzare."
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Wallpaper Plugins"
-msgstr "Estensioni per lo sfondo"
+msgstr "محلق خلفية"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:139
 msgid "Get New Plugins…"
-msgstr "Ottieni nuove estensioni..."
+msgstr "احصل على ملحقات جديدة..."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:154
 msgid "Layout changes must be applied before other changes can be made"
-msgstr ""
-"Le modifiche alla disposizione devono essere applicate prima che ne possano "
-"essere apportate delle altre"
+msgstr "يجب تطبيق تغييرات التخطيط قبل إجراء تغييرات أخرى"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:160
 msgid "Apply now"
-msgstr "Applica adesso"
+msgstr "طبّق الآن"
 
 #: contents/configuration/ContainmentConfiguration.qml:32
 msgid "Wallpaper"
-msgstr "Sfondo"
+msgstr "الخلفيّة"
 
 #: contents/configuration/ContainmentConfiguration.qml:95
 msgid "Change Wallpaper"
-msgstr "Modifica immagine di sfondo"
+msgstr ""
 
 #: contents/configuration/ContainmentConfiguration.qml:113
 msgid "Configure"
-msgstr "Configura"
+msgstr ""
