@@ -4,6 +4,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -69,6 +70,7 @@
         "Id": "org.kde.plasma.quicksetting.battery",
         "License": "GPL-2.0+",
         "Name": "Battery",
+        "Name[ar]": "البطارية",
         "Name[az]": "Batareya",
         "Name[ca@valencia]": "Bateria",
         "Name[ca]": "Bateria",

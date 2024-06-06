@@ -4,6 +4,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -69,6 +70,7 @@
         "Id": "org.kde.plasma.quicksetting.bluetooth",
         "License": "GPL-2.0+",
         "Name": "Bluetooth",
+        "Name[ar]": "بلوتوث",
         "Name[az]": "Bluetooth",
         "Name[ca@valencia]": "Bluetooth",
         "Name[ca]": "Bluetooth",

@@ -4,6 +4,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -71,6 +72,7 @@
         "Id": "org.kde.phone.homescreen.halcyon",
         "License": "GPLv2+",
         "Name": "Halcyon",
+        "Name[ar]": "قيون",
         "Name[az]": "Halcyon",
         "Name[ca@valencia]": "Halcyon",
         "Name[ca]": "Halcyon",

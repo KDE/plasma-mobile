@@ -4,6 +4,7 @@
             {
                 "Email": "devin@kde.org",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -70,6 +71,7 @@
         "Id": "org.kde.plasma.quicksetting.wifi",
         "License": "GPL-2.0+",
         "Name": "Wi-Fi",
+        "Name[ar]": "واي فاي",
         "Name[az]": "Wi-Fi",
         "Name[ca@valencia]": "Wi-Fi",
         "Name[ca]": "Wi-Fi",

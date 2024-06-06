@@ -4,6 +4,7 @@
             {
                 "Email": "espidev@gmail.com",
                 "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
                 "Name[az]": "Devin Lin",
                 "Name[ca@valencia]": "Devin Lin",
                 "Name[ca]": "Devin Lin",
@@ -78,6 +79,7 @@
         "Icon": "preferences-desktop-plasma",
         "License": "GPL",
         "Name": "Shell",
+        "Name[ar]": "الصدَفة",
         "Name[az]": "Örtük",
         "Name[ca@valencia]": "Intèrpret d'ordres",
         "Name[ca]": "Intèrpret d'ordres",
