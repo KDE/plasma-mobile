@@ -94,7 +94,7 @@ Item {
                     checked: Time.TimeUtil.currentTimeZone === timeZoneId
                     onCheckedChanged: {
                         if (checked && timeZoneId !== Time.TimeUtil.currentTimeZone) {
-                            Time.TimeUtil.currentTimeZone = model.timeZoneId;
+                            Time.TimeUtil.currentTimeZone = timeZoneId;
                             checked = Qt.binding(() => Time.TimeUtil.currentTimeZone === timeZoneId);
                         }
                     }
