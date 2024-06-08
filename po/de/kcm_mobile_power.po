@@ -1,22 +1,23 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 # Burkhard Lück <lueck@hube-lueck.de>, 2021.
 # Frederik Schwarzer <schwarzer@kde.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2023-04-26 20:25+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2024-05-11 17:20+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: mobilepower.cpp:28
 #, kde-format
@@ -49,10 +50,9 @@ msgid "15 min"
 msgstr "15 min"
 
 #: mobilepower.cpp:34
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 min"
+msgstr "30 min"
 
 #: mobilepower.cpp:35
 #, kde-format
@@ -242,9 +242,7 @@ msgid "Unknown battery"
 msgstr "Unbekannter Akku"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is a percentage value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
 msgstr "%1 %"

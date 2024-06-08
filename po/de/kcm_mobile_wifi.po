@@ -1,22 +1,23 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 # Burkhard Lück <lueck@hube-lueck.de>, 2018, 2019, 2020, 2021.
 # Frederik Schwarzer <schwarzer@kde.org>, 2022.
+# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-12 00:39+0000\n"
-"PO-Revision-Date: 2022-07-23 23:47+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2024-05-12 21:00+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -31,22 +32,20 @@ msgstr "Verbinden mit"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Bearbeiten"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "WLAN"
 
 #: ui/main.qml:135
-#, fuzzy, kde-format
-#| msgid "Available networks"
+#, kde-format
 msgid "Available Networks"
-msgstr "Verfügbare Netzwerke"
+msgstr "Verfügbare Netze"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Neue Verbindung hinzufügen"
 
@@ -56,10 +55,9 @@ msgid "Save"
 msgstr "Speichern"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
-msgstr "Verborgenes Netzwerk:"
+msgstr "Verborgenes Netzwerk"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -127,26 +125,22 @@ msgid "Manual"
 msgstr "Manuell"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP-Adresse:"
+msgstr "IP-Adresse"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Gateway:"
+msgstr "Gateway"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Länge des Netzwerkpräfix:"
+msgstr "Länge des Netzwerkpräfix"
 
 #: ui/NetworkSettings.qml:241
-#, fuzzy, kde-format
-#| msgid "DNS"
+#, kde-format
 msgid "DNS"
 msgstr "DNS"
 

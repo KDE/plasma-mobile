@@ -2,6 +2,7 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
 #
 # Automatically generated, 2023.
 msgid ""
@@ -9,15 +10,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-01 00:39+0000\n"
-"PO-Revision-Date: 2023-04-03 15:50+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2024-05-11 16:57+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -32,7 +33,7 @@ msgstr "kde-i18n-de@kde.org"
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "Öffnet den Startassistenten, ohne die Konfiguration zu ändern"
 
 #: main.cpp:36
 #, kde-format
@@ -126,6 +127,8 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
+"Bitte konfigurieren Sie unten Ihren APN für mobile Daten, weitere "
+"Informationen erhalten Sie von Ihrem Anbieter."
 
 #: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
@@ -163,11 +166,9 @@ msgid "Complete!"
 msgstr "Abgeschlossen."
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"Ihr Gerät ist jetzt bereit.<br /><br />Viel Freude mit <b>Plasma 6.0</b>!"
+msgstr "Ihr Gerät ist jetzt bereit.<br /><br />Viel Freude mit <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -179,11 +180,13 @@ msgstr "Bevor es losgeht ..."
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
+"Stellen Sie die Bildschirmhelligkeit so ein, dass sie für den "
+"Installationsvorgang angenehm ist."
 
 #: modules/prepare/package/contents/ui/main.qml:96
 #, kde-format
 msgid "Adjust the size of elements on the screen."
-msgstr ""
+msgstr "Passen Sie die Größe der Elemente auf dem Bildschirm an."
 
 #: modules/prepare/package/contents/ui/main.qml:107
 #, kde-format
@@ -193,7 +196,7 @@ msgstr "Anzeigeskalierung"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "Dunkles Design"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -203,7 +206,7 @@ msgstr "Zeit und Datum"
 #: modules/time/package/contents/ui/main.qml:36
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr ""
+msgstr "Wählen Sie Ihre Zeitzone und Ihr bevorzugtes Zeitformat."
 
 #: modules/time/package/contents/ui/main.qml:47
 #, kde-format
@@ -228,7 +231,7 @@ msgstr "Netzwerk"
 #: modules/wifi/package/contents/ui/main.qml:71
 #, kde-format
 msgid "Connect to a WiFi network for network access."
-msgstr ""
+msgstr "Verbinden Sie sich mit einem WLAN-Netzwerk für den Netzwerkzugang."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -236,10 +239,9 @@ msgid "Password…"
 msgstr "Passwort ..."
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Willkommen zu <b>Plasma</b>"
+msgstr "Willkommen zu<br><b>%1</b>"
 
 #: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
