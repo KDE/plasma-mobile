@@ -2,6 +2,7 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2023.
+# SPDX-FileCopyrightText: 2024 Alois Spitzbart <spitz234@hotmail.com>
 #
 # Automatically generated, 2023.
 msgid ""
@@ -9,15 +10,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2023-03-12 17:29+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2024-05-20 10:53+0200\n"
+"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -33,7 +34,7 @@ msgstr "Allgemein"
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "Haptisches Feedback"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
@@ -43,7 +44,7 @@ msgstr "Animationen"
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
+msgstr "Wenn dies aus ist, werden Animationen so weit wie möglich reduziert."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
@@ -78,7 +79,7 @@ msgstr ""
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Aktionsleiste"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
@@ -91,33 +92,33 @@ msgstr "Schnelleinstellungen"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "Reduzierter Modus"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "Erweiterter Modus"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Linke obere Aktionsleiste"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Darstellung beim Öffnen von links oben."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Rechte obere Aktionsleiste"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Darstellung beim Öffnen von rechts oben."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
@@ -127,7 +128,7 @@ msgstr ""
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Gibt an, ob Vibrationen in der Systemumgebung aktiviert sind."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
@@ -165,7 +166,7 @@ msgstr "Vibrationsdauer"
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Wie lange die Vibrationen in der Systemumgebung dauern sollten."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
@@ -191,3 +192,4 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"Vibration der Tastatur wird im Modul Bildschirmtastatur separat eingestellt."
