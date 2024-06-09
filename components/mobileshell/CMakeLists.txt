@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-ecm_add_qml_module(mobileshellplugin URI org.kde.plasma.private.mobileshell GENERATE_PLUGIN_SOURCE)
+ecm_add_qml_module(mobileshellplugin URI org.kde.plasma.private.mobileshell GENERATE_PLUGIN_SOURCE DEPENDENCIES QtQuick)
 
 set(mobileshellplugin_SRCS
     shellutil.cpp
