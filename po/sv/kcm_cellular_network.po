@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-14 00:39+0000\n"
-"PO-Revision-Date: 2022-04-08 19:36+0200\n"
+"PO-Revision-Date: 2024-06-09 14:26+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -587,20 +587,19 @@ msgid "Mobile data"
 msgstr "Mobildata"
 
 #: ui/main.qml:76
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "No SIM is inserted."
-msgstr "SIM-kortet är inte låst"
+msgstr "Inget SIM-kort är instoppat."
 
 #: ui/main.qml:78
 #, kde-format
 msgid "Mobile data is not available with this modem."
-msgstr ""
+msgstr "Mobildata är inte tillgängligt med modemet."
 
 #: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr ""
+msgstr "En APN måste vara inställd för att få mobildata."
 
 #: ui/main.qml:82
 #, kde-format
@@ -618,8 +617,7 @@ msgid "View data usage."
 msgstr "Visa dataanvändning."
 
 #: ui/main.qml:122 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM-kort"
@@ -776,11 +774,14 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Kan inte detektera anslutningsinställningar automatiskt för leverantören. Ta "
+"reda på leverantörens APN-inställningar genom att antingen kontakta support "
+"eller söka på nätet."
 
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN-lista"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -793,8 +794,7 @@ msgid "Add APN"
 msgstr "Lägg till APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
 msgstr "Detektera APN automatiskt"
 
@@ -913,6 +913,7 @@ msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
 msgstr ""
+"SIM-platsen är tom, ett SIM-kort måste stoppas in för att kunna använda den."
 
 #: ui/SimPage.qml:60
 #, kde-format
@@ -1017,7 +1018,7 @@ msgstr "Nödnummer"
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "stefan.asserhall@bredband.net"
+#~ msgstr "stefan.asserhall@gmail.com"
 
 #~ msgid "Cellular Networks"
 #~ msgstr "Mobilnät"

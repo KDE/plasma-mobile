@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-12 00:39+0000\n"
-"PO-Revision-Date: 2021-06-26 22:28+0200\n"
+"PO-Revision-Date: 2024-06-09 14:27+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -30,22 +30,20 @@ msgstr "Anslut till"
 #: ui/main.qml:26
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Redigera"
 
 #: ui/main.qml:87
 #, kde-format
 msgid "Wi-Fi"
-msgstr ""
+msgstr "WIFI"
 
 #: ui/main.qml:135
-#, fuzzy, kde-format
-#| msgid "Available networks"
+#, kde-format
 msgid "Available Networks"
 msgstr "Tillgängliga nätverk"
 
 #: ui/NetworkSettings.qml:15
-#, fuzzy, kde-format
-#| msgid "Add new Connection"
+#, kde-format
 msgid "Add New Connection"
 msgstr "Lägg till ny anslutning"
 
@@ -55,8 +53,7 @@ msgid "Save"
 msgstr "Spara"
 
 #: ui/NetworkSettings.qml:73
-#, fuzzy, kde-format
-#| msgid "Hidden Network:"
+#, kde-format
 msgid "Hidden Network"
 msgstr "Dolt nätverk"
 
@@ -126,22 +123,19 @@ msgid "Manual"
 msgstr "Manuell"
 
 #: ui/NetworkSettings.qml:186
-#, fuzzy, kde-format
-#| msgid "IP Address:"
+#, kde-format
 msgid "IP Address"
-msgstr "IP-adress:"
+msgstr "IP-adress"
 
 #: ui/NetworkSettings.qml:204
-#, fuzzy, kde-format
-#| msgid "Gateway:"
+#, kde-format
 msgid "Gateway"
-msgstr "Förmedlingsnod:"
+msgstr "Förmedlingsnod"
 
 #: ui/NetworkSettings.qml:222
-#, fuzzy, kde-format
-#| msgid "Network prefix length:"
+#, kde-format
 msgid "Network prefix length"
-msgstr "Längd på nätverksprefix:"
+msgstr "Längd på nätverksprefix"
 
 #: ui/NetworkSettings.qml:241
 #, kde-format
@@ -195,7 +189,7 @@ msgstr "Lösenord…"
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "stefan.asserhall@bredband.net"
+#~ msgstr "stefan.asserhall@gmail.com"
 
 #~ msgid "Wi-Fi networks"
 #~ msgstr "WIFI-nätverk"

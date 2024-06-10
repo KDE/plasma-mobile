@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2020.
+# SPDX-FileCopyrightText: 2020, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2020-04-25 15:05+0200\n"
+"PO-Revision-Date: 2024-06-09 14:22+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:33
 #, kde-format
 msgid "Configure Hotspot"
-msgstr ""
+msgstr "Anpassa accesspunkt"
 
 #: ui/main.qml:77
 #, kde-format
@@ -30,24 +30,22 @@ msgstr "Accesspunkt"
 #: ui/main.qml:78
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
-msgstr ""
+msgstr "Dela Internetanslutning med andra enheter som ett WIFI-nätverk."
 
 #: ui/main.qml:93
 #, kde-format
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: ui/main.qml:103
-#, fuzzy, kde-format
-#| msgid "Hotspot"
+#, kde-format
 msgid "Hotspot SSID"
-msgstr "Accesspunkt"
+msgstr "SSID för accesspunkt"
 
 #: ui/main.qml:112
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Hotspot Password"
-msgstr "Lösenord:"
+msgstr "Lösenord för accesspunkt"
 
 #~ msgid "Enabled:"
 #~ msgstr "Aktiverad:"
@@ -64,7 +62,7 @@ msgstr "Lösenord:"
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "stefan.asserhall@bredband.net"
+#~ msgstr "stefan.asserhall@gmail.com"
 
 #~ msgid "Tobias Fella"
 #~ msgstr "Tobias Fella"
