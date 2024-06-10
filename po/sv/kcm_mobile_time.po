@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2019, 2020, 2021, 2022.
+# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2019, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:39+0000\n"
 "PO-Revision-Date: 2022-08-03 09:33+0200\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -3072,7 +3072,7 @@ msgstr ""
 
 #~ msgctxt "EMAIL OF TRANSLATORS"
 #~ msgid "Your emails"
-#~ msgstr "stefan.asserhall@bredband.net"
+#~ msgstr "stefan.asserhall@gmail.com"
 
 #~ msgid "Date and Time"
 #~ msgstr "Datum och tid"
