@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Sergiu Bivol <sergiu@cip.md>, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2022-04-04 10:09+0100\n"
+"PO-Revision-Date: 2024-06-09 13:46+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -39,40 +39,36 @@ msgid "Type anything here…"
 msgstr "Tastați aici orice…"
 
 #: ui/main.qml:38
-#, fuzzy, kde-format
-#| msgid "Feedback:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr "Reacție:"
+msgstr "Reacție"
 
 #: ui/main.qml:44
 #, kde-format
 msgid "Sound"
-msgstr ""
+msgstr "Sunet"
 
 #: ui/main.qml:45
-#, fuzzy, kde-format
-#| msgid "Emit sound on key press"
+#, kde-format
 msgid "Whether to emit a sound on keypress."
-msgstr "Emite sunet la apăsarea tastelor"
+msgstr "Dacă se emit sunete la apăsarea tastelor."
 
 #: ui/main.qml:54
 #, kde-format
 msgid "Vibration"
-msgstr ""
+msgstr "Vibrație"
 
 #: ui/main.qml:55
-#, fuzzy, kde-format
-#| msgid "Vibrate on key press"
+#, kde-format
 msgid "Whether to vibrate on keypress."
-msgstr "Vibrează la apăsarea tastelor"
+msgstr "Dacă se emit vibrații la apăsarea tastelor."
 
 #: ui/main.qml:62
-#, fuzzy, kde-format
-#| msgid "Text correction:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr "Corectare text:"
+msgstr "Corectare text"
 
 #: ui/main.qml:69
 #, kde-format
