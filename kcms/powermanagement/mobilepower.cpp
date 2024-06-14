@@ -10,6 +10,8 @@
 #include <KSharedConfig>
 
 #include <Solid/Battery>
+#include <QDBusConnection>
+#include <QDBusPendingCall>
 
 K_PLUGIN_CLASS_WITH_JSON(MobilePower, "kcm_mobile_power.json")
 
@@ -120,6 +122,10 @@ void MobilePower::save()
     lowBatteryGroup.group("SuspendAndShutdown").writeEntry("AutoSuspendIdleTimeoutSec", m_suspendSessionTime, KConfigGroup::Notify);
 
     m_profilesConfig->sync();
+
+    QDBusMessage call =
+        QDBusMessage::createMethodCall("org.kde.Solid.PowerManagement", "/org/kde/Solid/PowerManagement", "org.kde.Solid.PowerManagement", "refreshStatus");
+    QDBusConnection::sessionBus().asyncCall(call);
 }
 
 QStringList MobilePower::timeOptions() const
