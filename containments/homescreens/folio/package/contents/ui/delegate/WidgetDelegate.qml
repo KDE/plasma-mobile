@@ -33,7 +33,7 @@ Folio.WidgetContainer {
     width: implicitWidth
     height: implicitHeight
 
-    // prevent widget contents from going outside of the container
+    // prevent widget contents from going outside the container
     clip: true
 
     function updateVisualApplet() {

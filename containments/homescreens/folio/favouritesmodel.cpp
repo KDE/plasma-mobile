@@ -321,7 +321,7 @@ bool FavouritesModel::dropPositionIsEdge(qreal x, qreal y) const
     qreal currentPos = startPosition;
 
     for (int i = 0; i < m_delegates.size(); i++) {
-        // if it is within the centre 70% of a delegate, it is not at an edge
+        // if it is within the center 70% of a delegate, it is not at an edge
         if (pos >= (currentPos + cellLength * 0.15) && pos <= (currentPos + cellLength * 0.85)) {
             return false;
         }

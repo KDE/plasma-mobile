@@ -115,7 +115,7 @@ MouseArea {
             // only show header once task switcher is opened
             showHeader: !taskSwitcherState.gestureInProgress && !taskSwitcherHelpers.currentlyBeingClosed && !taskSwitcherHelpers.isInTaskScrubMode
 
-            // darken effect as task gets away from the centre of the screen
+            // darken effect as task gets away from the center of the screen
             darken: {
                 const distFromCentreProgress = Math.abs(x - repeater.leftMargin) / taskSwitcherHelpers.taskWidth;
                 const upperBoundAdjust = Math.min(0.5, distFromCentreProgress) - 0.2;

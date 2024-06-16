@@ -17,7 +17,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 
 /**
- * Root element that contains all of the ActionDrawer's contents, and is anchored to the screen.
+ * Root element that contains all the ActionDrawer's contents, and is anchored to the screen.
  */
 Item {
     id: root

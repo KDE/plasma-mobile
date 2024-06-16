@@ -43,4 +43,4 @@ private:
     }
 };
 
-#endif // GCONFITEM_H
+#endif // GSETTINGSITEM_H

@@ -17,7 +17,7 @@ import org.kde.kirigami as Kirigami
  * Being it a FullScreenOverlay, no event is delivered to underlying components until it's closed.
  *
  * - property relatedTo:     Item to which the popup is related; the popup will spawn either above or below it, depending on its y value.
- *                           If no item is supplied, the popup will spawn at the centre of the screen.
+ *                           If no item is supplied, the popup will spawn at the center of the screen.
  * - property title:         The title for the menu.
  * - property menuActions:   The menu will be composed of these actions.
  * - function showOverlay(): Spawns the popup.
@@ -48,7 +48,7 @@ NanoShell.FullScreenOverlay {
         readonly property point coordinates: {
             if (relatedTo) { // Place next to Item
                 return mapFromGlobal(mappedGlobalCoordinates.x, mappedGlobalCoordinates.y);
-            } else { // Place at the centre of the screen
+            } else { // Place at the center of the screen
                 return Qt.point((overlay.width - width) / 2, (overlay.height - height) / 2);
             }
         }

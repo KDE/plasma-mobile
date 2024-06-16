@@ -55,7 +55,7 @@ Item {
     readonly property string replySubmitButtonText: model.replySubmitButtonText || ""
     readonly property string replySubmitButtonIconName: model.replySubmitButtonIconName || ""
     
-    // configure button on every single notifications is bit overwhelming
+    // configure button on every single notifications is a bit overwhelming
     readonly property bool configurable: !inGroup && model.configurable
 
     readonly property bool dismissable: model.type === NotificationManager.Notifications.JobType

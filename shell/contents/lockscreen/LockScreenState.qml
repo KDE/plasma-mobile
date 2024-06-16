@@ -21,7 +21,7 @@ QtObject {
     // whether the lockscreen was passwordless
     property bool passwordless: false // TODO true
     
-    // whether the device can login with fingerprint
+    // whether the device can log in with fingerprint
     readonly property bool isFingerprintSupported: authenticator.authenticatorTypes & ScreenLocker.Authenticator.Fingerprint
 
     signal reset()
