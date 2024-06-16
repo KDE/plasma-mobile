@@ -372,6 +372,7 @@ QCoro::Task<void> Modem::addProfile(QString name, QString apn, QString username,
 
     NetworkManager::Ipv6Setting::Ptr ipv6Setting = settings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
     ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
+    ipv6Setting->setInitialized(true);
 
     QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), "");
     if (!reply.isValid()) {
@@ -425,6 +426,7 @@ QCoro::Task<void> Modem::updateProfile(QString connectionUni, QString name, QStr
 
     NetworkManager::Ipv6Setting::Ptr ipv6Setting = conSettings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
     ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
+    ipv6Setting->setInitialized(true);
 
     QDBusReply<void> reply = con->update(conSettings->toMap());
     if (!reply.isValid()) {

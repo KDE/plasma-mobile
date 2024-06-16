@@ -103,6 +103,7 @@ QCoro::Task<void> AutoDetectAPN::checkAndAddAutodetectedAPN()
         ) {
             NetworkManager::Ipv6Setting::Ptr ipv6Setting = settings->setting(NetworkManager::Setting::Ipv6).dynamicCast<NetworkManager::Ipv6Setting>();
             ipv6Setting->setMethod(NetworkManager::Ipv6Setting::ConfigMethod::Automatic);
+            ipv6Setting->setInitialized(true);
         }
 
         QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), nmModem->uni(), "");
