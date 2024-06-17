@@ -1,0 +1,260 @@
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+#
+# SPDX-FileCopyrightText: 2024 Stefan Asserhäll <stefan.asserhall@bredband.net>
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-02-01 00:39+0000\n"
+"PO-Revision-Date: 2024-06-16 10:56+0200\n"
+"Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
+"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
+"Language: sv_SE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "Stefan Asserhäll"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "stefan.asserhall@gmail.com"
+
+#: main.cpp:21
+#, kde-format
+msgid "Opens the initial start wizard without modifying configuration"
+msgstr "Öppnar startguiden utan att ändra inställningen"
+
+#: main.cpp:36
+#, kde-format
+msgid "© 2023 KDE Community"
+msgstr "© 2023 KDE-gemenskapen"
+
+#: main.cpp:37
+#, kde-format
+msgid "Devin Lin"
+msgstr "Devin Lin"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
+#, kde-format
+msgid "Edit APN"
+msgstr "Redigera APN"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
+#, kde-format
+msgid "Name"
+msgstr "Namn"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
+#, kde-format
+msgid "APN"
+msgstr "APN"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
+#, kde-format
+msgid "Username"
+msgstr "Användarnamn"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:53
+#, kde-format
+msgid "Password"
+msgstr "Lösenord"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
+#, kde-format
+msgid "Network type"
+msgstr "Nätverkstyp"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "4G/3G/2G"
+msgstr "4G/3G/2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "3G/2G"
+msgstr "3G/2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "2G"
+msgstr "2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 4G"
+msgstr "Bara 4G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 3G"
+msgstr "Bara 3G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Only 2G"
+msgstr "Bara 2G"
+
+#: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
+#, kde-format
+msgid "Any"
+msgstr "Vilket som helst"
+
+#: modules/cellular/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Cellular"
+msgstr "Mobil"
+
+#: modules/cellular/package/contents/ui/main.qml:51
+#: modules/cellular/package/contents/ui/main.qml:59
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "Apparaten har inget tillgängligt modem."
+
+#: modules/cellular/package/contents/ui/main.qml:53
+#, kde-format
+msgid ""
+"Please configure your APN below for mobile data, further information will be "
+"available with your carrier."
+msgstr ""
+"Ställ in APN nedan för mobildata, mer information finnas tillgänglig hos din "
+"operatör."
+
+#: modules/cellular/package/contents/ui/main.qml:55
+#, kde-format
+msgid "You are connected to the mobile network."
+msgstr "Du är ansluten till mobilnätverket."
+
+#: modules/cellular/package/contents/ui/main.qml:57
+#, kde-format
+msgid "Please insert a SIM card into your device."
+msgstr "Sätt i ett SIM-kort i apparaten."
+
+#: modules/cellular/package/contents/ui/main.qml:71
+#, kde-format
+msgid "Mobile Data"
+msgstr "Mobildata"
+
+#: modules/cellular/package/contents/ui/main.qml:114
+#, kde-format
+msgid "Edit"
+msgstr "Redigera"
+
+#: modules/cellular/package/contents/ui/main.qml:122
+#, kde-format
+msgid "Delete"
+msgstr "Ta bort"
+
+#: modules/cellular/package/contents/ui/main.qml:131
+#, kde-format
+msgid "Add APN"
+msgstr "Lägg till APN"
+
+#: modules/finished/contents/ui/main.qml:15
+#, kde-format
+msgid "Complete!"
+msgstr "Färdig!"
+
+#: modules/finished/contents/ui/main.qml:24
+#, kde-format
+msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
+msgstr "Apparaten är nu redo.<br /><br />Njut av <b>%1</b>!"
+
+#: modules/prepare/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Before we get started…"
+msgstr "Innan vi kommer igång …"
+
+#: modules/prepare/package/contents/ui/main.qml:40
+#, kde-format
+msgid ""
+"Adjust the screen brightness to be comfortable for the installation process."
+msgstr ""
+"Justera skärmens ljusstyrka så att den är bekväm för installationsprocessen."
+
+#: modules/prepare/package/contents/ui/main.qml:96
+#, kde-format
+msgid "Adjust the size of elements on the screen."
+msgstr "Justera storleken på elementen på skärmen."
+
+#: modules/prepare/package/contents/ui/main.qml:107
+#, kde-format
+msgid "Display Scaling"
+msgstr "Skärmskalning"
+
+#: modules/prepare/package/contents/ui/main.qml:125
+#, kde-format
+msgid "Dark Theme"
+msgstr "Mörkt tema"
+
+#: modules/time/package/contents/ui/main.qml:14
+#, kde-format
+msgid "Time and Date"
+msgstr "Tid och datum"
+
+#: modules/time/package/contents/ui/main.qml:36
+#, kde-format
+msgid "Select your time zone and preferred time format."
+msgstr "Välj din tidszon och önskat tidsformat."
+
+#: modules/time/package/contents/ui/main.qml:47
+#, kde-format
+msgid "24-Hour Format"
+msgstr "24-timmarsformat"
+
+#: modules/wifi/package/contents/ui/ConnectDialog.qml:57
+#, kde-format
+msgid "Invalid input."
+msgstr "Ogiltig inmatning."
+
+#: modules/wifi/package/contents/ui/ConnectionItemDelegate.qml:125
+#, kde-format
+msgid "Connect to"
+msgstr "Anslut till"
+
+#: modules/wifi/package/contents/ui/main.qml:16
+#, kde-format
+msgid "Network"
+msgstr "Nätverk"
+
+#: modules/wifi/package/contents/ui/main.qml:71
+#, kde-format
+msgid "Connect to a WiFi network for network access."
+msgstr "Anslut till ett WIFI-nätverk för nätverksåtkomst."
+
+#: modules/wifi/package/contents/ui/PasswordField.qml:10
+#, kde-format
+msgid "Password…"
+msgstr "Lösenord…"
+
+#: qml/LandingComponent.qml:104
+#, kde-format
+msgid "Welcome to<br/><b>%1</b>"
+msgstr "Välkommen till <br/><b>%1</b>"
+
+#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
+#, kde-format
+msgid "Next"
+msgstr "Nästa"
+
+#: qml/Main.qml:19
+#, kde-format
+msgid "Initial Start"
+msgstr "Första start"
+
+#: qml/Wizard.qml:274
+#, kde-format
+msgid "Back"
+msgstr "Tillbaka"
+
+#: qml/Wizard.qml:310
+#, kde-format
+msgid "Finish"
+msgstr "Slutför"

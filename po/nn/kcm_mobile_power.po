@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2024-03-17 11:08+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:30
 #, kde-format
 msgid "30 sec"
 msgstr "30 sekund"
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:31
 #, kde-format
 msgid "1 min"
 msgstr "1 minutt"
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:32
 #, kde-format
 msgid "2 min"
 msgstr "2 minutt"
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:33
 #, kde-format
 msgid "5 min"
 msgstr "5 minutt"
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:34
 #, kde-format
 msgid "10 min"
 msgstr "10 minutt"
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:35
 #, kde-format
 msgid "15 min"
 msgstr "15 minutt"
 
-#: mobilepower.cpp:34
+#: mobilepower.cpp:36
 #, kde-format
 msgid "30 min"
 msgstr "30 minutt"
 
-#: mobilepower.cpp:35
+#: mobilepower.cpp:37
 #, kde-format
 msgid "Never"
 msgstr "Aldri"

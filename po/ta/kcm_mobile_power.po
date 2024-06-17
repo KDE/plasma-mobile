@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2021-10-31 16:46+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -18,43 +18,43 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.08.2\n"
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:30
 #, kde-format
 msgid "30 sec"
 msgstr "30 நொ"
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:31
 #, kde-format
 msgid "1 min"
 msgstr "1 நிமி"
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:32
 #, kde-format
 msgid "2 min"
 msgstr "2 நிமி"
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:33
 #, kde-format
 msgid "5 min"
 msgstr "5 நிமி"
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:34
 #, kde-format
 msgid "10 min"
 msgstr "10 நிமி"
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:35
 #, kde-format
 msgid "15 min"
 msgstr "15 நிமி"
 
-#: mobilepower.cpp:34
+#: mobilepower.cpp:36
 #, fuzzy, kde-format
 #| msgid "10 min"
 msgid "30 min"
 msgstr "10 நிமி"
 
-#: mobilepower.cpp:35
+#: mobilepower.cpp:37
 #, kde-format
 msgid "Never"
 msgstr "ஒருபோதுமில்லை"

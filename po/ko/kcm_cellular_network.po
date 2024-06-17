@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2024-02-09 19:33+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr "모뎀 초기화 오류: %1"
 
-#: modem.cpp:264 modem.cpp:428
+#: modem.cpp:264 modem.cpp:436
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "%1의 연결 설정 업데이트 오류: %2."
@@ -32,78 +32,78 @@ msgstr "%1의 연결 설정 업데이트 오류: %2."
 msgid "Error activating connection: %1"
 msgstr "연결 활성화 오류: %1"
 
-#: modem.cpp:376
+#: modem.cpp:380
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "연결 추가 오류: %1"
 
-#: modem.cpp:393
+#: modem.cpp:397
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "연결 삭제 오류: %1"
 
-#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "알 수 없음"
 
-#: modem.cpp:516
+#: modem.cpp:524
 #, kde-format
 msgid "Unmanaged"
 msgstr "관리되지 않음"
 
-#: modem.cpp:518
+#: modem.cpp:526
 #, kde-format
 msgid "Unavailable"
 msgstr "사용할 수 없음"
 
-#: modem.cpp:520
+#: modem.cpp:528
 #, kde-format
 msgid "Disconnected"
 msgstr "연결 끊김"
 
-#: modem.cpp:522
+#: modem.cpp:530
 #, kde-format
 msgid "Preparing"
 msgstr "준비 중"
 
-#: modem.cpp:524
+#: modem.cpp:532
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "하드웨어 설정 중"
 
-#: modem.cpp:526
+#: modem.cpp:534
 #, kde-format
 msgid "NeedAuth"
 msgstr "인증 필요"
 
-#: modem.cpp:528
+#: modem.cpp:536
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "IP 설정 중"
 
-#: modem.cpp:530
+#: modem.cpp:538
 #, kde-format
 msgid "CheckingIp"
 msgstr "IP 확인 중"
 
-#: modem.cpp:532
+#: modem.cpp:540
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "이차 연결 대기 중"
 
-#: modem.cpp:534
+#: modem.cpp:542
 #, kde-format
 msgid "Activated"
 msgstr "활성화됨"
 
-#: modem.cpp:536
+#: modem.cpp:544
 #, kde-format
 msgid "Deactivating"
 msgstr "비활성화 중"
 
-#: modem.cpp:538 modemdetails.cpp:250
+#: modem.cpp:546 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "실패"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2023-12-17 07:37+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -23,7 +23,7 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr "Napaka pri ponovni nastavitvi modema: %1"
 
-#: modem.cpp:264 modem.cpp:428
+#: modem.cpp:264 modem.cpp:436
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "Napaka pri osveževanju nastavitev povezave za %1: %2."
@@ -33,78 +33,78 @@ msgstr "Napaka pri osveževanju nastavitev povezave za %1: %2."
 msgid "Error activating connection: %1"
 msgstr "Napaka pri aktiviranju povezave: %1"
 
-#: modem.cpp:376
+#: modem.cpp:380
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Napaka pri dodajanju povezave: %1"
 
-#: modem.cpp:393
+#: modem.cpp:397
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Napaka pri odstranjevanju povezave: %1"
 
-#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Neznano"
 
-#: modem.cpp:516
+#: modem.cpp:524
 #, kde-format
 msgid "Unmanaged"
 msgstr "Neupravljano"
 
-#: modem.cpp:518
+#: modem.cpp:526
 #, kde-format
 msgid "Unavailable"
 msgstr "Nerazpoložljivo"
 
-#: modem.cpp:520
+#: modem.cpp:528
 #, kde-format
 msgid "Disconnected"
 msgstr "Odklopljeno"
 
-#: modem.cpp:522
+#: modem.cpp:530
 #, kde-format
 msgid "Preparing"
 msgstr "Pripravljanje"
 
-#: modem.cpp:524
+#: modem.cpp:532
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "Nastavljanje strojne opreme"
 
-#: modem.cpp:526
+#: modem.cpp:534
 #, kde-format
 msgid "NeedAuth"
 msgstr "Potrebna je poverilnica"
 
-#: modem.cpp:528
+#: modem.cpp:536
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "Nastavljanje IP"
 
-#: modem.cpp:530
+#: modem.cpp:538
 #, kde-format
 msgid "CheckingIp"
 msgstr "Preverjanje IP"
 
-#: modem.cpp:532
+#: modem.cpp:540
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "Čakanje na sekundarne"
 
-#: modem.cpp:534
+#: modem.cpp:542
 #, kde-format
 msgid "Activated"
 msgstr "Aktivirano"
 
-#: modem.cpp:536
+#: modem.cpp:544
 #, kde-format
 msgid "Deactivating"
 msgstr "Deaktivirano"
 
-#: modem.cpp:538 modemdetails.cpp:250
+#: modem.cpp:546 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Spodletelo"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_cellular_network\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2023-08-14 17:25+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -21,7 +21,7 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr "Chyba pri resetovaní modemu: %1"
 
-#: modem.cpp:264 modem.cpp:428
+#: modem.cpp:264 modem.cpp:436
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr "Chyba pri aktualizácii nastavení pripojenia pre %1: %2."
@@ -31,78 +31,78 @@ msgstr "Chyba pri aktualizácii nastavení pripojenia pre %1: %2."
 msgid "Error activating connection: %1"
 msgstr "Chyba pri aktivácii pripojenia: %1"
 
-#: modem.cpp:376
+#: modem.cpp:380
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Chyba pri pridávaní pripojenia: %1"
 
-#: modem.cpp:393
+#: modem.cpp:397
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Chyba pri odstraňovaní pripojenia: %1"
 
-#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Neznáme"
 
-#: modem.cpp:516
+#: modem.cpp:524
 #, kde-format
 msgid "Unmanaged"
 msgstr "Nespravované"
 
-#: modem.cpp:518
+#: modem.cpp:526
 #, kde-format
 msgid "Unavailable"
 msgstr "Nedostupné"
 
-#: modem.cpp:520
+#: modem.cpp:528
 #, kde-format
 msgid "Disconnected"
 msgstr "Odpojené"
 
-#: modem.cpp:522
+#: modem.cpp:530
 #, kde-format
 msgid "Preparing"
 msgstr "Príprava"
 
-#: modem.cpp:524
+#: modem.cpp:532
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "KonfiguráciaHardvéru"
 
-#: modem.cpp:526
+#: modem.cpp:534
 #, kde-format
 msgid "NeedAuth"
 msgstr "PotrebaOverenia"
 
-#: modem.cpp:528
+#: modem.cpp:536
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "KonfiguáciaIp"
 
-#: modem.cpp:530
+#: modem.cpp:538
 #, kde-format
 msgid "CheckingIp"
 msgstr "KontrolaIp"
 
-#: modem.cpp:532
+#: modem.cpp:540
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "ČakanieNaSekundárne"
 
-#: modem.cpp:534
+#: modem.cpp:542
 #, kde-format
 msgid "Activated"
 msgstr "Aktivované"
 
-#: modem.cpp:536
+#: modem.cpp:544
 #, kde-format
 msgid "Deactivating"
 msgstr "Deaktivovanie"
 
-#: modem.cpp:538 modemdetails.cpp:250
+#: modem.cpp:546 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Neúspešné"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2024-03-20 17:09-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.02.0\n"
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:30
 #, kde-format
 msgid "30 sec"
 msgstr "30 s"
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:31
 #, kde-format
 msgid "1 min"
 msgstr "1 min"
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:32
 #, kde-format
 msgid "2 min"
 msgstr "2 min"
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:33
 #, kde-format
 msgid "5 min"
 msgstr "5 min"
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:34
 #, kde-format
 msgid "10 min"
 msgstr "10 min"
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:35
 #, kde-format
 msgid "15 min"
 msgstr "15 min"
 
-#: mobilepower.cpp:34
+#: mobilepower.cpp:36
 #, kde-format
 msgid "30 min"
 msgstr "30 min"
 
-#: mobilepower.cpp:35
+#: mobilepower.cpp:37
 #, kde-format
 msgid "Never"
 msgstr "Nunca"
