@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"POT-Creation-Date: 2024-06-17 00:40+0000\n"
 "PO-Revision-Date: 2024-02-05 17:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -20,42 +20,42 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 24.01.95\n"
 
-#: mobilepower.cpp:28
+#: mobilepower.cpp:30
 #, kde-format
 msgid "30 sec"
 msgstr "30 秒"
 
-#: mobilepower.cpp:29
+#: mobilepower.cpp:31
 #, kde-format
 msgid "1 min"
 msgstr "1 分鐘"
 
-#: mobilepower.cpp:30
+#: mobilepower.cpp:32
 #, kde-format
 msgid "2 min"
 msgstr "2 分鐘"
 
-#: mobilepower.cpp:31
+#: mobilepower.cpp:33
 #, kde-format
 msgid "5 min"
 msgstr "5 分鐘"
 
-#: mobilepower.cpp:32
+#: mobilepower.cpp:34
 #, kde-format
 msgid "10 min"
 msgstr "10 分鐘"
 
-#: mobilepower.cpp:33
+#: mobilepower.cpp:35
 #, kde-format
 msgid "15 min"
 msgstr "15 分鐘"
 
-#: mobilepower.cpp:34
+#: mobilepower.cpp:36
 #, kde-format
 msgid "30 min"
 msgstr "30 分鐘"
 
-#: mobilepower.cpp:35
+#: mobilepower.cpp:37
 #, kde-format
 msgid "Never"
 msgstr "永不"

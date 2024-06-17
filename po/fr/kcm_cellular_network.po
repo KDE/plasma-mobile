@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-14 00:39+0000\n"
+"POT-Creation-Date: 2024-06-17 00:40+0000\n"
 "PO-Revision-Date: 2023-12-18 09:41+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "Error resetting the modem: %1"
 msgstr "Erreur lors de la ré-initialisation du modem : %1"
 
-#: modem.cpp:264 modem.cpp:428
+#: modem.cpp:264 modem.cpp:436
 #, kde-format
 msgid "Error updating connection settings for %1: %2."
 msgstr ""
@@ -30,78 +30,78 @@ msgstr ""
 msgid "Error activating connection: %1"
 msgstr "Erreur lors de l'activation de la connexion : %1"
 
-#: modem.cpp:376
+#: modem.cpp:380
 #, kde-format
 msgid "Error adding connection: %1"
 msgstr "Erreur lors de l'ajout d'une connexion : %1"
 
-#: modem.cpp:393
+#: modem.cpp:397
 #, kde-format
 msgid "Error removing connection: %1"
 msgstr "Erreur lors de la suppression d'une connexion : %1"
 
-#: modem.cpp:514 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
+#: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
 #, kde-format
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: modem.cpp:516
+#: modem.cpp:524
 #, kde-format
 msgid "Unmanaged"
 msgstr "Non géré"
 
-#: modem.cpp:518
+#: modem.cpp:526
 #, kde-format
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: modem.cpp:520
+#: modem.cpp:528
 #, kde-format
 msgid "Disconnected"
 msgstr "Déconnecté"
 
-#: modem.cpp:522
+#: modem.cpp:530
 #, kde-format
 msgid "Preparing"
 msgstr "En préparation"
 
-#: modem.cpp:524
+#: modem.cpp:532
 #, kde-format
 msgid "ConfiguringHardware"
 msgstr "Configuration du matériel"
 
-#: modem.cpp:526
+#: modem.cpp:534
 #, kde-format
 msgid "NeedAuth"
 msgstr "Authentification requise"
 
-#: modem.cpp:528
+#: modem.cpp:536
 #, kde-format
 msgid "ConfiguringIp"
 msgstr "Confirmation d'IP"
 
-#: modem.cpp:530
+#: modem.cpp:538
 #, kde-format
 msgid "CheckingIp"
 msgstr "Vérification d'IP"
 
-#: modem.cpp:532
+#: modem.cpp:540
 #, kde-format
 msgid "WaitingForSecondaries"
 msgstr "En attente pour des alternatifs"
 
-#: modem.cpp:534
+#: modem.cpp:542
 #, kde-format
 msgid "Activated"
 msgstr "Activé"
 
-#: modem.cpp:536
+#: modem.cpp:544
 #, kde-format
 msgid "Deactivating"
 msgstr "Désactivation en cours"
 
-#: modem.cpp:538 modemdetails.cpp:250
+#: modem.cpp:546 modemdetails.cpp:250
 #, kde-format
 msgid "Failed"
 msgstr "Échec"
