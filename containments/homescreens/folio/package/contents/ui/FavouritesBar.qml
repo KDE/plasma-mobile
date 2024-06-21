@@ -16,6 +16,7 @@ import "./delegate"
 
 MouseArea {
     id: root
+    property Folio.HomeScreen folio
 
     property var homeScreen
 
@@ -25,10 +26,10 @@ MouseArea {
 
     signal delegateDragRequested(var item)
 
-    onPressAndHold: Folio.HomeScreenState.openSettingsView()
+    onPressAndHold: folio.HomeScreenState.openSettingsView()
 
     Repeater {
-        model: Folio.FavouritesModel
+        model: folio.FavouritesModel
 
         delegate: Item {
             id: delegate
@@ -36,10 +37,10 @@ MouseArea {
             property var delegateModel: model.delegate
             property int index: model.index
 
-            property var dragState: Folio.HomeScreenState.dragState
+            property var dragState: folio.HomeScreenState.dragState
             property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
                                               dragState.candidateDropPosition.favouritesPosition === delegate.index
-            property bool isAppHoveredOver: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+            property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
                                             dragState.dropDelegate &&
                                             dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
                                             isDropPositionThis
@@ -49,8 +50,8 @@ MouseArea {
             x: model.xPosition - leftMargin
             y: model.xPosition - topMargin
 
-            anchors.verticalCenter: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? parent.verticalCenter : undefined
-            anchors.horizontalCenter: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? undefined : parent.horizontalCenter
+            anchors.verticalCenter: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? parent.verticalCenter : undefined
+            anchors.horizontalCenter: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? undefined : parent.horizontalCenter
 
             Behavior on x {
                 NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
@@ -59,10 +60,10 @@ MouseArea {
                 NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
             }
 
-            implicitWidth: Folio.HomeScreenState.pageCellWidth
-            implicitHeight: Folio.HomeScreenState.pageCellHeight
-            width: Folio.HomeScreenState.pageCellWidth
-            height: Folio.HomeScreenState.pageCellHeight
+            implicitWidth: folio.HomeScreenState.pageCellWidth
+            implicitHeight: folio.HomeScreenState.pageCellHeight
+            width: folio.HomeScreenState.pageCellWidth
+            height: folio.HomeScreenState.pageCellHeight
 
             Loader {
                 anchors.fill: parent
@@ -90,12 +91,13 @@ MouseArea {
 
                 AppDelegate {
                     id: appDelegate
+                    folio: root.folio
                     application: delegate.delegateModel.application
-                    name: Folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.application.name : ""
+                    name: folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.application.name : ""
                     shadow: true
 
                     turnToFolder: delegate.isAppHoveredOver
-                    turnToFolderAnimEnabled: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate
+                    turnToFolderAnimEnabled: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate
 
                     // do not show if the drop animation is running to this delegate
                     visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
@@ -118,7 +120,7 @@ MouseArea {
 
                     onPressAndHoldReleased: {
                         // cancel the event if the delegate is not dragged
-                        if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                        if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
                             homeScreen.cancelDelegateDrag();
                         }
                     }
@@ -132,10 +134,10 @@ MouseArea {
 
                         // close menu when drag starts
                         Connections {
-                            target: Folio.HomeScreenState
+                            target: folio.HomeScreenState
 
                             function onSwipeStateChanged() {
-                                if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                                     contextMenu.close();
                                 }
                             }
@@ -145,7 +147,7 @@ MouseArea {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
-                                onTriggered: Folio.FavouritesModel.removeEntry(delegate.index)
+                                onTriggered: folio.FavouritesModel.removeEntry(delegate.index)
                             }
                         ]
                     }
@@ -157,9 +159,10 @@ MouseArea {
 
                 AppFolderDelegate {
                     id: appFolderDelegate
+                    folio: root.folio
                     shadow: true
                     folder: delegate.delegateModel.folder
-                    name: Folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.folder.name : ""
+                    name: folio.FolioSettings.showFavouritesAppLabels ? delegate.delegateModel.folder.name : ""
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
@@ -173,12 +176,12 @@ MouseArea {
 
                     onAfterClickAnimation: {
                         const pos = homeScreen.prepareFolderOpen(appFolderDelegate.contentItem);
-                        Folio.HomeScreenState.openFolder(pos.x, pos.y, delegate.delegateModel.folder);
+                        folio.HomeScreenState.openFolder(pos.x, pos.y, delegate.delegateModel.folder);
                     }
 
                     onPressAndHold: {
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appFolderDelegate.delegateItem);
-                        Folio.HomeScreenState.startDelegateFavouritesDrag(
+                        folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
                             mappedCoords.y,
                             appFolderDelegate.pressPosition.x,
@@ -191,7 +194,7 @@ MouseArea {
 
                     onPressAndHoldReleased: {
                         // cancel the event if the delegate is not dragged
-                        if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                        if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
                             root.homeScreen.cancelDelegateDrag();
                         }
                     }
@@ -205,10 +208,10 @@ MouseArea {
 
                         // close menu when drag starts
                         Connections {
-                            target: Folio.HomeScreenState
+                            target: folio.HomeScreenState
 
                             function onSwipeStateChanged() {
-                                if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                                     contextMenu.close();
                                 }
                             }
@@ -225,7 +228,7 @@ MouseArea {
                         ConfirmDeleteFolderDialogLoader {
                             id: deleteDialog
                             parent: root.homeScreen
-                            onAccepted: Folio.FavouritesModel.removeEntry(delegate.index)
+                            onAccepted: folio.FavouritesModel.removeEntry(delegate.index)
                         }
                     }
                 }

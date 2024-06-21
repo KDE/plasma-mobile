@@ -12,9 +12,10 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 Loader {
     id: root
+    property Folio.HomeScreen folio
 
-    height: Folio.FolioSettings.delegateIconSize
-    width: Folio.FolioSettings.delegateIconSize
+    height: folio.FolioSettings.delegateIconSize
+    width: folio.FolioSettings.delegateIconSize
 
     property Folio.FolioDelegate delegate
 
@@ -39,6 +40,7 @@ Loader {
         id: appIcon
 
         DelegateAppIcon {
+            folio: root.folio
             source: delegate.application.icon
         }
     }
@@ -47,6 +49,7 @@ Loader {
         id: folderIcon
 
         DelegateFolderIcon {
+            folio: root.folio
             folder: delegate.folder
         }
     }

@@ -16,6 +16,7 @@ import '../delegate'
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     property var homeScreen
     property real settingsModeHomeScreenScale
@@ -31,7 +32,7 @@ Item {
         anchors.bottom: settingsBar.top
 
         onClicked: {
-            Folio.HomeScreenState.closeSettingsView();
+            folio.HomeScreenState.closeSettingsView();
         }
     }
 
@@ -66,7 +67,7 @@ Item {
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         source: 'edit-image'
                     }
-                    
+
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         text: i18n('Wallpapers')
@@ -76,7 +77,7 @@ Item {
 
                 onClicked: {
                     wallpaperSelectorLoader.active = true;
-                    Folio.HomeScreenState.closeSettingsView();
+                    folio.HomeScreenState.closeSettingsView();
                 }
             }
 
@@ -94,7 +95,7 @@ Item {
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         source: 'settings-configure'
                     }
-                    
+
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         text: i18n('Settings')
@@ -123,7 +124,7 @@ Item {
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         source: 'widget-alternatives'
                     }
-                    
+
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         text: i18n('Widgets')
@@ -140,6 +141,7 @@ Item {
 
     AppletListViewer {
         id: appletListViewer
+        folio: root.folio
         width: parent.width
         height: parent.height
 
@@ -162,6 +164,7 @@ Item {
 
     SettingsWindow {
         id: settingsWindow
+        folio: root.folio
         visible: false
 
         onRequestConfigureMenu: {

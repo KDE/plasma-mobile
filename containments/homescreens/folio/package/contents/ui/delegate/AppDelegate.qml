@@ -14,6 +14,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 AbstractDelegate {
     id: root
+
     shadow: true
     name: application.name
 
@@ -43,8 +44,8 @@ AbstractDelegate {
     }
 
     contentItem: Item {
-        height: Folio.FolioSettings.delegateIconSize
-        width: Folio.FolioSettings.delegateIconSize
+        height: folio.FolioSettings.delegateIconSize
+        width: folio.FolioSettings.delegateIconSize
 
         // background for folder creation animation
         Rectangle {
@@ -76,6 +77,7 @@ AbstractDelegate {
         // app icon
         DelegateAppIcon {
             id: icon
+            folio: root.folio
             anchors.fill: parent
             source: root.application.icon
 

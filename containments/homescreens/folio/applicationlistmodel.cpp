@@ -18,7 +18,7 @@
 #include <KSharedConfig>
 #include <KSycoca>
 
-ApplicationListModel::ApplicationListModel(QObject *parent)
+ApplicationListModel::ApplicationListModel(HomeScreen *parent)
     : QAbstractListModel(parent)
 {
     connect(KSycoca::self(), &KSycoca::databaseChanged, this, &ApplicationListModel::sycocaDbChanged);
@@ -33,12 +33,6 @@ ApplicationListModel::ApplicationListModel(QObject *parent)
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
-
-ApplicationListModel *ApplicationListModel::self()
-{
-    static ApplicationListModel *inst = new ApplicationListModel(nullptr);
-    return inst;
-}
 
 QHash<int, QByteArray> ApplicationListModel::roleNames() const
 {
@@ -82,8 +76,8 @@ void ApplicationListModel::load()
     const KService::List apps = KApplicationTrader::query(filter);
 
     for (const KService::Ptr &service : apps) {
-        FolioApplication *app = new FolioApplication{this, service};
-        FolioDelegate *delegate = new FolioDelegate{app, this};
+        FolioApplication *app = new FolioApplication{m_homeScreen, service};
+        FolioDelegate *delegate = new FolioDelegate{app, m_homeScreen};
         unorderedList << delegate;
     }
 

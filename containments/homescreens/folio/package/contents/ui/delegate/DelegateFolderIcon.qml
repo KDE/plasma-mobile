@@ -12,13 +12,14 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     property Folio.FolioApplicationFolder folder
 
     property bool expandBackground: false
 
-    height: Folio.FolioSettings.delegateIconSize
-    width: Folio.FolioSettings.delegateIconSize
+    height: folio.FolioSettings.delegateIconSize
+    width: folio.FolioSettings.delegateIconSize
 
     Rectangle {
         id: rect

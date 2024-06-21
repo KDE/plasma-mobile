@@ -11,6 +11,10 @@
 #include <QSet>
 
 #include "foliodelegate.h"
+#include "homescreen.h"
+
+class HomeScreen;
+class FolioDelegate;
 
 /**
  * @short The base application list, used directly by the app drawer.
@@ -24,15 +28,14 @@ public:
         DelegateRole = Qt::UserRole + 1,
     };
 
-    ApplicationListModel(QObject *parent = nullptr);
+    ApplicationListModel(HomeScreen *parent = nullptr);
     ~ApplicationListModel() override;
-    static ApplicationListModel *self();
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const Q_DECL_OVERRIDE;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const Q_DECL_OVERRIDE;
     QHash<int, QByteArray> roleNames() const Q_DECL_OVERRIDE;
 
-    Q_INVOKABLE void load();
+    void load();
 
 public Q_SLOTS:
     void sycocaDbChanged();
@@ -41,5 +44,6 @@ Q_SIGNALS:
     void launchError(const QString &msg);
 
 protected:
+    HomeScreen *m_homeScreen{nullptr};
     QList<FolioDelegate *> m_delegates;
 };

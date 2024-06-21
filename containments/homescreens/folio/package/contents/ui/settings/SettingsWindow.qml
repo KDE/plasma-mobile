@@ -16,6 +16,8 @@ import '../delegate'
 
 Window {
     id: root
+    property Folio.HomeScreen folio
+
     flags: Qt.FramelessWindowHint
     color: 'transparent'
 
@@ -92,18 +94,19 @@ Window {
                     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
                     Item {
-                        Layout.preferredHeight: Folio.HomeScreenState.pageCellHeight
+                        Layout.preferredHeight: folio.HomeScreenState.pageCellHeight
                         Layout.fillWidth: true
 
                         AbstractDelegate {
+                            folio: root.folio
                             anchors.centerIn: parent
-                            implicitHeight: Folio.HomeScreenState.pageCellHeight
-                            implicitWidth: Folio.HomeScreenState.pageCellWidth
+                            implicitHeight: folio.HomeScreenState.pageCellHeight
+                            implicitWidth: folio.HomeScreenState.pageCellWidth
                             name: i18n('Application')
 
                             contentItem: DelegateAppIcon {
-                                height: Folio.FolioSettings.delegateIconSize
-                                width: Folio.FolioSettings.delegateIconSize
+                                height: folio.FolioSettings.delegateIconSize
+                                width: folio.FolioSettings.delegateIconSize
                                 source: 'applications-system'
                             }
                         }
@@ -112,8 +115,8 @@ Window {
 
                 FormCard.FormCard {
                     id: iconsCard
-                    readonly property bool isVerticalOrientation: Folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RegularPosition ||
-                                                                Folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
+                    readonly property bool isVerticalOrientation: folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RegularPosition ||
+                                                                folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
 
                     readonly property string numOfRowsText: i18n("Number of rows")
                     readonly property string numOfColumnsText: i18n("Number of columns")
@@ -123,10 +126,10 @@ Window {
                         label: i18n("Size of icons on homescreen")
                         from: 16
                         to: 128
-                        value: Folio.FolioSettings.delegateIconSize
+                        value: folio.FolioSettings.delegateIconSize
                         onValueChanged: {
-                            if (value !== Folio.FolioSettings.delegateIconSize) {
-                                Folio.FolioSettings.delegateIconSize = value;
+                            if (value !== folio.FolioSettings.delegateIconSize) {
+                                folio.FolioSettings.delegateIconSize = value;
                             }
                         }
                     }
@@ -136,10 +139,10 @@ Window {
                         label: iconsCard.isVerticalOrientation ? iconsCard.numOfRowsText : iconsCard.numOfColumnsText
                         from: 3
                         to: 10
-                        value: Folio.FolioSettings.homeScreenRows
+                        value: folio.FolioSettings.homeScreenRows
                         onValueChanged: {
-                            if (value !== Folio.FolioSettings.homeScreenRows) {
-                                Folio.FolioSettings.homeScreenRows = value;
+                            if (value !== folio.FolioSettings.homeScreenRows) {
+                                folio.FolioSettings.homeScreenRows = value;
                             }
                         }
                     }
@@ -149,10 +152,10 @@ Window {
                         label: iconsCard.isVerticalOrientation ? iconsCard.numOfColumnsText : iconsCard.numOfRowsText
                         from: 3
                         to: 10
-                        value: Folio.FolioSettings.homeScreenColumns
+                        value: folio.FolioSettings.homeScreenColumns
                         onValueChanged: {
-                            if (value !== Folio.FolioSettings.homeScreenColumns) {
-                                Folio.FolioSettings.homeScreenColumns = value;
+                            if (value !== folio.FolioSettings.homeScreenColumns) {
+                                folio.FolioSettings.homeScreenColumns = value;
                             }
                         }
                     }
@@ -170,10 +173,10 @@ Window {
                     FormCard.FormSwitchDelegate {
                         id: showLabelsOnHomeScreen
                         text: i18n("Show labels on homescreen")
-                        checked: Folio.FolioSettings.showPagesAppLabels
+                        checked: folio.FolioSettings.showPagesAppLabels
                         onCheckedChanged: {
-                            if (checked != Folio.FolioSettings.showPagesAppLabels) {
-                                Folio.FolioSettings.showPagesAppLabels = checked;
+                            if (checked != folio.FolioSettings.showPagesAppLabels) {
+                                folio.FolioSettings.showPagesAppLabels = checked;
                             }
                         }
                     }
@@ -183,10 +186,10 @@ Window {
                     FormCard.FormSwitchDelegate {
                         id: showLabelsInFavourites
                         text: i18n("Show labels in favorites bar")
-                        checked: Folio.FolioSettings.showFavouritesAppLabels
+                        checked: folio.FolioSettings.showFavouritesAppLabels
                         onCheckedChanged: {
-                            if (checked != Folio.FolioSettings.showFavouritesAppLabels) {
-                                Folio.FolioSettings.showFavouritesAppLabels = checked;
+                            if (checked != folio.FolioSettings.showFavouritesAppLabels) {
+                                folio.FolioSettings.showFavouritesAppLabels = checked;
                             }
                         }
                     }
@@ -197,7 +200,7 @@ Window {
                         id: pageTransitionCombobox
                         text: i18n("Page transition effect")
 
-                        currentIndex: indexOfValue(Folio.FolioSettings.pageTransitionEffect)
+                        currentIndex: indexOfValue(folio.FolioSettings.pageTransitionEffect)
                         model: ListModel {
                             // we can't use i18n with ListElement
                             Component.onCompleted: {
@@ -208,14 +211,14 @@ Window {
                                 append({"name": i18n("Rotation"), "value": Folio.FolioSettings.RotationTransition});
 
                                 // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                                pageTransitionCombobox.currentIndex = pageTransitionCombobox.indexOfValue(Folio.FolioSettings.pageTransitionEffect)
+                                pageTransitionCombobox.currentIndex = pageTransitionCombobox.indexOfValue(folio.FolioSettings.pageTransitionEffect)
                             }
                         }
 
                         textRole: "name"
                         valueRole: "value"
 
-                        onCurrentValueChanged: Folio.FolioSettings.pageTransitionEffect = currentValue
+                        onCurrentValueChanged: folio.FolioSettings.pageTransitionEffect = currentValue
                     }
                 }
 
@@ -227,10 +230,10 @@ Window {
                     FormCard.FormSwitchDelegate {
                         text: i18n('Show background')
                         icon.name: 'draw-rectangle'
-                        checked: Folio.FolioSettings.showFavouritesBarBackground
+                        checked: folio.FolioSettings.showFavouritesBarBackground
                         onCheckedChanged: {
-                            if (checked !== Folio.FolioSettings.showFavouritesBarBackground) {
-                                Folio.FolioSettings.showFavouritesBarBackground = checked;
+                            if (checked !== folio.FolioSettings.showFavouritesBarBackground) {
+                                folio.FolioSettings.showFavouritesBarBackground = checked;
                             }
                         }
                     }
@@ -244,10 +247,10 @@ Window {
                     FormCard.FormSwitchDelegate {
                         id: showWallpaperBlur
                         text: i18nc("@option:check", "Show wallpaper blur effect")
-                        checked: Folio.FolioSettings.showWallpaperBlur
+                        checked: folio.FolioSettings.showWallpaperBlur
                         onCheckedChanged: {
-                            if (checked != Folio.FolioSettings.showWallpaperBlur) {
-                                Folio.FolioSettings.showWallpaperBlur = checked;
+                            if (checked != folio.FolioSettings.showWallpaperBlur) {
+                                folio.FolioSettings.showWallpaperBlur = checked;
                             }
                         }
                     }
@@ -295,7 +298,7 @@ Window {
                 onAccepted: {
                     console.log('saving layout to ' + selectedFile);
                     if (selectedFile) {
-                        let status = Folio.FolioSettings.saveLayoutToFile(selectedFile);
+                        let status = folio.FolioSettings.saveLayoutToFile(selectedFile);
                         if (status) {
                             exportedSuccessfullyPrompt.open();
                         } else {
@@ -335,7 +338,7 @@ Window {
                 title: i18n("Confirm Import")
                 subtitle: i18n("This will overwrite your existing homescreen layout!")
                 standardButtons: Kirigami.Dialog.Ok | Kirigami.Dialog.Cancel
-                onAccepted: Folio.FolioSettings.loadLayoutFromFile(importFileDialog.selectedFile);
+                onAccepted: folio.FolioSettings.loadLayoutFromFile(importFileDialog.selectedFile);
             }
         }
     }

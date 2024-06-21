@@ -11,25 +11,26 @@ import "./delegate"
 
 Item {
     id: root
-    width: Folio.HomeScreenState.pageCellWidth
-    height: Folio.HomeScreenState.pageCellHeight
-
+    property Folio.HomeScreen folio
     property Folio.FolioDelegate delegate
+
+    width: folio.HomeScreenState.pageCellWidth
+    height: folio.HomeScreenState.pageCellHeight
 
     readonly property real dropAnimationRunning: dragXAnim.running || dragYAnim.running
 
     // ignore widget dragging, that is not handled by this component
-    readonly property bool isWidgetDrag: Folio.HomeScreenState.dragState.dropDelegate && Folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
+    readonly property bool isWidgetDrag: folio.HomeScreenState.dragState.dropDelegate && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
 
     visible: false
-    x: Folio.HomeScreenState.delegateDragX
-    y: Folio.HomeScreenState.delegateDragY
+    x: folio.HomeScreenState.delegateDragX
+    y: folio.HomeScreenState.delegateDragY
 
     function setXBinding() {
-        x = Qt.binding(() => Folio.HomeScreenState.delegateDragX);
+        x = Qt.binding(() => folio.HomeScreenState.delegateDragX);
     }
     function setYBinding() {
-        y = Qt.binding(() => Folio.HomeScreenState.delegateDragY);
+        y = Qt.binding(() => folio.HomeScreenState.delegateDragY);
     }
 
     // animate drop x
@@ -67,13 +68,13 @@ Item {
 
     Connections {
         id: stateWatcher
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         property var delegateDroppedOn: null
 
         // reset and show drag item
         function onSwipeStateChanged() {
-            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate && !isWidgetDrag) {
+            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate && !isWidgetDrag) {
                 root.scale = 1.0;
                 root.visible = true;
             }
@@ -85,15 +86,15 @@ Item {
                 return;
             }
 
-            let dragState = Folio.HomeScreenState.dragState;
+            let dragState = folio.HomeScreenState.dragState;
             let dropPosition = dragState.candidateDropPosition;
 
             switch (dropPosition.location) {
                 case Folio.DelegateDragPosition.Pages:
-                    stateWatcher.delegateDroppedOn = Folio.HomeScreenState.getPageDelegateAt(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
+                    stateWatcher.delegateDroppedOn = folio.HomeScreenState.getPageDelegateAt(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
                     break;
                 case Folio.DelegateDragPosition.Favourites:
-                    stateWatcher.delegateDroppedOn = Folio.HomeScreenState.getFavouritesDelegateAt(dropPosition.favouritesPosition);
+                    stateWatcher.delegateDroppedOn = folio.HomeScreenState.getFavouritesDelegateAt(dropPosition.favouritesPosition);
                     break;
                 case Folio.DelegateDragPosition.Folder:
                     stateWatcher.delegateDroppedOn = null;
@@ -103,7 +104,7 @@ Item {
     }
 
     Connections {
-        target: Folio.HomeScreenState.dragState
+        target: folio.HomeScreenState.dragState
 
         // animate from when the delegate is dropped to its drop position
         function onDelegateDroppedAndPlaced() {
@@ -111,20 +112,20 @@ Item {
                 return;
             }
 
-            let dragState = Folio.HomeScreenState.dragState;
+            let dragState = folio.HomeScreenState.dragState;
             let dropPosition = dragState.candidateDropPosition;
 
             let pos = null;
 
             switch (dropPosition.location) {
                 case Folio.DelegateDragPosition.Pages:
-                    pos = Folio.HomeScreenState.getPageDelegateScreenPosition(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
+                    pos = folio.HomeScreenState.getPageDelegateScreenPosition(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
                     break;
                 case Folio.DelegateDragPosition.Favourites:
-                    pos = Folio.HomeScreenState.getFavouritesDelegateScreenPosition(dropPosition.favouritesPosition);
+                    pos = folio.HomeScreenState.getFavouritesDelegateScreenPosition(dropPosition.favouritesPosition);
                     break;
                 case Folio.DelegateDragPosition.Folder:
-                    pos = Folio.HomeScreenState.getFolderDelegateScreenPosition(dropPosition.folderPosition);
+                    pos = folio.HomeScreenState.getFolderDelegateScreenPosition(dropPosition.folderPosition);
                     break;
             }
 
@@ -156,9 +157,10 @@ Item {
         // icon
         DelegateIconLoader {
             id: loader
+            folio: root.folio
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.minimumWidth: Folio.FolioSettings.delegateIconSize
-            Layout.minimumHeight: Folio.FolioSettings.delegateIconSize
+            Layout.minimumWidth: folio.FolioSettings.delegateIconSize
+            Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
 
             delegate: root.delegate
@@ -173,8 +175,8 @@ Item {
             opacity: 0
 
             Layout.fillWidth: true
-            Layout.preferredHeight: Folio.HomeScreenState.pageDelegateLabelHeight
-            Layout.topMargin: Folio.HomeScreenState.pageDelegateLabelSpacing
+            Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
+            Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
             Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
             Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
         }

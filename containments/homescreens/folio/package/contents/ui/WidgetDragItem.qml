@@ -18,17 +18,19 @@ import './private'
 
 Item {
     id: root
+    property Folio.HomeScreen folio
+
     width: widgetLoader.item ? widgetLoader.item.width : 0
     height: widgetLoader.item ? widgetLoader.item.height : 0
 
     property Folio.FolioWidget widget
 
-    readonly property bool isWidgetDelegate: Folio.HomeScreenState.dragState.dropDelegate && Folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
+    readonly property bool isWidgetDelegate: folio.HomeScreenState.dragState.dropDelegate && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget
     readonly property bool dropAnimationRunning: dragXAnim.running || dragYAnim.running
 
     visible: false
-    x: Math.round(Folio.HomeScreenState.delegateDragX)
-    y: Math.round(Folio.HomeScreenState.delegateDragY)
+    x: Math.round(folio.HomeScreenState.delegateDragX)
+    y: Math.round(folio.HomeScreenState.delegateDragY)
 
     function startDrag(widget) {
         root.widget = widget;
@@ -36,10 +38,10 @@ Item {
     }
 
     function setXBinding() {
-        x = Qt.binding(() => Math.round(Folio.HomeScreenState.delegateDragX));
+        x = Qt.binding(() => Math.round(folio.HomeScreenState.delegateDragX));
     }
     function setYBinding() {
-        y = Qt.binding(() => Math.round(Folio.HomeScreenState.delegateDragY));
+        y = Qt.binding(() => Math.round(folio.HomeScreenState.delegateDragY));
     }
 
     // animate drop x
@@ -70,20 +72,20 @@ Item {
 
     Connections {
         id: stateWatcher
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         function onSwipeStateChanged() {
-            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                Folio.HomeScreenState.dragState.dropDelegate &&
-                Folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget) {
+            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+                folio.HomeScreenState.dragState.dropDelegate &&
+                folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Widget) {
 
-                root.startDrag(Folio.HomeScreenState.dragState.dropDelegate.widget);
+                root.startDrag(folio.HomeScreenState.dragState.dropDelegate.widget);
             }
         }
     }
 
     Connections {
-        target: Folio.HomeScreenState.dragState
+        target: folio.HomeScreenState.dragState
 
         // animate from when the delegate is dropped to its drop position
         function onDelegateDroppedAndPlaced() {
@@ -91,10 +93,10 @@ Item {
                 return;
             }
 
-            let dragState = Folio.HomeScreenState.dragState;
+            let dragState = folio.HomeScreenState.dragState;
             let dropPosition = dragState.candidateDropPosition;
 
-            let pos = Folio.HomeScreenState.getPageDelegateScreenPosition(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
+            let pos = folio.HomeScreenState.getPageDelegateScreenPosition(dropPosition.page, dropPosition.pageRow, dropPosition.pageColumn);
 
             dragXAnim.to = pos.x;
             dragYAnim.to = pos.y;
@@ -114,6 +116,7 @@ Item {
         active: root.widget
 
         sourceComponent: WidgetDelegate {
+            folio: root.folio
             widget: root.widget
 
             layer.enabled: true

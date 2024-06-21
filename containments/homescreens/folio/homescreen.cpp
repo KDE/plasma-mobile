@@ -4,20 +4,6 @@
 
 #include "homescreen.h"
 
-#include "applicationlistmodel.h"
-#include "delegatetoucharea.h"
-#include "favouritesmodel.h"
-#include "folioapplication.h"
-#include "folioapplicationfolder.h"
-#include "foliodelegate.h"
-#include "foliosettings.h"
-#include "foliowidget.h"
-#include "homescreenstate.h"
-#include "pagelistmodel.h"
-#include "pagemodel.h"
-#include "widgetcontainer.h"
-#include "widgetsmanager.h"
-
 #include <KWindowSystem>
 
 #include <QDebug>
@@ -27,49 +13,34 @@
 
 HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment{parent, data, args}
+    , m_folioSettings{new FolioSettings{this}}
+    , m_homeScreenState{new HomeScreenState{this}}
+    , m_widgetsManager{new WidgetsManager{this}}
+    , m_applicationListModel{new ApplicationListModel{this}}
+    , m_favouritesModel{new FavouritesModel{this}}
+    , m_pageListModel{new PageListModel{this}}
 {
-    setHasConfigurationInterface(true);
+    // HomeScreenState init() has dependencies on other objects
+    m_homeScreenState->init();
+
     const char *uri = "org.kde.private.mobile.homescreen.folio";
-
-    // pre-initialize
-    FolioSettings::self()->setApplet(this);
-    HomeScreenState::self()->setContainment(this);
-    WidgetsManager::self();
-
-    // models are loaded in main.qml
-    ApplicationListModel::self();
-    FavouritesModel::self()->setContainment(this);
-    PageListModel::self()->setContainment(this);
-
-    qmlRegisterSingletonType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return ApplicationListModel::self();
-    });
-
-    qmlRegisterSingletonType<FavouritesModel>(uri, 1, 0, "FavouritesModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return FavouritesModel::self();
-    });
-
-    qmlRegisterSingletonType<PageListModel>(uri, 1, 0, "PageListModel", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return PageListModel::self();
-    });
-
-    qmlRegisterSingletonType<FolioSettings>(uri, 1, 0, "FolioSettings", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return FolioSettings::self();
-    });
-
-    qmlRegisterSingletonType<HomeScreenState>(uri, 1, 0, "HomeScreenState", [](QQmlEngine *, QJSEngine *) -> QObject * {
-        return HomeScreenState::self();
-    });
-
-    qmlRegisterType<FolioApplication>(uri, 1, 0, "FolioApplication");
-    qmlRegisterType<FolioApplicationFolder>(uri, 1, 0, "FolioApplicationFolder");
-    qmlRegisterType<FolioWidget>(uri, 1, 0, "FolioWidget");
-    qmlRegisterType<FolioDelegate>(uri, 1, 0, "FolioDelegate");
-    qmlRegisterType<PageModel>(uri, 1, 0, "PageModel");
-    qmlRegisterType<FolioPageDelegate>(uri, 1, 0, "FolioPageDelegate");
+    qmlRegisterUncreatableType<HomeScreen>(uri, 1, 0, "HomeScreen", "");
+    qmlRegisterUncreatableType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", "");
+    qmlRegisterUncreatableType<FavouritesModel>(uri, 1, 0, "FavouritesModel", "");
+    qmlRegisterUncreatableType<PageListModel>(uri, 1, 0, "PageListModel", "");
+    qmlRegisterUncreatableType<FolioSettings>(uri, 1, 0, "FolioSettings", "");
+    qmlRegisterUncreatableType<HomeScreenState>(uri, 1, 0, "HomeScreenState", "");
+    qmlRegisterUncreatableType<FolioApplication>(uri, 1, 0, "FolioApplication", "");
+    qmlRegisterUncreatableType<FolioApplicationFolder>(uri, 1, 0, "FolioApplicationFolder", "");
+    qmlRegisterUncreatableType<FolioWidget>(uri, 1, 0, "FolioWidget", "");
+    qmlRegisterUncreatableType<FolioDelegate>(uri, 1, 0, "FolioDelegate", "");
+    qmlRegisterUncreatableType<PageModel>(uri, 1, 0, "PageModel", "");
+    qmlRegisterUncreatableType<FolioPageDelegate>(uri, 1, 0, "FolioPageDelegate", "");
     qmlRegisterType<DelegateTouchArea>(uri, 1, 0, "DelegateTouchArea");
-    qmlRegisterType<DelegateDragPosition>(uri, 1, 0, "DelegateDragPosition");
+    qmlRegisterUncreatableType<DelegateDragPosition>(uri, 1, 0, "DelegateDragPosition", "");
     qmlRegisterType<WidgetContainer>(uri, 1, 0, "WidgetContainer");
+
+    setHasConfigurationInterface(true);
 
     connect(KWindowSystem::self(), &KWindowSystem::showingDesktopChanged, this, &HomeScreen::showingDesktopChanged);
 
@@ -86,12 +57,43 @@ void HomeScreen::configChanged()
 
 void HomeScreen::onAppletAdded(Plasma::Applet *applet, const QRectF &geometryHint)
 {
-    WidgetsManager::self()->addWidget(applet);
+    Q_UNUSED(geometryHint)
+    widgetsManager()->addWidget(applet);
 }
 
 void HomeScreen::onAppletAboutToBeRemoved(Plasma::Applet *applet)
 {
-    WidgetsManager::self()->removeWidget(applet);
+    widgetsManager()->removeWidget(applet);
+}
+
+FolioSettings *HomeScreen::folioSettings()
+{
+    return m_folioSettings;
+}
+
+HomeScreenState *HomeScreen::homeScreenState()
+{
+    return m_homeScreenState;
+}
+
+WidgetsManager *HomeScreen::widgetsManager()
+{
+    return m_widgetsManager;
+}
+
+ApplicationListModel *HomeScreen::applicationListModel()
+{
+    return m_applicationListModel;
+}
+
+FavouritesModel *HomeScreen::favouritesModel()
+{
+    return m_favouritesModel;
+}
+
+PageListModel *HomeScreen::pageListModel()
+{
+    return m_pageListModel;
 }
 
 K_PLUGIN_CLASS(HomeScreen)

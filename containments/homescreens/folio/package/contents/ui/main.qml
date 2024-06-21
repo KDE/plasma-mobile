@@ -20,12 +20,12 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 ContainmentItem {
     id: root
+    property Folio.HomeScreen folio: root.plasmoid
 
     Component.onCompleted: {
-        Folio.FolioSettings.load();
-        Folio.ApplicationListModel.load();
-        Folio.FavouritesModel.load();
-        Folio.PageListModel.load();
+        folio.FolioSettings.load();
+        folio.FavouritesModel.load();
+        folio.PageListModel.load();
 
         // ensure the gestures work immediately on load
         forceActiveFocus();
@@ -33,7 +33,7 @@ ContainmentItem {
 
     Loader {
         id: wallpaperBlurLoader
-        active: Folio.FolioSettings.showWallpaperBlur
+        active: folio.FolioSettings.showWallpaperBlur
         anchors.fill: parent
 
         sourceComponent: Item {
@@ -60,12 +60,12 @@ ContainmentItem {
                 source: controlledWallpaperSource
                 anchors.fill: parent
                 visible: opacity > 0
-                opacity: Math.min(1, 
+                opacity: Math.min(1,
                     Math.max(
                         1 - homeScreen.contentOpacity,
-                        Folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
-                        Folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
-                        Folio.HomeScreenState.folderOpenProgress
+                        folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
+                        folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
+                        folio.HomeScreenState.folderOpenProgress
                     )
                 )
             }
@@ -83,30 +83,30 @@ ContainmentItem {
         if (isInWindow) {
             // only minimize windows and go to homescreen when not in docked mode
             if (!ShellSettings.Settings.convergenceModeEnabled) {
-                Folio.HomeScreenState.closeFolder();
-                Folio.HomeScreenState.closeSearchWidget();
-                Folio.HomeScreenState.closeAppDrawer();
-                Folio.HomeScreenState.goToPage(0);
+                folio.HomeScreenState.closeFolder();
+                folio.HomeScreenState.closeSearchWidget();
+                folio.HomeScreenState.closeAppDrawer();
+                folio.HomeScreenState.goToPage(0);
 
                 WindowPlugin.WindowUtil.minimizeAll();
             }
         } else { // if we are on the homescreen
-            switch (Folio.HomeScreenState.viewState) {
+            switch (folio.HomeScreenState.viewState) {
                 case Folio.HomeScreenState.PageView:
-                    if (Folio.HomeScreenState.currentPage === 0) {
-                        Folio.HomeScreenState.openAppDrawer();
+                    if (folio.HomeScreenState.currentPage === 0) {
+                        folio.HomeScreenState.openAppDrawer();
                     } else {
-                        Folio.HomeScreenState.goToPage(0);
+                        folio.HomeScreenState.goToPage(0);
                     }
                     break;
                 case Folio.HomeScreenState.AppDrawerView:
-                    Folio.HomeScreenState.closeAppDrawer();
+                    folio.HomeScreenState.closeAppDrawer();
                     break;
                 case Folio.HomeScreenState.SearchWidgetView:
-                    Folio.HomeScreenState.closeSearchWidget();
+                    folio.HomeScreenState.closeSearchWidget();
                     break;
                 case Folio.HomeScreenState.FolderView:
-                    Folio.HomeScreenState.closeFolder();
+                    folio.HomeScreenState.closeFolder();
                     break;
             }
         }
@@ -119,7 +119,7 @@ ContainmentItem {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.6)
 
-        opacity: Folio.HomeScreenState.appDrawerOpenProgress
+        opacity: folio.HomeScreenState.appDrawerOpenProgress
     }
 
     Rectangle {
@@ -127,7 +127,7 @@ ContainmentItem {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.3)
 
-        opacity: Folio.HomeScreenState.searchWidgetOpenProgress
+        opacity: folio.HomeScreenState.searchWidgetOpenProgress
     }
 
     Rectangle {
@@ -135,7 +135,7 @@ ContainmentItem {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.3)
 
-        opacity: Folio.HomeScreenState.settingsOpenProgress
+        opacity: folio.HomeScreenState.settingsOpenProgress
     }
 
     MobileShell.HomeScreen {
@@ -154,6 +154,7 @@ ContainmentItem {
             // homescreen component
             HomeScreen {
                 id: folioHomeScreen
+                folio: root.folio
                 anchors.fill: parent
 
                 topMargin: homeScreen.topMargin
@@ -168,7 +169,7 @@ ContainmentItem {
 
         // listen to app launch errors
         Connections {
-            target: Folio.ApplicationListModel
+            target: folio.ApplicationListModel
             function onLaunchError(msg) {
                 MobileShellState.ShellDBusClient.closeAppLaunchAnimation()
             }

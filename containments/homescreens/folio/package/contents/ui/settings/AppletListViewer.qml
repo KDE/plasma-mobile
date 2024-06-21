@@ -19,6 +19,7 @@ import '../private'
 
 MouseArea {
     id: root
+    property Folio.HomeScreen folio
 
     property var homeScreen
 
@@ -116,13 +117,13 @@ MouseArea {
 
             onPressAndHold: {
                 root.requestClose();
-                Folio.HomeScreenState.closeSettingsView();
+                folio.HomeScreenState.closeSettingsView();
 
                 let mappedCoords = root.homeScreen.prepareStartDelegateDrag(null, delegate);
-                const widthOffset = Folio.HomeScreenState.pageCellWidth / 2;
-                const heightOffset = Folio.HomeScreenState.pageCellHeight / 2;
-                
-                Folio.HomeScreenState.startDelegateWidgetListDrag(
+                const widthOffset = folio.HomeScreenState.pageCellWidth / 2;
+                const heightOffset = folio.HomeScreenState.pageCellHeight / 2;
+
+                folio.HomeScreenState.startDelegateWidgetListDrag(
                     mappedCoords.x + mouseX - widthOffset,
                     mappedCoords.y + mouseY - heightOffset,
                     widthOffset,

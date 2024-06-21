@@ -3,10 +3,14 @@
 
 #pragma once
 
+#include "homescreen.h"
+
 #include <QObject>
 
 #include <Plasma/Applet>
 #include <PlasmaQuick/AppletQuickItem>
+
+class HomeScreen;
 
 struct GridPosition {
     Q_GADGET
@@ -28,10 +32,10 @@ class FolioWidget : public QObject
     Q_PROPERTY(PlasmaQuick::AppletQuickItem *visualApplet READ visualApplet NOTIFY visualAppletChanged)
 
 public:
-    FolioWidget(QObject *parent = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0);
-    FolioWidget(QObject *parent, Plasma::Applet *applet, int gridWidth, int gridHeight);
+    FolioWidget(HomeScreen *parent = nullptr, int id = -1, int gridWidth = 0, int gridHeight = 0);
+    FolioWidget(HomeScreen *parent, Plasma::Applet *applet, int gridWidth, int gridHeight);
 
-    static FolioWidget *fromJson(QJsonObject &obj, QObject *parent);
+    static FolioWidget *fromJson(QJsonObject &obj, HomeScreen *parent);
     QJsonObject toJson() const;
 
     int id() const;
@@ -80,10 +84,12 @@ private:
     void init();
     void setVisualApplet(PlasmaQuick::AppletQuickItem *quickApplet);
 
-    int m_id = -1;
-    int m_realGridWidth = 1;
-    int m_realGridHeight = 1;
+    HomeScreen *m_homeScreen{nullptr};
 
-    Plasma::Applet *m_applet = nullptr;
-    PlasmaQuick::AppletQuickItem *m_quickApplet = nullptr;
+    int m_id{-1};
+    int m_realGridWidth{1};
+    int m_realGridHeight{1};
+
+    Plasma::Applet *m_applet{nullptr};
+    PlasmaQuick::AppletQuickItem *m_quickApplet{nullptr};
 };

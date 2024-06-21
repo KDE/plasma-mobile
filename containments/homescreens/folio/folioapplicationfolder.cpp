@@ -7,14 +7,15 @@
 #include <QJsonArray>
 #include <algorithm>
 
-FolioApplicationFolder::FolioApplicationFolder(QObject *parent, QString name)
+FolioApplicationFolder::FolioApplicationFolder(HomeScreen *parent, QString name)
     : QObject{parent}
+    , m_homeScreen{parent}
     , m_name{name}
     , m_applicationFolderModel{new ApplicationFolderModel{this}}
 {
 }
 
-FolioApplicationFolder *FolioApplicationFolder::fromJson(QJsonObject &obj, QObject *parent)
+FolioApplicationFolder *FolioApplicationFolder::fromJson(QJsonObject &obj, HomeScreen *parent)
 {
     QString name = obj[QStringLiteral("name")].toString();
     QList<FolioApplication *> apps;
@@ -86,7 +87,7 @@ void FolioApplicationFolder::setApplications(QList<FolioApplication *> applicati
 
     m_delegates.clear();
     for (auto *app : applications) {
-        m_delegates.append({new FolioDelegate{app, this}, 0, 0});
+        m_delegates.append({new FolioDelegate{app, m_homeScreen}, 0, 0});
     }
     m_applicationFolderModel = new ApplicationFolderModel{this};
     m_applicationFolderModel->evaluateDelegatePositions();
@@ -125,28 +126,29 @@ ApplicationFolderModel::ApplicationFolderModel(FolioApplicationFolder *folder)
     : QAbstractListModel{folder}
     , m_folder{folder}
 {
-    connect(HomeScreenState::self(), &HomeScreenState::folderPageWidthChanged, this, [this]() {
+    HomeScreenState *homeScreenState = folder->m_homeScreen->homeScreenState();
+    connect(homeScreenState, &HomeScreenState::folderPageWidthChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::folderPageHeightChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::folderPageHeightChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::folderPageContentWidthChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::folderPageContentWidthChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::folderPageContentHeightChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::folderPageContentHeightChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::viewWidthChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::viewWidthChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::viewHeightChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::viewHeightChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageCellWidthChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::pageCellWidthChanged, this, [this]() {
         evaluateDelegatePositions();
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageCellHeightChanged, this, [this]() {
+    connect(homeScreenState, &HomeScreenState::pageCellHeightChanged, this, [this]() {
         evaluateDelegatePositions();
     });
 }
@@ -312,7 +314,7 @@ void ApplicationFolderModel::setGhostEntry(int index)
     }
 
     if (!ghost) {
-        ghost = new FolioDelegate{HomeScreenState::self()};
+        ghost = new FolioDelegate{m_folder->m_homeScreen};
     }
 
     // add empty delegate at new position
@@ -342,8 +344,8 @@ void ApplicationFolderModel::deleteGhostEntry()
 
 int ApplicationFolderModel::dropInsertPosition(int page, qreal x, qreal y)
 {
-    qreal cellWidth = HomeScreenState::self()->pageCellWidth();
-    qreal cellHeight = HomeScreenState::self()->pageCellHeight();
+    qreal cellWidth = m_folder->m_homeScreen->homeScreenState()->pageCellWidth();
+    qreal cellHeight = m_folder->m_homeScreen->homeScreenState()->pageCellHeight();
 
     int row = (y - topMarginFromScreenEdge()) / cellHeight;
     row = std::max(0, std::min(numRowsOnPage(), row));
@@ -369,18 +371,18 @@ int ApplicationFolderModel::dropInsertPosition(int page, qreal x, qreal y)
 
 bool ApplicationFolderModel::isDropPositionOutside(qreal x, qreal y)
 {
-    return (x < leftMarginFromScreenEdge()) || (x > (HomeScreenState::self()->viewWidth() - leftMarginFromScreenEdge())) || (y < topMarginFromScreenEdge())
-        || (y > HomeScreenState::self()->viewHeight() - topMarginFromScreenEdge());
+    return (x < leftMarginFromScreenEdge()) || (x > (m_folder->m_homeScreen->homeScreenState()->viewWidth() - leftMarginFromScreenEdge()))
+        || (y < topMarginFromScreenEdge()) || (y > m_folder->m_homeScreen->homeScreenState()->viewHeight() - topMarginFromScreenEdge());
 }
 
 void ApplicationFolderModel::evaluateDelegatePositions(bool emitSignal)
 {
-    qreal pageWidth = HomeScreenState::self()->folderPageWidth();
+    qreal pageWidth = m_folder->m_homeScreen->homeScreenState()->folderPageWidth();
     qreal topMargin = verticalPageMargin();
     qreal leftMargin = horizontalPageMargin();
 
-    qreal cellWidth = HomeScreenState::self()->pageCellWidth();
-    qreal cellHeight = HomeScreenState::self()->pageCellHeight();
+    qreal cellWidth = m_folder->m_homeScreen->homeScreenState()->pageCellWidth();
+    qreal cellHeight = m_folder->m_homeScreen->homeScreenState()->pageCellHeight();
 
     int rows = numRowsOnPage();
     int columns = numColumnsOnPage();
@@ -418,7 +420,7 @@ void ApplicationFolderModel::evaluateDelegatePositions(bool emitSignal)
 
 QPointF ApplicationFolderModel::getDelegateStartPosition(int page)
 {
-    qreal pageWidth = HomeScreenState::self()->folderPageWidth();
+    qreal pageWidth = m_folder->m_homeScreen->homeScreenState()->folderPageWidth();
 
     qreal x = pageWidth * page + leftMarginFromScreenEdge();
     qreal y = topMarginFromScreenEdge();
@@ -433,48 +435,54 @@ int ApplicationFolderModel::numTotalPages()
 
 int ApplicationFolderModel::numRowsOnPage()
 {
-    qreal contentHeight = HomeScreenState::self()->folderPageContentHeight();
-    qreal cellHeight = HomeScreenState::self()->pageCellHeight();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal contentHeight = homeScreenState->folderPageContentHeight();
+    qreal cellHeight = homeScreenState->pageCellHeight();
 
     return std::max(0.0, contentHeight / cellHeight);
 }
 
 int ApplicationFolderModel::numColumnsOnPage()
 {
-    qreal contentWidth = HomeScreenState::self()->folderPageContentWidth();
-    qreal cellWidth = HomeScreenState::self()->pageCellWidth();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal contentWidth = homeScreenState->folderPageContentWidth();
+    qreal cellWidth = homeScreenState->pageCellWidth();
 
     return std::max(0.0, contentWidth / cellWidth);
 }
 
 qreal ApplicationFolderModel::leftMarginFromScreenEdge()
 {
-    qreal viewWidth = HomeScreenState::self()->viewWidth();
-    qreal folderPageWidth = HomeScreenState::self()->folderPageWidth();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal viewWidth = homeScreenState->viewWidth();
+    qreal folderPageWidth = homeScreenState->folderPageWidth();
 
     return (viewWidth - folderPageWidth) / 2 + horizontalPageMargin();
 }
 
 qreal ApplicationFolderModel::topMarginFromScreenEdge()
 {
-    qreal viewHeight = HomeScreenState::self()->viewHeight();
-    qreal folderPageHeight = HomeScreenState::self()->folderPageHeight();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal viewHeight = homeScreenState->viewHeight();
+    qreal folderPageHeight = homeScreenState->folderPageHeight();
 
     return (viewHeight - folderPageHeight) / 2 + verticalPageMargin();
 }
 
 qreal ApplicationFolderModel::horizontalPageMargin()
 {
-    qreal pageWidth = HomeScreenState::self()->folderPageWidth();
-    qreal pageContentWidth = HomeScreenState::self()->folderPageContentWidth();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal pageWidth = homeScreenState->folderPageWidth();
+    qreal pageContentWidth = homeScreenState->folderPageContentWidth();
 
     return (pageWidth - pageContentWidth) / 2;
 }
 
 qreal ApplicationFolderModel::verticalPageMargin()
 {
-    qreal pageHeight = HomeScreenState::self()->folderPageHeight();
-    qreal pageContentHeight = HomeScreenState::self()->folderPageContentHeight();
+    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
+    qreal pageHeight = homeScreenState->folderPageHeight();
+    qreal pageContentHeight = homeScreenState->folderPageContentHeight();
 
     return (pageHeight - pageContentHeight) / 2;
 }

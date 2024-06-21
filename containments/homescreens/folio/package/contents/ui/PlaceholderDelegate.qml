@@ -11,8 +11,10 @@ import "./delegate"
 
 Item {
     id: root
-    width: Folio.HomeScreenState.pageCellWidth
-    height: Folio.HomeScreenState.pageCellHeight
+    property Folio.HomeScreen folio
+
+    width: folio.HomeScreenState.pageCellWidth
+    height: folio.HomeScreenState.pageCellHeight
 
     // we need to simulate the position of the icon if it is placed at this spot
     ColumnLayout {
@@ -26,8 +28,8 @@ Item {
             radius: Kirigami.Units.largeSpacing
 
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            Layout.minimumWidth: Folio.FolioSettings.delegateIconSize
-            Layout.minimumHeight: Folio.FolioSettings.delegateIconSize
+            Layout.minimumWidth: folio.FolioSettings.delegateIconSize
+            Layout.minimumHeight: folio.FolioSettings.delegateIconSize
             Layout.preferredHeight: Layout.minimumHeight
             layer.enabled: true
             layer.effect: DelegateShadow {}
@@ -38,8 +40,8 @@ Item {
             id: label
             opacity: 0
             Layout.fillWidth: true
-            Layout.preferredHeight: Folio.HomeScreenState.pageDelegateLabelHeight
-            Layout.topMargin: Folio.HomeScreenState.pageDelegateLabelSpacing
+            Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
+            Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
         }
     }
 }

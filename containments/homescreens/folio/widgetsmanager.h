@@ -3,6 +3,8 @@
 
 #pragma once
 
+#include "homescreen.h"
+
 #include <QObject>
 
 #include <Plasma/Applet>
@@ -14,8 +16,6 @@ class WidgetsManager : public QObject
     Q_OBJECT
 public:
     WidgetsManager(QObject *parent = nullptr);
-
-    static WidgetsManager *self();
 
     Plasma::Applet *getWidget(int id);
 

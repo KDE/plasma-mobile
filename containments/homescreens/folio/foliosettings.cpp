@@ -10,15 +10,10 @@
 #include <QJsonDocument>
 #include <QTextStream>
 
-FolioSettings::FolioSettings(QObject *parent)
+FolioSettings::FolioSettings(HomeScreen *parent)
     : QObject{parent}
+    , m_homeScreen{parent}
 {
-}
-
-FolioSettings *FolioSettings::self()
-{
-    static FolioSettings *settings = new FolioSettings;
-    return settings;
 }
 
 int FolioSettings::homeScreenRows() const
@@ -134,43 +129,38 @@ void FolioSettings::setShowWallpaperBlur(bool showWallpaperBlur)
     }
 }
 
-void FolioSettings::setApplet(Plasma::Applet *applet)
-{
-    m_applet = applet;
-}
-
 void FolioSettings::save()
 {
-    if (!m_applet) {
+    if (!m_homeScreen) {
         return;
     }
 
-    m_applet->config().writeEntry("homeScreenRows", m_homeScreenRows);
-    m_applet->config().writeEntry("homeScreenColumns", m_homeScreenColumns);
-    m_applet->config().writeEntry("showPagesAppLabels", m_showPagesAppLabels);
-    m_applet->config().writeEntry("showFavouritesAppLabels", m_showFavouritesAppLabels);
-    m_applet->config().writeEntry("delegateIconSize", m_delegateIconSize);
-    m_applet->config().writeEntry("showFavouritesBarBackground", m_showFavouritesBarBackground);
-    m_applet->config().writeEntry("pageTransitionEffect", (int)m_pageTransitionEffect);
-    m_applet->config().writeEntry("showWallpaperBlur", m_showWallpaperBlur);
+    m_homeScreen->config().writeEntry("homeScreenRows", m_homeScreenRows);
+    m_homeScreen->config().writeEntry("homeScreenColumns", m_homeScreenColumns);
+    m_homeScreen->config().writeEntry("showPagesAppLabels", m_showPagesAppLabels);
+    m_homeScreen->config().writeEntry("showFavouritesAppLabels", m_showFavouritesAppLabels);
+    m_homeScreen->config().writeEntry("delegateIconSize", m_delegateIconSize);
+    m_homeScreen->config().writeEntry("showFavouritesBarBackground", m_showFavouritesBarBackground);
+    m_homeScreen->config().writeEntry("pageTransitionEffect", (int)m_pageTransitionEffect);
+    m_homeScreen->config().writeEntry("showWallpaperBlur", m_showWallpaperBlur);
 
-    Q_EMIT m_applet->configNeedsSaving();
+    Q_EMIT m_homeScreen->configNeedsSaving();
 }
 
 void FolioSettings::load()
 {
-    if (!m_applet) {
+    if (!m_homeScreen) {
         return;
     }
 
-    m_homeScreenRows = m_applet->config().readEntry("homeScreenRows", 5);
-    m_homeScreenColumns = m_applet->config().readEntry("homeScreenColumns", 4);
-    m_showPagesAppLabels = m_applet->config().readEntry("showPagesAppLabels", true);
-    m_showFavouritesAppLabels = m_applet->config().readEntry("showFavoritesAppLabels", false);
-    m_delegateIconSize = m_applet->config().readEntry("delegateIconSize", 48);
-    m_showFavouritesBarBackground = m_applet->config().readEntry("showFavoritesBarBackground", true);
-    m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_applet->config().readEntry("pageTransitionEffect", (int)SlideTransition));
-    m_showWallpaperBlur = m_applet->config().readEntry("showWallpaperBlur", true);
+    m_homeScreenRows = m_homeScreen->config().readEntry("homeScreenRows", 5);
+    m_homeScreenColumns = m_homeScreen->config().readEntry("homeScreenColumns", 4);
+    m_showPagesAppLabels = m_homeScreen->config().readEntry("showPagesAppLabels", true);
+    m_showFavouritesAppLabels = m_homeScreen->config().readEntry("showFavoritesAppLabels", false);
+    m_delegateIconSize = m_homeScreen->config().readEntry("delegateIconSize", 48);
+    m_showFavouritesBarBackground = m_homeScreen->config().readEntry("showFavoritesBarBackground", true);
+    m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_homeScreen->config().readEntry("pageTransitionEffect", (int)SlideTransition));
+    m_showWallpaperBlur = m_homeScreen->config().readEntry("showWallpaperBlur", true);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
@@ -182,12 +172,16 @@ void FolioSettings::load()
 
 bool FolioSettings::saveLayoutToFile(QString path)
 {
+    if (!m_homeScreen) {
+        return false;
+    }
+
     if (path.startsWith(QStringLiteral("file://"))) {
         path = path.replace(QStringLiteral("file://"), QString());
     }
 
-    QJsonArray favourites = FavouritesModel::self()->exportToJson();
-    QJsonArray pages = PageListModel::self()->exportToJson();
+    QJsonArray favourites = m_homeScreen->favouritesModel()->exportToJson();
+    QJsonArray pages = m_homeScreen->pageListModel()->exportToJson();
 
     QJsonObject obj;
     obj[QStringLiteral("Favourites")] = favourites;
@@ -209,6 +203,10 @@ bool FolioSettings::saveLayoutToFile(QString path)
 
 bool FolioSettings::loadLayoutFromFile(QString path)
 {
+    if (!m_homeScreen) {
+        return false;
+    }
+
     if (path.startsWith(QStringLiteral("file://"))) {
         path = path.replace(QStringLiteral("file://"), QString());
     }
@@ -227,11 +225,11 @@ bool FolioSettings::loadLayoutFromFile(QString path)
     QJsonObject obj = doc.object();
 
     // TODO error checking
-    FavouritesModel::self()->loadFromJson(obj[QStringLiteral("Favourites")].toArray());
-    PageListModel::self()->loadFromJson(obj[QStringLiteral("Pages")].toArray());
+    m_homeScreen->favouritesModel()->loadFromJson(obj[QStringLiteral("Favourites")].toArray());
+    m_homeScreen->pageListModel()->loadFromJson(obj[QStringLiteral("Pages")].toArray());
 
-    FavouritesModel::self()->save();
-    PageListModel::self()->save();
+    m_homeScreen->favouritesModel()->save();
+    m_homeScreen->pageListModel()->save();
 
     return true;
 }

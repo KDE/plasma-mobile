@@ -10,8 +10,10 @@
 #include <Plasma/Applet>
 
 #include "dragstate.h"
+#include "homescreen.h"
 
 class DragState;
+class HomeScreen;
 
 /**
  * @short The homescreen state, containing information on positioning panels as well as any swipe events.
@@ -110,9 +112,8 @@ public:
     };
     Q_ENUM(PageOrientation)
 
-    static HomeScreenState *self();
-
-    HomeScreenState(QObject *parent = nullptr);
+    HomeScreenState(HomeScreen *parent = nullptr);
+    void init(); // separate function due to dependencies on other classes
 
     // the current state of swipe interaction
     SwipeState swipeState() const;
@@ -257,9 +258,6 @@ public:
     Q_INVOKABLE QPointF getFavouritesDelegateScreenPosition(int position);
     Q_INVOKABLE QPointF getFolderDelegateScreenPosition(int position);
 
-    Plasma::Containment *containment();
-    void setContainment(Plasma::Containment *containment);
-
 Q_SIGNALS:
     void swipeStateChanged();
     void viewStateChanged();
@@ -354,6 +352,8 @@ private:
 
     QPropertyAnimation *setupAnimation(QByteArray property, int duration, QEasingCurve::Type curve, qreal endValue);
 
+    HomeScreen *m_homeScreen{nullptr};
+
     SwipeState m_swipeState{SwipeState::None};
     ViewState m_viewState{ViewState::PageView};
 
@@ -414,6 +414,4 @@ private:
     QPropertyAnimation *m_folderPageAnim{nullptr};
     QPropertyAnimation *m_openSettingsAnim{nullptr};
     QPropertyAnimation *m_closeSettingsAnim{nullptr};
-
-    Plasma::Containment *m_containment{nullptr};
 };

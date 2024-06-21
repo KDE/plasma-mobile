@@ -13,12 +13,13 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 MobileShell.BaseItem {
     id: root
+    property Folio.HomeScreen folio
 
     property Folio.FolioApplicationFolder folder
     property bool inFolderTitleEditMode: false
 
     Connections {
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         function onLeftCurrentFolder() {
             root.inFolderTitleEditMode = false;

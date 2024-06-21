@@ -7,6 +7,10 @@
 
 #include <Plasma/Applet>
 
+#include "homescreen.h"
+
+class HomeScreen;
+
 class FolioSettings : public QObject
 {
     Q_OBJECT
@@ -21,9 +25,7 @@ class FolioSettings : public QObject
     Q_PROPERTY(bool showWallpaperBlur READ showWallpaperBlur WRITE setShowWallpaperBlur NOTIFY showWallpaperBlurChanged)
 
 public:
-    FolioSettings(QObject *parent = nullptr);
-
-    static FolioSettings *self();
+    FolioSettings(HomeScreen *parent = nullptr);
 
     // ensure that existing enum values are the same when modifying, since this value is saved
     enum PageTransitionEffect {
@@ -67,8 +69,6 @@ public:
     Q_INVOKABLE bool saveLayoutToFile(QString path);
     Q_INVOKABLE bool loadLayoutFromFile(QString path);
 
-    Q_INVOKABLE void setApplet(Plasma::Applet *applet);
-
 Q_SIGNALS:
     void homeScreenRowsChanged();
     void homeScreenColumnsChanged();
@@ -82,6 +82,8 @@ Q_SIGNALS:
 private:
     void save();
 
+    HomeScreen *m_homeScreen{nullptr};
+
     int m_homeScreenRows{5};
     int m_homeScreenColumns{4};
     bool m_showPagesAppLabels{false};
@@ -90,6 +92,4 @@ private:
     bool m_showFavouritesBarBackground{false};
     PageTransitionEffect m_pageTransitionEffect{SlideTransition};
     bool m_showWallpaperBlur{false};
-
-    Plasma::Applet *m_applet{nullptr};
 };

@@ -3,12 +3,16 @@
 
 #pragma once
 
+#include "homescreen.h"
 #include "pagemodel.h"
 
 #include <QAbstractListModel>
 #include <QList>
 
 #include <Plasma/Containment>
+
+class HomeScreen;
+class PageModel;
 
 class PageListModel : public QAbstractListModel
 {
@@ -18,9 +22,7 @@ class PageListModel : public QAbstractListModel
 public:
     enum Roles { PageRole = Qt::UserRole + 1 };
 
-    PageListModel(QObject *parent = nullptr);
-
-    static PageListModel *self();
+    PageListModel(HomeScreen *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -40,13 +42,11 @@ public:
     Q_INVOKABLE void load();
     void loadFromJson(QJsonArray arr);
 
-    void setContainment(Plasma::Containment *containment);
-
 Q_SIGNALS:
     void lengthChanged();
 
 private:
-    QList<PageModel *> m_pages;
+    HomeScreen *m_homeScreen{nullptr};
 
-    Plasma::Containment *m_containment{nullptr};
+    QList<PageModel *> m_pages;
 };

@@ -8,12 +8,6 @@ WidgetsManager::WidgetsManager(QObject *parent)
 {
 }
 
-WidgetsManager *WidgetsManager::self()
-{
-    static WidgetsManager *manager = new WidgetsManager{nullptr};
-    return manager;
-}
-
 Plasma::Applet *WidgetsManager::getWidget(int id)
 {
     for (auto *widget : m_widgets) {
