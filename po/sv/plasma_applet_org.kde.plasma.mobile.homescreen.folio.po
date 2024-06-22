@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-07 00:38+0000\n"
-"PO-Revision-Date: 2022-04-08 17:37+0200\n"
+"PO-Revision-Date: 2024-06-21 11:26+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Katalog"
 
 #: package/contents/ui/AppDrawerHeader.qml:27
 #, kde-format
@@ -39,143 +39,143 @@ msgstr "Ta bort"
 #: package/contents/ui/settings/AppletListViewer.qml:56
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "Grafiska komponenter"
 
 #: package/contents/ui/settings/SettingsWindow.qml:78
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Hemskärmsinställningar"
 
 #: package/contents/ui/settings/SettingsWindow.qml:87
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Ikoner"
 
 #: package/contents/ui/settings/SettingsWindow.qml:118
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Antal rader"
 
 #: package/contents/ui/settings/SettingsWindow.qml:119
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Antal kolumner"
 
 #: package/contents/ui/settings/SettingsWindow.qml:123
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Storlek på hemskärmens ikoner"
 
 #: package/contents/ui/settings/SettingsWindow.qml:162
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "Raderna och kolumnerna byter plats beroende på skärmrotation."
 
 #: package/contents/ui/settings/SettingsWindow.qml:166
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Hemskärm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:172
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Visa beteckningar på hemskärm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:185
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Visa beteckningar på favoritraden"
 
 #: package/contents/ui/settings/SettingsWindow.qml:198
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Sidövergångseffekt"
 
 #: package/contents/ui/settings/SettingsWindow.qml:204
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Glid"
 
 #: package/contents/ui/settings/SettingsWindow.qml:205
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Kub"
 
 #: package/contents/ui/settings/SettingsWindow.qml:206
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Tona"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Stapla"
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Rotation"
 
 #: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Favoritrad"
 
 #: package/contents/ui/settings/SettingsWindow.qml:240
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Skrivbordsunderlägg"
 
 #: package/contents/ui/settings/SettingsWindow.qml:246
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Visa suddighetseffekt för skrivbordsunderlägg"
 
 #: package/contents/ui/settings/SettingsWindow.qml:257
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 #: package/contents/ui/settings/SettingsWindow.qml:264
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Byt mellan hemskärmar och fler skrivbordsunderläggsalternativ"
 
 #: package/contents/ui/settings/SettingsWindow.qml:291
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Exportera layout till"
 
 #: package/contents/ui/settings/SettingsWindow.qml:310
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "Importera layout från"
 
 #: package/contents/ui/settings/SettingsWindow.qml:321
 #: package/contents/ui/settings/SettingsWindow.qml:328
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Exportstatus"
 
 #: package/contents/ui/settings/SettingsWindow.qml:322
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "Misslyckades exportera till %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:329
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "Hemskärmens layout exporterad med lyckad resultat till %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:335
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Bekräfta import"
 
 #: package/contents/ui/settings/SettingsWindow.qml:336
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "Det här skriver över hemskärmens befintliga layout."

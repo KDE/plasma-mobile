@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 00:40+0000\n"
-"PO-Revision-Date: 2022-09-24 15:51+0200\n"
+"PO-Revision-Date: 2024-06-21 11:25+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: mobilepower.cpp:30
 #, kde-format
@@ -48,10 +48,9 @@ msgid "15 min"
 msgstr "15 min"
 
 #: mobilepower.cpp:36
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 min"
+msgstr "30 min"
 
 #: mobilepower.cpp:37
 #, kde-format
@@ -124,12 +123,10 @@ msgid "Current Charge"
 msgstr "Aktuell laddning"
 
 #: ui/BatteryPage.qml:108 ui/BatteryPage.qml:116
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "%1 is percentage value"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: ui/BatteryPage.qml:115
 #, kde-format
@@ -192,12 +189,10 @@ msgid "Unknown technology"
 msgstr "Okänd teknologi"
 
 #: ui/Graph.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: ui/main.qml:33
 #, kde-format
@@ -245,12 +240,10 @@ msgid "Unknown battery"
 msgstr "Okänt batteri"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is value, %2 is unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: ui/main.qml:91
 #, kde-format
