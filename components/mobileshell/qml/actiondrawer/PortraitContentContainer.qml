@@ -72,15 +72,20 @@ Item {
         addedHeight: {
             if (!actionDrawer.openToPinnedMode) {
                 // if pinned mode disabled, just go to full height
-                return quickSettings.maxAddedHeight;
+                let progress = (root.actionDrawer.offset - maximizedQuickSettingsOffset) / (quickSettings.maxAddedHeight * 4);
+                let effectProgress = Math.atan(Math.max(0, progress));
+                return (quickSettings.maxAddedHeight * effectProgress) + quickSettings.maxAddedHeight;
             } else if (!actionDrawer.opened) {
                 // over-scroll effect for initial opening
                 let progress = (root.actionDrawer.offset - minimizedQuickSettingsOffset) / quickSettings.maxAddedHeight;
                 let effectProgress = Math.atan(Math.max(0, progress));
                 return quickSettings.maxAddedHeight * 0.25 * effectProgress;
             } else {
+                // over-scroll effect for full drawer
+                let progress = (root.actionDrawer.offset - maximizedQuickSettingsOffset) / (quickSettings.maxAddedHeight * 4);
+                let effectProgress = Math.atan(Math.max(0, progress));
                 // as the drawer opens, add height to the rectangle, revealing content
-                return Math.max(0, Math.min(quickSettings.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
+                return (quickSettings.maxAddedHeight * effectProgress) + Math.max(0, Math.min(quickSettings.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
             }
         }
         
