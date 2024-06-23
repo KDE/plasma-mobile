@@ -32,7 +32,6 @@ QtObject {
         if (root.password !== '') { // prevent typing lock when password is empty
             waitingForAuth = true;
         }
-        connections.hasPrompt = true;
         authenticator.startAuthenticating();
     }
     
@@ -41,42 +40,21 @@ QtObject {
         root.reset();
     }
     
-    Component.onCompleted: {
-        // determine whether we have passwordless login
-        // if we do, authenticator will emit a success signal, otherwise it will emit failure
-
-        // TODO: Disabled for the time being, since it seems to cause an infinite loop
-        // authenticator.startAuthenticating();
-    }
-    
     property var connections: Connections {
         target: authenticator
         
-        // false for our test of whether we have passwordless login, otherwise it's true
-        property bool hasPrompt: false
-        
         function onSucceeded() {
-            if (hasPrompt) {
-                console.log('login succeeded');
-                root.waitingForAuth = false;
-                root.unlockSucceeded();
-                Qt.quit();
-            }
+            console.log('login succeeded');
+            root.waitingForAuth = false;
+            root.unlockSucceeded();
+            Qt.quit();
         }
         
-        function onFailed(kind) {
-            if (kind != 0) { // if this is coming from the noninteractive authenticators
-                return;
-            }
-
-            // root.passwordless = false;
-
-            if (hasPrompt) {
-                console.log('login failed');
-                root.waitingForAuth = false;
-                root.password = "";
-                root.unlockFailed();
-            }
+        function onFailed() {
+            console.log('login failed');
+            root.waitingForAuth = false;
+            root.password = "";
+            root.unlockFailed();
         }
         
         function onInfoMessageChanged() {
