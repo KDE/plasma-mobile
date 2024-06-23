@@ -34,8 +34,13 @@ ContainmentItem {
     }
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingApp: WindowPlugin.WindowMaximizedTracker.showingWindow
+    readonly property bool showingApp: windowMaximizedTracker.showingWindow
     readonly property color backgroundColor: topPanel.colorScopeColor
+
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
+    }
 
     // enforce thickness
     Binding {

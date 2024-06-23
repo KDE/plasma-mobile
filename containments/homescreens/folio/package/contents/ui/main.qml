@@ -72,8 +72,13 @@ ContainmentItem {
         }
     }
 
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
+    }
+
     function homeAction() {
-        const isInWindow = (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow);
+        const isInWindow = (!WindowPlugin.WindowUtil.isShowingDesktop && windowMaximizedTracker.showingWindow);
 
         // Always close action drawer
         if (MobileShellState.ShellDBusClient.isActionDrawerOpen) {

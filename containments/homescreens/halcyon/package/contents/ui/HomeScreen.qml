@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 Item {
     id: root
-    
+
     required property real topMargin
     required property real bottomMargin
     required property real leftMargin
@@ -24,7 +24,7 @@ Item {
 
     required property bool interactive
     required property var searchWidget
-    
+
     property alias page: swipeView.currentIndex
 
     property bool settingsOpen: false
@@ -41,7 +41,7 @@ Item {
         favoritesView.goToBeginning();
         gridAppList.goToBeginning();
     }
-    
+
     function openConfigure() {
         settingsOpen = true;
     }
@@ -51,11 +51,12 @@ Item {
         Plasmoid.editMode = false;
     }
 
-    Connections {
-        target: WindowPlugin.WindowMaximizedTracker
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
 
-        function onShowingWindowChanged(){
-            if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
+        onShowingWindowChanged: {
+            if (windowMaximizedTracker.showingWindow) {
                 swipeView.focusChild();
             }
         }
@@ -75,7 +76,7 @@ Item {
         id: swipeView
         opacity: Math.min(1 - root.settingsOpenFactor, 1 - searchWidget.openFactor)
         interactive: root.interactive
-        
+
         anchors.fill: parent
         anchors.topMargin: root.topMargin
         anchors.bottomMargin: root.bottomMargin
@@ -104,7 +105,7 @@ Item {
 
                 onLongPressed: root.openConfigure()
             }
-            
+
             FavoritesView {
                 id: favoritesView
                 anchors.fill: parent
@@ -128,7 +129,7 @@ Item {
 
             GridAppList {
                 id: gridAppList
-                
+
                 anchors.fill: parent
 
                 property int horizontalMargin: Math.round(swipeView.width * 0.05)

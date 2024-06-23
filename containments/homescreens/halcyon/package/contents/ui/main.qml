@@ -16,13 +16,13 @@ import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
 ContainmentItem {
     id: root
-    
+
     Component.onCompleted: {
         Halcyon.ApplicationListModel.loadApplications();
         Halcyon.PinnedModel.applet = root.plasmoid;
         forceActiveFocus();
     }
-    
+
     Plasmoid.onActivated: {
         // there's a couple of steps:
         // - minimize windows (only if we are in an app)
@@ -34,7 +34,7 @@ ContainmentItem {
             MobileShellState.ShellDBusClient.closeActionDrawer();
         }
 
-        if (!WindowPlugin.WindowUtil.isShowingDesktop && WindowPlugin.WindowMaximizedTracker.showingWindow || search.isOpen) {
+        if (!WindowPlugin.WindowUtil.isShowingDesktop && windowMaximizedTracker.showingWindow || search.isOpen) {
             // Always close the search widget as well
             if (search.isOpen) {
                 search.close();
@@ -49,6 +49,11 @@ ContainmentItem {
             WindowPlugin.WindowUtil.isShowingDesktop = false;
             halcyonHomeScreen.page = 0;
         }
+    }
+
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
     }
 
     Rectangle {

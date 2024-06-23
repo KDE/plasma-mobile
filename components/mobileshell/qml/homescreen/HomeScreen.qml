@@ -86,7 +86,7 @@ Item {
         target: MobileShellState.ShellDBusClient
 
         function onOpenHomeScreenRequested() {
-            if (WindowPlugin.WindowMaximizedTracker.showingWindow) {
+            if (windowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
 
@@ -125,7 +125,7 @@ Item {
         function onIsTaskSwitcherVisibleChanged() {
             if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
                 itemContainer.zoomOutImmediately();
-            } else if (!WindowPlugin.WindowMaximizedTracker.showingWindow) {
+            } else if (!windowMaximizedTracker.showingWindow) {
                 itemContainer.zoomIn();
             }
         }
@@ -149,6 +149,15 @@ Item {
     Component.onCompleted: {
         // determine the margins used
         evaluateMargins();
+    }
+
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
+
+        onShowingWindowChanged: {
+            itemContainer.evaluateAnimChange();
+        }
     }
 
     // homescreen visual component
@@ -199,18 +208,10 @@ Item {
 
         function evaluateAnimChange() {
             // only animate if homescreen is visible
-            if (!WindowPlugin.WindowMaximizedTracker.showingWindow && !MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+            if (!windowMaximizedTracker.showingWindow && !MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
                 itemContainer.zoomIn();
             } else {
                 itemContainer.zoomOut();
-            }
-        }
-
-        Connections {
-            target: WindowPlugin.WindowMaximizedTracker
-
-            function onShowingWindowChanged() {
-                itemContainer.evaluateAnimChange();
             }
         }
 

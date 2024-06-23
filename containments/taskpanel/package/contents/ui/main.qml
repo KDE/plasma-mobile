@@ -110,7 +110,12 @@ ContainmentItem {
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool opaqueBar: WindowPlugin.WindowMaximizedTracker.showingWindow
+    readonly property bool opaqueBar: windowMaximizedTracker.showingWindow
+
+    WindowPlugin.WindowMaximizedTracker {
+        id: windowMaximizedTracker
+        screenGeometry: Plasmoid.containment.screenGeometry
+    }
 
     Item {
         anchors.fill: parent

@@ -8,11 +8,12 @@ import org.kde.taskmanager as TaskManager
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 import org.kde.kitemmodels as KItemModels
 
-pragma Singleton
-
 // Helper component that uses Plasma's tasks model to provide whether a maximized window is showing on the current screen.
-
 QtObject {
+    // Setting this property is necessary to filter by screen, otherwise the model will use all screens.
+    // Set it to Plasmoid.containment.screenGeometry in a plasmoid to accomplish this.
+    property alias screenGeometry: tasksModel.screenGeometry
+
     readonly property bool showingWindow: __internal.count > 0 && !WindowPlugin.WindowUtil.isShowingDesktop
 
     property var __internal: KItemModels.KSortFilterProxyModel {

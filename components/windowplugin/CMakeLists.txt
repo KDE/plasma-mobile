@@ -5,7 +5,6 @@ ecm_add_qml_module(windowplugin URI org.kde.plasma.private.mobileshell.windowplu
 
 target_sources(windowplugin PRIVATE windowutil.cpp)
 
-set_source_files_properties(qml/WindowMaximizedTracker.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 ecm_target_qml_sources(windowplugin SOURCES qml/WindowMaximizedTracker.qml)
 
 target_link_libraries(windowplugin PRIVATE
