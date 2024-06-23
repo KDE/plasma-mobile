@@ -17,9 +17,13 @@
 const QMap<QString, QMap<QString, QVariant>> APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS = {
     {"Applications",
      {{"blacklist",
-       "cuttlefish,org.kde.plasma.themeexplorer,org.kde.klipper,ciborium,syncmonitorhelper,org.kde.okular,wordview,assistant,assistant-qt5,designer,designer-"
-       "qt5,linguist,linguist-qt5,org.kde.perusecreator,UserFeedbackConsole,org.kde.kuserfeedback-console,avahi-discover,bssh,bvnc,ktelnetservice5,qv4l2,"
-       "qvidcap"}}}};
+       "assistant,assistant-qt5,avahi-discover,bssh,bvnc,ciborium,cuttlefish,designer,designer-qt5,htop,ktelnetservice5,linguist,linguist-qt5,"
+       "org.kde.kcharselect,org.kde.kfind,org.kde.klipper,org.kde.kmag,org.kde.kmenuedit,org.kde.kmousetool,org.kde.krfb,"
+       "org.kde.kuserfeedback-console,org.kde.kwalletmanager5,org.kde.okular,org.kde.perusecreator,org.kde.plasma.themeexplorer,org.kde.plasma-welcome,"
+       "nvtop,qt5-qdbusviewer,qv4l2,qvidcap,syncmonitorhelper,UserFeedbackConsole,waydroid.com.android.calculator2,waydroid.com.android.camera2,"
+       "waydroid.com.android.contacts,waydroid.com.android.deskclock,waydroid.com.android.documentsui,waydroid.com.android.gallery3d,"
+       "waydroid.com.android.inputmethod.latin,waydroid.com.android.settings,waydroid.org.lineageos.eleven,waydroid.org.lineageos.etar,"
+       "waydroid.org.lineageos.jelly,waydroid.org.lineageos.recorder,wordview"}}}};
 
 // kdeglobals
 // NOTE: we only write these entries if they are not already defined in the config
