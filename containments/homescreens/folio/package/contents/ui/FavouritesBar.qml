@@ -107,7 +107,7 @@ MouseArea {
 
                     onPressAndHold: {
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
-                        Folio.HomeScreenState.startDelegateFavouritesDrag(
+                        folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
                             mappedCoords.y,
                             appDelegate.pressPosition.x,
