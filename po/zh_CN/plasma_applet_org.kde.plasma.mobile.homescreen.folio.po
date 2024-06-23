@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:38+0000\n"
+"POT-Creation-Date: 2024-06-23 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -28,155 +28,155 @@ msgstr "文件夹"
 msgid "Applications"
 msgstr "应用程序"
 
-#: package/contents/ui/FavouritesBar.qml:147
-#: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:270
-#: package/contents/ui/HomeScreenPage.qml:214
-#: package/contents/ui/HomeScreenPage.qml:293
+#: package/contents/ui/FavouritesBar.qml:149
+#: package/contents/ui/FavouritesBar.qml:223
+#: package/contents/ui/FolderView.qml:273
+#: package/contents/ui/HomeScreenPage.qml:218
+#: package/contents/ui/HomeScreenPage.qml:298
 #, kde-format
 msgid "Remove"
 msgstr "移除"
 
-#: package/contents/ui/settings/AppletListViewer.qml:56
+#: package/contents/ui/settings/AppletListViewer.qml:57
 #, kde-format
 msgid "Widgets"
 msgstr "挂件"
 
-#: package/contents/ui/settings/SettingsWindow.qml:78
+#: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
 msgstr "主屏幕设置"
 
-#: package/contents/ui/settings/SettingsWindow.qml:87
+#: package/contents/ui/settings/SettingsWindow.qml:89
 #, kde-format
 msgid "Icons"
 msgstr "图标"
 
-#: package/contents/ui/settings/SettingsWindow.qml:118
+#: package/contents/ui/settings/SettingsWindow.qml:121
 #, kde-format
 msgid "Number of rows"
 msgstr "行数"
 
-#: package/contents/ui/settings/SettingsWindow.qml:119
+#: package/contents/ui/settings/SettingsWindow.qml:122
 #, kde-format
 msgid "Number of columns"
 msgstr "列数"
 
-#: package/contents/ui/settings/SettingsWindow.qml:123
+#: package/contents/ui/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
 msgstr "主屏幕的图标大小"
 
-#: package/contents/ui/settings/SettingsWindow.qml:162
+#: package/contents/ui/settings/SettingsWindow.qml:165
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr "行和列将根据屏幕旋转进行对换。"
 
-#: package/contents/ui/settings/SettingsWindow.qml:166
+#: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Homescreen"
 msgstr "主屏幕"
 
-#: package/contents/ui/settings/SettingsWindow.qml:172
+#: package/contents/ui/settings/SettingsWindow.qml:175
 #, kde-format
 msgid "Show labels on homescreen"
 msgstr "主屏幕图标显示标签"
 
-#: package/contents/ui/settings/SettingsWindow.qml:185
+#: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Show labels in favorites bar"
 msgstr "收藏栏图标显示标签"
 
-#: package/contents/ui/settings/SettingsWindow.qml:198
+#: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Page transition effect"
 msgstr "页面切换特效"
 
-#: package/contents/ui/settings/SettingsWindow.qml:204
+#: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Slide"
 msgstr "滑动"
 
-#: package/contents/ui/settings/SettingsWindow.qml:205
+#: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Cube"
 msgstr "立方"
 
-#: package/contents/ui/settings/SettingsWindow.qml:206
+#: package/contents/ui/settings/SettingsWindow.qml:209
 #, kde-format
 msgid "Fade"
 msgstr "渐隐渐显"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:210
 #, kde-format
 msgid "Stack"
 msgstr "堆叠"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:211
 #, kde-format
 msgid "Rotation"
 msgstr "旋转"
 
-#: package/contents/ui/settings/SettingsWindow.qml:223
+#: package/contents/ui/settings/SettingsWindow.qml:226
 #, kde-format
 msgid "Favorites Bar"
 msgstr "收藏栏"
 
-#: package/contents/ui/settings/SettingsWindow.qml:240
+#: package/contents/ui/settings/SettingsWindow.qml:243
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "壁纸"
 
-#: package/contents/ui/settings/SettingsWindow.qml:246
+#: package/contents/ui/settings/SettingsWindow.qml:249
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "显示壁纸模糊效果"
 
-#: package/contents/ui/settings/SettingsWindow.qml:257
+#: package/contents/ui/settings/SettingsWindow.qml:260
 #, kde-format
 msgid "General"
 msgstr "常规"
 
-#: package/contents/ui/settings/SettingsWindow.qml:264
+#: package/contents/ui/settings/SettingsWindow.qml:267
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "在主屏幕和更多壁纸选项间切换"
 
-#: package/contents/ui/settings/SettingsWindow.qml:291
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "Export layout to"
 msgstr "导出布局到"
 
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:313
 #, kde-format
 msgid "Import layout from"
 msgstr "导入布局来源"
 
-#: package/contents/ui/settings/SettingsWindow.qml:321
-#: package/contents/ui/settings/SettingsWindow.qml:328
+#: package/contents/ui/settings/SettingsWindow.qml:324
+#: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Export Status"
 msgstr "导出状态"
 
-#: package/contents/ui/settings/SettingsWindow.qml:322
+#: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "导出到 %1 失败"
 
-#: package/contents/ui/settings/SettingsWindow.qml:329
+#: package/contents/ui/settings/SettingsWindow.qml:332
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "主屏幕布局成功导出到 %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:335
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "Confirm Import"
 msgstr "确认导入"
 
-#: package/contents/ui/settings/SettingsWindow.qml:336
+#: package/contents/ui/settings/SettingsWindow.qml:339
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "这将覆盖您现有的主屏幕布局！"

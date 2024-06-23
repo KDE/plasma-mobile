@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-07 00:38+0000\n"
+"POT-Creation-Date: 2024-06-23 00:40+0000\n"
 "PO-Revision-Date: 2024-05-20 11:03+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -29,119 +29,119 @@ msgstr "Ordner"
 msgid "Applications"
 msgstr "Anwendungen"
 
-#: package/contents/ui/FavouritesBar.qml:147
-#: package/contents/ui/FavouritesBar.qml:220
-#: package/contents/ui/FolderView.qml:270
-#: package/contents/ui/HomeScreenPage.qml:214
-#: package/contents/ui/HomeScreenPage.qml:293
+#: package/contents/ui/FavouritesBar.qml:149
+#: package/contents/ui/FavouritesBar.qml:223
+#: package/contents/ui/FolderView.qml:273
+#: package/contents/ui/HomeScreenPage.qml:218
+#: package/contents/ui/HomeScreenPage.qml:298
 #, kde-format
 msgid "Remove"
 msgstr "Entfernen"
 
-#: package/contents/ui/settings/AppletListViewer.qml:56
+#: package/contents/ui/settings/AppletListViewer.qml:57
 #, kde-format
 msgid "Widgets"
 msgstr "Miniprogramme"
 
-#: package/contents/ui/settings/SettingsWindow.qml:78
+#: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
 msgstr "Einstellungen für Startbildschirm"
 
-#: package/contents/ui/settings/SettingsWindow.qml:87
+#: package/contents/ui/settings/SettingsWindow.qml:89
 #, kde-format
 msgid "Icons"
 msgstr "Symbole"
 
-#: package/contents/ui/settings/SettingsWindow.qml:118
+#: package/contents/ui/settings/SettingsWindow.qml:121
 #, kde-format
 msgid "Number of rows"
 msgstr "Anzahl der Zeilen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:119
+#: package/contents/ui/settings/SettingsWindow.qml:122
 #, kde-format
 msgid "Number of columns"
 msgstr "Anzahl der Spalten"
 
-#: package/contents/ui/settings/SettingsWindow.qml:123
+#: package/contents/ui/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
 msgstr "Größe der Symbole auf dem Startbildschirm"
 
-#: package/contents/ui/settings/SettingsWindow.qml:162
+#: package/contents/ui/settings/SettingsWindow.qml:165
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
 msgstr ""
 "Die Zeilen und Spalten werden je nach Drehung des Bildschirms vertauscht."
 
-#: package/contents/ui/settings/SettingsWindow.qml:166
+#: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Homescreen"
 msgstr "Startbildschirm"
 
-#: package/contents/ui/settings/SettingsWindow.qml:172
+#: package/contents/ui/settings/SettingsWindow.qml:175
 #, kde-format
 msgid "Show labels on homescreen"
 msgstr "Beschriftungen auf dem Startbildschirm anzeigen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:185
+#: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Show labels in favorites bar"
 msgstr "Beschriftung in der Favoritenleiste anzeigen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:198
+#: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Page transition effect"
 msgstr "Seitenwechseleffekt"
 
-#: package/contents/ui/settings/SettingsWindow.qml:204
+#: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Slide"
 msgstr "Gleiten"
 
-#: package/contents/ui/settings/SettingsWindow.qml:205
+#: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Cube"
 msgstr "Würfel"
 
-#: package/contents/ui/settings/SettingsWindow.qml:206
+#: package/contents/ui/settings/SettingsWindow.qml:209
 #, kde-format
 msgid "Fade"
 msgstr "Überblenden"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:210
 #, kde-format
 msgid "Stack"
 msgstr "Stapel"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:211
 #, kde-format
 msgid "Rotation"
 msgstr "Drehung"
 
-#: package/contents/ui/settings/SettingsWindow.qml:223
+#: package/contents/ui/settings/SettingsWindow.qml:226
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Favoritenleiste"
 
-#: package/contents/ui/settings/SettingsWindow.qml:240
+#: package/contents/ui/settings/SettingsWindow.qml:243
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Hintergrundbild"
 
-#: package/contents/ui/settings/SettingsWindow.qml:246
+#: package/contents/ui/settings/SettingsWindow.qml:249
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Unschärfe-Effekte für Hintergrundbild anzeigen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:257
+#: package/contents/ui/settings/SettingsWindow.qml:260
 #, kde-format
 msgid "General"
 msgstr "Allgemein"
 
-#: package/contents/ui/settings/SettingsWindow.qml:264
+#: package/contents/ui/settings/SettingsWindow.qml:267
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
@@ -149,38 +149,38 @@ msgstr ""
 "Zwischen Startbildschirmen und weiteren Optionen für Hintergrundbilder "
 "wechseln"
 
-#: package/contents/ui/settings/SettingsWindow.qml:291
+#: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "Export layout to"
 msgstr "Layout exportieren nach"
 
-#: package/contents/ui/settings/SettingsWindow.qml:310
+#: package/contents/ui/settings/SettingsWindow.qml:313
 #, kde-format
 msgid "Import layout from"
 msgstr "Layout importieren von"
 
-#: package/contents/ui/settings/SettingsWindow.qml:321
-#: package/contents/ui/settings/SettingsWindow.qml:328
+#: package/contents/ui/settings/SettingsWindow.qml:324
+#: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Export Status"
 msgstr "Exportstatus"
 
-#: package/contents/ui/settings/SettingsWindow.qml:322
+#: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Export nach %1 fehlgeschlagen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:329
+#: package/contents/ui/settings/SettingsWindow.qml:332
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Layout des Startbildschirms erfolgreich nach %1 exportiert"
 
-#: package/contents/ui/settings/SettingsWindow.qml:335
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "Confirm Import"
 msgstr "Import bestätigen"
 
-#: package/contents/ui/settings/SettingsWindow.qml:336
+#: package/contents/ui/settings/SettingsWindow.qml:339
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Dies wird Ihr bestehendes Layout des Startbildschirms überschreiben!"
