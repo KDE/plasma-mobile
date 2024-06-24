@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2023-04-18 09:30+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -155,12 +155,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "Malfermi sonajn agordojn"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "Sonaj Agordoj"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Baskuligi montron de sonfluoj"
@@ -292,6 +287,9 @@ msgstr "Forigi Ĉiujn Sciigojn"
 #, kde-format
 msgid "More Options…"
 msgstr "Pli da Opcioj..."
+
+#~ msgid "Audio Settings"
+#~ msgstr "Sonaj Agordoj"
 
 #~ msgid "Audio"
 #~ msgstr "Aŭdio"

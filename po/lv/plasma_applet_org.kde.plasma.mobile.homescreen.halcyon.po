@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2024-04-22 17:16+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr "Izņemt no mapes"
 msgid "Add to favourites"
 msgstr "Pievienot iecienītajām"
 
-#: package/contents/ui/GridAppList.qml:67
+#: package/contents/ui/GridAppList.qml:68
 #, kde-format
 msgid "Applications"
 msgstr "Programmas"

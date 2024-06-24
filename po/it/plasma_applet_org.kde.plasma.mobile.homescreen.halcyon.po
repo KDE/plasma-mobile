@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2022-07-12 14:10+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -40,7 +40,7 @@ msgstr "Sposta fuori dalla cartella"
 msgid "Add to favourites"
 msgstr "Aggiungi ai preferiti"
 
-#: package/contents/ui/GridAppList.qml:67
+#: package/contents/ui/GridAppList.qml:68
 #, kde-format
 msgid "Applications"
 msgstr "Applicazioni"

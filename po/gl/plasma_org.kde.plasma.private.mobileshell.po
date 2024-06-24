@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2024-06-10 21:30+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -154,12 +154,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "Abrir a configuración de son."
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "Configuración de son"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Conmutar a visualización dos fluxos de son."
@@ -291,3 +286,6 @@ msgstr "Borrar as notificacións"
 #, kde-format
 msgid "More Options…"
 msgstr "Máis opcións…"
+
+#~ msgid "Audio Settings"
+#~ msgstr "Configuración de son"

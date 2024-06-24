@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-23 21:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -154,12 +154,7 @@ msgstr "%​%1"
 msgid "Open audio settings"
 msgstr "Ses ayarlarını aç"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "Ses Ayarları"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Ses akışlarını göstermeyi aç/kapat"
@@ -291,6 +286,9 @@ msgstr "Tüm Bildirimleri Temizle"
 #, kde-format
 msgid "More Options…"
 msgstr "Daha Çok Seçenek…"
+
+#~ msgid "Audio Settings"
+#~ msgstr "Ses Ayarları"
 
 #~ msgid "Audio"
 #~ msgstr "Ses"

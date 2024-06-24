@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2023-05-07 20:44+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Add to favourites"
 msgstr "أضف إلى المفضلة"
 
-#: package/contents/ui/GridAppList.qml:67
+#: package/contents/ui/GridAppList.qml:68
 #, kde-format
 msgid "Applications"
 msgstr "التّطبيقات"

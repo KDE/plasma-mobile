@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -153,12 +153,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "Otvoriť nastavenia zvuku"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "Nastavenia zvuku"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Prepnúť zobrazovanie zvukových prúdov"
@@ -290,6 +285,9 @@ msgstr "Vymazať všetky oznámenia"
 #, kde-format
 msgid "More Options…"
 msgstr "Viac možností..."
+
+#~ msgid "Audio Settings"
+#~ msgstr "Nastavenia zvuku"
 
 #~ msgid "Audio"
 #~ msgstr "Zvuk"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2024-03-07 12:12+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -155,12 +155,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "פתיחת הגדרות שמע"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "הגדרות שמע"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "החלפת הופעת תזרימי שמע"
@@ -292,6 +287,9 @@ msgstr "פינוי כל ההתראות"
 #, kde-format
 msgid "More Options…"
 msgstr "אפשרויות נוספות…"
+
+#~ msgid "Audio Settings"
+#~ msgstr "הגדרות שמע"
 
 #~ msgid "Audio"
 #~ msgstr "שמע"

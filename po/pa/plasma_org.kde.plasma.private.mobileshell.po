@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2023-04-01 19:29-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -154,12 +154,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "ਆਡੀਓ ਸੈਟਿੰਗਾਂ ਖੋਲ੍ਹੋ"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "ਆਡੀਓ ਸੈਟਿੰਗਾਂ"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "ਦਿਖਾਈਆਂ ਆਡੀਓ ਸਟਰੀਮਾਂ ਨੂੰ ਬਦਲੋ"
@@ -291,6 +286,9 @@ msgstr "ਸਾਰੇ ਨੋਟੀਫਿਕੇਸ਼ਨ ਮਿਟਾਓ"
 #, kde-format
 msgid "More Options…"
 msgstr "…ਹੋਰ ਚੋਣਾਂ"
+
+#~ msgid "Audio Settings"
+#~ msgstr "ਆਡੀਓ ਸੈਟਿੰਗਾਂ"
 
 #~ msgid "Audio"
 #~ msgstr "ਆਡੀਓ"

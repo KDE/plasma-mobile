@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -39,7 +39,7 @@ msgstr "移出文件夹"
 msgid "Add to favourites"
 msgstr "添加到常用应用"
 
-#: package/contents/ui/GridAppList.qml:67
+#: package/contents/ui/GridAppList.qml:68
 #, kde-format
 msgid "Applications"
 msgstr "应用程序"

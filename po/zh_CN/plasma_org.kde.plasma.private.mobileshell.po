@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -155,12 +155,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "打开音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "音频设置"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "切换显示音频流"
@@ -292,3 +287,6 @@ msgstr "清除所有通知"
 #, kde-format
 msgid "More Options…"
 msgstr "更多选项"
+
+#~ msgid "Audio Settings"
+#~ msgstr "音频设置"

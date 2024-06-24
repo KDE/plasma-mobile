@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-24 00:39+0000\n"
 "PO-Revision-Date: 2022-12-28 07:59+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -155,12 +155,7 @@ msgstr "%1%"
 msgid "Open audio settings"
 msgstr "აუდიოს მორგება"
 
-#: qml/volumeosd/VolumeOSD.qml:171
-#, kde-format
-msgid "Audio Settings"
-msgstr "აუდიოს პარამეტრები"
-
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:177
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "აუდიონაკადების ჩვენების გადართვა"
@@ -292,6 +287,9 @@ msgstr "ყველა შეტყობინების გასუფთ�
 #, kde-format
 msgid "More Options…"
 msgstr "მეტი პარამეტრი…"
+
+#~ msgid "Audio Settings"
+#~ msgstr "აუდიოს პარამეტრები"
 
 #~ msgid "Audio"
 #~ msgstr "აუდიო"
