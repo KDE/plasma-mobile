@@ -100,8 +100,8 @@ NanoShell.FullScreenOverlay {
                         anchors.rightMargin: Kirigami.Units.smallSpacing
 
                         PlasmaComponents.ToolButton {
-                            icon.name: !MobileShell.AudioInfo.paSinkModel.preferredSink || MobileShell.AudioInfo.paSinkModel.preferredSink.muted ? "audio-volume-muted" : "audio-volume-high"
-                            text: !MobileShell.AudioInfo.paSinkModel.preferredSink || MobileShell.AudioInfo.paSinkModel.preferredSink.muted ? i18n("Unmute") : i18n("Mute")
+                            icon.name: !PreferredDevice.sink || PreferredDevice.sink.muted ? "audio-volume-muted" : "audio-volume-high"
+                            text: !PreferredDevice.sink || PreferredDevice.sink.muted ? i18n("Unmute") : i18n("Mute")
                             display: Controls.AbstractButton.IconOnly
                             Layout.alignment: Qt.AlignVCenter
                             Layout.preferredWidth: Kirigami.Units.iconSizes.medium

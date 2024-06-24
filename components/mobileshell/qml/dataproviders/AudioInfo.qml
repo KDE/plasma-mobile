@@ -15,11 +15,11 @@ QtObject {
     property SinkModel paSinkModel: SinkModel {}
 
     // whether the audio icon should be visible in the status bar
-    readonly property bool isVisible: paSinkModel.preferredSink
+    readonly property bool isVisible: PreferredDevice.sink
 
     // the icon that should be displayed in the status bar
-    readonly property string icon: paSinkModel.preferredSink && !isDummyOutput(paSinkModel.preferredSink)
-                                    ? iconName(paSinkModel.preferredSink.volume, paSinkModel.preferredSink.muted)
+    readonly property string icon: PreferredDevice.sink && !isDummyOutput(PreferredDevice.sink)
+                                    ? iconName(PreferredDevice.sink.volume, PreferredDevice.sink.muted)
                                     : iconName(0, true)
 
     // the name of the audio device when it isn't valid
@@ -53,33 +53,33 @@ QtObject {
     }
 
     function increaseVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
+        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
             return;
         }
 
-        var volume = boundVolume(paSinkModel.preferredSink.volume + volumeStep);
+        var volume = boundVolume(PreferredDevice.sink.volume + volumeStep);
         var percent = volumePercent(volume, maxVolumeValue);
-        paSinkModel.preferredSink.muted = percent == 0;
-        paSinkModel.preferredSink.volume = volume;
+        PreferredDevice.sink.muted = percent == 0;
+        PreferredDevice.sink.volume = volume;
     }
 
     function decreaseVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
+        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
             return;
         }
 
-        var volume = boundVolume(paSinkModel.preferredSink.volume - volumeStep);
+        var volume = boundVolume(PreferredDevice.sink.volume - volumeStep);
         var percent = volumePercent(volume, maxVolumeValue);
-        paSinkModel.preferredSink.muted = percent == 0;
-        paSinkModel.preferredSink.volume = volume;
+        PreferredDevice.sink.muted = percent == 0;
+        PreferredDevice.sink.volume = volume;
     }
 
     function muteVolume() {
-        if (!paSinkModel.preferredSink || isDummyOutput(paSinkModel.preferredSink)) {
+        if (!PreferredDevice.sink || isDummyOutput(PreferredDevice.sink)) {
             return;
         }
 
-        paSinkModel.preferredSink.muted = !paSinkModel.preferredSink.muted;
+        PreferredDevice.sink.muted = !PreferredDevice.sink.muted;
     }
 
     function iconName(volume, muted, prefix) {
@@ -104,16 +104,16 @@ QtObject {
     signal volumeChanged()
 
     property var updateVolume: Connections {
-        target: root.paSinkModel ? (root.paSinkModel.preferredSink ? root.paSinkModel.preferredSink : null) : null
+        target: root.paSinkModel ? (PreferredDevice.sink ? PreferredDevice.sink : null) : null
         enabled: target !== null
 
         function onVolumeChanged() {
-            root.volumeValue = root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            root.volumeValue = root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
             root.volumeChanged();
         }
 
         function onMutedChanged() {
-            root.volumeValue = root.paSinkModel.preferredSink.muted ? 0 : root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            root.volumeValue = PreferredDevice.sink.muted ? 0 : root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
             root.volumeChanged();
         }
     }
@@ -123,8 +123,8 @@ QtObject {
         enabled: target !== null
 
         function onPreferredSinkChanged() {
-            if (root.paSinkModel.preferredSink) {
-                root.volumeValue = root.volumePercent(root.paSinkModel.preferredSink.volume, root.maxVolumeValue);
+            if (PreferredDevice.sink) {
+                root.volumeValue = root.volumePercent(PreferredDevice.sink.volume, root.maxVolumeValue);
             }
         }
     }
