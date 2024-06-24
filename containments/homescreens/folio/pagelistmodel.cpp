@@ -7,14 +7,9 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
-PageListModel *PageListModel::self()
-{
-    static PageListModel *model = new PageListModel;
-    return model;
-}
-
-PageListModel::PageListModel(QObject *parent)
+PageListModel::PageListModel(HomeScreen *parent)
     : QAbstractListModel{parent}
+    , m_homeScreen{parent}
 {
 }
 
@@ -77,7 +72,7 @@ Q_INVOKABLE void PageListModel::addPageAtEnd()
 {
     beginInsertRows(QModelIndex(), m_pages.size(), m_pages.size());
 
-    PageModel *page = new PageModel{{}, this};
+    PageModel *page = new PageModel{{}, this, m_homeScreen};
     connect(page, &PageModel::saveRequested, this, &PageListModel::save);
 
     m_pages.append(page);
@@ -96,9 +91,11 @@ bool PageListModel::isLastPageEmpty()
 
 void PageListModel::deleteEmptyPagesAtEnd()
 {
+    auto pageListModel = m_homeScreen->pageListModel();
+
     // delete empty pages at the end if they exist
-    while (PageListModel::self()->isLastPageEmpty() && PageListModel::self()->rowCount() > 1) {
-        PageListModel::self()->removePage(PageListModel::self()->rowCount() - 1);
+    while (pageListModel->isLastPageEmpty() && pageListModel->rowCount() > 1) {
+        pageListModel->removePage(pageListModel->rowCount() - 1);
     }
 }
 
@@ -113,24 +110,24 @@ QJsonArray PageListModel::exportToJson()
 
 void PageListModel::save()
 {
-    if (!m_containment) {
+    if (!m_homeScreen) {
         return;
     }
 
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_containment->config().writeEntry("Pages", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_containment->configNeedsSaving();
+    m_homeScreen->config().writeEntry("Pages", QString::fromStdString(data.toStdString()));
+    Q_EMIT m_homeScreen->configNeedsSaving();
 }
 
 void PageListModel::load()
 {
-    if (!m_containment) {
+    if (!m_homeScreen) {
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_containment->config().readEntry("Pages", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->config().readEntry("Pages", "{}").toUtf8());
     loadFromJson(doc.array());
 }
 
@@ -143,7 +140,7 @@ void PageListModel::loadFromJson(QJsonArray arr)
     for (QJsonValueRef r : arr) {
         QJsonArray obj = r.toArray();
 
-        PageModel *page = PageModel::fromJson(obj, this);
+        PageModel *page = PageModel::fromJson(obj, this, m_homeScreen);
         if (page) {
             connect(page, &PageModel::saveRequested, this, &PageListModel::save);
             m_pages.append(page);
@@ -158,9 +155,4 @@ void PageListModel::loadFromJson(QJsonArray arr)
     if (m_pages.size() == 0) {
         addPageAtEnd();
     }
-}
-
-void PageListModel::setContainment(Plasma::Containment *containment)
-{
-    m_containment = containment;
 }

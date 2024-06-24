@@ -122,8 +122,10 @@ void DelegateDragPosition::setFolder(FolioApplicationFolder *folder)
     }
 }
 
-DragState::DragState(HomeScreenState *state, QObject *parent)
+DragState::DragState(HomeScreenState *state, HomeScreen *parent)
     : QObject{parent}
+    , m_homeScreen{parent}
+    , m_state{state}
     , m_changePageTimer{new QTimer{this}}
     , m_openFolderTimer{new QTimer{this}}
     , m_leaveFolderTimer{new QTimer{this}}
@@ -132,7 +134,6 @@ DragState::DragState(HomeScreenState *state, QObject *parent)
     , m_favouritesInsertBetweenTimer{new QTimer{this}}
     , m_candidateDropPosition{new DelegateDragPosition{this}}
     , m_startPosition{new DelegateDragPosition{this}}
-    , m_state{state}
 {
     if (!state) {
         return;
@@ -170,7 +171,7 @@ DragState::DragState(HomeScreenState *state, QObject *parent)
     connect(m_state, &HomeScreenState::delegateDragFromFolderStarted, this, &DragState::onDelegateDragFromFolderStarted);
     connect(m_state, &HomeScreenState::delegateDragFromWidgetListStarted, this, &DragState::onDelegateDragFromWidgetListStarted);
     connect(m_state, &HomeScreenState::swipeStateChanged, this, [this]() {
-        if (HomeScreenState::self()->swipeState() == HomeScreenState::DraggingDelegate) {
+        if (m_state->swipeState() == HomeScreenState::DraggingDelegate) {
             onDelegateDraggingStarted();
         }
     });
@@ -314,7 +315,8 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
 
     qreal x = getPointerX();
     qreal y = getPointerY();
-    int dropIndex = FavouritesModel::self()->dropInsertPosition(x, y);
+    FavouritesModel *favouritesModel = m_homeScreen->favouritesModel();
+    int dropIndex = favouritesModel->dropInsertPosition(x, y);
 
     // if the drop position changed, cancel the open folder timer
     if (m_candidateDropPosition->location() != DelegateDragPosition::Favourites || m_candidateDropPosition->favouritesPosition() != dropIndex) {
@@ -329,7 +331,7 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
     }
 
     // ignore this event if the favourites area is full already
-    if (FavouritesModel::self()->isFull()) {
+    if (favouritesModel->isFull()) {
         return;
     }
 
@@ -338,7 +340,7 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
         return;
     }
 
-    if (FavouritesModel::self()->dropPositionIsEdge(x, y)) {
+    if (favouritesModel->dropPositionIsEdge(x, y)) {
         // if we need to make space for the delegate
 
         // start the insertion timer (so that the user has time to move the delegate away)
@@ -350,13 +352,13 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
         // if we are hovering over the center of a folder or app
 
         // delete ghost entry if there is one
-        int ghostEntryPosition = FavouritesModel::self()->getGhostEntryPosition();
+        int ghostEntryPosition = favouritesModel->getGhostEntryPosition();
         if (ghostEntryPosition != -1 && ghostEntryPosition != dropIndex) {
             if (dropIndex > ghostEntryPosition) {
                 // correct index if deleting the ghost will change the index
                 dropIndex--;
             }
-            FavouritesModel::self()->deleteGhostEntry();
+            favouritesModel->deleteGhostEntry();
         }
 
         // update the current drop position
@@ -365,7 +367,7 @@ void DragState::onDelegateDragPositionOverFavouritesChanged()
 
         // start folder open timer if hovering over a folder
         // get delegate being hovered over
-        FolioDelegate *delegate = FavouritesModel::self()->getEntryAt(dropIndex);
+        FolioDelegate *delegate = favouritesModel->getEntryAt(dropIndex);
 
         // check delegate is a folder and the drop delegate is an app
         if (delegate && delegate->type() == FolioDelegate::Folder && m_dropDelegate && m_dropDelegate->type() == FolioDelegate::Application) {
@@ -422,7 +424,7 @@ void DragState::onDelegateDragPositionOverPageViewChanged()
     m_candidateDropPosition->setLocation(DelegateDragPosition::Pages);
 
     // start folder open timer if hovering over a folder
-    PageModel *pageModel = PageListModel::self()->getPage(page);
+    PageModel *pageModel = m_homeScreen->pageListModel()->getPage(page);
     if (pageModel) {
         // get delegate being hovered over
         FolioDelegate *delegate = pageModel->getDelegate(row, column);
@@ -462,7 +464,7 @@ void DragState::onDelegateDraggingStarted()
 void DragState::onDelegateDragFromPageStarted(int page, int row, int column)
 {
     // fetch delegate at start position
-    PageModel *pageModel = PageListModel::self()->getPage(page);
+    PageModel *pageModel = m_homeScreen->pageListModel()->getPage(page);
     if (pageModel) {
         setDropDelegate(pageModel->getDelegate(row, column));
     } else {
@@ -479,7 +481,7 @@ void DragState::onDelegateDragFromPageStarted(int page, int row, int column)
 void DragState::onDelegateDragFromFavouritesStarted(int position)
 {
     // fetch delegate at start position
-    setDropDelegate(FavouritesModel::self()->getEntryAt(position));
+    setDropDelegate(m_homeScreen->favouritesModel()->getEntryAt(position));
 
     // set start location
     m_startPosition->setFavouritesPosition(position);
@@ -490,8 +492,8 @@ void DragState::onDelegateDragFromAppDrawerStarted(QString storageId)
 {
     // fetch delegate at start position
     if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
-        FolioApplication *app = new FolioApplication{this, service};
-        setDropDelegate(new FolioDelegate{app, this});
+        FolioApplication *app = new FolioApplication{m_homeScreen, service};
+        setDropDelegate(new FolioDelegate{app, m_homeScreen});
     } else {
         setDropDelegate(nullptr);
     }
@@ -515,8 +517,8 @@ void DragState::onDelegateDragFromWidgetListStarted(QString appletPluginId)
 {
     // default widget has dimensions of 1x1, and id of -1
     m_createdAppletPluginId = appletPluginId;
-    FolioWidget *widget = new FolioWidget{this, -1, 1, 1};
-    setDropDelegate(new FolioDelegate{widget, this});
+    FolioWidget *widget = new FolioWidget{m_homeScreen, -1, 1, 1};
+    setDropDelegate(new FolioDelegate{widget, m_homeScreen});
 
     // set start location
     m_startPosition->setLocation(DelegateDragPosition::WidgetList);
@@ -533,10 +535,10 @@ void DragState::onDelegateDropped()
 
     // delete empty pages at the end if they exist
     // (it can be created if user drags app to new page, but doesn't place it there)
-    PageListModel::self()->deleteEmptyPagesAtEnd();
+    m_homeScreen->pageListModel()->deleteEmptyPagesAtEnd();
 
     // clear ghost position if there is one
-    FavouritesModel::self()->deleteGhostEntry();
+    m_homeScreen->favouritesModel()->deleteGhostEntry();
 
     // reset timers
     m_folderInsertBetweenTimer->stop();
@@ -581,6 +583,8 @@ void DragState::onChangePageTimerFinished()
     const int leftPagePosition = 0;
     const int rightPagePosition = m_state->pageWidth();
 
+    PageListModel *pageListModel = m_homeScreen->pageListModel();
+
     qreal x = getPointerX();
     if (qAbs(leftPagePosition - x) <= PAGE_CHANGE_THRESHOLD) {
         // if we are at the left edge, go left
@@ -594,12 +598,12 @@ void DragState::onChangePageTimerFinished()
         int page = m_state->currentPage() + 1;
 
         // if we are at the right-most page, try to create a new one if the current page isn't empty
-        if (page == PageListModel::self()->rowCount() && !PageListModel::self()->isLastPageEmpty()) {
-            PageListModel::self()->addPageAtEnd();
+        if (page == pageListModel->rowCount() && !pageListModel->isLastPageEmpty()) {
+            pageListModel->addPageAtEnd();
         }
 
         // go to page if it exists
-        if (page < PageListModel::self()->rowCount()) {
+        if (page < pageListModel->rowCount()) {
             m_state->goToPage(page);
         }
     }
@@ -618,7 +622,7 @@ void DragState::onOpenFolderTimerFinished()
     switch (m_candidateDropPosition->location()) {
     case DelegateDragPosition::Pages: {
         // get current page
-        PageModel *page = PageListModel::self()->getPage(m_candidateDropPosition->page());
+        PageModel *page = m_homeScreen->pageListModel()->getPage(m_candidateDropPosition->page());
         if (!page) {
             return;
         }
@@ -630,20 +634,19 @@ void DragState::onOpenFolderTimerFinished()
         }
 
         folder = delegate->folder();
-        screenPosition = HomeScreenState::self()->getPageDelegateScreenPosition(m_candidateDropPosition->page(),
-                                                                                m_candidateDropPosition->pageRow(),
-                                                                                m_candidateDropPosition->pageColumn());
+        screenPosition =
+            m_state->getPageDelegateScreenPosition(m_candidateDropPosition->page(), m_candidateDropPosition->pageRow(), m_candidateDropPosition->pageColumn());
         break;
     }
     case DelegateDragPosition::Favourites: {
         // get delegate being hovered over in favourites bar
-        FolioDelegate *delegate = FavouritesModel::self()->getEntryAt(m_candidateDropPosition->favouritesPosition());
+        FolioDelegate *delegate = m_homeScreen->favouritesModel()->getEntryAt(m_candidateDropPosition->favouritesPosition());
         if (!delegate || delegate->type() != FolioDelegate::Folder) {
             return;
         }
 
         folder = delegate->folder();
-        screenPosition = HomeScreenState::self()->getFavouritesDelegateScreenPosition(m_candidateDropPosition->favouritesPosition());
+        screenPosition = m_homeScreen->homeScreenState()->getFavouritesDelegateScreenPosition(m_candidateDropPosition->favouritesPosition());
         break;
     }
     default:
@@ -727,7 +730,7 @@ void DragState::onFavouritesInsertBetweenTimerFinished()
     m_candidateDropPosition->setLocation(DelegateDragPosition::Favourites);
 
     // insert it at this position, shifting existing apps to the side
-    FavouritesModel::self()->setGhostEntry(m_favouritesInsertBetweenIndex);
+    m_homeScreen->favouritesModel()->setGhostEntry(m_favouritesInsertBetweenIndex);
 }
 
 void DragState::deleteStartPositionDelegate()
@@ -735,14 +738,14 @@ void DragState::deleteStartPositionDelegate()
     // delete the delegate at the start position
     switch (m_startPosition->location()) {
     case DelegateDragPosition::Pages: {
-        PageModel *page = PageListModel::self()->getPage(m_startPosition->page());
+        PageModel *page = m_homeScreen->pageListModel()->getPage(m_startPosition->page());
         if (page) {
             page->removeDelegate(m_startPosition->pageRow(), m_startPosition->pageColumn());
         }
         break;
     }
     case DelegateDragPosition::Favourites:
-        FavouritesModel::self()->removeEntry(m_startPosition->favouritesPosition());
+        m_homeScreen->favouritesModel()->removeEntry(m_startPosition->favouritesPosition());
         break;
     case DelegateDragPosition::Folder:
         m_startPosition->folder()->removeDelegate(m_startPosition->folderPosition());
@@ -767,7 +770,7 @@ bool DragState::createDropPositionDelegate()
     switch (m_candidateDropPosition->location()) {
     case DelegateDragPosition::Pages: {
         // locate the page we are dropping on
-        PageModel *page = PageListModel::self()->getPage(m_candidateDropPosition->page());
+        PageModel *page = m_homeScreen->pageListModel()->getPage(m_candidateDropPosition->page());
         if (!page) {
             break;
         }
@@ -776,7 +779,7 @@ bool DragState::createDropPositionDelegate()
         int column = m_candidateDropPosition->pageColumn();
 
         // delegate to add
-        FolioPageDelegate *delegate = new FolioPageDelegate{row, column, m_dropDelegate, page};
+        FolioPageDelegate *delegate = new FolioPageDelegate{row, column, m_dropDelegate, m_homeScreen};
 
         // delegate that exists at the drop position
         FolioPageDelegate *existingDelegate = page->getDelegate(row, column);
@@ -795,10 +798,10 @@ bool DragState::createDropPositionDelegate()
                 } else if (existingDelegate->type() == FolioDelegate::Application && !isStartPositionEqualDropPosition()) {
                     // create a folder from the two apps
 
-                    FolioApplicationFolder *folder = new FolioApplicationFolder(this, DEFAULT_FOLDER_NAME);
+                    FolioApplicationFolder *folder = new FolioApplicationFolder(m_homeScreen, DEFAULT_FOLDER_NAME);
                     folder->addDelegate(delegate, 0);
                     folder->addDelegate(existingDelegate, 0);
-                    FolioPageDelegate *folderDelegate = new FolioPageDelegate{row, column, folder, this};
+                    FolioPageDelegate *folderDelegate = new FolioPageDelegate{row, column, folder, m_homeScreen};
 
                     page->removeDelegate(row, column);
                     page->addDelegate(folderDelegate);
@@ -822,7 +825,7 @@ bool DragState::createDropPositionDelegate()
     }
     case DelegateDragPosition::Favourites: {
         // delegate that exists at the drop position
-        FolioDelegate *existingDelegate = FavouritesModel::self()->getEntryAt(m_candidateDropPosition->favouritesPosition());
+        FolioDelegate *existingDelegate = m_homeScreen->favouritesModel()->getEntryAt(m_candidateDropPosition->favouritesPosition());
 
         // if a delegate already exists at the spot, check if we can insert/create a folder
         if (existingDelegate) {
@@ -838,13 +841,13 @@ bool DragState::createDropPositionDelegate()
                 } else if (existingDelegate->type() == FolioDelegate::Application && !isStartPositionEqualDropPosition()) {
                     // create a folder from the two apps
 
-                    FolioApplicationFolder *folder = new FolioApplicationFolder(this, DEFAULT_FOLDER_NAME);
+                    FolioApplicationFolder *folder = new FolioApplicationFolder(m_homeScreen, DEFAULT_FOLDER_NAME);
                     folder->addDelegate(m_dropDelegate, 0);
                     folder->addDelegate(existingDelegate, 0);
-                    FolioDelegate *folderDelegate = new FolioDelegate{folder, this};
+                    FolioDelegate *folderDelegate = new FolioDelegate{folder, m_homeScreen};
 
-                    FavouritesModel::self()->removeEntry(m_candidateDropPosition->favouritesPosition());
-                    FavouritesModel::self()->addEntry(m_candidateDropPosition->favouritesPosition(), folderDelegate);
+                    m_homeScreen->favouritesModel()->removeEntry(m_candidateDropPosition->favouritesPosition());
+                    m_homeScreen->favouritesModel()->addEntry(m_candidateDropPosition->favouritesPosition(), folderDelegate);
 
                     added = true;
                     break;
@@ -854,7 +857,7 @@ bool DragState::createDropPositionDelegate()
 
         // otherwise, just add the delegate at this position
 
-        added = FavouritesModel::self()->addEntry(m_candidateDropPosition->favouritesPosition(), m_dropDelegate);
+        added = m_homeScreen->favouritesModel()->addEntry(m_candidateDropPosition->favouritesPosition(), m_dropDelegate);
 
         // if we couldn't add the delegate, try again but at the start position
         if (!added && !isStartPositionEqualDropPosition()) {
@@ -902,8 +905,8 @@ bool DragState::createDropPositionDelegate()
     }
 
     // if we are dropping a new widget, we need to now create the applet in the containment
-    if (added && m_startPosition->location() == DelegateDragPosition::WidgetList && m_dropDelegate->type() == FolioDelegate::Widget && m_state->containment()) {
-        Plasma::Applet *applet = m_state->containment()->createApplet(m_createdAppletPluginId);
+    if (added && m_startPosition->location() == DelegateDragPosition::WidgetList && m_dropDelegate->type() == FolioDelegate::Widget && m_homeScreen) {
+        Plasma::Applet *applet = m_homeScreen->createApplet(m_createdAppletPluginId);
 
         // associate the new delegate with the Plasma::Applet
         m_dropDelegate->widget()->setApplet(applet);

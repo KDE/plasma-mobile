@@ -17,6 +17,7 @@ import '../private'
 
 Folio.WidgetContainer {
     id: root
+    property Folio.HomeScreen folio
 
     property Folio.FolioWidget widget
 
@@ -28,8 +29,8 @@ Folio.WidgetContainer {
     readonly property real leftWidgetBackgroundPadding: widgetBackground.margins.left
     readonly property real rightWidgetBackgroundPadding: widgetBackground.margins.right
 
-    implicitWidth: (widget ? widget.gridWidth : 0) * Folio.HomeScreenState.pageCellWidth
-    implicitHeight: (widget ? widget.gridHeight : 0) * Folio.HomeScreenState.pageCellHeight
+    implicitWidth: (widget ? widget.gridWidth : 0) * folio.HomeScreenState.pageCellWidth
+    implicitHeight: (widget ? widget.gridHeight : 0) * folio.HomeScreenState.pageCellHeight
     width: implicitWidth
     height: implicitHeight
 

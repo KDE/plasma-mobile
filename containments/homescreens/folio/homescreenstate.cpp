@@ -17,12 +17,6 @@ constexpr qreal DETERMINE_SWIPE_THRESHOLD = 10;
 
 constexpr qreal VERTICAL_FAVOURITES_BAR_THRESHOLD = 400;
 
-HomeScreenState *HomeScreenState::self()
-{
-    static HomeScreenState *inst = new HomeScreenState{nullptr};
-    return inst;
-}
-
 QPropertyAnimation *HomeScreenState::setupAnimation(QByteArray property, int duration, QEasingCurve::Type curve, qreal endValue)
 {
     auto anim = new QPropertyAnimation{this, property, this};
@@ -32,11 +26,16 @@ QPropertyAnimation *HomeScreenState::setupAnimation(QByteArray property, int dur
     return anim;
 }
 
-HomeScreenState::HomeScreenState(QObject *parent)
+HomeScreenState::HomeScreenState(HomeScreen *parent)
     : QObject{parent}
-    , m_dragState{new DragState{this, this}}
+    , m_homeScreen{parent}
+    , m_dragState{new DragState{this, parent}}
     , m_appDrawerY{APP_DRAWER_OPEN_DIST}
     , m_searchWidgetY{SEARCH_WIDGET_OPEN_DIST}
+{
+}
+
+void HomeScreenState::init()
 {
     const int expoDuration = 800;
     const int cubicDuration = 400;
@@ -136,11 +135,11 @@ HomeScreenState::HomeScreenState(QObject *parent)
         Q_EMIT favouritesBarLocationChanged();
     });
 
-    connect(FolioSettings::self(), &FolioSettings::homeScreenRowsChanged, this, [this]() {
+    connect(m_homeScreen->folioSettings(), &FolioSettings::homeScreenRowsChanged, this, [this]() {
         Q_EMIT pageRowsChanged();
         Q_EMIT pageColumnsChanged();
     });
-    connect(FolioSettings::self(), &FolioSettings::homeScreenColumnsChanged, this, [this]() {
+    connect(m_homeScreen->folioSettings(), &FolioSettings::homeScreenColumnsChanged, this, [this]() {
         Q_EMIT pageRowsChanged();
         Q_EMIT pageColumnsChanged();
     });
@@ -277,18 +276,18 @@ HomeScreenState::FavouritesBarLocation HomeScreenState::favouritesBarLocation() 
 int HomeScreenState::pageRows() const
 {
     if (m_pageOrientation == RegularPosition || m_pageOrientation == RotateUpsideDown) {
-        return FolioSettings::self()->homeScreenRows();
+        return m_homeScreen->folioSettings()->homeScreenRows();
     } else {
-        return FolioSettings::self()->homeScreenColumns();
+        return m_homeScreen->folioSettings()->homeScreenColumns();
     }
 }
 
 int HomeScreenState::pageColumns() const
 {
     if (m_pageOrientation == RegularPosition || m_pageOrientation == RotateUpsideDown) {
-        return FolioSettings::self()->homeScreenColumns();
+        return m_homeScreen->folioSettings()->homeScreenColumns();
     } else {
-        return FolioSettings::self()->homeScreenRows();
+        return m_homeScreen->folioSettings()->homeScreenRows();
     }
 }
 
@@ -622,7 +621,7 @@ int HomeScreenState::currentFolderPage()
 
 FolioDelegate *HomeScreenState::getPageDelegateAt(int page, int row, int column)
 {
-    PageModel *pageModel = PageListModel::self()->getPage(page);
+    PageModel *pageModel = m_homeScreen->pageListModel()->getPage(page);
     if (!pageModel) {
         return nullptr;
     }
@@ -637,7 +636,7 @@ FolioDelegate *HomeScreenState::getPageDelegateAt(int page, int row, int column)
 
 FolioDelegate *HomeScreenState::getFavouritesDelegateAt(int position)
 {
-    return FavouritesModel::self()->getEntryAt(position);
+    return m_homeScreen->favouritesModel()->getEntryAt(position);
 }
 
 FolioDelegate *HomeScreenState::getFolderDelegateAt(int position)
@@ -659,7 +658,7 @@ QPointF HomeScreenState::getPageDelegateScreenPosition(int page, int row, int co
 
 QPointF HomeScreenState::getFavouritesDelegateScreenPosition(int position)
 {
-    return FavouritesModel::self()->getDelegateScreenPosition(position);
+    return m_homeScreen->favouritesModel()->getDelegateScreenPosition(position);
 }
 
 QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
@@ -677,16 +676,6 @@ QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
     x -= currentFolderPage() * m_folderPageWidth;
 
     return {x, y};
-}
-
-Plasma::Containment *HomeScreenState::containment()
-{
-    return m_containment;
-}
-
-void HomeScreenState::setContainment(Plasma::Containment *containment)
-{
-    m_containment = containment;
 }
 
 void HomeScreenState::openAppDrawer()
@@ -719,7 +708,7 @@ void HomeScreenState::closeSearchWidget()
 
 void HomeScreenState::snapPage()
 {
-    const int numOfPages = PageListModel::self()->rowCount();
+    const int numOfPages = m_homeScreen->pageListModel()->rowCount();
 
     const int leftPage = qBound(0.0, (m_pageViewX / m_pageWidth), numOfPages - 1.0);
     const qreal leftPagePos = -leftPage * m_pageWidth;
@@ -745,7 +734,7 @@ void HomeScreenState::goToPage(int page)
         page = 0;
     }
 
-    const int numOfPages = PageListModel::self()->rowCount();
+    const int numOfPages = m_homeScreen->pageListModel()->rowCount();
     if (page >= numOfPages) {
         page = std::max(0, numOfPages - 1);
     }

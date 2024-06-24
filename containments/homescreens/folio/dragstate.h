@@ -8,8 +8,10 @@
 
 #include "folioapplicationfolder.h"
 #include "foliodelegate.h"
+#include "homescreen.h"
 #include "homescreenstate.h"
 
+class HomeScreen;
 class HomeScreenState;
 
 class DelegateDragPosition : public QObject
@@ -83,7 +85,7 @@ class DragState : public QObject
     Q_PROPERTY(FolioDelegate *dropDelegate READ dropDelegate NOTIFY dropDelegateChanged)
 
 public:
-    DragState(HomeScreenState *state = nullptr, QObject *parent = nullptr);
+    DragState(HomeScreenState *state = nullptr, HomeScreen *parent = nullptr);
 
     DelegateDragPosition *candidateDropPosition() const;
     DelegateDragPosition *startPosition() const;
@@ -138,6 +140,9 @@ private:
     qreal getPointerX();
     qreal getPointerY();
 
+    HomeScreen *m_homeScreen{nullptr};
+    HomeScreenState *m_state{nullptr};
+
     QTimer *m_changePageTimer{nullptr};
     QTimer *m_openFolderTimer{nullptr};
     QTimer *m_leaveFolderTimer{nullptr};
@@ -162,6 +167,4 @@ private:
 
     // when dropping a new widget, this is the applet name
     QString m_createdAppletPluginId{};
-
-    HomeScreenState *m_state{nullptr};
 };

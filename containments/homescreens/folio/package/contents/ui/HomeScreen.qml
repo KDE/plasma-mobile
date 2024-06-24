@@ -19,6 +19,8 @@ import "./settings"
 
 Item {
     id: root
+    property Folio.HomeScreen folio
+    property Folio.HomeScreenState homeScreenState: folio.HomeScreenState
 
     property real topMargin: 0
     property real bottomMargin: 0
@@ -26,8 +28,6 @@ Item {
     property real rightMargin: 0
 
     property bool interactive: true
-
-    property Folio.HomeScreenState homeScreenState: Folio.HomeScreenState
 
     // non-widget drop animation
     readonly property bool dropAnimationRunning: delegateDragItem.dropAnimationRunning || widgetDragItem.dropAnimationRunning
@@ -38,10 +38,10 @@ Item {
     // how much to scale out in the settings mode
     readonly property real settingsModeHomeScreenScale: 0.8
 
-    onTopMarginChanged: Folio.HomeScreenState.viewTopPadding = root.topMargin
-    onBottomMarginChanged: Folio.HomeScreenState.viewBottomPadding = root.bottomMargin
-    onLeftMarginChanged: Folio.HomeScreenState.viewLeftPadding = root.leftMargin
-    onRightMarginChanged: Folio.HomeScreenState.viewRightPadding = root.rightMargin
+    onTopMarginChanged: folio.HomeScreenState.viewTopPadding = root.topMargin
+    onBottomMarginChanged: folio.HomeScreenState.viewBottomPadding = root.bottomMargin
+    onLeftMarginChanged: folio.HomeScreenState.viewLeftPadding = root.leftMargin
+    onRightMarginChanged: folio.HomeScreenState.viewRightPadding = root.rightMargin
 
     // called by any delegates when starting drag
     // returns the mapped coordinates to be used in the home screen state
@@ -73,10 +73,10 @@ Item {
         text: "M\nM"
         visible: false
 
-        onHeightChanged: Folio.HomeScreenState.pageDelegateLabelHeight = appLabelMetrics.height
+        onHeightChanged: folio.HomeScreenState.pageDelegateLabelHeight = appLabelMetrics.height
 
         Component.onCompleted: {
-            Folio.HomeScreenState.pageDelegateLabelWidth = Kirigami.Units.smallSpacing;
+            folio.HomeScreenState.pageDelegateLabelWidth = Kirigami.Units.smallSpacing;
         }
     }
 
@@ -85,8 +85,8 @@ Item {
         id: screenDimensions
         anchors.fill: parent
 
-        onWidthChanged: Folio.HomeScreenState.viewWidth = width;
-        onHeightChanged: Folio.HomeScreenState.viewHeight = height;
+        onWidthChanged: folio.HomeScreenState.viewWidth = width;
+        onHeightChanged: folio.HomeScreenState.viewHeight = height;
     }
 
     // a way of stopping focus
@@ -102,10 +102,10 @@ Item {
         interactive: root.interactive &&
             settings.homeScreenInteractive &&
             (appDrawer.flickable.contentY <= 10 || // disable the swipe area when we are swiping in the app drawer, and not in drag-and-drop
-                Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
-                Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
-                Folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
-                Folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
+                folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate ||
+                folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate ||
+                folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
+                folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
 
         onSwipeStarted: {
             homeScreenState.swipeStarted();
@@ -126,9 +126,10 @@ Item {
 
         SettingsComponent {
             id: settings
+            folio: root.folio
             width: parent.width
             height: parent.height
-            opacity: Folio.HomeScreenState.settingsOpenProgress
+            opacity: folio.HomeScreenState.settingsOpenProgress
             z: 1
 
             // move the settings out of the way if it is not visible
@@ -160,12 +161,13 @@ Item {
 
             HomeScreenPages {
                 id: homeScreenPages
+                folio: root.folio
                 homeScreen: root
 
                 anchors.topMargin: root.topMargin
-                anchors.leftMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : root.leftMargin
-                anchors.rightMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : root.rightMargin
-                anchors.bottomMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : root.bottomMargin
+                anchors.leftMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : root.leftMargin
+                anchors.rightMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : root.rightMargin
+                anchors.bottomMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : root.bottomMargin
 
                 // update the model with page dimensions
                 onWidthChanged: {
@@ -178,7 +180,7 @@ Item {
                 transform: [
                     Scale {
                         // animation when settings opens
-                        property real scaleFactor: 1 - Folio.HomeScreenState.settingsOpenProgress * (1 - settingsModeHomeScreenScale)
+                        property real scaleFactor: 1 - folio.HomeScreenState.settingsOpenProgress * (1 - settingsModeHomeScreenScale)
                         origin.x: root.leftMargin + (root.width - root.rightMargin - root.leftMargin) / 2
                         origin.y: root.height * settingsModeHomeScreenScale / 2
                         xScale: scaleFactor
@@ -189,7 +191,7 @@ Item {
                 states: [
                     State {
                         name: "bottom"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
                         AnchorChanges {
                             target: homeScreenPages
                             anchors.top: parent.top
@@ -199,7 +201,7 @@ Item {
                         }
                     }, State {
                         name: "left"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left
                         AnchorChanges {
                             target: homeScreenPages
                             anchors.top: parent.top
@@ -209,7 +211,7 @@ Item {
                         }
                     }, State {
                         name: "right"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right
                         AnchorChanges {
                             target: homeScreenPages
                             anchors.top: parent.top
@@ -226,29 +228,30 @@ Item {
                 color: Qt.rgba(255, 255, 255, 0.2)
 
                 // don't show in settings mode
-                opacity: 1 - Folio.HomeScreenState.settingsOpenProgress
-                visible: Folio.FolioSettings.showFavouritesBarBackground
+                opacity: 1 - folio.HomeScreenState.settingsOpenProgress
+                visible: folio.FolioSettings.showFavouritesBarBackground
 
-                anchors.top: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? favouritesBar.top : parent.top
+                anchors.top: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? favouritesBar.top : parent.top
                 anchors.bottom: parent.bottom
-                anchors.left: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? favouritesBar.left : parent.left
-                anchors.right: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? favouritesBar.right : parent.right
+                anchors.left: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? favouritesBar.left : parent.left
+                anchors.right: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? favouritesBar.right : parent.right
 
                 // because of the scale animation, we need to extend the panel out a bit
-                anchors.topMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : -Kirigami.Units.gridUnit * 5
+                anchors.topMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : -Kirigami.Units.gridUnit * 5
                 anchors.bottomMargin: -Kirigami.Units.gridUnit * 5
-                anchors.leftMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : -Kirigami.Units.gridUnit * 5
-                anchors.rightMargin: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : -Kirigami.Units.gridUnit * 5
+                anchors.leftMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : -Kirigami.Units.gridUnit * 5
+                anchors.rightMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : -Kirigami.Units.gridUnit * 5
             }
 
             FavouritesBar {
                 id: favouritesBar
+                folio: root.folio
                 homeScreen: root
                 leftMargin: root.leftMargin
                 topMargin: root.topMargin
 
                 // don't show in settings mode
-                opacity: 1 - Folio.HomeScreenState.settingsOpenProgress
+                opacity: 1 - folio.HomeScreenState.settingsOpenProgress
                 visible: opacity > 0
 
                 // one is ignored as anchors are set
@@ -263,7 +266,7 @@ Item {
                 states: [
                     State {
                         name: "bottom"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
                         AnchorChanges {
                             target: favouritesBar
                             anchors.top: undefined
@@ -277,7 +280,7 @@ Item {
                         }
                     }, State {
                         name: "left"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left
                         AnchorChanges {
                             target: favouritesBar
                             anchors.top: parent.top
@@ -291,7 +294,7 @@ Item {
                         }
                     }, State {
                         name: "right"
-                        when: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right
+                        when: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right
                         AnchorChanges {
                             target: favouritesBar
                             anchors.top: parent.top
@@ -309,10 +312,10 @@ Item {
 
             Item {
                 id: pageIndicatorWrapper
-                property bool favouritesBarAtBottom: Folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
+                property bool favouritesBarAtBottom: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
 
                 // don't show in settings mode
-                opacity: 1 - Folio.HomeScreenState.settingsOpenProgress
+                opacity: 1 - folio.HomeScreenState.settingsOpenProgress
 
                 anchors.top: parent.top
                 anchors.left: parent.left
@@ -333,11 +336,11 @@ Item {
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
 
-                    currentIndex: Folio.HomeScreenState.currentPage
-                    count: Folio.PageListModel.length
+                    currentIndex: folio.HomeScreenState.currentPage
+                    count: folio.PageListModel.length
 
                     TapHandler {
-                        onTapped: Folio.HomeScreenState.openAppDrawer()
+                        onTapped: folio.HomeScreenState.openAppDrawer()
                     }
                 }
 
@@ -346,18 +349,18 @@ Item {
                     source: 'arrow-up'
                     Kirigami.Theme.inherit: false
                     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-                    
+
                     implicitHeight: Kirigami.Units.iconSizes.small
                     implicitWidth: Kirigami.Units.iconSizes.small
 
-                    visible: Folio.PageListModel.length <= 1
-                    
+                    visible: folio.PageListModel.length <= 1
+
                     anchors.horizontalCenter: parent.horizontalCenter
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: Kirigami.Units.smallSpacing
 
                     TapHandler {
-                        onTapped: Folio.HomeScreenState.openAppDrawer()
+                        onTapped: folio.HomeScreenState.openAppDrawer()
                     }
                 }
             }
@@ -366,6 +369,7 @@ Item {
         // folder view
         FolderView {
             id: folderView
+            folio: root.folio
             anchors.fill: parent
             anchors.topMargin: root.topMargin
             anchors.leftMargin: root.leftMargin
@@ -380,16 +384,19 @@ Item {
         // drag and drop component
         DelegateDragItem {
             id: delegateDragItem
+            folio: root.folio
         }
 
         // drag and drop for widgets
         WidgetDragItem {
             id: widgetDragItem
+            folio: root.folio
         }
 
         // bottom app drawer
         AppDrawer {
             id: appDrawer
+            folio: root.folio
             width: parent.width
             height: parent.height
 
@@ -416,7 +423,7 @@ Item {
             rightPadding: root.rightMargin
 
             Connections {
-                target: Folio.HomeScreenState
+                target: folio.HomeScreenState
 
                 function onAppDrawerClosed() {
                     // reset app drawer position when closed
@@ -443,7 +450,7 @@ Item {
 
             // focus the search bar if it opens
             Connections {
-                target: Folio.HomeScreenState
+                target: folio.HomeScreenState
 
                 function onSearchWidgetOpenProgressChanged() {
                     if (homeScreenState.searchWidgetOpenProgress === 1.0) {

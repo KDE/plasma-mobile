@@ -5,23 +5,25 @@
 #include "homescreenstate.h"
 #include "widgetsmanager.h"
 
-FolioWidget::FolioWidget(QObject *parent, int id, int realGridWidth, int realGridHeight)
+FolioWidget::FolioWidget(HomeScreen *parent, int id, int realGridWidth, int realGridHeight)
     : QObject{parent}
+    , m_homeScreen{parent}
     , m_id{id}
     , m_realGridWidth{realGridWidth}
     , m_realGridHeight{realGridHeight}
     , m_applet{nullptr}
     , m_quickApplet{nullptr}
 {
-    auto *applet = WidgetsManager::self()->getWidget(id);
+    auto *applet = m_homeScreen->widgetsManager()->getWidget(id);
     if (applet) {
         setApplet(applet);
     }
     init();
 }
 
-FolioWidget::FolioWidget(QObject *parent, Plasma::Applet *applet, int realGridWidth, int realGridHeight)
+FolioWidget::FolioWidget(HomeScreen *parent, Plasma::Applet *applet, int realGridWidth, int realGridHeight)
     : QObject{parent}
+    , m_homeScreen{parent}
     , m_id{applet ? static_cast<int>(applet->id()) : -1}
     , m_realGridWidth{realGridWidth}
     , m_realGridHeight{realGridHeight}
@@ -32,24 +34,24 @@ FolioWidget::FolioWidget(QObject *parent, Plasma::Applet *applet, int realGridWi
 
 void FolioWidget::init()
 {
-    connect(HomeScreenState::self(), &HomeScreenState::pageOrientationChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageOrientationChanged, this, [this]() {
         Q_EMIT gridWidthChanged();
         Q_EMIT gridHeightChanged();
     });
 
-    connect(WidgetsManager::self(), &WidgetsManager::widgetAdded, this, [this](Plasma::Applet *applet) {
+    connect(m_homeScreen->widgetsManager(), &WidgetsManager::widgetAdded, this, [this](Plasma::Applet *applet) {
         if (applet && static_cast<int>(applet->id()) == m_id) {
             setApplet(applet);
         }
     });
-    connect(WidgetsManager::self(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
+    connect(m_homeScreen->widgetsManager(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
         if (applet && static_cast<int>(applet->id()) == m_id) {
             setApplet(nullptr);
         }
     });
 }
 
-FolioWidget *FolioWidget::fromJson(QJsonObject &obj, QObject *parent)
+FolioWidget *FolioWidget::fromJson(QJsonObject &obj, HomeScreen *parent)
 {
     int id = obj[QStringLiteral("id")].toInt();
     int gridWidth = obj[QStringLiteral("gridWidth")].toInt();
@@ -74,7 +76,7 @@ int FolioWidget::id() const
 
 int FolioWidget::gridWidth() const
 {
-    switch (HomeScreenState::self()->pageOrientation()) {
+    switch (m_homeScreen->homeScreenState()->pageOrientation()) {
     case HomeScreenState::RegularPosition:
         return m_realGridWidth;
     case HomeScreenState::RotateClockwise:
@@ -89,7 +91,7 @@ int FolioWidget::gridWidth() const
 
 void FolioWidget::setGridWidth(int gridWidth)
 {
-    switch (HomeScreenState::self()->pageOrientation()) {
+    switch (m_homeScreen->homeScreenState()->pageOrientation()) {
     case HomeScreenState::RegularPosition:
         setRealGridWidth(gridWidth);
         break;
@@ -113,7 +115,7 @@ void FolioWidget::setGridWidth(int gridWidth)
 
 int FolioWidget::gridHeight() const
 {
-    switch (HomeScreenState::self()->pageOrientation()) {
+    switch (m_homeScreen->homeScreenState()->pageOrientation()) {
     case HomeScreenState::RegularPosition:
         return m_realGridHeight;
     case HomeScreenState::RotateClockwise:
@@ -128,7 +130,7 @@ int FolioWidget::gridHeight() const
 
 void FolioWidget::setGridHeight(int gridHeight)
 {
-    switch (HomeScreenState::self()->pageOrientation()) {
+    switch (m_homeScreen->homeScreenState()->pageOrientation()) {
     case HomeScreenState::RegularPosition:
         setRealGridHeight(gridHeight);
         break;
@@ -188,7 +190,7 @@ void FolioWidget::setRealGridHeight(int gridHeight)
 
 GridPosition FolioWidget::topLeftCorner(int row, int column)
 {
-    switch (HomeScreenState::self()->pageOrientation()) {
+    switch (m_homeScreen->homeScreenState()->pageOrientation()) {
     case HomeScreenState::RegularPosition:
         return {row, column};
     case HomeScreenState::RotateClockwise:

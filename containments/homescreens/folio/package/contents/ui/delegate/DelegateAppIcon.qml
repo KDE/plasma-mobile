@@ -12,7 +12,8 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
 Kirigami.Icon {
     id: root
+    property Folio.HomeScreen folio
 
-    height: Folio.FolioSettings.delegateIconSize
-    width: Folio.FolioSettings.delegateIconSize
+    height: folio.FolioSettings.delegateIconSize
+    width: folio.FolioSettings.delegateIconSize
 }

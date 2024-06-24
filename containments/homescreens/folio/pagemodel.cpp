@@ -6,268 +6,12 @@
 #include "homescreenstate.h"
 #include "widgetsmanager.h"
 
-FolioPageDelegate::FolioPageDelegate(int row, int column, QObject *parent)
-    : FolioDelegate{parent}
-    , m_row{row}
-    , m_column{column}
-{
-    init();
-}
-
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplication *application, QObject *parent)
-    : FolioDelegate{application, parent}
-    , m_row{row}
-    , m_column{column}
-{
-    init();
-}
-
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioApplicationFolder *folder, QObject *parent)
-    : FolioDelegate{folder, parent}
-    , m_row{row}
-    , m_column{column}
-{
-    init();
-}
-
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioWidget *widget, QObject *parent)
-    : FolioDelegate{widget, parent}
-    , m_row{row}
-    , m_column{column}
-{
-    init();
-}
-
-FolioPageDelegate::FolioPageDelegate(int row, int column, FolioDelegate *delegate, QObject *parent)
-    : FolioDelegate{parent}
-    , m_row{row}
-    , m_column{column}
-{
-    m_type = delegate->type();
-    m_application = delegate->application();
-    m_folder = delegate->folder();
-    m_widget = delegate->widget();
-
-    init();
-}
-
-void FolioPageDelegate::init()
-{
-    // we have to use the "real" rows and columns, so fetch them from FolioSettings instead of HomeScreenState
-    switch (HomeScreenState::self()->pageOrientation()) {
-    case HomeScreenState::RegularPosition:
-        m_realRow = m_row;
-        m_realColumn = m_column;
-        break;
-    case HomeScreenState::RotateClockwise:
-        m_realRow = HomeScreenState::self()->pageColumns() - m_column - 1;
-        m_realColumn = m_row;
-
-        if (m_widget) {
-            // since top-left in cw is bottom-left in portrait
-            m_realRow -= m_widget->realGridHeight() - 1;
-        }
-
-        break;
-    case HomeScreenState::RotateCounterClockwise:
-        m_realRow = m_column;
-        m_realColumn = HomeScreenState::self()->pageRows() - m_row - 1;
-
-        if (m_widget) {
-            // since top-left in ccw is top-right in portrait
-            m_realColumn -= m_widget->realGridWidth() - 1;
-        }
-
-        break;
-    case HomeScreenState::RotateUpsideDown:
-        m_realRow = HomeScreenState::self()->pageRows() - m_row - 1;
-        m_realColumn = HomeScreenState::self()->pageColumns() - m_column - 1;
-
-        if (m_widget) {
-            // since top-left in upside-down is bottom-right in portrait
-            m_realRow -= m_widget->realGridHeight() - 1;
-            m_realColumn -= m_widget->realGridWidth() - 1;
-        }
-
-        break;
-    }
-
-    if (m_widget) {
-        connect(m_widget, &FolioWidget::realTopLeftPositionChanged, this, [this](int rowOffset, int columnOffset) {
-            m_realRow += rowOffset;
-            m_realColumn += columnOffset;
-        });
-    }
-
-    connect(HomeScreenState::self(), &HomeScreenState::pageOrientationChanged, this, [this]() {
-        setRowOnly(getTranslatedTopLeftRow(m_realRow, m_realColumn, this));
-        setColumnOnly(getTranslatedTopLeftColumn(m_realRow, m_realColumn, this));
-    });
-}
-
-FolioPageDelegate *FolioPageDelegate::fromJson(QJsonObject &obj, QObject *parent)
-{
-    FolioDelegate *fd = FolioDelegate::fromJson(obj, parent);
-
-    if (!fd) {
-        return nullptr;
-    }
-
-    int realRow = obj[QStringLiteral("row")].toInt();
-    int realColumn = obj[QStringLiteral("column")].toInt();
-
-    int row = getTranslatedTopLeftRow(realRow, realColumn, fd);
-    int column = getTranslatedTopLeftColumn(realRow, realColumn, fd);
-
-    FolioPageDelegate *delegate = new FolioPageDelegate{row, column, fd, parent};
-    fd->deleteLater();
-
-    return delegate;
-}
-
-int FolioPageDelegate::getTranslatedTopLeftRow(int realRow, int realColumn, FolioDelegate *fd)
-{
-    int row = getTranslatedRow(realRow, realColumn);
-    int column = getTranslatedColumn(realRow, realColumn);
-
-    // special logic to return "top left" for widgets, since they take more than one tile
-    if (fd->type() == FolioDelegate::Widget) {
-        return fd->widget()->topLeftCorner(row, column).row;
-    } else {
-        return row;
-    }
-}
-
-int FolioPageDelegate::getTranslatedTopLeftColumn(int realRow, int realColumn, FolioDelegate *fd)
-{
-    int row = getTranslatedRow(realRow, realColumn);
-    int column = getTranslatedColumn(realRow, realColumn);
-
-    // special logic to return "top left" for widgets, since they take more than one tile
-    if (fd->type() == FolioDelegate::Widget) {
-        return fd->widget()->topLeftCorner(row, column).column;
-    } else {
-        return column;
-    }
-}
-
-int FolioPageDelegate::getTranslatedRow(int realRow, int realColumn)
-{
-    // we have to use the "real" rows and columns, so fetch them from FolioSettings instead of HomeScreenState
-    switch (HomeScreenState::self()->pageOrientation()) {
-    case HomeScreenState::RegularPosition:
-        return realRow;
-    case HomeScreenState::RotateClockwise:
-        return realColumn;
-    case HomeScreenState::RotateCounterClockwise:
-        return FolioSettings::self()->homeScreenColumns() - realColumn - 1;
-    case HomeScreenState::RotateUpsideDown:
-        return FolioSettings::self()->homeScreenRows() - realRow - 1;
-    }
-    return realRow;
-}
-
-int FolioPageDelegate::getTranslatedColumn(int realRow, int realColumn)
-{
-    // we have to use the "real" rows and columns, so fetch them from FolioSettings instead of HomeScreenState
-    switch (HomeScreenState::self()->pageOrientation()) {
-    case HomeScreenState::RegularPosition:
-        return realColumn;
-    case HomeScreenState::RotateClockwise:
-        return FolioSettings::self()->homeScreenRows() - realRow - 1;
-    case HomeScreenState::RotateCounterClockwise:
-        return realRow;
-    case HomeScreenState::RotateUpsideDown:
-        return FolioSettings::self()->homeScreenColumns() - realColumn - 1;
-    }
-    return realRow;
-}
-
-QJsonObject FolioPageDelegate::toJson() const
-{
-    QJsonObject o = FolioDelegate::toJson();
-    o[QStringLiteral("row")] = m_realRow;
-    o[QStringLiteral("column")] = m_realColumn;
-    return o;
-}
-
-int FolioPageDelegate::row()
-{
-    return m_row;
-}
-
-void FolioPageDelegate::setRow(int row)
-{
-    if (m_row != row) {
-        // adjust stored data too
-        switch (HomeScreenState::self()->pageOrientation()) {
-        case HomeScreenState::RegularPosition:
-            m_realRow = row;
-            break;
-        case HomeScreenState::RotateClockwise:
-            m_realColumn += row - m_row;
-            break;
-        case HomeScreenState::RotateCounterClockwise:
-            m_realColumn += m_row - row;
-            break;
-        case HomeScreenState::RotateUpsideDown:
-            m_realRow += m_row - row;
-            break;
-        }
-
-        setRowOnly(row);
-    }
-}
-
-void FolioPageDelegate::setRowOnly(int row)
-{
-    if (m_row != row) {
-        m_row = row;
-        Q_EMIT rowChanged();
-    }
-}
-
-int FolioPageDelegate::column()
-{
-    return m_column;
-}
-
-void FolioPageDelegate::setColumn(int column)
-{
-    if (m_column != column) {
-        // adjust stored data too
-        switch (HomeScreenState::self()->pageOrientation()) {
-        case HomeScreenState::RegularPosition:
-            m_realColumn = column;
-            break;
-        case HomeScreenState::RotateClockwise:
-            m_realRow += m_column - column;
-            break;
-        case HomeScreenState::RotateCounterClockwise:
-            m_realRow += column - m_column;
-            break;
-        case HomeScreenState::RotateUpsideDown:
-            m_realColumn += m_column - column;
-            break;
-        }
-
-        setColumnOnly(column);
-    }
-}
-
-void FolioPageDelegate::setColumnOnly(int column)
-{
-    if (m_column != column) {
-        m_column = column;
-        Q_EMIT columnChanged();
-    }
-}
-
-PageModel::PageModel(QList<FolioPageDelegate *> delegates, QObject *parent)
+PageModel::PageModel(QList<FolioPageDelegate *> delegates, QObject *parent, HomeScreen *homeScreen)
     : QAbstractListModel{parent}
+    , m_homeScreen{homeScreen}
     , m_delegates{delegates}
 {
-    connect(WidgetsManager::self(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
+    connect(homeScreen->widgetsManager(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
         if (applet) {
             // delete any instance of this widget
             for (int i = 0; i < m_delegates.size(); i++) {
@@ -283,20 +27,20 @@ PageModel::PageModel(QList<FolioPageDelegate *> delegates, QObject *parent)
 
 PageModel::~PageModel() = default;
 
-PageModel *PageModel::fromJson(QJsonArray &arr, QObject *parent)
+PageModel *PageModel::fromJson(QJsonArray &arr, QObject *parent, HomeScreen *homeScreen)
 {
     QList<FolioPageDelegate *> delegates;
 
     for (QJsonValueRef r : arr) {
         QJsonObject obj = r.toObject();
 
-        FolioPageDelegate *delegate = FolioPageDelegate::fromJson(obj, parent);
+        FolioPageDelegate *delegate = FolioPageDelegate::fromJson(obj, homeScreen);
         if (delegate) {
             delegates.append(delegate);
         }
     }
 
-    PageModel *model = new PageModel{delegates, parent};
+    PageModel *model = new PageModel{delegates, parent, homeScreen};
 
     // ensure delegates can request saves
     for (auto *delegate : delegates) {
@@ -372,7 +116,9 @@ void PageModel::removeDelegate(int index)
 
 bool PageModel::canAddDelegate(int row, int column, FolioDelegate *delegate)
 {
-    if (row < 0 || row >= HomeScreenState::self()->pageRows() || column < 0 || column >= HomeScreenState::self()->pageColumns()) {
+    HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
+
+    if (row < 0 || row >= homeScreenState->pageRows() || column < 0 || column >= homeScreenState->pageColumns()) {
         return false;
     }
 
@@ -384,8 +130,8 @@ bool PageModel::canAddDelegate(int row, int column, FolioDelegate *delegate)
         int maxColumn = column + delegate->widget()->gridWidth() - 1;
 
         // check bounds
-        if ((row < 0 || row >= HomeScreenState::self()->pageRows()) || (maxRow < 0 || maxRow >= HomeScreenState::self()->pageRows())
-            || (column < 0 || column >= HomeScreenState::self()->pageColumns()) || (maxColumn < 0 || maxColumn >= HomeScreenState::self()->pageColumns())) {
+        if ((row < 0 || row >= homeScreenState->pageRows()) || (maxRow < 0 || maxRow >= homeScreenState->pageRows())
+            || (column < 0 || column >= homeScreenState->pageColumns()) || (maxColumn < 0 || maxColumn >= homeScreenState->pageColumns())) {
             return false;
         }
 
@@ -462,11 +208,11 @@ void PageModel::moveAndResizeWidgetDelegate(FolioPageDelegate *delegate, int new
     }
 
     // test if we can add the delegate with new size and position
-    FolioWidget *testWidget = new FolioWidget(this, 0, 0, 0);
+    FolioWidget *testWidget = new FolioWidget(m_homeScreen, 0, 0, 0);
     // we have to use setGridWidth and setGridHeight since it takes into account the page orientation
     testWidget->setGridWidth(newGridWidth);
     testWidget->setGridHeight(newGridHeight);
-    FolioDelegate *testDelegate = new FolioDelegate(testWidget, this);
+    FolioDelegate *testDelegate = new FolioDelegate(testWidget, m_homeScreen);
 
     // NOT THREAD SAFE!
     // which is fine, because the GUI isn't multithreaded

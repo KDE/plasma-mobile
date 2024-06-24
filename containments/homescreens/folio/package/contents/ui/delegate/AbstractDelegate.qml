@@ -16,7 +16,8 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell as MobileShell
 
 Folio.DelegateTouchArea {
-    id: delegate
+    id: root
+    property Folio.HomeScreen folio
 
     property string name
     property bool shadow: false
@@ -37,7 +38,7 @@ Folio.DelegateTouchArea {
         duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
         to: ShellSettings.Settings.animationsEnabled ? 0.8 : 1
         onFinished: {
-            if (!delegate.pressed) {
+            if (!root.pressed) {
                 growAnim.restart();
             }
         }
@@ -49,9 +50,9 @@ Folio.DelegateTouchArea {
         duration: ShellSettings.Settings.animationsEnabled ? 80 : 1
         to: 1
         onFinished: {
-            if (delegate.clickRequested) {
-                delegate.afterClickAnimation();
-                delegate.clickRequested = false;
+            if (root.clickRequested) {
+                root.afterClickAnimation();
+                root.clickRequested = false;
             }
         }
     }
@@ -68,7 +69,7 @@ Folio.DelegateTouchArea {
     // trigger handled by press animation
     onClicked: clickRequested = true;
 
-    layer.enabled: delegate.shadow
+    layer.enabled: root.shadow
     layer.effect: DelegateShadow {}
 
     Item {
@@ -83,24 +84,24 @@ Folio.DelegateTouchArea {
             // affects the delegate's x and y position, which messes up the starting drag and drop
             // position (for mapFromItem in HomeScreen.qml)
             transform: Scale {
-                origin.x: delegate.width / 2;
-                origin.y: delegate.height / 2;
-                xScale: delegate.zoomScale
-                yScale: delegate.zoomScale
+                origin.x: root.width / 2;
+                origin.y: root.height / 2;
+                xScale: root.zoomScale
+                yScale: root.zoomScale
             }
 
             MobileShell.BaseItem {
                 id: visualItem
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                Layout.minimumWidth: Folio.FolioSettings.delegateIconSize
-                Layout.minimumHeight: Folio.FolioSettings.delegateIconSize
+                Layout.minimumWidth: folio.FolioSettings.delegateIconSize
+                Layout.minimumHeight: folio.FolioSettings.delegateIconSize
                 Layout.preferredHeight: Layout.minimumHeight
 
                 // darken effect when hovered
                 // TODO: removed for now, since hovered property seems to overlap with the touch pressed event
                 // layer {
-                //     enabled: delegate.hovered
+                //     enabled: root.hovered
                 //     effect: ColorOverlay {
                 //         color: Qt.rgba(0, 0, 0, 0.3)
                 //     }
@@ -112,12 +113,12 @@ Folio.DelegateTouchArea {
                 opacity: text.length > 0
 
                 Layout.fillWidth: true
-                Layout.preferredHeight: Folio.HomeScreenState.pageDelegateLabelHeight
-                Layout.topMargin: Folio.HomeScreenState.pageDelegateLabelSpacing
+                Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
+                Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
                 Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
                 Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
 
-                text: delegate.name
+                text: root.name
                 color: "white"
             }
         }

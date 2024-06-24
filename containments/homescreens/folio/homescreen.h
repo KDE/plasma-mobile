@@ -7,9 +7,36 @@
 #include <Plasma/Containment>
 #include <QSortFilterProxyModel>
 
+#include "applicationlistmodel.h"
+#include "delegatetoucharea.h"
+#include "favouritesmodel.h"
+#include "folioapplication.h"
+#include "folioapplicationfolder.h"
+#include "foliodelegate.h"
+#include "foliosettings.h"
+#include "foliowidget.h"
+#include "homescreenstate.h"
+#include "pagelistmodel.h"
+#include "pagemodel.h"
+#include "widgetcontainer.h"
+#include "widgetsmanager.h"
+
+class FolioSettings;
+class PageListModel;
+class WidgetsManager;
+class HomeScreenState;
+class FavouritesModel;
+class ApplicationListModel;
+
 class HomeScreen : public Plasma::Containment
 {
     Q_OBJECT
+    Q_PROPERTY(FolioSettings *FolioSettings READ folioSettings CONSTANT)
+    Q_PROPERTY(HomeScreenState *HomeScreenState READ homeScreenState CONSTANT)
+    Q_PROPERTY(WidgetsManager *WidgetsManager READ widgetsManager CONSTANT)
+    Q_PROPERTY(ApplicationListModel *ApplicationListModel READ applicationListModel CONSTANT)
+    Q_PROPERTY(FavouritesModel *FavouritesModel READ favouritesModel CONSTANT)
+    Q_PROPERTY(PageListModel *PageListModel READ pageListModel CONSTANT)
 
 public:
     HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
@@ -17,10 +44,25 @@ public:
 
     void configChanged() override;
 
+    FolioSettings *folioSettings();
+    HomeScreenState *homeScreenState();
+    WidgetsManager *widgetsManager();
+    ApplicationListModel *applicationListModel();
+    FavouritesModel *favouritesModel();
+    PageListModel *pageListModel();
+
 Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
 
 private Q_SLOTS:
     void onAppletAdded(Plasma::Applet *applet, const QRectF &geometryHint);
     void onAppletAboutToBeRemoved(Plasma::Applet *applet);
+
+private:
+    FolioSettings *m_folioSettings{nullptr};
+    HomeScreenState *m_homeScreenState{nullptr};
+    WidgetsManager *m_widgetsManager{nullptr};
+    ApplicationListModel *m_applicationListModel{nullptr};
+    FavouritesModel *m_favouritesModel{nullptr};
+    PageListModel *m_pageListModel{nullptr};
 };

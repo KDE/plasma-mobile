@@ -5,6 +5,7 @@
 
 #include "folioapplication.h"
 #include "foliodelegate.h"
+#include "homescreen.h"
 
 #include <QAbstractListModel>
 #include <QObject>
@@ -17,9 +18,11 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+class HomeScreen;
 struct ApplicationDelegate;
 class ApplicationFolderModel;
 class FolioDelegate;
+class FolioApplication;
 
 /**
  * @short Object that represents an application folder.
@@ -33,9 +36,9 @@ class FolioApplicationFolder : public QObject
     Q_PROPERTY(ApplicationFolderModel *applications READ applications NOTIFY applicationsReset)
 
 public:
-    FolioApplicationFolder(QObject *parent = nullptr, QString name = QString{});
+    FolioApplicationFolder(HomeScreen *parent = nullptr, QString name = QString{});
 
-    static FolioApplicationFolder *fromJson(QJsonObject &obj, QObject *parent);
+    static FolioApplicationFolder *fromJson(QJsonObject &obj, HomeScreen *parent);
     QJsonObject toJson() const;
 
     QString name() const;
@@ -60,9 +63,11 @@ Q_SIGNALS:
     void applicationsReset();
 
 private:
+    HomeScreen *m_homeScreen{nullptr};
+
     QString m_name;
     QList<ApplicationDelegate> m_delegates;
-    ApplicationFolderModel *m_applicationFolderModel;
+    ApplicationFolderModel *m_applicationFolderModel{nullptr};
 
     friend class ApplicationFolderModel;
 };

@@ -17,6 +17,8 @@ import "./delegate"
 
 MobileShell.GridView {
     id: root
+    property Folio.HomeScreen folio
+
     cacheBuffer: cellHeight * 20
     reuseItems: true
     layer.enabled: true
@@ -24,14 +26,14 @@ MobileShell.GridView {
     property var homeScreen
     property real headerHeight
 
-    readonly property int reservedSpaceForLabel: Folio.HomeScreenState.pageDelegateLabelHeight
+    readonly property int reservedSpaceForLabel: folio.HomeScreenState.pageDelegateLabelHeight
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
     readonly property real horizontalMargin: Math.round(width * 0.05)
 
     leftMargin: horizontalMargin
     rightMargin: horizontalMargin
 
-    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Folio.FolioSettings.delegateIconSize + Kirigami.Units.largeSpacing * 3.5)), 8)
+    cellWidth: effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (folio.FolioSettings.delegateIconSize + Kirigami.Units.largeSpacing * 3.5)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
     boundsBehavior: Flickable.DragAndOvershootBounds
@@ -41,14 +43,14 @@ MobileShell.GridView {
 
     // HACK: the first swipe from the top of the app drawer is done from HomeScreenState, not the flickable
     //       due to issues with Flickable getting its swipe stolen by SwipeArea
-    interactive: (dragging || !atYBeginning) // allow us to drag to the top 
-                    && Folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
+    interactive: (dragging || !atYBeginning) // allow us to drag to the top
+                    && folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
 
     Connections {
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         function onSwipeStateChanged() {
-            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid) {
+            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid) {
                 velocityCalculator.startMeasure();
                 velocityCalculator.changePosition(root.contentY);
             }
@@ -76,10 +78,12 @@ MobileShell.GridView {
         id: velocityCalculator
     }
 
-    model: Folio.ApplicationListModel
+    model: folio.ApplicationListModel
 
     delegate: AppDelegate {
-        id: delegate
+        id: appDelegate
+
+        folio: root.folio
         shadow: false
         application: model.delegate.application
 
@@ -87,18 +91,18 @@ MobileShell.GridView {
         height: root.cellHeight
 
         onPressAndHold: {
-            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, delegate.delegateItem);
-            Folio.HomeScreenState.closeAppDrawer();
+            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem);
+            folio.HomeScreenState.closeAppDrawer();
 
             // we need to adjust because app drawer delegates have a different size than regular homescreen delegates
             const centerX = mappedCoords.x + root.cellWidth / 2;
             const centerY = mappedCoords.y + root.cellHeight / 2;
 
-            Folio.HomeScreenState.startDelegateAppDrawerDrag(
-                centerX - Folio.HomeScreenState.pageCellWidth / 2,
-                centerY - Folio.HomeScreenState.pageCellHeight / 2,
-                delegate.pressPosition.x * (Folio.HomeScreenState.pageCellWidth / root.cellWidth),
-                delegate.pressPosition.y * (Folio.HomeScreenState.pageCellHeight / root.cellHeight),
+            folio.HomeScreenState.startDelegateAppDrawerDrag(
+                centerX - folio.HomeScreenState.pageCellWidth / 2,
+                centerY - folio.HomeScreenState.pageCellHeight / 2,
+                appDelegate.pressPosition.x * (folio.HomeScreenState.pageCellWidth / root.cellWidth),
+                appDelegate.pressPosition.y * (folio.HomeScreenState.pageCellHeight / root.cellHeight),
                 model.delegate.application.storageId
             );
         }

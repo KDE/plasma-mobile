@@ -17,6 +17,7 @@ import "./private"
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     property int pageNum
 
@@ -28,43 +29,44 @@ Item {
         id: settingsViewBackground
         anchors.fill: parent
         color: Qt.rgba(255, 255, 255, 0.2)
-        opacity: Folio.HomeScreenState.settingsOpenProgress
+        opacity: folio.HomeScreenState.settingsOpenProgress
         radius: Kirigami.Units.largeSpacing
     }
 
     // square that shows when hovering over a spot to drop a delegate on
     PlaceholderDelegate {
         id: dragDropFeedback
-        width: Folio.HomeScreenState.pageCellWidth
-        height: Folio.HomeScreenState.pageCellHeight
+        folio: root.folio
+        width: folio.HomeScreenState.pageCellWidth
+        height: folio.HomeScreenState.pageCellHeight
 
-        property var dropPosition: Folio.HomeScreenState.dragState.candidateDropPosition
-        property var dropDelegate: Folio.HomeScreenState.dragState.dropDelegate
+        property var dropPosition: folio.HomeScreenState.dragState.candidateDropPosition
+        property var dropDelegate: folio.HomeScreenState.dragState.dropDelegate
         property bool dropDelegateIsWidget: dropDelegate && dropDelegate.type === Folio.FolioDelegate.Widget
 
         // only show if it is an empty spot on this page
-        visible: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+        visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
                     dropPosition.location === Folio.DelegateDragPosition.Pages &&
                     dropPosition.page === root.pageNum &&
                     !dropDelegateIsWidget &&
-                    Folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
+                    folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
 
-        x: dropPosition.pageColumn * Folio.HomeScreenState.pageCellWidth
-        y: dropPosition.pageRow * Folio.HomeScreenState.pageCellHeight
+        x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
+        y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
     }
 
     // square that shows when a widget hovers over a spot to drop a delegate on
     Rectangle {
         id: widgetDragDropFeedback
-        width: (dropDelegateIsWidget ? dropDelegate.widget.gridWidth : 0) * Folio.HomeScreenState.pageCellWidth
-        height: (dropDelegateIsWidget ? dropDelegate.widget.gridHeight : 0) * Folio.HomeScreenState.pageCellHeight
+        width: (dropDelegateIsWidget ? dropDelegate.widget.gridWidth : 0) * folio.HomeScreenState.pageCellWidth
+        height: (dropDelegateIsWidget ? dropDelegate.widget.gridHeight : 0) * folio.HomeScreenState.pageCellHeight
 
-        property var dropPosition: Folio.HomeScreenState.dragState.candidateDropPosition
-        property var dropDelegate: Folio.HomeScreenState.dragState.dropDelegate
+        property var dropPosition: folio.HomeScreenState.dragState.candidateDropPosition
+        property var dropDelegate: folio.HomeScreenState.dragState.dropDelegate
         property bool dropDelegateIsWidget: dropDelegate && dropDelegate.type === Folio.FolioDelegate.Widget
 
         // only show if the widget can be placed here
-        visible: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+        visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
                     dropPosition.location === Folio.DelegateDragPosition.Pages &&
                     dropPosition.page === root.pageNum &&
                     dropDelegateIsWidget &&
@@ -73,8 +75,8 @@ Item {
         radius: Kirigami.Units.smallSpacing
         color: Qt.rgba(255, 255, 255, 0.3)
 
-        x: dropPosition.pageColumn * Folio.HomeScreenState.pageCellWidth
-        y: dropPosition.pageRow * Folio.HomeScreenState.pageCellHeight
+        x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
+        y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
 
         layer.enabled: true
         layer.effect: DelegateShadow {}
@@ -91,14 +93,14 @@ Item {
             property int row: pageDelegate.row
             property int column: pageDelegate.column
 
-            property var dragState: Folio.HomeScreenState.dragState
+            property var dragState: folio.HomeScreenState.dragState
 
             property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Pages &&
                                               dragState.candidateDropPosition.page === root.pageNum &&
                                               dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
                                               dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
 
-            property bool isAppHoveredOver: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+            property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
                                             dragState.dropDelegate &&
                                             dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
                                             isDropPositionThis
@@ -108,20 +110,21 @@ Item {
             width: loader.item ? loader.item.width : 0
             height: loader.item ? loader.item.height : 0
 
-            x: column * Folio.HomeScreenState.pageCellWidth
-            y: row * Folio.HomeScreenState.pageCellHeight
+            x: column * folio.HomeScreenState.pageCellWidth
+            y: row * folio.HomeScreenState.pageCellHeight
 
-            visible: row >= 0 && row < Folio.HomeScreenState.pageRows &&
-                     column >= 0 && column < Folio.HomeScreenState.pageColumns
+            visible: row >= 0 && row < folio.HomeScreenState.pageRows &&
+                     column >= 0 && column < folio.HomeScreenState.pageColumns
 
             // called when we want to delete this delegate
             function removeSelf() {
                 // remove from model
                 root.pageModel.removeDelegate(delegate.row, delegate.column);
-                
-                // delete empty pages at the end, and snap position to page that exists
-                Folio.PageListModel.deleteEmptyPagesAtEnd();
-                Folio.HomeScreenState.snapPage();
+
+                // TODO: this doesn't work, because the removeDelegate calls removes this entire object and the calls fail
+                // // delete empty pages at the end, and snap position to page that exists
+                // folio.PageListModel.deleteEmptyPagesAtEnd();
+                // folio.HomeScreenState.snapPage();
             }
 
             Loader {
@@ -153,15 +156,16 @@ Item {
 
                 AppDelegate {
                     id: appDelegate
-                    name: Folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.application.name : ""
+                    folio: root.folio
+                    name: folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.application.name : ""
                     application: delegate.pageDelegate.application
                     turnToFolder: delegate.isAppHoveredOver
-                    turnToFolderAnimEnabled: Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate
+                    turnToFolderAnimEnabled: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate
 
-                    implicitWidth: Folio.HomeScreenState.pageCellWidth
-                    implicitHeight: Folio.HomeScreenState.pageCellHeight
-                    width: Folio.HomeScreenState.pageCellWidth
-                    height: Folio.HomeScreenState.pageCellHeight
+                    implicitWidth: folio.HomeScreenState.pageCellWidth
+                    implicitHeight: folio.HomeScreenState.pageCellHeight
+                    width: folio.HomeScreenState.pageCellWidth
+                    height: folio.HomeScreenState.pageCellHeight
 
                     // do not show if the drop animation is running to this delegate
                     visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
@@ -171,7 +175,7 @@ Item {
 
                     onPressAndHold: {
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.pageDelegate, appDelegate.delegateItem);
-                        Folio.HomeScreenState.startDelegatePageDrag(
+                        folio.HomeScreenState.startDelegatePageDrag(
                             mappedCoords.x,
                             mappedCoords.y,
                             appDelegate.pressPosition.x,
@@ -185,7 +189,7 @@ Item {
                     }
                     onPressAndHoldReleased: {
                         // cancel the event if the delegate is not dragged
-                        if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                        if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
                             homeScreen.cancelDelegateDrag();
                         }
                     }
@@ -199,10 +203,10 @@ Item {
 
                         // close menu when drag starts
                         Connections {
-                            target: Folio.HomeScreenState
+                            target: folio.HomeScreenState
 
                             function onSwipeStateChanged() {
-                                if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                                     contextMenu.close();
                                 }
                             }
@@ -224,13 +228,14 @@ Item {
 
                 AppFolderDelegate {
                     id: appFolderDelegate
-                    name: Folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.folder.name : ""
+                    folio: root.folio
+                    name: folio.FolioSettings.showPagesAppLabels ? delegate.pageDelegate.folder.name : ""
                     folder: delegate.pageDelegate.folder
 
-                    implicitWidth: Folio.HomeScreenState.pageCellWidth
-                    implicitHeight: Folio.HomeScreenState.pageCellHeight
-                    width: Folio.HomeScreenState.pageCellWidth
-                    height: Folio.HomeScreenState.pageCellHeight
+                    implicitWidth: folio.HomeScreenState.pageCellWidth
+                    implicitHeight: folio.HomeScreenState.pageCellHeight
+                    width: folio.HomeScreenState.pageCellWidth
+                    height: folio.HomeScreenState.pageCellHeight
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
@@ -244,12 +249,12 @@ Item {
 
                     onAfterClickAnimation: {
                         const pos = homeScreen.prepareFolderOpen(appFolderDelegate.contentItem);
-                        Folio.HomeScreenState.openFolder(pos.x, pos.y, folder);
+                        folio.HomeScreenState.openFolder(pos.x, pos.y, folder);
                     }
 
                     onPressAndHold: {
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.pageDelegate, appFolderDelegate.delegateItem);
-                        Folio.HomeScreenState.startDelegatePageDrag(
+                        folio.HomeScreenState.startDelegatePageDrag(
                             mappedCoords.x,
                             mappedCoords.y,
                             appFolderDelegate.pressPosition.x,
@@ -264,7 +269,7 @@ Item {
 
                     onPressAndHoldReleased: {
                         // cancel the event if the delegate is not dragged
-                        if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                        if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
                             homeScreen.cancelDelegateDrag();
                         }
                     }
@@ -278,10 +283,10 @@ Item {
 
                         // close menu when drag starts
                         Connections {
-                            target: Folio.HomeScreenState
+                            target: folio.HomeScreenState
 
                             function onSwipeStateChanged() {
-                                if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                                     contextMenu.close();
                                 }
                             }
@@ -309,6 +314,7 @@ Item {
 
                 WidgetDelegate {
                     id: widgetDelegate
+                    folio: root.folio
 
                     // don't reparent applet if the drop animation is running to this delegate
                     // background: there is only one "visual" instance of the widget, once this delegate loads
@@ -321,7 +327,7 @@ Item {
 
                     onStartEditMode: (pressPoint) => {
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.pageDelegate, widgetDelegate);
-                        Folio.HomeScreenState.startDelegatePageDrag(
+                        folio.HomeScreenState.startDelegatePageDrag(
                             mappedCoords.x,
                             mappedCoords.y,
                             pressPoint.x - mappedCoords.x,
@@ -336,8 +342,8 @@ Item {
 
                     onPressReleased: {
                         // cancel the event if the delegate is not dragged
-                        if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
-                            Folio.HomeScreenState.cancelDelegateDrag();
+                        if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                            folio.HomeScreenState.cancelDelegateDrag();
                             widgetConfig.fullyOpen();
                         }
                     }
@@ -352,6 +358,7 @@ Item {
 
                     WidgetDelegateConfig {
                         id: widgetConfig
+                        folio: root.folio
                         homeScreen: root.homeScreen
 
                         pageModel: root.pageModel

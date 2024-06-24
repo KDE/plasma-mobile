@@ -16,6 +16,7 @@ import "./delegate"
 
 Folio.DelegateTouchArea {
     id: root
+    property Folio.HomeScreen folio
 
     property var homeScreen
 
@@ -23,25 +24,26 @@ Folio.DelegateTouchArea {
     property real folderPositionX
     property real folderPositionY
 
-    property Folio.FolioApplicationFolder folder: Folio.HomeScreenState.currentFolder
+    property Folio.FolioApplicationFolder folder: folio.HomeScreenState.currentFolder
 
     onClicked: close();
 
     function close() {
-        Folio.HomeScreenState.closeFolder();
+        folio.HomeScreenState.closeFolder();
     }
 
     Connections {
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         function onFolderAboutToOpen(x, y) {
-            root.folderPositionX = x - Folio.HomeScreenState.viewLeftPadding;
-            root.folderPositionY = y - Folio.HomeScreenState.viewRightPadding;
+            root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
+            root.folderPositionY = y - folio.HomeScreenState.viewRightPadding;
         }
     }
 
     FolderViewTitle {
         id: titleText
+        folio: root.folio
         width: root.width
 
         // have to use y instead of anchors to avoid animations
@@ -59,18 +61,18 @@ Folio.DelegateTouchArea {
 
     function updateContentWidth() {
         let margin = folderBackground.margin;
-        let columns = Math.floor((folderBackground.width - margin * 2) / Folio.HomeScreenState.pageCellWidth);
-        Folio.HomeScreenState.folderPageContentWidth = columns * Folio.HomeScreenState.pageCellWidth;
+        let columns = Math.floor((folderBackground.width - margin * 2) / folio.HomeScreenState.pageCellWidth);
+        folio.HomeScreenState.folderPageContentWidth = columns * folio.HomeScreenState.pageCellWidth;
     }
 
     function updateContentHeight() {
         let margin = folderBackground.margin;
-        let rows = Math.floor((folderBackground.height - margin * 2) / Folio.HomeScreenState.pageCellHeight);
-        Folio.HomeScreenState.folderPageContentHeight = rows * Folio.HomeScreenState.pageCellHeight;
+        let rows = Math.floor((folderBackground.height - margin * 2) / folio.HomeScreenState.pageCellHeight);
+        folio.HomeScreenState.folderPageContentHeight = rows * folio.HomeScreenState.pageCellHeight;
     }
 
     Connections {
-        target: Folio.HomeScreenState
+        target: folio.HomeScreenState
 
         function onPageCellWidthChanged() {
             root.updateContentWidth();
@@ -94,31 +96,31 @@ Folio.DelegateTouchArea {
         width: {
             let perRow = 0;
             if (root.width < root.height) {
-                perRow = Math.floor((maxLength - margin * 2) / Folio.HomeScreenState.pageCellWidth);
+                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellWidth);
             } else {
                 // try to get the same number of rows as columns
-                perRow = Math.floor((maxLength - margin * 2) / Folio.HomeScreenState.pageCellHeight);
+                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellHeight);
             }
-            return Math.min(root.width * 0.9, perRow * Folio.HomeScreenState.pageCellWidth + margin * 2);
+            return Math.min(root.width * 0.9, perRow * folio.HomeScreenState.pageCellWidth + margin * 2);
         }
         height: {
             let perRow = 0;
             if (root.width < root.height) {
                 // try to get the same number of rows as columns
-                perRow = Math.floor((maxLength - margin * 2) / Folio.HomeScreenState.pageCellWidth);
+                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellWidth);
             } else {
-                perRow = Math.floor((maxLength - margin * 2) / Folio.HomeScreenState.pageCellHeight);
+                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellHeight);
             }
-            return Math.min(root.height * 0.9, perRow * Folio.HomeScreenState.pageCellHeight + margin * 2);
+            return Math.min(root.height * 0.9, perRow * folio.HomeScreenState.pageCellHeight + margin * 2);
         }
 
         onWidthChanged: {
-            Folio.HomeScreenState.folderPageWidth = width;
+            folio.HomeScreenState.folderPageWidth = width;
             root.updateContentWidth();
             root.updateContentHeight();
         }
         onHeightChanged: {
-            Folio.HomeScreenState.folderPageHeight = height;
+            folio.HomeScreenState.folderPageHeight = height;
             root.updateContentWidth();
             root.updateContentHeight();
         }
@@ -126,12 +128,12 @@ Folio.DelegateTouchArea {
         x: {
             const folderPos = root.folderPositionX;
             const centerX = (root.width / 2) - (width / 2);
-            return Math.round(folderPos + (centerX - folderPos) * Folio.HomeScreenState.folderOpenProgress);
+            return Math.round(folderPos + (centerX - folderPos) * folio.HomeScreenState.folderOpenProgress);
         }
         y: {
             const folderPos = root.folderPositionY;
             const centerY = (root.height / 2) - (height / 2);
-            return Math.round(folderPos + (centerY - folderPos) * Folio.HomeScreenState.folderOpenProgress);
+            return Math.round(folderPos + (centerY - folderPos) * folio.HomeScreenState.folderOpenProgress);
         }
 
         transform: [
@@ -140,15 +142,15 @@ Folio.DelegateTouchArea {
                 origin.y: 0
 
                 xScale: {
-                    const iconSize = Folio.FolioSettings.delegateIconSize;
+                    const iconSize = folio.FolioSettings.delegateIconSize;
                     const fullWidth = folderBackground.width;
-                    const candidate = iconSize + (fullWidth - iconSize) * Folio.HomeScreenState.folderOpenProgress;
+                    const candidate = iconSize + (fullWidth - iconSize) * folio.HomeScreenState.folderOpenProgress;
                     return Math.max(0, Math.min(1, candidate / fullWidth));
                 }
                 yScale: {
-                    const iconSize = Folio.FolioSettings.delegateIconSize;
+                    const iconSize = folio.FolioSettings.delegateIconSize;
                     const fullHeight = folderBackground.height;
-                    const candidate = iconSize + (fullHeight - iconSize) * Folio.HomeScreenState.folderOpenProgress;
+                    const candidate = iconSize + (fullHeight - iconSize) * folio.HomeScreenState.folderOpenProgress;
                     return Math.max(0, Math.min(1, candidate / fullHeight));
                 }
             }
@@ -163,7 +165,7 @@ Folio.DelegateTouchArea {
 
             Item {
                 id: contentContainer
-                x: Folio.HomeScreenState.folderViewX
+                x: folio.HomeScreenState.folderViewX
 
                 Repeater {
                     model: root.folder ? root.folder.applications : []
@@ -174,7 +176,7 @@ Folio.DelegateTouchArea {
                         property var delegateModel: model.delegate
                         property int index: model.index
 
-                        property var dragState: Folio.HomeScreenState.dragState
+                        property var dragState: folio.HomeScreenState.dragState
                         property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
                                                           dragState.candidateDropPosition.folderPosition === index
 
@@ -188,10 +190,10 @@ Folio.DelegateTouchArea {
                             NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
                         }
 
-                        implicitWidth: Folio.HomeScreenState.pageCellWidth
-                        implicitHeight: Folio.HomeScreenState.pageCellHeight
-                        width: Folio.HomeScreenState.pageCellWidth
-                        height: Folio.HomeScreenState.pageCellHeight
+                        implicitWidth: folio.HomeScreenState.pageCellWidth
+                        implicitHeight: folio.HomeScreenState.pageCellHeight
+                        width: folio.HomeScreenState.pageCellWidth
+                        height: folio.HomeScreenState.pageCellHeight
 
                         Loader {
                             id: delegateLoader
@@ -217,6 +219,7 @@ Folio.DelegateTouchArea {
 
                             AppDelegate {
                                 id: appDelegate
+                                folio: root.folio
                                 application: delegate.delegateModel.application
 
                                 // do not show if the drop animation is running to this delegate
@@ -227,7 +230,7 @@ Folio.DelegateTouchArea {
 
                                 onPressAndHold: {
                                     let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
-                                    Folio.HomeScreenState.startDelegateFolderDrag(
+                                    folio.HomeScreenState.startDelegateFolderDrag(
                                         mappedCoords.x,
                                         mappedCoords.y,
                                         appDelegate.pressPosition.x,
@@ -241,7 +244,7 @@ Folio.DelegateTouchArea {
 
                                 onPressAndHoldReleased: {
                                     // cancel the event if the delegate is not dragged
-                                    if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
+                                    if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.AwaitingDraggingDelegate) {
                                         homeScreen.cancelDelegateDrag();
                                     }
                                 }
@@ -255,10 +258,10 @@ Folio.DelegateTouchArea {
 
                                     // close menu when drag starts
                                     Connections {
-                                        target: Folio.HomeScreenState
+                                        target: folio.HomeScreenState
 
                                         function onSwipeStateChanged() {
-                                            if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                                            if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                                                 contextMenu.close();
                                             }
                                         }
@@ -289,8 +292,8 @@ Folio.DelegateTouchArea {
         y: Math.round((root.height / 2) + (folderBackground.height / 2) + Kirigami.Units.largeSpacing)
         anchors.horizontalCenter: parent.horizontalCenter
 
-        currentIndex: Folio.HomeScreenState.currentFolderPage
-        count: Folio.HomeScreenState.currentFolder ? Folio.HomeScreenState.currentFolder.applications.numberOfPages : 0
+        currentIndex: folio.HomeScreenState.currentFolderPage
+        count: folio.HomeScreenState.currentFolder ? folio.HomeScreenState.currentFolder.applications.numberOfPages : 0
 
         opacity: (root.opacity === 1) ? 1 : 0
         Behavior on opacity {

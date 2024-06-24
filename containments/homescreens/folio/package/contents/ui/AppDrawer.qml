@@ -10,11 +10,13 @@ import org.kde.plasma.components 3.0 as PC3
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.private.mobile.homescreen.folio as Folio
 
 import 'private'
 
 Item {
     id: root
+    required property Folio.HomeScreen folio
 
     property var homeScreen
 
@@ -53,6 +55,7 @@ Item {
 
         AppDrawerGrid {
             id: appDrawerGrid
+            folio: root.folio
             homeScreen: root.homeScreen
             height: parent.height - drawerHeader.height
             anchors.left: parent.left

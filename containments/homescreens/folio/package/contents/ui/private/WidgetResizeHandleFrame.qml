@@ -13,6 +13,7 @@ import '../delegate'
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     // given by parent:
 
@@ -117,16 +118,16 @@ Item {
             handleContainer.height = root.startDragHeight + bottomEdgeDelta + topEdgeDelta;
 
             // update the widget dimensions and position
-            const columnsMovedRight = Math.round((handleContainer.x - root.startX) / Folio.HomeScreenState.pageCellWidth);
-            const rowsMovedDown = Math.round((handleContainer.y - root.startY) / Folio.HomeScreenState.pageCellHeight);
+            const columnsMovedRight = Math.round((handleContainer.x - root.startX) / folio.HomeScreenState.pageCellWidth);
+            const rowsMovedDown = Math.round((handleContainer.y - root.startY) / folio.HomeScreenState.pageCellHeight);
 
             const realWidgetWidth = handleContainer.width + widgetLeftMargin + widgetRightMargin;
             const realWidgetHeight = handleContainer.height + widgetTopMargin + widgetBottomMargin;
 
             const widgetRowAfterDrag = startWidgetRow + rowsMovedDown;
             const widgetColumnAfterDrag = startWidgetColumn + columnsMovedRight;
-            const widgetGridWidthAfterDrag = Math.round(realWidgetWidth / Folio.HomeScreenState.pageCellWidth);
-            const widgetGridHeightAfterDrag = Math.round(realWidgetHeight / Folio.HomeScreenState.pageCellHeight);
+            const widgetGridWidthAfterDrag = Math.round(realWidgetWidth / folio.HomeScreenState.pageCellWidth);
+            const widgetGridHeightAfterDrag = Math.round(realWidgetHeight / folio.HomeScreenState.pageCellHeight);
 
             root.widgetChangeAfterDrag(widgetRowAfterDrag, widgetColumnAfterDrag, widgetGridWidthAfterDrag, widgetGridHeightAfterDrag);
         }

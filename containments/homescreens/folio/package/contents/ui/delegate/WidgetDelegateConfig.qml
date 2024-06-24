@@ -17,6 +17,7 @@ import '../private'
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     property var homeScreen
 
@@ -85,11 +86,11 @@ Item {
         }
 
         Connections {
-            target: Folio.HomeScreenState
+            target: folio.HomeScreenState
 
             // if we are starting drag-and-drop, close the menu immediately
             function onSwipeStateChanged() {
-                if (Folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
+                if (folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate) {
                     configOverlay.animClose();
                     root.closed();
                 }
@@ -104,7 +105,7 @@ Item {
         }
     }
 
-    // this is the actual interactive popup for widget settings, only 
+    // this is the actual interactive popup for widget settings, only
     // opened when the user releases their press (and doesn't drag)
     QQC2.Popup {
         id: configPopup
@@ -136,7 +137,7 @@ Item {
         }
 
         Connections {
-            target: Folio.HomeScreenState
+            target: folio.HomeScreenState
 
             // don't show config overlay if we have navigated to another page
             function onCurrentPageChanged() {
@@ -153,6 +154,7 @@ Item {
 
             WidgetResizeHandleFrame {
                 id: resizeFrame
+                folio: root.folio
                 anchors.fill: parent
 
                 widgetWidth: root.widgetWidth

@@ -18,6 +18,7 @@ AbstractDelegate {
     property bool appHoveredOver: false
 
     contentItem: DelegateFolderIcon {
+        folio: root.folio
         folder: root.folder
         expandBackground: root.appHoveredOver
     }

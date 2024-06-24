@@ -20,31 +20,26 @@
 #include <KSharedConfig>
 #include <KSycoca>
 
-FavouritesModel *FavouritesModel::self()
-{
-    static FavouritesModel *inst = new FavouritesModel();
-    return inst;
-}
-
-FavouritesModel::FavouritesModel(QObject *parent)
+FavouritesModel::FavouritesModel(HomeScreen *parent)
     : QAbstractListModel{parent}
+    , m_homeScreen{parent}
 {
-    connect(HomeScreenState::self(), &HomeScreenState::pageWidthChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageWidthChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageHeightChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageHeightChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageCellWidthChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageCellWidthChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageCellHeightChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageCellHeightChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
-    connect(HomeScreenState::self(), &HomeScreenState::favouritesBarLocationChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::favouritesBarLocationChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
-    connect(HomeScreenState::self(), &HomeScreenState::pageOrientationChanged, this, [this]() {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::pageOrientationChanged, this, [this]() {
         evaluateDelegatePositions(true);
     });
 }
@@ -173,12 +168,13 @@ FolioDelegate *FavouritesModel::getEntryAt(int row)
 
 bool FavouritesModel::isFull() const
 {
-    bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
+    auto homeScreenState = m_homeScreen->homeScreenState();
+    bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
 
     if (isLocationBottom) {
-        return m_delegates.size() >= HomeScreenState::self()->pageColumns();
+        return m_delegates.size() >= homeScreenState->pageColumns();
     } else {
-        return m_delegates.size() >= HomeScreenState::self()->pageRows();
+        return m_delegates.size() >= homeScreenState->pageRows();
     }
 }
 
@@ -209,7 +205,7 @@ void FavouritesModel::setGhostEntry(int row)
 
     // if it doesn't, add a new empty delegate
     if (!found) {
-        FolioDelegate *ghost = new FolioDelegate{this};
+        FolioDelegate *ghost = new FolioDelegate{m_homeScreen};
         addEntry(row, ghost);
     }
 }
@@ -218,6 +214,7 @@ void FavouritesModel::replaceGhostEntry(FolioDelegate *delegate)
 {
     for (int i = 0; i < m_delegates.size(); i++) {
         if (m_delegates[i].delegate->type() == FolioDelegate::None) {
+            m_delegates[i].delegate->deleteLater();
             m_delegates[i].delegate = delegate;
 
             Q_EMIT dataChanged(createIndex(i, 0), createIndex(i, 0), {DelegateRole});
@@ -230,7 +227,11 @@ void FavouritesModel::deleteGhostEntry()
 {
     for (int i = 0; i < m_delegates.size(); i++) {
         if (m_delegates[i].delegate->type() == FolioDelegate::None) {
+            auto ghostEntry = m_delegates[i].delegate;
             removeEntry(i);
+
+            // ensure ghost entry is deleted
+            ghostEntry->deleteLater();
         }
     }
 }
@@ -253,24 +254,24 @@ QJsonArray FavouritesModel::exportToJson()
 
 void FavouritesModel::save()
 {
-    if (!m_containment) {
+    if (!m_homeScreen) {
         return;
     }
 
     QJsonArray arr = exportToJson();
     QByteArray data = QJsonDocument(arr).toJson(QJsonDocument::Compact);
 
-    m_containment->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
-    Q_EMIT m_containment->configNeedsSaving();
+    m_homeScreen->config().writeEntry("Favourites", QString::fromStdString(data.toStdString()));
+    Q_EMIT m_homeScreen->configNeedsSaving();
 }
 
 void FavouritesModel::load()
 {
-    if (!m_containment) {
+    if (!m_homeScreen) {
         return;
     }
 
-    QJsonDocument doc = QJsonDocument::fromJson(m_containment->config().readEntry("Favourites", "{}").toUtf8());
+    QJsonDocument doc = QJsonDocument::fromJson(m_homeScreen->config().readEntry("Favourites", "{}").toUtf8());
     loadFromJson(doc.array());
 }
 
@@ -282,7 +283,7 @@ void FavouritesModel::loadFromJson(QJsonArray arr)
 
     for (QJsonValueRef r : arr) {
         QJsonObject obj = r.toObject();
-        FolioDelegate *delegate = FolioDelegate::fromJson(obj, this);
+        FolioDelegate *delegate = FolioDelegate::fromJson(obj, m_homeScreen);
 
         if (delegate) {
             connectSaveRequests(delegate);
@@ -301,16 +302,13 @@ void FavouritesModel::connectSaveRequests(FolioDelegate *delegate)
     }
 }
 
-void FavouritesModel::setContainment(Plasma::Containment *containment)
-{
-    m_containment = containment;
-}
-
 bool FavouritesModel::dropPositionIsEdge(qreal x, qreal y) const
 {
+    auto homeScreenState = m_homeScreen->homeScreenState();
+
     qreal startPosition = getDelegateRowStartPos();
-    bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
-    qreal cellLength = isLocationBottom ? HomeScreenState::self()->pageCellWidth() : HomeScreenState::self()->pageCellHeight();
+    bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
+    qreal cellLength = isLocationBottom ? homeScreenState->pageCellWidth() : homeScreenState->pageCellHeight();
 
     qreal pos = isLocationBottom ? x : y;
 
@@ -334,9 +332,11 @@ bool FavouritesModel::dropPositionIsEdge(qreal x, qreal y) const
 
 int FavouritesModel::dropInsertPosition(qreal x, qreal y) const
 {
+    auto homeScreenState = m_homeScreen->homeScreenState();
+
     qreal startPosition = getDelegateRowStartPos();
-    bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
-    qreal cellLength = isLocationBottom ? HomeScreenState::self()->pageCellWidth() : HomeScreenState::self()->pageCellHeight();
+    bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
+    qreal cellLength = isLocationBottom ? homeScreenState->pageCellWidth() : homeScreenState->pageCellHeight();
 
     qreal pos = isLocationBottom ? x : y;
 
@@ -361,20 +361,21 @@ QPointF FavouritesModel::getDelegateScreenPosition(int position) const
 {
     position = adjustIndex(position);
 
-    qreal screenHeight = HomeScreenState::self()->viewHeight();
-    qreal screenWidth = HomeScreenState::self()->viewWidth();
-    qreal pageHeight = HomeScreenState::self()->pageHeight();
-    qreal pageWidth = HomeScreenState::self()->pageWidth();
-    qreal screenTopPadding = HomeScreenState::self()->viewTopPadding();
-    qreal screenBottomPadding = HomeScreenState::self()->viewBottomPadding();
-    qreal screenLeftPadding = HomeScreenState::self()->viewLeftPadding();
-    qreal screenRightPadding = HomeScreenState::self()->viewRightPadding();
-    qreal cellHeight = HomeScreenState::self()->pageCellHeight();
-    qreal cellWidth = HomeScreenState::self()->pageCellWidth();
+    auto homeScreenState = m_homeScreen->homeScreenState();
+    qreal screenHeight = homeScreenState->viewHeight();
+    qreal screenWidth = homeScreenState->viewWidth();
+    qreal pageHeight = homeScreenState->pageHeight();
+    qreal pageWidth = homeScreenState->pageWidth();
+    qreal screenTopPadding = homeScreenState->viewTopPadding();
+    qreal screenBottomPadding = homeScreenState->viewBottomPadding();
+    qreal screenLeftPadding = homeScreenState->viewLeftPadding();
+    qreal screenRightPadding = homeScreenState->viewRightPadding();
+    qreal cellHeight = homeScreenState->pageCellHeight();
+    qreal cellWidth = homeScreenState->pageCellWidth();
 
     qreal startPosition = getDelegateRowStartPos();
 
-    switch (HomeScreenState::self()->favouritesBarLocation()) {
+    switch (homeScreenState->favouritesBarLocation()) {
     case HomeScreenState::Bottom: {
         qreal favouritesHeight = screenHeight - pageHeight - screenBottomPadding - screenTopPadding;
         qreal x = screenLeftPadding + startPosition + cellWidth * position;
@@ -399,8 +400,10 @@ QPointF FavouritesModel::getDelegateScreenPosition(int position) const
 
 void FavouritesModel::evaluateDelegatePositions(bool emitSignal)
 {
-    bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
-    qreal cellLength = isLocationBottom ? HomeScreenState::self()->pageCellWidth() : HomeScreenState::self()->pageCellHeight();
+    auto homeScreenState = m_homeScreen->homeScreenState();
+
+    bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
+    qreal cellLength = isLocationBottom ? homeScreenState->pageCellWidth() : homeScreenState->pageCellHeight();
     qreal startPosition = getDelegateRowStartPos();
     qreal currentPos = startPosition;
 
@@ -416,13 +419,15 @@ void FavouritesModel::evaluateDelegatePositions(bool emitSignal)
 
 qreal FavouritesModel::getDelegateRowStartPos() const
 {
-    const int length = m_delegates.size();
-    const bool isLocationBottom = HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom;
-    const qreal cellLength = isLocationBottom ? HomeScreenState::self()->pageCellWidth() : HomeScreenState::self()->pageCellHeight();
-    const qreal pageLength = isLocationBottom ? HomeScreenState::self()->pageWidth() : HomeScreenState::self()->pageHeight();
+    auto homeScreenState = m_homeScreen->homeScreenState();
 
-    const qreal topMargin = HomeScreenState::self()->viewTopPadding();
-    const qreal leftMargin = HomeScreenState::self()->viewLeftPadding();
+    const int length = m_delegates.size();
+    const bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
+    const qreal cellLength = isLocationBottom ? homeScreenState->pageCellWidth() : homeScreenState->pageCellHeight();
+    const qreal pageLength = isLocationBottom ? homeScreenState->pageWidth() : homeScreenState->pageHeight();
+
+    const qreal topMargin = homeScreenState->viewTopPadding();
+    const qreal leftMargin = homeScreenState->viewLeftPadding();
     const qreal panelOffset = isLocationBottom ? leftMargin : topMargin;
 
     return (pageLength / 2) - (((qreal)length) / 2) * cellLength + panelOffset;
@@ -430,8 +435,9 @@ qreal FavouritesModel::getDelegateRowStartPos() const
 
 int FavouritesModel::adjustIndex(int index) const
 {
-    if (HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Bottom
-        || HomeScreenState::self()->favouritesBarLocation() == HomeScreenState::Left) {
+    auto homeScreenState = m_homeScreen->homeScreenState();
+
+    if (homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom || homeScreenState->favouritesBarLocation() == HomeScreenState::Left) {
         return index;
     } else {
         // if it's on the right side of the screen, we flip the order of the delegates

@@ -16,6 +16,10 @@
 #include <KWayland/Client/registry.h>
 #include <KWayland/Client/surface.h>
 
+#include "homescreen.h"
+
+class HomeScreen;
+
 /**
  * @short Object that represents an application.
  */
@@ -28,9 +32,9 @@ class FolioApplication : public QObject
     Q_PROPERTY(QString storageId READ storageId NOTIFY storageIdChanged)
 
 public:
-    FolioApplication(QObject *parent = nullptr, KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr});
+    FolioApplication(HomeScreen *parent = nullptr, KService::Ptr service = QExplicitlySharedDataPointer<KService>{nullptr});
 
-    static FolioApplication *fromJson(QJsonObject &obj, QObject *parent); // may return nullptr
+    static FolioApplication *fromJson(QJsonObject &obj, HomeScreen *parent); // may return nullptr
     QJsonObject toJson() const;
 
     bool running() const;

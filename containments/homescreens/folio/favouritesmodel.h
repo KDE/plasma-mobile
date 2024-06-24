@@ -11,9 +11,13 @@
 #include <QQuickItem>
 #include <QSet>
 
-#include <Plasma/Containment>
+#include <Plasma/Applet>
 
 #include "foliodelegate.h"
+#include "homescreen.h"
+
+class HomeScreen;
+class FolioDelegate;
 
 struct FavouritesDelegate {
     FolioDelegate *delegate;
@@ -30,8 +34,7 @@ public:
         XPositionRole,
     };
 
-    FavouritesModel(QObject *parent = nullptr);
-    static FavouritesModel *self();
+    FavouritesModel(HomeScreen *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -68,8 +71,6 @@ public:
     Q_INVOKABLE void load();
     void loadFromJson(QJsonArray arr);
 
-    void setContainment(Plasma::Containment *containment);
-
 private:
     void connectSaveRequests(FolioDelegate *delegate);
     void evaluateDelegatePositions(bool emitSignal = true);
@@ -81,7 +82,7 @@ private:
     // this is so that we only have to calculate positions assuming one orientation
     int adjustIndex(int index) const;
 
-    QList<FavouritesDelegate> m_delegates;
+    HomeScreen *m_homeScreen{nullptr};
 
-    Plasma::Containment *m_containment{nullptr};
+    QList<FavouritesDelegate> m_delegates;
 };

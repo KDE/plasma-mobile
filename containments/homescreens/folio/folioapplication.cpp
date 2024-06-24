@@ -9,7 +9,7 @@
 
 #include <KNotificationJobUiDelegate>
 
-FolioApplication::FolioApplication(QObject *parent, KService::Ptr service)
+FolioApplication::FolioApplication(HomeScreen *parent, KService::Ptr service)
     : QObject{parent}
     , m_running{false}
     , m_name{service->name()}
@@ -35,7 +35,7 @@ FolioApplication::FolioApplication(QObject *parent, KService::Ptr service)
     });
 }
 
-FolioApplication *FolioApplication::fromJson(QJsonObject &obj, QObject *parent)
+FolioApplication *FolioApplication::fromJson(QJsonObject &obj, HomeScreen *parent)
 {
     QString storageId = obj[QStringLiteral("storageId")].toString();
     if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
