@@ -163,6 +163,12 @@ void WifiSettings::addConnectionFromQML(const QVariantMap &QMLmap)
                 securitySettings->setWepKeyFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
                 securitySettings->setWepKey0(securMap["password"].toString());
             }
+            if (type == NetworkManager::SAE) {
+                securitySettings->setKeyMgmt(NetworkManager::WirelessSecuritySetting::KeyMgmt::SAE);
+                securitySettings->setAuthAlg(NetworkManager::WirelessSecuritySetting::AuthAlg::Open);
+                securitySettings->setPskFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
+                securitySettings->setPsk(securMap["password"].toString());
+            }
             map.insert("802-11-wireless-security", securitySettings->toMap());
         }
     }
@@ -220,6 +226,10 @@ void WifiSettings::updateConnectionFromQML(const QString &path, const QVariantMa
         }
 
         if ((securitySetting->keyMgmt() == NetworkManager::WirelessSecuritySetting::WpaPsk) && (secMap.value("type") == NetworkManager::Wpa2Psk)) {
+            securitySetting->setPsk(secMap["password"].toString());
+        }
+
+        if ((securitySetting->keyMgmt() == NetworkManager::WirelessSecuritySetting::SAE) && (secMap.value("type") == NetworkManager::SAE)) {
             securitySetting->setPsk(secMap["password"].toString());
         }
 
