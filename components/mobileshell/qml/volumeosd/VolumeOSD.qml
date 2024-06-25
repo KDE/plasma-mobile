@@ -17,6 +17,8 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 
+import org.kde.plasma.private.volume
+
 NanoShell.FullScreenOverlay {
     id: window
 
@@ -32,7 +34,7 @@ NanoShell.FullScreenOverlay {
     Behavior on color {
         ColorAnimation {}
     }
-    
+
     function showOverlay() {
         if (!window.visible) {
             window.showFullApplet = false;
@@ -49,7 +51,7 @@ NanoShell.FullScreenOverlay {
             hideTimer.triggered();
         }
     }
-    
+
     Timer {
         id: hideTimer
         interval: 3000
@@ -59,7 +61,7 @@ NanoShell.FullScreenOverlay {
             window.showFullApplet = false;
         }
     }
-    
+
     Flickable {
         id: flickable
         anchors.fill: parent
