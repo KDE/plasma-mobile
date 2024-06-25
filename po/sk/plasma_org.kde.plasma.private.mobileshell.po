@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-25 02:25+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -127,38 +127,38 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Názov prúdu nebol nájdený"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Unmute"
 msgstr "Zrušiť stlmenie"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Mute"
 msgstr "Stlmiť"
 
-#: qml/volumeosd/VolumeOSD.qml:128
+#: qml/volumeosd/VolumeOSD.qml:130
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:138
+#: qml/volumeosd/VolumeOSD.qml:140
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:158
+#: qml/volumeosd/VolumeOSD.qml:160
 #, kde-format
 msgid "Open audio settings"
 msgstr "Otvoriť nastavenia zvuku"
 
-#: qml/volumeosd/VolumeOSD.qml:171
+#: qml/volumeosd/VolumeOSD.qml:173
 #, kde-format
 msgid "Audio Settings"
 msgstr "Nastavenia zvuku"
 
-#: qml/volumeosd/VolumeOSD.qml:178
+#: qml/volumeosd/VolumeOSD.qml:180
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Prepnúť zobrazovanie zvukových prúdov"
