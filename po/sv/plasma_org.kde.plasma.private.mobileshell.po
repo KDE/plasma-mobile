@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-25 00:40+0000\n"
 "PO-Revision-Date: 2024-06-21 11:27+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -128,33 +128,33 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Strömnamn hittades inte"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Unmute"
 msgstr "Tysta inte"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Mute"
 msgstr "Tysta"
 
-#: qml/volumeosd/VolumeOSD.qml:128
+#: qml/volumeosd/VolumeOSD.qml:130
 #, kde-format
 msgid "100%"
 msgstr "100 %"
 
-#: qml/volumeosd/VolumeOSD.qml:138
+#: qml/volumeosd/VolumeOSD.qml:140
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1 %"
 
-#: qml/volumeosd/VolumeOSD.qml:158
+#: qml/volumeosd/VolumeOSD.qml:160
 #, kde-format
 msgid "Open audio settings"
 msgstr "Öppna ljudinställningar"
 
-#: qml/volumeosd/VolumeOSD.qml:177
+#: qml/volumeosd/VolumeOSD.qml:179
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "Ändra visning av ljudströmmar"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-12 00:39+0000\n"
+"POT-Creation-Date: 2024-06-25 00:40+0000\n"
 "PO-Revision-Date: 2019-11-12 21:55+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -86,65 +86,77 @@ msgstr "Пайвасти шахсии WPA/WPA2"
 msgid "WPA/WPA2 Enterprise"
 msgstr "Пайвасти тиҷории WPA/WPA2"
 
-#: ui/NetworkSettings.qml:146
+#: ui/NetworkSettings.qml:101
+#, fuzzy, kde-format
+#| msgid "WPA/WPA2 Personal"
+msgid "WPA3 Personal"
+msgstr "Пайвасти шахсии WPA/WPA2"
+
+#: ui/NetworkSettings.qml:102
+#, fuzzy, kde-format
+#| msgid "WPA/WPA2 Enterprise"
+msgid "WPA3 Enterprise"
+msgstr "Пайвасти тиҷории WPA/WPA2"
+
+#: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
 msgstr "Санҷиши ҳаққоният:"
 
-#: ui/NetworkSettings.qml:150
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "TLS"
 msgstr "TLS"
 
-#: ui/NetworkSettings.qml:150
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "LEAP"
 msgstr "LEAP"
 
-#: ui/NetworkSettings.qml:150
+#: ui/NetworkSettings.qml:160
 #, kde-format
 msgid "FAST"
 msgstr "FAST"
 
-#: ui/NetworkSettings.qml:151
+#: ui/NetworkSettings.qml:161
 #, kde-format
 msgid "Tunneled TLS"
 msgstr "TLS-и ниҳонӣ"
 
-#: ui/NetworkSettings.qml:152
+#: ui/NetworkSettings.qml:162
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP-и ҳифзшуда"
 
-#: ui/NetworkSettings.qml:170
+#: ui/NetworkSettings.qml:180
 #, kde-format
 msgid "Automatic"
 msgstr "Худкор"
 
-#: ui/NetworkSettings.qml:170
+#: ui/NetworkSettings.qml:180
 #, kde-format
 msgid "Manual"
 msgstr "Дастӣ"
 
-#: ui/NetworkSettings.qml:186
+#: ui/NetworkSettings.qml:196
 #, fuzzy, kde-format
 #| msgid "IP Address:"
 msgid "IP Address"
 msgstr "Нишонии IP:"
 
-#: ui/NetworkSettings.qml:204
+#: ui/NetworkSettings.qml:214
 #, fuzzy, kde-format
 #| msgid "Gateway:"
 msgid "Gateway"
 msgstr "Нишонии асосӣ:"
 
-#: ui/NetworkSettings.qml:222
+#: ui/NetworkSettings.qml:232
 #, fuzzy, kde-format
 #| msgid "Network prefix length:"
 msgid "Network prefix length"
 msgstr "Дарозии пешванди шабака:"
 
-#: ui/NetworkSettings.qml:241
+#: ui/NetworkSettings.qml:251
 #, fuzzy, kde-format
 #| msgid "DNS:"
 msgid "DNS"

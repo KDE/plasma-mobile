@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 00:39+0000\n"
+"POT-Creation-Date: 2024-06-25 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -129,33 +129,33 @@ msgstr "%1：%2"
 msgid "Stream name not found"
 msgstr "未发现流名称"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Unmute"
 msgstr "取消静音"
 
-#: qml/volumeosd/VolumeOSD.qml:104
+#: qml/volumeosd/VolumeOSD.qml:106
 #, kde-format
 msgid "Mute"
 msgstr "静音"
 
-#: qml/volumeosd/VolumeOSD.qml:128
+#: qml/volumeosd/VolumeOSD.qml:130
 #, kde-format
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/VolumeOSD.qml:138
+#: qml/volumeosd/VolumeOSD.qml:140
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/VolumeOSD.qml:158
+#: qml/volumeosd/VolumeOSD.qml:160
 #, kde-format
 msgid "Open audio settings"
 msgstr "打开音频设置"
 
-#: qml/volumeosd/VolumeOSD.qml:177
+#: qml/volumeosd/VolumeOSD.qml:179
 #, kde-format
 msgid "Toggle showing audio streams"
 msgstr "切换显示音频流"
