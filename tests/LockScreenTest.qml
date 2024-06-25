@@ -7,7 +7,7 @@ import QtQuick.Controls 2.15
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell as MobileShell
 
-import "../shell/contents/lockscreen" as LockScreen
+import "../lookandfeel/contents/lockscreen" as LockScreen
 
 // This is a test app for the lockscreen, simulating kscreenlocker.
 //
