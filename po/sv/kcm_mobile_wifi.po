@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-25 00:40+0000\n"
-"PO-Revision-Date: 2024-06-21 11:26+0200\n"
+"PO-Revision-Date: 2024-06-25 19:09+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -83,16 +83,14 @@ msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 företag"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 personlig"
+msgstr "WPA3 personlig"
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 företag"
+msgstr "WPA3 företag"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format

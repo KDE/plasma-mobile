@@ -83,16 +83,14 @@ msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 企业"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 个人"
+msgstr ""
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 企业"
+msgstr ""
 
 #: ui/NetworkSettings.qml:156
 #, kde-format

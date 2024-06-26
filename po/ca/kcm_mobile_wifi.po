@@ -1,16 +1,16 @@
 # Translation of kcm_mobile_wifi.po to Catalan
-# Copyright (C) 2018-2023 This_file_is_part_of_KDE
+# Copyright (C) 2018-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2019, 2020, 2021, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2019, 2020, 2021, 2023, 2024.
 # Empar Montoro Martín <montoro_mde@gva.es>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-25 00:40+0000\n"
-"PO-Revision-Date: 2023-12-17 11:44+0100\n"
+"PO-Revision-Date: 2024-06-25 12:38+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -87,16 +87,14 @@ msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 corporativa"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 personal"
+msgstr "WPA3 personal"
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 corporativa"
+msgstr "WPA3 corporativa"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format

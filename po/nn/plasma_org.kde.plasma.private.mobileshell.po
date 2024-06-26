@@ -288,6 +288,3 @@ msgstr "Tøm varslingar"
 #, kde-format
 msgid "More Options…"
 msgstr "Fleire val …"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Lydinnstillingar"
