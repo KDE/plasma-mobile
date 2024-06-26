@@ -127,8 +127,9 @@ void Settings::loadKeys(const QString &fileName, KSharedConfig::Ptr &config, con
 // NOTE: this only saves a value if it hasn't already been saved
 void Settings::saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value)
 {
-    const auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
-    const auto fileGroup = KConfigGroup{&savedGroup, fileName};
+    // These are not const because we are writing an entry
+    auto savedGroup = KConfigGroup{m_mobileConfig, SAVED_CONFIG_GROUP};
+    auto fileGroup = KConfigGroup{&savedGroup, fileName};
     auto keyGroup = KConfigGroup{&fileGroup, group};
 
     if (!keyGroup.hasKey(key)) {
