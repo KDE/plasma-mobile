@@ -1,0 +1,23 @@
+{
+    "KPackageStructure": "Plasma/LayoutTemplate",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin"
+            }
+        ],
+        "Category": "",
+        "Description": "Default panel layout for mobile, including status bar and navigation panel",
+        "EnabledByDefault": true,
+        "Id": "org.kde.plasma.mobile.defaultMobileLayout",
+        "License": "LGPLv2+",
+        "Name": "Default Mobile Layout",
+        "Website": "https://www.kde.org/plasma-desktop"
+    },
+    "X-Plasma-ContainmentCategories": [
+        "panel"
+    ],
+    "X-Plasma-Shell": "plasmashell"
+}
+
