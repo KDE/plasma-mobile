@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2023 Devin Lin <espidev@gmail.com>
+// SPDX-FileCopyrightText: 2023-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -27,7 +27,6 @@ Loader {
         Kirigami.Icon {
             implicitWidth: Kirigami.Units.iconSizes.small
             implicitHeight: Kirigami.Units.iconSizes.small
-            opacity: 1 - flickable.openFactor
 
             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
             source: "arrow-up"
@@ -39,7 +38,6 @@ Loader {
 
         Kirigami.Icon {
             source: 'fingerprint-symbolic'
-            opacity: 1 - flickable.openFactor
             implicitWidth: Kirigami.Units.iconSizes.medium
             implicitHeight: Kirigami.Units.iconSizes.medium
 

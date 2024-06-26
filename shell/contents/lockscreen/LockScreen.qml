@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
-// SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
+// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -19,47 +19,56 @@ import org.kde.kirigami 2.12 as Kirigami
 Item {
     id: root
 
-    property var lockScreenState: LockScreenState {}
-    property var notifModel: Notifications.WatchedNotificationsModel {}
+    readonly property var lockScreenState: LockScreenState {}
+    readonly property var notifModel: Notifications.WatchedNotificationsModel {}
 
-    // only show widescreen mode for short height devices (ex. phone landscape)
-    property bool isWidescreen: root.height < 720 && (root.height < root.width * 0.75)
+    // Only show widescreen mode for short height devices (ex. phone landscape)
+    readonly property bool isWidescreen: root.height < 720 && (root.height < root.width * 0.75)
     property bool notificationsShown: false
 
-    readonly property bool drawerOpen: flickable.openFactor >= 1
-    property var passwordBar: keypadLoader.item.passwordBar
+    property var passwordBar: keypad.passwordBar
 
-    // listen for keyboard events, and focus on input area
-    Component.onCompleted: forceActiveFocus();
+    Component.onCompleted: {
+        forceActiveFocus();
+
+        // Go to closed position when loaded
+        flickable.position = 0;
+        flickable.goToClosePosition();
+    }
+
+    // Listen for keyboard events, and focus on input area
     Keys.onPressed: {
-        passwordBar.isPinMode = false;
+        root.lockScreenState.isKeyboardMode = true;
         flickable.goToOpenPosition();
         passwordBar.textField.forceActiveFocus();
     }
 
-    // wallpaper blur
+    // Wallpaper blur
     Loader {
         anchors.fill: parent
         asynchronous: true
         sourceComponent: WallpaperBlur {
             source: wallpaper
-            shouldBlur: root.notificationsShown || root.drawerOpen // only blur once animation finished for performance
+            opacity: flickable.openFactor
         }
     }
 
     Connections {
         target: root.lockScreenState
 
-        // ensure keypad is opened when password is updated (ex. keyboard)
+        // Ensure keypad is opened when password is updated (ex. keyboard)
         function onPasswordChanged() {
-            flickable.goToOpenPosition()
+            if (root.lockScreenState.password !== "") {
+                flickable.goToOpenPosition();
+            }
         }
     }
 
     Item {
+        id: lockscreenContainer
         anchors.fill: parent
 
-        // header bar and action drawer
+        // Header bar and action drawer
         Loader {
             id: headerBarLoader
             z: 1 // on top of flick area
@@ -80,67 +89,35 @@ Item {
             id: flickable
             anchors.fill: parent
 
-            property real openFactor: position / keypadHeight
-
-            onOpened: {
-                if (root.lockScreenState.passwordless) {
-                    // try unlocking if flicked to the top, and we have passwordless login
-                    root.lockScreenState.tryPassword();
-                }
-            }
-
+            // Distance to swipe to fully open keypad
             keypadHeight: Kirigami.Units.gridUnit * 20
 
-            // go to closed position when loaded
-            Component.onCompleted: {
-                flickable.position = 0;
-                flickable.goToClosePosition();
-            }
-
-            // update position, and cap it at the keypad height
-            onPositionChanged: {
-                if (position > keypadHeight) {
-                    position = keypadHeight;
-                } else if (position < 0) {
-                    position = 0;
+            // Clear entered password after closing keypad
+            onOpenFactorChanged: {
+                if (flickable.openFactor < 0.1) {
+                    root.passwordBar.clear();
                 }
             }
 
-            LockScreenNarrowContent {
-                id: phoneComponent
+            LockScreenContent {
+                id: lockScreenContent
 
-                visible: !isWidescreen
-                active: visible
-                opacity: 1 - flickable.openFactor
+                isVertical: !root.isWidescreen
+                opacity: Math.max(0, 1 - flickable.openFactor * 2)
+                transform: [
+                    Scale {
+                        origin.x: lockScreenContent.width / 2
+                        origin.y: lockScreenContent.height / 2
+                        yScale: 1 - (flickable.openFactor * 2) * 0.1
+                        xScale: 1 - (flickable.openFactor * 2) * 0.1
+                    }
+                ]
 
                 fullHeight: root.height
 
                 lockScreenState: root.lockScreenState
                 notificationsModel: root.notifModel
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
-
-                onPasswordRequested: flickable.goToOpenPosition()
-
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-                // move while swiping up
-                transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
-            }
-
-            LockScreenWideScreenContent {
-                id: tabletComponent
-
-                visible: isWidescreen
-                active: visible
-                opacity: 1 - flickable.openFactor
-
-                lockScreenState: root.lockScreenState
-                notificationsModel: root.notifModel
-                onNotificationsShownChanged: root.notificationsShown = notificationsShown
-
                 onPasswordRequested: flickable.goToOpenPosition()
 
                 anchors.topMargin: headerBarLoader.statusBarHeight
@@ -148,75 +125,36 @@ Item {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-
-                // move while swiping up
-                transform: Translate { y: Math.round((1 - phoneComponent.opacity) * (-root.height / 6)) }
             }
 
             // scroll up icon
             BottomIconIndicator {
                 id: scrollUpIconLoader
                 lockScreenState: root.lockScreenState
+                opacity: Math.max(0, 1 - flickable.openFactor * 2)
 
                 anchors.bottom: parent.bottom
-                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.5
+                anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.1
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
-            // password keypad
-            Loader {
-                id: keypadLoader
-                width: parent.width
-                asynchronous: true
-                active: !root.lockScreenState.passwordless // only load keypad if not passwordless
+            Rectangle {
+                id: keypadScrim
+                anchors.fill: parent
+                visible: opacity > 0
+                opacity: flickable.openFactor
+                color: Qt.rgba(0, 0, 0, 0.5)
+            }
 
-                anchors.bottom: parent.bottom
+            Keypad {
+                id: keypad
+                anchors.fill: parent
+                openProgress: flickable.openFactor
+                lockScreenState: root.lockScreenState
 
-                sourceComponent: ColumnLayout {
-                    property alias passwordBar: keypad.passwordBar
-
-                    transform: Translate { y: flickable.keypadHeight - flickable.position }
-                    spacing: 0
-
-                    // info notification text
-                    Label {
-                        Layout.fillWidth: true
-                        Layout.rightMargin: Kirigami.Units.largeSpacing
-                        Layout.leftMargin: Kirigami.Units.largeSpacing
-                        Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-                        font.pointSize: 9
-
-                        elide: Text.ElideRight
-                        horizontalAlignment: Text.AlignHCenter
-                        text: root.lockScreenState.info
-                        opacity: (root.lockScreenState.info.length === 0 || flickable.openFactor < 1) ? 0 : 1
-                        color: 'white'
-
-                        Behavior on opacity {
-                            NumberAnimation { duration: 200 }
-                        }
-                    }
-
-                    // scroll down icon
-                    Kirigami.Icon {
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.bottomMargin: Kirigami.Units.gridUnit
-                        implicitWidth: Kirigami.Units.iconSizes.small
-                        implicitHeight: Kirigami.Units.iconSizes.small
-                        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-                        source: "arrow-down"
-                        opacity: Math.sin((Math.PI / 2) * flickable.openFactor + 1.5 * Math.PI) + 1
-                    }
-
-                    Keypad {
-                        id: keypad
-                        Layout.fillWidth: true
-                        focus: true
-
-                        lockScreenState: root.lockScreenState
-                        swipeProgress: flickable.openFactor
-                    }
-                }
+                // only show in last 50% of anim
+                opacity: (flickable.openFactor - 0.5) * 2
+                transform: Translate { y: (flickable.keypadHeight - flickable.position) * 0.1 }
             }
         }
     }

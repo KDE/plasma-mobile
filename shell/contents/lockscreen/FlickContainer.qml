@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick 2.15
@@ -9,59 +9,66 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 MobileShell.SwipeArea {
     id: root
-    mode: MobileShell.SwipeArea.VerticalOnly
-    
-    property int position: 0
-    
     required property real keypadHeight
-    
+
+    readonly property real openFactor: position / keypadHeight
+    property real position: 0
+    property bool movingUp: false
+    property real __oldPosition: position
+
     signal opened()
-    
+
+    mode: MobileShell.SwipeArea.VerticalOnly
+
     function cancelAnimations() {
         positionAnim.stop();
     }
-    
+
     function goToOpenPosition() {
         positionAnim.to = keypadHeight;
         positionAnim.restart();
     }
-    
+
     function goToClosePosition() {
         positionAnim.to = 0;
         positionAnim.restart();
     }
-    
+
     function updateState() {
         // don't update state if at end
         if (position <= 0 || position >= keypadHeight) return;
-        
+
         if (movingUp) {
             goToOpenPosition();
         } else {
             goToClosePosition();
         }
     }
-    
+
     NumberAnimation on position {
         id: positionAnim
-        duration: Kirigami.Units.veryLongDuration
+        duration: 800
         easing.type: Easing.OutExpo
-        
+
         onFinished: {
             if (root.position === keypadHeight) {
                 root.opened();
             }
         }
     }
-    
-    property int oldPosition: position
-    property bool movingUp: false 
-    
+
     onPositionChanged: {
-        movingUp = oldPosition <= position;
-        oldPosition = position;
+        movingUp = __oldPosition <= position;
+        __oldPosition = position;
+
+        // Limit position to between 0 and keypadHeight
+        if (position > keypadHeight) {
+            position = keypadHeight;
+        } else if (position < 0) {
+            position = 0;
+        }
     }
-    
+
     onSwipeStarted: cancelAnimations();
     onSwipeEnded: {
         if (!positionAnim.running) {

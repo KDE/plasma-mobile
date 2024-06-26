@@ -11,14 +11,4 @@ MultiEffect {
     blurEnabled: true
     blurMax: 50
     blur: 1.0
-    
-    property bool shouldBlur
-    opacity: shouldBlur ? 1 : 0
-    
-    Behavior on opacity {
-        NumberAnimation {
-            duration: 1000
-            easing.type: Easing.InOutQuad
-        }
-    }
 }

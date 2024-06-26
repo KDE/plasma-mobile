@@ -1,4 +1,4 @@
-// SPDX-FileCopyrightText: 2020-2023 Devin Lin <espidev@gmail.com>
+// SPDX-FileCopyrightText: 2020-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -13,182 +13,153 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.kirigami 2.12 as Kirigami
 
-Rectangle {
-    id: keypadRoot
-    
+Item {
+    id: root
+    required property real openProgress
     required property var lockScreenState
-    
+
     property alias passwordBar: passwordBar
-    
-    // 0 - keypad is not shown, 1 - keypad is shown
-    property double swipeProgress
-    
-    // slightly translucent background, for key contrast
-    color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.backgroundColor, {"alpha": 0.9*255})
-    
-    // colour calculations
-    readonly property color buttonColor: Qt.lighter(Kirigami.Theme.backgroundColor, 1.3)
-    readonly property color buttonPressedColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.08)
-    readonly property color buttonTextColor: Kirigami.Theme.textColor
-    readonly property color dropShadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.2)
-    readonly property color headerBackgroundColor: Qt.lighter(Kirigami.Theme.backgroundColor, 1.3)
-    
-    opacity: Math.sin((Math.PI / 2) * swipeProgress + 1.5 * Math.PI) + 1
-    
-    implicitHeight: {
-        if (passwordBar.isPinMode && !Qt.inputMethod.visible) {
-            return Kirigami.Units.gridUnit * 17;
-        } else {
-            return Math.min(root.height - passwordBar.implicitHeight, // don't make the password bar go off the screen
-                            Kirigami.Units.smallSpacing * 2 + Qt.inputMethod.keyboardRectangle.height + passwordBar.implicitHeight);
-        }
-    }
-    
-    Behavior on implicitHeight {
-        NumberAnimation {
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.InOutQuad
-        }
-    }
 
     MobileShell.HapticsEffect {
         id: haptics
     }
 
-    // pin display and bar
-    PasswordBar {
-        id: passwordBar
-        
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-        
-        color: keypadRoot.headerBackgroundColor
-        opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-
-        lockScreenState: keypadRoot.lockScreenState
-        
-        keypadOpen: swipeProgress === 1
-        previewCharIndex: -2
-
-        layer.enabled: true
-        layer.effect: MultiEffect {
-            blurMax: 16
-            shadowEnabled: true
-            shadowVerticalOffset: 1
-            shadowOpacity: 0.3
-            shadowColor: keypadRoot.dropShadowColor
-        }
-    }
-    
-    // actual number keys
+    // Column layout - most cases
     ColumnLayout {
-        visible: opacity > 0
-        opacity: passwordBar.isPinMode ? 1 : 0
-        
-        Behavior on opacity {
-            NumberAnimation {
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
-        
-        anchors {
-            left: parent.left
-            right: parent.right
-            top: passwordBar.bottom
-            bottom: parent.bottom
-            topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.gridUnit
-        }
+        id: keypadVerticalContainer
+        visible: root.height > Kirigami.Units.gridUnit * 25
+
+        anchors.centerIn: parent
         spacing: Kirigami.Units.gridUnit
 
-        GridLayout {
-            id: grid
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-            Layout.leftMargin: Kirigami.Units.gridUnit * 0.5
-            Layout.rightMargin: Kirigami.Units.gridUnit * 0.5
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 22
-            Layout.maximumHeight: Kirigami.Units.gridUnit * 12.5
-            opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
-            
-            columns: 4
-            
-            readonly property real keyRadius: 5
-            
-            // numpad keys
-            Repeater {
-                model: ["1", "2", "3", "R", "4", "5", "6", "0", "7", "8", "9", "E"]
+        LayoutItemProxy { target: header }
+        LayoutItemProxy { target: keypadGrid }
+    }
 
-                delegate: AbstractButton {
-                    id: button
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    visible: modelData.length > 0
-                    opacity: (Math.sin(2*((Math.PI / 2) * keypadRoot.swipeProgress + 1.5 * Math.PI)) + 1)
+    // Row layout - used when there is restricted height
+    RowLayout {
+        id: keypadHorizontalContainer
+        visible: !keypadVerticalContainer.visible
 
-                    background: Rectangle {
-                        id: keyRect
-                        radius: grid.keyRadius
-                        color: button.pressed ? keypadRoot.buttonPressedColor : keypadRoot.buttonColor
+        anchors.centerIn: parent
+        spacing: Kirigami.Units.gridUnit * 2
+
+        LayoutItemProxy { target: header }
+        LayoutItemProxy { target: keypadGrid }
+    }
+
+    ColumnLayout {
+        id: header
+        spacing: Kirigami.Units.gridUnit
+
+        // label ("wrong pin", "enter pin")
+        Label {
+            id: descriptionLabel
+            Layout.alignment: Qt.AlignHCenter
+            opacity: root.lockScreenState.password.length === 0 ? 1 : 0
+            text: root.lockScreenState.pinLabel
+            font.pointSize: 12
+            font.bold: true
+            color: 'white'
+
+            // Enforce extra margin at top of vertical container
+            Layout.topMargin: keypadVerticalContainer.visible ? Kirigami.Units.gridUnit * 3 : 0
+
+            Behavior on opacity {
+                NumberAnimation { duration: 200 }
+            }
+        }
+
+        // pin display and bar
+        PasswordBar {
+            id: passwordBar
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 14
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 2.5
+
+            lockScreenState: root.lockScreenState
+            isKeypadOpen: root.openProgress >= 0.9
+        }
+    }
+
+    GridLayout {
+        id: keypadGrid
+        columnSpacing: Kirigami.Units.gridUnit
+        rowSpacing: Kirigami.Units.gridUnit
+        uniformCellHeights: true
+        uniformCellWidths: true
+
+        readonly property real intendedWidth: Kirigami.Units.gridUnit * 14
+
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 14
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 22
+
+        readonly property real cellLength: (intendedWidth - columnSpacing * 2) / 3
+
+        columns: 3
+
+        // numpad keys
+        Repeater {
+            model: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "R", "0", "E"]
+
+            delegate: AbstractButton {
+                id: button
+                implicitWidth: keypadGrid.cellLength
+                implicitHeight: keypadGrid.cellLength
+                visible: modelData.length > 0
+                enabled: root.openProgress >= 0.8 // Only enable after a certain point in animation
+
+                opacity: enabled
+                Behavior on opacity {
+                    NumberAnimation { duration: 100 * index }
+                }
+
+                background: Rectangle {
+                    readonly property real restingOpacity: (modelData !== "R" && modelData !== "E") ? 0.2 : 0.0
+                    radius: width
+                    color: Qt.rgba(255, 255, 255,
+                                    button.pressed ? 0.5 : restingOpacity)
+                }
+
+                onPressedChanged: {
+                    if (pressed) {
+                        haptics.buttonVibrate();
+                    }
+                }
+
+                onClicked: {
+                    if (modelData === "R") {
+                        passwordBar.backspace();
+                    } else if (modelData === "E") {
+                        passwordBar.enter();
+                    } else {
+                        passwordBar.keyPress(modelData);
+                    }
+                }
+
+                onPressAndHold: {
+                    if (modelData === "R") {
+                        haptics.buttonVibrate();
+                        passwordBar.clear();
+                    }
+                }
+
+                contentItem: Item {
+                    PlasmaComponents.Label {
+                        visible: modelData !== "R" && modelData !== "E"
+                        text: modelData
+                        anchors.centerIn: parent
+                        font.pointSize: 18
+                        color: 'white'
                     }
 
-                    layer.enabled: true
-                    layer.effect: MultiEffect {
-                        blurMax: 16
-                        shadowEnabled: true
-                        shadowVerticalOffset: 1
-                        shadowOpacity: 0.3
-                        shadowColor: keypadRoot.dropShadowColor
-                    }
-
-                    onPressedChanged: {
-                        if (pressed) {
-                            haptics.buttonVibrate();
-                        }
-                    }
-
-                    onClicked: {
-                        if (modelData === "R") {
-                            passwordBar.backspace();
-                        } else if (modelData === "E") {
-                            passwordBar.enter();
-                        } else {
-                            passwordBar.keyPress(modelData);
-                        }
-                    }
-                    onPressAndHold: {
-                        if (modelData === "R") {
-                            haptics.buttonVibrate();
-                            passwordBar.clear();
-                        }
-                    }
-                    
-                    contentItem: Item {
-                        PlasmaComponents.Label {
-                            visible: modelData !== "R" && modelData !== "E"
-                            text: modelData
-                            anchors.centerIn: parent
-                            font.pointSize: 18
-                            font.weight: Font.Light
-                            color: keypadRoot.buttonTextColor
-                        }
-
-                        Kirigami.Icon {
-                            visible: modelData === "R"
-                            anchors.centerIn: parent
-                            width: Kirigami.Units.iconSizes.small
-                            height: Kirigami.Units.iconSizes.small
-                            source: "edit-clear"
-                        }
-
-                        Kirigami.Icon {
-                            visible: modelData === "E"
-                            anchors.centerIn: parent
-                            width: Kirigami.Units.iconSizes.small
-                            height: Kirigami.Units.iconSizes.small
-                            source: "go-next"
-                        }
+                    Kirigami.Icon {
+                        visible: modelData === "R" || modelData === "E"
+                        anchors.centerIn: parent
+                        width: Kirigami.Units.iconSizes.small
+                        height: Kirigami.Units.iconSizes.small
+                        source: modelData === "R" ? "edit-clear" : "go-next"
+                        Kirigami.Theme.inherit: false
+                        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                     }
                 }
             }
