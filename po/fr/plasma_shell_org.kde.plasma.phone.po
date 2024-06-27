@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-31 00:41+0000\n"
+"POT-Creation-Date: 2024-06-27 00:40+0000\n"
 "PO-Revision-Date: 2024-06-01 10:06+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -62,19 +62,16 @@ msgstr "Appliquer maintenant"
 msgid "Wallpaper"
 msgstr "Fond d'écran"
 
-#: contents/lockscreen/PasswordBar.qml:27
-#: contents/lockscreen/PasswordBar.qml:88
-#: contents/lockscreen/PasswordBar.qml:89
+#: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Saisir un code « PIN »"
 
-#: contents/lockscreen/PasswordBar.qml:44
-msgid "Logging in..."
-msgstr "Connexion en cours..."
-
-#: contents/lockscreen/PasswordBar.qml:48
+#: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Code « PIN » incorrect"
+
+#~ msgid "Logging in..."
+#~ msgstr "Connexion en cours..."
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Modifier un fond d'écran"

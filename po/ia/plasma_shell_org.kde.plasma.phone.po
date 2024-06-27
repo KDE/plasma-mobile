@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-31 00:41+0000\n"
+"POT-Creation-Date: 2024-06-27 00:40+0000\n"
 "PO-Revision-Date: 2024-05-31 09:56+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -65,19 +65,16 @@ msgstr "Applica hora"
 msgid "Wallpaper"
 msgstr "Tapete de papiro"
 
-#: contents/lockscreen/PasswordBar.qml:27
-#: contents/lockscreen/PasswordBar.qml:88
-#: contents/lockscreen/PasswordBar.qml:89
+#: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
 msgstr "Inserta PIN"
 
-#: contents/lockscreen/PasswordBar.qml:44
-msgid "Logging in..."
-msgstr "Accedente ..."
-
-#: contents/lockscreen/PasswordBar.qml:48
+#: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "PIN Errate"
+
+#~ msgid "Logging in..."
+#~ msgstr "Accedente ..."
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Campia tapete de papiro"

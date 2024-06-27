@@ -85,12 +85,12 @@ msgstr "WPA/WPA2 企业"
 #: ui/NetworkSettings.qml:101
 #, kde-format
 msgid "WPA3 Personal"
-msgstr ""
+msgstr "WPA3 Personal"
 
 #: ui/NetworkSettings.qml:102
 #, kde-format
 msgid "WPA3 Enterprise"
-msgstr ""
+msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
