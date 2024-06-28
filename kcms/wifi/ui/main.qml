@@ -3,7 +3,7 @@
 // SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
-import QtQuick.Layouts 
+import QtQuick.Layouts
 import QtQuick.Controls as Controls
 
 import org.kde.plasma.networkmanagement as PlasmaNM
@@ -86,7 +86,7 @@ SimpleKCM {
                 id: wifiSwitch
                 text: i18n("Wi-Fi")
                 checked: enabledConnections.wirelessEnabled
-                onClicked: {
+                onCheckedChanged: {
                     handler.enableWireless(checked);
                     checked = Qt.binding(() => enabledConnections.wirelessEnabled);
                 }
@@ -119,11 +119,11 @@ SimpleKCM {
                 model: mobileProxyModel
                 delegate: ConnectionItemDelegate {
                     editMode: root.editMode
-                    
+
                     // connected or saved
                     property bool shouldDisplay: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
                     onShouldDisplayChanged: savedCard.updateCount()
-                    
+
                     // separate property for visible since visible is false when the whole card is not visible
                     visible: shouldDisplay
                 }
@@ -159,7 +159,7 @@ SimpleKCM {
 
                     property bool shouldDisplay: !((Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated)
                     onShouldDisplayChanged: availableCard.updateCount()
-                    
+
                     visible: shouldDisplay
                 }
             }
