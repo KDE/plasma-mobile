@@ -25,12 +25,22 @@ ContainmentItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
     Plasmoid.status: PlasmaCore.Types.PassiveStatus // ensure that the panel never takes focus away from the running app
 
+    onWidthChanged: maximizeTimer.restart()
+
     // filled in by the shell (Panel.qml) with the plasma-workspace PanelView
     property var panel: null
     onPanelChanged: {
         if (panel) {
             panel.floating = false;
         }
+    }
+
+    // Ensure that panel is always the full width of the screen
+    Timer {
+        id: maximizeTimer
+        running: false
+        interval: 100
+        onTriggered: root.panel.maximize()
     }
 
     // only opaque if there are no maximized windows on this screen
