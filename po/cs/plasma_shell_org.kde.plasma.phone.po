@@ -68,6 +68,3 @@ msgstr "Zadejte PIN"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Špatný PIN"
-
-#~ msgid "Logging in..."
-#~ msgstr "Probíhá přihlašování..."
