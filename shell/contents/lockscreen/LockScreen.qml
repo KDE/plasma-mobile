@@ -69,20 +69,14 @@ Item {
         anchors.fill: parent
 
         // Header bar and action drawer
-        Loader {
-            id: headerBarLoader
-            z: 1 // on top of flick area
-            readonly property real statusBarHeight: Kirigami.Units.gridUnit * 1.25
-
+        HeaderComponent {
+            id: headerBar
+            z: 1
             anchors.fill: parent
-            asynchronous: true
-
-            sourceComponent: HeaderComponent {
-                statusBarHeight: headerBarLoader.statusBarHeight
-                openFactor: flickable.openFactor
-                notificationsModel: root.notifModel
-                onPasswordRequested: root.askPassword()
-            }
+            statusBarHeight: Kirigami.Units.gridUnit * 1.25
+            openFactor: flickable.openFactor
+            notificationsModel: root.notifModel
+            onPasswordRequested: root.askPassword()
         }
 
         FlickContainer {
@@ -120,7 +114,7 @@ Item {
                 onNotificationsShownChanged: root.notificationsShown = notificationsShown
                 onPasswordRequested: flickable.goToOpenPosition()
 
-                anchors.topMargin: headerBarLoader.statusBarHeight
+                anchors.topMargin: headerBar.statusBarHeight
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left

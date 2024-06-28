@@ -15,10 +15,8 @@ import org.kde.plasma.private.mobileshell as MobileShell
 MobileShell.SwipeArea {
     id: root
     mode: MobileShell.SwipeArea.VerticalOnly
-    
+
     required property ActionDrawer actionDrawer
-    
-    property int oldMouseY: 0
 
     function startSwipe() {
         if (actionDrawer.visible) {
@@ -28,22 +26,22 @@ MobileShell.SwipeArea {
         actionDrawer.cancelAnimations();
         actionDrawer.dragging = true;
         actionDrawer.opened = false;
-        
+
         // must be after properties other are set, we cannot have actionDrawer.updateState() be called
         actionDrawer.offset = 0;
         actionDrawer.oldOffset = 0;
         actionDrawer.visible = true;
     }
-    
+
     function endSwipe() {
         actionDrawer.dragging = false;
         actionDrawer.updateState();
     }
-    
+
     function updateOffset(offsetY) {
         actionDrawer.offset += offsetY;
     }
-    
+
     anchors.fill: parent
 
     onSwipeStarted: (point) => {

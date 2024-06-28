@@ -21,9 +21,23 @@ Item {
 
     signal passwordRequested()
 
-    // top status bar
-    MobileShell.StatusBar {
-        id: statusBar
+    // The status bar and quicksettings take a while to load, don't pause initial lockscreen loading for it
+    Timer {
+        id: loadTimer
+        running: true
+        repeat: false
+        onTriggered: {
+            statusBarLoader.active = true
+            actionDrawerLoader.active = true
+        }
+    }
+
+    // Status bar
+    Loader {
+        id: statusBarLoader
+        active: false
+        asynchronous: true
+        visible: status == Loader.Ready
 
         anchors.top: parent.top
         anchors.left: parent.left
@@ -31,58 +45,82 @@ Item {
 
         height: root.statusBarHeight
 
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+        sourceComponent: MobileShell.StatusBar {
+            id: statusBar
 
-        backgroundColor: "transparent"
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: root.statusBarHeight
 
-        showSecondRow: false
-        showDropShadow: true
-        showTime: false
-        disableSystemTray: true // prevent SIGABRT, since loading the system tray on the lockscreen leads to bad... things
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+            backgroundColor: "transparent"
+
+            showSecondRow: false
+            showDropShadow: true
+            showTime: false
+            disableSystemTray: true // prevent SIGABRT, since loading the system tray on the lockscreen leads to bad... things
+        }
     }
 
-    // drag down gesture to open action drawer
+    // Drag down gesture to open action drawer
     MobileShell.ActionDrawerOpenSurface {
         id: swipeArea
-        actionDrawer: drawer
-        anchors.fill: statusBar
+        actionDrawer: actionDrawerLoader.item ? actionDrawerLoader.item.actionDrawer : null
+
+        anchors.fill: statusBarLoader
     }
 
-    // action drawer component
-    MobileShell.ActionDrawer {
-        id: drawer
+    // Dynamically load on swipe-down to avoid having to load at start
+    Loader {
+        id: actionDrawerLoader
+        active: false
+        asynchronous: true
+        visible: status == Loader.Ready
+
         anchors.fill: parent
 
-        visible: offset !== 0
-        restrictedPermissions: true
+        sourceComponent: Item {
+            property var actionDrawer: drawer
 
-        notificationSettings: NotificationManager.Settings {}
-        notificationModel: root.notificationsModel
-        notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
+            // Action drawer component
+            MobileShell.ActionDrawer {
+                id: drawer
+                anchors.fill: parent
 
-        property bool requestNotificationAction: false
+                visible: offset !== 0
+                restrictedPermissions: true
 
-        // notification button clicked, requesting auth
-        onPermissionsRequested: {
-            requestNotificationAction = true;
-            drawer.close();
-            root.passwordRequested();
-        }
-    }
+                notificationSettings: NotificationManager.Settings {}
+                notificationModel: root.notificationsModel
+                notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
 
-    // listen to authentication events
-    Connections {
-        target: authenticator
-        function onSucceeded() {
-            // run pending action if successfully unlocked
-            if (drawer.requestNotificationAction) {
-                drawer.runPendingAction();
-                drawer.requestNotificationAction = false;
+                property bool requestNotificationAction: false
+
+                // notification button clicked, requesting auth
+                onPermissionsRequested: {
+                    requestNotificationAction = true;
+                    drawer.close();
+                    root.passwordRequested();
+                }
             }
-        }
-        function onFailed() {
-            drawer.requestNotificationAction = false;
+
+            // listen to authentication events
+            Connections {
+                target: authenticator
+                function onSucceeded() {
+                    // run pending action if successfully unlocked
+                    if (drawer.requestNotificationAction) {
+                        drawer.runPendingAction();
+                        drawer.requestNotificationAction = false;
+                    }
+                }
+                function onFailed() {
+                    drawer.requestNotificationAction = false;
+                }
+            }
         }
     }
 }
