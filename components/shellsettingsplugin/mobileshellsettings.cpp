@@ -29,6 +29,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT vibrationsEnabledChanged();
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
+            Q_EMIT dateInStatusBarChanged();
             Q_EMIT navigationPanelEnabledChanged();
             Q_EMIT alwaysShowKeyboardToggleOnNavigationPanelChanged();
             Q_EMIT keyboardButtonEnabledChanged();
@@ -76,6 +77,19 @@ void MobileShellSettings::setAnimationsEnabled(bool animationsEnabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("animationsEnabled", animationsEnabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::dateInStatusBar() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("dateInStatusBar", false);
+}
+
+void MobileShellSettings::setDateInStatusBar(bool dateInStatusBar)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("dateInStatusBar", dateInStatusBar, KConfigGroup::Notify);
     m_config->sync();
 }
 

@@ -50,6 +50,24 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormHeader {
+            title: i18n("Status bar")
+        }
+
+        FormCard.FormCard {
+            FormCard.FormSwitchDelegate {
+                id: dateInStatusBar
+                text: i18n("Date in status bar")
+                description: i18n("If on, date will be shown next to the clock in the status bar.")
+                checked: ShellSettings.Settings.dateInStatusBar
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.dateInStatusBar) {
+                        ShellSettings.Settings.dateInStatusBar = checked;
+                    }
+                }
+            }
+        }
+
+        FormCard.FormHeader {
             title: i18n("Navigation Panel")
         }
 

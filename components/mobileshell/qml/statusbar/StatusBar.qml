@@ -113,7 +113,7 @@ Item {
                 ClockText {
                     visible: root.showTime
                     Layout.fillHeight: true
-                    font.pixelSize: textPixelSize
+                    fontPixelSize: textPixelSize
                     source: timeSource
                 }
 

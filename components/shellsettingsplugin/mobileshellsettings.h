@@ -29,6 +29,9 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(int vibrationDuration READ vibrationDuration WRITE setVibrationDuration NOTIFY vibrationDurationChanged)
     Q_PROPERTY(bool animationsEnabled READ animationsEnabled WRITE setAnimationsEnabled NOTIFY animationsEnabledChanged)
 
+    // status bar
+    Q_PROPERTY(bool dateInStatusBar READ dateInStatusBar WRITE setDateInStatusBar NOTIFY dateInStatusBarChanged)
+
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
     Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel
@@ -90,6 +93,20 @@ public:
      * @param animationsEnabled Whether animations should be enabled in the shell.
      */
     void setAnimationsEnabled(bool animationsEnabled);
+
+    /**
+     * Whether date is shown in the status bar.
+     *
+     * If true, date will be shown in the status bar next to the clock.
+     */
+    bool dateInStatusBar() const;
+
+    /**
+     * Set whether date is shown in the status bar.
+     *
+     * @param dateInStatusBar Whether date is shown in the status bar.
+     */
+    void setDateInStatusBar(bool dateInStatusBar);
 
     /**
      * Whether the navigation panel is enabled.
@@ -165,6 +182,7 @@ Q_SIGNALS:
     void alwaysShowKeyboardToggleOnNavigationPanelChanged();
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
+    void dateInStatusBarChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
