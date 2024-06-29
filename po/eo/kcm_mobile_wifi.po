@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-25 00:40+0000\n"
-"PO-Revision-Date: 2023-12-17 22:24+0100\n"
+"PO-Revision-Date: 2024-06-28 16:51+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -84,16 +84,14 @@ msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 Persona"
+msgstr "WPA3 Persona"
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 Enterprise"
+msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format

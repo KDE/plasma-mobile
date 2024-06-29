@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-20 00:39+0000\n"
+"POT-Creation-Date: 2024-06-29 00:40+0000\n"
 "PO-Revision-Date: 2023-02-19 17:59+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -45,69 +45,84 @@ msgstr "Если этот параметр отключён, использов�
 
 #: ui/main.qml:53
 #, kde-format
+msgid "Status bar"
+msgstr ""
+
+#: ui/main.qml:59
+#, kde-format
+msgid "Date in status bar"
+msgstr ""
+
+#: ui/main.qml:60
+#, kde-format
+msgid "If on, date will be shown next to the clock in the status bar."
+msgstr ""
+
+#: ui/main.qml:71
+#, kde-format
 msgid "Navigation Panel"
 msgstr "Панель навигации"
 
-#: ui/main.qml:59
+#: ui/main.qml:77
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Режим «только жесты»"
 
-#: ui/main.qml:60
+#: ui/main.qml:78
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Сокрытие панели навигации."
 
-#: ui/main.qml:74
+#: ui/main.qml:92
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:75
+#: ui/main.qml:93
 #, fuzzy, kde-format
 #| msgid "Whether to hide the navigation panel."
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Сокрытие панели навигации."
 
-#: ui/main.qml:86
+#: ui/main.qml:104
 #, kde-format
 msgid "Action Drawer"
 msgstr ""
 
-#: ui/main.qml:92
+#: ui/main.qml:110
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Фиксированный режим"
 
-#: ui/main.qml:93
+#: ui/main.qml:111
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Растянутый режим"
 
-#: ui/main.qml:97 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:115 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Быстрая настройка"
 
-#: ui/main.qml:105
+#: ui/main.qml:123
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr ""
 
-#: ui/main.qml:106
+#: ui/main.qml:124
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr ""
 
-#: ui/main.qml:131
+#: ui/main.qml:149
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr ""
 
-#: ui/main.qml:132
+#: ui/main.qml:150
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr ""

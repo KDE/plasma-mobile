@@ -69,6 +69,3 @@ msgstr "输入 PIN 码"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "PIN 码错误"
-
-#~ msgid "Logging in..."
-#~ msgstr "正在登录..."
