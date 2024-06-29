@@ -85,10 +85,9 @@ QuickSettingsDelegate {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
 
-            PlasmaComponents.Label {
+            MobileShell.MarqueeLabel {
                 Layout.fillWidth: true
-                elide: Text.ElideRight
-                text: root.text
+                inputText: root.text
                 font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.75 // TODO base height off of size of delegate
                 font.weight: Font.Bold
             }
