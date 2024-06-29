@@ -29,14 +29,6 @@ Kirigami.ScrollablePage {
             onCheckedChanged: root.editMode = checked
         }
     ]
-    
-    property var dialog: EditProfileDialog {
-        id: profileDialog
-        parent: root
-        modem: root.modem
-        profile: null
-        pageWidth: root.width
-    }
 
     ColumnLayout {
         spacing: 0
@@ -96,8 +88,7 @@ Kirigami.ScrollablePage {
                             text: i18n("Edit")
                             display: Controls.ToolButton.IconOnly
                             onClicked: {
-                                profileDialog.profile = modelData;
-                                profileDialog.open();
+                                kcm.push("EditProfilePage.qml", { "profile": modelData, "modem": modem });
                             }
                         }
 
@@ -116,8 +107,7 @@ Kirigami.ScrollablePage {
                 text: i18n("Add APN")
                 icon.name: 'list-add'
                 onClicked: {
-                    profileDialog.profile = null;
-                    profileDialog.open();
+                    kcm.push("EditProfilePage.qml", { "profile": null, "modem": modem });
                 }
             }
             
