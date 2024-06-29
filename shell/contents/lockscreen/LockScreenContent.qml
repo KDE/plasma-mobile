@@ -29,13 +29,16 @@ Item {
         visible: root.isVertical
         spacing: 0
 
-        // center clock when no notifications are shown, otherwise move the clock upward
-        anchors.topMargin: !root.notificationsShown ? Math.round(root.fullHeight / 2 - (verticalLayout.implicitHeight / 2)) : Kirigami.Units.gridUnit * 5
+        // Center clock when no notifications are shown, otherwise move the clock upward
+        anchors.topMargin: root.notificationsShown ? Kirigami.Units.gridUnit * 5 : Math.round(root.fullHeight / 2 - (verticalLayout.implicitHeight / 2))
         anchors.bottomMargin: Kirigami.Units.gridUnit
         anchors.fill: parent
 
-        // animate
+        // Animate clock centering change when notifications come in
         Behavior on anchors.topMargin {
+            id: topMarginAnim
+            enabled: false
+
             NumberAnimation {
                 duration: Kirigami.Units.veryLongDuration
                 easing.type: Easing.InOutExpo
@@ -44,6 +47,13 @@ Item {
 
         LayoutItemProxy { target: clockAndMediaWidget }
         LayoutItemProxy { target: notificationComponent }
+    }
+
+    // HACK: don't animate top margin at beginning, while notification model figures itself out
+    Timer {
+        running: true
+        repeat: false
+        onTriggered: topMarginAnim.enabled = true
     }
 
     // Horizontal layout (landscape on smaller devices)
