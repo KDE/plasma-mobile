@@ -30,10 +30,21 @@ QS.QuickSetting {
     }
     icon: "media-record"
     enabled: false
+    available: record.encoder != PWRec.PipeWireRecord.NoEncoder
 
     function toggle() {
         if (!record.active) {
-            record.output = RecordUtil.videoLocation("screen-recording.mp4");
+            // See this https://invent.kde.org/plasma/kpipewire/-/blob/eb21912e7e0ce5a70c6f906c6e5a20f56cc6783e/src/pipewirerecord.cpp#L82
+            switch (record.encoder) {
+                case PWRec.PipeWireRecord.H264Main:
+                case PWRec.PipeWireRecord.H264Baseline:
+                    record.output = RecordUtil.videoLocation("screen-recording.mp4");
+                    break;
+                case PWRec.PipeWireRecord.VP8:
+                case PWRec.PipeWireRecord.VP9:
+                    record.output = RecordUtil.videoLocation("screen-recording.webm");
+                    break;
+            }
         } else {
             RecordUtil.showNotification(i18n("New Screen Recording"), i18n("New Screen Recording saved in %1", record.output), record.output);
         }

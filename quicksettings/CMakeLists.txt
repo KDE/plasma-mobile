@@ -17,6 +17,6 @@ add_subdirectory(flashlight)
 add_subdirectory(nightcolor)
 add_subdirectory(powermenu)
 # TODO: Disable screen recording quick setting, as it does not work properly
-# add_subdirectory(record)
+add_subdirectory(record)
 add_subdirectory(screenshot)
 add_subdirectory(screenrotation)
