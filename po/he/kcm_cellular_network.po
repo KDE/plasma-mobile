@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-17 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2024-03-09 17:54+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -365,7 +365,7 @@ msgid "GuessNo"
 msgstr "לנחש לא"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:473 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "2G"
 msgstr "דור 2"
@@ -387,7 +387,7 @@ msgstr "דור 4"
 msgid "5G"
 msgstr "דור 5"
 
-#: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:509 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Any"
 msgstr "כלשהו"
@@ -522,60 +522,71 @@ msgstr "ספק נוכחי: %1"
 msgid "Scan For Networks"
 msgstr "סריקת לאיתור רשתות"
 
-#: ui/EditProfileDialog.qml:14
+#: ui/EditProfilePage.qml:15
 #, kde-format
 msgid "Edit APN"
 msgstr "עריכת נקודת גישה (APN)"
 
-#: ui/EditProfileDialog.qml:41
+#: ui/EditProfilePage.qml:15
+#, fuzzy, kde-format
+#| msgid "New PIN"
+msgid "New APN"
+msgstr "PIN חדש"
+
+#: ui/EditProfilePage.qml:30
 #, kde-format
 msgid "Name"
 msgstr "שם"
 
-#: ui/EditProfileDialog.qml:46
+#: ui/EditProfilePage.qml:38
 #, kde-format
 msgid "APN"
 msgstr "נקודת גישה (APN)"
 
-#: ui/EditProfileDialog.qml:51
+#: ui/EditProfilePage.qml:46
 #, kde-format
 msgid "Username"
 msgstr "שם משתמש"
 
-#: ui/EditProfileDialog.qml:56
+#: ui/EditProfilePage.qml:54
 #, kde-format
 msgid "Password"
 msgstr "סיסמה"
 
-#: ui/EditProfileDialog.qml:61
+#: ui/EditProfilePage.qml:62
 #, kde-format
 msgid "Network type"
 msgstr "סוג רשת"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "4G/3G/2G"
 msgstr "דור 4/דור 3/דור 2"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "3G/2G"
 msgstr "דור 3/דור 2"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 4G"
 msgstr "דור 4 בלבד"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 3G"
 msgstr "דור 3 בלבד"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 2G"
 msgstr "דור 2 בלבד"
+
+#: ui/EditProfilePage.qml:75
+#, kde-format
+msgid "Save profile"
+msgstr ""
 
 #: ui/main.qml:52
 #, kde-format
@@ -766,12 +777,12 @@ msgstr "נתיב SIM"
 msgid "APNs"
 msgstr "נקודות גישה (APN)"
 
-#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:88
 #, kde-format
 msgid "Edit"
 msgstr "עריכה"
 
-#: ui/ProfileList.qml:61
+#: ui/ProfileList.qml:53
 #, kde-format
 msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
@@ -780,22 +791,22 @@ msgstr ""
 "לא ניתן לזהות את הגדרות החיבור לספק שלך אוטומטית. נא לאתר את הגדרות נקודות "
 "הגישה (APN) של הספק שלך על ידי יצירת קשר עם התמיכה או בחיפוש באינטרנט."
 
-#: ui/ProfileList.qml:72
+#: ui/ProfileList.qml:64
 #, kde-format
 msgid "APN List"
 msgstr "רשימת נקודות גישה (APN)"
 
-#: ui/ProfileList.qml:107
+#: ui/ProfileList.qml:98
 #, kde-format
 msgid "Delete"
 msgstr "מחיקה"
 
-#: ui/ProfileList.qml:116
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Add APN"
 msgstr "הוספת נקודת גישה (APN)"
 
-#: ui/ProfileList.qml:125
+#: ui/ProfileList.qml:115
 #, kde-format
 msgid "Automatically detect APN"
 msgstr "זיהוי נקודת גישה (APN) אוטומטית"

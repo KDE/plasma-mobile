@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2024-05-17 01:05+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -40,12 +40,12 @@ msgstr "Kopijuoti vietą"
 msgid "Properties"
 msgstr "Savybės"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr "Įjungta"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr "Išjungta"

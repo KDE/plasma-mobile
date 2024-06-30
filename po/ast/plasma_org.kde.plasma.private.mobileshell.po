@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2023-05-14 22:58+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -38,12 +38,12 @@ msgstr ""
 msgid "Properties"
 msgstr "Propiedaes"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr ""
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2023-04-09 16:05+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -38,12 +38,12 @@ msgstr "Skopiuj położenie"
 msgid "Properties"
 msgstr "Właściwości"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr "Wł."
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr "Wył."

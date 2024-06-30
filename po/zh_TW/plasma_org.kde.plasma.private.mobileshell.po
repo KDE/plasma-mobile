@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2023-12-22 05:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -38,12 +38,12 @@ msgstr "複製位置"
 msgid "Properties"
 msgstr "屬性"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "On"
 msgstr "開啟"
 
-#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:98
+#: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
 msgid "Off"
 msgstr "關閉"

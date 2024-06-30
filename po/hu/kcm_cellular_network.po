@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-17 00:40+0000\n"
+"POT-Creation-Date: 2024-06-30 00:40+0000\n"
 "PO-Revision-Date: 2023-12-17 21:02+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -366,7 +366,7 @@ msgid "GuessNo"
 msgstr "Talán nem"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:473 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "2G"
 msgstr "2G"
@@ -388,7 +388,7 @@ msgstr "4G"
 msgid "5G"
 msgstr "5G"
 
-#: modemdetails.cpp:509 ui/EditProfileDialog.qml:62
+#: modemdetails.cpp:509 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Any"
 msgstr "Bármely"
@@ -523,60 +523,71 @@ msgstr "Jelenlegi szolgáltató: %1"
 msgid "Scan For Networks"
 msgstr "Hálózatkeresés"
 
-#: ui/EditProfileDialog.qml:14
+#: ui/EditProfilePage.qml:15
 #, kde-format
 msgid "Edit APN"
 msgstr "APN szerkesztése"
 
-#: ui/EditProfileDialog.qml:41
+#: ui/EditProfilePage.qml:15
+#, fuzzy, kde-format
+#| msgid "New PIN"
+msgid "New APN"
+msgstr "Új PIN"
+
+#: ui/EditProfilePage.qml:30
 #, kde-format
 msgid "Name"
 msgstr "Név"
 
-#: ui/EditProfileDialog.qml:46
+#: ui/EditProfilePage.qml:38
 #, kde-format
 msgid "APN"
 msgstr "APN"
 
-#: ui/EditProfileDialog.qml:51
+#: ui/EditProfilePage.qml:46
 #, kde-format
 msgid "Username"
 msgstr "Felhasználónév"
 
-#: ui/EditProfileDialog.qml:56
+#: ui/EditProfilePage.qml:54
 #, kde-format
 msgid "Password"
 msgstr "Jelszó"
 
-#: ui/EditProfileDialog.qml:61
+#: ui/EditProfilePage.qml:62
 #, kde-format
 msgid "Network type"
 msgstr "Hálózattípus"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "4G/3G/2G"
 msgstr "4G/3G/2G"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "3G/2G"
 msgstr "3G/2G"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 4G"
 msgstr "Csak 4G"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 3G"
 msgstr "Csak 3G"
 
-#: ui/EditProfileDialog.qml:62
+#: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 2G"
 msgstr "Csak 2G"
+
+#: ui/EditProfilePage.qml:75
+#, kde-format
+msgid "Save profile"
+msgstr ""
 
 #: ui/main.qml:52
 #, kde-format
@@ -765,12 +776,12 @@ msgstr "SIM útvonal"
 msgid "APNs"
 msgstr "APN-ek"
 
-#: ui/ProfileList.qml:26 ui/ProfileList.qml:96
+#: ui/ProfileList.qml:26 ui/ProfileList.qml:88
 #, kde-format
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: ui/ProfileList.qml:61
+#: ui/ProfileList.qml:53
 #, kde-format
 msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
@@ -780,22 +791,22 @@ msgstr ""
 "beállításokat. Kérjük, keresse meg a a szolgáltató APN-beállításait az "
 "ügyfélszolgálattal való kapcsolatfelvétellel vagy online kereséssel."
 
-#: ui/ProfileList.qml:72
+#: ui/ProfileList.qml:64
 #, kde-format
 msgid "APN List"
 msgstr "APN lista"
 
-#: ui/ProfileList.qml:107
+#: ui/ProfileList.qml:98
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: ui/ProfileList.qml:116
+#: ui/ProfileList.qml:107
 #, kde-format
 msgid "Add APN"
 msgstr "APN hozzáadása"
 
-#: ui/ProfileList.qml:125
+#: ui/ProfileList.qml:115
 #, kde-format
 msgid "Automatically detect APN"
 msgstr "APN automatikus felismerése"
