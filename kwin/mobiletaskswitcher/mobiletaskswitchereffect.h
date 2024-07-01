@@ -21,6 +21,8 @@
 #include <KLocalizedString>
 
 #include "effecttouchborder.h"
+#include "taskfiltermodel.h"
+#include "taskmodel.h"
 
 namespace KWin
 {
@@ -184,6 +186,7 @@ private:
 
     EffectTouchBorderState *const m_effectState;
     MobileTaskSwitcherState *const m_taskSwitcherState;
+    TaskModel *const m_taskModel;
     EffectTouchBorder *const m_border;
     QList<int> m_borderActivate = {ElectricBorder::ElectricBottom};
 

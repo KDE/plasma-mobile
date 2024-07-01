@@ -6,6 +6,8 @@ target_sources(mobiletaskswitcher PRIVATE
     main.cpp
     mobiletaskswitchereffect.cpp
     effecttouchborder.cpp
+    taskfiltermodel.cpp
+    taskmodel.cpp
 )
 
 target_link_libraries(mobiletaskswitcher
@@ -19,6 +21,7 @@ target_link_libraries(mobiletaskswitcher
     Qt::Core
 
     KWin::kwin
+    Plasma::Activities
 )
 
 # install(TARGETS kwin4_effect_taskswitcher DESTINATION ${PLUGIN_INSTALL_DIR}/kwin/effects/plugins)
