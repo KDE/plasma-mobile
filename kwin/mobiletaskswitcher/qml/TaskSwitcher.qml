@@ -39,33 +39,9 @@ FocusScope {
         stateClass: TaskSwitcherData.TaskSwitcherState
     }
 
-    KWinComponents.WindowModel {
-        id: stackModel
-    }
-
-    KWinComponents.VirtualDesktopModel {
-        id: desktopModel
-    }
-
-    property var baseTasksModel: KWinComponents.WindowFilterModel {
-        activity: KWinComponents.Workspace.currentActivity
-        desktop: KWinComponents.Workspace.currentDesktop
+    property var tasksModel: TaskSwitcherData.TaskFilterModel {
         screenName: root.targetScreen.name
-        windowModel: stackModel
-        minimizedWindows: true
-        windowType: ~KWinComponents.WindowFilterModel.Dock &
-                    ~KWinComponents.WindowFilterModel.Desktop &
-                    ~KWinComponents.WindowFilterModel.Notification &
-                    ~KWinComponents.WindowFilterModel.CriticalNotification
-    }
-
-    property var tasksModel: KSortFilterProxyModel {
-        sourceModel: baseTasksModel
-        filterRoleName: 'window'
-        filterRowCallback: function(source_row, source_parent) {
-            const window = sourceModel.data(sourceModel.index(source_row, 0, source_parent), Qt.DisplayRole);
-            return !window.skipSwitcher;
-        }
+        windowModel: TaskSwitcherData.TaskModel
     }
 
     readonly property int tasksCount: taskList.count

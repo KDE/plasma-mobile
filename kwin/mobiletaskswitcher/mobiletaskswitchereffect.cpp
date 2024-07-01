@@ -193,13 +193,18 @@ void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qr
 MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
     : m_effectState{new EffectTouchBorderState(this)}
     , m_taskSwitcherState{new MobileTaskSwitcherState(m_effectState)}
+    , m_taskModel{new TaskModel{this}}
     , m_border{new EffectTouchBorder{m_effectState}}
     , m_toggleAction{std::make_unique<QAction>()}
     , m_shutdownTimer{new QTimer{this}}
 {
     const char *uri = "org.kde.private.mobileshell.taskswitcher";
+    qmlRegisterType<TaskFilterModel>(uri, 1, 0, "TaskFilterModel");
+    qmlRegisterSingletonType<TaskModel>(uri, 1, 0, "TaskModel", [this](QQmlEngine *, QJSEngine *) -> QObject * {
+        return m_taskModel;
+    });
     qmlRegisterSingletonType<MobileTaskSwitcherState>(uri, 1, 0, "TaskSwitcherState", [this](QQmlEngine *, QJSEngine *) -> QObject * {
-        return this->m_taskSwitcherState;
+        return m_taskSwitcherState;
     });
 
     connect(m_border, &EffectTouchBorder::touchPositionChanged, m_taskSwitcherState, &MobileTaskSwitcherState::processTouchPositionChanged);
