@@ -17,6 +17,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     , m_homeScreenState{new HomeScreenState{this}}
     , m_widgetsManager{new WidgetsManager{this}}
     , m_applicationListModel{new ApplicationListModel{this}}
+    , m_applicationListSearchModel{new ApplicationListSearchModel{this, m_applicationListModel}}
     , m_favouritesModel{new FavouritesModel{this}}
     , m_pageListModel{new PageListModel{this}}
 {
@@ -26,6 +27,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     const char *uri = "org.kde.private.mobile.homescreen.folio";
     qmlRegisterUncreatableType<HomeScreen>(uri, 1, 0, "HomeScreen", "");
     qmlRegisterUncreatableType<ApplicationListModel>(uri, 1, 0, "ApplicationListModel", "");
+    qmlRegisterUncreatableType<ApplicationListSearchModel>(uri, 1, 0, "ApplicationListSearchModel", "");
     qmlRegisterUncreatableType<FavouritesModel>(uri, 1, 0, "FavouritesModel", "");
     qmlRegisterUncreatableType<PageListModel>(uri, 1, 0, "PageListModel", "");
     qmlRegisterUncreatableType<FolioSettings>(uri, 1, 0, "FolioSettings", "");
@@ -84,6 +86,11 @@ WidgetsManager *HomeScreen::widgetsManager()
 ApplicationListModel *HomeScreen::applicationListModel()
 {
     return m_applicationListModel;
+}
+
+ApplicationListSearchModel *HomeScreen::applicationListSearchModel()
+{
+    return m_applicationListSearchModel;
 }
 
 FavouritesModel *HomeScreen::favouritesModel()

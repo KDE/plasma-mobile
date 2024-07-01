@@ -27,6 +27,7 @@ class WidgetsManager;
 class HomeScreenState;
 class FavouritesModel;
 class ApplicationListModel;
+class ApplicationListSearchModel;
 
 class HomeScreen : public Plasma::Containment
 {
@@ -35,6 +36,7 @@ class HomeScreen : public Plasma::Containment
     Q_PROPERTY(HomeScreenState *HomeScreenState READ homeScreenState CONSTANT)
     Q_PROPERTY(WidgetsManager *WidgetsManager READ widgetsManager CONSTANT)
     Q_PROPERTY(ApplicationListModel *ApplicationListModel READ applicationListModel CONSTANT)
+    Q_PROPERTY(ApplicationListSearchModel *ApplicationListSearchModel READ applicationListSearchModel CONSTANT)
     Q_PROPERTY(FavouritesModel *FavouritesModel READ favouritesModel CONSTANT)
     Q_PROPERTY(PageListModel *PageListModel READ pageListModel CONSTANT)
 
@@ -48,6 +50,7 @@ public:
     HomeScreenState *homeScreenState();
     WidgetsManager *widgetsManager();
     ApplicationListModel *applicationListModel();
+    ApplicationListSearchModel *applicationListSearchModel();
     FavouritesModel *favouritesModel();
     PageListModel *pageListModel();
 
@@ -63,6 +66,7 @@ private:
     HomeScreenState *m_homeScreenState{nullptr};
     WidgetsManager *m_widgetsManager{nullptr};
     ApplicationListModel *m_applicationListModel{nullptr};
+    ApplicationListSearchModel *m_applicationListSearchModel{nullptr};
     FavouritesModel *m_favouritesModel{nullptr};
     PageListModel *m_pageListModel{nullptr};
 };

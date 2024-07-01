@@ -8,25 +8,64 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.private.mobile.homescreen.folio 1.0 as Folio
+import './delegate'
 
 Item {
     id: root
+    property Folio.HomeScreen folio
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     Kirigami.Theme.inherit: false
 
+    function clearSearchText(): void {
+        searchField.text = '';
+    }
+
     RowLayout {
-        anchors.topMargin: Kirigami.Units.smallSpacing
+        anchors.topMargin: Kirigami.Units.largeSpacing
         anchors.leftMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
         anchors.rightMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing
         anchors.fill: parent
-        spacing: Kirigami.Units.smallSpacing
 
-        QQC2.Label {
-            color: "white"
-            text: i18n("Applications")
+        Kirigami.SearchField {
+            id: searchField
+            onTextChanged: folio.ApplicationListSearchModel.setFilterFixedString(text)
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            Layout.alignment: Qt.AlignHCenter
+
+            background: Rectangle {
+                radius: Kirigami.Units.cornerRadius
+                color: Qt.rgba(255, 255, 255, (searchField.hovered || searchField.focus) ? 0.2 : 0.1)
+
+                Behavior on color { ColorAnimation {} }
+            }
+
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+            topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+            bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+            Layout.fillWidth: true
+
+            horizontalAlignment: QQC2.TextField.AlignHCenter
+            placeholderText: i18nc("@info:placeholder", "Search applications…")
+            placeholderTextColor: Qt.rgba(255, 255, 255, 0.8)
+            color: 'white'
+
             font.weight: Font.Bold
-            font.pointSize: Kirigami.Theme.defaultFont.pointSize * 1.5
+
+            Connections {
+                target: folio.HomeScreenState
+                function onViewStateChanged(): void {
+                    if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView) {
+                        // Reset search field if the app drawer is not shown
+                        if (searchField.text !== '') {
+                            searchField.text = '';
+                        }
+                    }
+                }
+            }
         }
     }
 }

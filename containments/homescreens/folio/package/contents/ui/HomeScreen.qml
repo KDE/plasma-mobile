@@ -413,8 +413,8 @@ Item {
             //       it doesn't mess with app drag and drop from the app drawer
             y: (opacity > 0) ? animationY : parent.height
 
-            headerHeight: Math.round(Kirigami.Units.gridUnit * 5)
-            headerItem: AppDrawerHeader {}
+            headerHeight: Math.round(Kirigami.Units.gridUnit * 4)
+            headerItem: AppDrawerHeader { folio: root.folio }
 
             // account for panels
             topPadding: root.topMargin

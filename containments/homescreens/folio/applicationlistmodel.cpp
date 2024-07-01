@@ -96,10 +96,17 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         return QVariant();
     }
 
+    FolioDelegate *delegate = m_delegates.at(index.row());
+
     switch (role) {
     case Qt::DisplayRole:
     case DelegateRole:
-        return QVariant::fromValue(m_delegates.at(index.row()));
+        return QVariant::fromValue(delegate);
+    case NameRole:
+        if (!delegate->application()) {
+            return QVariant();
+        }
+        return m_delegates.at(index.row())->application()->name();
     default:
         return QVariant();
     }
@@ -112,4 +119,12 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
     }
 
     return m_delegates.count();
+}
+
+ApplicationListSearchModel::ApplicationListSearchModel(HomeScreen *parent, ApplicationListModel *model)
+    : QSortFilterProxyModel(parent)
+{
+    setFilterCaseSensitivity(Qt::CaseInsensitive);
+    setSourceModel(model);
+    setFilterRole(ApplicationListModel::NameRole);
 }

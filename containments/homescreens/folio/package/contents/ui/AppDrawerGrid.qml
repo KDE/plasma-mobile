@@ -78,7 +78,7 @@ MobileShell.GridView {
         id: velocityCalculator
     }
 
-    model: folio.ApplicationListModel
+    model: folio.ApplicationListSearchModel
 
     delegate: AppDelegate {
         id: appDelegate

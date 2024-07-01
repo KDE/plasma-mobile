@@ -26,6 +26,7 @@ class ApplicationListModel : public QAbstractListModel
 public:
     enum Roles {
         DelegateRole = Qt::UserRole + 1,
+        NameRole,
     };
 
     ApplicationListModel(HomeScreen *parent = nullptr);
@@ -46,4 +47,12 @@ Q_SIGNALS:
 protected:
     HomeScreen *m_homeScreen{nullptr};
     QList<FolioDelegate *> m_delegates;
+};
+
+class ApplicationListSearchModel : public QSortFilterProxyModel
+{
+    Q_OBJECT
+
+public:
+    ApplicationListSearchModel(HomeScreen *parent = nullptr, ApplicationListModel *model = nullptr);
 };

@@ -44,6 +44,7 @@ Item {
         // drawer header
         MobileShell.BaseItem {
             id: drawerHeader
+            z: 1
             height: root.headerHeight
 
             anchors.top: parent.top
@@ -72,5 +73,3 @@ Item {
         }
     }
 }
-
-
