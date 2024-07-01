@@ -8,7 +8,7 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
     text: i18n("Flashlight")
-    icon: "flashlight-on"
+    icon: FlashlightUtil.torchEnabled ? "flashlight-on" : "flashlight-off"
     enabled: FlashlightUtil.torchEnabled
     available: FlashlightUtil.available
     function toggle() {

@@ -10,7 +10,7 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
     text: i18n("Airplane Mode")
-    icon: "network-flightmode-on"
+    icon: PlasmaNM.Configuration.airplaneModeEnabled ? "network-flightmode-on" : "network-flightmode-off"
     status: ""
     enabled: PlasmaNM.Configuration.airplaneModeEnabled
 

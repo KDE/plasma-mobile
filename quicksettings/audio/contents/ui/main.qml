@@ -9,7 +9,7 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
     text: i18n("Sound")
-    icon: "audio-speakers-symbolic"
+    icon: MobileShell.AudioInfo.icon
     status: i18n("%1%", MobileShell.AudioInfo.volumeValue)
     enabled: false
     settingsCommand: "plasma-open-settings kcm_pulseaudio"

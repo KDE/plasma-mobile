@@ -4,6 +4,7 @@
 import QtQuick 2.15
 
 import org.kde.bluezqt 1.0 as BluezQt
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
@@ -13,7 +14,7 @@ QS.QuickSetting {
     id: root
 
     text: i18n("Bluetooth")
-    icon: "network-bluetooth"
+    icon: MobileShell.BluetoothInfo.icon
     settingsCommand: "plasma-open-settings kcm_bluetooth"
     function toggle() {
         const enable = !btManager.bluetoothOperational;
