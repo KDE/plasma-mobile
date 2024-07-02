@@ -13,6 +13,7 @@
 #include "savedquicksettingsmodel.h"
 
 #include <QAbstractListModel>
+#include <QQmlComponent>
 #include <QQmlListProperty>
 
 class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
@@ -38,9 +39,19 @@ Q_SIGNALS:
 
 private:
     void loadQuickSettings();
-    void availabilityChanged();
+    void availabilityChanged(KPluginMetaData metaData, QuickSetting *quickSetting);
 
-    bool m_loaded = false;
+    void loadQuickSetting(KPluginMetaData metaData, bool emitInsertSignal);
+    void removeQuickSetting(int index);
+
+    void afterQuickSettingLoad(QQmlEngine *engine, KPluginMetaData metaData, QQmlComponent *component, bool emitInsertSignal);
+    void insertQuickSettingToModel(KPluginMetaData metaData, QuickSetting *quickSetting, bool emitInsertSignal);
+
+    bool m_loaded{false};
+
+    // m_quickSettings and m_quickSettingsMetaData indices match to same quick setting
     QList<QuickSetting *> m_quickSettings;
-    SavedQuickSettings *m_savedQuickSettings;
+    QList<KPluginMetaData> m_quickSettingsMetaData;
+
+    SavedQuickSettings *m_savedQuickSettings{nullptr};
 };
