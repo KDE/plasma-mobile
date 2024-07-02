@@ -45,17 +45,17 @@ msgstr "如果此选项被关闭，动效将被减少到最低程度。"
 #: ui/main.qml:53
 #, kde-format
 msgid "Status bar"
-msgstr ""
+msgstr "状态栏"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "在状态栏中显示日期"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "如果开启，将在状态栏中的时钟旁边显示日期。"
 
 #: ui/main.qml:71
 #, kde-format

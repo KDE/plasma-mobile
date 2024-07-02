@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-01 23:30+0000\n"
+"POT-Creation-Date: 2024-07-02 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,7 +18,7 @@ msgstr ""
 "quicksetting.bluetooth.pot\n"
 "X-Crowdin-File-ID: 43259\n"
 
-#: contents/ui/main.qml:15
+#: contents/ui/main.qml:16
 #, kde-format
 msgid "Bluetooth"
 msgstr "蓝牙"

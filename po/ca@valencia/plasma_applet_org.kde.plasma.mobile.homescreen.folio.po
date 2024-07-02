@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-23 00:40+0000\n"
+"POT-Creation-Date: 2024-07-02 00:40+0000\n"
 "PO-Revision-Date: 2024-02-09 09:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -24,9 +24,11 @@ msgstr ""
 msgid "Folder"
 msgstr "Carpeta"
 
-#: package/contents/ui/AppDrawerHeader.qml:27
-#, kde-format
-msgid "Applications"
+#: package/contents/ui/AppDrawerHeader.qml:52
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@info:placeholder"
+msgid "Search applications…"
 msgstr "Aplicacions"
 
 #: package/contents/ui/FavouritesBar.qml:149

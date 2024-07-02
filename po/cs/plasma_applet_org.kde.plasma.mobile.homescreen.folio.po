@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-23 00:40+0000\n"
+"POT-Creation-Date: 2024-07-02 00:40+0000\n"
 "PO-Revision-Date: 2024-05-30 09:48+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -23,9 +23,11 @@ msgstr ""
 msgid "Folder"
 msgstr "Složka"
 
-#: package/contents/ui/AppDrawerHeader.qml:27
-#, kde-format
-msgid "Applications"
+#: package/contents/ui/AppDrawerHeader.qml:52
+#, fuzzy, kde-format
+#| msgid "Applications"
+msgctxt "@info:placeholder"
+msgid "Search applications…"
 msgstr "Aplikace"
 
 #: package/contents/ui/FavouritesBar.qml:149

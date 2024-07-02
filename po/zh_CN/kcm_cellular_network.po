@@ -527,10 +527,9 @@ msgid "Edit APN"
 msgstr "编辑 APN"
 
 #: ui/EditProfilePage.qml:15
-#, fuzzy, kde-format
-#| msgid "New PIN"
+#, kde-format
 msgid "New APN"
-msgstr "新 PIN 码"
+msgstr ""
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
