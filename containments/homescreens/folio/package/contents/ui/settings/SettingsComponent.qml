@@ -190,6 +190,11 @@ Item {
             onClosed: {
                 wallpaperSelectorLoader.active = false;
             }
+
+            onWallpaperSettingsRequested: {
+                close();
+                homeScreen.openConfigure();
+            }
         }
     }
 }
