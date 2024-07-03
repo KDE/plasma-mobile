@@ -529,7 +529,7 @@ msgstr "编辑 APN"
 #: ui/EditProfilePage.qml:15
 #, kde-format
 msgid "New APN"
-msgstr ""
+msgstr "新建 APN"
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
@@ -584,7 +584,7 @@ msgstr "仅 2G"
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "保存方案"
 
 #: ui/main.qml:52
 #, kde-format

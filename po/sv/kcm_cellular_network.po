@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-30 00:40+0000\n"
-"PO-Revision-Date: 2024-06-21 11:24+0200\n"
+"PO-Revision-Date: 2024-07-02 21:49+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -527,10 +527,9 @@ msgid "Edit APN"
 msgstr "Redigera APN"
 
 #: ui/EditProfilePage.qml:15
-#, fuzzy, kde-format
-#| msgid "New PIN"
+#, kde-format
 msgid "New APN"
-msgstr "Ny PIN-kod"
+msgstr "Ny APN"
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
@@ -585,7 +584,7 @@ msgstr "Bara 2G"
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "Spara profil"
 
 #: ui/main.qml:52
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2024-07-03 00:40+0000\n"
 "PO-Revision-Date: 2022-12-23 21:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -47,12 +47,12 @@ msgstr "Ekran yakalanıyor…"
 msgid "Please wait…"
 msgstr "Lütfen bekleyin…"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Yeni Ekran Kaydı"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Yeni ekran kaydı, %1 konumuna kaydedildi"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2024-07-03 00:40+0000\n"
 "PO-Revision-Date: 2022-12-28 08:37+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -48,12 +48,12 @@ msgstr "მიმდინარეობს ეკრანის ჩაწე�
 msgid "Please wait…"
 msgstr "გთხოვთ, მოითმინოთ…"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording"
 msgstr "ახალი ეკრანის ჩაწერა"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "ახალი ეკრანის ჩანაწერი შენახულია %1-ში"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2024-07-03 00:40+0000\n"
 "PO-Revision-Date: 2023-12-22 05:31+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -47,12 +47,12 @@ msgstr "螢幕正被擷取…"
 msgid "Please wait…"
 msgstr "請稍候…"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording"
 msgstr "新的螢幕錄製"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "新的螢幕錄製已儲存於 %1"

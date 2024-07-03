@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:48+0000\n"
+"POT-Creation-Date: 2024-07-03 00:40+0000\n"
 "PO-Revision-Date: 2023-01-04 18:27+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -50,12 +50,12 @@ msgstr "Pantaila atzematen ari da..."
 msgid "Please wait…"
 msgstr "Itxoin mesedez..."
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Pantaila grabazio berria"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Pantaila grabazio berria %1(e)an gorde da"
