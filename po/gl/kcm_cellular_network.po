@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 02:35+0000\n"
-"PO-Revision-Date: 2024-06-23 13:03+0200\n"
+"PO-Revision-Date: 2024-07-02 17:44+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -525,7 +525,7 @@ msgstr "Buscar redes"
 #: ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr "Editar o NPA"
+msgstr "Editar o APN"
 
 #: ui/EditProfileDialog.qml:41
 #, kde-format
@@ -600,7 +600,8 @@ msgstr "Este módem non ten datos móbiles dispoñíbeis."
 #: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr "Para ter datos móbiles necesita configurar un APN."
+msgstr ""
+"Para ter datos móbiles necesita configurar un nome de punto de acceso (APN)."
 
 #: ui/main.qml:82
 #, kde-format
@@ -776,8 +777,9 @@ msgid ""
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
 "Non é posíbel detectar automaticamente a configuración de conexión do seu "
-"fornecedor. Descubra a configuración de APN do seu fornecedor, ben sexa "
-"contactando co seu servizo de asistencia técnica ou buscándoa por Internet."
+"fornecedor. Descubra a configuración de nome de punto de acceso (APN) do seu "
+"fornecedor, ben sexa contactando co seu servizo de asistencia técnica ou "
+"buscándoa por Internet."
 
 #: ui/ProfileList.qml:72
 #, kde-format
