@@ -83,8 +83,18 @@ Item {
             id: flickable
             anchors.fill: parent
 
+            // Speed up animation when passwordless
+            animationDuration: root.lockScreenState.canBeUnlocked ? 400 : 800
+
             // Distance to swipe to fully open keypad
             keypadHeight: Kirigami.Units.gridUnit * 20
+
+            // Unlock lockscreen if it's already unlocked
+            onOpened: {
+                if (root.lockScreenState.canBeUnlocked) {
+                    Qt.quit();
+                }
+            }
 
             // Clear entered password after closing keypad
             onOpenFactorChanged: {
@@ -142,6 +152,7 @@ Item {
 
             Keypad {
                 id: keypad
+                visible: !root.lockScreenState.canBeUnlocked // don't show for passwordless login
                 anchors.fill: parent
                 openProgress: flickable.openFactor
                 lockScreenState: root.lockScreenState

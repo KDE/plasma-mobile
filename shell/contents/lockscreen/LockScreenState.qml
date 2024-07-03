@@ -18,8 +18,8 @@ QtObject {
     // the info message given
     property string info: ""
 
-    // whether the lockscreen was passwordless
-    property bool passwordless: false // TODO true
+    // whether the lockscreen can be unlocked (no password needed, passwordless login)
+    readonly property bool canBeUnlocked: authenticator.unlocked
 
     // whether the device can log in with fingerprint
     readonly property bool isFingerprintSupported: authenticator.authenticatorTypes & ScreenLocker.Authenticator.Fingerprint
@@ -38,9 +38,14 @@ QtObject {
     Component.onCompleted: authenticator.startAuthenticating();
 
     function tryPassword() {
-        if (root.password !== '') { // prevent typing lock when password is empty
+        // ensure it's in authenticating state (it might get unset after suspend)
+        authenticator.startAuthenticating();
+
+        // prevent typing lock when password is empty
+        if (root.password !== '') {
             root.waitingForAuth = true;
         }
+        console.log('attempt password');
         authenticator.respond(root.password);
     }
 
@@ -66,10 +71,12 @@ QtObject {
         target: authenticator
 
         function onSucceeded() {
-            console.log('login succeeded');
-            root.waitingForAuth = false;
-            root.unlockSucceeded();
-            Qt.quit();
+            if (authenticator.hadPrompt) {
+                console.log('login succeeded');
+                root.waitingForAuth = false;
+                root.unlockSucceeded();
+                Qt.quit();
+            }
         }
 
         function onFailed(kind: int): void {

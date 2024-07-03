@@ -11,6 +11,8 @@ MobileShell.SwipeArea {
     id: root
     required property real keypadHeight
 
+    property real animationDuration
+
     readonly property real openFactor: position / keypadHeight
     property real position: 0
     property bool movingUp: false
@@ -47,7 +49,7 @@ MobileShell.SwipeArea {
 
     NumberAnimation on position {
         id: positionAnim
-        duration: 800
+        duration: root.animationDuration
         easing.type: Easing.OutExpo
 
         onFinished: {
