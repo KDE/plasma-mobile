@@ -121,19 +121,6 @@ Item {
 
 //END API implementation
 
-    Connections {
-        target: MobileShellState.LockscreenDBusClient
-
-        function onLockscreenLocked() {
-            itemContainer.zoomOut();
-        }
-
-        function onLockscreenUnlocked() {
-            // run zoom animation after login
-            itemContainer.zoomIn();
-        }
-    }
-
     Component.onCompleted: {
         // determine the margins used
         evaluateMargins();
