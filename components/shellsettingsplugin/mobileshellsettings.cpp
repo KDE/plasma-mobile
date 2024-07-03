@@ -9,6 +9,7 @@
 #include <KIO/CommandLauncherJob>
 #include <KNotificationJobUiDelegate>
 #include <KPluginFactory>
+#include <KRuntimePlatform>
 
 #include <QDBusConnection>
 #include <QDBusMessage>
@@ -168,6 +169,12 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
 
 void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)
 {
+    // Do not update panels when not in Plasma Mobile
+    bool isMobilePlatform = KRuntimePlatform::runtimePlatform().contains("phone");
+    if (!isMobilePlatform) {
+        return;
+    }
+
     auto message = QDBusMessage::createMethodCall(QLatin1String("org.kde.plasmashell"),
                                                   QLatin1String("/PlasmaShell"),
                                                   QLatin1String("org.kde.PlasmaShell"),
