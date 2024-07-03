@@ -31,7 +31,7 @@
         "Description[x-test]": "xxAllows you to switch between running tasks with a mobile interface.xx",
         "Description[zh_CN]": "允许您使用移动界面在正在运行的任务之间切换。",
         "Description[zh_TW]": "讓您用手機介面在執行中的工作項目之間切換。",
-        "EnabledByDefault": true,
+        "EnabledByDefault": false,
         "License": "GPL",
         "Name": "Mobile Task Switcher",
         "Name[ca@valencia]": "Commutador de tasques del mòbil",
