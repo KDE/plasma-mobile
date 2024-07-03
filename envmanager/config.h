@@ -44,7 +44,8 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
             {"Plugins",
              {
                  {"blurEnabled", false}, // disable blur for performance reasons, we could reconsider in the future for more powerful devices
-                 {"convergentwindowsEnabled", true} // enable our convergent window plugin
+                 {"convergentwindowsEnabled", true}, // enable our convergent window plugin
+                 {"mobiletaskswitcherEnabled", true} // ensure the mobile task switcher plugin is enabled
              }},
             {"Wayland",
              {
