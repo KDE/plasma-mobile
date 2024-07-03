@@ -65,7 +65,7 @@ Item {
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         source: 'edit-image'
                     }
-                    
+
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         text: i18n('Wallpapers')
@@ -93,7 +93,7 @@ Item {
                         implicitHeight: Kirigami.Units.iconSizes.smallMedium
                         source: 'settings-configure'
                     }
-                    
+
                     QQC2.Label {
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
                         text: i18n('Settings')
@@ -126,6 +126,10 @@ Item {
             rightMargin: root.rightMargin
             onClosed: {
                 wallpaperSelectorLoader.active = false;
+            }
+            onWallpaperSettingsRequested: {
+                close();
+                root.homeScreen.openContainmentSettings();
             }
         }
     }

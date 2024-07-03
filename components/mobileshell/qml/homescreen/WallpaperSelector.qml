@@ -15,24 +15,26 @@ import org.kde.plasma.private.mobileshell.wallpaperimageplugin as WallpaperImage
 Controls.Drawer {
     id: imageWallpaperDrawer
     dragMargin: 0
-    
+
     required property bool horizontal
+
+    signal wallpaperSettingsRequested()
 
     onOpened: {
         wallpapersView.forceActiveFocus()
     }
-    
+
     implicitWidth: Kirigami.Units.gridUnit * 10
     implicitHeight: Kirigami.Units.gridUnit * 8
     width: imageWallpaperDrawer.horizontal ? implicitWidth : parent.width
     height: imageWallpaperDrawer.horizontal ? parent.height : implicitHeight
-    
+
     Wallpaper.ImageBackend {
         id: imageWallpaper
     }
-    
+
     background: null
-    
+
     ListView {
         id: wallpapersView
         anchors.fill: parent
@@ -45,7 +47,37 @@ Controls.Drawer {
         snapMode: ListView.SnapToItem
         model: imageWallpaper.wallpaperModel
         // onCountChanged: currentIndex =  Math.min(model.indexOf(configDialog.wallpaperConfiguration["Image"]), model.rowCount()-1)
-        headerPositioning: ListView.PullBackHeader
+        headerPositioning: ListView.InlineHeader
+
+        header: Controls.ItemDelegate {
+            id: openSettings
+            width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : parent.height
+            padding: Kirigami.Units.gridUnit / 2
+            leftPadding: padding
+            topPadding: padding
+            rightPadding: padding
+            bottomPadding: padding
+
+            background: Rectangle {
+                color: Qt.rgba(255, 255, 255, (openSettings.down || openSettings.highlighted) ? 0.3 : 0.2)
+                radius: Kirigami.Units.gridUnit / 4
+                anchors.fill: parent
+                anchors.margins: Kirigami.Units.gridUnit / 4
+            }
+
+            contentItem: Item {
+                Kirigami.Icon {
+                    anchors.centerIn: parent
+                    implicitHeight: Kirigami.Units.iconSizes.large
+                    implicitWidth: Kirigami.Units.iconSizes.large
+                    source: 'list-add'
+                }
+            }
+
+            onClicked: imageWallpaperDrawer.wallpaperSettingsRequested()
+            Keys.onReturnPressed: clicked();
+        }
 
         delegate: Controls.ItemDelegate {
             width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
@@ -68,7 +100,7 @@ Controls.Drawer {
                     wallpapersView.currentIndex = index;
                 }
             }
-            
+
             z: wallpapersView.currentIndex === index ? 2 : 0
             contentItem: Item {
                 Kirigami.Icon {
