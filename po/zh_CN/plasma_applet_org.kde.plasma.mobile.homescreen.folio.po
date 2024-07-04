@@ -143,7 +143,7 @@ msgstr "常规"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "在主屏幕和更多壁纸选项间切换"
+msgstr "切换主屏幕和更多壁纸选项"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
