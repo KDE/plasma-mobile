@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2016, 2023 Vít Pelčák <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2016, 2023, 2024 Vít Pelčák <vit@pelcak.org>
 # SPDX-FileCopyrightText: 2024 Vit Pelcak <vit@pelcak.org>
 #
 msgid ""
@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 00:40+0000\n"
-"PO-Revision-Date: 2024-05-30 09:48+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2024-07-03 10:43+0200\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -24,11 +24,10 @@ msgid "Folder"
 msgstr "Složka"
 
 #: package/contents/ui/AppDrawerHeader.qml:52
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "Aplikace"
+msgstr "Hledat aplikace…"
 
 #: package/contents/ui/FavouritesBar.qml:149
 #: package/contents/ui/FavouritesBar.qml:223
