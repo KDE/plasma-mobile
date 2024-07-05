@@ -1,16 +1,16 @@
 # Translation for kcm_mobileshell.po to Euskara/Basque (eu).
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2023-11-07 23:37+0100\n"
+"PO-Revision-Date: 2024-07-04 13:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -48,17 +48,17 @@ msgstr "Hau itzalita badago, animazioak ahalik gehien murriztuko dira."
 #: ui/main.qml:53
 #, kde-format
 msgid "Status bar"
-msgstr ""
+msgstr "Egoera-barra"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Data egoera-barran"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "Aktibatuta badago, data erlojuaren ondoan erakutsiko da egoera-barran."
 
 #: ui/main.qml:71
 #, kde-format
