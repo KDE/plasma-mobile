@@ -156,13 +156,14 @@ FocusScope {
             let shouldSwitch = false;
             if (state.xVelocity > 0 && state.wasInActiveTask) {
                 // flick to the right, go to app to the left
-                newIndex = state.currentTaskIndex + 1, tasksCount - 1;
+                newIndex = state.currentTaskIndex + 1;
                 if (newIndex < tasksCount) {
                     // switch only if flick doesn't go over end of list
                     shouldSwitch = true;
                 }
             } else if (state.xVelocity < 0 && state.wasInActiveTask) {
-                newIndex = Math.max(state.currentTaskIndex - 1, 0);
+                // flick to the left, go to app to the right
+                newIndex = state.currentTaskIndex - 1;
                 if (newIndex >= 0) {
                     // switch only if flick doesn't go over end of list
                     shouldSwitch = true;
