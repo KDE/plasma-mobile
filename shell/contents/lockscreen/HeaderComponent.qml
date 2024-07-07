@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2021-2022 Devin Lin <espidev@gmail.com>
+ * SPDX-FileCopyrightText: 2021-2024 Devin Lin <espidev@gmail.com>
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.components 3.0 as PC3
 
 import org.kde.notificationmanager as NotificationManager
 
@@ -30,6 +31,22 @@ Item {
             statusBarLoader.active = true
             actionDrawerLoader.active = true
         }
+    }
+
+    // Add loading indicator when status bar has not loaded yet
+    PC3.BusyIndicator {
+        id: statusBarLoadingIndication
+        anchors.top: parent.top
+        anchors.right: parent.right
+        anchors.topMargin: Kirigami.Units.smallSpacing
+        anchors.rightMargin: Kirigami.Units.smallSpacing
+        visible: statusBarLoader.status != Loader.Ready
+
+        implicitHeight: root.statusBarHeight
+        implicitWidth: root.statusBarHeight
+
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
     }
 
     // Status bar
