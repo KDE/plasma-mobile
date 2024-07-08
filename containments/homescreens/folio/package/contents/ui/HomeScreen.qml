@@ -107,8 +107,10 @@ Item {
                 folio.HomeScreenState.swipeState === Folio.HomeScreenState.SwipingAppDrawerGrid ||
                 folio.HomeScreenState.viewState !== Folio.HomeScreenState.AppDrawerView)
 
-        onSwipeStarted: {
-            homeScreenState.swipeStarted();
+        onSwipeStarted: (currentPos, startPos) => {
+            const deltaX = currentPos.x - startPos.x;
+            const deltaY = currentPos.y - startPos.y;
+            homeScreenState.swipeStarted(deltaX, deltaY);
         }
         onSwipeEnded: {
             homeScreenState.swipeEnded();
