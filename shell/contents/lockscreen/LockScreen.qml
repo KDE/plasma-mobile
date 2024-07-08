@@ -103,10 +103,20 @@ Item {
             // Distance to swipe to fully open keypad
             keypadHeight: Kirigami.Units.gridUnit * 20
 
-            // Unlock lockscreen if it's already unlocked
+            // Unlock lockscreen if it's already unlocked and keypad is opened
             onOpened: {
                 if (root.lockScreenState.canBeUnlocked) {
                     Qt.quit();
+                }
+            }
+
+            // Unlock lockscreen if it's already unlocked and keypad is open
+            Connections {
+                target: root.lockScreenState
+                function onCanBeUnlockedChanged() {
+                    if (root.lockScreenState.canBeUnlocked && flickable.openFactor > 0.8) {
+                        Qt.quit();
+                    }
                 }
             }
 
