@@ -334,7 +334,7 @@ public Q_SLOTS:
     void cancelDelegateDrag();
 
     // from SwipeArea
-    void swipeStarted();
+    void swipeStarted(qreal deltaX, qreal deltaY);
     void swipeEnded();
     void swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
 

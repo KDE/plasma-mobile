@@ -284,7 +284,7 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
         m_lastPos = point;
         m_stealMouse = true;
         setMoving(true);
-        Q_EMIT swipeStarted(m_startPos);
+        Q_EMIT swipeStarted(m_startPos, m_pressPos);
     }
 
     const QVector2D totalDelta = QVector2D(point - m_startPos);

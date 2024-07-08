@@ -52,7 +52,7 @@ Q_SIGNALS:
     void pressedChanged();
 
     void swipeEnded();
-    void swipeStarted(QPointF point);
+    void swipeStarted(QPointF currentPoint, QPointF startPoint); // we let the user move a couple of pixels for swipe detection
 
     // deltaX, deltaY - amount moved since last swipeMove()
     // totalDeltaX, totalDeltaY - amount move since startedSwipe()

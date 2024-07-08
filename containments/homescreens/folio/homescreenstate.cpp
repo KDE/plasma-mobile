@@ -868,13 +868,17 @@ void HomeScreenState::cancelDelegateDrag()
     swipeEnded();
 }
 
-void HomeScreenState::swipeStarted()
+void HomeScreenState::swipeStarted(qreal deltaX, qreal deltaY)
 {
     if (m_swipeState != SwipeState::None) {
         return;
     }
 
     setSwipeState(SwipeState::DeterminingSwipeType);
+
+    // the user interaction has already moved a bit (for swipe detection),
+    // so we call the move event too.
+    swipeMoved(deltaX, deltaY, deltaX, deltaY);
 }
 
 void HomeScreenState::swipeEnded()
