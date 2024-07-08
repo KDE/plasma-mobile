@@ -81,7 +81,7 @@ ContainmentItem {
         }
 
         if (isInWindow) {
-            // only minimize windows and go to homescreen when not in docked mode
+            // Only minimize windows and go to homescreen when not in docked mode
             if (!ShellSettings.Settings.convergenceModeEnabled) {
                 folio.HomeScreenState.closeFolder();
                 folio.HomeScreenState.closeSearchWidget();
@@ -90,7 +90,13 @@ ContainmentItem {
 
                 WindowPlugin.WindowUtil.minimizeAll();
             }
-        } else { // if we are on the homescreen
+
+            // Always ensure settings view is closed
+            if (folio.HomeScreenState.viewState == Folio.HomeScreenState.SettingsView) {
+                folio.HomeScreenState.closeSettingsView();
+            }
+
+        } else { // If we are already on the homescreen
             switch (folio.HomeScreenState.viewState) {
                 case Folio.HomeScreenState.PageView:
                     if (folio.HomeScreenState.currentPage === 0) {
@@ -107,6 +113,9 @@ ContainmentItem {
                     break;
                 case Folio.HomeScreenState.FolderView:
                     folio.HomeScreenState.closeFolder();
+                    break;
+                case Folio.HomeScreenState.SettingsView:
+                    folio.HomeScreenState.closeSettingsView();
                     break;
             }
         }
