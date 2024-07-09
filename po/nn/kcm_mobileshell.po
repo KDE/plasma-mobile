@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2024-03-17 11:07+0100\n"
+"PO-Revision-Date: 2024-07-08 22:03+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.05.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -46,12 +46,12 @@ msgstr "Viss dette er av, vert animasjonane reduserte så mykje som mogleg."
 #: ui/main.qml:53
 #, kde-format
 msgid "Status bar"
-msgstr ""
+msgstr "Statuslinje"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Dato i statuslinje"
 
 #: ui/main.qml:60
 #, kde-format
