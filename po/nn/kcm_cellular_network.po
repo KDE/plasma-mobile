@@ -1,12 +1,11 @@
 # Translation of kcm_cellular_network to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 02:35+0000\n"
-"PO-Revision-Date: 2023-03-04 15:51+0100\n"
+"PO-Revision-Date: 2024-07-08 22:06+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.05.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -348,12 +347,12 @@ msgstr ""
 #: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
-msgstr ""
+msgstr "Ja"
 
 #: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
-msgstr ""
+msgstr "Nei"
 
 #: modemdetails.cpp:434
 #, kde-format
@@ -406,77 +405,77 @@ msgstr ""
 #: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
-msgstr ""
+msgstr "SIM krev PIN-kode."
 
 #: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
-msgstr ""
+msgstr "SIM krev PIN2-kode."
 
 #: sim.cpp:82
 #, kde-format
 msgid "SIM requires the PUK code."
-msgstr ""
+msgstr "SIM krev PUK-kode."
 
 #: sim.cpp:84
 #, kde-format
 msgid "SIM requires the PUK2 code."
-msgstr ""
+msgstr "SIM krev PUK2-kode."
 
 #: sim.cpp:86
 #, kde-format
 msgid "Modem requires the service provider PIN code."
-msgstr ""
+msgstr "Modemet treng PIN-koden til tenesteleverandøren."
 
 #: sim.cpp:88
 #, kde-format
 msgid "Modem requires the service provider PUK code."
-msgstr ""
+msgstr "Modemet treng PUK-koden til tenesteleverandøren."
 
 #: sim.cpp:90
 #, kde-format
 msgid "Modem requires the network PIN code."
-msgstr ""
+msgstr "Modemet treng PIN-koden til nettverket."
 
 #: sim.cpp:92
 #, kde-format
 msgid "Modem requires the network PUK code."
-msgstr ""
+msgstr "Modemet treng PUK-koden til nettverket."
 
 #: sim.cpp:94
 #, kde-format
 msgid "Modem requires the PIN code."
-msgstr ""
+msgstr "Modemet krev PIN-koden."
 
 #: sim.cpp:96
 #, kde-format
 msgid "Modem requires the corporate PIN code."
-msgstr ""
+msgstr "Modemet krev PIN-koden til firmaet."
 
 #: sim.cpp:98
 #, kde-format
 msgid "Modem requires the corporate PUK code."
-msgstr ""
+msgstr "Modemet krev PUK-koden til firmaet."
 
 #: sim.cpp:100
 #, kde-format
 msgid "Modem requires the PH-FSIM PIN code."
-msgstr ""
+msgstr "Modemet krev PH-FSIM PIN-koden."
 
 #: sim.cpp:102
 #, kde-format
 msgid "Modem requires the PH-FSIM PUK code."
-msgstr ""
+msgstr "Modemet krev PH-FSIM PUK-koden."
 
 #: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
-msgstr ""
+msgstr "Modemet krev PIN-koden til undernettverket."
 
 #: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
-msgstr ""
+msgstr "Modemet krev PUK-koden til undernettverket."
 
 #: sim.cpp:150
 #, kde-format
@@ -581,7 +580,7 @@ msgstr "Berre 2G"
 #: ui/main.qml:52
 #, kde-format
 msgid "Modem not available"
-msgstr ""
+msgstr "Modem ikkje tilgjengeleg"
 
 #: ui/main.qml:71
 #, kde-format
@@ -611,16 +610,15 @@ msgstr ""
 #: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
-msgstr ""
+msgstr "Databruk"
 
 #: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
-msgstr ""
+msgstr "Vis databruk."
 
 #: ui/main.qml:122 ui/SimPage.qml:35
-#, fuzzy, kde-format
-#| msgid "SIM"
+#, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
 msgstr[0] "SIM"
@@ -629,17 +627,17 @@ msgstr[1] "SIM"
 #: ui/main.qml:143
 #, kde-format
 msgid "SIM %1"
-msgstr ""
+msgstr "SIM %1"
 
 #: ui/main.qml:144
 #, kde-format
 msgid "View SIM %1 details."
-msgstr ""
+msgstr "Vis SIM %1-detaljar."
 
 #: ui/ModemPage.qml:20
 #, kde-format
 msgid "Modem %1"
-msgstr ""
+msgstr "Modem %1"
 
 #: ui/ModemPage.qml:30
 #, kde-format
@@ -654,7 +652,7 @@ msgstr ""
 #: ui/ModemPage.qml:42 ui/SimPage.qml:105
 #, kde-format
 msgid "Modem Details"
-msgstr ""
+msgstr "Modemdetaljar"
 
 #: ui/ModemPage.qml:55
 #, kde-format
@@ -781,7 +779,7 @@ msgstr ""
 #: ui/ProfileList.qml:72
 #, kde-format
 msgid "APN List"
-msgstr ""
+msgstr "APN-liste"
 
 #: ui/ProfileList.qml:107
 #, kde-format
@@ -844,7 +842,7 @@ msgstr ""
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr ""
+msgstr "Byt PIN"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
@@ -859,17 +857,17 @@ msgstr "Lås opp SIM-kort"
 #: ui/SimLockPage.qml:114
 #, kde-format
 msgid "Attempts left: %1"
-msgstr ""
+msgstr "Forsøk att: %1"
 
 #: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
-msgstr ""
+msgstr "Skriv inn PIN"
 
 #: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "Byt SIM-PIN"
 
 #: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
@@ -884,27 +882,27 @@ msgstr ""
 #: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
 msgid "Current PIN"
-msgstr ""
+msgstr "Gjelande PIN"
 
 #: ui/SimLockPage.qml:161 ui/SimLockPage.qml:221
 #, kde-format
 msgid "New PIN"
-msgstr ""
+msgstr "Ny PIN"
 
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr ""
+msgstr "Stadfest PIN"
 
 #: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr ""
+msgstr "Fjern SIM-PIN"
 
 #: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
-msgstr ""
+msgstr "Legg til SIM-PIN"
 
 #: ui/SimPage.qml:45
 #, kde-format
@@ -916,7 +914,7 @@ msgstr ""
 #: ui/SimPage.qml:60
 #, kde-format
 msgid "Data Roaming"
-msgstr ""
+msgstr "Nettveksling"
 
 #: ui/SimPage.qml:61
 #, kde-format
@@ -926,7 +924,7 @@ msgstr ""
 #: ui/SimPage.qml:72
 #, kde-format
 msgid "Modify APNs"
-msgstr ""
+msgstr "Rediger APN-ar"
 
 #: ui/SimPage.qml:73
 #, kde-format
@@ -936,7 +934,7 @@ msgstr ""
 #: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
-msgstr ""
+msgstr "Nettverk"
 
 #: ui/SimPage.qml:84
 #, kde-format
@@ -956,7 +954,7 @@ msgstr ""
 #: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
-msgstr ""
+msgstr "SIM-detaljar"
 
 #: ui/SimPage.qml:126
 #, kde-format
@@ -991,7 +989,7 @@ msgstr ""
 #: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
-msgstr ""
+msgstr "SIM-ID"
 
 #: ui/SimPage.qml:190
 #, kde-format
