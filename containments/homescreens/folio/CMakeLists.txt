@@ -1,6 +1,8 @@
 # SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
+add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.mobile.homescreen.folio\")
+
 set(homescreen_SRCS
     homescreen.cpp
     applicationlistmodel.cpp
