@@ -50,9 +50,9 @@ void SavedQuickSettingsModel::moveRow(int oldIndex, int newIndex)
 
 void SavedQuickSettingsModel::insertRow(KPluginMetaData metaData, int index)
 {
-    Q_EMIT beginInsertRows(QModelIndex(), index, index);
+    beginInsertRows(QModelIndex(), index, index);
     m_data.insert(index, metaData);
-    Q_EMIT endInsertRows();
+    endInsertRows();
 
     Q_EMIT dataUpdated(m_data);
 }

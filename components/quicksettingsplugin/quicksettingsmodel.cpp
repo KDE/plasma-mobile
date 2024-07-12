@@ -205,7 +205,7 @@ void QuickSettingsModel::insertQuickSettingToModel(KPluginMetaData metaData, Qui
     }
 
     if (emitInsertSignal) {
-        beginInsertRows({}, insertIndex, 0);
+        beginInsertRows({}, insertIndex, insertIndex);
     }
 
     m_quickSettings.insert(insertIndex, quickSetting);
