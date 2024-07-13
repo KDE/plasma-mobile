@@ -16,6 +16,7 @@ import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 ContainmentItem {
     id: root
@@ -110,11 +111,23 @@ ContainmentItem {
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool opaqueBar: windowMaximizedTracker.showingWindow
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
+    readonly property bool opaqueBar: windowMaximizedTracker.showingWindow && !showingStartupFeedback
 
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry
+    }
+
+    MobileShell.StartupFeedbackPanelFill {
+        id: startupFeedbackColorAnimation
+        anchors.top: parent.top
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        fullHeight: root.height
+        screen: Plasmoid.screen
+        maximizedTracker: windowMaximizedTracker
     }
 
     Item {

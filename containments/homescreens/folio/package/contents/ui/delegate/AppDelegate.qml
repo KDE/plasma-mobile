@@ -27,11 +27,12 @@ AbstractDelegate {
     property bool turnToFolderAnimEnabled: false
 
     function launchApp() {
-        if (application.icon !== "") {
+        if (application.icon !== "" && !root.application.running) {
             MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
                 Plasmoid.screen,
                 application.icon,
                 application.name,
+                application.storageId,
                 root.iconItem.Kirigami.ScenePosition.x + root.iconItem.width/2,
                 root.iconItem.Kirigami.ScenePosition.y + root.iconItem.height/2,
                 Math.min(root.iconItem.width, root.iconItem.height));

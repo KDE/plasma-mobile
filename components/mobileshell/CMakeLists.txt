@@ -32,7 +32,7 @@ file(GLOB_RECURSE _qml_sources
 ecm_target_qml_sources(mobileshellplugin SOURCES ${_qml_sources})
 
 
-target_link_libraries(mobileshellplugin 
+target_link_libraries(mobileshellplugin
     PUBLIC
         Qt::Core
     PRIVATE

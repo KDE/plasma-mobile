@@ -58,7 +58,7 @@ ContainmentItem {
 
     Rectangle {
         id: darkenBackground
-        color: homeScreen.overlayShown ? 'transparent' : (halcyonHomeScreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
+        color: (halcyonHomeScreen.page == 1 ? Qt.rgba(0, 0, 0, 0.7) : Qt.rgba(0, 0, 0, 0.2))
         anchors.fill: parent
         z: -1
         Behavior on color {
@@ -101,8 +101,6 @@ ContainmentItem {
                 leftMargin: homeScreen.leftMargin
                 rightMargin: homeScreen.rightMargin
 
-                // make the homescreen not interactable when task switcher or startup feedback is on
-                interactive: !homeScreen.overlayShown
                 searchWidget: search
             }
 

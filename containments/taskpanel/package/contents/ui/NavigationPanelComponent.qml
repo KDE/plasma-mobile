@@ -20,7 +20,7 @@ import org.kde.kirigami as Kirigami
 MobileShell.NavigationPanel {
     id: root
     required property bool opaqueBar
-    
+
     // background is:
     // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
@@ -28,7 +28,7 @@ MobileShell.NavigationPanel {
     backgroundColor: (Keyboards.KWinVirtualKeyboard.active || opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent";
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
     shadow: !opaqueBar
-        
+
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
     }
@@ -53,42 +53,42 @@ MobileShell.NavigationPanel {
 
     // ~~~~
     // navigation panel actions
-    
+
     // toggle task switcher button
     leftAction: MobileShell.NavigationPanelAction {
         id: taskSwitcherAction
-        
+
         enabled: true
         iconSource: "mobile-task-switcher"
         iconSizeFactor: 0.75
-        
+
         onTriggered: {
             Plasmoid.triggerTaskSwitcher();
         }
     }
-    
+
     // home button
     middleAction: MobileShell.NavigationPanelAction {
         id: homeAction
-        
+
         enabled: true
         iconSource: "start-here-kde"
         iconSizeFactor: 1
-        
+
         onTriggered: {
             MobileShellState.ShellDBusClient.openHomeScreen();
         }
     }
-    
+
     // close app/keyboard button
     rightAction: MobileShell.NavigationPanelAction {
         id: closeAppAction
-        
+
         enabled: Keyboards.KWinVirtualKeyboard.active || WindowPlugin.WindowUtil.hasCloseableActiveWindow
         iconSource: Keyboards.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
         iconSizeFactor: Keyboards.KWinVirtualKeyboard.active ? 1 : 0.75
-        
+
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.active) {
                 // close keyboard if it is open
@@ -98,19 +98,18 @@ MobileShell.NavigationPanel {
                 if (tasksModel.activeTask !== 0) {
                     tasksModel.requestClose(tasksModel.activeTask);
                 }
-                MobileShellState.ShellDBusClient.closeAppLaunchAnimation();
             }
         }
     }
-    
+
     rightCornerAction: MobileShell.NavigationPanelAction {
         id: keyboardToggleAction
-        visible: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel || 
+        visible: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel ||
                  (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput)
         enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
         iconSizeFactor: 0.75
-        
+
         onTriggered: {
             if (Keyboards.KWinVirtualKeyboard.active) {
                 Keyboards.KWinVirtualKeyboard.active = false;

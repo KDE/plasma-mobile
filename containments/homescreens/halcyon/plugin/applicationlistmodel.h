@@ -35,9 +35,6 @@ public:
 public Q_SLOTS:
     void sycocaDbChanged();
 
-Q_SIGNALS:
-    void launchError(const QString &msg);
-
 protected:
     QList<Application *> m_applicationList;
 };

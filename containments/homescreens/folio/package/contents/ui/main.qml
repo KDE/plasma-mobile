@@ -166,17 +166,6 @@ ContainmentItem {
                 bottomMargin: homeScreen.bottomMargin
                 leftMargin: homeScreen.leftMargin
                 rightMargin: homeScreen.rightMargin
-
-                // make the homescreen not interactable when task switcher or startup feedback is on
-                interactive: !homeScreen.overlayShown
-            }
-        }
-
-        // listen to app launch errors
-        Connections {
-            target: folio.ApplicationListModel
-            function onLaunchError(msg) {
-                MobileShellState.ShellDBusClient.closeAppLaunchAnimation()
             }
         }
     }

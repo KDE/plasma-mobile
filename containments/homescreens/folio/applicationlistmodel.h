@@ -41,9 +41,6 @@ public:
 public Q_SLOTS:
     void sycocaDbChanged();
 
-Q_SIGNALS:
-    void launchError(const QString &msg);
-
 protected:
     HomeScreen *m_homeScreen{nullptr};
     QList<FolioDelegate *> m_delegates;

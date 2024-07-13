@@ -8,6 +8,7 @@
 
 ShellDBusObject::ShellDBusObject(QObject *parent)
     : QObject{parent}
+    , m_startupFeedbackModel{new StartupFeedbackModel{this}}
 {
 }
 
@@ -18,6 +19,11 @@ void ShellDBusObject::registerObject()
         QDBusConnection::sessionBus().registerObject(QStringLiteral("/Mobile"), this);
         m_initialized = true;
     }
+}
+
+StartupFeedbackModel *ShellDBusObject::startupFeedbackModel()
+{
+    return m_startupFeedbackModel;
 }
 
 bool ShellDBusObject::doNotDisturb()
@@ -69,19 +75,25 @@ void ShellDBusObject::closeActionDrawer()
     Q_EMIT closeActionDrawerRequested();
 }
 
-void ShellDBusObject::openAppLaunchAnimation(int screen, QString splashIcon)
+void ShellDBusObject::openAppLaunchAnimationWithPosition(int screen,
+                                                         QString splashIcon,
+                                                         QString title,
+                                                         QString storageId,
+                                                         qreal x,
+                                                         qreal y,
+                                                         qreal sourceIconSize)
 {
-    Q_EMIT openAppLaunchAnimationRequested(screen, splashIcon);
+    if (!m_startupFeedbackModel) {
+        return;
+    }
+
+    StartupFeedback *feedback = new StartupFeedback{m_startupFeedbackModel, splashIcon, title, storageId, x, y, sourceIconSize, screen};
+    m_startupFeedbackModel->addApp(feedback);
 }
 
-void ShellDBusObject::openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+void ShellDBusObject::triggerAppLaunchMaximizePanelAnimation(int screen, QString color)
 {
-    Q_EMIT openAppLaunchAnimationWithPositionRequested(screen, splashIcon, title, x, y, sourceIconSize);
-}
-
-void ShellDBusObject::closeAppLaunchAnimation()
-{
-    Q_EMIT closeAppLaunchAnimationRequested();
+    Q_EMIT appLaunchMaximizePanelAnimationTriggered(screen, color);
 }
 
 void ShellDBusObject::openHomeScreen()

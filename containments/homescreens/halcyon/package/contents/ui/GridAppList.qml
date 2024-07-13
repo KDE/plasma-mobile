@@ -19,7 +19,7 @@ MobileShell.GridView {
     id: gridView
     cacheBuffer: cellHeight * 20 // 10 rows above and below
     reuseItems: true
-    
+
     Controls.ScrollBar.vertical: Controls.ScrollBar {}
 
     Connections {
@@ -32,10 +32,10 @@ MobileShell.GridView {
 
     // ensure items aren't visible out of bounds
     layer.enabled: true
-    
+
     readonly property int reservedSpaceForLabel: metrics.height
     readonly property real effectiveContentWidth: width - leftMargin - rightMargin
-    
+
     cellWidth: gridView.effectiveContentWidth / Math.min(Math.floor(effectiveContentWidth / (Kirigami.Units.iconSizes.huge + Kirigami.Units.largeSpacing * 2)), 8)
     cellHeight: cellWidth + reservedSpaceForLabel
 
@@ -45,14 +45,14 @@ MobileShell.GridView {
     function goToBeginning() {
         goToBeginningAnim.restart();
     }
-    
+
     NumberAnimation on contentY {
         id: goToBeginningAnim
         to: gridView.originY
         duration: 200
         easing.type: Easing.InOutQuad
     }
-    
+
     model: Halcyon.ApplicationListModel
 
     header: MobileShell.BaseItem {
@@ -60,7 +60,7 @@ MobileShell.GridView {
         topPadding: Kirigami.Units.gridUnit + Math.round(gridView.height * 0.1)
         bottomPadding: Kirigami.Units.gridUnit
         leftPadding: Kirigami.Units.smallSpacing
-        
+
         contentItem: PC3.Label {
             color: "white"
             font.pointSize: 16
@@ -68,7 +68,7 @@ MobileShell.GridView {
             text: i18n("Applications")
         }
     }
-    
+
     PC3.Label {
         id: metrics
         text: "M\nM"
@@ -76,13 +76,13 @@ MobileShell.GridView {
         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.85
         font.weight: Font.Bold
     }
-    
+
     Keys.onReturnPressed: currentItem.launchApp()
     delegate: GridAppDelegate {
         id: delegate
-        
+
         property Halcyon.Application application: model.application
-        
+
         width: gridView.cellWidth
         height: gridView.cellHeight
         reservedSpaceForLabel: gridView.reservedSpaceForLabel
@@ -93,6 +93,7 @@ MobileShell.GridView {
                     Plasmoid.screen,
                     icon,
                     title,
+                    storageId,
                     delegate.iconItem.Kirigami.ScenePosition.x + delegate.iconItem.width/2,
                     delegate.iconItem.Kirigami.ScenePosition.y + delegate.iconItem.height/2,
                     Math.min(delegate.iconItem.width, delegate.iconItem.height));

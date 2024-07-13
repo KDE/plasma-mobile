@@ -44,7 +44,8 @@ ContainmentItem {
     }
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingApp: windowMaximizedTracker.showingWindow
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
+    readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
     readonly property color backgroundColor: topPanel.colorScopeColor
 
     WindowPlugin.WindowMaximizedTracker {
@@ -94,6 +95,17 @@ ContainmentItem {
         // HACK: we need to initialize the DBus server somewhere, it might as well be here...
         // initialize the volume osd, and volume keys
         MobileShell.VolumeOSDProviderLoader.load();
+    }
+
+    MobileShell.StartupFeedbackPanelFill {
+        id: startupFeedbackColorAnimation
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        fullHeight: root.height
+        screen: Plasmoid.screen
+        maximizedTracker: windowMaximizedTracker
     }
 
     // top panel component

@@ -34,12 +34,10 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::isTaskSwitcherVisibleChanged, this, &ShellDBusClient::updateIsTaskSwitcherVisible);
     connect(m_interface, &OrgKdePlasmashellInterface::openActionDrawerRequested, this, &ShellDBusClient::openActionDrawerRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::closeActionDrawerRequested, this, &ShellDBusClient::closeActionDrawerRequested);
-    connect(m_interface, &OrgKdePlasmashellInterface::openAppLaunchAnimationRequested, this, &ShellDBusClient::openAppLaunchAnimationRequested);
     connect(m_interface,
-            &OrgKdePlasmashellInterface::openAppLaunchAnimationWithPositionRequested,
+            &OrgKdePlasmashellInterface::appLaunchMaximizePanelAnimationTriggered,
             this,
-            &ShellDBusClient::openAppLaunchAnimationWithPositionRequested);
-    connect(m_interface, &OrgKdePlasmashellInterface::closeAppLaunchAnimationRequested, this, &ShellDBusClient::closeAppLaunchAnimationRequested);
+            &ShellDBusClient::appLaunchMaximizePanelAnimationTriggered);
     connect(m_interface, &OrgKdePlasmashellInterface::openHomeScreenRequested, this, &ShellDBusClient::openHomeScreenRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::resetHomeScreenPositionRequested, this, &ShellDBusClient::resetHomeScreenPositionRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::showVolumeOSDRequested, this, &ShellDBusClient::showVolumeOSDRequested);
@@ -84,19 +82,20 @@ bool ShellDBusClient::isTaskSwitcherVisible() const
     return m_isTaskSwitcherVisible;
 }
 
-void ShellDBusClient::openAppLaunchAnimation(int screen, QString splashIcon)
+void ShellDBusClient::openAppLaunchAnimationWithPosition(int screen,
+                                                         QString splashIcon,
+                                                         QString title,
+                                                         QString storageId,
+                                                         qreal x,
+                                                         qreal y,
+                                                         qreal sourceIconSize)
 {
-    m_interface->openAppLaunchAnimation(screen, splashIcon);
+    m_interface->openAppLaunchAnimationWithPosition(screen, splashIcon, title, storageId, x, y, sourceIconSize);
 }
 
-void ShellDBusClient::openAppLaunchAnimationWithPosition(int screen, QString splashIcon, QString title, qreal x, qreal y, qreal sourceIconSize)
+void ShellDBusClient::triggerAppLaunchMaximizePanelAnimation(int screen, QString color)
 {
-    m_interface->openAppLaunchAnimationWithPosition(screen, splashIcon, title, x, y, sourceIconSize);
-}
-
-void ShellDBusClient::closeAppLaunchAnimation()
-{
-    m_interface->closeAppLaunchAnimation();
+    m_interface->triggerAppLaunchMaximizePanelAnimation(screen, color);
 }
 
 void ShellDBusClient::openHomeScreen()
