@@ -5,7 +5,6 @@
 #include "config.h"
 #include "utils.h"
 
-#include <KPackage/PackageLoader>
 #include <KRuntimePlatform>
 
 #include <QDBusConnection>
