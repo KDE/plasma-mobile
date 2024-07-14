@@ -91,7 +91,7 @@ MobileShell.GridView {
         height: root.cellHeight
 
         onPressAndHold: {
-            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem);
+            const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem, true);
             folio.HomeScreenState.closeAppDrawer();
 
             // we need to adjust because app drawer delegates have a different size than regular homescreen delegates
