@@ -119,7 +119,7 @@ MouseArea {
                 root.requestClose();
                 folio.HomeScreenState.closeSettingsView();
 
-                let mappedCoords = root.homeScreen.prepareStartDelegateDrag(null, delegate);
+                let mappedCoords = root.homeScreen.prepareStartDelegateDrag(null, delegate, true);
                 const widthOffset = folio.HomeScreenState.pageCellWidth / 2;
                 const heightOffset = folio.HomeScreenState.pageCellHeight / 2;
 

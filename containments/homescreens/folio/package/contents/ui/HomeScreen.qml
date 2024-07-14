@@ -45,8 +45,13 @@ Item {
 
     // called by any delegates when starting drag
     // returns the mapped coordinates to be used in the home screen state
-    function prepareStartDelegateDrag(delegate, item) {
-        swipeArea.setSkipSwipeThreshold(true);
+    function prepareStartDelegateDrag(delegate, item, skipSwipeThreshold) {
+
+        // If the user is prompted with a context menu, they may want to let go, and so we keep the detect swipe threshold.
+        // Otherwise, we want to skip detecting a swipe because we know we immediately go into delegate dragging.
+        if (skipSwipeThreshold) {
+            swipeArea.setSkipSwipeThreshold(true);
+        }
 
         if (delegate) {
             delegateDragItem.delegate = delegate;
