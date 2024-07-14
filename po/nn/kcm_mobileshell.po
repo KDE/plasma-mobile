@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2024-07-08 22:03+0200\n"
+"PO-Revision-Date: 2024-07-13 21:51+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -57,6 +57,8 @@ msgstr "Dato i statuslinje"
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
+"Viss det er kryssa av her, vil datoen visast ved sida av klokka i "
+"statuslinja."
 
 #: ui/main.qml:71
 #, kde-format
@@ -76,14 +78,15 @@ msgstr "Om navigasjonspanelet skal gøymast."
 #: ui/main.qml:92
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "Vis alltid tastatur-knapp"
 
 #: ui/main.qml:93
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Om navigasjonspanelet skal gøymast."
+msgstr ""
+"Om knappen for å visa/gøyma skjerm­tastaturet alltid skal visast på "
+"navigasjonspanelet."
 
 #: ui/main.qml:104
 #, kde-format
