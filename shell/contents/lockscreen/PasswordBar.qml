@@ -163,10 +163,16 @@ Rectangle {
 
         // toggle between showing keypad and not
         ToolButton {
+            id: keyboardToggle
+
             anchors.right: parent.right
             anchors.top: parent.top
             anchors.bottom: parent.bottom
             anchors.margins: Kirigami.Units.smallSpacing
+
+            // Don't show if the PIN display overlaps it
+            visible: (dotDisplay.width / 2) < ((root.width / 2) - keyboardToggle.width - Kirigami.Units.smallSpacing)
+
             implicitWidth: height
             icon.name: root.lockScreenState.isKeyboardMode ? "input-dialpad-symbolic" : "input-keyboard-virtual-symbolic"
             onClicked: {
@@ -175,6 +181,13 @@ Rectangle {
                     Keyboards.KWinVirtualKeyboard.active = true;
                 }
             }
+        }
+
+        // PIN font metrics
+        FontMetrics {
+            id: pinFontMetrics
+            font.family: Kirigami.Theme.defaultFont.family
+            font.pointSize: 12
         }
 
         // pin dot display
@@ -188,9 +201,13 @@ Rectangle {
 
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.bottomMargin: Math.round(dotWidth / 2)
+                Layout.maximumWidth: root.width - (Kirigami.Units.largeSpacing * 2)
 
-                implicitHeight: dotWidth
-                implicitWidth: count * dotWidth + spacing * (count - 1)
+                readonly property real delegateHeight: Math.max(pinFontMetrics.height, dotWidth)
+                readonly property real delegateWidth: dotWidth
+
+                implicitHeight: delegateHeight
+                implicitWidth: count * delegateWidth + spacing * (count - 1)
 
                 orientation: ListView.Horizontal
                 spacing: 8
@@ -200,9 +217,17 @@ Rectangle {
                     NumberAnimation { duration: 50 }
                 }
 
+                onImplicitWidthChanged: {
+                    if (contentWidth > Layout.maximumWidth) {
+                        // When character is created and ListView is in overflow,
+                        // scroll to the end of the ListView to show it
+                        dotDisplay.positionViewAtEnd();
+                    }
+                }
+
                 delegate: Item {
-                    width: dotDisplay.dotWidth
-                    height: dotDisplay.dotWidth
+                    width: dotDisplay.delegateWidth
+                    height: dotDisplay.delegateHeight
                     property bool showChar: index === root.previewCharIndex
 
                     Component.onCompleted: {
@@ -229,7 +254,9 @@ Rectangle {
                     Rectangle { // dot
                         id: dot
                         scale: 0
-                        anchors.fill: parent
+                        width: dotDisplay.dotWidth
+                        height: dotDisplay.dotWidth
+                        anchors.centerIn: parent
                         radius: width
                         color: lockScreenState.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
 
