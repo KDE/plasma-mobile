@@ -1,12 +1,11 @@
 # Translation of plasma_org.kde.plasma.mobileinitialstart to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-01 00:39+0000\n"
-"PO-Revision-Date: 2023-05-27 14:48+0200\n"
+"PO-Revision-Date: 2024-07-13 21:49+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -165,13 +164,9 @@ msgid "Complete!"
 msgstr "Ferdig!"
 
 #: modules/finished/contents/ui/main.qml:24
-#, fuzzy, kde-format
-#| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
+#, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
-"Eininga er no klar til bruk.<br />\n"
-"<br />\n"
-"Kos deg med <b>Plasma 6.0</b>!"
+msgstr "Eininga er no klar til bruk.<br /><br />Kos deg med <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:14
 #, kde-format
@@ -197,7 +192,7 @@ msgstr "Skjermskalering"
 #: modules/prepare/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "Mørkt tema"
 
 #: modules/time/package/contents/ui/main.qml:14
 #, kde-format
@@ -240,10 +235,9 @@ msgid "Password…"
 msgstr "Passord …"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to <b>Plasma</b>"
+#, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Velkommen til <b>Plasma</b>"
+msgstr "Velkommen til<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
