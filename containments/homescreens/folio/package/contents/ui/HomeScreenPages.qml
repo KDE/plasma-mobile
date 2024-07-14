@@ -93,7 +93,7 @@ MouseArea {
                 origin.x: (positionX < 0) ?
                             (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
                             (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
-                origin.y: Folio.HomeScreenState.pageHeight / 2;
+                origin.y: folio.HomeScreenState.pageHeight / 2;
                 axis { x: 0; y: 1; z: 0 }
                 angle: {
                     return Math.min(1, Math.max(0, distanceToCenter / root.width)) * 90 * ((positionX > 0) ? 1 : -1)
