@@ -19,10 +19,10 @@ QuickSettingsDelegate {
     id: root
 
     iconItem: icon
-    
+
     // scale animation on press
     zoomScale: (ShellSettings.Settings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
-    
+
     background: Item {
         // very simple shadow for performance
         Rectangle {
@@ -31,15 +31,15 @@ QuickSettingsDelegate {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height
-            
-            radius: Kirigami.Units.smallSpacing
+
+            radius: Kirigami.Units.cornerRadius
             color: Qt.rgba(0, 0, 0, 0.075)
         }
-        
+
         // background
         Rectangle {
             anchors.fill: parent
-            radius: Kirigami.Units.smallSpacing
+            radius: Kirigami.Units.cornerRadius
             border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
             color: {
                 if (root.enabled) {
@@ -50,23 +50,23 @@ QuickSettingsDelegate {
             }
         }
     }
-    
+
     MobileShell.HapticsEffect {
         id: haptics
     }
-    
+
     contentItem: MouseArea {
         id: mouseArea
-        
+
         onPressed: haptics.buttonVibrate();
         onClicked: root.delegateClick()
         onPressAndHold: {
             haptics.buttonVibrate();
             root.delegatePressAndHold();
         }
-        
+
         cursorShape: Qt.PointingHandCursor
-        
+
         Kirigami.Icon {
             id: icon
             anchors.centerIn: parent

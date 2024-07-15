@@ -17,13 +17,13 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 QuickSettingsDelegate {
     id: root
-    
+
     padding: Kirigami.Units.smallSpacing * 2
     iconItem: icon
-    
+
     // scale animation on press
     zoomScale: (ShellSettings.Settings.animationsEnabled && mouseArea.pressed) ? 0.9 : 1
-    
+
     background: Item {
         // very simple shadow for performance
         Rectangle {
@@ -32,15 +32,15 @@ QuickSettingsDelegate {
             anchors.left: parent.left
             anchors.right: parent.right
             height: parent.height
-            
-            radius: Kirigami.Units.smallSpacing
+
+            radius: Kirigami.Units.cornerRadius
             color: Qt.rgba(0, 0, 0, 0.075)
         }
-    
+
         // background color
         Rectangle {
             anchors.fill: parent
-            radius: Kirigami.Units.smallSpacing
+            radius: Kirigami.Units.cornerRadius
             border.width: 1
             border.color: root.enabled ? root.enabledButtonBorderColor : root.disabledButtonBorderColor
             color: {
@@ -52,23 +52,23 @@ QuickSettingsDelegate {
             }
         }
     }
-    
+
     MobileShell.HapticsEffect {
         id: haptics
     }
-    
+
     contentItem: MouseArea {
         id: mouseArea
-        
+
         onPressed: haptics.buttonVibrate()
         onClicked: root.delegateClick()
         onPressAndHold: {
             haptics.buttonVibrate();
             root.delegatePressAndHold();
         }
-        
+
         cursorShape: Qt.PointingHandCursor
-        
+
         Kirigami.Icon {
             id: icon
             anchors.top: parent.top
@@ -77,7 +77,7 @@ QuickSettingsDelegate {
             implicitHeight: width
             source: root.icon
         }
-        
+
         ColumnLayout {
             id: column
             spacing: Kirigami.Units.smallSpacing
