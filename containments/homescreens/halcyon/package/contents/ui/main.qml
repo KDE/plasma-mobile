@@ -102,6 +102,7 @@ ContainmentItem {
                 rightMargin: homeScreen.rightMargin
 
                 searchWidget: search
+                interactive: true
             }
 
             // search component
