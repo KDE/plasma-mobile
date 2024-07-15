@@ -1,0 +1,26 @@
+{
+    "KPackageStructure": "Plasma/LayoutTemplate",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "devin@kde.org",
+                "Name": "Devin Lin",
+                "Name[ar]": "ديفين لين",
+                "Name[he]": "דווין לין",
+                "Name[pa]": "ਡੇਵਿਨ ਲਿਨ",
+                "Name[x-test]": "xxDevin Linxx"
+            }
+        ],
+        "Category": "",
+        "Description": "Default desktop panel for Plasma Mobile",
+        "EnabledByDefault": true,
+        "Id": "org.kde.plasma.mobile.defaultDesktopPanel",
+        "License": "LGPLv2+",
+        "Name": "Default Desktop Panel for Mobile",
+        "Website": "https://www.kde.org/plasma-desktop"
+    },
+    "X-Plasma-ContainmentCategories": [
+        "panel"
+    ],
+    "X-Plasma-Shell": "plasmashell"
+}

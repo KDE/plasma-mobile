@@ -205,7 +205,7 @@ Q_SIGNALS:
     void convergenceModeEnabledChanged();
 
 private:
-    void updateNavigationBarsInPlasma(bool navigationPanelEnabled);
+    void updateNavigationBarsInPlasma();
 
     KConfigWatcher::Ptr m_configWatcher;
     KSharedConfig::Ptr m_config;
