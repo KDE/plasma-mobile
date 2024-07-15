@@ -17,13 +17,8 @@ for (let i in panels()) {
 
 if (!topFound) {
     // keep widget list synced with the layout.js
-    let topPanel = new Panel("org.kde.plasma.mobile.panel")
-    topPanel.addWidget("org.kde.plasma.notifications");
-    topPanel.location = "top";
-    topPanel.height = 1.25 * gridUnit;
+    loadTemplate("org.kde.plasma.mobile.defaultStatusBar");
 }
 if (!bottomFound) {
-    let bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
-    bottomPanel.location = "bottom";
-    bottomPanel.height = 2 * gridUnit;
+    loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
 }

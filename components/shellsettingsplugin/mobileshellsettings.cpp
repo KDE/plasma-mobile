@@ -182,9 +182,7 @@ void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabl
 
     if (navigationPanelEnabled) {
         QString createNavigationPanelScript = R"(
-            var bottomPanel = new Panel("org.kde.plasma.mobile.taskpanel")
-            bottomPanel.location = "bottom";
-            bottomPanel.height = 2 * gridUnit;
+            loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
         )";
 
         message << createNavigationPanelScript;

@@ -6,7 +6,8 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 // Load panel layout
-loadTemplate("org.kde.plasma.mobile.defaultMobileLayout")
+loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
+loadTemplate("org.kde.plasma.mobile.defaultStatusBar");
 
 // Set wallpaper plugin
 var desktopsArray = desktopsForActivity(currentActivity());
