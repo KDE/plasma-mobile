@@ -24,8 +24,8 @@ Item {
     // NOTE: Plasma Mobile specific:
     Connections {
         target: root
-        
-        function onContainmentChanged() { 
+
+        function onContainmentChanged() {
             // HACK: add PanelView into the containment so that it can be used
             if (containment.panel !== undefined) {
                 containment.panel = panel;
@@ -36,7 +36,7 @@ Item {
         }
     }
 
-    // NOTE: Below is taken straight out of Plasma Desktop so that we can 
+    // NOTE: Below is taken straight out of Plasma Desktop so that we can
     //       support desktop panels properly, try to keep it in sync:
     //       plasma-desktop/desktoppackage/contents/views/Panel.qml
 
@@ -59,28 +59,40 @@ Item {
         imagePath: "widgets/panel-background"
     }
 
-    readonly property bool topEdge: containment?.plasmoid?.location === PlasmaCore.Types.TopEdge
-    readonly property bool leftEdge: containment?.plasmoid?.location === PlasmaCore.Types.LeftEdge
     readonly property bool rightEdge: containment?.plasmoid?.location === PlasmaCore.Types.RightEdge
     readonly property bool bottomEdge: containment?.plasmoid?.location === PlasmaCore.Types.BottomEdge
-
-    readonly property int topPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.top + Kirigami.Units.smallSpacing, spacingAtMinSize));
-    readonly property int bottomPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.bottom + Kirigami.Units.smallSpacing, spacingAtMinSize));
-    readonly property int leftPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.left + Kirigami.Units.smallSpacing, spacingAtMinSize));
-    readonly property int rightPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.right + Kirigami.Units.smallSpacing, spacingAtMinSize));
-
-    readonly property int fixedBottomFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.bottom : 8)
-    readonly property int fixedLeftFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.left   : 8)
-    readonly property int fixedRightFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.right  : 8)
-    readonly property int fixedTopFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.top    : 8)
 
     readonly property int bottomFloatingPadding: Math.round(fixedBottomFloatingPadding * floatingness)
     readonly property int leftFloatingPadding: Math.round(fixedLeftFloatingPadding * floatingness)
     readonly property int rightFloatingPadding: Math.round(fixedRightFloatingPadding * floatingness)
     readonly property int topFloatingPadding: Math.round(fixedTopFloatingPadding * floatingness)
 
+
+    // NOTE: Many of the properties in this file are accessed directly in C++ PanelView!
+    // If you change these, make sure to also correct the related code in panelview.cpp.
+    readonly property int fixedBottomFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.bottom : 8)
+    readonly property int fixedLeftFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.left   : 8)
+    readonly property int fixedRightFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.right  : 8)
+    readonly property int fixedTopFloatingPadding: floating && (floatingPrefix ? floatingPanelSvg.fixedMargins.top    : 8)
+
+    readonly property int topPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.top + Kirigami.Units.smallSpacing, spacingAtMinSize));
+    readonly property int bottomPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.bottom + Kirigami.Units.smallSpacing, spacingAtMinSize));
+    readonly property int leftPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.left + Kirigami.Units.smallSpacing, spacingAtMinSize));
+    readonly property int rightPadding: Math.round(Math.min(thickPanelSvg.fixedMargins.right + Kirigami.Units.smallSpacing, spacingAtMinSize));
+
     readonly property int minPanelHeight: translucentItem.minimumDrawingHeight
     readonly property int minPanelWidth: translucentItem.minimumDrawingWidth
+
+    // This value is read from panelview.cpp which needs it to decide which border should be enabled
+    property real topShadowMargin: -floatingTranslucentItem.y
+    property real leftShadowMargin: -floatingTranslucentItem.x
+    property real rightShadowMargin: -(width - floatingTranslucentItem.width - floatingTranslucentItem.x)
+    property real bottomShadowMargin: -(height - floatingTranslucentItem.height - floatingTranslucentItem.y)
+
+    property var panelMask: floatingness === 0 ? (panelOpacity === 1 ? opaqueItem.mask : translucentItem.mask) : (panelOpacity === 1 ? floatingOpaqueItem.mask : floatingTranslucentItem.mask)
+
+    // The point is read from panelview.cpp and is used as an offset for the mask
+    readonly property point floatingTranslucentItemOffset: Qt.point(floatingTranslucentItem.x, floatingTranslucentItem.y)
 
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
@@ -90,13 +102,28 @@ Item {
         id: activityInfo
     }
 
-    property bool touchingWindow: visibleWindowsModel.count > 0
+    // We need to have a little gap between the raw visibleWindowsModel count
+    // and actually determining if a window is touching.
+    // This is because certain dialog windows start off with a position of (screenwidth/2, screenheight/2)
+    // and they register as "touching" in the split-second before KWin can place them correctly.
+    // This avoids the panel flashing if it is auto-hide etc and such a window is shown.
+    // Examples of such windows: properties of a file on desktop, or portal "open with" dialog
+    property bool touchingWindow: false
+    property bool touchingWindowDirect: visibleWindowsModel.count > 0
+    property bool showingDesktop: KWindowSystem.showingDesktop
+    Timer {
+        id: touchingWindowDebounceTimer
+        interval: 10  // ms, I find that this value is enough while not causing unresponsiveness while dragging windows close
+        onTriggered: root.touchingWindow = !KWindowSystem.showingDesktop && root.touchingWindowDirect
+    }
+    onTouchingWindowDirectChanged: touchingWindowDebounceTimer.start()
+    onShowingDesktopChanged: touchingWindowDebounceTimer.start()
 
     TaskManager.TasksModel {
         id: visibleWindowsModel
         filterByVirtualDesktop: true
         filterByActivity: true
-        filterByScreen: true
+        filterByScreen: false
         filterByRegion: TaskManager.RegionFilterMode.Intersect
         filterHidden: true
         filterMinimized: true
@@ -109,52 +136,34 @@ Item {
 
         Binding on regionGeometry {
             delayed: true
-            property real verticalMargin: (fixedTopFloatingPadding + fixedBottomFloatingPadding) * (1 - floatingness)
-            property real horizontalMargin: (fixedLeftFloatingPadding + fixedRightFloatingPadding) * (1 - floatingness)
-            // This makes the panel de-float when a window is 6px from it or less.
-            // 6px is chosen to avoid any potential issue with kwin snapping behavior,
-            // and it looks like the panel hides away from the active window.
-            value: floatingness, panel.width, panel.height, panel.x, panel.y, panel.geometryByDistance(6 + (verticalPanel ? horizontalMargin : verticalMargin))
+            value: panel.width, panel.height, panel.x, panel.y, panel.dogdeGeometryByDistance(panel.visibilityMode === Panel.Global.DodgeWindows ? -1 : 1) // +1 is for overlap detection, -1 is for snapping to panel
         }
     }
 
     Connections {
-        target: containment
+        target: root.containment?.plasmoid ?? null
         function onActivated() {
-            // BUG 472909: status changes to PassiveStatus or ActiveStatus after applet shortcut is pressed for the second time
-            if (containment.status === PlasmaCore.Types.PassiveStatus /*After pressing panel shortcut*/ || containment.status === PlasmaCore.Types.ActiveStatus) {
-                containment.status = PlasmaCore.Types.AcceptingInputStatus;
-                // BUG 472909: if applet shortcut is pressed, panel also gets activated, but status will change to RequiresAttentionStatus after applet has focus
-            } else /* Panel has focus, or applet has focus */ {
-                containment.status = PlasmaCore.Types.PassiveStatus;
+            if (root.containment.plasmoid.status === PlasmaCore.Types.AcceptingInputStatus) {
+                root.containment.plasmoid.status = PlasmaCore.Types.PassiveStatus;
+            } else {
+                root.containment.plasmoid.status = PlasmaCore.Types.AcceptingInputStatus;
             }
         }
     }
 
     // Floatingness is a value in [0, 1] that's multiplied to the floating margin; 0: not floating, 1: floating, between 0 and 1: animation between the two states
-    property double floatingness
+    readonly property int floatingnessAnimationDuration: Kirigami.Units.longDuration
+    property double floatingnessTarget: 0.0 // The animation is handled in panelview.cpp for efficiency
+    property double floatingness: 0.0
+
     // PanelOpacity is a value in [0, 1] that's used as the opacity of the opaque elements over the transparent ones; values between 0 and 1 are used for animations
     property double panelOpacity
-    Behavior on floatingness {
-        NumberAnimation {
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.OutCubic
-        }
-    }
     Behavior on panelOpacity {
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.OutCubic
         }
     }
-
-    // This value is read from panelview.cpp and disables shadow for floating panels, as they'd be detached from the panel
-    property bool hasShadows: floatingness < 0.5
-    property var panelMask: floatingness === 0 ? (panelOpacity === 1 ? opaqueItem.mask : translucentItem.mask) : (panelOpacity === 1 ? floatingOpaqueItem.mask : floatingTranslucentItem.mask)
-
-    // These two values are read from panelview.cpp and are used as an offset for the mask
-    property int maskOffsetX: floatingTranslucentItem.x
-    property int maskOffsetY: floatingTranslucentItem.y
 
     KSvg.FrameSvgItem {
         id: translucentItem
@@ -166,8 +175,8 @@ Item {
     KSvg.FrameSvgItem {
         id: floatingTranslucentItem
         visible: floatingness !== 0 && panelOpacity !== 1
-        x: root.leftEdge ? fixedLeftFloatingPadding + fixedRightFloatingPadding * (1 - floatingness) : leftFloatingPadding
-        y: root.topEdge ? fixedTopFloatingPadding + fixedBottomFloatingPadding * (1 - floatingness) : topFloatingPadding
+        x: root.rightEdge ? fixedLeftFloatingPadding + fixedRightFloatingPadding * (1 - floatingness) : leftFloatingPadding
+        y: root.bottomEdge ? fixedTopFloatingPadding + fixedBottomFloatingPadding * (1 - floatingness) : topFloatingPadding
         width: verticalPanel ? panel.thickness : parent.width - leftFloatingPadding - rightFloatingPadding
         height: verticalPanel ? parent.height - topFloatingPadding - bottomFloatingPadding : panel.thickness
 
@@ -188,20 +197,6 @@ Item {
         anchors.fill: floatingTranslucentItem
         imagePath: containment?.plasmoid?.backgroundHints === PlasmaCore.Types.NoBackground ? "" : "solid/widgets/panel-background"
     }
-    KSvg.FrameSvgItem {
-        id: floatingShadow
-        visible: !hasShadows
-        z: -100
-        imagePath: containment?.plasmoid?.backgroundHints === PlasmaCore.Types.NoBackground ? "" : "solid/widgets/panel-background"
-        prefix: "shadow"
-        anchors {
-            fill: floatingTranslucentItem
-            topMargin: -floatingShadow.margins.top
-            leftMargin: -floatingShadow.margins.left
-            rightMargin: -floatingShadow.margins.right
-            bottomMargin: -floatingShadow.margins.bottom
-        }
-    }
 
     Keys.onEscapePressed: {
         root.parent.focus = false
@@ -211,29 +206,30 @@ Item {
     property bool isTransparent: panel.opacityMode === Panel.Global.Translucent
     property bool isAdaptive: panel.opacityMode === Panel.Global.Adaptive
     property bool floating: panel.floating
-    readonly property bool screenCovered: !KWindowSystem.showingDesktop && touchingWindow && panel.visibilityMode == Panel.Global.NormalPanel
-    property var stateTriggers: [floating, screenCovered, isOpaque, isAdaptive, isTransparent]
+    property bool hasCompositing: KWindowSystem.isPlatformX11 ? KX11Extras.compositingActive : true
+    readonly property bool screenCovered: touchingWindow && panel.visibilityMode == Panel.Global.NormalPanel
+    property var stateTriggers: [floating, screenCovered, isOpaque, isAdaptive, isTransparent, hasCompositing, containment]
     onStateTriggersChanged: {
         let opaqueApplets = false
         let floatingApplets = false
         if ((!floating || screenCovered) && (isOpaque || (screenCovered && isAdaptive))) {
             panelOpacity = 1
             opaqueApplets = true
-            floatingness = 0
+            floatingnessTarget = 0
         } else if ((!floating || screenCovered) && (isTransparent || (!screenCovered && isAdaptive))) {
             panelOpacity = 0
-            floatingness = 0
+            floatingnessTarget = 0
         } else if ((floating && !screenCovered) && (isTransparent || isAdaptive)) {
             panelOpacity = 0
-            floatingness = 1
+            floatingnessTarget = 1
             floatingApplets = true
         } else if (floating && !screenCovered && isOpaque) {
             panelOpacity = 1
             opaqueApplets = true
-            floatingness = 1
+            floatingnessTarget = 1
             floatingApplets = true
         }
-        if (!KWindowSystem.isPlatformWayland) {
+        if (!KWindowSystem.isPlatformWayland && !KX11Extras.compositingActive) {
             opaqueApplets = false
             panelOpacity = 0
         }
@@ -293,7 +289,6 @@ Item {
         target: panel
         property: "length"
         when: containment
-        delayed: true
         value: {
             if (!containment) {
                 return;
@@ -322,19 +317,21 @@ Item {
     }
 
     KSvg.FrameSvgItem {
-        id: tabBar
+
+        Accessible.name: i18n("Panel Focus Indicator")
+
         x: root.verticalPanel || !panel.activeFocusItem
-            ? 0
+            ? translucentItem.x
             : Math.max(panel.activeFocusItem.Kirigami.ScenePosition.x, panel.activeFocusItem.Kirigami.ScenePosition.x)
         y: root.verticalPanel && panel.activeFocusItem
             ? Math.max(panel.activeFocusItem.Kirigami.ScenePosition.y, panel.activeFocusItem.Kirigami.ScenePosition.y)
-            : 0
+            : translucentItem.y
 
         width: panel.activeFocusItem
-            ? (root.verticalPanel ? root.width : Math.min(panel.activeFocusItem.width, panel.activeFocusItem.width))
+            ? (root.verticalPanel ? translucentItem.width : Math.min(panel.activeFocusItem.width, panel.activeFocusItem.width))
             : 0
         height: panel.activeFocusItem
-            ? (root.verticalPanel ?  Math.min(panel.activeFocusItem.height, panel.activeFocusItem.height) : root.height)
+            ? (root.verticalPanel ?  Math.min(panel.activeFocusItem.height, panel.activeFocusItem.height) : translucentItem.height)
             : 0
 
         visible: panel.active && panel.activeFocusItem
@@ -367,8 +364,7 @@ Item {
     Item {
         id: containmentParent
         anchors.centerIn: isOpaque ? floatingOpaqueItem : floatingTranslucentItem
-        width: root.verticalPanel ? panel.thickness : root.width - root.floatingness * (fixedLeftFloatingPadding + fixedRightFloatingPadding)
-        height: root.verticalPanel ? root.height - root.floatingness * (fixedBottomFloatingPadding - fixedTopFloatingPadding) : panel.thickness
+        width: root.verticalPanel ? panel.thickness : root.width - fixedLeftFloatingPadding - fixedRightFloatingPadding
+        height: root.verticalPanel ? root.height - fixedBottomFloatingPadding - fixedTopFloatingPadding : panel.thickness
     }
-
 }
