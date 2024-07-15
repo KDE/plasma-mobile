@@ -30,7 +30,7 @@ Item {
         visible: root.height > Kirigami.Units.gridUnit * 25
 
         anchors.centerIn: parent
-        spacing: Kirigami.Units.gridUnit
+        spacing: Kirigami.Units.gridUnit * 2
 
         LayoutItemProxy { target: header }
         LayoutItemProxy { target: keypadGrid }
