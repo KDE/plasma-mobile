@@ -67,11 +67,20 @@ QtObject {
         }
     }
 
+    // scaling factor during closing of the switcher
+    property real closingScalingFactor: 1
+
     // scale of the task list (based on the progress of the swipe up gesture)
     readonly property real currentScale: {
         let maxScale = 1 / scalingFactor;
         let subtract = (maxScale - 1) * Math.min(root.state.yPosition / openedYPosition, 1);
         let finalScale = Math.min(maxScale, maxScale - subtract);
+
+        // if closing scaling factor is below 1 we want it to override the other scale
+        // to allow for a smoother closing animation
+        if (closingScalingFactor < 1) {
+            return closingScalingFactor;
+        }
 
         // animate scale only if we are *not* opening from the homescreen
         if (root.state.wasInActiveTask || !root.state.gestureInProgress) {
@@ -92,6 +101,7 @@ QtObject {
         openAnim.stop();
         openAppAnim.stop();
         closeAnim.stop();
+        closeScaleAnim.stop();
         xAnim.stop();
     }
 
@@ -120,14 +130,17 @@ QtObject {
     }
 
     function close() {
+        cancelAnimations();
+        closingScalingFactor = currentScale;
         closeAnim.restart();
+        closeScaleAnim.restart();
     }
 
-    function openApp(index, window) {
+    function openApp(index, window, duration = Kirigami.Units.shortDuration, horizontalEasing = Easing.OutBack) {
         // cancel any opening animations ongoing
         cancelAnimations();
 
-        animateGoToTaskIndex(index, Kirigami.Units.shortDuration);
+        animateGoToTaskIndex(index, duration);
         openAppAnim.restart();
         KWinComponents.Workspace.activeWindow = window
     }
@@ -143,9 +156,10 @@ QtObject {
     }
 
     // go to the task index, animated
-    function animateGoToTaskIndex(index, duration = Kirigami.Units.longDuration * 2) {
+    function animateGoToTaskIndex(index, duration = Kirigami.Units.longDuration * 2, easing = Easing.OutExpo) {
         xAnim.duration = duration;
         xAnim.to = xPositionFromTaskIndex(index);
+        xAnim.easing.type = easing;
         xAnim.restart();
     }
 
@@ -216,15 +230,31 @@ QtObject {
         }
     }
 
+    // TODO: This animation should ideally be replaced by some
+    // speed tracking to track finger movement better. Until then
+    // InBack at least pretends to go in the finger move direction
     property var closeAnim: NumberAnimation {
         target: root.state
         property: "yPosition"
         to: 0
         duration: Kirigami.Units.longDuration
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.InBack
+
         onFinished: {
             root.state.status = stateClass.Inactive;
             taskSwitcher.instantHide();
+        }
+    }
+
+    property var closeScaleAnim: NumberAnimation {
+        target: root
+        property: "closingScalingFactor"
+        to: 0.1
+        duration: Kirigami.Units.longDuration
+        easing.type: Easing.InQuad
+
+        onStopped: {
+            closingScalingFactor = 1;
         }
     }
 

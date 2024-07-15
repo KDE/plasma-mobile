@@ -171,7 +171,7 @@ FocusScope {
             }
             if (shouldSwitch) {
                 let appAtNewIndex = taskList.getTaskAt(newIndex).window;
-                taskSwitcherHelpers.openApp(newIndex, appAtNewIndex);
+                taskSwitcherHelpers.openApp(newIndex, appAtNewIndex, Kirigami.Units.longDuration * 4, Easing.OutExpo);
             } else {
                 // if not switching, just open task switcher
                 taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
