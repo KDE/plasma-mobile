@@ -178,9 +178,8 @@ void StartupFeedbackModel::onWindowOpened(KWayland::Client::PlasmaWindow *window
     if (m_list.size() > indexToRemove) {
         StartupFeedback *feedbackToRemove = m_list[indexToRemove];
 
-        // Only delete StartupFeedback once the window becomes active
-        // -> There is a gap of time between when a window is created and when it is actually visible/active
-        connect(window, &KWayland::Client::PlasmaWindow::activeChanged, this, [this, window, feedbackToRemove]() {
+        // Function to remove the startup feedback from the model
+        auto removeFunction = [this, window, feedbackToRemove]() {
             if (!window->isActive()) {
                 return;
             }
@@ -198,7 +197,15 @@ void StartupFeedbackModel::onWindowOpened(KWayland::Client::PlasmaWindow *window
             }
 
             window->disconnect(this);
-        });
+        };
+
+        // Only delete StartupFeedback once the window becomes active
+        // -> There is a potential gap of time between when a window is created and when it is actually visible/active
+        if (window->isActive()) {
+            removeFunction();
+        } else {
+            connect(window, &KWayland::Client::PlasmaWindow::activeChanged, this, removeFunction);
+        }
     }
 }
 
@@ -245,7 +252,7 @@ void StartupFeedbackModel::updateActiveWindowIsStartupFeedback()
 StartupFeedbackFilterModel::StartupFeedbackFilterModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-    setSortRole(StartupFeedbackModel::ScreenRole);
+    setFilterRole(StartupFeedbackModel::ScreenRole);
 }
 
 StartupFeedbackModel *StartupFeedbackFilterModel::startupFeedbackModel() const
@@ -262,39 +269,4 @@ void StartupFeedbackFilterModel::setStartupFeedbackModel(StartupFeedbackModel *s
     m_startupFeedbackModel = startupFeedbackModel;
     setSourceModel(m_startupFeedbackModel);
     Q_EMIT startupFeedbackModelChanged();
-}
-
-int StartupFeedbackFilterModel::screen() const
-{
-    return m_screen;
-}
-
-void StartupFeedbackFilterModel::setScreen(int screen)
-{
-    if (m_screen == screen) {
-        return;
-    }
-
-    m_screen = screen;
-    Q_EMIT screenChanged();
-}
-
-bool StartupFeedbackFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
-{
-    if (!m_startupFeedbackModel) {
-        return false;
-    }
-
-    const QModelIndex index = m_startupFeedbackModel->index(sourceRow, 0, sourceParent);
-    if (!index.isValid()) {
-        return false;
-    }
-    const QVariant data = index.data();
-    if (!data.isValid()) {
-        // an invalid QVariant is valid data
-        return true;
-    }
-
-    StartupFeedback *startupFeedback = qvariant_cast<StartupFeedback *>(data);
-    return startupFeedback->screen() == m_screen;
 }

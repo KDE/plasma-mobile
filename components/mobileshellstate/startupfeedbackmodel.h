@@ -108,7 +108,6 @@ class StartupFeedbackFilterModel : public QSortFilterProxyModel
     Q_OBJECT
     QML_ELEMENT
     Q_PROPERTY(StartupFeedbackModel *startupFeedbackModel READ startupFeedbackModel WRITE setStartupFeedbackModel NOTIFY startupFeedbackModelChanged)
-    Q_PROPERTY(int screen READ screen WRITE setScreen NOTIFY screenChanged)
 
 public:
     explicit StartupFeedbackFilterModel(QObject *parent = nullptr);
@@ -116,17 +115,9 @@ public:
     StartupFeedbackModel *startupFeedbackModel() const;
     void setStartupFeedbackModel(StartupFeedbackModel *taskModel);
 
-    int screen() const;
-    void setScreen(int screen);
-
-protected:
-    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
-
 Q_SIGNALS:
-    void screenChanged();
     void startupFeedbackModelChanged();
 
 private:
     StartupFeedbackModel *m_startupFeedbackModel{nullptr};
-    int m_screen{0};
 };

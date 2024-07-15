@@ -20,11 +20,18 @@ Item {
     property real leftMargin
     property real rightMargin
 
+    onScreenChanged: {
+        repeater.model.setFilterFixedString(root.screen);
+    }
+
+    Component.onCompleted: {
+        repeater.model.setFilterFixedString(root.screen);
+    }
+
     Repeater {
         id: repeater
         model: MobileShellState.StartupFeedbackFilterModel {
             startupFeedbackModel: MobileShellState.ShellDBusObject.startupFeedbackModel
-            screen: root.screen
         }
 
         delegate: Item {
