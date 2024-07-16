@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-27 00:40+0000\n"
+"POT-Creation-Date: 2024-07-16 00:40+0000\n"
 "PO-Revision-Date: 2024-05-31 09:56+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 23.04.3\n"
+
+#: contents/applet/AppletError.qml:168
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: contents/applet/AppletError.qml:191
+msgid "View Error Details…"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:81
+msgid "Open %1"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -69,6 +81,10 @@ msgstr "Введіть PIN-код"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "Помилковий код"
+
+#: contents/views/Panel.qml:321
+msgid "Panel Focus Indicator"
+msgstr ""
 
 #~ msgid "Logging in..."
 #~ msgstr "Вхід до системи…"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-27 00:40+0000\n"
+"POT-Creation-Date: 2024-07-16 00:40+0000\n"
 "PO-Revision-Date: 2023-07-22 15:27+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -15,6 +15,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#: contents/applet/AppletError.qml:168
+msgid "Copy to Clipboard"
+msgstr ""
+
+#: contents/applet/AppletError.qml:191
+msgid "View Error Details…"
+msgstr ""
+
+#: contents/applet/CompactApplet.qml:81
+msgid "Open %1"
+msgstr ""
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -66,6 +78,10 @@ msgstr ""
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
+msgstr ""
+
+#: contents/views/Panel.qml:321
+msgid "Panel Focus Indicator"
 msgstr ""
 
 #~ msgid "Change Wallpaper"
