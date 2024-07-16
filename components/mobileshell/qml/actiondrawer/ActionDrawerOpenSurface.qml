@@ -33,6 +33,17 @@ MobileShell.SwipeArea {
         actionDrawer.visible = true;
     }
 
+    function startSwipeWithPoint(point) {
+        // if the user swiped from the top left, otherwise it's from the top right
+        if (point.x < root.width / 2) {
+            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settings.Pinned;
+        } else {
+            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopRightMode == ShellSettings.Settings.Pinned;
+        }
+
+        startSwipe();
+    }
+
     function endSwipe() {
         actionDrawer.dragging = false;
         actionDrawer.updateState();
@@ -44,16 +55,11 @@ MobileShell.SwipeArea {
 
     anchors.fill: parent
 
-    onSwipeStarted: (point) => {
-        // if the user swiped from the top left, otherwise it's from the top right
-        if (point.x < root.width / 2) {
-            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settings.Pinned;
-        } else {
-            actionDrawer.openToPinnedMode = ShellSettings.Settings.actionDrawerTopRightMode == ShellSettings.Settings.Pinned;
-        }
-
-        startSwipe();
-    }
+    onSwipeStarted: (point) => startSwipeWithPoint(point)
     onSwipeEnded: endSwipe()
     onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => updateOffset(deltaY);
+
+    onTouchpadScrollStarted: (point) => startSwipeWithPoint(point)
+    onTouchpadScrollEnded: endSwipe()
+    onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => updateOffset(deltaY);
 }

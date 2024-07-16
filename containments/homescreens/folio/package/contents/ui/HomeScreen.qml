@@ -124,6 +124,10 @@ Item {
             homeScreenState.swipeMoved(totalDeltaX, totalDeltaY, deltaX, deltaY);
         }
 
+        onTouchpadScrollStarted: homeScreenState.swipeStarted(0, 0);
+        onTouchpadScrollEnded: homeScreenState.swipeEnded();
+        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => homeScreenState.swipeMoved(totalDeltaX, totalDeltaY, deltaX, deltaY);
+
         onPressedChanged: {
             if (pressed) {
                 // ensures that components like the widget settings overlay close when swiping

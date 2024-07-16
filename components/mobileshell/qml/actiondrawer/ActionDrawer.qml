@@ -267,17 +267,27 @@ Item {
         mode: MobileShell.SwipeArea.VerticalOnly
         anchors.fill: parent
 
-        onSwipeStarted: {
+        function startSwipe() {
             root.cancelAnimations();
             root.dragging = true;
         }
-        onSwipeEnded: {
+
+        function endSwipe() {
             root.dragging = false;
             root.updateState();
         }
-        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
+
+        function moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
             root.offset += deltaY;
         }
+
+        onSwipeStarted: startSwipe()
+        onSwipeEnded: endSwipe()
+        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
+
+        onTouchpadScrollStarted: startSwipe()
+        onTouchpadScrollEnded: endSwipe()
+        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
 
         Loader {
             id: contentContainerLoader

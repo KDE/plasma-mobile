@@ -71,16 +71,28 @@ MobileShell.SwipeArea {
         }
     }
 
-    onSwipeStarted: cancelAnimations();
-    onSwipeEnded: {
+    function __startSwipe() {
+        cancelAnimations();
+    }
+
+    function __endSwipe() {
         if (!positionAnim.running) {
             updateState();
         }
     }
 
-    onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
+    function __moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
         position = Math.max(0, Math.min(keypadHeight, position - deltaY));
     }
+
+    onSwipeStarted: __startSwipe()
+    onSwipeEnded: __endSwipe()
+
+    onSwipeMove: __moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
+
+    onTouchpadScrollStarted: __startSwipe()
+    onTouchpadScrollEnded: __endSwipe()
+    onTouchpadScrollMove: __moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
 }
 
 

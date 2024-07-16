@@ -58,6 +58,10 @@ Q_SIGNALS:
     // totalDeltaX, totalDeltaY - amount move since startedSwipe()
     void swipeMove(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
 
+    void touchpadScrollStarted(QPointF point);
+    void touchpadScrollEnded();
+    void touchpadScrollMove(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
+
 protected:
     bool childMouseEventFilter(QQuickItem *item, QEvent *event) override;
     void mouseMoveEvent(QMouseEvent *event) override;
@@ -66,6 +70,7 @@ protected:
     void mouseUngrabEvent() override;
     void touchEvent(QTouchEvent *event) override;
     void touchUngrabEvent() override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
     void setMoving(bool moving);
@@ -82,6 +87,7 @@ private:
     Mode m_mode = Mode::BothAxis;
     bool m_interactive = true;
     bool m_pressed = false;
+    bool m_touchpadScrolling = false;
 
     // whether we have started a flick
     bool m_moving = false;
@@ -100,6 +106,9 @@ private:
 
     // whether to skip trying to measure the swipe threshold
     bool m_skipSwipeThreshold;
+
+    // the total amount of distance scrolled
+    QPointF m_totalScrollDelta;
 };
 
 QML_DECLARE_TYPE(SwipeArea)
