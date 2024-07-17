@@ -7,27 +7,27 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-16 00:40+0000\n"
-"PO-Revision-Date: 2024-05-31 14:00+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2024-07-16 15:45+0200\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Zkopírovat do schránky"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Zobrazit podrobnosti chyby..."
 
 #: contents/applet/CompactApplet.qml:81
 msgid "Open %1"
-msgstr ""
+msgstr "Otevřít %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -39,7 +39,7 @@ msgstr "Obecné"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:66
 msgid "Homescreen Layout"
-msgstr ""
+msgstr "Rozložení domácí obrazovky"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:67
 msgid "The homescreen layout to use."

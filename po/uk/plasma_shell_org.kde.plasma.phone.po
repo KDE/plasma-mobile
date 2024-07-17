@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-16 00:40+0000\n"
-"PO-Revision-Date: 2024-05-31 09:56+0300\n"
+"PO-Revision-Date: 2024-07-16 08:44+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Скопіювати до буфера"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Переглянути подробиці щодо помилки…"
 
 #: contents/applet/CompactApplet.qml:81
 msgid "Open %1"
-msgstr ""
+msgstr "Відкрити %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -84,7 +84,7 @@ msgstr "Помилковий код"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Індикатор фокусування панелі"
 
 #~ msgid "Logging in..."
 #~ msgstr "Вхід до системи…"

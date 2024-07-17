@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-16 00:40+0000\n"
-"PO-Revision-Date: 2024-05-31 11:06+0200\n"
+"PO-Revision-Date: 2024-07-16 06:43+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Kopiraj na odložišče"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Poglej podrobnosti napake…"
 
 #: contents/applet/CompactApplet.qml:81
 msgid "Open %1"
-msgstr ""
+msgstr "Odpri %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -84,7 +84,7 @@ msgstr "Napačen PIN"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Indikator fokusa plošče"
 
 #~ msgid "Logging in..."
 #~ msgstr "Prijavljanje..."
