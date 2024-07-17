@@ -32,7 +32,23 @@ MouseArea {
 
         return baseY + diff / 2 - shellTopMargin - trackFingerYOffset;
     }
-    readonly property real trackFingerYOffset: taskSwitcherHelpers.isScaleClamped ? taskSwitcherState.yPosition - taskSwitcherHelpers.openedYPosition : 0
+    readonly property real trackFingerYOffset: {
+        if (taskSwitcherHelpers.isScaleClamped) {
+            let openedPos = taskSwitcherHelpers.openedYPosition;
+            let directTrackingOffset = openedPos * 0.2
+            if (taskSwitcherState.yPosition < openedPos + directTrackingOffset) {
+                // Allow the task list to move further up than the fully opened position
+                return taskSwitcherState.yPosition - openedPos;
+            } else {
+                // but make it more reluctant the further up it goes
+                let overDragProgress = (taskSwitcherState.yPosition - directTrackingOffset - openedPos) / openedPos;
+                // Base formula is 1-2.3^(-progress) which asymptotically approaches 1
+                return (1 - Math.pow(2.3, -overDragProgress)) * openedPos + directTrackingOffset;
+            }
+        } else {
+            return 0;
+        }
+    }
 
     function getTaskAt(index) {
         return repeater.itemAt(index);
