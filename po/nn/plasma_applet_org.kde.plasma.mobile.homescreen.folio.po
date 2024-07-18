@@ -1,12 +1,11 @@
 # Translation of plasma_applet_org.kde.plasma.mobile.homescreen.folio to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 00:40+0000\n"
-"PO-Revision-Date: 2022-06-18 14:49+0200\n"
+"PO-Revision-Date: 2024-07-17 17:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 24.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -22,14 +21,13 @@ msgstr ""
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr ""
+msgstr "Mappe"
 
 #: package/contents/ui/AppDrawerHeader.qml:52
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "Program"
+msgstr "Søk etter program …"
 
 #: package/contents/ui/FavouritesBar.qml:149
 #: package/contents/ui/FavouritesBar.qml:223
@@ -43,143 +41,143 @@ msgstr "Fjern"
 #: package/contents/ui/settings/AppletListViewer.qml:57
 #, kde-format
 msgid "Widgets"
-msgstr ""
+msgstr "Skjermelement"
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
-msgstr ""
+msgstr "Val for heimeskjerm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:89
 #, kde-format
 msgid "Icons"
-msgstr ""
+msgstr "Ikon"
 
 #: package/contents/ui/settings/SettingsWindow.qml:121
 #, kde-format
 msgid "Number of rows"
-msgstr ""
+msgstr "Talet på rader"
 
 #: package/contents/ui/settings/SettingsWindow.qml:122
 #, kde-format
 msgid "Number of columns"
-msgstr ""
+msgstr "Talet på kolonnar"
 
 #: package/contents/ui/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr ""
+msgstr "Storleiken på ikon på heimeskjermen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:165
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr ""
+msgstr "Radene og kolonnane vil byta plass avhengig av skjermretninga."
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Homescreen"
-msgstr ""
+msgstr "Heimeskjerm"
 
 #: package/contents/ui/settings/SettingsWindow.qml:175
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr ""
+msgstr "Vis merkelappar på heimeskjermen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr ""
+msgstr "Vis merkelappar på favorittlinja"
 
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Page transition effect"
-msgstr ""
+msgstr "Bruk overgangseffektar ved sideskift"
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Slide"
-msgstr ""
+msgstr "Skliding"
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Cube"
-msgstr ""
+msgstr "Kube"
 
 #: package/contents/ui/settings/SettingsWindow.qml:209
 #, kde-format
 msgid "Fade"
-msgstr ""
+msgstr "Ton inn/ut"
 
 #: package/contents/ui/settings/SettingsWindow.qml:210
 #, kde-format
 msgid "Stack"
-msgstr ""
+msgstr "Stabel"
 
 #: package/contents/ui/settings/SettingsWindow.qml:211
 #, kde-format
 msgid "Rotation"
-msgstr ""
+msgstr "Dreiing"
 
 #: package/contents/ui/settings/SettingsWindow.qml:226
 #, kde-format
 msgid "Favorites Bar"
-msgstr ""
+msgstr "Favorittlinje"
 
 #: package/contents/ui/settings/SettingsWindow.qml:243
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "Bakgrunnsbilete"
 
 #: package/contents/ui/settings/SettingsWindow.qml:249
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "Vis sløreeffekt på bakgrunnsbilete"
 
 #: package/contents/ui/settings/SettingsWindow.qml:260
 #, kde-format
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: package/contents/ui/settings/SettingsWindow.qml:267
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "Byt mellom heimeskjerm og fleire val for bakgrunnsbilete"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
 msgid "Export layout to"
-msgstr ""
+msgstr "Eksporter utforming til"
 
 #: package/contents/ui/settings/SettingsWindow.qml:313
 #, kde-format
 msgid "Import layout from"
-msgstr ""
+msgstr "Importer utforming frå"
 
 #: package/contents/ui/settings/SettingsWindow.qml:324
 #: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Export Status"
-msgstr ""
+msgstr "Eksportstatus"
 
 #: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Failed to export to %1"
-msgstr ""
+msgstr "Klarte ikkje eksportera til %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:332
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr ""
+msgstr "Utforminga for heimeskjermen er no eksportert til %1"
 
 #: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "Confirm Import"
-msgstr ""
+msgstr "Stadfest import"
 
 #: package/contents/ui/settings/SettingsWindow.qml:339
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr ""
+msgstr "Dette vil overskriva utforminga du brukar på heimeskjermen."

@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2024.
+# SPDX-FileCopyrightText: 2022, 2024 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-16 00:40+0000\n"
-"PO-Revision-Date: 2024-05-31 09:41+0200\n"
+"PO-Revision-Date: 2024-07-16 08:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Copia a dins del porta-retalls"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Visualitza els detalls de l'error…"
 
 #: contents/applet/CompactApplet.qml:81
 msgid "Open %1"
-msgstr ""
+msgstr "Obri %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -85,7 +85,4 @@ msgstr "PIN erroni"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
-
-#~ msgid "Logging in..."
-#~ msgstr "S'està iniciant la sessió…"
+msgstr "Indicador de focus del quadro"
