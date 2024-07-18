@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 02:35+0000\n"
-"PO-Revision-Date: 2024-07-08 22:06+0200\n"
+"PO-Revision-Date: 2024-07-17 17:32+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -31,17 +31,17 @@ msgstr "Feil ved oppdatering av tilkoplings­innstillingar for %1: %2."
 #: modem.cpp:342
 #, kde-format
 msgid "Error activating connection: %1"
-msgstr ""
+msgstr "Feil ved forsøk på å kopla til: %1"
 
 #: modem.cpp:380
 #, kde-format
 msgid "Error adding connection: %1"
-msgstr ""
+msgstr "Feil ved forsøk på leggja til tilkopling: %1"
 
 #: modem.cpp:397
 #, kde-format
 msgid "Error removing connection: %1"
-msgstr ""
+msgstr "Feil ved fjerning av tilkopling: %1"
 
 #: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
 #: modemdetails.cpp:428 modemdetails.cpp:458
@@ -197,12 +197,12 @@ msgstr "Av"
 #: modemdetails.cpp:224
 #, kde-format
 msgid "Low-power mode"
-msgstr ""
+msgstr "Straumsparingsmodus"
 
 #: modemdetails.cpp:226
 #, kde-format
 msgid "Full power mode"
-msgstr ""
+msgstr "Fullstraumsmodus"
 
 #: modemdetails.cpp:254
 #, kde-format
@@ -237,12 +237,12 @@ msgstr "Teke i bruk"
 #: modemdetails.cpp:266
 #, kde-format
 msgid "Searching for network provider"
-msgstr ""
+msgstr "Søkjer etter mobiloperatør"
 
 #: modemdetails.cpp:268
 #, kde-format
 msgid "Registered with network provider"
-msgstr ""
+msgstr "Registrert hos mobiloperatør"
 
 #: modemdetails.cpp:270
 #, kde-format
@@ -282,67 +282,67 @@ msgstr "SIM-kortet er tilgjengeleg, men ikkje brukbart."
 #: modemdetails.cpp:312
 #, kde-format
 msgid "Not registered, not searching for new operator to register."
-msgstr ""
+msgstr "Ikkje registrert, og søkjer ikkje etter ny operatør å registrera hos."
 
 #: modemdetails.cpp:314
 #, kde-format
 msgid "Registered on home network."
-msgstr ""
+msgstr "Registrert på heime-mobilnett."
 
 #: modemdetails.cpp:316
 #, kde-format
 msgid "Not registered, searching for new operator to register with."
-msgstr ""
+msgstr "Ikkje registrert, men søkjer etter ny operatør å registrera hos."
 
 #: modemdetails.cpp:318
 #, kde-format
 msgid "Registration denied."
-msgstr ""
+msgstr "Registrering avvist."
 
 #: modemdetails.cpp:320
 #, kde-format
 msgid "Unknown registration status."
-msgstr ""
+msgstr "Ukjend registreringsstatus."
 
 #: modemdetails.cpp:322
 #, kde-format
 msgid "Registered on a roaming network."
-msgstr ""
+msgstr "Registrert på nettvekslings-mobilnett."
 
 #: modemdetails.cpp:324
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
-msgstr ""
+msgstr "Registrert for «berre SMS», på heime-mobilnett."
 
 #: modemdetails.cpp:326
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
-msgstr ""
+msgstr "Registrert for «berre SMS», på nettvekslings-mobilnett."
 
 #: modemdetails.cpp:328
 #, kde-format
 msgid "Emergency services only."
-msgstr ""
+msgstr "Berre naudnummer."
 
 #: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
-msgstr ""
+msgstr "Registrert for «CSFB ikkje føretrekt», på heime-mobilnett."
 
 #: modemdetails.cpp:332
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
-msgstr ""
+msgstr "Registrert for «CSFB ikkje føretrekt», på nettvekslings-mobilnett."
 
 #: modemdetails.cpp:334
 #, kde-format
 msgid "Attached for access to Restricted Local Operator Services."
-msgstr ""
+msgstr "Tilknytt for tilgang til RLOS (Restricted Local Operator Services)."
 
 #: modemdetails.cpp:373
 #, kde-format
 msgid "Scanning networks failed: %1"
-msgstr ""
+msgstr "Feil ved søk etter mobiloperatørar: %1"
 
 #: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
@@ -357,12 +357,12 @@ msgstr "Nei"
 #: modemdetails.cpp:434
 #, kde-format
 msgid "GuessYes"
-msgstr ""
+msgstr "Gjett ja"
 
 #: modemdetails.cpp:436
 #, kde-format
 msgid "GuessNo"
-msgstr ""
+msgstr "Gjett nei"
 
 #: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
 #: modemdetails.cpp:473 ui/EditProfileDialog.qml:62
@@ -395,22 +395,22 @@ msgstr "Vilkårleg"
 #: sim.cpp:74
 #, kde-format
 msgid "Lock reason unknown."
-msgstr ""
+msgstr "Ukjend låseårsak."
 
 #: sim.cpp:76
 #, kde-format
 msgid "Modem is unlocked."
-msgstr ""
+msgstr "Modemet er låst opp."
 
 #: sim.cpp:78
 #, kde-format
 msgid "SIM requires the PIN code."
-msgstr "SIM krev PIN-kode."
+msgstr "SIM-kortet krev PIN-kode."
 
 #: sim.cpp:80
 #, kde-format
 msgid "SIM requires the PIN2 code."
-msgstr "SIM krev PIN2-kode."
+msgstr "SIM-kortet krev PIN2-kode."
 
 #: sim.cpp:82
 #, kde-format
@@ -435,12 +435,12 @@ msgstr "Modemet treng PUK-koden til tenesteleverandøren."
 #: sim.cpp:90
 #, kde-format
 msgid "Modem requires the network PIN code."
-msgstr "Modemet treng PIN-koden til nettverket."
+msgstr "Modemet treng PIN-koden til mobilnettet."
 
 #: sim.cpp:92
 #, kde-format
 msgid "Modem requires the network PUK code."
-msgstr "Modemet treng PUK-koden til nettverket."
+msgstr "Modemet treng PUK-koden til mobilnettet."
 
 #: sim.cpp:94
 #, kde-format
@@ -470,12 +470,12 @@ msgstr "Modemet krev PH-FSIM PUK-koden."
 #: sim.cpp:104
 #, kde-format
 msgid "Modem requires the network subset PIN code."
-msgstr "Modemet krev PIN-koden til undernettverket."
+msgstr "Modemet krev PIN-koden til under-mobilnettet."
 
 #: sim.cpp:106
 #, kde-format
 msgid "Modem requires the network subset PUK code."
-msgstr "Modemet krev PUK-koden til undernettverket."
+msgstr "Modemet krev PUK-koden til under-mobilnettet."
 
 #: sim.cpp:150
 #, kde-format
@@ -485,27 +485,27 @@ msgstr "(tom)"
 #: sim.cpp:164
 #, kde-format
 msgid "Error toggling SIM lock: %1"
-msgstr ""
+msgstr "Feil ved (opp)låsing av SIM-kort: %1"
 
 #: sim.cpp:173
 #, kde-format
 msgid "Error changing the PIN: %1"
-msgstr ""
+msgstr "Feil ved byte av PIN-kode: %1"
 
 #: sim.cpp:186
 #, kde-format
 msgid "Error sending the PIN: %1"
-msgstr ""
+msgstr "Feil ved sending av PIN-kode: %1"
 
 #: sim.cpp:199
 #, kde-format
 msgid "Error sending the PUK: %1"
-msgstr ""
+msgstr "Feil ved sending av PUK-kode: %1"
 
 #: ui/AvailableNetworks.qml:16
 #, kde-format
 msgid "Available Networks"
-msgstr "Tilgjengelege nettverk"
+msgstr "Tilgjengelege mobilnett"
 
 #: ui/AvailableNetworks.qml:40
 #, kde-format
@@ -520,7 +520,7 @@ msgstr "Gjeldande operatør: %1"
 #: ui/AvailableNetworks.qml:43
 #, kde-format
 msgid "Scan For Networks"
-msgstr "Søk etter nettverk"
+msgstr "Søk etter mobilnett"
 
 #: ui/EditProfileDialog.qml:14
 #, kde-format
@@ -550,7 +550,7 @@ msgstr "Passord"
 #: ui/EditProfileDialog.qml:61
 #, kde-format
 msgid "Network type"
-msgstr "Nettverkstype"
+msgstr "Type mobilnett"
 
 #: ui/EditProfileDialog.qml:62
 #, kde-format
@@ -600,12 +600,12 @@ msgstr "Mobildata er ikkje tilgjengeleg med dette modemet."
 #: ui/main.qml:80
 #, kde-format
 msgid "An APN needs to be configured to have mobile data."
-msgstr ""
+msgstr "Ein APN må setjast opp til å ha mobildata."
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Whether mobile data is enabled."
-msgstr ""
+msgstr "Om bruk av mobildata er påslått."
 
 #: ui/main.qml:113
 #, kde-format
@@ -642,12 +642,12 @@ msgstr "Modem %1"
 #: ui/ModemPage.qml:30
 #, kde-format
 msgid "Modem Control"
-msgstr ""
+msgstr "Modemstyring"
 
 #: ui/ModemPage.qml:36
 #, kde-format
 msgid "Force Modem Restart"
-msgstr ""
+msgstr "Tving omstart av modem"
 
 #: ui/ModemPage.qml:42 ui/SimPage.qml:105
 #, kde-format
@@ -657,7 +657,7 @@ msgstr "Modemdetaljar"
 #: ui/ModemPage.qml:55
 #, kde-format
 msgid "Access Technologies"
-msgstr ""
+msgstr "Tilgangsteknologi"
 
 #: ui/ModemPage.qml:75
 #, kde-format
@@ -727,7 +727,7 @@ msgstr "Forbruksmålt"
 #: ui/ModemPage.qml:207
 #, kde-format
 msgid "Active NetworkManager Connection"
-msgstr ""
+msgstr "Aktiv NetworkManager-tilkopling"
 
 #: ui/ModemPage.qml:215
 #, kde-format
@@ -757,7 +757,7 @@ msgstr "Straumstatus"
 #: ui/ModemPage.qml:274
 #, kde-format
 msgid "SIM Path"
-msgstr ""
+msgstr "SIM-adresse"
 
 #: ui/ProfileList.qml:23
 #, kde-format
@@ -775,6 +775,9 @@ msgid ""
 "Unable to autodetect connection settings for your carrier. Please find your "
 "carrier's APN settings by either contacting support or searching online."
 msgstr ""
+"Klarte ikkje finna tilkoplings­innstillingar for operatøren din automatisk. "
+"Du kan finna rette APN-innstillingar ved å kontakta kundestøtte for "
+"operatøren eller sjå på heimesida hans."
 
 #: ui/ProfileList.qml:72
 #, kde-format
@@ -792,10 +795,9 @@ msgid "Add APN"
 msgstr "Ny APN"
 
 #: ui/ProfileList.qml:125
-#, fuzzy, kde-format
-#| msgid "Autodetect APN"
+#, kde-format
 msgid "Automatically detect APN"
-msgstr "Oppdag automatisk APN"
+msgstr "Finn automatisk APN"
 
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
@@ -805,17 +807,17 @@ msgstr "SIM-lås"
 #: ui/SimLockPage.qml:38
 #, kde-format
 msgid "SIM is locked"
-msgstr ""
+msgstr "SIM-kortet er låst"
 
 #: ui/SimLockPage.qml:39
 #, kde-format
 msgid "In order to use this SIM, you must first unlock it."
-msgstr ""
+msgstr "For å bruka dette SIM-kortet må du først låsa det opp."
 
 #: ui/SimLockPage.qml:61
 #, kde-format
 msgid "SIM is not locked"
-msgstr ""
+msgstr "SIM-kortet er ikkje låst"
 
 #: ui/SimLockPage.qml:62
 #, kde-format
@@ -823,6 +825,8 @@ msgid ""
 "You can lock your SIM to require a set PIN code for phone calls and mobile "
 "data."
 msgstr ""
+"Du kan låsa SIM-kortet slik at det krev ein PIN-kode for telefonsamtalar og "
+"mobildata."
 
 #: ui/SimLockPage.qml:66
 #, kde-format
@@ -832,22 +836,22 @@ msgstr "Lås SIM-kort"
 #: ui/SimLockPage.qml:78
 #, kde-format
 msgid "Disable SIM Lock"
-msgstr ""
+msgstr "Fjern SIM-låsing"
 
 #: ui/SimLockPage.qml:79
 #, kde-format
 msgid "Disable the SIM lock feature and remove the passcode on the SIM."
-msgstr ""
+msgstr "Fjern låsefunksjonen på SIM-kortet og tilhøyrande passkode."
 
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr "Byt PIN"
+msgstr "Byt PIN-kode"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
 msgid "Change the passcode set on the SIM."
-msgstr ""
+msgstr "Byt passkode på SIM-kortet."
 
 #: ui/SimLockPage.qml:106
 #, kde-format
@@ -862,54 +866,54 @@ msgstr "Forsøk att: %1"
 #: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
-msgstr "Skriv inn PIN"
+msgstr "Skriv inn PIN-kode"
 
 #: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
-msgstr "Byt SIM-PIN"
+msgstr "Byt SIM-PIN-kode"
 
 #: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
 msgid "PINs don't match!"
-msgstr ""
+msgstr "PIN-kodane er ikkje like."
 
 #: ui/SimLockPage.qml:151 ui/SimLockPage.qml:216
 #, kde-format
 msgid "PINs must be between 4 and 8 digits!"
-msgstr ""
+msgstr "PIN-koden må ha mellom 4–8 siffer."
 
 #: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
 msgid "Current PIN"
-msgstr "Gjelande PIN"
+msgstr "Gjeldande PIN-kode"
 
 #: ui/SimLockPage.qml:161 ui/SimLockPage.qml:221
 #, kde-format
 msgid "New PIN"
-msgstr "Ny PIN"
+msgstr "Ny PIN-kode"
 
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr "Stadfest PIN"
+msgstr "Stadfest PIN-koden"
 
 #: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr "Fjern SIM-PIN"
+msgstr "Fjern SIM-PIN-kode"
 
 #: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
-msgstr "Legg til SIM-PIN"
+msgstr "Legg til SIM-PIN-kode"
 
 #: ui/SimPage.qml:45
 #, kde-format
 msgid ""
 "This SIM slot is empty, a SIM card needs to be inserted in order for it to "
 "be used."
-msgstr ""
+msgstr "SIM-sporet er låst. Du må setja inn eit SIM-kort før du kan bruka det."
 
 #: ui/SimPage.qml:60
 #, kde-format
@@ -919,7 +923,7 @@ msgstr "Nettveksling"
 #: ui/SimPage.qml:61
 #, kde-format
 msgid "Allow your device to use networks other than your carrier."
-msgstr ""
+msgstr "Tillat at eininga brukar andre mobilnett enn operatøren din sine."
 
 #: ui/SimPage.qml:72
 #, kde-format
@@ -929,27 +933,27 @@ msgstr "Rediger APN-ar"
 #: ui/SimPage.qml:73
 #, kde-format
 msgid "Configure access point names for your carrier."
-msgstr ""
+msgstr "Set opp APN-ar for operatøren din."
 
 #: ui/SimPage.qml:83
 #, kde-format
 msgid "Networks"
-msgstr "Nettverk"
+msgstr "Mobilnett"
 
 #: ui/SimPage.qml:84
 #, kde-format
 msgid "Select a network operator."
-msgstr ""
+msgstr "Vel mobiloperatør."
 
 #: ui/SimPage.qml:95
 #, kde-format
 msgid "Modify SIM lock settings."
-msgstr ""
+msgstr "Endra innstillingar for SIM-lås."
 
 #: ui/SimPage.qml:106
 #, kde-format
 msgid "View the details of the modem this SIM is connected to."
-msgstr ""
+msgstr "Vis detaljar om modem som SIK-kortet er tilkopla."
 
 #: ui/SimPage.qml:112
 #, kde-format
@@ -959,32 +963,32 @@ msgstr "SIM-detaljar"
 #: ui/SimPage.qml:126
 #, kde-format
 msgid "IMSI"
-msgstr ""
+msgstr "IMSI"
 
 #: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
-msgstr ""
+msgstr "EID"
 
 #: ui/SimPage.qml:142
 #, kde-format
 msgid "Operator Code (modem)"
-msgstr ""
+msgstr "Operatørkode (modem)"
 
 #: ui/SimPage.qml:150
 #, kde-format
 msgid "Operator Name (modem)"
-msgstr ""
+msgstr "Operatørnamn (modem)"
 
 #: ui/SimPage.qml:158
 #, kde-format
 msgid "Operator Code (provided by SIM)"
-msgstr ""
+msgstr "Operatørkode (frå SIM-kort)"
 
 #: ui/SimPage.qml:166
 #, kde-format
 msgid "Operator Name (provided by SIM)"
-msgstr ""
+msgstr "Operatørkode (frå SIM-kort)"
 
 #: ui/SimPage.qml:174
 #, kde-format
@@ -994,4 +998,4 @@ msgstr "SIM-ID"
 #: ui/SimPage.qml:190
 #, kde-format
 msgid "Emergency Numbers"
-msgstr ""
+msgstr "Naudnummer"
