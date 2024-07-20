@@ -24,5 +24,5 @@ target_link_libraries(mobiletaskswitcher
     Plasma::Activities
 )
 
-# install(TARGETS kwin4_effect_taskswitcher DESTINATION ${PLUGIN_INSTALL_DIR}/kwin/effects/plugins)
 install(DIRECTORY qml DESTINATION ${KDE_INSTALL_DATADIR}/kwin/effects/mobiletaskswitcher)
+install(FILES mobiletaskswitcher.json DESTINATION ${KDE_INSTALL_DATADIR}/kwin/effects/mobiletaskswitcher)
