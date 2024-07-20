@@ -27,6 +27,7 @@
         "Description[tr]": "Cep için öntanımlı dolaşım paneli",
         "Description[uk]": "Типова панель навігації для мобільних",
         "Description[x-test]": "xxDefault navigation panel for mobilexx",
+        "Description[zh_CN]": "手机的默认导航面板",
         "EnabledByDefault": true,
         "Id": "org.kde.plasma.mobile.defaultNavigationPanel",
         "License": "LGPLv2+",
@@ -45,6 +46,7 @@
         "Name[tr]": "Öntanımlı Taşınabilir Dolaşım Paneli",
         "Name[uk]": "Типова панель навігації для мобільних",
         "Name[x-test]": "xxDefault Mobile Navigation Panelxx",
+        "Name[zh_CN]": "默认手机导航面板",
         "Website": "https://www.kde.org/plasma-desktop"
     },
     "X-Plasma-ContainmentCategories": [

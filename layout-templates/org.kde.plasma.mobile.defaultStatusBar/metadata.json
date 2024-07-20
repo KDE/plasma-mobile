@@ -27,6 +27,7 @@
         "Description[tr]": "Cep için öntanımlı durum çubuğu",
         "Description[uk]": "Типова смужка стану для мобільних",
         "Description[x-test]": "xxDefault status bar for mobilexx",
+        "Description[zh_CN]": "手机的默认状态栏",
         "EnabledByDefault": true,
         "Id": "org.kde.plasma.mobile.defaultStatusBar",
         "License": "LGPLv2+",
@@ -45,6 +46,7 @@
         "Name[tr]": "Öntanımlı Taşınabilir Durum Çubuğu",
         "Name[uk]": "Типова смужка стану для мобільних",
         "Name[x-test]": "xxDefault Mobile Status Barxx",
+        "Name[zh_CN]": "默认手机状态栏",
         "Website": "https://www.kde.org/plasma-desktop"
     },
     "X-Plasma-ContainmentCategories": [
