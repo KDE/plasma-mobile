@@ -79,6 +79,8 @@ private:
 
     void resetSwipe();
 
+    const QMetaObject *getFlickableMetaObject();
+
     Mode m_mode = Mode::BothAxis;
     bool m_interactive = true;
     bool m_pressed = false;
@@ -100,6 +102,8 @@ private:
 
     // whether to skip trying to measure the swipe threshold
     bool m_skipSwipeThreshold;
+
+    QQuickItem *m_internalFlickable = nullptr;
 };
 
 QML_DECLARE_TYPE(SwipeArea)
