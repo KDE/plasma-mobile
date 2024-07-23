@@ -25,7 +25,7 @@ Rectangle {
     readonly property color headerTextInactiveColor: Qt.rgba(255, 255, 255, 0.4)
 
     radius: Kirigami.Units.largeSpacing
-    color: Qt.rgba(255, 255, 255, 0.3)
+    color: Qt.rgba(255, 255, 255, 0.2)
 
     // model for shown dots
     // we need to use a listmodel to avoid all delegates from reloading
@@ -164,6 +164,8 @@ Rectangle {
         // toggle between showing keypad and not
         ToolButton {
             id: keyboardToggle
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
             anchors.right: parent.right
             anchors.top: parent.top
@@ -175,6 +177,7 @@ Rectangle {
 
             implicitWidth: height
             icon.name: root.lockScreenState.isKeyboardMode ? "input-dialpad-symbolic" : "input-keyboard-virtual-symbolic"
+            icon.color: 'white'
             onClicked: {
                 root.lockScreenState.isKeyboardMode = !root.lockScreenState.isKeyboardMode;
                 if (root.lockScreenState.isKeyboardMode) {
