@@ -8,6 +8,8 @@
 
 #include <QMouseEvent>
 #include <QObject>
+#include <QQmlComponent>
+#include <QQmlEngine>
 #include <QTabletEvent>
 #include <QTouchEvent>
 
@@ -66,7 +68,13 @@ bool SwipeArea::childMouseEventFilter(QQuickItem *item, QEvent *event)
         return QQuickItem::childMouseEventFilter(item, event);
     }
 
-    if (event->isPointerEvent() && event->type() != QEvent::UngrabMouse) {
+    if (event->type() == QEvent::UngrabMouse) {
+        auto spe = static_cast<QSinglePointEvent *>(event);
+        const QObject *grabber = spe->exclusiveGrabber(spe->points().first());
+        if (grabber != this) {
+            resetSwipe(); // A child has been ungrabbed
+        }
+    } else if (event->isPointerEvent()) {
         return filterPointerEvent(item, static_cast<QPointerEvent *>(event));
     }
 
@@ -97,6 +105,33 @@ bool SwipeArea::filterPointerEvent(QQuickItem *receiver, QPointerEvent *event)
     QPointF localPos = mapFromScene(firstPoint.scenePosition());
     bool receiverDisabled = receiver && !receiver->isEnabled();
     bool receiverKeepsGrab = receiver && (receiver->keepMouseGrab() || receiver->keepTouchGrab());
+
+    qDebug() << receiverDisabled << receiverKeepsGrab << receiver;
+
+    // Check if there is a nested flickable, and cancel events if it still is needs to flick
+    QQuickItem *item = receiver;
+    while (item->parentItem() && item->parentItem() != this) {
+        auto metaObject = item->metaObject();
+        bool isFlickable = metaObject->inherits(getFlickableMetaObject());
+
+        if (isFlickable) {
+            // HACK: detect if the flickable can move
+            QVariant qInteractive = item->property("interactive");
+            QVariant qDragging = item->property("dragging");
+            if (qInteractive.isValid() && qDragging.isValid()) {
+                bool interactive = qInteractive.toBool();
+                bool dragging = qDragging.toBool();
+                qDebug() << "dragging" << dragging;
+
+                if (interactive && dragging) {
+                    receiverKeepsGrab = true;
+                    break;
+                }
+            }
+        }
+
+        item = item->parentItem();
+    }
 
     if ((m_stealMouse || contains(localPos)) && (!receiver || !receiverKeepsGrab || receiverDisabled)) {
         // clone the event, and set the first point's local position
@@ -171,11 +206,20 @@ void SwipeArea::mouseReleaseEvent(QMouseEvent *event)
 
 void SwipeArea::mouseUngrabEvent()
 {
-    QQuickItem::mouseUngrabEvent();
+    resetSwipe();
 }
 
 void SwipeArea::touchEvent(QTouchEvent *event)
 {
+    if (event->type() == QEvent::TouchCancel) {
+        if (m_interactive) {
+            resetSwipe();
+        } else {
+            QQuickItem::touchEvent(event);
+        }
+        return;
+    }
+
     bool unhandled = true;
     const auto &firstPoint = event->points().first();
 
@@ -213,7 +257,7 @@ void SwipeArea::touchEvent(QTouchEvent *event)
 
 void SwipeArea::touchUngrabEvent()
 {
-    QQuickItem::touchUngrabEvent();
+    resetSwipe();
 }
 
 void SwipeArea::wheelEvent(QWheelEvent *event)
@@ -346,4 +390,22 @@ void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 
     // ensure it's called AFTER swipeStarted()
     Q_EMIT swipeMove(totalDelta.x(), totalDelta.y(), delta.x(), delta.y());
+}
+
+const QMetaObject *SwipeArea::getFlickableMetaObject()
+{
+    if (!m_internalFlickable) {
+        // HACK: To avoid relying on Qt Quick private API to get Flickable's QMetaObject,
+        //       we dynamically create one internally.
+        QQmlEngine *engine = qmlEngine(this);
+        if (!engine) {
+            return nullptr;
+        }
+
+        QQmlComponent component{engine};
+        component.setData("import QtQuick; Flickable {}", QUrl{});
+        m_internalFlickable = qobject_cast<QQuickItem *>(component.create());
+    }
+
+    return m_internalFlickable->metaObject();
 }

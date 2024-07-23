@@ -84,6 +84,8 @@ private:
 
     void resetSwipe();
 
+    const QMetaObject *getFlickableMetaObject();
+
     Mode m_mode = Mode::BothAxis;
     bool m_interactive = true;
     bool m_pressed = false;
@@ -109,6 +111,8 @@ private:
 
     // the total amount of distance scrolled
     QPointF m_totalScrollDelta;
+
+    QQuickItem *m_internalFlickable = nullptr;
 };
 
 QML_DECLARE_TYPE(SwipeArea)
