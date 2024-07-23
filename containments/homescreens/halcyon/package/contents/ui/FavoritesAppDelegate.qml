@@ -180,13 +180,7 @@ Item {
                 launchAppRequested = true;
             }
         }
-        
-        HoverHandler {
-            id: hoverHandler
-            acceptedDevices: PointerDevice.Mouse
-            acceptedPointerTypes: PointerDevice.Generic
-        }
-        
+
         Rectangle {
             anchors.fill: parent
             radius: height / 2        
