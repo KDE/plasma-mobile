@@ -33,6 +33,10 @@ QtObject {
     // yPosition threshold below which opening the task switcher should be undone and returned to the previously active task
     readonly property real undoYThreshold: openedYPosition / 2
 
+    // whether the switcher has already triggered haptic feedback or not
+    // we don't want to continuously send haptics, just once is enough
+    property bool hasVibrated: false
+
     // ~~ measurement constants ~~
 
     // dimensions of a real window on the screen

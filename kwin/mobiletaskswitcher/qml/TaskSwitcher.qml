@@ -39,6 +39,10 @@ FocusScope {
         stateClass: TaskSwitcherData.TaskSwitcherState
     }
 
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
     property var tasksModel: TaskSwitcherData.TaskFilterModel {
         screenName: root.targetScreen.name
         windowModel: TaskSwitcherData.TaskModel
@@ -102,6 +106,12 @@ FocusScope {
                 taskSwitcherHelpers.isInTaskScrubMode = true;
                 taskSwitcherHelpers.cancelAnimations();
                 taskSwitcherHelpers.open();
+                if (!taskSwitcherHelpers.hasVibrated) {
+                    // Haptic feedback when the task scrub mode engages
+                    haptics.buttonVibrate();
+                    taskSwitcherHelpers.hasVibrated = true;
+                }
+
             }
             let newTaskIndex = Math.max(0, Math.min(tasksCount - 1, Math.floor(state.touchXPosition / taskSwitcherHelpers.taskScrubDistance) + state.initialTaskIndex));
             if (newTaskIndex != state.currentTaskIndex) {
@@ -217,9 +227,30 @@ FocusScope {
                         taskSwitcherHelpers.open();
                     } else {
                         // no flick and not enough activation to go to task switcher
-                        returnToApp();
+                        if (state.wasInActiveTask) {
+                            returnToApp();
+                        } else {
+                            // do open switcher in case we were on homescreen before
+                            taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
+                            taskSwitcherHelpers.open();
+                        }
+
                     }
                 }
+            }
+        }
+
+        function onVelocityChanged() {
+            if (!taskSwitcherHelpers.hasVibrated) {
+                if (!state.wasInActiveTask ||
+                    (state.wasInActiveTask &&
+                     state.yPosition > taskSwitcherHelpers.undoYThreshold &&
+                     state.totalSquaredVelocity < state.flickVelocityThreshold)) {
+                        // Haptic feedback when conditions are met for the task switcher to open
+                        haptics.buttonVibrate();
+                        taskSwitcherHelpers.hasVibrated = true;
+                }
+
             }
         }
 
