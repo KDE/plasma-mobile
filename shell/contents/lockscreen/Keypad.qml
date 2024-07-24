@@ -110,7 +110,10 @@ Item {
 
                 opacity: enabled
                 Behavior on opacity {
-                    NumberAnimation { duration: 100 * index }
+                    SequentialAnimation {
+                        PauseAnimation { duration: 20 * index }
+                        NumberAnimation { duration: 300 }
+                    }
                 }
 
                 background: Rectangle {
