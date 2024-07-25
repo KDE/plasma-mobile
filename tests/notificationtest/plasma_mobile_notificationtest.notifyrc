@@ -1,0 +1,11 @@
+# SPDX-FileCopyrightText: 2024 Devin Lin <devin@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[Global]
+IconName=notifications
+Name=Notification Test
+
+[Event/notificationTest]
+Name=Notification Test
+Comment=A test notification
+Action=Popup
