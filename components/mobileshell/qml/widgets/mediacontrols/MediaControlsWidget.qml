@@ -7,7 +7,7 @@ import QtQuick.Layouts
 import QtQuick.Controls as QQC2
 
 import org.kde.kirigami as Kirigami
-
+import org.kde.plasma.components 3.0 as PC3
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 
@@ -19,10 +19,20 @@ import org.kde.plasma.private.mpris as Mpris
 Item {
     id: root
     visible: sourceRepeater.count > 0
-    
+
+    property bool detailledView: false
+    readonly property real heightMultiplier: detailledView ? 2 : 1
+
     readonly property real padding: Kirigami.Units.gridUnit
-    readonly property real contentHeight: Kirigami.Units.gridUnit * 2
+    readonly property real contentHeight: Kirigami.Units.gridUnit * 2 * heightMultiplier
     implicitHeight: visible ? padding * 2 + contentHeight : 0
+
+    Behavior on implicitHeight {
+        NumberAnimation {
+            duration: Kirigami.Units.shortDuration
+            easing.type: Easing.InOutQuad
+        }
+    }
     
     MediaControlsSource {
         id: mpris2Source
@@ -82,15 +92,27 @@ Item {
                     return decodeURIComponent(lastUrlPart);
                 }
 
+                function msecToString(duration: int): string {
+                    let seconds = Math.floor(duration / 1000000)
+                    let minutes = Math.floor(seconds / 60)
+                    seconds -= minutes * 60
+                    return `${minutes}:${seconds.toString().padStart(2, '0')}`
+                }
+
                 sourceComponent: MouseArea {
                     id: mouseArea
                     implicitHeight: playerItem.implicitHeight
                     implicitWidth: playerItem.implicitWidth
-                    
-                    onClicked: {
+
+                    onPressAndHold: {
                         MobileShell.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
                         MobileShellState.ShellDBusClient.closeActionDrawer();
                     }
+                    
+                    onClicked: {
+                        root.detailledView = !root.detailledView
+                    }
+
                     
                     MobileShell.BaseItem {
                         id: playerItem
@@ -105,15 +127,14 @@ Item {
                             imageSource: model.artUrl
                         }
                         
-                        contentItem: Item {
+                        contentItem: ColumnLayout {
                             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                             Kirigami.Theme.inherit: false
                             width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
+                            spacing: Kirigami.Units.largeSpacing
                             
                             RowLayout {
                                 id: controlsRow
-                                width: parent.width
-                                height: parent.height
                                 spacing: 0
 
                                 enabled: model.canControl
@@ -121,7 +142,7 @@ Item {
                                 Image {
                                     id: albumArt
                                     Layout.preferredWidth: height
-                                    Layout.fillHeight: true
+                                    Layout.preferredHeight: controlsRow.height
                                     asynchronous: true
                                     fillMode: Image.PreserveAspectFit
                                     source: model.artUrl
@@ -131,6 +152,7 @@ Item {
 
                                 ColumnLayout {
                                     Layout.leftMargin: albumArt.visible ? Kirigami.Units.gridUnit : 0
+                                    Layout.rightMargin: Kirigami.Units.largeSpacing
                                     Layout.fillWidth: true
                                     spacing: Kirigami.Units.smallSpacing
 
@@ -160,13 +182,11 @@ Item {
                                 }
 
                                 QQC2.ToolButton {
-                                    Layout.fillHeight: true
-                                    Layout.preferredWidth: height
-                                    
                                     enabled: model.canGoPrevious
                                     icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
-                                    icon.width: Kirigami.Units.iconSizes.small
-                                    icon.height: Kirigami.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.smallMedium
+                                    icon.height: Kirigami.Units.iconSizes.smallMedium
+                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.goPrevious();
@@ -176,12 +196,10 @@ Item {
                                 }
 
                                 QQC2.ToolButton {
-                                    Layout.fillHeight: true
-                                    Layout.preferredWidth: height
-                                    
                                     icon.name: (model.playbackStatus === Mpris.PlaybackStatus.Playing) ? "media-playback-pause" : "media-playback-start"
-                                    icon.width: Kirigami.Units.iconSizes.small
-                                    icon.height: Kirigami.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.smallMedium
+                                    icon.height: Kirigami.Units.iconSizes.smallMedium
+                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.playPause();
@@ -190,19 +208,57 @@ Item {
                                 }
 
                                 QQC2.ToolButton {
-                                    Layout.fillHeight: true
-                                    Layout.preferredWidth: height
-                                    
                                     enabled: model.canGoNext
                                     icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
-                                    icon.width: Kirigami.Units.iconSizes.small
-                                    icon.height: Kirigami.Units.iconSizes.small
+                                    icon.width: Kirigami.Units.iconSizes.smallMedium
+                                    icon.height: Kirigami.Units.iconSizes.smallMedium
+                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.goNext();
                                     }
                                     visible: model.canGoPrevious || model.canGoNext
                                     Accessible.name: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Next track")
+                                }
+                            }
+
+                            RowLayout {
+                                id: timerControlsRow
+
+                                spacing: Kirigami.Units.largeSpacing
+
+                                visible: root.detailledView
+
+                                Text {
+                                    text: msecToString(model.position)
+
+                                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+                                    color: "white"
+                                }
+
+                                PC3.Slider {
+                                    Layout.fillWidth: true
+
+                                    from: 0
+                                    value: model.position
+                                    to: model.length
+
+                                    onMoved: model.position = value
+
+                                    Timer {
+                                        interval: 1000; running: true; repeat: true
+                                        onTriggered: {
+                                            mpris2Source.setIndex(model.index);
+                                            mpris2Source.updatePosition()
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    text: msecToString(model.length)
+
+                                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
+                                    color: "white"
                                 }
                             }
                         }

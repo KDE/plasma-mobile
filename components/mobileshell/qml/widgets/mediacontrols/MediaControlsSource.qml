@@ -37,4 +37,8 @@ QtObject {
     function playPause() {
         baseMpris2Model.currentPlayer.PlayPause();
     }
+
+    function updatePosition(): void {
+        baseMpris2Model.currentPlayer.updatePosition();
+    }
 }
