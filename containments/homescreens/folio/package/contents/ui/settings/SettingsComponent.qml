@@ -23,6 +23,17 @@ Item {
 
     readonly property bool homeScreenInteractive: !appletListViewer.open
 
+    Connections {
+        target: folio.HomeScreenState
+
+        // Close applet viewer when settings view closes
+        function onViewStateChanged() {
+            if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.SettingsView) {
+                appletListViewer.requestClose();
+            }
+        }
+    }
+
     MouseArea {
         id: closeSettings
 
