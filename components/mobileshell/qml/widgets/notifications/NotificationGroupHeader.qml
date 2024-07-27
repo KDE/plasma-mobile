@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  * SPDX-FileCopyrightText: 2018-2019 Kai Uwe Broulik <kde@privat.broulik.de>
- * 
+ *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
@@ -20,20 +20,10 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 
 RowLayout {
     id: notificationHeading
-    property int notificationType
 
     property var applicationIconSource
     property string applicationName
     property string originName
-
-    property var time
-    property P5Support.DataSource timeSource
-
-    property int jobState
-    property QtObject jobDetails
-
-    property real timeout: 5000
-    property real remainingTime: 0
 
     spacing: Kirigami.Units.smallSpacing
     Layout.preferredHeight: Math.max(applicationNameLabel.implicitHeight, Kirigami.Units.iconSizes.small)

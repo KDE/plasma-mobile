@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  * SPDX-FileCopyrightText: 2018-2019 Kai Uwe Broulik <kde@privat.broulik.de>
- * 
+ *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -23,7 +23,7 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
-    
+
     // notification heading for groups with one element
     NotificationGroupHeader {
         id: notificationHeading
@@ -40,15 +40,8 @@ BaseNotificationItem {
         applicationName: notificationItem.applicationName
         applicationIconSource: notificationItem.applicationIconSource
         originName: notificationItem.originName
-        
-        notificationType: notificationItem.notificationType
-        jobState: notificationItem.jobState
-        jobDetails: notificationItem.jobDetails
-        
-        time: notificationItem.time
-        timeSource: notificationItem.timeSource
     }
-    
+
     // notification
     NotificationCard {
         id: mainCard
@@ -56,21 +49,21 @@ BaseNotificationItem {
         anchors.top: notificationHeading.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         tapEnabled: notificationItem.hasDefaultAction
         onTapped: notificationItem.actionInvoked("default");
-        swipeGestureEnabled: notificationItem.notificationType != NotificationManager.Notifications.JobType
+        swipeGestureEnabled: notificationItem.closable
         onDismissRequested: notificationItem.close()
-        
+
         ColumnLayout {
             id: column
             spacing: 0
-            
+
             // notification summary row
             RowLayout {
                 Layout.fillWidth: true
                 Layout.bottomMargin: Kirigami.Units.smallSpacing
-                
+
                 // notification summary
                 PlasmaComponents.Label {
                     id: summaryLabel
@@ -83,19 +76,19 @@ BaseNotificationItem {
                     visible: text !== ""
                     font.weight: Font.DemiBold
                 }
-                
+
                 // notification timestamp
                 NotificationTimeText {
                     Layout.alignment: Qt.AlignRight | Qt.AlignTop
                     notificationType: notificationItem.notificationType
                     jobState: notificationItem.jobState
                     jobDetails: notificationItem.jobDetails
-                    
+
                     time: notificationItem.time
                     timeSource: notificationItem.timeSource
                 }
             }
-            
+
             // notification contents
             RowLayout {
                 Layout.fillWidth: true
@@ -105,17 +98,11 @@ BaseNotificationItem {
                 NotificationBodyLabel {
                     id: bodyLabel
                     Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                    Layout.fillWidth: true
-                    
-                    // HACK RichText does not allow to specify link color and since LineEdit
-                    // does not support StyledText, we have to inject some CSS to force the color,
-                    // cf. QTBUG-81463 and to some extent QTBUG-80354
-                    text: "<style>a { color: " + Kirigami.Theme.linkColor + "; }</style>" + notificationItem.body
+                    Layout.preferredWidth: column.width - iconContainer.width - Kirigami.Units.smallSpacing
 
-                    // Cannot do text !== "" because RichText adds some HTML tags even when empty
-                    visible: notificationItem.body !== ""
+                    text: notificationItem.body
                 }
-                
+
                 // notification icon
                 Item {
                     id: iconContainer
@@ -138,13 +125,41 @@ BaseNotificationItem {
                     }
                 }
             }
-            
+
+            // Job progress reporting
+            Loader {
+                id: jobLoader
+                Layout.fillWidth: true
+                Layout.preferredHeight: item ? item.implicitHeight : 0
+                active: notificationItem.notificationType === NotificationManager.Notifications.JobType
+                visible: active
+                sourceComponent: NotificationJobItem {
+                    iconContainerItem: iconContainer
+
+                    jobState: notificationItem.jobState
+                    jobError: notificationItem.jobError
+                    percentage: notificationItem.percentage
+                    suspendable: notificationItem.suspendable
+                    killable: notificationItem.killable
+
+                    jobDetails: notificationItem.jobDetails
+
+                    onSuspendJobClicked: notificationItem.suspendJobClicked()
+                    onResumeJobClicked: notificationItem.resumeJobClicked()
+                    onKillJobClicked: notificationItem.killJobClicked()
+
+                    onOpenUrl: notificationItem.openUrl(url)
+                    onFileActionInvoked: notificationItem.fileActionInvoked(action)
+                }
+            }
+
             // notification actions
             NotificationFooterActions {
                 Layout.fillWidth: true
+                Layout.topMargin: Kirigami.Units.smallSpacing
                 notification: notificationItem
             }
-            
+
             // thumbnails
             Loader {
                 id: thumbnailStripLoader
