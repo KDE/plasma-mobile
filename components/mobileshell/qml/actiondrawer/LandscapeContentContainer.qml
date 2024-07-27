@@ -15,6 +15,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 /**
  * Root element that contains all the ActionDrawer's contents, and is anchored to the screen.
@@ -23,6 +24,7 @@ Item {
     id: root
 
     required property var actionDrawer
+    property QS.QuickSettingsModel quickSettingsModel
 
     property alias notificationsWidget: notificationWidget
 
@@ -169,6 +171,7 @@ Item {
             anchors.right: parent.right
 
             actionDrawer: root.actionDrawer
+            quickSettingsModel: root.quickSettingsModel
             fullScreenHeight: root.height
 
             transform: Translate {

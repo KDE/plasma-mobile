@@ -12,6 +12,7 @@ import org.kde.kirigami 2.12 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 /**
  * Quick settings panel for landscape view (right sidebar).
@@ -22,6 +23,11 @@ MobileShell.BaseItem {
 
     required property var actionDrawer
 
+    property QS.QuickSettingsModel quickSettingsModel
+
+    /**
+     * The height of the entire screen the panel opens in.
+     */
     required property real fullScreenHeight
 
     /**
@@ -75,6 +81,7 @@ MobileShell.BaseItem {
                 id: quickSettings
 
                 mode: QuickSettings.ScrollView
+                quickSettingsModel: root.quickSettingsModel
                 width: column.width
                 implicitHeight: quickSettings.fullHeight
 

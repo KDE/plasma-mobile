@@ -13,6 +13,7 @@ import org.kde.ksvg 1.0 as KSvg
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 /**
  * Quick settings drawer pulled down from the top (for portrait mode).
@@ -22,6 +23,8 @@ MobileShell.BaseItem {
     id: root
 
     required property var actionDrawer
+
+    property QS.QuickSettingsModel quickSettingsModel
 
     /**
      * The amount of height to add to the panel (increasing the height of the quick settings area).
@@ -95,6 +98,7 @@ MobileShell.BaseItem {
 
                 mode: QuickSettings.Pages
                 actionDrawer: root.actionDrawer
+                quickSettingsModel: root.quickSettingsModel
                 minimizedViewProgress: 1 - root.minimizedToFullProgress
                 fullViewProgress: root.minimizedToFullProgress
                 height: root.minimizedQuickSettingsHeight + root.addedHeight

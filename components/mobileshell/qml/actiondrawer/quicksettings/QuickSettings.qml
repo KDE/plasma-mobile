@@ -25,6 +25,8 @@ Item {
     required property var actionDrawer
     required property int mode
 
+    property QS.QuickSettingsModel quickSettingsModel
+
     enum Mode {
         Pages,
         ScrollView
@@ -44,8 +46,6 @@ Item {
 
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
-
-    readonly property QS.QuickSettingsModel quickSettingsModel: QS.QuickSettingsModel {}
 
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {

@@ -12,6 +12,7 @@ import QtQuick.Window 2.2
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 /**
  * Root element that contains all the ActionDrawer's contents, and is anchored to the screen.
@@ -20,6 +21,7 @@ Item {
     id: root
 
     required property var actionDrawer
+    property QS.QuickSettingsModel quickSettingsModel
 
     property alias notificationsWidget: notificationWidget
 
@@ -56,6 +58,7 @@ Item {
         anchors.right: parent.right
 
         actionDrawer: root.actionDrawer
+        quickSettingsModel: root.quickSettingsModel
 
         // opacity and move animation (disabled when openToPinnedMode is false)
         property real offsetDist: actionDrawer.offset - minimizedQuickSettingsOffset

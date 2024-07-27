@@ -14,6 +14,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 Item {
     id: root
@@ -27,6 +28,11 @@ Item {
      * The model type for the notification widget.
      */
     property var notificationModelType: MobileShell.NotificationsModelType.NotificationsModel
+
+    /**
+     * The model for the quick settings.
+     */
+    property var quickSettingsModel: QS.QuickSettingsModel {}
 
     /**
      * The notification settings object to be used in the notification widget.
@@ -261,6 +267,7 @@ Item {
                 actionDrawer: root
                 width: root.width
                 height: root.height
+                quickSettingsModel: root.quickSettingsModel
             }
         }
 
@@ -270,6 +277,7 @@ Item {
                 actionDrawer: root
                 width: root.width
                 height: root.height
+                quickSettingsModel: root.quickSettingsModel
             }
         }
     }
