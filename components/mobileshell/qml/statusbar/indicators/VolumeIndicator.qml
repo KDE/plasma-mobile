@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 Kirigami.Icon {
     id: paIcon
-    
+
     source: MobileShell.AudioInfo.icon
 
     visible: MobileShell.AudioInfo.isVisible

@@ -17,15 +17,15 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 Item {
     id: root
-    
+
     property bool shadow: false
     property color backgroundColor
     property var foregroundColorGroup
-    
+
     property NavigationPanelAction leftAction
     property NavigationPanelAction middleAction
     property NavigationPanelAction rightAction
-    
+
     property NavigationPanelAction leftCornerAction
     property NavigationPanelAction rightCornerAction
 
@@ -41,7 +41,7 @@ Item {
         shadowVerticalOffset: 1
         shadowOpacity: 0.8
     }
-        
+
     Item {
         id: icons
         anchors.fill: parent

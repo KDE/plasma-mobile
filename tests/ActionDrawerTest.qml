@@ -25,50 +25,50 @@ ApplicationWindow {
     width: 360
     height: 720
     visible: true
-    
+
     Image {
         source: "assets/background.jpg"
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
     }
-    
+
     MobileShell.StatusBar {
         id: statusBar
         z: 1
-        
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         height: Kirigami.Units.gridUnit * 1.25
-        
+
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
         backgroundColor: "transparent"
-        
+
         showSecondRow: false
         showDropShadow: true
         showTime: true
         disableSystemTray: true // prevent SIGABRT, since loading the system tray leads to bad... things
     }
-    
+
     MobileShell.ActionDrawerOpenSurface {
         anchors.fill: statusBar
         actionDrawer: drawer
         z: 1
     }
-    
+
     MobileShell.ActionDrawer {
         id: drawer
         z: 1
         anchors.fill: parent
-        
+
         notificationSettings: NotificationManager.Settings {}
         notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
         notificationModel: NotificationManager.WatchedNotificationsModel {}
     }
-    
+
     PC3.Label {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: Kirigami.Units.gridUnit

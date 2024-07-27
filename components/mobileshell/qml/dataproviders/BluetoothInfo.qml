@@ -16,9 +16,9 @@ QtObject {
     id: root
     readonly property bool isVisible: BluezQt.Manager.bluetoothOperational
     readonly property string icon: deviceConnected ? "network-bluetooth-activated" : "network-bluetooth"
-    
+
     property bool deviceConnected: false
-    
+
     function updateStatus() {
         let connectedDevices = [];
 
@@ -28,13 +28,13 @@ QtObject {
                 connectedDevices.push(device);
             }
         }
-        
+
         root.deviceConnected = connectedDevices.length > 0;
     }
-    
+
     property var connections: Connections {
         target: BluezQt.Manager
-        
+
         function onDeviceAdded() {
             root.updateStatus();
         }
@@ -51,7 +51,7 @@ QtObject {
             root.updateStatus();
         }
     }
-    
+
     Component.onCompleted: {
         updateStatus();
     }

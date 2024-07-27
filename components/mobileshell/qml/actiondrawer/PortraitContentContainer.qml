@@ -18,56 +18,56 @@ import org.kde.kirigami 2.20 as Kirigami
  */
 Item {
     id: root
-    
+
     required property var actionDrawer
-    
+
     property alias notificationsWidget: notificationWidget
-    
+
     // pinned position (disabled when openToPinnedMode is false)
     readonly property real minimizedQuickSettingsOffset: quickSettings.minimizedHeight
-    
+
     // fully open position
     readonly property real maximizedQuickSettingsOffset: minimizedQuickSettingsOffset + quickSettings.maxAddedHeight
-    
+
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
-    
+
     function applyMinMax(val) {
         return Math.max(0, Math.min(1, val));
     }
-    
+
     // fullscreen background
     Rectangle {
         anchors.fill: parent
         // darken if there are notifications
-        color: Qt.rgba(Kirigami.Theme.backgroundColor.r, 
-                       Kirigami.Theme.backgroundColor.g, 
-                       Kirigami.Theme.backgroundColor.b, 
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
+                       Kirigami.Theme.backgroundColor.g,
+                       Kirigami.Theme.backgroundColor.b,
                        0.95)
         Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration } }
         opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
-    
+
     MobileShell.QuickSettingsDrawer {
         id: quickSettings
         z: 1 // ensure it's above notifications
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         actionDrawer: root.actionDrawer
-        
+
         // opacity and move animation (disabled when openToPinnedMode is false)
         property real offsetDist: actionDrawer.offset - minimizedQuickSettingsOffset
         property real totalOffsetDist: maximizedQuickSettingsOffset - minimizedQuickSettingsOffset
         minimizedToFullProgress: actionDrawer.openToPinnedMode ? (actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
-        
+
         // this drawer opens in two stages when pinned mode is enabled:
         // ---
         // stage 1: the transform effect is used, the drawer physically moves down to the pinned mode
         // stage 2: the rectangle increases height to reveal content, but the content stays still
         // when pinned mode is disabled, only stage 1 happens
-        
+
         // increase height of drawer when between pinned mode <-> maximized mode
         addedHeight: {
             if (!actionDrawer.openToPinnedMode) {
@@ -88,7 +88,7 @@ Item {
                 return (quickSettings.maxAddedHeight * effectProgress) + Math.max(0, Math.min(quickSettings.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
             }
         }
-        
+
         // physically move the drawer when between closed <-> pinned mode
         transform: Translate {
             id: translate
@@ -96,7 +96,7 @@ Item {
             y: Math.min(root.actionDrawer.offset - offsetHeight, 0)
         }
     }
-    
+
     MobileShell.NotificationsWidget {
         id: notificationWidget
         historyModel: root.actionDrawer.notificationModel
@@ -104,17 +104,17 @@ Item {
         notificationSettings: root.actionDrawer.notificationSettings
         actionsRequireUnlock: root.actionDrawer.restrictedPermissions
         onUnlockRequested: root.actionDrawer.permissionsRequested()
-        
+
         Connections {
             target: root.actionDrawer
-            
+
             function onRunPendingNotificationAction() {
                 notificationWidget.runPendingAction();
             }
         }
-        
+
         onBackgroundClicked: root.actionDrawer.close();
-        
+
         anchors {
             top: quickSettings.top
             topMargin: quickSettings.height + translate.y
@@ -123,7 +123,7 @@ Item {
             right: parent.right
         }
         opacity: applyMinMax(root.actionDrawer.offset / root.minimizedQuickSettingsOffset)
-        
+
         // HACK: there are weird issues with text rendering black regardless of opacity, just set the text to be invisible once it's out
         visible: opacity > 0.05
     }

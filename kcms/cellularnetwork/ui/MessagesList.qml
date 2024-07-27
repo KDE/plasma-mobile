@@ -11,17 +11,17 @@ import cellularnetworkkcm 1.0
 
 ColumnLayout {
     id: root
-    
+
     property var model
     property alias count: repeater.count
-    
+
     spacing: 0
     visible: count > 0
-    
+
     Repeater {
         id: repeater
         model: root.model
-        
+
         delegate: Kirigami.InlineMessage {
             Layout.bottomMargin: Kirigami.Units.largeSpacing
             Layout.fillWidth: true
@@ -34,9 +34,9 @@ ColumnLayout {
                     case InlineMessage.Warning: return Kirigami.MessageType.Warning;
                     case InlineMessage.Error: return Kirigami.MessageType.Error;
                 }
-                return Kirigami.MessageType.Error; 
+                return Kirigami.MessageType.Error;
             }
-            
+
             actions: [
                 Kirigami.Action {
                     icon.name: "dialog-close"

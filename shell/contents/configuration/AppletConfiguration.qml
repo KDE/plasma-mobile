@@ -20,13 +20,13 @@ Rectangle {
     color: "transparent"
 
 //BEGIN properties
-    
+
     property bool isContainment: false
     property alias app: appLoader.item
     property bool loadApp: true
-    
+
     signal appLoaded()
-    
+
 //END properties
 
 //BEGIN model
@@ -44,7 +44,7 @@ Rectangle {
             return sourceModel.data(sourceModel.index(row, 0), ConfigModel.VisibleRole);
         }
     }
-    
+
 //END model
 
 //BEGIN functions
@@ -87,7 +87,7 @@ Rectangle {
             root.saveConfig();
         }
     }
-    
+
     function pushReplace(item, config) {
         let page;
         if (app.pageStack.depth === 0) {
@@ -97,7 +97,7 @@ Rectangle {
         }
         app.currentConfigPage = page;
     }
-    
+
     function open(item) {
         app.isAboutPage = false;
         if (item.source) {
@@ -109,7 +109,7 @@ Rectangle {
             app.pageStack.pop();
         }
     }
-    
+
 //END functions
 
 
@@ -123,7 +123,7 @@ Rectangle {
             }
         }
     }
-    
+
 //END connections
 
 //BEGIN UI components
@@ -132,7 +132,7 @@ Rectangle {
         id: configurationKcmPageComponent
         ConfigurationKcmPage {}
     }
-    
+
     Loader {
         id: appLoader
         anchors.fill: parent
@@ -146,14 +146,14 @@ Rectangle {
             } else {
                 root.open(configDialog.configModel.get(0))
             }
-            
+
             root.appLoaded();
         }
-        
+
         sourceComponent: Kirigami.ApplicationItem {
             id: app
             anchors.fill: parent
-            
+
             // animation on show
             opacity: 0
             NumberAnimation on opacity {
@@ -162,14 +162,14 @@ Rectangle {
                 duration: Kirigami.Units.longDuration
                 easing.type: Easing.InOutQuad
             }
-            
+
             pageStack.globalToolBar.canContainHandles: true
             pageStack.globalToolBar.style: Kirigami.ApplicationHeaderStyle.ToolBar
             pageStack.globalToolBar.showNavigationButtons: Kirigami.ApplicationHeaderStyle.ShowBackButton;
-            
+
             property var currentConfigPage: null
             property bool isAboutPage: false
-            
+
             // pop pages when not in use
             Connections {
                 target: app.pageStack
@@ -178,7 +178,7 @@ Rectangle {
                     timer.restart();
                 }
             }
-            
+
             Timer {
                 id: timer
                 interval: 300
@@ -207,7 +207,7 @@ Rectangle {
                     delegate: configCategoryDelegate
                 }
             }
-            
+
             Component {
                 id: configCategoryDelegate
                 Kirigami.NavigationTabButton {
@@ -215,13 +215,13 @@ Rectangle {
                     text: model.name
                     width: footerBar.buttonWidth
                     QQC2.ButtonGroup.group: footerBar.tabGroup
-                    
+
                     onClicked: {
                         if (checked) {
                             root.open(model);
                         }
                     }
-                    
+
                     checked: {
                         if (app.pageStack.currentItem) {
                             if (model.kcm && app.pageStack.currentItem.kcm) {

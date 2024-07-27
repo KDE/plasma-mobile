@@ -12,7 +12,7 @@ QS.QuickSetting {
     icon: "system-shutdown-symbolic"
     status: i18n("Open power menu")
     enabled: false
-    
+
     function toggle() {
         PowerMenu.PowerMenuUtil.openShutdownScreen();
     }

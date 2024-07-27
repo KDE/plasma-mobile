@@ -33,11 +33,11 @@ Item {
             easing.type: Easing.InOutQuad
         }
     }
-    
+
     MediaControlsSource {
         id: mpris2Source
     }
-    
+
     // page indicator
     RowLayout {
         z: 1
@@ -46,7 +46,7 @@ Item {
         anchors.bottomMargin: Kirigami.Units.smallSpacing
         anchors.bottom: view.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        
+
         Repeater {
             model: view.count
             delegate: Rectangle {
@@ -57,24 +57,24 @@ Item {
             }
         }
     }
-    
+
     // list of app media widgets
     QQC2.SwipeView {
         id: view
         clip: true
-        
+
         anchors.fill: parent
-        
+
         Repeater {
             id: sourceRepeater
             model: mpris2Source.mpris2Model
-            
+
             delegate: Loader {
                 id: delegate
                 // NOTE: model is PlayerContainer from KMpris in plasma-workspace
 
                 asynchronous: true
-                
+
                 function getTrackName() {
                     console.log('track name: ' + model.title);
                     if (model.title) {
@@ -108,31 +108,31 @@ Item {
                         MobileShell.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
                         MobileShellState.ShellDBusClient.closeActionDrawer();
                     }
-                    
+
                     onClicked: {
                         root.detailledView = !root.detailledView
                     }
 
-                    
+
                     MobileShell.BaseItem {
                         id: playerItem
                         anchors.fill: parent
-                        
+
                         padding: root.padding
                         implicitHeight: root.contentHeight + root.padding * 2
                         implicitWidth: root.width
-                        
+
                         background: BlurredBackground {
                             darken: mouseArea.pressed
                             imageSource: model.artUrl
                         }
-                        
+
                         contentItem: ColumnLayout {
                             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
                             Kirigami.Theme.inherit: false
                             width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
                             spacing: Kirigami.Units.largeSpacing
-                            
+
                             RowLayout {
                                 id: controlsRow
                                 spacing: 0

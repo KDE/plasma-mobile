@@ -21,7 +21,7 @@ import org.kde.kirigami 2.20 as Kirigami
 Item {
     id: root
     clip: true
-    
+
     required property var actionDrawer
     required property int mode
 
@@ -34,19 +34,19 @@ Item {
     readonly property real columnWidth: Math.floor(width / columns)
     readonly property int minimizedColumns: Math.round(Math.min(8, Math.max(5, width / intendedMinimizedColumnWidth)))
     readonly property real minimizedColumnWidth: Math.floor(width / minimizedColumns)
-    
+
     readonly property real rowHeight: columnWidth * 0.7
     readonly property real fullHeight: fullView.implicitHeight
-    
+
     readonly property real intendedColumnWidth: Kirigami.Units.gridUnit * 7
     readonly property real intendedMinimizedColumnWidth: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
     readonly property real minimizedRowHeight: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
-    
+
     property real minimizedViewProgress: 0
     property real fullViewProgress: 1
 
     readonly property QS.QuickSettingsModel quickSettingsModel: QS.QuickSettingsModel {}
-    
+
     readonly property int columnCount: Math.floor(width/columnWidth)
     readonly property int rowCount: {
         let totalRows = Math.ceil(quickSettingsCount / columnCount);
@@ -56,17 +56,17 @@ Item {
             let maxRows = 5; // more than 5 is just disorienting
             let targetRows = Math.floor(Window.height * 0.65 / rowHeight);
             return Math.min(maxRows, Math.min(totalRows, targetRows));
-            
+
         } else if (root.mode === QuickSettings.ScrollView) {
             // horizontal orientation
             let targetRows = Math.floor(Window.height * 0.8 / rowHeight);
             return Math.min(totalRows, targetRows);
         }
     }
-    
+
     readonly property int pageSize: rowCount * columnCount
     readonly property int quickSettingsCount: quickSettingsModel.count
-        
+
     function resetSwipeView() {
         if (root.mode === QuickSettings.Pages) {
             pageLoader.item.view.currentIndex = 0;
@@ -83,29 +83,29 @@ Item {
             }
         }
     }
-    
+
     // view when fully open
     ColumnLayout {
         id: fullView
         opacity: root.fullViewProgress
         visible: opacity !== 0
         transform: Translate { y: (1 - fullView.opacity) * root.rowHeight }
-        
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         // Dynamically loads the appropriate view
         Loader {
             id: pageLoader
-            
+
             Layout.fillWidth: true
             Layout.minimumHeight: rowCount * rowHeight
 
             asynchronous: true
             sourceComponent: root.mode === QuickSettings.Pages ? swipeViewComponent : scrollViewComponent
         }
-        
+
         BrightnessItem {
             id: brightnessItem
             Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
@@ -114,7 +114,7 @@ Item {
             Layout.fillWidth: true
         }
     }
-    
+
     // view when in minimized mode
     RowLayout {
         id: minimizedView
@@ -122,11 +122,11 @@ Item {
         opacity: root.minimizedViewProgress
         visible: opacity !== 0
         transform: Translate { y: (1 - minimizedView.opacity) * -root.rowHeight }
-        
+
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
-        
+
         Repeater {
             model: QS.PaginateModel {
                 sourceModel: quickSettingsModel
@@ -134,22 +134,22 @@ Item {
             }
             delegate: MobileShell.BaseItem {
                 required property var modelData
-                
+
                 implicitHeight: root.minimizedRowHeight
                 implicitWidth: root.minimizedColumnWidth
                 horizontalPadding: (width - Kirigami.Units.gridUnit * 3) / 2
                 verticalPadding: (height - Kirigami.Units.gridUnit * 3) / 2
-                
+
                 contentItem: QuickSettingsMinimizedDelegate {
                     restrictedPermissions: actionDrawer.restrictedPermissions
-                    
+
                     text: modelData.text
                     status: modelData.status
                     icon: modelData.icon
                     enabled: modelData.enabled
                     settingsCommand: modelData.settingsCommand
                     toggleFunction: modelData.toggle
-                    
+
                     onCloseRequested: {
                         actionDrawer.close();
                     }
@@ -157,28 +157,28 @@ Item {
             }
         }
     }
-    
+
     // Loads portrait quick settings view
     Component {
         id: swipeViewComponent
-        
+
         ColumnLayout {
             readonly property var view: swipeView
-            
+
             SwipeView {
                 id: swipeView
-                
+
                 Layout.fillWidth: true
                 Layout.preferredHeight: rowCount * rowHeight
-                
+
                 Repeater {
                     model: Math.ceil(quickSettingsCount / pageSize)
                     delegate: Flow {
                         id: flow
                         spacing: 0
-                        
+
                         required property int index
-                        
+
                         Repeater {
                             model: QS.PaginateModel {
                                 sourceModel: quickSettingsModel
@@ -187,34 +187,34 @@ Item {
                             }
                             delegate: Loader {
                                 required property var modelData
-                                
+
                                 asynchronous: true
-                                
+
                                 sourceComponent: quickSettingComponent
                             }
                         }
                     }
                 }
             }
-            
+
             Loader {
                 id: indicatorLoader
-                
+
                 Layout.alignment: Qt.AlignCenter
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.smallSpacing
                 Layout.rightMargin: Kirigami.Units.smallSpacing
-                
+
                 // Avoid wasting space when not loaded
                 Layout.maximumHeight: active ? item.implicitHeight : 0
-                
+
                 active: swipeView.count > 1 ? true: false
                 asynchronous: true
-                
+
                 sourceComponent: PageIndicator {
                     count: swipeView.count
                     currentIndex: swipeView.currentIndex
-                        
+
                     delegate: Rectangle {
                         implicitWidth: 8
                         implicitHeight: count > 1 ? 8 : 0
@@ -228,28 +228,28 @@ Item {
             }
         }
     }
-    
+
     // Loads landscape quick settings view
     Component {
         id: scrollViewComponent
-        
+
         Item {
             width: parent.width
             height: rowCount * rowHeight
-            
+
             Flickable {
                 id: flickable
                 anchors.fill: parent
                 contentWidth: width
                 contentHeight: flow.height
-                
+
                 clip: true
-                
+
                 ScrollIndicator.vertical: ScrollIndicator {
                     id: scrollIndicator
                     visible: quickSettingsCount > pageSize ? true : false
                     position: 0.1
-                    
+
                     contentItem: Item {
                         implicitWidth: Kirigami.Units.smallSpacing / 4
                         Rectangle {
@@ -257,28 +257,28 @@ Item {
                             anchors.fill: parent
                             anchors.leftMargin: 2
                             anchors.rightMargin: -2
-                            
+
                             color: Kirigami.Theme.textColor
                             opacity: scrollIndicator.active ? 0.5 : 0
-                            
+
                             Behavior on opacity { NumberAnimation {} }
                         }
                     }
                 }
-                
+
                 Flow {
                     id: flow
                     width: parent.width
                     height: Math.ceil(quickSettingsCount / columnCount) * rowHeight
                     spacing: 0
-                    
+
                     Repeater {
                         model: quickSettingsModel
                         delegate: Loader {
                             required property var modelData
-                            
+
                             asynchronous: true
-                            
+
                             sourceComponent: quickSettingComponent
                         }
                     }
@@ -286,11 +286,11 @@ Item {
             }
         }
     }
-    
+
     // Quick setting component
     Component {
         id: quickSettingComponent
-        
+
         MobileShell.BaseItem {
             height: root.rowHeight
             width: root.columnWidth
@@ -298,14 +298,14 @@ Item {
 
             contentItem: QuickSettingsFullDelegate {
                 restrictedPermissions: actionDrawer.restrictedPermissions
-                
+
                 text: modelData.text
                 status: modelData.status
                 icon: modelData.icon
                 enabled: modelData.enabled
                 settingsCommand: modelData.settingsCommand
                 toggleFunction: modelData.toggle
-                
+
                 onCloseRequested: {
                     actionDrawer.close();
                 }

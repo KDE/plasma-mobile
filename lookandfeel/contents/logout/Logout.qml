@@ -33,7 +33,7 @@ Item {
         onTriggered: root.cancelRequested()
         shortcut: "Escape"
     }
-    
+
     Rectangle {
         id: blackOverlay
         anchors.fill: parent
@@ -125,12 +125,12 @@ Item {
             }
         }
     }
-    
+
     Item {
         id: buttons
         anchors.fill: parent
         opacity: 0
-        
+
         ColumnLayout {
             anchors.centerIn: parent
             spacing: Kirigami.Units.gridUnit
@@ -162,7 +162,7 @@ Item {
                 }
             }
         }
-        
+
         ActionButton {
             anchors {
                 bottom: parent.bottom

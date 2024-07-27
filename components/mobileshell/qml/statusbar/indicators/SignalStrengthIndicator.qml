@@ -15,13 +15,13 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     property InternetIndicator internetIndicator
-        
+
     // check if the internet indicator icon is a mobile data related one
     readonly property bool isInternetIndicatorMobileData: internetIndicator && internetIndicator.icon && internetIndicator.icon.startsWith('network-mobile-')
-    
+
     property bool showLabel: true
     property real textPixelSize: Kirigami.Units.gridUnit * 0.6
-    
+
     width: strengthIcon.width + label.width
     Layout.minimumWidth: strengthIcon.width + label.width
 
@@ -33,11 +33,11 @@ Item {
         height: parent.height
 
         source: MobileShell.SignalStrengthInfo.icon
-        
+
         // don't show mobile indicator icon if the networkmanager one is already showing
         visible: (!isInternetIndicatorMobileData || wirelessStatus.hotspotSSID.length !== 0) && MobileShell.SignalStrengthInfo.showIndicator
     }
-    
+
     PlasmaComponents.Label {
         id: label
         visible: showLabel

@@ -16,10 +16,10 @@ import org.kde.private.mobile.homescreen.halcyon as Halcyon
 MobileShell.GridView {
     id: root
     required property var searchWidget
-    
+
     // don't set anchors.margins since we want everywhere to be draggable
     required property bool twoColumn
-    
+
     signal openConfigureRequested()
     signal requestOpenFolder(Halcyon.ApplicationFolder folder)
 
@@ -27,7 +27,7 @@ MobileShell.GridView {
     property bool openingSearchWidget: false
     property bool canOpenSearchWidget: false
     property real oldVerticalOvershoot: verticalOvershoot
-    
+
     onVerticalOvershootChanged: {
         if (dragging && canOpenSearchWidget && verticalOvershoot < 0) {
             if (!openingSearchWidget) {
@@ -55,7 +55,7 @@ MobileShell.GridView {
     TapHandler {
         onLongPressed: root.openConfigureRequested()
     }
-    
+
     header: MobileShell.BaseItem {
         topPadding: Math.round(root.height * 0.2)
         bottomPadding: Kirigami.Units.gridUnit
@@ -69,12 +69,12 @@ MobileShell.GridView {
         }
         contentItem: Clock {}
     }
-    
+
     Keys.onReturnPressed: currentItem.appDelegate.launch()
     model: DelegateModel {
         id: visualModel
         model: Halcyon.PinnedModel
-        
+
         delegate: Item {
             id: delegateRoot
             property int visualIndex: DelegateModel.itemsIndex
@@ -82,21 +82,21 @@ MobileShell.GridView {
 
             width: root.cellWidth
             height: root.cellHeight
-            
+
             function moveDragToCurrentPos(from, to) {
                 if (from !== to) {
                     visualModel.items.move(from, to);
                     Halcyon.PinnedModel.moveEntry(from, to);
                 }
             }
-            
+
             function topDragEnter(drag) {
                 if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
-                    
+
                 let fromIndex = drag.source.visualIndex;
                 let delegateVisualIndex = appDelegate.visualIndex;
                 let reorderIndex = -1;
-                
+
                 if (fromIndex < delegateVisualIndex) { // dragged item from above
                     // move to spot above
                     reorderIndex = delegateVisualIndex - (root.twoColumn ? 2 : 1);
@@ -104,19 +104,19 @@ MobileShell.GridView {
                     // move to current spot
                     reorderIndex = delegateVisualIndex;
                 }
-                
+
                 if (reorderIndex >= 0 && reorderIndex < root.count) {
                     delegateRoot.moveDragToCurrentPos(fromIndex, reorderIndex)
                 }
             }
-            
+
             function bottomDragEnter(drag) {
                 if (transitionAnim.running || appDelegate.drag.active) return; // don't do anything when reordering
-                
+
                 let fromIndex = drag.source.visualIndex;
                 let delegateVisualIndex = appDelegate.visualIndex;
                 let reorderIndex = -1;
-                
+
                 if (fromIndex < delegateVisualIndex) { // dragged item from above
                     // move to current spot
                     reorderIndex = delegateVisualIndex;
@@ -124,7 +124,7 @@ MobileShell.GridView {
                     // move to spot below
                     reorderIndex = delegateVisualIndex + (root.twoColumn ? 2 : 1);
                 }
-                
+
                 if (reorderIndex >= 0 && reorderIndex < root.count) {
                     delegateRoot.moveDragToCurrentPos(fromIndex, reorderIndex);
                 }
@@ -139,7 +139,7 @@ MobileShell.GridView {
                 height: delegateRoot.height * 0.2
                 onEntered: (drag) => delegateRoot.topDragEnter(drag)
             }
-            
+
             // bottom drop area
             DropArea {
                 id: bottomDropArea
@@ -149,7 +149,7 @@ MobileShell.GridView {
                 height: delegateRoot.height * 0.2
                 onEntered: (drag) => delegateRoot.bottomDragEnter(drag)
             }
-            
+
             // left drop area
             DropArea {
                 id: leftDropArea
@@ -159,7 +159,7 @@ MobileShell.GridView {
                 width: root.twoColumn ? Math.max(appDelegate.leftPadding, delegateRoot.width * 0.1) : 0
                 onEntered: (drag) => delegateRoot.topDragEnter(drag)
             }
-            
+
             // right drop area
             DropArea {
                 id: rightDropArea
@@ -169,7 +169,7 @@ MobileShell.GridView {
                 width: root.twoColumn ? Math.max(appDelegate.rightPadding, delegateRoot.width * 0.1) : 0
                 onEntered: (drag) => delegateRoot.bottomDragEnter(drag)
             }
-            
+
             // folder drop area
             DropArea {
                 anchors.top: topDropArea.bottom
@@ -195,7 +195,7 @@ MobileShell.GridView {
                     folderAnim.to = 0;
                     folderAnim.restart();
                 }
-                
+
                 NumberAnimation {
                     id: folderAnim
                     target: appDelegate
@@ -203,18 +203,18 @@ MobileShell.GridView {
                     duration: 100
                 }
             }
-            
+
             // actual visual delegate
             FavoritesAppDelegate {
                 id: appDelegate
                 visualIndex: delegateRoot.visualIndex
-                
+
                 isFolder: model.isFolder
                 folder: model.folder
                 application: model.application
-                
+
                 onFolderOpenRequested: root.requestOpenFolder(model.folder)
-                
+
                 menuActions: [
                     Kirigami.Action {
                         icon.name: "emblem-favorite"
@@ -222,13 +222,13 @@ MobileShell.GridView {
                         onTriggered: Halcyon.PinnedModel.removeEntry(model.index)
                     }
                 ]
-                
+
                 implicitWidth: root.cellWidth
                 implicitHeight: visible ? root.cellHeight : 0
-                
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                
+
                 states: [
                     State {
                         when: appDelegate.drag.active
@@ -236,7 +236,7 @@ MobileShell.GridView {
                             target: appDelegate
                             parent: root
                         }
-                        
+
                         AnchorChanges {
                             target: appDelegate
                             anchors.horizontalCenter: undefined
@@ -247,7 +247,7 @@ MobileShell.GridView {
             }
         }
     }
-    
+
     // animations
     displaced: Transition {
         NumberAnimation {
@@ -256,21 +256,21 @@ MobileShell.GridView {
             easing.type: Easing.OutQuad
         }
     }
-    
+
     ColumnLayout {
         id: placeholder
         spacing: Kirigami.Units.gridUnit
         visible: root.count == 0
         opacity: 0.9
-        
+
         anchors.fill: parent
         anchors.topMargin: Math.round(swipeView.height * 0.2) - (root.contentY - root.originY)
         anchors.leftMargin: root.leftMargin
         anchors.rightMargin: root.rightMargin
-        
+
         layer.enabled: true
         layer.effect: MobileShell.TextDropShadow {}
-        
+
         Kirigami.Icon {
             id: icon
             Layout.alignment: Qt.AlignBottom | Qt.AlignHCenter
@@ -279,7 +279,7 @@ MobileShell.GridView {
             source: "arrow-left"
             color: "white"
         }
-        
+
         Kirigami.Heading {
             Layout.fillWidth: true
             Layout.maximumWidth: placeholder.width * 0.75
@@ -290,7 +290,7 @@ MobileShell.GridView {
             horizontalAlignment: Text.AlignHCenter
             text: i18n("Add applications to your favourites so they show up here.")
         }
-        
+
         TapHandler {
             onLongPressed: root.openConfigureRequested()
         }

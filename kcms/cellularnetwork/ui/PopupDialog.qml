@@ -9,24 +9,24 @@ import org.kde.kirigami 2.12 as Kirigami
 
 Controls.Dialog {
     id: dialog
-    
+
     anchors.centerIn: Controls.Overlay.overlay
     modal: true
     padding: Kirigami.Units.smallSpacing
     closePolicy: Controls.Popup.CloseOnEscape | Controls.Popup.CloseOnReleaseOutside
-    
+
     property int translateY: (1 - opacity) * Kirigami.Units.gridUnit * 2
-    
+
     NumberAnimation on opacity {
         from: 0; to: 1;
         duration: Kirigami.Units.veryShortDuration
         easing.type: Easing.InOutQuad
         running: true
     }
-    
+
     contentItem.transform: Translate { y: dialog.translateY }
     footer.transform: Translate { y: dialog.translateY }
-    
+
     header: Item {
         transform: Translate { y: dialog.translateY }
         implicitHeight: heading.implicitHeight + Kirigami.Units.largeSpacing * 2
@@ -40,7 +40,7 @@ Controls.Dialog {
             anchors.right: parent.right
             anchors.leftMargin: Kirigami.Units.largeSpacing
             anchors.verticalCenter: parent.verticalCenter
-            
+
             // use tooltip for long text that is elided
             Controls.ToolTip.visible: truncated && titleHoverHandler.hovered
             Controls.ToolTip.text: dialog.title
@@ -49,10 +49,10 @@ Controls.Dialog {
             }
         }
     }
-    
+
     background: Item {
         transform: Translate { y: dialog.translateY }
-        
+
         RectangularGlow {
             anchors.fill: rect
             anchors.topMargin: 1
@@ -68,7 +68,7 @@ Controls.Dialog {
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             color: Kirigami.Theme.backgroundColor
             radius: Kirigami.Units.smallSpacing
-            
+
             Kirigami.Separator {
                 id: topSeparator
                 anchors.left: parent.left
@@ -76,7 +76,7 @@ Controls.Dialog {
                 anchors.top: parent.top
                 anchors.topMargin: dialog.header.implicitHeight
             }
-            
+
             Kirigami.Separator {
                 id: bottomSeparator
                 anchors.left: parent.left
@@ -84,7 +84,7 @@ Controls.Dialog {
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: dialog.footer.implicitHeight
             }
-            
+
             Rectangle {
                 Kirigami.Theme.inherit: false
                 Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -95,6 +95,6 @@ Controls.Dialog {
                 anchors.bottom: bottomSeparator.top
             }
         }
-    }    
-} 
+    }
+}
 

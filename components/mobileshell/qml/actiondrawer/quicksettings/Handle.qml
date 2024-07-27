@@ -10,15 +10,15 @@ import org.kde.kirigami 2.20 as Kirigami
 
 Rectangle {
     id: handle
-    
+
     signal tapped()
-    
+
     implicitWidth: Kirigami.Units.gridUnit * 3
     implicitHeight: 3
     radius: height
     color: Kirigami.Theme.textColor
     opacity: 0.5
-    
+
     TapHandler {
         cursorShape: pressed ? Qt.ClosedHandCursor : Qt.PointingHandCursor
         onTapped: handle.tapped()

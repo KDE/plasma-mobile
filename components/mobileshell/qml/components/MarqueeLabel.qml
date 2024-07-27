@@ -12,26 +12,26 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 PlasmaComponents.Label {
     id: root
-                
+
     required property string inputText
     readonly property string filteredText: inputText.replace(/\n/g, ' ') // remove new line characters
-    
+
     readonly property int interval: 200 // update position every 200 ms
     readonly property int longDuration: 300
-    readonly property int waitDuration: 900 
-    
+    readonly property int waitDuration: 900
+
     readonly property int charactersOverflow: Math.ceil((txtMeter.advanceWidth - root.width) / (txtMeter.advanceWidth / filteredText.length))
     property int step: 0
-    
+
     TextMetrics {
         id: txtMeter
         font: root.font
         text: filteredText
     }
-    
-    Timer {              
+
+    Timer {
         property bool paused: false
-        
+
         interval: root.interval
         running: visible && charactersOverflow > 0
         repeat: true
@@ -52,13 +52,13 @@ PlasmaComponents.Label {
                 }
             }
         }
-        
+
         onRunningChanged: {
             if (!running) {
                 step = 0;
             }
         }
     }
-    
+
     text: filteredText.substring(step, step + filteredText.length - charactersOverflow)
 }

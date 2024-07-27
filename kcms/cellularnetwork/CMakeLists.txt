@@ -4,7 +4,7 @@
 kcmutils_add_qml_kcm(kcm_cellular_network)
 
 target_sources(kcm_cellular_network PRIVATE
-    cellularnetworksettings.cpp 
+    cellularnetworksettings.cpp
     modem.cpp
     modemdetails.cpp
     sim.cpp

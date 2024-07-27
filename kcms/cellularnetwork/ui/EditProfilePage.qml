@@ -18,13 +18,13 @@ FormCard.FormCardPage {
     bottomPadding: Kirigami.Units.gridUnit
     leftPadding: 0
     rightPadding: 0
-    
+
     property Modem modem
     property ProfileSettings profile
-    
+
     FormCard.FormCard {
         Layout.topMargin: Kirigami.Units.gridUnit
-            
+
         FormCard.FormTextFieldDelegate {
             id: profileName
             label: i18n("Name")

@@ -20,40 +20,40 @@ import org.kde.plasma.private.mobileshell as MobileShell
  */
 MobileShell.BaseItem {
     id: root
-    
+
     required property var actionDrawer
-    
+
     /**
      * The amount of height to add to the panel (increasing the height of the quick settings area).
      */
     property real addedHeight: 0
-    
+
     /**
      * The maximum amount of added height to snap to the full height of the quick settings panel.
      */
     readonly property real maxAddedHeight: quickSettings.fullHeight - minimizedQuickSettingsHeight // first row is part of minimized height
-    
+
     /**
      * Height of panel when in minimized mode.
      */
     readonly property real minimizedHeight: bottomPadding + topPadding + statusBar.height + minimizedQuickSettingsHeight + mediaWidget.height + handle.fullHeight
-    
+
     /**
      * Height of just the QuickSettings component in minimized mode.
      */
     readonly property real minimizedQuickSettingsHeight: quickSettings.minimizedRowHeight + Kirigami.Units.gridUnit
-    
+
     /**
      * Progress of showing the full quick settings view from pinned.
      */
     property real minimizedToFullProgress: 1
-    
+
     // we need extra padding if the background side border is enabled
-    topPadding: Kirigami.Units.smallSpacing 
-    leftPadding: Kirigami.Units.smallSpacing 
+    topPadding: Kirigami.Units.smallSpacing
+    leftPadding: Kirigami.Units.smallSpacing
     rightPadding: Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.smallSpacing * 4
-    
+
     background: KSvg.FrameSvgItem {
         enabledBorders: KSvg.FrameSvgItem.BottomBorder
         imagePath: "widgets/background"
@@ -62,7 +62,7 @@ MobileShell.BaseItem {
     contentItem: Item {
         id: containerItem
         implicitHeight: column.implicitHeight
-        
+
         // use container item so that our column doesn't get stretched if base item is anchored
         ColumnLayout {
             id: column
@@ -70,29 +70,29 @@ MobileShell.BaseItem {
             anchors.right: parent.right
             anchors.top: parent.top
             spacing: 0
-            
+
             MobileShell.StatusBar {
                 id: statusBar
                 Layout.fillWidth: true
                 Layout.preferredHeight: MobileShell.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
-                
+
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
                 Kirigami.Theme.inherit: false
 
                 backgroundColor: "transparent"
                 showSecondRow: true
                 showDropShadow: false
-                
+
                 // security reasons, system tray also doesn't work on lockscreen
                 disableSystemTray: actionDrawer.restrictedPermissions
             }
-            
+
             MobileShell.QuickSettings {
                 id: quickSettings
                 Layout.preferredHeight: root.minimizedQuickSettingsHeight + root.addedHeight
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.fillWidth: true
-                
+
                 mode: QuickSettings.Pages
                 actionDrawer: root.actionDrawer
                 minimizedViewProgress: 1 - root.minimizedToFullProgress
@@ -100,7 +100,7 @@ MobileShell.BaseItem {
                 height: root.minimizedQuickSettingsHeight + root.addedHeight
                 width: parent.width
             }
-            
+
             MobileShell.MediaControlsWidget {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
@@ -109,13 +109,13 @@ MobileShell.BaseItem {
                 Layout.leftMargin: Kirigami.Units.largeSpacing
                 Layout.rightMargin: Kirigami.Units.largeSpacing
             }
-            
+
             Handle {
                 id: handle
                 property real fullHeight: height + Layout.topMargin
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: Kirigami.Units.smallSpacing * 2
-                
+
                 onTapped: {
                     if (root.minimizedToFullProgress < 0.5) {
                         root.actionDrawer.expand();

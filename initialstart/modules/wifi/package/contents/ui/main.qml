@@ -93,11 +93,11 @@ Item {
                 model: mobileProxyModel
                 delegate: ConnectionItemDelegate {
                     editMode: false
-                    
+
                     // connected or saved
                     property bool shouldDisplay: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
                     onShouldDisplayChanged: savedCard.updateCount()
-                    
+
                     // separate property for visible since visible is false when the whole card is not visible
                     visible: (Uuid != "") || ConnectionState === PlasmaNM.Enums.Activated
                 }

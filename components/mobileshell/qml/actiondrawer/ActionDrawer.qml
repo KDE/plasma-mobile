@@ -17,17 +17,17 @@ import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     id: root
-    
+
     /**
      * The model for the notification widget.
      */
     property var notificationModel
-    
+
     /**
      * The model type for the notification widget.
      */
     property var notificationModelType: MobileShell.NotificationsModelType.NotificationsModel
-    
+
     /**
      * The notification settings object to be used in the notification widget.
      */
@@ -35,21 +35,21 @@ Item {
 
     /**
      * Whether actions should be subject to restricted permissions (ex. lockscreen).
-     * 
+     *
      * The permissionsRequested() signal emits when authentication is requested.
      */
     property bool restrictedPermissions: false
-    
+
     /**
      * The amount of pixels moved by touch/mouse in the process of opening/closing the panel.
      */
     property real offset: 0
-    
+
     /**
      * Whether the panel is being dragged.
      */
     property bool dragging: false
-    
+
     /**
      * Whether the panel is open after touch/mouse release from the first opening swipe.
      */
@@ -60,52 +60,52 @@ Item {
      * Only applies to portrait mode.
      */
     property bool openToPinnedMode: true
-    
+
     /**
      * Direction the panel is currently moving in.
      */
     property int direction: MobileShell.Direction.None
-    
+
     /**
      * The notifications widget being shown. May be null.
      */
     property var notificationsWidget: contentContainerLoader.item.notificationsWidget
-    
+
     /**
      * The mode of the action drawer (portrait or landscape).
      */
     property int mode: (height > width && width <= largePortraitThreshold) ? ActionDrawer.Portrait : ActionDrawer.Landscape
-    
+
     /**
      * At some point, even if the screen is technically portrait, if we have a ton of width it'd be best to just show the landscape mode.
      */
     readonly property real largePortraitThreshold: Kirigami.Units.gridUnit * 35
-    
+
     enum Mode {
         Portrait = 0,
         Landscape
     }
-    
+
     /**
      * Emitted when the drawer has closed.
      */
     signal drawerClosed()
-    
+
     /**
      * Emitted when the drawer has opened.
      */
     signal drawerOpened()
-    
+
     /**
      * Emitted when permissions are requested (ex. unlocking the phone).
-     * 
+     *
      * Only gets emitted when restrictedPermissions is set to true.
      */
     signal permissionsRequested()
-    
+
     /**
      * Runs the held notification action that was pending for authentication.
-     * 
+     *
      * Should be called by users if authentication is successful after permissionsRequested() was emitted.
      */
     signal runPendingNotificationAction()
@@ -119,13 +119,13 @@ Item {
         if (offset < 0) {
             offset = 0;
         }
-        
-        root.direction = (oldOffset === offset) 
-                            ? MobileShell.Direction.None 
+
+        root.direction = (oldOffset === offset)
+                            ? MobileShell.Direction.None
                             : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
-            
+
         oldOffset = offset;
-        
+
         // close panel immediately after panel is not shown, and the flickable is not being dragged
         if (opened && root.offset <= 0 && !swipeArea.moving && !closeAnim.running && !openAnim.running) {
             root.updateState();
@@ -137,7 +137,7 @@ Item {
         closeAnim.stop();
         openAnim.stop();
     }
-    
+
     function open() {
         cancelAnimations();
         if (openToPinnedMode) {
@@ -146,36 +146,36 @@ Item {
             expandAnim.restart(); // go to maximized height
         }
     }
-    
+
     function closeImmediately() {
         cancelAnimations();
         offset = 0;
         closeAnim.finished();
     }
-    
+
     function close() {
         cancelAnimations();
         closeAnim.restart();
     }
-    
+
     function expand() {
         cancelAnimations();
         expandAnim.restart();
     }
-    
+
     function updateState() {
         cancelAnimations();
         let openThreshold = Kirigami.Units.gridUnit;
-        
+
         if (root.offset <= 0) {
-            // close immediately, so that we don't have to wait Kirigami.Units.longDuration 
+            // close immediately, so that we don't have to wait Kirigami.Units.longDuration
             root.visible = false;
             close();
         } else if (root.direction === MobileShell.Direction.None || !root.opened) {
-            
+
             // if the panel has not been opened yet, run open animation only if drag passed threshold
             (root.offset < openThreshold) ? close() : open();
-            
+
         } else if (root.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
             // if drag has gone past the fully expanded view
             expand();
@@ -187,7 +187,7 @@ Item {
                 // go back to pinned, or close if pinned mode is disabled
                 openToPinnedMode ? open() : close();
             }
-            
+
         } else if (root.direction === MobileShell.Direction.Down) {
             // if drag is between pinned view and open view, and dragging down
             open();
@@ -226,7 +226,7 @@ Item {
         to: contentContainerLoader.maximizedQuickSettingsOffset
         onFinished: root.opened = true;
     }
-    
+
     MobileShell.SwipeArea {
         id: swipeArea
         mode: MobileShell.SwipeArea.VerticalOnly
@@ -247,14 +247,14 @@ Item {
         Loader {
             id: contentContainerLoader
             anchors.fill: parent
-            
+
             property real minimizedQuickSettingsOffset: item ? item.minimizedQuickSettingsOffset : 0
             property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
-            
+
             asynchronous: true
             sourceComponent: root.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
         }
-        
+
         Component {
             id: portraitContentContainer
             PortraitContentContainer {
@@ -263,7 +263,7 @@ Item {
                 height: root.height
             }
         }
-        
+
         Component {
             id: landscapeContentContainer
             LandscapeContentContainer {

@@ -19,7 +19,7 @@ import org.kde.milou as Milou
 import org.kde.kirigami 2.19 as Kirigami
 
 /**
- * Search widget that is embedded into the homescreen. The dimensions of 
+ * Search widget that is embedded into the homescreen. The dimensions of
  * the root item is assumed to be the available screen area for applications.
  */
 Item {
@@ -35,22 +35,22 @@ Item {
         queryField.text = "";
         flickable.contentY = closedContentY;
     }
-    
+
     function updateGestureOffset(yOffset) {
         flickable.contentY = Math.max(0, Math.min(closedContentY, flickable.contentY + yOffset));
     }
-    
+
     // call when the touch gesture has let go
     function endGesture() {
         flickable.opening ? open() : close();
     }
-    
+
     // open the search widget (animated)
     function open() {
         anim.to = openedContentY;
         anim.restart();
     }
-    
+
     // close the search widget (animated)
     function close() {
         anim.to = closedContentY;
@@ -59,24 +59,24 @@ Item {
 
     // emitted when an item on the ListView is triggered
     signal actionTriggered()
-    
+
     readonly property real closedContentY: Kirigami.Units.gridUnit * 5
     readonly property real openedContentY: 0
     readonly property real openFactor: Math.max(0, Math.min(1, 1 - flickable.contentY / closedContentY))
     readonly property bool isOpen: openFactor != 0
-    
+
     Rectangle {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.3)
         opacity: root.openFactor
     }
-    
+
     onOpacityChanged: {
         if (opacity === 0) {
             close();
         }
     }
-    
+
     Keys.onPressed: event => {
                         if (event.key === Qt.Key_Down) {
                             listView.forceActiveFocus();
@@ -85,35 +85,35 @@ Item {
 
     Flickable {
         id: flickable
-        
+
         anchors.fill: parent
         anchors.topMargin: root.topMargin
         anchors.bottomMargin: root.bottomMargin
         anchors.leftMargin: root.leftMargin
         anchors.rightMargin: root.rightMargin
-        
+
         contentHeight: flickable.height + root.closedContentY
         contentY: root.closedContentY
         property real oldContentY: contentY
         property bool opening: false
-        
+
         onContentYChanged: {
             opening = contentY < oldContentY;
             oldContentY = contentY;
-            
+
             if (contentY !== root.openedContentY) {
                 queryField.focus = false;
             }
         }
-        
+
         onMovementEnded: root.endGesture()
-        
+
         onDraggingChanged: {
             if (!dragging) {
                 root.endGesture();
             }
         }
-        
+
         NumberAnimation on contentY {
             id: anim
             duration: Kirigami.Units.longDuration * 2
@@ -125,12 +125,12 @@ Item {
                 }
             }
         }
-        
+
         ColumnLayout {
             id: column
             height: flickable.height
             width: flickable.width
-            
+
             Controls.Control {
                 opacity: root.openFactor
                 Layout.fillWidth: true
@@ -139,14 +139,14 @@ Item {
                 Layout.topMargin: Kirigami.Units.gridUnit
                 Layout.leftMargin: Kirigami.Units.gridUnit
                 Layout.rightMargin: Kirigami.Units.gridUnit
-                
-                leftPadding: Kirigami.Units.smallSpacing 
-                rightPadding: Kirigami.Units.smallSpacing 
-                topPadding: Kirigami.Units.smallSpacing 
-                bottomPadding: Kirigami.Units.smallSpacing 
-                
+
+                leftPadding: Kirigami.Units.smallSpacing
+                rightPadding: Kirigami.Units.smallSpacing
+                topPadding: Kirigami.Units.smallSpacing
+                bottomPadding: Kirigami.Units.smallSpacing
+
                 background: Item {
-                    
+
                     // shadow for search window
                     MultiEffect {
                         anchors.fill: parent
@@ -156,7 +156,7 @@ Item {
                         shadowVerticalOffset: 1
                         shadowOpacity: 0.15
                     }
-                    
+
                     Rectangle {
                         id: rectBackground
                         anchors.fill: parent
@@ -164,7 +164,7 @@ Item {
                         radius: Kirigami.Units.smallSpacing
                     }
                 }
-                
+
                 contentItem: RowLayout {
                     Item {
                         implicitHeight: queryField.height
@@ -183,13 +183,13 @@ Item {
                     }
                 }
             }
-            
+
             Controls.ScrollView {
                 opacity: root.openFactor === 1 ? 1 : 0
                 Behavior on opacity {
                     NumberAnimation { duration: Kirigami.Units.shortDuration }
                 }
-                
+
                 Layout.fillWidth: true
                 Layout.fillHeight: listView.contentHeight > availableHeight
 

@@ -16,7 +16,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 
 RowLayout {
     property real textPixelSize: Kirigami.Units.gridUnit * 0.6
-    
+
     visible: MobileShell.BatteryInfo.isVisible
 
     PW.BatteryIcon {

@@ -24,7 +24,7 @@ AppletConfiguration {
         app.width = root.width < root.height ? root.width : Math.min(root.width, Math.max(app.implicitWidth, Kirigami.Units.gridUnit * 45));
         app.height = Math.min(root.height, Math.max(app.implicitHeight, Kirigami.Units.gridUnit * 29));
     }
-    
+
 //BEGIN model
     globalConfigModel: globalContainmentConfigModel
 

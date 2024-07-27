@@ -33,15 +33,15 @@ Item {
 
     Kirigami.Theme.colorSet: Kirigami.Theme.Button
     Kirigami.Theme.inherit: false
-    
+
     implicitWidth: Kirigami.Units.gridUnit * 4
     implicitHeight: column.implicitHeight
-    
+
     readonly property color buttonColor: Kirigami.Theme.backgroundColor
     readonly property color buttonHoverColor: Qt.darker(buttonColor, 1.05)
     readonly property color buttonPressedColor: Qt.darker(buttonColor, 1.2)
     readonly property color buttonBorderColor: Qt.alpha(Kirigami.Theme.textColor, 0.3)
-    
+
     ColumnLayout {
         id: column
         spacing: 0
@@ -128,7 +128,7 @@ Item {
                     verticalAlignment: Qt.AlignVCenter
 
                     inputMethodHints: Qt.ImhFormattedNumbersOnly
-                    
+
                     function applyTextBinding() {
                         text = Qt.binding(function () { return spinBox.displayText.length == 1 ? '0' + spinBox.displayText : spinBox.displayText });
                     }

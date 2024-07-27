@@ -14,7 +14,7 @@ import cellularnetworkkcm 1.0
 Kirigami.ScrollablePage {
     id: root
     title: i18n("Available Networks")
-    
+
     property Modem modem
     property Sim sim
 
@@ -24,7 +24,7 @@ Kirigami.ScrollablePage {
             anchors.left: parent.left
             anchors.right: parent.right
             spacing: 0
-            
+
             MessagesList {
                 visible: count != 0
                 Layout.fillWidth: true
@@ -32,7 +32,7 @@ Kirigami.ScrollablePage {
                 model: kcm.messages
             }
         }
-        
+
         Kirigami.PlaceholderMessage {
             anchors.centerIn: parent
             visible: !modem.details.isScanningNetworks && listView.count == 0
@@ -45,16 +45,16 @@ Kirigami.ScrollablePage {
                 onTriggered: modem.details.scanNetworks()
             }
         }
-        
+
         Controls.BusyIndicator {
             anchors.centerIn: parent
             visible: modem.details.isScanningNetworks
             implicitWidth: Kirigami.Units.iconSizes.large
             implicitHeight: implicitWidth
         }
-        
+
         model: modem.details.networks
-        
+
         delegate: FormCard.FormRadioDelegate {
             checked: modelData.isCurrentlyUsed
 

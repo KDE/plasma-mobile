@@ -32,7 +32,7 @@ FormCard.AbstractFormDelegate {
             Layout.rightMargin: Kirigami.Units.gridUnit
             implicitWidth: Kirigami.Units.iconSizes.smallMedium
             implicitHeight: Kirigami.Units.iconSizes.smallMedium
-            
+
             Kirigami.Icon {
                 implicitWidth: Kirigami.Units.iconSizes.smallMedium
                 implicitHeight: Kirigami.Units.iconSizes.smallMedium
@@ -55,7 +55,7 @@ FormCard.AbstractFormDelegate {
             font.bold: ConnectionState === PlasmaNM.Enums.Activated
             Accessible.ignored: true // base class sets this text on root already
         }
-        
+
         RowLayout {
             Kirigami.Icon {
                 Layout.alignment: Qt.AlignVCenter

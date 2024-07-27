@@ -96,5 +96,5 @@ NanoShell.FullScreenOverlay {
             }
         }
     }
-    
+
 }

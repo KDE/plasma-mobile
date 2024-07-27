@@ -14,18 +14,18 @@ Kirigami.PromptDialog {
     property string headingText
     property string devicePath
     property string specificPath
-    
+
     signal donePressed(string password)
-    
+
     function openAndClear() {
         warning.visible = false;
         this.open();
         passwordField.text = "";
         passwordField.focus = true;
     }
-    
+
     standardButtons: Controls.Dialog.Ok | Controls.Dialog.Cancel
-    
+
     onOpened: passwordField.forceActiveFocus()
     onRejected: {
         dialogRoot.close();
@@ -40,23 +40,23 @@ Kirigami.PromptDialog {
         }
         passwordField.focus = false;
     }
-    
+
     ColumnLayout {
         id: column
         spacing: Kirigami.Units.largeSpacing
-        
+
         PasswordField {
             id: passwordField
             Layout.fillWidth: true
             securityType: dialogRoot.securityType
             onAccepted: dialogRoot.accept()
         }
-        
+
         Controls.Label {
             id: warning
             text: i18n("Invalid input.")
             visible: false
         }
     }
-    
+
 }

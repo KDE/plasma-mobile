@@ -23,10 +23,10 @@ QS.QuickSetting {
             return i18n("Not Available");
         }
     }
-                
+
     settingsCommand: "plasma-open-settings kcm_cellular_network"
     enabled: PlasmaMM.SignalIndicator.mobileDataEnabled
-    
+
     function toggle() {
         if (PlasmaMM.SignalIndicator.needsAPNAdded || !PlasmaMM.SignalIndicator.mobileDataSupported) {
             // open settings if unable to toggle mobile data

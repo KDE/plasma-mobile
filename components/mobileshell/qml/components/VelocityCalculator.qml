@@ -10,27 +10,27 @@ import QtQuick 2.15
 
 QtObject {
     id: root
-    
+
     property bool zeroVelocityCounts: false
-    
+
     property real velocity: 0
-    
+
     function changePosition(position) {
         __pushDragEvent(position);
     }
-    
+
     function startMeasure(position) {
         __dragEvents = [];
         __pushDragEvent(position);
     }
-    
+
 //BEGIN internal
-    
+
     property var __dragEvents: []
     property var __dateTime: new function() {
         this.getCurrentTimeMs = function() {return new Date().getTime()}
     }
-    
+
     function __updateSpeed() {
         var totalSpeed = 0;
         for (var i = 0; i < __dragEvents.length; i++) {
@@ -61,13 +61,13 @@ QtObject {
             return 0;
         }
     }
-    
+
     function __pushDragEvent(position) {
         let currentTime = __dateTime.getCurrentTimeMs();
         __dragEvents.push([currentTime, position, __getEventSpeed(currentTime, position)]);
         __cullOldDragEvents(currentTime);
         __updateSpeed();
     }
-    
+
 //END internal
 }

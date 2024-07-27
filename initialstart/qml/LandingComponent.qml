@@ -50,10 +50,10 @@ Item {
             const darkWallpaperFolder = 'wallpapers/Next/contents/images_dark/';
 
             const wallpaperUrl = StandardPaths.locate(
-                StandardPaths.GenericDataLocation, 
+                StandardPaths.GenericDataLocation,
                 (Prepare.PrepareUtil.usingDarkTheme ? darkWallpaperFolder : lightWallpaperFolder) + imgFile
             );
-            
+
             if (!wallpaperUrl) {
                 return StandardPaths.locate(StandardPaths.GenericDataLocation, lightWallpaperFolder + imgFile);
             }

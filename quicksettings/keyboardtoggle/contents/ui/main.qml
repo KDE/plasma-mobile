@@ -11,11 +11,11 @@ import org.kde.plasma.workspace.keyboardlayout 1.0 as Keyboards
 QS.QuickSetting {
     text: i18n("Virtual Keyboard")
     icon: "input-keyboard-virtual"
-    status: enabled ? i18n("On") : 
+    status: enabled ? i18n("On") :
                       (Keyboards.KWinVirtualKeyboard.available ? i18n("Off") : i18n("Tap to open settings"))
     enabled: Keyboards.KWinVirtualKeyboard.enabled && Keyboards.KWinVirtualKeyboard.available
     settingsCommand: "plasma-open-settings kcm_mobile_onscreenkeyboard"
-    
+
     function toggle() {
         if (!Keyboards.KWinVirtualKeyboard.available) {
             // select a keyboard in the settings (none is likely set)

@@ -37,7 +37,7 @@ QQC2.StackView {
     onWallpaperPluginConfigChanged: {
         onWallpaperConfigurationChanged();
     }
-    
+
     function onWallpaperConfigurationChanged() {
         let wallpaperConfig = root.wallpaperPluginConfig
         if (!wallpaperConfig || !root.currentItem) {
@@ -46,21 +46,21 @@ QQC2.StackView {
         wallpaperConfig.keys().forEach(key => {
             const cfgKey = "cfg_" + key;
             if (cfgKey in root.currentItem) {
-                
+
                 var changedSignal = root.currentItem[cfgKey + "Changed"]
                 if (changedSignal) {
                     changedSignal.disconnect(root.onConfigurationChanged);
                 }
                 root.currentItem[cfgKey] = wallpaperConfig[key];
-                
+
                 changedSignal = root.currentItem[cfgKey + "Changed"]
                 if (changedSignal) {
                     changedSignal.connect(root.onConfigurationChanged)
                 }
-            }                    
+            }
         })
     }
-    
+
     function loadSourceFile() {
         let wallpaperConfig = root.wallpaperPluginConfig;
         let wallpaperPluginSource = root.wallpaperPluginSource;
@@ -71,16 +71,16 @@ QQC2.StackView {
                 "configDialog": root.configDialog,
                 "wallpaperConfiguration": wallpaperConfig
             };
-                                    
+
             wallpaperConfig.keys().forEach(key => {
                 // Preview is not part of the config, only of the WallpaperObject
                 if (!key.startsWith("Preview")) {
                     props["cfg_" + key] = wallpaperConfig[key];
                 }
             });
-            
+
             var newItem = replace(Qt.resolvedUrl(wallpaperPluginSource), props)
-                
+
             wallpaperConfig.keys().forEach(key => {
                 const cfgKey = "cfg_" + key;
                 if (cfgKey in root.currentItem) {

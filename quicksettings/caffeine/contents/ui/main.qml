@@ -28,7 +28,7 @@ QS.QuickSetting {
 
     property int cookie1: -1
     property int cookie2: -1
-    
+
     function toggle() {
         let inhibit = !enabled;
         const service = pmSource.serviceForSource("PowerDevil");

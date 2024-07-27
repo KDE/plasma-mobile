@@ -10,11 +10,11 @@ import org.kde.kirigami as Kirigami
 
 RowLayout {
     id: root
-    
+
     property int hours: 0
     property int minutes: 0
     readonly property bool twelveHourTime: !kcm.twentyFour // am/pm
-    
+
     onHoursChanged: updateHours()
     onMinutesChanged: minutesSpinbox.value = minutes
     onTwelveHourTimeChanged: updateHours()
@@ -35,7 +35,7 @@ RowLayout {
             hoursSpinbox.value = hours;
         }
     }
-    
+
     RowLayout {
         spacing: Kirigami.Units.largeSpacing
         Layout.alignment: Qt.AlignHCenter
@@ -44,7 +44,7 @@ RowLayout {
         //       for 24-hour time, we have hours from 0-23
         TimePickerSpinBox {
             id: hoursSpinbox
-            
+
             onValueModified: {
                 if (root.twelveHourTime) {
                     if (root.hours >= 12) {
@@ -57,22 +57,22 @@ RowLayout {
                 }
             }
         }
-        
+
         Kirigami.Heading {
             level: 1
             text: ":"
         }
-        
+
         TimePickerSpinBox {
             id: minutesSpinbox
             from: 0
             to: 59
-            
+
             onValueModified: {
                 root.minutes = value;
             }
         }
-        
+
         Button {
             id: amPmToggle
             visible: root.twelveHourTime

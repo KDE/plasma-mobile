@@ -125,7 +125,7 @@ SimpleKCM {
                     bottomPadding: 0
                     leftPadding: Kirigami.Units.smallSpacing
                     rightPadding: Kirigami.Units.smallSpacing
-                    
+
                     background: Rectangle {
                         color: Kirigami.Theme.backgroundColor
                     }

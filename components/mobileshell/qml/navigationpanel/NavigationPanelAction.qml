@@ -11,6 +11,6 @@ QtObject {
     property bool visible: true
     property string iconSource
     property real iconSizeFactor
-    
+
     signal triggered()
 }

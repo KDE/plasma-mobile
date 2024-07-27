@@ -19,7 +19,7 @@ Kirigami.ScrollablePage {
 
     property Modem modem
     property bool editMode: false
-    
+
     title: i18n("APNs")
     actions: [
         Kirigami.Action {
@@ -40,18 +40,18 @@ Kirigami.ScrollablePage {
             Layout.margins: Kirigami.Units.largeSpacing
             model: kcm.messages
         }
-        
+
         Kirigami.InlineMessage {
             id: cannotFindWarning
             Layout.margins: visible ? Kirigami.Units.largeSpacing : 0
             Layout.topMargin: visible && !messagesList.visible ? Kirigami.Units.largeSpacing : 0
             Layout.fillWidth: true
-            
+
             visible: false
             type: Kirigami.MessageType.Warning
             showCloseButton: true
             text: i18n("Unable to autodetect connection settings for your carrier. Please find your carrier's APN settings by either contacting support or searching online.")
-            
+
             Connections {
                 target: modem
                 function onCouldNotAutodetectSettings() {
@@ -59,7 +59,7 @@ Kirigami.ScrollablePage {
                 }
             }
         }
-        
+
         FormCard.FormHeader {
             title: i18n("APN List")
         }
@@ -110,7 +110,7 @@ Kirigami.ScrollablePage {
                     kcm.push("EditProfilePage.qml", { "profile": null, "modem": modem });
                 }
             }
-            
+
             FormCard.FormButtonDelegate {
                 text: i18n("Automatically detect APN")
                 icon.name: 'list-add'

@@ -17,7 +17,7 @@ ApplicationWindow {
     width: 360
     height: 720
     visible: true
-    
+
     // simulate kscreenlocker wallpaper
     Image {
         id: wallpaper // id passed in by kscreenlocker
@@ -25,11 +25,11 @@ ApplicationWindow {
         anchors.fill: parent
         fillMode: Image.PreserveAspectCrop
     }
-    
+
     // simulate kscreenlocker authenticator object
     QtObject {
         id: authenticator // id passed in by kscreenlocker
-        
+
         property string infoMessage: ""
         property string errorMessage: ""
         property string prompt: ""
@@ -37,11 +37,11 @@ ApplicationWindow {
 
         signal succeeded()
         signal failed()
-        
+
         // these are not kscreenlocker properties, for test purposes only
         property string password: ""
         property bool shouldPrompt: true
-        
+
         function startAuthenticating() {
             if (shouldPrompt) {
                 shouldPrompt = false;
@@ -55,12 +55,12 @@ ApplicationWindow {
                 failed();
             }
         }
-        
+
         function respond(promptPassword) {
             password = promptPassword;
         }
     }
-    
+
     // component to test
     LockScreen.LockScreen {
         anchors.fill: parent

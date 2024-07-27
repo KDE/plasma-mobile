@@ -4,18 +4,18 @@
 import QtQuick 2.15
 
 /**
- * Serves a similar function as a QQC2.Control, but does not 
+ * Serves a similar function as a QQC2.Control, but does not
  * take touch input events, preventing conflicts with Flickable.
  */
 
 Item {
     id: root
-    
+
     property real topInset: 0
     property real bottomInset: 0
     property real leftInset: 0
     property real rightInset: 0
-    
+
     property real padding: 0
     property real verticalPadding: padding
     property real horizontalPadding: padding
@@ -23,10 +23,10 @@ Item {
     property real bottomPadding: verticalPadding
     property real leftPadding: horizontalPadding
     property real rightPadding: horizontalPadding
-    
+
     property Item contentItem: Item {}
     property Item background: Item {}
-    
+
     implicitHeight: topPadding + bottomPadding + contentItem.implicitHeight
     implicitWidth: leftPadding + rightPadding + contentItem.implicitWidth
 
@@ -34,12 +34,12 @@ Item {
         contentItem.parent = contentItemLoader;
         contentItem.anchors.fill = contentItemLoader;
     }
-    
+
     onBackgroundChanged: {
         background.parent = backgroundLoader;
         background.anchors.fill = backgroundLoader;
     }
-    
+
     Item {
         id: backgroundLoader
         anchors.fill: parent
@@ -48,7 +48,7 @@ Item {
         anchors.topMargin: root.topInset
         anchors.bottomMargin: root.bottomInset
     }
-    
+
     Item {
         id: contentItemLoader
         anchors.fill: parent

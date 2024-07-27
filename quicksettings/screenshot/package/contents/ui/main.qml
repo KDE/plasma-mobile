@@ -12,14 +12,14 @@ QS.QuickSetting {
     status: i18n("Tap to screenshot")
     icon: "spectacle"
     enabled: false
-    
+
     property bool screenshotRequested: false
-    
+
     function toggle() {
         screenshotRequested = true;
         MobileShellState.ShellDBusClient.closeActionDrawer();
     }
-    
+
     Connections {
         target: MobileShellState.ShellDBusClient
 
@@ -30,7 +30,7 @@ QS.QuickSetting {
             }
         }
     }
-    
+
     // HACK: KWin's fade effect may have the window ending up being in the screenshot if taken too fast
     Timer {
         id: timer

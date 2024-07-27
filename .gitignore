@@ -2,9 +2,9 @@
 # SPDX-License-Identifier: CC0-1.0
 
 build
-*.config 
-*.creator 
-*.files 
+*.config
+*.creator
+*.files
 *.includes
 *.user
 

@@ -3,7 +3,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Layouts 
+import QtQuick.Layouts
 import QtQuick.Window
 import Qt5Compat.GraphicalEffects
 import QtQuick.Templates as T
@@ -11,7 +11,7 @@ import org.kde.kirigami as Kirigami
 
 Item {
     id: root
-    
+
     // -- public API: should match plasma-workspace implementation --
 
     default property Item mainItem
@@ -27,7 +27,7 @@ Item {
     readonly property int flags: Qt.FramelessWindowHint | Qt.Dialog
     property var standardButtons // footerButtonBox standardButtons
     readonly property int spacing: Kirigami.Units.gridUnit
-    
+
     function present() {
         window.showMaximized();
     }
@@ -140,7 +140,7 @@ Item {
                     id: footerButtonBox
                     // ensure we never have no buttons, we always must have the cancel button available
                     standardButtons: (root.standardButtons === QQC2.DialogButtonBox.NoButton) ? QQC2.DialogButtonBox.Cancel : root.standardButtons
-                    
+
                     Layout.topMargin: Kirigami.Units.largeSpacing
                     Layout.fillWidth: true
                     Layout.maximumWidth: root.window.maximumWidth

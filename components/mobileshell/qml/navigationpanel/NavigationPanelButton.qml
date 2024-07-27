@@ -28,20 +28,20 @@ Controls.AbstractButton {
     }
 
     onPressed: haptics.buttonVibrate()
-    
+
     Rectangle {
         id: rect
         radius: height/2
         anchors.fill: parent
         opacity: 0
         color: Kirigami.Theme.textColor
-        
+
         // this way of calculating animations lets the animation fully complete before switching back (tap runs the full animation)
         property bool buttonHeld: button.pressed && button.enabled
-        
+
         onButtonHeldChanged: showBackground(buttonHeld)
         Component.onCompleted: showBackground(buttonHeld)
-        
+
         function showBackground(show) {
             if (show) {
                 if (!opacityAnimator.running && opacityAnimator.to !== 0.1) {

@@ -3,7 +3,7 @@
 
 kcmutils_add_qml_kcm(kcm_mobile_info)
 
-target_sources(kcm_mobile_info PRIVATE 
+target_sources(kcm_mobile_info PRIVATE
     info.cpp
     distroinfo.cpp
     softwareinfo.cpp

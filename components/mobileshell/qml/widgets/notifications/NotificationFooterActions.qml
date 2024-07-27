@@ -1,7 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  * SPDX-FileCopyrightText: 2018-2019 Kai Uwe Broulik <kde@privat.broulik.de>
- * 
+ *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
@@ -13,12 +13,12 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 
 Item {
     id: actionContainer
-    
+
     required property BaseNotificationItem notification
-    
+
     implicitHeight: Math.max(actionFlow.implicitHeight, replyLoader.height)
     visible: actionRepeater.count > 0
-    
+
     Flow {
         id: actionFlow
         width: parent.width
@@ -26,7 +26,7 @@ Item {
         layoutDirection: Qt.RightToLeft
         enabled: !replyLoader.active
         opacity: replyLoader.active ? 0 : 1
-        
+
         Behavior on opacity {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
@@ -48,14 +48,14 @@ Item {
                         label: actionLabels[i]
                     });
                 }
-                
+
                 if (notificationItem.hasReplyAction) {
                     buttons.unshift({
                         actionName: "inline-reply",
                         label: notificationItem.replyActionLabel || i18nc("Reply to message", "Reply")
                     });
                 }
-                
+
                 return buttons;
             }
 
@@ -73,19 +73,19 @@ Item {
             }
         }
     }
-    
+
     // inline reply field
     Loader {
         id: replyLoader
         width: parent.width
         height: active ? item.implicitHeight : 0
-        
+
         // When there is only one action and it is a reply action, show text field right away
         active: false
         visible: active
         opacity: active ? 1 : 0
         x: active ? 0 : parent.width
-        
+
         Behavior on x {
             NumberAnimation {
                 duration: Kirigami.Units.longDuration
@@ -109,7 +109,7 @@ Item {
             buttonIconName: notificationItem.replySubmitButtonIconName
             buttonText: notificationItem.replySubmitButtonText
             onReplied: notificationItem.replied(text)
-            
+
             replying: replyLoader.active
             onBeginReplyRequested: replyLoader.beginReply()
         }

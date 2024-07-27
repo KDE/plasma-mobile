@@ -17,22 +17,22 @@ import org.kde.private.mobile.homescreen.halcyon as Halcyon
 MobileShell.GridView {
     id: root
     property Halcyon.ApplicationFolder folder: null
-    
+
     property string folderName: folder ? folder.name : ""
     property var folderModel: folder ? folder.applications : []
-    
+
     required property bool twoColumn
-    
+
     signal openConfigureRequested()
     signal closeRequested()
-    
+
     property bool inFolderTitleEditMode: false
-    
+
     TapHandler {
         onLongPressed: root.openConfigureRequested()
         onTapped: root.closeRequested()
     }
-    
+
     header: MobileShell.BaseItem {
         topPadding: Math.round(root.height * 0.2)
         bottomPadding: Kirigami.Units.gridUnit
@@ -42,29 +42,29 @@ MobileShell.GridView {
 
         background: Rectangle {
             color: 'transparent'
-            TapHandler { 
+            TapHandler {
                 onLongPressed: root.openConfigureRequested()
                 onTapped: root.closeRequested()
             }
         }
-        
+
         Component {
             id: folderTitleEdit
-            
+
             TextEdit {
                 text: root.folderName
                 color: "white"
                 selectByMouse: true
                 wrapMode: TextEdit.Wrap
-                
+
                 Component.onCompleted: forceActiveFocus()
-                
+
                 font.weight: Font.Bold
                 font.pointSize: 18
 
                 layer.enabled: true
                 layer.effect: MobileShell.TextDropShadow {}
-                
+
                 onTextChanged: {
                     if (text.includes('\n')) {
                         // exit text edit mode when new line is entered
@@ -76,10 +76,10 @@ MobileShell.GridView {
                 onEditingFinished: root.inFolderTitleEditMode = false
             }
         }
-        
+
         Component {
             id: folderTitleLabel
-            
+
             QQC2.Label {
                 text: root.folderName
                 color: "white"
@@ -87,7 +87,7 @@ MobileShell.GridView {
                 styleColor: "transparent"
                 horizontalAlignment: Text.AlignLeft
                 textFormat: Text.MarkdownText
-                
+
                 elide: Text.ElideRight
                 wrapMode: Text.Wrap
                 maximumLineCount: 2
@@ -97,35 +97,35 @@ MobileShell.GridView {
 
                 layer.enabled: true
                 layer.effect: MobileShell.TextDropShadow {}
-                
+
                 MouseArea {
                     anchors.fill: parent
                     onClicked: root.inFolderTitleEditMode = true
                 }
             }
         }
-        
+
         contentItem: RowLayout {
             id: rowLayout
             spacing: Kirigami.Units.smallSpacing * 2
-            
+
             // close folder button
             MouseArea {
                 id: button
                 Layout.alignment: Qt.AlignVCenter
                 implicitHeight: Kirigami.Units.iconSizes.small + Kirigami.Units.gridUnit
                 implicitWidth: Kirigami.Units.iconSizes.small + Kirigami.Units.gridUnit
-                
+
                 cursorShape: Qt.PointingHandCursor
                 onClicked: root.closeRequested()
-                
+
                 // button background
                 Rectangle {
                     anchors.fill: parent
                     color: Qt.rgba(255, 255, 255, button.pressed ? 0.2 : 0)
                     radius: button.width / 2
                 }
-                
+
                 // button icon
                 Kirigami.Icon {
                     anchors.centerIn: parent
@@ -144,7 +144,7 @@ MobileShell.GridView {
                     }
                 }
             }
-            
+
             // folder title
             Loader {
                 Layout.alignment: Qt.AlignVCenter
@@ -154,18 +154,18 @@ MobileShell.GridView {
             }
         }
     }
-    
+
     model: DelegateModel {
         id: visualModel
         model: root.folderModel
-        
+
         delegate: Item {
             id: delegateRoot
             width: root.cellWidth
             height: root.cellHeight
-            
+
             property int visualIndex: DelegateModel.itemsIndex
-            
+
             DropArea {
                 anchors.fill: parent
                 onEntered: (drag) => {
@@ -175,14 +175,14 @@ MobileShell.GridView {
                     root.folder.moveEntry(from, to);
                 }
             }
-            
+
             FavoritesAppDelegate {
                 id: appDelegate
                 visualIndex: delegateRoot.visualIndex
-                
+
                 isFolder: false
                 application: model.application
-                
+
                 menuActions: [
                     Kirigami.Action {
                         icon.name: "emblem-favorite"
@@ -195,13 +195,13 @@ MobileShell.GridView {
                         onTriggered: root.folder.moveAppOut(model.index)
                     }
                 ]
-                
+
                 implicitWidth: root.cellWidth
                 implicitHeight: visible ? root.cellHeight : 0
-                
+
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.verticalCenter: parent.verticalCenter
-                
+
                 states: [
                     State {
                         when: appDelegate.drag.active
@@ -209,7 +209,7 @@ MobileShell.GridView {
                             target: appDelegate
                             parent: root
                         }
-                        
+
                         AnchorChanges {
                             target: appDelegate
                             anchors.horizontalCenter: undefined
@@ -220,7 +220,7 @@ MobileShell.GridView {
             }
         }
     }
-    
+
     // animations
     displaced: Transition {
         NumberAnimation {

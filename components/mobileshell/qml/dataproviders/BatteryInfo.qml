@@ -17,7 +17,7 @@ QtObject {
     property bool isVisible: pmSource.data["Battery"]["Has Cumulative"]
     property int percent: pmSource.data["Battery"]["Percent"]
     property bool pluggedIn: pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false
-    
+
     property P5Support.DataSource pmSource: P5Support.DataSource {
         engine: "powermanagement"
         connectedSources: ["Battery", "AC Adapter"]

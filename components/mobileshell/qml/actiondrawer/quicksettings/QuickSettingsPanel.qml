@@ -19,22 +19,22 @@ import org.kde.plasma.core as PlasmaCore
  */
 MobileShell.BaseItem {
     id: root
-    
+
     required property var actionDrawer
-    
+
     required property real fullScreenHeight
-    
+
     /**
      * Implicit height of the contents of the panel.
      */
     readonly property real contentImplicitHeight: column.implicitHeight
-    
+
     // we need extra padding since the background side border is enabled
     topPadding: Kirigami.Units.smallSpacing * 4
     leftPadding: Kirigami.Units.smallSpacing * 4
     rightPadding: Kirigami.Units.smallSpacing * 4
     bottomPadding: Kirigami.Units.smallSpacing * 4
-    
+
     background: KSvg.FrameSvgItem {
         enabledBorders: KSvg.FrameSvgItem.AllBorders
         imagePath: "widgets/background"
@@ -42,7 +42,7 @@ MobileShell.BaseItem {
 
     contentItem: Item {
         id: containerItem
-        
+
         // use container item so that our column doesn't get stretched if base item is anchored
         ColumnLayout {
             id: column
@@ -51,14 +51,14 @@ MobileShell.BaseItem {
             anchors.top: parent.top
             height: root.fullScreenHeight
             spacing: 0
-            
+
             MobileShell.StatusBar {
                 id: statusBar
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.preferredHeight: Kirigami.Units.gridUnit * 1.5
                 Layout.maximumHeight: Kirigami.Units.gridUnit * 1.5
-                
+
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
                 Kirigami.Theme.inherit: false
 
@@ -66,31 +66,31 @@ MobileShell.BaseItem {
                 showSecondRow: false
                 showDropShadow: false
                 showTime: false
-                
+
                 // security reasons, system tray also doesn't work on lockscreen
                 disableSystemTray: actionDrawer.restrictedPermissions
             }
-            
+
             MobileShell.QuickSettings {
                 id: quickSettings
-                
+
                 mode: QuickSettings.ScrollView
                 width: column.width
                 implicitHeight: quickSettings.fullHeight
-                
+
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBar.height - Kirigami.Units.smallSpacing
                 Layout.maximumWidth: column.width
-                
+
                 actionDrawer: root.actionDrawer
                 minimizedViewProgress: 0
                 fullViewProgress: 1
             }
-            
+
             Item { Layout.fillHeight: true }
         }
-        
+
         Handle {
             id: handle
             anchors.horizontalCenter: parent.horizontalCenter

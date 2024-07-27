@@ -6,7 +6,7 @@ import QtQuick 2.15
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.plasma.private.mobileshell as MobileShell
 
-QS.QuickSetting {    
+QS.QuickSetting {
     text: i18n("Battery")
     status: i18n("%1%", MobileShell.BatteryInfo.percent)
     icon: "battery-full" + (MobileShell.BatteryInfo.pluggedIn ? "-charging" : "")

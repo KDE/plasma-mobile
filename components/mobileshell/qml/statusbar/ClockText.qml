@@ -23,9 +23,9 @@ RowLayout {
 
     PlasmaComponents.Label {
         id: clock
-    
+
         property bool is24HourTime: MobileShell.ShellUtil.isSystem24HourFormat
-    
+
         text: Qt.formatTime(source.data.Local.DateTime, is24HourTime ? "h:mm" : "h:mm ap")
         color: Kirigami.Theme.textColor
         verticalAlignment: Qt.AlignVCenter

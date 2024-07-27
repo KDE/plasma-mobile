@@ -23,21 +23,21 @@ import "icon.js" as Icon
 // adapted from https://invent.kde.org/plasma/plasma-pa/-/blob/master/applet/contents/ui/ListItemBase.qml
 Controls.ItemDelegate {
     id: baseItem
-    
+
     property string label
     property alias listIcon: clientIcon.source
     property string type // sink, source, source-output
-    
+
     onClicked: {
         if (selectButton.visible) {
             model.PulseObject.default = true;
         }
     }
-    
+
     contentItem: RowLayout {
         id: row
         spacing: Kirigami.Units.smallSpacing
-        
+
         PlasmaComponents.RadioButton {
             id: selectButton
             Layout.alignment: Qt.AlignTop
@@ -46,7 +46,7 @@ Controls.ItemDelegate {
             visible: (baseItem.type == "sink" && sinkView.model.count > 1) || (baseItem.type == "source" && sourceView.model.count > 1)
             onClicked: model.PulseObject.default = true
         }
-        
+
         // application icon
         Kirigami.Icon {
             id: clientIcon
@@ -62,17 +62,17 @@ Controls.ItemDelegate {
                 }
             }
         }
-        
+
         ColumnLayout {
             Layout.alignment: Qt.AlignVCenter
             Layout.fillWidth: true
             spacing: Kirigami.Units.smallSpacing
-            
+
             RowLayout {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
                 Layout.alignment: Qt.AlignBottom
-                
+
                 PlasmaComponents.Label {
                     id: mainLabel
                     text: baseItem.label
@@ -80,7 +80,7 @@ Controls.ItemDelegate {
                     Layout.fillWidth: true
                     elide: Text.ElideRight
                 }
-                
+
                 PlasmaComponents.ToolButton {
                     Layout.alignment: Qt.AlignBottom
                     Layout.bottomMargin: -Kirigami.Units.smallSpacing
@@ -95,7 +95,7 @@ Controls.ItemDelegate {
                     PlasmaComponents.ToolTip {
                         text: i18n("Show additional options for %1", baseItem.label)
                     }
-                    
+
                     ListItemMenu {
                         id: contextMenu
                         pulseObject: model.PulseObject
@@ -123,17 +123,17 @@ Controls.ItemDelegate {
                     }
                 }
             }
-            
+
             RowLayout {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
-                
+
                 // this slider was effectively copied from the source (linked at the top of the file)
                 PlasmaComponents.Slider {
                     id: slider
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignTop
-                    
+
                     // Helper properties to allow async slider updates.
                     // While we are sliding we must not react to value updates
                     // as otherwise we can easily end up in a loop where value
@@ -141,14 +141,14 @@ Controls.ItemDelegate {
                     property int volume: Volume
                     property bool ignoreValueChange: true
                     readonly property bool forceRaiseMaxVolume: volume >= PulseAudio.NormalVolume * 1.01
-                    
+
                     from: PulseAudio.MinimalVolume
                     to: PulseAudio.NormalVolume
                     stepSize: to / (to / PulseAudio.NormalVolume * 100.0)
                     visible: HasVolume
                     enabled: VolumeWritable
                     opacity: Muted ? 0.5 : 1
-                    
+
                     Accessible.name: i18nc("Accessibility data on volume slider", "Adjust volume for %1", baseItem.label)
 
                     background: KSvg.FrameSvgItem {
@@ -247,7 +247,7 @@ Controls.ItemDelegate {
             }
         }
     }
-    
+
     function setVolumeByPercent(targetPercent) {
         model.PulseObject.volume = Math.round(PulseAudio.NormalVolume * (targetPercent/100));
     }

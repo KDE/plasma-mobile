@@ -48,7 +48,7 @@ QS.QuickSetting {
         } else {
             RecordUtil.showNotification(i18n("New Screen Recording"), i18n("New Screen Recording saved in %1", record.output), record.output);
         }
-        
+
         enabled = !enabled
         MobileShellState.ShellDBusClient.closeActionDrawer();
     }

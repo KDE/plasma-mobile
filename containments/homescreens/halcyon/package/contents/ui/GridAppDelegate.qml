@@ -25,23 +25,23 @@ MouseArea {
     height: GridView.view.cellHeight
 
     property Halcyon.Application application: model.application
-    
+
     property int reservedSpaceForLabel
     property alias iconItem: icon
 
     readonly property real margins: Math.floor(width * 0.2)
 
     signal launch(int x, int y, var source, string title, string storageId)
-    
+
     function openContextMenu() {
         dialogLoader.active = true;
         dialogLoader.item.open();
     }
-    
+
     cursorShape: Qt.PointingHandCursor
     acceptedButtons: Qt.LeftButton | Qt.RightButton
     onPressAndHold: openContextMenu()
-    
+
     function launchApp() {
         // launch app
         if (application.running) {
@@ -50,15 +50,15 @@ MouseArea {
             delegate.launch(delegate.x + (Kirigami.Units.smallSpacing * 2), delegate.y + (Kirigami.Units.smallSpacing * 2), icon.source, application.name, application.storageId);
         }
     }
-    
+
     Loader {
         id: dialogLoader
         active: false
-        
+
         sourceComponent: PlasmaComponents.Menu {
             title: label.text
             closePolicy: PlasmaComponents.Menu.CloseOnReleaseOutside | PlasmaComponents.Menu.CloseOnEscape
-            
+
             PlasmaComponents.MenuItem {
                 icon.name: "emblem-favorite"
                 text: i18n("Add to favourites")
@@ -72,15 +72,15 @@ MouseArea {
 
     // grow/shrink animation
     property real zoomScale: 1
-    transform: Scale { 
-        origin.x: delegate.width / 2; 
-        origin.y: delegate.height / 2; 
+    transform: Scale {
+        origin.x: delegate.width / 2;
+        origin.y: delegate.height / 2;
         xScale: delegate.zoomScale
         yScale: delegate.zoomScale
     }
-    
+
     property bool launchAppRequested: false
-    
+
     NumberAnimation on zoomScale {
         id: shrinkAnim
         running: false
@@ -92,7 +92,7 @@ MouseArea {
             }
         }
     }
-    
+
     NumberAnimation on zoomScale {
         id: growAnim
         running: false
@@ -105,7 +105,7 @@ MouseArea {
             }
         }
     }
-    
+
     onPressedChanged: {
         if (pressed) {
             growAnim.stop();
@@ -122,7 +122,7 @@ MouseArea {
             launchAppRequested = true;
         }
     }
-    
+
     ColumnLayout {
         anchors {
             fill: parent
@@ -138,7 +138,7 @@ MouseArea {
 
             Kirigami.Theme.inherit: false
             Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-            
+
             Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
             Layout.fillWidth: true
             Layout.preferredHeight: Math.floor(parent.height - delegate.reservedSpaceForLabel)
@@ -158,7 +158,7 @@ MouseArea {
                 height: width
                 color: Kirigami.Theme.highlightColor
             }
-            
+
             // darken effect when hovered/pressed
             layer {
                 enabled: delegate.pressed
@@ -167,7 +167,7 @@ MouseArea {
                     colorizationColor: Qt.rgba(0, 0, 0, 0.3)
                 }
             }
-            
+
             FontMetrics {
                 id: labelFontMetrics
                 font: label.font
@@ -183,7 +183,7 @@ MouseArea {
             Layout.topMargin: Kirigami.Units.smallSpacing
             Layout.leftMargin: -parent.anchors.leftMargin + Kirigami.Units.smallSpacing
             Layout.rightMargin: -parent.anchors.rightMargin + Kirigami.Units.smallSpacing
-            
+
             wrapMode: Text.WordWrap
             maximumLineCount: 2
             horizontalAlignment: Text.AlignHCenter

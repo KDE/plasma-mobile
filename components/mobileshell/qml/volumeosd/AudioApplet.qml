@@ -20,7 +20,7 @@ import org.kde.plasma.private.volume
 // capture presses on the audio applet so it doesn't close the overlay
 ColumnLayout {
     spacing: 0
-        
+
     PulseObjectFilterModel {
         id: paSinkFilterModel
         sortRoleName: "SortByDefault"
@@ -46,14 +46,14 @@ ColumnLayout {
     }
 
     // ui elements
-    
+
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
-            
+
             Kirigami.Heading {
                 level: 2
                 text: i18n("Outputs")
@@ -61,11 +61,11 @@ ColumnLayout {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.smallSpacing
             }
-            
+
             Repeater {
                 id: sinkView
                 Layout.fillWidth: true
-                
+
                 model: paSinkFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
@@ -76,14 +76,14 @@ ColumnLayout {
             }
         }
     }
-    
+
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
-            
+
             Kirigami.Heading {
                 level: 2
                 text: i18n("Inputs")
@@ -91,11 +91,11 @@ ColumnLayout {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.smallSpacing
             }
-            
+
             Repeater {
                 id: sourceView
                 Layout.fillWidth: true
-                
+
                 model: paSourceFilterModel
                 delegate: DeviceListItem {
                     Layout.fillWidth: true
@@ -106,7 +106,7 @@ ColumnLayout {
             }
         }
     }
-    
+
     PopupCard {
         visible: sourceInputView.model.count + sourceMediaInputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
@@ -114,7 +114,7 @@ ColumnLayout {
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
-            
+
             Kirigami.Heading {
                 level: 2
                 text: i18n("Playback Streams")
@@ -122,11 +122,11 @@ ColumnLayout {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.smallSpacing
             }
-            
+
             Repeater {
                 id: sourceMediaInputView
                 Layout.fillWidth: true
-                
+
                 model: PulseObjectFilterModel {
                     filters: [ { role: "Name", value: "sink-input-by-media-role:event" } ]
                     sourceModel: StreamRestoreModel {}
@@ -139,11 +139,11 @@ ColumnLayout {
                     devicesModel: sourceView.model
                 }
             }
-            
+
             Repeater {
                 id: sourceInputView
                 Layout.fillWidth: true
-                
+
                 model: PulseObjectFilterModel {
                     filters: [ { role: "VirtualStream", value: false } ]
                     sourceModel: SinkInputModel {}
@@ -159,7 +159,7 @@ ColumnLayout {
             }
         }
     }
-    
+
     PopupCard {
         visible: sourceOutputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
@@ -167,7 +167,7 @@ ColumnLayout {
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
-            
+
             Kirigami.Heading {
                 level: 2
                 text: i18n("Recording Streams")
@@ -175,11 +175,11 @@ ColumnLayout {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.smallSpacing
             }
-            
+
             Repeater {
                 id: sourceOutputView
                 Layout.fillWidth: true
-                
+
                 model: PulseObjectFilterModel {
                     filters: [ { role: "VirtualStream", value: false } ]
                     sourceModel: SourceOutputModel {}
