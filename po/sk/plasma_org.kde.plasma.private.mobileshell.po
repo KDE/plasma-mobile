@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-30 00:40+0000\n"
+"POT-Creation-Date: 2024-07-27 00:42+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -164,22 +164,22 @@ msgstr "Prepnúť zobrazovanie zvukových prúdov"
 msgid "Search…"
 msgstr "Hľadať..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:142
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:164
 #, kde-format
 msgid "No media playing"
 msgstr "Neprehráva sa žiadne médium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:175
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "Previous track"
 msgstr "Predchádzajúca skladba"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:189
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Prehrať alebo pozastaviť médium"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:205
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:221
 #, kde-format
 msgid "Next track"
 msgstr "Nasledujúca skladba"
