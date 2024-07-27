@@ -65,7 +65,7 @@ Item {
         anchors.bottomMargin: -1
 
         color: Qt.darker(Kirigami.Theme.backgroundColor, 1.3)
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
     }
 
     // card
@@ -78,7 +78,7 @@ Item {
         anchors.top: parent.top
 
         color: (root.tapEnabled && mouseArea.pressed) ? Qt.darker(Kirigami.Theme.backgroundColor, 1.1) : Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
         implicitHeight: contentParent.implicitHeight
 
         // clip

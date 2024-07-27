@@ -171,7 +171,7 @@ Item {
         id: resizeOutline
         color: 'transparent'
         border.color: 'white'
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
         border.width: 1
 
         anchors.fill: handleContainer

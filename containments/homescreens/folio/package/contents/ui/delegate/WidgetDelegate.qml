@@ -95,7 +95,7 @@ Folio.WidgetContainer {
             anchors.fill: parent
             visible: root.widget && !root.widget.applet
             color: Qt.rgba(255, 255, 255, 0.3)
-            radius: Kirigami.Units.smallSpacing
+            radius: Kirigami.Units.cornerRadius
         }
 
         Item {

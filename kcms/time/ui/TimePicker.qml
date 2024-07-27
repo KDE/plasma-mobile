@@ -95,7 +95,7 @@ RowLayout {
             }
 
             background: Rectangle {
-                radius: Kirigami.Units.smallSpacing
+                radius: Kirigami.Units.cornerRadius
                 border.color: {
                     if (amPmToggle.enabled && (amPmToggle.visualFocus || amPmToggle.hovered || amPmToggle.down)) {
                         return Kirigami.Theme.focusColor

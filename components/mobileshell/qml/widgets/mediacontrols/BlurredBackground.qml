@@ -24,7 +24,7 @@ Item {
                 anchors.centerIn: parent
                 width: img.width
                 height: img.height
-                radius: Kirigami.Units.smallSpacing
+                radius: Kirigami.Units.cornerRadius
             }
         }
     }

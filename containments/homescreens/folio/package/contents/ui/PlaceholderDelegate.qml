@@ -25,7 +25,7 @@ Item {
         Rectangle {
             id: loader
             color: Qt.rgba(255, 255, 255, 0.3)
-            radius: Kirigami.Units.largeSpacing
+            radius: Kirigami.Units.cornerRadius
 
             Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
             Layout.minimumWidth: folio.FolioSettings.delegateIconSize

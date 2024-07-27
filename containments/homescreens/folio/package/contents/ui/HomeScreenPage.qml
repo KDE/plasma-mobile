@@ -72,7 +72,7 @@ Item {
                     dropDelegateIsWidget &&
                     pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
 
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
         color: Qt.rgba(255, 255, 255, 0.3)
 
         x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth

@@ -64,7 +64,7 @@ Item {
                     id: rectBackground
                     anchors.fill: parent
                     color: Kirigami.Theme.backgroundColor
-                    radius: Kirigami.Units.smallSpacing
+                    radius: Kirigami.Units.cornerRadius
                 }
             }
 

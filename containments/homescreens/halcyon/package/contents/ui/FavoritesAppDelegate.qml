@@ -263,7 +263,7 @@ Item {
                 anchors.fill: parent
                 anchors.margins: Kirigami.Units.smallSpacing
                 color: Qt.rgba(255, 255, 255, 0.2)
-                radius: Kirigami.Units.smallSpacing
+                radius: Kirigami.Units.cornerRadius
                 opacity: delegate.dragFolderAnimationProgress
             }
 
@@ -311,7 +311,7 @@ Item {
                 anchors.fill: parent
                 anchors.margins: Kirigami.Units.smallSpacing
                 color: Qt.rgba(255, 255, 255, 0.2)
-                radius: Kirigami.Units.smallSpacing
+                radius: Kirigami.Units.cornerRadius
 
                 transform: Scale {
                     origin.x: rect.width / 2

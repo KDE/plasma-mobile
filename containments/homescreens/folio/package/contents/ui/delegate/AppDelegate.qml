@@ -53,7 +53,7 @@ AbstractDelegate {
         // background for folder creation animation
         Rectangle {
             id: rect
-            radius: Kirigami.Units.largeSpacing
+            radius: Kirigami.Units.cornerRadius
             color: Qt.rgba(255, 255, 255, 0.3)
             anchors.fill: parent
 

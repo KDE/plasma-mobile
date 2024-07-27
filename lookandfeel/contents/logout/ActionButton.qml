@@ -35,7 +35,7 @@ Item {
         id: buttonRect
         width: root.width
         height: iconSize * 2.2
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Units.cornerRadius
         color: Kirigami.Theme.backgroundColor
         opacity: mouseArea.containsPress ? 1 : 0.6
         border {

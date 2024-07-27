@@ -136,7 +136,7 @@ MouseArea {
                 id: background
                 color: Qt.rgba(255, 255, 255, 0.3)
                 visible: delegate.containsMouse
-                radius: Kirigami.Units.smallSpacing
+                radius: Kirigami.Units.cornerRadius
                 anchors.fill: parent
             }
 
