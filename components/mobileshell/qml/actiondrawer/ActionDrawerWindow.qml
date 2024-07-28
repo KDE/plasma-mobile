@@ -32,6 +32,12 @@ NanoShell.FullScreenOverlay {
 
     color: "transparent"
 
+    onVisibleChanged: {
+        if (visible) {
+            window.raise();
+        }
+    }
+
     onActiveChanged: {
         if (!active) {
             drawer.close();
