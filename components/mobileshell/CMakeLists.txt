@@ -10,6 +10,7 @@ set(mobileshellplugin_SRCS
     components/swipearea.cpp
     notifications/notificationthumbnailer.cpp
     notifications/notificationfilemenu.cpp
+    notifications/notificationfileinfo.cpp
 )
 target_include_directories(mobileshellplugin PRIVATE components)
 target_include_directories(mobileshellplugin PRIVATE notifications)

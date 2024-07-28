@@ -9,10 +9,9 @@ import QtQml 2.15
 
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import org.kde.notificationmanager as NotificationManager
-
-import org.kde.plasma.private.notifications 2.0 as Notifications
 
 ColumnLayout {
     id: jobItem
@@ -59,7 +58,7 @@ ColumnLayout {
 
     spacing: Kirigami.Units.smallSpacing
 
-    Notifications.FileInfo {
+    MobileShell.NotificationFileInfo {
         id: fileInfo
         url: jobItem.totalFiles === 1 && jobItem.url ? jobItem.url : ""
     }
@@ -196,7 +195,7 @@ ColumnLayout {
                 enabled: parent.text === ""
             }
 
-            Notifications.FileMenu {
+            MobileShell.NotificationFileMenu {
                 id: otherFileActionsMenu
                 url: jobItem.url || ""
                 onActionTriggered: jobItem.fileActionInvoked(action)
