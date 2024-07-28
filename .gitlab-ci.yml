@@ -6,6 +6,7 @@ include:
     file:
       - /gitlab-templates/reuse-lint.yml
       - /gitlab-templates/linux-qt6.yml
+      - /gitlab-templates/alpine-qt6.yml
 
 posix-script-compliance:
   image:
