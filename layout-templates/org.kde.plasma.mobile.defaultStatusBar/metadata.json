@@ -32,6 +32,7 @@
         "Description[uk]": "Типова смужка стану для мобільних",
         "Description[x-test]": "xxDefault status bar for mobilexx",
         "Description[zh_CN]": "手机的默认状态栏",
+        "Description[zh_TW]": "手機用的預設狀態列",
         "EnabledByDefault": true,
         "Id": "org.kde.plasma.mobile.defaultStatusBar",
         "License": "LGPLv2+",
@@ -55,6 +56,7 @@
         "Name[uk]": "Типова смужка стану для мобільних",
         "Name[x-test]": "xxDefault Mobile Status Barxx",
         "Name[zh_CN]": "默认手机状态栏",
+        "Name[zh_TW]": "預設手機狀態列",
         "Website": "https://www.kde.org/plasma-desktop"
     },
     "X-Plasma-ContainmentCategories": [

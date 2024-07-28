@@ -32,6 +32,7 @@
         "Description[uk]": "Типова панель навігації для мобільних",
         "Description[x-test]": "xxDefault navigation panel for mobilexx",
         "Description[zh_CN]": "手机的默认导航面板",
+        "Description[zh_TW]": "手機用的預設導覽面板",
         "EnabledByDefault": true,
         "Id": "org.kde.plasma.mobile.defaultNavigationPanel",
         "License": "LGPLv2+",
@@ -55,6 +56,7 @@
         "Name[uk]": "Типова панель навігації для мобільних",
         "Name[x-test]": "xxDefault Mobile Navigation Panelxx",
         "Name[zh_CN]": "默认手机导航面板",
+        "Name[zh_TW]": "預設手機導覽面板",
         "Website": "https://www.kde.org/plasma-desktop"
     },
     "X-Plasma-ContainmentCategories": [
