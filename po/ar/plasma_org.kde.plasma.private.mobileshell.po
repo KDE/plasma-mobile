@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 00:41+0000\n"
+"POT-Creation-Date: 2024-07-29 00:41+0000\n"
 "PO-Revision-Date: 2023-05-07 20:47+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -17,8 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
+#: notifications/notificationfileinfo.cpp:169
+#, kde-format
+msgid "Open with %1"
+msgstr ""
+
+#: notifications/notificationfileinfo.cpp:173
+#, kde-format
+msgid "Open with…"
+msgstr ""
+
 #: notifications/notificationfilemenu.cpp:109
-#: qml/widgets/notifications/NotificationJobItem.qml:218
+#: qml/widgets/notifications/NotificationJobItem.qml:217
 #, kde-format
 msgid "Open Containing Folder"
 msgstr "افتح المجلد الحاوي"
@@ -298,19 +308,19 @@ msgctxt "Bytes per second"
 msgid "%1/s"
 msgstr ""
 
-#: qml/widgets/notifications/NotificationJobItem.qml:116
+#: qml/widgets/notifications/NotificationJobItem.qml:115
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr ""
 
-#: qml/widgets/notifications/NotificationJobItem.qml:131
+#: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
 msgstr ""
 
-#: qml/widgets/notifications/NotificationJobItem.qml:142
+#: qml/widgets/notifications/NotificationJobItem.qml:141
 #, fuzzy, kde-format
 #| msgctxt "Job name, e.g. Copying is paused"
 #| msgid "%1 (Paused)"
@@ -318,19 +328,19 @@ msgctxt "Pause running job"
 msgid "Pause"
 msgstr "%1 (مُلبثة)"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:151
+#: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
 msgstr ""
 
-#: qml/widgets/notifications/NotificationJobItem.qml:182
+#: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
 msgstr "خيارات أكثر..."
 
-#: qml/widgets/notifications/NotificationJobItem.qml:210
+#: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
 msgid "Open"
 msgstr ""

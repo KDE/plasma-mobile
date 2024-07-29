@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-28 00:41+0000\n"
-"PO-Revision-Date: 2024-06-10 21:30+0200\n"
+"POT-Creation-Date: 2024-07-29 00:41+0000\n"
+"PO-Revision-Date: 2024-07-28 10:12+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,10 +15,20 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.05.2\n"
+
+#: notifications/notificationfileinfo.cpp:169
+#, kde-format
+msgid "Open with %1"
+msgstr ""
+
+#: notifications/notificationfileinfo.cpp:173
+#, kde-format
+msgid "Open with…"
+msgstr ""
 
 #: notifications/notificationfilemenu.cpp:109
-#: qml/widgets/notifications/NotificationJobItem.qml:218
+#: qml/widgets/notifications/NotificationJobItem.qml:217
 #, kde-format
 msgid "Open Containing Folder"
 msgstr "Abrir o cartafol contedor"
@@ -190,20 +200,19 @@ msgstr "Seguinte pista"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Copiar o enderezo da ligazón"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr "&Copiar"
+msgstr "Copiar"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "Seleccionar todo"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:55
 #, kde-format
@@ -212,106 +221,102 @@ msgid "Reply"
 msgstr "Responder"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:31
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1%"
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
 msgctxt "How many bytes have been copied"
 msgid "%2 of %1"
-msgstr ""
+msgstr "%2 de %1"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:106
 #, kde-format
 msgctxt "How many files have been copied"
 msgid "%2 of %1 file"
 msgid_plural "%2 of %1 files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 de %1 ficheiro"
+msgstr[1] "%2 de %1 ficheiros"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:109
 #, kde-format
 msgctxt "How many dirs have been copied"
 msgid "%2 of %1 folder"
 msgid_plural "%2 of %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 de %1 cartafol"
+msgstr[1] "%2 de %1 cartafoles"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:112
 #, kde-format
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%2 de %1 elemento"
+msgstr[1] "%2 de %1 elementos"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 ficheiro"
+msgstr[1] "%1 ficheiros"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 cartafol"
+msgstr[1] "%1 cartafoles"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 elemento"
+msgstr[1] "%1 elementos"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1/s"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:116
-#, fuzzy, kde-format
-#| msgid "%1%"
+#: qml/widgets/notifications/NotificationJobItem.qml:115
+#, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:131
+#: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr ""
+msgstr "Detalles"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:142
-#, fuzzy, kde-format
-#| msgctxt "Job name, e.g. Copying is paused"
-#| msgid "%1 (Paused)"
+#: qml/widgets/notifications/NotificationJobItem.qml:141
+#, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr "%1 (en pausa)"
+msgstr "Pausar"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:151
+#: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:182
+#: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
 msgstr "Máis opcións…"
 
-#: qml/widgets/notifications/NotificationJobItem.qml:210
+#: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
 msgid "Open"
-msgstr ""
+msgstr "Abrir"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format
