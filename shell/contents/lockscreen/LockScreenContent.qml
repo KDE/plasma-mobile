@@ -30,30 +30,12 @@ Item {
         spacing: 0
 
         // Center clock when no notifications are shown, otherwise move the clock upward
-        anchors.topMargin: root.notificationsShown ? Kirigami.Units.gridUnit * 5 : Math.round(root.fullHeight / 2 - (verticalLayout.implicitHeight / 2))
-        anchors.bottomMargin: Kirigami.Units.gridUnit
+        anchors.topMargin: Kirigami.Units.gridUnit * 3.5
+        anchors.bottomMargin: Kirigami.Units.gridUnit * 2
         anchors.fill: parent
-
-        // Animate clock centering change when notifications come in
-        Behavior on anchors.topMargin {
-            id: topMarginAnim
-            enabled: false
-
-            NumberAnimation {
-                duration: Kirigami.Units.veryLongDuration
-                easing.type: Easing.InOutExpo
-            }
-        }
 
         LayoutItemProxy { target: clockAndMediaWidget }
         LayoutItemProxy { target: notificationComponent }
-    }
-
-    // HACK: don't animate top margin at beginning, while notification model figures itself out
-    Timer {
-        running: true
-        repeat: false
-        onTriggered: topMarginAnim.enabled = true
     }
 
     // Horizontal layout (landscape on smaller devices)
@@ -94,13 +76,12 @@ Item {
         id: clockAndMediaWidget
         Layout.fillWidth: true
         Layout.fillHeight: root.isVertical
-        spacing: Kirigami.Units.gridUnit * 2
+        spacing: Kirigami.Units.gridUnit
 
         Clock {
             layoutAlignment: root.isVertical ? Qt.AlignHCenter : Qt.AlignLeft
             Layout.alignment: root.isVertical ? Qt.AlignHCenter : Qt.AlignLeft
             Layout.fillWidth: true
-            Layout.bottomMargin: root.isVertical ? Kirigami.Units.gridUnit * 2 : 0
         }
 
         MobileShell.MediaControlsWidget {

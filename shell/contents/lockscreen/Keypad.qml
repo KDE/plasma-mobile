@@ -106,7 +106,7 @@ Item {
                 implicitWidth: keypadGrid.cellLength
                 implicitHeight: keypadGrid.cellLength
                 visible: modelData.length > 0
-                enabled: root.openProgress >= 0.8 // Only enable after a certain point in animation
+                enabled: root.openProgress >= 0.8 && !lockScreenState.isKeyboardMode // Only enable after a certain point in animation
 
                 opacity: enabled
                 Behavior on opacity {

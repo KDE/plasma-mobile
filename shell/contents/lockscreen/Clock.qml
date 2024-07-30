@@ -30,33 +30,45 @@ Item {
 
     ColumnLayout {
         id: clockColumn
-        spacing: Kirigami.Units.gridUnit
+        spacing: 0
 
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
 
         PC3.Label {
-            text: Qt.formatTime(timeSource.data["Local"]["DateTime"], MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
+            text: {
+                let timeText = Qt.formatTime(timeSource.data["Local"]["DateTime"], MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap");
+
+                // Remove am/pm in 12-hour time to avoid excessive length
+                if (!MobileShell.ShellUtil.isSystem24HourFormat) {
+                    timeText = timeText.substring(0, timeText.length - 3);
+                }
+                return timeText;
+            }
+
             color: "white"
+            opacity: 0.9
+
+            renderType: Text.NativeRendering
 
             Layout.alignment: root.layoutAlignment
-            font.weight: Font.Bold
-            font.pointSize: 36
+            font.weight: Font.Medium
+            font.pointSize: 64
 
             layer.enabled: true
             layer.effect: MobileShell.TextDropShadow {
                 blurMax: 16
             }
         }
-
         PC3.Label {
-            text: Qt.formatDate(timeSource.data["Local"]["DateTime"], "ddd, MMM d")
+            text: Qt.formatDate(timeSource.data["Local"]["DateTime"], "dddd, MMMM d")
             color: "white"
+            opacity: 0.9
 
             Layout.alignment: root.layoutAlignment
             font.weight: Font.Bold
-            font.pointSize: 10
+            font.pointSize: 12
 
             layer.enabled: true
             layer.effect: MobileShell.TextDropShadow {
