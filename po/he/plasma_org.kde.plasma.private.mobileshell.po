@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-29 00:41+0000\n"
-"PO-Revision-Date: 2024-03-07 12:12+0200\n"
+"PO-Revision-Date: 2024-07-29 08:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,17 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
 msgid "Open with %1"
-msgstr ""
+msgstr "פתיחה עם %1"
 
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr ""
+msgstr "פתיחה עם…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -201,20 +201,19 @@ msgstr "הרצועה הבאה"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "העתקת כתובת קישור"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr "ה&עתקה"
+msgstr "העתקה"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "בחירה בהכול"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:55
 #, kde-format
@@ -223,84 +222,82 @@ msgid "Reply"
 msgstr "להגיב"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:31
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1%"
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
 msgctxt "How many bytes have been copied"
 msgid "%2 of %1"
-msgstr ""
+msgstr "%2 מתוך %1"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:106
 #, kde-format
 msgctxt "How many files have been copied"
 msgid "%2 of %1 file"
 msgid_plural "%2 of %1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 מתוך קובץ"
+msgstr[1] "%2 מתוך שני קבצים"
+msgstr[2] "%2 מתוך %1 קבצים"
+msgstr[3] "%2 מתוך %1 קבצים"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:109
 #, kde-format
 msgctxt "How many dirs have been copied"
 msgid "%2 of %1 folder"
 msgid_plural "%2 of %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 מתוך תיקייה"
+msgstr[1] "%2 מתוך שתי תיקיות"
+msgstr[2] "%2 מתוך %1 תיקיות"
+msgstr[3] "%2 מתוך %1 תיקיות"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:112
 #, kde-format
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%2 מתוך פריט"
+msgstr[1] "%2 מתוך שני פריטים"
+msgstr[2] "%2 מתוך %1 פריטים"
+msgstr[3] "%2 מתוך %1 פריטים"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "קובץ"
+msgstr[1] "שני קבצים"
+msgstr[2] "%1 קבצים"
+msgstr[3] "%1 קבצים"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "תיקייה"
+msgstr[1] "שתי תיקיות"
+msgstr[2] "%1 תיקיות"
+msgstr[3] "%1 תיקיות"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "פריט"
+msgstr[1] "שני פריטים"
+msgstr[2] "%1 פריטים"
+msgstr[3] "%1 פריטים"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1 לשנייה"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr "%1%"
@@ -309,21 +306,19 @@ msgstr "%1%"
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr ""
+msgstr "פרטים"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
-#, fuzzy, kde-format
-#| msgctxt "Job name, e.g. Copying is paused"
-#| msgid "%1 (Paused)"
+#, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr "%1 (מושהית)"
+msgstr "השהיה"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
-msgstr ""
+msgstr "ביטול"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
@@ -334,7 +329,7 @@ msgstr "אפשרויות נוספות…"
 #: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
 msgid "Open"
-msgstr ""
+msgstr "פתיחה"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format

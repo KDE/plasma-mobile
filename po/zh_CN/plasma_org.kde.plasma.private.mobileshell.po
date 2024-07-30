@@ -204,10 +204,10 @@ msgid "Copy Link Address"
 msgstr ""
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr "复制 (&C)"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
@@ -222,10 +222,10 @@ msgid "Reply"
 msgstr "回复"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:31
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1%"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
@@ -279,7 +279,7 @@ msgid "%1/s"
 msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr "%1%"
@@ -291,10 +291,10 @@ msgid "Details"
 msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr "%1 (已暂停)"
+msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format

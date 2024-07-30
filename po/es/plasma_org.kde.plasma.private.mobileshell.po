@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-29 00:41+0000\n"
-"PO-Revision-Date: 2024-07-28 12:57+0200\n"
+"PO-Revision-Date: 2024-07-29 13:58+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -22,12 +22,12 @@ msgstr ""
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
 msgid "Open with %1"
-msgstr ""
+msgstr "Abrir con %1"
 
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr ""
+msgstr "Abrir con..."
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217

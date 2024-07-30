@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-29 00:41+0000\n"
-"PO-Revision-Date: 2024-07-28 09:09+0200\n"
+"PO-Revision-Date: 2024-07-29 09:26+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -20,12 +20,12 @@ msgstr ""
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
 msgid "Open with %1"
-msgstr ""
+msgstr "Openen met %1"
 
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr ""
+msgstr "Openen met…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -261,7 +261,7 @@ msgstr[1] "%2 van %1 items"
 msgid "%1 file"
 msgid_plural "%1 files"
 msgstr[0] ""
-msgstr[1] "%1 bestanden"
+msgstr[1] "%1 bestanden%1 bestanden"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
