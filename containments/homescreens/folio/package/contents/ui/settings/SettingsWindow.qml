@@ -105,8 +105,8 @@ Window {
                             name: i18n('Application')
 
                             contentItem: DelegateAppIcon {
-                                height: folio.FolioSettings.delegateIconSize
-                                width: folio.FolioSettings.delegateIconSize
+                                height: root.folio.FolioSettings.delegateIconSize
+                                width: root.folio.FolioSettings.delegateIconSize
                                 source: 'applications-system'
                             }
                         }
