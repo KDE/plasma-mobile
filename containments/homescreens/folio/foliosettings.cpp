@@ -10,6 +10,15 @@
 #include <QJsonDocument>
 #include <QTextStream>
 
+const QString CFG_KEY_HOMESCREEN_ROWS = QStringLiteral("homeScreenRows");
+const QString CFG_KEY_HOMESCREEN_COLS = QStringLiteral("homeScreenColumns");
+const QString CFG_KEY_SHOW_PAGES_APPLABELS = QStringLiteral("showPagesAppLabels");
+const QString CFG_KEY_SHOW_FAVORITES_APPLABELS = QStringLiteral("showFavoritesAppLabels");
+const QString CFG_KEY_DELEGATE_ICON_SIZE = QStringLiteral("delegateIconSize");
+const QString CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND = QStringLiteral("showFavoritesBarBackground");
+const QString CFG_KEY_PAGE_TRANSITION_EFFECT = QStringLiteral("pageTransitionEffect");
+const QString CFG_KEY_SHOW_WALLPAPER_BLUR = QStringLiteral("showWallpaperBlur");
+
 FolioSettings::FolioSettings(HomeScreen *parent)
     : QObject{parent}
     , m_homeScreen{parent}
@@ -135,14 +144,14 @@ void FolioSettings::save()
         return;
     }
 
-    m_homeScreen->config().writeEntry("homeScreenRows", m_homeScreenRows);
-    m_homeScreen->config().writeEntry("homeScreenColumns", m_homeScreenColumns);
-    m_homeScreen->config().writeEntry("showPagesAppLabels", m_showPagesAppLabels);
-    m_homeScreen->config().writeEntry("showFavouritesAppLabels", m_showFavouritesAppLabels);
-    m_homeScreen->config().writeEntry("delegateIconSize", m_delegateIconSize);
-    m_homeScreen->config().writeEntry("showFavouritesBarBackground", m_showFavouritesBarBackground);
-    m_homeScreen->config().writeEntry("pageTransitionEffect", (int)m_pageTransitionEffect);
-    m_homeScreen->config().writeEntry("showWallpaperBlur", m_showWallpaperBlur);
+    m_homeScreen->config().writeEntry(CFG_KEY_HOMESCREEN_ROWS, m_homeScreenRows);
+    m_homeScreen->config().writeEntry(CFG_KEY_HOMESCREEN_COLS, m_homeScreenColumns);
+    m_homeScreen->config().writeEntry(CFG_KEY_SHOW_PAGES_APPLABELS, m_showPagesAppLabels);
+    m_homeScreen->config().writeEntry(CFG_KEY_SHOW_FAVORITES_APPLABELS, m_showFavouritesAppLabels);
+    m_homeScreen->config().writeEntry(CFG_KEY_DELEGATE_ICON_SIZE, m_delegateIconSize);
+    m_homeScreen->config().writeEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, m_showFavouritesBarBackground);
+    m_homeScreen->config().writeEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)m_pageTransitionEffect);
+    m_homeScreen->config().writeEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, m_showWallpaperBlur);
 
     Q_EMIT m_homeScreen->configNeedsSaving();
 }
@@ -153,14 +162,14 @@ void FolioSettings::load()
         return;
     }
 
-    m_homeScreenRows = m_homeScreen->config().readEntry("homeScreenRows", 5);
-    m_homeScreenColumns = m_homeScreen->config().readEntry("homeScreenColumns", 4);
-    m_showPagesAppLabels = m_homeScreen->config().readEntry("showPagesAppLabels", true);
-    m_showFavouritesAppLabels = m_homeScreen->config().readEntry("showFavoritesAppLabels", false);
-    m_delegateIconSize = m_homeScreen->config().readEntry("delegateIconSize", 48);
-    m_showFavouritesBarBackground = m_homeScreen->config().readEntry("showFavoritesBarBackground", true);
-    m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_homeScreen->config().readEntry("pageTransitionEffect", (int)SlideTransition));
-    m_showWallpaperBlur = m_homeScreen->config().readEntry("showWallpaperBlur", true);
+    m_homeScreenRows = m_homeScreen->config().readEntry(CFG_KEY_HOMESCREEN_ROWS, 5);
+    m_homeScreenColumns = m_homeScreen->config().readEntry(CFG_KEY_HOMESCREEN_COLS, 4);
+    m_showPagesAppLabels = m_homeScreen->config().readEntry(CFG_KEY_SHOW_PAGES_APPLABELS, true);
+    m_showFavouritesAppLabels = m_homeScreen->config().readEntry(CFG_KEY_SHOW_FAVORITES_APPLABELS, false);
+    m_delegateIconSize = m_homeScreen->config().readEntry(CFG_KEY_DELEGATE_ICON_SIZE, 48);
+    m_showFavouritesBarBackground = m_homeScreen->config().readEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, true);
+    m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_homeScreen->config().readEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)SlideTransition));
+    m_showWallpaperBlur = m_homeScreen->config().readEntry(CFG_KEY_SHOW_WALLPAPER_BLUR, true);
 
     Q_EMIT homeScreenRowsChanged();
     Q_EMIT homeScreenColumnsChanged();
