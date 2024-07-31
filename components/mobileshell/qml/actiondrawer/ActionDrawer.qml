@@ -19,6 +19,8 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 Item {
     id: root
 
+    visible: false
+
     /**
      * The model for the notification widget.
      */
@@ -133,44 +135,45 @@ Item {
         oldOffset = offset;
 
         // close panel immediately after panel is not shown, and the flickable is not being dragged
-        if (opened && root.offset <= 0 && !swipeArea.moving && !closeAnim.running && !openAnim.running) {
-            root.updateState();
+        if (opened && root.offset <= 0 && !swipeArea.moving && !drawerAnimation.running) {
+            root.state = "";
+            offset = 0;
             focus = false;
+            root.opened = false;
+            root.updateState();
         }
     }
 
     function cancelAnimations() {
-        closeAnim.stop();
-        openAnim.stop();
-    }
+        root.state = "";
+     }
 
     function open() {
         cancelAnimations();
         if (openToPinnedMode) {
-            openAnim.restart(); // go to pinned height
+            root.state = "open"; // go to pinned height
         } else {
-            expandAnim.restart(); // go to maximized height
+            root.state = "expand"; // go to maximized height
         }
     }
 
     function closeImmediately() {
         cancelAnimations();
         offset = 0;
-        closeAnim.finished();
+        root.state = "close";
     }
 
     function close() {
         cancelAnimations();
-        closeAnim.restart();
+        root.state = "close";
     }
 
     function expand() {
         cancelAnimations();
-        expandAnim.restart();
+        root.state = "expand";
     }
 
     function updateState() {
-        cancelAnimations();
         let openThreshold = Kirigami.Units.gridUnit;
 
         if (root.offset <= 0) {
@@ -208,29 +211,55 @@ Item {
         onTriggered: updateState()
     }
 
-    PropertyAnimation on offset {
-        id: closeAnim
-        duration: Kirigami.Units.veryLongDuration
-        easing.type: Easing.OutExpo
-        to: 0
-        onFinished: {
-            root.visible = false;
-            root.opened = false;
+    state: "close"
+
+    states: [
+        State {
+            name: ""
+            PropertyChanges {
+                target: root; offset: offset
+            }
+        },
+        State {
+            name: "close"
+            PropertyChanges {
+                target: root; offset: 0
+            }
+        },
+        State {
+            name: "open"
+            PropertyChanges {
+                target: root; offset: contentContainerLoader.minimizedQuickSettingsOffset
+            }
+        },
+        State {
+            name: "expand"
+            PropertyChanges {
+                target: root; offset: contentContainerLoader.maximizedQuickSettingsOffset
+            }
         }
-    }
-    PropertyAnimation on offset {
-        id: openAnim
-        duration: Kirigami.Units.veryLongDuration
-        easing.type: Easing.OutExpo
-        to: contentContainerLoader.minimizedQuickSettingsOffset
-        onFinished: root.opened = true
-    }
-    PropertyAnimation on offset {
-        id: expandAnim
-        duration: Kirigami.Units.veryLongDuration
-        easing.type: Easing.OutExpo
-        to: contentContainerLoader.maximizedQuickSettingsOffset
-        onFinished: root.opened = true;
+    ]
+
+    transitions: Transition {
+        SequentialAnimation {
+            PropertyAnimation {
+                id: drawerAnimation
+                properties: "offset"; easing.type: Easing.OutExpo; duration: root.state != "" ? Kirigami.Units.veryLongDuration : 0
+            }
+            ScriptAction {
+                script: {
+                    if (root.state != "") {
+                        if (root.offset <= 0) {
+                            root.visible = false;
+                            root.opened = false;
+                            root.state = "";
+                        } else {
+                            root.opened = true;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     MobileShell.SwipeArea {

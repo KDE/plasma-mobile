@@ -21,17 +21,19 @@ Item {
     visible: sourceRepeater.count > 0
 
     property bool detailledView: false
-    readonly property real heightMultiplier: detailledView ? 2 : 1
 
     readonly property real padding: Kirigami.Units.gridUnit
-    readonly property real contentHeight: Kirigami.Units.gridUnit * 2 * heightMultiplier
+    readonly property real contentHeight: {
+        let heightMultiplier = detailledView ? 2 : 1
+        Kirigami.Units.gridUnit * 2 * heightMultiplier
+    }
     implicitHeight: visible ? padding * 2 + contentHeight : 0
 
     Behavior on implicitHeight {
-        NumberAnimation {
-            duration: Kirigami.Units.shortDuration
-            easing.type: Easing.InOutQuad
-        }
+       NumberAnimation {
+           duration: implicitHeight == 0 ? 0 : Kirigami.Units.shortDuration
+           easing.type: Easing.InOutQuad
+       }
     }
 
     MediaControlsSource {
