@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-29 00:41+0000\n"
-"PO-Revision-Date: 2023-04-18 09:30+0100\n"
+"PO-Revision-Date: 2024-07-30 21:06+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -287,8 +287,7 @@ msgid "%1/s"
 msgstr ""
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
-#, fuzzy, kde-format
-#| msgid "%1%"
+#, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
 msgstr "%1%"
@@ -414,15 +413,3 @@ msgstr "Montri %1 Pli"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Forigi Ĉiujn Sciigojn"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Sonaj Agordoj"
-
-#~ msgid "Audio"
-#~ msgstr "Aŭdio"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Pliigi Laŭtecon"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Malpliigi Laŭtecon"
