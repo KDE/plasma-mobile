@@ -232,6 +232,7 @@ FocusScope {
                         } else {
                             // do open switcher in case we were on homescreen before
                             taskSwitcherHelpers.animateGoToTaskIndex(state.currentTaskIndex);
+                            state.yPosition = taskSwitcherHelpers.openedYPosition;
                             taskSwitcherHelpers.open();
                         }
 
