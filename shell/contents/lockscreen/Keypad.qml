@@ -32,8 +32,41 @@ Item {
         anchors.centerIn: parent
         spacing: Kirigami.Units.gridUnit * 2
 
-        LayoutItemProxy { target: header }
+        LayoutItemProxy {
+            id: verticalHeaderProxy
+            target: header
+        }
         LayoutItemProxy { target: keypadGrid }
+
+        states: [
+            State {
+                name: "keypad"
+                when: !lockScreenState.isKeyboardMode
+                AnchorChanges {
+                    target: verticalHeaderProxy; anchors.top: keypadVerticalContainer.top
+                }
+                PropertyChanges {
+                    target: verticalHeaderProxy; anchors.verticalCenterOffset: 0
+                }
+            },
+            State {
+                name: "keyboard"
+                when: lockScreenState.isKeyboardMode
+                AnchorChanges {
+                    target: verticalHeaderProxy; anchors.verticalCenter: keypadVerticalContainer.verticalCenter
+                }
+                PropertyChanges {
+                    target: verticalHeaderProxy; anchors.verticalCenterOffset: -Kirigami.Units.gridUnit * 3
+                }
+            }
+        ]
+
+        transitions: Transition {
+            AnchorAnimation {
+                easing.type: Easing.OutCirc
+                duration: openProgress > 0.5 ? 300 : 0
+            }
+        }
     }
 
     // Row layout - used when there is restricted height
@@ -44,8 +77,35 @@ Item {
         anchors.centerIn: parent
         spacing: Kirigami.Units.gridUnit * 2
 
-        LayoutItemProxy { target: header }
+        LayoutItemProxy {
+            id: horizontalHeaderProxy
+            target: header
+        }
         LayoutItemProxy { target: keypadGrid }
+
+        states: [
+            State {
+                name: "keypad"
+                when: !lockScreenState.isKeyboardMode
+                AnchorChanges {
+                    target: horizontalHeaderProxy; anchors.left: keypadHorizontalContainer.left
+                }
+            },
+            State {
+                name: "keyboard"
+                when: lockScreenState.isKeyboardMode
+                AnchorChanges {
+                    target: horizontalHeaderProxy; anchors.horizontalCenter: keypadHorizontalContainer.horizontalCenter
+                }
+            }
+        ]
+
+        transitions: Transition {
+            AnchorAnimation {
+                easing.type: Easing.OutCirc
+                duration: openProgress > 0.5 ? 300 : 0
+            }
+        }
     }
 
     ColumnLayout {
@@ -78,6 +138,7 @@ Item {
 
             lockScreenState: root.lockScreenState
             isKeypadOpen: root.openProgress >= 0.9
+            enabled: root.openProgress >= 0.8
         }
     }
 
