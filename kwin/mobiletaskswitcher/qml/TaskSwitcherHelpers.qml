@@ -37,6 +37,10 @@ QtObject {
     // we don't want to continuously send haptics, just once is enough
     property bool hasVibrated: false
 
+    // made as variables to keep x anim in task list and task scrub icon list in sync
+    property int xAnimDuration: Kirigami.Units.longDuration * 2
+    property int xAnimEasingType: Easing.OutExpo
+
     // ~~ measurement constants ~~
 
     // dimensions of a real window on the screen
@@ -161,9 +165,9 @@ QtObject {
 
     // go to the task index, animated
     function animateGoToTaskIndex(index, duration = Kirigami.Units.longDuration * 2, easing = Easing.OutExpo) {
-        xAnim.duration = duration;
+        xAnimDuration = duration;
+        xAnimEasingType = easing;
         xAnim.to = xPositionFromTaskIndex(index);
-        xAnim.easing.type = easing;
         xAnim.restart();
     }
 
@@ -219,7 +223,8 @@ QtObject {
     property var xAnim: NumberAnimation {
         target: root.state
         property: "xPosition"
-        easing.type: Easing.OutBack
+        duration: xAnimDuration
+        easing.type: xAnimEasingType
     }
 
     property var openAnim: NumberAnimation {

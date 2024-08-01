@@ -445,20 +445,18 @@ FocusScope {
             Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
             anchors.bottom: parent.bottom
-            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.right: parent.horizontalCenter
             anchors.bottomMargin: taskSwitcherHelpers.openedYPosition * 5 / 8
 
-            anchors.horizontalCenterOffset: {
+            anchors.rightMargin: {
                 let size = Kirigami.Units.iconSizes.large + Kirigami.Units.largeSpacing * 2;
-                let offset = (root.state.currentTaskIndex - 0.5) * size;
-                return offset;
+                let offset = (root.state.currentTaskIndex + 0.5) * size;
+                return -offset;
             }
-            Behavior on anchors.horizontalCenterOffset {
+            Behavior on anchors.rightMargin {
                 NumberAnimation {
-                    // TODO: this duration should track the duration of xAnim but that is variable through function parameter
-                    // how do we make sure this is always the same duration?
-                    duration: Kirigami.Units.longDuration * 2;
-                    easing.type: Easing.OutBack;
+                    duration: taskSwitcherHelpers.xAnimDuration;
+                    easing.type: taskSwitcherHelpers.xAnimEasingType;
                 }
             }
 
