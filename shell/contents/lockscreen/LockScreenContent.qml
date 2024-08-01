@@ -90,15 +90,6 @@ Item {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 25
             Layout.leftMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
             Layout.rightMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
-
-            layer.enabled: true
-            layer.effect: MultiEffect {
-                blurMax: 16
-                shadowEnabled: true
-                shadowVerticalOffset: 1
-                shadowOpacity: 0.5
-                shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.1)
-            }
         }
     }
 

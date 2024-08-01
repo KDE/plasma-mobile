@@ -24,12 +24,16 @@ BaseNotificationItem {
     id: notificationItem
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
 
+    property bool inLockscreen: false
+
     // notification heading for groups with one element
     NotificationGroupHeader {
         id: notificationHeading
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
+
+        inLockscreen: root.inLockscreen
 
         Kirigami.Theme.colorSet: Kirigami.Theme.Header
         Kirigami.Theme.inherit: false
@@ -59,6 +63,7 @@ BaseNotificationItem {
             id: column
             spacing: 0
 
+
             // notification summary row
             RowLayout {
                 Layout.fillWidth: true
@@ -72,6 +77,7 @@ BaseNotificationItem {
                     maximumLineCount: 3
                     wrapMode: Text.WordWrap
                     elide: Text.ElideRight
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize
                     text: MobileShell.NotificationsUtils.determineNotificationHeadingText(notificationItem)
                     visible: text !== ""
                     font.weight: Font.DemiBold
@@ -93,6 +99,7 @@ BaseNotificationItem {
             RowLayout {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
+
 
                 // notification text
                 NotificationBodyLabel {

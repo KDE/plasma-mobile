@@ -19,10 +19,10 @@ PlasmaComponents.Label {
     // https://bugreports.qt.io/browse/QTBUG-67007
     renderType: Screen.devicePixelRatio % 1 !== 0 ? Text.QtRendering : Text.NativeRendering
 
-    opacity: 0.6
     maximumLineCount: 3
     elide: Text.ElideRight
     wrapMode: Text.Wrap
     textFormat: TextEdit.RichText
+
 }
 

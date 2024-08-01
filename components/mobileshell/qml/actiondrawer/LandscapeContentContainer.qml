@@ -149,6 +149,7 @@ Item {
 
             y: isOnLargeScreen ? date.y - height + date.implicitHeight : date.y + date.implicitHeight + columnLayout.anchors.margins / 2
 
+            inActionDrawer: true
             opacity: columnLayout.opacity
 
             anchors {

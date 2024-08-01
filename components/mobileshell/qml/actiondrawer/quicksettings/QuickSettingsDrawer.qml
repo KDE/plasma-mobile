@@ -108,6 +108,7 @@ MobileShell.BaseItem {
             MobileShell.MediaControlsWidget {
                 id: mediaWidget
                 property real fullHeight: height + Layout.topMargin
+                inActionDrawer: true
                 Layout.fillWidth: true
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.largeSpacing

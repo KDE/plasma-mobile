@@ -73,6 +73,7 @@ Loader {
                 actionsRequireUnlock: true
                 historyModel: root.notificationsModel
                 notificationSettings: root.notificationSettings
+                inLockscreen: true
 
                 property bool requestNotificationAction: false
 

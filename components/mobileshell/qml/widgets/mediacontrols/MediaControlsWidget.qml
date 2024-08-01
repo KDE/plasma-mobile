@@ -5,6 +5,7 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
+import QtQuick.Effects
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components 3.0 as PC3
@@ -19,6 +20,8 @@ import org.kde.plasma.private.mpris as Mpris
 Item {
     id: root
     visible: sourceRepeater.count > 0
+
+    property bool inActionDrawer: false
 
     property bool detailledView: false
 
@@ -58,6 +61,32 @@ Item {
                 color: Qt.rgba(255, 255, 255, view.currentIndex == model.index ? 1 : 0.5)
             }
         }
+    }
+
+    // shadow
+    MultiEffect {
+        anchors.fill: root
+        visible: !inActionDrawer
+        source: simpleShadow
+        blurMax: 32
+        shadowEnabled: true
+        shadowVerticalOffset: 1
+        shadowOpacity: 0.5
+        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
+    }
+
+    Rectangle {
+        id: simpleShadow
+        anchors.fill: root
+        anchors.leftMargin: -1
+        anchors.rightMargin: -1
+        anchors.bottomMargin: -1
+
+        color: {
+            let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
+            return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.3)
+        }
+        radius: Kirigami.Units.cornerRadius
     }
 
     // list of app media widgets
@@ -126,12 +155,12 @@ Item {
 
                         background: BlurredBackground {
                             darken: mouseArea.pressed
+                            inActionDrawer: root.inActionDrawer
                             imageSource: model.artUrl
                         }
 
                         contentItem: ColumnLayout {
-                            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-                            Kirigami.Theme.inherit: false
+                            Kirigami.Theme.inherit: true
                             width: playerItem.width - playerItem.leftPadding - playerItem.rightPadding
                             spacing: Kirigami.Units.largeSpacing
 
@@ -166,7 +195,6 @@ Item {
                                         inputText: model.track || i18n("No media playing");
                                         textFormat: Text.PlainText
                                         font.pointSize: Kirigami.Theme.defaultFont.pointSize
-                                        color: "white"
                                     }
 
                                     // media artist name text
@@ -179,7 +207,6 @@ Item {
                                         textFormat: Text.PlainText
                                         font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
                                         opacity: 0.9
-                                        color: "white"
                                     }
                                 }
 
@@ -188,7 +215,6 @@ Item {
                                     icon.name: LayoutMirroring.enabled ? "media-skip-forward" : "media-skip-backward"
                                     icon.width: Kirigami.Units.iconSizes.smallMedium
                                     icon.height: Kirigami.Units.iconSizes.smallMedium
-                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.goPrevious();
@@ -201,7 +227,6 @@ Item {
                                     icon.name: (model.playbackStatus === Mpris.PlaybackStatus.Playing) ? "media-playback-pause" : "media-playback-start"
                                     icon.width: Kirigami.Units.iconSizes.smallMedium
                                     icon.height: Kirigami.Units.iconSizes.smallMedium
-                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.playPause();
@@ -214,7 +239,6 @@ Item {
                                     icon.name: LayoutMirroring.enabled ? "media-skip-backward" : "media-skip-forward"
                                     icon.width: Kirigami.Units.iconSizes.smallMedium
                                     icon.height: Kirigami.Units.iconSizes.smallMedium
-                                    icon.color: "white"
                                     onClicked: {
                                         mpris2Source.setIndex(model.index);
                                         mpris2Source.goNext();
@@ -235,7 +259,7 @@ Item {
                                     text: msecToString(model.position)
 
                                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
-                                    color: "white"
+                                    color: Kirigami.Theme.textColor
                                 }
 
                                 PC3.Slider {
@@ -260,7 +284,7 @@ Item {
                                     text: msecToString(model.length)
 
                                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 0.9
-                                    color: "white"
+                                    color: Kirigami.Theme.textColor
                                 }
                             }
                         }

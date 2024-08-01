@@ -12,6 +12,7 @@ Item {
 
     property string imageSource
     property bool darken: false
+    property bool inActionDrawer: false
 
     // clip corners so that the image has rounded corners
     layer.enabled: true
@@ -40,14 +41,13 @@ Item {
         // ensure text is readable
         Rectangle {
             anchors.fill: parent
-            color: Qt.rgba(0, 0, 0, root.darken ? 0.8 : 0.6)
+            color: Qt.rgba(Kirigami.Theme.backgroundColor.r * (inActionDrawer ? 0.85 : 0.95), Kirigami.Theme.backgroundColor.g * (inActionDrawer ? 0.85 : 0.95), Kirigami.Theme.backgroundColor.b * (inActionDrawer ? 0.85 : 0.95), root.darken ? 0.95 : 0.85)
         }
 
         // apply lighten, saturate and blur effect
         layer.enabled: true
         layer.effect: MultiEffect {
-            brightness: 0.2
-            saturation: 1.5
+            brightness: 0.075
 
             blurEnabled: true
             blurMax: 32

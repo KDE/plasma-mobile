@@ -3,6 +3,7 @@
 
 import QtQuick
 import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.12 as Kirigami
 
@@ -51,11 +52,10 @@ Item {
         blurMax: 16
         shadowEnabled: true
         shadowVerticalOffset: 1
-        shadowOpacity: 0.3
+        shadowOpacity: 0.5
         shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
     }
 
-    // shadow
     Rectangle {
         id: simpleShadow
         visible: Math.abs(dragOffset) !== root.width
@@ -64,12 +64,17 @@ Item {
         anchors.rightMargin: -1
         anchors.bottomMargin: -1
 
-        color: Qt.darker(Kirigami.Theme.backgroundColor, 1.3)
+        color: {
+            let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
+            return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.3)
+        }
         radius: Kirigami.Units.cornerRadius
     }
 
+
+
     // card
-    Rectangle {
+    Item {
         id: mainCard
         anchors.left: parent.left
         anchors.leftMargin: root.dragOffset > 0 ? root.dragOffset : 0
@@ -77,9 +82,17 @@ Item {
         anchors.rightMargin: root.dragOffset < 0 ? -root.dragOffset : 0
         anchors.top: parent.top
 
-        color: (root.tapEnabled && mouseArea.pressed) ? Qt.darker(Kirigami.Theme.backgroundColor, 1.1) : Kirigami.Theme.backgroundColor
-        radius: Kirigami.Units.cornerRadius
         implicitHeight: contentParent.implicitHeight
+
+        Rectangle {
+            anchors.fill: parent
+            color: Qt.rgba(Kirigami.Theme.backgroundColor.r * 0.95, Kirigami.Theme.backgroundColor.g * 0.95, Kirigami.Theme.backgroundColor.b * 0.95, (root.tapEnabled && mouseArea.pressed) ? 0.95 : 0.85)
+            radius: Kirigami.Units.cornerRadius
+            layer.enabled: true
+            layer.effect: MultiEffect {
+                brightness: 0.075
+            }
+        }
 
         // clip
         layer.enabled: true

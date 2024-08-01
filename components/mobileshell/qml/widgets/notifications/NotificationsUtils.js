@@ -41,7 +41,7 @@ function generateNotificationHeaderAgoText(time, jobState) {
 
     const deltaMinutes = Math.floor((Date.now() - time.getTime()) / 1000 / 60);
     if (deltaMinutes < 1) {
-        return "";
+        return i18n("now");
     }
 
     // Received less than an hour ago, show relative minutes

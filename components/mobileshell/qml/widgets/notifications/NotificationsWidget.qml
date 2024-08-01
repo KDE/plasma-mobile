@@ -27,6 +27,8 @@ import org.kde.notificationmanager as NotificationManager
 Item {
     id: root
 
+    property bool inLockscreen: false
+
     /**
      * The notification model for the widget.
      */
@@ -269,6 +271,8 @@ Item {
                         id: notificationItem
                         width: parent.width
                         height: implicitHeight
+
+                        inLockscreen: root.inLockscreen
 
                         model: delegateLoader.model
                         modelIndex: delegateLoader.index

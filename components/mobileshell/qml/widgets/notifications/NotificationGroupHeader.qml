@@ -21,6 +21,7 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 RowLayout {
     id: notificationHeading
 
+    property bool inLockscreen: false
     property var applicationIconSource
     property string applicationName
     property string originName
@@ -42,8 +43,10 @@ RowLayout {
         id: applicationNameLabel
         Layout.leftMargin: Kirigami.Units.smallSpacing
         Layout.fillWidth: true
-        opacity: 0.6
-        textFormat: Text.PlainText
+
+        color: inLockscreen ? "white" : Kirigami.Theme.textColor
+
+        opacity: 0.75
         elide: Text.ElideLeft
         font.bold: true
         text: notificationHeading.applicationName + (notificationHeading.originName ? " · " + notificationHeading.originName : "")
