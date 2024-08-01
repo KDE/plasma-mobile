@@ -132,8 +132,8 @@ Item {
 
                 sourceComponent: MouseArea {
                     id: mouseArea
-                    implicitHeight: playerItem.implicitHeight
-                    implicitWidth: playerItem.implicitWidth
+                    implicitHeight: root.contentHeight + root.padding * 2
+                    implicitWidth: root.width
 
                     onPressAndHold: {
                         MobileShell.AppLaunch.launchOrActivateApp(model.desktopEntry + ".desktop");
@@ -144,20 +144,20 @@ Item {
                         root.detailledView = !root.detailledView
                     }
 
+                    BlurredBackground {
+                        anchors.fill: parent
+                        darken: mouseArea.pressed
+                        inActionDrawer: root.inActionDrawer
+                        imageSource: model.artUrl
+                    }
 
                     MobileShell.BaseItem {
                         id: playerItem
-                        anchors.fill: parent
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.right: parent.right
 
                         padding: root.padding
-                        implicitHeight: root.contentHeight + root.padding * 2
-                        implicitWidth: root.width
-
-                        background: BlurredBackground {
-                            darken: mouseArea.pressed
-                            inActionDrawer: root.inActionDrawer
-                            imageSource: model.artUrl
-                        }
 
                         contentItem: ColumnLayout {
                             Kirigami.Theme.inherit: true
