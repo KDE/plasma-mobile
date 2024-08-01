@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 00:41+0000\n"
+"POT-Creation-Date: 2024-08-01 00:42+0000\n"
 "PO-Revision-Date: 2023-01-04 19:25+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -179,22 +179,22 @@ msgstr "Txandakatu audio-korronteak erakustea"
 msgid "Search…"
 msgstr "Bilatu..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:164
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
 #, kde-format
 msgid "No media playing"
 msgstr "Ez da euskarririk jotzen ari"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
 #, kde-format
 msgid "Previous track"
 msgstr "Aurreko pista"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Euskarria jo edo eten"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:221
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Next track"
 msgstr "Hurrengo pista"

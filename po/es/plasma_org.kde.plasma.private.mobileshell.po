@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 00:41+0000\n"
+"POT-Creation-Date: 2024-08-01 00:42+0000\n"
 "PO-Revision-Date: 2024-07-29 13:58+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -178,22 +178,22 @@ msgstr "Conmutar la visualización de emisiones de sonido"
 msgid "Search…"
 msgstr "Buscar..."
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:164
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
 #, kde-format
 msgid "No media playing"
 msgstr "Ningún medio en reproducción"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
 #, kde-format
 msgid "Previous track"
 msgstr "Pista anterior"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Reproducir o pausar multimedia"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:221
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Next track"
 msgstr "Pista siguiente"

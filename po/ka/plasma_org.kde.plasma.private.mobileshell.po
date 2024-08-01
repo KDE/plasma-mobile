@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-29 00:41+0000\n"
+"POT-Creation-Date: 2024-08-01 00:42+0000\n"
 "PO-Revision-Date: 2024-07-29 05:04+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -177,22 +177,22 @@ msgstr "აუდიონაკადების ჩვენების გ�
 msgid "Search…"
 msgstr "ძებნა…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:164
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
 #, kde-format
 msgid "No media playing"
 msgstr "არაფერს ვუკრავ"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
 #, kde-format
 msgid "Previous track"
 msgstr "წინა აუდიობილიკი"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:207
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
 #, kde-format
 msgid "Play or Pause media"
 msgstr "მედიის დაკვრა/გაჩერების გადართვა"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:221
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Next track"
 msgstr "შემდეგი აუდიობილიკი"

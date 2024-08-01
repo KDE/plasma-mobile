@@ -20,17 +20,17 @@ msgstr ""
 #: contents/logout/Logout.qml:140
 #, kde-format
 msgid "Restart"
-msgstr "Omstart"
+msgstr "Starta om"
 
 #: contents/logout/Logout.qml:149
 #, kde-format
 msgid "Shut Down"
-msgstr "Avstängning"
+msgstr "Stäng av"
 
 #: contents/logout/Logout.qml:158
 #, kde-format
 msgid "Log Out"
-msgstr "Utloggning"
+msgstr "Logga ut"
 
 #: contents/logout/Logout.qml:173
 #, kde-format

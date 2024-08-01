@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-16 00:40+0000\n"
+"POT-Creation-Date: 2024-08-01 00:42+0000\n"
 "PO-Revision-Date: 2024-07-16 09:26+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -26,7 +26,7 @@ msgstr "העתקה ללוח הגזירים"
 msgid "View Error Details…"
 msgstr "הצגת פרטי שגיאה…"
 
-#: contents/applet/CompactApplet.qml:81
+#: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
 msgstr "פתיחת %1"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-16 00:40+0000\n"
+"POT-Creation-Date: 2024-08-01 00:42+0000\n"
 "PO-Revision-Date: 2024-07-16 05:58+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "ბუფერში კოპირება"
 msgid "View Error Details…"
 msgstr "შეცდომის დეტალები ნახვა…"
 
-#: contents/applet/CompactApplet.qml:81
+#: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
 msgstr "%1-ის გახსნა"
 
