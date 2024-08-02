@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2024-08-02 00:42+0000\n"
 "PO-Revision-Date: 2022-12-21 19:07+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -176,22 +176,22 @@ msgstr "Mostra o nascondi i flussi audio"
 msgid "Search…"
 msgstr "Cerca…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "Nessun supporto in riproduzione"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Previous track"
 msgstr "Traccia precedente"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Riproduci o sospendi supporto"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
 #, kde-format
 msgid "Next track"
 msgstr "Traccia successiva"
@@ -363,6 +363,11 @@ msgstr "%1 (Completata)"
 msgid "Job Finished"
 msgstr "Operazione completata"
 
+#: qml/widgets/notifications/NotificationsUtils.js:44
+#, kde-format
+msgid "now"
+msgstr ""
+
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
@@ -387,29 +392,29 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 h rimanenti"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:177
+#: qml/widgets/notifications/NotificationsWidget.qml:179
 #, kde-format
 msgid "Notification service not available"
 msgstr "Servizio delle notifiche non disponibile"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:186
+#: qml/widgets/notifications/NotificationsWidget.qml:188
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Le notifiche sono attualmente fornite da «%1 %2»"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
 msgid "Show Fewer"
 msgstr "Mostra di meno"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:327
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostra %1 altre"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:386
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Cancella tutte le notifiche"

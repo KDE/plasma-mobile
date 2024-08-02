@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2024-08-02 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -177,22 +177,22 @@ msgstr "切换显示音频流"
 msgid "Search…"
 msgstr "搜索"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "没有正在播放的媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Previous track"
 msgstr "上一首"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
 #, kde-format
 msgid "Play or Pause media"
 msgstr "播放或暂停媒体"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
 #, kde-format
 msgid "Next track"
 msgstr "下一首"
@@ -353,6 +353,11 @@ msgstr "%1 (已完成)"
 msgid "Job Finished"
 msgstr "任务已完成"
 
+#: qml/widgets/notifications/NotificationsUtils.js:44
+#, kde-format
+msgid "now"
+msgstr ""
+
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
@@ -377,29 +382,29 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "剩余 %1小时"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:177
+#: qml/widgets/notifications/NotificationsWidget.qml:179
 #, kde-format
 msgid "Notification service not available"
 msgstr "通知服务不可用"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:186
+#: qml/widgets/notifications/NotificationsWidget.qml:188
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "通知由 %1 %2 提供"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
 msgid "Show Fewer"
 msgstr "显示更少"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:327
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "显示其他 %1 条"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:386
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "清除所有通知"

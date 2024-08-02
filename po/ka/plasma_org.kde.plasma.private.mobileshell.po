@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2024-08-02 00:42+0000\n"
 "PO-Revision-Date: 2024-07-29 05:04+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -177,22 +177,22 @@ msgstr "აუდიონაკადების ჩვენების გ�
 msgid "Search…"
 msgstr "ძებნა…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "არაფერს ვუკრავ"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Previous track"
 msgstr "წინა აუდიობილიკი"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
 #, kde-format
 msgid "Play or Pause media"
 msgstr "მედიის დაკვრა/გაჩერების გადართვა"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
 #, kde-format
 msgid "Next track"
 msgstr "შემდეგი აუდიობილიკი"
@@ -359,6 +359,11 @@ msgstr "%1 (დასრულებულია)"
 msgid "Job Finished"
 msgstr "დავალება დასრულებულია"
 
+#: qml/widgets/notifications/NotificationsUtils.js:44
+#, kde-format
+msgid "now"
+msgstr ""
+
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
@@ -383,29 +388,29 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1სთ დარჩენილია"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:177
+#: qml/widgets/notifications/NotificationsWidget.qml:179
 #, kde-format
 msgid "Notification service not available"
 msgstr "შეტყობინებების სერვისი მიუწვდოელია"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:186
+#: qml/widgets/notifications/NotificationsWidget.qml:188
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "შეტყობინებები ამჟამად მოწოდებულია '%1 %2'-ის მიერ"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
 msgid "Show Fewer"
 msgstr "ნაკლების ჩვენება"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:327
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "კიდევ %1-ის ჩვენება"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:386
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "ყველა შეტყობინების გასუფთავება"

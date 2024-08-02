@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2024-08-02 00:42+0000\n"
 "PO-Revision-Date: 2024-07-29 14:40+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -176,22 +176,22 @@ msgstr "Ses akışlarını göstermeyi aç/kapat"
 msgid "Search…"
 msgstr "Ara…"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:166
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
 msgid "No media playing"
 msgstr "Çalınan/Oynatılan ortam yok"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:197
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
 #, kde-format
 msgid "Previous track"
 msgstr "Önceki parça"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:209
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:234
 #, kde-format
 msgid "Play or Pause media"
 msgstr "Ortamı Çal/Duraklat"
 
-#: qml/widgets/mediacontrols/MediaControlsWidget.qml:223
+#: qml/widgets/mediacontrols/MediaControlsWidget.qml:247
 #, kde-format
 msgid "Next track"
 msgstr "Sonraki parça"
@@ -358,6 +358,11 @@ msgstr "%1 (Bitti)"
 msgid "Job Finished"
 msgstr "İş Bitti"
 
+#: qml/widgets/notifications/NotificationsUtils.js:44
+#, kde-format
+msgid "now"
+msgstr ""
+
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
@@ -382,29 +387,29 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 sa kaldı"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:177
+#: qml/widgets/notifications/NotificationsWidget.qml:179
 #, kde-format
 msgid "Notification service not available"
 msgstr "Bildirim hizmeti kullanılamıyor"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:186
+#: qml/widgets/notifications/NotificationsWidget.qml:188
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Bildirimler şu anda “%1 %2” tarafından sağlanıyor"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:321
+#: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
 msgid "Show Fewer"
 msgstr "Daha Az Göster"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:323
+#: qml/widgets/notifications/NotificationsWidget.qml:327
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 Daha Çok Göster"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:382
+#: qml/widgets/notifications/NotificationsWidget.qml:386
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Tüm Bildirimleri Temizle"
