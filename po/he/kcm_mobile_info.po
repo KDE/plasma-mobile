@@ -7,16 +7,15 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2024-03-07 11:44+0200\n"
+"PO-Revision-Date: 2024-08-02 08:18+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
-"Language: he\n"
+"Language: en_US\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
-"n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.4.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: ui/main.qml:16
 #, kde-format
@@ -88,8 +87,6 @@ msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "מעבד"
 msgstr[1] "מעבדים"
-msgstr[2] "מעבדים"
-msgstr[3] "מעבדים"
 
 #: ui/main.qml:114
 #, kde-format
