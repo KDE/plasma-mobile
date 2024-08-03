@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-02 00:42+0000\n"
-"PO-Revision-Date: 2024-07-29 09:26+0200\n"
+"PO-Revision-Date: 2024-08-02 13:05+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -260,8 +260,8 @@ msgstr[1] "%2 van %1 items"
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] "%1 bestanden%1 bestanden"
+msgstr[0] "%1 bestand"
+msgstr[1] "%1 bestanden"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
@@ -361,7 +361,7 @@ msgstr "Job voltooid"
 #: qml/widgets/notifications/NotificationsUtils.js:44
 #, kde-format
 msgid "now"
-msgstr ""
+msgstr "nu"
 
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
