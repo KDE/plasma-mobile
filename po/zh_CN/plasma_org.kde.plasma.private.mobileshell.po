@@ -356,7 +356,7 @@ msgstr "任务已完成"
 #: qml/widgets/notifications/NotificationsUtils.js:44
 #, kde-format
 msgid "now"
-msgstr ""
+msgstr "当前"
 
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
