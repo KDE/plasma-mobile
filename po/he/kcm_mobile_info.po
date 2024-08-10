@@ -7,10 +7,10 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-22 01:46+0000\n"
-"PO-Revision-Date: 2024-08-02 08:18+0300\n"
+"PO-Revision-Date: 2024-08-08 14:40+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
-"Language: en_US\n"
+"Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -83,13 +83,13 @@ msgid "Hardware"
 msgstr "חומרה"
 
 #: ui/main.qml:107
-#, fuzzy, kde-format
+#, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "מעבד"
 msgstr[1] "מעבדים"
-msgstr[2] ""
-msgstr[3] ""
+msgstr[2] "מעבדים"
+msgstr[3] "מעבדים"
 
 #: ui/main.qml:114
 #, kde-format
