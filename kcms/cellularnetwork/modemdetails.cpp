@@ -287,6 +287,10 @@ QString ModemDetails::stateFailedReason()
         return i18n("SIM is required but missing.");
     case MM_MODEM_STATE_FAILED_REASON_SIM_ERROR:
         return i18n("SIM is available but unusable.");
+    case MM_MODEM_STATE_FAILED_REASON_UNKNOWN_CAPABILITIES:
+        return i18n("Unknown modem capabilities.");
+    case MM_MODEM_STATE_FAILED_REASON_ESIM_WITHOUT_PROFILES:
+        return i18n("eSIM is not initialized.");
     }
     return {};
 }
@@ -507,6 +511,12 @@ AvailableNetwork::AvailableNetwork(QObject *parent,
         break;
     case MM_MODEM_ACCESS_TECHNOLOGY_ANY:
         m_accessTechnology = i18n("Any");
+        break;
+    case MM_MODEM_ACCESS_TECHNOLOGY_LTE_CAT_M:
+        m_accessTechnology = i18n("4G");
+        break;
+    case MM_MODEM_ACCESS_TECHNOLOGY_LTE_NB_IOT:
+        m_accessTechnology = i18n("4G");
         break;
     }
 }
