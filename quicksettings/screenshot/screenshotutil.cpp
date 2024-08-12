@@ -78,7 +78,7 @@ ScreenShotUtil::ScreenShotUtil(QObject *parent)
 void ScreenShotUtil::takeScreenShot()
 {
     // wait ~200 ms to wait for rest of animations
-    QTimer::singleShot(SCREENSHOT_DELAY, [=]() {
+    QTimer::singleShot(SCREENSHOT_DELAY, [this]() {
         int lPipeFds[2];
         if (pipe2(lPipeFds, O_CLOEXEC) != 0) {
             qWarning() << "Could not take screenshot";
