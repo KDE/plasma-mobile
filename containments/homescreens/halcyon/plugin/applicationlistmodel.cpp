@@ -89,6 +89,7 @@ void ApplicationListModel::loadApplications()
 
 QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
 {
+    Q_UNUSED(role)
     if (!index.isValid()) {
         return QVariant();
     }

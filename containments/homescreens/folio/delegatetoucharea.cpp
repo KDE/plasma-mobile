@@ -173,6 +173,7 @@ void DelegateTouchArea::hoverLeaveEvent(QHoverEvent *event)
 
 void DelegateTouchArea::handlePressEvent(QPointerEvent *event, QPointF point)
 {
+    Q_UNUSED(event)
     // ignore multiple press events
     if (m_pressed) {
         return;
@@ -190,7 +191,7 @@ void DelegateTouchArea::handlePressEvent(QPointerEvent *event, QPointF point)
 void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
 {
     // NOTE: event can be nullptr!
-
+    Q_UNUSED(event)
     bool wasPressed = m_pressed;
     setPressed(false);
 
@@ -208,6 +209,7 @@ void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
 
 void DelegateTouchArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 {
+    Q_UNUSED(event)
     if (QPointF(point - m_mouseDownPosition).manhattanLength() >= QGuiApplication::styleHints()->startDragDistance()) {
         m_pressAndHoldTimer->stop();
         setPressed(false);

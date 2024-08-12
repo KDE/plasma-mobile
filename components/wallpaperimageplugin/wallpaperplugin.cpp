@@ -39,6 +39,7 @@ WallpaperPlugin::WallpaperPlugin(QObject *parent)
     }
 
     connect(m_lockscreenConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group) {
+	Q_UNUSED(group)
         loadLockscreenSettings();
     });
 

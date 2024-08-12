@@ -26,6 +26,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     m_configWatcher = KConfigWatcher::create(m_config);
 
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+	Q_UNUSED(names)
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT vibrationsEnabledChanged();
             Q_EMIT vibrationDurationChanged();

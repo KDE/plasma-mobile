@@ -23,6 +23,7 @@ PinnedModel *PinnedModel::self()
 
 int PinnedModel::rowCount(const QModelIndex &parent) const
 {
+    Q_UNUSED(parent)
     return m_applications.count();
 }
 
