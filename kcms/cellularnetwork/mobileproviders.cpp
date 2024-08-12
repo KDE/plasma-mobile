@@ -25,16 +25,16 @@ bool localeAwareCompare(const QString &one, const QString &two)
 MobileProviders::MobileProviders()
 {
     for (int c = 1; c <= QLocale::LastCountry; c++) {
-        const auto country = static_cast<QLocale::Country>(c);
+        const auto country = static_cast<QLocale::Territory>(c);
         QLocale locale(QLocale::AnyLanguage, country);
-        if (locale.country() == country) {
+        if (locale.territory() == country) {
             const QString localeName = locale.name();
             const auto idx = localeName.indexOf(QLatin1Char('_'));
             if (idx != -1) {
                 const QString countryCode = localeName.mid(idx + 1);
-                QString countryName = locale.nativeCountryName();
+                QString countryName = locale.nativeTerritoryName();
                 if (countryName.isEmpty()) {
-                    countryName = QLocale::countryToString(country);
+                    countryName = QLocale::territoryToString(country);
                 }
                 mCountries.insert(countryCode, countryName);
             }
