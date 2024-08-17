@@ -288,7 +288,7 @@ void SwipeArea::resetSwipe()
 
 void SwipeArea::handlePressEvent(QPointerEvent *event, QPointF point)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
 
     // ignore more touch events
     if (m_pressed) {
@@ -303,8 +303,8 @@ void SwipeArea::handlePressEvent(QPointerEvent *event, QPointF point)
 
 void SwipeArea::handleReleaseEvent(QPointerEvent *event, QPointF point)
 {
-    Q_UNUSED(event);
-    Q_UNUSED(point);
+    Q_UNUSED(event)
+    Q_UNUSED(point)
 
     // if we are in a swipe
     if (m_moving) {
@@ -316,7 +316,7 @@ void SwipeArea::handleReleaseEvent(QPointerEvent *event, QPointF point)
 
 void SwipeArea::handleMoveEvent(QPointerEvent *event, QPointF point)
 {
-    Q_UNUSED(event);
+    Q_UNUSED(event)
 
     if (!m_stealMouse) {
         if (!m_skipSwipeThreshold) {

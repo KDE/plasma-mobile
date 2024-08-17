@@ -81,7 +81,7 @@ QVariant BatteryModel::data(const QModelIndex &index, int role) const
 
 int BatteryModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent);
+    Q_UNUSED(parent)
     return m_batteries.count();
 }
 

@@ -124,7 +124,7 @@ void NotificationThumbnailer::generatePreview()
     job->setIgnoreMaximumSize(true);
 
     connect(job, &KIO::PreviewJob::gotPreview, this, [this](const KFileItem &item, const QPixmap &preview) {
-        Q_UNUSED(item);
+        Q_UNUSED(item)
         m_pixmap = preview;
         Q_EMIT pixmapChanged();
 

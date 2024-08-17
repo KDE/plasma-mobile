@@ -43,9 +43,9 @@ void NightColorUtil::setEnabled(bool enabled)
 
 void NightColorUtil::enabledUpdated(const QString &name, const QVariantMap &map, const QStringList &list)
 {
-    Q_UNUSED(name);
-    Q_UNUSED(map);
-    Q_UNUSED(list);
+    Q_UNUSED(name)
+    Q_UNUSED(map)
+    Q_UNUSED(list)
     bool running = m_ccInterface->running();
     if (running != m_enabled) {
         m_enabled = running;

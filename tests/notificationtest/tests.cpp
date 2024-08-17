@@ -23,7 +23,7 @@ void BasicNotificationTest::sendNotification(QCoreApplication &app)
     notification->setIconName(QStringLiteral("notification-active"));
     notification->setText("This is a test notification!");
     auto action = notification->addAction("Action!");
-    Q_UNUSED(action);
+    Q_UNUSED(action)
 
     connect(notification, &KNotification::closed, &app, QCoreApplication::quit);
     notification->sendEvent();
@@ -95,7 +95,7 @@ void CriticalUrgencyNotificationTest::sendNotification(QCoreApplication &app)
     notification->setText("This is very urgent! AAAAAA");
     notification->setUrgency(KNotification::CriticalUrgency);
     auto action = notification->addAction("Action!");
-    Q_UNUSED(action);
+    Q_UNUSED(action)
 
     connect(notification, &KNotification::closed, &app, QCoreApplication::quit);
     notification->sendEvent();
