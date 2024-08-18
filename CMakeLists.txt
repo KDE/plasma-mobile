@@ -18,6 +18,8 @@ set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+option(INSTALL_SYSTEMD_SERVICE "Install a systemd service file to start the session" OFF)
+
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
@@ -137,3 +139,10 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 ki18n_install(po)
+
+if (INSTALL_SYSTEMD_SERVICE)
+    install(FILES
+        ${CMAKE_CURRENT_SOURCE_DIR}/plasma-mobile.service
+        DESTINATION ${KDE_INSTALL_SYSTEMDUNITDIR}
+    )
+endif()
