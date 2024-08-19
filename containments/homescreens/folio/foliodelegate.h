@@ -73,7 +73,7 @@ public:
     static int getTranslatedRow(HomeScreen *homeScreen, int realRow, int realColumn);
     static int getTranslatedColumn(HomeScreen *homeScreen, int realRow, int realColumn);
 
-    virtual QJsonObject toJson() const override;
+    QJsonObject toJson() const override;
 
     int row();
     void setRow(int row);

@@ -20,7 +20,7 @@ class GSettingsItem : public QObject
 
 public:
     explicit GSettingsItem(const QString &key, QObject *parent = nullptr);
-    virtual ~GSettingsItem() override;
+    ~GSettingsItem() override;
 
     QVariant value(const QString &key) const;
     void set(const QString &key, const QVariant &val);

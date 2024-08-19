@@ -91,7 +91,7 @@ class FakeJob : public KJob
     Q_OBJECT
 public:
     explicit FakeJob(QObject *parent = nullptr);
-    virtual void start() override;
+    void start() override;
 
 private Q_SLOTS:
     void timerFinished();
