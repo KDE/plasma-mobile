@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-25 00:40+0000\n"
-"PO-Revision-Date: 2024-04-22 17:03+0300\n"
+"PO-Revision-Date: 2024-08-16 11:50+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -76,24 +76,22 @@ msgstr "Dinamiska WEP"
 #: ui/NetworkSettings.qml:99
 #, kde-format
 msgid "WPA/WPA2 Personal"
-msgstr "WPA/WPA2 personīgs"
+msgstr "WPA/WPA2 Personal"
 
 #: ui/NetworkSettings.qml:100
 #, kde-format
 msgid "WPA/WPA2 Enterprise"
-msgstr "WPA/WPA2 uzņēmumu"
+msgstr "WPA/WPA2 Enterprise"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 personīgs"
+msgstr "WPA3 Personal"
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 uzņēmumu"
+msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -158,4 +156,4 @@ msgstr "DNS"
 #: ui/PasswordField.qml:13
 #, kde-format
 msgid "Password…"
-msgstr "Parole..."
+msgstr "Parole…"

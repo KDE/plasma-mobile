@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-04-22 17:46+0300\n"
+"PO-Revision-Date: 2024-08-16 11:51+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Kopēt starpliktuvē"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Skatīt informāciju par kļūdu…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
-msgstr ""
+msgstr "Atvērt „%1“"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -60,7 +60,7 @@ msgstr "Ekrāntapetes spraudnis"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
-msgstr "Iegūt jaunus spraudņus..."
+msgstr "Iegūt jaunus spraudņus…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:148
 msgid "Layout changes must be applied before other changes can be made"
@@ -76,12 +76,12 @@ msgstr "Ekrāntapete"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "Ievadiet PIN"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "Nepareizs PIN"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Paneļa fokusa indikators"

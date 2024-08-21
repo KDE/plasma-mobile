@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Shinjo Park <kde@peremen.name>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2022-07-13 12:05+0200\n"
+"PO-Revision-Date: 2024-08-21 00:31+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "클립보드에 복사"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "자세한 오류 정보 표시…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
-msgstr ""
+msgstr "%1 열기"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -75,15 +75,15 @@ msgstr "배경 그림"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "PIN 입력"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "잘못된 PIN"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "패널 포커스 표시기"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "배경 그림 바꾸기"
