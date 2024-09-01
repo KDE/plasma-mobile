@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-19 00:39+0000\n"
-"PO-Revision-Date: 2024-06-23 13:26+0200\n"
+"PO-Revision-Date: 2024-08-31 14:13+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: timesettings.cpp:146
 #, kde-format
@@ -605,7 +605,7 @@ msgstr "Colombo"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Comoro"
-msgstr "Comoros"
+msgstr "Comores"
 
 #: timezonesi18n.cpp:139
 #, kde-format
@@ -833,7 +833,7 @@ msgstr "Famagusta"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Faroe"
-msgstr "Feroes"
+msgstr "Feroe"
 
 #: timezonesi18n.cpp:177
 #, kde-format
@@ -1703,7 +1703,7 @@ msgstr "Nauru"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Ndjamena"
-msgstr "N'djamena"
+msgstr "Xamena"
 
 #: timezonesi18n.cpp:322
 #, kde-format
@@ -2753,7 +2753,7 @@ msgstr "Vilnius"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Vincennes"
-msgstr "Vicennes"
+msgstr "Vincennes"
 
 #: timezonesi18n.cpp:497
 #, kde-format
