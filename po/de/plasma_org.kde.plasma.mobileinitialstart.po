@@ -241,7 +241,7 @@ msgstr "Passwort ..."
 #: qml/LandingComponent.qml:104
 #, kde-format
 msgid "Welcome to<br/><b>%1</b>"
-msgstr "Willkommen zu<br><b>%1</b>"
+msgstr "Willkommen zu<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
