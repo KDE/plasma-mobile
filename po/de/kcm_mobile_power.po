@@ -6,7 +6,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma-settings\n"
+"Project-Id-Version: kcm_mobile_power\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 02:35+0000\n"
 "PO-Revision-Date: 2024-05-11 17:20+0200\n"
