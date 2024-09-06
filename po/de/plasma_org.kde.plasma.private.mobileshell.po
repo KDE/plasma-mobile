@@ -7,7 +7,7 @@
 # Automatically generated, 2023.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma-mobile\n"
+"Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-02 00:42+0000\n"
 "PO-Revision-Date: 2024-05-11 16:48+0200\n"
