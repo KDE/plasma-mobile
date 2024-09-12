@@ -49,13 +49,13 @@ Kirigami.ScrollablePage {
 
     ColumnLayout {
         FormCard.FormHeader {
-            title: i18n('General')
+            title: i18nc("@title:group", "General")
         }
 
         FormCard.FormCard {
             FormCard.FormTextFieldDelegate {
                 id: ssidField
-                label: i18n('SSID')
+                label: i18n("SSID")
                 text: wirelessSettings["ssid"] ? wirelessSettings["ssid"] : ""
                 enabled: true
                 onTextChanged: {
@@ -77,14 +77,14 @@ Kirigami.ScrollablePage {
         }
 
         FormCard.FormHeader {
-            title: i18n('Security')
+            title: i18nc("@title:group", "Security")
         }
 
         FormCard.FormCard {
             FormCard.FormComboBoxDelegate {
                 id: securityCombobox
                 currentIndex: 0
-                text: i18n('Security type')
+                text: i18n("Security type")
                 model: ListModel {
                     id: securityTypesModel
                     // FIXME just placeholder element to set "text" property as default
@@ -137,7 +137,7 @@ Kirigami.ScrollablePage {
 
             FormCard.FormTextFieldDelegate {
                 id: passwordDelegate
-                label: i18n('Password')
+                label: i18n("Password")
                 echoMode: TextInput.Password
                 inputMethodHints: Qt.ImhHiddenText
                 text: secrets["psk"]
@@ -170,7 +170,7 @@ Kirigami.ScrollablePage {
         }
 
         FormCard.FormHeader {
-            title: i18n('IP Settings')
+            title: i18nc("@title:group", "IP Settings")
         }
 
         FormCard.FormCard {
