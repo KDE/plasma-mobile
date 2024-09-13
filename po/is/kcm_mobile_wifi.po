@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-02-19 18:48+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -53,10 +53,36 @@ msgstr "Bæta við nýrri tengingu"
 msgid "Save"
 msgstr "Vista"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Almennt"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "Netheiti (SSID):"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Falið net:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Öryggi"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tegund öryggis:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -95,6 +121,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Lykilorð:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -124,6 +156,13 @@ msgstr "Tunneled TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Protected EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Stillingar IP-tölu"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -174,24 +213,6 @@ msgstr "Lykilorð…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Sýna vistaðar tengingar"
-
-#~ msgid "General"
-#~ msgstr "Almennt"
-
-#~ msgid "SSID:"
-#~ msgstr "Netheiti (SSID):"
-
-#~ msgid "Security"
-#~ msgstr "Öryggi"
-
-#~ msgid "Security type:"
-#~ msgstr "Tegund öryggis:"
-
-#~ msgid "Password:"
-#~ msgstr "Lykilorð:"
-
-#~ msgid "IP settings"
-#~ msgstr "Stillingar IP-tölu"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

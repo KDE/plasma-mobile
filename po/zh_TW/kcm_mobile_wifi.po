@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-07-27 13:00+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -53,10 +53,35 @@ msgstr "新增連線"
 msgid "Save"
 msgstr "儲存"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "一般"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "隱藏的網路"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "安全性"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "安全性類型："
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -98,6 +123,12 @@ msgstr "WPA3 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "密碼："
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -127,6 +158,13 @@ msgstr "隧道 TLS (Tunneled TLS)"
 #, kde-format
 msgid "Protected EAP"
 msgstr "受保護 EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP 設定"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -178,23 +216,8 @@ msgstr "密碼…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "顯示已儲存的連線"
 
-#~ msgid "General"
-#~ msgstr "一般"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID："
-
-#~ msgid "Security"
-#~ msgstr "安全性"
-
-#~ msgid "Security type:"
-#~ msgstr "安全性類型："
-
-#~ msgid "Password:"
-#~ msgstr "密碼："
-
-#~ msgid "IP settings"
-#~ msgstr "IP 設定"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -227,9 +250,6 @@ msgstr "密碼…"
 
 #~ msgid "Configure"
 #~ msgstr "設定"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "我的熱點"

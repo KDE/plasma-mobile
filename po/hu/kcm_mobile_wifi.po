@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2023-12-17 21:01+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -53,10 +53,35 @@ msgstr "Új kapcsolat hozzáadása"
 msgid "Save"
 msgstr "Mentés"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Általános"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Rejtett hálózat"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Biztonság"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Biztonságtípus:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -95,6 +120,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Jelszó:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -124,6 +155,13 @@ msgstr "Alagutas TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Védett EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP beállítások"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -175,23 +213,8 @@ msgstr "Jelszó…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mentett kapcsolatok megjelenítése"
 
-#~ msgid "General"
-#~ msgstr "Általános"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Biztonság"
-
-#~ msgid "Security type:"
-#~ msgstr "Biztonságtípus:"
-
-#~ msgid "Password:"
-#~ msgstr "Jelszó:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP beállítások"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -226,9 +249,6 @@ msgstr "Jelszó…"
 
 #~ msgid "Configure"
 #~ msgstr "Beállítás"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Saját hotspot"

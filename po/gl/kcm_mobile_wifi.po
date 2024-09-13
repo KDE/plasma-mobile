@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-06-27 20:54+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -52,10 +52,35 @@ msgstr "Engadir unha nova conexión"
 msgid "Save"
 msgstr "Gardar"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Xeral"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Rede agochada"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Seguridade"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tipo de seguridade:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +117,12 @@ msgstr "WPA3 persoal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 empresarial"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Contrasinal:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +152,13 @@ msgstr "TLS en túnel"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP protexida"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Configuración de IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -172,23 +210,8 @@ msgstr "Contrasinal…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Amosar as conexións gardadas"
 
-#~ msgid "General"
-#~ msgstr "Xeral"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Seguridade"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipo de seguridade:"
-
-#~ msgid "Password:"
-#~ msgstr "Contrasinal:"
-
-#~ msgid "IP settings"
-#~ msgstr "Configuración de IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -224,9 +247,6 @@ msgstr "Contrasinal…"
 
 #~ msgid "Configure"
 #~ msgstr "Configurar"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "O meu punto de acceso"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2023-12-17 16:22+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -52,10 +52,36 @@ msgstr "புதிய இணைப்பை சேர்"
 msgid "Save"
 msgstr "சேமி"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "பொது"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "மறைந்துள்ள பிணையம்"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "பாதுகாப்பு"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "பாதுகாப்பு வகை:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +118,12 @@ msgstr ""
 msgid "WPA3 Enterprise"
 msgstr ""
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "கடவுச்சொல்:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +153,13 @@ msgstr ""
 #, kde-format
 msgid "Protected EAP"
 msgstr ""
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP அமைப்பு"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -171,24 +210,6 @@ msgstr "கடவுச்சொல்..."
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "சேமிக்கப்பட்ட இணைப்புகளை காட்டு"
-
-#~ msgid "General"
-#~ msgstr "பொது"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "பாதுகாப்பு"
-
-#~ msgid "Security type:"
-#~ msgstr "பாதுகாப்பு வகை:"
-
-#~ msgid "Password:"
-#~ msgstr "கடவுச்சொல்:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP அமைப்பு"
 
 #~ msgid "Wi-Fi networks"
 #~ msgstr "அருகலை பிணையங்கள்"

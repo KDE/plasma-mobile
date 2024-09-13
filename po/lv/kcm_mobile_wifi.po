@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-08-16 11:50+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -53,10 +53,32 @@ msgstr "Pievienot jaunu savienojumu"
 msgid "Save"
 msgstr "Saglabāt"
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr ""
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Slēpts tīkls"
+
+#: ui/NetworkSettings.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Security"
+msgstr ""
+
+#: ui/NetworkSettings.qml:87
+#, kde-format
+msgid "Security type"
+msgstr ""
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -93,6 +115,12 @@ msgstr "WPA3 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password…"
+msgid "Password"
+msgstr "Parole…"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -122,6 +150,12 @@ msgstr "Tunelēts TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Aizsargāts EAP"
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr ""
 
 #: ui/NetworkSettings.qml:180
 #, kde-format

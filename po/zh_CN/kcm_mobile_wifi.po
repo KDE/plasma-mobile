@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -52,10 +52,32 @@ msgstr "添加新连接"
 msgid "Save"
 msgstr "保存"
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr ""
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "隐藏的网络"
+
+#: ui/NetworkSettings.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Security"
+msgstr ""
+
+#: ui/NetworkSettings.qml:87
+#, kde-format
+msgid "Security type"
+msgstr ""
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +114,12 @@ msgstr "WPA3 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password…"
+msgid "Password"
+msgstr "密码…"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +149,12 @@ msgstr "基于隧道的 TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "受保护的 EAP"
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr ""
 
 #: ui/NetworkSettings.qml:180
 #, kde-format

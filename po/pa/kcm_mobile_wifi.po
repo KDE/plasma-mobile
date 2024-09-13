@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2023-12-24 09:09-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -52,10 +52,36 @@ msgstr "ਨਵਾਂ ਕਨੈਕਸ਼ਨ ਜੋੜੋ"
 msgid "Save"
 msgstr "ਸੰਭਾਲੋ"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "ਆਮ"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "ਲੁਕਵਾਂ ਨੈੱਟਵਰਕ"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "ਸੁਰੱਖਿਆ"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "ਸੁਰੱਖਿਆ ਦੀ ਕਿਸਮ:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -94,6 +120,12 @@ msgstr "WPA/WPA2 ਪਰਸਨਲ"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 ਇੰਟਰਪ੍ਰਾਈਜ"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "ਪਾਸਵਰਡ:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -123,6 +155,13 @@ msgstr "ਟਨਲ ਕੀਤੀ TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "ਸੁਰੱਖਿਅਤ EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP ਸੈਟਿੰਗਾਂ"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -173,24 +212,6 @@ msgstr "…ਪਾਸਵਰਡ"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "ਸੰਭਾਲੇ ਹੋਏ ਕਨੈਕਸ਼ਨ ਵੇਖਾਓ"
-
-#~ msgid "General"
-#~ msgstr "ਆਮ"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "ਸੁਰੱਖਿਆ"
-
-#~ msgid "Security type:"
-#~ msgstr "ਸੁਰੱਖਿਆ ਦੀ ਕਿਸਮ:"
-
-#~ msgid "Password:"
-#~ msgstr "ਪਾਸਵਰਡ:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP ਸੈਟਿੰਗਾਂ"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-08-21 00:30+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -52,10 +52,35 @@ msgstr "새 연결 추가"
 msgid "Save"
 msgstr "저장"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "일반"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "숨은 네트워크"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "보안"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "보안 종류:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +117,12 @@ msgstr "WPA3 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "암호:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +152,13 @@ msgstr "터널된 TLS(TTLS)"
 #, kde-format
 msgid "Protected EAP"
 msgstr "보호된 EAP(PEAP)"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP 설정"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -172,23 +210,8 @@ msgstr "암호…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "저장된 연결 표시"
 
-#~ msgid "General"
-#~ msgstr "일반"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "보안"
-
-#~ msgid "Security type:"
-#~ msgstr "보안 종류:"
-
-#~ msgid "Password:"
-#~ msgstr "암호:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP 설정"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -226,9 +249,6 @@ msgstr "암호…"
 
 #~ msgid "Configure"
 #~ msgstr "설정"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "내 핫스팟"

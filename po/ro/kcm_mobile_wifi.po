@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2021-07-25 13:11+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -55,11 +55,37 @@ msgstr "Adaugă conexiune nouă"
 msgid "Save"
 msgstr "Salvează"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Generale"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Rețea ascunsă:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Securitate"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tip de securitate:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -98,6 +124,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Parolă:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -127,6 +159,13 @@ msgstr "TLS prin tunel"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP protejat"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Configurări IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -181,24 +220,6 @@ msgstr "Parolă…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Arată conexiuni salvate"
-
-#~ msgid "General"
-#~ msgstr "Generale"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Securitate"
-
-#~ msgid "Security type:"
-#~ msgstr "Tip de securitate:"
-
-#~ msgid "Password:"
-#~ msgstr "Parolă:"
-
-#~ msgid "IP settings"
-#~ msgstr "Configurări IP"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

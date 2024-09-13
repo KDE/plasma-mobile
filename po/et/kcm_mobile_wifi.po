@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2020-04-15 12:12+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -55,11 +55,36 @@ msgstr "Lisa uus ühendus"
 msgid "Save"
 msgstr "Salvesta"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Üldine"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Varjatud võrk:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Turvalisus"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Turbetüüp:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -98,6 +123,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Parool:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -127,6 +158,13 @@ msgstr "Tunneldatud TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Kaitstud EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP seadistused"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -186,23 +224,8 @@ msgstr "Parool:"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Salvestatud ühendused"
 
-#~ msgid "General"
-#~ msgstr "Üldine"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Turvalisus"
-
-#~ msgid "Security type:"
-#~ msgstr "Turbetüüp:"
-
-#~ msgid "Password:"
-#~ msgstr "Parool:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP seadistused"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -235,9 +258,6 @@ msgstr "Parool:"
 
 #~ msgid "Configure"
 #~ msgstr "Seadista"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Minu pääsupunkt"
