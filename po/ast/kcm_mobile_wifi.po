@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2023-12-18 10:00+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
@@ -52,10 +52,35 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr ""
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Seguranza"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security"
+msgid "Security type"
+msgstr "Seguranza"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +117,12 @@ msgstr ""
 msgid "WPA3 Enterprise"
 msgstr ""
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Contraseña:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -120,6 +151,12 @@ msgstr ""
 #: ui/NetworkSettings.qml:162
 #, kde-format
 msgid "Protected EAP"
+msgstr ""
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
 msgstr ""
 
 #: ui/NetworkSettings.qml:180
@@ -156,12 +193,3 @@ msgstr "DNS"
 #, kde-format
 msgid "Password…"
 msgstr "Contraseña…"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Seguranza"
-
-#~ msgid "Password:"
-#~ msgstr "Contraseña:"

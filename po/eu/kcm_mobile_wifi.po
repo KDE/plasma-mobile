@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-07-04 13:04+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -55,10 +55,35 @@ msgstr "Gehitu konexioa berria"
 msgid "Save"
 msgstr "Gorde"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Orokorra"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Ezkutuko sarea"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Segurtasuna"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Segurtasun mota:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -95,6 +120,12 @@ msgstr "WPA3 pertsonala"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 enpresakoa"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Pasahitza:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -124,6 +155,13 @@ msgstr "Tunel bidez TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Babestutako EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP ezarpenak"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -175,23 +213,8 @@ msgstr "Pasahitza..."
 #~ msgid "Show Saved Connections"
 #~ msgstr "Erakutsi gordetako konexioak"
 
-#~ msgid "General"
-#~ msgstr "Orokorra"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Segurtasuna"
-
-#~ msgid "Security type:"
-#~ msgstr "Segurtasun mota:"
-
-#~ msgid "Password:"
-#~ msgstr "Pasahitza:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP ezarpenak"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -229,9 +252,6 @@ msgstr "Pasahitza..."
 
 #~ msgid "Configure"
 #~ msgstr "Konfiguratu"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Nere berogunea"

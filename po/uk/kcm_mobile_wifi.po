@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-25 07:13+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -55,10 +55,35 @@ msgstr "Додати нове з'єднання"
 msgid "Save"
 msgstr "Зберегти"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Загальні"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Прихована мережа"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Безпека"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Тип захисту:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -95,6 +120,12 @@ msgstr "Особиста WPA3"
 msgid "WPA3 Enterprise"
 msgstr "Промислова WPA3"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Пароль:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -124,6 +155,13 @@ msgstr "Тунельоване TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Захищена EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Параметри IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -175,23 +213,8 @@ msgstr "Пароль…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Показати збережені з'єднання"
 
-#~ msgid "General"
-#~ msgstr "Загальні"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Безпека"
-
-#~ msgid "Security type:"
-#~ msgstr "Тип захисту:"
-
-#~ msgid "Password:"
-#~ msgstr "Пароль:"
-
-#~ msgid "IP settings"
-#~ msgstr "Параметри IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -229,9 +252,6 @@ msgstr "Пароль…"
 
 #~ msgid "Configure"
 #~ msgstr "Налаштувати"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Ваш хот-спот"

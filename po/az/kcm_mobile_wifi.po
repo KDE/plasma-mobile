@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2022-07-06 09:32+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -54,11 +54,37 @@ msgstr "Yeni bağlantı əlavə etmək"
 msgid "Save"
 msgstr "Saxlayın"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Əsas"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Gizli şəbəkə:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Təhlükəsizlik"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Təhlükəsizlik növü:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -97,6 +123,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Şifrə:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -126,6 +158,13 @@ msgstr "Tunelləşmiş TLS (TTLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Qorunan EAP (PEAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "İP ayarları"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -180,24 +219,6 @@ msgstr "Şifrə..."
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Saxlanılan bağlantıları göstərmək"
-
-#~ msgid "General"
-#~ msgstr "Əsas"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Təhlükəsizlik"
-
-#~ msgid "Security type:"
-#~ msgstr "Təhlükəsizlik növü:"
-
-#~ msgid "Password:"
-#~ msgstr "Şifrə:"
-
-#~ msgid "IP settings"
-#~ msgstr "İP ayarları"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

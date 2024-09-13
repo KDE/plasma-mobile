@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-01-29 21:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -52,10 +52,35 @@ msgstr "Lisää uusi yhteys"
 msgid "Save"
 msgstr "Tallenna"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Perusasetukset"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Piiloverkko"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Turvallisuus"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Turvallisuustyyppi:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -94,6 +119,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Salasana:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -123,6 +154,13 @@ msgstr "Tunneloitu TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Suojattu EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP-asetukset"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -174,23 +212,8 @@ msgstr "Salasana…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Näytä tallennetut yhteydet"
 
-#~ msgid "General"
-#~ msgstr "Perusasetukset"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Turvallisuus"
-
-#~ msgid "Security type:"
-#~ msgstr "Turvallisuustyyppi:"
-
-#~ msgid "Password:"
-#~ msgstr "Salasana:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-asetukset"
 
 #~ msgid "DNS:"
 #~ msgstr "Nimipalvelin:"
@@ -228,9 +251,6 @@ msgstr "Salasana…"
 
 #~ msgid "Configure"
 #~ msgstr "Aseta"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Oma tukiasema"

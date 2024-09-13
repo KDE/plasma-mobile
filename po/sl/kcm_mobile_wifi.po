@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-26 11:51+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -53,10 +53,36 @@ msgstr "Dodaj novo povezavo"
 msgid "Save"
 msgstr "Shrani"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Splošno"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Skrito omrežje"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Varnost"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Vrsta varnosti:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -93,6 +119,12 @@ msgstr "Osebni WPA3"
 msgid "WPA3 Enterprise"
 msgstr "Podjetniški WPA3"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Geslo:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -122,6 +154,13 @@ msgstr "Tunelirani TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Zavarovani EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Nastavitve IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -172,21 +211,3 @@ msgstr "Geslo…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Prikaži shranjene povezave"
-
-#~ msgid "General"
-#~ msgstr "Splošno"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Varnost"
-
-#~ msgid "Security type:"
-#~ msgstr "Vrsta varnosti:"
-
-#~ msgid "Password:"
-#~ msgstr "Geslo:"
-
-#~ msgid "IP settings"
-#~ msgstr "Nastavitve IP"

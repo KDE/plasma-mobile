@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2021-06-21 19:45+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -50,11 +50,37 @@ msgstr "Adicionar uma Nova Ligação"
 msgid "Save"
 msgstr "Gravar"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Geral"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Rede Escondida:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Segurança"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tipo de segurança:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -93,6 +119,12 @@ msgstr "WPA/WPA2 Pessoal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Empresarial"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Senha:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -122,6 +154,13 @@ msgstr "TLS por Túnel"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP Protegido"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Configuração do IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -176,24 +215,6 @@ msgstr "Senha…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mostrar as Ligações Gravadas"
-
-#~ msgid "General"
-#~ msgstr "Geral"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Segurança"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipo de segurança:"
-
-#~ msgid "Password:"
-#~ msgstr "Senha:"
-
-#~ msgid "IP settings"
-#~ msgstr "Configuração do IP"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

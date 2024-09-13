@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2021-08-20 21:06+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -56,11 +56,36 @@ msgstr "Добавить новое соединение"
 msgid "Save"
 msgstr "Сохранить"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Общие"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "Точка доступа (SSID)"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Скрытая сеть:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Защита"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Тип защиты:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -99,6 +124,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Пароль:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -128,6 +159,13 @@ msgstr "Туннельный TLS (TTLS)"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Защищённый EAP (PEAP)"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Параметры IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -182,23 +220,8 @@ msgstr "Пароль…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Сохранённые соединения"
 
-#~ msgid "General"
-#~ msgstr "Общие"
-
 #~ msgid "SSID:"
 #~ msgstr "Точка доступа (SSID):"
-
-#~ msgid "Security"
-#~ msgstr "Защита"
-
-#~ msgid "Security type:"
-#~ msgstr "Тип защиты:"
-
-#~ msgid "Password:"
-#~ msgstr "Пароль:"
-
-#~ msgid "IP settings"
-#~ msgstr "Параметры IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -237,9 +260,6 @@ msgstr "Пароль…"
 # BUGME: please add ellipsis --aspotashev
 #~ msgid "Configure"
 #~ msgstr "Настроить..."
-
-#~ msgid "SSID"
-#~ msgstr "Точка доступа (SSID)"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Моя точка доступа"

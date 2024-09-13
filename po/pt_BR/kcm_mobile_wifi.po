@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-07-19 23:38-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -55,10 +55,35 @@ msgstr "Adicionar nova conexão"
 msgid "Save"
 msgstr "Salvar"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Geral"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Rede oculta"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Segurança"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tipo de segurança:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -95,6 +120,12 @@ msgstr "WPA3 pessoal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 empresarial"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Senha..."
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -124,6 +155,13 @@ msgstr "TLS encapsulado"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP protegido"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Configurações do IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -175,23 +213,8 @@ msgstr "Senha..."
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mostrar conexões salvas"
 
-#~ msgid "General"
-#~ msgstr "Geral"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Segurança"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipo de segurança:"
-
-#~ msgid "Password:"
-#~ msgstr "Senha..."
-
-#~ msgid "IP settings"
-#~ msgstr "Configurações do IP"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
@@ -226,9 +249,6 @@ msgstr "Senha..."
 
 #~ msgid "Configure"
 #~ msgstr "Configurar"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Meu hotspot"

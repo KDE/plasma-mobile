@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2022-05-22 13:09+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -54,11 +54,33 @@ msgstr "Добавяне на нова връзка"
 msgid "Save"
 msgstr "Запазване"
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr ""
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Скрита мрежа:"
+
+#: ui/NetworkSettings.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Security"
+msgstr ""
+
+#: ui/NetworkSettings.qml:87
+#, kde-format
+msgid "Security type"
+msgstr ""
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -97,6 +119,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password…"
+msgid "Password"
+msgstr "Парола…"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -126,6 +154,12 @@ msgstr "Тунелен TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Защитена EAP"
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr ""
 
 #: ui/NetworkSettings.qml:180
 #, kde-format

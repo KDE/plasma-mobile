@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2018-11-20 23:16-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -49,9 +49,31 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr ""
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
+msgstr ""
+
+#: ui/NetworkSettings.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Security"
+msgstr ""
+
+#: ui/NetworkSettings.qml:87
+#, kde-format
+msgid "Security type"
 msgstr ""
 
 #: ui/NetworkSettings.qml:96
@@ -89,6 +111,11 @@ msgstr ""
 msgid "WPA3 Enterprise"
 msgstr ""
 
+#: ui/NetworkSettings.qml:140
+#, kde-format
+msgid "Password"
+msgstr ""
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -117,6 +144,12 @@ msgstr ""
 #: ui/NetworkSettings.qml:162
 #, kde-format
 msgid "Protected EAP"
+msgstr ""
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
 msgstr ""
 
 #: ui/NetworkSettings.qml:180

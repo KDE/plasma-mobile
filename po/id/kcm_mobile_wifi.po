@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2020-04-24 22:01+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -54,11 +54,36 @@ msgstr "Tambahkan Koneksi baru"
 msgid "Save"
 msgstr "Simpan"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Umum"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Hidden Network"
 msgstr "Jaringan Tersembunyi:"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Keamanan"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tipe keamanan:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -97,6 +122,12 @@ msgstr "WPA/WPA2 Personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Kata sandi:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -126,6 +157,13 @@ msgstr "Ditembus TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Dilindungi EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Pengaturan IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -185,23 +223,8 @@ msgstr "Kata sandi:"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Koneksi yang Disimpan"
 
-#~ msgid "General"
-#~ msgstr "Umum"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Keamanan"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipe keamanan:"
-
-#~ msgid "Password:"
-#~ msgstr "Kata sandi:"
-
-#~ msgid "IP settings"
-#~ msgstr "Pengaturan IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -237,9 +260,6 @@ msgstr "Kata sandi:"
 
 #~ msgid "Configure"
 #~ msgstr "Konfigurasikan"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Hotspot-ku"

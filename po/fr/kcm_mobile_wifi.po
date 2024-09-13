@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-27 14:32+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -53,10 +53,35 @@ msgstr "Ajouter une nouvelle connexion"
 msgid "Save"
 msgstr "Enregistrer"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Général"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Réseau masqué"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Sécurité"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Type de sécurité :"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -93,6 +118,12 @@ msgstr "WPA3 domestique"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 entreprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Mot de passe :"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -122,6 +153,13 @@ msgstr "TLS en mode tunnel (TTLS)"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP protégé (PEAP)"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Paramètres IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -173,23 +211,8 @@ msgstr "Mot de passe..."
 #~ msgid "Show Saved Connections"
 #~ msgstr "Afficher les connexions enregistrées"
 
-#~ msgid "General"
-#~ msgstr "Général"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID :"
-
-#~ msgid "Security"
-#~ msgstr "Sécurité"
-
-#~ msgid "Security type:"
-#~ msgstr "Type de sécurité :"
-
-#~ msgid "Password:"
-#~ msgstr "Mot de passe :"
-
-#~ msgid "IP settings"
-#~ msgstr "Paramètres IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS :"
@@ -229,9 +252,6 @@ msgstr "Mot de passe..."
 
 #~ msgid "Configure"
 #~ msgstr "Configurer"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Mon point d'accès"

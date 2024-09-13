@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-02-14 01:40+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -54,10 +54,35 @@ msgstr "Pridėti naują ryšį"
 msgid "Save"
 msgstr "Įrašyti"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Bendra"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Paslėptas tinklas"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Saugumas"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Saugumo tipas:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -96,6 +121,12 @@ msgstr "WPA/WPA2 asmeninis"
 msgid "WPA3 Enterprise"
 msgstr "WPA/WPA2 verslo"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Slaptažodis:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -125,6 +156,13 @@ msgstr "Tuneliuotas TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Apsaugotas EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP nuostatos"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -176,23 +214,8 @@ msgstr "Slaptažodis…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Rodyti įrašytus ryšius"
 
-#~ msgid "General"
-#~ msgstr "Bendra"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Saugumas"
-
-#~ msgid "Security type:"
-#~ msgstr "Saugumo tipas:"
-
-#~ msgid "Password:"
-#~ msgstr "Slaptažodis:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP nuostatos"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -230,9 +253,6 @@ msgstr "Slaptažodis…"
 
 #~ msgid "Configure"
 #~ msgstr "Konfigūruoti"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Mano viešosios prieigos taškas"

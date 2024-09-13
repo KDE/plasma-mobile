@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-25 05:20+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -53,10 +53,36 @@ msgstr "ახალი შეერთების დამატება"
 msgid "Save"
 msgstr "შენახვა"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "ძირითადი"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "დამალული ქსელი"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "უსაფრთხოება"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "დაცვის ტიპი:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -93,6 +119,12 @@ msgstr "WPA3 პერსონალური"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 საწარმოო"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "პაროლი:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -122,6 +154,13 @@ msgstr "TLS გვირაბი (TTLS)"
 #, kde-format
 msgid "Protected EAP"
 msgstr "დაცული EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP-ის მორგება"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -172,24 +211,6 @@ msgstr "პაროლი…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "შენახული კავშირების ჩვენება"
-
-#~ msgid "General"
-#~ msgstr "ძირითადი"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "უსაფრთხოება"
-
-#~ msgid "Security type:"
-#~ msgstr "დაცვის ტიპი:"
-
-#~ msgid "Password:"
-#~ msgstr "პაროლი:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-ის მორგება"
 
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"

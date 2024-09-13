@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2019-11-12 21:55+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -55,11 +55,35 @@ msgstr "Илова кардани пайвасти фармоишӣ"
 msgid "Save"
 msgstr "Нигоҳ доштан"
 
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, fuzzy, kde-format
 #| msgid "Hide this network"
 msgid "Hidden Network"
 msgstr "Пинҳон кардани шабакаи ҷорӣ"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Амният"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Навъи амният:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -98,6 +122,12 @@ msgstr "Пайвасти шахсии WPA/WPA2"
 msgid "WPA3 Enterprise"
 msgstr "Пайвасти тиҷории WPA/WPA2"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Ниҳонвожа:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -127,6 +157,13 @@ msgstr "TLS-и ниҳонӣ"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP-и ҳифзшуда"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Танзимоти IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -191,18 +228,6 @@ msgstr "Ниҳонвожа:"
 #~ msgid "SSID:"
 #~ msgstr "SSID"
 
-#~ msgid "Security"
-#~ msgstr "Амният"
-
-#~ msgid "Security type:"
-#~ msgstr "Навъи амният:"
-
-#~ msgid "Password:"
-#~ msgstr "Ниҳонвожа:"
-
-#~ msgid "IP settings"
-#~ msgstr "Танзимоти IP"
-
 #~ msgctxt "NAME OF TRANSLATORS"
 #~ msgid "Your names"
 #~ msgstr "Victor Ibragimov"
@@ -234,9 +259,6 @@ msgstr "Ниҳонвожа:"
 
 #~ msgid "Configure"
 #~ msgstr "Танзим кардан"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Нуқтаи пайвасти ман"

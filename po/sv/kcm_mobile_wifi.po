@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-25 19:09+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -52,10 +52,35 @@ msgstr "Lägg till ny anslutning"
 msgid "Save"
 msgstr "Spara"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Allmänt"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Dolt nätverk"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Säkerhet"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Säkerhetstyp:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +117,12 @@ msgstr "WPA3 personlig"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 företag"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Lösenord:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +152,13 @@ msgstr " Tunnel-TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr " Skyddad EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP-inställningar"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -172,23 +210,8 @@ msgstr "Lösenord…"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Visa sparade anslutningar"
 
-#~ msgid "General"
-#~ msgstr "Allmänt"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Säkerhet"
-
-#~ msgid "Security type:"
-#~ msgstr "Säkerhetstyp:"
-
-#~ msgid "Password:"
-#~ msgstr "Lösenord:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-inställningar"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -226,9 +249,6 @@ msgstr "Lösenord…"
 
 #~ msgid "Configure"
 #~ msgstr "Anpassa"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Min accesspunkt"

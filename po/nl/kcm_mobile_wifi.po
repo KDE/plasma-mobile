@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-25 12:11+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -52,10 +52,36 @@ msgstr "Nieuwe verbinding toevoegen"
 msgid "Save"
 msgstr "Opslaan"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "Algemeen"
+
+#: ui/NetworkSettings.qml:58
+#, fuzzy, kde-format
+#| msgid "SSID:"
+msgid "SSID"
+msgstr "SSID:"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Verborgen netwerk"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Beveiliging"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Type beveiliging:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -92,6 +118,12 @@ msgstr "WPA3-persoonlijk"
 msgid "WPA3 Enterprise"
 msgstr "WPA3-enterprise"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Wachtwoord:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -121,6 +153,13 @@ msgstr "Getunnelde TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "Beschermde EAP"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "IP-instellingen"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -171,21 +210,3 @@ msgstr "Wachtwoord…"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Opgeslagen verbindingen tonen"
-
-#~ msgid "General"
-#~ msgstr "Algemeen"
-
-#~ msgid "SSID:"
-#~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Beveiliging"
-
-#~ msgid "Security type:"
-#~ msgstr "Type beveiliging:"
-
-#~ msgid "Password:"
-#~ msgstr "Wachtwoord:"
-
-#~ msgid "IP settings"
-#~ msgstr "IP-instellingen"

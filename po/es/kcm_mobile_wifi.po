@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-25 00:40+0000\n"
+"POT-Creation-Date: 2024-09-13 00:41+0000\n"
 "PO-Revision-Date: 2024-06-25 17:58+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -54,10 +54,35 @@ msgstr "Añadir nueva conexión"
 msgid "Save"
 msgstr "Guardar"
 
+#: ui/NetworkSettings.qml:52
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title:group"
+msgid "General"
+msgstr "General"
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID"
+
 #: ui/NetworkSettings.qml:73
 #, kde-format
 msgid "Hidden Network"
 msgstr "Red oculta"
+
+#: ui/NetworkSettings.qml:80
+#, fuzzy, kde-format
+#| msgid "Security"
+msgctxt "@title:group"
+msgid "Security"
+msgstr "Seguridad"
+
+#: ui/NetworkSettings.qml:87
+#, fuzzy, kde-format
+#| msgid "Security type:"
+msgid "Security type"
+msgstr "Tipo de seguridad:"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -94,6 +119,12 @@ msgstr "WPA3 personal"
 msgid "WPA3 Enterprise"
 msgstr "WPA3 empresarial"
 
+#: ui/NetworkSettings.qml:140
+#, fuzzy, kde-format
+#| msgid "Password:"
+msgid "Password"
+msgstr "Contraseña:"
+
 #: ui/NetworkSettings.qml:156
 #, kde-format
 msgid "Authentication:"
@@ -123,6 +154,13 @@ msgstr "Túnel TLS"
 #, kde-format
 msgid "Protected EAP"
 msgstr "EAP protegido"
+
+#: ui/NetworkSettings.qml:173
+#, fuzzy, kde-format
+#| msgid "IP settings"
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr "Preferencias de la IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
@@ -174,23 +212,8 @@ msgstr "Contraseña..."
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mostrar conexiones guardadas"
 
-#~ msgid "General"
-#~ msgstr "General"
-
 #~ msgid "SSID:"
 #~ msgstr "SSID:"
-
-#~ msgid "Security"
-#~ msgstr "Seguridad"
-
-#~ msgid "Security type:"
-#~ msgstr "Tipo de seguridad:"
-
-#~ msgid "Password:"
-#~ msgstr "Contraseña:"
-
-#~ msgid "IP settings"
-#~ msgstr "Preferencias de la IP"
 
 #~ msgid "DNS:"
 #~ msgstr "DNS:"
@@ -228,9 +251,6 @@ msgstr "Contraseña..."
 
 #~ msgid "Configure"
 #~ msgstr "Configurar"
-
-#~ msgid "SSID"
-#~ msgstr "SSID"
 
 #~ msgid "My Hotspot"
 #~ msgstr "Mi hotspot"
