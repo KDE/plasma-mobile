@@ -86,12 +86,3 @@ msgstr "PIN erroni"
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
 msgstr "Indicador de focus del plafó"
-
-#~ msgid "Logging in..."
-#~ msgstr "S'està iniciant la sessió..."
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Canvia el fons de pantalla"
-
-#~ msgid "Configure"
-#~ msgstr "Configura"
