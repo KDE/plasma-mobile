@@ -119,5 +119,13 @@
         "Website": "https://plasma-mobile.org"
     },
     "X-KDE-Keywords": "onscreen,osk,virtualkeyboard,keyboard",
+    "X-KDE-Keywords[ca]": "en pantalla,osk,teclat virtual,teclat",
+    "X-KDE-Keywords[he]": "על המסך,מקלדת על המסך,מקלדת וירטואלית,מקלדת",
+    "X-KDE-Keywords[ia]": "onscreen,osk,virtualkeyboard,keyboard",
+    "X-KDE-Keywords[ka]": "onscreen,osk,virtualkeyboard,keyboard,ეკრანზე, კლავიატურა ეკრანზე, კლავიატურა",
+    "X-KDE-Keywords[sl]": "na zaslonu,osk,virtualna tipkovnica,tipkovnica",
+    "X-KDE-Keywords[sv]": "på skärmen,virtuellt tangentbord,tangentbord",
+    "X-KDE-Keywords[uk]": "onscreen,osk,virtualkeyboard,keyboard,екранна,екран,клавіатура",
+    "X-KDE-Keywords[x-test]": "xxonscreenxx,xxoskxx,xxvirtualkeyboardxx,xxkeyboardxx",
     "X-KDE-System-Settings-Parent-Category": "input-devices"
 }

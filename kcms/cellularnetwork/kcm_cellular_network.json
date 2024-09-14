@@ -76,6 +76,14 @@
         "Name[zh_TW]": "行動網路"
     },
     "X-KDE-Keywords": "mobile,data,network",
+    "X-KDE-Keywords[ca]": "mòbil,dades,xarxa",
+    "X-KDE-Keywords[he]": "נייד,נתונים,רשת,פס רחב",
+    "X-KDE-Keywords[ia]": "mobile,data,network",
+    "X-KDE-Keywords[ka]": "mobile,data,network,მობილური ინტერნეტი,ქსელი",
+    "X-KDE-Keywords[sl]": "mobilnik,podatki,omrežje",
+    "X-KDE-Keywords[sv]": "mobil,data,nätverk",
+    "X-KDE-Keywords[uk]": "mobile,data,network,мобільний,дані,мережа",
+    "X-KDE-Keywords[x-test]": "xxmobilexx,xxdataxx,xxnetworkxx",
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 70
 }

@@ -84,6 +84,14 @@
         "Name[zh_TW]": "Wi-Fi"
     },
     "X-KDE-Keywords": "wifi,network",
+    "X-KDE-Keywords[ca]": "wi-fi,xarxa",
+    "X-KDE-Keywords[he]": "רשת אלחוטית,רשת,תקשורת",
+    "X-KDE-Keywords[ia]": "wifi,network",
+    "X-KDE-Keywords[ka]": "wifi,network, ქსელი",
+    "X-KDE-Keywords[sl]": "wifi,omrežje",
+    "X-KDE-Keywords[sv]": "wifi,nätverk",
+    "X-KDE-Keywords[uk]": "wifi,network,вайфай,мережа",
+    "X-KDE-Keywords[x-test]": "xxwifixx,xxnetworkxx",
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 70
 }

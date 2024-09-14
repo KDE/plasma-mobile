@@ -78,6 +78,14 @@
         "Name[zh_TW]": "電源"
     },
     "X-KDE-Keywords": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",
+    "X-KDE-Keywords[ca]": "vídeo,monitor,gràfics,temps d'espera,dormir,bloqueig,bloqueig de pantalla,estil de pantalla",
+    "X-KDE-Keywords[he]": "וידאו,צג,תצוגה,מסך,מקרן,גרפיקה,תום זמן,המתנה,השהיה,שינה,נעילה,נועל מסך,שומר מסך",
+    "X-KDE-Keywords[ia]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",
+    "X-KDE-Keywords[ka]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, ეკრანის შემნახველი, ვიდეო, ეკრანი, გრაფიკა, მოლოდინის დრო, ძილი",
+    "X-KDE-Keywords[sl]": "video, monitor, grafika, časovna omejitev, spanje, zaklepanje, zaklepanje zaslona, ​​ohranjevalnik zaslona",
+    "X-KDE-Keywords[sv]": "video, bildskärm, grafik, tidsgräns, viloläge, lår, skärmlåsning, skärmsläckare",
+    "X-KDE-Keywords[uk]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, відео, монітор, графіка, час очікування, присипляння, блокування, збереження, екран",
+    "X-KDE-Keywords[x-test]": "xxvideoxx,xx monitorxx,xx graphicsxx,xx timeoutxx,xx sleepxx,xx lockxx,xx screenlockerxx,xx screensaverxx",
     "X-KDE-System-Settings-Parent-Category": "system-administration",
     "X-KDE-Weight": 20
 }

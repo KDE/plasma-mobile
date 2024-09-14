@@ -79,5 +79,13 @@
         "Name[zh_TW]": "通知"
     },
     "X-KDE-Keywords": "info, distro, system",
+    "X-KDE-Keywords[ca]": "informació,distribució,sistema",
+    "X-KDE-Keywords[he]": "פרטים,מידע,הפצה,מערכת",
+    "X-KDE-Keywords[ia]": "info, distro, system",
+    "X-KDE-Keywords[ka]": "info, distro, system, ინფორმაცია, დისტრიბუტივი, სისტემა",
+    "X-KDE-Keywords[sl]": "informacije,distribucija,sistem",
+    "X-KDE-Keywords[sv]": "information, distribution, system",
+    "X-KDE-Keywords[uk]": "info, distro, system, інфо, відомості, дистрибутив, система",
+    "X-KDE-Keywords[x-test]": "xxinfoxx,xx distroxx,xx systemxx",
     "X-KDE-System-Settings-Parent-Category": "system-administration"
 }
