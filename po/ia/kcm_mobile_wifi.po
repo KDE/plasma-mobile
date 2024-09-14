@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-06-25 09:46+0200\n"
+"PO-Revision-Date: 2024-09-13 18:29+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -53,8 +53,7 @@ msgid "Save"
 msgstr "Salveguarda"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "General"
@@ -70,17 +69,15 @@ msgid "Hidden Network"
 msgstr "Rete celate"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "Securitate"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Typo de securitate:"
+msgstr "Typo de securitate"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -118,10 +115,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Interprisa"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Contrasigno:"
+msgstr "Contrasigno"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -154,8 +150,7 @@ msgid "Protected EAP"
 msgstr "EAP (PEAP) protegite"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "Preferentias de IP"
