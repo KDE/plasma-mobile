@@ -61,8 +61,7 @@ msgid "General"
 msgstr "Général"
 
 #: ui/NetworkSettings.qml:58
-#, fuzzy, kde-format
-#| msgid "SSID"
+#, kde-format
 msgid "SSID"
 msgstr "SSID"
 
