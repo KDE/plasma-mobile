@@ -119,5 +119,8 @@
         "Website": "https://plasma-mobile.org"
     },
     "X-KDE-Keywords": "onscreen,osk,virtualkeyboard,keyboard",
+    "X-KDE-Keywords[ca]": "en pantalla,osk,teclat virtual,teclat",
+    "X-KDE-Keywords[sl]": "na zaslonu,osk,virtualna tipkovnica,tipkovnica",
+    "X-KDE-Keywords[sv]": "på skärmen,virtuellt tangentbord,tangentbord",
     "X-KDE-System-Settings-Parent-Category": "input-devices"
 }

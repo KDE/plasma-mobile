@@ -76,6 +76,9 @@
         "Name[zh_TW]": "行動網路"
     },
     "X-KDE-Keywords": "mobile,data,network",
+    "X-KDE-Keywords[ca]": "mòbil,dades,xarxa",
+    "X-KDE-Keywords[sl]": "mobilnik,podatki,omrežje",
+    "X-KDE-Keywords[sv]": "mobil,data,nätverk",
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 70
 }

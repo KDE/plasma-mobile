@@ -84,6 +84,9 @@
         "Name[zh_TW]": "Wi-Fi"
     },
     "X-KDE-Keywords": "wifi,network",
+    "X-KDE-Keywords[ca]": "wi-fi,xarxa",
+    "X-KDE-Keywords[sl]": "wifi,omrežje",
+    "X-KDE-Keywords[sv]": "wifi,nätverk",
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 70
 }

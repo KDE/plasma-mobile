@@ -78,6 +78,9 @@
         "Name[zh_TW]": "電源"
     },
     "X-KDE-Keywords": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",
+    "X-KDE-Keywords[ca]": "vídeo,monitor,gràfics,temps d'espera,dormir,bloqueig,bloqueig de pantalla,estil de pantalla",
+    "X-KDE-Keywords[sl]": "video, monitor, grafika, časovna omejitev, spanje, zaklepanje, zaklepanje zaslona, ​​ohranjevalnik zaslona",
+    "X-KDE-Keywords[sv]": "video, bildskärm, grafik, tidsgräns, viloläge, lår, skärmlåsning, skärmsläckare",
     "X-KDE-System-Settings-Parent-Category": "system-administration",
     "X-KDE-Weight": 20
 }
