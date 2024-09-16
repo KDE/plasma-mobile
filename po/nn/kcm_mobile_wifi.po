@@ -63,7 +63,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:58
 #, kde-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
 #: ui/NetworkSettings.qml:73
 #, kde-format
