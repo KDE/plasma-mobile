@@ -80,6 +80,9 @@
     },
     "X-KDE-Keywords": "info, distro, system",
     "X-KDE-Keywords[ca]": "informació,distribució,sistema",
+    "X-KDE-Keywords[gl]": "info, información, distro, distribución, sistema",
+    "X-KDE-Keywords[he]": "פרטים,מידע,הפצה,מערכת",
+    "X-KDE-Keywords[ka]": "info, distro, system, ინფორმაცია, დისტრიბუტივი, სისტემა",
     "X-KDE-Keywords[sl]": "informacije,distribucija,sistem",
     "X-KDE-Keywords[sv]": "information, distribution, system",
     "X-KDE-System-Settings-Parent-Category": "system-administration"
