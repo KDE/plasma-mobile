@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 02:34+0000\n"
-"PO-Revision-Date: 2024-06-25 17:58+0200\n"
+"PO-Revision-Date: 2024-09-16 12:21+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -55,8 +55,7 @@ msgid "Save"
 msgstr "Guardar"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "General"
@@ -72,17 +71,15 @@ msgid "Hidden Network"
 msgstr "Red oculta"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "Seguridad"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Tipo de seguridad:"
+msgstr "Tipo de seguridad"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -120,10 +117,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 empresarial"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Contraseña:"
+msgstr "Contraseña"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -156,11 +152,10 @@ msgid "Protected EAP"
 msgstr "EAP protegido"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
-msgstr "Preferencias de la IP"
+msgstr "Preferencias de IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format

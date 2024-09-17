@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 02:34+0000\n"
 "PO-Revision-Date: 2024-06-26 15:17+0200\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -56,12 +56,12 @@ msgstr "Uložit"
 #, kde-format
 msgctxt "@title:group"
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: ui/NetworkSettings.qml:58
 #, kde-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
 #: ui/NetworkSettings.qml:73
 #, kde-format
@@ -77,7 +77,7 @@ msgstr ""
 #: ui/NetworkSettings.qml:87
 #, kde-format
 msgid "Security type"
-msgstr ""
+msgstr "Typ zabezpečení"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -115,10 +115,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password…"
+#, kde-format
 msgid "Password"
-msgstr "Heslo…"
+msgstr "Heslo"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
