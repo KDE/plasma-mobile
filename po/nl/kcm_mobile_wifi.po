@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-06-25 12:11+0200\n"
+"PO-Revision-Date: 2024-09-16 12:53+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -53,17 +53,15 @@ msgid "Save"
 msgstr "Opslaan"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "Algemeen"
 
 #: ui/NetworkSettings.qml:58
-#, fuzzy, kde-format
-#| msgid "SSID:"
+#, kde-format
 msgid "SSID"
-msgstr "SSID:"
+msgstr "SSID"
 
 #: ui/NetworkSettings.qml:73
 #, kde-format
@@ -71,17 +69,15 @@ msgid "Hidden Network"
 msgstr "Verborgen netwerk"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "Beveiliging"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Type beveiliging:"
+msgstr "Type beveiliging"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -119,10 +115,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3-enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Wachtwoord:"
+msgstr "Wachtwoord"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -155,8 +150,7 @@ msgid "Protected EAP"
 msgstr "Beschermde EAP"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "IP-instellingen"
