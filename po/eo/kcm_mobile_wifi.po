@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-06-28 16:51+0200\n"
+"PO-Revision-Date: 2024-09-17 21:39+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -57,12 +57,12 @@ msgstr "Konservi"
 #, kde-format
 msgctxt "@title:group"
 msgid "General"
-msgstr ""
+msgstr "Ĝenerala"
 
 #: ui/NetworkSettings.qml:58
 #, kde-format
 msgid "SSID"
-msgstr ""
+msgstr "SSID"
 
 #: ui/NetworkSettings.qml:73
 #, kde-format
@@ -73,12 +73,12 @@ msgstr "Kaŝita Reto"
 #, kde-format
 msgctxt "@title:group"
 msgid "Security"
-msgstr ""
+msgstr "Sekureco"
 
 #: ui/NetworkSettings.qml:87
 #, kde-format
 msgid "Security type"
-msgstr ""
+msgstr "Sekurectipo"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -116,10 +116,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password…"
+#, kde-format
 msgid "Password"
-msgstr "Pasvorto…"
+msgstr "Pasvorto"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
