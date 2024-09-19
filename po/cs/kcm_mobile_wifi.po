@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-06-26 15:17+0200\n"
+"PO-Revision-Date: 2024-09-16 12:49+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -72,7 +72,7 @@ msgstr "Skrytá síť"
 #, kde-format
 msgctxt "@title:group"
 msgid "Security"
-msgstr ""
+msgstr "Bezpečnost"
 
 #: ui/NetworkSettings.qml:87
 #, kde-format
@@ -153,7 +153,7 @@ msgstr "Chráněný EAP"
 #, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
-msgstr ""
+msgstr "Nastavení IP"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
