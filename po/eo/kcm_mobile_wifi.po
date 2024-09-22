@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-09-17 21:39+0200\n"
+"PO-Revision-Date: 2024-09-21 10:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -154,7 +154,7 @@ msgstr "Protektita EAP"
 #, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
-msgstr ""
+msgstr "IP-Agordo"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
