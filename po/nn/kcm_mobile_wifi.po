@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 02:34+0000\n"
-"PO-Revision-Date: 2024-07-08 22:03+0200\n"
+"PO-Revision-Date: 2024-09-22 16:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.11.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -58,7 +58,7 @@ msgstr "Lagra"
 #, kde-format
 msgctxt "@title:group"
 msgid "General"
-msgstr ""
+msgstr "Generelt"
 
 #: ui/NetworkSettings.qml:58
 #, kde-format
@@ -74,12 +74,12 @@ msgstr "Ikkje-synleg nettverk"
 #, kde-format
 msgctxt "@title:group"
 msgid "Security"
-msgstr ""
+msgstr "Tryggleik"
 
 #: ui/NetworkSettings.qml:87
 #, kde-format
 msgid "Security type"
-msgstr ""
+msgstr "Tryggleikstype"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -117,10 +117,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 firma"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password…"
+#, kde-format
 msgid "Password"
-msgstr "Passord …"
+msgstr "Passord"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -156,7 +155,7 @@ msgstr "Verna EAP (PEAP)"
 #, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
-msgstr ""
+msgstr "IP-innstillingar"
 
 #: ui/NetworkSettings.qml:180
 #, kde-format
