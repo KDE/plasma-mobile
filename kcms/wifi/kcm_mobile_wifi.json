@@ -94,9 +94,11 @@
     "X-KDE-Keywords[he]": "רשת אלחוטית,רשת,תקשורת",
     "X-KDE-Keywords[it]": "wifi,rete",
     "X-KDE-Keywords[ka]": "wifi,network",
+    "X-KDE-Keywords[pl]": "wifi,sieć",
     "X-KDE-Keywords[sl]": "wifi,omrežje",
     "X-KDE-Keywords[sv]": "wifi,nätverk",
     "X-KDE-Keywords[tr]": "wifi,wi-fi,ağ",
+    "X-KDE-Keywords[uk]": "wifi,network,вайфай,мережа",
     "X-KDE-System-Settings-Parent-Category": "network",
     "X-KDE-Weight": 70
 }
