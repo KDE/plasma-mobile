@@ -1,22 +1,23 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2023-02-19 17:59+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2024-09-23 16:25+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -46,17 +47,19 @@ msgstr "Если этот параметр отключён, использов�
 #: ui/main.qml:53
 #, kde-format
 msgid "Status bar"
-msgstr ""
+msgstr "Строка состояния"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Дата в строке состояния"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
+"Если этот параметр включён, в строке состояния рядом с часами будет показана "
+"дата."
 
 #: ui/main.qml:71
 #, kde-format
@@ -76,19 +79,18 @@ msgstr "Сокрытие панели навигации."
 #: ui/main.qml:92
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "Всегда показывать переключатель клавиатуры"
 
 #: ui/main.qml:93
-#, fuzzy, kde-format
-#| msgid "Whether to hide the navigation panel."
+#, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr "Сокрытие панели навигации."
+msgstr "Постоянный показ кнопки переключения клавиатуры на панели навигации."
 
 #: ui/main.qml:104
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "Выдвижная панель быстрой настройки"
 
 #: ui/main.qml:110
 #, kde-format
@@ -110,56 +112,58 @@ msgstr "Быстрая настройка"
 #: ui/main.qml:123
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "Режим верхней левой выдвижной панели"
 
 #: ui/main.qml:124
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "Режим открытия из верхнего левого угла."
 
 #: ui/main.qml:149
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "Режим верхней правой выдвижной панели"
 
 #: ui/main.qml:150
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "Режим открытия из верхнего правого угла."
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "Скрыть"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "Показать"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
 msgstr ""
+"Настройка порядка параметров для быстрой настройки, расположенных на "
+"выдвижной панели, и их скрытие."
 
 #: ui/QuickSettingsForm.qml:99
-#, fuzzy, kde-format
-#| msgid "Quick Settings"
+#, kde-format
 msgid "Disabled Quick Settings"
-msgstr "Быстрая настройка"
+msgstr "Отключённые параметры для быстрой настройки"
 
 #: ui/QuickSettingsForm.qml:104
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
 msgstr ""
+"Повторное включение ранее отключённых параметров для быстрой настройки."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "Включение виброотклика оболочки."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
@@ -169,7 +173,7 @@ msgstr "Длительность вибрации"
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "Продолжительность виброотклика."
 
 #: ui/VibrationForm.qml:42
 #, kde-format
@@ -195,6 +199,8 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"Управление виброоткликом клавиатуры выполняется отдельно, в модуле "
+"параметров клавиатуры."
 
 #~ msgid "Vibration Intensity"
 #~ msgstr "Интенсивность вибрации"
