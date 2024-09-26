@@ -113,9 +113,6 @@
         "Name[x-test]": "xxWiFixx",
         "Name[zh_CN]": "WiFi",
         "Name[zh_TW]": "WiFi",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Website": "https://kde.org"
     }
 }

@@ -112,9 +112,6 @@
         "Name[x-test]": "xxFinishedxx",
         "Name[zh_CN]": "完成",
         "Name[zh_TW]": "已完成",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Website": "https://kde.org"
     }
 }

@@ -111,9 +111,6 @@
         "Name[x-test]": "xxCellularxx",
         "Name[zh_CN]": "蜂窝数据",
         "Name[zh_TW]": "行動電話",
-        "ServiceTypes": [
-            "KPackage/GenericQML"
-        ],
         "Website": "https://kde.org"
     }
 }
