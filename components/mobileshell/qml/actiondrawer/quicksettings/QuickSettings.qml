@@ -14,6 +14,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.private.brightnesscontrolplugin as BC
 
 /**
  * Quick settings elements layout, change the height to clip.
@@ -106,12 +107,29 @@ Item {
             sourceComponent: root.mode === QuickSettings.Pages ? swipeViewComponent : scrollViewComponent
         }
 
-        BrightnessItem {
-            id: brightnessItem
-            Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-            Layout.leftMargin: Kirigami.Units.smallSpacing
-            Layout.rightMargin: Kirigami.Units.smallSpacing
-            Layout.fillWidth: true
+        BC.ScreenBrightnessControl {
+            id: screenBrightnessControl
+        }
+
+        Repeater {
+            id: brightnessRepeater
+            model: screenBrightnessControl.displays
+
+            BrightnessItem {
+                required property string displayName
+                required property int brightness
+                required property int maxBrightness
+
+                Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
+                Layout.leftMargin: Kirigami.Units.smallSpacing
+                Layout.rightMargin: Kirigami.Units.smallSpacing
+                Layout.fillWidth: true
+
+                value: brightness
+                maximumValue: maxBrightness
+
+                onMoved: screenBrightnessControl.setBrightness(displayName, value)
+            }
         }
     }
 

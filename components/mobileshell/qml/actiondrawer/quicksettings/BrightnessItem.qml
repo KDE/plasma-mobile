@@ -12,16 +12,16 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.plasma.private.brightnesscontrolplugin as BC
 
 Item {
     id: root
 
     implicitHeight: brightnessRow.implicitHeight
 
-    BC.ScreenBrightnessControl {
-        id: screenBrightnessControl
-    }
+    property alias value: brightnessSlider.value
+    property alias maximumValue: brightnessSlider.to
+
+    signal moved()
 
     RowLayout {
         id: brightnessRow
@@ -44,12 +44,8 @@ Item {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignVCenter
             from: 1
-            to: screenBrightnessControl.brightnessMax
-            value: screenBrightnessControl.brightness
 
-            onMoved: {
-                screenBrightnessControl.brightness = value;
-            }
+            onMoved: root.moved()
         }
 
         Kirigami.Icon {
