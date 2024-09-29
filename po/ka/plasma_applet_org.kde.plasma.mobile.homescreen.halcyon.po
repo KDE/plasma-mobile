@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 00:39+0000\n"
+"POT-Creation-Date: 2024-09-29 00:41+0000\n"
 "PO-Revision-Date: 2022-08-15 15:07+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -44,7 +44,7 @@ msgstr "რჩეულებში ჩამატება"
 msgid "Applications"
 msgstr "აპლიკაციები"
 
-#: plugin/pinnedmodel.cpp:150
+#: plugin/pinnedmodel.cpp:151
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"

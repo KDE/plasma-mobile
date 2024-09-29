@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-24 00:39+0000\n"
+"POT-Creation-Date: 2024-09-29 00:41+0000\n"
 "PO-Revision-Date: 2022-07-21 18:54+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "Lisää suosikkeihin"
 msgid "Applications"
 msgstr "Sovellukset"
 
-#: plugin/pinnedmodel.cpp:150
+#: plugin/pinnedmodel.cpp:151
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"

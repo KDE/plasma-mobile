@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-30 00:40+0000\n"
+"POT-Creation-Date: 2024-09-29 00:41+0000\n"
 "PO-Revision-Date: 2024-06-30 08:54+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -44,7 +44,7 @@ msgid "Error removing connection: %1"
 msgstr "שגיאה בהסרת חיבור: %1"
 
 #: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
-#: modemdetails.cpp:428 modemdetails.cpp:458
+#: modemdetails.cpp:432 modemdetails.cpp:462
 #, kde-format
 msgid "Unknown"
 msgstr "לא ידוע"
@@ -109,7 +109,7 @@ msgstr "מושבת"
 msgid "Failed"
 msgstr "נכשל"
 
-#: modemdetails.cpp:121 modemdetails.cpp:461
+#: modemdetails.cpp:121 modemdetails.cpp:465
 #, kde-format
 msgid "POTS"
 msgstr "POTS"
@@ -279,115 +279,126 @@ msgstr "דרוש SIM אבל אין."
 msgid "SIM is available but unusable."
 msgstr "יש SIM אבל הוא בלתי שמיש."
 
-#: modemdetails.cpp:312
+#: modemdetails.cpp:291
+#, kde-format
+msgid "Unknown modem capabilities."
+msgstr ""
+
+#: modemdetails.cpp:293
+#, fuzzy, kde-format
+#| msgid "SIM is not locked"
+msgid "eSIM is not initialized."
+msgstr "ה־SIM לא נעול"
+
+#: modemdetails.cpp:316
 #, kde-format
 msgid "Not registered, not searching for new operator to register."
 msgstr "לא רשום, לא מתבצע חיפוש אחר ספק חדש לרישום."
 
-#: modemdetails.cpp:314
+#: modemdetails.cpp:318
 #, kde-format
 msgid "Registered on home network."
 msgstr "רשום ברשת הבית."
 
-#: modemdetails.cpp:316
+#: modemdetails.cpp:320
 #, kde-format
 msgid "Not registered, searching for new operator to register with."
 msgstr "לא רשום, מתבצע חיפוש אחר ספק חדש לרישום מולו."
 
-#: modemdetails.cpp:318
+#: modemdetails.cpp:322
 #, kde-format
 msgid "Registration denied."
 msgstr "הרישום נדחה."
 
-#: modemdetails.cpp:320
+#: modemdetails.cpp:324
 #, kde-format
 msgid "Unknown registration status."
 msgstr "מצב הרישום לא ידוע."
 
-#: modemdetails.cpp:322
+#: modemdetails.cpp:326
 #, kde-format
 msgid "Registered on a roaming network."
 msgstr "בוצע רישום מול רשת נדידה."
 
-#: modemdetails.cpp:324
+#: modemdetails.cpp:328
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
 msgstr "רשום במסלול „מסרונים בלבד”, רשת הבית."
 
-#: modemdetails.cpp:326
+#: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
 msgstr "רשום במסלול „מסרונים בלבד”, רשת נדידה."
 
-#: modemdetails.cpp:328
+#: modemdetails.cpp:332
 #, kde-format
 msgid "Emergency services only."
 msgstr "שירותי חירום בלבד."
 
-#: modemdetails.cpp:330
+#: modemdetails.cpp:334
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
 msgstr "רשום במסלול „אין העדפת נסיגת תזרים שיחות (CSFB)”, רשת הבית."
 
-#: modemdetails.cpp:332
+#: modemdetails.cpp:336
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
 msgstr "רשום במסלול „אין העדפת נסיגת תזרים שיחות (CSFB)”, רשת נדידה."
 
-#: modemdetails.cpp:334
+#: modemdetails.cpp:338
 #, kde-format
 msgid "Attached for access to Restricted Local Operator Services."
 msgstr "מצורף לגישה אל שירותי ספק מקומי מוגבלים."
 
-#: modemdetails.cpp:373
+#: modemdetails.cpp:377
 #, kde-format
 msgid "Scanning networks failed: %1"
 msgstr "סריקת הרשתות נכשלה: %1"
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
+#: modemdetails.cpp:434 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
 msgstr "כן"
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
+#: modemdetails.cpp:436 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
 msgstr "לא"
 
-#: modemdetails.cpp:434
+#: modemdetails.cpp:438
 #, kde-format
 msgid "GuessYes"
 msgstr "לנחש כן"
 
-#: modemdetails.cpp:436
+#: modemdetails.cpp:440
 #, kde-format
 msgid "GuessNo"
 msgstr "לנחש לא"
 
-#: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 ui/EditProfilePage.qml:63
+#: modemdetails.cpp:468 modemdetails.cpp:471 modemdetails.cpp:474
+#: modemdetails.cpp:477 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "2G"
 msgstr "דור 2"
 
-#: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
-#: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
-#: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
+#: modemdetails.cpp:480 modemdetails.cpp:483 modemdetails.cpp:486
+#: modemdetails.cpp:489 modemdetails.cpp:492 modemdetails.cpp:495
+#: modemdetails.cpp:498 modemdetails.cpp:501 modemdetails.cpp:504
 #, kde-format
 msgid "3G"
 msgstr "דור 3"
 
-#: modemdetails.cpp:503
+#: modemdetails.cpp:507 modemdetails.cpp:516 modemdetails.cpp:519
 #, kde-format
 msgid "4G"
 msgstr "דור 4"
 
-#: modemdetails.cpp:506
+#: modemdetails.cpp:510
 #, kde-format
 msgid "5G"
 msgstr "דור 5"
 
-#: modemdetails.cpp:509 ui/EditProfilePage.qml:63
+#: modemdetails.cpp:513 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Any"
 msgstr "כלשהו"

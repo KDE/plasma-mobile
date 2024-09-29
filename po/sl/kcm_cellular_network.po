@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-30 00:40+0000\n"
+"POT-Creation-Date: 2024-09-29 00:41+0000\n"
 "PO-Revision-Date: 2024-06-30 07:56+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -44,7 +44,7 @@ msgid "Error removing connection: %1"
 msgstr "Napaka pri odstranjevanju povezave: %1"
 
 #: modem.cpp:522 modemdetails.cpp:118 modemdetails.cpp:220 modemdetails.cpp:252
-#: modemdetails.cpp:428 modemdetails.cpp:458
+#: modemdetails.cpp:432 modemdetails.cpp:462
 #, kde-format
 msgid "Unknown"
 msgstr "Neznano"
@@ -109,7 +109,7 @@ msgstr "Deaktivirano"
 msgid "Failed"
 msgstr "Spodletelo"
 
-#: modemdetails.cpp:121 modemdetails.cpp:461
+#: modemdetails.cpp:121 modemdetails.cpp:465
 #, kde-format
 msgid "POTS"
 msgstr "POTS"
@@ -279,115 +279,126 @@ msgstr "SIM kartica je obvezna, a manjka."
 msgid "SIM is available but unusable."
 msgstr "SIM kartica je na voljo, a je neuporabna."
 
-#: modemdetails.cpp:312
+#: modemdetails.cpp:291
+#, kde-format
+msgid "Unknown modem capabilities."
+msgstr ""
+
+#: modemdetails.cpp:293
+#, fuzzy, kde-format
+#| msgid "SIM is not locked"
+msgid "eSIM is not initialized."
+msgstr "SIM ni zaklenjena"
+
+#: modemdetails.cpp:316
 #, kde-format
 msgid "Not registered, not searching for new operator to register."
 msgstr "Ni registriran, ne išče novega operaterja za registracijo."
 
-#: modemdetails.cpp:314
+#: modemdetails.cpp:318
 #, kde-format
 msgid "Registered on home network."
 msgstr "Registrirani v domače omrežje."
 
-#: modemdetails.cpp:316
+#: modemdetails.cpp:320
 #, kde-format
 msgid "Not registered, searching for new operator to register with."
 msgstr "Ni registrirano; iskanje novega operaterja za registracijo."
 
-#: modemdetails.cpp:318
+#: modemdetails.cpp:322
 #, kde-format
 msgid "Registration denied."
 msgstr "Registracija zavrnjena."
 
-#: modemdetails.cpp:320
+#: modemdetails.cpp:324
 #, kde-format
 msgid "Unknown registration status."
 msgstr "Neznano stanje registracije."
 
-#: modemdetails.cpp:322
+#: modemdetails.cpp:326
 #, kde-format
 msgid "Registered on a roaming network."
 msgstr "Registriran v gostujočem omrežju."
 
-#: modemdetails.cpp:324
+#: modemdetails.cpp:328
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
 msgstr "Registriran \"Samo za SMS\" v domačem omrežju."
 
-#: modemdetails.cpp:326
+#: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
 msgstr "Registriran \"Samo za SMS\" v gostujočem omrežju."
 
-#: modemdetails.cpp:328
+#: modemdetails.cpp:332
 #, kde-format
 msgid "Emergency services only."
 msgstr "Samo nujne storitve v sili."
 
-#: modemdetails.cpp:330
+#: modemdetails.cpp:334
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
 msgstr "Registriran za neprednostno CSFB domače omrežje."
 
-#: modemdetails.cpp:332
+#: modemdetails.cpp:336
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
 msgstr "Registriran za neprednostno CSFB gostujoče omrežje."
 
-#: modemdetails.cpp:334
+#: modemdetails.cpp:338
 #, kde-format
 msgid "Attached for access to Restricted Local Operator Services."
 msgstr "Priključen za dostop do omejenih lokalnih operaterskih storitev."
 
-#: modemdetails.cpp:373
+#: modemdetails.cpp:377
 #, kde-format
 msgid "Scanning networks failed: %1"
 msgstr "Prečesavanje omrežij ni uspelo: %1"
 
-#: modemdetails.cpp:430 ui/ModemPage.qml:176 ui/SimPage.qml:119
+#: modemdetails.cpp:434 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "Yes"
 msgstr "Da"
 
-#: modemdetails.cpp:432 ui/ModemPage.qml:176 ui/SimPage.qml:119
+#: modemdetails.cpp:436 ui/ModemPage.qml:176 ui/SimPage.qml:119
 #, kde-format
 msgid "No"
 msgstr "Ne"
 
-#: modemdetails.cpp:434
+#: modemdetails.cpp:438
 #, kde-format
 msgid "GuessYes"
 msgstr "Se zdi Da"
 
-#: modemdetails.cpp:436
+#: modemdetails.cpp:440
 #, kde-format
 msgid "GuessNo"
 msgstr "Se zdi Ne"
 
-#: modemdetails.cpp:464 modemdetails.cpp:467 modemdetails.cpp:470
-#: modemdetails.cpp:473 ui/EditProfilePage.qml:63
+#: modemdetails.cpp:468 modemdetails.cpp:471 modemdetails.cpp:474
+#: modemdetails.cpp:477 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "2G"
 msgstr "2G"
 
-#: modemdetails.cpp:476 modemdetails.cpp:479 modemdetails.cpp:482
-#: modemdetails.cpp:485 modemdetails.cpp:488 modemdetails.cpp:491
-#: modemdetails.cpp:494 modemdetails.cpp:497 modemdetails.cpp:500
+#: modemdetails.cpp:480 modemdetails.cpp:483 modemdetails.cpp:486
+#: modemdetails.cpp:489 modemdetails.cpp:492 modemdetails.cpp:495
+#: modemdetails.cpp:498 modemdetails.cpp:501 modemdetails.cpp:504
 #, kde-format
 msgid "3G"
 msgstr "3G"
 
-#: modemdetails.cpp:503
+#: modemdetails.cpp:507 modemdetails.cpp:516 modemdetails.cpp:519
 #, kde-format
 msgid "4G"
 msgstr "4G"
 
-#: modemdetails.cpp:506
+#: modemdetails.cpp:510
 #, kde-format
 msgid "5G"
 msgstr "5G"
 
-#: modemdetails.cpp:509 ui/EditProfilePage.qml:63
+#: modemdetails.cpp:513 ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Any"
 msgstr "Poljubno"
