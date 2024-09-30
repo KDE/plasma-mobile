@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-07-02 21:49+0200\n"
+"PO-Revision-Date: 2024-09-29 08:19+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -281,13 +281,12 @@ msgstr "SIM-kort är tillgängligt men oanvändbart"
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Okända modemfunktioner."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM-kortet är inte låst"
+msgstr "eSIM är inte initierat"
 
 #: modemdetails.cpp:316
 #, kde-format
