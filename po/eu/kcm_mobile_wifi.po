@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 00:41+0000\n"
-"PO-Revision-Date: 2024-07-04 13:04+0200\n"
+"PO-Revision-Date: 2024-09-30 21:25+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -56,8 +56,7 @@ msgid "Save"
 msgstr "Gorde"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "Orokorra"
@@ -73,17 +72,15 @@ msgid "Hidden Network"
 msgstr "Ezkutuko sarea"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "Segurtasuna"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Segurtasun mota:"
+msgstr "Segurtasun mota"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -121,10 +118,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 enpresakoa"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Pasahitza:"
+msgstr "Pasahitza"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -157,8 +153,7 @@ msgid "Protected EAP"
 msgstr "Babestutako EAP"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "IP ezarpenak"

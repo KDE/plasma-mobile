@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-07-04 13:02+0200\n"
+"PO-Revision-Date: 2024-09-30 21:25+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -284,13 +284,12 @@ msgstr "SIMa erabilgarri dago, baina ezin da erabili."
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Modemaren gaitasun ezezagunak."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIMa ez dago giltzatuta"
+msgstr "eSIM ez dago hasieratuta."
 
 #: modemdetails.cpp:316
 #, kde-format

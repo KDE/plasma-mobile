@@ -284,10 +284,9 @@ msgid "Unknown modem capabilities."
 msgstr ""
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM není uzamčena"
+msgstr ""
 
 #: modemdetails.cpp:316
 #, kde-format
