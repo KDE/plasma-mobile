@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-13 02:34+0000\n"
-"PO-Revision-Date: 2024-06-29 15:48+0200\n"
+"PO-Revision-Date: 2024-09-28 19:20+0200\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -53,8 +53,7 @@ msgid "Save"
 msgstr "Salva"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "Generale"
@@ -70,17 +69,15 @@ msgid "Hidden Network"
 msgstr "Rete nascosta"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "Sicurezza"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Tipo di sicurezza:"
+msgstr "Tipo di protezione"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -118,10 +115,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Password:"
+msgstr "Password"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -154,8 +150,7 @@ msgid "Protected EAP"
 msgstr "EAP protetto"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "Impostazioni IP"
