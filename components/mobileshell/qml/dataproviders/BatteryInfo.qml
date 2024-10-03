@@ -1,4 +1,5 @@
 /*
+ *  SPDX-FileCopyrightText: 2024 Sebastian Kügler <sebas@kde.org>
  *  SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
  *  SPDX-FileCopyrightText: 2019 Marco Martin <mart@kde.org>
  *
@@ -8,18 +9,17 @@
 pragma Singleton
 
 import QtQuick
-import QtQuick.Layouts
 
-import org.kde.plasma.plasma5support as P5Support
-import org.kde.plasma.workspace.components as PW
+import org.kde.plasma.private.battery
 
-QtObject {
-    property bool isVisible: pmSource.data["Battery"]["Has Cumulative"]
-    property int percent: pmSource.data["Battery"]["Percent"]
-    property bool pluggedIn: pmSource.data["AC Adapter"] ? pmSource.data["AC Adapter"]["Plugged in"] : false
+Item {
 
-    property P5Support.DataSource pmSource: P5Support.DataSource {
-        engine: "powermanagement"
-        connectedSources: ["Battery", "AC Adapter"]
+    BatteryControlModel {
+        id: batteryControl
     }
+
+    property bool isVisible: batteryControl.hasInternalBatteries
+    property int percent: batteryControl.percent
+    property bool pluggedIn: batteryControl.pluggedIn
+    property alias batteries: batteryControl
 }
