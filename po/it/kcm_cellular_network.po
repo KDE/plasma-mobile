@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-06-30 13:39+0200\n"
+"PO-Revision-Date: 2024-09-30 19:05+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -282,13 +282,12 @@ msgstr "La SIM è disponibile, ma inutilizzabile."
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Capacità del modem sconosciute."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "La SIM non è bloccata"
+msgstr "La eSIM non è inizializzata."
 
 #: modemdetails.cpp:316
 #, kde-format
