@@ -21,4 +21,18 @@ Item {
     property bool isVisible: batteryControl.hasInternalBatteries
     property int percent: batteryControl.percent
     property bool pluggedIn: batteryControl.pluggedIn
+    property alias batteries: batteryControl
+
+
+    onPluggedInChanged: {
+        console.log("++..............Battery is now plugged in? " + (pluggedIn ? "Yes" : "No"))
+    }
+
+    Component.onCompleted: {
+
+        console.log("BatteryInfo NEW created.")
+        //console.log("Number of batteries: " + batteryControl.size())
+        console.log("batteryControl.percent: " + batteryControl.percent)
+    }
 }
+

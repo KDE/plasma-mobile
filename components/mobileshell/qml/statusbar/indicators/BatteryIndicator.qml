@@ -19,24 +19,70 @@ RowLayout {
 
     visible: MobileShell.BatteryInfo.isVisible
 
-    PW.BatteryIcon {
-        id: battery
-        Layout.preferredWidth: height
-        Layout.fillHeight: true
-        hasBattery: true
-        percent: MobileShell.BatteryInfo.percent
-        pluggedIn: MobileShell.BatteryInfo.pluggedIn
 
-        height: batteryLabel.height
-        width: batteryLabel.height
-    }
+    ListView {
+        id: batteryRepeater
+        spacing: root.elementSpacing
 
-    PlasmaComponents.Label {
-        id: batteryLabel
-        text: i18n("%1%", MobileShell.BatteryInfo.percent)
+        model: MobileShell.BatteryInfo.batteries
+
+        orientation: ListView.Horizontal
         Layout.alignment: Qt.AlignVCenter
+        Layout.preferredWidth: childrenRect.width
 
-        color: Kirigami.Theme.textColor
-        font.pixelSize: textPixelSize
+        Layout.fillHeight: true
+
+        delegate: RowLayout {
+
+            /* Battery properties (from batterycontrol.h):
+             *     enum BatteryRoles {
+                *  Percent = Qt::UserRole + 1,
+                *  Capacity,
+                *  Energy,
+                *  PluggedIn,
+                *  IsPowerSupply,
+                *  ChargeState,
+                *  PrettyName,
+                *  Type }
+                */
+
+            Layout.preferredWidth: childrenRect.width
+            Layout.fillHeight: true
+
+            height: batteryLabel.height
+            width: childrenRect.width + (root.elementSpacing * index)
+
+            PW.BatteryIcon {
+                id: battery
+
+                Layout.fillHeight: true
+                height: batteryLabel.height
+                width: batteryLabel.height
+
+                hasBattery: true
+                percent: Percent
+                pluggedIn: PluggedIn
+
+            }
+
+            PlasmaComponents.Label {
+                id: batteryLabel
+                text: i18n("%1%", Percent)
+                Layout.alignment: Qt.AlignVCenter
+
+                color: Kirigami.Theme.textColor
+                font.pixelSize: textPixelSize
+            }
+
+            Component.onCompleted: {
+                console.log("======> Created Battery " + index);
+                console.log("        PrettyName: " + PrettyName);
+                console.log("        Percent:    " + Percent);
+                console.log("        Type:       " + Type);
+                console.log("        Energy:     " + Energy);
+                console.log("        PluggedIn:  " + PluggedIn);
+                console.log("        ChargeState:  " + ChargeState);
+            }
+        }
     }
 }

@@ -172,7 +172,7 @@ Item {
                         spacing: root.elementSpacing
                         textPixelSize: root.textPixelSize
                         implicitHeight: mainRow.rowHeight
-                        Layout.preferredWidth: height
+                        Layout.preferredWidth: height * 6
                     }
                 }
             }
