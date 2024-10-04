@@ -13,6 +13,7 @@
 
 #include <QDebug>
 #include <QOrientationSensor>
+#include <QTimer>
 
 ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
     : QObject{parent}
@@ -58,6 +59,20 @@ bool ScreenRotationUtil::autoScreenRotationEnabled()
 
 void ScreenRotationUtil::setAutoScreenRotationEnabled(bool value)
 {
+    // Don't execute immediately, in case the screen rotation
+    // deletes the caller mid-function call, causing a crash.
+    QTimer::singleShot(0, this, [this, value]() {
+        actuallySetAutoScreenRotationEnabled(value);
+    });
+}
+
+bool ScreenRotationUtil::isAvailable()
+{
+    return m_sensor->connectToBackend();
+}
+
+void ScreenRotationUtil::actuallySetAutoScreenRotationEnabled(bool value)
+{
     if (!m_config) {
         return;
     }
@@ -75,9 +90,4 @@ void ScreenRotationUtil::setAutoScreenRotationEnabled(bool value)
     setop->exec();
 
     Q_EMIT autoScreenRotationEnabledChanged();
-}
-
-bool ScreenRotationUtil::isAvailable()
-{
-    return m_sensor->connectToBackend();
 }
