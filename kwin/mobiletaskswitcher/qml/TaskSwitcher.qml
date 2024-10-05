@@ -423,7 +423,7 @@ FocusScope {
                 Layout.alignment: Qt.AlignHCenter
                 implicitWidth: Kirigami.Units.iconSizes.large
                 implicitHeight: Kirigami.Units.iconSizes.large
-                source: "window"
+                source: "edit-none-symbolic"
                 color: "white"
             }
 
