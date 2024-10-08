@@ -101,11 +101,37 @@ Item {
         Label {
             Layout.fillWidth: true
 
-            text: i18n("Welcome to<br/><b>%1</b>", InitialStartUtil.distroName)
+            text: i18n("Welcome to<br/><b>Plasma Mobile</b>")
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
 
             font.pointSize: 18
+            color: "white"
+        }
+
+    }
+
+    ColumnLayout {
+        opacity: root.contentOpacity
+        spacing: Kirigami.Units.largeSpacing
+
+	anchors {
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+            leftMargin: Kirigami.Units.gridUnit * 4
+            rightMargin: Kirigami.Units.gridUnit * 4
+            bottomMargin: Kirigami.Units.gridUnit * 2
+        }
+
+
+        Kirigami.Heading {
+            Layout.fillWidth: true
+            text: i18n("Powered by<br/><b>%1</b>", InitialStartUtil.distroName)
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+
+            level: 5
             color: "white"
         }
     }
