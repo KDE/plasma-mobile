@@ -55,6 +55,7 @@ Controls.AbstractButton {
                 }
             }
         }
+
         NumberAnimation on opacity {
             id: opacityAnimator
             duration: Kirigami.Units.shortDuration
@@ -72,6 +73,11 @@ Controls.AbstractButton {
 
     Kirigami.Icon {
         id: icon
+
+        // Workaround for icon colors being grey when button is disabled
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: button.Kirigami.Theme.colorSet
+
         readonly property real side: Math.min(button.width, button.height)
         anchors {
             fill: parent
