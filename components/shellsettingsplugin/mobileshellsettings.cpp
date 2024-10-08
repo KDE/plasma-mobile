@@ -212,14 +212,33 @@ void MobileShellSettings::updateNavigationBarsInPlasma()
 
     QString createDesktopPanelScript = R"(
             if (knownPanelTypes.includes("org.kde.panel")) {
-                loadTemplate("org.kde.plasma.mobile.defaultDesktopPanel");
+                // Create a panel for each screen
+                for (let i = 0; i < screenCount; i++) {
+                    loadTemplate("org.kde.plasma.mobile.defaultDesktopPanel");
+                }
+
+                let panelsList = panels();
+                let curScreen = 0;
+
+                // Set the location and screen that each panel is on
+                for (let i = 0; i < panelsList.length; i++) {
+                    let panel = panelsList[i];
+                    if (panel.type === "org.kde.panel") {
+                        panel.location = 'bottom';
+
+                        if (panel.screen !== curScreen) {
+                            panel.screen = curScreen;
+                        }
+                        curScreen++;
+                    }
+                }
             }
         )";
 
     // If the desktop panel doesn't get created (ex. Plasma Desktop is not installed), fallback to navbar
     QString checkIfDesktopPanelCreatedScript = R"(
             if (!knownPanelTypes.includes("org.kde.panel")) {
-                print("Plasma Desktop is not installed, cannot add desktop panel.")
+                print("Plasma Desktop is not installed, cannot add desktop panel.");
                 loadTemplate("org.kde.plasma.mobile.defaultNavigationPanel");
             }
         )";
