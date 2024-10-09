@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-04-21 21:28+0300\n"
+"PO-Revision-Date: 2024-10-05 11:47+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -282,13 +282,12 @@ msgstr "SIM ir pieejama, bet nav izmantojama."
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Nezināmas modema spējas."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM nav slēgta"
+msgstr "eSIM nav inicializēta."
 
 #: modemdetails.cpp:316
 #, kde-format
@@ -539,10 +538,9 @@ msgid "Edit APN"
 msgstr "Rediģēt APN"
 
 #: ui/EditProfilePage.qml:15
-#, fuzzy, kde-format
-#| msgid "New PIN"
+#, kde-format
 msgid "New APN"
-msgstr "Jaunais PIN"
+msgstr "Jauns APN"
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
@@ -597,7 +595,7 @@ msgstr "Tikai 2G"
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "Saglabāt profilu"
 
 #: ui/main.qml:52
 #, kde-format

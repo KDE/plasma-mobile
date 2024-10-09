@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-01 00:39+0000\n"
+"POT-Creation-Date: 2024-10-09 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 17:21+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -235,11 +235,18 @@ msgid "Password…"
 msgstr "Parole..."
 
 #: qml/LandingComponent.qml:104
-#, kde-format
-msgid "Welcome to<br/><b>%1</b>"
+#, fuzzy, kde-format
+#| msgid "Welcome to<br/><b>%1</b>"
+msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Laipni lūgti<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:130
+#, fuzzy, kde-format
+#| msgid "Welcome to<br/><b>%1</b>"
+msgid "Powered by<br/><b>%1</b>"
+msgstr "Laipni lūgti<br/><b>%1</b>"
+
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Uz priekšu"

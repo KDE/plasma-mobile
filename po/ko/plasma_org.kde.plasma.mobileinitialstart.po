@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-01 00:39+0000\n"
+"POT-Creation-Date: 2024-10-09 00:41+0000\n"
 "PO-Revision-Date: 2024-02-09 19:37+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -234,11 +234,18 @@ msgid "Password…"
 msgstr "암호…"
 
 #: qml/LandingComponent.qml:104
-#, kde-format
-msgid "Welcome to<br/><b>%1</b>"
+#, fuzzy, kde-format
+#| msgid "Welcome to<br/><b>%1</b>"
+msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "<b>%1</b>에<br/>오신 것을 환영합니다"
 
-#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:130
+#, fuzzy, kde-format
+#| msgid "Welcome to<br/><b>%1</b>"
+msgid "Powered by<br/><b>%1</b>"
+msgstr "<b>%1</b>에<br/>오신 것을 환영합니다"
+
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "다음"

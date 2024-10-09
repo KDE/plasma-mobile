@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-01 00:39+0000\n"
+"POT-Creation-Date: 2024-10-09 00:41+0000\n"
 "PO-Revision-Date: 2023-07-28 15:18+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -237,10 +237,16 @@ msgstr "Heslo..."
 #: qml/LandingComponent.qml:104
 #, fuzzy, kde-format
 #| msgid "Welcome to <b>Plasma</b>"
-msgid "Welcome to<br/><b>%1</b>"
+msgid "Welcome to<br/><b>Plasma Mobile</b>"
 msgstr "Vitajte v <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:125 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:130
+#, fuzzy, kde-format
+#| msgid "Welcome to <b>Plasma</b>"
+msgid "Powered by<br/><b>%1</b>"
+msgstr "Vitajte v <b>Plasma</b>"
+
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
 msgstr "Ďalej"
