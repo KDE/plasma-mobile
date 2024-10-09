@@ -16,6 +16,7 @@ class HardwareInfo : public QObject
     Q_PROPERTY(QString processors READ processors CONSTANT)
     Q_PROPERTY(int processorCount READ processorCount CONSTANT)
     Q_PROPERTY(QString memory READ memory CONSTANT)
+    Q_PROPERTY(QString gpu READ gpu CONSTANT)
 
 public:
     HardwareInfo(QObject *parent = nullptr);
@@ -23,6 +24,7 @@ public:
     QString processors() const;
     int processorCount() const;
     QString memory() const;
+    QString gpu() const;
 };
 
 #endif // HARDWAREINFO_H

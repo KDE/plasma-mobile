@@ -15,12 +15,25 @@
 
 #include <KLocalizedString>
 
+#include <QOffscreenSurface>
+#include <QOpenGLContext>
+#include <QOpenGLFunctions>
+
 #ifdef Q_OS_LINUX
 #include <sys/sysinfo.h>
 #elif defined(Q_OS_FREEBSD)
 #include <sys/sysctl.h>
 #include <sys/types.h>
 #endif
+
+static QString FancyString_fromUgly(const QString &input)
+{
+    QString fancy = input;
+    fancy.replace(QStringLiteral("(TM)"), QChar(8482));
+    fancy.replace(QStringLiteral("(R)"), QChar(174));
+    fancy = fancy.simplified();
+    return fancy;
+}
 
 HardwareInfo::HardwareInfo(QObject *parent)
     : QObject(parent)
@@ -54,9 +67,7 @@ QString HardwareInfo::processors() const
     for (auto it = processorMap.constBegin(); it != processorMap.constEnd(); ++it) {
         const int count = it.value();
         QString name = it.key();
-        name.replace(QStringLiteral("(TM)"), QChar(8482));
-        name.replace(QStringLiteral("(R)"), QChar(174));
-        name = name.simplified();
+        name = FancyString_fromUgly(name);
         names.append(QStringLiteral("%1 × %2").arg(count).arg(name));
     }
 
@@ -86,4 +97,29 @@ QString HardwareInfo::memory() const
 #endif
 
     return KFormat().formatByteSize(totalRam);
+}
+
+QString HardwareInfo::gpu() const
+{
+    QString gpuName;
+    QOpenGLContext context;
+    QOffscreenSurface surface;
+
+    surface.create();
+    if (!context.create()) {
+        return gpuName;
+    }
+
+    if (context.makeCurrent(&surface)) {
+        gpuName = QString::fromUtf8(reinterpret_cast<const char *>(context.functions()->glGetString(GL_RENDERER)));
+        gpuName = FancyString_fromUgly(gpuName);
+        // It seems the renderer value may have excess information in parentheses, strip that
+        gpuName = gpuName.mid(0, gpuName.indexOf('('));
+        // Leads to trailing space in my case, don't know whether that is happening
+        // everywhere, though. Thus removing trailing spaces separately.
+        gpuName = gpuName.trimmed();
+        context.doneCurrent();
+    }
+
+    return gpuName;
 }

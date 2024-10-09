@@ -121,6 +121,13 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormTextDelegate {
+                text: i18n("GPU");
+                description: kcm.hardwareInfo.gpu
+            }
         }
     }
 }
