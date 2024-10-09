@@ -10,23 +10,12 @@
 
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
+#include <QProcess>
 
 PrepareUtil::PrepareUtil(QObject *parent)
     : QObject{parent}
     , m_colorsSettings{new ColorsSettings(this)}
 {
-    m_brightnessInterface =
-        new org::kde::Solid::PowerManagement::Actions::BrightnessControl(QStringLiteral("org.kde.Solid.PowerManagement"),
-                                                                         QStringLiteral("/org/kde/Solid/PowerManagement/Actions/BrightnessControl"),
-                                                                         QDBusConnection::sessionBus(),
-                                                                         this);
-
-    fetchBrightness();
-    fetchMaxBrightness();
-
-    connect(m_brightnessInterface, &org::kde::Solid::PowerManagement::Actions::BrightnessControl::brightnessChanged, this, &PrepareUtil::fetchBrightness);
-    connect(m_brightnessInterface, &org::kde::Solid::PowerManagement::Actions::BrightnessControl::brightnessMaxChanged, this, &PrepareUtil::fetchMaxBrightness);
-
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
 
@@ -43,20 +32,6 @@ PrepareUtil::PrepareUtil(QObject *parent)
 
         m_scaling = scaling;
         Q_EMIT scalingChanged();
-    });
-
-    // watch for brightness interface
-    m_brightnessInterfaceWatcher = new QDBusServiceWatcher(QStringLiteral("org.kde.Solid.PowerManagement.Actions.BrightnessControl"),
-                                                           QDBusConnection::sessionBus(),
-                                                           QDBusServiceWatcher::WatchForOwnerChange,
-                                                           this);
-
-    connect(m_brightnessInterfaceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this]() -> void {
-        Q_EMIT brightnessAvailableChanged();
-    });
-
-    connect(m_brightnessInterfaceWatcher, &QDBusServiceWatcher::serviceUnregistered, this, [this]() -> void {
-        Q_EMIT brightnessAvailableChanged();
     });
 
     // set property initially
@@ -93,26 +68,6 @@ QStringList PrepareUtil::scalingOptions()
     return {"50%", "75%", "100%", "125%", "150%", "175%", "200%", "225%", "250%", "275%", "300%"};
 }
 
-int PrepareUtil::brightness() const
-{
-    return m_brightness;
-}
-
-void PrepareUtil::setBrightness(int brightness)
-{
-    m_brightnessInterface->setBrightness(brightness);
-}
-
-int PrepareUtil::maxBrightness() const
-{
-    return m_maxBrightness;
-}
-
-bool PrepareUtil::brightnessAvailable() const
-{
-    return m_brightnessInterface->isValid();
-}
-
 bool PrepareUtil::usingDarkTheme() const
 {
     return m_usingDarkTheme;
@@ -129,38 +84,4 @@ void PrepareUtil::setUsingDarkTheme(bool usingDarkTheme)
 
     m_usingDarkTheme = usingDarkTheme;
     Q_EMIT usingDarkThemeChanged();
-}
-
-void PrepareUtil::fetchBrightness()
-{
-    QDBusPendingReply<int> reply = m_brightnessInterface->brightness();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<int> reply = *watcher;
-        if (reply.isError()) {
-            qWarning() << "Getting brightness failed:" << reply.error().name() << reply.error().message();
-        } else if (m_brightness != reply.value()) {
-            m_brightness = reply.value();
-            Q_EMIT brightnessChanged();
-        }
-        watcher->deleteLater();
-    });
-}
-
-void PrepareUtil::fetchMaxBrightness()
-{
-    QDBusPendingReply<int> reply = m_brightnessInterface->brightnessMax();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
-
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<int> reply = *watcher;
-        if (reply.isError()) {
-            qWarning() << "Getting max brightness failed:" << reply.error().name() << reply.error().message();
-        } else if (m_maxBrightness != reply.value()) {
-            m_maxBrightness = reply.value();
-            Q_EMIT maxBrightnessChanged();
-        }
-        watcher->deleteLater();
-    });
 }

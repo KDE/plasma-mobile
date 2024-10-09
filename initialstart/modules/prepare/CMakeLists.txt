@@ -1,12 +1,9 @@
 # SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-qt_add_dbus_interfaces(DBUS_SRCS dbus/org.kde.Solid.PowerManagement.Actions.BrightnessControl.xml)
-
 set(prepareplugin_SRCS
     prepareplugin.cpp
     prepareutil.cpp
-    ${DBUS_SRCS}
 )
 
 kconfig_add_kcfg_files(prepareplugin_SRCS colorssettings.kcfgc GENERATE_MOC)
