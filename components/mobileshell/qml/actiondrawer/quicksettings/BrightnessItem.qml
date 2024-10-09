@@ -12,16 +12,15 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PC3
+import org.kde.plasma.private.mobileshell.screenbrightnessplugin as ScreenBrightness
 
 Item {
     id: root
-
     implicitHeight: brightnessRow.implicitHeight
 
-    property alias value: brightnessSlider.value
-    property alias maximumValue: brightnessSlider.to
-
-    signal moved()
+    ScreenBrightness.ScreenBrightnessUtil {
+        id: screenBrightness
+    }
 
     RowLayout {
         id: brightnessRow
@@ -42,10 +41,18 @@ Item {
         PC3.Slider {
             id: brightnessSlider
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignVCenter
             from: 1
+            to: screenBrightness.maxBrightness
+            value: screenBrightness.brightness
+            onMoved: screenBrightness.brightness = value;
 
-            onMoved: root.moved()
+            // HACK: for some reason, the slider initial value doesn't set without being done after the component completes loading
+            Timer {
+                interval: 0
+                running: true
+                repeat: false
+                onTriggered: brightnessSlider.value = Qt.binding(() => screenBrightness.brightness)
+            }
         }
 
         Kirigami.Icon {
