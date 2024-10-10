@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-09 00:41+0000\n"
-"PO-Revision-Date: 2023-12-09 22:12+0300\n"
+"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"PO-Revision-Date: 2024-10-09 10:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.01.80\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -168,29 +168,29 @@ msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Aygıtınız artık hazır. <br /><br /><b>%1</b> sisteminin keyfini çıkarın!"
 
-#: modules/prepare/package/contents/ui/main.qml:14
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "Başlamadan önce…"
 
-#: modules/prepare/package/contents/ui/main.qml:40
+#: modules/prepare/package/contents/ui/main.qml:45
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 "Kurulum süreci için ekran parlaklığını sizin için rahat bir düzeye ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:96
+#: modules/prepare/package/contents/ui/main.qml:101
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ekrandaki ögelerin boyutunu ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:107
+#: modules/prepare/package/contents/ui/main.qml:112
 #, kde-format
 msgid "Display Scaling"
 msgstr "Görüntü Ölçekleme"
 
-#: modules/prepare/package/contents/ui/main.qml:125
+#: modules/prepare/package/contents/ui/main.qml:130
 #, kde-format
 msgid "Dark Theme"
 msgstr "Koyu Tema"
@@ -236,16 +236,14 @@ msgid "Password…"
 msgstr "Parola…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "<b>%1</b> sistemine hoş geldiniz"
+msgstr "<b>Plasma Cep</b>’e hoş geldiniz"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "<b>%1</b> sistemine hoş geldiniz"
+msgstr "<b>%1</b> temelli"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format

@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.mobileinitialstart.po to Catalan
-# Copyright (C) 2023 This_file_is_part_of_KDE
+# Copyright (C) 2023-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-09 00:41+0000\n"
-"PO-Revision-Date: 2023-11-10 11:59+0100\n"
+"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"PO-Revision-Date: 2024-10-09 10:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -170,12 +170,12 @@ msgstr "Finalitzat!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "El dispositiu ara està llest. <br /><br />Gaudiu el <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:14
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "Abans de començar…"
 
-#: modules/prepare/package/contents/ui/main.qml:40
+#: modules/prepare/package/contents/ui/main.qml:45
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -183,17 +183,17 @@ msgstr ""
 "Ajusteu la lluminositat de la pantalla perquè sigui confortable durant el "
 "procés d'instal·lació."
 
-#: modules/prepare/package/contents/ui/main.qml:96
+#: modules/prepare/package/contents/ui/main.qml:101
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ajusteu la mida dels elements a la pantalla."
 
-#: modules/prepare/package/contents/ui/main.qml:107
+#: modules/prepare/package/contents/ui/main.qml:112
 #, kde-format
 msgid "Display Scaling"
 msgstr "Escalat de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:125
+#: modules/prepare/package/contents/ui/main.qml:130
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema fosc"
@@ -239,16 +239,14 @@ msgid "Password…"
 msgstr "Contrasenya…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "Us donem la benvinguda al <b>%1</b>"
+msgstr "Us donem la benvinguda al<br/><b>Plasma Mobile</b>"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "Us donem la benvinguda al <b>%1</b>"
+msgstr "Funciona amb<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-09 00:41+0000\n"
+"POT-Creation-Date: 2024-10-10 00:41+0000\n"
 "PO-Revision-Date: 2023-11-10 09:09+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -168,29 +168,29 @@ msgstr "Končano!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Vaša naprava je zdaj pripravljena.<br /><br />Uživajte <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:14
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "Preden začnemo…"
 
-#: modules/prepare/package/contents/ui/main.qml:40
+#: modules/prepare/package/contents/ui/main.qml:45
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 "Prilagodite svetlost zaslona, da boste lahko prijetno izvedli namestitev."
 
-#: modules/prepare/package/contents/ui/main.qml:96
+#: modules/prepare/package/contents/ui/main.qml:101
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Prilagodite velikost elementov na zaslonu."
 
-#: modules/prepare/package/contents/ui/main.qml:107
+#: modules/prepare/package/contents/ui/main.qml:112
 #, kde-format
 msgid "Display Scaling"
 msgstr "Prikaži mersko lestvico"
 
-#: modules/prepare/package/contents/ui/main.qml:125
+#: modules/prepare/package/contents/ui/main.qml:130
 #, kde-format
 msgid "Dark Theme"
 msgstr "Temna tema"

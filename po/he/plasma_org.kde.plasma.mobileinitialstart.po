@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-09 00:41+0000\n"
-"PO-Revision-Date: 2024-03-07 12:05+0200\n"
+"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"PO-Revision-Date: 2024-10-09 22:59+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -168,28 +168,28 @@ msgstr "סיימנו!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "המכשיר שלך מוכן כעת. <br /><br />בהצלחה <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:14
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "לפני שנתחיל…"
 
-#: modules/prepare/package/contents/ui/main.qml:40
+#: modules/prepare/package/contents/ui/main.qml:45
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "אפשר לכוון את בהירות המסך לנוחות מרבית בתהליך ההתקנה."
 
-#: modules/prepare/package/contents/ui/main.qml:96
+#: modules/prepare/package/contents/ui/main.qml:101
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "אפשר לכוון את גודל הרכיבים שעל המסך."
 
-#: modules/prepare/package/contents/ui/main.qml:107
+#: modules/prepare/package/contents/ui/main.qml:112
 #, kde-format
 msgid "Display Scaling"
 msgstr "קנה מידה לתצוגה"
 
-#: modules/prepare/package/contents/ui/main.qml:125
+#: modules/prepare/package/contents/ui/main.qml:130
 #, kde-format
 msgid "Dark Theme"
 msgstr "ערכת עיצוב כהה"
@@ -235,16 +235,14 @@ msgid "Password…"
 msgstr "סיסמה…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "ברוך בואך אל<br/><b>%1</b>"
+msgstr "ברוך בואך אל<br/><b>פלזמה לניידים</b>"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "ברוך בואך אל<br/><b>%1</b>"
+msgstr "פועל על גבי<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format

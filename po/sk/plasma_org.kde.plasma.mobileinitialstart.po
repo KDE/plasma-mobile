@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-09 00:41+0000\n"
+"POT-Creation-Date: 2024-10-10 00:41+0000\n"
 "PO-Revision-Date: 2023-07-28 15:18+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -168,28 +168,28 @@ msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Vaše zariadenie je teraz pripravené. <br /><br />Užite si <b>Plasma 6.0</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:14
+#: modules/prepare/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Before we get started…"
 msgstr "Skôr než začneme..."
 
-#: modules/prepare/package/contents/ui/main.qml:40
+#: modules/prepare/package/contents/ui/main.qml:45
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "Upravte jas obrazovky tak, aby bol pohodlný pre proces inštalácie."
 
-#: modules/prepare/package/contents/ui/main.qml:96
+#: modules/prepare/package/contents/ui/main.qml:101
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Upravte veľkosť prvkov na obrazovke."
 
-#: modules/prepare/package/contents/ui/main.qml:107
+#: modules/prepare/package/contents/ui/main.qml:112
 #, kde-format
 msgid "Display Scaling"
 msgstr "Mierka zobrazenia displeja"
 
-#: modules/prepare/package/contents/ui/main.qml:125
+#: modules/prepare/package/contents/ui/main.qml:130
 #, kde-format
 msgid "Dark Theme"
 msgstr ""
