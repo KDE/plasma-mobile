@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2024 Devin Lin <devin@kde.org>
+# SPDX-License-Identifier: GPL-2.0-or-later
+
+[SddmGreeterTheme]
+Name=Breeze Mobile
+Description=Breeze Theme for Plasma Mobile
+Author=KDE Visual Design Group
+Copyright=(c) 2024, Devin Lin
+License=CC-BY-SA
+Type=sddm-theme
+Version=0.1
+Website=https://github.com/sddm/sddm
+Screenshot=preview.png
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Email=plasma-devel@kde.org
+Theme-Id=breeze-mobile
+Theme-API=2.0
+QtVersion=6

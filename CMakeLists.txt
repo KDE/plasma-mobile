@@ -19,6 +19,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 option(INSTALL_SYSTEMD_SERVICE "Install a systemd service file to start the session" OFF)
+set(INSTALL_SDDM_THEME TRUE)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
@@ -132,6 +133,20 @@ set_package_properties(PlasmaOpenSettings PROPERTIES
                                           PURPOSE "Used on the top panel")
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)
+
+if (INSTALL_SDDM_THEME)
+    configure_file(sddm-theme/theme.conf.cmake ${CMAKE_CURRENT_BINARY_DIR}/sddm-theme/theme.conf)
+
+    # Install the login theme into the SDDM directory
+    #NOTE this trailing slash is important to rename the directory
+    install(DIRECTORY sddm-theme/
+        DESTINATION ${KDE_INSTALL_FULL_DATADIR}/sddm/themes/breeze-mobile
+    )
+
+    install(FILES ${CMAKE_CURRENT_BINARY_DIR}/sddm-theme/theme.conf
+        DESTINATION ${KDE_INSTALL_FULL_DATADIR}/sddm/themes/breeze-mobile
+    )
+endif()
 
 # add clang-format target for all our real source files
 file(GLOB_RECURSE ALL_CLANG_FORMAT_SOURCE_FILES *.cpp *.h)

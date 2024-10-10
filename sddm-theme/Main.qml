@@ -1,35 +1,29 @@
-// SPDX-FileCopyrightText: 2019 Nicolas Fella <nicolas.fella@gmx.de>
-// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
-import QtQuick.Controls
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
+import Qt5Compat.GraphicalEffects
 
-import org.kde.plasma.core as PlasmaCore
-import org.kde.notificationmanager as Notifications
-import org.kde.plasma.private.mobileshell.dpmsplugin as DPMS
 import org.kde.plasma.components 3.0 as PC3
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell as MobileShell
 
-import org.kde.kirigami 2.12 as Kirigami
+import SddmComponents 2.0 as SddmComponents
 
-/**
- * Lockscreen component that is loaded after the device is locked.
- *
- * Special attention must be paid to ensuring the GUI loads as fast as possible.
- */
 Item {
     id: root
 
-    readonly property var lockScreenState: LockScreenState {}
-    readonly property var notifModel: Notifications.WatchedNotificationsModel {}
-
     // Only show widescreen mode for short height devices (ex. phone landscape)
     readonly property bool isWidescreen: root.height < 720 && (root.height < root.width * 0.75)
-    property bool notificationsShown: false
+
+    property var greeterState: GreeterState {}
 
     property var passwordBar: flickableLoader.item ? flickableLoader.item.passwordBar : null
+
+    Kirigami.Theme.inherit: false
+    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
     Component.onCompleted: {
         forceActiveFocus();
@@ -38,11 +32,31 @@ Item {
     // Listen for keyboard events, and focus on input area
     Keys.onPressed: (event) => {
         if (flickableLoader.item) {
-            root.lockScreenState.isKeyboardMode = true;
+            root.greeterState.isKeyboardMode = true;
             flickableLoader.item.goToOpenPosition();
             passwordBar.textField.forceActiveFocus();
 
-            passwordBar.keyPress(event.text);
+            // Add text from key press
+            root.greeterState.password += event.text;
+        }
+    }
+
+    SddmComponents.Background {
+        id: wallpaper
+        anchors.fill: parent
+        source: "qrc:///theme/background.png"
+        fillMode: Image.PreserveAspectCrop
+        onStatusChanged: {
+            if (status == Image.Error && source != config.defaultBackground) {
+                source = config.defaultBackground
+            }
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                listView.focus = true;
+            }
         }
     }
 
@@ -66,27 +80,26 @@ Item {
         }
     }
 
+    // Animate entrance
+    Rectangle {
+        id: screenCoverAnim
+        z: 1
+        color: 'black'
+        anchors.fill: parent
+        opacity: 1
+        visible: opacity > 0
+
+        Behavior on opacity { NumberAnimation { duration: 1000 } }
+        Component.onCompleted: opacity = 0
+    }
+
     Connections {
-        target: root.lockScreenState
+        target: root.greeterState
 
         // Ensure keypad is opened when password is updated (ex. keyboard)
         function onPasswordChanged() {
-            if (root.lockScreenState.password !== "" && flickableLoader.item) {
+            if (root.greeterState.password !== "" && flickableLoader.item) {
                 flickableLoader.item.goToOpenPosition();
-            }
-        }
-    }
-
-    // when screen turns off, reset state
-    DPMS.DPMSUtil {
-        id: dpms
-
-        onDpmsTurnedOff: (screen) => {
-            if (screen.name === Screen.name) {
-                if (flickableLoader.item) {
-                    flickableLoader.item.goToClosePosition();
-                }
-                lockScreenState.resetPassword();
             }
         }
     }
@@ -96,17 +109,16 @@ Item {
         anchors.fill: parent
 
         // Header bar and action drawer
-        HeaderComponent {
+        StatusBar {
             id: headerBar
             z: 1
-            anchors.fill: parent
-            statusBarHeight: Kirigami.Units.gridUnit * 1.25
-            openFactor: flickableLoader.item ? flickableLoader.item.openFactor : 0
-            notificationsModel: root.notifModel
-            onPasswordRequested: root.askPassword()
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Kirigami.Units.gridUnit * 1.25
         }
 
-        // Add loading indicator when status bar has not loaded yet
+        // Add loading indicator when not loaded yet
         PC3.BusyIndicator {
             id: flickableLoadingBusyIndicator
             anchors.centerIn: parent
@@ -149,7 +161,7 @@ Item {
                 property alias passwordBar: keypad.passwordBar
 
                 // Speed up animation when passwordless
-                animationDuration: root.lockScreenState.canBeUnlocked ? 400 : 800
+                animationDuration: 800
 
                 // Distance to swipe to fully open keypad
                 keypadHeight: Kirigami.Units.gridUnit * 20
@@ -160,31 +172,14 @@ Item {
                     flickable.goToClosePosition();
                 }
 
-                // Unlock lockscreen if it's already unlocked and keypad is opened
-                onOpened: {
-                    if (root.lockScreenState.canBeUnlocked) {
-                        Qt.quit();
-                    }
-                }
-
-                // Unlock lockscreen if it's already unlocked and keypad is open
-                Connections {
-                    target: root.lockScreenState
-                    function onCanBeUnlockedChanged() {
-                        if (root.lockScreenState.canBeUnlocked && flickable.openFactor > 0.8) {
-                            Qt.quit();
-                        }
-                    }
-                }
-
                 // Clear entered password after closing keypad
                 onOpenFactorChanged: {
-                    if (flickable.openFactor < 0.1 && !flickable.movingUp) {
+                    if (flickable.openFactor < 0.1) {
                         root.passwordBar.clear();
                     }
                 }
 
-                LockScreenContent {
+                MainContent {
                     id: lockScreenContent
 
                     isVertical: !root.isWidescreen
@@ -200,12 +195,9 @@ Item {
 
                     fullHeight: root.height
 
-                    lockScreenState: root.lockScreenState
-                    notificationsModel: root.notifModel
-                    onNotificationsShownChanged: root.notificationsShown = notificationsShown
-                    onPasswordRequested: flickable.goToOpenPosition()
+                    greeterState: root.greeterState
 
-                    anchors.topMargin: headerBar.statusBarHeight
+                    anchors.topMargin: headerBar.height
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.left: parent.left
@@ -213,14 +205,19 @@ Item {
                 }
 
                 // scroll up icon
-                BottomIconIndicator {
+                Kirigami.Icon {
                     id: scrollUpIconLoader
-                    lockScreenState: root.lockScreenState
                     opacity: Math.max(0, 1 - flickable.openFactor * 2)
 
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.1
                     anchors.horizontalCenter: parent.horizontalCenter
+
+                    implicitWidth: Kirigami.Units.iconSizes.small
+                    implicitHeight: Kirigami.Units.iconSizes.small
+
+                    Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+                    source: "arrow-up"
                 }
 
                 Rectangle {
@@ -233,7 +230,6 @@ Item {
 
                 MobileShell.LockScreenKeypad {
                     id: keypad
-                    visible: !root.lockScreenState.canBeUnlocked // don't show for passwordless login
                     anchors.fill: parent
                     openProgress: flickable.openFactor
 
@@ -241,16 +237,16 @@ Item {
                     opacity: (flickable.openFactor - 0.5) * 2
                     transform: Translate { y: (flickable.keypadHeight - flickable.position) * 0.1 }
 
-                    pinLabel: root.lockScreenState.pinLabel
-                    password: root.lockScreenState.password
-                    waitingForAuth: root.lockScreenState.waitingForAuth
-                    isKeyboardMode: root.lockScreenState.isKeyboardMode
+                    pinLabel: root.greeterState.pinLabel
+                    password: root.greeterState.password
+                    waitingForAuth: root.greeterState.waitingForAuth
+                    isKeyboardMode: root.greeterState.isKeyboardMode
 
-                    onChangePassword: (password) => { root.lockScreenState.password = password; }
-                    onResetPassword: root.lockScreenState.resetPassword()
-                    onTryPassword: root.lockScreenState.tryPassword()
-                    onResetPinLabel: root.lockScreenState.resetPinLabel()
-                    onChangeKeyboardMode: (isKeyboardMode) => { root.lockScreenState.isKeyboardMode = isKeyboardMode; }
+                    onChangePassword: (password) => { root.greeterState.password = password; }
+                    onResetPassword: root.greeterState.resetPassword()
+                    onTryPassword: root.greeterState.tryPassword()
+                    onResetPinLabel: root.greeterState.resetPinLabel()
+                    onChangeKeyboardMode: (isKeyboardMode) => { root.greeterState.isKeyboardMode = isKeyboardMode; }
                 }
             }
         }

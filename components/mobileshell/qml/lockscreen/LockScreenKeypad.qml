@@ -15,8 +15,26 @@ import org.kde.kirigami 2.12 as Kirigami
 
 Item {
     id: root
+
     required property real openProgress
-    required property var lockScreenState
+
+    // Label to show above the password bar
+    required property string pinLabel
+
+    // The current password
+    required property string password
+
+    // Whether to grey out the password bar to wait for authentication
+    required property bool waitingForAuth
+
+    // Whether we are in keyboard interaction, with the keypad not shown
+    required property bool isKeyboardMode
+
+    signal changePassword(string password)
+    signal resetPassword()
+    signal tryPassword()
+    signal resetPinLabel()
+    signal changeKeyboardMode(bool isKeyboardMode)
 
     property alias passwordBar: passwordBar
 
@@ -41,7 +59,7 @@ Item {
         states: [
             State {
                 name: "keypad"
-                when: !lockScreenState.isKeyboardMode
+                when: !root.isKeyboardMode
                 AnchorChanges {
                     target: verticalHeaderProxy; anchors.top: keypadVerticalContainer.top
                 }
@@ -51,7 +69,7 @@ Item {
             },
             State {
                 name: "keyboard"
-                when: lockScreenState.isKeyboardMode
+                when: root.isKeyboardMode
                 AnchorChanges {
                     target: verticalHeaderProxy; anchors.verticalCenter: keypadVerticalContainer.verticalCenter
                 }
@@ -86,14 +104,14 @@ Item {
         states: [
             State {
                 name: "keypad"
-                when: !lockScreenState.isKeyboardMode
+                when: !root.isKeyboardMode
                 AnchorChanges {
                     target: horizontalHeaderProxy; anchors.left: keypadHorizontalContainer.left
                 }
             },
             State {
                 name: "keyboard"
-                when: lockScreenState.isKeyboardMode
+                when: root.isKeyboardMode
                 AnchorChanges {
                     target: horizontalHeaderProxy; anchors.horizontalCenter: keypadHorizontalContainer.horizontalCenter
                 }
@@ -116,8 +134,8 @@ Item {
         Label {
             id: descriptionLabel
             Layout.alignment: Qt.AlignHCenter
-            opacity: root.lockScreenState.password.length === 0 ? 1 : 0
-            text: root.lockScreenState.pinLabel
+            opacity: root.password.length === 0 ? 1 : 0
+            text: root.pinLabel
             font.pointSize: 12
             font.bold: true
             color: 'white'
@@ -131,13 +149,22 @@ Item {
         }
 
         // pin display and bar
-        PasswordBar {
+        MobileShell.LockScreenPasswordBar {
             id: passwordBar
             Layout.preferredWidth: Kirigami.Units.gridUnit * 14
             Layout.preferredHeight: Kirigami.Units.gridUnit * 2.5
 
-            lockScreenState: root.lockScreenState
             isKeypadOpen: root.openProgress >= 0.9
+            password: root.password
+            waitingForAuth: root.waitingForAuth
+            isKeyboardMode: root.isKeyboardMode
+
+            onChangePassword: (password) => root.changePassword(password)
+            onResetPassword: root.resetPassword()
+            onTryPassword: root.tryPassword()
+            onResetPinLabel: root.resetPinLabel()
+            onChangeKeyboardMode: (isKeyboardMode) => root.changeKeyboardMode(isKeyboardMode)
+
             enabled: root.openProgress >= 0.8
         }
     }
@@ -167,7 +194,7 @@ Item {
                 implicitWidth: keypadGrid.cellLength
                 implicitHeight: keypadGrid.cellLength
                 visible: modelData.length > 0
-                enabled: root.openProgress >= 0.8 && !lockScreenState.isKeyboardMode // Only enable after a certain point in animation
+                enabled: root.openProgress >= 0.8 && !root.isKeyboardMode // Only enable after a certain point in animation
 
                 opacity: enabled
                 Behavior on opacity {
