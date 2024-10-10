@@ -118,18 +118,6 @@ void TimeZoneModel::update()
     beginResetModel();
     m_data.clear();
 
-    QTimeZone localZone = QTimeZone(QTimeZone::systemTimeZoneId());
-    const QStringList data = QString::fromUtf8(localZone.id()).split(QLatin1Char('/'));
-
-    TimeZoneData local;
-    local.id = "Local";
-    local.region = i18nc("This means \"Local Timezone\"", "Local");
-    local.city = m_timezonesI18n->i18nCity(data.last());
-    local.comment = i18n("Your system time zone");
-    local.checked = false;
-
-    m_data.append(local);
-
     QStringList cities;
     QHash<QString, QTimeZone> zonesByCity;
 
@@ -151,11 +139,6 @@ void TimeZoneModel::update()
     for (const QString &key : std::as_const(cities)) {
         const QTimeZone timeZone = zonesByCity.value(key);
         QString comment = timeZone.comment();
-
-        // FIXME - this was in the old code but makes no sense
-        //         if (!comment.isEmpty()) {
-        //             comment = i18n(comment.toUtf8());
-        //         }
 
         const QStringList cityCountryContinent = key.split(QLatin1Char('|'));
 
