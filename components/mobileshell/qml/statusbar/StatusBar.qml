@@ -59,7 +59,7 @@ Item {
         id: timeSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: 60 * 1000
+        interval: 1000
         intervalAlignment: P5Support.Types.AlignToMinute
     }
 
