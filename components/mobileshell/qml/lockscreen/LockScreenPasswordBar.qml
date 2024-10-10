@@ -12,11 +12,25 @@ import org.kde.kirigami 2.12 as Kirigami
 
 Rectangle {
     id: root
-    required property var lockScreenState
-
     property alias textField: textField
 
+    // Whether the password bar is shown
     required property bool isKeypadOpen
+
+    // The current password
+    required property string password
+
+    // Whether to grey out the password bar to wait for authentication
+    required property bool waitingForAuth
+
+    // Whether we are in keyboard interaction, with the keypad not shown
+    required property bool isKeyboardMode
+
+    signal changePassword(string password)
+    signal resetPassword()
+    signal tryPassword()
+    signal resetPinLabel()
+    signal changeKeyboardMode(bool isKeyboardMode)
 
     // for displaying temporary number in pin dot display
     property int previewCharIndex: -2
@@ -35,48 +49,48 @@ Rectangle {
 
     // Listen to lockscreen state changes
     Connections {
-        target: root.lockScreenState
+        target: root
 
         function onPasswordChanged() {
-            while (root.lockScreenState.password.length < dotDisplayModel.count) {
+            while (root.password.length < dotDisplayModel.count) {
                 dotDisplayModel.remove(dotDisplayModel.count - 1);
             }
-            while (root.lockScreenState.password.length > dotDisplayModel.count) {
-                dotDisplayModel.append({"char": root.lockScreenState.password.charAt(dotDisplayModel.count)});
+            while (root.password.length > dotDisplayModel.count) {
+                dotDisplayModel.append({"char": root.password.charAt(dotDisplayModel.count)});
             }
         }
     }
 
     // Keypad functions
     function backspace() {
-        if (!lockScreenState.waitingForAuth) {
+        if (!root.waitingForAuth) {
             root.previewCharIndex = -2;
-            lockScreenState.password = lockScreenState.password.substr(0, lockScreenState.password.length - 1);
+            root.changePassword(root.password.substr(0, root.password.length - 1));
         }
     }
 
     function clear() {
-        if (!lockScreenState.waitingForAuth) {
+        if (!root.waitingForAuth) {
             root.previewCharIndex = -2;
-            lockScreenState.resetPassword();
+            root.resetPassword();
         }
     }
 
     function enter() {
-        lockScreenState.tryPassword();
+        root.tryPassword();
 
-        if (root.isKeypadOpen && root.lockScreenState.isKeyboardMode) {
+        if (root.isKeypadOpen && root.isKeyboardMode) {
             // make sure keyboard doesn't close
             openKeyboardTimer.restart();
         }
     }
 
     function keyPress(data) {
-        if (!lockScreenState.waitingForAuth) {
-            root.lockScreenState.resetPinLabel();
+        if (!root.waitingForAuth) {
+            root.resetPinLabel();
 
-            root.previewCharIndex = lockScreenState.password.length;
-            lockScreenState.password += data
+            root.previewCharIndex = root.password.length;
+            root.changePassword(root.password + data);
 
             // trigger turning letter into dot later
             letterTimer.restart();
@@ -107,7 +121,7 @@ Rectangle {
     TextField {
         id: textField
         visible: false
-        focus: root.isKeypadOpen && root.lockScreenState.isKeyboardMode
+        focus: root.isKeypadOpen && root.isKeyboardMode
         z: 1
         inputMethodHints: Qt.ImhNoPredictiveText
 
@@ -121,12 +135,12 @@ Rectangle {
         property string prevText: ""
 
         Connections {
-            target: root.lockScreenState
+            target: root
 
             function onPasswordChanged() {
-                if (textField.text != root.lockScreenState.password) {
+                if (textField.text != root.password) {
                     textField.externalEdit = true;
-                    textField.text = root.lockScreenState.password;
+                    textField.text = root.password;
                 }
             }
         }
@@ -156,7 +170,7 @@ Rectangle {
         anchors.fill: parent
         onClicked: {
             // clicking on rectangle opens keyboard if not already open
-            if (root.lockScreenState.isKeyboardMode) {
+            if (root.isKeyboardMode) {
                 Keyboards.KWinVirtualKeyboard.active = true;
             }
         }
@@ -176,11 +190,11 @@ Rectangle {
             visible: (dotDisplay.width / 2) < ((root.width / 2) - keyboardToggle.width - Kirigami.Units.smallSpacing)
 
             implicitWidth: height
-            icon.name: root.lockScreenState.isKeyboardMode ? "input-dialpad-symbolic" : "input-keyboard-virtual-symbolic"
+            icon.name: root.isKeyboardMode ? "input-dialpad-symbolic" : "input-keyboard-virtual-symbolic"
             icon.color: 'white'
             onClicked: {
-                root.lockScreenState.isKeyboardMode = !root.lockScreenState.isKeyboardMode;
-                if (root.lockScreenState.isKeyboardMode) {
+                root.changeKeyboardMode(!root.isKeyboardMode);
+                if (root.isKeyboardMode) {
                     Keyboards.KWinVirtualKeyboard.active = true;
                 }
             }
@@ -261,7 +275,7 @@ Rectangle {
                         height: dotDisplay.dotWidth
                         anchors.centerIn: parent
                         radius: width
-                        color: lockScreenState.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                        color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
 
                         PropertyAnimation {
                             id: dotAnimation
@@ -275,7 +289,7 @@ Rectangle {
                         id: charLabel
                         scale: 0
                         anchors.centerIn: parent
-                        color: lockScreenState.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
+                        color: root.waitingForAuth ? root.headerTextInactiveColor : root.headerTextColor // dim when waiting for auth
                         text: model.char
                         font.pointSize: 12
 

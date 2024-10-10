@@ -30,7 +30,7 @@ Item {
         spacing: 0
 
         // Center clock when no notifications are shown, otherwise move the clock upward
-        anchors.topMargin: Kirigami.Units.gridUnit * 3.5
+        anchors.topMargin: Math.round(Kirigami.Units.gridUnit * 3.5)
         anchors.bottomMargin: Kirigami.Units.gridUnit * 2
         anchors.fill: parent
 
@@ -46,7 +46,7 @@ Item {
 
         ColumnLayout {
             id: leftLayout
-            width: parent.width / 2
+            width: Math.round(parent.width / 2)
             anchors {
                 top: parent.top
                 bottom: parent.bottom
