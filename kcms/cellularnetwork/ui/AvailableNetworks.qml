@@ -56,6 +56,7 @@ Kirigami.ScrollablePage {
         model: modem.details.networks
 
         delegate: FormCard.FormRadioDelegate {
+            width: listView.width
             checked: modelData.isCurrentlyUsed
 
             onClicked: {
