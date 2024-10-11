@@ -143,5 +143,6 @@
     "X-KDE-Keywords[tr]": "ekran üzeri,ekran,osk,osd,sanal klavye,klavye,düğme",
     "X-KDE-Keywords[uk]": "onscreen,osk,virtualkeyboard,keyboard,екранна,екран,клавіатура",
     "X-KDE-Keywords[x-test]": "xxonscreenxx,xxoskxx,xxvirtualkeyboardxx,xxkeyboardxx",
+    "X-KDE-Keywords[zh_CN]": "onscreen,osk,virtualkeyboard,keyboard,pingmujianpan,pingmujianpan,pingshangjianpan,xunijianpan,jianpan,屏幕键盘,屏幕显示,屏上键盘,虚拟键盘,键盘",
     "X-KDE-System-Settings-Parent-Category": "input-devices"
 }
