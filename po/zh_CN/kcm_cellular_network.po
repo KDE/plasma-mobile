@@ -281,13 +281,12 @@ msgstr "SIM 卡存在，但不可用。"
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "未知调制解调器功能。"
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM 卡未锁定"
+msgstr "eSIM 卡未初始化。"
 
 #: modemdetails.cpp:316
 #, kde-format

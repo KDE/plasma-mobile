@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2022-03-18 07:14+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "Tak dapat mengatur waktu saat ini"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Tidak dapat mengatur zona waktu"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Lokal"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Zona-waktu sistemmu"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3059,6 +3048,13 @@ msgstr ""
 #, kde-format
 msgid "PM"
 msgstr ""
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Lokal"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Zona-waktu sistemmu"
 
 #, fuzzy
 #~| msgctxt "This is a city associated with particular time zone"

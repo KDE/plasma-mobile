@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 10:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -31,17 +31,6 @@ msgstr "Huidige tijd instellen lukt niet"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Tijdzone instellen lukt niet"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Lokaal"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Tijdzone van uw systeem"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Lokaal"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Tijdzone van uw systeem"
 
 #~ msgid "Current Time"
 #~ msgstr "Huidige tijd"

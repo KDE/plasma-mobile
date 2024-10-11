@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-08-14 17:29+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -31,17 +31,6 @@ msgstr "Nepodarilo sa nastaviť aktuálny čas"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nepodarilo sa nastaviť časové pásmo"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Miestne"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Vaše systémové časové pásmo"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3055,6 +3044,13 @@ msgstr ""
 #, kde-format
 msgid "PM"
 msgstr ""
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Miestne"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Vaše systémové časové pásmo"
 
 #~ msgid "Current Time"
 #~ msgstr "Aktuálny čas"

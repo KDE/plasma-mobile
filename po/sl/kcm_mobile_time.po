@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 07:17+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -32,17 +32,6 @@ msgstr "Ni mogoče nastaviti trenutnega časa"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Ni mogoče nastaviti časovnega pasu"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Lokalno"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Vaš sistemski časovni pas"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3054,6 +3043,13 @@ msgstr "dop."
 #, kde-format
 msgid "PM"
 msgstr "pop."
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Lokalno"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Vaš sistemski časovni pas"
 
 #~ msgid "Current Time"
 #~ msgstr "Trenutni čas"

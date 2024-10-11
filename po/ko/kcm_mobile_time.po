@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-02-09 19:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "현재 시간을 설정할 수 없음"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "시간대를 설정할 수 없음"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "지역"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "내 시스템 시간대"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "오전"
 #, kde-format
 msgid "PM"
 msgstr "오후"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "지역"
+
+#~ msgid "Your system time zone"
+#~ msgstr "내 시스템 시간대"
 
 #~ msgid "Current Time"
 #~ msgstr "현재 시간"

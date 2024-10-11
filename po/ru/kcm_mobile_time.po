@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-09-23 12:04+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -34,17 +34,6 @@ msgstr "Не удалось установить текущее время"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Не удалось установить часовой пояс"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Местный"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Системный часовой пояс"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3056,6 +3045,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Местный"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Системный часовой пояс"
 
 #~ msgid "Current Time"
 #~ msgstr "Текущее время"

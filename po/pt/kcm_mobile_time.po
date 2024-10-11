@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kgeography\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2022-07-07 11:14+0100\n"
 "Last-Translator: Pedro Morais <morais@kde.org>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -779,17 +779,6 @@ msgstr "Não é possível ajustar a hora actual"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Não é possível mudar o fuso-horário"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Local"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "O fuso-horário do seu sistema"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3803,6 +3792,13 @@ msgstr ""
 #, kde-format
 msgid "PM"
 msgstr ""
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Your system time zone"
+#~ msgstr "O fuso-horário do seu sistema"
 
 #~ msgid "Current Time"
 #~ msgstr "Hora Actual"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-05-30 09:49+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "Nelze nastavit aktuální čas"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nelze nastavit časové pásmo"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Místní"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Časové pásmo vašeho systému"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,3 +3042,10 @@ msgstr "dop."
 #, kde-format
 msgid "PM"
 msgstr "odp."
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Místní"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Časové pásmo vašeho systému"

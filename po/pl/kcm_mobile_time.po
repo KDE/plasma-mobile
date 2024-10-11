@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-23 13:39+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmai.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "Nie można ustawić bieżącego czasu"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nie można ustawić strefy czasowej"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Lokalna"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Strefa czasowa twojego systemu"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Lokalna"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Strefa czasowa twojego systemu"
 
 #~ msgid "Current Time"
 #~ msgstr "Bieżący czas"

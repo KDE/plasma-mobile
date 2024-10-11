@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2022-12-28 02:19+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: none\n"
@@ -33,17 +33,6 @@ msgstr "Nepavyko nustatyti dabartinio laiko"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nepavyko nustatyti laiko juostos"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Vietinė"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Jūsų sistemos laiko juosta"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3057,6 +3046,13 @@ msgstr ""
 #, kde-format
 msgid "PM"
 msgstr ""
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Vietinė"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Jūsų sistemos laiko juosta"
 
 #~ msgid "Current Time"
 #~ msgstr "Dabartinis laikas"

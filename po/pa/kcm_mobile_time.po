@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-24 09:08-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "ਮੌਜੂਦਾ ਸਮਾਂ ਸੈੱਟ ਕਰਨ ਲਈ ਅਸਮ�
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "ਸਮਾਂ-ਖੇਤਰ ਸੈੱਟ ਕਰਨ ਲਈ ਅਸਮਰੱਥ"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "ਲੋਕਲ"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "ਤੁਹਾਡਾ ਸਿਸਟਮ ਸਮਾਂ ਖੇਤਰ"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "ਸਵੇਰ"
 #, kde-format
 msgid "PM"
 msgstr "ਸ਼ਾਮ"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "ਲੋਕਲ"
+
+#~ msgid "Your system time zone"
+#~ msgstr "ਤੁਹਾਡਾ ਸਿਸਟਮ ਸਮਾਂ ਖੇਤਰ"
 
 #~ msgid "Current Time"
 #~ msgstr "ਮੌਜੂਦਾ ਸਮਾਂ"

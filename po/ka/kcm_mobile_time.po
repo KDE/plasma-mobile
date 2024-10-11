@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 07:38+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -32,17 +32,6 @@ msgstr "მიმდინარე დროის მიღება შეუ
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "დროის სარტყლის მიღების შეცდომა"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "ლოკალური"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "სისტემის დროის სარტყლის გამოყენება"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3054,6 +3043,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "ლოკალური"
+
+#~ msgid "Your system time zone"
+#~ msgstr "სისტემის დროის სარტყლის გამოყენება"
 
 #~ msgid "Current Time"
 #~ msgstr "მიმდინარე დრო"

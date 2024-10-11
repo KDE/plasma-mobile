@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-04-23 14:46+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -32,17 +32,6 @@ msgstr "Neizdevās iestatīt pašreizējo laiku"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Neizdevās iestatīt laika joslu"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Vietējā"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Jūsu sistēmas laika josla"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3054,3 +3043,10 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Vietējā"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Jūsu sistēmas laika josla"

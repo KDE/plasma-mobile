@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 21:57+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -34,17 +34,6 @@ msgstr "Ez da uneko ordua ezartzeko gai"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Ez da ordu-eremua ezartzeko gai"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Tokikoa"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Zure sistemako ordu-eremua"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3059,6 +3048,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Tokikoa"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Zure sistemako ordu-eremua"
 
 #~ msgid "Current Time"
 #~ msgstr "Uneko ordua"

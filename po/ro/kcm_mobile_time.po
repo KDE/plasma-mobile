@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-06-09 14:09+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -32,17 +32,6 @@ msgstr "Nu s-a putut stabili ora curentă"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nu s-a putut stabili fusul orar"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Local"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Fusul orar al sistemului"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3054,6 +3043,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Fusul orar al sistemului"
 
 #~ msgid "Date"
 #~ msgstr "Dată"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-03-17 11:07+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -32,17 +32,6 @@ msgstr "Klarte ikkje å stilla inn gjeldande tid"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Klarte ikkje stilla inn tidssone"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Lokal"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "System-tidssone"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3057,3 +3046,10 @@ msgstr "a.m."
 #, kde-format
 msgid "PM"
 msgstr "p.m."
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Lokal"
+
+#~ msgid "Your system time zone"
+#~ msgstr "System-tidssone"

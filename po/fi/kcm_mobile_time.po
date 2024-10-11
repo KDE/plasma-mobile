@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-01-29 21:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "Nykyisen ajan asettaminen epäonnistui"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Aikavyöhykkeen asettaminen epäonnistui"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Paikallinen"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Järjestelmän aikavyöhyke"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "ap."
 #, kde-format
 msgid "PM"
 msgstr "ip."
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Paikallinen"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Järjestelmän aikavyöhyke"
 
 #~ msgid "Current Time"
 #~ msgstr "Nykyinen aika"

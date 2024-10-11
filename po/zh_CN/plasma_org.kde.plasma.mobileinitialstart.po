@@ -233,16 +233,14 @@ msgid "Password…"
 msgstr "密码…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "欢迎使用<br/><b>%1</b>"
+msgstr "欢迎使用<br/><b>Plasma Mobile</b>"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "欢迎使用<br/><b>%1</b>"
+msgstr ""
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-19 17:44+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -33,17 +33,6 @@ msgstr "No se ha podido definir la hora actual"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "No se ha podido definir la zona horaria"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Local"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "La zona horaria de su sistema"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3055,6 +3044,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Your system time zone"
+#~ msgstr "La zona horaria de su sistema"
 
 #~ msgid "Current Time"
 #~ msgstr "Hora actual"

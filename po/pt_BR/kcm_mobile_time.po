@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-03-23 19:12-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -33,17 +33,6 @@ msgstr "Não foi possível definir a hora atual"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Não foi possível definir o fuso horário"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Local"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "Fuso horário do seu sistema"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3055,6 +3044,13 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Local"
+
+#~ msgid "Your system time zone"
+#~ msgstr "Fuso horário do seu sistema"
 
 #~ msgid "Current Time"
 #~ msgstr "Hora atual"

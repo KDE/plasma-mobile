@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 13:50+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -31,17 +31,6 @@ msgstr "Nem lehet beállítani a jelenlegi időt"
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Nem lehet beállítani az időzónát"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "Helyi"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "A rendszer időzónája"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3053,6 +3042,13 @@ msgstr "DE"
 #, kde-format
 msgid "PM"
 msgstr "DU"
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "Helyi"
+
+#~ msgid "Your system time zone"
+#~ msgstr "A rendszer időzónája"
 
 #~ msgid "Current Time"
 #~ msgstr "Aktuális idő"

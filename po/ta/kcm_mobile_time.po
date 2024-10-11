@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-19 00:39+0000\n"
+"POT-Creation-Date: 2024-10-11 00:42+0000\n"
 "PO-Revision-Date: 2024-04-20 20:21+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -32,17 +32,6 @@ msgstr "தற்போதைய நேரத்தை அமைக்க இய
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "நேரமண்டலத்தை அமைக்க இயலவில்லை"
-
-#: timezonemodel.cpp:126
-#, kde-format
-msgctxt "This means \"Local Timezone\""
-msgid "Local"
-msgstr "வட்டாரம்"
-
-#: timezonemodel.cpp:128
-#, kde-format
-msgid "Your system time zone"
-msgstr "உங்கள் கணினியின் நேரமண்டலம்"
 
 #: timezonesi18n.cpp:45
 #, kde-format
@@ -3059,6 +3048,13 @@ msgstr "மு.ப."
 #, kde-format
 msgid "PM"
 msgstr "பி.ப."
+
+#~ msgctxt "This means \"Local Timezone\""
+#~ msgid "Local"
+#~ msgstr "வட்டாரம்"
+
+#~ msgid "Your system time zone"
+#~ msgstr "உங்கள் கணினியின் நேரமண்டலம்"
 
 #~ msgid "Date"
 #~ msgstr "தேதி"
