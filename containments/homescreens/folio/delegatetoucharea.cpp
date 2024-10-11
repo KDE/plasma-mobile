@@ -13,10 +13,17 @@
 DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     : QQuickItem{parent}
     , m_pressAndHoldTimer{new QTimer{this}}
+    , m_pressTimer{new QTimer{this}}
 {
+    // Timer for when the press and hold event triggers
     m_pressAndHoldTimer->setInterval(600);
     m_pressAndHoldTimer->setSingleShot(true);
     connect(m_pressAndHoldTimer, &QTimer::timeout, this, &DelegateTouchArea::startPressAndHold);
+
+    // Timer for when press is registered (so that it isn't immediate in case of a swipe)
+    m_pressTimer->setInterval(10);
+    m_pressTimer->setSingleShot(true);
+    connect(m_pressTimer, &QTimer::timeout, this, &DelegateTouchArea::startPress);
 
     // Explcitly call setCursor on QQuickItem since
     // it internally keeps a boolean hasCursor that doesn't
@@ -29,7 +36,7 @@ DelegateTouchArea::DelegateTouchArea(QQuickItem *parent)
     setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton);
 }
 
-bool DelegateTouchArea::pressed()
+bool DelegateTouchArea::pressed() const
 {
     return m_pressed;
 }
@@ -42,7 +49,7 @@ void DelegateTouchArea::setPressed(bool pressed)
     }
 }
 
-bool DelegateTouchArea::hovered()
+bool DelegateTouchArea::hovered() const
 {
     return m_hovered;
 }
@@ -55,7 +62,7 @@ void DelegateTouchArea::setHovered(bool hovered)
     }
 }
 
-Qt::CursorShape DelegateTouchArea::cursorShape()
+Qt::CursorShape DelegateTouchArea::cursorShape() const
 {
     return cursor().shape();
 }
@@ -75,7 +82,7 @@ void DelegateTouchArea::unsetCursor()
     setCursorShape(Qt::ArrowCursor);
 }
 
-QPointF DelegateTouchArea::pressPosition()
+QPointF DelegateTouchArea::pressPosition() const
 {
     return m_mouseDownPosition;
 }
@@ -175,17 +182,14 @@ void DelegateTouchArea::handlePressEvent(QPointerEvent *event, QPointF point)
 {
     Q_UNUSED(event)
     // ignore multiple press events
-    if (m_pressed) {
+    if (m_pressed || m_pressTimer->isActive()) {
         return;
     }
 
-    setPressed(true);
-    forceActiveFocus(Qt::MouseFocusReason);
-
     m_mouseDownPosition = point;
-    Q_EMIT pressPositionChanged();
 
-    m_pressAndHoldTimer->start();
+    // Start press timer
+    m_pressTimer->start();
 }
 
 void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
@@ -203,6 +207,7 @@ void DelegateTouchArea::handleReleaseEvent(QPointerEvent *event, bool click)
         Q_EMIT pressAndHoldReleased();
     }
 
+    m_pressTimer->stop();
     m_pressAndHoldTimer->stop();
     m_pressAndHeld = false;
 }
@@ -212,6 +217,7 @@ void DelegateTouchArea::handleMoveEvent(QPointerEvent *event, QPointF point)
     Q_UNUSED(event)
     if (QPointF(point - m_mouseDownPosition).manhattanLength() >= QGuiApplication::styleHints()->startDragDistance()) {
         m_pressAndHoldTimer->stop();
+        m_pressTimer->stop();
         setPressed(false);
     }
 }
@@ -220,4 +226,19 @@ void DelegateTouchArea::startPressAndHold()
 {
     m_pressAndHeld = true;
     Q_EMIT pressAndHold();
+}
+
+void DelegateTouchArea::startPress()
+{
+    if (m_pressed) {
+        return;
+    }
+
+    setPressed(true);
+    forceActiveFocus(Qt::MouseFocusReason);
+
+    m_pressAndHoldTimer->start();
+
+    // Only emit when the press event starts
+    Q_EMIT pressPositionChanged();
 }

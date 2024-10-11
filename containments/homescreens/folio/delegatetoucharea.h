@@ -27,12 +27,12 @@ class DelegateTouchArea : public QQuickItem
 public:
     DelegateTouchArea(QQuickItem *parent = nullptr);
 
-    bool pressed();
-    bool hovered();
-    Qt::CursorShape cursorShape();
+    bool pressed() const;
+    bool hovered() const;
+    Qt::CursorShape cursorShape() const;
     void setCursorShape(Qt::CursorShape cursorShape);
     void unsetCursor();
-    QPointF pressPosition();
+    QPointF pressPosition() const;
 
 Q_SIGNALS:
     void clicked();
@@ -56,6 +56,7 @@ protected:
 
 private Q_SLOTS:
     void startPressAndHold();
+    void startPress();
 
 private:
     void setPressed(bool pressed);
@@ -73,6 +74,7 @@ private:
     QPointF m_mouseDownPosition{};
 
     QTimer *m_pressAndHoldTimer{nullptr};
+    QTimer *m_pressTimer{nullptr};
 };
 
 QML_DECLARE_TYPE(DelegateTouchArea)
