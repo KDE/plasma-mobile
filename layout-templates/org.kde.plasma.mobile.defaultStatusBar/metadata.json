@@ -66,6 +66,7 @@
         "Description[ru]": "Строка состояния по умолчанию для мобильных устройств",
         "Description[sl]": "Privzeta vrstica stanja za mobilne naprave",
         "Description[sv]": "Standardstatusrad för mobil",
+        "Description[ta]": "கைபேசிக்கான இயல்பிருப்பு நிலைப்பட்டை",
         "Description[tr]": "Cep için öntanımlı durum çubuğu",
         "Description[uk]": "Типова смужка стану для мобільних",
         "Description[x-test]": "xxDefault status bar for mobilexx",
