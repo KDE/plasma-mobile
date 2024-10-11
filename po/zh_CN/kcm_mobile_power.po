@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_mobile_power.pot\n"
-"X-Crowdin-File-ID: 53198\n"
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/kcm_mobile_power.pot\n"
+"X-Crowdin-File-ID: 53196\n"
 
 #: mobilepower.cpp:30
 #, kde-format
