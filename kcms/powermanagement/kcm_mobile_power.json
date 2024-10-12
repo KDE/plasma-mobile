@@ -98,6 +98,7 @@
     "X-KDE-Keywords[sv]": "video, bildskärm, grafik, tidsgräns, viloläge, lår, skärmlåsning, skärmsläckare",
     "X-KDE-Keywords[tr]": "video,monitör,ekran,görüntü,grafik,zaman aşımı,uyku,kilit,ekran kilidi,ekran koruyucusu",
     "X-KDE-Keywords[uk]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, відео, монітор, графіка, час очікування, присипляння, блокування, збереження, екран",
+    "X-KDE-Keywords[zh_CN]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver, shipin, xianshiqi, jianshiqi, tuxing, tuxiang, chaoshi, shuimian, suoping, pingmubaohu, pingmusuoding, pingbao, suoding, 视频, 显示器, 监视器, 图形, 图像, 超时, 睡眠, 锁屏, 屏幕保护, 屏幕锁定, 屏保, 锁定",
     "X-KDE-System-Settings-Parent-Category": "system-administration",
     "X-KDE-Weight": 20
 }
