@@ -3046,10 +3046,3 @@ msgstr "a.m."
 #, kde-format
 msgid "PM"
 msgstr "p.m."
-
-#~ msgctxt "This means \"Local Timezone\""
-#~ msgid "Local"
-#~ msgstr "Lokal"
-
-#~ msgid "Your system time zone"
-#~ msgstr "System-tidssone"
