@@ -734,7 +734,6 @@ FocusScope {
                 x: flickable.contentX
                 width: flickable.width
                 height: flickable.height
-                z: 1
             }
 
             PlasmaComponents.ToolButton {
@@ -742,6 +741,9 @@ FocusScope {
                 property bool closeRequested: false
                 visible: root.tasksCount !== 0 && !taskSwitcherHelpers.isInTaskScrubMode
                 enabled: !taskSwitcherHelpers.currentlyBeingClosed && !root.state.gestureInProgress
+
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
                 anchors {
                     bottom: parent.bottom
