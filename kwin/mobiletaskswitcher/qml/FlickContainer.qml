@@ -25,6 +25,9 @@ Flickable {
     // update position from horizontal flickable movement
     property real oldContentX
     onContentXChanged: {
+        // disable if animations are running to prevent bugs
+        if (taskSwitcherHelpers.currentlyBeingClosed) {return}
+
         if (moving) {
             // TODO whenever flicking actually works this should probably be swapped with
             // a minimum velocity after which it should snap to the nearest task
@@ -35,14 +38,17 @@ Flickable {
     }
 
     onMovementStarted: {
+        if (taskSwitcherHelpers.currentlyBeingClosed) {return}
         taskSwitcherHelpers.cancelAnimations();
     }
     onMovementEnded: {
+        if (taskSwitcherHelpers.currentlyBeingClosed) {return}
         taskSwitcherHelpers.snapToNearestTaskWorkaround(movingRight);
         resetPosition();
     }
 
     onFlickStarted: {
+        if (taskSwitcherHelpers.currentlyBeingClosed) {return}
         root.cancelFlick();
     }
     onFlickEnded: {
@@ -51,6 +57,7 @@ Flickable {
     }
 
     onDraggingChanged: {
+        if (taskSwitcherHelpers.currentlyBeingClosed) {return}
         if (dragging) {
             taskSwitcherHelpers.cancelAnimations();
         } else {

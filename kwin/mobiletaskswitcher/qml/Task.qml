@@ -25,6 +25,8 @@ Item {
 
     readonly property real dragOffset: -control.y
 
+    readonly property int currentIndex: model.index
+
     // whether this task is being interacted with
     readonly property bool interactingActive: control.pressed && control.passedDragThreshold
 
@@ -136,6 +138,7 @@ Item {
             to: 0
             onFinished: {
                 if (to != 0) { // close app
+                    taskSwitcherHelpers.lastClosedTask = currentIndex;
                     delegate.closeApp();
                     uncloseTimer.start();
                 }
@@ -182,7 +185,10 @@ Item {
                     icon.name: "window-close"
                     icon.width: Kirigami.Units.iconSizes.smallMedium
                     icon.height: Kirigami.Units.iconSizes.smallMedium
-                    onClicked: delegate.closeApp()
+                    onClicked: {
+                        taskSwitcherHelpers.lastClosedTask = currentIndex;
+                        delegate.closeApp()
+                    }
                 }
             }
 
