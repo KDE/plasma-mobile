@@ -12,7 +12,7 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 pragma Singleton
 
 QtObject {
-    readonly property real topPanelHeight: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing
+    readonly property real topPanelHeight: Math.round(Kirigami.Units.gridUnit * ShellSettings.Settings.statusBarScaleFactor / 2) * 2 + Kirigami.Units.smallSpacing
     readonly property real navigationPanelThickness: ShellSettings.Settings.navigationPanelEnabled ? Kirigami.Units.gridUnit * 2 : 0
 
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {

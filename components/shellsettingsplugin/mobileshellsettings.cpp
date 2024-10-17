@@ -24,14 +24,14 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
     , m_config{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
 {
     m_configWatcher = KConfigWatcher::create(m_config);
-
     connect(m_configWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
-	Q_UNUSED(names)
+        Q_UNUSED(names)
         if (group.name() == GENERAL_CONFIG_GROUP) {
             Q_EMIT vibrationsEnabledChanged();
             Q_EMIT vibrationDurationChanged();
             Q_EMIT animationsEnabledChanged();
             Q_EMIT dateInStatusBarChanged();
+            Q_EMIT statusBarScaleFactorChanged();
             Q_EMIT navigationPanelEnabledChanged();
             Q_EMIT alwaysShowKeyboardToggleOnNavigationPanelChanged();
             Q_EMIT keyboardButtonEnabledChanged();
@@ -92,6 +92,19 @@ void MobileShellSettings::setDateInStatusBar(bool dateInStatusBar)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("dateInStatusBar", dateInStatusBar, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+float MobileShellSettings::statusBarScaleFactor() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("statusBarScaleFactor", 1.0);
+}
+
+void MobileShellSettings::setStatusBarScaleFactor(float statusBarScaleFactor)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("statusBarScaleFactor", statusBarScaleFactor, KConfigGroup::Notify);
     m_config->sync();
 }
 
