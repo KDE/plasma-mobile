@@ -42,7 +42,6 @@ RowLayout {
             Layout.alignment: Qt.AlignVCenter
 
             height: batteryRepeater.height
-            width: childrenRect.width
 
             PW.BatteryIcon {
                 id: battery

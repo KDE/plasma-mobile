@@ -20,6 +20,7 @@ import org.kde.plasma.private.systemtray as SystemTray
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kitemmodels as KItemModels
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
     id: root
@@ -51,9 +52,9 @@ Item {
 
     property color colorScopeColor: Kirigami.Theme.backgroundColor
 
-    readonly property real textPixelSize: 11
-    readonly property real smallerTextPixelSize: 9
-    readonly property real elementSpacing: Kirigami.Units.smallSpacing * 1.5
+    readonly property real textPixelSize: Math.round(11 * ShellSettings.Settings.statusBarScaleFactor)
+    readonly property real smallerTextPixelSize: Math.round(9 * ShellSettings.Settings.statusBarScaleFactor)
+    readonly property real elementSpacing: Math.round(Kirigami.Units.smallSpacing * 1.5)
 
     P5Support.DataSource {
         id: timeSource

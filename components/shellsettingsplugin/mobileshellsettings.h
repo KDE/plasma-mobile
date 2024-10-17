@@ -31,6 +31,7 @@ class MobileShellSettings : public QObject
 
     // status bar
     Q_PROPERTY(bool dateInStatusBar READ dateInStatusBar WRITE setDateInStatusBar NOTIFY dateInStatusBarChanged)
+    Q_PROPERTY(float statusBarScaleFactor READ statusBarScaleFactor WRITE setStatusBarScaleFactor NOTIFY statusBarScaleFactorChanged)
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
@@ -109,6 +110,20 @@ public:
     void setDateInStatusBar(bool dateInStatusBar);
 
     /**
+     * Scale factor for status bar height.
+     *
+     * Status bar height will be multiplied by this value.
+     */
+    float statusBarScaleFactor() const;
+
+    /**
+     * Set the scale factor for the status bar's height.
+     *
+     * @param statusBarScaleFactor Scale factor for status bar height.
+     */
+    void setStatusBarScaleFactor(float statusBarScaleFactor);
+
+    /**
      * Whether the navigation panel is enabled.
      *
      * If this is false, then gesture based navigation is used.
@@ -183,6 +198,7 @@ Q_SIGNALS:
     void keyboardButtonEnabledChanged();
     void animationsEnabledChanged();
     void dateInStatusBarChanged();
+    void statusBarScaleFactorChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();

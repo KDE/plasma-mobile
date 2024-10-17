@@ -8,6 +8,7 @@ import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.notificationmanager as Notifications
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.dpmsplugin as DPMS
 import org.kde.plasma.components 3.0 as PC3
 
@@ -99,7 +100,7 @@ Item {
             id: headerBar
             z: 1
             anchors.fill: parent
-            statusBarHeight: Kirigami.Units.gridUnit * 1.25
+            statusBarHeight: MobileShell.Constants.topPanelHeight
             openFactor: flickableLoader.item ? flickableLoader.item.openFactor : 0
             notificationsModel: root.notifModel
             onPasswordRequested: root.askPassword()
