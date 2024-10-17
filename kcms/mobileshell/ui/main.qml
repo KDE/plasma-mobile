@@ -50,7 +50,7 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormHeader {
-            title: i18n("Status bar")
+            title: i18n("Status Bar")
         }
 
         FormCard.FormCard {
@@ -65,6 +65,44 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
+
+            FormCard.FormComboBoxDelegate {
+                id: statusBarScaleFactorDelegate
+
+                property string tinyString: i18nc("Status bar height", "Tiny")
+                property string smallString: i18nc("Status bar height", "Small")
+                property string normalString: i18nc("Status bar height", "Normal")
+                property string largeString: i18nc("Status bar height","Large")
+                property string xlargeString: i18nc("Status bar height", "Very Large")
+
+
+                text: i18n("Status Bar Size")
+                description: i18n("Size of the top panel (needs restart).")
+
+                currentIndex: indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
+                model: ListModel {
+                    // We can't use i18n with ListElement, so use a property instead
+                    Component.onCompleted: {
+                        append({"name": statusBarScaleFactorDelegate.tinyString, "value": 1.0});
+                        append({"name": statusBarScaleFactorDelegate.smallString, "value": 1.15});
+                        append({"name": statusBarScaleFactorDelegate.normalString, "value": 1.25});
+                        append({"name": statusBarScaleFactorDelegate.largeString, "value": 1.5});
+                        append({"name": statusBarScaleFactorDelegate.xlargeString, "value": 2.0});
+
+                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                        statusBarScaleFactorDelegate.currentIndex = statusBarScaleFactorDelegate.indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
+                    }
+                }
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: dialog.parent = root
+                onCurrentValueChanged: ShellSettings.Settings.statusBarScaleFactor = currentValue
+            }
+
         }
 
         FormCard.FormHeader {
