@@ -1,16 +1,16 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Sveinn í Felli <sv1@fellsnet.is>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Sveinn í Felli <sv1@fellsnet.is>
 # SPDX-FileCopyrightText: 2023, 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2024-06-28 16:20+0000\n"
-"Last-Translator: Gummi <gudmundure@gmail.com>\n"
-"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-10-17 11:58+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,15 +20,15 @@ msgstr ""
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Afrita á klippispjald"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Skoða nánar um villu…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
-msgstr ""
+msgstr "Opna %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -48,15 +48,15 @@ msgstr "Framsetning sem á að nota fyrir heimaskjáinn."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:93
 msgid "Wallpaper Plugin"
-msgstr "Veggfóðursviðbót"
+msgstr "Bakgrunnsmyndaviðbót"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:94
 msgid "The wallpaper plugin to use."
-msgstr "Veggfóðursviðbót sem á að nota."
+msgstr "Bakgrunnsmyndaviðbót sem á að nota."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Wallpaper Plugins"
-msgstr "Veggfóðursviðbót"
+msgstr "Bakgrunnsmyndaviðbætur"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
@@ -74,7 +74,7 @@ msgstr "Sækja um núna"
 
 #: contents/configuration/ContainmentConfiguration.qml:34
 msgid "Wallpaper"
-msgstr "Veggfóður"
+msgstr "Bakgrunnsmynd"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
@@ -86,7 +86,7 @@ msgstr "Rangt PIN-númer"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Vísir um virkni spjalds"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Skipta um veggfóður"

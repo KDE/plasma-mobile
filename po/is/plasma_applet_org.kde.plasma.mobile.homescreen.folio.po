@@ -1,22 +1,22 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Sveinn í Felli <sv1@fellsnet.is>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Sveinn í Felli <sv1@fellsnet.is>
 # SPDX-FileCopyrightText: 2023, 2024 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-02 00:40+0000\n"
-"PO-Revision-Date: 2024-02-19 18:49+0000\n"
-"Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
-"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2024-10-17 12:05+0000\n"
+"Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
+"Language-Team: Icelandic\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -24,11 +24,10 @@ msgid "Folder"
 msgstr "Mappa"
 
 #: package/contents/ui/AppDrawerHeader.qml:52
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "Forrit"
+msgstr "Leita að forritum…"
 
 #: package/contents/ui/FavouritesBar.qml:149
 #: package/contents/ui/FavouritesBar.qml:223
@@ -128,13 +127,13 @@ msgstr "Eftirlætastika"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr "Veggfóður"
+msgstr "Bakgrunnsmynd"
 
 #: package/contents/ui/settings/SettingsWindow.qml:249
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr "Sýna móðuáhrif á veggfóðri"
+msgstr "Sýna móðuáhrif á bakgrunnsmynd"
 
 #: package/contents/ui/settings/SettingsWindow.qml:260
 #, kde-format
@@ -145,7 +144,7 @@ msgstr "Almennt"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "Skipta á milli heimaskjáa og fleiri veggfóðursvalkosta"
+msgstr "Skipta á milli heimaskjáa og fleiri bakgrunnsvalkosta"
 
 #: package/contents/ui/settings/SettingsWindow.qml:294
 #, kde-format
