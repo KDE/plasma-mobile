@@ -35,11 +35,13 @@ Item {
     }
 
     // Listen for keyboard events, and focus on input area
-    Keys.onPressed: {
+    Keys.onPressed: (event) => {
         if (flickableLoader.item) {
             root.lockScreenState.isKeyboardMode = true;
             flickableLoader.item.goToOpenPosition();
             passwordBar.textField.forceActiveFocus();
+
+            passwordBar.keyPress(event.text);
         }
     }
 
@@ -176,7 +178,7 @@ Item {
 
                 // Clear entered password after closing keypad
                 onOpenFactorChanged: {
-                    if (flickable.openFactor < 0.1) {
+                    if (flickable.openFactor < 0.1 && !flickable.movingUp) {
                         root.passwordBar.clear();
                     }
                 }
