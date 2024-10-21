@@ -19,43 +19,33 @@ RowLayout {
 
     visible: MobileShell.BatteryInfo.isVisible
 
-
     ListView {
         id: batteryRepeater
+
+        property int batteryWidth: 0
+
         spacing: root.elementSpacing
-
         model: MobileShell.BatteryInfo.batteries
-
         orientation: ListView.Horizontal
-        Layout.alignment: Qt.AlignVCenter
-        Layout.preferredWidth: childrenRect.width
 
+        Layout.alignment: Qt.AlignVCenter
+        Layout.preferredWidth: (batteryRepeater.batteryWidth + root.elementSpacing) * batteryRepeater.count
         Layout.fillHeight: true
+        Layout.fillWidth: false
 
         delegate: RowLayout {
 
-            /* Battery properties (from batterycontrol.h):
-             *     enum BatteryRoles {
-                *  Percent = Qt::UserRole + 1,
-                *  Capacity,
-                *  Energy,
-                *  PluggedIn,
-                *  IsPowerSupply,
-                *  ChargeState,
-                *  PrettyName,
-                *  Type }
-                */
+            Layout.preferredWidth: batteryRepeater.batteryWidth
+            Layout.fillHeight: false
+            Layout.alignment: Qt.AlignVCenter
 
-            Layout.preferredWidth: childrenRect.width
-            Layout.fillHeight: true
-
-            height: batteryLabel.height
-            width: childrenRect.width + (root.elementSpacing * index)
+            height: batteryRepeater.height
+            width: childrenRect.width
 
             PW.BatteryIcon {
                 id: battery
 
-                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignVCenter
                 height: batteryLabel.height
                 width: batteryLabel.height
 
@@ -75,6 +65,7 @@ RowLayout {
             }
 
             Component.onCompleted: {
+                batteryRepeater.batteryWidth = batteryLabel.width + battery.width
                 console.log("======> Created Battery " + index);
                 console.log("        PrettyName: " + PrettyName);
                 console.log("        Percent:    " + Percent);
