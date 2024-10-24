@@ -52,6 +52,7 @@ target_link_libraries(mobileshellplugin
         Plasma::KWaylandClient
         KF6::Service
         KF6::Package
+        LayerShellQt::Interface
 )
 
 ecm_finalize_qml_module(mobileshellplugin)

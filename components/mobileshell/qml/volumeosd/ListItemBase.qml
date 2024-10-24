@@ -128,6 +128,18 @@ Controls.ItemDelegate {
                 Layout.fillWidth: true
                 spacing: Kirigami.Units.smallSpacing
 
+                PlasmaComponents.ToolButton {
+                    icon.name: Icon.name(Volume / PulseAudio.NormalVolume * 100.0, Muted)
+                    text: Muted ? i18n("Unmute") : i18n("Mute")
+                    display: Controls.AbstractButton.IconOnly
+                    Layout.alignment: Qt.AlignVCenter
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                    onClicked: {
+                        Muted = !Muted
+                    }
+                }
+
                 // this slider was effectively copied from the source (linked at the top of the file)
                 PlasmaComponents.Slider {
                     id: slider

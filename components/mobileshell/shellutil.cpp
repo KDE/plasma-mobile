@@ -14,6 +14,8 @@
 #include <KNotification>
 #include <KNotificationJobUiDelegate>
 
+#include <QQuickWindow>
+
 #include <QDBusPendingReply>
 #include <QDateTime>
 #include <QDebug>
@@ -87,3 +89,16 @@ void ShellUtil::launchApp(const QString &storageId)
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoHandlingEnabled));
     job->start();
 }
+
+void ShellUtil::setInputTransparent(QQuickWindow *window, bool transparent) {
+    if (window) {
+        Qt::WindowFlags flags = window->flags();
+        if (transparent) {
+            flags |= Qt::WindowTransparentForInput;
+        } else {
+            flags &= ~Qt::WindowTransparentForInput;
+        }
+        window->setFlags(flags);
+    }
+}
+

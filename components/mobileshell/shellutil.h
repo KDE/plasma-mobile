@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QQuickItem>
+#include <QQuickWindow>
 #include <qqmlregistration.h>
 
 #include <KConfigWatcher>
@@ -64,6 +65,11 @@ public:
      * Whether the system is using 24 hour format.
      */
     Q_INVOKABLE bool isSystem24HourFormat();
+
+    /**
+     * Set window input to be transparent.
+     */
+    Q_INVOKABLE void setInputTransparent(QQuickWindow *window, bool transparent);
 
 Q_SIGNALS:
     void isSystem24HourFormatChanged();

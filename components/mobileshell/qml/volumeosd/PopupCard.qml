@@ -9,6 +9,9 @@ import QtQuick.Controls as Controls
 import QtQuick.Layouts
 import QtQuick.Window
 
+import QtQuick.Effects
+import Qt5Compat.GraphicalEffects
+
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
@@ -16,11 +19,43 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 // capture presses on the audio applet so it doesn't close the overlay
 Controls.Control {
     id: content
-    implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, parent.width - Kirigami.Units.gridUnit * 2)
+    implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, Screen.width - Kirigami.Units.gridUnit * 2)
     padding: Kirigami.Units.smallSpacing * 2
-    background: KSvg.FrameSvgItem {
-        imagePath: "widgets/background"
-        anchors.margins: -Kirigami.Units.smallSpacing * 2
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    MultiEffect {
         anchors.fill: parent
+        source: simpleShadow
+        blurMax: 16
+        shadowEnabled: true
+        shadowVerticalOffset: 1
+        shadowOpacity: 0.85
+        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
+    }
+
+    Rectangle {
+        id: simpleShadow
+        anchors.fill: parent
+        anchors.leftMargin: -1
+        anchors.rightMargin: -1
+        anchors.bottomMargin: -1
+
+        color: {
+            let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
+            return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.5)
+        }
+        radius: Kirigami.Units.cornerRadius
+    }
+
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r * 0.95, Kirigami.Theme.backgroundColor.g * 0.95, Kirigami.Theme.backgroundColor.b * 0.95, 0.85)
+        radius: Kirigami.Units.cornerRadius
+        layer.enabled: true
+        layer.effect: MultiEffect {
+            brightness: 0.075
+        }
     }
 }
