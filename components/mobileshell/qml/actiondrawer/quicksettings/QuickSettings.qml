@@ -103,7 +103,7 @@ Item {
             Layout.minimumHeight: rowCount * rowHeight
 
             asynchronous: true
-            sourceComponent: root.mode === QuickSettings.Pages ? swipeViewComponent : scrollViewComponent
+            sourceComponent: swipeViewComponent
         }
 
         BrightnessItem {
@@ -157,7 +157,7 @@ Item {
         }
     }
 
-    // Loads portrait quick settings view
+    // Loads portrait and landscape quick settings view
     Component {
         id: swipeViewComponent
 
@@ -222,64 +222,6 @@ Item {
                         color: Kirigami.Theme.disabledTextColor
 
                         opacity: index === currentIndex ? 0.95 : 0.45
-                    }
-                }
-            }
-        }
-    }
-
-    // Loads landscape quick settings view
-    Component {
-        id: scrollViewComponent
-
-        Item {
-            width: parent.width
-            height: rowCount * rowHeight
-
-            Flickable {
-                id: flickable
-                anchors.fill: parent
-                contentWidth: width
-                contentHeight: flow.height
-
-                clip: true
-
-                ScrollIndicator.vertical: ScrollIndicator {
-                    id: scrollIndicator
-                    visible: quickSettingsCount > pageSize ? true : false
-                    position: 0.1
-
-                    contentItem: Item {
-                        implicitWidth: Kirigami.Units.smallSpacing / 4
-                        Rectangle {
-                            // shift over the indicator a bit to the right
-                            anchors.fill: parent
-                            anchors.leftMargin: 2
-                            anchors.rightMargin: -2
-
-                            color: Kirigami.Theme.textColor
-                            opacity: scrollIndicator.active ? 0.5 : 0
-
-                            Behavior on opacity { NumberAnimation {} }
-                        }
-                    }
-                }
-
-                Flow {
-                    id: flow
-                    width: parent.width
-                    height: Math.ceil(quickSettingsCount / columnCount) * rowHeight
-                    spacing: 0
-
-                    Repeater {
-                        model: quickSettingsModel
-                        delegate: Loader {
-                            required property var modelData
-
-                            asynchronous: true
-
-                            sourceComponent: quickSettingComponent
-                        }
                     }
                 }
             }
