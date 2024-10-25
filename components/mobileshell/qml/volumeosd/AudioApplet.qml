@@ -19,7 +19,13 @@ import org.kde.plasma.private.volume
 
 // capture presses on the audio applet so it doesn't close the overlay
 ColumnLayout {
+    id: audioApplet
     spacing: 0
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    property real scale: 1.0
 
     PulseObjectFilterModel {
         id: paSinkFilterModel
@@ -50,6 +56,14 @@ ColumnLayout {
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
+
+        transform: Scale {
+            origin.x: Math.round(implicitWidth / 2)
+            origin.y: Math.round(height / 2)
+            xScale: audioApplet.scale
+            yScale: audioApplet.scale
+        }
+
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
@@ -80,6 +94,14 @@ ColumnLayout {
     PopupCard {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
+
+        transform: Scale {
+            origin.x: Math.round(implicitWidth / 2)
+            origin.y: Math.round(height / 2)
+            xScale: audioApplet.scale
+            yScale: audioApplet.scale
+        }
+
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
@@ -111,6 +133,14 @@ ColumnLayout {
         visible: sourceInputView.model.count + sourceMediaInputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
+
+        transform: Scale {
+            origin.x: Math.round(implicitWidth / 2)
+            origin.y: Math.round(height / 2)
+            xScale: audioApplet.scale
+            yScale: audioApplet.scale
+        }
+
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing
@@ -164,6 +194,14 @@ ColumnLayout {
         visible: sourceOutputView.model.count !== 0
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.gridUnit
+
+        transform: Scale {
+            origin.x: Math.round(implicitWidth / 2)
+            origin.y: Math.round(height / 2)
+            xScale: audioApplet.scale
+            yScale: audioApplet.scale
+        }
+
         contentItem: ColumnLayout {
             anchors.rightMargin: Kirigami.Units.smallSpacing
             anchors.leftMargin: Kirigami.Units.smallSpacing

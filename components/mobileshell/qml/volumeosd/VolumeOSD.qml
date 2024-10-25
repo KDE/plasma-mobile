@@ -13,62 +13,129 @@ import QtQuick.Window
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 import org.kde.plasma.private.volume
 
-NanoShell.FullScreenOverlay {
+import org.kde.layershell 1.0 as LayerShell
+
+
+Window {
     id: window
 
-    // used by context menus opened in the applet to not autoclose the osd
-    property bool suppressActiveClose: false
-
-    // whether the applet is showing all devices
-    property bool showFullApplet: false
+    width: Screen.width
+    height: Screen.height
 
     visible: false
 
-    color: showFullApplet ? Qt.rgba(0, 0, 0, 0.6) : "transparent"
-    Behavior on color {
-        ColorAnimation {}
-    }
+    LayerShell.Window.scope: "overlay"
+    LayerShell.Window.anchors: LayerShell.Window.AnchorTop
+    LayerShell.Window.layer: LayerShell.Window.LayerTop
+    LayerShell.Window.exclusionZone: -1
+
+    readonly property color backgroundColor: Qt.darker(Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95), 1.05)
+
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    color: backgroundColor
 
     function showOverlay() {
         if (!window.visible) {
-            window.showFullApplet = false;
-            window.showFullScreen();
-            hideTimer.restart();
-        } else if (!window.showFullApplet) { // don't autohide applet when the full applet is showing
-            hideTimer.restart();
+            window.open();
         }
     }
 
-    onActiveChanged: {
-        if (!active && !suppressActiveClose) {
-            hideTimer.stop();
-            hideTimer.triggered();
-        }
+    function open() {
+        flickable.state = "open";
+        // set window input transparency to accept touches
+        ShellUtil.setInputTransparent(window, false);
+        window.visible = true;
     }
 
-    Timer {
-        id: hideTimer
-        interval: 3000
-        running: false
-        onTriggered: {
-            window.close();
-            window.showFullApplet = false;
-        }
+    function close() {
+        flickable.state = "closed";
+        // set window input transparency to allow touches to pass through while the closing animation is playing
+        ShellUtil.setInputTransparent(window, true);
+    }
+
+    Component.onCompleted: {
+        window.close();
+        visible = false;
     }
 
     Flickable {
         id: flickable
         anchors.fill: parent
         contentHeight: cards.implicitHeight
-        boundsBehavior: window.showFullApplet ? Flickable.DragAndOvershootBounds : Flickable.StopAtBounds
+        boundsBehavior: Flickable.DragAndOvershootBounds
 
         pressDelay: 50
+
+        property real offset: -Kirigami.Units.gridUnit
+        property real scale: 0.95
+
+        state: "closed"
+
+        states: [
+            State {
+                name: "open"
+                PropertyChanges {
+                    target: flickable; offset: 0
+                }
+                PropertyChanges {
+                    target: flickable; scale: 1.0
+                }
+                PropertyChanges {
+                    target: flickable; opacity: 1.0
+                }
+                PropertyChanges {
+                    target: window; color: backgroundColor
+                }
+            },
+            State {
+                name: "closed"
+                PropertyChanges {
+                    target: flickable; offset: -Kirigami.Units.gridUnit * 3
+                }
+                PropertyChanges {
+                    target: flickable; scale: 0.95
+                }
+                PropertyChanges {
+                    target: flickable; opacity: 0.0
+                }
+                PropertyChanges {
+                    target: window; color: "transparent"
+                }
+            }
+        ]
+
+        transitions: Transition {
+            SequentialAnimation {
+                ParallelAnimation {
+                    PropertyAnimation {
+                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                    }
+                    PropertyAnimation {
+                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                    }
+                    PropertyAnimation {
+                        properties: "opacity"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                    }
+                    PropertyAnimation {
+                        properties: "color"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                    }
+                }
+                ScriptAction {
+                    script: {
+                        if (flickable.state == "closed") {
+                            window.visible = false;
+                        }
+                    }
+                }
+            }
+        }
 
         MouseArea {
             // capture taps behind cards to close
@@ -77,8 +144,7 @@ NanoShell.FullScreenOverlay {
             width: parent.width
             height: Math.max(cards.implicitHeight, window.height)
             onReleased: {
-                hideTimer.stop();
-                hideTimer.triggered();
+                window.close();
             }
 
             ColumnLayout {
@@ -88,126 +154,63 @@ NanoShell.FullScreenOverlay {
                 anchors.right: parent.right
                 spacing: 0
 
-                // osd card
-                PopupCard {
-                    id: osd
-                    Layout.topMargin: Kirigami.Units.gridUnit
-                    Layout.alignment: Qt.AlignHCenter
-
-                    contentItem: RowLayout {
-                        id: containerLayout
-                        spacing: Kirigami.Units.smallSpacing
-
-                        anchors.leftMargin: Kirigami.Units.smallSpacing * 2
-                        anchors.rightMargin: Kirigami.Units.smallSpacing
-
-                        PlasmaComponents.ToolButton {
-                            icon.name: !PreferredDevice.sink || PreferredDevice.sink.muted ? "audio-volume-muted" : "audio-volume-high"
-                            text: !PreferredDevice.sink || PreferredDevice.sink.muted ? i18n("Unmute") : i18n("Mute")
-                            display: Controls.AbstractButton.IconOnly
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                            Layout.rightMargin: Kirigami.Units.smallSpacing
-                            onClicked: muteVolume()
-                        }
-
-                        PlasmaComponents.ProgressBar {
-                            id: volumeSlider
-                            Layout.fillWidth: true
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.rightMargin: Kirigami.Units.smallSpacing * 2
-                            value: MobileShell.AudioInfo.volumeValue
-                            from: 0
-                            to: MobileShell.AudioInfo.maxVolumePercent
-                            Behavior on value { NumberAnimation { duration: Kirigami.Units.shortDuration } }
-                        }
-
-                        // Get the width of a three-digit number so we can size the label
-                        // to the maximum width to avoid the progress bar resizing itself
-                        TextMetrics {
-                            id: widestLabelSize
-                            text: i18n("100%")
-                            font: percentageLabel.font
-                        }
-
-                        Kirigami.Heading {
-                            id: percentageLabel
-                            Layout.preferredWidth: widestLabelSize.width
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.rightMargin: Kirigami.Units.smallSpacing
-                            level: 3
-                            text: i18nc("Percentage value", "%1%", MobileShell.AudioInfo.volumeValue)
-
-                            // Display a subtle visual indication that the volume might be
-                            // dangerously high
-                            // ------------------------------------------------
-                            // Keep this in sync with the copies in plasma-pa:ListItemBase.qml
-                            // and plasma-pa:VolumeSlider.qml
-                            color: {
-                                if (MobileShell.AudioInfo.volumeValue <= 100) {
-                                    return Kirigami.Theme.textColor
-                                } else if (MobileShell.AudioInfo.volumeValue > 100 && MobileShell.AudioInfo.volumeValue <= 125) {
-                                    return Kirigami.Theme.neutralTextColor
-                                } else {
-                                    return Kirigami.Theme.negativeTextColor
-                                }
-                            }
-                        }
-
-                        PlasmaComponents.ToolButton {
-                            icon.name: "configure"
-                            text: i18n("Open audio settings")
-                            visible: opacity !== 0
-                            opacity: showFullApplet ? 1 : 0
-                            display: Controls.AbstractButton.IconOnly
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                            Layout.rightMargin: Kirigami.Units.smallSpacing
-
-                            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
-
-                            onClicked: {
-                                let coords = mapToItem(flickable, 0, 0);
-                                MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_pulseaudio");
-                            }
-                        }
-
-                        PlasmaComponents.ToolButton {
-                            icon.name: window.showFullApplet ? "arrow-up" : "arrow-down"
-                            text: i18n("Toggle showing audio streams")
-                            display: Controls.AbstractButton.IconOnly
-                            Layout.alignment: Qt.AlignVCenter
-                            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
-                            onClicked: {
-                                window.showFullApplet = !window.showFullApplet
-                                // don't autohide applet when full applet is shown
-                                if (window.showFullApplet) {
-                                    hideTimer.stop();
-                                } else {
-                                    hideTimer.restart();
-                                }
-                            }
-                        }
-                    }
+                transform: Translate {
+                    y: flickable.offset
                 }
 
-                // other applet cards
                 AudioApplet {
                     id: applet
-                    Layout.topMargin: Kirigami.Units.gridUnit
+                    Layout.topMargin: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing * 3
                     Layout.alignment: Qt.AlignHCenter
                     Layout.preferredWidth: cards.width
-                    opacity: window.showFullApplet ? 1 : 0
-                    visible: opacity !== 0
-                    transform: Translate {
-                        y: window.showFullApplet ? 0 : -Kirigami.Units.gridUnit
-                        Behavior on y { NumberAnimation {} }
+                    scale: flickable.scale
+                }
+
+                PopupCard {
+                    id: settings
+                    Layout.alignment: Qt.AlignHCenter
+                    Layout.bottomMargin: Kirigami.Units.gridUnit
+
+                    transform: Scale {
+                        origin.x: Math.round(implicitWidth / 2)
+                        origin.y: Math.round(height / 2)
+                        xScale: flickable.scale
+                        yScale: flickable.scale
                     }
 
-                    Behavior on opacity { NumberAnimation {} }
+                    contentItem: RowLayout {
+
+                        PlasmaComponents.ToolButton {
+                            property int addedPadding: Kirigami.Units.smallSpacing * 2
+                            Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                            Layout.preferredWidth: parent.width - addedPadding * 2
+                            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                            Layout.margins: addedPadding
+
+                            contentItem: Item {
+                                anchors.fill: parent
+                                RowLayout {
+                                    spacing: Kirigami.Units.largeSpacing
+                                    anchors.centerIn: parent
+                                    Kirigami.Icon {
+                                        Layout.alignment: Qt.AlignVCenter
+                                        Layout.preferredWidth: Kirigami.Units.iconSizes.smallMedium
+                                        Layout.preferredHeight: Kirigami.Units.iconSizes.smallMedium
+                                        source:  "settings-configure"
+                                    }
+                                    PlasmaComponents.Label {
+                                        text: i18n("Open audio settings")
+                                        anchors.verticalCenter: parent.verticalCenter
+                                    }
+                                }
+                            }
+
+                            onClicked: {
+                                MobileShell.ShellUtil.executeCommand("plasma-open-settings kcm_pulseaudio");
+                                window.close();
+                            }
+                        }
+                    }
                 }
             }
         }

@@ -20,7 +20,9 @@ QtObject {
     id: component
 
     function showVolumeOverlay() {
-        osd.showOverlay();
+        if (!osd.visible) {
+            vcp.showOverlay();
+        }
     }
 
     Component.onCompleted: {
@@ -31,9 +33,11 @@ QtObject {
         target: MobileShellState.ShellDBusClient
 
         function onShowVolumeOSDRequested() {
-            component.showVolumeOverlay();
+            osd.showOverlay();
+            vcp.close();
         }
     }
 
     property var osd: VolumeOSD {}
+    property var vcp: VolumeChangedPopup {}
 }
