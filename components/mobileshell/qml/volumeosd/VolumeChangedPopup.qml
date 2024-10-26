@@ -34,6 +34,7 @@ Window {
     LayerShell.Window.layer: LayerShell.Window.LayerOverlay
     LayerShell.Window.exclusionZone: -1
     LayerShell.Window.margins.top: offsetMargins
+    LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityNone
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
