@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-24 00:41+0000\n"
+"POT-Creation-Date: 2024-10-26 00:41+0000\n"
 "PO-Revision-Date: 2024-08-03 12:41+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -64,27 +64,27 @@ msgstr "Off"
 msgid "SIM Locked"
 msgstr "SIM Locked"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:61
+#: qml/statusbar/indicators/BatteryIndicator.qml:60
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:59
+#: qml/volumeosd/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
 msgstr "Outputs"
 
-#: qml/volumeosd/AudioApplet.qml:89
+#: qml/volumeosd/AudioApplet.qml:111
 #, kde-format
 msgid "Inputs"
 msgstr "Inputs"
 
-#: qml/volumeosd/AudioApplet.qml:120
+#: qml/volumeosd/AudioApplet.qml:150
 #, kde-format
 msgid "Playback Streams"
 msgstr "Playback Streams"
 
-#: qml/volumeosd/AudioApplet.qml:173
+#: qml/volumeosd/AudioApplet.qml:211
 #, kde-format
 msgid "Recording Streams"
 msgstr "Recording Streams"
@@ -105,19 +105,29 @@ msgstr "Device name not found"
 msgid "Show additional options for %1"
 msgstr "Show additional options for %1"
 
-#: qml/volumeosd/ListItemBase.qml:152
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#, kde-format
+msgid "Unmute"
+msgstr "Unmute"
+
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#, kde-format
+msgid "Mute"
+msgstr "Mute"
+
+#: qml/volumeosd/ListItemBase.qml:164
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Adjust volume for %1"
 
-#: qml/volumeosd/ListItemBase.qml:230
+#: qml/volumeosd/ListItemBase.qml:242
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:245
+#: qml/volumeosd/ListItemBase.qml:257
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -139,36 +149,16 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Stream name not found"
 
-#: qml/volumeosd/VolumeOSD.qml:106
-#, kde-format
-msgid "Unmute"
-msgstr "Unmute"
+#: qml/volumeosd/VolumeChangedPopup.qml:260
+#, fuzzy, kde-format
+#| msgid "Toggle showing audio streams"
+msgid "configure audio streams"
+msgstr "Toggle showing audio streams"
 
-#: qml/volumeosd/VolumeOSD.qml:106
-#, kde-format
-msgid "Mute"
-msgstr "Mute"
-
-#: qml/volumeosd/VolumeOSD.qml:130
-#, kde-format
-msgid "100%"
-msgstr "100%"
-
-#: qml/volumeosd/VolumeOSD.qml:140
-#, kde-format
-msgctxt "Percentage value"
-msgid "%1%"
-msgstr "%1%"
-
-#: qml/volumeosd/VolumeOSD.qml:160
+#: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
 msgid "Open audio settings"
 msgstr "Open audio settings"
-
-#: qml/volumeosd/VolumeOSD.qml:179
-#, kde-format
-msgid "Toggle showing audio streams"
-msgstr "Toggle showing audio streams"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -413,6 +403,13 @@ msgstr "Show %1 More"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Clear All Notifications"
+
+#~ msgid "100%"
+#~ msgstr "100%"
+
+#~ msgctxt "Percentage value"
+#~ msgid "%1%"
+#~ msgstr "%1%"
 
 #~ msgid "Audio Settings"
 #~ msgstr "Audio Settings"

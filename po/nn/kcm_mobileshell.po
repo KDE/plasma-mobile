@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:41+0000\n"
 "PO-Revision-Date: 2024-07-13 21:51+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -44,8 +44,9 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Viss dette er av, vert animasjonane reduserte så mykje som mogleg."
 
 #: ui/main.qml:53
-#, kde-format
-msgid "Status bar"
+#, fuzzy, kde-format
+#| msgid "Status bar"
+msgid "Status Bar"
 msgstr "Statuslinje"
 
 #: ui/main.qml:59
@@ -60,27 +61,68 @@ msgstr ""
 "Viss det er kryssa av her, vil datoen visast ved sida av klokka i "
 "statuslinja."
 
-#: ui/main.qml:71
+#: ui/main.qml:74
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:75
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:76
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr ""
+
+#: ui/main.qml:77
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr ""
+
+#: ui/main.qml:78
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr ""
+
+#: ui/main.qml:81
+#, fuzzy, kde-format
+#| msgid "Status bar"
+msgid "Status Bar Size"
+msgstr "Statuslinje"
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr ""
+
+#: ui/main.qml:109
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigasjonspanel"
 
-#: ui/main.qml:77
+#: ui/main.qml:115
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "«Berre fingerrørsler»-modus"
 
-#: ui/main.qml:78
+#: ui/main.qml:116
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Om navigasjonspanelet skal gøymast."
 
-#: ui/main.qml:92
+#: ui/main.qml:130
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Vis alltid tastatur-knapp"
 
-#: ui/main.qml:93
+#: ui/main.qml:131
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -88,44 +130,44 @@ msgstr ""
 "Om knappen for å visa/gøyma skjerm­tastaturet alltid skal visast på "
 "navigasjonspanelet."
 
-#: ui/main.qml:104
+#: ui/main.qml:142
 #, kde-format
 msgid "Action Drawer"
 msgstr "Handlingsskuff"
 
-#: ui/main.qml:110
+#: ui/main.qml:148
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Festa-modus"
 
-#: ui/main.qml:111
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Utvida-modus"
 
-#: ui/main.qml:115 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snøgginnstillingar"
 
-#: ui/main.qml:123
+#: ui/main.qml:161
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Øvre venstre skuff-modus"
 
-#: ui/main.qml:124
+#: ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Modus ved opning frå oppe til venstre."
 
-#: ui/main.qml:149
+#: ui/main.qml:187
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Øvre høgre skuff-modus"
 
-#: ui/main.qml:150
+#: ui/main.qml:188
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modus ved opning frå oppe til høgre."

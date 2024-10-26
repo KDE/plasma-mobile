@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:41+0000\n"
 "PO-Revision-Date: 2024-01-01 10:11-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -44,7 +44,7 @@ msgstr ""
 
 #: ui/main.qml:53
 #, kde-format
-msgid "Status bar"
+msgid "Status Bar"
 msgstr ""
 
 #: ui/main.qml:59
@@ -57,70 +57,110 @@ msgstr ""
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 
-#: ui/main.qml:71
+#: ui/main.qml:74
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:75
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:76
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr ""
+
+#: ui/main.qml:77
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr ""
+
+#: ui/main.qml:78
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar Size"
+msgstr ""
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr ""
+
+#: ui/main.qml:109
 #, kde-format
 msgid "Navigation Panel"
 msgstr "ਨੇਵੀਗੇਸ਼ਨ ਪੈਨਲ"
 
-#: ui/main.qml:77
+#: ui/main.qml:115
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "ਸਿਰਫ਼਼ ਜੈਸਚਰ ਢੰਗ"
 
-#: ui/main.qml:78
+#: ui/main.qml:116
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "ਕੀ ਨੇਵੀਗੇਸ਼ਨ ਪੈਨਲ ਨੂੰ ਓਹਲੇ ਕਰਨਾ ਹੈ।"
 
-#: ui/main.qml:92
+#: ui/main.qml:130
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:93
+#: ui/main.qml:131
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "ਕੀ ਨੇਵੀਗੇਸ਼ਨ ਪੈਨਲ ਉੱਤੇ ਕੀਬੋਰਡ ਬਦਲੋ ਬਟਨ ਨੂੰ ਹਮੇਸ਼ਾਂ ਵੇਖਾਉਣਾ ਹੈ।"
 
-#: ui/main.qml:104
+#: ui/main.qml:142
 #, kde-format
 msgid "Action Drawer"
 msgstr "ਸਰਗਰਮ ਦਰਾਜ"
 
-#: ui/main.qml:110
+#: ui/main.qml:148
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "ਟੰਗਣ ਢੰਗ"
 
-#: ui/main.qml:111
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "ਫ਼ੈਲਾਉਣ ਢੰਗ"
 
-#: ui/main.qml:115 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "ਫ਼ੌਰੀ ਸੈਟਿੰਗਾਂ"
 
-#: ui/main.qml:123
+#: ui/main.qml:161
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "ਉਪਰੀ ਖੱਬਾ ਦਰਾਜ ਢੰਗ"
 
-#: ui/main.qml:124
+#: ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr ""
 
-#: ui/main.qml:149
+#: ui/main.qml:187
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "ਉਪਰੀ ਸੱਜਾ ਦਰਾਜ ਢੰਗ"
 
-#: ui/main.qml:150
+#: ui/main.qml:188
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr ""

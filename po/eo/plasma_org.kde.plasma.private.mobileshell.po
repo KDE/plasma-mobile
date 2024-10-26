@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-24 00:41+0000\n"
+"POT-Creation-Date: 2024-10-26 00:41+0000\n"
 "PO-Revision-Date: 2024-08-02 22:29+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -65,27 +65,27 @@ msgstr "Malŝaltita"
 msgid "SIM Locked"
 msgstr "SIM Ŝlosita"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:61
+#: qml/statusbar/indicators/BatteryIndicator.qml:60
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/AudioApplet.qml:59
+#: qml/volumeosd/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
 msgstr "Eligoj"
 
-#: qml/volumeosd/AudioApplet.qml:89
+#: qml/volumeosd/AudioApplet.qml:111
 #, kde-format
 msgid "Inputs"
 msgstr "Enigaĵoj"
 
-#: qml/volumeosd/AudioApplet.qml:120
+#: qml/volumeosd/AudioApplet.qml:150
 #, kde-format
 msgid "Playback Streams"
 msgstr "Reproduktaj Rojoj"
 
-#: qml/volumeosd/AudioApplet.qml:173
+#: qml/volumeosd/AudioApplet.qml:211
 #, kde-format
 msgid "Recording Streams"
 msgstr "Registrado de Rojoj"
@@ -106,19 +106,29 @@ msgstr "Aparatonomo ne trovita"
 msgid "Show additional options for %1"
 msgstr "Montri pliajn opciojn por %1"
 
-#: qml/volumeosd/ListItemBase.qml:152
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#, kde-format
+msgid "Unmute"
+msgstr "Malŝalti"
+
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#, kde-format
+msgid "Mute"
+msgstr "Silentigi"
+
+#: qml/volumeosd/ListItemBase.qml:164
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Alĝustigi laŭtecon por %1"
 
-#: qml/volumeosd/ListItemBase.qml:230
+#: qml/volumeosd/ListItemBase.qml:242
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:245
+#: qml/volumeosd/ListItemBase.qml:257
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -140,36 +150,16 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Flugnomo ne trovita"
 
-#: qml/volumeosd/VolumeOSD.qml:106
-#, kde-format
-msgid "Unmute"
-msgstr "Malŝalti"
+#: qml/volumeosd/VolumeChangedPopup.qml:260
+#, fuzzy, kde-format
+#| msgid "Toggle showing audio streams"
+msgid "configure audio streams"
+msgstr "Baskuligi montron de sonfluoj"
 
-#: qml/volumeosd/VolumeOSD.qml:106
-#, kde-format
-msgid "Mute"
-msgstr "Silentigi"
-
-#: qml/volumeosd/VolumeOSD.qml:130
-#, kde-format
-msgid "100%"
-msgstr "100%"
-
-#: qml/volumeosd/VolumeOSD.qml:140
-#, kde-format
-msgctxt "Percentage value"
-msgid "%1%"
-msgstr "%1%"
-
-#: qml/volumeosd/VolumeOSD.qml:160
+#: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
 msgid "Open audio settings"
 msgstr "Malfermi sonajn agordojn"
-
-#: qml/volumeosd/VolumeOSD.qml:179
-#, kde-format
-msgid "Toggle showing audio streams"
-msgstr "Baskuligi montron de sonfluoj"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:84
 #: qml/widgets/krunner/KRunnerWidget.qml:181
@@ -414,3 +404,10 @@ msgstr "Montri %1 Pli"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Forigi Ĉiujn Sciigojn"
+
+#~ msgid "100%"
+#~ msgstr "100%"
+
+#~ msgctxt "Percentage value"
+#~ msgid "%1%"
+#~ msgstr "%1%"

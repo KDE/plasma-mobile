@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-29 00:40+0000\n"
+"POT-Creation-Date: 2024-10-26 00:41+0000\n"
 "PO-Revision-Date: 2022-12-24 07:23+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr "Se estiver desligado, as animações serão reduzidas ao máximo."
 
 #: ui/main.qml:53
 #, kde-format
-msgid "Status bar"
+msgid "Status Bar"
 msgstr ""
 
 #: ui/main.qml:59
@@ -52,71 +52,111 @@ msgstr ""
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 
-#: ui/main.qml:71
+#: ui/main.qml:74
+#, kde-format
+msgctxt "Status bar height"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:75
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:76
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
+msgstr ""
+
+#: ui/main.qml:77
+#, kde-format
+msgctxt "Status bar height"
+msgid "Large"
+msgstr ""
+
+#: ui/main.qml:78
+#, kde-format
+msgctxt "Status bar height"
+msgid "Very Large"
+msgstr ""
+
+#: ui/main.qml:81
+#, kde-format
+msgid "Status Bar Size"
+msgstr ""
+
+#: ui/main.qml:82
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr ""
+
+#: ui/main.qml:109
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Painel de Navegação"
 
-#: ui/main.qml:77
+#: ui/main.qml:115
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Modo Apenas com Gestos"
 
-#: ui/main.qml:78
+#: ui/main.qml:116
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Se deve esconder o painel de navegação."
 
-#: ui/main.qml:92
+#: ui/main.qml:130
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:93
+#: ui/main.qml:131
 #, fuzzy, kde-format
 #| msgid "Whether to hide the navigation panel."
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Se deve esconder o painel de navegação."
 
-#: ui/main.qml:104
+#: ui/main.qml:142
 #, kde-format
 msgid "Action Drawer"
 msgstr "Área de Acções"
 
-#: ui/main.qml:110
+#: ui/main.qml:148
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Modo Fixo"
 
-#: ui/main.qml:111
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modo Expandido"
 
-#: ui/main.qml:115 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Configuração Rápida"
 
-#: ui/main.qml:123
+#: ui/main.qml:161
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Modo Superior-Esquerdo da Área"
 
-#: ui/main.qml:124
+#: ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "O modo ao abrir no canto superior-esquerdo."
 
-#: ui/main.qml:149
+#: ui/main.qml:187
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Modo Superior-Direito da Área"
 
-#: ui/main.qml:150
+#: ui/main.qml:188
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "O modo ao abrir no canto superior-direito."
