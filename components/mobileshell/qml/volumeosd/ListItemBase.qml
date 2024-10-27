@@ -21,16 +21,21 @@ import org.kde.plasma.private.volume 0.1
 import "icon.js" as Icon
 
 // adapted from https://invent.kde.org/plasma/plasma-pa/-/blob/master/applet/contents/ui/ListItemBase.qml
-Controls.ItemDelegate {
+Controls.Control {
     id: baseItem
 
     property string label
     property alias listIcon: clientIcon.source
     property string type // sink, source, source-output
 
-    onClicked: {
-        if (selectButton.visible) {
-            model.PulseObject.default = true;
+    MouseArea {
+        id: clickArea
+        anchors.fill: parent
+        z: -1
+        onClicked: {
+            if (selectButton.visible) {
+                model.PulseObject.default = true;
+            }
         }
     }
 
@@ -119,7 +124,6 @@ Controls.ItemDelegate {
                                 return sourceView.model;
                             }
                         }
-                        onVisibleChanged: window.suppressActiveClose = visible
                     }
                 }
             }
