@@ -51,10 +51,10 @@ Window {
     }
 
     function open() {
+        window.visible = true;
         cards.state = "open";
         // set window input transparency to accept touches
         ShellUtil.setInputTransparent(window, false);
-        window.visible = true;
     }
 
     function close() {
@@ -116,10 +116,10 @@ Window {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                     PropertyAnimation {
-                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration
+                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                 }
                 ScriptAction {
