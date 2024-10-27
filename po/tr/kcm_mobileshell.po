@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2024-06-29 13:28+0300\n"
+"PO-Revision-Date: 2024-10-26 13:22+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -50,7 +50,7 @@ msgstr "Durum Çubuğu"
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr "Durum Çubuğunda Tarih"
+msgstr "Durum çubuğunda tarih"
 
 #: ui/main.qml:60
 #, kde-format
@@ -65,7 +65,7 @@ msgstr "Dolaşım Paneli"
 #: ui/main.qml:77
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr "Yalnızca Hareket Kipi"
+msgstr "Yalnızca hareket kipi"
 
 #: ui/main.qml:78
 #, kde-format
@@ -75,7 +75,7 @@ msgstr "Dolaşım panelinin gizlenip gizlenmeyeceği."
 #: ui/main.qml:92
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr "Klavye aç/kapat düğmesini her zaman göster"
+msgstr "Klavyeyi aç/kapat düğmesini her zaman göster"
 
 #: ui/main.qml:93
 #, kde-format
