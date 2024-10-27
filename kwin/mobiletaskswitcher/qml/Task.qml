@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
 // SPDX-FileCopyrightText: 2021-2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -48,7 +49,7 @@ Item {
         if (!ShellSettings.Settings.convergenceModeEnabled) {
             delegate.window.setMaximize(true, true);
         }
-        taskSwitcherHelpers.openApp(model.index, delegate.window);
+        taskSwitcherHelpers.openApp(model.index);
     }
 
     function minimizeApp() {

@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
-// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@server23.cc>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -47,6 +47,9 @@ class MobileTaskSwitcherState : public QObject
 
     Q_PROPERTY(bool gestureInProgress READ gestureInProgress NOTIFY gestureInProgressChanged)
     Q_PROPERTY(Status status READ status WRITE setStatus NOTIFY statusChanged)
+
+    Q_PROPERTY(qint64 elapsedTimeSinceStart READ getElapsedTimeSinceStart)
+    Q_PROPERTY(qint64 doubleClickInterval READ getDoubleClickInterval) // is there a better way than to forward this?
 
 public:
     enum class Status {
@@ -97,6 +100,8 @@ public:
         return m_initialTaskIndex;
     }
 
+    void restartDoubleClickTimer();
+
 public Q_SLOTS:
     void processTouchPositionChanged(qreal primaryPosition, qreal orthogonalPosition);
 
@@ -130,6 +135,7 @@ private:
 
     void clearVelocityFilter();
     void calculateFilteredVelocity(qreal primaryPosition, qreal orthogonalPosition);
+    qint64 getElapsedTimeSinceStart();
 
     // velocities in (logical) pixels/msec
     QElapsedTimer m_frameTimer;
@@ -149,6 +155,12 @@ private:
     qreal m_yPosition = 0;
 
     bool m_wasInActiveTask;
+
+    QElapsedTimer *m_doubleClickTimer;
+    qint64 getDoubleClickInterval() const
+    {
+        return qApp->doubleClickInterval();
+    }
 };
 
 class MobileTaskSwitcherEffect : public QuickSceneEffect

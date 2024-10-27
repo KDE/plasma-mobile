@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick 2.15
@@ -19,6 +20,7 @@ QtObject {
     required property var taskSwitcher
     property var state: taskSwitcher.state
     required property var stateClass
+    required property var taskList
 
     // task switcher peek and pop setting for when it is toggled from the home screen
     readonly property real peekOffsetValue: 1.85
@@ -217,14 +219,14 @@ QtObject {
         closeFactorAnim.restart();
     }
 
-    function openApp(index, window, duration = Kirigami.Units.shortDuration, horizontalEasing = Easing.OutBack) {
+    function openApp(index, duration = Kirigami.Units.shortDuration, horizontalEasing = Easing.OutBack) {
         // cancel any opening animations ongoing
         openAnim.stop();
         cancelAnimations();
 
         animateGoToTaskIndex(index, duration);
         openAppAnim.restart();
-        KWinComponents.Workspace.activeWindow = window
+        KWinComponents.Workspace.activeWindow = taskList.getTaskAt(index).window;
     }
 
     // get the xPosition where the task will be centered on the screen

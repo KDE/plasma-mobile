@@ -1,6 +1,6 @@
 // SPDX-FileCopyrightText: 2021 Vlad Zahorodnii <vlad.zahorodnii@kde.org>
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
-// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@server23.cc>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "mobiletaskswitchereffect.h"
@@ -20,6 +20,7 @@ namespace KWin
 
 MobileTaskSwitcherState::MobileTaskSwitcherState(EffectTouchBorderState *effectState)
     : m_effectState{effectState}
+    , m_doubleClickTimer{new QElapsedTimer{}}
 {
     connect(m_effectState, &EffectTouchBorderState::inProgressChanged, this, &MobileTaskSwitcherState::gestureInProgressChanged);
 }
@@ -150,6 +151,11 @@ void MobileTaskSwitcherState::setInitialTaskIndex(int newTaskIndex)
     }
 }
 
+void MobileTaskSwitcherState::restartDoubleClickTimer()
+{
+    m_doubleClickTimer->restart();
+}
+
 void MobileTaskSwitcherState::calculateFilteredVelocity(qreal primaryDelta, qreal orthogonalDelta)
 {
     static qreal prevPrimaryDelta = 0;
@@ -188,6 +194,15 @@ void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qr
     m_touchXPosition = orthogonalDelta;
     m_touchYPosition = primaryDelta;
     Q_EMIT touchPositionChanged();
+}
+
+qint64 MobileTaskSwitcherState::getElapsedTimeSinceStart()
+{
+    if (m_doubleClickTimer->isValid())
+    {
+        return m_doubleClickTimer->elapsed();
+    }
+    return -1;
 }
 
 MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
@@ -269,6 +284,7 @@ void MobileTaskSwitcherEffect::grabbedKeyboardEvent(QKeyEvent *keyEvent)
 void MobileTaskSwitcherEffect::toggle()
 {
     if (!isRunning()) {
+        m_taskSwitcherState->restartDoubleClickTimer();
         activate();
     } else {
         deactivate(false);

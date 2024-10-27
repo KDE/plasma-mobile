@@ -1,5 +1,6 @@
 // SPDX-FileCopyrightText: 2015 Marco Martin <notmart@gmail.com>
 // SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
@@ -37,6 +38,7 @@ FocusScope {
     property var taskSwitcherHelpers: TaskSwitcherHelpers {
         taskSwitcher: root
         stateClass: TaskSwitcherData.TaskSwitcherState
+        taskList: taskList
     }
 
     MobileShell.HapticsEffect {
@@ -308,8 +310,7 @@ FocusScope {
         // if accidentally invoked, but can also be used to switch to an adjacent app and then open it
         function returnToApp() {
             let newIndex = taskSwitcherHelpers.getNearestTaskIndex();
-            let appAtNewIndex = taskList.getTaskAt(newIndex).window;
-            taskSwitcherHelpers.openApp(newIndex, appAtNewIndex);
+            taskSwitcherHelpers.openApp(newIndex);
         }
 
         // diagonal quick switch gesture logic
@@ -338,15 +339,14 @@ FocusScope {
                 } else {
                     // flick to the left on the home screen, dismiss the gesture
                     taskSwitcherHelpers.close();
-                    retrun;
+                    return;
                 }
             }
             if (shouldSwitch) {
                 if (!taskSwitcherHelpers.taskDrawerOpened && unmodifiedYposition < taskSwitcherHelpers.openedYPosition) {
                     // if in a app, switch it to the new task when it is under the openedYPosition
                     taskList.setTaskOffsetValue(0, unmodifiedYposition < taskSwitcherHelpers.openedYPosition && taskSwitcherHelpers.notHomeScreenState);
-                    let appAtNewIndex = taskList.getTaskAt(newIndex).window;
-                    taskSwitcherHelpers.openApp(newIndex, appAtNewIndex, Kirigami.Units.longDuration * 4, Easing.OutExpo);
+                    taskSwitcherHelpers.openApp(newIndex, Kirigami.Units.longDuration * 4, Easing.OutExpo);
                 } else {
                     // if already in the task switcher or above the openedYPosition, only change the focus to the new task
                     taskSwitcherHelpers.animateGoToTaskIndex(newIndex);
@@ -380,7 +380,7 @@ FocusScope {
                     taskSwitcherHelpers.open();
                     taskSwitcherHelpers.isInTaskScrubMode = false;
                 } else {
-                    taskSwitcherHelpers.openApp(state.currentTaskIndex, taskList.getTaskAt(state.currentTaskIndex).window);
+                    taskSwitcherHelpers.openApp(state.currentTaskIndex);
                 }
             } else if (taskSwitcherHelpers.gestureState == TaskSwitcherHelpers.GestureStates.Undecided) {
                 if (taskSwitcherHelpers.taskDrawerOpened) {
@@ -499,8 +499,15 @@ FocusScope {
                 if (taskList.count === 0) {
                     root.hide();
                 } else {
+                    if (taskList.count > 1 &&
+                        state.elapsedTimeSinceStart != -1 &&
+                        state.elapsedTimeSinceStart < state.doubleClickInterval) {
+                        taskSwitcherHelpers.openApp(1);
+                        return;
+                    }
+
                     const currentIndex = state.currentTaskIndex;
-                    taskSwitcherHelpers.openApp(state.currentTaskIndex, taskList.getTaskAt(currentIndex).window);
+                    taskSwitcherHelpers.openApp(state.currentTaskIndex);
                 }
             }
         }
