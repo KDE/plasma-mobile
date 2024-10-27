@@ -43,10 +43,9 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr "如果此选项被关闭，动效将被减少到最低程度。"
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
-msgstr "状态栏"
+msgstr ""
 
 #: ui/main.qml:59
 #, kde-format
@@ -89,10 +88,9 @@ msgid "Very Large"
 msgstr ""
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "状态栏"
+msgstr ""
 
 #: ui/main.qml:82
 #, kde-format

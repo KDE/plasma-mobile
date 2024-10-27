@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2024-08-21 00:31+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -105,12 +105,12 @@ msgstr "장치 이름을 찾을 수 없음"
 msgid "Show additional options for %1"
 msgstr "%1의 추가 설정 표시"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "음소거 해제"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "음소거"
@@ -149,7 +149,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "스트림 이름을 찾을 수 없음"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
+#: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"

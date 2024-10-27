@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2024-05-11 16:48+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -108,12 +108,12 @@ msgstr "Gerätename nicht gefunden"
 msgid "Show additional options for %1"
 msgstr "Weitere Einstellungen für %1 anzeigen"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Stummschaltung aufheben"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Stummschalten"
@@ -152,7 +152,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Name des Streams nicht gefunden"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
+#: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"

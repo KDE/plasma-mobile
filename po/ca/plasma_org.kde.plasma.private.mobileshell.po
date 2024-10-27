@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-08-02 12:52+0200\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
+"PO-Revision-Date: 2024-10-26 11:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -107,12 +107,12 @@ msgstr "No s'ha trobat el nom del dispositiu"
 msgid "Show additional options for %1"
 msgstr "Mostra les opcions addicionals de %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Activa el so"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Silenci"
@@ -151,11 +151,10 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "No s'ha trobat el nom del flux"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#: qml/volumeosd/VolumeChangedPopup.qml:261
+#, kde-format
 msgid "configure audio streams"
-msgstr "Commuta la visualització dels fluxos d'àudio"
+msgstr "configuració dels fluxos d'àudio"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format

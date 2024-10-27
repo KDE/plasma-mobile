@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -106,12 +106,12 @@ msgstr "未发现设备名称"
 msgid "Show additional options for %1"
 msgstr "显示 %1 的附加选项"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "取消静音"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "静音"
@@ -150,11 +150,10 @@ msgstr "%1：%2"
 msgid "Stream name not found"
 msgstr "未发现流名称"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#: qml/volumeosd/VolumeChangedPopup.qml:261
+#, kde-format
 msgid "configure audio streams"
-msgstr "切换显示音频流"
+msgstr ""
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -398,10 +397,3 @@ msgstr "显示其他 %1 条"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "清除所有通知"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"

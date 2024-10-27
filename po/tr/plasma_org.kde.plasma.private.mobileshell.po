@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-08-02 14:04+0300\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
+"PO-Revision-Date: 2024-10-26 13:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -105,12 +105,12 @@ msgstr "Aygıt adı bulunamadı"
 msgid "Show additional options for %1"
 msgstr "%1 ek seçeneklerini göster"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Sesini Aç"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Sessize Al"
@@ -149,11 +149,10 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Akış adı bulunamadı"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#: qml/volumeosd/VolumeChangedPopup.qml:261
+#, kde-format
 msgid "configure audio streams"
-msgstr "Ses akışlarını göstermeyi aç/kapat"
+msgstr "Ses Akışlarını Yapılandır"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format

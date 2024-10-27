@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2024-09-23 22:00+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -105,12 +105,12 @@ msgstr "Az eszköznév nem található"
 msgid "Show additional options for %1"
 msgstr "További beállítások ehhez: %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Visszahangosítás"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Némítás"
@@ -149,7 +149,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Az adatfolyam neve nem található"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
+#: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"

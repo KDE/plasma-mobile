@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-06-30 21:01+0200\n"
+"PO-Revision-Date: 2024-10-26 11:51+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -43,8 +43,7 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Als dit uit is zullen animaties zo veel mogelijk verminderd worden."
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "Statusbalk"
 
@@ -63,42 +62,41 @@ msgstr ""
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Miniem"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Klein"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normaal"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Groot"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Erg groot"
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "Statusbalk"
+msgstr "Grootte statusbalk"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Grootte van het bovenste paneel (heeft herstart nodig)."
 
 #: ui/main.qml:109
 #, kde-format

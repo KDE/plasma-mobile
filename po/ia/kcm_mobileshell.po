@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-07-01 11:12+0200\n"
+"PO-Revision-Date: 2024-10-26 10:35+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -45,8 +45,7 @@ msgstr ""
 "possibile."
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "Barra de stato"
 
@@ -66,42 +65,41 @@ msgstr ""
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Minuscule"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Parve"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Grande (Large)"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Multe Grande"
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "Barra de stato"
+msgstr "Grandor de Barra de stato"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Grandor del pannello culminje (il necessita restartar)."
 
 #: ui/main.qml:109
 #, kde-format

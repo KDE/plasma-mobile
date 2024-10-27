@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2023-12-22 05:33+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -105,12 +105,12 @@ msgstr "找不到裝置名稱"
 msgid "Show additional options for %1"
 msgstr "顯示 %1 的額外設定"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "取消靜音"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "靜音"
@@ -149,7 +149,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "找不到串流名稱"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
+#: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"

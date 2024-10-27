@@ -240,7 +240,7 @@ msgstr "欢迎使用<br/><b>Plasma Mobile</b>"
 #: qml/LandingComponent.qml:130
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr ""
+msgstr "由<br/><b>%1</b> 开发维护"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:293
 #, kde-format

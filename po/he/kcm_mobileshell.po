@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-06-29 07:32+0300\n"
+"PO-Revision-Date: 2024-10-26 07:59+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -44,8 +44,7 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr "אם אפשרות זו כבויה, ההנפשות תופחתנה לכמה שפחות."
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "שורת מצב"
 
@@ -63,42 +62,41 @@ msgstr "אם האפשרות פעילה, יופיע תאריך ליד השעון 
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "פצפון"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "קטן"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "רגיל"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "גדול"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "גדול מאוד"
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "שורת מצב"
+msgstr "גודל שורת מצב"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "גודל הלוח העליון (דורש הפעלה מחדש)."
 
 #: ui/main.qml:109
 #, kde-format

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
 "PO-Revision-Date: 2022-12-23 17:15+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -100,12 +100,12 @@ msgstr "Nome do dispositivo não encontrado"
 msgid "Show additional options for %1"
 msgstr "Mostrar as opções adicionais do %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Activar o Som"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Silenciar"
@@ -144,7 +144,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Nome da sequência não encontrado"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
+#: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"

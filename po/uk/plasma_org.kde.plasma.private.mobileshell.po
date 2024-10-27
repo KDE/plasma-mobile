@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-08-02 09:25+0300\n"
+"POT-Creation-Date: 2024-10-27 00:42+0000\n"
+"PO-Revision-Date: 2024-10-26 09:32+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -106,12 +106,12 @@ msgstr "Назву пристрою не знайдено"
 msgid "Show additional options for %1"
 msgstr "Показати додаткові параметри для %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Увімкнути звук"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:165
+#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Вимкнути звук"
@@ -150,11 +150,10 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "Назву потоку не знайдено"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:260
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#: qml/volumeosd/VolumeChangedPopup.qml:261
+#, kde-format
 msgid "configure audio streams"
-msgstr "Увімкнути або вимкнути показ потоків звукових даних"
+msgstr "налаштовування звукових потоків"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
