@@ -85,8 +85,8 @@
         "Name[zh_TW]": "Wi-Fi"
     },
     "X-KDE-Keywords": "wifi,network",
-    "X-KDE-Keywords[ca@valencia]": "wi-fi,xarxa",
-    "X-KDE-Keywords[ca]": "wi-fi,xarxa",
+    "X-KDE-Keywords[ca@valencia]": "wifi,wi-fi,xarxa",
+    "X-KDE-Keywords[ca]": "wifi,wi-fi,xarxa",
     "X-KDE-Keywords[cs]": "wifi,síť",
     "X-KDE-Keywords[en_GB]": "wifi,network",
     "X-KDE-Keywords[es]": "wifi,red",
