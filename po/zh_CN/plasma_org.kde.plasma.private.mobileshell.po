@@ -153,7 +153,7 @@ msgstr "未发现流名称"
 #: qml/volumeosd/VolumeChangedPopup.qml:261
 #, kde-format
 msgid "configure audio streams"
-msgstr ""
+msgstr "配置音频流"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format

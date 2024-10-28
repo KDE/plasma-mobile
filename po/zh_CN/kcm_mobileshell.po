@@ -45,7 +45,7 @@ msgstr "如果此选项被关闭，动效将被减少到最低程度。"
 #: ui/main.qml:53
 #, kde-format
 msgid "Status Bar"
-msgstr ""
+msgstr "状态栏"
 
 #: ui/main.qml:59
 #, kde-format
@@ -61,41 +61,41 @@ msgstr "如果开启，将在状态栏中的时钟旁边显示日期。"
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "超小"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "小"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "正常"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "大"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "超大"
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Status Bar Size"
-msgstr ""
+msgstr "状态栏大小"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "顶部面板大小 (需要重启)。"
 
 #: ui/main.qml:109
 #, kde-format

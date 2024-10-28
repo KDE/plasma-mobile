@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-27 00:42+0000\n"
-"PO-Revision-Date: 2024-10-26 11:37+0200\n"
+"PO-Revision-Date: 2024-10-27 17:52+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -284,7 +284,7 @@ msgstr "%1%"
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr "Details"
+msgstr "Detalls"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
 #, kde-format
