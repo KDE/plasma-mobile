@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-27 00:42+0000\n"
+"POT-Creation-Date: 2024-10-29 00:41+0000\n"
 "PO-Revision-Date: 2024-09-24 12:21+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -102,34 +102,34 @@ msgstr "%1 (%2)"
 msgid "Device name not found"
 msgstr "Имя устройства не найдено"
 
-#: qml/volumeosd/ListItemBase.qml:96
+#: qml/volumeosd/ListItemBase.qml:101
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Открыть дополнительные параметры %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Включить звук"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Выключить звук"
 
-#: qml/volumeosd/ListItemBase.qml:164
+#: qml/volumeosd/ListItemBase.qml:168
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Настройка громкости %1"
 
-#: qml/volumeosd/ListItemBase.qml:242
+#: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:257
+#: qml/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"

@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-27 00:42+0000\n"
-"PO-Revision-Date: 2024-08-03 10:54+0200\n"
+"POT-Creation-Date: 2024-10-29 00:41+0000\n"
+"PO-Revision-Date: 2024-10-27 08:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -97,34 +97,34 @@ msgstr "%1 (%2)"
 msgid "Device name not found"
 msgstr "Impossible de trouver le nom du périphérique"
 
-#: qml/volumeosd/ListItemBase.qml:96
+#: qml/volumeosd/ListItemBase.qml:101
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Afficher les options additionnelles pour %1"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Sortir du mode Pause"
 
-#: qml/volumeosd/ListItemBase.qml:133 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Mettre en pause"
 
-#: qml/volumeosd/ListItemBase.qml:164
+#: qml/volumeosd/ListItemBase.qml:168
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Ajuster le volume pour %1"
 
-#: qml/volumeosd/ListItemBase.qml:242
+#: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1 %"
 
-#: qml/volumeosd/ListItemBase.qml:257
+#: qml/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
@@ -147,10 +147,9 @@ msgid "Stream name not found"
 msgstr "Impossible de trouver le nom du flux"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Basculer l'affichage des flux audio"
+msgstr "Configurer les flux audio"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
