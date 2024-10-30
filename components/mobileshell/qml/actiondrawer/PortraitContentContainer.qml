@@ -53,6 +53,10 @@ Item {
     MobileShell.QuickSettingsDrawer {
         id: quickSettings
         z: 1 // ensure it's above notifications
+
+        // physically move the drawer when between closed <-> pinned mode
+        readonly property real offsetHeight: actionDrawer.openToPinnedMode ? minimizedQuickSettingsOffset : maximizedQuickSettingsOffset
+        anchors.topMargin: Math.min(root.actionDrawer.offset - offsetHeight, 0)
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -91,13 +95,6 @@ Item {
                 return (quickSettings.maxAddedHeight * effectProgress) + Math.max(0, Math.min(quickSettings.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
             }
         }
-
-        // physically move the drawer when between closed <-> pinned mode
-        transform: Translate {
-            id: translate
-            readonly property real offsetHeight: actionDrawer.openToPinnedMode ? minimizedQuickSettingsOffset : maximizedQuickSettingsOffset
-            y: Math.min(root.actionDrawer.offset - offsetHeight, 0)
-        }
     }
 
     MobileShell.NotificationsWidget {
@@ -119,8 +116,7 @@ Item {
         onBackgroundClicked: root.actionDrawer.close();
 
         anchors {
-            top: quickSettings.top
-            topMargin: quickSettings.height + translate.y
+            top: quickSettings.bottom
             bottom: parent.bottom
             left: parent.left
             right: parent.right

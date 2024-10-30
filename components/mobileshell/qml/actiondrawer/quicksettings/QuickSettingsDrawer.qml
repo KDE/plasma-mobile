@@ -96,10 +96,8 @@ MobileShell.BaseItem {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.fillWidth: true
 
-                mode: QuickSettings.Pages
                 actionDrawer: root.actionDrawer
                 quickSettingsModel: root.quickSettingsModel
-                minimizedViewProgress: 1 - root.minimizedToFullProgress
                 fullViewProgress: root.minimizedToFullProgress
                 height: root.minimizedQuickSettingsHeight + root.addedHeight
                 width: parent.width

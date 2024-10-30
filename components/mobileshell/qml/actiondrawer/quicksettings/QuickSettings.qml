@@ -23,14 +23,8 @@ Item {
     clip: true
 
     required property var actionDrawer
-    required property int mode
 
     property QS.QuickSettingsModel quickSettingsModel
-
-    enum Mode {
-        Pages,
-        ScrollView
-    }
 
     readonly property real columns: Math.round(Math.min(6, Math.max(3, width / intendedColumnWidth)))
     readonly property real columnWidth: Math.floor(width / columns)
@@ -44,7 +38,6 @@ Item {
     readonly property real intendedMinimizedColumnWidth: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
     readonly property real minimizedRowHeight: Kirigami.Units.gridUnit * 4 + Kirigami.Units.smallSpacing
 
-    property real minimizedViewProgress: 0
     property real fullViewProgress: 1
 
     readonly property int columnCount: Math.floor(width/columnWidth)
@@ -69,7 +62,7 @@ Item {
 
     function resetSwipeView() {
         if (root.mode === QuickSettings.Pages) {
-            pageLoader.item.view.currentIndex = 0;
+            swipeView.currentIndex = 0;
         }
     }
 
@@ -84,44 +77,13 @@ Item {
         }
     }
 
-    // view when fully open
-    ColumnLayout {
-        id: fullView
-        opacity: root.fullViewProgress
-        visible: opacity !== 0
-        transform: Translate { y: (1 - fullView.opacity) * root.rowHeight }
-
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        // Dynamically loads the appropriate view
-        Loader {
-            id: pageLoader
-
-            Layout.fillWidth: true
-            Layout.minimumHeight: rowCount * rowHeight
-
-            asynchronous: true
-            sourceComponent: swipeViewComponent
-        }
-
-        BrightnessItem {
-            Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-            Layout.leftMargin: Kirigami.Units.smallSpacing
-            Layout.rightMargin: Kirigami.Units.smallSpacing
-            Layout.fillWidth: true
-        }
-    }
-
     // view when in minimized mode
     RowLayout {
         id: minimizedView
         spacing: 0
-        opacity: root.minimizedViewProgress
-        visible: opacity !== 0
-        transform: Translate { y: (1 - minimizedView.opacity) * -root.rowHeight }
+        opacity: 1 - root.fullViewProgress
 
+        anchors.topMargin: root.fullViewProgress * -height
         anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
@@ -157,12 +119,19 @@ Item {
         }
     }
 
-    // Loads portrait and landscape quick settings view
-    Component {
-        id: swipeViewComponent
+    // view when fully open
+    ColumnLayout {
+        id: fullView
+        opacity: root.fullViewProgress
 
+        anchors.top: minimizedView.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+
+        // Quick settings view
         ColumnLayout {
-            readonly property var view: swipeView
+            Layout.fillWidth: true
+            Layout.minimumHeight: rowCount * rowHeight
 
             SwipeView {
                 id: swipeView
@@ -225,6 +194,14 @@ Item {
                     }
                 }
             }
+        }
+
+        // Brightness slider
+        BrightnessItem {
+            Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
+            Layout.leftMargin: Kirigami.Units.smallSpacing
+            Layout.rightMargin: Kirigami.Units.smallSpacing
+            Layout.fillWidth: true
         }
     }
 

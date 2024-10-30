@@ -80,7 +80,6 @@ MobileShell.BaseItem {
             MobileShell.QuickSettings {
                 id: quickSettings
 
-                mode: QuickSettings.ScrollView
                 quickSettingsModel: root.quickSettingsModel
                 width: column.width
                 implicitHeight: quickSettings.fullHeight
@@ -91,8 +90,7 @@ MobileShell.BaseItem {
                 Layout.maximumWidth: column.width
 
                 actionDrawer: root.actionDrawer
-                minimizedViewProgress: 0
-                fullViewProgress: 1
+                fullViewProgress: 1.0
             }
 
             Item { Layout.fillHeight: true }
