@@ -16,4 +16,7 @@ Kirigami.Icon {
 
     height: folio.FolioSettings.delegateIconSize
     width: folio.FolioSettings.delegateIconSize
+
+    roundToIconSize: false
+    animated: false
 }
