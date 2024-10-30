@@ -229,7 +229,6 @@ Window {
                 FormCard.FormCard {
                     FormCard.FormSwitchDelegate {
                         text: i18n('Show background')
-                        icon.name: 'draw-rectangle'
                         checked: folio.FolioSettings.showFavouritesBarBackground
                         onCheckedChanged: {
                             if (checked !== folio.FolioSettings.showFavouritesBarBackground) {
