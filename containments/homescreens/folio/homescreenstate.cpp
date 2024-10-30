@@ -680,6 +680,9 @@ QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
 
 void HomeScreenState::openAppDrawer()
 {
+    // Ensure search widget is closed when app drawer opens
+    closeSearchWidget();
+
     cancelAppDrawerAnimations();
     m_openAppDrawerAnim->setStartValue(m_appDrawerY);
     m_openAppDrawerAnim->start();
@@ -694,6 +697,9 @@ void HomeScreenState::closeAppDrawer()
 
 void HomeScreenState::openSearchWidget()
 {
+    // Ensure app drawer is closed when search widget opens
+    closeAppDrawer();
+
     cancelSearchWidgetAnimations();
     m_openSearchWidgetAnim->setStartValue(m_searchWidgetY);
     m_openSearchWidgetAnim->start();
