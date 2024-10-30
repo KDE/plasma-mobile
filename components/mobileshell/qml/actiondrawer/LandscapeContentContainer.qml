@@ -168,18 +168,14 @@ Item {
 
             readonly property real intendedWidth: 360
 
+            property real offsetRatio: quickSettings.height / root.height
+            anchors.topMargin: Math.min(root.actionDrawer.offset * offsetRatio - quickSettings.height, 0)
             anchors.top: parent.top
             anchors.right: parent.right
 
             actionDrawer: root.actionDrawer
             quickSettingsModel: root.quickSettingsModel
             fullScreenHeight: root.height
-
-            transform: Translate {
-                id: translate
-                property real offsetRatio: quickSettings.height / root.height
-                y: Math.min(root.actionDrawer.offset * offsetRatio - quickSettings.height, 0)
-            }
         }
     }
 }
