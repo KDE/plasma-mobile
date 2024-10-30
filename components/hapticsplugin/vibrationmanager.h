@@ -20,5 +20,5 @@ public:
     Q_INVOKABLE void vibrate(int durationMs);
 
 private:
-    com::lomiri::hfd::Vibrator *m_interface;
+    com::lomiri::hfd::Vibrator *m_interface{nullptr};
 };
