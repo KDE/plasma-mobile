@@ -41,7 +41,6 @@ target_link_libraries(mobileshellplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
-        KF6::ConfigWidgets # for KStandardAction
         KF6::KIOGui
         Plasma::Plasma
         KF6::I18n
@@ -51,6 +50,7 @@ target_link_libraries(mobileshellplugin
         KF6::KIOWidgets # for PreviewJob
         KF6::Service
         KF6::Package
+        KF6::ConfigGui
         LayerShellQt::Interface
 )
 

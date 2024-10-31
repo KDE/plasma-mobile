@@ -21,7 +21,7 @@
 #include <KPropertiesDialog>
 #include <KProtocolManager>
 #include <KSharedConfig>
-#include <KStandardAction>
+#include <KStandardActions>
 #include <KUrlMimeData>
 
 #include <KIO/DeleteOrTrashJob>
@@ -147,7 +147,7 @@ void NotificationFileMenu::open(int x, int y)
             auto *job = new KIO::DeleteOrTrashJob(urls, KIO::AskUserActionInterface::Trash, KIO::AskUserActionInterface::DefaultConfirmation, this);
             job->start();
         };
-        auto moveToTrashAction = KStandardAction::moveToTrash(this, moveToTrashLambda, menu);
+        auto moveToTrashAction = KStandardActions::moveToTrash(this, moveToTrashLambda, menu);
         moveToTrashAction->setShortcut({}); // Can't focus notification to press Delete
         menu->addAction(moveToTrashAction);
     }
@@ -162,7 +162,7 @@ void NotificationFileMenu::open(int x, int y)
             auto *job = new KIO::DeleteOrTrashJob(urls, KIO::AskUserActionInterface::Delete, KIO::AskUserActionInterface::DefaultConfirmation, this);
             job->start();
         };
-        auto deleteAction = KStandardAction::deleteFile(this, deleteLambda, menu);
+        auto deleteAction = KStandardActions::deleteFile(this, deleteLambda, menu);
         deleteAction->setShortcut({});
         menu->addAction(deleteAction);
     }
