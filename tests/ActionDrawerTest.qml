@@ -63,6 +63,7 @@ ApplicationWindow {
         id: drawer
         z: 1
         anchors.fill: parent
+        visible: offset !== 0
 
         notificationSettings: NotificationManager.Settings {}
         notificationModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel

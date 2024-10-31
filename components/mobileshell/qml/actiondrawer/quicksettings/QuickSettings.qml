@@ -20,11 +20,12 @@ import org.kde.kirigami 2.20 as Kirigami
  */
 Item {
     id: root
+    layer.enabled: true
     clip: true
 
     required property var actionDrawer
 
-    property QS.QuickSettingsModel quickSettingsModel
+    required property QS.QuickSettingsModel quickSettingsModel
 
     readonly property real columns: Math.round(Math.min(6, Math.max(3, width / intendedColumnWidth)))
     readonly property real columnWidth: Math.floor(width / columns)
@@ -89,9 +90,10 @@ Item {
         anchors.right: parent.right
 
         Repeater {
+            id: repeater
             model: QS.PaginateModel {
-                sourceModel: quickSettingsModel
-                pageSize: minimizedColumns
+                sourceModel: root.quickSettingsModel
+                pageSize: Math.min(root.pageSize, root.minimizedColumns) // HACK: just root.minimizedColumns appears to end up with an empty model?
             }
             delegate: MobileShell.BaseItem {
                 required property var modelData

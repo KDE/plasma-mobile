@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2021-2022 Devin Lin <devin@kde.org>
+ *  SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
  *
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -19,7 +19,7 @@ MobileShell.SwipeArea {
     required property ActionDrawer actionDrawer
 
     function startSwipe() {
-        if (actionDrawer.visible) {
+        if (actionDrawer.intendedToBeVisible) {
             // ensure the action drawer state is consistent
             actionDrawer.closeImmediately();
         }
@@ -30,7 +30,7 @@ MobileShell.SwipeArea {
         // must be after properties other are set, we cannot have actionDrawer.updateState() be called
         actionDrawer.offset = 0;
         actionDrawer.oldOffset = 0;
-        actionDrawer.visible = true;
+        actionDrawer.intendedToBeVisible = true;
     }
 
     function startSwipeWithPoint(point) {

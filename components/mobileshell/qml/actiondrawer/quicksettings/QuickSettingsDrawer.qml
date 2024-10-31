@@ -1,8 +1,5 @@
-/*
- *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -24,8 +21,6 @@ MobileShell.BaseItem {
 
     required property var actionDrawer
 
-    property QS.QuickSettingsModel quickSettingsModel
-
     /**
      * The amount of height to add to the panel (increasing the height of the quick settings area).
      */
@@ -39,7 +34,7 @@ MobileShell.BaseItem {
     /**
      * Height of panel when in minimized mode.
      */
-    readonly property real minimizedHeight: bottomPadding + topPadding + statusBar.height + minimizedQuickSettingsHeight + mediaWidget.height + handle.fullHeight
+    readonly property real minimizedHeight: bottomPadding + topPadding + statusBarProxy.height + minimizedQuickSettingsHeight + mediaControlsWidgetProxy.height + handle.fullHeight
 
     /**
      * Height of just the QuickSettings component in minimized mode.
@@ -50,6 +45,10 @@ MobileShell.BaseItem {
      * Progress of showing the full quick settings view from pinned.
      */
     property real minimizedToFullProgress: 1
+
+    property alias quickSettings: quickSettingsProxy.contentItem
+    property alias statusBar: statusBarProxy.contentItem
+    property alias mediaControlsWidget: mediaControlsWidgetProxy.contentItem
 
     // we need extra padding if the background side border is enabled
     topPadding: Kirigami.Units.smallSpacing
@@ -74,39 +73,25 @@ MobileShell.BaseItem {
             anchors.top: parent.top
             spacing: 0
 
-            MobileShell.StatusBar {
-                id: statusBar
+            MobileShell.BaseItem {
+                id: statusBarProxy
                 Layout.fillWidth: true
                 Layout.preferredHeight: MobileShell.Constants.topPanelHeight + Kirigami.Units.gridUnit * 0.8
-
-                Kirigami.Theme.colorSet: Kirigami.Theme.Window
-                Kirigami.Theme.inherit: false
-
-                backgroundColor: "transparent"
-                showSecondRow: true
-                showDropShadow: false
-
-                // security reasons, system tray also doesn't work on lockscreen
-                disableSystemTray: actionDrawer.restrictedPermissions
             }
 
-            MobileShell.QuickSettings {
-                id: quickSettings
+            MobileShell.BaseItem {
+                id: quickSettingsProxy
                 Layout.preferredHeight: root.minimizedQuickSettingsHeight + root.addedHeight
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.fillWidth: true
 
-                actionDrawer: root.actionDrawer
-                quickSettingsModel: root.quickSettingsModel
-                fullViewProgress: root.minimizedToFullProgress
                 height: root.minimizedQuickSettingsHeight + root.addedHeight
                 width: parent.width
             }
 
-            MobileShell.MediaControlsWidget {
-                id: mediaWidget
+            MobileShell.BaseItem {
+                id: mediaControlsWidgetProxy
                 property real fullHeight: height + Layout.topMargin
-                inActionDrawer: true
                 Layout.fillWidth: true
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 Layout.leftMargin: Kirigami.Units.largeSpacing

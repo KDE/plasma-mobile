@@ -19,7 +19,13 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 Item {
     id: root
 
-    visible: false
+    /*
+     * The intended visiblity of the action drawer.
+     *
+     * This is separate from "visible" in order to avoid having to set
+     * item visiblity when its on its own window (wasteful since the window itself can be shown/hidden).
+     */
+    property bool intendedToBeVisible: false
 
     /**
      * The model for the notification widget.
@@ -34,7 +40,7 @@ Item {
     /**
      * The model for the quick settings.
      */
-    property var quickSettingsModel: QS.QuickSettingsModel {}
+    property QS.QuickSettingsModel quickSettingsModel: QS.QuickSettingsModel {}
 
     /**
      * The notification settings object to be used in the notification widget.
@@ -77,7 +83,7 @@ Item {
     /**
      * The notifications widget being shown. May be null.
      */
-    property var notificationsWidget: contentContainerLoader.item.notificationsWidget
+    property var notificationsWidget: contentContainer.notificationsWidget
 
     /**
      * The mode of the action drawer (portrait or landscape).
@@ -178,17 +184,17 @@ Item {
 
         if (root.offset <= 0) {
             // close immediately, so that we don't have to wait Kirigami.Units.longDuration
-            root.visible = false;
+            root.intendedToBeVisible = false;
             close();
         } else if (root.direction === MobileShell.Direction.None || !root.opened) {
 
             // if the panel has not been opened yet, run open animation only if drag passed threshold
             (root.offset < openThreshold) ? close() : open();
 
-        } else if (root.offset > contentContainerLoader.maximizedQuickSettingsOffset) {
+        } else if (root.offset > contentContainer.maximizedQuickSettingsOffset) {
             // if drag has gone past the fully expanded view
             expand();
-        } else if (root.offset > contentContainerLoader.minimizedQuickSettingsOffset) {
+        } else if (root.offset > contentContainer.minimizedQuickSettingsOffset) {
             // if drag is between pinned view and fully expanded view
             if (root.direction === MobileShell.Direction.Down) {
                 expand();
@@ -229,13 +235,13 @@ Item {
         State {
             name: "open"
             PropertyChanges {
-                target: root; offset: contentContainerLoader.minimizedQuickSettingsOffset
+                target: root; offset: contentContainer.minimizedQuickSettingsOffset
             }
         },
         State {
             name: "expand"
             PropertyChanges {
-                target: root; offset: contentContainerLoader.maximizedQuickSettingsOffset
+                target: root; offset: contentContainer.maximizedQuickSettingsOffset
             }
         }
     ]
@@ -250,7 +256,7 @@ Item {
                 script: {
                     if (root.state != "") {
                         if (root.offset <= 0) {
-                            root.visible = false;
+                            root.intendedToBeVisible = false;
                             root.opened = false;
                             root.state = "";
                         } else {
@@ -289,35 +295,12 @@ Item {
         onTouchpadScrollEnded: endSwipe()
         onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
 
-        Loader {
-            id: contentContainerLoader
+        ContentContainer {
+            id: contentContainer
             anchors.fill: parent
 
-            property real minimizedQuickSettingsOffset: item ? item.minimizedQuickSettingsOffset : 0
-            property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
-
-            asynchronous: true
-            sourceComponent: root.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
-        }
-
-        Component {
-            id: portraitContentContainer
-            PortraitContentContainer {
-                actionDrawer: root
-                width: root.width
-                height: root.height
-                quickSettingsModel: root.quickSettingsModel
-            }
-        }
-
-        Component {
-            id: landscapeContentContainer
-            LandscapeContentContainer {
-                actionDrawer: root
-                width: root.width
-                height: root.height
-                quickSettingsModel: root.quickSettingsModel
-            }
+            actionDrawer: root
+            quickSettingsModel: root.quickSettingsModel
         }
     }
 }
