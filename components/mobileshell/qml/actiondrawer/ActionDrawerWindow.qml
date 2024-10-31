@@ -26,7 +26,7 @@ NanoShell.FullScreenOverlay {
      */
     property alias actionDrawer: drawer
 
-    visible: drawer.visible
+    visible: drawer.intendedToBeVisible
     width: Screen.width
     height: Screen.height
 

@@ -31,13 +31,17 @@ Item {
     implicitWidth: leftPadding + rightPadding + contentItem.implicitWidth
 
     onContentItemChanged: {
-        contentItem.parent = contentItemLoader;
-        contentItem.anchors.fill = contentItemLoader;
+        if (contentItem !== null && contentItem !== undefined) {
+            contentItem.parent = contentItemLoader;
+            contentItem.anchors.fill = contentItemLoader;
+        }
     }
 
     onBackgroundChanged: {
-        background.parent = backgroundLoader;
-        background.anchors.fill = backgroundLoader;
+        if (background !== null && background !== undefined) {
+            background.parent = backgroundLoader;
+            background.anchors.fill = backgroundLoader;
+        }
     }
 
     Item {

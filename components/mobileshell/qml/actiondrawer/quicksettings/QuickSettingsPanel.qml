@@ -1,8 +1,5 @@
-/*
- *   SPDX-FileCopyrightText: 2021 Devin Lin <devin@kde.org>
- *
- *   SPDX-License-Identifier: LGPL-2.0-or-later
- */
+// SPDX-FileCopyrightText: 2021-2024 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: LGPL-2.0-or-later
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -36,6 +33,9 @@ MobileShell.BaseItem {
      */
     readonly property real contentImplicitHeight: column.implicitHeight
 
+    property alias quickSettings: quickSettingsProxy.contentItem
+    property alias statusBar: statusBarProxy.contentItem
+
     // we need extra padding since the background side border is enabled
     topPadding: Kirigami.Units.smallSpacing * 4
     leftPadding: Kirigami.Units.smallSpacing * 4
@@ -59,8 +59,8 @@ MobileShell.BaseItem {
             height: root.fullScreenHeight
             spacing: 0
 
-            MobileShell.StatusBar {
-                id: statusBar
+            MobileShell.BaseItem {
+                id: statusBarProxy
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
                 // Align these to double pixels to aid vertical alignment and sharper icon rendering
@@ -69,30 +69,17 @@ MobileShell.BaseItem {
 
                 Kirigami.Theme.colorSet: Kirigami.Theme.Window
                 Kirigami.Theme.inherit: false
-
-                backgroundColor: "transparent"
-                showSecondRow: false
-                showDropShadow: false
-                showTime: false
-
-                // security reasons, system tray also doesn't work on lockscreen
-                disableSystemTray: actionDrawer.restrictedPermissions
             }
 
-            MobileShell.QuickSettings {
-                id: quickSettings
-
-                quickSettingsModel: root.quickSettingsModel
+            MobileShell.BaseItem {
+                id: quickSettingsProxy
                 width: column.width
                 implicitHeight: quickSettings.fullHeight
 
                 Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBar.height - Kirigami.Units.smallSpacing
+                Layout.maximumHeight: root.fullScreenHeight - root.topPadding - root.bottomPadding - statusBarProxy.height - Kirigami.Units.smallSpacing
                 Layout.maximumWidth: column.width
-
-                actionDrawer: root.actionDrawer
-                fullViewProgress: 1.0
             }
 
             Item { Layout.fillHeight: true }
