@@ -62,3 +62,8 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
                  {"TabletMode", convergenceModeEnabled ? "off" : "auto"} // TabletMode changes depending on whether the device is in convergence mode
              }}};
 }
+
+// Have a separate list here because we need to trigger DBus calls to load/unload each effect/script.
+// Make sure that the effect/script is added to the kwinrc "Plugins" section above!
+const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher"};
+const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
