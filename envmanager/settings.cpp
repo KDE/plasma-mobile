@@ -170,6 +170,34 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
 
 void Settings::reloadKWinConfig()
 {
-    QDBusMessage message = QDBusMessage::createSignal(u"/KWin"_s, u"org.kde.KWin"_s, u"reloadConfig"_s);
+    // Most KWin settings are already reloaded through KConfig's notify feature.
+    // However, effects need to manually be loaded/unloaded in a live KWin session.
+
+    KConfigGroup pluginsGroup{m_kwinrcConfig, QStringLiteral("Plugins")};
+
+    for (const auto &effect : KWIN_EFFECTS) {
+        // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
+        bool status = pluginsGroup.readEntry(effect + u"Enabled"_s, false);
+        const QString method = status ? u"loadEffect"_s : u"unloadEffect"_s;
+
+        QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Effects"_s, u"org.kde.kwin.Effects"_s, method);
+        message.setArguments({effect});
+        QDBusConnection::sessionBus().send(message);
+    }
+
+    // Unload KWin scripts that are now disabled.
+    for (const auto &script : KWIN_SCRIPTS) {
+        // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
+        bool status = pluginsGroup.readEntry(script + u"Enabled"_s, false);
+
+        if (!status) {
+            QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"unloadScript"_s);
+            message.setArguments({script});
+            QDBusConnection::sessionBus().send(message);
+        }
+    }
+
+    // Call "start" to load enabled KWin scripts.
+    QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"start"_s);
     QDBusConnection::sessionBus().send(message);
 }
