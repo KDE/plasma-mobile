@@ -14,7 +14,7 @@ target_link_libraries(windowplugin PRIVATE
     Qt::Quick
     Plasma::KWaylandClient
     KF6::Service
-    KF6::ConfigWidgets
+    KF6::ConfigCore
 )
 
 ecm_finalize_qml_module(windowplugin)

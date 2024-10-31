@@ -5,8 +5,6 @@
 #include <KNotificationJobUiDelegate>
 #include <KPluginFactory>
 
-#include <QProcess>
-
 #include "start.h"
 
 K_PLUGIN_FACTORY_WITH_JSON(StartFactory, "kded_plasma_mobile_start.json", registerPlugin<Start>();)

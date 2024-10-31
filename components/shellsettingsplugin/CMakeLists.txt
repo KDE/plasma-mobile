@@ -11,7 +11,6 @@ target_link_libraries(shellsettingsplugin PRIVATE
     Qt::Quick
     Plasma::KWaylandClient
     KF6::Service
-    KF6::ConfigWidgets
     KF6::Package
     KF6::KIOGui
     KF6::JobWidgets

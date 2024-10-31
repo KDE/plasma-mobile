@@ -13,7 +13,6 @@ target_link_libraries(kded_plasma_mobile_autodetect_apn PRIVATE
     Qt::Core
     Qt::Xml
     KF6::DBusAddons
-    KF6::ConfigWidgets
     KF6::KIOGui
     KF6::JobWidgets
     KF6::Package
