@@ -27,6 +27,9 @@ Rectangle {
         return Math.max(0, Math.min(1, val));
     }
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
     // Background color
     color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
                     Kirigami.Theme.backgroundColor.g,
