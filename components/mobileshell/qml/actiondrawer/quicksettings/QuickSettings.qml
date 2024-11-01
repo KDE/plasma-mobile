@@ -20,7 +20,6 @@ import org.kde.kirigami 2.20 as Kirigami
  */
 Item {
     id: root
-    layer.enabled: true
     clip: true
 
     required property var actionDrawer
