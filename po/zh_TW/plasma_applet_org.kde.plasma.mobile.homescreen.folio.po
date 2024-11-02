@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-02 00:40+0000\n"
+"POT-Creation-Date: 2024-11-02 02:32+0000\n"
 "PO-Revision-Date: 2024-07-27 13:00+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -125,61 +125,61 @@ msgstr "旋轉"
 msgid "Favorites Bar"
 msgstr "最愛列"
 
-#: package/contents/ui/settings/SettingsWindow.qml:243
+#: package/contents/ui/settings/SettingsWindow.qml:242
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "桌布"
 
-#: package/contents/ui/settings/SettingsWindow.qml:249
+#: package/contents/ui/settings/SettingsWindow.qml:248
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "顯示桌布模糊效果"
 
-#: package/contents/ui/settings/SettingsWindow.qml:260
+#: package/contents/ui/settings/SettingsWindow.qml:259
 #, kde-format
 msgid "General"
 msgstr "一般"
 
-#: package/contents/ui/settings/SettingsWindow.qml:267
+#: package/contents/ui/settings/SettingsWindow.qml:266
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "在主畫面與更多桌布選項之間切換"
 
-#: package/contents/ui/settings/SettingsWindow.qml:294
+#: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Export layout to"
 msgstr "匯出佈局至"
 
-#: package/contents/ui/settings/SettingsWindow.qml:313
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Import layout from"
 msgstr "匯入佈局"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:323
+#: package/contents/ui/settings/SettingsWindow.qml:330
 #, kde-format
 msgid "Export Status"
 msgstr "匯出狀態"
 
-#: package/contents/ui/settings/SettingsWindow.qml:325
+#: package/contents/ui/settings/SettingsWindow.qml:324
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "匯出至 %1 失敗"
 
-#: package/contents/ui/settings/SettingsWindow.qml:332
+#: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "主畫面佈局成功匯出至 %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Confirm Import"
 msgstr "確認匯入"
 
-#: package/contents/ui/settings/SettingsWindow.qml:339
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "這會覆寫您目前的主畫面佈局！"

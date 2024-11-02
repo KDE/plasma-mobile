@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-02 00:40+0000\n"
+"POT-Creation-Date: 2024-11-02 02:32+0000\n"
 "PO-Revision-Date: 2024-08-21 00:38+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -122,61 +122,61 @@ msgstr "회전"
 msgid "Favorites Bar"
 msgstr "책갈피 표시줄"
 
-#: package/contents/ui/settings/SettingsWindow.qml:243
+#: package/contents/ui/settings/SettingsWindow.qml:242
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "배경 그림"
 
-#: package/contents/ui/settings/SettingsWindow.qml:249
+#: package/contents/ui/settings/SettingsWindow.qml:248
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "배경 그림 흐림 효과 표시"
 
-#: package/contents/ui/settings/SettingsWindow.qml:260
+#: package/contents/ui/settings/SettingsWindow.qml:259
 #, kde-format
 msgid "General"
 msgstr "일반"
 
-#: package/contents/ui/settings/SettingsWindow.qml:267
+#: package/contents/ui/settings/SettingsWindow.qml:266
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "홈 화면과 더 많은 배경 그림 옵션 전환"
 
-#: package/contents/ui/settings/SettingsWindow.qml:294
+#: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Export layout to"
 msgstr "레이아웃 내보내기"
 
-#: package/contents/ui/settings/SettingsWindow.qml:313
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Import layout from"
 msgstr "레이아웃 가져오기"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:323
+#: package/contents/ui/settings/SettingsWindow.qml:330
 #, kde-format
 msgid "Export Status"
 msgstr "상태 내보내기"
 
-#: package/contents/ui/settings/SettingsWindow.qml:325
+#: package/contents/ui/settings/SettingsWindow.qml:324
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "%1(으)로 내보낼 수 없음"
 
-#: package/contents/ui/settings/SettingsWindow.qml:332
+#: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "홈 화면 레이아웃을 %1(으)로 내보냄"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Confirm Import"
 msgstr "가져오기 확인"
 
-#: package/contents/ui/settings/SettingsWindow.qml:339
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "현재 홈 화면 레이아웃을 덮어씁니다!"

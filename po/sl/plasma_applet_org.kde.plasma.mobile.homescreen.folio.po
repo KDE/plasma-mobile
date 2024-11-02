@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-02 00:40+0000\n"
+"POT-Creation-Date: 2024-11-02 02:32+0000\n"
 "PO-Revision-Date: 2024-07-02 06:56+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
@@ -124,61 +124,61 @@ msgstr "Zasuk"
 msgid "Favorites Bar"
 msgstr "Vrstica priljubljenih"
 
-#: package/contents/ui/settings/SettingsWindow.qml:243
+#: package/contents/ui/settings/SettingsWindow.qml:242
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Ozadje"
 
-#: package/contents/ui/settings/SettingsWindow.qml:249
+#: package/contents/ui/settings/SettingsWindow.qml:248
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Prikaži učinek zameglitve ozadja"
 
-#: package/contents/ui/settings/SettingsWindow.qml:260
+#: package/contents/ui/settings/SettingsWindow.qml:259
 #, kde-format
 msgid "General"
 msgstr "Splošno"
 
-#: package/contents/ui/settings/SettingsWindow.qml:267
+#: package/contents/ui/settings/SettingsWindow.qml:266
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "Preklopi med začetnimi zasloni in več možnostmi ozadja"
 
-#: package/contents/ui/settings/SettingsWindow.qml:294
+#: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Export layout to"
 msgstr "Izvozi postavitev v"
 
-#: package/contents/ui/settings/SettingsWindow.qml:313
+#: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Import layout from"
 msgstr "Uvozi postavitev iz"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:323
+#: package/contents/ui/settings/SettingsWindow.qml:330
 #, kde-format
 msgid "Export Status"
 msgstr "Izvozi stanje"
 
-#: package/contents/ui/settings/SettingsWindow.qml:325
+#: package/contents/ui/settings/SettingsWindow.qml:324
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Izvoz v %1 ni uspel"
 
-#: package/contents/ui/settings/SettingsWindow.qml:332
+#: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Postavitev domačega zaslona je bila uspešno izvožena v %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Confirm Import"
 msgstr "Potrdi uvoz"
 
-#: package/contents/ui/settings/SettingsWindow.qml:339
+#: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "To bo prepisalo vašo obstoječo postavitev domačega zaslona!"
