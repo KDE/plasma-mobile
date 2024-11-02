@@ -8,8 +8,9 @@ import QtQuick.Layouts
 import org.kde.kcmutils
 import org.kde.kirigami as Kirigami
 
-RowLayout {
+Item {
     id: root
+    implicitHeight: row.implicitHeight + Kirigami.Units.largeSpacing * 2
 
     property int hours: 0
     property int minutes: 0
@@ -37,8 +38,9 @@ RowLayout {
     }
 
     RowLayout {
+        id: row
+        anchors.centerIn: parent
         spacing: Kirigami.Units.largeSpacing
-        Layout.alignment: Qt.AlignHCenter
 
         // note: for 12-hour time, we have hours from 1-12 (0'o clock displays as 12)
         //       for 24-hour time, we have hours from 0-23

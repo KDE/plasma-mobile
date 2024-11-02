@@ -15,6 +15,7 @@ import org.kde.kcmutils
 import org.kde.timesettings
 import org.kde.kirigamiaddons.formcard 1 as FormCard
 import org.kde.kirigamiaddons.delegates 1 as Delegates
+import org.kde.kirigamiaddons.dateandtime as DateAndTime
 
 SimpleKCM {
     id: timeModule
@@ -163,45 +164,18 @@ SimpleKCM {
             }
         },
 
-        Kirigami.PromptDialog {
+        DateAndTime.DatePopup {
             id: datePickerDialog
-            title: i18n("Pick System Date")
-            topPadding: Kirigami.Units.largeSpacing
-            bottomPadding: Kirigami.Units.largeSpacing
-            preferredWidth: Kirigami.Units.gridUnit * 15
-            preferredHeight: Kirigami.Units.gridUnit * 13
-
-            standardButtons: Kirigami.Dialog.Save | Kirigami.Dialog.Cancel
-
-            onAccepted: {
-                kcm.currentDate = datePicker.isoDate;
-                kcm.saveTime();
-            }
+            modal: true
+            parent: timeModule
 
             onOpened: {
-                let date = new Date(kcm.currentDate)
-                datePicker.day = date.getDate();
-                datePicker.month = date.getMonth() + 1;
-                datePicker.year = date.getFullYear();
+                value = kcm.currentDate;
             }
 
-            DatePicker {
-                id: datePicker
-                implicitHeight: Kirigami.Units.gridUnit * 6
-
-                Connections {
-                    target: kcm
-                    function onCurrentDateChanged() {
-                        if (datePickerDialog.visible) {
-                            return;
-                        }
-
-                        let date = new Date(kcm.currentDate);
-                        datePicker.day = date.getDate();
-                        datePicker.month = date.getMonth() + 1;
-                        datePicker.year = date.getFullYear();
-                    }
-                }
+            onAccepted: {
+                kcm.currentDate = value;
+                kcm.saveTime();
             }
         },
 
@@ -209,9 +183,6 @@ SimpleKCM {
             id: timePickerDialog
             title: i18n("Pick System Time")
             preferredWidth: Kirigami.Units.gridUnit * 15
-            topPadding: Kirigami.Units.largeSpacing
-            bottomPadding: Kirigami.Units.largeSpacing
-
             standardButtons: Kirigami.Dialog.Save | Kirigami.Dialog.Cancel
 
             onAccepted: {
@@ -231,6 +202,7 @@ SimpleKCM {
 
             TimePicker {
                 id: timePicker
+                width: timePickerDialog.width - timePickerDialog.leftPadding - timePickerDialog.rightPadding
 
                 Connections {
                     target: kcm

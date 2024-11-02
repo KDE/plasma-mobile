@@ -55,7 +55,7 @@ Item {
                 spinBox.increase();
                 spinBox.valueModified();
             }
-            icon.name: 'list-add-symbolic'
+            icon.name: 'arrow-up-symbolic'
             isStart: true
             isEnd: false
             enabled: spinBox.value < spinBox.to
@@ -149,7 +149,7 @@ Item {
                 spinBox.decrease();
                 spinBox.valueModified();
             }
-            icon.name: 'list-remove-symbolic'
+            icon.name: 'arrow-down-symbolic'
             isStart: false
             isEnd: true
             enabled: spinBox.value > spinBox.from
