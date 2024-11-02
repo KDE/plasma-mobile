@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-29 00:41+0000\n"
-"PO-Revision-Date: 2024-08-03 12:41+0100\n"
+"PO-Revision-Date: 2024-11-01 14:06+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -150,10 +150,9 @@ msgid "Stream name not found"
 msgstr "Stream name not found"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Toggle showing audio streams"
+msgstr "configure audio streams"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
