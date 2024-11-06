@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:42+0000\n"
+"POT-Creation-Date: 2024-11-06 00:41+0000\n"
 "PO-Revision-Date: 2022-07-13 09:22+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -2912,138 +2912,113 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Thái Bình Dương"
 
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jan"
-msgstr "Th1"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Feb"
-msgstr "Th2"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Mar"
-msgstr "Th3"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Apr"
-msgstr "Th4"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "May"
-msgstr "Th5"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jun"
-msgstr "Th6"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jul"
-msgstr "Th7"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Aug"
-msgstr "Th8"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Sep"
-msgstr "Th9"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Oct"
-msgstr "Th10"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Nov"
-msgstr "Th11"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Dec"
-msgstr "Th12"
-
-#: ui/main.qml:31
+#: ui/main.qml:32
 #, kde-format
 msgid "Display"
 msgstr "Hiển thị"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "24-Hour Format"
 msgstr "Định dạng 24 giờ"
 
-#: ui/main.qml:38
+#: ui/main.qml:39
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "Có dùng định dạng 24 giờ cho đồng hồ không."
 
-#: ui/main.qml:49
+#: ui/main.qml:50
 #, kde-format
 msgid "Timezone"
 msgstr "Múi giờ"
 
-#: ui/main.qml:56
+#: ui/main.qml:57
 #, kde-format
 msgid "Time and Date"
 msgstr "Ngày và giờ"
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "Đồng bộ hoá thời gian tự động"
 
-#: ui/main.qml:63
+#: ui/main.qml:64
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "Có tự động đặt giờ không."
 
-#: ui/main.qml:80
+#: ui/main.qml:81
 #, kde-format
 msgid "System Time"
 msgstr ""
 
-#: ui/main.qml:89
+#: ui/main.qml:90
 #, kde-format
 msgid "System Date"
 msgstr ""
 
-#: ui/main.qml:101
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Chọn múi giờ"
 
-#: ui/main.qml:168
-#, fuzzy, kde-format
-#| msgid "Pick Date"
-msgid "Pick System Date"
-msgstr "Chọn ngày"
-
-#: ui/main.qml:210
+#: ui/main.qml:184
 #, fuzzy, kde-format
 #| msgid "Pick Time"
 msgid "Pick System Time"
 msgstr "Chọn giờ"
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "AM"
 msgstr ""
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "PM"
 msgstr ""
+
+#~ msgid "Jan"
+#~ msgstr "Th1"
+
+#~ msgid "Feb"
+#~ msgstr "Th2"
+
+#~ msgid "Mar"
+#~ msgstr "Th3"
+
+#~ msgid "Apr"
+#~ msgstr "Th4"
+
+#~ msgid "May"
+#~ msgstr "Th5"
+
+#~ msgid "Jun"
+#~ msgstr "Th6"
+
+#~ msgid "Jul"
+#~ msgstr "Th7"
+
+#~ msgid "Aug"
+#~ msgstr "Th8"
+
+#~ msgid "Sep"
+#~ msgstr "Th9"
+
+#~ msgid "Oct"
+#~ msgstr "Th10"
+
+#~ msgid "Nov"
+#~ msgstr "Th11"
+
+#~ msgid "Dec"
+#~ msgstr "Th12"
+
+#, fuzzy
+#~| msgid "Pick Date"
+#~ msgid "Pick System Date"
+#~ msgstr "Chọn ngày"
 
 #~ msgctxt "This means \"Local Timezone\""
 #~ msgid "Local"

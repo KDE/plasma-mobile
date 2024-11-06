@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:42+0000\n"
+"POT-Creation-Date: 2024-11-06 00:41+0000\n"
 "PO-Revision-Date: 2024-10-27 17:47+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -2915,148 +2915,122 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Pacífic"
 
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jan"
-msgstr "Gen."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Feb"
-msgstr "Febr."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Mar"
-msgstr "Mar."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Apr"
-msgstr "Abr."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "May"
-msgstr "Mai."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jun"
-msgstr "Jun."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jul"
-msgstr "Jul."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Aug"
-msgstr "Ago."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Sep"
-msgstr "Set."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Oct"
-msgstr "Oct."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Nov"
-msgstr "Nov."
-
-# skip-rule: punctuation-period-no
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Dec"
-msgstr "Des."
-
-#: ui/main.qml:31
+#: ui/main.qml:32
 #, kde-format
 msgid "Display"
 msgstr "Visualització"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "24-Hour Format"
 msgstr "Format de 24 hores"
 
-#: ui/main.qml:38
+#: ui/main.qml:39
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "Si s'ha d'emprar el format de 24 hores en els rellotges."
 
-#: ui/main.qml:49
+#: ui/main.qml:50
 #, kde-format
 msgid "Timezone"
 msgstr "Zona horària"
 
-#: ui/main.qml:56
+#: ui/main.qml:57
 #, kde-format
 msgid "Time and Date"
 msgstr "Data i l'hora"
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "Sincronització automàtica de la data i l'hora"
 
-#: ui/main.qml:63
+#: ui/main.qml:64
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "Si s'ha d'establir automàticament la data i l'hora."
 
-#: ui/main.qml:80
+#: ui/main.qml:81
 #, kde-format
 msgid "System Time"
 msgstr "Hora del sistema"
 
-#: ui/main.qml:89
+#: ui/main.qml:90
 #, kde-format
 msgid "System Date"
 msgstr "Data del sistema"
 
-#: ui/main.qml:101
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Selecció de la zona horària"
 
-#: ui/main.qml:168
-#, kde-format
-msgid "Pick System Date"
-msgstr "Trieu la data del sistema"
-
-#: ui/main.qml:210
+#: ui/main.qml:184
 #, kde-format
 msgid "Pick System Time"
 msgstr "Trieu l'hora del sistema"
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "AM"
 msgstr "AM"
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+# skip-rule: punctuation-period-no
+#~ msgid "Jan"
+#~ msgstr "Gen."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Feb"
+#~ msgstr "Febr."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Mar"
+#~ msgstr "Mar."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Apr"
+#~ msgstr "Abr."
+
+# skip-rule: punctuation-period-no
+#~ msgid "May"
+#~ msgstr "Mai."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Jun"
+#~ msgstr "Jun."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Jul"
+#~ msgstr "Jul."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Aug"
+#~ msgstr "Ago."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Sep"
+#~ msgstr "Set."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Oct"
+#~ msgstr "Oct."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Nov"
+#~ msgstr "Nov."
+
+# skip-rule: punctuation-period-no
+#~ msgid "Dec"
+#~ msgstr "Des."
+
+#~ msgid "Pick System Date"
+#~ msgstr "Trieu la data del sistema"
 
 #~ msgctxt "This means \"Local Timezone\""
 #~ msgid "Local"

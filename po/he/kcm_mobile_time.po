@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-11 00:42+0000\n"
+"POT-Creation-Date: 2024-11-06 00:41+0000\n"
 "PO-Revision-Date: 2024-03-07 14:43+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -2913,136 +2913,110 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "האוקיינוס השקט"
 
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jan"
-msgstr "ינו"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Feb"
-msgstr "פבר"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Mar"
-msgstr "מרץ"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Apr"
-msgstr "אפר"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "May"
-msgstr "מאי"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jun"
-msgstr "יונ"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Jul"
-msgstr "יול"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Aug"
-msgstr "אוג"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Sep"
-msgstr "ספט"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Oct"
-msgstr "אוק"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Nov"
-msgstr "נוב"
-
-#: ui/DatePicker.qml:122
-#, kde-format
-msgid "Dec"
-msgstr "דצמ"
-
-#: ui/main.qml:31
+#: ui/main.qml:32
 #, kde-format
 msgid "Display"
 msgstr "תצוגה"
 
-#: ui/main.qml:37
+#: ui/main.qml:38
 #, kde-format
 msgid "24-Hour Format"
 msgstr "תבנית 24 שעות"
 
-#: ui/main.qml:38
+#: ui/main.qml:39
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "האם להשתמש בתבנית 24 שעות לשעונים."
 
-#: ui/main.qml:49
+#: ui/main.qml:50
 #, kde-format
 msgid "Timezone"
 msgstr "אזור זמן"
 
-#: ui/main.qml:56
+#: ui/main.qml:57
 #, kde-format
 msgid "Time and Date"
 msgstr "שעה ותאריך"
 
-#: ui/main.qml:62
+#: ui/main.qml:63
 #, kde-format
 msgid "Automatic Time Synchronization"
 msgstr "סנכרון זמן אוטומטי"
 
-#: ui/main.qml:63
+#: ui/main.qml:64
 #, kde-format
 msgid "Whether to set the time automatically."
 msgstr "האם להגדיר את השעון אוטומטית."
 
-#: ui/main.qml:80
+#: ui/main.qml:81
 #, kde-format
 msgid "System Time"
 msgstr "שעון המערכת"
 
-#: ui/main.qml:89
+#: ui/main.qml:90
 #, kde-format
 msgid "System Date"
 msgstr "תאריך המערכת"
 
-#: ui/main.qml:101
+#: ui/main.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "בחירת אזור זמן"
 
-#: ui/main.qml:168
-#, kde-format
-msgid "Pick System Date"
-msgstr "בחירת תאריך המערכת"
-
-#: ui/main.qml:210
+#: ui/main.qml:184
 #, kde-format
 msgid "Pick System Time"
 msgstr "בחירת שעת המערכת"
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "AM"
 msgstr "AM"
 
-#: ui/TimePicker.qml:93
+#: ui/TimePicker.qml:95
 #, kde-format
 msgid "PM"
 msgstr "PM"
+
+#~ msgid "Jan"
+#~ msgstr "ינו"
+
+#~ msgid "Feb"
+#~ msgstr "פבר"
+
+#~ msgid "Mar"
+#~ msgstr "מרץ"
+
+#~ msgid "Apr"
+#~ msgstr "אפר"
+
+#~ msgid "May"
+#~ msgstr "מאי"
+
+#~ msgid "Jun"
+#~ msgstr "יונ"
+
+#~ msgid "Jul"
+#~ msgstr "יול"
+
+#~ msgid "Aug"
+#~ msgstr "אוג"
+
+#~ msgid "Sep"
+#~ msgstr "ספט"
+
+#~ msgid "Oct"
+#~ msgstr "אוק"
+
+#~ msgid "Nov"
+#~ msgstr "נוב"
+
+#~ msgid "Dec"
+#~ msgstr "דצמ"
+
+#~ msgid "Pick System Date"
+#~ msgstr "בחירת תאריך המערכת"
 
 #~ msgctxt "This means \"Local Timezone\""
 #~ msgid "Local"
