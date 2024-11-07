@@ -20,45 +20,41 @@ MouseArea {
 
     property var homeScreen
 
-    // use to account for x-y positioning, because delegate x and y will include the screen margins
-    property real leftMargin
-    property real topMargin
-
     signal delegateDragRequested(var item)
 
     onPressAndHold: folio.HomeScreenState.openSettingsView()
 
     Repeater {
+        id: repeater
         model: folio.FavouritesModel
 
         delegate: Item {
             id: delegate
 
-            property var delegateModel: model.delegate
-            property int index: model.index
+            readonly property var delegateModel: model.delegate
+            readonly property int index: model.index
 
-            property var dragState: folio.HomeScreenState.dragState
-            property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
+            readonly property var dragState: folio.HomeScreenState.dragState
+            readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Favourites &&
                                               dragState.candidateDropPosition.favouritesPosition === delegate.index
-            property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
+            readonly property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
                                             dragState.dropDelegate &&
                                             dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
                                             isDropPositionThis
 
-            // only one of them will be used, because of the anchors below
-            // this is used due to the ability for the favourites bar to be in multiple locations
-            x: model.xPosition - leftMargin
-            y: model.xPosition - topMargin
+            readonly property bool isLocationBottom: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom
 
-            anchors.verticalCenter: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? parent.verticalCenter : undefined
-            anchors.horizontalCenter: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? undefined : parent.horizontalCenter
+            // get the normalized index position value from the center so we can animate it
+            property double fromCenterValue: model.index - (repeater.count / 2)
+            Behavior on fromCenterValue {
+                NumberAnimation { duration: 250; easing.type: Easing.InOutQuad; }
+            }
 
-            Behavior on x {
-                NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
-            }
-            Behavior on y {
-                NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
-            }
+            // multiply the 'fromCenterValue' by the cell size to get the actual position
+            readonly property int centerPosition: (isLocationBottom ? folio.HomeScreenState.pageCellWidth : folio.HomeScreenState.pageCellHeight) * fromCenterValue
+
+            x: isLocationBottom ? centerPosition + parent.width / 2 : (parent.width - width) / 2
+            y: isLocationBottom ? (parent.height - height) / 2 : parent.height / 2 - centerPosition - folio.HomeScreenState.pageCellHeight
 
             implicitWidth: folio.HomeScreenState.pageCellWidth
             implicitHeight: folio.HomeScreenState.pageCellHeight

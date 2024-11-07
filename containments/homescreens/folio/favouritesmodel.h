@@ -31,7 +31,6 @@ class FavouritesModel : public QAbstractListModel
 public:
     enum Roles {
         DelegateRole = Qt::UserRole + 1,
-        XPositionRole,
     };
 
     FavouritesModel(HomeScreen *parent = nullptr);
@@ -73,7 +72,6 @@ public:
 
 private:
     void connectSaveRequests(FolioDelegate *delegate);
-    void evaluateDelegatePositions(bool emitSignal = true);
 
     // get the x (or y) position where delegates start being placed
     qreal getDelegateRowStartPos() const;
