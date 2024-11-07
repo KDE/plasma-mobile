@@ -316,8 +316,7 @@ public Q_SLOTS:
     void openSearchWidget();
     void closeSearchWidget();
 
-    void snapPage(); // snaps to closest page
-    void goToPage(int page);
+    void goToPage(int page, bool snap);
 
     void goToFolderPage(int page);
     void openFolder(qreal delegateX, qreal delegateY, FolioApplicationFolder *folder);
