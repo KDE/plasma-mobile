@@ -10,128 +10,133 @@ import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.mobileinitialstart.prepare 1.0 as Prepare
 import org.kde.plasma.private.mobileshell.screenbrightnessplugin as ScreenBrightness
 
-Item {
-    id: root
-    property string name: i18n("Before we get started…")
+import org.kde.plasma.mobileinitialstart.initialstart
 
-    readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
+InitialStartModule {
+    id: module
+    contentItem: Item {
+        id: root
+        property string name: i18n("Before we get started…")
 
-    ScreenBrightness.ScreenBrightnessUtil {
-        id: screenBrightness
-    }
+        readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 
-    ScrollView {
-        anchors {
-            fill: parent
-            topMargin: Kirigami.Units.gridUnit
+        ScreenBrightness.ScreenBrightnessUtil {
+            id: screenBrightness
         }
 
-        ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
-        contentWidth: -1
-
-        ColumnLayout {
-            width: root.width
-            spacing: Kirigami.Units.gridUnit
-
-            Label {
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.rightMargin: Kirigami.Units.gridUnit
-                Layout.alignment: Qt.AlignTop
-                Layout.fillWidth: true
-
-                visible: screenBrightness.brightnessAvailable
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                text: i18n("Adjust the screen brightness to be comfortable for the installation process.")
+        ScrollView {
+            anchors {
+                fill: parent
+                topMargin: Kirigami.Units.gridUnit
             }
 
-            FormCard.FormCard {
-                id: brightnessCard
-                visible: screenBrightness.brightnessAvailable
-                maximumWidth: root.cardWidth
+            ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+            contentWidth: -1
 
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+            ColumnLayout {
+                width: root.width
+                spacing: Kirigami.Units.gridUnit
 
-                FormCard.AbstractFormDelegate {
-                    background: null
+                Label {
+                    Layout.leftMargin: Kirigami.Units.gridUnit
+                    Layout.rightMargin: Kirigami.Units.gridUnit
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
 
-                    contentItem: RowLayout {
-                        spacing: Kirigami.Units.gridUnit
+                    visible: screenBrightness.brightnessAvailable
+                    wrapMode: Text.Wrap
+                    horizontalAlignment: Text.AlignHCenter
+                    text: i18n("Adjust the screen brightness to be comfortable for the installation process.")
+                }
 
-                        Kirigami.Icon {
-                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                            source: "brightness-low"
-                        }
+                FormCard.FormCard {
+                    id: brightnessCard
+                    visible: screenBrightness.brightnessAvailable
+                    maximumWidth: root.cardWidth
 
-                        Slider {
-                            id: brightnessSlider
-                            Layout.fillWidth: true
-                            from: 1
-                            to: screenBrightness.maxBrightness
-                            value: screenBrightness.brightness
-                            onMoved: screenBrightness.brightness = value;
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-                            // HACK: for some reason, the slider initial value doesn't set without being done after the component completes loading
-                            Timer {
-                                interval: 0
-                                running: true
-                                repeat: false
-                                onTriggered: brightnessSlider.value = Qt.binding(() => screenBrightness.brightness)
+                    FormCard.AbstractFormDelegate {
+                        background: null
+
+                        contentItem: RowLayout {
+                            spacing: Kirigami.Units.gridUnit
+
+                            Kirigami.Icon {
+                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                source: "brightness-low"
                             }
-                        }
 
-                        Kirigami.Icon {
-                            implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                            implicitHeight: Kirigami.Units.iconSizes.smallMedium
-                            source: "brightness-high"
+                            Slider {
+                                id: brightnessSlider
+                                Layout.fillWidth: true
+                                from: 1
+                                to: screenBrightness.maxBrightness
+                                value: screenBrightness.brightness
+                                onMoved: screenBrightness.brightness = value;
+
+                                // HACK: for some reason, the slider initial value doesn't set without being done after the component completes loading
+                                Timer {
+                                    interval: 0
+                                    running: true
+                                    repeat: false
+                                    onTriggered: brightnessSlider.value = Qt.binding(() => screenBrightness.brightness)
+                                }
+                            }
+
+                            Kirigami.Icon {
+                                implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                                implicitHeight: Kirigami.Units.iconSizes.smallMedium
+                                source: "brightness-high"
+                            }
                         }
                     }
                 }
-            }
 
-            Label {
-                Layout.leftMargin: Kirigami.Units.gridUnit
-                Layout.rightMargin: Kirigami.Units.gridUnit
-                Layout.alignment: Qt.AlignTop
-                Layout.fillWidth: true
+                Label {
+                    Layout.leftMargin: Kirigami.Units.gridUnit
+                    Layout.rightMargin: Kirigami.Units.gridUnit
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
 
-                wrapMode: Text.Wrap
-                horizontalAlignment: Text.AlignHCenter
-                text: i18n("Adjust the size of elements on the screen.")
-            }
-
-            FormCard.FormCard {
-                id: scalingCard
-                maximumWidth: root.cardWidth
-
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-
-                FormCard.FormComboBoxDelegate {
-                    id: displayScaling
-                    text: i18n("Display Scaling")
-                    displayMode: FormCard.FormComboBoxDelegate.Dialog
-                    currentIndex: Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
-                    model: Prepare.PrepareUtil.scalingOptions
-
-                    // remove % suffix
-                    onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
+                    wrapMode: Text.Wrap
+                    horizontalAlignment: Text.AlignHCenter
+                    text: i18n("Adjust the size of elements on the screen.")
                 }
-            }
 
-            FormCard.FormCard {
-                id: darkThemeCard
-                maximumWidth: root.cardWidth
+                FormCard.FormCard {
+                    id: scalingCard
+                    maximumWidth: root.cardWidth
 
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-                FormCard.FormSwitchDelegate {
-                    id: darkThemeSwitch
-                    text: i18n("Dark Theme")
-                    checked: Prepare.PrepareUtil.usingDarkTheme
-                    onCheckedChanged: {
-                        if (checked !== Prepare.PrepareUtil.usingDarkTheme) {
-                            Prepare.PrepareUtil.usingDarkTheme = checked;
+                    FormCard.FormComboBoxDelegate {
+                        id: displayScaling
+                        text: i18n("Display Scaling")
+                        displayMode: FormCard.FormComboBoxDelegate.Dialog
+                        currentIndex: Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
+                        model: Prepare.PrepareUtil.scalingOptions
+
+                        // remove % suffix
+                        onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
+                    }
+                }
+
+                FormCard.FormCard {
+                    id: darkThemeCard
+                    maximumWidth: root.cardWidth
+
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+
+                    FormCard.FormSwitchDelegate {
+                        id: darkThemeSwitch
+                        text: i18n("Dark Theme")
+                        checked: Prepare.PrepareUtil.usingDarkTheme
+                        onCheckedChanged: {
+                            if (checked !== Prepare.PrepareUtil.usingDarkTheme) {
+                                Prepare.PrepareUtil.usingDarkTheme = checked;
+                            }
                         }
                     }
                 }

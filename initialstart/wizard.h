@@ -10,10 +10,13 @@
 #include <KPackage/Package>
 #include <KPluginMetaData>
 
+#include "initialstartmodule.h"
+
 class Wizard : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QList<QQuickItem *> steps READ steps CONSTANT)
+    Q_PROPERTY(QList<InitialStartModule *> steps READ steps NOTIFY stepsChanged)
+    Q_PROPERTY(int stepsCount READ stepsCount NOTIFY stepsChanged)
     Q_PROPERTY(bool testingMode READ testingMode NOTIFY testingModeChanged)
 
 public:
@@ -24,17 +27,23 @@ public:
     void setTestingMode(bool testingMode);
     bool testingMode();
 
-    QList<QQuickItem *> steps();
+    QList<InitialStartModule *> steps();
+    int stepsCount();
 
 public Q_SLOTS:
     void wizardFinished();
 
 Q_SIGNALS:
+    void stepsChanged();
     void testingModeChanged();
+
+private Q_SLOTS:
+    void determineAvailableModuleItems();
 
 private:
     QList<std::pair<KPluginMetaData *, KPackage::Package>> m_modulePackages;
-    QList<QQuickItem *> m_moduleItems;
+    QList<InitialStartModule *> m_availableModuleItems;
+    QList<InitialStartModule *> m_moduleItems;
 
     bool m_testingMode;
     QQmlEngine *m_engine;

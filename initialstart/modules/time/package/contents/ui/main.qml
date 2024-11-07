@@ -9,93 +9,97 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.mobileinitialstart.time 1.0 as Time
 
-Item {
-    id: root
-    property string name: i18n("Time and Date")
+import org.kde.plasma.mobileinitialstart.initialstart
 
-    readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
+InitialStartModule {
+    contentItem: Item {
+        id: root
+        property string name: i18n("Time and Date")
 
-    ColumnLayout {
-        anchors {
-            fill: parent
-            topMargin: Kirigami.Units.gridUnit
-            bottomMargin: Kirigami.Units.largeSpacing
-        }
+        readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 
-        width: root.width
-        spacing: Kirigami.Units.gridUnit
-
-        Label {
-            Layout.leftMargin: Kirigami.Units.gridUnit
-            Layout.rightMargin: Kirigami.Units.gridUnit
-            Layout.alignment: Qt.AlignTop
-            Layout.fillWidth: true
-
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-            text: i18n("Select your time zone and preferred time format.")
-        }
-
-        FormCard.FormCard {
-            maximumWidth: root.cardWidth
-
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            Layout.fillWidth: true
-
-            FormCard.FormSwitchDelegate {
-                Layout.fillWidth: true
-                text: i18n("24-Hour Format")
-                checked: Time.TimeUtil.is24HourTime
-                onCheckedChanged: {
-                    if (checked !== Time.TimeUtil.is24HourTime) {
-                        Time.TimeUtil.is24HourTime = checked;
-                    }
-                }
+        ColumnLayout {
+            anchors {
+                fill: parent
+                topMargin: Kirigami.Units.gridUnit
+                bottomMargin: Kirigami.Units.largeSpacing
             }
-        }
 
-        FormCard.FormCard {
-            maximumWidth: root.cardWidth
+            width: root.width
+            spacing: Kirigami.Units.gridUnit
 
-            Layout.fillHeight: true
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-            Layout.fillWidth: true
-
-            ListView {
-                id: listView
-
-                clip: true
+            Label {
+                Layout.leftMargin: Kirigami.Units.gridUnit
+                Layout.rightMargin: Kirigami.Units.gridUnit
+                Layout.alignment: Qt.AlignTop
                 Layout.fillWidth: true
-                Layout.fillHeight: true
-                model: Time.TimeUtil.timeZones
-                currentIndex: -1 // ensure focus is not on the listview
 
-                header: Control {
-                    width: listView.width
-                    leftPadding: Kirigami.Units.largeSpacing
-                    rightPadding: Kirigami.Units.largeSpacing
-                    topPadding: Kirigami.Units.largeSpacing
-                    bottomPadding: Kirigami.Units.largeSpacing
+                wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+                text: i18n("Select your time zone and preferred time format.")
+            }
 
-                    contentItem: Kirigami.SearchField {
-                        id: searchField
+            FormCard.FormCard {
+                maximumWidth: root.cardWidth
 
-                        onTextChanged: {
-                            Time.TimeUtil.timeZones.filterString = text;
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                Layout.fillWidth: true
+
+                FormCard.FormSwitchDelegate {
+                    Layout.fillWidth: true
+                    text: i18n("24-Hour Format")
+                    checked: Time.TimeUtil.is24HourTime
+                    onCheckedChanged: {
+                        if (checked !== Time.TimeUtil.is24HourTime) {
+                            Time.TimeUtil.is24HourTime = checked;
                         }
                     }
                 }
+            }
 
-                delegate: FormCard.FormRadioDelegate {
-                    required property string timeZoneId
+            FormCard.FormCard {
+                maximumWidth: root.cardWidth
 
-                    width: ListView.view.width
-                    text: timeZoneId
-                    checked: Time.TimeUtil.currentTimeZone === timeZoneId
-                    onCheckedChanged: {
-                        if (checked && timeZoneId !== Time.TimeUtil.currentTimeZone) {
-                            Time.TimeUtil.currentTimeZone = timeZoneId;
-                            checked = Qt.binding(() => Time.TimeUtil.currentTimeZone === timeZoneId);
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                Layout.fillWidth: true
+
+                ListView {
+                    id: listView
+
+                    clip: true
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    model: Time.TimeUtil.timeZones
+                    currentIndex: -1 // ensure focus is not on the listview
+
+                    header: Control {
+                        width: listView.width
+                        leftPadding: Kirigami.Units.largeSpacing
+                        rightPadding: Kirigami.Units.largeSpacing
+                        topPadding: Kirigami.Units.largeSpacing
+                        bottomPadding: Kirigami.Units.largeSpacing
+
+                        contentItem: Kirigami.SearchField {
+                            id: searchField
+
+                            onTextChanged: {
+                                Time.TimeUtil.timeZones.filterString = text;
+                            }
+                        }
+                    }
+
+                    delegate: FormCard.FormRadioDelegate {
+                        required property string timeZoneId
+
+                        width: ListView.view.width
+                        text: timeZoneId
+                        checked: Time.TimeUtil.currentTimeZone === timeZoneId
+                        onCheckedChanged: {
+                            if (checked && timeZoneId !== Time.TimeUtil.currentTimeZone) {
+                                Time.TimeUtil.currentTimeZone = timeZoneId;
+                                checked = Qt.binding(() => Time.TimeUtil.currentTimeZone === timeZoneId);
+                            }
                         }
                     }
                 }
@@ -103,4 +107,3 @@ Item {
         }
     }
 }
-

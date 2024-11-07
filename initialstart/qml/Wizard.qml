@@ -19,7 +19,7 @@ Kirigami.Page {
     bottomPadding: 0
 
     property int currentIndex: 0
-    property int stepCount: 0
+    readonly property int stepCount: InitialStart.Wizard.stepsCount
     property bool showingLanding: true
 
     // filled by items
@@ -61,6 +61,11 @@ Kirigami.Page {
                 root.nextStepItem.visible = false;
             }
         }
+    }
+
+    onStepCountChanged: {
+        // reset position
+        requestPreviousPage();
     }
 
     function finishFinalPage() {
@@ -207,7 +212,7 @@ Kirigami.Page {
                     delegate: MobileShell.BaseItem {
                         id: item
                         visible: model.index === 0 // the binding is broken later
-                        contentItem: modelData
+                        contentItem: modelData.contentItem
                         transform: Translate {
                             x: {
                                 if (item.currentIndex === root.currentIndex - 1) {
@@ -238,7 +243,6 @@ Kirigami.Page {
                         }
 
                         Component.onCompleted: {
-                            root.stepCount++
                             updateRootItems();
                         }
 

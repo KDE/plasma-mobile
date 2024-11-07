@@ -14,6 +14,8 @@ add_executable(plasma-mobile-initial-start
     utils.h
     initialstartutil.cpp
     initialstartutil.h
+    initialstartmodule.cpp
+    initialstartmodule.h
 )
 
 qt_add_qml_module(plasma-mobile-initial-start

@@ -9,31 +9,32 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.mobileinitialstart.initialstart
 
-Item {
-    id: root
+InitialStartModule {
+    contentItem: Item {
+        id: root
 
-    property string name: i18n("Complete!")
+        property string name: i18n("Complete!")
 
-    ColumnLayout {
-        anchors.fill: parent
-        anchors.margins: Kirigami.Units.gridUnit
+        ColumnLayout {
+            anchors.fill: parent
+            anchors.margins: Kirigami.Units.gridUnit
 
-        Label {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
-            text: i18n("Your device is now ready. <br /><br />Enjoy <b>%1</b>!", InitialStartUtil.distroName)
-            wrapMode: Text.Wrap
-            horizontalAlignment: Text.AlignHCenter
-        }
+            Label {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
+                text: i18n("Your device is now ready. <br /><br />Enjoy <b>%1</b>!", InitialStartUtil.distroName)
+                wrapMode: Text.Wrap
+                horizontalAlignment: Text.AlignHCenter
+            }
 
-        Item { Layout.fillHeight: true }
+            Item { Layout.fillHeight: true }
 
-        Image {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignHCenter
-            fillMode: Image.PreserveAspectFit
-            source: "konqi-calling.png"
+            Image {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignHCenter
+                fillMode: Image.PreserveAspectFit
+                source: "konqi-calling.png"
+            }
         }
     }
 }
-

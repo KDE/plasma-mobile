@@ -50,12 +50,12 @@ void Wizard::load()
     QQmlComponent *c = new QQmlComponent(m_engine, this);
 
     // load initialstart QML items
-    for (auto &pair : m_modulePackages) {
+    for (const auto &[pluginMetadata, package] : m_modulePackages) {
         // load QML from kpackage
-        c->loadUrl(pair.second.fileUrl("mainscript"), QQmlComponent::PreferSynchronous);
+        c->loadUrl(package.fileUrl("mainscript"), QQmlComponent::PreferSynchronous);
 
         auto created = c->create(m_engine->rootContext());
-        auto createdItem = qobject_cast<QQuickItem *>(created);
+        InitialStartModule *createdItem = qobject_cast<InitialStartModule *>(created);
 
         // print errors if there were issues loading
         if (!createdItem) {
@@ -67,12 +67,16 @@ void Wizard::load()
             continue;
         }
 
+        connect(createdItem, &InitialStartModule::availableChanged, this, &Wizard::determineAvailableModuleItems);
         m_moduleItems.push_back(createdItem);
 
-        qCDebug(LOGGING_CATEGORY) << "Loaded initialstart module" << pair.first->pluginId();
+        qCDebug(LOGGING_CATEGORY) << "Loaded initialstart module" << pluginMetadata->pluginId();
     }
 
     delete c;
+
+    // Populate model
+    determineAvailableModuleItems();
 }
 
 void Wizard::setTestingMode(bool testingMode)
@@ -88,13 +92,30 @@ bool Wizard::testingMode()
     return m_testingMode;
 }
 
-QList<QQuickItem *> Wizard::steps()
+QList<InitialStartModule *> Wizard::steps()
 {
-    return m_moduleItems;
+    return m_availableModuleItems;
+}
+
+int Wizard::stepsCount()
+{
+    return m_availableModuleItems.size();
 }
 
 void Wizard::wizardFinished()
 {
     Settings::self()->setWizardFinished();
     QCoreApplication::quit();
+}
+
+void Wizard::determineAvailableModuleItems()
+{
+    m_availableModuleItems.clear();
+    for (auto *moduleItem : m_moduleItems) {
+        if (moduleItem->available()) {
+            m_availableModuleItems.push_back(moduleItem);
+        }
+    }
+
+    Q_EMIT stepsChanged();
 }
