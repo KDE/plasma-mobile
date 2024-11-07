@@ -258,8 +258,6 @@ Item {
                 id: favouritesBar
                 folio: root.folio
                 homeScreen: root
-                leftMargin: root.leftMargin
-                topMargin: root.topMargin
 
                 // don't show in settings mode
                 opacity: 1 - folio.HomeScreenState.settingsOpenProgress
