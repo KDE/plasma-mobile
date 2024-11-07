@@ -316,7 +316,7 @@ void HomeScreenState::setPageWidth(qreal pageWidth)
         Q_EMIT pageWidthChanged();
 
         // make sure we snap
-        snapPage();
+        goToPage(m_pageNum, true);
     }
 }
 
@@ -712,29 +712,7 @@ void HomeScreenState::closeSearchWidget()
     m_closeSearchWidgetAnim->start();
 }
 
-void HomeScreenState::snapPage()
-{
-    const int numOfPages = m_homeScreen->pageListModel()->rowCount();
-
-    const int leftPage = qBound(0.0, (m_pageViewX / m_pageWidth), numOfPages - 1.0);
-    const qreal leftPagePos = -leftPage * m_pageWidth;
-
-    if (leftPage == numOfPages + 1) {
-        // if we are past the last page
-        goToPage(leftPage);
-    } else {
-        const qreal rightPagePos = leftPagePos - m_pageWidth;
-
-        // go to the closer page (right or left)
-        if (qAbs(rightPagePos - m_pageViewX) < qAbs(leftPagePos - m_pageViewX)) {
-            goToPage(leftPage + 1);
-        } else {
-            goToPage(leftPage);
-        }
-    }
-}
-
-void HomeScreenState::goToPage(int page)
+void HomeScreenState::goToPage(int page, bool snap)
 {
     if (page < 0) {
         page = 0;
@@ -747,7 +725,12 @@ void HomeScreenState::goToPage(int page)
 
     setCurrentPage(page);
 
-    m_pageAnim->setStartValue(m_pageViewX);
+    if (snap) {
+        // Skip the animation and go straight to the intended page
+        m_pageAnim->setStartValue(-page * m_pageWidth);
+    } else {
+        m_pageAnim->setStartValue(m_pageViewX);
+    }
     m_pageAnim->setEndValue(-page * m_pageWidth);
     m_pageAnim->start();
 }
@@ -914,9 +897,9 @@ void HomeScreenState::swipeEnded()
 
         // m_movingRight refers to finger movement
         if (m_movingRight || m_pageViewX > 0) {
-            goToPage(page);
+            goToPage(page, false);
         } else {
-            goToPage(page + 1);
+            goToPage(page + 1, false);
         }
         break;
     }

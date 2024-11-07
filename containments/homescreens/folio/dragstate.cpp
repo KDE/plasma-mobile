@@ -590,7 +590,7 @@ void DragState::onChangePageTimerFinished()
         // if we are at the left edge, go left
         int page = m_state->currentPage() - 1;
         if (page >= 0) {
-            m_state->goToPage(page);
+            m_state->goToPage(page, false);
         }
 
     } else if (qAbs(rightPagePosition - x) <= PAGE_CHANGE_THRESHOLD) {
@@ -604,7 +604,7 @@ void DragState::onChangePageTimerFinished()
 
         // go to page if it exists
         if (page < pageListModel->rowCount()) {
-            m_state->goToPage(page);
+            m_state->goToPage(page, false);
         }
     }
 }
