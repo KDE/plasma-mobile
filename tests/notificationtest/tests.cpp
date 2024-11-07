@@ -67,7 +67,7 @@ void LowUrgencyNotificationTest::sendNotification(QCoreApplication &app)
     notification->setIconName(QStringLiteral("notification-inactive"));
     notification->setTitle("Low Urgency Notification");
     notification->setText("This is not very important...");
-    notification->setUrgency(KNotification::CriticalUrgency);
+    notification->setUrgency(KNotification::LowUrgency);
 
     connect(notification, &KNotification::closed, &app, QCoreApplication::quit);
     notification->sendEvent();
@@ -80,7 +80,7 @@ void HighUrgencyNotificationTest::sendNotification(QCoreApplication &app)
     notification->setIconName(QStringLiteral("notification-active"));
     notification->setTitle("Urgent Notification");
     notification->setText("This is very urgent! AAAAAA");
-    notification->setUrgency(KNotification::CriticalUrgency);
+    notification->setUrgency(KNotification::HighUrgency);
 
     connect(notification, &KNotification::closed, &app, QCoreApplication::quit);
     notification->sendEvent();

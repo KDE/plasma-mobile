@@ -54,6 +54,7 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Quick
     Gui
     Sensors
+    WaylandClient
 )
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS

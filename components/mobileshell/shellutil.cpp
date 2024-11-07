@@ -22,12 +22,15 @@
 #include <QFile>
 #include <QProcess>
 
+#include <QTextDocumentFragment>
+#include <QtWaylandClient/private/qwaylandwindow_p.h>
+
+
 #define FORMAT24H "HH:mm:ss"
 
-ShellUtil::ShellUtil(QObject *parent)
-    : QObject{parent}
-    , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
-{
+
+ShellUtil::ShellUtil(QObject *parent) : QObject{parent}, m_localeConfig {
+    KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig) } {
 }
 
 void ShellUtil::stackItemBefore(QQuickItem *item1, QQuickItem *item2)
@@ -102,3 +105,44 @@ void ShellUtil::setInputTransparent(QQuickWindow *window, bool transparent) {
     }
 }
 
+void ShellUtil::setInputRegion(QWindow *window, const QRect &region) {
+    auto waylandWindow = dynamic_cast<QtWaylandClient::QWaylandWindow *>(window->handle());
+    if (!waylandWindow) {
+        qWarning() << "Failed to retrieve Wayland window handle.";
+        return;
+    }
+    
+    auto waylandDisplay = dynamic_cast<QtWaylandClient::QWaylandDisplay *>(waylandWindow->display());
+    if (!waylandDisplay) {
+        qWarning() << "Failed to retrieve Wayland display.";
+        return;
+    }
+
+    wl_compositor *compositorResource = static_cast<wl_compositor *>(waylandDisplay->compositor()->object());
+    if (!compositorResource) {
+        qWarning() << "Failed to retrieve compositor.";
+        return;
+    }
+
+    wl_surface *surface = waylandWindow->wlSurface();
+    if (!surface) {
+        qWarning() << "Failed to retrieve Wayland surface.";
+        return;
+    }
+
+    if (region.isEmpty()) {
+        wl_surface_set_input_region(surface, nullptr);
+    } else {
+        wl_region *inputRegion = wl_compositor_create_region(compositorResource);
+
+        wl_region_add(inputRegion, region.x(), region.y(), region.width(), region.height());
+        wl_surface_set_input_region(surface, inputRegion);
+        wl_region_destroy(inputRegion);
+    }
+
+    wl_surface_commit(surface);
+}
+
+QString ShellUtil::toPlainText(QString htmlString) {
+    return QTextDocumentFragment::fromHtml(htmlString).toPlainText();
+}

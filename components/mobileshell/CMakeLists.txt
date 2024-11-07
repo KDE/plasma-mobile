@@ -23,6 +23,7 @@ set_source_files_properties(qml/dataproviders/AudioInfo.qml PROPERTIES QT_QML_SI
 set_source_files_properties(qml/dataproviders/BatteryInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/dataproviders/BluetoothInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/dataproviders/SignalStrengthInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(qml/notificationpopup/NotificationPopupProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/volumeosd/VolumeOSDProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 # Include qml and js files within ./qml/
@@ -41,6 +42,7 @@ target_link_libraries(mobileshellplugin
         Qt::Qml
         Qt::Gui
         Qt::Quick
+        Qt::WaylandClientPrivate
         KF6::KIOGui
         Plasma::Plasma
         KF6::I18n

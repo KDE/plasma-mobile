@@ -19,9 +19,9 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 Item {
     id: notificationItem
 
-    required property var notificationsModel
+    property var notificationsModel
 
-    required property int notificationsModelType
+    property int notificationsModelType
 
     /**
      * Whether the notification is allowed to invoke any action, or if it should instead

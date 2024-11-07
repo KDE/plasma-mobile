@@ -15,9 +15,12 @@ Item {
     id: actionContainer
 
     required property BaseNotificationItem notification
+    property bool popupNotification: false
 
     implicitHeight: Math.max(actionFlow.implicitHeight, replyLoader.height)
     visible: actionRepeater.count > 0
+
+    signal takeFocus()
 
     Flow {
         id: actionFlow
@@ -63,6 +66,8 @@ Item {
                 flat: false
                 text: modelData.label || ""
 
+                visible: !(notificationItem.hasReplyAction && actionContainer.popupNotification)
+
                 onClicked: {
                     if (modelData.actionName === "inline-reply") {
                         replyLoader.beginReply();
@@ -81,10 +86,12 @@ Item {
         height: active ? item.implicitHeight : 0
 
         // When there is only one action and it is a reply action, show text field right away
-        active: false
+        active: notificationItem.hasReplyAction && actionContainer.popupNotification
         visible: active
         opacity: active ? 1 : 0
         x: active ? 0 : parent.width
+
+        property bool replying: false
 
         Behavior on x {
             NumberAnimation {
@@ -100,7 +107,9 @@ Item {
         }
 
         function beginReply() {
-            active = true
+            actionContainer.takeFocus();
+            active = true;
+            replying = true;
             replyLoader.item.activate();
         }
 
@@ -110,7 +119,7 @@ Item {
             buttonText: notificationItem.replySubmitButtonText
             onReplied: notificationItem.replied(text)
 
-            replying: replyLoader.active
+            replying: replyLoader.replying
             onBeginReplyRequested: replyLoader.beginReply()
         }
     }
