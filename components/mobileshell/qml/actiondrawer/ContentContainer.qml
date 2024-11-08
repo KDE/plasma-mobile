@@ -14,7 +14,7 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 /**
  * Root element that contains all the ActionDrawer's contents, and is anchored to the screen.
  */
-Rectangle {
+Item {
     id: root
 
     required property var actionDrawer
@@ -31,12 +31,15 @@ Rectangle {
     Kirigami.Theme.inherit: false
 
     // Background color
-    color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
-                    Kirigami.Theme.backgroundColor.g,
-                    Kirigami.Theme.backgroundColor.b,
-                    (root.actionDrawer.mode == ActionDrawer.Portrait || notificationWidget.hasNotifications) ? 0.95 : 0.9)
-    Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration } }
-    opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
+                        Kirigami.Theme.backgroundColor.g,
+                        Kirigami.Theme.backgroundColor.b,
+                        (root.actionDrawer.mode == ActionDrawer.Portrait || notificationWidget.hasNotifications) ? 0.95 : 0.9)
+        Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration } }
+        opacity: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
+    }
 
     // Layout that switches between landscape and portrait mode
     Loader {
