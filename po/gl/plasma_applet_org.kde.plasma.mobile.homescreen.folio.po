@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-02 02:32+0000\n"
+"POT-Creation-Date: 2024-11-08 02:29+0000\n"
 "PO-Revision-Date: 2024-07-02 17:41+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -28,8 +28,8 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Buscar nas aplicacións…"
 
-#: package/contents/ui/FavouritesBar.qml:149
-#: package/contents/ui/FavouritesBar.qml:223
+#: package/contents/ui/FavouritesBar.qml:145
+#: package/contents/ui/FavouritesBar.qml:219
 #: package/contents/ui/FolderView.qml:273
 #: package/contents/ui/HomeScreenPage.qml:218
 #: package/contents/ui/HomeScreenPage.qml:298
