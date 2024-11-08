@@ -54,6 +54,21 @@ Item {
             color: root.backgroundColor
         }
 
+        NavigationPanelButton {
+            id: leftCornerButton
+            visible: root.leftCornerAction.visible
+            Kirigami.Theme.colorSet: root.foregroundColorGroup
+            Kirigami.Theme.inherit: false
+            enabled: root.leftCornerAction.enabled
+            iconSizeFactor: root.leftCornerAction.iconSizeFactor
+            iconSource: root.leftCornerAction.iconSource
+            onClicked: {
+                if (enabled) {
+                    root.leftCornerAction.triggered();
+                }
+            }
+        }
+
         // button row (anchors provided by state)
         NavigationPanelButton {
             id: leftButton
@@ -166,6 +181,18 @@ Item {
                 height: Kirigami.Units.gridUnit * 2
                 width: icons.width
             }
+            AnchorChanges {
+                target: leftCornerButton
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                }
+            }
+            PropertyChanges {
+                target: leftCornerButton
+                height: Kirigami.Units.gridUnit * 2
+                width: icons.width
+            }
         }, State {
             name: "horizontal"
             when: !root.isVertical
@@ -211,6 +238,18 @@ Item {
             }
             PropertyChanges {
                 target: rightCornerButton
+                height: parent.height
+                width: Kirigami.Units.gridUnit * 2
+            }
+            AnchorChanges {
+                target: leftCornerButton
+                anchors {
+                    verticalCenter: parent.verticalCenter
+                    left: parent.left
+                }
+            }
+            PropertyChanges {
+                target: leftCornerButton
                 height: parent.height
                 width: Kirigami.Units.gridUnit * 2
             }
