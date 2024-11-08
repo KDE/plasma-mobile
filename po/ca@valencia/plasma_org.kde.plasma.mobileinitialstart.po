@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
 "PO-Revision-Date: 2024-10-09 10:25+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -110,18 +110,18 @@ msgstr "Només 2G"
 msgid "Any"
 msgstr "Qualsevol"
 
-#: modules/cellular/package/contents/ui/main.qml:14
+#: modules/cellular/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Cellular"
 msgstr "Mòbil"
 
-#: modules/cellular/package/contents/ui/main.qml:51
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:54
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid "Your device does not have a modem available."
 msgstr "El dispositiu no té cap mòdem disponible."
 
-#: modules/cellular/package/contents/ui/main.qml:53
+#: modules/cellular/package/contents/ui/main.qml:56
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -130,52 +130,52 @@ msgstr ""
 "Configureu l'APN següent per a les dades mòbils, la informació addicional "
 "estarà disponible en el vostre operador."
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:58
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Esteu connectat/da a la xarxa mòbil."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:60
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Inseriu una targeta SIM en el vostre dispositiu."
 
-#: modules/cellular/package/contents/ui/main.qml:71
+#: modules/cellular/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Mobile Data"
 msgstr "Dades mòbils"
 
-#: modules/cellular/package/contents/ui/main.qml:114
+#: modules/cellular/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Edit"
 msgstr "Edita"
 
-#: modules/cellular/package/contents/ui/main.qml:122
+#: modules/cellular/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Suprimix"
 
-#: modules/cellular/package/contents/ui/main.qml:131
+#: modules/cellular/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Add APN"
 msgstr "Afig un APN"
 
-#: modules/finished/contents/ui/main.qml:15
+#: modules/finished/contents/ui/main.qml:16
 #, kde-format
 msgid "Complete!"
 msgstr "Finalitzat!"
 
-#: modules/finished/contents/ui/main.qml:24
+#: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "El dispositiu ara està llest. <br /><br />Gaudiu <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Before we get started…"
 msgstr "Abans de començar…"
 
-#: modules/prepare/package/contents/ui/main.qml:45
+#: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -183,32 +183,32 @@ msgstr ""
 "Ajusteu la brillantor de la pantalla perquè siga confortable durant el "
 "procés d'instal·lació."
 
-#: modules/prepare/package/contents/ui/main.qml:101
+#: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ajusteu la mida dels elements a la pantalla."
 
-#: modules/prepare/package/contents/ui/main.qml:112
+#: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
 msgstr "Escalat de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:130
+#: modules/prepare/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema fosc"
 
-#: modules/time/package/contents/ui/main.qml:14
+#: modules/time/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Time and Date"
 msgstr "Hora i data"
 
-#: modules/time/package/contents/ui/main.qml:36
+#: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Seleccioneu la zona horària i el format de l'hora."
 
-#: modules/time/package/contents/ui/main.qml:47
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "Format de 24 hores"
@@ -223,12 +223,12 @@ msgstr "Entrada no vàlida."
 msgid "Connect to"
 msgstr "Connecta a"
 
-#: modules/wifi/package/contents/ui/main.qml:16
+#: modules/wifi/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Network"
 msgstr "Xarxa"
 
-#: modules/wifi/package/contents/ui/main.qml:71
+#: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Connecta amb una xarxa Wi-Fi per a l'accés a la xarxa."
@@ -248,7 +248,7 @@ msgstr "Us donem la benvinguda a<br/><b>Plasma Mobile</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Funciona amb<br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Següent"
@@ -258,12 +258,12 @@ msgstr "Següent"
 msgid "Initial Start"
 msgstr "Començament inicial"
 
-#: qml/Wizard.qml:274
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Arrere"
 
-#: qml/Wizard.qml:310
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Finalitza"

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 00:41+0000\n"
-"PO-Revision-Date: 2024-08-16 11:50+0300\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"PO-Revision-Date: 2024-11-06 16:51+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "Straumes nosaukums nav atrasts"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Pārslēgt skaņas straumju rādīšanu"
+msgstr "konfigurēt audio straumes"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -205,7 +204,7 @@ msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Atlasīt visu"
 
-#: qml/widgets/notifications/NotificationFooterActions.qml:55
+#: qml/widgets/notifications/NotificationFooterActions.qml:58
 #, kde-format
 msgctxt "Reply to message"
 msgid "Reply"

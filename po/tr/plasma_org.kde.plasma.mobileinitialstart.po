@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
 "PO-Revision-Date: 2024-10-09 10:01+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -107,18 +107,18 @@ msgstr "Yalnızca 2G"
 msgid "Any"
 msgstr "Herhangi biri"
 
-#: modules/cellular/package/contents/ui/main.qml:14
+#: modules/cellular/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Cellular"
 msgstr "Hücresel"
 
-#: modules/cellular/package/contents/ui/main.qml:51
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:54
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid "Your device does not have a modem available."
 msgstr "Aygıtınızda kullanılabilir bir modem yok."
 
-#: modules/cellular/package/contents/ui/main.qml:53
+#: modules/cellular/package/contents/ui/main.qml:56
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -127,85 +127,85 @@ msgstr ""
 "Taşınabilir veri için erişim noktası adınızı yapılandırın; bununla ilgili "
 "bilgi hizmet sağlayıcınızda vardır."
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:58
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Taşınabilir ağa bağlısınız."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:60
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Lütfen aygıtınıza bir SIM kart takın."
 
-#: modules/cellular/package/contents/ui/main.qml:71
+#: modules/cellular/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Mobile Data"
 msgstr "Taşınabilir Veri"
 
-#: modules/cellular/package/contents/ui/main.qml:114
+#: modules/cellular/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
 
-#: modules/cellular/package/contents/ui/main.qml:122
+#: modules/cellular/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
 
-#: modules/cellular/package/contents/ui/main.qml:131
+#: modules/cellular/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Add APN"
 msgstr "Erişim Noktası Adı Ekle"
 
-#: modules/finished/contents/ui/main.qml:15
+#: modules/finished/contents/ui/main.qml:16
 #, kde-format
 msgid "Complete!"
 msgstr "Tamamlandı!"
 
-#: modules/finished/contents/ui/main.qml:24
+#: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Aygıtınız artık hazır. <br /><br /><b>%1</b> sisteminin keyfini çıkarın!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Before we get started…"
 msgstr "Başlamadan önce…"
 
-#: modules/prepare/package/contents/ui/main.qml:45
+#: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 "Kurulum süreci için ekran parlaklığını sizin için rahat bir düzeye ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:101
+#: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Ekrandaki ögelerin boyutunu ayarlayın."
 
-#: modules/prepare/package/contents/ui/main.qml:112
+#: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
 msgstr "Görüntü Ölçekleme"
 
-#: modules/prepare/package/contents/ui/main.qml:130
+#: modules/prepare/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Dark Theme"
 msgstr "Koyu Tema"
 
-#: modules/time/package/contents/ui/main.qml:14
+#: modules/time/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Time and Date"
 msgstr "Tarih ve Zaman"
 
-#: modules/time/package/contents/ui/main.qml:36
+#: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Zaman dilimini ve yeğlediğiniz zaman biçimini seçin."
 
-#: modules/time/package/contents/ui/main.qml:47
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 Saat Biçimi"
@@ -220,12 +220,12 @@ msgstr "Geçersiz girdi."
 msgid "Connect to"
 msgstr "Bağlan"
 
-#: modules/wifi/package/contents/ui/main.qml:16
+#: modules/wifi/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Network"
 msgstr "Ağ"
 
-#: modules/wifi/package/contents/ui/main.qml:71
+#: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Ağ erişimi için bir Wi-Fi ağına bağlanın."
@@ -245,7 +245,7 @@ msgstr "<b>Plasma Cep</b>’e hoş geldiniz"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "<b>%1</b> temelli"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Sonraki"
@@ -255,12 +255,12 @@ msgstr "Sonraki"
 msgid "Initial Start"
 msgstr "Başlangıç"
 
-#: qml/Wizard.qml:274
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Geri"
 
-#: qml/Wizard.qml:310
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Bitir"

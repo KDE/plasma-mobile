@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
 "PO-Revision-Date: 2023-07-28 15:18+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -106,18 +106,18 @@ msgstr "Iba 2G"
 msgid "Any"
 msgstr "Hocičo"
 
-#: modules/cellular/package/contents/ui/main.qml:14
+#: modules/cellular/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Cellular"
 msgstr "Mobilné"
 
-#: modules/cellular/package/contents/ui/main.qml:51
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:54
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid "Your device does not have a modem available."
 msgstr "Vaše zariadenie nemá k dispozícii modem."
 
-#: modules/cellular/package/contents/ui/main.qml:53
+#: modules/cellular/package/contents/ui/main.qml:56
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -126,85 +126,85 @@ msgstr ""
 "Nižšie si nakonfigurujte APN pre mobilné dáta, ďalšie informácie vám "
 "poskytne váš operátor."
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:58
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Ste pripojení k mobilnej sieti."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:60
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Prosím, vložte kartu SIM do zariadenia."
 
-#: modules/cellular/package/contents/ui/main.qml:71
+#: modules/cellular/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobilné dáta"
 
-#: modules/cellular/package/contents/ui/main.qml:114
+#: modules/cellular/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Edit"
 msgstr "Upraviť"
 
-#: modules/cellular/package/contents/ui/main.qml:122
+#: modules/cellular/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Vymazať"
 
-#: modules/cellular/package/contents/ui/main.qml:131
+#: modules/cellular/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Add APN"
 msgstr "Pridať APN"
 
-#: modules/finished/contents/ui/main.qml:15
+#: modules/finished/contents/ui/main.qml:16
 #, kde-format
 msgid "Complete!"
 msgstr "Dokončené"
 
-#: modules/finished/contents/ui/main.qml:24
+#: modules/finished/contents/ui/main.qml:25
 #, fuzzy, kde-format
 #| msgid "Your device is now ready. <br /><br />Enjoy <b>Plasma 6.0</b>!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr ""
 "Vaše zariadenie je teraz pripravené. <br /><br />Užite si <b>Plasma 6.0</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Before we get started…"
 msgstr "Skôr než začneme..."
 
-#: modules/prepare/package/contents/ui/main.qml:45
+#: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr "Upravte jas obrazovky tak, aby bol pohodlný pre proces inštalácie."
 
-#: modules/prepare/package/contents/ui/main.qml:101
+#: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Upravte veľkosť prvkov na obrazovke."
 
-#: modules/prepare/package/contents/ui/main.qml:112
+#: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
 msgstr "Mierka zobrazenia displeja"
 
-#: modules/prepare/package/contents/ui/main.qml:130
+#: modules/prepare/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Dark Theme"
 msgstr ""
 
-#: modules/time/package/contents/ui/main.qml:14
+#: modules/time/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Time and Date"
 msgstr "Čas a dátum"
 
-#: modules/time/package/contents/ui/main.qml:36
+#: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Vyberte časové pásmo a preferovaný formát času."
 
-#: modules/time/package/contents/ui/main.qml:47
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24-hodinový formát"
@@ -219,12 +219,12 @@ msgstr "Neplatný vstup"
 msgid "Connect to"
 msgstr "Pripojiť k"
 
-#: modules/wifi/package/contents/ui/main.qml:16
+#: modules/wifi/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Network"
 msgstr "Sieť"
 
-#: modules/wifi/package/contents/ui/main.qml:71
+#: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Pripojenie k sieti WiFi kvôli prístupu k sieti."
@@ -246,7 +246,7 @@ msgstr "Vitajte v <b>Plasma</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Vitajte v <b>Plasma</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Ďalej"
@@ -256,12 +256,12 @@ msgstr "Ďalej"
 msgid "Initial Start"
 msgstr "Úvodné spustenie"
 
-#: qml/Wizard.qml:274
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Späť"
 
-#: qml/Wizard.qml:310
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Dokončiť"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
 "PO-Revision-Date: 2024-10-09 21:34+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -107,18 +107,18 @@ msgstr "Bara 2G"
 msgid "Any"
 msgstr "Vilket som helst"
 
-#: modules/cellular/package/contents/ui/main.qml:14
+#: modules/cellular/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Cellular"
 msgstr "Mobil"
 
-#: modules/cellular/package/contents/ui/main.qml:51
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:54
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid "Your device does not have a modem available."
 msgstr "Apparaten har inget tillgängligt modem."
 
-#: modules/cellular/package/contents/ui/main.qml:53
+#: modules/cellular/package/contents/ui/main.qml:56
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -127,84 +127,84 @@ msgstr ""
 "Ställ in APN nedan för mobildata, mer information finnas tillgänglig hos din "
 "operatör."
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:58
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Du är ansluten till mobilnätverket."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:60
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Sätt i ett SIM-kort i apparaten."
 
-#: modules/cellular/package/contents/ui/main.qml:71
+#: modules/cellular/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobildata"
 
-#: modules/cellular/package/contents/ui/main.qml:114
+#: modules/cellular/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Edit"
 msgstr "Redigera"
 
-#: modules/cellular/package/contents/ui/main.qml:122
+#: modules/cellular/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: modules/cellular/package/contents/ui/main.qml:131
+#: modules/cellular/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Add APN"
 msgstr "Lägg till APN"
 
-#: modules/finished/contents/ui/main.qml:15
+#: modules/finished/contents/ui/main.qml:16
 #, kde-format
 msgid "Complete!"
 msgstr "Färdig!"
 
-#: modules/finished/contents/ui/main.qml:24
+#: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Apparaten är nu redo.<br /><br />Njut av <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Before we get started…"
 msgstr "Innan vi kommer igång …"
 
-#: modules/prepare/package/contents/ui/main.qml:45
+#: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
 msgstr ""
 "Justera skärmens ljusstyrka så att den är bekväm för installationsprocessen."
 
-#: modules/prepare/package/contents/ui/main.qml:101
+#: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Justera storleken på elementen på skärmen."
 
-#: modules/prepare/package/contents/ui/main.qml:112
+#: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
 msgstr "Skärmskalning"
 
-#: modules/prepare/package/contents/ui/main.qml:130
+#: modules/prepare/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Dark Theme"
 msgstr "Mörkt tema"
 
-#: modules/time/package/contents/ui/main.qml:14
+#: modules/time/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Time and Date"
 msgstr "Tid och datum"
 
-#: modules/time/package/contents/ui/main.qml:36
+#: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Välj din tidszon och önskat tidsformat."
 
-#: modules/time/package/contents/ui/main.qml:47
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24-timmarsformat"
@@ -219,12 +219,12 @@ msgstr "Ogiltig inmatning."
 msgid "Connect to"
 msgstr "Anslut till"
 
-#: modules/wifi/package/contents/ui/main.qml:16
+#: modules/wifi/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Network"
 msgstr "Nätverk"
 
-#: modules/wifi/package/contents/ui/main.qml:71
+#: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Anslut till ett WIFI-nätverk för nätverksåtkomst."
@@ -244,7 +244,7 @@ msgstr "Välkommen till <br/><b>Plasma Mobil</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Drivs av <br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Nästa"
@@ -254,12 +254,12 @@ msgstr "Nästa"
 msgid "Initial Start"
 msgstr "Första start"
 
-#: qml/Wizard.qml:274
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Tillbaka"
 
-#: qml/Wizard.qml:310
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Slutför"

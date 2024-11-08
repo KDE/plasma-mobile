@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-10 00:41+0000\n"
+"POT-Creation-Date: 2024-11-08 00:42+0000\n"
 "PO-Revision-Date: 2023-12-17 21:46+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -107,18 +107,18 @@ msgstr "Csak 2G"
 msgid "Any"
 msgstr "Bármely"
 
-#: modules/cellular/package/contents/ui/main.qml:14
+#: modules/cellular/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Cellular"
 msgstr "Mobil"
 
-#: modules/cellular/package/contents/ui/main.qml:51
-#: modules/cellular/package/contents/ui/main.qml:59
+#: modules/cellular/package/contents/ui/main.qml:54
+#: modules/cellular/package/contents/ui/main.qml:62
 #, kde-format
 msgid "Your device does not have a modem available."
 msgstr "A készülék nem rendelkezik modemmel."
 
-#: modules/cellular/package/contents/ui/main.qml:53
+#: modules/cellular/package/contents/ui/main.qml:56
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -127,52 +127,52 @@ msgstr ""
 "Kérjük, állítsa be az APN-jét az alábbiakban a mobil adatkapcsolathoz,  "
 "további információk a  szolgáltatónál érhetők el."
 
-#: modules/cellular/package/contents/ui/main.qml:55
+#: modules/cellular/package/contents/ui/main.qml:58
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Ön kapcsolódott a mobilhálózathoz."
 
-#: modules/cellular/package/contents/ui/main.qml:57
+#: modules/cellular/package/contents/ui/main.qml:60
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Kérjük, helyezzen be egy SIM-kártyát az eszközbe."
 
-#: modules/cellular/package/contents/ui/main.qml:71
+#: modules/cellular/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobil adatkapcsolat"
 
-#: modules/cellular/package/contents/ui/main.qml:114
+#: modules/cellular/package/contents/ui/main.qml:117
 #, kde-format
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: modules/cellular/package/contents/ui/main.qml:122
+#: modules/cellular/package/contents/ui/main.qml:125
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"
 
-#: modules/cellular/package/contents/ui/main.qml:131
+#: modules/cellular/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Add APN"
 msgstr "APN hozzáadása"
 
-#: modules/finished/contents/ui/main.qml:15
+#: modules/finished/contents/ui/main.qml:16
 #, kde-format
 msgid "Complete!"
 msgstr "Kész!"
 
-#: modules/finished/contents/ui/main.qml:24
+#: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Az eszköze most már kész. <br /><br />Élvezze a <b>%1</b>-t!"
 
-#: modules/prepare/package/contents/ui/main.qml:15
+#: modules/prepare/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Before we get started…"
 msgstr "Mielőtt elkezdenénk…"
 
-#: modules/prepare/package/contents/ui/main.qml:45
+#: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
@@ -180,32 +180,32 @@ msgstr ""
 "Állítsa be a képernyő fényerejét úgy, hogy kényelmes legyen a telepítési "
 "folyamathoz."
 
-#: modules/prepare/package/contents/ui/main.qml:101
+#: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
 msgstr "Állítsa be a képernyőn megjelenő elemek méretét."
 
-#: modules/prepare/package/contents/ui/main.qml:112
+#: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Display Scaling"
 msgstr "Képernyőméretezés"
 
-#: modules/prepare/package/contents/ui/main.qml:130
+#: modules/prepare/package/contents/ui/main.qml:134
 #, kde-format
 msgid "Dark Theme"
 msgstr "Sötét téma"
 
-#: modules/time/package/contents/ui/main.qml:14
+#: modules/time/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Time and Date"
 msgstr "Dátum és idő"
 
-#: modules/time/package/contents/ui/main.qml:36
+#: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
 msgstr "Válassza ki az időzónáját és a preferált időformátumot."
 
-#: modules/time/package/contents/ui/main.qml:47
+#: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 órás formátum"
@@ -220,12 +220,12 @@ msgstr "Érvénytelen bemenet."
 msgid "Connect to"
 msgstr "Kapcsolódás ehhez:"
 
-#: modules/wifi/package/contents/ui/main.qml:16
+#: modules/wifi/package/contents/ui/main.qml:19
 #, kde-format
 msgid "Network"
 msgstr "Hálózat"
 
-#: modules/wifi/package/contents/ui/main.qml:71
+#: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
 msgstr "Kapcsolódjon egy WiFi hálózathoz a hálózati hozzáférését."
@@ -247,7 +247,7 @@ msgstr "Üdvözli a(z) <br/><b>%1</b>"
 msgid "Powered by<br/><b>%1</b>"
 msgstr "Üdvözli a(z) <br/><b>%1</b>"
 
-#: qml/LandingComponent.qml:151 qml/Wizard.qml:293
+#: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
 msgid "Next"
 msgstr "Következő"
@@ -257,12 +257,12 @@ msgstr "Következő"
 msgid "Initial Start"
 msgstr "Első indítás"
 
-#: qml/Wizard.qml:274
+#: qml/Wizard.qml:278
 #, kde-format
 msgid "Back"
 msgstr "Vissza"
 
-#: qml/Wizard.qml:310
+#: qml/Wizard.qml:314
 #, kde-format
 msgid "Finish"
 msgstr "Befejezés"

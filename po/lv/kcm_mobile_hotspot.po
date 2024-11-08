@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2024-04-21 21:30+0300\n"
+"PO-Revision-Date: 2024-11-06 20:43+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: ui/main.qml:33
 #, kde-format
@@ -32,7 +32,7 @@ msgstr "Tīklājs"
 #, kde-format
 msgid "Share your internet connection with other devices as a Wi-Fi network."
 msgstr ""
-"Dalieties ar savu interneta savienojumu ar citām ierīcēm, izmantojot Wi-Fi "
+"Dalieties ar savu interneta savienojumu ar citām ierīcēm, izmantojot „Wi-Fi“ "
 "tīklu."
 
 #: ui/main.qml:93
