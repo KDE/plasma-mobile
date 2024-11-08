@@ -102,6 +102,18 @@ MobileShell.NavigationPanel {
         }
     }
 
+    leftCornerAction: MobileShell.NavigationPanelAction {
+        id: rotationAction
+        visible: Plasmoid.showRotationButton
+        enabled: true
+        iconSource: "rotation-allowed-symbolic"
+        iconSizeFactor: 0.75
+
+        onTriggered: {
+            Plasmoid.rotateToSuggestedRotation();
+        }
+    }
+
     rightCornerAction: MobileShell.NavigationPanelAction {
         id: keyboardToggleAction
         visible: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel ||
