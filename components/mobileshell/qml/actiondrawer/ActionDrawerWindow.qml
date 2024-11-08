@@ -7,10 +7,11 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
-import QtQuick.Window 2.2
+import QtQuick.Window
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
+import org.kde.layershell 1.0 as LayerShell
 
 /**
  * Window with the ActionDrawer component embedded in it.
@@ -18,8 +19,14 @@ import org.kde.plasma.private.nanoshell 2.0 as NanoShell
  * Used for overlaying the ActionDrawer if the original window does not cover
  * the whole screen.
  */
-NanoShell.FullScreenOverlay {
+Window {
     id: window
+
+    LayerShell.Window.scope: "overlay"
+    LayerShell.Window.anchors: LayerShell.Window.AnchorTop | LayerShell.Window.AnchorLeft | LayerShell.Window.AnchorRight | LayerShell.Window.AnchorBottom
+    LayerShell.Window.layer: LayerShell.Window.LayerOverlay
+    LayerShell.Window.exclusionZone: -1
+    LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityNone
 
     /**
      * The ActionDrawer component.
@@ -27,8 +34,6 @@ NanoShell.FullScreenOverlay {
     property alias actionDrawer: drawer
 
     visible: drawer.intendedToBeVisible
-    width: Screen.width
-    height: Screen.height
 
     color: "transparent"
 
