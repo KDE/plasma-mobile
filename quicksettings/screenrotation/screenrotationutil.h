@@ -29,8 +29,8 @@ Q_SIGNALS:
 private:
     void actuallySetAutoScreenRotationEnabled(bool value);
 
-    KScreen::ConfigPtr m_config;
-    QOrientationSensor *m_sensor;
+    KScreen::ConfigPtr m_config{nullptr};
+    QOrientationSensor *m_sensor{nullptr};
 
-    bool m_available;
+    bool m_available{false};
 };

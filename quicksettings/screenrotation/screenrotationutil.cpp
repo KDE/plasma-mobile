@@ -22,8 +22,13 @@ ScreenRotationUtil::ScreenRotationUtil(QObject *parent)
 {
     connect(m_sensor, &QOrientationSensor::activeChanged, this, &ScreenRotationUtil::availableChanged);
 
+    connect(KScreen::ConfigMonitor::instance(), &KScreen::ConfigMonitor::configurationChanged, this, [this]() {
+        Q_EMIT autoScreenRotationEnabledChanged();
+    });
+
     connect(new KScreen::GetConfigOperation(), &KScreen::GetConfigOperation::finished, this, [this](auto *op) {
         m_config = qobject_cast<KScreen::GetConfigOperation *>(op)->config();
+        KScreen::ConfigMonitor::instance()->addConfig(m_config);
 
         // update all screens with event connect
         for (KScreen::OutputPtr output : m_config->outputs()) {
