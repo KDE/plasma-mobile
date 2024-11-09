@@ -143,10 +143,19 @@ bool FavouritesModel::isFull() const
     auto homeScreenState = m_homeScreen->homeScreenState();
     bool isLocationBottom = homeScreenState->favouritesBarLocation() == HomeScreenState::Bottom;
 
+    // we should not include the ghost entry in the delegate count
+    int count = 0;
+    for (const auto &delegate : m_delegates) {
+        if (delegate.delegate->type() == FolioDelegate::None) {
+            continue;
+        }
+        ++count;
+    }
+
     if (isLocationBottom) {
-        return m_delegates.size() >= homeScreenState->pageColumns();
+        return count >= homeScreenState->pageColumns();
     } else {
-        return m_delegates.size() >= homeScreenState->pageRows();
+        return count >= homeScreenState->pageRows();
     }
 }
 
