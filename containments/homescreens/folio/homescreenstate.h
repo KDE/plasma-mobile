@@ -61,6 +61,7 @@ class HomeScreenState : public QObject
     Q_PROPERTY(qreal folderPageContentHeight READ folderPageContentHeight WRITE setFolderPageContentHeight NOTIFY folderPageContentHeightChanged)
     Q_PROPERTY(qreal folderOpenProgress READ folderOpenProgress WRITE setFolderOpenProgress NOTIFY folderOpenProgressChanged)
     Q_PROPERTY(FolioApplicationFolder *currentFolder READ currentFolder NOTIFY currentFolderChanged)
+    Q_PROPERTY(qreal folderGridLength READ folderGridLength NOTIFY folderGridLengthChanged)
 
     Q_PROPERTY(qreal settingsOpenProgress READ settingsOpenProgress WRITE setSettingsOpenProgress NOTIFY settingsOpenProgressChanged)
 
@@ -204,6 +205,9 @@ public:
     qreal folderOpenProgress() const;
     void setFolderOpenProgress(qreal folderOpenProgress);
 
+    int folderGridLength() const;
+    void calculateFolderGridLength();
+
     FolioApplicationFolder *currentFolder() const;
     void setCurrentFolder(FolioApplicationFolder *folder);
 
@@ -286,6 +290,7 @@ Q_SIGNALS:
     void folderPageContentWidthChanged();
     void folderPageContentHeightChanged();
     void folderOpenProgressChanged();
+    void folderGridLengthChanged();
     void currentFolderChanged();
     void settingsOpenProgressChanged();
     void appDrawerOpenProgressChanged();
@@ -318,7 +323,7 @@ public Q_SLOTS:
 
     void goToPage(int page, bool snap);
 
-    void goToFolderPage(int page);
+    void goToFolderPage(int page, bool snap);
     void openFolder(qreal delegateX, qreal delegateY, FolioApplicationFolder *folder);
     void closeFolder();
 
@@ -385,6 +390,7 @@ private:
     qreal m_folderPageContentHeight{0};
     qreal m_folderOpenProgress{0};
     FolioApplicationFolder *m_currentFolder{nullptr};
+    int m_folderGridLength{0};
 
     qreal m_settingsOpenProgress{0};
 

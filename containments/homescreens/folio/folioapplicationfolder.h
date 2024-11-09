@@ -74,8 +74,9 @@ private:
 
 struct ApplicationDelegate {
     FolioDelegate *delegate;
-    qreal xPosition;
-    qreal yPosition;
+    int columnIndex;
+    int rowIndex;
+    int pageIndex;
 };
 
 class ApplicationFolderModel : public QAbstractListModel
@@ -86,8 +87,9 @@ class ApplicationFolderModel : public QAbstractListModel
 public:
     enum Roles {
         DelegateRole = Qt::UserRole + 1,
-        XPositionRole,
-        YPositionRole,
+        columnIndexRole,
+        rowIndexRole,
+        pageIndexRole,
     };
     ApplicationFolderModel(FolioApplicationFolder *folder);
 
@@ -126,13 +128,12 @@ Q_SIGNALS:
     void numberOfPagesChanged();
 
 private:
-    void evaluateDelegatePositions(bool emitSignal = true);
+    void evaluateDelegateIndexes(bool emitSignal = true);
 
     // get the position where delegates start being placed
     QPointF getDelegateStartPosition(int page);
 
-    int numRowsOnPage();
-    int numColumnsOnPage();
+    int numGridLengthOnPage();
 
     // distance between folder edge and page content
     qreal horizontalPageMargin();
