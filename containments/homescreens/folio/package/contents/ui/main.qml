@@ -91,7 +91,7 @@ ContainmentItem {
                 folio.HomeScreenState.closeFolder();
                 folio.HomeScreenState.closeSearchWidget();
                 folio.HomeScreenState.closeAppDrawer();
-                folio.HomeScreenState.goToPage(0);
+                folio.HomeScreenState.goToPage(0, false);
 
                 WindowPlugin.WindowUtil.minimizeAll();
             }
@@ -107,7 +107,7 @@ ContainmentItem {
                     if (folio.HomeScreenState.currentPage === 0) {
                         folio.HomeScreenState.openAppDrawer();
                     } else {
-                        folio.HomeScreenState.goToPage(0);
+                        folio.HomeScreenState.goToPage(0, false);
                     }
                     break;
                 case Folio.HomeScreenState.AppDrawerView:
