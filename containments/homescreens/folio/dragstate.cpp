@@ -238,6 +238,9 @@ void DragState::onDelegateDragPositionChanged()
     // stop the favourites insertion timer if the delegate has moved out
     if (!inFavouritesArea) {
         m_favouritesInsertBetweenTimer->stop();
+
+        // clear any ghost entries in the favourites model
+        m_homeScreen->favouritesModel()->deleteGhostEntry();
     }
 
     if (inFavouritesArea || inFolder) {
