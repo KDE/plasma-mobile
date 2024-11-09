@@ -90,7 +90,7 @@ void FolioApplicationFolder::setApplications(QList<FolioApplication *> applicati
         m_delegates.append({new FolioDelegate{app, m_homeScreen}, 0, 0});
     }
     m_applicationFolderModel = new ApplicationFolderModel{this};
-    m_applicationFolderModel->evaluateDelegatePositions();
+    m_applicationFolderModel->evaluateDelegateIndexes();
 
     Q_EMIT applicationsChanged();
     Q_EMIT applicationsReset();
@@ -128,28 +128,28 @@ ApplicationFolderModel::ApplicationFolderModel(FolioApplicationFolder *folder)
 {
     HomeScreenState *homeScreenState = folder->m_homeScreen->homeScreenState();
     connect(homeScreenState, &HomeScreenState::folderPageWidthChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::folderPageHeightChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::folderPageContentWidthChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::folderPageContentHeightChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::viewWidthChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::viewHeightChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::pageCellWidthChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
     connect(homeScreenState, &HomeScreenState::pageCellHeightChanged, this, [this]() {
-        evaluateDelegatePositions();
+        evaluateDelegateIndexes();
     });
 }
 
@@ -167,10 +167,12 @@ QVariant ApplicationFolderModel::data(const QModelIndex &index, int role) const
     switch (role) {
     case DelegateRole:
         return QVariant::fromValue(m_folder->m_delegates.at(index.row()).delegate);
-    case XPositionRole:
-        return QVariant::fromValue(m_folder->m_delegates.at(index.row()).xPosition);
-    case YPositionRole:
-        return QVariant::fromValue(m_folder->m_delegates.at(index.row()).yPosition);
+    case columnIndexRole:
+        return QVariant::fromValue(m_folder->m_delegates.at(index.row()).columnIndex);
+    case rowIndexRole:
+        return QVariant::fromValue(m_folder->m_delegates.at(index.row()).rowIndex);
+    case pageIndexRole:
+        return QVariant::fromValue(m_folder->m_delegates.at(index.row()).pageIndex);
     }
 
     return QVariant();
@@ -178,7 +180,7 @@ QVariant ApplicationFolderModel::data(const QModelIndex &index, int role) const
 
 QHash<int, QByteArray> ApplicationFolderModel::roleNames() const
 {
-    return {{DelegateRole, "delegate"}, {XPositionRole, "xPosition"}, {YPositionRole, "yPosition"}};
+    return {{DelegateRole, "delegate"}, {columnIndexRole, "columnIndex"}, {rowIndexRole, "rowIndex"}, {pageIndexRole, "pageIndex"}};
 }
 
 FolioDelegate *ApplicationFolderModel::getDelegate(int index)
@@ -209,7 +211,7 @@ void ApplicationFolderModel::moveEntry(int fromRow, int toRow)
     }
     endMoveRows();
 
-    evaluateDelegatePositions();
+    evaluateDelegateIndexes();
 
     Q_EMIT m_folder->applicationsChanged();
     Q_EMIT m_folder->saveRequested();
@@ -237,18 +239,18 @@ bool ApplicationFolderModel::addDelegate(FolioDelegate *delegate, int index)
     if (index == m_folder->m_delegates.size()) {
         beginInsertRows(QModelIndex(), index, index);
         m_folder->m_delegates.append({delegate, 0, 0});
-        evaluateDelegatePositions(false);
+        evaluateDelegateIndexes(false);
         endInsertRows();
     } else if (m_folder->m_delegates[index].delegate->type() == FolioDelegate::None) {
         replaceGhostEntry(delegate);
     } else {
         beginInsertRows(QModelIndex(), index, index);
         m_folder->m_delegates.insert(index, {delegate, 0, 0});
-        evaluateDelegatePositions(false);
+        evaluateDelegateIndexes(false);
         endInsertRows();
     }
 
-    evaluateDelegatePositions();
+    evaluateDelegateIndexes();
 
     Q_EMIT m_folder->applicationsChanged();
     Q_EMIT m_folder->saveRequested();
@@ -268,7 +270,7 @@ void ApplicationFolderModel::removeDelegate(int index)
     m_folder->m_delegates.removeAt(index);
     endRemoveRows();
 
-    evaluateDelegatePositions();
+    evaluateDelegateIndexes();
 
     Q_EMIT m_folder->applicationsChanged();
     Q_EMIT m_folder->saveRequested();
@@ -280,7 +282,18 @@ QPointF ApplicationFolderModel::getDelegatePosition(int index)
         return {0, 0};
     }
     auto delegate = m_folder->m_delegates[index];
-    return {delegate.xPosition, delegate.yPosition};
+    qreal pageContentWidth = m_folder->m_homeScreen->homeScreenState()->folderPageContentWidth();
+    qreal margin = horizontalPageMargin();
+
+    int cellSize = pageContentWidth / numGridLengthOnPage();
+
+    qreal cellWitdhRecenter = (cellSize - m_folder->m_homeScreen->homeScreenState()->pageCellWidth()) / 2;
+    qreal cellHeightRecenter = (cellSize - m_folder->m_homeScreen->homeScreenState()->pageCellHeight()) / 2;
+
+    qreal xPosition = cellWitdhRecenter + margin + delegate.columnIndex * cellSize;
+    qreal yPosition = cellHeightRecenter + delegate.rowIndex * cellSize;
+
+    return {xPosition, yPosition};
 }
 
 int ApplicationFolderModel::getGhostEntryPosition()
@@ -344,27 +357,27 @@ void ApplicationFolderModel::deleteGhostEntry()
 
 int ApplicationFolderModel::dropInsertPosition(int page, qreal x, qreal y)
 {
-    qreal cellWidth = m_folder->m_homeScreen->homeScreenState()->pageCellWidth();
-    qreal cellHeight = m_folder->m_homeScreen->homeScreenState()->pageCellHeight();
+    qreal pageContentWidth = m_folder->m_homeScreen->homeScreenState()->folderPageContentWidth();
+    qreal cellSize = (pageContentWidth) / numGridLengthOnPage();
 
-    int row = (y - topMarginFromScreenEdge()) / cellHeight;
-    row = std::max(0, std::min(numRowsOnPage(), row));
+    int row = (y - topMarginFromScreenEdge()) / cellSize;
+    row = std::max(0, std::min(numGridLengthOnPage(), row));
 
     // the index that the position is over
-    int leftColumn = std::max(0.0, x - leftMarginFromScreenEdge()) / cellWidth;
-    leftColumn = std::min(numColumnsOnPage() - 1, leftColumn);
+    int leftColumn = std::max(0.0, x - leftMarginFromScreenEdge()) / cellSize;
+    leftColumn = std::min(numGridLengthOnPage() - 1, leftColumn);
 
-    qreal leftColumnPosition = leftColumn * cellWidth + leftMarginFromScreenEdge();
+    qreal leftColumnPosition = leftColumn * cellSize + leftMarginFromScreenEdge();
 
     int column = leftColumn + 1;
 
     // if it's the left half of this position or it's the last column on this row, return itself
-    if ((x < leftColumnPosition + cellWidth * 0.5) || (leftColumn == numColumnsOnPage() - 1)) {
+    if ((x < leftColumnPosition + cellSize * 0.5) || (leftColumn == numGridLengthOnPage() - 1)) {
         column = leftColumn;
     }
 
     // calculate the position based on the page, row and column it is at
-    int pos = (page * numRowsOnPage() * numColumnsOnPage()) + (row * numColumnsOnPage()) + column;
+    int pos = (page * numGridLengthOnPage() * numGridLengthOnPage()) + (row * numGridLengthOnPage()) + column;
     // make sure it's in bounds
     return std::min((int)m_folder->m_delegates.size(), std::max(0, pos));
 }
@@ -375,17 +388,10 @@ bool ApplicationFolderModel::isDropPositionOutside(qreal x, qreal y)
         || (y < topMarginFromScreenEdge()) || (y > m_folder->m_homeScreen->homeScreenState()->viewHeight() - topMarginFromScreenEdge());
 }
 
-void ApplicationFolderModel::evaluateDelegatePositions(bool emitSignal)
+void ApplicationFolderModel::evaluateDelegateIndexes(bool emitSignal)
 {
-    qreal pageWidth = m_folder->m_homeScreen->homeScreenState()->folderPageWidth();
-    qreal topMargin = verticalPageMargin();
-    qreal leftMargin = horizontalPageMargin();
-
-    qreal cellWidth = m_folder->m_homeScreen->homeScreenState()->pageCellWidth();
-    qreal cellHeight = m_folder->m_homeScreen->homeScreenState()->pageCellHeight();
-
-    int rows = numRowsOnPage();
-    int columns = numColumnsOnPage();
+    int rows = numGridLengthOnPage();
+    int columns = numGridLengthOnPage();
     int numOfDelegates = m_folder->m_delegates.size();
 
     int index = 0;
@@ -394,11 +400,12 @@ void ApplicationFolderModel::evaluateDelegatePositions(bool emitSignal)
     while (index < m_folder->m_delegates.size()) {
         int prevIndex = index;
 
-        // determine positions page-by-page
+        // determine the row and column index page-by-page
         for (int row = 0; row < rows && index < numOfDelegates; row++) {
             for (int column = 0; column < columns && index < numOfDelegates; column++) {
-                m_folder->m_delegates[index].xPosition = qRound(page * pageWidth + leftMargin + column * cellWidth);
-                m_folder->m_delegates[index].yPosition = qRound(topMargin + row * cellHeight);
+                m_folder->m_delegates[index].columnIndex = column;
+                m_folder->m_delegates[index].rowIndex = row;
+                m_folder->m_delegates[index].pageIndex = page;
                 index++;
             }
         }
@@ -411,8 +418,9 @@ void ApplicationFolderModel::evaluateDelegatePositions(bool emitSignal)
     }
 
     if (emitSignal) {
-        Q_EMIT dataChanged(createIndex(0, 0), createIndex(m_folder->m_delegates.size() - 1, 0), {XPositionRole});
-        Q_EMIT dataChanged(createIndex(0, 0), createIndex(m_folder->m_delegates.size() - 1, 0), {YPositionRole});
+        Q_EMIT dataChanged(createIndex(0, 0), createIndex(m_folder->m_delegates.size() - 1, 0), {columnIndexRole});
+        Q_EMIT dataChanged(createIndex(0, 0), createIndex(m_folder->m_delegates.size() - 1, 0), {rowIndexRole});
+        Q_EMIT dataChanged(createIndex(0, 0), createIndex(m_folder->m_delegates.size() - 1, 0), {pageIndexRole});
     }
 
     Q_EMIT numberOfPagesChanged();
@@ -429,26 +437,13 @@ QPointF ApplicationFolderModel::getDelegateStartPosition(int page)
 
 int ApplicationFolderModel::numTotalPages()
 {
-    int numOfDelegatesOnPage = numRowsOnPage() * numColumnsOnPage();
+    int numOfDelegatesOnPage = numGridLengthOnPage() * numGridLengthOnPage();
     return std::ceil(((qreal)m_folder->m_delegates.size()) / numOfDelegatesOnPage);
 }
 
-int ApplicationFolderModel::numRowsOnPage()
+int ApplicationFolderModel::numGridLengthOnPage()
 {
-    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
-    qreal contentHeight = homeScreenState->folderPageContentHeight();
-    qreal cellHeight = homeScreenState->pageCellHeight();
-
-    return std::max(0.0, contentHeight / cellHeight);
-}
-
-int ApplicationFolderModel::numColumnsOnPage()
-{
-    HomeScreenState *homeScreenState = m_folder->m_homeScreen->homeScreenState();
-    qreal contentWidth = homeScreenState->folderPageContentWidth();
-    qreal cellWidth = homeScreenState->pageCellWidth();
-
-    return std::max(0.0, contentWidth / cellWidth);
+    return m_folder->m_homeScreen->homeScreenState()->folderGridLength();
 }
 
 qreal ApplicationFolderModel::leftMarginFromScreenEdge()

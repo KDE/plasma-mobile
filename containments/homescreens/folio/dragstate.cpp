@@ -694,7 +694,7 @@ void DragState::onChangeFolderPageTimerFinished()
         // if we are at the left edge, go left
         int page = m_state->currentFolderPage() - 1;
         if (page >= 0) {
-            m_state->goToFolderPage(page);
+            m_state->goToFolderPage(page, false);
         }
 
     } else if (x >= rightPagePosition - PAGE_CHANGE_THRESHOLD) {
@@ -703,7 +703,7 @@ void DragState::onChangeFolderPageTimerFinished()
 
         // go to page if it exists
         if (page < folder->applications()->numTotalPages()) {
-            m_state->goToFolderPage(page);
+            m_state->goToFolderPage(page, false);
         }
     }
 }

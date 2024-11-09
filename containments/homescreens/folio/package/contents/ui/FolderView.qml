@@ -47,7 +47,7 @@ Folio.DelegateTouchArea {
         width: root.width
 
         // have to use y instead of anchors to avoid animations
-        y: Math.round((root.height / 2) - (folderBackground.height / 2) - Kirigami.Units.gridUnit - height)
+        y: Math.round(((root.height / 2) - (folderBackground.height / 2)) * 0.9 - height)
         anchors.left: parent.left
         anchors.right: parent.right
 
@@ -61,14 +61,12 @@ Folio.DelegateTouchArea {
 
     function updateContentWidth() {
         let margin = folderBackground.margin;
-        let columns = Math.floor((folderBackground.width - margin * 2) / folio.HomeScreenState.pageCellWidth);
-        folio.HomeScreenState.folderPageContentWidth = columns * folio.HomeScreenState.pageCellWidth;
+        folio.HomeScreenState.folderPageContentWidth = (folderBackground.width - margin * 2);
     }
 
     function updateContentHeight() {
         let margin = folderBackground.margin;
-        let rows = Math.floor((folderBackground.height - margin * 2) / folio.HomeScreenState.pageCellHeight);
-        folio.HomeScreenState.folderPageContentHeight = rows * folio.HomeScreenState.pageCellHeight;
+        folio.HomeScreenState.folderPageContentHeight = (folderBackground.height - margin * 2);
     }
 
     Connections {
@@ -90,28 +88,26 @@ Folio.DelegateTouchArea {
         color: Qt.rgba(255, 255, 255, 0.3)
         radius: Kirigami.Units.gridUnit
 
-        readonly property real margin: Kirigami.Units.largeSpacing
-        readonly property real maxLength: Math.min(root.width * 0.9, root.height * 0.9)
+        readonly property int gridLength: folio.HomeScreenState.folderGridLength
 
-        width: {
-            let perRow = 0;
-            if (root.width < root.height) {
-                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellWidth);
-            } else {
-                // try to get the same number of rows as columns
-                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellHeight);
-            }
-            return Math.min(root.width * 0.9, perRow * folio.HomeScreenState.pageCellWidth + margin * 2);
-        }
-        height: {
-            let perRow = 0;
-            if (root.width < root.height) {
-                // try to get the same number of rows as columns
-                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellWidth);
-            } else {
-                perRow = Math.floor((maxLength - margin * 2) / folio.HomeScreenState.pageCellHeight);
-            }
-            return Math.min(root.height * 0.9, perRow * folio.HomeScreenState.pageCellHeight + margin * 2);
+        readonly property int margin: Kirigami.Units.largeSpacing
+        readonly property int maxLength: Math.min(root.width - Kirigami.Units.gridUnit * 4, root.height - Kirigami.Units.gridUnit * 2)
+
+        readonly property int pageSize: Math.min(maxLength, (folio.FolioSettings.delegateIconSize + Kirigami.Units.gridUnit * 3) * gridLength + Kirigami.Units.gridUnit * 2)
+
+        width: pageSize - margin * 2
+        height: pageSize
+
+        QQC2.PageIndicator {
+            visible: count > 1
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+
+            currentIndex: folio.HomeScreenState.currentFolderPage
+            count: folio.HomeScreenState.currentFolder ? folio.HomeScreenState.currentFolder.applications.numberOfPages : 0
         }
 
         onWidthChanged: {
@@ -173,27 +169,42 @@ Folio.DelegateTouchArea {
                     delegate: Item {
                         id: delegate
 
-                        property var delegateModel: model.delegate
-                        property int index: model.index
+                        readonly property var delegateModel: model.delegate
+                        readonly property int index: model.index
 
-                        property var dragState: folio.HomeScreenState.dragState
-                        property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
-                                                          dragState.candidateDropPosition.folderPosition === index
+                        readonly property int folderCellSize: folio.HomeScreenState.folderPageContentWidth / folderBackground.gridLength
+                        readonly property int cellWidth: folio.HomeScreenState.pageCellWidth
+                        readonly property int cellHeight: folio.HomeScreenState.pageCellHeight
 
-                        x: model.xPosition
-                        y: model.yPosition
+                        readonly property var dragState: folio.HomeScreenState.dragState
+                        readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
+                        dragState.candidateDropPosition.folderPosition === index
 
-                        Behavior on x {
+                        // get the index position value so we can animate them
+                        property double columnValue: model.columnIndex
+                        property double rowValue: model.rowIndex
+                        property double pageValue: model.pageIndex
+                        Behavior on columnValue {
                             NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
                         }
-                        Behavior on y {
+                        Behavior on rowValue {
+                            NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
+                        }
+                        Behavior on pageValue {
                             NumberAnimation { duration: 250; easing.type: Easing.InOutQuad }
                         }
 
-                        implicitWidth: folio.HomeScreenState.pageCellWidth
-                        implicitHeight: folio.HomeScreenState.pageCellHeight
-                        width: folio.HomeScreenState.pageCellWidth
-                        height: folio.HomeScreenState.pageCellHeight
+                        // multiply the index values by the cell size to get the actual position
+                        readonly property int positionColumn: folderCellSize * columnValue
+                        readonly property int positionRow: folderCellSize * rowValue
+
+                        x: (folderCellSize - cellWidth) / 2 + folderBackground.margin + pageValue * folderBackground.width + positionColumn
+                        y: (folderCellSize - cellHeight) / 2 + folderBackground.margin + positionRow
+
+                        implicitWidth: cellWidth
+                        implicitHeight: cellHeight
+                        width: cellWidth
+                        height: cellHeight
 
                         Loader {
                             id: delegateLoader
@@ -280,24 +291,6 @@ Folio.DelegateTouchArea {
                     }
                 }
             }
-        }
-    }
-
-    QQC2.PageIndicator {
-        visible: count > 1
-        Kirigami.Theme.inherit: false
-        Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
-
-        // have to use y instead of anchors to avoid animations
-        y: Math.round((root.height / 2) + (folderBackground.height / 2) + Kirigami.Units.largeSpacing)
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        currentIndex: folio.HomeScreenState.currentFolderPage
-        count: folio.HomeScreenState.currentFolder ? folio.HomeScreenState.currentFolder.applications.numberOfPages : 0
-
-        opacity: (root.opacity === 1) ? 1 : 0
-        Behavior on opacity {
-            NumberAnimation { duration: Kirigami.Units.shortDuration }
         }
     }
 }
