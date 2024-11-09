@@ -86,6 +86,10 @@ void ScreenRotationUtil::actuallySetAutoScreenRotationEnabled(bool value)
 
     const auto outputs = m_config->outputs();
     for (KScreen::OutputPtr output : outputs) {
+        if (!output) {
+            continue;
+        }
+
         if (output->autoRotatePolicy() != policy) {
             output->setAutoRotatePolicy(policy);
         }
