@@ -14,9 +14,9 @@ import org.kde.plasma.mobileinitialstart.wifi 1.0 as WiFi
 import org.kde.plasma.mobileinitialstart.initialstart
 
 InitialStartModule {
+    name: i18n("Network")
     contentItem: Item {
         id: root
-        property string name: i18n("Network")
 
         readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 

@@ -10,10 +10,10 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.mobileinitialstart.initialstart
 
 InitialStartModule {
+    name: i18n("Complete!")
     contentItem: Item {
         id: root
 
-        property string name: i18n("Complete!")
 
         ColumnLayout {
             anchors.fill: parent

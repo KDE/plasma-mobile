@@ -12,9 +12,10 @@ import org.kde.plasma.mm as PlasmaMM
 import org.kde.plasma.mobileinitialstart.initialstart
 
 InitialStartModule {
+    name: i18n("Cellular")
+    available: PlasmaMM.SignalIndicator.modemAvailable
     contentItem: Item {
         id: root
-        property string name: i18n("Cellular")
 
         readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 
@@ -50,9 +51,7 @@ InitialStartModule {
                 wrapMode: Text.Wrap
                 horizontalAlignment: Text.AlignHCenter
                 text: {
-                    if (!PlasmaMM.SignalIndicator.modemAvailable) {
-                        return i18n("Your device does not have a modem available.");
-                    } else if (PlasmaMM.SignalIndicator.needsAPNAdded) {
+                    if (PlasmaMM.SignalIndicator.needsAPNAdded) {
                         return i18n("Please configure your APN below for mobile data, further information will be available with your carrier.");
                     } else if (PlasmaMM.SignalIndicator.mobileDataSupported) {
                         return i18n("You are connected to the mobile network.");

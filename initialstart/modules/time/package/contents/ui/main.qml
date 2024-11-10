@@ -12,9 +12,9 @@ import org.kde.plasma.mobileinitialstart.time 1.0 as Time
 import org.kde.plasma.mobileinitialstart.initialstart
 
 InitialStartModule {
+    name: i18n("Time and Date")
     contentItem: Item {
         id: root
-        property string name: i18n("Time and Date")
 
         readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 

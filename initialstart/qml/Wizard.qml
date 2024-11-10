@@ -229,7 +229,7 @@ Kirigami.Page {
                         anchors.fill: parent
 
                         // pass up the property
-                        property string name: contentItem.name
+                        property string name: modelData.name
                         property int currentIndex: model.index
 
                         function updateRootItems() {

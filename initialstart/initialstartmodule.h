@@ -13,6 +13,7 @@ class InitialStartModule : public QObject
     Q_OBJECT
     QML_ELEMENT
 
+    Q_PROPERTY(QString name READ name WRITE setName REQUIRED NOTIFY nameChanged)
     Q_PROPERTY(bool available READ available WRITE setAvailable NOTIFY availableChanged)
     Q_PROPERTY(QQuickItem *contentItem READ contentItem WRITE setContentItem REQUIRED NOTIFY contentItemChanged)
     Q_PROPERTY(QQmlListProperty<QObject> children READ children CONSTANT)
@@ -20,6 +21,9 @@ class InitialStartModule : public QObject
 
 public:
     InitialStartModule(QObject *parent = nullptr);
+
+    QString name() const;
+    void setName(QString name);
 
     bool available() const;
     void setAvailable(bool available);
@@ -30,10 +34,12 @@ public:
     QQmlListProperty<QObject> children();
 
 Q_SIGNALS:
+    void nameChanged();
     void availableChanged();
     void contentItemChanged();
 
 private:
+    QString m_name;
     bool m_available{true};
     QQuickItem *m_contentItem{nullptr};
     QList<QObject *> m_children;

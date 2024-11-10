@@ -14,9 +14,9 @@ import org.kde.plasma.mobileinitialstart.initialstart
 
 InitialStartModule {
     id: module
+    name: i18n("Before we get started…")
     contentItem: Item {
         id: root
-        property string name: i18n("Before we get started…")
 
         readonly property real cardWidth: Math.min(Kirigami.Units.gridUnit * 30, root.width - Kirigami.Units.gridUnit * 2)
 

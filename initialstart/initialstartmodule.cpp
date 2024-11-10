@@ -8,6 +8,20 @@ InitialStartModule::InitialStartModule(QObject *parent)
 {
 }
 
+QString InitialStartModule::name() const
+{
+    return m_name;
+}
+
+void InitialStartModule::setName(QString name)
+{
+    if (m_name == name) {
+        return;
+    }
+    m_name = name;
+    Q_EMIT nameChanged();
+}
+
 bool InitialStartModule::available() const
 {
     return m_available;
