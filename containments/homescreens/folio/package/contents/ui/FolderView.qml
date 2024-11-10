@@ -176,6 +176,11 @@ Folio.DelegateTouchArea {
                         readonly property int cellWidth: folio.HomeScreenState.pageCellWidth
                         readonly property int cellHeight: folio.HomeScreenState.pageCellHeight
 
+                        readonly property bool outsideView: {
+                            const appPosition = x + folio.HomeScreenState.folderViewX;
+                            return (appPosition < -folderCellSize || appPosition > folderBackground.width)
+                        }
+
                         readonly property var dragState: folio.HomeScreenState.dragState
                         readonly property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Folder &&
                         dragState.candidateDropPosition.folderPosition === index
@@ -235,6 +240,7 @@ Folio.DelegateTouchArea {
 
                                 // do not show if the drop animation is running to this delegate
                                 visible: !(root.homeScreen.dropAnimationRunning && delegate.isDropPositionThis)
+                                enabled: !delegate.outsideView
 
                                 // don't show label in drag and drop mode
                                 labelOpacity: delegate.opacity
