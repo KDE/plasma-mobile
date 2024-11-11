@@ -1,18 +1,18 @@
 # translation of plasma_org.kde.plasma.quicksetting.caffeine.po to Slovak
-# Roman Paholík <wizzardsk@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Roman Paholík <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.caffeine\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2023-03-20 17:22+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-10 18:21+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: contents/ui/main.qml:11
@@ -23,14 +23,14 @@ msgstr "Kofeín"
 #: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to disable sleep suspension"
-msgstr ""
+msgstr "Ťuknutím zakázať pozastavenie spánku"
 
 #: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to suspend sleep"
-msgstr ""
+msgstr "Ťuknutím pozastaviť spánok"
 
 #: contents/ui/main.qml:36
 #, kde-format
 msgid "Plasma Mobile has enabled system-wide inhibition"
-msgstr ""
+msgstr "Plasma Mobile povolila potlačenie celého systému."

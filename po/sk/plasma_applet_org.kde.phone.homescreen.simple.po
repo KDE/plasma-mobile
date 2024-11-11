@@ -1,18 +1,18 @@
 # translation of plasma_applet_org.kde.phone.homescreen.simple.po to Slovak
-# Roman Paholik <wizzardsk@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Roman Paholik <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen.simple\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-19 02:57+0000\n"
-"PO-Revision-Date: 2022-06-11 20:11+0200\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-10 18:20+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: package/contents/ui/FavoritesGrid.qml:224
@@ -24,12 +24,12 @@ msgstr "Odstrániť z obľúbených"
 #: package/contents/ui/FavoritesGrid.qml:296
 #, kde-format
 msgid "Add applications to your favourites so they show up here."
-msgstr ""
+msgstr "Pridajte si aplikácie do svojich obľúbených, aby sa tu zobrazovali."
 
 #: package/contents/ui/FolderGrid.qml:207
 #, kde-format
 msgid "Move out of folder"
-msgstr ""
+msgstr "Presunúť z priečinka"
 
 #: package/contents/ui/GridAppDelegate.qml:64
 #, kde-format
@@ -45,4 +45,4 @@ msgstr "Aplikácie"
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
-msgstr ""
+msgstr "Priečinok"

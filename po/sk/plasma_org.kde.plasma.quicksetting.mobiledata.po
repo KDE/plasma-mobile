@@ -1,18 +1,18 @@
 # translation of plasma_org.kde.plasma.quicksetting.mobiledata.po to Slovak
-# Roman Paholík <wizzardsk@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Roman Paholík <wizzardsk@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.quicksetting.mobiledata\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2023-03-20 17:23+0100\n"
-"Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
+"PO-Revision-Date: 2024-11-10 18:20+0100\n"
+"Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: contents/ui/main.qml:10
@@ -28,7 +28,7 @@ msgstr "Nedostupné"
 #: contents/ui/main.qml:16
 #, kde-format
 msgid "APN needs to be configured in the settings"
-msgstr ""
+msgstr "APN je potrebné nakonfigurovať v nastaveniach"
 
 #: contents/ui/main.qml:18
 #, kde-format
@@ -43,4 +43,4 @@ msgstr "Vypnuté"
 #: contents/ui/main.qml:20
 #, kde-format
 msgid "No SIM inserted"
-msgstr ""
+msgstr "Nie je vložená žiadna SIM"
