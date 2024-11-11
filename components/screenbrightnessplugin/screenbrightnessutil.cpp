@@ -15,9 +15,6 @@ ScreenBrightnessUtil::ScreenBrightnessUtil(QObject *parent)
                                                                          QDBusConnection::sessionBus(),
                                                                          this);
 
-    fetchBrightness();
-    fetchMaxBrightness();
-
     connect(m_brightnessInterface,
             &org::kde::Solid::PowerManagement::Actions::BrightnessControl::brightnessChanged,
             this,
@@ -27,6 +24,9 @@ ScreenBrightnessUtil::ScreenBrightnessUtil(QObject *parent)
             this,
             &ScreenBrightnessUtil::fetchMaxBrightness);
 
+    fetchBrightness();
+    fetchMaxBrightness();
+
     // watch for brightness interface
     m_brightnessInterfaceWatcher = new QDBusServiceWatcher(QStringLiteral("org.kde.Solid.PowerManagement.Actions.BrightnessControl"),
                                                            QDBusConnection::sessionBus(),
@@ -34,6 +34,8 @@ ScreenBrightnessUtil::ScreenBrightnessUtil(QObject *parent)
                                                            this);
 
     connect(m_brightnessInterfaceWatcher, &QDBusServiceWatcher::serviceRegistered, this, [this]() -> void {
+        fetchBrightness();
+        fetchMaxBrightness();
         Q_EMIT brightnessAvailableChanged();
     });
 
@@ -64,34 +66,32 @@ bool ScreenBrightnessUtil::brightnessAvailable() const
 
 void ScreenBrightnessUtil::fetchBrightness()
 {
-    QDBusPendingReply<int> reply = m_brightnessInterface->brightness();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    QDBusPendingReply<int> pendingReply = m_brightnessInterface->brightness();
+    const auto reply = co_await pendingReply;
 
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<int> reply = *watcher;
-        if (reply.isError()) {
-            qWarning() << "Getting brightness failed:" << reply.error().name() << reply.error().message();
-        } else if (m_brightness != reply.value()) {
-            m_brightness = reply.value();
-            Q_EMIT brightnessChanged();
-        }
-        watcher->deleteLater();
-    });
+    if (reply.isError()) {
+        qWarning() << "Getting brightness failed:" << reply.error().name() << reply.error().message();
+        return;
+    }
+
+    if (m_brightness != reply.value()) {
+        m_brightness = reply.value();
+        Q_EMIT brightnessChanged();
+    }
 }
 
 void ScreenBrightnessUtil::fetchMaxBrightness()
 {
     QDBusPendingReply<int> reply = m_brightnessInterface->brightnessMax();
-    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+    const auto reply = co_await pendingReply;
 
-    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
-        QDBusPendingReply<int> reply = *watcher;
-        if (reply.isError()) {
-            qWarning() << "Getting max brightness failed:" << reply.error().name() << reply.error().message();
-        } else if (m_maxBrightness != reply.value()) {
-            m_maxBrightness = reply.value();
-            Q_EMIT maxBrightnessChanged();
-        }
-        watcher->deleteLater();
-    });
+    if (reply.isError()) {
+        qWarning() << "Getting max brightness failed:" << reply.error().name() << reply.error().message();
+        return;
+    }
+
+    if (m_maxBrightness != reply.value()) {
+        m_maxBrightness = reply.value();
+        Q_EMIT maxBrightnessChanged();
+    }
 }

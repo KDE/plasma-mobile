@@ -42,8 +42,8 @@ private Q_SLOTS:
     void fetchMaxBrightness();
 
 private:
-    int m_brightness;
-    int m_maxBrightness;
+    int m_brightness{0};
+    int m_maxBrightness{0};
 
     org::kde::Solid::PowerManagement::Actions::BrightnessControl *m_brightnessInterface;
     QDBusServiceWatcher *m_brightnessInterfaceWatcher;
