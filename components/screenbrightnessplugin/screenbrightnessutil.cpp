@@ -66,32 +66,34 @@ bool ScreenBrightnessUtil::brightnessAvailable() const
 
 void ScreenBrightnessUtil::fetchBrightness()
 {
-    QDBusPendingReply<int> pendingReply = m_brightnessInterface->brightness();
-    const auto reply = co_await pendingReply;
+    QDBusPendingReply<int> reply = m_brightnessInterface->brightness();
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
 
-    if (reply.isError()) {
-        qWarning() << "Getting brightness failed:" << reply.error().name() << reply.error().message();
-        return;
-    }
-
-    if (m_brightness != reply.value()) {
-        m_brightness = reply.value();
-        Q_EMIT brightnessChanged();
-    }
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<int> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Getting brightness failed:" << reply.error().name() << reply.error().message();
+        } else if (m_brightness != reply.value()) {
+            m_brightness = reply.value();
+            Q_EMIT brightnessChanged();
+        }
+        watcher->deleteLater();
+    });
 }
 
 void ScreenBrightnessUtil::fetchMaxBrightness()
 {
     QDBusPendingReply<int> reply = m_brightnessInterface->brightnessMax();
-    const auto reply = co_await pendingReply;
+    QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
 
-    if (reply.isError()) {
-        qWarning() << "Getting max brightness failed:" << reply.error().name() << reply.error().message();
-        return;
-    }
-
-    if (m_maxBrightness != reply.value()) {
-        m_maxBrightness = reply.value();
-        Q_EMIT maxBrightnessChanged();
-    }
+    connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
+        QDBusPendingReply<int> reply = *watcher;
+        if (reply.isError()) {
+            qWarning() << "Getting max brightness failed:" << reply.error().name() << reply.error().message();
+        } else if (m_maxBrightness != reply.value()) {
+            m_maxBrightness = reply.value();
+            Q_EMIT maxBrightnessChanged();
+        }
+        watcher->deleteLater();
+    });
 }
