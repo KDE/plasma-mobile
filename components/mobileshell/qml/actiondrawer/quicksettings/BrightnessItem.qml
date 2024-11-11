@@ -17,6 +17,7 @@ import org.kde.plasma.private.mobileshell.screenbrightnessplugin as ScreenBright
 Item {
     id: root
     implicitHeight: brightnessRow.implicitHeight
+    visible: screenBrightness.brightnessAvailable
 
     ScreenBrightness.ScreenBrightnessUtil {
         id: screenBrightness

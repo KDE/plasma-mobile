@@ -20,6 +20,7 @@ target_link_libraries(screenbrightnessplugin PRIVATE
     KF6::ConfigGui
     KF6::I18n
     KF6::Screen
+    QCoro::DBus
 )
 
 ecm_finalize_qml_module(screenbrightnessplugin)
