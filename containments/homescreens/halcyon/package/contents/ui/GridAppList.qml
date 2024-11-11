@@ -8,7 +8,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls 2.15 as Controls
 
 import org.kde.plasma.components 3.0 as PC3
-import org.kde.kirigami as Kirigami
+import org.kde.kirigami 2.10 as Kirigami
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
@@ -67,15 +67,6 @@ MobileShell.GridView {
             font.weight: Font.Bold
             text: i18n("Applications")
         }
-    }
-
-    // Handle mouse wheel scrolling
-    Kirigami.WheelHandler {
-        target: gridView
-        filterMouseEvents: false
-        // `20 * Qt.styleHints.wheelScrollLines` is the default speed.
-        horizontalStepSize: 20 * Qt.styleHints.wheelScrollLines
-        verticalStepSize: 20 * Qt.styleHints.wheelScrollLines
     }
 
     PC3.Label {

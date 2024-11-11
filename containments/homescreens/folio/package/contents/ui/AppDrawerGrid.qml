@@ -46,15 +46,6 @@ MobileShell.GridView {
     interactive: (dragging || !atYBeginning) // allow us to drag to the top
                     && folio.HomeScreenState.swipeState !== Folio.HomeScreenState.SwipingAppDrawerGrid
 
-    // Handle mouse wheel scrolling
-    Kirigami.WheelHandler {
-        target: root
-        filterMouseEvents: false
-        // `20 * Qt.styleHints.wheelScrollLines` is the default speed.
-        horizontalStepSize: 20 * Qt.styleHints.wheelScrollLines
-        verticalStepSize: 20 * Qt.styleHints.wheelScrollLines
-    }
-
     Connections {
         target: folio.HomeScreenState
 
