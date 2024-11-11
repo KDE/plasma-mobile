@@ -8,7 +8,7 @@
 
 import QtQuick
 import QtQuick.Effects
-import QtQuick.Controls as Controls
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
@@ -18,8 +18,9 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.milou as Milou
 import org.kde.kirigami 2.19 as Kirigami
 
-Item {
+MouseArea {
     id: root
+    onClicked: root.requestedClose()
 
     function requestFocus() {
         queryField.forceActiveFocus();
@@ -31,71 +32,62 @@ Item {
 
     signal requestedClose()
 
+    Keys.onPressed: (event) => {
+        if (event.key === Qt.Key_Escape) {
+            root.requestedClose();
+            event.accepted = true;
+        }
+    }
+
     ColumnLayout {
         id: column
         anchors.fill: parent
 
-        Controls.Control {
-            Layout.fillWidth: true
+        Kirigami.SearchField {
+            id: queryField
             Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignHCenter
             Layout.topMargin: Kirigami.Units.gridUnit
             Layout.leftMargin: Kirigami.Units.gridUnit
             Layout.rightMargin: Kirigami.Units.gridUnit
 
-            leftPadding: Kirigami.Units.smallSpacing
-            rightPadding: Kirigami.Units.smallSpacing
-            topPadding: Kirigami.Units.smallSpacing
-            bottomPadding: Kirigami.Units.smallSpacing
+            background: Rectangle {
+                radius: Kirigami.Units.cornerRadius
+                color: Qt.rgba(255, 255, 255, (queryField.hovered || queryField.focus) ? 0.2 : 0.1)
 
-            background: Item {
-
-                // shadow for search window
-                MultiEffect {
-                    anchors.fill: parent
-                    source: rectBackground
-                    blurMax: 16
-                    shadowEnabled: true
-                    shadowVerticalOffset: 1
-                    shadowOpacity: 0.15
-                }
-
-                Rectangle {
-                    id: rectBackground
-                    anchors.fill: parent
-                    color: Kirigami.Theme.backgroundColor
-                    radius: Kirigami.Units.cornerRadius
-                }
+                Behavior on color { ColorAnimation {} }
             }
 
-            contentItem: RowLayout {
-                Item {
-                    implicitHeight: queryField.height
-                    implicitWidth: height
-                    Kirigami.Icon {
-                        anchors.fill: parent
-                        anchors.margins: Math.round(Kirigami.Units.smallSpacing)
-                        source: "start-here-symbolic"
-                    }
-                }
-                PlasmaComponents.TextField {
-                    id: queryField
-                    Layout.fillWidth: true
-                    placeholderText: i18n("Search…")
-                    inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
-                }
-            }
+            Kirigami.Theme.inherit: false
+            Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
+            topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+            bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
+
+            placeholderText: i18nc("@info:placeholder", "Search…")
+            placeholderTextColor: Qt.rgba(255, 255, 255, 0.8)
+            color: 'white'
+            inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
+
+            font.weight: Font.Bold
+
+            KeyNavigation.down: listView
         }
 
-        Controls.ScrollView {
+        QQC2.ScrollView {
             Layout.fillWidth: true
             Layout.fillHeight: listView.contentHeight > availableHeight
+
+            Layout.maximumWidth: Kirigami.Units.gridUnit * 30
+            Layout.leftMargin: Kirigami.Units.gridUnit
+            Layout.rightMargin: Kirigami.Units.gridUnit
+            Layout.alignment: Qt.AlignHCenter
 
             Milou.ResultsListView {
                 id: listView
                 queryString: queryField.text
                 clip: true
-                Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
                 highlight: activeFocus ? highlightComponent : null
                 Component {
@@ -112,10 +104,52 @@ Item {
                     queryField.cursorPosition = cursorPosition
                 }
 
+                section.delegate: QQC2.Control {
+                    id: sectionHeader
+                    required property string section
+
+                    topPadding: Kirigami.Units.smallSpacing
+                    bottomPadding: Kirigami.Units.smallSpacing
+                    leftPadding: 0
+                    rightPadding: 0
+
+                    contentItem: Kirigami.Heading {
+                        opacity: 0.7
+                        level: 5
+                        type: Kirigami.Heading.Primary
+                        text: sectionHeader.section
+                        elide: Text.ElideRight
+                        color: 'white'
+
+                        // we override the Primary type's font weight (DemiBold) for Bold for contrast with small text
+                        font.weight: Font.Bold
+                        Accessible.ignored: true
+                    }
+                }
+
+
                 delegate: MouseArea {
                     id: delegate
                     height: rowLayout.height
                     width: listView.width
+
+                    // Go to search bar if this we press up with the first item selected
+                    KeyNavigation.up: model.index === 0 ? queryField : null
+
+                    // Close search view if we press down with last item selected
+                    Keys.onPressed: (event) => {
+                        if (event.key === Qt.Key_Down && (model.index === listView.count - 1)) {
+                            root.requestedClose();
+                            event.accepted = true;
+                        }
+                    }
+
+                    // Used by ResultsListView to determine next tab action
+                    function activateNextAction() {
+                        queryField.forceActiveFocus();
+                        queryField.selectAll();
+                        listView.currentIndex = -1;
+                    }
 
                     onClicked: {
                         listView.currentIndex = model.index;
@@ -125,18 +159,10 @@ Item {
                     }
                     hoverEnabled: true
 
-                    function activateNextAction() {
-                        queryField.forceActiveFocus();
-                        queryField.selectAll();
-                        listView.currentIndex = -1;
-                    }
-
                     Rectangle {
                         anchors.fill: parent
-                        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.2) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.05) : "transparent")
-                        Behavior on color {
-                            ColorAnimation { duration: Kirigami.Units.shortDuration }
-                        }
+                        radius: Kirigami.Units.cornerRadius
+                        color: delegate.pressed ? Qt.rgba(255, 255, 255, 0.3) : (delegate.containsMouse ? Qt.rgba(255, 255, 255, 0.1) : "transparent")
                     }
 
                     RowLayout {
@@ -146,8 +172,8 @@ Item {
                             top: parent.top
                             left: parent.left
                             right: parent.right
-                            leftMargin: Kirigami.Units.gridUnit
-                            rightMargin: Kirigami.Units.gridUnit
+                            leftMargin: Kirigami.Units.largeSpacing
+                            rightMargin: Kirigami.Units.largeSpacing
                         }
 
                         Kirigami.Icon {
@@ -190,34 +216,14 @@ Item {
                                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 0.8)
                             }
                         }
-
-                        Repeater {
-                            id: actionsRepeater
-                            model: typeof actions !== "undefined" ? actions : []
-
-                            Controls.ToolButton {
-                                icon: modelData.icon || ""
-                                visible: modelData.visible || true
-                                enabled: modelData.enabled || true
-
-                                Accessible.role: Accessible.Button
-                                Accessible.name: modelData.text
-                                checkable: checked
-                                checked: delegate.activeAction === index
-                                focus: delegate.activeAction === index
-                                onClicked: delegate.ListView.view.runAction(index)
-                            }
-                        }
                     }
                 }
             }
         }
 
-        MouseArea {
+        Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-
-            onClicked: root.requestedClose()
         }
     }
 }
