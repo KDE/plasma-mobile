@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
 "PO-Revision-Date: 2024-10-11 19:53+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -108,18 +108,12 @@ msgstr "Samo 2G"
 msgid "Any"
 msgstr "Katerokoli"
 
-#: modules/cellular/package/contents/ui/main.qml:17
+#: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
 msgstr "Celično"
 
-#: modules/cellular/package/contents/ui/main.qml:54
-#: modules/cellular/package/contents/ui/main.qml:62
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "Vaša naprava nima na voljo modema."
-
-#: modules/cellular/package/contents/ui/main.qml:56
+#: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -128,37 +122,42 @@ msgstr ""
 "Konfigurirajte vaš APN po mobilnimi podatki, več informacij bo na voljo pri "
 "vašem ponudniku omrežja."
 
-#: modules/cellular/package/contents/ui/main.qml:58
+#: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Ste povezani v mobilno omrežje."
 
-#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Vstavite kartico SIM v vašo napravo."
 
-#: modules/cellular/package/contents/ui/main.qml:74
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "Vaša naprava nima na voljo modema."
+
+#: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobilni podatki"
 
-#: modules/cellular/package/contents/ui/main.qml:117
+#: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Edit"
 msgstr "Uredi"
 
-#: modules/cellular/package/contents/ui/main.qml:125
+#: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Zbriši"
 
-#: modules/cellular/package/contents/ui/main.qml:134
+#: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
 msgstr "Dodaj APN"
 
-#: modules/finished/contents/ui/main.qml:16
+#: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
 msgstr "Končano!"
@@ -168,7 +167,7 @@ msgstr "Končano!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Vaša naprava je zdaj pripravljena.<br /><br />Uživajte <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:19
+#: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
 msgstr "Preden začnemo…"
@@ -195,7 +194,7 @@ msgstr "Prikaži mersko lestvico"
 msgid "Dark Theme"
 msgstr "Temna tema"
 
-#: modules/time/package/contents/ui/main.qml:17
+#: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
 msgstr "Čas in datum"
@@ -220,7 +219,7 @@ msgstr "Neveljavni vhod."
 msgid "Connect to"
 msgstr "Poveži se na"
 
-#: modules/wifi/package/contents/ui/main.qml:19
+#: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
 msgstr "Omrežje"

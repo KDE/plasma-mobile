@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
 "PO-Revision-Date: 2024-09-24 11:54+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -109,18 +109,12 @@ msgstr "Только 2G"
 msgid "Any"
 msgstr "Любая"
 
-#: modules/cellular/package/contents/ui/main.qml:17
+#: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
 msgstr "Сотовая сеть"
 
-#: modules/cellular/package/contents/ui/main.qml:54
-#: modules/cellular/package/contents/ui/main.qml:62
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "На устройстве нет доступного модема."
-
-#: modules/cellular/package/contents/ui/main.qml:56
+#: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -129,37 +123,42 @@ msgstr ""
 "Настройте ниже APN для данных мобильной связи. Дальнейшие сведения "
 "предоставит поставщик услуг."
 
-#: modules/cellular/package/contents/ui/main.qml:58
+#: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Подключение к мобильной сети установлено."
 
-#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Вставьте в устройство SIM-карту."
 
-#: modules/cellular/package/contents/ui/main.qml:74
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "На устройстве нет доступного модема."
+
+#: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
 msgstr "Мобильные данные"
 
-#: modules/cellular/package/contents/ui/main.qml:117
+#: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Edit"
 msgstr "Изменить"
 
-#: modules/cellular/package/contents/ui/main.qml:125
+#: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Удалить"
 
-#: modules/cellular/package/contents/ui/main.qml:134
+#: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
 msgstr "Добавить APN"
 
-#: modules/finished/contents/ui/main.qml:16
+#: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
 msgstr "Готово!"
@@ -169,7 +168,7 @@ msgstr "Готово!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Устройство готово к работе. <br /><br />Пользуйтесь <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:19
+#: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
 msgstr "До начала работы…"
@@ -197,7 +196,7 @@ msgstr "Масштабирование экрана"
 msgid "Dark Theme"
 msgstr "Тёмная тема"
 
-#: modules/time/package/contents/ui/main.qml:17
+#: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
 msgstr "Дата и время"
@@ -222,7 +221,7 @@ msgstr "Недопустимые входные данные."
 msgid "Connect to"
 msgstr "Подключиться к"
 
-#: modules/wifi/package/contents/ui/main.qml:19
+#: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
 msgstr "Сеть"

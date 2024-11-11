@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
 "PO-Revision-Date: 2024-10-09 21:27+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -110,18 +110,12 @@ msgstr "Bakarrik 2G"
 msgid "Any"
 msgstr "Edozein"
 
-#: modules/cellular/package/contents/ui/main.qml:17
+#: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
 msgstr "Mugikorrerako sarea"
 
-#: modules/cellular/package/contents/ui/main.qml:54
-#: modules/cellular/package/contents/ui/main.qml:62
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "Zure gailuak ez du modemik erabilgarri."
-
-#: modules/cellular/package/contents/ui/main.qml:56
+#: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -130,37 +124,42 @@ msgstr ""
 "Mesedez, konfiguratu mugikorreko datuetarako zure APNa behean, zure "
 "hornitzaileak informazio gehiago erabilgarri izango du."
 
-#: modules/cellular/package/contents/ui/main.qml:58
+#: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "Mugikorreko sarera konektatuta zaude."
 
-#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Mesedez, sartu SIM txartel bat zure gailuan."
 
-#: modules/cellular/package/contents/ui/main.qml:74
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "Zure gailuak ez du modemik erabilgarri."
+
+#: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mugikorreko datuak"
 
-#: modules/cellular/package/contents/ui/main.qml:117
+#: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Edit"
 msgstr "Editatu"
 
-#: modules/cellular/package/contents/ui/main.qml:125
+#: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: modules/cellular/package/contents/ui/main.qml:134
+#: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
 msgstr "Gehitu APN"
 
-#: modules/finished/contents/ui/main.qml:16
+#: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
 msgstr "Osatuta!"
@@ -170,7 +169,7 @@ msgstr "Osatuta!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Zure gailua orain prest dago. <br /><br />Gozatu <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:19
+#: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
 msgstr "Hasi baino lehen..."
@@ -196,7 +195,7 @@ msgstr "Azaldutakoaren eskala"
 msgid "Dark Theme"
 msgstr "Gai iluna"
 
-#: modules/time/package/contents/ui/main.qml:17
+#: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
 msgstr "Ordua eta data"
@@ -221,7 +220,7 @@ msgstr "Sarrerako baliogabea."
 msgid "Connect to"
 msgstr "Konektatu hona:"
 
-#: modules/wifi/package/contents/ui/main.qml:19
+#: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
 msgstr "Sarea"

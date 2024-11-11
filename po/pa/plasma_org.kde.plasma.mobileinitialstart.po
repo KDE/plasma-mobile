@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
 "PO-Revision-Date: 2023-12-24 09:06-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -107,55 +107,54 @@ msgstr "ਸਿਰਫ਼ 2G"
 msgid "Any"
 msgstr "ਕੋਈ ਵੀ"
 
-#: modules/cellular/package/contents/ui/main.qml:17
+#: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
 msgstr "ਸੈਲੂਲਰ"
 
-#: modules/cellular/package/contents/ui/main.qml:54
-#: modules/cellular/package/contents/ui/main.qml:62
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਲਈ ਮਾਡਮ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
-
-#: modules/cellular/package/contents/ui/main.qml:56
+#: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr "ਮੋਬਾਈਲ ਡਾਟੇ ਲਈ ਹੇਠਾਂ ਆਪਣਾ APN ਸੰਰਚਿਤ ਕਰੋ, ਹੋਰ ਜਾਣਕਾਰੀ ਤੁਹਾਡੇ ਕੈਰੀਅਰ ਤੋਂ ਮਿਲੇਗੀ।"
 
-#: modules/cellular/package/contents/ui/main.qml:58
+#: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "ਤੁਸੀਂ ਮੋਬਾਈਲ ਨੈੱਟਵਰਕ ਨਾਲ ਕਨੈਕਟ ਹੋ।"
 
-#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "ਆਪਣੇ ਡਿਵਾਈਸ ਵਿੱਚ ਸਿਮ ਕਾਰਡ ਪਾਓ।"
 
-#: modules/cellular/package/contents/ui/main.qml:74
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "ਤੁਹਾਡੇ ਡਿਵਾਈਸ ਲਈ ਮਾਡਮ ਮੌਜੂਦ ਨਹੀਂ ਹੈ।"
+
+#: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
 msgstr "ਮੋਬਾਈਲ ਡਾਟਾ"
 
-#: modules/cellular/package/contents/ui/main.qml:117
+#: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Edit"
 msgstr "ਸੋਧੋ"
 
-#: modules/cellular/package/contents/ui/main.qml:125
+#: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
-#: modules/cellular/package/contents/ui/main.qml:134
+#: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
 msgstr "APN ਜੋੜੋ"
 
-#: modules/finished/contents/ui/main.qml:16
+#: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
 msgstr "ਪੂਰਾ!"
@@ -165,7 +164,7 @@ msgstr "ਪੂਰਾ!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "ਤੁਹਾਡਾ ਡਿਵਾਈਸ ਤਿਆਰ ਹੈ। <br /><br /><b>%1</b> ਦਾ ਆਨੰਦ ਮਾਣੋ!"
 
-#: modules/prepare/package/contents/ui/main.qml:19
+#: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
 msgstr "ਸ਼ੁਰੂ ਕਰਨ ਤੋਂ ਪਹਿਲਾਂ…"
@@ -191,7 +190,7 @@ msgstr "ਡਿਸਪਲੇਅ ਸਕੇਲਿੰਗ"
 msgid "Dark Theme"
 msgstr "ਗੂੜ੍ਹਾ ਥੀਮ"
 
-#: modules/time/package/contents/ui/main.qml:17
+#: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
 msgstr "ਸਮਾਂ ਤੇ ਤਾਰੀਖ"
@@ -216,7 +215,7 @@ msgstr "ਗਲਤ ਇੰਪੁੱਟ ਹੈ।"
 msgid "Connect to"
 msgstr "ਕਨੈਕਟ ਕਰੋ"
 
-#: modules/wifi/package/contents/ui/main.qml:19
+#: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
 msgstr "ਨੈੱਟਵਰਕ"

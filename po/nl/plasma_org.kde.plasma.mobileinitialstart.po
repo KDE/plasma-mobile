@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-11 00:41+0000\n"
 "PO-Revision-Date: 2024-10-09 10:34+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -108,18 +108,12 @@ msgstr "Alleen 2G"
 msgid "Any"
 msgstr "Elke"
 
-#: modules/cellular/package/contents/ui/main.qml:17
+#: modules/cellular/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Cellular"
 msgstr "Cellulair"
 
-#: modules/cellular/package/contents/ui/main.qml:54
-#: modules/cellular/package/contents/ui/main.qml:62
-#, kde-format
-msgid "Your device does not have a modem available."
-msgstr "Uw apparaat heeft geen modem beschikbaar."
-
-#: modules/cellular/package/contents/ui/main.qml:56
+#: modules/cellular/package/contents/ui/main.qml:55
 #, kde-format
 msgid ""
 "Please configure your APN below for mobile data, further information will be "
@@ -128,37 +122,42 @@ msgstr ""
 "Configureer uw onderstaande APN voor mobiele gegevens, verdere informatie "
 "zal beschikbaar zijn bij uw leverancier."
 
-#: modules/cellular/package/contents/ui/main.qml:58
+#: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
 msgstr "U bent verbonden met het mobiele netwerk."
 
-#: modules/cellular/package/contents/ui/main.qml:60
+#: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
 msgstr "Stop een SIM-kaart in uw apparaat."
 
-#: modules/cellular/package/contents/ui/main.qml:74
+#: modules/cellular/package/contents/ui/main.qml:61
+#, kde-format
+msgid "Your device does not have a modem available."
+msgstr "Uw apparaat heeft geen modem beschikbaar."
+
+#: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
 msgstr "Mobiele gegevens"
 
-#: modules/cellular/package/contents/ui/main.qml:117
+#: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
 msgid "Edit"
 msgstr "Bewerken"
 
-#: modules/cellular/package/contents/ui/main.qml:125
+#: modules/cellular/package/contents/ui/main.qml:124
 #, kde-format
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: modules/cellular/package/contents/ui/main.qml:134
+#: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
 msgstr "APN toevoegen"
 
-#: modules/finished/contents/ui/main.qml:16
+#: modules/finished/contents/ui/main.qml:13
 #, kde-format
 msgid "Complete!"
 msgstr "Voltooid!"
@@ -168,7 +167,7 @@ msgstr "Voltooid!"
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
 msgstr "Uw apparaat is nu gereed. <br /><br />Veel plezier <b>%1</b>!"
 
-#: modules/prepare/package/contents/ui/main.qml:19
+#: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
 msgstr "Voordat we verder gaan…"
@@ -195,7 +194,7 @@ msgstr "Schaal van het scherm"
 msgid "Dark Theme"
 msgstr "Donker thema"
 
-#: modules/time/package/contents/ui/main.qml:17
+#: modules/time/package/contents/ui/main.qml:15
 #, kde-format
 msgid "Time and Date"
 msgstr "Tijd en datum"
@@ -220,7 +219,7 @@ msgstr "Ongeldige invoer."
 msgid "Connect to"
 msgstr "Verbinden met"
 
-#: modules/wifi/package/contents/ui/main.qml:19
+#: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
 msgstr "Netwerk"
