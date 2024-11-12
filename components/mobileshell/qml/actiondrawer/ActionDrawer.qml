@@ -202,7 +202,6 @@ Item {
                 // go back to pinned, or close if pinned mode is disabled
                 openToPinnedMode ? open() : close();
             }
-
         } else if (root.direction === MobileShell.Direction.Down) {
             // if drag is between pinned view and open view, and dragging down
             open();
@@ -276,6 +275,12 @@ Item {
         function startSwipe() {
             root.cancelAnimations();
             root.dragging = true;
+
+            // Immediately open action drawer if we interact with it and it's already open
+            // This allows us to have 2 quick flicks from minimized -> expanded
+            if (root.visible && !root.opened) {
+                root.opened = true;
+            }
         }
 
         function endSwipe() {
