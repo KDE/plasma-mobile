@@ -97,6 +97,8 @@ ContainmentItem {
         MobileShell.VolumeOSDProviderLoader.load();
         // initialize notification popups
         MobileShell.NotificationPopupProviderLoader.load();
+        // initialize krunner window
+        MobileShell.KRunnerWindowLoader.load();
     }
 
     MobileShell.StartupFeedbackPanelFill {

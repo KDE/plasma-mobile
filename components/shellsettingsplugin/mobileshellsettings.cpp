@@ -39,6 +39,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
+            Q_EMIT rightNavigationPanelButtonActionChanged();
         }
     });
 }
@@ -179,6 +180,19 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
     job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
     job->start();
+}
+
+MobileShellSettings::NavigationPanelButtonAction MobileShellSettings::rightNavigationPanelButtonAction() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return (NavigationPanelButtonAction)group.readEntry("rightNavigationPanelButtonAction", (int)NavigationPanelButtonAction::Search);
+}
+
+void MobileShellSettings::setRightNavigationPanelButtonAction(NavigationPanelButtonAction action)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("rightNavigationPanelButtonAction", (int)action, KConfigGroup::Notify);
+    m_config->sync();
 }
 
 void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)

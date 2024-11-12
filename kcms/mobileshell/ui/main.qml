@@ -136,6 +136,37 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator {}
+
+            FormCard.FormComboBoxDelegate {
+                id: rightNavigationButtonDelegate
+                visible: !gestureDelegate.checked
+                text: i18n("Right button function")
+                description: i18n("Choose the function of the right button.")
+
+                property string searchString: i18nc("Search action", "Search")
+                property string closeAppString: i18nc("Close application action", "Close Application")
+
+                model: ListModel {
+                    // we can't use i18n with ListElement
+                    Component.onCompleted: {
+                        append({"name": rightNavigationButtonDelegate.searchString, "value": ShellSettings.Settings.Search});
+                        append({"name": rightNavigationButtonDelegate.closeAppString, "value": ShellSettings.Settings.CloseApplication});
+
+                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                        rightNavigationButtonDelegate.currentIndex = rightNavigationButtonDelegate.indexOfValue(ShellSettings.Settings.rightNavigationPanelButtonAction)
+                    }
+                }
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    dialog.parent = root
+                }
+                onCurrentValueChanged: ShellSettings.Settings.rightNavigationPanelButtonAction = currentValue
+            }
         }
 
         FormCard.FormHeader {

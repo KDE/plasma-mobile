@@ -37,6 +37,8 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
     Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel
                    NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
+    Q_PROPERTY(NavigationPanelButtonAction rightNavigationPanelButtonAction READ rightNavigationPanelButtonAction WRITE setRightNavigationPanelButtonAction
+                   NOTIFY rightNavigationPanelButtonActionChanged)
 
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
@@ -53,6 +55,13 @@ public:
         Expanded /** The drawer is fully expanded when pulled down.*/
     };
     Q_ENUM(ActionDrawerMode)
+
+    enum NavigationPanelButtonAction {
+        Search,
+        CloseApplication,
+        TaskSwitcher,
+    };
+    Q_ENUM(NavigationPanelButtonAction)
 
     /**
      * Get whether shell vibrations are enabled.
@@ -190,6 +199,17 @@ public:
      */
     void setConvergenceModeEnabled(bool enabled);
 
+    /**
+     * The action of the right navigation panel button.
+     */
+    NavigationPanelButtonAction rightNavigationPanelButtonAction() const;
+
+    /**
+     * Set the action of the right navigation panel button.
+     * @param action The navigation panel button action.
+     */
+    void setRightNavigationPanelButtonAction(NavigationPanelButtonAction action);
+
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
@@ -203,6 +223,7 @@ Q_SIGNALS:
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
     void convergenceModeEnabledChanged();
+    void rightNavigationPanelButtonActionChanged();
 
 private:
     void updateNavigationBarsInPlasma(bool navigationPanelEnabled);

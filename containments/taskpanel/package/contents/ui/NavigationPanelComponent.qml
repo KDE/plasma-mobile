@@ -82,21 +82,51 @@ MobileShell.NavigationPanel {
 
     // close app/keyboard button
     rightAction: MobileShell.NavigationPanelAction {
-        id: closeAppAction
+        enabled: {
+            let enabledReturn = Keyboards.KWinVirtualKeyboard.active;
+            const action = ShellSettings.Settings.rightNavigationPanelButtonAction;
 
-        enabled: Keyboards.KWinVirtualKeyboard.active || WindowPlugin.WindowUtil.hasCloseableActiveWindow
-        iconSource: Keyboards.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
+            if (action === ShellSettings.Settings.CloseApplication
+                && WindowPlugin.WindowUtil.hasCloseableActiveWindow) {
+                enabledReturn = true;
+            }
+            if (action === ShellSettings.Settings.Search) {
+                enabledReturn = true;
+            }
+
+            return enabledReturn;
+        }
+        iconSource: {
+            if (Keyboards.KWinVirtualKeyboard.active) {
+                return "go-down-symbolic";
+            }
+
+            const action = ShellSettings.Settings.rightNavigationPanelButtonAction;
+            if (action === ShellSettings.Settings.CloseApplication) {
+                return "mobile-close-app";
+            }
+            return "search-symbolic";
+        }
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
-        iconSizeFactor: Keyboards.KWinVirtualKeyboard.active ? 1 : 0.75
+        iconSizeFactor: iconSource === "mobile-close-app" ? 0.75 : 1
 
         onTriggered: {
+            const action = ShellSettings.Settings.rightNavigationPanelButtonAction;
+
             if (Keyboards.KWinVirtualKeyboard.active) {
                 // close keyboard if it is open
                 Keyboards.KWinVirtualKeyboard.active = false;
-            } else if (WindowPlugin.WindowUtil.hasCloseableActiveWindow) {
+            } else if (action === ShellSettings.Settings.CloseApplication
+                        && WindowPlugin.WindowUtil.hasCloseableActiveWindow) {
                 // if task switcher is closed, but there is an active window
                 if (tasksModel.activeTask !== 0) {
                     tasksModel.requestClose(tasksModel.activeTask);
+                }
+            } else if (action === ShellSettings.Settings.Search) {
+                if (!MobileShell.KRunnerWindowLoader.item.visible) {
+                    MobileShell.KRunnerWindowLoader.item.showMaximized();
+                } else {
+                    MobileShell.KRunnerWindowLoader.item.close();
                 }
             }
         }
