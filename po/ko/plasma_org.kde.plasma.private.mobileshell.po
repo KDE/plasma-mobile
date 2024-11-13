@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-13 00:41+0000\n"
 "PO-Revision-Date: 2024-08-21 00:31+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -160,7 +160,13 @@ msgstr "오디오 스트림 표시 전환"
 msgid "Open audio settings"
 msgstr "오디오 설정 열기"
 
-#: qml/widgets/krunner/KRunnerScreen.qml:84
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, fuzzy, kde-format
+#| msgid "Search…"
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr "검색…"
+
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"

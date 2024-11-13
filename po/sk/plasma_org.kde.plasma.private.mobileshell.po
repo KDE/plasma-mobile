@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-13 00:41+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -159,7 +159,13 @@ msgstr "Prepnúť zobrazovanie zvukových prúdov"
 msgid "Open audio settings"
 msgstr "Otvoriť nastavenia zvuku"
 
-#: qml/widgets/krunner/KRunnerScreen.qml:84
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, fuzzy, kde-format
+#| msgid "Search…"
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr "Hľadať..."
+
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"

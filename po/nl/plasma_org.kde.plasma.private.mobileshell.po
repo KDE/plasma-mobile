@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:42+0000\n"
+"POT-Creation-Date: 2024-11-13 00:41+0000\n"
 "PO-Revision-Date: 2024-10-26 11:51+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -159,7 +159,13 @@ msgstr "audio-streams configureren"
 msgid "Open audio settings"
 msgstr "Audio-instellingen openen"
 
-#: qml/widgets/krunner/KRunnerScreen.qml:84
+#: qml/widgets/krunner/KRunnerScreen.qml:68
+#, fuzzy, kde-format
+#| msgid "Search…"
+msgctxt "@info:placeholder"
+msgid "Search…"
+msgstr "Zoeken…"
+
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"
