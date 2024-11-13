@@ -9,6 +9,8 @@ import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 Loader {
     id: root
 
+    property var currentWindow
+
     function run(window) {
         // HACK: don't maximize xwaylandvideobridge
         // see: https://invent.kde.org/plasma/plasma-mobile/-/issues/324
@@ -45,6 +47,27 @@ Loader {
     }
 
     Connections {
+        target: currentWindow
+
+        function onFullScreenChanged() {
+            currentWindow.interactiveMoveResizeFinished.connect((currentWindow) => {
+                root.run(currentWindow);
+            });
+            root.run(currentWindow);
+        }
+
+        function onMaximizedChanged() {
+            if (!currentWindow.maximizable) {
+                return;
+            }
+            currentWindow.interactiveMoveResizeFinished.connect((currentWindow) => {
+                root.run(currentWindow);
+            });
+            root.run(currentWindow);
+        }
+    }
+
+    Connections {
         target: ShellSettings.Settings
 
         function onConvergenceModeEnabledChanged() {
@@ -63,6 +86,16 @@ Loader {
 
         function onWindowAdded(window) {
             if (window.normalWindow) {
+                window.interactiveMoveResizeFinished.connect((window) => {
+                    root.run(window);
+                });
+                root.run(window);
+            }
+        }
+
+        function onWindowActivated(window) {
+            if (window.normalWindow) {
+                currentWindow = window;
                 window.interactiveMoveResizeFinished.connect((window) => {
                     root.run(window);
                 });
