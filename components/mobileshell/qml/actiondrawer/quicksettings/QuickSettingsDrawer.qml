@@ -49,6 +49,7 @@ MobileShell.BaseItem {
     property alias quickSettings: quickSettingsProxy.contentItem
     property alias statusBar: statusBarProxy.contentItem
     property alias mediaControlsWidget: mediaControlsWidgetProxy.contentItem
+    readonly property double brightnessPressedValue: quickSettings.brightnessPressedValue
 
     // we need extra padding if the background side border is enabled
     topPadding: Kirigami.Units.smallSpacing
@@ -59,6 +60,7 @@ MobileShell.BaseItem {
     background: KSvg.FrameSvgItem {
         enabledBorders: KSvg.FrameSvgItem.BottomBorder
         imagePath: "widgets/background"
+        opacity: brightnessPressedValue
     }
 
     contentItem: Item {
@@ -103,6 +105,7 @@ MobileShell.BaseItem {
                 property real fullHeight: height + Layout.topMargin
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: Kirigami.Units.smallSpacing * 2
+                opacity: brightnessPressedValue
 
                 onTapped: {
                     if (root.minimizedToFullProgress < 0.5) {

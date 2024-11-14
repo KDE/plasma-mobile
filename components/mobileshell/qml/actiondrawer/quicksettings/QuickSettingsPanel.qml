@@ -35,6 +35,7 @@ MobileShell.BaseItem {
 
     property alias quickSettings: quickSettingsProxy.contentItem
     property alias statusBar: statusBarProxy.contentItem
+    readonly property double brightnessPressedValue: quickSettings.brightnessPressedValue
 
     // we need extra padding since the background side border is enabled
     topPadding: Kirigami.Units.smallSpacing * 4
@@ -45,6 +46,7 @@ MobileShell.BaseItem {
     background: KSvg.FrameSvgItem {
         enabledBorders: KSvg.FrameSvgItem.AllBorders
         imagePath: "widgets/background"
+        opacity: brightnessPressedValue
     }
 
     contentItem: Item {
@@ -89,6 +91,7 @@ MobileShell.BaseItem {
             id: handle
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
+            opacity: brightnessPressedValue
         }
     }
 }

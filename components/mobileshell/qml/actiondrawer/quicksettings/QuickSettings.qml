@@ -60,6 +60,8 @@ Item {
     readonly property int pageSize: rowCount * columnCount
     readonly property int quickSettingsCount: quickSettingsModel.count
 
+    readonly property alias brightnessPressedValue: brightnessItem.brightnessPressedValue
+
     function resetSwipeView() {
         if (root.mode === QuickSettings.Pages) {
             swipeView.currentIndex = 0;
@@ -134,6 +136,8 @@ Item {
             Layout.fillWidth: true
             Layout.minimumHeight: rowCount * rowHeight
 
+            opacity: brightnessPressedValue
+
             SwipeView {
                 id: swipeView
 
@@ -199,6 +203,7 @@ Item {
 
         // Brightness slider
         BrightnessItem {
+            id: brightnessItem
             Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
             Layout.leftMargin: Kirigami.Units.smallSpacing
             Layout.rightMargin: Kirigami.Units.smallSpacing
