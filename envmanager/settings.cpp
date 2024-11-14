@@ -170,8 +170,11 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
 
 void Settings::reloadKWinConfig()
 {
-    // Most KWin settings are already reloaded through KConfig's notify feature.
-    // However, effects need to manually be loaded/unloaded in a live KWin session.
+    // Reload config
+    QDBusMessage reloadMessage = QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reloadConfig");
+    QDBusConnection::sessionBus().send(reloadMessage);
+
+    // Effects need to manually be loaded/unloaded in a live KWin session.
 
     KConfigGroup pluginsGroup{m_kwinrcConfig, QStringLiteral("Plugins")};
 
