@@ -122,13 +122,6 @@ ContainmentItem {
         backgroundColor: !root.showingApp ? "transparent" : root.backgroundColor
     }
 
-    // swiping area for swipe-down drawer
-    MobileShell.ActionDrawerOpenSurface {
-        id: swipeArea
-        actionDrawer: drawer.actionDrawer
-        anchors.fill: parent
-    }
-
     // swipe-down drawer component
     MobileShell.ActionDrawerWindow {
         id: drawer
