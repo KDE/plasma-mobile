@@ -16,8 +16,7 @@ Rectangle {
     implicitWidth: Kirigami.Units.gridUnit * 3
     implicitHeight: 3
     radius: height
-    color: Kirigami.Theme.textColor
-    opacity: 0.5
+    color: Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.5)
 
     TapHandler {
         cursorShape: pressed ? Qt.ClosedHandCursor : Qt.PointingHandCursor

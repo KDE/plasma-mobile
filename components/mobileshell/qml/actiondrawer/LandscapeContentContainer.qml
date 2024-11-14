@@ -32,6 +32,7 @@ Item {
     readonly property bool isOnLargeScreen: width > quickSettingsPanel.width * 2.5
     readonly property real minWidthHeight: Math.min(root.width, root.height)
     readonly property real opacityValue: Math.max(0, Math.min(1, actionDrawer.offset / root.minimizedQuickSettingsOffset))
+    readonly property double brightnessPressedValue: quickSettings.brightnessPressedValue
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
@@ -81,7 +82,7 @@ Item {
             id: clock
             text: Qt.formatTime(timeSource.data.Local.DateTime, MobileShell.ShellUtil.isSystem24HourFormat ? "h:mm" : "h:mm ap")
             verticalAlignment: Qt.AlignVCenter
-            opacity: columnLayout.opacity
+            opacity: Math.min(brightnessPressedValue, columnLayout.opacity)
 
             anchors {
                 left: parent.left
@@ -100,7 +101,7 @@ Item {
             text: Qt.formatDate(timeSource.data.Local.DateTime, "ddd MMMM d")
             verticalAlignment: Qt.AlignTop
             color: Kirigami.Theme.disabledTextColor
-            opacity: columnLayout.opacity
+            opacity: Math.min(brightnessPressedValue, columnLayout.opacity)
 
             anchors {
                 left: parent.left
