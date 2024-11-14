@@ -83,7 +83,7 @@ ContainmentItem {
     Binding {
         target: MobileShellState.ShellDBusClient
         property: "isActionDrawerOpen"
-        value: drawer.visible
+        value: drawer.intendedToBeVisible
     }
 
 //END API implementation
