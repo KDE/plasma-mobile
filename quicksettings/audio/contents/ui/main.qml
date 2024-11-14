@@ -15,6 +15,7 @@ QS.QuickSetting {
     settingsCommand: "plasma-open-settings kcm_pulseaudio"
 
     function toggle() {
-        MobileShellState.ShellDBusClient.showVolumeOSD()
+        MobileShellState.ShellDBusClient.closeActionDrawer();
+        MobileShellState.ShellDBusClient.showVolumeOSD();
     }
 }
