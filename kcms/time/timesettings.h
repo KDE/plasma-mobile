@@ -23,6 +23,7 @@
 #include <QCoroQmlTask>
 #include <QCoroTask>
 
+#include "timedated_interface.h"
 #include "timezonemodel.h"
 
 // #include "settingsmodule.h"
@@ -106,11 +107,11 @@ private:
     bool m_useNtp;
     QString m_errorString;
 
-    void initSettings();
     void initTimeZones();
 
     KSharedConfig::Ptr m_localeConfig;
     KConfigGroup m_localeSettings;
+    std::shared_ptr<OrgFreedesktopTimedate1Interface> m_timedateIface{nullptr};
 };
 
 #endif // TIMESETTINGS_H

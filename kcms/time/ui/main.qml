@@ -39,6 +39,7 @@ SimpleKCM {
                 checked: kcm.twentyFour
                 onCheckedChanged: {
                     kcm.twentyFour = checked
+                    checked = Qt.binding(function () { return kcm.twentyFour; });
                 }
             }
 
@@ -63,11 +64,8 @@ SimpleKCM {
                 description: i18n("Whether to set the time automatically.")
                 checked: kcm.useNtp
                 onCheckedChanged: {
-                    kcm.useNtp = checked
-                    if (!checked) {
-                        kcm.ntpServer = "";
-                        kcm.saveTime();
-                    }
+                    kcm.useNtp = checked;
+                    checked = Qt.binding(function () { return kcm.useNtp; });
                 }
             }
 

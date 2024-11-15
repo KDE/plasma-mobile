@@ -29,8 +29,6 @@
 #include <QCoroDBus>
 #include <QCoroTask>
 
-#include "timedated_interface.h"
-
 #define FORMAT24H "HH:mm:ss"
 #define FORMAT12H "h:mm:ss ap"
 
@@ -39,18 +37,24 @@ K_PLUGIN_CLASS_WITH_JSON(TimeSettings, "kcm_mobile_time.json")
 TimeSettings::TimeSettings(QObject *parent, const KPluginMetaData &metaData)
     : KQuickConfigModule(parent, metaData)
     , m_useNtp(true)
+    , m_localeConfig{KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig)}
+    , m_localeSettings{KConfigGroup(m_localeConfig, "Locale")}
+    , m_timedateIface{std::make_shared<OrgFreedesktopTimedate1Interface>(QStringLiteral("org.freedesktop.timedate1"),
+                                                                         QStringLiteral("/org/freedesktop/timedate1"),
+                                                                         QDBusConnection::systemBus())}
 {
     setButtons({});
 
-    qDebug() << "time settings init";
     m_timeZonesModel = nullptr;
     setTimeZone(QTimeZone::systemTimeZone().id());
 
     qmlRegisterAnonymousType<TimeZoneModel>("org.kde.timesettings", 1);
     qmlRegisterAnonymousType<TimeZoneFilterProxy>("org.kde.timesettings", 1);
 
-    initSettings();
+    m_useNtp = m_timedateIface->nTP();
+    setTimeFormat(m_localeSettings.readEntry("TimeFormat", QStringLiteral(FORMAT24H))); // FIXME?!
     initTimeZones();
+
     qDebug() << "TimeSettings module loaded.";
 }
 
@@ -59,20 +63,6 @@ void TimeSettings::initTimeZones()
     auto *filterModel = new TimeZoneFilterProxy(this);
     filterModel->setSourceModel(new TimeZoneModel(filterModel));
     setTimeZonesModel(filterModel);
-}
-
-void TimeSettings::initSettings()
-{
-    m_localeConfig = KSharedConfig::openConfig(QStringLiteral("kdeglobals"), KConfig::SimpleConfig);
-    m_localeSettings = KConfigGroup(m_localeConfig, "Locale");
-
-    setTimeFormat(m_localeSettings.readEntry("TimeFormat", QStringLiteral(FORMAT24H))); // FIXME?!
-
-    OrgFreedesktopTimedate1Interface timeDatedIface(QStringLiteral("org.freedesktop.timedate1"),
-                                                    QStringLiteral("/org/freedesktop/timedate1"),
-                                                    QDBusConnection::systemBus());
-    // the server list is not relevant for timesyncd, it fetches it from the network
-    m_useNtp = timeDatedIface.nTP();
 }
 
 void TimeSettings::timeout()
@@ -94,11 +84,13 @@ QTime TimeSettings::currentTime() const
 
 void TimeSettings::setCurrentTime(const QTime &currentTime)
 {
-    if (m_currentTime != currentTime) {
-        m_currentTime = currentTime;
-        m_currentTimeText = QLocale().toString(QTime::currentTime(), m_timeFormat);
-        emit currentTimeChanged();
+    if (m_currentTime == currentTime) {
+        return;
     }
+
+    m_currentTime = currentTime;
+    m_currentTimeText = QLocale().toString(QTime::currentTime(), m_timeFormat);
+    Q_EMIT currentTimeChanged();
 }
 
 QDate TimeSettings::currentDate() const
@@ -108,10 +100,12 @@ QDate TimeSettings::currentDate() const
 
 void TimeSettings::setCurrentDate(const QDate &currentDate)
 {
-    if (m_currentDate != currentDate) {
-        m_currentDate = currentDate;
-        emit currentDateChanged();
+    if (m_currentDate == currentDate) {
+        return;
     }
+
+    m_currentDate = currentDate;
+    Q_EMIT currentDateChanged();
 }
 
 bool TimeSettings::useNtp() const
@@ -121,78 +115,70 @@ bool TimeSettings::useNtp() const
 
 void TimeSettings::setUseNtp(bool ntp)
 {
-    if (m_useNtp != ntp) {
-        m_useNtp = ntp;
-        saveTime();
-        emit useNtpChanged();
+    if (m_useNtp == ntp) {
+        return;
     }
-}
 
-void TimeSettings::saveTime()
-{
-    auto timedateIface = std::make_shared<OrgFreedesktopTimedate1Interface>(QStringLiteral("org.freedesktop.timedate1"),
-                                                                            QStringLiteral("/org/freedesktop/timedate1"),
-                                                                            QDBusConnection::systemBus());
-
-    // final arg in each method is "user-interaction" i.e whether it's OK for polkit to ask for auth
-
-    // we cannot send requests up front then block for all replies as we need NTP to be disabled before we can make a call to SetTime
-    // timedated processes these in parallel and will return an error otherwise
-
-    auto reply = timedateIface->SetNTP(m_useNtp, true);
+    auto reply = m_timedateIface->SetNTP(ntp, true);
     auto r = reply;
     QCoro::connect(std::move(reply), this, [=, this]() {
         if (r.isError()) {
             m_errorString = i18n("Unable to change NTP settings");
-            emit errorStringChanged();
+            Q_EMIT errorStringChanged();
             qWarning() << "Failed to enable NTP" << r.error().name() << r.error().message();
         }
 
-        if (!useNtp()) {
-            QDateTime userTime;
-            userTime.setTime(currentTime());
-            userTime.setDate(currentDate());
-            qDebug() << "Setting userTime: " << userTime;
-            qint64 timeDiff = userTime.toMSecsSinceEpoch() - QDateTime::currentMSecsSinceEpoch();
+        m_useNtp = m_timedateIface->nTP();
+        Q_EMIT useNtpChanged();
+    });
+}
 
-            //*1000 for milliseconds -> microseconds
-            auto reply = timedateIface->SetTime(timeDiff * 1000, true, true);
-            auto r = reply;
-            QCoro::connect(std::move(reply), this, [=, this]() {
-                if (r.isError()) {
-                    m_errorString = i18n("Unable to set current time");
-                    emit errorStringChanged();
-                    qWarning() << "Failed to set current time" << r.error().name() << r.error().message();
-                }
-            });
+void TimeSettings::saveTime()
+{
+    if (useNtp()) {
+        return;
+    }
+
+    QDateTime userTime;
+    userTime.setTime(currentTime());
+    userTime.setDate(currentDate());
+    qDebug() << "Setting userTime: " << userTime;
+    qint64 timeDiff = userTime.toMSecsSinceEpoch() - QDateTime::currentMSecsSinceEpoch();
+
+    //*1000 for milliseconds -> microseconds
+    auto reply = m_timedateIface->SetTime(timeDiff * 1000, true, true);
+    auto r = reply;
+    QCoro::connect(std::move(reply), this, [=, this]() {
+        if (r.isError()) {
+            m_errorString = i18n("Unable to set current time");
+            Q_EMIT errorStringChanged();
+            qWarning() << "Failed to set current time" << r.error().name() << r.error().message();
         }
-        saveTimeZone(m_timezone);
     });
 }
 
 void TimeSettings::saveTimeZone(const QString &newtimezone)
 {
     qDebug() << "Saving timezone to config: " << newtimezone;
-    OrgFreedesktopTimedate1Interface timedateIface(QStringLiteral("org.freedesktop.timedate1"),
-                                                   QStringLiteral("/org/freedesktop/timedate1"),
-                                                   QDBusConnection::systemBus());
 
-    if (!newtimezone.isEmpty()) {
-        qDebug() << "Setting timezone: " << newtimezone;
-        auto reply = timedateIface.SetTimezone(newtimezone, true);
-        auto r = reply;
-        QCoro::connect(std::move(reply), this, [=, this]() {
-            if (r.isError()) {
-                m_errorString = i18n("Unable to set timezone");
-                emit errorStringChanged();
-                qWarning() << "Failed to set timezone" << r.error().name() << r.error().message();
-            } else {
-                setTimeZone(newtimezone);
-                emit timeZoneChanged();
-                notify();
-            }
-        });
+    if (newtimezone.isEmpty()) {
+        return;
     }
+
+    qDebug() << "Setting timezone: " << newtimezone;
+    auto reply = m_timedateIface->SetTimezone(newtimezone, true);
+    auto r = reply;
+    QCoro::connect(std::move(reply), this, [=, this]() {
+        if (r.isError()) {
+            m_errorString = i18n("Unable to set timezone");
+            Q_EMIT errorStringChanged();
+            qWarning() << "Failed to set timezone" << r.error().name() << r.error().message();
+        } else {
+            setTimeZone(newtimezone);
+            Q_EMIT timeZoneChanged();
+            notify();
+        }
+    });
 }
 
 QString TimeSettings::timeFormat()
@@ -202,20 +188,22 @@ QString TimeSettings::timeFormat()
 
 void TimeSettings::setTimeFormat(const QString &timeFormat)
 {
-    if (m_timeFormat != timeFormat) {
-        m_timeFormat = timeFormat;
-
-        m_localeSettings.writeEntry("TimeFormat", timeFormat, KConfigGroup::Notify);
-        m_localeConfig->sync();
-
-        QDBusMessage msg =
-            QDBusMessage::createSignal(QStringLiteral("/org/kde/kcmshell_clock"), QStringLiteral("org.kde.kcmshell_clock"), QStringLiteral("clockUpdated"));
-        QDBusConnection::sessionBus().send(msg);
-
-        qDebug() << "time format is now: " << QLocale().toString(QTime::currentTime(), m_timeFormat);
-        emit timeFormatChanged();
-        timeout();
+    if (m_timeFormat == timeFormat) {
+        return;
     }
+
+    m_timeFormat = timeFormat;
+
+    m_localeSettings.writeEntry("TimeFormat", timeFormat, KConfigGroup::Notify);
+    m_localeConfig->sync();
+
+    QDBusMessage msg =
+        QDBusMessage::createSignal(QStringLiteral("/org/kde/kcmshell_clock"), QStringLiteral("org.kde.kcmshell_clock"), QStringLiteral("clockUpdated"));
+    QDBusConnection::sessionBus().send(msg);
+
+    qDebug() << "time format is now: " << QLocale().toString(QTime::currentTime(), m_timeFormat);
+    Q_EMIT timeFormatChanged();
+    timeout();
 }
 
 QString TimeSettings::timeZone()
@@ -225,12 +213,14 @@ QString TimeSettings::timeZone()
 
 void TimeSettings::setTimeZone(const QString &timezone)
 {
-    if (m_timezone != timezone) {
-        m_timezone = timezone;
-        qDebug() << "timezone changed to: " << timezone;
-        emit timeZoneChanged();
-        timeout();
+    if (m_timezone == timezone) {
+        return;
     }
+
+    m_timezone = timezone;
+    qDebug() << "timezone changed to: " << timezone;
+    Q_EMIT timeZoneChanged();
+    timeout();
 }
 
 TimeZoneFilterProxy *TimeSettings::timeZonesModel()
@@ -241,7 +231,7 @@ TimeZoneFilterProxy *TimeSettings::timeZonesModel()
 void TimeSettings::setTimeZonesModel(TimeZoneFilterProxy *timezones)
 {
     m_timeZonesModel = timezones;
-    emit timeZonesModelChanged();
+    Q_EMIT timeZonesModelChanged();
 }
 
 bool TimeSettings::twentyFour()
@@ -251,17 +241,19 @@ bool TimeSettings::twentyFour()
 
 void TimeSettings::setTwentyFour(bool t)
 {
-    if (twentyFour() != t) {
-        if (t) {
-            setTimeFormat(FORMAT24H);
-        } else {
-            setTimeFormat(FORMAT12H);
-        }
-        qDebug() << "T24 toggled: " << t << m_timeFormat;
-        emit twentyFourChanged();
-        emit currentTimeChanged();
-        timeout();
+    if (twentyFour() == t) {
+        return;
     }
+
+    if (t) {
+        setTimeFormat(FORMAT24H);
+    } else {
+        setTimeFormat(FORMAT12H);
+    }
+    qDebug() << "T24 toggled: " << t << m_timeFormat;
+    Q_EMIT twentyFourChanged();
+    Q_EMIT currentTimeChanged();
+    timeout();
 }
 
 QString TimeSettings::errorString()
