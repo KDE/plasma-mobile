@@ -13,6 +13,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.layershell 1.0 as LayerShell
+import org.kde.plasma.workspace.keyboardlayout as Keyboards
 
 /**
  * Window with the ActionDrawer component embedded in it.
@@ -52,8 +53,17 @@ Window {
     }
 
     onWidthChanged:  updateTouchArea()
-    onIntendedToBeVisibleChanged: updateTouchArea()
     onStateChanged: updateTouchArea()
+    onIntendedToBeVisibleChanged: {
+        updateTouchArea();
+
+        if (intendedToBeVisible) {
+            // Close vkbd if open
+            if (Keyboards.KWinVirtualKeyboard.active) {
+                Keyboards.KWinVirtualKeyboard.active = false;
+            }
+        }
+    }
 
     onActiveChanged: {
         if (!active) {
