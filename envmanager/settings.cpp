@@ -26,6 +26,7 @@ Settings::Settings(QObject *parent)
     , m_appBlacklistConfig{KSharedConfig::openConfig(u"applications-blacklistrc"_s, KConfig::SimpleConfig)}
     , m_kdeglobalsConfig{KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig)}
     , m_ksmServerConfig{KSharedConfig::openConfig(u"ksmserverrc"_s, KConfig::SimpleConfig)}
+    , m_kwinrulesrcConfig{KSharedConfig::openConfig(u"kwinrulesrc"_s, KConfig::SimpleConfig)}
     , m_configWatcher{KConfigWatcher::create(m_mobileConfig)}
 {
 }
@@ -54,6 +55,14 @@ void Settings::loadSavedConfiguration()
     // kwinrc
     loadKeys(u"kwinrc"_s, m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
     m_kwinrcConfig->sync();
+
+    // kwinrules
+    for (const auto &groupName : KWIN_RULES) {
+        m_kwinrulesrcConfig->deleteGroup(groupName);
+    }
+    writeKeys(u"kwinrulesrc"_s, m_kwinrulesrcConfig, getKwinrulesrcSettings(m_mobileConfig, false), false, false);
+    m_kwinrulesrcConfig->sync();
+
     reloadKWinConfig();
 
     // applications-blacklistrc
@@ -74,6 +83,14 @@ void Settings::applyMobileConfiguration()
     // kwinrc
     writeKeys(u"kwinrc"_s, m_kwinrcConfig, getKwinrcSettings(m_mobileConfig), false);
     m_kwinrcConfig->sync();
+
+    // kwinrules
+    for (const auto &groupName : KWIN_RULES) {
+        m_kwinrulesrcConfig->deleteGroup(groupName);
+    }
+    writeKeys(u"kwinrulesrc"_s, m_kwinrulesrcConfig, getKwinrulesrcSettings(m_mobileConfig, true), false, false);
+    m_kwinrulesrcConfig->sync();
+
     reloadKWinConfig();
 
     // applications-blacklistrc
@@ -97,7 +114,11 @@ void Settings::applyMobileConfiguration()
     m_mobileConfig->sync();
 }
 
-void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty)
+void Settings::writeKeys(const QString &fileName,
+                         KSharedConfig::Ptr &config,
+                         const QMap<QString, QMap<QString, QVariant>> &settings,
+                         bool overwriteOnlyIfEmpty,
+                         bool saveSettings)
 {
     const auto groupNames = settings.keys();
     for (const auto &groupName : groupNames) {
@@ -107,7 +128,9 @@ void Settings::writeKeys(const QString &fileName, KSharedConfig::Ptr &config, co
         for (const auto &key : keys) {
             if (!group.hasKey(key) || !overwriteOnlyIfEmpty) {
                 // save key
-                saveConfigSetting(fileName, groupName, key, group.readEntry(key));
+                if (saveSettings) {
+                    saveConfigSetting(fileName, groupName, key, group.readEntry(key));
+                }
 
                 // overwrite with mobile setting
                 group.writeEntry(key, settings[groupName][key], KConfigGroup::Notify);
@@ -207,6 +230,10 @@ void Settings::reloadKWinConfig()
     }
 
     // Call "start" to load enabled KWin scripts.
-    QDBusMessage message = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"start"_s);
-    QDBusConnection::sessionBus().send(message);
+    QDBusMessage startScriptsMessage = QDBusMessage::createMethodCall(u"org.kde.KWin"_s, u"/Scripting"_s, u"org.kde.kwin.Scripting"_s, u"start"_s);
+    QDBusConnection::sessionBus().send(startScriptsMessage);
+
+    // Call reconfigure
+    QDBusMessage reconfigureMessage = QDBusMessage::createSignal("/KWin", "org.kde.KWin", "reconfigure");
+    QDBusConnection::sessionBus().send(reconfigureMessage);
 }

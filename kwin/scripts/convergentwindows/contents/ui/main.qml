@@ -6,6 +6,11 @@ import QtQuick
 import org.kde.kwin as KWinComponents
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
+// This script ensures that windows stay maximized in the shell.
+//
+// We eventually want to replace this with the window rules implementation,
+// but it seems that window maximize rules still don't work for all cases just yet
+// (ex. unmaximizing fullscreen window)
 Loader {
     id: root
 
@@ -23,29 +28,26 @@ Loader {
         }
 
         if (ShellSettings.Settings.convergenceModeEnabled) {
-            window.noBorder = false;
-        } else {
-            if (!window.fullScreen) {
-                const output = window.output;
-                const desktop = window.desktops[0]; // assume it's the first desktop that the window is on
-                if (desktop === undefined) {
-                    return;
-                }
-                const maximizeRect = KWinComponents.Workspace.clientArea(KWinComponents.Workspace.MaximizeArea, output, desktop);
+            return;
+        }
 
-                // set the window to the maximized size and position instantly, avoiding race condition
-                // between maximizing and window decorations being turned off (changing window height)
-                // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/256
-                window.frameGeometry = maximizeRect;
+        if (!window.fullScreen) {
+            const output = window.output;
+            const desktop = window.desktops[0]; // assume it's the first desktop that the window is on
+            if (desktop === undefined) {
+                return;
             }
+            const maximizeRect = KWinComponents.Workspace.clientArea(KWinComponents.Workspace.MaximizeArea, output, desktop);
 
-            // turn off window decorations
-            window.noBorder = true;
+            // set the window to the maximized size and position instantly, avoiding race condition
+            // between maximizing and window decorations being turned off (changing window height)
+            // see: https://invent.kde.org/teams/plasma-mobile/issues/-/issues/256
+            window.frameGeometry = maximizeRect;
+        }
 
-            if (!window.fullScreen) {
-                // run maximize after to ensure the state is maximized
-                window.setMaximize(true, true);
-            }
+        if (!window.fullScreen) {
+            // run maximize after to ensure the state is maximized
+            window.setMaximize(true, true);
         }
     }
 
