@@ -21,8 +21,8 @@ PlasmaComponents.Label {
 
     maximumLineCount: 3
     elide: Text.ElideRight
-    wrapMode: Text.Wrap
-    textFormat: TextEdit.RichText
+    wrapMode: Text.WordWrap
+    textFormat: TextEdit.PlainText
 
 }
 

@@ -3,7 +3,7 @@
  * SPDX-FileCopyrightText: 2018-2019 Kai Uwe Broulik <kde@privat.broulik.de>
  *
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
-*/
+ */
 
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
@@ -22,46 +22,40 @@ import org.kde.coreaddons 1.0 as KCoreAddons
 // notification properties are in BaseNotificationItem
 BaseNotificationItem {
     id: notificationItem
-    implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
+    implicitHeight: mainCard.implicitHeight
+
+    property bool inPopupDrawer: false
+    property int currentPopupHeight: 0
+    property real remainingTimeProgress: 1
+    property bool closeTimerRunning: false
 
     property bool inLockscreen: false
 
     signal dragStart()
     signal dragEnd()
     signal takeFocus()
-
-    // notification heading for groups with one element
-    NotificationGroupHeader {
-        id: notificationHeading
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
-
-        inLockscreen: root.inLockscreen
-
-        Kirigami.Theme.colorSet: Kirigami.Theme.Header
-        Kirigami.Theme.inherit: false
-
-        visible: !notificationItem.inGroup
-        height: visible ? implicitHeight : 0
-
-        applicationName: notificationItem.applicationName
-        applicationIconSource: notificationItem.applicationIconSource
-        originName: notificationItem.originName
-    }
+    signal dismissRequested()
 
     // notification
     NotificationCard {
         id: mainCard
-        anchors.topMargin: notificationHeading.visible ? Kirigami.Units.largeSpacing : 0
-        anchors.top: notificationHeading.bottom
+        anchors.top: parent.top
         anchors.left: parent.left
         anchors.right: parent.right
 
+        popupNotification: true
+        inPopupDrawer: notificationItem.inPopupDrawer
+        currentPopupHeight: notificationItem.currentPopupHeight
+        remainingTimeProgress: notificationItem.remainingTimeProgress
+        closeTimerRunning: notificationItem.closeTimerRunning
         tapEnabled: notificationItem.hasDefaultAction
         onTapped: notificationItem.actionInvoked("default");
         swipeGestureEnabled: notificationItem.closable
-        onDismissRequested: notificationItem.close();
+        onDismissRequested: {
+            model.resident = false;
+            notificationItem.dismissRequested();
+            notificationItem.close();
+        }
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()
@@ -70,29 +64,47 @@ BaseNotificationItem {
             id: column
             spacing: 0
 
+            opacity: notificationItem.inPopupDrawer ? 0 : 1
+            Behavior on opacity {
+                NumberAnimation {
+                    duration: Kirigami.Units.veryLongDuration
+                    easing.type: Easing.OutExpo
+                }
+            }
+
             // notification summary row
             RowLayout {
                 Layout.alignment: Qt.AlignRight
-                Layout.fillWidth: summaryLabel.visible
+                Layout.fillWidth: true
                 Layout.bottomMargin: Kirigami.Units.smallSpacing
 
-                // notification summary
+                Kirigami.Icon {
+                    id: applicationIconItem
+                    Layout.topMargin: Kirigami.Units.smallSpacing
+                    Layout.bottomMargin: Kirigami.Units.smallSpacing
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                    source: notificationItem.applicationIconSource
+                    visible: valid
+                }
+
                 PlasmaComponents.Label {
-                    id: summaryLabel
+                    id: applicationNameLabel
+                    Layout.leftMargin: Kirigami.Units.smallSpacing
                     Layout.fillWidth: true
-                    textFormat: Text.PlainText
-                    maximumLineCount: 3
-                    wrapMode: Text.WordWrap
-                    elide: Text.ElideRight
+
+                    color: Kirigami.Theme.textColor
+
+                    elide: Text.ElideLeft
                     font.pointSize: Kirigami.Theme.defaultFont.pointSize
-                    text: MobileShell.NotificationsUtils.determineNotificationHeadingText(notificationItem)
-                    visible: text !== ""
-                    font.weight: Font.DemiBold
+                    text: notificationItem.applicationName + (notificationItem.originName ? " · " + notificationItem.originName : "")
                 }
 
                 // notification timestamp
                 NotificationTimeText {
-                    Layout.alignment: Qt.AlignRight | Qt.AlignTop
+                    Layout.rightMargin: Kirigami.Units.smallSpacing
+                    Layout.topMargin: Kirigami.Units.smallSpacing
+                    Layout.bottomMargin: Kirigami.Units.smallSpacing
                     notificationType: notificationItem.notificationType
                     jobState: notificationItem.jobState
                     jobDetails: notificationItem.jobDetails
@@ -105,23 +117,45 @@ BaseNotificationItem {
             // notification contents
             RowLayout {
                 Layout.fillWidth: true
+                Layout.bottomMargin: Kirigami.Units.smallSpacing
                 spacing: Kirigami.Units.smallSpacing
+                Layout.alignment: Qt.AlignTop
+
+                ColumnLayout {
+                    Layout.alignment: Qt.AlignTop
+
+                    // notification summary
+                    PlasmaComponents.Label {
+                        id: summaryLabel
+                        Layout.fillWidth: true
+                        textFormat: Text.PlainText
+                        maximumLineCount: 3
+                        wrapMode: Text.WordWrap
+                        elide: Text.ElideRight
+                        font.pointSize: Kirigami.Theme.defaultFont.pointSize
+                        text: MobileShell.NotificationsUtils.determineNotificationHeadingText(notificationItem)
+                        visible: text !== ""
+                        font.weight: Font.DemiBold
+                    }
 
 
-                // notification text
-                NotificationBodyLabel {
-                    id: bodyLabel
-                    Layout.alignment: Qt.AlignTop | Qt.AlignLeft
-                    Layout.preferredWidth: column.width - iconContainer.width - Kirigami.Units.smallSpacing
+                    // notification text
+                    NotificationBodyLabel {
+                        id: bodyLabel
+                        Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+                        Layout.preferredWidth: column.width - iconContainer.width - Kirigami.Units.smallSpacing
 
-                    text: ShellUtil.toPlainText(notificationItem.body)
+                        text: ShellUtil.toPlainText(notificationItem.body)
+                    }
+
                 }
 
                 // notification icon
                 Item {
                     id: iconContainer
-                    Layout.preferredWidth: Kirigami.Units.iconSizes.large
-                    Layout.preferredHeight: Kirigami.Units.iconSizes.large
+                    Layout.fillHeight: true
+                    Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+                    Layout.preferredHeight: Kirigami.Units.iconSizes.medium
                     Layout.topMargin: Kirigami.Units.smallSpacing
                     Layout.bottomMargin: Kirigami.Units.smallSpacing
 
@@ -173,6 +207,8 @@ BaseNotificationItem {
                 Layout.topMargin: Kirigami.Units.smallSpacing
                 notification: notificationItem
                 onTakeFocus: notificationItem.takeFocus()
+
+                popupNotification: true
             }
 
             // thumbnails
