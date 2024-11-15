@@ -95,7 +95,7 @@ SimpleKCM {
 
         FormCard.FormHeader {
             visible: savedCard.visible
-            title: i18n('Saved Networks')
+            title: i18nc("@title:group", "Saved Networks")
         }
 
         FormCard.FormCard {
@@ -166,7 +166,7 @@ SimpleKCM {
 
             FormCard.FormButtonDelegate {
                 icon.name: 'list-add'
-                text: i18n('Add Custom Connection')
+                text: i18n("Add Custom Connection")
                 visible: enabledConnections.wirelessEnabled
                 onClicked: kcm.push("NetworkSettings.qml")
             }
