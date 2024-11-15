@@ -65,7 +65,7 @@ MouseArea {
             topPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
             bottomPadding: Kirigami.Units.largeSpacing + Kirigami.Units.smallSpacing
 
-            placeholderText: i18nc("@info:placeholder", "Search…")
+            placeholderText: "Search…"
             placeholderTextColor: Qt.rgba(255, 255, 255, 0.8)
             color: 'white'
             inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text

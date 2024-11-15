@@ -178,7 +178,7 @@ Item {
                     PlasmaComponents.TextField {
                         id: queryField
                         Layout.fillWidth: true
-                        placeholderText: "Search…"
+                        placeholderText: i18nc("@info:placeholder", "Search…")
                         inputMethodHints: Qt.ImhNoPredictiveText // don't need to press "enter" to update text
                     }
                 }
