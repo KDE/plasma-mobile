@@ -15,7 +15,6 @@ import org.kde.kcmutils
 import org.kde.timesettings
 import org.kde.kirigamiaddons.formcard 1 as FormCard
 import org.kde.kirigamiaddons.delegates 1 as Delegates
-import org.kde.kirigamiaddons.dateandtime as DateAndTime
 
 SimpleKCM {
     id: timeModule
@@ -91,7 +90,20 @@ SimpleKCM {
                 description: Qt.formatDate(kcm.currentDate, Locale.LongFormat)
                 icon.name: "view-calendar"
                 enabled: !ntpCheckBox.checked
-                onClicked: datePickerDialog.open()
+                onClicked: {
+                    const component = Qt.createComponent("org.kde.kirigamiaddons.dateandtime", "DatePopup");
+                    const dialog = component.createObject(timeModule.Controls.Overlay.overlay, {
+                        modal: true,
+                        value: kcm.currentDate,
+                    });
+                    dialog.x = Qt.binding(() => Math.round((timeModule.width - dialog.width) / 2));
+                    dialog.y = Qt.binding(() => Math.round((timeModule.height - dialog.height) / 2));
+                    dialog.accepted.connect(() => {
+                        kcm.currentDate = dialog.value;
+                        kcm.saveTime();
+                    });
+                    dialog.open();
+                }
             }
         }
     }
@@ -163,22 +175,6 @@ SimpleKCM {
                 }
             }
         },
-
-        DateAndTime.DatePopup {
-            id: datePickerDialog
-            modal: true
-            parent: timeModule
-
-            onOpened: {
-                value = kcm.currentDate;
-            }
-
-            onAccepted: {
-                kcm.currentDate = value;
-                kcm.saveTime();
-            }
-        },
-
         Kirigami.PromptDialog {
             id: timePickerDialog
             title: i18n("Pick System Time")
