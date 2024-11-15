@@ -28,6 +28,9 @@ Loader {
             if (!window.fullScreen) {
                 const output = window.output;
                 const desktop = window.desktops[0]; // assume it's the first desktop that the window is on
+                if (desktop === undefined) {
+                    return;
+                }
                 const maximizeRect = KWinComponents.Workspace.clientArea(KWinComponents.Workspace.MaximizeArea, output, desktop);
 
                 // set the window to the maximized size and position instantly, avoiding race condition
