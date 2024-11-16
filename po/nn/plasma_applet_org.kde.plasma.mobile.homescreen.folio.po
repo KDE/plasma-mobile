@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 02:29+0000\n"
+"POT-Creation-Date: 2024-11-16 02:38+0000\n"
 "PO-Revision-Date: 2024-07-17 17:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -31,7 +31,7 @@ msgstr "Søk etter program …"
 
 #: package/contents/ui/FavouritesBar.qml:145
 #: package/contents/ui/FavouritesBar.qml:219
-#: package/contents/ui/FolderView.qml:273
+#: package/contents/ui/FolderView.qml:290
 #: package/contents/ui/HomeScreenPage.qml:218
 #: package/contents/ui/HomeScreenPage.qml:298
 #, kde-format
