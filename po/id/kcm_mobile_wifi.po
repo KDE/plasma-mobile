@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2020-04-24 22:01+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -37,11 +37,24 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr ""
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Jaringan yang disimpan"
+
 #: ui/main.qml:135
 #, fuzzy, kde-format
 #| msgid "Available networks"
 msgid "Available Networks"
 msgstr "Jaringan yang tersedia"
+
+#: ui/main.qml:169
+#, fuzzy, kde-format
+#| msgid "Add custom connection"
+msgid "Add Custom Connection"
+msgstr "Tambahkan kustom koneksi"
 
 #: ui/NetworkSettings.qml:15
 #, fuzzy, kde-format
@@ -214,11 +227,6 @@ msgstr "Kata sandi:"
 #~ msgstr "Nonfungsikan Wi-Fi"
 
 #, fuzzy
-#~| msgid "Add custom connection"
-#~ msgid "Add Custom Connection"
-#~ msgstr "Tambahkan kustom koneksi"
-
-#, fuzzy
 #~| msgid "Saved Connections"
 #~ msgid "Show Saved Connections"
 #~ msgstr "Koneksi yang Disimpan"
@@ -305,9 +313,6 @@ msgstr "Kata sandi:"
 
 #~ msgid "Delete"
 #~ msgstr "Hapus"
-
-#~ msgid "Saved networks"
-#~ msgstr "Jaringan yang disimpan"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-fi"

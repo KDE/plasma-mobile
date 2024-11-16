@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-14 16:56+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -37,10 +37,22 @@ msgstr "Editar"
 msgid "Wi-Fi"
 msgstr "Sen fíos"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Redes gardadas"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Redes dispoñíbeis"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Engadir unha conexión personalizada"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -199,9 +211,6 @@ msgstr "Contrasinal…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Desactivar a Wi-Fi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Engadir unha conexión personalizada"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Amosar as conexións gardadas"
 
@@ -287,9 +296,6 @@ msgstr "Contrasinal…"
 
 #~ msgid "Delete"
 #~ msgstr "Eliminar"
-
-#~ msgid "Saved networks"
-#~ msgstr "Redes gardadas"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Sen fíos"

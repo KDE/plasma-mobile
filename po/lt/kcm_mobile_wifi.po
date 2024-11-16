@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-02-14 01:40+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -39,10 +39,22 @@ msgstr "Taisyti"
 msgid "Wi-Fi"
 msgstr "Belaidis (Wi-Fi)"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Įrašyti tinklai"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Prieinami tinklai"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Pridėti tinkintą ryšį"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -208,9 +220,6 @@ msgstr "Slaptažodis…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Išjungti belaidį (Wi-Fi)"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Pridėti tinkintą ryšį"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Rodyti įrašytus ryšius"
 
@@ -298,9 +307,6 @@ msgstr "Slaptažodis…"
 
 #~ msgid "Delete"
 #~ msgstr "Ištrinti"
-
-#~ msgid "Saved networks"
-#~ msgstr "Įrašyti tinklai"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Belaidis (Wi-fi)"

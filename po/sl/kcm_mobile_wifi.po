@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-13 13:28+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -38,10 +38,22 @@ msgstr "Uredi"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Razpoložljiva omrežja"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Razpoložljiva omrežja"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Dodaj povezavo po meri"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -199,9 +211,6 @@ msgstr "Geslo…"
 
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Onemogoči Wi-Fi"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Dodaj povezavo po meri"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Prikaži shranjene povezave"

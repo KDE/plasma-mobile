@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-30 21:25+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -40,10 +40,22 @@ msgstr "Editatu"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Gordetako sareak"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Sare erabilgarriak"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Gehitu erabiltzaileak finkatutako konexioa"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -202,9 +214,6 @@ msgstr "Pasahitza..."
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Ezgaitu Wi-Fi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Gehitu erabiltzaileak finkatutako konexioa"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Erakutsi gordetako konexioak"
 
@@ -292,9 +301,6 @@ msgstr "Pasahitza..."
 
 #~ msgid "Delete"
 #~ msgstr "Ezabatu"
-
-#~ msgid "Saved networks"
-#~ msgstr "Gordetako sareak"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-Fi"

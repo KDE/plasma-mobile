@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-16 12:21+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -39,10 +39,22 @@ msgstr "Editar"
 msgid "Wi-Fi"
 msgstr "Wifi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Redes guardadas"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Redes disponibles"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Añadir conexión personalizada"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -201,9 +213,6 @@ msgstr "Contraseña..."
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Desactivar wifi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Añadir conexión personalizada"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mostrar conexiones guardadas"
 
@@ -291,9 +300,6 @@ msgstr "Contraseña..."
 
 #~ msgid "Delete"
 #~ msgstr "Borrar"
-
-#~ msgid "Saved networks"
-#~ msgstr "Redes guardadas"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-fi"

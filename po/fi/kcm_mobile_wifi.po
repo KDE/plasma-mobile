@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-01-29 21:57+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -37,10 +37,22 @@ msgstr "Muokkaa"
 msgid "Wi-Fi"
 msgstr "Langaton verkko"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Tallennetut verkot"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Saatavilla olevat verkot"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Lisää mukautettu yhteys"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -206,9 +218,6 @@ msgstr "Salasana…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Poista langaton verkko käytöstä"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Lisää mukautettu yhteys"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Näytä tallennetut yhteydet"
 
@@ -296,9 +305,6 @@ msgstr "Salasana…"
 
 #~ msgid "Delete"
 #~ msgstr "Poista"
-
-#~ msgid "Saved networks"
-#~ msgstr "Tallennetut verkot"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Langaton verkko"

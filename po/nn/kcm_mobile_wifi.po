@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-22 16:33+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -39,10 +39,23 @@ msgstr "Rediger"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Tilgjengelege nettverk"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Tilgjengelege nettverk"
+
+#: ui/main.qml:169
+#, fuzzy, kde-format
+#| msgid "Add New Connection"
+msgid "Add Custom Connection"
+msgstr "Legg til ny tilkopling"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

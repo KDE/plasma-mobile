@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-16 12:49+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -37,10 +37,23 @@ msgstr "Upravit"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Dostupné sítě"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Dostupné sítě"
+
+#: ui/main.qml:169
+#, fuzzy, kde-format
+#| msgid "Add New Connection"
+msgid "Add Custom Connection"
+msgstr "Přidat nové připojení"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

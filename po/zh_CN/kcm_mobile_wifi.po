@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -37,10 +37,23 @@ msgstr "编辑"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "可用网络"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "可用网络"
+
+#: ui/main.qml:169
+#, fuzzy, kde-format
+#| msgid "Add New Connection"
+msgid "Add Custom Connection"
+msgstr "添加新连接"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-16 12:53+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -37,10 +37,22 @@ msgstr "Bewerken"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Beschikbare netwerken"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Beschikbare netwerken"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Aangepaste verbinding toevoegen"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -198,9 +210,6 @@ msgstr "Wachtwoord…"
 
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Wi-Fi uitschakelen"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Aangepaste verbinding toevoegen"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Opgeslagen verbindingen tonen"

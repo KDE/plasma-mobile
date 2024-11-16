@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-13 08:24+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -37,10 +37,22 @@ msgstr "Redigera"
 msgid "Wi-Fi"
 msgstr "WIFI"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Sparade nätverk"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Tillgängliga nätverk"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Lägg till egen anslutning"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -199,9 +211,6 @@ msgstr "Lösenord…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Inaktivera WIFI"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Lägg till egen anslutning"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Visa sparade anslutningar"
 
@@ -289,9 +298,6 @@ msgstr "Lösenord…"
 
 #~ msgid "Delete"
 #~ msgstr "Ta bort"
-
-#~ msgid "Saved networks"
-#~ msgstr "Sparade nätverk"
 
 #~ msgid "Wi-fi"
 #~ msgstr "WIFI"

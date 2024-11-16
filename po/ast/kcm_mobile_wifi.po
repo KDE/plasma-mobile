@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 10:00+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: Assamese <alministradores@softastur.org>\n"
@@ -37,9 +37,20 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, kde-format
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr ""
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
+msgstr ""
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
 msgstr ""
 
 #: ui/NetworkSettings.qml:15

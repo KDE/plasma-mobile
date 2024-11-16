@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-13 16:21+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -40,10 +40,22 @@ msgstr "Змінити"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Збережені мережі"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Доступні мережі"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Додати нетипове з'єднання"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -202,9 +214,6 @@ msgstr "Пароль…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Вимкнути Wi-Fi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Додати нетипове з'єднання"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Показати збережені з'єднання"
 
@@ -292,9 +301,6 @@ msgstr "Пароль…"
 
 #~ msgid "Delete"
 #~ msgstr "Вилучити"
-
-#~ msgid "Saved networks"
-#~ msgstr "Збережені мережі"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-Fi"

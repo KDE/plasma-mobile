@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -17,17 +17,17 @@ msgstr ""
 "X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_mobile_time.pot\n"
 "X-Crowdin-File-ID: 43759\n"
 
-#: timesettings.cpp:146
+#: timesettings.cpp:126
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "无法修改 NTP 设置"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:153
 #, kde-format
 msgid "Unable to set current time"
 msgstr "无法设置当前时间"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:173
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "无法设置时区"
@@ -2912,17 +2912,17 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "太平洋"
 
-#: ui/main.qml:32
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr "显示"
 
-#: ui/main.qml:38
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24 小时格式"
 
-#: ui/main.qml:39
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "时钟是否使用 24 小时格式显示。"
@@ -2947,23 +2947,23 @@ msgstr "自动同步时间"
 msgid "Whether to set the time automatically."
 msgstr "是否自动设置时间。"
 
-#: ui/main.qml:81
+#: ui/main.qml:78
 #, kde-format
 msgid "System Time"
 msgstr "系统时间"
 
-#: ui/main.qml:90
+#: ui/main.qml:87
 #, kde-format
 msgid "System Date"
 msgstr "系统日期"
 
-#: ui/main.qml:102
+#: ui/main.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "选取时区"
 
-#: ui/main.qml:184
+#: ui/main.qml:178
 #, kde-format
 msgid "Pick System Time"
 msgstr "选择系统时间"

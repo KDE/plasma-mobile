@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-23 12:29+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -40,10 +40,22 @@ msgstr "Изменить"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Сохранённые сети "
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Доступные сети"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Добавить другое соединение"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -202,9 +214,6 @@ msgstr "Пароль…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Выключить Wi-Fi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Добавить другое соединение"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Сохранённые соединения"
 
@@ -293,9 +302,6 @@ msgstr "Пароль…"
 
 #~ msgid "Delete"
 #~ msgstr "Удалить"
-
-#~ msgid "Saved networks"
-#~ msgstr "Сохранённые сети "
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-Fi"

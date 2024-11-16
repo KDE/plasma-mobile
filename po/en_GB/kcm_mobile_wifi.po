@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-15 10:36+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -37,10 +37,22 @@ msgstr "Edit"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Saved networks"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Available Networks"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Add Custom Connection"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -199,9 +211,6 @@ msgstr "Password…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Disable Wi-Fi"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "Add Custom Connection"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "Show Saved Connections"
 
@@ -289,9 +298,6 @@ msgstr "Password…"
 
 #~ msgid "Delete"
 #~ msgstr "Delete"
-
-#~ msgid "Saved networks"
-#~ msgstr "Saved networks"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-fi"

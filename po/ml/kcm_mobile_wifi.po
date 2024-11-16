@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2019-12-12 22:31+0000\n"
 "Last-Translator: Vivek KJ Pazhedath <vivekkj2004@gmail.com>\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -38,9 +38,20 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr ""
 
+#: ui/main.qml:98
+#, kde-format
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr ""
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
+msgstr ""
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
 msgstr ""
 
 #: ui/NetworkSettings.qml:15

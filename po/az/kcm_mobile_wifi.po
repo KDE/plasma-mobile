@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2022-07-06 09:32+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -37,11 +37,23 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr ""
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Gizli şəbəkə:"
+
 #: ui/main.qml:135
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Available Networks"
 msgstr "Gizli şəbəkə:"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Xüsusi bağlantə əlavə edin"
 
 #: ui/NetworkSettings.qml:15
 #, fuzzy, kde-format
@@ -213,9 +225,6 @@ msgstr "Şifrə..."
 
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Wi-Fi söndürmək"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Xüsusi bağlantə əlavə edin"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Saxlanılan bağlantıları göstərmək"

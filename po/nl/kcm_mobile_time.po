@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 10:33+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: timesettings.cpp:146
+#: timesettings.cpp:126
 #, kde-format
 msgid "Unable to change NTP settings"
 msgstr "NTP-instellingen wijzigen lukt niet"
 
-#: timesettings.cpp:163
+#: timesettings.cpp:153
 #, kde-format
 msgid "Unable to set current time"
 msgstr "Huidige tijd instellen lukt niet"
 
-#: timesettings.cpp:186
+#: timesettings.cpp:173
 #, kde-format
 msgid "Unable to set timezone"
 msgstr "Tijdzone instellen lukt niet"
@@ -2912,17 +2912,17 @@ msgctxt "This is a continent/area associated with a particular timezone"
 msgid "Pacific"
 msgstr "Pacific"
 
-#: ui/main.qml:32
+#: ui/main.qml:31
 #, kde-format
 msgid "Display"
 msgstr "Beeldscherm"
 
-#: ui/main.qml:38
+#: ui/main.qml:37
 #, kde-format
 msgid "24-Hour Format"
 msgstr "24-uurs formaat"
 
-#: ui/main.qml:39
+#: ui/main.qml:38
 #, kde-format
 msgid "Whether to use a 24-hour format for clocks."
 msgstr "Of een 24-uurs formaat wordt gebruikt voor klokken."
@@ -2947,23 +2947,23 @@ msgstr "Automatische synchronisatie van tijd"
 msgid "Whether to set the time automatically."
 msgstr "Of de tijd automatisch wordt ingesteld."
 
-#: ui/main.qml:81
+#: ui/main.qml:78
 #, kde-format
 msgid "System Time"
 msgstr "Systeemtijd"
 
-#: ui/main.qml:90
+#: ui/main.qml:87
 #, kde-format
 msgid "System Date"
 msgstr "Systeemdatum"
 
-#: ui/main.qml:102
+#: ui/main.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Pick Timezone"
 msgstr "Tijdzone kiezen"
 
-#: ui/main.qml:184
+#: ui/main.qml:178
 #, kde-format
 msgid "Pick System Time"
 msgstr "Systeemtijd kiezen"

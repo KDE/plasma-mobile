@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-08-21 00:30+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -37,10 +37,22 @@ msgstr "편집"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Saved networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "저장된 네트워크"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "사용 가능한 네트워크"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "사용자 정의 연결 추가"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -204,9 +216,6 @@ msgstr "암호…"
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Wi-Fi 비활성화"
 
-#~ msgid "Add Custom Connection"
-#~ msgstr "사용자 정의 연결 추가"
-
 #~ msgid "Show Saved Connections"
 #~ msgstr "저장된 연결 표시"
 
@@ -294,9 +303,6 @@ msgstr "암호…"
 
 #~ msgid "Delete"
 #~ msgstr "삭제"
-
-#~ msgid "Saved networks"
-#~ msgstr "저장된 네트워크"
 
 #~ msgid "Wi-fi"
 #~ msgstr "Wi-Fi"

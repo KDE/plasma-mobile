@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2024-09-23 21:56+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -38,10 +38,22 @@ msgstr "Szerkesztés"
 msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Available Networks"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Elérhető hálózatok"
+
 #: ui/main.qml:135
 #, kde-format
 msgid "Available Networks"
 msgstr "Elérhető hálózatok"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Saját kapcsolat hozzáadása"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -199,9 +211,6 @@ msgstr "Jelszó…"
 
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Wi-Fi kikapcsolása"
-
-#~ msgid "Add Custom Connection"
-#~ msgstr "Saját kapcsolat hozzáadása"
 
 #~ msgid "Show Saved Connections"
 #~ msgstr "Mentett kapcsolatok megjelenítése"

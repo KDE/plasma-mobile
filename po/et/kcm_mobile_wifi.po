@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-13 00:41+0000\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
 "PO-Revision-Date: 2020-04-15 12:12+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -38,11 +38,24 @@ msgstr ""
 msgid "Wi-Fi"
 msgstr ""
 
+#: ui/main.qml:98
+#, fuzzy, kde-format
+#| msgid "Hidden Network:"
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr "Varjatud võrk:"
+
 #: ui/main.qml:135
 #, fuzzy, kde-format
 #| msgid "Hidden Network:"
 msgid "Available Networks"
 msgstr "Varjatud võrk:"
+
+#: ui/main.qml:169
+#, fuzzy, kde-format
+#| msgid "Add custom connection"
+msgid "Add Custom Connection"
+msgstr "Kohandatud ühenduse lisamine"
 
 #: ui/NetworkSettings.qml:15
 #, fuzzy, kde-format
@@ -213,11 +226,6 @@ msgstr "Parool:"
 
 #~ msgid "Disable Wi-Fi"
 #~ msgstr "Wi-Fi keelamine"
-
-#, fuzzy
-#~| msgid "Add custom connection"
-#~ msgid "Add Custom Connection"
-#~ msgstr "Kohandatud ühenduse lisamine"
 
 #, fuzzy
 #~| msgid "Saved Connections"
