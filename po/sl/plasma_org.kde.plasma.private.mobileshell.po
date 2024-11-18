@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-08-02 05:34+0200\n"
+"PO-Revision-Date: 2024-11-16 07:13+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "Ime toka ni mogoče najti"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Preklopi prikaz zvočnih tokov"
+msgstr "konfiguriraj zvočne tokove"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -162,8 +161,7 @@ msgid "Open audio settings"
 msgstr "Odpri nastavitve zvoka"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Išči…"

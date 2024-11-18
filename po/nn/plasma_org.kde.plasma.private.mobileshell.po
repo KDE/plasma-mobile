@@ -405,10 +405,3 @@ msgstr "Vis %1 fleire"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Tøm varslingar"
-
-#~ msgid "100%"
-#~ msgstr "100 %"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1 %"

@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "未发现流名称"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "切换显示音频流"
+msgstr "配置音频流"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -162,8 +161,7 @@ msgid "Open audio settings"
 msgstr "打开音频设置"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "搜索"
@@ -399,10 +397,3 @@ msgstr "显示其他 %1 条"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "清除所有通知"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"

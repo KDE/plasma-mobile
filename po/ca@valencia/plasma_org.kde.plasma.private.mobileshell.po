@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-10-27 17:52+0100\n"
+"PO-Revision-Date: 2024-11-16 12:05+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -152,10 +152,9 @@ msgid "Stream name not found"
 msgstr "No s'ha trobat el nom del flux"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Canvia la visualització dels fluxos d'àudio"
+msgstr "configuració dels fluxos d'àudio"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -163,8 +162,7 @@ msgid "Open audio settings"
 msgstr "Obri la configuració d'àudio"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Busca…"
@@ -406,10 +404,3 @@ msgstr "Mostra'n %1 més"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Neteja totes les notificacions"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"

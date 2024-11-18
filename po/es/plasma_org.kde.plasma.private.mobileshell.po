@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-08-02 17:46+0200\n"
+"PO-Revision-Date: 2024-11-16 14:26+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -152,10 +152,9 @@ msgid "Stream name not found"
 msgstr "Nombre de emisión no encontrado"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Conmutar la visualización de emisiones de sonido"
+msgstr "Configurar emisiones de sonido"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -163,8 +162,7 @@ msgid "Open audio settings"
 msgstr "Abrir las preferencias de sonido"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Buscar..."
