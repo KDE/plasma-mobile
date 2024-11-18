@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-09-13 05:40+0300\n"
+"PO-Revision-Date: 2024-11-16 07:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -39,11 +39,10 @@ msgid "Wi-Fi"
 msgstr "רשת אלחוטית"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Available Networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "רשתות זמינות"
+msgstr "רשתות שמורות"
 
 #: ui/main.qml:135
 #, kde-format
@@ -51,10 +50,9 @@ msgid "Available Networks"
 msgstr "רשתות זמינות"
 
 #: ui/main.qml:169
-#, fuzzy, kde-format
-#| msgid "Add New Connection"
+#, kde-format
 msgid "Add Custom Connection"
-msgstr "הוספת חיבור חדש"
+msgstr "הוספת חיבור מותאם אישית"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

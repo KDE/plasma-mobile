@@ -52,10 +52,9 @@ msgid "Available Networks"
 msgstr "Tilgjengelege nettverk"
 
 #: ui/main.qml:169
-#, fuzzy, kde-format
-#| msgid "Add New Connection"
+#, kde-format
 msgid "Add Custom Connection"
-msgstr "Legg til ny tilkopling"
+msgstr "Legg til tilpassa tilkopling"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

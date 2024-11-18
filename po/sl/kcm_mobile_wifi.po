@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-09-13 13:28+0200\n"
+"PO-Revision-Date: 2024-11-16 07:08+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -39,11 +39,10 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Available Networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "Razpoložljiva omrežja"
+msgstr "Shranjena omrežja"
 
 #: ui/main.qml:135
 #, kde-format

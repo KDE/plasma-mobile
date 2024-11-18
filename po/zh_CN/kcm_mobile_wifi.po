@@ -38,11 +38,10 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Available Networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "可用网络"
+msgstr "已保存的网络"
 
 #: ui/main.qml:135
 #, kde-format
@@ -50,10 +49,9 @@ msgid "Available Networks"
 msgstr "可用网络"
 
 #: ui/main.qml:169
-#, fuzzy, kde-format
-#| msgid "Add New Connection"
+#, kde-format
 msgid "Add Custom Connection"
-msgstr "添加新连接"
+msgstr "添加自定义连接"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
