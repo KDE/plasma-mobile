@@ -282,16 +282,17 @@ QPointF ApplicationFolderModel::getDelegatePosition(int index)
         return {0, 0};
     }
     auto delegate = m_folder->m_delegates[index];
-    qreal pageContentWidth = m_folder->m_homeScreen->homeScreenState()->folderPageContentWidth();
-    qreal margin = horizontalPageMargin();
+    qreal pageContentSize = m_folder->m_homeScreen->homeScreenState()->folderPageContentWidth();
+    qreal topMargin = verticalPageMargin();
+    qreal leftMargin = horizontalPageMargin();
 
-    int cellSize = pageContentWidth / numGridLengthOnPage();
+    int cellSize = pageContentSize / numGridLengthOnPage();
 
     qreal cellWitdhRecenter = (cellSize - m_folder->m_homeScreen->homeScreenState()->pageCellWidth()) / 2;
     qreal cellHeightRecenter = (cellSize - m_folder->m_homeScreen->homeScreenState()->pageCellHeight()) / 2;
 
-    qreal xPosition = cellWitdhRecenter + margin + delegate.columnIndex * cellSize;
-    qreal yPosition = cellHeightRecenter + delegate.rowIndex * cellSize;
+    qreal xPosition = cellWitdhRecenter + leftMargin + delegate.columnIndex * cellSize;
+    qreal yPosition = cellHeightRecenter + topMargin + delegate.rowIndex * cellSize;
 
     return {xPosition, yPosition};
 }
