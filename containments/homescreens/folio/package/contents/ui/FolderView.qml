@@ -177,8 +177,8 @@ Folio.DelegateTouchArea {
                         readonly property int cellHeight: folio.HomeScreenState.pageCellHeight
 
                         readonly property bool outsideView: {
-                            const appPosition = x + folio.HomeScreenState.folderViewX;
-                            return (appPosition < -folderCellSize || appPosition > folderBackground.width)
+                            const appPosition = x + (cellWidth - folderCellSize) / 2 + folio.HomeScreenState.folderViewX;
+                            return (appPosition <= -folderCellSize || appPosition >= folderBackground.width);
                         }
 
                         readonly property var dragState: folio.HomeScreenState.dragState

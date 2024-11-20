@@ -703,8 +703,11 @@ QPointF HomeScreenState::getFolderDelegateScreenPosition(int position)
         return {0, 0};
     }
     auto pos = m_currentFolder->applications()->getDelegatePosition(position);
-    qreal x = pos.x() + (m_viewWidth - m_folderPageWidth) / 2;
-    qreal y = pos.y() + (m_viewHeight - m_folderPageHeight) / 2;
+
+    qreal x = pos.x() + (m_viewWidth - m_viewLeftPadding - m_viewRightPadding - m_folderPageWidth) / 2;
+    qreal y = pos.y() + (m_viewHeight - m_viewTopPadding - m_viewBottomPadding - m_folderPageHeight) / 2;
+    x += m_viewLeftPadding;
+    y += m_viewTopPadding;
 
     return {x, y};
 }
