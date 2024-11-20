@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-08-02 09:25+0300\n"
+"PO-Revision-Date: 2024-11-19 18:56+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "Назву потоку не знайдено"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Увімкнути або вимкнути показ потоків звукових даних"
+msgstr "налаштовування звукових потоків"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -162,8 +161,7 @@ msgid "Open audio settings"
 msgstr "Відкрити параметри звуку"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Шукати…"

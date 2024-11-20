@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-09-23 22:00+0200\n"
+"PO-Revision-Date: 2024-11-19 20:10+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -150,10 +150,9 @@ msgid "Stream name not found"
 msgstr "Az adatfolyam neve nem található"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Hanglejátszás megjelenítése be/ki"
+msgstr "hanglejátszás beállítása"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -161,8 +160,7 @@ msgid "Open audio settings"
 msgstr "Hangbeállítások megnyitása"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Keresés…"
