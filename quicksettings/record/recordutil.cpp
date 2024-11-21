@@ -6,11 +6,14 @@
 
 #include "recordutil.h"
 
+#include <QDir>
 #include <QFile>
 #include <QStandardPaths>
 
 #include <KFileUtils>
 #include <KNotification>
+
+using namespace Qt::StringLiterals;
 
 RecordUtil::RecordUtil(QObject *parent)
     : QObject{parent}
@@ -19,7 +22,10 @@ RecordUtil::RecordUtil(QObject *parent)
 
 QString RecordUtil::videoLocation(const QString &name)
 {
-    QString path = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+    const QString path = QStandardPaths::writableLocation(QStandardPaths::MoviesLocation);
+    if (!QDir(path).mkpath(u"."_s)) {
+        qWarning() << "Unable to create directory" << path;
+    }
     QString newPath(path + '/' + name);
     if (QFile::exists(newPath)) {
         newPath = path + '/' + KFileUtils::suggestName(QUrl::fromLocalFile(newPath), name);
