@@ -73,13 +73,19 @@ Rectangle {
 
     function keyPress(data) {
         if (!lockScreenState.waitingForAuth) {
-            root.lockScreenState.resetPinLabel();
+            if (data === "\x08") { // Handle backspace
+                root.backspace();
+            } else if (data === "\r") { // Handle enter
+                root.enter();
+            } else {
+                root.lockScreenState.resetPinLabel();
 
-            root.previewCharIndex = lockScreenState.password.length;
-            lockScreenState.password += data
+                root.previewCharIndex = lockScreenState.password.length;
+                lockScreenState.password += data
 
-            // trigger turning letter into dot later
-            letterTimer.restart();
+                // trigger turning letter into dot later
+                letterTimer.restart();
+            }
         }
     }
 
@@ -146,8 +152,8 @@ Rectangle {
                 } else if (text.length > 0) { // key enter
                     root.keyPress(text.charAt(text.length - 1));
                 }
-                prevText = text;
             }
+            prevText = text;
             externalEdit = false;
         }
     }
