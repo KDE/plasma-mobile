@@ -151,7 +151,7 @@ Window {
                 model: popupNotificationsModel
 
                 // get the height, drag offset, and idx of the current popup notifition and make it easily accessible by all popup notifications
-                property int currentPopupHeight: (count > 0 && currentPopupIndex < count) ? objectAt(currentPopupIndex).popupHeight : 0;
+                property int currentPopupHeight: (count > 0 && currentPopupIndex < count && objectAt(currentPopupIndex)) ? objectAt(currentPopupIndex).popupHeight : 0;
                 property int currentDragOffset: 0
                 property int currentPopupIndex: 0
 
@@ -224,7 +224,11 @@ Window {
                             // but don't actually invalidate the notification
                             model.expired = true;
                         } else {
-                            popupNotificationsModel.expire(popupNotificationsModel.index(index, 0));
+                            if (notificationModelType === NotificationsModelType.WatchedNotificationsModel) {
+                                popupNotificationsModel.expire(model.notificationId);
+                            } else if (notificationModelType === NotificationsModelType.NotificationsModel) {
+                                popupNotificationsModel.expire(popupNotificationsModel.index(index, 0));
+                            }
                         }
                     }
 

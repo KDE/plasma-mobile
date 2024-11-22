@@ -45,8 +45,9 @@ Item {
         interval: Kirigami.Units.veryLongDuration
         running: true
         onTriggered: {
-            updateNotificationPopups();
             visible = true;
+            updateNotificationPopups();
+            checkActionDrawerOpened();
         }
     }
 
@@ -133,8 +134,9 @@ Item {
     // if the popup height ever changes, update the notification below wiht new height
     // also update the allowed touch area for the main window
     onPopupHeightChanged: {
-        if (popupIndex + 1 < popupCount) {
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationHeight = popupHeight;
+        let abovePopup = popupNotifications.objectAt(popupIndex + 1)
+        if (popupIndex + 1 < popupCount && abovePopup) {
+            abovePopup.aboveNotificationHeight = popupHeight;
         }
         if (popupNotifications.currentPopupIndex == notificationPopup.popupIndex && notificationItem.state == "open") {
             notificationPopup.updateTouchArea();
@@ -143,22 +145,25 @@ Item {
 
     // if the offset position need in the expanded drawer changes, update the notification below wiht new offset
     onFullOpenOffsetChanged: {
-        if (popupIndex + 1 < popupCount) {
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationFullOffset = fullOpenOffset;
+        let abovePopup = popupNotifications.objectAt(popupIndex + 1)
+        if (popupIndex + 1 < popupCount && abovePopup) {
+            abovePopup.aboveNotificationFullOffset = fullOpenOffset;
         }
     }
     // if the notification is being draged and is the current one
     // update 'currentDragOffset' so all notifications can easily access this value
     onDragOffsetChanged: {
+        let abovePopup = popupNotifications.objectAt(popupIndex + 1)
         if (popupNotifications.currentPopupIndex == notificationPopup.popupIndex) {
             popupNotifications.currentDragOffset = dragOffset;
         }
     }
     // if a new notification is added, update the above notification values need for the expanded drawer
     onPopupCountChanged: {
-        if (popupIndex + 1 < popupCount) {
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationHeight = popupHeight;
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationFullOffset = fullOpenOffset;
+        let abovePopup = popupNotifications.objectAt(popupIndex + 1)
+        if (popupIndex + 1 < abovePopup) {
+            abovePopup.aboveNotificationHeight = popupHeight;
+            abovePopup.aboveNotificationFullOffset = fullOpenOffset;
         }
     }
     // update the current popup index value if the index ever changes.
@@ -201,14 +206,10 @@ Item {
         return model.timeout;
     }
 
-    Component.onCompleted: checkActionDrawerOpened()
-
-    // check if the action drawer is opened, and if so, close the popup with scale
+    // check if the action drawer is opened and the popup is fully created
+    // if so, close the popup with a scale effect
     function checkActionDrawerOpened() {
-        if (isActionDrawerOpen) {
-            if (popupNotifications.currentPopupIndex == notificationPopup.popupIndex) {
-                notificationPopup.setInputTransparent();
-            }
+        if (isActionDrawerOpen && popupNotifications.objectAt(popupIndex)) {
             notificationPopup.expired();
             keyboardInteractivity = LayerShell.Window.KeyboardInteractivityNone;
             notificationItem.state = "closeWithScale";
