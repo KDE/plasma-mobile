@@ -33,8 +33,9 @@ QtObject {
         showDismissed: false
         blacklistedDesktopEntries: notificationSettings.popupBlacklistedApplications
         blacklistedNotifyRcNames: notificationSettings.popupBlacklistedServices
-        whitelistedDesktopEntries: []
-        whitelistedNotifyRcNames: []
+        whitelistedDesktopEntries: notificationProvider.inhibited ? notificationSettings.doNotDisturbPopupWhitelistedApplications : []
+        whitelistedNotifyRcNames: notificationProvider.inhibited ? notificationSettings.doNotDisturbPopupWhitelistedServices : []
+
         showJobs: notificationSettings.jobsInNotifications
         sortMode: NotificationManager.Notifications.SortByTypeAndUrgency
         sortOrder: Qt.DescendingOrder
