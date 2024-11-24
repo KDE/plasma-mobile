@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-08-03 11:55+0200\n"
+"PO-Revision-Date: 2024-11-23 14:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "Nie znaleziono nazwy strumienia"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Przestaw pokazywanie strumieni dźwięku"
+msgstr "ustawienia strumieni dźwiękowych"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -162,11 +161,10 @@ msgid "Open audio settings"
 msgstr "Otwórz ustawienia dźwięku"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Poszukaj..."
+msgstr "Poszukaj…"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
