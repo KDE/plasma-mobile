@@ -10,7 +10,6 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
-import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.nanoshell 2.0 as NanoShell
 import org.kde.plasma.private.mobileshell as MobileShell
@@ -153,7 +152,7 @@ Item {
 
     function cancelAnimations() {
         root.state = "";
-     }
+    }
 
     function open() {
         cancelAnimations();
@@ -273,34 +272,14 @@ Item {
         mode: MobileShell.SwipeArea.VerticalOnly
         anchors.fill: parent
 
-
-        function startSwipeWithPoint(point) {
+        function startSwipe() {
             root.cancelAnimations();
             root.dragging = true;
 
             // Immediately open action drawer if we interact with it and it's already open
             // This allows us to have 2 quick flicks from minimized -> expanded
-            if (root.intendedToBeVisible && !root.opened) {
+            if (root.visible && !root.opened) {
                 root.opened = true;
-            }
-
-            // if the user swiped from the top left, otherwise it's from the top right
-            if (!root.intendedToBeVisible) {
-                if (point.x < root.width / 2) {
-                    root.openToPinnedMode = ShellSettings.Settings.actionDrawerTopLeftMode == ShellSettings.Settings.Pinned;
-                } else {
-                    root.openToPinnedMode = ShellSettings.Settings.actionDrawerTopRightMode == ShellSettings.Settings.Pinned;
-                }
-
-                if (root.intendedToBeVisible) {
-                    // ensure the action drawer state is consistent
-                    root.closeImmediately();
-                }
-
-                actionDrawer.offset = 0;
-                actionDrawer.oldOffset = 0;
-
-                intendedToBeVisible = true;
             }
         }
 
@@ -313,7 +292,7 @@ Item {
             root.offset += deltaY;
         }
 
-        onSwipeStarted: (point) => startSwipeWithPoint(point)
+        onSwipeStarted: startSwipe()
         onSwipeEnded: endSwipe()
         onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
 
@@ -324,8 +303,6 @@ Item {
         ContentContainer {
             id: contentContainer
             anchors.fill: parent
-
-            opacity: root.opened || swipeArea.moving || drawerAnimation.running ||  root.offset > 0 || root.intendedToBeVisible ? 1 : 0
 
             actionDrawer: root
             quickSettingsModel: root.quickSettingsModel

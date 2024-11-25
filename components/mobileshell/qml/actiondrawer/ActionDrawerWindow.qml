@@ -33,27 +33,20 @@ Window {
      * The ActionDrawer component.
      */
     property alias actionDrawer: drawer
-    property alias intendedToBeVisible: drawer.intendedToBeVisible
     property alias state: drawer.state
 
-    visible: true
+    visible: drawer.intendedToBeVisible
 
     color: "transparent"
 
-    Component.onCompleted: updateTouchArea()
+    // set input to transparent when closing to prevent window from taking unwanted touch inputs
+    onStateChanged: ShellUtil.setInputTransparent(window, state == "close")
 
-    function updateTouchArea() {
-        if (state != "" && state != "close") {
+    onVisibleChanged: {
+        if (visible) {
             window.raise();
-            ShellUtil.setInputRegion(window, Qt.rect(0, 0, 0, 0));
-        } else {
-            ShellUtil.setInputRegion(window, Qt.rect(0, 0, window.width, MobileShell.Constants.topPanelHeight));
         }
     }
-
-    onWidthChanged:  updateTouchArea()
-    onIntendedToBeVisibleChanged: updateTouchArea()
-    onStateChanged: updateTouchArea()
 
     onActiveChanged: {
         if (!active) {

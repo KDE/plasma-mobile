@@ -14,23 +14,38 @@ QtObject {
     // Set it to Plasmoid.containment.screenGeometry in a plasmoid to accomplish this.
     property alias screenGeometry: tasksModel.screenGeometry
 
+    property bool isCurrentWindowFullscreen: __internal.count > 0 && visibleWindowsModel.currentFullscreen && !WindowPlugin.WindowUtil.isShowingDesktop
+
     readonly property bool showingWindow: __internal.count > 0 && !WindowPlugin.WindowUtil.isShowingDesktop
     readonly property int windowCount: __internal.count
 
     property var __internal: KItemModels.KSortFilterProxyModel {
-        id: visibleMaximizedWindowsModel
-        filterRoleName: 'IsMinimized'
-        filterString: 'false'
-        sourceModel: TaskManager.TasksModel {
+        id: visibleWindowsModel
+        sourceModel: taskModel
+        filterRowCallback: (sourceRow, sourceParent) => {
+            const task = sourceModel.index(sourceRow, 0, sourceParent);
+            let isFullScreen = sourceModel.data(task, TaskManager.AbstractTasksModel.IsFullScreen);
+            let isMaximized = sourceModel.data(task, TaskManager.AbstractTasksModel.IsMaximized);
+            if (sourceRow == 0) {
+                visibleWindowsModel.currentFullscreen = isFullScreen;
+            }
+            return isFullScreen || isMaximized;
+        }
+
+        property bool currentFullscreen: false
+
+        property var taskModel: TaskManager.TasksModel {
             id: tasksModel
             filterByVirtualDesktop: true
             filterByActivity: true
-            filterNotMaximized: true
+            filterMinimized: true
             filterByScreen: true
             filterHidden: true
 
             virtualDesktop: virtualDesktopInfo.currentDesktop
             activity: activityInfo.currentActivity
+
+            sortMode: TaskManager.TasksModel.SortLastActivated
 
             groupMode: TaskManager.TasksModel.GroupDisabled
         }

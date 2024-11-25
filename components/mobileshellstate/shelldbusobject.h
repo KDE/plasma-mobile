@@ -28,6 +28,7 @@ public:
 Q_SIGNALS:
     Q_SCRIPTABLE void doNotDisturbChanged();
     Q_SCRIPTABLE void isActionDrawerOpenChanged();
+    Q_SCRIPTABLE void panelStateChanged();
     Q_SCRIPTABLE void isTaskSwitcherVisibleChanged();
     Q_SCRIPTABLE void openActionDrawerRequested();
     Q_SCRIPTABLE void closeActionDrawerRequested();
@@ -43,6 +44,10 @@ public Q_SLOTS:
     // TODO: Account for multiple action drawers?
     Q_SCRIPTABLE bool isActionDrawerOpen();
     Q_SCRIPTABLE void setIsActionDrawerOpen(bool value);
+
+    Q_SCRIPTABLE QString panelState();
+    Q_SCRIPTABLE void setPanelState(QString state);
+
 
     Q_SCRIPTABLE bool isTaskSwitcherVisible();
     Q_SCRIPTABLE void setIsTaskSwitcherVisible(bool value);
@@ -64,6 +69,8 @@ private:
     bool m_doNotDisturb{false};
     bool m_isActionDrawerOpen{false};
     bool m_isTaskSwitcherVisible{false};
+
+    QString m_panelState{};
 
     StartupFeedbackModel *m_startupFeedbackModel{nullptr};
 };

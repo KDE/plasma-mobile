@@ -29,6 +29,7 @@ ShellDBusClient::ShellDBusClient(QObject *parent)
 
 void ShellDBusClient::connectSignals()
 {
+    connect(m_interface, &OrgKdePlasmashellInterface::panelStateChanged, this, &ShellDBusClient::updatePanelState);
     connect(m_interface, &OrgKdePlasmashellInterface::isActionDrawerOpenChanged, this, &ShellDBusClient::updateIsActionDrawerOpen);
     connect(m_interface, &OrgKdePlasmashellInterface::doNotDisturbChanged, this, &ShellDBusClient::updateDoNotDisturb);
     connect(m_interface, &OrgKdePlasmashellInterface::isTaskSwitcherVisibleChanged, this, &ShellDBusClient::updateIsTaskSwitcherVisible);
@@ -45,6 +46,16 @@ void ShellDBusClient::connectSignals()
     updateIsActionDrawerOpen();
     updateDoNotDisturb();
     updateIsTaskSwitcherVisible();
+}
+
+QString ShellDBusClient::panelState() const
+{
+    return m_panelState;
+}
+
+void ShellDBusClient::setPanelState(QString state)
+{
+    m_interface->setPanelState(state);
 }
 
 bool ShellDBusClient::doNotDisturb() const
@@ -111,6 +122,18 @@ void ShellDBusClient::resetHomeScreenPosition()
 void ShellDBusClient::showVolumeOSD()
 {
     m_interface->showVolumeOSD();
+}
+
+void ShellDBusClient::updatePanelState()
+{
+    auto reply = m_interface->panelState();
+    auto watcher = new QDBusPendingCallWatcher(reply, this);
+
+    QObject::connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](auto watcher) {
+        QDBusPendingReply<QString> reply = *watcher;
+        m_panelState = reply.argumentAt<0>();
+        Q_EMIT panelStateChanged();
+    });
 }
 
 void ShellDBusClient::updateDoNotDisturb()

@@ -19,6 +19,7 @@ class ShellDBusClient : public QObject
     Q_PROPERTY(bool doNotDisturb READ doNotDisturb WRITE setDoNotDisturb NOTIFY doNotDisturbChanged)
     Q_PROPERTY(bool isActionDrawerOpen READ isActionDrawerOpen WRITE setIsActionDrawerOpen NOTIFY isActionDrawerOpenChanged)
     Q_PROPERTY(bool isTaskSwitcherVisible READ isTaskSwitcherVisible NOTIFY isTaskSwitcherVisibleChanged)
+    Q_PROPERTY(QString panelState READ panelState WRITE setPanelState NOTIFY panelStateChanged)
 
 public:
     explicit ShellDBusClient(QObject *parent = nullptr);
@@ -30,6 +31,10 @@ public:
     void setIsActionDrawerOpen(bool value);
 
     bool isTaskSwitcherVisible() const;
+
+    QString panelState() const;
+    void setPanelState(QString state);
+
 
     Q_INVOKABLE void openActionDrawer();
     Q_INVOKABLE void closeActionDrawer();
@@ -43,6 +48,7 @@ public:
     Q_INVOKABLE void showVolumeOSD();
 
 Q_SIGNALS:
+    void panelStateChanged();
     void isActionDrawerOpenChanged();
     void doNotDisturbChanged();
     void isTaskSwitcherVisibleChanged();
@@ -57,12 +63,15 @@ private Q_SLOTS:
     void updateDoNotDisturb();
     void updateIsActionDrawerOpen();
     void updateIsTaskSwitcherVisible();
+    void updatePanelState();
 
 private:
     void connectSignals();
 
     OrgKdePlasmashellInterface *m_interface;
     QDBusServiceWatcher *m_watcher;
+
+    QString m_panelState = "default";
 
     bool m_doNotDisturb = false;
     bool m_isActionDrawerOpen = false;

@@ -39,6 +39,20 @@ void ShellDBusObject::setDoNotDisturb(bool value)
     }
 }
 
+QString ShellDBusObject::panelState()
+{
+    return m_panelState;
+}
+
+void ShellDBusObject::setPanelState(QString state)
+{
+    if (state != m_panelState) {
+        m_panelState = state;
+        Q_EMIT panelStateChanged();
+    }
+}
+
+
 bool ShellDBusObject::isActionDrawerOpen()
 {
     return m_isActionDrawerOpen;

@@ -44,6 +44,7 @@ public:
     bool pressed() const;
 
     Q_INVOKABLE void setSkipSwipeThreshold(bool value);
+    Q_INVOKABLE void resetSwipe();
 
 Q_SIGNALS:
     void modeChanged();
@@ -81,8 +82,6 @@ private:
     void handlePressEvent(QPointerEvent *event, QPointF point);
     void handleReleaseEvent(QPointerEvent *event, QPointF point);
     void handleMoveEvent(QPointerEvent *event, QPointF point);
-
-    void resetSwipe();
 
     Mode m_mode = Mode::BothAxis;
     bool m_interactive = true;

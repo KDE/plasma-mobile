@@ -15,6 +15,7 @@
 #include <KConfigWatcher>
 #include <KIO/ApplicationLauncherJob>
 #include <KSharedConfig>
+#include <LayerShellQt/Window>
 
 /**
  * Miscellaneous class to put utility functions used in the shell.
@@ -70,6 +71,11 @@ public:
      * Set window input to be transparent.
      */
     Q_INVOKABLE void setInputTransparent(QQuickWindow *window, bool transparent);
+
+    /**
+     * Set the window layer
+     */
+    Q_INVOKABLE void setWindowLayer(QQuickWindow *window, LayerShellQt::Window::Layer layer);
 
     /**
      * Sets a region where inputs will get registered on a window.
