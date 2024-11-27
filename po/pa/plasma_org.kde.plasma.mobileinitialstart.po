@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-11 00:41+0000\n"
+"POT-Creation-Date: 2024-11-27 00:42+0000\n"
 "PO-Revision-Date: 2023-12-24 09:06-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -33,8 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "ਸੰਰਚਨਾ ਬਦਲਣ ਤੋਂ ਬਿਨਾਂ ਸ਼ੁਰੂਆਤੀ ਸਹਾਇਕ ਖੋਲ੍ਹਦਾ ਹੈ"
 
 #: main.cpp:36
-#, kde-format
-msgid "© 2023 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2023 KDE Community"
+msgid "© 2024 KDE Community"
 msgstr "© 2023 ਕੇਡੀਈ ਕਮਿਊਨਟੀ"
 
 #: main.cpp:37

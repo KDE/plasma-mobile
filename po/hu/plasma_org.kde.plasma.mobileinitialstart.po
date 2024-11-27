@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-11 00:41+0000\n"
+"POT-Creation-Date: 2024-11-27 00:42+0000\n"
 "PO-Revision-Date: 2023-12-17 21:46+0100\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -33,8 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Megnyitja az első indítás varázslót a beállítások módosítása nélkül"
 
 #: main.cpp:36
-#, kde-format
-msgid "© 2023 KDE Community"
+#, fuzzy, kde-format
+#| msgid "© 2023 KDE Community"
+msgid "© 2024 KDE Community"
 msgstr "© A KDE Közösség, 2023."
 
 #: main.cpp:37
