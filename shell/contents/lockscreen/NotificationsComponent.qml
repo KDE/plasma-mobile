@@ -20,12 +20,15 @@ Loader {
     property real rightMargin: 0
     property real topMargin: 0
     property real bottomMargin: 0
+    property real maxHeight: 0
     readonly property bool notificationsShown: item && item.notificationsList.hasNotifications
 
     property var notificationsList: item ? item.notificationsList : null
 
     signal passwordRequested()
 
+    Layout.maximumHeight: Math.min(column.implicitHeight + topMargin + bottomMargin, maxHeight - bottomMargin)
+    height: Layout.maximumHeight
     // perform delayed loading of notifications
     active: false
     Timer {
@@ -52,34 +55,54 @@ Loader {
 
     sourceComponent: Item {
         clip: true
-
         property alias notificationsList: notificationsList
+        property alias column: column
 
-        Item {
-            anchors.fill: parent
-            anchors.topMargin: root.topMargin
-            anchors.bottomMargin: root.bottomMargin
-            anchors.leftMargin: root.leftMargin
-            anchors.rightMargin: root.rightMargin
+        MobileShell.Flickable {
+            id: notifications
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+                topMargin: root.topMargin
+                leftMargin: root.leftMargin
+                rightMargin: root.rightMargin
+            }
+
+            height: root.topMargin + root.height + root.bottomMargin
+            interactive: root.maxHeight < column.implicitHeight
+
+            contentHeight: root.topMargin + column.implicitHeight + root.bottomMargin + Kirigami.Units.gridUnit
+            boundsBehavior: Flickable.DragAndOvershootBounds
+
+            clip: true
 
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 
-            MobileShell.NotificationsWidget {
-                id: notificationsList
-                anchors.fill: parent
+            ColumnLayout {
+                id: column
+                spacing: 10
+                width: parent.width
 
-                historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
-                actionsRequireUnlock: true
-                historyModel: root.notificationsModel
-                notificationSettings: root.notificationSettings
-                inLockscreen: true
+                Item {}
+                MobileShell.NotificationsWidget {
+                    id: notificationsList
+                    Layout.preferredHeight: notificationsList.listHeight
+                    Layout.fillWidth: true
 
-                property bool requestNotificationAction: false
+                    historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
+                    actionsRequireUnlock: true
+                    historyModel: root.notificationsModel
+                    notificationSettings: root.notificationSettings
+                    inLockscreen: true
 
-                onUnlockRequested: {
-                    requestNotificationAction = true;
-                    root.passwordRequested();
+                    property bool requestNotificationAction: false
+
+                    onUnlockRequested: {
+                        requestNotificationAction = true;
+                        root.passwordRequested();
+                    }
                 }
             }
         }

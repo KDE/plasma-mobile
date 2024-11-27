@@ -13,15 +13,10 @@ import org.kde.plasma.private.mobileshell as MobileShell
 Item {
     id: root
 
-    required property var lockScreenState
+    readonly property int topMargin: verticalLayout.height + verticalLayout.anchors.topMargin + anchors.topMargin
+    readonly property int leftMargin: leftLayout.width + leftLayout.anchors.leftMargin
+
     required property bool isVertical
-
-    property var notificationsModel: []
-    property bool notificationsShown: false
-
-    property real fullHeight
-
-    signal passwordRequested()
 
     // Vertical layout
     ColumnLayout {
@@ -29,13 +24,14 @@ Item {
         visible: root.isVertical
         spacing: 0
 
-        // Center clock when no notifications are shown, otherwise move the clock upward
-        anchors.topMargin: Kirigami.Units.gridUnit * 3.5
-        anchors.bottomMargin: Kirigami.Units.gridUnit * 2
-        anchors.fill: parent
+        anchors {
+            topMargin: Kirigami.Units.gridUnit * 3.5
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
 
         LayoutItemProxy { target: clockAndMediaWidget }
-        LayoutItemProxy { target: notificationComponent }
     }
 
     // Horizontal layout (landscape on smaller devices)
@@ -55,19 +51,6 @@ Item {
             }
 
             LayoutItemProxy { target: clockAndMediaWidget }
-        }
-
-        ColumnLayout {
-            id: rightLayout
-            anchors {
-                top: parent.top
-                bottom: parent.bottom
-                left: leftLayout.right
-                right: parent.right
-                rightMargin: Kirigami.Units.gridUnit
-            }
-
-            LayoutItemProxy { target: notificationComponent }
         }
     }
 
@@ -91,24 +74,5 @@ Item {
             Layout.leftMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
             Layout.rightMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
         }
-    }
-
-    NotificationsComponent {
-        id: notificationComponent
-        lockScreenState: root.lockScreenState
-        notificationsModel: root.notificationsModel
-
-        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-        Layout.fillHeight: true
-        Layout.fillWidth: true
-        Layout.maximumWidth: Kirigami.Units.gridUnit * (25 + 2) // clip margins
-
-        leftMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        bottomMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        topMargin: Kirigami.Units.gridUnit
-
-        onPasswordRequested: root.passwordRequested()
-        onNotificationsShownChanged: root.notificationsShown = notificationsShown
     }
 }

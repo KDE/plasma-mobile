@@ -29,7 +29,7 @@ Item {
     readonly property bool isWidescreen: root.height < 720 && (root.height < root.width * 0.75)
     property bool notificationsShown: false
 
-    property var passwordBar: flickableLoader.item ? flickableLoader.item.passwordBar : null
+    property var passwordBar: flickableLoader.item ? flickableLoader.item.flickable.passwordBar : null
 
     Component.onCompleted: {
         forceActiveFocus();
@@ -39,7 +39,7 @@ Item {
     Keys.onPressed: (event) => {
         if (flickableLoader.item) {
             root.lockScreenState.isKeyboardMode = true;
-            flickableLoader.item.goToOpenPosition();
+            flickableLoader.item.flickable.goToOpenPosition();
             passwordBar.textField.forceActiveFocus();
 
             passwordBar.keyPress(event.text);
@@ -62,7 +62,7 @@ Item {
 
         sourceComponent: WallpaperBlur {
             source: wallpaper
-            opacity: flickableLoader.item ? flickableLoader.item.openFactor : 0
+            opacity: flickableLoader.item ? flickableLoader.item.flickable.openFactor : 0
         }
     }
 
@@ -72,7 +72,7 @@ Item {
         // Ensure keypad is opened when password is updated (ex. keyboard)
         function onPasswordChanged() {
             if (root.lockScreenState.password !== "" && flickableLoader.item) {
-                flickableLoader.item.goToOpenPosition();
+                flickableLoader.item.flickable.goToOpenPosition();
             }
         }
     }
@@ -84,7 +84,7 @@ Item {
         onDpmsTurnedOff: (screen) => {
             if (screen.name === Screen.name) {
                 if (flickableLoader.item) {
-                    flickableLoader.item.goToClosePosition();
+                    flickableLoader.item.flickable.goToClosePosition();
                 }
                 lockScreenState.resetPassword();
             }
@@ -101,7 +101,7 @@ Item {
             z: 1
             anchors.fill: parent
             statusBarHeight: MobileShell.Constants.topPanelHeight
-            openFactor: flickableLoader.item ? flickableLoader.item.openFactor : 0
+            openFactor: flickableLoader.item ? flickableLoader.item.flickable.openFactor : 0
             notificationsModel: root.notifModel
             onPasswordRequested: root.askPassword()
         }
@@ -144,103 +144,134 @@ Item {
             }
 
             // Container for lockscreen contents
-            sourceComponent: FlickContainer {
-                id: flickable
-                property alias passwordBar: keypad.passwordBar
+            sourceComponent: Item {
+                id: item
+                property alias flickable: flickable
+                property alias topMargin: lockScreenContent.topMargin
+                property alias leftMargin: lockScreenContent.leftMargin
+                FlickContainer {
+                    id: flickable
+                    anchors.fill: parent
+                    property alias passwordBar: keypad.passwordBar
 
-                // Speed up animation when passwordless
-                animationDuration: root.lockScreenState.canBeUnlocked ? 400 : 800
+                    // Speed up animation when passwordless
+                    animationDuration: root.lockScreenState.canBeUnlocked ? 400 : 800
 
-                // Distance to swipe to fully open keypad
-                keypadHeight: Kirigami.Units.gridUnit * 20
+                    // Distance to swipe to fully open keypad
+                    keypadHeight: Kirigami.Units.gridUnit * 20
 
-                Component.onCompleted: {
-                    // Go to closed position when loaded
-                    flickable.position = 0;
-                    flickable.goToClosePosition();
-                }
-
-                // Unlock lockscreen if it's already unlocked and keypad is opened
-                onOpened: {
-                    if (root.lockScreenState.canBeUnlocked) {
-                        Qt.quit();
+                    Component.onCompleted: {
+                        // Go to closed position when loaded
+                        flickable.position = 0;
+                        flickable.goToClosePosition();
                     }
-                }
 
-                // Unlock lockscreen if it's already unlocked and keypad is open
-                Connections {
-                    target: root.lockScreenState
-                    function onCanBeUnlockedChanged() {
-                        if (root.lockScreenState.canBeUnlocked && flickable.openFactor > 0.8) {
+                    // Unlock lockscreen if it's already unlocked and keypad is opened
+                    onOpened: {
+                        if (root.lockScreenState.canBeUnlocked) {
                             Qt.quit();
                         }
                     }
-                }
 
-                // Clear entered password after closing keypad
-                onOpenFactorChanged: {
-                    if (flickable.openFactor < 0.1 && !flickable.movingUp) {
-                        root.passwordBar.clear();
+                    // Unlock lockscreen if it's already unlocked and keypad is open
+                    Connections {
+                        target: root.lockScreenState
+                        function onCanBeUnlockedChanged() {
+                            if (root.lockScreenState.canBeUnlocked && flickable.openFactor > 0.8) {
+                                Qt.quit();
+                            }
+                        }
+                    }
+
+                    // Clear entered password after closing keypad
+                    onOpenFactorChanged: {
+                        if (flickable.openFactor < 0.1 && !flickable.movingUp) {
+                            root.passwordBar.clear();
+                        }
+                    }
+
+                    LockScreenContent {
+                        id: lockScreenContent
+
+                        isVertical: !root.isWidescreen
+                        opacity: Math.max(0, 1 - flickable.openFactor * 2)
+                        transform: [
+                            Scale {
+                                origin.x: lockScreenContent.width / 2
+                                origin.y: lockScreenContent.height / 2
+                                yScale: 1 - (flickable.openFactor * 2) * 0.1
+                                xScale: 1 - (flickable.openFactor * 2) * 0.1
+                            }
+                        ]
+
+                        anchors {
+                            topMargin: headerBar.statusBarHeight
+                            top: parent.top
+                            bottom: parent.bottom
+                            left: parent.left
+                            right: parent.right
+                        }
+                    }
+
+                    // scroll up icon
+                    BottomIconIndicator {
+                        id: scrollUpIconLoader
+                        lockScreenState: root.lockScreenState
+                        opacity: Math.max(0, 1 - flickable.openFactor * 2)
+
+                        anchors {
+                            bottom: parent.bottom
+                            bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.1
+                            horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+
+                    Rectangle {
+                        id: keypadScrim
+                        anchors.fill: parent
+                        visible: opacity > 0
+                        opacity: flickable.openFactor
+                        color: Qt.rgba(0, 0, 0, 0.5)
+                    }
+
+                    Keypad {
+                        id: keypad
+                        visible: !root.lockScreenState.canBeUnlocked // don't show for passwordless login
+                        anchors.fill: parent
+                        openProgress: flickable.openFactor
+                        lockScreenState: root.lockScreenState
+
+                        // only show in last 50% of anim
+                        opacity: (flickable.openFactor - 0.5) * 2
+                        transform: Translate { y: (flickable.keypadHeight - flickable.position) * 0.1 }
                     }
                 }
 
-                LockScreenContent {
-                    id: lockScreenContent
+                NotificationsContent {
+                    id: notificationsCentent
 
                     isVertical: !root.isWidescreen
                     opacity: Math.max(0, 1 - flickable.openFactor * 2)
+                    topMargin: item.topMargin
+                    leftMargin: item.leftMargin
                     transform: [
                         Scale {
-                            origin.x: lockScreenContent.width / 2
-                            origin.y: lockScreenContent.height / 2
+                            origin.x: notificationsCentent.width / 2
+                            origin.y: notificationsCentent.height / 2
                             yScale: 1 - (flickable.openFactor * 2) * 0.1
                             xScale: 1 - (flickable.openFactor * 2) * 0.1
                         }
                     ]
-
-                    fullHeight: root.height
 
                     lockScreenState: root.lockScreenState
                     notificationsModel: root.notifModel
                     onNotificationsShownChanged: root.notificationsShown = notificationsShown
                     onPasswordRequested: flickable.goToOpenPosition()
 
-                    anchors.topMargin: headerBar.statusBarHeight
-                    anchors.top: parent.top
-                    anchors.bottom: parent.bottom
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                }
+                    readonly property bool onKeypad: flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false
+                    z: onKeypad ? -1 : 0
 
-                // scroll up icon
-                BottomIconIndicator {
-                    id: scrollUpIconLoader
-                    lockScreenState: root.lockScreenState
-                    opacity: Math.max(0, 1 - flickable.openFactor * 2)
-
-                    anchors.bottom: parent.bottom
-                    anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.1
-                    anchors.horizontalCenter: parent.horizontalCenter
-                }
-
-                Rectangle {
-                    id: keypadScrim
                     anchors.fill: parent
-                    visible: opacity > 0
-                    opacity: flickable.openFactor
-                    color: Qt.rgba(0, 0, 0, 0.5)
-                }
-
-                Keypad {
-                    id: keypad
-                    visible: !root.lockScreenState.canBeUnlocked // don't show for passwordless login
-                    anchors.fill: parent
-                    openProgress: flickable.openFactor
-                    lockScreenState: root.lockScreenState
-
-                    // only show in last 50% of anim
-                    opacity: (flickable.openFactor - 0.5) * 2
-                    transform: Translate { y: (flickable.keypadHeight - flickable.position) * 0.1 }
                 }
             }
         }

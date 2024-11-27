@@ -38,7 +38,7 @@ Item {
         color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
                         Kirigami.Theme.backgroundColor.g,
                         Kirigami.Theme.backgroundColor.b,
-                        (root.actionDrawer.mode == ActionDrawer.Portrait || notificationWidget.hasNotifications) ? 0.95 : 0.9)
+                        0.95)
         Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutQuad } }
         opacity: Math.max(0, Math.min(brightnessPressedValue, actionDrawer.offset / root.minimizedQuickSettingsOffset))
     }
@@ -69,7 +69,6 @@ Item {
             quickSettings: root.quickSettings
             statusBar: root.statusBar
             mediaControlsWidget: root.mediaControlsWidget
-            notificationsWidget: root.notificationsWidget
         }
     }
 
@@ -83,7 +82,6 @@ Item {
             quickSettings: root.quickSettings
             statusBar: root.statusBar
             mediaControlsWidget: root.mediaControlsWidget
-            notificationsWidget: root.notificationsWidget
         }
     }
 
@@ -119,26 +117,5 @@ Item {
         inActionDrawer: true
 
         opacity: brightnessPressedValue
-    }
-
-    property MobileShell.NotificationsWidget notificationsWidget: MobileShell.NotificationsWidget {
-        id: notificationWidget
-        historyModel: root.actionDrawer.notificationModel
-        historyModelType: root.actionDrawer.notificationModelType
-        notificationSettings: root.actionDrawer.notificationSettings
-        actionsRequireUnlock: root.actionDrawer.restrictedPermissions
-        onUnlockRequested: root.actionDrawer.permissionsRequested()
-
-        opacity: brightnessPressedValue
-
-        Connections {
-            target: root.actionDrawer
-
-            function onRunPendingNotificationAction() {
-                notificationWidget.runPendingAction();
-            }
-        }
-
-        onBackgroundClicked: root.actionDrawer.close();
     }
 }

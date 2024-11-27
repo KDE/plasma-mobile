@@ -65,6 +65,8 @@ Item {
         WatchedNotificationsModel // used on the lockscreen
     }
 
+    readonly property int listHeight: list.height
+
     /**
      * Signal emitted when authentication is requested for an action.
      * Listeners should call runPendingAction() if authentication is successful.
@@ -139,6 +141,7 @@ Item {
         id: list
         model: historyModel
 
+        interactive: false
         clip: true
 
         currentIndex: 0
@@ -147,11 +150,8 @@ Item {
 
         readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
 
-        // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
-        readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + spacing >= root.height
-
         bottomMargin: spacing
-        height: count === 0 ? 0 : (listOverflowing ? root.height - toolButtons.height : contentItem.childrenRect.height + bottomMargin)
+        height: contentItem.childrenRect.height + bottomMargin
 
         anchors {
             top: parent.top
@@ -331,60 +331,6 @@ Item {
                         }
                     }
                 }
-            }
-        }
-    }
-
-    Item {
-        id: toolButtons
-        height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
-
-        // do not show on lockscreen
-        visible: !root.actionsRequireUnlock
-
-        anchors {
-            top: list.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        Rectangle {
-            id: spacer
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            visible: list.listOverflowing
-            height: 1
-            opacity: 0.25
-            color: Kirigami.Theme.textColor
-        }
-
-        RowLayout {
-            id: toolLayout
-
-            anchors {
-                top: spacer.bottom
-                right: parent.right
-                left: parent.left
-                leftMargin: Kirigami.Units.largeSpacing
-                rightMargin: Kirigami.Units.largeSpacing
-                topMargin: list.spacing
-                bottomMargin: list.spacing
-            }
-
-            PlasmaComponents3.ToolButton {
-                id: clearButton
-
-                Layout.alignment: Qt.AlignCenter
-
-                visible: hasNotifications
-
-                font.bold: true
-                font.pointSize: Kirigami.Theme.smallFont.pointSize
-
-                icon.name: "edit-clear-history"
-                text: i18n("Clear All Notifications")
-                onClicked: clearHistory()
             }
         }
     }
