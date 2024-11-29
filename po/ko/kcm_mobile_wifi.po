@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-08-21 00:30+0200\n"
+"PO-Revision-Date: 2024-11-29 00:11+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -38,8 +38,7 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Saved networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
 msgstr "저장된 네트워크"
@@ -65,8 +64,7 @@ msgid "Save"
 msgstr "저장"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "일반"
@@ -82,17 +80,15 @@ msgid "Hidden Network"
 msgstr "숨은 네트워크"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "보안"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "보안 종류:"
+msgstr "보안 종류"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -130,10 +126,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "암호:"
+msgstr "암호"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -166,8 +161,7 @@ msgid "Protected EAP"
 msgstr "보호된 EAP(PEAP)"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "IP 설정"

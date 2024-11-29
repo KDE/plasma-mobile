@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-08-21 00:31+0200\n"
+"PO-Revision-Date: 2024-11-29 00:11+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -43,8 +43,7 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr "이 설정을 사용하지 않으면 애니메이션을 최소화합니다."
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "상태 표시줄"
 
@@ -62,42 +61,41 @@ msgstr "이 옵션을 사용하면 상태 표시줄의 시계 옆에 날짜를 �
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "매우 작게"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "작게"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "보통"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "크게"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "매우 크게"
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "상태 표시줄"
+msgstr "상태 표시줄 크기"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "위쪽 패널의 크기입니다(다시 시작 필요)."
 
 #: ui/main.qml:109
 #, kde-format

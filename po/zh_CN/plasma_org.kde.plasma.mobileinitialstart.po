@@ -36,7 +36,7 @@ msgstr "打开初始化向导，但不修改配置"
 #: main.cpp:36
 #, kde-format
 msgid "© 2024 KDE Community"
-msgstr ""
+msgstr "© 2024 KDE Community"
 
 #: main.cpp:37
 #, kde-format
