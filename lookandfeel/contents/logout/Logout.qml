@@ -15,6 +15,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.coreaddons 1.0 as KCoreAddons
 
 import org.kde.plasma.private.sessions 2.0
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
     id: root
@@ -156,6 +157,7 @@ Item {
             ActionButton {
                 iconSource: "system-log-out"
                 text: i18nd("plasma_lookandfeel_org.kde.lookandfeel", "Log Out")
+                visible: ShellSettings.Settings.allowLogout
                 onClicked: {
                     closeAnim.closeToBlack = true;
                     closeAnim.execute(root.logoutRequested);

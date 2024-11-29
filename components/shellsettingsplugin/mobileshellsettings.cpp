@@ -39,6 +39,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
+            Q_EMIT allowLogoutChanged();
         }
     });
 }
@@ -216,4 +217,10 @@ void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabl
 
     // TODO check for error response
     QDBusConnection::sessionBus().asyncCall(message);
+}
+
+bool MobileShellSettings::allowLogout() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("allowLogout", true);
 }

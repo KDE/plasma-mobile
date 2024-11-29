@@ -45,6 +45,9 @@ class MobileShellSettings : public QObject
     // convergence mode
     Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
 
+    // logout dialog
+    Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
+
 public:
     MobileShellSettings(QObject *parent = nullptr);
 
@@ -190,6 +193,11 @@ public:
      */
     void setConvergenceModeEnabled(bool enabled);
 
+    /**
+     * Whether logout button is shown in the logout/shutdown dialog.
+     */
+    bool allowLogout() const;
+
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
@@ -203,6 +211,7 @@ Q_SIGNALS:
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
     void convergenceModeEnabledChanged();
+    void allowLogoutChanged();
 
 private:
     void updateNavigationBarsInPlasma(bool navigationPanelEnabled);
