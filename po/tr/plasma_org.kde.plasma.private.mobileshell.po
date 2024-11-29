@@ -150,10 +150,9 @@ msgid "Stream name not found"
 msgstr "Akış adı bulunamadı"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Ses akışlarını göstermeyi aç/kapat"
+msgstr "Ses akışlarını yapılandır"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -161,8 +160,7 @@ msgid "Open audio settings"
 msgstr "Ses ayarlarını aç"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Ara…"
@@ -404,22 +402,3 @@ msgstr "%1 Daha Çok Göster"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Tüm Bildirimleri Temizle"
-
-#~ msgid "100%"
-#~ msgstr "%​100"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%​%1"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Ses Ayarları"
-
-#~ msgid "Audio"
-#~ msgstr "Ses"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Ses Düzeyini Artır"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Ses Düzeyini Azalt"
