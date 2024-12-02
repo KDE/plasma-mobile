@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-phone-components package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2021, 2023, 2024.
+# SPDX-FileCopyrightText: 2018, 2021, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-02-14 19:13+0200\n"
+"PO-Revision-Date: 2024-10-18 11:50+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -23,11 +23,10 @@ msgid "Folder"
 msgstr "Kansio"
 
 #: package/contents/ui/AppDrawerHeader.qml:52
-#, fuzzy, kde-format
-#| msgid "Applications"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "Sovellukset"
+msgstr "Etsi sovelluksia…"
 
 #: package/contents/ui/FavouritesBar.qml:145
 #: package/contents/ui/FavouritesBar.qml:219

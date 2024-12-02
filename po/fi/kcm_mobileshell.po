@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Tommi Nieminen <translator@legisign.org>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2023-11-22 21:29+0200\n"
+"PO-Revision-Date: 2024-11-07 17:20+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -47,17 +47,17 @@ msgstr ""
 #: ui/main.qml:53
 #, kde-format
 msgid "Status bar"
-msgstr ""
+msgstr "Tilarivi"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "Päiväys tilarivillä"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "Jos käytössä, tilarivillä kellon vieressä näytetään päiväys."
 
 #: ui/main.qml:71
 #, kde-format
