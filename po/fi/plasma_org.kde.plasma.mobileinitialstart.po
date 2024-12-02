@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Tommi Nieminen <translator@legisign.org>, 2023.
+# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2023-12-11 18:26+0200\n"
+"PO-Revision-Date: 2024-10-18 11:50+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -232,16 +232,14 @@ msgid "Password…"
 msgstr "Salasana…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "<b>%1</b><br/>– tervetuloa"
+msgstr "Tervetuloa<br/><b>Plasma Mobileen</b>"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "<b>%1</b><br/>– tervetuloa"
+msgstr "Moottorina<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format

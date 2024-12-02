@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
-# Tommi Nieminen <translator@legisign.org>, 2021, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-02-02 13:05+0200\n"
+"PO-Revision-Date: 2024-10-18 11:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -281,13 +281,12 @@ msgstr "SIM on läsnä muttei käytettävissä."
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Modeemin kyvyt ovat tuntemattomia."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM-korttia ei ole lukittu"
+msgstr "eSIMiä ei ole valmisteltu."
 
 #: modemdetails.cpp:316
 #, kde-format
@@ -539,10 +538,9 @@ msgid "Edit APN"
 msgstr "Muokkaa APN:ää"
 
 #: ui/EditProfilePage.qml:15
-#, fuzzy, kde-format
-#| msgid "New PIN"
+#, kde-format
 msgid "New APN"
-msgstr "Uusi PIN"
+msgstr "Uusi APN"
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
@@ -597,7 +595,7 @@ msgstr "Vain 2G"
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "Tallenna profiili"
 
 #: ui/main.qml:52
 #, kde-format

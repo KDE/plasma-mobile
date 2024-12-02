@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2019, 2020, 2021, 2024.
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-01-29 21:57+0200\n"
+"PO-Revision-Date: 2024-10-18 11:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -65,8 +65,7 @@ msgid "Save"
 msgstr "Tallenna"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "Perusasetukset"
@@ -82,17 +81,15 @@ msgid "Hidden Network"
 msgstr "Piiloverkko"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
-msgstr "Turvallisuus"
+msgstr "Tietoturva"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "Turvallisuustyyppi:"
+msgstr "Suojaustyyppi"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -120,22 +117,19 @@ msgid "WPA/WPA2 Enterprise"
 msgstr "WPA/WPA2 Enterprise"
 
 #: ui/NetworkSettings.qml:101
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Personal"
+#, kde-format
 msgid "WPA3 Personal"
-msgstr "WPA/WPA2 Personal"
+msgstr "WPA3 Personal"
 
 #: ui/NetworkSettings.qml:102
-#, fuzzy, kde-format
-#| msgid "WPA/WPA2 Enterprise"
+#, kde-format
 msgid "WPA3 Enterprise"
-msgstr "WPA/WPA2 Enterprise"
+msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "Salasana:"
+msgstr "Salasana"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -168,8 +162,7 @@ msgid "Protected EAP"
 msgstr "Suojattu EAP"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "IP-asetukset"

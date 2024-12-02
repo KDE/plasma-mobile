@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_lookandfeel_org.kde.breeze.mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-12-02 00:44+0000\n"
 "PO-Revision-Date: 2023-03-12 08:39+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -15,22 +15,22 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: contents/logout/Logout.qml:140
+#: contents/logout/Logout.qml:141
 #, kde-format
 msgid "Restart"
 msgstr "Reštart"
 
-#: contents/logout/Logout.qml:149
+#: contents/logout/Logout.qml:150
 #, kde-format
 msgid "Shut Down"
 msgstr "Vypnúť"
 
-#: contents/logout/Logout.qml:158
+#: contents/logout/Logout.qml:159
 #, kde-format
 msgid "Log Out"
 msgstr "Odhlásiť sa"
 
-#: contents/logout/Logout.qml:173
+#: contents/logout/Logout.qml:175
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušiť"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-12-02 00:44+0000\n"
 "PO-Revision-Date: 2023-03-04 15:44+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,22 +19,22 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: contents/logout/Logout.qml:140
+#: contents/logout/Logout.qml:141
 #, kde-format
 msgid "Restart"
 msgstr "Start på nytt"
 
-#: contents/logout/Logout.qml:149
+#: contents/logout/Logout.qml:150
 #, kde-format
 msgid "Shut Down"
 msgstr "Slå av"
 
-#: contents/logout/Logout.qml:158
+#: contents/logout/Logout.qml:159
 #, kde-format
 msgid "Log Out"
 msgstr "Logg ut"
 
-#: contents/logout/Logout.qml:173
+#: contents/logout/Logout.qml:175
 #, kde-format
 msgid "Cancel"
 msgstr "Avbryt"

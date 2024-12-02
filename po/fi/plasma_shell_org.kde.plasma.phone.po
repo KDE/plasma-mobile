@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Tommi Nieminen <translator@legisign.org>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:42+0000\n"
-"PO-Revision-Date: 2022-07-03 22:58+0300\n"
+"PO-Revision-Date: 2024-10-18 11:52+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Kopioi leikepöydälle"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "Näytä virheen yksityiskohdat…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
-msgstr ""
+msgstr "Avaa %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -76,15 +76,15 @@ msgstr "Taustakuva"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "Anna PIN"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "Väärä PIN"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "Paneelin kohdistuksen osoitin"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "Vaihda taustakuva"

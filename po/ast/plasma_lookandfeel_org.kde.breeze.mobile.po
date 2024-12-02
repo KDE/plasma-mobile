@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-25 02:00+0000\n"
+"POT-Creation-Date: 2024-12-02 00:44+0000\n"
 "PO-Revision-Date: 2023-05-03 23:31+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -17,22 +17,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: contents/logout/Logout.qml:140
+#: contents/logout/Logout.qml:141
 #, kde-format
 msgid "Restart"
 msgstr ""
 
-#: contents/logout/Logout.qml:149
+#: contents/logout/Logout.qml:150
 #, kde-format
 msgid "Shut Down"
 msgstr ""
 
-#: contents/logout/Logout.qml:158
+#: contents/logout/Logout.qml:159
 #, kde-format
 msgid "Log Out"
 msgstr ""
 
-#: contents/logout/Logout.qml:173
+#: contents/logout/Logout.qml:175
 #, kde-format
 msgid "Cancel"
 msgstr ""
