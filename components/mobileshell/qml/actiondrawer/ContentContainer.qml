@@ -6,6 +6,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.2
 
+import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.kirigami as Kirigami
@@ -32,59 +33,171 @@ Item {
 
     readonly property alias brightnessPressedValue: quickSettings.brightnessPressedValue
 
-    // Background color
-    Rectangle {
-        anchors.fill: parent
-        color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
-                        Kirigami.Theme.backgroundColor.g,
-                        Kirigami.Theme.backgroundColor.b,
-                        0.95)
-        Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutQuad } }
-        opacity: Math.max(0, Math.min(brightnessPressedValue, actionDrawer.offset / root.minimizedQuickSettingsOffset))
-    }
-
-    // Layout that switches between landscape and portrait mode
-    Loader {
-        id: contentContainerLoader
+    MobileShell.SwipeArea {
+        id: swipeArea
+        mode: MobileShell.SwipeArea.VerticalOnly
         anchors.fill: parent
 
-        readonly property real minimizedQuickSettingsOffset: item ? item.minimizedQuickSettingsOffset : 0
-        readonly property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
 
-        readonly property real offsetDist: root.actionDrawer.offset - minimizedQuickSettingsOffset
-        readonly property real totalOffsetDist: maximizedQuickSettingsOffset - minimizedQuickSettingsOffset
-        readonly property real minimizedToFullProgress: root.actionDrawer.openToPinnedMode ? (root.actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
+        function startSwipe() {
+            actionDrawer.cancelAnimations();
+            actionDrawer.dragging = true;
 
-        asynchronous: true
-        sourceComponent: root.actionDrawer.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
-    }
+            // Immediately open action drawer if we interact with it and it's already open
+            // This allows us to have 2 quick flicks from minimized -> expanded
+            if (actionDrawer.visible && !actionDrawer.opened) {
+                actionDrawer.opened = true;
+            }
+        }
 
-    Component {
-        id: portraitContentContainer
-        PortraitContentContainer {
-            actionDrawer: root.actionDrawer
-            width: root.width
-            height: root.height
+        function endSwipe() {
+            actionDrawer.dragging = false;
+            actionDrawer.updateState();
+        }
 
-            quickSettings: root.quickSettings
-            statusBar: root.statusBar
-            mediaControlsWidget: root.mediaControlsWidget
+        function moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
+            actionDrawer.offset += deltaY;
+        }
+
+        onSwipeStarted: startSwipe()
+        onSwipeEnded: endSwipe()
+        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
+
+        onTouchpadScrollStarted: startSwipe()
+        onTouchpadScrollEnded: endSwipe()
+        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
+
+        Item {
+            anchors.fill: parent
+
+            // Background color
+            Rectangle {
+                anchors.fill: parent
+                color: Qt.rgba(Kirigami.Theme.backgroundColor.r,
+                               Kirigami.Theme.backgroundColor.g,
+                               Kirigami.Theme.backgroundColor.b,
+                               0.95)
+                Behavior on color { ColorAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.OutQuad } }
+                opacity: Math.max(0, Math.min(brightnessPressedValue, actionDrawer.offset / root.minimizedQuickSettingsOffset))
+            }
+
+            // Layout that switches between landscape and portrait mode
+            Loader {
+                id: contentContainerLoader
+                anchors.fill: parent
+
+                readonly property real minimizedQuickSettingsOffset: item ? item.minimizedQuickSettingsOffset : 0
+                readonly property real maximizedQuickSettingsOffset: item ? item.maximizedQuickSettingsOffset : 0
+
+                readonly property real offsetDist: root.actionDrawer.offset - minimizedQuickSettingsOffset
+                readonly property real totalOffsetDist: maximizedQuickSettingsOffset - minimizedQuickSettingsOffset
+                readonly property real minimizedToFullProgress: root.actionDrawer.openToPinnedMode ? (root.actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
+
+                asynchronous: true
+                sourceComponent: root.actionDrawer.mode == ActionDrawer.Portrait ? portraitContentContainer : landscapeContentContainer
+            }
+
+            Component {
+                id: portraitContentContainer
+                PortraitContentContainer {
+                    actionDrawer: root.actionDrawer
+                    width: root.width
+                    height: root.height
+
+                    quickSettings: root.quickSettings
+                    statusBar: root.statusBar
+                    mediaControlsWidget: root.mediaControlsWidget
+                }
+            }
+
+            Component {
+                id: landscapeContentContainer
+                LandscapeContentContainer {
+                    actionDrawer: root.actionDrawer
+                    width: root.width
+                    height: root.height
+
+                    quickSettings: root.quickSettings
+                    statusBar: root.statusBar
+                }
+            }
+        }
+
+        Item {
+            id: toolButtons
+            height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
+
+            visible: actionDrawer.intendedToBeVisible
+            opacity: Math.max(0, Math.min(root.brightnessPressedValue, actionDrawer.offsetResistance / root.minimizedQuickSettingsOffset))
+
+            anchors {
+                topMargin: notificationDrawer.height
+                leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : 10
+                rightMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.notificationWidget.anchors.rightMargin + Kirigami.Units.gridUnit - notificationDrawer.anchors.leftMargin + 370
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
+            Rectangle {
+                id: spacer
+                anchors.left: parent.left
+                anchors.right: parent.right
+
+                visible: notificationDrawer.listOverflowing
+                height: 1
+                opacity: 0.25
+                color: Kirigami.Theme.textColor
+            }
+
+            RowLayout {
+                id: toolLayout
+
+                anchors {
+                    top: spacer.bottom
+                    right: parent.right
+                    left: parent.left
+                    leftMargin: Kirigami.Units.largeSpacing
+                    rightMargin: Kirigami.Units.largeSpacing
+                    topMargin: Kirigami.Units.largeSpacing
+                    bottomMargin: Kirigami.Units.largeSpacing
+                }
+
+                PlasmaComponents.ToolButton {
+                    id: clearButton
+
+                    Layout.alignment: Qt.AlignCenter
+
+                    visible: notificationDrawer.hasNotifications
+
+                    font.bold: true
+                    font.pointSize: Kirigami.Theme.smallFont.pointSize
+
+                    icon.name: "edit-clear-history"
+                    text: i18n("Clear All Notifications")
+                    onClicked: clearHistory()
+                }
+            }
         }
     }
 
-    Component {
-        id: landscapeContentContainer
-        LandscapeContentContainer {
-            actionDrawer: root.actionDrawer
-            width: root.width
-            height: root.height
+    NotificationDrawer {
+        id: notificationDrawer
 
-            quickSettings: root.quickSettings
-            statusBar: root.statusBar
-            mediaControlsWidget: root.mediaControlsWidget
+        swipeArea: swipeArea
+        actionDrawer: root.actionDrawer
+        mediaControlsWidget: root.mediaControlsWidget
+        contentContainer: root
+        opacity: Math.max(0, Math.min(root.brightnessPressedValue, actionDrawer.offsetResistance / root.minimizedQuickSettingsOffset))
+
+        anchors {
+            top: parent.top
+            left: parent.left
+            right: parent.right
+            rightMargin: root.actionDrawer.mode == ActionDrawer.Portrait ? 0 : 360
+            leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.minWidthHeight * 0.06
         }
     }
-
 
     // Components shared between the two layouts.
     // This allows us to avoid having to reload the components every time the screen size changes.
@@ -114,7 +227,7 @@ Item {
 
     property MobileShell.MediaControlsWidget mediaControlsWidget: MobileShell.MediaControlsWidget {
         id: mediaWidget
-        inActionDrawer: true
+        inActionDrawer: root.actionDrawer.mode == ActionDrawer.Portrait
 
         opacity: brightnessPressedValue
     }

@@ -67,7 +67,7 @@ Item {
         }
 
         // opacity gradient at grid edges
-        FlickableOpacityGradient {
+        MobileShell.FlickableOpacityGradient {
             anchors.fill: appDrawerGrid
             flickable: appDrawerGrid
         }

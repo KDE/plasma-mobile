@@ -54,6 +54,31 @@ Item {
     property bool actionsRequireUnlock: false
 
     /**
+     * the top paddding of the notification list
+     */
+    property int topPadding: 0
+
+    /**
+     * the bottom paddding of the notification list
+     */
+    property int bottomPadding: 0
+
+    /**
+     * the media controls widget
+     */
+    property var mediaControlsWidget
+
+    /**
+     * whether to show the media controls widget
+     */
+    property bool showMediaControlsWidget: false
+
+    /**
+     * give access to the list view outside of the notification widget
+     */
+    property alias listView: list
+
+    /**
      * Whether the widget has notifications.
      */
     readonly property bool hasNotifications: list.count > 0
@@ -64,8 +89,6 @@ Item {
         NotificationsModel, // used in the logged-in shell
         WatchedNotificationsModel // used on the lockscreen
     }
-
-    readonly property int listHeight: list.height
 
     /**
      * Signal emitted when authentication is requested for an action.
@@ -141,7 +164,6 @@ Item {
         id: list
         model: historyModel
 
-        interactive: false
         clip: true
 
         currentIndex: 0
@@ -150,8 +172,11 @@ Item {
 
         readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
 
+        // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
+        readonly property bool listOverflowing: contentItem.childrenRect.height + spacing >= root.height
+
         bottomMargin: spacing
-        height: contentItem.childrenRect.height + bottomMargin
+        height: count === 0 ? root.topPadding + (showMediaControlsWidget ? mediaControlsWidget.height : 0) : (listOverflowing ? root.height : contentItem.childrenRect.height + bottomMargin)
 
         anchors {
             top: parent.top
@@ -159,13 +184,43 @@ Item {
             right: parent.right
         }
 
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: Flickable.DragAndOvershootBounds
         spacing: Kirigami.Units.largeSpacing
 
         // TODO keyboard focus
         highlightMoveDuration: 0
         highlightResizeDuration: 0
         highlight: Item {}
+
+        Component {
+            id: headerComponent
+            Item {
+                width: parent.width
+
+                MobileShell.BaseItem {
+                    id: mediaControlsWidgetProxy
+
+                    contentItem: showMediaControlsWidget ? mediaControlsWidget : null
+                    y: root.topPadding - Kirigami.Units.largeSpacing
+
+                    width: parent.width - Kirigami.Units.gridUnit * 2
+                    anchors.left: parent.left
+                    anchors.leftMargin: Kirigami.Units.gridUnit
+                }
+            }
+        }
+
+        Component {
+            id: footerComponent
+            Item {
+                width: parent.width
+                height: root.bottomPadding
+            }
+        }
+
+        header: headerComponent
+
+        footer: footerComponent
 
         section {
             property: "isGroup"
@@ -252,10 +307,24 @@ Item {
 
             Component {
                 id: groupDelegate
-                NotificationGroupHeader {
-                    applicationName: model.applicationName
-                    applicationIconSource: model.applicationIconName
-                    originName: model.originName || ""
+                Column {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    height: headerSpace.height + groupHeader.height
+
+                    Item {
+                        id: headerSpace
+                        width: parent.width
+                        height: index == 0 ? root.topPadding + (showMediaControlsWidget ? mediaControlsWidget.height : 0) : 0
+                        visible: index == 0
+                    }
+
+                    NotificationGroupHeader {
+                        id: groupHeader
+                        applicationName: model.applicationName
+                        applicationIconSource: model.applicationIconName
+                        originName: model.originName || ""
+                    }
                 }
             }
 
@@ -265,7 +334,14 @@ Item {
                 Column {
                     spacing: Kirigami.Units.smallSpacing
 
-                    height: notificationItem.height + showMoreLoader.height
+                    height: headerSpace.height + notificationItem.height + showMoreLoader.height
+
+                    Item {
+                        id: headerSpace
+                        width: parent.width
+                        height: index == 0 ? root.topPadding + (showMediaControlsWidget ? mediaControlsWidget.height : 0) : 0
+                        visible: index == 0
+                    }
 
                     NotificationItem {
                         id: notificationItem

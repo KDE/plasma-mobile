@@ -268,8 +268,8 @@ Item {
                     onNotificationsShownChanged: root.notificationsShown = notificationsShown
                     onPasswordRequested: flickable.goToOpenPosition()
 
-                    readonly property bool onKeypad: flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false
-                    z: onKeypad ? -1 : 0
+                    onKeypad: flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false
+                    z: onKeypad || !listOverflowing ? -1 : 0
 
                     anchors.fill: parent
                 }

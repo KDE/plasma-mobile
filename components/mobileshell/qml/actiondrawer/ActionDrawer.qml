@@ -60,7 +60,7 @@ Item {
     property real offset: 0
 
     /**
-     * Same as the offset value except this adds a resistance value when it passes the open position of the current drawer state.
+     * Same as offset value except this adds a resistance value when it passes the open position of the current drawer state.
      */
     property real offsetResistance: 0
 
@@ -84,17 +84,6 @@ Item {
      * Direction the panel is currently moving in.
      */
     property int direction: MobileShell.Direction.None
-
-    /**
-     * The scroll position of the notification drawer
-     */
-    property alias notificationsScrollY: flickable.contentY
-
-    /**
-     * The bottom y position of the header content above the notifications
-     * Only applies to landscape mode.
-     */
-    property int landscapeHeaderY: 0
 
     /**
      * The mode of the action drawer (portrait or landscape).
@@ -294,167 +283,11 @@ Item {
         }
     }
 
-    readonly property alias brightnessPressedValue: contentContainer.brightnessPressedValue
-
-    MobileShell.SwipeArea {
-        id: swipeArea
-        mode: MobileShell.SwipeArea.VerticalOnly
+    ContentContainer {
+        id: contentContainer
         anchors.fill: parent
 
-        function startSwipe() {
-            root.cancelAnimations();
-            root.dragging = true;
-
-            // Immediately open action drawer if we interact with it and it's already open
-            // This allows us to have 2 quick flicks from minimized -> expanded
-            if (root.visible && !root.opened) {
-                root.opened = true;
-            }
-        }
-
-        function endSwipe() {
-            root.dragging = false;
-            root.updateState();
-        }
-
-        function moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
-            root.offset += deltaY;
-        }
-
-        onSwipeStarted: startSwipe()
-        onSwipeEnded: endSwipe()
-        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        onTouchpadScrollStarted: startSwipe()
-        onTouchpadScrollEnded: endSwipe()
-        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        ContentContainer {
-            id: contentContainer
-            anchors.fill: parent
-
-            actionDrawer: root
-            quickSettingsModel: root.quickSettingsModel
-        }
-
-        Item {
-            id: toolButtons
-            height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
-
-            visible: root.intendedToBeVisible
-            opacity: Math.max(0, Math.min(root.brightnessPressedValue, root.offsetResistance / contentContainer.minimizedQuickSettingsOffset))
-
-            anchors {
-                topMargin: root.mode == ActionDrawer.Landscape && flickable.interactive ? root.height - toolButtons.height : flickable.height + flickable.topMargin
-                leftMargin: root.mode == ActionDrawer.Portrait ? 0 : 10
-                rightMargin: root.mode == ActionDrawer.Portrait ? 0 : 360
-                top: parent.top
-                left: parent.left
-                right: parent.right
-            }
-
-            Rectangle {
-                id: spacer
-                anchors.left: parent.left
-                anchors.right: parent.right
-
-                visible: flickable.listOverflowing
-                height: 1
-                opacity: 0.25
-                color: Kirigami.Theme.textColor
-            }
-
-            RowLayout {
-                id: toolLayout
-
-                anchors {
-                    top: spacer.bottom
-                    right: parent.right
-                    left: parent.left
-                    leftMargin: Kirigami.Units.largeSpacing
-                    rightMargin: Kirigami.Units.largeSpacing
-                    topMargin: Kirigami.Units.largeSpacing
-                    bottomMargin: Kirigami.Units.largeSpacing
-                }
-
-                PlasmaComponents.ToolButton {
-                    id: clearButton
-
-                    Layout.alignment: Qt.AlignCenter
-
-                    visible: flickable.hasNotifications
-
-                    font.bold: true
-                    font.pointSize: Kirigami.Theme.smallFont.pointSize
-
-                    icon.name: "edit-clear-history"
-                    text: i18n("Clear All Notifications")
-                    onClicked: clearHistory()
-                }
-            }
-        }
-    }
-
-    MobileShell.Flickable {
-        id: flickable
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-            topMargin: flickable.topMargin
-            leftMargin: root.mode == ActionDrawer.Portrait ? 0 : Math.round(Math.min(root.width, root.height) * 0.06) - Kirigami.Units.gridUnit
-            rightMargin: root.mode == ActionDrawer.Portrait ? 0 : 360
-        }
-
-        height: Math.min(root.height - flickable.topMargin - toolButtons.height, column.implicitHeight)
-        property int topMargin: root.mode == ActionDrawer.Portrait ? root.offsetResistance + 1 : Math.max(Math.min(topPadding - contentY, topPadding), 0)
-        property int topPadding: root.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : root.landscapeHeaderY
-
-        contentHeight: column.implicitHeight + topPadding
-        boundsBehavior: Flickable.DragAndOvershootBounds
-
-        clip: true
-        visible: root.intendedToBeVisible
-        opacity: Math.max(0, Math.min(root.brightnessPressedValue, root.offsetResistance / contentContainer.minimizedQuickSettingsOffset))
-
-        readonly property bool hasNotifications: notificationWidget.hasNotifications
-        readonly property bool listOverflowing: {
-            let padding = root.mode == ActionDrawer.Portrait ? root.offsetResistance + 1 + Kirigami.Units.largeSpacing : topPadding
-            return column.implicitHeight + toolButtons.height > root.height - padding
-        }
-        onListOverflowingChanged: flickable.contentY = 0
-        interactive: listOverflowing && !root.dragging
-
-        Kirigami.Theme.colorSet: Kirigami.Theme.View
-        Kirigami.Theme.inherit: false
-
-        ColumnLayout {
-            id: column
-            width: parent.width
-
-            y: root.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : Math.max(Math.min(flickable.contentY, flickable.topPadding), 0)
-
-            MobileShell.NotificationsWidget {
-                id: notificationWidget
-                historyModel: root.notificationModel
-                historyModelType: root.notificationModelType
-                notificationSettings: root.notificationSettings
-                actionsRequireUnlock: root.restrictedPermissions
-                onUnlockRequested: root.permissionsRequested()
-
-                Connections {
-                    target: root
-
-                    function onRunPendingNotificationAction() {
-                        notificationWidget.runPendingAction();
-                    }
-                }
-
-                onBackgroundClicked: root.close();
-                Layout.maximumWidth: root.mode == ActionDrawer.Portrait ? -1 : Kirigami.Units.gridUnit * 25
-                Layout.preferredHeight: notificationWidget.listHeight
-                Layout.fillWidth: true
-            }
-        }
+        actionDrawer: root
+        quickSettingsModel: root.quickSettingsModel
     }
 }
