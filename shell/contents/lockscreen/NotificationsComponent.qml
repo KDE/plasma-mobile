@@ -20,15 +20,15 @@ Loader {
     property real rightMargin: 0
     property real topMargin: 0
     property real bottomMargin: 0
-    property real maxHeight: 0
     readonly property bool notificationsShown: item && item.notificationsList.hasNotifications
+    readonly property bool listOverflowing: item && item.notificationsList.listView.listOverflowing
+
+    property bool onKeypad: false
 
     property var notificationsList: item ? item.notificationsList : null
 
     signal passwordRequested()
 
-    Layout.maximumHeight: Math.min(column.implicitHeight + topMargin + bottomMargin, maxHeight - bottomMargin)
-    height: Layout.maximumHeight
     // perform delayed loading of notifications
     active: false
     Timer {
@@ -55,55 +55,45 @@ Loader {
 
     sourceComponent: Item {
         clip: true
+
         property alias notificationsList: notificationsList
-        property alias column: column
 
-        MobileShell.Flickable {
-            id: notifications
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                topMargin: root.topMargin
-                leftMargin: root.leftMargin
-                rightMargin: root.rightMargin
-            }
-
-            height: root.topMargin + root.height + root.bottomMargin
-            interactive: root.maxHeight < column.implicitHeight
-
-            contentHeight: root.topMargin + column.implicitHeight + root.bottomMargin + Kirigami.Units.gridUnit
-            boundsBehavior: Flickable.DragAndOvershootBounds
-
-            clip: true
+        Item {
+            anchors.fill: parent
+            anchors.topMargin: root.topMargin
+            anchors.bottomMargin: root.bottomMargin
+            anchors.leftMargin: root.leftMargin
+            anchors.rightMargin: root.rightMargin
 
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 
-            ColumnLayout {
-                id: column
-                spacing: 10
-                width: parent.width
+            MobileShell.NotificationsWidget {
+                id: notificationsList
+                anchors.fill: parent
+                opacity: 0
 
-                Item {}
-                MobileShell.NotificationsWidget {
-                    id: notificationsList
-                    Layout.preferredHeight: notificationsList.listHeight
-                    Layout.fillWidth: true
+                historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
+                actionsRequireUnlock: true
+                historyModel: root.notificationsModel
+                notificationSettings: root.notificationSettings
+                inLockscreen: true
+                topPadding: Kirigami.Units.gridUnit
+                bottomPadding: Kirigami.Units.gridUnit * 1.5
+                listView.interactive: !root.onKeypad && listView.listOverflowing
 
-                    historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
-                    actionsRequireUnlock: true
-                    historyModel: root.notificationsModel
-                    notificationSettings: root.notificationSettings
-                    inLockscreen: true
+                property bool requestNotificationAction: false
 
-                    property bool requestNotificationAction: false
-
-                    onUnlockRequested: {
-                        requestNotificationAction = true;
-                        root.passwordRequested();
-                    }
+                onUnlockRequested: {
+                    requestNotificationAction = true;
+                    root.passwordRequested();
                 }
+            }
+
+            // opacity gradient at flickable edges
+            MobileShell.FlickableOpacityGradient {
+                anchors.fill: notificationsList
+                flickable: notificationsList
             }
         }
     }

@@ -21,6 +21,10 @@ Item {
     property var notificationsModel: []
     property bool notificationsShown: false
 
+    readonly property bool listOverflowing: notificationComponent.listOverflowing
+
+    property bool onKeypad: false
+
     signal passwordRequested()
 
     // Vertical layout
@@ -66,9 +70,9 @@ Item {
 
         leftMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        bottomMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        topMargin: Kirigami.Units.gridUnit
-        maxHeight: root.isVertical ? verticalLayout.height : rightLayout.height
+        topMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
+        bottomMargin: 0
+        onKeypad: root.onKeypad
 
         onPasswordRequested: root.passwordRequested()
         onNotificationsShownChanged: root.notificationsShown = notificationsShown
