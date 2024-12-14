@@ -1,0 +1,201 @@
+# Sanskrit translations for plasma-mobile package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the plasma-mobile package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma-mobile\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ui/ConnectDialog.qml:57
+#, kde-format
+msgid "Invalid input."
+msgstr "अमान्य निवेशः।"
+
+#: ui/ConnectionItemDelegate.qml:125
+#, kde-format
+msgid "Connect to"
+msgstr "सम्बद्धं कुर्वन्तु"
+
+#: ui/main.qml:26
+#, kde-format
+msgid "Edit"
+msgstr "सम्पादन"
+
+#: ui/main.qml:87
+#, kde-format
+msgid "Wi-Fi"
+msgstr "वाई-फाई"
+
+#: ui/main.qml:98
+#, kde-format
+msgctxt "@title:group"
+msgid "Saved Networks"
+msgstr ""
+
+#: ui/main.qml:135
+#, kde-format
+msgid "Available Networks"
+msgstr "उपलब्धजालम्"
+
+#: ui/main.qml:169
+#, kde-format
+msgid "Add Custom Connection"
+msgstr "Custom Connection योजयन्तु"
+
+#: ui/NetworkSettings.qml:15
+#, kde-format
+msgid "Add New Connection"
+msgstr "New Connection योजयतु"
+
+#: ui/NetworkSettings.qml:36
+#, kde-format
+msgid "Save"
+msgstr "रक्ष्"
+
+#: ui/NetworkSettings.qml:52
+#, kde-format
+msgctxt "@title:group"
+msgid "General"
+msgstr ""
+
+#: ui/NetworkSettings.qml:58
+#, kde-format
+msgid "SSID"
+msgstr "SSID इति"
+
+#: ui/NetworkSettings.qml:73
+#, kde-format
+msgid "Hidden Network"
+msgstr "गुप्तजालम्"
+
+#: ui/NetworkSettings.qml:80
+#, kde-format
+msgctxt "@title:group"
+msgid "Security"
+msgstr ""
+
+#: ui/NetworkSettings.qml:87
+#, kde-format
+msgid "Security type"
+msgstr "सुरक्षाप्रकारः"
+
+#: ui/NetworkSettings.qml:96
+#, kde-format
+msgid "None"
+msgstr "न कश्चित्"
+
+#: ui/NetworkSettings.qml:97
+#, kde-format
+msgid "WEP Key"
+msgstr "WEP कुञ्जी"
+
+#: ui/NetworkSettings.qml:98
+#, kde-format
+msgid "Dynamic WEP"
+msgstr "गतिशील WEP"
+
+#: ui/NetworkSettings.qml:99
+#, kde-format
+msgid "WPA/WPA2 Personal"
+msgstr "WPA/WPA2 व्यक्तिगत"
+
+#: ui/NetworkSettings.qml:100
+#, kde-format
+msgid "WPA/WPA2 Enterprise"
+msgstr "WPA/WPA2 उद्यमः"
+
+#: ui/NetworkSettings.qml:101
+#, kde-format
+msgid "WPA3 Personal"
+msgstr "WPA3 व्यक्तिगत"
+
+#: ui/NetworkSettings.qml:102
+#, kde-format
+msgid "WPA3 Enterprise"
+msgstr "WPA3 उद्यम"
+
+#: ui/NetworkSettings.qml:140
+#, kde-format
+msgid "Password"
+msgstr "समाभाष्"
+
+#: ui/NetworkSettings.qml:156
+#, kde-format
+msgid "Authentication:"
+msgstr "प्रमाणीकरणम् : १."
+
+#: ui/NetworkSettings.qml:160
+#, kde-format
+msgid "TLS"
+msgstr "TLS"
+
+#: ui/NetworkSettings.qml:160
+#, kde-format
+msgid "LEAP"
+msgstr "प्लुति"
+
+#: ui/NetworkSettings.qml:160
+#, kde-format
+msgid "FAST"
+msgstr "उपवासः"
+
+#: ui/NetworkSettings.qml:161
+#, kde-format
+msgid "Tunneled TLS"
+msgstr "सुरंगयुक्त TLS"
+
+#: ui/NetworkSettings.qml:162
+#, kde-format
+msgid "Protected EAP"
+msgstr "संरक्षित ईएपी"
+
+#: ui/NetworkSettings.qml:173
+#, kde-format
+msgctxt "@title:group"
+msgid "IP Settings"
+msgstr ""
+
+#: ui/NetworkSettings.qml:180
+#, kde-format
+msgid "Automatic"
+msgstr "स्वतः"
+
+#: ui/NetworkSettings.qml:180
+#, kde-format
+msgid "Manual"
+msgstr "शास्त्र"
+
+#: ui/NetworkSettings.qml:196
+#, kde-format
+msgid "IP Address"
+msgstr "IP Address इति"
+
+#: ui/NetworkSettings.qml:214
+#, kde-format
+msgid "Gateway"
+msgstr "द्वारम्"
+
+#: ui/NetworkSettings.qml:232
+#, kde-format
+msgid "Network prefix length"
+msgstr "जाल उपसर्गदीर्घता"
+
+#: ui/NetworkSettings.qml:251
+#, kde-format
+msgid "DNS"
+msgstr "DNS"
+
+#: ui/PasswordField.qml:13
+#, kde-format
+msgid "Password…"
+msgstr "समाभाष्…"
