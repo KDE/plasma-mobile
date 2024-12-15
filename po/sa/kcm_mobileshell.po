@@ -60,31 +60,31 @@ msgstr "यदि चालू अस्ति तर्हि स्थित�
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "तुच्छ"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "लघु"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "सामान्य"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "बृहत्‌"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "अतीव विशालः"
 
 #: ui/main.qml:81
 #, kde-format
@@ -131,13 +131,13 @@ msgstr "क्रिया दराज"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "पिन मोड"
 
 #: ui/main.qml:149
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "विस्तारितः मोडः"
 
 #: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
@@ -168,13 +168,13 @@ msgstr "उपरि दक्षिणतः उद्घाटने मोड
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "गोपयतु"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "दर्शयतु"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format
@@ -211,19 +211,19 @@ msgstr "शंखस्पन्दनानि कियत् दीर्घ�
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr ""
+msgstr "दीर्घम्‌"
 
 #: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
-msgstr ""
+msgstr "मध्यम"
 
 #: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
-msgstr ""
+msgstr "वामनः"
 
 #: ui/VibrationForm.qml:68
 #, kde-format

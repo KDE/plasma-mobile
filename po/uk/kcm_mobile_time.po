@@ -1209,7 +1209,7 @@ msgstr "Кіншаса"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Kiritimati"
-msgstr "Кіріматі"
+msgstr "Кірітіматі"
 
 #: timezonesi18n.cpp:241
 #, kde-format

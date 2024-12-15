@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 20:20+0530\n"
+"PO-Revision-Date: 2024-12-14 01:12+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -44,7 +44,7 @@ msgstr "&प्रतिलिपि"
 #, kde-format
 msgctxt "@action:incontextmenu"
 msgid "Copy Location"
-msgstr ""
+msgstr "प्रतिलिपि स्थानम्"
 
 #: notifications/notificationfilemenu.cpp:176
 #, kde-format
@@ -95,7 +95,7 @@ msgstr "रिकार्डिंग स्ट्रीम्स"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2) २."
 
 #: qml/volumeosd/DeviceListItem.qml:34
 #, kde-format
@@ -121,7 +121,7 @@ msgstr "मूक"
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
-msgstr ""
+msgstr "%1 कृते आयतनं समायोजयन्तु"
 
 #: qml/volumeosd/ListItemBase.qml:246
 #, kde-format
@@ -133,7 +133,7 @@ msgstr "%1% २."
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr ""
+msgstr "१००% २."
 
 #: qml/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -144,7 +144,7 @@ msgstr "सूचना ध्वनयः"
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: qml/volumeosd/StreamListItem.qml:29
 #, kde-format
@@ -196,88 +196,88 @@ msgstr "अग्रिमः पटलः"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "लिङ्क पता प्रतिलिपि कुर्वन्तु"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr ""
+msgstr "प्रतिलिपि"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "All इति चिनोतु"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:58
 #, kde-format
 msgctxt "Reply to message"
 msgid "Reply"
-msgstr ""
+msgstr "उत्तरं"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:31
 #, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr ""
+msgstr "%1: १."
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
 msgctxt "How many bytes have been copied"
 msgid "%2 of %1"
-msgstr ""
+msgstr "%1 इत्यस्य %2"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:106
 #, kde-format
 msgctxt "How many files have been copied"
 msgid "%2 of %1 file"
 msgid_plural "%2 of %1 files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 सञ्चिकायाः %2"
+msgstr[1] "%1 सञ्चिकानां %2"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:109
 #, kde-format
 msgctxt "How many dirs have been copied"
 msgid "%2 of %1 folder"
 msgid_plural "%2 of %1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 पुटस्य %2"
+msgstr[1] "%1 पुटस्य %2"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:112
 #, kde-format
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 द्रव्यस्य %2"
+msgstr[1] "%1 द्रव्येषु %2"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 सञ्चिका"
+msgstr[1] "%1 सञ्चिकाः"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 पुटम्"
+msgstr[1] "%1 पुटम्"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 द्रव्यम्"
+msgstr[1] "%1 द्रव्यम्"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1/s"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
 #, kde-format
@@ -289,19 +289,19 @@ msgstr "%1% २."
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr ""
+msgstr "वर्णन"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
 #, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr ""
+msgstr "विराम"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
-msgstr ""
+msgstr "निरसयतु"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
@@ -318,25 +318,25 @@ msgstr "उद्घाटित"
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr ""
+msgstr "एकं उत्तरं टङ्कयन्तु..."
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Send"
-msgstr ""
+msgstr "प्रेषयतु"
 
 #: qml/widgets/notifications/NotificationsUtils.js:14
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr ""
+msgstr "%1 (विरामितः) २."
 
 #: qml/widgets/notifications/NotificationsUtils.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr ""
+msgstr "%1 (विफलम्) २."
 
 #: qml/widgets/notifications/NotificationsUtils.js:21
 #, kde-format
@@ -347,7 +347,7 @@ msgstr "Job Failed इति"
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
-msgstr ""
+msgstr "%1 (समाप्तम्) २."
 
 #: qml/widgets/notifications/NotificationsUtils.js:26
 #, kde-format
@@ -363,25 +363,25 @@ msgstr "अधुना"
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "%1m पूर्वम्"
 
 #: qml/widgets/notifications/NotificationsUtils.js:81
 #, kde-format
 msgctxt "seconds remaining, keep short"
 msgid "%1 s remaining"
-msgstr ""
+msgstr "%1 s अवशिष्टम्"
 
 #: qml/widgets/notifications/NotificationsUtils.js:84
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "%1म् अवशिष्टम्"
 
 #: qml/widgets/notifications/NotificationsUtils.js:87
 #, kde-format
 msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
-msgstr ""
+msgstr "%1ह अवशिष्टम्"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:179
 #, kde-format
@@ -392,7 +392,7 @@ msgstr "सूचनासेवा उपलब्धा नास्ति"
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
-msgstr ""
+msgstr "सूचनाः सम्प्रति '%1 %2' द्वारा प्रदत्ताः सन्ति ।"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:325
 #, kde-format
@@ -403,7 +403,7 @@ msgstr "न्यूनानि दर्शयतु"
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
-msgstr ""
+msgstr "%1 अधिकं दर्शयतु"
 
 #: qml/widgets/notifications/NotificationsWidget.qml:386
 #, kde-format

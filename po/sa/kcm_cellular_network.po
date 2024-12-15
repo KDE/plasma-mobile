@@ -640,8 +640,8 @@ msgstr "दत्तांशस्य उपयोगं पश्यन्त�
 #, kde-format
 msgid "SIM"
 msgid_plural "SIMs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "सिम्"
+msgstr[1] "सिम"
 
 #: ui/main.qml:143
 #, kde-format

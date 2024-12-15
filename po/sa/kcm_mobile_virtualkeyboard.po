@@ -40,7 +40,7 @@ msgstr "अत्र किमपि टङ्कयन्तु..."
 #, kde-format
 msgctxt "@title:group"
 msgid "Feedback"
-msgstr ""
+msgstr "स्पर्शावबोध"
 
 #: ui/main.qml:44
 #, kde-format
@@ -66,7 +66,7 @@ msgstr "कीलप्रेबेन स्पन्दनं कर्तव�
 #, kde-format
 msgctxt "@title:group"
 msgid "Text Correction"
-msgstr ""
+msgstr "पाठशुद्धिः"
 
 #: ui/main.qml:69
 #, kde-format

@@ -26,7 +26,7 @@ msgstr "प्रणाली सूचना"
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "प्रतिलिपि"
 
 #: ui/main.qml:47
 #, kde-format
@@ -42,7 +42,7 @@ msgstr "जालपुटम्"
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
-msgstr ""
+msgstr "तन्त्रांश"
 
 #: ui/main.qml:68
 #, kde-format
@@ -73,20 +73,20 @@ msgstr "ओएस प्रकार"
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
-msgstr ""
+msgstr "%1-बिट्"
 
 #: ui/main.qml:102
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
-msgstr ""
+msgstr "हार्डवेयर"
 
 #: ui/main.qml:107
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "संसाधकः"
+msgstr[1] "संसाधकाः"
 
 #: ui/main.qml:114
 #, kde-format
@@ -97,10 +97,10 @@ msgstr "स्मृति"
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
-msgstr ""
+msgstr "%1 RAM इत्यस्य"
 
 #: ui/main.qml:120
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
-msgstr ""
+msgstr "अज्ञात"

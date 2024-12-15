@@ -46,4 +46,4 @@ msgstr "अनुप्रयोगाः"
 #, kde-format
 msgctxt "Default application folder name."
 msgid "Folder"
-msgstr ""
+msgstr "फोल्डर"

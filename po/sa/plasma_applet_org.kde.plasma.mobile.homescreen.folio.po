@@ -25,7 +25,7 @@ msgstr "फोल्डर"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr ""
+msgstr "अनुप्रयोगाः अन्वेषणं कुर्वन्तु..."
 
 #: package/contents/ui/FavouritesBar.qml:145
 #: package/contents/ui/FavouritesBar.qml:219
@@ -125,13 +125,13 @@ msgstr "प्रियतम बार"
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr ""
+msgstr "वॉलपेपर"
 
 #: package/contents/ui/settings/SettingsWindow.qml:248
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr ""
+msgstr "वॉलपेपर धुंधला प्रभावं दर्शयतु"
 
 #: package/contents/ui/settings/SettingsWindow.qml:259
 #, kde-format
@@ -142,7 +142,7 @@ msgstr "सामान्य"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr ""
+msgstr "होमस्क्रीन् अधिकानि वॉलपेपरविकल्पानि च मध्ये स्विच कुर्वन्तु"
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
