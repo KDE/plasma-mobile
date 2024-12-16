@@ -22,8 +22,27 @@ FormCard.AbstractFormDelegate {
                                                      SecurityType == PlasmaNM.Enums.WpaPsk ||
                                                      SecurityType == PlasmaNM.Enums.Wpa2Psk ||
                                                      SecurityType == PlasmaNM.Enums.SAE)
+    property real rxSpeed: 0
+    property real txSpeed: 0
 
     verticalPadding: Kirigami.Units.largeSpacing
+
+    Timer {
+        id: timer
+        repeat: true
+        interval: 2000
+        running: ConnectionState === PlasmaNM.Enums.Activated
+        triggeredOnStart: true
+        // property int can overflow with the amount of bytes.
+        property double prevRxBytes: 0
+        property double prevTxBytes: 0
+        onTriggered: {
+            rxSpeed = prevRxBytes === 0 ? 0 : (RxBytes - prevRxBytes) * 1000 / interval
+            txSpeed = prevTxBytes === 0 ? 0 : (TxBytes - prevTxBytes) * 1000 / interval
+            prevRxBytes = RxBytes
+            prevTxBytes = TxBytes
+        }
+    }
 
     contentItem: RowLayout {
         spacing: 0
@@ -118,8 +137,11 @@ FormCard.AbstractFormDelegate {
                 } else {
                     handler.activateConnection(ConnectionPath, DevicePath, SpecificPath);
                 }
-            } else{
-                //show popup
+            } else {
+                kcm.push("ConnectionInfo.qml", {details: ConnectionDetails,
+                                                connectionName: ItemUniqueName,
+                                                delegate: root})
+
             }
         } else if (predictableWirelessPassword) {
             connectionDialog.headingText = i18n("Connect to") + " " + ItemUniqueName;
