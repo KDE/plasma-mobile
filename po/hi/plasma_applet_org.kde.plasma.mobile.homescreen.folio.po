@@ -1,4 +1,4 @@
-# Sanskrit translations for plasma-mobile package.
+# Hindi translations for plasma-mobile package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 # Kali <EMAIL@ADDRESS>, 2024.
@@ -8,25 +8,24 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-10 00:42+0000\n"
-"PO-Revision-Date: 2024-12-13 19:10+0530\n"
+"PO-Revision-Date: 2024-12-15 15:58+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
-"Language: sa\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
 
 #: dragstate.cpp:14
 #, kde-format
 msgid "Folder"
-msgstr "फोल्डर"
+msgstr ""
 
 #: package/contents/ui/AppDrawerHeader.qml:52
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search applications…"
-msgstr "अनुप्रयोगाः अन्वेषणं कुर्वन्तु..."
+msgstr ""
 
 #: package/contents/ui/FavouritesBar.qml:145
 #: package/contents/ui/FavouritesBar.qml:219
@@ -35,148 +34,148 @@ msgstr "अनुप्रयोगाः अन्वेषणं कुर्�
 #: package/contents/ui/HomeScreenPage.qml:298
 #, kde-format
 msgid "Remove"
-msgstr "अपाकरोति"
+msgstr ""
 
 #: package/contents/ui/settings/AppletListViewer.qml:57
 #, kde-format
 msgid "Widgets"
-msgstr "विजेट्"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:80
 #, kde-format
 msgid "Homescreen Settings"
-msgstr "होमस्क्रीन् सेटिंग्स्"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:89
 #, kde-format
 msgid "Icons"
-msgstr "चिह्नानि"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:121
 #, kde-format
 msgid "Number of rows"
-msgstr "पङ्क्तयः संख्या"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:122
 #, kde-format
 msgid "Number of columns"
-msgstr "स्तम्भानां संख्या"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:126
 #, kde-format
 msgid "Size of icons on homescreen"
-msgstr "होमस्क्रीन् मध्ये चिह्नानां आकारः"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:165
 #, kde-format
 msgid "The rows and columns will swap depending on the screen rotation."
-msgstr "पङ्क्तयः स्तम्भाः च पटलस्य परिभ्रमणस्य आधारेण स्वैपं करिष्यन्ति ।"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:169
 #, kde-format
 msgid "Homescreen"
-msgstr "होमस्क्रीन्"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:175
 #, kde-format
 msgid "Show labels on homescreen"
-msgstr "होमस्क्रीन् मध्ये लेबल् दर्शयतु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:188
 #, kde-format
 msgid "Show labels in favorites bar"
-msgstr "प्रियपट्टिकायां लेबल् दर्शयतु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Page transition effect"
-msgstr "पृष्ठ संक्रमण प्रभाव"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:207
 #, kde-format
 msgid "Slide"
-msgstr "च्यु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:208
 #, kde-format
 msgid "Cube"
-msgstr "घन"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:209
 #, kde-format
 msgid "Fade"
-msgstr "म्लै"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:210
 #, kde-format
 msgid "Stack"
-msgstr "स्त्राव"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:211
 #, kde-format
 msgid "Rotation"
-msgstr "परिभ्रमणम्"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:226
 #, kde-format
 msgid "Favorites Bar"
-msgstr "प्रियतम बार"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:242
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
-msgstr "वॉलपेपर"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:248
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
-msgstr "वॉलपेपर धुंधला प्रभावं दर्शयतु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:259
 #, kde-format
 msgid "General"
-msgstr "सामान्य"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:266
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
-msgstr "होमस्क्रीन् अधिकानि वॉलपेपरविकल्पानि च मध्ये स्विच कुर्वन्तु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:293
 #, kde-format
 msgid "Export layout to"
-msgstr "विन्यासं निर्यातयन्तु to"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:312
 #, kde-format
 msgid "Import layout from"
-msgstr "तः विन्यासम् आयातयन्तु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:323
 #: package/contents/ui/settings/SettingsWindow.qml:330
 #, kde-format
 msgid "Export Status"
-msgstr "निर्यातस्य स्थितिः"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:324
 #, kde-format
 msgid "Failed to export to %1"
-msgstr "%1 प्रति निर्यातं कर्तुं असफलम्"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:331
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
-msgstr "होमस्क्रीन् विन्यासः %1 मध्ये सफलतया निर्यातितः"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Confirm Import"
-msgstr "आयातस्य पुष्टिं कुर्वन्तु"
+msgstr ""
 
 #: package/contents/ui/settings/SettingsWindow.qml:338
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
-msgstr "एतेन भवतः विद्यमानं होमस्क्रीन् विन्यासः अधिलिखितः भविष्यति!"
+msgstr ""
