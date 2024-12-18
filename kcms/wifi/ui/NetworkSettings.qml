@@ -93,12 +93,34 @@ Kirigami.ScrollablePage {
                     }
                     function load() {
                         clear();
-                        append({ "text": i18n("None"), "type": PlasmaNM.Enums.NoneSecurity });
+                        append({ "text": i18n("None"), "type": PlasmaNM.Enums.NoneSecurity }); // OK
+                        append({ "text": i18n("WPA/WPA2 Personal"), "type": PlasmaNM.Enums.Wpa2Psk }); // OK
+                        append({ "text": i18n("WPA3 Personal"), "type": PlasmaNM.Enums.SAE }); // OK
+                        // See https://networkmanager.dev/docs/api/latest/settings-802-11-wireless-security.html
+                        switch (securitySettings["key-mgmt"]) {
+                            case "none":
+                                securityCombobox.currentIndex = 0;
+                                break;
+                            case "wpa-psk":
+                                securityCombobox.currentIndex = 1;
+                                break;
+                            case "sae":
+                                securityCombobox.currentIndex = 2;
+                                break;
+                            default:
+                                securityCombobox.currentIndex = 0;
+                                break;
+                        }
+
+                        return;
+
+                        // This is the full combo
+                        append({ "text": i18n("None"), "type": PlasmaNM.Enums.NoneSecurity }); // OK
                         append({ "text": i18n("WEP Key"), "type": PlasmaNM.Enums.StaticWep });
                         append({ "text": i18n("Dynamic WEP"), "type": PlasmaNM.Enums.DynamicWep });
-                        append({ "text": i18n("WPA/WPA2 Personal"), "type": PlasmaNM.Enums.Wpa2Psk });
+                        append({ "text": i18n("WPA/WPA2 Personal"), "type": PlasmaNM.Enums.Wpa2Psk }); // OK
                         append({ "text": i18n("WPA/WPA2 Enterprise"), "type": PlasmaNM.Enums.Wpa2Eap });
-                        append({ "text": i18n("WPA3 Personal"), "type": PlasmaNM.Enums.SAE });
+                        append({ "text": i18n("WPA3 Personal"), "type": PlasmaNM.Enums.SAE }); // OK
                         append({ "text": i18n("WPA3 Enterprise"), "type": PlasmaNM.Enums.Wpa3SuiteB192 });
 
                         // See https://networkmanager.dev/docs/api/latest/settings-802-11-wireless-security.html
@@ -155,15 +177,17 @@ Kirigami.ScrollablePage {
                 id: authComboBox
                 text: i18n("Authentication:")
                 currentIndex: 0
-                visible: securityCombobox.currentIndex === 2
-                        || securityCombobox.currentIndex === 4
+                visible: false
+                // visible: securityCombobox.currentIndex === 2
+                //         || securityCombobox.currentIndex === 4
                 model: [i18n("TLS"), i18n("LEAP"), i18n("FAST"), i18n(
                         "Tunneled TLS"), i18n(
                         "Protected EAP")] // more - SIM, AKA, PWD ?
             }
 
             Controls.Label {
-                visible: ![0, 3, 5].includes(securityCombobox.currentIndex) // only supports WPA PSK, SAE
+                //visible: ![0, 3, 5].includes(securityCombobox.currentIndex) // only supports WPA PSK, SAE
+                visible: false
                 text: "----Not yet implemented----"
                 color: "red"
             }
@@ -275,9 +299,10 @@ Kirigami.ScrollablePage {
         securitySettings["type"] = securityTypesModel.get(securityCombobox.currentIndex).type
         settings["802-11-wireless-security"] = securitySettings
 
-        if (path)
+        if (path) {
             kcm.updateConnectionFromQML(path, settings)
-        else
+        } else {
             kcm.addConnectionFromQML(settings)
+        }
     }
 }
