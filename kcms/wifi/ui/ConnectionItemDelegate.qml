@@ -37,6 +37,7 @@ FormCard.AbstractFormDelegate {
         property double prevRxBytes: 0
         property double prevTxBytes: 0
         onTriggered: {
+            console.log(ItemUniqueName + " adding data rx: " + RxBytes + " tx:" + TxBytes)
             rxSpeed = prevRxBytes === 0 ? 0 : (RxBytes - prevRxBytes) * 1000 / interval
             txSpeed = prevTxBytes === 0 ? 0 : (TxBytes - prevTxBytes) * 1000 / interval
             prevRxBytes = RxBytes

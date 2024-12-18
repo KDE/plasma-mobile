@@ -30,6 +30,10 @@ Kirigami.ScrollablePage {
                 width: parent.width
                 downloadSpeed: delegate.rxSpeed
                 uploadSpeed: delegate.txSpeed
+
+                onDownloadSpeedChanged: {
+                    console.log("dl speed changed in graph:" + downloadSpeed)
+                }
             }
             Controls.Label {
                 font: Kirigami.Theme.smallFont
@@ -60,5 +64,10 @@ Kirigami.ScrollablePage {
                 }
             }
         }
+    }
+
+    Component.onCompleted: {
+        console.log("ConnectionInfo.delegate: " + connectionInfo.delegate)
+
     }
 }
