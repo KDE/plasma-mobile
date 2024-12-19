@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 02:38+0000\n"
-"PO-Revision-Date: 2024-08-02 09:45+0200\n"
+"PO-Revision-Date: 2024-12-18 18:23+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -150,10 +150,9 @@ msgid "Stream name not found"
 msgstr "Nomine de fluxo (stream) non trovate"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Commuta monstrar fluxo audio"
+msgstr "configura fluxos audio"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -161,11 +160,10 @@ msgid "Open audio settings"
 msgstr "Aperi preferentias de audio"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Cerca…"
+msgstr "Cerca..."
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
