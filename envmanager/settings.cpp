@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "settings.h"
@@ -24,6 +25,7 @@ Settings::Settings(QObject *parent)
     , m_kwinrcConfig{KSharedConfig::openConfig(u"kwinrc"_s, KConfig::SimpleConfig)}
     , m_appBlacklistConfig{KSharedConfig::openConfig(u"applications-blacklistrc"_s, KConfig::SimpleConfig)}
     , m_kdeglobalsConfig{KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig)}
+    , m_ksmServerConfig{KSharedConfig::openConfig(u"ksmserverrc"_s, KConfig::SimpleConfig)}
     , m_configWatcher{KConfigWatcher::create(m_mobileConfig)}
 {
 }
@@ -86,6 +88,10 @@ void Settings::applyMobileConfiguration()
               true); // only write entries if they are not already defined in the config
     writeKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, false);
     m_kdeglobalsConfig->sync();
+
+    // ksmserver
+    writeKeys(u"ksmserverrc"_s, m_ksmServerConfig, KSMSERVER_SETTINGS, false);
+    m_ksmServerConfig->sync();
 
     // save our changes
     m_mobileConfig->sync();

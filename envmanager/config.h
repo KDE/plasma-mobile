@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -70,3 +71,6 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 // Make sure that the effect/script is added to the kwinrc "Plugins" section above!
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
 const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
+
+//ksmserver
+const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};

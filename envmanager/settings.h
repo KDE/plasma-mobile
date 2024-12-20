@@ -1,4 +1,5 @@
 // SPDX-FileCopyrightText: 2023 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2024 Luis Büchi <luis.buechi@kdemail.net>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #pragma once
@@ -41,6 +42,7 @@ private:
     KSharedConfig::Ptr m_kwinrcConfig;
     KSharedConfig::Ptr m_appBlacklistConfig;
     KSharedConfig::Ptr m_kdeglobalsConfig;
+    KSharedConfig::Ptr m_ksmServerConfig;
 
     KConfigWatcher::Ptr m_configWatcher;
 };
