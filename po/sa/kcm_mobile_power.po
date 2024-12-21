@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-17 00:40+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"PO-Revision-Date: 2024-12-20 12:26+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -194,7 +194,7 @@ msgstr "अज्ञात प्रौद्योगिकी"
 #, kde-format
 msgctxt "%1 is a percentage value"
 msgid "%1%"
-msgstr "%1% २."
+msgstr "%1%"
 
 #: ui/main.qml:33
 #, kde-format
@@ -245,7 +245,7 @@ msgstr "अज्ञात बैटरी"
 #, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
-msgstr "%1% २."
+msgstr "%1%"
 
 #: ui/main.qml:91
 #, kde-format

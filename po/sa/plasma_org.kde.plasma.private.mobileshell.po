@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-12-14 01:12+0530\n"
+"PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -69,7 +69,7 @@ msgstr "सिम लॉक्ड्"
 #: qml/statusbar/indicators/BatteryIndicator.qml:60
 #, kde-format
 msgid "%1%"
-msgstr "%1% २."
+msgstr "%1%"
 
 #: qml/volumeosd/AudioApplet.qml:73
 #, kde-format
@@ -95,7 +95,7 @@ msgstr "रिकार्डिंग स्ट्रीम्स"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr "%1 (%2) २."
+msgstr "%1 (%2)"
 
 #: qml/volumeosd/DeviceListItem.qml:34
 #, kde-format
@@ -127,13 +127,13 @@ msgstr "%1 कृते आयतनं समायोजयन्तु"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr "%1% २."
+msgstr "%1%"
 
 #: qml/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr "१००% २."
+msgstr "१००%"
 
 #: qml/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -220,7 +220,7 @@ msgstr "उत्तरं"
 #, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr "%1: १."
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
@@ -283,7 +283,7 @@ msgstr "%1/s"
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
-msgstr "%1% २."
+msgstr "%1%"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format
@@ -330,13 +330,13 @@ msgstr "प्रेषयतु"
 #, kde-format
 msgctxt "Job name, e.g. Copying is paused"
 msgid "%1 (Paused)"
-msgstr "%1 (विरामितः) २."
+msgstr "%1 (विरामितः)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:19
 #, kde-format
 msgctxt "Job name, e.g. Copying has failed"
 msgid "%1 (Failed)"
-msgstr "%1 (विफलम्) २."
+msgstr "%1 (विफलम्)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:21
 #, kde-format
@@ -347,7 +347,7 @@ msgstr "Job Failed इति"
 #, kde-format
 msgctxt "Job name, e.g. Copying has finished"
 msgid "%1 (Finished)"
-msgstr "%1 (समाप्तम्) २."
+msgstr "%1 (समाप्तम्)"
 
 #: qml/widgets/notifications/NotificationsUtils.js:26
 #, kde-format
