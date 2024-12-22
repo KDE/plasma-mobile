@@ -1,19 +1,20 @@
 # SPDX-FileCopyrightText: 2021, 2024 Alois Spitzbart <spitz234@hotmail.com>
 # Frederik Schwarzer <schwarzer@kde.org>, 2021.
+# SPDX-FileCopyrightText: 2024 Flori G <Renner03@protonmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_cellular_network\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-05-20 10:48+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2024-10-30 15:23+0100\n"
+"Last-Translator: Flori G <Renner03@protonmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 21.08.2\n"
 
@@ -281,13 +282,12 @@ msgstr "Die SIM ist vorhanden, aber nicht verwendbar."
 #: modemdetails.cpp:291
 #, kde-format
 msgid "Unknown modem capabilities."
-msgstr ""
+msgstr "Unbekannte Modemfähigkeiten."
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM ist nicht gesperrt"
+msgstr "eSIM ist nicht initialisiert."
 
 #: modemdetails.cpp:316
 #, kde-format
@@ -541,10 +541,9 @@ msgid "Edit APN"
 msgstr "APN bearbeiten"
 
 #: ui/EditProfilePage.qml:15
-#, fuzzy, kde-format
-#| msgid "New PIN"
+#, kde-format
 msgid "New APN"
-msgstr "Neue PIN"
+msgstr "Neuer APN"
 
 #: ui/EditProfilePage.qml:30
 #, kde-format
@@ -599,7 +598,7 @@ msgstr "Nur 2G"
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "Profil speichern"
 
 #: ui/main.qml:52
 #, kde-format
