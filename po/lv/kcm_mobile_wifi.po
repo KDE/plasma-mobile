@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2024-10-05 11:47+0300\n"
+"PO-Revision-Date: 2024-12-16 17:34+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -39,11 +39,10 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Available Networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "Pieejamie tīkli"
+msgstr "Saglabātie tīkli"
 
 #: ui/main.qml:135
 #, kde-format
@@ -51,10 +50,9 @@ msgid "Available Networks"
 msgstr "Pieejamie tīkli"
 
 #: ui/main.qml:169
-#, fuzzy, kde-format
-#| msgid "Add New Connection"
+#, kde-format
 msgid "Add Custom Connection"
-msgstr "Pievienot jaunu savienojumu"
+msgstr "Pievienot pielāgotu savienojumu"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format

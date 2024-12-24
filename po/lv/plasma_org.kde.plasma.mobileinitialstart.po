@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-06 16:04+0200\n"
+"PO-Revision-Date: 2024-12-16 17:34+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Atver sākotnējo sākuma vedni, nemainot konfigurāciju"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 KDE kopiena"
+msgstr "© 2024 KDE kopiena"
 
 #: main.cpp:37
 #, kde-format

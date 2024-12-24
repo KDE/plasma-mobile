@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-11-06 16:51+0200\n"
+"PO-Revision-Date: 2024-12-16 17:35+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
@@ -161,8 +161,7 @@ msgid "Open audio settings"
 msgstr "Atvērt skaņas iestatījumus"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Meklēt…"
