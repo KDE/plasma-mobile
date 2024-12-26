@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-12-24 20:39+0530\n"
+"PO-Revision-Date: 2024-12-25 19:35+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -222,7 +222,7 @@ msgstr "सम्बद्धं कुर्वन्तु"
 #: modules/wifi/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Network"
-msgstr "जाल"
+msgstr "जालकृति"
 
 #: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
