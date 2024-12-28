@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2024-08-02 22:29+0200\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -151,10 +151,9 @@ msgid "Stream name not found"
 msgstr "Flugnomo ne trovita"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Baskuligi montron de sonfluoj"
+msgstr "agordi sonfluojn"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
@@ -162,8 +161,7 @@ msgid "Open audio settings"
 msgstr "Malfermi sonajn agordojn"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Serĉi…"
@@ -410,10 +408,3 @@ msgstr "Montri %1 Pli"
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Forigi Ĉiujn Sciigojn"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"

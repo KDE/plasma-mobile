@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2024-06-29 10:05+0200\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -26,7 +26,7 @@ msgstr "Ŝelo"
 #: ui/main.qml:27
 #, kde-format
 msgid "General"
-msgstr "Generalo"
+msgstr "Ĝeneralo"
 
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
@@ -45,8 +45,7 @@ msgstr ""
 "Se ĉi tio estas malŝaltita, kuraĝigoj estos reduktitaj kiel eble plej multe."
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "Statusbreto"
 
@@ -64,42 +63,41 @@ msgstr "Se ŝaltita, dato montriĝos apud la horloĝo en la statusbreto."
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "Eta"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "Malgranda"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "Normala"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "Granda"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "Grandega"
 
 #: ui/main.qml:81
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar Size"
-msgstr "Statusbreto"
+msgstr "Statusbreta Grandeco"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "Grandeco de la supra panelo (postulas rekomencon)."
 
 #: ui/main.qml:109
 #, kde-format
@@ -237,21 +235,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Klavaraj vibroj estas regataj aparte en la klavar-agorda modulo."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Vibra Intenseco"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Kiel intensaj ŝelvibroj devus esti."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Malalta"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Meza"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
