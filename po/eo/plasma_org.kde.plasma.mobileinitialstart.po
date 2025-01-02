@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-10 02:29+0000\n"
-"PO-Revision-Date: 2023-11-18 08:12+0100\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -242,12 +242,12 @@ msgstr "Bonvenon al<br/><b>%1</b>"
 #: qml/LandingComponent.qml:125 qml/Wizard.qml:293
 #, kde-format
 msgid "Next"
-msgstr "Poste"
+msgstr "Sekva"
 
 #: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr "Komenca Komenco"
+msgstr "Komenca Starto"
 
 #: qml/Wizard.qml:274
 #, kde-format
@@ -258,9 +258,3 @@ msgstr "Reen"
 #, kde-format
 msgid "Finish"
 msgstr "Fini"
-
-#~ msgid "Wi-Fi is disabled"
-#~ msgstr "Wi-Fi estas malŝaltita"
-
-#~ msgid "Enable"
-#~ msgstr "Ebligi"

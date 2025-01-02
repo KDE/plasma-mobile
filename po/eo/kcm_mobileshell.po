@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-29 00:40+0000\n"
-"PO-Revision-Date: 2024-06-29 10:05+0200\n"
+"PO-Revision-Date: 2024-12-27 17:40+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -26,7 +26,7 @@ msgstr "Ŝelo"
 #: ui/main.qml:27
 #, kde-format
 msgid "General"
-msgstr "Generalo"
+msgstr "Ĝeneralo"
 
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
@@ -195,21 +195,3 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr "Klavaraj vibroj estas regataj aparte en la klavar-agorda modulo."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Vibra Intenseco"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Kiel intensaj ŝelvibroj devus esti."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Malalta"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Meza"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
