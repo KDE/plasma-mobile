@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2025-01-04 00:42+0000\n"
 "PO-Revision-Date: 2020-04-15 12:12+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -22,7 +22,31 @@ msgstr ""
 msgid "Invalid input."
 msgstr ""
 
-#: ui/ConnectionItemDelegate.qml:125
+#: ui/ConnectionInfo.qml:14
+#, kde-format
+msgctxt "kcm page title"
+msgid "Connection Info for \"%1\""
+msgstr ""
+
+#: ui/ConnectionInfo.qml:21
+#, kde-format
+msgctxt "@title:group"
+msgid "Transfer Rates"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:37
+#, kde-format
+msgid "Connected, ↓ %1/s, ↑ %2/s"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:44
+#, fuzzy, kde-format
+#| msgid "Connection Name"
+msgctxt "@title:group"
+msgid "Connection Details"
+msgstr "Ühenduse nimi"
+
+#: ui/ConnectionItemDelegate.qml:147
 #, fuzzy, kde-format
 #| msgid "Connection Editor"
 msgid "Connect to"
@@ -219,6 +243,21 @@ msgstr "DNS:"
 msgid "Password…"
 msgstr "Parool:"
 
+#: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
+#, kde-format
+msgid "/s"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Upload"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Download"
+msgstr ""
+
 #, fuzzy
 #~| msgid "Enable Wi-Fi"
 #~ msgid "Enable"
@@ -299,9 +338,6 @@ msgstr "Parool:"
 
 #~ msgid "Access point available: %1"
 #~ msgstr "Pääsupunkt saadaval: %1"
-
-#~ msgid "Connection Name"
-#~ msgstr "Ühenduse nimi"
 
 #~ msgid "(Unchanged)"
 #~ msgstr "(muutmata)"

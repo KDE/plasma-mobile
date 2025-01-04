@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2025-01-04 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -22,7 +22,31 @@ msgstr ""
 msgid "Invalid input."
 msgstr "无效的输入。"
 
-#: ui/ConnectionItemDelegate.qml:125
+#: ui/ConnectionInfo.qml:14
+#, kde-format
+msgctxt "kcm page title"
+msgid "Connection Info for \"%1\""
+msgstr ""
+
+#: ui/ConnectionInfo.qml:21
+#, kde-format
+msgctxt "@title:group"
+msgid "Transfer Rates"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:37
+#, kde-format
+msgid "Connected, ↓ %1/s, ↑ %2/s"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:44
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgctxt "@title:group"
+msgid "Connection Details"
+msgstr "连接到"
+
+#: ui/ConnectionItemDelegate.qml:147
 #, kde-format
 msgid "Connect to"
 msgstr "连接到"
@@ -200,3 +224,18 @@ msgstr "DNS"
 #, kde-format
 msgid "Password…"
 msgstr "密码…"
+
+#: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
+#, kde-format
+msgid "/s"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Upload"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Download"
+msgstr ""

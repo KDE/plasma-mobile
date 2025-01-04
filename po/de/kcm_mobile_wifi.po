@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_wifi\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2025-01-04 00:42+0000\n"
 "PO-Revision-Date: 2024-06-10 22:33+0200\n"
 "Last-Translator: Julian Groß <julian.g@posteo.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -25,7 +25,31 @@ msgstr ""
 msgid "Invalid input."
 msgstr "Ungültige Eingabe."
 
-#: ui/ConnectionItemDelegate.qml:125
+#: ui/ConnectionInfo.qml:14
+#, kde-format
+msgctxt "kcm page title"
+msgid "Connection Info for \"%1\""
+msgstr ""
+
+#: ui/ConnectionInfo.qml:21
+#, kde-format
+msgctxt "@title:group"
+msgid "Transfer Rates"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:37
+#, kde-format
+msgid "Connected, ↓ %1/s, ↑ %2/s"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:44
+#, fuzzy, kde-format
+#| msgid "Connection Name"
+msgctxt "@title:group"
+msgid "Connection Details"
+msgstr "Verbindungsname"
+
+#: ui/ConnectionItemDelegate.qml:147
 #, kde-format
 msgid "Connect to"
 msgstr "Verbinden mit"
@@ -212,6 +236,21 @@ msgstr "DNS"
 msgid "Password…"
 msgstr "Passwort ..."
 
+#: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
+#, kde-format
+msgid "/s"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Upload"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Download"
+msgstr ""
+
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "WLAN ist deaktiviert"
 
@@ -296,9 +335,6 @@ msgstr "Passwort ..."
 
 #~ msgid "Access point available: %1"
 #~ msgstr "Zugangspunkt verfügbar: %1"
-
-#~ msgid "Connection Name"
-#~ msgstr "Verbindungsname"
 
 #~ msgid "(Unchanged)"
 #~ msgstr "(Unverändert)"

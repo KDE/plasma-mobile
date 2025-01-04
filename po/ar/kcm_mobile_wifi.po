@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-16 00:42+0000\n"
+"POT-Creation-Date: 2025-01-04 00:42+0000\n"
 "PO-Revision-Date: 2023-05-07 20:41+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -22,7 +22,31 @@ msgstr ""
 msgid "Invalid input."
 msgstr "إدخال غير صحيح"
 
-#: ui/ConnectionItemDelegate.qml:125
+#: ui/ConnectionInfo.qml:14
+#, kde-format
+msgctxt "kcm page title"
+msgid "Connection Info for \"%1\""
+msgstr ""
+
+#: ui/ConnectionInfo.qml:21
+#, kde-format
+msgctxt "@title:group"
+msgid "Transfer Rates"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:37
+#, kde-format
+msgid "Connected, ↓ %1/s, ↑ %2/s"
+msgstr ""
+
+#: ui/ConnectionInfo.qml:44
+#, fuzzy, kde-format
+#| msgid "Connect to"
+msgctxt "@title:group"
+msgid "Connection Details"
+msgstr "متصل ب"
+
+#: ui/ConnectionItemDelegate.qml:147
 #, kde-format
 msgid "Connect to"
 msgstr "متصل ب"
@@ -211,6 +235,21 @@ msgstr ""
 #, kde-format
 msgid "Password…"
 msgstr "كلمة المرور..."
+
+#: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
+#, kde-format
+msgid "/s"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Upload"
+msgstr ""
+
+#: ui/TrafficMonitor.qml:89
+#, kde-format
+msgid "Download"
+msgstr ""
 
 #~ msgid "Enable"
 #~ msgstr "مكّن"
