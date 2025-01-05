@@ -40,11 +40,10 @@ msgid "Connected, ↓ %1/s, ↑ %2/s"
 msgstr ""
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "连接到"
+msgstr ""
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
