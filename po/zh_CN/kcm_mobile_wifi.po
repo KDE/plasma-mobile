@@ -26,24 +26,24 @@ msgstr "无效的输入。"
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "“%1”的连接信息"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "传输速率"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "已连接，↓ %1/秒，↑ %2/秒"
 
 #: ui/ConnectionInfo.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr ""
+msgstr "连接详情"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -227,14 +227,14 @@ msgstr "密码…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/秒"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "上行"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "下行"

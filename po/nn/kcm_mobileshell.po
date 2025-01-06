@@ -45,7 +45,6 @@ msgstr "Viss dette er av, vert animasjonane reduserte så mykje som mogleg."
 
 #: ui/main.qml:53
 #, fuzzy, kde-format
-#| msgid "Status bar"
 msgid "Status Bar"
 msgstr "Statuslinje"
 
@@ -93,7 +92,6 @@ msgstr ""
 
 #: ui/main.qml:81
 #, fuzzy, kde-format
-#| msgid "Status bar"
 msgid "Status Bar Size"
 msgstr "Statuslinje"
 

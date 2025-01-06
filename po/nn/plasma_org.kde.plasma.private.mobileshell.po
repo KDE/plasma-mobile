@@ -152,7 +152,6 @@ msgstr "Fann ikkje straumnamn"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
 msgid "configure audio streams"
 msgstr "Vis/gøym lydstraumar"
 
@@ -163,7 +162,6 @@ msgstr "Opna lydinnstillingar"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, fuzzy, kde-format
-#| msgid "Search…"
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Søk …"

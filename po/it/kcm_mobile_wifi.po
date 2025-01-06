@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2023, 2024 Paolo Zamponi <feus73@gmail.com>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2023, 2024, 2025 Paolo Zamponi <feus73@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-11-17 16:14+0100\n"
+"PO-Revision-Date: 2025-01-04 22:14+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -26,25 +26,24 @@ msgstr "Input non valido."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "Informazioni sulla connessione «%1»"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "Velocità di trasferimento"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "Connesso, ↓ %1/s, ↑ %2/s"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connection Name"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "Nome della connessione"
+msgstr "Dettagli della connessione"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -228,17 +227,17 @@ msgstr "Password…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/s"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Invio"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Scaricamento"
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "Il Wi-Fi è disabilitato"

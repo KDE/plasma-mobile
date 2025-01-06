@@ -35,7 +35,6 @@ msgstr "Opnar vegvisar for første start, utan å endra oppsettet"
 
 #: main.cpp:36
 #, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
 msgid "© 2024 KDE Community"
 msgstr "© 2023 KDE-fellesskapet"
 

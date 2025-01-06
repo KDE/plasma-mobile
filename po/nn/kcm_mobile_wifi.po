@@ -43,7 +43,6 @@ msgstr ""
 
 #: ui/ConnectionInfo.qml:44
 #, fuzzy, kde-format
-#| msgid "Connect to"
 msgctxt "@title:group"
 msgid "Connection Details"
 msgstr "Kopla til"
@@ -65,7 +64,6 @@ msgstr "Wi-Fi"
 
 #: ui/main.qml:98
 #, fuzzy, kde-format
-#| msgid "Available Networks"
 msgctxt "@title:group"
 msgid "Saved Networks"
 msgstr "Tilgjengelege nettverk"

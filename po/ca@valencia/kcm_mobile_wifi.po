@@ -1,16 +1,16 @@
 # Translation of kcm_mobile_wifi.po to Catalan (Valencian)
-# Copyright (C) 2018-2024 This_file_is_part_of_KDE
+# Copyright (C) 2018-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # Empar Montoro Martín <montoro_mde@gva.es>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-11-16 15:01+0100\n"
+"PO-Revision-Date: 2025-01-04 10:08+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -30,25 +30,24 @@ msgstr "Entrada no vàlida."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "Informació de la connexió per a «%1»"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "Velocitats de transferència"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "Connectat, ↓ %1/s, ↑ %2/s"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "Connecta a"
+msgstr "Detalls de la connexió"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -232,14 +231,14 @@ msgstr "Contrasenya…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/s"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Pujada"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Baixada"

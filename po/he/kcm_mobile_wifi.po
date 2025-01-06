@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-11-16 07:18+0200\n"
+"PO-Revision-Date: 2025-01-04 21:41+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -27,25 +27,24 @@ msgstr "קלט שגוי."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "פרטי החיבור „%1”"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "קצבי תעבורה"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "מחובר, ↓ %1 לשנייה, ↑ %2 לשנייה"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "התחברות אל"
+msgstr "פרטי חיבור"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -229,14 +228,14 @@ msgstr "סיסמה…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "לשנ׳"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "העלאה"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "מחיקה"
