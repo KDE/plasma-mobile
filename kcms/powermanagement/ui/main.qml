@@ -121,7 +121,6 @@ SimpleKCM {
                 text: i18nc("Part of a sentence like 'Dim screen after 5 minutes'", "Dim screen after")
                 model: kcm.timeOptions()
                 currentIndex: kcm.dimScreenIdx
-                Component.onCompleted: dialog.parent = powermanagementModule
                 onCurrentIndexChanged: kcm.dimScreenIdx = currentIndex
             }
 
@@ -132,7 +131,6 @@ SimpleKCM {
                 text: i18nc("Part of a sentence like 'Turn off screen after 5 minutes'", "Turn off screen after")
                 model: kcm.timeOptions()
                 currentIndex: kcm.screenOffIdx
-                Component.onCompleted: dialog.parent = powermanagementModule
                 onCurrentIndexChanged: kcm.screenOffIdx = currentIndex
             }
 
@@ -143,7 +141,6 @@ SimpleKCM {
                 text: i18nc("Part of a sentence like 'Suspend device after 5 minutes'", "Suspend device after")
                 model: kcm.timeOptions()
                 currentIndex: kcm.suspendSessionIdx
-                Component.onCompleted: dialog.parent = powermanagementModule
                 onCurrentIndexChanged: kcm.suspendSessionIdx = currentIndex
             }
         }
