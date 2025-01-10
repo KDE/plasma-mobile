@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-09-29 21:59+0300\n"
+"PO-Revision-Date: 2025-01-09 16:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -321,12 +321,12 @@ msgstr "Bir dolaşım ağında kayıtlı."
 #: modemdetails.cpp:328
 #, kde-format
 msgid "Registered for \"SMS only\", on home network."
-msgstr "Ev ağında ‘Yalnızca SMS’ için kayıtlı."
+msgstr "Ev ağında “Yalnızca SMS” için kayıtlı."
 
 #: modemdetails.cpp:330
 #, kde-format
 msgid "Registered for \"SMS only\", roaming network."
-msgstr "Dolaşım ağında ‘Yalnızca SMS’ için kayıtlı."
+msgstr "Dolaşım ağında “Yalnızca SMS” için kayıtlı."
 
 #: modemdetails.cpp:332
 #, kde-format
@@ -336,12 +336,12 @@ msgstr "Yalnızca acil durum hizmetleri."
 #: modemdetails.cpp:334
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", home network."
-msgstr "Ev ağında ‘CSFB tercihsiz’ için kayıtlı."
+msgstr "Ev ağında “CSFB tercihsiz” için kayıtlı."
 
 #: modemdetails.cpp:336
 #, kde-format
 msgid "Registered for \"CSFB not preferred\", roaming network."
-msgstr "Dolaşım ağında ‘CSFB tercihsiz’ için kayıtlı."
+msgstr "Dolaşım ağında “CSFB tercihsiz” için kayıtlı."
 
 #: modemdetails.cpp:338
 #, kde-format

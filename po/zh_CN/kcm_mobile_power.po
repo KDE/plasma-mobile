@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-17 00:40+0000\n"
+"POT-Creation-Date: 2025-01-10 02:00+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/plasma-mobile/kcm_mobile_power.pot\n"
-"X-Crowdin-File-ID: 53198\n"
+"X-Crowdin-File: /kf6-stable/messages/plasma-mobile/kcm_mobile_power.pot\n"
+"X-Crowdin-File-ID: 53196\n"
 
 #: mobilepower.cpp:30
 #, kde-format
@@ -268,13 +268,13 @@ msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
 msgstr "降低屏幕亮度等待时间"
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
 msgstr "关闭屏幕等待时间"
 
-#: ui/main.qml:143
+#: ui/main.qml:141
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"

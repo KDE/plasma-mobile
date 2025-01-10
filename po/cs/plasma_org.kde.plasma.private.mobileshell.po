@@ -161,8 +161,7 @@ msgid "Open audio settings"
 msgstr "Otevřít nastavení audio"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Hledat…"

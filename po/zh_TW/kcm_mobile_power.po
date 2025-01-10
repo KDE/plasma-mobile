@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-17 00:40+0000\n"
+"POT-Creation-Date: 2025-01-10 02:00+0000\n"
 "PO-Revision-Date: 2024-02-05 17:48+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -271,13 +271,13 @@ msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
 msgstr "多久之後將螢幕變暗"
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
 msgstr "多久之後關閉螢幕"
 
-#: ui/main.qml:143
+#: ui/main.qml:141
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"

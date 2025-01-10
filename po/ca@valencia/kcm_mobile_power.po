@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-17 00:40+0000\n"
+"POT-Creation-Date: 2025-01-10 02:00+0000\n"
 "PO-Revision-Date: 2024-01-04 08:26+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -270,13 +270,13 @@ msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
 msgstr "Enfosquix la pantalla després de"
 
-#: ui/main.qml:132
+#: ui/main.qml:131
 #, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
 msgstr "Apaga la pantalla després de"
 
-#: ui/main.qml:143
+#: ui/main.qml:141
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
