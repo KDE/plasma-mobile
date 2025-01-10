@@ -43,8 +43,7 @@ msgid "If this is off, animations will be reduced as much as possible."
 msgstr ""
 
 #: ui/main.qml:53
-#, fuzzy, kde-format
-#| msgid "Status bar"
+#, kde-format
 msgid "Status Bar"
 msgstr "Stavový řádek"
 

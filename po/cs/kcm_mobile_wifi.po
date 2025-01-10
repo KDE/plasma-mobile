@@ -74,10 +74,9 @@ msgid "Available Networks"
 msgstr "Dostupné sítě"
 
 #: ui/main.qml:169
-#, fuzzy, kde-format
-#| msgid "Add New Connection"
+#, kde-format
 msgid "Add Custom Connection"
-msgstr "Přidat nové připojení"
+msgstr "Přidat vlastní spojení"
 
 #: ui/NetworkSettings.qml:15
 #, kde-format
@@ -230,14 +229,14 @@ msgstr "Heslo…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/s"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Odeslat"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Stáhnout"
