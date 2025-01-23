@@ -1,0 +1,17 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "sebas@kde.org",
+                "Name": "Sebastian Kŭgler"
+            }
+        ],
+        "Description": "Prevent mistouch",
+        "Icon": "input-touchscreen",
+        "Id": "org.kde.plasma.quicksetting.locktouchscreen",
+        "License": "GPL-2.0+",
+        "Name": "Lock Touchscreen",
+        "Website": "https://kde.org"
+    }
+}

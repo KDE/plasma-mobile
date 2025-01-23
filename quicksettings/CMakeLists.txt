@@ -9,6 +9,7 @@ plasma_install_package(caffeine org.kde.plasma.quicksetting.caffeine quicksettin
 plasma_install_package(docked org.kde.plasma.quicksettings.docked quicksettings)
 plasma_install_package(donotdisturb org.kde.plasma.quicksetting.donotdisturb quicksettings)
 plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle quicksettings)
+plasma_install_package(locktouchscreen org.kde.plasma.quicksetting.locktouchscreen quicksettings)
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)
 plasma_install_package(wifi org.kde.plasma.quicksetting.wifi quicksettings)
