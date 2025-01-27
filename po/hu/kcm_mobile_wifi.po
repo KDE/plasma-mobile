@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-nm package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019, 2020.
-# SPDX-FileCopyrightText: 2021, 2023, 2024 Kristof Kiszel <kiszel.kristof@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2023, 2024, 2025 Kristof Kiszel <kiszel.kristof@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-09-23 21:56+0200\n"
+"PO-Revision-Date: 2025-01-26 21:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -27,25 +27,24 @@ msgstr "Érvénytelen bemenet."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "Kapcsolatinformációk ehhez: „%1”"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "Átviteli sebességek"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "Kapcsolódva, ↓ %1/s, ↑ %2/s"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connection Name"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "Kapcsolatnév"
+msgstr "Kapcsolat részletei"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -63,11 +62,10 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Available Networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "Elérhető hálózatok"
+msgstr "Mentett hálózatok"
 
 #: ui/main.qml:135
 #, kde-format
@@ -230,17 +228,17 @@ msgstr "Jelszó…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/s"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Feltöltés"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Letöltés"
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "A Wi-Fi ki van kapcsolva"
