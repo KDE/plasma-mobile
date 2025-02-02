@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-10 00:42+0000\n"
-"PO-Revision-Date: 2024-07-02 10:07+0300\n"
+"PO-Revision-Date: 2025-02-01 09:28+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 24.12.0\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -111,7 +111,7 @@ msgstr "עמעום"
 #: package/contents/ui/settings/SettingsWindow.qml:210
 #, kde-format
 msgid "Stack"
-msgstr "ערימה"
+msgstr "ערמה"
 
 #: package/contents/ui/settings/SettingsWindow.qml:211
 #, kde-format
