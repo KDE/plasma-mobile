@@ -19,10 +19,13 @@ QS.QuickSetting {
 
     function toggle() {
         MobileShellState.ShellDBusClient.closeActionDrawer();
-        console.log("Locking the touchscreen now...");
+        console.log("Locking the touchscreen now... lts_object: " + lts_object);
+        if (lts_component) {
+            finishCreation();
+            return;
+        }
         lts_component = Qt.createComponent("LockTouchScreen.qml");
         if (lts_component.status == Component.Ready) {
-            //console.log("not yet finished")
             finishCreation();
         } else {
             lts_component.statusChanged.connect(finishCreation);
@@ -36,9 +39,16 @@ QS.QuickSetting {
                 // Error Handling
                 console.log("Error creating object");
             }
+            lts_object.byebye.connect(lockDestroyed);
         } else if (lts_component.status == Component.Error) {
             // Error Handling
             console.log("Error loading component:", lts_component.errorString());
         }
+    }
+
+    function lockDestroyed() {
+        //console.log("bye bye!");
+        lts_object.destroy();
+        lts_object = null;
     }
 }
