@@ -12,6 +12,8 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 Window {
     id: root
 
+    signal byebye()
+
     readonly property int fadeOutWait: 1500
     readonly property int fadeDuration: 400
     readonly property real darkOpacity: 0.6
@@ -19,6 +21,7 @@ Window {
     readonly property int unlockDuration: 400
     readonly property int bgMargin: 20
     readonly property int lockAnimationDuration: 400
+    //readonly property int sliderHeight: Kirigami.Units.gridUnit * 22
 
     readonly property color textColor: Kirigami.Theme.backgroundColor
     readonly property color backgroundColor: Kirigami.Theme.textColor
@@ -29,6 +32,10 @@ Window {
     color: "#00000000" // important bytes are translucency!
     visible: true
     visibility: Window.FullScreen
+
+    TasksHelper {
+        id: tasksHelper
+    }
 
     MouseArea {
         anchors.fill: parent
@@ -115,27 +122,46 @@ Window {
             unlockText.opacity = 0;
             unlockSlider.opacity = 0;
             unlockAnimation.running = true;
+            // set app to not fullscreen during our close animation
+            tasksHelper.restoreApp();
         }
     }
+
+    /*
+    Timer {
+        id: lockTimer
+        interval: 3000
+        running: true
+        repeat: true
+        onTriggered: {
+            console.log("     still alive!")
+            //console.log("..... locktimer triggers ... panel state setting visible")
+            //MobileShellState.ShellDBusClient.panelState = "visible";
+
+        }
+    }
+    */
 
     Timer {
         id: resetTimer
         running: false
         interval: unlockDuration * 1.5
         onTriggered: {
-            console.log("reset / quit.")
+            //console.log("reset / quit.")
             background.opacity = 0.0
             background.scale = 1.0
             unlockSlider.value = 0
             unlockText.opacity = 0.0
 
-            MobileShellState.ShellDBusClient.panelState = "visible";
+            //MobileShellState.ShellDBusClient.panelState = "default";
 
             console.log("Destroying LockTouchScreen.");
             root.visible = false;
             //console.log("rp: "+ root.parent);
+            // tasksHelper.restoreApp();
+            root.byebye();
             if (root.parent != null) {
-                root.destroy();
+                //root.destroy();
             } else {
                 // when running standalone / testing
                 Qt.quit();
@@ -146,6 +172,11 @@ Window {
     Slider {
         id: unlockSlider
 
+        property int sliderHeight: Kirigami.Units.gridUnit * 5
+        property int sliderWidth: Math.min(root.width * 0.4, Kirigami.Units.gridUnit * 120)
+        property int sliderRadius: unlockSlider.sliderHeight / 2
+
+
         opacity: translucentOpacity
         visible: opacity != 0.0
 
@@ -155,12 +186,12 @@ Window {
 
         x: (root.width - unlockSlider.width) / 2
         y: root.height * 0.7
-        width: root.width * 0.4
-        height: 200
+        width: unlockSlider.sliderWidth
+        height: unlockSlider.sliderHeight
 
         onPressedChanged: {
             if (unlockSlider.value === 1) {
-                console.log("unlocking...: " + unlockSlider.value);
+                console.log("unlocking...: " + unlockSlider.value + " width:" + root.width);
                 unlockText.opacity = 1.0;
                 bgFadeOutTimer.stop();
                 unlockTimer.start();
@@ -172,13 +203,11 @@ Window {
             }
         }
 
-        property int sliderHeight: 80
-        property int sliderRadius: unlockSlider.sliderHeight / 2
 
         background: Rectangle {
             x: unlockSlider.leftPadding
             y: unlockSlider.topPadding + unlockSlider.availableHeight / 2 - height / 2
-            implicitWidth: 200
+            implicitWidth: unlockSlider.sliderWidth
             implicitHeight: unlockSlider.sliderHeight
             width: unlockSlider.availableWidth
             height: implicitHeight
@@ -221,7 +250,7 @@ Window {
         anchors.bottom: unlockSlider.top
         //anchors.bottomMargin: unlockSlider.sliderHeight
         font.pointSize: unlockSlider.sliderHeight / 3
-        text: "Unlocking."
+        text: i18n("Unlocking...")
         color: root.textColor
         opacity: 0.0
         Behavior on opacity {
@@ -230,9 +259,11 @@ Window {
     }
 
     Component.onCompleted: {
-        console.log("Created LockTouchScreen.")
+        console.log("Created LockTouchScreen." + Kirigami.Units.gridUnit);
         lockAnimation.running = true;
-        //MobileShellState.ShellDBusClient.panelState = "hidden";
-        //console.log("panel state is now hidden")
+        //MobileShellState.ShellDBusClient.panelState = "visible";
+        //console.log("panel state is now visible. starting lockTimer")
+        //lockTimer.start();
+        tasksHelper.setAppFullScreen();
     }
 }
