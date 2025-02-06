@@ -1,3 +1,5 @@
+// SPDX-FileCopyrightText: 2025 Sebastian Kŭgler <sebas@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
 
 import QtQuick
 import org.kde.taskmanager as TaskManager
@@ -54,7 +56,7 @@ QtObject {
     function setAppFullScreen() {
         let appIndex = __getAppIndex();
         if (appIndex === null) {
-            console.log("Didn't find a matching window to make fullscreen")
+            console.log("Didn't find a window matching '" + tasksHelper.appId + "' to make fullscreen")
             return;
         }
         let isFullScreen = tasksModel.data(appIndex, TaskManager.AbstractTasksModel.IsFullScreen);
@@ -68,7 +70,7 @@ QtObject {
     function restoreApp() {
         let appIndex = __getAppIndex();
         if (appIndex === null) {
-            console.log("Didn't find a matching window to restore")
+            console.log("Didn't find a window matching '" + tasksHelper.appId + "' to restore ")
             return;
         }
         let isFullScreen = tasksModel.data(appIndex, TaskManager.AbstractTasksModel.IsFullScreen);
