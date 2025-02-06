@@ -6,7 +6,7 @@ QtObject {
     id: tasksHelper
 
     // desktop filename of the app which we want to fullscreen temporarily
-    property string appId: "org.kde.mobile.plasmasettings.desktop"
+    property string appId: "inspection.desktop"
     property bool initiallyFullScreen: false // FIXME
 
     property var tasksModel: TaskManager.TasksModel {
@@ -48,10 +48,15 @@ QtObject {
                 return task;
             }
         }
+        return null;
     }
 
     function setAppFullScreen() {
         let appIndex = __getAppIndex();
+        if (appIndex === null) {
+            console.log("Didn't find a matching window to make fullscreen")
+            return;
+        }
         let isFullScreen = tasksModel.data(appIndex, TaskManager.AbstractTasksModel.IsFullScreen);
         tasksHelper.initiallyFullScreen = isFullScreen;
         console.log("Was fullscreen? " + initiallyFullScreen);
@@ -62,6 +67,10 @@ QtObject {
 
     function restoreApp() {
         let appIndex = __getAppIndex();
+        if (appIndex === null) {
+            console.log("Didn't find a matching window to restore")
+            return;
+        }
         let isFullScreen = tasksModel.data(appIndex, TaskManager.AbstractTasksModel.IsFullScreen);
         console.log("is fullscreen? " + isFullScreen + " was fullscreen? " + tasksHelper.initiallyFullScreen);
         //if (isFullScreen && !tasksHelper.initiallyFullScreen) {

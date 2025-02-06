@@ -19,6 +19,10 @@ QS.QuickSetting {
 
     function toggle() {
         MobileShellState.ShellDBusClient.closeActionDrawer();
+        if (lts_object != null) {
+            console.log("Already locked."); // FIXME: perhaps unlock?
+            return;
+        }
         console.log("Locking the touchscreen now... lts_object: " + lts_object);
         if (lts_component) {
             finishCreation();
