@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-nm package.
 #
 # pan93412 <pan93412@gmail.com>, 2019, 2020.
-# SPDX-FileCopyrightText: 2023, 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-07-27 13:00+0900\n"
+"PO-Revision-Date: 2025-02-07 23:05+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -27,25 +27,24 @@ msgstr "無效輸入。"
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "「%1」的連線資訊"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "傳輸速率"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "已連線，↓ %1/秒, ↑ %2/秒"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connection Name"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "連線名稱"
+msgstr "連線詳情"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -63,11 +62,10 @@ msgid "Wi-Fi"
 msgstr "Wi-Fi"
 
 #: ui/main.qml:98
-#, fuzzy, kde-format
-#| msgid "Saved networks"
+#, kde-format
 msgctxt "@title:group"
 msgid "Saved Networks"
-msgstr "儲存的網路"
+msgstr "已儲存的網路"
 
 #: ui/main.qml:135
 #, kde-format
@@ -90,8 +88,7 @@ msgid "Save"
 msgstr "儲存"
 
 #: ui/NetworkSettings.qml:52
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title:group"
 msgid "General"
 msgstr "一般"
@@ -107,17 +104,15 @@ msgid "Hidden Network"
 msgstr "隱藏的網路"
 
 #: ui/NetworkSettings.qml:80
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgctxt "@title:group"
 msgid "Security"
 msgstr "安全性"
 
 #: ui/NetworkSettings.qml:87
-#, fuzzy, kde-format
-#| msgid "Security type:"
+#, kde-format
 msgid "Security type"
-msgstr "安全性類型："
+msgstr "安全性類型"
 
 #: ui/NetworkSettings.qml:96
 #, kde-format
@@ -160,10 +155,9 @@ msgid "WPA3 Enterprise"
 msgstr "WPA3 Enterprise"
 
 #: ui/NetworkSettings.qml:140
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password"
-msgstr "密碼："
+msgstr "密碼"
 
 #: ui/NetworkSettings.qml:156
 #, kde-format
@@ -196,8 +190,7 @@ msgid "Protected EAP"
 msgstr "受保護 EAP"
 
 #: ui/NetworkSettings.qml:173
-#, fuzzy, kde-format
-#| msgid "IP settings"
+#, kde-format
 msgctxt "@title:group"
 msgid "IP Settings"
 msgstr "IP 設定"
@@ -240,17 +233,17 @@ msgstr "密碼…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/秒"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "上傳"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "下載"
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "Wi-Fi 已停用"
