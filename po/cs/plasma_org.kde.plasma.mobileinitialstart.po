@@ -33,10 +33,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr ""
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 Komunita KDE"
+msgstr ""
 
 #: main.cpp:37
 #, kde-format
