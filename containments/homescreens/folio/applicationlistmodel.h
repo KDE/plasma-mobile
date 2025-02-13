@@ -44,6 +44,8 @@ public Q_SLOTS:
 protected:
     HomeScreen *m_homeScreen{nullptr};
     QList<FolioDelegate *> m_delegates;
+
+    QTimer *m_reloadAppsTimer{nullptr};
 };
 
 class ApplicationListSearchModel : public QSortFilterProxyModel

@@ -11,6 +11,7 @@
 #include <QObject>
 #include <QQuickItem>
 #include <QSet>
+#include <QTimer>
 
 /**
  * @short The base application list, used directly by the full app list page.
@@ -37,4 +38,5 @@ public Q_SLOTS:
 
 protected:
     QList<Application *> m_applicationList;
+    QTimer *m_reloadAppsTimer{nullptr};
 };

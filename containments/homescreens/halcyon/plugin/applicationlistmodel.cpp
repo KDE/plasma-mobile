@@ -18,10 +18,19 @@
 #include <KSharedConfig>
 #include <KSycoca>
 
+#include <chrono>
+
+using namespace std::chrono_literals;
+
 ApplicationListModel::ApplicationListModel(QObject *parent)
     : QAbstractListModel(parent)
+    , m_reloadAppsTimer{new QTimer{this}}
 {
-    connect(KSycoca::self(), &KSycoca::databaseChanged, this, &ApplicationListModel::sycocaDbChanged);
+    m_reloadAppsTimer->setSingleShot(true);
+    m_reloadAppsTimer->setInterval(100ms);
+    connect(m_reloadAppsTimer, &QTimer::timeout, this, &ApplicationListModel::sycocaDbChanged);
+
+    connect(KSycoca::self(), &KSycoca::databaseChanged, m_reloadAppsTimer, static_cast<void (QTimer::*)()>(&QTimer::start));
 }
 
 ApplicationListModel::~ApplicationListModel() = default;
@@ -49,12 +58,6 @@ void ApplicationListModel::loadApplications()
 
     const QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
 
-    beginResetModel();
-
-    m_applicationList.clear();
-
-    QList<Application *> unorderedList;
-
     auto filter = [blacklist](const KService::Ptr &service) -> bool {
         if (service->noDisplay()) {
             return false;
@@ -70,6 +73,12 @@ void ApplicationListModel::loadApplications()
 
         return true;
     };
+
+    beginResetModel();
+
+    m_applicationList.clear();
+
+    QList<Application *> unorderedList;
 
     const KService::List apps = KApplicationTrader::query(filter);
 
