@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-settings package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022, 2024.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022, 2024, 2025.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2024-08-11 07:26+0300\n"
+"PO-Revision-Date: 2025-02-13 12:47+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -286,10 +286,9 @@ msgid "Unknown modem capabilities."
 msgstr ""
 
 #: modemdetails.cpp:293
-#, fuzzy, kde-format
-#| msgid "SIM is not locked"
+#, kde-format
 msgid "eSIM is not initialized."
-msgstr "SIM-карта не заблокирована"
+msgstr "eSIM-карта не инициализирована"
 
 #: modemdetails.cpp:316
 #, kde-format
