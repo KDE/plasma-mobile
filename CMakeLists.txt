@@ -25,21 +25,25 @@ set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 set(KF_IGNORE_PLATFORM_CHECK ON CACHE BOOL "Don't check platform that is being built on")
 
+# Warnings are treated as errors
+set(CMAKE_COMPILE_WARNING_AS_ERROR ON)
+
 include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
-include(ECMOptionalAddSubdirectory)
-include(ECMInstallIcons)
-include(ECMSetupVersion)
-include(ECMMarkNonGuiExecutable)
-include(ECMGenerateHeaders)
-include(ECMFindQmlModule)
-include(ECMGenerateQmlTypes)
 include(ECMFindQmlModule)
 include(GenerateExportHeader)
+include(ECMInstallIcons)
+include(ECMMarkNonGuiExecutable)
+include(ECMOptionalAddSubdirectory)
+include(ECMSetupVersion)
+include(ECMGenerateHeaders)
+include(ECMGenerateQmlTypes)
 include(KDEGitCommitHooks)
 include(KDEClangFormat)
 include(FeatureSummary)
+include(ECMQmlModule)
+include(ECMConfiguredInstall)
 
 add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 

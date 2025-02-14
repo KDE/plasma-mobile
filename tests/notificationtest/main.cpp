@@ -11,7 +11,6 @@
 #include <KAboutData>
 
 #include "tests.h"
-#include "utils.h"
 #include "version.h"
 
 using namespace Qt::Literals::StringLiterals;

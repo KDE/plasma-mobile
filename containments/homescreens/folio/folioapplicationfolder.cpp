@@ -87,7 +87,7 @@ void FolioApplicationFolder::setApplications(QList<FolioApplication *> applicati
 
     m_delegates.clear();
     for (auto *app : applications) {
-        m_delegates.append({new FolioDelegate{app, m_homeScreen}, 0, 0});
+        m_delegates.append({new FolioDelegate{app, m_homeScreen}, 0, 0, 0});
     }
     m_applicationFolderModel = new ApplicationFolderModel{this};
     m_applicationFolderModel->evaluateDelegateIndexes();
@@ -238,14 +238,14 @@ bool ApplicationFolderModel::addDelegate(FolioDelegate *delegate, int index)
 
     if (index == m_folder->m_delegates.size()) {
         beginInsertRows(QModelIndex(), index, index);
-        m_folder->m_delegates.append({delegate, 0, 0});
+        m_folder->m_delegates.append({delegate, 0, 0, 0});
         evaluateDelegateIndexes(false);
         endInsertRows();
     } else if (m_folder->m_delegates[index].delegate->type() == FolioDelegate::None) {
         replaceGhostEntry(delegate);
     } else {
         beginInsertRows(QModelIndex(), index, index);
-        m_folder->m_delegates.insert(index, {delegate, 0, 0});
+        m_folder->m_delegates.insert(index, {delegate, 0, 0, 0});
         evaluateDelegateIndexes(false);
         endInsertRows();
     }

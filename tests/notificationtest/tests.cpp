@@ -1,6 +1,9 @@
 // SPDX-FileCopyrightText: 2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+#include "tests.h"
+#include "utils.h"
+
 #include <KJob>
 #include <KNotification>
 #include <KNotificationJobUiDelegate>
@@ -8,8 +11,6 @@
 #include <KUiServerV2JobTracker>
 
 #include <stdlib.h>
-
-#include "tests.h"
 
 NotificationTest::NotificationTest(QObject *parent)
     : QObject{parent}
@@ -52,7 +53,7 @@ void ReplyNotificationTest::sendNotification(QCoreApplication &app)
     auto replyAction = std::make_unique<KNotificationReplyAction>("Reply");
     replyAction->setPlaceholderText("Reply to John...");
     QObject::connect(replyAction.get(), &KNotificationReplyAction::replied, [](const QString &text) {
-        qDebug() << "you replied with" << text;
+        qCDebug(LOGGING_CATEGORY) << "you replied with" << text;
     });
     notification->setReplyAction(std::move(replyAction));
 
