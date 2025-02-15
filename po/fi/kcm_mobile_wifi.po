@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-nm package.
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-12-01 15:00+0200\n"
+"PO-Revision-Date: 2025-01-12 17:07+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -26,25 +26,24 @@ msgstr "Virheellinen syöte."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "Yhteystietoa – ”%1”"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "Siirtonopeudet"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "Yhdistetty, ↓ %1/s, ↑ %2/s"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connection Name"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "Yhteyden nimi"
+msgstr "Yhteyden tiedot"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -228,17 +227,17 @@ msgstr "Salasana…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/s"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Lähetys"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Lataus"
 
 #~ msgid "Wi-Fi is disabled"
 #~ msgstr "Langaton verkko ei ole käytössä"
