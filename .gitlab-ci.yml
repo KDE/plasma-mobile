@@ -29,8 +29,6 @@ posix-script-compliance:
   image:
     name: espidev/alpine-remote-builder-base:latest
     entrypoint: [""]
-  tags:
-    - alpine-remote-builder
   stage: build
   script:
     - >
