@@ -24,7 +24,7 @@ posix-script-compliance:
     - shellcheck -x -s sh bin/startplasmamobile.in
     - shellcheck -x --exclude=1091 -s sh bin/startplasmamobile-dev.sh.cmake # ignore error from file not existing (given by cmake)
 
-.remote-builder:
+.apk-builder:
   when: never
   image:
     name: espidev/alpine-remote-builder-base:latest
@@ -43,8 +43,8 @@ posix-script-compliance:
     paths:
       - ./packages
 
-remote-builder-amd64:
-  extends: .remote-builder
+apk-builder-amd64:
+  extends: .apk-builder
   when: always
   # when: manual
   # tags:
