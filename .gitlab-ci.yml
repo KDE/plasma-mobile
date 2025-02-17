@@ -47,6 +47,7 @@ posix-script-compliance:
 
 remote-builder-amd64:
   extends: .remote-builder
+  when: always
   # when: manual
   # tags:
     # - alpine-remote-builder-amd64
