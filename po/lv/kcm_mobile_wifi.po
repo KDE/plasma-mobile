@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-04 00:42+0000\n"
-"PO-Revision-Date: 2024-12-16 17:34+0200\n"
+"PO-Revision-Date: 2025-02-18 18:59+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: ui/ConnectDialog.qml:57
 #, kde-format
@@ -27,25 +27,24 @@ msgstr "Nederīga ievade."
 #, kde-format
 msgctxt "kcm page title"
 msgid "Connection Info for \"%1\""
-msgstr ""
+msgstr "„%1“ savienojuma informācija"
 
 #: ui/ConnectionInfo.qml:21
 #, kde-format
 msgctxt "@title:group"
 msgid "Transfer Rates"
-msgstr ""
+msgstr "Pārsūtīšanas ātrumi"
 
 #: ui/ConnectionInfo.qml:37
 #, kde-format
 msgid "Connected, ↓ %1/s, ↑ %2/s"
-msgstr ""
+msgstr "Savienots, ↓ %1/s, ↑ %2/s"
 
 #: ui/ConnectionInfo.qml:44
-#, fuzzy, kde-format
-#| msgid "Connect to"
+#, kde-format
 msgctxt "@title:group"
 msgid "Connection Details"
-msgstr "Savienoties ar"
+msgstr "Savienojuma informācija"
 
 #: ui/ConnectionItemDelegate.qml:147
 #, kde-format
@@ -229,14 +228,14 @@ msgstr "Parole…"
 #: ui/TrafficMonitor.qml:37 ui/TrafficMonitor.qml:111
 #, kde-format
 msgid "/s"
-msgstr ""
+msgstr "/sek."
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Upload"
-msgstr ""
+msgstr "Augšuplāde"
 
 #: ui/TrafficMonitor.qml:89
 #, kde-format
 msgid "Download"
-msgstr ""
+msgstr "Lejuplāde"
