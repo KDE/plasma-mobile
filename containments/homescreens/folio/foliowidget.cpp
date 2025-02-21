@@ -51,12 +51,12 @@ void FolioWidget::init()
     });
 }
 
-FolioWidget *FolioWidget::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioWidget::Ptr FolioWidget::fromJson(QJsonObject &obj, HomeScreen *parent)
 {
     int id = obj[QStringLiteral("id")].toInt();
     int gridWidth = obj[QStringLiteral("gridWidth")].toInt();
     int gridHeight = obj[QStringLiteral("gridHeight")].toInt();
-    return new FolioWidget(parent, id, gridWidth, gridHeight);
+    return std::make_shared<FolioWidget>(parent, id, gridWidth, gridHeight);
 }
 
 QJsonObject FolioWidget::toJson() const
@@ -208,7 +208,7 @@ bool FolioWidget::isInBounds(int widgetRow, int widgetColumn, int row, int colum
     return (row >= widgetRow) && (row <= widgetRow + gridHeight() - 1) && (column >= widgetColumn) && (column <= widgetColumn + gridWidth() - 1);
 }
 
-bool FolioWidget::overlapsWidget(int widgetRow, int widgetColumn, FolioWidget *otherWidget, int otherWidgetRow, int otherWidgetColumn)
+bool FolioWidget::overlapsWidget(int widgetRow, int widgetColumn, FolioWidget::Ptr otherWidget, int otherWidgetRow, int otherWidgetColumn)
 {
     if (!otherWidget) {
         return false;

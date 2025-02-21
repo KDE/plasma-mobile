@@ -60,7 +60,7 @@ class HomeScreenState : public QObject
     Q_PROPERTY(qreal folderPageContentWidth READ folderPageContentWidth WRITE setFolderPageContentWidth NOTIFY folderPageContentWidthChanged)
     Q_PROPERTY(qreal folderPageContentHeight READ folderPageContentHeight WRITE setFolderPageContentHeight NOTIFY folderPageContentHeightChanged)
     Q_PROPERTY(qreal folderOpenProgress READ folderOpenProgress WRITE setFolderOpenProgress NOTIFY folderOpenProgressChanged)
-    Q_PROPERTY(FolioApplicationFolder *currentFolder READ currentFolder NOTIFY currentFolderChanged)
+    Q_PROPERTY(FolioApplicationFolder *currentFolder READ currentFolderRaw NOTIFY currentFolderChanged)
     Q_PROPERTY(qreal folderGridLength READ folderGridLength NOTIFY folderGridLengthChanged)
 
     Q_PROPERTY(qreal settingsOpenProgress READ settingsOpenProgress WRITE setSettingsOpenProgress NOTIFY settingsOpenProgressChanged)
@@ -208,8 +208,9 @@ public:
     int folderGridLength() const;
     void calculateFolderGridLength();
 
-    FolioApplicationFolder *currentFolder() const;
-    void setCurrentFolder(FolioApplicationFolder *folder);
+    std::shared_ptr<FolioApplicationFolder> currentFolder() const;
+    FolioApplicationFolder *currentFolderRaw() const;
+    void setCurrentFolder(std::shared_ptr<FolioApplicationFolder> folder);
 
     // the progress for the opening of the settings view
     qreal settingsOpenProgress();
@@ -389,7 +390,7 @@ private:
     qreal m_folderPageContentWidth{0};
     qreal m_folderPageContentHeight{0};
     qreal m_folderOpenProgress{0};
-    FolioApplicationFolder *m_currentFolder{nullptr};
+    std::shared_ptr<FolioApplicationFolder> m_currentFolder{nullptr};
     int m_folderGridLength{0};
 
     qreal m_settingsOpenProgress{0};

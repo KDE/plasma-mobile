@@ -35,11 +35,11 @@ FolioApplication::FolioApplication(HomeScreen *parent, KService::Ptr service)
     });
 }
 
-FolioApplication *FolioApplication::fromJson(QJsonObject &obj, HomeScreen *parent)
+FolioApplication::Ptr FolioApplication::fromJson(QJsonObject &obj, HomeScreen *parent)
 {
     QString storageId = obj[QStringLiteral("storageId")].toString();
     if (KService::Ptr service = KService::serviceByStorageId(storageId)) {
-        return new FolioApplication(parent, service);
+        return std::make_shared<FolioApplication>(parent, service);
     }
     return nullptr;
 }
