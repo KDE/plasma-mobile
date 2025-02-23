@@ -17,6 +17,7 @@
 #include <QKeySequence>
 #include <QTimer>
 
+#include <KConfigWatcher>
 #include <KGlobalAccel>
 #include <KLocalizedString>
 
@@ -208,6 +209,9 @@ private:
     QTimer *m_shutdownTimer;
 
     int m_animationDuration = 400;
+
+    KConfigWatcher::Ptr m_mobileShellConfigWatcher;
+    KSharedConfig::Ptr m_mobileShellConfig;
 };
 
 } // namespace KWin

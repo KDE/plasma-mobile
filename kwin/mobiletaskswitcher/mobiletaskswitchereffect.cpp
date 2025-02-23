@@ -15,6 +15,10 @@
 
 using namespace std::chrono_literals;
 
+const QString SHELL_CONFIG_FILE = QStringLiteral("plasmamobilerc");
+const QString SHELL_CONFIG_GROUP = QStringLiteral("General");
+const QString NAVIGATION_PANEL_SHOWN_CONFIG_KEY = QStringLiteral("navigationPanelEnabled");
+
 namespace KWin
 {
 
@@ -212,7 +216,16 @@ MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
     , m_border{new EffectTouchBorder{m_effectState}}
     , m_toggleAction{std::make_unique<QAction>()}
     , m_shutdownTimer{new QTimer{this}}
+    , m_mobileShellConfig{KSharedConfig::openConfig(SHELL_CONFIG_FILE, KConfig::SimpleConfig)}
 {
+    // Watch shell config for gesture mode changes
+    m_mobileShellConfigWatcher = KConfigWatcher::create(m_mobileShellConfig);
+    connect(m_mobileShellConfigWatcher.data(), &KConfigWatcher::configChanged, this, [this](const KConfigGroup &group, const QByteArrayList &names) -> void {
+        if (group.name() == SHELL_CONFIG_GROUP && names.contains(NAVIGATION_PANEL_SHOWN_CONFIG_KEY)) {
+            reconfigure(ReconfigureFlag::ReconfigureAll);
+        }
+    });
+
     const char *uri = "org.kde.private.mobileshell.taskswitcher";
     qmlRegisterType<TaskFilterModel>(uri, 1, 0, "TaskFilterModel");
     qmlRegisterSingletonType<TaskModel>(uri, 1, 0, "TaskModel", [this](QQmlEngine *, QJSEngine *) -> QObject * {
@@ -257,7 +270,15 @@ MobileTaskSwitcherEffect::~MobileTaskSwitcherEffect()
 void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
 {
     setAnimationDuration(animationTime(300ms));
-    m_border->setBorders(m_borderActivate);
+
+    auto group = KConfigGroup{m_mobileShellConfig, SHELL_CONFIG_GROUP};
+
+    // Only enable edge borders when navigation panel is not shown
+    if (group.readEntry(NAVIGATION_PANEL_SHOWN_CONFIG_KEY, true)) {
+        m_border->setBorders({});
+    } else {
+        m_border->setBorders(m_borderActivate);
+    }
 }
 
 int MobileTaskSwitcherEffect::requestedEffectChainPosition() const
