@@ -94,9 +94,6 @@ SimpleKCM {
         }
 
         FormCard.FormCard {
-            Layout.topMargin: Kirigami.Units.largeSpacing
-            Layout.bottomMargin: Kirigami.Units.largeSpacing
-
             FormCard.FormTextDelegate {
                 id: hotspotSSIDText
                 enabled: !hotspotToggle.checked
