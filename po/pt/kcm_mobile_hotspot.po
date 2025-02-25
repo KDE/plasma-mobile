@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2020-04-23 19:28+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -33,13 +33,13 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, fuzzy, kde-format
 #| msgid "Hotspot"
 msgid "Hotspot SSID"
 msgstr "Ponto de Acesso"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, fuzzy, kde-format
 #| msgid "Password:"
 msgid "Hotspot Password"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2023-12-18 22:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -38,12 +38,12 @@ msgstr "İnternet bağlantınızı başka aygıtlarla bir Wi-Fi ağı olarak pay
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "Erişim Noktası SSID'si"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Erişim Noktası Parolası"

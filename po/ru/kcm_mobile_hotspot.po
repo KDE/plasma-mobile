@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2024-09-23 10:26+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -41,12 +41,12 @@ msgstr ""
 msgid "Settings"
 msgstr "Параметры"
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "SSID точки доступа"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Пароль точки доступа"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -37,12 +37,12 @@ msgstr "将您的互联网连接通过 Wi-Fi 网络共享给其他设备。"
 msgid "Settings"
 msgstr "设置"
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "无线热点 SSID"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, kde-format
 msgid "Hotspot Password"
 msgstr "无线热点密码"

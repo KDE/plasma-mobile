@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-nm\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2024-02-09 19:36+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -37,12 +37,12 @@ msgstr "Wi-Fi 네트워크를 통해서 다른 장치와 인터넷 연결을 공
 msgid "Settings"
 msgstr "설정"
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "핫스팟 SSID"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, kde-format
 msgid "Hotspot Password"
 msgstr "핫스팟 암호"

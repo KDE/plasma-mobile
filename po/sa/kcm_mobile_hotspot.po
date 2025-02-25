@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-03 01:37+0000\n"
+"POT-Creation-Date: 2025-02-25 00:42+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -37,12 +37,12 @@ msgstr "अन्यैः उपकरणैः सह स्वस्य अ�
 msgid "Settings"
 msgstr "सेटिंग्स्"
 
-#: ui/main.qml:103
+#: ui/main.qml:100
 #, kde-format
 msgid "Hotspot SSID"
 msgstr "हॉटस्पॉट SSID"
 
-#: ui/main.qml:112
+#: ui/main.qml:109
 #, kde-format
 msgid "Hotspot Password"
 msgstr "हॉटस्पॉट पासवर्ड"
