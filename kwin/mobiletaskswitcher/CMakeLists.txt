@@ -1,28 +1,10 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-kcoreaddons_add_plugin(mobiletaskswitcher INSTALL_NAMESPACE "kwin/effects/plugins")
-target_sources(mobiletaskswitcher PRIVATE
-    main.cpp
-    mobiletaskswitchereffect.cpp
-    effecttouchborder.cpp
-    taskfiltermodel.cpp
-    taskmodel.cpp
-)
+kpackage_install_package(package mobiletaskswitcher effects kwin)
 
-target_link_libraries(mobiletaskswitcher
-    KF6::ConfigGui
-    KF6::GlobalAccel
-    KF6::I18n
-    KF6::CoreAddons
-    KF6::WindowSystem
+# Copy the script to the build directory so one can run tests without prior
+# make install.
+file(COPY package/contents package/metadata.json DESTINATION ${CMAKE_BINARY_DIR}/bin/kwin/effects/mobiletaskswitcher)
 
-    Qt::Quick
-    Qt::Core
-
-    KWin::kwin
-    Plasma::Activities
-)
-
-install(DIRECTORY qml DESTINATION ${KDE_INSTALL_DATADIR}/kwin/effects/mobiletaskswitcher)
-install(FILES mobiletaskswitcher.json DESTINATION ${KDE_INSTALL_DATADIR}/kwin/effects/mobiletaskswitcher)
+add_subdirectory(plugin)

@@ -51,6 +51,9 @@ class MobileTaskSwitcherState : public QObject
     Q_PROPERTY(qint64 elapsedTimeSinceStart READ getElapsedTimeSinceStart)
     Q_PROPERTY(qint64 doubleClickInterval READ getDoubleClickInterval) // is there a better way than to forward this?
 
+    Q_PROPERTY(TaskModel *taskModel READ taskModel CONSTANT)
+    QML_ELEMENT
+
 public:
     enum class Status {
         // TODO! I could (should?) re-add the activating and deactivating states again to match EffectTogglableState. could help with/tie into
@@ -61,7 +64,9 @@ public:
     };
     Q_ENUM(Status)
 
-    MobileTaskSwitcherState(EffectTouchBorderState *effectState);
+    MobileTaskSwitcherState(QObject *parent = nullptr);
+
+    Q_INVOKABLE void init(KWin::QuickSceneEffect *parent);
 
     bool gestureInProgress() const;
     void setGestureInProgress(bool gestureInProgress);
@@ -102,8 +107,22 @@ public:
 
     void restartDoubleClickTimer();
 
+    int animationDuration() const;
+    void setDBusState(bool active);
+
+    TaskModel *taskModel() const
+    {
+        return m_taskModel;
+    }
+
 public Q_SLOTS:
     void processTouchPositionChanged(qreal primaryPosition, qreal orthogonalPosition);
+
+    void activate();
+    void realDeactivate();
+    void deactivate(bool deactivateInstantly);
+    void quickDeactivate();
+    void toggle();
 
 Q_SIGNALS:
     void activated();
@@ -126,8 +145,14 @@ Q_SIGNALS:
     void yPositionChanged();
 
 private:
+    void invokeEffect();
+
+    EffectTouchBorderState *m_effectState{nullptr};
+    EffectTouchBorder *m_border{nullptr};
+    TaskModel *m_taskModel{nullptr};
+    KWin::QuickSceneEffect *m_effect{nullptr};
+
     Status m_status = Status::Inactive;
-    EffectTouchBorderState *m_effectState;
     bool m_gestureInProgress = false;
 
     int m_currentTaskIndex;
@@ -161,53 +186,8 @@ private:
     {
         return qApp->doubleClickInterval();
     }
-};
-
-class MobileTaskSwitcherEffect : public QuickSceneEffect
-{
-    Q_OBJECT
-
-public:
-    enum class Status { Inactive, Activating, Deactivating, Active };
-    MobileTaskSwitcherEffect();
-    ~MobileTaskSwitcherEffect() override;
-
-    int animationDuration() const;
-    void setAnimationDuration(int duration);
-
-    int requestedEffectChainPosition() const override;
-    bool borderActivated(ElectricBorder border) override;
-    void reconfigure(ReconfigureFlags flags) override;
-    void grabbedKeyboardEvent(QKeyEvent *keyEvent) override;
-
-    void setDBusState(bool active);
-
-public Q_SLOTS:
-    void activate();
-    void realDeactivate();
-    void deactivate(bool deactivateInstantly);
-    void quickDeactivate();
-    void toggle();
-
-Q_SIGNALS:
-    void animationDurationChanged();
-    void gestureInProgressChanged();
-
-private:
-    void invokeEffect();
-
-    EffectTouchBorderState *const m_effectState;
-    MobileTaskSwitcherState *const m_taskSwitcherState;
-    TaskModel *const m_taskModel;
-    EffectTouchBorder *const m_border;
-    QList<int> m_borderActivate = {ElectricBorder::ElectricBottom};
-
-    std::unique_ptr<QAction> m_toggleAction;
-    QList<QKeySequence> m_toggleShortcut;
 
     QTimer *m_shutdownTimer;
-
-    int m_animationDuration = 400;
 };
 
 } // namespace KWin

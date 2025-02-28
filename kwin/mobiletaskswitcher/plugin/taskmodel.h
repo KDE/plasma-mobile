@@ -19,7 +19,13 @@ class TaskModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    enum Roles { WindowRole = Qt::UserRole + 1, OutputRole, DesktopRole, ActivityRole, LastActivatedRole };
+    enum Roles {
+        WindowRole = Qt::UserRole + 1,
+        OutputRole,
+        DesktopRole,
+        ActivityRole,
+        LastActivatedRole
+    };
 
     explicit TaskModel(QObject *parent = nullptr);
 

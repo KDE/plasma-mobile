@@ -13,16 +13,44 @@
 #include <QQuickItem>
 #include <window.h>
 
+#include <execinfo.h>
+#include <signal.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
 using namespace std::chrono_literals;
 
 namespace KWin
 {
 
-MobileTaskSwitcherState::MobileTaskSwitcherState(EffectTouchBorderState *effectState)
-    : m_effectState{effectState}
+MobileTaskSwitcherState::MobileTaskSwitcherState(QObject *parent)
+    : QObject{parent}
     , m_doubleClickTimer{new QElapsedTimer{}}
+    , m_shutdownTimer{new QTimer{this}}
 {
+    // Configure close timer
+    m_shutdownTimer->setSingleShot(true);
+    m_shutdownTimer->setInterval(300ms);
+    connect(m_shutdownTimer, &QTimer::timeout, this, &MobileTaskSwitcherState::realDeactivate);
+}
+
+void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
+{
+    m_effectState = new EffectTouchBorderState(parent);
+    m_border = new EffectTouchBorder{m_effectState};
+    m_taskModel = new TaskModel{parent};
+    m_effect = parent;
+
+    // Connect signals
+    connect(m_border, &EffectTouchBorder::touchPositionChanged, this, &MobileTaskSwitcherState::processTouchPositionChanged);
+    connect(this, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
+        if (gestureInProgress()) {
+            invokeEffect();
+        }
+    });
     connect(m_effectState, &EffectTouchBorderState::inProgressChanged, this, &MobileTaskSwitcherState::gestureInProgressChanged);
+    connect(effects, &EffectsHandler::screenAboutToLock, this, &MobileTaskSwitcherState::realDeactivate);
 }
 
 bool MobileTaskSwitcherState::gestureInProgress() const
@@ -198,100 +226,23 @@ void MobileTaskSwitcherState::processTouchPositionChanged(qreal primaryDelta, qr
 
 qint64 MobileTaskSwitcherState::getElapsedTimeSinceStart()
 {
-    if (m_doubleClickTimer->isValid())
-    {
+    if (m_doubleClickTimer->isValid()) {
         return m_doubleClickTimer->elapsed();
     }
     return -1;
 }
 
-MobileTaskSwitcherEffect::MobileTaskSwitcherEffect()
-    : m_effectState{new EffectTouchBorderState(this)}
-    , m_taskSwitcherState{new MobileTaskSwitcherState(m_effectState)}
-    , m_taskModel{new TaskModel{this}}
-    , m_border{new EffectTouchBorder{m_effectState}}
-    , m_toggleAction{std::make_unique<QAction>()}
-    , m_shutdownTimer{new QTimer{this}}
+void MobileTaskSwitcherState::toggle()
 {
-    const char *uri = "org.kde.private.mobileshell.taskswitcher";
-    qmlRegisterType<TaskFilterModel>(uri, 1, 0, "TaskFilterModel");
-    qmlRegisterSingletonType<TaskModel>(uri, 1, 0, "TaskModel", [this](QQmlEngine *, QJSEngine *) -> QObject * {
-        return m_taskModel;
-    });
-    qmlRegisterSingletonType<MobileTaskSwitcherState>(uri, 1, 0, "TaskSwitcherState", [this](QQmlEngine *, QJSEngine *) -> QObject * {
-        return m_taskSwitcherState;
-    });
-
-    connect(m_border, &EffectTouchBorder::touchPositionChanged, m_taskSwitcherState, &MobileTaskSwitcherState::processTouchPositionChanged);
-
-    connect(m_taskSwitcherState, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
-        if (m_taskSwitcherState->gestureInProgress()) {
-            invokeEffect();
-        }
-    });
-
-    // configure close timer
-    m_shutdownTimer->setSingleShot(true);
-    connect(m_shutdownTimer, &QTimer::timeout, this, &MobileTaskSwitcherEffect::realDeactivate);
-
-    // toggle action
-    const QKeySequence defaultToggleShortcut = Qt::META | Qt::Key_C;
-
-    m_toggleAction.get()->setObjectName(QStringLiteral("Mobile Task Switcher"));
-    m_toggleAction.get()->setText(i18n("Toggle Mobile Task Switcher"));
-    KGlobalAccel::self()->setDefaultShortcut(m_toggleAction.get(), {defaultToggleShortcut});
-    KGlobalAccel::self()->setShortcut(m_toggleAction.get(), {defaultToggleShortcut});
-    connect(m_toggleAction.get(), &QAction::triggered, this, &MobileTaskSwitcherEffect::toggle);
-
-    connect(effects, &EffectsHandler::screenAboutToLock, this, &MobileTaskSwitcherEffect::realDeactivate);
-
-    setSource(QUrl::fromLocalFile(
-        QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/effects/mobiletaskswitcher/qml/TaskSwitcher.qml"))));
-    reconfigure(ReconfigureFlag::ReconfigureAll);
-}
-
-MobileTaskSwitcherEffect::~MobileTaskSwitcherEffect()
-{
-}
-
-void MobileTaskSwitcherEffect::reconfigure(ReconfigureFlags)
-{
-    setAnimationDuration(animationTime(300ms));
-    m_border->setBorders(m_borderActivate);
-}
-
-int MobileTaskSwitcherEffect::requestedEffectChainPosition() const
-{
-    return 70;
-}
-
-bool MobileTaskSwitcherEffect::borderActivated(ElectricBorder border)
-{
-    return m_borderActivate.contains(border);
-}
-
-void MobileTaskSwitcherEffect::grabbedKeyboardEvent(QKeyEvent *keyEvent)
-{
-    if (m_toggleShortcut.contains(keyEvent->key() | keyEvent->modifiers())) {
-        if (keyEvent->type() == QEvent::KeyPress) {
-            toggle();
-        }
-        return;
-    }
-    QuickSceneEffect::grabbedKeyboardEvent(keyEvent);
-}
-
-void MobileTaskSwitcherEffect::toggle()
-{
-    if (!isRunning()) {
-        m_taskSwitcherState->restartDoubleClickTimer();
+    if (!m_effect->isRunning()) {
+        restartDoubleClickTimer();
         activate();
     } else {
         deactivate(false);
     }
 }
 
-void MobileTaskSwitcherEffect::activate()
+void MobileTaskSwitcherState::activate()
 {
     if (effects->isScreenLocked()) {
         return;
@@ -301,44 +252,31 @@ void MobileTaskSwitcherEffect::activate()
     invokeEffect();
 }
 
-void MobileTaskSwitcherEffect::deactivate(bool deactivateInstantly)
+void MobileTaskSwitcherState::deactivate(bool deactivateInstantly)
 {
     const auto screens = effects->screens();
     for (const auto screen : screens) {
-        if (QuickSceneView *view = viewForScreen(screen)) {
+        if (QuickSceneView *view = m_effect->viewForScreen(screen)) {
             QMetaObject::invokeMethod(view->rootItem(), "hideAnimation");
         }
     }
-    m_shutdownTimer->start(animationTime(deactivateInstantly ? 0ms : 200ms));
+    m_shutdownTimer->start(m_effect->animationTime(deactivateInstantly ? 0ms : 200ms));
 }
 
-void MobileTaskSwitcherEffect::realDeactivate()
+void MobileTaskSwitcherState::realDeactivate()
 {
     m_effectState->setInProgress(false);
-    m_taskSwitcherState->setStatus(MobileTaskSwitcherState::Status::Inactive);
-    setRunning(false);
+    setStatus(MobileTaskSwitcherState::Status::Inactive);
+    m_effect->setRunning(false);
     setDBusState(false);
 }
 
-void MobileTaskSwitcherEffect::quickDeactivate()
+void MobileTaskSwitcherState::quickDeactivate()
 {
     m_shutdownTimer->start(0);
 }
 
-int MobileTaskSwitcherEffect::animationDuration() const
-{
-    return m_animationDuration;
-}
-
-void MobileTaskSwitcherEffect::setAnimationDuration(int duration)
-{
-    if (m_animationDuration != duration) {
-        m_animationDuration = duration;
-        Q_EMIT animationDurationChanged();
-    }
-}
-
-void MobileTaskSwitcherEffect::setDBusState(bool active)
+void MobileTaskSwitcherState::setDBusState(bool active)
 {
     QDBusMessage request = QDBusMessage::createMethodCall(QStringLiteral("org.kde.plasmashell"),
                                                           QStringLiteral("/Mobile"),
@@ -350,11 +288,10 @@ void MobileTaskSwitcherEffect::setDBusState(bool active)
     QDBusConnection::sessionBus().send(request);
 }
 
-void MobileTaskSwitcherEffect::invokeEffect()
+void MobileTaskSwitcherState::invokeEffect()
 {
-    m_taskSwitcherState->setInitialTaskIndex(
-        m_taskSwitcherState->currentTaskIndex()); // TODO! this is only until the crashing bug is fixed and recency sorting is in
-    setRunning(true);
+    setInitialTaskIndex(currentTaskIndex()); // TODO! this is only until the crashing bug is fixed and recency sorting is in
+    m_effect->setRunning(true);
     setDBusState(true);
 }
 }

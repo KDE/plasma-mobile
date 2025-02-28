@@ -1,0 +1,52 @@
+// SPDX-FileCopyrightText: 2025 Devin Lin <devin@kde.org>
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+import QtQuick
+
+import org.kde.kwin
+
+import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+
+SceneEffect {
+    id: root
+
+    // Created per screen
+    delegate: TaskSwitcher {
+        id: taskSwitcher
+        state: taskSwitcherState
+
+        // Connections {
+        //     target: taskSwitcherState
+
+        //     function onDeactivateRequested() {
+        //         taskSwitcher.hideAnimation()
+        //     }
+        // }
+    }
+
+    ShortcutHandler {
+        name: 'Mobile Task Switcher'
+        text: i18n('Toggle Mobile Task Switcher')
+        sequence: 'Meta+C'
+
+        onActivated: taskSwitcherState.toggle()
+    }
+
+    ScreenEdgeHandler {
+        edge: ScreenEdgeHandler.BottomEdge
+        mode: ScreenEdgeHandler.Touch
+        enabled: !ShellSettings.Settings.navigationPanelEnabled
+
+        onActivated: taskSwitcherState.activate()
+    }
+
+    TaskSwitcherPlugin.MobileTaskSwitcherState {
+        id: taskSwitcherState
+
+        Component.onCompleted: {
+            // Initialize with effect
+            taskSwitcherState.init(root);
+        }
+    }
+}

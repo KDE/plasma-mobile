@@ -12,7 +12,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
-import org.kde.private.mobileshell.taskswitcher 1.0 as TaskSwitcherData
+import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
 
 import org.kde.kwin 3.0 as KWinComponents
 import org.kde.kwin.private.effects 1.0
@@ -26,8 +26,8 @@ FocusScope {
     id: root
     focus: true
 
+    property TaskSwitcherPlugin.MobileTaskSwitcherState state
     readonly property QtObject effect: KWinComponents.SceneView.effect
-    readonly property TaskSwitcherData.TaskSwitcherState state: TaskSwitcherData.TaskSwitcherState
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
     readonly property real topMargin: MobileShell.Constants.topPanelHeight
@@ -37,7 +37,6 @@ FocusScope {
 
     property var taskSwitcherHelpers: TaskSwitcherHelpers {
         taskSwitcher: root
-        stateClass: TaskSwitcherData.TaskSwitcherState
         taskList: taskList
     }
 
@@ -45,9 +44,9 @@ FocusScope {
         id: haptics
     }
 
-    property var tasksModel: TaskSwitcherData.TaskFilterModel {
+    property var tasksModel: TaskSwitcherPlugin.TaskFilterModel {
         screenName: root.targetScreen.name
-        windowModel: TaskSwitcherData.TaskModel
+        windowModel: root.state.taskModel
     }
 
     readonly property int tasksCount: taskList.count
@@ -147,11 +146,11 @@ FocusScope {
     }
 
     function instantHide() {
-        root.effect.deactivate(true);
+        root.state.deactivate(true);
     }
 
     function hide() {
-        root.effect.deactivate(false);
+        root.state.deactivate(false);
     }
 
     Connections {
@@ -196,7 +195,7 @@ FocusScope {
                     // setup some values and return to the initial setup so that the user can always navigate with no down time
                     state.wasInActiveTask = taskSwitcherHelpers.openAppAnim.running ? true : false
                     taskList.setTaskOffsetValue(state.wasInActiveTask ? taskSwitcherHelpers.taskOffsetValue : taskSwitcherHelpers.homeOffsetValue, true);
-                    state.status = !state.wasInActiveTask ? (taskSwitcherHelpers.openAppAnim.closeAnim && !taskSwitcherHelpers.taskDrawerWillOpen ? TaskSwitcherData.TaskSwitcherState.Active : TaskSwitcherData.TaskSwitcherState.Inactive) : TaskSwitcherData.TaskSwitcherState.Inactive
+                    state.status = !state.wasInActiveTask ? (taskSwitcherHelpers.openAppAnim.closeAnim && !taskSwitcherHelpers.taskDrawerWillOpen ? TaskSwitcherPlugin.TaskSwitcherState.Active : TaskSwitcherPlugin.TaskSwitcherState.Inactive) : TaskSwitcherPlugin.TaskSwitcherState.Inactive
                     initialSetup();
                 } else if (taskSwitcherHelpers.openAnim.running) {
                     taskSwitcherHelpers.cancelAnimations();

@@ -5,7 +5,7 @@
 import QtQuick 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.private.mobileshell.taskswitcher 1.0 as TaskSwitcherData
+import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
 
 import org.kde.kwin 3.0 as KWinComponents
 
@@ -19,7 +19,6 @@ QtObject {
     // We assume that the taskSwitcher is the size of the entire screen.
     required property var taskSwitcher
     property var state: taskSwitcher.state
-    required property var stateClass
     required property var taskList
 
     // task switcher peek and pop setting for when it is toggled from the home screen
@@ -56,7 +55,7 @@ QtObject {
     readonly property real heightThreshold: windowHeight * 0.55
 
     // whether the switcher is opened or not
-    readonly property bool taskDrawerOpened: state.status == TaskSwitcherData.TaskSwitcherState.Active
+    readonly property bool taskDrawerOpened: state.status == TaskSwitcherPlugin.MobileTaskSwitcherState.Active
 
     // This is true when the task drawer is already opened or if within an app
     readonly property bool notHomeScreenState: state.wasInActiveTask || taskDrawerOpened
@@ -312,7 +311,7 @@ QtObject {
 
         onFinished: {
             if (!isInTaskScrubMode) {
-                root.state.status = stateClass.Active;
+                root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Active;
             }
         }
     }
@@ -328,7 +327,7 @@ QtObject {
         easing.type: Easing.InBack
 
         onFinished: {
-            root.state.status = stateClass.Inactive;
+            root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
             taskSwitcher.instantHide();
         }
     }
@@ -360,7 +359,7 @@ QtObject {
         duration: 300
         easing.type: Easing.OutQuint
         onFinished: {
-            root.state.status = stateClass.Inactive;
+            root.state.status = TaskSwitcherPlugin.MobileTaskSwitcherState.Inactive;
             taskSwitcher.instantHide();
         }
     }
