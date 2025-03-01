@@ -36,6 +36,8 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
     m_taskModel = new TaskModel{parent};
     m_effect = parent;
 
+    m_border->setBorders({ElectricBorder::ElectricBottom});
+
     // Connect signals
     connect(m_border, &EffectTouchBorder::touchPositionChanged, this, &MobileTaskSwitcherState::processTouchPositionChanged);
     connect(this, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
