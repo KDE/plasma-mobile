@@ -4,7 +4,7 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.24)
 
 project(plasma-mobile)
 set(PROJECT_VERSION "6.3.80")
