@@ -25,18 +25,10 @@ SceneEffect {
         onActivated: taskSwitcherState.toggle()
     }
 
-    // ScreenEdgeHandler {
-    //     edge: ScreenEdgeHandler.BottomEdge
-    //     mode: ScreenEdgeHandler.Touch
-    //     enabled: !ShellSettings.Settings.navigationPanelEnabled
-
-    //     onActivated: taskSwitcherState.activate()
-    // }
-
     TaskSwitcherPlugin.MobileTaskSwitcherState {
         id: taskSwitcherState
 
-        gestureEnabled: ShellSettings.Settings.navigationPanelEnabled
+        gestureEnabled: !ShellSettings.Settings.navigationPanelEnabled
 
         Component.onCompleted: {
             // Initialize with effect
