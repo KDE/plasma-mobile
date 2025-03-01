@@ -10,6 +10,7 @@
 
 #include <QAbstractListModel>
 #include <QHash>
+#include <QQmlEngine>
 #include <QSortFilterProxyModel>
 #include <QVariant>
 
@@ -21,6 +22,7 @@ class TaskFilterModel : public QSortFilterProxyModel
     Q_OBJECT
     Q_PROPERTY(TaskModel *windowModel READ windowModel WRITE setWindowModel NOTIFY windowModelChanged)
     Q_PROPERTY(QString screenName READ screenName WRITE setScreenName NOTIFY screenNameChanged)
+    QML_ELEMENT
 
 public:
     explicit TaskFilterModel(QObject *parent = nullptr);
