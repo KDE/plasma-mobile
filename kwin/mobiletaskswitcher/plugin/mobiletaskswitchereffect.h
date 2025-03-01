@@ -30,6 +30,8 @@ namespace KWin
 class MobileTaskSwitcherState : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool gestureEnabled READ gestureEnabled WRITE setGestureEnabled NOTIFY gestureEnabledChanged)
+
     Q_PROPERTY(bool wasInActiveTask READ wasInActiveTask WRITE setWasInActiveTask NOTIFY wasInActiveTaskChanged)
     Q_PROPERTY(int currentTaskIndex READ currentTaskIndex WRITE setCurrentTaskIndex NOTIFY currentTaskIndexChanged)
     Q_PROPERTY(int initialTaskIndex READ initialTaskIndex WRITE setInitialTaskIndex NOTIFY initialTaskIndexChanged)
@@ -68,6 +70,9 @@ public:
 
     Q_INVOKABLE void init(KWin::QuickSceneEffect *parent);
 
+    bool gestureEnabled() const;
+    void setGestureEnabled(bool gestureEnabled);
+
     bool gestureInProgress() const;
     void setGestureInProgress(bool gestureInProgress);
     bool wasInActiveTask() const;
@@ -87,33 +92,21 @@ public:
     qreal yPosition() const;
     void setYPosition(qreal positionY);
 
+    Status status() const;
     void setStatus(Status status);
-    Status status() const
-    {
-        return m_status;
-    }
 
+    int currentTaskIndex() const;
     void setCurrentTaskIndex(int newTaskIndex);
-    int currentTaskIndex() const
-    {
-        return m_currentTaskIndex;
-    }
 
+    int initialTaskIndex() const;
     void setInitialTaskIndex(int newTaskIndex);
-    int initialTaskIndex() const
-    {
-        return m_initialTaskIndex;
-    }
 
     void restartDoubleClickTimer();
 
     int animationDuration() const;
     void setDBusState(bool active);
 
-    TaskModel *taskModel() const
-    {
-        return m_taskModel;
-    }
+    TaskModel *taskModel() const;
 
 public Q_SLOTS:
     void processTouchPositionChanged(qreal primaryPosition, qreal orthogonalPosition);
@@ -125,6 +118,8 @@ public Q_SLOTS:
     void toggle();
 
 Q_SIGNALS:
+    void gestureEnabledChanged();
+
     void activated();
     void deactivated();
 
@@ -144,9 +139,13 @@ Q_SIGNALS:
     void xPositionChanged();
     void yPositionChanged();
 
+private Q_SLOTS:
+    void refreshBorders();
+
 private:
     void invokeEffect();
 
+    bool m_gestureEnabled{false};
     EffectTouchBorderState *m_effectState{nullptr};
     EffectTouchBorder *m_border{nullptr};
     TaskModel *m_taskModel{nullptr};

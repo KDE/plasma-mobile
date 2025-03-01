@@ -15,14 +15,6 @@ SceneEffect {
     delegate: TaskSwitcher {
         id: taskSwitcher
         state: taskSwitcherState
-
-        // Connections {
-        //     target: taskSwitcherState
-
-        //     function onDeactivateRequested() {
-        //         taskSwitcher.hideAnimation()
-        //     }
-        // }
     }
 
     ShortcutHandler {
@@ -33,16 +25,18 @@ SceneEffect {
         onActivated: taskSwitcherState.toggle()
     }
 
-    ScreenEdgeHandler {
-        edge: ScreenEdgeHandler.BottomEdge
-        mode: ScreenEdgeHandler.Touch
-        enabled: !ShellSettings.Settings.navigationPanelEnabled
+    // ScreenEdgeHandler {
+    //     edge: ScreenEdgeHandler.BottomEdge
+    //     mode: ScreenEdgeHandler.Touch
+    //     enabled: !ShellSettings.Settings.navigationPanelEnabled
 
-        onActivated: taskSwitcherState.activate()
-    }
+    //     onActivated: taskSwitcherState.activate()
+    // }
 
     TaskSwitcherPlugin.MobileTaskSwitcherState {
         id: taskSwitcherState
+
+        gestureEnabled: ShellSettings.Settings.navigationPanelEnabled
 
         Component.onCompleted: {
             // Initialize with effect

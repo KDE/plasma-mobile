@@ -36,9 +36,8 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
     m_taskModel = new TaskModel{parent};
     m_effect = parent;
 
-    m_border->setBorders({ElectricBorder::ElectricBottom});
-
     // Connect signals
+    connect(this, &MobileTaskSwitcherState::gestureEnabledChanged, this, &MobileTaskSwitcherState::refreshBorders);
     connect(m_border, &EffectTouchBorder::touchPositionChanged, this, &MobileTaskSwitcherState::processTouchPositionChanged);
     connect(this, &MobileTaskSwitcherState::gestureInProgressChanged, this, [this]() {
         if (gestureInProgress()) {
@@ -47,6 +46,28 @@ void MobileTaskSwitcherState::init(KWin::QuickSceneEffect *parent)
     });
     connect(m_effectState, &EffectTouchBorderState::inProgressChanged, this, &MobileTaskSwitcherState::gestureInProgressChanged);
     connect(effects, &EffectsHandler::screenAboutToLock, this, &MobileTaskSwitcherState::realDeactivate);
+
+    refreshBorders();
+}
+
+bool MobileTaskSwitcherState::gestureEnabled() const
+{
+    return m_gestureEnabled;
+}
+
+void MobileTaskSwitcherState::setGestureEnabled(bool gestureEnabled)
+{
+    m_gestureEnabled = gestureEnabled;
+    Q_EMIT gestureEnabledChanged();
+}
+
+void MobileTaskSwitcherState::refreshBorders()
+{
+    if (m_gestureEnabled) {
+        m_border->setBorders({ElectricBorder::ElectricBottom});
+    } else {
+        m_border->setBorders({});
+    }
 }
 
 bool MobileTaskSwitcherState::gestureInProgress() const
@@ -148,6 +169,11 @@ void MobileTaskSwitcherState::setYPosition(qreal yPosition)
     }
 }
 
+MobileTaskSwitcherState::Status MobileTaskSwitcherState::status() const
+{
+    return m_status;
+}
+
 void MobileTaskSwitcherState::setStatus(Status status)
 {
     if (m_status != status) {
@@ -159,6 +185,11 @@ void MobileTaskSwitcherState::setStatus(Status status)
     }
 }
 
+int MobileTaskSwitcherState::currentTaskIndex() const
+{
+    return m_currentTaskIndex;
+}
+
 void MobileTaskSwitcherState::setCurrentTaskIndex(int newTaskIndex)
 {
     if (m_currentTaskIndex != newTaskIndex) {
@@ -167,12 +198,22 @@ void MobileTaskSwitcherState::setCurrentTaskIndex(int newTaskIndex)
     }
 }
 
+int MobileTaskSwitcherState::initialTaskIndex() const
+{
+    return m_initialTaskIndex;
+}
+
 void MobileTaskSwitcherState::setInitialTaskIndex(int newTaskIndex)
 {
     if (m_initialTaskIndex != newTaskIndex) {
         m_initialTaskIndex = newTaskIndex;
         Q_EMIT initialTaskIndexChanged();
     }
+}
+
+TaskModel *MobileTaskSwitcherState::taskModel() const
+{
+    return m_taskModel;
 }
 
 void MobileTaskSwitcherState::restartDoubleClickTimer()
@@ -230,6 +271,10 @@ qint64 MobileTaskSwitcherState::getElapsedTimeSinceStart()
 
 void MobileTaskSwitcherState::toggle()
 {
+    if (!m_effect) {
+        return;
+    }
+
     if (!m_effect->isRunning()) {
         restartDoubleClickTimer();
         activate();
@@ -250,6 +295,10 @@ void MobileTaskSwitcherState::activate()
 
 void MobileTaskSwitcherState::deactivate(bool deactivateInstantly)
 {
+    if (!m_effect) {
+        return;
+    }
+
     const auto screens = effects->screens();
     for (const auto screen : screens) {
         if (QuickSceneView *view = m_effect->viewForScreen(screen)) {
@@ -261,6 +310,10 @@ void MobileTaskSwitcherState::deactivate(bool deactivateInstantly)
 
 void MobileTaskSwitcherState::realDeactivate()
 {
+    if (!m_effect || !m_effectState) {
+        return;
+    }
+
     m_effectState->setInProgress(false);
     setStatus(MobileTaskSwitcherState::Status::Inactive);
     m_effect->setRunning(false);
