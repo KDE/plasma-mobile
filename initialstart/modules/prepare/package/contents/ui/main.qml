@@ -118,8 +118,10 @@ InitialStartModule {
                         currentIndex: Prepare.PrepareUtil.scalingOptions.indexOf(Prepare.PrepareUtil.scaling.toString() + "%");
                         model: Prepare.PrepareUtil.scalingOptions
 
-                        // remove % suffix
-                        onCurrentValueChanged: Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
+                        onActivated: (index) => {
+                            // remove % suffix
+                            Prepare.PrepareUtil.scaling = parseInt(currentValue.substring(0, currentValue.length - 1));
+                        }
                     }
                 }
 
