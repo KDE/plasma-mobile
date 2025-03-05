@@ -36,6 +36,8 @@ private:
     int m_scaling;
     bool m_usingDarkTheme;
 
+    int m_output{0};
+
     ColorsSettings *m_colorsSettings;
     KScreen::ConfigPtr m_config;
 };

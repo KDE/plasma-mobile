@@ -25,6 +25,7 @@ PrepareUtil::PrepareUtil(QObject *parent)
         // try to take the primary display's scaling, otherwise use the scaling of any of the displays
         for (KScreen::OutputPtr output : m_config->outputs()) {
             scaling = output->scale() * 100;
+            m_output = output->id();
             if (output->isPrimary()) {
                 break;
             }
@@ -53,7 +54,9 @@ void PrepareUtil::setScaling(int scaling)
     qreal scalingNum = ((double)scaling) / 100;
 
     for (KScreen::OutputPtr output : outputs) {
-        output->setScale(scalingNum);
+        if (output->id() == m_output) {
+            output->setScale(scalingNum);
+        }
     }
 
     auto setop = new KScreen::SetConfigOperation(m_config, this);
