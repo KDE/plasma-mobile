@@ -3,6 +3,5 @@
 
 add_subdirectory(mobileshell)
 add_subdirectory(info)
-add_subdirectory(powermanagement)
 add_subdirectory(time)
 add_subdirectory(virtualkeyboard)
