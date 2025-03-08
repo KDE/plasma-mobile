@@ -115,7 +115,7 @@ Rectangle {
         visible: false
         focus: root.isKeypadOpen && root.lockScreenState.isKeyboardMode
         z: 1
-        inputMethodHints: Qt.ImhNoPredictiveText
+        inputMethodHints: Qt.ImhNoPredictiveText | Qt.ImhNoAutoUppercase | Qt.ImhSensitiveData
 
         onFocusChanged: {
             if (focus) {
