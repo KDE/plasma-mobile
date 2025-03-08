@@ -1,15 +1,15 @@
-# Spanish translations for plasma_org.kde.plasma.mobileinitialstart.po package.
-# Copyright (C) 2023 This file is copyright:
+# Spanish translations for mobileinitialstart.po package.
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:42+0000\n"
-"PO-Revision-Date: 2024-11-28 00:57+0100\n"
+"PO-Revision-Date: 2025-03-07 17:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -37,7 +37,7 @@ msgstr "Abre el asistente del primer inicio sin modificar la configuración"
 #: main.cpp:36
 #, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2024 La comunidad KDE"
+msgstr "© 2024 La Comunidad KDE"
 
 #: main.cpp:37
 #, kde-format
@@ -171,7 +171,7 @@ msgstr "El dispositivo ya está preparado.<br /><br />¡Disfrute de <b>%1</b>!"
 #: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
-msgstr "Antes de empezar..."
+msgstr "Antes de empezar…"
 
 #: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
@@ -234,7 +234,7 @@ msgstr "Conectarse una red móvil para acceso de red."
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
 msgid "Password…"
-msgstr "Contraseña..."
+msgstr "Contraseña…"
 
 #: qml/LandingComponent.qml:104
 #, kde-format
