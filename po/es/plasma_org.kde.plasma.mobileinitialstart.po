@@ -1,15 +1,15 @@
-# Spanish translations for plasma_org.kde.plasma.mobileinitialstart.po package.
+# Spanish translations for mobileinitialstart.po package.
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 00:44+0000\n"
-"PO-Revision-Date: 2024-11-28 00:57+0100\n"
+"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"PO-Revision-Date: 2025-03-07 17:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -37,7 +37,7 @@ msgstr "Abre el asistente del primer inicio sin modificar la configuración"
 #: main.cpp:36
 #, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2024 La comunidad KDE"
+msgstr "© 2024 La Comunidad KDE"
 
 #: main.cpp:37
 #, kde-format
@@ -171,7 +171,7 @@ msgstr "El dispositivo ya está preparado.<br /><br />¡Disfrute de <b>%1</b>!"
 #: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
-msgstr "Antes de empezar..."
+msgstr "Antes de empezar…"
 
 #: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
@@ -191,7 +191,7 @@ msgstr "Ajuste el tamaño de los elementos de la pantalla."
 msgid "Display Scaling"
 msgstr "Escalado de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema oscuro"
@@ -199,17 +199,17 @@ msgstr "Tema oscuro"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Navegación del sistema"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Escoja un método para navegar por el sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Navegación con gestos"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -217,21 +217,24 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Deslizar desde la parte inferior hacia arriba para ver las aplicaciones que "
+"se están ejecutando. Dar un toque para ir a la pantalla inicial."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Navegación con botones"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
 msgstr ""
+"Usar los botones de una barra de navegación para moverse por el sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Se puede modificar posteriormente en las preferencias."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -271,7 +274,7 @@ msgstr "Conectarse una red móvil para acceso de red."
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
 msgid "Password…"
-msgstr "Contraseña..."
+msgstr "Contraseña…"
 
 #: qml/LandingComponent.qml:104
 #, kde-format

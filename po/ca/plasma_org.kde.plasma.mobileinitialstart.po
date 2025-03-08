@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.mobileinitialstart.po to Catalan
-# Copyright (C) 2023-2024 This_file_is_part_of_KDE
+# Copyright (C) 2023-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-07 00:44+0000\n"
-"PO-Revision-Date: 2024-11-27 09:25+0100\n"
+"POT-Creation-Date: 2025-03-08 00:45+0000\n"
+"PO-Revision-Date: 2025-03-07 11:20+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -192,7 +192,7 @@ msgstr "Ajusteu la mida dels elements a la pantalla."
 msgid "Display Scaling"
 msgstr "Escalat de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema fosc"
@@ -200,17 +200,17 @@ msgstr "Tema fosc"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Navegació del sistema"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Trieu un mètode per a navegar pel sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Navegació de gestos"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -218,21 +218,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Llisqueu cap amunt des de la part inferior per a veure aplicacions en "
+"execució. Llisqueu de manera fina per a anar a la pantalla d'inici."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Navegació de botons"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Utilitzeu botons en una barra de navegació per a navegar pel sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Més tard ho podreu canviar a la configuració."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
