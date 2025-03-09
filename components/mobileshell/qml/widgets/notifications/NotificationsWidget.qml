@@ -54,27 +54,27 @@ Item {
     property bool actionsRequireUnlock: false
 
     /**
-     * the top paddding of the notification list
+     * top paddding of the notification list
      */
     property int topPadding: 0
 
     /**
-     * the bottom paddding of the notification list
+     * bottom paddding of the notification list
      */
     property int bottomPadding: 0
 
     /**
-     * the media controls widget
+     * media controls widget
      */
     property var mediaControlsWidget
 
     /**
-     * whether to show the media controls widget
+     * whether to show the media control widget
      */
     property bool showMediaControlsWidget: false
 
     /**
-     * give access to the list view outside of the notification widget
+     * gives access to the list view outside of the notification widget
      */
     property alias listView: list
 
@@ -192,6 +192,8 @@ Item {
         highlightResizeDuration: 0
         highlight: Item {}
 
+        // media control widget
+        // added to the notification list when in landscape mode
         Component {
             id: headerComponent
             Item {
@@ -210,6 +212,7 @@ Item {
             }
         }
 
+        // set bottom padding for the notification list
         Component {
             id: footerComponent
             Item {
@@ -305,8 +308,10 @@ Item {
                 PropertyAction { target: delegateLoader; property: "ListView.delayRemove"; value: false }
             }
 
+            // adjust top paddding for media control widget
             Component {
                 id: groupDelegate
+
                 Column {
                     spacing: Kirigami.Units.smallSpacing
 

@@ -20,10 +20,11 @@ Loader {
     property real rightMargin: 0
     property real topMargin: 0
     property real bottomMargin: 0
+
     readonly property bool notificationsShown: item && item.notificationsList.hasNotifications
     readonly property bool listOverflowing: item && item.notificationsList.listView.listOverflowing
 
-    property bool onKeypad: false
+    property bool scrollLock: false
 
     property var notificationsList: item ? item.notificationsList : null
 
@@ -71,7 +72,6 @@ Loader {
             MobileShell.NotificationsWidget {
                 id: notificationsList
                 anchors.fill: parent
-                opacity: 0
 
                 historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
                 actionsRequireUnlock: true
@@ -79,8 +79,8 @@ Loader {
                 notificationSettings: root.notificationSettings
                 inLockscreen: true
                 topPadding: Kirigami.Units.gridUnit
-                bottomPadding: Kirigami.Units.gridUnit * 1.5
-                listView.interactive: !root.onKeypad && listView.listOverflowing
+                bottomPadding: Kirigami.Units.gridUnit
+                listView.interactive: !root.scrollLock && listView.listOverflowing
 
                 property bool requestNotificationAction: false
 
@@ -88,12 +88,6 @@ Loader {
                     requestNotificationAction = true;
                     root.passwordRequested();
                 }
-            }
-
-            // opacity gradient at flickable edges
-            MobileShell.FlickableOpacityGradient {
-                anchors.fill: notificationsList
-                flickable: notificationsList
             }
         }
     }

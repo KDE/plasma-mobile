@@ -60,7 +60,7 @@ Item {
     property real offset: 0
 
     /**
-     * Same as offset value except this adds a resistance value when it passes the open position of the current drawer state.
+     * Same as offset value except this adds resistance when passing the open position of the current drawer state.
      */
     property real offsetResistance: 0
 
@@ -135,9 +135,10 @@ Item {
         }
 
         root.direction = (oldOffset === offset)
-        ? MobileShell.Direction.None
-        : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
+            ? MobileShell.Direction.None
+            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
 
+        // set offset resistance based off of the current state
         if (!openToPinnedMode) {
             offsetResistance = root.calculateResistance(offset, contentContainer.maximizedQuickSettingsOffset);
         } else if (!opened) {
@@ -158,6 +159,7 @@ Item {
         }
     }
 
+    // calculates offset resistance for the action drawer overshoots it's open position
     function calculateResistance(value : double, threshold : int) : double {
         if (value > threshold) {
             return threshold + Math.pow(value - threshold + 1, Math.max(0.8 - (value - threshold) / ((root.height - threshold) * 15), 0.35));
@@ -283,6 +285,7 @@ Item {
         }
     }
 
+    // action drawer ui content
     ContentContainer {
         id: contentContainer
         anchors.fill: parent

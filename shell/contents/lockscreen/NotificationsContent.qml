@@ -23,7 +23,7 @@ Item {
 
     readonly property bool listOverflowing: notificationComponent.listOverflowing
 
-    property bool onKeypad: false
+    property bool scrollLock: false
 
     signal passwordRequested()
 
@@ -58,6 +58,7 @@ Item {
         }
     }
 
+    // notification widget column
     NotificationsComponent {
         id: notificationComponent
         lockScreenState: root.lockScreenState
@@ -72,7 +73,7 @@ Item {
         rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         topMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         bottomMargin: 0
-        onKeypad: root.onKeypad
+        scrollLock: root.scrollLock
 
         onPasswordRequested: root.passwordRequested()
         onNotificationsShownChanged: root.notificationsShown = notificationsShown

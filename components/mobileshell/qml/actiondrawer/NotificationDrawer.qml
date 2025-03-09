@@ -24,23 +24,24 @@ Item {
     property alias notificationWidget: notificationWidget
     property real contentY: notificationWidget.listView.contentY
 
-    height: Math.min(actionDrawer.height - toolButtons.height, notificationWidget.listView.contentHeight + 10 + topMargin)
-
-    property real topMargin: actionDrawer.mode == ActionDrawer.Portrait ? actionDrawer.offsetResistance + 1 : 0
     property real topPadding: actionDrawer.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : date.y + date.height + Kirigami.Units.smallSpacing * 6
+    property real topMargin: actionDrawer.mode == ActionDrawer.Portrait ? actionDrawer.offsetResistance + 1 : 0
 
     readonly property real minWidthHeight: Math.min(actionDrawer.width, actionDrawer.height)
     readonly property bool hasNotifications: notificationWidget.hasNotifications
     readonly property bool listOverflowing: notificationWidget.listView.listOverflowing
+
+    height: Math.min(actionDrawer.height - toolButtons.height, notificationWidget.listView.contentHeight + 10 + topMargin)
+
+    // update top margin for the mouse area
+    // this can only be updated when not being dragged to prevent issues
     onTopMarginChanged: {
         if (!actionDrawer.dragging) {
             mouseArea.anchors.topMargin = topMargin;
         }
     }
 
-    Kirigami.Theme.colorSet: Kirigami.Theme.View
-    Kirigami.Theme.inherit: false
-
+    // time source for the time and date whenin landscape mode
     P5Support.DataSource {
         id: timeSource
         engine: "time"
@@ -48,6 +49,11 @@ Item {
         interval: 60 * 1000
     }
 
+    Kirigami.Theme.colorSet: Kirigami.Theme.View
+    Kirigami.Theme.inherit: false
+
+    // notification list widget
+    // margin adjusted to fit and postion into the action drawer
     MobileShell.NotificationsWidget {
         id: notificationWidget
         anchors.fill: parent
@@ -75,6 +81,7 @@ Item {
         onBackgroundClicked: actionDrawer.close();
     }
 
+    // time and date displayed in landscape mode
     Item {
         id: landscapeModeHeader
         anchors.fill: parent

@@ -64,6 +64,7 @@ Item {
         // increase height of drawer when between pinned mode <-> maximized mode
         addedHeight: {
             if (!actionDrawer.openToPinnedMode) {
+                // if pinned mode disabled, just go to full height
                 return Math.max(maximizedQuickSettingsOffset - minimizedQuickSettingsOffset, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
             } else if (!actionDrawer.opened) {
                 return Math.max(0, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
@@ -71,6 +72,5 @@ Item {
                 return Math.max(0, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
             }
         }
-
     }
 }

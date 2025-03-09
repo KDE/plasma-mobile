@@ -38,11 +38,9 @@ Item {
         mode: MobileShell.SwipeArea.VerticalOnly
         anchors.fill: parent
 
-
         function startSwipe() {
             actionDrawer.cancelAnimations();
             actionDrawer.dragging = true;
-
             // Immediately open action drawer if we interact with it and it's already open
             // This allows us to have 2 quick flicks from minimized -> expanded
             if (actionDrawer.visible && !actionDrawer.opened) {
@@ -123,6 +121,7 @@ Item {
             }
         }
 
+        // clear all notification history button
         Item {
             id: toolButtons
             height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
@@ -181,6 +180,8 @@ Item {
         }
     }
 
+    // notification drawer ui
+    // separated from the main drawer ui swipe area to prevent scrolling conflicts
     NotificationDrawer {
         id: notificationDrawer
 

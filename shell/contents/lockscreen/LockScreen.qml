@@ -104,6 +104,8 @@ Item {
             openFactor: flickableLoader.item ? flickableLoader.item.flickable.openFactor : 0
             notificationsModel: root.notifModel
             onPasswordRequested: root.askPassword()
+
+            //readonly property alias actionDrawerVisible: actionDrawerVisible
         }
 
         // Add loading indicator when status bar has not loaded yet
@@ -268,8 +270,8 @@ Item {
                     onNotificationsShownChanged: root.notificationsShown = notificationsShown
                     onPasswordRequested: flickable.goToOpenPosition()
 
-                    onKeypad: flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false
-                    z: onKeypad || !listOverflowing ? -1 : 0
+                    scrollLock: headerBar.actionDrawerVisible || (flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false)
+                    z: scrollLock || !listOverflowing ? -1 : 0
 
                     anchors.fill: parent
                 }
