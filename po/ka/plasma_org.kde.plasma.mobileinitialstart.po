@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2025-03-07 05:57+0100\n"
+"PO-Revision-Date: 2025-03-08 06:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -201,7 +201,7 @@ msgstr "ნავიგაცია სისტემაში"
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr "აირჩიეთ სისტემაში ნავიგაციის მეთოდი"
+msgstr "აირჩიეთ სისტემაში ნავიგაციის მეთოდი."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
