@@ -68,6 +68,12 @@ Window {
 
     Component.onCompleted: ShellUtil.setInputTransparent(notificationPopupManager, true)
 
+    Binding {
+        target: MobileShellState.ShellDBusClient
+        property: "isNotificationPopupDrawerOpen"
+        value: popupDrawerOpened
+    }
+
     // Update the window touch region to encapsulate the notification area or the whole screen depending on the 'popupDrawerOpened' state
     function updateTouchArea() {
         ShellUtil.setInputTransparent(notificationPopupManager, false);
