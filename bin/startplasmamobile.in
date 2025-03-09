@@ -7,7 +7,6 @@
 
 [ -f /etc/profile ] && . /etc/profile
 
-export QT_QPA_PLATFORM=wayland
 export QT_QPA_PLATFORMTHEME=KDE
 export EGL_PLATFORM=wayland
 
