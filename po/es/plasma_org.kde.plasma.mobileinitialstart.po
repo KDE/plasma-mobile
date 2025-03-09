@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:42+0000\n"
+"POT-Creation-Date: 2025-03-09 02:32+0000\n"
 "PO-Revision-Date: 2025-03-07 17:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -191,7 +191,7 @@ msgstr "Ajuste el tamaño de los elementos de la pantalla."
 msgid "Display Scaling"
 msgstr "Escalado de la pantalla"
 
-#: modules/prepare/package/contents/ui/main.qml:134
+#: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
 msgstr "Tema oscuro"
