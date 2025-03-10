@@ -68,7 +68,7 @@ Window {
     Binding {
         target: MobileShellState.ShellDBusClient
         property: "isVolumeOSDOpen"
-        value: visible
+        value: window.visible
     }
 
     Flickable {
