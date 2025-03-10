@@ -194,39 +194,39 @@ msgstr "深色主题"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "系统导航"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "选择一种系统导航方式。"
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "手势导航"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
 msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
-msgstr ""
+msgstr "从底部向上滑动可查看正在运行的应用程序。快速滑动可返回主屏幕。"
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "按钮导航"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "使用导航栏上的按钮来导航系统。"
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "此设置可以之后在设置中更改。"
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
