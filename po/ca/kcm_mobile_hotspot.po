@@ -51,6 +51,3 @@ msgstr "SSID del punt d'accés"
 #, kde-format
 msgid "Hotspot Password"
 msgstr "Contrasenya del punt d'accés"
-
-#~ msgid "Whether the wireless hotspot is enabled."
-#~ msgstr "Si el punt d'accés sense fil està activat."

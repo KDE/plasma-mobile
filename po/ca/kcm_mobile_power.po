@@ -281,10 +281,3 @@ msgstr "Apaga la pantalla després de"
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
 msgstr "Suspèn el dispositiu després de"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgctxt "%1 is value, %2 is unit"
-#~ msgid "%1%2"
-#~ msgstr "%1%2"

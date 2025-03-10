@@ -244,21 +244,3 @@ msgid ""
 msgstr ""
 "La vibració del teclat es controla separadament en el mòdul de configuració "
 "del teclat."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Intensitat de la vibració"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr "Quant intensa ha de ser la vibració en l'intèrpret d'ordres."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Baixa"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Mitjana"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
