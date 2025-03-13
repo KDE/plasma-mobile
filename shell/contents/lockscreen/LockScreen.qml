@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.notificationmanager as Notifications
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.dpmsplugin as DPMS
 import org.kde.plasma.components 3.0 as PC3
 
@@ -212,6 +213,18 @@ Item {
                     anchors.right: parent.right
                 }
 
+                QuickActionButton {
+                    id: leftButton
+                    buttonAction: ShellSettings.Settings.lockscreenLeftButtonAction
+                    opacity: Math.max(0, 1 - flickable.openFactor * 2)
+                    anchors {
+                        bottom: parent.bottom
+                        left: parent.left
+                        bottomMargin: Kirigami.Units.largeSpacing * 3
+                        leftMargin: Kirigami.Units.largeSpacing * 3
+                    }
+                }
+
                 // scroll up icon
                 BottomIconIndicator {
                     id: scrollUpIconLoader
@@ -221,6 +234,18 @@ Item {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: Kirigami.Units.gridUnit + flickable.position * 0.1
                     anchors.horizontalCenter: parent.horizontalCenter
+                }
+
+                QuickActionButton {
+                    id: rightButton
+                    buttonAction: ShellSettings.Settings.lockscreenRightButtonAction
+                    opacity: Math.max(0, 1 - flickable.openFactor * 2)
+                    anchors {
+                        bottom: parent.bottom
+                        right: parent.right
+                        bottomMargin: Kirigami.Units.largeSpacing * 3
+                        rightMargin: Kirigami.Units.largeSpacing * 3
+                    }
                 }
 
                 Rectangle {

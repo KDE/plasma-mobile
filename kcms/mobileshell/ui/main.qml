@@ -207,5 +207,62 @@ KCM.SimpleKCM {
                 onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopRightMode = currentValue
             }
         }
+
+        FormCard.FormHeader {
+            title: i18nc("@title:group", "Lock Screen Shortcuts")
+        }
+
+        FormCard.FormCard {
+            id: quickActionButtons
+            property string noneString: i18nc("@item:inlistbox", "None")
+            property string flashlightString: i18nc("@item:inlistbox", "Flashlight")
+            property string cameraString: i18nc("@item:inlistbox", "Camera")
+
+            FormCard.FormComboBoxDelegate {
+                id: lockscreenLeftButtonDelegate
+                text: i18nc("@label:listbox", "Left button")
+
+                model: ListModel {
+                    Component.onCompleted: {
+                        append({"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None});
+                        append({"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight});
+                        // append({"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera});
+                        lockscreenLeftButtonDelegate.currentIndex = lockscreenLeftButtonDelegate.indexOfValue(ShellSettings.Settings.lockscreenLeftButtonAction)
+                    }
+                }
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    dialog.parent = root
+                }
+                onCurrentValueChanged: ShellSettings.Settings.lockscreenLeftButtonAction = currentValue
+            }
+            
+            FormCard.FormDelegateSeparator { above: lockscreenRightButtonDelegate; below: lockscreenLeftButtonDelegate }
+
+            FormCard.FormComboBoxDelegate {
+                id: lockscreenRightButtonDelegate
+                text: i18nc("@label:listbox", "Right button")
+
+                model: ListModel {
+                    Component.onCompleted: {
+                        append({"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None});
+                        append({"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight});
+                        // append({"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera});
+                        lockscreenRightButtonDelegate.currentIndex = lockscreenRightButtonDelegate.indexOfValue(ShellSettings.Settings.lockscreenRightButtonAction)
+                    }
+                }
+
+                textRole: "name"
+                valueRole: "value"
+
+                Component.onCompleted: {
+                    dialog.parent = root
+                }
+                onCurrentValueChanged: ShellSettings.Settings.lockscreenRightButtonAction = currentValue
+            }
+        }
     }
 }

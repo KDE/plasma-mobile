@@ -18,6 +18,7 @@
 
 const QString CONFIG_FILE = QStringLiteral("plasmamobilerc");
 const QString GENERAL_CONFIG_GROUP = QStringLiteral("General");
+const QString LOCKSCREEN_CONFIG_GROUP = QStringLiteral("Lockscreen");
 
 MobileShellSettings::MobileShellSettings(QObject *parent)
     : QObject{parent}
@@ -40,6 +41,10 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
             Q_EMIT allowLogoutChanged();
+        }
+        if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
+            Q_EMIT lockscreenLeftButtonActionChanged();
+            Q_EMIT lockscreenRightButtonActionChanged();
         }
     });
 }
@@ -223,4 +228,30 @@ bool MobileShellSettings::allowLogout() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     return group.readEntry("allowLogout", true);
+}
+
+MobileShellSettings::LockscreenButtonAction MobileShellSettings::lockscreenLeftButtonAction() const
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    return (LockscreenButtonAction)group.readEntry("lockscreenLeftButtonAction", (int)LockscreenButtonAction::None);
+}
+
+void MobileShellSettings::setLockscreenLeftButtonAction(const LockscreenButtonAction action)
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    group.writeEntry("lockscreenLeftButtonAction", (int)action, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+MobileShellSettings::LockscreenButtonAction MobileShellSettings::lockscreenRightButtonAction() const
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    return (LockscreenButtonAction)group.readEntry("lockscreenRightButtonAction", (int)LockscreenButtonAction::None);
+}
+
+void MobileShellSettings::setLockscreenRightButtonAction(const LockscreenButtonAction action)
+{
+    auto group = KConfigGroup{m_config, LOCKSCREEN_CONFIG_GROUP};
+    group.writeEntry("lockscreenRightButtonAction", (int)action, KConfigGroup::Notify);
+    m_config->sync();
 }
