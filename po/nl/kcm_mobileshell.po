@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2025-03-14 00:44+0000\n"
 "PO-Revision-Date: 2024-10-26 11:51+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -167,6 +167,42 @@ msgstr "Modus Schuiflade rechtsboven "
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Modus bij openen vanaf rechtsboven."
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@title:group"
+msgid "Lock Screen Shortcuts"
+msgstr ""
+
+#: ui/main.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:218
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr ""
+
+#: ui/main.qml:219
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr ""
+
+#: ui/main.qml:223
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr ""
+
+#: ui/main.qml:247
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

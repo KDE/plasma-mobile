@@ -48,6 +48,12 @@ class MobileShellSettings : public QObject
     // logout dialog
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
 
+    // locksreen shortcut icons
+    Q_PROPERTY(LockscreenButtonAction lockscreenLeftButtonAction READ lockscreenLeftButtonAction WRITE setLockscreenLeftButtonAction NOTIFY
+                   lockscreenLeftButtonActionChanged)
+    Q_PROPERTY(LockscreenButtonAction lockscreenRightButtonAction READ lockscreenRightButtonAction WRITE setLockscreenRightButtonAction NOTIFY
+                   lockscreenRightButtonActionChanged)
+
 public:
     MobileShellSettings(QObject *parent = nullptr);
 
@@ -56,6 +62,14 @@ public:
         Expanded /** The drawer is fully expanded when pulled down.*/
     };
     Q_ENUM(ActionDrawerMode)
+
+    enum LockscreenButtonAction {
+        None, // hide the button
+        Flashlight, // toggle flashlight/torch
+        Camera, // camera
+        OpenApp // cant be selected, no support yet
+    };
+    Q_ENUM(LockscreenButtonAction)
 
     /**
      * Get whether shell vibrations are enabled.
@@ -198,6 +212,30 @@ public:
      */
     bool allowLogout() const;
 
+    /**
+     * The action of the left lock screen shortcut
+     */
+    LockscreenButtonAction lockscreenLeftButtonAction() const;
+
+    /**
+     * Set the action of the left lock screen shortcut
+     *
+     * @param action
+     */
+    void setLockscreenLeftButtonAction(LockscreenButtonAction action);
+
+    /**
+     * The action of the right lock screen shortcut
+     */
+    LockscreenButtonAction lockscreenRightButtonAction() const;
+
+    /**
+     * Set the action of the right lock screen shortcut
+     *
+     * @param action
+     */
+    void setLockscreenRightButtonAction(LockscreenButtonAction action);
+
 Q_SIGNALS:
     void vibrationsEnabledChanged();
     void vibrationDurationChanged();
@@ -212,6 +250,8 @@ Q_SIGNALS:
     void actionDrawerTopRightModeChanged();
     void convergenceModeEnabledChanged();
     void allowLogoutChanged();
+    void lockscreenLeftButtonActionChanged();
+    void lockscreenRightButtonActionChanged();
 
 private:
     void updateNavigationBarsInPlasma(bool navigationPanelEnabled);

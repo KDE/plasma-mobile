@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-01 00:42+0000\n"
+"POT-Creation-Date: 2025-03-14 00:44+0000\n"
 "PO-Revision-Date: 2024-07-16 08:15+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -82,6 +82,16 @@ msgstr "Introduïu el PIN"
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
 msgstr "PIN erroni"
+
+#: contents/lockscreen/QuickActionButton.qml:31
+msgctxt "@action:button"
+msgid "Turn flashlight on"
+msgstr ""
+
+#: contents/lockscreen/QuickActionButton.qml:33
+msgctxt "@action:button"
+msgid "Open camera"
+msgstr ""
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
