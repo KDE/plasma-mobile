@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Emir SARI <emir_sari@icloud.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-03-14 11:37+0300\n"
+"PO-Revision-Date: 2025-03-13 21:56+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: ui/languages.qml:19
 #, kde-format
@@ -82,7 +82,7 @@ msgstr "Her bir tümcenin ilk harfini Büyük yap"
 #: ui/main.qml:87
 #, kde-format
 msgid "Complete current word with first suggestion when hitting space"
-msgstr "Boşluk'a basıldığında geçerli sözcüğü ilk öneriyle tamamla"
+msgstr "Boşluk’a basıldığında geçerli sözcüğü ilk öneriyle tamamla"
 
 #: ui/main.qml:96
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Sözcük şeridinde olası sözcükleri öner"
 #: ui/main.qml:107
 #, kde-format
 msgid "Insert a full-stop when space is pressed twice"
-msgstr "Boşluk'a iki kez basıldığında tümceyi noktayla bitir"
+msgstr "Boşluk’a iki kez basıldığında tümceyi noktayla bitir"
 
 #: ui/main.qml:118
 #, kde-format

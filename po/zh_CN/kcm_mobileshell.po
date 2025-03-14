@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-26 00:41+0000\n"
+"POT-Creation-Date: 2025-03-14 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -164,6 +164,42 @@ msgstr "右上角抽屉模式"
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "从右上角打开的模式。"
+
+#: ui/main.qml:212
+#, kde-format
+msgctxt "@title:group"
+msgid "Lock Screen Shortcuts"
+msgstr ""
+
+#: ui/main.qml:217
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "None"
+msgstr ""
+
+#: ui/main.qml:218
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flashlight"
+msgstr ""
+
+#: ui/main.qml:219
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Camera"
+msgstr ""
+
+#: ui/main.qml:223
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Left button"
+msgstr ""
+
+#: ui/main.qml:247
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Right button"
+msgstr ""
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
