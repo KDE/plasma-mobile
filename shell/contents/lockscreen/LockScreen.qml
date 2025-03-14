@@ -105,8 +105,6 @@ Item {
             openFactor: flickableLoader.item ? flickableLoader.item.flickable.openFactor : 0
             notificationsModel: root.notifModel
             onPasswordRequested: root.askPassword()
-
-            //readonly property alias actionDrawerVisible: actionDrawerVisible
         }
 
         // Add loading indicator when status bar has not loaded yet
@@ -150,8 +148,6 @@ Item {
             sourceComponent: Item {
                 id: item
                 property alias flickable: flickable
-                property alias topMargin: lockScreenContent.topMargin
-                property alias leftMargin: lockScreenContent.leftMargin
                 FlickContainer {
                     id: flickable
                     anchors.fill: parent
@@ -190,29 +186,6 @@ Item {
                     onOpenFactorChanged: {
                         if (flickable.openFactor < 0.1 && !flickable.movingUp) {
                             root.passwordBar.clear();
-                        }
-                    }
-
-                    LockScreenContent {
-                        id: lockScreenContent
-
-                        isVertical: !root.isWidescreen
-                        opacity: Math.max(0, 1 - flickable.openFactor * 2)
-                        transform: [
-                            Scale {
-                                origin.x: lockScreenContent.width / 2
-                                origin.y: lockScreenContent.height / 2
-                                yScale: 1 - (flickable.openFactor * 2) * 0.1
-                                xScale: 1 - (flickable.openFactor * 2) * 0.1
-                            }
-                        ]
-
-                        anchors {
-                            topMargin: headerBar.statusBarHeight
-                            top: parent.top
-                            bottom: parent.bottom
-                            left: parent.left
-                            right: parent.right
                         }
                     }
 
@@ -274,17 +247,15 @@ Item {
                     }
                 }
 
-                NotificationsContent {
-                    id: notificationsCentent
+                LockScreenContent {
+                    id: lockScreenContent
 
                     isVertical: !root.isWidescreen
                     opacity: Math.max(0, 1 - flickable.openFactor * 2)
-                    topMargin: item.topMargin
-                    leftMargin: item.leftMargin
                     transform: [
                         Scale {
-                            origin.x: notificationsCentent.width / 2
-                            origin.y: notificationsCentent.height / 2
+                            origin.x: lockScreenContent.width / 2
+                            origin.y: lockScreenContent.height / 2
                             yScale: 1 - (flickable.openFactor * 2) * 0.1
                             xScale: 1 - (flickable.openFactor * 2) * 0.1
                         }
@@ -296,7 +267,15 @@ Item {
                     onPasswordRequested: flickable.goToOpenPosition()
 
                     scrollLock: headerBar.actionDrawerVisible || (flickableLoader.item ? flickableLoader.item.flickable.openFactor > 0.2 : false)
-                    z: scrollLock || !listOverflowing ? -1 : 0
+                    z: scrollLock ? -1 : 0
+
+                    anchors {
+                        //topMargin: headerBar.statusBarHeight
+                        top: item.top
+                        bottom: item.bottom
+                        left: item.left
+                        right: item.right
+                    }
                 }
             }
         }

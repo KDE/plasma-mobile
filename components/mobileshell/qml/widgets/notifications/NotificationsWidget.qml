@@ -173,10 +173,11 @@ Item {
         readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
 
         // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
-        readonly property bool listOverflowing: contentItem.childrenRect.height + spacing >= root.height
+        readonly property bool listOverflowing: listHeight + spacing >= root.height
+        readonly property int listHeight: contentItem.childrenRect.height
 
         bottomMargin: spacing
-        height: count === 0 ? root.topPadding + (showMediaControlsWidget ? mediaControlsWidget.height : 0) : (listOverflowing ? root.height : contentItem.childrenRect.height + bottomMargin)
+        height: count === 0 ? root.topPadding + (showMediaControlsWidget ? mediaControlsWidget.height : 0) : (listOverflowing ? root.height : listHeight + bottomMargin)
 
         anchors {
             top: parent.top

@@ -21,6 +21,9 @@ Loader {
     property real topMargin: 0
     property real bottomMargin: 0
 
+    property bool fadeAtTop: true
+    property real topPadding: 0
+
     readonly property bool notificationsShown: item && item.notificationsList.hasNotifications
     readonly property bool listOverflowing: item && item.notificationsList.listView.listOverflowing
 
@@ -60,25 +63,29 @@ Loader {
         property alias notificationsList: notificationsList
 
         Item {
-            anchors.fill: parent
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.topMargin: root.topMargin
-            anchors.bottomMargin: root.bottomMargin
             anchors.leftMargin: root.leftMargin
             anchors.rightMargin: root.rightMargin
 
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 
+            height: Math.min(parent.height - root.topMargin - root.bottomMargin, notificationsList.listView.listHeight + Kirigami.Units.gridUnit)
+
             MobileShell.NotificationsWidget {
                 id: notificationsList
                 anchors.fill: parent
+                opacity: 0
 
                 historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
                 actionsRequireUnlock: true
                 historyModel: root.notificationsModel
                 notificationSettings: root.notificationSettings
                 inLockscreen: true
-                topPadding: Kirigami.Units.gridUnit
+                topPadding: root.topPadding // Kirigami.Units.gridUnit
                 bottomPadding: Kirigami.Units.gridUnit
                 listView.interactive: !root.scrollLock && listView.listOverflowing
 
@@ -88,6 +95,13 @@ Loader {
                     requestNotificationAction = true;
                     root.passwordRequested();
                 }
+            }
+
+            // opacity gradient at flickable edges
+            MobileShell.FlickableOpacityGradient {
+                anchors.fill: notificationsList
+                flickable: notificationsList
+                fadeAtTop: root.fadeAtTop
             }
         }
     }
