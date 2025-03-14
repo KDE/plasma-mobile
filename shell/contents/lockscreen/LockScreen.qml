@@ -205,6 +205,7 @@ Item {
                     notificationsModel: root.notifModel
                     onNotificationsShownChanged: root.notificationsShown = notificationsShown
                     onPasswordRequested: flickable.goToOpenPosition()
+                    actionButtonsVisible: leftButton.visible || rightButton.visible
 
                     anchors.topMargin: headerBar.statusBarHeight
                     anchors.top: parent.top
@@ -220,8 +221,8 @@ Item {
                     anchors {
                         bottom: parent.bottom
                         left: parent.left
-                        bottomMargin: Kirigami.Units.largeSpacing * 3
-                        leftMargin: Kirigami.Units.largeSpacing * 3
+                        bottomMargin: Kirigami.Units.gridUnit * 3
+                        leftMargin: Kirigami.Units.gridUnit * 3
                     }
                 }
 
@@ -243,8 +244,8 @@ Item {
                     anchors {
                         bottom: parent.bottom
                         right: parent.right
-                        bottomMargin: Kirigami.Units.largeSpacing * 3
-                        rightMargin: Kirigami.Units.largeSpacing * 3
+                        bottomMargin: Kirigami.Units.gridUnit * 3
+                        rightMargin: Kirigami.Units.gridUnit * 3
                     }
                 }
 

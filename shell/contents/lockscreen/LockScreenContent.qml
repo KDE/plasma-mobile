@@ -15,6 +15,7 @@ Item {
 
     required property var lockScreenState
     required property bool isVertical
+    required property bool actionButtonsVisible
 
     property var notificationsModel: []
     property bool notificationsShown: false
@@ -30,7 +31,7 @@ Item {
         spacing: 0
 
         // Center clock when no notifications are shown, otherwise move the clock upward
-        anchors.topMargin: Kirigami.Units.gridUnit * 3.5
+        anchors.topMargin: Kirigami.Units.gridUnit * 3
         anchors.bottomMargin: Kirigami.Units.gridUnit * 2
         anchors.fill: parent
 
@@ -105,7 +106,7 @@ Item {
 
         leftMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        bottomMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
+        bottomMargin: root.isVertical ? (actionButtonsVisible ? Kirigami.Units.gridUnit * 4 : 0) : Kirigami.Units.gridUnit
         topMargin: Kirigami.Units.gridUnit
 
         onPasswordRequested: root.passwordRequested()
