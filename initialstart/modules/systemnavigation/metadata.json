@@ -54,6 +54,7 @@
         "Description[it]": "Modulo di avvio iniziale della navigazione del sistema per Plasma Mobile",
         "Description[nl]": "Systeemnavigatie initiële startmodule voor Plasma Mobile",
         "Description[sl]": "Modul sistemskega krmarjenja initialstart za Plasma Mobile",
+        "Description[tr]": "Plasma Cep için sistem dolaşımı ilk başlangıcı",
         "Description[uk]": "Модуль навігації початкового запуску для мобільної Плазми",
         "Description[zh_CN]": "Plasma Mobile 的系统导航初始化模块",
         "Id": "org.kde.plasma.mobileinitialstart.systemnavigation",
@@ -68,6 +69,7 @@
         "Name[it]": "Navigazione del sistema",
         "Name[nl]": "Systeemnavigatie",
         "Name[sl]": "Sistemsko krmarjenje",
+        "Name[tr]": "Sistem Dolaşımı",
         "Name[uk]": "Навігація системою",
         "Name[zh_CN]": "系统导航",
         "Website": "https://kde.org"
