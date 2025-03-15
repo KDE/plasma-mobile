@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-07-16 06:43+0200\n"
+"PO-Revision-Date: 2025-03-14 07:14+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -85,12 +85,12 @@ msgstr "Napačen PIN"
 #: contents/lockscreen/QuickActionButton.qml:31
 msgctxt "@action:button"
 msgid "Turn flashlight on"
-msgstr ""
+msgstr "Vklopi svetilko"
 
 #: contents/lockscreen/QuickActionButton.qml:33
 msgctxt "@action:button"
 msgid "Open camera"
-msgstr ""
+msgstr "Odpri kamero"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"

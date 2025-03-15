@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# Fracture dept <yurchor@ukr.net>, 2022, 2023, 2024.
+# Fracture dept <yurchor@ukr.net>, 2022, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-10-26 09:31+0300\n"
+"PO-Revision-Date: 2025-03-14 13:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -173,37 +173,37 @@ msgstr "Режим відкриття від верхнього правого �
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Скорочення блокування екрана"
 
 #: ui/main.qml:217
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Немає"
 
 #: ui/main.qml:218
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Спалах"
 
 #: ui/main.qml:219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Камера"
 
 #: ui/main.qml:223
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Ліва кнопка"
 
 #: ui/main.qml:247
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Права кнопка"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

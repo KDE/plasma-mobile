@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-07-16 13:49+0300\n"
+"PO-Revision-Date: 2025-03-14 16:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.07.70\n"
+"X-Generator: Lokalize 25.07.70\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -75,7 +75,7 @@ msgstr "Duvar Kağıdı"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr "PIN Gir"
+msgstr "PIN’i Girin"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
@@ -84,12 +84,12 @@ msgstr "Yanlış PIN"
 #: contents/lockscreen/QuickActionButton.qml:31
 msgctxt "@action:button"
 msgid "Turn flashlight on"
-msgstr ""
+msgstr "Feneri Yak"
 
 #: contents/lockscreen/QuickActionButton.qml:33
 msgctxt "@action:button"
 msgid "Open camera"
-msgstr ""
+msgstr "Kamerayı Aç"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
