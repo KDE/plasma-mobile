@@ -32,6 +32,8 @@ class MobileShellSettings : public QObject
     // status bar
     Q_PROPERTY(bool dateInStatusBar READ dateInStatusBar WRITE setDateInStatusBar NOTIFY dateInStatusBarChanged)
     Q_PROPERTY(float statusBarScaleFactor READ statusBarScaleFactor WRITE setStatusBarScaleFactor NOTIFY statusBarScaleFactorChanged)
+    Q_PROPERTY(float showAllBatteries READ showAllBatteries WRITE setShowAllBatteries NOTIFY showAllBatteriesChanged)
+    Q_PROPERTY(float showBatteryPercentage READ showBatteryPercentage WRITE setShowBatteryPercentage NOTIFY showBatteryPercentageChanged)
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
@@ -141,6 +143,34 @@ public:
     void setStatusBarScaleFactor(float statusBarScaleFactor);
 
     /**
+     * Whether all batteries are shown in the status bar.
+     *
+     * If false, only the primary battery will be shown.
+     */
+    bool showAllBatteries() const;
+
+    /**
+     * Set whether all batteries are shown in the status bar.
+     *
+     * @param showAllBatteries Whether all batteries are shown in the status bar.
+     */
+    void setShowAllBatteries(bool showAllBatteries);
+
+    /**
+     * Whether the battery percentage is shown in the status bar.
+     *
+     * If true, the percentage will be shown next to the battery in the status bar.
+     */
+    bool showBatteryPercentage() const;
+
+    /**
+     * Set whether the battery percentage is shown in the status bar.
+     *
+     * @param showBatteryPercentage Whether the battery percentage is shown in the status bar.
+     */
+    void setShowBatteryPercentage(bool showBatteryPercentage);
+
+    /**
      * Whether the navigation panel is enabled.
      *
      * If this is false, then gesture based navigation is used.
@@ -245,6 +275,8 @@ Q_SIGNALS:
     void animationsEnabledChanged();
     void dateInStatusBarChanged();
     void statusBarScaleFactorChanged();
+    void showAllBatteriesChanged();
+    void showBatteryPercentageChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();

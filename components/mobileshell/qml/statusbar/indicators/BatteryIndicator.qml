@@ -13,6 +13,7 @@ import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.workspace.components 2.0 as PW
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.battery // needed for charging state
 
@@ -24,30 +25,31 @@ RowLayout {
     ListView {
         id: batteryRepeater
 
-        property int batteryWidth: 0
-
-        spacing: root.elementSpacing
+        spacing: ShellSettings.Settings.showAllBatteries ? root.elementSpacing : 0
         model: MobileShell.BatteryInfo.batteries
         orientation: ListView.Horizontal
 
         Layout.alignment: Qt.AlignVCenter
-        Layout.preferredWidth: (batteryRepeater.batteryWidth + root.elementSpacing) * batteryRepeater.count
+        Layout.preferredWidth: contentItem.childrenRect.width
         Layout.fillHeight: true
         Layout.fillWidth: false
 
         delegate: RowLayout {
+            id: batteryBase
 
-            Layout.preferredWidth: batteryRepeater.batteryWidth
+            width: (batteryBase.visible ? ((batteryLabel.visible ? batteryLabel.width : 0) + battery.width) : 0) + (ShellSettings.Settings.showAllBatteries && ShellSettings.Settings.showBatteryPercentage && (batteryRepeater.count - 1 > model.index) ? root.elementSpacing : 0)
             Layout.fillHeight: false
             Layout.alignment: Qt.AlignVCenter
 
             height: batteryRepeater.height
 
+            visible: ShellSettings.Settings.showAllBatteries || Type == "Battery"
+
             PW.BatteryIcon {
                 id: battery
 
                 Layout.alignment: Qt.AlignVCenter
-                height: batteryLabel.height
+                Layout.fillHeight: true
                 width: batteryLabel.height
 
                 hasBattery: PluggedIn
@@ -59,15 +61,11 @@ RowLayout {
                 id: batteryLabel
                 text: i18n("%1%", Percent)
                 Layout.alignment: Qt.AlignVCenter
+                Layout.fillHeight: true
 
                 color: Kirigami.Theme.textColor
+                visible: ShellSettings.Settings.showBatteryPercentage
                 font.pixelSize: textPixelSize
-            }
-
-            Component.onCompleted: {
-                // ListView & RowLayout have problems with childrenRect size,
-                // set it here so it propagates up nicely
-                batteryRepeater.batteryWidth = batteryLabel.width + battery.width
             }
         }
     }

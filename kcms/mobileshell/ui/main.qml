@@ -68,6 +68,34 @@ KCM.SimpleKCM {
 
             FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
 
+            FormCard.FormSwitchDelegate {
+                id: showBatteryPercentage
+                text: i18n("Battery Percentage")
+                description: i18n("Show battery percentage in the status bar.")
+                checked: ShellSettings.Settings.showBatteryPercentage
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.showBatteryPercentage) {
+                        ShellSettings.Settings.showBatteryPercentage = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
+
+            FormCard.FormSwitchDelegate {
+                id: showAllBatteries
+                text: i18n("Show All Batteries")
+                description: i18n("If on, all connected batteries will populate the status bar.")
+                checked: ShellSettings.Settings.showAllBatteries
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.showAllBatteries) {
+                        ShellSettings.Settings.showAllBatteries = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
+
             FormCard.FormComboBoxDelegate {
                 id: statusBarScaleFactorDelegate
 
