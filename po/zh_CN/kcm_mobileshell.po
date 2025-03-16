@@ -169,37 +169,37 @@ msgstr "从右上角打开的模式。"
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "锁屏画面快捷方式"
 
 #: ui/main.qml:217
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: ui/main.qml:218
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "手电筒"
 
 #: ui/main.qml:219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "相机"
 
 #: ui/main.qml:223
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "左键"
 
 #: ui/main.qml:247
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "右键"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

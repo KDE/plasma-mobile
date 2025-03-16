@@ -85,12 +85,12 @@ msgstr "PIN 码错误"
 #: contents/lockscreen/QuickActionButton.qml:31
 msgctxt "@action:button"
 msgid "Turn flashlight on"
-msgstr ""
+msgstr "打开手电筒"
 
 #: contents/lockscreen/QuickActionButton.qml:33
 msgctxt "@action:button"
 msgid "Open camera"
-msgstr ""
+msgstr "打开相机"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
