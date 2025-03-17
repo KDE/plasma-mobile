@@ -1,15 +1,15 @@
 # Spanish translations for plasma_shell_org.kde.plasma.phone.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is part of KDE
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_shell_org\n"
+"Project-Id-Version: plasma_shell_org.kde.plasma.phone\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-07-16 16:40+0200\n"
+"PO-Revision-Date: 2025-03-15 02:01+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
@@ -25,7 +25,7 @@ msgstr "Copiar al portapapeles"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr "Ver detalles del error..."
+msgstr "Ver detalles del error…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
@@ -61,7 +61,7 @@ msgstr "Complementos de fondo del escritorio"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:134
 msgid "Get New Plugins…"
-msgstr "Obtener nuevos complementos..."
+msgstr "Obtener nuevos complementos…"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:148
 msgid "Layout changes must be applied before other changes can be made"
@@ -88,31 +88,13 @@ msgstr "PIN erróneo"
 #: contents/lockscreen/QuickActionButton.qml:31
 msgctxt "@action:button"
 msgid "Turn flashlight on"
-msgstr ""
+msgstr "Encender la linterna"
 
 #: contents/lockscreen/QuickActionButton.qml:33
 msgctxt "@action:button"
 msgid "Open camera"
-msgstr ""
+msgstr "Abrir la cámara"
 
 #: contents/views/Panel.qml:321
 msgid "Panel Focus Indicator"
 msgstr "Indicador de foco del panel"
-
-#~ msgid "Logging in..."
-#~ msgstr "Iniciando sesión..."
-
-#~ msgid "Change Wallpaper"
-#~ msgstr "Cambiar fondo del escritorio"
-
-#~ msgid "Configure"
-#~ msgstr "Configurar"
-
-#~ msgid "Layout:"
-#~ msgstr "Disposición:"
-
-#~ msgid "Wallpaper Type:"
-#~ msgstr "Tipo de fondo del escritorio:"
-
-#~ msgid "Customize..."
-#~ msgstr "Personalizar..."

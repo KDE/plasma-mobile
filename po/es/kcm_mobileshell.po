@@ -1,15 +1,15 @@
 # Spanish translations for kcm_mobileshell.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is part of KDE
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-10-26 20:28+0200\n"
+"PO-Revision-Date: 2025-03-15 02:00+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -175,37 +175,37 @@ msgstr "Modo al abrir desde la parte superior derecha."
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Atajos de teclado de bloquear pantalla"
 
 #: ui/main.qml:217
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Ninguno"
 
 #: ui/main.qml:218
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Linterna"
 
 #: ui/main.qml:219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Cámara"
 
 #: ui/main.qml:223
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Botón izquierdo"
 
 #: ui/main.qml:247
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Botón derecho"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
@@ -279,31 +279,3 @@ msgid ""
 msgstr ""
 "Las vibraciones del teclado se controlan de forma separada en el módulo de "
 "ajustes del teclado."
-
-#~ msgid "Vibration Intensity"
-#~ msgstr "Intensidad de la vibración"
-
-#~ msgid "How intense shell vibrations should be."
-#~ msgstr ""
-#~ "Intensidad que deben tener las vibraciones del intérprete de órdenes."
-
-#~ msgctxt "Low intensity"
-#~ msgid "Low"
-#~ msgstr "Baja"
-
-#~ msgctxt "Medium intensity"
-#~ msgid "Medium"
-#~ msgstr "Media"
-
-#~ msgctxt "High intensity"
-#~ msgid "High"
-#~ msgstr "Alta"
-
-#~ msgid "Task Switcher"
-#~ msgstr "Selector de tareas"
-
-#~ msgid "Show Application Previews"
-#~ msgstr "Mostrar vistas previas de aplicaciones"
-
-#~ msgid "Turning this off may help improve performance."
-#~ msgstr "Desactivar esto puede ayudar a mejorar el rendimiento."
