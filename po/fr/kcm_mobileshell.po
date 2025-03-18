@@ -1,11 +1,11 @@
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Xavier Besnard <xavier.besnard@kde.org>
 # Xavier Besnard <xavier.besnard@kde.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-14 00:44+0000\n"
-"PO-Revision-Date: 2024-10-27 08:45+0100\n"
+"PO-Revision-Date: 2025-03-15 09:26+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -173,37 +173,37 @@ msgstr "Mode à l'ouverture à partir du coté droit supérieur."
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Raccourcis concernant l'écran de verrouillage"
 
 #: ui/main.qml:217
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Aucune"
 
 #: ui/main.qml:218
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Lampe torche"
 
 #: ui/main.qml:219
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Appareil photo"
 
 #: ui/main.qml:223
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Bouton gauche"
 
 #: ui/main.qml:247
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Bouton droit"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
