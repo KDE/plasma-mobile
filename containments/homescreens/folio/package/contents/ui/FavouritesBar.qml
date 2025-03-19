@@ -79,7 +79,13 @@ MouseArea {
             Component {
                 id: placeholderComponent
 
-                Item {}
+                // square that shows when hovering over a spot to drop a delegate on (ghost entry)
+                PlaceholderDelegate {
+                    id: dragDropFeedback
+                    folio: root.folio
+                    width: folio.HomeScreenState.pageCellWidth
+                    height: folio.HomeScreenState.pageCellHeight
+                }
             }
 
             Component {
