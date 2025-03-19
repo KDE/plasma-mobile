@@ -32,14 +32,6 @@ ContainmentItem {
         setWindowProperties()
     }
 
-    // filled in by the shell (Panel.qml)
-    property var tabBar: null
-    onTabBarChanged: {
-        if (tabBar) {
-            tabBar.visible = false;
-        }
-    }
-
     MobileShell.HapticsEffect {
         id: haptics
     }

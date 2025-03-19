@@ -30,9 +30,6 @@ Item {
             if (containment.panel !== undefined) {
                 containment.panel = panel;
             }
-            if (containment.tabBar !== undefined) {
-                containment.tabBar = tabBar;
-            }
         }
     }
 
