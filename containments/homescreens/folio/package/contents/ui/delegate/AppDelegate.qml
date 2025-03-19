@@ -17,8 +17,9 @@ AbstractDelegate {
     id: root
 
     shadow: true
-    name: application.name
+    name: application ? application.name : ""
 
+    // This may be null for short periods of time due to model changes
     property Folio.FolioApplication application
 
     property alias iconItem: icon
@@ -27,6 +28,10 @@ AbstractDelegate {
     property bool turnToFolderAnimEnabled: false
 
     function launchApp() {
+        if (!application) {
+            return;
+        }
+
         if (application.icon !== "" && !root.application.running) {
             MobileShellState.ShellDBusClient.openAppLaunchAnimationWithPosition(
                 Plasmoid.screen,
@@ -50,7 +55,7 @@ AbstractDelegate {
         height: folio.FolioSettings.delegateIconSize
         width: folio.FolioSettings.delegateIconSize
 
-        // background for folder creation animation
+        // Background for folder creation animation
         Rectangle {
             id: rect
             radius: Kirigami.Units.cornerRadius
@@ -77,12 +82,12 @@ AbstractDelegate {
             }
         }
 
-        // app icon
+        // Application icon
         DelegateAppIcon {
             id: icon
             folio: root.folio
             anchors.fill: parent
-            source: root.application.icon
+            source: root.application ? root.application.icon : ""
 
             property real scaleAmount: root.turnToFolder ? 0.3 : 1.0
             Behavior on scaleAmount {
@@ -97,13 +102,14 @@ AbstractDelegate {
                 yScale: icon.scaleAmount
             }
 
+            // Running indicator
             Rectangle {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
                     bottomMargin: -Kirigami.Units.smallSpacing
                 }
-                visible: root.application.running
+                visible: root.application && root.application.running
                 radius: width
                 width: Kirigami.Units.smallSpacing
                 height: width
@@ -112,5 +118,3 @@ AbstractDelegate {
         }
     }
 }
-
-
