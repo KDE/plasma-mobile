@@ -32,11 +32,11 @@ class MobileShellSettings : public QObject
     // status bar
     Q_PROPERTY(bool dateInStatusBar READ dateInStatusBar WRITE setDateInStatusBar NOTIFY dateInStatusBarChanged)
     Q_PROPERTY(float statusBarScaleFactor READ statusBarScaleFactor WRITE setStatusBarScaleFactor NOTIFY statusBarScaleFactorChanged)
+    Q_PROPERTY(bool showBatteryPercentage READ showBatteryPercentage WRITE setShowBatteryPercentage NOTIFY showBatteryPercentageChanged)
 
     // navigation panel
     Q_PROPERTY(bool navigationPanelEnabled READ navigationPanelEnabled WRITE setNavigationPanelEnabled NOTIFY navigationPanelEnabledChanged)
-    Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel
-                   NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
+    Q_PROPERTY(bool alwaysShowKeyboardToggleOnNavigationPanel READ alwaysShowKeyboardToggleOnNavigationPanel WRITE setAlwaysShowKeyboardToggleOnNavigationPanel NOTIFY alwaysShowKeyboardToggleOnNavigationPanelChanged)
 
     // action drawer
     Q_PROPERTY(ActionDrawerMode actionDrawerTopLeftMode READ actionDrawerTopLeftMode WRITE setActionDrawerTopLeftMode NOTIFY actionDrawerTopLeftModeChanged)
@@ -49,10 +49,8 @@ class MobileShellSettings : public QObject
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
 
     // locksreen shortcut icons
-    Q_PROPERTY(LockscreenButtonAction lockscreenLeftButtonAction READ lockscreenLeftButtonAction WRITE setLockscreenLeftButtonAction NOTIFY
-                   lockscreenLeftButtonActionChanged)
-    Q_PROPERTY(LockscreenButtonAction lockscreenRightButtonAction READ lockscreenRightButtonAction WRITE setLockscreenRightButtonAction NOTIFY
-                   lockscreenRightButtonActionChanged)
+    Q_PROPERTY(LockscreenButtonAction lockscreenLeftButtonAction READ lockscreenLeftButtonAction WRITE setLockscreenLeftButtonAction NOTIFY lockscreenLeftButtonActionChanged)
+    Q_PROPERTY(LockscreenButtonAction lockscreenRightButtonAction READ lockscreenRightButtonAction WRITE setLockscreenRightButtonAction NOTIFY lockscreenRightButtonActionChanged)
 
 public:
     MobileShellSettings(QObject *parent = nullptr);
@@ -139,6 +137,20 @@ public:
      * @param statusBarScaleFactor Scale factor for status bar height.
      */
     void setStatusBarScaleFactor(float statusBarScaleFactor);
+
+    /**
+     * Whether the battery percentage is shown in the status bar.
+     *
+     * If true, the percentage will be shown next to the battery in the status bar.
+     */
+    bool showBatteryPercentage() const;
+
+    /**
+     * Set whether the battery percentage is shown in the status bar.
+     *
+     * @param showBatteryPercentage Whether the battery percentage is shown in the status bar.
+     */
+    void setShowBatteryPercentage(bool showBatteryPercentage);
 
     /**
      * Whether the navigation panel is enabled.
@@ -245,6 +257,7 @@ Q_SIGNALS:
     void animationsEnabledChanged();
     void dateInStatusBarChanged();
     void statusBarScaleFactorChanged();
+    void showBatteryPercentageChanged();
     void taskSwitcherPreviewsEnabledChanged();
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();

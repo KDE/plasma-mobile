@@ -68,6 +68,20 @@ KCM.SimpleKCM {
 
             FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
 
+            FormCard.FormSwitchDelegate {
+                id: showBatteryPercentage
+                text: i18n("Battery Percentage")
+                description: i18n("Show battery percentage in the status bar.")
+                checked: ShellSettings.Settings.showBatteryPercentage
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.showBatteryPercentage) {
+                        ShellSettings.Settings.showBatteryPercentage = checked;
+                    }
+                }
+            }
+
+            FormCard.FormDelegateSeparator { above: quickSettingsButton; below: topLeftActionDrawerModeDelegate }
+
             FormCard.FormComboBoxDelegate {
                 id: statusBarScaleFactorDelegate
 
@@ -239,7 +253,7 @@ KCM.SimpleKCM {
                 }
                 onCurrentValueChanged: ShellSettings.Settings.lockscreenLeftButtonAction = currentValue
             }
-            
+
             FormCard.FormDelegateSeparator { above: lockscreenRightButtonDelegate; below: lockscreenLeftButtonDelegate }
 
             FormCard.FormComboBoxDelegate {
