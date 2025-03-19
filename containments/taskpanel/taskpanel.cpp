@@ -129,8 +129,8 @@ void TaskPanel::updateShowRotationButton()
             // apparently it's possible to get nullptr outputs?
             continue;
         }
-        if (output->autoRotatePolicy() == KScreen::Output::AutoRotatePolicy::Always) {
-            // only check displays that have autorotate on
+        if (output->autoRotatePolicy() != KScreen::Output::AutoRotatePolicy::Never) {
+            // only check displays that don't have autorotate on
             continue;
         }
 
