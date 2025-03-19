@@ -10,6 +10,8 @@
 #include <QQuickItem>
 #include <QSet>
 
+#include <KService>
+
 #include "foliodelegate.h"
 #include "homescreen.h"
 
@@ -42,6 +44,8 @@ public Q_SLOTS:
     void sycocaDbChanged();
 
 protected:
+    KService::List queryApplications();
+
     HomeScreen *m_homeScreen{nullptr};
 
     QList<std::shared_ptr<FolioDelegate>> m_delegates;

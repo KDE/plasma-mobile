@@ -1,5 +1,5 @@
 // SPDX-FileCopyrightText: 2014 Antonis Tsiapaliokas <antonis.tsiapaliokas@kde.org>
-// SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
+// SPDX-FileCopyrightText: 2022-2024 Devin Lin <devin@kde.org>
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "applicationlistmodel.h"
@@ -53,13 +53,12 @@ void ApplicationListModel::sycocaDbChanged()
     load();
 }
 
-void ApplicationListModel::load()
+KService::List ApplicationListModel::queryApplications()
 {
     auto cfg = KSharedConfig::openConfig(QStringLiteral("applications-blacklistrc"));
     auto blgroup = KConfigGroup(cfg, QStringLiteral("Applications"));
 
     const QStringList blacklist = blgroup.readEntry("blacklist", QStringList());
-
     auto filter = [blacklist](const KService::Ptr &service) -> bool {
         if (service->noDisplay()) {
             return false;
@@ -76,27 +75,61 @@ void ApplicationListModel::load()
         return true;
     };
 
-    beginResetModel();
+    return KApplicationTrader::query(filter);
+}
 
-    m_delegates.clear();
+void ApplicationListModel::load()
+{
+    qDebug() << "Reloading folio app list...";
 
-    QList<FolioDelegate::Ptr> unorderedList;
+    // This function supports dynamic insertions and deletions to the existing
+    // list depending on what is given from queryApplications().
 
-    const KService::List apps = KApplicationTrader::query(filter);
-
-    for (const KService::Ptr &service : apps) {
-        FolioApplication::Ptr app = std::make_shared<FolioApplication>(m_homeScreen, service);
-        FolioDelegate::Ptr delegate = std::make_shared<FolioDelegate>(app, m_homeScreen);
-        unorderedList << delegate;
+    QMap<QString, int> storageIdMap; // <storageId, index>
+    for (int i = 0; i < m_delegates.size(); ++i) {
+        const auto &delegate = m_delegates[i];
+        storageIdMap.insert(delegate->application()->storageId(), i);
     }
 
-    std::sort(unorderedList.begin(), unorderedList.end(), [](FolioDelegate::Ptr &a1, FolioDelegate::Ptr &a2) {
-        return a1->application()->name().compare(a2->application()->name(), Qt::CaseInsensitive) < 0;
-    });
+    const KService::List currentApps = queryApplications();
+    QList<KService::Ptr> toInsert;
 
-    m_delegates << unorderedList;
+    for (const KService::Ptr &service : currentApps) {
+        auto it = storageIdMap.find(service->storageId());
+        if (it != storageIdMap.end()) {
+            // Service already in m_delegates
+            storageIdMap.erase(it);
+        } else {
+            // Service needs to be inserted into m_delegates
+            toInsert.append(std::move(service));
+        }
+    }
 
-    endResetModel();
+    QList<int> toRemove;
+    for (int index : storageIdMap.values()) {
+        toRemove.append(index);
+    }
+
+    std::sort(toRemove.begin(), toRemove.end());
+
+    // Remove indices first, from end to start to avoid indicies changing
+    for (int i = toRemove.size() - 1; i >= 0; --i) {
+        int ind = toRemove[i];
+
+        beginRemoveRows({}, ind, ind);
+        m_delegates.removeAt(ind);
+        endRemoveRows();
+    }
+
+    // Append new elements
+    for (const KService::Ptr &service : toInsert) {
+        FolioApplication::Ptr app = std::make_shared<FolioApplication>(m_homeScreen, service);
+        FolioDelegate::Ptr delegate = std::make_shared<FolioDelegate>(app, m_homeScreen);
+
+        beginInsertRows({}, m_delegates.size(), m_delegates.size());
+        m_delegates.append(delegate);
+        endInsertRows();
+    }
 }
 
 QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
@@ -115,7 +148,7 @@ QVariant ApplicationListModel::data(const QModelIndex &index, int role) const
         if (!delegate->application()) {
             return QVariant();
         }
-        return m_delegates.at(index.row())->application()->name();
+        return delegate->application()->name();
     default:
         return QVariant();
     }
@@ -133,7 +166,13 @@ int ApplicationListModel::rowCount(const QModelIndex &parent) const
 ApplicationListSearchModel::ApplicationListSearchModel(HomeScreen *parent, ApplicationListModel *model)
     : QSortFilterProxyModel(parent)
 {
-    setFilterCaseSensitivity(Qt::CaseInsensitive);
     setSourceModel(model);
+
     setFilterRole(ApplicationListModel::NameRole);
+    setFilterCaseSensitivity(Qt::CaseInsensitive);
+
+    setSortRole(ApplicationListModel::NameRole);
+    setSortCaseSensitivity(Qt::CaseInsensitive);
+
+    sort(0, Qt::AscendingOrder);
 }
