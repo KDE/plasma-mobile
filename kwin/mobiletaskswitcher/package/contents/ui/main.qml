@@ -7,6 +7,7 @@ import org.kde.kwin
 
 import org.kde.plasma.private.mobileshell.taskswitcherplugin as TaskSwitcherPlugin
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 
 SceneEffect {
     id: root
@@ -28,7 +29,7 @@ SceneEffect {
     TaskSwitcherPlugin.MobileTaskSwitcherState {
         id: taskSwitcherState
 
-        gestureEnabled: !ShellSettings.Settings.navigationPanelEnabled
+        gestureEnabled: !ShellSettings.Settings.navigationPanelEnabled && !MobileShellState.ShellDBusClient.isActionDrawerOpen && !MobileShellState.ShellDBusClient.isVolumeOSDOpen && !MobileShellState.ShellDBusClient.isNotificationPopupDrawerOpen
 
         Component.onCompleted: {
             // Initialize with effect

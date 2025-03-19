@@ -31,7 +31,7 @@ Window {
 
     LayerShell.Window.scope: "overlay"
     LayerShell.Window.anchors: LayerShell.Window.AnchorTop
-    LayerShell.Window.layer: LayerShell.Window.LayerTop
+    LayerShell.Window.layer: LayerShell.Window.LayerOverlay
     LayerShell.Window.exclusionZone: -1
 
     readonly property color backgroundColor: Qt.darker(Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95), 1.05)
@@ -63,6 +63,12 @@ Window {
     Component.onCompleted: {
         window.close();
         visible = false;
+    }
+
+    Binding {
+        target: MobileShellState.ShellDBusClient
+        property: "isVolumeOSDOpen"
+        value: window.visible
     }
 
     Flickable {

@@ -66,6 +66,32 @@ void ShellDBusObject::setIsActionDrawerOpen(bool value)
     }
 }
 
+bool ShellDBusObject::isVolumeOSDOpen()
+{
+    return m_isVolumeOSDOpen;
+}
+
+void ShellDBusObject::setIsVolumeOSDOpen(bool value)
+{
+    if (value != m_isVolumeOSDOpen) {
+        m_isVolumeOSDOpen = value;
+        Q_EMIT isVolumeOSDOpenChanged();
+    }
+}
+
+bool ShellDBusObject::isNotificationPopupDrawerOpen()
+{
+    return m_isNotificationPopupDrawerOpen;
+}
+
+void ShellDBusObject::setIsNotificationPopupDrawerOpen(bool value)
+{
+    if (value != m_isNotificationPopupDrawerOpen) {
+        m_isNotificationPopupDrawerOpen = value;
+        Q_EMIT isNotificationPopupDrawerOpenChanged();
+    }
+}
+
 bool ShellDBusObject::isTaskSwitcherVisible()
 {
     return m_isTaskSwitcherVisible;
