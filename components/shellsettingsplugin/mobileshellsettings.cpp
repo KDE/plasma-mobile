@@ -118,7 +118,7 @@ void MobileShellSettings::setStatusBarScaleFactor(float statusBarScaleFactor)
 bool MobileShellSettings::showBatteryPercentage() const
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
-    return group.readEntry("showBatteryPercentage", false);
+    return group.readEntry("showBatteryPercentage", true);
 }
 
 void MobileShellSettings::setShowBatteryPercentage(bool showBatteryPercentage)
