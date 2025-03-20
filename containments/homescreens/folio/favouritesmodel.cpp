@@ -24,6 +24,16 @@ FavouritesModel::FavouritesModel(HomeScreen *parent)
     : QAbstractListModel{parent}
     , m_homeScreen{parent}
 {
+    // Listen to application removal events and delete delegates
+    connect(m_homeScreen->applicationListModel(), &ApplicationListModel::applicationRemoved, this, [this](const QString &storageId) {
+        for (int i = 0; i < m_delegates.size(); i++) {
+            auto delegate = m_delegates[i].delegate;
+
+            if (delegate->type() == FolioDelegate::Application && delegate->application()->storageId() == storageId) {
+                removeEntry(i);
+            }
+        }
+    });
 }
 
 int FavouritesModel::rowCount(const QModelIndex &parent) const

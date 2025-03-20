@@ -116,9 +116,16 @@ void ApplicationListModel::load()
     for (int i = toRemove.size() - 1; i >= 0; --i) {
         int ind = toRemove[i];
 
+        QString storageId;
+        if (m_delegates[ind]->application()) {
+            storageId = m_delegates[ind]->application()->storageId();
+        }
+
         beginRemoveRows({}, ind, ind);
         m_delegates.removeAt(ind);
         endRemoveRows();
+
+        Q_EMIT applicationRemoved(storageId);
     }
 
     // Append new elements

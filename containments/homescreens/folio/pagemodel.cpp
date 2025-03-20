@@ -11,15 +11,30 @@ PageModel::PageModel(QList<FolioPageDelegate::Ptr> delegates, QObject *parent, H
     , m_homeScreen{homeScreen}
     , m_delegates{delegates}
 {
+    // Listen to widget removal events and delete delegates
     connect(homeScreen->widgetsManager(), &WidgetsManager::widgetRemoved, this, [this](Plasma::Applet *applet) {
-        if (applet) {
-            // delete any instance of this widget
-            for (int i = 0; i < m_delegates.size(); i++) {
-                FolioPageDelegate::Ptr delegate = m_delegates[i];
-                if (delegate->type() == FolioDelegate::Widget && delegate->widget()->applet() == applet) {
-                    removeDelegate(i);
-                    break;
-                }
+        if (!applet) {
+            return;
+        }
+
+        // delete any instance of this widget
+        for (int i = 0; i < m_delegates.size(); i++) {
+            FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+            if (delegate->type() == FolioDelegate::Widget && delegate->widget()->applet() == applet) {
+                removeDelegate(i);
+                break;
+            }
+        }
+    });
+
+    // Listen to application removal events and delete delegates
+    connect(homeScreen->applicationListModel(), &ApplicationListModel::applicationRemoved, this, [this](const QString &storageId) {
+        for (int i = 0; i < m_delegates.size(); i++) {
+            FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+            if (delegate->type() == FolioDelegate::Application && delegate->application()->storageId() == storageId) {
+                removeDelegate(i);
             }
         }
     });

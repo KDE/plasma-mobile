@@ -40,6 +40,10 @@ public:
 
     void load();
 
+Q_SIGNALS:
+    // Emitted when an application was detected to have been removed from the system
+    void applicationRemoved(QString storageId);
+
 public Q_SLOTS:
     void sycocaDbChanged();
 

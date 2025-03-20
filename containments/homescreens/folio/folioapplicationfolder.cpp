@@ -151,6 +151,17 @@ ApplicationFolderModel::ApplicationFolderModel(FolioApplicationFolder *parent)
     connect(homeScreenState, &HomeScreenState::pageCellHeightChanged, this, [this]() {
         evaluateDelegateIndexes();
     });
+
+    // Listen to application removal events and delete delegates
+    connect(m_folder->m_homeScreen->applicationListModel(), &ApplicationListModel::applicationRemoved, this, [this](const QString &storageId) {
+        for (int i = 0; i < m_folder->m_delegates.size(); i++) {
+            auto delegate = m_folder->m_delegates[i].delegate;
+
+            if (delegate->type() == FolioDelegate::Application && delegate->application()->storageId() == storageId) {
+                removeDelegate(i);
+            }
+        }
+    });
 }
 
 int ApplicationFolderModel::rowCount(const QModelIndex & /*parent*/) const
