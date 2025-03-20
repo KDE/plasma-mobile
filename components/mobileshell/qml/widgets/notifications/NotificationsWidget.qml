@@ -54,6 +54,31 @@ Item {
     property bool actionsRequireUnlock: false
 
     /**
+     * Top padding of the notification list.
+     */
+    property int topPadding: 0
+
+    /**
+     * Bottom padding of the notification list.
+     */
+    property int bottomPadding: 0
+
+    /**
+     * Header component for notification list.
+     */
+    property var header
+
+    /**
+     * Whether to show the header component.
+     */
+    property bool showHeader: false
+
+    /**
+     * Gives access to the notification list view outside of the notification widget.
+     */
+    property alias listView: list
+
+    /**
      * Whether the widget has notifications.
      */
     readonly property bool hasNotifications: list.count > 0
@@ -72,11 +97,6 @@ Item {
      * Only emitted if actionsRequireUnlock is enabled.
      */
     signal unlockRequested()
-
-    /**
-     * Emitted when the background is clicked (not a notification or other element).
-     */
-    signal backgroundClicked()
 
     /**
      * Run pending action that was pending for authentication when unlockRequested() was emitted.
@@ -128,13 +148,6 @@ Item {
         intervalAlignment: P5Support.Types.AlignToMinute
     }
 
-    // implement background clicking signal
-    MouseArea {
-        anchors.fill: parent
-        onClicked: backgroundClicked()
-        z: -1 // ensure that this is below notification items so we don't steal button clicks
-    }
-
     ListView {
         id: list
         model: historyModel
@@ -148,10 +161,11 @@ Item {
         readonly property int animationDuration: ShellSettings.Settings.animationsEnabled ? Kirigami.Units.longDuration : 0
 
         // If a screen overflow occurs, fix height in order to maintain tool buttons in place.
-        readonly property bool listOverflowing: contentItem.childrenRect.height + toolButtons.height + spacing >= root.height
+        readonly property bool listOverflowing: listHeight + spacing >= root.height
+        readonly property int listHeight: contentItem.childrenRect.height
 
         bottomMargin: spacing
-        height: count === 0 ? 0 : (listOverflowing ? root.height - toolButtons.height : contentItem.childrenRect.height + bottomMargin)
+        height: count === 0 ? (root.topPadding + (showHeader ? root.header.height + listHeight : 0)) : (listOverflowing ? root.height : listHeight + bottomMargin)
 
         anchors {
             top: parent.top
@@ -159,13 +173,46 @@ Item {
             right: parent.right
         }
 
-        boundsBehavior: Flickable.StopAtBounds
+        boundsBehavior: Flickable.DragAndOvershootBounds
         spacing: Kirigami.Units.largeSpacing
 
         // TODO keyboard focus
         highlightMoveDuration: 0
         highlightResizeDuration: 0
         highlight: Item {}
+
+        // media control widget
+        // added to the notification list when in landscape mode
+        Component {
+            id: headerComponent
+            Item {
+                width: parent.width
+
+                MobileShell.BaseItem {
+                    id: headerComponentProxy
+
+                    contentItem: showHeader ? root.header : null
+                    y: root.topPadding - Kirigami.Units.largeSpacing
+
+                    width: parent.width - Kirigami.Units.gridUnit * 2
+                    anchors.left: parent.left
+                    anchors.leftMargin: Kirigami.Units.gridUnit
+                }
+            }
+        }
+
+        // set bottom padding for the notification list
+        Component {
+            id: footerComponent
+            Item {
+                width: parent.width
+                height: root.bottomPadding
+            }
+        }
+
+        header: headerComponent
+
+        footer: footerComponent
 
         section {
             property: "isGroup"
@@ -250,12 +297,28 @@ Item {
                 PropertyAction { target: delegateLoader; property: "ListView.delayRemove"; value: false }
             }
 
+            // adjust top paddding for media control widget
             Component {
                 id: groupDelegate
-                NotificationGroupHeader {
-                    applicationName: model.applicationName
-                    applicationIconSource: model.applicationIconName
-                    originName: model.originName || ""
+
+                Column {
+                    spacing: Kirigami.Units.smallSpacing
+
+                    height: headerSpace.height + groupHeader.height
+
+                    Item {
+                        id: headerSpace
+                        width: parent.width
+                        height: index == 0 ? root.topPadding + (showHeader ? root.header.height : 0) : 0
+                        visible: index == 0
+                    }
+
+                    NotificationGroupHeader {
+                        id: groupHeader
+                        applicationName: model.applicationName
+                        applicationIconSource: model.applicationIconName
+                        originName: model.originName || ""
+                    }
                 }
             }
 
@@ -265,7 +328,14 @@ Item {
                 Column {
                     spacing: Kirigami.Units.smallSpacing
 
-                    height: notificationItem.height + showMoreLoader.height
+                    height: headerSpace.height + notificationItem.height + showMoreLoader.height
+
+                    Item {
+                        id: headerSpace
+                        width: parent.width
+                        height: index == 0 ? root.topPadding + (showHeader ? root.header.height : 0) : 0
+                        visible: index == 0
+                    }
 
                     NotificationItem {
                         id: notificationItem
@@ -303,7 +373,7 @@ Item {
                                 return false;
 
                             return (model.groupChildrenCount > model.expandedGroupChildrenCount || model.isGroupExpanded)
-                                && delegateLoader.ListView.nextSection != delegateLoader.ListView.section;
+                            && delegateLoader.ListView.nextSection != delegateLoader.ListView.section;
                         }
 
                         // state + transition: animates the item when it becomes visible. Fade off is handled by above ListView.onRemove.
@@ -323,68 +393,14 @@ Item {
                         sourceComponent: PlasmaComponents3.ToolButton {
                             icon.name: model.isGroupExpanded ? "arrow-up" : "arrow-down"
                             text: model.isGroupExpanded ? i18n("Show Fewer")
-                                                        : i18nc("Expand to show n more notifications",
-                                                                "Show %1 More", (model.groupChildrenCount - model.expandedGroupChildrenCount))
+                            : i18nc("Expand to show n more notifications",
+                                    "Show %1 More", (model.groupChildrenCount - model.expandedGroupChildrenCount))
                             onClicked: {
                                 list.setGroupExpanded(model.index, !model.isGroupExpanded)
                             }
                         }
                     }
                 }
-            }
-        }
-    }
-
-    Item {
-        id: toolButtons
-        height: visible ? spacer.height + toolLayout.height + toolLayout.anchors.topMargin + toolLayout.anchors.bottomMargin : 0
-
-        // do not show on lockscreen
-        visible: !root.actionsRequireUnlock
-
-        anchors {
-            top: list.bottom
-            left: parent.left
-            right: parent.right
-        }
-
-        Rectangle {
-            id: spacer
-            anchors.left: parent.left
-            anchors.right: parent.right
-
-            visible: list.listOverflowing
-            height: 1
-            opacity: 0.25
-            color: Kirigami.Theme.textColor
-        }
-
-        RowLayout {
-            id: toolLayout
-
-            anchors {
-                top: spacer.bottom
-                right: parent.right
-                left: parent.left
-                leftMargin: Kirigami.Units.largeSpacing
-                rightMargin: Kirigami.Units.largeSpacing
-                topMargin: list.spacing
-                bottomMargin: list.spacing
-            }
-
-            PlasmaComponents3.ToolButton {
-                id: clearButton
-
-                Layout.alignment: Qt.AlignCenter
-
-                visible: hasNotifications
-
-                font.bold: true
-                font.pointSize: Kirigami.Theme.smallFont.pointSize
-
-                icon.name: "edit-clear-history"
-                text: i18n("Clear All Notifications")
-                onClicked: clearHistory()
             }
         }
     }

@@ -28,7 +28,6 @@ Item {
     property alias quickSettings: quickSettingsDrawer.quickSettings
     property alias statusBar: quickSettingsDrawer.statusBar
     property alias mediaControlsWidget: quickSettingsDrawer.mediaControlsWidget
-    property alias notificationsWidget: notificationWidgetProxy.contentItem
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
@@ -39,19 +38,20 @@ Item {
 
     MobileShell.QuickSettingsDrawer {
         id: quickSettingsDrawer
-        z: 1 // ensure it's above notifications
 
         // physically move the drawer when between closed <-> pinned mode
         readonly property real offsetHeight: actionDrawer.openToPinnedMode ? minimizedQuickSettingsOffset : maximizedQuickSettingsOffset
-        anchors.topMargin: Math.min(root.actionDrawer.offset - offsetHeight, 0)
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+        anchors {
+            topMargin: Math.min(root.actionDrawer.offsetResistance - offsetHeight, 0)
+            top: parent.top
+            left: parent.left
+            right: parent.right
+        }
 
         actionDrawer: root.actionDrawer
 
         // opacity and move animation (disabled when openToPinnedMode is false)
-        property real offsetDist: actionDrawer.offset - minimizedQuickSettingsOffset
+        property real offsetDist: actionDrawer.offsetResistance - minimizedQuickSettingsOffset
         property real totalOffsetDist: maximizedQuickSettingsOffset - minimizedQuickSettingsOffset
         minimizedToFullProgress: actionDrawer.openToPinnedMode ? (actionDrawer.opened ? applyMinMax(offsetDist / totalOffsetDist) : 0) : 1
 
@@ -65,33 +65,12 @@ Item {
         addedHeight: {
             if (!actionDrawer.openToPinnedMode) {
                 // if pinned mode disabled, just go to full height
-                let progress = (root.actionDrawer.offset - maximizedQuickSettingsOffset) / (quickSettingsDrawer.maxAddedHeight * 4);
-                let effectProgress = Math.atan(Math.max(0, progress));
-                return (quickSettingsDrawer.maxAddedHeight * effectProgress) + quickSettingsDrawer.maxAddedHeight;
+                return Math.max(maximizedQuickSettingsOffset - minimizedQuickSettingsOffset, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
             } else if (!actionDrawer.opened) {
-                // over-scroll effect for initial opening
-                let progress = (root.actionDrawer.offset - minimizedQuickSettingsOffset) / quickSettingsDrawer.maxAddedHeight;
-                let effectProgress = Math.atan(Math.max(0, progress));
-                return quickSettingsDrawer.maxAddedHeight * 0.25 * effectProgress;
+                return Math.max(0, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
             } else {
-                // over-scroll effect for full drawer
-                let progress = (root.actionDrawer.offset - maximizedQuickSettingsOffset) / (quickSettingsDrawer.maxAddedHeight * 4);
-                let effectProgress = Math.atan(Math.max(0, progress));
-                // as the drawer opens, add height to the rectangle, revealing content
-                return (quickSettingsDrawer.maxAddedHeight * effectProgress) + Math.max(0, Math.min(quickSettingsDrawer.maxAddedHeight, root.actionDrawer.offset - minimizedQuickSettingsOffset));
+                return Math.max(0, root.actionDrawer.offsetResistance - minimizedQuickSettingsOffset)
             }
         }
-    }
-
-    MobileShell.BaseItem {
-        id: notificationWidgetProxy
-
-        anchors {
-            top: quickSettingsDrawer.bottom
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        opacity: applyMinMax(root.actionDrawer.offset / root.minimizedQuickSettingsOffset)
     }
 }

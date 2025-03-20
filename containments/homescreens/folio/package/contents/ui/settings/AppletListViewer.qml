@@ -13,6 +13,7 @@ import org.kde.plasma.private.shell 2.0
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.kirigamiaddons.formcard 1.0 as FormCard
 import org.kde.plasma.components 3.0 as PC3
+import org.kde.plasma.private.mobileshell as MobileShell
 
 import '../delegate'
 import '../private'
@@ -199,7 +200,7 @@ MouseArea {
     }
 
     // opacity gradient at grid edges
-    FlickableOpacityGradient {
+    MobileShell.FlickableOpacityGradient {
         anchors.fill: gridView
         flickable: gridView
     }

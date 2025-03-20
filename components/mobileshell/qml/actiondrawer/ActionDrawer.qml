@@ -60,6 +60,19 @@ Item {
     property real offset: 0
 
     /**
+     * Same as offset value except this adds resistance when passing the open position of the current drawer state.
+     */
+    readonly property real offsetResistance: {
+        if (!openToPinnedMode) {
+            return root.calculateResistance(offset, contentContainer.maximizedQuickSettingsOffset);
+        } else if (!opened) {
+            return root.calculateResistance(offset, contentContainer.minimizedQuickSettingsOffset);
+        } else {
+            return root.calculateResistance(offset, contentContainer.maximizedQuickSettingsOffset);
+        }
+    }
+
+    /**
      * Whether the panel is being dragged.
      */
     property bool dragging: false
@@ -79,11 +92,6 @@ Item {
      * Direction the panel is currently moving in.
      */
     property int direction: MobileShell.Direction.None
-
-    /**
-     * The notifications widget being shown. May be null.
-     */
-    property var notificationsWidget: contentContainer.notificationsWidget
 
     /**
      * The mode of the action drawer (portrait or landscape).
@@ -135,8 +143,8 @@ Item {
         }
 
         root.direction = (oldOffset === offset)
-                            ? MobileShell.Direction.None
-                            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
+            ? MobileShell.Direction.None
+            : (offset > oldOffset ? MobileShell.Direction.Down : MobileShell.Direction.Up);
 
         oldOffset = offset;
 
@@ -147,6 +155,15 @@ Item {
             focus = false;
             root.opened = false;
             root.updateState();
+        }
+    }
+
+    // calculates offset resistance for the action drawer overshoots it's open position
+    function calculateResistance(value : double, threshold : int) : double {
+        if (value > threshold) {
+            return threshold + Math.pow(value - threshold + 1, Math.max(0.8 - (value - threshold) / ((root.height - threshold) * 15), 0.35));
+        } else {
+            return value;
         }
     }
 
@@ -267,45 +284,12 @@ Item {
         }
     }
 
-    MobileShell.SwipeArea {
-        id: swipeArea
-        mode: MobileShell.SwipeArea.VerticalOnly
+    // action drawer ui content
+    ContentContainer {
+        id: contentContainer
         anchors.fill: parent
 
-        function startSwipe() {
-            root.cancelAnimations();
-            root.dragging = true;
-
-            // Immediately open action drawer if we interact with it and it's already open
-            // This allows us to have 2 quick flicks from minimized -> expanded
-            if (root.visible && !root.opened) {
-                root.opened = true;
-            }
-        }
-
-        function endSwipe() {
-            root.dragging = false;
-            root.updateState();
-        }
-
-        function moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY) {
-            root.offset += deltaY;
-        }
-
-        onSwipeStarted: startSwipe()
-        onSwipeEnded: endSwipe()
-        onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        onTouchpadScrollStarted: startSwipe()
-        onTouchpadScrollEnded: endSwipe()
-        onTouchpadScrollMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => moveSwipe(totalDeltaX, totalDeltaY, deltaX, deltaY)
-
-        ContentContainer {
-            id: contentContainer
-            anchors.fill: parent
-
-            actionDrawer: root
-            quickSettingsModel: root.quickSettingsModel
-        }
+        actionDrawer: root
+        quickSettingsModel: root.quickSettingsModel
     }
 }

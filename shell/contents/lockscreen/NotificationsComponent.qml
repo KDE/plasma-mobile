@@ -20,7 +20,13 @@ Loader {
     property real rightMargin: 0
     property real topMargin: 0
     property real bottomMargin: 0
+
+    property real topPadding: 0
+
     readonly property bool notificationsShown: item && item.notificationsList.hasNotifications
+    readonly property bool listOverflowing: item && item.notificationsList.listView.listOverflowing
+
+    property bool scrollLock: false
 
     property var notificationsList: item ? item.notificationsList : null
 
@@ -56,24 +62,31 @@ Loader {
         property alias notificationsList: notificationsList
 
         Item {
-            anchors.fill: parent
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
             anchors.topMargin: root.topMargin
-            anchors.bottomMargin: root.bottomMargin
             anchors.leftMargin: root.leftMargin
             anchors.rightMargin: root.rightMargin
 
             Kirigami.Theme.colorSet: Kirigami.Theme.Window
             Kirigami.Theme.inherit: false
 
+            height: Math.min(parent.height - root.topMargin - root.bottomMargin, notificationsList.listView.listHeight + Kirigami.Units.gridUnit)
+
             MobileShell.NotificationsWidget {
                 id: notificationsList
                 anchors.fill: parent
+                opacity: 0 // we display with the opacity gradient below
 
                 historyModelType: MobileShell.NotificationsModelType.WatchedNotificationsModel
                 actionsRequireUnlock: true
                 historyModel: root.notificationsModel
                 notificationSettings: root.notificationSettings
                 inLockscreen: true
+                topPadding: root.topPadding // Kirigami.Units.gridUnit
+                bottomPadding: Kirigami.Units.gridUnit
+                listView.interactive: !root.scrollLock && listView.listOverflowing
 
                 property bool requestNotificationAction: false
 
@@ -81,6 +94,17 @@ Loader {
                     requestNotificationAction = true;
                     root.passwordRequested();
                 }
+            }
+
+            // opacity gradient at flickable edges
+            MobileShell.FlickableOpacityGradient {
+                anchors {
+                    top: notificationsList.top
+                    left: notificationsList.left
+                    right: notificationsList.right
+                }
+                height: notificationsList.listView.height
+                flickable: notificationsList.listView
             }
         }
     }

@@ -20,6 +20,8 @@ Item {
 
     property var notificationsModel: []
 
+    readonly property bool actionDrawerVisible: swipeArea.actionDrawer.intendedToBeVisible
+
     signal passwordRequested()
 
     // The status bar and quicksettings take a while to load, don't pause initial lockscreen loading for it
