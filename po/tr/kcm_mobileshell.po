@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 00:44+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 16:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -57,67 +57,77 @@ msgstr "Durum çubuğunda tarih"
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "Etkinleştirilirse tarih, durum çubuğunda saatin yanında görüntülenir."
 
+#: ui/main.qml:73
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
 #: ui/main.qml:74
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:88
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Ufak"
 
-#: ui/main.qml:75
+#: ui/main.qml:89
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Küçük"
 
-#: ui/main.qml:76
+#: ui/main.qml:90
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normal"
 
-#: ui/main.qml:77
+#: ui/main.qml:91
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Büyük"
 
-#: ui/main.qml:78
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Çok Büyük"
 
-#: ui/main.qml:81
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Durum Çubuğu Boyutu"
 
-#: ui/main.qml:82
+#: ui/main.qml:96
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "Üst panelin boyutu (yeniden başlatma gerektirir)."
 
-#: ui/main.qml:109
+#: ui/main.qml:123
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Dolaşım Paneli"
 
-#: ui/main.qml:115
+#: ui/main.qml:129
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Yalnızca hareket kipi"
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Dolaşım panelinin gizlenip gizlenmeyeceği."
 
-#: ui/main.qml:130
+#: ui/main.qml:144
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Klavyeyi aç/kapat düğmesini her zaman göster"
 
-#: ui/main.qml:131
+#: ui/main.qml:145
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -125,79 +135,79 @@ msgstr ""
 "Dolaşım panelindeki klavye aç/kapat düğmesinin her zaman gösterilip "
 "gösterilmeyeceği."
 
-#: ui/main.qml:142
+#: ui/main.qml:156
 #, kde-format
 msgid "Action Drawer"
 msgstr "Eylem Çekmecesi"
 
-#: ui/main.qml:148
+#: ui/main.qml:162
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Sabitlenmiş Kip"
 
-#: ui/main.qml:149
+#: ui/main.qml:163
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Genişletilmiş Kip"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Tez Ayarlar"
 
-#: ui/main.qml:161
+#: ui/main.qml:175
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Sol Üst Çekmece Kipi"
 
-#: ui/main.qml:162
+#: ui/main.qml:176
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Sol üstten açıldığı zamanki kip."
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Sağ Üst Çekmece Kipi"
 
-#: ui/main.qml:188
+#: ui/main.qml:202
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Sağ üstten açıldığı zamanki kip."
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
 msgstr "Kilit Ekranı Kısayolları"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Yok"
 
-#: ui/main.qml:218
+#: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Fener"
 
-#: ui/main.qml:219
+#: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:223
+#: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Sol düğme"
 
-#: ui/main.qml:247
+#: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

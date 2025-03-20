@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-23 14:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -65,7 +65,7 @@ msgstr "Wył."
 msgid "SIM Locked"
 msgstr "SIM zablokowany"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
@@ -155,7 +155,7 @@ msgstr "Nie znaleziono nazwy strumienia"
 msgid "configure audio streams"
 msgstr "ustawienia strumieni dźwiękowych"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr "Otwórz ustawienia dźwięku"

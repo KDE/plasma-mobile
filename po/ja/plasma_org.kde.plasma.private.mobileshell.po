@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2022-12-20 22:48-0800\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "SIM Locked"
 msgstr ""
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
 msgstr ""
@@ -151,7 +151,7 @@ msgstr ""
 msgid "configure audio streams"
 msgstr ""
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 00:44+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 13:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -59,67 +59,77 @@ msgid "If on, date will be shown next to the clock in the status bar."
 msgstr ""
 "Якщо увімкнено, дату буде показано поряд із годинником на смужці стану."
 
+#: ui/main.qml:73
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
 #: ui/main.qml:74
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:88
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Крихітний"
 
-#: ui/main.qml:75
+#: ui/main.qml:89
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Малий"
 
-#: ui/main.qml:76
+#: ui/main.qml:90
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Звичайний"
 
-#: ui/main.qml:77
+#: ui/main.qml:91
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Великий"
 
-#: ui/main.qml:78
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Дуже великий"
 
-#: ui/main.qml:81
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Розмір смужки стану"
 
-#: ui/main.qml:82
+#: ui/main.qml:96
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "Розмір верхньої панелі (потребує перезапуску)."
 
-#: ui/main.qml:109
+#: ui/main.qml:123
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Панель навігації"
 
-#: ui/main.qml:115
+#: ui/main.qml:129
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Режим лише жестів"
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Визначає, чи слід ховати панель навігації."
 
-#: ui/main.qml:130
+#: ui/main.qml:144
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Завжди показувати перемикач клавіатури"
 
-#: ui/main.qml:131
+#: ui/main.qml:145
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -127,79 +137,79 @@ msgstr ""
 "Визначає, чи слід завжди показувати кнопку перемикання клавіатури на панелі "
 "навігації."
 
-#: ui/main.qml:142
+#: ui/main.qml:156
 #, kde-format
 msgid "Action Drawer"
 msgstr "Висувна панель дій"
 
-#: ui/main.qml:148
+#: ui/main.qml:162
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Пришпилений режим"
 
-#: ui/main.qml:149
+#: ui/main.qml:163
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Розширений режим"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Швидке налаштовування"
 
-#: ui/main.qml:161
+#: ui/main.qml:175
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Режим верхньої лівої висувної панелі"
 
-#: ui/main.qml:162
+#: ui/main.qml:176
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Режим відкриття від верхнього лівого кута."
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Режим верхньої правої висувної панелі"
 
-#: ui/main.qml:188
+#: ui/main.qml:202
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Режим відкриття від верхнього правого кута."
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
 msgstr "Скорочення блокування екрана"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Немає"
 
-#: ui/main.qml:218
+#: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Спалах"
 
-#: ui/main.qml:219
+#: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Камера"
 
-#: ui/main.qml:223
+#: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Ліва кнопка"
 
-#: ui/main.qml:247
+#: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

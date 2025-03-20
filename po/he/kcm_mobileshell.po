@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 00:44+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 09:30+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -58,145 +58,155 @@ msgstr "תאריך בשורת המצב"
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "אם האפשרות פעילה, יופיע תאריך ליד השעון בשורת המצב."
 
+#: ui/main.qml:73
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
 #: ui/main.qml:74
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:88
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "פצפון"
 
-#: ui/main.qml:75
+#: ui/main.qml:89
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "קטן"
 
-#: ui/main.qml:76
+#: ui/main.qml:90
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "רגיל"
 
-#: ui/main.qml:77
+#: ui/main.qml:91
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "גדול"
 
-#: ui/main.qml:78
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "גדול מאוד"
 
-#: ui/main.qml:81
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar Size"
 msgstr "גודל שורת מצב"
 
-#: ui/main.qml:82
+#: ui/main.qml:96
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "גודל הלוח העליון (דורש הפעלה מחדש)."
 
-#: ui/main.qml:109
+#: ui/main.qml:123
 #, kde-format
 msgid "Navigation Panel"
 msgstr "לוח ניווט"
 
-#: ui/main.qml:115
+#: ui/main.qml:129
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "מצב מחוות בלבד"
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "האם להסתיר את לוח הניווט."
 
-#: ui/main.qml:130
+#: ui/main.qml:144
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "תמיד להציג את מתג המקלדת"
 
-#: ui/main.qml:131
+#: ui/main.qml:145
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "האם תמיד להציג את כפתור מתג המקלדת בלוח הניווט."
 
-#: ui/main.qml:142
+#: ui/main.qml:156
 #, kde-format
 msgid "Action Drawer"
 msgstr "מגירת פעולות"
 
-#: ui/main.qml:148
+#: ui/main.qml:162
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "מצב נעוץ"
 
-#: ui/main.qml:149
+#: ui/main.qml:163
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "מצב מורחב"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "הגדרות מהירות"
 
-#: ui/main.qml:161
+#: ui/main.qml:175
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "מצב מגירה שמאלית עליונה"
 
-#: ui/main.qml:162
+#: ui/main.qml:176
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "מצב בעת פתיחה מהפינה השמאלית העליונה."
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "מצב מגירה ימנית עליונה"
 
-#: ui/main.qml:188
+#: ui/main.qml:202
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "מצב בעת פתיחה מהפינה הימנית העליונה."
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
 msgstr "קיצורי מסך נעילה"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "אין"
 
-#: ui/main.qml:218
+#: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "פנס"
 
-#: ui/main.qml:219
+#: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "מצלמה"
 
-#: ui/main.qml:223
+#: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "כפתור שמאלי"
 
-#: ui/main.qml:247
+#: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-19 20:10+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -64,7 +64,7 @@ msgstr "Ki"
 msgid "SIM Locked"
 msgstr "A SIM zárolt"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
@@ -154,7 +154,7 @@ msgstr "Az adatfolyam neve nem található"
 msgid "configure audio streams"
 msgstr "hanglejátszás beállítása"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr "Hangbeállítások megnyitása"

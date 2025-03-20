@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-14 00:07+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -65,7 +65,7 @@ msgstr "Izklopljeno"
 msgid "SIM Locked"
 msgstr "SIM zaklenjena"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
 msgstr "%1%"
@@ -155,7 +155,7 @@ msgstr "Ime toka ni mogoče najti"
 msgid "configure audio streams"
 msgstr "konfiguriraj zvočne tokove"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr "Odpri nastavitve zvoka"

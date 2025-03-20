@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-10 00:42+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-07-02 09:51+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -29,8 +29,8 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Cerca applicationes..."
 
-#: package/contents/ui/FavouritesBar.qml:145
-#: package/contents/ui/FavouritesBar.qml:219
+#: package/contents/ui/FavouritesBar.qml:151
+#: package/contents/ui/FavouritesBar.qml:225
 #: package/contents/ui/FolderView.qml:290
 #: package/contents/ui/HomeScreenPage.qml:218
 #: package/contents/ui/HomeScreenPage.qml:298

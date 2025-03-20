@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.phone.homescreen\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-10 00:42+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2016-10-07 23:55-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -26,8 +26,8 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "アプリケーション"
 
-#: package/contents/ui/FavouritesBar.qml:145
-#: package/contents/ui/FavouritesBar.qml:219
+#: package/contents/ui/FavouritesBar.qml:151
+#: package/contents/ui/FavouritesBar.qml:225
 #: package/contents/ui/FolderView.qml:290
 #: package/contents/ui/HomeScreenPage.qml:218
 #: package/contents/ui/HomeScreenPage.qml:298

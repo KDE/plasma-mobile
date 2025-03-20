@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 00:44+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-29 00:11+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -57,145 +57,155 @@ msgstr "상태 표시줄에 날짜 표시"
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "이 옵션을 사용하면 상태 표시줄의 시계 옆에 날짜를 표시합니다."
 
+#: ui/main.qml:73
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
 #: ui/main.qml:74
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:88
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "매우 작게"
 
-#: ui/main.qml:75
+#: ui/main.qml:89
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "작게"
 
-#: ui/main.qml:76
+#: ui/main.qml:90
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "보통"
 
-#: ui/main.qml:77
+#: ui/main.qml:91
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "크게"
 
-#: ui/main.qml:78
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "매우 크게"
 
-#: ui/main.qml:81
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar Size"
 msgstr "상태 표시줄 크기"
 
-#: ui/main.qml:82
+#: ui/main.qml:96
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "위쪽 패널의 크기입니다(다시 시작 필요)."
 
-#: ui/main.qml:109
+#: ui/main.qml:123
 #, kde-format
 msgid "Navigation Panel"
 msgstr "탐색 패널"
 
-#: ui/main.qml:115
+#: ui/main.qml:129
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "제스처 전용 모드"
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "탐색 패널을 숨길지 여부입니다."
 
-#: ui/main.qml:130
+#: ui/main.qml:144
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "항상 키보드 전환 표시"
 
-#: ui/main.qml:131
+#: ui/main.qml:145
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "탐색 패널에 키보드 전환 단추를 항상 표시할지 여부입니다."
 
-#: ui/main.qml:142
+#: ui/main.qml:156
 #, kde-format
 msgid "Action Drawer"
 msgstr "동작 서랍"
 
-#: ui/main.qml:148
+#: ui/main.qml:162
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "핀 모드"
 
-#: ui/main.qml:149
+#: ui/main.qml:163
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "확장 모드"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "빠른 설정"
 
-#: ui/main.qml:161
+#: ui/main.qml:175
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "왼쪽 위 서랍 모드"
 
-#: ui/main.qml:162
+#: ui/main.qml:176
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "왼쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "오른쪽 위 서랍 모드"
 
-#: ui/main.qml:188
+#: ui/main.qml:202
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "오른쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:218
+#: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:219
+#: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:223
+#: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:247
+#: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-13 00:41+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-13 16:34+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -67,7 +67,7 @@ msgstr "Itzalita"
 msgid "SIM Locked"
 msgstr "SIM giltzatuta"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:60
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
 #, kde-format
 msgid "%1%"
 msgstr "% %1"
@@ -157,7 +157,7 @@ msgstr "Korronte-izena ez da aurkitu"
 msgid "configure audio streams"
 msgstr "konfiguratu audio-korronteak"
 
-#: qml/volumeosd/VolumeOSD.qml:202
+#: qml/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr "Ireki audio-ezarpenak"

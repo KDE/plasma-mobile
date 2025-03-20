@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-14 00:44+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-11-24 19:39+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -57,67 +57,77 @@ msgstr "Datum på statusrad"
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "Om på, visas datum intill klockan på statusraden."
 
+#: ui/main.qml:73
+#, kde-format
+msgid "Battery Percentage"
+msgstr ""
+
 #: ui/main.qml:74
+#, kde-format
+msgid "Show battery percentage in the status bar."
+msgstr ""
+
+#: ui/main.qml:88
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Mycket liten"
 
-#: ui/main.qml:75
+#: ui/main.qml:89
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Liten"
 
-#: ui/main.qml:76
+#: ui/main.qml:90
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normal"
 
-#: ui/main.qml:77
+#: ui/main.qml:91
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Stor"
 
-#: ui/main.qml:78
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Mycket stor"
 
-#: ui/main.qml:81
+#: ui/main.qml:95
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Statusradens storlek"
 
-#: ui/main.qml:82
+#: ui/main.qml:96
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "Den övre panelens storlek (kräver omstart)."
 
-#: ui/main.qml:109
+#: ui/main.qml:123
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigeringspanel"
 
-#: ui/main.qml:115
+#: ui/main.qml:129
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Bara gester"
 
-#: ui/main.qml:116
+#: ui/main.qml:130
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Om navigeringspanelen ska döljas."
 
-#: ui/main.qml:130
+#: ui/main.qml:144
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Visa alltid tangentbordsknapp"
 
-#: ui/main.qml:131
+#: ui/main.qml:145
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -125,79 +135,79 @@ msgstr ""
 "Om knappen för att visa eller dölja tangentbordet alltid ska visas på "
 "navigeringspanelen."
 
-#: ui/main.qml:142
+#: ui/main.qml:156
 #, kde-format
 msgid "Action Drawer"
 msgstr "Åtgärdslåda"
 
-#: ui/main.qml:148
+#: ui/main.qml:162
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Uppsatt funktion"
 
-#: ui/main.qml:149
+#: ui/main.qml:163
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Expanderad funktion"
 
-#: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Snabbinställningar"
 
-#: ui/main.qml:161
+#: ui/main.qml:175
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Funktion för övre vänstra lådan"
 
-#: ui/main.qml:162
+#: ui/main.qml:176
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Funktion vid öppna från uppe till vänster."
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Funktion för övre högra lådan"
 
-#: ui/main.qml:188
+#: ui/main.qml:202
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Funktion vid öppna från uppe till höger."
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:218
+#: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:219
+#: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:223
+#: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:247
+#: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
