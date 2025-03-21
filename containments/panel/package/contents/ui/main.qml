@@ -77,7 +77,7 @@ ContainmentItem {
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
-    readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
+    readonly property bool opaqueBar: windowMaximizedTracker.showingWindow && !showingStartupFeedback && statusPanel.state == "default"
     readonly property color backgroundColor: topPanel.colorScopeColor
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
     onIsCurrentWindowFullscreenChanged: {
@@ -150,13 +150,11 @@ ContainmentItem {
         visible: !root.isCurrentWindowFullscreen
     }
 
-    Rectangle {
+    Item {
         id: statusPanel
         anchors.fill: parent
-        Kirigami.Theme.colorSet: root.showingApp ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
+        Kirigami.Theme.colorSet: root.opaqueBar ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
         Kirigami.Theme.inherit: false
-
-        color: statusPanel.state == "default" && root.showingApp ? Kirigami.Theme.backgroundColor : "transparent"
 
         property real offset: 0
 
@@ -165,8 +163,8 @@ ContainmentItem {
             id: topPanel
             anchors.fill: parent
 
-            showDropShadow: !root.showingApp
-            backgroundColor: statusPanel.state != "default" ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
+            showDropShadow: !root.opaqueBar
+            backgroundColor: root.opaqueBar ? Kirigami.Theme.backgroundColor : "transparent"
 
             transform: [
                 Translate {

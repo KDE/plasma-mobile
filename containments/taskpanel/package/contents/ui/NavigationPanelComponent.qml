@@ -26,9 +26,9 @@ MobileShell.NavigationPanel {
     // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
-    backgroundColor: navbarState != "default" ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
+    backgroundColor: (Keyboards.KWinVirtualKeyboard.active || (opaqueBar && ShellSettings.Settings.navigationPanelEnabled)) ? Kirigami.Theme.backgroundColor : "transparent"
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
-    shadow: !opaqueBar
+    shadow: !opaqueBar || !ShellSettings.Settings.navigationPanelEnabled
 
     TaskManager.VirtualDesktopInfo {
         id: virtualDesktopInfo
@@ -60,6 +60,7 @@ MobileShell.NavigationPanel {
         id: taskSwitcherAction
 
         enabled: true
+        visible: ShellSettings.Settings.navigationPanelEnabled
         iconSource: "mobile-task-switcher"
         iconSizeFactor: 0.75
 
@@ -73,6 +74,7 @@ MobileShell.NavigationPanel {
         id: homeAction
 
         enabled: true
+        visible: ShellSettings.Settings.navigationPanelEnabled
         iconSource: "start-here-kde"
         iconSizeFactor: 1
 
@@ -86,6 +88,7 @@ MobileShell.NavigationPanel {
         id: closeAppAction
 
         enabled: Keyboards.KWinVirtualKeyboard.active || WindowPlugin.WindowUtil.hasCloseableActiveWindow
+        visible: ShellSettings.Settings.navigationPanelEnabled
         iconSource: Keyboards.KWinVirtualKeyboard.active ? "go-down-symbolic" : "mobile-close-app"
         // mobile-close-app (from plasma-frameworks) seems to have fewer margins than icons from breeze-icons
         iconSizeFactor: Keyboards.KWinVirtualKeyboard.active ? 1 : 0.75
@@ -117,8 +120,9 @@ MobileShell.NavigationPanel {
 
     rightCornerAction: MobileShell.NavigationPanelAction {
         id: keyboardToggleAction
-        visible: ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel ||
-                 (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput)
+        visible: (ShellSettings.Settings.alwaysShowKeyboardToggleOnNavigationPanel ||
+                 (Keyboards.KWinVirtualKeyboard.available && !Keyboards.KWinVirtualKeyboard.activeClientSupportsTextInput) &&
+                 ShellSettings.Settings.navigationPanelEnabled)
         enabled: true
         iconSource: "input-keyboard-virtual-symbolic"
         iconSizeFactor: 0.75

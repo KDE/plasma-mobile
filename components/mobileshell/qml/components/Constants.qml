@@ -13,7 +13,7 @@ pragma Singleton
 
 QtObject {
     readonly property real topPanelHeight: Math.round(Kirigami.Units.gridUnit * ShellSettings.Settings.statusBarScaleFactor / 2) * 2 + Kirigami.Units.smallSpacing
-    readonly property real navigationPanelThickness: ShellSettings.Settings.navigationPanelEnabled ? Kirigami.Units.gridUnit * 2 : 0
+    readonly property real navigationPanelThickness: Kirigami.Units.gridUnit * 2
 
     function navigationPanelOnSide(screenWidth: real, screenHeight: real): bool {
         // TODO: we have this disabled for now, we might consider just removing this feature entirely due to it causing several issues:

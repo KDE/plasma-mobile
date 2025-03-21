@@ -29,7 +29,7 @@ SceneEffect {
     TaskSwitcherPlugin.MobileTaskSwitcherState {
         id: taskSwitcherState
 
-        gestureEnabled: !ShellSettings.Settings.navigationPanelEnabled && !MobileShellState.ShellDBusClient.isActionDrawerOpen && !MobileShellState.ShellDBusClient.isVolumeOSDOpen && !MobileShellState.ShellDBusClient.isNotificationPopupDrawerOpen
+        gestureEnabled: !ShellSettings.Settings.navigationPanelEnabled && !MobileShellState.ShellDBusClient.isActionDrawerOpen && !MobileShellState.ShellDBusClient.isVolumeOSDOpen && !MobileShellState.ShellDBusClient.isNotificationPopupDrawerOpen && (MobileShellState.ShellDBusClient.panelState === "default" || TaskSwitcherHelpers.taskDrawerOpened)
 
         Component.onCompleted: {
             // Initialize with effect

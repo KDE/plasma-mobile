@@ -85,6 +85,7 @@ ContainmentItem {
             root.panel.offset = intendedWindowOffset;
             root.panel.thickness = navigationPanelHeight;
             root.panel.location = intendedWindowLocation;
+            root.panel.visibilityMode = ShellSettings.Settings.navigationPanelEnabled ? 0 : 3;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay);
             root.updateTouchArea();
         }
@@ -95,13 +96,42 @@ ContainmentItem {
         const hiddenTouchAreaThickness = Kirigami.Units.gridUnit;
 
         if (navigationPanel.state == "hidden") {
+            MobileShell.ShellUtil.setInputTransparent(root.panel, false);
             if (inLandscape) {
                 MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(root.panel.width - hiddenTouchAreaThickness, 0, hiddenTouchAreaThickness, root.panel.height));
             } else {
                 MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, root.panel.height - hiddenTouchAreaThickness, root.panel.width, hiddenTouchAreaThickness));
             }
         } else {
-            MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, 0, 0, 0));
+            if (!ShellSettings.Settings.navigationPanelEnabled) {
+                // If gesture navigation is active and rotation button is displayed,
+                // set the inpt region around the button so it is able to be pressed.
+                if (Plasmoid.showRotationButton) {
+                    MobileShell.ShellUtil.setInputTransparent(root.panel, false);
+                    MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, 0, navigationPanelHeight, navigationPanelHeight));
+                } else {
+                    MobileShell.ShellUtil.setInputTransparent(root.panel, true);
+                }
+            } else {
+                MobileShell.ShellUtil.setInputTransparent(root.panel, false);
+                MobileShell.ShellUtil.setInputRegion(root.panel, Qt.rect(0, 0, 0, 0));
+            }
+        }
+    }
+
+    Connections {
+        target: ShellSettings.Settings
+
+        function onNavigationPanelEnabledChanged() {
+            root.setWindowProperties();
+        }
+    }
+
+    Connections {
+        target: Plasmoid
+
+        function onShowRotationButtonChanged() {
+            root.updateTouchArea();
         }
     }
 
@@ -128,7 +158,7 @@ ContainmentItem {
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
-    readonly property bool opaqueBar: (windowMaximizedTracker.showingWindow || isCurrentWindowFullscreen) && !showingStartupFeedback
+    readonly property bool opaqueBar: windowMaximizedTracker.showingWindow && !showingStartupFeedback && navigationPanel.state == "default"
 
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
 
@@ -147,17 +177,15 @@ ContainmentItem {
         screen: Plasmoid.screen
         maximizedTracker: windowMaximizedTracker
 
-        visible: !root.isCurrentWindowFullscreen
+        visible: !root.isCurrentWindowFullscreen && ShellSettings.Settings.navigationPanelEnabled
     }
 
-    Rectangle {
+    Item {
         id: navigationPanel
         anchors.fill: parent
         // contrasting colour
         Kirigami.Theme.colorSet: root.opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
         Kirigami.Theme.inherit: false
-
-        color: navigationPanel.state == "default" && (Keyboards.KWinVirtualKeyboard.active || root.opaqueBar) ? Kirigami.Theme.backgroundColor : "transparent"
 
         property real offset: 0
 

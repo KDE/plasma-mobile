@@ -60,7 +60,7 @@ Item {
 
     function evaluateMargins() {
         topMargin = plasmoidItem.availableScreenRect.y
-        bottomMargin = root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height)
+        bottomMargin = root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height) - (ShellSettings.Settings.navigationPanelEnabled ? 0 : MobileShell.Constants.navigationPanelThickness)
         leftMargin = plasmoidItem.availableScreenRect.x
         rightMargin = root.width - (plasmoidItem.availableScreenRect.x + plasmoidItem.availableScreenRect.width)
     }
@@ -70,6 +70,14 @@ Item {
 
         // avoid binding loops with root.height and root.width changing along with the availableScreenRect
         function onAvailableScreenRectChanged() {
+            Qt.callLater(() => root.evaluateMargins());
+        }
+    }
+
+    Connections {
+        target: ShellSettings.Settings
+
+        function onNavigationPanelEnabledChanged() {
             Qt.callLater(() => root.evaluateMargins());
         }
     }

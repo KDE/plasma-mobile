@@ -31,9 +31,9 @@ FocusScope {
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
     readonly property real topMargin: MobileShell.Constants.topPanelHeight
-    readonly property real bottomMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? 0 : MobileShell.Constants.navigationPanelThickness
+    readonly property real bottomMargin: ShellSettings.Settings.navigationPanelEnabled ? (MobileShell.Constants.navigationPanelOnSide(width, height) ? 0 : MobileShell.Constants.navigationPanelThickness) : 0
     readonly property real leftMargin: 0
-    readonly property real rightMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0
+    readonly property real rightMargin: ShellSettings.Settings.navigationPanelEnabled ? (MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0) : 0
 
     property var taskSwitcherHelpers: TaskSwitcherHelpers {
         taskSwitcher: root
