@@ -9,6 +9,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.workspace.keyboardlayout 1.0
 import org.kde.notificationmanager as Notifications
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
 Item {
     id: root
@@ -37,6 +38,7 @@ Item {
 
         LayoutItemProxy { target: clockAndMediaWidget }
         LayoutItemProxy { target: notificationComponent }
+        LayoutItemProxy { target: actionButtons }
     }
 
     // Horizontal layout (landscape on smaller devices)
@@ -47,12 +49,13 @@ Item {
 
         ColumnLayout {
             id: leftLayout
-            width: parent.width / 2
+            width: Math.round(parent.width / 2.15)
             anchors {
                 top: parent.top
                 bottom: parent.bottom
                 left: parent.left
                 leftMargin: Kirigami.Units.gridUnit * 3
+                bottomMargin: Kirigami.Units.gridUnit * 3
             }
 
             LayoutItemProxy { target: clockAndMediaWidget }
@@ -69,6 +72,15 @@ Item {
             }
 
             LayoutItemProxy { target: notificationComponent }
+        }
+
+        ColumnLayout {
+            anchors.bottomMargin: Kirigami.Units.gridUnit
+            anchors.leftMargin: Kirigami.Units.gridUnit
+            anchors.rightMargin: Kirigami.Units.gridUnit
+            anchors.fill: parent
+
+            LayoutItemProxy { target: actionButtons }
         }
     }
 
@@ -111,10 +123,43 @@ Item {
         leftMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
         topMargin: root.isVertical ? 0 : MobileShell.Constants.topPanelHeight
-        bottomMargin: Kirigami.Units.gridUnit * 2
+        bottomMargin: root.isVertical && (Kirigami.Units.gridUnit * 35 < root.width) && actionButtons.isVisible ? 0 : Kirigami.Units.gridUnit
         scrollLock: root.scrollLock
 
         onPasswordRequested: root.passwordRequested()
         onNotificationsShownChanged: root.notificationsShown = notificationsShown
+    }
+
+    RowLayout {
+        id: actionButtons
+
+        readonly property int sideMargin: Kirigami.Units.gridUnit * 2
+        readonly property bool isVisible: leftButton.visible || rightButton.visible
+
+        Layout.fillWidth: true
+        Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+        Layout.leftMargin: actionButtons.sideMargin
+        Layout.rightMargin: actionButtons.sideMargin
+
+        // Left quick action button.
+        QuickActionButton {
+            id: leftButton
+            buttonAction: ShellSettings.Settings.lockscreenLeftButtonAction
+            opacity: Math.max(0, 1 - flickable.openFactor * 2)
+
+            Layout.alignment: Qt.AlignVCenter
+        }
+
+        // Spacer
+        Item { Layout.fillWidth: true }
+
+        // Right quick action button.
+        QuickActionButton {
+            id: rightButton
+            buttonAction: ShellSettings.Settings.lockscreenRightButtonAction
+            opacity: Math.max(0, 1 - flickable.openFactor * 2)
+
+            Layout.alignment: Qt.AlignVCenter
+        }
     }
 }
