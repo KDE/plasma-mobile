@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -39,7 +39,7 @@ msgstr "अनुप्रयोगाः अन्वेषणं कुर्�
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: package/contents/ui/settings/AppletListViewer.qml:58
 #, kde-format
 msgid "Widgets"
 msgstr "विजेट्"

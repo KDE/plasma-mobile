@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-11-23 14:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -49,6 +49,11 @@ msgstr "Skopiuj położenie"
 #, kde-format
 msgid "Properties"
 msgstr "Właściwości"
+
+#: qml/actiondrawer/ContentContainer.qml:149
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Wyczyść wszystkie powiadomienia"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
@@ -388,32 +393,27 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "Pozostały %1 h"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:226
 #, kde-format
 msgid "Notification service not available"
 msgstr "Usługa powiadomień jest niedostępna"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:235
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Powiadomienia są obecnie dostarczane przez '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:395
 #, kde-format
 msgid "Show Fewer"
 msgstr "Wyświetl mniej"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:397
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Wyświetl %1 więcej"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Wyczyść wszystkie powiadomienia"
 
 #~ msgid "100%"
 #~ msgstr "100%"

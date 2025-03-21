@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-07-04 13:13+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -40,7 +40,7 @@ msgstr "Bilatu aplikazioak..."
 msgid "Remove"
 msgstr "Kendu"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: package/contents/ui/settings/AppletListViewer.qml:58
 #, kde-format
 msgid "Widgets"
 msgstr "Trepetak"

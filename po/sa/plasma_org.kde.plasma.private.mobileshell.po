@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-12-20 21:53+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -50,6 +50,11 @@ msgstr "प्रतिलिपि स्थानम्"
 #, kde-format
 msgid "Properties"
 msgstr "गुणाः"
+
+#: qml/actiondrawer/ContentContainer.qml:149
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "सर्वाणि सूचनानि स्वच्छं कुर्वन्तु"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
@@ -383,29 +388,24 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1ह अवशिष्टम्"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:226
 #, kde-format
 msgid "Notification service not available"
 msgstr "सूचनासेवा उपलब्धा नास्ति"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:235
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "सूचनाः सम्प्रति '%1 %2' द्वारा प्रदत्ताः सन्ति ।"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:395
 #, kde-format
 msgid "Show Fewer"
 msgstr "न्यूनानि दर्शयतु"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:397
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1 अधिकं दर्शयतु"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "सर्वाणि सूचनानि स्वच्छं कुर्वन्तु"

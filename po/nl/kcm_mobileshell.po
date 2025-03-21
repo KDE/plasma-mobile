@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2025-03-14 12:11+0100\n"
+"PO-Revision-Date: 2025-03-20 13:06+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -61,12 +61,12 @@ msgstr ""
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Percentage batterij"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Percentage van batterij tonen in de statusbalk."
 
 #: ui/main.qml:88
 #, kde-format

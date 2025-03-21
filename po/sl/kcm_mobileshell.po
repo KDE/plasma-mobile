@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2025-03-14 07:21+0100\n"
+"PO-Revision-Date: 2025-03-20 07:32+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -61,12 +61,12 @@ msgstr "Če je vklopljeno, bo datum prikazan poleg ure v vrstici stanja."
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Odstotek baterije"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Prikazuj odstotek baterije v vrstici stanja."
 
 #: ui/main.qml:88
 #, kde-format

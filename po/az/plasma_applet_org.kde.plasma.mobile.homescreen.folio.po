@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2022-04-10 02:35+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -38,7 +38,7 @@ msgstr "Tətbiqlər"
 msgid "Remove"
 msgstr "Silmək"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: package/contents/ui/settings/AppletListViewer.qml:58
 #, kde-format
 msgid "Widgets"
 msgstr ""

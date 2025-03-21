@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-08-21 00:38+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -37,7 +37,7 @@ msgstr "앱 검색…"
 msgid "Remove"
 msgstr "삭제"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: package/contents/ui/settings/AppletListViewer.qml:58
 #, kde-format
 msgid "Widgets"
 msgstr "위젯"

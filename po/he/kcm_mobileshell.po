@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2025-03-14 09:30+0200\n"
+"PO-Revision-Date: 2025-03-20 20:28+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -61,12 +61,12 @@ msgstr "אם האפשרות פעילה, יופיע תאריך ליד השעון 
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "אחוז סוללה"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "הצגת אחוז סוללה בשורת המצב."
 
 #: ui/main.qml:88
 #, kde-format

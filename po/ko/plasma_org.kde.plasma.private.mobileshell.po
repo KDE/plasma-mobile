@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-11-29 00:12+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -48,6 +48,11 @@ msgstr "위치 복사"
 #, kde-format
 msgid "Properties"
 msgstr "속성"
+
+#: qml/actiondrawer/ContentContainer.qml:149
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "모든 알림 지우기"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
@@ -375,32 +380,27 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1시간 남음"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:226
 #, kde-format
 msgid "Notification service not available"
 msgstr "알림 서비스를 사용할 수 없음"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:235
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "'%1 %2'에서 알림 서비스 제공 중"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:395
 #, kde-format
 msgid "Show Fewer"
 msgstr "적게 표시"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:397
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "%1개 더 보기"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "모든 알림 지우기"
 
 #~ msgid "100%"
 #~ msgstr "100%"

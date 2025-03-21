@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2024, 2025 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2024-12-04 09:39+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"PO-Revision-Date: 2025-03-20 08:10+0100\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -197,17 +197,17 @@ msgstr "Tema escuro"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Navegación do sistema"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Escolla como navegar polo sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Navegación por acenos"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -215,21 +215,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Arrastre desde abaixo para ver as aplicacións en execución. Arrastre para ir "
+"á pantalla principal."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Navegación por botóns"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Use botóns dunha barra de navegación para navegar polo sistema."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Isto pode cambiarse despois desde a configuración."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format

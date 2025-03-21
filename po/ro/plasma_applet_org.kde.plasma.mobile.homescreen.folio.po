@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-phone-components\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2020-09-19 10:02+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Remove"
 msgstr "Elimină"
 
-#: package/contents/ui/settings/AppletListViewer.qml:57
+#: package/contents/ui/settings/AppletListViewer.qml:58
 #, kde-format
 msgid "Widgets"
 msgstr ""

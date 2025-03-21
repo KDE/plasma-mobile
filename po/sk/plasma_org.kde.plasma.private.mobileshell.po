@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2023-07-28 16:07+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -47,6 +47,11 @@ msgstr "Kopírovať umiestnenie"
 #, kde-format
 msgid "Properties"
 msgstr "Vlastnosti"
+
+#: qml/actiondrawer/ContentContainer.qml:149
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Vymazať všetky oznámenia"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
@@ -393,32 +398,27 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1h zostáva"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:226
 #, kde-format
 msgid "Notification service not available"
 msgstr "Služba upozornení nie je dostupná"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:235
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Oznámenia v súčasnosti poskytuje '%1 %2'"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:395
 #, kde-format
 msgid "Show Fewer"
 msgstr "Zobraziť menej"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:397
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Zobraziť ďalších %1"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Vymazať všetky oznámenia"
 
 #~ msgid "100%"
 #~ msgstr "100%"

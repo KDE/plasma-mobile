@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-21 00:43+0000\n"
 "PO-Revision-Date: 2024-11-19 20:10+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -48,6 +48,11 @@ msgstr "Hely másolása"
 #, kde-format
 msgid "Properties"
 msgstr "Tulajdonságok"
+
+#: qml/actiondrawer/ContentContainer.qml:149
+#, kde-format
+msgid "Clear All Notifications"
+msgstr "Összes értesítés törlése"
 
 #: qml/actiondrawer/quicksettings/QuickSettingsFullDelegate.qml:97
 #, kde-format
@@ -381,32 +386,27 @@ msgctxt "hours remaining, keep short"
 msgid "%1h remaining"
 msgstr "%1 óra van hátra"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:179
+#: qml/widgets/notifications/NotificationsWidget.qml:226
 #, kde-format
 msgid "Notification service not available"
 msgstr "Az értesítési szolgáltatás nem érhető el"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:188
+#: qml/widgets/notifications/NotificationsWidget.qml:235
 #, kde-format
 msgctxt "Vendor and product name"
 msgid "Notifications are currently provided by '%1 %2'"
 msgstr "Az értesítéseket jelenleg a(z) „%1 %2” biztosítja"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:325
+#: qml/widgets/notifications/NotificationsWidget.qml:395
 #, kde-format
 msgid "Show Fewer"
 msgstr "Kevesebb megjelenítése"
 
-#: qml/widgets/notifications/NotificationsWidget.qml:327
+#: qml/widgets/notifications/NotificationsWidget.qml:397
 #, kde-format
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "További %1 megjelenítése"
-
-#: qml/widgets/notifications/NotificationsWidget.qml:386
-#, kde-format
-msgid "Clear All Notifications"
-msgstr "Összes értesítés törlése"
 
 #~ msgid "100%"
 #~ msgstr "100%"
