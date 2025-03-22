@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2024-10-26 10:35+0200\n"
+"PO-Revision-Date: 2025-03-21 17:52+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -64,12 +64,12 @@ msgstr ""
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Percentage de batteria "
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Monstra percentage de batteria in le barra de stato"
 
 #: ui/main.qml:88
 #, kde-format
@@ -185,37 +185,37 @@ msgstr "Modo quando aperir ex le dextera in alto."
 #, kde-format
 msgctxt "@title:group"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Bloca Vias breve de schermo"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Necun"
 
 #: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Flashlight (luce de fulgure)"
 
 #: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Camera"
 
 #: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "button sinistre"
 
 #: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Button dextere"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

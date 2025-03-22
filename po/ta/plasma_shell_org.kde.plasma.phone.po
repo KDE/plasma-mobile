@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-16 14:13+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -81,19 +81,17 @@ msgstr "கடவெண்ணை உள்ளிடவும்"
 msgid "Wrong PIN"
 msgstr "தவறான கடவெண்"
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr "கைவிளக்கை இயக்கு"
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr "படக்கருவியை திற"
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "பலகைக் குவியக்காட்டி"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "கைவிளக்கை இயக்கு"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "படக்கருவியை திற"
 
 #~ msgid "Logging in..."
 #~ msgstr "நுழைகிறது…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 13:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -82,19 +82,17 @@ msgstr "Введіть PIN-код"
 msgid "Wrong PIN"
 msgstr "Помилковий код"
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr "Увімкнути спалах"
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr "Відкрити камеру"
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Індикатор фокусування панелі"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "Увімкнути спалах"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "Відкрити камеру"
 
 #~ msgid "Logging in..."
 #~ msgstr "Вхід до системи…"

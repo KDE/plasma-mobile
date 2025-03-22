@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 04:18+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -83,19 +83,17 @@ msgstr "შეიყვანეთ PIN კოდი"
 msgid "Wrong PIN"
 msgstr "არასწორი PIN-კოდი"
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr "ფანრის ჩართვა"
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr "კამერის გახსნა"
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "პანელის ფოკუსის მაჩვენებელი"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "ფანრის ჩართვა"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "კამერის გახსნა"
 
 #~ msgid "Logging in..."
 #~ msgstr "შესვლა..."

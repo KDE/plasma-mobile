@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-19 13:22+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -83,19 +83,17 @@ msgstr "Introduza o PIN"
 msgid "Wrong PIN"
 msgstr "O PIN é incorrecto."
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr "Acender a lanterna"
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr "Abrir a cámara"
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicador de foco do panel"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "Acender a lanterna"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "Abrir a cámara"
 
 #~ msgid "Logging in..."
 #~ msgstr "Accedendo…"

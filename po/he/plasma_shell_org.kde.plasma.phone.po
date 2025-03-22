@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
 "PO-Revision-Date: 2025-03-14 09:30+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -82,19 +82,17 @@ msgstr "נא למלא קוד אישי (PIN)"
 msgid "Wrong PIN"
 msgstr "קוד אישי (PIN) שגוי"
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr "הפעלת הפנס"
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr "פתיחת המצלמה"
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "מחוון מיקוד לוח"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "הפעלת הפנס"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "פתיחת המצלמה"
 
 #~ msgid "Logging in..."
 #~ msgstr "מתבצעת כניסה למערכת…"

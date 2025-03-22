@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2024-07-16 09:36+0200\n"
+"POT-Creation-Date: 2025-03-22 00:43+0000\n"
+"PO-Revision-Date: 2025-03-21 17:53+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -85,19 +85,17 @@ msgstr "Inserta PIN"
 msgid "Wrong PIN"
 msgstr "PIN Errate"
 
-#: contents/lockscreen/QuickActionButton.qml:31
-msgctxt "@action:button"
-msgid "Turn flashlight on"
-msgstr ""
-
-#: contents/lockscreen/QuickActionButton.qml:33
-msgctxt "@action:button"
-msgid "Open camera"
-msgstr ""
-
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "Indicator de foco de pannello"
+
+#~ msgctxt "@action:button"
+#~ msgid "Turn flashlight on"
+#~ msgstr "Accende Lumine de flash"
+
+#~ msgctxt "@action:button"
+#~ msgid "Open camera"
+#~ msgstr "Aperi Camera"
 
 #~ msgid "Logging in..."
 #~ msgstr "Accedente ..."
