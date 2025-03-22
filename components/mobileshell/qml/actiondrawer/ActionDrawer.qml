@@ -132,10 +132,6 @@ Item {
      */
     signal runPendingNotificationAction()
 
-    onOpenedChanged: {
-        if (opened) swipeArea.focus = true;
-    }
-
     property real oldOffset
     onOffsetChanged: {
         if (offset < 0) {
@@ -149,7 +145,7 @@ Item {
         oldOffset = offset;
 
         // close panel immediately after panel is not shown, and the flickable is not being dragged
-        if (opened && root.offset <= 0 && !swipeArea.moving && !drawerAnimation.running) {
+        if (opened && root.offset <= 0 && !contentContainer.swipeAreaMoving && !drawerAnimation.running) {
             root.state = "";
             offset = 0;
             focus = false;
