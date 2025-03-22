@@ -22,8 +22,8 @@ Item {
     property double brightnessPressedValue: 1
     Behavior on brightnessPressedValue {
         NumberAnimation {
-            duration: Kirigami.Units.longDuration
-            easing.type: Easing.OutQuad
+            duration: Kirigami.Units.longDuration * 2
+            easing.type: Easing.InOutQuad
         }
     }
 
@@ -64,7 +64,10 @@ Item {
             from: 1
             to: screenBrightness.maxBrightness
             value: screenBrightness.brightness
-            onMoved: screenBrightness.brightness = value;
+            onMoved: {
+                brightnessPressedTimer.restart();
+                screenBrightness.brightness = value;
+            }
 
             onPressedChanged: {
                 if (pressed) {
@@ -77,7 +80,7 @@ Item {
 
             Timer {
                 id: brightnessPressedTimer
-                interval: 200
+                interval: Kirigami.Units.longDuration * 2
                 repeat: false
                 onTriggered: {
                     if (brightnessSlider.pressed) {
