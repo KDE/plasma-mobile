@@ -24,6 +24,8 @@ Item {
     readonly property real minimizedQuickSettingsOffset: contentContainerLoader.minimizedQuickSettingsOffset
     readonly property real maximizedQuickSettingsOffset: contentContainerLoader.maximizedQuickSettingsOffset
 
+    readonly property bool swipeAreaMoving: swipeAreaBase.moving || swipeAreaPortrait.moving
+
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
