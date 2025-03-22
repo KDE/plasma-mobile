@@ -223,7 +223,7 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormHeader {
-            title: i18nc("@title:group", "Lock Screen Shortcuts")
+            title: i18nc("@title:group, shortcuts available from lock screen", "Lock Screen Shortcuts")
         }
 
         FormCard.FormCard {
