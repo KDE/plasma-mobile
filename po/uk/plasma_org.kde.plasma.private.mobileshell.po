@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2024-11-13 16:48+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -50,7 +50,7 @@ msgstr "Копіювати адресу"
 msgid "Properties"
 msgstr "Властивості"
 
-#: qml/actiondrawer/ContentContainer.qml:149
+#: qml/actiondrawer/ContentContainer.qml:151
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Вилучити усі сповіщення"

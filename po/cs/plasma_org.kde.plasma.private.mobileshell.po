@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2023-01-05 12:05+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -49,7 +49,7 @@ msgstr "Kopírovat umístění"
 msgid "Properties"
 msgstr "Vlastnosti"
 
-#: qml/actiondrawer/ContentContainer.qml:149
+#: qml/actiondrawer/ContentContainer.qml:151
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Vymazat všechna oznámení"

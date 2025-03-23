@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2024-12-27 17:40+0100\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"PO-Revision-Date: 2025-03-22 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -62,12 +62,12 @@ msgstr "Se ŝaltita, dato montriĝos apud la horloĝo en la statusbreto."
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Procento de Baterio"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Montri baterian procenton en la statusbreto."
 
 #: ui/main.qml:88
 #, kde-format
@@ -178,40 +178,42 @@ msgid "Mode when opening from the top right."
 msgstr "Reĝimo malfermante de supre dekstre."
 
 #: ui/main.qml:226
-#, kde-format
-msgctxt "@title:group"
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Lock Screen Shortcuts"
+msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Ŝlosi Ekranajn Ŝparvojojn"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Neniu"
 
 #: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Fulmolumo"
 
 #: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Kamerao"
 
 #: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Maldesktra butono"
 
 #: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Destra butono"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

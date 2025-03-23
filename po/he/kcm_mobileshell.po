@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2025-03-20 20:28+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -177,8 +177,10 @@ msgid "Mode when opening from the top right."
 msgstr "מצב בעת פתיחה מהפינה הימנית העליונה."
 
 #: ui/main.qml:226
-#, kde-format
-msgctxt "@title:group"
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Lock Screen Shortcuts"
+msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "קיצורי מסך נעילה"
 

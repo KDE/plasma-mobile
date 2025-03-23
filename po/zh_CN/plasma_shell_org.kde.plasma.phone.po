@@ -85,11 +85,3 @@ msgstr "PIN 码错误"
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
 msgstr "面板焦点指示器"
-
-#~ msgctxt "@action:button"
-#~ msgid "Turn flashlight on"
-#~ msgstr "打开手电筒"
-
-#~ msgctxt "@action:button"
-#~ msgid "Open camera"
-#~ msgstr "打开相机"

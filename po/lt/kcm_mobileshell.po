@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2022-12-24 00:51+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -178,7 +178,7 @@ msgstr ""
 
 #: ui/main.qml:226
 #, kde-format
-msgctxt "@title:group"
+msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 

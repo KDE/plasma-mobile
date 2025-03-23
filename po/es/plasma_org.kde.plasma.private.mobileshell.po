@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2024-11-13 14:13+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -51,7 +51,7 @@ msgstr "Copiar ubicación"
 msgid "Properties"
 msgstr "Propiedades"
 
-#: qml/actiondrawer/ContentContainer.qml:149
+#: qml/actiondrawer/ContentContainer.qml:151
 #, kde-format
 msgid "Clear All Notifications"
 msgstr "Borrar todas las notificaciones"
