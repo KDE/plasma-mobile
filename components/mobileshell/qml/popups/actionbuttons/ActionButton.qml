@@ -5,8 +5,9 @@
  */
 
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Controls as Controls
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.private.mobileshell.state as MobileShellState
@@ -93,10 +94,11 @@ Window {
         ShellUtil.setInputTransparent(root, !active);
     }
 
-    AbstractButton {
-        id: button
+    Controls.Control {
+        id: content
         anchors.centerIn: parent
-        padding: root.size / 2
+        width: root.size
+        height: root.size
         opacity: root.active ? 1 : 0
 
         property double scale: !root.active ? 0.5 : (button.pressed ? 1.5 : 1)
@@ -118,38 +120,67 @@ Window {
         transform: Scale {
             origin.x: root.size / 2
             origin.y: root.size / 2
-            xScale: button.scale
-            yScale: button.scale
+            xScale: content.scale
+            yScale: content.scale
         }
 
-        MobileShell.HapticsEffect {
-            id: haptics
+        MultiEffect {
+            anchors.fill: parent
+            source: simpleShadow
+            blurMax: 16
+            shadowEnabled: true
+            shadowVerticalOffset: 1
+            shadowOpacity: 0.85
+            shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
         }
 
-        background: Rectangle {
-            radius: root.size
-            color: Qt.rgba(255, 255, 255, button.pressed ? 0.5 : 0.2)
-        }
+        Rectangle {
+            id: simpleShadow
+            anchors.fill: parent
+            anchors.leftMargin: -1
+            anchors.rightMargin: -1
+            anchors.bottomMargin: -1
 
-        contentItem: Item {
-            Kirigami.Icon {
-                anchors.centerIn: parent
-                width: Kirigami.Units.iconSizes.small
-                height: Kirigami.Units.iconSizes.small
-                transformOrigin: Item.Center
-                rotation: root.angle
-                source: root.iconSource
-                Kirigami.Theme.inherit: false
-                Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+            color: {
+                let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
+                return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.5)
             }
+            radius: root.size
         }
 
-        onPressed: {
-            haptics.buttonVibrate();
+        Rectangle {
+            anchors.fill: parent
+            color: Qt.lighter(Kirigami.Theme.backgroundColor, 1.5)
+            radius: root.size
+            opacity: 0.85
         }
 
-        onReleased: {
-            if (active) root.triggered();
+        Controls.AbstractButton {
+            id: button
+            anchors.fill: parent
+
+            MobileShell.HapticsEffect {
+                id: haptics
+            }
+
+            contentItem: Item {
+                Kirigami.Icon {
+                    anchors.centerIn: parent
+                    width: Kirigami.Units.iconSizes.small
+                    height: Kirigami.Units.iconSizes.small
+                    transformOrigin: Item.Center
+                    rotation: root.angle
+                    source: root.iconSource
+                }
+            }
+
+            onPressed: {
+                haptics.buttonVibrate();
+            }
+
+            onReleased: {
+                if (active) root.triggered();
+            }
         }
     }
 }
