@@ -23,8 +23,7 @@ set_source_files_properties(qml/dataproviders/AudioInfo.qml PROPERTIES QT_QML_SI
 set_source_files_properties(qml/dataproviders/BatteryInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/dataproviders/BluetoothInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 set_source_files_properties(qml/dataproviders/SignalStrengthInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/notificationpopup/NotificationPopupProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/volumeosd/VolumeOSDProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(qml/popups/PopupProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
 
 # Include qml and js files within ./qml/
 file(GLOB_RECURSE _qml_sources

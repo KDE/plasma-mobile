@@ -132,9 +132,8 @@ ContainmentItem {
 
         // HACK: we need to initialize the DBus server somewhere, it might as well be here...
         // initialize the volume osd, and volume keys
-        MobileShell.VolumeOSDProviderLoader.load();
         // initialize notification popups
-        MobileShell.NotificationPopupProviderLoader.load();
+        MobileShell.PopupProviderLoader.load();
     }
 
     MobileShell.StartupFeedbackPanelFill {
