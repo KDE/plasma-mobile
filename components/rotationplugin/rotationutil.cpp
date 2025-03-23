@@ -15,6 +15,7 @@
 #include <kscreen/getconfigoperation.h>
 #include <kscreen/output.h>
 #include <kscreen/setconfigoperation.h>
+#include <qtmetamacros.h>
 
 KScreen::Output::Rotation mapReadingOrientation(QOrientationReading::Orientation orientation)
 {
@@ -35,16 +36,17 @@ KScreen::Output::Rotation mapReadingOrientation(QOrientationReading::Orientation
     return KScreen::Output::Rotation::None;
 }
 
-int mapRotationToInt(KScreen::Output::Rotation rotation)
+RotationUtil::Rotation mapRotation(KScreen::Output::Rotation rotation)
 {
-    if (rotation == KScreen::Output::Rotation::Left) {
-        return 1;
-    } else if (rotation == KScreen::Output::Rotation::Inverted) {
-        return 2;
-    } else if (rotation == KScreen::Output::Rotation::Right) {
-        return 3;
-    } else {
-        return 0;
+    switch (rotation) {
+        case KScreen::Output::Rotation::Left:
+            return RotationUtil::Rotation::LandscapeLeft;
+        case KScreen::Output::Rotation::Inverted:
+            return RotationUtil::Rotation::UpsideDown;
+        case KScreen::Output::Rotation::Right:
+            return RotationUtil::Rotation::LandscapeRight;
+        default:
+            return RotationUtil::Rotation::Portrait;
     }
 }
 
@@ -103,14 +105,14 @@ bool RotationUtil::showRotationButton() const
     return m_showRotationButton;
 }
 
-int RotationUtil::deviceRotation() const
+RotationUtil::Rotation RotationUtil::deviceRotation() const
 {
-    return mapRotationToInt(m_rotateTo);
+    return m_deviceRotation;
 }
 
-int RotationUtil::currentRotation() const
+RotationUtil::Rotation RotationUtil::currentRotation() const
 {
-    return mapRotationToInt(m_currentRotate);
+    return m_currentRotation;
 }
 
 void RotationUtil::updateShowRotationButton()
@@ -125,6 +127,7 @@ void RotationUtil::updateShowRotationButton()
     }
 
     m_rotateTo = mapReadingOrientation(reading->orientation());
+    m_deviceRotation = mapRotation(m_rotateTo);
 
     const auto outputs = m_config->outputs();
 
@@ -144,8 +147,8 @@ void RotationUtil::updateShowRotationButton()
             // only check displays that have autorotate on
             continue;
         }
-        m_currentRotate = output->rotation();
-        m_showRotationButton = m_currentRotate != m_rotateTo;
+        m_currentRotation = mapRotation(output->rotation());
+        m_showRotationButton = output->rotation() != m_rotateTo;
         Q_EMIT rotationChanged();
         return;
     }

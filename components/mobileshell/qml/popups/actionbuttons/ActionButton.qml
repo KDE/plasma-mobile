@@ -21,14 +21,14 @@ Window {
     readonly property int size: Kirigami.Units.gridUnit * 2
     readonly property int margins: Math.round(Kirigami.Units.largeSpace * 0.5)
 
-    property int screenEdge: ActionButton.ScreenEdge.BottomRight
+    property int screenCorner: ActionButton.ScreenCorner.BottomRight
     property int angle: 0
     property string iconSource
     property bool active: false
 
     signal triggered()
 
-    enum ScreenEdge {
+    enum ScreenCorner {
         BottomRight,
         BottomLeft,
         TopLeft,
@@ -56,11 +56,11 @@ Window {
     LayerShell.Window.exclusionZone: -1
     LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityNone
     LayerShell.Window.anchors: {
-        if (screenEdge === ActionButton.ScreenEdge.TopLeft) {
+        if (screenCorner === ActionButton.ScreenCorner.TopLeft) {
             return LayerShell.Window.AnchorTop | LayerShell.Window.AnchorLeft
-        } else if (screenEdge === ActionButton.ScreenEdge.BottomRight) {
+        } else if (screenCorner === ActionButton.ScreenCorner.BottomRight) {
             return LayerShell.Window.AnchorBottom | LayerShell.Window.AnchorRight
-        } else if (screenEdge === ActionButton.ScreenEdge.BottomLeft) {
+        } else if (screenCorner === ActionButton.ScreenCorner.BottomLeft) {
             return LayerShell.Window.AnchorBottom | LayerShell.Window.AnchorLeft
         } else {
             return LayerShell.Window.AnchorTop | LayerShell.Window.AnchorRight
@@ -70,7 +70,7 @@ Window {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    // Double the set button size to leave room for button scale snimation.
+    // Double the set button size to leave room for button scale animation.
     width: size * 2
     height: size * 2
 

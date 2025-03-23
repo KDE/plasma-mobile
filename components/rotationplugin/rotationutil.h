@@ -11,6 +11,7 @@
 
 #include <kscreen/config.h>
 #include <qqmlregistration.h>
+#include <qtmetamacros.h>
 
 class RotationUtil : public QObject
 {
@@ -19,15 +20,24 @@ class RotationUtil : public QObject
     QML_SINGLETON
 
     Q_PROPERTY(bool showRotationButton READ showRotationButton NOTIFY rotationChanged)
-    Q_PROPERTY(int deviceRotation READ deviceRotation NOTIFY rotationChanged)
-    Q_PROPERTY(int currentRotation READ currentRotation NOTIFY rotationChanged)
+    Q_PROPERTY(Rotation deviceRotation READ deviceRotation NOTIFY rotationChanged)
+    Q_PROPERTY(Rotation currentRotation READ currentRotation NOTIFY rotationChanged)
 
 public:
     RotationUtil(QObject *parent = nullptr);
 
+    enum Rotation {
+        Portrait = 0,
+        LandscapeLeft,
+        UpsideDown,
+        LandscapeRight
+    };
+    Q_ENUM(Rotation)
+
     bool showRotationButton() const;
-    int deviceRotation() const;
-    int currentRotation() const;
+    Rotation deviceRotation() const;
+    Rotation currentRotation() const;
+
     Q_INVOKABLE void rotateToSuggestedRotation();
 
 Q_SIGNALS:
@@ -39,7 +49,8 @@ private Q_SLOTS:
 private:
     bool m_showRotationButton{false};
     KScreen::Output::Rotation m_rotateTo;
-    KScreen::Output::Rotation m_currentRotate;
+    Rotation m_deviceRotation;
+    Rotation m_currentRotation;
 
     KScreen::ConfigPtr m_config{nullptr};
     QOrientationSensor *m_sensor{nullptr};

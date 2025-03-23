@@ -22,7 +22,7 @@ ActionButton {
     onDeviceRotationChanged: {
         if (!showRotationButton || ShellSettings.Settings.navigationPanelEnabled) return;
         // Position at the bottom left edge of actual device, regardless of current rotation.
-        root.screenEdge = (deviceRotation - currentRotation) % 4;
+        root.screenCorner = (deviceRotation - currentRotation) % 4;
         // match angle to physical device rotation.
         root.angle = ((deviceRotation - currentRotation) % 4) * 90;
         root.active = true;
