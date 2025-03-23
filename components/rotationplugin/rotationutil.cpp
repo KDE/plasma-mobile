@@ -69,8 +69,6 @@ RotationUtil::RotationUtil(QObject *parent)
 
     connect(m_sensor, &QOrientationSensor::readingChanged, this, &RotationUtil::updateShowRotationButton);
     m_sensor->start();
-
-    qWarning() << "Testing";
 }
 
 void RotationUtil::rotateToSuggestedRotation()

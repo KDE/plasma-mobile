@@ -21,7 +21,7 @@ Window {
     readonly property int size: Kirigami.Units.gridUnit * 2
     readonly property int margins: Math.round(Kirigami.Units.largeSpace * 0.5)
 
-    property int screenEdge: ActionButton.ScreenEdge.Bottom
+    property int screenEdge: ActionButton.ScreenEdge.BottomRight
     property int angle: 0
     property string iconSource
     property bool active: false
@@ -29,12 +29,13 @@ Window {
     signal triggered()
 
     enum ScreenEdge {
-        Bottom,
-        Left,
-        Top,
-        Right
+        BottomRight,
+        BottomLeft,
+        TopLeft,
+        TopRight
     }
 
+    // When the button is animating its disappearance, make sure it is transparent to inputs.
     onActiveChanged: {
         ShellUtil.setInputTransparent(root, !active)
         if (active) {
@@ -55,11 +56,11 @@ Window {
     LayerShell.Window.exclusionZone: -1
     LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityNone
     LayerShell.Window.anchors: {
-        if (screenEdge === ActionButton.ScreenEdge.Top) {
+        if (screenEdge === ActionButton.ScreenEdge.TopLeft) {
             return LayerShell.Window.AnchorTop | LayerShell.Window.AnchorLeft
-        } else if (screenEdge === ActionButton.ScreenEdge.Bottom) {
+        } else if (screenEdge === ActionButton.ScreenEdge.BottomRight) {
             return LayerShell.Window.AnchorBottom | LayerShell.Window.AnchorRight
-        } else if (screenEdge === ActionButton.ScreenEdge.Left) {
+        } else if (screenEdge === ActionButton.ScreenEdge.BottomLeft) {
             return LayerShell.Window.AnchorBottom | LayerShell.Window.AnchorLeft
         } else {
             return LayerShell.Window.AnchorTop | LayerShell.Window.AnchorRight
@@ -69,6 +70,7 @@ Window {
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
+    // Double the set button size to leave room for button scale snimation.
     width: size * 2
     height: size * 2
 
@@ -76,6 +78,7 @@ Window {
 
     color: "transparent"
 
+    // Hide the root window after the button disappearing animation finishes.
     Timer {
         id: hideButton
         interval: Kirigami.Units.longDuration
@@ -84,6 +87,8 @@ Window {
     }
 
     Component.onCompleted: {
+        // Because the window surface area had to be made larger to accommodate the button scale animation,
+        // set the input region to the size of the actual button.
         ShellUtil.setInputRegion(root, Qt.rect((root.width - size) / 2, (root.height - size) / 2, size, size));
         ShellUtil.setInputTransparent(root, !active);
     }
