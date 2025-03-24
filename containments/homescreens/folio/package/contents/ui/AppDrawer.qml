@@ -52,6 +52,18 @@ Item {
             anchors.right: parent.right
 
             contentItem: root.headerItem
+
+            // Keyboard navigation
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Down) {
+                    appDrawerGrid.forceActiveFocus();
+                    appDrawerGrid.currentIndex = 0;
+                    event.accepted = true;
+                }
+                if (event.key === Qt.Key_Up) {
+                    folio.HomeScreenState.closeAppDrawer();
+                }
+            }
         }
 
         AppDrawerGrid {
@@ -64,6 +76,12 @@ Item {
             anchors.bottom: parent.bottom
             opacity: 0 // we display with the opacity gradient below
             headerHeight: root.headerHeight
+
+            // Keyboard navigation
+            topEdgeCallback: () => {
+                drawerHeader.contentItem.forceActiveFocus();
+                currentIndex = -1;
+            }
         }
 
         // opacity gradient at grid edges
