@@ -121,7 +121,7 @@ bool FolioApplicationFolder::isDropPositionOutside(qreal x, qreal y)
     return m_applicationFolderModel->isDropPositionOutside(x, y);
 }
 
-std::pair<FolioDelegate::Ptr, int> FolioApplicationFolder::getNeighborDelegate(FolioDelegate::Ptr delegate, Direction direction)
+std::pair<FolioDelegate::Ptr, int> FolioApplicationFolder::getNeighborDelegate(FolioDelegate::Ptr delegate, Enums::Direction direction)
 {
     if (!delegate) {
         // If there is no delegate, just return the first element (if it exists)
@@ -151,16 +151,16 @@ std::pair<FolioDelegate::Ptr, int> FolioApplicationFolder::getNeighborDelegate(F
 
     // Add delta position for neighbour's coordinate.
     switch (direction) {
-    case Direction::Up:
+    case Enums::Direction::Up:
         rowIndex--;
         break;
-    case Direction::Down:
+    case Enums::Direction::Down:
         rowIndex++;
         break;
-    case Direction::Left:
+    case Enums::Direction::Left:
         columnIndex--;
         break;
-    case Direction::Right:
+    case Enums::Direction::Right:
         columnIndex++;
         break;
     default:

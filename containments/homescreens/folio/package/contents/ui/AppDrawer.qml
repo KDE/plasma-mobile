@@ -56,12 +56,14 @@ Item {
             // Keyboard navigation
             Keys.onPressed: (event) => {
                 if (event.key === Qt.Key_Down) {
+                    // Go from search bar to grid
                     appDrawerGrid.forceActiveFocus();
                     appDrawerGrid.currentIndex = 0;
                     event.accepted = true;
-                }
-                if (event.key === Qt.Key_Up) {
+                } else if (event.key === Qt.Key_Up) {
+                    // Go to homescreen pages
                     folio.HomeScreenState.closeAppDrawer();
+                    folio.KeyboardNavigation.navigateFromAppDrawer();
                 }
             }
         }

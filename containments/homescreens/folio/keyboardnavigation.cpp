@@ -7,6 +7,21 @@ KeyboardNavigation::KeyboardNavigation(HomeScreen *parent)
     : QObject{parent}
     , m_homeScreen{parent}
 {
+    connect(m_homeScreen->homeScreenState(), &HomeScreenState::viewStateChanged, this, [this]() {
+        // Reset focused delegate if we move outside of the folder or pages view.
+
+        switch (m_homeScreen->homeScreenState()->viewState()) {
+        case HomeScreenState::FolderView:
+        case HomeScreenState::PageView:
+            break;
+        case HomeScreenState::SearchWidgetView:
+        case HomeScreenState::SettingsView:
+        case HomeScreenState::AppDrawerView:
+        default:
+            setFocusedDelegate(nullptr);
+            break;
+        }
+    });
 }
 
 FolioDelegate *KeyboardNavigation::focusedDelegate() const
@@ -19,10 +34,63 @@ void KeyboardNavigation::setFocusedDelegate(FolioDelegate::Ptr delegate)
     if (delegate != m_focusedDelegate) {
         m_focusedDelegate = delegate;
         Q_EMIT focusedDelegateChanged();
+
+        // TODO
+        qDebug() << "selected delegate" << delegate.get();
     }
 }
 
-void KeyboardNavigation::moveKeyboardNavigate(Direction direction)
+void KeyboardNavigation::navigateFromAppDrawer()
+{
+    HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
+    PageListModel *pageListModel = m_homeScreen->pageListModel();
+    FavouritesModel *favouritesModel = m_homeScreen->favouritesModel();
+
+    PageModel *currentPage = pageListModel->getPage(homeScreenState->currentPage());
+    if (!currentPage) {
+        setFocusedDelegate(nullptr);
+        return;
+    }
+
+    switch (homeScreenState->favouritesBarLocation()) {
+    case HomeScreenState::FavouritesBarLocation::Bottom:
+        setFocusedDelegate(favouritesModel->getEntryAt(0));
+
+        if (!m_focusedDelegate) {
+            // If there are no elements in the favourites model, just select an item on the current page.
+            setFocusedDelegate(currentPage->getLastDelegate());
+        }
+        break;
+    case HomeScreenState::FavouritesBarLocation::Left:
+    case HomeScreenState::FavouritesBarLocation::Right:
+        setFocusedDelegate(currentPage->getLastDelegate());
+        break;
+    default:
+        break;
+    }
+}
+
+void KeyboardNavigation::navigateFromSearchWidget()
+{
+    startKeyboardNavigateOnPage();
+}
+
+void KeyboardNavigation::startKeyboardNavigateOnPage()
+{
+    HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
+    PageListModel *pageListModel = m_homeScreen->pageListModel();
+
+    PageModel *currentPage = pageListModel->getPage(homeScreenState->currentPage());
+    if (!currentPage) {
+        setFocusedDelegate(nullptr);
+        return;
+    }
+
+    // Select first delegate on page.
+    setFocusedDelegate(currentPage->getFirstDelegate());
+}
+
+void KeyboardNavigation::moveKeyboardNavigate(Enums::Direction direction)
 {
     HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
     FavouritesModel *favouritesModel = m_homeScreen->favouritesModel();
@@ -46,7 +114,7 @@ void KeyboardNavigation::moveKeyboardNavigate(Direction direction)
     }
 }
 
-void KeyboardNavigation::moveKeyboardNavigateInFolder(Direction direction)
+void KeyboardNavigation::moveKeyboardNavigateInFolder(Enums::Direction direction)
 {
     HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
 
@@ -73,7 +141,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFolder(Direction direction)
     homeScreenState->closeFolder();
 }
 
-void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
+void KeyboardNavigation::moveKeyboardNavigateInFavorites(Enums::Direction direction)
 {
     HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
     FavouritesModel *favouritesModel = m_homeScreen->favouritesModel();
@@ -91,18 +159,23 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
     switch (homeScreenState->favouritesBarLocation()) {
     case HomeScreenState::FavouritesBarLocation::Bottom:
         switch (direction) {
-        case Direction::Up:
+        case Enums::Direction::Up:
             // Go to bottom of current page
             setFocusedDelegate(currentPage->getLastDelegate());
             break;
-        case Direction::Down:
+        case Enums::Direction::Down:
             homeScreenState->openAppDrawer();
+            setFocusedDelegate(nullptr);
             break;
-        case Direction::Left:
-            setFocusedDelegate(favouritesModel->getEntryAt(index - 1));
+        case Enums::Direction::Left:
+            if (index - 1 >= 0) {
+                setFocusedDelegate(favouritesModel->getEntryAt(index - 1));
+            }
             break;
-        case Direction::Right:
-            setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
+        case Enums::Direction::Right:
+            if (favouritesModel->rowCount() > index + 1) {
+                setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
+            }
             break;
         default:
             break;
@@ -110,21 +183,21 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
         break;
     case HomeScreenState::FavouritesBarLocation::Left:
         switch (direction) {
-        case Direction::Up:
+        case Enums::Direction::Up:
             // Go up in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index - 1));
             if (!m_focusedDelegate) {
                 homeScreenState->openSearchWidget();
             }
             break;
-        case Direction::Down:
+        case Enums::Direction::Down:
             // Go down in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
             if (!m_focusedDelegate) {
                 homeScreenState->openAppDrawer();
             }
             break;
-        case Direction::Left: {
+        case Enums::Direction::Left: {
             // Go to previous page
             homeScreenState->goToPage(homeScreenState->currentPage() - 1, false);
             PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
@@ -134,7 +207,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
             }
             break;
         }
-        case Direction::Right:
+        case Enums::Direction::Right:
             // Go to current page
             setFocusedDelegate(currentPage->getFirstDelegate());
             break;
@@ -144,25 +217,25 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
         break;
     case HomeScreenState::FavouritesBarLocation::Right:
         switch (direction) {
-        case Direction::Up:
+        case Enums::Direction::Up:
             // Go up in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index - 1));
             if (!m_focusedDelegate) {
                 homeScreenState->openSearchWidget();
             }
             break;
-        case Direction::Down:
+        case Enums::Direction::Down:
             // Go down in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
             if (!m_focusedDelegate) {
                 homeScreenState->openAppDrawer();
             }
             break;
-        case Direction::Left:
+        case Enums::Direction::Left:
             // Go to current page
             setFocusedDelegate(currentPage->getLastDelegate());
             break;
-        case Direction::Right: {
+        case Enums::Direction::Right: {
             // Go to next page
             homeScreenState->goToPage(homeScreenState->currentPage() + 1, false);
             PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
@@ -181,7 +254,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Direction direction)
     }
 }
 
-void KeyboardNavigation::moveKeyboardNavigateInPage(Direction direction)
+void KeyboardNavigation::moveKeyboardNavigateInPage(Enums::Direction direction)
 {
     HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
     FavouritesModel *favouritesModel = m_homeScreen->favouritesModel();
@@ -200,56 +273,68 @@ void KeyboardNavigation::moveKeyboardNavigateInPage(Direction direction)
     }
 
     // Set focused delegate to next neighbor in direction.
-    setFocusedDelegate(currentPage->getNeighborDelegate(m_focusedDelegate, direction));
+    FolioDelegate::Ptr nextDelegate = currentPage->getNeighborDelegate(m_focusedDelegate, direction);
+
+    if (nextDelegate) {
+        setFocusedDelegate(nextDelegate);
+        return;
+    }
 
     // If there is no delegate in this direction, we need to change view.
-    if (!m_focusedDelegate) {
-        switch (direction) {
-        case Direction::Up:
-            homeScreenState->openSearchWidget();
-            break;
-        case Direction::Down:
-            if (homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Bottom) {
-                setFocusedDelegate(favouritesModel->getEntryAt(0));
-            }
-            if (!m_focusedDelegate) {
-                // If favourites bar has no items, or it is not in this location, open app drawer.
-                homeScreenState->openAppDrawer();
-            }
-            break;
-        case Direction::Left:
-            if (homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Left) {
-                setFocusedDelegate(favouritesModel->getEntryAt(0));
-            }
-            if (!m_focusedDelegate) {
-                // If favourites bar has no items, or it is not in this location, go left a page.
-                homeScreenState->goToPage(homeScreenState->currentPage() - 1, false);
+    switch (direction) {
+    case Enums::Direction::Up:
+        homeScreenState->openSearchWidget();
+        break;
+    case Enums::Direction::Down: {
+        bool hasFavoritesBarNext = homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Bottom;
 
-                PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
-                if (newCurrentPage && newCurrentPage != currentPage) {
-                    // Select delegate on new page if page changed.
-                    setFocusedDelegate(newCurrentPage->getLastDelegate());
-                }
-            }
-            break;
-        case Direction::Right:
-            if (homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Right) {
-                setFocusedDelegate(favouritesModel->getEntryAt(0));
-            }
-            if (!m_focusedDelegate) {
-                // If favourites bar has no items, or it is not in this location, go right a page.
-                homeScreenState->goToPage(homeScreenState->currentPage() + 1, false);
-
-                PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
-                if (newCurrentPage && newCurrentPage != currentPage) {
-                    // Select delegate on new page if page changed.
-                    setFocusedDelegate(newCurrentPage->getFirstDelegate());
-                }
-            }
-            break;
-        default:
-            break;
+        if (hasFavoritesBarNext) {
+            setFocusedDelegate(favouritesModel->getEntryAt(0));
         }
+        if (!m_focusedDelegate || !hasFavoritesBarNext) {
+            // If favourites bar has no items, or it is not in this location, open app drawer.
+            homeScreenState->openAppDrawer();
+        }
+        break;
+    }
+    case Enums::Direction::Left: {
+        bool hasFavoritesBarNext = homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Left;
+
+        if (hasFavoritesBarNext) {
+            setFocusedDelegate(favouritesModel->getEntryAt(0));
+        }
+        if (!m_focusedDelegate || !hasFavoritesBarNext) {
+            // If favourites bar has no items, or it is not in this location, go left a page.
+            homeScreenState->goToPage(homeScreenState->currentPage() - 1, false);
+
+            PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
+            if (newCurrentPage && newCurrentPage != currentPage) {
+                // Select delegate on new page if page changed.
+                setFocusedDelegate(newCurrentPage->getLastDelegate());
+            }
+        }
+        break;
+    }
+    case Enums::Direction::Right: {
+        bool hasFavoritesBarNext = homeScreenState->favouritesBarLocation() == HomeScreenState::FavouritesBarLocation::Right;
+
+        if (hasFavoritesBarNext) {
+            setFocusedDelegate(favouritesModel->getEntryAt(0));
+        }
+        if (!m_focusedDelegate || !hasFavoritesBarNext) {
+            // If favourites bar has no items, or it is not in this location, go right a page.
+            homeScreenState->goToPage(homeScreenState->currentPage() + 1, false);
+
+            PageModel *newCurrentPage = pageListModel->getPage(homeScreenState->currentPage());
+            if (newCurrentPage && newCurrentPage != currentPage) {
+                // Select delegate on new page if page changed.
+                setFocusedDelegate(newCurrentPage->getFirstDelegate());
+            }
+        }
+        break;
+    }
+    default:
+        break;
     }
 }
 

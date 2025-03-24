@@ -22,6 +22,8 @@ MouseArea {
     id: root
     onClicked: root.requestedClose()
 
+    readonly property bool searchFieldFocused: queryField.activeFocus
+
     function requestFocus() {
         queryField.forceActiveFocus();
     }
@@ -31,6 +33,7 @@ MouseArea {
     }
 
     signal requestedClose()
+    signal requestedCloseByKeyboardNavigation()
 
     Keys.onPressed: (event) => {
         if (event.key === Qt.Key_Escape) {
@@ -77,6 +80,7 @@ MouseArea {
                     if (listView.count === 0) {
                         // Close if listview has no elements
                         root.requestedClose();
+                        root.requestedCloseByKeyboardNavigation();
                     } else {
                         // Focus on listview if there are elements
                         listView.forceActiveFocus();
@@ -152,6 +156,7 @@ MouseArea {
                     Keys.onPressed: (event) => {
                         if (event.key === Qt.Key_Down && (model.index === listView.count - 1)) {
                             root.requestedClose();
+                            root.requestedCloseByKeyboardNavigation();
                             event.accepted = true;
                         }
                     }
