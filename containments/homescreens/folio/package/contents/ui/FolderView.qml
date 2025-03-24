@@ -32,6 +32,13 @@ Folio.DelegateTouchArea {
 
     onClicked: close();
 
+    Keys.onReleased: (event) => {
+        if (event.key == Qt.Key_Escape || event.key == Qt.Key_Back) {
+            close();
+            event.accepted = true;
+        }
+    }
+
     function close() {
         folio.HomeScreenState.closeFolder();
     }
@@ -39,9 +46,13 @@ Folio.DelegateTouchArea {
     Connections {
         target: folio.HomeScreenState
 
+        // When the folder view is about to become visible
         function onFolderAboutToOpen(x, y) {
             root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
             root.folderPositionY = y - folio.HomeScreenState.viewRightPadding;
+
+            // Select for keyboard focus
+            root.focus = true;
         }
     }
 
@@ -214,6 +225,17 @@ Folio.DelegateTouchArea {
                         implicitHeight: cellHeight
                         width: cellWidth
                         height: cellHeight
+
+                        // Keyboard navigation focus
+                        Connections {
+                            target: folio.KeyboardNavigation
+
+                            function onFocusedDelegateChanged() {
+                                if (folio.KeyboardNavigation.focusedDelegate === delegate.delegateModel && delegateLoader.item.keyboardFocus) {
+                                    delegateLoader.item.keyboardFocus();
+                                }
+                            }
+                        }
 
                         Loader {
                             id: delegateLoader

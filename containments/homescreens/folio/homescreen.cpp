@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "homescreen.h"
+#include "enums.h"
 
 #include <KWindowSystem>
 
@@ -20,6 +21,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     , m_applicationListSearchModel{new ApplicationListSearchModel{this, m_applicationListModel}}
     , m_favouritesModel{new FavouritesModel{this}}
     , m_pageListModel{new PageListModel{this}}
+    , m_keyboardNavigation{new KeyboardNavigation{this}}
 {
     // HomeScreenState init() has dependencies on other objects
     m_homeScreenState->init();
@@ -33,6 +35,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     qmlRegisterUncreatableType<FolioSettings>(uri, 1, 0, "FolioSettings", "");
     qmlRegisterUncreatableType<HomeScreenState>(uri, 1, 0, "HomeScreenState", "");
     qmlRegisterUncreatableType<FolioApplication>(uri, 1, 0, "FolioApplication", "");
+    qmlRegisterUncreatableType<KeyboardNavigation>(uri, 1, 0, "KeyboardNavigation", "");
     qmlRegisterUncreatableType<FolioApplicationFolder>(uri, 1, 0, "FolioApplicationFolder", "");
     qmlRegisterUncreatableType<FolioWidget>(uri, 1, 0, "FolioWidget", "");
     qmlRegisterUncreatableType<FolioDelegate>(uri, 1, 0, "FolioDelegate", "");
@@ -41,6 +44,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     qmlRegisterType<DelegateTouchArea>(uri, 1, 0, "DelegateTouchArea");
     qmlRegisterUncreatableType<DelegateDragPosition>(uri, 1, 0, "DelegateDragPosition", "");
     qmlRegisterType<WidgetContainer>(uri, 1, 0, "WidgetContainer");
+    qmlRegisterType<Enums>(uri, 1, 0, "Enums");
 
     setHasConfigurationInterface(true);
 
@@ -101,6 +105,11 @@ FavouritesModel *HomeScreen::favouritesModel()
 PageListModel *HomeScreen::pageListModel()
 {
     return m_pageListModel;
+}
+
+KeyboardNavigation *HomeScreen::keyboardNavigation()
+{
+    return m_keyboardNavigation;
 }
 
 K_PLUGIN_CLASS(HomeScreen)

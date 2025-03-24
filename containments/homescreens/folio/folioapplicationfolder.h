@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "enums.h"
 #include "folioapplication.h"
 #include "foliodelegate.h"
 #include "homescreen.h"
@@ -57,6 +58,15 @@ public:
 
     int dropInsertPosition(int page, qreal x, qreal y);
     bool isDropPositionOutside(qreal x, qreal y);
+
+    /**
+     * For keyboard navigation, returns nullptr if no neighbour exists.
+     *
+     * @param delegate the delegate to find a neighbour of
+     * @param direction the direction to find the neighbour in
+     * @returns <delegate, page it is on>
+     */
+    std::pair<std::shared_ptr<FolioDelegate>, int> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Enums::Direction direction);
 
 Q_SIGNALS:
     void nameChanged();

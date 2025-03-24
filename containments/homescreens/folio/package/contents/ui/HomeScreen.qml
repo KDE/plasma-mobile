@@ -161,6 +161,39 @@ Item {
             homeScreen: root
         }
 
+        // Keyboard navigation
+        Keys.onPressed: (event) => {
+            if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.PageView) {
+                return;
+            }
+
+            // Select an item on the page if nothing is selected.
+            if (!folio.KeyboardNavigation.focusedDelegate) {
+                folio.KeyboardNavigation.startKeyboardNavigateOnPage();
+                return;
+            }
+
+            // If an item is already selected, move in the respective direction.
+            switch (event.key) {
+                case Qt.Key_Left:
+                    folio.KeyboardNavigation.moveKeyboardNavigate(Folio.Enums.Left);
+                    event.accepted = true;
+                    break;
+                case Qt.Key_Right:
+                    folio.KeyboardNavigation.moveKeyboardNavigate(Folio.Enums.Right);
+                    event.accepted = true;
+                    break;
+                case Qt.Key_Down:
+                    folio.KeyboardNavigation.moveKeyboardNavigate(Folio.Enums.Down);
+                    event.accepted = true;
+                    break;
+                case Qt.Key_Up:
+                    folio.KeyboardNavigation.moveKeyboardNavigate(Folio.Enums.Up);
+                    event.accepted = true;
+                    break;
+            }
+        }
+
         Item {
             id: mainHomeScreen
             anchors.fill: parent
@@ -473,15 +506,19 @@ Item {
                 function onSearchWidgetOpenProgressChanged() {
                     if (homeScreenState.searchWidgetOpenProgress === 1.0) {
                         searchWidget.requestFocus();
-                    } else {
-                        // TODO this gets called a lot, can we have a more performant way?
-                        root.forceActiveFocus();
+                    } else if (searchWidget.searchFieldFocused) {
+                        // Unfocus search widget while closing
+                        noFocus.forceActiveFocus();
                     }
                 }
             }
 
             onRequestedClose: {
                 homeScreenState.closeSearchWidget();
+            }
+
+            onRequestedCloseByKeyboardNavigation: {
+                folio.KeyboardNavigation.navigateFromSearchWidget();
             }
 
             anchors.topMargin: root.topMargin

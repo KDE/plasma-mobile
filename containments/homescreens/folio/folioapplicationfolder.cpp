@@ -2,7 +2,6 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "folioapplicationfolder.h"
-#include "homescreenstate.h"
 
 #include <QJsonArray>
 #include <algorithm>
@@ -120,6 +119,78 @@ int FolioApplicationFolder::dropInsertPosition(int page, qreal x, qreal y)
 bool FolioApplicationFolder::isDropPositionOutside(qreal x, qreal y)
 {
     return m_applicationFolderModel->isDropPositionOutside(x, y);
+}
+
+std::pair<FolioDelegate::Ptr, int> FolioApplicationFolder::getNeighborDelegate(FolioDelegate::Ptr delegate, Enums::Direction direction)
+{
+    if (!delegate) {
+        // If there is no delegate, just return the first element (if it exists)
+        return {m_applicationFolderModel->getDelegate(0), 0};
+    }
+
+    int rowIndex = -1;
+    int columnIndex = -1;
+    int pageIndex = -1;
+
+    // Find delegate and the position it is at
+    for (const ApplicationDelegate &d : m_delegates) {
+        if (d.delegate == delegate) {
+            rowIndex = d.rowIndex;
+            columnIndex = d.columnIndex;
+            pageIndex = d.pageIndex;
+            break;
+        }
+    }
+
+    if (rowIndex == -1) {
+        // Delegate was not found
+        return {nullptr, 0};
+    }
+
+    int gridLength = m_applicationFolderModel->numGridLengthOnPage();
+
+    // Add delta position for neighbour's coordinate.
+    switch (direction) {
+    case Enums::Direction::Up:
+        rowIndex--;
+        break;
+    case Enums::Direction::Down:
+        rowIndex++;
+        break;
+    case Enums::Direction::Left:
+        columnIndex--;
+        break;
+    case Enums::Direction::Right:
+        columnIndex++;
+        break;
+    default:
+        break;
+    }
+
+    if (rowIndex < 0 || rowIndex >= gridLength) {
+        // Above or below the folder
+        return {nullptr, 0};
+    }
+
+    if (columnIndex >= gridLength) {
+        // Go to next page
+        pageIndex++;
+        columnIndex = 0;
+    }
+    if (columnIndex < 0) {
+        // Go to previous page
+        pageIndex--;
+        columnIndex = gridLength - 1;
+    }
+
+    // Find new delegate at coordinate
+    for (const ApplicationDelegate &d : m_delegates) {
+        if (d.rowIndex == rowIndex && d.columnIndex == columnIndex && d.pageIndex == pageIndex) {
+            return {d.delegate, pageIndex};
+        }
+    }
+
+    return {nullptr, 0};
 }
 
 ApplicationFolderModel::ApplicationFolderModel(FolioApplicationFolder *parent)

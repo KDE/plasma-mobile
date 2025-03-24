@@ -13,6 +13,7 @@
 
 #include <Plasma/Applet>
 
+#include "folioapplicationfolder.h"
 #include "foliodelegate.h"
 #include "homescreen.h"
 
@@ -43,7 +44,11 @@ public:
     void moveEntry(int fromRow, int toRow);
     bool canAddEntry(int row, std::shared_ptr<FolioDelegate> delegate);
     bool addEntry(int row, std::shared_ptr<FolioDelegate> delegate);
-    std::shared_ptr<FolioDelegate> getEntryAt(int row);
+    std::shared_ptr<FolioDelegate> getEntryAt(int row) const;
+    bool contains(std::shared_ptr<FolioDelegate> delegate) const;
+    int indexOf(std::shared_ptr<FolioDelegate> delegate) const;
+
+    std::shared_ptr<FolioDelegate> getEntryFromFolder(std::shared_ptr<FolioApplicationFolder> folder) const;
 
     // whether the dock is full, we can't add any more items
     bool isFull() const;

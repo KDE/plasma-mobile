@@ -28,10 +28,19 @@ Item {
     required property int headerHeight
     required property var headerItem
 
-    // height from top of screen that the drawer starts
+    // Height from top of screen that the drawer starts.
     readonly property real drawerTopMargin: height - topPadding - bottomPadding
 
     property alias flickable: appDrawerGrid
+
+    Connections {
+        target: folio.KeyboardNavigation
+
+        function onRequestAppDrawer() {
+            // Focus on search bar when requesting app drawer from keyboard navigation.
+            drawerHeader.contentItem.forceActiveFocus();
+        }
+    }
 
     Item {
         anchors.fill: parent
@@ -52,6 +61,20 @@ Item {
             anchors.right: parent.right
 
             contentItem: root.headerItem
+
+            // Keyboard navigation
+            Keys.onPressed: (event) => {
+                if (event.key === Qt.Key_Down) {
+                    // Go from search bar to grid
+                    appDrawerGrid.forceActiveFocus();
+                    appDrawerGrid.currentIndex = 0;
+                    event.accepted = true;
+                } else if (event.key === Qt.Key_Up) {
+                    // Go to homescreen pages
+                    folio.HomeScreenState.closeAppDrawer();
+                    folio.KeyboardNavigation.navigateFromAppDrawer();
+                }
+            }
         }
 
         AppDrawerGrid {
@@ -64,6 +87,12 @@ Item {
             anchors.bottom: parent.bottom
             opacity: 0 // we display with the opacity gradient below
             headerHeight: root.headerHeight
+
+            // Keyboard navigation
+            topEdgeCallback: () => {
+                drawerHeader.contentItem.forceActiveFocus();
+                currentIndex = -1;
+            }
         }
 
         // opacity gradient at grid edges

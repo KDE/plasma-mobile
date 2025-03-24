@@ -71,6 +71,7 @@ class HomeScreenState : public QObject
     Q_PROPERTY(qreal searchWidgetOpenProgress READ searchWidgetOpenProgress NOTIFY searchWidgetOpenProgressChanged)
     Q_PROPERTY(qreal searchWidgetY READ searchWidgetY WRITE setSearchWidgetY NOTIFY searchWidgetYChanged)
 
+    // drag state
     Q_PROPERTY(qreal delegateDragX READ delegateDragX NOTIFY delegateDragXChanged)
     Q_PROPERTY(qreal delegateDragY READ delegateDragY NOTIFY delegateDragYChanged)
 
@@ -393,6 +394,8 @@ private:
     qreal m_folderOpenProgress{0};
     std::shared_ptr<FolioApplicationFolder> m_currentFolder{nullptr};
     int m_folderGridLength{0};
+
+    std::shared_ptr<FolioDelegate> m_keyboardFocusedDelegate{nullptr};
 
     qreal m_settingsOpenProgress{0};
 

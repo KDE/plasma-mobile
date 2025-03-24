@@ -139,13 +139,45 @@ bool FavouritesModel::addEntry(int row, FolioDelegate::Ptr delegate)
     return true;
 }
 
-FolioDelegate::Ptr FavouritesModel::getEntryAt(int row)
+FolioDelegate::Ptr FavouritesModel::getEntryAt(int row) const
 {
     if (row < 0 || row >= m_delegates.size()) {
         return nullptr;
     }
 
     return m_delegates[row].delegate;
+}
+
+bool FavouritesModel::contains(std::shared_ptr<FolioDelegate> delegate) const
+{
+    for (auto &favouritesDelegate : m_delegates) {
+        if (favouritesDelegate.delegate == delegate) {
+            return true;
+        }
+    }
+    return false;
+}
+
+int FavouritesModel::indexOf(std::shared_ptr<FolioDelegate> delegate) const
+{
+    for (int i = 0; i < m_delegates.size(); ++i) {
+        auto &favouritesDelegate = m_delegates[i];
+        if (favouritesDelegate.delegate == delegate) {
+            return i;
+        }
+    }
+    return -1;
+}
+
+std::shared_ptr<FolioDelegate> FavouritesModel::getEntryFromFolder(std::shared_ptr<FolioApplicationFolder> folder) const
+{
+    for (auto &favouritesDelegate : m_delegates) {
+        if (favouritesDelegate.delegate->folder() == folder) {
+            return favouritesDelegate.delegate;
+        }
+    }
+
+    return nullptr;
 }
 
 bool FavouritesModel::isFull() const

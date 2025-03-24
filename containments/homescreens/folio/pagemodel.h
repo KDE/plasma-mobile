@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "enums.h"
 #include "folioapplication.h"
 #include "folioapplicationfolder.h"
 #include "foliodelegate.h"
@@ -16,6 +17,7 @@
 
 class HomeScreen;
 class FolioPageDelegate;
+class KeyboardNavigation;
 
 class PageModel : public QAbstractListModel
 {
@@ -47,6 +49,12 @@ public:
     Q_INVOKABLE bool canAddDelegate(int row, int column, FolioDelegate *delegate);
     bool addDelegate(std::shared_ptr<FolioPageDelegate> delegate);
     std::shared_ptr<FolioPageDelegate> getDelegate(int row, int col);
+    std::shared_ptr<FolioPageDelegate> getDelegateFromFolder(std::shared_ptr<FolioApplicationFolder> folder) const;
+
+    std::shared_ptr<FolioPageDelegate> getFirstDelegate() const;
+    std::shared_ptr<FolioPageDelegate> getLastDelegate() const;
+
+    std::shared_ptr<FolioDelegate> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Enums::Direction direction);
 
     Q_INVOKABLE void moveAndResizeWidgetDelegate(FolioPageDelegate *delegate, int newRow, int newColumn, int newGridWidth, int newGridHeight);
 

@@ -212,6 +212,95 @@ FolioPageDelegate::Ptr PageModel::getDelegate(int row, int col)
     return nullptr;
 }
 
+FolioPageDelegate::Ptr PageModel::getDelegateFromFolder(FolioApplicationFolder::Ptr folder) const
+{
+    for (FolioPageDelegate::Ptr d : m_delegates) {
+        if (d->folder() == folder) {
+            return d;
+        }
+    }
+
+    return nullptr;
+}
+
+FolioPageDelegate::Ptr PageModel::getFirstDelegate() const
+{
+    FolioPageDelegate::Ptr minDelegate{nullptr};
+    for (int i = 0; i < m_delegates.size(); ++i) {
+        FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+        if (!minDelegate // No delegate found yet
+            || minDelegate->row() > delegate->row() // Earlier row
+            || (minDelegate->row() == delegate->row() && minDelegate->column() > delegate->column()) /* Earlier column, same row */) {
+            minDelegate = delegate;
+        }
+    }
+
+    return minDelegate;
+}
+
+FolioPageDelegate::Ptr PageModel::getLastDelegate() const
+{
+    FolioPageDelegate::Ptr maxDelegate{nullptr};
+    for (int i = 0; i < m_delegates.size(); ++i) {
+        FolioPageDelegate::Ptr delegate = m_delegates[i];
+
+        if (!maxDelegate // No delegate found yet
+            || maxDelegate->row() < delegate->row() // Later row
+            || (maxDelegate->row() == delegate->row() && maxDelegate->column() < delegate->column()) /* Later column, same row */) {
+            maxDelegate = delegate;
+        }
+    }
+
+    return maxDelegate;
+}
+
+FolioDelegate::Ptr PageModel::getNeighborDelegate(FolioDelegate::Ptr delegate, Enums::Direction direction)
+{
+    FolioPageDelegate::Ptr pageDelegate = static_pointer_cast<FolioPageDelegate>(delegate);
+    if (!pageDelegate) {
+        return nullptr;
+    }
+
+    // Set deltas for looping the specified direction.
+    int dx = 0;
+    int dy = 0;
+    switch (direction) {
+    case Enums::Direction::Up:
+        dy = -1;
+        break;
+    case Enums::Direction::Down:
+        dy = 1;
+        break;
+    case Enums::Direction::Left:
+        dx = -1;
+        break;
+    case Enums::Direction::Right:
+        dx = 1;
+        break;
+    default:
+        break;
+    }
+
+    HomeScreenState *homeScreenState = m_homeScreen->homeScreenState();
+    int row = pageDelegate->row() + dy;
+    int col = pageDelegate->column() + dx;
+
+    // Loop in the direction until we either find a delegate, or go out of bounds.
+    while (row >= 0 && row < homeScreenState->pageRows() && col >= 0 && col < homeScreenState->pageColumns()) {
+        FolioPageDelegate::Ptr delegate = getDelegate(row, col);
+        if (delegate) {
+            return static_pointer_cast<FolioDelegate>(delegate);
+        }
+
+        row += dy;
+        col += dx;
+    }
+
+    // Return nullptr if we go out of bounds.
+    return nullptr;
+}
+
 void PageModel::moveAndResizeWidgetDelegate(FolioPageDelegate *delegate, int newRow, int newColumn, int newGridWidth, int newGridHeight)
 {
     if (delegate->type() != FolioDelegate::Widget) {

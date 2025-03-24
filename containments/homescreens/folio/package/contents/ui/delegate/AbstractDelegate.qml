@@ -32,6 +32,10 @@ Folio.DelegateTouchArea {
     property real zoomScale: 1
     property bool clickRequested: false
 
+    function keyboardFocus() {
+        delegateWrapper.forceActiveFocus();
+    }
+
     NumberAnimation on zoomScale {
         id: shrinkAnim
         running: false
@@ -69,16 +73,36 @@ Folio.DelegateTouchArea {
     // trigger handled by press animation
     onClicked: clickRequested = true;
 
-    layer.enabled: root.shadow
-    layer.effect: DelegateShadow {}
-
-    Item {
+    FocusScope {
         id: delegateWrapper
         anchors.fill: parent
+
+        // Select keyboard navigation
+        Keys.onPressed: (event) => {
+            switch (event.key) {
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Space:
+                    console.log('accept')
+                    root.afterClickAnimation();
+                    event.accepted = true;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        KeyboardHighlight {
+            anchors.fill: parent
+            visible: delegateWrapper.activeFocus
+        }
 
         ColumnLayout {
             anchors.fill: parent
             spacing: 0
+
+            layer.enabled: root.shadow
+            layer.effect: DelegateShadow {}
 
             // transform is not on delegateWrapper because when it's zoomed in, it apparently
             // affects the delegate's x and y position, which messes up the starting drag and drop

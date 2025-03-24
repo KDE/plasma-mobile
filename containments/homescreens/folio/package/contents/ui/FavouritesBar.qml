@@ -68,7 +68,19 @@ MouseArea {
             width: folio.HomeScreenState.pageCellWidth
             height: folio.HomeScreenState.pageCellHeight
 
+            // Keyboard navigation focus
+            Connections {
+                target: folio.KeyboardNavigation
+
+                function onFocusedDelegateChanged() {
+                    if (folio.KeyboardNavigation.focusedDelegate === delegate.delegateModel && delegateLoader.item.keyboardFocus) {
+                        delegateLoader.item.keyboardFocus();
+                    }
+                }
+            }
+
             Loader {
+                id: delegateLoader
                 anchors.fill: parent
 
                 sourceComponent: {

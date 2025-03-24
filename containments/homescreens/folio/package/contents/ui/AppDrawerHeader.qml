@@ -22,6 +22,12 @@ Item {
         searchField.text = '';
     }
 
+    onFocusChanged: {
+        if (focus) {
+            searchField.focus = true;
+        }
+    }
+
     RowLayout {
         anchors.topMargin: Kirigami.Units.largeSpacing
         anchors.leftMargin: Kirigami.Units.gridUnit + Kirigami.Units.largeSpacing

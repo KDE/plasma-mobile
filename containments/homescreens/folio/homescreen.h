@@ -16,6 +16,7 @@
 #include "foliosettings.h"
 #include "foliowidget.h"
 #include "homescreenstate.h"
+#include "keyboardnavigation.h"
 #include "pagelistmodel.h"
 #include "pagemodel.h"
 #include "widgetcontainer.h"
@@ -28,6 +29,7 @@ class HomeScreenState;
 class FavouritesModel;
 class ApplicationListModel;
 class ApplicationListSearchModel;
+class KeyboardNavigation;
 
 class HomeScreen : public Plasma::Containment
 {
@@ -39,6 +41,7 @@ class HomeScreen : public Plasma::Containment
     Q_PROPERTY(ApplicationListSearchModel *ApplicationListSearchModel READ applicationListSearchModel CONSTANT)
     Q_PROPERTY(FavouritesModel *FavouritesModel READ favouritesModel CONSTANT)
     Q_PROPERTY(PageListModel *PageListModel READ pageListModel CONSTANT)
+    Q_PROPERTY(KeyboardNavigation *KeyboardNavigation READ keyboardNavigation CONSTANT)
 
 public:
     HomeScreen(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
@@ -53,6 +56,7 @@ public:
     ApplicationListSearchModel *applicationListSearchModel();
     FavouritesModel *favouritesModel();
     PageListModel *pageListModel();
+    KeyboardNavigation *keyboardNavigation();
 
 Q_SIGNALS:
     void showingDesktopChanged(bool showingDesktop);
@@ -69,4 +73,5 @@ private:
     ApplicationListSearchModel *m_applicationListSearchModel{nullptr};
     FavouritesModel *m_favouritesModel{nullptr};
     PageListModel *m_pageListModel{nullptr};
+    KeyboardNavigation *m_keyboardNavigation{nullptr};
 };

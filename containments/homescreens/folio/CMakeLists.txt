@@ -20,6 +20,8 @@ set(homescreen_SRCS
     dragstate.cpp
     widgetcontainer.cpp
     widgetsmanager.cpp
+    keyboardnavigation.cpp
+    enums.h
 )
 
 add_library(org.kde.plasma.mobile.homescreen.folio MODULE ${homescreen_SRCS})

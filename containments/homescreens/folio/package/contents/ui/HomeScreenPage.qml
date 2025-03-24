@@ -120,7 +120,18 @@ Item {
             visible: row >= 0 && row < folio.HomeScreenState.pageRows &&
                      column >= 0 && column < folio.HomeScreenState.pageColumns
 
-            // called when we want to delete this delegate
+            // Keyboard navigation focus
+            Connections {
+                target: folio.KeyboardNavigation
+
+                function onFocusedDelegateChanged() {
+                    if (folio.KeyboardNavigation.focusedDelegate === delegate.pageDelegate && loader.item.keyboardFocus) {
+                        loader.item.keyboardFocus();
+                    }
+                }
+            }
+
+            // Called when we want to delete this delegate
             function removeSelf() {
                 // remove from model
                 root.pageModel.removeDelegate(delegate.row, delegate.column);
