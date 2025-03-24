@@ -176,12 +176,10 @@ msgid "Mode when opening from the top right."
 msgstr "从右上角打开的模式。"
 
 #: ui/main.qml:226
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Lock Screen Shortcuts"
+#, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr "锁屏画面快捷方式"
+msgstr ""
 
 #: ui/main.qml:231
 #, kde-format

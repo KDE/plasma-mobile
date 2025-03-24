@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-23 00:43+0000\n"
-"PO-Revision-Date: 2025-03-21 01:23+0100\n"
+"PO-Revision-Date: 2025-03-23 03:51+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -182,9 +182,7 @@ msgid "Mode when opening from the top right."
 msgstr "Modo al abrir desde la parte superior derecha."
 
 #: ui/main.qml:226
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Lock Screen Shortcuts"
+#, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Atajos de teclado de bloquear pantalla"

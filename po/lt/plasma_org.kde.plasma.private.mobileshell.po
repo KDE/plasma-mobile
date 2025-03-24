@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-03-24 00:43+0000\n"
 "PO-Revision-Date: 2024-05-17 01:05+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -71,101 +71,103 @@ msgstr "Išjungta"
 msgid "SIM Locked"
 msgstr "SIM kortelė užrakinta"
 
-#: qml/statusbar/indicators/BatteryIndicator.qml:62
-#, kde-format
-msgid "%1%"
-msgstr "%1%"
-
-#: qml/volumeosd/AudioApplet.qml:73
+#: qml/popups/volumeosd/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
 msgstr "Išvestys"
 
-#: qml/volumeosd/AudioApplet.qml:111
+#: qml/popups/volumeosd/AudioApplet.qml:111
 #, kde-format
 msgid "Inputs"
 msgstr "Įvestys"
 
-#: qml/volumeosd/AudioApplet.qml:150
+#: qml/popups/volumeosd/AudioApplet.qml:150
 #, kde-format
 msgid "Playback Streams"
 msgstr "Atkūrimo srautai"
 
-#: qml/volumeosd/AudioApplet.qml:211
+#: qml/popups/volumeosd/AudioApplet.qml:211
 #, kde-format
 msgid "Recording Streams"
 msgstr "Įrašymo srautai"
 
-#: qml/volumeosd/DeviceListItem.qml:25
+#: qml/popups/volumeosd/DeviceListItem.qml:25
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/volumeosd/DeviceListItem.qml:34
+#: qml/popups/volumeosd/DeviceListItem.qml:34
 #, kde-format
 msgid "Device name not found"
 msgstr "Įrenginio pavadinimas nerastas"
 
-#: qml/volumeosd/ListItemBase.qml:101
+#: qml/popups/volumeosd/ListItemBase.qml:101
 #, kde-format
 msgid "Show additional options for %1"
 msgstr "Rodyti papildomas %1 parinktis"
 
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/ListItemBase.qml:137
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Unmute"
 msgstr "Įjungti garsą"
 
-#: qml/volumeosd/ListItemBase.qml:137 qml/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/ListItemBase.qml:137
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
 #, kde-format
 msgid "Mute"
 msgstr "Nutildyti"
 
-#: qml/volumeosd/ListItemBase.qml:168
+#: qml/popups/volumeosd/ListItemBase.qml:168
 #, kde-format
 msgctxt "Accessibility data on volume slider"
 msgid "Adjust volume for %1"
 msgstr "Reguliuoti %1 garsumą"
 
-#: qml/volumeosd/ListItemBase.qml:246
+#: qml/popups/volumeosd/ListItemBase.qml:246
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
 msgstr "%1%"
 
-#: qml/volumeosd/ListItemBase.qml:261
+#: qml/popups/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
 msgstr "100%"
 
-#: qml/volumeosd/StreamListItem.qml:21
+#: qml/popups/volumeosd/StreamListItem.qml:21
 #, kde-format
 msgid "Notification Sounds"
 msgstr "Pranešimų garsai"
 
-#: qml/volumeosd/StreamListItem.qml:24
+#: qml/popups/volumeosd/StreamListItem.qml:24
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: qml/volumeosd/StreamListItem.qml:29
+#: qml/popups/volumeosd/StreamListItem.qml:29
 #, kde-format
 msgid "Stream name not found"
 msgstr "Srauto pavadinimas nerastas"
 
-#: qml/volumeosd/VolumeChangedPopup.qml:261
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:261
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"
 msgstr "Perjungti garso srautų rodymą"
 
-#: qml/volumeosd/VolumeOSD.qml:208
+#: qml/popups/volumeosd/VolumeOSD.qml:208
 #, kde-format
 msgid "Open audio settings"
 msgstr "Atverti garso nuostatas"
+
+#: qml/statusbar/indicators/BatteryIndicator.qml:62
+#, kde-format
+msgid "%1%"
+msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
 #, fuzzy, kde-format

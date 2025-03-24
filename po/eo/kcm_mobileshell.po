@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-23 00:43+0000\n"
-"PO-Revision-Date: 2025-03-22 22:36+0100\n"
+"PO-Revision-Date: 2025-03-23 07:29+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -178,12 +178,10 @@ msgid "Mode when opening from the top right."
 msgstr "Reĝimo malfermante de supre dekstre."
 
 #: ui/main.qml:226
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Lock Screen Shortcuts"
+#, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr "Ŝlosi Ekranajn Ŝparvojojn"
+msgstr "Ŝparvojoj en Ŝlosi Ekranon"
 
 #: ui/main.qml:231
 #, kde-format
@@ -195,7 +193,7 @@ msgstr "Neniu"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr "Fulmolumo"
+msgstr "Poŝlampo"
 
 #: ui/main.qml:233
 #, kde-format
