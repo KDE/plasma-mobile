@@ -54,7 +54,7 @@ public:
     std::shared_ptr<FolioPageDelegate> getFirstDelegate() const;
     std::shared_ptr<FolioPageDelegate> getLastDelegate() const;
 
-    std::shared_ptr<FolioDelegate> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Direction direction);
+    std::shared_ptr<FolioDelegate> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Enums::Direction direction);
 
     Q_INVOKABLE void moveAndResizeWidgetDelegate(FolioPageDelegate *delegate, int newRow, int newColumn, int newGridWidth, int newGridHeight);
 

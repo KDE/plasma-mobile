@@ -3,6 +3,7 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
 #include "homescreen.h"
+#include "enums.h"
 
 #include <KWindowSystem>
 
@@ -43,6 +44,7 @@ HomeScreen::HomeScreen(QObject *parent, const KPluginMetaData &data, const QVari
     qmlRegisterType<DelegateTouchArea>(uri, 1, 0, "DelegateTouchArea");
     qmlRegisterUncreatableType<DelegateDragPosition>(uri, 1, 0, "DelegateDragPosition", "");
     qmlRegisterType<WidgetContainer>(uri, 1, 0, "WidgetContainer");
+    qmlRegisterType<Enums>(uri, 1, 0, "Enums");
 
     setHasConfigurationInterface(true);
 

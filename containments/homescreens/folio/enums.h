@@ -3,9 +3,18 @@
 
 #pragma once
 
-enum Direction {
-    Up,
-    Down,
-    Left,
-    Right
+#include <QObject>
+
+class Enums : public QObject
+{
+    Q_OBJECT
+
+public:
+    enum Direction {
+        Up,
+        Down,
+        Left,
+        Right
+    };
+    Q_ENUM(Direction)
 };

@@ -42,16 +42,31 @@ Q_SIGNALS:
 
 public Q_SLOTS:
     /**
-     * Moves the focused homescreen delegate one position in the given direction.
+     * Called by QML when keyboard navigation moves up from app drawer.
+     */
+    void navigateFromAppDrawer();
+
+    /**
+     * Called by QML when keyboard navigation moves down from search widget.
+     */
+    void navigateFromSearchWidget();
+
+    /**
+     * Called by QML to begin keyboard navigation on current page.
+     */
+    void startKeyboardNavigateOnPage();
+
+    /**
+     * Called by QML to move the focused homescreen delegate one position in the given direction.
      *
      * @param direction the direction to move in
      */
-    void moveKeyboardNavigate(Direction direction);
+    void moveKeyboardNavigate(Enums::Direction direction);
 
 private:
-    void moveKeyboardNavigateInFolder(Direction direction);
-    void moveKeyboardNavigateInFavorites(Direction direction);
-    void moveKeyboardNavigateInPage(Direction direction);
+    void moveKeyboardNavigateInFolder(Enums::Direction direction);
+    void moveKeyboardNavigateInFavorites(Enums::Direction direction);
+    void moveKeyboardNavigateInPage(Enums::Direction direction);
 
     std::shared_ptr<FolioDelegate> getFolioDelegateForFolder(std::shared_ptr<FolioApplicationFolder> folder);
 

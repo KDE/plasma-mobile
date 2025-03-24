@@ -229,7 +229,8 @@ FolioPageDelegate::Ptr PageModel::getFirstDelegate() const
     for (int i = 0; i < m_delegates.size(); ++i) {
         FolioPageDelegate::Ptr delegate = m_delegates[i];
 
-        if (!delegate || minDelegate->row() > delegate->row() // Earlier row
+        if (!minDelegate // No delegate found yet
+            || minDelegate->row() > delegate->row() // Earlier row
             || (minDelegate->row() == delegate->row() && minDelegate->column() > delegate->column()) /* Earlier column, same row */) {
             minDelegate = delegate;
         }
@@ -244,7 +245,8 @@ FolioPageDelegate::Ptr PageModel::getLastDelegate() const
     for (int i = 0; i < m_delegates.size(); ++i) {
         FolioPageDelegate::Ptr delegate = m_delegates[i];
 
-        if (!delegate || maxDelegate->row() < delegate->row() // Later row
+        if (!maxDelegate // No delegate found yet
+            || maxDelegate->row() < delegate->row() // Later row
             || (maxDelegate->row() == delegate->row() && maxDelegate->column() < delegate->column()) /* Later column, same row */) {
             maxDelegate = delegate;
         }
@@ -253,7 +255,7 @@ FolioPageDelegate::Ptr PageModel::getLastDelegate() const
     return maxDelegate;
 }
 
-FolioDelegate::Ptr PageModel::getNeighborDelegate(FolioDelegate::Ptr delegate, Direction direction)
+FolioDelegate::Ptr PageModel::getNeighborDelegate(FolioDelegate::Ptr delegate, Enums::Direction direction)
 {
     FolioPageDelegate::Ptr pageDelegate = static_pointer_cast<FolioPageDelegate>(delegate);
     if (!pageDelegate) {
@@ -264,16 +266,16 @@ FolioDelegate::Ptr PageModel::getNeighborDelegate(FolioDelegate::Ptr delegate, D
     int dx = 0;
     int dy = 0;
     switch (direction) {
-    case Direction::Up:
+    case Enums::Direction::Up:
         dy = -1;
         break;
-    case Direction::Down:
+    case Enums::Direction::Down:
         dy = 1;
         break;
-    case Direction::Left:
+    case Enums::Direction::Left:
         dx = -1;
         break;
-    case Direction::Right:
+    case Enums::Direction::Right:
         dx = 1;
         break;
     default:

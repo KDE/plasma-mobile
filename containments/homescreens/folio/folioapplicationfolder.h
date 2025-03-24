@@ -66,7 +66,7 @@ public:
      * @param direction the direction to find the neighbour in
      * @returns <delegate, page it is on>
      */
-    std::pair<std::shared_ptr<FolioDelegate>, int> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Direction direction);
+    std::pair<std::shared_ptr<FolioDelegate>, int> getNeighborDelegate(std::shared_ptr<FolioDelegate> delegate, Enums::Direction direction);
 
 Q_SIGNALS:
     void nameChanged();

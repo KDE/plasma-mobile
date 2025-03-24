@@ -211,6 +211,17 @@ Folio.DelegateTouchArea {
                         width: cellWidth
                         height: cellHeight
 
+                        // Keyboard navigation focus
+                        Connections {
+                            target: folio.KeyboardNavigation
+
+                            function onFocusedDelegateChanged() {
+                                if (folio.KeyboardNavigation.focusedDelegate === delegate.delegateModel && delegateLoader.item.keyboardFocus) {
+                                    delegateLoader.item.keyboardFocus();
+                                }
+                            }
+                        }
+
                         Loader {
                             id: delegateLoader
                             anchors.fill: parent
