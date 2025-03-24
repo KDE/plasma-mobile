@@ -8,6 +8,7 @@ import QtQuick.Controls as Controls
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PC3
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
@@ -22,6 +23,9 @@ MobileShell.GridView {
     cacheBuffer: cellHeight * 20
     reuseItems: true
     layer.enabled: true
+
+    keyNavigationEnabled: true
+    highlightMoveDuration: 0
 
     property var homeScreen
     property real headerHeight
