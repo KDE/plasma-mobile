@@ -28,10 +28,19 @@ Item {
     required property int headerHeight
     required property var headerItem
 
-    // height from top of screen that the drawer starts
+    // Height from top of screen that the drawer starts.
     readonly property real drawerTopMargin: height - topPadding - bottomPadding
 
     property alias flickable: appDrawerGrid
+
+    Connections {
+        target: folio.KeyboardNavigation
+
+        function onRequestAppDrawer() {
+            // Focus on search bar when requesting app drawer from keyboard navigation.
+            drawerHeader.contentItem.forceActiveFocus();
+        }
+    }
 
     Item {
         anchors.fill: parent

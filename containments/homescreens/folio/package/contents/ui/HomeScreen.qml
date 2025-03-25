@@ -154,6 +154,17 @@ Item {
 
         // Keyboard navigation
         Keys.onPressed: (event) => {
+            if (folio.HomeScreenState.viewState !== Folio.HomeScreenState.PageView) {
+                return;
+            }
+
+            // Select an item on the page if nothing is selected.
+            if (!folio.KeyboardNavigation.focusedDelegate) {
+                folio.KeyboardNavigation.startKeyboardNavigateOnPage();
+                return;
+            }
+
+            // If an item is already selected, move in the respective direction.
             switch (event.key) {
                 case Qt.Key_Left:
                     folio.KeyboardNavigation.moveKeyboardNavigate(Folio.Enums.Left);
