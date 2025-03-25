@@ -40,6 +40,8 @@ public:
 Q_SIGNALS:
     void focusedDelegateChanged();
 
+    void requestAppDrawer();
+
 public Q_SLOTS:
     /**
      * Called by QML when keyboard navigation moves up from app drawer.
@@ -68,6 +70,7 @@ private:
     void moveKeyboardNavigateInFavorites(Enums::Direction direction);
     void moveKeyboardNavigateInPage(Enums::Direction direction);
 
+    void openAppDrawer();
     std::shared_ptr<FolioDelegate> getFolioDelegateForFolder(std::shared_ptr<FolioApplicationFolder> folder);
 
     std::shared_ptr<FolioDelegate> m_focusedDelegate{nullptr};

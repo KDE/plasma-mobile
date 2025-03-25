@@ -25,6 +25,7 @@ MobileShell.GridView {
 
     keyNavigationEnabled: true
     highlightMoveDuration: 0
+    highlight: null // We supply our own highlight from the delegate
 
     property var homeScreen
     property real headerHeight
@@ -82,6 +83,13 @@ MobileShell.GridView {
     }
 
     model: folio.ApplicationListSearchModel
+
+    // Keyboard focus on app delegate when it is the selected item
+    onCurrentItemChanged: {
+        if (currentItem) {
+            currentItem.keyboardFocus();
+        }
+    }
 
     delegate: AppDelegate {
         id: appDelegate

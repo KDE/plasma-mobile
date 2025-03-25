@@ -164,7 +164,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Enums::Direction direct
             setFocusedDelegate(currentPage->getLastDelegate());
             break;
         case Enums::Direction::Down:
-            homeScreenState->openAppDrawer();
+            openAppDrawer();
             setFocusedDelegate(nullptr);
             break;
         case Enums::Direction::Left:
@@ -194,7 +194,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Enums::Direction direct
             // Go down in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
             if (!m_focusedDelegate) {
-                homeScreenState->openAppDrawer();
+                openAppDrawer();
             }
             break;
         case Enums::Direction::Left: {
@@ -228,7 +228,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFavorites(Enums::Direction direct
             // Go down in favourites bar
             setFocusedDelegate(favouritesModel->getEntryAt(index + 1));
             if (!m_focusedDelegate) {
-                homeScreenState->openAppDrawer();
+                openAppDrawer();
             }
             break;
         case Enums::Direction::Left:
@@ -293,7 +293,7 @@ void KeyboardNavigation::moveKeyboardNavigateInPage(Enums::Direction direction)
         }
         if (!m_focusedDelegate || !hasFavoritesBarNext) {
             // If favourites bar has no items, or it is not in this location, open app drawer.
-            homeScreenState->openAppDrawer();
+            openAppDrawer();
         }
         break;
     }
@@ -336,6 +336,12 @@ void KeyboardNavigation::moveKeyboardNavigateInPage(Enums::Direction direction)
     default:
         break;
     }
+}
+
+void KeyboardNavigation::openAppDrawer()
+{
+    m_homeScreen->homeScreenState()->openAppDrawer();
+    Q_EMIT requestAppDrawer();
 }
 
 FolioDelegate::Ptr KeyboardNavigation::getFolioDelegateForFolder(FolioApplicationFolder::Ptr folder)
