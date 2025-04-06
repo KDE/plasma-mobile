@@ -12,7 +12,7 @@ import QtQuick.Controls as QQC2
 import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.kirigami as Kirigami
 
-Kirigami.Icon {
+Item {
     id: connectionIcon
 
     // data
@@ -40,9 +40,16 @@ Kirigami.Icon {
         id: connectionIconProvider
     }
 
-    // implementation
-    source: icon
+    // Internet icon, only show while visible
+    Kirigami.Icon {
+        id: internetIcon
 
+        anchors.fill: parent
+        visible: !connectingIndicator.visible
+        source: connectionIcon.icon
+    }
+
+    // Connecting indicator
     QQC2.BusyIndicator {
         id: connectingIndicator
 
