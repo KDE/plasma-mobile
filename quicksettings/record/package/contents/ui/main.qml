@@ -28,7 +28,7 @@ QS.QuickSetting {
         case PWRec.PipeWireRecord.Rendering:
             i18n("Please wait…")
     }
-    icon: "media-record"
+    icon: "camera-video-symbolic"
     enabled: false
     available: record.encoder != PWRec.PipeWireRecord.NoEncoder
 

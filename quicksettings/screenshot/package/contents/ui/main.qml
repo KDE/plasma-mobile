@@ -10,7 +10,7 @@ import org.kde.plasma.quicksetting.screenshot
 QS.QuickSetting {
     text: i18n("Screenshot")
     status: i18n("Tap to screenshot")
-    icon: "spectacle"
+    icon: "view-fullscreen-symbolic"
     enabled: false
 
     property bool screenshotRequested: false
