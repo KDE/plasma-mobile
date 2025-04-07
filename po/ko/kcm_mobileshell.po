@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-23 00:43+0000\n"
-"PO-Revision-Date: 2024-11-29 00:11+0100\n"
+"PO-Revision-Date: 2025-04-07 00:24+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -60,12 +60,12 @@ msgstr "이 옵션을 사용하면 상태 표시줄의 시계 옆에 날짜를 �
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "배터리 백분율"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "상태 표시줄에 배터리 백분율을 표시합니다."
 
 #: ui/main.qml:88
 #, kde-format
@@ -179,37 +179,37 @@ msgstr "오른쪽 위에서 열었을 때 모드입니다."
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "잠금 화면 바로 가기"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "없음"
 
 #: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "플래시"
 
 #: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "카메라"
 
 #: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "왼쪽 단추"
 
 #: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "오른쪽 단추"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format

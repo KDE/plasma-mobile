@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-23 00:43+0000\n"
-"PO-Revision-Date: 2024-11-24 19:39+0100\n"
+"PO-Revision-Date: 2025-04-06 16:07+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -60,12 +60,12 @@ msgstr "Om på, visas datum intill klockan på statusraden."
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Batteriprocent"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Visa batteriprocent på statusraden."
 
 #: ui/main.qml:88
 #, kde-format
@@ -181,37 +181,37 @@ msgstr "Funktion vid öppna från uppe till höger."
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Lås skärmbildsgenvägar"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Inga"
 
 #: ui/main.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Ficklampa"
 
 #: ui/main.qml:233
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ui/main.qml:237
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Vänster knapp"
 
 #: ui/main.qml:261
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Höger knapp"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
