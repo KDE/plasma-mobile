@@ -9,6 +9,7 @@
 #include "folioapplicationfolder.h"
 #include "foliodelegate.h"
 #include "homescreen.h"
+#include "homescreenstate.h"
 
 class FolioDelegate;
 class FolioApplicationFolder;
@@ -21,6 +22,12 @@ class KeyboardNavigation : public QObject
 
 public:
     KeyboardNavigation(HomeScreen *parent = nullptr);
+
+    // HACK: for now, since we can't have HomeScreenState dep
+    enum DelegateLocation {
+        PageView,
+        FolderView
+    };
 
     /**
      * Get the currently focused FolioDelegate. If the view is currently the search or app drawer,
@@ -35,7 +42,7 @@ public:
      *
      * @param delegate the delegate to focus on
      */
-    void setFocusedDelegate(std::shared_ptr<FolioDelegate> delegate);
+    void setFocusedDelegate(std::shared_ptr<FolioDelegate> delegate, DelegateLocation viewState = DelegateLocation::PageView);
 
 Q_SIGNALS:
     void focusedDelegateChanged();
@@ -74,6 +81,7 @@ private:
     std::shared_ptr<FolioDelegate> getFolioDelegateForFolder(std::shared_ptr<FolioApplicationFolder> folder);
 
     std::shared_ptr<FolioDelegate> m_focusedDelegate{nullptr};
+    DelegateLocation m_focusedDelegateViewState{DelegateLocation::PageView};
 
     HomeScreen *m_homeScreen;
 };

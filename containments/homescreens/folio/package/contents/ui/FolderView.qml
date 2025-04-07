@@ -26,7 +26,14 @@ Folio.DelegateTouchArea {
 
     property Folio.FolioApplicationFolder folder: folio.HomeScreenState.currentFolder
 
-    onClicked: close();
+    onClicked: close()
+
+    Keys.onReleased: (event) => {
+        if (event.key == Qt.Key_Escape || event.key == Qt.Key_Back) {
+            close();
+            event.accepted = true;
+        }
+    }
 
     function close() {
         folio.HomeScreenState.closeFolder();
@@ -35,9 +42,13 @@ Folio.DelegateTouchArea {
     Connections {
         target: folio.HomeScreenState
 
+        // When the folder view is about to become visible
         function onFolderAboutToOpen(x, y) {
             root.folderPositionX = x - folio.HomeScreenState.viewLeftPadding;
             root.folderPositionY = y - folio.HomeScreenState.viewRightPadding;
+
+            // Select for keyboard focus
+            root.focus = true;
         }
     }
 

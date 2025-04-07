@@ -8,16 +8,25 @@ KeyboardNavigation::KeyboardNavigation(HomeScreen *parent)
     , m_homeScreen{parent}
 {
     connect(m_homeScreen->homeScreenState(), &HomeScreenState::viewStateChanged, this, [this]() {
-        // Reset focused delegate if we move outside of the folder or pages view.
-
         switch (m_homeScreen->homeScreenState()->viewState()) {
         case HomeScreenState::FolderView:
+            // Select first delegate in folder if moving from homescreen pages.
+            if (m_focusedDelegate != nullptr && m_focusedDelegateViewState == DelegateLocation::PageView) {
+                FolioApplicationFolder::Ptr folder = m_homeScreen->homeScreenState()->currentFolder();
+
+                if (folder && folder->applications()->getDelegate(0)) {
+                    setFocusedDelegate(folder->applications()->getDelegate(0), DelegateLocation::FolderView);
+                }
+            }
+            break;
         case HomeScreenState::PageView:
+            // TODO reselect folder when moving out of it
             break;
         case HomeScreenState::SearchWidgetView:
         case HomeScreenState::SettingsView:
         case HomeScreenState::AppDrawerView:
         default:
+            // Reset focused delegate if we move outside of the folder or pages view.
             setFocusedDelegate(nullptr);
             break;
         }
@@ -29,9 +38,10 @@ FolioDelegate *KeyboardNavigation::focusedDelegate() const
     return m_focusedDelegate.get();
 }
 
-void KeyboardNavigation::setFocusedDelegate(FolioDelegate::Ptr delegate)
+void KeyboardNavigation::setFocusedDelegate(FolioDelegate::Ptr delegate, KeyboardNavigation::DelegateLocation viewState)
 {
     if (delegate != m_focusedDelegate) {
+        m_focusedDelegateViewState = viewState;
         m_focusedDelegate = delegate;
         Q_EMIT focusedDelegateChanged();
 
@@ -131,7 +141,7 @@ void KeyboardNavigation::moveKeyboardNavigateInFolder(Enums::Direction direction
 
     // If neighbour exists, navigate to it.
     if (neighbor) {
-        setFocusedDelegate(neighbor);
+        setFocusedDelegate(neighbor, DelegateLocation::FolderView);
         homeScreenState->goToFolderPage(newPage, false); // Navigate to new page
         return;
     }
