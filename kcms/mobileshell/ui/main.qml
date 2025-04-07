@@ -85,35 +85,24 @@ KCM.SimpleKCM {
             FormCard.FormComboBoxDelegate {
                 id: statusBarScaleFactorDelegate
 
-                property string tinyString: i18nc("Status bar height", "Tiny")
-                property string smallString: i18nc("Status bar height", "Small")
-                property string normalString: i18nc("Status bar height", "Normal")
-                property string largeString: i18nc("Status bar height","Large")
-                property string xlargeString: i18nc("Status bar height", "Very Large")
-
-
                 text: i18n("Status Bar Size")
                 description: i18n("Size of the top panel (needs restart).")
 
-                currentIndex: indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
-                model: ListModel {
-                    // We can't use i18n with ListElement, so use a property instead
-                    Component.onCompleted: {
-                        append({"name": statusBarScaleFactorDelegate.tinyString, "value": 1.0});
-                        append({"name": statusBarScaleFactorDelegate.smallString, "value": 1.15});
-                        append({"name": statusBarScaleFactorDelegate.normalString, "value": 1.25});
-                        append({"name": statusBarScaleFactorDelegate.largeString, "value": 1.5});
-                        append({"name": statusBarScaleFactorDelegate.xlargeString, "value": 2.0});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        statusBarScaleFactorDelegate.currentIndex = statusBarScaleFactorDelegate.indexOfValue(ShellSettings.Settings.statusBarScaleFactor)
-                    }
-                }
+                model: [
+                    {"name": i18nc("Status bar height", "Tiny"), "value": 1.0},
+                    {"name": i18nc("Status bar height", "Small"), "value": 1.15},
+                    {"name": i18nc("Status bar height", "Normal"), "value": 1.25},
+                    {"name": i18nc("Status bar height", "Large"), "value": 1.5},
+                    {"name": i18nc("Status bar height", "Very Large"), "value": 2.0}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
-                Component.onCompleted: dialog.parent = root
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.statusBarScaleFactor);
+                    dialog.parent = root;
+                }
                 onCurrentValueChanged: ShellSettings.Settings.statusBarScaleFactor = currentValue
             }
 
@@ -175,22 +164,18 @@ KCM.SimpleKCM {
                 text: i18n("Top Left Drawer Mode")
                 description: i18n("Mode when opening from the top left.")
 
-                currentIndex: indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
-                model: ListModel {
-                    // we can't use i18n with ListElement
-                    Component.onCompleted: {
-                        append({"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned});
-                        append({"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        topLeftActionDrawerModeDelegate.currentIndex = topLeftActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode)
-                    }
-                }
+                model: [
+                    {"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned},
+                    {"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
-                Component.onCompleted: dialog.parent = root
+                Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.actionDrawerTopLeftMode);
+                    dialog.parent = root;
+                }
                 onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopLeftMode = currentValue
             }
 
@@ -201,21 +186,16 @@ KCM.SimpleKCM {
                 text: i18n("Top Right Drawer Mode")
                 description: i18n("Mode when opening from the top right.")
 
-                model: ListModel {
-                    // we can't use i18n with ListElement
-                    Component.onCompleted: {
-                        append({"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned});
-                        append({"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded});
-
-                        // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                        topRightActionDrawerModeDelegate.currentIndex = topRightActionDrawerModeDelegate.indexOfValue(ShellSettings.Settings.actionDrawerTopRightMode)
-                    }
-                }
+                model: [
+                    {"name": quickSettings.pinnedString, "value": ShellSettings.Settings.Pinned},
+                    {"name": quickSettings.expandedString, "value": ShellSettings.Settings.Expanded}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
                 Component.onCompleted: {
+                    currentIndex = indexOfValue(ShellSettings.Settings.actionDrawerTopRightMode);
                     dialog.parent = root
                 }
                 onCurrentValueChanged: ShellSettings.Settings.actionDrawerTopRightMode = currentValue
@@ -236,20 +216,18 @@ KCM.SimpleKCM {
                 id: lockscreenLeftButtonDelegate
                 text: i18nc("@label:listbox", "Left button")
 
-                model: ListModel {
-                    Component.onCompleted: {
-                        append({"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None});
-                        append({"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight});
-                        // append({"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera});
-                        lockscreenLeftButtonDelegate.currentIndex = lockscreenLeftButtonDelegate.indexOfValue(ShellSettings.Settings.lockscreenLeftButtonAction)
-                    }
-                }
+                model: [
+                    {"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None},
+                    {"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight}
+                    // {"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
                 Component.onCompleted: {
-                    dialog.parent = root
+                    currentIndex = indexOfValue(ShellSettings.Settings.lockscreenLeftButtonAction);
+                    dialog.parent = root;
                 }
                 onCurrentValueChanged: ShellSettings.Settings.lockscreenLeftButtonAction = currentValue
             }
@@ -260,20 +238,18 @@ KCM.SimpleKCM {
                 id: lockscreenRightButtonDelegate
                 text: i18nc("@label:listbox", "Right button")
 
-                model: ListModel {
-                    Component.onCompleted: {
-                        append({"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None});
-                        append({"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight});
-                        // append({"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera});
-                        lockscreenRightButtonDelegate.currentIndex = lockscreenRightButtonDelegate.indexOfValue(ShellSettings.Settings.lockscreenRightButtonAction)
-                    }
-                }
+                model: [
+                    {"name": quickActionButtons.noneString, "value": ShellSettings.Settings.None},
+                    {"name": quickActionButtons.flashlightString, "value": ShellSettings.Settings.Flashlight}
+                    // {"name": quickActionButtons.cameraString, "value": ShellSettings.Settings.Camera}
+                ]
 
                 textRole: "name"
                 valueRole: "value"
 
                 Component.onCompleted: {
-                    dialog.parent = root
+                    currentIndex = indexOfValue(ShellSettings.Settings.lockscreenRightButtonAction);
+                    dialog.parent = root;
                 }
                 onCurrentValueChanged: ShellSettings.Settings.lockscreenRightButtonAction = currentValue
             }

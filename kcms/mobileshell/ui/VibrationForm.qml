@@ -39,27 +39,19 @@ FormCard.FormCardPage {
             text: i18n("Vibration Duration")
             description: i18n("How long shell vibrations should be.")
 
-            property string longString: i18nc("Long duration", "Long")
-            property string mediumString: i18nc("Medium duration", "Medium")
-            property string shortString: i18nc("Short duration", "Short")
-
-            currentIndex: indexOfValue(ShellSettings.Settings.vibrationDuration)
-            model: ListModel {
-                // we can't use i18n with ListElement
-                Component.onCompleted: {
-                    append({"name": vibrationDurationDelegate.longString, "value": 100});
-                    append({"name": vibrationDurationDelegate.mediumString, "value": 50});
-                    append({"name": vibrationDurationDelegate.shortString, "value": 10});
-
-                    // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
-                    vibrationDurationDelegate.currentIndex = vibrationDurationDelegate.indexOfValue(ShellSettings.Settings.vibrationDuration)
-                }
-            }
+            model: [
+                {"name": i18nc("Long duration", "Long"), "value": 100},
+                {"name": i18nc("Medium duration", "Medium"), "value": 50},
+                {"name": i18nc("Short duration", "Short"), "value": 10}
+            ]
 
             textRole: "name"
             valueRole: "value"
 
-            Component.onCompleted: dialog.parent = root
+            Component.onCompleted: {
+                currentIndex = indexOfValue(ShellSettings.Settings.vibrationDuration);
+                dialog.parent = root;
+            }
             onCurrentValueChanged: ShellSettings.Settings.vibrationDuration = currentValue;
         }
     }
