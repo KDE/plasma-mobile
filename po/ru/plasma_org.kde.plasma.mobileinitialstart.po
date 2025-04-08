@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # SPDX-FileCopyrightText: 2023 Alexander Yavorsky <kekcuha@gmail.com>
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-09 02:32+0000\n"
-"PO-Revision-Date: 2024-09-24 11:54+0300\n"
+"PO-Revision-Date: 2025-04-07 16:52+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -35,10 +35,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr "Открыть мастер начального запуска без изменения конфигурации"
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© Сообщество KDE, 2023"
+msgstr "© Сообщество KDE, 2024"
 
 #: main.cpp:37
 #, kde-format
@@ -238,16 +237,14 @@ msgid "Password…"
 msgstr "Пароль…"
 
 #: qml/LandingComponent.qml:104
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr "Добро пожаловать в<br/><b>%1</b>"
+msgstr "Добро пожаловать в<br/><b>Plasma Mobile</b>"
 
 #: qml/LandingComponent.qml:130
-#, fuzzy, kde-format
-#| msgid "Welcome to<br/><b>%1</b>"
+#, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr "Добро пожаловать в<br/><b>%1</b>"
+msgstr "На основе<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:297
 #, kde-format
