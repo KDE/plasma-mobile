@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the plasma-mobile package.
 #
 # Alexander Yavorsky <kekcuha@gmail.com>, 2023.
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-24 00:43+0000\n"
-"PO-Revision-Date: 2024-09-24 12:21+0300\n"
+"PO-Revision-Date: 2025-04-07 16:56+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -154,10 +154,9 @@ msgid "Stream name not found"
 msgstr "Имя потока не найдено"
 
 #: qml/popups/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Toggle showing audio streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "Включить или отключить показ аудиопотоков"
+msgstr "Настройка аудиопотоков"
 
 #: qml/popups/volumeosd/VolumeOSD.qml:208
 #, kde-format
@@ -170,8 +169,7 @@ msgid "%1%"
 msgstr "%1%"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
 msgstr "Поиск…"
