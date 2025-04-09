@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2025-03-23 07:29+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -71,143 +71,143 @@ msgstr "Montri baterian procenton en la statusbreto."
 
 #: ui/main.qml:88
 #, kde-format
+msgid "Status Bar Size"
+msgstr "Statusbreta Grandeco"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Grandeco de la supra panelo (postulas rekomencon)."
+
+#: ui/main.qml:92
+#, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Eta"
 
-#: ui/main.qml:89
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Malgranda"
 
-#: ui/main.qml:90
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normala"
 
-#: ui/main.qml:91
+#: ui/main.qml:95
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Granda"
 
-#: ui/main.qml:92
+#: ui/main.qml:96
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Grandega"
 
-#: ui/main.qml:95
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Statusbreta Grandeco"
-
-#: ui/main.qml:96
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Grandeco de la supra panelo (postulas rekomencon)."
-
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigada Panelo"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Nur gesta Reĝimo"
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Ĉu kaŝi la navigadan panelon."
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Ĉiam montri klavaran baskulon"
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Ĉu ĉiam montri la klavarbaskulan butonon sur la navigada panelo."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "Ago-Kesto"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Alpinglita Reĝimo"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Vastigita Reĝimo"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rapidaj Agordoj"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Supra Maldekstra Kesto-Reĝimo"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Reĝimo malfermante de la supro maldekstre."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Supra Dekstra Kesto-Reĝimo"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Reĝimo malfermante de supre dekstre."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Ŝparvojoj en Ŝlosi Ekranon"
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Neniu"
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Poŝlampo"
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamerao"
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Maldesktra butono"
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -257,25 +257,25 @@ msgstr "Vibrado Daŭro"
 msgid "How long shell vibrations should be."
 msgstr "Kiom longaj ŝelvibroj devus esti."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Longa"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Meza"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Mallonga"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2025-03-23 17:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -69,65 +69,65 @@ msgstr "Durum çubuğunda pil yüzdesini gösterin."
 
 #: ui/main.qml:88
 #, kde-format
+msgid "Status Bar Size"
+msgstr "Durum Çubuğu Boyutu"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Üst panelin boyutu (yeniden başlatma gerektirir)."
+
+#: ui/main.qml:92
+#, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Ufak"
 
-#: ui/main.qml:89
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Küçük"
 
-#: ui/main.qml:90
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normal"
 
-#: ui/main.qml:91
+#: ui/main.qml:95
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Büyük"
 
-#: ui/main.qml:92
+#: ui/main.qml:96
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Çok Büyük"
 
-#: ui/main.qml:95
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Durum Çubuğu Boyutu"
-
-#: ui/main.qml:96
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Üst panelin boyutu (yeniden başlatma gerektirir)."
-
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Dolaşım Paneli"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Yalnızca hareket kipi"
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Dolaşım panelinin gizlenip gizlenmeyeceği."
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Klavyeyi aç/kapat düğmesini her zaman göster"
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -135,79 +135,79 @@ msgstr ""
 "Dolaşım panelindeki klavye aç/kapat düğmesinin her zaman gösterilip "
 "gösterilmeyeceği."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "Eylem Çekmecesi"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Sabitlenmiş Kip"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Genişletilmiş Kip"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Tez Ayarlar"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Sol Üst Çekmece Kipi"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Sol üstten açıldığı zamanki kip."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Sağ Üst Çekmece Kipi"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Sağ üstten açıldığı zamanki kip."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Kilit Ekranı Kısayolları"
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Yok"
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Fener"
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Sol düğme"
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -257,25 +257,25 @@ msgstr "Titreşim Süresi"
 msgid "How long shell vibrations should be."
 msgstr "Kabuk titreşimlerinin ne kadar süreceği."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Uzun"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Orta"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Kısa"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

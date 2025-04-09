@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2024-03-27 23:20+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: none\n"
@@ -40,50 +40,50 @@ msgstr "Operacinė sistema"
 msgid "Webpage"
 msgstr "Internetinė svetainė"
 
-#: ui/main.qml:63
+#: ui/main.qml:88
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Programinė įranga"
 
-#: ui/main.qml:68
+#: ui/main.qml:93
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma versija"
 
-#: ui/main.qml:75
+#: ui/main.qml:100
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE sistemų versija"
 
-#: ui/main.qml:82
+#: ui/main.qml:107
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt versija"
 
-#: ui/main.qml:89
+#: ui/main.qml:114
 #, kde-format
 msgid "Kernel Version"
 msgstr "Branduolio versija"
 
-#: ui/main.qml:96
+#: ui/main.qml:121
 #, kde-format
 msgid "OS Type"
 msgstr "OS tipas"
 
-#: ui/main.qml:97
+#: ui/main.qml:122
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1 bitų"
 
-#: ui/main.qml:102
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Aparatinė įranga"
 
-#: ui/main.qml:107
+#: ui/main.qml:132
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -92,18 +92,18 @@ msgstr[1] "Procesoriai"
 msgstr[2] "Procesorių"
 msgstr[3] "Procesorių"
 
-#: ui/main.qml:114
+#: ui/main.qml:139
 #, kde-format
 msgid "Memory"
 msgstr "Atmintis"
 
-#: ui/main.qml:118
+#: ui/main.qml:143
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 OA (RAM)"
 
-#: ui/main.qml:120
+#: ui/main.qml:145
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

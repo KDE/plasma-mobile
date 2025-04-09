@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2020-10-29 23:50+0200\n"
 "Last-Translator: scootergrisen\n"
 "Language-Team: Danish\n"
@@ -37,57 +37,57 @@ msgstr ""
 msgid "Webpage"
 msgstr ""
 
-#: ui/main.qml:63
+#: ui/main.qml:88
 #, fuzzy, kde-format
 #| msgid "Software"
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Software"
 
-#: ui/main.qml:68
+#: ui/main.qml:93
 #, fuzzy, kde-format
 #| msgid "KDE Plasma Version:"
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma-version:"
 
-#: ui/main.qml:75
+#: ui/main.qml:100
 #, fuzzy, kde-format
 #| msgid "KDE Frameworks Version:"
 msgid "KDE Frameworks Version"
 msgstr "KDE Frameworks-version:"
 
-#: ui/main.qml:82
+#: ui/main.qml:107
 #, fuzzy, kde-format
 #| msgid "Qt Version:"
 msgid "Qt Version"
 msgstr "Qt-version:"
 
-#: ui/main.qml:89
+#: ui/main.qml:114
 #, fuzzy, kde-format
 #| msgid "Kernel Version:"
 msgid "Kernel Version"
 msgstr "Kerne-version:"
 
-#: ui/main.qml:96
+#: ui/main.qml:121
 #, fuzzy, kde-format
 #| msgid "OS Type:"
 msgid "OS Type"
 msgstr "OS-type:"
 
-#: ui/main.qml:97
+#: ui/main.qml:122
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: ui/main.qml:102
+#: ui/main.qml:127
 #, fuzzy, kde-format
 #| msgid "Hardware"
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Hardware"
 
-#: ui/main.qml:107
+#: ui/main.qml:132
 #, fuzzy, kde-format
 #| msgid "Processor:"
 #| msgid_plural "Processors:"
@@ -96,19 +96,19 @@ msgid_plural "Processors"
 msgstr[0] "Processor:"
 msgstr[1] "Processorer:"
 
-#: ui/main.qml:114
+#: ui/main.qml:139
 #, fuzzy, kde-format
 #| msgid "Memory:"
 msgid "Memory"
 msgstr "Hukommelse:"
 
-#: ui/main.qml:118
+#: ui/main.qml:143
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 af RAM"
 
-#: ui/main.qml:120
+#: ui/main.qml:145
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

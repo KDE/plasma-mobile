@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2025-04-03 18:04+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -70,65 +70,65 @@ msgstr "Statusa joslā rādīt baterijas uzlādes līmeni procentos."
 
 #: ui/main.qml:88
 #, kde-format
+msgid "Status Bar Size"
+msgstr "Statusa joslas izmērs"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "Augšējā paneļa izmērs (jāpārstartē)."
+
+#: ui/main.qml:92
+#, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Sīka"
 
-#: ui/main.qml:89
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Maza"
 
-#: ui/main.qml:90
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normāla"
 
-#: ui/main.qml:91
+#: ui/main.qml:95
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Liela"
 
-#: ui/main.qml:92
+#: ui/main.qml:96
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Milzīga"
 
-#: ui/main.qml:95
-#, kde-format
-msgid "Status Bar Size"
-msgstr "Statusa joslas izmērs"
-
-#: ui/main.qml:96
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "Augšējā paneļa izmērs (jāpārstartē)."
-
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigācijas panelis"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Tikai žestu režīms"
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Vai slēpt navigācijas paneli."
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Vienmēr rādīt tastatūras parādīšanas un slēpšanas pogu"
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -136,79 +136,79 @@ msgstr ""
 "Vai navigācijas panelī vienmēr rādīt tastatūras parādīšanas un slēpšanas "
 "pogu."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "Darbību atvilktne"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Piespraustais režīms"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Izvērstais režīms"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Ātrie iestatījumi"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Augšējās kreisās puses atvilktnes režīms"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Režīms, atverot no augšējās kreisās puses."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Augšējās labās puses atvilktnes režīms"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Režīms, atverot no augšējās labās puses."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Ekrāna slēgšanas saīsnes"
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Nav"
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Kabatas lukturītis"
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Kreisā poga"
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -259,25 +259,25 @@ msgstr "Vibrāciju ilgums"
 msgid "How long shell vibrations should be."
 msgstr "Cik garām jābūt čaulas vibrācijām."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Garas"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Vidējas"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Īsas"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2023-07-23 18:09+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -68,144 +68,144 @@ msgstr ""
 
 #: ui/main.qml:88
 #, kde-format
-msgctxt "Status bar height"
-msgid "Tiny"
+msgid "Status Bar Size"
 msgstr ""
 
 #: ui/main.qml:89
 #, kde-format
-msgctxt "Status bar height"
-msgid "Small"
-msgstr ""
-
-#: ui/main.qml:90
-#, kde-format
-msgctxt "Status bar height"
-msgid "Normal"
-msgstr ""
-
-#: ui/main.qml:91
-#, kde-format
-msgctxt "Status bar height"
-msgid "Large"
+msgid "Size of the top panel (needs restart)."
 msgstr ""
 
 #: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
-msgid "Very Large"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:93
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:94
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
 msgstr ""
 
 #: ui/main.qml:95
 #, kde-format
-msgid "Status Bar Size"
+msgctxt "Status bar height"
+msgid "Large"
 msgstr ""
 
 #: ui/main.qml:96
 #, kde-format
-msgid "Size of the top panel (needs restart)."
+msgctxt "Status bar height"
+msgid "Very Large"
 msgstr ""
 
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigačný panel"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Režim len pre gestá"
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Či sa má skryť navigačný panel."
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr ""
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, fuzzy, kde-format
 #| msgid "Whether to hide the navigation panel."
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "Či sa má skryť navigačný panel."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "Ťahania akcií"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Režim pripnutia"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Rozšírený režim"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Rýchle nastavenia"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Režim ťahania zľava hore"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Režim pri otvorení z ľavého horného rohu."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Režim ťahania sprava hore"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Režim pri otvorení z pravého horného rohu."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -255,25 +255,25 @@ msgstr "Trvanie vibrácie"
 msgid "How long shell vibrations should be."
 msgstr "Aké dlhé by mali byť vibrácie shellu."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Dlhé"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Stredné"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Stručné"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

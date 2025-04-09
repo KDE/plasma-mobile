@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2024-05-20 10:53+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -72,65 +72,65 @@ msgstr ""
 
 #: ui/main.qml:88
 #, kde-format
-msgctxt "Status bar height"
-msgid "Tiny"
+msgid "Status Bar Size"
 msgstr ""
 
 #: ui/main.qml:89
 #, kde-format
-msgctxt "Status bar height"
-msgid "Small"
-msgstr ""
-
-#: ui/main.qml:90
-#, kde-format
-msgctxt "Status bar height"
-msgid "Normal"
-msgstr ""
-
-#: ui/main.qml:91
-#, kde-format
-msgctxt "Status bar height"
-msgid "Large"
+msgid "Size of the top panel (needs restart)."
 msgstr ""
 
 #: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
-msgid "Very Large"
+msgid "Tiny"
+msgstr ""
+
+#: ui/main.qml:93
+#, kde-format
+msgctxt "Status bar height"
+msgid "Small"
+msgstr ""
+
+#: ui/main.qml:94
+#, kde-format
+msgctxt "Status bar height"
+msgid "Normal"
 msgstr ""
 
 #: ui/main.qml:95
 #, kde-format
-msgid "Status Bar Size"
+msgctxt "Status bar height"
+msgid "Large"
 msgstr ""
 
 #: ui/main.qml:96
 #, kde-format
-msgid "Size of the top panel (needs restart)."
+msgctxt "Status bar height"
+msgid "Very Large"
 msgstr ""
 
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Navigationsbereich"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr ""
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr ""
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Umschalter für die Tastatur immer anzeigen"
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -138,79 +138,79 @@ msgstr ""
 "Gibt an, ob der Umschalter für die Tastatur immer in der Navigationsleiste "
 "angezeigt wird."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "Aktionsleiste"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Reduzierter Modus"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Erweiterter Modus"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Schnelleinstellungen"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Linke obere Aktionsleiste"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Darstellung beim Öffnen von links oben."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Rechte obere Aktionsleiste"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Darstellung beim Öffnen von rechts oben."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr ""
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr ""
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr ""
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr ""
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr ""
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
@@ -261,25 +261,25 @@ msgstr "Vibrationsdauer"
 msgid "How long shell vibrations should be."
 msgstr "Wie lange die Vibrationen in der Systemumgebung dauern sollten."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "Lang"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "Mittel"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "Kurz"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
