@@ -48,9 +48,13 @@ KCM.SimpleKCM {
                 description: kcm.distroInfo.name
             }
 
-            FormCard.FormDelegateSeparator {}
+            FormCard.FormDelegateSeparator {
+                visible: webpageDelegate.visible
+            }
 
             FormCard.FormButtonDelegate {
+                id: webpageDelegate
+                visible: kcm.distroInfo.homeUrl
                 text: i18n("Webpage")
                 description: kcm.distroInfo.homeUrl
                 onClicked: {
