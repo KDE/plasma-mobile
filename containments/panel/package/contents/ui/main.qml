@@ -67,14 +67,6 @@ ContainmentItem {
         }
     }
 
-
-    Binding {
-        target: MobileShellState.ShellDBusClient
-        property: "isActionDrawerOpen"
-        value: drawer.visible
-    }
-
-
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
     readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
@@ -119,7 +111,7 @@ ContainmentItem {
     Binding {
         target: MobileShellState.ShellDBusClient
         property: "isActionDrawerOpen"
-        value: drawer.intendedToBeVisible
+        value: drawer.visible
     }
 
 //END API implementation
