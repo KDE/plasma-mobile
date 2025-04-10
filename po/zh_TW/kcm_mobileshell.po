@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-09 00:43+0000\n"
-"PO-Revision-Date: 2025-02-07 23:04+0900\n"
+"PO-Revision-Date: 2025-04-09 17:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -60,12 +60,12 @@ msgstr "啟用時，會在狀態列的時鐘旁邊顯示日期。"
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "電池百分比"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "在狀態列中顯示電池百分比。"
 
 #: ui/main.qml:88
 #, kde-format
@@ -179,37 +179,37 @@ msgstr "從右上開啟時的模式。"
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "鎖定螢幕捷徑"
 
 #: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "無"
 
 #: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "手電筒"
 
 #: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "相機"
 
 #: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "左邊按鈕"
 
 #: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "右邊按鈕"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
