@@ -51,7 +51,6 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::resetHomeScreenPositionRequested, this, &ShellDBusClient::resetHomeScreenPositionRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::showVolumeOSDRequested, this, &ShellDBusClient::showVolumeOSDRequested);
 
-    updateIsActionDrawerOpen();
     updateDoNotDisturb();
     updateIsTaskSwitcherVisible();
 }
