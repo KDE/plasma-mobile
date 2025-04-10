@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2024-12-01 15:00+0200\n"
+"PO-Revision-Date: 2025-03-15 09:20+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -193,17 +193,17 @@ msgstr "Tumma teema"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Järjestelmänavigointi"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Valitse järjestelmän navigointitapa."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Elenavigointi"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -211,21 +211,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Näytä käynnissä olevat sovellukset pyyhkäisemällä alhaalta ylös. Nopea "
+"näpäys vie kotinäytölle."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Painikenavigointi"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Käytä järjestelmänavigointiin navigointirivin painikkeita."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "Valintaa voi myöhemmin asetuksissa muuttaa."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format

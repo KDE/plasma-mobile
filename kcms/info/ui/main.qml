@@ -60,6 +60,31 @@ KCM.SimpleKCM {
         }
 
         FormCard.FormHeader {
+            visible: kcm.vendorInfoTitle !== ""
+            title: kcm.vendorInfoTitle
+        }
+
+        FormCard.FormCard {
+            visible: kcm.vendorInfoTitle !== ""
+            Repeater {
+                model: kcm.vendorInfo
+                ColumnLayout {
+                    id: delegate
+
+                    required property var modelData
+
+                    spacing: 0
+
+                    FormCard.FormTextDelegate {
+                        text: delegate.modelData.Key
+                        description: delegate.modelData.Value
+                    }
+                    FormCard.FormDelegateSeparator {}
+                }
+            }
+        }
+
+        FormCard.FormHeader {
             title: i18nc("@title:group", "Software")
         }
 
@@ -119,31 +144,6 @@ KCM.SimpleKCM {
                     } else {
                         return i18nc("Unknown amount of RAM", "Unknown")
                     }
-                }
-            }
-        }
-
-        FormCard.FormHeader {
-            visible: kcm.vendorInfoTitle !== ""
-            title: kcm.vendorInfoTitle
-        }
-
-        FormCard.FormCard {
-            visible: kcm.vendorInfoTitle !== ""
-            Repeater {
-                model: kcm.vendorInfo
-                ColumnLayout {
-                    id: delegate
-
-                    required property var modelData
-
-                    spacing: 0
-
-                    FormCard.FormTextDelegate {
-                        text: delegate.modelData.Key
-                        description: delegate.modelData.Value
-                    }
-                    FormCard.FormDelegateSeparator {}
                 }
             }
         }

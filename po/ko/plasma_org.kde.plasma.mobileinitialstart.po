@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2024-11-29 00:12+0100\n"
+"PO-Revision-Date: 2025-04-07 00:24+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -195,17 +195,17 @@ msgstr "어두운 테마"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "시스템 탐색"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "시스템 탐색 방식을 선택하십시오."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "제스처 탐색"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -213,21 +213,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"아래쪽에서 쓸어 올려서 실행 중인 앱을 표시합니다. 밀어 내면 홈 화면으로 돌아"
+"갑니다."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "단추 탐색"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "탐색 표시줄의 단추를 사용하여 시스템을 탐색합니다."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "나중에 설정에서 변경할 수 있습니다."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format

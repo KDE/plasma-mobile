@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-22 01:46+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2024-12-13 19:10+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -38,68 +38,68 @@ msgstr "संचालन प्रणाली"
 msgid "Webpage"
 msgstr "जालपुटम्"
 
-#: ui/main.qml:63
+#: ui/main.qml:88
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "तन्त्रांश"
 
-#: ui/main.qml:68
+#: ui/main.qml:93
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE प्लाज्मा संस्करणम्"
 
-#: ui/main.qml:75
+#: ui/main.qml:100
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE Frameworks संस्करणम्"
 
-#: ui/main.qml:82
+#: ui/main.qml:107
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt संस्करणम्"
 
-#: ui/main.qml:89
+#: ui/main.qml:114
 #, kde-format
 msgid "Kernel Version"
 msgstr "कर्नेल् संस्करणम्"
 
-#: ui/main.qml:96
+#: ui/main.qml:121
 #, kde-format
 msgid "OS Type"
 msgstr "ओएस प्रकार"
 
-#: ui/main.qml:97
+#: ui/main.qml:122
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-बिट्"
 
-#: ui/main.qml:102
+#: ui/main.qml:127
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "हार्डवेयर"
 
-#: ui/main.qml:107
+#: ui/main.qml:132
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "संसाधकः"
 msgstr[1] "संसाधकाः"
 
-#: ui/main.qml:114
+#: ui/main.qml:139
 #, kde-format
 msgid "Memory"
 msgstr "स्मृति"
 
-#: ui/main.qml:118
+#: ui/main.qml:143
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM इत्यस्य"
 
-#: ui/main.qml:120
+#: ui/main.qml:145
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

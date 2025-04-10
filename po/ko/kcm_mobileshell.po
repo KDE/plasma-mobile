@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
-"PO-Revision-Date: 2024-11-29 00:11+0100\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"PO-Revision-Date: 2025-04-07 00:24+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -60,156 +60,156 @@ msgstr "이 옵션을 사용하면 상태 표시줄의 시계 옆에 날짜를 �
 #: ui/main.qml:73
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "배터리 백분율"
 
 #: ui/main.qml:74
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "상태 표시줄에 배터리 백분율을 표시합니다."
 
 #: ui/main.qml:88
+#, kde-format
+msgid "Status Bar Size"
+msgstr "상태 표시줄 크기"
+
+#: ui/main.qml:89
+#, kde-format
+msgid "Size of the top panel (needs restart)."
+msgstr "위쪽 패널의 크기입니다(다시 시작 필요)."
+
+#: ui/main.qml:92
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "매우 작게"
 
-#: ui/main.qml:89
+#: ui/main.qml:93
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "작게"
 
-#: ui/main.qml:90
+#: ui/main.qml:94
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "보통"
 
-#: ui/main.qml:91
+#: ui/main.qml:95
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "크게"
 
-#: ui/main.qml:92
+#: ui/main.qml:96
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "매우 크게"
 
-#: ui/main.qml:95
-#, kde-format
-msgid "Status Bar Size"
-msgstr "상태 표시줄 크기"
-
-#: ui/main.qml:96
-#, kde-format
-msgid "Size of the top panel (needs restart)."
-msgstr "위쪽 패널의 크기입니다(다시 시작 필요)."
-
-#: ui/main.qml:123
+#: ui/main.qml:112
 #, kde-format
 msgid "Navigation Panel"
 msgstr "탐색 패널"
 
-#: ui/main.qml:129
+#: ui/main.qml:118
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "제스처 전용 모드"
 
-#: ui/main.qml:130
+#: ui/main.qml:119
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "탐색 패널을 숨길지 여부입니다."
 
-#: ui/main.qml:144
+#: ui/main.qml:133
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "항상 키보드 전환 표시"
 
-#: ui/main.qml:145
+#: ui/main.qml:134
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "탐색 패널에 키보드 전환 단추를 항상 표시할지 여부입니다."
 
-#: ui/main.qml:156
+#: ui/main.qml:145
 #, kde-format
 msgid "Action Drawer"
 msgstr "동작 서랍"
 
-#: ui/main.qml:162
+#: ui/main.qml:151
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "핀 모드"
 
-#: ui/main.qml:163
+#: ui/main.qml:152
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "확장 모드"
 
-#: ui/main.qml:167 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "빠른 설정"
 
-#: ui/main.qml:175
+#: ui/main.qml:164
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "왼쪽 위 서랍 모드"
 
-#: ui/main.qml:176
+#: ui/main.qml:165
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "왼쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:201
+#: ui/main.qml:186
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "오른쪽 위 서랍 모드"
 
-#: ui/main.qml:202
+#: ui/main.qml:187
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "오른쪽 위에서 열었을 때 모드입니다."
 
-#: ui/main.qml:226
+#: ui/main.qml:206
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "잠금 화면 바로 가기"
 
-#: ui/main.qml:231
+#: ui/main.qml:211
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "없음"
 
-#: ui/main.qml:232
+#: ui/main.qml:212
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "플래시"
 
-#: ui/main.qml:233
+#: ui/main.qml:213
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "카메라"
 
-#: ui/main.qml:237
+#: ui/main.qml:217
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "왼쪽 단추"
 
-#: ui/main.qml:261
+#: ui/main.qml:239
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "오른쪽 단추"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
@@ -254,25 +254,25 @@ msgstr "진동 시간"
 msgid "How long shell vibrations should be."
 msgstr "셸 진동의 지속 시간입니다."
 
-#: ui/VibrationForm.qml:42
+#: ui/VibrationForm.qml:43
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "길게"
 
-#: ui/VibrationForm.qml:43
+#: ui/VibrationForm.qml:44
 #, kde-format
 msgctxt "Medium duration"
 msgid "Medium"
 msgstr "중간"
 
-#: ui/VibrationForm.qml:44
+#: ui/VibrationForm.qml:45
 #, kde-format
 msgctxt "Short duration"
 msgid "Short"
 msgstr "짧게"
 
-#: ui/VibrationForm.qml:68
+#: ui/VibrationForm.qml:60
 #, kde-format
 msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "

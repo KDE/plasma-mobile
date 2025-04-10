@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2024-12-16 17:34+0200\n"
+"PO-Revision-Date: 2025-04-03 18:07+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 24.08.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -196,17 +196,17 @@ msgstr "Tumšais motīvs"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "Sistēmas navigācija"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "Izvēlieties metodi navigācijai sistēmā."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "Žestu navigācija"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -214,21 +214,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"Lai redzētu ieslēgtās programmas, pavelciet no apakšas. Lai atgrieztos mājas "
+"ekrānā, ātri pārvelciet."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "Pogu navigācija"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "Lietojiet pogas navigācijas joslā, lai pārvietotos sistēmā."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "To vēlāk varēsiet izmainīt sistēmas iestatījumos."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
