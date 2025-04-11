@@ -75,6 +75,15 @@ Kirigami.ScrollablePage {
             if (configurationChangedSignal) {
                 configurationChangedSignal.connect(root.settingValueChanged)
             }
+
+            var unsavedChangesChangedSignal = item.unsavedChangesChanged
+            if (unsavedChangesChangedSignal) {
+                unsavedChangesChangedSignal.connect( () => {
+                    if (item.unsavedChanges) {
+                        root.settingValueChanged()
+                    }
+                })
+            }
         }
     }
 }
