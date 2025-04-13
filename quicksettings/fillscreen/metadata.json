@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "stanleymicah@proton.me",
+                "Name": "Micah Stanley",
+                "Name[x-test]": "xxMicah Stanleyxx"
+            }
+        ],
+        "Description": "Fill screen for all applicatoins quick setting for Plasma Mobile",
+        "Description[x-test]": "xxFill screen for all applicatoins quick setting for Plasma Mobilexx",
+        "Icon": "view-fullscreen",
+        "Id": "org.kde.plasma.quicksetting.fillscreen",
+        "License": "GPL-2.0+",
+        "Name": "Fill Screen",
+        "Name[x-test]": "xxFill Screennxx",
+        "Website": "https://kde.org"
+    }
+}

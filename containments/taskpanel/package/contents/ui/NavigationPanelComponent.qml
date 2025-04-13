@@ -26,7 +26,7 @@ MobileShell.NavigationPanel {
     // - opaque if an app is shown or vkbd is shown
     // - translucent if the task switcher is open
     // - transparent if on the homescreen
-    backgroundColor: navbarState != "default" ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
+    backgroundColor: navbarState != "default" && opaqueBar ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
     foregroundColorGroup: opaqueBar ? Kirigami.Theme.Window : Kirigami.Theme.Complementary
     shadow: !opaqueBar
 

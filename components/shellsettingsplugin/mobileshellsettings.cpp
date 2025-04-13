@@ -41,6 +41,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
+            Q_EMIT fillScreenModeEnabledChanged();
             Q_EMIT allowLogoutChanged();
         }
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
@@ -192,6 +193,19 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
 {
     auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
     group.writeEntry("convergenceModeEnabled", enabled, KConfigGroup::Notify);
+    m_config->sync();
+}
+
+bool MobileShellSettings::fillScreenModeEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("fillScreenModeEnabled", false);
+}
+
+void MobileShellSettings::setFillScreenModeEnabled(bool enabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("fillScreenModeEnabled", enabled, KConfigGroup::Notify);
     m_config->sync();
 
     // update environment settings

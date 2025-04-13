@@ -85,6 +85,7 @@ ContainmentItem {
             root.panel.offset = intendedWindowOffset;
             root.panel.thickness = navigationPanelHeight;
             root.panel.location = intendedWindowLocation;
+            root.panel.visibilityMode = ShellSettings.Settings.fillScreenModeEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay);
             root.updateTouchArea();
         }
@@ -124,13 +125,21 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: ShellSettings.Settings
+
+        function onFillScreenModeEnabled() {
+            root.setWindowProperties();
+        }
+    }
+
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
     readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
     readonly property bool opaqueBar: (windowMaximizedTracker.showingWindow || isCurrentWindowFullscreen) && !showingStartupFeedback
-
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
+    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.fillScreenModeEnabled && opaqueBar)
 
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
@@ -147,7 +156,7 @@ ContainmentItem {
         screen: Plasmoid.screen
         maximizedTracker: windowMaximizedTracker
 
-        visible: !root.isCurrentWindowFullscreen
+        visible: !root.fullscreen
     }
 
     Rectangle {

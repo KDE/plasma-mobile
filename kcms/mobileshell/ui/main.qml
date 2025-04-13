@@ -47,6 +47,20 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
+
+            FormCard.FormSwitchDelegate {
+                id: fillScreenMode
+                text: i18n("Applications Fill Screen")
+                description: i18n("If this is on, applications will take up the whole screen area, hiding the status and navigation panels.")
+                checked: ShellSettings.Settings.fillScreenModeEnabled
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.fillScreenModeEnabled) {
+                        ShellSettings.Settings.fillScreenModeEnabled = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
