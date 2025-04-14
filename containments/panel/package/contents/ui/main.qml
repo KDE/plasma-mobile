@@ -52,7 +52,7 @@ ContainmentItem {
             root.panel.floating = false;
             root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
             root.panel.thickness = statusPanelHeight;
-            root.panel.visibilityMode = ShellSettings.Settings.fillScreenModeEnabled ? 3 : 0;
+            root.panel.visibilityMode = ShellSettings.Settings.autoHidePanelsEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay)
             root.updateTouchArea();
         }
@@ -72,17 +72,17 @@ ContainmentItem {
     Connections {
         target: ShellSettings.Settings
 
-        function onFillScreenModeEnabled() {
+        function onAutoHidePanelsEnabled() {
             root.setWindowProperties();
         }
     }
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
     readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
     readonly property color backgroundColor: topPanel.colorScopeColor
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
-    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.fillScreenModeEnabled && showingApp)
+    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.autoHidePanelsEnabled && showingApp)
     onFullscreenChanged: {
         MobileShellState.ShellDBusClient.panelState = fullscreen ? "hidden" : "default";
     }
@@ -149,7 +149,7 @@ ContainmentItem {
         screen: Plasmoid.screen
         maximizedTracker: windowMaximizedTracker
 
-        visible: !root.fullscreen
+        visible: !root.fullscreen && startupFeedbackVisible
     }
 
     Rectangle {
@@ -158,7 +158,7 @@ ContainmentItem {
         Kirigami.Theme.colorSet: root.showingApp ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
         Kirigami.Theme.inherit: false
 
-        color: statusPanel.state == "default" && root.showingApp ? Kirigami.Theme.backgroundColor : "transparent"
+        color: statusPanel.state == "default" && (root.showingApp || root.fullscreen) ? Kirigami.Theme.backgroundColor : "transparent"
 
         property real offset: 0
 

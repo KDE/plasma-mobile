@@ -51,13 +51,13 @@ KCM.SimpleKCM {
             FormCard.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
 
             FormCard.FormSwitchDelegate {
-                id: fillScreenMode
-                text: i18n("Applications Fill Screen")
-                description: i18n("If this is on, applications will take up the whole screen area, hiding the status and navigation panels.")
-                checked: ShellSettings.Settings.fillScreenModeEnabled
+                id: autoHidePanels
+                text: i18n("Auto Hide Panels")
+                description: i18n("When active, status and navigation panels will auto hide, allowing applications to fill the entire screen space.")
+                checked: ShellSettings.Settings.autoHidePanelsEnabled
                 onCheckedChanged: {
-                    if (checked != ShellSettings.Settings.fillScreenModeEnabled) {
-                        ShellSettings.Settings.fillScreenModeEnabled = checked;
+                    if (checked != ShellSettings.Settings.autoHidePanelsEnabled) {
+                        ShellSettings.Settings.autoHidePanelsEnabled = checked;
                     }
                 }
             }

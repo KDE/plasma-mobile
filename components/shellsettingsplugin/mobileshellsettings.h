@@ -45,8 +45,8 @@ class MobileShellSettings : public QObject
     // convergence mode
     Q_PROPERTY(bool convergenceModeEnabled READ convergenceModeEnabled WRITE setConvergenceModeEnabled NOTIFY convergenceModeEnabledChanged)
 
-    // fill screen mode
-    Q_PROPERTY(bool fillScreenModeEnabled READ fillScreenModeEnabled WRITE setFillScreenModeEnabled NOTIFY fillScreenModeEnabledChanged)
+    // Auto Hide Panels
+    Q_PROPERTY(bool autoHidePanelsEnabled READ autoHidePanelsEnabled WRITE setAutoHidePanelsEnabled NOTIFY autoHidePanelsEnabledChanged)
 
     // logout dialog
     Q_PROPERTY(bool allowLogout READ allowLogout READ allowLogout NOTIFY allowLogoutChanged)
@@ -223,16 +223,16 @@ public:
     void setConvergenceModeEnabled(bool enabled);
 
     /**
-     * Whether fill screen mode is enabled.
+     * Whether Auto Hide Panels is enabled.
      */
-    bool fillScreenModeEnabled() const;
+    bool autoHidePanelsEnabled() const;
 
     /**
-     * Set whether fill screen mode is enabled.
+     * Set whether Auto Hide Panels is enabled.
      *
      * @param enabled
      */
-    void setFillScreenModeEnabled(bool enabled);
+    void setAutoHidePanelsEnabled(bool enabled);
 
     /**
      * Whether logout button is shown in the logout/shutdown dialog.
@@ -277,7 +277,7 @@ Q_SIGNALS:
     void actionDrawerTopLeftModeChanged();
     void actionDrawerTopRightModeChanged();
     void convergenceModeEnabledChanged();
-    void fillScreenModeEnabledChanged();
+    void autoHidePanelsEnabledChanged();
     void allowLogoutChanged();
     void lockscreenLeftButtonActionChanged();
     void lockscreenRightButtonActionChanged();

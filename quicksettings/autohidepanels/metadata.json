@@ -8,13 +8,13 @@
                 "Name[x-test]": "xxMicah Stanleyxx"
             }
         ],
-        "Description": "Fill screen for all applicatoins quick setting for Plasma Mobile",
-        "Description[x-test]": "xxFill screen for all applicatoins quick setting for Plasma Mobilexx",
+        "Description": "Auto Hide Panels quick setting for Plasma Mobile",
+        "Description[x-test]": "xxAuto Hide Panels quick setting for Plasma Mobilexx",
         "Icon": "view-fullscreen",
-        "Id": "org.kde.plasma.quicksetting.fillscreen",
+        "Id": "org.kde.plasma.quicksetting.autohidepanels",
         "License": "GPL-2.0+",
-        "Name": "Fill Screen",
-        "Name[x-test]": "xxFill Screennxx",
+        "Name": "Auto Hide Panels",
+        "Name[x-test]": "xxAuto Hide Panelsxx",
         "Website": "https://kde.org"
     }
 }
