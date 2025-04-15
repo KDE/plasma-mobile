@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2023-07-22 15:32+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -33,57 +33,57 @@ msgstr ""
 msgid "Operating System"
 msgstr "Operačný systém"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "Webová stránka"
 
-#: ui/main.qml:88
+#: ui/main.qml:92
 #, fuzzy, kde-format
 #| msgid "Software"
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Softvér"
 
-#: ui/main.qml:93
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Verzia KDE Plasma"
 
-#: ui/main.qml:100
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Verzia KDE Frameworks"
 
-#: ui/main.qml:107
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "Verzia Qt"
 
-#: ui/main.qml:114
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "Verzia jadra"
 
-#: ui/main.qml:121
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "Typ OS"
 
-#: ui/main.qml:122
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bitové"
 
-#: ui/main.qml:127
+#: ui/main.qml:131
 #, fuzzy, kde-format
 #| msgid "Hardware"
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Hardvér"
 
-#: ui/main.qml:132
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -91,18 +91,18 @@ msgstr[0] "Procesor"
 msgstr[1] "Procesory"
 msgstr[2] "Procesory"
 
-#: ui/main.qml:139
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "Pamäť"
 
-#: ui/main.qml:143
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM"
 
-#: ui/main.qml:145
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

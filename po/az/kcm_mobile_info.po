@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-settings\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2022-07-20 09:12+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -33,75 +33,75 @@ msgstr ""
 msgid "Operating System"
 msgstr "Əməliyyat Sistemi"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "Veb-səhifə"
 
-#: ui/main.qml:88
+#: ui/main.qml:92
 #, fuzzy, kde-format
 #| msgid "Software"
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Proqram Təminatı Mərkəzi"
 
-#: ui/main.qml:93
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma versiyası"
 
-#: ui/main.qml:100
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE Framework versiyası"
 
-#: ui/main.qml:107
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "QT versiyası"
 
-#: ui/main.qml:114
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "Nüvə versiyası"
 
-#: ui/main.qml:121
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "ƏS növü"
 
-#: ui/main.qml:122
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-bit"
 
-#: ui/main.qml:127
+#: ui/main.qml:131
 #, fuzzy, kde-format
 #| msgid "Hardware"
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Avadanlıq"
 
-#: ui/main.qml:132
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "Prosessor"
 msgstr[1] "Prosessorlar"
 
-#: ui/main.qml:139
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "Yaddaş"
 
-#: ui/main.qml:143
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "Əməliyyat Yaddaşı: %1"
 
-#: ui/main.qml:145
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

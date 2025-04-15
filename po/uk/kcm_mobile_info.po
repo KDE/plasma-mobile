@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2023-09-22 08:38+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -36,55 +36,55 @@ msgstr "Копіювати"
 msgid "Operating System"
 msgstr "Операційна система"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "Вебсторінка"
 
-#: ui/main.qml:88
+#: ui/main.qml:92
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Програмне забезпечення"
 
-#: ui/main.qml:93
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "Версія Плазми KDE"
 
-#: ui/main.qml:100
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "Версія KDE Frameworks"
 
-#: ui/main.qml:107
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "Версія Qt"
 
-#: ui/main.qml:114
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "Версія ядра"
 
-#: ui/main.qml:121
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "Тип ОС"
 
-#: ui/main.qml:122
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1-бітова"
 
-#: ui/main.qml:127
+#: ui/main.qml:131
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Обладнання"
 
-#: ui/main.qml:132
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
@@ -93,18 +93,18 @@ msgstr[1] "Процесори"
 msgstr[2] "Процесори:"
 msgstr[3] "Процесор:"
 
-#: ui/main.qml:139
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "Пам'ять"
 
-#: ui/main.qml:143
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 оперативної пам’яті"
 
-#: ui/main.qml:145
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"

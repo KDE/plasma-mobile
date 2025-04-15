@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-15 00:42+0000\n"
 "PO-Revision-Date: 2023-07-26 12:57+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -33,73 +33,73 @@ msgstr "Kopyala"
 msgid "Operating System"
 msgstr "İşletim Sistemi"
 
-#: ui/main.qml:54
+#: ui/main.qml:58
 #, kde-format
 msgid "Webpage"
 msgstr "Web Sayfası"
 
-#: ui/main.qml:88
+#: ui/main.qml:92
 #, kde-format
 msgctxt "@title:group"
 msgid "Software"
 msgstr "Yazılım"
 
-#: ui/main.qml:93
+#: ui/main.qml:97
 #, kde-format
 msgid "KDE Plasma Version"
 msgstr "KDE Plasma Sürümü"
 
-#: ui/main.qml:100
+#: ui/main.qml:104
 #, kde-format
 msgid "KDE Frameworks Version"
 msgstr "KDE Frameworks Sürümü"
 
-#: ui/main.qml:107
+#: ui/main.qml:111
 #, kde-format
 msgid "Qt Version"
 msgstr "Qt Sürümü"
 
-#: ui/main.qml:114
+#: ui/main.qml:118
 #, kde-format
 msgid "Kernel Version"
 msgstr "Çekirdek Sürümü"
 
-#: ui/main.qml:121
+#: ui/main.qml:125
 #, kde-format
 msgid "OS Type"
 msgstr "İS Türü"
 
-#: ui/main.qml:122
+#: ui/main.qml:126
 #, kde-format
 msgctxt "@label %1 is the CPU bit width (e.g. 32 or 64)"
 msgid "%1-bit"
 msgstr "%1 bit"
 
-#: ui/main.qml:127
+#: ui/main.qml:131
 #, kde-format
 msgctxt "@title:group"
 msgid "Hardware"
 msgstr "Donanım"
 
-#: ui/main.qml:132
+#: ui/main.qml:136
 #, kde-format
 msgid "Processor"
 msgid_plural "Processors"
 msgstr[0] "İşlemci"
 msgstr[1] "İşlemciler"
 
-#: ui/main.qml:139
+#: ui/main.qml:143
 #, kde-format
 msgid "Memory"
 msgstr "Bellek"
 
-#: ui/main.qml:143
+#: ui/main.qml:147
 #, kde-format
 msgctxt "@label %1 is the formatted amount of system memory (e.g. 7,7 GiB)"
 msgid "%1 of RAM"
 msgstr "%1 RAM"
 
-#: ui/main.qml:145
+#: ui/main.qml:149
 #, kde-format
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
