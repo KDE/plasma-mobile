@@ -78,7 +78,8 @@ Item {
         // this is so one can swipe down from the top of the notification drawer to expand the action drawer
         DragHandler {
             id: dragHandler
-            yAxis.enabled: true
+            // disable the draghandler when we are not at the top of the notification list as it can interfere with the notification scrolling
+            yAxis.enabled: notificationWidget.listView.atYBeginning || active
             xAxis.enabled: false
 
             property bool startActive: false
