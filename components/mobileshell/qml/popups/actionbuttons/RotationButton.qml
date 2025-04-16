@@ -20,7 +20,7 @@ ActionButton {
 
     // Update button position and timeout when device rotation changes.
     onDeviceRotationChanged: {
-        if (!showRotationButton || ShellSettings.Settings.navigationPanelEnabled) return;
+        if (!RotationPlugin.RotationUtil.showRotationButton || ShellSettings.Settings.navigationPanelEnabled) return;
         // Position at the bottom left edge of actual device, regardless of current rotation.
         root.screenCorner = (deviceRotation - currentRotation) % 4;
         // match angle to physical device rotation.
