@@ -27,8 +27,6 @@ Window {
     property string iconSource
     property bool active: false
 
-    property string debugText
-
     signal triggered()
 
     enum ScreenCorner {
@@ -166,20 +164,13 @@ Window {
             }
 
             contentItem: Item {
-                // Kirigami.Icon {
-                //     anchors.centerIn: parent
-                //     width: Kirigami.Units.iconSizes.small
-                //     height: Kirigami.Units.iconSizes.small
-                //     transformOrigin: Item.Center
-                //     rotation: root.angle
-                //     source: root.iconSource
-                // }
-                Controls.Label {
+                Kirigami.Icon {
                     anchors.centerIn: parent
-                    width: root.width
+                    width: Kirigami.Units.iconSizes.small
                     height: Kirigami.Units.iconSizes.small
-                    text: debugText
-                    font.pixelSize: 8
+                    transformOrigin: Item.Center
+                    rotation: root.angle
+                    source: root.iconSource
                 }
             }
 

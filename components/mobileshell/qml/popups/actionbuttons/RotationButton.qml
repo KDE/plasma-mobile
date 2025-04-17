@@ -20,8 +20,6 @@ ActionButton {
 
     // Update button position and timeout when device rotation changes.
     onDeviceRotationChanged: {
-        root.debugText = currentRotation + ", " + deviceRotation;
-
         if (ShellSettings.Settings.navigationPanelEnabled) return;
         // reset button if visible
         if (root.visible) {
