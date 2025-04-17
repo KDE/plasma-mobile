@@ -137,8 +137,8 @@ ContainmentItem {
         target: MobileShellState.ShellDBusClient
         
         function onIsTaskSwitcherVisibleChanged() {
-            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
-                navigationPanel.offset = root.navigationPanelHeight
+            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen) && windowMaximizedTracker.showingWindow) {
+                navigationPanel.offset = root.navigationPanelHeight;
             }
         }
     }
@@ -154,6 +154,12 @@ ContainmentItem {
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry
+
+        onShowingWindowChanged: {
+            if (!windowMaximizedTracker.showingWindow) {
+                navigationPanel.offset = 0;
+            }
+        }
     }
 
     MobileShell.StartupFeedbackPanelFill {

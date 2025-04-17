@@ -90,6 +90,13 @@ ContainmentItem {
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry
+
+        onShowingWindowChanged: {
+            if (!windowMaximizedTracker.showingWindow) {
+                MobileShellState.ShellDBusClient.panelState = "default";
+                statusPanel.offset = 0;
+            }
+        }
     }
 
     // enforce thickness
@@ -119,10 +126,9 @@ ContainmentItem {
         }
 
         function onIsTaskSwitcherVisibleChanged() {
-            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen) && windowMaximizedTracker.showingWindow) {
                 MobileShellState.ShellDBusClient.panelState = "hidden";
-                statusPanel.offset = -root.statusPanelHeight
-
+                statusPanel.offset = -root.statusPanelHeight;
             }
         }
     }
