@@ -18,6 +18,13 @@ ActionButton {
 
     iconSource: "rotation-allowed-symbolic"
 
+    function updateButton() {
+        // Position at the bottom left edge of actual device, regardless of current rotation.
+        root.screenCorner = (4 + currentRotation - deviceRotation) % 4;
+        // match angle to physical device rotation.
+        root.angle = ((4 + currentRotation - deviceRotation) % 4) * 90;
+    }
+
     // Update button position and timeout when device rotation changes.
     onDeviceRotationChanged: {
         if (ShellSettings.Settings.navigationPanelEnabled) return;
@@ -28,10 +35,7 @@ ActionButton {
             if (RotationPlugin.RotationUtil.showRotationButton) root.visible = false;
         }
         if (!RotationPlugin.RotationUtil.showRotationButton) return;
-        // Position at the bottom left edge of actual device, regardless of current rotation.
-        root.screenCorner = (4 + currentRotation - deviceRotation) % 4;
-        // match angle to physical device rotation.
-        root.angle = ((4 + currentRotation - deviceRotation) % 4) * 90;
+        root.updateButton();
         root.active = true;
     }
 
@@ -40,6 +44,7 @@ ActionButton {
         RotationPlugin.RotationUtil.rotateToSuggestedRotation();
         root.active = false;
         timeout.stop();
+        root.updateButton();
     }
 
     // When the button is active, hide it after a certain amount of time has passed.
