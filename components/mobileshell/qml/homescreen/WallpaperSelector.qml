@@ -41,12 +41,12 @@ Controls.Drawer {
         anchors.leftMargin: imageWallpaperDrawer.leftMargin
         anchors.rightMargin: imageWallpaperDrawer.rightMargin
         anchors.bottomMargin: imageWallpaperDrawer.bottomMargin
+
         orientation: imageWallpaperDrawer.horizontal ? ListView.Vertical : ListView.Horizontal
         keyNavigationEnabled: true
         highlightFollowsCurrentItem: true
         snapMode: ListView.SnapToItem
         model: imageWallpaper.wallpaperModel
-        // onCountChanged: currentIndex =  Math.min(model.indexOf(configDialog.wallpaperConfiguration["Image"]), model.rowCount()-1)
         headerPositioning: ListView.InlineHeader
 
         header: Controls.ItemDelegate {
@@ -60,10 +60,8 @@ Controls.Drawer {
             bottomPadding: padding
 
             background: Rectangle {
+                radius: Kirigami.Units.cornerRadius
                 color: Qt.rgba(255, 255, 255, (openSettings.down || openSettings.highlighted) ? 0.3 : 0.2)
-                radius: Kirigami.Units.gridUnit / 4
-                anchors.fill: parent
-                anchors.margins: Kirigami.Units.gridUnit / 4
             }
 
             contentItem: Item {
@@ -72,6 +70,7 @@ Controls.Drawer {
                     implicitHeight: Kirigami.Units.iconSizes.large
                     implicitWidth: Kirigami.Units.iconSizes.large
                     source: 'list-add'
+                    color: 'white'
                 }
             }
 
@@ -80,19 +79,33 @@ Controls.Drawer {
         }
 
         delegate: Controls.ItemDelegate {
+            id: delegate
+
             width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
-            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : parent.height
-            padding: wallpapersView.currentIndex === index ? Kirigami.Units.gridUnit / 4 : Kirigami.Units.gridUnit / 2
-            leftPadding: padding
-            topPadding: padding
-            rightPadding: padding
-            bottomPadding: padding
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : (parent ? parent.height : 0)
+            padding: Kirigami.Units.largeSpacing - (ListView.isCurrentItem ? Kirigami.Units.smallSpacing : 0)
+            property real inset: ListView.isCurrentItem ? 0 : Kirigami.Units.smallSpacing
+            Behavior on inset {
+                NumberAnimation {
+                    duration: Kirigami.Units.longDuration
+                    easing.type: Easing.InOutQuad
+                }
+            }
             Behavior on padding {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration
                     easing.type: Easing.InOutQuad
                 }
             }
+
+            leftPadding: padding
+            topPadding: padding
+            rightPadding: padding
+            bottomPadding: padding
+            topInset: inset
+            bottomInset: inset
+            leftInset: inset
+            rightInset: inset
 
             property bool isCurrent: WallpaperImagePlugin.WallpaperPlugin.homescreenWallpaperPath == model.path
             onIsCurrentChanged: {
@@ -126,20 +139,10 @@ Controls.Drawer {
             Keys.onReturnPressed: {
                 clicked();
             }
-            background: Item {
-                Rectangle {
-                    anchors {
-                        fill: parent
-                        margins: wallpapersView.currentIndex === index ? 0 : Kirigami.Units.gridUnit / 4
-                        Behavior on margins {
-                            NumberAnimation {
-                                duration: Kirigami.Units.longDuration
-                                easing.type: Easing.InOutQuad
-                            }
-                        }
-                    }
-                    radius: Kirigami.Units.gridUnit / 4
-                }
+
+            background: Rectangle {
+                color: Qt.rgba(255, 255, 255, (delegate.down || delegate.highlighted) ? 0.4 : 0.2)
+                radius: Kirigami.Units.cornerRadius
             }
         }
     }
