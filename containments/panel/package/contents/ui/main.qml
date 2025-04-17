@@ -117,6 +117,14 @@ ContainmentItem {
                 drawer.actionDrawer.notificationsWidget.toggleDoNotDisturbMode();
             }
         }
+
+        function onIsTaskSwitcherVisibleChanged() {
+            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+                MobileShellState.ShellDBusClient.panelState = "hidden";
+                statusPanel.offset = -root.statusPanelHeight
+
+            }
+        }
     }
 
     Binding {
@@ -221,7 +229,7 @@ ContainmentItem {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: statusPanel.state == "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
+                        properties: "offset"; easing.type: statusPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
                     }
                 }
                 ScriptAction {

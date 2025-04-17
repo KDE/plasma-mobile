@@ -30,10 +30,12 @@ FocusScope {
     readonly property QtObject effect: KWinComponents.SceneView.effect
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
 
-    readonly property real topMargin: MobileShell.Constants.topPanelHeight
-    readonly property real bottomMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? 0 : MobileShell.Constants.navigationPanelThickness
+    readonly property real navBottomMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? 0 : MobileShell.Constants.navigationPanelThickness
+    readonly property real navRightMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0
+    readonly property real topMargin: ShellSettings.Settings.autoHidePanelsEnabled ? 0 : MobileShell.Constants.topPanelHeight
+    readonly property real bottomMargin: ShellSettings.Settings.autoHidePanelsEnabled ? 0 : navBottomMargin
     readonly property real leftMargin: 0
-    readonly property real rightMargin: MobileShell.Constants.navigationPanelOnSide(width, height) ? MobileShell.Constants.navigationPanelThickness : 0
+    readonly property real rightMargin: ShellSettings.Settings.autoHidePanelsEnabled ? 0 : navRightMargin
 
     property var taskSwitcherHelpers: TaskSwitcherHelpers {
         taskSwitcher: root
@@ -481,7 +483,7 @@ FocusScope {
     // navigation panel
     MobileShell.NavigationPanel {
         id: navigationPanel
-        z: 1
+        z: taskSwitcherHelpers.taskDrawerOpened && !taskSwitcherHelpers.currentlyBeingClosed ? 1 : 0
         visible: ShellSettings.Settings.navigationPanelEnabled
         backgroundColor: Qt.rgba(0, 0, 0, 0.1)
         foregroundColorGroup: Kirigami.Theme.Complementary
@@ -550,7 +552,7 @@ FocusScope {
             }
             PropertyChanges {
                 target: navigationPanel
-                width: root.rightMargin
+                width: navRightMargin
                 anchors.topMargin: root.topMargin
             }
         },
@@ -568,7 +570,7 @@ FocusScope {
             }
             PropertyChanges {
                 target: navigationPanel
-                height: root.bottomMargin
+                height: navBottomMargin
             }
         }
     ]

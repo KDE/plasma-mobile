@@ -133,6 +133,16 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: MobileShellState.ShellDBusClient
+        
+        function onIsTaskSwitcherVisibleChanged() {
+            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible) {
+                navigationPanel.offset = root.navigationPanelHeight
+            }
+        }
+    }
+
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
@@ -217,7 +227,7 @@ ContainmentItem {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: navigationPanel.state == "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
+                        properties: "offset"; easing.type: navigationPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
                     }
                 }
                 ScriptAction {
