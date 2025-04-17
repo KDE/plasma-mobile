@@ -133,16 +133,6 @@ ContainmentItem {
         }
     }
 
-    Connections {
-        target: MobileShellState.ShellDBusClient
-        
-        function onIsTaskSwitcherVisibleChanged() {
-            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen) && windowMaximizedTracker.showingWindow) {
-                navigationPanel.offset = root.navigationPanelHeight;
-            }
-        }
-    }
-
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
@@ -156,8 +146,8 @@ ContainmentItem {
         screenGeometry: Plasmoid.containment.screenGeometry
 
         onShowingWindowChanged: {
-            if (!windowMaximizedTracker.showingWindow) {
-                navigationPanel.offset = 0;
+            if (windowMaximizedTracker.showingWindow && MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
+                navigationPanel.offset = root.navigationPanelHeight;
             }
         }
     }

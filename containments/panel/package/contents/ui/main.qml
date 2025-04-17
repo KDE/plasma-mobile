@@ -92,9 +92,9 @@ ContainmentItem {
         screenGeometry: Plasmoid.containment.screenGeometry
 
         onShowingWindowChanged: {
-            if (!windowMaximizedTracker.showingWindow) {
-                MobileShellState.ShellDBusClient.panelState = "default";
-                statusPanel.offset = 0;
+            if (windowMaximizedTracker.showingWindow && MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
+                MobileShellState.ShellDBusClient.panelState = "hidden";
+                statusPanel.offset = -root.statusPanelHeight;
             }
         }
     }
@@ -122,13 +122,6 @@ ContainmentItem {
         function onDoNotDisturbChanged() {
             if (drawer.actionDrawer.notificationsWidget.doNotDisturbModeEnabled !== MobileShellState.ShellDBusClient.doNotDisturb) {
                 drawer.actionDrawer.notificationsWidget.toggleDoNotDisturbMode();
-            }
-        }
-
-        function onIsTaskSwitcherVisibleChanged() {
-            if (MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen) && windowMaximizedTracker.showingWindow) {
-                MobileShellState.ShellDBusClient.panelState = "hidden";
-                statusPanel.offset = -root.statusPanelHeight;
             }
         }
     }
