@@ -56,6 +56,10 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     WaylandClient
 )
 
+if(Qt6WaylandClient_VERSION VERSION_GREATER_EQUAL "6.10.0")
+    find_package(Qt6 REQUIRED COMPONENTS WaylandClientPrivate)
+endif()
+
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     I18n
     GlobalAccel
