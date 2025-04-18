@@ -6,7 +6,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.plasma.quicksetting.nightcolor 1.0 as NightColor
+import org.kde.plasma.quicksetting.nightcolor as NightColor
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
