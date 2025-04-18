@@ -7,7 +7,7 @@ import QtQuick.Window 2.15
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.pipewire.record 0.1 as PWRec
 import org.kde.taskmanager 0.1 as TaskManager
-import org.kde.plasma.quicksetting.record 1.0
+import org.kde.plasma.quicksetting.record
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {

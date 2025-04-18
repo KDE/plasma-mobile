@@ -1,14 +1,11 @@
 # SPDX-FileCopyrightText: 2022 Devin Lin <devin@kde.org>
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-set(recordplugin_SRCS
-    recordplugin.cpp
-    recordutil.cpp
-)
+ecm_add_qml_module(recordplugin URI "org.kde.plasma.quicksetting.record" GENERATE_PLUGIN_SOURCE)
 
-add_library(recordplugin ${recordplugin_SRCS})
+target_sources(recordplugin PRIVATE recordutil.cpp)
 
-target_link_libraries(recordplugin
+target_link_libraries(recordplugin PRIVATE
     Qt::Core
     Qt::DBus
     Qt::Qml
@@ -20,11 +17,8 @@ target_link_libraries(recordplugin
     KF6::Notifications
 )
 
-set_property(TARGET recordplugin PROPERTY LIBRARY_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/record)
-file(COPY qmldir DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/org/kde/plasma/quicksetting/record)
+ecm_finalize_qml_module(recordplugin)
 
-install(TARGETS recordplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/record)
-install(FILES qmldir ${qml_SRC} DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/quicksetting/record)
 install(FILES plasma_mobile_quicksetting_record.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
 
 plasma_install_package(package org.kde.plasma.quicksetting.record quicksettings)
