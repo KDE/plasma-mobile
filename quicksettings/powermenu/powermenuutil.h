@@ -7,10 +7,13 @@
 #pragma once
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 class PowerMenuUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     PowerMenuUtil(QObject *parent = nullptr);
