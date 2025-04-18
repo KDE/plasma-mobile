@@ -4,7 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import org.kde.plasma.quicksetting.powermenu 1.0 as PowerMenu
+import org.kde.plasma.quicksetting.powermenu as PowerMenu
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
