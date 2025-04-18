@@ -8,10 +8,13 @@
 
 #include <QObject>
 #include <QVariantMap>
+#include <qqmlregistration.h>
 
 class RecordUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     RecordUtil(QObject *parent = nullptr);
