@@ -9,9 +9,13 @@
 #include <QObject>
 #include <libudev.h>
 
+#include <qqmlregistration.h>
+
 class FlashlightUtil : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
     Q_PROPERTY(bool torchEnabled READ torchEnabled NOTIFY torchChanged);
     Q_PROPERTY(bool available READ isAvailable CONSTANT);
 
