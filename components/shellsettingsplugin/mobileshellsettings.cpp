@@ -41,6 +41,7 @@ MobileShellSettings::MobileShellSettings(QObject *parent)
             Q_EMIT actionDrawerTopLeftModeChanged();
             Q_EMIT actionDrawerTopRightModeChanged();
             Q_EMIT convergenceModeEnabledChanged();
+            Q_EMIT autoHidePanelsEnabledChanged();
             Q_EMIT allowLogoutChanged();
         }
         if (group.name() == LOCKSCREEN_CONFIG_GROUP) {
@@ -199,6 +200,19 @@ void MobileShellSettings::setConvergenceModeEnabled(bool enabled)
     job->setUiDelegate(new KNotificationJobUiDelegate(KJobUiDelegate::AutoErrorHandlingEnabled));
     job->setDesktopName(QStringLiteral("org.kde.plasma-mobile-envmanager"));
     job->start();
+}
+
+bool MobileShellSettings::autoHidePanelsEnabled() const
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    return group.readEntry("autoHidePanelsEnabled", false);
+}
+
+void MobileShellSettings::setAutoHidePanelsEnabled(bool enabled)
+{
+    auto group = KConfigGroup{m_config, GENERAL_CONFIG_GROUP};
+    group.writeEntry("autoHidePanelsEnabled", enabled, KConfigGroup::Notify);
+    m_config->sync();
 }
 
 void MobileShellSettings::updateNavigationBarsInPlasma(bool navigationPanelEnabled)

@@ -85,6 +85,7 @@ ContainmentItem {
             root.panel.offset = intendedWindowOffset;
             root.panel.thickness = navigationPanelHeight;
             root.panel.location = intendedWindowLocation;
+            root.panel.visibilityMode = ShellSettings.Settings.autoHidePanelsEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay);
             root.updateTouchArea();
         }
@@ -124,17 +125,31 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: ShellSettings.Settings
+
+        function onAutoHidePanelsEnabled() {
+            root.setWindowProperties();
+        }
+    }
+
     Component.onCompleted: setWindowProperties();
 
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
     readonly property bool opaqueBar: (windowMaximizedTracker.showingWindow || isCurrentWindowFullscreen) && !showingStartupFeedback
-
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
+    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.autoHidePanelsEnabled && opaqueBar)
 
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry
+
+        onShowingWindowChanged: {
+            if (windowMaximizedTracker.showingWindow && MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
+                navigationPanel.offset = root.navigationPanelHeight;
+            }
+        }
     }
 
     MobileShell.StartupFeedbackPanelFill {
@@ -147,7 +162,7 @@ ContainmentItem {
         screen: Plasmoid.screen
         maximizedTracker: windowMaximizedTracker
 
-        visible: !root.isCurrentWindowFullscreen
+        visible: !root.fullscreen
     }
 
     Rectangle {
@@ -208,7 +223,7 @@ ContainmentItem {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: navigationPanel.state == "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
+                        properties: "offset"; easing.type: navigationPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
                     }
                 }
                 ScriptAction {

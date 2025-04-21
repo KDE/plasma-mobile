@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "KPackage/GenericQML",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "stanleymicah@proton.me",
+                "Name": "Micah Stanley",
+                "Name[x-test]": "xxMicah Stanleyxx"
+            }
+        ],
+        "Description": "Auto Hide Panels quick setting for Plasma Mobile",
+        "Description[x-test]": "xxAuto Hide Panels quick setting for Plasma Mobilexx",
+        "Icon": "view-fullscreen",
+        "Id": "org.kde.plasma.quicksetting.autohidepanels",
+        "License": "GPL-2.0+",
+        "Name": "Auto Hide Panels",
+        "Name[x-test]": "xxAuto Hide Panelsxx",
+        "Website": "https://kde.org"
+    }
+}

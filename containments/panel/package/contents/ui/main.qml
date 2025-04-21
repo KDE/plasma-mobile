@@ -14,6 +14,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 
@@ -51,6 +52,7 @@ ContainmentItem {
             root.panel.floating = false;
             root.panel.maximize(); // maximize first, then we can apply offsets (otherwise they are overridden)
             root.panel.thickness = statusPanelHeight;
+            root.panel.visibilityMode = ShellSettings.Settings.autoHidePanelsEnabled ? 3 : 0;
             MobileShell.ShellUtil.setWindowLayer(root.panel, LayerShell.Window.LayerOverlay)
             root.updateTouchArea();
         }
@@ -67,18 +69,34 @@ ContainmentItem {
         }
     }
 
+    Connections {
+        target: ShellSettings.Settings
+
+        function onAutoHidePanelsEnabled() {
+            root.setWindowProperties();
+        }
+    }
+
     // only opaque if there are no maximized windows on this screen
-    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && windowMaximizedTracker.windowCount === 1
+    readonly property bool showingStartupFeedback: MobileShellState.ShellDBusObject.startupFeedbackModel.activeWindowIsStartupFeedback && startupFeedbackColorAnimation.visible && windowMaximizedTracker.windowCount === 1
     readonly property bool showingApp: windowMaximizedTracker.showingWindow && !showingStartupFeedback
     readonly property color backgroundColor: topPanel.colorScopeColor
     readonly property alias isCurrentWindowFullscreen: windowMaximizedTracker.isCurrentWindowFullscreen
-    onIsCurrentWindowFullscreenChanged: {
-        MobileShellState.ShellDBusClient.panelState = isCurrentWindowFullscreen ? "hidden" : "default";
+    readonly property bool fullscreen: isCurrentWindowFullscreen || (ShellSettings.Settings.autoHidePanelsEnabled && showingApp)
+    onFullscreenChanged: {
+        MobileShellState.ShellDBusClient.panelState = fullscreen ? "hidden" : "default";
     }
 
     WindowPlugin.WindowMaximizedTracker {
         id: windowMaximizedTracker
         screenGeometry: Plasmoid.containment.screenGeometry
+
+        onShowingWindowChanged: {
+            if (windowMaximizedTracker.showingWindow && MobileShellState.ShellDBusClient.isTaskSwitcherVisible && (ShellSettings.Settings.autoHidePanelsEnabled || fullscreen)) {
+                MobileShellState.ShellDBusClient.panelState = "hidden";
+                statusPanel.offset = -root.statusPanelHeight;
+            }
+        }
     }
 
     // enforce thickness
@@ -138,7 +156,7 @@ ContainmentItem {
         screen: Plasmoid.screen
         maximizedTracker: windowMaximizedTracker
 
-        visible: !root.isCurrentWindowFullscreen
+        visible: !root.fullscreen
     }
 
     Rectangle {
@@ -147,7 +165,7 @@ ContainmentItem {
         Kirigami.Theme.colorSet: root.showingApp ? Kirigami.Theme.Header : Kirigami.Theme.Complementary
         Kirigami.Theme.inherit: false
 
-        color: statusPanel.state == "default" && root.showingApp ? Kirigami.Theme.backgroundColor : "transparent"
+        color: statusPanel.state == "default" && (root.showingApp || root.fullscreen) ? Kirigami.Theme.backgroundColor : "transparent"
 
         property real offset: 0
 
@@ -157,7 +175,7 @@ ContainmentItem {
             anchors.fill: parent
 
             showDropShadow: !root.showingApp
-            backgroundColor: statusPanel.state != "default" ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
+            backgroundColor: statusPanel.state != "default" && root.showingApp ? Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95) : "transparent"
 
             transform: [
                 Translate {
@@ -210,7 +228,7 @@ ContainmentItem {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: statusPanel.state == "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
+                        properties: "offset"; easing.type: statusPanel.state === "hidden" ? Easing.InExpo : Easing.OutExpo; duration: Kirigami.Units.longDuration
                     }
                 }
                 ScriptAction {
@@ -230,18 +248,6 @@ ContainmentItem {
 
         readonly property alias drawerVisible: drawer.visible
         readonly property alias offset: drawer.actionDrawer.offset
-        property bool surfacePressed: false
-        onOffsetChanged: surfacePressed = false
-
-        // allow tapping to bring back up the status bar when it is hidden
-        onPressedChanged: {
-            if (!pressed && surfacePressed && root.isCurrentWindowFullscreen) {
-                haptics.buttonVibrate();
-                MobileShellState.ShellDBusClient.panelState = "visible";
-            } else {
-                surfacePressed = true;
-            }
-        }
 
         // if in a fullscreen app, the panels are visible, and the action drawer is opened
         // set the panels to a hidden state

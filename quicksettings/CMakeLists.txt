@@ -8,6 +8,7 @@ plasma_install_package(bluetooth org.kde.plasma.quicksetting.bluetooth quicksett
 plasma_install_package(caffeine org.kde.plasma.quicksetting.caffeine quicksettings)
 plasma_install_package(docked org.kde.plasma.quicksetting.docked quicksettings)
 plasma_install_package(donotdisturb org.kde.plasma.quicksetting.donotdisturb quicksettings)
+plasma_install_package(autohidepanels org.kde.plasma.quicksetting.autohidepanels quicksettings)
 plasma_install_package(keyboardtoggle org.kde.plasma.quicksetting.keyboardtoggle quicksettings)
 plasma_install_package(mobiledata org.kde.plasma.quicksetting.mobiledata quicksettings)
 plasma_install_package(settingsapp org.kde.plasma.quicksetting.settingsapp quicksettings)

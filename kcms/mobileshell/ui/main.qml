@@ -47,6 +47,20 @@ KCM.SimpleKCM {
                     }
                 }
             }
+
+            FormCard.FormDelegateSeparator { above: shellVibrationsButton; below: animationsSwitch }
+
+            FormCard.FormSwitchDelegate {
+                id: autoHidePanels
+                text: i18n("Auto Hide Panels")
+                description: i18n("When active, status and navigation panels will auto hide, allowing applications to fill the entire screen space.")
+                checked: ShellSettings.Settings.autoHidePanelsEnabled
+                onCheckedChanged: {
+                    if (checked != ShellSettings.Settings.autoHidePanelsEnabled) {
+                        ShellSettings.Settings.autoHidePanelsEnabled = checked;
+                    }
+                }
+            }
         }
 
         FormCard.FormHeader {
