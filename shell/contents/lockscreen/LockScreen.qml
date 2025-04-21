@@ -45,23 +45,10 @@ Item {
     }
 
     // Wallpaper blur
-    Loader {
-        id: wallpaperLoader
+    WallpaperBlur {
         anchors.fill: parent
-        active: false
-        asynchronous: true
-
-        // This take a while to load, don't pause initial lockscreen loading for it
-        Timer {
-            running: true
-            repeat: false
-            onTriggered: wallpaperLoader.active = true
-        }
-
-        sourceComponent: WallpaperBlur {
-            source: wallpaper
-            opacity: flickable.openFactor
-        }
+        source: wallpaper
+        opacity: flickable.openFactor
     }
 
     Connections {
