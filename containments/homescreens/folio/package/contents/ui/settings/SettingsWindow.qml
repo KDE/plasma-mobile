@@ -194,7 +194,20 @@ Window {
                         }
                     }
 
-                    FormCard.FormDelegateSeparator { above: showLabelsInFavourites; below: pageTransitionCombobox }
+                    FormCard.FormDelegateSeparator { above: showLabelsInFavourites; below: lockLayout }
+
+                    FormCard.FormSwitchDelegate {
+                        id: lockLayout
+                        text: i18n("Lock layout")
+                        checked: folio.FolioSettings.lockLayout
+                        onCheckedChanged: {
+                            if (checked != folio.FolioSettings.lockLayout) {
+                                folio.FolioSettings.lockLayout = checked;
+                            }
+                        }
+                    }
+
+                    FormCard.FormDelegateSeparator { above: lockLayout; below: pageTransitionCombobox }
 
                     FormCard.FormComboBoxDelegate {
                         id: pageTransitionCombobox

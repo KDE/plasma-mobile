@@ -108,6 +108,9 @@ MouseArea {
                     labelOpacity: delegate.opacity
 
                     onPressAndHold: {
+                        // prevent editing if lock layout is enabled
+                        if (folio.FolioSettings.lockLayout) return;
+
                         let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
                         folio.HomeScreenState.startDelegateFavouritesDrag(
                             mappedCoords.x,
@@ -149,6 +152,7 @@ MouseArea {
                             Kirigami.Action {
                                 icon.name: "emblem-favorite"
                                 text: i18n("Remove")
+                                enabled: !folio.FolioSettings.lockLayout
                                 onTriggered: folio.FavouritesModel.removeEntry(delegate.index)
                             }
                         ]

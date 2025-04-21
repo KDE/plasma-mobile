@@ -43,6 +43,8 @@ Item {
     signal closed()
 
     function startOpen() {
+        // prevent config overlay if lock layout is enabled
+        if (folio.FolioSettings.lockLayout) return;
         configOverlay.open();
     }
 

@@ -14,6 +14,7 @@ const QString CFG_KEY_HOMESCREEN_ROWS = QStringLiteral("homeScreenRows");
 const QString CFG_KEY_HOMESCREEN_COLS = QStringLiteral("homeScreenColumns");
 const QString CFG_KEY_SHOW_PAGES_APPLABELS = QStringLiteral("showPagesAppLabels");
 const QString CFG_KEY_SHOW_FAVORITES_APPLABELS = QStringLiteral("showFavoritesAppLabels");
+const QString CFG_KEY_LOCK_LAYOUT = QStringLiteral("lockLayout");
 const QString CFG_KEY_DELEGATE_ICON_SIZE = QStringLiteral("delegateIconSize");
 const QString CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND = QStringLiteral("showFavoritesBarBackground");
 const QString CFG_KEY_PAGE_TRANSITION_EFFECT = QStringLiteral("pageTransitionEffect");
@@ -78,6 +79,20 @@ void FolioSettings::setShowFavouritesAppLabels(bool showFavouritesAppLabels)
     if (m_showFavouritesAppLabels != showFavouritesAppLabels) {
         m_showFavouritesAppLabels = showFavouritesAppLabels;
         Q_EMIT showFavouritesAppLabelsChanged();
+        save();
+    }
+}
+
+bool FolioSettings::lockLayout() const
+{
+    return m_lockLayout;
+}
+
+void FolioSettings::setLockLayout(bool lockLayout)
+{
+    if (m_lockLayout != lockLayout) {
+        m_lockLayout = lockLayout;
+        Q_EMIT lockLayoutChanged();
         save();
     }
 }
@@ -148,6 +163,7 @@ void FolioSettings::save()
     m_homeScreen->config().writeEntry(CFG_KEY_HOMESCREEN_COLS, m_homeScreenColumns);
     m_homeScreen->config().writeEntry(CFG_KEY_SHOW_PAGES_APPLABELS, m_showPagesAppLabels);
     m_homeScreen->config().writeEntry(CFG_KEY_SHOW_FAVORITES_APPLABELS, m_showFavouritesAppLabels);
+    m_homeScreen->config().writeEntry(CFG_KEY_LOCK_LAYOUT, m_lockLayout);
     m_homeScreen->config().writeEntry(CFG_KEY_DELEGATE_ICON_SIZE, m_delegateIconSize);
     m_homeScreen->config().writeEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, m_showFavouritesBarBackground);
     m_homeScreen->config().writeEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)m_pageTransitionEffect);
@@ -166,6 +182,7 @@ void FolioSettings::load()
     m_homeScreenColumns = m_homeScreen->config().readEntry(CFG_KEY_HOMESCREEN_COLS, 4);
     m_showPagesAppLabels = m_homeScreen->config().readEntry(CFG_KEY_SHOW_PAGES_APPLABELS, true);
     m_showFavouritesAppLabels = m_homeScreen->config().readEntry(CFG_KEY_SHOW_FAVORITES_APPLABELS, false);
+    m_lockLayout = m_homeScreen->config().readEntry(CFG_KEY_LOCK_LAYOUT, false);
     m_delegateIconSize = m_homeScreen->config().readEntry(CFG_KEY_DELEGATE_ICON_SIZE, 48);
     m_showFavouritesBarBackground = m_homeScreen->config().readEntry(CFG_KEY_SHOW_FAVORITES_BAR_BACKGROUND, true);
     m_pageTransitionEffect = static_cast<PageTransitionEffect>(m_homeScreen->config().readEntry(CFG_KEY_PAGE_TRANSITION_EFFECT, (int)SlideTransition));
@@ -175,6 +192,7 @@ void FolioSettings::load()
     Q_EMIT homeScreenColumnsChanged();
     Q_EMIT showPagesAppLabels();
     Q_EMIT showFavouritesAppLabelsChanged();
+    Q_EMIT lockLayoutChanged();
     Q_EMIT delegateIconSizeChanged();
     Q_EMIT showWallpaperBlurChanged();
 }

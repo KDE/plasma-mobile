@@ -246,6 +246,9 @@ Folio.DelegateTouchArea {
                                 labelOpacity: delegate.opacity
 
                                 onPressAndHold: {
+                                    // prevent editing if lock layout is enabled
+                                    if (folio.FolioSettings.lockLayout) return;
+
                                     let mappedCoords = root.homeScreen.prepareStartDelegateDrag(delegate.delegateModel, appDelegate.delegateItem);
                                     folio.HomeScreenState.startDelegateFolderDrag(
                                         mappedCoords.x,
@@ -288,6 +291,7 @@ Folio.DelegateTouchArea {
                                         Kirigami.Action {
                                             icon.name: "emblem-favorite"
                                             text: i18n("Remove")
+                                            enabled: !folio.FolioSettings.lockLayout
                                             onTriggered: root.folder.removeDelegate(delegate.index)
                                         }
                                     ]

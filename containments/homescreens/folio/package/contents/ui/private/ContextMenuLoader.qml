@@ -35,6 +35,7 @@ Loader {
             delegate: PC3.MenuItem {
                 icon.name: modelData.iconName
                 text: modelData.text
+                enabled: modelData.enabled
                 onClicked: modelData.triggered()
             }
         }
