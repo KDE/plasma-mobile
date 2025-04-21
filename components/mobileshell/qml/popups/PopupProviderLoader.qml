@@ -22,6 +22,7 @@ Item {
     function load() {
         volumeOSD.active = true;
         notifications.active = true;
+        actionButtons.active = true;
     }
 
     Loader {
@@ -35,6 +36,13 @@ Item {
         id: notifications
         sourceComponent: Component {
             MobileShell.NotificationPopupProvider {}
+        }
+    }
+
+    Loader {
+        id: actionButtons
+        sourceComponent: Component {
+            MobileShell.ActionButtonsProvider {}
         }
     }
 }

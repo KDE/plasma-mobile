@@ -14,6 +14,7 @@ import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.taskmanager as TaskManager
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
+import org.kde.plasma.private.mobileshell.rotationplugin as RotationPlugin
 
 import org.kde.kirigami as Kirigami
 
@@ -105,13 +106,13 @@ MobileShell.NavigationPanel {
 
     leftCornerAction: MobileShell.NavigationPanelAction {
         id: rotationAction
-        visible: Plasmoid.showRotationButton
+        visible: RotationPlugin.RotationUtil.showRotationButton
         enabled: true
         iconSource: "rotation-allowed-symbolic"
         iconSizeFactor: 0.75
 
         onTriggered: {
-            Plasmoid.rotateToSuggestedRotation();
+            RotationPlugin.RotationUtil.rotateToSuggestedRotation();
         }
     }
 

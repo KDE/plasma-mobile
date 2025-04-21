@@ -141,8 +141,9 @@ ContainmentItem {
         MobileShellState.ShellDBusObject.registerObject();
 
         // HACK: we need to initialize the DBus server somewhere, it might as well be here...
-        // initialize the volume osd, and volume keys
-        // initialize notification popups
+        // Initialize the volume osd, and volume keys.
+        // Initialize notification popups.
+        // Initialize action popup buttons.
         MobileShell.PopupProviderLoader.load();
     }
 
