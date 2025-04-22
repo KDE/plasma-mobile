@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-13 00:41+0000\n"
-"PO-Revision-Date: 2023-05-07 20:47+0400\n"
+"PO-Revision-Date: 2025-04-21 18:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,16 +16,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: notifications/notificationfileinfo.cpp:169
 #, kde-format
 msgid "Open with %1"
-msgstr ""
+msgstr "افتح في %1"
 
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr ""
+msgstr "افتح باستخدام…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -62,22 +63,22 @@ msgstr "مغلق"
 #: qml/dataproviders/SignalStrengthInfo.qml:17
 #, kde-format
 msgid "SIM Locked"
-msgstr ""
+msgstr "الشريحة مقفلة"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:60
 #, kde-format
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/volumeosd/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
-msgstr ""
+msgstr "المخرجات"
 
 #: qml/volumeosd/AudioApplet.qml:111
 #, kde-format
 msgid "Inputs"
-msgstr ""
+msgstr "المدخلات"
 
 #: qml/volumeosd/AudioApplet.qml:150
 #, kde-format
@@ -93,7 +94,7 @@ msgstr "تدفقات التّسجيل"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: qml/volumeosd/DeviceListItem.qml:34
 #, kde-format
@@ -125,13 +126,13 @@ msgstr "اضبط المستوى إلى %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/volumeosd/ListItemBase.qml:261
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: qml/volumeosd/StreamListItem.qml:21
 #, kde-format
@@ -142,7 +143,7 @@ msgstr "أصوات الإشعارات"
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: qml/volumeosd/StreamListItem.qml:29
 #, kde-format
@@ -150,22 +151,20 @@ msgid "Stream name not found"
 msgstr "اسم الدفق غير موجود"
 
 #: qml/volumeosd/VolumeChangedPopup.qml:261
-#, fuzzy, kde-format
-#| msgid "Recording Streams"
+#, kde-format
 msgid "configure audio streams"
-msgstr "تدفقات التّسجيل"
+msgstr "اضبط تدفقات الصوت"
 
 #: qml/volumeosd/VolumeOSD.qml:202
 #, kde-format
 msgid "Open audio settings"
-msgstr ""
+msgstr "افتح إعدادات الصوت"
 
 #: qml/widgets/krunner/KRunnerScreen.qml:68
-#, fuzzy, kde-format
-#| msgid "Search…"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "ابحث..."
+msgstr "ابحث…"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
@@ -196,20 +195,19 @@ msgstr "المقطوعة التالية"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "انسخ عنوان الوصلة"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:44
-#, fuzzy, kde-format
-#| msgid "&Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
-msgstr "ا&نسخ"
+msgstr "انسخ"
 
 #: qml/widgets/notifications/NotificationEditContextMenu.qml:61
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
-msgstr ""
+msgstr "حدّد الكلّ"
 
 #: qml/widgets/notifications/NotificationFooterActions.qml:58
 #, kde-format
@@ -221,114 +219,112 @@ msgstr "رد"
 #, kde-format
 msgctxt "Row description, e.g. Source"
 msgid "%1:"
-msgstr ""
+msgstr "%1:"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:102
 #, kde-format
 msgctxt "How many bytes have been copied"
 msgid "%2 of %1"
-msgstr ""
+msgstr "%2 من %1"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:106
 #, kde-format
 msgctxt "How many files have been copied"
 msgid "%2 of %1 file"
 msgid_plural "%2 of %1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%2 من 0 ملف"
+msgstr[1] "%2 من ملف واحد"
+msgstr[2] "%2 من ملفّين"
+msgstr[3] "%2 من %1 ملفّات"
+msgstr[4] "%2 من %1 ملفًّا"
+msgstr[5] "%2 من %1 ملفّ"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:109
 #, kde-format
 msgctxt "How many dirs have been copied"
 msgid "%2 of %1 folder"
 msgid_plural "%2 of %1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%2 من 0 مجلد"
+msgstr[1] "%2 من 0 ملف"
+msgstr[2] "%2 من مجلدين"
+msgstr[3] "%2 من %1 مجلدات"
+msgstr[4] "%2 من %1 مجلدًا"
+msgstr[5] "%2 من %1 مجلد"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:112
 #, kde-format
 msgctxt "How many items (that includes files and dirs) have been copied"
 msgid "%2 of %1 item"
 msgid_plural "%2 of %1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%2 من %1 "
+msgstr[1] "%2 من عنصر واحد"
+msgstr[2] "%2 من عنصرين"
+msgstr[3] "%2 من %1 عناصر"
+msgstr[4] "%2 من %1 عنصرًا"
+msgstr[5] "%2 من %1 عنصر"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:120
 #, kde-format
 msgid "%1 file"
 msgid_plural "%1 files"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "%1 ملف"
+msgstr[1] "ملفّ واحد"
+msgstr[2] "ملفّان"
+msgstr[3] "%1 ملفّات"
+msgstr[4] "%1 ملفًّا"
+msgstr[5] "%1 ملفّ"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:122
 #, kde-format
 msgid "%1 folder"
 msgid_plural "%1 folders"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لا يوجد أي مجلّد"
+msgstr[1] "مجلد واحد"
+msgstr[2] "مجلدان"
+msgstr[3] "%1 مجلدات"
+msgstr[4] "%1 مجلدًا"
+msgstr[5] "%1 مجلد"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:124
 #, kde-format
 msgid "%1 item"
 msgid_plural "%1 items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "لا يوجد أي عنصر "
+msgstr[1] "عنصر واحد"
+msgstr[2] "عنصران"
+msgstr[3] "%1 عناصر"
+msgstr[4] "%1 عنصرًا"
+msgstr[5] "%1 عنصر"
 
 #: qml/widgets/notifications/NotificationJobDetails.qml:141
 #, kde-format
 msgctxt "Bytes per second"
 msgid "%1/s"
-msgstr ""
+msgstr "%1/ث"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:115
 #, kde-format
 msgctxt "Percentage of a job"
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:130
 #, kde-format
 msgctxt "Hides/expands item details"
 msgid "Details"
-msgstr ""
+msgstr "التّفاصيل"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:141
-#, fuzzy, kde-format
-#| msgctxt "Job name, e.g. Copying is paused"
-#| msgid "%1 (Paused)"
+#, kde-format
 msgctxt "Pause running job"
 msgid "Pause"
-msgstr "%1 (مُلبثة)"
+msgstr "ألبِث"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:150
 #, kde-format
 msgctxt "Cancel running job"
 msgid "Cancel"
-msgstr ""
+msgstr "ألغِ"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:181
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
@@ -339,7 +335,7 @@ msgstr "خيارات أكثر..."
 #: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
 msgid "Open"
-msgstr ""
+msgstr "افتح"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:36
 #, kde-format
@@ -384,13 +380,13 @@ msgstr "انتهت المهمّة"
 #: qml/widgets/notifications/NotificationsUtils.js:44
 #, kde-format
 msgid "now"
-msgstr ""
+msgstr "الآن"
 
 #: qml/widgets/notifications/NotificationsUtils.js:49
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "منذ %1د"
 
 #: qml/widgets/notifications/NotificationsUtils.js:81
 #, kde-format
@@ -402,7 +398,7 @@ msgstr "%1 ث متبقي"
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "المتبقي %1د"
 
 #: qml/widgets/notifications/NotificationsUtils.js:87
 #, kde-format

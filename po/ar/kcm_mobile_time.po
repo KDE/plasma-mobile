@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2023-05-07 20:17+0400\n"
+"PO-Revision-Date: 2025-04-21 17:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: timesettings.cpp:126
 #, kde-format
@@ -144,13 +145,13 @@ msgstr "أكتاو"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Aqtobe"
-msgstr ""
+msgstr "أكتوبي"
 
 #: timezonesi18n.cpp:64
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Araguaina"
-msgstr ""
+msgstr "أراغوينا"
 
 #: timezonesi18n.cpp:65
 #, kde-format
@@ -180,7 +181,7 @@ msgstr "أستراخان"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Asuncion"
-msgstr ""
+msgstr "أسونسيون"
 
 #: timezonesi18n.cpp:70
 #, kde-format
@@ -318,7 +319,7 @@ msgstr "برمودا"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Beulah"
-msgstr ""
+msgstr "بيولا"
 
 #: timezonesi18n.cpp:93
 #, kde-format
@@ -366,7 +367,7 @@ msgstr "بويز"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Bougainville"
-msgstr ""
+msgstr "بوغاينفيل"
 
 #: timezonesi18n.cpp:101
 #, kde-format
@@ -1422,7 +1423,7 @@ msgstr "ماغادان"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mahe"
-msgstr ""
+msgstr "ماهي"
 
 #: timezonesi18n.cpp:277
 #, kde-format
@@ -1500,7 +1501,7 @@ msgstr "ماريغو"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Marquesas"
-msgstr ""
+msgstr "الماركيز"
 
 #: timezonesi18n.cpp:290
 #, kde-format
@@ -1518,7 +1519,7 @@ msgstr "ماسيرو"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Matamoros"
-msgstr ""
+msgstr "ماتاموروس"
 
 #: timezonesi18n.cpp:293
 #, kde-format
@@ -1530,7 +1531,7 @@ msgstr "موريشيوس"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mawson"
-msgstr ""
+msgstr "ماوسن"
 
 #: timezonesi18n.cpp:295
 #, kde-format
@@ -1542,7 +1543,7 @@ msgstr "مايوت"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Mazatlan"
-msgstr ""
+msgstr "مازاتلان"
 
 #: timezonesi18n.cpp:297
 #, kde-format
@@ -1554,7 +1555,7 @@ msgstr "مبابان"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "McMurdo"
-msgstr ""
+msgstr "ماك موردو"
 
 #: timezonesi18n.cpp:299
 #, kde-format
@@ -1572,7 +1573,7 @@ msgstr "مندوزا"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Menominee"
-msgstr ""
+msgstr "مينوميني"
 
 #: timezonesi18n.cpp:302
 #, kde-format
@@ -1584,7 +1585,7 @@ msgstr "مريدا"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Metlakatla"
-msgstr ""
+msgstr "ميتلاكاتلا"
 
 #: timezonesi18n.cpp:304
 #, kde-format
@@ -1608,7 +1609,7 @@ msgstr "مينسك"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Miquelon"
-msgstr ""
+msgstr "ميكويلون"
 
 #: timezonesi18n.cpp:308
 #, kde-format
@@ -1692,7 +1693,7 @@ msgstr "ناورو"
 #, kde-format
 msgctxt "This is a city associated with particular time zone"
 msgid "Ndjamena"
-msgstr ""
+msgstr "نجامينا"
 
 #: timezonesi18n.cpp:322
 #, kde-format
@@ -2457,10 +2458,10 @@ msgid "Ust-Nera"
 msgstr ""
 
 #: timezonesi18n.cpp:449
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC+00:00"
-msgstr "ت ع م"
+msgstr "ت ع م+00:00"
 
 #: timezonesi18n.cpp:450
 #, kde-format
@@ -2583,106 +2584,106 @@ msgid "UTC+14:00"
 msgstr "ت ع م+14:00"
 
 #: timezonesi18n.cpp:470
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-00:00"
-msgstr "ت ع م"
+msgstr "ت ع م-00:00"
 
 #: timezonesi18n.cpp:471
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-01:00"
-msgstr "ت ع م"
+msgstr "ت ع م-01:00"
 
 #: timezonesi18n.cpp:472
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-02:00"
-msgstr "ت ع م"
+msgstr "ت ع م-02:00"
 
 #: timezonesi18n.cpp:473
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:00"
-msgstr "ت ع م"
+msgstr "ت ع م-03:00"
 
 #: timezonesi18n.cpp:474
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-03:30"
-msgstr "ت ع م"
+msgstr "ت ع م-03:30"
 
 #: timezonesi18n.cpp:475
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:00"
-msgstr "ت ع م"
+msgstr "ت ع م-04:00"
 
 #: timezonesi18n.cpp:476
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-04:30"
-msgstr "ت ع م"
+msgstr "ت ع م-04:30"
 
 #: timezonesi18n.cpp:477
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-05:00"
-msgstr "ت ع م"
+msgstr "ت ع م-05:00"
 
 #: timezonesi18n.cpp:478
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-06:00"
-msgstr "ت ع م"
+msgstr "ت ع م-06:00"
 
 #: timezonesi18n.cpp:479
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-07:00"
-msgstr "ت ع م"
+msgstr "ت ع م-07:00"
 
 #: timezonesi18n.cpp:480
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-08:00"
-msgstr "ت ع م"
+msgstr "ت ع م-08:00"
 
 #: timezonesi18n.cpp:481
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-09:00"
-msgstr "ت ع م"
+msgstr "ت ع م-09:00"
 
 #: timezonesi18n.cpp:482
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-10:00"
-msgstr "ت ع م"
+msgstr "ت ع م-10:00"
 
 #: timezonesi18n.cpp:483
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-11:00"
-msgstr "ت ع م"
+msgstr "ت ع م-11:00"
 
 #: timezonesi18n.cpp:484
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-12:00"
-msgstr "ت ع م"
+msgstr "ت ع م-12:00"
 
 #: timezonesi18n.cpp:485
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-13:00"
-msgstr "ت ع م"
+msgstr "ت ع م-13:00"
 
 #: timezonesi18n.cpp:486
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "This is a generic time zone name, localize as needed"
 msgid "UTC-14:00"
-msgstr "ت ع م"
+msgstr "ت ع م-14:00"
 
 #: timezonesi18n.cpp:487
 #, kde-format
@@ -2971,12 +2972,12 @@ msgstr ""
 #: ui/TimePicker.qml:95
 #, kde-format
 msgid "AM"
-msgstr ""
+msgstr "ق‌ظ"
 
 #: ui/TimePicker.qml:95
 #, kde-format
 msgid "PM"
-msgstr ""
+msgstr "ب‌ظ"
 
 #~ msgid "Jan"
 #~ msgstr "يناير"

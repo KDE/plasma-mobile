@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-25 02:00+0000\n"
-"PO-Revision-Date: 2023-05-07 20:48+0400\n"
+"PO-Revision-Date: 2025-04-21 18:20+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/ui/main.qml:11
 #, kde-format
@@ -25,14 +26,14 @@ msgstr "كافيين"
 #: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to disable sleep suspension"
-msgstr ""
+msgstr "اطرق لتعطيل تعليق النوم"
 
 #: contents/ui/main.qml:13
 #, kde-format
 msgid "Tap to suspend sleep"
-msgstr ""
+msgstr "اطرق لتعليق النوم"
 
 #: contents/ui/main.qml:36
 #, kde-format
 msgid "Plasma Mobile has enabled system-wide inhibition"
-msgstr ""
+msgstr "بلازما جوال مكّنت السبات على مستوى النظام"

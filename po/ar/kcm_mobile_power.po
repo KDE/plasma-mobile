@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-01-10 02:00+0000\n"
-"PO-Revision-Date: 2023-05-07 20:11+0400\n"
+"PO-Revision-Date: 2025-04-20 05:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: mobilepower.cpp:30
 #, kde-format
@@ -48,15 +49,14 @@ msgid "15 min"
 msgstr "15 دق"
 
 #: mobilepower.cpp:36
-#, fuzzy, kde-format
-#| msgid "10 min"
+#, kde-format
 msgid "30 min"
-msgstr "10 دق"
+msgstr "30 دق"
 
 #: mobilepower.cpp:37
 #, kde-format
 msgid "Never"
-msgstr "أبدًا"
+msgstr "البتة"
 
 #: ui/BatteryPage.qml:23
 #, kde-format
@@ -241,9 +241,7 @@ msgid "Unknown battery"
 msgstr "بطارية مجهولة"
 
 #: ui/main.qml:89
-#, fuzzy, kde-format
-#| msgctxt "%1 is a percentage value"
-#| msgid "%1%"
+#, kde-format
 msgctxt "%1 is the charge percent, % is the percent sign"
 msgid "%1%"
 msgstr "%1٪"
@@ -269,19 +267,19 @@ msgstr "الشّاشة"
 #, kde-format
 msgctxt "Part of a sentence like 'Dim screen after 5 minutes'"
 msgid "Dim screen after"
-msgstr ""
+msgstr "أعتِم الشاشة بعد"
 
 #: ui/main.qml:131
 #, kde-format
 msgctxt "Part of a sentence like 'Turn off screen after 5 minutes'"
 msgid "Turn off screen after"
-msgstr ""
+msgstr "أطفئ الشاشة بعد"
 
 #: ui/main.qml:141
 #, kde-format
 msgctxt "Part of a sentence like 'Suspend device after 5 minutes'"
 msgid "Suspend device after"
-msgstr ""
+msgstr "علّق الجهاز بعد"
 
 #~ msgid "%"
 #~ msgstr "٪"

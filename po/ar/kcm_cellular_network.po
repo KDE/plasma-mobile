@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-29 00:41+0000\n"
-"PO-Revision-Date: 2023-05-07 20:06+0400\n"
+"PO-Revision-Date: 2025-04-21 18:14+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: modem.cpp:130
 #, kde-format
@@ -111,17 +112,17 @@ msgstr "فشل"
 #: modemdetails.cpp:121 modemdetails.cpp:465
 #, kde-format
 msgid "POTS"
-msgstr ""
+msgstr "POTS"
 
 #: modemdetails.cpp:124
-#, fuzzy, kde-format
+#, kde-format
 msgid "GSM"
 msgstr "GSM"
 
 #: modemdetails.cpp:127
 #, kde-format
 msgid "GSM Compact"
-msgstr ""
+msgstr "GSM Compact"
 
 #: modemdetails.cpp:130
 #, kde-format
@@ -134,7 +135,7 @@ msgid "EDGE"
 msgstr "EDGE"
 
 #: modemdetails.cpp:136
-#, fuzzy, kde-format
+#, kde-format
 msgid "UMTS"
 msgstr "UMTS"
 
@@ -166,17 +167,17 @@ msgstr "CDMA2000 1xRTT"
 #: modemdetails.cpp:154
 #, kde-format
 msgid "CDMA2000 EVDO-0"
-msgstr ""
+msgstr "CDMA2000 EVDO-0"
 
 #: modemdetails.cpp:157
 #, kde-format
 msgid "CDMA2000 EVDO-A"
-msgstr ""
+msgstr "CDMA2000 EVDO-A"
 
 #: modemdetails.cpp:160
 #, kde-format
 msgid "CDMA2000 EVDO-B"
-msgstr ""
+msgstr "CDMA2000 EVDO-B"
 
 #: modemdetails.cpp:163
 #, kde-format
@@ -186,7 +187,7 @@ msgstr "LTE"
 #: modemdetails.cpp:166
 #, kde-format
 msgid "5GNR"
-msgstr ""
+msgstr "5GNR"
 
 #: modemdetails.cpp:222
 #, kde-format
@@ -375,31 +376,31 @@ msgstr ""
 
 #: modemdetails.cpp:468 modemdetails.cpp:471 modemdetails.cpp:474
 #: modemdetails.cpp:477 ui/EditProfilePage.qml:63
-#, fuzzy, kde-format
+#, kde-format
 msgid "2G"
-msgstr "خ"
+msgstr "2G"
 
 #: modemdetails.cpp:480 modemdetails.cpp:483 modemdetails.cpp:486
 #: modemdetails.cpp:489 modemdetails.cpp:492 modemdetails.cpp:495
 #: modemdetails.cpp:498 modemdetails.cpp:501 modemdetails.cpp:504
-#, fuzzy, kde-format
+#, kde-format
 msgid "3G"
-msgstr "خ"
+msgstr "3G"
 
 #: modemdetails.cpp:507 modemdetails.cpp:516 modemdetails.cpp:519
-#, fuzzy, kde-format
+#, kde-format
 msgid "4G"
-msgstr "خ"
+msgstr "4G"
 
 #: modemdetails.cpp:510
-#, fuzzy, kde-format
+#, kde-format
 msgid "5G"
-msgstr "خ"
+msgstr "5G"
 
 #: modemdetails.cpp:513 ui/EditProfilePage.qml:63
-#, fuzzy, kde-format
+#, kde-format
 msgid "Any"
-msgstr "أيّ"
+msgstr "أيّ شيء"
 
 #: sim.cpp:74
 #, kde-format
@@ -517,9 +518,9 @@ msgid "Available Networks"
 msgstr ""
 
 #: ui/AvailableNetworks.qml:40
-#, fuzzy, kde-format
+#, kde-format
 msgid "none"
-msgstr "بلا"
+msgstr "لاشيء"
 
 #: ui/AvailableNetworks.qml:40
 #, kde-format
@@ -564,37 +565,37 @@ msgstr "كلمة السّرّ"
 #: ui/EditProfilePage.qml:62
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "نوع الشبكة"
 
 #: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "4G فقط"
 
 #: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "3G فقط"
 
 #: ui/EditProfilePage.qml:63
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "2G فقط"
 
 #: ui/EditProfilePage.qml:75
 #, kde-format
 msgid "Save profile"
-msgstr ""
+msgstr "احفظ التشكيلة"
 
 #: ui/main.qml:52
 #, kde-format
@@ -604,12 +605,12 @@ msgstr ""
 #: ui/main.qml:71
 #, kde-format
 msgid "Mobile data"
-msgstr ""
+msgstr "بيانات المحمول"
 
 #: ui/main.qml:76
 #, kde-format
 msgid "No SIM is inserted."
-msgstr ""
+msgstr "لا توجد شريحة."
 
 #: ui/main.qml:78
 #, kde-format
@@ -629,12 +630,12 @@ msgstr ""
 #: ui/main.qml:113
 #, kde-format
 msgid "Data Usage"
-msgstr ""
+msgstr "استخدام البيانات"
 
 #: ui/main.qml:114
 #, kde-format
 msgid "View data usage."
-msgstr ""
+msgstr "اعرض استخدام البيانات."
 
 #: ui/main.qml:122 ui/SimPage.qml:35
 #, fuzzy, kde-format
@@ -649,9 +650,9 @@ msgstr[4] "سيم"
 msgstr[5] "سيم"
 
 #: ui/main.qml:143
-#, fuzzy, kde-format
+#, kde-format
 msgid "SIM %1"
-msgstr "سيم"
+msgstr "الشريحة %1"
 
 #: ui/main.qml:144
 #, kde-format
@@ -686,7 +687,7 @@ msgstr ""
 #: ui/ModemPage.qml:75
 #, kde-format
 msgid "IMEI"
-msgstr ""
+msgstr "رقم هوية IMEI"
 
 #: ui/ModemPage.qml:91
 #, kde-format
@@ -776,12 +777,12 @@ msgstr "الملحقة"
 #: ui/ModemPage.qml:266
 #, kde-format
 msgid "Power State"
-msgstr ""
+msgstr "حالة الطاقة"
 
 #: ui/ModemPage.qml:274
 #, kde-format
 msgid "SIM Path"
-msgstr ""
+msgstr "مسار الشريحة"
 
 #: ui/ProfileList.qml:23
 #, kde-format
@@ -823,12 +824,12 @@ msgstr ""
 #: ui/SimLockPage.qml:19 ui/SimPage.qml:94
 #, kde-format
 msgid "SIM Lock"
-msgstr ""
+msgstr "قفل الشريحة"
 
 #: ui/SimLockPage.qml:38
 #, kde-format
 msgid "SIM is locked"
-msgstr ""
+msgstr "الشريحة مقفلة"
 
 #: ui/SimLockPage.qml:39
 #, kde-format
@@ -838,7 +839,7 @@ msgstr ""
 #: ui/SimLockPage.qml:61
 #, kde-format
 msgid "SIM is not locked"
-msgstr ""
+msgstr "الشريحة غير مقفلة"
 
 #: ui/SimLockPage.qml:62
 #, kde-format
@@ -850,12 +851,12 @@ msgstr ""
 #: ui/SimLockPage.qml:66
 #, kde-format
 msgid "Lock SIM"
-msgstr ""
+msgstr "اقفل الشريحة"
 
 #: ui/SimLockPage.qml:78
 #, kde-format
 msgid "Disable SIM Lock"
-msgstr ""
+msgstr "عطّل قفل الشريحة"
 
 #: ui/SimLockPage.qml:79
 #, kde-format
@@ -865,7 +866,7 @@ msgstr ""
 #: ui/SimLockPage.qml:91
 #, kde-format
 msgid "Change PIN"
-msgstr "تغيير رمز PIN"
+msgstr "غيّر رقم التعريف الشخصي"
 
 #: ui/SimLockPage.qml:92
 #, kde-format
@@ -875,22 +876,22 @@ msgstr ""
 #: ui/SimLockPage.qml:106
 #, kde-format
 msgid "Unlock SIM"
-msgstr ""
+msgstr "فك قفل الشريحة"
 
 #: ui/SimLockPage.qml:114
 #, kde-format
 msgid "Attempts left: %1"
-msgstr ""
+msgstr "المحاولات المتبقية: %1"
 
 #: ui/SimLockPage.qml:118
 #, kde-format
 msgid "Enter PIN"
-msgstr ""
+msgstr "أدخل رقم التعريفي الشخصي"
 
 #: ui/SimLockPage.qml:126
 #, kde-format
 msgid "Change SIM PIN"
-msgstr ""
+msgstr "غيّر رقم التعريف الشخصي للشريحة"
 
 #: ui/SimLockPage.qml:145 ui/SimLockPage.qml:210
 #, kde-format
@@ -905,27 +906,27 @@ msgstr ""
 #: ui/SimLockPage.qml:156 ui/SimLockPage.qml:183
 #, kde-format
 msgid "Current PIN"
-msgstr ""
+msgstr "رقم التعريفي الشخصي الحالي"
 
 #: ui/SimLockPage.qml:161 ui/SimLockPage.qml:221
 #, kde-format
 msgid "New PIN"
-msgstr ""
+msgstr "رقم التعريفي الشخصي جديد"
 
 #: ui/SimLockPage.qml:166 ui/SimLockPage.qml:226
 #, kde-format
 msgid "Confirm PIN"
-msgstr "أكّد الرّمز"
+msgstr "أكد رقم التعريف الشخصي"
 
 #: ui/SimLockPage.qml:174
 #, kde-format
 msgid "Remove SIM PIN"
-msgstr ""
+msgstr "أزل رقم التعريفي الشخصي"
 
 #: ui/SimLockPage.qml:191
 #, kde-format
 msgid "Add SIM PIN"
-msgstr ""
+msgstr "أضف رقم التعريف الشخصي للشريحة"
 
 #: ui/SimPage.qml:45
 #, kde-format
@@ -977,7 +978,7 @@ msgstr ""
 #: ui/SimPage.qml:112
 #, kde-format
 msgid "SIM Details"
-msgstr ""
+msgstr "تفاصيل الشريحة"
 
 #: ui/SimPage.qml:126
 #, kde-format
@@ -987,32 +988,32 @@ msgstr ""
 #: ui/SimPage.qml:134
 #, kde-format
 msgid "EID"
-msgstr "عيد"
+msgstr "EID"
 
 #: ui/SimPage.qml:142
 #, kde-format
 msgid "Operator Code (modem)"
-msgstr ""
+msgstr "رمز المشغل (المودم)"
 
 #: ui/SimPage.qml:150
 #, kde-format
 msgid "Operator Name (modem)"
-msgstr ""
+msgstr "اسم المشغل (المودم)"
 
 #: ui/SimPage.qml:158
 #, kde-format
 msgid "Operator Code (provided by SIM)"
-msgstr ""
+msgstr "رمز المشغل (المقدم من الشريحة)"
 
 #: ui/SimPage.qml:166
 #, kde-format
 msgid "Operator Name (provided by SIM)"
-msgstr ""
+msgstr "اسم المشغل (المقدم من الشريحة)"
 
 #: ui/SimPage.qml:174
 #, kde-format
 msgid "SIM ID"
-msgstr ""
+msgstr "معرف الشريحة"
 
 #: ui/SimPage.qml:190
 #, kde-format
