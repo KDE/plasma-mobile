@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-22 00:43+0000\n"
-"PO-Revision-Date: 2023-05-07 20:53+0400\n"
+"PO-Revision-Date: 2025-04-21 20:05+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,18 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/applet/AppletError.qml:168
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "انسخ إلى الحافظة"
 
 #: contents/applet/AppletError.qml:191
 msgid "View Error Details…"
-msgstr ""
+msgstr "استعرض تفاصيل الخطأ…"
 
 #: contents/applet/CompactApplet.qml:77
 msgid "Open %1"
-msgstr ""
+msgstr "افتح %1"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:44
 msgid "Layout changes have been restricted by the system administrator"
@@ -43,15 +44,15 @@ msgstr "تخطيط الشاشة الرئيسة"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:67
 msgid "The homescreen layout to use."
-msgstr ""
+msgstr "تخطيط الشاشة الرئيسة الذي سيستعمل."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:93
 msgid "Wallpaper Plugin"
-msgstr ""
+msgstr "محلق الخلفيات"
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:94
 msgid "The wallpaper plugin to use."
-msgstr ""
+msgstr "محلقة الخلفيات في الاستعمال."
 
 #: contents/configuration/ConfigurationContainmentAppearance.qml:129
 msgid "Wallpaper Plugins"
@@ -75,15 +76,15 @@ msgstr "الخلفيّة"
 
 #: contents/lockscreen/LockScreenState.qml:31
 msgid "Enter PIN"
-msgstr ""
+msgstr "أدخل رقم التعريفي الشخصي"
 
 #: contents/lockscreen/LockScreenState.qml:32
 msgid "Wrong PIN"
-msgstr ""
+msgstr "رقم التعريف الشخصي خاطئ"
 
 #: contents/views/Panel.qml:318
 msgid "Panel Focus Indicator"
-msgstr ""
+msgstr "مؤشر التركيز على اللوحة"
 
 #~ msgid "Change Wallpaper"
 #~ msgstr "غير خلفية الشاشة"

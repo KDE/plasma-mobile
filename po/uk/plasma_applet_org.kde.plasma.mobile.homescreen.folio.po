@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2024-07-02 09:37+0300\n"
 "Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Шукати програми…"
 
-#: package/contents/ui/FavouritesBar.qml:151
-#: package/contents/ui/FavouritesBar.qml:225
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: package/contents/ui/FavouritesBar.qml:154
+#: package/contents/ui/FavouritesBar.qml:229
+#: package/contents/ui/FolderView.qml:293
+#: package/contents/ui/HomeScreenPage.qml:221
+#: package/contents/ui/HomeScreenPage.qml:305
 #, kde-format
 msgid "Remove"
 msgstr "Вилучити"
@@ -90,95 +90,100 @@ msgstr "Показувати мітки на панелі улюбленого"
 
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
+msgid "Lock layout"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:214
+#, kde-format
 msgid "Page transition effect"
 msgstr "Ефект переходу між сторінками"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:220
 #, kde-format
 msgid "Slide"
 msgstr "Ковзання"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:221
 #, kde-format
 msgid "Cube"
 msgstr "Куб"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: package/contents/ui/settings/SettingsWindow.qml:222
 #, kde-format
 msgid "Fade"
 msgstr "Згасання"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Stack"
 msgstr "Стос"
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: package/contents/ui/settings/SettingsWindow.qml:224
 #, kde-format
 msgid "Rotation"
 msgstr "Обертання"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Панель улюблених"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: package/contents/ui/settings/SettingsWindow.qml:255
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Зображення тла"
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: package/contents/ui/settings/SettingsWindow.qml:261
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Показувати ефект розмивання шпалер"
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: package/contents/ui/settings/SettingsWindow.qml:272
 #, kde-format
 msgid "General"
 msgstr "Загальне"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr ""
 "Перемкнутися між домашніми екранами і додатковими варіантами зображень тла"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: package/contents/ui/settings/SettingsWindow.qml:306
 #, kde-format
 msgid "Export layout to"
 msgstr "Експортувати компонування до"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Import layout from"
 msgstr "Імпортувати компонування з"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: package/contents/ui/settings/SettingsWindow.qml:336
+#: package/contents/ui/settings/SettingsWindow.qml:343
 #, kde-format
 msgid "Export Status"
 msgstr "Стан експортування"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Не вдалося експортувати до %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:344
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Компонування домашньої сторінки успішно експортовано до %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: package/contents/ui/settings/SettingsWindow.qml:350
 #, kde-format
 msgid "Confirm Import"
 msgstr "Підтвердження імпортування"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:351
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr ""

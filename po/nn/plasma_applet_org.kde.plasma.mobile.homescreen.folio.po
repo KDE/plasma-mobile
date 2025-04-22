@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2024-07-17 17:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Søk etter program …"
 
-#: package/contents/ui/FavouritesBar.qml:151
-#: package/contents/ui/FavouritesBar.qml:225
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: package/contents/ui/FavouritesBar.qml:154
+#: package/contents/ui/FavouritesBar.qml:229
+#: package/contents/ui/FolderView.qml:293
+#: package/contents/ui/HomeScreenPage.qml:221
+#: package/contents/ui/HomeScreenPage.qml:305
 #, kde-format
 msgid "Remove"
 msgstr "Fjern"
@@ -90,94 +90,99 @@ msgstr "Vis merkelappar på favorittlinja"
 
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
+msgid "Lock layout"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:214
+#, kde-format
 msgid "Page transition effect"
 msgstr "Bruk overgangseffektar ved sideskift"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:220
 #, kde-format
 msgid "Slide"
 msgstr "Skliding"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:221
 #, kde-format
 msgid "Cube"
 msgstr "Kube"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: package/contents/ui/settings/SettingsWindow.qml:222
 #, kde-format
 msgid "Fade"
 msgstr "Ton inn/ut"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Stack"
 msgstr "Stabel"
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: package/contents/ui/settings/SettingsWindow.qml:224
 #, kde-format
 msgid "Rotation"
 msgstr "Dreiing"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Favorittlinje"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: package/contents/ui/settings/SettingsWindow.qml:255
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Bakgrunnsbilete"
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: package/contents/ui/settings/SettingsWindow.qml:261
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Vis sløreeffekt på bakgrunnsbilete"
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: package/contents/ui/settings/SettingsWindow.qml:272
 #, kde-format
 msgid "General"
 msgstr "Generelt"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
 msgstr "Byt mellom heimeskjerm og fleire val for bakgrunnsbilete"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: package/contents/ui/settings/SettingsWindow.qml:306
 #, kde-format
 msgid "Export layout to"
 msgstr "Eksporter utforming til"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Import layout from"
 msgstr "Importer utforming frå"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: package/contents/ui/settings/SettingsWindow.qml:336
+#: package/contents/ui/settings/SettingsWindow.qml:343
 #, kde-format
 msgid "Export Status"
 msgstr "Eksportstatus"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Klarte ikkje eksportera til %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:344
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Utforminga for heimeskjermen er no eksportert til %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: package/contents/ui/settings/SettingsWindow.qml:350
 #, kde-format
 msgid "Confirm Import"
 msgstr "Stadfest import"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:351
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Dette vil overskriva utforminga du brukar på heimeskjermen."

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2025-04-14 17:42+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -45,92 +45,104 @@ msgstr "Animazioak"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Hau itzalita badago, animazioak ahalik gehien murriztuko dira."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr ""
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"When active, status and navigation panels will auto hide, allowing "
+"applications to fill the entire screen space."
+msgstr ""
+
+#: ui/main.qml:67
 #, kde-format
 msgid "Status Bar"
 msgstr "Egoera-barra"
 
-#: ui/main.qml:59
+#: ui/main.qml:73
 #, kde-format
 msgid "Date in status bar"
 msgstr "Data egoera-barran"
 
-#: ui/main.qml:60
+#: ui/main.qml:74
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "Aktibatuta badago, data erlojuaren ondoan erakutsiko da egoera-barran."
 
-#: ui/main.qml:73
+#: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
 msgstr "Bateriaren ehunekoa"
 
-#: ui/main.qml:74
+#: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
 msgstr "Erakutsi bateriaren ehuneko egoera-barran."
 
-#: ui/main.qml:88
+#: ui/main.qml:102
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Egoera-barraren neurria"
 
-#: ui/main.qml:89
+#: ui/main.qml:103
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "Goiko panelaren neurria (berrabiarazi beharra dago)."
 
-#: ui/main.qml:92
+#: ui/main.qml:106
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Ñimiñoa"
 
-#: ui/main.qml:93
+#: ui/main.qml:107
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Txikia"
 
-#: ui/main.qml:94
+#: ui/main.qml:108
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Arrunta"
 
-#: ui/main.qml:95
+#: ui/main.qml:109
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Handia"
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Oso handia"
 
-#: ui/main.qml:112
+#: ui/main.qml:126
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Nabigatzeko panela"
 
-#: ui/main.qml:118
+#: ui/main.qml:132
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Keinu-soileko modua"
 
-#: ui/main.qml:119
+#: ui/main.qml:133
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Nabigatzeko panela ezkutatu behar den edo ez."
 
-#: ui/main.qml:133
+#: ui/main.qml:147
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Erakutsi beti teklatua txandakatzea"
 
-#: ui/main.qml:134
+#: ui/main.qml:148
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
@@ -138,79 +150,79 @@ msgstr ""
 "Nabigatzeko panelean teklatua txandakatzeko botoia beti erakutsi behar den "
 "edo ez."
 
-#: ui/main.qml:145
+#: ui/main.qml:159
 #, kde-format
 msgid "Action Drawer"
 msgstr "Ekintza tiradera"
 
-#: ui/main.qml:151
+#: ui/main.qml:165
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Iltzatutako modua"
 
-#: ui/main.qml:152
+#: ui/main.qml:166
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Modu hedatua"
 
-#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:170 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Ezarpen azkarrak"
 
-#: ui/main.qml:164
+#: ui/main.qml:178
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Goiko ezkerreko tiradera modua"
 
-#: ui/main.qml:165
+#: ui/main.qml:179
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Goiko ezkerreko aldetik irekitzeko modua."
 
-#: ui/main.qml:186
+#: ui/main.qml:200
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Goiko eskuineko tiradera modua"
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Goiko eskuineko aldetik irekitzeko modua."
 
-#: ui/main.qml:206
+#: ui/main.qml:220
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Pantaila giltzatzeko lasterbideak"
 
-#: ui/main.qml:211
+#: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Bat ere ez"
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Esku-argia"
 
-#: ui/main.qml:213
+#: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Ezkerreko botoia"
 
-#: ui/main.qml:239
+#: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

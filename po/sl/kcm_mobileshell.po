@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2025-03-23 07:12+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -43,171 +43,183 @@ msgstr "Animacije"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "Če je to izključeno, bodo animacije reducirane, kolikor je le mogoče."
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr ""
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"When active, status and navigation panels will auto hide, allowing "
+"applications to fill the entire screen space."
+msgstr ""
+
+#: ui/main.qml:67
 #, kde-format
 msgid "Status Bar"
 msgstr "Vrstica stanja"
 
-#: ui/main.qml:59
+#: ui/main.qml:73
 #, kde-format
 msgid "Date in status bar"
 msgstr "Datum v vrstici stanja"
 
-#: ui/main.qml:60
+#: ui/main.qml:74
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "Če je vklopljeno, bo datum prikazan poleg ure v vrstici stanja."
 
-#: ui/main.qml:73
+#: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
 msgstr "Odstotek baterije"
 
-#: ui/main.qml:74
+#: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
 msgstr "Prikazuj odstotek baterije v vrstici stanja."
 
-#: ui/main.qml:88
+#: ui/main.qml:102
 #, kde-format
 msgid "Status Bar Size"
 msgstr "Velikost vrstice stanja"
 
-#: ui/main.qml:89
+#: ui/main.qml:103
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "Velikost vrhnje plošče (potreben ponovni zagon)"
 
-#: ui/main.qml:92
+#: ui/main.qml:106
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "Majcena"
 
-#: ui/main.qml:93
+#: ui/main.qml:107
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "Majhna"
 
-#: ui/main.qml:94
+#: ui/main.qml:108
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "Normalna"
 
-#: ui/main.qml:95
+#: ui/main.qml:109
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "Velika"
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "Zelo velika"
 
-#: ui/main.qml:112
+#: ui/main.qml:126
 #, kde-format
 msgid "Navigation Panel"
 msgstr "Krmilna plošča"
 
-#: ui/main.qml:118
+#: ui/main.qml:132
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "Način samo prepoznavanja gest"
 
-#: ui/main.qml:119
+#: ui/main.qml:133
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "Ali naj se skrije krmilna plošča."
 
-#: ui/main.qml:133
+#: ui/main.qml:147
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "Vedno kaži preklop tipkovnice"
 
-#: ui/main.qml:134
+#: ui/main.qml:148
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr ""
 "Ali naj se na navigacijski plošči vedno kaže preklopni gumb tipkovnice."
 
-#: ui/main.qml:145
+#: ui/main.qml:159
 #, kde-format
 msgid "Action Drawer"
 msgstr "Predal aktivnosti"
 
-#: ui/main.qml:151
+#: ui/main.qml:165
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "Pripeti način"
 
-#: ui/main.qml:152
+#: ui/main.qml:166
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "Razširjeni način"
 
-#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:170 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "Hitre nastavitve"
 
-#: ui/main.qml:164
+#: ui/main.qml:178
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "Način zgornjega levega predala"
 
-#: ui/main.qml:165
+#: ui/main.qml:179
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "Način z odpiranjem zgoraj levo."
 
-#: ui/main.qml:186
+#: ui/main.qml:200
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "Način zgornjega desnega predala"
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "Način z odpiranjem zgoraj desno."
 
-#: ui/main.qml:206
+#: ui/main.qml:220
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Bližnjice pri zaklenjenem zaslonu"
 
-#: ui/main.qml:211
+#: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "Nobena"
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "Svetilka"
 
-#: ui/main.qml:213
+#: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "Kamera"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "Levi gumb"
 
-#: ui/main.qml:239
+#: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

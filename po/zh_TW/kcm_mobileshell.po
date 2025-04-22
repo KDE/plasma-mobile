@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-09 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2025-04-09 17:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -42,170 +42,182 @@ msgstr "動畫"
 msgid "If this is off, animations will be reduced as much as possible."
 msgstr "停用此選項時，會儘量關閉動畫效果。"
 
-#: ui/main.qml:53
+#: ui/main.qml:55
+#, kde-format
+msgid "Auto Hide Panels"
+msgstr ""
+
+#: ui/main.qml:56
+#, kde-format
+msgid ""
+"When active, status and navigation panels will auto hide, allowing "
+"applications to fill the entire screen space."
+msgstr ""
+
+#: ui/main.qml:67
 #, kde-format
 msgid "Status Bar"
 msgstr "狀態列"
 
-#: ui/main.qml:59
+#: ui/main.qml:73
 #, kde-format
 msgid "Date in status bar"
 msgstr "狀態列中顯示日期"
 
-#: ui/main.qml:60
+#: ui/main.qml:74
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
 msgstr "啟用時，會在狀態列的時鐘旁邊顯示日期。"
 
-#: ui/main.qml:73
+#: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
 msgstr "電池百分比"
 
-#: ui/main.qml:74
+#: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
 msgstr "在狀態列中顯示電池百分比。"
 
-#: ui/main.qml:88
+#: ui/main.qml:102
 #, kde-format
 msgid "Status Bar Size"
 msgstr "狀態列大小"
 
-#: ui/main.qml:89
+#: ui/main.qml:103
 #, kde-format
 msgid "Size of the top panel (needs restart)."
 msgstr "頂部面板的大小（需要重新啟動）。"
 
-#: ui/main.qml:92
+#: ui/main.qml:106
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
 msgstr "極小"
 
-#: ui/main.qml:93
+#: ui/main.qml:107
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
 msgstr "小"
 
-#: ui/main.qml:94
+#: ui/main.qml:108
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
 msgstr "一般"
 
-#: ui/main.qml:95
+#: ui/main.qml:109
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
 msgstr "大"
 
-#: ui/main.qml:96
+#: ui/main.qml:110
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
 msgstr "巨大"
 
-#: ui/main.qml:112
+#: ui/main.qml:126
 #, kde-format
 msgid "Navigation Panel"
 msgstr "導覽面板"
 
-#: ui/main.qml:118
+#: ui/main.qml:132
 #, kde-format
 msgid "Gesture-only Mode"
 msgstr "純手勢模式"
 
-#: ui/main.qml:119
+#: ui/main.qml:133
 #, kde-format
 msgid "Whether to hide the navigation panel."
 msgstr "是否要隱藏導覽面板。"
 
-#: ui/main.qml:133
+#: ui/main.qml:147
 #, kde-format
 msgid "Always show keyboard toggle"
 msgstr "總是顯示鍵盤切換按鈕"
 
-#: ui/main.qml:134
+#: ui/main.qml:148
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
 msgstr "是否要總是在導覽面板上顯示鍵盤切換按鈕。"
 
-#: ui/main.qml:145
+#: ui/main.qml:159
 #, kde-format
 msgid "Action Drawer"
 msgstr "動作抽屜"
 
-#: ui/main.qml:151
+#: ui/main.qml:165
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
 msgstr "釘選模式"
 
-#: ui/main.qml:152
+#: ui/main.qml:166
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
 msgstr "展開模式"
 
-#: ui/main.qml:156 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
+#: ui/main.qml:170 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
 msgid "Quick Settings"
 msgstr "快速設定"
 
-#: ui/main.qml:164
+#: ui/main.qml:178
 #, kde-format
 msgid "Top Left Drawer Mode"
 msgstr "左上抽屜模式"
 
-#: ui/main.qml:165
+#: ui/main.qml:179
 #, kde-format
 msgid "Mode when opening from the top left."
 msgstr "從左上開啟時的模式。"
 
-#: ui/main.qml:186
+#: ui/main.qml:200
 #, kde-format
 msgid "Top Right Drawer Mode"
 msgstr "右上抽屜模式"
 
-#: ui/main.qml:187
+#: ui/main.qml:201
 #, kde-format
 msgid "Mode when opening from the top right."
 msgstr "從右上開啟時的模式。"
 
-#: ui/main.qml:206
+#: ui/main.qml:220
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "鎖定螢幕捷徑"
 
-#: ui/main.qml:211
+#: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
 msgstr "無"
 
-#: ui/main.qml:212
+#: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
 msgstr "手電筒"
 
-#: ui/main.qml:213
+#: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
 msgstr "相機"
 
-#: ui/main.qml:217
+#: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
 msgstr "左邊按鈕"
 
-#: ui/main.qml:239
+#: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"

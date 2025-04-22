@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-21 00:43+0000\n"
+"POT-Creation-Date: 2025-04-22 00:42+0000\n"
 "PO-Revision-Date: 2024-07-02 09:51+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -29,11 +29,11 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "Cerca applicationes..."
 
-#: package/contents/ui/FavouritesBar.qml:151
-#: package/contents/ui/FavouritesBar.qml:225
-#: package/contents/ui/FolderView.qml:290
-#: package/contents/ui/HomeScreenPage.qml:218
-#: package/contents/ui/HomeScreenPage.qml:298
+#: package/contents/ui/FavouritesBar.qml:154
+#: package/contents/ui/FavouritesBar.qml:229
+#: package/contents/ui/FolderView.qml:293
+#: package/contents/ui/HomeScreenPage.qml:221
+#: package/contents/ui/HomeScreenPage.qml:305
 #, kde-format
 msgid "Remove"
 msgstr "Remove"
@@ -90,57 +90,62 @@ msgstr "Monstra etiquettas in barra de favoritos"
 
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
+msgid "Lock layout"
+msgstr ""
+
+#: package/contents/ui/settings/SettingsWindow.qml:214
+#, kde-format
 msgid "Page transition effect"
 msgstr "Effecto de transition de pagina"
 
-#: package/contents/ui/settings/SettingsWindow.qml:207
+#: package/contents/ui/settings/SettingsWindow.qml:220
 #, kde-format
 msgid "Slide"
 msgstr "Glissa"
 
-#: package/contents/ui/settings/SettingsWindow.qml:208
+#: package/contents/ui/settings/SettingsWindow.qml:221
 #, kde-format
 msgid "Cube"
 msgstr "Cubic"
 
-#: package/contents/ui/settings/SettingsWindow.qml:209
+#: package/contents/ui/settings/SettingsWindow.qml:222
 #, kde-format
 msgid "Fade"
 msgstr "Dispare"
 
-#: package/contents/ui/settings/SettingsWindow.qml:210
+#: package/contents/ui/settings/SettingsWindow.qml:223
 #, kde-format
 msgid "Stack"
 msgstr "Stack (Pila)"
 
-#: package/contents/ui/settings/SettingsWindow.qml:211
+#: package/contents/ui/settings/SettingsWindow.qml:224
 #, kde-format
 msgid "Rotation"
 msgstr "Rotation"
 
-#: package/contents/ui/settings/SettingsWindow.qml:226
+#: package/contents/ui/settings/SettingsWindow.qml:239
 #, kde-format
 msgid "Favorites Bar"
 msgstr "Barra de favoritos"
 
-#: package/contents/ui/settings/SettingsWindow.qml:242
+#: package/contents/ui/settings/SettingsWindow.qml:255
 #, kde-format
 msgctxt "@title:group settings group"
 msgid "Wallpaper"
 msgstr "Tapete de papiro"
 
-#: package/contents/ui/settings/SettingsWindow.qml:248
+#: package/contents/ui/settings/SettingsWindow.qml:261
 #, kde-format
 msgctxt "@option:check"
 msgid "Show wallpaper blur effect"
 msgstr "Monstra effecto velate (blur) de tepate de papiro"
 
-#: package/contents/ui/settings/SettingsWindow.qml:259
+#: package/contents/ui/settings/SettingsWindow.qml:272
 #, kde-format
 msgid "General"
 msgstr "General"
 
-#: package/contents/ui/settings/SettingsWindow.qml:266
+#: package/contents/ui/settings/SettingsWindow.qml:279
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch between homescreens and more wallpaper options"
@@ -148,38 +153,38 @@ msgstr ""
 "Commuta inter schermos de initio (homescreens) e plus optiones de tapete de "
 "papiro"
 
-#: package/contents/ui/settings/SettingsWindow.qml:293
+#: package/contents/ui/settings/SettingsWindow.qml:306
 #, kde-format
 msgid "Export layout to"
 msgstr "Exporta disposition a"
 
-#: package/contents/ui/settings/SettingsWindow.qml:312
+#: package/contents/ui/settings/SettingsWindow.qml:325
 #, kde-format
 msgid "Import layout from"
 msgstr "Importa Disposition ab"
 
-#: package/contents/ui/settings/SettingsWindow.qml:323
-#: package/contents/ui/settings/SettingsWindow.qml:330
+#: package/contents/ui/settings/SettingsWindow.qml:336
+#: package/contents/ui/settings/SettingsWindow.qml:343
 #, kde-format
 msgid "Export Status"
 msgstr "Exporta stato"
 
-#: package/contents/ui/settings/SettingsWindow.qml:324
+#: package/contents/ui/settings/SettingsWindow.qml:337
 #, kde-format
 msgid "Failed to export to %1"
 msgstr "Falleva a exportar a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:331
+#: package/contents/ui/settings/SettingsWindow.qml:344
 #, kde-format
 msgid "Homescreen layout exported successfully to %1"
 msgstr "Disposition de schermo initial exportate con successo a %1"
 
-#: package/contents/ui/settings/SettingsWindow.qml:337
+#: package/contents/ui/settings/SettingsWindow.qml:350
 #, kde-format
 msgid "Confirm Import"
 msgstr "Confirma Importation"
 
-#: package/contents/ui/settings/SettingsWindow.qml:338
+#: package/contents/ui/settings/SettingsWindow.qml:351
 #, kde-format
 msgid "This will overwrite your existing homescreen layout!"
 msgstr "Isto superscribera tu disposition de schermo initial existente!"

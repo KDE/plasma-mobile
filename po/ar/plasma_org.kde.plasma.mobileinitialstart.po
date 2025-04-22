@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2023-05-07 20:46+0400\n"
+"PO-Revision-Date: 2025-04-21 20:06+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -33,10 +34,9 @@ msgid "Opens the initial start wizard without modifying configuration"
 msgstr ""
 
 #: main.cpp:36
-#, fuzzy, kde-format
-#| msgid "© 2023 KDE Community"
+#, kde-format
 msgid "© 2024 KDE Community"
-msgstr "© 2023 مجتمع كِيدِي"
+msgstr "© 2024 مجتمع كِيدِي"
 
 #: main.cpp:37
 #, kde-format
@@ -76,32 +76,32 @@ msgstr ""
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "4G/3G/2G"
-msgstr ""
+msgstr "4G/3G/2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "3G/2G"
-msgstr ""
+msgstr "3G/2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
-#, fuzzy, kde-format
+#, kde-format
 msgid "2G"
-msgstr "خ"
+msgstr "2G"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 4G"
-msgstr ""
+msgstr "4G فقط"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 3G"
-msgstr ""
+msgstr "3G فقط"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
 msgid "Only 2G"
-msgstr ""
+msgstr "2G فقط"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
@@ -189,7 +189,7 @@ msgstr "تحجيم العرض"
 #: modules/prepare/package/contents/ui/main.qml:136
 #, kde-format
 msgid "Dark Theme"
-msgstr ""
+msgstr "سمة مظلمة"
 
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
