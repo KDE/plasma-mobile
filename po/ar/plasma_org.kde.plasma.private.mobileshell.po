@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:48+0000\n"
-"PO-Revision-Date: 2023-05-07 20:47+0400\n"
+"PO-Revision-Date: 2025-04-21 18:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: notifications/notificationfilemenu.cpp:109
 #, kde-format
@@ -51,17 +52,17 @@ msgstr "مغلق"
 #: qml/dataproviders/AudioProvider.qml:171
 #, kde-format
 msgid "Audio"
-msgstr ""
+msgstr "الصوت"
 
 #: qml/dataproviders/AudioProvider.qml:175
 #, kde-format
 msgid "Increase Volume"
-msgstr ""
+msgstr "زد الصوت"
 
 #: qml/dataproviders/AudioProvider.qml:182
 #, kde-format
 msgid "Decrease Volume"
-msgstr ""
+msgstr "اخفض الصوت"
 
 #: qml/dataproviders/AudioProvider.qml:189 qml/osd/volume/VolumeOSD.qml:108
 #, kde-format
@@ -71,17 +72,17 @@ msgstr "اكتم"
 #: qml/dataproviders/SignalStrengthInfo.qml:15
 #, kde-format
 msgid "SIM Locked"
-msgstr ""
+msgstr "الشريحة مقفلة"
 
 #: qml/osd/volume/AudioApplet.qml:73
 #, kde-format
 msgid "Outputs"
-msgstr ""
+msgstr "المخرجات"
 
 #: qml/osd/volume/AudioApplet.qml:103
 #, kde-format
 msgid "Inputs"
-msgstr ""
+msgstr "المدخلات"
 
 #: qml/osd/volume/AudioApplet.qml:134
 #, kde-format
@@ -97,7 +98,7 @@ msgstr "تدفقات التّسجيل"
 #, kde-format
 msgctxt "label of device items"
 msgid "%1 (%2)"
-msgstr ""
+msgstr "%1 (%2)"
 
 #: qml/osd/volume/DeviceListItem.qml:34
 #, kde-format
@@ -119,13 +120,13 @@ msgstr "اضبط المستوى إلى %1"
 #, kde-format
 msgctxt "volume percentage"
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/osd/volume/ListItemBase.qml:257
 #, kde-format
 msgctxt "only used for sizing, should be widest possible string"
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: qml/osd/volume/StreamListItem.qml:21
 #, kde-format
@@ -136,7 +137,7 @@ msgstr "أصوات الإشعارات"
 #, kde-format
 msgctxt "label of stream items"
 msgid "%1: %2"
-msgstr ""
+msgstr "%1: %2"
 
 #: qml/osd/volume/StreamListItem.qml:29
 #, kde-format
@@ -151,18 +152,18 @@ msgstr "ألغ الكتم"
 #: qml/osd/volume/VolumeOSD.qml:132
 #, kde-format
 msgid "100%"
-msgstr ""
+msgstr "100%"
 
 #: qml/osd/volume/VolumeOSD.qml:142
 #, kde-format
 msgctxt "Percentage value"
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/osd/volume/VolumeOSD.qml:162
 #, kde-format
 msgid "Open audio settings"
-msgstr ""
+msgstr "افتح إعدادات الصوت"
 
 #: qml/osd/volume/VolumeOSD.qml:175
 #, kde-format
@@ -172,12 +173,12 @@ msgstr "إعدادات الصوت"
 #: qml/osd/volume/VolumeOSD.qml:182
 #, kde-format
 msgid "Toggle showing audio streams"
-msgstr ""
+msgstr "تبديل عرض تدفقات الصوت"
 
 #: qml/statusbar/indicators/BatteryIndicator.qml:36
 #, kde-format
 msgid "%1%"
-msgstr ""
+msgstr "%1٪"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:175
 #, kde-format
@@ -286,7 +287,7 @@ msgstr "انتهت المهمّة"
 #, kde-format
 msgctxt "Notification was added minutes ago, keep short"
 msgid "%1m ago"
-msgstr ""
+msgstr "منذ %1د"
 
 #: qml/widgets/notifications/util.js:81
 #, kde-format
@@ -298,7 +299,7 @@ msgstr "%1 ث متبقي"
 #, kde-format
 msgctxt "minutes remaining, keep short"
 msgid "%1m remaining"
-msgstr ""
+msgstr "المتبقي %1د"
 
 #: qml/widgets/notifications/util.js:87
 #, kde-format
