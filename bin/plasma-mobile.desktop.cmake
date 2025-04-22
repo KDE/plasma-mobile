@@ -52,6 +52,7 @@ Name[x-test]=xxPlasma Mobilexx
 Name[zh_CN]=Plasma Mobile
 Name[zh_TW]=Plasma 行動
 Comment=Plasma Mobile by KDE
+Comment[ar]=بلازما الجوال من كيدي
 Comment[az]=KDE Plasma Mobil
 Comment[ca]=Plasma Mobile, creat per la comunitat KDE
 Comment[ca@valencia]=Plasma Mobile, creat per la comunitat KDE
