@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2024 Micah Stanley <stanleymicah@proton.me>
+ *  SPDX-FileCopyrightText: 2024-2025 Micah Stanley <stanleymicah@proton.me>
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -70,7 +70,7 @@ Item {
             }
             return true;
         }
-        onTriggered: notificationPopup.closePopup()
+        onTriggered: notificationPopup.closePopup(popupIndex)
     }
 
     // the value of how much time is left, normalized from 1 to 0
@@ -161,7 +161,7 @@ Item {
     // if a new notification is added, update the above notification values need for the expanded drawer
     onPopupCountChanged: {
         let abovePopup = popupNotifications.objectAt(popupIndex + 1)
-        if (popupIndex + 1 < abovePopup) {
+        if (popupIndex + 1 < popupCount && abovePopup) {
             abovePopup.aboveNotificationHeight = popupHeight;
             abovePopup.aboveNotificationFullOffset = fullOpenOffset;
         }
@@ -169,6 +169,11 @@ Item {
     // update the current popup index value if the index ever changes.
     onPopupIndexChanged: {
         if (!isClosing && !inPopupDrawer && !waiting) {
+            // if index goes below zero, assume it is being closed externally and move over to the next popup
+            if (popupIndex < 0 ) {
+                closePopup(0);
+                return;
+            }
             popupNotifications.currentPopupIndex = popupIndex;
         }
     }
@@ -229,7 +234,7 @@ Item {
 
     function showNotificationPopup() {
         if (isClosing) {
-            closePopup();
+            closePopup(popupIndex);
             return;
         }
         if (notificationItem.state != "open") {
@@ -271,19 +276,19 @@ Item {
 
     // if the notification ever expires, close it and move on to the next one in the list.
     property bool isExpired: model.expired
-    onIsExpiredChanged: closePopup()
+    onIsExpiredChanged: closePopup(popupIndex)
 
     // this closes the popup notification with the relvent animation while updating the popup below to show, if any exist
-    function closePopup() {
+    function closePopup(index: int) {
         notificationPopup.removeKeyboardFocus();
         notificationPopup.setInputTransparent();
-        if (popupIndex + 1 < popupCount) {
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationHeight = 0;
-            popupNotifications.objectAt(popupIndex + 1).aboveNotificationFullOffset = 0;
+        if (index + 1 < popupCount) {
+            popupNotifications.objectAt(index + 1).aboveNotificationHeight = 0;
+            popupNotifications.objectAt(index + 1).aboveNotificationFullOffset = 0;
         }
 
         if (popupCount > 1) {
-            let nextNotificationIdx = popupIndex + (popupIndex < popupCount - 1 ? 1 : -1);
+            let nextNotificationIdx = index + (index < popupCount - 1 ? 1 : -1);
             let nextNotification = popupNotifications.objectAt(nextNotificationIdx);
 
             if (nextNotification != null) {
@@ -344,25 +349,25 @@ Item {
             preventDismissTimeout = true;
         }
 
-        onDismissRequested: closePopup()
+        onDismissRequested: closePopup(popupIndex)
 
         property real offset: closedOffset
         property real scale: 1.0
-        property real drawerScale: 1 - Math.max(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 1) * 0.075
+        property real drawerScale: 1 - Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1) * 0.075
         Behavior on drawerScale {
             NumberAnimation {
                 duration: Kirigami.Units.veryLongDuration
                 easing.type: Easing.OutExpo
             }
         }
-        property real drawerAddedOffset: Kirigami.Units.gridUnit * 0.5 * Math.max(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 1)
+        property real drawerAddedOffset: Kirigami.Units.gridUnit * 0.5 * Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1)
         Behavior on drawerAddedOffset {
             NumberAnimation {
                 duration: Kirigami.Units.veryLongDuration
                 easing.type: Easing.OutExpo
             }
         }
-        property real drawerOpacity: (Math.max(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 1) > 2) ? 0 : 1
+        property real drawerOpacity: (Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1) > 2) ? 0 : 1
         Behavior on drawerOpacity {
             NumberAnimation {
                 duration: Kirigami.Units.veryLongDuration
@@ -504,7 +509,7 @@ Item {
                 dragOffsetAn.running = true;
                 if ((lastOffset - notificationPopup.dragOffset > 1.0 && notificationPopup.dragOffset < 0) || (-(notificationPopup.openOffset - notificationPopup.closedOffset) / 4 > notificationPopup.dragOffset)) {
                     // this code is called when the notifition is swiped or draged to the top.
-                    notificationPopup.closePopup();
+                    notificationPopup.closePopup(popupIndex);
                     return;
                 } else if (notificationPopup.dragOffset - lastOffset > 1.0 || Kirigami.Units.gridUnit * 3 < notificationPopup.dragOffset) {
                     // this code is called when the notifition is swiped or draged down.
