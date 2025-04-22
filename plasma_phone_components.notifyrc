@@ -43,6 +43,7 @@ Name[zh_CN]=Plasma
 
 [Event/captured]
 Name=Captured
+Name[ar]=الملتقط
 Name[az]=Şəkli çəkildi
 Name[ca]=Capturat
 Name[ca@valencia]=Capturat
@@ -79,6 +80,7 @@ Name[uk]=Захоплено
 Name[x-test]=xxCapturedxx
 Name[zh_CN]=已捕获
 Comment=Captured
+Comment[ar]=الملتقط
 Comment[az]=Şəkli çəkildi
 Comment[ca]=Capturat
 Comment[ca@valencia]=Capturat
