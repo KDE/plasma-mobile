@@ -17,13 +17,16 @@ target_include_directories(mobileshellplugin PRIVATE notifications)
 target_sources(mobileshellplugin PRIVATE ${mobileshellplugin_SRCS})
 
 # Singleton declarations
-set_source_files_properties(qml/components/AppLaunch.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/components/Constants.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/dataproviders/AudioInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/dataproviders/BatteryInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/dataproviders/BluetoothInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/dataproviders/SignalStrengthInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
-set_source_files_properties(qml/popups/PopupProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
+set_source_files_properties(
+    qml/components/AppLaunch.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/components/Constants.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/dataproviders/AudioInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/dataproviders/BatteryInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/dataproviders/BluetoothInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/dataproviders/NetworkInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/dataproviders/SignalStrengthInfo.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+    qml/popups/PopupProviderLoader.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE
+)
 
 # Include qml and js files within ./qml/
 file(GLOB_RECURSE _qml_sources

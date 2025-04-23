@@ -7,6 +7,7 @@
 
 import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell as MobileShell
 
 QS.QuickSetting {
     text: i18n("Airplane Mode")
@@ -14,12 +15,8 @@ QS.QuickSetting {
     status: ""
     enabled: PlasmaNM.Configuration.airplaneModeEnabled
 
-    PlasmaNM.Handler {
-        id: nmHandler
-    }
-
     function toggle() {
-        nmHandler.enableAirplaneMode(!PlasmaNM.Configuration.airplaneModeEnabled);
+        MobileShell.NetworkInfo.handler.enableAirplaneMode(!PlasmaNM.Configuration.airplaneModeEnabled);
         PlasmaNM.Configuration.airplaneModeEnabled = !PlasmaNM.Configuration.airplaneModeEnabled;
     }
 }

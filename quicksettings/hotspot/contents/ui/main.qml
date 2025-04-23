@@ -3,32 +3,24 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.networkmanagement as PlasmaNM
 import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
+import org.kde.plasma.private.mobileshell as MobileShell
 
 QS.QuickSetting {
     id: root
 
-    PlasmaNM.Handler {
-        id: nmHandler
-    }
-
-    PlasmaNM.WirelessStatus {
-        id: wirelessStatus
-    }
-
     text: i18n("Hotspot")
     icon: "network-wireless-hotspot"
 
-    enabled: wirelessStatus.hotspotSSID.length !== 0
-    status: enabled ? wirelessStatus.hotspotSSID : ""
+    enabled: MobileShell.NetworkInfo.wirelessStatus.hotspotSSID.length !== 0
+    status: enabled ? MobileShell.NetworkInfo.wirelessStatus.hotspotSSID : ""
 
     settingsCommand: "plasma-open-settings kcm_mobile_hotspot"
     function toggle() {
         if (!enabled) {
-            nmHandler.createHotspot();
+            MobileShell.NetworkInfo.handler.createHotspot();
         } else {
-            nmHandler.stopHotspot();
+            MobileShell.NetworkInfo.handler.stopHotspot();
         }
     }
 }

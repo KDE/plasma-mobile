@@ -15,22 +15,8 @@ import org.kde.kirigami as Kirigami
 Item {
     id: connectionIcon
 
-    // data
-
     readonly property string icon: wirelessStatus.hotspotSSID.length !== 0 ? "network-wireless-hotspot" : connectionIconProvider.connectionIcon
     readonly property bool indicatorRunning: connectionIconProvider.connecting
-
-    readonly property var networkStatus: PlasmaNM.NetworkStatus {
-        id: networkStatus
-    }
-
-    readonly property var networkModel: PlasmaNM.NetworkModel {
-        id: connectionModel
-    }
-
-    readonly property var handler: PlasmaNM.Handler {
-        id: handler
-    }
 
     readonly property var wirelessStatus: PlasmaNM.WirelessStatus {
         id: wirelessStatus
