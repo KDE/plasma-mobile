@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-02 06:07+0200\n"
+"PO-Revision-Date: 2025-04-22 04:55+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "ჭდეების ჩვენება სანიშნეებ�
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "განლაგების ჩაკეტვა"
 
 #: package/contents/ui/settings/SettingsWindow.qml:214
 #, kde-format

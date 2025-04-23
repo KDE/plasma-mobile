@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-03-23 10:46+0200\n"
+"PO-Revision-Date: 2025-04-22 09:25+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -46,7 +46,7 @@ msgstr "Якщо вимкнено, використання анімацій б�
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Автоматично ховати панелі"
 
 #: ui/main.qml:56
 #, kde-format
@@ -54,6 +54,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Якщо позначено, програма автоматично ховатиме панелі стану і навігації, "
+"надаючи самій програмі усе місце на екрані."
 
 #: ui/main.qml:67
 #, kde-format

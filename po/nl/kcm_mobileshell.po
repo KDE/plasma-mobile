@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-03-23 23:00+0100\n"
+"PO-Revision-Date: 2025-04-22 12:39+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Als dit uit is zullen animaties zo veel mogelijk verminderd worden."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Panelen automatisch verbergen"
 
 #: ui/main.qml:56
 #, kde-format
@@ -53,6 +53,9 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Indien actief, zullen de status en navigatiepanelen automatisch worden "
+"verborgen, waarmee toepassingen geboden wordt de gehele schermruimte te "
+"vullen."
 
 #: ui/main.qml:67
 #, kde-format

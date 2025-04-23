@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-03-23 09:51+0100\n"
+"PO-Revision-Date: 2025-04-22 09:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Oculta automàticament els plafons"
 
 #: ui/main.qml:56
 #, kde-format
@@ -57,6 +57,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Quan està actiu, els plafons d'estat i navegació s'ocultaran automàticament, "
+"i això permet que les aplicacions omplin tot l'espai de la pantalla."
 
 #: ui/main.qml:67
 #, kde-format

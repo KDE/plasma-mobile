@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-02 06:56+0200\n"
+"PO-Revision-Date: 2025-04-22 06:32+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <kde-i18n-doc@kde.org>\n"
 "Language: sl\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.6\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -92,7 +92,7 @@ msgstr "Prikaži oznake v vrstici priljubljenih"
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "Zakleni postavitev"
 
 #: package/contents/ui/settings/SettingsWindow.qml:214
 #, kde-format

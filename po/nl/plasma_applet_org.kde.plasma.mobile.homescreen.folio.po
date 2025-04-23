@@ -1,13 +1,13 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2023, 2024 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2024-07-02 11:46+0200\n"
+"PO-Revision-Date: 2025-04-22 12:40+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.1\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: dragstate.cpp:14
 #, kde-format
@@ -91,7 +91,7 @@ msgstr "Labels in balk met favorieten tonen"
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "Opmaak vergrendelen"
 
 #: package/contents/ui/settings/SettingsWindow.qml:214
 #, kde-format
