@@ -12,27 +12,43 @@ import org.kde.plasma.private.mobileshell.quicksettingsplugin as QS
 
 QS.QuickSetting {
     id: root
-    text: switch (record.state) {
-        case PWRec.PipeWireRecord.Idle:
-            return i18n("Record Screen")
-        case PWRec.PipeWireRecord.Recording:
-            return i18n("Recording…")
-        case PWRec.PipeWireRecord.Rendering:
-            i18n("Writing…")
+
+    property var record: recordLoader.item
+
+    text: {
+        if (!record) return '';
+        switch (record.state) {
+            case PWRec.PipeWireRecord.Idle:
+                return i18n("Record Screen");
+            case PWRec.PipeWireRecord.Recording:
+                return i18n("Recording…");
+            case PWRec.PipeWireRecord.Rendering:
+                return i18n("Writing…");
+        }
+        return '';
     }
-    status: switch(record.state) {
-        case PWRec.PipeWireRecord.Idle:
-            return i18n("Tap to start recording")
-        case PWRec.PipeWireRecord.Recording:
-            return i18n("Screen is being captured…")
-        case PWRec.PipeWireRecord.Rendering:
-            i18n("Please wait…")
+    status: {
+        if (!record) return '';
+        switch (record.state) {
+            case PWRec.PipeWireRecord.Idle:
+                return i18n("Tap to start recording")
+            case PWRec.PipeWireRecord.Recording:
+                return i18n("Screen is being captured…")
+            case PWRec.PipeWireRecord.Rendering:
+                i18n("Please wait…")
+        }
+        return '';
     }
     icon: "camera-video-symbolic"
     enabled: false
-    available: record.encoder != PWRec.PipeWireRecord.NoEncoder
+    available: !record || record.encoder != PWRec.PipeWireRecord.NoEncoder
 
     function toggle() {
+        // Load record object when needed
+        if (!record) {
+            recordLoader.active = true;
+        }
+
         if (!record.active) {
             // See this https://invent.kde.org/plasma/kpipewire/-/blob/eb21912e7e0ce5a70c6f906c6e5a20f56cc6783e/src/pipewirerecord.cpp#L82
             switch (record.encoder) {
@@ -53,13 +69,19 @@ QS.QuickSetting {
         MobileShellState.ShellDBusClient.closeActionDrawer();
     }
 
-    PWRec.PipeWireRecord {
-        id: record
-        nodeId: waylandItem.nodeId
-        active: root.enabled
-    }
-    TaskManager.ScreencastingRequest {
-        id: waylandItem
-        outputName: root.enabled ? Screen.name : ""
+    Loader {
+        id: recordLoader
+        active: false
+
+        sourceComponent: PWRec.PipeWireRecord {
+            id: record
+            nodeId: waylandItem.nodeId
+            active: root.enabled
+
+            TaskManager.ScreencastingRequest {
+                id: waylandItem
+                outputName: root.enabled ? Screen.name : ""
+            }
+        }
     }
 }
