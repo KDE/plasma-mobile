@@ -13,7 +13,7 @@ public:
     quint32 duration;
 };
 
-typedef QList<VibrationEvent> VibrationEventList;
+using VibrationEventList = QList<VibrationEvent>;
 
 Q_DECLARE_METATYPE(VibrationEvent)
 Q_DECLARE_METATYPE(VibrationEventList)
