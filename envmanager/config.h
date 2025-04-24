@@ -32,7 +32,7 @@ const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_DEFAULT_SETTINGS = {{"Ge
 
 const QMap<QString, QMap<QString, QVariant>> KDEGLOBALS_SETTINGS = {{"KDE", {{"LookAndFeelPackage", "org.kde.breeze.mobile"}}}};
 
-// kwinrc
+// plasma-mobile/kwinrc
 QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mobileConfig)
 {
     auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
@@ -72,5 +72,5 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
 const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
 
-//ksmserver
+// plasma-mobile/ksmserver
 const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};
