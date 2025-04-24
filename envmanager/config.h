@@ -72,47 +72,5 @@ QMap<QString, QMap<QString, QVariant>> getKwinrcSettings(KSharedConfig::Ptr m_mo
 const QList<QString> KWIN_EFFECTS = {"blur", "mobiletaskswitcher", "screenedge"};
 const QList<QString> KWIN_SCRIPTS = {"convergentwindows"};
 
-// ksmserver
+//ksmserver
 const QMap<QString, QMap<QString, QVariant>> KSMSERVER_SETTINGS = {{"General", {{"loginMode", "emptySession"}}}};
-
-// kwinrulesrc
-const QList<QString> KWIN_RULES = {"plasma-mobile-desktop", "plasma-mobile-maximized-no-border"};
-
-QMap<QString, QMap<QString, QVariant>> getKwinrulesrcSettings(KSharedConfig::Ptr m_mobileConfig, bool isMobileSession)
-{
-    auto group = KConfigGroup{m_mobileConfig, QStringLiteral("General")};
-    bool convergenceModeEnabled = group.readEntry("convergenceModeEnabled", false);
-
-    if (convergenceModeEnabled || !isMobileSession) {
-        return {{"plasma-mobile-desktop",
-                 {
-                     {"Description", "Desktop windows (controlled by Plasma Mobile)"},
-                     {"maximizehoriz", true},
-                     {"maximizehorizrule", 1},
-                     {"maximizevert", true},
-                     {"maximizevertrule", 1},
-                     {"noborderrule", 2},
-                 }},
-                {"General",
-                 {
-                     {"count", 1},
-                     {"rules", "plasma-mobile-desktop"},
-                 }}};
-    } else {
-        return {{"plasma-mobile-maximized-no-border",
-                 {
-                     {"Description", "Mobile windows (controlled by Plasma Mobile)"},
-                     {"maximizehoriz", true},
-                     {"maximizehorizrule", 2},
-                     {"maximizevert", true},
-                     {"maximizevertrule", 2},
-                     {"noborder", true},
-                     {"noborderrule", 2},
-                 }},
-                {"General",
-                 {
-                     {"count", 1},
-                     {"rules", "plasma-mobile-maximized-no-border"},
-                 }}};
-    }
-}

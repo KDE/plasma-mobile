@@ -28,11 +28,7 @@ private:
     // applies our mobile configuration
     void applyMobileConfiguration();
 
-    void writeKeys(const QString &fileName,
-                   KSharedConfig::Ptr &config,
-                   const QMap<QString, QMap<QString, QVariant>> &settings,
-                   bool overwriteOnlyIfEmpty,
-                   bool saveSettings = true);
+    void writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty);
     void loadKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings);
     void saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value);
     const QString loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write = true);
@@ -47,7 +43,6 @@ private:
     KSharedConfig::Ptr m_appBlacklistConfig;
     KSharedConfig::Ptr m_kdeglobalsConfig;
     KSharedConfig::Ptr m_ksmServerConfig;
-    KSharedConfig::Ptr m_kwinrulesrcConfig;
 
     KConfigWatcher::Ptr m_configWatcher;
 };
