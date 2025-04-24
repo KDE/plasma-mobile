@@ -341,6 +341,7 @@ public Q_SLOTS:
     // from SwipeArea
     void swipeStarted(qreal deltaX, qreal deltaY);
     void swipeEnded();
+    void swipeCancelled();
     void swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY);
 
 private:

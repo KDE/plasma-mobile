@@ -971,6 +971,11 @@ void HomeScreenState::swipeEnded()
     setSwipeState(SwipeState::None);
 }
 
+void HomeScreenState::swipeCancelled()
+{
+    setSwipeState(SwipeState::None);
+}
+
 void HomeScreenState::swipeMoved(qreal totalDeltaX, qreal totalDeltaY, qreal deltaX, qreal deltaY)
 {
     m_movingUp = deltaY > 0;

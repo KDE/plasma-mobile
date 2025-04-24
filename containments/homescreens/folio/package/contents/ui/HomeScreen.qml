@@ -121,6 +121,11 @@ Item {
             homeScreenState.swipeEnded();
         }
         onSwipeMove: (totalDeltaX, totalDeltaY, deltaX, deltaY) => {
+            // cancel swipe when settings component is opening to prevent conflicts
+            if (folio.HomeScreenState.settingsOpenProgress && folio.HomeScreenState.viewState !== Folio.HomeScreenState.SettingsView) {
+                homeScreenState.swipeCancelled();
+                return;
+            }
             homeScreenState.swipeMoved(totalDeltaX, totalDeltaY, deltaX, deltaY);
         }
 
