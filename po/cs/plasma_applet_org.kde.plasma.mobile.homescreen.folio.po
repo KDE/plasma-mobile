@@ -91,7 +91,7 @@ msgstr ""
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "Uzamknout rozvržení"
 
 #: package/contents/ui/settings/SettingsWindow.qml:214
 #, kde-format
