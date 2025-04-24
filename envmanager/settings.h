@@ -28,7 +28,10 @@ private:
     // applies our mobile configuration
     void applyMobileConfiguration();
 
-    void writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty);
+    void writeKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings);
+
+    void
+    writeKeysAndSave(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings, bool overwriteOnlyIfEmpty);
     void loadKeys(const QString &fileName, KSharedConfig::Ptr &config, const QMap<QString, QMap<QString, QVariant>> &settings);
     void saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value);
     const QString loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write = true);
@@ -39,10 +42,13 @@ private:
     bool m_isMobilePlatform;
 
     KSharedConfig::Ptr m_mobileConfig;
-    KSharedConfig::Ptr m_kwinrcConfig;
+    KSharedConfig::Ptr m_kwinrcConfig; // (~/.config/kwinrc-plasma-mobile)
     KSharedConfig::Ptr m_appBlacklistConfig;
     KSharedConfig::Ptr m_kdeglobalsConfig;
     KSharedConfig::Ptr m_ksmServerConfig;
+
+    // For legacy upgrade purposes (~/.config/kwinrc)
+    KSharedConfig::Ptr m_originalKwinrcConfig;
 
     KConfigWatcher::Ptr m_configWatcher;
 };

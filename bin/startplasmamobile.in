@@ -17,6 +17,9 @@ export QT_QUICK_CONTROLS_MOBILE=true
 export PLASMA_INTEGRATION_USE_PORTAL=1
 export PLASMA_PLATFORM=phone:handset
 
+# Set ~/.config/plasma-mobile/... as location for default mobile configs (i.e. envmanager generated)
+export XDG_CONFIG_DIRS="$HOME/.config/plasma-mobile:/etc/xdg:$XDG_CONFIG_DIRS"
+
 # if coredumpd knows about the dumps, make sure drkonqi catches them
 if grep -q '/systemd-coredump' /proc/sys/kernel/core_pattern
 then
