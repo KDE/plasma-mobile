@@ -38,7 +38,7 @@ public:
 RaiseLockscreen::RaiseLockscreen(QObject *parent)
     : QObject{parent}
 {
-    QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, m_window, [this](int, const QString &token) {
+    QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, this, [this](int, const QString &token) {
         qDebug() << "XDG ACTIVATION TOKEN ARRIVED";
         // Activate window over lockscreen once we have activation token
         KWindowSystem::setCurrentXdgActivationToken(token);
