@@ -9,6 +9,8 @@
 
 #include "qqml.h"
 
+class WaylandAboveLockscreen;
+
 class RaiseLockscreen : public QObject
 {
     Q_OBJECT
@@ -34,7 +36,10 @@ Q_SIGNALS:
 
 private:
     void setInitialized(bool initialized);
+    void setOverlay();
+    bool eventFilter(QObject *watched, QEvent *event) override;
 
     bool m_initialized = false;
     QWindow *m_window = nullptr;
+    std::unique_ptr<WaylandAboveLockscreen> m_implementation;
 };
