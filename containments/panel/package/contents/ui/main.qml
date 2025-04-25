@@ -17,6 +17,7 @@ import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
+import org.kde.plasma.private.mobileshell.raiselockscreenplugin as RaiseLockscreenPlugin
 
 import org.kde.taskmanager as TaskManager
 import org.kde.notificationmanager as NotificationManager
@@ -44,7 +45,7 @@ ContainmentItem {
         id: maximizeTimer
         running: false
         interval: 100
-        onTriggered:  root.panel.maximize()
+        onTriggered: root.panel.maximize()
     }
 
     function setWindowProperties() {
@@ -77,14 +78,19 @@ ContainmentItem {
         }
     }
 
+    // Raise panel over the lockscreen when it is enabled
+    RaiseLockscreenPlugin.RaiseLockscreen {
+        id: raiseLockscreen
+        Component.onCompleted: {
+            raiseLockscreen.initializeOverlay(root.Window.window);
+        }
+    }
     Connections {
         target: MobileShellState.LockscreenDBusClient
 
-        // Raise panel over the lockscreen
-        function onLockscreenActiveChanged() {
-            if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
-                Plasmoid.raiseOverlay();
-            }
+        function onLockscreenLocked() {
+            console.log('Raising top panel over the lockscreen');
+            raiseLockscreen.raiseOverlay();
         }
     }
 
@@ -156,9 +162,6 @@ ContainmentItem {
         // Initialize notification popups.
         // Initialize action popup buttons.
         MobileShell.PopupProviderLoader.load();
-
-        // initialize lockscreen overlay
-        Plasmoid.initializeOverlay(Window.window);
     }
 
     MobileShell.StartupFeedbackPanelFill {
