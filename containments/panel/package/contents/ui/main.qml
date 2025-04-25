@@ -89,6 +89,7 @@ ContainmentItem {
 
             raiseLockscreen.initializeOverlay(root.Window.window);
 
+            // Raise panel if lockscreen is already active
             if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
                 raiseLockscreen.raiseOverlay();
             }
@@ -98,6 +99,7 @@ ContainmentItem {
     }
     Connections {
         target: root.Window
+        // Window.window may start out null, we need to wait for it to exist
         function onWindowChanged() {
             console.log('WINDOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW ' + root.Window.window);
             if (root.Window.window && !raiseLockscreen.initialized) {
