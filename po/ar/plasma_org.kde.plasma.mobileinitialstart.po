@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2025-04-21 20:06+0400\n"
+"PO-Revision-Date: 2025-04-24 11:28+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -31,7 +31,7 @@ msgstr "zayed.alsaidi@gmail.com"
 #: main.cpp:21
 #, kde-format
 msgid "Opens the initial start wizard without modifying configuration"
-msgstr ""
+msgstr "يفتح معالج البدء الأولي دون تعديل الضبط"
 
 #: main.cpp:36
 #, kde-format
@@ -46,7 +46,7 @@ msgstr "ديفين لين"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:14
 #, kde-format
 msgid "Edit APN"
-msgstr ""
+msgstr "حرّر اسم نقطة الوصول APN"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:38
 #, kde-format
@@ -54,9 +54,9 @@ msgid "Name"
 msgstr "الاسم"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:43
-#, fuzzy, kde-format
+#, kde-format
 msgid "APN"
-msgstr "APN:"
+msgstr "اسم نقطة الوصول APN"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:48
 #, kde-format
@@ -71,7 +71,7 @@ msgstr "كلمة السّرّ"
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:58
 #, kde-format
 msgid "Network type"
-msgstr ""
+msgstr "نوع الشبكة"
 
 #: modules/cellular/package/contents/ui/EditProfileDialog.qml:59
 #, kde-format
@@ -119,26 +119,28 @@ msgid ""
 "Please configure your APN below for mobile data, further information will be "
 "available with your carrier."
 msgstr ""
+"يرجى ضبط اسم نقطة الوصول (APN) الخاص بك أدناه لبيانات الهاتف المحمول، وسوف "
+"تتوفر المزيد من المعلومات مع شركة الاتصالات الخاصة بك."
 
 #: modules/cellular/package/contents/ui/main.qml:57
 #, kde-format
 msgid "You are connected to the mobile network."
-msgstr ""
+msgstr "أنت متصل بشبكة الهاتف المحمول."
 
 #: modules/cellular/package/contents/ui/main.qml:59
 #, kde-format
 msgid "Please insert a SIM card into your device."
-msgstr ""
+msgstr "الرجاء إدخال شريحة SIM في جهازك."
 
 #: modules/cellular/package/contents/ui/main.qml:61
 #, kde-format
 msgid "Your device does not have a modem available."
-msgstr ""
+msgstr "لا يتوفر مودم لجهازك."
 
 #: modules/cellular/package/contents/ui/main.qml:73
 #, kde-format
 msgid "Mobile Data"
-msgstr ""
+msgstr "بيانات المحمول"
 
 #: modules/cellular/package/contents/ui/main.qml:116
 #, kde-format
@@ -153,7 +155,7 @@ msgstr "احذف"
 #: modules/cellular/package/contents/ui/main.qml:133
 #, kde-format
 msgid "Add APN"
-msgstr ""
+msgstr "أضف اسم نقطة الوصول APN"
 
 #: modules/finished/contents/ui/main.qml:13
 #, kde-format
@@ -163,23 +165,23 @@ msgstr "اكتمل!"
 #: modules/finished/contents/ui/main.qml:25
 #, kde-format
 msgid "Your device is now ready. <br /><br />Enjoy <b>%1</b>!"
-msgstr ""
+msgstr "جهازك جاهز الآن.<br /><br />استمتع <b>%1</b>!"
 
 #: modules/prepare/package/contents/ui/main.qml:17
 #, kde-format
 msgid "Before we get started…"
-msgstr ""
+msgstr "قبل أن نبدأ…"
 
 #: modules/prepare/package/contents/ui/main.qml:49
 #, kde-format
 msgid ""
 "Adjust the screen brightness to be comfortable for the installation process."
-msgstr ""
+msgstr "اضبط سطوع الشاشة لتكون مريحة لعملية التثبيت."
 
 #: modules/prepare/package/contents/ui/main.qml:105
 #, kde-format
 msgid "Adjust the size of elements on the screen."
-msgstr ""
+msgstr "اضبط حجم العناصر على الشاشة."
 
 #: modules/prepare/package/contents/ui/main.qml:116
 #, kde-format
@@ -194,17 +196,17 @@ msgstr "سمة مظلمة"
 #: modules/systemnavigation/contents/ui/main.qml:15
 #, kde-format
 msgid "System Navigation"
-msgstr ""
+msgstr "التنقل في النظام"
 
 #: modules/systemnavigation/contents/ui/main.qml:40
 #, kde-format
 msgid "Choose a method to navigate around the system."
-msgstr ""
+msgstr "اختر طريقة للتنقل في النظام."
 
 #: modules/systemnavigation/contents/ui/main.qml:49
 #, kde-format
 msgid "Gesture navigation"
-msgstr ""
+msgstr "التنقل بالإيماءات"
 
 #: modules/systemnavigation/contents/ui/main.qml:50
 #, kde-format
@@ -212,21 +214,23 @@ msgid ""
 "Swipe up from the bottom to see running applications. Flick to go to the "
 "home screen."
 msgstr ""
+"مرّر للأعلى من الأسفل لرؤية التطبيقات قيد التشغيل. انقر للانتقال إلى الشاشة "
+"الرئيسة."
 
 #: modules/systemnavigation/contents/ui/main.qml:70
 #, kde-format
 msgid "Button navigation"
-msgstr ""
+msgstr "التنقل بالأزرار"
 
 #: modules/systemnavigation/contents/ui/main.qml:71
 #, kde-format
 msgid "Use buttons on a navigation bar to navigate the system."
-msgstr ""
+msgstr "استخدم الأزرار الموجودة على شريط التنقل للتنقل في النظام."
 
 #: modules/systemnavigation/contents/ui/main.qml:93
 #, kde-format
 msgid "This can later be changed in the settings."
-msgstr ""
+msgstr "يمكن تغيير ذلك لاحقًا في الإعدادات."
 
 #: modules/time/package/contents/ui/main.qml:15
 #, kde-format
@@ -236,12 +240,12 @@ msgstr "الوقت والتاريخ"
 #: modules/time/package/contents/ui/main.qml:39
 #, kde-format
 msgid "Select your time zone and preferred time format."
-msgstr ""
+msgstr "حدد منطقتك الزمنية وتنسيق الوقت المفضل لديك."
 
 #: modules/time/package/contents/ui/main.qml:50
 #, kde-format
 msgid "24-Hour Format"
-msgstr ""
+msgstr "تنسيق 24 ساعة"
 
 #: modules/wifi/package/contents/ui/ConnectDialog.qml:57
 #, kde-format
@@ -261,7 +265,7 @@ msgstr "الشبكة"
 #: modules/wifi/package/contents/ui/main.qml:74
 #, kde-format
 msgid "Connect to a WiFi network for network access."
-msgstr ""
+msgstr "الاتصال بشبكة واي فاي للوصول إلى الشبكة."
 
 #: modules/wifi/package/contents/ui/PasswordField.qml:10
 #, kde-format
@@ -271,12 +275,12 @@ msgstr "كلمة السر…"
 #: qml/LandingComponent.qml:104
 #, kde-format
 msgid "Welcome to<br/><b>Plasma Mobile</b>"
-msgstr ""
+msgstr "مرحبًا في<br/><b>بلازما الجوال</b>"
 
 #: qml/LandingComponent.qml:130
 #, kde-format
 msgid "Powered by<br/><b>%1</b>"
-msgstr ""
+msgstr "ممكنة بواسطة<br/><b>%1</b>"
 
 #: qml/LandingComponent.qml:151 qml/Wizard.qml:303
 #, kde-format
@@ -286,7 +290,7 @@ msgstr "التالي"
 #: qml/Main.qml:19
 #, kde-format
 msgid "Initial Start"
-msgstr ""
+msgstr "أول بدء"
 
 #: qml/Wizard.qml:284
 #, kde-format
