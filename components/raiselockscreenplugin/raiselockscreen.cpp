@@ -5,7 +5,7 @@
 
 #include <QQuickItem>
 #include <QWaylandClientExtensionTemplate>
-#include <qpa/qplatformnativeinterface.h>
+#include <qpa/qplatformwindow_p.h>
 
 #include <KWaylandExtras>
 #include <KWindowSystem>
@@ -20,23 +20,11 @@ public:
     {
         initialize();
     }
-
-    bool allowWindow(QWindow *window)
-    {
-        QPlatformNativeInterface *native = qGuiApp->platformNativeInterface();
-        wl_surface *surface = reinterpret_cast<wl_surface *>(native->nativeResourceForWindow(QByteArrayLiteral("surface"), window));
-
-        if (!surface) {
-            return false;
-        }
-
-        allow(surface);
-        return true;
-    }
 };
 
 RaiseLockscreen::RaiseLockscreen(QObject *parent)
     : QObject{parent}
+    , m_implementation(std::make_unique<WaylandAboveLockscreen>())
 {
     QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, this, [this](int, const QString &token) {
         qDebug() << "XDG ACTIVATION TOKEN ARRIVED";
@@ -74,22 +62,61 @@ void RaiseLockscreen::setInitialized(bool initialized)
 
 void RaiseLockscreen::initializeOverlay(QQuickWindow *window)
 {
-    if (!window) {
+    if (!window || window == m_window) {
         return;
     }
-
     setWindow(window);
+    setOverlay();
+    // also re-set the overlay when the compositor gets restarted
+    connect(m_implementation.get(), &WaylandAboveLockscreen::activeChanged, this, &RaiseLockscreen::setOverlay);
+}
 
-    WaylandAboveLockscreen aboveLockscreen;
-    if (!aboveLockscreen.isInitialized()) {
+void RaiseLockscreen::setOverlay()
+{
+    if (!m_implementation->isActive()) {
         setInitialized(false);
+        return;
     }
-
-    if (!aboveLockscreen.allowWindow(m_window)) {
+    auto waylandWindow = m_window->nativeInterface<QNativeInterface::Private::QWaylandWindow>();
+    if (!waylandWindow) {
+        m_window->installEventFilter(this);
         setInitialized(false);
+        return;
     }
+    if (!waylandWindow->surface()) {
+        connect(waylandWindow, &QNativeInterface::Private::QWaylandWindow::surfaceCreated, this, &RaiseLockscreen::setOverlay, Qt::SingleShotConnection);
+        setInitialized(false);
+        return;
+    }
+    // We need to allow the overlay when there's a shell surface, or it gets ignored
+    if (m_window->isExposed()) {
+        m_implementation->allow(waylandWindow->surface());
+        setInitialized(true);
+    } else {
+        setInitialized(false);
+        connect(
+            waylandWindow,
+            &QNativeInterface::Private::QWaylandWindow::surfaceRoleCreated,
+            this,
+            [this, waylandWindow]() {
+                m_implementation->allow(waylandWindow->surface());
+                setInitialized(true);
+            },
+            Qt::SingleShotConnection);
+    }
+}
 
-    setInitialized(true);
+bool RaiseLockscreen::eventFilter(QObject *watched, QEvent *event)
+{
+    auto window = qobject_cast<QQuickWindow *>(watched);
+    if (window && event->type() == QEvent::PlatformSurface) {
+        auto surfaceEvent = static_cast<QPlatformSurfaceEvent *>(event);
+        if (surfaceEvent->surfaceEventType() == QPlatformSurfaceEvent::SurfaceCreated) {
+            m_window->removeEventFilter(this);
+            setOverlay();
+        }
+    }
+    return false;
 }
 
 void RaiseLockscreen::raiseOverlay()
