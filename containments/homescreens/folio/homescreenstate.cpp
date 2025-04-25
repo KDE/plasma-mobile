@@ -57,7 +57,10 @@ void HomeScreenState::init()
         // the animation runs too long to connect to QPropertyAnimation::finished
         // instead just have the end behaviour execute once we are 90% through
         if (m_appDrawerOpenProgress < 0.1) {
-            setViewState(ViewState::PageView);
+            if (m_viewState == ViewState::AppDrawerView) {
+                // confirm view state is still AppDrawerView before setting to prevent oddities
+                setViewState(ViewState::PageView);
+            }
             Q_EMIT appDrawerClosed();
         }
     });
