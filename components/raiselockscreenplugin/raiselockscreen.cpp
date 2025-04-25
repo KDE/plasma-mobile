@@ -72,7 +72,7 @@ void RaiseLockscreen::initializeOverlay(QQuickWindow *window)
         return;
     }
 
-    m_window = window;
+    setWindow(window);
 
     WaylandAboveLockscreen aboveLockscreen;
     if (!aboveLockscreen.isInitialized()) {
@@ -88,12 +88,16 @@ void RaiseLockscreen::initializeOverlay(QQuickWindow *window)
 
 void RaiseLockscreen::raiseOverlay()
 {
-    if (m_window && m_initialized) {
-        KWaylandExtras::requestXdgActivationToken(m_window, 0, QStringLiteral("org.kde.plasmashell.desktop"));
-
-        QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, m_window, [this](int, const QString &token) {
-            KWindowSystem::setCurrentXdgActivationToken(token);
-            KWindowSystem::activateWindow(m_window);
-        });
+    qDebug() << "raiseOverlay: " << m_window << m_initialized;
+    if (!m_window) {
+        return;
     }
+
+    KWaylandExtras::requestXdgActivationToken(m_window, 0, QStringLiteral("org.kde.plasmashell.desktop"));
+
+    QObject::connect(KWaylandExtras::self(), &KWaylandExtras::xdgActivationTokenArrived, m_window, [this](int, const QString &token) {
+        qDebug() << "XDG ACTIVATION TOKEN ARRIVED";
+        KWindowSystem::setCurrentXdgActivationToken(token);
+        KWindowSystem::activateWindow(m_window);
+    });
 }
