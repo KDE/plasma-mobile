@@ -8,6 +8,7 @@
 #include <NetworkManagerQt/Manager>
 #include <NetworkManagerQt/Settings>
 #include <NetworkManagerQt/Utils>
+#include <QDBusReply>
 
 #include <KUser>
 
@@ -197,11 +198,11 @@ void SignalIndicator::refreshProfiles()
     Q_EMIT profileListChanged();
 }
 
-void SignalIndicator::activateProfile(const QString &connectionUni)
+QCoro::Task<void> SignalIndicator::activateProfile(const QString &connectionUni)
 {
     if (!m_nmModem) {
         qWarning() << "Cannot activate profile since there is no NetworkManager modem";
-        return;
+        co_return;
     }
 
     qDebug() << QStringLiteral("Activating profile on modem") << m_nmModem->uni() << QStringLiteral("for connection") << connectionUni << ".";
@@ -220,24 +221,23 @@ void SignalIndicator::activateProfile(const QString &connectionUni)
 
     if (!con) {
         qDebug() << QStringLiteral("Connection") << connectionUni << QStringLiteral("not found.");
-        return;
+        co_return;
     }
 
     // activate connection manually
     // despite the documentation saying otherwise, activateConnection seems to need the DBus path, not uuid of the connection
-    QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::activateConnection(con->path(), m_nmModem->uni(), {});
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::activateConnection(con->path(), m_nmModem->uni(), {});
+    if (!reply.isValid()) {
         qWarning() << QStringLiteral("Error activating connection:") << reply.error().message();
-        return;
+        co_return;
     }
 }
 
-void SignalIndicator::addProfile(const QString &name, const QString &apn, const QString &username, const QString &password, const QString &networkType)
+QCoro::Task<void> SignalIndicator::addProfile(const QString &name, const QString &apn, const QString &username, const QString &password, const QString &networkType)
 {
     if (!m_nmModem) {
         qWarning() << "Cannot add profile since there is no NetworkManager modem";
-        return;
+        co_return;
     }
 
     NetworkManager::ConnectionSettings::Ptr settings{new NetworkManager::ConnectionSettings(NetworkManager::ConnectionSettings::Gsm)};
@@ -255,47 +255,45 @@ void SignalIndicator::addProfile(const QString &name, const QString &apn, const 
 
     gsmSetting->setInitialized(true);
 
-    QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), {});
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusReply<QDBusObjectPath> reply = co_await NetworkManager::addAndActivateConnection(settings->toMap(), m_nmModem->uni(), {});
+    if (!reply.isValid()) {
         qWarning() << "Error adding connection:" << reply.error().message();
     } else {
         qDebug() << "Successfully added a new connection" << name << "with APN" << apn << ".";
     }
 }
 
-void SignalIndicator::removeProfile(const QString &connectionUni)
+QCoro::Task<void> SignalIndicator::removeProfile(const QString &connectionUni)
 {
     NetworkManager::Connection::Ptr con = NetworkManager::findConnectionByUuid(connectionUni);
     if (!con) {
         qWarning() << "Could not find connection" << connectionUni << "to update!";
-        return;
+        co_return;
     }
 
-    QDBusPendingReply reply = con->remove();
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusPendingReply reply = co_await con->remove();
+    if (!reply.isValid()) {
         qWarning() << "Error removing connection" << reply.error().message();
     }
 }
 
-void SignalIndicator::updateProfile(const QString &connectionUni,
-                                    const QString &name,
-                                    const QString &apn,
-                                    const QString &username,
-                                    const QString &password,
-                                    const QString &networkType)
+QCoro::Task<void> SignalIndicator::updateProfile(const QString &connectionUni,
+                                                 const QString &name,
+                                                 const QString &apn,
+                                                 const QString &username,
+                                                 const QString &password,
+                                                 const QString &networkType)
 {
     NetworkManager::Connection::Ptr con = NetworkManager::findConnectionByUuid(connectionUni);
     if (!con) {
         qWarning() << "Could not find connection" << connectionUni << "to update!";
-        return;
+        co_return;
     }
 
     NetworkManager::ConnectionSettings::Ptr conSettings = con->settings();
     if (!conSettings) {
         qWarning() << "Could not find connection settings for" << connectionUni << "to update!";
-        return;
+        co_return;
     }
 
     conSettings->setId(name);
@@ -309,9 +307,8 @@ void SignalIndicator::updateProfile(const QString &connectionUni,
 
     gsmSetting->setInitialized(true);
 
-    QDBusPendingReply reply = con->update(conSettings->toMap());
-    reply.waitForFinished();
-    if (reply.isError()) {
+    QDBusPendingReply reply = co_await con->update(conSettings->toMap());
+    if (!reply.isValid()) {
         qWarning() << "Error updating connection settings for" << connectionUni << ":" << reply.error().message() << ".";
     } else {
         qDebug() << "Successfully updated connection settings" << connectionUni << ".";

@@ -14,6 +14,7 @@ target_link_libraries(ppc-mmqmlplugin PRIVATE
     KF6::NetworkManagerQt
     KF6::CoreAddons
     KF6::I18n
+    QCoro::DBus
 )
 
 
