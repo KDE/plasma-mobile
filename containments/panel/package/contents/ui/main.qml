@@ -32,6 +32,10 @@ ContainmentItem {
     property var panel: null
     onPanelChanged: setWindowProperties()
 
+    LockscreenOverlay {
+        window: root.Window.window
+    }
+
     MobileShell.HapticsEffect {
         id: haptics
     }
@@ -75,44 +79,6 @@ ContainmentItem {
 
         function onAutoHidePanelsEnabled() {
             root.setWindowProperties();
-        }
-    }
-
-    // Raise panel over the lockscreen when it is enabled
-    RaiseLockscreenPlugin.RaiseLockscreen {
-        id: raiseLockscreen
-
-        function initializeLockscreenOverlay() {
-            if (!root.Window.window) {
-                return;
-            }
-
-            raiseLockscreen.initializeOverlay(root.Window.window);
-
-            // Raise panel if lockscreen is already active
-            if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
-                raiseLockscreen.raiseOverlay();
-            }
-        }
-
-        Component.onCompleted: initializeLockscreenOverlay()
-    }
-    Connections {
-        target: root.Window
-        // Window.window may start out null, we need to wait for it to exist
-        function onWindowChanged() {
-            console.log('WINDOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW ' + root.Window.window);
-            if (root.Window.window && !raiseLockscreen.initialized) {
-                raiseLockscreen.initializeOverlay(root.Window.window);
-            }
-        }
-    }
-    Connections {
-        target: MobileShellState.LockscreenDBusClient
-
-        function onLockscreenLocked() {
-            console.log('Raising top panel over the lockscreen');
-            raiseLockscreen.raiseOverlay();
         }
     }
 
