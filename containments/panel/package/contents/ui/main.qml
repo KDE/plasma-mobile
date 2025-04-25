@@ -81,8 +81,28 @@ ContainmentItem {
     // Raise panel over the lockscreen when it is enabled
     RaiseLockscreenPlugin.RaiseLockscreen {
         id: raiseLockscreen
-        Component.onCompleted: {
+
+        function initializeLockscreenOverlay() {
+            if (!root.Window.window) {
+                return;
+            }
+
             raiseLockscreen.initializeOverlay(root.Window.window);
+
+            if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                raiseLockscreen.raiseOverlay();
+            }
+        }
+
+        Component.onCompleted: initializeLockscreenOverlay()
+    }
+    Connections {
+        target: root.Window
+        function onWindowChanged() {
+            console.log('WINDOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW ' + root.Window.window);
+            if (root.Window.window && !raiseLockscreen.initialized) {
+                raiseLockscreen.initializeOverlay(root.Window.window);
+            }
         }
     }
     Connections {
