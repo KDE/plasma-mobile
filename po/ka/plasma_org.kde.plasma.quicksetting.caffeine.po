@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-26 00:44+0000\n"
-"PO-Revision-Date: 2022-12-28 08:32+0100\n"
+"PO-Revision-Date: 2025-04-26 04:49+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.5\n"
 
 #: contents/ui/main.qml:8
 #, kde-format
@@ -34,8 +34,7 @@ msgid "Tap to suspend sleep"
 msgstr "დაატყაპუნეთ აპარატურული ძილის გასათიშად"
 
 #: contents/ui/main.qml:22
-#, fuzzy, kde-format
-#| msgid "Plasma Mobile has enabled system-wide inhibition"
+#, kde-format
 msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "Plasma Mobile-მა მთელი სისტემის კონტროლი აიღო"
