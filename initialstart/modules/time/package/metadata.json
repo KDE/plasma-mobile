@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Time initialstart module for Plasma Mobile",
+        "Description[ar]": "وحدة الإعداد الأولي للوقت لبلازما الجوال",
         "Description[ca@valencia]": "Mòdul de començament inicial de l'hora per a Plasma Mobile",
         "Description[ca]": "Mòdul de començament inicial de l'hora per al Plasma Mobile",
         "Description[de]": "Zeit-Einrichtungsmodul für Plasma Mobile",

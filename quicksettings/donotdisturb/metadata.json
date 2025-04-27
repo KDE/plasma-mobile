@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Quick setting to toggle do not disturb mode for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتبديل وضع عدم الإزعاج لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida per a canviar el mode no destorbar per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida per a canviar el mode no destorbar per al Plasma Mobile",
         "Description[de]": "Schnelleinstellung zum Umschalten des „Bitte nicht stören“-Modus für Plasma Mobile",

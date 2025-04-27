@@ -1,6 +1,7 @@
 {
     "KPlugin": {
         "Description": "Run initial tasks for Plasma Mobile during session startup",
+        "Description[ar]": "شغّل مهام في بدء النظام لبلازما الجوال",
         "Description[ca@valencia]": "Executa les tasques inicials de Plasma Mobile durant l'inici de sessió",
         "Description[ca]": "Executa les tasques inicials del Plasma Mobile durant l'inici de sessió",
         "Description[de]": "Ausführen der ersten Aufgaben für Plasma Mobile während des Starts der Sitzung",
@@ -34,6 +35,7 @@
         "Description[zh_CN]": "会话启动时为 Plasma Mobile 运行初始任务",
         "Description[zh_TW]": "在工作階段啟動時為 Plasma 行動執行初始工作",
         "Name": "Plasma Mobile Start",
+        "Name[ar]": "بدء بلازما الجوال",
         "Name[ca@valencia]": "Inici de Plasma Mobile",
         "Name[ca]": "Inici del Plasma Mobile",
         "Name[cs]": "Spuštění Plasma Mobile",

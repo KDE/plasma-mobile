@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Quick setting to toggle docked mode for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتبديل وضع الإرساء لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida per a canviar el mode acoblat per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida per a canviar el mode acoblat per al Plasma Mobile",
         "Description[de]": "Schnelleinstellung zum Umschalten des angedockten Modus für Plasma Mobile",
@@ -81,6 +82,7 @@
         "Id": "org.kde.plasma.quicksetting.docked",
         "License": "GPL",
         "Name": "Docked Mode",
+        "Name[ar]": "وضع الإرساء",
         "Name[ca@valencia]": "Mode acoblat",
         "Name[ca]": "Mode acoblat",
         "Name[cs]": "Režim v doku",

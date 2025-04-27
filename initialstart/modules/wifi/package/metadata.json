@@ -45,6 +45,7 @@
             }
         ],
         "Description": "WiFi initialstart module for Plasma Mobile",
+        "Description[ar]": "وحدة الإعداد الأولي لشبكة واي فاي لبلازما الجوال",
         "Description[ca@valencia]": "Mòdul de començament inicial de Wi-Fi per a Plasma Mobile",
         "Description[ca]": "Mòdul de començament inicial de Wi-Fi per al Plasma Mobile",
         "Description[de]": "WLAN-Einrichtungsmodul für Plasma Mobile",

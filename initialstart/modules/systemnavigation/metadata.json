@@ -45,6 +45,7 @@
             }
         ],
         "Description": "System navigation initialstart module for Plasma Mobile",
+        "Description[ar]": "وحدة الإعداد الأولي للتنقل في النظام في البلازما الجوال",
         "Description[ca@valencia]": "Mòdul de començament inicial de navegació del sistema per a Plasma Mobile",
         "Description[ca]": "Mòdul de començament inicial de navegació del sistema per al Plasma Mobile",
         "Description[eo]": "Sistemnaviga prakomenca modulo por Plasma Mobile",
@@ -71,6 +72,7 @@
         "Id": "org.kde.plasma.mobileinitialstart.systemnavigation",
         "License": "GPL-2.0+",
         "Name": "System Navigation",
+        "Name[ar]": "التنقل في النظام",
         "Name[ca@valencia]": "Navegueu pel sistema",
         "Name[ca]": "Navegació del sistema",
         "Name[es]": "Navegación del sistema",

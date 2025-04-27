@@ -3,7 +3,7 @@
         "Authors": [
             {
                 "Name": "Bhushan Shah",
-                "Name[ar]": "Bhushan Shah",
+                "Name[ar]": "بوشان شاه",
                 "Name[ast]": "Bhushan Shah",
                 "Name[az]": "Bhushan Shah",
                 "Name[ca@valencia]": "Bhushan Shah",
@@ -44,6 +44,7 @@
             }
         ],
         "Description": "On-Screen Keyboard configuration",
+        "Description[ar]": "ضبط لوحة المفاتيح على الشاشة",
         "Description[ca@valencia]": "Configureu el teclat en pantalla",
         "Description[ca]": "Configuració del teclat en pantalla",
         "Description[cs]": "Nastavení klávesnice na obrazovce",
@@ -86,6 +87,7 @@
         "Icon": "input-keyboard",
         "License": "GPL",
         "Name": "On-Screen Keyboard",
+        "Name[ar]": "لوحة المفاتيح على الشّاشة",
         "Name[ca@valencia]": "Teclat en pantalla",
         "Name[ca]": "Teclat en pantalla",
         "Name[cs]": "Klávesnice na obrazovce",
@@ -124,6 +126,7 @@
         "Website": "https://plasma-mobile.org"
     },
     "X-KDE-Keywords": "onscreen,osk,virtualkeyboard,keyboard",
+    "X-KDE-Keywords[ar]": "على الشاشة,لوحة المفاتيح الافتراضية,لوحة المفاتيح",
     "X-KDE-Keywords[ca@valencia]": "en pantalla,osk,teclat virtual,teclat",
     "X-KDE-Keywords[ca]": "en pantalla,osk,teclat virtual,teclat",
     "X-KDE-Keywords[en_GB]": "onscreen,osk,virtualkeyboard,keyboard",

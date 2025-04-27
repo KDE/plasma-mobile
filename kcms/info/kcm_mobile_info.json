@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Software Versions",
+        "Description[ar]": "إصدارات البرمجيات",
         "Description[ca@valencia]": "Versions de programari",
         "Description[ca]": "Versions de programari",
         "Description[cs]": "Verze softwaru",
@@ -83,6 +84,7 @@
         "Name[zh_TW]": "通知"
     },
     "X-KDE-Keywords": "info, distro, system",
+    "X-KDE-Keywords[ar]": "معلومات,توزيعة,نظام",
     "X-KDE-Keywords[ca@valencia]": "informació,distribució,sistema",
     "X-KDE-Keywords[ca]": "informació,distribució,sistema",
     "X-KDE-Keywords[cs]": "informace, distribuce, systém",
