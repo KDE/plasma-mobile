@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2023-05-07 20:42+0400\n"
+"PO-Revision-Date: 2025-04-26 12:12+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/ui/main.qml:18
 #, kde-format
@@ -31,7 +32,7 @@ msgstr "عامّ"
 #: package/contents/ui/VibrationForm.qml:35
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "اهتزازات الصدفة"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
@@ -41,42 +42,42 @@ msgstr "التّحريكات"
 #: package/contents/ui/main.qml:50
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
+msgstr "إذا كان هذا متوقفًا، فستقلل الرسوم المتحركة قدر الإمكان."
 
 #: package/contents/ui/main.qml:69
 #, kde-format
 msgid "Navigation Panel"
-msgstr ""
+msgstr "لوحة التنقل"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "وضع الإيماءات فقط"
 
 #: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr ""
+msgstr "ما إذا كنت تريد إخفاء لوحة التنقل أم لا."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Task Switcher"
-msgstr ""
+msgstr "مبدّل المهام"
 
 #: package/contents/ui/main.qml:98
 #, kde-format
 msgid "Show Application Previews"
-msgstr ""
+msgstr "اعرض معاينات التطبيق"
 
 #: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Turning this off may help improve performance."
-msgstr ""
+msgstr "قد يساعد إيقاف تشغيل هذا في تحسين الأداء."
 
 #: package/contents/ui/main.qml:119
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "دُرج الإجراءات"
 
 #: package/contents/ui/main.qml:124
 #: package/contents/ui/QuickSettingsForm.qml:17
@@ -89,87 +90,87 @@ msgstr "إعدادات سريعة"
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "وضع المثبت"
 
 #: package/contents/ui/main.qml:131
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "وضع الموسّع"
 
 #: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "وضع الدرج الأيسر العلوي"
 
 #: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "الوضع عند الفتح من أعلى اليسار."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "وضع الدرج العلوي الأيمن"
 
 #: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "الوضع عند الفتح من أعلى اليمين."
 
 #: package/contents/ui/QuickSettingsForm.qml:35
 #, kde-format
 msgid "Customize the order of quick settings in the pull-down panel."
-msgstr ""
+msgstr "خصّص ترتيب الإعدادات السريعة في اللوحة المنسدلة."
 
 #: package/contents/ui/VibrationForm.qml:36
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "ما إذا كان يجب تمكين الاهتزازات."
 
 #: package/contents/ui/VibrationForm.qml:49
 #, kde-format
 msgid "Vibration Intensity"
-msgstr ""
+msgstr "شدة الاهتزاز"
 
 #: package/contents/ui/VibrationForm.qml:50
 #, kde-format
 msgid "How intense shell vibrations should be."
-msgstr ""
+msgstr "مدى شدة الاهتزازات."
 
 #: package/contents/ui/VibrationForm.qml:52
 #, kde-format
 msgctxt "Low intensity"
 msgid "Low"
-msgstr ""
+msgstr "منخفض"
 
 #: package/contents/ui/VibrationForm.qml:53
 #, kde-format
 msgctxt "Medium intensity"
 msgid "Medium"
-msgstr ""
+msgstr "متوسط"
 
 #: package/contents/ui/VibrationForm.qml:54
 #, kde-format
 msgctxt "High intensity"
 msgid "High"
-msgstr ""
+msgstr "عالي"
 
 #: package/contents/ui/VibrationForm.qml:80
 #, kde-format
 msgid "Vibration Duration"
-msgstr ""
+msgstr "مدة الاهتزاز"
 
 #: package/contents/ui/VibrationForm.qml:81
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "كم من الوقت يجب أن تكون الاهتزازات."
 
 #: package/contents/ui/VibrationForm.qml:83
 #, kde-format
 msgctxt "Long duration"
 msgid "Long"
-msgstr ""
+msgstr "طويل"
 
 #: package/contents/ui/VibrationForm.qml:84
 #, kde-format
@@ -189,3 +190,4 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"يُتحكم في اهتزازات لوحة المفاتيح بشكل منفصل في وحدة إعدادات لوحة المفاتيح."
