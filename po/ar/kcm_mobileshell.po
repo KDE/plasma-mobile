@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
+# SPDX-FileCopyrightText: 2023, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-26 00:41+0000\n"
-"PO-Revision-Date: 2023-05-07 20:42+0400\n"
+"PO-Revision-Date: 2025-04-26 12:12+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -30,7 +31,7 @@ msgstr "عامّ"
 #: ui/main.qml:33 ui/VibrationForm.qml:18 ui/VibrationForm.qml:25
 #, kde-format
 msgid "Shell Vibrations"
-msgstr ""
+msgstr "اهتزازات الصدفة"
 
 #: ui/main.qml:41
 #, kde-format
@@ -40,105 +41,105 @@ msgstr "التّحريكات"
 #: ui/main.qml:42
 #, kde-format
 msgid "If this is off, animations will be reduced as much as possible."
-msgstr ""
+msgstr "إذا كان هذا متوقفًا، فستقلل الرسوم المتحركة قدر الإمكان."
 
 #: ui/main.qml:53
 #, kde-format
 msgid "Status Bar"
-msgstr ""
+msgstr "شريط الحالة"
 
 #: ui/main.qml:59
 #, kde-format
 msgid "Date in status bar"
-msgstr ""
+msgstr "التاريخ في شريط الحالة"
 
 #: ui/main.qml:60
 #, kde-format
 msgid "If on, date will be shown next to the clock in the status bar."
-msgstr ""
+msgstr "إذا كان يعمل، فسيُعرض التاريخ بجوار الساعة في شريط الحالة."
 
 #: ui/main.qml:74
 #, kde-format
 msgctxt "Status bar height"
 msgid "Tiny"
-msgstr ""
+msgstr "ضئيل"
 
 #: ui/main.qml:75
 #, kde-format
 msgctxt "Status bar height"
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 #: ui/main.qml:76
 #, kde-format
 msgctxt "Status bar height"
 msgid "Normal"
-msgstr ""
+msgstr "عادي"
 
 #: ui/main.qml:77
 #, kde-format
 msgctxt "Status bar height"
 msgid "Large"
-msgstr ""
+msgstr "كبير"
 
 #: ui/main.qml:78
 #, kde-format
 msgctxt "Status bar height"
 msgid "Very Large"
-msgstr ""
+msgstr "كبير جدًّا"
 
 #: ui/main.qml:81
 #, kde-format
 msgid "Status Bar Size"
-msgstr ""
+msgstr "حجم شريط الحالة"
 
 #: ui/main.qml:82
 #, kde-format
 msgid "Size of the top panel (needs restart)."
-msgstr ""
+msgstr "حجم اللوحة العلوية (تحتاج إعادة التشغيل)."
 
 #: ui/main.qml:109
 #, kde-format
 msgid "Navigation Panel"
-msgstr ""
+msgstr "لوحة التنقل"
 
 #: ui/main.qml:115
 #, kde-format
 msgid "Gesture-only Mode"
-msgstr ""
+msgstr "وضع الإيماءات فقط"
 
 #: ui/main.qml:116
 #, kde-format
 msgid "Whether to hide the navigation panel."
-msgstr ""
+msgstr "ما إذا كنت تريد إخفاء لوحة التنقل أم لا."
 
 #: ui/main.qml:130
 #, kde-format
 msgid "Always show keyboard toggle"
-msgstr ""
+msgstr "دائما أظهر تبديل لوحة المفاتيح"
 
 #: ui/main.qml:131
 #, kde-format
 msgid ""
 "Whether to always show the keyboard toggle button on the navigation panel."
-msgstr ""
+msgstr "ما إذا كان يجب إظهار زر تبديل لوحة المفاتيح دائمًا على لوحة التنقل."
 
 #: ui/main.qml:142
 #, kde-format
 msgid "Action Drawer"
-msgstr ""
+msgstr "دُرج الإجراءات"
 
 #: ui/main.qml:148
 #, kde-format
 msgctxt "Pinned action drawer mode"
 msgid "Pinned Mode"
-msgstr ""
+msgstr "وضع المثبت"
 
 #: ui/main.qml:149
 #, kde-format
 msgctxt "Expanded action drawer mode"
 msgid "Expanded Mode"
-msgstr ""
+msgstr "وضع الموسّع"
 
 #: ui/main.qml:153 ui/QuickSettingsForm.qml:18 ui/QuickSettingsForm.qml:71
 #, kde-format
@@ -148,68 +149,68 @@ msgstr "إعدادات سريعة"
 #: ui/main.qml:161
 #, kde-format
 msgid "Top Left Drawer Mode"
-msgstr ""
+msgstr "وضع الدرج الأيسر العلوي"
 
 #: ui/main.qml:162
 #, kde-format
 msgid "Mode when opening from the top left."
-msgstr ""
+msgstr "الوضع عند الفتح من أعلى اليسار."
 
 #: ui/main.qml:187
 #, kde-format
 msgid "Top Right Drawer Mode"
-msgstr ""
+msgstr "وضع الدرج العلوي الأيمن"
 
 #: ui/main.qml:188
 #, kde-format
 msgid "Mode when opening from the top right."
-msgstr ""
+msgstr "الوضع عند الفتح من أعلى اليمين."
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Hide"
-msgstr ""
+msgstr "أخفِ"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr ""
+msgstr "أظهر"
 
 #: ui/QuickSettingsForm.qml:76
 #, kde-format
 msgid ""
 "Customize the order of quick settings in the pull-down panel and hide them."
-msgstr ""
+msgstr "خصّص ترتيب الإعدادات السريعة في اللوحة المنسدلة وإخفائها."
 
 #: ui/QuickSettingsForm.qml:99
 #, kde-format
 msgid "Disabled Quick Settings"
-msgstr ""
+msgstr "الإعدادات السريعة المعطلة"
 
 #: ui/QuickSettingsForm.qml:104
 #, kde-format
 msgid "Re-enable previously disabled quick settings."
-msgstr ""
+msgstr "أعد تمكين الإعدادات السريعة المعطلة سابقًا."
 
 #: ui/VibrationForm.qml:26
 #, kde-format
 msgid "Whether to have vibrations enabled in the shell."
-msgstr ""
+msgstr "ما إذا كان يجب تمكين الاهتزازات."
 
 #: ui/VibrationForm.qml:39
 #, kde-format
 msgid "Vibration Duration"
-msgstr ""
+msgstr "مدة الاهتزاز"
 
 #: ui/VibrationForm.qml:40
 #, kde-format
 msgid "How long shell vibrations should be."
-msgstr ""
+msgstr "كم من الوقت يجب أن تكون الاهتزازات."
 
 #: ui/VibrationForm.qml:42
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Long duration"
 msgid "Long"
 msgstr "طويل"
@@ -232,6 +233,7 @@ msgid ""
 "Keyboard vibrations are controlled separately in the keyboard settings "
 "module."
 msgstr ""
+"يُتحكم في اهتزازات لوحة المفاتيح بشكل منفصل في وحدة إعدادات لوحة المفاتيح."
 
 #~ msgctxt "Low intensity"
 #~ msgid "Low"
