@@ -41,6 +41,7 @@
         ],
         "Category": "System Information",
         "Description": "Configure the system shell",
+        "Description[ar]": "اضبط صدفة النظام",
         "Description[az]": "Sistem üz qabığını tənzimləyin",
         "Description[ca@valencia]": "Configura l'intèrpret d'ordres del sistema",
         "Description[ca]": "Configura l'intèrpret d'ordres del sistema",
@@ -124,6 +125,7 @@
         "Website": "https://plasma-mobile.org/"
     },
     "X-KDE-Keywords": "system,shell,panel",
+    "X-KDE-Keywords[ar]": "نظام,صدفة,لوحة",
     "X-KDE-Keywords[az]": "sistem,örtük,panel",
     "X-KDE-Keywords[ca@valencia]": "sistema,intèrpret d'ordres,quadro",
     "X-KDE-Keywords[ca]": "sistema,intèrpret d'ordres,plafó",

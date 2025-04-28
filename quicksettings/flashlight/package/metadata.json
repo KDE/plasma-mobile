@@ -40,6 +40,7 @@
             }
         ],
         "Description": "Flashlight quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع للكشاف لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del llum de flaix per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del llum de flaix per al Plasma Mobile",
         "Description[de]": "Taschenlampen-Schnelleinstellung für Plasma Mobile",
@@ -73,7 +74,7 @@
         "Id": "org.kde.plasma.quicksetting.flashlight",
         "License": "GPL-2.0+",
         "Name": "Flashlight",
-        "Name[ar]": "مشعل كهربائي",
+        "Name[ar]": "كشاف",
         "Name[az]": "Fənər",
         "Name[ca@valencia]": "Llum de flaix",
         "Name[ca]": "Llum de flaix",

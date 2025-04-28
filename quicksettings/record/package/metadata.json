@@ -39,6 +39,7 @@
             }
         ],
         "Description": "Screen recording quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتسجيل الشاشة لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de la gravació de pantalla per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de l'enregistrament de pantalla per al Plasma Mobile",
         "Description[de]": "Bildschirmaufnahme-Schnelleinstellung für Plasma Mobile",
@@ -72,6 +73,7 @@
         "Id": "org.kde.plasma.quicksetting.record",
         "License": "GPL-2.0+",
         "Name": "Record Screen",
+        "Name[ar]": "سجّل الشاشة",
         "Name[ca@valencia]": "Grava la pantalla",
         "Name[ca]": "Enregistra la pantalla",
         "Name[cs]": "Nahrávat obrazovku",

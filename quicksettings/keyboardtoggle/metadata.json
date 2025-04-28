@@ -40,6 +40,7 @@
             }
         ],
         "Description": "Quick setting for keyboard toggle for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتبديل لوحة المفاتيح لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del canvi de teclat per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del canvi de teclat per al Plasma Mobile",
         "Description[de]": "Schnelleinstellung für das Umschalten der Tastatur für Plasma Mobile",
@@ -73,6 +74,7 @@
         "Id": "org.kde.plasma.quicksetting.keyboardtoggle",
         "License": "GPL",
         "Name": "Virtual Keyboard Toggle",
+        "Name[ar]": "تبديل لوحة المفاتيح الافتراضية",
         "Name[az]": "Virtual klaviatura keçidi",
         "Name[ca@valencia]": "Commutació del teclat virtual",
         "Name[ca]": "Commutació del teclat virtual",

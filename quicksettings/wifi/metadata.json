@@ -40,6 +40,7 @@
             }
         ],
         "Description": "Wi-Fi quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لشبكة واي فاي لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de la Wi-Fi per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la Wi-Fi per al Plasma Mobile",
         "Description[cs]": "Rychlé nastavení WiFi pro mobilní telefony",

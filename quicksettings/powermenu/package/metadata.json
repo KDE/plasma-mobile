@@ -40,6 +40,7 @@
             }
         ],
         "Description": "Power menu quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لقائمة الطاقة لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del menú d'iniciada per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del menú d'engegada per al Plasma Mobile",
         "Description[de]": "Energie-Schnelleinstellung für Plasma Mobile",
@@ -73,6 +74,7 @@
         "Id": "org.kde.plasma.quicksetting.powermenu",
         "License": "GPL",
         "Name": "Power Menu",
+        "Name[ar]": "قائمة الطاقة",
         "Name[az]": "Güc menyusu",
         "Name[ca@valencia]": "Menú d'iniciada",
         "Name[ca]": "Menú d'engegada",

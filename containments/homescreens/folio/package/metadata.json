@@ -41,6 +41,7 @@
         ],
         "Category": "Containments",
         "Description": "Mobile homescreen with a focus on customizability.",
+        "Description[ar]": "شاشة رئيسة للجوال مع التركيز على قابلية التخصيص.",
         "Description[ca@valencia]": "Pantalla d'inici del mòbil enfocada a la personalització.",
         "Description[ca]": "Pantalla d'inici del mòbil enfocada a la personalització.",
         "Description[de]": "Startbildschirm für Mobilgeräte mit dem Schwerpunkt auf Anpassbarkeit.",
