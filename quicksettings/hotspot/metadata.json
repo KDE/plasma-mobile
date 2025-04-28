@@ -5,6 +5,7 @@
             {
                 "Email": "skilvingr@gmail.com",
                 "Name": "Yari Polla",
+                "Name[ar]": "ياري بولا",
                 "Name[ca@valencia]": "Yari Polla",
                 "Name[ca]": "Yari Polla",
                 "Name[cs]": "Yari Polla",
@@ -40,6 +41,7 @@
             }
         ],
         "Description": "Hotspot quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع للنقطة الفعالة لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del punt d'accés per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del punt d'accés per al Plasma Mobile",
         "Description[cs]": "Rychlé nastavení Plasma pro mobilní telefony",

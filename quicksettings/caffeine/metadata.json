@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Quick setting to suspend system sleep for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتعليق نوم النظام لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida per a suspendre el repòs del sistema per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida per a suspendre el repòs del sistema per al Plasma Mobile",
         "Description[de]": "Schnelleinstellung zum Aussetzen des Standby-Modus für Plasma Mobile",

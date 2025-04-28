@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Configure power management settings",
+        "Description[ar]": "اضبط إعدادات إدارة الطاقة",
         "Description[ca@valencia]": "Configureu els paràmetres de gestió de l'energia",
         "Description[ca]": "Configuració dels paràmetres de gestió d'energia",
         "Description[cs]": "Konfigurace nastavení správy napájení",
@@ -82,6 +83,7 @@
         "Name[zh_TW]": "電源"
     },
     "X-KDE-Keywords": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",
+    "X-KDE-Keywords[ar]": "فيديو، شاشة, رسومات, مهلة زمنية, وضع السكون, قفل, قفل الشاشة, شاشة التوقف",
     "X-KDE-Keywords[ca@valencia]": "vídeo,monitor,gràfics,temps d'espera,dormir,bloqueig,bloqueig de la pantalla,estil de la pantalla",
     "X-KDE-Keywords[ca]": "vídeo,monitor,gràfics,temps d'espera,dormir,bloqueig,bloqueig de pantalla,estil de pantalla",
     "X-KDE-Keywords[en_GB]": "video, monitor, graphics, timeout, sleep, lock, screenlocker, screensaver",

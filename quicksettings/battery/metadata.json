@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Battery quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع للبطارية لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de la bateria per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la bateria per al Plasma Mobile",
         "Description[de]": "Akku-Schnelleinstellung für Plasma Mobile",

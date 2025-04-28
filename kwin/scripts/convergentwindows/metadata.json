@@ -5,6 +5,7 @@
             {
                 "Email": "plata.hill@kdemail.net",
                 "Name": "Plata Hill",
+                "Name[ar]": "بلاتا هيل",
                 "Name[ca@valencia]": "Plata Hill",
                 "Name[ca]": "Plata Hill",
                 "Name[cs]": "Plata Hill",
@@ -41,6 +42,7 @@
             }
         ],
         "Description": "Removes window decorations and maximizes windows on the first screen only.",
+        "Description[ar]": "يزيل زخارف النوافذ ويكبر النوافذ على الشاشة الأولى فقط.",
         "Description[ca@valencia]": "Elimina les decoracions de les finestres i maximitza les finestres només en la primera pantalla.",
         "Description[ca]": "Elimina les decoracions de les finestres i maximitza les finestres només en la primera pantalla.",
         "Description[cs]": "Odstraní dekorace oken a maximalizuje je pouze na první obrazovce.",
@@ -77,6 +79,7 @@
         "Id": "convergentwindows",
         "License": "LGPL-2.1-or-later",
         "Name": "Convergent Windows",
+        "Name[ar]": "نوافذ متقاربة",
         "Name[ca@valencia]": "Finestres convergents",
         "Name[ca]": "Finestres convergents",
         "Name[de]": "Konvergente Fenster",

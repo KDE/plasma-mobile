@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Finished initialstart module for Plasma Mobile",
+        "Description[ar]": "وحدة إنهاء الإعدادات الأولية لبلازما الجوال",
         "Description[ca@valencia]": "Mòdul de començament inicial finalitzat per a Plasma Mobile",
         "Description[ca]": "Mòdul de començament inicial finalitzat per al Plasma Mobile",
         "Description[de]": "Einrichtungsmodul für Plasma Mobile abgeschlossen",

@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Settings application quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لإعدادات التطبيقات لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de la configuració general per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la configuració general per al Plasma Mobile",
         "Description[cs]": "Rychlá nastavení aplikací pro Plasma Mobile",
@@ -84,7 +85,7 @@
         "Id": "org.kde.plasma.quicksetting.settingsapp",
         "License": "GPL-2.0+",
         "Name": "Settings",
-        "Name[ar]": "الإعدادات",
+        "Name[ar]": "إعدادات",
         "Name[ast]": "Configuración",
         "Name[az]": "Ayarlar",
         "Name[ca@valencia]": "Configuració",

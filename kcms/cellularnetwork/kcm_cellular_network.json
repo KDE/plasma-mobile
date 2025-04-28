@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Management of cellular networks",
+        "Description[ar]": "إدارة الشبكات الخلوية",
         "Description[ca@valencia]": "Gestió de xarxes de telefonia mòbil",
         "Description[ca]": "Gestió de xarxes de telefonia mòbil",
         "Description[cs]": "Spravovat vaše mobilní sítě",
@@ -81,6 +82,7 @@
         "Name[zh_TW]": "行動網路"
     },
     "X-KDE-Keywords": "mobile,data,network",
+    "X-KDE-Keywords[ar]": "جوال,بيانات,شبكة",
     "X-KDE-Keywords[ca@valencia]": "mòbil,dades,xarxa",
     "X-KDE-Keywords[ca]": "mòbil,dades,xarxa",
     "X-KDE-Keywords[cs]": "mobilní,data,síť",

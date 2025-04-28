@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Screen rotation quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لتدوير الشاشة لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del gir de pantalla per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del gir de pantalla per al Plasma Mobile",
         "Description[de]": "Bildschirmdrehung-Schnelleinstellung für Plasma Mobile",
@@ -83,6 +84,7 @@
         "Id": "org.kde.plasma.quicksetting.screenrotation",
         "License": "GPL-2.0+",
         "Name": "Screen rotation",
+        "Name[ar]": "دوران الشاشة",
         "Name[az]": "Ekran dönməsi",
         "Name[ca@valencia]": "Gir de la pantalla",
         "Name[ca]": "Gir de la pantalla",

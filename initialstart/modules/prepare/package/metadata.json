@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Prepare initialstart module for Plasma Mobile",
+        "Description[ar]": "وحدة تحضير الإعداد الأولي للبلازما للبلازما",
         "Description[ca@valencia]": "Mòdul de començament inicial de preparació per a Plasma Mobile",
         "Description[ca]": "Mòdul de començament inicial de preparació per al Plasma Mobile",
         "Description[de]": "Einrichtungsmodul für Plasma Mobile vorbereiten",
@@ -80,6 +81,7 @@
         "Id": "org.kde.plasma.mobileinitialstart.prepare",
         "License": "GPL-2.0+",
         "Name": "Prepare",
+        "Name[ar]": "حضّر",
         "Name[ca@valencia]": "Preparació",
         "Name[ca]": "Preparació",
         "Name[cs]": "Připravit",

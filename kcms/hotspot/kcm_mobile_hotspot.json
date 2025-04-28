@@ -41,6 +41,7 @@
         ],
         "Category": "System Information",
         "Description": "Wi-Fi Hotspot",
+        "Description[ar]": "نقاط فعالة لواي فاي",
         "Description[ca@valencia]": "Punt d'accés Wi-Fi",
         "Description[ca]": "Punt d'accés Wi-Fi",
         "Description[cs]": "Hotspot WiFi",

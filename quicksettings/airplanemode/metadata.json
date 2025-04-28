@@ -5,7 +5,7 @@
             {
                 "Email": "bshah@kde.org",
                 "Name": "Bhushan Shah",
-                "Name[ar]": "Bhushan Shah",
+                "Name[ar]": "بوشان شاه",
                 "Name[ast]": "Bhushan Shah",
                 "Name[az]": "Bhushan Shah",
                 "Name[ca@valencia]": "Bhushan Shah",
@@ -46,6 +46,7 @@
             }
         ],
         "Description": "Airplane mode quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع لوضع الطائرة لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del mode avió per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del mode avió per al Plasma Mobile",
         "Description[de]": "Flugzeugmodus-Schnelleinstellung für Plasma Mobile",

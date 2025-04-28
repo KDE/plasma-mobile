@@ -45,6 +45,7 @@
             }
         ],
         "Description": "Location quick setting for Plasma Mobile",
+        "Description[ar]": "إعداد سريع للموقع لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida de la ubicació per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida de la ubicació per al Plasma Mobile",
         "Description[de]": "Standort-Schnelleinstellung für Plasma Mobile",
@@ -83,6 +84,7 @@
         "Id": "org.kde.plasma.quicksetting.mobiledata",
         "License": "GPL-2.0+",
         "Name": "Mobile Data",
+        "Name[ar]": "بيانات المحمول",
         "Name[az]": "Mobil internet",
         "Name[ca@valencia]": "Dades mòbils",
         "Name[ca]": "Dades mòbils",

@@ -2,6 +2,7 @@
     "Categories": "Qt;KDE;X-KDE-settings-system;",
     "KPlugin": {
         "Description": "Timezone, Date Display",
+        "Description[ar]": "المنطقة الزمنية,عرض التاريخ",
         "Description[ca@valencia]": "Zona horària, Mostra la data",
         "Description[ca]": "Zona horària, Mostra la data",
         "Description[cs]": "Zobrazení data a časového pásma",
@@ -83,6 +84,7 @@
         "Name[zh_TW]": "時間與日期"
     },
     "X-KDE-Keywords": "theme, look, feel",
+    "X-KDE-Keywords[ar]": "سمة,منظر,شكل",
     "X-KDE-Keywords[ca@valencia]": "tema,aspecte,comportament",
     "X-KDE-Keywords[ca]": "tema,aspecte,comportament",
     "X-KDE-Keywords[cs]": "motiv,vzhled,chování",
