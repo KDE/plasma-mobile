@@ -121,16 +121,16 @@ Window {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
+                        properties: "offset"; easing.type: Easing.OutQuint; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                     PropertyAnimation {
-                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
+                        properties: "scale"; easing.type: Easing.OutQuint; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                     PropertyAnimation {
-                        properties: "opacity"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
+                        properties: "opacity"; easing.type: Easing.OutQuint; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                     PropertyAnimation {
-                        properties: "color"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
+                        properties: "color"; easing.type: Easing.OutQuint; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                 }
                 ScriptAction {

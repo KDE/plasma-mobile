@@ -74,6 +74,14 @@ Window {
         value: popupDrawerOpened
     }
 
+    // hide on timeout to give time to finish animations
+    Timer {
+        id: hideTimeout
+        interval: Kirigami.Units.veryLongDuration * 1.5
+        repeat: false
+        onTriggered: if (notifications.count == 0) notificationPopupManager.visible = false;
+    }
+
     // Update the window touch region to encapsulate the notification area or the whole screen depending on the 'popupDrawerOpened' state
     function updateTouchArea() {
         ShellUtil.setInputTransparent(notificationPopupManager, false);
@@ -166,7 +174,7 @@ Window {
                 onCountChanged: {
                     if (count == 0) {
                         ShellUtil.setInputTransparent(notificationPopupManager, true);
-                        notificationPopupManager.visible = false;
+                        hideTimeout.restart();
                         notificationPopupManager.popupDrawerOpened = false;
                         fullHeight = 0;
                         return;

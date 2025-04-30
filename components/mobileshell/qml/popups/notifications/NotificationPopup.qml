@@ -33,6 +33,9 @@ Item {
     property real aboveNotificationFullOffset: 0
     property int aboveNotificationHeight: 0
 
+    // set to true when notification is swiped up by user
+    property bool closedWithSwipe: false
+
     // the drag offset on the current popup notification - used to position notification when stacked underneath
     property real currentDragOffset: {
         let current = popupNotifications.currentPopupIndex == notificationPopup.popupIndex;
@@ -257,7 +260,7 @@ Item {
         if (notificationPopup.popupDrawerOpened && notificationItem.state != "inDrawerClosed" && notificationItem.state != "open") {
             notificationItem.offset = openOffset;
             notificationItem.scale = 0.75;
-            notificationItem.opacity = 0.0;
+            notificationItem.popupOpacity = 0.0;
         }
         notificationItem.state = "inDrawerClosed";
         notificationPopup.removeKeyboardFocus();
@@ -268,7 +271,7 @@ Item {
         if (notificationPopup.popupDrawerOpened && notificationItem.state != "open" && notificationItem.state != "inDrawerClosed") {
             notificationItem.offset = openOffset;
             notificationItem.scale = 0.75;
-            notificationItem.opacity = 0.0;
+            notificationItem.popupOpacity = 0.0;
         }
         notificationItem.state = "open";
         notificationPopup.removeKeyboardFocus();
@@ -353,29 +356,53 @@ Item {
 
         property real offset: closedOffset
         property real scale: 1.0
-        property real drawerScale: 1 - Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1) * 0.075
+        property real popupOpacity: 1.0 // controls the opacity of the notification popup when outside the popup drawer
+        property real drawerScale: {
+            if (notificationPopup.popupDrawerOpened) {
+                return 0; // when popup drawer is opened, reset scale to 0
+            }
+            let index = notificationPopup.popupIndex - popupNotifications.currentPopupIndex;
+            // clamp the index value to avoid scaling too much with animations
+            let indexClamped = Math.max(Math.min(index, 2), 0);
+            return indexClamped * 0.075;
+        }
+        property real drawerAddedOffset: {
+            if (notificationPopup.popupDrawerOpened) {
+                return 0; // when popup drawer is opened, reset any added height to 0
+            }
+            let index = notificationPopup.popupIndex - popupNotifications.currentPopupIndex;
+            // clamp the index value to avoid moving too much with animations
+            let indexClamped = Math.max(Math.min(index, 2), -1);
+            return Kirigami.Units.gridUnit * 0.5 * indexClamped;
+        }
+        property real drawerOpacity: {
+            let index = notificationPopup.popupIndex - popupNotifications.currentPopupIndex;
+            if (index > 2 && !notificationPopup.popupDrawerOpened) {
+                return 0; // make this popup invisible if it is below 3 other popups
+            } else {
+                return 1; // when popup drawer is opened, reset opacity to 1
+            }
+        }
         Behavior on drawerScale {
             NumberAnimation {
-                duration: Kirigami.Units.veryLongDuration
-                easing.type: Easing.OutExpo
+                duration: Kirigami.Units.veryLongDuration * 1.25
+                easing.type: Easing.OutQuint
             }
         }
-        property real drawerAddedOffset: Kirigami.Units.gridUnit * 0.5 * Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1)
         Behavior on drawerAddedOffset {
             NumberAnimation {
-                duration: Kirigami.Units.veryLongDuration
-                easing.type: Easing.OutExpo
+                duration: Kirigami.Units.veryLongDuration * 1.25
+                easing.type: Easing.OutQuint
             }
         }
-        property real drawerOpacity: (Math.max(Math.min(notificationPopup.popupIndex - popupNotifications.currentPopupIndex, 3), 1) > 2) ? 0 : 1
         Behavior on drawerOpacity {
             NumberAnimation {
-                duration: Kirigami.Units.veryLongDuration
-                easing.type: Easing.OutExpo
+                duration: Kirigami.Units.veryLongDuration * 1.25
+                easing.type: Easing.OutQuint
             }
         }
 
-        opacity: 1.0
+        opacity: Math.min(popupOpacity, drawerOpacity)
 
         state: ""
 
@@ -389,7 +416,7 @@ Item {
                     target: notificationItem; scale: 1.0
                 }
                 PropertyChanges {
-                    target: notificationItem; opacity: 1.0
+                    target: notificationItem; popupOpacity: 1.0
                 }
             },
             State {
@@ -401,7 +428,7 @@ Item {
                     target: notificationItem; scale: 1.0
                 }
                 PropertyChanges {
-                    target: notificationItem; opacity: 1.0
+                    target: notificationItem; popupOpacity: 1.0
                 }
             },
             State {
@@ -413,47 +440,88 @@ Item {
                     target: notificationItem; scale: 0.75
                 }
                 PropertyChanges {
-                    target: notificationItem; opacity: 0.0
+                    target: notificationItem; popupOpacity: 0.0
                 }
             },
             State {
                 name: "inDrawerClosed"
                 PropertyChanges {
-                    target: notificationItem; offset: notificationPopup.openOffset + (notificationPopup.popupDrawerOpened ? 0 : drawerAddedOffset)
+                    target: notificationItem; offset: notificationPopup.openOffset
                 }
                 PropertyChanges {
-                    target: notificationItem; scale: notificationPopup.popupDrawerOpened ? 1 : drawerScale
+                    target: notificationItem; scale: 1
                 }
                 PropertyChanges {
-                    target: notificationItem; opacity: notificationPopup.popupDrawerOpened ? 1 : drawerOpacity
+                    target: notificationItem; popupOpacity: 1
                 }
             }
         ]
+
+        readonly property int notificationEasing: {
+            // check whether the popup is the current one or above it
+            let topPopup = popupNotifications.currentPopupIndex >= notificationPopup.popupIndex;
+            // check whether the popup has any popups below it
+            let popupBelow = notificationPopup.popupCount - notificationPopup.popupIndex > 1;
+            let popupOpening = notificationItem.state == "open" || notificationItem.state == "inDrawerClosed";
+            let popupClosing = notificationItem.state == "closeWithMove" || notificationItem.state == "closeWithScale"
+            if (notificationPopup.closedWithSwipe || (topPopup && popupClosing && popupBelow)) {
+                // set the easing type to linear when closed with a swipe or if a popup is below when closing
+                // as to make sure the popup feels like it is keeping it's momentum
+                return Easing.Linear;
+            } else if (popupOpening) {
+                // set the easing type to 'Out' when opening so the popup will have a gentle landing
+                return Easing.OutQuint;
+            } else {
+                // if above conditions fail, set the easing type to 'In' so the popup will build up speed for it's exit
+                return Easing.InQuint;
+            }
+        }
+
+        readonly property real notificationDuration: {
+            // check whether the popup is the current one or above it
+            let topPopup = popupNotifications.currentPopupIndex >= notificationPopup.popupIndex;
+            // check whether the popup has any popups below it
+            let popupBelow = notificationPopup.popupCount - notificationPopup.popupIndex > 1;
+            let popupClosing = notificationItem.state == "closeWithMove" || notificationItem.state == "closeWithScale"
+            if (notificationPopup.closedWithSwipe || (topPopup && popupClosing && popupBelow)) {
+                // make sure the speed it faster when closed with a swipe or if there is a popup below when closing
+                // as to make sure the speed feels comparable with the easing type is set to linear
+                return Kirigami.Units.veryLongDuration * 0.5;
+            } else {
+                return Kirigami.Units.veryLongDuration * 1.25;
+            }
+        }
 
         transitions: Transition {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.5
+                        properties: "offset"
+                        easing.type: notificationItem.notificationEasing
+                        duration: notificationItem.notificationDuration
                     }
                     PropertyAnimation {
-                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.5
+                        properties: "scale"
+                        easing.type: notificationItem.notificationEasing
+                        duration: notificationItem.notificationDuration
                     }
                     PropertyAnimation {
-                        properties: "opacity"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.5
+                        properties: "popupOpacity"
+                        easing.type: notificationItem.notificationEasing
+                        duration: notificationItem.notificationDuration
                     }
                 }
                 ScriptAction {
                     script: {
                         if (notificationItem.state == "open") {
-                            preventDismissTimeout = false;
+                            notificationPopup.preventDismissTimeout = false;
                             notificationPopup.updateTouchArea();
                         } else if (notificationItem.state == "closeWithMove" || notificationItem.state == "closeWithScale") {
-                            preventDismissTimeout = true;
-                            if (dismissTimeout) {
+                            notificationPopup.preventDismissTimeout = true;
+                            if (notificationPopup.dismissTimeout) {
                                 notificationPopup.dismissClicked();
-                            } else if (!isActionDrawerOpen) {
-                               notificationPopup.expired();
+                            } else if (!notificationPopup.isActionDrawerOpen) {
+                                notificationPopup.expired();
                             }
                         }
                     }
@@ -465,15 +533,15 @@ Item {
             Scale {
                 origin.x: Math.round(notificationPopup.popupWidth / 2)
                 origin.y: notificationPopup.scaleOriginY
-                xScale: notificationItem.scale
-                yScale: notificationItem.scale
+                xScale: notificationItem.scale - notificationItem.drawerScale
+                yScale: notificationItem.scale - notificationItem.drawerScale
             }
         ]
     }
 
     transform: [
         Translate {
-            y: notificationItem.offset + notificationPopup.fullOffsetAn + notificationPopup.dragOffset + notificationPopup.currentDragOffset
+            y: notificationItem.offset + notificationPopup.fullOffsetAn + notificationPopup.dragOffset + notificationPopup.currentDragOffset + notificationItem.drawerAddedOffset
         }
     ]
 
@@ -506,12 +574,14 @@ Item {
             startActive = active;
             notificationPopup.preventDismissTimeout = true;
             if (!active && !(notificationItem.state == "closeWithScale" || notificationItem.state == "closeWithMove")) {
-                dragOffsetAn.running = true;
                 if ((lastOffset - notificationPopup.dragOffset > 1.0 && notificationPopup.dragOffset < 0) || (-(notificationPopup.openOffset - notificationPopup.closedOffset) / 4 > notificationPopup.dragOffset)) {
                     // this code is called when the notifition is swiped or draged to the top.
+                    notificationPopup.closedWithSwipe = true;
                     notificationPopup.closePopup(popupIndex);
                     return;
-                } else if (notificationPopup.dragOffset - lastOffset > 1.0 || Kirigami.Units.gridUnit * 3 < notificationPopup.dragOffset) {
+                }
+                dragOffsetAn.running = true;
+                if (notificationPopup.dragOffset - lastOffset > 1.0 || Kirigami.Units.gridUnit * 3 < notificationPopup.dragOffset) {
                     // this code is called when the notifition is swiped or draged down.
                 }
                 notificationPopup.preventDismissTimeout = (keyboardInteractivity == LayerShell.Window.KeyboardInteractivityOnDemand);

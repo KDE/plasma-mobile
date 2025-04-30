@@ -23,17 +23,16 @@ Window {
     id: window
 
     width: osd.width + 6
-    height: cards.implicitHeight + 6
+    height: cards.implicitHeight + 6 + cards.openOffset
+
+    onWidthChanged: if (visible) window.updateTouchRegion()
 
     visible: false
-
-    readonly property real offsetMargins: Math.max(cards.offset, 0)
 
     LayerShell.Window.scope: "overlay"
     LayerShell.Window.anchors: LayerShell.Window.AnchorTop
     LayerShell.Window.layer: LayerShell.Window.LayerOverlay
     LayerShell.Window.exclusionZone: -1
-    LayerShell.Window.margins.top: offsetMargins
     LayerShell.Window.keyboardInteractivity: LayerShell.Window.KeyboardInteractivityNone
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
@@ -51,10 +50,11 @@ Window {
     }
 
     function open() {
+        // set window input transparency to allow touches to pass through while the opening animation is playing
+        ShellUtil.setInputTransparent(window, true);
+
         window.visible = true;
         cards.state = "open";
-        // set window input transparency to accept touches
-        ShellUtil.setInputTransparent(window, false);
     }
 
     function close() {
@@ -63,12 +63,16 @@ Window {
         ShellUtil.setInputTransparent(window, true);
     }
 
+    function updateTouchRegion() {
+        ShellUtil.setInputRegion(window, Qt.rect(0, cards.openOffset, window.width, cards.implicitHeight + 6));
+    }
+
     Timer {
         id: hideTimer
         interval: 2000
         running: false
         onTriggered: {
-           window.close();
+            window.close();
         }
     }
 
@@ -87,7 +91,6 @@ Window {
         readonly property real closedOffset: -(cards.implicitHeight + Kirigami.Units.smallSpacing)
         readonly property real openOffset: Kirigami.Units.gridUnit + Kirigami.Units.smallSpacing * 3
         property real offset: closedOffset
-        property real scale: 0.95
 
         state: "closed"
 
@@ -97,17 +100,11 @@ Window {
                 PropertyChanges {
                     target: cards; offset: openOffset
                 }
-                PropertyChanges {
-                    target: cards; scale: 1.0
-                }
             },
             State {
                 name: "closed"
                 PropertyChanges {
                     target: cards; offset: closedOffset
-                }
-                PropertyChanges {
-                    target: cards; scale: 0.95
                 }
             }
         ]
@@ -116,16 +113,16 @@ Window {
             SequentialAnimation {
                 ParallelAnimation {
                     PropertyAnimation {
-                        properties: "offset"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
-                    }
-                    PropertyAnimation {
-                        properties: "scale"; easing.type: Easing.OutExpo; duration: Kirigami.Units.veryLongDuration * 1.25
+                        properties: "offset"; easing.type: cards.state == "open" ? Easing.OutQuint : Easing.InQuint; duration: Kirigami.Units.veryLongDuration * 1.25
                     }
                 }
                 ScriptAction {
                     script: {
                         if (cards.state == "open") {
                             hideTimer.restart();
+                            // set window input transparency to accept touches
+                            ShellUtil.setInputTransparent(window, false);
+                            window.updateTouchRegion();
                         } else {
                             hideTimer.stop();
                             window.visible = false;
@@ -142,13 +139,7 @@ Window {
 
             transform: [
                 Translate {
-                    y: cards.offset - window.offsetMargins + 1
-                },
-                Scale {
-                    origin.x: Math.round(width / 2)
-                    origin.y: Math.round(height / 2)
-                    xScale: cards.scale
-                    yScale: cards.scale
+                    y: cards.offset + 1
                 }
             ]
 
