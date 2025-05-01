@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-24 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2024-11-13 10:33+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -108,13 +108,13 @@ msgid "Show additional options for %1"
 msgstr "Mostra les opcions addicionals per a %1"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
 #, kde-format
 msgid "Unmute"
 msgstr "Activa el so"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
 #, kde-format
 msgid "Mute"
 msgstr "Silenci"
@@ -153,7 +153,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "No s'ha trobat el nom del flux"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:261
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
 #, kde-format
 msgid "configure audio streams"
 msgstr "configuració dels fluxos d'àudio"

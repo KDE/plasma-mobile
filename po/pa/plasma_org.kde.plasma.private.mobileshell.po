@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-24 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2023-04-01 19:29-0700\n"
 "Last-Translator: A S Alam <aalam@satluj.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -106,13 +106,13 @@ msgid "Show additional options for %1"
 msgstr "%1 ਲਈ ਹੋਰ ਚੋਣਾਂ ਵੇਖਾਓ"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
 #, kde-format
 msgid "Unmute"
 msgstr "ਨਾ-ਚੁੱਪ"
 
 #: qml/popups/volumeosd/ListItemBase.qml:137
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:166
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:157
 #, kde-format
 msgid "Mute"
 msgstr "ਚੁੱਪ"
@@ -151,7 +151,7 @@ msgstr "%1: %2"
 msgid "Stream name not found"
 msgstr "ਸਟਰੀਮ ਦਾ ਨਾਂ ਨਹੀਂ ਲੱਭਿਆ"
 
-#: qml/popups/volumeosd/VolumeChangedPopup.qml:261
+#: qml/popups/volumeosd/VolumeChangedPopup.qml:252
 #, fuzzy, kde-format
 #| msgid "Toggle showing audio streams"
 msgid "configure audio streams"
