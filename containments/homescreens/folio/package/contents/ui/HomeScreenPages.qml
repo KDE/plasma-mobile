@@ -6,6 +6,7 @@ import QtQuick.Window
 import QtQuick.Layouts
 
 import org.kde.plasma.components 3.0 as PC3
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.kirigami 2.10 as Kirigami
 import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 
@@ -18,7 +19,14 @@ MouseArea {
     readonly property real verticalMargin: Math.round((folio.HomeScreenState.pageHeight - folio.HomeScreenState.pageContentHeight) / 2)
     readonly property real horizontalMargin: Math.round((folio.HomeScreenState.pageWidth - folio.HomeScreenState.pageContentWidth) / 2)
 
-    onPressAndHold: folio.HomeScreenState.openSettingsView()
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
+    onPressAndHold: {
+        folio.HomeScreenState.openSettingsView()
+        haptics.buttonVibrate();
+    }
 
     Repeater {
         model: folio.PageListModel

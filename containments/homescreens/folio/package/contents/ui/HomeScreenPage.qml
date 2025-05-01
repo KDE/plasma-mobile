@@ -24,6 +24,10 @@ Item {
     property var pageModel
     property var homeScreen
 
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
     // background when in settings view (for rearranging pages)
     Rectangle {
         id: settingsViewBackground
@@ -189,6 +193,7 @@ Item {
                         );
 
                         contextMenu.open();
+                        haptics.buttonVibrate();
                     }
                     onPressAndHoldReleased: {
                         // cancel the event if the delegate is not dragged
@@ -272,6 +277,7 @@ Item {
                         );
 
                         contextMenu.open();
+                        haptics.buttonVibrate();
                     }
 
                     onPressAndHoldReleased: {
@@ -349,6 +355,7 @@ Item {
                         );
 
                         widgetConfig.startOpen();
+                        haptics.buttonVibrate();
                     }
 
                     onPressReleased: {

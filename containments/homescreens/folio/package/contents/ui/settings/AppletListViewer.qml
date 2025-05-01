@@ -30,6 +30,10 @@ MouseArea {
     Kirigami.Theme.inherit: false
     Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
 
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
     Rectangle {
         anchors.fill: parent
         color: Qt.rgba(0, 0, 0, 0.7)
@@ -119,6 +123,7 @@ MouseArea {
             onPressAndHold: {
                 root.requestClose();
                 folio.HomeScreenState.closeSettingsView();
+                haptics.buttonVibrate();
 
                 let mappedCoords = root.homeScreen.prepareStartDelegateDrag(null, delegate, true);
                 const widthOffset = folio.HomeScreenState.pageCellWidth / 2;

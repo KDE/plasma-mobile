@@ -26,6 +26,10 @@ Folio.DelegateTouchArea {
 
     property Folio.FolioApplicationFolder folder: folio.HomeScreenState.currentFolder
 
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
     onClicked: close();
 
     function close() {
@@ -260,6 +264,7 @@ Folio.DelegateTouchArea {
                                     );
 
                                     contextMenu.open();
+                                    haptics.buttonVibrate();
                                 }
 
                                 onPressAndHoldReleased: {

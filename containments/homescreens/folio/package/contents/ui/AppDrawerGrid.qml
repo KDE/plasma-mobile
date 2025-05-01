@@ -78,6 +78,10 @@ MobileShell.GridView {
         id: velocityCalculator
     }
 
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
+
     model: folio.ApplicationListSearchModel
 
     delegate: AppDelegate {
@@ -96,6 +100,7 @@ MobileShell.GridView {
 
             const mappedCoords = root.homeScreen.prepareStartDelegateDrag(model.delegate, appDelegate.delegateItem, true);
             folio.HomeScreenState.closeAppDrawer();
+            haptics.buttonVibrate();
 
             // we need to adjust because app drawer delegates have a different size than regular homescreen delegates
             const centerX = mappedCoords.x + root.cellWidth / 2;

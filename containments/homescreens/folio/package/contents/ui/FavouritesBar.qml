@@ -22,7 +22,14 @@ MouseArea {
 
     signal delegateDragRequested(var item)
 
-    onPressAndHold: folio.HomeScreenState.openSettingsView()
+    onPressAndHold: {
+        folio.HomeScreenState.openSettingsView();
+        haptics.buttonVibrate();
+    }
+
+    MobileShell.HapticsEffect {
+        id: haptics
+    }
 
     Repeater {
         id: repeater
@@ -121,6 +128,7 @@ MouseArea {
                         );
 
                         contextMenu.open();
+                        haptics.buttonVibrate();
                     }
 
                     onPressAndHoldReleased: {
@@ -196,6 +204,7 @@ MouseArea {
                         );
 
                         contextMenu.open();
+                        haptics.buttonVibrate();
                     }
 
                     onPressAndHoldReleased: {
