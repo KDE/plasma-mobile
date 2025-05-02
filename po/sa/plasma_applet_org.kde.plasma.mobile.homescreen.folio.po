@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-22 00:42+0000\n"
+"POT-Creation-Date: 2025-05-02 00:43+0000\n"
 "PO-Revision-Date: 2024-12-25 19:40+0530\n"
 "Last-Translator: kali <shreekantkalwar@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -30,16 +30,16 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "अनुप्रयोगाः अन्वेषणं कुर्वन्तु..."
 
-#: package/contents/ui/FavouritesBar.qml:154
-#: package/contents/ui/FavouritesBar.qml:229
-#: package/contents/ui/FolderView.qml:293
-#: package/contents/ui/HomeScreenPage.qml:221
-#: package/contents/ui/HomeScreenPage.qml:305
+#: package/contents/ui/FavouritesBar.qml:162
+#: package/contents/ui/FavouritesBar.qml:238
+#: package/contents/ui/FolderView.qml:298
+#: package/contents/ui/HomeScreenPage.qml:226
+#: package/contents/ui/HomeScreenPage.qml:311
 #, kde-format
 msgid "Remove"
 msgstr "अपाकरोति"
 
-#: package/contents/ui/settings/AppletListViewer.qml:58
+#: package/contents/ui/settings/AppletListViewer.qml:62
 #, kde-format
 msgid "Widgets"
 msgstr "विजेट्"

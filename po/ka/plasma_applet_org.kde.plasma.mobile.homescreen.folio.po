@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-22 00:42+0000\n"
+"POT-Creation-Date: 2025-05-02 00:43+0000\n"
 "PO-Revision-Date: 2025-04-22 04:55+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -29,16 +29,16 @@ msgctxt "@info:placeholder"
 msgid "Search applications…"
 msgstr "აპლიკაციების ძებნა…"
 
-#: package/contents/ui/FavouritesBar.qml:154
-#: package/contents/ui/FavouritesBar.qml:229
-#: package/contents/ui/FolderView.qml:293
-#: package/contents/ui/HomeScreenPage.qml:221
-#: package/contents/ui/HomeScreenPage.qml:305
+#: package/contents/ui/FavouritesBar.qml:162
+#: package/contents/ui/FavouritesBar.qml:238
+#: package/contents/ui/FolderView.qml:298
+#: package/contents/ui/HomeScreenPage.qml:226
+#: package/contents/ui/HomeScreenPage.qml:311
 #, kde-format
 msgid "Remove"
 msgstr "წაშლა"
 
-#: package/contents/ui/settings/AppletListViewer.qml:58
+#: package/contents/ui/settings/AppletListViewer.qml:62
 #, kde-format
 msgid "Widgets"
 msgstr "ვიჯეტები"
