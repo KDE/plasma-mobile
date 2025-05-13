@@ -34,8 +34,7 @@ msgid "Tap to suspend sleep"
 msgstr "点击以暂停息屏"
 
 #: contents/ui/main.qml:22
-#, fuzzy, kde-format
-#| msgid "Plasma Mobile has enabled system-wide inhibition"
+#, kde-format
 msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "Plasma 已为系统全局启用了暂停息屏"

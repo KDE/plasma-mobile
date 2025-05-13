@@ -91,7 +91,7 @@ msgstr "收藏栏图标显示标签"
 #: package/contents/ui/settings/SettingsWindow.qml:201
 #, kde-format
 msgid "Lock layout"
-msgstr ""
+msgstr "锁定布局"
 
 #: package/contents/ui/settings/SettingsWindow.qml:214
 #, kde-format
