@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# SPDX-FileCopyrightText: 2023, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2024-11-07 17:20+0200\n"
+"PO-Revision-Date: 2025-04-08 08:24+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: ui/main.qml:18
 #, kde-format
 msgid "Shell"
-msgstr "Kuori"
+msgstr "Komentotulkki"
 
 #: ui/main.qml:27
 #, kde-format
@@ -74,12 +74,12 @@ msgstr "Jos käytössä, tilarivillä kellon vieressä näytetään päiväys."
 #: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Akkuvirta"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Näytä tilarivillä akkuvirta."
 
 #: ui/main.qml:102
 #, kde-format
@@ -193,37 +193,37 @@ msgstr "Tila avattaessa yläoikealta."
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Lukitusnäytön pikakuvakkeet"
 
 #: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Ei mitään"
 
 #: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Taskulamppu"
 
 #: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Vasen painike"
 
 #: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Oikea painike"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
