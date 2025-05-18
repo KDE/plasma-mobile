@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-03-19 13:29+0100\n"
+"PO-Revision-Date: 2025-05-17 13:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Desmarque isto para reducir as animacións ao mínimo."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Agochar os paneis automaticamente"
 
 #: ui/main.qml:56
 #, kde-format
@@ -189,9 +189,7 @@ msgid "Mode when opening from the top right."
 msgstr "Modo de abertura desde a parte superior dereita."
 
 #: ui/main.qml:220
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Lock Screen Shortcuts"
+#, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
 msgstr "Bloquear os atallos de pantalla"
