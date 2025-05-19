@@ -1,16 +1,16 @@
 # Translation for plasma_org.kde.plasma.quicksetting.caffeine.po to Euskara/Basque (eu).
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-26 00:44+0000\n"
-"PO-Revision-Date: 2023-01-04 18:10+0100\n"
+"PO-Revision-Date: 2025-05-18 15:27+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: contents/ui/main.qml:8
 #, kde-format
@@ -36,8 +36,7 @@ msgid "Tap to suspend sleep"
 msgstr "Egin tak loa eteteko"
 
 #: contents/ui/main.qml:22
-#, fuzzy, kde-format
-#| msgid "Plasma Mobile has enabled system-wide inhibition"
+#, kde-format
 msgctxt "@info"
 msgid "Plasma Mobile has enabled system-wide inhibition"
 msgstr "Plasma Mugikorrak sistema osoko inhibizioa gaitu du"
