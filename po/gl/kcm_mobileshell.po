@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-05-17 13:28+0200\n"
+"PO-Revision-Date: 2025-05-19 10:23+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -53,6 +53,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Se se activa, os paneis de estado e de navegación agocharanse "
+"automaticamente para permitir ás aplicacións ocupar toda a pantalla."
 
 #: ui/main.qml:67
 #, kde-format
@@ -72,12 +74,12 @@ msgstr "Se se activa, a data amosarase canda o reloxo na barra de estado."
 #: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Porcentaxe de batería"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Amosar a porcentaxe de batería na barra de estado."
 
 #: ui/main.qml:102
 #, kde-format
