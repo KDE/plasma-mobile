@@ -45,7 +45,7 @@ Dependencies:
 * Milou (for search)
 * Kirigami
 * Kirigami Addons
-* hfd-service (optional: for vibrations)
+* feedbackd (optional: for vibrations)
 
 To start the shell in a window, run:
 
