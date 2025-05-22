@@ -158,7 +158,6 @@ Item {
                     notificationsModel.invokeAction(notificationsModel.index(modelIndex, 0), actionName,  NotificationManager.Close); // notification closes
                 }
             }
-            expire();
         }
 
         if (notificationItem.requestToInvoke) {
