@@ -52,9 +52,9 @@ msgstr "Espereu…"
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording"
-msgstr "Gravació de pantalla nova"
+msgstr "Gravació nova de la pantalla"
 
 #: package/contents/ui/main.qml:49
 #, kde-format
 msgid "New Screen Recording saved in %1"
-msgstr "S'ha guardat la gravació de pantalla nova a %1"
+msgstr "S'ha guardat la gravació nova de la pantalla a %1"
