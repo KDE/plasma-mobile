@@ -1,15 +1,15 @@
 # Spanish translations for kcm_mobile_time.po package.
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_time\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-16 00:42+0000\n"
-"PO-Revision-Date: 2023-12-19 17:44+0100\n"
+"PO-Revision-Date: 2025-05-26 01:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -2979,59 +2979,3 @@ msgstr "AM"
 #, kde-format
 msgid "PM"
 msgstr "PM"
-
-#~ msgid "Jan"
-#~ msgstr "ene"
-
-#~ msgid "Feb"
-#~ msgstr "feb"
-
-#~ msgid "Mar"
-#~ msgstr "mar"
-
-#~ msgid "Apr"
-#~ msgstr "abr"
-
-#~ msgid "May"
-#~ msgstr "may"
-
-#~ msgid "Jun"
-#~ msgstr "jun"
-
-#~ msgid "Jul"
-#~ msgstr "jul"
-
-#~ msgid "Aug"
-#~ msgstr "ago"
-
-#~ msgid "Sep"
-#~ msgstr "sep"
-
-#~ msgid "Oct"
-#~ msgstr "oct"
-
-#~ msgid "Nov"
-#~ msgstr "nov"
-
-#~ msgid "Dec"
-#~ msgstr "dic"
-
-#~ msgid "Pick System Date"
-#~ msgstr "Seleccionar fecha del sistema"
-
-#~ msgctxt "This means \"Local Timezone\""
-#~ msgid "Local"
-#~ msgstr "Local"
-
-#~ msgid "Your system time zone"
-#~ msgstr "La zona horaria de su sistema"
-
-#~ msgid "Current Time"
-#~ msgstr "Hora actual"
-
-#~ msgid "Date"
-#~ msgstr "Fecha"
-
-#~ msgctxt "@action:button"
-#~ msgid "Close"
-#~ msgstr "Cerrar"

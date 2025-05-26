@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.quicksetting.nightcolor.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+#
+# SPDX-FileCopyrightText: 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: plasma_org.kde.plasma.quicksetting.nightcolor\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-28 01:41+0000\n"
-"PO-Revision-Date: 2022-12-21 01:31+0100\n"
+"PO-Revision-Date: 2025-05-26 01:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"

@@ -1,15 +1,15 @@
-# Spanish translations for mobileinitialstart.po package.
-# Copyright (C) 2023 This file is copyright:
+# Spanish translations for plasma_org.kde.plasma.mobileinitialstart.po package.
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2023.
+#
 # SPDX-FileCopyrightText: 2023, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: mobileinitialstart\n"
+"Project-Id-Version: plasma_org.kde.plasma.mobileinitialstart\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-08 00:45+0000\n"
-"PO-Revision-Date: 2025-03-07 17:03+0100\n"
+"PO-Revision-Date: 2025-05-26 01:08+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"

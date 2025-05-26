@@ -1,15 +1,15 @@
 # Spanish translations for kcm_mobile_info.po package.
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_info\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-15 00:42+0000\n"
-"PO-Revision-Date: 2023-09-22 12:46+0200\n"
+"PO-Revision-Date: 2025-05-26 01:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -106,6 +106,3 @@ msgstr "%1 de RAM"
 msgctxt "Unknown amount of RAM"
 msgid "Unknown"
 msgstr "Desconocida"
-
-#~ msgid "Copy to clipboard"
-#~ msgstr "Copiar en el portapapeles"

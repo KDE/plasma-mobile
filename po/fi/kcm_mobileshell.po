@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-04-08 08:24+0300\n"
+"PO-Revision-Date: 2025-05-25 10:13+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Piilota paneelit automaattisesti"
 
 #: ui/main.qml:56
 #, kde-format
@@ -55,6 +55,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Kun on aktiivinen, tila- ja navigointipaneelit piilotetaan automaattisesti, "
+"jolloin sovellukset saavat koko näytön käyttöönsä."
 
 #: ui/main.qml:67
 #, kde-format
