@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.private.mobileshell.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: plasma_org.kde.plasma.private.mobileshell\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2024-11-13 14:13+0100\n"
+"PO-Revision-Date: 2025-05-26 01:04+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -27,7 +27,7 @@ msgstr "Abrir con %1"
 #: notifications/notificationfileinfo.cpp:173
 #, kde-format
 msgid "Open with…"
-msgstr "Abrir con..."
+msgstr "Abrir con…"
 
 #: notifications/notificationfilemenu.cpp:109
 #: qml/widgets/notifications/NotificationJobItem.qml:217
@@ -172,12 +172,12 @@ msgstr "%1%"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: qml/widgets/krunner/KRunnerWidget.qml:181
 #, kde-format
 msgid "Search…"
-msgstr "Buscar..."
+msgstr "Buscar…"
 
 #: qml/widgets/mediacontrols/MediaControlsWidget.qml:195
 #, kde-format
@@ -314,7 +314,7 @@ msgstr "Cancelar"
 #: qml/widgets/notifications/ThumbnailStrip.qml:134
 #, kde-format
 msgid "More Options…"
-msgstr "Más opciones..."
+msgstr "Más opciones…"
 
 #: qml/widgets/notifications/NotificationJobItem.qml:209
 #, kde-format
@@ -325,7 +325,7 @@ msgstr "Abrir"
 #, kde-format
 msgctxt "Text field placeholder"
 msgid "Type a reply…"
-msgstr "Escriba una respuesta..."
+msgstr "Escriba una respuesta…"
 
 #: qml/widgets/notifications/NotificationReplyField.qml:55
 #, kde-format
@@ -411,22 +411,3 @@ msgstr "Mostrar menos"
 msgctxt "Expand to show n more notifications"
 msgid "Show %1 More"
 msgstr "Mostrar %1 más"
-
-#~ msgid "100%"
-#~ msgstr "100%"
-
-#~ msgctxt "Percentage value"
-#~ msgid "%1%"
-#~ msgstr "%1%"
-
-#~ msgid "Audio Settings"
-#~ msgstr "Preferencias de sonido"
-
-#~ msgid "Audio"
-#~ msgstr "Sonido"
-
-#~ msgid "Increase Volume"
-#~ msgstr "Aumentar el volumen"
-
-#~ msgid "Decrease Volume"
-#~ msgstr "Disminuir el volumen"

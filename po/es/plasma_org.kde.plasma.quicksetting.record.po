@@ -1,15 +1,15 @@
 # Spanish translations for plasma_org.kde.plasma.quicksetting.record.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+#
+# SPDX-FileCopyrightText: 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_org\n"
+"Project-Id-Version: plasma_org.kde.plasma.quicksetting.record\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-07-03 00:40+0000\n"
-"PO-Revision-Date: 2022-12-21 01:32+0100\n"
+"PO-Revision-Date: 2025-05-26 01:06+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -27,12 +27,12 @@ msgstr "Grabar la pantalla"
 #: package/contents/ui/main.qml:19
 #, kde-format
 msgid "Recording…"
-msgstr "Grabando..."
+msgstr "Grabando…"
 
 #: package/contents/ui/main.qml:21
 #, kde-format
 msgid "Writing…"
-msgstr "Escribiendo..."
+msgstr "Escribiendo…"
 
 #: package/contents/ui/main.qml:25
 #, kde-format
@@ -42,12 +42,12 @@ msgstr "Toque para empezar a grabar"
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Screen is being captured…"
-msgstr "Se está capturando la pantalla..."
+msgstr "Se está capturando la pantalla…"
 
 #: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Please wait…"
-msgstr "Espere..."
+msgstr "Espere…"
 
 #: package/contents/ui/main.qml:49
 #, kde-format

@@ -1,15 +1,15 @@
 # Spanish translations for kcm_mobile_virtualkeyboard.po package.
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2025 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
-#
 # Automatically generated, 2023.
-# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kcm_mobile_virtualkeyboard\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-03 01:37+0000\n"
-"PO-Revision-Date: 2023-09-22 12:49+0200\n"
+"PO-Revision-Date: 2025-05-26 01:03+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -37,7 +37,7 @@ msgstr "Teclado en pantalla"
 #: ui/main.qml:33
 #, kde-format
 msgid "Type anything here…"
-msgstr "Escriba algo aquí..."
+msgstr "Escriba algo aquí…"
 
 #: ui/main.qml:38
 #, kde-format
