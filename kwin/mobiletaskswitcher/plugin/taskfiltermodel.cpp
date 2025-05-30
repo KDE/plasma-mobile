@@ -6,6 +6,7 @@
 
 // KWin
 #include <activities.h>
+#include <config-kwin.h>
 #include <core/output.h>
 #include <core/outputbackend.h>
 #include <virtualdesktops.h>
@@ -77,11 +78,13 @@ bool TaskFilterModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceP
         return false;
     }
 
+#if KWIN_BUILD_ACTIVITIES 
     // Filter by same activity
     auto activity = Workspace::self()->activities()->current();
     if (!window->isOnActivity(activity)) {
         return false;
     }
+#endif
 
     // Filter by same desktop
     auto desktop = VirtualDesktopManager::self()->currentDesktop();
