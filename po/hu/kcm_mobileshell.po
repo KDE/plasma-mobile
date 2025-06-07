@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-01-26 21:24+0100\n"
+"PO-Revision-Date: 2025-06-06 22:40+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Ha ki van kapcsolva, az animációk a lehető legjobban lecsökkennek."
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "Panelek automatikus elrejtése"
 
 #: ui/main.qml:56
 #, kde-format
@@ -53,6 +53,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"Ha aktív, az állapotsáv és a navigációs panel automatikusan elrejtődik, "
+"lehetővé téve az alkalmazásoknak a teljes képernyőterület kitöltését."
 
 #: ui/main.qml:67
 #, kde-format
@@ -73,12 +75,12 @@ msgstr ""
 #: ui/main.qml:87
 #, kde-format
 msgid "Battery Percentage"
-msgstr ""
+msgstr "Akkumulátorszázalék"
 
 #: ui/main.qml:88
 #, kde-format
 msgid "Show battery percentage in the status bar."
-msgstr ""
+msgstr "Akkumulátor töltöttségének megjelenítése százalékban az állapotsávon."
 
 #: ui/main.qml:102
 #, kde-format
@@ -192,37 +194,37 @@ msgstr "Mód a jobb felső sarokból való megnyitáskor."
 #, kde-format
 msgctxt "@title:group, shortcuts available from lock screen"
 msgid "Lock Screen Shortcuts"
-msgstr ""
+msgstr "Parancsikonok a zárolt képernyőn"
 
 #: ui/main.qml:225
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #: ui/main.qml:226
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flashlight"
-msgstr ""
+msgstr "Zseblámpa"
 
 #: ui/main.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Camera"
-msgstr ""
+msgstr "Kamera"
 
 #: ui/main.qml:231
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Left button"
-msgstr ""
+msgstr "Bal gomb"
 
 #: ui/main.qml:253
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Right button"
-msgstr ""
+msgstr "Jobb gomb"
 
 #: ui/QuickSettingsForm.qml:55
 #, kde-format
