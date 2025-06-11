@@ -159,6 +159,10 @@ Item {
             // header
             RowLayout {
                 id: appHeader
+
+                Kirigami.Theme.inherit: false
+                Kirigami.Theme.colorSet: Kirigami.Theme.Complementary
+
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.minimumHeight: column.height - appView.height
