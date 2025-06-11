@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-22 00:42+0000\n"
-"PO-Revision-Date: 2025-04-07 00:24+0200\n"
+"PO-Revision-Date: 2025-06-10 22:25+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: ui/main.qml:18
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "이 설정을 사용하지 않으면 애니메이션을 최소화합니�
 #: ui/main.qml:55
 #, kde-format
 msgid "Auto Hide Panels"
-msgstr ""
+msgstr "패널 자동 숨기기"
 
 #: ui/main.qml:56
 #, kde-format
@@ -53,6 +53,8 @@ msgid ""
 "When active, status and navigation panels will auto hide, allowing "
 "applications to fill the entire screen space."
 msgstr ""
+"이 옵션을 사용하면 상태와 탐색 패널을 자동으로 숨겨서 앱에서 전체 화면을 사용"
+"할 수 있습니다."
 
 #: ui/main.qml:67
 #, kde-format
