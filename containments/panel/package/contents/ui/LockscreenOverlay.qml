@@ -5,17 +5,19 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Window
 
+import org.kde.plasma.private.mobileshell as MobileShell
 import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.raiselockscreenplugin as RaiseLockscreenPlugin
 
-// Raise panel over the lockscreen when it is shown
+import org.kde.layershell 1.0 as LayerShell
+
+// Raise panel window over the lockscreen when it is shown
 QtObject {
     id: root
     required property var window
 
     onWindowChanged: {
         // Window.window may start out null, we need to wait for it to exist
-        console.log('WINDOWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW ' + root.window);
         if (root.window && !raiseLockscreen.initialized) {
             raiseLockscreen.initializeOverlay(root.window);
         }
@@ -34,7 +36,9 @@ QtObject {
 
             // Raise panel if lockscreen is already active
             if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
+                console.log('Raising top panel over the lockscreen');
                 raiseLockscreen.raiseOverlay();
+                MobileShell.ShellUtil.setWindowLayer(root.window, LayerShell.Window.LayerOverlay);
             }
         }
 
@@ -47,6 +51,7 @@ QtObject {
         function onLockscreenLocked() {
             console.log('Raising top panel over the lockscreen');
             raiseLockscreen.raiseOverlay();
+            MobileShell.ShellUtil.setWindowLayer(root.window, LayerShell.Window.LayerOverlay);
         }
     }
 }

@@ -11,6 +11,9 @@
 
 class WaylandAboveLockscreen;
 
+/**
+ * A plugin to implement raising windows over the lockscreen.
+ */
 class RaiseLockscreen : public QObject
 {
     Q_OBJECT

@@ -26,6 +26,8 @@ Item {
 
     readonly property bool swipeAreaMoving: swipeAreaBase.moving || swipeAreaPortrait.moving
 
+    property alias notificationsWidget: notificationDrawer.notificationWidget
+
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 

@@ -4,6 +4,7 @@
 ecm_add_qml_module(raiselockscreenplugin URI org.kde.plasma.private.mobileshell.raiselockscreenplugin GENERATE_PLUGIN_SOURCE)
 target_sources(raiselockscreenplugin PRIVATE
     raiselockscreen.cpp
+    utils.h
 )
 
 target_link_libraries(raiselockscreenplugin PRIVATE

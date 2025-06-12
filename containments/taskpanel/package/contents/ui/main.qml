@@ -128,7 +128,7 @@ ContainmentItem {
     Connections {
         target: ShellSettings.Settings
 
-        function onAutoHidePanelsEnabled() {
+        function onAutoHidePanelsEnabledChanged() {
             root.setWindowProperties();
         }
     }
