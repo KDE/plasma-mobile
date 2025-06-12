@@ -54,6 +54,7 @@ public:
     Q_INVOKABLE void openHomeScreen();
     Q_INVOKABLE void resetHomeScreenPosition();
     Q_INVOKABLE void showVolumeOSD();
+    Q_INVOKABLE void openLockScreenKeypad();
 
 Q_SIGNALS:
     void panelStateChanged();
@@ -68,6 +69,7 @@ Q_SIGNALS:
     void openHomeScreenRequested();
     void resetHomeScreenPositionRequested();
     void showVolumeOSDRequested();
+    void openLockScreenKeypadRequested();
 
 private Q_SLOTS:
     void updateDoNotDisturb();

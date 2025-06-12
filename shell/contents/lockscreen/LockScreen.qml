@@ -44,6 +44,14 @@ Item {
         passwordBar.keyPress(event.text);
     }
 
+    Connections {
+        target: MobileShellState.ShellDBusClient
+
+        function onOpenLockScreenKeypadRequested() {
+            flickable.goToOpenPosition();
+        }
+    }
+
     // Wallpaper blur
     Loader {
         id: wallpaperLoader
@@ -167,7 +175,7 @@ Item {
 
         LockScreenContent {
             id: lockScreenContent
-            anchors.fill: item
+            anchors.fill: parent
 
             isVertical: !root.isWidescreen
             opacity: Math.max(0, 1 - flickable.openFactor * 2)
