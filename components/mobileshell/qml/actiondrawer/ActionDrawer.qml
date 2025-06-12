@@ -109,6 +109,11 @@ Item {
     }
 
     /**
+     * The current notifications widget component.
+     */
+    property alias notificationsWidget: contentContainer.notificationsWidget
+
+    /**
      * Emitted when the drawer has closed.
      */
     signal drawerClosed()
