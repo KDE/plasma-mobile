@@ -50,6 +50,7 @@ void ShellDBusClient::connectSignals()
     connect(m_interface, &OrgKdePlasmashellInterface::openHomeScreenRequested, this, &ShellDBusClient::openHomeScreenRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::resetHomeScreenPositionRequested, this, &ShellDBusClient::resetHomeScreenPositionRequested);
     connect(m_interface, &OrgKdePlasmashellInterface::showVolumeOSDRequested, this, &ShellDBusClient::showVolumeOSDRequested);
+    connect(m_interface, &OrgKdePlasmashellInterface::openLockScreenKeypadRequested, this, &ShellDBusClient::openLockScreenKeypadRequested);
 
     updateDoNotDisturb();
     updateIsTaskSwitcherVisible();
@@ -149,6 +150,11 @@ void ShellDBusClient::resetHomeScreenPosition()
 void ShellDBusClient::showVolumeOSD()
 {
     m_interface->showVolumeOSD();
+}
+
+void ShellDBusClient::openLockScreenKeypad()
+{
+    m_interface->openLockScreenKeypad();
 }
 
 void ShellDBusClient::updatePanelState()

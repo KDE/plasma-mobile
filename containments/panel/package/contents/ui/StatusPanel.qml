@@ -169,5 +169,22 @@ Item {
                 return urgencies;
             }
         }
+
+        Connections {
+            target: drawer.actionDrawer
+
+            function onPermissionsRequested() {
+                MobileShellState.ShellDBusClient.openLockScreenKeypad();
+            }
+        }
+
+        Connections {
+            target: MobileShellState.LockscreenDBusClient
+
+            function onLockscreenUnlocked() {
+                // Run pending actions after the lockscreen gets unlocked
+                drawer.actionDrawer.runPendingNotificationAction();
+            }
+        }
     }
 }
