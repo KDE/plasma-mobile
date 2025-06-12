@@ -147,6 +147,17 @@ Item {
     MobileShell.ActionDrawerWindow {
         id: drawer
 
+        Loader {
+            // Needs to be reloaded for each drawer open
+            active: drawer.visible && MobileShellState.LockscreenDBusClient.lockscreenActive
+
+            // Raise drawer over the lockscreen
+            sourceComponent: LockscreenOverlay {
+                id: lockScreenOverlay
+                window: drawer
+            }
+        }
+
         actionDrawer.restrictedPermissions: MobileShellState.LockscreenDBusClient.lockscreenActive
 
         actionDrawer.notificationSettings: NotificationManager.Settings {}

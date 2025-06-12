@@ -19,7 +19,7 @@ QtObject {
     onWindowChanged: {
         // Window.window may start out null, we need to wait for it to exist
         if (root.window && !raiseLockscreen.initialized) {
-            raiseLockscreen.initializeLockscreenOverlay();
+            initializeLockscreenOverlay();
         }
     }
 
@@ -27,26 +27,24 @@ QtObject {
         if (MobileShellState.LockscreenDBusClient.lockscreenActive) {
             console.log('Raising top panel over the lockscreen');
             raiseLockscreen.raiseOverlay();
-            MobileShell.ShellUtil.setWindowLayer(root.window, LayerShell.Window.LayerOverlay);
         }
+    }
+
+     function initializeLockscreenOverlay() {
+        if (!root.window) {
+            return;
+        }
+
+        raiseLockscreen.initializeOverlay(root.window);
+
+        // Raise panel if lockscreen is already active
+        raiseOverlay();
     }
 
     // Raise panel over the lockscreen when it is enabled
     readonly property var raiseLockscreen: RaiseLockscreenPlugin.RaiseLockscreen {
         id: raiseLockscreen
-
-        function initializeLockscreenOverlay() {
-            if (!root.window) {
-                return;
-            }
-
-            raiseLockscreen.initializeOverlay(root.window);
-
-            // Raise panel if lockscreen is already active
-            root.raiseOverlay();
-        }
-
-        Component.onCompleted: initializeLockscreenOverlay()
+        Component.onCompleted: root.initializeLockscreenOverlay()
     }
 
     readonly property Connections lockscreenConnections: Connections {
