@@ -21,17 +21,13 @@ const QString SAVED_CONFIG_GROUP = u"SavedConfig"_s;
 // In bin/startplasmamobile, we add `~/.config/plasma-mobile` to XDG_CONFIG_DIRS to overlay our own configs
 const QString MOBILE_KWINRC_FILE = u"plasma-mobile/kwinrc"_s;
 const QString MOBILE_KSMSERVERRC_FILE = u"plasma-mobile/ksmserverrc"_s;
+const QString MOBILE_KDEGLOBALS_FILE = u"plasma-mobile/kdeglobals"_s;
 
 Settings::Settings(QObject *parent)
     : QObject{parent}
     , m_isMobilePlatform{KRuntimePlatform::runtimePlatform().contains(u"phone"_s)}
     , m_mobileConfig{KSharedConfig::openConfig(CONFIG_FILE, KConfig::SimpleConfig)}
-    , m_kwinrcConfig{KSharedConfig::openConfig(MOBILE_KWINRC_FILE, KConfig::SimpleConfig)}
     , m_appBlacklistConfig{KSharedConfig::openConfig(u"applications-blacklistrc"_s, KConfig::SimpleConfig)}
-    , m_kdeglobalsConfig{KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig)}
-    , m_ksmServerConfig{KSharedConfig::openConfig(MOBILE_KSMSERVERRC_FILE, KConfig::SimpleConfig)}
-    , m_originalKwinrcConfig{KSharedConfig::openConfig(u"kwinrc"_s, KConfig::SimpleConfig)}
-    , m_configWatcher{KConfigWatcher::create(m_mobileConfig)}
 {
 }
 
@@ -57,18 +53,19 @@ void Settings::applyConfiguration()
 void Settings::loadSavedConfiguration()
 {
     // kwinrc (legacy, we only write in the plasma-mobile/kwinrc file now)
-    loadKeys(u"kwinrc"_s, m_originalKwinrcConfig, getKwinrcSettings(m_mobileConfig));
-    m_originalKwinrcConfig->sync();
+    auto originalKwinrcConfig = KSharedConfig::openConfig(u"kwinrc"_s, KConfig::SimpleConfig);
+    loadKeys(u"kwinrc"_s, originalKwinrcConfig, getKwinrcSettings(m_mobileConfig));
+    originalKwinrcConfig->sync();
     reloadKWinConfig();
 
     // applications-blacklistrc
     loadKeys(u"applications-blacklistrc"_s, m_appBlacklistConfig, APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS);
     m_appBlacklistConfig->sync();
 
-    // kdeglobals
-    loadKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_DEFAULT_SETTINGS);
-    loadKeys(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_SETTINGS);
-    m_kdeglobalsConfig->sync();
+    // kdeglobals (legacy, we only write in the plasma-mobile/kdeglobals file now)
+    auto originalKdeglobalsConfig = KSharedConfig::openConfig(u"kdeglobals"_s, KConfig::SimpleConfig);
+    loadKeys(u"kdeglobals"_s, originalKdeglobalsConfig, KDEGLOBALS_SETTINGS);
+    originalKdeglobalsConfig->sync();
 
     // save our changes
     m_mobileConfig->sync();
@@ -76,29 +73,50 @@ void Settings::loadSavedConfiguration()
 
 void Settings::applyMobileConfiguration()
 {
-    // kwinrc-plasma-mobile
-    writeKeys(MOBILE_KWINRC_FILE, m_kwinrcConfig, getKwinrcSettings(m_mobileConfig));
-    m_kwinrcConfig->sync();
-    reloadKWinConfig();
+    // kwinrc
+    {
+        auto kwinSettings = getKwinrcSettings(m_mobileConfig);
+        setOptionsImmutable(false, MOBILE_KWINRC_FILE, kwinSettings);
+
+        auto kwinrc = kwinrcConfig();
+        writeKeys(MOBILE_KWINRC_FILE, kwinrc, kwinSettings);
+        kwinrc->sync();
+        reloadKWinConfig();
+
+        setOptionsImmutable(true, MOBILE_KWINRC_FILE, kwinSettings);
+    }
 
     // applications-blacklistrc
-    writeKeysAndSave(u"applications-blacklistrc"_s,
-                     m_appBlacklistConfig,
-                     APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS,
-                     true); // only write entries if they are not already defined in the config
-    m_appBlacklistConfig->sync();
+    {
+        writeKeysAndSave(u"applications-blacklistrc"_s,
+                         m_appBlacklistConfig,
+                         APPLICATIONS_BLACKLIST_DEFAULT_SETTINGS,
+                         true); // only write entries if they are not already defined in the config
+        m_appBlacklistConfig->sync();
+    }
 
     // kdeglobals
-    writeKeysAndSave(u"kdeglobals"_s,
-                     m_kdeglobalsConfig,
-                     KDEGLOBALS_DEFAULT_SETTINGS,
-                     true); // only write entries if they are not already defined in the config
-    writeKeysAndSave(u"kdeglobals"_s, m_kdeglobalsConfig, KDEGLOBALS_SETTINGS, false);
-    m_kdeglobalsConfig->sync();
+    {
+        setOptionsImmutable(false, MOBILE_KDEGLOBALS_FILE, KDEGLOBALS_SETTINGS);
+
+        auto kdeglobals = KSharedConfig::openConfig(MOBILE_KDEGLOBALS_FILE, KConfig::SimpleConfig);
+        writeKeys(MOBILE_KDEGLOBALS_FILE, kdeglobals, KDEGLOBALS_DEFAULT_SETTINGS); // only write, don't make immutable
+        writeKeys(MOBILE_KDEGLOBALS_FILE, kdeglobals, KDEGLOBALS_SETTINGS);
+        kdeglobals->sync();
+
+        setOptionsImmutable(true, MOBILE_KDEGLOBALS_FILE, KDEGLOBALS_SETTINGS);
+    }
 
     // ksmserver
-    writeKeys(MOBILE_KSMSERVERRC_FILE, m_ksmServerConfig, KSMSERVER_SETTINGS);
-    m_ksmServerConfig->sync();
+    {
+        setOptionsImmutable(false, MOBILE_KSMSERVERRC_FILE, KSMSERVER_SETTINGS);
+
+        auto ksmserver = KSharedConfig::openConfig(MOBILE_KSMSERVERRC_FILE, KConfig::SimpleConfig);
+        writeKeys(MOBILE_KSMSERVERRC_FILE, ksmserver, KSMSERVER_SETTINGS);
+        ksmserver->sync();
+
+        setOptionsImmutable(true, MOBILE_KSMSERVERRC_FILE, KSMSERVER_SETTINGS);
+    }
 
     // save our changes
     m_mobileConfig->sync();
@@ -197,6 +215,11 @@ const QString Settings::loadSavedConfigSetting(KSharedConfig::Ptr &config, const
     return value;
 }
 
+KSharedConfig::Ptr Settings::kwinrcConfig() const
+{
+    return KSharedConfig::openConfig(MOBILE_KWINRC_FILE, KConfig::SimpleConfig);
+}
+
 void Settings::reloadKWinConfig()
 {
     // Reload config
@@ -205,7 +228,7 @@ void Settings::reloadKWinConfig()
 
     // Effects need to manually be loaded/unloaded in a live KWin session.
 
-    KConfigGroup pluginsGroup{m_kwinrcConfig, QStringLiteral("Plugins")};
+    KConfigGroup pluginsGroup{kwinrcConfig(), QStringLiteral("Plugins")};
 
     for (const auto &effect : KWIN_EFFECTS) {
         // Read from the config whether the effect is enabled (settings are suffixed with "Enabled", ex. blurEnabled)
