@@ -36,19 +36,18 @@ private:
     void saveConfigSetting(const QString &fileName, const QString &group, const QString &key, const QVariant value);
     const QString loadSavedConfigSetting(KSharedConfig::Ptr &config, const QString &fileName, const QString &group, const QString &key, bool write = true);
 
+    KSharedConfig::Ptr kwinrcConfig() const;
     void reloadKWinConfig();
 
     // whether this is Plasma Mobile
     bool m_isMobilePlatform;
 
     KSharedConfig::Ptr m_mobileConfig;
-    KSharedConfig::Ptr m_kwinrcConfig; // (~/.config/kwinrc-plasma-mobile)
+    KSharedConfig::Ptr m_kwinrcConfig; // (~/.config/plasma-mobile/kwinrc)
     KSharedConfig::Ptr m_appBlacklistConfig;
-    KSharedConfig::Ptr m_kdeglobalsConfig;
-    KSharedConfig::Ptr m_ksmServerConfig;
+    KSharedConfig::Ptr m_kdeglobalsConfig; // (~/.config/plasma-mobile/kdeglobals)
+    KSharedConfig::Ptr m_ksmServerConfig; // (~/.config/plamsma-mobile/ksmserverrc)
 
-    // For legacy upgrade purposes (~/.config/kwinrc)
-    KSharedConfig::Ptr m_originalKwinrcConfig;
-
-    KConfigWatcher::Ptr m_configWatcher;
+    // For legacy upgrade purposes
+    KSharedConfig::Ptr m_originalKdeglobalsConfig; // (~/.config/kdeglobals)
 };
