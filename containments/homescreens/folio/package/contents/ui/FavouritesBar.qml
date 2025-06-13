@@ -31,6 +31,128 @@ MouseArea {
         id: haptics
     }
 
+    // creates the favourites bar mask layer for the folder icons
+    // only in use when the favourites bar background in trunned off
+    property Component maskComponent: Item {
+        id: maskComponent
+        anchors.fill: parent
+
+        // icon mask template component
+        component IconMask : ColumnLayout {
+            id: icon
+            required property Item item
+            property bool widget: false
+            property bool turnToFolder: false
+            spacing: 0
+
+            implicitWidth: item ? item.implicitWidth : 0
+            implicitHeight: item ? item.implicitHeight : 0
+            width: item ? item.width : 0
+            height: item ? item.height : 0
+
+            x: item ? item.x : 0
+            y: item ? item.y : 0
+
+            property real scaleAmount: icon.turnToFolder ? 1.2 : 1.0
+
+            Behavior on scaleAmount { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+
+            Item {
+                Layout.minimumWidth: widget ? parent.width : folio.FolioSettings.delegateIconSize
+                Layout.minimumHeight: widget ? parent.height : folio.FolioSettings.delegateIconSize
+
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                Layout.preferredHeight: Layout.minimumHeight
+
+                Rectangle {
+                    id: rect
+                    radius: Kirigami.Units.cornerRadius
+                    anchors.fill: parent
+
+                    transform: Scale {
+                        origin.x: rect.width / 2
+                        origin.y: rect.height / 2
+                        xScale: icon.scaleAmount
+                        yScale: icon.scaleAmount
+                    }
+                }
+            }
+
+            Item {
+                Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
+                Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
+                visible: !widget
+            }
+        }
+
+        // loop though and create a layer mask for all the icons in the favourites bar
+        Repeater {
+            model: folio.FavouritesModel
+            delegate: Item {
+                property var maskDelegate: repeater.itemAt(index)
+
+                Loader {
+                    id: maskLoader
+                    active: folio.FolioSettings.wallpaperBlurEffect > 1
+                    asynchronous: true
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+
+                    sourceComponent: {
+                        if (!maskDelegate) {
+                            return noneComponent;
+                        } else if (maskDelegate.delegateModel.type === Folio.FolioDelegate.Application) {
+                            return appComponent;
+                        } else if (maskDelegate.delegateModel.type === Folio.FolioDelegate.Folder) {
+                            return folderComponent;
+                        } else {
+                            return noneComponent;
+                        }
+                    }
+                }
+
+                Component {
+                    id: noneComponent
+
+                    Item {}
+                }
+
+                // blur mask for behind icons when a app is hovered over it and it is turning into a folder
+                Component {
+                    id: appComponent
+
+                    IconMask {
+                        id: folder
+                        item: maskDelegate
+                        visible: item.visible && item.componentItem.visible && scaleAmount > 1
+
+                        turnToFolder: item.isAppHoveredOver
+                    }
+                }
+
+                // blur mask for folders
+                Component {
+                    id: folderComponent
+
+                    IconMask {
+                        id: folder
+                        item: maskDelegate
+                        visible: item.visible && item.componentItem.visible
+
+                        turnToFolder: item.isAppHoveredOver
+
+                        transform: Scale {
+                            origin.x: maskDelegate.width / 2;
+                            origin.y: maskDelegate.height / 2;
+                            xScale: maskDelegate.componentItem.zoomScale;
+                            yScale: maskDelegate.componentItem.zoomScale;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     Repeater {
         id: repeater
         model: folio.FavouritesModel
@@ -68,7 +190,10 @@ MouseArea {
             width: folio.HomeScreenState.pageCellWidth
             height: folio.HomeScreenState.pageCellHeight
 
+            property var componentItem: loader.item
+
             Loader {
+                id: loader
                 anchors.fill: parent
 
                 sourceComponent: {

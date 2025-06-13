@@ -37,6 +37,129 @@ Item {
         radius: Kirigami.Units.largeSpacing
     }
 
+    // creates the homescreen page mask layer for the folder icons
+    property Component maskComponent: Item {
+        id: maskComponent
+        anchors.fill: parent
+
+        // icon mask template component
+        component IconMask : ColumnLayout {
+            id: icon
+            required property Item item
+            property bool widget: false
+            property bool turnToFolder: false
+            spacing: 0
+
+            implicitWidth: item ? item.implicitWidth : 0
+            implicitHeight: item ? item.implicitHeight : 0
+            width: item ? item.width : 0
+            height: item ? item.height : 0
+
+            x: item ? item.x : 0
+            y: item ? item.y : 0
+
+            property real scaleAmount: icon.turnToFolder ? 1.2 : 1.0
+
+            Behavior on scaleAmount { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+
+            Item {
+                Layout.minimumWidth: widget ? parent.width : folio.FolioSettings.delegateIconSize
+                Layout.minimumHeight: widget ? parent.height : folio.FolioSettings.delegateIconSize
+
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
+                Layout.preferredHeight: Layout.minimumHeight
+
+                Rectangle {
+                    id: rect
+                    radius: Kirigami.Units.cornerRadius
+                    anchors.fill: parent
+
+                    transform: Scale {
+                        origin.x: rect.width / 2
+                        origin.y: rect.height / 2
+                        xScale: icon.scaleAmount
+                        yScale: icon.scaleAmount
+                    }
+                }
+            }
+
+            Item {
+                Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
+                Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
+                visible: !widget
+            }
+        }
+
+        // loop though and create a layer mask for all the icons on the homescreen page
+        Repeater {
+            model: root.pageModel
+            delegate: Item {
+                property var maskDelegate: pageRepeater.itemAt(index)
+
+                Loader {
+                    id: maskLoader
+                    active: folio.FolioSettings.wallpaperBlurEffect > 1
+                    asynchronous: true
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+
+                    sourceComponent: {
+                        if (!maskDelegate) {
+                            return noneComponent;
+                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Application) {
+                            return appComponent;
+                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Folder) {
+                            return folderComponent;
+                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Widget) {
+                            return noneComponent;
+                        } else {
+                            return noneComponent;
+                        }
+                    }
+                }
+
+                Component {
+                    id: noneComponent
+
+                    Item {}
+                }
+
+                // blur mask for behind icons when a app is hovered over it and it is turning into a folder
+                Component {
+                    id: appComponent
+
+                    IconMask {
+                        id: folder
+                        item: maskDelegate
+                        visible: item.visible && item.componentItem.visible && scaleAmount > 1
+
+                        turnToFolder: item.isAppHoveredOver
+                    }
+                }
+
+                // blur mask for folders
+                Component {
+                    id: folderComponent
+
+                    IconMask {
+                        id: folder
+                        item: maskDelegate
+                        visible: item.visible && item.componentItem.visible
+
+                        turnToFolder: item.isAppHoveredOver
+
+                        transform: Scale {
+                            origin.x: maskDelegate.width / 2;
+                            origin.y: maskDelegate.height / 2;
+                            xScale: maskDelegate.componentItem.zoomScale;
+                            yScale: maskDelegate.componentItem.zoomScale;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     // square that shows when hovering over a spot to drop a delegate on
     PlaceholderDelegate {
         id: dragDropFeedback
@@ -50,10 +173,10 @@ Item {
 
         // only show if it is an empty spot on this page
         visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                    dropPosition.location === Folio.DelegateDragPosition.Pages &&
-                    dropPosition.page === root.pageNum &&
-                    !dropDelegateIsWidget &&
-                    folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
+            dropPosition.location === Folio.DelegateDragPosition.Pages &&
+            dropPosition.page === root.pageNum &&
+            !dropDelegateIsWidget &&
+            folio.HomeScreenState.getPageDelegateAt(root.pageNum, dropPosition.pageRow, dropPosition.pageColumn) === null
 
         x: dropPosition.pageColumn * folio.HomeScreenState.pageCellWidth
         y: dropPosition.pageRow * folio.HomeScreenState.pageCellHeight
@@ -71,10 +194,10 @@ Item {
 
         // only show if the widget can be placed here
         visible: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                    dropPosition.location === Folio.DelegateDragPosition.Pages &&
-                    dropPosition.page === root.pageNum &&
-                    dropDelegateIsWidget &&
-                    pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
+            dropPosition.location === Folio.DelegateDragPosition.Pages &&
+            dropPosition.page === root.pageNum &&
+            dropDelegateIsWidget &&
+            pageModel.canAddDelegate(dropPosition.pageRow, dropPosition.pageColumn, dropDelegate)
 
         radius: Kirigami.Units.cornerRadius
         color: Qt.rgba(255, 255, 255, 0.3)
@@ -88,6 +211,7 @@ Item {
 
     // repeater of all delegates in the page
     Repeater {
+        id: pageRepeater
         model: root.pageModel
 
         delegate: Item {
@@ -100,14 +224,16 @@ Item {
             property var dragState: folio.HomeScreenState.dragState
 
             property bool isDropPositionThis: dragState.candidateDropPosition.location === Folio.DelegateDragPosition.Pages &&
-                                              dragState.candidateDropPosition.page === root.pageNum &&
-                                              dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
-                                              dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
+                dragState.candidateDropPosition.page === root.pageNum &&
+                dragState.candidateDropPosition.pageRow === delegate.pageDelegate.row &&
+                dragState.candidateDropPosition.pageColumn === delegate.pageDelegate.column
 
             property bool isAppHoveredOver: folio.HomeScreenState.swipeState === Folio.HomeScreenState.DraggingDelegate &&
-                                            dragState.dropDelegate &&
-                                            dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
-                                            isDropPositionThis
+                dragState.dropDelegate &&
+                dragState.dropDelegate.type === Folio.FolioDelegate.Application &&
+                isDropPositionThis
+
+            property var componentItem: loader.item
 
             implicitWidth: loader.item ? loader.item.implicitWidth : 0
             implicitHeight: loader.item ? loader.item.implicitHeight : 0
@@ -118,7 +244,7 @@ Item {
             y: row * folio.HomeScreenState.pageCellHeight
 
             visible: row >= 0 && row < folio.HomeScreenState.pageRows &&
-                     column >= 0 && column < folio.HomeScreenState.pageColumns
+                column >= 0 && column < folio.HomeScreenState.pageColumns
 
             // called when we want to delete this delegate
             function removeSelf() {
@@ -248,8 +374,8 @@ Item {
 
                     // do not show if the drop animation is running to this delegate, and the drop delegate is a folder
                     visible: !(root.homeScreen.dropAnimationRunning &&
-                               delegate.isDropPositionThis &&
-                               delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
+                        delegate.isDropPositionThis &&
+                        delegate.dragState.dropDelegate.type === Folio.FolioDelegate.Folder)
 
                     // don't show label in drag and drop mode
                     labelOpacity: delegate.opacity
@@ -334,7 +460,7 @@ Item {
                     // background: there is only one "visual" instance of the widget, once this delegate loads
                     //             it will reparent it to here (but we don't want it to happen while the drop animation is running)
                     property bool suppressAppletReparent: (root.homeScreen.currentlyDraggedWidget === delegate.pageDelegate.widget)
-                                                            && delegate.isDropPositionThis
+                        && delegate.isDropPositionThis
 
                     visible: !suppressAppletReparent
                     widget: suppressAppletReparent ? null : delegate.pageDelegate.widget

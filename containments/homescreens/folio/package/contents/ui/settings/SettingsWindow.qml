@@ -116,7 +116,7 @@ Window {
                 FormCard.FormCard {
                     id: iconsCard
                     readonly property bool isVerticalOrientation: folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RegularPosition ||
-                                                                folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
+                        folio.HomeScreenState.pageOrientation === Folio.HomeScreenState.RotateUpsideDown
 
                     readonly property string numOfRowsText: i18n("Number of rows")
                     readonly property string numOfColumnsText: i18n("Number of columns")
@@ -256,15 +256,27 @@ Window {
                 }
 
                 FormCard.FormCard {
-                    FormCard.FormSwitchDelegate {
-                        id: showWallpaperBlur
-                        text: i18nc("@option:check", "Show wallpaper blur effect")
-                        checked: folio.FolioSettings.showWallpaperBlur
-                        onCheckedChanged: {
-                            if (checked != folio.FolioSettings.showWallpaperBlur) {
-                                folio.FolioSettings.showWallpaperBlur = checked;
+                    FormCard.FormComboBoxDelegate {
+                        id: wallpaperBlurCombobox
+                        text: i18n("Wallpaper blur effect")
+
+                        currentIndex: indexOfValue(folio.FolioSettings.wallpaperBlurEffect)
+                        model: ListModel {
+                            // we can't use i18n with ListElement
+                            Component.onCompleted: {
+                                append({"name": i18n("None"), "value": 0});
+                                append({"name": i18n("Simple"), "value": 1});
+                                append({"name": i18n("Full"), "value": 2});
+
+                                // indexOfValue doesn't bind to model changes unfortunately, set currentIndex manually here
+                                wallpaperBlurCombobox.currentIndex = wallpaperBlurCombobox.indexOfValue(folio.FolioSettings.wallpaperBlurEffect)
                             }
                         }
+
+                        textRole: "name"
+                        valueRole: "value"
+
+                        onCurrentValueChanged: folio.FolioSettings.wallpaperBlurEffect = currentValue
                     }
                 }
 

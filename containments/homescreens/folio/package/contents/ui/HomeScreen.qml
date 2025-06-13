@@ -22,6 +22,8 @@ Item {
     property Folio.HomeScreen folio
     property Folio.HomeScreenState homeScreenState: folio.HomeScreenState
 
+    property real zoomScale: 1 // global homescreen zoom scale, gets set outside file
+
     property real topMargin: 0
     property real bottomMargin: 0
     property real leftMargin: 0
@@ -82,6 +84,63 @@ Item {
 
         Component.onCompleted: {
             folio.HomeScreenState.pageDelegateLabelWidth = Kirigami.Units.smallSpacing;
+        }
+    }
+
+    // load in the homeScreenPages mask layer and creates the favouritesBarScrim mask layer
+    property Component maskComponent: Item {
+        id: maskComponent
+        anchors.fill: parent
+
+        // scale the mask layer in the same way as the home screen so lines up
+        transform: [
+            Scale {
+                origin.x: mainHomeScreen.width / 2
+                origin.y: mainHomeScreen.height / 2
+                yScale: (1 - (mainHomeScreen.scaleFactor * 2) * 0.1) * root.zoomScale
+                xScale: (1 - (mainHomeScreen.scaleFactor * 2) * 0.1) * root.zoomScale
+            }
+        ]
+
+        // panel mask template component
+        component PanelMask : Rectangle {
+            required property Item item
+            visible: item.visible
+            x: item.x
+            y: item.y
+            width: item.width
+            height: item.height
+        }
+
+        // FavouritesBarScrim mask layer
+        PanelMask {
+            item: favouritesBarScrim
+        }
+
+        // HomeScreenPages mask layer
+        Loader {
+            asynchronous: true
+            anchors.fill: parent
+            anchors.topMargin: root.topMargin
+            anchors.leftMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Left ? 0 : root.leftMargin
+            anchors.rightMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Right ? 0 : root.rightMargin
+            anchors.bottomMargin: folio.HomeScreenState.favouritesBarLocation === Folio.HomeScreenState.Bottom ? 0 : root.bottomMargin
+            sourceComponent: homeScreenPages.maskComponent
+        }
+
+        // FavouritesBar mask layer
+        // only in use when the favourites bar background in trunned off
+        Loader {
+            active: !favouritesBarScrim.visible
+            visible: active
+            asynchronous: true
+
+            x: favouritesBar.x
+            y: favouritesBar.y
+            width: favouritesBar.width
+            height: favouritesBar.height
+
+            sourceComponent: favouritesBar.maskComponent
         }
     }
 
@@ -168,14 +227,14 @@ Item {
             // we stop showing halfway through the animation
             opacity: 1 - Math.max(homeScreenState.appDrawerOpenProgress, homeScreenState.searchWidgetOpenProgress, homeScreenState.folderOpenProgress) * 2
             visible: opacity > 0 // prevent handlers from picking up events
+            readonly property real scaleFactor: Math.max(homeScreenState.appDrawerOpenProgress, homeScreenState.searchWidgetOpenProgress)
 
             transform: [
                 Scale {
-                    property real scaleFactor: Math.max(homeScreenState.appDrawerOpenProgress, homeScreenState.searchWidgetOpenProgress)
                     origin.x: mainHomeScreen.width / 2
                     origin.y: mainHomeScreen.height / 2
-                    yScale: 1 - (scaleFactor * 2) * 0.1
-                    xScale: 1 - (scaleFactor * 2) * 0.1
+                    yScale: 1 - (mainHomeScreen.scaleFactor * 2) * 0.1
+                    xScale: 1 - (mainHomeScreen.scaleFactor * 2) * 0.1
                 }
             ]
 
@@ -397,18 +456,6 @@ Item {
             homeScreen: root
             opacity: homeScreenState.folderOpenProgress
             transform: Translate { y: folderView.opacity > 0 ? 0 : folderView.height }
-        }
-
-        // drag and drop component
-        DelegateDragItem {
-            id: delegateDragItem
-            folio: root.folio
-        }
-
-        // drag and drop for widgets
-        WidgetDragItem {
-            id: widgetDragItem
-            folio: root.folio
         }
 
         // bottom app drawer

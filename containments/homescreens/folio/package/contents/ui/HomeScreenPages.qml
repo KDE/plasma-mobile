@@ -28,7 +28,44 @@ MouseArea {
         haptics.buttonVibrate();
     }
 
+    // loads and combines all the homescreen page layer masks
+    property Component maskComponent: Item {
+        id: maskComponent
+        anchors.fill: parent
+        anchors.leftMargin: root.horizontalMargin
+        anchors.rightMargin: root.horizontalMargin
+        anchors.topMargin: root.verticalMargin
+        anchors.bottomMargin: root.verticalMargin
+
+        Repeater {
+            model: pageRepeater.count
+
+            delegate: Loader {
+                id: pageMask
+                asynchronous: true
+                active: folio.FolioSettings.wallpaperBlurEffect > 1
+                anchors.fill: parent
+
+                readonly property var page: pageRepeater.itemAt(model.index)
+
+                sourceComponent: page.maskComponent
+                visible: page.visible
+                opacity: page.opacity
+
+                // x position of page
+                Connections {
+                    target: page
+
+                    function onPositionXChanged() {
+                        pageMask.transform = pageMask.page.transform
+                    }
+                }
+            }
+        }
+    }
+
     Repeater {
+        id: pageRepeater
         model: folio.PageListModel
 
         delegate: HomeScreenPage {
@@ -99,8 +136,8 @@ MouseArea {
             Rotation {
                 id: cubeTransitionRotation
                 origin.x: (positionX < 0) ?
-                            (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
-                            (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
+                    (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
+                    (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
                 origin.y: folio.HomeScreenState.pageHeight / 2;
                 axis { x: 0; y: 1; z: 0 }
                 angle: {
@@ -111,8 +148,8 @@ MouseArea {
             Rotation {
                 id: rotationTransitionRotation
                 origin.x: (positionX < 0) ?
-                            (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
-                            (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
+                    (folio.HomeScreenState.pageWidth / 2) * homeScreenPage.progressToCenter :
+                    (folio.HomeScreenState.pageWidth / 2) + (folio.HomeScreenState.pageWidth / 2) * (1 - homeScreenPage.progressToCenter);
                 origin.y: 0
                 axis { x: -0.2; y: 0.3; z: 0.5 }
                 angle: {

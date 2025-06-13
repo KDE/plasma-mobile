@@ -58,6 +58,11 @@ Item {
      */
     readonly property real contentOpacity: itemContainer.opacity
 
+    /**
+     * The current homescreen scale value.
+     */
+    readonly property real zoomScale: itemContainer.zoomScale
+
     function evaluateMargins() {
         topMargin = plasmoidItem.availableScreenRect.y
         bottomMargin = root.height - (plasmoidItem.availableScreenRect.y + plasmoidItem.availableScreenRect.height)
