@@ -17,6 +17,7 @@ AbstractButton {
 
     property bool buttonHeld: false
     property double scale: pressed ? (buttonHeld ? 1.7 : 1.5) : 1
+    property real fillAmount: 0.0
 
     Behavior on scale {
         NumberAnimation {
@@ -41,7 +42,15 @@ AbstractButton {
 
     background: Rectangle {
         radius: width
-        color: Qt.rgba(255, 255, 255, pressed ? (buttonHeld ? 0.7 : 0.5) : 0.2)
+        color: Qt.rgba(255, 255, 255, 0.2)
+
+        Rectangle {
+            anchors.centerIn: parent
+            width: parent.width * root.fillAmount
+            height: parent.height * root.fillAmount
+            radius: Math.min(width, height)
+            color: Qt.rgba(255, 255, 255, 0.2) // Use the same background rectangle color
+        }
     }
 
     contentItem: Item {
@@ -66,8 +75,22 @@ AbstractButton {
         if (pressed) {
             pressedTimer.restart();
             buttonHeld = false;
-        } else{
+
+            // Ensure emptyAnimation is not running
+            // And fillAnimation use current fillAmount state before start
+            // To avoid "reset" glitch
+            emptyAnimation.stop();
+            fillAnimation.from = root.fillAmount;
+            fillAnimation.start();
+        } else {
             pressedTimer.stop();
+
+            // Ensure fillAnimation is not running
+            // And emptyAnimation use current fillAmount state before start
+            // To avoid "reset" glitch
+            fillAnimation.stop();
+            emptyAnimation.from = root.fillAmount;
+            emptyAnimation.start();
         }
     }
 
@@ -94,5 +117,21 @@ AbstractButton {
             haptics.buttonVibrate();
             buttonHeld = true;
         }
+    }
+
+    PropertyAnimation {
+        id: fillAnimation
+        target: root
+        property: "fillAmount"
+        duration: Kirigami.Units.longDuration
+        to: 1.0
+    }
+
+    PropertyAnimation {
+        id: emptyAnimation
+        target: root
+        property: "fillAmount"
+        duration: Kirigami.Units.longDuration
+        to: 0.0
     }
 }
