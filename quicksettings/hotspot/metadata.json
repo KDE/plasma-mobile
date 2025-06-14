@@ -41,7 +41,7 @@
             }
         ],
         "Description": "Hotspot quick setting for Plasma Mobile",
-        "Description[ar]": "إعداد سريع للنقطة الفعالة لبلازما الجوال",
+        "Description[ar]": "إعداد سريع لنقطة اتصال لبلازما الجوال",
         "Description[ca@valencia]": "Configuració ràpida del punt d'accés per a Plasma Mobile",
         "Description[ca]": "Configuració ràpida del punt d'accés per al Plasma Mobile",
         "Description[cs]": "Rychlé nastavení Plasma pro mobilní telefony",
@@ -80,7 +80,7 @@
         "Id": "org.kde.plasma.quicksetting.hotspot",
         "License": "GPL-2.0+",
         "Name": "Hotspot",
-        "Name[ar]": "هوت-سبوت",
+        "Name[ar]": "نقطة اتصال",
         "Name[ca@valencia]": "Punt d'accés",
         "Name[ca]": "Punt d'accés",
         "Name[cs]": "Hotspot",
