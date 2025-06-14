@@ -15,6 +15,8 @@ target_link_libraries(recordplugin PRIVATE
     KF6::ConfigGui
     KF6::I18n
     KF6::Notifications
+    K::KPipeWire
+    K::KPipeWireRecord
 )
 
 ecm_finalize_qml_module(recordplugin)
