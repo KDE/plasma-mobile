@@ -81,6 +81,7 @@ find_package(PlasmaQuick CONFIG REQUIRED)
 find_package(PlasmaActivities CONFIG REQUIRED)
 find_package(KF6Screen CONFIG REQUIRED)
 find_package(KWayland CONFIG REQUIRED)
+find_package(KPipeWire ${PROJECT_DEP_VERSION} REQUIRED)
 
 find_package(PkgConfig REQUIRED)
 
