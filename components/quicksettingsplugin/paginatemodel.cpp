@@ -377,7 +377,7 @@ void PaginateModel::_k_sourceRowsRemoved(const QModelIndex &parent, int start, i
     if (canSizeChange()) {
         endRemoveRows();
     } else {
-        beginResetModel();
+        endResetModel();
     }
 }
 
