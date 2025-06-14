@@ -12,9 +12,11 @@
 #include "savedquicksettings.h"
 #include "savedquicksettingsmodel.h"
 
+#include <KPluginMetaData>
 #include <QAbstractListModel>
 #include <QQmlComponent>
 #include <QQmlListProperty>
+#include <qqmlregistration.h>
 
 class QuickSettingsModel : public QAbstractListModel, public QQmlParserStatus
 {
@@ -44,8 +46,8 @@ private:
     void loadQuickSetting(KPluginMetaData metaData, bool emitInsertSignal);
     void removeQuickSetting(int index);
 
-    void afterQuickSettingLoad(QQmlEngine *engine, KPluginMetaData metaData, QQmlComponent *component, bool emitInsertSignal);
     void insertQuickSettingToModel(KPluginMetaData metaData, QuickSetting *quickSetting, bool emitInsertSignal);
+    QuickSetting *loadQuickSettingComponent(KPluginMetaData metaData);
 
     bool m_loaded{false};
 
