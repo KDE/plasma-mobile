@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-06-15 00:44+0000\n"
 "PO-Revision-Date: 2022-12-23 15:11+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -17,42 +17,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:51
 #, kde-format
-msgid "Record Screen"
-msgstr "Gravar o Ecrã"
+msgid "No encoders available for recording"
+msgstr ""
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "A gravar…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "A gravar…"
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Toque para iniciar a gravação"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "O ecrã está a ser capturado…"
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Espere por favor…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Nova Gravação do Ecrã"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "A nova gravação do ecrã foi gravada em %1"
+
+#: recordutil.cpp:121
+#, fuzzy, kde-format
+#| msgid "Record Screen"
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Gravar o Ecrã"
+
+#: recordutil.cpp:130
+#, fuzzy, kde-format
+#| msgid "Recording…"
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "A gravar…"
+
+#: recordutil.cpp:133
+#, fuzzy, kde-format
+#| msgid "Writing…"
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "A gravar…"
+
+#: recordutil.cpp:146
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Toque para iniciar a gravação"
+
+#: recordutil.cpp:156
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "O ecrã está a ser capturado…"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Please wait…"
+msgstr "Espere por favor…"

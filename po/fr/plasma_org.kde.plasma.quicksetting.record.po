@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-06-15 00:44+0000\n"
 "PO-Revision-Date: 2023-11-01 14:44+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -14,42 +14,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 23.08.2\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:51
 #, kde-format
-msgid "Record Screen"
-msgstr "Enregistrer l'écran"
+msgid "No encoders available for recording"
+msgstr ""
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "Enregistrement en cours..."
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "Enregistrement en cours..."
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Tapoter pour démarrer l'enregistrement"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "La capture d'écran est en cours..."
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Veuillez patienter..."
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Nouvel enregistrement d'écran en cours..."
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Nouvel enregistrement d'écran enregistré dans %1..."
+
+#: recordutil.cpp:121
+#, fuzzy, kde-format
+#| msgid "Record Screen"
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Enregistrer l'écran"
+
+#: recordutil.cpp:130
+#, fuzzy, kde-format
+#| msgid "Recording…"
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "Enregistrement en cours..."
+
+#: recordutil.cpp:133
+#, fuzzy, kde-format
+#| msgid "Writing…"
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "Enregistrement en cours..."
+
+#: recordutil.cpp:146
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Tapoter pour démarrer l'enregistrement"
+
+#: recordutil.cpp:156
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "La capture d'écran est en cours..."
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Please wait…"
+msgstr "Veuillez patienter..."
