@@ -96,28 +96,12 @@ Item {
                 sourceModel: root.quickSettingsModel
                 pageSize: Math.min(root.pageSize, root.minimizedColumns) // HACK: just root.minimizedColumns appears to end up with an empty model?
             }
-            delegate: MobileShell.BaseItem {
+            delegate: Loader {
                 required property var modelData
 
-                implicitHeight: root.minimizedRowHeight
-                implicitWidth: root.minimizedColumnWidth
-                horizontalPadding: (width - Kirigami.Units.gridUnit * 3) / 2
-                verticalPadding: (height - Kirigami.Units.gridUnit * 3) / 2
+                asynchronous: true
 
-                contentItem: QuickSettingsMinimizedDelegate {
-                    restrictedPermissions: actionDrawer.restrictedPermissions
-
-                    text: modelData.text
-                    status: modelData.status
-                    icon: modelData.icon
-                    enabled: modelData.enabled
-                    settingsCommand: modelData.settingsCommand
-                    toggleFunction: modelData.toggle
-
-                    onCloseRequested: {
-                        actionDrawer.close();
-                    }
-                }
+                sourceComponent: quickSettingComponentMinimized
             }
         }
     }
@@ -163,7 +147,7 @@ Item {
 
                                 asynchronous: true
 
-                                sourceComponent: quickSettingComponent
+                                sourceComponent: quickSettingComponentFull
                             }
                         }
                     }
@@ -211,9 +195,36 @@ Item {
         }
     }
 
-    // Quick setting component
+    // Quick setting component minimized
     Component {
-        id: quickSettingComponent
+        id: quickSettingComponentMinimized
+
+        MobileShell.BaseItem {
+            implicitHeight: root.minimizedRowHeight
+            implicitWidth: root.minimizedColumnWidth
+            horizontalPadding: (width - Kirigami.Units.gridUnit * 3) / 2
+            verticalPadding: (height - Kirigami.Units.gridUnit * 3) / 2
+
+            contentItem: QuickSettingsMinimizedDelegate {
+                restrictedPermissions: actionDrawer.restrictedPermissions
+
+                text: modelData.text
+                status: modelData.status
+                icon: modelData.icon
+                enabled: modelData.enabled
+                settingsCommand: modelData.settingsCommand
+                toggleFunction: modelData.toggle
+
+                onCloseRequested: {
+                    actionDrawer.close();
+                }
+            }
+        }
+    }
+
+    // Quick setting component full
+    Component {
+        id: quickSettingComponentFull
 
         MobileShell.BaseItem {
             height: root.rowHeight
