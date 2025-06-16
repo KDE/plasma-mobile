@@ -85,7 +85,7 @@ Item {
                 }
 
                 onClicked: {
-                    wallpaperSelectorLoader.active = true;
+                    homeScreen.wallpaperSelectorTriggered();
                     folio.HomeScreenState.closeSettingsView();
                 }
             }
@@ -245,32 +245,6 @@ Item {
 
         onRequestConfigureMenu: {
             homeScreen.openConfigure()
-        }
-    }
-
-    Loader {
-        id: wallpaperSelectorLoader
-        asynchronous: true
-        active: false
-
-        onLoaded: {
-            wallpaperSelectorLoader.item.open();
-        }
-
-        sourceComponent: MobileShell.WallpaperSelector {
-            horizontal: root.width > root.height
-            edge: horizontal ? Qt.LeftEdge : Qt.BottomEdge
-            bottomMargin: root.homeScreen.bottomMargin
-            leftMargin: root.homeScreen.leftMargin
-            rightMargin: root.homeScreen.rightMargin
-            onClosed: {
-                wallpaperSelectorLoader.active = false;
-            }
-
-            onWallpaperSettingsRequested: {
-                close();
-                homeScreen.openConfigure();
-            }
         }
     }
 }

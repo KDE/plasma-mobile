@@ -18,13 +18,17 @@ Item {
 
     property bool expandBackground: false
 
+    property bool maskIcon: false
+
+    readonly property alias scaleAmount: rect.scaleAmount
+
     height: folio.FolioSettings.delegateIconSize
     width: folio.FolioSettings.delegateIconSize
 
     Rectangle {
         id: rect
         radius: Kirigami.Units.cornerRadius
-        color: Qt.rgba(255, 255, 255, 0.3)
+        color: maskIcon ? "white" : Qt.rgba(255, 255, 255, 0.3)
         anchors.fill: parent
 
         property real scaleAmount: root.expandBackground ? 1.2 : 1.0
@@ -39,21 +43,29 @@ Item {
         }
     }
 
-    Grid {
-        id: previewGrid
+    Loader {
+        id: pageMask
         anchors.fill: parent
-        anchors.margins: Kirigami.Units.smallSpacing * 2
-        columns: 2
-        spacing: Kirigami.Units.smallSpacing
+        asynchronous: true
+        active: !maskIcon
+        visible: active
 
-        property var previews: root.folder.appPreviews
+        sourceComponent: Grid {
+            id: previewGrid
+            anchors.fill: parent
+            anchors.margins: Kirigami.Units.smallSpacing * 2
+            columns: 2
+            spacing: Kirigami.Units.smallSpacing
 
-        Repeater {
-            model: previewGrid.previews
-            delegate: Kirigami.Icon {
-                implicitWidth: Math.round((previewGrid.width - previewGrid.spacing) / 2)
-                implicitHeight: Math.round((previewGrid.width - previewGrid.spacing) / 2)
-                source: modelData.icon
+            property var previews: root.folder.appPreviews
+
+            Repeater {
+                model: previewGrid.previews
+                delegate: Kirigami.Icon {
+                    implicitWidth: Math.round((previewGrid.width - previewGrid.spacing) / 2)
+                    implicitHeight: Math.round((previewGrid.width - previewGrid.spacing) / 2)
+                    source: modelData.icon
+                }
             }
         }
     }

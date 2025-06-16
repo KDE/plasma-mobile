@@ -38,122 +38,68 @@ Item {
     }
 
     // creates the homescreen page mask layer for the folder icons
-    property Component maskComponent: Item {
-        id: maskComponent
-        anchors.fill: parent
+    property Component maskComponent: Repeater {
+        model: root.pageModel
+        delegate: Item {
+            property var maskDelegate: pageRepeater.itemAt(index)
 
-        // icon mask template component
-        component IconMask : ColumnLayout {
-            id: icon
-            required property Item item
-            property bool widget: false
-            property bool turnToFolder: false
-            spacing: 0
+            Loader {
+                id: maskLoader
+                active: folio.FolioSettings.wallpaperBlurEffect > 1
+                asynchronous: true
+                anchors.top: parent.top
+                anchors.left: parent.left
 
-            implicitWidth: item ? item.implicitWidth : 0
-            implicitHeight: item ? item.implicitHeight : 0
-            width: item ? item.width : 0
-            height: item ? item.height : 0
+                sourceComponent: {
+                    if (!maskDelegate) {
+                        return noneComponent;
+                    } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Application) {
+                        return appComponent;
+                    } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Folder) {
+                        return folderComponent;
+                    } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Widget) {
+                        return noneComponent;
+                    } else {
+                        return noneComponent;
+                    }
+                }
+            }
 
-            x: item ? item.x : 0
-            y: item ? item.y : 0
+            Component {
+                id: noneComponent
 
-            property real scaleAmount: icon.turnToFolder ? 1.2 : 1.0
+                Item {}
+            }
 
-            Behavior on scaleAmount { NumberAnimation { duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad } }
+            // blur mask for behind icons when a app is hovered over it and it is turning into a folder
+            Component {
+                id: appComponent
 
-            Item {
-                Layout.minimumWidth: widget ? parent.width : folio.FolioSettings.delegateIconSize
-                Layout.minimumHeight: widget ? parent.height : folio.FolioSettings.delegateIconSize
+                IconMaskDelegate {
+                    folio: root.folio
+                    item: maskDelegate
+                    visible: item.visible && item.componentItem.visible && scaleAmount > 1
 
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-                Layout.preferredHeight: Layout.minimumHeight
+                    expandBackground: item.isAppHoveredOver
+                }
+            }
 
-                Rectangle {
-                    id: rect
-                    radius: Kirigami.Units.cornerRadius
-                    anchors.fill: parent
+            // blur mask for folders
+            Component {
+                id: folderComponent
+
+                IconMaskDelegate {
+                    folio: root.folio
+                    item: maskDelegate
+                    visible: item.visible && item.componentItem.visible
+
+                    expandBackground: item.isAppHoveredOver
 
                     transform: Scale {
-                        origin.x: rect.width / 2
-                        origin.y: rect.height / 2
-                        xScale: icon.scaleAmount
-                        yScale: icon.scaleAmount
-                    }
-                }
-            }
-
-            Item {
-                Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
-                Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
-                visible: !widget
-            }
-        }
-
-        // loop though and create a layer mask for all the icons on the homescreen page
-        Repeater {
-            model: root.pageModel
-            delegate: Item {
-                property var maskDelegate: pageRepeater.itemAt(index)
-
-                Loader {
-                    id: maskLoader
-                    active: folio.FolioSettings.wallpaperBlurEffect > 1
-                    asynchronous: true
-                    anchors.top: parent.top
-                    anchors.left: parent.left
-
-                    sourceComponent: {
-                        if (!maskDelegate) {
-                            return noneComponent;
-                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Application) {
-                            return appComponent;
-                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Folder) {
-                            return folderComponent;
-                        } else if (maskDelegate.pageDelegate.type === Folio.FolioDelegate.Widget) {
-                            return noneComponent;
-                        } else {
-                            return noneComponent;
-                        }
-                    }
-                }
-
-                Component {
-                    id: noneComponent
-
-                    Item {}
-                }
-
-                // blur mask for behind icons when a app is hovered over it and it is turning into a folder
-                Component {
-                    id: appComponent
-
-                    IconMask {
-                        id: folder
-                        item: maskDelegate
-                        visible: item.visible && item.componentItem.visible && scaleAmount > 1
-
-                        turnToFolder: item.isAppHoveredOver
-                    }
-                }
-
-                // blur mask for folders
-                Component {
-                    id: folderComponent
-
-                    IconMask {
-                        id: folder
-                        item: maskDelegate
-                        visible: item.visible && item.componentItem.visible
-
-                        turnToFolder: item.isAppHoveredOver
-
-                        transform: Scale {
-                            origin.x: maskDelegate.width / 2;
-                            origin.y: maskDelegate.height / 2;
-                            xScale: maskDelegate.componentItem.zoomScale;
-                            yScale: maskDelegate.componentItem.zoomScale;
-                        }
+                        origin.x: maskDelegate.width / 2;
+                        origin.y: maskDelegate.height / 2;
+                        xScale: maskDelegate.componentItem.zoomScale;
+                        yScale: maskDelegate.componentItem.zoomScale;
                     }
                 }
             }

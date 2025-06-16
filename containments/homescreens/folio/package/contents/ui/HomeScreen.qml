@@ -22,7 +22,8 @@ Item {
     property Folio.HomeScreen folio
     property Folio.HomeScreenState homeScreenState: folio.HomeScreenState
 
-    property real zoomScale: 1 // global homescreen zoom scale, gets set outside file
+    // global homescreen zoom scale, gets set outside file
+    property real zoomScale: 1
 
     property real topMargin: 0
     property real bottomMargin: 0
@@ -44,6 +45,8 @@ Item {
     onBottomMarginChanged: folio.HomeScreenState.viewBottomPadding = root.bottomMargin
     onLeftMarginChanged: folio.HomeScreenState.viewLeftPadding = root.leftMargin
     onRightMarginChanged: folio.HomeScreenState.viewRightPadding = root.rightMargin
+
+    signal wallpaperSelectorTriggered()
 
     // called by any delegates when starting drag
     // returns the mapped coordinates to be used in the home screen state
@@ -102,18 +105,9 @@ Item {
             }
         ]
 
-        // panel mask template component
-        component PanelMask : Rectangle {
-            required property Item item
-            visible: item.visible
-            x: item.x
-            y: item.y
-            width: item.width
-            height: item.height
-        }
-
         // FavouritesBarScrim mask layer
-        PanelMask {
+        BasicMaskDelegate {
+            folio: root.folio
             item: favouritesBarScrim
         }
 

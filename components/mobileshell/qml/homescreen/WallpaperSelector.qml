@@ -6,6 +6,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Controls as Controls
+import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.wallpapers.image 2.0 as Wallpaper
@@ -35,6 +36,31 @@ Controls.Drawer {
 
     background: null
 
+    // creates a wallpaper selector mask layer to be able to blur behind it
+    property Component maskComponent: Item {
+        anchors.fill: parent
+        ThresholdMask {
+            width: imageWallpaperDrawer.width
+            height: imageWallpaperDrawer.height
+            implicitWidth: imageWallpaperDrawer.implicitWidth
+            implicitHeight: imageWallpaperDrawer.implicitHeight
+
+            anchors.leftMargin: imageWallpaperDrawer.leftMargin
+            anchors.rightMargin: imageWallpaperDrawer.rightMargin
+            anchors.bottomMargin: imageWallpaperDrawer.bottomMargin
+
+            x: imageWallpaperDrawer.x
+            y: imageWallpaperDrawer.y
+
+            source: Rectangle {
+                width: wallpapersView.width
+                height: wallpapersView.height
+            }
+            maskSource: wallpapersView
+            threshold: 0.0
+        }
+    }
+
     ListView {
         id: wallpapersView
         anchors.fill: parent
@@ -51,8 +77,8 @@ Controls.Drawer {
 
         header: Controls.ItemDelegate {
             id: openSettings
-            width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
-            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : parent.height
+            width: imageWallpaperDrawer.horizontal ? wallpapersView.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : wallpapersView.height
             padding: Kirigami.Units.gridUnit / 2
             leftPadding: padding
             topPadding: padding
@@ -81,10 +107,10 @@ Controls.Drawer {
         delegate: Controls.ItemDelegate {
             id: delegate
 
-            width: imageWallpaperDrawer.horizontal ? parent.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
-            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : (parent ? parent.height : 0)
-            padding: Kirigami.Units.largeSpacing - (ListView.isCurrentItem ? Kirigami.Units.smallSpacing : 0)
-            property real inset: ListView.isCurrentItem ? 0 : Kirigami.Units.smallSpacing
+            width: imageWallpaperDrawer.horizontal ? wallpapersView.width : height * (imageWallpaperDrawer.width / imageWallpaperDrawer.Screen.height)
+            height: imageWallpaperDrawer.horizontal ? width / (imageWallpaperDrawer.Screen.width / imageWallpaperDrawer.Screen.height) : (wallpapersView ? wallpapersView.height : 0)
+            padding: Kirigami.Units.largeSpacing - (wallpapersView.currentIndex === index ? Kirigami.Units.smallSpacing : 0)
+            property real inset: wallpapersView.currentIndex === index ? 0 : Kirigami.Units.smallSpacing
             Behavior on inset {
                 NumberAnimation {
                     duration: Kirigami.Units.longDuration

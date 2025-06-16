@@ -5,7 +5,6 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Layouts
 import QtQuick.Effects
-import Qt5Compat.GraphicalEffects
 
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -18,13 +17,13 @@ import org.kde.private.mobile.homescreen.folio 1.0 as Folio
 import org.kde.plasma.private.mobileshell.windowplugin as WindowPlugin
 import org.kde.plasma.private.mobileshell.shellsettingsplugin as ShellSettings
 
+import "./settings"
+import "./delegate"
+import "./private"
+
 ContainmentItem {
     id: root
     property Folio.HomeScreen folio: root.plasmoid
-
-    // blur properties, the wallpaperBlurEffect setting must not be set to none to make an effect
-    readonly property int fastBlurRadius: 24
-    readonly property real blurTextureQuality: 0.1 // gets multiplied against the screen size to set the texture size
 
     Component.onCompleted: {
         folio.FolioSettings.load();
@@ -42,76 +41,19 @@ ContainmentItem {
         asynchronous: true
         anchors.fill: parent
 
-        sourceComponent: Item {
-            id: wallpaper
-            anchors.fill: parent
-
-            // this value is used to switch between blurring the whole wallpaper or just behind the mask areas
-            property real fullBlur: Math.min(1,
-                Math.max(0,
+        sourceComponent: BlurEffect {
+            active: true
+            fullBlur: Math.min(1, Math.max(0,
                 1 - homeScreen.contentOpacity,
                 folio.HomeScreenState.appDrawerOpenProgress * 2, // blur faster during swipe
                 folio.HomeScreenState.searchWidgetOpenProgress * 1.5, // blur faster during swipe
                 folio.HomeScreenState.folderOpenProgress
             ))
 
-            // only take samples from wallpaper when we need the blur for performance
-            ShaderEffectSource {
-                id: controlledWallpaperSource
-                anchors.fill: parent
+            sourceComponent: Plasmoid.wallpaperGraphicsObject
+            maskSourceComponent: folio.FolioSettings.wallpaperBlurEffect > 1 ? folioHomeScreen.maskComponent : null
 
-                // this layer will be blurred, so it looks fine to have a lower texture quality to help with performance
-                textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-
-                live: wallpaperBlurLoader.active
-                hideSource: false
-                opacity: wallpaper.fullBlur
-
-                // wallpaper blur
-                // we attempted to use MultiEffect in the past, but it had very poor performance on the PinePhone
-                sourceItem: FastBlur {
-                    height: Math.round(root.height * root.blurTextureQuality)
-                    width: Math.round(root.width * root.blurTextureQuality)
-
-                    cached: true
-                    radius: root.fastBlurRadius
-
-                    source: ShaderEffectSource{
-                        anchors.fill: parent
-
-                        textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-
-                        sourceItem: Plasmoid.wallpaperGraphicsObject
-                        hideSource: false
-                    }
-                }
-            }
-
-            // load in the layer mask so we can utilize it with the OpacityMask
-            Item {
-                id: blurMask
-                anchors.fill: parent
-                layer.enabled: true
-                layer.smooth: true
-                opacity: 0
-
-                Loader {
-                    asynchronous: true
-                    active: wallpaper.fullBlur != 1 && folio.FolioSettings.wallpaperBlurEffect > 1
-                    anchors.fill: parent
-
-                    sourceComponent: folioHomeScreen.maskComponent
-                }
-            }
-
-            // here we utilize the mask on the blur layer so we can blur behind the folders and favorites bar
-            OpacityMask {
-                anchors.fill: parent
-                source: controlledWallpaperSource
-                maskSource: blurMask
-                opacity: 1 - Math.max(folio.HomeScreenState.settingsOpenProgress, wallpaper.fullBlur)
-                visible: (folio.FolioSettings.wallpaperBlurEffect > 1) && opacity > 0
-            }
+            opacity: 1 - folio.HomeScreenState.settingsOpenProgress
         }
     }
 
@@ -220,179 +162,78 @@ ContainmentItem {
                 bottomMargin: homeScreen.bottomMargin
                 leftMargin: homeScreen.leftMargin
                 rightMargin: homeScreen.rightMargin
+
+                onWallpaperSelectorTriggered: wallpaperSelectorLoader.active = true
             }
         }
     }
 
-    // create mask layer for the drag and drop item so we can blur behind it
-    property Component dragMaskComponent: Item {
-        id: maskComponent
-        anchors.fill: parent
-
-        component FolderMask : ColumnLayout {
-            id: folderMask
-            required property Item item
-            spacing: 0
-
-            width: item.width
-            height: item.height
-
-            x: item.x
-            y: item.y
-
-            function setXBinding() {
-                x = Qt.binding(() => item.x);
-            }
-            function setYBinding() {
-                y = Qt.binding(() => item.y);
-            }
-
-            // animate drop x
-            XAnimator on x {
-                id: dragXAnim
-                running: false
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
-                onFinished: {
-                    folderMask.setXBinding();
-                }
-            }
-
-            // animate drop y
-            YAnimator on y {
-                id: dragYAnim
-                running: false
-                duration: Kirigami.Units.longDuration
-                easing.type: Easing.OutCubic
-                onFinished: {
-                    folderMask.setYBinding();
-                }
-            }
-
-            Connections {
-                target: item
-
-                function onAnimateDrop() {
-                    dragXAnim.to = item.snapPositionX;
-                    dragYAnim.to = item.snapPositionY;
-                    dragXAnim.restart();
-                    dragYAnim.restart();
-                }
-            }
-
-            Rectangle {
-                Layout.minimumWidth: folio.FolioSettings.delegateIconSize
-                Layout.minimumHeight: folio.FolioSettings.delegateIconSize
-                Layout.preferredHeight: Layout.minimumHeight
-
-                radius: Kirigami.Units.cornerRadius
-
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignBottom
-            }
-
-            Item {
-                Layout.preferredHeight: folio.HomeScreenState.pageDelegateLabelHeight
-                Layout.topMargin: folio.HomeScreenState.pageDelegateLabelSpacing
-            }
-        }
-
-        FolderMask {
-            item: delegateDragItem
-        }
-    }
-
-    // drag and drop blur layer
+    // homescreen top blur layer
     Loader {
-        id: dragDropBlurLoader
-        // only take samples from wallpaper and homescreen when we need the blur for performance
-        active: folio.FolioSettings.wallpaperBlurEffect > 1 && delegateDragItem.visible && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Folder
+        id: topLayerBlurLoader
+        active: folio.FolioSettings.wallpaperBlurEffect > 1 && ((delegateDragItem.visible && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Folder) || wallpaperSelectorLoader.active)
         visible: active
         asynchronous: true
         anchors.fill: parent
 
-        sourceComponent: Item {
-            id: frontLayer
+        sourceComponent: BlurEffect {
             anchors.fill: parent
+            active: topLayerBlurLoader.active
+            fullBlur: 0
 
-            ShaderEffectSource {
-                id: blur
-                anchors.fill: parent
+            sourceComponent: homeScreenLayer
+            maskSourceComponent: maskComponent
 
-                // this layer will be blurred, so it looks fine to have a lower texture quality to help with performance
-                textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-
-                live: dragDropBlurLoader.active
-                visible: dragDropBlurLoader.active
-                hideSource: true
-
-                opacity: 0
-
-                // we attempted to use MultiEffect in the past, but it had very poor performance on the PinePhone
-                sourceItem: FastBlur {
-                    height: Math.round(root.height * root.blurTextureQuality)
-                    width: Math.round(root.width * root.blurTextureQuality)
-
-                    cached: true
-                    radius: root.fastBlurRadius
-
-                    source: homeScreenLayer
-
-                    // stacking both wallpaper and homescreen layers so we can blur them in one pass
-                    Item {
-                        id: homeScreenLayer
-                        anchors.fill: parent
-
-                        layer.enabled: true
-                        layer.smooth: true
-
-                        opacity: 0
-
-                        // wallpaper blur
-                        ShaderEffectSource {
-                            anchors.fill: parent
-
-                            textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-
-                            sourceItem: Plasmoid.wallpaperGraphicsObject
-                            hideSource: false
-                        }
-
-                        // homescreen blur
-                        ShaderEffectSource {
-                            anchors.fill: parent
-
-                            sourceItem: homeScreen
-                            textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-                            hideSource: false
-                        }
-                    }
-                }
-            }
-
-            // load in the drag and drop mask layer so we can utilize it with the ThresholdMask
+            // stacking both wallpaper and homescreen layers so we can blur them in one pass
             Item {
-                id: dragMask
+                id: homeScreenLayer
                 anchors.fill: parent
+
                 layer.enabled: true
                 layer.smooth: true
+
                 opacity: 0
 
-                Loader {
-                    asynchronous: true
-                    active: frontLayer.fullBlur != 1 && folio.FolioSettings.wallpaperBlurEffect > 1 && dragDropBlurLoader.active
+                // wallpaper blur
+                ShaderEffectSource {
                     anchors.fill: parent
 
-                    sourceComponent: root.dragMaskComponent
+                    textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
+
+                    sourceItem: Plasmoid.wallpaperGraphicsObject
+                    hideSource: false
+                }
+
+                // homescreen blur
+                ShaderEffectSource {
+                    anchors.fill: parent
+
+                    sourceItem: homeScreen
+                    textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
+                    hideSource: false
                 }
             }
 
-            // here we use the dragMask on the blur layer to blur behind folders when they are being dragged
-            ThresholdMask {
+            // load in the mask layer so we can utilize it with the OpacityMask
+            property Component maskComponent: Item {
                 anchors.fill: parent
-                source: blur
-                maskSource: dragMask
-                threshold: 0.5
-                visible: folio.FolioSettings.wallpaperBlurEffect > 1 && dragDropBlurLoader.active
+
+                // load mask layer for the drag and drop item so we can blur behind it
+                Loader {
+                    asynchronous: true
+                    active: topLayerBlurLoader.active && delegateDragItem.visible && folio.HomeScreenState.dragState.dropDelegate.type === Folio.FolioDelegate.Folder
+
+                    sourceComponent: DragIconMaskDelegate { folio: root.folio; item: delegateDragItem }
+                }
+
+                // load mask layer for the wallpaper selector so we can blur behind it
+                Loader {
+                    asynchronous: true
+                    active: topLayerBlurLoader.active && wallpaperSelectorLoader.item && wallpaperSelectorLoader.active
+                    anchors.fill: parent
+
+                    sourceComponent: wallpaperSelectorLoader.active ? wallpaperSelectorLoader.item.maskComponent : null
+                }
             }
         }
     }
@@ -407,6 +248,34 @@ ContainmentItem {
     WidgetDragItem {
         id: widgetDragItem
         folio: root.folio
+    }
+
+    // loader for wallpaper selector
+    Loader {
+        id: wallpaperSelectorLoader
+        anchors.fill: parent
+        asynchronous: true
+        active: false
+
+        onLoaded: {
+            wallpaperSelectorLoader.item.open();
+        }
+
+        sourceComponent: MobileShell.WallpaperSelector {
+            horizontal: root.width > root.height
+            edge: horizontal ? Qt.LeftEdge : Qt.BottomEdge
+            bottomMargin: horizontal ? 0 : folioHomeScreen.bottomMargin
+            leftMargin: horizontal ? folioHomeScreen.leftMargin : 0
+            rightMargin: horizontal ? folioHomeScreen.rightMargin : 0
+            onClosed: {
+                wallpaperSelectorLoader.active = false;
+            }
+
+            onWallpaperSettingsRequested: {
+                close();
+                folioHomeScreen.openConfigure();
+            }
+        }
     }
 }
 
