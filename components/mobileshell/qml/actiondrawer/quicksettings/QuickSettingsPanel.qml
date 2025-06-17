@@ -4,6 +4,7 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
+import QtQuick.Effects
 
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
@@ -43,10 +44,31 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing * 4
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
-    background: KSvg.FrameSvgItem {
-        enabledBorders: KSvg.FrameSvgItem.AllBorders
-        imagePath: "widgets/background"
-        opacity: brightnessPressedValue
+    background: Item {
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            anchors.margins: Kirigami.Units.largeSpacing
+            color: Kirigami.Theme.backgroundColor
+            opacity: brightnessPressedValue
+            visible: false
+
+            radius: Kirigami.Units.cornerRadius
+
+            // Only show border on dark background
+            border.color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.textColor, Kirigami.Theme.backgroundColor, 0.9)
+            border.width: (Kirigami.ColorUtils.brightnessForColor(color)) === Kirigami.ColorUtils.Dark ? 1 : 0
+            border.pixelAligned: false
+        }
+
+        MultiEffect {
+            anchors.fill: background
+            source: background
+            blurMax: 16
+            shadowEnabled: true
+            shadowOpacity: 0.5
+            shadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.9)
+        }
     }
 
     contentItem: Item {

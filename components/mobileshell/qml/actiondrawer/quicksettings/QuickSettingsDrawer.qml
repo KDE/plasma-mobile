@@ -57,10 +57,42 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
-    background: KSvg.FrameSvgItem {
-        enabledBorders: KSvg.FrameSvgItem.BottomBorder
-        imagePath: "widgets/background"
-        opacity: brightnessPressedValue
+    background: Item {
+        Rectangle {
+            id: background
+            anchors.fill: parent
+            anchors.bottomMargin: shadow.height
+            color: Kirigami.Theme.backgroundColor
+            opacity: brightnessPressedValue
+        }
+
+        Rectangle {
+            id: separator
+            anchors.bottom: background.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            antialiasing: true
+
+            // Only show separator on dark background
+            visible: (Kirigami.ColorUtils.brightnessForColor(background.color)) === Kirigami.ColorUtils.Dark ? 1 : 0
+            height: 1
+            color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.textColor, Kirigami.Theme.backgroundColor, 0.9)
+        }
+
+        Rectangle {
+            id: shadow
+            anchors.top: background.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            height: Kirigami.Units.largeSpacing
+            opacity: 0.1
+
+            gradient: Gradient {
+                orientation: Gradient.Vertical
+                GradientStop { position: 0.0; color: 'black' }
+                GradientStop { position: 1.0; color: 'transparent' }
+            }
+        }
     }
 
     contentItem: Item {
