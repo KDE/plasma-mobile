@@ -39,10 +39,14 @@ Item {
 
         showDropShadow: root.transparentBackground
         backgroundColor: {
+            if (root.transparentBackground) {
+                return "transparent";
+            }
+
             if (state == "default") {
-                return transparentBackground ? "transparent" : Kirigami.Theme.backgroundColor;
+                return Kirigami.Theme.backgroundColor;
             } else {
-                return transparentBackground ? "transparent" : Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95);
+                return Qt.rgba(Kirigami.Theme.backgroundColor.r, Kirigami.Theme.backgroundColor.g, Kirigami.Theme.backgroundColor.b, 0.95);
             }
         }
 

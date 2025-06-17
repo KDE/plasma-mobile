@@ -9,6 +9,7 @@ import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.notificationmanager as Notifications
 import org.kde.plasma.private.mobileshell as MobileShell
+import org.kde.plasma.private.mobileshell.state as MobileShellState
 import org.kde.plasma.private.mobileshell.dpmsplugin as DPMS
 import org.kde.plasma.components 3.0 as PC3
 
