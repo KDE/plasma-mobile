@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the plasma-mobile package.
 #
-# SPDX-FileCopyrightText: 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-15 00:44+0000\n"
-"PO-Revision-Date: 2024-06-21 11:30+0200\n"
+"PO-Revision-Date: 2025-06-16 22:22+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,12 +15,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "Inga kodare tillgängliga för inspelning"
 
 #: recordutil.cpp:74
 #, kde-format
@@ -33,22 +33,19 @@ msgid "New Screen Recording saved in %1"
 msgstr "Ny skärminspelning sparad i %1"
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
-msgstr "Spela in skärm"
+msgstr "Spela in bildskärm"
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "Spelar in…"
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "Skriver…"
