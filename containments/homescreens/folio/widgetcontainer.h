@@ -37,6 +37,8 @@ private Q_SLOTS:
     void onActiveFocusChanged(bool activeFocus);
 
 private:
+    bool validMouseEvent(QMouseEvent *event);
+
     bool m_pressed{false};
     bool m_editMode{false};
     QTimer *m_pressAndHoldTimer{nullptr};
