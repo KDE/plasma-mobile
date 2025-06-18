@@ -14,8 +14,9 @@ Item {
     property real fullBlur: 1
 
     // gets multiplied against the screen size to set the texture size
-    readonly property real blurTextureQuality: 0.2
-    readonly property int fastBlurRadius: 30
+    readonly property real blurTextureQuality: 0.5
+    readonly property var textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
+    readonly property int fastBlurRadius: 42
 
     property var sourceComponent
     property Component maskSourceComponent
@@ -26,7 +27,7 @@ Item {
         anchors.fill: parent
 
         // this layer will be blurred, so it looks fine to have a lower texture quality to help with performance
-        textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
+        textureSize: root.textureSize
 
         live: root.active
         hideSource: false
@@ -60,6 +61,7 @@ Item {
         anchors.fill: parent
         layer.enabled: true
         layer.smooth: true
+        layer.textureSize: root.textureSize
         opacity: 0
 
         Loader {

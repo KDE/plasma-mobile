@@ -177,6 +177,7 @@ ContainmentItem {
         anchors.fill: parent
 
         sourceComponent: BlurEffect {
+            id: blurEffect
             anchors.fill: parent
             active: topLayerBlurLoader.active
             fullBlur: 0
@@ -188,18 +189,13 @@ ContainmentItem {
             Item {
                 id: homeScreenLayer
                 anchors.fill: parent
-
-                layer.enabled: true
-                layer.smooth: true
-
                 opacity: 0
 
                 // wallpaper blur
                 ShaderEffectSource {
                     anchors.fill: parent
 
-                    textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
-
+                    textureSize: blurEffect.textureSize
                     sourceItem: Plasmoid.wallpaperGraphicsObject
                     hideSource: false
                 }
@@ -208,8 +204,8 @@ ContainmentItem {
                 ShaderEffectSource {
                     anchors.fill: parent
 
+                    textureSize: blurEffect.textureSize
                     sourceItem: homeScreen
-                    textureSize: Qt.size(Math.round(root.width * root.blurTextureQuality), Math.round(root.height * root.blurTextureQuality))
                     hideSource: false
                 }
             }
