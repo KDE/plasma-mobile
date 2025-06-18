@@ -21,7 +21,7 @@ msgstr ""
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "没有编码器可供录制使用"
 
 #: recordutil.cpp:74
 #, kde-format
