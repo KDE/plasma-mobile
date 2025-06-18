@@ -58,12 +58,13 @@ MobileShell.BaseItem {
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
     background: Item {
+        opacity: brightnessPressedValue
+
         Rectangle {
             id: background
             anchors.fill: parent
             anchors.bottomMargin: shadow.height
             color: Kirigami.Theme.backgroundColor
-            opacity: brightnessPressedValue
         }
 
         Rectangle {
