@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-06-19 02:34+0000\n"
 "PO-Revision-Date: 2024-03-07 11:34+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -18,42 +18,53 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:51
 #, kde-format
-msgid "Record Screen"
-msgstr "הקלטת המסך"
+msgid "No encoders available for recording"
+msgstr ""
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "בהקלטה…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "מתבצעת כתיבה…"
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "נגיעה תתחיל להקליט"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "המסך מוקלט…"
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "נא להמתין…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording"
 msgstr "הקלטת מסך חדשה"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "הקלטת המסך החדשה נשמרה תחת %1"
+
+#: recordutil.cpp:121
+#, fuzzy, kde-format
+#| msgid "Record Screen"
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "הקלטת המסך"
+
+#: recordutil.cpp:130
+#, fuzzy, kde-format
+#| msgid "Recording…"
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "בהקלטה…"
+
+#: recordutil.cpp:133
+#, fuzzy, kde-format
+#| msgid "Writing…"
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "מתבצעת כתיבה…"
+
+#: recordutil.cpp:146
+#, kde-format
+msgid "Tap to start recording"
+msgstr "נגיעה תתחיל להקליט"
+
+#: recordutil.cpp:156
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "המסך מוקלט…"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Please wait…"
+msgstr "נא להמתין…"

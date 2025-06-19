@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-06-19 02:34+0000\n"
 "PO-Revision-Date: 2024-04-22 17:31+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -18,42 +18,53 @@ msgstr ""
 "2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:51
 #, kde-format
-msgid "Record Screen"
-msgstr "Ierakstīt ekrānu"
+msgid "No encoders available for recording"
+msgstr ""
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "Ieraksta..."
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "Raksta..."
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "Spiediet, lai sākt ierakstīšanu"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "Notiek ekrāna ierakstīšana..."
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "Uzgaidiet..."
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording"
 msgstr "Jauns ekrāna ieraksts"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "Jaunais ekrāna ieraksts ir saglabāts „%1“"
+
+#: recordutil.cpp:121
+#, fuzzy, kde-format
+#| msgid "Record Screen"
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "Ierakstīt ekrānu"
+
+#: recordutil.cpp:130
+#, fuzzy, kde-format
+#| msgid "Recording…"
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "Ieraksta..."
+
+#: recordutil.cpp:133
+#, fuzzy, kde-format
+#| msgid "Writing…"
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "Raksta..."
+
+#: recordutil.cpp:146
+#, kde-format
+msgid "Tap to start recording"
+msgstr "Spiediet, lai sākt ierakstīšanu"
+
+#: recordutil.cpp:156
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "Notiek ekrāna ierakstīšana..."
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Please wait…"
+msgstr "Uzgaidiet..."

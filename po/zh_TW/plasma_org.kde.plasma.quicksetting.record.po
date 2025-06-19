@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-07-03 00:40+0000\n"
+"POT-Creation-Date: 2025-06-19 02:34+0000\n"
 "PO-Revision-Date: 2023-12-22 05:31+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -17,42 +17,53 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 24.01.80\n"
 
-#: package/contents/ui/main.qml:17
+#: recordutil.cpp:51
 #, kde-format
-msgid "Record Screen"
-msgstr "錄製螢幕"
+msgid "No encoders available for recording"
+msgstr ""
 
-#: package/contents/ui/main.qml:19
-#, kde-format
-msgid "Recording…"
-msgstr "錄製中…"
-
-#: package/contents/ui/main.qml:21
-#, kde-format
-msgid "Writing…"
-msgstr "寫入中…"
-
-#: package/contents/ui/main.qml:25
-#, kde-format
-msgid "Tap to start recording"
-msgstr "輕點以開始錄製"
-
-#: package/contents/ui/main.qml:27
-#, kde-format
-msgid "Screen is being captured…"
-msgstr "螢幕正被擷取…"
-
-#: package/contents/ui/main.qml:29
-#, kde-format
-msgid "Please wait…"
-msgstr "請稍候…"
-
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording"
 msgstr "新的螢幕錄製"
 
-#: package/contents/ui/main.qml:49
+#: recordutil.cpp:74
 #, kde-format
 msgid "New Screen Recording saved in %1"
 msgstr "新的螢幕錄製已儲存於 %1"
+
+#: recordutil.cpp:121
+#, fuzzy, kde-format
+#| msgid "Record Screen"
+msgctxt "@action:button"
+msgid "Record Screen"
+msgstr "錄製螢幕"
+
+#: recordutil.cpp:130
+#, fuzzy, kde-format
+#| msgid "Recording…"
+msgctxt "@info:status"
+msgid "Recording…"
+msgstr "錄製中…"
+
+#: recordutil.cpp:133
+#, fuzzy, kde-format
+#| msgid "Writing…"
+msgctxt "@info:status"
+msgid "Writing…"
+msgstr "寫入中…"
+
+#: recordutil.cpp:146
+#, kde-format
+msgid "Tap to start recording"
+msgstr "輕點以開始錄製"
+
+#: recordutil.cpp:156
+#, kde-format
+msgid "Screen is being captured…"
+msgstr "螢幕正被擷取…"
+
+#: recordutil.cpp:159
+#, kde-format
+msgid "Please wait…"
+msgstr "請稍候…"
