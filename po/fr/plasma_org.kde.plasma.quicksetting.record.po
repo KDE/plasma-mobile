@@ -4,8 +4,8 @@ msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 02:34+0000\n"
-"PO-Revision-Date: 2023-11-01 14:44+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2025-06-17 14:02+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "Aucun encodeur disponible pour enregistrement"
 
 #: recordutil.cpp:74
 #, kde-format
@@ -30,25 +30,22 @@ msgid "New Screen Recording saved in %1"
 msgstr "Nouvel enregistrement d'écran enregistré dans %1..."
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Enregistrer l'écran"
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "Enregistrement en cours..."
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
-msgstr "Enregistrement en cours..."
+msgstr "Écriture en cours..."
 
 #: recordutil.cpp:146
 #, kde-format
