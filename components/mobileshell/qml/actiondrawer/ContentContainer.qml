@@ -105,7 +105,7 @@ Item {
             opacity: Math.max(0, Math.min(root.brightnessPressedValue, actionDrawer.offsetResistance / root.minimizedQuickSettingsOffset))
 
             anchors {
-                topMargin: notificationDrawer.height
+                topMargin: notificationDrawer.height - Kirigami.Units.largeSpacing + 1
                 leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : 10
                 rightMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.notificationWidget.anchors.rightMargin + Kirigami.Units.gridUnit - notificationDrawer.anchors.leftMargin + 370
                 top: parent.top
@@ -170,6 +170,7 @@ Item {
             top: parent.top
             left: parent.left
             right: parent.right
+            topMargin: -Kirigami.Units.largeSpacing
             rightMargin: root.actionDrawer.mode == ActionDrawer.Portrait ? 0 : 360
             leftMargin: actionDrawer.mode == ActionDrawer.Portrait ? 0 : notificationDrawer.minWidthHeight * 0.06
         }
@@ -232,7 +233,6 @@ Item {
 
             quickSettings: root.quickSettings
             statusBar: root.statusBar
-            mediaControlsWidget: root.mediaControlsWidget
         }
     }
 

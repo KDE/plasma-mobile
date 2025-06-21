@@ -34,8 +34,8 @@ Item {
 
     Behavior on implicitHeight {
        NumberAnimation {
-           duration: implicitHeight == 0 ? 0 : Kirigami.Units.shortDuration
-           easing.type: Easing.InOutQuad
+           duration: implicitHeight == 0 ? 0 : Kirigami.Units.longDuration
+           easing.type: Easing.OutQuart
        }
     }
 
@@ -63,30 +63,9 @@ Item {
         }
     }
 
-    // shadow
-    MultiEffect {
-        anchors.fill: root
-        visible: !inActionDrawer
-        source: simpleShadow
-        blurMax: 32
-        shadowEnabled: true
-        shadowVerticalOffset: 1
-        shadowOpacity: 0.5
-        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
-    }
-
-    Rectangle {
-        id: simpleShadow
-        anchors.fill: root
-        anchors.leftMargin: -1
-        anchors.rightMargin: -1
-        anchors.bottomMargin: -1
-
-        color: {
-            let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
-            return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, 0.3)
-        }
-        radius: Kirigami.Units.cornerRadius
+    MobileShell.BackgroundItem {
+        anchors.fill: parent
+        translucent: inActionDrawer ? 0 : 1
     }
 
     // list of app media widgets

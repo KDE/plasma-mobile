@@ -62,6 +62,7 @@ BaseNotificationItem {
         onTapped: notificationItem.actionInvoked("default");
         swipeGestureEnabled: notificationItem.closable
         onDismissRequested: notificationItem.close();
+        inLockscreen: notificationItem.inLockscreen
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()

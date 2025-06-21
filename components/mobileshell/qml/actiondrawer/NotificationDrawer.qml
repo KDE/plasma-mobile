@@ -24,14 +24,14 @@ Item {
     property alias notificationWidget: notificationWidget
     property real contentY: notificationWidget.listView.contentY
 
-    property real topPadding: actionDrawer.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing : date.y + date.height + Kirigami.Units.smallSpacing * 6
+    property real topPadding: actionDrawer.mode == ActionDrawer.Portrait ? Kirigami.Units.largeSpacing * 2 : date.y + date.height + Kirigami.Units.smallSpacing * 6
     property real topMargin: actionDrawer.mode == ActionDrawer.Portrait ? actionDrawer.offsetResistance + 1 : 0
 
     readonly property real minWidthHeight: Math.min(actionDrawer.width, actionDrawer.height)
     readonly property bool hasNotifications: notificationWidget.hasNotifications
     readonly property bool listOverflowing: notificationWidget.listView.listOverflowing
 
-    height: Math.min(actionDrawer.height - toolButtons.height, notificationWidget.listView.contentHeight + 10 + topMargin)
+    height: Math.min(actionDrawer.height - toolButtons.height + Kirigami.Units.largeSpacing, notificationWidget.listView.contentHeight + 10 + topMargin)
 
     // time source for the time and date whenin landscape mode
     P5Support.DataSource {
@@ -63,7 +63,7 @@ Item {
         actionsRequireUnlock: actionDrawer.restrictedPermissions
         onUnlockRequested: actionDrawer.permissionsRequested()
         topPadding: root.topPadding
-        showHeader: actionDrawer.mode != ActionDrawer.Portrait
+        showHeader: true
         listView.interactive: !actionDrawer.dragging && root.listOverflowing
 
         Connections {

@@ -34,7 +34,7 @@ MobileShell.BaseItem {
     /**
      * Height of panel when in minimized mode.
      */
-    readonly property real minimizedHeight: bottomPadding + topPadding + statusBarProxy.height + minimizedQuickSettingsHeight + mediaControlsWidgetProxy.height + handle.fullHeight
+    readonly property real minimizedHeight: bottomPadding + topPadding + statusBarProxy.height + minimizedQuickSettingsHeight + handle.fullHeight
 
     /**
      * Height of just the QuickSettings component in minimized mode.
@@ -48,7 +48,6 @@ MobileShell.BaseItem {
 
     property alias quickSettings: quickSettingsProxy.contentItem
     property alias statusBar: statusBarProxy.contentItem
-    property alias mediaControlsWidget: mediaControlsWidgetProxy.contentItem
     readonly property double brightnessPressedValue: quickSettings.brightnessPressedValue
 
     // we need extra padding if the background side border is enabled
@@ -60,11 +59,13 @@ MobileShell.BaseItem {
     background: Item {
         opacity: brightnessPressedValue
 
-        Rectangle {
+        MobileShell.BackgroundItem {
             id: background
             anchors.fill: parent
             anchors.bottomMargin: shadow.height
-            color: Kirigami.Theme.backgroundColor
+            border: 0
+            shadow: 0
+            radius: 0
         }
 
         Rectangle {
@@ -122,15 +123,6 @@ MobileShell.BaseItem {
 
                 height: root.minimizedQuickSettingsHeight + root.addedHeight
                 width: parent.width
-            }
-
-            MobileShell.BaseItem {
-                id: mediaControlsWidgetProxy
-                property real fullHeight: height + Layout.topMargin
-                Layout.fillWidth: true
-                Layout.topMargin: Kirigami.Units.smallSpacing
-                Layout.leftMargin: Kirigami.Units.largeSpacing
-                Layout.rightMargin: Kirigami.Units.largeSpacing
             }
 
             Handle {

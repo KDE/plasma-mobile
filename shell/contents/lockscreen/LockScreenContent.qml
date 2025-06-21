@@ -102,8 +102,8 @@ Item {
             Layout.alignment: root.isVertical ? Qt.AlignHCenter : Qt.AlignLeft
             Layout.fillWidth: true
             Layout.maximumWidth: Kirigami.Units.gridUnit * 25
-            Layout.leftMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
-            Layout.rightMargin: root.isVertical ? Kirigami.Units.gridUnit : 0
+            Layout.leftMargin: root.isVertical ? Kirigami.Units.largeSpacing * 2 : 0
+            Layout.rightMargin: root.isVertical ? Kirigami.Units.largeSpacing * 2 : 0
         }
     }
 
@@ -120,8 +120,8 @@ Item {
 
         topPadding: root.isVertical ? (mediaControlsWidget.visible ? Kirigami.Units.smallSpacing : Kirigami.Units.gridUnit) : Kirigami.Units.gridUnit
 
-        leftMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
-        rightMargin: root.isVertical ? 0 : Kirigami.Units.gridUnit
+        leftMargin: root.isVertical ? Kirigami.Units.largeSpacing : Kirigami.Units.gridUnit
+        rightMargin: root.isVertical ? Kirigami.Units.largeSpacing : Kirigami.Units.gridUnit
         topMargin: root.isVertical ? 0 : MobileShell.Constants.topPanelHeight
         bottomMargin: root.isVertical && (Kirigami.Units.gridUnit * 35 < root.width) && actionButtons.isVisible ? 0 : Kirigami.Units.gridUnit
         scrollLock: root.scrollLock

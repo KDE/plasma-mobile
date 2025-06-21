@@ -27,7 +27,6 @@ Item {
 
     property alias quickSettings: quickSettingsDrawer.quickSettings
     property alias statusBar: quickSettingsDrawer.statusBar
-    property alias mediaControlsWidget: quickSettingsDrawer.mediaControlsWidget
 
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false

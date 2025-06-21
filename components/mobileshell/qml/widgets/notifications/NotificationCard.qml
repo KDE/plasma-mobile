@@ -9,6 +9,7 @@ import Qt5Compat.GraphicalEffects
 import org.kde.kirigami 2.12 as Kirigami
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.private.mobileshell as MobileShell
 
 Item {
     id: root
@@ -18,6 +19,8 @@ Item {
     property bool popupNotification: false
 
     property bool inPopupDrawer: false
+
+    property bool inLockscreen: false
 
     property int currentPopupHeight: 0
 
@@ -57,34 +60,10 @@ Item {
         }
     }
 
-    // shadow
-    MultiEffect {
+    MobileShell.BackgroundItem {
         anchors.fill: mainCard
-        visible: Math.abs(dragOffset) !== root.width
-        source: simpleShadow
-        blurMax: 16
-        shadowEnabled: true
-        shadowVerticalOffset: 1
-        shadowOpacity: popupNotification ? 0.85 : 0.5
-        shadowColor: Qt.lighter(Kirigami.Theme.backgroundColor, 0.2)
+        translucent: inLockscreen ? 1 : 0
     }
-
-    Rectangle {
-        id: simpleShadow
-        visible: Math.abs(dragOffset) !== root.width
-        anchors.fill: mainCard
-        anchors.leftMargin: -1
-        anchors.rightMargin: -1
-        anchors.bottomMargin: -1
-
-        color: {
-            let darkerBackgroundColor = Qt.darker(Kirigami.Theme.backgroundColor, 1.3);
-            return Qt.rgba(darkerBackgroundColor.r, darkerBackgroundColor.g, darkerBackgroundColor.b, popupNotification ? 0.5 : 0.3)
-        }
-        radius: Kirigami.Units.cornerRadius
-    }
-
-
 
     // card
     Item {
@@ -100,17 +79,6 @@ Item {
             NumberAnimation {
                 duration: Kirigami.Units.veryLongDuration
                 easing.type: Easing.OutExpo
-            }
-        }
-
-        Rectangle {
-            anchors.fill: parent
-            color: popupNotification ? Qt.lighter(Kirigami.Theme.backgroundColor, 1.5) :  Qt.rgba(Kirigami.Theme.backgroundColor.r * 0.95, Kirigami.Theme.backgroundColor.g * 0.95, Kirigami.Theme.backgroundColor.b * 0.95, (root.tapEnabled && mouseArea.pressed) ? 0.95 : 0.85)
-            opacity: popupNotification ? 0.85 : 1
-            radius: Kirigami.Units.cornerRadius
-            layer.enabled: popupNotification ? false : true
-            layer.effect: MultiEffect {
-                brightness: 0.075
             }
         }
 

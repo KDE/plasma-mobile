@@ -44,32 +44,10 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing * 4
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
-    background: Item {
+    background: MobileShell.BackgroundItem {
+        anchors.fill: parent
+        anchors.margins: Kirigami.Units.largeSpacing
         opacity: brightnessPressedValue
-
-        Rectangle {
-            id: background
-            anchors.fill: parent
-            anchors.margins: Kirigami.Units.largeSpacing
-            color: Kirigami.Theme.backgroundColor
-            visible: false
-
-            radius: Kirigami.Units.cornerRadius
-
-            // Only show border on dark background
-            border.color: Kirigami.ColorUtils.tintWithAlpha(Kirigami.Theme.textColor, Kirigami.Theme.backgroundColor, 0.9)
-            border.width: (Kirigami.ColorUtils.brightnessForColor(color)) === Kirigami.ColorUtils.Dark ? 1 : 0
-            border.pixelAligned: false
-        }
-
-        MultiEffect {
-            anchors.fill: background
-            source: background
-            blurMax: 16
-            shadowEnabled: true
-            shadowOpacity: 0.5
-            shadowColor: Qt.darker(Kirigami.Theme.backgroundColor, 1.9)
-        }
     }
 
     contentItem: Item {
