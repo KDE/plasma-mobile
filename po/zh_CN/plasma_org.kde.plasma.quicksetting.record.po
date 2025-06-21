@@ -21,7 +21,7 @@ msgstr ""
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "没有编码器可供录制使用"
 
 #: recordutil.cpp:74
 #, kde-format
@@ -34,22 +34,19 @@ msgid "New Screen Recording saved in %1"
 msgstr "新屏幕录像已保存到 %1"
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "屏幕录像"
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "正在录屏…"
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "正在写入…"
