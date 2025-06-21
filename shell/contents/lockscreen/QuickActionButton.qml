@@ -94,10 +94,7 @@ AbstractButton {
         }
     }
 
-    onReleased: {
-        if (!buttonHeld) {
-            return
-        }
+    function triggerButtonAction() {
         switch (buttonAction) {
             case ShellSettings.Settings.Flashlight:
                 FlashlightUtil.toggleTorch();
@@ -116,6 +113,7 @@ AbstractButton {
         onTriggered: {
             haptics.buttonVibrate();
             buttonHeld = true;
+            triggerButtonAction();
         }
     }
 
