@@ -233,6 +233,7 @@ Item {
 
             quickSettings: root.quickSettings
             statusBar: root.statusBar
+            mediaControlsWidget: root.mediaControlsWidget
         }
     }
 

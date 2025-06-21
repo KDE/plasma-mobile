@@ -63,7 +63,7 @@ Item {
         actionsRequireUnlock: actionDrawer.restrictedPermissions
         onUnlockRequested: actionDrawer.permissionsRequested()
         topPadding: root.topPadding
-        showHeader: true
+        showHeader: actionDrawer.mode != ActionDrawer.Portrait
         listView.interactive: !actionDrawer.dragging && root.listOverflowing
 
         Connections {
