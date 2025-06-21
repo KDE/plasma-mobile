@@ -14,24 +14,65 @@ import org.kde.plasma.private.mobileshell as MobileShell
 Item {
     id: root
 
+    /**
+     * The content that goes inside the notification card
+     */
     default property Item contentItem
 
+    /**
+     * Whether this is a popup notification.
+     */
     property bool popupNotification: false
 
+    /**
+     * Whether this popup notification is tucked underneath the current popup.
+     */
     property bool inPopupDrawer: false
 
+    /**
+     * Whether this popup notification drawer is opened.
+     */
+    property bool popupDrawerOpened: false
+
+    /**
+     * Whether this notification is within the lockscreen.
+     */
     property bool inLockscreen: false
 
+    /**
+     * Whether this notification is within the lockscreen notification drawer.
+     */
+    property bool inLockScreenDrawer: false
+
+
+    /**
+     * The current notification popup height.
+     */
     property int currentPopupHeight: 0
 
+    /**
+     * The remaining time before the notification popup is dismissed.
+     */
     property real remainingTimeProgress: 1
 
+    /**
+     * Whether the timer for dismissing the notification popup is running.
+     */
     property bool closeTimerRunning: false
 
+    /**
+     * Whether tapping on this notification is enabled.
+     */
     property bool tapEnabled: false
 
+    /**
+     * Whether swipping on this notification is enabled.
+     */
     property bool swipeGestureEnabled: false
 
+    /**
+     * The current drag offset for this notification.
+     */
     property real dragOffset: 0
 
     signal tapped()
@@ -60,9 +101,18 @@ Item {
         }
     }
 
-    MobileShell.BackgroundItem {
+    MobileShell.PanelBackground {
         anchors.fill: mainCard
-        translucent: inLockscreen ? 1 : 0
+        animate: true
+        panelType: {
+            if (inLockScreenDrawer) {
+                return MobileShell.PanelBackground.PanelType.Wallpaper
+            } else if (popupNotification && !popupDrawerOpened) {
+                return MobileShell.PanelBackground.PanelType.Popup
+            } else {
+                return MobileShell.PanelBackground.PanelType.Drawer
+            }
+        }
     }
 
     // card

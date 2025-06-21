@@ -83,6 +83,7 @@ Loader {
                 actionsRequireUnlock: true
                 historyModel: root.notificationsModel
                 notificationSettings: root.notificationSettings
+                inLockScreenDrawer: true
                 inLockscreen: true
                 topPadding: root.topPadding // Kirigami.Units.gridUnit
                 bottomPadding: Kirigami.Units.gridUnit

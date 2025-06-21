@@ -124,8 +124,9 @@ Window {
             yScale: content.scale
         }
 
-        MobileShell.BackgroundItem {
+        MobileShell.PanelBackground {
             anchors.fill: parent
+            panelType: MobileShell.PanelBackground.PanelType.Popup
             radius: root.size
         }
 

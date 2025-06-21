@@ -27,7 +27,15 @@ import org.kde.notificationmanager as NotificationManager
 Item {
     id: root
 
+    /**
+     * If the notification is in the lockscreen.
+     */
     property bool inLockscreen: false
+
+    /**
+     * If the notification is in the lockscreen notification drawer.
+     */
+    property bool inLockScreenDrawer: false
 
     /**
      * The notification model for the widget.
@@ -343,6 +351,7 @@ Item {
                         height: implicitHeight
 
                         inLockscreen: root.inLockscreen
+                        inLockScreenDrawer: root.inLockScreenDrawer
 
                         model: delegateLoader.model
                         modelIndex: delegateLoader.index

@@ -39,7 +39,7 @@ MobileShell.BaseItem {
     /**
      * Height of just the QuickSettings component in minimized mode.
      */
-    readonly property real minimizedQuickSettingsHeight: quickSettings.minimizedRowHeight + Kirigami.Units.gridUnit
+    readonly property real minimizedQuickSettingsHeight: quickSettings.minimizedRowHeight + Kirigami.Units.gridUnit - Kirigami.Units.largeSpacing
 
     /**
      * Progress of showing the full quick settings view from pinned.
@@ -60,12 +60,11 @@ MobileShell.BaseItem {
     background: Item {
         opacity: brightnessPressedValue
 
-        MobileShell.BackgroundItem {
+        MobileShell.PanelBackground {
             id: background
             anchors.fill: parent
             anchors.bottomMargin: shadow.height
-            border: 0
-            shadow: 0
+            panelType: MobileShell.PanelBackground.PanelType.Flat
             radius: 0
         }
 

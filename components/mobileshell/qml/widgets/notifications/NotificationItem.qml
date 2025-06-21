@@ -25,6 +25,7 @@ BaseNotificationItem {
     implicitHeight: mainCard.implicitHeight + mainCard.anchors.topMargin + notificationHeading.height
 
     property bool inLockscreen: false
+    property bool inLockScreenDrawer: false
 
     signal dragStart()
     signal dragEnd()
@@ -63,6 +64,7 @@ BaseNotificationItem {
         swipeGestureEnabled: notificationItem.closable
         onDismissRequested: notificationItem.close();
         inLockscreen: notificationItem.inLockscreen
+        inLockScreenDrawer: notificationItem.inLockScreenDrawer
 
         onDragStart: notificationItem.dragStart()
         onDragEnd: notificationItem.dragEnd()

@@ -20,7 +20,7 @@ import org.kde.kirigami 2.20 as Kirigami
  */
 Item {
     id: root
-    clip: true
+    clip: fullViewProgress < 1
 
     required property var actionDrawer
 
@@ -124,6 +124,7 @@ Item {
 
             SwipeView {
                 id: swipeView
+                clip: true
 
                 Layout.fillWidth: true
                 Layout.preferredHeight: rowCount * rowHeight

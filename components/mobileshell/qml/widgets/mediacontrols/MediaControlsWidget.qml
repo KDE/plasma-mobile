@@ -21,8 +21,8 @@ Item {
     id: root
     visible: sourceRepeater.count > 0
 
-    property bool inActionDrawer: false
-
+    property bool inEmbeddedActionDrawer: false
+    property bool inLockScreenDrawer: false
     property bool detailledView: false
 
     readonly property real padding: Kirigami.Units.gridUnit
@@ -63,10 +63,17 @@ Item {
         }
     }
 
-    MobileShell.BackgroundItem {
+    MobileShell.PanelBackground {
         anchors.fill: parent
-        translucent: inActionDrawer ? 0 : 1
-        forceBorder: true
+        panelType: {
+            if (inLockScreenDrawer) {
+                return MobileShell.PanelBackground.PanelType.Wallpaper
+            } else if (inEmbeddedActionDrawer) {
+                return MobileShell.PanelBackground.PanelType.Stacked
+            } else {
+                return MobileShell.PanelBackground.PanelType.Drawer
+            }
+        }
     }
 
     // list of app media widgets

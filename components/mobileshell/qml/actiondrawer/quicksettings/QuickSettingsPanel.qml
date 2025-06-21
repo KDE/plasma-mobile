@@ -44,11 +44,11 @@ MobileShell.BaseItem {
     rightPadding: Kirigami.Units.smallSpacing * 4
     bottomPadding: Kirigami.Units.smallSpacing * 4
 
-    background: MobileShell.BackgroundItem {
+    background: MobileShell.PanelBackground {
         anchors.fill: parent
         anchors.margins: Kirigami.Units.largeSpacing
+        panelType: MobileShell.PanelBackground.PanelType.Base
         opacity: brightnessPressedValue
-        complexShadow: true
     }
 
     contentItem: Item {
@@ -86,7 +86,7 @@ MobileShell.BaseItem {
                 Layout.maximumWidth: column.width
             }
 
-            Item { Layout.fillHeight: true }
+            Item { Layout.fillHeight: true; height: Kirigami.Units.largeSpacing }
         }
 
         Handle {

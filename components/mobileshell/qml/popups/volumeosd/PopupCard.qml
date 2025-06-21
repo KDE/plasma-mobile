@@ -24,10 +24,15 @@ Controls.Control {
     implicitWidth: Math.min(Kirigami.Units.gridUnit * 20, Screen.width - Kirigami.Units.gridUnit * 2)
     padding: Kirigami.Units.smallSpacing * 2
 
+    property bool popupBackground: false
+
     Kirigami.Theme.colorSet: Kirigami.Theme.View
     Kirigami.Theme.inherit: false
 
-    MobileShell.BackgroundItem {
+    MobileShell.PanelBackground {
         anchors.fill: parent
+        panelType: content.popupBackground ?
+            MobileShell.PanelBackground.PanelType.Popup :
+            MobileShell.PanelBackground.PanelType.Drawer
     }
 }

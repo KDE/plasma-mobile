@@ -32,15 +32,15 @@ Item {
         id: screenBrightness
     }
 
-    MobileShell.BackgroundItem {
+    MobileShell.PanelBackground {
         anchors.fill: parent
         anchors.leftMargin: -Kirigami.Units.smallSpacing
         anchors.rightMargin: -Kirigami.Units.smallSpacing
         anchors.topMargin: -Kirigami.Units.smallSpacing * 2
         anchors.bottomMargin: -Kirigami.Units.smallSpacing * 2
 
-        border: 1 - root.brightnessPressedValue
-        shadow: 1- root.brightnessPressedValue
+        panelType: MobileShell.PanelBackground.PanelType.Base
+        flatten:  root.brightnessPressedValue
     }
 
     RowLayout {

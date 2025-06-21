@@ -28,6 +28,7 @@ BaseNotificationItem {
     property int currentPopupHeight: 0
     property real remainingTimeProgress: 1
     property bool closeTimerRunning: false
+    property bool popupDrawerOpened: false
 
     property bool inLockscreen: false
 
@@ -45,6 +46,7 @@ BaseNotificationItem {
 
         popupNotification: true
         inPopupDrawer: notificationItem.inPopupDrawer
+        popupDrawerOpened: notificationItem.popupDrawerOpened
         currentPopupHeight: notificationItem.currentPopupHeight
         remainingTimeProgress: notificationItem.remainingTimeProgress
         closeTimerRunning: notificationItem.closeTimerRunning

@@ -104,6 +104,7 @@ Item {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 25
             Layout.leftMargin: root.isVertical ? Kirigami.Units.largeSpacing * 2 : 0
             Layout.rightMargin: root.isVertical ? Kirigami.Units.largeSpacing * 2 : 0
+            inLockScreenDrawer: true
         }
     }
 

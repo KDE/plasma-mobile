@@ -278,7 +278,7 @@ Item {
 
     property MobileShell.MediaControlsWidget mediaControlsWidget: MobileShell.MediaControlsWidget {
         id: mediaWidget
-        inActionDrawer: root.actionDrawer.mode == ActionDrawer.Portrait
+        inEmbeddedActionDrawer: root.actionDrawer.mode == ActionDrawer.Portrait
 
         opacity: brightnessPressedValue
     }
