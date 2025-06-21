@@ -48,6 +48,7 @@ MobileShell.BaseItem {
         anchors.fill: parent
         anchors.margins: Kirigami.Units.largeSpacing
         opacity: brightnessPressedValue
+        complexShadow: true
     }
 
     contentItem: Item {

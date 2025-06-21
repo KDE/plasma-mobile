@@ -66,6 +66,7 @@ Item {
     MobileShell.BackgroundItem {
         anchors.fill: parent
         translucent: inActionDrawer ? 0 : 1
+        forceBorder: true
     }
 
     // list of app media widgets
