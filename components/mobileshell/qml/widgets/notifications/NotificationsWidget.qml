@@ -202,9 +202,9 @@ Item {
                     contentItem: showHeader ? root.header : null
                     y: root.topPadding + Kirigami.Units.largeSpacing
 
-                    width: parent.width - Kirigami.Units.largeSpacing * 2
+                    width: parent.width - Kirigami.Units.gridUnit * 2
                     anchors.left: parent.left
-                    anchors.leftMargin: Kirigami.Units.largeSpacing
+                    anchors.leftMargin: Kirigami.Units.gridUnit
                 }
             }
         }
@@ -286,9 +286,9 @@ Item {
 
             anchors {
                 left: parent ? parent.left : undefined
-                leftMargin: Kirigami.Units.largeSpacing
+                leftMargin: Kirigami.Units.gridUnit
                 right: parent ? parent.right : undefined
-                rightMargin: Kirigami.Units.largeSpacing
+                rightMargin: Kirigami.Units.gridUnit
             }
 
             height: model.isGroup ? groupDelegate.height : notificationDelegate.height

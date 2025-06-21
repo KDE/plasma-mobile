@@ -68,8 +68,6 @@ Item {
         panelType: {
             if (inLockScreenDrawer) {
                 return MobileShell.PanelBackground.PanelType.Wallpaper
-            } else if (inEmbeddedActionDrawer) {
-                return MobileShell.PanelBackground.PanelType.Stacked
             } else {
                 return MobileShell.PanelBackground.PanelType.Drawer
             }
