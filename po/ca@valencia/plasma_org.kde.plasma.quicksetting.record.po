@@ -1,15 +1,15 @@
 # Translation of plasma_org.kde.plasma.quicksetting.record.po to Catalan (Valencian)
-# Copyright (C) 2022-2023 This_file_is_part_of_KDE
+# Copyright (C) 2022-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2022, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma-mobile\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-19 02:34+0000\n"
-"PO-Revision-Date: 2023-09-24 20:15+0200\n"
+"PO-Revision-Date: 2025-06-19 07:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -22,7 +22,7 @@ msgstr ""
 #: recordutil.cpp:51
 #, kde-format
 msgid "No encoders available for recording"
-msgstr ""
+msgstr "No hi ha cap codificador disponible per a gravar"
 
 #: recordutil.cpp:74
 #, kde-format
@@ -35,22 +35,19 @@ msgid "New Screen Recording saved in %1"
 msgstr "S'ha guardat la gravació nova de la pantalla a %1"
 
 #: recordutil.cpp:121
-#, fuzzy, kde-format
-#| msgid "Record Screen"
+#, kde-format
 msgctxt "@action:button"
 msgid "Record Screen"
 msgstr "Grava la pantalla"
 
 #: recordutil.cpp:130
-#, fuzzy, kde-format
-#| msgid "Recording…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Recording…"
 msgstr "S'està gravant…"
 
 #: recordutil.cpp:133
-#, fuzzy, kde-format
-#| msgid "Writing…"
+#, kde-format
 msgctxt "@info:status"
 msgid "Writing…"
 msgstr "S'està escrivint…"
